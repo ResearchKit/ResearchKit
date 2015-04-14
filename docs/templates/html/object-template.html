@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{{page.title}}</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	{{#strings.appledocData}}<meta name="generator" content="{{tool}} {{version}} (build {{build}})">{{/strings.appledocData}}
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			{{#page}}
+			<h1 id="library-title">
+				<a href="https://github.com/ResearchKit/ResearchKit">{{projectName}} {{strings.objectPage.libraryTitlePostfix}}</a>
+			</h1>
+
+			<!--<p id="developer-home">
+				<a href="../index.html">{{projectCompany}}</a>
+			</p>-->
+			{{/page}}
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+				        <li>Programming Guide:</li>
+					<li><a href="../docs/Overview/GuideOverview.html">Overview</a></li>
+				        <li><a href="../docs/Survey/CreatingSurveys.html">Surveys</a></li>
+					<li><a href="../docs/InformedConsent/InformedConsent.html">Informed Consent</a></li>
+					<li><a href="../docs/ActiveTasks/ActiveTasks.html">Active Tasks</a></li>
+				        <li>API Reference:</li>
+					{{>Navigation}}
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							{{>JumpTo}}
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">{{page.title}}</h1>
+
+					{{#page.specifications}}
+					{{#used}}<div class="section section-specification"><table cellspacing="0"><tbody>{{/used}}
+						{{#values}}{{>ObjectSpecification}}{{/values}}
+						{{#used}}</tbody></table></div>{{/used}}
+					{{/page.specifications}}
+
+                    {{#object.comment}}
+					{{#hasLongDescription}}
+					<div class="section section-overview">
+						<a title="{{strings.objectOverview.title}}" name="overview"></a>
+						<!--<h2 class="subtitle subtitle-overview">{{strings.objectOverview.title}}</h2>-->
+						<p></p>
+						{{#longDescription}}{{>GBCommentComponentsList}}{{/longDescription}}
+					</div>
+					{{/hasLongDescription}}
+					{{/object.comment}}
+
+					{{#object.methods}}
+					{{#hasSections}}
+					<div class="section section-tasks">
+						<a title="{{strings.objectTasks.title}}" name="tasks"></a>
+						{{#sections}}
+
+						{{#sectionName}}<a title="{{#sectionName}}{{.}}{{/sectionName}}" name="task_{{#sectionName}}{{.}}{{/sectionName}}"></a>{{/sectionName}}
+						{{>TaskTitle}}
+						<div class="task-list">
+							{{#methods}}{{>Method}}{{/methods}}
+						</div>
+						{{/sections}}
+					</div>
+					{{/hasSections}}
+					{{/object.methods}}
+
+                    {{#typedefEnum}}
+                    <h3 class="subsubtitle method-title">{{nameOfEnum}}</h3>
+                    {{#comment}}
+					{{#hasLongDescription}}
+					<div class="section section-overview">
+                        {{#longDescription}}{{>GBCommentComponentsList}}{{/longDescription}}
+					</div>
+					{{/hasLongDescription}}
+					{{/comment}}
+                    <div class="section">
+                        <!-- display enum values -->
+                        {{#constants}}
+                        <h4 class="method-subtitle">Definition</h4>
+                        <code>typedef {{enumStyle}}({{enumPrimitive}}, {{nameOfEnum}} ) {<br>
+                            {{#constants}}
+                            &nbsp;&nbsp; <a href="{{htmlLocalReference}}">{{name}}</a>{{#hasAssignedValue}} = {{assignedValue}}{{/hasAssignedValue}},<br>
+                            {{/constants}}
+                            };</code>
+                    {{/constants}}
+                    </div>
+                    {{#constants}}
+                    <div class="section section-methods">
+                        <h4 class="method-subtitle">Constants</h4>
+                        <dl class="termdef">
+                            {{#constants}}
+                            {{>Constant}}
+                            {{/constants}}
+                        </dl>
+                    </div>
+                    {{/constants}}
+
+                    {{#comment}}
+                    {{#hasAvailability}}
+                    <div class="method-subsection availability">
+                        <h4 class="method-subtitle parameter-title">{{strings.objectMethods.availability}}</h4>
+                        {{#availability}}{{>GBCommentComponentsList}}{{/availability}}
+                    </div>
+                    {{/hasAvailability}}
+
+                    {{#hasRelatedItems}}
+                    <div class="method-subsection see-also-section">
+                        <h4 class="method-subtitle">{{strings.objectMethods.seeAlsoTitle}}</h4>
+                        <ul>
+                            {{#relatedItems.components}}
+                            <li><code>{{>GBCommentComponent}}</code></li>
+                            {{/relatedItems.components}}
+                        </ul>
+                    </div>
+                    {{/hasRelatedItems}}
+
+                    {{#prefferedSourceInfo}}
+                    <div class="method-subsection declared-in-section">
+                        <h4 class="method-subtitle">{{strings.objectMethods.declaredInTitle}}</h4>
+                        <p><code class="declared-in-ref">{{filename}}</code></p>
+                    </div>
+                    {{/prefferedSourceInfo}}
+                    {{/comment}}
+                    {{/typedefEnum}}
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						{{#page}}
+						<p class="copyright">Copyright &copy; {{copyrightDate}} {{copyrightHolder}}. All rights reserved. Updated: {{lastUpdatedDate}}</p>
+						{{/page}}
+						{{#strings.appledocData}}
+						<p class="generator">Generated by <a href="{{homepage}}">{{tool}} {{version}} (build {{build}})</a>.</p>
+						{{/strings.appledocData}}
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
+
+
+Section Method
+<div class="section-method">
+	<a name="{{htmlReferenceName}}" title="{{methodSelector}}"></a>
+	<h3 class="method-title">{{>TaskMethod}}</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			{{#comment}}
+			{{#hasShortDescription}}
+			<div class="method-subsection brief-description">
+				{{#shortDescription}}{{>GBCommentComponent}}{{/shortDescription}}
+			</div>
+			{{/hasShortDescription}}
+		    {{/comment}}
+
+			<div class="method-subsection method-declaration"><code>{{>MethodDeclaration}}</code></div>
+
+		    {{#comment}}
+			{{#hasMethodParameters}}
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">{{strings.objectMethods.parametersTitle}}</h4>
+				<table class="argument-def parameter-def">
+				{{#methodParameters}}
+					<tr>
+						<th scope="row" class="argument-name"><code>{{argumentName}}</code></th>
+						<td>{{#argumentDescription}}{{>GBCommentComponentsList}}{{/argumentDescription}}</td>
+					</tr>
+				{{/methodParameters}}
+				</table>
+			</div>
+			{{/hasMethodParameters}}
+
+			{{#hasMethodResult}}
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">{{strings.objectMethods.resultTitle}}</h4>
+				{{#methodResult}}{{>GBCommentComponentsList}}{{/methodResult}}
+			</div>
+			{{/hasMethodResult}}
+
+			{{#hasAvailability}}
+			<div class="method-subsection availability">
+				<h4 class="method-subtitle parameter-title">{{strings.objectMethods.availability}}</h4>
+				{{#availability}}{{>GBCommentComponentsList}}{{/availability}}
+			</div>
+			{{/hasAvailability}}
+
+			{{#hasLongDescription}}
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">{{strings.objectMethods.discussionTitle}}</h4>
+				{{#longDescription}}{{>GBCommentComponentsList}}{{/longDescription}}
+			</div>
+			{{/hasLongDescription}}
+
+			{{#hasMethodExceptions}}
+			<div class="method-subsection arguments-section exceptions">
+				<h4 class="method-subtitle exception-title">{{strings.objectMethods.exceptionsTitle}}</h4>
+				<table class="argument-def exception-def">
+				{{#methodExceptions}}
+					<tr>
+						<th scope="row" class="argument-name"><code>{{argumentName}}</code></th>
+						<td>{{#argumentDescription}}{{>GBCommentComponentsList}}{{/argumentDescription}}</td>
+					</tr>
+				{{/methodExceptions}}
+				</table>
+			</div>
+			{{/hasMethodExceptions}}
+
+			{{#hasRelatedItems}}
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">{{strings.objectMethods.seeAlsoTitle}}</h4>
+				<ul>
+					{{#relatedItems.components}}
+					<li><code>{{>GBCommentComponent}}</code></li>
+					{{/relatedItems.components}}
+				</ul>
+			</div>
+			{{/hasRelatedItems}}
+
+			{{#prefferedSourceInfo}}
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">{{strings.objectMethods.declaredInTitle}}</h4>
+				<p><code class="declared-in-ref">{{filename}}</code></p>
+			</div>
+			{{/prefferedSourceInfo}}
+			{{/comment}}
+		</div>
+	</div>
+</div>
+EndSection
+
+Section MethodDeclaration
+{{#formattedComponents}}{{#emphasized}}<em>{{/emphasized}}{{#href}}<a href="{{&href}}">{{/href}}{{value}}{{#href}}</a>{{/href}}{{#emphasized}}</em>{{/emphasized}}{{/formattedComponents}}
+EndSection
+
+
+Section TaskTitle
+{{#hasMultipleSections}}<h2 class="task-title">{{#sectionName}}{{.}}{{/sectionName}}{{^sectionName}}{{strings.objectTasks.otherMethodsSectionName}}{{/sectionName}}</h2>{{/hasMultipleSections}}
+{{^hasMultipleSections}}{{#sectionName}}<h2 class="task-title">{{.}}</h2>{{/sectionName}}{{/hasMultipleSections}}
+EndSection
+
+Section TaskMethod
+<code><a href="{{htmlLocalReference}}">{{>TaskSelector}}</a></code>
+{{#isRequired}}<span class="task-item-suffix">{{strings.objectTasks.requiredMethod}}</span>{{/isRequired}}
+EndSection
+
+Section TaskSelector
+{{#isInstanceMethod}}&ndash;{{/isInstanceMethod}}{{#isClassMethod}}+{{/isClassMethod}}{{#isProperty}}&nbsp;{{/isProperty}}&nbsp;{{methodSelector}}
+EndSection
+
+
+Section GBCommentComponentsList
+{{#components}}{{>GBCommentComponent}}{{/components}}
+EndSection
+
+Section Constant
+<dt><a name="{{htmlReferenceName}}" title="{{name}}"></a><code>{{name}}</code></dt>
+<dd>
+{{#comment}}
+{{#hasShortDescription}}
+{{#shortDescription}}{{>GBCommentComponent}}{{/shortDescription}}
+{{/hasShortDescription}}
+
+{{#hasAvailability}}
+    <p>Available in {{#availability}}{{#components}}{{stringValue}}{{/components}}{{/availability}}</p>
+{{/hasAvailability}}
+
+{{/comment}}
+    {{#prefferedSourceInfo}}
+	<p>
+		{{strings.objectMethods.declaredInTitle}} <code class="declared-in-ref">{{filename}}</code>.
+	</p>
+	{{/prefferedSourceInfo}}
+</dd>
+EndSection
+
+Section GBCommentComponent
+{{&htmlValue}}
+EndSection
+
+Section ObjectSpecification
+<tr>
+	<th>{{title}}</th>
+	<td>{{#values}}{{#href}}<a href="{{&href}}">{{/href}}{{string}}{{#href}}</a>{{/href}}{{&delimiter}}{{/values}}</td>
+</tr>
+EndSection
+
+
+Section Navigation
+<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+EndSection
+
+Section JumpTo
+<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	{{#object.comment}}
+	<option value="overview">{{strings.objectOverview.title}}</option>
+	{{/object.comment}}
+
+	{{#object.methods}}
+	{{#hasSections}}
+	<option value="tasks">{{strings.objectTasks.title}}</option>
+	{{/hasSections}}
+	{{/object.methods}}
+
+	{{#object.methods}}
+	{{#hasProperties}}
+	<optgroup label="{{strings.objectMethods.propertiesTitle}}">
+		{{#properties}}
+		<option value="{{htmlReferenceName}}">{{methodSelector}}</option>
+		{{/properties}}
+	</optgroup>
+	{{/hasProperties}}
+
+	{{#hasClassMethods}}
+	<optgroup label="{{strings.objectMethods.classMethodsTitle}}">
+		{{#classMethods}}
+		<option value="{{htmlReferenceName}}">{{prefixedMethodSelector}}</option>
+		{{/classMethods}}
+	</optgroup>
+	{{/hasClassMethods}}
+
+	{{#hasInstanceMethods}}
+	<optgroup label="{{strings.objectMethods.instanceMethodsTitle}}">
+		{{#instanceMethods}}
+		<option value="{{htmlReferenceName}}">{{prefixedMethodSelector}}</option>
+		{{/instanceMethods}}
+	</optgroup>
+	{{/hasInstanceMethods}}
+	{{/object.methods}}
+</select>
+EndSection
+
+Section TableOfContents
+{{#object.comment}}
+<li role="treeitem"><span class="no-disclosure"></span><span class="section-name"><a href="#overview">{{strings.objectOverview.title}}</a></span></li>
+{{/object.comment}}
+
+{{#object.methods}}
+{{#hasSections}}
+<li role="treeitem" id="task_treeitem"><span class="no-disclosure"></span><span class="section-name"><a href="#tasks">{{strings.objectTasks.title}}</a></span><ul>
+	{{#sections}}{{#sectionName}}
+	<li><span class="no-disclosure"></span><span class="section-name"><a href="#task_{{#sectionName}}{{.}}{{/sectionName}}">{{#sectionName}}{{.}}{{/sectionName}}</a></span></li>
+	{{/sectionName}}{{/sections}}
+</ul></li>
+{{/hasSections}}
+{{/object.methods}}
+
+{{#object.methods}}
+{{#hasProperties}}
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="section-name"><a href="#properties">{{strings.objectMethods.propertiesTitle}}</a></span><ul>
+	{{#properties}}
+	<li><span class="no-disclosure"></span><span class="section-name"><a href="#{{htmlReferenceName}}">{{methodSelector}}</a></span></li>
+	{{/properties}}
+</ul></li>
+{{/hasProperties}}
+
+{{#hasClassMethods}}
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="section-name"><a href="#class_methods">{{strings.objectMethods.classMethodsTitle}}</a></span><ul>
+	{{#classMethods}}
+	<li><span class="no-disclosure"></span><span class="section-name"><a href="#{{htmlReferenceName}}">{{methodSelector}}</a></span></li>
+	{{/classMethods}}
+</ul></li>
+{{/hasClassMethods}}
+
+{{#hasInstanceMethods}}
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="section-name"><a href="#instance_methods">{{strings.objectMethods.instanceMethodsTitle}}</a></span><ul>
+	{{#instanceMethods}}
+	<li><span class="no-disclosure"></span><span class="section-name"><a href="#{{htmlReferenceName}}">{{methodSelector}}</a></span></li>
+	{{/instanceMethods}}
+</ul></li>
+{{/hasInstanceMethods}}
+{{/object.methods}}
+EndSection

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>--repeat-first-par</key>
+	<false/>
+	<key>--company-id</key>
+	<string>org.researchkit</string>
+	<key>--create-docset</key>
+	<false/>
+	<key>--create-html</key>
+	<true/>
+	<key>--ignore</key>
+	<array>
+		<string>Internal</string>
+		<string>ORKDemo</string>
+		<string>ORKDemoTests</string>
+		<string>docs</string>
+	</array>
+	<key>--index-desc</key>
+	<string>docs/index-template.md</string>
+	<key>--install-docset</key>
+	<false/>
+	<key>--keep-undocumented-objects</key>
+	<false/>
+	<key>--logformat</key>
+	<string>xcode</string>
+	<key>--project-company</key>
+	<string>ResearchKit</string>
+	<key>--project-name</key>
+	<string>ResearchKit</string>
+	<key>--verbose</key>
+	<string>2</string>
+	<key>--warn-empty-description</key>
+	<true/>
+	<key>--warn-undocumented-member</key>
+	<true/>
+	<key>--warn-undocumented-object</key>
+	<true/>
+	<key>--warn-unknown-directive</key>
+	<true/>
+</dict>
+</plist>
