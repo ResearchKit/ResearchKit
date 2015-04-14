@@ -411,7 +411,7 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView){
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
 #if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else
 #endif
@@ -427,7 +427,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
 #if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else
 #endif
@@ -443,7 +443,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
 #if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else
 #endif

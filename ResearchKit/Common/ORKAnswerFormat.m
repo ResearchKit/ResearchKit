@@ -82,7 +82,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
         _healthStore = healthStore;
         
 #if __IPHONE_8_2
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(healthKitUserPreferencesDidChange:)
                                                          name:HKUserPreferencesDidChangeNotification
@@ -198,7 +198,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     __block HKUnit *unit = [answerFormat healthKitUnit];
 #if __IPHONE_8_2
     HKObjectType *objectType = [answerFormat healthKitObjectType];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.2) {
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         return unit;
     }
     
