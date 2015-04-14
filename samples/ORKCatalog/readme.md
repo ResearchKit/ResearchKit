@@ -25,7 +25,7 @@ app does not expose the content in a result view controller to users.
 The ORKCatalog sample app is written in Swift.
 
 For more conceptual information about the ResearchKit framework, see the
-[ResearchKit Framework Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html).
+[ResearchKit Framework Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html).
 
 
 ## Build Requirements
