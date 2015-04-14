@@ -63,7 +63,7 @@ using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 Installation
 ------------
 
-The lastest stable version of ResearchKit framework can be cloned with
+The latest stable version of ResearchKit framework can be cloned with
 
 ```
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
