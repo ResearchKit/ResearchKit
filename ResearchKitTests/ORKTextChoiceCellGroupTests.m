@@ -39,14 +39,6 @@
 
 @implementation ORKTextChoiceCellGroupTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (NSArray *)textChoices {
     
     static NSArray *choices = nil;

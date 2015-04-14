@@ -38,14 +38,6 @@
 
 @implementation ORKResultTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (ORKTaskResult *)createTaskResultTree {
     
     // Construction

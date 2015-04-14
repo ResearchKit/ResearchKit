@@ -40,14 +40,6 @@
 
 @implementation ORKConsentTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (void)testContentEscaping {
     
     NSString *content = @"<img><p>this is content</p><br><div/>";

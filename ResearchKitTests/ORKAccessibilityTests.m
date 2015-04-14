@@ -37,14 +37,6 @@
 
 @implementation ORKAccessibilityTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (void)testAccessibilityString {
     
     {

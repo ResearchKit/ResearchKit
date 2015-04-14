@@ -50,11 +50,6 @@
     _d2 = [NSDate dateWithTimeInterval:10 sinceDate:_d1];
 }
 
-- (void)tearDown
-{
-    [super tearDown];
-}
-
 - (void)testHKSampleSerialization
 {
     
