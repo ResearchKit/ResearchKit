@@ -10,7 +10,7 @@ the user to walk a short distance, while collecting accelerometer
 sample data on iPhone.
 
 
-##predefined Active Tasks
+##Predefined Active Tasks
 
 At release, the ResearchKit™ framework includes five predefined tasks, which fall into four categories: motor activities, fitness, cognition, and voice. The table below summarizes each task and describes the data it generates.
 
