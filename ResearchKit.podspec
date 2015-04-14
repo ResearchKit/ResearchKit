@@ -7,7 +7,8 @@ Pod::Spec.new do |s|
   s.author       = { "Apple Inc." => "http://apple.com" }
   s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => "v#{s.version}"}
   s.source_files = 'ResearchKit/**/*'
-  s.private_header_files = "ResearchKit/**/*Private.h"
+  s.private_header_files = 'ResearchKit/**/*Private.h'
+  s.resources    = 'ResearchKit/Animations/**/*.m4v', 'ResearchKit/Artwork.xcassets', 'ResearchKit/Localized/*.lproj'
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 end
