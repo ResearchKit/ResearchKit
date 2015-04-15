@@ -156,6 +156,8 @@ enum TaskListRow: Int, Printable {
         case ScaleQuestionTask =                    "ScaleQuestionTask"
         case DiscreteScaleQuestionStep =            "DiscreteScaleQuestionStep"
         case ContinuousScaleQuestionStep =          "ContinuousScaleQuestionStep"
+        case DiscreteVerticalScaleQuestionStep =    "DiscreteVerticalScaleQuestionStep"
+        case ContinuousVerticalScaleQuestionStep =  "ContinuousVerticalScaleQuestionStep"
 
         // Task with examples of numeric questions.
         case NumericQuestionTask =                  "NumericQuestionTask"
@@ -313,7 +315,25 @@ enum TaskListRow: Int, Printable {
         questionStep2.text = exampleDetailText
         
         steps += [questionStep2]
+
+        // The third step is a vertical scale control with 10 discrete ticks.
+        let step3AnswerFormat = ORKAnswerFormat.verticalScaleAnswerFormatWithMaxValue(10, minValue: 1, step: 1, defaultValue: NSIntegerMax)
         
+        let questionStep3 = ORKQuestionStep(identifier: Identifier.DiscreteVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step3AnswerFormat)
+        
+        questionStep3.text = exampleDetailText
+        
+        steps += [questionStep3]
+
+        // The fourth step is a vertical scale control that allows continuous movement.
+        let step4AnswerFormat = ORKAnswerFormat.continuousVerticalScaleAnswerFormatWithMaxValue(5.0, minValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2)
+        
+        let questionStep4 = ORKQuestionStep(identifier: Identifier.ContinuousVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step4AnswerFormat)
+        
+        questionStep4.text = exampleDetailText
+        
+        steps += [questionStep4]
+
         return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: steps)
     }
     
