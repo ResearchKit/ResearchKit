@@ -35,10 +35,11 @@
 
 #define PPI 72
 #define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
-#define A4Width 8.26666667
-#define A4Height 11.6916667
-#define LetterWidth 8.5f
-#define LetterHeight 11.0f
+
+static const float A4Width = 8.26666667;
+static const float A4Height = 11.6916667;
+static const float LetterWidth = 8.5f;
+static const float LetterHeight = 11.0f;
 
 
 #pragma mark - ORKHTMLPDFWriter Interface
