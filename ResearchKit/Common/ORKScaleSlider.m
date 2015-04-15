@@ -81,6 +81,10 @@
 }
 
 - (void)updateValueForTouchAtPoint:(CGPoint)touchPoint {
+    // Ignore negative (out of bounds) positions
+    if (touchPoint.x < 0) {
+        touchPoint.x = 0;
+    }
     CGRect trackRect = [self trackRectForBounds:[self bounds]];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
