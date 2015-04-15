@@ -63,7 +63,7 @@ static inline CGFloat ORKCGFloor(CGFloat value)
     }
 }
 
-static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFloat s) {
+static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFloat s) {
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
@@ -71,9 +71,9 @@ static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFl
         s = __s;
     }
     if (s == 1.0) {
-        return ajdustFn(v);
+        return adjustFn(v);
     } else {
-        return ajdustFn(v * s) / s;
+        return adjustFn(v * s) / s;
     }
 }
 
