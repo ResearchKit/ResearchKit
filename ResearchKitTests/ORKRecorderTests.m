@@ -339,7 +339,7 @@ static const NSInteger kNumberOfSamples = 5;
     _result = nil;
 }
 
-- (ORKRecorder *)createRecorder: (ORKRecorderConfiguration *)conf {
+- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)conf {
     ORKRecorder *recorder = [conf recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
                                                                     outputDirectory:[NSURL fileURLWithPath:_outputPath]];
     recorder.delegate = self;
