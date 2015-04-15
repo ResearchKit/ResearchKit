@@ -173,7 +173,7 @@ the game, and the touch inputs made by the user.
 
 The data collected in active tasks is recorded in a hierarchy of
 `ORKResult` objects in memory. It is up to you to serialize this
-hierarchy for storage or transmission n a way that’s appropriate for your application.
+hierarchy for storage or transmission in a way that’s appropriate for your application.
 
 If the data collected is to too large for in-memory delivery, an
 `ORKFileResult` is included in the hierarchy instead. The file result

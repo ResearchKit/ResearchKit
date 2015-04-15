@@ -90,8 +90,8 @@ The name entry page is included in a consent review step if the step’s `signat
     
     ORKConsentReviewStep *reviewStep =
       [[ORKConsentReviewStep alloc] initWithIdentifier:kConsentReviewIdentifier
-                                             signature:consentDocument.signatures[0]
-                                            inDocument:consentDocument];
+                                             signature:consent.signatures[0]
+                                            inDocument:consent];
     reviewStep.text = @"Lorem ipsum ..";
     reviewStep.reasonForConsent = @"Lorem ipsum ...";
     
