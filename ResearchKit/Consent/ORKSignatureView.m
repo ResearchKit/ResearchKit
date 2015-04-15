@@ -95,7 +95,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 @property (nonatomic, strong) UIBezierPath *currentPath;
 @property (nonatomic, strong) NSMutableArray *pathArray;
-@property (nonatomic, strong) NSArray *backgroundLines;
+@property (nonatomic, copy) NSArray *backgroundLines;
 
 
 @end

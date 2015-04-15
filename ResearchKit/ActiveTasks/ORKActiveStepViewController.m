@@ -58,7 +58,7 @@
     NSURL *_alertSoundURL;
 }
 
-@property (nonatomic, strong) NSArray *recorders;
+@property (nonatomic, copy) NSArray *recorders;
 
 @end
 

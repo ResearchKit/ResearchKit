@@ -41,7 +41,7 @@
 }
 
 @property (nonatomic, strong) CMPedometer *pedometer;
-@property (nonatomic, strong) NSError *recordingError;
+@property (nonatomic, copy) NSError *recordingError;
 
 @end
 
