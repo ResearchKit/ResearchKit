@@ -89,7 +89,7 @@
 @property (nonatomic) CGSize pageSize;
 @property (nonatomic) UIEdgeInsets pageMargins;
 @property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, copy) NSData *data;
+@property (nonatomic, strong) NSData *data;
 @property (nonatomic, copy) NSError *error;
 @property (nonatomic, copy) void (^completionBlock)(NSData *data, NSError *error);
 

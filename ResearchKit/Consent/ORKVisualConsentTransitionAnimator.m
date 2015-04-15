@@ -47,7 +47,7 @@
 @property (nonatomic, copy) ORKVisualConsentAnimationCompletionHandler handler;
 @property (nonatomic, copy) ORKVisualConsentAnimationCompletionHandler loadHandler;
 
-@property (nonatomic, copy) NSValue *startTime;
+@property (nonatomic, strong) NSValue *startTime;
 
 // Establish a retain cycle by setting this to ourselves, to lengthen lifetime
 @property (nonatomic, strong) id selfRef;
