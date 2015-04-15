@@ -141,10 +141,20 @@ ORK_CLASS_AVAILABLE
                                                    step:(NSInteger)step
                                            defaultValue:(NSInteger)defaultValue;
 
++ (ORKScaleAnswerFormat *)verticalScaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
+                                                       minValue:(NSInteger)scaleMin
+                                                           step:(NSInteger)step
+                                                   defaultValue:(NSInteger)defaultValue;
+
 + (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaxValue:(double)scaleMax
                                                                    minValue:(double)scaleMin
                                                                defaultValue:(double)defaultValue
                                                       maximumFractionDigits:(NSInteger)maximumFractionDigits;
+
++ (ORKContinuousScaleAnswerFormat *)continuousVerticalScaleAnswerFormatWithMaxValue:(double)scaleMax
+                                                                           minValue:(double)scaleMin
+                                                                       defaultValue:(double)defaultValue
+                                                              maximumFractionDigits:(NSInteger)maximumFractionDigits;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -179,8 +189,8 @@ ORK_CLASS_AVAILABLE
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
 
-/// @name Validation
 
+/// @name Validation
 
 /**
  Validates the parameters of the answer format to ensure that they can be displayed.
@@ -211,7 +221,7 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue   The upper bound of the scale.
  @param minimumValue   The lower bound of the scale.
- @param step  The size of each discrete offset on the scale.
+ @param step   The size of each discrete offset on the scale.
  @param defaultValue   The default value of the scale. If this value is out of range, the slider is displayed without a default value.
  @return An initialized scale answer format.
  */
@@ -229,7 +239,6 @@ ORK_CLASS_AVAILABLE
  The lower bound of the scale. (read-only)
  */
 @property (readonly) NSInteger minimum;
-
 
 /**
  The size of each discrete offset on the scale. (read-only)
@@ -250,6 +259,21 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
+
+/**
+ The `ORKVerticalScaleAnswerFormat `class represents an answer format that includes a vertical slider control.
+ 
+ The vertical scale answer format produces an `ORKScaleQuestionResult` object that contains an integer whose
+ value is between the scale's minimum and maximum values, and represents one of the quantized step values.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKVerticalScaleAnswerFormat : ORKScaleAnswerFormat
+
+@end
+
+
+
 /**
  The `ORKContinuousScaleAnswerFormat` class represents an answer format that lets participants
  select a value on a continuous scale.
@@ -259,7 +283,17 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKContinuousScaleAnswerFormat : ORKAnswerFormat
 
-
+/**
+ Returns an initialized continous scale answer format using the specified values.
+ 
+ This method is the designated initializer.
+ 
+ @param maximumValue   The upper bound of the scale.
+ @param minimumValue   The lower bound of the scale.
+ @param defaultValue   The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param maximumFractionDigits    The maximum number of fractional digits to display.
+ @return An initialized scale answer format.
+ */
 - (instancetype)initWithMaximumValue:(double)maximumValue
                         minimumValue:(double)minimumValue
                         defaultValue:(double)defaultValue
@@ -288,6 +322,21 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSInteger maximumFractionDigits;
 
 @end
+
+
+
+/**
+ The `ORKContinuousVerticalScaleAnswerFormat` class represents an answer format that lets participants
+ select a value on a continuous vertical scale.
+ 
+ The continuous vertical scale answer format produces an `ORKScaleQuestionResult` object that has a real-number value.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKContinuousVerticalScaleAnswerFormat : ORKContinuousScaleAnswerFormat
+
+@end
+
+
 
 /**
  The `ORKValuePickerAnswerFormat` class represents an answer format that lets participants use a value picker 
@@ -323,6 +372,8 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
+
 /**
  The `ORKImageChoiceAnswerFormat` class represents an answer format that lets participants choose one image from a fixed set of images in a single choice question.
  
@@ -352,6 +403,8 @@ ORK_CLASS_AVAILABLE
 @property (readonly, copy) NSArray *imageChoices;
 
 @end
+
+
 
 /**
  The `ORKTextChoiceAnswerFormat` class represents an answer format that lets participants choose from a fixed set of text choices in a multiple or single choice question.

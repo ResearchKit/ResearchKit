@@ -119,9 +119,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 140.0;
+    return 244.0;
 }
-
-
 
 @end

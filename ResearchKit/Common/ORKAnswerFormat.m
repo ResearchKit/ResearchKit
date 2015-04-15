@@ -251,17 +251,29 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
 + (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
                                               minValue:(NSInteger)scaleMin
                                                   step:(NSInteger)step
-                                          defaultValue:(NSInteger)defaultValue
-{
+                                          defaultValue:(NSInteger)defaultValue {
     return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin step:step defaultValue:defaultValue];
 }
 
++ (ORKScaleAnswerFormat *)verticalScaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
+                                                       minValue:(NSInteger)scaleMin
+                                                           step:(NSInteger)step
+                                                   defaultValue:(NSInteger)defaultValue {
+    return [[ORKVerticalScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin step:step defaultValue:defaultValue];
+}
 
 + (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaxValue:(double)scaleMax
                                                                   minValue:(double)scaleMin
                                                               defaultValue:(double)defaultValue
                                                      maximumFractionDigits:(NSInteger)maximumFractionDigits {
     return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin defaultValue:defaultValue maximumFractionDigits:maximumFractionDigits];
+}
+
++ (ORKContinuousScaleAnswerFormat *)continuousVerticalScaleAnswerFormatWithMaxValue:(double)scaleMax
+                                                                           minValue:(double)scaleMin
+                                                                       defaultValue:(double)defaultValue
+                                                              maximumFractionDigits:(NSInteger)maximumFractionDigits {
+    return [[ORKContinuousVerticalScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin defaultValue:defaultValue maximumFractionDigits:maximumFractionDigits];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -1304,9 +1316,10 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 @end
 
+
 #pragma mark - ORKScaleAnswerFormat
 
-@implementation ORKScaleAnswerFormat : ORKAnswerFormat
+@implementation ORKScaleAnswerFormat
 
 - (Class)questionResultClass {
     return [ORKScaleQuestionResult class];
@@ -1456,6 +1469,17 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 @end
 
 
+#pragma mark - ORKVerticalScaleAnswerFormat
+
+@implementation ORKVerticalScaleAnswerFormat
+
+- (BOOL)isVertical {
+    return YES;
+}
+
+@end
+
+
 #pragma mark - ORKContinuousScaleAnswerFormat
 
 @implementation ORKContinuousScaleAnswerFormat {
@@ -1597,9 +1621,19 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return ORKQuestionTypeScale;
 }
 
-
 @end
 
+
+#pragma mark - ORKContinuousScaleAnswerFormat
+
+@implementation ORKContinuousVerticalScaleAnswerFormat
+
+- (BOOL)isVertical {
+    return YES;
+}
+
+@end
+    
 
 #pragma mark - ORKTextAnswerFormat
 
