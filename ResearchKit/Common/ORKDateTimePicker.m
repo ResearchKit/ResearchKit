@@ -35,7 +35,7 @@
 @interface ORKDateTimePicker ()
 
 @property (nonatomic, strong) ORKAnswerFormat *answerFormat;
-@property (nonatomic, copy) NSCalendar *calendar;
+@property (nonatomic, strong) NSCalendar *calendar;
 
 @end
 
