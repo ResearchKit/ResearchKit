@@ -34,34 +34,26 @@
 #import "HKSample+ORKJSONDictionary.h"
 #import "ORKHelpers.h"
 
-@interface ORKHKSampleTests : XCTestCase {
-    NSDate *_d1;
-    NSDate *_d2;
-}
+@interface ORKHKSampleTests : XCTestCase
 
 @end
 
 @implementation ORKHKSampleTests
 
-- (void)setUp
-{
-    [super setUp];
-    _d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
-    _d2 = [NSDate dateWithTimeInterval:10 sinceDate:_d1];
-}
-
 - (void)testHKSampleSerialization
 {
+    NSDate *d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    NSDate *d2 = [NSDate dateWithTimeInterval:10 sinceDate:d1];
     
     NSString *identifier = HKQuantityTypeIdentifierStepCount;
-    HKQuantitySample *quantitySample = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:identifier] quantity:[HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:5] startDate:_d1 endDate:_d2];
+    HKQuantitySample *quantitySample = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:identifier] quantity:[HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:5] startDate:d1 endDate:d2];
     
     NSDictionary *dict = [quantitySample ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) unit:[HKUnit countUnit]];
     
     XCTAssertEqualObjects(dict[@"uuid"], [[quantitySample UUID] UUIDString], @"");
     XCTAssertEqualObjects(dict[@"type"], identifier, @"");
-    XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(_d1), @"");
-    XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(_d2), @"");
+    XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(d1), @"");
+    XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(d2), @"");
     XCTAssertEqualObjects(dict[@"value"], @(5), @"");
     XCTAssertNil(dict[@"sourceBundleIdentifier"], @"");
     XCTAssertNil(dict[@"sourceName"], @"");
@@ -70,10 +62,13 @@
 
 - (void)testHKMetadataSerialization
 {
+    NSDate *d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    NSDate *d2 = [NSDate dateWithTimeInterval:10 sinceDate:d1];
+    
     NSDictionary *testMeta = @{@"k1" : @"v1"};
     
     NSString *identifier = HKQuantityTypeIdentifierStepCount;
-    HKQuantitySample *quantitySample = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:identifier] quantity:[HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:5] startDate:_d1 endDate:_d2 metadata:testMeta ];
+    HKQuantitySample *quantitySample = [HKQuantitySample quantitySampleWithType:[HKQuantityType quantityTypeForIdentifier:identifier] quantity:[HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:5] startDate:d1 endDate:d2 metadata:testMeta ];
     
     // No metadata if not requested
     NSDictionary *dict = [quantitySample ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeSource) unit:[HKUnit countUnit]];
@@ -86,14 +81,17 @@
 
 - (void)testHKCorrelationSerialization
 {
+    NSDate *d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    NSDate *d2 = [NSDate dateWithTimeInterval:10 sinceDate:d1];
+    
     NSString *identifier = HKCorrelationTypeIdentifierBloodPressure;
     HKUnit *unit = [HKUnit unitFromString:@"mmHg"];
     HKQuantityType *diastolicType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureDiastolic];
     HKQuantityType *systolicType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodPressureSystolic];
-    HKQuantitySample *dPressure = [HKQuantitySample quantitySampleWithType:diastolicType quantity:[HKQuantity quantityWithUnit:unit doubleValue:70] startDate:_d1 endDate:_d2];
-    HKQuantitySample *sPressure = [HKQuantitySample quantitySampleWithType:systolicType quantity:[HKQuantity quantityWithUnit:unit doubleValue:110] startDate:_d1 endDate:_d2];
+    HKQuantitySample *dPressure = [HKQuantitySample quantitySampleWithType:diastolicType quantity:[HKQuantity quantityWithUnit:unit doubleValue:70] startDate:d1 endDate:d2];
+    HKQuantitySample *sPressure = [HKQuantitySample quantitySampleWithType:systolicType quantity:[HKQuantity quantityWithUnit:unit doubleValue:110] startDate:d1 endDate:d2];
     
-    HKCorrelation *correlation = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:identifier] startDate:_d1 endDate:_d2 objects:[NSSet setWithObjects:dPressure, sPressure, nil]];
+    HKCorrelation *correlation = [HKCorrelation correlationWithType:[HKCorrelationType correlationTypeForIdentifier:identifier] startDate:d1 endDate:d2 objects:[NSSet setWithObjects:dPressure, sPressure, nil]];
     
     NSDictionary *dict = [correlation ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) sampleTypes:@[diastolicType,systolicType] units:@[unit,unit]];
     
@@ -102,8 +100,8 @@
     
     XCTAssertEqualObjects(dict[@"uuid"], [[correlation UUID] UUIDString], @"");
     XCTAssertEqualObjects(dict[@"type"], identifier, @"");
-    XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(_d1), @"");
-    XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(_d2), @"");
+    XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(d1), @"");
+    XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(d2), @"");
     XCTAssertNil(dict[@"sourceBundleIdentifier"], @"");
     XCTAssertNil(dict[@"sourceName"], @"");
     XCTAssertNil(dict[@"metadata"], @"");
