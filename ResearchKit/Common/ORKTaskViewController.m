@@ -129,7 +129,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 
 @interface ORKObserver : NSObject
 
-@property (nonatomic, copy) NSArray *keyPaths;
+@property (nonatomic, strong) NSArray *keyPaths;
 @property (nonatomic, strong) id target;
 @property (nonatomic) BOOL observing;
 @property (nonatomic) void *context;

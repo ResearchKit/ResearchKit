@@ -47,7 +47,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 @property (nonatomic, strong) UIColor *keyColor;
 @property (nonatomic, strong) UIColor *alertColor;
 
-@property (nonatomic, copy) NSArray *values;
+@property (nonatomic, strong) NSArray *values;
 
 @property (nonatomic) CGFloat alertThreshold;
 

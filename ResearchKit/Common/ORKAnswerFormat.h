@@ -319,7 +319,7 @@ ORK_CLASS_AVAILABLE
  
  Note that the `detailText` property of each choice is ignored. Be sure to create localized text for each choice that is short enough to fit in a `UIPickerView` object.
  */
-@property (readonly, copy) NSArray *textChoices;
+@property (readonly, strong) NSArray *textChoices;
 
 @end
 
@@ -349,7 +349,7 @@ ORK_CLASS_AVAILABLE
  The text of the currently selected choice is displayed on screen. The text for
  each choice is spoken by VoiceOver when an image is highlighted.
  */
-@property (readonly, copy) NSArray *imageChoices;
+@property (readonly, strong) NSArray *imageChoices;
 
 @end
 
@@ -387,7 +387,7 @@ ORK_CLASS_AVAILABLE
  The text for each answer is given more prominence than the `detailText` in the row, but
  both are shown.
  */
-@property (readonly, copy) NSArray *textChoices;
+@property (readonly, strong) NSArray *textChoices;
 
 @end
 
