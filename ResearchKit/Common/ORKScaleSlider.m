@@ -69,6 +69,52 @@
     _showThumb = showThumb;
 }
 
+- (void)setIsVertical:(BOOL)isVertical
+{
+    if (isVertical != _isVertical)
+    {
+        _isVertical = isVertical;
+        self.transform = isVertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+    }
+}
+
+- (void)addConstraint:(NSLayoutConstraint *)constraint
+{
+    [super addConstraint:constraint];
+    if (_isVertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
+    {
+        // In vertical mode, the slider needs to be of square size for the drawn area to have the appropriate height (due to using self.transform)
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                         attribute:NSLayoutAttributeWidth
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeHeight
+                                                        multiplier:1.0
+                                                          constant:0.0]];
+    }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *view = nil;
+    if (_isVertical)
+    {
+        // In vertical mode, we need to ignore the touch are for the needed extra width
+        const CGFloat desiredSliderWidth = 36.0;
+        const CGFloat actualWidth = self.bounds.size.width;
+        const CGFloat centerX = actualWidth / 2;
+        if (fabs(point.y - centerX) < desiredSliderWidth / 2)
+        {
+            view = [super hitTest:point withEvent:event];
+        }
+    }
+    else
+    {
+        view = [super hitTest:point withEvent:event];
+    }
+    return view;
+}
+
 - (void)sliderTouched:(UIGestureRecognizer *)gesture
 {
     self.showThumb = YES;

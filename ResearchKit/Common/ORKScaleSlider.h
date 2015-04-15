@@ -37,6 +37,8 @@
 
 @property (nonatomic, assign) NSUInteger numberOfSteps;
 
+@property (nonatomic, assign) BOOL isVertical;
+
 @end
 
 
