@@ -398,7 +398,7 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
 }
 
 
-+ (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
 {
     ORKStepViewController *vc = [[[self class] alloc] initWithStep:nil];
     vc.restorationIdentifier = [identifierComponents lastObject];
