@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -151,10 +152,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @return An active fitness check task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)fitnessCheckTaskWithIdentifier:(NSString *)identifier
-                           intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                     walkDuration:(NSTimeInterval)walkDuration
-                                     restDuration:(NSTimeInterval)restDuration
-                                          options:(ORKPredefinedTaskOption)options;
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                      walkDuration:(NSTimeInterval)walkDuration
+                                      restDuration:(NSTimeInterval)restDuration
+                                           options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that consists of a short walk.
@@ -182,10 +183,10 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  */
 + (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)identifier
-                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                           numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
-                                  restDuration:(NSTimeInterval)restDuration
-                                       options:(ORKPredefinedTaskOption)options;
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                            numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
+                                   restDuration:(NSTimeInterval)restDuration
+                                        options:(ORKPredefinedTaskOption)options;
 
 
 /**
@@ -209,14 +210,13 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @return An active audio task that can be presented with an `ORKTaskViewController` object.
  
  */
-
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                    intendedUseDescription:(nullable NSString *)intendedUseDescription
-                         speechInstruction:(nullable NSString *)speechInstruction
-                    shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
-                                  duration:(NSTimeInterval)duration
-                         recordingSettings:(nullable NSDictionary *)recordingSettings
-                                   options:(ORKPredefinedTaskOption)options;
+                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                          speechInstruction:(nullable NSString *)speechInstruction
+                     shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                   duration:(NSTimeInterval)duration
+                          recordingSettings:(nullable NSDictionary *)recordingSettings
+                                    options:(ORKPredefinedTaskOption)options;
 
 
 /**
@@ -239,9 +239,9 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  */
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                       intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                                     duration:(NSTimeInterval)duration
-                                                      options:(ORKPredefinedTaskOption)options;
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that tests spatial span memory.
@@ -278,17 +278,17 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @return An active spatial span memory task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)identifier
-                                intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                           initialSpan:(NSInteger)initialSpan
-                                           minimumSpan:(NSInteger)minimumSpan
-                                           maximumSpan:(NSInteger)maximumSpan
-                                             playSpeed:(NSTimeInterval)playSpeed
-                                              maxTests:(NSInteger)maxTests
-                                maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
-                                     customTargetImage:(nullable UIImage *)customTargetImage
-                                customTargetPluralName:(nullable NSString *)customTargetPluralName
-                                       requireReversal:(BOOL)requireReversal
-                                               options:(ORKPredefinedTaskOption)options;
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                            initialSpan:(NSInteger)initialSpan
+                                            minimumSpan:(NSInteger)minimumSpan
+                                            maximumSpan:(NSInteger)maximumSpan
+                                              playSpeed:(NSTimeInterval)playSpeed
+                                               maxTests:(NSInteger)maxTests
+                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                      customTargetImage:(nullable UIImage *)customTargetImage
+                                 customTargetPluralName:(nullable NSString *)customTargetPluralName
+                                        requireReversal:(BOOL)requireReversal
+                                                options:(ORKPredefinedTaskOption)options;
 
 
 @end

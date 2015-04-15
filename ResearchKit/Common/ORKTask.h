@@ -220,4 +220,3 @@ requests access to these HealthKit types.
 @end
 
 NS_ASSUME_NONNULL_END
-
