@@ -38,18 +38,15 @@
 
 @implementation ORKRecorderConfiguration
 
-- (instancetype)ork_init
-{
+- (instancetype)ork_init {
     return [super init];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     return [super init];
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
 }
 
 - (BOOL)isEqual:(id)object {
@@ -64,13 +61,11 @@
     return 0;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return nil;
 }
 
@@ -85,27 +80,22 @@
 
 @end
 
-@implementation ORKRecorder
-{
+@implementation ORKRecorder {
     UIBackgroundTaskIdentifier _backgroundTask;
     NSUUID *_recorderUUID;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use designated initializer" userInfo:nil];
 }
 
-- (instancetype)ork_init
-{
+- (instancetype)ork_init {
     return [super init];
 }
 
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory;
-{
+- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory; {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         _outputDirectory = outputDirectory;
         self.step = step;
         _backgroundTask = NSNotFound;
@@ -118,17 +108,14 @@
 
 }
 
-- (void)start
-{
-    if (self.continuesInBackground)
-    {
+- (void)start {
+    if (self.continuesInBackground) {
         UIApplication *app = [UIApplication sharedApplication];
         UIBackgroundTaskIdentifier oldTask = _backgroundTask;
         _backgroundTask = [app beginBackgroundTaskWithName:[NSString stringWithFormat:@"%@.%p",NSStringFromClass([self class]),self] expirationHandler:^{
             [self stop];
         }];
-        if (oldTask != NSNotFound)
-        {
+        if (oldTask != NSNotFound) {
             [app endBackgroundTask:oldTask];
         }
     }
@@ -137,26 +124,22 @@
 }
 
 
-- (void)stop
-{
+- (void)stop {
     [self finishRecordingWithError:nil];
     [self reset];
 }
 
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     // NOTE. This method may be called multiple times (once when someone tries
     // to finish, and another time with -stop is actually called.
     
     
-    if (error)
-    {
+    if (error) {
         // ALWAYS report errors to the delegate, even if we think we're finished already
         
         id<ORKRecorderDelegate> localDelegate = self.delegate;
-        if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didFailWithError:)])
-        {
+        if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didFailWithError:)]) {
             [localDelegate recorder:self didFailWithError:error];
         }
         
@@ -164,8 +147,7 @@
     }
     
     
-    if (_backgroundTask != NSNotFound)
-    {
+    if (_backgroundTask != NSNotFound) {
         // End the background task asynchronously, so whatever we're doing cleaning up the recorder has a chance to complete.
         UIBackgroundTaskIdentifier ident = _backgroundTask;
         _backgroundTask = NSNotFound;
@@ -179,8 +161,7 @@
     
 }
 
-- (NSURL *)recordingDirectoryURL
-{
+- (NSURL *)recordingDirectoryURL {
     if (! _outputDirectory) {
         return nil;
     }
@@ -188,18 +169,15 @@
     return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@",[_recorderUUID UUIDString]]]];
 }
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"recorder";
 }
 
-- (NSString *)logName
-{
+- (NSString *)logName {
     return [NSString stringWithFormat:@"%@_%@", [self recorderType],self.step.identifier];
 }
 
-- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error
-{
+- (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
     NSURL *workingDir = [self recordingDirectoryURL];
     if (! workingDir) {
         if (error) {
@@ -221,8 +199,7 @@
     return logger;
 }
 
-- (void)reset
-{
+- (void)reset {
     _recorderUUID = [NSUUID UUID];
 }
 
@@ -259,8 +236,7 @@
             [self reset];
         }
     } else {
-        if (! error)
-        {
+        if (! error) {
             error = [NSError errorWithDomain:NSCocoaErrorDomain
                                         code:NSFileReadNoSuchFileError
                                     userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_DATA", nil)}];

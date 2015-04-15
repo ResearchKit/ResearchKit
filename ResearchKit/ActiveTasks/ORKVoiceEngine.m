@@ -43,8 +43,7 @@
 
 
 
-+(ORKVoiceEngine *)sharedVoiceEngine
-{
++(ORKVoiceEngine *)sharedVoiceEngine {
     static ORKVoiceEngine *shared;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -53,8 +52,7 @@
     return shared;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
@@ -63,8 +61,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     self.speechSynthesizer.delegate = nil;
     self.speechSynthesizer = nil;
@@ -99,8 +96,7 @@
     
 }
 
-- (BOOL)isSpeaking
-{
+- (BOOL)isSpeaking {
     return self.speechSynthesizer.isSpeaking;
 }
 

@@ -80,12 +80,10 @@
     
     _answer = answer;
     
-    if ([self isTimeOfDay])
-    {
+    if ([self isTimeOfDay]) {
         ORKTimeOfDayAnswerFormat *timeOfDayAnswerFormat = (ORKTimeOfDayAnswerFormat *)self.answerFormat;
         
-        if (answer && answer != ORKNullAnswerValue())
-        {
+        if (answer && answer != ORKNullAnswerValue()) {
             NSDateComponents *timeOfDayComponents = (NSDateComponents *)answer;
             
             NSDate *dateValue = ORKTimeOfDayDateFromComponents(timeOfDayComponents);
@@ -101,8 +99,7 @@
     {
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)self.answerFormat;
         
-        if (answer && answer != ORKNullAnswerValue())
-        {
+        if (answer && answer != ORKNullAnswerValue()) {
             NSDate *defaultDate = (NSDate *)answer;
             [self setDate:defaultDate];
         }
@@ -119,8 +116,7 @@
     
     ORKQuestionType questionType = answerFormat.questionType;
     int datePickerMode = -1;
-    switch (questionType)
-    {
+    switch (questionType) {
         case ORKQuestionTypeDate:
             datePickerMode = UIDatePickerModeDate;
             break;
@@ -140,8 +136,7 @@
     
     _pickerView.datePickerMode = datePickerMode;
     
-    if ([self isTimeOfDay])
-    {
+    if ([self isTimeOfDay]) {
         [self setDate:[(ORKTimeOfDayAnswerFormat *)answerFormat pickerDefaultDate]];
     }
     else
@@ -164,16 +159,14 @@
     _pickerView.date = date;
 }
 
-- (NSDateFormatter *)labelFormatter
-{
+- (NSDateFormatter *)labelFormatter {
     if (_labelFormatter) {
         _labelFormatter.calendar = self.calendar;
         return _labelFormatter;
     }
     
     NSString *dateFormat = nil;
-    switch ([self questionType])
-    {
+    switch ([self questionType]) {
         case ORKQuestionTypeDate:
             dateFormat = [NSDateFormatter dateFormatFromTemplate:@"Mdy" options:0 locale:[NSLocale currentLocale]];
             break;
@@ -187,8 +180,7 @@
             break;
     }
     
-    if (dateFormat != nil)
-    {
+    if (dateFormat != nil) {
         NSDateFormatter *dfm = [NSDateFormatter new];
         dfm.dateFormat = dateFormat;
         dfm.calendar = self.calendar;
@@ -242,14 +234,12 @@
     return [self questionType] == ORKQuestionTypeTimeOfDay;
 }
 
-- (void)currentLocaleDidChange:(NSNotification *)notification
-{
+- (void)currentLocaleDidChange:(NSNotification *)notification {
     _labelFormatter = nil;
     [self valueChanged:nil];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

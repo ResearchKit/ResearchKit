@@ -33,13 +33,11 @@
 
 @implementation ORKCountdownStep
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKCountdownStepViewController class];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-{
+- (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.shouldStartTimerAutomatically = YES;
@@ -56,8 +54,7 @@
     
     NSTimeInterval const ORKCountdownStepMinimumDuration = 3.0;
     
-    if ( self.stepDuration < ORKCountdownStepMinimumDuration)
-    {
+    if ( self.stepDuration < ORKCountdownStepMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKCountdownStepMinimumDuration)]  userInfo:nil];
     }
     

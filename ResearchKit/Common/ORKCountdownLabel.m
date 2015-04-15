@@ -69,8 +69,7 @@
     [self renderText];
 }
 
-- (CGSize)intrinsicContentSize
-{
+- (CGSize)intrinsicContentSize {
     CGSize intrinsic = [super intrinsicContentSize];
     return (CGSize){.width=intrinsic.width,ORKExpectedLabelHeight(self)};
 }

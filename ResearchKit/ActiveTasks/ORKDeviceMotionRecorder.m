@@ -36,8 +36,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "CMDeviceMotion+ORKJSONDictionary.h"
 
-@interface ORKDeviceMotionRecorder()
-{
+@interface ORKDeviceMotionRecorder() {
     ORKDataLogger *_logger;
 }
 
@@ -52,12 +51,10 @@
 
 - (instancetype)initWithFrequency:(double)frequency
                              step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory
-{
+                  outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithStep:step
                outputDirectory:(NSURL *)outputDirectory];
-    if (self)
-    {
+    if (self) {
         self.frequency = frequency;
         self.continuesInBackground = YES;
     }
@@ -65,15 +62,12 @@
 }
 
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
-- (void)setFrequency:(double)frequency
-{
-    if (frequency <= 0)
-    {
+- (void)setFrequency:(double)frequency {
+    if (frequency <= 0) {
         _frequency = 1;
     }
     else
@@ -125,8 +119,7 @@
 }
 
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"deviceMotion";
 }
 
@@ -146,16 +139,14 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     if (self.isRecording) {
         [self.motionManager stopDeviceMotionUpdates];
         self.motionManager = nil;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
@@ -168,8 +159,7 @@
     return @"application/json";
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
@@ -195,32 +185,27 @@
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return [[ORKDeviceMotionRecorder alloc] initWithFrequency:self.frequency
                                                         step:step
                                              outputDirectory:(NSURL *)outputDirectory];
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, frequency);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, frequency);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

@@ -35,8 +35,7 @@
 #import "ORKRecorder_Internal.h"
 #import "HKSample+ORKJSONDictionary.h"
 
-@interface ORKHealthQuantityTypeRecorder()
-{
+@interface ORKHealthQuantityTypeRecorder() {
     ORKDataLogger *_logger;
     BOOL _isRecording;
     HKHealthStore *_healthStore;
@@ -55,12 +54,10 @@
 - (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType
                                       unit:(HKUnit *)unit
                                       step:(ORKStep *)step
-                           outputDirectory:(NSURL *)outputDirectory
-{
+                           outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithStep:step
                outputDirectory:(NSURL *)outputDirectory];
-    if (self)
-    {
+    if (self) {
         NSParameterAssert(quantityType != nil);
         NSParameterAssert(unit != nil);
         // Quantity type and unit are immutable, so should be equivalent to -copy
@@ -73,8 +70,7 @@
 }
 
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
@@ -170,8 +166,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
         }
     }
     
-    if (! [HKHealthStore isHealthDataAvailable])
-    {
+    if (! [HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
                                                        userInfo:@{@"recorder" : self}]];
@@ -229,8 +224,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return _quantityType.identifier;
 }
 
@@ -255,8 +249,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     if (_isRecording) {
         NSAssert(_observerQuery != nil, @"Observer query should be non-nil when recording");
         [_healthStore stopQuery:_observerQuery];
@@ -269,8 +262,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
@@ -283,8 +275,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     return @"application/json";
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
@@ -312,8 +303,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return [[ORKHealthQuantityTypeRecorder alloc] initWithHealthQuantityType:_quantityType
                                                                        unit:_unit
                                                                        step:step
@@ -321,25 +311,21 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, quantityType, HKQuantityType);
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, HKUnit);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, quantityType);
     ORK_ENCODE_OBJ(aCoder, unit);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

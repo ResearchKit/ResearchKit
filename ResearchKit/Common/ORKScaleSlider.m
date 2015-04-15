@@ -42,8 +42,7 @@
     CFAbsoluteTime _axLastOutputTime;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTouched:)];
@@ -64,13 +63,11 @@
     return self;
 }
 
-- (void)setShowThumb:(BOOL)showThumb
-{
+- (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
 }
 
-- (void)sliderTouched:(UIGestureRecognizer *)gesture
-{
+- (void)sliderTouched:(UIGestureRecognizer *)gesture {
     self.showThumb = YES;
     
     CGPoint touchPoint = [gesture locationInView:self];
@@ -96,8 +93,7 @@
 }
 
 static CGFloat kLineWidth = 1.0;
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     CGRect trackRect = [self trackRectForBounds:[self bounds]];
     CGFloat centerY = [self bounds].size.height / 2.0;
     
@@ -121,8 +117,7 @@ static CGFloat kLineWidth = 1.0;
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
 static CGFloat kPadding = 2.0;
-- (CGRect)trackRectForBounds:(CGRect)bounds
-{
+- (CGRect)trackRectForBounds:(CGRect)bounds {
     
     CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
     CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
@@ -212,8 +207,7 @@ static CGFloat kPadding = 2.0;
 
 static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
-    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold )
-    {
+    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [self accessibilityValue]);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }

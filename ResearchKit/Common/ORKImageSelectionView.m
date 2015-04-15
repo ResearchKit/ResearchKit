@@ -45,8 +45,7 @@
 
 @implementation ORKChoiceButtonView
 
-- (instancetype)initWithImageOption:(ORKImageChoice *)option
-{
+- (instancetype)initWithImageOption:(ORKImageChoice *)option {
     self = [super init];
     if (self) {
         
@@ -56,8 +55,7 @@
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.exclusiveTouch = YES;
        
-        if (option.selectedStateImage)
-        {
+        if (option.selectedStateImage) {
             [_button setImage:option.selectedStateImage forState:UIControlStateSelected];
         }
         
@@ -81,8 +79,7 @@
         }
         
         {
-            if(option.normalStateImage.size.height > 0 && option.normalStateImage.size.width > 0)
-            {
+            if(option.normalStateImage.size.height > 0 && option.normalStateImage.size.width > 0) {
                 // Keep Aspect ratio
                 [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:option.normalStateImage.size.height/option.normalStateImage.size.width constant:0]];
                 // button's height <= image
@@ -100,8 +97,7 @@
         
         // Accessibility
         NSString *trimmedText = [self.labelText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ( trimmedText.length == 0 )
-        {
+        if ( trimmedText.length == 0 ) {
             self.button.accessibilityLabel = ORKLocalizedString(@"AX_UNLABELED_IMAGE", nil);
         }
         else
@@ -126,8 +122,7 @@ static const CGFloat kSpacerWidth = 10.0;
     ORKImageChoiceLabel *_invisibleLabel; // Hold tallest text to make sure this view allocate enough space to accommodate _choiceLabel
 }
 
-- (ORKImageChoiceLabel *)makeLabel
-{
+- (ORKImageChoiceLabel *)makeLabel {
     ORKImageChoiceLabel *label = [[ORKImageChoiceLabel alloc] init];
     label.textAlignment = NSTextAlignmentCenter;
     label.numberOfLines = 0;
@@ -248,8 +243,7 @@ static const CGFloat kSpacerWidth = 10.0;
     
     button.selected = !button.selected;
     
-    if (button.selected)
-    {
+    if (button.selected) {
         [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
          {
              ORKChoiceButtonView *buttonView = obj;

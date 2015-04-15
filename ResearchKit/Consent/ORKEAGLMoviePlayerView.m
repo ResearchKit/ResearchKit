@@ -37,8 +37,7 @@
 #import "ORKHelpers.h"
 
 // Uniform index.
-enum
-{
+enum {
     UNIFORM_Y,
     UNIFORM_UV,
     UNIFORM_ROTATION_ANGLE,
@@ -49,8 +48,7 @@ enum
 GLint uniforms[NUM_UNIFORMS];
 
 // Attribute index.
-enum
-{
+enum {
     ATTRIB_VERTEX,
     ATTRIB_TEXCOORD,
     NUM_ATTRIBUTES
@@ -73,8 +71,7 @@ static const GLfloat kColorConversion709[] = {
 };
 
 
-@interface ORKEAGLMoviePlayerView ()
-{
+@interface ORKEAGLMoviePlayerView () {
     // The pixel dimensions of the CAEAGLLayer.
     GLint _backingWidth;
     GLint _backingHeight;
@@ -111,15 +108,12 @@ static const GLfloat kColorConversion709[] = {
 @implementation ORKEAGLMoviePlayerView
 
 
-+ (Class)layerClass
-{
++ (Class)layerClass {
     return [CAEAGLLayer class];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    if ((self = [super initWithFrame:frame]))
-    {
+- (id)initWithFrame:(CGRect)frame {
+    if ((self = [super initWithFrame:frame])) {
         // Use 2x scale factor on Retina displays.
         self.contentScaleFactor = [[UIScreen mainScreen] scale];
         
@@ -147,8 +141,7 @@ static const GLfloat kColorConversion709[] = {
 
 # pragma mark - OpenGL setup
 
-- (void)setupGL
-{
+- (void)setupGL {
     if (_haveSetup) {
         return;
     }
@@ -182,8 +175,7 @@ static const GLfloat kColorConversion709[] = {
 
 #pragma mark - Utilities
 
-- (void)setupBuffers
-{
+- (void)setupBuffers {
     glDisable(GL_DEPTH_TEST);
     
     glEnableVertexAttribArray(ATTRIB_VERTEX);
@@ -209,8 +201,7 @@ static const GLfloat kColorConversion709[] = {
     ORKEAGLLog(@"");
 }
 
-- (void)cleanUpTextures
-{
+- (void)cleanUpTextures {
     if (_lumaTexture) {
         CFRelease(_lumaTexture);
         _lumaTexture = NULL;
@@ -225,8 +216,7 @@ static const GLfloat kColorConversion709[] = {
     CVOpenGLESTextureCacheFlush(_videoTextureCache, 0);
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     ORKEAGLLog(@"");
     [self cleanUpTextures];
     
@@ -331,8 +321,7 @@ static const GLfloat kColorConversion709[] = {
     return YES;
 }
 
-- (void)render
-{
+- (void)render {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -403,8 +392,7 @@ static const GLfloat kColorConversion709[] = {
 
 #pragma mark -  OpenGL ES 2 shader compilation
 
-- (BOOL)loadShaders
-{
+- (BOOL)loadShaders {
     GLuint vertShader, fragShader;
     NSURL *vertShaderURL, *fragShaderURL;
     
@@ -475,8 +463,7 @@ static const GLfloat kColorConversion709[] = {
     return YES;
 }
 
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type URL:(NSURL *)URL
-{
+- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type URL:(NSURL *)URL {
     NSError *error;
     NSString *sourceString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
     if (sourceString == nil) {
@@ -512,8 +499,7 @@ static const GLfloat kColorConversion709[] = {
     return YES;
 }
 
-- (BOOL)linkProgram:(GLuint)prog
-{
+- (BOOL)linkProgram:(GLuint)prog {
     GLint status;
     glLinkProgram(prog);
     
@@ -537,8 +523,7 @@ static const GLfloat kColorConversion709[] = {
     return YES;
 }
 
-- (BOOL)validateProgram:(GLuint)prog
-{
+- (BOOL)validateProgram:(GLuint)prog {
     GLint logLength, status;
     
     glValidateProgram(prog);

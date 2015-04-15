@@ -51,8 +51,7 @@
 @implementation ORKConsentSceneView
 
 
-- (void)setConsentSection:(ORKConsentSection *)consentSection
-{
+- (void)setConsentSection:(ORKConsentSection *)consentSection {
     _consentSection = consentSection;
     
     BOOL isOverview = (consentSection.type == ORKConsentSectionTypeOverview);
@@ -81,8 +80,7 @@
 
 @end
 
-@interface ORKConsentSceneViewController ()
-{
+@interface ORKConsentSceneViewController () {
     ORKConsentSceneView *_sceneView;
 }
 

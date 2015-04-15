@@ -54,8 +54,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 
 @implementation HKSample (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit
-{
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithCapacity:12];
     
     // Type identification
@@ -66,37 +65,29 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     
     // Start and end dates
     NSDate *startDate = [self startDate];
-    if (startDate)
-    {
+    if (startDate) {
         mdict[kHKSampleStartDateKey] = ORKStringFromDateISO8601(startDate);
     }
     
     NSDate *endDate = [self endDate];
-    if (endDate)
-    {
+    if (endDate) {
         mdict[kHKSampleEndDateKey] = ORKStringFromDateISO8601(endDate);
     }
-    if (unit)
-    {
+    if (unit) {
         mdict[kHKUnitKey] = [unit unitString];
     }
-    if ((options & ORKSampleIncludeUUID))
-    {
+    if ((options & ORKSampleIncludeUUID)) {
         NSUUID *uuid = [self UUID];
-        if (uuid)
-        {
+        if (uuid) {
             mdict[kHKUUIDKey] = [uuid UUIDString];
         }
     }
     
-    if ( (options & ORKSampleIncludeMetadata) && [self.metadata count] > 0)
-    {
+    if ( (options & ORKSampleIncludeMetadata) && [self.metadata count] > 0) {
         NSMutableDictionary *metadata = [self.metadata mutableCopy];
-        for (NSString *k in metadata)
-        {
+        for (NSString *k in metadata) {
             id obj = metadata[k];
-            if ([obj isKindOfClass:[NSDate class]])
-            {
+            if ([obj isKindOfClass:[NSDate class]]) {
                 metadata[k] = ORKStringFromDateISO8601(obj);
             }
         }
@@ -104,11 +95,9 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
         mdict[kHKMetadataKey] = metadata;
     }
     
-    if (options & ORKSampleIncludeSource)
-    {
+    if (options & ORKSampleIncludeSource) {
         HKSource *source = [self source];
-        if (source.name)
-        {
+        if (source.name) {
             mdict[kHKSourceKey] = source.name;
         }
     }
@@ -121,8 +110,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 
 @implementation HKCategorySample (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit
-{
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dict = [[super ork_JSONDictionaryWithOptions:options unit:unit] mutableCopy];
     
     NSInteger value = [self value];
@@ -135,8 +123,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 
 @implementation HKQuantitySample (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit
-{
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dict = [[super ork_JSONDictionaryWithOptions:options unit:unit] mutableCopy];
     
     HKQuantity *quantity = [self quantity];
@@ -153,17 +140,14 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 @implementation HKCorrelation (ORKJSONDictionary)
 
 
-- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units
-{
+- (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units {
     NSMutableDictionary *mdict = (NSMutableDictionary *)[self ork_JSONDictionaryWithOptions:options unit:nil];
     
     // The correlated objects
     NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:[sampleTypes count]];
-    for (HKSample *sample in self.objects)
-    {
+    for (HKSample *sample in self.objects) {
         NSUInteger idx = [sampleTypes indexOfObject:sample.sampleType];
-        if (idx == NSNotFound)
-        {
+        if (idx == NSNotFound) {
             continue;
         }
         
@@ -174,7 +158,5 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     
     return mdict;
 }
-
-
 
 @end

@@ -51,20 +51,16 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
       investigatorShortDescription:(NSString *)investigatorShortDescription
        investigatorLongDescription:(NSString *)investigatorLongDescription
-     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent
-{
+     localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        if ( [investigatorShortDescription length] == 0 )
-        {
+        if ( [investigatorShortDescription length] == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"investigatorShortDescription should not be empty." userInfo:nil];
         }
-        if ( [investigatorLongDescription length] == 0 )
-        {
+        if ( [investigatorLongDescription length] == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"investigatorLongDescription should not be empty." userInfo:nil];
         }
-        if ( [localizedLearnMoreHTMLContent length] == 0 )
-        {
+        if ( [localizedLearnMoreHTMLContent length] == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"localizedLearnMoreHTMLContent should not be empty." userInfo:nil];
         }
         
@@ -92,25 +88,21 @@
     ORKEqualObjects(self.localizedLearnMoreHTMLContent, castObject.localizedLearnMoreHTMLContent);
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSharingStep *step = [super copyWithZone:zone];
     step.localizedLearnMoreHTMLContent = self.localizedLearnMoreHTMLContent;
     return step;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, localizedLearnMoreHTMLContent, NSString);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, localizedLearnMoreHTMLContent);

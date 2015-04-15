@@ -48,8 +48,7 @@
 
 @implementation ORKTouchGestureRecognizer
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         
@@ -91,8 +90,7 @@
 
 @end
 
-@interface ORKTouchRecorder () <ORKTouchRecordingDelegate>
-{
+@interface ORKTouchRecorder () <ORKTouchRecordingDelegate> {
     ORKDataLogger *_logger;
 }
 @property (nonatomic, strong) ORKTouchGestureRecognizer *gestureRecognizer;
@@ -107,16 +105,14 @@
 
 @implementation ORKTouchRecorder
 
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithStep:step
                outputDirectory:(NSURL *)outputDirectory];
     return self;
 }
 
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
@@ -177,23 +173,19 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
-    if (_touchView)
-    {
+- (void)doStopRecording {
+    if (_touchView) {
         [self.touchView removeGestureRecognizer:self.gestureRecognizer];
         _touchView = nil;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"touch";
 }
 
@@ -202,8 +194,7 @@
     return @"application/json";
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
@@ -218,8 +209,7 @@
     }
     
     NSError *err = nil;
-    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&err])
-    {
+    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&err]) {
         assert(err != nil);
         [self finishRecordingWithError:err];
     }
@@ -234,8 +224,7 @@
 
 @implementation ORKTouchRecorderConfiguration
 
-- (instancetype)init
-{
+- (instancetype)init {
     return [self ork_init];
 }
 
@@ -246,17 +235,14 @@
     return recorder;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
     }
     return self;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

@@ -45,8 +45,7 @@
 
 @end
 
-@implementation ORKTableContainerView
-{
+@implementation ORKTableContainerView {
     UIView *_realFooterView;
     
     NSLayoutConstraint *_bottomConstraint;
@@ -298,15 +297,13 @@
     if (containByVisibleRect == NO) {
         
         
-        if (CGRectGetHeight(desiredRect) > CGRectGetHeight(visibleRect))
-        {
+        if (CGRectGetHeight(desiredRect) > CGRectGetHeight(visibleRect)) {
             CGFloat desiredCenterY = CGRectGetMidY(desiredRect);
             offsetY = desiredCenterY - visibleRect.size.height*0.5;
         }
         else
         {
-            if (CGRectGetMinY(desiredRect) < CGRectGetMinY(visibleRect))
-            {
+            if (CGRectGetMinY(desiredRect) < CGRectGetMinY(visibleRect)) {
                 offsetY = CGRectGetMinY(desiredRect);
             }
             else
@@ -418,8 +415,7 @@
 }
 
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
     [self updateToInsets:UIEdgeInsetsZero];
     
     _keyboardIsUp = NO;

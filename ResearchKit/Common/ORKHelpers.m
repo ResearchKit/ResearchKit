@@ -54,8 +54,7 @@ NSBundle *ORKAssetsBundle(void) {
     return __bundle;
 }
 
-static inline CGFloat ORKCGFloor(CGFloat value)
-{
+static inline CGFloat ORKCGFloor(CGFloat value) {
     if (sizeof(value) == sizeof(float)) {
         return (CGFloat)floorf((float)value);
     } else {
@@ -77,29 +76,24 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
     }
 }
 
-CGFloat ORKFloorToViewScale(CGFloat value, UIView *view)
-{
+CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return AdjustToScale(ORKCGFloor, value, [view contentScaleFactor]);
 }
 
-static id findInArrayByKey(NSArray * array, NSString *key, id value)
-{
+static id findInArrayByKey(NSArray * array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
-    if (matches.count)
-    {
+    if (matches.count) {
         return matches[0];
     }
     return nil;
 }
 
-id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier)
-{
+id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
     return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
 }
 
-NSString *ORKStringFromDateISO8601(NSDate *date)
-{
+NSString *ORKStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -110,8 +104,7 @@ NSString *ORKStringFromDateISO8601(NSDate *date)
     return [__formatter stringFromDate:date];
 }
 
-NSDate *ORKDateFromStringISO8601(NSString *string)
-{
+NSDate *ORKDateFromStringISO8601(NSString *string) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -136,16 +129,14 @@ NSString *ORKSignatureStringFromDate(NSDate *date){
 
 }
 
-UIColor *ORKRGBA(uint32_t x, CGFloat alpha)
-{
+UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
     CGFloat b = (x & 0xff) / 255.0f; x >>= 8;
     CGFloat g = (x & 0xff) / 255.0f; x >>= 8;
     CGFloat r = (x & 0xff) / 255.0f;
     return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
 }
 
-UIColor *ORKRGB(uint32_t x)
-{
+UIColor *ORKRGB(uint32_t x) {
     return ORKRGBA(x, 1.0f);
 }
 
@@ -172,10 +163,8 @@ UIFont *ORKTimeFontForSize(CGFloat size) {
     return font;
 }
 
-NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode)
-{
-    switch (mode)
-    {
+NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode) {
+    switch (mode) {
         case ORKFileProtectionComplete:
             return NSFileProtectionComplete;
         case ORKFileProtectionCompleteUnlessOpen:

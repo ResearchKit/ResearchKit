@@ -138,15 +138,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 
 
-- (void)learnMoreAction:(id)sender
-{
+- (void)learnMoreAction:(id)sender {
     ORKSuppressPerformSelectorWarning(
                                       (void)[_learnMoreButtonItem.target performSelector:_learnMoreButtonItem.action withObject:self];);
 }
 
 
-- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem
-{
+- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     _learnMoreButtonItem = learnMoreButtonItem;
     [_learnMoreButton setTitle:learnMoreButtonItem.title forState:UIControlStateNormal];
     _learnMoreButton.alpha = ([learnMoreButtonItem.title length] > 0) ? 1 : 0;
@@ -228,8 +226,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints
-{
+- (void)updateConstraints {
     [super updateConstraints];
     
     if (_myConstraints) {
@@ -322,8 +319,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
     
     
-    for (UIView *v in views)
-    {
+    for (UIView *v in views) {
 #ifdef LAYOUT_DEBUG
         v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
         v.layer.borderColor = [UIColor redColor].CGColor;

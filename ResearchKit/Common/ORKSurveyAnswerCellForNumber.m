@@ -45,8 +45,7 @@
 
 @end
 
-@implementation ORKSurveyAnswerCellForNumber
-{
+@implementation ORKSurveyAnswerCellForNumber {
     NSNumberFormatter *_numberFormatter;
 }
 
@@ -54,8 +53,7 @@
     return _textFieldView.textField;
 }
 
-- (void)numberCell_initialize
-{
+- (void)numberCell_initialize {
     ORKQuestionType questionType = self.step.questionType;
     _numberFormatter = [(ORKNumericAnswerFormat *)[[self.step answerFormat] impliedAnswerFormat] makeNumberFormatter];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
@@ -67,12 +65,10 @@
     textField.allowsSelection = YES;
     
     
-    if (questionType == ORKQuestionTypeDecimal)
-    {
+    if (questionType == ORKQuestionTypeDecimal) {
         textField.keyboardType = UIKeyboardTypeDecimalPad;
     }
-    else if (questionType == ORKQuestionTypeInteger)
-    {
+    else if (questionType == ORKQuestionTypeInteger) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
@@ -100,8 +96,7 @@
     [self answerDidChange];
 }
 
-- (void)setNeedsUpdateConstraints
-{
+- (void)setNeedsUpdateConstraints {
     [NSLayoutConstraint deactivateConstraints:[self constraints]];
     [NSLayoutConstraint deactivateConstraints:[_containerView constraints]];
     [super setNeedsUpdateConstraints];
@@ -113,8 +108,7 @@
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints
-{
+- (void)updateConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
     self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
     
@@ -169,14 +163,12 @@
 }
 
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKNumericAnswerFormat *numericFormat = (ORKNumericAnswerFormat *)answerFormat;
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
-    if ([answer isKindOfClass:[NSNumber class]])
-    {
+    if ([answer isKindOfClass:[NSNumber class]]) {
         displayValue = [_numberFormatter stringFromNumber:answer];
     }
    
@@ -222,8 +214,7 @@
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
     if (! isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
@@ -241,8 +232,7 @@
     
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid)
-    {
+    if (! isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }

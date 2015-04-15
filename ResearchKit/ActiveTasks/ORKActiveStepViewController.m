@@ -100,8 +100,7 @@
     return _activeStepView;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     _activeStepView = [[ORKActiveStepView alloc] initWithFrame:self.view.bounds];
@@ -119,8 +118,7 @@
     
     [self prepareStep];
 }
-- (void)stepDidChange
-{
+- (void)stepDidChange {
     [super stepDidChange];
     _activeStepView.activeStep = [self activeStep];
     [self updateContinueButtonItem];
@@ -129,20 +127,17 @@
     [self prepareStep];
 }
 
-- (UIView *)customViewContainer
-{
+- (UIView *)customViewContainer {
     __unused UIView *v = [self view];
     return _activeStepView.customViewContainer;
 }
 
-- (UIImageView *)imageView
-{
+- (UIImageView *)imageView {
     __unused UIView *v = [self view];
     return _activeStepView.imageView;
 }
 
-- (void)setCustomView:(UIView *)customView
-{
+- (void)setCustomView:(UIView *)customView {
     _customView = customView;
     [_activeStepView setStepView:_customView];
 }
@@ -162,8 +157,7 @@
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        if ([[self activeStep] shouldStartTimerAutomatically])
-        {
+        if ([[self activeStep] shouldStartTimerAutomatically]) {
             [self start];
         }
     });
@@ -187,20 +181,17 @@
     [self updateContinueButtonItem];
 }
 
-- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem
-{
+- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
-- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem
-{
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     _activeStepView.continueSkipContainer.skipButtonItem = skipButtonItem;
 }
 
-- (void)setFinished:(BOOL)finished
-{
+- (void)setFinished:(BOOL)finished {
     _finished = finished;
     
     _activeStepView.continueSkipContainer.continueEnabled = finished;
@@ -227,12 +218,10 @@
 }
 
 
-- (void)prepareRecorders
-{
+- (void)prepareRecorders {
     // Stop any existing recorders
     [self recordersWillStop];
-    for (ORKRecorder *recorder in self.recorders)
-    {
+    for (ORKRecorder *recorder in self.recorders) {
         recorder.delegate = nil;
         [recorder stop];
     }
@@ -271,8 +260,7 @@
     ORK_Log_Debug(@"%@", self);
     _activeStepView.activeStep = self.activeStep;
     
-    if ([self.activeStep hasCountDown])
-    {
+    if ([self.activeStep hasCountDown]) {
         ORKActiveStepTimerView *timerView = [ORKActiveStepTimerView new];
         _activeStepView.activeCustomView = timerView;
     }
@@ -304,8 +292,7 @@
     }
 }
 
-- (void)playSound
-{
+- (void)playSound {
     if (_alertSoundURL == nil) {
         _alertSoundURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/short_low_high.caf"];
         AudioServicesCreateSystemSoundID((__bridge CFURLRef)(_alertSoundURL), &_alertSound);
@@ -405,8 +392,7 @@
     _activeStepTimer = nil;
 }
 
-- (void)startTimer
-{
+- (void)startTimer {
     [self resetTimer];
     
     NSTimeInterval stepDuration = self.activeStep.stepDuration;
@@ -462,8 +448,7 @@
 
 #pragma mark - action handlers
 
-- (void)stepDidFinish
-{
+- (void)stepDidFinish {
 }
 
 #pragma mark - ORKRecorderDelegate
@@ -496,16 +481,14 @@
 static NSString * const _ORKFinishedRestoreKey = @"finished";
 static NSString * const _ORKRecorderResultsRestoreKey = @"recorderResults";
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeBool:_finished forKey:_ORKFinishedRestoreKey];
     [coder encodeObject:_recorderResults forKey:_ORKRecorderResultsRestoreKey];
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     self.finished = [coder decodeBoolForKey:_ORKFinishedRestoreKey];

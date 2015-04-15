@@ -199,8 +199,7 @@ static const CGFloat kValueLineMargin = 1.5;
 
 @end
 
-@implementation ORKAudioContentView
-{
+@implementation ORKAudioContentView {
     NSArray *_constraints;
     NSMutableArray *_samples;
     UIColor *_keyColor;

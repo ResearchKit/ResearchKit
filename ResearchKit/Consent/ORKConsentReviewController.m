@@ -42,8 +42,7 @@
 
 @end
 
-@implementation ORKConsentReviewController
-{
+@implementation ORKConsentReviewController {
     UIToolbar *_toolbar;
     NSLayoutConstraint *_toolbarHeightConstraint;
     NSString *_htmlString;

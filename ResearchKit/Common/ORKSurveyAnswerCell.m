@@ -121,8 +121,7 @@
 #pragma mark - KeyboardNotifications
 
 // Call this method somewhere in your view controller setup code.
-- (void)registerForKeyboardNotifications
-{
+- (void)registerForKeyboardNotifications {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -138,8 +137,7 @@
 
 
 // Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWillAppear:(NSNotification *)aNotification
-{
+- (void)keyboardWillAppear:(NSNotification *)aNotification {
     
     UIView *inputView = self.textView == nil ? self.textField : self.textView;
     
@@ -170,8 +168,7 @@
     
     desiredOffset.y = cellFrame.origin.y - (availFrame.size.height/2);
     
-    if (availFrame.size.height > cellFrame.size.height)
-    {
+    if (availFrame.size.height > cellFrame.size.height) {
         desiredOffset.y = cellFrame.origin.y - (availFrame.size.height - cellFrame.size.height) - (cellFrame.size.height -55);
     }
     desiredOffset.y = MAX(desiredOffset.y,0);
@@ -180,8 +177,7 @@
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillHide:(NSNotification *)aNotification
-{
+- (void)keyboardWillHide:(NSNotification *)aNotification {
     UIView *inputView = self.textView == nil ? self.textField : self.textView;
     
     if (inputView == nil) {
