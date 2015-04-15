@@ -34,9 +34,6 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 
-
-#define HKBiologicalSexOther 3
-
 #pragma mark - ORKHealthAnswerFormat
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
