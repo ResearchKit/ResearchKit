@@ -280,7 +280,7 @@
 
 - (void)scrollCellVisible:(UITableViewCell *)cell animated:(BOOL)animated {
     
-    if (cell == nil) {
+    if (cell == nil || [cell respondsToSelector:@selector(bounds)] == NO) {
         return;
     }
 
@@ -383,7 +383,7 @@
             {
                 UIView *firstResponderView = (UIView *)[[UIApplication sharedApplication] ork_currentFirstResponder];
                 UIView *cell = firstResponderView;
-                while (cell && [cell isKindOfClass:[UITableViewCell class]] == NO) {
+                while (cell && [cell isKindOfClass:[UITableViewCell class]] == NO && [cell respondsToSelector:@selector(superview)] == YES) {
                     cell = cell.superview;
                 }
                 [self scrollCellVisible:(UITableViewCell *)cell animated:NO];

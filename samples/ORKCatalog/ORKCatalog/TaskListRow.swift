@@ -642,7 +642,7 @@ enum TaskListRow: Int, Printable {
         
         // A first field, for entering an integer.
         let formItem01Text = NSLocalizedString("Field01", comment: "")
-        let formItem01 = ORKFormItem(identifier: Identifier.FormItem01.rawValue, text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormatWithUnit(nil))
+        let formItem01 = ORKFormItem(identifier: Identifier.FormItem01.rawValue, text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormatWithUnit(""))
         formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
 
         // A second field, for entering a time interval.
