@@ -35,6 +35,10 @@
 
 #define PPI 72
 #define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
+#define A4Width 8.26666667
+#define A4Height 11.6916667
+#define LetterWidth 8.5f
+#define LetterHeight 11.0f
 
 
 #pragma mark - ORKHTMLPDFWriter Interface
@@ -166,7 +170,7 @@ static const CGFloat kPageEdge = 72.0f/4;
 + (CGSize)defaultPageSize {
     NSLocale *locale = [NSLocale currentLocale];
     BOOL useMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
-    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(8.26666667, 11.6916667) : ORKSizeMakeWithPPI(8.5f, 11.0f)); // A4 and Letter
+    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(A4Width, A4Height) : ORKSizeMakeWithPPI(LetterWidth, LetterHeight)); // A4 and Letter
     
     return pageSize;
 }
