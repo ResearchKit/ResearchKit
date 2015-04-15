@@ -326,7 +326,6 @@ static const NSInteger kNumberOfSamples = 5;
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
@@ -340,7 +339,7 @@ static const NSInteger kNumberOfSamples = 5;
     _result = nil;
 }
 
-- (ORKRecorder *)createRecorder: (ORKRecorderConfiguration *)conf {
+- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)conf {
     ORKRecorder *recorder = [conf recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
                                                                     outputDirectory:[NSURL fileURLWithPath:_outputPath]];
     recorder.delegate = self;
