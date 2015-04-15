@@ -46,8 +46,6 @@
     HKQuantitySample *_lastSample;
 }
 
-@property (nonatomic, copy) NSError *recordingError;
-
 @end
 
 
