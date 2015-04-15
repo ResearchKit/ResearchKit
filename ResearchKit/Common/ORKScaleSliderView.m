@@ -57,6 +57,8 @@
         self.leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
         self.rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
         
+        self.slider.isVertical = [formatProvider isVertical];
+        
         self.slider.maximumValue = [[formatProvider maximumNumber] floatValue];
         self.slider.minimumValue = [[formatProvider minimumNumber] floatValue];
         
@@ -126,19 +128,51 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_slider,_leftRangeLabel,_rightRangeLabel, _valueLabel);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
-                                                                 options:NSLayoutFormatAlignAllCenterX
-                                                                 metrics:nil views:views]];
-    
-    const CGFloat kMargin = 17.0;
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|" options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                 metrics:@{@"kMargin": @(kMargin)} views:views]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_valueLabel
-                                                     attribute:NSLayoutAttributeLastBaseline
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:_slider
-                                                     attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-34.0]];
+    if ([_formatProvider isVertical])
+    {
+        // Horizontal slider constraints
+        const CGFloat kSmallMargin = 11.0;
+        const CGFloat kMargin = 15.0;
+        const CGFloat kSliderHeight = 120.0;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_slider]-|"
+                                                                     options:0
+                                                                     metrics:@{@"kSliderHeight": @(kSliderHeight)}
+                                                                       views:views]];
+
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-kSmallMargin-[_rightRangeLabel]-kMargin-[_slider(==kSliderHeight)]-kMargin-[_leftRangeLabel]"
+                                                                     options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:@{@"kSliderHeight": @(kSliderHeight),
+                                                                               @"kMargin": @(kMargin),
+                                                                               @"kSmallMargin": @(kSmallMargin)}
+                                                                       views:views]];
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeLabel(==_leftRangeLabel)]"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:views]];
+    }
+    else
+    {
+        // Horizontal slider constraints
+        const CGFloat kMargin = 17.0;
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
+                                                                     options:NSLayoutFormatAlignAllCenterX
+                                                                     metrics:nil
+                                                                       views:views]];
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
+                                                                     options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:@{@"kMargin": @(kMargin)}
+                                                                       views:views]];
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_valueLabel
+                                                         attribute:NSLayoutAttributeLastBaseline
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:_slider
+                                                         attribute:NSLayoutAttributeCenterY
+                                                        multiplier:1.0
+                                                          constant:-34.0]];
+    }
 }
 
 

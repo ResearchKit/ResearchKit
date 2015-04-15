@@ -1330,6 +1330,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
+- (BOOL)isVertical {
+    return NO;
+}
 
 - (NSNumber *)minimumNumber {
     return @(_minimum);
@@ -1481,6 +1484,10 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
+
+- (BOOL)isVertical {
+    return NO;
+}
 
 - (NSNumber *)minimumNumber {
     return @(_minimum);
