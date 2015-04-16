@@ -50,9 +50,9 @@
 @implementation ORKLocationRecorder
 
 
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step outputDirectory:outputDirectory];
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
     if (self)
     {
         self.continuesInBackground = YES;
@@ -184,10 +184,8 @@
 @implementation ORKLocationRecorderConfiguration
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
-    return [[ORKLocationRecorder alloc] initWithStep:step outputDirectory:outputDirectory];
+    return [[ORKLocationRecorder alloc] initWithIdentifier:self.identifier step:step outputDirectory:outputDirectory];
 }
-
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];

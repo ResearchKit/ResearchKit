@@ -38,18 +38,34 @@
 
 @implementation ORKRecorderConfiguration
 
-- (instancetype)ork_init
-{
-    return [super init];
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    
+    self = [super init];
+    if (self)
+    {
+        if (nil == identifier)
+        {
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
+        }
+        
+        _identifier = [identifier copy];
+    }
+    return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    return [super init];
+    self = [super init];
+    if (self)
+    {
+        ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+    ORK_ENCODE_OBJ(aCoder, identifier);
 }
 
 - (BOOL)isEqual:(id)object {
@@ -96,16 +112,17 @@
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use designated initializer" userInfo:nil];
 }
 
-- (instancetype)ork_init
-{
-    return [super init];
-}
-
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory;
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory;
 {
     self = [super init];
     if (self)
     {
+        if (nil == identifier)
+        {
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
+        }
+        
+        _identifier = [identifier copy];
         _outputDirectory = outputDirectory;
         self.step = step;
         _backgroundTask = NSNotFound;
@@ -247,7 +264,7 @@
     id<ORKRecorderDelegate> localDelegate = self.delegate;
     if (fileUrl && !error) {
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didCompleteWithResult:)]) {
-            ORKFileResult *result = [[ORKFileResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+            ORKFileResult *result = [[ORKFileResult alloc] initWithIdentifier:self.identifier];
             result.contentType = [self mimeType];
             result.fileURL = fileUrl;
             result.userInfo = [self userInfo];

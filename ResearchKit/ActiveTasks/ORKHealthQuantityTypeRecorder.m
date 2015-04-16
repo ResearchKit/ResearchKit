@@ -54,13 +54,15 @@
 @implementation ORKHealthQuantityTypeRecorder
 
 
-- (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
                                       unit:(HKUnit *)unit
                                       step:(ORKStep *)step
                            outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step
-               outputDirectory:(NSURL *)outputDirectory];
+    self = [super initWithIdentifier:identifier
+                                step:step
+                     outputDirectory:(NSURL *)outputDirectory];
     if (self)
     {
         NSParameterAssert(quantityType != nil);
@@ -301,8 +303,13 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit {
-    self = [super ork_init];
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit {
+    self = [super initWithIdentifier:identifier];
     if (self) {
         NSParameterAssert(quantityType != nil);
         NSParameterAssert(unit != nil);
@@ -312,16 +319,17 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     return self;
 }
+
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    return [[ORKHealthQuantityTypeRecorder alloc] initWithHealthQuantityType:_quantityType
-                                                                       unit:_unit
-                                                                       step:step
-                                                            outputDirectory:outputDirectory];
+    return [[ORKHealthQuantityTypeRecorder alloc] initWithIdentifier:self.identifier
+                                                  healthQuantityType:_quantityType
+                                                                unit:_unit
+                                                                step:step
+                                                     outputDirectory:outputDirectory];
 }
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {

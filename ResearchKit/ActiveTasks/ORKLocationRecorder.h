@@ -41,4 +41,14 @@
 ORK_CLASS_AVAILABLE
 @interface ORKLocationRecorder : ORKRecorder
 
+/**
+ Returns an initialized location recorder.
+ 
+ @param identifier   The unique indentifier of the recorder (assigned by the recorder configuration).
+ @return An initialized location recorder.
+*/
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+
 @end

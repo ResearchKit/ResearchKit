@@ -53,10 +53,19 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly, copy) HKUnit *unit;
 @property (nonatomic, readonly, copy, nullable) HKQuantitySample *lastSample;
 
-- (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType
-                                      unit:(HKUnit *)unit
-                                      step:(ORKStep *)step
-                           outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+/**
+ Returns an initialized health quantity type recorder using the specified quantity type and unit.
+ 
+ @param identifier      The unique indentifier of the recorder (assigned by the recorder configuration).
+ @param quantityType    The quantity type that should be collected during the active task.
+ @param unit            The unit for the data that should be collected and serialized.
+ @return An initialized health quantity type recorder.
+*/
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                healthQuantityType:(HKQuantityType *)quantityType
+                              unit:(HKUnit *)unit
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
 

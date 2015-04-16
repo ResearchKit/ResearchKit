@@ -210,8 +210,6 @@
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"stepIdentifier" results:@[qr]];
     stepResult.results = @[qr];
-    
-
 }
 
 - (void)testTaskModel {
@@ -220,7 +218,10 @@
     activeStep.shouldPlaySoundOnStart = YES;
     activeStep.shouldVibrateOnStart = YES;
     activeStep.stepDuration = 100.0;
-    activeStep.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithFrequency:11.0], [ORKTouchRecorderConfiguration new] , [ORKAudioRecorderConfiguration new]];
+    activeStep.recorderConfigurations =
+  @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"id.accelerometer" frequency:11.0],
+    [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
+    [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
     ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1)]  ]]];
     
@@ -251,7 +252,7 @@
     NSLog(@"----%@",dict2);
     
     
-    XCTAssertTrue([dict1 isEqualToDictionary:dict2],@"Should be equal");
+    XCTAssertTrue([dict1 isEqualToDictionary:dict2], @"Should be equal");
     
 }
 
@@ -370,7 +371,7 @@
         // Must contain corrected _class field
         XCTAssertTrue([NSStringFromClass(aClass) isEqualToString:mockDictionary[@"_class"]]);
         
-        // All properties should have matching fields in dictionary( allow predefined exceptions)
+        // All properties should have matching fields in dictionary (allow predefined exceptions)
         for (NSString *pName in propertyNames) {
             if (mockDictionary[pName] == nil) {
                 NSString *notSerializedProperty = dottedPropertyNames[pName];

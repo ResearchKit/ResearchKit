@@ -44,6 +44,4 @@
 
 @interface CustomRecorderConfiguration : ORKRecorderConfiguration
 
-
-
 @end

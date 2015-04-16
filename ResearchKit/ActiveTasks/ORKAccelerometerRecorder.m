@@ -49,9 +49,9 @@
 
 @implementation ORKAccelerometerRecorder
 
-- (instancetype)initWithFrequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step outputDirectory:outputDirectory];
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
     if (self)
     {
         self.frequency = frequency;
@@ -192,18 +192,27 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithFrequency:(double)freq {
-    self = [self ork_init];
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency {
+    self = [super initWithIdentifier:identifier];
     if (self) {
-        _frequency = freq;
+        _frequency = frequency;
     }
     return self;
 }
+
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    return [[ORKAccelerometerRecorder alloc] initWithFrequency:self.frequency step:step outputDirectory:outputDirectory];
+    return [[ORKAccelerometerRecorder alloc] initWithIdentifier:self.identifier
+                                                      frequency:self.frequency
+                                                           step:step
+                                                outputDirectory:outputDirectory];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder

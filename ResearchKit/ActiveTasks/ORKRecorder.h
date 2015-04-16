@@ -58,13 +58,41 @@ ORK_CLASS_AVAILABLE
 @interface ORKRecorderConfiguration : NSObject <NSSecureCoding>
 
 /**
- The `init` method is unavailable outside the framework on `ORKRecorderConfiguration`,
+ The `init` and `new` methods are unavailable outside the framework on `ORKRecorderConfiguration`,
  because it is an abstract class.
  
  `ORKRecorderConfiguration` classes should be initialized with custom designated
  initializers on each subclass.
  */
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
+
+/**
+ Returns an initialized recorder configuration.
+ 
+ This method is the designated initializer for recorder configurations not needing additional parameters.
+ 
+ If you provide a new designated initializer when subclassing, make sure you apropriately override the base designated initializer.
+ 
+ @param identifier   The unique indentifier of the recorder configuration.
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ A short string that uniquely identifies the recorder configuration within the step.
+ 
+ The identifier is reproduced in the results of a recorder created from this configuration. In fact, the only way to link a result
+ (an `ORKFileResult` object) to the recorder that generated it is to look at the value of
+ `identifier`. To accurately identify recorder results, you need to ensure that recorder identifiers
+ are unique within each step.
+ 
+ In some cases, it can be useful to link the recorder identifier to a unique identifier in a
+ database; in other cases, it can make sense to make the identifier human
+ readable.
+ */
+@property (nonatomic, copy, readonly) NSString *identifier;
 
 /**
  Returns a recorder instance using this configuration.
@@ -117,10 +145,11 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
+ @param identifier   The unique indentifier of the recorder configuration.
  @param frequency The frequency of accelerometer data collection in samples per second (Hz).
  @return An initialized accelerometer recorder configuration.
  */
-- (instancetype)initWithFrequency:(double)frequency NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -159,9 +188,11 @@ ORK_CLASS_AVAILABLE
  
  For information on the settings available for an audio recorder, see "AV Foundation Audio Settings Constants".
  
+ @param identifier   The unique indentifier of the recorder configuration.
  @param recorderSettings The settings for the recording session.
+ @return An initialized audio recorder configuration.
  */
-- (instancetype)initWithRecorderSettings:(NSDictionary *)recorderSettings NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier recorderSettings:(NSDictionary *)recorderSettings NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -196,10 +227,11 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
+ @param identifier   The unique indentifier of the recorder configuration.
  @param frequency    Motion data collection frequency in samples per second (Hz).
  @return An initialized device motion recorder configuration.
  */
-- (instancetype)initWithFrequency:(double)frequency NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -222,20 +254,12 @@ ORK_CLASS_AVAILABLE
  To use a recorder, include its configuration in the `recorderConfigurations` property
  of an `ORKActiveStep` object, include that step in a task, and present it with
  a task view controller.
+ 
+ Note that the recorder instantiates a `CMPedometer` object, so no additional parameters besides
+ the identifier are required.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPedometerRecorderConfiguration : ORKRecorderConfiguration
-
-/**
- Returns an initialized pedometer recorder configuration.
- 
- This method is the designated initializer.
- 
- Note that the recorder instantiates a `CMPedometer` object, so no parameters are required.
- */
-- (instancetype)init NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -255,19 +279,11 @@ ORK_CLASS_AVAILABLE
  To use a recorder, include its configuration in the `recorderConfigurations` property
  of an `ORKActiveStep` object, include that step in a task, and present it with
  a task view controller.
+ 
+ No additional parameters besides the identifier are required.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKLocationRecorderConfiguration : ORKRecorderConfiguration
-
-/**
- Returns an initialized location recorder configuration.
- 
- This method is the designated initializer.
- 
- No parameters are required.
- */
-- (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -294,11 +310,12 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
+ @param identifier   The unique indentifier of the recorder configuration.
  @param quantityType    The quantity type that should be collected during the active task.
  @param unit            The unit for the data that should be collected and serialized.
  @return An initialized health quantity type recorder configuration.
  */
-- (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -369,11 +386,26 @@ need to implement it.
 ORK_CLASS_AVAILABLE
 @interface ORKRecorder : NSObject
 
++ (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /// @name Configuration
 
 @property (nonatomic, weak, nullable) id<ORKRecorderDelegate> delegate;
+
+/**
+ A short string that uniquely identifies the recorder (usually assigned by the recorder configuration).
+ 
+ The identifier is reproduced in the results of a recorder created from this configuration. In fact, the only way to link a result
+ (an `ORKFileResult` object) to the recorder that generated it is to look at the value of
+ `identifier`. To accurately identify recorder results, you need to ensure that recorder identifiers
+ are unique within each step.
+ 
+ In some cases, it can be useful to link the recorder identifier to a unique identifier in a
+ database; in other cases, it can make sense to make the identifier human
+ readable.
+ */
+@property (nonatomic, copy, readonly) NSString *identifier;
 
 /**
  The step that produced this recorder, configured during initialization.

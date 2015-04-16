@@ -43,14 +43,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchRecorderConfiguration: ORKRecorderConfiguration
 
-- (instancetype)init;
-
 @end
 
 
 @interface ORKRecorder()
 
-- (instancetype)initWithStep:(nullable ORKStep *)step
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(nullable ORKStep *)step
              outputDirectory:(nullable NSURL *)outputDirectory;
 
 

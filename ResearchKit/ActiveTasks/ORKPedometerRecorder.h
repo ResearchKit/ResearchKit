@@ -57,8 +57,15 @@ ORK_CLASS_AVAILABLE
 // Negative if an invalid value.
 @property (nonatomic, readonly) NSInteger totalDistance;
 
-- (instancetype)initWithStep:(ORKStep *)step
-             outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+/**
+ Returns an initialized pedometer recorder.
+ 
+ @param identifier   The unique indentifier of the recorder (assigned by the recorder configuration).
+ @return An initialized pedometer recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
 

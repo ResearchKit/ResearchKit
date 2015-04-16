@@ -186,7 +186,7 @@
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step
     outputDirectory:(NSURL *)outputDirectory {
-    return [[CustomRecorder alloc] initWithStep:step
+    return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step
                      outputDirectory:outputDirectory];
 }
 

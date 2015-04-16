@@ -50,11 +50,11 @@
 @implementation ORKDeviceMotionRecorder
 
 
-- (instancetype)initWithFrequency:(double)frequency
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency
                              step:(ORKStep *)step
                   outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step
+    self = [super initWithIdentifier:identifier step:step
                outputDirectory:(NSURL *)outputDirectory];
     if (self)
     {
@@ -186,22 +186,28 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithFrequency:(double)freq {
-    self = [super ork_init];
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)freq {
+    self = [super initWithIdentifier:identifier];
     if (self) {
         _frequency = freq;
     }
     return self;
 }
+
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    return [[ORKDeviceMotionRecorder alloc] initWithFrequency:self.frequency
-                                                        step:step
-                                             outputDirectory:(NSURL *)outputDirectory];
+    return [[ORKDeviceMotionRecorder alloc] initWithIdentifier:self.identifier
+                                                     frequency:self.frequency
+                                                          step:step
+                                               outputDirectory:(NSURL *)outputDirectory];
 }
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
