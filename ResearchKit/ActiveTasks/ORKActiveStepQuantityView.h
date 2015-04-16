@@ -45,8 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL enabled;
 
 
-@property (nonatomic, readonly, strong, nullable) UILabel *titleLabel;
-@property (nonatomic, readonly, strong, nullable) UILabel *valueLabel;
+@property (nonatomic, strong, readonly, nullable) UILabel *titleLabel;
+@property (nonatomic, strong, readonly, nullable) UILabel *valueLabel;
 
 
 @end

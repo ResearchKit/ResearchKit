@@ -135,7 +135,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 @property (nonatomic) void *context;
 
 @property (nonatomic, weak) id responder;
-@property(nonatomic) SEL action;
+@property (nonatomic) SEL action;
 
 - (void)startObserving;
 
