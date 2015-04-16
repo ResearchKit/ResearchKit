@@ -34,8 +34,8 @@
 @interface ORKCountdownLabel ()
 
 
-@property (nonatomic, strong) NSString *mmString;
-@property (nonatomic, strong) NSString *ssString;
+@property (nonatomic, copy) NSString *mmString;
+@property (nonatomic, copy) NSString *ssString;
 
 @end
 
