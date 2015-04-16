@@ -155,7 +155,7 @@
 
 @interface ORKMockAccelerometerRecorder : ORKAccelerometerRecorder
 
-@property (nonatomic ,strong) ORKMockMotionManager* mockManager;
+@property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
 
@@ -185,7 +185,7 @@
 
 @interface ORKMockPedometerRecorder : ORKPedometerRecorder
 
-@property (nonatomic ,strong) ORKMockPedometer* mockPedometer;
+@property (nonatomic, strong) ORKMockPedometer* mockPedometer;
 
 @end
 
@@ -230,7 +230,7 @@
 
 @interface ORKMockDeviceMotionRecorder : ORKDeviceMotionRecorder
 
-@property (nonatomic ,strong) ORKMockMotionManager* mockManager;
+@property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
 
