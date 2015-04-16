@@ -1001,7 +1001,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
         if (progress.total > 0)
         {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,(unsigned long)progress.current+1, (unsigned long)progress.total];
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil), (unsigned long)progress.current+1, (unsigned long)progress.total];
         }
     }
     
