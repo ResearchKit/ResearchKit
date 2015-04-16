@@ -381,7 +381,7 @@
             
             // Make cell visible
             {
-                UIView *firstResponderView = (UIView *)[[UIApplication sharedApplication] ork_currentFirstResponder];
+                UIView *firstResponderView = (UIView *)[[UIApplication sharedApplication] ork_currentFirstResponderView];
                 UIView *cell = firstResponderView;
                 while (cell && [cell isKindOfClass:[UITableViewCell class]] == NO) {
                     cell = cell.superview;
