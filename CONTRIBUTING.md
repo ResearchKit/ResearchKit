@@ -3,7 +3,7 @@ Contributing to the ResearchKit Framework
 
 This page focuses on code contributions to the existing
 codebase. However, other types of contributions are welcome too, in
-keeping with the ResearchKit™ framework [best practices](../../wiki/best_practices). For example,
+keeping with the ResearchKit™ framework [best practices](../../wiki/best-practices). For example,
 contributions of original free-to-use survey content, back-end integrations,
 validation data, and analysis or processing tools are all welcome. Ask
 on [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) or [contact us](https://developer.apple.com/contact/researchkit/) for guidance.
