@@ -38,7 +38,7 @@
 @property (nonatomic, strong, readonly) ORKTextButton *skipButton;
 
 @property (nonatomic) BOOL useNextForSkip;
-@property (nonatomic,getter=isOptional) BOOL optional;
+@property (nonatomic, getter=isOptional) BOOL optional;
 
 - (void)updateContinueAndSkipEnabled;
 
