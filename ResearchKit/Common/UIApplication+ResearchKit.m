@@ -34,15 +34,20 @@
 
 @implementation UIApplication (ResearchKit)
 
-- (UIResponder *)ork_currentFirstResponder {
+- (UIView *)ork_currentFirstResponderView {
     NSMutableArray *sender = [NSMutableArray new] ;
     [self sendAction:@selector(ork_updateCurrentFirstResponder:)
                                                to:nil
                                              from:sender
                                          forEvent:nil];
     
+    for (UIResponder *responder in sender) {
+        if ([responder isKindOfClass:[UIView class]]) {
+            return (UIView *)responder;
+        }
+    }
     
-    return [sender firstObject];
+    return nil;
 }
 
 
