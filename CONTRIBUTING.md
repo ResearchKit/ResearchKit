@@ -163,7 +163,7 @@ The `master` branch is used for work in progress. On `master`:
   represent that you have the right to license the patch to the
   community, and agree by submitting the patch that your changes are
   licensed under the existing license terms of the file you are
-  modifying (i.e., [ResearchKit BSD license](https://github.com/ResearchKit/ResearchKit#license)).
+  modifying (i.e., [ResearchKit BSD license](LICENSE)).
   Please also add your copyright (name and year) to the relevant
   files for changes that are more than 10 lines of code.
   2.  If you are submitting a new file for inclusion in the ResearchKit framework (no
