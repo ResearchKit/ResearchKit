@@ -3,9 +3,10 @@ Pod::Spec.new do |s|
   s.version      = '1.0.0'
   s.summary      = 'ResearchKit is an open source software framework that makes it easy to create apps for medical research or for other research projects.'
   s.homepage     = 'https://www.github.com/ResearchKit/ResearchKit'
+  s.documentation_url = 'http://researchkit.github.io/docs/'
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
   s.author       = { "Apple Inc." => "http://apple.com" }
-  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'stable' } #:tag => "v#{s.version}"}
+  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => "v#{s.version}"}
   s.public_header_files = `./scripts/find_headers.rb --public`.split("\n")
   s.private_header_files = `./scripts/find_headers.rb --private`.split("\n")
   s.source_files = 'ResearchKit/**/*.{h,m}'
