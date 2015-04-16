@@ -483,11 +483,9 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
                                   if ([[error domain] isEqualToString:CMErrorDomain]) {
                                       switch (error.code) {
                                           case CMErrorMotionActivityNotAuthorized:
-#if defined(__IPHONE_8_2)
                                           case CMErrorNotAuthorized:
                                           case CMErrorNotAvailable:
                                           case CMErrorNotEntitled:
-#endif
                                           case CMErrorMotionActivityNotAvailable:
                                           case CMErrorMotionActivityNotEntitled:
                                               success = NO;
