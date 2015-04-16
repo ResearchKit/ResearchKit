@@ -18,7 +18,7 @@ Getting More Information
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
 * Or [contact us](https://developer.apple.com/contact/researchkit/)
 
-Use cases
+Use Cases
 ===========
 
 A task in the ResearchKit framework contains a set of steps to present to a
