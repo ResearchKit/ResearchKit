@@ -515,8 +515,10 @@
             
             BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
             
+            BOOL scale = answerFormat.questionType == ORKQuestionTypeScale;
+            
             // Items require individual section
-            if (multiCellChoices || multilineTextEntry)
+            if (multiCellChoices || multilineTextEntry || scale)
             {
                 // Add new section
                 section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
@@ -776,6 +778,10 @@
                         }
                     }
                         break;
+                    case ORKQuestionTypeScale:{
+                        class = [ORKFormItemScaleCell class];
+                    }
+                        break;
                         
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
@@ -905,6 +911,9 @@
             return 40;
         }
         
+    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKFormItemScaleCell class]]){
+        
+        return [ORKFormItemScaleCell suggestedCellHeightInTableView:_tableView];
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]){
         
         ORKTableCellItem *cellItem = [_sections[indexPath.section] items][indexPath.row-1];

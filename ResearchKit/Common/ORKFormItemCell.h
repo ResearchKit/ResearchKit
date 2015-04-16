@@ -83,4 +83,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKFormItemPickerCell : ORKFormItemTextFieldBasedCell
 @end
 
+@interface ORKFormItemScaleCell : ORKFormItemCell
++ (CGFloat)suggestedCellHeightInTableView:(nullable UITableView *)tableView;
+@end
+
 NS_ASSUME_NONNULL_END

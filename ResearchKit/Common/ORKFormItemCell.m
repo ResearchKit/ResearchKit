@@ -41,6 +41,8 @@
 #import "ORKFormTextView.h"
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
+#import "ORKScaleSlider.h"
+#import "ORKScaleSliderView.h"
 
 static const CGFloat kVMargin = 10.0;
 static const CGFloat kHMargin = 15.0;
@@ -847,6 +849,60 @@ static const CGFloat kHMargin = 15.0;
     
     [super answerDidChange];
     [_selectionView setAnswer:self.answer];
+}
+
+@end
+
+
+#pragma mark - ORKFormItemScaleCell
+
+@interface ORKFormItemScaleCell ()
+
+@end
+
+@implementation ORKFormItemScaleCell {
+
+    ORKScaleSliderView *_sliderView;
+}
+
++ (CGFloat)suggestedCellHeightInTableView:(nullable UITableView *)tableView {
+    return 140;
+}
+
+- (void)cellInit {
+    
+    self.labelLabel.text = nil;
+   
+    
+    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
+    [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
+    
+    [self.contentView addSubview:_sliderView];
+    
+    
+    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_sliderView);
+    
+    ORKEnableAutoLayoutForViews([dictionary allValues]);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    
+    
+    [super cellInit];
+}
+
+#pragma mark recover answer
+- (void)answerDidChange {
+    
+    [super answerDidChange];
+    [_sliderView setCurrentValue:(self.answer && self.answer!=ORKNullAnswerValue() ? self.answer : nil)];
+    
+}
+
+- (void)inputValueDidChange {
+    
+    [self ork_setAnswer:_sliderView.currentValue];
+    [super inputValueDidChange];
+    
 }
 
 @end
