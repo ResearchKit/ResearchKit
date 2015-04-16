@@ -224,6 +224,8 @@ enum TaskListRow: Int, Printable {
         case FormStep =                             "FormStep"
         case FormItem01 =                           "FormItem01"
         case FormItem02 =                           "FormItem02"
+        case FormItem03 =                           "FormItem03"
+        case FormItem04 =                           "FormItem04"
     }
     
     // MARK: Properties
@@ -650,7 +652,15 @@ enum TaskListRow: Int, Printable {
         let formItem02 = ORKFormItem(identifier: Identifier.FormItem02.rawValue, text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
         formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
         
-        step.formItems = [formItem01, formItem02]
+        //A third field, for entering an integer via a slider
+        let formItem03Text = NSLocalizedString("Your slider question here", comment: "")
+        let formItem03 = ORKFormItem(identifier: Identifier.FormItem03.rawValue, text: formItem03Text, answerFormat: ORKScaleAnswerFormat(maximumValue: 100, minimumValue: 0, step:10, defaultValue:50))
+        
+        //A fourth field, for entering a decimal via a slider
+        let formItem04Text = NSLocalizedString("Your other slider question here", comment: "")
+        let formItem04 = ORKFormItem(identifier: Identifier.FormItem04.rawValue, text: formItem04Text, answerFormat: ORKContinuousScaleAnswerFormat(maximumValue: 100, minimumValue: 0, defaultValue:50, maximumFractionDigits: 2))
+        
+        step.formItems = [formItem01, formItem02, formItem03, formItem04]
 
         return ORKOrderedTask(identifier: Identifier.FormTask.rawValue, steps: [step])
     }
