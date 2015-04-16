@@ -7,7 +7,7 @@ create apps for medical research or for other research projects.
 * Getting Started: [Getting Started](#gettingstarted)
 * Documentation: ([Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.github.io/docs/index.html))
 * Best practices: [Best Practices](../../wiki/best_practices)
-* Contributing to ResearchKit: [Contributing](../../wiki/contributing)
+* Contributing to ResearchKit: [Contributing](CONTRIBUTING.md)
 * Website and blog: ([researchkit.org](http://researchkit.github.io/index.html))  ([Blog](http://researchkit.github.io/blog.html))
 * ResearchKit BSD License: [License](#license)
 
