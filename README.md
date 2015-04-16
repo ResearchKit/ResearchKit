@@ -48,7 +48,7 @@ programming for iOS. ResearchKit's active tasks invite users to perform activiti
 under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.github.io/docs/docs/ActiveTasks/ActiveTasks.html)
 
 
-Getting started<a name="gettingstarted"></a>
+Getting Started<a name="gettingstarted"></a>
 ===============
 
 
