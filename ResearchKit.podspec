@@ -5,8 +5,9 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://www.github.com/ResearchKit/ResearchKit'
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
   s.author       = { "Apple Inc." => "http://apple.com" }
-  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => "v#{s.version}"}
-  s.public_header_files = 'ResearchKit/ResearchKit.h', 'ResearchKit/ActiveTasks/{ORKActiveStep.h,ORKActiveStepViewController.h,ORKRecorder.h}', 'ResearchKit/Common/{ORKAnswerFormat.h,ORKDefines.h,ORKFormStep.h,ORKHealthAnswerFormat.h,ORKInstructionStep.h,ORKOrderedTask.h,ORKQuestionStep.h,ORKResult.h,ORKStep.h,ORKStepViewController.h,ORKTask.h,ORKTaskViewController.h}', 'ResearchKit/Consent/{ORKConsentDocument.h,ORKConsentReviewStep.h,ORKConsentSection.h,ORKConsentSharingStep.h,ORKConsentSignature.h,ORKVisualConsentStep.h}'
+  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'stable' } #:tag => "v#{s.version}"}
+  s.public_header_files = `./scripts/find_headers.rb --public`.split("\n")
+  s.private_header_files = `./scripts/find_headers.rb --private`.split("\n")
   s.source_files = 'ResearchKit/**/*.{h,m}'
   s.resources    = 'ResearchKit/**/*.{fsh,vsh}', 'ResearchKit/Animations/**/*.m4v', 'ResearchKit/Artwork.xcassets', 'ResearchKit/Localized/*.lproj'
   s.platform     = :ios, '8.0'
