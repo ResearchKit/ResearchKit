@@ -1,7 +1,7 @@
 Dependency Management
 ===========
 
-The ResearchKit framework can also be added to you app using CocoaPods or Carthage.
+The ResearchKit framework can also be added to your app using CocoaPods or Carthage.
 
 Installation with CocoaPods
 ------------
