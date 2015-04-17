@@ -128,7 +128,7 @@
 @implementation ORKSurveyAnswerCellForVerticalScale
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 244.0;
+    return 358.0;
 }
 
 @end
