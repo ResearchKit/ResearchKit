@@ -5,8 +5,8 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://www.github.com/ResearchKit/ResearchKit'
   s.documentation_url = 'http://researchkit.github.io/docs/'
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
-  s.author       = { "Apple Inc." => "http://apple.com" }
-  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => "v#{s.version}"}
+  s.author       = { 'researchkit.org' => 'http://researchkit.org' }
+  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => 'v#{s.version}' }
   s.public_header_files = `./scripts/find_headers.rb --public`.split("\n")
   s.private_header_files = `./scripts/find_headers.rb --private`.split("\n")
   s.source_files = 'ResearchKit/**/*.{h,m}'
