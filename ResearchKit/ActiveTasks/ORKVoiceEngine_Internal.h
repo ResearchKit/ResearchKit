@@ -29,72 +29,15 @@
  */
 
 
+
 #import "ORKVoiceEngine.h"
-#import "ORKVoiceEngine_Internal.h"
-#import "ORKHelpers.h"
 
-@implementation ORKVoiceEngine
+NS_ASSUME_NONNULL_BEGIN
 
-+(ORKVoiceEngine *)sharedVoiceEngine
-{
-    static ORKVoiceEngine *shared;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        shared = [ORKVoiceEngine new];
-    });
-    return shared;
-}
+@interface ORKVoiceEngine ()
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
-        self.speechSynthesizer.delegate = self;
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    self.speechSynthesizer.delegate = nil;
-    self.speechSynthesizer = nil;
-}
-
-- (void)speakText:(NSString *)text {
-    if (self.speechSynthesizer.isSpeaking) {
-        [self stopTalking];
-    }
-    
-    if (UIAccessibilityIsVoiceOverRunning()) {
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, text);
-        return;
-    }
-    
-    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
-    utterance.rate = AVSpeechUtteranceMaximumSpeechRate / 7;
-
-    [self.speechSynthesizer speakUtterance:utterance];
-}
-
-- (void)speakInt:(NSInteger)number {
-    [self speakText:[NSString stringWithFormat:@"%ld",(long)number]];
-}
-
-- (void)stopTalking {
-    [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryWord];
-}
-
-
-- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
-    
-}
-
-- (BOOL)isSpeaking
-{
-    return self.speechSynthesizer.isSpeaking;
-}
-
+@property (nonatomic, strong, nullable) AVSpeechSynthesizer *speechSynthesizer;
 
 @end
+
+NS_ASSUME_NONNULL_END
