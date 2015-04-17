@@ -343,8 +343,8 @@ static const NSInteger kNumberOfSamples = 5;
     _result = nil;
 }
 
-- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)conf {
-    ORKRecorder *recorder = [conf recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
+- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)recorderConfiguration {
+    ORKRecorder *recorder = [recorderConfiguration recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
                                                                     outputDirectory:[NSURL fileURLWithPath:_outputPath]];
     recorder.delegate = self;
     return recorder;
@@ -453,9 +453,9 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testDeviceMotionRecorder {
     
-    ORKDeviceMotionRecorderConfiguration *conf = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"deviceMotion" frequency:60.0];
+    ORKDeviceMotionRecorderConfiguration *recorderConfiguration = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"deviceMotion" frequency:60.0];
     Class recorderClass = [ORKDeviceMotionRecorder class];
-    ORKDeviceMotionRecorder *recorder = (ORKDeviceMotionRecorder *)[self createRecorder:conf];
+    ORKDeviceMotionRecorder *recorder = (ORKDeviceMotionRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
@@ -574,9 +574,9 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testAudioRecorder {
     
-    ORKAudioRecorderConfiguration *conf = [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"audio" recorderSettings:@{}];
+    ORKAudioRecorderConfiguration *recorderConfiguration = [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"audio" recorderSettings:@{}];
     Class recorderClass = [ORKAudioRecorder class];
-    ORKAudioRecorder *recorder = (ORKAudioRecorder *)[self createRecorder:conf];
+    ORKAudioRecorder *recorder = (ORKAudioRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
 }
@@ -585,9 +585,9 @@ static const NSInteger kNumberOfSamples = 5;
     
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *hbQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-    ORKHealthQuantityTypeRecorderConfiguration *conf = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
+    ORKHealthQuantityTypeRecorderConfiguration *recorderConfiguration = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
     Class recorderClass = [ORKHealthQuantityTypeRecorder class];
-    ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:conf];
+    ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
 }
