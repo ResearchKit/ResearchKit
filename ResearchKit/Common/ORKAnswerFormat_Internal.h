@@ -129,14 +129,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
-@interface ORKVerticalScaleAnswerFormat() <ORKScaleAnswerFormatProvider>
-
-@end
-
-@interface ORKContinuousVerticalScaleAnswerFormat() <ORKScaleAnswerFormatProvider>
-
-@end
-
 
 @interface ORKTextChoice() <ORKAnswerOption>
 

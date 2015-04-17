@@ -248,32 +248,28 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
 
 @implementation ORKAnswerFormat
 
-+ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
-                                              minValue:(NSInteger)scaleMin
-                                                  step:(NSInteger)step
-                                          defaultValue:(NSInteger)defaultValue {
-    return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin step:step defaultValue:defaultValue];
++ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
+                                               minimumValue:(NSInteger)scaleMinimum
+                                               defaultValue:(NSInteger)defaultValue
+                                                       step:(NSInteger)step
+                                                   vertical:(BOOL)verticalFlag {
+    return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                 minimumValue:scaleMinimum
+                                                 defaultValue:defaultValue
+                                                         step:step
+                                                     vertical:verticalFlag];
 }
 
-+ (ORKScaleAnswerFormat *)verticalScaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
-                                                       minValue:(NSInteger)scaleMin
-                                                           step:(NSInteger)step
-                                                   defaultValue:(NSInteger)defaultValue {
-    return [[ORKVerticalScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin step:step defaultValue:defaultValue];
-}
-
-+ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaxValue:(double)scaleMax
-                                                                  minValue:(double)scaleMin
-                                                              defaultValue:(double)defaultValue
-                                                     maximumFractionDigits:(NSInteger)maximumFractionDigits {
-    return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin defaultValue:defaultValue maximumFractionDigits:maximumFractionDigits];
-}
-
-+ (ORKContinuousScaleAnswerFormat *)continuousVerticalScaleAnswerFormatWithMaxValue:(double)scaleMax
-                                                                           minValue:(double)scaleMin
-                                                                       defaultValue:(double)defaultValue
-                                                              maximumFractionDigits:(NSInteger)maximumFractionDigits {
-    return [[ORKContinuousVerticalScaleAnswerFormat alloc] initWithMaximumValue:scaleMax minimumValue:scaleMin defaultValue:defaultValue maximumFractionDigits:maximumFractionDigits];
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                               defaultValue:(double)defaultValue
+                                                      maximumFractionDigits:(NSInteger)maximumFractionDigits
+                                                                       vertical:(BOOL)verticalFlag {
+    return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                           minimumValue:scaleMinimum
+                                                           defaultValue:defaultValue
+                                                  maximumFractionDigits:maximumFractionDigits
+                                                               vertical:verticalFlag];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
@@ -1328,23 +1324,32 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 - (instancetype)initWithMaximumValue:(NSInteger)maximumValue
                         minimumValue:(NSInteger)minimumValue
+                        defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
-                        defaultValue:(NSInteger)defaultValue {
+                            vertical:(BOOL)verticalFlag {
     self = [super init];
     if (self) {
 
         _minimum = minimumValue;
         _maximum = maximumValue;
-        _step = step;
         _defaultValue = defaultValue;
+        _step = step;
+        _vertical = verticalFlag;
         
         [self validateParameters];
     }
     return self;
 }
 
-- (BOOL)isVertical {
-    return NO;
+- (instancetype)initWithMaximumValue:(NSInteger)maximumValue
+                        minimumValue:(NSInteger)minimumValue
+                        defaultValue:(NSInteger)defaultValue
+                                step:(NSInteger)step {
+    return [self initWithMaximumValue:maximumValue
+                         minimumValue:minimumValue
+                         defaultValue:defaultValue
+                                 step:step
+                             vertical:NO];
 }
 
 - (NSNumber *)minimumNumber {
@@ -1469,16 +1474,6 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 @end
 
 
-#pragma mark - ORKVerticalScaleAnswerFormat
-
-@implementation ORKVerticalScaleAnswerFormat
-
-- (BOOL)isVertical {
-    return YES;
-}
-
-@end
-
 
 #pragma mark - ORKContinuousScaleAnswerFormat
 
@@ -1490,11 +1485,11 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return [ORKScaleQuestionResult class];
 }
 
-
 - (instancetype)initWithMaximumValue:(double)maximumValue
                         minimumValue:(double)minimumValue
                         defaultValue:(double)defaultValue
-               maximumFractionDigits:(NSInteger)maximumFractionDigits {
+               maximumFractionDigits:(NSInteger)maximumFractionDigits
+                            vertical:(BOOL)verticalFlag {
     self = [super init];
     if (self) {
         
@@ -1502,15 +1497,22 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
         _maximum = maximumValue;
         _defaultValue = defaultValue;
         _maximumFractionDigits = maximumFractionDigits;
+        _vertical = verticalFlag;
         
         [self validateParameters];
     }
     return self;
 }
 
-
-- (BOOL)isVertical {
-    return NO;
+- (instancetype)initWithMaximumValue:(double)maximumValue
+                        minimumValue:(double)minimumValue
+                        defaultValue:(double)defaultValue
+               maximumFractionDigits:(NSInteger)maximumFractionDigits {
+    return [self initWithMaximumValue:maximumValue
+                         minimumValue:minimumValue
+                         defaultValue:defaultValue
+                maximumFractionDigits:maximumFractionDigits
+                             vertical:NO];
 }
 
 - (NSNumber *)minimumNumber {
@@ -1624,16 +1626,6 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 @end
 
 
-#pragma mark - ORKContinuousScaleAnswerFormat
-
-@implementation ORKContinuousVerticalScaleAnswerFormat
-
-- (BOOL)isVertical {
-    return YES;
-}
-
-@end
-    
 
 #pragma mark - ORKTextAnswerFormat
 

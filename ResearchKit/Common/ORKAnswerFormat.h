@@ -136,25 +136,17 @@ ORK_CLASS_AVAILABLE
 
 /// @name Factory methods
 
-+ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
-                                               minValue:(NSInteger)scaleMin
-                                                   step:(NSInteger)step
-                                           defaultValue:(NSInteger)defaultValue;
++ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
+                                               minimumValue:(NSInteger)scaleMinimum
+                                               defaultValue:(NSInteger)defaultValue
+                                                       step:(NSInteger)step
+                                                   vertical:(BOOL)verticalFlag;
 
-+ (ORKScaleAnswerFormat *)verticalScaleAnswerFormatWithMaxValue:(NSInteger)scaleMax
-                                                       minValue:(NSInteger)scaleMin
-                                                           step:(NSInteger)step
-                                                   defaultValue:(NSInteger)defaultValue;
-
-+ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaxValue:(double)scaleMax
-                                                                   minValue:(double)scaleMin
-                                                               defaultValue:(double)defaultValue
-                                                      maximumFractionDigits:(NSInteger)maximumFractionDigits;
-
-+ (ORKContinuousScaleAnswerFormat *)continuousVerticalScaleAnswerFormatWithMaxValue:(double)scaleMax
-                                                                           minValue:(double)scaleMin
-                                                                       defaultValue:(double)defaultValue
-                                                              maximumFractionDigits:(NSInteger)maximumFractionDigits;
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                                   defaultValue:(double)defaultValue
+                                                          maximumFractionDigits:(NSInteger)maximumFractionDigits
+                                                                       vertical:(BOOL)verticalFlag;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -221,14 +213,32 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue   The upper bound of the scale.
  @param minimumValue   The lower bound of the scale.
- @param step   The size of each discrete offset on the scale.
  @param defaultValue   The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param step   The size of each discrete offset on the scale.
+ @param vertical   Pass YES to use a vertical scale; for the default horizontal scale, pass NO.
  @return An initialized scale answer format.
  */
 - (instancetype)initWithMaximumValue:(NSInteger)maximumValue
                         minimumValue:(NSInteger)minimumValue
+                        defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
-                        defaultValue:(NSInteger)defaultValue NS_DESIGNATED_INITIALIZER;
+                            vertical:(BOOL)verticalFlag NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized horizontal scale answer format using the specified values.
+ 
+ This method is a convenience initializer.
+
+ @param maximumValue   The upper bound of the scale.
+ @param minimumValue   The lower bound of the scale.
+ @param defaultValue   The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param step   The size of each discrete offset on the scale.
+ @return An initialized scale answer format.
+ */
+- (instancetype)initWithMaximumValue:(NSInteger)maximumValue
+                        minimumValue:(NSInteger)minimumValue
+                        defaultValue:(NSInteger)defaultValue
+                                step:(NSInteger)step;
 
 /**
  The upper bound of the scale. (read-only)
@@ -257,18 +267,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly) NSInteger defaultValue;
 
-@end
-
-
-
 /**
- The `ORKVerticalScaleAnswerFormat `class represents an answer format that includes a vertical slider control.
- 
- The vertical scale answer format produces an `ORKScaleQuestionResult` object that contains an integer whose
- value is between the scale's minimum and maximum values, and represents one of the quantized step values.
+ A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
-ORK_CLASS_AVAILABLE
-@interface ORKVerticalScaleAnswerFormat : ORKScaleAnswerFormat
+@property (readonly, getter=isVertical) BOOL vertical;
 
 @end
 
@@ -292,12 +294,30 @@ ORK_CLASS_AVAILABLE
  @param minimumValue   The lower bound of the scale.
  @param defaultValue   The default value of the scale. If this value is out of range, the slider is displayed without a default value.
  @param maximumFractionDigits    The maximum number of fractional digits to display.
+ @param vertical   Pass YES to use a vertical scale; for the default horizontal scale, pass NO.
  @return An initialized scale answer format.
  */
 - (instancetype)initWithMaximumValue:(double)maximumValue
                         minimumValue:(double)minimumValue
                         defaultValue:(double)defaultValue
-               maximumFractionDigits:(NSInteger)maximumFractionDigits NS_DESIGNATED_INITIALIZER;
+               maximumFractionDigits:(NSInteger)maximumFractionDigits
+                            vertical:(BOOL)verticalFlag NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized horizontal continous scale answer format using the specified values.
+ 
+ This method is a convenience initializer.
+ 
+ @param maximumValue   The upper bound of the scale.
+ @param minimumValue   The lower bound of the scale.
+ @param step   The size of each discrete offset on the scale.
+ @param maximumFractionDigits    The maximum number of fractional digits to display.
+ @return An initialized scale answer format.
+ */
+- (instancetype)initWithMaximumValue:(double)maximumValue
+                        minimumValue:(double)minimumValue
+                        defaultValue:(double)defaultValue
+               maximumFractionDigits:(NSInteger)maximumFractionDigits;
 
 /**
  The upper bound of the scale. (read-only)
@@ -321,18 +341,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly) NSInteger maximumFractionDigits;
 
-@end
-
-
-
 /**
- The `ORKContinuousVerticalScaleAnswerFormat` class represents an answer format that lets participants
- select a value on a continuous vertical scale.
- 
- The continuous vertical scale answer format produces an `ORKScaleQuestionResult` object that has a real-number value.
+ A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
-ORK_CLASS_AVAILABLE
-@interface ORKContinuousVerticalScaleAnswerFormat : ORKContinuousScaleAnswerFormat
+@property (readonly, getter=isVertical) BOOL vertical;
 
 @end
 
