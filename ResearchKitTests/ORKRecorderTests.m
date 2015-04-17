@@ -371,7 +371,7 @@ static const NSInteger kNumberOfSamples = 5;
     
     recorder = [[ORKMockLocationRecorder alloc] initWithIdentifier:@"location"
                                                               step:recorder.step
-                                             outputDirectory:recorder.outputDirectory];
+                                                   outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
     [recorder start];
     

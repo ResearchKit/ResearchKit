@@ -50,12 +50,14 @@
 @implementation ORKDeviceMotionRecorder
 
 
-- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
                              step:(ORKStep *)step
                   outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithIdentifier:identifier step:step
-               outputDirectory:(NSURL *)outputDirectory];
+    self = [super initWithIdentifier:identifier
+                                step:step
+                     outputDirectory:(NSURL *)outputDirectory];
     if (self)
     {
         self.frequency = frequency;

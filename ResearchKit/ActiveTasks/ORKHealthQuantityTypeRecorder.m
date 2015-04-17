@@ -56,9 +56,9 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthQuantityType:(HKQuantityType *)quantityType
-                                      unit:(HKUnit *)unit
-                                      step:(ORKStep *)step
-                           outputDirectory:(NSURL *)outputDirectory
+                              unit:(HKUnit *)unit
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory
 {
     self = [super initWithIdentifier:identifier
                                 step:step

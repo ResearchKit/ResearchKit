@@ -55,8 +55,8 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifer
                          frequency:(double)frequency
-                             step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory;
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory;
 
 @end
 
