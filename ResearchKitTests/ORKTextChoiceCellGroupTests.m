@@ -80,7 +80,7 @@
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertNotNil(cell, @"");
         XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
-        XCTAssertEqual(cell.immediateNavigation , YES, @"");
+        XCTAssertEqual(cell.immediateNavigation, YES, @"");
         XCTAssertEqual(cell.accessoryType, UITableViewCellAccessoryDisclosureIndicator, @"");
     }
     

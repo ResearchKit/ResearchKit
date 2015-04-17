@@ -122,7 +122,7 @@
             typeof(self) strongSelf = weakSelf;
             [strongSelf doSample];
             if (finished) {
-                [self finish];
+                [strongSelf finish];
             }
         }];
         [_timer resume];

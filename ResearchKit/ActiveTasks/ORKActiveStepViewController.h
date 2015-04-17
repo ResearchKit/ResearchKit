@@ -118,7 +118,7 @@ ORK_CLASS_AVAILABLE
  
  In addition, when a step is finished, all recorders are stopped.
  */
-@property (nonatomic, assign, getter=isFinished, readonly) BOOL finished;
+@property (nonatomic, assign, readonly, getter=isFinished) BOOL finished;
 
 
 /**

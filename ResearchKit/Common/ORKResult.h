@@ -564,7 +564,7 @@ ORK_CLASS_AVAILABLE
 /**
  The unit string displayed to the user when the value was entered, or `nil` if no unit string was displayed.
  */
-@property (nonatomic, copy) NSString *unit;
+@property (nonatomic, copy, nullable) NSString *unit;
 
 @end
 

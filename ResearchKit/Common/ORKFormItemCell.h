@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) ORKScreenType screenType;
 
-@property(nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic) CGFloat expectedLayoutWidth;
 
 @end
 

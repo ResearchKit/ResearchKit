@@ -211,7 +211,7 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     _startTime = mach_absolute_time();
     dispatch_source_set_timer(_timer,
                               dispatch_time(DISPATCH_TIME_NOW, timeUntilNextFire * NSEC_PER_SEC),
-                              _interval * NSEC_PER_SEC ,
+                              _interval * NSEC_PER_SEC,
                               0.05 * NSEC_PER_SEC);
     dispatch_resume(_timer);
 }

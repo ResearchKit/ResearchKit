@@ -155,7 +155,7 @@
 
 @interface ORKMockAccelerometerRecorder : ORKAccelerometerRecorder
 
-@property (nonatomic ,strong) ORKMockMotionManager* mockManager;
+@property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
 
@@ -185,7 +185,7 @@
 
 @interface ORKMockPedometerRecorder : ORKPedometerRecorder
 
-@property (nonatomic ,strong) ORKMockPedometer* mockPedometer;
+@property (nonatomic, strong) ORKMockPedometer* mockPedometer;
 
 @end
 
@@ -230,7 +230,7 @@
 
 @interface ORKMockDeviceMotionRecorder : ORKDeviceMotionRecorder
 
-@property (nonatomic ,strong) ORKMockMotionManager* mockManager;
+@property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
 
@@ -475,13 +475,13 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual(motion.attitude.quaternion.w, [sample[@"attitude"][@"w"] doubleValue]), @"");
         
         XCTAssertTrue(ork_doubleEqual(motion.gravity.x, [sample[@"gravity"][@"x"] doubleValue]), @"");
-        XCTAssertTrue(ork_doubleEqual(motion.gravity.y , [sample[@"gravity"][@"y"] doubleValue]), @"");
-        XCTAssertTrue(ork_doubleEqual(motion.gravity.z , [sample[@"gravity"][@"z"] doubleValue]), @"");
+        XCTAssertTrue(ork_doubleEqual(motion.gravity.y, [sample[@"gravity"][@"y"] doubleValue]), @"");
+        XCTAssertTrue(ork_doubleEqual(motion.gravity.z, [sample[@"gravity"][@"z"] doubleValue]), @"");
         
         XCTAssertTrue(ork_doubleEqual(motion.magneticField.accuracy, [sample[@"magneticField"][@"accuracy"] doubleValue]), @"");
         XCTAssertTrue(ork_doubleEqual(motion.magneticField.field.x, [sample[@"magneticField"][@"x"] doubleValue]), @"");
         XCTAssertTrue(ork_doubleEqual(motion.magneticField.field.y, [sample[@"magneticField"][@"y"] doubleValue]), @"");
-        XCTAssertTrue(ork_doubleEqual(motion.magneticField.field.z , [sample[@"magneticField"][@"z"] doubleValue]), @"");
+        XCTAssertTrue(ork_doubleEqual(motion.magneticField.field.z, [sample[@"magneticField"][@"z"] doubleValue]), @"");
         
         XCTAssertTrue(ork_doubleEqual(motion.rotationRate.x, [sample[@"rotationRate"][@"x"] doubleValue]), @"");
         XCTAssertTrue(ork_doubleEqual(motion.rotationRate.y, [sample[@"rotationRate"][@"y"] doubleValue]), @"");
