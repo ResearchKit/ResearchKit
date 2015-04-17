@@ -563,6 +563,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         typeAndCellMapping = @{@(ORKQuestionTypeScale): [ORKSurveyAnswerCellForScale class],
+                               @(ORKQuestionTypeVerticalScale): [ORKSurveyAnswerCellForVerticalScale class],
                                @(ORKQuestionTypeDecimal) : [ORKSurveyAnswerCellForNumber class],
                                @(ORKQuestionTypeText) : [ORKSurveyAnswerCellForText class],
                                @(ORKQuestionTypeTimeOfDay) : [ORKSurveyAnswerCellForPicker class],
@@ -784,8 +785,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
             height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
         }
             break;
+        case ORKQuestionTypeVerticalScale:{
+            height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
+        }
+            break;
         default:{
-            
         }
             break;
     }

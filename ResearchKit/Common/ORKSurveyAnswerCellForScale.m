@@ -119,6 +119,15 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
+    return 140.0;
+}
+
+@end
+
+
+@implementation ORKSurveyAnswerCellForVerticalScale
+
++ (CGFloat)suggestedCellHeightForView:(UIView *)view {
     return 244.0;
 }
 
