@@ -60,7 +60,7 @@ static NSString * const kORKDataLoggerManagerConfigurationFilename = @".ORKDataL
 
 @interface ORKObjectObserver : NSObject
 
-- (id)initWithObject:(id)object keys:(NSArray *)keys selector:(SEL)selector;
+- (instancetype)initWithObject:(id)object keys:(NSArray *)keys selector:(SEL)selector;
 
 @property (unsafe_unretained) id object;
 
@@ -186,7 +186,7 @@ static NSString * const kORKDataLoggerManagerConfigurationFilename = @".ORKDataL
 
 static void *ORKObjectObserverContext = &ORKObjectObserverContext;
 
-- (id)initWithObject:(id)object keys:(NSArray *)keys selector:(SEL)selector
+- (instancetype)initWithObject:(id)object keys:(NSArray *)keys selector:(SEL)selector
 {
     self = [super init];
     if (self)
@@ -351,7 +351,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 @implementation ORKJSONLogFormatter
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self)
