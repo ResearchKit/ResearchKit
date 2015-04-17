@@ -196,8 +196,6 @@
     [super tearDown];
 }
 
-
-
 - (void)testTaskResult {
     
     //ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:@"a000012" taskRunUUID:[NSUUID UUID] outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
@@ -219,9 +217,9 @@
     activeStep.shouldVibrateOnStart = YES;
     activeStep.stepDuration = 100.0;
     activeStep.recorderConfigurations =
-  @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"id.accelerometer" frequency:11.0],
-    [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
-    [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
+    @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"id.accelerometer" frequency:11.0],
+      [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
+      [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
     ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1)]  ]]];
     
