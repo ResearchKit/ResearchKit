@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Copyright (c) 2015, Dasmer Singh. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification,
@@ -26,8 +28,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-#!/usr/bin/env ruby
 
 require 'pathname'
 require 'xcodeproj'

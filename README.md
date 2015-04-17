@@ -90,8 +90,6 @@ dynamic framework, and present a simple task view controller.
 
 ###1. Add the ResearchKit framework to Your Project
 
-####a. Using dynamic frameworks
-
 To get started, drag `ResearchKit.xcodeproj` from your checkout into
 your iOS app project in Xcode:
 
@@ -112,13 +110,7 @@ target as shown in the figure below.
 </figure>
 </center>
 
-####b. Using CocoaPods
-Add the following line to your Podfile:
-
-```ruby
-pod 'ResearchKit', '~> 1.0'
-```
-
+Note: You can also import ResearchKit into your project using a [dependency manager](./dependency_management.md) such as CocoaPods or Carthage.
 
 ###2. Create a Step
 
