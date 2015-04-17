@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.documentation_url = 'http://researchkit.github.io/docs/'
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
   s.author       = { 'researchkit.org' => 'http://researchkit.org' }
-  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => 'v#{s.version}' }
+  s.source       = { :git => 'https://github.com/ResearchKit/ResearchKit.git', :tag => s.version.to_s }
   s.public_header_files = `./scripts/find_headers.rb --public --private`.split("\n")
   s.source_files = 'ResearchKit/**/*.{h,m}'
   s.resources    = 'ResearchKit/**/*.{fsh,vsh}', 'ResearchKit/Animations/**/*.m4v', 'ResearchKit/Artwork.xcassets', 'ResearchKit/Localized/*.lproj'
