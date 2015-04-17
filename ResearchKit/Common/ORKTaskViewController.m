@@ -726,7 +726,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     [super viewDidDisappear:animated];
     
     // Set endDate on TaskVC is dismissed,
-    // because nextResponder is not nil when current TaskVC is  covered by another modal view
+    // because nextResponder is not nil when current TaskVC is covered by another modal view
     if (self.nextResponder == nil) {
          _dismissedDate = [NSDate date];
     }
