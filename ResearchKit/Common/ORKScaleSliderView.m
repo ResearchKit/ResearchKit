@@ -57,7 +57,7 @@
         self.leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
         self.rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
         
-        self.slider.isVertical = [formatProvider isVertical];
+        self.slider.vertical = [formatProvider isVertical];
         
         self.slider.maximumValue = [[formatProvider maximumNumber] floatValue];
         self.slider.minimumValue = [[formatProvider minimumNumber] floatValue];

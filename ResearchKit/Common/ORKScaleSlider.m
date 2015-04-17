@@ -69,19 +69,19 @@
     _showThumb = showThumb;
 }
 
-- (void)setIsVertical:(BOOL)isVertical
+- (void)setVertical:(BOOL)vertical
 {
-    if (isVertical != _isVertical)
+    if (vertical != _vertical)
     {
-        _isVertical = isVertical;
-        self.transform = isVertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+        _vertical = vertical;
+        self.transform = vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
     }
 }
 
 - (void)addConstraint:(NSLayoutConstraint *)constraint
 {
     [super addConstraint:constraint];
-    if (_isVertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
+    if (_vertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
     {
         // In vertical mode, the slider needs to be of square size for the drawn area to have the appropriate height (due to using self.transform)
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self
@@ -97,7 +97,7 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *view = nil;
-    if (_isVertical)
+    if (_vertical)
     {
         // In vertical mode, we need to ignore the touch are for the needed extra width
         const CGFloat desiredSliderWidth = 36.0;
