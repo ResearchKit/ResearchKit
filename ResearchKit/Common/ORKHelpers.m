@@ -450,5 +450,6 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
     return font;
 }
 
-
-
+id _ORKDynamicCast(id x, Class objClass) {
+    return [x isKindOfClass:objClass] ? x : nil;
+}

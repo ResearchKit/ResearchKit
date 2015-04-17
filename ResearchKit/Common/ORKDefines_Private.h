@@ -37,8 +37,9 @@ ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
 #define ORKLocalizedString(key, comment) \
 [ORKBundle() localizedStringForKey:(key) value:@"" table:nil]
 
-#define ORKDynamicCast(x, c) ((c *) ([x isKindOfClass:[c class]] ? x : nil))
+ORK_EXTERN id _ORKDynamicCast(id x, Class objClass) ORK_AVAILABLE_DECL;
 
+#define ORKDynamicCast(x, c) (c *) _ORKDynamicCast(x, [c class])
 
 ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
