@@ -1205,6 +1205,18 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                                ]];
             [items addObject:item3];
         }
+        
+        {
+            //Fixed Step Scale
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_001" text:@"Pick an integer" answerFormat:[[ORKScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 step:10 defaultValue:50]];
+            [items addObject:item];
+        }
+        
+        {
+            //Continuous Scale
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_002" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:50 maximumFractionDigits: 2]];
+            [items addObject:item];
+        }
     
         
         [step setFormItems:items];
