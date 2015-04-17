@@ -777,7 +777,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         _managedResults = [NSMutableDictionary new];
     }
 
-    [_managedResults setObject:result forKey:aKey];
+    _managedResults[aKey] = result;
 }
 
 - (NSUUID *)taskRunUUID {

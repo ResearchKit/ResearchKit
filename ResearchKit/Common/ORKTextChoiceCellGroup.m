@@ -139,7 +139,7 @@
             cell.selectedItem = YES;
         } else {
             // It is ok to not create the cell at here
-            ORKChoiceViewCell *cell = [_cells objectForKey:@(index)];
+            ORKChoiceViewCell *cell = _cells[@(index)];
             cell.selectedItem = NO;
         }
     }
@@ -150,7 +150,7 @@
     NSMutableArray *indexes = [NSMutableArray new];
     
     for (NSUInteger index = 0; index < self.size; index++ ) {
-        ORKChoiceViewCell *cell = [_cells objectForKey:@(index)];
+        ORKChoiceViewCell *cell = _cells[@(index)];
         if (cell.selectedItem) {
             [indexes addObject:@(index)];
         }

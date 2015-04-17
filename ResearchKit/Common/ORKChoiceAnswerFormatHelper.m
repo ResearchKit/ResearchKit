@@ -74,7 +74,7 @@
         return nil;
     }
     
-    ORKImageChoice *choice = [_choices objectAtIndex:index];
+    ORKImageChoice *choice = _choices[index];
     return [choice isKindOfClass:[ORKImageChoice class]]? choice : nil;
 }
 
@@ -83,7 +83,7 @@
         return nil;
     }
     
-    ORKTextChoice *choice = [_choices objectAtIndex:index];
+    ORKTextChoice *choice = _choices[index];
     return [choice isKindOfClass:[ORKTextChoice class]]? choice : nil;
 }
 
@@ -103,7 +103,7 @@
             continue;
         }
         
-        id<ORKAnswerOption> choice = [_choices objectAtIndex:index];
+        id<ORKAnswerOption> choice = _choices[index];
         id value = [choice value];
         
         if (value == nil) {

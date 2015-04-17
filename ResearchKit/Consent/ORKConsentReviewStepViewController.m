@@ -178,7 +178,7 @@ static NSString * const _FamilyNameIdentifier = @"family";
 
 
 - (BOOL)currentLocalePresentsFamilyNameFirst {
-    NSString * language = [[[NSLocale preferredLanguages] objectAtIndex:0] substringToIndex:2];
+    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
     static dispatch_once_t onceToken;
     static NSArray *familyNameFirstLangs = nil;
     dispatch_once(&onceToken, ^{
@@ -242,7 +242,7 @@ static NSString * const _FamilyNameIdentifier = @"family";
     ORKConsentDocument *document = [origninalDocument copy];
     
     if (index != NSNotFound) {
-        ORKConsentSignature *signature = [document.signatures objectAtIndex:index];
+        ORKConsentSignature *signature = document.signatures[index];
         
         if (signature.requiresName) {
             signature.givenName = _signatureFirst;
