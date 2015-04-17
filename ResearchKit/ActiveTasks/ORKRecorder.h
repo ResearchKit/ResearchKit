@@ -74,7 +74,7 @@ ORK_CLASS_AVAILABLE
  
  If you provide a new designated initializer when subclassing, make sure you apropriately override the base designated initializer.
  
- @param identifier   The unique indentifier of the recorder configuration.
+ @param identifier   The unique identifier of the recorder configuration.
  @return An initialized recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
@@ -98,7 +98,7 @@ ORK_CLASS_AVAILABLE
  Returns a recorder instance using this configuration.
  
  @param step      The step for which this recorder is being created.
- @param outputDirectory     The directory in which all output file data should be written
+ @param outputDirectory     The directory in which all output file data should be written.
  (if producing `ORKFileResult` instances).
  
  @return A configured recorder instance.
@@ -145,7 +145,7 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param identifier   The unique indentifier of the recorder configuration.
+ @param identifier   The unique identifier of the recorder configuration.
  @param frequency The frequency of accelerometer data collection in samples per second (Hz).
  @return An initialized accelerometer recorder configuration.
  */
@@ -188,7 +188,7 @@ ORK_CLASS_AVAILABLE
  
  For information on the settings available for an audio recorder, see "AV Foundation Audio Settings Constants".
  
- @param identifier   The unique indentifier of the recorder configuration.
+ @param identifier   The unique identifier of the recorder configuration.
  @param recorderSettings The settings for the recording session.
  @return An initialized audio recorder configuration.
  */
@@ -227,7 +227,7 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param identifier   The unique indentifier of the recorder configuration.
+ @param identifier   The unique identifier of the recorder configuration.
  @param frequency    Motion data collection frequency in samples per second (Hz).
  @return An initialized device motion recorder configuration.
  */
@@ -310,7 +310,7 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param identifier   The unique indentifier of the recorder configuration.
+ @param identifier   The unique identifier of the recorder configuration.
  @param quantityType    The quantity type that should be collected during the active task.
  @param unit            The unit for the data that should be collected and serialized.
  @return An initialized health quantity type recorder configuration.
