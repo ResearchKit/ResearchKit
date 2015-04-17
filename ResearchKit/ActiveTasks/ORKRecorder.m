@@ -212,7 +212,7 @@
 
 - (NSString *)logName
 {
-    return [NSString stringWithFormat:@"%@_%@", [self recorderType],self.step.identifier];
+    return [NSString stringWithFormat:@"%@_%@", [self recorderType],self.identifier];
 }
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error
