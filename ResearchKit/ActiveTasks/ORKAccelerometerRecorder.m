@@ -131,7 +131,7 @@
 }
 
 - (NSDictionary *)userInfo {
-    return  @{ @"frequency" : @(self.frequency) };;
+    return  @{ @"frequency" : @(self.frequency) };
 }
 
 - (void)stop {

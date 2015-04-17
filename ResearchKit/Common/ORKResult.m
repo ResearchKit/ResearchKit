@@ -1208,7 +1208,7 @@
 
 @interface ORKCollectionResult ()
 
-- (void)setResultsCopyObjects: (NSArray *)results;
+- (void)setResultsCopyObjects:(NSArray *)results;
 
 @end
 
@@ -1266,7 +1266,7 @@
 }
 
 
-- (void)setResultsCopyObjects: (NSArray *)results {
+- (void)setResultsCopyObjects:(NSArray *)results {
     _results = ORKArrayCopyObjects(results);
 }
 

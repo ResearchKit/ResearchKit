@@ -34,11 +34,6 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 
-
-#if !defined(__IPHONE_8_2)
-#define HKBiologicalSexOther 3
-#endif
-
 #pragma mark - ORKHealthAnswerFormat
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
@@ -46,14 +41,7 @@ NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex) {
     switch (biologicalSex) {
         case HKBiologicalSexFemale: string = @"HKBiologicalSexFemale"; break;
         case HKBiologicalSexMale:   string = @"HKBiologicalSexMale";   break;
-#if !defined(__IPHONE_8_2)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wswitch"
-#endif
         case HKBiologicalSexOther:  string = @"HKBiologicalSexOther";  break;
-#if !defined(__IPHONE_8_2)
-#pragma clang diagnostic pop
-#endif
         case HKBiologicalSexNotSet: break;
     }
     return string;

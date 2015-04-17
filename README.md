@@ -6,8 +6,8 @@ create apps for medical research or for other research projects.
 
 * Getting Started: [Getting Started](#gettingstarted)
 * Documentation: ([Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.github.io/docs/index.html))
-* Best practices: [Best Practices](../../wiki/best_practices)
-* Contributing to ResearchKit: [Contributing](../../wiki/contributing)
+* Best practices: [Best Practices](../../wiki/best-practices)
+* Contributing to ResearchKit: [Contributing](CONTRIBUTING.md)
 * Website and blog: ([researchkit.org](http://researchkit.github.io/index.html))  ([Blog](http://researchkit.github.io/blog.html))
 * ResearchKit BSD License: [License](#license)
 
@@ -18,7 +18,7 @@ Getting More Information
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
 * Or [contact us](https://developer.apple.com/contact/researchkit/)
 
-Use cases
+Use Cases
 ===========
 
 A task in the ResearchKit framework contains a set of steps to present to a
@@ -48,7 +48,7 @@ programming for iOS. ResearchKit's active tasks invite users to perform activiti
 under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.github.io/docs/docs/ActiveTasks/ActiveTasks.html)
 
 
-Getting started<a name="gettingstarted"></a>
+Getting Started<a name="gettingstarted"></a>
 ===============
 
 
@@ -63,7 +63,7 @@ using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 Installation
 ------------
 
-The lastest stable version of ResearchKit framework can be cloned with
+The latest stable version of ResearchKit framework can be cloned with
 
 ```
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
@@ -139,7 +139,7 @@ myStep.title = @"Welcome to ResearchKit";
 ###3. Create a Task
 
 Use the ordered task class (`ORKOrderedTask`) to create a task that
-contains myStep. An ordered task is just a task where the order and
+contains `myStep`. An ordered task is just a task where the order and
 selection of later steps does not depend on the results of earlier
 ones. Name your task `task` and initialize it with `myStep`.
 

@@ -158,7 +158,7 @@
 
 @implementation ORKFormItem
 
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat: (ORKAnswerFormat *) answerFormat {
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
         

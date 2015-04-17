@@ -219,7 +219,6 @@
     XCTAssertTrue(bytes > _manager.totalBytesThreshold);
     XCTAssertEqual(_totalBytesReachedCounter, 2);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
-    
 }
 
 - (void)testDelegateThresholds
@@ -269,7 +268,6 @@
     XCTAssertTrue(bytes > _manager.pendingUploadBytesThreshold);
     XCTAssertEqual(_totalBytesReachedCounter, 0);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 2);
-    
 }
 
 @end

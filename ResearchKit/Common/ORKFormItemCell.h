@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(nullable id)answer;
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
-- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;;
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 
 @end
 
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) ORKScreenType screenType;
 
-@property(nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic) CGFloat expectedLayoutWidth;
 
 @end
 

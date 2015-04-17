@@ -114,8 +114,8 @@ static UIBezierPath *ORKErrorBezierPath() {
 
 @property (nonatomic, readonly) UIEdgeInsets canvasMargins;
 @property (nonatomic, readonly) CGSize canvasSize;
-@property (nonatomic, readonly, strong) UIBezierPath *path;
-@property (nonatomic, readonly, strong) UIColor *color;
+@property (nonatomic, strong, readonly) UIBezierPath *path;
+@property (nonatomic, strong, readonly) UIColor *color;
 
 @end
 

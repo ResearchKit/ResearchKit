@@ -38,16 +38,6 @@
 
 @implementation ORKResultTests
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 - (ORKTaskResult *)createTaskResultTree {
     
     // Construction
@@ -76,9 +66,9 @@
     // Compare
     XCTAssert([taskResult1.taskRunUUID isEqual:taskResult2.taskRunUUID], @"");
     XCTAssert([taskResult1.outputDirectory isEqual:taskResult2.outputDirectory], @"");
-    XCTAssert([taskResult1.identifier isEqualToString:taskResult2.identifier],@"");
+    XCTAssert([taskResult1.identifier isEqualToString:taskResult2.identifier], @"");
     
-    XCTAssert(taskResult1!=taskResult2 ,@"");
+    XCTAssert(taskResult1!=taskResult2, @"");
 
     [taskResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         ORKResult *result1 = obj;
@@ -89,44 +79,44 @@
         ORKStepResult *stepResult1 = (ORKStepResult *)result1;
         ORKStepResult *stepResult2 = (ORKStepResult *)result2;
         
-        XCTAssert(stepResult1!=stepResult2 ,@"");
+        XCTAssert(stepResult1!=stepResult2, @"");
         
         [stepResult1.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKResult *result1 = obj;
             ORKResult *result2 = stepResult2.results[idx];
             XCTAssertNotNil(result2, @"");
             XCTAssert(result1.class == result2.class);
-            XCTAssert([result1.startDate isEqualToDate: result2.startDate],@"");
-            XCTAssert([result1.endDate isEqualToDate: result2.endDate],@"");
+            XCTAssert([result1.startDate isEqualToDate: result2.startDate], @"");
+            XCTAssert([result1.endDate isEqualToDate: result2.endDate], @"");
             
-            XCTAssert(result1!=result2 ,@"");
+            XCTAssert(result1!=result2, @"");
             
             if ([result1 isKindOfClass:[ORKQuestionResult class]])
             {
                 ORKQuestionResult *q1 = (ORKQuestionResult *)result1;
                 ORKQuestionResult *q2 = (ORKQuestionResult *)result2;
                 
-                XCTAssert(q1.questionType == q2.questionType , @"");
+                XCTAssert(q1.questionType == q2.questionType, @"");
                 if (! [q1.answer isEqual:q2.answer]) {
-                    XCTAssert([q1.answer isEqual:q2.answer] , @"");
+                    XCTAssert([q1.answer isEqual:q2.answer], @"");
                 }
-                XCTAssert([q1.identifier isEqualToString:q2.identifier] , @"%@ and %@",q1.identifier, q2.identifier);
+                XCTAssert([q1.identifier isEqualToString:q2.identifier], @"%@ and %@", q1.identifier, q2.identifier);
             }
             else if ([result1 isKindOfClass:[ORKFileResult class]])
             {
                 ORKFileResult *f1 = (ORKFileResult *)result1;
                 ORKFileResult *f2 = (ORKFileResult *)result2;
                 
-                XCTAssert( [f1.fileURL isEqual:f2.fileURL] , @"");
-                XCTAssert( [f1.contentType isEqualToString:f2.contentType] , @"");
+                XCTAssert( [f1.fileURL isEqual:f2.fileURL], @"");
+                XCTAssert( [f1.contentType isEqualToString:f2.contentType], @"");
             }
             else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]])
             {
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;
                 ORKConsentSignatureResult *c2 = (ORKConsentSignatureResult *)result2;
                 
-                XCTAssert(c1.signature!=c2.signature ,@"");
-                //XCTAssert( [c1.signature isEqual:c2.signature] , @"%@ and %@",c1.signature, c2.signature);
+                XCTAssert(c1.signature!=c2.signature, @"");
+                //XCTAssert( [c1.signature isEqual:c2.signature], @"%@ and %@",c1.signature, c2.signature);
             }
             
         }];
@@ -169,11 +159,10 @@
     XCTAssertNil(ret, @"%@", ret.identifier);
     
     ret = [result resultForIdentifier:@"007"];
-    XCTAssertEqual(ret.identifier, @"007" , @"%@", ret.identifier);
+    XCTAssertEqual(ret.identifier, @"007", @"%@", ret.identifier);
     
     ret = [result resultForIdentifier: @"101"];
     XCTAssertEqual(ret.identifier, @"101", @"%@", ret.identifier);
-    
 }
 
 @end

@@ -44,7 +44,7 @@
     {
         if (nil == identifier)
         {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
         }
         
         _identifier = [identifier copy];

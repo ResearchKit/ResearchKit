@@ -68,7 +68,7 @@ typedef struct {
 
 @interface ORKSpatialSpanMemoryContentView : ORKActiveStepCustomView
 
-@property (nonatomic, readonly, strong) ORKSpatialSpanMemoryGameView *gameView;
+@property (nonatomic, strong, readonly) ORKSpatialSpanMemoryGameView *gameView;
 
 @property (nonatomic, assign, getter=isFooterHidden) BOOL footerHidden;
 
