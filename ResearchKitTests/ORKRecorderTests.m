@@ -300,6 +300,7 @@ static BOOL ork_doubleEqual(double x, double y) {
 
 @implementation ORKRecorderTests {
     NSString  *_outputPath;
+    ORKRecorder *_recorder;
     ORKResult *_result;
     NSArray   *_items;
 }
@@ -321,6 +322,7 @@ static const NSInteger kNumberOfSamples = 5;
         }
     }
     
+    _recorder = nil;
     _result = nil;
     _items = nil;
 }
@@ -331,11 +333,13 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
      NSLog(@"didCompleteWithResult: %@", result);
+    _recorder = recorder;
     _result = result;
 }
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     NSLog(@"didFailWithError: %@", error);
+    _recorder = nil;
     _result = nil;
 }
 
@@ -350,6 +354,7 @@ static const NSInteger kNumberOfSamples = 5;
     
     XCTAssertNotNil(_result, @"");
     XCTAssert([_result isKindOfClass:[ORKFileResult class]], @"");
+    XCTAssert([_recorder.identifier isEqualToString:_result.identifier], @"");
     
     ORKFileResult *fileResult = (ORKFileResult *)_result;
     
@@ -416,11 +421,12 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testAccelerometerRecorder {
     
-    ORKAccelerometerRecorderConfiguration *conf = [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"accelerometer" frequency:60.0];
+    ORKAccelerometerRecorderConfiguration *recorderConfiguration = [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"accelerometer" frequency:60.0];
     Class recorderClass = [ORKAccelerometerRecorder class];
-    ORKAccelerometerRecorder *recorder = (ORKAccelerometerRecorder *)[self createRecorder:conf];
+    ORKAccelerometerRecorder *recorder = (ORKAccelerometerRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
+    XCTAssertTrue([recorder.identifier isEqualToString:recorderConfiguration.identifier], @"");
     
     recorder = [[ORKMockAccelerometerRecorder alloc] initWithIdentifier:@"accelerometer" frequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
