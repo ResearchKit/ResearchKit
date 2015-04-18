@@ -34,6 +34,6 @@
 
 @interface ORKVoiceEngine ()
 
-@property (nonatomic, strong) AVSpeechSynthesizer *speechSynthesizer;
+@property (nonatomic, strong, readonly) AVSpeechSynthesizer *speechSynthesizer;
 
 @end

@@ -41,6 +41,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [ORKVoiceEngine new];
+        
     });
     return shared;
 }
@@ -49,7 +50,7 @@
 {
     self = [super init];
     if (self) {
-        self.speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
+        _speechSynthesizer = [[AVSpeechSynthesizer alloc] init];
         self.speechSynthesizer.delegate = self;
     }
     return self;
@@ -59,7 +60,7 @@
 {
     [self.speechSynthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     self.speechSynthesizer.delegate = nil;
-    self.speechSynthesizer = nil;
+    _speechSynthesizer = nil;
 }
 
 - (void)speakText:(NSString *)text {

@@ -65,6 +65,23 @@
 
 @end
 
+@interface ORKTestVoiceEngine : ORKVoiceEngine
+
+@end
+
+@implementation ORKTestVoiceEngine {
+    ORKMockSpeechSynthesizer *_speechSynthesizer;
+}
+
+- (AVSpeechSynthesizer *)speechSynthesizer {
+    if (! _speechSynthesizer) {
+        _speechSynthesizer = [[ORKMockSpeechSynthesizer alloc] init];
+    }
+    return _speechSynthesizer;
+}
+
+@end
+
 @interface ORKVoiceEngineTests : XCTestCase
 
 @end
@@ -76,10 +93,8 @@
 
 - (void)setUp {
     [super setUp];
-    _voiceEngine = [[ORKVoiceEngine alloc] init];
-    _mockSpeechSynthesizer = [[ORKMockSpeechSynthesizer alloc] init];
-    _voiceEngine.speechSynthesizer = _mockSpeechSynthesizer;
-    _mockSpeechSynthesizer.delegate = _voiceEngine;
+    _voiceEngine = [[ORKTestVoiceEngine alloc] init];
+    _mockSpeechSynthesizer = (ORKMockSpeechSynthesizer *)_voiceEngine.speechSynthesizer;
 }
 
 - (void)testSharedInstance {
