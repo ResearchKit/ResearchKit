@@ -865,10 +865,6 @@ static const CGFloat kHMargin = 15.0;
     ORKScaleSliderView *_sliderView;
 }
 
-+ (CGFloat)suggestedCellHeightInTableView:(nullable UITableView *)tableView {
-    return 140;
-}
-
 - (void)cellInit {
     
     self.labelLabel.text = nil;

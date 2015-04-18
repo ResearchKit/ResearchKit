@@ -911,9 +911,6 @@
             return 40;
         }
         
-    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKFormItemScaleCell class]]){
-        
-        return [ORKFormItemScaleCell suggestedCellHeightInTableView:_tableView];
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]){
         
         ORKTableCellItem *cellItem = [_sections[indexPath.section] items][indexPath.row-1];

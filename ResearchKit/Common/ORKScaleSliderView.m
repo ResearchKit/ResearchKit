@@ -126,19 +126,13 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_slider,_leftRangeLabel,_rightRangeLabel, _valueLabel);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
-                                                                 options:NSLayoutFormatAlignAllCenterX
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
+                                                                 options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil views:views]];
     
     const CGFloat kMargin = 17.0;
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|" options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:@{@"kMargin": @(kMargin)} views:views]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_valueLabel
-                                                     attribute:NSLayoutAttributeLastBaseline
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:_slider
-                                                     attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-34.0]];
 }
 
 

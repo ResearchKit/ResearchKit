@@ -780,10 +780,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
             height = [ORKSurveyAnswerCellForPicker suggestedCellHeightForView:tableView];
         }
             break;
-        case ORKQuestionTypeScale:{
-            height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
-        }
-            break;
         default:{
             
         }

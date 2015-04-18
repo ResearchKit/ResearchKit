@@ -38,4 +38,11 @@
     return ORKLightFontWithSize([[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]+18.0);
 }
 
+- (CGSize)intrinsicContentSize
+{
+    CGSize intrinsic = [super intrinsicContentSize];
+    //force the height to always be the height of the font, so that an empty label doesnt go to 0
+    return (CGSize){.width=intrinsic.width,self.font.lineHeight};
+}
+
 @end

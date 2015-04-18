@@ -84,7 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface ORKFormItemScaleCell : ORKFormItemCell
-+ (CGFloat)suggestedCellHeightInTableView:(nullable UITableView *)tableView;
 @end
 
 NS_ASSUME_NONNULL_END

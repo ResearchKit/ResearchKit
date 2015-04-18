@@ -118,8 +118,8 @@
     [self ork_setAnswer:_sliderView.currentValue];
 }
 
-+ (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 140.0;
+- (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
+    return @[];
 }
 
 
