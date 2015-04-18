@@ -184,6 +184,11 @@
 
 @implementation CustomRecorderConfiguration
 
+- (instancetype)initWithIdentifier:(NSString *)identifier
+{
+    return [super initWithIdentifier:identifier];
+}
+
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step outputDirectory:outputDirectory];
 }

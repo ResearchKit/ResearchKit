@@ -43,13 +43,40 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTouchRecorderConfiguration: ORKRecorderConfiguration
 
+/**
+ Returns an initialized touch recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @return An initialized touch recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new touch recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the touch recorder configuration.
+ @return A new touch recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 @end
 
 
 @interface ORKRecorder()
 
-- (instancetype)initWithIdentifier:(NSString *)identifier step:(nullable ORKStep *)step
-             outputDirectory:(nullable NSURL *)outputDirectory;
+/**
+ Returns an initialized recorder.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier          The unique identifier of the recorder.
+ @param step                The step for which this recorder is being created.
+ @param outputDirectory     The directory in which all output file data should be written (if producing `ORKFileResult` instances).
+ @return An initialized recorder.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier step:(nullable ORKStep *)step outputDirectory:(nullable NSURL *)outputDirectory;
 
 
 /**
@@ -88,12 +115,29 @@ ORK_CLASS_AVAILABLE
 @interface ORKRecorderConfiguration()
 
 /**
+ Returns an initialized recorder configuration.
+ 
+ This method is the designated initializer.
+ 
+ @param identifier   The unique identifier of the recorder configuration.
+ @return An initialized recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the recorder configuration.
+ @return A new recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
  Returns the permission mask indicating the permissions required for this configuration.
  
  This method is typically overridden in new recorder configuration subclasses.
  */
 - (ORKPermissionMask)requestedPermissionMask;
-
 
 @end
 

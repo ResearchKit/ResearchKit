@@ -204,6 +204,11 @@
 
 @implementation ORKPedometerRecorderConfiguration
 
+- (instancetype)initWithIdentifier:(NSString *)identifier
+{
+    return [super initWithIdentifier:identifier];
+}
+
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
     return [[ORKPedometerRecorder alloc] initWithIdentifier:self.identifier

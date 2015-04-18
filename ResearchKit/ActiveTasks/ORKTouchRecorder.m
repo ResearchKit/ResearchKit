@@ -226,6 +226,11 @@
 
 @implementation ORKTouchRecorderConfiguration
 
+- (instancetype)initWithIdentifier:(NSString *)identifier
+{
+    return [super initWithIdentifier:identifier];
+}
+
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier
                                                                          step:step

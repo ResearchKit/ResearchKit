@@ -69,19 +69,6 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- Returns an initialized recorder configuration.
- 
- This method is the designated initializer for recorder configurations not needing additional parameters.
- 
- If you provide a new designated initializer when subclassing, make sure you apropriately override the base designated initializer.
- 
- @param identifier   The unique identifier of the recorder configuration.
- @return An initialized recorder configuration.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
-/**
  A short string that uniquely identifies the recorder configuration within the step.
  
  The identifier is reproduced in the results of a recorder created from this configuration. In fact, the only way to link a result
@@ -151,6 +138,12 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
 
+/**
+ Returns a new accelerometer recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the accelerometer recorder configuration.
+ @return A new accelerometer recorder configuration.
+ */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
@@ -194,9 +187,16 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier recorderSettings:(NSDictionary *)recorderSettings NS_DESIGNATED_INITIALIZER;
 
+/**
+ Returns a new audio recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the audio recorder configuration.
+ @return A new audio recorder configuration.
+ */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
+
 
 
 /**
@@ -233,6 +233,12 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
 
+/**
+ Returns a new device motion recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the device motion recorder configuration.
+ @return A new device motion recorder configuration.
+ */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
@@ -255,13 +261,34 @@ ORK_CLASS_AVAILABLE
  of an `ORKActiveStep` object, include that step in a task, and present it with
  a task view controller.
  
- Note that the recorder instantiates a `CMPedometer` object, so no additional parameters besides
- the identifier are required.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPedometerRecorderConfiguration : ORKRecorderConfiguration
 
+/**
+ Returns an initialized pedometer recorder configuration.
+
+ The recorder instantiates a `CMPedometer` object, so no additional parameters besides
+ the identifier are required.
+
+ This method is the designated initializer.
+
+ @param identifier   The unique identifier of the recorder configuration.
+ @return An initialized pedometer recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new pedometer recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the pedometer recorder configuration.
+ @return A new pedometer recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 @end
+
+
 
 /**
  The `ORKLocationRecorderConfiguration` class represents a configuration
@@ -285,7 +312,26 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKLocationRecorderConfiguration : ORKRecorderConfiguration
 
+/**
+ Returns an initialized location recorder configuration.
+ 
+ This method is the designated initializer.
+
+ @param identifier   The unique identifier of the recorder configuration.
+ @return An initialized location recorder configuration.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a new location recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the location recorder configuration.
+ @return A new location recorder configuration.
+ */
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
 @end
+
 
 
 /**
@@ -317,6 +363,12 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
 
+/**
+ Returns a new health quantity type recorder configuration initialized from data in the given unarchiver.
+ 
+ @param aDecoder    Coder from which to initialize the health quantity type recorder configuration.
+ @return A new health quantity type recorder configuration.
+ */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -331,6 +383,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly, copy) HKUnit *unit;
 
 @end
+
+
 
 /**
  The `ORKRecorderDelegate` protocol defines methods that the delegate of an `ORKRecorder` object should use to handle errors and log the
@@ -362,6 +416,8 @@ need to implement it.
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
 @end
+
+
 
 /**
  A recorder is the runtime companion to an `ORKRecorderConfiguration` object, and is
