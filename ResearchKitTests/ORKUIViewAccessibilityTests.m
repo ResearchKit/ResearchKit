@@ -38,32 +38,30 @@
 
 @implementation ORKUIViewAccessibilityTests
 
-- (void)testOrkSuperViewOfType {
+- (void)testSuperViewOfTypeReturnsNilWhenClassIsNil {
+    UIView *view = [[UIView alloc] init];
     
-    {   // Returns nil when superview class is nil
-        UIView *view = [[UIView alloc] init];
-        
-        UIView *result = [view ork_superviewOfType:nil];
-        XCTAssertNil(result);
-    }
+    UIView *result = [view ork_superviewOfType:nil];
+    XCTAssertNil(result);
+}
+
+- (void)testReturnsNilWhenViewHasNoSuperView {
+    UIView *view = [[UIView alloc] init];
     
-    {   // Returns nil when view has no superview
-        UIView *view = [[UIView alloc] init];
-        
-        UIView *result = [view ork_superviewOfType:[UIView class]];
-        XCTAssertNil(result);
-    }
+    UIView *result = [view ork_superviewOfType:[UIView class]];
+    XCTAssertNil(result);
     
-    {   // Returns superview of specified class
-        UIButton *button = [[UIButton alloc] init];
-        UIView *view = [[UIView alloc] init];
-        UIView *anotherView = [[UIView alloc] init];
-        [button addSubview:view];
-        [view addSubview:anotherView];
-        
-        UIView *result = [anotherView ork_superviewOfType:[UIButton class]];
-        XCTAssertEqualObjects(result, button);
-    }
+}
+
+- (void)testReturnsSuperViewOfSpecifiedClass {
+    UIButton *button = [[UIButton alloc] init];
+    UIView *view = [[UIView alloc] init];
+    UIView *anotherView = [[UIView alloc] init];
+    [button addSubview:view];
+    [view addSubview:anotherView];
+    
+    UIView *result = [anotherView ork_superviewOfType:[UIButton class]];
+    XCTAssertEqualObjects(result, button);
 }
 
 @end
