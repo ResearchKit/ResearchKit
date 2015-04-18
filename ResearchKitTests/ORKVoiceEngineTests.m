@@ -31,25 +31,20 @@
 #import <XCTest/XCTest.h>
 #import "ORKVoiceEngine_Internal.h"
 
-@interface ORKMockSpeechSynthesizer : AVSpeechSynthesizer {
-    BOOL _speaking;
-}
+@interface ORKMockSpeechSynthesizer : AVSpeechSynthesizer
 
 @property (nonatomic, readonly) BOOL didStopSpeaking;
 @property (nonatomic, readonly) BOOL didSpeakText;
 @property (nonatomic, readonly) NSString *speech;
 @property (nonatomic, readonly) AVSpeechBoundary stopBoundary;
+@property (nonatomic) BOOL mockSpeaking;
 
 @end
 
 @implementation ORKMockSpeechSynthesizer
 
-- (void)injectSpeaking:(BOOL)speaking {
-    _speaking = speaking;
-}
-
 - (BOOL)isSpeaking {
-    return _speaking;
+    return self.mockSpeaking;
 }
 
 - (BOOL)stopSpeakingAtBoundary:(AVSpeechBoundary)boundary {
@@ -109,7 +104,7 @@
 }
 
 - (void)testSpeakTextWhenVoiceEngineIsAlreadySpeaking {
-    [_mockSpeechSynthesizer injectSpeaking:YES];
+    _mockSpeechSynthesizer.mockSpeaking = YES;
         
     [_voiceEngine speakText:@"foo"];
         
@@ -134,12 +129,12 @@
 
 - (void)testIsSpeaking {
     {
-        [_mockSpeechSynthesizer injectSpeaking:NO];
+        _mockSpeechSynthesizer.mockSpeaking = NO;
         XCTAssertFalse(_voiceEngine.isSpeaking);
     }
     
     {
-        [_mockSpeechSynthesizer injectSpeaking:YES];
+        _mockSpeechSynthesizer.mockSpeaking = YES;
         XCTAssertTrue(_voiceEngine.isSpeaking);
     }
 }
