@@ -50,7 +50,6 @@
     
     UIView *result = [view ork_superviewOfType:[UIView class]];
     XCTAssertNil(result);
-    
 }
 
 - (void)testReturnsSuperViewOfSpecifiedClass {
