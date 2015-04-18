@@ -32,11 +32,11 @@
 #import <XCTest/XCTest.h>
 #import "UIView+ORKAccessibility.h"
 
-@interface UIViewORKAccessibilityTests : XCTestCase
+@interface ORKUIViewAccessibilityTests : XCTestCase
 
 @end
 
-@implementation UIViewORKAccessibilityTests
+@implementation ORKUIViewAccessibilityTests
 
 - (void)testOrkSuperViewOfType {
     
