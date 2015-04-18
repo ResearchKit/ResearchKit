@@ -226,10 +226,10 @@
 
 @implementation ORKTouchRecorderConfiguration
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-               outputDirectory:(NSURL *)outputDirectory {
-    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier step:step
-                                                      outputDirectory:outputDirectory];
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier
+                                                                         step:step
+                                                              outputDirectory:outputDirectory];
     return recorder;
 }
 

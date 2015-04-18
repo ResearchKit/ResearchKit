@@ -314,7 +314,7 @@
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step
-                outputDirectory:(NSURL *)outputDirectory
+                 outputDirectory:(NSURL *)outputDirectory
 {
     return [[ORKAudioRecorder alloc] initWithIdentifier:self.identifier
                                        recorderSettings:self.recorderSettings

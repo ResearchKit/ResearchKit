@@ -57,7 +57,7 @@
 {
     self = [super initWithIdentifier:identifier
                                 step:step
-                     outputDirectory:(NSURL *)outputDirectory];
+                     outputDirectory:outputDirectory];
     if (self)
     {
         self.frequency = frequency;
@@ -208,7 +208,7 @@
     return [[ORKDeviceMotionRecorder alloc] initWithIdentifier:self.identifier
                                                      frequency:self.frequency
                                                           step:step
-                                               outputDirectory:(NSURL *)outputDirectory];
+                                               outputDirectory:outputDirectory];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder

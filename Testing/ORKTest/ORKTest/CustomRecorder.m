@@ -184,10 +184,8 @@
 
 @implementation CustomRecorderConfiguration
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-    outputDirectory:(NSURL *)outputDirectory {
-    return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step
-                     outputDirectory:outputDirectory];
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step outputDirectory:outputDirectory];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder

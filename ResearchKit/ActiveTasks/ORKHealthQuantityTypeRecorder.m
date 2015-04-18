@@ -62,7 +62,7 @@
 {
     self = [super initWithIdentifier:identifier
                                 step:step
-                     outputDirectory:(NSURL *)outputDirectory];
+                     outputDirectory:outputDirectory];
     if (self)
     {
         NSParameterAssert(quantityType != nil);
