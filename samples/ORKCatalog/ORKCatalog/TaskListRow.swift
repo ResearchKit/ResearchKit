@@ -205,7 +205,7 @@ enum TaskListRow: Int, Printable {
         case ShortWalkTask =                        "ShortWalkTask"
         case AudioTask =                            "AudioTask"
 
-        // Surevey task specific identifiers.
+        // Survey task specific identifiers.
         case SurveyTask =                           "SurveyTask"
         case IntroStep =                            "IntroStep"
         case QuestionStep =                         "QuestionStep"
