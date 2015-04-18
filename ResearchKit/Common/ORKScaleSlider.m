@@ -34,17 +34,18 @@
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
 
+
 @interface ORKScaleSlider ()
 
 @end
+
 
 @implementation ORKScaleSlider {
     CFAbsoluteTime _axLastOutputTime;
     BOOL _thumbImageNeedsTransformUpdate;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTouched:)];
@@ -66,15 +67,12 @@
     return self;
 }
 
-- (void)setShowThumb:(BOOL)showThumb
-{
+- (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
 }
 
-- (void)setVertical:(BOOL)vertical
-{
-    if (vertical != _vertical)
-    {
+- (void)setVertical:(BOOL)vertical {
+    if (vertical != _vertical) {
         _vertical = vertical;
         self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
         _thumbImageNeedsTransformUpdate = YES;
@@ -116,29 +114,24 @@
     }
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     UIView *view = nil;
-    if (_vertical)
-    {
+    if (_vertical) {
         // In vertical mode, we need to ignore the touch area for the needed extra width
         const CGFloat desiredSliderWidth = 36.0;
         const CGFloat actualWidth = self.bounds.size.width;
         const CGFloat centerX = actualWidth / 2;
-        if (fabs(point.y - centerX) < desiredSliderWidth / 2)
-        {
+        if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
             view = [super hitTest:point withEvent:event];
         }
     }
-    else
-    {
+    else {
         view = [super hitTest:point withEvent:event];
     }
     return view;
 }
 
-- (void)sliderTouched:(UIGestureRecognizer *)gesture
-{
+- (void)sliderTouched:(UIGestureRecognizer *)gesture {
     self.showThumb = YES;
     
     CGPoint touchPoint = [gesture locationInView:self];
@@ -153,7 +146,7 @@
     if (touchPoint.x < 0) {
         touchPoint.x = 0;
     }
-    CGRect trackRect = [self trackRectForBounds:[self bounds]];
+    CGRect trackRect = [self trackRectForBounds:self.bounds];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
     CGFloat newValue = position * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
@@ -168,10 +161,9 @@
 }
 
 static CGFloat kLineWidth = 1.0;
-- (void)drawRect:(CGRect)rect
-{
-    CGRect trackRect = [self trackRectForBounds:[self bounds]];
-    CGFloat centerY = [self bounds].size.height / 2.0;
+- (void)drawRect:(CGRect)rect {
+    CGRect trackRect = [self trackRectForBounds:self.bounds];
+    CGFloat centerY = self.bounds.size.height / 2.0;
     
     [[UIColor blackColor] set];
     
@@ -187,18 +179,15 @@ static CGFloat kLineWidth = 1.0;
             [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
         }
         [path stroke];
-        
     }
     
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
+
 static CGFloat kPadding = 2.0;
-- (CGRect)trackRectForBounds:(CGRect)bounds
-{
-    
+- (CGRect)trackRectForBounds:(CGRect)bounds {
     CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
     CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
-    
     return rect;
 }
 
