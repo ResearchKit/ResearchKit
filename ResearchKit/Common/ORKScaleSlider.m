@@ -40,6 +40,7 @@
 
 @implementation ORKScaleSlider {
     CFAbsoluteTime _axLastOutputTime;
+    BOOL _thumbImageNeedsTransformUpdate;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -60,6 +61,7 @@
         self.showThumb = NO;
         
         _axLastOutputTime = 0;
+        _thumbImageNeedsTransformUpdate = NO;
     }
     return self;
 }
@@ -74,12 +76,32 @@
     if (vertical != _vertical)
     {
         _vertical = vertical;
-        self.transform = vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+        self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+        _thumbImageNeedsTransformUpdate = YES;
     }
 }
 
-- (void)addConstraint:(NSLayoutConstraint *)constraint
-{
+- (UIView *)_thumbImageSubview {
+    UIView *thumbImageSubview = nil;
+    CGRect trackRect = [self trackRectForBounds:self.bounds];
+    CGRect thumbRect = [self thumbRectForBounds:self.bounds trackRect:trackRect value:self.value];
+    for (UIView *subview in self.subviews) {
+        if (CGRectEqualToRect(thumbRect, subview.frame)) {
+            thumbImageSubview = subview;
+        }
+    }
+    return thumbImageSubview;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (_thumbImageNeedsTransformUpdate)
+    {
+        [self _thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
+    }
+}
+
+- (void)addConstraint:(NSLayoutConstraint *)constraint {
     [super addConstraint:constraint];
     if (_vertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
     {
