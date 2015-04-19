@@ -39,7 +39,7 @@
 # String keys present in the target file but not present in the master file are added at the end of the
 # converted file in an undefined order.
 #
-# This script has been tested with Python 2.7.6
+# This script has been tested with Python 2.7.6. You need to have Xcode Command Line Tools installed (it uses plutil).
 #
 # Single file usage example:
 #   ./plist-to-strings.py -m en.lproj/Localizable.strings -t es.lproj/Localizable.strings 
@@ -80,7 +80,7 @@ if not os.path.isfile(targetFileName):
 
 
 def convertBinaryPlistToStrings(masterFileName, targetFileName):
-    def getStringsLine(stringKey, localizedString):
+    def buildStringsLine(stringKey, localizedString):
         # escape '\', '"', '\n' and '\r' characters on the target plain text string
         escapedString = localizedString.replace('\\', '\\\\').replace('"','\\"').replace('\n','\\n').replace('\r','\\r')
         return '"' + stringKey + '" = "' + escapedString + '";\n'
@@ -108,9 +108,10 @@ def convertBinaryPlistToStrings(masterFileName, targetFileName):
             temporaryOutputFile.write(line.encode(outputEncoding))
         
         else:
-            # get string key
-            # line example:             "CONSENT_NAME_TITLE" = "Consent";
-            # tokenizedLine example:    ['', 'CONSENT_NAME_TITLE', ' = ', 'Consent', ';']
+            # get appropriate string from target plist, convert it, and write to output
+            
+            # master line example:             "CONSENT_NAME_TITLE" = "Consent";
+            # master tokenizedLine example:    ['', 'CONSENT_NAME_TITLE', ' = ', 'Consent', ';']
         
             # remove escaped \\ and \" so they don't interfere with the tokenizer (we don't need the correct master string)
             intermediateLine = line.strip().replace('\\\\', '').replace('\\"','')
@@ -126,16 +127,16 @@ def convertBinaryPlistToStrings(masterFileName, targetFileName):
                 warning("String key not found in target file: " + stringKey)
                 continue
             
-            targetLine = getStringsLine(stringKey, targetPlist[stringKey])
+            targetLine = buildStringsLine(stringKey, targetPlist[stringKey])
             temporaryOutputFile.write(targetLine.encode(outputEncoding))
             
             del targetPlist[stringKey]
 
-    # Add remaining target keys
+    # Add remaining target string keys
     if len(targetPlist) > 0:        
         temporaryOutputFile.write("\n\n/* Unsorted */\n")
         for stringKey in targetPlist:
-            targetLine = getStringsLine(stringKey, targetPlist[stringKey]).encode(outputEncoding)
+            targetLine = buildStringsLine(stringKey, targetPlist[stringKey]).encode(outputEncoding)
             temporaryOutputFile.write(targetLine)
 
     temporaryOutputFile.close()
