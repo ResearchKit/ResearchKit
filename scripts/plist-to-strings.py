@@ -39,6 +39,8 @@
 # String keys present in the target file but not present in the master file are added at the end of the
 # converted file in an undefined order.
 #
+# This script has been tested with Python 2.7.6
+#
 # Single file usage example:
 #   ./plist-to-strings.py -m en.lproj/Localizable.strings -t es.lproj/Localizable.strings 
 #
