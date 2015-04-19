@@ -68,23 +68,22 @@ args = parser.parse_args()
 masterFileName = args.master
 targetFileName = args.target
 
-def convertPlistToStrings(masterFileName, targetFileName):
+if not os.path.isfile(masterFileName):
+    print('Master .strings file not found: ' + masterFileName + '\n')
+    parser.print_usage()
+    sys.exit(1)
+
+if not os.path.isfile(targetFileName):
+    print('Target .strings file not found: ' + targetFileName + '\n')
+    parser.print_usage()
+    sys.exit(1)
+
+
+def convertBinaryPlistToStrings(masterFileName, targetFileName):
     def getStringsLine(stringKey, localizedString):
-        # escape \, ", \n and \r characters for the target plain text string
+        # escape '\', '"', '\n' and '\r' characters on the target plain text string
         escapedString = localizedString.replace('\\', '\\\\').replace('"','\\"').replace('\n','\\n').replace('\r','\\r')
         return '"' + stringKey + '" = "' + escapedString + '";\n'
-        
-    if not os.path.isfile(masterFileName):
-        print('Master .strings file not found: ' + masterFileName + '\n')
-        parser.print_usage()
-        sys.exit(1)
-
-    if not os.path.isfile(targetFileName):
-        print('Target .strings file not found: ' + targetFileName + '\n')
-        parser.print_usage()
-        sys.exit(1)
-
-    print('Converting: ' + targetFileName)
 
     outputEncoding = 'UTF-8'
 
@@ -139,13 +138,13 @@ def convertPlistToStrings(masterFileName, targetFileName):
             targetLine = getStringsLine(stringKey, targetPlist[stringKey]).encode(outputEncoding)
             temporaryOutputFile.write(targetLine)
 
-
     temporaryOutputFile.close()
     masterFile.close()
     
     os.remove(temporaryTargetFileName)
     os.rename(temporaryOutputFileName, targetFileName)
 
-    print(' done')
 
-convertPlistToStrings(masterFileName, targetFileName)
+print('Converting: ' + targetFileName)
+convertBinaryPlistToStrings(masterFileName, targetFileName)
+print('...done')
