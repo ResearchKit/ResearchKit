@@ -55,8 +55,6 @@ import subprocess
 import sys
 import uuid
 
-import string
-
 def warning(string):
     sys.stdout.write("WARNING: " + string + '\n\n')
 
