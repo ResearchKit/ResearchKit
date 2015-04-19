@@ -87,6 +87,7 @@
     for (UIView *subview in self.subviews) {
         if (CGRectEqualToRect(thumbRect, subview.frame)) {
             thumbImageSubview = subview;
+            break;
         }
     }
     return thumbImageSubview;
