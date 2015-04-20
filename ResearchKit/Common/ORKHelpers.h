@@ -72,10 +72,10 @@
 #define ORK_DECODE_INTEGER(d,x) _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_INTEGER(c,x) [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
 
-#define ORK_ENCODE_UINT32(c,x) [[c encodeInt32:_ ## x] forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_UINT32(c,x) [c encodeInt32:_ ## x forKey:@STRINGIFY(x)]
 #define ORK_DECODE_UINT32(d,x) _ ## x = [d decodeInt32ForKey:@STRINGIFY(x)]
 
-#define ORK_ENCODE_UINT64(c,x) [[c encodeInt64:_ ## x] forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_UINT64(c,x) [c encodeInt64:_ ## x forKey:@STRINGIFY(x)]
 #define ORK_DECODE_UINT64(d,x) _ ## x = [d decodeInt64ForKey:@STRINGIFY(x)]
 
 #define ORK_DECODE_ENUM(d,x)  _ ## x = (__typeof(_ ## x))[d decodeIntegerForKey:@STRINGIFY(x)]
