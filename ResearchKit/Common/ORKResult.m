@@ -78,7 +78,7 @@
     ORK_ENCODE_OBJ(aCoder, userInfo);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
     if (self)
@@ -148,7 +148,7 @@
 
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
     if (self)
@@ -206,7 +206,7 @@
     ORK_ENCODE_BOOL(aCoder, correct);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
     if (self)
@@ -273,7 +273,7 @@
   
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
     if (self)
@@ -342,7 +342,7 @@
     
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -409,7 +409,7 @@
     ORK_ENCODE_CGSIZE(aCoder, stepViewSize);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -476,7 +476,7 @@
     ORK_ENCODE_OBJ(aCoder, contentType);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -539,7 +539,7 @@
     ORK_ENCODE_OBJ(aCoder, contentType);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -596,7 +596,7 @@
     ORK_ENCODE_OBJ(aCoder, signature);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -666,7 +666,7 @@
     ORK_ENCODE_ENUM(aCoder, questionType);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -731,7 +731,7 @@
     ORK_ENCODE_OBJ(aCoder, scaleAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, scaleAnswer, NSNumber);
@@ -787,7 +787,7 @@
     ORK_ENCODE_OBJ(aCoder, choiceAnswers);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, choiceAnswers, NSObject);
@@ -845,7 +845,7 @@
     ORK_ENCODE_OBJ(aCoder, booleanAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, booleanAnswer, NSNumber);
@@ -906,7 +906,7 @@
     ORK_ENCODE_OBJ(aCoder, textAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, textAnswer, NSString);
@@ -964,7 +964,7 @@
     ORK_ENCODE_OBJ(aCoder, unit);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, numericAnswer, NSNumber);
@@ -1026,7 +1026,7 @@
     ORK_ENCODE_OBJ(aCoder, dateComponentsAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, dateComponentsAnswer, NSDateComponents);
@@ -1084,7 +1084,7 @@
     ORK_ENCODE_OBJ(aCoder, intervalAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, intervalAnswer, NSNumber);
@@ -1145,7 +1145,7 @@
     ORK_ENCODE_OBJ(aCoder, dateAnswer);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -1236,7 +1236,7 @@
     
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
@@ -1339,7 +1339,7 @@
     ORK_ENCODE_OBJ(aCoder, outputDirectory);
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
