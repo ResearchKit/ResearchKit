@@ -263,7 +263,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
