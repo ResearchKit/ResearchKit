@@ -18,6 +18,4 @@ DerivedData
 *.xcuserstate
 
 .DS_Store
-
-StudyDemo/ResearchKit
 *.pyc

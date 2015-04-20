@@ -54,13 +54,10 @@
 
 + (NSDictionary *)defaultRecorderSettings
 {
-    return [NSDictionary
-            dictionaryWithObjectsAndKeys:
-            @(kAudioFormatMPEG4AAC), AVFormatIDKey,
-            @(AVAudioQualityMin), AVEncoderAudioQualityKey,
-            @(2), AVNumberOfChannelsKey,
-            @(44100.0), AVSampleRateKey,
-            nil];
+    return @{AVFormatIDKey              : @(kAudioFormatMPEG4AAC),
+             AVEncoderAudioQualityKey   : @(AVAudioQualityMin),
+             AVNumberOfChannelsKey      : @(2),
+             AVSampleRateKey            : @(44100.0)};
 }
 
 - (instancetype)initWithRecorderSettings:(NSDictionary *)recorderSettings

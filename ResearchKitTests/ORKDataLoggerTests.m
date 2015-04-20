@@ -62,7 +62,6 @@
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
     [_dataLogger finishCurrentLog];
@@ -74,7 +73,6 @@
     _directory = nil;
     _logName = nil;
 }
-
 
 - (void)dataLogger:(ORKDataLogger *)dataLogger finishedLogFile:(NSURL *)fileUrl
 {
@@ -88,7 +86,6 @@
     
     XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:[url path]], @"File should not be created if we log nothing");
 }
-
 
 - (void)logJsonObject:(NSDictionary *)jsonObject
 {
@@ -128,8 +125,6 @@
     NSDictionary *jsonOut = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:_finishedLogFiles[0]] options:(NSJSONReadingOptions)0 error:&error];
     XCTAssertNil(error);
     XCTAssertEqualObjects(jsonOut[@"items"][0], jsonObject);
-                             
-    
 }
 
 - (void)testContinuesExistingLog
@@ -210,7 +205,6 @@
     
     XCTAssertTrue([_dataLogger isFileUploadedAtURL:_finishedLogFiles[0]]);
     XCTAssertFalse([_dataLogger isFileUploadedAtURL:_finishedLogFiles[1]]);
-    
 }
 
 - (NSArray *)allLogsWithError:(NSError * __autoreleasing *)error
@@ -330,9 +324,6 @@
     
     XCTAssertTrue([[fm attributesOfItemAtPath:[(NSURL *)_finishedLogFiles[0] path] error:nil] fileSize] >= 50);
     XCTAssertTrue([[fm attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
-    
-    
-    
 }
 
 - (void)testFirstWriteOpensFilehandle {
@@ -350,7 +341,6 @@
     XCTAssertNil([_dataLogger fileHandle]);
     [self wait];
     XCTAssertEqual([_finishedLogFiles count], 0);
-    
 }
 
 - (void)testExplicitRolloverWithZeroLengthFile {
@@ -361,7 +351,6 @@
     XCTAssertEqual([_finishedLogFiles count], 1);
     [self logJsonObjectAndRolloverAndWaitOnce:jsonObject];
     XCTAssertEqual([_finishedLogFiles count], 2);
-    
 }
 
 - (void)testCurrentLogFileAlwaysHasValidJson {

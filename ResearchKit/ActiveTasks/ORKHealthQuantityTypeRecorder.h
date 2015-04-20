@@ -49,9 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorder : ORKRecorder
 
-@property (nonatomic, readonly, copy) HKQuantityType *quantityType;
-@property (nonatomic, readonly, copy) HKUnit *unit;
-@property (nonatomic, readonly, copy, nullable) HKQuantitySample *lastSample;
+@property (nonatomic, copy, readonly) HKQuantityType *quantityType;
+@property (nonatomic, copy, readonly) HKUnit *unit;
+@property (nonatomic, copy, readonly, nullable) HKQuantitySample *lastSample;
 
 - (instancetype)initWithHealthQuantityType:(HKQuantityType *)quantityType
                                       unit:(HKUnit *)unit

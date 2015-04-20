@@ -54,13 +54,11 @@
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
-ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
-{
+ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     return (ORKTaskProgress){.current=current,.total=total};
 }
 
-@implementation ORKOrderedTask
-{
+@implementation ORKOrderedTask {
     NSString *_identifier;
 }
 
@@ -68,20 +66,18 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
     self = [super init];
     if (self) {
         
-        if ( nil == identifier)
-        {
+        if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
         
         _identifier = [identifier copy];
         _steps = steps;
-        
     }
+    
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKOrderedTask *task = [[[self class] allocWithZone:zone] init];
     task->_identifier = [_identifier copy];
     task->_steps = ORKArrayCopyObjects(_steps);
@@ -161,7 +157,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
         
         NSUInteger index = [self indexOfStep:step];
         
-        if(NSNotFound != index && index !=  0) {
+        if (NSNotFound != index && index != 0) {
             nextStep = steps[index-1];
         }
     }
@@ -187,8 +183,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
     progress.current = [self indexOfStep:step];
     progress.total = [_steps count];
     
-    if (! [step showsProgress])
-    {
+    if (![step showsProgress]) {
         progress.total = 0;
     }
     
@@ -196,27 +191,22 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
 }
 
 
-- (NSSet *)requestedHealthKitTypesForReading
-{
+- (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
-    for (ORKStep *step in self.steps)
-    {
-        if ([step isKindOfClass:[ORKFormStep class]])
-        {
+    for (ORKStep *step in self.steps) {
+        
+        if ([step isKindOfClass:[ORKFormStep class]]) {
             ORKFormStep *formStep = (ORKFormStep *)step;
             
-            for (ORKFormItem *formItem in formStep.formItems)
-            {
+            for (ORKFormItem *formItem in formStep.formItems) {
                 ORKAnswerFormat *answerFormat = [formItem answerFormat];
                 HKObjectType *objType = [answerFormat healthKitObjectType];
-                if (objType)
-                {
+                if (objType) {
                     [healthTypes addObject:objType];
                 }
             }
         }
-        else if ([step isKindOfClass:[ORKQuestionStep class]])
-        {
+        else if ([step isKindOfClass:[ORKQuestionStep class]]) {
             HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
             if (objType)
             {
@@ -228,11 +218,11 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
     }
+    
     return [healthTypes count] ? healthTypes : nil;
 }
 
-- (NSSet *)requestedHealthKitTypesForWriting
-{
+- (NSSet *)requestedHealthKitTypesForWriting {
     return nil;
 }
 
@@ -274,8 +264,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total)
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, steps, ORKStep);
         
@@ -608,10 +597,10 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
 
 
 + (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)identifier
-                        intendedUseDescription:(NSString *)intendedUseDescription
-                           numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
-                                  restDuration:(NSTimeInterval)restDuration
-                                       options:(ORKPredefinedTaskOption)options {
+                         intendedUseDescription:(NSString *)intendedUseDescription
+                            numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
+                                   restDuration:(NSTimeInterval)restDuration
+                                        options:(ORKPredefinedTaskOption)options {
     
     NSDateComponentsFormatter *formatter = [self textTimeFormatter];
     
@@ -727,17 +716,17 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
 
 
 + (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)identifier
-                                intendedUseDescription:(NSString *)intendedUseDescription
-                                           initialSpan:(NSInteger)initialSpan
-                                           minimumSpan:(NSInteger)minimumSpan
-                                           maximumSpan:(NSInteger)maximumSpan
-                                             playSpeed:(NSTimeInterval)playSpeed
-                                              maxTests:(NSInteger)maxTests
-                                maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
-                                     customTargetImage:(UIImage *)customTargetImage
-                                customTargetPluralName:(NSString *)customTargetPluralName
-                                       requireReversal:(BOOL)requireReversal
-                                               options:(ORKPredefinedTaskOption)options {
+                                 intendedUseDescription:(NSString *)intendedUseDescription
+                                            initialSpan:(NSInteger)initialSpan
+                                            minimumSpan:(NSInteger)minimumSpan
+                                            maximumSpan:(NSInteger)maximumSpan
+                                              playSpeed:(NSTimeInterval)playSpeed
+                                               maxTests:(NSInteger)maxTests
+                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                      customTargetImage:(UIImage *)customTargetImage
+                                 customTargetPluralName:(NSString *)customTargetPluralName
+                                        requireReversal:(BOOL)requireReversal
+                                                options:(ORKPredefinedTaskOption)options {
     
     
     NSString *targetPluralName = customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil);
@@ -805,11 +794,3 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
 
 
 @end
-
-
-
-
-
-
-
-

@@ -135,7 +135,7 @@
     NSInteger tileIndex = 0;
     for (NSInteger x = 0; x < _gridSize.width; x++) {
         for (NSInteger y = 0; y < _gridSize.height; y++) {
-            ORKSpatialSpanTargetView *targetView = [_tileViews objectAtIndex:tileIndex];
+            ORKSpatialSpanTargetView *targetView = _tileViews[tileIndex];
             
             CGPoint origin = (CGPoint){.x = ORKFloorToViewScale(centeringOffset.x + x * gridItemSize.width, self),
                 .y = ORKFloorToViewScale(centeringOffset.y + y * gridItemSize.height, self)};
@@ -147,12 +147,12 @@
 }
 
 - (void)setState:(ORKSpatialSpanTargetState)state forTileIndex:(NSInteger)tileIndex animated:(BOOL)animated {
-    ORKSpatialSpanTargetView *view = [_tileViews objectAtIndex:tileIndex];
+    ORKSpatialSpanTargetView *view = _tileViews[tileIndex];
     [view setState:state animated:animated];
 }
 
 - (ORKSpatialSpanTargetState)stateForTileIndex:(NSInteger)tileIndex {
-    return [(ORKSpatialSpanTargetView *)[_tileViews objectAtIndex:tileIndex] state];
+    return [(ORKSpatialSpanTargetView *)_tileViews[tileIndex] state];
 }
 
 #pragma mark Accessibility

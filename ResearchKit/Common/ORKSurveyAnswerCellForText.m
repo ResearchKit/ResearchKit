@@ -52,7 +52,7 @@
     NSArray *_constraints;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -105,7 +105,7 @@
         
         [self addSubview:self.textView];
         
-        self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0 , self.bounds.size.width, 36)];
+        self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width, 36)];
         self.textView.placeHolder = self.placeHolder;
         self.placeHolder.text = self.step.placeholder? :ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
         self.placeHolder.textColor = [UIColor lightGrayColor];

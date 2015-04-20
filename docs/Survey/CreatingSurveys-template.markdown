@@ -179,7 +179,7 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p>
-<p style="clear: both;">
+<p style="clear: both;"></p>
 
 In addition to the preceding answer formats, the ResearchKit framework provides
 special answer formats for asking questions about quantities or

@@ -40,18 +40,6 @@
 
 @implementation ORKHKSampleTests
 
-- (void)setUp
-{
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown
-{
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 - (void)testHKSampleSerialization
 {
     NSDate *d1 = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
@@ -70,8 +58,6 @@
     XCTAssertNil(dict[@"sourceBundleIdentifier"], @"");
     XCTAssertNil(dict[@"sourceName"], @"");
     XCTAssertNil(dict[@"metadata"], @"");
-    
-    
 }
 
 - (void)testHKMetadataSerialization
@@ -91,7 +77,6 @@
     // Verify metadata appears when requested
     dict = [quantitySample ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) unit:[HKUnit countUnit]];
     XCTAssertEqualObjects(testMeta, dict[@"metadata"], @"");
-    
 }
 
 - (void)testHKCorrelationSerialization
@@ -122,9 +107,6 @@
     XCTAssertNil(dict[@"metadata"], @"");
     XCTAssertTrue([dict[@"objects"] containsObject:dd], @"");
     XCTAssertTrue([dict[@"objects"] containsObject:ds], @"");
-    
-    
 }
-
 
 @end

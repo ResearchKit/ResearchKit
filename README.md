@@ -5,10 +5,10 @@ The ResearchKit™ framework is an open source software framework that makes it 
 create apps for medical research or for other research projects.
 
 * Getting Started: [Getting Started](#gettingstarted)
-* Documentation: ([Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.org/docs/index.html))
-* Best practices: [Best Practices](../../wiki/best_practices)
-* Contributing to ResearchKit: [Contributing](../../wiki/contributing)
-* Website and blog: ([researchkit.org](http://researchkit.org/index.html))  ([Blog](http://researchkit.org/blog.html))
+* Documentation: ([Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.github.io/docs/index.html))
+* Best practices: [Best Practices](../../wiki/best-practices)
+* Contributing to ResearchKit: [Contributing](CONTRIBUTING.md)
+* Website and blog: ([researchkit.org](http://researchkit.github.io/index.html))  ([Blog](http://researchkit.github.io/blog.html))
 * ResearchKit BSD License: [License](#license)
 
 Getting More Information
@@ -18,7 +18,7 @@ Getting More Information
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
 * Or [contact us](https://developer.apple.com/contact/researchkit/)
 
-Use cases
+Use Cases
 ===========
 
 A task in the ResearchKit framework contains a set of steps to present to a
@@ -29,14 +29,14 @@ Surveys
 -------
 
 The ResearchKit framework provides a pre-built user interface for surveys, which can be
-presented modally on an iPhone, iPod Touch, or iPad.  [Surveys](http://researchkit.org/docs/docs/Survey/CreatingSurveys.html)
+presented modally on an iPhone, iPod Touch, or iPad.  [Surveys](http://researchkit.github.io/docs/docs/Survey/CreatingSurveys.html)
 
 
 Consent
 ----------------
 
 The ResearchKit framework provides visual consent templates that you can customize to
-explain the details of your research study and obtain a signature if needed.  [Consent](http://researchkit.org/docs/docs/InformedConsent/InformedConsent.html)
+explain the details of your research study and obtain a signature if needed.  [Consent](http://researchkit.github.io/docs/docs/InformedConsent/InformedConsent.html)
 
 
 Active Tasks
@@ -45,10 +45,10 @@ Active Tasks
 Some studies may need data beyond survey questions or the passive data collection
 capabilities available through use of the HealthKit and CoreMotion APIs if you are
 programming for iOS. ResearchKit's active tasks invite users to perform activities
-under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.org/docs/docs/ActiveTasks/ActiveTasks.html)
+under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.github.io/docs/docs/ActiveTasks/ActiveTasks.html)
 
 
-Getting started<a name="gettingstarted"></a>
+Getting Started<a name="gettingstarted"></a>
 ===============
 
 
@@ -63,7 +63,7 @@ using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 Installation
 ------------
 
-The lastest stable version of ResearchKit framework can be cloned with
+The latest stable version of ResearchKit framework can be cloned with
 
 ```
 git clone -b stable https://github.com/ResearchKit/ResearchKit.git
@@ -110,6 +110,8 @@ target as shown in the figure below.
 </figure>
 </center>
 
+Note: You can also import ResearchKit into your project using a [dependency manager](./dependency_management.md) such as CocoaPods or Carthage.
+
 ###2. Create a Step
 
 In this walk-through, we will use the ResearchKit framework to modally present a
@@ -129,7 +131,7 @@ myStep.title = @"Welcome to ResearchKit";
 ###3. Create a Task
 
 Use the ordered task class (`ORKOrderedTask`) to create a task that
-contains myStep. An ordered task is just a task where the order and
+contains `myStep`. An ordered task is just a task where the order and
 selection of later steps does not depend on the results of earlier
 ones. Name your task `task` and initialize it with `myStep`.
 

@@ -63,7 +63,7 @@ static inline CGFloat ORKCGFloor(CGFloat value)
     }
 }
 
-static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFloat s) {
+static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFloat s) {
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
@@ -71,9 +71,9 @@ static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFl
         s = __s;
     }
     if (s == 1.0) {
-        return ajdustFn(v);
+        return adjustFn(v);
     } else {
-        return ajdustFn(v * s) / s;
+        return adjustFn(v * s) / s;
     }
 }
 
@@ -410,11 +410,9 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView){
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else
-#endif
     {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
         if (! font) {
@@ -426,11 +424,9 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else
-#endif
     {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
         if (! font) {
@@ -442,11 +438,9 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else
-#endif
     {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
         if (! font) {

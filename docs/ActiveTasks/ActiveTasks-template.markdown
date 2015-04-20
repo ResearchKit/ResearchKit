@@ -10,7 +10,7 @@ the user to walk a short distance, while collecting accelerometer
 sample data on iPhone.
 
 
-##predefined Active Tasks
+##Predefined Active Tasks
 
 At release, the ResearchKit™ framework includes five predefined tasks, which fall into four categories: motor activities, fitness, cognition, and voice. The table below summarizes each task and describes the data it generates.
 
@@ -173,7 +173,7 @@ the game, and the touch inputs made by the user.
 
 The data collected in active tasks is recorded in a hierarchy of
 `ORKResult` objects in memory. It is up to you to serialize this
-hierarchy for storage or transmission n a way that’s appropriate for your application.
+hierarchy for storage or transmission in a way that’s appropriate for your application.
 
 If the data collected is to too large for in-memory delivery, an
 `ORKFileResult` is included in the hierarchy instead. The file result

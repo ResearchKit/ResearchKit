@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIApplication (ORKFirstResponderAdditions)
 
-- (nullable UIResponder *)ork_currentFirstResponder;
+- (nullable UIView *)ork_currentFirstResponderView;
 
 @end
 

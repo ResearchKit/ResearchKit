@@ -36,6 +36,6 @@
 ORK_CLASS_AVAILABLE
 @interface ORKHeadlineLabel : ORKLabel
 
-@property (nonatomic,assign) BOOL useSurveyMode;
+@property (nonatomic, assign) BOOL useSurveyMode;
 
 @end

@@ -319,7 +319,7 @@ ORK_CLASS_AVAILABLE
  
  Note that the `detailText` property of each choice is ignored. Be sure to create localized text for each choice that is short enough to fit in a `UIPickerView` object.
  */
-@property (readonly, copy) NSArray *textChoices;
+@property (copy, readonly) NSArray *textChoices;
 
 @end
 
@@ -349,7 +349,7 @@ ORK_CLASS_AVAILABLE
  The text of the currently selected choice is displayed on screen. The text for
  each choice is spoken by VoiceOver when an image is highlighted.
  */
-@property (readonly, copy) NSArray *imageChoices;
+@property (copy, readonly) NSArray *imageChoices;
 
 @end
 
@@ -387,7 +387,7 @@ ORK_CLASS_AVAILABLE
  The text for each answer is given more prominence than the `detailText` in the row, but
  both are shown.
  */
-@property (readonly, copy) NSArray *textChoices;
+@property (copy, readonly) NSArray *textChoices;
 
 @end
 
@@ -453,7 +453,7 @@ ORK_CLASS_AVAILABLE
  
  In general, it's best when the text can fit on one line.
   */
-@property (readonly, copy) NSString *text;
+@property (copy, readonly) NSString *text;
 
 /**
  The value to return when this choice is selected.
@@ -462,14 +462,14 @@ ORK_CLASS_AVAILABLE
  If no value is provided, the index of the option in the options list in the
  answer format is used.
  */
-@property (readonly, copy) id<NSCopying, NSCoding, NSObject> value;
+@property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
 
 /**
  The text that provides additional details about the choice in a localized string.
  
  The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail text.
   */
-@property (readonly, copy, nullable) NSString *detailText;
+@property (copy, readonly, nullable) NSString *detailText;
 
 @end
 
@@ -525,7 +525,7 @@ ORK_CLASS_AVAILABLE
  The size of the unselected image depends on the number of choices you need to display. As a
  general rule, it's recommended that you start by creating an image that measures 44 x 44 points, and adjust it if necessary.
  */
-@property (readonly, strong) UIImage *normalStateImage;
+@property (strong, readonly) UIImage *normalStateImage;
 
 /**
  The image to display when the choice is selected. (read-only)
@@ -535,14 +535,14 @@ ORK_CLASS_AVAILABLE
  If you don't specify a selected image, the default `UIButton` behavior is used to
  indicate the selection state of the item.
  */
-@property (readonly, strong, nullable) UIImage *selectedStateImage;
+@property (strong, readonly, nullable) UIImage *selectedStateImage;
 
 /**
  The text to display when the image is selected, in a localized string. (read-only)
  
  Note that the text you supply may be spoken by VoiceOver even when the item is not selected.
   */
-@property (readonly, copy, nullable) NSString *text;
+@property (copy, readonly, nullable) NSString *text;
 
 /**
  The value to return when the image is selected. (read-only)
@@ -551,7 +551,7 @@ ORK_CLASS_AVAILABLE
  If no value is provided, the index of the option in the `ORKImageChoiceAnswerFormat`
  options list is used.
  */
-@property (readonly, copy) id<NSCopying, NSCoding, NSObject> value;
+@property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
 
 
 @end
@@ -629,7 +629,7 @@ Returns an initialized numeric answer format using the specified style, unit des
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
   */
-@property (readonly, copy, nullable) NSString *unit;
+@property (copy, readonly, nullable) NSString *unit;
 
 /**
  The minimum allowed value for the numeric answer.
@@ -677,7 +677,7 @@ ORK_CLASS_AVAILABLE
  Note that both the hour and minute components are observed. If the value of this property is `nil`, the picker displays
  the current time of day.
  */
-@property (nonatomic, readonly, copy, nullable) NSDateComponents *defaultComponents;
+@property (nonatomic, copy, readonly, nullable) NSDateComponents *defaultComponents;
 
 @end
 
@@ -740,28 +740,28 @@ ORK_CLASS_AVAILABLE
  The date is displayed in the user's time zone.
  When the value of this property is `nil`, the current time is used as the default.
  */
-@property (readonly, copy, nullable) NSDate *defaultDate;
+@property (copy, readonly, nullable) NSDate *defaultDate;
 
 /**
  The minimum allowed date.
  
 When the value of this property is `nil`, there is no minimum.
  */
-@property (readonly, copy, nullable) NSDate *minimumDate;
+@property (copy, readonly, nullable) NSDate *minimumDate;
 
 /**
  The maximum allowed date.
  
  When the value of this property is `nil`, there is no maximum.
  */
-@property (readonly, copy, nullable) NSDate *maximumDate;
+@property (copy, readonly, nullable) NSDate *maximumDate;
 
 /**
  The calendar to use in the picker.
  
  When the value of this property is `nil`, the picker uses the default calendar for the current locale.
  */
-@property (readonly, copy, nullable) NSCalendar *calendar;
+@property (copy, readonly, nullable) NSCalendar *calendar;
 
 @end
 
