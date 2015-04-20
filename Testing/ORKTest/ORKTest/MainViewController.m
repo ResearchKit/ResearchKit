@@ -816,7 +816,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.title = @"Audio";
         step.stepDuration = 10.0;
         step.text = @"An active test recording audio";
-        step.recorderConfigurations = @[[ORKAudioRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"aid_001d.audio" recorderSettings:@{}]];
         step.shouldUseNextAsSkipButton = YES;
         [steps addObject:step];
     }
@@ -834,10 +834,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.text = @"An active test recording lossless audio";
         step.shouldUseNextAsSkipButton = YES;
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc]
-                                         initWithRecorderSettings:@{AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                                                    AVNumberOfChannelsKey : @(2),
-                                                                    AVSampleRateKey: @(44100.0)
-                                                                    }]];
+                                         initWithIdentifier:@"aid_001e.audio" recorderSettings:@{AVFormatIDKey : @(kAudioFormatAppleLossless),
+                                                                                                 AVNumberOfChannelsKey : @(2),
+                                                                                                 AVSampleRateKey: @(44100.0)
+                                                                                                 }]];
         [steps addObject:step];
     }
     
@@ -855,7 +855,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.stepDuration = 30.0;
         step.spokenInstruction = @"An active test, touch collection";
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[ORKTouchRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"aid_001a.touch"]];
         [steps addObject:step];
     }
     
@@ -870,7 +870,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.text = @"Please tap the orange button when it appears in the green area below.";
         step.stepDuration = 10.0;
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[CustomRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[CustomRecorderConfiguration alloc] initWithIdentifier:@"aid_001b.audio"]];
         [steps addObject:step];
     }
     
@@ -884,7 +884,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.title = @"Motion";
         step.text = @"An active test collecting device motion data";
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[[ORKDeviceMotionRecorderConfiguration alloc] initWithFrequency:100.0]];
+        step.recorderConfigurations = @[[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"aid_001c.deviceMotion" frequency:100.0]];
         [steps addObject:step];
     }
     

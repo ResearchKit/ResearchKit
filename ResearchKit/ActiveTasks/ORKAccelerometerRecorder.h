@@ -49,12 +49,16 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized accelerometer recorder using the specified frequency.
  
- @param frequency    The frequency of accelerometer data collected from CoreMotion, in hertz (Hz).
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param frequency           The frequency of accelerometer data collected from CoreMotion, in hertz (Hz).
+ @param step                The step that requested this recorder.
+ @param outputDirectory     The directory in which the accelerometer data should be stored.
  @return An initialized accelerometer recorder.
  */
-- (instancetype)initWithFrequency:(double)frequency
-                             step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory;
+- (instancetype)initWithIdentifier:(NSString *)identifer
+                         frequency:(double)frequency
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory;
 
 @end
 

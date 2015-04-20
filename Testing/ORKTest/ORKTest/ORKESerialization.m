@@ -308,8 +308,8 @@ ret =
 [@{
   ENTRY(ORKOrderedTask,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict,identifier)
-                                                                        steps:GETPROP(dict,steps)];
+            ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                                        steps:GETPROP(dict, steps)];
             return task;
         },(@{
           PROPERTY(identifier, NSString, NSObject, NO , nil, nil),
@@ -337,8 +337,12 @@ ret =
           PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
           }),
   ENTRY(ORKRecorderConfiguration,
-        nil,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            ORKRecorderConfiguration *recorderConfiguration = [[ORKRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
+            return recorderConfiguration;
+        },
         (@{
+           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKQuestionStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -357,7 +361,7 @@ ret =
           })),
   ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithHealthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
+            return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
         },
         (@{
           PROPERTY(quantityType, HKQuantityType, NSObject, NO,
@@ -415,14 +419,14 @@ ret =
           })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKAccelerometerRecorderConfiguration alloc] initWithFrequency:[GETPROP(dict, frequency) doubleValue]];
+            return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
         },
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKAccelerometerRecorderConfiguration,
+  ENTRY(ORKAudioRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKAudioRecorderConfiguration alloc] initWithRecorderSettings:GETPROP(dict, recorderSettings)];
+            return [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) recorderSettings:GETPROP(dict, recorderSettings)];
         },
         (@{
           PROPERTY(recorderSettings, NSDictionary, NSObject, NO, nil, nil),
@@ -483,7 +487,7 @@ ret =
           })),
   ENTRY(ORKDeviceMotionRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKDeviceMotionRecorderConfiguration alloc] initWithFrequency:[GETPROP(dict, frequency) doubleValue]];
+            return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
         },
         (@{
           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),

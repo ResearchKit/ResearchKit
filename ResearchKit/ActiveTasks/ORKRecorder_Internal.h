@@ -37,15 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKRecorderConfiguration()
 
-- (instancetype)ork_init;  
-
 @end
 
 
 
 @interface ORKRecorder ()
-
-- (instancetype)ork_init;
 
 @property (nonatomic, strong, nullable) ORKStep *step;
 

@@ -63,7 +63,7 @@ ORK_CLASS_AVAILABLE
  
  This method is the primary designated initializer.
  
- @param identifier   The unique indentifier of the step.
+ @param identifier   The unique identifier of the step.
  @return A new step.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;

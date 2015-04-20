@@ -48,11 +48,13 @@
 @implementation ORKPedometerRecorder
 
 
-- (instancetype)initWithStep:(ORKStep *)step
-             outputDirectory:(NSURL *)outputDirectory
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step
-               outputDirectory:(NSURL *)outputDirectory];
+    self = [super initWithIdentifier:identifier
+                                step:step
+                     outputDirectory:outputDirectory];
     if (self)
     {
         self.continuesInBackground = YES;
@@ -201,15 +203,16 @@
 
 @implementation ORKPedometerRecorderConfiguration
 
-- (instancetype)init {
-    self = [super ork_init];
-    return self;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+{
+    return [super initWithIdentifier:identifier];
 }
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
 {
-    return [[ORKPedometerRecorder alloc] initWithStep:step
-                                     outputDirectory:outputDirectory];
+    return [[ORKPedometerRecorder alloc] initWithIdentifier:self.identifier
+                                                       step:step
+                                            outputDirectory:outputDirectory];
 }
 
 

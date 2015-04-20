@@ -300,6 +300,7 @@ static BOOL ork_doubleEqual(double x, double y) {
 
 @implementation ORKRecorderTests {
     NSString  *_outputPath;
+    ORKRecorder *_recorder;
     ORKResult *_result;
     NSArray   *_items;
 }
@@ -321,6 +322,7 @@ static const NSInteger kNumberOfSamples = 5;
         }
     }
     
+    _recorder = nil;
     _result = nil;
     _items = nil;
 }
@@ -331,17 +333,20 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
      NSLog(@"didCompleteWithResult: %@", result);
+    _recorder = recorder;
     _result = result;
 }
 
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     NSLog(@"didFailWithError: %@", error);
+    _recorder = nil;
     _result = nil;
 }
 
-- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)conf {
-    ORKRecorder *recorder = [conf recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
-                                                                    outputDirectory:[NSURL fileURLWithPath:_outputPath]];
+- (ORKRecorder *)createRecorder:(ORKRecorderConfiguration *)recorderConfiguration {
+    ORKRecorder *recorder = [recorderConfiguration recorderForStep:[[ORKStep alloc] initWithIdentifier:@"step"]
+                                                   outputDirectory:[NSURL fileURLWithPath:_outputPath]];
+    XCTAssert([recorder.identifier isEqualToString:recorderConfiguration.identifier], @"");
     recorder.delegate = self;
     return recorder;
 }
@@ -350,6 +355,7 @@ static const NSInteger kNumberOfSamples = 5;
     
     XCTAssertNotNil(_result, @"");
     XCTAssert([_result isKindOfClass:[ORKFileResult class]], @"");
+    XCTAssert([_recorder.identifier isEqualToString:_result.identifier], @"");
     
     ORKFileResult *fileResult = (ORKFileResult *)_result;
     
@@ -366,10 +372,12 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testLocationRecorder {
     
-    ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[ORKLocationRecorderConfiguration new]];
+    ORKLocationRecorder *recorder = (ORKLocationRecorder *)[self createRecorder:[[ORKLocationRecorderConfiguration alloc] initWithIdentifier:@"location"]];
     XCTAssertTrue([recorder isKindOfClass:[ORKLocationRecorder class]], @"");
     
-    recorder = [[ORKMockLocationRecorder alloc] initWithStep:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockLocationRecorder alloc] initWithIdentifier:@"location"
+                                                              step:recorder.step
+                                                   outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
     [recorder start];
     
@@ -414,13 +422,14 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testAccelerometerRecorder {
     
-    ORKAccelerometerRecorderConfiguration *conf = [[ORKAccelerometerRecorderConfiguration alloc] initWithFrequency:60.0];
+    ORKAccelerometerRecorderConfiguration *recorderConfiguration = [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"accelerometer" frequency:60.0];
     Class recorderClass = [ORKAccelerometerRecorder class];
-    ORKAccelerometerRecorder *recorder = (ORKAccelerometerRecorder *)[self createRecorder:conf];
+    ORKAccelerometerRecorder *recorder = (ORKAccelerometerRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
+    XCTAssertTrue([recorder.identifier isEqualToString:recorderConfiguration.identifier], @"");
     
-    recorder = [[ORKMockAccelerometerRecorder alloc] initWithFrequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockAccelerometerRecorder alloc] initWithIdentifier:@"accelerometer" frequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
     ORKMockMotionManager *manager = [ORKMockMotionManager new];
     [(ORKMockAccelerometerRecorder*)recorder setMockManager:manager];
@@ -445,13 +454,13 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testDeviceMotionRecorder {
     
-    ORKDeviceMotionRecorderConfiguration *conf = [[ORKDeviceMotionRecorderConfiguration alloc] initWithFrequency:60.0];
+    ORKDeviceMotionRecorderConfiguration *recorderConfiguration = [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"deviceMotion" frequency:60.0];
     Class recorderClass = [ORKDeviceMotionRecorder class];
-    ORKDeviceMotionRecorder *recorder = (ORKDeviceMotionRecorder *)[self createRecorder:conf];
+    ORKDeviceMotionRecorder *recorder = (ORKDeviceMotionRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
-    recorder = [[ORKMockDeviceMotionRecorder alloc] initWithFrequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockDeviceMotionRecorder alloc] initWithIdentifier:@"deviceMotion" frequency:recorder.frequency step:recorder.step outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
     ORKMockMotionManager *manager = [ORKMockMotionManager new];
     [(ORKMockAccelerometerRecorder*)recorder setMockManager:manager];
@@ -496,11 +505,11 @@ static const NSInteger kNumberOfSamples = 5;
 - (void)testPedometerRecorder {
     
     Class recorderClass = [ORKPedometerRecorder class];
-    ORKPedometerRecorder *recorder = (ORKPedometerRecorder *)[self createRecorder:[ORKPedometerRecorderConfiguration new]];
+    ORKPedometerRecorder *recorder = (ORKPedometerRecorder *)[self createRecorder:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:@"pedometer"]];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
-    recorder = [[ORKMockPedometerRecorder alloc] initWithStep:recorder.step outputDirectory:recorder.outputDirectory];
+    recorder = [[ORKMockPedometerRecorder alloc] initWithIdentifier:@"pedometer" step:recorder.step outputDirectory:recorder.outputDirectory];
     recorder.delegate = self;
     ORKMockPedometer *pedometer = [ORKMockPedometer new];
     [(ORKMockPedometerRecorder*)recorder setMockPedometer:pedometer];
@@ -530,7 +539,7 @@ static const NSInteger kNumberOfSamples = 5;
 - (void)testTouchRecorder {
     
     Class recorderClass = [ORKTouchRecorder class];
-    ORKTouchRecorder *recorder = (ORKTouchRecorder *)[self createRecorder:[ORKTouchRecorderConfiguration new]];
+    ORKTouchRecorder *recorder = (ORKTouchRecorder *)[self createRecorder:[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"touch"]];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
     
@@ -566,9 +575,9 @@ static const NSInteger kNumberOfSamples = 5;
 
 - (void)testAudioRecorder {
     
-    ORKAudioRecorderConfiguration *conf = [[ORKAudioRecorderConfiguration alloc] initWithRecorderSettings:@{}];
+    ORKAudioRecorderConfiguration *recorderConfiguration = [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"audio" recorderSettings:@{}];
     Class recorderClass = [ORKAudioRecorder class];
-    ORKAudioRecorder *recorder = (ORKAudioRecorder *)[self createRecorder:conf];
+    ORKAudioRecorder *recorder = (ORKAudioRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
 }
@@ -577,9 +586,9 @@ static const NSInteger kNumberOfSamples = 5;
     
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *hbQuantityType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
-    ORKHealthQuantityTypeRecorderConfiguration *conf = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithHealthQuantityType:hbQuantityType unit:bpmUnit];
+    ORKHealthQuantityTypeRecorderConfiguration *recorderConfiguration = [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:@"healtQuantityTypeRecorder" healthQuantityType:hbQuantityType unit:bpmUnit];
     Class recorderClass = [ORKHealthQuantityTypeRecorder class];
-    ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:conf];
+    ORKHealthQuantityTypeRecorder *recorder = (ORKHealthQuantityTypeRecorder *)[self createRecorder:recorderConfiguration];
     
     XCTAssertTrue([recorder isKindOfClass:recorderClass], @"");
 }

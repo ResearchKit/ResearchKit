@@ -107,14 +107,6 @@
 
 @implementation ORKTouchRecorder
 
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
-    self = [super initWithStep:step
-               outputDirectory:(NSURL *)outputDirectory];
-    return self;
-}
-
-
 - (void)dealloc
 {
     [_logger finishCurrentLog];
@@ -234,15 +226,15 @@
 
 @implementation ORKTouchRecorderConfiguration
 
-- (instancetype)init
+- (instancetype)initWithIdentifier:(NSString *)identifier
 {
-    return [self ork_init];
+    return [super initWithIdentifier:identifier];
 }
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-               outputDirectory:(NSURL *)outputDirectory {
-    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithStep:step
-                                                      outputDirectory:outputDirectory];
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier
+                                                                         step:step
+                                                              outputDirectory:outputDirectory];
     return recorder;
 }
 
