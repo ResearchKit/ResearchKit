@@ -37,24 +37,15 @@
 #import "ORKResult.h"
 #import "ORKLabel.h"
 #import "ORKSubheadlineLabel.h"
+#import "ORKTapCountLabel.h"
 #import "ORKHelpers.h"
 #import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
 
-@interface ORKCountDownViewLabel : ORKLabel
-
-@end
-
-@implementation ORKCountDownViewLabel
-+ (UIFont *)defaultFont {
-    return ORKThinFontWithSize(56);
-}
-@end
-
 @interface ORKCountdownView : ORKActiveStepCustomView
 
 @property (nonatomic, strong) ORKSubheadlineLabel *textLabel;
-@property (nonatomic, strong) ORKCountDownViewLabel *timeLabel;
+@property (nonatomic, strong) ORKTapCountLabel *timeLabel;
 @property (nonatomic, strong) UIView *progressView;
 
 - (void)startAnimateWithDuration:(NSTimeInterval)duration;
@@ -76,7 +67,7 @@
         _textLabel.text =  ORKLocalizedString(@"COUNTDOWN_LABEL", nil);
         [self addSubview:_textLabel];
         
-        _timeLabel = [ORKCountDownViewLabel new];
+        _timeLabel = [ORKTapCountLabel new];
         _timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _timeLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_timeLabel];
@@ -87,8 +78,10 @@
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
-        static const CGFloat ProgressIndicatorDiameter = 104;
+        const CGFloat ProgressIndicatorRadius = _timeLabel.font.pointSize-4.0;
+        const CGFloat ProgressIndicatorDiameter = 2*ProgressIndicatorRadius;        
         static const CGFloat ProgressIndicatorOuterMargin = 1;
+        
         NSDictionary *metrics = @{@"d":@(ProgressIndicatorDiameter+2*ProgressIndicatorOuterMargin)};
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _timeLabel, _progressView);
@@ -124,7 +117,6 @@
                                                         multiplier:1 constant:16-ProgressIndicatorOuterMargin]];
         
         _circleLayer = [CAShapeLayer layer];
-        static const CGFloat ProgressIndicatorRadius = ProgressIndicatorDiameter/2;
         _circleLayer.path = [[UIBezierPath bezierPathWithArcCenter:CGPointMake(ProgressIndicatorRadius+ProgressIndicatorOuterMargin, ProgressIndicatorRadius+ProgressIndicatorOuterMargin)
                                                             radius:ProgressIndicatorRadius
                                                         startAngle:M_PI + M_PI_2
