@@ -1,5 +1,7 @@
 language: objective-c
+before_install: gem install slather -N
 script:
   - xcodebuild -scheme ResearchKit test
   - xcodebuild -project samples/ORKCatalog/ORKCatalog.xcodeproj -scheme ORKCatalog -sdk iphonesimulator8.3
   - xcodebuild -project Testing/ORKTest/ORKTest.xcodeproj -scheme ORKTest -sdk iphonesimulator8.3 test
+after_success: slather
