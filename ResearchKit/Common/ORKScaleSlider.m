@@ -80,7 +80,7 @@
     }
 }
 
-- (UIView *)_thumbImageSubview {
+- (UIView *)thumbImageSubview {
     UIView *thumbImageSubview = nil;
     CGRect trackRect = [self trackRectForBounds:self.bounds];
     CGRect thumbRect = [self thumbRectForBounds:self.bounds trackRect:trackRect value:self.value];
@@ -97,7 +97,8 @@
     [super layoutSubviews];
     if (_thumbImageNeedsTransformUpdate)
     {
-        [self _thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
+        _thumbImageNeedsTransformUpdate = NO;
+        [self thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
     }
 }
 
