@@ -122,10 +122,19 @@ Create a step for your task by adding some code, perhaps in
 simple, we'll use an instruction step (`ORKInstructionStep`) and name
 the step `myStep`.
 
+Objective-C
+
 ```objc 	
 ORKInstructionStep *myStep =
   [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
 myStep.title = @"Welcome to ResearchKit";
+```
+
+Swift
+
+```swift
+let myStep = ORKInstructionStep(identifier: "intro")
+myStep.title = "Welcome to ResearchKit"
 ```
 
 ###3. Create a Task
@@ -135,9 +144,17 @@ contains `myStep`. An ordered task is just a task where the order and
 selection of later steps does not depend on the results of earlier
 ones. Name your task `task` and initialize it with `myStep`.
 
+Objective-C
+
 ```objc
 ORKOrderedTask *task =
   [[ORKOrderedTask alloc] initWithIdentifier:@"task" steps:@[myStep]];
+```
+
+Swift
+
+```swift
+let task = ORKOrderedTask(identifier: "task", steps: [myStep])
 ```
 
 ###4. Present the Task
@@ -147,6 +164,8 @@ it with your `task`. A task view controller manages a task and collects the
 results of each step. In this case, your task view
 controller simply displays your instruction step.
 
+Objective-C
+
 ```objc
 ORKTaskViewController *taskViewController =
   [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
@@ -154,9 +173,19 @@ taskViewController.delegate = self;
 [self presentViewController:taskViewController animated:YES completion:nil];
 ```
 
+Swift
+
+```swift
+let taskViewController = ORKTaskViewController(task: task, taskRunUUID: nil)
+taskViewController.delegate = self
+presentViewController(taskViewController, animated: true, completion: nil)
+```
+
 The above snippet assumes that your class implements the
 `ORKTaskViewControllerDelegate` protocol. This has just one required method,
 which you must implement in order to handle the completion of the task:
+
+Objective-C
 
 ```objc
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
@@ -168,6 +197,20 @@ which you must implement in order to handle the completion of the task:
 
     // Then, dismiss the task view controller.
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+```
+
+Swift
+
+```swift
+func taskViewController(taskViewController: ORKTaskViewController, 
+                didFinishWithReason reason: ORKTaskViewControllerFinishReason, 
+                                     error: NSError?) {
+  let taskResult = taskViewController.result
+  // You could do something with the result here.
+
+  // Then, dismiss the task view controller.
+  dismissViewControllerAnimated(true, completion: nil)
 }
 ```
 
