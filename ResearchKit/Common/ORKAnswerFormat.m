@@ -253,24 +253,24 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
                                                minimumValue:(NSInteger)scaleMinimum
                                                defaultValue:(NSInteger)defaultValue
                                                        step:(NSInteger)step
-                                                   vertical:(BOOL)verticalFlag {
+                                                   vertical:(BOOL)vertical {
     return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
                                                  minimumValue:scaleMinimum
                                                  defaultValue:defaultValue
                                                          step:step
-                                                     vertical:verticalFlag];
+                                                     vertical:vertical];
 }
 
 + (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
                                                                    minimumValue:(double)scaleMinimum
                                                                defaultValue:(double)defaultValue
                                                       maximumFractionDigits:(NSInteger)maximumFractionDigits
-                                                                       vertical:(BOOL)verticalFlag {
+                                                                       vertical:(BOOL)vertical {
     return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
                                                            minimumValue:scaleMinimum
                                                            defaultValue:defaultValue
                                                   maximumFractionDigits:maximumFractionDigits
-                                                               vertical:verticalFlag];
+                                                               vertical:vertical];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
