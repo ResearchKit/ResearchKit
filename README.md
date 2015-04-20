@@ -178,7 +178,7 @@ Swift
 ```swift
 let taskViewController = ORKTaskViewController(task: task, taskRunUUID: nil)
 taskViewController.delegate = self
-self.presentViewController(taskViewController, animated: true, completion: nil)
+presentViewController(taskViewController, animated: true, completion: nil)
 ```
 
 The above snippet assumes that your class implements the
@@ -210,7 +210,7 @@ func taskViewController(taskViewController: ORKTaskViewController,
   // You could do something with the result here.
 
   // Then, dismiss the task view controller.
-  self.dismissViewControllerAnimated(true, completion: nil)
+  dismissViewControllerAnimated(true, completion: nil)
 }
 ```
 
