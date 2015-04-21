@@ -866,11 +866,13 @@ static const CGFloat kHMargin = 15.0;
     
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
-    NSAssert(!formItem ||
+    if (! (!formItem ||
              [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
              [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
              [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-             [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]], @"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance");
+           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
+    }
     [super setFormItem:formItem];
 }
 

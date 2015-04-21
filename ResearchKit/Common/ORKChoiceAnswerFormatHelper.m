@@ -46,7 +46,9 @@
                                   [ORKTextChoiceAnswerFormat class],
                                   [ORKImageChoiceAnswerFormat class]];
         
-        NSAssert([validClasses containsObject:[answerFormat class]], @"Not a valid answerformat.");
+        if (![validClasses containsObject:[answerFormat class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Not a valid answerformat for this helper." userInfo:nil];
+        }
         
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKValuePickerAnswerFormat *vpaf = (ORKValuePickerAnswerFormat *)answerFormat;
