@@ -156,6 +156,8 @@ enum TaskListRow: Int, Printable {
         case ScaleQuestionTask =                    "ScaleQuestionTask"
         case DiscreteScaleQuestionStep =            "DiscreteScaleQuestionStep"
         case ContinuousScaleQuestionStep =          "ContinuousScaleQuestionStep"
+        case DiscreteVerticalScaleQuestionStep =    "DiscreteVerticalScaleQuestionStep"
+        case ContinuousVerticalScaleQuestionStep =  "ContinuousVerticalScaleQuestionStep"
 
         // Task with examples of numeric questions.
         case NumericQuestionTask =                  "NumericQuestionTask"
@@ -297,7 +299,7 @@ enum TaskListRow: Int, Printable {
         var steps = [ORKStep]()
         
         // The first step is a scale control with 10 discrete ticks.
-        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaxValue(10, minValue: 1, step: 1, defaultValue: NSIntegerMax)
+        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false)
         
         let questionStep1 = ORKQuestionStep(identifier: Identifier.DiscreteScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step1AnswerFormat)
         
@@ -306,14 +308,32 @@ enum TaskListRow: Int, Printable {
         steps += [questionStep1]
         
         // The second step is a scale control that allows continuous movement.
-        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaxValue(5.0, minValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2)
+        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: false)
         
         let questionStep2 = ORKQuestionStep(identifier: Identifier.ContinuousScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step2AnswerFormat)
         
         questionStep2.text = exampleDetailText
         
         steps += [questionStep2]
+
+        // The third step is a vertical scale control with 10 discrete ticks.
+        let step3AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true)
         
+        let questionStep3 = ORKQuestionStep(identifier: Identifier.DiscreteVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step3AnswerFormat)
+        
+        questionStep3.text = exampleDetailText
+        
+        steps += [questionStep3]
+
+        // The fourth step is a vertical scale control that allows continuous movement.
+        let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true)
+        
+        let questionStep4 = ORKQuestionStep(identifier: Identifier.ContinuousVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step4AnswerFormat)
+        
+        questionStep4.text = exampleDetailText
+        
+        steps += [questionStep4]
+
         return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: steps)
     }
     
