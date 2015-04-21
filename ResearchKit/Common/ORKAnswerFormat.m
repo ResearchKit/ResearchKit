@@ -49,7 +49,6 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     {
             SQT_CASE(None);
             SQT_CASE(Scale);
-            SQT_CASE(VerticalScale);
             SQT_CASE(SingleChoice);
             SQT_CASE(MultipleChoice);
             SQT_CASE(Decimal);
@@ -1471,7 +1470,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 - (ORKQuestionType) questionType
 {
-    return _vertical ? ORKQuestionTypeVerticalScale : ORKQuestionTypeScale;
+    return ORKQuestionTypeScale;
 }
 
 @end
@@ -1625,7 +1624,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 - (ORKQuestionType) questionType
 {
-    return _vertical ? ORKQuestionTypeVerticalScale : ORKQuestionTypeScale;
+    return ORKQuestionTypeScale;
 }
 
 @end

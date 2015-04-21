@@ -44,9 +44,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     
     /// The scale question type asks participants to place a mark at an appropriate position on a continuous or discrete line.
     ORKQuestionTypeScale,
-    
-    /// The vertical scale question type asks participants to place a mark at an appropriate position on a continuous or discrete vertical line.
-    ORKQuestionTypeVerticalScale,
 
     /// In a single choice question, the participant can pick only one predefined option.
     ORKQuestionTypeSingleChoice,

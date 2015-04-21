@@ -563,7 +563,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         typeAndCellMapping = @{@(ORKQuestionTypeScale): [ORKSurveyAnswerCellForScale class],
-                               @(ORKQuestionTypeVerticalScale): [ORKSurveyAnswerCellForVerticalScale class],
                                @(ORKQuestionTypeDecimal) : [ORKSurveyAnswerCellForNumber class],
                                @(ORKQuestionTypeText) : [ORKSurveyAnswerCellForText class],
                                @(ORKQuestionTypeTimeOfDay) : [ORKSurveyAnswerCellForPicker class],
@@ -577,7 +576,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     // SingleSelectionPicker Cell && Other Cells
     Class class = typeAndCellMapping[@(self.questionStep.questionType)];
     
-    if([self.questionStep isFormatChoiceWithImageOptions])
+    if ([self.questionStep isFormatChoiceWithImageOptions])
     {
         class = [ORKSurveyAnswerCellForImageSelection class];
     }
@@ -588,6 +587,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     }
     else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
+    }
+    else if ([self.questionStep isFormatVertical]) {
+        class = [ORKSurveyAnswerCellForVerticalScale class];
     }
     
     identifier = NSStringFromClass(class);
@@ -782,11 +784,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
         }
             break;
         case ORKQuestionTypeScale:{
-            height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
-        }
-            break;
-        case ORKQuestionTypeVerticalScale:{
-            height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
+            if ([self.questionStep isFormatVertical]) {
+                height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
+            }
+            else {
+                height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
+            }
         }
             break;
         default:{
