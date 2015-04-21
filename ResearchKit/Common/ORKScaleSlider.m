@@ -80,6 +80,9 @@
     }
 }
 
+// Error prone: needs to be replaced by a custom thumb asset
+// Details here: https://github.com/ResearchKit/ResearchKit/pull/33#discussion_r28804792
+// Tracked here: https://github.com/ResearchKit/ResearchKit/issues/67
 - (UIView *)thumbImageSubview {
     UIView *thumbImageSubview = nil;
     CGRect bounds = [self bounds];
