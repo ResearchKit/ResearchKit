@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -34,16 +35,18 @@
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
 
+
 @interface ORKScaleSlider ()
 
 @end
 
+
 @implementation ORKScaleSlider {
     CFAbsoluteTime _axLastOutputTime;
+    BOOL _thumbImageNeedsTransformUpdate;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTouched:)];
@@ -60,17 +63,82 @@
         self.showThumb = NO;
         
         _axLastOutputTime = 0;
+        _thumbImageNeedsTransformUpdate = NO;
     }
     return self;
 }
 
-- (void)setShowThumb:(BOOL)showThumb
-{
+- (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
 }
 
-- (void)sliderTouched:(UIGestureRecognizer *)gesture
-{
+- (void)setVertical:(BOOL)vertical {
+    if (vertical != _vertical) {
+        _vertical = vertical;
+        self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+        _thumbImageNeedsTransformUpdate = YES;
+    }
+}
+
+// Error prone: needs to be replaced by a custom thumb asset
+// Details here: https://github.com/ResearchKit/ResearchKit/pull/33#discussion_r28804792
+// Tracked here: https://github.com/ResearchKit/ResearchKit/issues/67
+- (UIView *)thumbImageSubview {
+    UIView *thumbImageSubview = nil;
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGRect thumbRect = [self thumbRectForBounds:bounds trackRect:trackRect value:self.value];
+    for (UIView *subview in self.subviews) {
+        if (CGRectEqualToRect(thumbRect, subview.frame)) {
+            thumbImageSubview = subview;
+            break;
+        }
+    }
+    return thumbImageSubview;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (_thumbImageNeedsTransformUpdate)
+    {
+        _thumbImageNeedsTransformUpdate = NO;
+        [self thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
+    }
+}
+
+- (void)addConstraint:(NSLayoutConstraint *)constraint {
+    [super addConstraint:constraint];
+    if (_vertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
+    {
+        // In vertical mode, the slider needs to be of square size for the drawn area to have the appropriate height (due to using self.transform)
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self
+                                                         attribute:NSLayoutAttributeWidth
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeHeight
+                                                        multiplier:1.0
+                                                          constant:0.0]];
+    }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *view = nil;
+    if (_vertical) {
+        // In vertical mode, we need to ignore the touch area for the needed extra width
+        const CGFloat desiredSliderWidth = 44.0;
+        const CGFloat actualWidth = [self bounds].size.width;
+        const CGFloat centerX = actualWidth / 2;
+        if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
+            view = [super hitTest:point withEvent:event];
+        }
+    }
+    else {
+        view = [super hitTest:point withEvent:event];
+    }
+    return view;
+}
+
+- (void)sliderTouched:(UIGestureRecognizer *)gesture {
     self.showThumb = YES;
     
     CGPoint touchPoint = [gesture locationInView:self];
@@ -81,6 +149,10 @@
 }
 
 - (void)updateValueForTouchAtPoint:(CGPoint)touchPoint {
+    // Ignore negative (out of bounds) positions
+    if (touchPoint.x < 0) {
+        touchPoint.x = 0;
+    }
     CGRect trackRect = [self trackRectForBounds:[self bounds]];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
@@ -96,10 +168,10 @@
 }
 
 static CGFloat kLineWidth = 1.0;
-- (void)drawRect:(CGRect)rect
-{
-    CGRect trackRect = [self trackRectForBounds:[self bounds]];
-    CGFloat centerY = [self bounds].size.height / 2.0;
+- (void)drawRect:(CGRect)rect {
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGFloat centerY = bounds.size.height / 2.0;
     
     [[UIColor blackColor] set];
     
@@ -115,18 +187,15 @@ static CGFloat kLineWidth = 1.0;
             [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
         }
         [path stroke];
-        
     }
     
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
+
 static CGFloat kPadding = 2.0;
-- (CGRect)trackRectForBounds:(CGRect)bounds
-{
-    
+- (CGRect)trackRectForBounds:(CGRect)bounds {
     CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
     CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
-    
     return rect;
 }
 

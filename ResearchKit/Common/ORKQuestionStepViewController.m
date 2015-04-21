@@ -576,7 +576,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     // SingleSelectionPicker Cell && Other Cells
     Class class = typeAndCellMapping[@(self.questionStep.questionType)];
     
-    if([self.questionStep isFormatChoiceWithImageOptions])
+    if ([self.questionStep isFormatChoiceWithImageOptions])
     {
         class = [ORKSurveyAnswerCellForImageSelection class];
     }
@@ -587,6 +587,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     }
     else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
+    }
+    else if ([self.questionStep isFormatVerticalScale]) {
+        class = [ORKSurveyAnswerCellForVerticalScale class];
     }
     
     identifier = NSStringFromClass(class);
@@ -781,11 +784,15 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
         }
             break;
         case ORKQuestionTypeScale:{
-            height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
+            if ([self.questionStep isFormatVerticalScale]) {
+                height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
+            }
+            else {
+                height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
+            }
         }
             break;
         default:{
-            
         }
             break;
     }

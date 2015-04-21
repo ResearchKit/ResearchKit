@@ -109,7 +109,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
-@protocol ORKScaleAnswerFormatProvider<NSObject>
+@protocol ORKScaleAnswerFormatProvider <NSObject>
 
 - (nullable NSNumber *)minimumNumber;
 - (nullable NSNumber *)maximumNumber;
@@ -117,6 +117,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (nullable NSString *)localizedStringForNumber:(nullable NSNumber *)number;
 - (NSInteger)numberOfSteps;
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
+- (BOOL)isVertical;
 
 @end
 
