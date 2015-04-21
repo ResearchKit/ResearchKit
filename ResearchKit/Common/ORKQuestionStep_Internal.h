@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isFormatChoiceWithImageOptions;
 - (BOOL)isFormatFitsChoiceCells;
 - (BOOL)isFormatTextfield;
-- (BOOL)isFormatVertical;
+- (BOOL)isFormatVerticalScale;
 
 - (BOOL)formatRequiresTableView;
 

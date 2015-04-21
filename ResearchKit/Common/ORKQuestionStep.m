@@ -165,7 +165,7 @@
             self.questionType == ORKQuestionTypeBoolean);
 }
 
-- (BOOL)isFormatVertical {
+- (BOOL)isFormatVerticalScale {
     return (ORKDynamicCast([self impliedAnswerFormat], ORKScaleAnswerFormat).isVertical ||
             ORKDynamicCast([self impliedAnswerFormat], ORKContinuousScaleAnswerFormat).isVertical);
 }

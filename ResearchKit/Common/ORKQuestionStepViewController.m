@@ -588,7 +588,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
     }
-    else if ([self.questionStep isFormatVertical]) {
+    else if ([self.questionStep isFormatVerticalScale]) {
         class = [ORKSurveyAnswerCellForVerticalScale class];
     }
     
@@ -784,7 +784,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
         }
             break;
         case ORKQuestionTypeScale:{
-            if ([self.questionStep isFormatVertical]) {
+            if ([self.questionStep isFormatVerticalScale]) {
                 height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
             }
             else {
