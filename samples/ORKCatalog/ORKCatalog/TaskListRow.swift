@@ -764,13 +764,13 @@ enum TaskListRow: Int, Printable {
         var consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in
             let consentSection = ORKConsentSection(type: contentSectionType)
             
-            consentSection.summary = self.loremIpsumShortText
+            consentSection.summary = self.loremIpsumLongText
             
             if contentSectionType == .Overview {
                 consentSection.htmlContent = htmlContentString
             }
             else {
-                consentSection.content = self.loremIpsumLongText
+                consentSection.content = self.loremIpsumVeryLongText
             }
             
             return consentSection
@@ -825,6 +825,10 @@ enum TaskListRow: Int, Printable {
     
     private var loremIpsumLongText: String {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
+    }
+
+    private var loremIpsumVeryLongText: String {
+        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo? Et doming eirmod delicata cum. Vel fabellas scribentur neglegentur cu, pro te iudicabit explicari. His alia idque scriptorem ei, quo no nominavi noluisse."
     }
 }
     

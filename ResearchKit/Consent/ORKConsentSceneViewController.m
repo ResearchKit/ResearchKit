@@ -174,6 +174,26 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
 }
 
+- (void)setScrollEnabled:(BOOL)enabled {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    consentSceneView.scrollEnabled = enabled;
+}
+
+- (void)scrollToTopAnimated:(BOOL)animated {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    CGPoint targetContentOffset = CGPointMake(consentSceneView.contentOffset.x, 0);
+    [consentSceneView setContentOffset:targetContentOffset animated:animated];
+}
+
+- (BOOL)isScrolledToTop {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    return consentSceneView.contentOffset.y == 0;
+}
+
+- (void)setScrollViewDelegate:(id<UIScrollViewDelegate>)delegate {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    consentSceneView.delegate = delegate;
+}
 
 #pragma mark - Action
 
