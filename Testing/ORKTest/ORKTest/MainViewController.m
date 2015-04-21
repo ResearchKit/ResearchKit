@@ -1310,7 +1310,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 #pragma mark Scales task
 
 /*
- This task is used to test various uses of discrete and continuous valued sliders.
+ This task is used to test various uses of discrete and continuous, horizontal and vertical valued sliders.
  */
 - (id<ORKTask>)makeScalesTask {
 
@@ -1358,7 +1358,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                  step:1
                                                                                              vertical:NO];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_03"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                    answer:scaleAnswerFormat];
         [steps addObject:step];
@@ -1374,9 +1374,41 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                  step:50
                                                                                              vertical:NO];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_04"
                                                                     title:@"How much money do you need?"
                                                                    answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+
+    {
+        /*
+         Vertical continuous scale with three decimal places and a default.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:8.725
+                                                                                                    maximumFractionDigits:3
+                                                                                                                 vertical:YES];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+
+    {
+        /*
+         Vertical discrete scale, with a default on a step boundary.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:5
+                                                                                                 step:1
+                                                                                             vertical:YES];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
+                                                                      title:@"How would you measure your mood improvement?"
+                                                                     answer:scaleAnswerFormat];
         [steps addObject:step];
     }
 
