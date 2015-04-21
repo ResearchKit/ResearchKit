@@ -1436,6 +1436,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
         ORK_DECODE_INTEGER(aDecoder, minimum);
         ORK_DECODE_INTEGER(aDecoder, step);
         ORK_DECODE_INTEGER(aDecoder, defaultValue);
+        ORK_DECODE_BOOL(aDecoder, vertical);
     }
     return self;
 }
@@ -1447,6 +1448,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     ORK_ENCODE_INTEGER(aCoder, minimum);
     ORK_ENCODE_INTEGER(aCoder, step);
     ORK_ENCODE_INTEGER(aCoder, defaultValue);
+    ORK_ENCODE_BOOL(aCoder, vertical);
 }
 
 + (BOOL)supportsSecureCoding
@@ -1588,6 +1590,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
         ORK_DECODE_DOUBLE(aDecoder, minimum);
         ORK_DECODE_DOUBLE(aDecoder, defaultValue);
         ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
+        ORK_DECODE_BOOL(aDecoder, vertical);
     }
     return self;
 }
@@ -1599,6 +1602,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     ORK_ENCODE_DOUBLE(aCoder, minimum);
     ORK_ENCODE_DOUBLE(aCoder, defaultValue);
     ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
+    ORK_ENCODE_BOOL(aCoder, vertical);
 }
 
 + (BOOL)supportsSecureCoding
