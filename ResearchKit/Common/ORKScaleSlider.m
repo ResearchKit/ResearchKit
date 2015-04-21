@@ -82,8 +82,9 @@
 
 - (UIView *)thumbImageSubview {
     UIView *thumbImageSubview = nil;
-    CGRect trackRect = [self trackRectForBounds:self.bounds];
-    CGRect thumbRect = [self thumbRectForBounds:self.bounds trackRect:trackRect value:self.value];
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGRect thumbRect = [self thumbRectForBounds:bounds trackRect:trackRect value:self.value];
     for (UIView *subview in self.subviews) {
         if (CGRectEqualToRect(thumbRect, subview.frame)) {
             thumbImageSubview = subview;
@@ -122,7 +123,7 @@
     if (_vertical) {
         // In vertical mode, we need to ignore the touch area for the needed extra width
         const CGFloat desiredSliderWidth = 36.0;
-        const CGFloat actualWidth = self.bounds.size.width;
+        const CGFloat actualWidth = [self bounds].size.width;
         const CGFloat centerX = actualWidth / 2;
         if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
             view = [super hitTest:point withEvent:event];
@@ -149,7 +150,7 @@
     if (touchPoint.x < 0) {
         touchPoint.x = 0;
     }
-    CGRect trackRect = [self trackRectForBounds:self.bounds];
+    CGRect trackRect = [self trackRectForBounds:[self bounds]];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
     CGFloat newValue = position * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
@@ -165,8 +166,9 @@
 
 static CGFloat kLineWidth = 1.0;
 - (void)drawRect:(CGRect)rect {
-    CGRect trackRect = [self trackRectForBounds:self.bounds];
-    CGFloat centerY = self.bounds.size.height / 2.0;
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGFloat centerY = bounds.size.height / 2.0;
     
     [[UIColor blackColor] set];
     
