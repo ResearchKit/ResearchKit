@@ -166,8 +166,8 @@
 }
 
 - (BOOL)isFormatVerticalScale {
-    return (ORKDynamicCast([self impliedAnswerFormat], ORKScaleAnswerFormat).isVertical ||
-            ORKDynamicCast([self impliedAnswerFormat], ORKContinuousScaleAnswerFormat).isVertical);
+    return (ORKDynamicCast([self impliedAnswerFormat], ORKScaleAnswerFormat).vertical ||
+            ORKDynamicCast([self impliedAnswerFormat], ORKContinuousScaleAnswerFormat).vertical);
 }
 
 - (BOOL)formatRequiresTableView {
