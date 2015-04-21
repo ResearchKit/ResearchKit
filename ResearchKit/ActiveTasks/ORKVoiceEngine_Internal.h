@@ -32,8 +32,12 @@
 
 #import "ORKVoiceEngine.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ORKVoiceEngine ()
 
 @property (nonatomic, strong, readonly) AVSpeechSynthesizer *speechSynthesizer;
 
 @end
+
+NS_ASSUME_NONNULL_END
