@@ -1327,7 +1327,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
                         minimumValue:(NSInteger)minimumValue
                         defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
-                            vertical:(BOOL)verticalFlag {
+                            vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
 
@@ -1335,7 +1335,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
         _maximum = maximumValue;
         _defaultValue = defaultValue;
         _step = step;
-        _vertical = verticalFlag;
+        _vertical = vertical;
         
         [self validateParameters];
     }
@@ -1492,7 +1492,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
                         minimumValue:(double)minimumValue
                         defaultValue:(double)defaultValue
                maximumFractionDigits:(NSInteger)maximumFractionDigits
-                            vertical:(BOOL)verticalFlag {
+                            vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
         
@@ -1500,7 +1500,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
         _maximum = maximumValue;
         _defaultValue = defaultValue;
         _maximumFractionDigits = maximumFractionDigits;
-        _vertical = verticalFlag;
+        _vertical = vertical;
         
         [self validateParameters];
     }

@@ -143,13 +143,13 @@ ORK_CLASS_AVAILABLE
                                                minimumValue:(NSInteger)scaleMinimum
                                                defaultValue:(NSInteger)defaultValue
                                                        step:(NSInteger)step
-                                                   vertical:(BOOL)verticalFlag;
+                                                   vertical:(BOOL)vertical;
 
 + (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
                                                                    minimumValue:(double)scaleMinimum
                                                                    defaultValue:(double)defaultValue
                                                           maximumFractionDigits:(NSInteger)maximumFractionDigits
-                                                                       vertical:(BOOL)verticalFlag;
+                                                                       vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -225,7 +225,7 @@ ORK_CLASS_AVAILABLE
                         minimumValue:(NSInteger)minimumValue
                         defaultValue:(NSInteger)defaultValue
                                 step:(NSInteger)step
-                            vertical:(BOOL)verticalFlag NS_DESIGNATED_INITIALIZER;
+                            vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized horizontal scale answer format using the specified values.
@@ -304,7 +304,7 @@ ORK_CLASS_AVAILABLE
                         minimumValue:(double)minimumValue
                         defaultValue:(double)defaultValue
                maximumFractionDigits:(NSInteger)maximumFractionDigits
-                            vertical:(BOOL)verticalFlag NS_DESIGNATED_INITIALIZER;
+                            vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized horizontal continous scale answer format using the specified values.
