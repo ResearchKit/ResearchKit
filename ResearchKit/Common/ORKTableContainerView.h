@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTableContainerView : UIView
 
-@property (nonatomic, weak) id<ORKTableContainerViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKTableContainerViewDelegate> delegate;
 
 @property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, strong, readonly) ORKStepHeaderView *stepHeaderView;
