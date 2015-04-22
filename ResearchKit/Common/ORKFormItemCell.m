@@ -406,6 +406,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.editingHighlight = NO;
+    [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -785,6 +786,7 @@ static const CGFloat kHMargin = 15.0;
         textView.text = self.formItem.placeholder;
         textView.textColor = [self placeholderColor];
     }
+    [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

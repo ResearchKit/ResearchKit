@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(nullable id)answer;
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
+- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 
 @end

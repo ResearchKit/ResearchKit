@@ -308,7 +308,6 @@
     
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
-    _currentFirstResponderCell = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -988,6 +987,14 @@
         [_tableContainer scrollCellVisible:cell animated:YES];
     }
 }
+
+- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell
+{
+    if (_currentFirstResponderCell == cell) {
+        _currentFirstResponderCell = nil;
+    }
+}
+
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
 }
