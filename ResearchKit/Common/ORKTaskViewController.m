@@ -50,6 +50,7 @@
 #import "ORKFormStep.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers.h"
+#import "ORKObserver.h"
 #import "ORKTaskViewController_Private.h"
 #import "ORKTappingIntervalStep.h"
 #import "ORKTappingIntervalStepViewController.h"
@@ -123,117 +124,13 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     }
 }
 
-
 @end
 
-@interface ORKObserver : NSObject
 
-@property (nonatomic, strong) NSArray *keyPaths;
-@property (nonatomic, strong) id target;
-@property (nonatomic) BOOL observing;
-@property (nonatomic) void *context;
-
-@property (nonatomic, weak) id responder;
-@property (nonatomic) SEL action;
-
-- (void)startObserving;
-
-@end
-
-@implementation ORKObserver
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    NSAssert(context == self.context, @"Unexpected KVO");
-    ORKSuppressPerformSelectorWarning(
-                                     (void)[self.responder performSelector:self.action withObject:self.target];);
-}
-
-- (void)startObserving {
-    if (_observing == NO) {
-        NSAssert(self.keyPaths, @"");
-        NSAssert(self.target, @"");
-        NSAssert(self.context, @"");
-        NSAssert(self.responder, @"");
-        NSAssert(self.action, @"");
-        for (NSString *keyPath in self.keyPaths) {
-            [self.target addObserver:self forKeyPath:keyPath options:(NSKeyValueObservingOptions)0 context:self.context];
-        }
-        self.observing = YES;
-    }
-}
-
-- (void)stopObserving {
-    if (_observing) {
-        for (NSString *keyPath in _keyPaths) {
-            [self.target removeObserver:self forKeyPath:keyPath];
-        }
-        _observing = NO;
-    }
-}
-
-- (void)dealloc {
-    [self stopObserving];
-}
-
-@end
-
-@interface ORKTaskViewControllerObserver : ORKObserver
-
-- (instancetype)initWithTargetViewContoller:(NSObject *)target taskViewController:(ORKTaskViewController *)taskViewController;
-
-@end
-
-@implementation ORKTaskViewControllerObserver
-
-static void *_ORKTaskViewControllerContext = &_ORKTaskViewControllerContext;
-
-- (instancetype)initWithTargetViewContoller:(UIViewController *)target taskViewController:(ORKTaskViewController *)taskViewController {
-    self = [super init];
-    if (self) {
-        self.keyPaths = @[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"];
-        self.target = target;
-        self.responder = taskViewController;
-        self.action = @selector(collectToolbarItemsFromViewController:);
-        self.context = _ORKTaskViewControllerContext;
-        [self startObserving];
-    }
-    return self;
-}
-
-@end
-
-@interface ORKScrollViewObserver  : ORKObserver
-
-- (instancetype)initWithTargetView:(UIScrollView *)scrollView taskViewController:(ORKTaskViewController *)taskViewController;
-
-@end
-
-@implementation ORKScrollViewObserver
-
-static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
-
-- (instancetype)initWithTargetView:(UIScrollView *)scrollView taskViewController:(ORKTaskViewController *)taskViewController {
-    self = [super init];
-    if (self) {
-        self.keyPaths = @[@"contentOffset"];
-        self.target = scrollView;
-        self.responder = taskViewController;
-        self.action = @selector(registeredScrollViewDidScroll:);
-        self.context = _ORKScrollViewObserverContext;
-        [self startObserving];
-    }
-    return self;
-}
-
-@end
-
-@interface ORKTaskViewController () {
+@interface ORKTaskViewController () <ORKViewControllerObserverProtocol, ORKScrollViewObserverProtocol> {
     NSMutableDictionary *_managedResults;
     NSMutableArray *_managedStepIdentifiers;
-    ORKTaskViewControllerObserver *_stepVCObserver;
+    ORKViewControllerObserver *_stepVCObserver;
     ORKScrollViewObserver *_scrollViewObserver;
     BOOL _haveSetProgressLabel;
     BOOL _hasBeenPresented;
@@ -841,7 +738,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         
         // Start new observer
         if (_registeredScrollView) {
-            _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:_registeredScrollView taskViewController:self];
+            _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:_registeredScrollView responder:self];
         }
     }
 }
@@ -1044,7 +941,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
 }
 
-- (void)registeredScrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
     
     // alpha's range [0.0, 1.0]
     float alpha = MAX( MIN(scrollView.contentOffset.y/64.0, 1.0), 0.0);
@@ -1101,7 +998,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
     stepVC.delegate = self;
     
-    _stepVCObserver = [[ORKTaskViewControllerObserver alloc] initWithTargetViewContoller:stepVC taskViewController:self];
+    _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC responder:self];
     return stepVC;
 }
 
@@ -1424,7 +1321,7 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
                 stepVC.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
             }
             
-            _stepVCObserver = [[ORKTaskViewControllerObserver alloc] initWithTargetViewContoller:stepVC taskViewController:self];
+            _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC responder:self];
             
         } else if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
             stepVC = [self viewControllerForStep:[_task stepWithIdentifier:_restoredStepIdentifier]];
