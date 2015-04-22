@@ -113,16 +113,16 @@
         XCTAssertEqual( cell.selectedItem, YES);
     }
     
-    // Test cell deselection
+    // Test cell deselection (ORKChoiceAnswerStyleSingleChoice: selected cell should not deselect if chosen again)
     [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:group.size-1 inSection:0]];
     
     id answer = group.answer;
     XCTAssert([answer isKindOfClass:[NSArray class]]);
-    XCTAssertEqual([answer count], 0);
-    
+    XCTAssertEqual([answer count], 1);
     
     // Test set nil/null answer
     [group setAnswer:nil];
+    answer = group.answer;
     XCTAssertEqual([answer count], 0);
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
