@@ -48,7 +48,7 @@
 #import "ORKContinueButton.h"
 #import "ORKAccessibility.h"
 
-@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, UIScrollViewDelegate>
+@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate>
 {
     BOOL _hasAppeared;
     ORKStepViewControllerNavigationDirection _navDirection;
@@ -246,7 +246,6 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    
     [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
@@ -255,13 +254,18 @@
     ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
     [currentConsentSceneViewController setScrollEnabled:NO];
     [currentConsentSceneViewController scrollToTopAnimated:YES completion:^(BOOL finished) {
-        [self showNextViewController];
+        if (finished) {
+            [self showNextViewController];
+        } else {
+            [currentConsentSceneViewController setScrollEnabled:YES];
+        }
     }];
 }
 
 - (void)showNextViewController {
     ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
+        // 'finished' is always YES when not animated
         [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
         ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
     }];
