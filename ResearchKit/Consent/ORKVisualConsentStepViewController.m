@@ -254,27 +254,17 @@
 - (IBAction)next {
     ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
     [currentConsentSceneViewController setScrollEnabled:NO];
-    if ([currentConsentSceneViewController isScrolledToTop])
-    {
+    [currentConsentSceneViewController scrollToTopAnimated:YES completion:^(BOOL finished) {
         [self showNextViewController];
-    }
-    else
-    {
-        [currentConsentSceneViewController setScrollViewDelegate:self];
-        [currentConsentSceneViewController scrollToTopAnimated:YES];
-    }
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    self.delegate = nil;
-    [self showNextViewController];
+    }];
 }
 
 - (void)showNextViewController {
     ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
-    [nextConsentSceneViewController scrollToTopAnimated:NO];
-    [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
-    ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
+    [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
+        [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
+        ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
+    }];
 }
 
 #pragma mark - internal
@@ -304,8 +294,7 @@
     _currentPage = currentIndex;
     
     [self updateBackButton];
-    [self setScrollEnabled:NO];
-    
+
     [[self viewControllerForIndex:currentIndex] setScrollEnabled:YES];
     
     ORKConsentSection *currentSection = (ORKConsentSection *)_visualSections[currentIndex];

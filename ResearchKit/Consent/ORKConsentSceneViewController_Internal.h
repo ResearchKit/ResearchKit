@@ -32,15 +32,11 @@
 
 #import "ORKStepViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface ORKConsentSceneViewController ()
 
-- (void)setScrollEnabled:(BOOL)enabled;
-- (void)scrollToTopAnimated:(BOOL)animated;
-- (BOOL)isScrolledToTop;
-- (void)setScrollViewDelegate:(id<UIScrollViewDelegate>)delegate;
+@property (nonatomic, assign) BOOL scrollEnabled;
+
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 @end
 
-NS_ASSUME_NONNULL_END

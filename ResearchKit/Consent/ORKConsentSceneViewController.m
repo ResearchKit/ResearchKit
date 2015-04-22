@@ -174,25 +174,31 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
 }
 
+- (BOOL)scrollEnabled {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    return consentSceneView.scrollEnabled;
+}
+
 - (void)setScrollEnabled:(BOOL)enabled {
     ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
     consentSceneView.scrollEnabled = enabled;
 }
 
-- (void)scrollToTopAnimated:(BOOL)animated {
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    CGPoint targetContentOffset = CGPointMake(consentSceneView.contentOffset.x, 0);
-    [consentSceneView setContentOffset:targetContentOffset animated:animated];
-}
-
-- (BOOL)isScrolledToTop {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    return consentSceneView.contentOffset.y == 0;
-}
-
-- (void)setScrollViewDelegate:(id<UIScrollViewDelegate>)delegate {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    consentSceneView.delegate = delegate;
+    CGRect targetBounds = consentSceneView.bounds;
+    targetBounds.origin.y = 0;
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:^{
+            consentSceneView.bounds = targetBounds;
+        } completion:completion];
+    } else {
+        consentSceneView.bounds = targetBounds;
+        if (completion) {
+            completion(YES);
+        }
+            
+    }
 }
 
 #pragma mark - Action
