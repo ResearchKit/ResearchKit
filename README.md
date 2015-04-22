@@ -122,7 +122,7 @@ Create a step for your task by adding some code, perhaps in
 simple, we'll use an instruction step (`ORKInstructionStep`) and name
 the step `myStep`.
 
-Objective-C
+*Objective-C*
 
 ```objc 	
 ORKInstructionStep *myStep =
@@ -130,7 +130,7 @@ ORKInstructionStep *myStep =
 myStep.title = @"Welcome to ResearchKit";
 ```
 
-Swift
+*Swift*
 
 ```swift
 let myStep = ORKInstructionStep(identifier: "intro")
@@ -144,14 +144,14 @@ contains `myStep`. An ordered task is just a task where the order and
 selection of later steps does not depend on the results of earlier
 ones. Name your task `task` and initialize it with `myStep`.
 
-Objective-C
+*Objective-C*
 
 ```objc
 ORKOrderedTask *task =
   [[ORKOrderedTask alloc] initWithIdentifier:@"task" steps:@[myStep]];
 ```
 
-Swift
+*Swift*
 
 ```swift
 let task = ORKOrderedTask(identifier: "task", steps: [myStep])
@@ -164,7 +164,7 @@ it with your `task`. A task view controller manages a task and collects the
 results of each step. In this case, your task view
 controller simply displays your instruction step.
 
-Objective-C
+*Objective-C*
 
 ```objc
 ORKTaskViewController *taskViewController =
@@ -173,7 +173,7 @@ taskViewController.delegate = self;
 [self presentViewController:taskViewController animated:YES completion:nil];
 ```
 
-Swift
+*Swift*
 
 ```swift
 let taskViewController = ORKTaskViewController(task: task, taskRunUUID: nil)
@@ -185,7 +185,7 @@ The above snippet assumes that your class implements the
 `ORKTaskViewControllerDelegate` protocol. This has just one required method,
 which you must implement in order to handle the completion of the task:
 
-Objective-C
+*Objective-C*
 
 ```objc
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
@@ -200,7 +200,7 @@ Objective-C
 }
 ```
 
-Swift
+*Swift*
 
 ```swift
 func taskViewController(taskViewController: ORKTaskViewController, 
