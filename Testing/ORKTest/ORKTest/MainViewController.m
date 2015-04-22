@@ -1606,8 +1606,9 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     
     NSMutableArray *sections = [NSMutableArray new];
     for (NSNumber *type in scenes) {
+        NSString *summary = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo? Et doming eirmod delicata cum. Vel fabellas scribentur neglegentur cu, pro te iudicabit explicari. His alia idque scriptorem ei, quo no nominavi noluisse.";
         ORKConsentSection *c = [[ORKConsentSection alloc] initWithType:type.integerValue];
-        c.summary = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        c.summary = summary;
         
         if (type.integerValue == ORKConsentSectionTypeOverview) {
             /*
