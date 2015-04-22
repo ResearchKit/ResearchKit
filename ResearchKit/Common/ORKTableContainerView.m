@@ -35,7 +35,6 @@
 #import "ORKVerticalContainerView.h"
 #import "ORKSkin.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "UIApplication+ResearchKit.h"
 #import "ORKStepHeaderView.h"
 
 // Enable this define to see outlines and colors of all the views laid out at this level.
@@ -379,14 +378,9 @@
             scrollView.contentInset = insets;
             scrollView.bounds = bds;
             
-            // Make cell visible
+            // Make current first responder cell visible
             {
-                UIView *firstResponderView = (UIView *)[[UIApplication sharedApplication] ork_currentFirstResponderView];
-                UIView *cell = firstResponderView;
-                while (cell && [cell isKindOfClass:[UITableViewCell class]] == NO) {
-                    cell = cell.superview;
-                }
-                [self scrollCellVisible:(UITableViewCell *)cell animated:NO];
+                [self scrollCellVisible:[self.delegate currentFirstResponderCellForTableContainerView:self] animated:NO];
             }
         }
         

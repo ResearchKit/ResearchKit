@@ -212,7 +212,7 @@
 
 
 
-@interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate>
+@interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate, ORKTableContainerViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
 @property (nonatomic, strong) UITableView *tableView;
@@ -236,6 +236,8 @@
     NSMutableArray *_sections;
 
     BOOL _skipped;
+    
+    ORKFormItemCell *_currentFirstResponderCell;
 }
 
 - (instancetype)ORKFormStepViewController_initWithResult:(ORKResult *)result {
@@ -306,6 +308,7 @@
     
     // Reset skipped flag - result can now be non-empty
     _skipped = NO;
+    _currentFirstResponderCell = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -453,6 +456,7 @@
         _formItemCells = [NSMutableSet new];
         
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
+        _tableContainer.delegate = self;
         [self.view addSubview:_tableContainer];
         
         _tableView = _tableContainer.tableView;
@@ -977,6 +981,7 @@
 
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell
 {
+    _currentFirstResponderCell = cell;
     NSIndexPath *path = [_tableView indexPathForCell:cell];
     if (path)
     {
@@ -1000,6 +1005,12 @@
     [self notifyDelegateOnResultChange];
 }
 
+
+#pragma mark ORKTableContainerViewDelegate
+
+- (UITableViewCell *)currentFirstResponderCellForTableContainerView:(ORKTableContainerView *)tableContainerView {
+    return _currentFirstResponderCell;
+}
 
 #pragma mark UIStateRestoration
 

@@ -33,10 +33,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKTableContainerView;
+@protocol ORKTableContainerViewDelegate <NSObject>
+
+@required
+- (UITableViewCell *)currentFirstResponderCellForTableContainerView:(ORKTableContainerView *)tableContainerView;
+
+@end
+
+
 @class ORKStepHeaderView;
 @class ORKNavigationContainerView;
 
 @interface ORKTableContainerView : UIView
+
+@property (nonatomic, weak) id<ORKTableContainerViewDelegate> delegate;
 
 @property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, strong, readonly) ORKStepHeaderView *stepHeaderView;
