@@ -141,8 +141,7 @@
 
 @implementation ORKTableSection
 
-- (instancetype)initWithSectionIndex:(NSUInteger)index
-{
+- (instancetype)initWithSectionIndex:(NSUInteger)index {
     self = [super init];
     if (self) {
         _items = [NSMutableArray new];
@@ -158,8 +157,7 @@
 
 - (void)addFormItem:(ORKFormItem *)item {
     
-    if ([[item impliedAnswerFormat] isKindOfClass:[ORKTextChoiceAnswerFormat class]])
-    {
+    if ([[item impliedAnswerFormat] isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
        
         _hasChoiceRows = YES;
         ORKTextChoiceAnswerFormat *taf = (ORKTextChoiceAnswerFormat *)[item impliedAnswerFormat];
@@ -177,8 +175,7 @@
         }];
     
     }
-    else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]])
-    {
+    else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
         _hasChoiceRows = YES;
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
@@ -265,33 +262,27 @@
     return [self ORKFormStepViewController_initWithResult:result];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.taskViewController setRegisteredScrollView:_tableView];
     
     NSMutableSet *types = [NSMutableSet set];
-    for (ORKFormItem *item in [self formItems])
-    {
+    for (ORKFormItem *item in [self formItems]) {
         ORKAnswerFormat *format = [item answerFormat];
         HKObjectType *objType = [format healthKitObjectType];
-        if (objType)
-        {
+        if (objType) {
             [types addObject:objType];
         }
     }
     
     BOOL refreshDefaultsPending = NO;
-    if ([types count])
-    {
+    if ([types count]) {
         NSSet *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (! [types isSubsetOfSet:alreadyRequested])
-        {
+        if (! [types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
-                if (! success)
-                {
+                if (! success) {
                     ORK_Log_Debug(@"Authorization: %@",error);
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -316,8 +307,7 @@
 - (void)updateDefaults:(NSMutableDictionary *)defaults {
     _savedDefaults = defaults;
     
-    for (ORKFormItemCell *cell in [_tableView visibleCells])
-    {
+    for (ORKFormItemCell *cell in [_tableView visibleCells]) {
         NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
         if ([self isSeparatorRow:indexPath]) {
             continue;
@@ -344,8 +334,7 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (void)refreshDefaults
-{
+- (void)refreshDefaults {
     NSArray *formItems = [self formItems];
     ORKAnswerDefaultSource *source = _defaultSource;
     __weak typeof(self) weakSelf = self;
@@ -416,16 +405,14 @@
 }
 
 
-- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem
-{
+- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
     
     [_tableContainer setNeedsLayout];
 }
 
-- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem
-{
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     
     _continueSkipView.skipButtonItem = skipButtonItem;
@@ -482,8 +469,7 @@
 
 }
 
-- (void)buildSections
-{
+- (void)buildSections {
     NSArray *items = [self allFormItems];
     
     _sections = [NSMutableArray new];
@@ -493,11 +479,9 @@
                                      @(ORKQuestionTypeSingleChoice),
                                      @(ORKQuestionTypeMultipleChoice)];
 
-    for (ORKFormItem *item in items)
-    {
+    for (ORKFormItem *item in items) {
         // Section header
-        if ([item impliedAnswerFormat] == nil)
-        {
+        if ([item impliedAnswerFormat] == nil) {
             // Add new section
             section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
             [_sections addObject:section];
@@ -516,8 +500,7 @@
             BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
             
             // Items require individual section
-            if (multiCellChoices || multilineTextEntry)
-            {
+            if (multiCellChoices || multilineTextEntry) {
                 // Add new section
                 section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
                 [_sections addObject:section];
@@ -533,8 +516,7 @@
             else
             {
                 // In case no section available, create new one.
-                if (section == nil)
-                {
+                if (section == nil) {
                     section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
                     [_sections addObject:section];
                 }
@@ -646,8 +628,7 @@
         ORKQuestionResult *result = [item.answerFormat resultWithIdentifier:item.identifier answer:answer];
         ORKAnswerFormat *impliedAnswerFormat = [item impliedAnswerFormat];
         
-        if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]])
-        {
+        if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
             ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
             if (dqr.dateAnswer) {
                 NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? :systemCalendar;
@@ -694,20 +675,17 @@
             (indexPath.row == ([self tableView:nil numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _sections.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     ORKTableSection *sectionObject = (ORKTableSection *)_sections[section];
     return sectionObject.items.count+(_sections.count == 1?1:2);
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = @"_ork.separator";
     if (! [self isSeparatorRow:indexPath]) {
         identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
@@ -743,12 +721,10 @@
                 switch (type) {
                     case ORKQuestionTypeSingleChoice:
                     case ORKQuestionTypeMultipleChoice:{
-                        if ([formItem.impliedAnswerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]])
-                        {
+                        if ([formItem.impliedAnswerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
                             class = [ORKFormItemImageSelectionCell class];
                         }
-                        else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])
-                        {
+                        else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
                             class = [ORKFormItemPickerCell class];
                         }
                     }
@@ -784,8 +760,7 @@
                 
                 if (class) {
                     
-                    if ([class isSubclassOfClass:[ORKChoiceViewCell class]])
-                    {
+                    if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
                         
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
 
@@ -816,16 +791,12 @@
     return cell;
 }
 
-- (BOOL)isChoiceSelected:(id)value atIndex:(NSUInteger)index answer:(id)answer
-{
+- (BOOL)isChoiceSelected:(id)value atIndex:(NSUInteger)index answer:(id)answer {
     BOOL isSelected = NO;
 
-    if (answer != nil && answer != ORKNullAnswerValue())
-    {
-        if ([answer isKindOfClass:[NSArray class]])
-        {
-            if (value)
-            {
+    if (answer != nil && answer != ORKNullAnswerValue()) {
+        if ([answer isKindOfClass:[NSArray class]]) {
+            if (value) {
                 isSelected = [(NSArray *)answer containsObject:value];
             }
             else
@@ -835,8 +806,7 @@
         }
         else
         {
-            if (value)
-            {
+            if (value) {
                 isSelected = ([answer isEqual:value]);
             }
             else
@@ -865,8 +835,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     ORKFormItemCell *cell = (ORKFormItemCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[ORKFormItemCell class]])
-    {
+    if ([cell isKindOfClass:[ORKFormItemCell class]]) {
         [cell becomeFirstResponder];
     }
     else
@@ -894,8 +863,7 @@
     [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Seperator line
     if ([self isSeparatorRow:indexPath]){
         
@@ -914,20 +882,17 @@
     return UITableViewAutomaticDimension;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     NSString *title = [(ORKTableSection *)_sections[section] title];
     return (title.length > 0)? UITableViewAutomaticDimension : 0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSString *title = [(ORKTableSection *)_sections[section] title];
     
     UIView *view = [UIView new];
     
-    if (title.length > 0)
-    {
+    if (title.length > 0) {
         ORKFormSectionTitleLabel *label = [ORKFormSectionTitleLabel new];
         label.text = title;
         label.numberOfLines = 0;
@@ -963,8 +928,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if ([self isSeparatorRow:indexPath] &&
-        indexPath.row == ([self tableView:nil numberOfRowsInSection:indexPath.section] - 1))
-    {
+        indexPath.row == ([self tableView:nil numberOfRowsInSection:indexPath.section] - 1)) {
         // Hide separator row completely (setting separator inset does nothing at all)
         cell.hidden = YES;
     }
@@ -975,11 +939,9 @@
 #pragma mark ORKFormItemCellDelegate
 
 
-- (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell
-{
+- (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell {
     NSIndexPath *path = [_tableView indexPathForCell:cell];
-    if (path)
-    {
+    if (path) {
         [_tableContainer scrollCellVisible:cell animated:YES];
     }
 }
@@ -1008,8 +970,7 @@ static NSString * const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
 static NSString * const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
 static NSString * const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_savedAnswers forKey:_ORKSavedAnswersRestoreKey];
@@ -1018,8 +979,7 @@ static NSString * const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZo
     [coder encodeObject:_savedSystemTimeZones forKey:_ORKSavedSystemTimeZonesRestoreKey];
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     _savedAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswersRestoreKey];

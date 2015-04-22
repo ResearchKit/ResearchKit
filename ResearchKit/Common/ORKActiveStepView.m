@@ -34,8 +34,7 @@
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 
-@implementation  ORKActiveStepView
-{
+@implementation  ORKActiveStepView {
     ORKTintedImageView *_imageView;
 }
 
@@ -63,8 +62,7 @@
     }
 }
 
-- (void)setActiveStep:(ORKActiveStep *)step
-{
+- (void)setActiveStep:(ORKActiveStep *)step {
     self.continueSkipContainer.useNextForSkip = step.shouldUseNextAsSkipButton;
     _activeStep = step;
     self.headerView.instructionLabel.hidden = ! (_activeStep.hasText);
@@ -92,8 +90,7 @@
     [headerView updateCaptionLabelPreferredWidth];
 }
 
-- (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView
-{
+- (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView {
     _activeCustomView = activeCustomView;
     [self updateStepView];
     

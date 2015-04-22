@@ -48,8 +48,7 @@
 #import "ORKContinueButton.h"
 #import "ORKAccessibility.h"
 
-@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate>
-{
+@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate> {
     BOOL _hasAppeared;
     ORKStepViewControllerNavigationDirection _navDirection;
     
@@ -113,8 +112,7 @@
 
 
 
-- (void)stepDidChange
-{
+- (void)stepDidChange {
     [super stepDidChange];
     {
         NSMutableArray *vs = [NSMutableArray new];
@@ -128,8 +126,7 @@
         _visualSections = [vs copy];
     }
     
-    if (self.step && [self pageCount] == 0)
-    {
+    if (self.step && [self pageCount] == 0) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Visual consent step has no visible scenes" userInfo:nil];
     }
     
@@ -145,8 +142,7 @@
     return [(ORKAnimationPlaceholderView *)_animationView playerView];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     CGRect viewBounds = self.view.bounds;
@@ -198,8 +194,7 @@
         
         // Add first viewController
         NSUInteger idx = 0;
-        if (_navDirection == ORKStepViewControllerNavigationDirectionReverse)
-        {
+        if (_navDirection == ORKStepViewControllerNavigationDirectionReverse) {
             idx = [self pageCount]-1;
         }
         
@@ -209,8 +204,7 @@
     [self updatePageIndex];
 }
 
-- (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction
-{
+- (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction {
     _navDirection = direction;
 }
 
@@ -232,10 +226,8 @@
     }
 }
 
-- (void)updateBackButton
-{
-    if (! _hasAppeared)
-    {
+- (void)updateBackButton {
+    if (! _hasAppeared) {
         return;
     }
     
@@ -290,8 +282,7 @@
 - (void)updatePageIndex {
     
     NSUInteger currentIndex = [self currentIndex];
-    if (currentIndex == NSNotFound)
-    {
+    if (currentIndex == NSNotFound) {
         return;
     }
     
@@ -465,8 +456,7 @@
     
     
     
-    if (animated)
-    {
+    if (animated) {
         // Disable user interaction during the animated transition, and re-enable when finished
         _transitioning = YES;
         
@@ -625,16 +615,14 @@ static NSString * const _ORKCurrentPageRestoreKey = @"currentPage";
 static NSString * const _ORKHasAppearedRestoreKey = @"hasAppeared";
 static NSString * const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeInteger:_currentPage forKey:_ORKCurrentPageRestoreKey];
     [coder encodeBool:_hasAppeared forKey:_ORKHasAppearedRestoreKey];
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     self.currentPage = [coder decodeIntegerForKey:_ORKCurrentPageRestoreKey];

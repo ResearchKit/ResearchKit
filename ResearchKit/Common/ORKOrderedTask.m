@@ -184,7 +184,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     progress.current = [self indexOfStep:step];
     progress.total = [_steps count];
     
-    if (![step showsProgress]) {
+    if (! [step showsProgress]) {
         progress.total = 0;
     }
     
@@ -195,7 +195,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
     for (ORKStep *step in self.steps) {
-        
         if ([step isKindOfClass:[ORKFormStep class]]) {
             ORKFormStep *formStep = (ORKFormStep *)step;
             
@@ -209,8 +208,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         }
         else if ([step isKindOfClass:[ORKQuestionStep class]]) {
             HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
-            if (objType)
-            {
+            if (objType) {
                 [healthTypes addObject:objType];
             }
         }
@@ -219,7 +217,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
     }
-    
     return [healthTypes count] ? healthTypes : nil;
 }
 
@@ -526,8 +523,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
     HKUnit *bpmUnit = [[HKUnit countUnit] unitDividedByUnit:[HKUnit minuteUnit]];
     HKQuantityType *heartRateType = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierHeartRate];
     {
-        if (walkDuration > 0)
-        {
+        if (walkDuration > 0) {
             NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
             if (! (ORKPredefinedTaskOptionExcludePedometer & options)) {
                 [recorderConfigurations addObject:[[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:ORKPedometerRecorderIdentifier]];

@@ -43,15 +43,13 @@
     
     NSTimeInterval const ORKFitnessStepMinimumDuration = 5.0;
     
-    if ( self.stepDuration < ORKFitnessStepMinimumDuration)
-    {
+    if ( self.stepDuration < ORKFitnessStepMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"rest duration can not be shorter than %@ seconds.", @(ORKFitnessStepMinimumDuration)]  userInfo:nil];
     }
     
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKFitnessStep *step = [super copyWithZone:zone];
     return step;
 }

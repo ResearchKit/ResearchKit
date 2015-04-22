@@ -281,8 +281,7 @@ static CGFloat kPadding = 2.0;
 
 static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
-    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold )
-    {
+    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [self accessibilityValue]);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }

@@ -72,8 +72,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -215,18 +214,15 @@
     return NO;
 }
 
-- (NSInteger)accessibilityElementCount
-{
+- (NSInteger)accessibilityElementCount {
     return (self.slider != nil ? 1 : 0);
 }
 
-- (id)accessibilityElementAtIndex:(NSInteger)index
-{
+- (id)accessibilityElementAtIndex:(NSInteger)index {
     return self.slider;
 }
 
-- (NSInteger)indexOfAccessibilityElement:(id)element
-{
+- (NSInteger)indexOfAccessibilityElement:(id)element {
     return (element == self.slider ? 0 : NSNotFound);
 }
 

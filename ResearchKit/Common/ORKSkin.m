@@ -60,8 +60,7 @@ cachedColorMethod(ork_darkGrayColor, 102./255., 102./255., 102./255., 1.)
 #undef cachedColorMethod
 @end
 
-static NSMutableDictionary *colors()
-{
+static NSMutableDictionary *colors() {
     
     static NSMutableDictionary *colors = nil;
     
@@ -80,14 +79,12 @@ static NSMutableDictionary *colors()
     return colors;
 }
 
-UIColor *ORKColor(NSString *colorKey)
-{
+UIColor *ORKColor(NSString *colorKey) {
     return colors()[colorKey];
 }
 
 
-void ORKColorSetColorForKey(NSString *key, UIColor *color)
-{
+void ORKColorSetColorForKey(NSString *key, UIColor *color) {
     NSMutableDictionary *d = colors();
     d[key] = color;
 }

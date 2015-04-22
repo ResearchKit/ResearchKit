@@ -37,8 +37,7 @@
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 
-@interface ORKStepViewController ()
-{
+@interface ORKStepViewController () {
     BOOL _hasBeenPresented;
     BOOL _dismissing;
     BOOL _presentingAlert;
@@ -51,8 +50,7 @@
 
 @implementation ORKStepViewController
 
-- (void)initializeInternalButtonItems
-{
+- (void)initializeInternalButtonItems {
     _internalBackButtonItem = [UIBarButtonItem obk_backBarButtonItemWithTarget:self action:@selector(goBackward)];
     _internalBackButtonItem.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     _internalContinueButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
@@ -63,16 +61,14 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     [self initializeInternalButtonItems];
     return self;
 }
 #pragma clang diagnostic pop
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     [self initializeInternalButtonItems];
     return self;
@@ -100,10 +96,8 @@
     [self setupButtons];
 }
 
-- (void)setupButtons
-{
-    if (self.hasPreviousStep == YES)
-    {
+- (void)setupButtons {
+    if (self.hasPreviousStep == YES) {
         [self ork_setBackButtonItem: _internalBackButtonItem];
     }
     else
@@ -120,14 +114,11 @@
     self.skipButtonItem = _internalSkipButtonItem;
 }
 
-- (void)setStep:(ORKStep *)step
-{
-    if (_hasBeenPresented)
-    {
+- (void)setStep:(ORKStep *)step {
+    if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot set step after presenting step view controller" userInfo:nil];
     }
-    if ( step && nil == [step identifier])
-    {
+    if ( step && nil == [step identifier]) {
         NSLog(@"%@ Step's identifier should not be nil.",  NSStringFromSelector(_cmd));
     }
     
@@ -139,8 +130,7 @@
     [self stepDidChange];
 }
 
-- (void)stepDidChange
-{
+- (void)stepDidChange {
     
 }
 
@@ -153,8 +143,7 @@
         [self.delegate stepViewControllerWillAppear:self];
     }
     
-    if (!_step)
-    {
+    if (!_step) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot present step view controller without a step" userInfo:nil];
     }
     _hasBeenPresented = YES;
@@ -189,12 +178,10 @@
     _dismissing = NO;
 }
 
-- (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction
-{
+- (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction {
 }
 
-- (void)setContinueButtonTitle:(NSString *)continueButtonTitle
-{
+- (void)setContinueButtonTitle:(NSString *)continueButtonTitle {
     self.internalContinueButtonItem.title = continueButtonTitle;
     self.internalDoneButtonItem.title = continueButtonTitle;
     
@@ -205,24 +192,20 @@
     return self.continueButtonItem.title;
 }
 
-- (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle
-{
+- (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle {
     self.learnMoreButtonItem.title = learnMoreButtonTitle;
 }
 
-- (NSString *)learnMoreButtonTitle
-{
+- (NSString *)learnMoreButtonTitle {
     return self.learnMoreButtonItem.title;
 }
 
-- (void)setSkipButtonTitle:(NSString *)skipButtonTitle
-{
+- (void)setSkipButtonTitle:(NSString *)skipButtonTitle {
     self.internalSkipButtonItem.title = skipButtonTitle;
     self.skipButtonItem = self.internalSkipButtonItem;
 }
 
-- (NSString *)skipButtonTitle
-{
+- (NSString *)skipButtonTitle {
     return self.skipButtonItem.title;
 }
 
@@ -364,8 +347,7 @@ static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString * const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_step.identifier forKey:_ORKStepIdentifierRestoreKey];
@@ -373,8 +355,7 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
     [coder encodeObject:_outputDirectory forKey:_ORKOutputDirectoryKey];
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     self.outputDirectory = [coder decodeObjectOfClass:[NSURL class] forKey:_ORKOutputDirectoryKey];
@@ -398,8 +379,7 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
 }
 
 
-+ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
-{
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     ORKStepViewController *vc = [[[self class] alloc] initWithStep:nil];
     vc.restorationIdentifier = [identifierComponents lastObject];
     vc.restorationClass = self;

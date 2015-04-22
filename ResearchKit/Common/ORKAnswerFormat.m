@@ -36,17 +36,14 @@
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 
-id ORKNullAnswerValue()
-{
+id ORKNullAnswerValue() {
     return [NSNull null];
 }
 
 
-NSString *ORKQuestionTypeString(ORKQuestionType questionType)
-{
+NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
 #define SQT_CASE(x) case ORKQuestionType ## x : return @STRINGIFY(ORKQuestionType ## x);
-    switch (questionType)
-    {
+    switch (questionType) {
             SQT_CASE(None);
             SQT_CASE(Scale);
             SQT_CASE(SingleChoice);
@@ -64,14 +61,12 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
 #undef SQT_CASE
 }
 
-@implementation ORKAnswerDefaultSource
-{
+@implementation ORKAnswerDefaultSource {
     NSMutableDictionary *_unitsTable;
 }
 @synthesize healthStore=_healthStore;
 
-+ (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore
-{
++ (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore {
     ORKAnswerDefaultSource *source = [[ORKAnswerDefaultSource alloc] initWithHealthStore:healthStore];
     return source;
 }
@@ -100,33 +95,26 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
 }
 
 
-- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError * __autoreleasing *)error
-{
+- (id)defaultValueForCharacteristicType:(HKCharacteristicType *)characteristicType error:(NSError * __autoreleasing *)error {
     id result = nil;
-    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth])
-    {
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierDateOfBirth]) {
         NSDate *dob = [_healthStore dateOfBirthWithError:error];
-        if (dob)
-        {
+        if (dob) {
             result = dob;
         }
     }
-    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBloodType])
-    {
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBloodType]) {
         HKBloodTypeObject *bloodType = [_healthStore bloodTypeWithError:error];
-        if (bloodType && bloodType.bloodType != HKBloodTypeNotSet)
-        {
+        if (bloodType && bloodType.bloodType != HKBloodTypeNotSet) {
             result = ORKHKBloodTypeString(bloodType.bloodType);
         }
         if (result) {
             result = @[result];
         }
     }
-    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBiologicalSex])
-    {
+    if ([[characteristicType identifier] isEqualToString:HKCharacteristicTypeIdentifierBiologicalSex]) {
         HKBiologicalSexObject *biologicalSex = [_healthStore biologicalSexWithError:error];
-        if (biologicalSex && biologicalSex.biologicalSex != HKBiologicalSexNotSet)
-        {
+        if (biologicalSex && biologicalSex.biologicalSex != HKBiologicalSexNotSet) {
             result = ORKHKBiologicalSexString(biologicalSex.biologicalSex);
         }
         if (result) {
@@ -136,8 +124,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     return result;
 }
 
-- (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler
-{
+- (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler {
     if (! unit) {
         handler(nil, nil);
         return;
@@ -149,8 +136,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
         HKSampleQuery *sampleQuery = [[HKSampleQuery alloc] initWithSampleType:quantityType predicate:nil limit:1 sortDescriptors:@[sortDescriptor] resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
             HKQuantitySample *sample = [results firstObject];
             id value = nil;
-            if (sample)
-            {
+            if (sample) {
                 value = @([sample.quantity doubleValueForUnit:unit]);
             }
             handler(value, error);
@@ -163,19 +149,15 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     
     HKObjectType *objectType = [answerFormat healthKitObjectType];
     BOOL handled = NO;
-    if (objectType)
-    {
-        if ([HKHealthStore isHealthDataAvailable])
-        {
-            if ([answerFormat isKindOfClass:[ORKHealthKitCharacteristicTypeAnswerFormat class]])
-            {
+    if (objectType) {
+        if ([HKHealthStore isHealthDataAvailable]) {
+            if ([answerFormat isKindOfClass:[ORKHealthKitCharacteristicTypeAnswerFormat class]]) {
                 NSError *error = nil;
                 id defaultValue = [self defaultValueForCharacteristicType:(HKCharacteristicType *)objectType error:&error];
                 handler(defaultValue, error);
                 handled = YES;
             }
-            else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]])
-            {
+            else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
                 [self updateHealthKitUnitForAnswerFormat:answerFormat force:NO];
                 HKUnit *unit = [answerFormat healthKitUserUnit];
                 [self fetchDefaultValueForQuantityType:(HKQuantityType *)objectType unit:unit handler:handler];
@@ -272,19 +254,16 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     return [ORKBooleanAnswerFormat new];
 }
 
-+ (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray *)textChoices
-{
++ (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray *)textChoices {
     return [[ORKValuePickerAnswerFormat alloc] initWithTextChoices:textChoices];
 }
 
-+ (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray *)imageChoices
-{
++ (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray *)imageChoices {
     return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:imageChoices];
 }
 
 + (ORKTextChoiceAnswerFormat *)choiceAnswerFormatWithStyle:(ORKChoiceAnswerStyle)style
-                                        textChoices:(NSArray *)textChoices
-{
+                                        textChoices:(NSArray *)textChoices {
     return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:style textChoices:textChoices];
 }
 
@@ -349,19 +328,16 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -382,38 +358,31 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType)
     return 0;
 }
 
-- (BOOL)isHealthKitAnswerFormat
-{
+- (BOOL)isHealthKitAnswerFormat {
     return NO;
 }
 
-- (HKObjectType *)healthKitObjectType
-{
+- (HKObjectType *)healthKitObjectType {
     return nil;
 }
 
-- (HKUnit *)healthKitUnit
-{
+- (HKUnit *)healthKitUnit {
     return nil;
 }
 
-- (HKUnit *)healthKitUserUnit
-{
+- (HKUnit *)healthKitUserUnit {
     return nil;
 }
 
-- (void)setHealthKitUserUnit:(HKUnit *)unit
-{
+- (void)setHealthKitUserUnit:(HKUnit *)unit {
     
 }
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeNone;
 }
 
-- (ORKAnswerFormat *)impliedAnswerFormat
-{
+- (ORKAnswerFormat *)impliedAnswerFormat {
     return self;
 }
 
@@ -458,8 +427,7 @@ static void ork_validateChoices(NSArray *choices){
     }
 }
 
-static NSArray *ork_processTextChoices(NSArray *textChoices)
-{
+static NSArray *ork_processTextChoices(NSArray *textChoices) {
     NSMutableArray *mChoices = [[NSMutableArray alloc] init];
     
     for (id obj in textChoices) {
@@ -525,24 +493,20 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, textChoices, ORKTextChoice);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, textChoices);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -550,8 +514,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return [ORKChoiceQuestionResult class];
 }
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeSingleChoice;
 }
 
@@ -607,31 +570,26 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, imageChoices, ORKImageChoice);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, imageChoices);
     
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeSingleChoice;
 }
 
@@ -680,32 +638,27 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, textChoices, ORKTextChoice);
         ORK_DECODE_ENUM(aDecoder, style);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, textChoices);
     ORK_ENCODE_ENUM(aCoder, style);
     
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeSingleChoice + _style;
 }
 
@@ -740,8 +693,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -770,11 +722,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_OBJ(aDecoder, value);
@@ -782,8 +732,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, value);
     ORK_ENCODE_OBJ(aCoder, detailText);
@@ -814,8 +763,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-+(BOOL)supportsSecureCoding
-{
++(BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -852,11 +800,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ(aDecoder, value);
         ORK_DECODE_IMAGE(aDecoder, normalStateImage);
@@ -865,8 +811,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, value);
     ORK_ENCODE_IMAGE(aCoder, normalStateImage);
@@ -881,8 +826,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 @implementation ORKBooleanAnswerFormat
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeBoolean;
 }
 
@@ -915,8 +859,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeTimeOfDay;
 }
 
@@ -952,24 +895,20 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return [super hash] & [self.defaultComponents hash];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultComponents, NSDateComponents);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, defaultComponents);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -993,11 +932,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
                   defaultDate:(NSDate *)defaultDate
                   minimumDate:(NSDate *)minimum
                   maximumDate:(NSDate *)maximum
-                     calendar:(NSCalendar *)calendar
-{
+                     calendar:(NSCalendar *)calendar {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         _style = style;
         _defaultDate = [defaultDate copy];
         _minimumDate = [minimum copy];
@@ -1025,16 +962,13 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return [super hash] & [self.defaultDate hash] ^ _style;
 }
 
-- (NSCalendar *)currentCalendar
-{
+- (NSCalendar *)currentCalendar {
     return (NSCalendar *__nonnull)(_calendar ? : [NSCalendar currentCalendar]);
 }
 
-- (NSDateFormatter *)resultDateFormatter
-{
+- (NSDateFormatter *)resultDateFormatter {
     NSDateFormatter *dfm = nil;
-    switch (self.questionType)
-    {
+    switch (self.questionType) {
         case ORKQuestionTypeDate: {
             dfm = ORKResultDateFormatter();
             break;
@@ -1056,14 +990,12 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return dfm;
 }
 
-- (NSString *)stringFromDate:(NSDate *)date
-{
+- (NSString *)stringFromDate:(NSDate *)date {
     NSDateFormatter *dfm = [self resultDateFormatter];
     return [dfm stringFromDate:date];
 }
 
-- (NSDate *)dateFromString:(NSString *)string
-{
+- (NSDate *)dateFromString:(NSString *)string {
     NSDateFormatter *dfm = [self resultDateFormatter];
     return [dfm dateFromString:string];
 }
@@ -1073,22 +1005,18 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
    
 }
 
-- (NSDate *)pickerMinimumDate
-{
+- (NSDate *)pickerMinimumDate {
     return self.minimumDate;
 }
 
-- (NSDate *)pickerMaximumDate
-{
+- (NSDate *)pickerMaximumDate {
    return self.maximumDate;
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_ENUM(aDecoder, style);
         ORK_DECODE_OBJ_CLASS(aDecoder, minimumDate, NSDate);
         ORK_DECODE_OBJ_CLASS(aDecoder, maximumDate, NSDate);
@@ -1098,8 +1026,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, style);
     ORK_ENCODE_OBJ(aCoder, minimumDate);
@@ -1109,13 +1036,11 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeDateAndTime + _style;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -1146,11 +1071,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_ENUM(aDecoder, style);
         ORK_DECODE_OBJ_CLASS(aDecoder, unit, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, minimum, NSNumber);
@@ -1159,8 +1082,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, style);
     ORK_ENCODE_OBJ(aCoder, unit);
@@ -1169,8 +1091,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -1201,8 +1122,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 
 
-- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style unit:(NSString *)unit
-{
+- (instancetype)initWithStyle:(ORKNumericAnswerStyle)style unit:(NSString *)unit {
     return [self initWithStyle:style unit:unit minimum:nil maximum:nil];
 }
 
@@ -1215,8 +1135,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeDecimal + _style;
     
 }
@@ -1422,11 +1341,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_INTEGER(aDecoder, maximum);
         ORK_DECODE_INTEGER(aDecoder, minimum);
         ORK_DECODE_INTEGER(aDecoder, step);
@@ -1436,8 +1353,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximum);
     ORK_ENCODE_INTEGER(aCoder, minimum);
@@ -1446,8 +1362,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     ORK_ENCODE_BOOL(aCoder, vertical);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -1464,8 +1379,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeScale;
 }
 
@@ -1576,11 +1490,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, maximum);
         ORK_DECODE_DOUBLE(aDecoder, minimum);
         ORK_DECODE_DOUBLE(aDecoder, defaultValue);
@@ -1590,8 +1502,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, maximum);
     ORK_ENCODE_DOUBLE(aCoder, minimum);
@@ -1600,8 +1511,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     ORK_ENCODE_BOOL(aCoder, vertical);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -1618,8 +1528,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeScale;
 }
 
@@ -1653,8 +1562,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeText;
 }
 
@@ -1677,11 +1585,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 
 #pragma mark NSSecureCoding
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
@@ -1692,8 +1598,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
@@ -1702,8 +1607,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     ORK_ENCODE_BOOL(aCoder, multipleLines);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -1747,8 +1651,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
 }
 
 
-- (ORKQuestionType) questionType
-{
+- (ORKQuestionType) questionType {
     return ORKQuestionTypeTimeInterval;
 }
 
@@ -1776,26 +1679,22 @@ static NSArray *ork_processTextChoices(NSArray *textChoices)
     
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, defaultInterval);
         ORK_DECODE_DOUBLE(aDecoder, step);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, defaultInterval);
     ORK_ENCODE_DOUBLE(aCoder, step);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

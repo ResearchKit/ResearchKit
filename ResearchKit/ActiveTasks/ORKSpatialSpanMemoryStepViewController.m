@@ -101,8 +101,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 @end
 
-@implementation ORKSpatialSpanMemoryStepViewController
-{
+@implementation ORKSpatialSpanMemoryStepViewController {
     ORKSpatialSpanMemoryContentView *_contentView;
     ORKState *_state;
     NSDictionary *_states;
@@ -224,8 +223,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             
             score += record.score;
             
-            if (record.gameStatus != ORKSpatialSpanMemoryGameStatusSuccess)
-            {
+            if (record.gameStatus != ORKSpatialSpanMemoryGameStatusSuccess) {
                 numberOfFailures++;
             }
         }
@@ -268,8 +266,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _lastRoundScore = _score;
 }
 
-- (void)updateGameRecordTargetRects
-{
+- (void)updateGameRecordTargetRects {
     ORKSpatialSpanMemoryGameRecord *record = [self currentGameRecord];
     NSArray *tileViews = _contentView.gameView.tileViews;
     NSMutableArray *targetRects = [NSMutableArray new];
@@ -281,21 +278,18 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     NSAssert(tileViews.count == 0 || tileViews.count == record.gameSize, nil);
 }
 
-- (void)updateGameRecordOnStartingGamePlay
-{
+- (void)updateGameRecordOnStartingGamePlay {
     _gameStartTime = CACurrentMediaTime();
 }
 
-- (void)handleUserTap:(UITapGestureRecognizer *)tapRecognizer
-{
+- (void)handleUserTap:(UITapGestureRecognizer *)tapRecognizer {
     if (_state.state != ORKSpatialSpanStepStateGameplay) {
         return;
     }
     [self updateGameRecordOnTouch:-1 location:[tapRecognizer locationInView: self.view]];
 }
 
-- (void)updateGameRecordOnTouch:(NSInteger)targetIndex location:(CGPoint)location
-{
+- (void)updateGameRecordOnTouch:(NSInteger)targetIndex location:(CGPoint)location {
     ORKSpatialSpanMemoryGameTouchSample *sample = [ORKSpatialSpanMemoryGameTouchSample new];
     
     sample.timestamp = CACurrentMediaTime() - _gameStartTime;
@@ -324,28 +318,23 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     
 }
 
-- (void)updateGameRecordOnSuccess
-{
+- (void)updateGameRecordOnSuccess {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusSuccess;
 }
 
-- (void)updateGameRecordOnFailure
-{
+- (void)updateGameRecordOnFailure {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusFailure;
 }
 
-- (void)updateGameRecordOnTimeout
-{
+- (void)updateGameRecordOnTimeout {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusTimeout;
 }
 
-- (void)updateGameRecordScore
-{
+- (void)updateGameRecordScore {
     [self currentGameRecord].score = _score - _lastRoundScore;
 }
 
-- (void)updateGameRecordOnPause
-{
+- (void)updateGameRecordOnPause {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusUnknown;
 }
 

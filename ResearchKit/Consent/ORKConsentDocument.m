@@ -41,8 +41,7 @@
 #import "ORKDefines_Private.h"
 
 
-@implementation ORKConsentDocument
-{
+@implementation ORKConsentDocument {
     NSMutableArray *_signatures;
 }
 
@@ -51,8 +50,7 @@
 }
 
 - (void)addSignature:(ORKConsentSignature *)signature {
-    if (! _signatures)
-    {
+    if (! _signatures) {
         _signatures = [NSMutableArray array];
     }
     [_signatures addObject:signature];
@@ -175,15 +173,13 @@
             NSString *hr = @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />";
             
             NSString *signatureElementWrapper = @"<p><br/><div class='sigbox'><div class='inbox'>%@</div></div>%@%@</p>";
-            for (ORKConsentSignature *signature in self.signatures)
-            {
+            for (ORKConsentSignature *signature in self.signatures) {
                 BOOL addedSig = NO;
                 
                 NSMutableArray *signatureElements = [NSMutableArray array];
                 
                 // Signature
-                if (signature.requiresName || signature.familyName || signature.givenName)
-                {
+                if (signature.requiresName || signature.familyName || signature.givenName) {
                     addedSig = YES;
                     NSString *nameStr = @"&nbsp;";
                     if (signature.familyName || signature.givenName) {
@@ -201,8 +197,7 @@
                     [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, nameStr, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
                 }
                 
-                if (signature.requiresSignatureImage || signature.signatureImage)
-                {
+                if (signature.requiresSignatureImage || signature.signatureImage) {
                     addedSig = YES;
                     NSString *imageTag = nil;
                     
@@ -217,8 +212,7 @@
                 }
                 
                 
-                if (addedSig)
-                {
+                if (addedSig) {
                     [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate?:@"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
                 }
                 
@@ -244,16 +238,13 @@
 
 
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, signaturePageTitle, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, signaturePageContent, NSString);
@@ -265,8 +256,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, title);
     ORK_ENCODE_OBJ(aCoder, signaturePageTitle);
     ORK_ENCODE_OBJ(aCoder, signaturePageContent);
@@ -294,8 +284,7 @@
 }
 
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentDocument *doc = [[[self class] allocWithZone:zone] init];
     doc.title = _title;
     doc.signaturePageTitle = _signaturePageTitle;

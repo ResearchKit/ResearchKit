@@ -121,8 +121,7 @@ static UIBezierPath *ORKErrorBezierPath() {
 
 @implementation ORKPathView
 
-- (instancetype)initWithBezierPath:(UIBezierPath *)path canvasSize:(CGSize)canvasSize canvasMargins:(UIEdgeInsets)margins color:(UIColor *)color
-{
+- (instancetype)initWithBezierPath:(UIBezierPath *)path canvasSize:(CGSize)canvasSize canvasMargins:(UIEdgeInsets)margins color:(UIColor *)color {
     CGRect r = (CGRect){CGPointZero, canvasSize};
     CGRect outsetRect = UIEdgeInsetsInsetRect(r, (UIEdgeInsets){.top=-margins.top,.left=-margins.left,.right=-margins.right,.bottom=-margins.bottom});
     self = [super initWithFrame:outsetRect];

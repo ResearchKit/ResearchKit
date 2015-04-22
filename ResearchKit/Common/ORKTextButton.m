@@ -37,8 +37,7 @@
     return [super buttonWithType:buttonType];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self init_ORKTextButton];
@@ -46,8 +45,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self init_ORKTextButton];
@@ -104,8 +102,7 @@
     
     // This is to avoid calling self.titleLabel when recalculation of content size is not needed.
     // Calling self.titleLabel at here can cause weird layout error.
-    if (label && label.preferredMaxLayoutWidth > 0 && self.currentTitle.length > 0)
-    {
+    if (label && label.preferredMaxLayoutWidth > 0 && self.currentTitle.length > 0) {
         CGSize labelSize = [self.titleLabel sizeThatFits:CGSizeMake(self.titleLabel.preferredMaxLayoutWidth, CGFLOAT_MAX)];
         
         CGFloat verticalPadding = MAX(self.contentEdgeInsets.top, self.titleEdgeInsets.top) +  MAX(self.contentEdgeInsets.bottom, self.titleEdgeInsets.bottom);

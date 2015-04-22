@@ -91,8 +91,7 @@
             
             XCTAssert(result1!=result2, @"");
             
-            if ([result1 isKindOfClass:[ORKQuestionResult class]])
-            {
+            if ([result1 isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *q1 = (ORKQuestionResult *)result1;
                 ORKQuestionResult *q2 = (ORKQuestionResult *)result2;
                 
@@ -102,16 +101,14 @@
                 }
                 XCTAssert([q1.identifier isEqualToString:q2.identifier], @"%@ and %@", q1.identifier, q2.identifier);
             }
-            else if ([result1 isKindOfClass:[ORKFileResult class]])
-            {
+            else if ([result1 isKindOfClass:[ORKFileResult class]]) {
                 ORKFileResult *f1 = (ORKFileResult *)result1;
                 ORKFileResult *f2 = (ORKFileResult *)result2;
                 
                 XCTAssert( [f1.fileURL isEqual:f2.fileURL], @"");
                 XCTAssert( [f1.contentType isEqualToString:f2.contentType], @"");
             }
-            else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]])
-            {
+            else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]]) {
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;
                 ORKConsentSignatureResult *c2 = (ORKConsentSignatureResult *)result2;
                 
@@ -123,8 +120,7 @@
     }];
 }
 
-- (void)testResultSerialization
-{
+- (void)testResultSerialization {
     
     ORKTaskResult *taskResult1 = [self createTaskResultTree];
     
@@ -139,8 +135,7 @@
     XCTAssertEqualObjects(taskResult1, taskResult2);
 }
 
-- (void)testResultCopy
-{
+- (void)testResultCopy {
     ORKTaskResult *taskResult1 = [self createTaskResultTree];
     
     ORKTaskResult *taskResult2 = [taskResult1 copy];

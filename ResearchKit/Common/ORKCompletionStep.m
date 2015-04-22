@@ -33,13 +33,11 @@
 
 @implementation ORKCompletionStep
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKCompletionStepViewController class];
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
