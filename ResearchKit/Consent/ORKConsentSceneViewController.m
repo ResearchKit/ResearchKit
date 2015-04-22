@@ -175,14 +175,16 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
 }
 
+- (UIScrollView *)scrollView {
+    return (UIScrollView *)self.view;
+}
+
 - (BOOL)scrollEnabled {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    return consentSceneView.scrollEnabled;
+    return self.scrollView.scrollEnabled;
 }
 
 - (void)setScrollEnabled:(BOOL)enabled {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    consentSceneView.scrollEnabled = enabled;
+    self.scrollView.scrollEnabled = enabled;
 }
 
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {

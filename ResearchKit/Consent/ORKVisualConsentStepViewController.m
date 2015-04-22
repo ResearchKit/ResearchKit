@@ -36,6 +36,7 @@
 #import "ORKHelpers.h"
 #import <MessageUI/MessageUI.h>
 #import "ORKSkin.h"
+#import "ORKTaskViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKConsentSceneViewController.h"
 #import "ORKConsentSceneViewController_Internal.h"
@@ -299,7 +300,9 @@
     
     [self updateBackButton];
 
-    [[self viewControllerForIndex:currentIndex] setScrollEnabled:YES];
+    ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
+    [self.taskViewController setRegisteredScrollView:currentConsentSceneViewController.scrollView];
+    [currentConsentSceneViewController setScrollEnabled:YES];
     
     ORKConsentSection *currentSection = (ORKConsentSection *)_visualSections[currentIndex];
     if (currentSection.type == ORKConsentSectionTypeOverview) {
