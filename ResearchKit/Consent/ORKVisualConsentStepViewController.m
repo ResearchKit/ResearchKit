@@ -34,6 +34,7 @@
 #import "ORKResult.h"
 #import "ORKSignatureView.h"
 #import "ORKHelpers.h"
+#import "ORKObserver.h"
 #import <MessageUI/MessageUI.h>
 #import "ORKSkin.h"
 #import "ORKTaskViewController_Internal.h"
@@ -49,7 +50,8 @@
 #import "ORKContinueButton.h"
 #import "ORKAccessibility.h"
 
-@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate> {
+
+@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverProtocol> {
     BOOL _hasAppeared;
     ORKStepViewControllerNavigationDirection _navDirection;
     
@@ -57,6 +59,8 @@
     ORKVisualConsentTransitionAnimator *_animator;
     
     NSArray *_visualSections;
+    
+    ORKScrollViewObserver *_scrollViewObserver;
 }
 
 @property (nonatomic, strong) UIPageViewController *pageViewController;
@@ -75,11 +79,13 @@
 
 @end
 
+
 @interface ORKAnimationPlaceholderView : UIView
 
 @property (nonatomic, strong) ORKEAGLMoviePlayerView *playerView;
 
 @end
+
 
 @implementation ORKAnimationPlaceholderView
 
@@ -109,9 +115,8 @@
 
 @end
 
+
 @implementation ORKVisualConsentStepViewController
-
-
 
 - (void)stepDidChange {
     [super stepDidChange];
@@ -135,7 +140,6 @@
     _viewControllers = nil;
     
     [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
-    
 }
 
 
@@ -171,7 +175,8 @@
     [self addChildViewController:_pageViewController];
     [_pageViewController didMoveToParentViewController:self];
     
-    self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:(CGRect){{0,0},{viewBounds.size.width,ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, ORKScreenTypeiPhone4)}}];
+    self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
+                          (CGRect){{0,0},{viewBounds.size.width,ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, ORKScreenTypeiPhone4)}}];
     _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
     _animationView.backgroundColor = [UIColor clearColor];
     _animationView.userInteractionEnabled = NO;
@@ -245,17 +250,17 @@
 
 - (IBAction)next {
     ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
-    [currentConsentSceneViewController setScrollEnabled:NO];
     [currentConsentSceneViewController scrollToTopAnimated:YES completion:^(BOOL finished) {
         if (finished) {
             [self showNextViewController];
-        } else {
-            [currentConsentSceneViewController setScrollEnabled:YES];
         }
     }];
 }
 
 - (void)showNextViewController {
+    CGRect animationViewFrame = _animationView.frame;
+    animationViewFrame.origin = CGPointZero;
+    _animationView.frame = animationViewFrame;
     ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
         // 'finished' is always YES when not animated
@@ -291,10 +296,6 @@
     
     [self updateBackButton];
 
-    ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
-    [self.taskViewController setRegisteredScrollView:currentConsentSceneViewController.scrollView];
-    [currentConsentSceneViewController setScrollEnabled:YES];
-    
     ORKConsentSection *currentSection = (ORKConsentSection *)_visualSections[currentIndex];
     if (currentSection.type == ORKConsentSectionTypeOverview) {
         _animationView.isAccessibilityElement = NO;
@@ -394,12 +395,23 @@
     }
 }
 
+- (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
+    CGRect animationViewFrame = _animationView.frame;
+    CGPoint scrollViewBoundsOrigin = scrollView.bounds.origin;
+    animationViewFrame.origin = (CGPoint){-scrollViewBoundsOrigin.x, -scrollViewBoundsOrigin.y};
+    _animationView.frame = animationViewFrame;
+}
+
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
 
     if (! viewController) {
         return;
     }
     
+    // Stops old observer and starts new one
+    _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView responder:self];
+    [self.taskViewController setRegisteredScrollView:viewController.scrollView];
+
     ORKConsentSceneViewController *fromController = nil;
     NSUInteger currentIndex = [self currentIndex];
     if (currentIndex == NSNotFound) {
@@ -584,6 +596,7 @@
 }
 
 #pragma mark - UIPageViewControllerDataSource
+
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSUInteger index = [self indexOfViewController:viewController];
     if (index == NSNotFound) {

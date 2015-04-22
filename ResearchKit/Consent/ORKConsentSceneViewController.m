@@ -59,8 +59,6 @@
     self.verticalCenteringEnabled = isOverview;
     self.continueHugsContent =  isOverview;
     
-    self.scrollEnabled = NO;
-    
     self.headerView.instructionLabel.hidden = ! [[consentSection summary] length];
     self.headerView.captionLabel.text = consentSection.title;
     
@@ -177,13 +175,13 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     return (UIScrollView *)self.view;
 }
 
-- (BOOL)scrollEnabled {
-    return self.scrollView.scrollEnabled;
-}
-
-- (void)setScrollEnabled:(BOOL)enabled {
-    self.scrollView.scrollEnabled = enabled;
-}
+//- (BOOL)scrollEnabled {
+//    return self.scrollView.scrollEnabled;
+//}
+//
+//- (void)setScrollEnabled:(BOOL)enabled {
+//    self.scrollView.scrollEnabled = enabled;
+//}
 
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
