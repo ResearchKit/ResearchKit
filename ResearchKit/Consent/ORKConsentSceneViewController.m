@@ -175,20 +175,12 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     return (UIScrollView *)self.view;
 }
 
-//- (BOOL)scrollEnabled {
-//    return self.scrollView.scrollEnabled;
-//}
-//
-//- (void)setScrollEnabled:(BOOL)enabled {
-//    self.scrollView.scrollEnabled = enabled;
-//}
-
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
     CGRect targetBounds = consentSceneView.bounds;
     targetBounds.origin.y = 0;
     if (animated) {
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:ORKScrollToTopAnimationDuration animations:^{
             consentSceneView.bounds = targetBounds;
         } completion:completion];
     } else {
@@ -196,7 +188,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
         if (completion) {
             completion(YES);
         }
-            
     }
 }
 

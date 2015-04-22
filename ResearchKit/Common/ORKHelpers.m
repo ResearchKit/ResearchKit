@@ -443,3 +443,5 @@ id ORKDynamicCast_(id x, Class objClass)
 {
     return [x isKindOfClass:objClass] ? x : nil;
 }
+
+const CGFloat ORKScrollToTopAnimationDuration = 0.2;

@@ -84,6 +84,8 @@
 
 @property (nonatomic, strong) ORKEAGLMoviePlayerView *playerView;
 
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
+
 @end
 
 
@@ -111,6 +113,22 @@
     [super layoutSubviews];
     
     _playerView.frame = self.bounds;
+}
+
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
+    CGRect targetFrame = self.frame;
+    targetFrame.origin = CGPointZero;
+    if (animated) {
+        [UIView animateWithDuration:ORKScrollToTopAnimationDuration
+                         animations:^{
+            self.frame = targetFrame;
+        }  completion:completion];
+    } else {
+        self.frame = targetFrame;
+        if (completion) {
+            completion(YES);
+        }
+    }
 }
 
 @end
@@ -250,6 +268,7 @@
 
 - (IBAction)next {
     ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
+    [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:YES completion:nil];
     [currentConsentSceneViewController scrollToTopAnimated:YES completion:^(BOOL finished) {
         if (finished) {
             [self showNextViewController];
@@ -262,6 +281,7 @@
     animationViewFrame.origin = CGPointZero;
     _animationView.frame = animationViewFrame;
     ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
+    [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:NO completion:nil];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
         // 'finished' is always YES when not animated
         [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
@@ -408,7 +428,7 @@
         return;
     }
     
-    // Stops old observer and starts new one
+    // Stop old observer and start new one
     _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView responder:self];
     [self.taskViewController setRegisteredScrollView:viewController.scrollView];
 

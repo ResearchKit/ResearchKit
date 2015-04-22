@@ -94,7 +94,7 @@
         
         // Setup CADisplayLink which will callback displayPixelBuffer: at every vsync.
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkCallback:)];
-        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
         [_displayLink setPaused:YES];
         
         // Setup AVPlayerItemVideoOutput with the required pixelbuffer attributes.
