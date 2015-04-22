@@ -47,8 +47,7 @@
 }
 
 
-- (void)stepDidChange
-{
+- (void)stepDidChange {
     [super stepDidChange];
     
     [self.stepView removeFromSuperview];
@@ -78,8 +77,7 @@
     [self.taskViewController setRegisteredScrollView:_stepView];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self stepDidChange];
@@ -93,22 +91,19 @@
     [super setContinueButtonItem:continueButtonItem];
     self.stepView.continueSkipContainer.continueButtonItem = continueButtonItem;
 }
-- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem
-{
+- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     self.stepView.headerView.learnMoreButtonItem = learnMoreButtonItem;
 }
 
 
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
 }

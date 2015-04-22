@@ -41,17 +41,14 @@
 #import "ORKStepViewController_Internal.h"
 
 
-@implementation ORKActiveStepTimerView
-{
+@implementation ORKActiveStepTimerView {
     BOOL _started;
     BOOL _registeredForNotifications;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         
         // Count Down
         {
@@ -108,8 +105,7 @@
 }
 
 
-- (void)setStep:(ORKActiveStep *)step
-{
+- (void)setStep:(ORKActiveStep *)step {
     _step = step;
     _countDownLabel.hidden = !(_step.hasCountDown);
     BOOL hasTimerButton = (_step.hasCountDown && _step.shouldStartTimerAutomatically == NO);
@@ -121,8 +117,7 @@
     [self setNeedsUpdateConstraints];
 }
 
-- (void)startTimerButtonTapped:(id)sender
-{
+- (void)startTimerButtonTapped:(id)sender {
     [self.activeStepViewController start];
     UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _countDownLabel);
 }
@@ -147,8 +142,7 @@
 
 - (void)resumeStep:(ORKActiveStepViewController *)viewController {
     self.step = (ORKActiveStep *)viewController.step;
-    if ([viewController timerActive])
-    {
+    if ([viewController timerActive]) {
         _startTimerButton.alpha = 0;
         [self updateDisplay:viewController];
     }
@@ -157,31 +151,26 @@
 - (void)finishStep:(ORKActiveStepViewController *)viewController {
 }
 
-- (void)setNeedsUpdateConstraints
-{
+- (void)setNeedsUpdateConstraints {
     [NSLayoutConstraint deactivateConstraints:[self constraints]];
     [super setNeedsUpdateConstraints];
     
 }
 
-- (void)updateConstraints
-{
+- (void)updateConstraints {
     NSDictionary *dictionary = NSDictionaryOfVariableBindings(_countDownLabel, _startTimerButton);
     NSDictionary *metrics = @{@"CS" : @(2)};
     ORKEnableAutoLayoutForViews([dictionary allValues]);
     
-    for (UIView *v in [dictionary allValues])
-    {
+    for (UIView *v in [dictionary allValues]) {
         [self addConstraint:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationLessThanOrEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     
-    if (! _countDownLabel.hidden)
-    {
+    if (! _countDownLabel.hidden) {
         NSMutableString *verticalLayout = [NSMutableString new];
         [verticalLayout appendString:@"V:|[_countDownLabel]"];
-        if (! _startTimerButton.hidden)
-        {
+        if (! _startTimerButton.hidden) {
             [verticalLayout appendString:@"-CS-[_startTimerButton]"];
         }
         [verticalLayout appendString:@"|"];

@@ -32,8 +32,7 @@
 #import "ORKQuestionStep_Internal.h"
 #import "ORKPicker.h"
 
-@interface ORKSurveyAnswerCellForPicker () <ORKPickerDelegate, UIPickerViewDelegate>
-{
+@interface ORKSurveyAnswerCellForPicker () <ORKPickerDelegate, UIPickerViewDelegate> {
     UIPickerView *_tempPicker;
     BOOL _valueChangedDueUserAction;
 }
@@ -47,8 +46,7 @@
     [super prepareView];
     
     // Add a temporary picker view to show the lines the date picker will have
-    if (! _tempPicker && ! self.picker)
-    {
+    if (! _tempPicker && ! self.picker) {
         _tempPicker = [UIPickerView new];
         _tempPicker.delegate = self;
         [self addSubview:_tempPicker];
@@ -59,8 +57,7 @@
 
 - (void)loadPicker {
     
-    if (_picker == nil)
-    {
+    if (_picker == nil) {
         _picker = [ORKPicker pickerWithAnswerFormat:[self.step impliedAnswerFormat] answer:self.answer delegate:self];
         
         [self.picker pickerWillAppear];
@@ -75,21 +72,18 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.picker)
-    {
+    if (self.picker) {
         CGSize sz = [_picker.pickerView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
         _picker.pickerView.frame = (CGRect){{0,0},sz};
     }
     
-    if (_tempPicker)
-    {
+    if (_tempPicker) {
         CGSize sz = [_tempPicker sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
         _tempPicker.frame = (CGRect){{0,0},sz};
     }
 }
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     [_picker setAnswer:self.answer];
 }
 
@@ -119,8 +113,7 @@
 
 #pragma mark UIPickerViewDelegate
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-{
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     assert(pickerView==_tempPicker);
     return 32;
 }

@@ -40,8 +40,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 
 
-@implementation ORKInstructionStepView
-{
+@implementation ORKInstructionStepView {
     ORKTintedImageView *_instructionImageView;
     BOOL _isCompletionStep;
     NSLayoutConstraint *_instructionImageHeightConstraint;
@@ -58,8 +57,7 @@
     return self;
 }
 
-- (void)setInstructionStep:(ORKInstructionStep *)instructionStep
-{
+- (void)setInstructionStep:(ORKInstructionStep *)instructionStep {
     _instructionStep = instructionStep;
     UIImage *image = _instructionStep.image;
     BOOL hasImage = (image != nil);

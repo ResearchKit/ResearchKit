@@ -33,8 +33,7 @@
 
 static const CGFloat _ContinueButtonTouchMargin = 10;
 
-@implementation ORKContinueButton
-{
+@implementation ORKContinueButton {
     NSLayoutConstraint *_widthConstraint;
     NSLayoutConstraint *_heightConstraint;
 }

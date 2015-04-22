@@ -53,8 +53,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     ORKConsentReviewPhaseSignature
 };
 
-@interface ORKConsentReviewStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate, ORKConsentReviewControllerDelegate, ORKConsentSignatureControllerDelegate>
-{
+@interface ORKConsentReviewStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate, ORKConsentReviewControllerDelegate, ORKConsentSignatureControllerDelegate> {
     ORKConsentSignature *_currentSignature;
     UIPageViewController *_pageViewController;
 
@@ -73,11 +72,9 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 
 @implementation ORKConsentReviewStepViewController
 
-- (instancetype)initWithConsentReviewStep:(ORKConsentReviewStep *)step result:(ORKConsentSignatureResult *)result
-{
+- (instancetype)initWithConsentReviewStep:(ORKConsentReviewStep *)step result:(ORKConsentSignatureResult *)result {
     self = [super initWithStep:step];
-    if (self)
-    {
+    if (self) {
         _signatureFirst = [result.signature givenName];
         _signatureLast = [result.signature familyName];
         _signatureImage = [result.signature signatureImage];
@@ -91,26 +88,21 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 }
 
 
-- (void)stepDidChange
-{
-    if (! [self isViewLoaded])
-    {
+- (void)stepDidChange {
+    if (! [self isViewLoaded]) {
         return;
     }
     
     _currentPageIndex = NSNotFound;
     ORKConsentReviewStep *step = [self consentReviewStep];
     NSMutableArray *indices = [NSMutableArray array];
-    if (step.consentDocument)
-    {
+    if (step.consentDocument) {
         [indices addObject:@(ORKConsentReviewPhaseReviewDocument)];
     }
-    if (step.signature.requiresName)
-    {
+    if (step.signature.requiresName) {
         [indices addObject:@(ORKConsentReviewPhaseName)];
     }
-    if (step.signature.requiresSignatureImage)
-    {
+    if (step.signature.requiresSignatureImage) {
         [indices addObject:@(ORKConsentReviewPhaseSignature)];
     }
     
@@ -120,8 +112,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     [self goToPage:0 animated:NO];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // Prepare pageViewController
@@ -162,10 +153,8 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     }
 }
 
-- (void)updateBackButton
-{
-    if (_currentPageIndex == NSNotFound)
-    {
+- (void)updateBackButton {
+    if (_currentPageIndex == NSNotFound) {
         return;
     }
     
@@ -318,8 +307,7 @@ static NSString * const _FamilyNameIdentifier = @"family";
             _currentSignature.signatureImage = _signatureImage;
         }
         
-        if (_currentSignature.signatureDateFormatString.length > 0)
-        {
+        if (_currentSignature.signatureDateFormatString.length > 0) {
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             [df setDateFormat:_currentSignature.signatureDateFormatString];
             _currentSignature.signatureDate = [df stringFromDate:[NSDate date]];
@@ -495,8 +483,7 @@ static NSString * const _ORKDocumentReviewedRestoreKey = @"documentReviewed";
 static NSString * const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
 
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_currentSignature forKey:_ORKCurrentSignatureRestoreKey];
@@ -510,8 +497,7 @@ static NSString * const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
     
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     _currentSignature = [coder decodeObjectOfClass:[ORKConsentSignature class]

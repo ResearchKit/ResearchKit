@@ -35,8 +35,7 @@
 
 @implementation ORKCaretOptionalTextField
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     _hitClearButton = NO;
     if ([self allowsSelection]) {
         return [super hitTest:point withEvent:event];
@@ -55,8 +54,7 @@
     }
 }
 
-- (CGRect)caretRectForPosition:(UITextPosition *)position
-{
+- (CGRect)caretRectForPosition:(UITextPosition *)position {
     if (_allowsSelection) {
         return [super caretRectForPosition:position];
     } else {
@@ -82,8 +80,7 @@
     UILabel *_suffixLabel;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
@@ -94,8 +91,7 @@
     return self;
 }
 
-- (id)ork_createTextLabelWithTextColor:(UIColor *)textColor
-{
+- (id)ork_createTextLabelWithTextColor:(UIColor *)textColor {
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     textLabel.font = [UIFont systemFontOfSize:17];
     [textLabel setOpaque:NO];
@@ -107,8 +103,7 @@
     return textLabel;
 }
 
-- (void)ork_setSuffix:(NSString *)suffix withColor:(UIColor *)color
-{
+- (void)ork_setSuffix:(NSString *)suffix withColor:(UIColor *)color {
     if (_suffixLabel) {
         [_suffixLabel removeFromSuperview];
         _suffixLabel = nil;
@@ -162,14 +157,12 @@
     [self updateManagedUnitAndPlaceholder];
 }
 
-- (void)setPlaceholder:(NSString *)placeholder
-{
+- (void)setPlaceholder:(NSString *)placeholder {
     _managedPlaceholder = placeholder;
     [self updateManagedUnitAndPlaceholder];
 }
 
-- (void)ork_setPlaceholder:(NSString *)placeholder
-{
+- (void)ork_setPlaceholder:(NSString *)placeholder {
     [super setPlaceholder:placeholder];
 }
 
@@ -194,28 +187,24 @@
 
 - (void)updateManagedUnitAndPlaceholder {
 
-    if (_manageUnitAndPlaceholder)
-    {
+    if (_manageUnitAndPlaceholder) {
         BOOL editing = [self isEditing];
         
-        if (editing)
-        {
+        if (editing) {
             [self ork_setPlaceholder: nil];
             [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
         }
         else
         {
             
-            if (_managedPlaceholder.length > 0)
-            {
+            if (_managedPlaceholder.length > 0) {
                 [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
                 NSString *unit = (self.text.length == 0)? _unitWithPlaceholder : _unitWithNumber;
                 [self ork_updateSuffix:unit withColor:_unitRegularColor];
             }
             else
             {
-                if (self.text.length > 0)
-                {
+                if (self.text.length > 0) {
                     [self ork_setPlaceholder:nil];
                     [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
                 }
@@ -312,8 +301,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     return r;
 }
 
-- (CGRect)ork_suffixFrame
-{
+- (CGRect)ork_suffixFrame {
     // Get the text currently 'in' the edit field
     NSString *textToMeasure = [self isPlaceholderVisible] ? [self placeholder] : self.text;
     CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
@@ -375,11 +363,9 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 
 @implementation ORKTextFieldView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         _textField = [[ORKUnitTextField alloc] init];
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self addSubview:_textField];

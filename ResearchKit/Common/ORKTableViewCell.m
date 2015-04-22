@@ -41,8 +41,7 @@
 
 @implementation ORKTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
@@ -52,8 +51,7 @@
             UITableView *tableView = [[UITableView alloc] init];
             defaultSeparatorColor = [tableView separatorColor];
         });
-        if (! defaultSeparatorColor)
-        {
+        if (! defaultSeparatorColor) {
             defaultSeparatorColor = [UIColor lightGrayColor];
         }
         

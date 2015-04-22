@@ -33,8 +33,7 @@
 
 @implementation CMDeviceMotion (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionary
-{
+- (NSDictionary *)ork_JSONDictionary {
     CMQuaternion attitude = self.attitude.quaternion;
     CMRotationRate rotationRate = self.rotationRate;
     CMAcceleration gravity = self.gravity;

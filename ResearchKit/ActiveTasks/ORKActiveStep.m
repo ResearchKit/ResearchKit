@@ -38,8 +38,7 @@
 
 @implementation ORKActiveStep
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKActiveStepViewController class];
 }
 
@@ -70,8 +69,7 @@
 }
 
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -83,8 +81,7 @@
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKActiveStep *step = [super copyWithZone:zone];
     step.stepDuration = self.stepDuration;
     step.shouldStartTimerAutomatically = self.shouldStartTimerAutomatically;
@@ -103,11 +100,9 @@
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self ) {
         ORK_DECODE_DOUBLE(aDecoder, stepDuration);
         ORK_DECODE_BOOL(aDecoder, shouldStartTimerAutomatically);
         ORK_DECODE_BOOL(aDecoder, shouldSpeakCountDown);
@@ -125,8 +120,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, stepDuration);
     ORK_ENCODE_BOOL(aCoder, shouldStartTimerAutomatically);

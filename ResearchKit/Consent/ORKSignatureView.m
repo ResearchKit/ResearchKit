@@ -70,8 +70,7 @@
 - (BOOL)shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     
     // Disable swipe gestureRecognizer
-    if ([otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]])
-    {
+    if ([otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
         // Cancel the gesture recognition in progress.
         otherGestureRecognizer.enabled = NO;
         otherGestureRecognizer.enabled = YES;
@@ -102,8 +101,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 @implementation ORKSignatureView
 
-+ (void)initialize
-{
++ (void)initialize {
     if (self == [ORKSignatureView class]) {
         if([[ORKSignatureView appearance] backgroundColor] == nil){
             [[ORKSignatureView appearance] setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
@@ -111,8 +109,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     }
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self makeSignatureGestureRecognizer];

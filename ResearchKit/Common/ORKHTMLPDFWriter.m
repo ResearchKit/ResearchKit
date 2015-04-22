@@ -85,8 +85,7 @@ static const CGFloat LetterHeight = 11.0f;
 
 @end
 
-@interface ORKHTMLPDFWriter () <UIWebViewDelegate>
-{
+@interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
     id _selfRetain;
 }
 

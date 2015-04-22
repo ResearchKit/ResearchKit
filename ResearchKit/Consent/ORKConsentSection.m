@@ -142,13 +142,11 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (void)setContent:(NSString *)content
-{
+- (void)setContent:(NSString *)content {
     _content = content;
     _escapedContent = nil;
 }
@@ -169,11 +167,9 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     return _escapedContent;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_ENUM(aDecoder, type);
         ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, summary, NSString);
@@ -187,8 +183,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_ENUM(aCoder, type);
     ORK_ENCODE_OBJ(aCoder, title);
     ORK_ENCODE_OBJ(aCoder, formalTitle);
@@ -222,8 +217,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
 }
 
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSection *sec = [[[self class] allocWithZone:zone] init];
     sec.title = _title;
     sec.formalTitle = _formalTitle;
