@@ -156,10 +156,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)defaultAnswerDidChange {
-    if (! self.haveChangedAnswer && ! self.answer)
-    {
-        if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer])
-        {
+    if (! self.haveChangedAnswer && ! self.answer) {
+        if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
             self.answer = _defaultAnswer;
             
             // Inform delegate of the change too
@@ -168,8 +166,7 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
-- (void)setDefaultAnswer:(id)defaultAnswer
-{
+- (void)setDefaultAnswer:(id)defaultAnswer {
     _defaultAnswer = [defaultAnswer copy];
     [self defaultAnswerDidChange];
 }
@@ -187,8 +184,7 @@ static const CGFloat kHMargin = 15.0;
     return YES;
 }
 
-- (void)prepareForReuse
-{
+- (void)prepareForReuse {
     self.haveChangedAnswer = NO;
 }
 
@@ -335,31 +331,25 @@ static const CGFloat kHMargin = 15.0;
     
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self textField].delegate = nil;
 }
 
-- (void)setLabel:(NSString *)label
-{
+- (void)setLabel:(NSString *)label {
     self.labelLabel.text = label;
     self.textField.accessibilityLabel = label;
 }
-- (NSString *)label
-{
+- (NSString *)label {
     return self.labelLabel.text;
 }
-- (NSString *)formattedValue
-{
+- (NSString *)formattedValue {
     return nil;
 }
-- (NSString *)shortenedFormattedValue
-{
+- (NSString *)shortenedFormattedValue {
     return [self formattedValue];
 }
 
-- (void)updateValueLabel
-{
+- (void)updateValueLabel {
     ORKUnitTextField *textField = [self textField];
     
     if (textField == nil) return;
@@ -375,8 +365,7 @@ static const CGFloat kHMargin = 15.0;
     
     textField.text = formattedValue;
 }
-- (BOOL)becomeFirstResponder
-{
+- (BOOL)becomeFirstResponder {
     return [self.textField becomeFirstResponder];
 }
 
@@ -406,6 +395,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.editingHighlight = NO;
+    [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -453,8 +443,7 @@ static const CGFloat kHMargin = 15.0;
     [super inputValueDidChange];
 }
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
@@ -482,8 +471,7 @@ static const CGFloat kHMargin = 15.0;
     [self inputValueDidChange];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
@@ -504,8 +492,7 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark - ORKFormItemNumericCell
 
-@implementation ORKFormItemNumericCell
-{
+@implementation ORKFormItemNumericCell {
     NSNumberFormatter *_numberFormatter;
 }
 
@@ -548,13 +535,11 @@ static const CGFloat kHMargin = 15.0;
     [super inputValueDidChange];
 }
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
         NSString *displayValue = answer;
-        if ([answer isKindOfClass:[NSNumber class]])
-        {
+        if ([answer isKindOfClass:[NSNumber class]]) {
             displayValue = [_numberFormatter stringFromNumber:answer];
         }
         
@@ -592,8 +577,7 @@ static const CGFloat kHMargin = 15.0;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid)
-    {
+    if (! isValid) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
@@ -700,19 +684,16 @@ static const CGFloat kHMargin = 15.0;
     [self applyAnswerFormat];
 }
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
-    if (answer == ORKNullAnswerValue())
-    {
+    if (answer == ORKNullAnswerValue()) {
         answer = nil;
     }
     _textView.text = (NSString *)answer;
     _textView.textColor = [UIColor blackColor];
     
     if (_textView.text.length == 0) {
-        if ([_textView isFirstResponder])
-        {
+        if ([_textView isFirstResponder]) {
             _textView.text = nil;
             _textView.textColor = [UIColor blackColor];
         }
@@ -747,8 +728,7 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark UITextViewDelegate
 
-- (void)textViewDidChange:(UITextView *)textView
-{
+- (void)textViewDidChange:(UITextView *)textView {
     NSInteger lineCount = [[textView.text componentsSeparatedByCharactersInSet:
                          [NSCharacterSet newlineCharacterSet]] count];
     
@@ -779,12 +759,12 @@ static const CGFloat kHMargin = 15.0;
 }
 
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
+- (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length == 0) {
         textView.text = self.formItem.placeholder;
         textView.textColor = [self placeholderColor];
     }
+    [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -876,8 +856,7 @@ static const CGFloat kHMargin = 15.0;
     [super setFormItem:formItem];
 }
 
-- (void)setDefaultAnswer:(id)defaultAnswer
-{
+- (void)setDefaultAnswer:(id)defaultAnswer {
     ORK_Log_Debug(@"%@", defaultAnswer);
     [super setDefaultAnswer:defaultAnswer];
 }
@@ -888,8 +867,7 @@ static const CGFloat kHMargin = 15.0;
     self.textField.text = self.picker.selectedLabelText;
 }
 
-- (id<ORKPicker>)picker
-{
+- (id<ORKPicker>)picker {
     if (_picker == nil) {
         ORKAnswerFormat *answerFormat = (ORKDateAnswerFormat *)[self.formItem impliedAnswerFormat];
         _picker = [ORKPicker pickerWithAnswerFormat:answerFormat answer:self.answer delegate:self];
@@ -899,8 +877,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)inputValueDidChange {
-    if (!_picker)
-    {
+    if (!_picker) {
         return;
     }
     
@@ -951,8 +928,7 @@ static const CGFloat kHMargin = 15.0;
     return ret;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;
 }
 

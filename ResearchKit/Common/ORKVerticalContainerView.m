@@ -308,8 +308,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
     [self updateToInsets:UIEdgeInsetsZero];
     
     _keyboardIsUp = NO;
@@ -407,8 +406,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self updateConstraintConstants];
 }
 
-- (void)updateConstraints
-{
+- (void)updateConstraints {
     [super updateConstraints];
     
     [NSLayoutConstraint deactivateConstraints:[_scrollContainer constraints]];
@@ -561,8 +559,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     // Force all to stay within the container's width.
     
     
-    for (UIView *v in views)
-    {
+    for (UIView *v in views) {
 #ifdef LAYOUT_DEBUG
         v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
         v.layer.borderColor = [UIColor redColor].CGColor;
@@ -659,19 +656,16 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 
-- (void)updateCustomViewContainerConstraints
-{
+- (void)updateCustomViewContainerConstraints {
     if ([_customViewContainerConstraints count]) {
         [NSLayoutConstraint deactivateConstraints:_customViewContainerConstraints];
     }
     NSMutableArray *constraints = [NSMutableArray array];
-    if (_customView)
-    {
+    if (_customView) {
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[c]|" options:(NSLayoutFormatOptions)0 metrics:nil views:@{@"c":_customView}]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[c]|" options:(NSLayoutFormatOptions)0 metrics:nil views:@{@"c":_customView}]];
     }
-    if (_imageView)
-    {
+    if (_imageView) {
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_imageView
                                                             attribute:NSLayoutAttributeWidth
@@ -703,14 +697,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
     _customViewContainerConstraints = constraints;
 }
 
-- (void)setCustomView:(UIView *)customView
-{
+- (void)setCustomView:(UIView *)customView {
     [_customView removeFromSuperview];
     _customView = customView;
     [_customViewContainer addSubview:_customView];
     
-    if (_customView && ! [[_customView constraints] count])
-    {
+    if (_customView && ! [[_customView constraints] count]) {
         [_customView setTranslatesAutoresizingMaskIntoConstraints:NO];
         CGSize requiredSize = [_customView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
         
@@ -726,8 +718,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 
-- (UIImageView *)imageView
-{
+- (UIImageView *)imageView {
     if(_imageView == nil){
         _imageView = [[UIImageView alloc] init];
         [_customViewContainer addSubview:_imageView];

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Denis Lebedev. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,25 +28,39 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
+#import <XCTest/XCTest.h>
+#import "UIView+ORKAccessibility.h"
 
-#import "UIApplication+ResearchKit.h"
-#import "UIResponder+ResearchKit.h"
+@interface ORKUIViewAccessibilityTests : XCTestCase
 
-@implementation UIApplication (ResearchKit)
+@end
 
-- (UIView *)ork_currentFirstResponderView {
-    NSMutableArray *sender = [NSMutableArray new];
-    [self sendAction:@selector(ork_updateCurrentFirstResponder:)
-                                               to:nil
-                                             from:sender
-                                         forEvent:nil];
+@implementation ORKUIViewAccessibilityTests
+
+- (void)testSuperViewOfTypeReturnsNilWhenClassIsNil {
+    UIView *view = [[UIView alloc] init];
     
-    id responder = [sender firstObject];
-    if (![responder isKindOfClass:[UIView class]]) {
-        responder = nil;
-    }
-    return responder;
+    UIView *result = [view ork_superviewOfType:nil];
+    XCTAssertNil(result);
 }
 
+- (void)testReturnsNilWhenViewHasNoSuperView {
+    UIView *view = [[UIView alloc] init];
+    
+    UIView *result = [view ork_superviewOfType:[UIView class]];
+    XCTAssertNil(result);
+}
+
+- (void)testReturnsSuperViewOfSpecifiedClass {
+    UIButton *button = [[UIButton alloc] init];
+    UIView *view = [[UIView alloc] init];
+    UIView *anotherView = [[UIView alloc] init];
+    [button addSubview:view];
+    [view addSubview:anotherView];
+    
+    UIView *result = [anotherView ork_superviewOfType:[UIButton class]];
+    XCTAssertEqualObjects(result, button);
+}
 
 @end

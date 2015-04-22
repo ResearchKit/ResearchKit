@@ -60,15 +60,13 @@
     [self updateBorderColor];
 }
 
-- (void)setHighlighted:(BOOL)highlighted
-{
+- (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     
     [self updateBorderColor];
 }
 
-- (void)setEnabled:(BOOL)enabled
-{
+- (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     
     [self updateBorderColor];
@@ -84,15 +82,13 @@
 
 - (void)updateBorderColor {
     
-    if (self.enabled && self.highlighted)
-    {
+    if (self.enabled && self.highlighted) {
         
         self.backgroundColor = _normalHighlightTintColor;
         self.layer.borderColor = [_normalHighlightTintColor CGColor];    // move
         
     }
-    else if(self.enabled && !self.highlighted)
-    {
+    else if(self.enabled && !self.highlighted) {
         if (self.fadeDelay > 0) {
             [self performSelector:@selector(fadeHighlightColor) withObject:nil afterDelay:self.fadeDelay];
         } else {

@@ -42,8 +42,7 @@ static const CGFloat kRightMargin = 44.0;
     ORKSelectionSubTitleLabel *_longLabel;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.clipsToBounds = YES;
@@ -189,8 +188,7 @@ static const CGFloat kRightMargin = 44.0;
     
     if (longText.length > 0) {
         static ORKSelectionSubTitleLabel *longLabel;
-        if (longLabel == nil)
-        {
+        if (longLabel == nil) {
             longLabel = [ORKSelectionSubTitleLabel new];
             longLabel.numberOfLines = 0;
         }
@@ -202,8 +200,7 @@ static const CGFloat kRightMargin = 44.0;
         
         CGFloat longLabelApproximateFirstBaselineOffset = [[longLabel font] ascender];
         
-        if (shortText.length > 0)
-        {
+        if (shortText.length > 0) {
             height += labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;
         }
         else

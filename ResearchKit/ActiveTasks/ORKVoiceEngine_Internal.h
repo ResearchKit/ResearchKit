@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Denis Lebedev. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,14 +29,14 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+
+#import "ORKVoiceEngine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIApplication (ORKFirstResponderAdditions)
+@interface ORKVoiceEngine ()
 
-- (nullable UIView *)ork_currentFirstResponderView;
+@property (nonatomic, strong, readonly) AVSpeechSynthesizer *speechSynthesizer;
 
 @end
 

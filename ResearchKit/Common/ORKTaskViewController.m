@@ -215,8 +215,7 @@ static void *_ORKTaskViewControllerContext = &_ORKTaskViewControllerContext;
 
 static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 
-- (instancetype)initWithTargetView:(UIScrollView *)scrollView taskViewController:(ORKTaskViewController *)taskViewController
-{
+- (instancetype)initWithTargetView:(UIScrollView *)scrollView taskViewController:(ORKTaskViewController *)taskViewController {
     self = [super init];
     if (self) {
         self.keyPaths = @[@"contentOffset"];
@@ -287,8 +286,7 @@ static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 static NSString * const _PageViewControllerRestorationKey = @"pageViewController";
 static NSString * const _ChildNavigationControllerRestorationKey = @"childNavigationController";
 
-+ (UIPageViewController *)pageVc
-{
++ (UIPageViewController *)pageVc {
     
     UIPageViewController *pageVc = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
@@ -392,7 +390,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (void)setTaskRunUUID:(NSUUID *)taskRunUUID {
-    
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change task instance UUID after presenting task controller" userInfo:nil];
     }
@@ -401,16 +398,13 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (void)setTask:(id<ORKTask>)task {
-    
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change task after presenting task controller" userInfo:nil];
     }
-    
     if (task && ! [task conformsToProtocol:@protocol(ORKTask)]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Expected a task" userInfo:nil];
     }
-    
-    if (task && nil == [task identifier]) {
+    if ( task && nil == [task identifier]) {
         NSLog(@"%@: Task's identifier should not be nil.", NSStringFromSelector(_cmd));
     }
     
@@ -521,7 +515,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (void)requestHealthAuthorizationWithCompletion:(void (^)(void))completion {
-  
     if (_hasRequestedHealthData) {
         if (completion) completion();
         return;
@@ -893,8 +886,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     BOOL isNextStepInstructionStep = [nextStep isKindOfClass:[ORKInstructionStep class]];
     
     if (_lastBeginningInstructionStepIdentifier == nil &&
-        nextStep && NO == isNextStepInstructionStep)
-    {
+        nextStep && NO == isNextStepInstructionStep) {
         _lastBeginningInstructionStepIdentifier = step.identifier;
     }
 }
@@ -956,8 +948,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         }
     }
     
-    if (step.identifier && ![[_managedStepIdentifiers lastObject] isEqualToString:step.identifier])
-    {
+    if (step.identifier && ![[_managedStepIdentifiers lastObject] isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
     if ([step isRestorable]) {
@@ -974,9 +965,8 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     if (self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:(ORKStep *__nonnull)viewController.step withResult:[self result]];
 
-        if (progress.total > 0)
-        {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil), (unsigned long)progress.current+1, (unsigned long)progress.total];
+        if (progress.total > 0) {
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,(unsigned long)progress.current+1, (unsigned long)progress.total];
         }
     }
     
@@ -1126,7 +1116,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     }
 }
 
-- (void)presentCancelOptions:(BOOL)saveable {
+- (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
     BOOL supportSaving = NO;
     if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
         supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
@@ -1135,7 +1125,8 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
+    alert.popoverPresentationController.barButtonItem = sender;
+
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
                                                   style:UIAlertActionStyleDefault
@@ -1165,7 +1156,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (IBAction)cancelAction:(id)sender {
+- (IBAction)cancelAction:(UIBarButtonItem *)sender {
     // Should we also include visualConsentStep here? Others?
     BOOL isCurrentInstructionStep = [self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]];
     
@@ -1183,7 +1174,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     if (isCurrentInstructionStep && saveable == NO) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
-        [self presentCancelOptions:saveable];
+        [self presentCancelOptions:saveable sender:sender];
     }
 }
 

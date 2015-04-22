@@ -61,8 +61,7 @@
 }
 
 // Nasty override (hack)
-- (void)updateAppearance
-{
+- (void)updateAppearance {
     self.font = [self defaultFont];
     [self invalidateIntrinsicContentSize];
 }

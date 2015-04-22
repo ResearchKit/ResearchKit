@@ -69,8 +69,7 @@
     return self;
 }
 
-- (void)initializeInternalButtonItems
-{
+- (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
     
     // Don't show next button

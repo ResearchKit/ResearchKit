@@ -33,8 +33,7 @@
 
 @implementation UITouch (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionaryInView:(UIView *)view allTouches:(NSArray *)allTouches
-{
+- (NSDictionary *)ork_JSONDictionaryInView:(UIView *)view allTouches:(NSArray *)allTouches {
     CGPoint p = [self locationInView:view];
     
     CGRect touchViewBounds = view.bounds;

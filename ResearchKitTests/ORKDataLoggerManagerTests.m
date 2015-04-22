@@ -34,8 +34,7 @@
 #import "ORKDataLogger.h"
 
 
-@interface ORKDataLoggerManagerTests : XCTestCase <ORKDataLoggerManagerDelegate>
-{
+@interface ORKDataLoggerManagerTests : XCTestCase <ORKDataLoggerManagerDelegate> {
     NSURL *_directory;
     ORKDataLoggerManager *_manager;
     
@@ -50,14 +49,12 @@
 
 
 
-- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger pendingUploadBytesReachedThreshold:(unsigned long long)pendingUploadBytes
-{
+- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger pendingUploadBytesReachedThreshold:(unsigned long long)pendingUploadBytes {
     _pendingUploadBytesReachedCounter ++;
     _lastPendingUploadBytes = pendingUploadBytes;
 }
 
-- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger totalBytesReachedThreshold:(unsigned long long)totalBytes
-{
+- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger totalBytesReachedThreshold:(unsigned long long)totalBytes {
     _totalBytesReachedCounter ++;
     _lastTotalBytes = totalBytes;
 }
@@ -91,8 +88,7 @@
     
 }
 
-- (void)addLoggers123
-{
+- (void)addLoggers123 {
     [_manager addJSONDataLoggerForLogName:@"test1"];
     [_manager addJSONDataLoggerForLogName:@"test2"];
     [_manager addJSONDataLoggerForLogName:@"test3"];
@@ -100,8 +96,7 @@
     XCTAssertEqual([[_manager logNames] count], 3);
 }
 
-- (void)testPreservesParameters
-{
+- (void)testPreservesParameters {
     _manager.totalBytesThreshold = 10;
     _manager.pendingUploadBytesThreshold = 12;
     _manager.delegate = nil;
@@ -115,16 +110,14 @@
     
 }
 
-- (void)testAddingLoggers
-{
+- (void)testAddingLoggers {
     [self addLoggers123];
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test1"].logName, @"test1");
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test2"].logName, @"test2");
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test3"].logName, @"test3");
 }
 
-- (void)testEnumerationSortOrder
-{
+- (void)testEnumerationSortOrder {
     
     [self addLoggers123];
     
@@ -175,8 +168,7 @@
 }
 
 
-- (void)testRemoveOldLogs
-{
+- (void)testRemoveOldLogs {
     [self addLoggers123];
     
     _manager.totalBytesThreshold = 10;
@@ -221,8 +213,7 @@
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
 }
 
-- (void)testDelegateThresholds
-{
+- (void)testDelegateThresholds {
     [self addLoggers123];
     
     _manager.pendingUploadBytesThreshold = 10;

@@ -44,8 +44,7 @@
 @end
 
 
-@implementation ORKActiveStepQuantityView
-{
+@implementation ORKActiveStepQuantityView {
     ORKSubheadlineLabel *_titleLabel;
     ORKQuantityLabel *_valueLabel;
     ORKTintedImageView *_imageView;
@@ -195,8 +194,7 @@
 
 @end
 
-@implementation ORKQuantityPairView
-{
+@implementation ORKQuantityPairView {
     UIView *_metricKeyline;
     NSArray *_constraints;
 }

@@ -65,8 +65,7 @@
     CAShapeLayer *_circleLayer;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         

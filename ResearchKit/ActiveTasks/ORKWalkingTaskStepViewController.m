@@ -86,8 +86,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 @end
 
-@implementation ORKWalkingProgressView
-{
+@implementation ORKWalkingProgressView {
     NSArray *_circles;
     NSInteger _index;
     NSTimer *_timer;
@@ -181,8 +180,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 
 
-@interface ORKWalkingContentView : ORKActiveStepCustomView
-{
+@interface ORKWalkingContentView : ORKActiveStepCustomView {
     ORKScreenType _screenType;
     NSLayoutConstraint *_topConstraint;
 }
@@ -241,8 +239,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 @end
 
-@interface ORKWalkingTaskStepViewController () <ORKPedometerRecorderDelegate>
-{
+@interface ORKWalkingTaskStepViewController () <ORKPedometerRecorderDelegate> {
     NSInteger _intendedSteps;
     ORKWalkingContentView *_contentView;
 }

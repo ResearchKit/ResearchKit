@@ -47,8 +47,7 @@
 
 @end
 
-@implementation ORKAudioStepViewController
-{
+@implementation ORKAudioStepViewController {
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
     
