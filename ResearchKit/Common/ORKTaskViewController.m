@@ -127,7 +127,7 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 @end
 
 
-@interface ORKTaskViewController () <ORKViewControllerObserverProtocol, ORKScrollViewObserverProtocol> {
+@interface ORKTaskViewController () <ORKViewControllerObserverDelegate, ORKScrollViewObserverDelegate> {
     NSMutableDictionary *_managedResults;
     NSMutableArray *_managedStepIdentifiers;
     ORKViewControllerObserver *_stepVCObserver;
@@ -738,7 +738,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         
         // Start new observer
         if (_registeredScrollView) {
-            _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:_registeredScrollView responder:self];
+            _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:_registeredScrollView delegate:self];
         }
     }
 }
@@ -998,7 +998,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
     stepVC.delegate = self;
     
-    _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC responder:self];
+    _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC delegate:self];
     return stepVC;
 }
 
@@ -1321,7 +1321,7 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
                 stepVC.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
             }
             
-            _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC responder:self];
+            _stepVCObserver = [[ORKViewControllerObserver alloc] initWithTargetViewController:stepVC delegate:self];
             
         } else if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
             stepVC = [self viewControllerForStep:[_task stepWithIdentifier:_restoredStepIdentifier]];

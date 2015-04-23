@@ -51,7 +51,7 @@
 #import "ORKAccessibility.h"
 
 
-@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverProtocol> {
+@interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
     BOOL _hasAppeared;
     ORKStepViewControllerNavigationDirection _navDirection;
     
@@ -429,7 +429,7 @@
     }
     
     // Stop old observer and start new one
-    _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView responder:self];
+    _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView delegate:self];
     [self.taskViewController setRegisteredScrollView:viewController.scrollView];
 
     ORKConsentSceneViewController *fromController = nil;

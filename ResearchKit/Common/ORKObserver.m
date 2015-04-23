@@ -1,10 +1,33 @@
-//
-//  ORKObserver.m
-//  ResearchKit
-//
-//  Created by Ricardo Sánchez-Sáez on 22/04/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 
 #import "ORKObserver.h"
 #import "ORKHelpers.h"
@@ -17,7 +40,7 @@
                        context:(void *)context {
     NSAssert(context == self.context, @"Unexpected KVO");
     ORKSuppressPerformSelectorWarning(
-                                      (void)[self.responder performSelector:self.action withObject:self.target];);
+                                      (void)[self.delegate performSelector:self.action withObject:self.target];);
 }
 
 - (void)startObserving {
@@ -25,7 +48,7 @@
         NSAssert(self.keyPaths, @"");
         NSAssert(self.target, @"");
         NSAssert(self.context, @"");
-        NSAssert(self.responder, @"");
+        NSAssert(self.delegate, @"");
         NSAssert(self.action, @"");
         for (NSString *keyPath in self.keyPaths) {
             [self.target addObserver:self forKeyPath:keyPath options:(NSKeyValueObservingOptions)0 context:self.context];
@@ -54,12 +77,12 @@
 
 static void *_ORKViewControllerContext = &_ORKViewControllerContext;
 
-- (instancetype)initWithTargetViewController:(UIViewController *)target responder:(id <ORKViewControllerObserverProtocol>)responder {
+- (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerObserverDelegate>)delegate {
     self = [super init];
     if (self) {
         self.keyPaths = @[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"];
         self.target = target;
-        self.responder = responder;
+        self.delegate = delegate;
         self.action = @selector(collectToolbarItemsFromViewController:);
         self.context = _ORKViewControllerContext;
         [self startObserving];
@@ -74,12 +97,12 @@ static void *_ORKViewControllerContext = &_ORKViewControllerContext;
 
 static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 
-- (instancetype)initWithTargetView:(UIScrollView *)scrollView responder:(id <ORKViewControllerObserverProtocol>)responder {
+- (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKViewControllerObserverDelegate>)delegate {
     self = [super init];
     if (self) {
         self.keyPaths = @[@"contentOffset"];
         self.target = scrollView;
-        self.responder = responder;
+        self.delegate = delegate;
         self.action = @selector(observedScrollViewDidScroll:);
         self.context = _ORKScrollViewObserverContext;
         [self startObserving];
