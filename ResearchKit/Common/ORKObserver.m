@@ -73,31 +73,11 @@
 @end
 
 
-@implementation ORKViewControllerObserver
-
-static void *_ORKViewControllerContext = &_ORKViewControllerContext;
-
-- (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerObserverDelegate>)delegate {
-    self = [super init];
-    if (self) {
-        self.keyPaths = @[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"];
-        self.target = target;
-        self.delegate = delegate;
-        self.action = @selector(collectToolbarItemsFromViewController:);
-        self.context = _ORKViewControllerContext;
-        [self startObserving];
-    }
-    return self;
-}
-
-@end
-
-
 @implementation ORKScrollViewObserver
 
 static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 
-- (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKViewControllerObserverDelegate>)delegate {
+- (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate {
     self = [super init];
     if (self) {
         self.keyPaths = @[@"contentOffset"];

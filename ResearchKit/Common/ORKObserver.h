@@ -48,18 +48,6 @@
 @end
 
 
-@protocol ORKViewControllerObserverDelegate <NSObject>
-@required
-- (void)collectToolbarItemsFromViewController:(UIViewController *)viewController;
-@end
-
-@interface ORKViewControllerObserver : ORKObserver
-
-- (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerObserverDelegate>)delegate;
-
-@end
-
-
 @protocol ORKScrollViewObserverDelegate <NSObject>
 @required
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView;
