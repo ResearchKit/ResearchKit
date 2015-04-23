@@ -34,6 +34,19 @@
 
 @implementation ORKObserver
 
+- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context {
+    self = [super init];
+    if (self) {
+        self.keyPaths = keyPaths;
+        self.target = target;
+        self.delegate = delegate;
+        self.action = action;
+        self.context = context;
+        [self startObserving];
+    }
+    return self;
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -78,16 +91,11 @@
 static void *_ORKScrollViewObserverContext = &_ORKScrollViewObserverContext;
 
 - (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate {
-    self = [super init];
-    if (self) {
-        self.keyPaths = @[@"contentOffset"];
-        self.target = scrollView;
-        self.delegate = delegate;
-        self.action = @selector(observedScrollViewDidScroll:);
-        self.context = _ORKScrollViewObserverContext;
-        [self startObserving];
-    }
-    return self;
+    return [super initWithTarget:scrollView
+                        keyPaths:@[@"contentOffset"]
+                        delegate:delegate
+                          action:@selector(observedScrollViewDidScroll:)
+                         context:_ORKScrollViewObserverContext];
 }
 
 @end

@@ -145,16 +145,11 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
 static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolbarObserverContext;
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
-    self = [super init];
-    if (self) {
-        self.keyPaths = @[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"];
-        self.target = target;
-        self.delegate = delegate;
-        self.action = @selector(collectToolbarItemsFromViewController:);
-        self.context = _ORKViewControllerToolbarObserverContext;
-        [self startObserving];
-    }
-    return self;
+    return [super initWithTarget:target
+                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"]
+                        delegate:delegate
+                          action:@selector(collectToolbarItemsFromViewController:)
+                         context:_ORKViewControllerToolbarObserverContext];
 }
 
 @end

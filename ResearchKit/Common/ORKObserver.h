@@ -43,6 +43,11 @@
 @property (nonatomic, weak) id delegate;
 @property (nonatomic) SEL action;
 
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context;
+
 - (void)startObserving;
 
 @end
