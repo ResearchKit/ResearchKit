@@ -416,10 +416,13 @@
 }
 
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
-    CGRect animationViewFrame = _animationView.frame;
-    CGPoint scrollViewBoundsOrigin = scrollView.bounds.origin;
-    animationViewFrame.origin = (CGPoint){-scrollViewBoundsOrigin.x, -scrollViewBoundsOrigin.y};
-    _animationView.frame = animationViewFrame;
+    if (scrollView == _scrollViewObserver.target)
+    {
+        CGRect animationViewFrame = _animationView.frame;
+        CGPoint scrollViewBoundsOrigin = scrollView.bounds.origin;
+        animationViewFrame.origin = (CGPoint){-scrollViewBoundsOrigin.x, -scrollViewBoundsOrigin.y};
+        _animationView.frame = animationViewFrame;
+    }
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
