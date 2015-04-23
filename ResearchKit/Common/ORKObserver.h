@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,15 +28,40 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
 
 
-#import "ORKStepViewController.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKConsentSceneViewController ()
+@class ORKTaskViewController;
 
-@property (nonatomic, readonly) UIScrollView *scrollView;
+@interface ORKObserver : NSObject
 
-- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
+@property (nonatomic, strong) NSArray *keyPaths;
+@property (nonatomic, strong) id target;
+@property (nonatomic) BOOL observing;
+@property (nonatomic) void *context;
+
+@property (nonatomic, weak, nullable) id delegate;
+@property (nonatomic) SEL action;
+
+- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context NS_DESIGNATED_INITIALIZER;
+
+- (void)startObserving;
 
 @end
+
+
+@protocol ORKScrollViewObserverDelegate <NSObject>
+@required
+- (void)observedScrollViewDidScroll:(UIScrollView *)scrollView;
+@end
+
+@interface ORKScrollViewObserver  : ORKObserver
+
+- (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate;
+
+@end
+
+NS_ASSUME_NONNULL_END
 

@@ -59,8 +59,6 @@
     self.verticalCenteringEnabled = isOverview;
     self.continueHugsContent =  isOverview;
     
-    self.scrollEnabled = NO;
-    
     self.headerView.instructionLabel.hidden = ! [[consentSection summary] length];
     self.headerView.captionLabel.text = consentSection.title;
     
@@ -173,14 +171,8 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
 }
 
-- (BOOL)scrollEnabled {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    return consentSceneView.scrollEnabled;
-}
-
-- (void)setScrollEnabled:(BOOL)enabled {
-    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
-    consentSceneView.scrollEnabled = enabled;
+- (UIScrollView *)scrollView {
+    return (UIScrollView *)self.view;
 }
 
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
@@ -188,7 +180,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     CGRect targetBounds = consentSceneView.bounds;
     targetBounds.origin.y = 0;
     if (animated) {
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:ORKScrollToTopAnimationDuration animations:^{
             consentSceneView.bounds = targetBounds;
         } completion:completion];
     } else {
@@ -196,7 +188,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
         if (completion) {
             completion(YES);
         }
-            
     }
 }
 
