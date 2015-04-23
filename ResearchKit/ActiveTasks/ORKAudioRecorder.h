@@ -58,7 +58,7 @@ ORK_CLASS_AVAILABLE
  Passed to  AVAudioRecorder`'s `-initWithURL:settings:error:`
  For information on the settings available for an audio recorder, see "AV Foundation Audio Settings Constants".
  */
-@property (nonatomic, copy, readonly, nullable) NSDictionary *recorderSettings;
+@property (nonatomic, copy, readonly) NSDictionary *recorderSettings;
 
 /**
  Returns an initialized audio recorder using the specified settings, step, and output directory.
@@ -70,9 +70,9 @@ ORK_CLASS_AVAILABLE
  @return An initialized audio recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                  recorderSettings:(NSDictionary *)recorderSettings
-                              step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                  recorderSettings:(nullable NSDictionary *)recorderSettings
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 
 /**

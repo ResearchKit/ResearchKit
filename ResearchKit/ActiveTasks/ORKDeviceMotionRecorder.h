@@ -30,6 +30,8 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The `ORKDeviceMotionRecorder` class represents a recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
  
@@ -55,7 +57,9 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          frequency:(double)frequency
-                              step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END
