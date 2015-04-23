@@ -32,16 +32,20 @@
 #import "ORKQuestionStep_Internal.h"
 #import "ORKPicker.h"
 
+
 @interface ORKSurveyAnswerCellForPicker () <ORKPickerDelegate, UIPickerViewDelegate> {
     UIPickerView *_tempPicker;
     BOOL _valueChangedDueUserAction;
 }
 
 @property (nonatomic, strong) id<ORKPicker> picker;
+@property (nonatomic, strong) NSMutableArray *customConstraints;
 
 @end
 
+
 @implementation ORKSurveyAnswerCellForPicker
+
 - (void)prepareView {
     [super prepareView];
     
@@ -66,20 +70,49 @@
         
         [_tempPicker removeFromSuperview];
         _tempPicker = nil;
+        
+        [self setNeedsUpdateConstraints];
     }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.picker) {
-        CGSize sz = [_picker.pickerView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
-        _picker.pickerView.frame = (CGRect){{0,0},sz};
+    if (_picker) {
+        CGSize pickerSize = [_picker.pickerView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
+        _picker.pickerView.frame = (CGRect){{0,0}, pickerSize};
     }
     
     if (_tempPicker) {
-        CGSize sz = [_tempPicker sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
-        _tempPicker.frame = (CGRect){{0,0},sz};
+        CGSize pickerSize = [_tempPicker sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
+        _tempPicker.frame = (CGRect){{0,0}, pickerSize};
+    }
+}
+
+- (void)updateConstraints {
+    [self removeConstraints:_customConstraints];
+    [_customConstraints removeAllObjects];
+
+    if (!_customConstraints) {
+        _customConstraints = [NSMutableArray new];
+    }
+    
+    [self addHorizontalHuggingConstraintForView:_tempPicker];
+    [self addHorizontalHuggingConstraintForView:_picker.pickerView];
+    
+    [super updateConstraints];
+}
+
+- (void)addHorizontalHuggingConstraintForView:(UIView *)view {
+    if (view) {
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|"
+                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                       metrics:nil
+                                                                         views:@{ @"view": view }];
+        [self addConstraints:constraints];
+        [_customConstraints addObjectsFromArray:constraints];
     }
 }
 
