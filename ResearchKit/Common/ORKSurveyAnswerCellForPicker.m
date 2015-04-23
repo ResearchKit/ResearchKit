@@ -32,16 +32,20 @@
 #import "ORKQuestionStep_Internal.h"
 #import "ORKPicker.h"
 
+
 @interface ORKSurveyAnswerCellForPicker () <ORKPickerDelegate, UIPickerViewDelegate> {
     UIPickerView *_tempPicker;
     BOOL _valueChangedDueUserAction;
 }
 
 @property (nonatomic, strong) id<ORKPicker> picker;
+@property (nonatomic, strong) NSMutableArray *customConstraints;
 
 @end
 
+
 @implementation ORKSurveyAnswerCellForPicker
+
 - (void)prepareView {
     [super prepareView];
     
@@ -86,16 +90,29 @@
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
+    [self removeConstraints:_customConstraints];
+    [_customConstraints removeAllObjects];
+
+    if (!_customConstraints) {
+        _customConstraints = [NSMutableArray new];
+    }
     
-    if (_picker) {
-        _picker.pickerView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSDictionary *views = @{ @"pickerView": _picker.pickerView };
+    [self addHorizontalHuggingConstraintForView:_tempPicker];
+    [self addHorizontalHuggingConstraintForView:_picker.pickerView];
+    
+    [super updateConstraints];
+}
+
+- (void)addHorizontalHuggingConstraintForView:(UIView *)view {
+    if (view) {
+        view.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[pickerView]-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil
-                                                                       views:views]];
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|"
+                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                       metrics:nil
+                                                                         views:@{ @"view": view }];
+        [self addConstraints:constraints];
+        [_customConstraints addObjectsFromArray:constraints];
     }
 }
 
