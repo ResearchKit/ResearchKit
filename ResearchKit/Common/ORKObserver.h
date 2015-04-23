@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import <UIKit/UIKit.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class ORKTaskViewController;
 
@@ -40,13 +42,10 @@
 @property (nonatomic) BOOL observing;
 @property (nonatomic) void *context;
 
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, weak, nullable) id delegate;
 @property (nonatomic) SEL action;
 
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
-
-- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context;
+- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context NS_DESIGNATED_INITIALIZER;
 
 - (void)startObserving;
 
@@ -63,3 +62,6 @@
 - (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
