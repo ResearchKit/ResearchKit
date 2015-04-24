@@ -195,7 +195,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (IBAction)showContent:(id)sender {
 
-    ORKConsentLearnMoreViewController *vc = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:(NSString *__nonnull)((_section.htmlContent.length > 0)?_section.htmlContent : _section.escapedContent)];
+    ORKConsentLearnMoreViewController *vc = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     vc.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navc animated:YES completion:nil];

@@ -142,6 +142,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options sampleTypes:(NSArray *)sampleTypes units:(NSArray *)units {
     NSMutableDictionary *mdict = (NSMutableDictionary *)[self ork_JSONDictionaryWithOptions:options unit:nil];
+    NSAssert([mdict isKindOfClass:[NSMutableDictionary class]], @"");
     
     // The correlated objects
     NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:[sampleTypes count]];

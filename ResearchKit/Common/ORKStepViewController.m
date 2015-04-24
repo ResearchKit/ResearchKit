@@ -258,7 +258,7 @@
 
 - (ORKStepResult *)result {
     
-    ORKStepResult *sResult = [[ORKStepResult alloc] initWithStepIdentifier:(NSString *__nonnull)self.step.identifier results:@[]];
+    ORKStepResult *sResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
     sResult.startDate = self.presentedDate;
     sResult.endDate = self.dismissedDate? :[NSDate date];
     
