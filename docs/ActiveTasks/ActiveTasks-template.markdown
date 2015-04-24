@@ -175,7 +175,7 @@ The data collected in active tasks is recorded in a hierarchy of
 `ORKResult` objects in memory. It is up to you to serialize this
 hierarchy for storage or transmission in a way that’s appropriate for your application.
 
-If the data collected is to too large for in-memory delivery, an
+If the data collected is too large for in-memory delivery, an
 `ORKFileResult` is included in the hierarchy instead. The file result
 references a file in the output directory (specified by the
 `outputDirectory` property of `ORKTaskViewController`). For example,
