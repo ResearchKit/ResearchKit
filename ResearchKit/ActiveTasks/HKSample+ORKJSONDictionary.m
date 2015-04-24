@@ -44,16 +44,9 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 // static NSString *const kHKSourceIdentifierKey = @"sourceBundleIdentifier";
 
 
-@interface HKSample ()
-
-- (NSMutableDictionary *)ork_JSONMutableDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit;
-
-@end
-
-
 @implementation HKSample (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONMutableDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
+- (NSMutableDictionary *)ork_JSONMutableDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithCapacity:12];
     
     // Type identification
