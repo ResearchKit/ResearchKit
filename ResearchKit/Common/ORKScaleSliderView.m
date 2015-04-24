@@ -72,7 +72,77 @@
         self.slider.numberOfSteps = numberOfSteps;
         
         [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+        self.slider.translatesAutoresizingMaskIntoConstraints = NO;
+        self.leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
+        NSDictionary *views = NSDictionaryOfVariableBindings(_slider,_leftRangeLabel,_rightRangeLabel, _valueLabel);
+        
+        if ([formatProvider isVertical]) {
+            // Vertical slider constraints
+            // Keep the thumb the same distance from the value label as in horizontal mode
+            const CGFloat kValueLabelSliderMargin = 23.0;
+            // Keep the shadow of the thumb inside the bounds
+            const CGFloat kSliderMargin = 20.0;
+            const CGFloat kSideLabelMargin = 24;
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kVerticalSliderHorizontalMargin-[_slider]-kVerticalSliderHorizontalMargin-|"
+                                                                         options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                         metrics:@{@"kVerticalSliderHorizontalMargin": @(kVerticalSliderHorizontalMargin)}
+                                                                           views:views]];
+
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
+                                                                         options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
+                                                                         metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+                                                                           views:views]];
+            
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeLabel(==_leftRangeLabel)]"
+                                                                         options:0
+                                                                         metrics:nil
+                                                                           views:views]];
+            
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeLabel
+                                                             attribute:NSLayoutAttributeRight
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.slider
+                                                             attribute:NSLayoutAttributeCenterX
+                                                            multiplier:1.0
+                                                              constant:-kSideLabelMargin]];
+            
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeLabel
+                                                             attribute:NSLayoutAttributeRight
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.slider
+                                                             attribute:NSLayoutAttributeCenterX
+                                                            multiplier:1.0
+                                                              constant:-kSideLabelMargin]];
+            
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeLabel
+                                                            attribute:NSLayoutAttributeCenterY
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self.slider
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1.0
+                                                             constant:0]];
+            
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeLabel
+                                                             attribute:NSLayoutAttributeCenterY
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self.slider
+                                                             attribute:NSLayoutAttributeBottom
+                                                            multiplier:1.0
+                                                              constant:0]];
+        } else {
+            // Horizontal slider constraints
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
+                                                                         options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
+                                                                         metrics:nil views:views]];
+        
+            const CGFloat kMargin = 17.0;
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|" options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
+                                                                         metrics:@{@"kMargin": @(kMargin)} views:views]];
+        }
     }
     return self;
 }
@@ -140,90 +210,13 @@ static const CGFloat kVerticalSliderHorizontalMargin = 48;
     [super layoutSubviews];
     // This is currently only used by vertical sliders, but keep track of the width to implement the Protocol anyway
     CGFloat currentLayoutWidth = self.delegate ? self.delegate.sliderLayoutWidth : self.bounds.size.width;
-    if(self.previousLayoutWidth!=currentLayoutWidth) {
+    if(self.previousLayoutWidth != currentLayoutWidth) {
         self.previousLayoutWidth = currentLayoutWidth;
         if ([_formatProvider isVertical]) {
             [self.slider invalidateIntrinsicContentSize];
         }
     }
 }
-
-- (void)updateConstraints {
-    
-    [super updateConstraints];
-    
-    self.slider.translatesAutoresizingMaskIntoConstraints = NO;
-    self.leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_slider,_leftRangeLabel,_rightRangeLabel, _valueLabel);
-    
-    if ([_formatProvider isVertical]) {
-        // Vertical slider constraints
-        // Keep the thumb the same distance from the value label as in horizontal mode
-        const CGFloat kValueLabelSliderMargin = 23.0;
-        // Keep the shadow of the thumb inside the bounds
-        const CGFloat kSliderMargin = 20.0;
-        const CGFloat kSideLabelMargin = 24;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kVerticalSliderHorizontalMargin-[_slider]-kVerticalSliderHorizontalMargin-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"kVerticalSliderHorizontalMargin": @(kVerticalSliderHorizontalMargin)}
-                                                                       views:views]];
-
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
-                                                                     options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
-                                                                       views:views]];
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeLabel(==_leftRangeLabel)]"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:views]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeLabel
-                                                         attribute:NSLayoutAttributeRight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.slider
-                                                         attribute:NSLayoutAttributeCenterX
-                                                        multiplier:1.0
-                                                          constant:-kSideLabelMargin]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeLabel
-                                                         attribute:NSLayoutAttributeRight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.slider
-                                                         attribute:NSLayoutAttributeCenterX
-                                                        multiplier:1.0
-                                                          constant:-kSideLabelMargin]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeLabel
-                                                        attribute:NSLayoutAttributeCenterY
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self.slider
-                                                        attribute:NSLayoutAttributeTop
-                                                       multiplier:1.0
-                                                         constant:0]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeLabel
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.slider
-                                                         attribute:NSLayoutAttributeBottom
-                                                        multiplier:1.0
-                                                          constant:0]];
-    } else {
-        // Horizontal slider constraints
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
-                                                                     options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
-    
-        const CGFloat kMargin = 17.0;
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|" options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"kMargin": @(kMargin)} views:views]];
-    }
-}
-
 
 #pragma mark - Accessibility
 
