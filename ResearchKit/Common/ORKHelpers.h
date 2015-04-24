@@ -159,8 +159,6 @@ NSCalendar *ORKTimeOfDayReferenceCalendar();
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
-CGFloat ORKStandardMarginForView(UIView *view);
-
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
@@ -190,8 +188,6 @@ _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
 PerformCall; \
 _Pragma("clang diagnostic pop") \
 } while (0)
-
-CGFloat ORKTableViewLeftMargin(UITableView *tableView);
 
 UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);

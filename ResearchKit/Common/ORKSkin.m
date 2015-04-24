@@ -93,17 +93,27 @@ CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *window){
     return ORKGetMetricForScreenType(metric, ORKGetScreenTypeForWindow(window));
 }
 
+const CGSize ORKiPhone4ScreenSize = (CGSize){320, 480};
+const CGSize ORKiPhone5ScreenSize = (CGSize){320, 568};
+const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
+const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
+const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
+
 ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
     if (! window) {
         window = [[[UIApplication sharedApplication] windows] firstObject];
     }
     CGRect windowBounds = [window bounds];
-    if (windowBounds.size.height < 481) {
+    if (windowBounds.size.height < ORKiPhone4ScreenSize.height + 1) {
         return ORKScreenTypeiPhone4;
-    } else if (windowBounds.size.height < 569) {
+    } else if (windowBounds.size.height < ORKiPhone5ScreenSize.height + 1) {
         return ORKScreenTypeiPhone5;
-    } else {
+    } else if (windowBounds.size.height < ORKiPhone6ScreenSize.height + 1) {
         return ORKScreenTypeiPhone6;
+    } else if (windowBounds.size.height < ORKiPhone6PlusScreenSize.height + 1) {
+        return ORKScreenTypeiPhone6Plus;
+    } else {
+        return ORKScreenTypeiPad;
     }
 }
 
@@ -111,36 +121,78 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
-        // iPhone 6,iPhone 5, iPhone 4
-        {       128,     100,      100},      // ORKScreenMetricTopToCaptionBaseline
-        {        35,      32,       24},      // ORKScreenMetricFontSizeHeadline
-        {        38,      32,       28},      // ORKScreenMetricMaxFontSizeHeadline
-        {        30,      30,       24},      // ORKScreenMetricFontSizeSurveyHeadline
-        {        32,      32,       28},      // ORKScreenMetricMaxFontSizeSurveyHeadline
-        {        17,      17,       16},      // ORKScreenMetricFontSizeSubheadline
-        {        62,      51,       51},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
-        {        62,      43,       43},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
-        {        36,      32,       32},      // ORKScreenMetricCaptionBaselineToInstructionBaseline
-        {        30,      28,       24},      // ORKScreenMetricInstructionBaselineToLearnMoreBaseline
-        {        44,      20,       14},      // ORKScreenMetricLearnMoreBaselineToStepViewTop
-        {        40,      30,       14},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
-        {        36,      20,       12},      // ORKScreenMetricContinueButtonTopMargin
-        {        40,      20,       12},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
-        {        44,      40,       40},      // ORKScreenMetricIllustrationToCaptionBaseline
-        {       198,     194,      152},      // ORKScreenMetricIllustrationHeight
-        {       300,     176,      152},      // ORKScreenMetricInstructionImageHeight
-        {       150,     146,      146},      // ORKScreenMetricContinueButtonWidth
-        {       162,     120,      116},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
-        {        60,      60,       44},      // ORKScreenMetricTableCellDefaultHeight
-        {        55,      55,       44},      // ORKScreenMetricTextFieldCellHeight
-        {        36,      36,       26},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
-        {        24,      24,       18},      // ORKScreenMetricChoiceCellLastBaselineToBottom,
-        {        24,      24,       24},      // ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline,
-        {        30,      20,       20},      // ORKScreenMetricLearnMoreButtonSideMargin
-        {        10,       0,        0},      // ORKScreenMetricHeadlineSideMargin
-        {        44,      44,       44},      // ORKScreenMetricToolbarHeight
+        // iPhone 6+, iPhone 6, iPhone 5, iPhone 4,     iPad
+        {        128,      128,      100,      100,      128},      // ORKScreenMetricTopToCaptionBaseline
+        {         35,       35,       32,       24,       35},      // ORKScreenMetricFontSizeHeadline
+        {         38,       38,       32,       28,       38},      // ORKScreenMetricMaxFontSizeHeadline
+        {         30,       30,       30,       24,       30},      // ORKScreenMetricFontSizeSurveyHeadline
+        {         32,       32,       32,       28,       32},      // ORKScreenMetricMaxFontSizeSurveyHeadline
+        {         17,       17,       17,       16,       17},      // ORKScreenMetricFontSizeSubheadline
+        {         62,       62,       51,       51,       62},      // ORKScreenMetricCaptionBaselineToFitnessTimerTop
+        {         62,       62,       43,       43,       62},      // ORKScreenMetricCaptionBaselineToTappingLabelTop
+        {         36,       36,       32,       32,       36},      // ORKScreenMetricCaptionBaselineToInstructionBaseline
+        {         30,       30,       28,       24,       30},      // ORKScreenMetricInstructionBaselineToLearnMoreBaseline
+        {         44,       44,       20,       14,       44},      // ORKScreenMetricLearnMoreBaselineToStepViewTop
+        {         40,       40,       30,       14,       40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
+        {         36,       36,       20,       12,       36},      // ORKScreenMetricContinueButtonTopMargin
+        {         40,       40,       20,       12,       40},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
+        {         44,       44,       40,       40,       44},      // ORKScreenMetricIllustrationToCaptionBaseline
+        {        198,      198,      194,      152,      198},      // ORKScreenMetricIllustrationHeight
+        {        300,      300,      176,      152,      300},      // ORKScreenMetricInstructionImageHeight
+        {        150,      150,      146,      146,      150},      // ORKScreenMetricContinueButtonWidth
+        {        162,      162,      120,      116,      162},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
+        {         60,       60,       60,       44,       60},      // ORKScreenMetricTableCellDefaultHeight
+        {         55,       55,       55,       44,       55},      // ORKScreenMetricTextFieldCellHeight
+        {         36,       36,       36,       26,       36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
+        {         24,       24,       24,       18,       24},      // ORKScreenMetricChoiceCellLastBaselineToBottom,
+        {         24,       24,       24,       24,       24},      // ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline,
+        {         30,       30,       20,       20,       30},      // ORKScreenMetricLearnMoreButtonSideMargin
+        {         10,       10,        0,        0,       10},      // ORKScreenMetricHeadlineSideMargin
+        {         44,       44,       44,       44,       44},      // ORKScreenMetricToolbarHeight
     };
     
     return metrics[metric][screenType];
+}
+
+BOOL ORKWantsWideContentMargins(UIScreen *screen){
+    
+    if (screen != [UIScreen mainScreen]) {
+        return NO;
+    }
+    
+    // If our screen's minimum dimension is bigger than a fixed threshold,
+    // decide to use wide content margins. This is less restrictive than UIKit,
+    // but a good enough approximation.
+    CGRect screenRect = [screen bounds];
+    CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
+    BOOL isWideScreenFormat = (minDimension > ORKiPhone6ScreenSize.width);
+    
+    return isWideScreenFormat;
+}
+
+const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
+const CGFloat ORKLayoutMarginWidthThinBezelCompact = 16.0;
+__unused const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
+
+CGFloat ORKStandardMarginForView(UIView *view) {
+    return ORKWantsWideContentMargins([UIScreen mainScreen]) ?
+    ORKLayoutMarginWidthThinBezelRegular : ORKLayoutMarginWidthThinBezelCompact;
+}
+
+CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
+    
+    if (ORKWantsWideContentMargins(tableView.window.screen)) {
+        if (CGRectGetWidth(tableView.frame) > 320.0) {
+            return ORKLayoutMarginWidthThinBezelRegular;
+            
+        }
+        else {
+            return ORKLayoutMarginWidthThinBezelCompact;
+        }
+    }
+    else {
+        // Probably should be ORKLayoutMarginWidthRegularBezel
+        return ORKLayoutMarginWidthThinBezelCompact;
+    }
 }
 

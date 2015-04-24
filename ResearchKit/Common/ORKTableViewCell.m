@@ -29,7 +29,7 @@
  */
 
 #import "ORKTableViewCell.h"
-#import "ORKHelpers.h"
+#import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
 
 @interface ORKTableViewCell ()
