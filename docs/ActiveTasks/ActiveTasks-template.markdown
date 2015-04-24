@@ -136,7 +136,7 @@ targets on the touch screen. The resulting touch data can be used to
 assess basic motor capabilities such as speed, accuracy, and rhythm.
 
 Touch data, and optionally accelerometer data from CoreMotion on iOS, are
-collected using public APIs. No analysis is preformed by the ResearchKit framework
+collected using public APIs. No analysis is performed by the ResearchKit framework
 on the data.
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Motivation for the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep2.png" style="width: 100%;border: solid black 1px;">Providing instruction for the task.</p><p style="clear: both;">
