@@ -73,7 +73,7 @@ currently doesn’t include:
 
 * Background sensor data collection. APIs like HealthKit and
   CoreMotion on iOS already support this.
-* Secure communication mechanisms between your app and your server, you will need to provide this.
+* Secure communication mechanisms between your app and your server; you will need to provide this.
 * The ability to schedule surveys and active tasks for your
   participants.
 * A defined data format for how the ResearchKit framework structured data is
