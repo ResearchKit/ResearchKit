@@ -66,8 +66,8 @@ ORK_CLASS_AVAILABLE
  @return An initialized pedometer recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                              step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
 

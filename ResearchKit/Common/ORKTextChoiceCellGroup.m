@@ -97,17 +97,16 @@
 - (void)didSelectCellAtIndex:(NSUInteger)index {
         
     ORKChoiceViewCell *touchedCell = [self cellAtIndex:index withReuseIdentifier:nil];
-    
-    touchedCell.selectedItem = !touchedCell.selectedItem;
-    
-    if (touchedCell.selectedItem && _singleChoice) {
         
+    if (_singleChoice) {
+        touchedCell.selectedItem = YES;
         for (ORKChoiceViewCell *cell in [_cells allValues]) {
             if (cell != touchedCell) {
                 cell.selectedItem = NO;
             }
         }
-        
+    } else {
+        touchedCell.selectedItem = !touchedCell.selectedItem;
     }
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];

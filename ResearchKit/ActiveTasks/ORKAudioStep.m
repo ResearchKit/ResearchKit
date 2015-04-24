@@ -45,14 +45,12 @@
     
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
     
-    if ( self.duration < ORKAudioTaskMinimumDuration)
-    {
+    if ( self.duration < ORKAudioTaskMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKAudioTaskMinimumDuration)]  userInfo:nil];
     }
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKAudioStep *step = [super copyWithZone:zone];
     step.duration = self.duration;
     return step;
@@ -62,24 +60,20 @@
     return NO;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, duration);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, duration);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

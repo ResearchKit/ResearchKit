@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2EBFE11D1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */; };
+		2EBFE1201AE1B74100CB8254 /* ORKVoiceEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */; };
 		618DA04E1A93D0D600E63AA8 /* ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA0481A93D0D600E63AA8 /* ORKAccessibility.h */; };
 		618DA0501A93D0D600E63AA8 /* ORKAccessibilityFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA0491A93D0D600E63AA8 /* ORKAccessibilityFunctions.h */; };
 		618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */; };
@@ -268,8 +270,6 @@
 		86C40DDE1A8D7C5C00081FAC /* ORKVerticalContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BE11A8D7C5C00081FAC /* ORKVerticalContainerView.h */; };
 		86C40DE01A8D7C5C00081FAC /* ORKVerticalContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BE21A8D7C5C00081FAC /* ORKVerticalContainerView.m */; };
 		86C40DE21A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BE31A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h */; };
-		86C40DE61A8D7C5C00081FAC /* UIApplication+ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BE51A8D7C5C00081FAC /* UIApplication+ResearchKit.h */; };
-		86C40DE81A8D7C5C00081FAC /* UIApplication+ResearchKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BE61A8D7C5C00081FAC /* UIApplication+ResearchKit.m */; };
 		86C40DEA1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BE71A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h */; };
 		86C40DEC1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C40BE81A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m */; };
 		86C40DEE1A8D7C5C00081FAC /* UIResponder+ResearchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C40BE91A8D7C5C00081FAC /* UIResponder+ResearchKit.h */; };
@@ -343,6 +343,8 @@
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* Localizable.strings */; };
 		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4194271AE8453A00073D6B /* ORKObserver.h */; };
+		BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4194281AE8453A00073D6B /* ORKObserver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,6 +365,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKUIViewAccessibilityTests.m; sourceTree = "<group>"; };
+		2EBFE11E1AE1B68800CB8254 /* ORKVoiceEngine_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKVoiceEngine_Internal.h; sourceTree = "<group>"; };
+		2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVoiceEngineTests.m; sourceTree = "<group>"; };
 		618DA0481A93D0D600E63AA8 /* ORKAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAccessibility.h; sourceTree = "<group>"; };
 		618DA0491A93D0D600E63AA8 /* ORKAccessibilityFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAccessibilityFunctions.h; sourceTree = "<group>"; };
 		618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAccessibilityFunctions.m; sourceTree = "<group>"; };
@@ -611,8 +616,6 @@
 		86C40BE11A8D7C5C00081FAC /* ORKVerticalContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKVerticalContainerView.h; sourceTree = "<group>"; };
 		86C40BE21A8D7C5C00081FAC /* ORKVerticalContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKVerticalContainerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86C40BE31A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKVerticalContainerView_Internal.h; sourceTree = "<group>"; };
-		86C40BE51A8D7C5C00081FAC /* UIApplication+ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIApplication+ResearchKit.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		86C40BE61A8D7C5C00081FAC /* UIApplication+ResearchKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIApplication+ResearchKit.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86C40BE71A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIBarButtonItem+ORKBarButtonItem.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		86C40BE81A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIBarButtonItem+ORKBarButtonItem.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		86C40BE91A8D7C5C00081FAC /* UIResponder+ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIResponder+ResearchKit.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -727,6 +730,8 @@
 		B1C0F4E21A9BA65F0022C153 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B1C1DE4F196F541F00F75544 /* ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResearchKit.h; sourceTree = "<group>"; };
 		B1C7955D1A9FBF04007279BA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		BC4194271AE8453A00073D6B /* ORKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKObserver.h; sourceTree = "<group>"; };
+		BC4194281AE8453A00073D6B /* ORKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKObserver.m; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -834,6 +839,7 @@
 				B12EFF3D1AB2121000A80147 /* Definitions */,
 				B12EFF321AB2106F00A80147 /* UIKitCategories */,
 				B12EFF311AB2100400A80147 /* Skin */,
+				BC4194261AE8451F00073D6B /* Misc */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -862,6 +868,8 @@
 				86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */,
 				86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */,
 				86CC8EA71AC09383001CCD89 /* Info.plist */,
+				2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */,
+				2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */,
 			);
 			path = ResearchKitTests;
 			sourceTree = "<group>";
@@ -940,8 +948,6 @@
 		B12EFF321AB2106F00A80147 /* UIKitCategories */ = {
 			isa = PBXGroup;
 			children = (
-				86C40BE51A8D7C5C00081FAC /* UIApplication+ResearchKit.h */,
-				86C40BE61A8D7C5C00081FAC /* UIApplication+ResearchKit.m */,
 				86C40BE71A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.h */,
 				86C40BE81A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m */,
 				86C40BE91A8D7C5C00081FAC /* UIResponder+ResearchKit.h */,
@@ -1498,6 +1504,7 @@
 			children = (
 				86C40B4D1A8D7C5B00081FAC /* ORKVoiceEngine.h */,
 				86C40B4E1A8D7C5B00081FAC /* ORKVoiceEngine.m */,
+				2EBFE11E1AE1B68800CB8254 /* ORKVoiceEngine_Internal.h */,
 			);
 			name = "Speech Synthesis";
 			sourceTree = "<group>";
@@ -1547,6 +1554,15 @@
 			path = Localized;
 			sourceTree = "<group>";
 		};
+		BC4194261AE8451F00073D6B /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				BC4194271AE8453A00073D6B /* ORKObserver.h */,
+				BC4194281AE8453A00073D6B /* ORKObserver.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1577,8 +1593,8 @@
 				86C40D841A8D7C5C00081FAC /* ORKSelectionTitleLabel.h in Headers */,
 				86C40E141A8D7C5C00081FAC /* ORKConsentSection+AssetLoading.h in Headers */,
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
+				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				86C40C661A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.h in Headers */,
-				86C40DE61A8D7C5C00081FAC /* UIApplication+ResearchKit.h in Headers */,
 				86C40D701A8D7C5C00081FAC /* ORKRoundTappingButton.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
@@ -1916,7 +1932,9 @@
 				86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */,
 				86CC8EB81AC09383001CCD89 /* ORKHKSampleTests.m in Sources */,
 				86CC8EB51AC09383001CCD89 /* ORKConsentTests.m in Sources */,
+				2EBFE11D1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m in Sources */,
 				86CC8EB41AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m in Sources */,
+				2EBFE1201AE1B74100CB8254 /* ORKVoiceEngineTests.m in Sources */,
 				86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				86CC8EB61AC09383001CCD89 /* ORKDataLoggerManagerTests.m in Sources */,
@@ -1984,6 +2002,7 @@
 				86C40C241A8D7C5C00081FAC /* ORKCountdownStep.m in Sources */,
 				86C40CA21A8D7C5C00081FAC /* ORKHealthQuantityTypeRecorder.m in Sources */,
 				86C40DC01A8D7C5C00081FAC /* ORKTableViewCell.m in Sources */,
+				BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
 				86C40D7E1A8D7C5C00081FAC /* ORKScaleValueLabel.m in Sources */,
@@ -1995,7 +2014,6 @@
 				86B781BC1AA668ED00688151 /* ORKTimeIntervalPicker.m in Sources */,
 				86B781BE1AA668ED00688151 /* ORKValuePicker.m in Sources */,
 				86B89ABC1AB3BECC001626A4 /* ORKStepHeaderView.m in Sources */,
-				86C40DE81A8D7C5C00081FAC /* UIApplication+ResearchKit.m in Sources */,
 				861D11AA1AA691BB003C98A7 /* ORKScaleSliderView.m in Sources */,
 				86C40C141A8D7C5C00081FAC /* ORKActiveStepQuantityView.m in Sources */,
 				86C40C6C1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.m in Sources */,

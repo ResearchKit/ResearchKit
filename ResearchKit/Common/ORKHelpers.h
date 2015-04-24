@@ -167,14 +167,12 @@ UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view);
 
 ORK_INLINE bool
-ORKEqualObjects(id o1, id o2)
-{
+ORKEqualObjects(id o1, id o2) {
     return (o1 == o2) || (o1 && o2 && [o1 isEqual:o2]);
 }
 
 ORK_INLINE NSArray *
-ORKArrayCopyObjects(NSArray *a)
-{
+ORKArrayCopyObjects(NSArray *a) {
     if (! a) {
         return nil;
     }
@@ -202,3 +200,5 @@ UIFont *ORKMediumFontWithSize(CGFloat size);
 id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
+
+const CGFloat ORKScrollToTopAnimationDuration;

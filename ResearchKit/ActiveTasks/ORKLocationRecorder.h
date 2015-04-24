@@ -30,6 +30,8 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The `ORKLocationRecorder` class represents a recorder for collecting location data from CoreLocation.
  
@@ -50,7 +52,9 @@ ORK_CLASS_AVAILABLE
  @return An initialized location recorder.
 */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                              step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

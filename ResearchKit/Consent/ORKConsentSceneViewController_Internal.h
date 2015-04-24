@@ -34,7 +34,7 @@
 
 @interface ORKConsentSceneViewController ()
 
-@property (nonatomic, assign) BOOL scrollEnabled;
+@property (nonatomic, readonly) UIScrollView *scrollView;
 
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 

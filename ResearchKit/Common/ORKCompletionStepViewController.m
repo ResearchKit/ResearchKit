@@ -42,8 +42,7 @@
 
 @end
 
-@implementation ORKCompletionStepView
-{
+@implementation ORKCompletionStepView {
     CAShapeLayer *_shapeLayer;
 }
 
@@ -128,8 +127,7 @@ static const CGFloat TickViewSize = 122;
 
 @end
 
-@implementation ORKCompletionStepViewController
-{
+@implementation ORKCompletionStepViewController {
     ORKCompletionStepView *_completionStepView;
 }
 - (void)stepDidChange {

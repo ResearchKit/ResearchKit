@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Denis Lebedev. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,48 +28,39 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKHeadlineLabel.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
+#import <UIKit/UIKit.h>
+#import <XCTest/XCTest.h>
+#import "UIView+ORKAccessibility.h"
 
-@implementation ORKHeadlineLabel
+@interface ORKUIViewAccessibilityTests : XCTestCase
 
-+ (UIFont *)defaultFontInSurveyMode:(BOOL)surveyMode {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
-    const CGFloat defaultHeadlineSize = 17;
+@end
+
+@implementation ORKUIViewAccessibilityTests
+
+- (void)testSuperViewOfTypeReturnsNilWhenClassIsNil {
+    UIView *view = [[UIView alloc] init];
     
-    UIWindow *window = [[[UIApplication sharedApplication] windows] firstObject];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    UIView *result = [view ork_superviewOfType:nil];
+    XCTAssertNil(result);
+}
+
+- (void)testReturnsNilWhenViewHasNoSuperView {
+    UIView *view = [[UIView alloc] init];
     
-    CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForScreenType(surveyMode?ORKScreenMetricFontSizeSurveyHeadline: ORKScreenMetricFontSizeHeadline, screenType);
-    CGFloat maxFontSize = ORKGetMetricForScreenType(surveyMode?ORKScreenMetricMaxFontSizeSurveyHeadline:ORKScreenMetricMaxFontSizeHeadline, screenType);
+    UIView *result = [view ork_superviewOfType:[UIView class]];
+    XCTAssertNil(result);
+}
+
+- (void)testReturnsSuperViewOfSpecifiedClass {
+    UIButton *button = [[UIButton alloc] init];
+    UIView *view = [[UIView alloc] init];
+    UIView *anotherView = [[UIView alloc] init];
+    [button addSubview:view];
+    [view addSubview:anotherView];
     
-    return ORKLightFontWithSize(MIN(maxFontSize, fontSize));
-}
-
-+ (UIFont *)defaultFont {
-    return [self defaultFontInSurveyMode:NO];
-}
-
-- (UIFont *)defaultFont {
-    return [[self class] defaultFontInSurveyMode:_useSurveyMode];
-}
-
-- (void)setUseSurveyMode:(BOOL)useSurveyMode {
-    _useSurveyMode = useSurveyMode;
-    [self updateAppearance];
-}
-
-// Nasty override (hack)
-- (void)updateAppearance {
-    self.font = [self defaultFont];
-    [self invalidateIntrinsicContentSize];
-}
-
-#pragma mark Accessibility
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    return [super accessibilityTraits] | UIAccessibilityTraitHeader;
+    UIView *result = [anotherView ork_superviewOfType:[UIButton class]];
+    XCTAssertEqualObjects(result, button);
 }
 
 @end

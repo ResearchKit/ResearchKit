@@ -47,8 +47,7 @@
 @end
 
 
-@implementation ORKConsentSignatureWrapperView
-{
+@implementation ORKConsentSignatureWrapperView {
     NSArray *_constraints;
 }
 

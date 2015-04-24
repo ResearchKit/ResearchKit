@@ -30,8 +30,7 @@
 
 #import "ORKSpatialSpanGame.h"
 
-@implementation ORKSpatialSpanGame
-{
+@implementation ORKSpatialSpanGame {
     NSInteger *_sequence;
 }
 

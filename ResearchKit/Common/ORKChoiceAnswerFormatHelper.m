@@ -138,8 +138,7 @@
     
     NSMutableArray *indexArray = [NSMutableArray new];
     
-    if (answer != nil && answer != ORKNullAnswerValue() )
-    {
+    if (answer != nil && answer != ORKNullAnswerValue() ) {
         
         NSAssert([answer isKindOfClass: [ORKChoiceQuestionResult answerClass] ], @"Wrong answer type");
         
@@ -147,17 +146,14 @@
             
             id<ORKAnswerOption> matchedChoice = nil;
             
-            for ( id<ORKAnswerOption> choice in _choices)
-            {
-                if ([choice.value isEqual:answerValue])
-                {
+            for ( id<ORKAnswerOption> choice in _choices) {
+                if ([choice.value isEqual:answerValue]) {
                     matchedChoice = choice;
                     break;
                 }
             }
             
-            if (nil == matchedChoice)
-            {
+            if (nil == matchedChoice) {
                 NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
                 if (_isValuePicker) {
                     matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]+1];
@@ -166,8 +162,7 @@
                 }
             }
             
-            if (matchedChoice)
-            {
+            if (matchedChoice) {
                 [indexArray addObject:@([_choices indexOfObject:matchedChoice])];
             }
             

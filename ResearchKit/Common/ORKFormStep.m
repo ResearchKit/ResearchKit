@@ -40,8 +40,7 @@
 @implementation ORKFormStep
 
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKFormStepViewController class];
 }
 
@@ -69,8 +68,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.optional = YES;
@@ -88,8 +86,7 @@
     }
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormStep *step = [super copyWithZone:zone];
     step.formItems = ORKArrayCopyObjects(_formItems);
     return step;
@@ -107,24 +104,20 @@
     return [super hash] ^ [self.formItems hash];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -152,8 +145,7 @@
     self = [super init];
     if (self) {
         
-        if ( nil == identifier)
-        {
+        if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
         
@@ -172,24 +164,20 @@
     return self;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormItem *item = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy] text:[_text copy] answerFormat:[_answerFormat copy]];
     item.placeholder = self.placeholder;
     return item;
 }
 
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
@@ -199,8 +187,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, placeholder);
@@ -231,13 +218,11 @@
 
 
 
-- (ORKAnswerFormat *)impliedAnswerFormat
-{
+- (ORKAnswerFormat *)impliedAnswerFormat {
     return [self.answerFormat impliedAnswerFormat];
 }
 
-- (ORKQuestionType)questionType
-{
+- (ORKQuestionType)questionType {
     return [[self impliedAnswerFormat] questionType];
 }
 

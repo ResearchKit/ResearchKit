@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Denis Lebedev. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,24 +29,15 @@
  */
 
 
-#import "UIApplication+ResearchKit.h"
-#import "UIResponder+ResearchKit.h"
 
-@implementation UIApplication (ResearchKit)
+#import "ORKVoiceEngine.h"
 
-- (UIView *)ork_currentFirstResponderView {
-    NSMutableArray *sender = [NSMutableArray new];
-    [self sendAction:@selector(ork_updateCurrentFirstResponder:)
-                                               to:nil
-                                             from:sender
-                                         forEvent:nil];
-    
-    id responder = [sender firstObject];
-    if (![responder isKindOfClass:[UIView class]]) {
-        responder = nil;
-    }
-    return responder;
-}
+NS_ASSUME_NONNULL_BEGIN
 
+@interface ORKVoiceEngine ()
+
+@property (nonatomic, strong, readonly) AVSpeechSynthesizer *speechSynthesizer;
 
 @end
+
+NS_ASSUME_NONNULL_END

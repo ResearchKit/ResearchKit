@@ -37,8 +37,7 @@
 #import "ORKHelpers.h"
 
 
-@interface ORKAccelerometerRecorder()
-{
+@interface ORKAccelerometerRecorder() {
     ORKDataLogger *_logger;
     NSError *_recordingError;
 }
@@ -49,24 +48,20 @@
 
 @implementation ORKAccelerometerRecorder
 
-- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
-    if (self)
-    {
+    if (self) {
         self.frequency = frequency;
         self.continuesInBackground = YES;
     }
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"accel";
 }
 
@@ -96,8 +91,7 @@
         }
     }
     
-    if (! self.motionManager || ! self.motionManager.accelerometerAvailable)
-    {
+    if (! self.motionManager || ! self.motionManager.accelerometerAvailable) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
                                          userInfo:@{@"recorder" : self}];
@@ -150,22 +144,19 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     if (self.isRecording) {
         [self.motionManager stopAccelerometerUpdates];
         self.motionManager = nil;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:nil];
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
@@ -205,32 +196,27 @@
 
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
     return [[ORKAccelerometerRecorder alloc] initWithIdentifier:self.identifier
                                                       frequency:self.frequency
                                                            step:step
                                                 outputDirectory:outputDirectory];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, frequency);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, frequency);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

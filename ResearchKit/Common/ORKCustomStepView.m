@@ -65,16 +65,14 @@
     [_cell becomeFirstResponder];
 }
 
-- (void)setCell:(ORKSurveyAnswerCell *)cell
-{
+- (void)setCell:(ORKSurveyAnswerCell *)cell {
     [self removeConstraints:[self constraints]];
     [_cell removeFromSuperview];
     _cell = cell;
     
     [_cell setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    if ([[_cell class] shouldDisplayWithSeparators])
-    {
+    if ([[_cell class] shouldDisplayWithSeparators]) {
         _cell.showTopSeparator = YES;
         _cell.showBottomSeparator = YES;
         //_cell.topSeparatorLeftInset = 0;
