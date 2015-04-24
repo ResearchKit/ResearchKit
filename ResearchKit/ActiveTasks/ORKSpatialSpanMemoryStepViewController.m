@@ -207,7 +207,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
-    ORKSpatialSpanMemoryResult *memoryResult = [[ORKSpatialSpanMemoryResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKSpatialSpanMemoryResult *memoryResult = [[ORKSpatialSpanMemoryResult alloc] initWithIdentifier:self.step.identifier];
     memoryResult.startDate = sResult.startDate;
     memoryResult.endDate = now;
     

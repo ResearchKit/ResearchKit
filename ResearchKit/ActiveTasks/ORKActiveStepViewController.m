@@ -324,7 +324,7 @@
         // Let VO speak "Step x of y" before the instruction.
         // If VO is not running, the text is spoken immediately.
         ORKAccessibilityPerformBlockAfterDelay(1.5, ^{
-            [[ORKVoiceEngine sharedVoiceEngine] speakText:(NSString *__nonnull)self.activeStep.spokenInstruction];
+            [[ORKVoiceEngine sharedVoiceEngine] speakText:self.activeStep.spokenInstruction];
         });
     }
 }

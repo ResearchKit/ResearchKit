@@ -708,7 +708,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
 - (ORKTaskResult *)result {
     
-    ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:(NSString *__nonnull)[self.task identifier] taskRunUUID:self.taskRunUUID outputDirectory:self.outputDirectory];
+    ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:[self.task identifier] taskRunUUID:self.taskRunUUID outputDirectory:self.outputDirectory];
     result.startDate = _presentedDate;
     result.endDate = _dismissedDate ? :[NSDate date];
     
@@ -889,7 +889,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     
     NSString *progressLabel = nil;
     if (self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)]) {
-        ORKTaskProgress progress = [_task progressOfCurrentStep:(ORKStep *__nonnull)viewController.step withResult:[self result]];
+        ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
 
         if (progress.total > 0) {
             progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,(unsigned long)progress.current+1, (unsigned long)progress.total];
@@ -1106,7 +1106,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
 - (IBAction)learnMoreAction:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(taskViewController:learnMoreForStep:)]) {
-        [self.delegate taskViewController:self learnMoreForStep:(ORKStepViewController *__nonnull)self.currentStepViewController];
+        [self.delegate taskViewController:self learnMoreForStep:self.currentStepViewController];
     }
 }
 
@@ -1345,7 +1345,7 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
             }
             
             if ([self.delegate respondsToSelector:@selector(taskViewController:hasLearnMoreForStep:)] &&
-                [self.delegate taskViewController:self hasLearnMoreForStep:(ORKStep *__nonnull)stepViewController.step]) {
+                [self.delegate taskViewController:self hasLearnMoreForStep:stepViewController.step]) {
                 
                 stepViewController.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
             }

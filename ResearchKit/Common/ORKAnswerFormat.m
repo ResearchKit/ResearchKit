@@ -963,7 +963,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (NSCalendar *)currentCalendar {
-    return (NSCalendar *__nonnull)(_calendar ? : [NSCalendar currentCalendar]);
+    return (_calendar ? : [NSCalendar currentCalendar]);
 }
 
 - (NSDateFormatter *)resultDateFormatter {
@@ -1001,7 +1001,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (NSDate *)pickerDefaultDate {
-    return (NSDate *__nonnull)(self.defaultDate ? : [NSDate date]);
+    return (self.defaultDate ? : [NSDate date]);
    
 }
 

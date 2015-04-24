@@ -641,7 +641,7 @@
         }
         else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-            nqr.unit = (NSString *__nonnull)[(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+            nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
         }
         
         result.startDate = answerDate;

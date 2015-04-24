@@ -392,7 +392,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKStepResult *sResult = [super result];
     ORKQuestionStep *questionStep = self.questionStep;
     
-    ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:(NSString *__nonnull)questionStep.identifier answer:self.answer];
+    ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
     ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
     
     if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
@@ -404,7 +404,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         }
     } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
         ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-        nqr.unit = (NSString *__nonnull)[(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+        nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
     }
     
     result.startDate = sResult.startDate;

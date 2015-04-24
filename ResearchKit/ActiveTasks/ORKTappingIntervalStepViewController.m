@@ -119,7 +119,7 @@
     
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
-    ORKTappingIntervalResult *tappingResult = [[ORKTappingIntervalResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKTappingIntervalResult *tappingResult = [[ORKTappingIntervalResult alloc] initWithIdentifier:self.step.identifier];
     tappingResult.startDate = sResult.startDate;
     tappingResult.endDate = now;
     tappingResult.buttonRect1 = _buttonRect1;

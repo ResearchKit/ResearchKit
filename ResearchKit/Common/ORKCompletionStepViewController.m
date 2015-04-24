@@ -106,7 +106,7 @@ static const CGFloat TickViewSize = 122;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     [animation setTimingFunction:timing];
     [animation setFillMode:kCAFillModeBoth];
-    animation.fromValue = @( [(CAShapeLayer *)[_shapeLayer presentationLayer] strokeEnd]);
+    animation.fromValue = @([(CAShapeLayer *)[_shapeLayer presentationLayer] strokeEnd]);
     animation.toValue = @(animationPoint);
     
     animation.duration = 0.3;

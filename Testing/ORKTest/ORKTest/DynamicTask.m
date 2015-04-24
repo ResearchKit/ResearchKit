@@ -107,7 +107,7 @@
     } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]) {
         return self.step2;
     } else if ([ident isEqualToString:self.step4.identifier] ) {
-        ORKQuestionResult *questionResult = (ORKQuestionResult *)[(ORKStepResult *)[result stepResultForStepIdentifier:self.step3a.identifier] firstResult];
+        ORKQuestionResult *questionResult = (ORKQuestionResult *)[[result stepResultForStepIdentifier:self.step3a.identifier] firstResult];
         
         if (questionResult != nil) {
              return self.step3a;
