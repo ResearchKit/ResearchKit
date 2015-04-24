@@ -284,12 +284,12 @@ is usually necessary.
         if ([ident isEqualToString:self.qualificationStep.identifier])
         {
             ORKStepResult *stepResult = [result stepResultForStepIdentifier:ident];
-            ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
+            ORKQuestionResult *result = (ORKQuestionResult *)stepResult.firstResult;
             if ([result isKindOfClass:[ORKBooleanQuestionResult class]])
             {
                 ORKBooleanQuestionResult *booleanResult = result;
                 NSNumber *booleanAnswer = booleanResult.booleanAnswer;
-                if (booleanAnswer )
+                if (booleanAnswer)
                 {
                     return booleanAnswer.boolValue ? self.regularQuestionStep : self.terminationStep;
                 }
