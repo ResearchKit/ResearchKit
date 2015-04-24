@@ -46,7 +46,9 @@
                                   [ORKTextChoiceAnswerFormat class],
                                   [ORKImageChoiceAnswerFormat class]];
         
-        NSAssert([validClasses containsObject:[answerFormat class]], @"Not a valid answerformat.");
+        if (![validClasses containsObject:[answerFormat class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Not a valid answerformat for this helper." userInfo:nil];
+        }
         
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKValuePickerAnswerFormat *vpaf = (ORKValuePickerAnswerFormat *)answerFormat;
@@ -74,7 +76,7 @@
         return nil;
     }
     
-    ORKImageChoice *choice = [_choices objectAtIndex:index];
+    ORKImageChoice *choice = _choices[index];
     return [choice isKindOfClass:[ORKImageChoice class]]? choice : nil;
 }
 
@@ -83,7 +85,7 @@
         return nil;
     }
     
-    ORKTextChoice *choice = [_choices objectAtIndex:index];
+    ORKTextChoice *choice = _choices[index];
     return [choice isKindOfClass:[ORKTextChoice class]]? choice : nil;
 }
 
@@ -103,7 +105,7 @@
             continue;
         }
         
-        id<ORKAnswerOption> choice = [_choices objectAtIndex:index];
+        id<ORKAnswerOption> choice = _choices[index];
         id value = [choice value];
         
         if (value == nil) {

@@ -47,11 +47,15 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized device motion recorder using the specified frequency.
  
- @param frequency    The frequency of motion data collection from CoreMotion in hertz (Hz).
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
+ @param step                The step that requested this recorder.
+ @param outputDirectory     The directory in which the device motion data should be stored.
  @return An initialized motion data recorder.
  */
-- (instancetype)initWithFrequency:(double)frequency
-                             step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -31,11 +31,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ORKScaleSliderLayoutWidthProvider <NSObject>
+
+@property (nonatomic, readonly) CGFloat sliderLayoutWidth;
+
+@end
+
+
 @interface ORKScaleSlider : UISlider
 
 @property (nonatomic, assign) BOOL showThumb;
 
 @property (nonatomic, assign) NSUInteger numberOfSteps;
+
+@property (nonatomic, assign, getter=isVertical) BOOL vertical;
+
+@property (nonatomic, weak, nullable) id<ORKScaleSliderLayoutWidthProvider> delegate;
 
 @end
 

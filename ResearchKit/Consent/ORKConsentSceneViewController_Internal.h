@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,47 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKRecorder.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
-@class ORKPedometerRecorder;
+#import "ORKStepViewController.h"
 
-@protocol ORKPedometerRecorderDelegate <ORKRecorderDelegate>
+@interface ORKConsentSceneViewController ()
 
-@optional
+@property (nonatomic, assign) BOOL scrollEnabled;
 
-- (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder;
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 @end
 
-/**
- A recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
- 
- The accelerometer recorder continues to record if the application enters the
- background using UIApplication's background task support.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKPedometerRecorder : ORKRecorder
-
-@property (nonatomic, readonly, nullable) NSDate *lastUpdateDate;
-@property (nonatomic, readonly) NSInteger totalNumberOfSteps;
-
-// Negative if an invalid value.
-@property (nonatomic, readonly) NSInteger totalDistance;
-
-/**
- Returns an initialized pedometer recorder.
- 
- @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
- @param step                The step that requested this recorder.
- @param outputDirectory     The directory in which the pedometer data should be stored.
- @return An initialized pedometer recorder.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                              step:(ORKStep *)step
-                   outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
-
-@end
-
-NS_ASSUME_NONNULL_END

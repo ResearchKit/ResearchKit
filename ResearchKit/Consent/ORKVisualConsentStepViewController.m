@@ -38,6 +38,7 @@
 #import "ORKSkin.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKConsentSceneViewController.h"
+#import "ORKConsentSceneViewController_Internal.h"
 #import "ORKConsentDocument.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ORKConsentSection+AssetLoading.h"
@@ -245,16 +246,30 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    
     [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
 - (IBAction)next {
-    [self showViewController:[self viewControllerForIndex:[self currentIndex]+1] forward:YES animated:YES];
-    ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
+    ORKConsentSceneViewController *currentConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]];
+    [currentConsentSceneViewController setScrollEnabled:NO];
+    [currentConsentSceneViewController scrollToTopAnimated:YES completion:^(BOOL finished) {
+        if (finished) {
+            [self showNextViewController];
+        } else {
+            [currentConsentSceneViewController setScrollEnabled:YES];
+        }
+    }];
 }
 
+- (void)showNextViewController {
+    ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
+    [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
+        // 'finished' is always YES when not animated
+        [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
+        ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
+    }];
+}
 
 #pragma mark - internal
 
@@ -283,7 +298,8 @@
     _currentPage = currentIndex;
     
     [self updateBackButton];
-    [self setScrollEnabled:NO];
+
+    [[self viewControllerForIndex:currentIndex] setScrollEnabled:YES];
     
     ORKConsentSection *currentSection = (ORKConsentSection *)_visualSections[currentIndex];
     if (currentSection.type == ORKConsentSectionTypeOverview) {

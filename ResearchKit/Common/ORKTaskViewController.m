@@ -726,7 +726,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     [super viewDidDisappear:animated];
     
     // Set endDate on TaskVC is dismissed,
-    // because nextResponder is not nil when current TaskVC is  covered by another modal view
+    // because nextResponder is not nil when current TaskVC is covered by another modal view
     if (self.nextResponder == nil) {
          _dismissedDate = [NSDate date];
     }
@@ -777,7 +777,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         _managedResults = [NSMutableDictionary new];
     }
 
-    [_managedResults setObject:result forKey:aKey];
+    _managedResults[aKey] = result;
 }
 
 - (NSUUID *)taskRunUUID {
@@ -1126,7 +1126,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     }
 }
 
-- (void)presentCancelOptions:(BOOL)saveable {
+- (void)presentCancelOptions:(BOOL)saveable sender:(UIBarButtonItem *)sender {
     BOOL supportSaving = NO;
     if ([self.delegate respondsToSelector:@selector(taskViewControllerSupportsSaveAndRestore:)]) {
         supportSaving = [self.delegate taskViewControllerSupportsSaveAndRestore:self];
@@ -1135,7 +1135,8 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
+    alert.popoverPresentationController.barButtonItem = sender;
+
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
                                                   style:UIAlertActionStyleDefault
@@ -1165,7 +1166,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (IBAction)cancelAction:(id)sender {
+- (IBAction)cancelAction:(UIBarButtonItem *)sender {
     // Should we also include visualConsentStep here? Others?
     BOOL isCurrentInstructionStep = [self.currentStepViewController.step isKindOfClass:[ORKInstructionStep class]];
     
@@ -1183,7 +1184,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     if (isCurrentInstructionStep && saveable == NO) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
-        [self presentCancelOptions:saveable];
+        [self presentCancelOptions:saveable sender:sender];
     }
 }
 

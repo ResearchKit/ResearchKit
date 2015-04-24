@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -693,7 +694,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_010a"
                                                                       title:@"On a scale of 1 to 10, how much pain do you feel?"
-                                                                     answer:[ORKAnswerFormat scaleAnswerFormatWithMaxValue:10 minValue:1 step:1 defaultValue:NSIntegerMax]];
+                                                                     answer:[ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                                                  minimumValue:1
+                                                                                                                  defaultValue:NSIntegerMax
+                                                                                                                          step:1
+                                                                                                                      vertical:NO]];
         [steps addObject:step];
     }
     {
@@ -816,7 +821,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.title = @"Audio";
         step.stepDuration = 10.0;
         step.text = @"An active test recording audio";
-        step.recorderConfigurations = @[[ORKAudioRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"aid_001d.audio" recorderSettings:@{}]];
         step.shouldUseNextAsSkipButton = YES;
         [steps addObject:step];
     }
@@ -834,10 +839,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.text = @"An active test recording lossless audio";
         step.shouldUseNextAsSkipButton = YES;
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc]
-                                         initWithRecorderSettings:@{AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                                                    AVNumberOfChannelsKey : @(2),
-                                                                    AVSampleRateKey: @(44100.0)
-                                                                    }]];
+                                         initWithIdentifier:@"aid_001e.audio" recorderSettings:@{AVFormatIDKey : @(kAudioFormatAppleLossless),
+                                                                                                 AVNumberOfChannelsKey : @(2),
+                                                                                                 AVSampleRateKey: @(44100.0)
+                                                                                                 }]];
         [steps addObject:step];
     }
     
@@ -855,7 +860,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.stepDuration = 30.0;
         step.spokenInstruction = @"An active test, touch collection";
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[ORKTouchRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"aid_001a.touch"]];
         [steps addObject:step];
     }
     
@@ -870,7 +875,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.text = @"Please tap the orange button when it appears in the green area below.";
         step.stepDuration = 10.0;
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[CustomRecorderConfiguration new]];
+        step.recorderConfigurations = @[[[CustomRecorderConfiguration alloc] initWithIdentifier:@"aid_001b.audio"]];
         [steps addObject:step];
     }
     
@@ -884,7 +889,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         step.title = @"Motion";
         step.text = @"An active test collecting device motion data";
         step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[[ORKDeviceMotionRecorderConfiguration alloc] initWithFrequency:100.0]];
+        step.recorderConfigurations = @[[[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:@"aid_001c.deviceMotion" frequency:100.0]];
         [steps addObject:step];
     }
     
@@ -1207,17 +1212,40 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         }
         
         {
-            //Fixed Step Scale
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_001" text:@"Pick an integer" answerFormat:[[ORKScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 step:10 defaultValue:50]];
+            //Discrete scale
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_001" text:@"Pick an integer" answerFormat:[[ORKScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:NSIntegerMax step:10]];
             [items addObject:item];
         }
         
         {
-            //Continuous Scale
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_002" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:50 maximumFractionDigits: 2]];
+            //Discrete scale, with default value
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_002" text:@"Pick an integer" answerFormat:[[ORKScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:20 step:10]];
             [items addObject:item];
         }
-    
+        
+        {
+            //Continuous scale
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_003" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:NSIntegerMax maximumFractionDigits:2]];
+            [items addObject:item];
+        }
+        
+        {
+            //Continuous scale, with default value
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_004" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:87.34 maximumFractionDigits:2]];
+            [items addObject:item];
+        }
+        
+        {
+            //Vertical Discrete scale, with default value
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_005" text:@"Pick an integer" answerFormat:[[ORKScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:90 step:10 vertical:YES]];
+            [items addObject:item];
+        }
+        
+        {
+            //Vertical Continuous scale, with default value
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_006" text:@"Pick a decimal" answerFormat:[[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue: 100 minimumValue: 0 defaultValue:12.75 maximumFractionDigits:2 vertical:YES]];
+            [items addObject:item];
+        }
         
         [step setFormItems:items];
         
@@ -1318,7 +1346,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 #pragma mark Scales task
 
 /*
- This task is used to test various uses of discrete and continuous valued sliders.
+ This task is used to test various uses of discrete and continuous, horizontal and vertical valued sliders.
  */
 - (id<ORKTask>)makeScalesTask {
 
@@ -1328,7 +1356,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         /*
          Continuous scale with two decimal places.
          */
-        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaxValue:10 minValue:1 defaultValue:NSIntegerMax maximumFractionDigits:2];
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:NSIntegerMax
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
@@ -1340,7 +1372,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         /*
          Discrete scale, no default.
          */
-        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaxValue:300 minValue:100 step:50 defaultValue:NSIntegerMax];
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:300
+                                                                                         minimumValue:100
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:50
+                                                                                             vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_02"
                                                                     title:@"How much money do you need?"
@@ -1352,9 +1388,13 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         /*
          Discrete scale, with a default.
          */
-        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaxValue:10 minValue:1 step:1 defaultValue:5];
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:5
+                                                                                                 step:1
+                                                                                             vertical:NO];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_03"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                    answer:scaleAnswerFormat];
         [steps addObject:step];
@@ -1364,11 +1404,47 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         /*
          Discrete scale, with a default that is not on a step boundary.
          */
-        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaxValue:300 minValue:100 step:50 defaultValue:174];
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:300
+                                                                                         minimumValue:100
+                                                                                         defaultValue:174
+                                                                                                 step:50
+                                                                                             vertical:NO];
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_04"
                                                                     title:@"How much money do you need?"
                                                                    answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+
+    {
+        /*
+         Vertical continuous scale with three decimal places and a default.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:8.725
+                                                                                                    maximumFractionDigits:3
+                                                                                                                 vertical:YES];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+
+    {
+        /*
+         Vertical discrete scale, with a default on a step boundary.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:5
+                                                                                                 step:1
+                                                                                             vertical:YES];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
+                                                                      title:@"How would you measure your mood improvement?"
+                                                                     answer:scaleAnswerFormat];
         [steps addObject:step];
     }
 
@@ -1566,8 +1642,9 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     
     NSMutableArray *sections = [NSMutableArray new];
     for (NSNumber *type in scenes) {
+        NSString *summary = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo? Et doming eirmod delicata cum. Vel fabellas scribentur neglegentur cu, pro te iudicabit explicari. His alia idque scriptorem ei, quo no nominavi noluisse.";
         ORKConsentSection *c = [[ORKConsentSection alloc] initWithType:type.integerValue];
-        c.summary = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        c.summary = summary;
         
         if (type.integerValue == ORKConsentSectionTypeOverview) {
             /*

@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -174,6 +175,32 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }
 }
 
+- (BOOL)scrollEnabled {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    return consentSceneView.scrollEnabled;
+}
+
+- (void)setScrollEnabled:(BOOL)enabled {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    consentSceneView.scrollEnabled = enabled;
+}
+
+- (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
+    ORKConsentSceneView *consentSceneView = (ORKConsentSceneView *)self.view;
+    CGRect targetBounds = consentSceneView.bounds;
+    targetBounds.origin.y = 0;
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:^{
+            consentSceneView.bounds = targetBounds;
+        } completion:completion];
+    } else {
+        consentSceneView.bounds = targetBounds;
+        if (completion) {
+            completion(YES);
+        }
+            
+    }
+}
 
 #pragma mark - Action
 

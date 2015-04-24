@@ -54,20 +54,18 @@
 
 + (NSDictionary *)defaultRecorderSettings
 {
-    return [NSDictionary
-            dictionaryWithObjectsAndKeys:
-            @(kAudioFormatMPEG4AAC), AVFormatIDKey,
-            @(AVAudioQualityMin), AVEncoderAudioQualityKey,
-            @(2), AVNumberOfChannelsKey,
-            @(44100.0), AVSampleRateKey,
-            nil];
+    return @{AVFormatIDKey              : @(kAudioFormatMPEG4AAC),
+             AVEncoderAudioQualityKey   : @(AVAudioQualityMin),
+             AVNumberOfChannelsKey      : @(2),
+             AVSampleRateKey            : @(44100.0)};
 }
 
-- (instancetype)initWithRecorderSettings:(NSDictionary *)recorderSettings
-                                    step:(ORKStep *)step
-                         outputDirectory:(NSURL *)outputDirectory
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                  recorderSettings:(NSDictionary *)recorderSettings
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory
 {
-    self = [super initWithStep:step outputDirectory:outputDirectory];
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
     if (self) {
         
         self.continuesInBackground = YES;
@@ -290,9 +288,15 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithRecorderSettings:(NSDictionary *)recorderSettings
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                  recorderSettings:(NSDictionary *)recorderSettings
 {
-    self = [self ork_init];
+    self = [super initWithIdentifier:identifier];
     if (self)
     {
         if (recorderSettings && ! [recorderSettings isKindOfClass:[NSDictionary class]])
@@ -303,14 +307,16 @@
     }
     return self;
 }
+
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step
-                outputDirectory:(NSURL *)outputDirectory
+                 outputDirectory:(NSURL *)outputDirectory
 {
-    return [[ORKAudioRecorder alloc] initWithRecorderSettings:(NSDictionary *__nonnull)self.recorderSettings
-                                                        step:step
-                                             outputDirectory:outputDirectory];
+    return [[ORKAudioRecorder alloc] initWithIdentifier:self.identifier
+                                       recorderSettings:self.recorderSettings
+                                                   step:step
+                                        outputDirectory:outputDirectory];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder

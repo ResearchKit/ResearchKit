@@ -31,12 +31,12 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKScaleSlider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKScaleRangeLabel;
 @class ORKScaleValueLabel;
-@class ORKScaleSlider;
 
 @interface ORKScaleSliderView : UIView
 
@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
 
 @property (nonatomic, strong, nullable) NSNumber *currentValue;
+
+@property (nonatomic, weak, nullable) id<ORKScaleSliderLayoutWidthProvider> delegate;
 
 @end
 

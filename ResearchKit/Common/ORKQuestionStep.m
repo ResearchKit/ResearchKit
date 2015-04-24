@@ -34,6 +34,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKQuestionStepViewController.h"
+#import "ORKDefines_Private.h"
 
 @implementation ORKQuestionStep
 
@@ -139,7 +140,6 @@
     return YES;
 }
 
-
 - (BOOL)isFormatImmediateNavigation {
     ORKQuestionType questionType = self.questionType;
     return (self.optional == NO) && ((questionType == ORKQuestionTypeBoolean) || (questionType == ORKQuestionTypeSingleChoice));
@@ -155,13 +155,13 @@
 }
 
 - (BOOL)isFormatTextfield {
-    ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)[self impliedAnswerFormat];
-    return [textAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]] && ![textAnswerFormat multipleLines];
+    ORKAnswerFormat *impliedAnswerFormat = [self impliedAnswerFormat];
+    return [impliedAnswerFormat isKindOfClass:[ORKTextAnswerFormat class]] && ![(ORKTextAnswerFormat *)impliedAnswerFormat multipleLines];
 }
 
 - (BOOL)isFormatFitsChoiceCells {
-    return ((self.questionType == ORKQuestionTypeSingleChoice && NO==[self isFormatChoiceWithImageOptions] && NO==[self isFormatChoiceValuePicker])||
-            (self.questionType == ORKQuestionTypeMultipleChoice && NO==[self isFormatChoiceWithImageOptions])||
+    return ((self.questionType == ORKQuestionTypeSingleChoice && NO==[self isFormatChoiceWithImageOptions] && NO==[self isFormatChoiceValuePicker]) ||
+            (self.questionType == ORKQuestionTypeMultipleChoice && NO==[self isFormatChoiceWithImageOptions]) ||
             self.questionType == ORKQuestionTypeBoolean);
 }
 

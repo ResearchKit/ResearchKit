@@ -44,7 +44,7 @@
     NSDate *timestamp = self.timestamp;
     CLFloor *floor = self.floor;
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:ORKStringFromDateISO8601(timestamp) forKey:@"timestamp"];
+    NSMutableDictionary *dict = [@{@"timestamp" : ORKStringFromDateISO8601(timestamp)} mutableCopy];
     
     if (horizAccuracy >= 0)
     {

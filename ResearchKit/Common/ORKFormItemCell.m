@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -41,7 +42,6 @@
 #import "ORKFormTextView.h"
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
-#import "ORKScaleSlider.h"
 #import "ORKScaleSliderView.h"
 
 static const CGFloat kVMargin = 10.0;
@@ -856,13 +856,26 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark - ORKFormItemScaleCell
 
-@interface ORKFormItemScaleCell ()
+@interface ORKFormItemScaleCell () <ORKScaleSliderLayoutWidthProvider>
 
 @end
 
 @implementation ORKFormItemScaleCell {
-
+    
     ORKScaleSliderView *_sliderView;
+    id<ORKScaleAnswerFormatProvider> _formatProvider;
+
+}
+
+- (CGFloat)sliderLayoutWidth {
+    return self.expectedLayoutWidth;
+}
+
+- (id<ORKScaleAnswerFormatProvider>)formatProvider {
+    if(_formatProvider == nil){
+        _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
+    }
+    return _formatProvider;
 }
 
 - (void)cellInit {
@@ -871,6 +884,7 @@ static const CGFloat kHMargin = 15.0;
    
     
     _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
+    _sliderView.delegate = self;
     [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
     
     [self.contentView addSubview:_sliderView];
@@ -890,7 +904,25 @@ static const CGFloat kHMargin = 15.0;
 - (void)answerDidChange {
     
     [super answerDidChange];
-    [_sliderView setCurrentValue:(self.answer && self.answer!=ORKNullAnswerValue() ? self.answer : nil)];
+    id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
+    id answer = self.answer;
+    if (answer && answer != ORKNullAnswerValue())
+    {
+        if (! [self.answer isKindOfClass:[NSNumber class]])
+        {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
+        }
+        
+        [_sliderView setCurrentValue:answer];
+    }
+    else
+    {
+        if (answer == nil && [formatProvider defaultNumber]) {
+            [_sliderView setCurrentValue:[formatProvider defaultNumber]];
+        } else {
+            [_sliderView setCurrentValue:nil];
+        }
+    }
     
 }
 
@@ -918,11 +950,13 @@ static const CGFloat kHMargin = 15.0;
     
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
-    NSAssert(!formItem ||
+    if (! (!formItem ||
              [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
              [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
              [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-             [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]], @"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance");
+           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
+    }
     [super setFormItem:formItem];
 }
 

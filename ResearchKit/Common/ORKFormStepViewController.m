@@ -324,7 +324,7 @@
         }
         
         ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-        ORKTableCellItem *cellItem = [[section items] objectAtIndex:indexPath.row-1];
+        ORKTableCellItem *cellItem = [section items][indexPath.row-1];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
             id answer = _savedAnswers[formItem.identifier];
@@ -383,7 +383,7 @@
         return;
     }
     [_savedAnswers removeObjectForKey:identifier];
-    [_savedAnswerDates setObject:[NSDate date] forKey:identifier];
+    _savedAnswerDates[identifier] = [NSDate date];
 }
 
 - (void)setAnswer:(id)answer forIdentifier:(NSString *)identifier {
@@ -402,10 +402,10 @@
     if (_savedSystemTimeZones == nil) {
         _savedSystemTimeZones = [NSMutableDictionary new];
     }
-    [_savedAnswers setObject:answer forKey:identifier];
-    [_savedAnswerDates setObject:[NSDate date] forKey:identifier];
-    [_savedSystemCalendars setObject:[NSCalendar currentCalendar] forKey:identifier];
-    [_savedSystemTimeZones setObject:[NSTimeZone systemTimeZone] forKey:identifier];
+    _savedAnswers[identifier] = answer;
+    _savedAnswerDates[identifier] = [NSDate date];
+    _savedSystemCalendars[identifier] = [NSCalendar currentCalendar];
+    _savedSystemTimeZones[identifier] = [NSTimeZone systemTimeZone];
 }
 
 // Override to monitor button title change
@@ -636,10 +636,10 @@
         NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
         if (! _skipped) {
             answer = _savedAnswers[item.identifier];
-            answerDate = [_savedAnswerDates objectForKey:item.identifier] ? : now;
-            systemCalendar = [_savedSystemCalendars objectForKey:item.identifier];
+            answerDate = _savedAnswerDates[item.identifier] ? : now;
+            systemCalendar = _savedSystemCalendars[item.identifier];
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemCalendar!=nil, @"systemCalendar NOT saved");
-            systemTimeZone = [_savedSystemTimeZones objectForKey:item.identifier];
+            systemTimeZone = _savedSystemTimeZones[item.identifier];
             NSAssert(answer == nil || answer == ORKNullAnswerValue() || systemTimeZone!=nil, @"systemTimeZone NOT saved");
         }
         
@@ -726,7 +726,7 @@
         } else {
             
             ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-            ORKTableCellItem *cellItem = [[section items] objectAtIndex:indexPath.row-1];
+            ORKTableCellItem *cellItem = [section items][indexPath.row-1];
             ORKFormItem *formItem = cellItem.formItem;
             id answer = _savedAnswers[formItem.identifier];
             
@@ -913,7 +913,7 @@
         
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]){
         
-        ORKTableCellItem *cellItem = [_sections[indexPath.section] items][indexPath.row-1];
+        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     

@@ -198,3 +198,7 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView);
 UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
+
+id ORKDynamicCast_(id x, Class objClass);
+
+#define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))

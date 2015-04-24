@@ -41,7 +41,8 @@
 - (CGSize)intrinsicContentSize
 {
     CGSize intrinsic = [super intrinsicContentSize];
-    //force the height to always be the height of the font, so that an empty label doesnt go to 0
+    // Force the intrinsic content height to always be the height of the font, so that an
+    // empty label height doesnt go to 0, which would cause slider controls to jump
     return (CGSize){.width=intrinsic.width,self.font.lineHeight};
 }
 

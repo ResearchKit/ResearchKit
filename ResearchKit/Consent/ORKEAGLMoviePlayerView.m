@@ -116,7 +116,7 @@ static const GLfloat kColorConversion709[] = {
     return [CAEAGLLayer class];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame]))
     {
@@ -129,7 +129,7 @@ static const GLfloat kColorConversion709[] = {
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
         
         eaglLayer.opaque = TRUE;
-        eaglLayer.drawableProperties = @{ kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:YES],
+        eaglLayer.drawableProperties = @{ kEAGLDrawablePropertyRetainedBacking : @YES,
                                           kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8};
         
         // Set the context into which the frames will be drawn.

@@ -576,7 +576,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
     // SingleSelectionPicker Cell && Other Cells
     Class class = typeAndCellMapping[@(self.questionStep.questionType)];
     
-    if([self.questionStep isFormatChoiceWithImageOptions])
+    if ([self.questionStep isFormatChoiceWithImageOptions])
     {
         class = [ORKSurveyAnswerCellForImageSelection class];
     }
@@ -781,7 +781,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
         }
             break;
         default:{
-            
         }
             break;
     }
@@ -791,7 +790,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection)
 
 - (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
     
-    ORKTextChoice *option = [[(ORKTextChoiceAnswerFormat *)_answerFormat textChoices] objectAtIndex:index];
+    ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
     CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText inTableView:_tableView];
     return height;
 }
