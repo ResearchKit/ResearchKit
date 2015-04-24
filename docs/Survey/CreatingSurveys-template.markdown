@@ -306,7 +306,7 @@ will likely include serializing the result hierarchy in some form,
 either using the built-in `NSSecureCoding` support, or to another
 format appropriate for your application.
 
-“If your task can produce file output, the files are generally referenced by an `ORKFileResult`, and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
+If your task can produce file output, the files are generally referenced by an `ORKFileResult`, and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
 directory, and share it.
 
 In the following example, the result is archived with
