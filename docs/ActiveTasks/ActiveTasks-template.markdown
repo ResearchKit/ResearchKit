@@ -16,12 +16,15 @@ At release, the ResearchKit™ framework includes five predefined tasks, which f
 
 <table>
 <caption>Active task in ResearchKit</caption>
+<thead>
     <tr>
         <td>Category</td>
         <td>Task</td>
         <td>Sensor</td>
         <td>Data collected</td>
     </tr>
+</thead>
+<tbody>
  <tr><td rowspan = 2>Motor activities</td> 
      <td>Gait and Balance</td>
      <td>Accelerometer<br>
@@ -57,6 +60,7 @@ Correct and actual sequences<br>
     <td>Microphone</td>
     <td>Uncompressed audio</td>
 </tr>
+</tbody>
 </table>
 
 
