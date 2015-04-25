@@ -106,6 +106,7 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
+    ORKScreenTypeiPad,
     ORKScreenType_COUNT
 };
 

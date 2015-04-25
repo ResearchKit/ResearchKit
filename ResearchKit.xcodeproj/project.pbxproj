@@ -2284,6 +2284,7 @@
 				PRODUCT_NAME = ResearchKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2310,6 +2311,7 @@
 				PRODUCT_NAME = ResearchKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
