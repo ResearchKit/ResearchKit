@@ -34,7 +34,7 @@
 #import "ORKHelpers.h"
 #import "ORKAccessibility.h"
 
-static const CGFloat kRightMargin = 44.0;
+static const CGFloat kLabelRightMargin = 44.0;
 
 @implementation ORKChoiceViewCell {
     UIImageView *_checkView;
@@ -60,24 +60,25 @@ static const CGFloat kRightMargin = 44.0;
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     
-    CGFloat leftMargin = self.separatorInset.left;
+    CGFloat tableLeftMargin = self.separatorInset.left;
+    CGFloat tableRightMargin = self.separatorInset.right;
 
-    CGFloat labelWidth =  self.bounds.size.width - (leftMargin+kRightMargin);
+    CGFloat labelWidth =  self.bounds.size.width - (tableLeftMargin + tableRightMargin + kLabelRightMargin);
     CGFloat cellHeight = self.bounds.size.height;
     
     if (self.longLabel.text.length == 0 && self.shortLabel.text.length == 0) {
         self.shortLabel.frame = CGRectZero;
         self.longLabel.frame = CGRectZero;
     } else if (self.longLabel.text.length == 0) {
-        self.shortLabel.frame = CGRectMake(leftMargin, 0, labelWidth, cellHeight);
+        self.shortLabel.frame = CGRectMake(tableLeftMargin, 0, labelWidth, cellHeight);
         self.longLabel.frame = CGRectZero;
     } else if (self.shortLabel.text.length == 0) {
-        self.longLabel.frame = CGRectMake(leftMargin, 0, labelWidth, cellHeight);
+        self.longLabel.frame = CGRectMake(tableLeftMargin, 0, labelWidth, cellHeight);
         self.shortLabel.frame = CGRectZero;
     } else {
         
         {
-            self.shortLabel.frame = CGRectMake(leftMargin, 0,
+            self.shortLabel.frame = CGRectMake(tableLeftMargin, 0,
                                                labelWidth, 1);
             
             ORKAdjustHeightForLabel(self.shortLabel);
@@ -93,7 +94,7 @@ static const CGFloat kRightMargin = 44.0;
         
         {
             
-            self.longLabel.frame = CGRectMake(leftMargin, 0,
+            self.longLabel.frame = CGRectMake(tableLeftMargin, 0,
                                               labelWidth, 1);
             
             ORKAdjustHeightForLabel(self.longLabel);
@@ -167,8 +168,9 @@ static const CGFloat kRightMargin = 44.0;
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);
     
     CGFloat leftMargin =  ORKTableViewLeftMargin(tableView);
+    CGFloat rightMargin =  ORKTableViewRightMargin(tableView);
     
-    CGFloat labelWidth =  tableView.bounds.size.width - (leftMargin+kRightMargin);
+    CGFloat labelWidth =  tableView.bounds.size.width - (leftMargin + rightMargin + kLabelRightMargin);
    
     if (shortText.length > 0) {
         static ORKSelectionTitleLabel *shortLabel;

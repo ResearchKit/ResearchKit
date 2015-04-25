@@ -118,5 +118,6 @@ CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable windo
 CGFloat ORKStandardMarginForView(UIView *view);
 
 CGFloat ORKTableViewLeftMargin(UITableView *tableView);
+CGFloat ORKTableViewRightMargin(UITableView *tableView);
 
 NS_ASSUME_NONNULL_END

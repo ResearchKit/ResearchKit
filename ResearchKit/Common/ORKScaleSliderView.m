@@ -33,6 +33,7 @@
 #import "ORKScaleSlider.h"
 #import "ORKScaleRangeLabel.h"
 #import "ORKScaleValueLabel.h"
+#import "ORKSkin.h"
 
 @interface ORKScaleSliderView ()
 
@@ -133,6 +134,7 @@
         // Vertical slider constraints
         const CGFloat kMargin = 15.0;
         const CGFloat kBigMargin = 24;
+        
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_slider]-|"
                                                                      options:0
                                                                      metrics:nil
@@ -182,6 +184,8 @@
     }
     else
     {
+        const CGFloat kSideMargin = ORKStandardMarginForView(self.superview);
+
         // Horizontal slider constraints
         const CGFloat kMargin = 17.0;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
@@ -189,9 +193,10 @@
                                                                      metrics:nil
                                                                        views:views]];
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kSideMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kSideMargin-|"
                                                                      options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"kMargin": @(kMargin)}
+                                                                     metrics:@{@"kMargin": @(kMargin),
+                                                                               @"kSideMargin": @(kSideMargin + kMargin)}
                                                                        views:views]];
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_valueLabel

@@ -100,21 +100,44 @@ const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 
 ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
-    if (! window) {
+    ORKScreenType screenType = ORKScreenTypeiPhone6;
+    if (!window) {
         window = [[[UIApplication sharedApplication] windows] firstObject];
     }
     CGRect windowBounds = [window bounds];
     if (windowBounds.size.height < ORKiPhone4ScreenSize.height + 1) {
-        return ORKScreenTypeiPhone4;
+        screenType = ORKScreenTypeiPhone4;
     } else if (windowBounds.size.height < ORKiPhone5ScreenSize.height + 1) {
-        return ORKScreenTypeiPhone5;
+        screenType = ORKScreenTypeiPhone5;
     } else if (windowBounds.size.height < ORKiPhone6ScreenSize.height + 1) {
-        return ORKScreenTypeiPhone6;
+        screenType = ORKScreenTypeiPhone6;
     } else if (windowBounds.size.height < ORKiPhone6PlusScreenSize.height + 1) {
-        return ORKScreenTypeiPhone6Plus;
+        screenType = ORKScreenTypeiPhone6Plus;
     } else {
-        return ORKScreenTypeiPad;
+        screenType = ORKScreenTypeiPad;
     }
+    return screenType;
+}
+
+
+ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
+    ORKScreenType screenType = ORKScreenTypeiPhone6;
+    if (screen == [UIScreen mainScreen]) {
+        CGRect screenBounds = [screen bounds];
+        CGFloat maximumDimension = MAX(screenBounds.size.width, screenBounds.size.height);
+        if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
+            screenType = ORKScreenTypeiPhone4;
+        } else if (maximumDimension < ORKiPhone5ScreenSize.height + 1) {
+            screenType = ORKScreenTypeiPhone5;
+        } else if (maximumDimension < ORKiPhone6ScreenSize.height + 1) {
+            screenType = ORKScreenTypeiPhone6;
+        } else if (maximumDimension < ORKiPhone6PlusScreenSize.height + 1) {
+            screenType = ORKScreenTypeiPhone6Plus;
+        } else {
+            screenType = ORKScreenTypeiPad;
+        }
+    }
+    return screenType;
 }
 
 
@@ -154,45 +177,43 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
     return metrics[metric][screenType];
 }
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen){
-    
-    if (screen != [UIScreen mainScreen]) {
-        return NO;
-    }
-    
-    // If our screen's minimum dimension is bigger than a fixed threshold,
-    // decide to use wide content margins. This is less restrictive than UIKit,
-    // but a good enough approximation.
-    CGRect screenRect = [screen bounds];
-    CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
-    BOOL isWideScreenFormat = (minDimension > ORKiPhone6ScreenSize.width);
-    
-    return isWideScreenFormat;
-}
-
+const CGFloat ORKLayoutMarginWidthiPad = 115.0;
 const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthThinBezelCompact = 16.0;
 __unused const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 
 CGFloat ORKStandardMarginForView(UIView *view) {
-    return ORKWantsWideContentMargins([UIScreen mainScreen]) ?
-    ORKLayoutMarginWidthThinBezelRegular : ORKLayoutMarginWidthThinBezelCompact;
+    CGFloat margin = 0;
+    switch (ORKGetScreenTypeForScreen([UIScreen mainScreen])) {
+        case ORKScreenTypeiPhone4:
+        case ORKScreenTypeiPhone5:
+            margin = ORKLayoutMarginWidthThinBezelCompact;
+            break;
+        case ORKScreenTypeiPhone6:
+        case ORKScreenTypeiPhone6Plus:
+        default:
+            margin = ORKLayoutMarginWidthThinBezelRegular;
+            break;
+        case ORKScreenTypeiPad:
+            margin = ORKLayoutMarginWidthiPad;
+            break;
+    }
+    return margin;
 }
 
 CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
-    
-    if (ORKWantsWideContentMargins(tableView.window.screen)) {
-        if (CGRectGetWidth(tableView.frame) > 320.0) {
-            return ORKLayoutMarginWidthThinBezelRegular;
-            
-        }
-        else {
-            return ORKLayoutMarginWidthThinBezelCompact;
-        }
+    return ORKStandardMarginForView(tableView);
+}
+
+CGFloat ORKTableViewRightMargin(UITableView *tableView) {
+    CGFloat margin = 0;
+    switch (ORKGetScreenTypeForScreen([UIScreen mainScreen])) {
+        case ORKScreenTypeiPad:
+            margin = ORKLayoutMarginWidthiPad;
+            break;
+        default:
+            break;
     }
-    else {
-        // Probably should be ORKLayoutMarginWidthRegularBezel
-        return ORKLayoutMarginWidthThinBezelCompact;
-    }
+    return margin;
 }
 
