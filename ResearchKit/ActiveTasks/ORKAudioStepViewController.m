@@ -75,7 +75,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    if (_audioRecorder.outputDirectory == nil) {
+        @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
+    }
     [self start];
 }
 
