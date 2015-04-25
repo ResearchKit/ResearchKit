@@ -116,12 +116,12 @@
     if (! _timer) {
         
         NSTimeInterval duration = self.audioStep.duration;
-        __weak typeof(self) weakSelf = self;
+        ORKWeakify(self);
         _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration/100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-            typeof(self) strongSelf = weakSelf;
-            [strongSelf doSample];
+            ORKStrongify(self);
+            [selfStrong doSample];
             if (finished) {
-                [strongSelf finish];
+                [selfStrong finish];
             }
         }];
         [_timer resume];

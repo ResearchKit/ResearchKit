@@ -33,6 +33,7 @@
 #import "CMPedometerData+ORKJSONDictionary.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
+#import "ORKHelpers.h"
 
 @interface ORKPedometerRecorder() {
     ORKDataLogger *_logger;
@@ -113,21 +114,21 @@
     }
 
     _isRecording = YES;
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakify(self);
     [self.pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData *pedometerData, NSError *error) {
         
         BOOL success = NO;
         if (pedometerData) {
             success = [_logger append:[pedometerData ork_JSONDictionary] error:&error];
             dispatch_async(dispatch_get_main_queue(), ^{
-                __typeof(self) strongSelf = weakSelf;
-                [strongSelf updateStatisticsWithData:pedometerData];
+                ORKStrongify(self);
+                [selfStrong updateStatisticsWithData:pedometerData];
             });
         }
         if (!success || error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                __typeof(self) strongSelf = weakSelf;
-                [strongSelf finishRecordingWithError:error];
+                ORKStrongify(self);
+                [selfStrong finishRecordingWithError:error];
             });
         }
     }];

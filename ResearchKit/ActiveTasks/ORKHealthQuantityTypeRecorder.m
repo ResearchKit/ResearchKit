@@ -132,7 +132,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
     
     
-    __weak typeof(self) weakSelf = self;
+    ORKWeakify(self);
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
                                             initWithType:_quantityType
                                             predicate:_samplePredicate
@@ -146,8 +146,8 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                                     return;
                                                 }
                                                 
-                                                __typeof(self) strongSelf = weakSelf;
-                                                [strongSelf query_logResults:results withAnchor:newAnchor];
+                                                ORKStrongify(self);
+                                                [selfStrong query_logResults:results withAnchor:newAnchor];
                                                 
                                             }];
     [_healthStore executeQuery:anchoredQuery];
@@ -201,18 +201,17 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     
     NSAssert(!_observerQuery, @"observer query should not exist if not recording");
     
-    __weak __typeof(self) weakSelf = self;
+    ORKWeakify(self);
     _observerQuery = [[HKObserverQuery alloc]
                       initWithSampleType:_quantityType
                       predicate:_samplePredicate
                       updateHandler:^(HKObserverQuery *query, HKObserverQueryCompletionHandler completionHandler, NSError *error) {
-                          __typeof(self) strongSelf = weakSelf;
-                          
+                          ORKStrongify(self);
                           dispatch_async(dispatch_get_main_queue(), ^{
                               if (error) {
-                                  [strongSelf finishRecordingWithError:error];
+                                  [selfStrong finishRecordingWithError:error];
                               } else {
-                                  [strongSelf doFetchNewData];
+                                  [selfStrong doFetchNewData];
                               }
                           });
                           

@@ -383,23 +383,23 @@ static NSString * const _FamilyNameIdentifier = @"family";
     
     UIPageViewControllerNavigationDirection direction = (!animated || page > currentIndex)?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
     _currentPageIndex = page;
-    __weak typeof(self) weakSelf = self;
     
     //unregister ScrollView to clear hairline
     [self.taskViewController setRegisteredScrollView:nil];
     
+    ORKWeakify(self);
     [_pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
         if (finished){
-            STRONGTYPE(weakSelf) strongSelf = weakSelf;
-            [strongSelf updateBackButton];
+            ORKStrongify(self);
+            [selfStrong updateBackButton];
             
             //register ScrollView to update hairline
             if ([viewController isKindOfClass:[ORKConsentReviewController class]]) {
                 ORKConsentReviewController *reviewVc =  (ORKConsentReviewController *)viewController;
-                [strongSelf.taskViewController setRegisteredScrollView:reviewVc.webView.scrollView];
+                [selfStrong.taskViewController setRegisteredScrollView:reviewVc.webView.scrollView];
             }
             
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, strongSelf.navigationItem.leftBarButtonItem);
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, selfStrong.navigationItem.leftBarButtonItem);
         }
     }];
 }

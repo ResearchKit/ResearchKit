@@ -399,13 +399,13 @@
     
     if (stepDuration > 0) {
         
-        __weak typeof(self) weakSelf = self;
+        ORKWeakify(self);
         _activeStepTimer = [[ORKActiveStepTimer alloc] initWithDuration:stepDuration
                                                         interval:_timerUpdateInterval
                                                          runtime:0
                                                          handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                             typeof(self) strongSelf = weakSelf;
-                                                             [strongSelf countDownTimerFired:timer finished:finished];
+                                                             ORKStrongify(self);
+                                                             [selfStrong countDownTimerFired:timer finished:finished];
                                                          }];
         [_activeStepTimer resume];
     }

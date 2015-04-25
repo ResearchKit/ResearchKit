@@ -536,10 +536,10 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     if (_directorySource) {
         dispatch_source_set_cancel_handler(_directorySource, ^{ close(dirFD); });
-        __weak __typeof(self) weakSelf = self;
+        ORKWeakify(self);
         dispatch_source_set_event_handler(_directorySource, ^{
-            __strong __typeof(self) strongSelf = weakSelf;
-            [strongSelf directoryUpdated];
+            ORKStrongify(self);
+            [selfStrong directoryUpdated];
         });
         dispatch_resume(_directorySource);
     }
