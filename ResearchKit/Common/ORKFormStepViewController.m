@@ -339,7 +339,7 @@
 - (void)refreshDefaults {
     NSArray *formItems = [self formItems];
     ORKAnswerDefaultSource *source = _defaultSource;
-    __weak typeof(self) weakSelf = self;
+    ORKWeakify(self);
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         dispatch_semaphore_t sem = dispatch_semaphore_create(0);
         __block NSMutableDictionary *defaults = [NSMutableDictionary dictionary];
@@ -360,8 +360,8 @@
         
         // All fetches have completed.
         dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf updateDefaults:defaults];
+            ORKStrongify(self);
+            [selfStrong updateDefaults:defaults];
         });
         
     });

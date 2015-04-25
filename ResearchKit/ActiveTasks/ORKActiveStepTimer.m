@@ -29,6 +29,7 @@
  */
 
 #import "ORKActiveStepTimer.h"
+#import "ORKHelpers.h"
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 #import <UIKit/UIKit.h>
@@ -199,10 +200,10 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
         assert(0);
         return;
     }
-    __weak typeof(self) weakSelf = self;
+    ORKWeakify(self);
     dispatch_source_set_event_handler(_timer, ^{
-        typeof(self) strongSelf = weakSelf;
-        [strongSelf hiqueue_event];
+        ORKStrongify(self);
+        [selfStrong hiqueue_event];
     });
     
     NSTimeInterval timeUntilNextFire = (floor(_preExistingRuntime / _interval) + 1)*_interval -  _preExistingRuntime;

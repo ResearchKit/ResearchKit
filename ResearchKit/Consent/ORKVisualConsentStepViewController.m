@@ -366,9 +366,9 @@
 
 - (ORKVisualConsentTransitionAnimator *)doAnimateFromViewController:(ORKConsentSceneViewController *)fromController toController:(ORKConsentSceneViewController *)viewController direction:(UIPageViewControllerNavigationDirection)direction semaphore:(dispatch_semaphore_t)sem url:(NSURL *)url animateBeforeTransition:(BOOL)animateBeforeTransition transitionBeforeAnimate:(BOOL)transitionBeforeAnimate {
     
-    __weak typeof(self) weakSelf = self;
     _animator = [[ORKVisualConsentTransitionAnimator alloc] initWithVisualConsentStepViewController:self movieURL:url];
-    
+
+    ORKWeakify(self);
     [_animator animateTransitionWithDirection:direction
                                           withLoadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
                                               fromController.imageHidden = YES;
@@ -376,23 +376,23 @@
                                               
                                               if (!animateBeforeTransition && !transitionBeforeAnimate) {
                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                      __strong typeof(self) strongSelf = weakSelf;
-                                                      [strongSelf doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
+                                                      ORKStrongify(self);
+                                                      [selfStrong doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
                                               }
                                           }
                                         completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
                                             
                                             if (animateBeforeTransition && !transitionBeforeAnimate) {
                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                    __strong typeof(self) strongSelf = weakSelf;
-                                                    [strongSelf doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
+                                                    ORKStrongify(self);
+                                                    [selfStrong doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
                                             } else {
                                                 viewController.imageHidden = NO;
                                                 fromController.imageHidden = NO;
                                             }
                                             
-                                            __strong typeof(self) strongSelf = weakSelf;
-                                            [strongSelf finishTransitioningAnimator:animator];
+                                            ORKStrongify(self);
+                                            [selfStrong finishTransitioningAnimator:animator];
 
                                             dispatch_semaphore_signal(sem);
                                         }];
@@ -499,10 +499,10 @@
         _transitioning = YES;
         
         
-        __weak typeof(self) weakSelf = self;
+        ORKWeakify(self);
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Defensive timeouts
-            typeof(self) strongSelf = weakSelf;
+            ORKStrongify(self);
             
             dispatch_semaphore_wait(sem, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
             
@@ -510,7 +510,7 @@
             
             if (url && transitionBeforeAnimate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    animator = [strongSelf doAnimateFromViewController:fromController
+                    animator = [selfStrong doAnimateFromViewController:fromController
                                                            toController:viewController
                                                               direction:direction
                                                               semaphore:sem
@@ -523,16 +523,16 @@
             dispatch_semaphore_wait(sem, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                __strong typeof(self) strongSelf = weakSelf;
+                ORKStrongify(self);
                 
                 viewController.imageHidden = NO;
                 fromController.imageHidden = NO;
                 
                 if (animator) {
-                    [strongSelf finishTransitioningAnimator:animator];
+                    [selfStrong finishTransitioningAnimator:animator];
                 }
                 
-                [strongSelf updatePageIndex];
+                [selfStrong updatePageIndex];
             });
         });
         

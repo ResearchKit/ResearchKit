@@ -881,8 +881,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         _lastRestorableStepIdentifier = step.identifier;
     }
     
-    __weak typeof(self) weakSelf = self;
-    
     UIPageViewControllerNavigationDirection direction = goForward?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
     
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
@@ -911,21 +909,21 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     // from the same VC.
     _currentStepViewController = viewController;
     
+    ORKWeakify(self);
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
+        ORKStrongify(self);
         
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        
-        ORK_Log_Debug(@"%@ %@", strongSelf, viewController);
+        ORK_Log_Debug(@"%@ %@", selfStrong, viewController);
         
         // Set the progress label only if non-nil or if it is nil having previously set a progress label.
-        if (progressLabel || strongSelf->_haveSetProgressLabel) {
-            strongSelf.pageViewController.navigationItem.title = progressLabel;
+        if (progressLabel || selfStrong->_haveSetProgressLabel) {
+            selfStrong.pageViewController.navigationItem.title = progressLabel;
         }
         
-        strongSelf->_haveSetProgressLabel = (progressLabel != nil);
+        selfStrong->_haveSetProgressLabel = (progressLabel != nil);
         
         // Collect toolbarItems
-        [strongSelf collectToolbarItemsFromViewController:viewController];
+        [selfStrong collectToolbarItemsFromViewController:viewController];
     }];
     
 }

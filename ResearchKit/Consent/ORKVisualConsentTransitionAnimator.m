@@ -197,8 +197,6 @@
 
 - (void)performAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
     AVPlayer *moviePlayer = _moviePlayer;
-
-    __weak AVPlayer *weakPlayer = moviePlayer;
     
     _pendingContext = context;
     
@@ -208,10 +206,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:[moviePlayer currentItem]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[moviePlayer currentItem]];
     
+    ORKWeakify(moviePlayer);
     [moviePlayer seekToTime:[context.startTime CMTimeValue]
             toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
-                AVPlayer *localPlayer = weakPlayer;
-                [localPlayer play];
+                ORKStrongify(moviePlayer);
+                [moviePlayerStrong play];
             }];
 }
 

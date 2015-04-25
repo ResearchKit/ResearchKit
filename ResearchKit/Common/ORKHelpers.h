@@ -202,3 +202,6 @@ id ORKDynamicCast_(id x, Class objClass);
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
 const CGFloat ORKScrollToTopAnimationDuration;
+
+#define ORKWeakify(VARIABLE)    __weak typeof(VARIABLE) VARIABLE##Weak = VARIABLE
+#define ORKStrongify(VARIABLE)  __strong typeof(VARIABLE##Weak) VARIABLE##Strong = VARIABLE##Weak
