@@ -950,8 +950,7 @@
     }
 }
 
-- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell
-{
+- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell {
     if (_currentFirstResponderCell == cell) {
         _currentFirstResponderCell = nil;
     }

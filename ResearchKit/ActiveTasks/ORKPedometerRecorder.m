@@ -192,8 +192,7 @@
 
 @implementation ORKPedometerRecorderConfiguration
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-{
+- (instancetype)initWithIdentifier:(NSString *)identifier {
     return [super initWithIdentifier:identifier];
 }
 
