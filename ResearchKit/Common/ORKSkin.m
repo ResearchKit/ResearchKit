@@ -99,19 +99,16 @@ const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
 const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 
-ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
+ORKScreenType ORKGetScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
-    if (!window) {
-        window = [[[UIApplication sharedApplication] windows] firstObject];
-    }
-    CGRect windowBounds = [window bounds];
-    if (windowBounds.size.height < ORKiPhone4ScreenSize.height + 1) {
+    CGFloat maximumDimension = MAX(bounds.size.width, bounds.size.height);
+    if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone4;
-    } else if (windowBounds.size.height < ORKiPhone5ScreenSize.height + 1) {
+    } else if (maximumDimension < ORKiPhone5ScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone5;
-    } else if (windowBounds.size.height < ORKiPhone6ScreenSize.height + 1) {
+    } else if (maximumDimension < ORKiPhone6ScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone6;
-    } else if (windowBounds.size.height < ORKiPhone6PlusScreenSize.height + 1) {
+    } else if (maximumDimension < ORKiPhone6PlusScreenSize.height + 1) {
         screenType = ORKScreenTypeiPhone6Plus;
     } else {
         screenType = ORKScreenTypeiPad;
@@ -119,23 +116,17 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
     return screenType;
 }
 
+ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
+    if (!window) {
+        window = [[[UIApplication sharedApplication] windows] firstObject];
+    }
+    return ORKGetScreenTypeForBounds([window bounds]);
+}
 
 ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     if (screen == [UIScreen mainScreen]) {
-        CGRect screenBounds = [screen bounds];
-        CGFloat maximumDimension = MAX(screenBounds.size.width, screenBounds.size.height);
-        if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
-            screenType = ORKScreenTypeiPhone4;
-        } else if (maximumDimension < ORKiPhone5ScreenSize.height + 1) {
-            screenType = ORKScreenTypeiPhone5;
-        } else if (maximumDimension < ORKiPhone6ScreenSize.height + 1) {
-            screenType = ORKScreenTypeiPhone6;
-        } else if (maximumDimension < ORKiPhone6PlusScreenSize.height + 1) {
-            screenType = ORKScreenTypeiPhone6Plus;
-        } else {
-            screenType = ORKScreenTypeiPad;
-        }
+        screenType = ORKGetScreenTypeForBounds([screen bounds]);
     }
     return screenType;
 }
