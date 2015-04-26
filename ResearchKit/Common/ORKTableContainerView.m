@@ -107,11 +107,9 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGRect bounds = self.bounds;
-    bounds.origin.x += ORKTableViewLeftMargin(_tableView);
-    bounds.size.width -= (bounds.origin.x + ORKTableViewRightMargin(_tableView));
-    _tableView.frame = bounds;
+    _tableView.frame = UIEdgeInsetsInsetRect(bounds, ORKDefaultFullScreenViewLayoutMargins(self));
     
     {
         _stepHeaderView.frame = (CGRect){{0,0},{_tableView.bounds.size.width,30}};

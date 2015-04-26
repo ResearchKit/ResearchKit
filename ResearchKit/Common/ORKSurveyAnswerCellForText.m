@@ -52,24 +52,15 @@
     NSArray *_constraints;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        
-    }
-    return self;
-}
-
 - (void)applyAnswerFormat {
-    ORKAnswerFormat *af = [self.step.answerFormat impliedAnswerFormat];
+    ORKAnswerFormat *answerFormat = [self.step.answerFormat impliedAnswerFormat];
     
-    if ([af isKindOfClass:[ORKTextAnswerFormat class]]) {
-        ORKTextAnswerFormat *taf = (ORKTextAnswerFormat *)af;
-        _maxLength = [taf maximumLength];
-        self.textView.autocorrectionType = taf.autocorrectionType;
-        self.textView.autocapitalizationType = taf.autocapitalizationType;
-        self.textView.spellCheckingType = taf.spellCheckingType;
+    if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
+        _maxLength = [textAnswerFormat maximumLength];
+        self.textView.autocorrectionType = textAnswerFormat.autocorrectionType;
+        self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
+        self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
     } else {
         _maxLength = 0;
     }
@@ -85,7 +76,7 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
     [self setNeedsUpdateConstraints];
 }
 
@@ -94,7 +85,7 @@
     
     if (self.textView == nil ) {
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self), .top=8, .bottom=8};
+        self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
         
         self.textView = [[ORKAnswerTextView alloc] initWithFrame:CGRectZero];
         
@@ -230,15 +221,13 @@
 
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.contentView.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.contentView.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
 }
 
-
 - (void)updateConstraints {
-    // Want to use ORKTableViewLeftMargin(), but tableview is not available here.
+    self.contentView.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
-    self.contentView.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
-   
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|" options:0 metrics:nil views:views]];
 
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|" options:0 metrics:nil views:views]];

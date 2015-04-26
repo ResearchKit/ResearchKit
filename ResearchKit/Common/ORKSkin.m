@@ -131,7 +131,6 @@ ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     return screenType;
 }
 
-
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
@@ -173,38 +172,52 @@ const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthThinBezelCompact = 16.0;
 __unused const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 
-CGFloat ORKStandardMarginForView(UIView *view) {
+CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
     CGFloat margin = 0;
-    switch (ORKGetScreenTypeForScreen([UIScreen mainScreen])) {
+    switch (ORKGetScreenTypeForWindow(cell.window)) {
         case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
+        case ORKScreenTypeiPhone6:
             margin = ORKLayoutMarginWidthThinBezelCompact;
             break;
-        case ORKScreenTypeiPhone6:
         case ORKScreenTypeiPhone6Plus:
+        case ORKScreenTypeiPad:
         default:
             margin = ORKLayoutMarginWidthThinBezelRegular;
             break;
-        case ORKScreenTypeiPad:
-            margin = ORKLayoutMarginWidthiPad;
-            break;
     }
     return margin;
 }
 
-CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
-    return ORKStandardMarginForView(tableView);
-}
-
-CGFloat ORKTableViewRightMargin(UITableView *tableView) {
+CGFloat ORKStandardMarginForView(UIView *view) {
     CGFloat margin = 0;
-    switch (ORKGetScreenTypeForScreen([UIScreen mainScreen])) {
+    switch (ORKGetScreenTypeForWindow(view.window)) {
+        case ORKScreenTypeiPhone4:
+        case ORKScreenTypeiPhone5:
+        case ORKScreenTypeiPhone6:
+        case ORKScreenTypeiPhone6Plus:
+        default:
+            margin = ORKTableViewCellLeftMargin(view);
+            break;
         case ORKScreenTypeiPad:
             margin = ORKLayoutMarginWidthiPad;
-            break;
-        default:
             break;
     }
     return margin;
 }
 
+UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UITableViewCell *cell) {
+    return (UIEdgeInsets){.left=ORKTableViewCellLeftMargin(cell),
+                          .right=ORKTableViewCellLeftMargin(cell),
+                          .bottom=8,
+                          .top=8};
+}
+
+UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view) {
+    UIEdgeInsets layoutMargins = UIEdgeInsetsZero;
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    if (screenType == ORKScreenTypeiPad) {
+        layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(view), .right=ORKStandardMarginForView(view)};
+    }
+    return layoutMargins;
+}

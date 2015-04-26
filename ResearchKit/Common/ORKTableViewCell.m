@@ -56,8 +56,8 @@
         }
         
         _orkSeparatorColor = defaultSeparatorColor;
-        _topSeparatorLeftInset = ORKStandardMarginForView(self);
-        _bottomSeparatorLeftInset = ORKStandardMarginForView(self);
+        _topSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
+        _bottomSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
         
         _topSeparator = [UIView new];
         _bottomSeparator = [UIView new];

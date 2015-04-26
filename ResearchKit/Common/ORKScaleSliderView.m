@@ -131,7 +131,7 @@
     
     if ([_formatProvider isVertical])
     {
-        // Vertical slider constraints
+        // Vertical slider
         const CGFloat kMargin = 15.0;
         const CGFloat kBigMargin = 24;
         
@@ -184,19 +184,16 @@
     }
     else
     {
-        const CGFloat kSideMargin = ORKStandardMarginForView(self.superview);
-
-        // Horizontal slider constraints
+        // Horizontal slider
         const CGFloat kMargin = 17.0;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
                                                                      options:NSLayoutFormatAlignAllCenterX
                                                                      metrics:nil
                                                                        views:views]];
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kSideMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kSideMargin-|"
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
                                                                      options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"kMargin": @(kMargin),
-                                                                               @"kSideMargin": @(kSideMargin + kMargin)}
+                                                                     metrics:@{@"kMargin": @(kMargin)}
                                                                        views:views]];
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_valueLabel

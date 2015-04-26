@@ -208,8 +208,7 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        CGFloat margin = ORKStandardMarginForView(self);
-        self.layoutMargins = (UIEdgeInsets){.left=2*margin,.right=2*margin};
+        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
         
         self.alertLabel = [ORKHeadlineLabel new];
         _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -280,18 +279,25 @@ static const CGFloat kValueLineMargin = 1.5;
     NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _alertLabel, _graphView);
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_graphView]-[_alertLabel]|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_alertLabel
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1 constant:0]];
+                                                       multiplier:1
+                                                         constant:0]];
+    
+    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKTableViewCellLeftMargin(self));
+    const CGFloat innerMargin = 2;
+
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_graphView]-2-[_timerLabel]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-sideMargin-[_graphView]-innerMargin-[_timerLabel]-sideMargin-|"
                                              options:NSLayoutFormatAlignAllCenterY
-                                             metrics:nil views:views]];
+                                             metrics:@{@"sideMargin": @(sideMargin), @"innerMargin": @(innerMargin)}
+                                               views:views]];
     
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_graphView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(GraphViewBlueZoneHeight+GraphViewRedZoneHeight*2)]];

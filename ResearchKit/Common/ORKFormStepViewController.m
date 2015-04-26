@@ -466,8 +466,6 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        
-        [self.view addSubview:_tableView];
     }
 
 }

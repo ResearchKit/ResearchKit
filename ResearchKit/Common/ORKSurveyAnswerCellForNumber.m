@@ -102,15 +102,14 @@
     [super setNeedsUpdateConstraints];
 }
 
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
     [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                  options:0 metrics:nil views:views]];

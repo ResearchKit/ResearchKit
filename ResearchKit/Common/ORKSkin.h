@@ -115,9 +115,9 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *__nullable window);
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable window);
 
+CGFloat ORKTableViewCellLeftMargin(UIView *view);
 CGFloat ORKStandardMarginForView(UIView *view);
-
-CGFloat ORKTableViewLeftMargin(UITableView *tableView);
-CGFloat ORKTableViewRightMargin(UITableView *tableView);
+UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UIView *view);
+UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view);
 
 NS_ASSUME_NONNULL_END
