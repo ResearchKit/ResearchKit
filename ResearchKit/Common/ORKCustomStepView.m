@@ -28,25 +28,39 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCustomStepView.h"
 #import "ORKCustomStepView_Internal.h"
 #import "ORKSurveyAnswerCell.h"
 
+
 @implementation ORKActiveStepCustomView
 
-- (void)resetStep:(ORKStepViewController *)viewController {}
-- (void)startStep:(ORKStepViewController *)viewController {}
-- (void)suspendStep:(ORKStepViewController *)viewController {}
-- (void)resumeStep:(ORKStepViewController *)viewController {}
-- (void)finishStep:(ORKStepViewController *)viewController {}
+- (void)resetStep:(ORKStepViewController *)viewController {
+}
 
-- (void)updateDisplay:(ORKActiveStepViewController *)viewController {}
+- (void)startStep:(ORKStepViewController *)viewController {
+}
+
+- (void)suspendStep:(ORKStepViewController *)viewController {
+}
+
+- (void)resumeStep:(ORKStepViewController *)viewController {
+}
+
+- (void)finishStep:(ORKStepViewController *)viewController {
+}
+
+- (void)updateDisplay:(ORKActiveStepViewController *)viewController {
+}
+
 @end
 
 
 @implementation ORKQuestionStepCustomView
 
 @end
+
 
 @implementation ORKQuestionStepCellHolderView
 

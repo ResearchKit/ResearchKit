@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForScale.h"
 #import "ORKScaleSlider.h"
 #import "ORKSkin.h"
@@ -37,12 +36,14 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKScaleSliderView.h"
 
+
 @interface ORKSurveyAnswerCellForScale ()
 
 @property (nonatomic, strong) ORKScaleSliderView *sliderView;
 @property (nonatomic, strong) id<ORKScaleAnswerFormatProvider> formatProvider;
 
 @end
+
 
 @implementation ORKSurveyAnswerCellForScale
 
@@ -52,7 +53,6 @@
     }
     return _formatProvider;
 }
-
 
 - (void)prepareView {
     [super prepareView];
@@ -92,7 +92,6 @@
 }
 
 - (void)updateConstraints {
-    
     [super updateConstraints];
     
     self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -106,12 +105,9 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil views:views]];
-
 }
 
-
 - (IBAction)sliderValueChanged:(id)sender {
-    
     [self ork_setAnswer:_sliderView.currentValue];
 }
 

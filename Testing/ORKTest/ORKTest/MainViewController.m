@@ -53,8 +53,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
-@interface MainViewController () <ORKTaskViewControllerDelegate>
-{
+@interface MainViewController () <ORKTaskViewControllerDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -70,8 +69,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
 
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.restorationIdentifier = @"main";
@@ -79,8 +77,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     _savedViewControllers = [NSMutableDictionary new];
@@ -376,8 +373,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 /*
  Actually presents the task view controller.
  */
-- (void)beginTask
-{
+- (void)beginTask {
     id<ORKTask> task = self.taskVC.task;
     self.taskVC.delegate = self;
     
@@ -1857,8 +1853,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
  
  In this test app, we don't dismiss on a fail (we just log it).
  */
-- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error
-{
+- (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
             [self taskViewControllerDidComplete:taskViewController];
@@ -1981,16 +1976,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
  and restore the actual task; here, since we know the tasks don't change during
  testing, we just re-create the task.
  */
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_taskVC forKey:@"taskVC"];
     [coder encodeObject:_lastRouteResult forKey:@"lastRouteResult"];
 }
 
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     _taskVC = [coder decodeObjectOfClass:[UIViewController class] forKey:@"taskVC"];

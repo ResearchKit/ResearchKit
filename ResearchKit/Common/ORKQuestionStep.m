@@ -36,14 +36,12 @@
 #import "ORKQuestionStepViewController.h"
 #import "ORKDefines_Private.h"
 
-@implementation ORKQuestionStep
 
+@implementation ORKQuestionStep
 
 + (Class)stepViewControllerClass {
     return [ORKQuestionStepViewController class];
 }
-
-
 
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
                                   title:(NSString *)title
@@ -54,7 +52,6 @@
     step.answerFormat = answer;
     return step;
 }
-
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     
@@ -100,17 +97,14 @@
     return [super hash] ^ [self.answerFormat hash];
 }
 
-
 - (ORKQuestionType)questionType {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
     return impliedFormat.questionType;
 }
 
-
 - (ORKAnswerFormat *)impliedAnswerFormat {
     return [self.answerFormat impliedAnswerFormat];
 }
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -136,7 +130,6 @@
     ORKQuestionType questionType = self.questionType;
     return (self.optional == NO) && ((questionType == ORKQuestionTypeBoolean) || (questionType == ORKQuestionTypeSingleChoice));
 }
-
 
 - (BOOL)isFormatChoiceWithImageOptions {
     return [[self impliedAnswerFormat] isKindOfClass:[ORKImageChoiceAnswerFormat class]];
@@ -165,7 +158,5 @@
 - (BOOL)formatRequiresTableView {
     return [self isFormatFitsChoiceCells];
 }
-
-
 
 @end

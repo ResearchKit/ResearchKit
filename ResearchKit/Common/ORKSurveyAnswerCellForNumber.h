@@ -31,6 +31,7 @@
 
 #import "ORKSurveyAnswerCell.h"
 
+
 @interface ORKSurveyAnswerCellForNumber : ORKSurveyAnswerCell <UITextFieldDelegate>
 
 @end

@@ -28,13 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTimeIntervalPicker.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKDatePicker : UIDatePicker
 
 @end
+
 
 @implementation ORKDatePicker
 
@@ -49,11 +52,13 @@
 
 @end
 
+
 @interface ORKTimeIntervalPicker ()
 
 @property (nonatomic, strong) ORKTimeIntervalAnswerFormat *answerFormat;
 
 @end
+
 
 @implementation ORKTimeIntervalPicker {
     id _answer;
@@ -69,7 +74,6 @@
                       pickerDelegate:(id<ORKPickerDelegate>)delegate {
     self = [super init];
     if (self) {
-        
         self.answerFormat = answerFormat;
         self.answer = answer;
         self.pickerDelegate = delegate;
@@ -89,7 +93,6 @@
 }
 
 - (void)setAnswer:(id)answer {
-
     _answer = answer;
     
     NSTimeInterval value;
@@ -126,6 +129,5 @@
         [self.pickerDelegate picker:self answerDidChangeTo:self.answer];
     }
 }
-
 
 @end

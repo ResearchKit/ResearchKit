@@ -31,8 +31,7 @@
 #import "ORKESerialization.h"
 
 
-static NSString *ORKEStringFromDateISO8601(NSDate *date)
-{
+static NSString *ORKEStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -43,8 +42,7 @@ static NSString *ORKEStringFromDateISO8601(NSDate *date)
     return [__formatter stringFromDate:date];
 }
 
-static NSDate *ORKEDateFromStringISO8601(NSString *string)
-{
+static NSDate *ORKEDateFromStringISO8601(NSString *string) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -55,8 +53,7 @@ static NSDate *ORKEDateFromStringISO8601(NSString *string)
     return [__formatter dateFromString:string];
 }
 
-static NSArray *ORKNumericAnswerStyleTable()
-{
+static NSArray *ORKNumericAnswerStyleTable() {
     static NSArray *table = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -104,14 +101,11 @@ static CGRect rectFromDictionary(NSDictionary *dict) {
     return (CGRect){.origin = pointFromDictionary(dict[@"origin"]), .size = sizeFromDictionary(dict[@"size"])};
 }
 
-
-static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s)
-{
+static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
     return tableMapReverse(s, ORKNumericAnswerStyleTable());
 }
 
-static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style)
-{
+static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
 }
 

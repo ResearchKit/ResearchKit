@@ -37,6 +37,7 @@
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 
+
 @interface ORKStepViewController () {
     BOOL _hasBeenPresented;
     BOOL _dismissing;
@@ -47,6 +48,7 @@
 @property (nonatomic, strong,readonly) UIBarButtonItem *fixedSpace;
 
 @end
+
 
 @implementation ORKStepViewController
 
@@ -131,7 +133,6 @@
 }
 
 - (void)stepDidChange {
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -237,7 +238,6 @@
     [self updateNavRightBarButtonItem];
 }
 
-
 - (BOOL)hasPreviousStep {
     STRONGTYPE(self.delegate) delegate = self.delegate;
     if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
@@ -295,7 +295,6 @@
     
 }
 
-
 - (ORKTaskViewController *)taskViewController {
     UIPageViewController *pageVc = (UIPageViewController *)[self parentViewController];
     if (pageVc && [pageVc isKindOfClass:[UIPageViewController class]]) {
@@ -308,8 +307,6 @@
     
     return nil;
 }
-
-
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
     
@@ -342,7 +339,6 @@
 
 #pragma mark - UIStateRestoring
 
-
 static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString * const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
@@ -374,10 +370,7 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
     }
-    
-    
 }
-
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     ORKStepViewController *vc = [[[self class] alloc] initWithStep:nil];
@@ -386,6 +379,4 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
     return vc;
 }
 
-
 @end
-
