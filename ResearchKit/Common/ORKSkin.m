@@ -169,8 +169,8 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
 
 const CGFloat ORKLayoutMarginWidthiPad = 115.0;
 const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
-const CGFloat ORKLayoutMarginWidthThinBezelCompact = 16.0;
-__unused const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
+//const CGFloat ORKLayoutMarginWidthThinBezelCompact = 16.0;
+const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 
 CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
     CGFloat margin = 0;
@@ -178,7 +178,7 @@ CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
         case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
-            margin = ORKLayoutMarginWidthThinBezelCompact;
+            margin = ORKLayoutMarginWidthRegularBezel;
             break;
         case ORKScreenTypeiPhone6Plus:
         case ORKScreenTypeiPad:
