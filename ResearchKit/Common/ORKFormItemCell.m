@@ -349,7 +349,9 @@ static const CGFloat kHMargin = 15.0;
 - (void)updateValueLabel {
     ORKUnitTextField *textField = [self textField];
     
-    if (textField == nil) { return; }
+    if (textField == nil) {
+        return;
+    }
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;

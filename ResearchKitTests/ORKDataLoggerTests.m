@@ -156,16 +156,16 @@
     
     XCTAssertEqual([_finishedLogFiles count], 2);
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    XCTAssertTrue([fm fileExistsAtPath:[(NSURL *)_finishedLogFiles[0] path]]);
-    XCTAssertTrue([fm fileExistsAtPath:[(NSURL *)_finishedLogFiles[1] path]]);
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    XCTAssertTrue([fileManager fileExistsAtPath:[(NSURL *)_finishedLogFiles[0] path]]);
+    XCTAssertTrue([fileManager fileExistsAtPath:[(NSURL *)_finishedLogFiles[1] path]]);
     
     NSError *error = nil;
     XCTAssertTrue([_dataLogger removeAllFilesWithError:&error]);
     XCTAssertNil(error);
     
-    XCTAssertFalse([fm fileExistsAtPath:[(NSURL *)_finishedLogFiles[0] path]]);
-    XCTAssertFalse([fm fileExistsAtPath:[(NSURL *)_finishedLogFiles[1] path]]);
+    XCTAssertFalse([fileManager fileExistsAtPath:[(NSURL *)_finishedLogFiles[0] path]]);
+    XCTAssertFalse([fileManager fileExistsAtPath:[(NSURL *)_finishedLogFiles[1] path]]);
     
     NSArray *logs = [self allLogsWithError:&error];
     XCTAssertNil(error);
@@ -288,7 +288,7 @@
 
 - (void)testFileSizeLimitTriggersRollover {
     _dataLogger.maximumCurrentLogFileSize = 50;
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSDictionary *jsonObject = @{@"x" : @"1234567890"};
     [self logJsonObject:jsonObject];
@@ -296,16 +296,16 @@
     
     [self wait];
     
-    XCTAssertTrue([[fm attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
+    XCTAssertTrue([[fileManager attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
     XCTAssertEqual([_finishedLogFiles count], 0);
     
     [self logJsonObject:jsonObject];
     [self wait];
-    XCTAssertTrue([[fm attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
+    XCTAssertTrue([[fileManager attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
     XCTAssertEqual([_finishedLogFiles count], 1);
     
-    XCTAssertTrue([[fm attributesOfItemAtPath:[(NSURL *)_finishedLogFiles[0] path] error:nil] fileSize] >= 50);
-    XCTAssertTrue([[fm attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
+    XCTAssertTrue([[fileManager attributesOfItemAtPath:[(NSURL *)_finishedLogFiles[0] path] error:nil] fileSize] >= 50);
+    XCTAssertTrue([[fileManager attributesOfItemAtPath:[[_dataLogger currentLogFileURL] path] error:nil] fileSize] < 50);
 }
 
 - (void)testFirstWriteOpensFilehandle {

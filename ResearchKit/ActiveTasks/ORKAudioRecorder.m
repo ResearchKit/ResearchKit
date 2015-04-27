@@ -238,20 +238,20 @@
         return NO;
     }
     
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if (! [fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:error]) {
+    if (! [fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:error]) {
         return NO;
     }
     
-    if ([fm fileExistsAtPath:[url path]]) {
-        if (! [fm removeItemAtPath:[url path] error:error]) {
+    if ([fileManager fileExistsAtPath:[url path]]) {
+        if (! [fileManager removeItemAtPath:[url path] error:error]) {
             return NO;
         }
     }
     
-    [fm createFileAtPath:[url path] contents:nil attributes:nil];
-    [fm setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
+    [fileManager createFileAtPath:[url path] contents:nil attributes:nil];
+    [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(ORKFileProtectionCompleteUnlessOpen)} ofItemAtPath:[url path] error:error];
     return YES;
 }
 

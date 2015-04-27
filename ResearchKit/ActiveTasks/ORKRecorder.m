@@ -216,9 +216,9 @@
 }
 
 - (void)applyFileProtection:(ORKFileProtectionMode)fileProtection toFileAtURL:(NSURL *)url {
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
-    if (!  [fm setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(fileProtection)} ofItemAtPath:[url path] error:&error]) {
+    if (!  [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(fileProtection)} ofItemAtPath:[url path] error:&error]) {
         ORK_Log_Debug(@"Error setting %@ on %@: %@", ORKFileProtectionFromMode(fileProtection), url, error);
     }
 }

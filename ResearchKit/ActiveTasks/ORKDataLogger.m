@@ -827,9 +827,9 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSString *datedLog = [NSString stringWithFormat:@"%@-%@",logName, [dfm stringFromDate:[NSDate date]]];
     NSURL *destinationUrl = [directory URLByAppendingPathComponent:datedLog];
     
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     int digit = 0;
-    while ([fm fileExistsAtPath:[destinationUrl path] isDirectory:NULL]) {
+    while ([fileManager fileExistsAtPath:[destinationUrl path] isDirectory:NULL]) {
         digit ++;
         NSString *lastComponent = [datedLog stringByAppendingFormat:@"-%02d",digit];
         destinationUrl = [directory URLByAppendingPathComponent:lastComponent];
@@ -941,7 +941,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (BOOL)queue_removeUploadedFiles:(NSArray *)fileURLs withError:(NSError * __autoreleasing *)error {
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     __block NSMutableArray *errors = [NSMutableArray array];
     BOOL success = [self queue_enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         if ([fileURLs containsObject:logFileUrl]) {
@@ -949,7 +949,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             BOOL uploaded = [logFileUrl ork_isUploaded];
             
             if (uploaded) {
-                if (![fm removeItemAtURL:logFileUrl error:&errorOut]) {
+                if (![fileManager removeItemAtURL:logFileUrl error:&errorOut]) {
                     [errors addObject:errorOut];
                 }
             } else {
@@ -974,11 +974,11 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     [_currentFileHandle closeFile];
     _currentFileHandle = nil;
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    [fm removeItemAtURL:[self currentLogFileURL] error:NULL];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtURL:[self currentLogFileURL] error:NULL];
     
     return [self queue_enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
-        [fm removeItemAtURL:logFileUrl error:error];
+        [fileManager removeItemAtURL:logFileUrl error:error];
     } error:error];
 }
 
@@ -988,11 +988,11 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     __block ssize_t pending = 0;
     __block ssize_t uploaded = 0;
     
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     [self queue_enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         BOOL logWasUploaded = [logFileUrl ork_isUploaded];
         
-        NSDictionary *attribs = [fm attributesOfItemAtPath:[logFileUrl path] error:nil];
+        NSDictionary *attribs = [fileManager attributesOfItemAtPath:[logFileUrl path] error:nil];
         unsigned long long size = [attribs fileSize];
         
         if (logWasUploaded) {
@@ -1283,14 +1283,14 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     __block unsigned long long totalBytes = self.totalBytes;
     
-    NSFileManager *fm = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (totalBytes > bytes) {
         for (ORKDataLogger *logger  in [_records allValues]) {
             [logger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
-                unsigned long long fileSize = [[fm attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
+                unsigned long long fileSize = [[fileManager attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
                 if (fileSize > 0) {
-                    if ([fm removeItemAtURL:logFileUrl error:nil]) {
+                    if ([fileManager removeItemAtURL:logFileUrl error:nil]) {
                         totalBytes -= fileSize;
                     }
                 }
@@ -1307,9 +1307,9 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     if (totalBytes > bytes) {
         [self queue_enumerateLogsNeedingUpload:^(ORKDataLogger *dataLogger, NSURL *logFileUrl, BOOL *stop) {
-            unsigned long long fileSize = [[fm attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
+            unsigned long long fileSize = [[fileManager attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
             if (fileSize > 0) {
-                if ([fm removeItemAtURL:logFileUrl error:nil]) {
+                if ([fileManager removeItemAtURL:logFileUrl error:nil]) {
                     totalBytes -= fileSize;
                 }
             }
