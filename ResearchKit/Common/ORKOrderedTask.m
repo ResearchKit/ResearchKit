@@ -159,14 +159,14 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 }
 
 - (ORKStep *)stepWithIdentifier:(NSString *)identifier {
-    __block ORKStep *ret = nil;
+    __block ORKStep *step = nil;
     [_steps enumerateObjectsUsingBlock:^(ORKStep *obj, NSUInteger idx, BOOL *stop) {
         if ([obj.identifier isEqualToString:identifier]) {
-            ret = obj;
+            step = obj;
             *stop = YES;
         }
     }];
-    return ret;
+    return step;
 }
 
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
@@ -193,14 +193,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
                     [healthTypes addObject:objType];
                 }
             }
-        }
-        else if ([step isKindOfClass:[ORKQuestionStep class]]) {
+        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
             HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
             if (objType) {
                 [healthTypes addObject:objType];
             }
-        }
-        else if ([step isKindOfClass:[ORKActiveStep class]]) {
+        } else if ([step isKindOfClass:[ORKActiveStep class]]) {
             ORKActiveStep *activeStep = (ORKActiveStep *)step;
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
@@ -293,7 +291,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
+static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }

@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKHelpers.h"
+
 
 @implementation ORKNavigationContainerView {
     NSLayoutConstraint *_gapConstraint;
@@ -89,9 +91,7 @@
 - (void)continueButtonAction:(id)sender {
     if (_useNextForSkip && _skipButtonItem && ! _continueButtonItem) {
         [self skipAction:sender];
-    }
-    else
-    {
+    } else {
         [self continueAction:sender];
     }
     
@@ -106,12 +106,14 @@
 
 - (void)continueAction:(id)sender {
     ORKSuppressPerformSelectorWarning(
-                                      (void)[_continueButtonItem.target performSelector:_continueButtonItem.action withObject:self];);
+                                      (void)[_continueButtonItem.target performSelector:_continueButtonItem.action withObject:self];
+                                      );
 }
 
 - (void)skipAction:(id)sender {
     ORKSuppressPerformSelectorWarning(
-                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:self];);
+                                      (void)[_skipButtonItem.target performSelector:_skipButtonItem.action withObject:self];
+                                      );
 }
 
 - (void)setNeverHasContinueButton:(BOOL)neverHasContinueButton {
@@ -130,7 +132,6 @@
 - (CGFloat)skipButtonAlpha {
     return ( [self skipButtonHidden] ? 0.0 : 1.0);
 }
-
 
 - (BOOL)hasContinueOrSkip {
     return ! ([self neverHasContinueButton] && [self neverHasSkipButton]);
@@ -152,9 +153,7 @@
     if (_useNextForSkip && _skipButtonItem) {
         _continueButton.alpha = (_continueButtonItem == nil && _skipButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title ? : _skipButtonItem.title forState:UIControlStateNormal];
-    }
-    else
-    {
+    } else {
         _continueButton.alpha = (_continueButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title forState:UIControlStateNormal];
     }
@@ -180,14 +179,12 @@
     [self updateContinueAndSkipEnabled];
 }
 
-
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     _continueButtonItem = continueButtonItem;
     [self updateContinueAndSkipEnabled];
 }
 
 - (void)updateConstraintConstants {
-    
     const CGFloat ContinueBottomToSkipButtonBaseline = 30;
     
     if ([self neverHasSkipButton] || _neverHasContinueButton) {
@@ -205,7 +202,6 @@
     }
     
     [super updateConstraints];
-    
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_skipButton, _continueButton);
     ORKEnableAutoLayoutForViews([views allValues]);
@@ -250,7 +246,6 @@
         [_localConstraints addObject:heightConstraint];
     }
     
-    
     if (_neverHasContinueButton && [self neverHasSkipButton]) {
         [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeHeight
@@ -268,7 +263,6 @@
     }
     [self addConstraints:_localConstraints];
     
-    
     [self updateConstraintConstants];
 }
 
@@ -279,6 +273,5 @@
     }
     return isInside;
 }
-
 
 @end

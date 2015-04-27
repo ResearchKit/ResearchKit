@@ -256,9 +256,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
         
         if (_numericAnswerStyle == ORKNumericAnswerStyleDecimal) {
             format = [ORKNumericAnswerFormat decimalAnswerFormatWithUnit:[unit unitString]];
-        }
-        else
-        {
+        } else {
             format = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:[unit unitString]];
         }
         

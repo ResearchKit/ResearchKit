@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 /**
  Step view controller corresponding to `ORKFitnessStep`.

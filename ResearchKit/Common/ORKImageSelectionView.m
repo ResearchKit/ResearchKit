@@ -246,7 +246,7 @@ static const CGFloat kSpacerWidth = 10.0;
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];
     
-    if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]){
+    if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]) {
         [_delegate selectionViewSelectionDidChange:self];
     }
 }

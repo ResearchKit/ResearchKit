@@ -131,8 +131,7 @@
         if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
             view = [super hitTest:point withEvent:event];
         }
-    }
-    else {
+    } else {
         view = [super hitTest:point withEvent:event];
     }
     return view;
@@ -257,8 +256,7 @@ static CGFloat kPadding = 2.0;
 - (NSString *)_axFormattedValue:(CGFloat)value {
     if (_numberOfSteps == 0) {
         return ORKAccessibilityFormatContinuousScaleSliderValue(value, self);
-    }
-    else {
+    } else {
         return ORKAccessibilityFormatScaleSliderValue(value, self);
     }
 }

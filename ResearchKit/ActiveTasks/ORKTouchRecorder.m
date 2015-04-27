@@ -133,10 +133,7 @@
         
         self.touchArray = [NSMutableArray array];
         _uptime = [NSProcessInfo processInfo].systemUptime;
-        
-    }
-    else
-    {
+    } else {
         @throw [NSException exceptionWithName:NSGenericException
                                        reason:@"No touch capture view provided"
                                      userInfo:@{@"recorder": self}];

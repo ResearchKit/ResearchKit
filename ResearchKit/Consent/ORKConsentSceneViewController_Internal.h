@@ -29,8 +29,8 @@
  */
 
 
-
 #import "ORKStepViewController.h"
+
 
 @interface ORKConsentSceneViewController ()
 
@@ -39,4 +39,3 @@
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion;
 
 @end
-

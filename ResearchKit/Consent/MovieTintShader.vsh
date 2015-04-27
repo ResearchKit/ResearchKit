@@ -29,7 +29,6 @@
  */
 
 
-
 attribute vec4 position;
 attribute vec2 texCoord;
 uniform float preferredRotation;
@@ -44,4 +43,3 @@ void main() {
 	gl_Position = position * rotationMatrix;
 	texCoordVarying = texCoord;
 }
-

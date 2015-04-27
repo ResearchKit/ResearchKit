@@ -135,7 +135,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSDictionary *userInfo;
 
-
 @end
 
 
@@ -196,6 +195,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKTappingIntervalResult` class records the results of a tapping interval test.
  
@@ -233,6 +233,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKSpatialSpanMemoryGameTouchSample` class represents a tap during the
  spatial span memory game.
@@ -241,7 +242,6 @@ ORK_CLASS_AVAILABLE
  completes, it may be appropriate to serialize it for transmission to a server,
  or to immediately perform analysis on it.
  */
-
 ORK_CLASS_AVAILABLE
 @interface ORKSpatialSpanMemoryGameTouchSample : NSObject <NSCopying, NSSecureCoding>
 
@@ -274,6 +274,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign, getter=isCorrect) BOOL correct;
 
 @end
+
 
 /// An enumeration of values that describe the status of a round of the spatial span memory game.
 typedef NS_ENUM(NSInteger, ORKSpatialSpanMemoryGameStatus) {
@@ -397,6 +398,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKFileResult` class is a result that references the location of a file produced
  during a task.
@@ -463,6 +465,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKScaleQuestionResult` class represents the answer to a continuous or
  discrete-value scale answer format.
@@ -483,6 +486,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber *scaleAnswer;
 
 @end
+
 
 /**
  The `ORKChoiceQuestionResult` class represents the single or multiple choice
@@ -508,6 +512,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKBooleanQuestionResult` class represents the answer to a Yes/No question.
  
@@ -525,6 +530,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber *booleanAnswer;
 
 @end
+
 
 /**
  The `ORKTextQuestionResult` class represents the answer to a question or
@@ -545,6 +551,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *textAnswer;
 
 @end
+
 
 /**
  The `ORKNumericQuestionResult` class represents a question or form item that uses an answer format that produces a numeric answer.
@@ -567,6 +574,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *unit;
 
 @end
+
 
 /**
  The `ORKTimeOfDayQuestionResult` class represents the result of a question that uses the `ORKTimeOfDayAnswerFormat` format.
@@ -604,6 +612,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSNumber *intervalAnswer;
 
 @end
+
 
 /**
  The `ORKDateQuestionResult` class represents the result of a question or form item that asks for a date (`ORKDateAnswerFormat`).
@@ -734,8 +743,6 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-
-
 /**
  An `ORKTaskResult` object is a collection result that contains all the step results
  generated from one run of a task or ordered task (that is, `ORKTask` or `ORKOrderedTask`) in a task view controller.
@@ -763,7 +770,6 @@ ORK_CLASS_AVAILABLE
                            taskRunUUID:(NSUUID *)taskRunUUID
                        outputDirectory:(nullable NSURL *)outputDirectory;
 
-
 /**
  A unique identifier (UUID) for the presentation of the task that generated
  the result.
@@ -784,8 +790,6 @@ ORK_CLASS_AVAILABLE
  `ORKFileResult` objects.
  */
 @property (nonatomic, copy, readonly, nullable) NSURL *outputDirectory;
-
-
 
 @end
 
@@ -820,6 +824,5 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray *)results;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

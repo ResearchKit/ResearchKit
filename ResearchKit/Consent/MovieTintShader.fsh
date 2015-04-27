@@ -29,7 +29,6 @@
  */
 
 
-
 varying highp vec2 texCoordVarying;
 precision mediump float;
 

@@ -28,12 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import "ORKAccessibilityFunctions.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKScaleSlider.h"
 #import "ORKScaleSliderView.h"
 #import "UIView+ORKAccessibility.h"
+
 
 NSString *ORKAccessibilityFormatScaleSliderValue(CGFloat value, ORKScaleSlider *slider) {
     ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[slider ork_superviewOfType:[ORKScaleSliderView class]];

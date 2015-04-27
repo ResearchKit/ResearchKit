@@ -29,8 +29,8 @@
  */
 
 
-
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 /*
  These classes demonstrate a new recorder and recorder configuration created
@@ -41,6 +41,7 @@
 @interface CustomRecorder : ORKRecorder
 
 @end
+
 
 @interface CustomRecorderConfiguration : ORKRecorderConfiguration
 

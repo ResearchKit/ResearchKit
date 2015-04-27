@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTableContainerView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
@@ -37,12 +38,14 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView.h"
 
+
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
 @interface ORKTableContainerView() <UIGestureRecognizerDelegate>
 
 @end
+
 
 @implementation ORKTableContainerView {
     UIView *_realFooterView;
@@ -55,8 +58,6 @@
     
     UIScrollView *_scrollView;
 }
-
-
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -103,8 +104,6 @@
     return self;
 }
 
-
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     
@@ -122,7 +121,6 @@
         _tableView.tableHeaderView = nil;
         _tableView.tableHeaderView = _stepHeaderView;
     }
-    
     {
         _tableView.tableFooterView = nil;
         [_realFooterView removeFromSuperview];
@@ -138,7 +136,6 @@
         }
         _realFooterView.frame = footerBounds;
         _tableView.tableFooterView = _realFooterView;
-        
     }
 }
 
@@ -186,33 +183,28 @@
     _constraints = constraints;
 }
 
-- (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)p {
-    
-    UIView *v = [_tableView hitTest:p withEvent:nil];
+- (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
+    UIView *subview = [_tableView hitTest:point withEvent:nil];
     BOOL viewIsChildOfFirstResponder = NO;
-    while (v) {
+    while (subview) {
         // Ignore table view cells, since first responder will be manually managed for taps on them
-        if ([v isFirstResponder] || [v isKindOfClass:[UITableViewCell class]]) {
-            ORK_Log_Debug(@"v=%@",v);
+        if ([subview isFirstResponder] || [subview isKindOfClass:[UITableViewCell class]]) {
+            ORK_Log_Debug(@"v=%@",subview);
             viewIsChildOfFirstResponder = YES;
             break;
         }
-        v = [v superview];
+        subview = [subview superview];
     }
-    
     return viewIsChildOfFirstResponder;
 }
 
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    
-    BOOL ret = [self view:_tableView hasFirstResponderOrTableViewCellContainingPoint:[touch locationInView:_tableView]];
-    return !ret;
+    BOOL shouldReceiveTouch = [self view:_tableView hasFirstResponderOrTableViewCellContainingPoint:[touch locationInView:_tableView]];
+    return !shouldReceiveTouch;
 }
 
 - (void)tapOffAction:(UITapGestureRecognizer *)recognizer {
     // On a tap, dismiss the keyboard if the tap was not inside a view that is first responder or a child of a first responder.
-    
     BOOL viewIsChildOfFirstResponder = [self view:_tableView hasFirstResponderOrTableViewCellContainingPoint:[recognizer locationInView:_tableView]];
     
     if (! viewIsChildOfFirstResponder) {
@@ -264,7 +256,6 @@
 }
 
 - (CGSize)keyboardIntersectionSizeFromNotification:(NSNotification *)notification {
-    
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self convertRect:keyboardFrame fromView:nil];
     
@@ -277,7 +268,6 @@
 }
 
 - (void)scrollCellVisible:(UITableViewCell *)cell animated:(BOOL)animated {
-    
     if (cell == nil) {
         return;
     }
@@ -289,24 +279,18 @@
     CGRect visibleRect = CGRectMake(0, scrollView.contentOffset.y, scrollView.bounds.size.width, visibleHeight);
     CGRect desiredRect = [scrollView convertRect:cell.bounds fromView:cell];
     
-    CGRect bds = scrollView.bounds;
-    CGFloat offsetY = bds.origin.y;
+    CGRect bounds = scrollView.bounds;
+    CGFloat offsetY = bounds.origin.y;
     BOOL containByVisibleRect = CGRectContainsRect(visibleRect, desiredRect);
     
     if (containByVisibleRect == NO) {
-        
-        
         if (CGRectGetHeight(desiredRect) > CGRectGetHeight(visibleRect)) {
             CGFloat desiredCenterY = CGRectGetMidY(desiredRect);
             offsetY = desiredCenterY - visibleRect.size.height*0.5;
-        }
-        else
-        {
+        } else {
             if (CGRectGetMinY(desiredRect) < CGRectGetMinY(visibleRect)) {
                 offsetY = CGRectGetMinY(desiredRect);
-            }
-            else
-            {
+            } else {
                 offsetY = CGRectGetMinY(desiredRect) - (CGRectGetHeight(visibleRect) - CGRectGetHeight(desiredRect));
             }
         }
@@ -322,34 +306,29 @@
     if ((visibleSpaceAboveDesiredRect > 0) && (visibleSpaceBelowDesiredRect < desiredExtraSpace)) {
         CGFloat additionalOffset = MIN(visibleSpaceAboveDesiredRect, desiredExtraSpace - visibleSpaceBelowDesiredRect);
         offsetY += additionalOffset;
-        
         offsetY = MAX(offsetY, 0);
     }
     
-    
-    if (offsetY != bds.origin.y) {
-        bds.origin.y = offsetY;
+    if (offsetY != bounds.origin.y) {
+        bounds.origin.y = offsetY;
         
         if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
-                scrollView.bounds = bds;
+                scrollView.bounds = bounds;
             }];
         } else {
-            scrollView.bounds = bds;
+            scrollView.bounds = bounds;
         }
     }
-   
 }
 
 - (void)animateLayoutForKeyboardNotification:(NSNotification *)notification {
-    
     NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     UIScrollView *scrollView = _scrollView;
     
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        
-        CGRect bds = scrollView.bounds;
+        CGRect bounds = scrollView.bounds;
         CGSize contentSize = scrollView.contentSize;
         
         CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
@@ -363,7 +342,6 @@
         [scrollView layoutIfNeeded];
         
         if (_keyboardIsUp) {
-            
             // The content ends at the bottom of the continueSkipContainer.
             // We want to calculate new insets so it's possible to scroll it fully visible, but no more.
             // Made a little more complicated because the contentSize will still extend below the bottom of this container,
@@ -373,14 +351,13 @@
             CGFloat keyboardOverlapWithActualContent = MAX(contentMaxY - (contentSize.height - intersectionSize.height), 0);
             UIEdgeInsets insets = (UIEdgeInsets){.bottom = keyboardOverlapWithActualContent };
             scrollView.contentInset = insets;
-            scrollView.bounds = bds;
+            scrollView.bounds = bounds;
             
             // Make current first responder cell visible
             {
                 [self scrollCellVisible:[self.delegate currentFirstResponderCellForTableContainerView:self] animated:NO];
             }
         }
-        
     } completion:nil];
 }
 
@@ -408,13 +385,11 @@
     [self animateLayoutForKeyboardNotification:notification];
 }
 
-
 - (void)keyboardWillHide:(NSNotification *)notification {
     [self updateToInsets:UIEdgeInsetsZero];
     
     _keyboardIsUp = NO;
     [self animateLayoutForKeyboardNotification:notification];
 }
-
 
 @end

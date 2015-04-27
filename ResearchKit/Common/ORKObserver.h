@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 
 
@@ -53,9 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @protocol ORKScrollViewObserverDelegate <NSObject>
+
 @required
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView;
+
 @end
+
 
 @interface ORKScrollViewObserver  : ORKObserver
 
@@ -64,4 +68,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

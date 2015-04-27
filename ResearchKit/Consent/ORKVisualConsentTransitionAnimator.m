@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <AVFoundation/AVFoundation.h>
 
 #import "ORKVisualConsentTransitionAnimator.h"
@@ -36,7 +37,6 @@
 
 #import "ORKEAGLMoviePlayerView.h"
 #import "ORKVisualConsentStepViewController_Internal.h"
-
 
 
 // Internal object to hold the direction we're animating, the phase of the animation, and the animation completion handler.
@@ -54,14 +54,16 @@
 
 @end
 
+
 @implementation ORKVisualConsentAnimationContext
 
-
 @end
+
 
 @interface ORKVisualConsentTransitionAnimator() <AVPlayerItemOutputPullDelegate>
 
 @end
+
 
 @implementation ORKVisualConsentTransitionAnimator {
     __weak ORKVisualConsentStepViewController *_stepViewController;
@@ -102,8 +104,6 @@
         _videoOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:pixBuffAttributes];
         _videoOutputQueue = dispatch_queue_create("_ork_animationVideoQueue", DISPATCH_QUEUE_SERIAL);
         [_videoOutput setDelegate:self queue:_videoOutputQueue];
-        
-        
     }
     return self;
 }
@@ -112,7 +112,6 @@
     return _movieURL;
 }
 
-
 - (void)animateTransitionWithDirection:(UIPageViewControllerNavigationDirection)direction
                        withLoadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
                      completionHandler:(ORKVisualConsentAnimationCompletionHandler)handler {
@@ -120,7 +119,6 @@
     context.handler = handler;
     context.direction = direction;
     context.loadHandler = loadHandler;
-    
     
     _playerItem = [AVPlayerItem playerItemWithURL:_movieURL];
     
@@ -133,9 +131,7 @@
     [self attemptAnimationWithContext:context];
 }
 
-
 - (void)attemptAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
-    
     BOOL playerIsReady = [_moviePlayer status] == AVPlayerStatusReadyToPlay;
     BOOL playerItemIsReady = CMTimeGetSeconds([_playerItem duration]) > 0;
     
@@ -166,7 +162,6 @@
         [self performAnimationWithContext:context];
     }
 }
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     ORKVisualConsentAnimationContext *animationContext = (__bridge ORKVisualConsentAnimationContext *)context;
@@ -215,7 +210,6 @@
             }];
 }
 
-
 - (void)finishAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
     if (context == _pendingContext) {
         _pendingContext = nil;
@@ -229,8 +223,6 @@
     context.handler = nil;
     // Make sure the context is released
     context.selfRef = nil;
-    
-    
 }
 
 #pragma mark - CADisplayLink Callback
@@ -314,6 +306,5 @@
     [self finish];
     [_displayLink invalidate];
 }
-
 
 @end

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKFitnessStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
@@ -45,15 +46,14 @@
     NSInteger _intendedSteps;
     ORKFitnessContentView *_contentView;
     NSNumberFormatter *_hrFormatter;
-    
 }
+
 @end
+
 
 @implementation ORKFitnessStepViewController
 
-
-- (instancetype)initWithStep:(ORKStep *)step {
-    
+- (instancetype)initWithStep:(ORKStep *)step {    
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = NO;

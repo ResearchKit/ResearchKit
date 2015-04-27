@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTappingIntervalStepViewController.h"
 #import "ORKTappingContentView.h"
 #import "ORKActiveStepViewController_internal.h"
@@ -38,14 +39,15 @@
 #import "ORKHelpers.h"
 #import "ORKActiveStepView.h"
 
+
 @interface ORKTappingIntervalStepViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *samples;
 
 @end
 
+
 @implementation ORKTappingIntervalStepViewController {
-    
     ORKTappingContentView *_tappingContentView;
     NSTimeInterval _tappingStart;
     BOOL _expired;
@@ -59,9 +61,7 @@
     UIGestureRecognizer *_touchDownRecognizer;
 }
 
-
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = YES;
@@ -97,9 +97,7 @@
     
     [_tappingContentView.tapButton1 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
     [_tappingContentView.tapButton2 addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
-        
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -110,7 +108,6 @@
 }
 
 - (ORKStepResult *)result {
-    
     ORKStepResult *sResult = [super result];
     
     // "Now" is the end time of the result, which is either actually now,
@@ -135,28 +132,26 @@
 }
 
 - (void)receiveTouch:(UITouch *)touch onButton:(ORKTappingButtonIdentifier)buttonIdentifier {
-    
     if (_expired || self.samples == nil) {
         return;
     }
     
-    NSTimeInterval ti = CACurrentMediaTime();
+    NSTimeInterval mediaTime = CACurrentMediaTime();
     
     if (_tappingStart == 0) {
-        _tappingStart = ti;
+        _tappingStart = mediaTime;
     }
     
     
     CGPoint location = [touch locationInView:self.view];
     
     // Add new sample
-    ti = ti-_tappingStart;
-    
+    mediaTime = mediaTime-_tappingStart;
     
     ORKTappingSample *sample = [[ORKTappingSample alloc] init];
     sample.buttonIdentifier = buttonIdentifier;
     sample.location = location;
-    sample.timestamp = ti;
+    sample.timestamp = mediaTime;
 
     [self.samples addObject:sample];
     
@@ -174,7 +169,6 @@
     [_tappingContentView finishStep:self];
     [self goForward];
 }
-
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
     CGFloat progress = finished ? 1 : (timer.runtime / timer.duration);
@@ -218,4 +212,3 @@
 }
 
 @end
-

@@ -349,7 +349,9 @@ static const CGFloat kHMargin = 15.0;
 - (void)updateValueLabel {
     ORKUnitTextField *textField = [self textField];
     
-    if (textField == nil) { return; }
+    if (textField == nil) {
+        return;
+    }
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;
@@ -368,9 +370,9 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    ret = [self.textField resignFirstResponder] || ret;
-    return ret;
+    BOOL resign = [super resignFirstResponder];
+    resign = [self.textField resignFirstResponder] || resign;
+    return resign;
 }
 
 - (void)inputValueDidClear {
@@ -687,9 +689,7 @@ static const CGFloat kHMargin = 15.0;
         if ([_textView isFirstResponder]) {
             _textView.text = nil;
             _textView.textColor = [UIColor blackColor];
-        }
-        else
-        {
+        } else {
             _textView.text = self.formItem.placeholder;
             _textView.textColor = [self placeholderColor];
         }
@@ -701,8 +701,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    return [_textView resignFirstResponder] || ret;
+    BOOL resign = [super resignFirstResponder];
+    return [_textView resignFirstResponder] || resign;
 }
 
 - (void)inputValueDidChange {

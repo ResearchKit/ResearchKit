@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <XCTest/XCTest.h>
 #import "ORKVoiceEngine_Internal.h"
+
 
 @interface ORKMockSpeechSynthesizer : AVSpeechSynthesizer
 
@@ -40,6 +42,7 @@
 @property (nonatomic) BOOL mockSpeaking;
 
 @end
+
 
 @implementation ORKMockSpeechSynthesizer
 
@@ -60,9 +63,11 @@
 
 @end
 
+
 @interface ORKTestVoiceEngine : ORKVoiceEngine
 
 @end
+
 
 @implementation ORKTestVoiceEngine {
     ORKMockSpeechSynthesizer *_speechSynthesizer;
@@ -77,9 +82,11 @@
 
 @end
 
+
 @interface ORKVoiceEngineTests : XCTestCase
 
 @end
+
 
 @implementation ORKVoiceEngineTests {
     ORKVoiceEngine *_voiceEngine;

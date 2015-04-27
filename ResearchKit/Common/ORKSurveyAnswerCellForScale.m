@@ -48,7 +48,7 @@
 @implementation ORKSurveyAnswerCellForScale
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if(_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.step impliedAnswerFormat];
     }
     return _formatProvider;
@@ -80,9 +80,7 @@
         }
         
         [_sliderView setCurrentValue:answer];
-    }
-    else
-    {
+    } else {
         if (answer == nil && [formatProvider defaultNumber]) {
             [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
         } else {

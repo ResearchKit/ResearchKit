@@ -85,9 +85,7 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, userInfo, NSDictionary);
     }
     return self;
-    
 }
-
 
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
@@ -104,7 +102,6 @@
 - (NSUInteger)hash {
     return [_identifier hash] ^ [_startDate hash] ^ [_endDate hash] ^ [_userInfo hash];
 }
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKResult *result = [[[self class] allocWithZone:zone] init];
@@ -124,8 +121,8 @@
     return self;
 }
 
-
 @end
+
 
 @implementation ORKTappingSample
 
@@ -149,7 +146,6 @@
     }
     return self;
 }
-
 
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
@@ -184,7 +180,6 @@
     return YES;
 }
 
-
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_DOUBLE(aCoder, timestamp);
     ORK_ENCODE_INTEGER(aCoder, targetIndex);
@@ -201,7 +196,6 @@
         ORK_DECODE_BOOL(aDecoder, correct);
     }
     return self;
-    
 }
 
 - (BOOL)isEqual:(id)object {
@@ -236,6 +230,7 @@
 
 @end
 
+
 @implementation ORKSpatialSpanMemoryGameRecord
 
 + (BOOL)supportsSecureCoding {
@@ -250,7 +245,6 @@
     ORK_ENCODE_INTEGER(aCoder, gameStatus);
     ORK_ENCODE_INTEGER(aCoder, score);
     ORK_ENCODE_OBJ(aCoder, targetRects);
-  
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -265,9 +259,7 @@
         ORK_DECODE_OBJ_ARRAY(aDecoder, targetRects, NSValue);
     }
     return self;
-    
 }
-
 
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
@@ -306,6 +298,7 @@
 
 @end
 
+
 @implementation ORKSpatialSpanMemoryResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -327,13 +320,11 @@
         
     }
     return self;
-    
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -359,14 +350,12 @@
     return result;
 }
 
-
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ score=%@", [super description], @(self.score)];
 }
 
-
 @end
+
 
 @implementation ORKTappingIntervalResult
 
@@ -387,13 +376,11 @@
         ORK_DECODE_CGSIZE(aDecoder, stepViewSize);
     }
     return self;
-    
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -419,13 +406,12 @@
     return result;
 }
 
-
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@", [super description], self.samples];
 }
 
 @end
+
 
 @implementation ORKFileResult
 
@@ -446,13 +432,11 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, contentType, NSString);
     }
     return self;
-    
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -474,11 +458,9 @@
     return result;
 }
 
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@ (%lld bytes)", [super description], self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
 }
-
 
 @end
 
@@ -504,13 +486,11 @@
         ORK_DECODE_OBJ_CLASS(aDecoder, contentType, NSString);
     }
     return self;
-    
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -526,7 +506,6 @@
     return [super hash] ^ [self.filename hash] ^ [self.contentType hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKDataResult *result = [super copyWithZone:zone];
     result.data = self.data;
@@ -535,8 +514,6 @@
 
     return result;
 }
-
-
                                 
 @end
 
@@ -566,7 +543,6 @@
     return result;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -578,7 +554,6 @@
 - (NSUInteger)hash {
     return [super hash] ^ [self.signature hash];
 }
-
 
 - (void)applyToDocument:(ORKConsentDocument *)document {
     __block NSUInteger indexToBeReplaced = NSNotFound;
@@ -623,7 +598,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -635,7 +609,6 @@
 - (NSUInteger)hash {
     return [super hash] ^ [self.answer hash] ^ _questionType;
 }
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKQuestionResult *result = [super copyWithZone:zone];
@@ -684,7 +657,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -697,13 +669,11 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKScaleQuestionResult *result = [super copyWithZone:zone];
     result->_scaleAnswer = [self.scaleAnswer copyWithZone:zone];
     return result;
 }
-
 
 + (Class)answerClass {
     return [NSNumber class];
@@ -719,6 +689,7 @@
 }
 
 @end
+
 
 @implementation ORKChoiceQuestionResult
 
@@ -739,7 +710,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -752,13 +722,11 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKChoiceQuestionResult *result = [super copyWithZone:zone];
     result->_choiceAnswers = [self.choiceAnswers copyWithZone:zone];
     return result;
 }
-
 
 + (Class)answerClass {
     return [NSArray class];
@@ -772,7 +740,6 @@
 - (id)answer {
     return self.choiceAnswers;
 }
-
 
 @end
 
@@ -796,7 +763,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -808,7 +774,6 @@
 - (NSUInteger)hash {
     return [super hash];
 }
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKBooleanQuestionResult *result = [super copyWithZone:zone];
@@ -836,8 +801,8 @@
 
 @end
 
-@implementation ORKTextQuestionResult
 
+@implementation ORKTextQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -856,7 +821,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -869,13 +833,11 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextQuestionResult *result = [super copyWithZone:zone];
     result->_textAnswer = [self.textAnswer copyWithZone:zone];
     return result;
 }
-
 
 + (Class)answerClass {
     return [NSString class];
@@ -892,8 +854,8 @@
 
 @end
 
-@implementation ORKNumericQuestionResult
 
+@implementation ORKNumericQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -914,7 +876,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -928,14 +889,12 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKNumericQuestionResult *result = [super copyWithZone:zone];
     result->_unit = [self.unit copyWithZone:zone];
     result->_numericAnswer = [self.numericAnswer copyWithZone:zone];
     return result;
 }
-
 
 + (Class)answerClass {
     return [NSNumber class];
@@ -954,6 +913,7 @@
 }
 
 @end
+
 
 @implementation ORKTimeOfDayQuestionResult
 
@@ -974,7 +934,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -987,14 +946,11 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTimeOfDayQuestionResult *result = [super copyWithZone:zone];
     result->_dateComponentsAnswer = [self.dateComponentsAnswer copyWithZone:zone];
     return result;
 }
-
-
 
 + (Class)answerClass {
     return [NSDateComponents class];
@@ -1031,7 +987,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -1044,14 +999,11 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTimeIntervalQuestionResult *result = [super copyWithZone:zone];
     result->_intervalAnswer = [self.intervalAnswer copyWithZone:zone];
     return result;
 }
-
-
 
 + (Class)answerClass {
     return [NSNumber class];
@@ -1107,7 +1059,6 @@
     return [super hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKDateQuestionResult *result = [super copyWithZone:zone];
     result->_calendar = [self.calendar copyWithZone:zone];
@@ -1115,8 +1066,6 @@
     result->_dateAnswer = [self.dateAnswer copyWithZone:zone];
     return result;
 }
-
-
 
 + (Class)answerClass {
     return [NSDate class];
@@ -1134,12 +1083,12 @@
 @end
 
 
-
 @interface ORKCollectionResult ()
 
 - (void)setResultsCopyObjects:(NSArray *)results;
 
 @end
+
 
 @implementation ORKCollectionResult
 
@@ -1147,13 +1096,11 @@
     BOOL saveable = NO;
     
     for (ORKResult *result in _results) {
-        
         if ([result isSaveable]) {
             saveable = YES;
             break;
         }
     }
-    
     return saveable;
 }
 
@@ -1170,13 +1117,11 @@
         ORK_DECODE_OBJ_ARRAY(aDecoder, results, ORKResult);
     }
     return self;
-    
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -1190,7 +1135,6 @@
     return [super hash] ^ [self.results hash];
 }
 
-
 - (void)setResultsCopyObjects:(NSArray *)results {
     _results = ORKArrayCopyObjects(results);
 }
@@ -1201,7 +1145,6 @@
     return result;
 }
 
-
 - (NSArray *)results {
     if (_results == nil) {
         _results = [NSArray new];
@@ -1209,15 +1152,13 @@
     return _results;
 }
 
-// Getter methods
-
 - (ORKResult *)resultForIdentifier:(NSString *)identifier {
     
     if (identifier == nil) {
         return nil;
     }
     
-    __block ORKQuestionResult *ret = nil;
+    __block ORKQuestionResult *result = nil;
     
     [self.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -1227,13 +1168,13 @@
         
         NSString *anIdentifier = [(ORKResult *)obj identifier];
         if ([anIdentifier isEqual:identifier]) {
-            ret = obj;
+            result = obj;
             *stop = YES;
         }
     
     }];
     
-    return ret;
+    return result;
 }
 
 - (ORKResult *)firstResult {
@@ -1242,6 +1183,7 @@
 }
 
 @end
+
 
 @implementation ORKTaskResult
 
@@ -1275,8 +1217,6 @@
     return YES;
 }
 
-
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -1304,6 +1244,7 @@
 
 @end
 
+
 @implementation ORKStepResult
 
 - (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(NSArray *)results {
@@ -1315,5 +1256,3 @@
 }
 
 @end
-
-

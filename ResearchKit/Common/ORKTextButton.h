@@ -28,9 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import "ORKDefaultFont.h"
 #import "ORKDefines_Private.h"
+
+
 /**
  *  "Skip" button or "Learn More" button.
  */
@@ -38,6 +41,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextButton : UIButton <ORKDefaultFont>
 
 @end
+
 
 @interface ORKTextButton ()
 

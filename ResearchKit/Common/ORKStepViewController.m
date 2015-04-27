@@ -101,9 +101,7 @@
 - (void)setupButtons {
     if (self.hasPreviousStep == YES) {
         [self ork_setBackButtonItem: _internalBackButtonItem];
-    }
-    else
-    {
+    } else {
         [self ork_setBackButtonItem:nil];
     }
     
@@ -290,21 +288,18 @@
 }
 
 - (void)skipForward {
-    
     [self goForward];
-    
 }
 
 - (ORKTaskViewController *)taskViewController {
-    UIPageViewController *pageVc = (UIPageViewController *)[self parentViewController];
-    if (pageVc && [pageVc isKindOfClass:[UIPageViewController class]]) {
-        UINavigationController *navVC = (UINavigationController *)[pageVc parentViewController];
-        ORKTaskViewController *taskVc = (ORKTaskViewController *)[navVC parentViewController];
-        if (taskVc && [taskVc isKindOfClass:[ORKTaskViewController class]]) {
-            return taskVc;
+    UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];
+    if (pageViewController && [pageViewController isKindOfClass:[UIPageViewController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)[pageViewController parentViewController];
+        ORKTaskViewController *taskViewController = (ORKTaskViewController *)[navigationController parentViewController];
+        if (taskViewController && [taskViewController isKindOfClass:[ORKTaskViewController class]]) {
+            return taskViewController;
         }
     }
-    
     return nil;
 }
 
@@ -373,10 +368,10 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
-    ORKStepViewController *vc = [[[self class] alloc] initWithStep:nil];
-    vc.restorationIdentifier = [identifierComponents lastObject];
-    vc.restorationClass = self;
-    return vc;
+    ORKStepViewController *viewController = [[[self class] alloc] initWithStep:nil];
+    viewController.restorationIdentifier = [identifierComponents lastObject];
+    viewController.restorationClass = self;
+    return viewController;
 }
 
 @end

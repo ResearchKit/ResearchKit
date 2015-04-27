@@ -33,12 +33,14 @@
 #import "ORKConsentDocument_Internal.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKConsentLearnMoreViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, copy) NSString *content;
 
 @end
+
 
 @implementation ORKConsentLearnMoreViewController
 
@@ -66,7 +68,6 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (navigationType != UIWebViewNavigationTypeOther) {
         [[UIApplication sharedApplication] openURL:request.URL];
@@ -74,6 +75,5 @@
     }
     return YES;
 }
-
 
 @end

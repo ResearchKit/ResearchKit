@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ResearchKit.h>
 #import "ORKVisualConsentStepViewController.h"
 #import "ORKEAGLMoviePlayerView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 

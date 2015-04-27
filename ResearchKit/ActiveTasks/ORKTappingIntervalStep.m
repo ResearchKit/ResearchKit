@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTappingIntervalStep.h"
 #import "ORKTappingIntervalStepViewController.h"
+
 
 @implementation ORKTappingIntervalStep
 
@@ -38,7 +40,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSTimeInterval const ORKTwoFingerTappingMinimumDuration = 5.0;
@@ -46,9 +47,6 @@
     if ( self.stepDuration < ORKTwoFingerTappingMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKTwoFingerTappingMinimumDuration)]  userInfo:nil];
     }
-
 }
-
-
 
 @end

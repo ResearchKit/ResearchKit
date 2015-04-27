@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAudioStep.h"
 #import "ORKAudioStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKAudioStep
 
@@ -40,7 +42,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
@@ -77,7 +78,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -85,6 +85,5 @@
     return (isParentSame &&
             (self.duration == castObject.duration)) ;
 }
-
 
 @end
