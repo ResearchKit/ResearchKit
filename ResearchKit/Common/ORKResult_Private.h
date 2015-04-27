@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ResearchKit_Private.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -59,6 +60,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 @interface ORKResult ()
 
 /**
@@ -77,6 +79,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
 
 @end
+
 
 @interface ORKQuestionResult()
 
