@@ -80,9 +80,7 @@
         }
         
         [_sliderView setCurrentValue:answer];
-    }
-    else
-    {
+    } else {
         if (answer == nil && [formatProvider defaultNumber]) {
             [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
         } else {

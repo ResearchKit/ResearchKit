@@ -155,8 +155,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
                 id defaultValue = [self defaultValueForCharacteristicType:(HKCharacteristicType *)objectType error:&error];
                 handler(defaultValue, error);
                 handled = YES;
-            }
-            else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
+            } else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
                 [self updateHealthKitUnitForAnswerFormat:answerFormat force:NO];
                 HKUnit *unit = [answerFormat healthKitUserUnit];
                 [self fetchDefaultValueForQuantityType:(HKQuantityType *)objectType unit:unit handler:handler];
@@ -1105,8 +1104,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
                 isValid = NO;
             } else if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
                 isValid = NO;
-            }
-            else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
+            } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
                 isValid = NO;
             }
         }

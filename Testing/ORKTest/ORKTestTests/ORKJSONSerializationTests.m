@@ -347,16 +347,13 @@
         
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
             [instance setValue:@(0) forKey:@"minimum"];
             [instance setValue:@(100) forKey:@"maximum"];
             [instance setValue:@(10) forKey:@"step"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
             [instance setValue:@"blah" forKey:@"value"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
             [instance setValue:[NSURL URLWithString:@"http://www.google.com/"] forKey:@"customAnimationURL"];
         }
         

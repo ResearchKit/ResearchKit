@@ -309,8 +309,7 @@
     ORKConsentSection *currentSection = (ORKConsentSection *)_visualSections[currentIndex];
     if (currentSection.type == ORKConsentSectionTypeOverview) {
         _animationView.isAccessibilityElement = NO;
-    }
-    else {
+    } else {
         _animationView.isAccessibilityElement = YES;
         _animationView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), currentSection.title];
         _animationView.accessibilityTraits |= UIAccessibilityTraitImage;

@@ -356,9 +356,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
          */
         NSData *data = _savedViewControllers[identifier];
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data];
-    }
-    else
-    {
+    } else {
         // No saved data, just create a task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }

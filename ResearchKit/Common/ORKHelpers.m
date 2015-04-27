@@ -353,12 +353,10 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView){
         if (CGRectGetWidth(tableView.frame) > 320.0) {
             return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR;
             
-        }
-        else {
+        } else {
             return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
         }
-    }
-    else {
+    } else {
         // Probably should be ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL
         return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
     }

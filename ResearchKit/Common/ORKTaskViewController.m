@@ -1332,8 +1332,7 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
         pageViewController.restorationIdentifier = [identifierComponents lastObject];
         pageViewController.restorationClass = self;
         return pageViewController;
-    }
-    else if ([[identifierComponents lastObject] isEqualToString:_ChildNavigationControllerRestorationKey]) {
+    } else if ([[identifierComponents lastObject] isEqualToString:_ChildNavigationControllerRestorationKey]) {
         UINavigationController *navigationController = [UINavigationController new];
         navigationController.restorationIdentifier = [identifierComponents lastObject];
         navigationController.restorationClass = self;

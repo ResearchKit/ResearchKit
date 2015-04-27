@@ -193,14 +193,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
                     [healthTypes addObject:objType];
                 }
             }
-        }
-        else if ([step isKindOfClass:[ORKQuestionStep class]]) {
+        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
             HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
             if (objType) {
                 [healthTypes addObject:objType];
             }
-        }
-        else if ([step isKindOfClass:[ORKActiveStep class]]) {
+        } else if ([step isKindOfClass:[ORKActiveStep class]]) {
             ORKActiveStep *activeStep = (ORKActiveStep *)step;
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }

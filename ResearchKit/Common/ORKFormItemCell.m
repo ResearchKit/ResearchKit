@@ -687,9 +687,7 @@ static const CGFloat kHMargin = 15.0;
         if ([_textView isFirstResponder]) {
             _textView.text = nil;
             _textView.textColor = [UIColor blackColor];
-        }
-        else
-        {
+        } else {
             _textView.text = self.formItem.placeholder;
             _textView.textColor = [self placeholderColor];
         }

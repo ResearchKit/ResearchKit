@@ -102,15 +102,13 @@
                     XCTAssert([q1.answer isEqual:q2.answer], @"");
                 }
                 XCTAssert([q1.identifier isEqualToString:q2.identifier], @"%@ and %@", q1.identifier, q2.identifier);
-            }
-            else if ([result1 isKindOfClass:[ORKFileResult class]]) {
+            } else if ([result1 isKindOfClass:[ORKFileResult class]]) {
                 ORKFileResult *f1 = (ORKFileResult *)result1;
                 ORKFileResult *f2 = (ORKFileResult *)result2;
                 
                 XCTAssert( [f1.fileURL isEqual:f2.fileURL], @"");
                 XCTAssert( [f1.contentType isEqualToString:f2.contentType], @"");
-            }
-            else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]]) {
+            } else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]]) {
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;
                 ORKConsentSignatureResult *c2 = (ORKConsentSignatureResult *)result2;
                 

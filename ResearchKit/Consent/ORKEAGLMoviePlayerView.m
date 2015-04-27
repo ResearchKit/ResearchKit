@@ -252,8 +252,7 @@ static const GLfloat kColorConversion709[] = {
         
         if (colorAttachments == kCVImageBufferYCbCrMatrix_ITU_R_601_4) {
             _preferredConversion = kColorConversion601;
-        }
-        else {
+        } else {
             _preferredConversion = kColorConversion709;
         }
         
@@ -346,8 +345,7 @@ static const GLfloat kColorConversion709[] = {
     if (cropScaleAmount.width > cropScaleAmount.height) {
         normalizedSamplingSize.width = 1.0;
         normalizedSamplingSize.height = cropScaleAmount.height/cropScaleAmount.width;
-    }
-    else {
+    } else {
         normalizedSamplingSize.height = 1.0;
         normalizedSamplingSize.width = cropScaleAmount.width/cropScaleAmount.height;
     }

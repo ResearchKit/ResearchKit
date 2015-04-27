@@ -251,9 +251,7 @@
     if ([self.activeStep hasCountDown]) {
         ORKActiveStepTimerView *timerView = [ORKActiveStepTimerView new];
         _activeStepView.activeCustomView = timerView;
-    }
-    else
-    {
+    } else {
         _activeStepView.activeCustomView = nil;
     }
     _activeStepView.activeCustomView.activeStepViewController = self;

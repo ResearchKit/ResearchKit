@@ -42,8 +42,7 @@
     id superview = [self superview];
     if (superview == nil) {
         return nil;
-    }
-    else if ([superview isKindOfClass:aClass]) {
+    } else if ([superview isKindOfClass:aClass]) {
         return superview;
     }
     

@@ -101,9 +101,7 @@
 - (void)setupButtons {
     if (self.hasPreviousStep == YES) {
         [self ork_setBackButtonItem: _internalBackButtonItem];
-    }
-    else
-    {
+    } else {
         [self ork_setBackButtonItem:nil];
     }
     

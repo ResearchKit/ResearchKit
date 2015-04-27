@@ -213,9 +213,7 @@
         [_dataLogger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
         } error:error];
-    }
-    else
-    {
+    } else {
         [_dataLogger enumerateLogsNeedingUpload:^(NSURL *logFileUrl, BOOL *stop) {
             [logs addObject:logFileUrl];
         } error:error];

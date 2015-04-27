@@ -508,10 +508,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     int dirFD = open([_url fileSystemRepresentation], O_EVTONLY);
     if (dirFD < 0) {
         ORK_Log_Oops(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
-        
-    }
-    else
-    {
+    } else {
         // Dispatch to a concurrent queue, so we don't store up blocks while our
         // queue is working.
         _directorySource = dispatch_source_create(DISPATCH_SOURCE_TYPE_VNODE, dirFD, DISPATCH_VNODE_WRITE, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
@@ -1356,16 +1353,14 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (exceededPendingThreshold && !_pendingUploadDelegateSent) {
         [self.delegate dataLoggerManager:self pendingUploadBytesReachedThreshold:pending];
         _pendingUploadDelegateSent = YES;
-    }
-    else if (! exceededPendingThreshold) {
+    } else if (! exceededPendingThreshold) {
         _pendingUploadDelegateSent = NO;
     }
     
     if (exceededTotalThreshold && !_totalBytesDelegateSent) {
         [self.delegate dataLoggerManager:self totalBytesReachedThreshold:(pending + uploaded)];
         _totalBytesDelegateSent = YES;
-    }
-    else if (! exceededTotalThreshold) {
+    } else if (! exceededTotalThreshold) {
         _totalBytesDelegateSent = NO;
     }
 }

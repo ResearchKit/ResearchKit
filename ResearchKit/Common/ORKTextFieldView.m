@@ -125,8 +125,7 @@
 - (void)ork_updateSuffix:(NSString *)suffix {
     if (!_suffixLabel) {
         [self ork_setSuffix:suffix withColor:nil];
-    }
-    else {
+    } else {
         _suffixLabel.text = suffix;
         [self setNeedsLayout];
     }
