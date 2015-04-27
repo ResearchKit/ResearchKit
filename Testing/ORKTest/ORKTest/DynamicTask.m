@@ -83,7 +83,7 @@
                 return self.step3b;
             }
         }
-    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]){
+    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]) {
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
         ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
         if (result.answer != nil) {

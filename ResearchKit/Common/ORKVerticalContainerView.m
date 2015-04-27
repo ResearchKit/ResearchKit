@@ -764,7 +764,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (UIImageView *)imageView {
-    if(_imageView == nil){
+    if(_imageView == nil) {
         _imageView = [[UIImageView alloc] init];
         [_customViewContainer addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;

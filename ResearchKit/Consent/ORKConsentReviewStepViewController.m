@@ -374,7 +374,7 @@ static NSString * const _FamilyNameIdentifier = @"family";
     [self.taskViewController setRegisteredScrollView:nil];
     
     [_pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        if (finished){
+        if (finished) {
             STRONGTYPE(weakSelf) strongSelf = weakSelf;
             [strongSelf updateBackButton];
             

@@ -49,7 +49,7 @@
 #import "ORKActiveStepView.h"
 
 
-@interface ORKActiveStepViewController (){
+@interface ORKActiveStepViewController () {
     ORKActiveStepView *_activeStepView;
     ORKActiveStepTimer *_activeStepTimer;
 

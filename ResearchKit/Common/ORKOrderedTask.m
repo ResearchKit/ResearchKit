@@ -291,7 +291,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
+static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }

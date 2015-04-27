@@ -328,7 +328,7 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
     return [ORKTimeOfDayReferenceCalendar() dateFromComponents:dateComponents];
 }
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen){
+BOOL ORKWantsWideContentMargins(UIScreen *screen) {
     
     if (screen != [UIScreen mainScreen]) {
         return NO;
@@ -348,7 +348,7 @@ BOOL ORKWantsWideContentMargins(UIScreen *screen){
 #define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT 16.0
 #define ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL 15.0
 
-CGFloat ORKTableViewLeftMargin(UITableView *tableView){
+CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
     if (ORKWantsWideContentMargins(tableView.window.screen)) {
         if (CGRectGetWidth(tableView.frame) > 320.0) {
             return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR;

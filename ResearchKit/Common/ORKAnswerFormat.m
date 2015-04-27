@@ -402,7 +402,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
 
 #pragma mark - ORKValuePickerAnswerFormat
 
-static void ork_validateChoices(NSArray *choices){
+static void ork_validateChoices(NSArray *choices) {
     const NSInteger ORKAnswerFormatMinimumNumberOfChoices = 1;
     if (choices.count < ORKAnswerFormatMinimumNumberOfChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
@@ -429,7 +429,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
                 
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0]]];
             } else if ([array count] == 1 &&
-                       [array[0] isKindOfClass:[NSString class]]){
+                       [array[0] isKindOfClass:[NSString class]]) {
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0]]];
             } else {
                 @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice" : object }];

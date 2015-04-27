@@ -470,7 +470,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionCoreMotionActivity) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting pedometer access");
-                [self requestPedometerAccessWithHandler:^(BOOL success){
+                [self requestPedometerAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionCoreMotionActivity;
                     } else {
@@ -485,7 +485,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionAudioRecording) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting audio access");
-                [self requestAudioRecordingAccessWithHandler:^(BOOL success){
+                [self requestAudioRecordingAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionAudioRecording;
                     } else {
@@ -500,7 +500,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionCoreLocation) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting location access");
-                [self requestLocationAccessWithHandler:^(BOOL success){
+                [self requestLocationAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionCoreLocation;
                     } else {

@@ -48,7 +48,7 @@
 @implementation ORKSurveyAnswerCellForScale
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if(_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.step impliedAnswerFormat];
     }
     return _formatProvider;

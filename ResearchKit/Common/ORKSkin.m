@@ -90,7 +90,7 @@ void ORKColorSetColorForKey(NSString *key, UIColor *color) {
     d[key] = color;
 }
 
-CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *window){
+CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *window) {
     return ORKGetMetricForScreenType(metric, ORKGetScreenTypeForWindow(window));
 }
 

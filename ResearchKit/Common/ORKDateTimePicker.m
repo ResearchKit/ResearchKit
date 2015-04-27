@@ -181,7 +181,7 @@
 }
 
 - (NSString *)selectedLabelText {
-    if (_answer == nil || _answer == ORKNullAnswerValue()){
+    if (_answer == nil || _answer == ORKNullAnswerValue()) {
         return nil;
     }
     

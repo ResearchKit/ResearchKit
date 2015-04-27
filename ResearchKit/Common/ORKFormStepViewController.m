@@ -808,7 +808,7 @@
         } else {
             return 40;
         }
-    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]){
+    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
