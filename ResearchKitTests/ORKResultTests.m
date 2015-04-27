@@ -28,18 +28,20 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
 #import "ORKResult_Private.h"
+
 
 @interface ORKResultTests : XCTestCase
 
 @end
 
+
 @implementation ORKResultTests
 
 - (ORKTaskResult *)createTaskResultTree {
-    
     // Construction
     ORKFileResult *fileResult1 = [[ORKFileResult alloc] init];
     fileResult1.fileURL = [NSURL fileURLWithPath:NSTemporaryDirectory()];
@@ -121,7 +123,6 @@
 }
 
 - (void)testResultSerialization {
-    
     ORKTaskResult *taskResult1 = [self createTaskResultTree];
     
     // Archive
@@ -146,7 +147,6 @@
 }
 
 - (void)testCollectionResult {
-    
     ORKCollectionResult *result = [[ORKCollectionResult alloc] initWithIdentifier:@"001"];
     [result setResults:@[ [[ORKResult alloc]initWithIdentifier: @"101"], [[ORKResult alloc]initWithIdentifier: @"007"] ]];
     

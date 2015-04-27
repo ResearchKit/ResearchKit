@@ -43,11 +43,11 @@
     NSInteger _totalBytesReachedCounter;
     unsigned long long _lastTotalBytes;
 }
+
 @end
 
+
 @implementation ORKDataLoggerManagerTests
-
-
 
 - (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger pendingUploadBytesReachedThreshold:(unsigned long long)pendingUploadBytes {
     _pendingUploadBytesReachedCounter ++;
@@ -58,7 +58,6 @@
     _totalBytesReachedCounter ++;
     _lastTotalBytes = totalBytes;
 }
-
 
 - (void)setUp {
     [super setUp];
@@ -118,7 +117,6 @@
 }
 
 - (void)testEnumerationSortOrder {
-    
     [self addLoggers123];
     
     ORKDataLogger *dm3 = [_manager dataLoggerForLogName:@"test3"];
@@ -167,7 +165,6 @@
     
 }
 
-
 - (void)testRemoveOldLogs {
     [self addLoggers123];
     
@@ -194,7 +191,6 @@
     XCTAssertEqual(_totalBytesReachedCounter, 1);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
     
-    
     NSError *err = nil;
     XCTAssertTrue([_manager removeOldAndUploadedLogsToThreshold:9 error:&err]);
     XCTAssertNil(err);
@@ -204,7 +200,6 @@
     XCTAssertTrue([dm3 append:@{@"test":@"blah"} error:nil]);
     [dm3 finishCurrentLog];
     [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:filesystemSettleTime]];
-    
     
     bytes = _manager.totalBytes;
     XCTAssertGreaterThan(bytes, _manager.totalBytesThreshold);
@@ -245,7 +240,6 @@
     
     bytes = _manager.pendingUploadBytes;
     XCTAssertTrue(bytes < _manager.pendingUploadBytesThreshold);
-    
     
     XCTAssertTrue([dm3 append:@{@"test":@"blah"} error:nil]);
     XCTAssertTrue([dm2 append:@{@"test":@"blah"} error:nil]);
