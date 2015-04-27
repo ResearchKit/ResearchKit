@@ -29,13 +29,13 @@
  */
 
 
-
 #import "MainViewController.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DynamicTask.h"
 #import "CustomRecorder.h"
 #import "AppDelegate.h"
+
 
 static NSString * const DatePickingTaskIdentifier = @"dates_001";
 static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
@@ -53,6 +53,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
+
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
@@ -65,9 +66,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
 @end
 
+
 @implementation MainViewController
-
-
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -216,7 +216,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
     }];
-    
    
     if (buttons.count > 0) {
          NSString *hvfl = @"";
@@ -225,7 +224,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         } else {
             hvfl= [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
         }
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hvfl options:(NSLayoutFormatOptions)0 metrics:nil views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hvfl
+                                                                          options:(NSLayoutFormatOptions)0
+                                                                          metrics:nil
+                                                                            views:buttons]];
         
         NSArray *allkeys = buttonKeys;
         BOOL left = YES;
@@ -271,12 +273,9 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVfl options:NSLayoutFormatAlignAllCenterX metrics:nil views:buttons]];
         
     }
-    
-
 }
 
 #pragma mark - Mapping identifiers to tasks
-
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier {
     if ([identifier isEqualToString:DatePickingTaskIdentifier]) {
@@ -345,7 +344,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
  Creates a task and presents it with a task view controller.
  */
 - (void)beginTaskWithIdentifier:(NSString *)identifier {
-    
     id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
     
     if (_savedViewControllers[identifier])
@@ -424,8 +422,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_timeInterval_001"
-                                                                    title:@"How long did it take to fall asleep last night?"
-                                                                   answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
+                                                                      title:@"How long did it take to fall asleep last night?"
+                                                                     answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
         [steps addObject:step];
     }
     
@@ -435,8 +433,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_timeInterval_default_002"
-                                                                    title:@"How long did it take to fall asleep last night?"
-                                                                   answer:[ORKAnswerFormat timeIntervalAnswerFormatWithDefaultInterval:300 step:5]];
+                                                                      title:@"How long did it take to fall asleep last night?"
+                                                                     answer:[ORKAnswerFormat timeIntervalAnswerFormatWithDefaultInterval:300 step:5]];
         [steps addObject:step];
     }
     
@@ -447,9 +445,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     {
         ORKDateAnswerFormat *dateAnswer = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:nil minimumDate:nil maximumDate:nil calendar: [NSCalendar calendarWithIdentifier:NSCalendarIdentifierHebrew]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_date_001"
-                                                                 title:@"When is your birthday?"
-                                                                   answer:dateAnswer];
-        
+                                                                      title:@"When is your birthday?"
+                                                                     answer:dateAnswer];
         [steps addObject:step];
     }
     
@@ -462,13 +459,12 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         NSDate *minDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:8 toDate:[NSDate date] options:(NSCalendarOptions)0];
         NSDate *maxDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:12 toDate:[NSDate date] options:(NSCalendarOptions)0];
         ORKDateAnswerFormat *dateAnswer = [ORKDateAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
-                                                                           minimumDate:minDate
-                                                                           maximumDate:maxDate
-                                                                              calendar: [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
+                                                                                   minimumDate:minDate
+                                                                                   maximumDate:maxDate
+                                                                                      calendar: [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_date_default_002"
-                                                                    title:@"What day are you available?"
-                                                                   answer:dateAnswer];
-        
+                                                                      title:@"What day are you available?"
+                                                                     answer:dateAnswer];
         [steps addObject:step];
     }
     
@@ -491,21 +487,19 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         dateComponents.hour = 8;
         dateComponents.minute = 15;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_timeOfDay_default_001"
-                                                                    title:@"What time do you get up?"
-                                                                   answer:[ORKTimeOfDayAnswerFormat timeOfDayAnswerFormatWithDefaultComponents:dateComponents]];
+                                                                      title:@"What time do you get up?"
+                                                                     answer:[ORKTimeOfDayAnswerFormat timeOfDayAnswerFormatWithDefaultComponents:dateComponents]];
         [steps addObject:step];
     }
-    
     
     /*
      A date-time question with default parameters (no min, no max, default to now).
      */
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_dateTime_001"
-                                                                 title:@"When is your next meeting?"
-                                                                   answer:[ORKDateAnswerFormat dateTimeAnswerFormat]];
+                                                                      title:@"When is your next meeting?"
+                                                                     answer:[ORKDateAnswerFormat dateTimeAnswerFormat]];
         [steps addObject:step];
-        
     }
     
     /*
@@ -516,8 +510,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         NSDate *minDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:8 toDate:[NSDate date] options:(NSCalendarOptions)0];
         NSDate *maxDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitDay value:12 toDate:[NSDate date] options:(NSCalendarOptions)0];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_dateTime_default_002"
-                                                                    title:@"When is your next meeting?"
-                                                                   answer:[ORKDateAnswerFormat dateTimeAnswerFormatWithDefaultDate:defaultDate minimumDate:minDate  maximumDate:maxDate calendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]]];
+                                                                      title:@"When is your next meeting?"
+                                                                     answer:[ORKDateAnswerFormat dateTimeAnswerFormatWithDefaultDate:defaultDate minimumDate:minDate  maximumDate:maxDate calendar:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian]]];
         [steps addObject:step];
         
     }
@@ -589,7 +583,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         [steps addObject:step];
     }
     
-    
     {
         /*
          A multiple-choice question with text choices that have detail text.
@@ -635,8 +628,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         format.autocorrectionType = UITextAutocorrectionTypeNo;
         format.spellCheckingType = UITextSpellCheckingTypeNo;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005a"
-                                                                    title:@"What is your name?"
-                                                                   answer:format];
+                                                                      title:@"What is your name?"
+                                                                     answer:format];
         [steps addObject:step];
     }
     
@@ -649,6 +642,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
         [steps addObject:step];
     }
+    
     {
         /*
          A single-select value-picker question. Rather than seeing the items in a tableview,
@@ -673,6 +667,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         
         [steps addObject:step];
     }
+    
     {
         /*
          A continuous slider question.
@@ -696,6 +691,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                                       vertical:NO]];
         [steps addObject:step];
     }
+    
     {
         /*
          A HealthKit answer format question for gender.
@@ -707,6 +703,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                      answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]]];
         [steps addObject:step];
     }
+    
     {
         /*
          A HealthKit answer format question for blood type.
@@ -714,10 +711,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"fqid_health_bloodType"
-                                                                 title:@"What is your blood type?"
-                                                                   answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType]]];
+                                                                      title:@"What is your blood type?"
+                                                                     answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType]]];
         [steps addObject:step];
     }
+    
     {
         /*
          A HealthKit answer format question for date of birth.
@@ -725,10 +723,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
          but the user's answer is not written back to HealthKit.
          */
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"fqid_health_dob"
-                                                                 title:@"What is your date of birth?"
-                                                                   answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
+                                                                      title:@"What is your date of birth?"
+                                                                     answer:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
         [steps addObject:step];
     }
+    
     {
         /*
          A HealthKit answer format question for weight.
@@ -764,21 +763,16 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000a"
                                                                       title:@"(Misused) Which symptoms do you have?"
                                                                      answer:answerFormat];
-        
         [steps addObject:step];
     }
     
-    
-    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SelectionSurveyTaskIdentifier steps:steps];
-    
     return task;
 }
 
 - (IBAction)showSelectionSurvey:(id)sender {
     [self beginTaskWithIdentifier:SelectionSurveyTaskIdentifier];
 }
-
 
 #pragma mark - Active step task
 
@@ -889,16 +883,12 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ActiveStepTaskIdentifier steps:steps];
-    
     return task;
 }
-
 
 - (IBAction)showActiveStepTask:(id)sender {
     [self beginTaskWithIdentifier:ActiveStepTaskIdentifier];
 }
-
-
 
 #pragma mark - Consent review task
 
@@ -910,7 +900,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
  for the various placeholders.
  */
 - (ORKOrderedTask *)makeConsentReviewTask {
-    
     /*
      Tests layout of the consent sharing step.
      
@@ -1053,22 +1042,26 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_biologicalSex" text:@"Gender" answerFormat:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex]]];
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Basic Information"];
             [items addObject:item];
         }
+        
         {
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_bloodType" text:@"Blood Type" answerFormat:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType]]];
             item.placeholder = @"Choose a type";
             [items addObject:item];
         }
+        
         {
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_dob" text:@"Date of Birth" answerFormat:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
             item.placeholder = @"DOB";
             [items addObject:item];
         }
+        
         {
             
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_health_weight"
@@ -1080,34 +1073,40 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             item.placeholder = @"Add weight";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_001" text:@"Have headache?" answerFormat:[ORKBooleanAnswerFormat new]];
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_002" text:@"Which fruit do you like most? Please pick one from below."
                                                          answerFormat:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[@"Apple", @"Orange", @"Banana"]
                                                                                                               ]];
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_003" text:@"Message"
                                                          answerFormat:[ORKAnswerFormat textAnswerFormat]];
             item.placeholder = @"Your message";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_004a" text:@"BP Diastolic"
                                                          answerFormat:[ORKAnswerFormat integerAnswerFormatWithUnit:@"mm Hg"]];
             item.placeholder = @"Enter value";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_004b" text:@"BP Systolic"
                                                          answerFormat:[ORKAnswerFormat integerAnswerFormatWithUnit:@"mm Hg"]];
             item.placeholder = @"Enter value";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
@@ -1135,6 +1134,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             item.placeholder = @"No default time";
             [items addObject:item];
         }
+        
         {
             NSDateComponents *defaultDC = [[NSDateComponents alloc] init];
             defaultDC.hour = 14;
@@ -1144,6 +1144,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             item.placeholder = @"Default time 14:23";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_dateTime_001" text:@"Next eclipse visible in Cupertino?"
                                                          answerFormat:[ORKAnswerFormat dateTimeAnswerFormat]];
@@ -1151,7 +1152,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             item.placeholder = @"No default date and range";
             [items addObject:item];
         }
-        
         
         {
             
@@ -1174,6 +1174,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             item.placeholder = @"No default Interval and step size";
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_timeInterval_002" text:@"Wake up interval"
                                                            answerFormat:[ORKAnswerFormat timeIntervalAnswerFormatWithDefaultInterval:300 step:3]];
@@ -1182,7 +1183,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             [items addObject:item];
         }
         
-
         {
             /*
              Testbed for image choice.
@@ -1201,14 +1201,11 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                        text:@"Yellow" value:@"yellow"];
             
             ORKFormItem *item3 = [[ORKFormItem alloc] initWithIdentifier:@"fqid_009_3" text:@"What is your favorite color?"
-                                                          answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3]
-                                                                                                               ]];
+                                                          answerFormat:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:@[option1, option2, option3]]];
             [items addObject:item3];
         }
-    
-        
+
         [step setFormItems:items];
-        
         [steps addObject:step];
     }
     
@@ -1221,7 +1218,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
     
     return task;
-    
 }
 
 - (IBAction)showMiniForm:(id)sender {
@@ -1478,11 +1474,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             [items addObject:item6];
         }
         
-        
         [step setFormItems:items];
-        
         [steps addObject:step];
-        
         
         for (NSNumber *dimension in @[@(360), @(60), @(20)]) {
             CGSize size1 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].x, [dimension floatValue] * [ratio CGPointValue].y);
@@ -1506,7 +1499,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             ORKImageChoice *option6 = [ORKImageChoice choiceWithNormalImage:[self imageWithColor:[UIColor cyanColor] size:size2 border:NO]
                                                               selectedImage:[self imageWithColor:[UIColor cyanColor] size:size2 border:YES]
                                                                        text:@"Cyan" value:@"cyanColor"];
-            
             
             ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:[NSString stringWithFormat:@"qid_color1_%@_%@", NSStringFromCGPoint(ratio.CGPointValue), dimension]
                                                                            title:@"Pick a color."
@@ -1537,7 +1529,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageChoicesTaskIdentifier steps:steps];
-    
     return task;
     
 }
@@ -1723,7 +1714,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
  tasks.
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step {
-   
     NSString *task_identifier = taskViewController.task.identifier;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
@@ -1737,7 +1727,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController {
     NSLog(@"Learn more tapped for step %@", stepViewController.step.identifier);
 }
-
 
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step {
     if ([ step.identifier isEqualToString:@"itid_002"]) {
@@ -1830,11 +1819,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          Example of customizing the back and cancel buttons in a way that's
          visibly obvious.
          */
-        stepViewController.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back1" style:UIBarButtonItemStylePlain target:stepViewController.backButtonItem.target action:stepViewController.backButtonItem.action];
+        stepViewController.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back1"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:stepViewController.backButtonItem.target
+                                                                            action:stepViewController.backButtonItem.action];
         stepViewController.cancelButtonItem.title = @"Cancel1";
     }
 }
-
 
 /*
  We support save and restore on all of the tasks in this test app.
@@ -1844,7 +1835,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
  should not support save at all.
  */
 - (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)taskViewController {
-    
     return YES;
 }
 
@@ -1897,27 +1887,19 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     for (ORKStepResult *sResult in taskViewController.result.results) {
         NSLog(@"--%@", sResult);
         for (ORKResult *result in sResult.results) {
-            if ([result isKindOfClass:[ORKDateQuestionResult class]])
-            {
+            if ([result isKindOfClass:[ORKDateQuestionResult class]]) {
                 ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
                 NSLog(@"    %@:   %@  %@  %@", result.identifier, dqr.answer, dqr.timeZone, dqr.calendar);
-            }
-            else if ([result isKindOfClass:[ORKQuestionResult class]])
-            {
+            } else if ([result isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *qr = (ORKQuestionResult *)result;
                 NSLog(@"    %@:   %@", result.identifier, qr.answer);
-            }
-            else if ([result isKindOfClass:[ORKTappingIntervalResult class]])
-            {
+            } else if ([result isKindOfClass:[ORKTappingIntervalResult class]]) {
                 ORKTappingIntervalResult *tir = (ORKTappingIntervalResult *)result;
                 NSLog(@"    %@:     %@\n    %@ %@", tir.identifier, tir.samples, NSStringFromCGRect(tir.buttonRect1), NSStringFromCGRect(tir.buttonRect2));
-            }
-            else if ([result isKindOfClass:[ORKFileResult class]]) {
+            } else if ([result isKindOfClass:[ORKFileResult class]]) {
                 ORKFileResult *fileResult = (ORKFileResult *)result;
                 NSLog(@"    File: %@", fileResult.fileURL);
-            }
-            else
-            {
+            } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }
         }
@@ -1949,7 +1931,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         }];
         
         _currentDocument = nil;
-        
     }
     
     NSURL *dir = taskViewController.outputDirectory;
@@ -2002,7 +1983,5 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }
     _taskVC.delegate = self;
 }
-
-
 
 @end
