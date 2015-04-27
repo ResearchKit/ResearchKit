@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import "ORKSignatureView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)consentSignatureControllerDidSign:(ORKConsentSignatureController *)consentSignatureController;
 
 @end
+
 
 @interface ORKConsentSignatureController : UIViewController<ORKSignatureViewDelegate>
 
@@ -52,4 +55,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

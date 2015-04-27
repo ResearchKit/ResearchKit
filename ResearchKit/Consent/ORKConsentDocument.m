@@ -91,7 +91,6 @@
                                  @(17.0+adjustment),
                                  @(13.0+adjustment),
                                  @(11.0+adjustment)];
-       
         
         [css appendString:[NSString stringWithFormat:@"h1 { font-family: -apple-system-font ; font-weight: 300; font-size: %.0lf; }\n",
                            [hPointSizes[0] floatValue]]];
@@ -125,7 +124,6 @@
 }
 
 + (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile {
-    
     NSMutableString *html = [NSMutableString string];
     
     [html appendString:@"<html><head><style>"];
@@ -138,7 +136,6 @@
 }
 
 - (NSString *)htmlForMobile:(BOOL)mobile withTitle:(NSString *)title detail:(NSString *)detail {
-   
     NSMutableString *body = [NSMutableString new];
     
     // header
@@ -211,7 +208,6 @@
                     [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag?:@"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
                 }
                 
-                
                 if (addedSig) {
                     [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate?:@"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
                 }
@@ -229,14 +225,9 @@
                 }
             }
         }
-        
     }
-    
-    
     return [[self class] wrapHTMLBody:body mobile:mobile];
 }
-
-
 
 + (BOOL)supportsSecureCoding {
     return YES;
@@ -283,7 +274,6 @@
     return [_title hash] ^ [_sections hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentDocument *doc = [[[self class] allocWithZone:zone] init];
     doc.title = _title;
@@ -300,10 +290,4 @@
     return doc;
 }
 
-
-
-
-
-
 @end
-

@@ -139,27 +139,25 @@
 - (void)stepDidChange {
     [super stepDidChange];
     {
-        NSMutableArray *vs = [NSMutableArray new];
+        NSMutableArray *visualSections = [NSMutableArray new];
         
         NSArray *sections = self.visualConsentStep.consentDocument.sections;
         for (ORKConsentSection *scene in sections) {
             if (scene.type != ORKConsentSectionTypeOnlyInDocument) {
-                [vs addObject:scene];
+                [visualSections addObject:scene];
             }
         }
-        _visualSections = [vs copy];
+        _visualSections = [visualSections copy];
     }
     
     if (self.step && [self pageCount] == 0) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Visual consent step has no visible scenes" userInfo:nil];
     }
     
-    
     _viewControllers = nil;
     
     [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
 }
-
 
 - (ORKEAGLMoviePlayerView *)animationPlayerView {
     return [(ORKAnimationPlaceholderView *)_animationView playerView];
@@ -186,7 +184,6 @@
         _pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    
     _pageViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _pageViewController.view.frame = viewBounds;
     [self.view addSubview:_pageViewController.view];
@@ -203,12 +200,10 @@
     [self updatePageIndex];
 }
 
-
 - (ORKVisualConsentStep *)visualConsentStep {
     assert(!self.step || [self.step isKindOfClass:[ORKVisualConsentStep class]]);
     return (ORKVisualConsentStep *)self.step;
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -258,7 +253,6 @@
     [self updateNavLeftBarButtonItem];
 }
 
-
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
@@ -292,7 +286,6 @@
 #pragma mark - internal
 
 - (UIScrollView *)scrollView {
-    
     if (_scrollView == nil) {
         for (UIView *view in self.pageViewController.view.subviews) {
             if ([view isKindOfClass:[UIScrollView class]]) {
@@ -300,13 +293,10 @@
             }
         }
     }
-    
     return _scrollView;
 }
 
-
 - (void)updatePageIndex {
-    
     NSUInteger currentIndex = [self currentIndex];
     if (currentIndex == NSNotFound) {
         return;
@@ -404,7 +394,6 @@
         animator = _animator;
     }
     
-    
     [animator finish];
     if (_transitioning && animator == _animator) {
         _transitioning = NO;
@@ -416,8 +405,7 @@
 }
 
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == _scrollViewObserver.target)
-    {
+    if (scrollView == _scrollViewObserver.target) {
         CGRect animationViewFrame = _animationView.frame;
         CGPoint scrollViewBoundsOrigin = scrollView.bounds.origin;
         animationViewFrame.origin = (CGPoint){-scrollViewBoundsOrigin.x, -scrollViewBoundsOrigin.y};
@@ -426,7 +414,6 @@
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
-
     if (! viewController) {
         return;
     }
@@ -481,30 +468,24 @@
         }
     }
     
-    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-    
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     UIPageViewControllerNavigationDirection direction = forward?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
     
     if (! url) {
-        [self doShowViewController:viewController direction:direction animated:animated semaphore:sem];
+        [self doShowViewController:viewController direction:direction animated:animated semaphore:semaphore];
     }
-    
-    
-    
-    
     
     if (animated) {
         // Disable user interaction during the animated transition, and re-enable when finished
         _transitioning = YES;
-        
         
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Defensive timeouts
             typeof(self) strongSelf = weakSelf;
             
-            dispatch_semaphore_wait(sem, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+            dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
             
             __block ORKVisualConsentTransitionAnimator *animator = nil;
             
@@ -513,14 +494,14 @@
                     animator = [strongSelf doAnimateFromViewController:fromController
                                                            toController:viewController
                                                               direction:direction
-                                                              semaphore:sem
+                                                              semaphore:semaphore
                                                                     url:url
                                                 animateBeforeTransition:animateBeforeTransition
                                                 transitionBeforeAnimate:transitionBeforeAnimate];
                 });
             }
             
-            dispatch_semaphore_wait(sem, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+            dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 __strong typeof(self) strongSelf = weakSelf;
@@ -536,21 +517,15 @@
             });
         });
         
-        
-        
         if (url) {
             if (transitionBeforeAnimate) {
-                
                 viewController.imageHidden = YES;
-                
-                [self doShowViewController:viewController direction:direction animated:YES semaphore:sem];
-                
+                [self doShowViewController:viewController direction:direction animated:YES semaphore:semaphore];
             } else {
-                
                 [self doAnimateFromViewController:fromController
                                       toController:viewController
                                          direction:direction
-                                         semaphore:sem
+                                         semaphore:semaphore
                                                url:url
                            animateBeforeTransition:animateBeforeTransition
                            transitionBeforeAnimate:transitionBeforeAnimate];
@@ -558,28 +533,25 @@
         } else {
             // No animation - complete now.
             viewController.imageHidden = NO;
-            dispatch_semaphore_signal(sem);
+            dispatch_semaphore_signal(semaphore);
         }
     }
-    
 }
 
-
 - (ORKConsentSceneViewController *)viewControllerForIndex:(NSUInteger)index {
-    
     if (_viewControllers == nil) {
         _viewControllers = [NSMutableDictionary new];
     }
     
-    ORKConsentSceneViewController *vc = nil;
+    ORKConsentSceneViewController *consentViewController = nil;
     
     if (_viewControllers[@(index)]) {
-        vc = _viewControllers[@(index)];
+        consentViewController = _viewControllers[@(index)];
     } else if (index>=[self pageCount]) {
-        vc = nil;
+        consentViewController = nil;
     } else {
         ORKConsentSceneViewController *sceneVc = [[ORKConsentSceneViewController alloc] initWithSection:[self visualSections][index]];
-        vc = sceneVc;
+        consentViewController = sceneVc;
         
         if (index == [self pageCount]-1) {
             sceneVc.continueButtonItem = self.continueButtonItem;
@@ -593,15 +565,15 @@
         }
     }
     
-    if (vc) {
-        _viewControllers[@(index)] = vc;
+    if (consentViewController) {
+        _viewControllers[@(index)] = consentViewController;
     }
     
-    return vc;
+    return consentViewController;
 }
 
 - (NSUInteger)indexOfViewController:(UIViewController *)viewController {
-    if (! viewController) {
+    if (!viewController) {
         return NSNotFound;
     }
     
@@ -642,12 +614,9 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished
    previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
-    
     if (finished && completed) {
-        
         [self updatePageIndex];
     }
-    
 }
 
 static NSString * const _ORKCurrentPageRestoreKey = @"currentPage";
@@ -670,6 +639,5 @@ static NSString * const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
     _viewControllers = nil;
     [self showViewController:[self viewControllerForIndex:_currentPage] forward:YES animated:NO];
 }
-
 
 @end

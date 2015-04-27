@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSignatureView.h"
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
@@ -41,8 +40,8 @@
 - (void)gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 
-
 @end
+
 
 @interface ORKSignatureGestureRecognizer : UIGestureRecognizer
 
@@ -50,37 +49,32 @@
 
 @end
 
+
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self.eventDelegate gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self.eventDelegate gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
 - (BOOL)shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    
     // Disable swipe gestureRecognizer
     if ([otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
         // Cancel the gesture recognition in progress.
         otherGestureRecognizer.enabled = NO;
         otherGestureRecognizer.enabled = YES;
     }
-    
     return YES;
 }
 
 @end
-
 
 
 static const CGFloat kPointMinDistance = 5;
@@ -96,8 +90,8 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 @property (nonatomic, strong) NSMutableArray *pathArray;
 @property (nonatomic, strong) NSArray *backgroundLines;
 
-
 @end
+
 
 @implementation ORKSignatureView
 
@@ -115,15 +109,19 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
         [self makeSignatureGestureRecognizer];
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual
+                                                         attribute:NSLayoutAttributeHeight
+                                                         relatedBy:NSLayoutRelationEqual
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1 constant:156]];
+                                                        multiplier:1
+                                                          constant:156]];
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                           attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1 constant:10000];
+                                                                          multiplier:1
+                                                                            constant:10000];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel-5;
         [self addConstraint:widthConstraint];
     }
@@ -131,7 +129,6 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 }
 
 - (UIBezierPath *)pathWithRoundedStyle {
-    
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineCapStyle = kCGLineCapRound;
     path.lineWidth = self.lineWidth;
@@ -183,14 +180,12 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 - (NSArray *)backgroundLines {
     if (_backgroundLines == nil) {
-        
         CGFloat width = self.bounds.size.width;
         CGFloat height = self.bounds.size.height;
         
         UIBezierPath *path = [UIBezierPath bezierPath];
         
         CGFloat bottom = 0.90;
-        
         {
             CGFloat x1 = 0;
             CGFloat x2 = width;
@@ -210,7 +205,6 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 #pragma mark Touch Event Handlers
 
 - (void)gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     if (touches.count > 1 ) {
         return;
     }
@@ -234,7 +228,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     if (touches.count > 1) {
         return;
     }
@@ -251,7 +244,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         return;
     }
     
-    
     previousPoint2 = previousPoint1;
     previousPoint1 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
@@ -266,7 +258,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     
     [self.currentPath addQuadCurveToPoint:mid2 controlPoint:previousPoint1];
     
-    
     CGRect drawBox = bounds;
     drawBox.origin.x -= self.lineWidth * 2.0;
     drawBox.origin.y -= self.lineWidth * 2.0;
@@ -274,12 +265,9 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     drawBox.size.height += self.lineWidth * 4.0;
     
     [self setNeedsDisplayInRect:drawBox];
-    
 }
 
-
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     CGRect rect = [self.currentPath bounds];
     if (touches.count > 1 || CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
@@ -295,10 +283,8 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
     
     for (UIBezierPath *path in self.backgroundLines) {
-        
         [[[UIColor blackColor] colorWithAlphaComponent:0.2] setStroke];
         [path stroke];
-        
     }
     
     if (! [self signatureExists] && (! self.currentPath || [self.currentPath isEmpty])) {
@@ -308,33 +294,26 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     }
     
     for (UIBezierPath *path in self.pathArray) {
-        
         [self.lineColor setStroke];
         [path stroke];
-        
     }
     
     [self.lineColor setStroke];
     [self.currentPath stroke];
-    
 }
 
 - (UIImage *)signatureImage {
-    
-    
     UIGraphicsBeginImageContext(self.bounds.size);
     
     for (UIBezierPath *path in self.pathArray) {
-        
         [self.lineColor setStroke];
         [path stroke];
-        
     }
     
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return img;
+    return image;
 }
 
 - (BOOL)signatureExists {

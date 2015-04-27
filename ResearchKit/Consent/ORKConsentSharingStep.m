@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSharingStep.h"
 #import "ORKConsentSharingStepViewController.h"
 #import "ORKHelpers.h"
@@ -36,7 +37,7 @@
 
 @implementation ORKConsentSharingStep
 
-+(Class)stepViewControllerClass {
++ (Class)stepViewControllerClass {
     return [ORKConsentSharingStepViewController class];
 }
 
@@ -77,8 +78,6 @@
     }
     return self;
 }
-
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];

@@ -43,14 +43,15 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 
+
 @interface ORKConsentSceneView : ORKVerticalContainerView
 
 @property (nonatomic, strong) ORKConsentSection *consentSection;
 
 @end
 
-@implementation ORKConsentSceneView
 
+@implementation ORKConsentSceneView
 
 - (void)setConsentSection:(ORKConsentSection *)consentSection {
     _consentSection = consentSection;
@@ -76,14 +77,15 @@
     [self.continueSkipContainer updateContinueAndSkipEnabled];
 }
 
-
 @end
+
 
 @interface ORKConsentSceneViewController () {
     ORKConsentSceneView *_sceneView;
 }
 
 @end
+
 
 static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     NSString *str = ORKLocalizedString(@"BUTTON_LEARN_MORE", nil);
@@ -120,6 +122,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     return str;
 }
 
+
 @implementation ORKConsentSceneViewController
 
 - (instancetype)initWithSection:(ORKConsentSection *)section {
@@ -129,7 +132,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
         self.learnMoreButtonTitle = _section.customLearnMoreButtonTitle;
     }
     return self;
-
 }
 
 - (void)loadView {
@@ -156,10 +158,8 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     _continueButtonItem = continueButtonItem;
-    
     _sceneView.continueSkipContainer.continueButtonItem = continueButtonItem;
 }
-
 
 - (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle {
     _learnMoreButtonTitle = learnMoreButtonTitle;
@@ -194,7 +194,6 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 #pragma mark - Action
 
 - (IBAction)showContent:(id)sender {
-
     ORKConsentLearnMoreViewController *vc = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     vc.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:vc];

@@ -28,13 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSharingStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKConsentLearnMoreViewController.h"
 #import "ORKConsentSharingStep.h"
 
-@implementation ORKConsentSharingStepViewController
 
+@implementation ORKConsentSharingStepViewController
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];

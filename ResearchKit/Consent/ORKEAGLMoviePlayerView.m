@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKEAGLMoviePlayerView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVUtilities.h>
@@ -35,6 +36,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import "ORKHelpers.h"
+
 
 // Uniform index.
 enum {
@@ -59,14 +61,14 @@ enum {
 // BT.601, which is the standard for SDTV.
 static const GLfloat kColorConversion601[] = {
     1.164,  1.164, 1.164,
-		  0.0, -0.392, 2.017,
+      0.0, -0.392, 2.017,
     1.596, -0.813,   0.0,
 };
 
 // BT.709, which is the standard for HDTV.
 static const GLfloat kColorConversion709[] = {
     1.164,  1.164, 1.164,
-		  0.0, -0.213, 2.112,
+      0.0, -0.213, 2.112,
     1.793, -0.533,   0.0,
 };
 
@@ -106,7 +108,6 @@ static const GLfloat kColorConversion709[] = {
 #define ORKEAGLLog(...)
 
 @implementation ORKEAGLMoviePlayerView
-
 
 + (Class)layerClass {
     return [CAEAGLLayer class];
@@ -231,7 +232,6 @@ static const GLfloat kColorConversion709[] = {
 #pragma mark - OpenGLES drawing
 
 - (BOOL)consumePixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    
     CVReturn err;
     if (pixelBuffer != NULL) {
         ORKEAGLLog(@"have buffer");
@@ -244,7 +244,6 @@ static const GLfloat kColorConversion709[] = {
         }
         
         [self cleanUpTextures];
-        
         
         /*
          Use the color attachment of the pixel buffer to determine the appropriate color conversion matrix.
@@ -542,6 +541,5 @@ static const GLfloat kColorConversion709[] = {
     
     return YES;
 }
-
 
 @end
