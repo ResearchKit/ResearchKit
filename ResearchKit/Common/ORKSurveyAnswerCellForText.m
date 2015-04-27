@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
@@ -38,34 +37,25 @@
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
 
+
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
 @property (nonatomic, strong) ORKAnswerTextView *textView;
 @property (nonatomic, strong) UILabel *placeHolder;
 
-
-
 @end
+
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
     NSArray *_constraints;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        
-    }
-    return self;
-}
-
 - (void)applyAnswerFormat {
-    ORKAnswerFormat *af = [self.step.answerFormat impliedAnswerFormat];
+    ORKAnswerFormat *answerFormat = [self.step.answerFormat impliedAnswerFormat];
     
-    if ([af isKindOfClass:[ORKTextAnswerFormat class]]) {
-        ORKTextAnswerFormat *taf = (ORKTextAnswerFormat *)af;
+    if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        ORKTextAnswerFormat *taf = (ORKTextAnswerFormat *)answerFormat;
         _maxLength = [taf maximumLength];
         self.textView.autocorrectionType = taf.autocorrectionType;
         self.textView.autocapitalizationType = taf.autocapitalizationType;
@@ -89,9 +79,7 @@
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)prepareView {
-    
     if (self.textView == nil ) {
         self.preservesSuperviewLayoutMargins = NO;
         self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self), .top=8, .bottom=8};
@@ -100,7 +88,6 @@
         
         self.textView.delegate = self;
         self.textView.editable = YES;
-        
         
         [self addSubview:self.textView];
         
@@ -117,8 +104,6 @@
         
         [self answerDidChange];
     }
-    
-    
     [super prepareView];
 }
 
@@ -195,7 +180,6 @@
     return 180.0;
 }
 
-
 @end
 
 
@@ -205,15 +189,14 @@
 
 @end
 
-@implementation ORKSurveyAnswerCellForTextField
 
+@implementation ORKSurveyAnswerCellForTextField
 
 - (BOOL)becomeFirstResponder {
     return [self.textField becomeFirstResponder];
 }
 
 - (void)textFieldCell_initialize {
-    
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
@@ -228,11 +211,9 @@
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.contentView.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
 }
-
 
 - (void)updateConstraints {
     // Want to use ORKTableViewLeftMargin(), but tableview is not available here.
@@ -246,13 +227,11 @@
     [super updateConstraints];
 }
 
-
 + (BOOL)shouldDisplayWithSeparators {
     return YES;
 }
 
 - (void)prepareView {
-    
     if (self.textField == nil ) {
         [self textFieldCell_initialize];
     }
@@ -265,12 +244,9 @@
     [super prepareView];
 }
 
-
-
 - (BOOL)shouldContinue {
     return ![self correctValueIfNeeded];
 }
-
 
 - (void)answerDidChange {
     id answer = self.answer;
@@ -287,7 +263,6 @@
 }
 
 #pragma mark - UITextFieldDelegate
-
 
 - (BOOL)correctValueIfNeeded {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
@@ -332,7 +307,6 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     BOOL canContinue = ![self correctValueIfNeeded];
     
     if (! canContinue) {
@@ -348,7 +322,6 @@
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
 }
-
 
 @end
 

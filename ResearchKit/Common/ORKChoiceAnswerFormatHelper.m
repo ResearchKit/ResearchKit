@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKDefines_Private.h"
 #import "ORKResult_Private.h"
+
 
 @implementation ORKChoiceAnswerFormatHelper {
     NSArray *_choices;
@@ -39,7 +41,6 @@
 }
 
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat {
-
     self = [super init];
     if (self) {
         NSArray *validClasses = @[[ORKValuePickerAnswerFormat class],
@@ -71,7 +72,6 @@
 }
 
 - (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
-    
     if (index >= _choices.count) {
         return nil;
     }
@@ -94,7 +94,6 @@
 }
 
 - (id)answerForSelectedIndexes:(NSArray *)indexes {
-    
     NSMutableArray *array = [NSMutableArray new];
     
     for (NSNumber *indexNumber in indexes) {
@@ -118,19 +117,15 @@
             [array addObject:value];
         }
     }
-    
     return [array copy];
 }
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {
-    
     NSArray *indexes = [self selectedIndexesForAnswer:answer];
-    
     return [indexes count] > 0 ? [indexes firstObject] : nil;
 }
 
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer {
-    
     // Works with boolean result
     if ([answer isKindOfClass:[NSNumber class]]) {
         answer = @[answer];
@@ -143,9 +138,7 @@
         NSAssert([answer isKindOfClass: [ORKChoiceQuestionResult answerClass] ], @"Wrong answer type");
         
         for (id answerValue in (NSArray *)answer) {
-            
             id<ORKAnswerOption> matchedChoice = nil;
-            
             for ( id<ORKAnswerOption> choice in _choices) {
                 if ([choice.value isEqual:answerValue]) {
                     matchedChoice = choice;
@@ -165,7 +158,6 @@
             if (matchedChoice) {
                 [indexArray addObject:@([_choices indexOfObject:matchedChoice])];
             }
-            
         }
     }
     
@@ -177,6 +169,5 @@
     return [indexArray copy];
     
 }
-
 
 @end

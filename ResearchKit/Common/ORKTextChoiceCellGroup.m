@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTextChoiceCellGroup.h"
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKAnswerFormat_Internal.h"
+
 
 @implementation ORKTextChoiceCellGroup {
     ORKChoiceAnswerFormatHelper *_helper;
@@ -63,7 +65,7 @@
 
 - (void)setAnswer:(id)answer {
     _answer = answer;
-    
+
     [self setSelectedIndexes:[_helper selectedIndexesForAnswer:answer]];
 }
 
@@ -76,7 +78,6 @@
 }
 
 - (ORKChoiceViewCell *)cellAtIndex:(NSUInteger)index withReuseIdentifier:(NSString *)identifier {
-    
     ORKChoiceViewCell *cell = _cells[@(index)];
     
     if (cell == nil) {
@@ -95,7 +96,6 @@
 }
 
 - (void)didSelectCellAtIndex:(NSUInteger)index {
-        
     ORKChoiceViewCell *touchedCell = [self cellAtIndex:index withReuseIdentifier:nil];
         
     if (_singleChoice) {
@@ -128,7 +128,6 @@
 }
 
 - (void)setSelectedIndexes:(NSArray *)indexes {
-    
     for (NSUInteger index = 0; index < self.size; index++ ) {
         BOOL selected = [indexes containsObject:@(index)];
         
@@ -145,7 +144,6 @@
 }
 
 - (NSArray *)selectedIndexes {
-    
     NSMutableArray *indexes = [NSMutableArray new];
     
     for (NSUInteger index = 0; index < self.size; index++ ) {
@@ -156,7 +154,6 @@
     }
     
     return [indexes copy];
-    
 }
 
 - (id)answerForBoolean {
@@ -165,9 +162,7 @@
         NSArray *answerArray = _answer;
         return (answerArray.count > 0)? [answerArray firstObject] : nil;
     }
-    
     return _answer;
-    
 }
 
 @end

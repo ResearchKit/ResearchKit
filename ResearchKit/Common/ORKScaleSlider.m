@@ -163,7 +163,6 @@
         
         newValue = stepSize*steps * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
     }
-    
     [self setValue:newValue animated:YES];
 }
 
@@ -188,7 +187,6 @@ static CGFloat kLineWidth = 1.0;
         }
         [path stroke];
     }
-    
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
 
@@ -200,7 +198,6 @@ static CGFloat kPadding = 2.0;
 }
 
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)trackRect value:(float)value {
-    
     CGRect rect = [super thumbRectForBounds:bounds trackRect:trackRect value:value];
     
     // VO needs the thumb to be visible, so we don't hide it if VO is running.
@@ -230,7 +227,10 @@ static CGFloat kPadding = 2.0;
 }
 
 - (NSString *)accessibilityLabel {
-    return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), [self _axFormattedValue:self.minimumValue], [self _axFormattedValue:self.maximumValue]];
+    return [NSString stringWithFormat:
+            ORKLocalizedString(@"AX_SLIDER_LABEL", nil),
+            [self _axFormattedValue:self.minimumValue],
+            [self _axFormattedValue:self.maximumValue]];
 }
 
 - (NSString *)accessibilityValue {
@@ -239,7 +239,6 @@ static CGFloat kPadding = 2.0;
     if (!self.showThumb) {
         return nil;
     }
-    
     return [self _axFormattedValue:self.value];
 }
 
@@ -250,7 +249,6 @@ static CGFloat kPadding = 2.0;
     if ([self isDescendantOfView:containingCell]) {
         return UIAccessibilityConvertFrameToScreenCoordinates(containingCell.bounds, containingCell);
     }
-    
     return CGRectZero;
 }
 

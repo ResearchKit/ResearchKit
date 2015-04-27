@@ -379,7 +379,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (ORKStepResult *)result {
-    ORKStepResult *superResult = [super result];
+    ORKStepResult *parentResult = [super result];
     ORKQuestionStep *questionStep = self.questionStep;
     
     ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
@@ -397,12 +397,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
     }
     
-    result.startDate = superResult.startDate;
-    result.endDate = superResult.endDate;
+    result.startDate = parentResult.startDate;
+    result.endDate = parentResult.endDate;
     
-    superResult.results = @[result];
+    parentResult.results = @[result];
     
-    return superResult;
+    return parentResult;
 }
 
 #pragma mark - Internal

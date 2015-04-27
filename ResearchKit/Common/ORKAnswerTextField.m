@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAnswerTextField.h"
 #import "ORKAccessibility.h"
+
 
 @implementation ORKAnswerTextField
 
@@ -50,12 +52,10 @@
 }
 
 - (void)init_ORKAnswerTextField {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
-    
     [self updateAppearance];
 }
 
@@ -63,7 +63,6 @@
     self.font = [[self class] defaultFont];
     [self invalidateIntrinsicContentSize];
 }
-
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -80,7 +79,6 @@
     if (self.text.length > 0) {
         return self.text;
     }
-    
     return self.placeholder;
 }
 

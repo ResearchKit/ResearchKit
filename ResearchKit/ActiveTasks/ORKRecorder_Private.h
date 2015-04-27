@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  It is currently considered private, and is not used in any of the active tasks.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTouchRecorderConfiguration: ORKRecorderConfiguration
+@interface ORKTouchRecorderConfiguration : ORKRecorderConfiguration
 
 /**
  Returns an initialized touch recorder configuration.

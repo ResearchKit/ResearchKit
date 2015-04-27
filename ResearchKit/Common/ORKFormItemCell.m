@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKFormItemCell.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
@@ -41,6 +42,7 @@
 #import "ORKFormTextView.h"
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
+
 
 static const CGFloat kVMargin = 10.0;
 static const CGFloat kHMargin = 15.0;
@@ -64,9 +66,11 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
+
 @interface ORKSegmentedControl : UISegmentedControl
 
 @end
+
 
 @implementation ORKSegmentedControl
 
@@ -80,6 +84,7 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
+
 #pragma mark - ORKFormItemCell
 
 @interface ORKFormItemCell ()
@@ -90,6 +95,7 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
+
 @implementation ORKFormItemCell
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
@@ -97,11 +103,8 @@ static const CGFloat kHMargin = 15.0;
                                  answer:(id)answer
                           maxLabelWidth:(CGFloat)maxLabelWidth
                              screenType:(ORKScreenType)screenType {
-    
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-    
     if (self) {
-        
         _screenType = screenType;
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
@@ -118,7 +121,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)setExpectedLayoutWidth:(CGFloat)newWidth {
-    
     if (newWidth != _expectedLayoutWidth) {
         _expectedLayoutWidth = newWidth;
         [self setNeedsUpdateConstraints];
@@ -152,7 +154,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)answerDidChange {
-    
 }
 
 - (void)defaultAnswerDidChange {
@@ -172,10 +173,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)becomeFirstResponder {
-    
     // Subclasses should override this
     return YES;
-    
 }
 
 - (BOOL)resignFirstResponder {
@@ -206,6 +205,7 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
+
 #pragma mark - ORKFormItemTextFieldBasedCell
 
 @interface ORKFormItemTextFieldBasedCell ()
@@ -217,9 +217,8 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
-@implementation ORKFormItemTextFieldBasedCell {
 
-}
+@implementation ORKFormItemTextFieldBasedCell
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth screenType:(ORKScreenType)screenType {
     self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth screenType:screenType];
@@ -238,7 +237,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)cellInit {
-    
     [super cellInit];
     
     _textFieldView = [[ORKTextFieldView alloc] init];
@@ -260,8 +258,6 @@ static const CGFloat kHMargin = 15.0;
     [super updateConstraints];
     
     CGFloat labelMinWidth = self.maxLabelWidth;
-    
-    
     CGFloat boundWidth = self.expectedLayoutWidth;
     
     id labelLabel = self.labelLabel, textFieldView = _textFieldView;
@@ -275,7 +271,7 @@ static const CGFloat kHMargin = 15.0;
     self.myConstraints = [NSMutableArray new];
     
     if ((labelMinWidth) >= 0.6*boundWidth) {
-        
+
         [self.myConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
         
@@ -321,14 +317,12 @@ static const CGFloat kHMargin = 15.0;
     
     
     [self.contentView addConstraints: self.myConstraints];
-
 }
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {
     _editingHighlight = editingHighlight;
     self.labelLabel.textColor = _editingHighlight ? [self tintColor] : [UIColor blackColor];
     [self textField].textColor = _editingHighlight ? [self tintColor] : [UIColor blackColor];
-    
 }
 
 - (void)dealloc {
@@ -339,12 +333,15 @@ static const CGFloat kHMargin = 15.0;
     self.labelLabel.text = label;
     self.textField.accessibilityLabel = label;
 }
+
 - (NSString *)label {
     return self.labelLabel.text;
 }
+
 - (NSString *)formattedValue {
     return nil;
 }
+
 - (NSString *)shortenedFormattedValue {
     return [self formattedValue];
 }
@@ -352,7 +349,7 @@ static const CGFloat kHMargin = 15.0;
 - (void)updateValueLabel {
     ORKUnitTextField *textField = [self textField];
     
-    if (textField == nil) return;
+    if (textField == nil) { return; }
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;
@@ -365,6 +362,7 @@ static const CGFloat kHMargin = 15.0;
     
     textField.text = formattedValue;
 }
+
 - (BOOL)becomeFirstResponder {
     return [self.textField becomeFirstResponder];
 }
@@ -422,7 +420,6 @@ static const CGFloat kHMargin = 15.0;
 
 @implementation ORKFormItemTextFieldCell
 
-
 - (void)cellInit {
     [super cellInit];
     self.textField.keyboardType = UIKeyboardTypeDefault;
@@ -436,7 +433,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)inputValueDidChange {
-    
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     
@@ -487,15 +483,14 @@ static const CGFloat kHMargin = 15.0;
     return YES;
 }
 
-
 @end
+
 
 #pragma mark - ORKFormItemNumericCell
 
 @implementation ORKFormItemNumericCell {
     NSNumberFormatter *_numberFormatter;
 }
-
 
 - (void)cellInit {
     [super cellInit];
@@ -542,7 +537,6 @@ static const CGFloat kHMargin = 15.0;
         if ([answer isKindOfClass:[NSNumber class]]) {
             displayValue = [_numberFormatter stringFromNumber:answer];
         }
-        
         self.textField.text = displayValue;
     } else {
         self.textField.text = nil;
@@ -587,14 +581,12 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    
     [self inputValueDidClear];
     
     return YES;
 }
 
 - (void)valueFieldDidChange:(UITextField *)textField {
-    
     ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.formItem impliedAnswerFormat];
     NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
     textField.text = sanitizedText;
@@ -663,7 +655,6 @@ static const CGFloat kHMargin = 15.0;
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.contentView addConstraint:heightConstraint];
     }
-    
 }
 
 - (void)applyAnswerFormat {
@@ -706,7 +697,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)becomeFirstResponder {
-    
     return [_textView becomeFirstResponder];
 }
 
@@ -724,7 +714,6 @@ static const CGFloat kHMargin = 15.0;
 - (UIColor *)placeholderColor {
     return [UIColor ork_midGrayTintColor];
 }
-
 
 #pragma mark UITextViewDelegate
 
@@ -749,7 +738,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
     if (textView.textColor == [self placeholderColor]) {
         textView.text = nil;
         textView.textColor = [UIColor blackColor];
@@ -768,7 +756,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
     if (_maxLength > 0) {
         NSUInteger oldLength = [textView.text length];
         NSUInteger replacementLength = [text length];
@@ -776,7 +763,6 @@ static const CGFloat kHMargin = 15.0;
         NSUInteger newLength = oldLength - rangeLength + replacementLength;
         return (newLength <= _maxLength);
     }
-    
     return YES;
 }
 @end
@@ -788,8 +774,8 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
-@implementation ORKFormItemImageSelectionCell {
 
+@implementation ORKFormItemImageSelectionCell {
     ORKImageSelectionView *_selectionView;
 }
 
@@ -812,19 +798,19 @@ static const CGFloat kHMargin = 15.0;
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
     
-    
     [super cellInit];
 }
 
 #pragma mark ORKImageSelectionViewDelegate
+
 - (void)selectionViewSelectionDidChange:(ORKImageSelectionView *)view {
     [self ork_setAnswer:view.answer];
     [self inputValueDidChange];
 }
 
 #pragma mark recover answer
+
 - (void)answerDidChange {
-    
     [super answerDidChange];
     [_selectionView setAnswer:self.answer];
 }
@@ -838,18 +824,19 @@ static const CGFloat kHMargin = 15.0;
 
 @end
 
+
 @implementation ORKFormItemPickerCell {
     id<ORKPicker> _picker;
 }
 
+
 - (void)setFormItem:(ORKFormItem *)formItem {
-    
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
     if (! (!formItem ||
-             [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
-             [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
-             [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
+           [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
+           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
+           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
            [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
     }
@@ -862,7 +849,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)answerDidChange {
-    
     self.picker.answer = self.answer;
     self.textField.text = self.picker.selectedLabelText;
 }
@@ -898,7 +884,6 @@ static const CGFloat kHMargin = 15.0;
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         // hide keyboard
@@ -914,10 +899,9 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    BOOL shouldBeginEditing = [super textFieldShouldBeginEditing:textField];
     
-    BOOL ret = [super textFieldShouldBeginEditing:textField];
-    
-    if (ret) {
+    if (shouldBeginEditing) {
         if (self.textFieldView.inputView == nil) {
             self.textField.inputView = self.picker.pickerView;
         }
@@ -925,7 +909,7 @@ static const CGFloat kHMargin = 15.0;
         [self.picker pickerWillAppear];
     }
     
-    return ret;
+    return shouldBeginEditing;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -933,4 +917,3 @@ static const CGFloat kHMargin = 15.0;
 }
 
 @end
-

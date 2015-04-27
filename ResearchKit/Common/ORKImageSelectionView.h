@@ -28,17 +28,21 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import "ORKAnswerFormat_Internal.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKImageSelectionView;
+
 @protocol ORKImageSelectionViewDelegate <NSObject>
 
 - (void)selectionViewSelectionDidChange:(ORKImageSelectionView *)view;
 
 @end
+
 
 @interface ORKImageSelectionView : UIView
 

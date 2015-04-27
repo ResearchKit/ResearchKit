@@ -573,13 +573,13 @@
 }
 
 - (ORKStepResult *)result {
-    ORKStepResult *superResult = [super result];
+    ORKStepResult *parentResult = [super result];
     
     NSArray *items = [self formItems];
     
     // "Now" is the end time of the result, which is either actually now,
     // or the last time we were in the responder chain.
-    NSDate *now = superResult.endDate;
+    NSDate *now = parentResult.endDate;
     
     NSMutableArray *qResults = [NSMutableArray new];
     for (ORKFormItem *item in items) {
@@ -622,9 +622,9 @@
         [qResults addObject:result];
     }
     
-    superResult.results = [qResults copy];
+    parentResult.results = [qResults copy];
     
-    return superResult;
+    return parentResult;
 }
 
 - (void)skipForward {

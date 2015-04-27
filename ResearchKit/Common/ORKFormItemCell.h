@@ -28,13 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKFormStep.h>
 #import "ORKSkin.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKFormItemCell;
+
 @protocol ORKFormItemCellDelegate <NSObject>
 
 @required
@@ -44,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 
 @end
+
 
 @interface ORKFormItemCell : UITableViewCell
 
@@ -67,21 +71,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ORKFormItemTextFieldBasedCell : ORKFormItemCell <UITextFieldDelegate>
+
 @end
+
 
 @interface ORKFormItemTextFieldCell : ORKFormItemTextFieldBasedCell
+
 @end
+
 
 @interface ORKFormItemNumericCell : ORKFormItemTextFieldBasedCell
+
 @end
+
 
 @interface ORKFormItemTextCell : ORKFormItemCell <UITextViewDelegate>
+
 @end
+
 
 @interface ORKFormItemImageSelectionCell : ORKFormItemCell
+
 @end
 
+
 @interface ORKFormItemPickerCell : ORKFormItemTextFieldBasedCell
+
 @end
 
 NS_ASSUME_NONNULL_END
