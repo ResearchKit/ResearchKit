@@ -89,3 +89,10 @@ typedef NS_ENUM(NSInteger, ORKFileProtectionMode) {
 } ORK_ENUM_AVAILABLE;
 
 
+/**
+ Audio channels constants (left or right).
+ */
+typedef NS_ENUM(NSInteger, ORKAudioChannel) {
+    ORKAudioChannelLeft,
+    ORKAudioChannelRight
+} ORK_ENUM_AVAILABLE;

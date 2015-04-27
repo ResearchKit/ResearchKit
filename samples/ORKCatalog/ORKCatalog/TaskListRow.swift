@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Survey
     case Consent
     case Form
+    case ToneAudiometry
     
     /// Returns an array of all the task list row enum cases.
     static var allCases: [TaskListRow] {
@@ -134,6 +135,9 @@ enum TaskListRow: Int, Printable {
 
             case .Form:
                 return NSLocalizedString("Form", comment: "")
+            
+            case .ToneAudiometry:
+                return NSLocalizedString("Tone Audiometry", comment: "")
         }
     }
     
@@ -206,6 +210,7 @@ enum TaskListRow: Int, Printable {
         case FitnessTask =                          "FitnessTask"
         case ShortWalkTask =                        "ShortWalkTask"
         case AudioTask =                            "AudioTask"
+        case ToneAudiometryTask =                   "ToneAudiometry"
 
         // Survey task specific identifiers.
         case SurveyTask =                           "SurveyTask"
@@ -289,6 +294,9 @@ enum TaskListRow: Int, Printable {
             
             case .Form:
                 return formTask
+
+            case .ToneAudiometry:
+                return toneAudiometryTask
         }
     }
 
@@ -570,6 +578,11 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
 
+    /// This task presents the Tone Audiometry pre-defined active task.
+    private var toneAudiometryTask: ORKTask {
+        return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: nil)
+    }
+    
     /**
         A task demonstrating how the ResearchKit framework can be used to present a simple
         survey with an introduction, a question, and a conclusion.

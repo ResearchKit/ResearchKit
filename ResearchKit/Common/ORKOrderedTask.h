@@ -284,6 +284,35 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                         requireReversal:(BOOL)requireReversal
                                                 options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that tests tone audiometry.
+
+ In a tone audiometry task, the participant is asked to listen to some tones
+ with different audio frequencies, playing on different channels (left and right),
+ with the volume being progressively increased until the participant taps a button.
+
+ A tone audiometry task can be used to measure properties of the user's hearing,
+ based on its reaction to a wide range of frequencies.
+
+ Data collected in this task consists of audio signal amplitude for specific
+ frequencies and channels.
+
+ @param identifier        The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription       A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
+ @param speechInstruction  Instructional content describing what the user needs to do when recording begins. If the value of this parameter is `nil`, default localized text is used.
+ @param shortSpeechInstruction Instructional content shown during audio recording. If the value of this parameter is `nil`, default localized text is used.
+ @param toneDuration      The maximum length of the duration for each tone (each tone can be interrupted sooner, after the participant presses the main button).
+ @param options           Options that affect the features of the predefined task.
+
+ @return An active tone audiometry task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)toneAudiometryTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                        toneDuration:(NSTimeInterval)toneDuration
+                                             options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END
