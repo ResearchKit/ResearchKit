@@ -31,6 +31,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 #if defined(__cplusplus)
 #define ORK_EXTERN extern "C" __attribute__((visibility("default")))
 #else
@@ -48,7 +49,6 @@
  that have been acquired for a task or step.
  */
 typedef NS_OPTIONS(NSInteger, ORKPermissionMask) {
-    
     /// No permissions.
     ORKPermissionNone                     = 0,
     
@@ -87,5 +87,3 @@ typedef NS_ENUM(NSInteger, ORKFileProtectionMode) {
     /// Complete file protection while the device is locked.
     ORKFileProtectionComplete
 } ORK_ENUM_AVAILABLE;
-
-

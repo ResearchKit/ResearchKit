@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKDefines.h>
+
 
 #define STRONGTYPE(x) __strong __typeof(x)
 
