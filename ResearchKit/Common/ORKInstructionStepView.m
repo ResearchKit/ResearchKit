@@ -138,8 +138,8 @@
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
     
     {
-        NSLayoutConstraint *c = _instructionImageHeightConstraint;
-        c.constant = (_instructionImageView.image ? IllustrationHeight : 0);
+        NSLayoutConstraint *constraint = _instructionImageHeightConstraint;
+        constraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
     }
 }
 

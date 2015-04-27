@@ -1129,16 +1129,16 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     if (! num) {
         return nil;
     }
-    NSString *ret = nil;
+    NSString *string = nil;
     NSNumberFormatter *formatter = [self makeNumberFormatter];
     if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
     } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
     } else {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
     }
-    return ret;
+    return string;
 }
 
 #pragma mark - Text Sanitization
@@ -1228,9 +1228,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         return nil;
     }
     
-    NSInteger ret = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
+    NSInteger integer = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
     
-    return @(ret);
+    return @(integer);
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterDecimalStyle];

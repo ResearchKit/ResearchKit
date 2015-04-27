@@ -364,11 +364,11 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
                                                                     views:views]];
     
     // Ask to fill the available horizontal space
-    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_textField
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_textField
                                                          attribute:NSLayoutAttributeWidth
                                                          relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
-    c.priority = UILayoutPriorityDefaultLow;
-    [self addConstraint:c];
+    constraint.priority = UILayoutPriorityDefaultLow;
+    [self addConstraint:constraint];
     
 }
 

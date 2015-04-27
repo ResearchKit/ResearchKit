@@ -45,9 +45,9 @@ static UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFlo
     UIRectFillUsingBlendMode(r, kCGBlendModeSourceIn);
     CGContextEndTransparencyLayer(context);
     
-    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return ret;
+    return outputImage;
 }
 
 @implementation ORKTintedImageView {

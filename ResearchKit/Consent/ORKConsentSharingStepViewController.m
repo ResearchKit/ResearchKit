@@ -53,10 +53,10 @@
 - (void)consentLearnMoreAction:(id)sender {
     ORKConsentSharingStep *step = (ORKConsentSharingStep *)self.step;
     
-    ORKConsentLearnMoreViewController *vc = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:step.localizedLearnMoreHTMLContent];
-    vc.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navc animated:YES completion:nil];
+    ORKConsentLearnMoreViewController *viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:step.localizedLearnMoreHTMLContent];
+    viewController.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 @end

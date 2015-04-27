@@ -329,13 +329,13 @@ static UIBezierPath *ORKErrorBezierPath() {
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGRect bds = self.bounds;
-    _flowerView.center = (CGPoint){CGRectGetMidX(bds), CGRectGetMidY(bds)};
-    _flowerView.bounds = bds;
+    CGRect bounds = self.bounds;
+    _flowerView.center = (CGPoint){CGRectGetMidX(bounds), CGRectGetMidY(bounds)};
+    _flowerView.bounds = bounds;
     _flowerView.transform = CGAffineTransformMakeScale(_flowerScaleFactor, _flowerScaleFactor);
     
     CGFloat designWidth = ORKFlowerBezierPathSize.width + _ORKFlowerMargins.left + _ORKFlowerMargins.right;
-    CGFloat scaleFactor = bds.size.width / designWidth;
+    CGFloat scaleFactor = bounds.size.width / designWidth;
     CGAffineTransform tfm = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
     
     CGRect checkRect = CGRectApplyAffineTransform((CGRect){CGPointZero,ORKCheckBezierPathSize}, tfm);

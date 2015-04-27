@@ -76,9 +76,9 @@
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-    ORKActiveStepViewController *vc = self.activeStepViewController;
-    if (vc) {
-        [self updateDisplay:vc];
+    ORKActiveStepViewController *viewController = self.activeStepViewController;
+    if (viewController) {
+        [self updateDisplay:viewController];
     }
 }
 

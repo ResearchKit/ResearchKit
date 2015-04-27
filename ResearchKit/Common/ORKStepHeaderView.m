@@ -153,8 +153,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect bds = self.bounds;
-    CGRect insetBounds = UIEdgeInsetsInsetRect(bds, self.layoutMargins);
+    CGRect bounds = self.bounds;
+    CGRect insetBounds = UIEdgeInsetsInsetRect(bounds, self.layoutMargins);
     
     ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
     CGFloat sideMargin = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreButtonSideMargin, screenType);

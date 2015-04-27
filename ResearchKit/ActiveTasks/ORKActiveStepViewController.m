@@ -128,12 +128,12 @@
 }
 
 - (UIView *)customViewContainer {
-    __unused UIView *v = [self view];
+    __unused UIView *view = [self view];
     return _activeStepView.customViewContainer;
 }
 
 - (UIImageView *)imageView {
-    __unused UIView *v = [self view];
+    __unused UIView *view = [self view];
     return _activeStepView.imageView;
 }
 

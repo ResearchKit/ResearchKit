@@ -150,14 +150,14 @@
     ORKCollectionResult *result = [[ORKCollectionResult alloc] initWithIdentifier:@"001"];
     [result setResults:@[ [[ORKResult alloc]initWithIdentifier: @"101"], [[ORKResult alloc]initWithIdentifier: @"007"] ]];
     
-    ORKResult *ret = [result resultForIdentifier:@"005"];
-    XCTAssertNil(ret, @"%@", ret.identifier);
+    ORKResult *childResult = [result resultForIdentifier:@"005"];
+    XCTAssertNil(childResult, @"%@", childResult.identifier);
     
-    ret = [result resultForIdentifier:@"007"];
-    XCTAssertEqual(ret.identifier, @"007", @"%@", ret.identifier);
+    childResult = [result resultForIdentifier:@"007"];
+    XCTAssertEqual(childResult.identifier, @"007", @"%@", childResult.identifier);
     
-    ret = [result resultForIdentifier: @"101"];
-    XCTAssertEqual(ret.identifier, @"101", @"%@", ret.identifier);
+    childResult = [result resultForIdentifier: @"101"];
+    XCTAssertEqual(childResult.identifier, @"101", @"%@", childResult.identifier);
 }
 
 @end

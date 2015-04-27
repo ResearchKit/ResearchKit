@@ -550,18 +550,18 @@
     } else if (index>=[self pageCount]) {
         consentViewController = nil;
     } else {
-        ORKConsentSceneViewController *sceneVc = [[ORKConsentSceneViewController alloc] initWithSection:[self visualSections][index]];
-        consentViewController = sceneVc;
+        ORKConsentSceneViewController *sceneViewController = [[ORKConsentSceneViewController alloc] initWithSection:[self visualSections][index]];
+        consentViewController = sceneViewController;
         
         if (index == [self pageCount]-1) {
-            sceneVc.continueButtonItem = self.continueButtonItem;
+            sceneViewController.continueButtonItem = self.continueButtonItem;
         } else {
             NSString *buttonTitle = ORKLocalizedString(@"BUTTON_NEXT", nil);
-            if (sceneVc.section.type == ORKConsentSectionTypeOverview) {
+            if (sceneViewController.section.type == ORKConsentSectionTypeOverview) {
                 buttonTitle = ORKLocalizedString(@"BUTTON_GET_STARTED", nil);
             }
             
-            sceneVc.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(next)];
+            sceneViewController.continueButtonItem = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(next)];
         }
     }
     

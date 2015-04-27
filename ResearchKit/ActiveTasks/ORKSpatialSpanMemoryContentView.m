@@ -123,15 +123,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect bds = [self bounds];
-    CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bds.size.width / _gridSize.width, bds.size.height / _gridSize.height), self);
+    CGRect bounds = [self bounds];
+    CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bounds.size.width / _gridSize.width, bounds.size.height / _gridSize.height), self);
     
     gridItemEdgeLength = MIN(gridItemEdgeLength, 114);
     CGSize gridItemSize = (CGSize){gridItemEdgeLength, gridItemEdgeLength};
     
     CGPoint centeringOffset = CGPointZero;
-    centeringOffset.x = 0.5*(bds.size.width - (gridItemSize.width * _gridSize.width));
-    centeringOffset.y = 0.5*(bds.size.height - (gridItemSize.height * _gridSize.height));
+    centeringOffset.x = 0.5*(bounds.size.width - (gridItemSize.width * _gridSize.width));
+    centeringOffset.y = 0.5*(bounds.size.height - (gridItemSize.height * _gridSize.height));
     
     NSInteger tileIndex = 0;
     for (NSInteger x = 0; x < _gridSize.width; x++) {

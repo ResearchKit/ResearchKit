@@ -183,18 +183,17 @@
     _constraints = constraints;
 }
 
-- (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)p {
-    
-    UIView *v = [_tableView hitTest:p withEvent:nil];
+- (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
+    UIView *subview = [_tableView hitTest:point withEvent:nil];
     BOOL viewIsChildOfFirstResponder = NO;
-    while (v) {
+    while (subview) {
         // Ignore table view cells, since first responder will be manually managed for taps on them
-        if ([v isFirstResponder] || [v isKindOfClass:[UITableViewCell class]]) {
-            ORK_Log_Debug(@"v=%@",v);
+        if ([subview isFirstResponder] || [subview isKindOfClass:[UITableViewCell class]]) {
+            ORK_Log_Debug(@"v=%@",subview);
             viewIsChildOfFirstResponder = YES;
             break;
         }
-        v = [v superview];
+        subview = [subview superview];
     }
     return viewIsChildOfFirstResponder;
 }
@@ -280,8 +279,8 @@
     CGRect visibleRect = CGRectMake(0, scrollView.contentOffset.y, scrollView.bounds.size.width, visibleHeight);
     CGRect desiredRect = [scrollView convertRect:cell.bounds fromView:cell];
     
-    CGRect bds = scrollView.bounds;
-    CGFloat offsetY = bds.origin.y;
+    CGRect bounds = scrollView.bounds;
+    CGFloat offsetY = bounds.origin.y;
     BOOL containByVisibleRect = CGRectContainsRect(visibleRect, desiredRect);
     
     if (containByVisibleRect == NO) {
@@ -310,15 +309,15 @@
         offsetY = MAX(offsetY, 0);
     }
     
-    if (offsetY != bds.origin.y) {
-        bds.origin.y = offsetY;
+    if (offsetY != bounds.origin.y) {
+        bounds.origin.y = offsetY;
         
         if (animated) {
             [UIView animateWithDuration:0.3 animations:^{
-                scrollView.bounds = bds;
+                scrollView.bounds = bounds;
             }];
         } else {
-            scrollView.bounds = bds;
+            scrollView.bounds = bounds;
         }
     }
 }

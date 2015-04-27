@@ -380,8 +380,8 @@ static NSString * const _FamilyNameIdentifier = @"family";
             
             //register ScrollView to update hairline
             if ([viewController isKindOfClass:[ORKConsentReviewController class]]) {
-                ORKConsentReviewController *reviewVc =  (ORKConsentReviewController *)viewController;
-                [strongSelf.taskViewController setRegisteredScrollView:reviewVc.webView.scrollView];
+                ORKConsentReviewController *reviewViewController =  (ORKConsentReviewController *)viewController;
+                [strongSelf.taskViewController setRegisteredScrollView:reviewViewController.webView.scrollView];
             }
             
             UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, strongSelf.navigationItem.leftBarButtonItem);

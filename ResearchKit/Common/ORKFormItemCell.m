@@ -368,9 +368,9 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    ret = [self.textField resignFirstResponder] || ret;
-    return ret;
+    BOOL resign = [super resignFirstResponder];
+    resign = [self.textField resignFirstResponder] || resign;
+    return resign;
 }
 
 - (void)inputValueDidClear {
@@ -701,8 +701,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    return [_textView resignFirstResponder] || ret;
+    BOOL resign = [super resignFirstResponder];
+    return [_textView resignFirstResponder] || resign;
 }
 
 - (void)inputValueDidChange {

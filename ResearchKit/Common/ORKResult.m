@@ -1158,7 +1158,7 @@
         return nil;
     }
     
-    __block ORKQuestionResult *ret = nil;
+    __block ORKQuestionResult *result = nil;
     
     [self.results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
@@ -1168,13 +1168,13 @@
         
         NSString *anIdentifier = [(ORKResult *)obj identifier];
         if ([anIdentifier isEqual:identifier]) {
-            ret = obj;
+            result = obj;
             *stop = YES;
         }
     
     }];
     
-    return ret;
+    return result;
 }
 
 - (ORKResult *)firstResult {
