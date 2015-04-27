@@ -35,10 +35,11 @@
 
 @implementation AppDelegate
 
-
-// For UI state restoration, we must configure the app and make the window key
-// in willFinishLaunchingWithOptions:. Otherwise, the restored task view controller
-// will animate in.
+/*
+ For UI state restoration, we must configure the app and make the window key
+ in willFinishLaunchingWithOptions:. Otherwise, the restored task view controller
+ will animate in.
+ */
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -53,7 +54,9 @@
 
 #pragma mark UI state restoration
 
-// These methods are needed in order to enable UI state restoration.
+/*
+ These methods are needed in order to enable UI state restoration.
+ */
 
 - (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder {
     return YES;
