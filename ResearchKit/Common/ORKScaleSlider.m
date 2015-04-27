@@ -112,8 +112,10 @@
     // width for the instrinsic content height, and leave the intrinsic content width alone.
     // The intrinsic content width is typically -1, which will allow the slider to fill the
     // available width in the superview.
-    if(_vertical && self.delegate.sliderLayoutWidth > 0)
-        s = CGSizeMake(s.width, self.delegate.sliderLayoutWidth);
+    CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
+    if(_vertical && sliderLayoutWidth > 0) {
+        s = CGSizeMake(s.width, sliderLayoutWidth);
+    }
     return s;
 }
 
