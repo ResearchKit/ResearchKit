@@ -50,12 +50,10 @@
 @implementation ORKAudioStepViewController {
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
-    
     ORKActiveStepTimer *_timer;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         // Continue audio recording in the background
@@ -67,7 +65,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.duration;
     self.activeStepView.activeCustomView = _audioContentView;
@@ -75,10 +72,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self start];
+}
+
+- (void)prepareStep {
     if (_audioRecorder.outputDirectory == nil) {
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
     }
-    [self start];
+    [super prepareStep];
 }
 
 - (void)audioRecorderDidChange {
@@ -94,7 +95,6 @@
             break;
         }
     }
-    
     _audioRecorder = audioRecorder;
     [self audioRecorderDidChange];
 }
@@ -106,17 +106,14 @@
 - (void)doSample {
     [_avAudioRecorder updateMeters];
     float value = [_avAudioRecorder averagePowerForChannel:0];
-    
     // Assume value is in range roughly -60dB to 0dB
     float clampedValue = MAX(value/60.0, -1) + 1;
-    
     [_audioContentView addSample:@(clampedValue)];
     _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
 }
 
 - (void)startNewTimerIfNeeded {
     if (! _timer) {
-        
         NSTimeInterval duration = self.audioStep.duration;
         __weak typeof(self) weakSelf = self;
         _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration/100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
@@ -131,16 +128,15 @@
     _audioContentView.finished = NO;
 }
 
-
 - (void)start {
     [super start];
     [self audioRecorderDidChange];
-    
     [_timer reset];
     _timer = nil;
     [self startNewTimerIfNeeded];
     
 }
+
 - (void)suspend {
     [super suspend];
     [_timer pause];
@@ -148,12 +144,14 @@
         [_audioContentView addSample:@(0)];
     }
 }
+
 - (void)resume {
     [super resume];
     [self audioRecorderDidChange];
     [self startNewTimerIfNeeded];
     [_timer resume];
 }
+
 - (void)finish {
     [super finish];
     [_timer reset];
@@ -167,7 +165,6 @@
 - (void)setAvAudioRecorder:(AVAudioRecorder *)recorder {
     _avAudioRecorder = nil;
     _avAudioRecorder = recorder;
-    
 }
 
 @end
