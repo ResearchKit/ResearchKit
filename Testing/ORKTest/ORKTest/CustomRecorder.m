@@ -33,8 +33,7 @@
 #import "CustomRecorder.h"
 #import <ResearchKit/ResearchKit_Private.h>
 
-@interface CustomRecorder ()
-{
+@interface CustomRecorder () {
     UIView *_containerFiller;
 }
 
@@ -153,8 +152,7 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     [self.timer invalidate];
     [_button removeFromSuperview];
     _button = nil;
@@ -162,8 +160,7 @@
     _containerFiller = nil;
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
@@ -184,8 +181,7 @@
 
 @implementation CustomRecorderConfiguration
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-{
+- (instancetype)initWithIdentifier:(NSString *)identifier {
     return [super initWithIdentifier:identifier];
 }
 
@@ -193,14 +189,12 @@
     return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step outputDirectory:outputDirectory];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
 }
 

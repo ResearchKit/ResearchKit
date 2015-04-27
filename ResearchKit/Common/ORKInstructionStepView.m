@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKInstructionStepView.h"
 #import "ORKInstructionStep.h"
 #import "ORKHelpers.h"
@@ -45,6 +46,7 @@
     BOOL _isCompletionStep;
     NSLayoutConstraint *_instructionImageHeightConstraint;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -78,14 +80,16 @@
                                                                           relatedBy:NSLayoutRelationLessThanOrEqual
                                                                              toItem:_instructionImageView
                                                                           attribute:NSLayoutAttributeWidth
-                                                                         multiplier:imageSize.height/imageSize.width constant:0]];
+                                                                         multiplier:imageSize.height/imageSize.width
+                                                                           constant:0]];
         
         _instructionImageHeightConstraint = [NSLayoutConstraint constraintWithItem:_instructionImageView
                                                                          attribute:NSLayoutAttributeHeight
                                                                          relatedBy:NSLayoutRelationLessThanOrEqual
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0 constant:300];
+                                                                        multiplier:1.0
+                                                                          constant:300];
         
         [_instructionImageView addConstraint:_instructionImageHeightConstraint];
         _instructionImageView.isAccessibilityElement = YES;

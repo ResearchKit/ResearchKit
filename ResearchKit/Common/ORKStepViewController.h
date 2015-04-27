@@ -187,6 +187,7 @@ ORK_CLASS_AVAILABLE
  Returns a new step view controller for the specified step.
  
  @param step    The step to be presented.
+ 
  @return A newly initialized step view controller.
  */
 - (instancetype)initWithStep:(nullable ORKStep *)step;
@@ -216,7 +217,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, weak, nullable) id<ORKStepViewControllerDelegate> delegate;
 
-
 /**
  A localized string that represents the title of the Continue button.
  
@@ -227,7 +227,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSString *continueButtonTitle;
 
-
 /**
  A localized string that represents the title of the Learn More button.
  
@@ -236,7 +235,6 @@ ORK_CLASS_AVAILABLE
  of the Learn More button for the step.
  */
 @property (nonatomic, copy, nullable) NSString *learnMoreButtonTitle;
-
 
 /**
  A localized string that represents the title of the "Skip" button.
@@ -321,7 +319,6 @@ ORK_CLASS_AVAILABLE
  */
 - (BOOL)hasPreviousStep;
 
-
 /**
  Returns a Boolean value indicating whether there is a next step.
  
@@ -355,9 +352,6 @@ ORK_CLASS_AVAILABLE
  */
 - (void)goBackward;
 
-
 @end
 
 NS_ASSUME_NONNULL_END
-
-

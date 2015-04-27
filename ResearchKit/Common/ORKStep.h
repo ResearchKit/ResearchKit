@@ -32,6 +32,7 @@
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKTask;
@@ -57,13 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
-
 /**
  Returns a new step initialized with the specified identifier.
  
  This method is the primary designated initializer.
  
  @param identifier   The unique identifier of the step.
+ 
  @return A new step.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
@@ -72,6 +73,7 @@ ORK_CLASS_AVAILABLE
  Returns a new step initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the step.
+ 
  @return A new step.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -131,7 +133,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, copy, nullable) NSString *text;
 
-
 /**
  The task that contains the step.
  
@@ -155,7 +156,5 @@ when adding a step to an `ORKStepViewController` object, and when presenting the
 - (void)validateParameters;
 
 @end
-
-
 
 NS_ASSUME_NONNULL_END

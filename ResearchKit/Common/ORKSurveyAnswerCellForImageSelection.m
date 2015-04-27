@@ -34,9 +34,11 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKImageSelectionView.h"
 
+
 @interface ORKSurveyAnswerCellForImageSelection () <ORKImageSelectionViewDelegate>
 
 @end
+
 
 @implementation ORKSurveyAnswerCellForImageSelection {
     ORKImageSelectionView *_selectionView;
@@ -60,7 +62,6 @@
     NSLayoutConstraint *resistsCompressingConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:20000.0];
     resistsCompressingConstraint.priority = UILayoutPriorityDefaultHigh;
     [self addConstraint:resistsCompressingConstraint];
-
 }
 
 #pragma mark ORKImageSelectionViewDelegate
@@ -69,7 +70,6 @@
 }
 
 - (void)answerDidChange {
-
     [_selectionView setAnswer:self.answer];
 }
 

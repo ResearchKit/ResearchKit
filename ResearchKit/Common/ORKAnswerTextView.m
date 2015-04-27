@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAnswerTextView.h"
+
 
 @implementation ORKAnswerTextView
 
@@ -57,7 +59,6 @@
 }
 
 - (void)init_ORKAnswerTextView {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
@@ -71,8 +72,6 @@
     self.font = [[self class] defaultFont];
     [self invalidateIntrinsicContentSize];
 }
-
-
 
 - (void)setFont:(UIFont *)font {
     [super setFont:font];

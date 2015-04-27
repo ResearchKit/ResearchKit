@@ -33,7 +33,6 @@
 
 #import <ResearchKit/ORKDefines_Private.h>
 
-
 // Active step support
 #import <ResearchKit/ORKTaskViewController_Private.h>
 #import <ResearchKit/ORKDataLogger.h>
@@ -50,7 +49,6 @@
 #import <ResearchKit/ORKCustomStepView.h>
 
 // Specific active task modules
-
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>

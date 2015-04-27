@@ -29,14 +29,15 @@
  */
 
 
-
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKQuestionStep.h>
 #import "ORKTableViewCell.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKSurveyAnswerCell;
+
 @protocol ORKSurveyAnswerCellDelegate
 
 @required
@@ -44,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 
 @end
+
 
 @interface ORKSurveyAnswerCell : ORKTableViewCell {
 @protected
@@ -66,6 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)shouldContinue;
 
 @end
+
 
 @interface ORKSurveyAnswerCell (ORKSurveyAnswerCellInternal)
 

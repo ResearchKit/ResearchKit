@@ -35,16 +35,15 @@
 #import "ORKStepViewController.h"
 #import "ORKOrderedTask.h"
 
+
 @implementation ORKStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
-    
     self = [super init];
     if (self) {
         if (nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
-        
         _identifier = [identifier copy];
     }
     return self;
@@ -65,14 +64,12 @@
     return step;
 }
 
-
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
     }
     
     // Ignore the task reference - it's not part of the content of the step.
-    
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.title, castObject.title)
@@ -137,6 +134,5 @@
 - (void)validateParameters {
     
 }
-
 
 @end
