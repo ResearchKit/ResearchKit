@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCompletionStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKInstructionStepViewController_Internal.h"
@@ -35,12 +36,15 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 
+
 @interface ORKCompletionStepView : ORKActiveStepCustomView
 
 @property (nonatomic) CGFloat animationPoint;
+
 - (void)setAnimationPoint:(CGFloat)animationPoint animated:(BOOL)animated;
 
 @end
+
 
 @implementation ORKCompletionStepView {
     CAShapeLayer *_shapeLayer;
@@ -127,9 +131,11 @@ static const CGFloat TickViewSize = 122;
 
 @end
 
+
 @implementation ORKCompletionStepViewController {
     ORKCompletionStepView *_completionStepView;
 }
+
 - (void)stepDidChange {
     [super stepDidChange];
     

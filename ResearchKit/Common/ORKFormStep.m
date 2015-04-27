@@ -37,18 +37,16 @@
 #import "ORKStep_Private.h"
 #import "ORKFormStepViewController.h"
 
-@implementation ORKFormStep
 
+@implementation ORKFormStep
 
 + (Class)stepViewControllerClass {
     return [ORKFormStepViewController class];
 }
 
-
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text {
-    
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
@@ -78,7 +76,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     for (ORKFormItem *item in _formItems) {
@@ -91,7 +88,6 @@
     step.formItems = ORKArrayCopyObjects(_formItems);
     return step;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -121,10 +117,7 @@
     return YES;
 }
 
-
-
 - (void)setFormItems:(NSArray *)formItems {
-    
     // unset removed formItems
     for (ORKFormItem *item in _formItems) {
          item.step = nil;
@@ -142,19 +135,18 @@
             
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"ORKFormItem doesn't support type %@", typeName] userInfo:nil];
         }
-        
         item.step = self;
     }
 }
 
 @end
 
+
 @implementation ORKFormItem
 
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        
         if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
@@ -184,7 +176,6 @@
     return item;
 }
 
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
@@ -206,14 +197,12 @@
 
 }
 
-
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
     }
     
-    // Ignore the step reference - it's not part of the content of this item.
-    
+    // Ignore the step reference - it's not part of the content of this item
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.text, castObject.text)
@@ -222,11 +211,9 @@
 }
 
 - (NSUInteger)hash {
-     // Ignore the step reference - it's not part of the content of this item.
+     // Ignore the step reference - it's not part of the content of this item
     return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash];
 }
-
-
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     return [self.answerFormat impliedAnswerFormat];

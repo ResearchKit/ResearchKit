@@ -46,17 +46,13 @@
     return (ORKInstructionStep *)self.step;
 }
 
-
 - (void)stepDidChange {
     [super stepDidChange];
     
     [self.stepView removeFromSuperview];
     self.stepView = nil;
     
-    
-    
     if (self.step && [self isViewLoaded]) {
-        
         self.stepView = [[ORKInstructionStepView alloc] initWithFrame:self.view.bounds];
         self.stepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:self.stepView];
@@ -67,8 +63,6 @@
         
         self.stepView.instructionStep = [self instructionStep];
     }
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -91,12 +85,11 @@
     [super setContinueButtonItem:continueButtonItem];
     self.stepView.continueSkipContainer.continueButtonItem = continueButtonItem;
 }
+
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     self.stepView.headerView.learnMoreButtonItem = learnMoreButtonItem;
 }
-
-
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

@@ -57,6 +57,7 @@
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKQuestionStepView.h"
 
+
 typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKQuestionSectionSpace1 = 0,
     ORKQuestionSectionAnswer = 1,
@@ -65,9 +66,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 };
 
 
-
-@interface ORKQuestionStepViewController () <UITableViewDataSource,UITableViewDelegate, ORKSurveyAnswerCellDelegate>{
-    
+@interface ORKQuestionStepViewController () <UITableViewDataSource,UITableViewDelegate, ORKSurveyAnswerCellDelegate> {
     id _answer;
     
     ORKTableContainerView *_tableContainer;
@@ -85,7 +84,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     BOOL _visible;
 }
 
-
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ORKQuestionStepView *questionView;
 
@@ -99,7 +97,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 @property (nonatomic, readonly) UILabel *questionLabel;
 @property (nonatomic, readonly) UILabel *promptLabel;
 
-// If `haveChangedAnswer`, then a new `defaultAnswer` should not change the answer.
+// If `haveChangedAnswer`, then a new `defaultAnswer` should not change the answer
 @property (nonatomic, assign) BOOL haveChangedAnswer;
 
 @end
@@ -188,8 +186,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
             }
-            else
-            {
+            else {
                 ORKQuestionStepCellHolderView *holder = [ORKQuestionStepCellHolderView new];
                 holder.delegate = self;
                 holder.cell = [self answerCellForTableView:nil];
@@ -215,7 +212,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         }
         
     }
-    
     
     if ([self allowContinue] == NO) {
         self.continueButtonItem  = self.internalContinueButtonItem;
@@ -279,14 +275,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if ([self.questionStep formatRequiresTableView] && ! _customQuestionView) {
         [self.tableView reloadData];
     }
-    else
-    {
-        
+    else {
         if (_customQuestionView) {
             _customQuestionView.answer = _answer;
         }
-        else
-        {
+        else {
             ORKQuestionStepCellHolderView *holder = (ORKQuestionStepCellHolderView *)_questionView.questionCustomView;
             holder.answer = _answer;
             [self.answerCell setAnswer:_answer];
@@ -315,7 +308,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         
         [self answerDidChange];
     }
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -352,7 +344,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         [_customQuestionView addConstraints:@[widthConstraint, heightConstraint]];
         [_customQuestionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     }
-    
     [self stepDidChange];
 }
 
@@ -385,36 +376,34 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
     _continueSkipView.skipButtonItem = self.skipButtonItem;
     [self updateButtonStates];
-    
 }
 
 - (ORKStepResult *)result {
-    ORKStepResult *sResult = [super result];
+    ORKStepResult *superResult = [super result];
     ORKQuestionStep *questionStep = self.questionStep;
     
     ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
     ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
     
     if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
-        ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
-        if (dqr.dateAnswer) {
-            NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? :_savedSystemCalendar;
-            dqr.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier?:[NSCalendar currentCalendar].calendarIdentifier];
-            dqr.timeZone = _savedSystemTimeZone? : [NSTimeZone systemTimeZone];
+        ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
+        if (dateQuestionResult.dateAnswer) {
+            NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? : _savedSystemCalendar;
+            dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier ? : [NSCalendar currentCalendar].calendarIdentifier];
+            dateQuestionResult.timeZone = _savedSystemTimeZone? : [NSTimeZone systemTimeZone];
         }
     } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
         ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
         nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
     }
     
-    result.startDate = sResult.startDate;
-    result.endDate = sResult.endDate;
+    result.startDate = superResult.startDate;
+    result.endDate = superResult.endDate;
     
-    sResult.results = @[result];
+    superResult.results = @[result];
     
-    return sResult;
+    return superResult;
 }
-
 
 #pragma mark - Internal
 
@@ -444,7 +433,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)notifyDelegateOnResultChange {
-    
     [super notifyDelegateOnResultChange];
     
     if (self.hasNextStep == NO) {
@@ -466,7 +454,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (id<NSCopying, NSCoding, NSObject>)answer {
-    
     if (self.questionStep.questionType == ORKQuestionTypeMultipleChoice && (_answer == nil || _answer == ORKNullAnswerValue())) {
         _answer = [NSMutableArray array];
     }
@@ -485,7 +472,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return !(self.questionStep.optional == NO && [self hasAnswer] == NO);
 }
 
-
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
 - (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer; {
@@ -493,13 +479,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     self.haveChangedAnswer = YES;
 }
 
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   
     return ORKQuestionSection_COUNT;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -510,21 +493,16 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKAnswerFormat *impliedAnswerFormat = [_answerFormat impliedAnswerFormat];
     
     if (section == ORKQuestionSectionAnswer) {
-        
         if (_choiceCellGroup == nil) {
             _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
                                                                                        answer:self.answer
                                                                            beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
                                                                           immediateNavigation:[self.questionStep isFormatImmediateNavigation]];
         }
-        
         return _choiceCellGroup.size;
-       
     }
-        
     return 0;
 }
-
 
 - (ORKSurveyAnswerCell *)answerCellForTableView:(UITableView *)tableView {
     static NSDictionary *typeAndCellMapping = nil;
@@ -541,7 +519,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class]};
     });
-    
     
     // SingleSelectionPicker Cell && Other Cells
     Class class = typeAndCellMapping[@(self.questionStep.questionType)];
@@ -569,7 +546,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     self.answerCell = cell;
     
-    
     if ([self.questionStep isFormatTextfield] ||
         [cell isKindOfClass:[ORKSurveyAnswerCellForScale class]] ||
         [cell isKindOfClass:[ORKSurveyAnswerCellForPicker class]]) {
@@ -583,9 +559,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return cell;
 }
 
-// Row display. Implementers should *always *try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.layoutMargins = UIEdgeInsetsZero;
     
@@ -605,10 +580,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     //////////////////////////////////
     
     static NSString *identifier = nil;
-    //id answer = self.answer;
-    
+
     assert (self.questionStep.isFormatFitsChoiceCells);
-    
     
     identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
     
@@ -619,7 +592,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -635,12 +607,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if (!cell) {
         return YES;
     }
-    
+
     return [cell shouldContinue];
 }
 
 - (void)goForward {
-    if (! [self shouldContinue]) {
+    if (![self shouldContinue]) {
         return;
     }
     
@@ -649,30 +621,24 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)goBackward {
-    
     [self notifyDelegateOnResultChange];
     [super goBackward];
 }
 
 - (void)continueAction:(id)sender {
-
     if (self.continueActionButton.enabled) {
-        
         if (! [self shouldContinue]) {
             return;
         }
         
-        
         ORKSuppressPerformSelectorWarning(
-                                         [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
+                                          [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
     }
-    return;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section != ORKQuestionSectionAnswer) {
         return nil;
     }
@@ -700,7 +666,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         // Proceed as continueButton tapped
         ORKSuppressPerformSelectorWarning(
                                          [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);
-        
     } else {
         [_tableView beginUpdates];
         [_tableView endUpdates];
@@ -708,7 +673,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section == ORKQuestionSectionSpace1 || indexPath.section == ORKQuestionSectionSpace2) {
         return 1;
     }
@@ -759,13 +723,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
-    
     ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
     CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText inTableView:_tableView];
     return height;
 }
 
 #pragma mark - ORKSurveyAnswerCellDelegate
+
 - (void)answerCell:(ORKSurveyAnswerCell *)cell answerDidChangeTo:(id)answer dueUserAction:(BOOL)dueUserAction {
     [self saveAnswer:answer];
     
@@ -780,8 +744,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 static NSString * const _ORKAnswerRestoreKey = @"answer";
 static NSString * const _ORKHaveChangedAnswerRestoreKey = @"haveChangedAnswer";
-
-
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
