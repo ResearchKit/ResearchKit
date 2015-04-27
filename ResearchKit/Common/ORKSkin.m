@@ -221,3 +221,26 @@ UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view) {
     }
     return layoutMargins;
 }
+
+UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view) {
+    UIEdgeInsets scrollIndicatorInsets = UIEdgeInsetsZero;
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    if (screenType == ORKScreenTypeiPad) {
+        scrollIndicatorInsets = (UIEdgeInsets){.left=-ORKStandardMarginForView(view), .right=-ORKStandardMarginForView(view)};
+    }
+    return scrollIndicatorInsets;
+}
+
+void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset) {
+    CGPoint savedOffset = scrollView.contentOffset;
+    
+    UIEdgeInsets insets = scrollView.contentInset;
+    insets.bottom = bottomInset;
+    scrollView.contentInset = insets;
+    
+    insets = scrollView.scrollIndicatorInsets;
+    insets.bottom = bottomInset;
+    scrollView.scrollIndicatorInsets = insets;
+    
+    scrollView.contentOffset = savedOffset;
+}

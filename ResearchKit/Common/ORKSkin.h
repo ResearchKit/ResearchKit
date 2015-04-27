@@ -119,5 +119,7 @@ CGFloat ORKTableViewCellLeftMargin(UIView *view);
 CGFloat ORKStandardMarginForView(UIView *view);
 UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UIView *view);
 UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view);
+UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view);
+void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 
 NS_ASSUME_NONNULL_END

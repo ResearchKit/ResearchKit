@@ -211,13 +211,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
 }
 
-- (void)updateToInsets:(UIEdgeInsets)insets {
-    CGPoint savedOffset = self.contentOffset;
-    self.contentInset = insets;
-    self.scrollIndicatorInsets = insets;
-    self.contentOffset = savedOffset;
-}
-
 - (CGSize)keyboardIntersectionSizeFromNotification:(NSNotification *)notification {
     
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -287,9 +280,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
     
     // Assume the overlap is at the bottom of the view
-    UIEdgeInsets insets = (UIEdgeInsets){.bottom = intersectionSize.height};
-    
-    [self updateToInsets:insets];
+    ORKUpdateScrollViewBottomInset(self, intersectionSize.height);
     
     _keyboardIsUp = YES;
     [self animateLayoutForKeyboardNotification:notification];
@@ -299,9 +290,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
     
     // Assume the overlap is at the bottom of the view
-    UIEdgeInsets insets = (UIEdgeInsets){.bottom = intersectionSize.height};
-    
-    [self updateToInsets:insets];
+    ORKUpdateScrollViewBottomInset(self, intersectionSize.height);
     
     _keyboardIsUp = YES;
     [self animateLayoutForKeyboardNotification:notification];
@@ -309,7 +298,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [self updateToInsets:UIEdgeInsetsZero];
+    ORKUpdateScrollViewBottomInset(self, 0);
     
     _keyboardIsUp = NO;
     [self animateLayoutForKeyboardNotification:notification];

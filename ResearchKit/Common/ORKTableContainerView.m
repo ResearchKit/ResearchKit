@@ -68,6 +68,8 @@
         _tableView.allowsSelection = YES;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
         _tableView.preservesSuperviewLayoutMargins = YES;
+        _tableView.clipsToBounds = NO; // Do not clip scroll indicators on iPad
+        _tableView.scrollIndicatorInsets = ORKDefaultScrollIndicatorInsets(self);
         [self addSubview:_tableView];
         
         _scrollView = _tableView;
@@ -258,13 +260,6 @@
     }
 }
 
-- (void)updateToInsets:(UIEdgeInsets)insets {
-    CGPoint savedOffset = self.tableView.contentOffset;
-    self.tableView.contentInset = insets;
-    self.tableView.scrollIndicatorInsets = insets;
-    self.tableView.contentOffset = savedOffset;
-}
-
 - (CGSize)keyboardIntersectionSizeFromNotification:(NSNotification *)notification {
     
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -286,8 +281,8 @@
 
     UIScrollView *scrollView = _scrollView;
     
-    ORK_Log_Debug(@"height=%lf insetsbottom=%lf", scrollView.bounds.size.height, scrollView.scrollIndicatorInsets.bottom);
-    CGFloat visibleHeight = (scrollView.bounds.size.height - scrollView.scrollIndicatorInsets.bottom);
+    ORK_Log_Debug(@"height=%lf insetsbottom=%lf", scrollView.bounds.size.height, scrollView.contentInset.bottom);
+    CGFloat visibleHeight = (scrollView.bounds.size.height - scrollView.contentInset.bottom);
     CGRect visibleRect = CGRectMake(0, scrollView.contentOffset.y, scrollView.bounds.size.width, visibleHeight);
     CGRect desiredRect = [scrollView convertRect:cell.bounds fromView:cell];
     
@@ -390,9 +385,7 @@
     CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
     
     // Assume the overlap is at the bottom of the view
-    UIEdgeInsets insets = (UIEdgeInsets){.bottom = intersectionSize.height};
-    
-    [self updateToInsets:insets];
+    ORKUpdateScrollViewBottomInset(self.tableView, intersectionSize.height);
     
     _keyboardIsUp = YES;
     [self animateLayoutForKeyboardNotification:notification];
@@ -402,9 +395,7 @@
     CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
     
     // Assume the overlap is at the bottom of the view
-    UIEdgeInsets insets = (UIEdgeInsets){.bottom = intersectionSize.height};
-    
-    [self updateToInsets:insets];
+    ORKUpdateScrollViewBottomInset(self.tableView, intersectionSize.height);
     
     _keyboardIsUp = YES;
     [self animateLayoutForKeyboardNotification:notification];
@@ -412,7 +403,7 @@
 
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [self updateToInsets:UIEdgeInsetsZero];
+    ORKUpdateScrollViewBottomInset(self.tableView, 0);
     
     _keyboardIsUp = NO;
     [self animateLayoutForKeyboardNotification:notification];
