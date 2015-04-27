@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKDataLogger;
@@ -38,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKRecorderConfiguration()
 
 @end
-
 
 
 @interface ORKRecorder ()

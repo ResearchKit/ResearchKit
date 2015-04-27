@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKActiveStepQuantityView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
@@ -82,7 +83,6 @@
         }
         
         [self setNeedsUpdateConstraints];
-        
     }
     return self;
 }
@@ -121,9 +121,18 @@
     }
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
     NSMutableArray *additionalConstraints = [NSMutableArray array];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]" options:0 metrics:nil views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]"
+                                                                                       options:0
+                                                                                       metrics:nil
+                                                                                         views:views]];
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
+                                                                                       options:0
+                                                                                       metrics:nil
+                                                                                         views:views]];
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|"
+                                                                                       options:NSLayoutFormatAlignAllCenterY
+                                                                                       metrics:nil
+                                                                                         views:views]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeFirstBaseline
                                                                   relatedBy:NSLayoutRelationEqual
@@ -194,6 +203,7 @@
 
 @end
 
+
 @implementation ORKQuantityPairView {
     UIView *_metricKeyline;
     NSArray *_constraints;
@@ -213,19 +223,15 @@
         [self setKeylineHidden:NO];
         _metricKeyline.backgroundColor = [UIColor ork_midGrayTintColor];
         
-        
         [self addSubview:_leftView];
         [self addSubview:_rightView];
         [self addSubview:_metricKeyline];
         [self setNeedsUpdateConstraints];
-        
     }
     return self;
 }
 
 - (void)updateConstraints {
-    
-    
     if (_constraints) {
         [self removeConstraints:_constraints];
         _constraints = nil;
@@ -235,16 +241,24 @@
     
     // Leave space for the keyline between these views, and then constrain it to be 1px wide and go from top to bottom baseline of metric views.
     CGFloat scale = [[UIScreen mainScreen] scale];
-    NSArray *vertConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views];
+    NSArray *vertConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftView]|"
+                                                                       options:(NSLayoutFormatOptions)0
+                                                                       metrics:nil views:views];
     [constraints addObjectsFromArray:vertConstraints];
     
-    NSArray *horizConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_leftView]-s-[_rightView]-|" options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom|NSLayoutFormatDirectionLeftToRight metrics:@{@"s":@(1/scale)} views:views];
+    NSArray *horizConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_leftView]-s-[_rightView]-|"
+                                                                        options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom|NSLayoutFormatDirectionLeftToRight
+                                                                        metrics:@{@"s":@(1/scale)}
+                                                                          views:views];
     for (NSLayoutConstraint *constraint in horizConstraints) {
         constraint.priority = UILayoutPriorityDefaultHigh+1;
     }
     [constraints addObjectsFromArray:horizConstraints];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]" options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight metrics:@{@"s":@(1/scale)} views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]"
+                                                                             options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight
+                                                                             metrics:@{@"s":@(1/scale)}
+                                                                               views:views]];
     NSLayoutConstraint *keylineBottom = [NSLayoutConstraint constraintWithItem:_metricKeyline
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationEqual
@@ -253,13 +267,25 @@
                                                                     multiplier:1 constant:0];
     [constraints addObject:keylineBottom];
     
-    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:10000];
     maxWidthConstraint.priority = UILayoutPriorityRequired-2;
     [constraints addObject:maxWidthConstraint];
     
     
     // This constraint should be beaten out by the full-width-coverage and zero-width constraints if only one of the views is enabled.
-    NSLayoutConstraint *equalWidthConstraint = [NSLayoutConstraint constraintWithItem:_leftView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_rightView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    NSLayoutConstraint *equalWidthConstraint = [NSLayoutConstraint constraintWithItem:_leftView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_rightView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1
+                                                                             constant:0];
     equalWidthConstraint.priority = UILayoutPriorityDefaultLow;
     [constraints addObject:equalWidthConstraint];
     
@@ -274,4 +300,3 @@
 }
 
 @end
-

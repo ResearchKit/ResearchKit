@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanMemoryContentView.h"
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKActiveStepQuantityView.h"
@@ -163,6 +164,7 @@
 
 @end
 
+
 @implementation ORKSpatialSpanMemoryContentView {
     ORKQuantityPairView *_quantityPairView;
     ORKNavigationContainerView *_continueView;
@@ -218,7 +220,6 @@
         [self scoreView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
         [self countView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
-        
         
         [self setNeedsUpdateConstraints];
     }
@@ -277,29 +278,62 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    NSLayoutConstraint *c1 = [NSLayoutConstraint constraintWithItem:_gameView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:1000];
-    c1.priority = UILayoutPriorityDefaultLow-1;
-    [constraints addObject:c1];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:views]];
+    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_gameView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1
+                                                           constant:1000];
+    constraint1.priority = UILayoutPriorityDefaultLow-1;
+    [constraints addObject:constraint1];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_quantityPairView attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_quantityPairView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_quantityPairView
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1
+                                                         constant:0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                           toItem:_quantityPairView
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1
+                                                         constant:0]];
     
-    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:10000];
     maxWidthConstraint.priority = UILayoutPriorityRequired-1;
     [constraints addObject:maxWidthConstraint];
-
     
     [NSLayoutConstraint activateConstraints:constraints];
     _constraints = constraints;
     
     [super updateConstraints];
 }
-
-
 
 @end

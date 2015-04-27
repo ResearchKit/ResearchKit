@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKActiveStep.h>
+
 
 /**
  The `ORKWalkingTaskStep` class implements a step that's used in the predefined

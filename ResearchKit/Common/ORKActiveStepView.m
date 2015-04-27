@@ -28,16 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKActiveStepView.h"
 #import "ORKTintedImageView.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 
+
 @implementation  ORKActiveStepView {
     ORKTintedImageView *_imageView;
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -47,7 +48,6 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self tintColorDidChange];
-        
     }
     return self;
 }
@@ -93,8 +93,6 @@
 - (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView {
     _activeCustomView = activeCustomView;
     [self updateStepView];
-    
 }
-
 
 @end

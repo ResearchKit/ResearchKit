@@ -37,16 +37,15 @@
 #import "ORKDataLogger.h"
 #import "ORKDefines_Private.h"
 
+
 @implementation ORKRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
-    
     self = [super init];
     if (self) {
         if (nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
         }
-        
         _identifier = [identifier copy];
     }
     return self;
@@ -68,7 +67,6 @@
     if ([self class] != [object class]) {
         return NO;
     }
-    
     return YES;
 }
 
@@ -84,7 +82,6 @@
     return nil;
 }
 
-
 - (NSSet *)requestedHealthKitTypesForReading {
     return nil;
 }
@@ -92,8 +89,8 @@
     return ORKPermissionNone;
 }
 
-
 @end
+
 
 @implementation ORKRecorder {
     UIBackgroundTaskIdentifier _backgroundTask;
@@ -121,47 +118,40 @@
 }
 
 - (void)viewController:(UIViewController *)viewController willStartStepWithView:(UIView *)view {
-
 }
 
 - (void)start {
     if (self.continuesInBackground) {
         UIApplication *app = [UIApplication sharedApplication];
         UIBackgroundTaskIdentifier oldTask = _backgroundTask;
-        _backgroundTask = [app beginBackgroundTaskWithName:[NSString stringWithFormat:@"%@.%p",NSStringFromClass([self class]),self] expirationHandler:^{
+        _backgroundTask = [app beginBackgroundTaskWithName:[NSString stringWithFormat:@"%@.%p",NSStringFromClass([self class]),self]
+                                         expirationHandler:^{
             [self stop];
         }];
         if (oldTask != NSNotFound) {
             [app endBackgroundTask:oldTask];
         }
     }
-    
     self.startDate = [NSDate date];
 }
-
 
 - (void)stop {
     [self finishRecordingWithError:nil];
     [self reset];
 }
 
-
 - (void)finishRecordingWithError:(NSError *)error {
     // NOTE. This method may be called multiple times (once when someone tries
     // to finish, and another time with -stop is actually called.
     
-    
     if (error) {
         // ALWAYS report errors to the delegate, even if we think we're finished already
-        
         id<ORKRecorderDelegate> localDelegate = self.delegate;
         if (localDelegate && [localDelegate respondsToSelector:@selector(recorder:didFailWithError:)]) {
             [localDelegate recorder:self didFailWithError:error];
         }
-        
         [self reset];
     }
-    
     
     if (_backgroundTask != NSNotFound) {
         // End the background task asynchronously, so whatever we're doing cleaning up the recorder has a chance to complete.
@@ -174,14 +164,12 @@
             [[UIApplication sharedApplication] endBackgroundTask:ident];
         });
     }
-    
 }
 
 - (NSURL *)recordingDirectoryURL {
     if (! _outputDirectory) {
         return nil;
     }
-    
     return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@",[_recorderUUID UUIDString]]]];
 }
 
@@ -262,4 +250,3 @@
 }
 
 @end
-
