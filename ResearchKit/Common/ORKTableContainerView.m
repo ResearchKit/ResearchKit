@@ -110,7 +110,8 @@
 
     CGRect bounds = self.bounds;
     _tableView.frame = UIEdgeInsetsInsetRect(bounds, ORKDefaultFullScreenViewLayoutMargins(self));
-    
+    // make the contentSize to be correct after changing the frame
+    [_tableView layoutIfNeeded];
     {
         _stepHeaderView.frame = (CGRect){{0,0},{_tableView.bounds.size.width,30}};
         _tableView.tableHeaderView = _stepHeaderView;
