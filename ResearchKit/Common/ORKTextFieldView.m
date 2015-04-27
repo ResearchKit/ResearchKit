@@ -33,6 +33,7 @@
 #import "ORKSkin.h"
 #import "ORKAccessibility.h"
 
+
 @implementation ORKCaretOptionalTextField
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -40,7 +41,6 @@
     if ([self allowsSelection]) {
         return [super hitTest:point withEvent:event];
     } else {
-        
         // Make exception for clear button, which is hittable
         if ( CGRectContainsPoint([self clearButtonRectForBounds:self.bounds], point)) {
             UIView *hitView = [super hitTest:point withEvent:event];
@@ -49,7 +49,6 @@
             _hitClearButton = [hitView isKindOfClass:[UIButton class]];
             return hitView;
         }
-        
         return nil;
     }
 }
@@ -64,8 +63,8 @@
 
 @end
 
+
 @implementation ORKUnitTextField {
-    
     NSString *_managedPlaceholder;
     
     NSString *_unitWithNumber;
@@ -134,9 +133,7 @@
 }
 
 - (void)ork_updateSuffix:(NSString *)suffix withColor:(UIColor *)color {
-    
-    if (NO == [color isEqual:_savedSuffixColor] ) {
-        
+    if (NO == [color isEqual:_savedSuffixColor]) {
         if (suffix != nil) {
             _savedSuffixColor = color;
         }
@@ -149,7 +146,6 @@
         _savedSuffixText = suffix;
         [self ork_updateSuffix:suffix];
     }
-    
 }
 
 - (void)setManageUnitAndPlaceholder:(BOOL)manageUnitAndPlaceholder {
@@ -170,14 +166,11 @@
     _unit = unit;
     
     if (_unit.length > 0) {
-        
         _unitWithPlaceholder = [NSString stringWithFormat:@"    %@",unit];
         _unitWithNumber = [NSString stringWithFormat:@" %@",unit];
         _unitRegularColor = [UIColor blackColor];
         _unitActiveColor = [UIColor ork_midGrayTintColor];
-    }
-    else
-    {
+    } else {
         _unitWithPlaceholder = nil;
         _unitWithNumber = nil;
     }
@@ -186,61 +179,45 @@
 }
 
 - (void)updateManagedUnitAndPlaceholder {
-
     if (_manageUnitAndPlaceholder) {
         BOOL editing = [self isEditing];
         
         if (editing) {
             [self ork_setPlaceholder: nil];
             [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
-        }
-        else
-        {
-            
+        } else {
             if (_managedPlaceholder.length > 0) {
                 [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
                 NSString *unit = (self.text.length == 0)? _unitWithPlaceholder : _unitWithNumber;
                 [self ork_updateSuffix:unit withColor:_unitRegularColor];
-            }
-            else
-            {
+            } else {
                 if (self.text.length > 0) {
                     [self ork_setPlaceholder:nil];
                     [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
-                }
-                else
-                {
+                } else {
                     [self ork_setPlaceholder: _unit];
                     [self ork_updateSuffix:nil withColor:_unitRegularColor];
                 }
             }
-
         }
-        
-    }
-    else
-    {
+    } else {
         // remove unit string
         if (_savedSuffixText.length > 0) {
             [self ork_updateSuffix:nil withColor:nil];
         }
-        
         // put back unit string
         if ([self.placeholder isEqualToString: _managedPlaceholder] == NO) {
             [self ork_setPlaceholder:_managedPlaceholder];
         }
     }
-    
     [self invalidateIntrinsicContentSize];
 }
 
 - (void)textFieldDidBeginEditing:(NSNotification *)notification {
-    
     [self updateManagedUnitAndPlaceholder];
 }
 
 - (void)textFieldDidEndEditing:(NSNotification *)notification {
-    
     [self updateManagedUnitAndPlaceholder];
     
 }
@@ -249,11 +226,8 @@
     [self updateManagedUnitAndPlaceholder];
 }
 
-
-
 - (void)setText:(NSString *)text {
     [super setText:text];
-    
     [self updateManagedUnitAndPlaceholder];
 }
 
@@ -271,7 +245,7 @@
 static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    CGRect r = [super textRectForBounds:bounds];
+    CGRect textRect = [super textRectForBounds:bounds];
     
     // Leave room for the suffix label
     if ([_suffixLabel.text length]) {
@@ -279,10 +253,9 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
         }
-        r.size.width = MAX(0, r.size.width - suffixWidth);
+        textRect.size.width = MAX(0, textRect.size.width - suffixWidth);
     }
-    
-    return r;
+    return textRect;
 }
 
 

@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTintedImageView.h"
+
 
 static UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);

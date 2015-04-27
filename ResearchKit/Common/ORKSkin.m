@@ -32,6 +32,7 @@
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
 
+
 NSString *const ORKSignatureColorKey = @"ORKSignatureColorKey";
 NSString *const ORKBackgroundColorKey = @"ORKBackgroundColorKey";
 NSString *const ORKToolBarTintColorKey = @"ORKToolBarTintColorKey";
@@ -40,7 +41,7 @@ NSString *const ORKDarkTintColorKey = @"ORKDarkTintColorKey";
 NSString *const ORKCaptionTextColorKey = @"ORKCaptionTextColorKey";
 NSString *const ORKBlueHighlightColorKey = @"ORKBlueHighlightColorKey";
 
-@implementation UIColor(ORKColor)
+@implementation UIColor (ORKColor)
 
 #define cachedColorMethod(m, r, g, b, a) \
 + (UIColor *)m { \
@@ -58,6 +59,7 @@ cachedColorMethod(ork_grayColor, 142./255., 142./255., 147./255., 1.)
 cachedColorMethod(ork_darkGrayColor, 102./255., 102./255., 102./255., 1.)
 
 #undef cachedColorMethod
+
 @end
 
 static NSMutableDictionary *colors() {
@@ -82,7 +84,6 @@ static NSMutableDictionary *colors() {
 UIColor *ORKColor(NSString *colorKey) {
     return colors()[colorKey];
 }
-
 
 void ORKColorSetColorForKey(NSString *key, UIColor *color) {
     NSMutableDictionary *d = colors();
@@ -109,7 +110,6 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
         return ORKScreenTypeiPhone6;
     }
 }
-
 
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     
@@ -146,4 +146,3 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
     
     return metrics[metric][screenType];
 }
-

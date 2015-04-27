@@ -28,14 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCountdownLabel.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKCountdownLabel ()
 
-
-@property (nonatomic, copy) NSString *mmString;
-@property (nonatomic, copy) NSString *ssString;
+@property (nonatomic, copy) NSString *minutesString;
+@property (nonatomic, copy) NSString *secondsString;
 
 @end
 
@@ -47,19 +48,17 @@
 }
 
 - (void)setCountDownValue:(NSInteger)value {
-    
-    _mmString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
-    _ssString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
+    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
+    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
     
     [self renderText];
 }
 
 - (void)renderText {
-    if (_mmString.length==0 || _ssString.length==0) {
+    if (_minutesString.length==0 || _secondsString.length==0) {
         return;
     }
-    
-    [self setText:[NSString stringWithFormat:@"%@:%@", _mmString, _ssString]];
+    [self setText:[NSString stringWithFormat:@"%@:%@", _minutesString, _secondsString]];
     
     [self invalidateIntrinsicContentSize];
 }
