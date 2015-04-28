@@ -271,7 +271,6 @@
 
     UIScrollView *scrollView = _scrollView;
     
-    ORK_Log_Debug(@"height=%lf insetsbottom=%lf", scrollView.bounds.size.height, scrollView.contentInset.bottom);
     CGFloat visibleHeight = (scrollView.bounds.size.height - scrollView.contentInset.bottom);
     CGRect visibleRect = CGRectMake(0, scrollView.contentOffset.y, scrollView.bounds.size.width, visibleHeight);
     CGRect desiredRect = [scrollView convertRect:cell.bounds fromView:cell];
