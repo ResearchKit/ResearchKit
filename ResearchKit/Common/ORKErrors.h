@@ -32,6 +32,7 @@
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
+
 /// Error domain for errors with codes in `ORKErrorCode`.
 ORK_EXTERN NSString * const ORKErrorDomain ORK_AVAILABLE_DECL;
 
@@ -40,7 +41,6 @@ ORK_EXTERN NSString * const ORKInvalidArgumentException ORK_AVAILABLE_DECL;
 
 /// `ORKErrorCode` codes are used for errors in the domain `ORKErrorDomain`.
 typedef NS_ENUM(NSInteger, ORKErrorCode) {
-
     /// No matching object was found.
     ORKErrorObjectNotFound = 1,
     
@@ -53,5 +53,3 @@ typedef NS_ENUM(NSInteger, ORKErrorCode) {
     /// Multiple errors were encountered during an operation.
     ORKErrorMultipleErrors
 } ORK_ENUM_AVAILABLE;
-
-

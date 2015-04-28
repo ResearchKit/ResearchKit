@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKWalkingTaskStep.h"
 #import "ORKHelpers.h"
 #import "ORKWalkingTaskStepViewController.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKWalkingTaskStep
 
@@ -40,7 +42,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSInteger const ORKShortWalkTaskMinimumNumberOfStepsPerLeg = 1;
@@ -51,8 +52,6 @@
                                      userInfo:nil];
     }
 }
-
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKWalkingTaskStep *step = [super copyWithZone:zone];
@@ -81,7 +80,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -89,6 +87,5 @@
     return (isParentSame &&
             (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg)) ;
 }
-
 
 @end

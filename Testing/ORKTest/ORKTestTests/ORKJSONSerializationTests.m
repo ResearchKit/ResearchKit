@@ -41,6 +41,7 @@
 #import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
 
+
 @interface ClassProperty : NSObject
 
 @property (nonatomic, copy) NSString *propertyName;
@@ -50,6 +51,7 @@
 - (instancetype)initWithObjcProperty:(objc_property_t)property;
 
 @end
+
 
 @implementation ClassProperty
 
@@ -69,13 +71,10 @@
         if ([typeAttribute hasPrefix:@"T@"]) {
              _isPrimitiveType = NO;
             Class typeClass = nil;
-            if ([typeAttribute length] > 4)
-            {
+            if ([typeAttribute length] > 4) {
                 NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  //turns @"NSDate" into NSDate
                 typeClass = NSClassFromString(typeClassName);
-            }
-            else
-            {
+            } else {
                 typeClass = [NSObject class];
             }
             self.propertyClass = typeClass;
@@ -88,6 +87,7 @@
 }
 
 @end
+
 
 @interface MockCountingDictionary : NSObject
 
@@ -103,8 +103,8 @@
 
 @end
 
-@implementation MockCountingDictionary
-{
+
+@implementation MockCountingDictionary {
     NSDictionary *_d;
 }
 
@@ -125,18 +125,16 @@
     return [_d methodSignatureForSelector:aSelector];
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
-    if ([_d respondsToSelector:
-         [anInvocation selector]])
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([_d respondsToSelector:[anInvocation selector]]) {
         [anInvocation invokeWithTarget:_d];
-    else
+    } else {
         [super forwardInvocation:anInvocation];
+    }
 }
 
 - (void)startObserving {
     self.touchedKeys = [NSMutableSet new];
-    
 }
 
 - (void)stopObserving {
@@ -151,7 +149,6 @@
             [unTouchedKeys addObject:key];
         }
     }
-    
     return [unTouchedKeys copy];
 }
 
@@ -172,10 +169,10 @@
 @end
 
 
-
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
 @end
+
 
 @implementation ORKJSONSerializationTests
 
@@ -184,14 +181,12 @@
     return nil;
 }
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
-- (void)tearDown
-{
+- (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
@@ -199,7 +194,6 @@
 - (void)testTaskResult {
     
     //ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:@"a000012" taskRunUUID:[NSUUID UUID] outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
-
     
     ORKQuestionResult *qr = [[ORKQuestionResult alloc] init];
     qr.answer = @(1010);
@@ -353,16 +347,13 @@
         
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
             [instance setValue:@(0) forKey:@"minimum"];
             [instance setValue:@(100) forKey:@"maximum"];
             [instance setValue:@(10) forKey:@"step"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
             [instance setValue:@"blah" forKey:@"value"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
             [instance setValue:[NSURL URLWithString:@"http://www.google.com/"] forKey:@"customAnimationURL"];
         }
         
@@ -495,7 +486,6 @@
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
-        
         id instance = [[aClass alloc] init];
         
         // Find all properties of this class
@@ -543,7 +533,6 @@
                     break;
                 }
             }
-            
         }
     
         // NSData and NSDateComponents in your properties mess up the following test.
@@ -557,14 +546,10 @@
             XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
         }
         
-        
         if (! [newInstance isEqual:instance]) {
             XCTAssertEqualObjects(newInstance, instance, @"equality mismatch for %@", NSStringFromClass(aClass));
         }
-        
-        
     }
-    
 }
 
 - (void)testEquality {
@@ -598,7 +583,6 @@
     
     // Test Each class
     for (Class aClass in classesWithSecureCodingAndCopying) {
-        
         id instance = [[aClass alloc] init];
         
         // Find all properties of this class
@@ -648,9 +632,7 @@
             }
         }
     }
-
 }
-
 
 - (void)testDateComponentsSerialization {
     

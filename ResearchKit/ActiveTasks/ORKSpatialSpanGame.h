@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 
 
@@ -64,18 +65,17 @@
 /**
  Enumerates the sequence, calling the block once for each element.
  
- @param handler The block to be called for each element in the sequence. The `handler` block takes the following parameters:
+ @param handler     The block to be called for each element in the sequence. The `handler` block takes the following parameters:
  
- `step`  The step in the sequence. The step starts at 0 and increments by one on each call.
- `tileIndex` The index in [ 0 .. gameSize ] that corresponds to the step's element of the sequence.
- `isLastStep` A Boolean value that indicates if this is the last step in the sequence.
-  `stop`   A Boolean value that indicates if the enumeration should be terminated (pass `NO` to terminate the enumeration).
+ `step`         The step in the sequence. The step starts at 0 and increments by one on each call.
+ `tileIndex`    The index in [ 0 .. gameSize ] that corresponds to the step's element of the sequence.
+ `isLastStep`   A Boolean value that indicates if this is the last step in the sequence.
+ `stop`         A Boolean value that indicates if the enumeration should be terminated (pass `NO` to terminate the enumeration).
  */
 
 - (void)enumerateSequenceWithHandler:(void(^)(NSInteger step, NSInteger tileIndex, BOOL isLastStep, BOOL *stop))handler;
 
 /// Returns the value of the specified step in the sequence.
 - (NSInteger)tileIndexForStep:(NSInteger)step;
-
 
 @end

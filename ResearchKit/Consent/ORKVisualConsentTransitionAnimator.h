@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,4 +57,3 @@ typedef void (^ORKVisualConsentAnimationCompletionHandler)(ORKVisualConsentTrans
 @end
 
 NS_ASSUME_NONNULL_END
-

@@ -37,6 +37,7 @@
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 
+
 @interface ORKStepViewController () {
     BOOL _hasBeenPresented;
     BOOL _dismissing;
@@ -47,6 +48,7 @@
 @property (nonatomic, strong,readonly) UIBarButtonItem *fixedSpace;
 
 @end
+
 
 @implementation ORKStepViewController
 
@@ -99,9 +101,7 @@
 - (void)setupButtons {
     if (self.hasPreviousStep == YES) {
         [self ork_setBackButtonItem: _internalBackButtonItem];
-    }
-    else
-    {
+    } else {
         [self ork_setBackButtonItem:nil];
     }
     
@@ -131,7 +131,6 @@
 }
 
 - (void)stepDidChange {
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -237,7 +236,6 @@
     [self updateNavRightBarButtonItem];
 }
 
-
 - (BOOL)hasPreviousStep {
     STRONGTYPE(self.delegate) delegate = self.delegate;
     if (delegate && [delegate respondsToSelector:@selector(stepViewControllerHasPreviousStep:)]) {
@@ -290,26 +288,20 @@
 }
 
 - (void)skipForward {
-    
     [self goForward];
-    
 }
-
 
 - (ORKTaskViewController *)taskViewController {
-    UIPageViewController *pageVc = (UIPageViewController *)[self parentViewController];
-    if (pageVc && [pageVc isKindOfClass:[UIPageViewController class]]) {
-        UINavigationController *navVC = (UINavigationController *)[pageVc parentViewController];
-        ORKTaskViewController *taskVc = (ORKTaskViewController *)[navVC parentViewController];
-        if (taskVc && [taskVc isKindOfClass:[ORKTaskViewController class]]) {
-            return taskVc;
+    UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];
+    if (pageViewController && [pageViewController isKindOfClass:[UIPageViewController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)[pageViewController parentViewController];
+        ORKTaskViewController *taskViewController = (ORKTaskViewController *)[navigationController parentViewController];
+        if (taskViewController && [taskViewController isKindOfClass:[ORKTaskViewController class]]) {
+            return taskViewController;
         }
     }
-    
     return nil;
 }
-
-
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
     
@@ -342,7 +334,6 @@
 
 #pragma mark - UIStateRestoring
 
-
 static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString * const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
@@ -374,18 +365,13 @@ static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
     }
-    
-    
 }
-
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
-    ORKStepViewController *vc = [[[self class] alloc] initWithStep:nil];
-    vc.restorationIdentifier = [identifierComponents lastObject];
-    vc.restorationClass = self;
-    return vc;
+    ORKStepViewController *viewController = [[[self class] alloc] initWithStep:nil];
+    viewController.restorationIdentifier = [identifierComponents lastObject];
+    viewController.restorationClass = self;
+    return viewController;
 }
 
-
 @end
-

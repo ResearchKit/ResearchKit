@@ -28,15 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKActiveStepTimer;
 
 typedef void (^ORKActiveStepTimerHandler)(ORKActiveStepTimer *timer, BOOL finished);
-
 
 @interface ORKActiveStepTimer : NSObject
 

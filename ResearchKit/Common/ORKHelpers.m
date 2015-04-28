@@ -113,18 +113,15 @@ NSDate *ORKDateFromStringISO8601(NSString *string) {
     return [__formatter dateFromString:string];
 }
 
-NSString *ORKSignatureStringFromDate(NSDate *date){
-    
+NSString *ORKSignatureStringFromDate(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         __formatter = [NSDateFormatter new];
         __formatter.dateStyle = NSDateFormatterShortStyle;
         __formatter.timeStyle = NSDateFormatterNoStyle;
     });
     return [__formatter stringFromDate:date];
-
 }
 
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
@@ -139,7 +136,6 @@ UIColor *ORKRGB(uint32_t x) {
 }
 
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor) {
-    
     UIFontDescriptor *fontDescriptor = [descriptor
                       fontDescriptorByAddingAttributes:
                       @{ UIFontDescriptorFeatureSettingsAttribute: @[
@@ -152,7 +148,6 @@ UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor
 UIFont *ORKTimeFontForSize(CGFloat size) {
     UIFontDescriptor *fontDescriptor = [ORKLightFontWithSize(size) fontDescriptor];
     fontDescriptor = ORKFontDescriptorForLightStylisticAlternative(fontDescriptor);
-    
     UIFont *font = [UIFont fontWithDescriptor:fontDescriptor size:0];
     return font;
 }
@@ -172,26 +167,21 @@ NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode) {
     return NSFileProtectionNone;
 }
 
-CGFloat ORKExpectedLabelHeight(UILabel *label){
-    
+CGFloat ORKExpectedLabelHeight(UILabel *label) {
     CGSize expectedLabelSize = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, CGFLOAT_MAX)
                                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                                     attributes:@{
-                                                                  NSFontAttributeName : label.font
-                                                                  }
-                                                        context:nil ].size;
-    
-    
+                                                     attributes:@{ NSFontAttributeName : label.font }
+                                                        context:nil].size;
     return expectedLabelSize.height;
 }
 
-void ORKAdjustHeightForLabel(UILabel *label){
+void ORKAdjustHeightForLabel(UILabel *label) {
     CGRect rect = label.frame;
     rect.size.height = ORKExpectedLabelHeight(label);
     label.frame = rect;
 }
 
-UIImage *ORKImageWithColor(UIColor *color){
+UIImage *ORKImageWithColor(UIColor *color) {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -205,13 +195,13 @@ UIImage *ORKImageWithColor(UIColor *color){
     return image;
 }
 
-void ORKEnableAutoLayoutForViews(NSArray *views){
+void ORKEnableAutoLayoutForViews(NSArray *views) {
     [views enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(UIView *) obj setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [(UIView *)obj setTranslatesAutoresizingMaskIntoConstraints:NO];
     }];
 }
 
-NSDateFormatter *ORKResultDateTimeFormatter(){
+NSDateFormatter *ORKResultDateTimeFormatter() {
     static NSDateFormatter *dateTimeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -219,24 +209,21 @@ NSDateFormatter *ORKResultDateTimeFormatter(){
         [dateTimeformatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
         dateTimeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return dateTimeformatter;
 }
-NSDateFormatter *ORKResultTimeFormatter(){
 
+NSDateFormatter *ORKResultTimeFormatter() {
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-    
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return timeformatter;
 }
-NSDateFormatter *ORKResultDateFormatter(){
 
+NSDateFormatter *ORKResultDateFormatter() {
     static NSDateFormatter *dateformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -244,35 +231,29 @@ NSDateFormatter *ORKResultDateFormatter(){
         [dateformatter setDateFormat:@"yyyy-MM-dd"];
         dateformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return dateformatter;
 }
 
-NSDateFormatter *ORKTimeOfDayLabelFormatter(){
+NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         timeformatter = [[NSDateFormatter alloc] init];
         NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:[NSLocale currentLocale]];
         [timeformatter setDateFormat:dateFormat];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return timeformatter;
 }
 
 NSBundle *ORKBundle() {
-    
-    NSBundle *b = [NSBundle bundleForClass:[ORKStep class]];
-    return b;
+    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
+    return bundle;
 }
 
-NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(){
-
+NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         durationFormatter = [[NSDateComponentsFormatter alloc] init];
         [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleFull];
@@ -280,15 +261,12 @@ NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(){
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
     });
-    
     return durationFormatter;
 }
 
-NSDateComponentsFormatter *ORKDurationStringFormatter(){
-    
+NSDateComponentsFormatter *ORKDurationStringFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         durationFormatter = [[NSDateComponentsFormatter alloc] init];
         [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleFull];
@@ -296,71 +274,93 @@ NSDateComponentsFormatter *ORKDurationStringFormatter(){
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
     });
-    
     return durationFormatter;
 }
 
-NSCalendar *ORKTimeOfDayReferenceCalendar(){
+NSCalendar *ORKTimeOfDayReferenceCalendar() {
     static NSCalendar *calendar;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return calendar;
 }
 
-NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents){
-    
+NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) {
     static NSDateComponentsFormatter *timeOfDayFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         timeOfDayFormatter = [[NSDateComponentsFormatter alloc] init];
         [timeOfDayFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStylePositional];
         [timeOfDayFormatter setAllowedUnits:NSCalendarUnitHour | NSCalendarUnitMinute];
         [timeOfDayFormatter setZeroFormattingBehavior:NSDateComponentsFormatterZeroFormattingBehaviorPad];
     });
-    
     return [timeOfDayFormatter stringFromDateComponents:dateComponents];
 }
 
-NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string){
+NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) {
     // NSDateComponentsFormatter don't support parsing, this is a work around.
-    
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     NSDate *date = [timeformatter dateFromString:string];
     return [ORKTimeOfDayReferenceCalendar() components:(NSCalendarUnitMinute |NSCalendarUnitHour) fromDate:date];
 }
 
-NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date){
-
+NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date) {
     if (date == nil) {
         return nil;
     }
-
     return [ORKTimeOfDayReferenceCalendar() components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:date];
 }
 
-NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents){
+NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
     return [ORKTimeOfDayReferenceCalendar() dateFromComponents:dateComponents];
+}
+
+BOOL ORKWantsWideContentMargins(UIScreen *screen) {
+    
+    if (screen != [UIScreen mainScreen]) {
+        return NO;
+    }
+   
+    // If our screen's minimum dimension is bigger than a fixed threshold,
+    // decide to use wide content margins. This is less restrictive than UIKit,
+    // but a good enough approximation.
+    CGRect screenRect = [screen bounds];
+    CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
+    BOOL isWideScreenFormat = (minDimension > 375.);
+    
+    return isWideScreenFormat;
+}
+
+#define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR 20.0
+#define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT 16.0
+#define ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL 15.0
+
+CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
+    if (ORKWantsWideContentMargins(tableView.window.screen)) {
+        if (CGRectGetWidth(tableView.frame) > 320.0) {
+            return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR;
+            
+        } else {
+            return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
+        }
+    } else {
+        // Probably should be ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL
+        return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
+    }
 }
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
-    } else
-    {
+    } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -373,8 +373,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
-    } else
-    {
+    } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -387,8 +386,7 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
     if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
-    } else
-    {
+    } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -397,8 +395,7 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
     return font;
 }
 
-id ORKDynamicCast_(id x, Class objClass)
-{
+id ORKDynamicCast_(id x, Class objClass) {
     return [x isKindOfClass:objClass] ? x : nil;
 }
 

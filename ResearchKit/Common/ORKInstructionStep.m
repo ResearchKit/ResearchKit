@@ -34,13 +34,12 @@
 #import "ORKStep_Private.h"
 #import "ORKInstructionStepViewController.h"
 
-@implementation ORKInstructionStep
 
+@implementation ORKInstructionStep
 
 + (Class)stepViewControllerClass {
     return [ORKInstructionStepViewController class];
 }
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -50,7 +49,6 @@
     }
     return self;
 }
-
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, detailText);
@@ -60,7 +58,6 @@
 + (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKInstructionStep *step = [super copyWithZone:zone];
@@ -79,7 +76,5 @@
 - (NSUInteger)hash {
     return [super hash] ^ [self.detailText hash];
 }
-
-
 
 @end

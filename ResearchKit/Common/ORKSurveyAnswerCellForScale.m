@@ -29,13 +29,13 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForScale.h"
 #import "ORKScaleSlider.h"
 #import "ORKSkin.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKScaleSliderView.h"
+
 
 @interface ORKSurveyAnswerCellForScale ()
 
@@ -44,15 +44,15 @@
 
 @end
 
+
 @implementation ORKSurveyAnswerCellForScale
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if(_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.step impliedAnswerFormat];
     }
     return _formatProvider;
 }
-
 
 - (void)prepareView {
     [super prepareView];
@@ -80,9 +80,7 @@
         }
         
         [_sliderView setCurrentValue:answer];
-    }
-    else
-    {
+    } else {
         if (answer == nil && [formatProvider defaultNumber]) {
             [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
         } else {
@@ -92,7 +90,6 @@
 }
 
 - (void)updateConstraints {
-    
     [super updateConstraints];
     
     self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -106,12 +103,9 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil views:views]];
-
 }
 
-
 - (IBAction)sliderValueChanged:(id)sender {
-    
     [self ork_setAnswer:_sliderView.currentValue];
 }
 

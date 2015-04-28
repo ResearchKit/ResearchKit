@@ -33,14 +33,14 @@
 #import "ORKVoiceEngine_Internal.h"
 #import "ORKHelpers.h"
 
+
 @implementation ORKVoiceEngine
 
-+(ORKVoiceEngine *)sharedVoiceEngine {
++ (ORKVoiceEngine *)sharedVoiceEngine {
     static ORKVoiceEngine *shared;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [ORKVoiceEngine new];
-        
     });
     return shared;
 }
@@ -86,12 +86,10 @@
 
 
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
-    
 }
 
 - (BOOL)isSpeaking {
     return self.speechSynthesizer.isSpeaking;
 }
-
 
 @end

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSection+AssetLoading.h"
 #import "ORKHelpers.h"
 
@@ -41,6 +42,11 @@ static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
 
 NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
     CGFloat scale = [[UIScreen mainScreen] scale];
+    
+    // For iPad, use the movie for the next scale up
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && scale < 3) {
+        scale++;
+    }
     
     NSURL *url = [ORKAssetsBundle() URLForResource:movieNameForType(type, scale) withExtension:@"m4v"];
     if (url == nil) {

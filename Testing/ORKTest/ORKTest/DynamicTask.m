@@ -29,9 +29,9 @@
  */
 
 
-
 #import "DynamicTask.h"
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 @interface DynamicTask ()
 
@@ -43,11 +43,11 @@
 
 @end
 
+
 @implementation DynamicTask
 
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
 
@@ -67,7 +67,6 @@
  behavior.
  */
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(id<ORKTaskResultSource>)result {
-    
     NSString *ident = step.identifier;
     if (step == nil) {
         return self.step1;
@@ -84,7 +83,7 @@
                 return self.step3b;
             }
         }
-    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]){
+    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]) {
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
         ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
         if (result.answer != nil) {
@@ -93,10 +92,8 @@
             }
         }
     }
-
     return nil;
 }
-
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     NSString *ident = step.identifier;
@@ -119,7 +116,6 @@
     return nil;
 }
 
-
 // Explicitly hide progress indication for all steps in this dynamic task.
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResultProvider:(NSArray *)surveyResults {
     return (ORKTaskProgress){.total = 0, .current = 0};
@@ -134,7 +130,6 @@
     return _step1;
 }
 
-
 - (ORKQuestionStep *)step2 {
     if (_step2 == nil) {
         _step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"step2"];
@@ -143,7 +138,6 @@
         _step2.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[@"route1", @"route2"]];
         _step2.optional = NO;
     }
-    
     return _step2;
 }
 
@@ -154,7 +148,6 @@
         _step3a.answerFormat = [ORKBooleanAnswerFormat new];
         _step3a.optional = NO;
     }
-    
     return _step3a;
 }
 
@@ -165,21 +158,16 @@
         _step3b.answerFormat = [ORKBooleanAnswerFormat new];
         _step3b.optional = NO;
     }
-    
     return _step3b;
 }
-
 
 - (ORKActiveStep *)step4 {
     if (_step4 == nil) {
         _step4 = [[ORKActiveStep alloc] initWithIdentifier:@"step4"];
         _step4.title = @"Thank you.";
         _step4.spokenInstruction = @"Thank you.";
-        
     }
-    
     return _step4;
 }
-
 
 @end

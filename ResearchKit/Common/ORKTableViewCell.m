@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTableViewCell.h"
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
+
 
 @interface ORKTableViewCell ()
 
@@ -39,12 +41,12 @@
 
 @end
 
+
 @implementation ORKTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         static UIColor *defaultSeparatorColor = nil;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -75,7 +77,6 @@
     if (self.bottomSeparatorLeftInset > 0) {
         self.bottomSeparatorLeftInset = ORKStandardMarginForView(self);
     }
-    
 }
 
 - (void)setShowBottomSeparator:(BOOL)showBottomSeparator {
@@ -121,11 +122,9 @@
     } else {
         [_bottomSeparator removeFromSuperview];
     }
-    
 }
 
 - (void)init_ORKTableViewCell {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
@@ -135,7 +134,6 @@
 }
 
 - (void)updateAppearance {
-    
     self.textLabel.font = [ORKSelectionTitleLabel defaultFont];
     [self invalidateIntrinsicContentSize];
 

@@ -29,18 +29,20 @@
  */
 
 
-
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKSignatureView;
 
 @protocol ORKSignatureViewDelegate <NSObject>
+
 - (void)signatureViewDidEditImage:(ORKSignatureView *)signatureView;
 
 @end
+
 
 @interface ORKSignatureView : UIView
 

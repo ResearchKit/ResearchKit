@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
 #import <CoreLocation/CoreLocation.h>
@@ -43,9 +44,11 @@
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
 
+
 @interface ORKMockLocationManager : CLLocationManager
 
 @end
+
 
 @implementation ORKMockLocationManager
 
@@ -55,10 +58,11 @@
 
 @end
 
+
 @interface ORKMockLocationRecorder : ORKLocationRecorder
 
-
 @end
+
 
 @implementation ORKMockLocationRecorder
 
@@ -68,9 +72,11 @@
 
 @end
 
+
 @interface ORKMockTouch : UITouch
 
 @end
+
 
 @implementation ORKMockTouch
 
@@ -88,6 +94,7 @@
 
 @end
 
+
 @interface ORKMockMotionManager : CMMotionManager
 
 - (void)injectMotion:(CMDeviceMotion *)motion;
@@ -95,6 +102,7 @@
 - (void)injectAccelerometerData:(CMAccelerometerData *)accelerometerData;
 
 @end
+
 
 @implementation ORKMockMotionManager {
     CMDeviceMotionHandler _motionHandler;
@@ -129,11 +137,13 @@
 
 @end
 
+
 @interface ORKMockPedometer : CMPedometer
 
 - (void)injectData:(CMPedometerData *)data;
 
 @end
+
 
 @implementation ORKMockPedometer {
     CMPedometerHandler _handler;
@@ -153,11 +163,13 @@
 
 @end
 
+
 @interface ORKMockAccelerometerRecorder : ORKAccelerometerRecorder
 
 @property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
+
 
 @implementation ORKMockAccelerometerRecorder
 
@@ -167,9 +179,11 @@
 
 @end
 
+
 @interface ORKMockAccelerometerData : CMAccelerometerData
 
 @end
+
 
 @implementation ORKMockAccelerometerData
 
@@ -183,11 +197,13 @@
 
 @end
 
+
 @interface ORKMockPedometerRecorder : ORKPedometerRecorder
 
 @property (nonatomic, strong) ORKMockPedometer* mockPedometer;
 
 @end
+
 
 @implementation ORKMockPedometerRecorder
 
@@ -197,8 +213,11 @@
 
 @end
 
+
 @interface ORKMockPedometerData : CMPedometerData
+
 @end
+
 
 @implementation ORKMockPedometerData
 
@@ -228,11 +247,13 @@
 
 @end
 
+
 @interface ORKMockDeviceMotionRecorder : ORKDeviceMotionRecorder
 
 @property (nonatomic, strong) ORKMockMotionManager* mockManager;
 
 @end
+
 
 @implementation ORKMockDeviceMotionRecorder
 
@@ -242,9 +263,11 @@
 
 @end
 
+
 @interface ORKMockAttitude : CMAttitude
 
 @end
+
 
 @implementation ORKMockAttitude
 
@@ -254,9 +277,11 @@
 
 @end
 
+
 @interface ORKMockDeviceMotion : CMDeviceMotion
 
 @end
+
 
 @implementation ORKMockDeviceMotion
 
@@ -286,6 +311,7 @@
 
 @end
 
+
 static BOOL ork_doubleEqual(double x, double y) {
     static double K = 1;
     return (fabs(x-y) < K * DBL_EPSILON * fabs(x+y) || fabs(x-y) < DBL_MIN);
@@ -297,6 +323,7 @@ static BOOL ork_doubleEqual(double x, double y) {
 @interface ORKRecorderTests : XCTestCase <ORKRecorderDelegate>
 
 @end
+
 
 @implementation ORKRecorderTests {
     NSString  *_outputPath;

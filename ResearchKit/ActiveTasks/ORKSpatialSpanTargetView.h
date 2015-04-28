@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,6 +49,7 @@ typedef NS_ENUM(NSInteger, ORKSpatialSpanTargetState) {
 - (void)targetView:(ORKSpatialSpanTargetView *)targetView recognizer:(UITapGestureRecognizer *)recognizer;
 
 @end
+
 
 @interface ORKSpatialSpanTargetView : UIView
 

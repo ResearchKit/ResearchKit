@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
@@ -38,14 +37,14 @@
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
 
+
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
 @property (nonatomic, strong) ORKAnswerTextView *textView;
 @property (nonatomic, strong) UILabel *placeHolder;
 
-
-
 @end
+
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
@@ -80,9 +79,7 @@
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)prepareView {
-    
     if (self.textView == nil ) {
         self.preservesSuperviewLayoutMargins = NO;
         self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
@@ -91,7 +88,6 @@
         
         self.textView.delegate = self;
         self.textView.editable = YES;
-        
         
         [self addSubview:self.textView];
         
@@ -108,8 +104,6 @@
         
         [self answerDidChange];
     }
-    
-    
     [super prepareView];
 }
 
@@ -186,7 +180,6 @@
     return 180.0;
 }
 
-
 @end
 
 
@@ -196,15 +189,14 @@
 
 @end
 
-@implementation ORKSurveyAnswerCellForTextField
 
+@implementation ORKSurveyAnswerCellForTextField
 
 - (BOOL)becomeFirstResponder {
     return [self.textField becomeFirstResponder];
 }
 
 - (void)textFieldCell_initialize {
-    
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
@@ -218,7 +210,6 @@
     
     [self setNeedsUpdateConstraints];
 }
-
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.contentView.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
@@ -235,13 +226,11 @@
     [super updateConstraints];
 }
 
-
 + (BOOL)shouldDisplayWithSeparators {
     return YES;
 }
 
 - (void)prepareView {
-    
     if (self.textField == nil ) {
         [self textFieldCell_initialize];
     }
@@ -254,12 +243,9 @@
     [super prepareView];
 }
 
-
-
 - (BOOL)shouldContinue {
     return ![self correctValueIfNeeded];
 }
-
 
 - (void)answerDidChange {
     id answer = self.answer;
@@ -276,7 +262,6 @@
 }
 
 #pragma mark - UITextFieldDelegate
-
 
 - (BOOL)correctValueIfNeeded {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
@@ -321,7 +306,6 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     BOOL canContinue = ![self correctValueIfNeeded];
     
     if (! canContinue) {
@@ -337,7 +321,6 @@
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
 }
-
 
 @end
 

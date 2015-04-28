@@ -36,6 +36,7 @@
 #import "ORKActiveStepViewController.h"
 #import "ORKRecorder_Private.h"
 
+
 @implementation ORKActiveStep
 
 + (Class)stepViewControllerClass {
@@ -52,22 +53,21 @@
 
 - (BOOL)hasTitle {
     NSString *title = self.title;
-    return  ( title != nil && title.length > 0);
+    return  (title != nil && title.length > 0);
 }
 
 - (BOOL)hasText {
     NSString *text = self.text;
-    return  ( text != nil && text.length > 0);
+    return  (text != nil && text.length > 0);
 }
 
 - (BOOL)hasVoice {
-    return  ( _spokenInstruction != nil && _spokenInstruction.length > 0);
+    return  (_spokenInstruction != nil && _spokenInstruction.length > 0);
 }
 
 - (BOOL)isRestorable {
     return NO;
 }
-
 
 + (BOOL)supportsSecureCoding {
     return YES;
@@ -98,7 +98,6 @@
     step.image = self.image;
     return step;
 }
-
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -137,8 +136,6 @@
     ORK_ENCODE_OBJ(aCoder, recorderConfigurations);
 }
 
-
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -159,10 +156,6 @@
             (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton)) ;
 }
 
-
-
-
-
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *set = [NSMutableSet set];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
@@ -172,7 +165,6 @@
         }
     }
     return set;
-    
 }
 
 - (ORKPermissionMask)requestedPermissions {

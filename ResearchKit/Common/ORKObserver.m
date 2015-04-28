@@ -32,6 +32,7 @@
 #import "ORKObserver.h"
 #import "ORKHelpers.h"
 
+
 @implementation ORKObserver
 
 - (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context {
@@ -53,7 +54,8 @@
                        context:(void *)context {
     NSAssert(context == self.context, @"Unexpected KVO");
     ORKSuppressPerformSelectorWarning(
-                                      (void)[self.delegate performSelector:self.action withObject:self.target];);
+                                      (void)[self.delegate performSelector:self.action withObject:self.target];
+                                      );
 }
 
 - (void)startObserving {

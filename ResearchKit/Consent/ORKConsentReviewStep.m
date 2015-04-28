@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentReviewStep.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers.h"
@@ -40,11 +41,9 @@
 
 @implementation ORKConsentReviewStep
 
-
 + (Class)stepViewControllerClass {
     return [ORKConsentReviewStepViewController class];
 }
-
 
 - (instancetype)initWithIdentifier:(NSString *)identifier signature:(ORKConsentSignature *)signature inDocument:(ORKConsentDocument *)consentDocument {
     self = [super initWithIdentifier:identifier];
@@ -98,13 +97,8 @@
     return [super hash] ^ [self.consentDocument hash] ^ [self.signature hash] ^ [self.reasonForConsent hash];
 }
 
-
-
 - (BOOL)showsProgress {
     return NO;
 }
-
-
-
 
 @end

@@ -68,11 +68,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     UIView *_stepViewContainer;
     
-
     BOOL _keyboardIsUp;
     
     NSArray *_customViewContainerConstraints;
-    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -95,13 +93,11 @@ static const CGFloat AssumedStatusBarHeight = 20;
             _headerView.translatesAutoresizingMaskIntoConstraints = NO;
             [_container addSubview:_headerView];
         }
-        
         {
             _stepViewContainer = [UIView new];
             _stepViewContainer.preservesSuperviewLayoutMargins = YES;
             [_container addSubview:_stepViewContainer];
         }
-        
         {
             // This lives in the scroll container, so it doesn't affect the vertical layout of the primary content
             // except through explicit constraints.
@@ -110,9 +106,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
             _continueSkipContainer.translatesAutoresizingMaskIntoConstraints = NO;
             [_scrollContainer addSubview:_continueSkipContainer];
         }
-        
-        // Custom View
         {
+            // Custom View
             _customViewContainer = [UIView new];
             [_container addSubview:self.customViewContainer];
         }
@@ -124,7 +119,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollContainer]|" options:0 metrics:nil views:views]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_scrollContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_scrollContainer attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-        
         
         // This constraint is needed to get the scroll container not to size itself too large (we don't want scrolling if it's not needed)
         NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_scrollContainer
@@ -144,35 +138,30 @@ static const CGFloat AssumedStatusBarHeight = 20;
         swipeOffRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
         
         [self addGestureRecognizer:swipeOffRecognizer];
-        
     }
     return self;
 }
 
 - (void)swipeOffAction:(UITapGestureRecognizer *)recognizer {
-
     [self endEditing:NO];
 }
 
 - (void)tapOffAction:(UITapGestureRecognizer *)recognizer {
     // On a tap, dismiss the keyboard if the tap was not inside a view that is first responder or a child of a first responder.
-    
-    CGPoint p = [recognizer locationInView:self];
-    UIView *v = [self hitTest:p withEvent:nil];
+    CGPoint point = [recognizer locationInView:self];
+    UIView *view = [self hitTest:point withEvent:nil];
     BOOL viewIsChildOfFirstResponder = NO;
-    while (v) {
-        if ([v isFirstResponder]) {
+    while (view) {
+        if ([view isFirstResponder]) {
             viewIsChildOfFirstResponder = YES;
             break;
         }
-        v = [v superview];
+        view = [view superview];
     }
     
-    if (! viewIsChildOfFirstResponder) {
-        
+    if (!viewIsChildOfFirstResponder) {
         [self endEditing:NO];
     }
-    
 }
 
 - (void)dealloc {
@@ -180,24 +169,23 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)registerForKeyboardNotifications:(BOOL)shouldRegister {
-    NSNotificationCenter *nfc = [NSNotificationCenter defaultCenter];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     if (shouldRegister) {
-        [nfc addObserver:self
+        [notificationCenter addObserver:self
                 selector:@selector(keyboardWillShow:)
                     name:UIKeyboardWillShowNotification object:nil];
         
-        [nfc addObserver:self
+        [notificationCenter addObserver:self
                 selector:@selector(keyboardWillHide:)
                     name:UIKeyboardWillHideNotification object:nil];
-        [nfc addObserver:self
+        [notificationCenter addObserver:self
                 selector:@selector(keyboardFrameWillChange:)
                     name:UIKeyboardWillChangeFrameNotification object:nil];
     } else {
-        [nfc removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-        [nfc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-        [nfc removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+        [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+        [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+        [notificationCenter removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     }
-    
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -212,7 +200,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (CGSize)keyboardIntersectionSizeFromNotification:(NSNotification *)notification {
-    
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self convertRect:keyboardFrame fromView:nil];
     
@@ -228,12 +215,11 @@ static const CGFloat AssumedStatusBarHeight = 20;
     NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        
-        CGRect bds = self.bounds;
+        CGRect bounds = self.bounds;
         CGSize contentSize = self.contentSize;
         
         CGSize intersectionSize = [self keyboardIntersectionSizeFromNotification:notification];
-        CGFloat visibleHeight = bds.size.height - intersectionSize.height;
+        CGFloat visibleHeight = bounds.size.height - intersectionSize.height;
         
         // Keep track of the keyboard overlap, so we can adjust the constraint properly.
         _keyboardOverlap = intersectionSize.height;
@@ -244,7 +230,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [self layoutIfNeeded];
         
         if (_keyboardIsUp) {
-            
             // The content ends at the bottom of the continueSkipContainer.
             // We want to calculate new insets so it's possible to scroll it fully visible, but no more.
             // Made a little more complicated because the contentSize will still extend below the bottom of this container,
@@ -256,7 +241,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
             yOffset = MIN(yOffset, contentSize.height - visibleHeight);
             
             // If that yOffset would not make the stepView visible, override to align with the top of the stepView.
-            CGRect potentialVisibleRect = (CGRect){{0,yOffset},{bds.size.width,visibleHeight}};
+            CGRect potentialVisibleRect = (CGRect){{0,yOffset},{bounds.size.width,visibleHeight}};
             CGRect targetBounds = [self convertRect:[_stepView bounds] fromView:_stepView];
             if (! CGRectContainsRect(potentialVisibleRect, targetBounds)) {
                 yOffset = targetBounds.origin.y;
@@ -267,12 +252,11 @@ static const CGFloat AssumedStatusBarHeight = 20;
             self.contentInset = insets;
         
             // Rather than setContentOffset, setBounds so that we get a smooth animation
-            if (ABS(yOffset - bds.origin.y) > 1) {
-                bds.origin.y = yOffset;
-                [self setBounds:bds];
+            if (ABS(yOffset - bounds.origin.y) > 1) {
+                bounds.origin.y = yOffset;
+                [self setBounds:bounds];
             }
         }
-        
     } completion:nil];
 }
 
@@ -296,7 +280,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self animateLayoutForKeyboardNotification:notification];
 }
 
-
 - (void)keyboardWillHide:(NSNotification *)notification {
     ORKUpdateScrollViewBottomInset(self, 0);
     
@@ -318,9 +301,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
 }
 
-
 - (void)updateConstraintConstants {
-    
     ORKScreenType screenType = _screenType;
     
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
@@ -332,8 +313,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     _headerView.hasContentAbove = hasIllustration;
     
     {
-        NSLayoutConstraint *c = _adjustableConstraints[_IllustrationHeightConstraintKey];
-        c.constant = (_imageView.image ? IllustrationHeight : 0);
+        NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
+        constraint.constant = (_imageView.image ? IllustrationHeight : 0);
     }
     
     BOOL haveCaption = [_headerView.captionLabel.text length] > 0;
@@ -343,8 +324,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     BOOL haveContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
     
     {
-        NSLayoutConstraint *c = _adjustableConstraints[_StepViewToContinueKey];
-        NSLayoutConstraint *c2 = _adjustableConstraints[_StepViewToContinueMinimumKey];
+        NSLayoutConstraint *constraint = _adjustableConstraints[_StepViewToContinueKey];
+        NSLayoutConstraint *constraint2 = _adjustableConstraints[_StepViewToContinueMinimumKey];
         CGFloat continueSpacing = StepViewBottomToContinueTop;
         if (self.continueHugsContent && ! haveStepView) {
             continueSpacing = 0;
@@ -357,9 +338,10 @@ static const CGFloat AssumedStatusBarHeight = 20;
             continueSpacing = 0;
         }
         CGFloat continueSpacing2 = MIN(10, continueSpacing);
-        c.constant = continueSpacing;
-        c2.constant = continueSpacing2;
+        constraint.constant = continueSpacing;
+        constraint2.constant = continueSpacing2;
     }
+    
     {
         NSLayoutConstraint *stepViewCentering = _adjustableConstraints[_StepViewCenteringOnWholeViewKey];
         if (stepViewCentering) {
@@ -367,6 +349,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
             stepViewCentering.active = offsetCentering;
         }
     }
+    
     {
         NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[_HeaderMinimumHeightKey];
         minimumHeaderHeight.constant = _minimumStepHeaderHeight;
@@ -407,7 +390,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
     NSArray *views = @[_headerView, _customViewContainer, _continueSkipContainer, _stepViewContainer];
     ORKEnableAutoLayoutForViews(views);
     
-    
     // Roughly center the container, but put it a little above the center if possible
     ORKEnableAutoLayoutForViews(@[_container, _scrollContainer]);
     if (_verticalCenteringEnabled) {
@@ -443,8 +425,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [_scrollContainer addConstraint:verticalTop];
     }
     
-    
-    
     // Don't let the container get too tall
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_container
                                                                         attribute:NSLayoutAttributeHeight
@@ -454,7 +434,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                        multiplier:1 constant:0];
     [_scrollContainer addConstraint:heightConstraint];
     
-    
     [_scrollContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[c]|" options:0 metrics:nil views:@{@"c":_container}]];
 #ifdef LAYOUT_DEBUG
     _container.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
@@ -462,12 +441,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
 #ifdef LAYOUT_DEBUG
     _scrollContainer.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
 #endif
-    
-    /*
-    All items with constants are added to the -adjustableConstraintsTable.
-     
-     */
-    
+
+    // All items with constants are added to the -adjustableConstraintsTable.
     NSMutableDictionary *adjustableConstraintsTable = [NSMutableDictionary dictionary];
     NSMutableArray *otherConstraints = [NSMutableArray array];
     adjustableConstraintsTable[_IllustrationHeightConstraintKey] =
@@ -513,18 +488,15 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     
     {
-        /*
-         Normally we want extra space, but we don't want to sacrifice that to scrolling (if it makes a difference)
-         */
-        
-        NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
+        // Normally we want extra space, but we don't want to sacrifice that to scrolling (if it makes a difference)
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
                                                              attribute:NSLayoutAttributeTop
                                                              relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                 toItem:_stepViewContainer
                                                              attribute:NSLayoutAttributeBottom
                                                             multiplier:1 constant:36];
-        c.priority = UILayoutPriorityDefaultLow-2;
-        adjustableConstraintsTable[_StepViewToContinueKey] = c;
+        constraint.priority = UILayoutPriorityDefaultLow-2;
+        adjustableConstraintsTable[_StepViewToContinueKey] = constraint;
         
         adjustableConstraintsTable[_StepViewToContinueMinimumKey] = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
                                                                                                  attribute:NSLayoutAttributeTop
@@ -546,23 +518,41 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [otherConstraints addObject:_continueAtBottomConstraint];
     
     // Force all to stay within the container's width.
-    
-    
-    for (UIView *v in views) {
+    for (UIView *view in views) {
 #ifdef LAYOUT_DEBUG
         v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
         v.layer.borderColor = [UIColor redColor].CGColor;
         v.layer.borderWidth = 1.0;
 #endif
-        if (v == _stepViewContainer) {
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:_container attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+        if (view == _stepViewContainer) {
+            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                        toItem:_container attribute:NSLayoutAttributeWidth
+                                                                    multiplier:1
+                                                                      constant:0]];
         } else {
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_container attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationLessThanOrEqual toItem:_container attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
+            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                     attribute:NSLayoutAttributeLeft
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:_container attribute:NSLayoutAttributeLeftMargin
+                                                                    multiplier:1
+                                                                      constant:0]];
+            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                     attribute:NSLayoutAttributeRight
+                                                                     relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                        toItem:_container attribute:NSLayoutAttributeRightMargin
+                                                                    multiplier:1
+                                                                      constant:0]];
         }
-        [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_container attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:_container
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1
+                                                                  constant:0]];
         
-        NSLayoutConstraint *bottomnessConstraint = [NSLayoutConstraint constraintWithItem:v
+        NSLayoutConstraint *bottomnessConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                                 attribute:NSLayoutAttributeBottom
                                                                                 relatedBy:NSLayoutRelationLessThanOrEqual
                                                                                    toItem:_container
@@ -573,17 +563,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
         // for all views to ensure the parent sizes large enough to contain everything.
         [otherConstraints addObject:bottomnessConstraint];
         
-        if (v == _continueSkipContainer) {
+        if (view == _continueSkipContainer) {
             _continueInContentConstraint = bottomnessConstraint;
             continue;
         }
-        
-        
     }
     
-    
     _adjustableConstraints = adjustableConstraintsTable;
-    
     
     [_scrollContainer addConstraints:otherConstraints];
     [_scrollContainer addConstraints:[adjustableConstraintsTable allValues]];
@@ -591,7 +577,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self updateCustomViewContainerConstraints];
     [self updateStepViewContainerConstraints];
     [self updateConstraintConstants];
-    
 }
 
 - (void)updateStepViewContainerConstraints {
@@ -600,50 +585,101 @@ static const CGFloat AssumedStatusBarHeight = 20;
     static const CGFloat ConstraintMaxValue = 10000;
     
     if (_stepView) {
-        
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:ConstraintMaxValue];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute multiplier:1
+                                                                            constant:ConstraintMaxValue];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
         [_stepViewContainer addConstraint:widthConstraint];
         
-        [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_stepViewContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepView
+                                                                       attribute:NSLayoutAttributeCenterX
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:_stepViewContainer
+                                                                       attribute:NSLayoutAttributeCenterX
+                                                                      multiplier:1
+                                                                        constant:0]];
         
-        NSLayoutConstraint *stepViewWidthConstraint = [NSLayoutConstraint constraintWithItem:_stepView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_stepViewContainer attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+        NSLayoutConstraint *stepViewWidthConstraint = [NSLayoutConstraint constraintWithItem:_stepView
+                                                                                   attribute:NSLayoutAttributeWidth
+                                                                                   relatedBy:NSLayoutRelationEqual
+                                                                                      toItem:_stepViewContainer
+                                                                                   attribute:NSLayoutAttributeWidth
+                                                                                  multiplier:1
+                                                                                    constant:0];
         stepViewWidthConstraint.priority = UILayoutPriorityRequired;
         [_stepViewContainer addConstraint:stepViewWidthConstraint];
         
         if (_stepViewFillsAvailableSpace) {
-            NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:_stepViewContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:ConstraintMaxValue];
-            c.priority = UILayoutPriorityFittingSizeLevel;
-            [_stepViewContainer addConstraint:c];
+            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer
+                                                                          attribute:NSLayoutAttributeHeight
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:ConstraintMaxValue];
+            constraint.priority = UILayoutPriorityFittingSizeLevel;
+            [_stepViewContainer addConstraint:constraint];
 
-            NSLayoutConstraint *verticalCentering = [NSLayoutConstraint constraintWithItem:_stepView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_stepViewContainer attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+            NSLayoutConstraint *verticalCentering = [NSLayoutConstraint constraintWithItem:_stepView
+                                                                                 attribute:NSLayoutAttributeCenterY
+                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                    toItem:_stepViewContainer
+                                                                                 attribute:NSLayoutAttributeCenterY
+                                                                                multiplier:1
+                                                                                  constant:0];
             verticalCentering.priority = UILayoutPriorityRequired-2;
             [_stepViewContainer addConstraint:verticalCentering];
             
             {
                 NSMutableDictionary *adjustable = [_adjustableConstraints mutableCopy];
-                NSLayoutConstraint *verticalCentering2 = [NSLayoutConstraint constraintWithItem:_stepView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_stepViewContainer attribute:NSLayoutAttributeCenterY multiplier:1 constant:-(AssumedNavBarHeight + AssumedStatusBarHeight)/2];
+                NSLayoutConstraint *verticalCentering2 = [NSLayoutConstraint constraintWithItem:_stepView
+                                                                                      attribute:NSLayoutAttributeCenterY
+                                                                                      relatedBy:NSLayoutRelationEqual
+                                                                                         toItem:_stepViewContainer
+                                                                                      attribute:NSLayoutAttributeCenterY
+                                                                                     multiplier:1
+                                                                                       constant:-(AssumedNavBarHeight + AssumedStatusBarHeight)/2];
                 verticalCentering2.priority = UILayoutPriorityRequired-1;
                 [_stepViewContainer addConstraint:verticalCentering2];
                 adjustable[_StepViewCenteringOnWholeViewKey] = verticalCentering2;
                 _adjustableConstraints = adjustable;
             }
             
-            [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:_stepViewContainer attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+            [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepView
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                              toItem:_stepViewContainer
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                          multiplier:1
+                                                                            constant:0]];
         } else {
-            [_stepViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[c]|" options:(NSLayoutFormatOptions)0 metrics:nil views:@{@"c":_stepView}]];
+            [_stepViewContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[c]|"
+                                                                                       options:0
+                                                                                       metrics:nil
+                                                                                         views:@{@"c":_stepView}]];
         }
-        
-        
     } else {
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1
+                                                                            constant:0];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
         [_stepViewContainer addConstraint:widthConstraint];
-        [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepViewContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0]];
+        [_stepViewContainer addConstraint:[NSLayoutConstraint constraintWithItem:_stepViewContainer
+                                                                       attribute:NSLayoutAttributeHeight
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1
+                                                                        constant:0]];
     }
-    
 }
-
 
 - (void)updateCustomViewContainerConstraints {
     if ([_customViewContainerConstraints count]) {
@@ -695,20 +731,29 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [_customView setTranslatesAutoresizingMaskIntoConstraints:NO];
         CGSize requiredSize = [_customView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
         
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_customView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:requiredSize.width];
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_customView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:requiredSize.height];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_customView
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1
+                                                                            constant:requiredSize.width];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_customView
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1
+                                                                             constant:requiredSize.height];
         
         widthConstraint.priority = UILayoutPriorityDefaultLow;
         heightConstraint.priority = UILayoutPriorityDefaultLow;
         [_customView addConstraints:@[widthConstraint, heightConstraint]];
     }
-    
     [self setNeedsUpdateConstraints];
 }
 
-
 - (UIImageView *)imageView {
-    if(_imageView == nil){
+    if(_imageView == nil) {
         _imageView = [[UIImageView alloc] init];
         [_customViewContainer addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -718,9 +763,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     return _imageView;
 }
 
-
 - (void)setStepView:(ORKActiveStepCustomView *)customView {
-    
     [_stepView removeFromSuperview];
     _stepView = customView;
     [_stepViewContainer addSubview:_stepView];

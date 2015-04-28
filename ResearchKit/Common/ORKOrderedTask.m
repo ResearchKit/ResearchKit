@@ -55,8 +55,9 @@
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
+
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
-    return (ORKTaskProgress){.current=current,.total=total};
+    return (ORKTaskProgress){.current=current, .total=total};
 }
 
 @implementation ORKOrderedTask {
@@ -66,7 +67,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray *)steps {
     self = [super init];
     if (self) {
-        
         if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
@@ -74,7 +74,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         _identifier = [identifier copy];
         _steps = steps;
     }
-    
     return self;
 }
 
@@ -115,7 +114,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    
     NSArray *steps = _steps;
     
     if (steps.count <= 0) {
@@ -123,7 +121,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     }
     
     ORKStep *currentStep = step;
-    
     ORKStep *nextStep = nil;
     
     if (currentStep == nil) {
@@ -135,12 +132,10 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             nextStep = steps[index+1];
         }
     }
-    
     return nextStep;
 }
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    
     NSArray *steps = _steps;
     
     if (steps.count <= 0) {
@@ -148,38 +143,33 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     }
     
     ORKStep *currentStep = step;
-    
     ORKStep *nextStep = nil;
     
     if (currentStep == nil) {
         nextStep = nil;
         
     } else {
-        
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
             nextStep = steps[index-1];
         }
     }
-    
     return nextStep;
-    
 }
 
 - (ORKStep *)stepWithIdentifier:(NSString *)identifier {
-    __block ORKStep *ret = nil;
+    __block ORKStep *step = nil;
     [_steps enumerateObjectsUsingBlock:^(ORKStep *obj, NSUInteger idx, BOOL *stop) {
         if ([obj.identifier isEqualToString:identifier]) {
-            ret = obj;
+            step = obj;
             *stop = YES;
         }
     }];
-    return ret;
+    return step;
 }
 
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
-    
     ORKTaskProgress progress;
     progress.current = [self indexOfStep:step];
     progress.total = [_steps count];
@@ -187,10 +177,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     if (! [step showsProgress]) {
         progress.total = 0;
     }
-    
     return progress;
 }
-
 
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *healthTypes = [NSMutableSet set];
@@ -205,14 +193,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
                     [healthTypes addObject:objType];
                 }
             }
-        }
-        else if ([step isKindOfClass:[ORKQuestionStep class]]) {
+        } else if ([step isKindOfClass:[ORKQuestionStep class]]) {
             HKObjectType *objType = [[(ORKQuestionStep *)step answerFormat] healthKitObjectType];
             if (objType) {
                 [healthTypes addObject:objType];
             }
-        }
-        else if ([step isKindOfClass:[ORKActiveStep class]]) {
+        } else if ([step isKindOfClass:[ORKActiveStep class]]) {
             ORKActiveStep *activeStep = (ORKActiveStep *)step;
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
@@ -272,11 +258,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             }
         }
     }
-    
     return self;
 }
-
-
 
 #pragma mark - Predefined
 
@@ -308,7 +291,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
+static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }
@@ -356,7 +339,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
     }
     
     {
-        
         NSMutableArray *recorderConfigurations = [NSMutableArray arrayWithCapacity:5];
         if (! (ORKPredefinedTaskOptionExcludeAccelerometer & options)) {
             [recorderConfigurations addObject:[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:ORKAccelerometerRecorderIdentifier
@@ -383,8 +365,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
     return task;
 }
 
-
-
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(NSString *)intendedUseDescription
                           speechInstruction:(NSString *)speechInstruction
@@ -393,10 +373,9 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
                           recordingSettings:(NSDictionary *)recordingSettings
                                     options:(ORKPredefinedTaskOption)options {
     
-    NSDictionary *defaultRecordingSettings = @{AVFormatIDKey : @(kAudioFormatAppleLossless),
-                                               AVNumberOfChannelsKey : @(2),
-                                               AVSampleRateKey: @(44100.0)
-                                               };
+    NSDictionary *defaultRecordingSettings = @{ AVFormatIDKey : @(kAudioFormatAppleLossless),
+                                                AVNumberOfChannelsKey : @(2),
+                                                AVSampleRateKey: @(44100.0) };
     recordingSettings = recordingSettings ? : defaultRecordingSettings;
     
     if (options & ORKPredefinedTaskOptionExcludeAudio) {
@@ -426,7 +405,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
             ORKStepArrayAddStep(steps, step);
         }
     }
-    
+
     {
         ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;
@@ -461,22 +440,16 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
 }
 
 + (NSDateComponentsFormatter *)textTimeFormatter {
-    
     NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
     formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleSpellOut;
     
-    
-    /*
-     Exception list:
-     Korean, Chinese (all), Thai, and Vietnamese.
-     */
+    // Exception list: Korean, Chinese (all), Thai, and Vietnamese.
     NSArray *nonSpelledOutLanguages = @[@"ko", @"zh", @"th", @"vi", @"ja"];
     NSString *currentLanguage = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
     NSString *currentLanguageCode = [NSLocale componentsFromLocaleIdentifier:currentLanguage][NSLocaleLanguageCode];
     if ((currentLanguageCode != nil) && [nonSpelledOutLanguages containsObject:currentLanguageCode]) {
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
     }
-    
     
     formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
     formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDropAll;
@@ -595,18 +568,15 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
         }
     }
     
-    
     if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
         ORKStepArrayAddStep(steps, step);
     }
     
-    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
     return task;
 }
-
 
 + (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(NSString *)intendedUseDescription
@@ -731,11 +701,9 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
             activeStep.shouldVibrateOnFinish = YES;
             activeStep.shouldPlaySoundOnFinish = YES;
             
-            
             ORKStepArrayAddStep(steps, activeStep);
         }
     }
-    
     
     if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
@@ -744,10 +712,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    
     return task;
 }
-
 
 + (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)identifier
                                  intendedUseDescription:(NSString *)intendedUseDescription
@@ -761,7 +727,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
                                  customTargetPluralName:(NSString *)customTargetPluralName
                                         requireReversal:(BOOL)requireReversal
                                                 options:(ORKPredefinedTaskOption)options {
-    
     
     NSString *targetPluralName = customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil);
     
@@ -778,7 +743,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
             
             ORKStepArrayAddStep(steps, step);
         }
-        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TITLE", nil);
@@ -814,17 +778,13 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
         ORKStepArrayAddStep(steps, step);
     }
     
-    
     if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
         ORKInstructionStep *step = [self makeCompletionStep];
-        
         ORKStepArrayAddStep(steps, step);
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
-    
     return task;
 }
-
 
 @end

@@ -28,20 +28,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
 #import "ORKConsentDocument_Internal.h"
 #import "ORKConsentSection_Internal.h"
 
+
 @interface ORKConsentTests : XCTestCase
 
 @end
 
+
 @implementation ORKConsentTests
 
 - (void)testContentEscaping {
-    
     NSString *content = @"<img><p>this is content</p><br><div/>";
     
     ORKConsentSection *section = [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeOverview];
@@ -51,6 +53,5 @@
     XCTAssert([section.escapedContent isEqualToString:@"&lt;img&gt;&lt;p&gt;this is content&lt;/p&gt;&lt;br&gt;&lt;div/&gt;"]);
 
 }
-
 
 @end

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKPicker.h"
@@ -60,7 +61,6 @@
 }
 
 - (void)loadPicker {
-    
     if (_picker == nil) {
         _picker = [ORKPicker pickerWithAnswerFormat:[self.step impliedAnswerFormat] answer:self.answer delegate:self];
         
@@ -135,7 +135,6 @@
 }
 
 - (void)picker:(id)picker answerDidChangeTo:(id)answer {
-    
     [self valueChangedDueUserAction:YES];
 }
 
@@ -147,7 +146,7 @@
 #pragma mark UIPickerViewDelegate
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    assert(pickerView==_tempPicker);
+    assert(pickerView == _tempPicker);
     return 32;
 }
 

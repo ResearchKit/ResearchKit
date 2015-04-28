@@ -28,22 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <XCTest/XCTest.h>
 #import "ORKAccessibilityFunctions.h"
+
 
 @interface ORKAccessibilityTests : XCTestCase
 
 @end
 
+
 @implementation ORKAccessibilityTests
 
 - (void)testAccessibilityString {
-    
     {
         NSString *result = ORKAccessibilityStringForVariables(@"a", @"b", nil);
         XCTAssert([result isEqualToString:@"a, b"]);
     }
-    
+
     {
         NSString *result = ORKAccessibilityStringForVariables(@"a", nil, @"b");
         XCTAssert([result isEqualToString:@"a, b"]);
@@ -54,6 +56,5 @@
         XCTAssert([result isEqualToString:@"a"]);
     }
 }
-
 
 @end

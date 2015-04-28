@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKActiveStep.h>
+
 
 @interface ORKActiveStep ()
 
@@ -40,6 +42,5 @@
 - (BOOL)hasTitle;
 - (BOOL)hasText;
 - (BOOL)hasVoice;
-
 
 @end

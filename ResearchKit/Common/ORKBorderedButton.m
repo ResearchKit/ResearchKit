@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKBorderedButton.h"
+
 
 @implementation ORKBorderedButton {
     UIColor *_normalTintColor;
@@ -81,22 +83,16 @@
 }
 
 - (void)updateBorderColor {
-    
     if (self.enabled && self.highlighted) {
-        
         self.backgroundColor = _normalHighlightTintColor;
-        self.layer.borderColor = [_normalHighlightTintColor CGColor];    // move
-        
-    }
-    else if(self.enabled && !self.highlighted) {
+        self.layer.borderColor = [_normalHighlightTintColor CGColor]; // move
+    } else if(self.enabled && !self.highlighted) {
         if (self.fadeDelay > 0) {
             [self performSelector:@selector(fadeHighlightColor) withObject:nil afterDelay:self.fadeDelay];
         } else {
             [self fadeHighlightColor];
         }
-    }
-    else
-    {
+    } else {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = [_disableTintColor CGColor];
     }

@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKQuestionStepView.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKQuestionStepView
 
@@ -86,7 +88,6 @@
     if (self.continueSkipContainer.skipButton != nil) {
         [elements addObject:self.continueSkipContainer.skipButton];
     }
-    
     return elements;
 }
 

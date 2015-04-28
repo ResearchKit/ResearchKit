@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCustomStepView_Internal.h"
 #import "ORKSpatialSpanTargetView.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -45,6 +47,7 @@ typedef struct {
 - (void)gameView:(ORKSpatialSpanMemoryGameView *)gameView didTapTileWithIndex:(NSInteger)tileIndex recognizer:(UITapGestureRecognizer *)recognizer;
 
 @end
+
 
 @interface ORKSpatialSpanMemoryGameView : UIView <ORKSpatialSpanTargetViewDelegate>
 

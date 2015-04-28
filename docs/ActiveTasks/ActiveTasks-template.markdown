@@ -16,12 +16,15 @@ At release, the ResearchKit™ framework includes five predefined tasks, which f
 
 <table>
 <caption>Active task in ResearchKit</caption>
+<thead>
     <tr>
         <td>Category</td>
         <td>Task</td>
         <td>Sensor</td>
         <td>Data collected</td>
     </tr>
+</thead>
+<tbody>
  <tr><td rowspan = 2>Motor activities</td> 
      <td>Gait and Balance</td>
      <td>Accelerometer<br>
@@ -57,6 +60,7 @@ Correct and actual sequences<br>
     <td>Microphone</td>
     <td>Uncompressed audio</td>
 </tr>
+</tbody>
 </table>
 
 
@@ -175,7 +179,7 @@ The data collected in active tasks is recorded in a hierarchy of
 `ORKResult` objects in memory. It is up to you to serialize this
 hierarchy for storage or transmission in a way that’s appropriate for your application.
 
-If the data collected is to too large for in-memory delivery, an
+If the data collected is too large for in-memory delivery, an
 `ORKFileResult` is included in the hierarchy instead. The file result
 references a file in the output directory (specified by the
 `outputDirectory` property of `ORKTaskViewController`). For example,

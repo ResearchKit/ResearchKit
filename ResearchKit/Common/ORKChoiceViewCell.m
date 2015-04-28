@@ -34,6 +34,7 @@
 #import "ORKHelpers.h"
 #import "ORKAccessibility.h"
 
+
 static const CGFloat kLabelRightMargin = 44.0;
 
 @implementation ORKChoiceViewCell {
@@ -52,7 +53,6 @@ static const CGFloat kLabelRightMargin = 44.0;
 }
 
 - (void)layoutSubviews {
-    
     [super layoutSubviews];
     
     ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
@@ -75,7 +75,6 @@ static const CGFloat kLabelRightMargin = 44.0;
         self.longLabel.frame = CGRectMake(cellLeftMargin, 0, labelWidth, cellHeight);
         self.shortLabel.frame = CGRectZero;
     } else {
-        
         {
             self.shortLabel.frame = CGRectMake(cellLeftMargin, 0,
                                                labelWidth, 1);
@@ -90,9 +89,7 @@ static const CGFloat kLabelRightMargin = 44.0;
             self.shortLabel.frame = rect;
         
         }
-        
         {
-            
             self.longLabel.frame = CGRectMake(cellLeftMargin, 0,
                                               labelWidth, 1);
             
@@ -113,25 +110,21 @@ static const CGFloat kLabelRightMargin = 44.0;
 }
 
 - (ORKSelectionTitleLabel *)shortLabel {
-    
     if (_shortLabel == nil ) {
         _shortLabel = [ORKSelectionTitleLabel new];
         _shortLabel.numberOfLines = 0;
         [self.contentView addSubview:_shortLabel];
     }
-    
     return _shortLabel;
 }
 
 - (ORKSelectionSubTitleLabel *)longLabel {
-    
     if (_longLabel == nil) {
         _longLabel = [ORKSelectionSubTitleLabel new];
         _longLabel.numberOfLines = 0;
         _longLabel.textColor = [UIColor ork_darkGrayColor];
         [self.contentView addSubview:_longLabel];
     }
-    
     return _longLabel;
 }
 
@@ -158,16 +151,13 @@ static const CGFloat kLabelRightMargin = 44.0;
 }
 
 + (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
-    
     CGFloat height = 0;
     
     ORKScreenType screenType = ORKGetScreenTypeForWindow(tableView.window);
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);
-    
     CGFloat cellLeftMargin =  ORKTableViewCellLeftMargin(tableView);
-    
     CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + kLabelRightMargin);
    
     if (shortText.length > 0) {
@@ -202,9 +192,7 @@ static const CGFloat kLabelRightMargin = 44.0;
         
         if (shortText.length > 0) {
             height += labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;
-        }
-        else
-        {
+        } else {
             height += firstBaselineOffsetFromTop - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;
         }
 
@@ -223,7 +211,6 @@ static const CGFloat kLabelRightMargin = 44.0;
     if (self.accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
         return ORKAccessibilityStringForVariables(self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
     }
-    
     NSString *state = (self.selectedItem ? ORKLocalizedString(@"AX_SELECTED", nil) : ORKLocalizedString(@"AX_UNSELECTED", nil));
     return ORKAccessibilityStringForVariables(state, self.shortLabel.accessibilityLabel, self.longLabel.accessibilityLabel);
 }

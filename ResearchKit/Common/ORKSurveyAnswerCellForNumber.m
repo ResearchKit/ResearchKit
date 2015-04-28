@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForNumber.h"
 #import "ORKSkin.h"
 #import "ORKAnswerFormat_Internal.h"
@@ -44,6 +43,7 @@
 @property (nonatomic, strong) ORKTextFieldView *textFieldView;
 
 @end
+
 
 @implementation ORKSurveyAnswerCellForNumber {
     NSNumberFormatter *_numberFormatter;
@@ -67,8 +67,7 @@
     
     if (questionType == ORKQuestionTypeDecimal) {
         textField.keyboardType = UIKeyboardTypeDecimalPad;
-    }
-    else if (questionType == ORKQuestionTypeInteger) {
+    } else if (questionType == ORKQuestionTypeInteger) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
@@ -84,7 +83,6 @@
         
     [self setNeedsUpdateConstraints];
 }
-
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -119,9 +117,7 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|" options:0 metrics:nil views:views]];
 
-    
     [super updateConstraints];
-    
 }
 
 - (BOOL)becomeFirstResponder {
@@ -129,7 +125,6 @@
 }
 
 - (void)prepareView {
-    
     if (self.textField == nil ) {
         [self numberCell_initialize];
     }
@@ -161,7 +156,6 @@
     return isValid;
 }
 
-
 - (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
@@ -179,11 +173,9 @@
     self.textField.text = displayValue;
 }
 
-
 #pragma mark - UITextFieldDelegate
 
 - (void)valueFieldDidChange:(UITextField *)textField {
-    
     ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.step impliedAnswerFormat];
     NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
     textField.text = sanitizedText;
@@ -191,7 +183,6 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    
     [self ork_setAnswer:ORKNullAnswerValue()];
     return YES;
 }
@@ -222,13 +213,11 @@
     return YES;
 }
 
-
 + (BOOL)shouldDisplayWithSeparators {
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     BOOL isValid = [self isAnswerValid];
     
     if (! isValid) {
@@ -244,6 +233,5 @@
     NSString *text = self.textField.text;
     [self setAnswerWithText:text];
 }
-
 
 @end

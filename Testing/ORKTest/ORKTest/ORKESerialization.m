@@ -28,11 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKESerialization.h"
 
 
-static NSString *ORKEStringFromDateISO8601(NSDate *date)
-{
+static NSString *ORKEStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -43,8 +43,7 @@ static NSString *ORKEStringFromDateISO8601(NSDate *date)
     return [__formatter stringFromDate:date];
 }
 
-static NSDate *ORKEDateFromStringISO8601(NSString *string)
-{
+static NSDate *ORKEDateFromStringISO8601(NSString *string) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -55,8 +54,7 @@ static NSDate *ORKEDateFromStringISO8601(NSString *string)
     return [__formatter dateFromString:string];
 }
 
-static NSArray *ORKNumericAnswerStyleTable()
-{
+static NSArray *ORKNumericAnswerStyleTable() {
     static NSArray *table = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -90,8 +88,6 @@ static NSDictionary *dictionaryFromCGRect(CGRect r) {
     return @{ @"origin" : dictionaryFromCGPoint(r.origin), @"size" : dictionaryFromCGSize(r.size) };
 }
 
-
-
 static CGSize sizeFromDictionary(NSDictionary *dict) {
     return (CGSize){.width = [dict[@"w"] doubleValue], .height = [dict[@"h"] doubleValue] };
 }
@@ -104,17 +100,13 @@ static CGRect rectFromDictionary(NSDictionary *dict) {
     return (CGRect){.origin = pointFromDictionary(dict[@"origin"]), .size = sizeFromDictionary(dict[@"size"])};
 }
 
-
-static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s)
-{
+static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
     return tableMapReverse(s, ORKNumericAnswerStyleTable());
 }
 
-static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style)
-{
+static NSString *ORKNumericAnswerStyleToString(ORKNumericAnswerStyle style) {
     return tableMapForward(style, ORKNumericAnswerStyleTable());
 }
-
 
 static NSMutableDictionary *ORKESerializationEncodingTable();
 static id propFromDict(NSDictionary *dict, NSString *propName);
@@ -132,7 +124,6 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
 #define DYNAMICCAST(x, c) ((c *) ([x isKindOfClass:[c class]] ? x : nil))
 
 
-
 @interface ORKESerializableTableEntry : NSObject
 
 - (instancetype)initWithClass:(Class)class
@@ -144,6 +135,7 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
 @property (nonatomic, strong) NSMutableDictionary *properties;
 
 @end
+
 
 @interface ORKESerializableProperty : NSObject
 
@@ -163,8 +155,8 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
 
 @end
 
-@implementation ORKESerializableTableEntry
 
+@implementation ORKESerializableTableEntry
 
 - (instancetype)initWithClass:(Class)class
                     initBlock:(ORKESerializationInitBlock)initBlock
@@ -182,7 +174,6 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
 
 
 @implementation ORKESerializableProperty
-
 
 - (instancetype)initWithPropertyName:(NSString *)propertyName
                           valueClass:(Class)valueClass
@@ -260,7 +251,6 @@ static id propFromDict(NSDictionary *dict, NSString *propName) {
 
 @implementation ORKESerializer
 
-
 static NSArray *ORKChoiceAnswerStyleTable() {
     static NSArray *table;
     static dispatch_once_t onceToken;
@@ -297,7 +287,6 @@ static NSArray *memoryGameStatusTable() {
     });
     return table;
 }
-
 
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
@@ -848,7 +837,6 @@ ret =
 #undef GETPROP
 
 static NSArray *classEncodingsForClass(Class c) {
-    
     NSDictionary *encodingTable = ORKESerializationEncodingTable();
     
     NSMutableArray *classEncodings = [NSMutableArray array];
@@ -859,7 +847,6 @@ static NSArray *classEncodingsForClass(Class c) {
         if (classEncoding) {
             [classEncodings addObject:classEncoding];
         }
-        
         sc = [sc superclass];
     }
     return classEncodings;
@@ -913,14 +900,12 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
                     break;
                 }
             }
-            
             NSCAssert(haveSetProp, @"Unexpected property on %@: %@", className, key);
         }
         
     } else {
         NSCAssert(0, @"Unexpected input of class %@ for %@", [input class], expectedClass);
     }
-    
     return output;
 }
 
@@ -1009,7 +994,6 @@ static id jsonObjectForObject(id object) {
     return jsonOutput;
 }
 
-
 + (NSDictionary *)JSONObjectForObject:(id)object error:(NSError * __autoreleasing *)error {
     id json = jsonObjectForObject(object);
     return json;
@@ -1096,5 +1080,3 @@ static id jsonObjectForObject(id object) {
 }
 
 @end
-
-

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSignatureController.h"
 #import "ORKTextButton.h"
 #import "ORKSkin.h"
@@ -35,6 +36,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
+
 
 @interface ORKConsentSignatureWrapperView : UIView
 
@@ -71,7 +73,6 @@
             [self addSubview:_clearButton];
         }
         {
-            
             _signatureView = [ORKSignatureView new];
             [_signatureView setClipsToBounds:YES];
             
@@ -111,7 +112,6 @@
         [NSLayoutConstraint deactivateConstraints:_constraints];
         _constraints = nil;
     }
-    
     
     [super updateConstraints];
     
@@ -153,9 +153,7 @@
     _constraints = constraints;
 }
 
-
 @end
-
 
 
 @interface ORKConsentSigningView : ORKVerticalContainerView
@@ -163,6 +161,7 @@
 @property (nonatomic, strong) ORKConsentSignatureWrapperView *wrapperView;
 
 @end
+
 
 @implementation ORKConsentSigningView
 
@@ -184,16 +183,15 @@
     return self;
 }
 
-
-
 @end
 
-@interface ORKConsentSignatureController()
 
+@interface ORKConsentSignatureController()
 
 @property (nonatomic, strong) ORKConsentSigningView *signingView;
 
 @end
+
 
 @implementation ORKConsentSignatureController
 
@@ -250,6 +248,5 @@
     _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
     [_signingView.wrapperView setClearButtonEnabled:YES];
 }
-
 
 @end

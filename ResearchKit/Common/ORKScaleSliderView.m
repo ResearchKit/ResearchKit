@@ -29,6 +29,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKScaleSliderView.h"
 #import "ORKScaleSlider.h"
 #import "ORKScaleRangeLabel.h"
@@ -49,6 +50,7 @@
 
 @end
 
+
 @implementation ORKScaleSliderView
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider {
@@ -68,7 +70,6 @@
         self.slider.numberOfSteps = numberOfSteps;
         
         [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-        
     }
     return self;
 }
@@ -76,7 +77,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
         self.leftRangeLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_leftRangeLabel];
@@ -99,7 +99,6 @@
 }
 
 - (void)setCurrentValue:(NSNumber *)value {
-    
     _currentValue = value;
     self.slider.showThumb = value? YES : NO;
     
@@ -113,13 +112,11 @@
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
-    
     NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(self.slider.value)];
     [self setCurrentValue:newValue];
 }
 
 - (void)updateConstraints {
-    
     [super updateConstraints];
     
     self.slider.translatesAutoresizingMaskIntoConstraints = NO;
@@ -129,8 +126,7 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_slider,_leftRangeLabel,_rightRangeLabel, _valueLabel);
     
-    if ([_formatProvider isVertical])
-    {
+    if ([_formatProvider isVertical]) {
         // Vertical slider
         const CGFloat kMargin = 15.0;
         const CGFloat kBigMargin = 24;
@@ -181,9 +177,7 @@
                                                  multiplier:1.0
                                                    constant:-kBigMargin];
         [self addConstraint:constraint];
-    }
-    else
-    {
+    } else {
         // Horizontal slider
         const CGFloat kMargin = 17.0;
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel(==40)]-[_slider]"
@@ -206,7 +200,6 @@
     }
 }
 
-
 #pragma mark - Accessibility
 
 // Since the slider is the only interesting thing within this cell, we make the
@@ -227,7 +220,5 @@
 - (NSInteger)indexOfAccessibilityElement:(id)element {
     return (element == self.slider ? 0 : NSNotFound);
 }
-
-
 
 @end

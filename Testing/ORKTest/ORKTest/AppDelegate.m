@@ -29,9 +29,9 @@
  */
 
 
-
 #import "AppDelegate.h"
 #import "MainViewController.h"
+
 
 @implementation AppDelegate
 
@@ -40,7 +40,6 @@
  in willFinishLaunchingWithOptions:. Otherwise, the restored task view controller
  will animate in.
  */
-
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -66,6 +65,5 @@
 - (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder {
     return YES;
 }
-
 
 @end

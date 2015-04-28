@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKSpatialSpanMemoryStep
 
@@ -61,7 +63,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSInteger const ORKSpatialSpanMemoryTaskMinimumInitialSpan = 2;
@@ -153,7 +154,6 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
@@ -169,11 +169,8 @@
             (self.requireReversal == castObject.requireReversal)) ;
 }
 
-
-
 - (BOOL)allowsBackNavigation {
     return NO;
 }
 
 @end
-
