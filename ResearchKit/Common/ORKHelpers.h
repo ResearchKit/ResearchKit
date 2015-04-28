@@ -153,8 +153,6 @@ NSCalendar *ORKTimeOfDayReferenceCalendar();
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
-CGFloat ORKStandardMarginForView(UIView *view);
-
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
@@ -185,8 +183,6 @@ PerformCall; \
 _Pragma("clang diagnostic pop") \
 } while (0)
 
-CGFloat ORKTableViewLeftMargin(UITableView *tableView);
-
 UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
@@ -196,3 +192,10 @@ id ORKDynamicCast_(id x, Class objClass);
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
 const CGFloat ORKScrollToTopAnimationDuration;
+
+ORK_INLINE CGFloat
+ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
+    const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
+    return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
+}
+

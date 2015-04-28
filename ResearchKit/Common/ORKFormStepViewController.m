@@ -155,14 +155,14 @@
 - (void)addFormItem:(ORKFormItem *)item {
     if ([[item impliedAnswerFormat] isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
         _hasChoiceRows = YES;
-        ORKTextChoiceAnswerFormat *taf = (ORKTextChoiceAnswerFormat *)[item impliedAnswerFormat];
+        ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)[item impliedAnswerFormat];
         
-        _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:taf
+        _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:textChoiceAnswerFormat
                                                                                        answer:nil
                                                                            beginningIndexPath:[NSIndexPath indexPathForRow:1 inSection:_index]
                                                                           immediateNavigation:NO];
         
-        [taf.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [textChoiceAnswerFormat.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:idx];
             [(NSMutableArray *)self.items addObject:cellItem];
         }];
@@ -448,8 +448,6 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        
-        [self.view addSubview:_tableView];
     }
 }
 
@@ -692,7 +690,7 @@
                         }
                         break;
                     }
-
+                        
                     case ORKQuestionTypeDateAndTime:
                     case ORKQuestionTypeDate:
                     case ORKQuestionTypeTimeOfDay:
@@ -716,6 +714,7 @@
                         }
                         break;
                     }
+                        
                     case ORKQuestionTypeScale: {
                         class = [ORKFormItemScaleCell class];
                         break;

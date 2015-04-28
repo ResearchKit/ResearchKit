@@ -30,7 +30,7 @@
 
 
 #import "ORKTableViewCell.h"
-#import "ORKHelpers.h"
+#import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
 
 
@@ -58,8 +58,8 @@
         }
         
         _orkSeparatorColor = defaultSeparatorColor;
-        _topSeparatorLeftInset = ORKStandardMarginForView(self);
-        _bottomSeparatorLeftInset = ORKStandardMarginForView(self);
+        _topSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
+        _bottomSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
         
         _topSeparator = [UIView new];
         _bottomSeparator = [UIView new];

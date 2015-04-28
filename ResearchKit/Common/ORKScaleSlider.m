@@ -107,16 +107,16 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    CGSize s = [super intrinsicContentSize];
+    CGSize intrinsicContentSize = [super intrinsicContentSize];
     // If we have a layout width provided by our delegate and we are vertical, use the provided
     // width for the instrinsic content height, and leave the intrinsic content width alone.
     // The intrinsic content width is typically -1, which will allow the slider to fill the
     // available width in the superview.
     CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
     if(_vertical && sliderLayoutWidth > 0) {
-        s = CGSizeMake(s.width, sliderLayoutWidth);
+        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth);
     }
-    return s;
+    return intrinsicContentSize;
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

@@ -35,6 +35,8 @@
 #import "ORKScaleSlider.h"
 #import "ORKScaleRangeLabel.h"
 #import "ORKScaleValueLabel.h"
+#import "ORKSkin.h"
+
 
 // #define LAYOUT_DEBUG 1
 
@@ -139,11 +141,14 @@
             // Horizontal slider constraints
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
                                                                          options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:nil views:views]];
+                                                                         metrics:nil
+                                                                           views:views]];
         
             const CGFloat kMargin = 17.0;
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|" options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:@{@"kMargin": @(kMargin)} views:views]];
+            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
+                                                                         options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
+                                                                         metrics:@{@"kMargin": @(kMargin)}
+                                                                           views:views]];
         }
     }
     return self;
