@@ -155,13 +155,13 @@
     
     if (_backgroundTask != NSNotFound) {
         // End the background task asynchronously, so whatever we're doing cleaning up the recorder has a chance to complete.
-        UIBackgroundTaskIdentifier ident = _backgroundTask;
+        UIBackgroundTaskIdentifier identifier = _backgroundTask;
         _backgroundTask = NSNotFound;
         
         // Hold the background task for a little extra to give time for the next step to kick in,
         // if it is an automatic transition.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] endBackgroundTask:ident];
+            [[UIApplication sharedApplication] endBackgroundTask:identifier];
         });
     }
 }
@@ -193,8 +193,8 @@
         return nil;
     }
     
-    NSString *ident = [self logName];
-    NSString *logName = [ident stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
+    NSString *identifier = [self logName];
+    NSString *logName = [identifier stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
     
     // Class B data protection for temporary file during active task logging.
     ORKDataLogger *logger = [[ORKDataLogger alloc] initWithDirectory:workingDir logName:logName formatter:[ORKJSONLogFormatter new] delegate:nil];
