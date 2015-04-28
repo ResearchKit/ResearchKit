@@ -36,7 +36,6 @@
 #import "ORKSkin.h"
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "ORKSkin.h"
 
 
 @interface ORKConsentReviewController()<UIWebViewDelegate>

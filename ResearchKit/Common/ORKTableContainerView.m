@@ -34,7 +34,6 @@
 #import "ORKSkin.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKVerticalContainerView.h"
-#import "ORKSkin.h"
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView.h"
 
