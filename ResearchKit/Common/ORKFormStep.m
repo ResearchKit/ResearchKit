@@ -126,15 +126,6 @@
     _formItems = formItems;
     
     for (ORKFormItem *item in _formItems) {
-        ORKAnswerFormat *answerFormat = [item impliedAnswerFormat];
-        
-        ORKQuestionType type = answerFormat.questionType;
-        if (type == ORKQuestionTypeScale) {
-            
-            NSString *typeName = @"ORKQuestionTypeScale";
-            
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"ORKFormItem doesn't support type %@", typeName] userInfo:nil];
-        }
         item.step = self;
     }
 }
