@@ -106,11 +106,14 @@
         self.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
         _quantityPairView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.2];
 #endif
-        
+      
+        [self setDistanceInMeters:0];
+        [self heartRateView].title = ORKLocalizedString(@"FITNESS_HEARTRATE_TITLE", nil);
+
         [self addSubview:_quantityPairView];
         [self addSubview:_imageView];
         [self addSubview:_timerLabel];
-        [self setNeedsUpdateConstraints];
+        [self setupConstraints];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
         
@@ -147,11 +150,7 @@
     _topConstraint.constant = (CaptionBaselineToTimerTop - CaptionBaselineToStepViewTop);
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [self removeConstraints:_constraints];
-        _constraints = nil;
-    }
+- (void)setupConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _imageView, _quantityPairView, _imageSpacer1, _imageSpacer2);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_timerLabel][_imageSpacer1(>=0)][_imageView]"
@@ -239,8 +238,6 @@
     [constraints addObject:maxWidthConstraint];
     
     [self addConstraints:constraints];
-    _constraints = constraints;
-    [super updateConstraints];
 }
 
 - (void)setImage:(UIImage *)image {
@@ -277,7 +274,6 @@
 - (void)setHeartRate:(NSString *)heartRate {
     _heartRate = heartRate;
     [self heartRateView].value = heartRate;
-    [self heartRateView].title = ORKLocalizedString(@"FITNESS_HEARTRATE_TITLE", nil);
 }
 
 - (void)updateKeylineVisible {
