@@ -1097,7 +1097,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         }
         [self finishAudioPromptSession];
         [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
-        
     } else if ([self shouldPresentStep:step]) {
         ORKStepViewController *stepViewController = [self viewControllerForStep:step];
         NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
