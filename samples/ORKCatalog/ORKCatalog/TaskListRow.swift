@@ -53,10 +53,10 @@ enum TaskListRow: Int, Printable {
     case Fitness
     case ShortWalk
     case Audio
+    case ToneAudiometry
     case Survey
     case Consent
     case Form
-    case ToneAudiometry
     
     /// Returns an array of all the task list row enum cases.
     static var allCases: [TaskListRow] {
@@ -127,6 +127,9 @@ enum TaskListRow: Int, Printable {
             case .Audio:
                 return NSLocalizedString("Audio Active Task", comment: "")
 
+            case .ToneAudiometry:
+                return NSLocalizedString("Tone Audiometry", comment: "")
+
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
 
@@ -135,9 +138,6 @@ enum TaskListRow: Int, Printable {
 
             case .Form:
                 return NSLocalizedString("Form", comment: "")
-            
-            case .ToneAudiometry:
-                return NSLocalizedString("Tone Audiometry", comment: "")
         }
     }
     
@@ -286,6 +286,9 @@ enum TaskListRow: Int, Printable {
             case .Audio:
                 return audioTask
             
+            case .ToneAudiometry:
+                return toneAudiometryTask
+
             case .Survey:
                 return surveyTask
             
@@ -294,9 +297,6 @@ enum TaskListRow: Int, Printable {
             
             case .Form:
                 return formTask
-
-            case .ToneAudiometry:
-                return toneAudiometryTask
         }
     }
 

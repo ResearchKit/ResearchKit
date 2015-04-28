@@ -292,7 +292,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  with the volume being progressively increased until the participant taps a button.
 
  A tone audiometry task can be used to measure properties of the user's hearing,
- based on its reaction to a wide range of frequencies.
+ based on their reaction to a wide range of frequencies.
 
  Data collected in this task consists of audio signal amplitude for specific
  frequencies and channels.

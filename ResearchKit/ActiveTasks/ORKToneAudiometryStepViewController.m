@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -64,6 +64,10 @@
     }
 
     return self;
+}
+
+- (void)dealloc {
+    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self selector:@selector(testExpired) object:nil];
 }
 
 - (void)initializeInternalButtonItems {
@@ -150,10 +154,10 @@
     }
 
     ORKToneAudiometrySample *sample = [ORKToneAudiometrySample new];
-    NSUInteger frequencyIndex = self.currentTestIndex/2;
+    NSUInteger frequencyIndex = (self.currentTestIndex / 2);
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
     sample.frequency = frequency;
-    sample.channel = (self.currentTestIndex%2 == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
+    sample.channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
     sample.amplitude = @(self.audioGenerator.volumeAmplitude);
 
     [self.samples addObject:sample];
@@ -187,15 +191,13 @@
 - (void)startCurrentTest {
     const NSTimeInterval SoundDuration = self.toneAudiometryStep.toneDuration;
 
-    NSUInteger frequencyIndex = self.currentTestIndex/2;
-    if (frequencyIndex >= self.testingFrequencies.count) {
-        return;
-    }
+    NSUInteger frequencyIndex = (self.currentTestIndex / 2);
+    NSAssert(frequencyIndex < self.testingFrequencies.count, nil);
 
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
-    ORKAudioChannel channel = (self.currentTestIndex%2 == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
+    ORKAudioChannel channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
 
-    CGFloat progress = 0.001 + (CGFloat)self.currentTestIndex/(self.testingFrequencies.count * 2);
+    CGFloat progress = 0.001 + (CGFloat)self.currentTestIndex / (self.testingFrequencies.count * 2);
     [self.toneAudiometryContentView setProgress:progress
                                         caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), frequency] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), frequency]
                                        animated:YES];
