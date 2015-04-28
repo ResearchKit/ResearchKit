@@ -234,7 +234,7 @@ UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view) {
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset) {
     UIEdgeInsets insets = scrollView.contentInset;
-    if (insets.bottom != bottomInset) {
+    if (!ORKCGFloatNearlyEqualToFloat(insets.bottom, bottomInset)) {
         CGPoint savedOffset = scrollView.contentOffset;
         
         insets.bottom = bottomInset;

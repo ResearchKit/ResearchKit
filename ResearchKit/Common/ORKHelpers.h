@@ -192,3 +192,10 @@ id ORKDynamicCast_(id x, Class objClass);
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
 const CGFloat ORKScrollToTopAnimationDuration;
+
+ORK_INLINE CGFloat
+ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
+    const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
+    return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
+}
+
