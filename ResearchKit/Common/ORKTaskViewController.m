@@ -1096,7 +1096,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         stepViewController = [self viewControllerForStep:step];
         
         if (stepViewController == nil) {
-            
             if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
                 [self.delegate taskViewController:self didChangeResult:[self result]];
             }
@@ -1104,7 +1103,6 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
             [self finishAudioPromptSession];
             
             [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
-            
         } else {
             [self showViewController:stepViewController goForward:YES animated:YES];
         }
