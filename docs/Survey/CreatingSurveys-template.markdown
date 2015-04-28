@@ -279,7 +279,7 @@ is usually necessary.
 
     - (ORKStep *)stepAfterStep:(ORKStep *)step
                     withResult:(id<ORKTaskResultSource>)result {
-        NSString *ident = step.identiifer;
+        NSString *ident = step.identifer;
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:ident];  
         if ([ident isEqualToString:self.qualificationStep.identifier])
         {
@@ -289,7 +289,7 @@ is usually necessary.
             {
                 ORKBooleanQuestionResult *booleanResult = result;
                 NSNumber *booleanAnswer = booleanResult.booleanAnswer;
-                if (booleanAnswer )
+                if (booleanAnswer)
                 {
                     return booleanAnswer.boolValue ? self.regularQuestionStep : self.terminationStep;
                 }
