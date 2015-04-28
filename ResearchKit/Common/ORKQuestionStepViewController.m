@@ -526,8 +526,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         class = [ORKSurveyAnswerCellForTextField class];
     } else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
-    } else if ([self.questionStep isFormatVerticalScale]) {
-        class = [ORKSurveyAnswerCellForVerticalScale class];
     }
     
     identifier = NSStringFromClass(class);
@@ -699,14 +697,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         case ORKQuestionTypeDate:
         case ORKQuestionTypeDateAndTime:{
             height = [ORKSurveyAnswerCellForPicker suggestedCellHeightForView:tableView];
-        }
-            break;
-        case ORKQuestionTypeScale:{
-            if ([self.questionStep isFormatVerticalScale]) {
-                height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
-            } else {
-                height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
-            }
         }
             break;
         default:{
