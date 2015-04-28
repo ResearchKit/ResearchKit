@@ -31,6 +31,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @protocol ORKScaleSliderLayoutWidthProvider <NSObject>
 
 @property (nonatomic, readonly) CGFloat sliderLayoutWidth;
@@ -49,5 +50,3 @@
 @property (nonatomic, weak, nullable) id<ORKScaleSliderLayoutWidthProvider> delegate;
 
 @end
-
-

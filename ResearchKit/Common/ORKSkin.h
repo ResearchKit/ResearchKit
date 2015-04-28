@@ -105,6 +105,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
 
 typedef NS_ENUM(NSInteger, ORKScreenType) {
     ORKScreenTypeiPhone6,
+    ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
@@ -114,5 +115,12 @@ typedef NS_ENUM(NSInteger, ORKScreenType) {
 ORKScreenType ORKGetScreenTypeForWindow(UIWindow *__nullable window);
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable window);
+
+CGFloat ORKTableViewCellLeftMargin(UIView *view);
+CGFloat ORKStandardMarginForView(UIView *view);
+UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UIView *view);
+UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view);
+UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view);
+void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 
 NS_ASSUME_NONNULL_END

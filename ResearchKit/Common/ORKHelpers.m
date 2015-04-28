@@ -37,8 +37,6 @@
 #import "ORKDefines_Private.h"
 
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen);
-
 NSURL *ORKCreateRandomBaseURL() {
     return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [[ NSUUID UUID] UUIDString]]];
 }
@@ -135,10 +133,6 @@ UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
 
 UIColor *ORKRGB(uint32_t x) {
     return ORKRGBA(x, 1.0f);
-}
-
-CGFloat ORKStandardMarginForView(UIView *view) {
-    return ORKWantsWideContentMargins([UIScreen mainScreen]) ? 20.0 : 16.0;
 }
 
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor) {
