@@ -66,10 +66,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self selector:@selector(testExpired) object:nil];
-}
-
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
 
@@ -162,7 +158,6 @@
 
     [self.samples addObject:sample];
 
-    [NSRunLoop cancelPreviousPerformRequestsWithTarget:self selector:@selector(testExpired) object:nil];
     [self.audioGenerator stop];
 
     [self startNextTestOrFinish];
@@ -191,13 +186,14 @@
 - (void)startCurrentTest {
     const NSTimeInterval SoundDuration = self.toneAudiometryStep.toneDuration;
 
-    NSUInteger frequencyIndex = (self.currentTestIndex / 2);
+    NSUInteger testIndex = self.currentTestIndex;
+    NSUInteger frequencyIndex = (testIndex / 2);
     NSAssert(frequencyIndex < self.testingFrequencies.count, nil);
 
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
-    ORKAudioChannel channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
+    ORKAudioChannel channel = ((testIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
 
-    CGFloat progress = 0.001 + (CGFloat)self.currentTestIndex / (self.testingFrequencies.count * 2);
+    CGFloat progress = 0.001 + (CGFloat)testIndex / (self.testingFrequencies.count * 2);
     [self.toneAudiometryContentView setProgress:progress
                                         caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), frequency] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), frequency]
                                        animated:YES];
@@ -206,7 +202,14 @@
                                     onChannel:channel
                                fadeInDuration:SoundDuration];
 
-    [self performSelector:@selector(testExpired) withObject:nil afterDelay:SoundDuration];
+    __weak typeof(self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SoundDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        typeof(self)strongSelf = weakSelf;
+
+        if (strongSelf.currentTestIndex == testIndex) {
+            [strongSelf testExpired];
+        }
+    });
 }
 
 @end
