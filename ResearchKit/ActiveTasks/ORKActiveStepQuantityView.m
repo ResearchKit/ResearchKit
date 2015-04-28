@@ -50,6 +50,8 @@
     ORKQuantityLabel *_valueLabel;
     ORKTintedImageView *_imageView;
     UIView *_valueHolder;
+    
+    NSLayoutConstraint *_zeroWidthConstraint;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -82,6 +84,7 @@
             view.isAccessibilityElement = NO;
         }
         
+        [self setupConstraints];
         [self setNeedsUpdateConstraints];
     }
     return self;
@@ -108,19 +111,13 @@
     _imageView.image = image;
 }
 
-- (void)updateConstraints {
-    [self removeConstraints:[self constraints]];
+- (void)setupConstraints {
     
     const CGFloat TitleBaselineToValueBaseline = 40;
     const CGFloat ValueBaselineToBottom = 36;
     
-    if (! _enabled) {
-        NSLayoutConstraint *zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
-        zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
-        [self addConstraint:zeroWidthConstraint];
-    }
-    NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
     NSMutableArray *additionalConstraints = [NSMutableArray array];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
     [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]"
                                                                                        options:0
                                                                                        metrics:nil
@@ -176,10 +173,20 @@
                                                                   attribute:NSLayoutAttributeRight
                                                                  multiplier:1 constant:0]];
     for (NSLayoutConstraint *constraint in additionalConstraints) {
-        constraint.priority = UILayoutPriorityDefaultHigh;
+        constraint.priority = UILayoutPriorityRequired-2;
     }
-    [self addConstraints:additionalConstraints];
     
+    [NSLayoutConstraint activateConstraints:additionalConstraints];
+    
+    
+    NSLayoutConstraint *zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
+    zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
+    _zeroWidthConstraint = zeroWidthConstraint;
+    _zeroWidthConstraint.active = !_enabled;
+}
+
+- (void)updateConstraints {
+    _zeroWidthConstraint.active = !_enabled;
     [super updateConstraints];
 }
 
@@ -206,7 +213,6 @@
 
 @implementation ORKQuantityPairView {
     UIView *_metricKeyline;
-    NSArray *_constraints;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -226,16 +232,13 @@
         [self addSubview:_leftView];
         [self addSubview:_rightView];
         [self addSubview:_metricKeyline];
-        [self setNeedsUpdateConstraints];
+        [self setupConstraints];
     }
     return self;
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [self removeConstraints:_constraints];
-        _constraints = nil;
-    }
+- (void)setupConstraints {
+    
     NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_leftView, _rightView, _metricKeyline);
     
@@ -254,6 +257,20 @@
         constraint.priority = UILayoutPriorityDefaultHigh+1;
     }
     [constraints addObjectsFromArray:horizConstraints];
+    
+    // Ensure baseline alignment of title and value
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftView.titleLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_rightView.titleLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                       multiplier:1 constant:0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftView.valueLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_rightView.valueLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                       multiplier:1 constant:0]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]"
                                                                              options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight
@@ -289,9 +306,7 @@
     equalWidthConstraint.priority = UILayoutPriorityDefaultLow;
     [constraints addObject:equalWidthConstraint];
     
-    [self addConstraints:constraints];
-    _constraints = constraints;
-    [super updateConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setKeylineHidden:(BOOL)keylineHidden {
