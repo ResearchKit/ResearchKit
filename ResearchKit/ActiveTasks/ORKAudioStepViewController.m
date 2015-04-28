@@ -75,13 +75,6 @@
     [self start];
 }
 
-- (void)prepareStep {
-    if (_audioRecorder.outputDirectory == nil) {
-        @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
-    }
-    [super prepareStep];
-}
-
 - (void)audioRecorderDidChange {
     _audioRecorder.audioRecorder.meteringEnabled = YES;
     [self setAvAudioRecorder:_audioRecorder.audioRecorder];
