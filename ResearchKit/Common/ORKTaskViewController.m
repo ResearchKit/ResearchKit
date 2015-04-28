@@ -909,9 +909,9 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (BOOL)shouldPresentStep:(ORKStep *)step {
-    BOOL shouldPresent = YES;
+    BOOL shouldPresent = (step != nil);
     
-    if ([self.delegate respondsToSelector:@selector(taskViewController:shouldPresentStep:)]) {
+    if (shouldPresent && [self.delegate respondsToSelector:@selector(taskViewController:shouldPresentStep:)]) {
         shouldPresent = [self.delegate taskViewController:self shouldPresentStep:step];
     }
     
@@ -1090,25 +1090,19 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     }
     
     ORKStep *step = [self nextStep];
-    ORKStepViewController *stepViewController = nil;
     
-    if ([self shouldPresentStep:step]) {
-        stepViewController = [self viewControllerForStep:step];
-        
-        if (stepViewController == nil) {
-            
-            if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
-                [self.delegate taskViewController:self didChangeResult:[self result]];
-            }
-            
-            [self finishAudioPromptSession];
-            
-            [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
-            
-        } else {
-            [self showViewController:stepViewController goForward:YES animated:YES];
+    if (step == nil) {
+        if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
+            [self.delegate taskViewController:self didChangeResult:[self result]];
         }
+        [self finishAudioPromptSession];
+        [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
+    } else if ([self shouldPresentStep:step]) {
+        ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+        NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
+        [self showViewController:stepViewController goForward:YES animated:YES];
     }
+    
 }
 
 - (IBAction)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
