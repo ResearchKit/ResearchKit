@@ -160,12 +160,16 @@ The following code snippet shows how to create a task with a visual consent step
 
 The ResearchKit framework can help you generate a PDF of the signed consent form and provide it to the user. For example, your app could generate the PDF locally, write it to disk, email it to the participant, display it in the app, or send it to a server.
 
-To do this, first take any signature results from the completed consent review, and apply the resulting signatures to your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
+To do this, first take any signature results from the completed consent review, and apply the resulting signatures to a copy of your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
+
+    ORKConsentDocument *documentCopy = [document copy];
 
     ORKConsentSignatureResult *signatureResult =
       (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:kConsentReviewIdentifier] firstResult];
-    [signatureResult applyToDocument:document];
+    [signatureResult applyToDocument:documentCopy];
     
-    [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
+    [documentCopy makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
         // Write the PDF data to disk, email it, display it, or send it to a server.
     }];
+    
+You can only apply a signature result to a new copy of a consent document. 

@@ -479,8 +479,10 @@
             
             BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
             
+            BOOL scale = (answerFormat.questionType == ORKQuestionTypeScale);
+            
             // Items require individual section
-            if (multiCellChoices || multilineTextEntry) {
+            if (multiCellChoices || multilineTextEntry || scale) {
                 // Add new section
                 section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
                 [_sections addObject:section];
@@ -686,23 +688,22 @@
                         } else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
                             class = [ORKFormItemPickerCell class];
                         }
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeDateAndTime:
                     case ORKQuestionTypeDate:
                     case ORKQuestionTypeTimeOfDay:
                     case ORKQuestionTypeTimeInterval: {
                         class = [ORKFormItemPickerCell class];
-                        
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeDecimal:
-                    case ORKQuestionTypeInteger:{
+                    case ORKQuestionTypeInteger: {
                         class = [ORKFormItemNumericCell class];
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeText: {
                         ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
@@ -711,8 +712,13 @@
                         } else {
                             class = [ORKFormItemTextCell class];
                         }
-                    }
                         break;
+                    }
+                        
+                    case ORKQuestionTypeScale: {
+                        class = [ORKFormItemScaleCell class];
+                        break;
+                    }
                         
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);

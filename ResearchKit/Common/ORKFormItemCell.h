@@ -99,4 +99,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface ORKFormItemScaleCell : ORKFormItemCell
+
+@end
+
 NS_ASSUME_NONNULL_END
