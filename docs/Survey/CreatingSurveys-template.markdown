@@ -279,7 +279,7 @@ is usually necessary.
 
     - (ORKStep *)stepAfterStep:(ORKStep *)step
                     withResult:(id<ORKTaskResultSource>)result {
-        NSString *ident = step.identifer;
+        NSString *ident = step.identifier;
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:ident];  
         if ([ident isEqualToString:self.qualificationStep.identifier])
         {
