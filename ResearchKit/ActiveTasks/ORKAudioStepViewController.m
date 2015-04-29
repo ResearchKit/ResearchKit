@@ -51,6 +51,7 @@
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
     ORKActiveStepTimer *_timer;
+    NSError *_audioRecorderError;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
@@ -97,12 +98,14 @@
 }
 
 - (void)doSample {
-    [_avAudioRecorder updateMeters];
-    float value = [_avAudioRecorder averagePowerForChannel:0];
-    // Assume value is in range roughly -60dB to 0dB
-    float clampedValue = MAX(value/60.0, -1) + 1;
-    [_audioContentView addSample:@(clampedValue)];
-    _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
+    if (!_audioRecorderError) {
+        [_avAudioRecorder updateMeters];
+        float value = [_avAudioRecorder averagePowerForChannel:0];
+        // Assume value is in range roughly -60dB to 0dB
+        float clampedValue = MAX(value/60.0, -1) + 1;
+        [_audioContentView addSample:@(clampedValue)];
+        _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
+    }
 }
 
 - (void)startNewTimerIfNeeded {
@@ -158,6 +161,11 @@
 - (void)setAvAudioRecorder:(AVAudioRecorder *)recorder {
     _avAudioRecorder = nil;
     _avAudioRecorder = recorder;
+}
+
+- (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
+    [super recorder:recorder didFailWithError:error];
+    _audioRecorderError = error;
 }
 
 @end
