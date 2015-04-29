@@ -38,11 +38,12 @@
 @property (nonatomic, strong) ORKUnitLabel *captionLabel;
 @property (nonatomic, strong) UIProgressView *progressView;
 
+- (void)setupConstraints;
+
 @end
 
 
 @implementation ORKToneAudiometryContentView {
-    NSArray *_constraints;
     ORKScreenType _screenType;
 }
 
@@ -50,7 +51,7 @@
     self = [super init];
     if (self) {
 
-        _screenType = ORKScreenTypeiPhone4;
+        _screenType = ORKGetScreenTypeForWindow(self.window);
         _captionLabel = [ORKUnitLabel new];
         _captionLabel.textAlignment = NSTextAlignmentCenter;
         _captionLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -72,6 +73,7 @@
 
         _captionLabel.text = nil;
 
+        [self setupConstraints];
         [self setNeedsUpdateConstraints];
     }
 
@@ -99,18 +101,7 @@
     self.tapButton.enabled = NO;
 }
 
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)updateConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-
+- (void)setupConstraints {
     ORKScreenType screenType = _screenType;
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
@@ -174,11 +165,9 @@
                                                         attribute:NSLayoutAttributeCenterX
                                                        multiplier:1 constant:0]];
 
-    _constraints = constraints;
-    [self addConstraints:_constraints];
+    [self addConstraints:constraints];
 
     [NSLayoutConstraint activateConstraints:constraints];
-    [super updateConstraints];
 }
 
 @end

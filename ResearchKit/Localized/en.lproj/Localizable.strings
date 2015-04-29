@@ -169,9 +169,9 @@
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
 "TONE_AUDIOMETRY_INTENDED_USE" = "This activity evaluates your hearing by testing it with different types of sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Put your headphones on, and turn up the volume to a sensible level. Tap the button every time your start hearing a sound.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Put your headphones on, and turn up the volume to a sensible level. Tap the button every time you start hearing a sound.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time your start hearing a sound.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time you start hearing a sound.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
 

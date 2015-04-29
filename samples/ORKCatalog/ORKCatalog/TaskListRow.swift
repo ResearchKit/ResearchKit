@@ -128,7 +128,7 @@ enum TaskListRow: Int, Printable {
                 return NSLocalizedString("Audio Active Task", comment: "")
 
             case .ToneAudiometry:
-                return NSLocalizedString("Tone Audiometry", comment: "")
+                return NSLocalizedString("Tone Audiometry Active Task", comment: "")
 
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")

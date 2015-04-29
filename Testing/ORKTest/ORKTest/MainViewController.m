@@ -47,6 +47,7 @@ static NSString * const ScreeningTaskIdentifier = @"screening";
 static NSString * const ScalesTaskIdentifier = @"scales";
 static NSString * const ImageChoicesTaskIdentifier = @"images";
 static NSString * const AudioTaskIdentifier = @"audio";
+static NSString * const ToneAudiometryTaskIdentifier = @"tone-audiometry";
 static NSString * const FitnessTaskIdentifier = @"fitness";
 static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
@@ -121,6 +122,13 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         [button addTarget:self action:@selector(showAudioTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Audio Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"audio"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showToneAudiometryTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Tone Audiometry Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"tone_audiometry"];
         buttons[buttonKeys.lastObject] = button;
     }
     {
@@ -297,6 +305,14 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                           duration:10
                                                  recordingSettings:nil
                                                            options:(ORKPredefinedTaskOption)0];
+        return task;
+    } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
+        id<ORKTask> task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:ToneAudiometryTaskIdentifier
+                                                     intendedUseDescription:nil
+                                                          speechInstruction:nil
+                                                     shortSpeechInstruction:nil
+                                                               toneDuration:20
+                                                                    options:(ORKPredefinedTaskOption)0];
         return task;
     } else if ([identifier isEqualToString:MiniFormTaskIdentifier]) {
         return [self makeMiniFormTask];
@@ -1246,6 +1262,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     [self beginTaskWithIdentifier:AudioTaskIdentifier];
 }
 
+- (IBAction)showToneAudiometryTask:(id)sender {
+    [self beginTaskWithIdentifier:ToneAudiometryTaskIdentifier];
+}
+
 - (IBAction)showTwoFingerTappingTask:(id)sender {
     [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
 }
@@ -1915,6 +1935,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             else if ([result isKindOfClass:[ORKFileResult class]]) {
                 ORKFileResult *fileResult = (ORKFileResult *)result;
                 NSLog(@"    File: %@", fileResult.fileURL);
+            }
+            else if ([result isKindOfClass:[ORKToneAudiometryResult class]])
+            {
+                ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
+                NSLog(@"    %@:     %@", tor.identifier, tor.samples);
             }
             else
             {

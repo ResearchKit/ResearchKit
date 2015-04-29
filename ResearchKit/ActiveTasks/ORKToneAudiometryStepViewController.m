@@ -95,6 +95,12 @@
     [self start];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    [self.audioGenerator stop];
+}
+
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
 

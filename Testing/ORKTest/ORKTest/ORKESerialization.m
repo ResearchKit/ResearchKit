@@ -390,6 +390,13 @@ ret =
         (@{
           PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
           })),
+  ENTRY(ORKToneAudiometryStep,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKToneAudiometryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+        },
+        (@{
+           PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
+           })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -750,6 +757,18 @@ ret =
            PROPERTY(fileURL, NSURL, NSObject, NO,
                     ^id(id url) { return [url absoluteString]; },
                     ^id(id string) { return [NSURL URLWithString:string]; })
+           })),
+  ENTRY(ORKToneAudiometrySample,
+        nil,
+        (@{
+           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(channel, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(amplitude, NSNumber, NSObject, NO, nil, nil)
+           })),
+  ENTRY(ORKToneAudiometryResult,
+        nil,
+        (@{
+           PROPERTY(samples, ORKToneAudiometrySample, NSArray, NO, nil, nil),
            })),
   ENTRY(ORKQuestionResult,
         nil,
