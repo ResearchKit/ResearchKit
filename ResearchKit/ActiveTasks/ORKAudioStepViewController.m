@@ -98,14 +98,15 @@
 }
 
 - (void)doSample {
-    if (!_audioRecorderError) {
-        [_avAudioRecorder updateMeters];
-        float value = [_avAudioRecorder averagePowerForChannel:0];
-        // Assume value is in range roughly -60dB to 0dB
-        float clampedValue = MAX(value/60.0, -1) + 1;
-        [_audioContentView addSample:@(clampedValue)];
-        _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
+    if (_audioRecorderError) {
+        return;
     }
+    [_avAudioRecorder updateMeters];
+    float value = [_avAudioRecorder averagePowerForChannel:0];
+    // Assume value is in range roughly -60dB to 0dB
+    float clampedValue = MAX(value/60.0, -1) + 1;
+    [_audioContentView addSample:@(clampedValue)];
+    _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
 }
 
 - (void)startNewTimerIfNeeded {
