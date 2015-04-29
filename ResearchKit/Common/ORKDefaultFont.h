@@ -27,13 +27,10 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef Itasca_ORKSkin_h
-#define Itasca_ORKSkin_h
+
 
 @protocol ORKDefaultFont <NSObject>
 
 + (UIFont *)defaultFont;
 
 @end
-
-#endif

@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKContinueButton.h"
 #import "ORKSkin.h"
 
-static const CGFloat _ContinueButtonTouchMargin = 10;
+
+static const CGFloat kContinueButtonTouchMargin = 10;
 
 @implementation ORKContinueButton {
     NSLayoutConstraint *_widthConstraint;
@@ -46,8 +48,6 @@ static const CGFloat _ContinueButtonTouchMargin = 10;
         self.contentEdgeInsets = (UIEdgeInsets){.left=6,.right=6};
         
         [self setNeedsUpdateConstraints];
-        
-        
     }
     return self;
 }
@@ -55,7 +55,6 @@ static const CGFloat _ContinueButtonTouchMargin = 10;
 - (void)didMoveToWindow {
     [self updateConstraintConstants];
 }
-
 
 - (void)updateConstraintConstants {
     
@@ -92,18 +91,19 @@ static const CGFloat _ContinueButtonTouchMargin = 10;
     
 }
 
-
-
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
     return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    CGRect outsetRect = UIEdgeInsetsInsetRect(self.bounds, (UIEdgeInsets){-_ContinueButtonTouchMargin,-_ContinueButtonTouchMargin,-_ContinueButtonTouchMargin,-_ContinueButtonTouchMargin});
+    CGRect outsetRect = UIEdgeInsetsInsetRect(self.bounds,
+                                              (UIEdgeInsets){-kContinueButtonTouchMargin,
+                                                             -kContinueButtonTouchMargin,
+                                                             -kContinueButtonTouchMargin,
+                                                             -kContinueButtonTouchMargin});
     BOOL isInside = [super pointInside:point withEvent:event] || CGRectContainsPoint(outsetRect, point);
     return isInside;
 }
 
 @end
-

@@ -155,22 +155,19 @@
 - (void)addFormItem:(ORKFormItem *)item {
     if ([[item impliedAnswerFormat] isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
         _hasChoiceRows = YES;
-        ORKTextChoiceAnswerFormat *taf = (ORKTextChoiceAnswerFormat *)[item impliedAnswerFormat];
+        ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)[item impliedAnswerFormat];
         
-        _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:taf
+        _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:textChoiceAnswerFormat
                                                                                        answer:nil
                                                                            beginningIndexPath:[NSIndexPath indexPathForRow:1 inSection:_index]
                                                                           immediateNavigation:NO];
         
-        [taf.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-           
+        [textChoiceAnswerFormat.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:idx];
             [(NSMutableArray *)self.items addObject:cellItem];
-
         }];
-    
-    }
-    else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
+        
+    } else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
         _hasChoiceRows = YES;
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
@@ -180,8 +177,8 @@
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
             [(NSMutableArray *)self.items addObject:cellItem];
         }
-    }
-    else {
+        
+    } else {
         ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item];
        [(NSMutableArray *)self.items addObject:cellItem];
     }
@@ -451,8 +448,6 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        
-        [self.view addSubview:_tableView];
     }
 }
 
@@ -484,8 +479,10 @@
             
             BOOL multilineTextEntry = (answerFormat.questionType == ORKQuestionTypeText && [(ORKTextAnswerFormat *)answerFormat multipleLines]);
             
+            BOOL scale = (answerFormat.questionType == ORKQuestionTypeScale);
+            
             // Items require individual section
-            if (multiCellChoices || multilineTextEntry) {
+            if (multiCellChoices || multilineTextEntry || scale) {
                 // Add new section
                 section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
                 [_sections addObject:section];
@@ -610,8 +607,7 @@
                 dqr.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier];
                 dqr.timeZone = systemTimeZone;
             }
-        }
-        else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
+        } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
             ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
             nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
         }
@@ -689,27 +685,25 @@
                     case ORKQuestionTypeMultipleChoice: {
                         if ([formItem.impliedAnswerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
                             class = [ORKFormItemImageSelectionCell class];
-                        }
-                        else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
+                        } else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
                             class = [ORKFormItemPickerCell class];
                         }
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeDateAndTime:
                     case ORKQuestionTypeDate:
                     case ORKQuestionTypeTimeOfDay:
                     case ORKQuestionTypeTimeInterval: {
                         class = [ORKFormItemPickerCell class];
-                        
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeDecimal:
-                    case ORKQuestionTypeInteger:{
+                    case ORKQuestionTypeInteger: {
                         class = [ORKFormItemNumericCell class];
-                    }
                         break;
+                    }
                         
                     case ORKQuestionTypeText: {
                         ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
@@ -718,8 +712,13 @@
                         } else {
                             class = [ORKFormItemTextCell class];
                         }
-                    }
                         break;
+                    }
+                        
+                    case ORKQuestionTypeScale: {
+                        class = [ORKFormItemScaleCell class];
+                        break;
+                    }
                         
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
@@ -813,7 +812,7 @@
         } else {
             return 40;
         }
-    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]){
+    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }

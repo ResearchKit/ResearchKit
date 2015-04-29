@@ -33,6 +33,7 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 
+
 #define PPI 72
 #define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
 
@@ -40,7 +41,6 @@ static const CGFloat A4Width = 8.26666667;
 static const CGFloat A4Height = 11.6916667;
 static const CGFloat LetterWidth = 8.5f;
 static const CGFloat LetterHeight = 11.0f;
-
 
 #pragma mark - ORKHTMLPDFWriter Interface
 
@@ -65,9 +65,6 @@ static const CGFloat LetterHeight = 11.0f;
 
 - (void)drawFooterForPageAtIndex:(NSInteger)pageIndex
                           inRect:(CGRect)footerRect {
-    
-    
-    
     NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex+1), (long)[self numberOfPages]];
     
     if (footer) {
@@ -85,10 +82,10 @@ static const CGFloat LetterHeight = 11.0f;
 
 @end
 
+
 @interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
     id _selfRetain;
 }
-
 
 @property (nonatomic) CGSize pageSize;
 @property (nonatomic) UIEdgeInsets pageMargins;
@@ -98,6 +95,7 @@ static const CGFloat LetterHeight = 11.0f;
 @property (nonatomic, copy) void (^completionBlock)(NSData *data, NSError *error);
 
 @end
+
 
 @implementation ORKHTMLPDFWriter
 

@@ -35,15 +35,15 @@
 
 
 #if !defined(ORK_INLINE)
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-#  define ORK_INLINE static inline
-# elif defined(__cplusplus)
-#  define ORK_INLINE static inline
-# elif defined(__GNUC__)
-#  define ORK_INLINE static __inline__
-# else
-#  define ORK_INLINE static
-# endif
+#  if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#    define ORK_INLINE static inline
+#  elif defined(__cplusplus)
+#    define ORK_INLINE static inline
+#  elif defined(__GNUC__)
+#    define ORK_INLINE static __inline__
+#  else
+#    define ORK_INLINE static
+#  endif
 #endif
 
 #define ORK_NARG(...) ORK_NARG_(__VA_ARGS__,ORK_RSEQ_N())
@@ -91,20 +91,18 @@
  * Helpers for completions which call the block only if non-nil
  *
  */
-
 #define BLOCK_EXEC(block, ...) if (block) { block(__VA_ARGS__); };
 
 #define DISPATCH_EXEC(queue, block, ...) if (block) { dispatch_async(queue, ^{ block(__VA_ARGS__); } ); }
-
 
 /*
  * For testing background delivery
  *
  */
 #if ORK_BACKGROUND_DELIVERY_TEST
-#define ORK_HEALTH_UPDATE_FREQUENCY HKUpdateFrequencyImmediate
+#  define ORK_HEALTH_UPDATE_FREQUENCY HKUpdateFrequencyImmediate
 #else
-#define ORK_HEALTH_UPDATE_FREQUENCY HKUpdateFrequencyDaily
+#  define ORK_HEALTH_UPDATE_FREQUENCY HKUpdateFrequencyDaily
 #endif
 
 // Find the first object of the specified class, using method as the iterator
@@ -112,7 +110,6 @@
 
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
-
 NSBundle *ORKBundle();
 
 // Pass 0xcccccc and get color #cccccc
@@ -129,9 +126,9 @@ NSString *ORKSignatureStringFromDate(NSDate *date);
 NSURL *ORKCreateRandomBaseURL();
 
 #if defined(DEBUG) && DEBUG
-#define ORK_Log_Debug(fmt,...) NSLog(@"%s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
+#  define ORK_Log_Debug(fmt,...) NSLog(@"%s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
 #else
-#define ORK_Log_Debug(...)
+#  define ORK_Log_Debug(...)
 #endif
 
 #define ORK_Log_Oops(fmt,...) NSLog(@"[ORK][OOPS] %s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
@@ -140,7 +137,6 @@ NSURL *ORKCreateRandomBaseURL();
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
 
 CGFloat ORKExpectedLabelHeight(UILabel *label);
-
 void ORKAdjustHeightForLabel(UILabel *label);
 
 // build a image with color
@@ -148,18 +144,14 @@ UIImage *ORKImageWithColor(UIColor *color);
 
 void ORKEnableAutoLayoutForViews(NSArray *views);
 
-
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter();
 NSDateComponentsFormatter *ORKDurationStringFormatter();
 
 NSDateFormatter *ORKTimeOfDayLabelFormatter();
 NSCalendar *ORKTimeOfDayReferenceCalendar();
 
-
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
-
-CGFloat ORKStandardMarginForView(UIView *view);
 
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
@@ -191,8 +183,6 @@ PerformCall; \
 _Pragma("clang diagnostic pop") \
 } while (0)
 
-CGFloat ORKTableViewLeftMargin(UITableView *tableView);
-
 UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
@@ -202,3 +192,10 @@ id ORKDynamicCast_(id x, Class objClass);
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
 
 const CGFloat ORKScrollToTopAnimationDuration;
+
+ORK_INLINE CGFloat
+ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
+    const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
+    return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
+}
+

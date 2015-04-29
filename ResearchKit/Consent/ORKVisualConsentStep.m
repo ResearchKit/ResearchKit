@@ -35,6 +35,7 @@
 #import "ORKConsentDocument_Internal.h"
 #import "ORKVisualConsentStepViewController.h"
 
+
 @implementation ORKVisualConsentStep
 
 + (Class)stepViewControllerClass {
@@ -83,10 +84,6 @@
 - (NSUInteger)hash {
     return [super hash] ^ [self.consentDocument hash];
 }
-
-
-
-
 
 - (BOOL)showsProgress {
     return NO;

@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTextButton.h"
+
 
 @implementation ORKTextButton
 
@@ -54,7 +56,6 @@
 }
 
 - (void)init_ORKTextButton {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
@@ -89,7 +90,6 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    
     // Fix for <rdar://problem/19528969>
     UILabel *label = nil;
     
@@ -111,8 +111,7 @@
         return CGSizeMake(labelSize.width+horizontalPadding,
                           labelSize.height+verticalPadding);
     }
-    
-    
     return [super intrinsicContentSize];
 }
+
 @end

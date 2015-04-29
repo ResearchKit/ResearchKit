@@ -69,7 +69,6 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
 @protocol ORKStepViewControllerDelegate <NSObject>
 
 @required
-
 /**
  Tells the delegate when the user has done something that requires navigation, such as
  tap the Back or a Next button, or enter a response to a nonoptional

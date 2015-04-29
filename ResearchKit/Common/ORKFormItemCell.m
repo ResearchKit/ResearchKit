@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -42,6 +43,7 @@
 #import "ORKFormTextView.h"
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
+#import "ORKScaleSliderView.h"
 
 
 static const CGFloat kVMargin = 10.0;
@@ -349,7 +351,9 @@ static const CGFloat kHMargin = 15.0;
 - (void)updateValueLabel {
     ORKUnitTextField *textField = [self textField];
     
-    if (textField == nil) { return; }
+    if (textField == nil) {
+        return;
+    }
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;
@@ -368,9 +372,9 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    ret = [self.textField resignFirstResponder] || ret;
-    return ret;
+    BOOL resign = [super resignFirstResponder];
+    resign = [self.textField resignFirstResponder] || resign;
+    return resign;
 }
 
 - (void)inputValueDidClear {
@@ -645,26 +649,38 @@ static const CGFloat kHMargin = 15.0;
         NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
 
         [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:dictionary]];
         
         [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:dictionary]];
         
         
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:120.0];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                           multiplier:1.0
+                                                                             constant:120.0];
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
         [self.contentView addConstraint:heightConstraint];
     }
 }
 
 - (void)applyAnswerFormat {
-    ORKAnswerFormat *af = [self.formItem impliedAnswerFormat];
-    if ([af isKindOfClass:[ORKTextAnswerFormat class]]) {
-        ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)af;
-        _maxLength = [answerFormat maximumLength];
-        _textView.autocorrectionType = answerFormat.autocorrectionType;
-        _textView.autocapitalizationType = answerFormat.autocapitalizationType;
-        _textView.spellCheckingType = answerFormat.spellCheckingType;
+    ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
+    if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
+        _maxLength = [textAnswerFormat maximumLength];
+        _textView.autocorrectionType = textAnswerFormat.autocorrectionType;
+        _textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
+        _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
     } else {
         _maxLength = 0;
     }
@@ -687,9 +703,7 @@ static const CGFloat kHMargin = 15.0;
         if ([_textView isFirstResponder]) {
             _textView.text = nil;
             _textView.textColor = [UIColor blackColor];
-        }
-        else
-        {
+        } else {
             _textView.text = self.formItem.placeholder;
             _textView.textColor = [self placeholderColor];
         }
@@ -701,8 +715,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL ret = [super resignFirstResponder];
-    return [_textView resignFirstResponder] || ret;
+    BOOL resign = [super resignFirstResponder];
+    return [_textView resignFirstResponder] || resign;
 }
 
 - (void)inputValueDidChange {
@@ -813,6 +827,83 @@ static const CGFloat kHMargin = 15.0;
 - (void)answerDidChange {
     [super answerDidChange];
     [_selectionView setAnswer:self.answer];
+}
+
+@end
+
+
+#pragma mark - ORKFormItemScaleCell
+
+@interface ORKFormItemScaleCell () <ORKScaleSliderLayoutWidthProvider>
+
+@end
+
+
+@implementation ORKFormItemScaleCell {
+    ORKScaleSliderView *_sliderView;
+    id<ORKScaleAnswerFormatProvider> _formatProvider;
+}
+
+- (CGFloat)sliderLayoutWidth {
+    return self.expectedLayoutWidth;
+}
+
+- (id<ORKScaleAnswerFormatProvider>)formatProvider {
+    if(_formatProvider == nil){
+        _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
+    }
+    return _formatProvider;
+}
+
+- (void)cellInit {
+    self.labelLabel.text = nil;
+    
+    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
+    _sliderView.delegate = self;
+    [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
+    
+    [self.contentView addSubview:_sliderView];
+    
+    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_sliderView);
+    
+    ORKEnableAutoLayoutForViews([dictionary allValues]);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:dictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:dictionary]];
+    
+    [super cellInit];
+}
+
+#pragma mark recover answer
+
+- (void)answerDidChange {
+    [super answerDidChange];
+    
+    id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
+    id answer = self.answer;
+    if (answer && answer != ORKNullAnswerValue()) {
+        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
+        }
+        
+        [_sliderView setCurrentValue:answer];
+    } else {
+        if (answer == nil && [formatProvider defaultNumber]) {
+            [_sliderView setCurrentValue:[formatProvider defaultNumber]];
+        } else {
+            [_sliderView setCurrentValue:nil];
+        }
+    }
+}
+
+- (void)inputValueDidChange {
+    [self ork_setAnswer:_sliderView.currentValue];
+    [super inputValueDidChange];
 }
 
 @end

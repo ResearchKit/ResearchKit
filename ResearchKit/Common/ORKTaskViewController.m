@@ -213,25 +213,24 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 static NSString * const _PageViewControllerRestorationKey = @"pageViewController";
 static NSString * const _ChildNavigationControllerRestorationKey = @"childNavigationController";
 
-+ (UIPageViewController *)pageVc {
-    
-    UIPageViewController *pageVc = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
++ (UIPageViewController *)pageViewController {
+    UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                                    navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                                  options:nil];
-    if ([pageVc respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        pageVc.edgesForExtendedLayout = UIRectEdgeNone;
+    if ([pageViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
+        pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    pageVc.restorationIdentifier = _PageViewControllerRestorationKey;
-    pageVc.restorationClass = self;
+    pageViewController.restorationIdentifier = _PageViewControllerRestorationKey;
+    pageViewController.restorationClass = self;
     
     
     // Disable swipe to scroll
-    for (UIScrollView *view in pageVc.view.subviews) {
+    for (UIScrollView *view in pageViewController.view.subviews) {
         if ([view isKindOfClass:[UIScrollView class]]) {
             view.scrollEnabled = NO;
         }
     }
-    return pageVc;
+    return pageViewController;
 }
 
 - (void)setChildNavigationController:(UINavigationController *)childNavigationController {
@@ -256,10 +255,10 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (instancetype)commonInitWithTask:(id<ORKTask>)task taskRunUUID:(NSUUID *)taskRunUUID {
-    UIPageViewController *pageVc = [[self class] pageVc];
-    self.childNavigationController = [[UINavigationController alloc] initWithRootViewController:pageVc];
+    UIPageViewController *pageViewController = [[self class] pageViewController];
+    self.childNavigationController = [[UINavigationController alloc] initWithRootViewController:pageViewController];
     
-    _pageViewController = pageVc;
+    _pageViewController = pageViewController;
     [self setTask: task];
     
     self.showsProgressInNavigationBar = YES;
@@ -471,7 +470,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionCoreMotionActivity) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting pedometer access");
-                [self requestPedometerAccessWithHandler:^(BOOL success){
+                [self requestPedometerAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionCoreMotionActivity;
                     } else {
@@ -486,7 +485,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionAudioRecording) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting audio access");
-                [self requestAudioRecordingAccessWithHandler:^(BOOL success){
+                [self requestAudioRecordingAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionAudioRecording;
                     } else {
@@ -501,7 +500,7 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
         if (permissions & ORKPermissionCoreLocation) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 ORK_Log_Debug(@"Requesting location access");
-                [self requestLocationAccessWithHandler:^(BOOL success){
+                [self requestLocationAccessWithHandler:^(BOOL success) {
                     if (success) {
                         _grantedPermissions |= ORKPermissionCoreLocation;
                     } else {
@@ -587,16 +586,16 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (void)loadView {
-    UIView *v = [[UIView alloc] initWithFrame:(CGRect){{0,0},{320,480}}];
+    UIView *view = [[UIView alloc] initWithFrame:(CGRect){{0,0},{320,480}}];
     
     if (_childNavigationController) {
         UIView *childView = _childNavigationController.view;
-        childView.frame = v.bounds;
+        childView.frame = view.bounds;
         childView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        [v addSubview:childView];
+        [view addSubview:childView];
     }
     
-    self.view = v;
+    self.view = view;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -616,8 +615,8 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
                 [self requestHealthAuthorizationWithCompletion:nil];
             }
             
-            ORKStepViewController *firstVC = [self viewControllerForStep:step];
-            [self showViewController:firstVC goForward:YES animated:animated];
+            ORKStepViewController *firstViewController = [self viewControllerForStep:step];
+            [self showViewController:firstViewController goForward:YES animated:animated];
             
         }
         _hasBeenPresented = YES;
@@ -910,9 +909,9 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 }
 
 - (BOOL)shouldPresentStep:(ORKStep *)step {
-    BOOL shouldPresent = YES;
+    BOOL shouldPresent = (step != nil);
     
-    if ([self.delegate respondsToSelector:@selector(taskViewController:shouldPresentStep:)]) {
+    if (shouldPresent && [self.delegate respondsToSelector:@selector(taskViewController:shouldPresentStep:)]) {
         shouldPresent = [self.delegate taskViewController:self shouldPresentStep:step];
     }
     
@@ -1091,25 +1090,19 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     }
     
     ORKStep *step = [self nextStep];
-    ORKStepViewController *stepViewController = nil;
     
-    if ([self shouldPresentStep:step]) {
-        stepViewController = [self viewControllerForStep:step];
-        
-        if (stepViewController == nil) {
-            
-            if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
-                [self.delegate taskViewController:self didChangeResult:[self result]];
-            }
-            
-            [self finishAudioPromptSession];
-            
-            [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
-            
-        } else {
-            [self showViewController:stepViewController goForward:YES animated:YES];
+    if (step == nil) {
+        if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
+            [self.delegate taskViewController:self didChangeResult:[self result]];
         }
+        [self finishAudioPromptSession];
+        [self finishWithReason:ORKTaskViewControllerFinishReasonCompleted error:nil];
+    } else if ([self shouldPresentStep:step]) {
+        ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+        NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
+        [self showViewController:stepViewController goForward:YES animated:YES];
     }
+    
 }
 
 - (IBAction)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
@@ -1329,22 +1322,21 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     if ([[identifierComponents lastObject] isEqualToString:_PageViewControllerRestorationKey]) {
-        UIPageViewController *pageVc = [self pageVc];
-        pageVc.restorationIdentifier = [identifierComponents lastObject];
-        pageVc.restorationClass = self;
-        return pageVc;
-    }
-    else if ([[identifierComponents lastObject] isEqualToString:_ChildNavigationControllerRestorationKey]) {
-        UINavigationController *nav = [UINavigationController new];
-        nav.restorationIdentifier = [identifierComponents lastObject];
-        nav.restorationClass = self;
-        return nav;
+        UIPageViewController *pageViewController = [self pageViewController];
+        pageViewController.restorationIdentifier = [identifierComponents lastObject];
+        pageViewController.restorationClass = self;
+        return pageViewController;
+    } else if ([[identifierComponents lastObject] isEqualToString:_ChildNavigationControllerRestorationKey]) {
+        UINavigationController *navigationController = [UINavigationController new];
+        navigationController.restorationIdentifier = [identifierComponents lastObject];
+        navigationController.restorationClass = self;
+        return navigationController;
     }
     
-    ORKTaskViewController *taskVc = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
-    taskVc.restorationIdentifier = [identifierComponents lastObject];
-    taskVc.restorationClass = self;
-    return taskVc;
+    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
+    taskViewController.restorationIdentifier = [identifierComponents lastObject];
+    taskViewController.restorationClass = self;
+    return taskViewController;
 }
 
 #pragma mark UINavigationController pass-throughs

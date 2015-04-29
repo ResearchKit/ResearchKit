@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -52,6 +53,7 @@ ORK_CLASS_AVAILABLE
  @param investigatorLongDescription     An extended description of the investigator and partners in a localized string. For example, "Stanford and its partners."
  @param localizedLearnMoreHTMLContent   The HTML content to display when the user
                                         taps the Learn More button.
+ 
  @return An initialized consent sharing step.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier

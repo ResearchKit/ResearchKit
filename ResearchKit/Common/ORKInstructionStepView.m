@@ -94,8 +94,7 @@
         [_instructionImageView addConstraint:_instructionImageHeightConstraint];
         _instructionImageView.isAccessibilityElement = YES;
         _instructionImageView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), _instructionStep.title];
-    }
-    else {
+    } else {
         _instructionImageView.isAccessibilityElement = NO;
     }
     
@@ -138,8 +137,8 @@
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
     
     {
-        NSLayoutConstraint *c = _instructionImageHeightConstraint;
-        c.constant = (_instructionImageView.image ? IllustrationHeight : 0);
+        NSLayoutConstraint *constraint = _instructionImageHeightConstraint;
+        constraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
     }
 }
 

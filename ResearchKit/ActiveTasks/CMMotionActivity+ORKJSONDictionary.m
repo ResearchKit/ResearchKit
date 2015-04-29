@@ -48,23 +48,23 @@ static NSString *stringFromActivityConfidence(CMMotionActivityConfidence confide
 }
 
 static NSArray *activityArray(CMMotionActivity *activity) {
-    NSMutableArray *ret = [NSMutableArray array];
+    NSMutableArray *array = [NSMutableArray array];
     if (activity.unknown) {
-        [ret addObject:kActivityUnknown];
+        [array addObject:kActivityUnknown];
     }
     if (activity.stationary) {
-        [ret addObject:kActivityStationary];
+        [array addObject:kActivityStationary];
     }
     if (activity.walking) {
-        [ret addObject:kActivityWalking];
+        [array addObject:kActivityWalking];
     }
     if (activity.running) {
-        [ret addObject:kActivityRunning];
+        [array addObject:kActivityRunning];
     }
     if (activity.automotive) {
-        [ret addObject:kActivityAutomotive];
+        [array addObject:kActivityAutomotive];
     }
-    return ret;
+    return array;
 }
 
     

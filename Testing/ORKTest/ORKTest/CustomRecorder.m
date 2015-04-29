@@ -29,9 +29,9 @@
  */
 
 
-
 #import "CustomRecorder.h"
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 @interface CustomRecorder () {
     UIView *_containerFiller;
@@ -43,6 +43,7 @@
 @property (nonatomic, strong) NSMutableArray *records;
 
 @end
+
 
 @implementation CustomRecorder
 
@@ -96,11 +97,10 @@
     
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
     });
 }
-
 
 - (IBAction)timerFired:(id)sender {
     _button.hidden = !_button.hidden;
@@ -137,7 +137,6 @@
                                     code:NSFileNoSuchFileError
                                 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
     }
-    
     
     id<ORKRecorderDelegate> localDelegate = self.delegate;
     if (! error)
@@ -179,6 +178,7 @@
 
 @end
 
+
 @implementation CustomRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -199,4 +199,3 @@
 }
 
 @end
-

@@ -33,6 +33,7 @@
 #import <ResearchKit/ORKStep.h>
 #import <UIKit/UIKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -99,7 +100,6 @@ automatically navigates forward when the timer expires.
  The default value of this property is `NO`.
  */
 @property (nonatomic) BOOL shouldSpeakCountDown;
-
 
 /**
  A Boolean value indicating whether to start the count down timer automatically when the step starts, or
@@ -193,7 +193,6 @@ The default value of this property is `NO`.
  */
 @property (nonatomic, copy, nullable) NSArray *recorderConfigurations;
 
-
 /**
  The set of HealthKit types the step requests for reading. (read-only)
  
@@ -218,7 +217,6 @@ The default value of this property is `NO`.
  required by the recorders. Subclasses may override this implementation.
  */
 @property (nonatomic, readonly) ORKPermissionMask requestedPermissions;
-
 
 @end
 

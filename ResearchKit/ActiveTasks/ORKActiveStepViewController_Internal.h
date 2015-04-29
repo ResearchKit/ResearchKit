@@ -29,16 +29,15 @@
  */
 
 
-
 #import "ORKActiveStepViewController.h"
 #import "ORKActiveStepTimer.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKActiveStepView;
 
 @interface ORKActiveStepViewController ()
-
 
 /**
  * The customViewContainer allows custom view to be its subview.
@@ -50,9 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSTimeInterval timeRemaining;
 @property (nonatomic, readonly) BOOL timerActive;
-
 @property (nonatomic, assign) NSTimeInterval timerUpdateInterval;
-
 
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 
@@ -60,7 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)applicationWillResignActive:(NSNotification *)notification;
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
-
 
 @end
 

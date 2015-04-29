@@ -54,10 +54,10 @@
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
     ORKActiveStepTimer *_timer;
-    NSError *_audioRecorderError;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
+    
     self = [super initWithStep:step];
     if (self) {
         // Continue audio recording in the background
@@ -69,6 +69,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     _audioContentView = [ORKAudioContentView new];
     _audioContentView.timeLeft = self.audioStep.duration;
     self.activeStepView.activeCustomView = _audioContentView;
@@ -76,6 +77,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     [self start];
 }
 
@@ -92,6 +94,7 @@
             break;
         }
     }
+    
     _audioRecorder = audioRecorder;
     [self audioRecorderDidChange];
 }
@@ -101,13 +104,12 @@
 }
 
 - (void)doSample {
-    if (_audioRecorderError) {
-        return;
-    }
     [_avAudioRecorder updateMeters];
     float value = [_avAudioRecorder averagePowerForChannel:0];
+    
     // Assume value is in range roughly -60dB to 0dB
     float clampedValue = MAX(value/60.0, -1) + 1;
+    
     [_audioContentView addSample:@(clampedValue)];
     _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
 }
@@ -136,7 +138,6 @@
     [self startNewTimerIfNeeded];
     
 }
-
 - (void)suspend {
     [super suspend];
     [_timer pause];
@@ -144,14 +145,12 @@
         [_audioContentView addSample:@(0)];
     }
 }
-
 - (void)resume {
     [super resume];
     [self audioRecorderDidChange];
     [self startNewTimerIfNeeded];
     [_timer resume];
 }
-
 - (void)finish {
     [super finish];
     [_timer reset];
@@ -165,11 +164,6 @@
 - (void)setAvAudioRecorder:(AVAudioRecorder *)recorder {
     _avAudioRecorder = nil;
     _avAudioRecorder = recorder;
-}
-
-- (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
-    [super recorder:recorder didFailWithError:error];
-    _audioRecorderError = error;
 }
 
 @end

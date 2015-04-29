@@ -89,22 +89,16 @@
             NSDate *dateValue = ORKTimeOfDayDateFromComponents(timeOfDayComponents);
             [self setDate:dateValue];
             
-        }
-        else
-        {
+        } else {
             [self setDate:[timeOfDayAnswerFormat pickerDefaultDate]];
         }
-    }
-    else
-    {
+    } else {
         ORKDateAnswerFormat *dateAnswerFormat = (ORKDateAnswerFormat *)self.answerFormat;
         
         if (answer && answer != ORKNullAnswerValue()) {
             NSDate *defaultDate = (NSDate *)answer;
             [self setDate:defaultDate];
-        }
-        else
-        {
+        } else {
             NSDate *defaultDate = [dateAnswerFormat pickerDefaultDate];
             [self setDate:defaultDate];
         }
@@ -187,7 +181,7 @@
 }
 
 - (NSString *)selectedLabelText {
-    if (_answer == nil || _answer == ORKNullAnswerValue()){
+    if (_answer == nil || _answer == ORKNullAnswerValue()) {
         return nil;
     }
     

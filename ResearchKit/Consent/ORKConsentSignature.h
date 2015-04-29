@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -104,7 +106,6 @@ ORK_CLASS_AVAILABLE
  screen is not shown when this property is `NO`.
  */
 @property (nonatomic, assign) BOOL requiresSignatureImage;
-
 
 /// @name Identifying signatories
 

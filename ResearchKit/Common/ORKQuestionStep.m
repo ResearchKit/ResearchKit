@@ -150,11 +150,6 @@
             self.questionType == ORKQuestionTypeBoolean);
 }
 
-- (BOOL)isFormatVerticalScale {
-    return (ORKDynamicCast([self impliedAnswerFormat], ORKScaleAnswerFormat).vertical ||
-            ORKDynamicCast([self impliedAnswerFormat], ORKContinuousScaleAnswerFormat).vertical);
-}
-
 - (BOOL)formatRequiresTableView {
     return [self isFormatFitsChoiceCells];
 }

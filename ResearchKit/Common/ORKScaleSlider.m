@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015, Bruce Duncan.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -99,26 +100,23 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (_thumbImageNeedsTransformUpdate)
-    {
+    if (_thumbImageNeedsTransformUpdate) {
         _thumbImageNeedsTransformUpdate = NO;
         [self thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
     }
 }
 
-- (void)addConstraint:(NSLayoutConstraint *)constraint {
-    [super addConstraint:constraint];
-    if (_vertical && constraint.firstItem == self && constraint.firstAttribute == NSLayoutAttributeHeight)
-    {
-        // In vertical mode, the slider needs to be of square size for the drawn area to have the appropriate height (due to using self.transform)
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeWidth
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                        multiplier:1.0
-                                                          constant:0.0]];
+- (CGSize)intrinsicContentSize {
+    CGSize intrinsicContentSize = [super intrinsicContentSize];
+    // If we have a layout width provided by our delegate and we are vertical, use the provided
+    // width for the instrinsic content height, and leave the intrinsic content width alone.
+    // The intrinsic content width is typically -1, which will allow the slider to fill the
+    // available width in the superview.
+    CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
+    if(_vertical && sliderLayoutWidth > 0) {
+        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth);
     }
+    return intrinsicContentSize;
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -131,8 +129,7 @@
         if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
             view = [super hitTest:point withEvent:event];
         }
-    }
-    else {
+    } else {
         view = [super hitTest:point withEvent:event];
     }
     return view;
@@ -257,8 +254,7 @@ static CGFloat kPadding = 2.0;
 - (NSString *)_axFormattedValue:(CGFloat)value {
     if (_numberOfSteps == 0) {
         return ORKAccessibilityFormatContinuousScaleSliderValue(value, self);
-    }
-    else {
+    } else {
         return ORKAccessibilityFormatScaleSliderValue(value, self);
     }
 }

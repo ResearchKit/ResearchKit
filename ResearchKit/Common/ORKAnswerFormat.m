@@ -155,8 +155,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
                 id defaultValue = [self defaultValueForCharacteristicType:(HKCharacteristicType *)objectType error:&error];
                 handler(defaultValue, error);
                 handled = YES;
-            }
-            else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
+            } else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
                 [self updateHealthKitUnitForAnswerFormat:answerFormat force:NO];
                 HKUnit *unit = [answerFormat healthKitUserUnit];
                 [self fetchDefaultValueForQuantityType:(HKQuantityType *)objectType unit:unit handler:handler];
@@ -403,7 +402,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
 
 #pragma mark - ORKValuePickerAnswerFormat
 
-static void ork_validateChoices(NSArray *choices){
+static void ork_validateChoices(NSArray *choices) {
     const NSInteger ORKAnswerFormatMinimumNumberOfChoices = 1;
     if (choices.count < ORKAnswerFormatMinimumNumberOfChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
@@ -430,7 +429,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
                 
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0]]];
             } else if ([array count] == 1 &&
-                       [array[0] isKindOfClass:[NSString class]]){
+                       [array[0] isKindOfClass:[NSString class]]) {
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0]]];
             } else {
                 @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Eligible array type Choice item should contain one or two NSString object." userInfo:@{@"choice" : object }];
@@ -1105,8 +1104,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
                 isValid = NO;
             } else if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
                 isValid = NO;
-            }
-            else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
+            } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
                 isValid = NO;
             }
         }
@@ -1129,16 +1127,16 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     if (! num) {
         return nil;
     }
-    NSString *ret = nil;
+    NSString *string = nil;
     NSNumberFormatter *formatter = [self makeNumberFormatter];
     if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
     } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
     } else {
-        ret = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
     }
-    return ret;
+    return string;
 }
 
 #pragma mark - Text Sanitization
@@ -1228,9 +1226,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         return nil;
     }
     
-    NSInteger ret = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
+    NSInteger integer = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
     
-    return @(ret);
+    return @(integer);
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterDecimalStyle];

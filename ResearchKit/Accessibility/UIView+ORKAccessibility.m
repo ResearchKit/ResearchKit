@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "UIView+ORKAccessibility.h"
+
 
 @implementation UIView (ORKAccessibility)
 
@@ -40,8 +42,7 @@
     id superview = [self superview];
     if (superview == nil) {
         return nil;
-    }
-    else if ([superview isKindOfClass:aClass]) {
+    } else if ([superview isKindOfClass:aClass]) {
         return superview;
     }
     

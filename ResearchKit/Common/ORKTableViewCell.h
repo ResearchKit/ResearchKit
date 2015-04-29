@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +42,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKTableViewCell : UITableViewCell
 
 @end
+
 
 @interface ORKTableViewCell ()
 

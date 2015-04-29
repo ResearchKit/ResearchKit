@@ -48,7 +48,8 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKActiveStepView.h"
 
-@interface ORKActiveStepViewController (){
+
+@interface ORKActiveStepViewController () {
     ORKActiveStepView *_activeStepView;
     ORKActiveStepTimer *_activeStepTimer;
 
@@ -76,9 +77,7 @@
         _timerUpdateInterval = 1;
     }
     return self;
-    
 }
-
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     if (self.suspendIfInactive) {
@@ -118,6 +117,7 @@
     
     [self prepareStep];
 }
+
 - (void)stepDidChange {
     [super stepDidChange];
     _activeStepView.activeStep = [self activeStep];
@@ -128,12 +128,12 @@
 }
 
 - (UIView *)customViewContainer {
-    __unused UIView *v = [self view];
+    __unused UIView *view = [self view];
     return _activeStepView.customViewContainer;
 }
 
 - (UIImageView *)imageView {
-    __unused UIView *v = [self view];
+    __unused UIView *view = [self view];
     return _activeStepView.imageView;
 }
 
@@ -149,20 +149,16 @@
     [self.taskViewController setRegisteredScrollView:_activeStepView];
 }
 
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     ORK_Log_Debug(@"%@",self);
     
     // Wait for animation complete 
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         if ([[self activeStep] shouldStartTimerAutomatically]) {
             [self start];
         }
     });
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -193,7 +189,6 @@
 
 - (void)setFinished:(BOOL)finished {
     _finished = finished;
-    
     _activeStepView.continueSkipContainer.continueEnabled = finished;
 }
 
@@ -206,17 +201,13 @@
 #pragma mark - transition
 
 - (void)recordersDidChange {
-    
 }
 
 - (void)recordersWillStart {
-    
 }
 
 - (void)recordersWillStop {
-    
 }
-
 
 - (void)prepareRecorders {
     // Stop any existing recorders
@@ -225,7 +216,6 @@
         recorder.delegate = nil;
         [recorder stop];
     }
-    
     NSMutableArray *recorders = [NSMutableArray array];
     
     for (ORKRecorderConfiguration * provider in self.activeStep.recorderConfigurations) {
@@ -238,7 +228,6 @@
         
         [recorders addObject:recorder];
     }
-
     self.recorders = recorders;
     
     [self recordersDidChange];
@@ -250,7 +239,6 @@
 }
 
 - (void)prepareStep {
-    
     if (self.activeStep==nil) {
         return;
     }
@@ -263,9 +251,7 @@
     if ([self.activeStep hasCountDown]) {
         ORKActiveStepTimerView *timerView = [ORKActiveStepTimerView new];
         _activeStepView.activeCustomView = timerView;
-    }
-    else
-    {
+    } else {
         _activeStepView.activeCustomView = nil;
     }
     _activeStepView.activeCustomView.activeStepViewController = self;
@@ -279,7 +265,6 @@
     [self recordersWillStart];
     // Start recorders
     for (ORKRecorder *recorder in self.recorders) {
-        
         [recorder viewController:self willStartStepWithView:self.customViewContainer];
         [recorder start];
     }
@@ -308,14 +293,11 @@
     
     [self startRecorders];
     
-    
     if (self.activeStep.shouldVibrateOnStart) {
-        
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
     
     if (self.activeStep.shouldPlaySoundOnStart) {
-        
         [self playSound];
     }
     
@@ -352,7 +334,6 @@
     [self startRecorders];
     [_activeStepView.activeCustomView resumeStep:self];
 }
-
 
 - (void)finish {
     ORK_Log_Debug(@"%@",self);
@@ -398,7 +379,6 @@
     NSTimeInterval stepDuration = self.activeStep.stepDuration;
     
     if (stepDuration > 0) {
-        
         __weak typeof(self) weakSelf = self;
         _activeStepTimer = [[ORKActiveStepTimer alloc] initWithDuration:stepDuration
                                                         interval:_timerUpdateInterval
@@ -412,7 +392,6 @@
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    
     if (finished) {
         [self finish];
     }
@@ -454,7 +433,6 @@
 #pragma mark - ORKRecorderDelegate
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
-    
     _recorderResults = [_recorderResults arrayByAddingObject:result];
     [self notifyDelegateOnResultChange];
 }
@@ -477,7 +455,6 @@
     }
 }
 
-
 static NSString * const _ORKFinishedRestoreKey = @"finished";
 static NSString * const _ORKRecorderResultsRestoreKey = @"recorderResults";
 
@@ -494,6 +471,5 @@ static NSString * const _ORKRecorderResultsRestoreKey = @"recorderResults";
     self.finished = [coder decodeBoolForKey:_ORKFinishedRestoreKey];
     _recorderResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKRecorderResultsRestoreKey];
 }
-
 
 @end

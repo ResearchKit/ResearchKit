@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKConsentSignature.h>
 #import "ORKHelpers.h"
+
 
 @implementation ORKConsentSignature
 
@@ -70,7 +72,6 @@
 }
 
 - (void)setIdentifier:(NSString *)identifier {
-    
     if ( nil == identifier) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
     }
@@ -110,7 +111,6 @@
     ORK_ENCODE_OBJ(aCoder, signatureDateFormatString);
 }
 
-
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
@@ -132,7 +132,6 @@
     return [_identifier hash] ^ [_title hash] ^ [_givenName hash] ^ [_familyName hash] ^ [_signatureDate hash];
 }
 
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSignature *sig = [[[self class] allocWithZone:zone] init];
     sig.identifier = [_identifier copy];
@@ -146,6 +145,5 @@
     sig.signatureDate = [_signatureDate copy];
     return sig;
 }
-
 
 @end

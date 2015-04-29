@@ -174,8 +174,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
             [_tableContainer setNeedsLayout];
-        }
-        else if (self.step) {
+        } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
             _questionView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
             _questionView.questionStep = [self questionStep];
@@ -185,8 +184,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
-            }
-            else {
+            } else {
                 ORKQuestionStepCellHolderView *holder = [ORKQuestionStepCellHolderView new];
                 holder.delegate = self;
                 holder.cell = [self answerCellForTableView:nil];
@@ -274,12 +272,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)answerDidChange {
     if ([self.questionStep formatRequiresTableView] && ! _customQuestionView) {
         [self.tableView reloadData];
-    }
-    else {
+    } else {
         if (_customQuestionView) {
             _customQuestionView.answer = _answer;
-        }
-        else {
+        } else {
             ORKQuestionStepCellHolderView *holder = (ORKQuestionStepCellHolderView *)_questionView.questionCustomView;
             holder.answer = _answer;
             [self.answerCell setAnswer:_answer];
@@ -530,8 +526,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         class = [ORKSurveyAnswerCellForTextField class];
     } else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
-    } else if ([self.questionStep isFormatVerticalScale]) {
-        class = [ORKSurveyAnswerCellForVerticalScale class];
     }
     
     identifier = NSStringFromClass(class);
@@ -596,10 +590,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = (UIEdgeInsets){.left=ORKStandardMarginForView(tableView)};
-    
+    cell.separatorInset = (UIEdgeInsets){.left=ORKTableViewCellLeftMargin(tableView)};
 }
 
 - (BOOL)shouldContinue {
@@ -703,15 +694,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         case ORKQuestionTypeDate:
         case ORKQuestionTypeDateAndTime:{
             height = [ORKSurveyAnswerCellForPicker suggestedCellHeightForView:tableView];
-        }
-            break;
-        case ORKQuestionTypeScale:{
-            if ([self.questionStep isFormatVerticalScale]) {
-                height = [ORKSurveyAnswerCellForVerticalScale suggestedCellHeightForView:tableView];
-            }
-            else {
-                height = [ORKSurveyAnswerCellForScale suggestedCellHeightForView:tableView];
-            }
         }
             break;
         default:{

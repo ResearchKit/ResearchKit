@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTappingContentView.h"
 #import "ORKActiveStepTimer.h"
 #import "ORKResult.h"
@@ -36,6 +37,7 @@
 #import "ORKTapCountLabel.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKTappingContentView ()
 
 @property (nonatomic, strong) ORKSubheadlineLabel *tapCaptionLabel;
@@ -43,6 +45,7 @@
 @property (nonatomic, strong) UIProgressView *progressView;
 
 @end
+
 
 @implementation ORKTappingContentView {
    
@@ -54,7 +57,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
         _screenType = ORKScreenTypeiPhone4;
         _tapCaptionLabel = [ORKSubheadlineLabel new];
         _tapCaptionLabel.textAlignment = NSTextAlignmentCenter;
@@ -231,7 +233,6 @@
                                                         attribute:NSLayoutAttributeCenterY
                                                        multiplier:1 constant:0]];
 
-    
     
     _constraints = constraints;
     [self addConstraints:_constraints];

@@ -48,7 +48,7 @@
 @implementation ORKSurveyAnswerCellForScale
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if(_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.step impliedAnswerFormat];
     }
     return _formatProvider;
@@ -80,9 +80,7 @@
         }
         
         [_sliderView setCurrentValue:answer];
-    }
-    else
-    {
+    } else {
         if (answer == nil && [formatProvider defaultNumber]) {
             [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
         } else {
@@ -111,17 +109,8 @@
     [self ork_setAnswer:_sliderView.currentValue];
 }
 
-+ (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 140.0;
-}
-
-@end
-
-
-@implementation ORKSurveyAnswerCellForVerticalScale
-
-+ (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 358.0;
+- (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
+    return @[];
 }
 
 @end

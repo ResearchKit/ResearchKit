@@ -57,8 +57,8 @@
             _choices = [@[nullChocie] arrayByAddingObjectsFromArray:vpaf.textChoices];
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
-            ORKTextChoiceAnswerFormat *taf = (ORKTextChoiceAnswerFormat *)answerFormat;
-            _choices = taf.textChoices;
+            ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)answerFormat;
+            _choices = textChoiceAnswerFormat.textChoices;
         } else if ([answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
             ORKImageChoiceAnswerFormat *iaf = (ORKImageChoiceAnswerFormat *)answerFormat;
             _choices = iaf.imageChoices;

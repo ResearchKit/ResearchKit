@@ -35,6 +35,7 @@
 #import <HealthKit/HealthKit.h>
 #import <ResearchKit/ORKResult.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKRecorder;
@@ -134,6 +135,7 @@ ORK_CLASS_AVAILABLE
  
  @param identifier  The unique identifier of the recorder configuration.
  @param frequency   The frequency of accelerometer data collection in samples per second (Hz).
+ 
  @return An initialized accelerometer recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
@@ -142,12 +144,12 @@ ORK_CLASS_AVAILABLE
  Returns a new accelerometer recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the accelerometer recorder configuration.
+ 
  @return A new accelerometer recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
 
 
 /**
@@ -183,6 +185,7 @@ ORK_CLASS_AVAILABLE
  
  @param identifier          The unique identifier of the recorder configuration.
  @param recorderSettings    The settings for the recording session.
+ 
  @return An initialized audio recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier recorderSettings:(NSDictionary *)recorderSettings NS_DESIGNATED_INITIALIZER;
@@ -191,12 +194,12 @@ ORK_CLASS_AVAILABLE
  Returns a new audio recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the audio recorder configuration.
+ 
  @return A new audio recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
 
 
 /**
@@ -229,6 +232,7 @@ ORK_CLASS_AVAILABLE
  
  @param identifier  The unique identifier of the recorder configuration.
  @param frequency   Motion data collection frequency in samples per second (Hz).
+ 
  @return An initialized device motion recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency NS_DESIGNATED_INITIALIZER;
@@ -237,12 +241,12 @@ ORK_CLASS_AVAILABLE
  Returns a new device motion recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the device motion recorder configuration.
+ 
  @return A new device motion recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
 
 
 /**
@@ -274,6 +278,7 @@ ORK_CLASS_AVAILABLE
  This method is the designated initializer.
 
  @param identifier   The unique identifier of the recorder configuration.
+ 
  @return An initialized pedometer recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
@@ -282,12 +287,12 @@ ORK_CLASS_AVAILABLE
  Returns a new pedometer recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the pedometer recorder configuration.
+ 
  @return A new pedometer recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
 
 
 /**
@@ -318,6 +323,7 @@ ORK_CLASS_AVAILABLE
  This method is the designated initializer.
 
  @param identifier   The unique identifier of the recorder configuration.
+ 
  @return An initialized location recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
@@ -326,12 +332,12 @@ ORK_CLASS_AVAILABLE
  Returns a new location recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the location recorder configuration.
+ 
  @return A new location recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
-
 
 
 /**
@@ -359,6 +365,7 @@ ORK_CLASS_AVAILABLE
  @param identifier      The unique identifier of the recorder configuration.
  @param quantityType    The quantity type that should be collected during the active task.
  @param unit            The unit for the data that should be collected and serialized.
+ 
  @return An initialized health quantity type recorder configuration.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier healthQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit NS_DESIGNATED_INITIALIZER;
@@ -367,6 +374,7 @@ ORK_CLASS_AVAILABLE
  Returns a new health quantity type recorder configuration initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the health quantity type recorder configuration.
+ 
  @return A new health quantity type recorder configuration.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -376,14 +384,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly, copy) HKQuantityType *quantityType;
 
-
 /**
  The unit in which to serialize the data from HealthKit. (read-only)
  */
 @property (nonatomic, readonly, copy) HKUnit *unit;
 
 @end
-
 
 
 /**
@@ -416,7 +422,6 @@ need to implement it.
 - (void)recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
 @end
-
 
 
 /**
@@ -513,4 +518,3 @@ ORK_CLASS_AVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
-

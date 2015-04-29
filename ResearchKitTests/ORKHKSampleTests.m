@@ -34,9 +34,11 @@
 #import "HKSample+ORKJSONDictionary.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKHKSampleTests : XCTestCase
 
 @end
+
 
 @implementation ORKHKSampleTests
 

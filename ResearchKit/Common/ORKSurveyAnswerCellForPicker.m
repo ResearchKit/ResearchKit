@@ -107,7 +107,7 @@
     if (view) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
         
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|"
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
                                                                        options:NSLayoutFormatDirectionLeadingToTrailing
                                                                        metrics:nil
                                                                          views:@{ @"view": view }];

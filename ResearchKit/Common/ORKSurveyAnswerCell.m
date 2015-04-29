@@ -132,7 +132,9 @@
 - (void)keyboardWillAppear:(NSNotification *)aNotification {
     UIView *inputView = self.textView == nil ? self.textField : self.textView;
     
-    if (inputView == nil) { return; }
+    if (inputView == nil) {
+        return;
+    }
     
     UITableViewCell *cell = ORKFirstObjectOfClass(UITableViewCell, inputView, superview);
     UITableView *tableView = ORKFirstObjectOfClass(UITableView, cell, superview);
@@ -169,7 +171,9 @@
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     UIView *inputView = self.textView == nil ? self.textField : self.textView;
     
-    if (inputView == nil) { return; }
+    if (inputView == nil) {
+        return;
+    }
     
     UITableView *tableView = ORKFirstObjectOfClass(UITableView, inputView, superview);
     

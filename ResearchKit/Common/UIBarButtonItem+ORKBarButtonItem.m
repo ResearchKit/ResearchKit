@@ -28,16 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 #import "ORKDefines_Private.h"
 
-@implementation UIBarButtonItem(ORKBarButtonItem)
+
+@implementation UIBarButtonItem (ORKBarButtonItem)
 
 + (UIBarButtonItem *)obk_backBarButtonItemWithTarget:(id)target action:(SEL)selector {
-    UIImage *im = [UIImage imageNamed:@"arrowLeft" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
-    UIImage *landscape = [UIImage imageNamed:@"arrowLeftLandscape" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:im
-                                               landscapeImagePhone:landscape
+    UIImage *image = [UIImage imageNamed:@"arrowLeft" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
+    UIImage *landscapeImage = [UIImage imageNamed:@"arrowLeftLandscape" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:image
+                                               landscapeImagePhone:landscapeImage
                                                              style:UIBarButtonItemStyleDone
                                                             target:target
                                                             action:selector];

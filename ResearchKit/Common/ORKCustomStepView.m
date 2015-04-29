@@ -32,6 +32,7 @@
 #import "ORKCustomStepView.h"
 #import "ORKCustomStepView_Internal.h"
 #import "ORKSurveyAnswerCell.h"
+#import "ORKSkin.h"
 
 
 @implementation ORKActiveStepCustomView
@@ -67,6 +68,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
+        
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
@@ -94,10 +97,11 @@
     }
     
     [self addSubview:_cell];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTopMargin multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
+
 }
 
 @end
