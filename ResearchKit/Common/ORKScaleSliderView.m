@@ -57,6 +57,8 @@
 @end
 
 
+static const CGFloat kVerticalSliderHorizontalMargin = 48;
+
 @implementation ORKScaleSliderView
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider {
@@ -201,8 +203,6 @@
     NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(self.slider.value)];
     [self setCurrentValue:newValue];
 }
-
-static const CGFloat kVerticalSliderHorizontalMargin = 48;
 
 -(CGFloat)sliderLayoutWidth {
     // Use the delegate expected width, if available, or if we have no delegate, then use our own width.
