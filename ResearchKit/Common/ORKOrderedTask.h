@@ -84,6 +84,22 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+@class ORKStepNavigationRule;
+
+@interface ORKNavigableOrderedTask : ORKOrderedTask
+
+- (void)addNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+
+/**
+ A dictionary of step navigation rules in the task, keyed by trigger step identifier.
+ 
+ Each object in the dictionary is a `ORKStepNavigationRule`.
+ */
+@property (nonatomic, copy, readonly) NSDictionary *stepNavigationRules;
+
+@end
+
+
 /**
  The `ORKPredefinedTaskOption` flags let you exclude particular behaviors from
  the predefined active tasks in the Predefined category of `ORKOrderedTask`.

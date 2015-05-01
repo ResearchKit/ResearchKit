@@ -786,3 +786,43 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 @end
+
+
+@implementation ORKNavigableOrderedTask {
+    NSMutableDictionary *_stepNavigationRules;
+}
+
+- (void)addNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
+    if (!triggerStepIdentifier) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
+    }
+    if (!stepNavigationRule) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"stepNavigationRule can not be nil." userInfo:nil];
+    }
+    
+    if (!_stepNavigationRules) {
+        _stepNavigationRules = [NSMutableDictionary new];
+    }
+    _stepNavigationRules[triggerStepIdentifier] = stepNavigationRule;
+}
+
+- (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
+    NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
+    if (nextStepIdentifier) {
+        return [self stepWithIdentifier:nextStepIdentifier];
+    }
+    return [super stepAfterStep:step withResult:result];
+}
+
+// TODO: How to handle this?
+- (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    return [super stepBeforeStep:step withResult:result];
+}
+
+// ORKNavigableOrderedTask doesn't have a linear order
+- (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    return ORKTaskProgressMake(0, 0);
+}
+
+@end

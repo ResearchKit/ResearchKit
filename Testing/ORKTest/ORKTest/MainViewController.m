@@ -41,7 +41,7 @@
 static NSString * const DatePickingTaskIdentifier = @"dates_001";
 static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
 static NSString * const ActiveStepTaskIdentifier = @"tid_002";
-static NSString * const ConsentReviewTaskIdentifier = @"consent-review";
+static NSString * const ConsentReviewTaskIdentifier = @"consent_review";
 static NSString * const ConsentTaskIdentifier = @"consent";
 static NSString * const MiniFormTaskIdentifier = @"miniform";
 static NSString * const ScreeningTaskIdentifier = @"screening";
@@ -53,6 +53,7 @@ static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
+static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
@@ -210,40 +211,48 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         [buttonKeys addObject:@"imageChoices"];
         buttons[buttonKeys.lastObject] = button;
     }
-    
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showStepNavigationTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Step Navigation Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"step"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
     }];
    
     if (buttons.count > 0) {
-         NSString *hvfl = @"";
+         NSString *horizVisualFormatString  = @"";
         if (buttons.count == 1) {
-            hvfl= [NSString stringWithFormat:@"H:|[%@]|", buttonKeys.firstObject];
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@]|", buttonKeys.firstObject];
         } else {
-            hvfl= [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
         }
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hvfl
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizVisualFormatString 
                                                                           options:(NSLayoutFormatOptions)0
                                                                           metrics:nil
                                                                             views:buttons]];
         
-        NSArray *allkeys = buttonKeys;
+        NSArray *allKeys = buttonKeys;
         BOOL left = YES;
-        NSMutableString *leftVfl = [NSMutableString stringWithString:@"V:|-20-"];
-        NSMutableString *rightVfl = [NSMutableString stringWithString:@"V:|-20-"];
+        NSMutableString *leftVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
+        NSMutableString *rightVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
         
         NSString *leftFirstKey = nil;
         NSString *rightFirstKey = nil;
         
-        for (NSString *key in allkeys) {
+        for (NSString *key in allKeys) {
         
             if (left == YES) {
             
                 if (leftFirstKey) {
-                    [leftVfl appendFormat:@"[%@(==%@)]", key, leftFirstKey];
+                    [leftVisualFormatString appendFormat:@"[%@(==%@)]", key, leftFirstKey];
                 } else {
-                    [leftVfl appendFormat:@"[%@]", key];
+                    [leftVisualFormatString appendFormat:@"[%@]", key];
                 }
                 
                 if (leftFirstKey == nil) {
@@ -252,9 +261,9 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             } else {
                 
                 if (rightFirstKey) {
-                    [rightVfl appendFormat:@"[%@(==%@)]", key, rightFirstKey];
+                    [rightVisualFormatString appendFormat:@"[%@(==%@)]", key, rightFirstKey];
                 } else {
-                    [rightVfl appendFormat:@"[%@]", key];
+                    [rightVisualFormatString appendFormat:@"[%@]", key];
                 }
                 
                 if (rightFirstKey == nil) {
@@ -265,11 +274,17 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
             left = !left;
         }
         
-        [leftVfl appendString:@"-20-|"];
-        [rightVfl appendString:@"-20-|"];
+        [leftVisualFormatString appendString:@"-20-|"];
+        [rightVisualFormatString appendString:@"-20-|"];
         
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVfl options:NSLayoutFormatAlignAllCenterX metrics:nil views:buttons]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVfl options:NSLayoutFormatAlignAllCenterX metrics:nil views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
         
     }
 }
@@ -278,7 +293,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier {
     if ([identifier isEqualToString:DatePickingTaskIdentifier]) {
-        return [self datePickingTask];
+        return [self makeDatePickingTask];
     } else if ([identifier isEqualToString:SelectionSurveyTaskIdentifier]) {
         return [self makeSelectionSurveyTask];
     } else if ([identifier isEqualToString:ActiveStepTaskIdentifier]) {
@@ -335,6 +350,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
                                                                  duration:20.0 options:(ORKPredefinedTaskOption)0];
+    } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
+        return [self makeStepNavigationTask];
     }
     return nil;
 }
@@ -405,7 +422,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
  This task presents several questions which exercise functionality based on
  `UIDatePicker`.
  */
-- (ORKOrderedTask *)datePickingTask {
+- (ORKOrderedTask *)makeDatePickingTask {
     NSMutableArray *steps = [NSMutableArray new];
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"iid_001"];
@@ -1565,10 +1582,137 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     return task;
     
 }
+
 - (IBAction)showImageChoices:(id)sender {
     [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
 }
 
+- (IBAction)showStepNavigationTask:(id)sender {
+    [self beginTaskWithIdentifier:StepNavigationTaskIdentifier];
+}
+
+#pragma mark - Step navigation task
+
+- (id<ORKTask>)makeStepNavigationTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    ORKAnswerFormat *answerFormat = nil;
+    ORKStep *step = nil;
+    
+    NSArray *textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:@"diziness"],
+      [ORKTextChoice choiceWithText:@"Nausea" value:@"nausea"]
+      ];
+    
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"symptom" title:@"What is your symptom?" answer:answerFormat];
+    step.optional = NO;
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom intereferes with your daily life?" answer:answerFormat];
+    step.optional = NO;
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [[ORKActiveStep alloc] initWithIdentifier:@"blank"];
+    step.title = @"This step is intentionally left blank (you should not see it)";
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [[ORKActiveStep alloc] initWithIdentifier:@"severe_headache"];
+    step.title = @"You have a severe headache";
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [[ORKActiveStep alloc] initWithIdentifier:@"light_headache"];
+    step.title = @"You have a light headache";
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [[ORKActiveStep alloc] initWithIdentifier:@"other_symptom"];
+    step.title = @"You have other symptom";
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [[ORKActiveStep alloc] initWithIdentifier:@"end"];
+    step.title = @"You have finished the task";
+    [steps addObject:step];
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:StepNavigationTaskIdentifier
+                                                                                  steps:steps];
+    
+    // Build navigation rules
+    
+    // Individual predicates
+    
+    // User chose headache at the symptom step
+    NSPredicate *predicateHeadache =
+    [NSPredicate predicateWithFormat:
+     @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' AND \
+                          SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
+
+    // User didn't chose headache at the symptom step
+    NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
+
+    // User chose YES at the severity step
+    NSPredicate *predicateSevereYes =
+    [NSPredicate predicateWithFormat:
+     @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
+
+    // User chose NO at the severity step
+    NSPredicate *predicateSevereNo = [NSCompoundPredicate notPredicateWithSubpredicate:predicateSevereYes];
+
+    
+    // From the "sympton" step, go to "other_sympton" is user didn't chose headache.
+    // Otherwise, default to going to next step in order (when the defaultStepIdentifier argument is omitted,
+    // the regular ORKOrderedTask order applies).
+    NSMutableArray *resultPredicates = [NSMutableArray new];
+    NSMutableArray *matchingStepIdentifiers = [NSMutableArray new];
+    
+    [resultPredicates addObject:predicateNotHeadache];
+    [matchingStepIdentifiers addObject:@"other_symptom"];
+    
+    ORKPredicateStepNavigationRule *predicateRule =
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                             matchingStepIdentifiers:matchingStepIdentifiers];
+    
+    [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
+
+    
+    // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
+    resultPredicates = [NSMutableArray new];
+    matchingStepIdentifiers = [NSMutableArray new];
+    
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
+    [resultPredicates addObject:predicate];
+    [matchingStepIdentifiers addObject:@"severe_headache"];
+
+    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
+    [resultPredicates addObject:predicate];
+    [matchingStepIdentifiers addObject:@"light_headache"];
+    
+    predicateRule =
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                  matchingStepIdentifiers:matchingStepIdentifiers
+                                                    defaultStepIdentifier:@"other_symptom"];
+    
+    [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
+    
+    
+    // Task end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule =
+    [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
+    
+    [task addNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
+    [task addNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
+    [task addNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+    
+    return task;
+}
 
 #pragma mark - Helpers
 
@@ -1960,7 +2104,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 [pdfData writeToURL:outputUrl atomically:YES];
                 NSLog(@"Wrote PDF to %@", [outputUrl path]);
             }
-            
         }];
         
         _currentDocument = nil;
