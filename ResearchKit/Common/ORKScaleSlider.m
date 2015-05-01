@@ -114,7 +114,9 @@
     // available width in the superview.
     CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
     if(_vertical && sliderLayoutWidth > 0) {
-        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth);
+        // Subtract 5 (magic number) pixels to the vertical slider height so the vertical scale question step
+        // fits perfectly on the iPhone 6 screen without scrolling
+        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth - 5);
     }
     return intrinsicContentSize;
 }

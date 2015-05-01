@@ -204,17 +204,17 @@ static const CGFloat kVerticalSliderHorizontalMargin = 48;
     [self setCurrentValue:newValue];
 }
 
--(CGFloat)sliderLayoutWidth {
+- (CGFloat)sliderLayoutWidth {
     // Use the delegate expected width, if available, or if we have no delegate, then use our own width.
     // Subtract the left and right margins from the width, to give the appropriate slider width.
     return (self.delegate ? self.delegate.sliderLayoutWidth : self.previousLayoutWidth)-(kVerticalSliderHorizontalMargin*2);
 }
 
--(void)layoutSubviews {
+- (void)layoutSubviews {
     [super layoutSubviews];
     // This is currently only used by vertical sliders, but keep track of the width to implement the Protocol anyway
     CGFloat currentLayoutWidth = self.delegate ? self.delegate.sliderLayoutWidth : self.bounds.size.width;
-    if(self.previousLayoutWidth != currentLayoutWidth) {
+    if (self.previousLayoutWidth != currentLayoutWidth) {
         self.previousLayoutWidth = currentLayoutWidth;
         if ([_formatProvider isVertical]) {
             [self.slider invalidateIntrinsicContentSize];
