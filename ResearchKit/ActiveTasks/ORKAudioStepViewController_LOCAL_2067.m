@@ -28,7 +28,6 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKAudioStepViewController.h"
 #import "ORKAudioContentView.h"
 #import "ORKActiveStepViewController_Internal.h"
@@ -42,13 +41,11 @@
 #import "ORKActiveStepView.h"
 #import "ORKCustomStepView_Internal.h"
 
-
 @interface ORKAudioStepViewController ()
 
 @property (nonatomic, strong) AVAudioRecorder *avAudioRecorder;
 
 @end
-
 
 @implementation ORKAudioStepViewController {
     ORKAudioContentView *_audioContentView;

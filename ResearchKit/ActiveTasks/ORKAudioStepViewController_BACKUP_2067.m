@@ -165,11 +165,14 @@
 - (void)setAvAudioRecorder:(AVAudioRecorder *)recorder {
     _avAudioRecorder = nil;
     _avAudioRecorder = recorder;
+<<<<<<< HEAD
 }
 
 - (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
     _audioRecorderError = error;
+=======
+>>>>>>> master
 }
 
 @end
