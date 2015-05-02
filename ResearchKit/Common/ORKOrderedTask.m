@@ -789,6 +789,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 @implementation ORKNavigableOrderedTask {
+    NSMutableOrderedSet *_stepIdentifierStack;
     NSMutableDictionary *_stepNavigationRules;
 }
 
@@ -807,17 +808,47 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
+    ORKStep *nextStep = nil;
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
     NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
     if (nextStepIdentifier) {
-        return [self stepWithIdentifier:nextStepIdentifier];
+        nextStep = [self stepWithIdentifier:nextStepIdentifier];
+    } else {
+        nextStep = [super stepAfterStep:step withResult:result];
     }
-    return [super stepAfterStep:step withResult:result];
+    if (nextStep) {
+        [self updateStepIdentifierStackWithSourceIdenfier:step.identifier destinationIdentifier:nextStep.identifier];
+    }
+    return nextStep;
+}
+    
+- (void)updateStepIdentifierStackWithSourceIdenfier:(NSString *)sourceIdentifer destinationIdentifier:(NSString *)destinationIdentifier {
+    if (!_stepIdentifierStack) {
+        NSAssert(sourceIdentifer == nil, @"");
+        _stepIdentifierStack = [NSMutableOrderedSet new];
+        [_stepIdentifierStack addObject:destinationIdentifier];
+        return;
+    }
+    
+    NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifer];
+    NSAssert(indexOfSource != NSNotFound, @"");
+    
+    NSUInteger stackCount = [_stepIdentifierStack count];
+    if (indexOfSource != stackCount - 1) {
+        [_stepIdentifierStack removeObjectsInRange:NSMakeRange(indexOfSource + 1, stackCount - (indexOfSource + 1))];
+    }
+    [_stepIdentifierStack addObject:destinationIdentifier];
 }
 
-// TODO: How to handle this?
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    return [super stepBeforeStep:step withResult:result];
+    ORKStep *previousStep = nil;
+    if (_stepIdentifierStack) {
+        NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:step.identifier];
+        if (indexOfSource != NSNotFound && indexOfSource >= 1) {
+            previousStep = [self stepWithIdentifier:_stepIdentifierStack[indexOfSource - 1]];
+        }
+    }
+    return previousStep;
 }
 
 // ORKNavigableOrderedTask doesn't have a linear order
