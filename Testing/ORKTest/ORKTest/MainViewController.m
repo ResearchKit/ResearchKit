@@ -1617,28 +1617,23 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     step.optional = NO;
     [steps addObject:step];
 
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [[ORKActiveStep alloc] initWithIdentifier:@"blank"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blank"];
     step.title = @"This step is intentionally left blank (you should not see it)";
     [steps addObject:step];
 
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [[ORKActiveStep alloc] initWithIdentifier:@"severe_headache"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"severe_headache"];
     step.title = @"You have a severe headache";
     [steps addObject:step];
 
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [[ORKActiveStep alloc] initWithIdentifier:@"light_headache"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"light_headache"];
     step.title = @"You have a light headache";
     [steps addObject:step];
 
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [[ORKActiveStep alloc] initWithIdentifier:@"other_symptom"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"other_symptom"];
     step.title = @"You have other symptom";
     [steps addObject:step];
 
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [[ORKActiveStep alloc] initWithIdentifier:@"end"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
     step.title = @"You have finished the task";
     [steps addObject:step];
 
@@ -1894,7 +1889,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     NSString *task_identifier = taskViewController.task.identifier;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier] containsObject:task_identifier]);
+            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, StepNavigationTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
