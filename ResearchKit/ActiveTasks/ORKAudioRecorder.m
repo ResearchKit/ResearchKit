@@ -78,7 +78,9 @@
 }
 
 - (void)start {
-    
+    if (self.outputDirectory == nil) {
+        @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
+    }
     // Only create the file when we should actually start recording.
     if (! _audioRecorder) {
         
