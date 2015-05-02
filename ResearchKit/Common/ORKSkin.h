@@ -100,12 +100,13 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
+    ORKScreenMetricVerticalScaleHorizontalMargin,
     ORKScreenMetric_COUNT
 };
 
 typedef NS_ENUM(NSInteger, ORKScreenType) {
-    ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone6Plus,
+    ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
     ORKScreenTypeiPad,
