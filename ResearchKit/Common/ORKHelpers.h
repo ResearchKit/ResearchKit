@@ -58,6 +58,8 @@
 #define ORK_ENCODE_OBJ(c,x) [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
 #define ORK_DECODE_OBJ_CLASS(d,x,cl) _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
 #define ORK_DECODE_OBJ_ARRAY(d,x,cl) _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl) _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl) _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
 #define ORK_ENCODE_COND_OBJ(c,x) [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
 #define ORK_DECODE_IMAGE(d,x) _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
 #define ORK_DECODE_URL(d,x) _ ## x = (NSURL *)[d decodeObjectOfClass:[NSURL class] forKey:@STRINGIFY(x)]
@@ -165,7 +167,7 @@ ORKEqualObjects(id o1, id o2) {
 
 ORK_INLINE NSArray *
 ORKArrayCopyObjects(NSArray *a) {
-    if (! a) {
+    if (!a) {
         return nil;
     }
     NSMutableArray *b = [NSMutableArray arrayWithCapacity:[a count]];
@@ -173,6 +175,30 @@ ORKArrayCopyObjects(NSArray *a) {
         [b addObject:[obj copy]];
     }];
     return [b copy];
+}
+
+ORK_INLINE NSMutableOrderedSet *
+ORKMutableOrderedSetCopyObjects(NSOrderedSet *a) {
+    if (!a) {
+        return nil;
+    }
+    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:[a count]];
+    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [b addObject:[obj copy]];
+    }];
+    return b;
+}
+
+ORK_INLINE NSMutableDictionary *
+ORKMutableDictionaryCopyObjects(NSDictionary *a) {
+    if (!a) {
+        return nil;
+    }
+    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:[a count]];
+    [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        b[key] = [obj copy];
+    }];
+    return b;
 }
 
 #define ORKSuppressPerformSelectorWarning(PerformCall) \

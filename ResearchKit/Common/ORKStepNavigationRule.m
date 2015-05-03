@@ -38,39 +38,39 @@
 
 @implementation ORKStepNavigationRule
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)init_ork {
     return [super init];
 }
-#pragma clang diagnostic pop
 
-- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)ORKTaskResult {
-    return nil;
+- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
 }
 
 #pragma mark NSSecureCoding
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-    }
-    return self;
+    return [super init];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    // TODO
 }
 
-+ (BOOL)supportsSecureCoding {
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
     return YES;
 }
 
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    // TODO
-    return nil;
+    typeof(self) rule = [[[self class] allocWithZone:zone] init];
+    return rule;
 }
 
 @end
@@ -87,8 +87,6 @@
 
 @implementation ORKPredicateStepNavigationRule
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
                  matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier {
@@ -107,13 +105,6 @@
     return [self initWithResultPredicates:resultPredicates
                   matchingStepIdentifiers:matchingStepIdentifiers
                     defaultStepIdentifier:nil];
-}
-#pragma clang diagnostic pop
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    // TODO
-    return self;
 }
 
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)ORKTaskResult {
@@ -134,6 +125,52 @@
     return matchedPredicateIdentifier ? : _defaultStepIdentifier;
 }
 
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_ARRAY(aDecoder, resultPredicates, NSPredicate);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, matchingStepIdentifiers, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, defaultStepIdentifier, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, resultPredicates);
+    ORK_ENCODE_OBJ(aCoder, matchingStepIdentifiers);
+    ORK_ENCODE_OBJ(aCoder, defaultStepIdentifier);
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    typeof(self) rule = [[[self class] allocWithZone:zone] init];
+    rule->_resultPredicates = ORKArrayCopyObjects(_resultPredicates);
+    rule->_matchingStepIdentifiers = ORKArrayCopyObjects(_matchingStepIdentifiers);
+    rule ->_defaultStepIdentifier = [_defaultStepIdentifier copy];
+    return rule;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return (isParentSame
+            && ORKEqualObjects(self.resultPredicates, castObject.resultPredicates)
+            && ORKEqualObjects(self.matchingStepIdentifiers, castObject.matchingStepIdentifiers)
+            && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier));
+}
+
+- (NSUInteger)hash {
+    return [_resultPredicates hash] ^ [_matchingStepIdentifiers hash] ^ [_defaultStepIdentifier hash];
+}
+
 @end
 
 
@@ -146,8 +183,6 @@
 
 @implementation ORKDirectStepNavigationRule
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier {
     self = [super init_ork];
     if (self) {
@@ -156,16 +191,47 @@
     
     return self;
 }
-#pragma clang diagnostic pop
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    // TODO
-    return self;
-}
 
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)ORKTaskResult {
     return self.destinationStepIdentifier;
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, destinationStepIdentifier, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, destinationStepIdentifier);
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    typeof(self) rule = [[[self class] allocWithZone:zone] init];
+    rule->_destinationStepIdentifier = [_destinationStepIdentifier copy];
+    return rule;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    __typeof(self) castObject = object;
+    return (isParentSame
+            && ORKEqualObjects(self.destinationStepIdentifier, castObject.destinationStepIdentifier));
+}
+
+- (NSUInteger)hash {
+    return [_destinationStepIdentifier hash];
 }
 
 @end

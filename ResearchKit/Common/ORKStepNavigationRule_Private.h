@@ -36,14 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init_ork;
 
-/**
- Returns a new step navigation rule initialized from data in the given unarchiver.
- 
- @param aDecoder    Coder from which to initialize the step navigation rule.
- @return A new step navigation rule.
- */
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
-
 @end
 
 NS_ASSUME_NONNULL_END

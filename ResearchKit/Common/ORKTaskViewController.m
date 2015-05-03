@@ -1279,7 +1279,7 @@ static NSString * const _ORKPresentedDate = @"presentedDate";
 }
 
 
-- (void) applicationFinishedRestoringState {
+- (void)applicationFinishedRestoringState {
     [super applicationFinishedRestoringState];
     
     _pageViewController = (UIPageViewController *)[self.childNavigationController viewControllers][0];

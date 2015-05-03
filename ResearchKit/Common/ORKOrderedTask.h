@@ -93,9 +93,9 @@ ORK_CLASS_AVAILABLE
 /**
  A dictionary of step navigation rules in the task, keyed by trigger step identifier.
  
- Each object in the dictionary is a `ORKStepNavigationRule`.
+ Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
-@property (nonatomic, copy, readonly) NSDictionary *stepNavigationRules;
+@property (nonatomic, strong, readonly) NSDictionary *stepNavigationRules;
 
 @end
 

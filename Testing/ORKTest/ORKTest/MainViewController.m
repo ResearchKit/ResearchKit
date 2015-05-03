@@ -1613,7 +1613,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [steps addObject:step];
 
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom intereferes with your daily life?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
     step.optional = NO;
     [steps addObject:step];
 
@@ -1692,8 +1692,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                  matchingStepIdentifiers:matchingStepIdentifiers
-                                                    defaultStepIdentifier:@"other_symptom"];
+                                             matchingStepIdentifiers:matchingStepIdentifiers
+                                               defaultStepIdentifier:@"other_symptom"];
     
     [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     

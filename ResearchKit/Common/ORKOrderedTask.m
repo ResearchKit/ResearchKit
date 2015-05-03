@@ -68,7 +68,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
-        
         _identifier = [identifier copy];
         _steps = steps;
     }
@@ -241,7 +240,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, steps);
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -281,7 +279,6 @@ static NSString * const ORKLocationRecorderIdentifier = @"location";
 static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
-    
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
     step.title = ORKLocalizedString(@"TASK_COMPLETE_TITLE", nil);
     step.text = ORKLocalizedString(@"TASK_COMPLETE_TEXT", nil);
@@ -789,8 +786,17 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 @implementation ORKNavigableOrderedTask {
-    NSMutableOrderedSet *_stepIdentifierStack;
     NSMutableDictionary *_stepNavigationRules;
+    NSMutableOrderedSet *_stepIdentifierStack;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray *)steps {
+    self = [super initWithIdentifier:identifier steps:steps];
+    if (self) {
+        _stepNavigationRules = nil;
+        _stepIdentifierStack = nil;
+    }
+    return self;
 }
 
 - (void)addNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
@@ -858,6 +864,55 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 // ORKNavigableOrderedTask doesn't have a linear order
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     return ORKTaskProgressMake(0, 0);
+}
+
+// This method should only be used by serialization (the stepNavigationRules property is published as readonly)
+- (void)setStepNavigationRules:(NSDictionary *)stepNavigationRules {
+    _stepNavigationRules = [stepNavigationRules mutableCopy];
+}
+
+#pragma mark NSSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
+        ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(aDecoder, stepIdentifierStack, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    
+    ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
+    ORK_ENCODE_OBJ(aCoder, stepIdentifierStack);
+}
+
+#pragma mark NSCopying
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    typeof(self) task = [super copyWithZone:zone];
+    task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
+    task->_stepIdentifierStack = ORKMutableOrderedSetCopyObjects(_stepIdentifierStack);
+    return task;
+}
+
+// Note: 'isEqual:' and 'hash' ignore _stepIdentifierStack
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame
+    && ORKEqualObjects(self->_stepNavigationRules, castObject->_stepNavigationRules);
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [_stepNavigationRules hash];
 }
 
 @end
