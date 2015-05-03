@@ -233,6 +233,7 @@ static id propFromDict(NSDictionary *dict, NSString *propName) {
                 NSCAssert(convertedValue != nil, @"Could not convert to object of class %@", propertyClass);
                 outputDictionary[key] = convertedValue;
             }
+            output = outputDictionary;
         } else {
             NSCAssert(containerClass == [NSObject class], @"Unexpected container class %@", containerClass);
             
@@ -295,542 +296,569 @@ static NSMutableDictionary *ORKESerializationEncodingTable() {
     dispatch_once(&onceToken, ^{
 ret =
 [@{
-  ENTRY(ORKOrderedTask,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
-                                                                        steps:GETPROP(dict, steps)];
-            return task;
-        },(@{
-          PROPERTY(identifier, NSString, NSObject, NO , nil, nil),
-          PROPERTY(steps, ORKStep, NSArray, NO , nil, nil)
-          })),
-  ENTRY(ORKStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            ORKStep *step = [[ORKStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-            return step;
-        },
-        (@{
-          PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
-          PROPERTY(optional, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(title, NSString, NSObject, YES, nil, nil),
-          PROPERTY(text, NSString, NSObject, YES, nil, nil),
-          PROPERTY(shouldTintImages, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(useSurveyMode, NSNumber, NSObject, YES, nil, nil)
-          })),
-  ENTRY(ORKVisualConsentStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKVisualConsentStep alloc] initWithIdentifier:GETPROP(dict, identifier)
-                                                           document:GETPROP(dict, consentDocument)];
-        },
-        @{
-          PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
-          }),
-  ENTRY(ORKRecorderConfiguration,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            ORKRecorderConfiguration *recorderConfiguration = [[ORKRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
-            return recorderConfiguration;
-        },
-        (@{
-           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKQuestionStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKQuestionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(answerFormat, ORKAnswerFormat, NSObject, YES, nil, nil),
-          PROPERTY(placeholder, NSString, NSObject, YES, nil, nil)
-          })),
-  ENTRY(ORKInstructionStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
-        },
-        (@{
-          PROPERTY(quantityType, HKQuantityType, NSObject, NO,
-                   ^id(id type) { return [(HKQuantityType *)type identifier]; },
-                   ^id(id string) { return [HKQuantityType quantityTypeForIdentifier:string]; }),
-          PROPERTY(unit, HKUnit, NSObject, NO,
-                   ^id(id unit) { return [(HKUnit *)unit unitString]; },
-                   ^id(id string) { return [HKUnit unitFromString:string]; }),
-          })),
-  ENTRY(ORKActiveStep,
-  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-      return [[ORKActiveStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-  },
-  (@{
-    PROPERTY(stepDuration, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldShowDefaultTimer, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldSpeakCountDown, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldStartTimerAutomatically, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldPlaySoundOnStart, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldPlaySoundOnFinish, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldVibrateOnStart, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldVibrateOnFinish, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldUseNextAsSkipButton, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(shouldContinueOnFinish, NSNumber, NSObject, YES, nil, nil),
-    PROPERTY(spokenInstruction, NSString, NSObject, YES, nil, nil),
-    PROPERTY(recorderConfigurations, ORKRecorderConfiguration, NSArray, YES, nil, nil),
-    })),
-  ENTRY(ORKAudioStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKAudioStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKSpatialSpanMemoryStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(initialSpan, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(minimumSpan, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(maximumSpan, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(playSpeed, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(maxTests, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(maxConsecutiveFailures, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(requireReversal, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(customTargetPluralName, NSString, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKWalkingTaskStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKWalkingTaskStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKAccelerometerRecorderConfiguration,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
-        },
-        (@{
-          PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKAudioRecorderConfiguration,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) recorderSettings:GETPROP(dict, recorderSettings)];
-        },
-        (@{
-          PROPERTY(recorderSettings, NSDictionary, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKConsentDocument,
-        nil,
-        (@{
-          PROPERTY(title, NSString, NSObject, NO, nil, nil),
-          PROPERTY(sections, ORKConsentSection, NSArray, NO, nil, nil),
-          PROPERTY(signaturePageTitle, NSString, NSObject, NO, nil, nil),
-          PROPERTY(signaturePageContent, NSString, NSObject, NO, nil, nil),
-          PROPERTY(signatures, ORKConsentSignature, NSArray, NO, nil, nil),
-          PROPERTY(htmlReviewContent, NSString, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKConsentSharingStep,
-        ^(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKConsentSharingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-           PROPERTY(localizedLearnMoreHTMLContent, NSString, NSObject, YES, nil, nil),
-           })),
-  ENTRY(ORKConsentReviewStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKConsentReviewStep alloc] initWithIdentifier:GETPROP(dict, identifier) signature:GETPROP(dict, signature) inDocument:GETPROP(dict,consentDocument)];
-        },
-        (@{
-          PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil),
-          PROPERTY(reasonForConsent, NSString, NSObject, YES, nil, nil),
-          PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKConsentSection,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKConsentSection alloc] initWithType:[GETPROP(dict, type) integerValue]];
-        },
-        (@{
-          PROPERTY(type, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(title, NSString, NSObject, YES, nil, nil),
-          PROPERTY(formalTitle, NSString, NSObject, YES, nil, nil),
-          PROPERTY(summary, NSString, NSObject, YES, nil, nil),
-          PROPERTY(content, NSString, NSObject, YES, nil, nil),
-          PROPERTY(htmlContent, NSString, NSObject, YES, nil, nil),
-          PROPERTY(customLearnMoreButtonTitle, NSString, NSObject, YES, nil, nil),
-          PROPERTY(customAnimationURL, NSURL, NSObject, YES,
-                   ^id(id url) { return [(NSURL *)url absoluteString]; },
-                   ^id(id string) { return [NSURL URLWithString:string]; }),
-          })),
-  ENTRY(ORKConsentSignature,
-        nil,
-        (@{
-          PROPERTY(identifier, NSString, NSObject, YES, nil, nil),
-          PROPERTY(title, NSString, NSObject, YES, nil, nil),
-          PROPERTY(givenName, NSString, NSObject, YES, nil, nil),
-          PROPERTY(familyName, NSString, NSObject, YES, nil, nil),
-          PROPERTY(signatureDate, NSString, NSObject, YES, nil, nil),
-          PROPERTY(requiresName, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKDeviceMotionRecorderConfiguration,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
-        },
-        (@{
-          PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKFormStep,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-        },
-        (@{
-          PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil)
-          })),
-  ENTRY(ORKFormItem,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKFormItem alloc] initWithIdentifier:GETPROP(dict, identifier) text:GETPROP(dict, text) answerFormat:GETPROP(dict, answerFormat)];
-        },
-        (@{
-          PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
-          PROPERTY(text, NSString, NSObject, NO, nil, nil),
-          PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
-          PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
-        },
-        (@{
-          PROPERTY(characteristicType, HKCharacteristicType, NSObject, NO,
-                   ^id(id type) { return [(HKCharacteristicType *)type identifier]; },
-                   ^id(id string) { return [HKCharacteristicType characteristicTypeForIdentifier:string]; }),
-          })),
-  ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKHealthKitQuantityTypeAnswerFormat alloc] initWithQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit) style:[GETPROP(dict, numericAnswerStyle) integerValue]];
-        },
-        (@{
-          PROPERTY(unit, HKUnit, NSObject, NO,
-                   ^id(id unit) { return [(HKUnit *)unit unitString]; },
-                   ^id(id string) { return [HKUnit unitFromString:string]; }),
-          PROPERTY(quantityType, HKQuantityType, NSObject, NO,
-                   ^id(id type) { return [(HKQuantityType *)type identifier]; },
-                   ^id(id string) { return [HKQuantityType quantityTypeForIdentifier:string]; }),
-          PROPERTY(numericAnswerStyle, NSNumber, NSObject, NO,
-                   ^id(id num) { return ORKNumericAnswerStyleToString([num integerValue]); },
-                   ^id(id string) { return @(ORKNumericAnswerStyleFromString(string)); }),
-          })),
-  ENTRY(ORKAnswerFormat,
-        nil,
-        (@{
-          })),
-  ENTRY(ORKValuePickerAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKValuePickerAnswerFormat alloc] initWithTextChoices:GETPROP(dict, textChoices)];
-        },
-        (@{
-          PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
-          
-          })),
-  ENTRY(ORKImageChoiceAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
-        },
-        (@{
-          PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
-          })),
-  ENTRY(ORKTextChoiceAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] textChoices:GETPROP(dict, textChoices)];
-        },
-        (@{
-          PROPERTY(style, NSNumber, NSObject, NO, NUMTOSTRINGBLOCK(ORKChoiceAnswerStyleTable()), STRINGTONUMBLOCK(ORKChoiceAnswerStyleTable())),
-          PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
-          })),
-  ENTRY(ORKTextChoice,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTextChoice alloc] initWithText:GETPROP(dict, text) detailText:GETPROP(dict, detailText) value:GETPROP(dict, value)];
-        },
-        (@{
-          PROPERTY(text, NSString, NSObject, NO, nil, nil),
-          PROPERTY(value, NSObject, NSObject, NO, nil, nil),
-          PROPERTY(detailText, NSString, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKImageChoice,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKImageChoice alloc] initWithNormalImage:nil selectedImage:nil text:GETPROP(dict, text) value:GETPROP(dict, value)];
-        },
-        (@{
-          PROPERTY(text, NSString, NSObject, NO, nil, nil),
-          PROPERTY(value, NSObject, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKTimeOfDayAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:GETPROP(dict, defaultComponents)];
-        },
-        (@{
-          PROPERTY(defaultComponents, NSDateComponents, NSObject, NO,
-                   ^id(id components) { return ORKTimeOfDayStringFromComponents(components);  },
-                   ^id(id string) { return ORKTimeOfDayComponentsFromString(string); })
-          })),
-  ENTRY(ORKDateAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKDateAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] defaultDate:GETPROP(dict, defaultDate) minimumDate:GETPROP(dict, minimumDate) maximumDate:GETPROP(dict, maximumDate) calendar:GETPROP(dict, calendar)];
-        },
-        (@{
-          PROPERTY(style, NSNumber, NSObject, NO,
-                   NUMTOSTRINGBLOCK(ORKDateAnswerStyleTable()),
-                   STRINGTONUMBLOCK(ORKDateAnswerStyleTable())),
-          PROPERTY(calendar, NSCalendar, NSObject, NO,
-                   ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
-                   ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
-          PROPERTY(minimumDate, NSDate, NSObject, NO,
-                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
-                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          PROPERTY(maximumDate, NSDate, NSObject, NO,
-                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
-                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          PROPERTY(defaultDate, NSDate, NSObject, NO,
-                   ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
-                   ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
-          
-          })),
-  ENTRY(ORKNumericAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKNumericAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum)];
-        },
-        (@{
-          PROPERTY(style, NSNumber, NSObject, NO,
-                   ^id(id num) { return ORKNumericAnswerStyleToString([num integerValue]); },
-                   ^id(id string) { return @(ORKNumericAnswerStyleFromString(string)); }),
-          PROPERTY(unit, NSString, NSObject, NO, nil, nil),
-          PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKScaleAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
-        },
-        (@{
-          PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
-          })),
-  ENTRY(ORKContinuousScaleAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
-        },
-        (@{
-          PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
-          })),
-  ENTRY(ORKTextAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTextAnswerFormat alloc] initWithMaximumLength:[GETPROP(dict, maximumLength) integerValue]];
-        },
-        (@{
-          PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          })),
-  ENTRY(ORKTimeIntervalAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:[GETPROP(dict, defaultInterval) doubleValue] step:[GETPROP(dict, step) integerValue]];
-        },
-        (@{
-          PROPERTY(defaultInterval, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
-          })),
-  ENTRY(ORKBooleanAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKBooleanAnswerFormat alloc] init];
-        },
-        (@{
-          })),
-  ENTRY(ORKLocationRecorderConfiguration,
-        nil,
-        (@{
-          })),
-  ENTRY(ORKPedometerRecorderConfiguration,
-        nil,
-        (@{
-          })),
-  ENTRY(ORKTouchRecorderConfiguration,
-        nil,
-        (@{
-          })),
-  ENTRY(ORKResult,
-        nil,
-        (@{
-           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
-           PROPERTY(startDate, NSDate, NSObject, YES,
-                    ^id(id date) { return ORKEStringFromDateISO8601(date); },
-                    ^id(id string) { return ORKEDateFromStringISO8601(string); }),
-           PROPERTY(endDate, NSDate, NSObject, YES,
-                    ^id(id date) { return ORKEStringFromDateISO8601(date); },
-                    ^id(id string) { return ORKEDateFromStringISO8601(string); }),
-           PROPERTY(userInfo, NSDictionary, NSObject, YES, nil, nil)
-           })),
-  ENTRY(ORKTappingSample,
-        nil,
-        (@{
-           PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(buttonIdentifier, NSNumber, NSObject, NO,
-                    ^id(id numeric) { return tableMapForward([numeric integerValue], buttonIdentifierTable()); },
-                    ^id(id string) { return @(tableMapReverse(string, buttonIdentifierTable())); }),
-           PROPERTY(location, NSValue, NSObject, NO,
-                    ^id(id value) { return value?dictionaryFromCGPoint([value CGPointValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGPoint:pointFromDictionary(dict)]; })
-           })),
-  ENTRY(ORKTappingIntervalResult,
-        nil,
-        (@{
-           PROPERTY(samples, ORKTappingSample, NSArray, NO, nil, nil),
-           PROPERTY(stepViewSize, NSValue, NSObject, NO,
-                    ^id(id value) { return value?dictionaryFromCGSize([value CGSizeValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGSize:sizeFromDictionary(dict)]; }),
-           PROPERTY(buttonRect1, NSValue, NSObject, NO,
-                    ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; }),
-           PROPERTY(buttonRect2, NSValue, NSObject, NO,
-                    ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
-           })),
-  ENTRY(ORKSpatialSpanMemoryGameTouchSample,
-        nil,
-        (@{
-           PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(targetIndex, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(correct, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(location, NSValue, NSObject, NO,
-                    ^id(id value) { return value?dictionaryFromCGPoint([value CGPointValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGPoint:pointFromDictionary(dict)]; })
-           })),
-  ENTRY(ORKSpatialSpanMemoryGameRecord,
-        nil,
-        (@{
-           PROPERTY(seed, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(sequence, NSNumber, NSArray, NO, nil, nil),
-           PROPERTY(gameSize, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(gameStatus, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(score, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(touchSamples, ORKSpatialSpanMemoryGameTouchSample, NSArray, NO,
-                    ^id(id numeric) { return tableMapForward([numeric integerValue], memoryGameStatusTable()); },
-                    ^id(id string) { return @(tableMapReverse(string, memoryGameStatusTable())); }),
-           PROPERTY(targetRects, NSValue, NSArray, NO,
-                    ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
-                    ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
-           })),
-  ENTRY(ORKSpatialSpanMemoryResult,
-        nil,
-        (@{
-           PROPERTY(score, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(numberOfGames, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(numberOfFailures, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(gameRecords, ORKSpatialSpanMemoryGameRecord, NSArray, NO, nil, nil)
-           })),
-  ENTRY(ORKFileResult,
-        nil,
-        (@{
-           PROPERTY(contentType, NSString, NSObject, NO, nil, nil),
-           PROPERTY(fileURL, NSURL, NSObject, NO,
-                    ^id(id url) { return [url absoluteString]; },
-                    ^id(id string) { return [NSURL URLWithString:string]; })
-           })),
-  ENTRY(ORKQuestionResult,
-        nil,
-        (@{
-           PROPERTY(questionType, NSNumber, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKScaleQuestionResult,
-        nil,
-        (@{
-           PROPERTY(scaleAnswer, NSNumber, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKChoiceQuestionResult,
-        nil,
-        (@{
-           PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKBooleanQuestionResult,
-        nil,
-        (@{
-           PROPERTY(booleanAnswer, NSNumber, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKTextQuestionResult,
-        nil,
-        (@{
-           PROPERTY(textAnswer, NSString, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKNumericQuestionResult,
-        nil,
-        (@{
-           PROPERTY(numericAnswer, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(unit, NSString, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKTimeOfDayQuestionResult,
-        nil,
-        (@{
-           PROPERTY(dateComponentsAnswer, NSDateComponents, NSObject, NO,
-                    ^id(id dateComponents) { return ORKTimeOfDayStringFromComponents(dateComponents); },
-                    ^id(id string) { return ORKTimeOfDayComponentsFromString(string); })
-           })),
-  ENTRY(ORKTimeIntervalQuestionResult,
-        nil,
-        (@{
-           PROPERTY(intervalAnswer, NSNumber, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKDateQuestionResult,
-        nil,
-        (@{
-           PROPERTY(dateAnswer, NSDate, NSObject, NO,
-                    ^id(id date) { return ORKEStringFromDateISO8601(date); },
-                    ^id(id string) { return ORKEDateFromStringISO8601(string); }),
-           PROPERTY(calendar, NSCalendar, NSObject, NO,
-                    ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
-                    ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
-           PROPERTY(timeZone, NSTimeZone, NSObject, NO,
-                    ^id(id timezone) { return @([timezone secondsFromGMT]); },
-                    ^id(id number) { return [NSTimeZone timeZoneForSecondsFromGMT:[number doubleValue]]; })
-           })),
-  ENTRY(ORKConsentSignatureResult,
-        nil,
-        (@{
-           PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil)
-           })),
-  ENTRY(ORKCollectionResult,
-        nil,
-        (@{
-           PROPERTY(results, ORKResult, NSArray, YES, nil, nil)
-           })),
-  ENTRY(ORKTaskResult,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            NSLog(@"blah");
-            return [[ORKTaskResult alloc] initWithTaskIdentifier:GETPROP(dict, identifier) taskRunUUID:GETPROP(dict, taskRunUUID) outputDirectory:GETPROP(dict, outputDirectory)];
-        },
-        (@{
-           PROPERTY(taskRunUUID, NSUUID, NSObject, NO,
-                    ^id(id uuid) { return [uuid UUIDString]; },
-                    ^id(id string) { return [[NSUUID alloc] initWithUUIDString:string]; }),
-           PROPERTY(outputDirectory, NSURL, NSObject, NO,
-                    ^id(id url) { return [url absoluteString]; },
-                    ^id(id string) { return [NSURL URLWithString:string]; })
-           })),
-  ENTRY(ORKStepResult,
-        nil,
-        (@{
-           })),
-  
-  } mutableCopy];
+   ENTRY(ORKPredicateStepNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKPredicateStepNavigationRule *rule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:GETPROP(dict, resultPredicates)
+                                                                                             matchingStepIdentifiers:GETPROP(dict, matchingStepIdentifiers)
+                                                                                               defaultStepIdentifier:GETPROP(dict, defaultStepIdentifier)];
+             return rule;
+         },(@{
+              PROPERTY(resultPredicates, NSPredicate, NSArray, NO, nil, nil),
+              PROPERTY(matchingStepIdentifiers, NSString, NSArray, NO, nil, nil),
+              PROPERTY(defaultStepIdentifier, NSString, NSObject, NO, nil, nil)
+              })),
+   ENTRY(ORKDirectStepNavigationRule,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKDirectStepNavigationRule *rule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:GETPROP(dict, destinationStepIdentifier)];
+             return rule;
+         },(@{
+              PROPERTY(destinationStepIdentifier, NSString, NSObject, NO, nil, nil),
+              })),
+   ENTRY(ORKOrderedTask,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                                         steps:GETPROP(dict, steps)];
+             return task;
+         },(@{
+              PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(steps, ORKStep, NSArray, NO, nil, nil)
+              })),
+   ENTRY(ORKNavigableOrderedTask,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                                                           steps:GETPROP(dict, steps)];
+             return task;
+         },(@{
+              PROPERTY(stepNavigationRules, ORKStepNavigationRule, NSMutableDictionary, YES, nil, nil),
+              PROPERTY(stepIdentifierStack, NSMutableOrderedSet, NSObject, YES, nil, nil),
+              })),
+   ENTRY(ORKStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKStep *step = [[ORKStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return step;
+         },
+         (@{
+            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(optional, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(title, NSString, NSObject, YES, nil, nil),
+            PROPERTY(text, NSString, NSObject, YES, nil, nil),
+            PROPERTY(shouldTintImages, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(useSurveyMode, NSNumber, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKVisualConsentStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVisualConsentStep alloc] initWithIdentifier:GETPROP(dict, identifier)
+                                                            document:GETPROP(dict, consentDocument)];
+         },
+         @{
+           PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
+           }),
+   ENTRY(ORKRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             ORKRecorderConfiguration *recorderConfiguration = [[ORKRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return recorderConfiguration;
+         },
+         (@{
+            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKQuestionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKQuestionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(answerFormat, ORKAnswerFormat, NSObject, YES, nil, nil),
+            PROPERTY(placeholder, NSString, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKInstructionStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKInstructionStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(detailText, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKHealthQuantityTypeRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHealthQuantityTypeRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) healthQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit)];
+         },
+         (@{
+            PROPERTY(quantityType, HKQuantityType, NSObject, NO,
+                     ^id(id type) { return [(HKQuantityType *)type identifier]; },
+                     ^id(id string) { return [HKQuantityType quantityTypeForIdentifier:string]; }),
+            PROPERTY(unit, HKUnit, NSObject, NO,
+                     ^id(id unit) { return [(HKUnit *)unit unitString]; },
+                     ^id(id string) { return [HKUnit unitFromString:string]; }),
+            })),
+   ENTRY(ORKActiveStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKActiveStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(stepDuration, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldShowDefaultTimer, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldSpeakCountDown, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldStartTimerAutomatically, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldPlaySoundOnStart, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldPlaySoundOnFinish, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldVibrateOnStart, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldVibrateOnFinish, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldUseNextAsSkipButton, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(shouldContinueOnFinish, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(spokenInstruction, NSString, NSObject, YES, nil, nil),
+            PROPERTY(recorderConfigurations, ORKRecorderConfiguration, NSArray, YES, nil, nil),
+            })),
+   ENTRY(ORKAudioStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAudioStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKSpatialSpanMemoryStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(initialSpan, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(minimumSpan, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(maximumSpan, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(playSpeed, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(maxTests, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(maxConsecutiveFailures, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(requireReversal, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(customTargetPluralName, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKWalkingTaskStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKWalkingTaskStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKAccelerometerRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
+         },
+         (@{
+            PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKAudioRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) recorderSettings:GETPROP(dict, recorderSettings)];
+         },
+         (@{
+            PROPERTY(recorderSettings, NSDictionary, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKConsentDocument,
+         nil,
+         (@{
+            PROPERTY(title, NSString, NSObject, NO, nil, nil),
+            PROPERTY(sections, ORKConsentSection, NSArray, NO, nil, nil),
+            PROPERTY(signaturePageTitle, NSString, NSObject, NO, nil, nil),
+            PROPERTY(signaturePageContent, NSString, NSObject, NO, nil, nil),
+            PROPERTY(signatures, ORKConsentSignature, NSArray, NO, nil, nil),
+            PROPERTY(htmlReviewContent, NSString, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKConsentSharingStep,
+         ^(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKConsentSharingStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(localizedLearnMoreHTMLContent, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKConsentReviewStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKConsentReviewStep alloc] initWithIdentifier:GETPROP(dict, identifier) signature:GETPROP(dict, signature) inDocument:GETPROP(dict,consentDocument)];
+         },
+         (@{
+            PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil),
+            PROPERTY(reasonForConsent, NSString, NSObject, YES, nil, nil),
+            PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKConsentSection,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKConsentSection alloc] initWithType:[GETPROP(dict, type) integerValue]];
+         },
+         (@{
+            PROPERTY(type, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(title, NSString, NSObject, YES, nil, nil),
+            PROPERTY(formalTitle, NSString, NSObject, YES, nil, nil),
+            PROPERTY(summary, NSString, NSObject, YES, nil, nil),
+            PROPERTY(content, NSString, NSObject, YES, nil, nil),
+            PROPERTY(htmlContent, NSString, NSObject, YES, nil, nil),
+            PROPERTY(customLearnMoreButtonTitle, NSString, NSObject, YES, nil, nil),
+            PROPERTY(customAnimationURL, NSURL, NSObject, YES,
+                     ^id(id url) { return [(NSURL *)url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; }),
+            })),
+   ENTRY(ORKConsentSignature,
+         nil,
+         (@{
+            PROPERTY(identifier, NSString, NSObject, YES, nil, nil),
+            PROPERTY(title, NSString, NSObject, YES, nil, nil),
+            PROPERTY(givenName, NSString, NSObject, YES, nil, nil),
+            PROPERTY(familyName, NSString, NSObject, YES, nil, nil),
+            PROPERTY(signatureDate, NSString, NSObject, YES, nil, nil),
+            PROPERTY(requiresName, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKDeviceMotionRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
+         },
+         (@{
+            PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKFormStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKFormStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(formItems, ORKFormItem, NSArray, YES, nil, nil)
+            })),
+   ENTRY(ORKFormItem,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKFormItem alloc] initWithIdentifier:GETPROP(dict, identifier) text:GETPROP(dict, text) answerFormat:GETPROP(dict, answerFormat)];
+         },
+         (@{
+            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(text, NSString, NSObject, NO, nil, nil),
+            PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
+            PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKHealthKitCharacteristicTypeAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHealthKitCharacteristicTypeAnswerFormat alloc] initWithCharacteristicType:GETPROP(dict, characteristicType)];
+         },
+         (@{
+            PROPERTY(characteristicType, HKCharacteristicType, NSObject, NO,
+                     ^id(id type) { return [(HKCharacteristicType *)type identifier]; },
+                     ^id(id string) { return [HKCharacteristicType characteristicTypeForIdentifier:string]; }),
+            })),
+   ENTRY(ORKHealthKitQuantityTypeAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHealthKitQuantityTypeAnswerFormat alloc] initWithQuantityType:GETPROP(dict, quantityType) unit:GETPROP(dict, unit) style:[GETPROP(dict, numericAnswerStyle) integerValue]];
+         },
+         (@{
+            PROPERTY(unit, HKUnit, NSObject, NO,
+                     ^id(id unit) { return [(HKUnit *)unit unitString]; },
+                     ^id(id string) { return [HKUnit unitFromString:string]; }),
+            PROPERTY(quantityType, HKQuantityType, NSObject, NO,
+                     ^id(id type) { return [(HKQuantityType *)type identifier]; },
+                     ^id(id string) { return [HKQuantityType quantityTypeForIdentifier:string]; }),
+            PROPERTY(numericAnswerStyle, NSNumber, NSObject, NO,
+                     ^id(id num) { return ORKNumericAnswerStyleToString([num integerValue]); },
+                     ^id(id string) { return @(ORKNumericAnswerStyleFromString(string)); }),
+            })),
+   ENTRY(ORKAnswerFormat,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKValuePickerAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKValuePickerAnswerFormat alloc] initWithTextChoices:GETPROP(dict, textChoices)];
+         },
+         (@{
+            PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
+            
+            })),
+   ENTRY(ORKImageChoiceAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKImageChoiceAnswerFormat alloc] initWithImageChoices:GETPROP(dict, imageChoices)];
+         },
+         (@{
+            PROPERTY(imageChoices, ORKImageChoice, NSArray, NO, nil, nil),
+            })),
+   ENTRY(ORKTextChoiceAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTextChoiceAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] textChoices:GETPROP(dict, textChoices)];
+         },
+         (@{
+            PROPERTY(style, NSNumber, NSObject, NO, NUMTOSTRINGBLOCK(ORKChoiceAnswerStyleTable()), STRINGTONUMBLOCK(ORKChoiceAnswerStyleTable())),
+            PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
+            })),
+   ENTRY(ORKTextChoice,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTextChoice alloc] initWithText:GETPROP(dict, text) detailText:GETPROP(dict, detailText) value:GETPROP(dict, value)];
+         },
+         (@{
+            PROPERTY(text, NSString, NSObject, NO, nil, nil),
+            PROPERTY(value, NSObject, NSObject, NO, nil, nil),
+            PROPERTY(detailText, NSString, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKImageChoice,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKImageChoice alloc] initWithNormalImage:nil selectedImage:nil text:GETPROP(dict, text) value:GETPROP(dict, value)];
+         },
+         (@{
+            PROPERTY(text, NSString, NSObject, NO, nil, nil),
+            PROPERTY(value, NSObject, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKTimeOfDayAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTimeOfDayAnswerFormat alloc] initWithDefaultComponents:GETPROP(dict, defaultComponents)];
+         },
+         (@{
+            PROPERTY(defaultComponents, NSDateComponents, NSObject, NO,
+                     ^id(id components) { return ORKTimeOfDayStringFromComponents(components);  },
+                     ^id(id string) { return ORKTimeOfDayComponentsFromString(string); })
+            })),
+   ENTRY(ORKDateAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKDateAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] defaultDate:GETPROP(dict, defaultDate) minimumDate:GETPROP(dict, minimumDate) maximumDate:GETPROP(dict, maximumDate) calendar:GETPROP(dict, calendar)];
+         },
+         (@{
+            PROPERTY(style, NSNumber, NSObject, NO,
+                     NUMTOSTRINGBLOCK(ORKDateAnswerStyleTable()),
+                     STRINGTONUMBLOCK(ORKDateAnswerStyleTable())),
+            PROPERTY(calendar, NSCalendar, NSObject, NO,
+                     ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
+                     ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
+            PROPERTY(minimumDate, NSDate, NSObject, NO,
+                     ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                     ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+            PROPERTY(maximumDate, NSDate, NSObject, NO,
+                     ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                     ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+            PROPERTY(defaultDate, NSDate, NSObject, NO,
+                     ^id(id date) { return [ORKResultDateTimeFormatter() stringFromDate:date]; },
+                     ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
+            
+            })),
+   ENTRY(ORKNumericAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKNumericAnswerFormat alloc] initWithStyle:[GETPROP(dict, style) integerValue] unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum)];
+         },
+         (@{
+            PROPERTY(style, NSNumber, NSObject, NO,
+                     ^id(id num) { return ORKNumericAnswerStyleToString([num integerValue]); },
+                     ^id(id string) { return @(ORKNumericAnswerStyleFromString(string)); }),
+            PROPERTY(unit, NSString, NSObject, NO, nil, nil),
+            PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+         },
+         (@{
+            PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKContinuousScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+         },
+         (@{
+            PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKTextAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTextAnswerFormat alloc] initWithMaximumLength:[GETPROP(dict, maximumLength) integerValue]];
+         },
+         (@{
+            PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
+            })),
+   ENTRY(ORKTimeIntervalAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:[GETPROP(dict, defaultInterval) doubleValue] step:[GETPROP(dict, step) integerValue]];
+         },
+         (@{
+            PROPERTY(defaultInterval, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKBooleanAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKBooleanAnswerFormat alloc] init];
+         },
+         (@{
+            })),
+   ENTRY(ORKLocationRecorderConfiguration,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKPedometerRecorderConfiguration,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKTouchRecorderConfiguration,
+         nil,
+         (@{
+            })),
+   ENTRY(ORKResult,
+         nil,
+         (@{
+            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(startDate, NSDate, NSObject, YES,
+                     ^id(id date) { return ORKEStringFromDateISO8601(date); },
+                     ^id(id string) { return ORKEDateFromStringISO8601(string); }),
+            PROPERTY(endDate, NSDate, NSObject, YES,
+                     ^id(id date) { return ORKEStringFromDateISO8601(date); },
+                     ^id(id string) { return ORKEDateFromStringISO8601(string); }),
+            PROPERTY(userInfo, NSDictionary, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKTappingSample,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(buttonIdentifier, NSNumber, NSObject, NO,
+                     ^id(id numeric) { return tableMapForward([numeric integerValue], buttonIdentifierTable()); },
+                     ^id(id string) { return @(tableMapReverse(string, buttonIdentifierTable())); }),
+            PROPERTY(location, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCGPoint([value CGPointValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGPoint:pointFromDictionary(dict)]; })
+            })),
+   ENTRY(ORKTappingIntervalResult,
+         nil,
+         (@{
+            PROPERTY(samples, ORKTappingSample, NSArray, NO, nil, nil),
+            PROPERTY(stepViewSize, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCGSize([value CGSizeValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGSize:sizeFromDictionary(dict)]; }),
+            PROPERTY(buttonRect1, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; }),
+            PROPERTY(buttonRect2, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
+            })),
+   ENTRY(ORKSpatialSpanMemoryGameTouchSample,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(targetIndex, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(correct, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(location, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCGPoint([value CGPointValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGPoint:pointFromDictionary(dict)]; })
+            })),
+   ENTRY(ORKSpatialSpanMemoryGameRecord,
+         nil,
+         (@{
+            PROPERTY(seed, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(sequence, NSNumber, NSArray, NO, nil, nil),
+            PROPERTY(gameSize, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(gameStatus, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(score, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(touchSamples, ORKSpatialSpanMemoryGameTouchSample, NSArray, NO,
+                     ^id(id numeric) { return tableMapForward([numeric integerValue], memoryGameStatusTable()); },
+                     ^id(id string) { return @(tableMapReverse(string, memoryGameStatusTable())); }),
+            PROPERTY(targetRects, NSValue, NSArray, NO,
+                     ^id(id value) { return value?dictionaryFromCGRect([value CGRectValue]):nil; },
+                     ^id(id dict) { return [NSValue valueWithCGRect:rectFromDictionary(dict)]; })
+            })),
+   ENTRY(ORKSpatialSpanMemoryResult,
+         nil,
+         (@{
+            PROPERTY(score, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(numberOfGames, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(numberOfFailures, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(gameRecords, ORKSpatialSpanMemoryGameRecord, NSArray, NO, nil, nil)
+            })),
+   ENTRY(ORKFileResult,
+         nil,
+         (@{
+            PROPERTY(contentType, NSString, NSObject, NO, nil, nil),
+            PROPERTY(fileURL, NSURL, NSObject, NO,
+                     ^id(id url) { return [url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; })
+            })),
+   ENTRY(ORKQuestionResult,
+         nil,
+         (@{
+            PROPERTY(questionType, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKScaleQuestionResult,
+         nil,
+         (@{
+            PROPERTY(scaleAnswer, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKChoiceQuestionResult,
+         nil,
+         (@{
+            PROPERTY(choiceAnswers, NSObject, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKBooleanQuestionResult,
+         nil,
+         (@{
+            PROPERTY(booleanAnswer, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKTextQuestionResult,
+         nil,
+         (@{
+            PROPERTY(textAnswer, NSString, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKNumericQuestionResult,
+         nil,
+         (@{
+            PROPERTY(numericAnswer, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(unit, NSString, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKTimeOfDayQuestionResult,
+         nil,
+         (@{
+            PROPERTY(dateComponentsAnswer, NSDateComponents, NSObject, NO,
+                     ^id(id dateComponents) { return ORKTimeOfDayStringFromComponents(dateComponents); },
+                     ^id(id string) { return ORKTimeOfDayComponentsFromString(string); })
+            })),
+   ENTRY(ORKTimeIntervalQuestionResult,
+         nil,
+         (@{
+            PROPERTY(intervalAnswer, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKDateQuestionResult,
+         nil,
+         (@{
+            PROPERTY(dateAnswer, NSDate, NSObject, NO,
+                     ^id(id date) { return ORKEStringFromDateISO8601(date); },
+                     ^id(id string) { return ORKEDateFromStringISO8601(string); }),
+            PROPERTY(calendar, NSCalendar, NSObject, NO,
+                     ^id(id calendar) { return [(NSCalendar *)calendar calendarIdentifier]; },
+                     ^id(id string) { return [NSCalendar calendarWithIdentifier:string]; }),
+            PROPERTY(timeZone, NSTimeZone, NSObject, NO,
+                     ^id(id timezone) { return @([timezone secondsFromGMT]); },
+                     ^id(id number) { return [NSTimeZone timeZoneForSecondsFromGMT:[number doubleValue]]; })
+            })),
+   ENTRY(ORKConsentSignatureResult,
+         nil,
+         (@{
+            PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKCollectionResult,
+         nil,
+         (@{
+            PROPERTY(results, ORKResult, NSArray, YES, nil, nil)
+            })),
+   ENTRY(ORKTaskResult,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             NSLog(@"blah");
+             return [[ORKTaskResult alloc] initWithTaskIdentifier:GETPROP(dict, identifier) taskRunUUID:GETPROP(dict, taskRunUUID) outputDirectory:GETPROP(dict, outputDirectory)];
+         },
+         (@{
+            PROPERTY(taskRunUUID, NSUUID, NSObject, NO,
+                     ^id(id uuid) { return [uuid UUIDString]; },
+                     ^id(id string) { return [[NSUUID alloc] initWithUUIDString:string]; }),
+            PROPERTY(outputDirectory, NSURL, NSObject, NO,
+                     ^id(id url) { return [url absoluteString]; },
+                     ^id(id string) { return [NSURL URLWithString:string]; })
+            })),
+   ENTRY(ORKStepResult,
+         nil,
+         (@{
+            })),
+   
+   } mutableCopy];
     });
     return ret;
 }
