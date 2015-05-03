@@ -824,8 +824,12 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
 - (void)updateStepIdentifierStackWithSourceIdenfier:(NSString *)sourceIdentifer destinationIdentifier:(NSString *)destinationIdentifier {
     if (!_stepIdentifierStack) {
-        NSAssert(sourceIdentifer == nil, @"");
         _stepIdentifierStack = [NSMutableOrderedSet new];
+        // sourceIdentifier is nil if the task starts fresh,
+        // but can have a value if the task is being restored to a specific step
+        if (sourceIdentifer) {
+            [_stepIdentifierStack addObject:sourceIdentifer];
+        }
         [_stepIdentifierStack addObject:destinationIdentifier];
         return;
     }
