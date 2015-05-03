@@ -29,14 +29,47 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@interface ORKResultPredicate : NSObject
+
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue;
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer;
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswers:(NSArray *)expectedAnswers;
+
++ (NSPredicate *)predicateForBooleanQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(BOOL)expectedAnswer;
+
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer;
+
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                      minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue;
+
++ (NSPredicate *)predicateForTimeOfDayQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                               minimumExpectedAnswerDateComponents:(NSDateComponents *)minimumExpectedAnswerDateComponents
+                               maximumExpectedAnswerDateComponents:(NSDateComponents *)maximumExpectedAnswerDateComponents;
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
+
++ (NSPredicate *)predicateForDateQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerDate:(NSDate *)minimumExpectedAnswerDate
+                                    maximumExpectedAnswerDate:(NSDate *)maximumExpectedAnswerDate;
+
+@end
+
+
 @class ORKResult;
 @class ORKTaskResult;
-
 
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>

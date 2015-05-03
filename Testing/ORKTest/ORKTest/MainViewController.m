@@ -1645,25 +1645,27 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     // Individual predicates
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache =
-    [NSPredicate predicateWithFormat:
-     @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' AND \
-                          SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:@"symptom" expectedAnswer:@"headache"];
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
+    //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
 
     // User didn't chose headache at the symptom step
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
 
     // User chose YES at the severity step
-    NSPredicate *predicateSevereYes =
-    [NSPredicate predicateWithFormat:
-     @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:@"severity" expectedAnswer:YES];
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
 
     // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [NSCompoundPredicate notPredicateWithSubpredicate:predicateSevereYes];
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:@"severity" expectedAnswer:NO];
 
     
-    // From the "sympton" step, go to "other_sympton" is user didn't chose headache.
-    // Otherwise, default to going to next step in order (when the defaultStepIdentifier argument is omitted,
+    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
+    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
     // the regular ORKOrderedTask order applies).
     NSMutableArray *resultPredicates = [NSMutableArray new];
     NSMutableArray *matchingStepIdentifiers = [NSMutableArray new];

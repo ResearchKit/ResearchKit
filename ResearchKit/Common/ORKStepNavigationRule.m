@@ -36,6 +36,105 @@
 #import "ORKResult.h"
 
 
+@implementation ORKResultPredicate
+
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer {
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier expectedAnswer:expectedAnswer];
+}
+
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue {
+    return [self predicateForScaleQuestionResultWithIdentifier:resultIdentifier
+                                    minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer {
+    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:@[ expectedAnswer ]];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswers:(NSArray *)expectedAnswers {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    ORKThrowInvalidArgumentExceptionIfNil(expectedAnswers);
+    if ([expectedAnswers count] == 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"expectedAnswer can not be empty." userInfo:nil];
+    }
+
+    NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
+    for (NSInteger i = 0; i < [expectedAnswers count]; i++) {
+        [format appendString:@" AND SUBQUERY($x.answer, $y, $y like %@).@count > 0"];
+    }
+    [format appendString:@").@count > 0"];
+    
+    NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:resultIdentifier, nil];
+    [arguments addObjectsFromArray:expectedAnswers];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:format argumentArray:arguments];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForBooleanQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(BOOL)expectedAnswer {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer == %@).@count > 0",
+                              resultIdentifier, @(expectedAnswer)];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer like %@).@count > 0",
+                              resultIdentifier, expectedAnswer];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer == %@).@count > 0",
+                              resultIdentifier, @(expectedAnswer)];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
+                              resultIdentifier, @(minimumExpectedAnswerValue), @(maximumExpectedAnswerValue)];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForTimeOfDayQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                               minimumExpectedAnswerDateComponents:(NSDateComponents *)minimumExpectedAnswerDateComponents
+                               maximumExpectedAnswerDateComponents:(NSDateComponents *)maximumExpectedAnswerDateComponents {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer.date >= %@ AND $x.answer.date <= %@).@count > 0",
+                              resultIdentifier, minimumExpectedAnswerDateComponents.date, maximumExpectedAnswerDateComponents.date];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer {
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier expectedAnswer:expectedAnswer];
+}
+
++ (NSPredicate *)predicateForDateQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerDate:(NSDate *)minimumExpectedAnswerDate
+                                    maximumExpectedAnswerDate:(NSDate *)maximumExpectedAnswerDate {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
+                              resultIdentifier, minimumExpectedAnswerDate, maximumExpectedAnswerDate];
+    return predicate;
+}
+
+@end
+
+
 @implementation ORKStepNavigationRule
 
 - (instancetype)init_ork {

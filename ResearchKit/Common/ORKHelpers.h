@@ -54,28 +54,32 @@
 #define STRINGIFY2( x) #x
 #define STRINGIFY(x) STRINGIFY2(x)
 
-#define ORK_DECODE_OBJ(d,x) _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_OBJ(c,x) [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_CLASS(d,x,cl) _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_ARRAY(d,x,cl) _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl) _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
-#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl) _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
-#define ORK_ENCODE_COND_OBJ(c,x) [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
-#define ORK_DECODE_IMAGE(d,x) _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
+
+#define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
+
 #define ORK_DECODE_URL(d,x) _ ## x = (NSURL *)[d decodeObjectOfClass:[NSURL class] forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_IMAGE(c,x) { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
 
-#define ORK_DECODE_BOOL(d,x) _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_BOOL(c,x) [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
 
-#define ORK_DECODE_DOUBLE(d,x) _ ## x = [d decodeDoubleForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_DOUBLE(c,x) [c encodeDouble:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_DOUBLE(d,x)  _ ## x = [d decodeDoubleForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_DOUBLE(c,x)  [c encodeDouble:_ ## x forKey:@STRINGIFY(x)]
 
-#define ORK_DECODE_INTEGER(d,x) _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_INTEGER(c,x) [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_INTEGER(d,x)  _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_INTEGER(c,x)  [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
 
-#define ORK_ENCODE_UINT32(c,x) [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_UINT32(d,x) _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@STRINGIFY(x)] unsignedLongValue]
+#define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@STRINGIFY(x)] unsignedLongValue]
 
 #define ORK_DECODE_ENUM(d,x)  _ ## x = (__typeof(_ ## x))[d decodeIntegerForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@STRINGIFY(x)]
@@ -225,3 +229,4 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
 
+#define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
