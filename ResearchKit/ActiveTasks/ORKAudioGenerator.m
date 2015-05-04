@@ -98,7 +98,7 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 
     // Generate the samples
     for (UInt32 frame = 0; frame < inNumberFrames; frame++) {
-        double bufferValue = sin(theta) * amplitude * fadeInFactor;
+        double bufferValue = sin(theta) * amplitude * pow(10, 2 * fadeInFactor - 2);
         bufferActive[frame] = bufferValue;
         bufferNonActive[frame] = 0;
 
@@ -132,11 +132,11 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 }
 
 - (double)volumeInDecibels {
-    return 20 * log(ORKSineWaveToneGeneratorAmplitudeDefault * fadeInFactor);
+    return 20 * log(self.volumeAmplitude);
 }
 
 - (double)volumeAmplitude {
-    return ORKSineWaveToneGeneratorAmplitudeDefault * fadeInFactor;
+    return ORKSineWaveToneGeneratorAmplitudeDefault * pow(10, 2 * fadeInFactor - 2);
 }
 
 - (void)playSoundAtFrequency:(double)playFrequency

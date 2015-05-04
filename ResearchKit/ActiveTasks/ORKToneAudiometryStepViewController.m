@@ -85,7 +85,7 @@
     [self.toneAudiometryContentView.tapButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchDown];
 
     self.currentTestIndex = 0;
-    self.testingFrequencies = @[@125, @250, @500, @1000, @2000, @4000, @8000];
+    self.testingFrequencies = @[@250, @500, @1000, @2000, @4000, @8000];
     self.audioGenerator = [ORKAudioGenerator new];
 }
 
