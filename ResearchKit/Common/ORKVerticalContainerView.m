@@ -302,6 +302,68 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
 }
 
+- (void)updateConstraintConstants {
+    ORKScreenType screenType = _screenType;
+    
+    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
+    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, screenType);
+    
+    BOOL hasIllustration = (_imageView.image != nil);
+    
+    _headerView.hasContentAbove = hasIllustration;
+    
+    {
+        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
+        
+        NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
+        constraint.constant = (_imageView.image ? IllustrationHeight : 0);
+        
+        constraint = _adjustableConstraints[_TopToIllustrationConstraintKey];
+        constraint.constant = (_imageView.image ?IllustrationTopMargin : 0);
+    }
+    
+    BOOL haveCaption = [_headerView.captionLabel.text length] > 0;
+    BOOL haveInstruction = [_headerView.instructionLabel.text length] > 0;
+    BOOL haveLearnMore = (_headerView.learnMoreButton.alpha > 0);
+    BOOL haveStepView = (_stepView != nil);
+    BOOL haveContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
+    
+    {
+        NSLayoutConstraint *constraint = _adjustableConstraints[_StepViewToContinueKey];
+        NSLayoutConstraint *constraint2 = _adjustableConstraints[_StepViewToContinueMinimumKey];
+        CGFloat continueSpacing = StepViewBottomToContinueTop;
+        if (self.continueHugsContent && ! haveStepView) {
+            continueSpacing = 0;
+        }
+        if (self.stepViewFillsAvailableSpace) {
+            continueSpacing = StepViewBottomToContinueTopForIntroStep;
+        }
+        if (! haveContinueOrSkip) {
+            // If we don't actually have continue or skip, we should not apply any space
+            continueSpacing = 0;
+        }
+        CGFloat continueSpacing2 = MIN(10, continueSpacing);
+        constraint.constant = continueSpacing;
+        constraint2.constant = continueSpacing2;
+    }
+    
+    {
+        NSLayoutConstraint *stepViewCentering = _adjustableConstraints[_StepViewCenteringOnWholeViewKey];
+        if (stepViewCentering) {
+            BOOL offsetCentering = ! (hasIllustration || haveCaption || haveInstruction || haveLearnMore || haveContinueOrSkip);
+            stepViewCentering.active = offsetCentering;
+        }
+    }
+    
+    {
+        NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[_HeaderMinimumHeightKey];
+        minimumHeaderHeight.constant = _minimumStepHeaderHeight;
+    }
+    
+    [self updateContinueButtonConstraints];
+}
+
 - (void)setContinueHugsContent:(BOOL)continueHugsContent {
     _continueHugsContent = continueHugsContent;
     [self setNeedsUpdateConstraints];
@@ -692,68 +754,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [_customView addConstraints:@[widthConstraint, heightConstraint]];
     }
     [self setNeedsUpdateConstraints];
-}
-
-- (void)updateConstraintConstants {
-    ORKScreenType screenType = _screenType;
-    
-    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
-    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, screenType);
-    
-    BOOL hasIllustration = (_imageView.image != nil);
-    
-    _headerView.hasContentAbove = hasIllustration;
-    
-    {
-        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
-        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
-
-        NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
-        constraint.constant = (_imageView.image ? IllustrationHeight : 0);
-
-        constraint = _adjustableConstraints[_TopToIllustrationConstraintKey];
-        constraint.constant = (_imageView.image ?IllustrationTopMargin : 0);
-    }
-    
-    BOOL haveCaption = [_headerView.captionLabel.text length] > 0;
-    BOOL haveInstruction = [_headerView.instructionLabel.text length] > 0;
-    BOOL haveLearnMore = (_headerView.learnMoreButton.alpha > 0);
-    BOOL haveStepView = (_stepView != nil);
-    BOOL haveContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
-    
-    {
-        NSLayoutConstraint *constraint = _adjustableConstraints[_StepViewToContinueKey];
-        NSLayoutConstraint *constraint2 = _adjustableConstraints[_StepViewToContinueMinimumKey];
-        CGFloat continueSpacing = StepViewBottomToContinueTop;
-        if (self.continueHugsContent && ! haveStepView) {
-            continueSpacing = 0;
-        }
-        if (self.stepViewFillsAvailableSpace) {
-            continueSpacing = StepViewBottomToContinueTopForIntroStep;
-        }
-        if (! haveContinueOrSkip) {
-            // If we don't actually have continue or skip, we should not apply any space
-            continueSpacing = 0;
-        }
-        CGFloat continueSpacing2 = MIN(10, continueSpacing);
-        constraint.constant = continueSpacing;
-        constraint2.constant = continueSpacing2;
-    }
-    
-    {
-        NSLayoutConstraint *stepViewCentering = _adjustableConstraints[_StepViewCenteringOnWholeViewKey];
-        if (stepViewCentering) {
-            BOOL offsetCentering = ! (hasIllustration || haveCaption || haveInstruction || haveLearnMore || haveContinueOrSkip);
-            stepViewCentering.active = offsetCentering;
-        }
-    }
-    
-    {
-        NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[_HeaderMinimumHeightKey];
-        minimumHeaderHeight.constant = _minimumStepHeaderHeight;
-    }
-    
-    [self updateContinueButtonConstraints];
 }
 
 - (UIImageView *)imageView {
