@@ -101,6 +101,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
+    ORKScreenMetricVerticalScaleHorizontalMargin,
     ORKScreenMetric_COUNT
 };
 
