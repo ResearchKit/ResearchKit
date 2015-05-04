@@ -60,8 +60,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
-    // A dictionary mapping task identifiers to restoration data.
-    NSMutableDictionary *_savedViewControllers;
+    NSMutableDictionary *_savedTasks;               // Maps task identifiers to archived task data
+    NSMutableDictionary *_savedViewControllers;     // Maps task identifiers to task view controller restoration data
 }
 
 @property (nonatomic, strong) ORKTaskViewController *taskViewController;
@@ -82,6 +82,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _savedTasks = [NSMutableDictionary new];
     _savedViewControllers = [NSMutableDictionary new];
     
     NSMutableDictionary *buttons = [NSMutableDictionary dictionary];
@@ -360,22 +361,44 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
  Creates a task and presents it with a task view controller.
  */
 - (void)beginTaskWithIdentifier:(NSString *)identifier {
-    id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
+    /*
+     This is our implementation of restoration after saving during a task.
+     If the user saved their work on a previous run of a task with the same
+     identifier, we attempt to restore the view controller here.
+     
+     We also attempt to restore the task when data for an archived task is found. Task restoration
+     is not always possible nor desirable. Some objects implementing the ORKTask
+     protocol can chose not to adopt NSSecureCoding (such as this project's DynamicTask).
+     Task archival and restoration is recommended for ORKNavigableOrderedTask, since
+     that preserves the navigation stack (which allows you to navigate steps backwards).
+     
+     Since unarchiving can throw an exception, in a real application we would
+     need to attempt to catch that exception here.
+     */
+
+    id<ORKTask> task = nil;
+    NSData *taskData = _savedTasks[identifier];
+    if (taskData)
+    {
+        /*
+         We assume any restored task is of the ORKNavigableOrderedTask since that's the only kind
+         we're archiving in this example. You have to make sure your are unarchiving a task of the proper class.
+         */
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:taskData];
+        task = [unarchiver decodeObjectOfClass:[ORKNavigableOrderedTask class] forKey:NSKeyedArchiveRootObjectKey];
+    } else {
+        /*
+         No task was previously stored
+         */
+        task = [self makeTaskWithIdentifier:identifier];
+    }
     
     if (_savedViewControllers[identifier])
     {
-        /*
-         This is our implementation of restoration after saving during a task.
-         If the user saved their work on a previous run of a task with the same
-         identifier, we attempt to restore it here.
-         
-         Since unarchiving can throw an exception, in a real application we would
-         need to attempt to catch that exception here.
-         */
         NSData *data = _savedViewControllers[identifier];
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data];
     } else {
-        // No saved data, just create a task view controller.
+        // No saved data, just create the task and the corresponding task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }
     
@@ -2034,7 +2057,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
              Save the restoration data, dismiss the task VC, and do an early return
              so we don't clear the restoration data.
              */
-            _savedViewControllers[[taskViewController.task identifier]] = [taskViewController restorationData];
+            id<ORKTask> task = taskViewController.task;
+            _savedViewControllers[task.identifier] = [taskViewController restorationData];
+            /*
+             Save only tasks of the ORKNavigableOrderedTask class, as it's useful to preserve its navigation stack
+             */
+            if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
+                _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
+            }
             [self dismissTaskViewController:taskViewController];
             return;
         }
@@ -2044,7 +2074,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             break;
     }
     
-    [_savedViewControllers removeObjectForKey:[taskViewController.task identifier]];
+    [_savedViewControllers removeObjectForKey:taskViewController.task.identifier];
+    [_savedTasks removeObjectForKey:taskViewController.task.identifier];
     _taskViewController = nil;
 }
 
