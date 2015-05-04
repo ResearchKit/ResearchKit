@@ -145,7 +145,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         40,        40,        30,        14,        40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
         {         36,        36,        20,        12,        36},      // ORKScreenMetricContinueButtonTopMargin
         {         40,        40,        20,        12,        40},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
-        {          0,         0,         0,         0,       176},      // ORKScreenMetricTopToIllustration
+        {          0,         0,         0,         0,        80},      // ORKScreenMetricTopToIllustration
         {         44,        44,        40,        40,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
         {        198,       198,       194,       152,       297},      // ORKScreenMetricIllustrationHeight
         {        300,       300,       176,       152,       300},      // ORKScreenMetricInstructionImageHeight
