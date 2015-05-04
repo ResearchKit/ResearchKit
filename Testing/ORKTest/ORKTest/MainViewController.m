@@ -1700,7 +1700,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     
     
-    // Task end direct rules to skip unneeded steps
+    // Add end direct rules to skip unneeded steps
     ORKDirectStepNavigationRule *directRule =
     [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
     

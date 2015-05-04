@@ -819,6 +819,13 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
     if (nextStepIdentifier) {
         nextStep = [self stepWithIdentifier:nextStepIdentifier];
+        
+        #if defined(DEBUG) && DEBUG
+        if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
+            ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
+        }
+        #endif
+        
     } else {
         nextStep = [super stepAfterStep:step withResult:result];
     }
