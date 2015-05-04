@@ -136,7 +136,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
     
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
         // iPhone 6+, iPhone 6, iPhone 5, iPhone 4,     iPad
-        {        128,      128,      100,      100,      128},      // ORKScreenMetricTopToCaptionBaseline
+        {        128,      128,      100,      100,      218},      // ORKScreenMetricTopToCaptionBaseline
         {         35,       35,       32,       24,       35},      // ORKScreenMetricFontSizeHeadline
         {         38,       38,       32,       28,       38},      // ORKScreenMetricMaxFontSizeHeadline
         {         30,       30,       30,       24,       30},      // ORKScreenMetricFontSizeSurveyHeadline
@@ -150,6 +150,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         40,       40,       30,       14,       40},      // ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore
         {         36,       36,       20,       12,       36},      // ORKScreenMetricContinueButtonTopMargin
         {         40,       40,       20,       12,       40},      // ORKScreenMetricContinueButtonTopMarginForIntroStep
+        {          0,        0,        0,        0,      176},      // ORKScreenMetricTopToIllustration
         {         44,       44,       40,       40,       44},      // ORKScreenMetricIllustrationToCaptionBaseline
         {        198,      198,      194,      152,      297},      // ORKScreenMetricIllustrationHeight
         {        300,      300,      176,      152,      300},      // ORKScreenMetricInstructionImageHeight
