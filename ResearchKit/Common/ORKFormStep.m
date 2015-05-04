@@ -82,10 +82,10 @@
         [item.answerFormat validateParameters];
     }
     
-    [self validateIdentifierUniquiness];
+    [self validateIdentifiersUnique];
 }
 
-- (void)validateIdentifierUniquiness {
+- (void)validateIdentifiersUnique {
     NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
     BOOL itemsHaveNonUniqueIdentifiers = _formItems.count != uniqueIdentifiers.count;
     

@@ -214,6 +214,11 @@ requests access to these HealthKit types.
  */
 @property (nonatomic, readonly) BOOL providesBackgroundAudioPrompts;
 
+/**
+ *  Validates task parameters. Will throw excpetion if validation fails.
+ */
+- (void)validateParameters;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -326,8 +326,12 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
     if (task && ! [task conformsToProtocol:@protocol(ORKTask)]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Expected a task" userInfo:nil];
     }
-    if ( task && nil == [task identifier]) {
+    if (task && nil == [task identifier]) {
         NSLog(@"%@: Task's identifier should not be nil.", NSStringFromSelector(_cmd));
+    }
+    
+    if (task && [task respondsToSelector:@selector(validateParameters)]) {
+        [task validateParameters];
     }
     
     _hasRequestedHealthData = NO;
