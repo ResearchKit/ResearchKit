@@ -34,20 +34,15 @@
 #import "ORKHelpers.h"
 
 
-#define DEF_KEY(x) static NSString * const x = @STRINGIFY(x)
+ORKDefineStringKey(_IllustrationToCaptionBaselineKey);
+ORKDefineStringKey(_IllustrationToCaptionTopKey);
+ORKDefineStringKey(_CaptionToInstructionKey);
+ORKDefineStringKey(_InstructionToLearnMoreKey);
+ORKDefineStringKey(_LearnMoreToStepViewKey);
 
-DEF_KEY(_IllustrationToCaptionBaselineKey);
-DEF_KEY(_IllustrationToCaptionTopKey);
-DEF_KEY(_CaptionToInstructionKey);
-DEF_KEY(_InstructionToLearnMoreKey);
-DEF_KEY(_LearnMoreToStepViewKey);
-
-DEF_KEY(_InstructionMinBottomSpacingKey);
-DEF_KEY(_CaptionMinBottomSpacingKey);
-DEF_KEY(_HeaderZeroHeightKey);
-
-#undef DEF_KEY
-
+ORKDefineStringKey(_InstructionMinBottomSpacingKey);
+ORKDefineStringKey(_CaptionMinBottomSpacingKey);
+ORKDefineStringKey(_HeaderZeroHeightKey);
 
 #define ORKVerticalContainerLog(...)
 
