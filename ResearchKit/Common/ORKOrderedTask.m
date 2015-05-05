@@ -848,7 +848,13 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifer];
-    NSAssert(indexOfSource != NSNotFound, @"");
+    if (indexOfSource == NSNotFound) {
+        ORK_Log_Debug(@"Warning: you are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifer, destinationIdentifier);
+        [_stepIdentifierStack removeAllObjects];
+        [_stepIdentifierStack addObject:sourceIdentifer];
+        [_stepIdentifierStack addObject:destinationIdentifier];
+        return;
+    }
     
     NSUInteger stackCount = [_stepIdentifierStack count];
     if (indexOfSource != stackCount - 1) {
