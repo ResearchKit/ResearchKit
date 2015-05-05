@@ -58,11 +58,11 @@
     AudioComponentInstance _toneUnit;
 
 @public
-    double frequency;
-    double theta;
-    ORKAudioChannel activeChannel;
-    double fadeInFactor;
-    NSTimeInterval fadeInDuration;
+    double _frequency;
+    double _theta;
+    ORKAudioChannel _activeChannel;
+    double _fadeInFactor;
+    NSTimeInterval _fadeInDuration;
 }
 
 - (void)setupAudioSession;
@@ -87,14 +87,14 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 
     // Get the tone parameters out of the view controller
     ORKAudioGenerator *audioGenerator = (__bridge ORKAudioGenerator *)inRefCon;
-    double theta = audioGenerator->theta;
-    double theta_increment = 2.0 * M_PI * audioGenerator->frequency / ORKSineWaveToneGeneratorSampleRateDefault;
+    double theta = audioGenerator->_theta;
+    double theta_increment = 2.0 * M_PI * audioGenerator->_frequency / ORKSineWaveToneGeneratorSampleRateDefault;
 
-    double fadeInFactor = audioGenerator->fadeInFactor;
+    double fadeInFactor = audioGenerator->_fadeInFactor;
 
     // This is a mono tone generator so we only need the first buffer
-    Float32 *bufferActive    = (Float32 *)ioData->mBuffers[audioGenerator->activeChannel].mData;
-    Float32 *bufferNonActive = (Float32 *)ioData->mBuffers[1 - audioGenerator->activeChannel].mData;
+    Float32 *bufferActive    = (Float32 *)ioData->mBuffers[audioGenerator->_activeChannel].mData;
+    Float32 *bufferNonActive = (Float32 *)ioData->mBuffers[1 - audioGenerator->_activeChannel].mData;
 
     // Generate the samples
     for (UInt32 frame = 0; frame < inNumberFrames; frame++) {
@@ -107,15 +107,15 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
             theta -= 2.0 * M_PI;
         }
 
-        fadeInFactor += 1/(ORKSineWaveToneGeneratorSampleRateDefault * audioGenerator->fadeInDuration);
+        fadeInFactor += 1/(ORKSineWaveToneGeneratorSampleRateDefault * audioGenerator->_fadeInDuration);
         if (fadeInFactor >= 1) {
             fadeInFactor = 1;
         }
     }
 
     // Store the theta back in the view controller
-    audioGenerator->theta = theta;
-    audioGenerator->fadeInFactor = fadeInFactor;
+    audioGenerator->_theta = theta;
+    audioGenerator->_fadeInFactor = fadeInFactor;
 
     return noErr;
 }
@@ -136,16 +136,16 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 }
 
 - (double)volumeAmplitude {
-    return ORKSineWaveToneGeneratorAmplitudeDefault * pow(10, 2 * fadeInFactor - 2);
+    return ORKSineWaveToneGeneratorAmplitudeDefault * pow(10, 2 * _fadeInFactor - 2);
 }
 
 - (void)playSoundAtFrequency:(double)playFrequency
                    onChannel:(ORKAudioChannel)playChannel
               fadeInDuration:(NSTimeInterval)duration {
-    frequency = playFrequency;
-    activeChannel = playChannel;
-    fadeInFactor = 0;
-    fadeInDuration = duration;
+    _frequency = playFrequency;
+    _activeChannel = playChannel;
+    _fadeInFactor = 0;
+    _fadeInDuration = duration;
 
     [self play];
 }
