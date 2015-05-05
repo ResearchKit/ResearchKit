@@ -34,18 +34,13 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-#define DEF_KEY(x) static NSString * const x = @STRINGIFY(x)
+ORKDefineStringKey(_IllustrationHeightConstraintKey);
 
-DEF_KEY(_IllustrationHeightConstraintKey);
+ORKDefineStringKey(_StepViewToContinueKey);
+ORKDefineStringKey(_StepViewToContinueMinimumKey);
+ORKDefineStringKey(_HeaderMinimumHeightKey);
 
-DEF_KEY(_StepViewToContinueKey);
-DEF_KEY(_StepViewToContinueMinimumKey);
-DEF_KEY(_HeaderMinimumHeightKey);
-
-DEF_KEY(_StepViewCenteringOnWholeViewKey);
-
-#undef DEF_KEY
-
+ORKDefineStringKey(_StepViewCenteringOnWholeViewKey);
 
 static const CGFloat AssumedNavBarHeight = 44;
 static const CGFloat AssumedStatusBarHeight = 20;
