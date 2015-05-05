@@ -40,9 +40,18 @@
 @end
 
 
-ORKDefineStringKey(HeadacheChoice);
-ORKDefineStringKey(DizinessChoice);
-ORKDefineStringKey(NauseaChoice);
+@implementation ORKTaskTests {
+    NSMutableArray *_orderedTaskStepIdentifiers;
+    NSMutableArray *_orderedTaskSteps;
+    ORKOrderedTask *_orderedTask;
+    
+    NSMutableDictionary *_stepNavigationRules;
+    ORKNavigableOrderedTask *_navigableOrderedTask;
+}
+
+ORKDefineStringKey(HeadacheChoiceValue);
+ORKDefineStringKey(DizinessChoiceValue);
+ORKDefineStringKey(NauseaChoiceValue);
 
 ORKDefineStringKey(SymptomStepIdentifier);
 ORKDefineStringKey(SeverityStepIdentifier);
@@ -55,16 +64,6 @@ ORKDefineStringKey(EndStepIdentifier);
 ORKDefineStringKey(OrderedTaskIdentifier);
 ORKDefineStringKey(NavigableOrderedTaskIdentifier);
 
-
-@implementation ORKTaskTests {
-    NSMutableArray *_orderedTaskStepIdentifiers;
-    NSMutableArray *_orderedTaskSteps;
-    ORKOrderedTask *_orderedTask;
-    
-    NSMutableDictionary *_stepNavigationRules;
-    ORKNavigableOrderedTask *_navigableOrderedTask;
-}
-
 - (void)setUpOrderedTask {
     _orderedTaskStepIdentifiers = [NSMutableArray new];
     _orderedTaskSteps = [NSMutableArray new];
@@ -75,9 +74,9 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
     NSArray *textChoices =
     @[
-      [ORKTextChoice choiceWithText:@"Headache" value:HeadacheChoice],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:DizinessChoice],
-      [ORKTextChoice choiceWithText:@"Nausea" value:NauseaChoice]
+      [ORKTextChoice choiceWithText:@"Headache" value:HeadacheChoiceValue],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:DizinessChoiceValue],
+      [ORKTextChoice choiceWithText:@"Nausea" value:NauseaChoiceValue]
       ];
     
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
@@ -127,7 +126,6 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
     _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
                                                         steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
-    
 }
 
 - (void)setUpNavigableOrderedTask {
@@ -139,7 +137,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     // Individual predicates
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SymptomStepIdentifier expectedAnswer:HeadacheChoice];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SymptomStepIdentifier expectedAnswer:HeadacheChoiceValue];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
@@ -229,11 +227,11 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
         questionResult = [[ORKChoiceQuestionResult alloc] init];
         questionResult.identifier = stepIdentifier;
         if (resultOptions & TestsTaskResultOptionSymptomHeadache) {
-            questionResult.answer = @[HeadacheChoice];
+            questionResult.answer = @[HeadacheChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomDiziness) {
-            questionResult.answer = @[DizinessChoice];
+            questionResult.answer = @[DizinessChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomNausea) {
-            questionResult.answer = @[NauseaChoice];
+            questionResult.answer = @[NauseaChoiceValue];
         }
         questionResult.questionType = ORKQuestionTypeSingleChoice;
         
@@ -307,7 +305,16 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     ORKStep *endStep = _orderedTaskSteps[6];
 
     ORKTaskResult *taskResult = nil;
-    ORKStep *testedStep = nil;
+
+    BOOL (^testStepAfterStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
+        ORKStep *testedStep = [task stepAfterStep:fromStep withResult:taskResult];
+        return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
+    };
+
+    BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
+        ORKStep *testedStep = [task stepBeforeStep:fromStep withResult:taskResult];
+        return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
+    };
 
     //
     // Empty task result
@@ -315,116 +322,63 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:0];
     
     // Test forward navigation
-    testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-
-    testedStep = [_navigableOrderedTask stepAfterStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-
-    testedStep = [_navigableOrderedTask stepAfterStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, otherSymptomStep, endStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
 
     // Test backward navigation
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, symptomStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, otherSymptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, symptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
     
     // Test unreachable node (will reset navigation stack)
-    testedStep = [_navigableOrderedTask stepAfterStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, otherSymptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, severityStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, nil));
 
     // Test unreachable node (will reset navigation stack)
-    testedStep = [_navigableOrderedTask stepAfterStep:blankStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severeHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:severeHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severeHeadacheStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:severeHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, blankStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:blankStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, blankStep, severeHeadacheStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severeHeadacheStep, endStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, severeHeadacheStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severeHeadacheStep, blankStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, blankStep, nil));
 
     // Test unreachable node (will reset navigation stack)
-    testedStep = [_navigableOrderedTask stepAfterStep:lightHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, lightHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:lightHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, lightHeadacheStep, endStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, lightHeadacheStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, lightHeadacheStep, nil));
 
     //
-    // Only headache symptom answered
+    // Only headache symptom question step answered
     //
     taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
 
     // Test forward navigation
-    testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-
-    testedStep = [_navigableOrderedTask stepAfterStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-
-    testedStep = [_navigableOrderedTask stepAfterStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, otherSymptomStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, otherSymptomStep, endStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
     
     // Test backward navigation
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-
-    testedStep = [_navigableOrderedTask stepBeforeStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, symptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, otherSymptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, severityStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
 
     //
-    // Only diziness symptom answered
+    // Only diziness symptom question answered
     //
     taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
     
     // Test forward navigation
-    testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, otherSymptomStep, endStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
     
     // Test backward navigation
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, otherSymptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:otherSymptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, symptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, otherSymptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, symptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
 
     //
     // Severe headache sequence
@@ -432,30 +386,16 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
-    testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severeHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:severeHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, severeHeadacheStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severeHeadacheStep, endStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
     
     // Test backward navigation
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severeHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:severeHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, symptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, severeHeadacheStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severeHeadacheStep, severityStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
 
     //
     // Light headache sequence
@@ -463,30 +403,16 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
     
     // Test forward navigation
-    testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, lightHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:lightHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, endStep);
-    
-    testedStep = [_navigableOrderedTask stepAfterStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, severityStep, lightHeadacheStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, lightHeadacheStep, endStep));
+    XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, endStep, nil));
     
     // Test backward navigation
-    testedStep = [_navigableOrderedTask stepBeforeStep:endStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, lightHeadacheStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:lightHeadacheStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, severityStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:severityStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, symptomStep);
-    
-    testedStep = [_navigableOrderedTask stepBeforeStep:symptomStep withResult:taskResult];
-    XCTAssertEqualObjects(testedStep, nil);
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, lightHeadacheStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, lightHeadacheStep, severityStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
+    XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
 }
 
 @end
