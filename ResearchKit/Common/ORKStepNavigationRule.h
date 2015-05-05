@@ -100,8 +100,8 @@ ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
 
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                      matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
-                        defaultStepIdentifier:(NSString * __nullable)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
+                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+                   defaultStepIdentifier:(NSString * __nullable)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
                  matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers;

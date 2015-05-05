@@ -65,7 +65,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     ORKNavigableOrderedTask *_navigableOrderedTask;
 }
 
-- (void)createOrderedTask {
+- (void)setUpOrderedTask {
     _orderedTaskStepIdentifiers = [NSMutableArray new];
     _orderedTaskSteps = [NSMutableArray new];
     
@@ -130,7 +130,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
 }
 
-- (void)createNavigableOrderedTask {
+- (void)setUpNavigableOrderedTask {
     _navigableOrderedTask = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedTaskIdentifier
                                                                           steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
     
@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     TestsTaskResultOptionSeverityNo         = 2 << 2
 };
 
-- (ORKTaskResult *)createResultTreeWithTaskIdentifier:(NSString *)taskIdentifier resultOptions:(TestsTaskResultOptions)resultOptions {
+- (ORKTaskResult *)getResultTreeWithTaskIdentifier:(NSString *)taskIdentifier resultOptions:(TestsTaskResultOptions)resultOptions {
     NSMutableArray *stepResults = [NSMutableArray new];
     
     ORKQuestionResult *questionResult = nil;
@@ -266,8 +266,8 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
 
 - (void)setUp {
     [super setUp];
-    [self createOrderedTask];
-    [self createNavigableOrderedTask];
+    [self setUpOrderedTask];
+    [self setUpNavigableOrderedTask];
 }
 
 - (void)testOrderedTask {
@@ -309,11 +309,10 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     ORKTaskResult *taskResult = nil;
     ORKStep *testedStep = nil;
 
-    
     //
     // Empty task result
     //
-    taskResult = [self createResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:0];
+    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:0];
     
     // Test forward navigation
     testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
@@ -374,7 +373,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Only headache symptom answered
     //
-    taskResult = [self createResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
+    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
 
     // Test forward navigation
     testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
@@ -405,7 +404,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Only diziness symptom answered
     //
-    taskResult = [self createResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
+    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
     
     // Test forward navigation
     testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
@@ -430,7 +429,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Severe headache sequence
     //
-    taskResult = [self createResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
+    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
     testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
@@ -461,7 +460,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Light headache sequence
     //
-    taskResult = [self createResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
+    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
     
     // Test forward navigation
     testedStep = [_navigableOrderedTask stepAfterStep:symptomStep withResult:taskResult];
