@@ -362,8 +362,8 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = [_samples lastObject];
-    BOOL hide = _finished || !_failed || (sample && !([sample doubleValue] > _alertThreshold));
-    _alertLabel.hidden = hide;
+    BOOL show = (! _finished && ([sample doubleValue] > _alertThreshold)) || _failed;
+    _alertLabel.hidden = !show;
 }
 
 - (void)setSamples:(NSArray *)samples {
