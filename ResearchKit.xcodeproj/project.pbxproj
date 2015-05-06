@@ -343,6 +343,7 @@
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* Localizable.strings */; };
 		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BC312B171AFACA850038F3C3 /* ORKStepNavigationRule_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = BCA5C0371AEC0D750092AC8D /* ORKStepNavigationRule_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4194271AE8453A00073D6B /* ORKObserver.h */; };
 		BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4194281AE8453A00073D6B /* ORKObserver.m */; };
 		BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */ = {isa = PBXBuildFile; fileRef = BCA5C0331AEC05F20092AC8D /* ORKStepNavigationRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1604,6 +1605,7 @@
 				86C40D441A8D7C5C00081FAC /* ORKInstructionStepViewController.h in Headers */,
 				86C40D841A8D7C5C00081FAC /* ORKSelectionTitleLabel.h in Headers */,
 				86C40E141A8D7C5C00081FAC /* ORKConsentSection+AssetLoading.h in Headers */,
+				BC312B171AFACA850038F3C3 /* ORKStepNavigationRule_Private.h in Headers */,
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
 				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				86C40C661A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.h in Headers */,

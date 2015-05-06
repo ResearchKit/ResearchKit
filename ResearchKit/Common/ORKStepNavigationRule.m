@@ -188,21 +188,13 @@
 
 @implementation ORKPredicateStepNavigationRule
 
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
-                   defaultStepIdentifier:(NSString *)defaultStepIdentifier {
+// Internal init without empty array checks, for serialization support
+- (instancetype)init_orkWithResultPredicates:(NSArray *)resultPredicates
+                     matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+                       defaultStepIdentifier:(NSString *)defaultStepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(resultPredicates);
     ORKThrowInvalidArgumentExceptionIfNil(matchingStepIdentifiers);
-    NSUInteger resultPredicatesCount = [resultPredicates count];
-    NSUInteger matchingStepIdentifiersCount = [matchingStepIdentifiers count];
-    if (resultPredicatesCount == 0) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates can not be an empty array" userInfo:nil];
-    }
-
-    if (resultPredicatesCount != matchingStepIdentifiersCount) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Each predicate in resultPredicates must have a matching step identifier in matchingStepIdentifiers" userInfo:nil];
-    }
-
+    
     self = [super init_ork];
     if (self) {
         self.resultPredicates = resultPredicates;
@@ -212,6 +204,27 @@
     
     return self;
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
+                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+                   defaultStepIdentifier:(NSString *)defaultStepIdentifier {
+    NSUInteger resultPredicatesCount = [resultPredicates count];
+    NSUInteger matchingStepIdentifiersCount = [matchingStepIdentifiers count];
+    if (resultPredicatesCount == 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates can not be an empty array" userInfo:nil];
+    }
+    
+    if (resultPredicatesCount != matchingStepIdentifiersCount) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Each predicate in resultPredicates must have a matching step identifier in matchingStepIdentifiers" userInfo:nil];
+    }
+
+    return [self init_orkWithResultPredicates:resultPredicates
+                      matchingStepIdentifiers:matchingStepIdentifiers
+                        defaultStepIdentifier:defaultStepIdentifier];
+}
+#pragma clang diagnostic pop
 
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
                  matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers {

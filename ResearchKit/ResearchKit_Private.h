@@ -69,3 +69,4 @@
 #import <ResearchKit/ORKResult_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
+#import <ResearchKit/ORKStepNavigationRule_Private.h>
