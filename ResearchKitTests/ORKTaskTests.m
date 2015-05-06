@@ -33,6 +33,7 @@
 #import <ResearchKit/ResearchKit.h>
 #import "ORKHelpers.h"
 #import "ORKResult_Private.h"
+#import "ORKStepNavigationRule_Private.h"
 
 
 @interface ORKTaskTests : XCTestCase
@@ -49,20 +50,20 @@
     ORKNavigableOrderedTask *_navigableOrderedTask;
 }
 
-ORKDefineStringKey(HeadacheChoiceValue);
-ORKDefineStringKey(DizinessChoiceValue);
-ORKDefineStringKey(NauseaChoiceValue);
+ORKDefineStringKey(ORKTHeadacheChoiceValue);
+ORKDefineStringKey(ORKTDizinessChoiceValue);
+ORKDefineStringKey(ORKTNauseaChoiceValue);
 
-ORKDefineStringKey(SymptomStepIdentifier);
-ORKDefineStringKey(SeverityStepIdentifier);
-ORKDefineStringKey(BlankStepIdentifier);
-ORKDefineStringKey(SevereHeadacheStepIdentifier);
-ORKDefineStringKey(LightHeadacheStepIdentifier);
-ORKDefineStringKey(OtherSymptomStepIdentifier);
-ORKDefineStringKey(EndStepIdentifier);
+ORKDefineStringKey(ORKTSymptomStepIdentifier);
+ORKDefineStringKey(ORKTSeverityStepIdentifier);
+ORKDefineStringKey(ORKTBlankStepIdentifier);
+ORKDefineStringKey(ORKTSevereHeadacheStepIdentifier);
+ORKDefineStringKey(ORKTLightHeadacheStepIdentifier);
+ORKDefineStringKey(ORKTOtherSymptomStepIdentifier);
+ORKDefineStringKey(ORKTEndStepIdentifier);
 
-ORKDefineStringKey(OrderedTaskIdentifier);
-ORKDefineStringKey(NavigableOrderedTaskIdentifier);
+ORKDefineStringKey(ORKTOrderedTaskIdentifier);
+ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 
 - (void)setUpOrderedTask {
     _orderedTaskStepIdentifiers = [NSMutableArray new];
@@ -74,62 +75,62 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
     NSArray *textChoices =
     @[
-      [ORKTextChoice choiceWithText:@"Headache" value:HeadacheChoiceValue],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:DizinessChoiceValue],
-      [ORKTextChoice choiceWithText:@"Nausea" value:NauseaChoiceValue]
+      [ORKTextChoice choiceWithText:@"Headache" value:ORKTHeadacheChoiceValue],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:ORKTDizinessChoiceValue],
+      [ORKTextChoice choiceWithText:@"Nausea" value:ORKTNauseaChoiceValue]
       ];
     
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
-    stepIdentifier = SymptomStepIdentifier;
+    stepIdentifier = ORKTSymptomStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"What is your symptom?" answer:answerFormat];
     step.optional = NO;
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    stepIdentifier = SeverityStepIdentifier;
+    stepIdentifier = ORKTSeverityStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
     step.optional = NO;
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    stepIdentifier = BlankStepIdentifier;
+    stepIdentifier = ORKTBlankStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"This step is intentionally left blank (you should not see it)";
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    stepIdentifier = SevereHeadacheStepIdentifier;
+    stepIdentifier = ORKTSevereHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a severe headache";
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    stepIdentifier = LightHeadacheStepIdentifier;
+    stepIdentifier = ORKTLightHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a light headache";
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    stepIdentifier = OtherSymptomStepIdentifier;
+    stepIdentifier = ORKTOtherSymptomStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have other symptom";
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    stepIdentifier = EndStepIdentifier;
+    stepIdentifier = ORKTEndStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have finished the task";
     [_orderedTaskStepIdentifiers addObject:stepIdentifier];
     [_orderedTaskSteps addObject:step];
     
-    _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
+    _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:ORKTOrderedTaskIdentifier
                                                         steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
 }
 
 - (void)setUpNavigableOrderedTask {
-    _navigableOrderedTask = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedTaskIdentifier
+    _navigableOrderedTask = [[ORKNavigableOrderedTask alloc] initWithIdentifier:ORKTNavigableOrderedTaskIdentifier
                                                                           steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
     
     // Build navigation rules
@@ -137,7 +138,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     // Individual predicates
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SymptomStepIdentifier expectedAnswer:HeadacheChoiceValue];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTSymptomStepIdentifier expectedAnswer:ORKTHeadacheChoiceValue];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
@@ -147,13 +148,13 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
     
     // User chose YES at the severity step
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:SeverityStepIdentifier expectedAnswer:YES];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:ORKTSeverityStepIdentifier expectedAnswer:YES];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
     
     // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:SeverityStepIdentifier expectedAnswer:NO];
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:ORKTSeverityStepIdentifier expectedAnswer:NO];
     
     
     // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
@@ -163,14 +164,14 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     NSMutableArray *matchingStepIdentifiers = [NSMutableArray new];
     
     [resultPredicates addObject:predicateNotHeadache];
-    [matchingStepIdentifiers addObject:OtherSymptomStepIdentifier];
+    [matchingStepIdentifiers addObject:ORKTOtherSymptomStepIdentifier];
     
     ORKPredicateStepNavigationRule *predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
                                              matchingStepIdentifiers:matchingStepIdentifiers];
     
-    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:SymptomStepIdentifier];
-    _stepNavigationRules[SymptomStepIdentifier] = [predicateRule copy];
+    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSymptomStepIdentifier];
+    _stepNavigationRules[ORKTSymptomStepIdentifier] = [predicateRule copy];
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
     resultPredicates = [NSMutableArray new];
@@ -178,32 +179,32 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
     NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:SevereHeadacheStepIdentifier];
+    [matchingStepIdentifiers addObject:ORKTSevereHeadacheStepIdentifier];
     
     predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:LightHeadacheStepIdentifier];
+    [matchingStepIdentifiers addObject:ORKTLightHeadacheStepIdentifier];
     
     predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
                                              matchingStepIdentifiers:matchingStepIdentifiers
-                                               defaultStepIdentifier:OtherSymptomStepIdentifier];
+                                               defaultStepIdentifier:ORKTOtherSymptomStepIdentifier];
     
-    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:SeverityStepIdentifier];
-    _stepNavigationRules[SeverityStepIdentifier] = [predicateRule copy];
+    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSeverityStepIdentifier];
+    _stepNavigationRules[ORKTSeverityStepIdentifier] = [predicateRule copy];
 
     
     // Add end direct rules to skip unneeded steps
     ORKDirectStepNavigationRule *directRule =
-    [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:EndStepIdentifier];
+    [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKTEndStepIdentifier];
     
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:SevereHeadacheStepIdentifier];
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:LightHeadacheStepIdentifier];
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:OtherSymptomStepIdentifier];
+    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTSevereHeadacheStepIdentifier];
+    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTLightHeadacheStepIdentifier];
+    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTOtherSymptomStepIdentifier];
     
-    _stepNavigationRules[SevereHeadacheStepIdentifier] = [directRule copy];
-    _stepNavigationRules[LightHeadacheStepIdentifier] = [directRule copy];
-    _stepNavigationRules[OtherSymptomStepIdentifier] = [directRule copy];
+    _stepNavigationRules[ORKTSevereHeadacheStepIdentifier] = [directRule copy];
+    _stepNavigationRules[ORKTLightHeadacheStepIdentifier] = [directRule copy];
+    _stepNavigationRules[ORKTOtherSymptomStepIdentifier] = [directRule copy];
 }
 
 typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
@@ -223,15 +224,15 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     NSString *stepIdentifier = nil;
     
     if (resultOptions & (TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSymptomDiziness | TestsTaskResultOptionSymptomNausea)) {
-        stepIdentifier = SymptomStepIdentifier;
+        stepIdentifier = ORKTSymptomStepIdentifier;
         questionResult = [[ORKChoiceQuestionResult alloc] init];
         questionResult.identifier = stepIdentifier;
         if (resultOptions & TestsTaskResultOptionSymptomHeadache) {
-            questionResult.answer = @[HeadacheChoiceValue];
+            questionResult.answer = @[ORKTHeadacheChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomDiziness) {
-            questionResult.answer = @[DizinessChoiceValue];
+            questionResult.answer = @[ORKTDizinessChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomNausea) {
-            questionResult.answer = @[NauseaChoiceValue];
+            questionResult.answer = @[ORKTNauseaChoiceValue];
         }
         questionResult.questionType = ORKQuestionTypeSingleChoice;
         
@@ -240,7 +241,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     }
 
     if (resultOptions & (TestsTaskResultOptionSeverityYes | TestsTaskResultOptionSeverityNo)) {
-        stepIdentifier = SeverityStepIdentifier;
+        stepIdentifier = ORKTSeverityStepIdentifier;
         questionResult = [[ORKBooleanQuestionResult alloc] init];
         questionResult.identifier = stepIdentifier;
         if (resultOptions & TestsTaskResultOptionSeverityYes) {
@@ -271,7 +272,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
 - (void)testOrderedTask {
     ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] init];
     
-    XCTAssertEqualObjects(_orderedTask.identifier, OrderedTaskIdentifier);
+    XCTAssertEqualObjects(_orderedTask.identifier, ORKTOrderedTaskIdentifier);
     XCTAssertEqualObjects(_orderedTask.steps, _orderedTaskSteps);
 
     NSUInteger expectedTotalProgress = [_orderedTaskSteps count];
@@ -292,7 +293,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
 }
 
 - (void)testNavigableOrderedTask {
-    XCTAssertEqualObjects(_navigableOrderedTask.identifier, NavigableOrderedTaskIdentifier);
+    XCTAssertEqualObjects(_navigableOrderedTask.identifier, ORKTNavigableOrderedTaskIdentifier);
     XCTAssertEqualObjects(_navigableOrderedTask.steps, _orderedTaskSteps);
     XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules, _stepNavigationRules);
     
@@ -319,7 +320,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Empty task result
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:0];
+    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:0];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
@@ -351,7 +352,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Only headache symptom question step answered
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
+    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
 
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
@@ -368,7 +369,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Only diziness symptom question answered
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
+    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
@@ -383,7 +384,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Severe headache sequence
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
+    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
@@ -400,7 +401,7 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     //
     // Light headache sequence
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
+    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
@@ -413,6 +414,180 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, lightHeadacheStep, severityStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
+}
+
+ORKDefineStringKey(ORKTScaleStepIdentifier);
+ORKDefineStringKey(ORKTContinuousScaleStepIdentifier);
+static const NSInteger ORKTIntegerValue = 6;
+static const NSInteger ORKTFloatValue = 6.5;
+
+ORKDefineStringKey(ORKTSingleChoiceStepIdentifier);
+ORKDefineStringKey(ORKTMultipleChoiceStepIdentifier);
+ORKDefineStringKey(ORKTSingleChoiceValue);
+ORKDefineStringKey(ORKTMultipleChoiceValue1);
+ORKDefineStringKey(ORKTMultipleChoiceValue2);
+
+ORKDefineStringKey(ORKTBooleanStepIdentifier);
+static const BOOL ORKTBooleanValue = YES;
+
+ORKDefineStringKey(ORKTTextStepIdentifier);
+ORKDefineStringKey(ORKTTextValue);
+ORKDefineStringKey(ORKTOtherTextValue);
+
+ORKDefineStringKey(ORKTIntegerNumericStepIdentifier);
+ORKDefineStringKey(ORKTFloatNumericStepIdentifier);
+
+ORKDefineStringKey(ORKTTimeOfDayStepIdentifier);
+ORKDefineStringKey(ORKTTimeIntervalStepIdentifier);
+ORKDefineStringKey(ORKTDateStepIdentifier);
+static NSDate *(^ORKTDate)() = ^NSDate *{ return [NSDate dateWithTimeIntervalSince1970:60*60*24]; };
+static NSDateComponents *(^ORKTDateComponents)() = ^NSDateComponents *{
+    NSDateComponents *dateComponents = [NSDateComponents new];
+    dateComponents.hour = 6;
+    dateComponents.minute = 6;
+    return dateComponents;
+};
+
+- (ORKTaskResult *)getGeneralTaskResultTree {
+    NSMutableArray *stepResults = [NSMutableArray new];
+    
+    ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKStepResult *(NSString *stepIdentifier, Class choiceQuestionResultClass, ORKQuestionType questionType, id answer) {
+        ORKQuestionResult *questionResult = [[choiceQuestionResultClass alloc] init];
+        questionResult.identifier = stepIdentifier;
+        questionResult.answer = answer;
+        questionResult.questionType = questionType;
+        
+        ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:stepIdentifier results:@[questionResult]];
+        return stepResult;
+    };
+
+    [stepResults addObject:getStepResult(ORKTScaleStepIdentifier, [ORKScaleQuestionResult class], ORKQuestionTypeScale, @(ORKTIntegerValue))];
+    [stepResults addObject:getStepResult(ORKTContinuousScaleStepIdentifier, [ORKScaleQuestionResult class], ORKQuestionTypeScale, @(ORKTFloatValue))];
+
+    [stepResults addObject:getStepResult(ORKTSingleChoiceStepIdentifier, [ORKChoiceQuestionResult class], ORKQuestionTypeSingleChoice, @[ORKTSingleChoiceValue])];
+    [stepResults addObject:getStepResult(ORKTMultipleChoiceStepIdentifier, [ORKChoiceQuestionResult class], ORKQuestionTypeMultipleChoice, @[ORKTMultipleChoiceValue1, ORKTMultipleChoiceValue2])];
+
+    [stepResults addObject:getStepResult(ORKTBooleanStepIdentifier, [ORKBooleanQuestionResult class], ORKQuestionTypeBoolean, @(ORKTBooleanValue))];
+
+    [stepResults addObject:getStepResult(ORKTTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, ORKTTextValue)];
+
+    [stepResults addObject:getStepResult(ORKTIntegerNumericStepIdentifier, [ORKNumericQuestionResult class], ORKQuestionTypeInteger, @(ORKTIntegerValue))];
+    [stepResults addObject:getStepResult(ORKTFloatNumericStepIdentifier, [ORKNumericQuestionResult class], ORKQuestionTypeDecimal, @(ORKTFloatValue))];
+
+    [stepResults addObject:getStepResult(ORKTDateStepIdentifier, [ORKDateQuestionResult class], ORKQuestionTypeDate, ORKTDate())];
+
+    [stepResults addObject:getStepResult(ORKTTimeIntervalStepIdentifier, [ORKTimeIntervalQuestionResult class], ORKQuestionTypeTimeInterval, @(ORKTIntegerValue))];
+
+    [stepResults addObject:getStepResult(ORKTTimeOfDayStepIdentifier, [ORKTimeOfDayQuestionResult class], ORKQuestionTypeTimeOfDay, ORKTDateComponents())];
+
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:ORKTOrderedTaskIdentifier
+                                                                  taskRunUUID:[NSUUID UUID]
+                                                              outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    taskResult.results = stepResults;
+    
+    return taskResult;
+}
+
+- (void)testResultPredicates {
+    // Get leaf results
+    ORKTaskResult *taskResult = [self getGeneralTaskResultTree];
+    NSArray *leafResults = [ORKPredicateStepNavigationRule getLeafResultsWithTaskResult:taskResult];
+
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTScaleStepIdentifier
+                                                                      expectedAnswer:ORKTIntegerValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTScaleStepIdentifier
+                                                                       expectedAnswer:ORKTIntegerValue + 1] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                          minimumExpectedAnswerValue:ORKTFloatValue - 0.01
+                                                          maximumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                           minimumExpectedAnswerValue:ORKTFloatValue + 0.05
+                                                           maximumExpectedAnswerValue:ORKTFloatValue + 0.06] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTSingleChoiceStepIdentifier
+                                                                       expectedAnswer:ORKTSingleChoiceValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTSingleChoiceStepIdentifier
+                                                                        expectedAnswer:ORKTOtherTextValue] evaluateWithObject:leafResults]);
+    
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTScaleStepIdentifier
+                                                                      expectedAnswer:ORKTIntegerValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTScaleStepIdentifier
+                                                                       expectedAnswer:ORKTIntegerValue + 1] evaluateWithObject:leafResults]);
+
+    NSArray *expectedAnswers = nil;
+    expectedAnswers = @[ORKTMultipleChoiceValue1, ORKTMultipleChoiceValue2];
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTMultipleChoiceStepIdentifier
+                                                                      expectedAnswers:expectedAnswers] evaluateWithObject:leafResults]);
+    expectedAnswers = @[ORKTMultipleChoiceValue1, ORKTMultipleChoiceValue2, ORKTOtherTextValue];
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTMultipleChoiceStepIdentifier
+                                                                       expectedAnswers:expectedAnswers] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:ORKTBooleanStepIdentifier
+                                                                        expectedAnswer:ORKTBooleanValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:ORKTBooleanStepIdentifier
+                                                                         expectedAnswer:!ORKTBooleanValue] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:ORKTTextStepIdentifier
+                                                                     expectedAnswer:ORKTTextValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:ORKTTextStepIdentifier
+                                                                      expectedAnswer:ORKTOtherTextValue] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTIntegerNumericStepIdentifier
+                                                                        expectedAnswer:ORKTIntegerValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTIntegerNumericStepIdentifier
+                                                                         expectedAnswer:ORKTIntegerValue + 1] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:ORKTFloatValue - 0.01
+                                                            maximumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:ORKTFloatValue + 0.05
+                                                             maximumExpectedAnswerValue:ORKTFloatValue + 0.06] evaluateWithObject:leafResults]);
+
+    NSDateComponents *expectedDateComponentsMinimum = ORKTDateComponents();
+    NSDateComponents *expectedDateComponentsMaximum = ORKTDateComponents();
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:ORKTTimeOfDayStepIdentifier
+                                                               minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                             minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                               maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                             maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    expectedDateComponentsMinimum.minute -= 2;
+    expectedDateComponentsMaximum.minute += 2;
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:ORKTTimeOfDayStepIdentifier
+                                                               minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                             minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                               maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                             maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    
+    expectedDateComponentsMinimum.minute += 3;
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:ORKTTimeOfDayStepIdentifier
+                                                                minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                              minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                              maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+
+    expectedDateComponentsMinimum.minute -= 3;
+    expectedDateComponentsMinimum.hour += 1;
+    expectedDateComponentsMaximum.hour += 2;
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:ORKTTimeOfDayStepIdentifier
+                                                                minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                              minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                              maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:ORKTTimeIntervalStepIdentifier
+                                                                             expectedAnswer:ORKTIntegerValue] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:ORKTTimeIntervalStepIdentifier
+                                                                              expectedAnswer:ORKTIntegerValue + 1] evaluateWithObject:leafResults]);
+
+    NSDate *expectedDate = ORKTDate();
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                          minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
+                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:60]] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                           minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]
+                                                           maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+120]] evaluateWithObject:leafResults]);
 }
 
 @end
