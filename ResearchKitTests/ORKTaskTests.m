@@ -315,35 +315,38 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     }
 }
 
+#define getIndividualNavigableOrderedTaskSteps() \
+    __unused ORKStep *symptomStep = _navigableOrderedTaskSteps[0];\
+    __unused ORKStep *severityStep = _navigableOrderedTaskSteps[1];\
+    __unused ORKStep *blankStep = _navigableOrderedTaskSteps[2];\
+    __unused ORKStep *severeHeadacheStep = _navigableOrderedTaskSteps[3];\
+    __unused ORKStep *lightHeadacheStep = _navigableOrderedTaskSteps[4];\
+    __unused ORKStep *otherSymptomStep = _navigableOrderedTaskSteps[5];\
+    __unused ORKStep *endStep = _navigableOrderedTaskSteps[6];
+
+BOOL (^testStepAfterStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
+    ORKStep *testedStep = [task stepAfterStep:fromStep withResult:taskResult];
+    return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
+};
+
+BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
+    ORKStep *testedStep = [task stepBeforeStep:fromStep withResult:taskResult];
+    return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
+};
+
 - (void)testNavigableOrderedTask {
     XCTAssertEqualObjects(_navigableOrderedTask.identifier, ORKTNavigableOrderedTaskIdentifier);
     XCTAssertEqualObjects(_navigableOrderedTask.steps, _navigableOrderedTaskSteps);
     XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules, _stepNavigationRules);
-    
-    ORKStep *symptomStep = _navigableOrderedTaskSteps[0];
-    ORKStep *severityStep = _navigableOrderedTaskSteps[1];
-    ORKStep *blankStep = _navigableOrderedTaskSteps[2];
-    ORKStep *severeHeadacheStep = _navigableOrderedTaskSteps[3];
-    ORKStep *lightHeadacheStep = _navigableOrderedTaskSteps[4];
-    ORKStep *otherSymptomStep = _navigableOrderedTaskSteps[5];
-    ORKStep *endStep = _navigableOrderedTaskSteps[6];
+}
 
-    ORKTaskResult *taskResult = nil;
-
-    BOOL (^testStepAfterStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
-        ORKStep *testedStep = [task stepAfterStep:fromStep withResult:taskResult];
-        return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
-    };
-
-    BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *, ORKStep *) =  ^BOOL(ORKNavigableOrderedTask *task, ORKTaskResult *taskResult, ORKStep *fromStep, ORKStep *expectedStep) {
-        ORKStep *testedStep = [task stepBeforeStep:fromStep withResult:taskResult];
-        return (testedStep == nil && expectedStep == nil) || [testedStep isEqual:expectedStep];
-    };
+- (void)testNavigableOrderedTaskEmpty {
+    getIndividualNavigableOrderedTaskSteps();
 
     //
     // Empty task result
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:0];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:0];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
@@ -371,11 +374,15 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, lightHeadacheStep, endStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, lightHeadacheStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, lightHeadacheStep, nil));
+}
+
+- (void)testNavigableOrderedTaskHeadache {
+    getIndividualNavigableOrderedTaskSteps();
 
     //
     // Only headache symptom question step answered
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache];
 
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
@@ -388,11 +395,15 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, severityStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
+}
 
+- (void)testNavigableOrderedTaskDiziness {
+    getIndividualNavigableOrderedTaskSteps();
+    
     //
     // Only diziness symptom question answered
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));
@@ -403,11 +414,15 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, endStep, otherSymptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, otherSymptomStep, symptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
+}
 
+- (void)testNavigableOrderedTaskSevereHeadache {
+    getIndividualNavigableOrderedTaskSteps();
+    
     //
     // Severe headache sequence
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityYes];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
@@ -420,11 +435,15 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severeHeadacheStep, severityStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, severityStep, symptomStep));
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
+}
 
+- (void)testNavigableOrderedTaskLightHeadache {
+    getIndividualNavigableOrderedTaskSteps();
+    
     //
     // Light headache sequence
     //
-    taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:ORKTNavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSeverityNo];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, severityStep));
