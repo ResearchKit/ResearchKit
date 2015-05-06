@@ -230,7 +230,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     _stepNavigationRules[ORKTOtherSymptomStepIdentifier] = [directRule copy];
 }
 
-typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
+typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     TestsTaskResultOptionSymptomHeadache    = 1 << 0,
     TestsTaskResultOptionSymptomDiziness    = 2 << 0,
     TestsTaskResultOptionSymptomNausea      = 3 << 0,
