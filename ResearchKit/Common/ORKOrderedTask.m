@@ -799,18 +799,20 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return self;
 }
 
-- (void)addNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
-    if (!triggerStepIdentifier) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-    }
-    if (!stepNavigationRule) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"stepNavigationRule can not be nil." userInfo:nil];
-    }
+- (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(stepNavigationRule);
+    ORKThrowInvalidArgumentExceptionIfNil(triggerStepIdentifier);
     
     if (!_stepNavigationRules) {
         _stepNavigationRules = [NSMutableDictionary new];
     }
     _stepNavigationRules[triggerStepIdentifier] = stepNavigationRule;
+}
+
+- (void)removeNavigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(triggerStepIdentifier);
+    
+    [_stepNavigationRules removeObjectForKey:triggerStepIdentifier];
 }
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(ORKTaskResult *)result {

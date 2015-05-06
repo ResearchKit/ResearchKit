@@ -193,7 +193,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
                                              matchingStepIdentifiers:matchingStepIdentifiers];
     
-    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSymptomStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSymptomStepIdentifier];
     _stepNavigationRules[ORKTSymptomStepIdentifier] = [predicateRule copy];
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
@@ -213,7 +213,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
                                              matchingStepIdentifiers:matchingStepIdentifiers
                                                defaultStepIdentifier:ORKTOtherSymptomStepIdentifier];
     
-    [_navigableOrderedTask addNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSeverityStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:predicateRule forTriggerStepIdentifier:ORKTSeverityStepIdentifier];
     _stepNavigationRules[ORKTSeverityStepIdentifier] = [predicateRule copy];
 
     
@@ -221,9 +221,9 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     ORKDirectStepNavigationRule *directRule =
     [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKTEndStepIdentifier];
     
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTSevereHeadacheStepIdentifier];
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTLightHeadacheStepIdentifier];
-    [_navigableOrderedTask addNavigationRule:directRule forTriggerStepIdentifier:ORKTOtherSymptomStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:ORKTSevereHeadacheStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:ORKTLightHeadacheStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:ORKTOtherSymptomStepIdentifier];
     
     _stepNavigationRules[ORKTSevereHeadacheStepIdentifier] = [directRule copy];
     _stepNavigationRules[ORKTLightHeadacheStepIdentifier] = [directRule copy];
@@ -338,6 +338,20 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertEqualObjects(_navigableOrderedTask.identifier, ORKTNavigableOrderedTaskIdentifier);
     XCTAssertEqualObjects(_navigableOrderedTask.steps, _navigableOrderedTaskSteps);
     XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules, _stepNavigationRules);
+
+    ORKDefineStringKey(ORKTMockTriggerStepIdentifier);
+    ORKDefineStringKey(ORKTMockDestinationStepIdentifier);
+
+    // Test adding and removing a step navigation rule
+    XCTAssertNil(_navigableOrderedTask.stepNavigationRules[ORKTMockTriggerStepIdentifier]);
+
+    ORKDirectStepNavigationRule *mockNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKTMockDestinationStepIdentifier];
+    [_navigableOrderedTask setNavigationRule:mockNavigationRule forTriggerStepIdentifier:ORKTMockTriggerStepIdentifier];
+ 
+    XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules[ORKTMockTriggerStepIdentifier], [mockNavigationRule copy]);
+    
+    [_navigableOrderedTask removeNavigationRuleForTriggerStepIdentifier:ORKTMockTriggerStepIdentifier];
+    XCTAssertNil(_navigableOrderedTask.stepNavigationRules[ORKTMockTriggerStepIdentifier]);
 }
 
 - (void)testNavigableOrderedTaskEmpty {

@@ -39,7 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can be represented as an ordered task.
  
- To enable conditional behaviors in a task, it can be easier to subclass `ORKOrderedTask` and override particular `ORKTask` methods than it is to implement the `ORKTask` protocol directly. For example, if you want to display a survey question only when the user answered Yes to the previous question, you can override `stepAfterStep:withResult:` and `stepBeforeStep:withResult:` and call super for all other methods.
+ The `ORKNavigableOrderedTask` subclass implements conditional step navigation behaviour. For example, this subclass allows you to display a survey question only when the user answered Yes to a specific question, or to define arbitrary jumps between the steps.
+ 
+ If you want further custom conditional behaviors in a task, it can be easier to subclass `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is to implement the `ORKTask` protocol directly. override `stepAfterStep:withResult:` and `stepBeforeStep:withResult:` and call super for all other methods.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
@@ -84,11 +86,34 @@ ORK_CLASS_AVAILABLE
 @end
 
 
+/**
+ The `ORKNavigableOrderedTask` class adds contional step navigation to the behaviour inherited from `ORKOrderedTask`.
+ 
+ For implementing conditional task navigation, you must instantiate concrete subclasses of `ORKStepNavigationRule` and attach them to
+ trigger steps by using `setNavigationRule:forTriggerStepIdentifier:`.
+ 
+ For example, if you want to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
+ */
 @class ORKStepNavigationRule;
 
 @interface ORKNavigableOrderedTask : ORKOrderedTask
 
-- (void)addNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+/**
+ Adds a navigation rule for a trigger step identifier. The rule will be used to obtain a new destination step when you are about to leave the trigger step in the task.
+ 
+ You cannot add two different navigtaion rules to the same trigger step identifier: only the most recently added rule is kept.
+ 
+ @param stepNavigationRule      The step navigation rule to be used when navigating forward from the trigger step. A strong reference to the rule is maintained by the task.
+ @param triggerStepIdentifier   The identifier of the step that should trigger the rule.
+ */
+- (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+
+/**
+ Removes the navigation rule (if any) associated to the specified trigger step identifier.
+ 
+ @param triggerStepIdentifier   The identifier of the step whose rule is to be removed.
+ */
+- (void)removeNavigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
  A dictionary of step navigation rules in the task, keyed by trigger step identifier.

@@ -1700,7 +1700,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
                                              matchingStepIdentifiers:matchingStepIdentifiers];
     
-    [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
@@ -1720,16 +1720,16 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                              matchingStepIdentifiers:matchingStepIdentifiers
                                                defaultStepIdentifier:@"other_symptom"];
     
-    [task addNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     
     
     // Add end direct rules to skip unneeded steps
     ORKDirectStepNavigationRule *directRule =
     [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
     
-    [task addNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
-    [task addNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
-    [task addNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
     
     return task;
 }
