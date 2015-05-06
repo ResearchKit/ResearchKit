@@ -45,9 +45,9 @@
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
                                     minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
                                     maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue {
-    return [self predicateForScaleQuestionResultWithIdentifier:resultIdentifier
-                                    minimumExpectedAnswerValue:minimumExpectedAnswerValue
-                                    maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer {
@@ -109,12 +109,14 @@
 }
 
 + (NSPredicate *)predicateForTimeOfDayQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                               minimumExpectedAnswerDateComponents:(NSDateComponents *)minimumExpectedAnswerDateComponents
-                               maximumExpectedAnswerDateComponents:(NSDateComponents *)maximumExpectedAnswerDateComponents {
+                                         minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
+                                       minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
+                                         maximumExpectedAnswerHour:(NSInteger)maximumExpectedAnswerHour
+                                       maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer.date >= %@ AND $x.answer.date <= %@).@count > 0",
-                              resultIdentifier, minimumExpectedAnswerDateComponents.date, maximumExpectedAnswerDateComponents.date];
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer.hour >= %@ AND $x.answer.minute >= %@ AND $x.answer.hour <= %@ AND $x.answer.minute <= %@).@count > 0",
+                              resultIdentifier, @(minimumExpectedAnswerHour), @(minimumExpectedAnswerMinute), @(maximumExpectedAnswerHour), @(maximumExpectedAnswerMinute)];
     return predicate;
 }
 
@@ -206,13 +208,18 @@
                     defaultStepIdentifier:nil];
 }
 
-- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)ORKTaskResult {
++ (NSArray *)getLeafResultsWithTaskResult:(ORKTaskResult *)ORKTaskResult {
     NSMutableArray *leafResults = [NSMutableArray new];
     for (ORKResult *result in ORKTaskResult.results) {
         if ([result isKindOfClass:[ORKCollectionResult class]]) {
             [leafResults addObjectsFromArray:[(ORKCollectionResult *)result results]];
         }
     }
+    return leafResults;
+}
+
+- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
+    NSArray *leafResults = [[self class] getLeafResultsWithTaskResult:taskResult];
     NSString *matchedPredicateIdentifier = nil;
     for (NSInteger i = 0; i < [_resultPredicates count]; i++) {
         NSPredicate *predicate = _resultPredicates[i];

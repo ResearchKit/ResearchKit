@@ -56,8 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
                                       maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue;
 
 + (NSPredicate *)predicateForTimeOfDayQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                               minimumExpectedAnswerDateComponents:(NSDateComponents *)minimumExpectedAnswerDateComponents
-                               maximumExpectedAnswerDateComponents:(NSDateComponents *)maximumExpectedAnswerDateComponents;
+                                         minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
+                                       minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
+                                         maximumExpectedAnswerHour:(NSInteger)maximumExpectedAnswerHour
+                                       maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute;
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
 
