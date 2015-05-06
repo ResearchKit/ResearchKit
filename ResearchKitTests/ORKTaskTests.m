@@ -42,10 +42,12 @@
 
 
 @implementation ORKTaskTests {
-    NSMutableArray *_orderedTaskStepIdentifiers;
-    NSMutableArray *_orderedTaskSteps;
+    NSArray *_orderedTaskStepIdentifiers;
+    NSArray *_orderedTaskSteps;
     ORKOrderedTask *_orderedTask;
-    
+
+    NSArray *_navigableOrderedTaskStepIdentifiers;
+    NSArray *_navigableOrderedTaskSteps;
     NSMutableDictionary *_stepNavigationRules;
     ORKNavigableOrderedTask *_navigableOrderedTask;
 }
@@ -65,9 +67,13 @@ ORKDefineStringKey(ORKTEndStepIdentifier);
 ORKDefineStringKey(ORKTOrderedTaskIdentifier);
 ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 
-- (void)setUpOrderedTask {
-    _orderedTaskStepIdentifiers = [NSMutableArray new];
-    _orderedTaskSteps = [NSMutableArray new];
+- (void)getTaskSteps:(out NSArray **)outSteps stepIdentifiers:(out NSArray **)outStepIdentifiers {
+    if (outSteps == NULL || outStepIdentifiers == NULL) {
+        return;
+    }
+    
+    NSMutableArray *stepIdentifiers = [NSMutableArray new];
+    NSMutableArray *steps = [NSMutableArray new];
     
     ORKAnswerFormat *answerFormat = nil;
     NSString *stepIdentifier = nil;
@@ -85,53 +91,70 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     stepIdentifier = ORKTSymptomStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"What is your symptom?" answer:answerFormat];
     step.optional = NO;
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
     stepIdentifier = ORKTSeverityStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
     step.optional = NO;
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     stepIdentifier = ORKTBlankStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"This step is intentionally left blank (you should not see it)";
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     stepIdentifier = ORKTSevereHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a severe headache";
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     stepIdentifier = ORKTLightHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a light headache";
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     stepIdentifier = ORKTOtherSymptomStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have other symptom";
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
     
     stepIdentifier = ORKTEndStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have finished the task";
-    [_orderedTaskStepIdentifiers addObject:stepIdentifier];
-    [_orderedTaskSteps addObject:step];
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
+    
+    *outSteps = steps;
+    *outStepIdentifiers = stepIdentifiers;
+}
+
+- (void)setUpOrderedTask {
+    NSArray *orderedTaskSteps = nil;
+    NSArray *orderedTaskStepIdentifiers = nil;
+    [self getTaskSteps:&orderedTaskSteps stepIdentifiers:&orderedTaskStepIdentifiers];
+    _orderedTaskSteps = orderedTaskSteps;
+    _orderedTaskStepIdentifiers = orderedTaskStepIdentifiers;
     
     _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:ORKTOrderedTaskIdentifier
                                                         steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
 }
 
 - (void)setUpNavigableOrderedTask {
+    NSArray *navigableOrderedTaskSteps = nil;
+    NSArray *navigableOrderedTaskStepIdentifiers = nil;
+    [self getTaskSteps:&navigableOrderedTaskSteps stepIdentifiers:&navigableOrderedTaskStepIdentifiers];
+    _navigableOrderedTaskSteps = navigableOrderedTaskSteps;
+    _navigableOrderedTaskStepIdentifiers = navigableOrderedTaskStepIdentifiers;
+
     _navigableOrderedTask = [[ORKNavigableOrderedTask alloc] initWithIdentifier:ORKTNavigableOrderedTaskIdentifier
-                                                                          steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
+                                                                          steps:ORKArrayCopyObjects(_navigableOrderedTaskSteps)]; // deep copy to test step copying and equality
     
     // Build navigation rules
     _stepNavigationRules = [NSMutableDictionary new];
@@ -294,16 +317,16 @@ typedef NS_ENUM(NSInteger, TestsTaskResultOptions) {
 
 - (void)testNavigableOrderedTask {
     XCTAssertEqualObjects(_navigableOrderedTask.identifier, ORKTNavigableOrderedTaskIdentifier);
-    XCTAssertEqualObjects(_navigableOrderedTask.steps, _orderedTaskSteps);
+    XCTAssertEqualObjects(_navigableOrderedTask.steps, _navigableOrderedTaskSteps);
     XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules, _stepNavigationRules);
     
-    ORKStep *symptomStep = _orderedTaskSteps[0];
-    ORKStep *severityStep = _orderedTaskSteps[1];
-    ORKStep *blankStep = _orderedTaskSteps[2];
-    ORKStep *severeHeadacheStep = _orderedTaskSteps[3];
-    ORKStep *lightHeadacheStep = _orderedTaskSteps[4];
-    ORKStep *otherSymptomStep = _orderedTaskSteps[5];
-    ORKStep *endStep = _orderedTaskSteps[6];
+    ORKStep *symptomStep = _navigableOrderedTaskSteps[0];
+    ORKStep *severityStep = _navigableOrderedTaskSteps[1];
+    ORKStep *blankStep = _navigableOrderedTaskSteps[2];
+    ORKStep *severeHeadacheStep = _navigableOrderedTaskSteps[3];
+    ORKStep *lightHeadacheStep = _navigableOrderedTaskSteps[4];
+    ORKStep *otherSymptomStep = _navigableOrderedTaskSteps[5];
+    ORKStep *endStep = _navigableOrderedTaskSteps[6];
 
     ORKTaskResult *taskResult = nil;
 
