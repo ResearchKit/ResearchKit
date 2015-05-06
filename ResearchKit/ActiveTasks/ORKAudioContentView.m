@@ -251,6 +251,12 @@ static const CGFloat kValueLineMargin = 1.5;
     [self applyKeyColor];
 }
 
+-(void)setFailed:(BOOL)failed {
+    _failed = failed;
+    _alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+    [self updateAlertLabelHidden];
+}
+
 - (void)setFinished:(BOOL)finished {
     _finished = finished;
     [self updateAlertLabelHidden];
@@ -356,8 +362,8 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = [_samples lastObject];
-    BOOL hide = _finished || !([sample doubleValue] > _alertThreshold);
-    _alertLabel.hidden = hide;
+    BOOL show = (! _finished && ([sample doubleValue] > _alertThreshold)) || _failed;
+    _alertLabel.hidden = !show;
 }
 
 - (void)setSamples:(NSArray *)samples {
