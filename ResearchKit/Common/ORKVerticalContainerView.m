@@ -36,6 +36,7 @@
 
 #define DEF_KEY(x) static NSString * const x = @STRINGIFY(x)
 
+DEF_KEY(_TopToIllustrationConstraintKey);
 DEF_KEY(_IllustrationHeightConstraintKey);
 
 DEF_KEY(_StepViewToContinueKey);
@@ -304,7 +305,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (void)updateConstraintConstants {
     ORKScreenType screenType = _screenType;
     
-    const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
     const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
     const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, screenType);
     
@@ -313,8 +313,14 @@ static const CGFloat AssumedStatusBarHeight = 20;
     _headerView.hasContentAbove = hasIllustration;
     
     {
+        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
+        
         NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
         constraint.constant = (_imageView.image ? IllustrationHeight : 0);
+        
+        constraint = _adjustableConstraints[_TopToIllustrationConstraintKey];
+        constraint.constant = (_imageView.image ?IllustrationTopMargin : 0);
     }
     
     BOOL haveCaption = [_headerView.captionLabel.text length] > 0;
@@ -354,7 +360,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
         NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[_HeaderMinimumHeightKey];
         minimumHeaderHeight.constant = _minimumStepHeaderHeight;
     }
- 
+    
     [self updateContinueButtonConstraints];
 }
 
@@ -414,7 +420,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                               attribute:NSLayoutAttributeTop
                                                                              multiplier:1.0 constant:0];
         verticalCentering3.priority = UILayoutPriorityDefaultHigh;
-        [_scrollContainer addConstraints:@[verticalCentering1,verticalCentering2,verticalCentering3]];
+        [_scrollContainer addConstraints:@[verticalCentering1, verticalCentering2, verticalCentering3]];
+        
     } else {
         NSLayoutConstraint *verticalTop = [NSLayoutConstraint constraintWithItem:_container
                                                                        attribute:NSLayoutAttributeTop
@@ -453,13 +460,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                  attribute:NSLayoutAttributeNotAnAttribute
                                 multiplier:1 constant:198];
     
-    [otherConstraints addObject:
+    adjustableConstraintsTable[_TopToIllustrationConstraintKey] =
      [NSLayoutConstraint constraintWithItem:_customViewContainer
                                   attribute:NSLayoutAttributeTop
                                   relatedBy:NSLayoutRelationEqual
                                      toItem:_container
                                   attribute:NSLayoutAttributeTop
-                                 multiplier:1 constant:0]];
+                                 multiplier:1 constant:0];
     
     [otherConstraints addObject:
     [NSLayoutConstraint constraintWithItem:_headerView
@@ -468,7 +475,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                     toItem:_customViewContainer
                                  attribute:NSLayoutAttributeBottom
                                 multiplier:1 constant:0]];
-    
     
     [otherConstraints addObject:
     [NSLayoutConstraint constraintWithItem:_stepViewContainer
@@ -505,8 +511,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                                                  attribute:NSLayoutAttributeBottom
                                                                                                 multiplier:1 constant:0];
     }
-    
-    
     
     _continueAtBottomConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
                                                                attribute:NSLayoutAttributeBottom

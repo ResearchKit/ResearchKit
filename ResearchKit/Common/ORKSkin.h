@@ -87,6 +87,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore,
     ORKScreenMetricContinueButtonTopMargin,
     ORKScreenMetricContinueButtonTopMarginForIntroStep,
+    ORKScreenMetricTopToIllustration,
     ORKScreenMetricIllustrationToCaptionBaseline,
     ORKScreenMetricIllustrationHeight,
     ORKScreenMetricInstructionImageHeight,
