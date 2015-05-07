@@ -61,6 +61,7 @@
     double _frequency;
     double _theta;
     ORKAudioChannel _activeChannel;
+    BOOL _playsStereo;
     double _fadeInFactor;
     NSTimeInterval _fadeInDuration;
 }
@@ -100,7 +101,12 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
     for (UInt32 frame = 0; frame < inNumberFrames; frame++) {
         double bufferValue = sin(theta) * amplitude * pow(10, 2 * fadeInFactor - 2);
         bufferActive[frame] = bufferValue;
-        bufferNonActive[frame] = 0;
+        if (audioGenerator->_playsStereo) {
+            bufferNonActive[frame] = bufferValue;
+        }
+        else {
+            bufferNonActive[frame] = 0;
+        }
 
         theta += theta_increment;
         if (theta > 2.0 * M_PI) {
@@ -139,6 +145,15 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
     return ORKSineWaveToneGeneratorAmplitudeDefault * pow(10, 2 * _fadeInFactor - 2);
 }
 
+- (void)playSoundAtFrequency:(double)playFrequency {
+    _frequency = playFrequency;
+    _fadeInFactor = 0;
+    _fadeInDuration = 0.5;
+    _playsStereo = YES;
+
+    [self play];
+}
+
 - (void)playSoundAtFrequency:(double)playFrequency
                    onChannel:(ORKAudioChannel)playChannel
               fadeInDuration:(NSTimeInterval)duration {
@@ -146,6 +161,7 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
     _activeChannel = playChannel;
     _fadeInFactor = 0;
     _fadeInDuration = duration;
+    _playsStereo = NO;
 
     [self play];
 }

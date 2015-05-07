@@ -53,6 +53,7 @@
 #import "ORKFitnessStep.h"
 #import "ORKWalkingTaskStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
+#import "ORKToneAudiometryInstructionStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
@@ -816,7 +817,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
             ORKStepArrayAddStep(steps, step);
         }
         {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            ORKToneAudiometryInstructionStep *step = [[ORKToneAudiometryInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
             step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_CALL_TO_ACTION", nil);

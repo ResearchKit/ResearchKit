@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1412855C1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 1412855A1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		1412855D1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 1412855B1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.m */; };
+		141285601AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1412855E1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		141285611AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1412855F1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.m */; };
 		147503AF1AEE8071004B17F3 /* ORKAudioGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */; };
 		147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */; };
 		147503B71AEE807C004B17F3 /* ORKToneAudiometryContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */; };
@@ -373,6 +377,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1412855A1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryInstructionStep.h; sourceTree = "<group>"; };
+		1412855B1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryInstructionStep.m; sourceTree = "<group>"; };
+		1412855E1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryInstructionStepViewController.h; sourceTree = "<group>"; };
+		1412855F1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryInstructionStepViewController.m; sourceTree = "<group>"; };
 		147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAudioGenerator.h; sourceTree = "<group>"; };
 		147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAudioGenerator.m; sourceTree = "<group>"; };
 		147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryContentView.h; sourceTree = "<group>"; };
@@ -780,8 +788,12 @@
 				147503B21AEE807C004B17F3 /* ORKToneAudiometryContentView.m */,
 				147503B31AEE807C004B17F3 /* ORKToneAudiometryStep.h */,
 				147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */,
+				1412855A1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.h */,
+				1412855B1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.m */,
 				147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */,
 				147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */,
+				1412855E1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.h */,
+				1412855F1AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.m */,
 			);
 			name = "Tone Audiometry";
 			sourceTree = "<group>";
@@ -1656,11 +1668,13 @@
 				86C40D1A1A8D7C5C00081FAC /* ORKFormItem_Internal.h in Headers */,
 				86C40E1C1A8D7C5C00081FAC /* ORKConsentSection_Internal.h in Headers */,
 				86C40C7A1A8D7C5C00081FAC /* ORKAccelerometerRecorder.h in Headers */,
+				141285601AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.h in Headers */,
 				86C40D141A8D7C5C00081FAC /* ORKDefines_Private.h in Headers */,
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
 				86C40CD01A8D7C5C00081FAC /* ORKInstructionStepView.h in Headers */,
 				86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */,
 				86C40E181A8D7C5C00081FAC /* ORKConsentSection.h in Headers */,
+				1412855C1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.h in Headers */,
 				86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */,
 				865EA16C1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.h in Headers */,
 				86C40C121A8D7C5C00081FAC /* ORKActiveStepQuantityView.h in Headers */,
@@ -2040,6 +2054,7 @@
 				86C40C241A8D7C5C00081FAC /* ORKCountdownStep.m in Sources */,
 				86C40CA21A8D7C5C00081FAC /* ORKHealthQuantityTypeRecorder.m in Sources */,
 				86C40DC01A8D7C5C00081FAC /* ORKTableViewCell.m in Sources */,
+				1412855D1AFBA2E2005F7EA0 /* ORKToneAudiometryInstructionStep.m in Sources */,
 				BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
@@ -2116,6 +2131,7 @@
 				86C40D0C1A8D7C5C00081FAC /* ORKCustomStepView.m in Sources */,
 				86C40C1C1A8D7C5C00081FAC /* ORKAudioStep.m in Sources */,
 				86C40D581A8D7C5C00081FAC /* ORKOrderedTask.m in Sources */,
+				141285611AFBA391005F7EA0 /* ORKToneAudiometryInstructionStepViewController.m in Sources */,
 				86C40D601A8D7C5C00081FAC /* ORKQuestionStep.m in Sources */,
 				86C40E381A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.m in Sources */,
 			);

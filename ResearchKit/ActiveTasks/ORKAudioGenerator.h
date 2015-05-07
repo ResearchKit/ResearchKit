@@ -61,6 +61,15 @@ ORK_CLASS_AVAILABLE
 @interface ORKAudioGenerator : NSObject
 
 /**
+ Plays a tone at a specific frequency in stereo.
+
+ The sound is a "pure" sinusoid tone.
+
+ @param frequency The audio frequency in hertz.
+ */
+- (void)playSoundAtFrequency:(double)frequency;
+
+/**
  Plays a tone at a specific frequency on a specific channel, with a fade-in effect.
 
  The sound is a "pure" sinusoid tone.
