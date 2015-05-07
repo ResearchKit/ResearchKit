@@ -50,11 +50,23 @@
                                       maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
-+ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer {
-    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:@[ expectedAnswer ]];
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString {
+    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:@[ expectedString ] usePatterns:NO];
 }
 
-+ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswers:(NSArray *)expectedAnswers {
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedStrings:(NSArray *)expectedStrings {
+    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:expectedStrings usePatterns:NO];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern {
+    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:@[ pattern ] usePatterns:YES];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPatterns:(NSArray *)patterns {
+    return [self predicateForChoiceQuestionResultWithIdentifier:resultIdentifier expectedAnswers:patterns usePatterns:YES];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswers:(NSArray *)expectedAnswers usePatterns:(BOOL)usePatterns {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(expectedAnswers);
     if ([expectedAnswers count] == 0) {
@@ -62,10 +74,15 @@
     }
 
     NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
+    NSString *repeatingFormatInfix = usePatterns ?
+    @" AND SUBQUERY($x.answer, $y, $y matches %@).@count > 0" :
+    @" AND SUBQUERY($x.answer, $y, $y like %@).@count > 0";
+    
     for (NSInteger i = 0; i < [expectedAnswers count]; i++) {
-        [format appendString:@" AND SUBQUERY($x.answer, $y, $y like %@).@count > 0"];
+        [format appendString:repeatingFormatInfix];
     }
-    [format appendString:@").@count > 0"];
+    NSString *formatSuffix = @").@count > 0";
+    [format appendString:formatSuffix];
     
     NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:resultIdentifier, nil];
     [arguments addObjectsFromArray:expectedAnswers];
@@ -82,11 +99,19 @@
     return predicate;
 }
 
-+ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer {
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer like %@).@count > 0",
-                              resultIdentifier, expectedAnswer];
+                              resultIdentifier, expectedString];
+    return predicate;
+}
+
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern {
+    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer matches %@).@count > 0",
+                              resultIdentifier, pattern];
     return predicate;
 }
 

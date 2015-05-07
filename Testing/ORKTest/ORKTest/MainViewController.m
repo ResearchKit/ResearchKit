@@ -1668,7 +1668,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     // Individual predicates
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:@"symptom" expectedAnswer:@"headache"];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:@"symptom" expectedString:@"headache"];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \

@@ -74,21 +74,41 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to the specified string.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
- @param expectedAnswer      The expected string.
+ @param expectedAnswer      The expected string answer.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer;
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to the specified strings.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
- @param expectedAnswer      An array with all the expected string answers.
+ @param expectedStrings      An array with all the expected string answers.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswers:(NSArray *)expectedAnswers;
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedStrings:(NSArray *)expectedStrings;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the specified regular expression pattern.
+ 
+ @param resultIdentifier    The identifier of the question result you want to match against.
+ @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the specified regular expression patterns.
+ 
+ @param resultIdentifier    The identifier of the question result you want to match against.
+ @param patterns            An array of ICU-compliant regular expression patterns that match the answer strings.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPatterns:(NSArray *)patterns;
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the specified boolean value.
@@ -104,11 +124,21 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the specified string.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
- @param expectedAnswer      The expected string.
+ @param expectedString      The expected result string.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSString *)expectedAnswer;
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString;
+
+/**
+ Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the specified regular expression pattern.
+ 
+ @param resultIdentifier    The identifier of the question result you want to match against.
+ @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern;
 
 /**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the specified integer value.
