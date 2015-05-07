@@ -475,7 +475,7 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
 ORKDefineStringKey(ORKTScaleStepIdentifier);
 ORKDefineStringKey(ORKTContinuousScaleStepIdentifier);
 static const NSInteger ORKTIntegerValue = 6;
-static const NSInteger ORKTFloatValue = 6.5;
+static const float ORKTFloatValue = 6.5;
 
 ORKDefineStringKey(ORKTSingleChoiceStepIdentifier);
 ORKDefineStringKey(ORKTMultipleChoiceStepIdentifier);
@@ -561,6 +561,16 @@ static NSDateComponents *(^ORKTDateComponents)() = ^NSDateComponents *{
                                                            minimumExpectedAnswerValue:ORKTFloatValue + 0.05
                                                            maximumExpectedAnswerValue:ORKTFloatValue + 0.06] evaluateWithObject:leafResults]);
 
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                          minimumExpectedAnswerValue:ORKTFloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                           minimumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                          maximumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTContinuousScaleStepIdentifier
+                                                           maximumExpectedAnswerValue:ORKTFloatValue - 0.01] evaluateWithObject:leafResults]);
+
     // ORKChoiceQuestionResult (strings)
     XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:ORKTSingleChoiceStepIdentifier
                                                                        expectedString:ORKTSingleChoiceValue] evaluateWithObject:leafResults]);
@@ -618,6 +628,23 @@ static NSDateComponents *(^ORKTDateComponents)() = ^NSDateComponents *{
     XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
                                                              minimumExpectedAnswerValue:ORKTFloatValue + 0.05
                                                              maximumExpectedAnswerValue:ORKTFloatValue + 0.06] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:ORKTFloatValue - 0.01
+                                                            maximumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:ORKTFloatValue + 0.05
+                                                             maximumExpectedAnswerValue:ORKTFloatValue + 0.06] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:ORKTFloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                            maximumExpectedAnswerValue:ORKTFloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:ORKTFloatNumericStepIdentifier
+                                                             maximumExpectedAnswerValue:ORKTFloatValue - 0.01] evaluateWithObject:leafResults]);
 
     // ORKTimeOfDayQuestionResult
     NSDateComponents *expectedDateComponentsMinimum = ORKTDateComponents();

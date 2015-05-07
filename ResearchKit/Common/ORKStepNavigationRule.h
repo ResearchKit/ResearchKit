@@ -29,7 +29,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
 
@@ -61,14 +60,36 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the specified float values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerValue   The minimum expected float value.
- @param maximumExpectedAnswerValue   The maximum expected float value.
+ @param minimumExpectedAnswerValue  The minimum expected float value.
+ @param maximumExpectedAnswerValue  The maximum expected float value.
  
  @return A result predicate.
  */
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
-                                    maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue;
+                                    minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than or equal to the specified float value.
+ 
+ @param resultIdentifier            The identifier of the question result you want to match against.
+ @param minimumExpectedAnswerValue  The minimum expected float value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or equal to the specified float value.
+ 
+ @param resultIdentifier            The identifier of the question result you want to match against.
+ @param maximumExpectedAnswerValue  The maximum expected float value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                    maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to the specified string.
@@ -160,8 +181,30 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                      minimumExpectedAnswerValue:(CGFloat)minimumExpectedAnswerValue
-                                      maximumExpectedAnswerValue:(CGFloat)maximumExpectedAnswerValue;
+                                      minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater than or equal to the specified float value.
+ 
+ @param resultIdentifier            The identifier of the question result you want to match against.
+ @param minimumExpectedAnswerValue  The minimum expected float value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                      minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than or equal to the specified float value.
+ 
+ @param resultIdentifier            The identifier of the question result you want to match against.
+ @param maximumExpectedAnswerValue  The maximum expected float value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                      maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within the specified hour and minute values.
