@@ -38,7 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the `ORKQuestionResult` subtypes.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
+
+/**
+ The `init` and `new` methods are unavailable. `ORKResultPredicate` only provides class methods and should not be instantiated.
+ */
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the specified integer value.
@@ -171,16 +178,16 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-/**
- The `ORKStepNavigationRule` class is the abstract base class for conrete step navigation rules. Several navigation rules can be set on a navigable ordered task (`ORKNavigableOrderedTask`), for different trigger step identifiers.
-
- Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns the identifier of the destination step for the rule.
- 
- Two cooncrete subclasses are included: `ORKPredicateStepNavigationRule` can match any answer combination in the results of the ongoing task and jump accordingly; `ORKDirectStepNavigationRule` unconditionally navigates to the step specified by the destination step identifier.
- */
 @class ORKResult;
 @class ORKTaskResult;
 
+/**
+ The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules. Several navigation rules can be set on a navigable ordered task (`ORKNavigableOrderedTask`), for different trigger step identifiers.
+
+ Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns the identifier of the destination step for the rule.
+ 
+ Two concrete subclasses are included: `ORKPredicateStepNavigationRule` can match any answer combination in the results of the ongoing task and jump accordingly; `ORKDirectStepNavigationRule` unconditionally navigates to the step specified by the destination step identifier.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
@@ -212,7 +219,7 @@ ORK_CLASS_AVAILABLE
  
  It can be used to match any answer combination in the results of the ongoing task and jump accordingly. You must provide one or more result predicates (each predicate can match one or more step result within the task).
  
- The `ORKResultPredicate` class provides convience class methods to build predicates for all the `ORKQuestionResult` subtypes.
+ The `ORKResultPredicate` class provides convenience class methods to build predicates for all the `ORKQuestionResult` subtypes.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
@@ -222,7 +229,7 @@ ORK_CLASS_AVAILABLE
  
  @param resultPredicates            An array of result predicates. Each result predicate can match one or more step results in the ongoing task.
  @param matchingStepIdentifiers     An array of possible destination step identifiers. This array must contain one step identifier for each of the predicates in `resultPredicates`.
- @param defaultStepIdentifier       The identifier of the step which will be used if none of the result predicates match. If this argument is `nil` and none of the predicates match, the default ordered task navigation behaviour takes place (i.e, the task goes to the next step in order).
+ @param defaultStepIdentifier       The identifier of the step which will be used if none of the result predicates match. If this argument is `nil` and none of the predicates match, the default ordered task navigation behavior takes place (i.e, the task goes to the next step in order).
  
  @return An initialized predicate step navigation rule.
  */
