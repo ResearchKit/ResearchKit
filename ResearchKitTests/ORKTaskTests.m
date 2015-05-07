@@ -688,10 +688,28 @@ static NSDateComponents *(^ORKTDateComponents)() = ^NSDateComponents *{
     NSDate *expectedDate = ORKTDate();
     XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
                                                           minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
-                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:60]] evaluateWithObject:leafResults]);
+                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:leafResults]);
     XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
                                                            minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]
                                                            maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+120]] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                          minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
+                                                          maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                           minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+1]
+                                                           maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                          minimumExpectedAnswerDate:nil
+                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                           minimumExpectedAnswerDate:nil
+                                                           maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-1]] evaluateWithObject:leafResults]);
+
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:ORKTDateStepIdentifier
+                                                          minimumExpectedAnswerDate:nil
+                                                          maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
 }
 
 @end

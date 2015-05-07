@@ -239,14 +239,14 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within the specified dates.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerDate   The minimum expected date.
- @param maximumExpectedAnswerDate   The maximum expected date.
+ @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to compare the answer against a minimum date.
+ @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to compare the answer against a maximum date.
  
  @return A result predicate.
  */
 + (NSPredicate *)predicateForDateQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerDate:(NSDate *)minimumExpectedAnswerDate
-                                    maximumExpectedAnswerDate:(NSDate *)maximumExpectedAnswerDate;
+                                    minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
+                                    maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
 
 @end
 

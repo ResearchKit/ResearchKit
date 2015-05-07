@@ -86,13 +86,14 @@
     }
 
     NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
+    
     NSString *repeatingFormatInfix = usePatterns ?
     @" AND SUBQUERY($x.answer, $y, $y matches %@).@count > 0" :
     @" AND SUBQUERY($x.answer, $y, $y like %@).@count > 0";
-    
     for (NSInteger i = 0; i < [expectedAnswers count]; i++) {
         [format appendString:repeatingFormatInfix];
     }
+    
     NSString *formatSuffix = @").@count > 0";
     [format appendString:formatSuffix];
     
@@ -180,12 +181,22 @@
 }
 
 + (NSPredicate *)predicateForDateQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerDate:(NSDate *)minimumExpectedAnswerDate
-                                    maximumExpectedAnswerDate:(NSDate *)maximumExpectedAnswerDate {
+                                    minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
+                                    maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
-                              resultIdentifier, minimumExpectedAnswerDate, maximumExpectedAnswerDate];
+    NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:resultIdentifier, nil];
+    NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
+    if (minimumExpectedAnswerDate) {
+        [format appendString:@" AND $x.answer >= %@"];
+        [arguments addObject:minimumExpectedAnswerDate];
+    }
+    if (maximumExpectedAnswerDate) {
+        [format appendString:@" AND $x.answer <= %@"];
+        [arguments addObject:maximumExpectedAnswerDate];
+    }
+    [format appendString:@").@count > 0"];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:format argumentArray:arguments];
     return predicate;
 }
 
