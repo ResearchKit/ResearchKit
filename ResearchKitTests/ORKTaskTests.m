@@ -621,7 +621,7 @@ ORKDefineStringKey(ORKTAdditionalTextValue);
 
 - (void)testResultPredicates {
     ORKTaskResult *taskResult = [self getGeneralTaskResultTree];
-    NSArray *leafResults = [ORKPredicateStepNavigationRule getLeafResultsWithTaskResult:taskResult];
+    NSArray *leafResults = [ORKPredicateStepNavigationRule leafResultsFromTaskResult:taskResult];
 
     // ORKScaleQuestionResult
     XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ORKTScaleStepIdentifier

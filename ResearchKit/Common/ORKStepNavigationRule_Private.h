@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKPredicateStepNavigationRule ()
 
-+ (NSArray *)getLeafResultsWithTaskResult:(ORKTaskResult *)ORKTaskResult;
++ (NSArray *)leafResultsFromTaskResult:(ORKTaskResult *)ORKTaskResult;
 
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
                  matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
