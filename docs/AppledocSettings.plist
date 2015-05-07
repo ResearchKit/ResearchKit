@@ -39,5 +39,7 @@
 	<true/>
 	<key>--warn-unknown-directive</key>
 	<true/>
+	<key>--explicit-crossref</key>
+	<string></string>
 </dict>
 </plist>
