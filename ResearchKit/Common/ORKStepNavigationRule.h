@@ -329,6 +329,15 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
+/**
+ An optional array of additional task results.
+ 
+ The predicate step navigation rule will use the child step results within these tasks, in addition to the current task results, to math the result predicates. You must ensure that all the step identifiers within the additional task results are unique, and that they are different from the step identifiers within the current task result.
+ 
+ Each object in the array should be of the `ORKTaskResult` class.
+ */
+@property (nonatomic, strong, nullable) NSArray *additionalTaskResults;
+
 @end
 
 

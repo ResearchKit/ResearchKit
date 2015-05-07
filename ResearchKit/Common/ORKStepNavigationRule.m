@@ -311,8 +311,27 @@
     return leafResults;
 }
 
+// the results array should only containt instances of the ORKResult class or its subclasses
+static void ORKValidateResultIdentifiersUnique(NSArray *results, NSString* exceptionReason) {
+    NSArray *uniqueIdentifiers = [results valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
+    BOOL itemsHaveNonUniqueIdentifiers = ([results count] != [uniqueIdentifiers count]);
+    if (itemsHaveNonUniqueIdentifiers) {
+        @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
+    }
+}
+
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
-    NSArray *leafResults = [[self class] getLeafResultsWithTaskResult:taskResult];
+    NSMutableArray *leafResults = [[NSMutableArray alloc] initWithArray:[[self class] getLeafResultsWithTaskResult:taskResult]];
+    
+    for (ORKTaskResult *additionalTaskResult in _additionalTaskResults) {
+        if (![additionalTaskResult isKindOfClass:[ORKTaskResult class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"additionalTaskResults should only contain instances of the ORKTaskResult class or its subclasses" userInfo:nil];
+        }
+        [leafResults addObjectsFromArray:[[self class] getLeafResultsWithTaskResult:additionalTaskResult]];
+    }
+    
+    ORKValidateResultIdentifiersUnique(leafResults, @"All steps should have a unique identifier");
+    
     NSString *matchedPredicateIdentifier = nil;
     for (NSInteger i = 0; i < [_resultPredicates count]; i++) {
         NSPredicate *predicate = _resultPredicates[i];
@@ -336,6 +355,7 @@
         ORK_DECODE_OBJ_ARRAY(aDecoder, resultPredicates, NSPredicate);
         ORK_DECODE_OBJ_ARRAY(aDecoder, matchingStepIdentifiers, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultStepIdentifier, NSString);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, additionalTaskResults, ORKTaskResult);
     }
     return self;
 }
@@ -345,6 +365,7 @@
     ORK_ENCODE_OBJ(aCoder, resultPredicates);
     ORK_ENCODE_OBJ(aCoder, matchingStepIdentifiers);
     ORK_ENCODE_OBJ(aCoder, defaultStepIdentifier);
+    ORK_ENCODE_OBJ(aCoder, additionalTaskResults);
 }
 
 #pragma mark NSCopying
@@ -353,7 +374,8 @@
     typeof(self) rule = [[[self class] allocWithZone:zone] init];
     rule->_resultPredicates = ORKArrayCopyObjects(_resultPredicates);
     rule->_matchingStepIdentifiers = ORKArrayCopyObjects(_matchingStepIdentifiers);
-    rule ->_defaultStepIdentifier = [_defaultStepIdentifier copy];
+    rule->_defaultStepIdentifier = [_defaultStepIdentifier copy];
+    rule->_additionalTaskResults = ORKArrayCopyObjects(_additionalTaskResults);
     return rule;
 }
 
@@ -363,11 +385,12 @@
     return (isParentSame
             && ORKEqualObjects(self.resultPredicates, castObject.resultPredicates)
             && ORKEqualObjects(self.matchingStepIdentifiers, castObject.matchingStepIdentifiers)
-            && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier));
+            && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier)
+            && ORKEqualObjects(self.additionalTaskResults, castObject.additionalTaskResults));
 }
 
 - (NSUInteger)hash {
-    return [_resultPredicates hash] ^ [_matchingStepIdentifiers hash] ^ [_defaultStepIdentifier hash];
+    return [_resultPredicates hash] ^ [_matchingStepIdentifiers hash] ^ [_defaultStepIdentifier hash] ^ [_additionalTaskResults hash];
 }
 
 @end

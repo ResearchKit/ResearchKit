@@ -306,7 +306,8 @@ ret =
          },(@{
               PROPERTY(resultPredicates, NSPredicate, NSArray, NO, nil, nil),
               PROPERTY(matchingStepIdentifiers, NSString, NSArray, NO, nil, nil),
-              PROPERTY(defaultStepIdentifier, NSString, NSObject, NO, nil, nil)
+              PROPERTY(defaultStepIdentifier, NSString, NSObject, NO, nil, nil),
+              PROPERTY(additionalTaskResults, ORKTaskResult, NSArray, YES, nil, nil)
               })),
    ENTRY(ORKDirectStepNavigationRule,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
