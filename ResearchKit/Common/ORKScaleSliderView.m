@@ -77,6 +77,7 @@
         
         [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         self.slider.translatesAutoresizingMaskIntoConstraints = NO;
         self.leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
