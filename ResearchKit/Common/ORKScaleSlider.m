@@ -71,6 +71,7 @@
 
 - (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
+    [self setNeedsLayout];
 }
 
 - (void)setVertical:(BOOL)vertical {
