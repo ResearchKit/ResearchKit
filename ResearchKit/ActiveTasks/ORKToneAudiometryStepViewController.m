@@ -114,6 +114,7 @@
     toneResult.startDate = sResult.startDate;
     toneResult.endDate = now;
     toneResult.samples = [self.samples copy];
+    toneResult.outputVolume = @([AVAudioSession sharedInstance].outputVolume);
 
     [results addObject:toneResult];
     sResult.results = [results copy];

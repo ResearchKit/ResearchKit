@@ -768,6 +768,7 @@ ret =
   ENTRY(ORKToneAudiometryResult,
         nil,
         (@{
+           PROPERTY(outputVolume, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(samples, ORKToneAudiometrySample, NSArray, NO, nil, nil),
            })),
   ENTRY(ORKQuestionResult,

@@ -498,15 +498,18 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
 
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKToneAudiometryResult
+        let toneAudiometryResult = result as! ORKToneAudiometryResult
         let rows = super.resultRowsForSection(section)
 
         if section == 0 {
-            return rows
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
+            ]
         }
 
         // Add a `ResultRow` for each sample.
-        return rows + questionResult.samples!.map { sample in
+        return rows + toneAudiometryResult.samples!.map { sample in
             let toneSample = sample as! ORKToneAudiometrySample
 
             let text : String

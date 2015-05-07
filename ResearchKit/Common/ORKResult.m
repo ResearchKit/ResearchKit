@@ -182,12 +182,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, outputVolume);
     ORK_ENCODE_OBJ(aCoder, samples);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        ORK_DECODE_OBJ(aDecoder, outputVolume);
         ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKToneAudiometrySample);
     }
     return self;
@@ -202,6 +204,7 @@
 
     __typeof(self) castObject = object;
     return (isParentSame &&
+            ORKEqualObjects(self.outputVolume, castObject.outputVolume) &&
             ORKEqualObjects(self.samples, castObject.samples)) ;
 }
 
@@ -211,12 +214,13 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKToneAudiometryResult *result = [super copyWithZone:zone];
+    result.outputVolume = [self.outputVolume copy];
     result.samples = [self.samples copy];
     return result;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", [super description], self.samples];
+    return [NSString stringWithFormat:@"%@ %@ %@", [super description], self.outputVolume, self.samples];
 }
 
 @end

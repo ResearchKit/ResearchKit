@@ -245,6 +245,14 @@ ORK_CLASS_AVAILABLE
 @interface ORKToneAudiometryResult : ORKResult
 
 /**
+ The system wide output volume set by the user during the audiometry test.
+
+ A value in the range `0.0` to `1.0`, with `0.0` representing the minimum volume
+ and `1.0` representing the maximum volume.
+ */
+@property (nonatomic, copy, nullable) NSNumber *outputVolume;
+
+/**
  An array of collected samples, in which each item is an `ORKToneAudiometrySample`
  object that represents an audiometry sample.
  */
