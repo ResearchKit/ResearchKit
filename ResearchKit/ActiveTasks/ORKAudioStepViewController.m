@@ -153,6 +153,9 @@
 }
 
 - (void)finish {
+    if (_audioRecorderError) {
+        return;
+    }
     [super finish];
     [_timer reset];
     _timer = nil;
@@ -170,6 +173,7 @@
 - (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
     _audioRecorderError = error;
+    _audioContentView.failed = YES;
 }
 
 @end

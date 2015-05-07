@@ -91,15 +91,17 @@
             // Keep the shadow of the thumb inside the bounds
             const CGFloat kSliderMargin = 20.0;
             const CGFloat kSideLabelMargin = 24;
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kVerticalSliderHorizontalMargin-[_slider]-kVerticalSliderHorizontalMargin-|"
-                                                                         options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:@{@"kVerticalSliderHorizontalMargin": @(kVerticalSliderHorizontalMargin)}
-                                                                           views:views]];
-
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
-                                                                         options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
-                                                                           views:views]];
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kVerticalSliderHorizontalMargin-[_slider]-kVerticalSliderHorizontalMargin-|"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"kVerticalSliderHorizontalMargin": @(ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHorizontalMargin, self.window))}
+                                                       views:views]];
+            
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
+                                                     options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+                                                       views:views]];
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeLabel(==_leftRangeLabel)]"
                                                                          options:0
@@ -139,16 +141,18 @@
                                                               constant:0]];
         } else {
             // Horizontal slider constraints
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
-                                                                         options:NSLayoutFormatAlignAllCenterX|NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:nil
-                                                                           views:views]];
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
+                                                     options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:nil
+                                                       views:views]];
         
             const CGFloat kMargin = 17.0;
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
-                                                                         options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatDirectionLeadingToTrailing
-                                                                         metrics:@{@"kMargin": @(kMargin)}
-                                                                           views:views]];
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeLabel]-kMargin-[_slider]-kMargin-[_rightRangeLabel(==_leftRangeLabel)]-kMargin-|"
+                                                     options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"kMargin": @(kMargin)}
+                                                       views:views]];
         }
     }
     return self;
@@ -202,19 +206,18 @@
     [self setCurrentValue:newValue];
 }
 
-static const CGFloat kVerticalSliderHorizontalMargin = 48;
-
--(CGFloat)sliderLayoutWidth {
+- (CGFloat)sliderLayoutWidth {
     // Use the delegate expected width, if available, or if we have no delegate, then use our own width.
     // Subtract the left and right margins from the width, to give the appropriate slider width.
-    return (self.delegate ? self.delegate.sliderLayoutWidth : self.previousLayoutWidth)-(kVerticalSliderHorizontalMargin*2);
+    return (self.delegate ? self.delegate.sliderLayoutWidth : self.previousLayoutWidth) -
+    (ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHorizontalMargin, self.window) * 2);
 }
 
--(void)layoutSubviews {
+- (void)layoutSubviews {
     [super layoutSubviews];
     // This is currently only used by vertical sliders, but keep track of the width to implement the Protocol anyway
     CGFloat currentLayoutWidth = self.delegate ? self.delegate.sliderLayoutWidth : self.bounds.size.width;
-    if(self.previousLayoutWidth != currentLayoutWidth) {
+    if (self.previousLayoutWidth != currentLayoutWidth) {
         self.previousLayoutWidth = currentLayoutWidth;
         if ([_formatProvider isVertical]) {
             [self.slider invalidateIntrinsicContentSize];

@@ -34,8 +34,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKTaskViewController;
-
 @interface ORKObserver : NSObject
 
 @property (nonatomic, strong) NSArray *keyPaths;

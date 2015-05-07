@@ -119,20 +119,20 @@
     return intrinsicContentSize;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *view = nil;
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL pointInside = NO;
     if (_vertical) {
         // In vertical mode, we need to ignore the touch area for the needed extra width
         const CGFloat desiredSliderWidth = 44.0;
         const CGFloat actualWidth = [self bounds].size.width;
         const CGFloat centerX = actualWidth / 2;
         if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
-            view = [super hitTest:point withEvent:event];
+            pointInside = [super pointInside:point withEvent:event];
         }
     } else {
-        view = [super hitTest:point withEvent:event];
+        pointInside = [super pointInside:point withEvent:event];
     }
-    return view;
+    return pointInside;
 }
 
 - (void)sliderTouched:(UIGestureRecognizer *)gesture {
