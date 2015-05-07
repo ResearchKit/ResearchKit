@@ -43,9 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSArray *)getLeafResultsWithTaskResult:(ORKTaskResult *)ORKTaskResult;
 
-- (instancetype)init_orkWithResultPredicates:(NSArray *)resultPredicates
-                     matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
-                       defaultStepIdentifier:(NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
+                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+                   defaultStepIdentifier:(NSString *)defaultStepIdentifier
+                          validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
 
 @end
 
