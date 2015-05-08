@@ -221,7 +221,7 @@
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];
 
     ORKQuestionStep *questionStep3 = [ORKQuestionStep questionStepWithIdentifier:@"id"
-                                                                           title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES]];
+                                                                           title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES maximumValueDescription:@"High value" minimumValueDescription:@"Low value"]];
 
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"id" steps:@[activeStep, questionStep, questionStep2, questionStep3]];
     
@@ -289,7 +289,11 @@
                                               @"ORKOrderedTask.requestedPermissions",
                                               @"ORKStep.showsProgress",
                                               @"ORKResult.saveable",
-                                              @"ORKCollectionResult.firstResult"];
+                                              @"ORKCollectionResult.firstResult",
+                                              @"ORKScaleAnswerFormat.maximumValueDescription",
+                                              @"ORKScaleAnswerFormat.minimumValueDescription",
+                                              @"ORKContinuousScaleAnswerFormat.maximumValueDescription",
+                                              @"ORKContinuousScaleAnswerFormat.minimumValueDescription"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class
