@@ -78,7 +78,12 @@
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     _toolbar.translatesAutoresizingMaskIntoConstraints = NO;
     _toolbar.translucent = YES;
-    
+
+    const CGFloat horizMargin = ORKStandardMarginForView(self.view);
+    _webView.clipsToBounds = NO;
+    _webView.scrollView.clipsToBounds = NO;
+    _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
+
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
@@ -89,10 +94,10 @@
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
-    const UIEdgeInsets insets = ORKDefaultFullScreenViewLayoutMargins(self.view);
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leftInset-[_webView]-rightInset-|"
+    const CGFloat horizMargin = ORKStandardMarginForView(self.view);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
                                                                       options:(NSLayoutFormatOptions)0
-                                                                      metrics:@{ @"leftInset": @(insets.left), @"rightInset": @(insets.right) }
+                                                                      metrics:@{ @"horizMargin": @(horizMargin) }
                                                                         views:views]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
                                                                       options:(NSLayoutFormatOptions)0

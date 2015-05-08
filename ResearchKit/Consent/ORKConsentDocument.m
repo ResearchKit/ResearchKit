@@ -81,7 +81,7 @@
     NSMutableString *css = [@"@media print { .pagebreak { page-break-before: always; } }\n" mutableCopy];
     if (mobile) {
         [css appendString:@".header { margin-top: 36px ; margin-bottom: 30px; text-align: center; }\n"];
-        [css appendString:@"body { margin-left: 20px; margin-right: 20px; }\n"];
+        [css appendString:@"body { margin-left: 0px; margin-right: 0px; }\n"];
         
         
         CGFloat adjustment = [[ORKSubheadlineLabel defaultFont] pointSize] - 17.0;
