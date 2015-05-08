@@ -247,6 +247,7 @@
         self.slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
         self.slider.userInteractionEnabled = YES;
         self.slider.delegate = self;
+        self.slider.contentMode = UIViewContentModeRedraw;
         [self addSubview:_slider];
         
         self.leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
