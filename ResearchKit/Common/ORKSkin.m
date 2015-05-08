@@ -160,6 +160,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         10,        10,         0,         0,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {         48,        51,        52,        48,        48},      // ORKScreenMetricVerticalScaleHorizontalMargin
+        {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
     };
     return metrics[metric][screenType];
 }
@@ -168,9 +169,9 @@ CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *window) {
     return ORKGetMetricForScreenType(metric, ORKGetScreenTypeForWindow(window));
 }
 
-const CGFloat ORKLayoutMarginWidthiPad = 115.0;
-const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
+const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
+const CGFloat ORKLayoutMarginWidthiPad = 115.0;
 
 CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
     CGFloat margin = 0;
@@ -245,4 +246,11 @@ void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInse
         
         scrollView.contentOffset = savedOffset;
     }
+}
+
+CGFloat ORKSignatureViewWidth(UIWindow *window) {
+    const CGSize windowSize = window.bounds.size;
+    const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
+    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardMarginForView(window) + 2*ORKTableViewCellLeftMargin(window) );
+    return signatureViewWidth;
 }

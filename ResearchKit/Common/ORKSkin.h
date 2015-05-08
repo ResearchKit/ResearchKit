@@ -102,6 +102,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
     ORKScreenMetricVerticalScaleHorizontalMargin,
+    ORKScreenMetricSignatureViewHeight,
     ORKScreenMetric_COUNT
 };
 
@@ -124,5 +125,7 @@ UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UIView *view);
 UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view);
 UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view);
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
+
+CGFloat ORKSignatureViewWidth(UIWindow *window);
 
 NS_ASSUME_NONNULL_END

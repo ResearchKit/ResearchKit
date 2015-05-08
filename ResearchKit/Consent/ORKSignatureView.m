@@ -80,7 +80,7 @@
 static const CGFloat kPointMinDistance = 5;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
 
-@interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate>{
+@interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate> {
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
@@ -114,15 +114,15 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                         multiplier:1
-                                                          constant:156]];
+                                                          constant:ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, self.window)]];
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                            attribute:NSLayoutAttributeWidth
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1
-                                                                            constant:10000];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel-5;
+                                                                          multiplier:1.0
+                                                                            constant:10000.0];
+        widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
         [self addConstraint:widthConstraint];
     }
     return self;
