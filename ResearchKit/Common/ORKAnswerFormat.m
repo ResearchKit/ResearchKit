@@ -1353,8 +1353,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_minimum == castObject.minimum) &&
             (_step == castObject.step) &&
             (_defaultValue == castObject.defaultValue) &&
-            ([_maximumValueDescription isEqualToString:castObject.maximumValueDescription]) &&
-            ([_minimumValueDescription isEqualToString:castObject.minimumValueDescription])) ;
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription)) ;
 }
 
 - (ORKQuestionType) questionType {
@@ -1522,8 +1522,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_minimum == castObject.minimum) &&
             (_defaultValue == castObject.defaultValue) &&
             (_maximumFractionDigits == castObject.maximumFractionDigits) &&
-            ([_maximumValueDescription isEqualToString:castObject.maximumValueDescription]) &&
-            ([_minimumValueDescription isEqualToString:castObject.minimumValueDescription])) ;
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription)) ;
 }
 
 - (ORKQuestionType) questionType {

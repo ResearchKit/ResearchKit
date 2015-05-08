@@ -158,10 +158,6 @@ enum TaskListRow: Int, Printable {
         case ContinuousScaleQuestionStep =                          "ContinuousScaleQuestionStep"
         case DiscreteVerticalScaleQuestionStep =                    "DiscreteVerticalScaleQuestionStep"
         case ContinuousVerticalScaleQuestionStep =                  "ContinuousVerticalScaleQuestionStep"
-        case DiscreteScaleQuestionStepWithDescription =             "DiscreteScaleQuestionStepWithDescription"
-        case ContinuousScaleQuestionStepWithDescription =           "ContinuousScaleQuestionStepWithDescription"
-        case DiscreteVerticalScaleQuestionStepWithDescription =     "DiscreteVerticalScaleQuestionStepWithDescription"
-        case ContinuousVerticalScaleQuestionStepWithDescription =   "ContinuousVerticalScaleQuestionStepWithDescription"
 
         // Task with examples of numeric questions.
         case NumericQuestionTask =                                  "NumericQuestionTask"
@@ -303,7 +299,7 @@ enum TaskListRow: Int, Printable {
         var steps = [ORKStep]()
         
         // The first step is a scale control with 10 discrete ticks.
-        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
+        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
         let questionStep1 = ORKQuestionStep(identifier: Identifier.DiscreteScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step1AnswerFormat)
         
@@ -330,49 +326,13 @@ enum TaskListRow: Int, Printable {
         steps += [questionStep3]
 
         // The fourth step is a vertical scale control that allows continuous movement.
-        let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
+        let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
         let questionStep4 = ORKQuestionStep(identifier: Identifier.ContinuousVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step4AnswerFormat)
         
         questionStep4.text = exampleDetailText
         
         steps += [questionStep4]
-        
-        // The fifth step is a scale control with 10 discrete ticks and an upper and lower description.
-        let step5AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
-        
-        let questionStep5 = ORKQuestionStep(identifier: Identifier.DiscreteScaleQuestionStepWithDescription.rawValue, title: exampleQuestionText, answer: step5AnswerFormat)
-        
-        questionStep5.text = exampleDetailText
-        
-        steps += [questionStep5]
-        
-        // The sixth step is a scale control that allows continuous movement and an upper and lower description.
-        let step6AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
-        
-        let questionStep6 = ORKQuestionStep(identifier: Identifier.ContinuousScaleQuestionStepWithDescription.rawValue, title: exampleQuestionText, answer: step6AnswerFormat)
-        
-        questionStep6.text = exampleDetailText
-        
-        steps += [questionStep6]
-        
-        // The seventh step is a vertical scale control with 10 discrete ticks and an upper and lower description.
-        let step7AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
-        
-        let questionStep7 = ORKQuestionStep(identifier: Identifier.DiscreteVerticalScaleQuestionStepWithDescription.rawValue, title: exampleQuestionText, answer: step7AnswerFormat)
-        
-        questionStep7.text = exampleDetailText
-        
-        steps += [questionStep7]
-        
-        // The eighth step is a vertical scale control that allows continuous movement and an upper and lower description.
-        let step8AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
-        
-        let questionStep8 = ORKQuestionStep(identifier: Identifier.ContinuousVerticalScaleQuestionStepWithDescription.rawValue, title: exampleQuestionText, answer: step8AnswerFormat)
-        
-        questionStep8.text = exampleDetailText
-        
-        steps += [questionStep8]
         
         return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: steps)
     }
