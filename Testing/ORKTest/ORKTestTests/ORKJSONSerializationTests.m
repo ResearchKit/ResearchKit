@@ -289,11 +289,7 @@
                                               @"ORKOrderedTask.requestedPermissions",
                                               @"ORKStep.showsProgress",
                                               @"ORKResult.saveable",
-                                              @"ORKCollectionResult.firstResult",
-                                              @"ORKScaleAnswerFormat.maximumValueDescription",
-                                              @"ORKScaleAnswerFormat.minimumValueDescription",
-                                              @"ORKContinuousScaleAnswerFormat.maximumValueDescription",
-                                              @"ORKContinuousScaleAnswerFormat.minimumValueDescription"];
+                                              @"ORKCollectionResult.firstResult"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class

@@ -611,25 +611,29 @@ ret =
           })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+            return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue] maximumValueDescription:GETPROP(dict, maximumValueDescription) minimumValueDescription:GETPROP(dict, minimumValueDescription)];
         },
         (@{
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
   ENTRY(ORKContinuousScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+            return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue] maximumValueDescription:GETPROP(dict, maximumValueDescription) minimumValueDescription:GETPROP(dict, minimumValueDescription)];
         },
         (@{
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
