@@ -119,13 +119,14 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *__nullable window);
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable window);
 
-CGFloat ORKTableViewCellLeftMargin(UIView *view);
-CGFloat ORKStandardMarginForView(UIView *view);
-UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UIView *view);
-UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view);
-UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view);
+CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
+CGFloat ORKStandardHorizMarginForView(UIView *view);
+UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
+UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
+UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
+CGFloat ORKWidthForSignatureView(UIWindow *window);
+
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 
-CGFloat ORKSignatureViewWidth(UIWindow *window);
 
 NS_ASSUME_NONNULL_END

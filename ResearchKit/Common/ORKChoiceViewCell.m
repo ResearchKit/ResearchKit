@@ -157,7 +157,7 @@ static const CGFloat kLabelRightMargin = 44.0;
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);
-    CGFloat cellLeftMargin =  ORKTableViewCellLeftMargin(tableView);
+    CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
     CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + kLabelRightMargin);
    
     if (shortText.length > 0) {

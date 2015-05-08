@@ -75,14 +75,14 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     [self setNeedsUpdateConstraints];
 }
 
 - (void)prepareView {
     if (self.textView == nil ) {
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+        self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
         
         self.textView = [[ORKAnswerTextView alloc] initWithFrame:CGRectZero];
         
@@ -212,11 +212,11 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.contentView.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+    self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
 }
 
 - (void)updateConstraints {
-    self.contentView.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+    self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|" options:0 metrics:nil views:views]];

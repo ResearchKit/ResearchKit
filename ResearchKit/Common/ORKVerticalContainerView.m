@@ -77,7 +77,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self)};
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
         self.layoutMargins = layoutMargins;
         _screenType = ORKScreenTypeiPhone4;
         _scrollContainer = [UIView new];
