@@ -173,7 +173,7 @@ const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthiPad = 115.0;
 
-CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
+CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
     CGFloat margin = 0;
     switch (ORKGetScreenTypeForWindow(cell.window)) {
         case ORKScreenTypeiPhone4:
@@ -190,7 +190,7 @@ CGFloat ORKTableViewCellLeftMargin(UITableViewCell *cell) {
     return margin;
 }
 
-CGFloat ORKStandardMarginForView(UIView *view) {
+CGFloat ORKStandardHorizMarginForView(UIView *view) {
     CGFloat margin = 0;
     switch (ORKGetScreenTypeForWindow(view.window)) {
         case ORKScreenTypeiPhone4:
@@ -198,7 +198,7 @@ CGFloat ORKStandardMarginForView(UIView *view) {
         case ORKScreenTypeiPhone6:
         case ORKScreenTypeiPhone6Plus:
         default:
-            margin = ORKTableViewCellLeftMargin(view);
+            margin = ORKStandardLeftMarginForTableViewCell(view);
             break;
         case ORKScreenTypeiPad:
             margin = ORKLayoutMarginWidthiPad;
@@ -207,29 +207,36 @@ CGFloat ORKStandardMarginForView(UIView *view) {
     return margin;
 }
 
-UIEdgeInsets ORKDefaultTableViewCellLayoutMargins(UITableViewCell *cell) {
-    return (UIEdgeInsets){.left=ORKTableViewCellLeftMargin(cell),
-                          .right=ORKTableViewCellLeftMargin(cell),
+UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UITableViewCell *cell) {
+    return (UIEdgeInsets){.left=ORKStandardLeftMarginForTableViewCell(cell),
+                          .right=ORKStandardLeftMarginForTableViewCell(cell),
                           .bottom=8,
                           .top=8};
 }
 
-UIEdgeInsets ORKDefaultFullScreenViewLayoutMargins(UIView *view) {
+UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
     UIEdgeInsets layoutMargins = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
     if (screenType == ORKScreenTypeiPad) {
-        layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(view), .right=ORKStandardMarginForView(view)};
+        layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(view), .right=ORKStandardHorizMarginForView(view)};
     }
     return layoutMargins;
 }
 
-UIEdgeInsets ORKDefaultScrollIndicatorInsets(UIView *view) {
+UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view) {
     UIEdgeInsets scrollIndicatorInsets = UIEdgeInsetsZero;
     ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
     if (screenType == ORKScreenTypeiPad) {
-        scrollIndicatorInsets = (UIEdgeInsets){.left=-ORKStandardMarginForView(view), .right=-ORKStandardMarginForView(view)};
+        scrollIndicatorInsets = (UIEdgeInsets){.left=-ORKStandardHorizMarginForView(view), .right=-ORKStandardHorizMarginForView(view)};
     }
     return scrollIndicatorInsets;
+}
+
+CGFloat ORKWidthForSignatureView(UIWindow *window) {
+    const CGSize windowSize = window.bounds.size;
+    const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
+    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardHorizMarginForView(window) + 2*ORKStandardLeftMarginForTableViewCell(window) );
+    return signatureViewWidth;
 }
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset) {
@@ -246,11 +253,4 @@ void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInse
         
         scrollView.contentOffset = savedOffset;
     }
-}
-
-CGFloat ORKSignatureViewWidth(UIWindow *window) {
-    const CGSize windowSize = window.bounds.size;
-    const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
-    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardMarginForView(window) + 2*ORKTableViewCellLeftMargin(window) );
-    return signatureViewWidth;
 }

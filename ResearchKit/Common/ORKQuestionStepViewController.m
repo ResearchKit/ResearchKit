@@ -590,7 +590,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = (UIEdgeInsets){.left=ORKTableViewCellLeftMargin(tableView)};
+    cell.separatorInset = (UIEdgeInsets){.left=ORKStandardLeftMarginForTableViewCell(tableView)};
 }
 
 - (BOOL)shouldContinue {

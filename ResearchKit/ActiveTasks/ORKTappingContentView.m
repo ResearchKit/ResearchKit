@@ -154,7 +154,7 @@
     ORKScreenType screenType = _screenType;
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    CGFloat margin = ORKStandardMarginForView(self);
+    CGFloat margin = ORKStandardHorizMarginForView(self);
     self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
     
     static const CGFloat CaptionBaselineToTapCountBaseline = 56;

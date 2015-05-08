@@ -218,7 +218,7 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
+        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         
         self.alertLabel = [ORKHeadlineLabel new];
         _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -305,7 +305,7 @@ static const CGFloat kValueLineMargin = 1.5;
                                                        multiplier:1
                                                          constant:0]];
     
-    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKTableViewCellLeftMargin(self));
+    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
     const CGFloat innerMargin = 2;
 
     [constraints addObjectsFromArray:

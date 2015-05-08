@@ -84,7 +84,7 @@
             [self addSubview:_signatureView];
         }
         
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self), .right=ORKStandardMarginForView(self)};
+        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
         
         [self setNeedsUpdateConstraints];
     }
@@ -138,7 +138,7 @@
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
-                                                         constant:ORKSignatureViewWidth(self.window)]];
+                                                         constant:ORKWidthForSignatureView(self.window)]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_clearButton]-(>=0)-|"
                                                                              options:(NSLayoutFormatOptions)0
