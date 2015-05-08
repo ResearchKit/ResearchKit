@@ -465,6 +465,53 @@
 @end
 
 
+@implementation ORKDeviceMotionReactionTimeResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_OBJ(aCoder, fileResult);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_OBJ_CLASS(aDecoder, fileResult, ORKFileResult);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.timestamp == castObject.timestamp) &&
+            ORKEqualObjects(self.fileResult, castObject.fileResult)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ [self.fileResult hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKDeviceMotionReactionTimeResult *result = [super copyWithZone:zone];
+    result.fileResult = [self.fileResult copy];
+    result.timestamp = self.timestamp;
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %f %@", [super description], self.timestamp, self.fileResult.description];
+}
+
+@end
+
 @implementation ORKDataResult
 
 - (BOOL)isSaveable {

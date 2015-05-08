@@ -53,6 +53,7 @@ enum TaskListRow: Int, Printable {
     case Fitness
     case ShortWalk
     case Audio
+    case DeviceMotionReactionTimeTask
     case Survey
     case Consent
     case Form
@@ -125,7 +126,10 @@ enum TaskListRow: Int, Printable {
 
             case .Audio:
                 return NSLocalizedString("Audio Active Task", comment: "")
-
+            
+            case .DeviceMotionReactionTimeTask:
+                return NSLocalizedString("Device Motion Reaction Time Task", comment: "")
+            
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
 
@@ -206,6 +210,7 @@ enum TaskListRow: Int, Printable {
         case FitnessTask =                          "FitnessTask"
         case ShortWalkTask =                        "ShortWalkTask"
         case AudioTask =                            "AudioTask"
+        case DeviceMotionReactionTimeTask =         "DeviceMotionReactionTimeTask"
 
         // Survey task specific identifiers.
         case SurveyTask =                           "SurveyTask"
@@ -280,6 +285,9 @@ enum TaskListRow: Int, Printable {
             
             case .Audio:
                 return audioTask
+            
+            case .DeviceMotionReactionTimeTask:
+                return devicMotionReactionTimeTask
             
             case .Survey:
                 return surveyTask
@@ -568,6 +576,10 @@ enum TaskListRow: Int, Printable {
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
+    }
+    
+    private var devicMotionReactionTimeTask: ORKTask {
+        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, getReadyInterval: 1, maximumStimulusInterval: 10, minimumStimulusInterval: 4, terminationGs: 0.5, numberOfAttempts: 3, timeout: 3, options: nil)
     }
 
     /**

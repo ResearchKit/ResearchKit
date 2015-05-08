@@ -32,6 +32,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CMDeviceMotion;
+
+@protocol ORKDeviceMotionRecorderDelegate <ORKRecorderDelegate>
+
+@optional
+
+- (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion;
+
+@end
+
 /**
  The `ORKDeviceMotionRecorder` class represents a recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
  

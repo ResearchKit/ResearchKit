@@ -108,6 +108,10 @@
          if (data)
          {
              success = [_logger append:[data ork_JSONDictionary] error:&error];
+             id delegate = self.delegate;
+             if ([delegate respondsToSelector:@selector(deviceMotionRecorderDidUpdateWithMotion:)]) {
+                 [delegate deviceMotionRecorderDidUpdateWithMotion:data];
+             }
          }
          if (!success)
          {
