@@ -64,11 +64,18 @@
         [_sliderView.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         
         [self addSubview:_sliderView];
+        
+        self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *views = NSDictionaryOfVariableBindings(_sliderView);
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
+                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
+                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:nil views:views]];
     }
     
     [self answerDidChange];
-    
-    [self setNeedsUpdateConstraints];
 }
 
 - (void)answerDidChange {
@@ -87,22 +94,6 @@
            [self.sliderView setCurrentValue:nil];
         }
     }
-}
-
-- (void)updateConstraints {
-    [super updateConstraints];
-    
-    self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_sliderView);
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
-                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                 metrics:nil views:views]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
-                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                 metrics:nil views:views]];
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
