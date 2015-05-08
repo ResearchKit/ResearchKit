@@ -38,7 +38,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-@interface ORKConsentReviewController()<UIWebViewDelegate>
+@interface ORKConsentReviewController() <UIWebViewDelegate>
 
 @end
 
@@ -83,25 +83,28 @@
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
-    NSDictionary *dict = NSDictionaryOfVariableBindings(_webView, _toolbar);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|"
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
+    const UIEdgeInsets insets = ORKDefaultFullScreenViewLayoutMargins(self.view);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-leftInset-[_webView]-rightInset-|"
                                                                       options:(NSLayoutFormatOptions)0
-                                                                      metrics:nil views:dict]];
+                                                                      metrics:@{ @"leftInset": @(insets.left), @"rightInset": @(insets.right) }
+                                                                        views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
                                                                       options:(NSLayoutFormatOptions)0
-                                                                      metrics:nil views:dict]];
+                                                                      metrics:nil
+                                                                        views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0 metrics:nil views:dict]];
+                                                                      options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                        views:views]];
     
     _toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
                                                             attribute:NSLayoutAttributeHeight
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:nil
                                                             attribute:NSLayoutAttributeNotAnAttribute
-                                                           multiplier:1
+                                                           multiplier:1.0
                                                              constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4) ];
     [self.view addConstraint:_toolbarHeightConstraint];
-
 }
 
 - (IBAction)cancel {
