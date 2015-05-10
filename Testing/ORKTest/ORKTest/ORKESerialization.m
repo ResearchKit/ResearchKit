@@ -383,7 +383,6 @@ ret =
             return [[ORKAudioStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
-          PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

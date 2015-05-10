@@ -420,7 +420,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.title = shortSpeechInstruction ? : ORKLocalizedString(@"AUDIO_INSTRUCTION", nil);
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:ORKAudioRecorderIdentifier
                                                                                  recorderSettings:recordingSettings]];
-        step.duration = duration;
+        step.stepDuration = duration;
         step.shouldContinueOnFinish = YES;
         
         ORKStepArrayAddStep(steps, step);
