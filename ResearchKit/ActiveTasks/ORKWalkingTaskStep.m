@@ -41,6 +41,14 @@
     return [ORKWalkingTaskStepViewController class];
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+    }
+    return self;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     
