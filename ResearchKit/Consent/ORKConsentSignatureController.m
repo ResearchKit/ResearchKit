@@ -113,8 +113,6 @@
         _constraints = nil;
     }
     
-    [super updateConstraints];
-    
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_clearButton, _signatureView);
@@ -176,6 +174,8 @@
     
     [self addConstraints:constraints];
     _constraints = constraints;
+    
+    [super updateConstraints];
 }
 
 @end

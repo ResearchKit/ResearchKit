@@ -385,8 +385,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     [NSLayoutConstraint deactivateConstraints:[_scrollContainer constraints]];
     [NSLayoutConstraint deactivateConstraints:[_container constraints]];
     [NSLayoutConstraint deactivateConstraints:[_stepViewContainer constraints]];
@@ -581,6 +579,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self updateCustomViewContainerConstraints];
     [self updateStepViewContainerConstraints];
     [self updateConstraintConstants];
+    
+    [super updateConstraints];
 }
 
 - (void)updateStepViewContainerConstraints {

@@ -87,8 +87,8 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     }
     _heightConstraint.active = YES;
     _widthConstraint.active = YES;
-    [super updateConstraints];
     
+    [super updateConstraints];
 }
 
 + (UIFont *)defaultFont {
