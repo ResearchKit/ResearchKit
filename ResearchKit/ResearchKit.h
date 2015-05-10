@@ -56,3 +56,7 @@
 #import <ResearchKit/ORKRecorder.h>
 #import <ResearchKit/ORKActiveStep.h>
 #import <ResearchKit/ORKActiveStepViewController.h>
+
+#import <ResearchKit/ORKLineGraphView.h>
+#import <ResearchKit/ORKDiscreteGraphView.h>
+#import <ResearchKit/ORKPieChartView.h>
