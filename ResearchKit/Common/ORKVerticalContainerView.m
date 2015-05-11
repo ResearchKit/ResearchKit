@@ -34,14 +34,12 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-ORKDefineStringKey(_TopToIllustrationConstraintKey);
-ORKDefineStringKey(_IllustrationHeightConstraintKey);
-
-ORKDefineStringKey(_StepViewToContinueKey);
-ORKDefineStringKey(_StepViewToContinueMinimumKey);
-ORKDefineStringKey(_HeaderMinimumHeightKey);
-
-ORKDefineStringKey(_StepViewCenteringOnWholeViewKey);
+ORKDefineStringKey(TopToIllustrationConstraintKey);
+ORKDefineStringKey(IllustrationHeightConstraintKey);
+ORKDefineStringKey(StepViewToContinueConstraintKey);
+ORKDefineStringKey(StepViewToContinueMinimumConstraintKey);
+ORKDefineStringKey(HeaderMinimumHeightConstraintKey);
+ORKDefineStringKey(StepViewCenteringOnWholeViewConstraintKey);
 
 static const CGFloat AssumedNavBarHeight = 44;
 static const CGFloat AssumedStatusBarHeight = 20;
@@ -311,10 +309,10 @@ static const CGFloat AssumedStatusBarHeight = 20;
         const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
         const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
         
-        NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
+        NSLayoutConstraint *constraint = _adjustableConstraints[IllustrationHeightConstraintKey];
         constraint.constant = (_imageView.image ? IllustrationHeight : 0);
         
-        constraint = _adjustableConstraints[_TopToIllustrationConstraintKey];
+        constraint = _adjustableConstraints[TopToIllustrationConstraintKey];
         constraint.constant = (_imageView.image ?IllustrationTopMargin : 0);
     }
     
@@ -325,8 +323,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     BOOL haveContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
     
     {
-        NSLayoutConstraint *constraint = _adjustableConstraints[_StepViewToContinueKey];
-        NSLayoutConstraint *constraint2 = _adjustableConstraints[_StepViewToContinueMinimumKey];
+        NSLayoutConstraint *constraint = _adjustableConstraints[StepViewToContinueConstraintKey];
+        NSLayoutConstraint *constraint2 = _adjustableConstraints[StepViewToContinueMinimumConstraintKey];
         CGFloat continueSpacing = StepViewBottomToContinueTop;
         if (self.continueHugsContent && ! haveStepView) {
             continueSpacing = 0;
@@ -344,7 +342,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
     
     {
-        NSLayoutConstraint *stepViewCentering = _adjustableConstraints[_StepViewCenteringOnWholeViewKey];
+        NSLayoutConstraint *stepViewCentering = _adjustableConstraints[StepViewCenteringOnWholeViewConstraintKey];
         if (stepViewCentering) {
             BOOL offsetCentering = ! (hasIllustration || haveCaption || haveInstruction || haveLearnMore || haveContinueOrSkip);
             stepViewCentering.active = offsetCentering;
@@ -352,7 +350,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
     
     {
-        NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[_HeaderMinimumHeightKey];
+        NSLayoutConstraint *minimumHeaderHeight = _adjustableConstraints[HeaderMinimumHeightConstraintKey];
         minimumHeaderHeight.constant = _minimumStepHeaderHeight;
     }
     
@@ -445,7 +443,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     // All items with constants are added to the -adjustableConstraintsTable.
     NSMutableDictionary *adjustableConstraintsTable = [NSMutableDictionary dictionary];
     NSMutableArray *otherConstraints = [NSMutableArray array];
-    adjustableConstraintsTable[_IllustrationHeightConstraintKey] =
+    adjustableConstraintsTable[IllustrationHeightConstraintKey] =
     [NSLayoutConstraint constraintWithItem:_customViewContainer
                                  attribute:NSLayoutAttributeHeight
                                  relatedBy:NSLayoutRelationEqual
@@ -453,7 +451,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                  attribute:NSLayoutAttributeNotAnAttribute
                                 multiplier:1 constant:198];
     
-    adjustableConstraintsTable[_TopToIllustrationConstraintKey] =
+    adjustableConstraintsTable[TopToIllustrationConstraintKey] =
      [NSLayoutConstraint constraintWithItem:_customViewContainer
                                   attribute:NSLayoutAttributeTop
                                   relatedBy:NSLayoutRelationEqual
@@ -477,7 +475,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                  attribute:NSLayoutAttributeBottom
                                 multiplier:1 constant:0]];
     
-    adjustableConstraintsTable[_HeaderMinimumHeightKey] = [NSLayoutConstraint constraintWithItem:_headerView
+    adjustableConstraintsTable[HeaderMinimumHeightConstraintKey] = [NSLayoutConstraint constraintWithItem:_headerView
                                                                                        attribute:NSLayoutAttributeHeight
                                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                                           toItem:nil
@@ -495,9 +493,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                              attribute:NSLayoutAttributeBottom
                                                             multiplier:1 constant:36];
         constraint.priority = UILayoutPriorityDefaultLow-2;
-        adjustableConstraintsTable[_StepViewToContinueKey] = constraint;
+        adjustableConstraintsTable[StepViewToContinueConstraintKey] = constraint;
         
-        adjustableConstraintsTable[_StepViewToContinueMinimumKey] = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
+        adjustableConstraintsTable[StepViewToContinueMinimumConstraintKey] = [NSLayoutConstraint constraintWithItem:_continueSkipContainer
                                                                                                  attribute:NSLayoutAttributeTop
                                                                                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                                                     toItem:_stepViewContainer
@@ -643,7 +641,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                                        constant:-(AssumedNavBarHeight + AssumedStatusBarHeight)/2];
                 verticalCentering2.priority = UILayoutPriorityRequired-1;
                 [_stepViewContainer addConstraint:verticalCentering2];
-                adjustable[_StepViewCenteringOnWholeViewKey] = verticalCentering2;
+                adjustable[StepViewCenteringOnWholeViewConstraintKey] = verticalCentering2;
                 _adjustableConstraints = adjustable;
             }
             
