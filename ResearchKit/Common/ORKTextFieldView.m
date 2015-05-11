@@ -346,8 +346,6 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     _textField.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
@@ -369,6 +367,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     constraint.priority = UILayoutPriorityDefaultLow;
     [self addConstraint:constraint];
     
+    [super updateConstraints];
 }
 
 
