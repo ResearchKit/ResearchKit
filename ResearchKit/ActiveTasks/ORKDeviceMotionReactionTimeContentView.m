@@ -9,7 +9,6 @@
 #import "ORKDeviceMotionReactionTimeContentView.h"
 #import "ORKDeviceMotionReactionTimeStimulusView.h"
 #import "ORKNavigationContainerView.h"
-#import "ORKSkin.h"
 
 @interface ORKDeviceMotionReactionTimeContentView ()
 
@@ -25,8 +24,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
         
         self.stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
         self.continueView = [ORKNavigationContainerView new];
