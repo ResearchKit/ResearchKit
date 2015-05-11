@@ -43,8 +43,10 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
-    self.shouldStartTimerAutomatically = YES;
-    self.shouldContinueOnFinish = YES;
+    if (self) {
+        self.shouldStartTimerAutomatically = YES;
+        self.shouldContinueOnFinish = YES;
+    }
     return self;
 }
 
