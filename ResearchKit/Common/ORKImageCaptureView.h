@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,31 +29,27 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "ORKImageCaptureStep.h"
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+@protocol ORKImageCaptureViewDelegate <NSObject>
 
-#import <ResearchKit/ORKResult.h>
+- (void)capturePressed:(void (^ __nullable)(BOOL captureSuccess))handler;
+- (void)retakePressed:(void (^ __nullable)())handler;
+- (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation;
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+@end
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@interface ORKImageCaptureView : UIView
+
+@property (nonatomic, strong, nullable) ORKImageCaptureStep *imageCaptureStep;
+@property (nonatomic, weak, nullable) id<ORKImageCaptureViewDelegate> delegate;
+@property (nonatomic, weak, nullable) AVCaptureSession *session;
+@property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
+@property (nonatomic, strong, nullable) UIImage *capturedImage;
+@property (nonatomic, strong, nullable) NSError *error;
+
+@end

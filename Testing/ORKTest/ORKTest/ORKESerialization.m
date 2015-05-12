@@ -88,6 +88,10 @@ static NSDictionary *dictionaryFromCGRect(CGRect r) {
     return @{ @"origin" : dictionaryFromCGPoint(r.origin), @"size" : dictionaryFromCGSize(r.size) };
 }
 
+static NSDictionary *dictionaryFromUIEdgeInsets(UIEdgeInsets i) {
+    return @{ @"top" : @(i.top), @"left" : @(i.left), @"bottom" : @(i.bottom), @"right" : @(i.right) };
+}
+
 static CGSize sizeFromDictionary(NSDictionary *dict) {
     return (CGSize){.width = [dict[@"w"] doubleValue], .height = [dict[@"h"] doubleValue] };
 }
@@ -98,6 +102,10 @@ static CGPoint pointFromDictionary(NSDictionary *dict) {
 
 static CGRect rectFromDictionary(NSDictionary *dict) {
     return (CGRect){.origin = pointFromDictionary(dict[@"origin"]), .size = sizeFromDictionary(dict[@"size"])};
+}
+
+static UIEdgeInsets edgeInsetsFromDictionary(NSDictionary *dict) {
+    return (UIEdgeInsets){.top = [dict[@"top"] doubleValue], .left = [dict[@"left"] doubleValue], .bottom = [dict[@"bottom"] doubleValue], .right = [dict[@"right"] doubleValue]};
 }
 
 static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
@@ -377,6 +385,16 @@ ret =
     PROPERTY(shouldContinueOnFinish, NSNumber, NSObject, YES, nil, nil),
     PROPERTY(spokenInstruction, NSString, NSObject, YES, nil, nil),
     PROPERTY(recorderConfigurations, ORKRecorderConfiguration, NSArray, YES, nil, nil),
+    })),
+  ENTRY(ORKImageCaptureStep,
+  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+      return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+  },
+  (@{
+    PROPERTY(shouldUsePercentageBasedTemplateImageInsets, NSNumber, NSObject, YES, nil, nil),
+    PROPERTY(templateImageInsets, NSValue, NSObject, NO,
+            ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
+            ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
     })),
   ENTRY(ORKAudioStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

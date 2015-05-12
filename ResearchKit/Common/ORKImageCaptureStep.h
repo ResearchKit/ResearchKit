@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -31,44 +31,12 @@
 
 #import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKDefines_Private.h>
 
-// Active step support
-#import <ResearchKit/ORKTaskViewController_Private.h>
-#import <ResearchKit/ORKDataLogger.h>
-#import <ResearchKit/ORKErrors.h>
+ORK_CLASS_AVAILABLE
+@interface ORKImageCaptureStep : ORKStep
 
-// Step view controllers (useful for appearance, customization by subclassing)
-#import <ResearchKit/ORKQuestionStepViewController.h>
-#import <ResearchKit/ORKInstructionStepViewController.h>
-#import <ResearchKit/ORKVisualConsentStepViewController.h>
-#import <ResearchKit/ORKConsentReviewStepViewController.h>
-#import <ResearchKit/ORKFormStepViewController.h>
-#import <ResearchKit/ORKImageCaptureStepViewController.h>
+@property (nonatomic, strong) UIImage *templateImage;
+@property (nonatomic) UIEdgeInsets templateImageInsets;
+@property (nonatomic) BOOL shouldUsePercentageBasedTemplateImageInsets;
 
-// Custom steps
-#import <ResearchKit/ORKCustomStepView.h>
-
-// Specific active task modules
-#import <ResearchKit/ORKAudioStep.h>
-#import <ResearchKit/ORKSpatialSpanMemoryStep.h>
-#import <ResearchKit/ORKWalkingTaskStep.h>
-#import <ResearchKit/ORKCountdownStep.h>
-#import <ResearchKit/ORKFitnessStep.h>
-#import <ResearchKit/ORKTappingIntervalStep.h>
-#import <ResearchKit/ORKCompletionStep.h>
-
-#import <ResearchKit/ORKAudioStepViewController.h>
-#import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
-#import <ResearchKit/ORKWalkingTaskStepViewController.h>
-#import <ResearchKit/ORKCountdownStepViewController.h>
-#import <ResearchKit/ORKFitnessStepViewController.h>
-#import <ResearchKit/ORKTappingIntervalStepViewController.h>
-#import <ResearchKit/ORKCompletionStepViewController.h>
-
-// More internal stuff
-#import <ResearchKit/ORKResult_Private.h>
-#import <ResearchKit/ORKQuestionStepViewController_Private.h>
-#import <ResearchKit/ORKRecorder_Private.h>
-
-
+@end

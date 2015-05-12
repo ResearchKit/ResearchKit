@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,31 +29,19 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <UIKit/UIKit.h>
+#import "ORKTintedImageView.h"
+#import <AVFoundation/AVFoundation.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+@interface ORKImageCaptureCameraPreviewView : UIView
 
-#import <ResearchKit/ORKResult.h>
+@property (nonatomic, weak, nullable) AVCaptureSession *session;
+@property (nonatomic) AVCaptureVideoOrientation videoOrientation;
+@property (nonatomic, weak, nullable) UIImage *templateImage;
+@property (nonatomic) UIEdgeInsets templateImageInsets;
+@property (nonatomic) BOOL shouldUsePercentageBasedTemplateImageInsets;
+@property (nonatomic) BOOL hideTemplateImage;
+@property (nonatomic, weak, nullable) UIImage *capturedImage;
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
-
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@end

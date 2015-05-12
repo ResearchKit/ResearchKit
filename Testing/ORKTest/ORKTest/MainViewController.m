@@ -47,6 +47,7 @@ static NSString * const MiniFormTaskIdentifier = @"miniform";
 static NSString * const ScreeningTaskIdentifier = @"screening";
 static NSString * const ScalesTaskIdentifier = @"scales";
 static NSString * const ImageChoicesTaskIdentifier = @"images";
+static NSString * const ImageCaptureTaskIdentifier = @"imageCapture";
 static NSString * const AudioTaskIdentifier = @"audio";
 static NSString * const FitnessTaskIdentifier = @"fitness";
 static NSString * const GaitTaskIdentifier = @"gait";
@@ -211,6 +212,14 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         buttons[buttonKeys.lastObject] = button;
     }
     
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showImageCapture:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Image Capture" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"imageCapture"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -331,6 +340,8 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         return [self makeScalesTask];
     } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
         return [self makeImageChoicesTask];
+    } else if ([identifier isEqualToString:ImageCaptureTaskIdentifier]) {
+        return [self makeImageCaptureTask];
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
@@ -1567,6 +1578,73 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 }
 - (IBAction)showImageChoices:(id)sender {
     [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
+}
+
+# pragma mark - Image Capture
+- (id<ORKTask>)makeImageCaptureTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
+        step.title = @"Hands";
+        step.image = [UIImage imageNamed:@"hands_solid"];
+        step.detailText = @"In this step we will capture images of both of your hands";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
+        step.title = @"Right Hand";
+        step.image = [UIImage imageNamed:@"right_hand_solid"];
+        step.detailText = @"Let's start by capturing an image of your right hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
+        step.title = @"Right Hand";
+        step.image = [UIImage imageNamed:@"right_hand_outline"];
+        step.detailText = @"Align your right hand with the onscreen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
+        step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        step.shouldUsePercentageBasedTemplateImageInsets = YES;
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
+        step.title = @"Left Hand";
+        step.image = [UIImage imageNamed:@"left_hand_solid"];
+        step.detailText = @"Now let's capture an image of your left hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
+        step.title = @"Left Hand";
+        step.image = [UIImage imageNamed:@"left_hand_outline"];
+        step.detailText = @"Align your left hand with the onscreen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
+        step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        step.shouldUsePercentageBasedTemplateImageInsets = YES;
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+        step.title = @"Complete";
+        step.detailText = @"Hand image capture complete";
+        [steps addObject:step];
+    }
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageCaptureTaskIdentifier steps:steps];
+    return task;
+    
+}
+- (IBAction)showImageCapture:(id)sender {
+    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
 }
 
 
