@@ -69,15 +69,15 @@ static const CGFloat kValueLineMargin = 1.5;
                                                                        relatedBy:NSLayoutRelationEqual
                                                                           toItem:nil
                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1
+                                                                      multiplier:1.0
                                                                         constant:CGFLOAT_MAX];
         constraint1.priority = UILayoutPriorityFittingSizeLevel;
         NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil
+                                                                       attribute:NSLayoutAttributeHeight
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1
+                                                                      multiplier:1.0
                                                                         constant:CGFLOAT_MAX];
         constraint2.priority = UILayoutPriorityFittingSizeLevel;
         [NSLayoutConstraint activateConstraints:@[constraint1, constraint2]];
@@ -200,7 +200,7 @@ static const CGFloat kValueLineMargin = 1.5;
 @end
 
 
-@interface ORKAudioContentView()
+@interface ORKAudioContentView ()
 
 @property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) UILabel *timerLabel;
@@ -242,7 +242,7 @@ static const CGFloat kValueLineMargin = 1.5;
         
         [self updateGraphSamples];
         [self applyKeyColor];
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
@@ -283,27 +283,21 @@ static const CGFloat kValueLineMargin = 1.5;
     _graphView.alertColor = alertColor;
 }
 
-- (void)updateConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _alertLabel, _graphView);
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_graphView]-[_alertLabel]|"
-                                             options:0
-                                             metrics:nil
-                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_graphView]-[_alertLabel]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_alertLabel
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
     const CGFloat innerMargin = 2;
@@ -314,18 +308,15 @@ static const CGFloat kValueLineMargin = 1.5;
                                              metrics:@{@"sideMargin": @(sideMargin), @"innerMargin": @(innerMargin)}
                                                views:views]];
     
-    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_graphView
                                                         attribute:NSLayoutAttributeHeight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
+                                                       multiplier:1.0
                                                          constant:(GraphViewBlueZoneHeight+GraphViewRedZoneHeight*2)]];
     
-    _constraints = constraints;
     [NSLayoutConstraint activateConstraints:constraints];
-    [super updateConstraints];
 }
 
 - (void)setAlertThreshold:(CGFloat)alertThreshold {
