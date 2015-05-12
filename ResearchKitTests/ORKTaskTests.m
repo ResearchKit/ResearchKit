@@ -46,20 +46,20 @@
     ORKOrderedTask *_orderedTask;
 }
 
-ORKDefineStringKey(ORKTHeadacheChoiceValue);
-ORKDefineStringKey(ORKTDizinessChoiceValue);
-ORKDefineStringKey(ORKTNauseaChoiceValue);
+ORKDefineStringKey(HeadacheChoiceValue);
+ORKDefineStringKey(DizinessChoiceValue);
+ORKDefineStringKey(NauseaChoiceValue);
 
-ORKDefineStringKey(ORKTSymptomStepIdentifier);
-ORKDefineStringKey(ORKTSeverityStepIdentifier);
-ORKDefineStringKey(ORKTBlankStepIdentifier);
-ORKDefineStringKey(ORKTSevereHeadacheStepIdentifier);
-ORKDefineStringKey(ORKTLightHeadacheStepIdentifier);
-ORKDefineStringKey(ORKTOtherSymptomStepIdentifier);
-ORKDefineStringKey(ORKTEndStepIdentifier);
+ORKDefineStringKey(SymptomStepIdentifier);
+ORKDefineStringKey(SeverityStepIdentifier);
+ORKDefineStringKey(BlankStepIdentifier);
+ORKDefineStringKey(SevereHeadacheStepIdentifier);
+ORKDefineStringKey(LightHeadacheStepIdentifier);
+ORKDefineStringKey(OtherSymptomStepIdentifier);
+ORKDefineStringKey(EndStepIdentifier);
 
-ORKDefineStringKey(ORKTOrderedTaskIdentifier);
-ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
+ORKDefineStringKey(OrderedTaskIdentifier);
+ORKDefineStringKey(NavigableOrderedTaskIdentifier);
 
 - (void)generateTaskSteps:(out NSArray **)outSteps stepIdentifiers:(out NSArray **)outStepIdentifiers {
     if (outSteps == NULL || outStepIdentifiers == NULL) {
@@ -75,51 +75,51 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     
     NSArray *textChoices =
     @[
-      [ORKTextChoice choiceWithText:@"Headache" value:ORKTHeadacheChoiceValue],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:ORKTDizinessChoiceValue],
-      [ORKTextChoice choiceWithText:@"Nausea" value:ORKTNauseaChoiceValue]
+      [ORKTextChoice choiceWithText:@"Headache" value:HeadacheChoiceValue],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:DizinessChoiceValue],
+      [ORKTextChoice choiceWithText:@"Nausea" value:NauseaChoiceValue]
       ];
     
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
-    stepIdentifier = ORKTSymptomStepIdentifier;
+    stepIdentifier = SymptomStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"What is your symptom?" answer:answerFormat];
     step.optional = NO;
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    stepIdentifier = ORKTSeverityStepIdentifier;
+    stepIdentifier = SeverityStepIdentifier;
     step = [ORKQuestionStep questionStepWithIdentifier:stepIdentifier title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
     step.optional = NO;
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
-    stepIdentifier = ORKTBlankStepIdentifier;
+    stepIdentifier = BlankStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"This step is intentionally left blank (you should not see it)";
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
-    stepIdentifier = ORKTSevereHeadacheStepIdentifier;
+    stepIdentifier = SevereHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a severe headache";
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
-    stepIdentifier = ORKTLightHeadacheStepIdentifier;
+    stepIdentifier = LightHeadacheStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have a light headache";
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
-    stepIdentifier = ORKTOtherSymptomStepIdentifier;
+    stepIdentifier = OtherSymptomStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have other symptom";
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
-    stepIdentifier = ORKTEndStepIdentifier;
+    stepIdentifier = EndStepIdentifier;
     step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
     step.title = @"You have finished the task";
     [stepIdentifiers addObject:stepIdentifier];
@@ -136,7 +136,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     _orderedTaskSteps = orderedTaskSteps;
     _orderedTaskStepIdentifiers = orderedTaskStepIdentifiers;
     
-    _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:ORKTOrderedTaskIdentifier
+    _orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
                                                         steps:ORKArrayCopyObjects(_orderedTaskSteps)]; // deep copy to test step copying and equality
 }
 
@@ -148,7 +148,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 - (void)testOrderedTask {
     ORKTaskResult *mockTaskResult = [[ORKTaskResult alloc] init];
     
-    XCTAssertEqualObjects(_orderedTask.identifier, ORKTOrderedTaskIdentifier);
+    XCTAssertEqualObjects(_orderedTask.identifier, OrderedTaskIdentifier);
     XCTAssertEqualObjects(_orderedTask.steps, _orderedTaskSteps);
     
     NSUInteger expectedTotalProgress = [_orderedTaskSteps count];
@@ -171,10 +171,10 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
     XCTAssertNoThrow([_orderedTask validateParameters]);
 
     NSMutableArray *steps = [[NSMutableArray alloc] initWithArray:ORKArrayCopyObjects(_orderedTaskSteps)];
-    ORKStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKTBlankStepIdentifier];
+    ORKStep *step = [[ORKInstructionStep alloc] initWithIdentifier:BlankStepIdentifier];
     [steps addObject:step];
     
-    ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:ORKTOrderedTaskIdentifier
+    ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
                                                                        steps:steps];
     XCTAssertThrows([orderedTask validateParameters]);
 }
