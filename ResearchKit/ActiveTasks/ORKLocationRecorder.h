@@ -49,6 +49,7 @@ ORK_CLASS_AVAILABLE
  @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the location data should be stored.
+ 
  @return An initialized location recorder.
 */
 - (instancetype)initWithIdentifier:(NSString *)identifier

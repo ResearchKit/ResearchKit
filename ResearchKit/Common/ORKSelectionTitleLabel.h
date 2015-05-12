@@ -33,7 +33,7 @@
 
 
 /**
- *  Title line in selection question's choice cell.
+ Title line in selection question's choice cell.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKSelectionTitleLabel : ORKLabel

@@ -61,6 +61,7 @@ ORK_CLASS_AVAILABLE
  @param unit                The unit for the data that should be collected and serialized.
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the HealthKit data should be stored.
+ 
  @return An initialized health quantity type recorder.
 */
 - (instancetype)initWithIdentifier:(NSString *)identifier

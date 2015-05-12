@@ -67,6 +67,7 @@ ORK_CLASS_AVAILABLE
  @param recorderSettings    The settings for the recording session.
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the audio output should be stored.
+ 
  @return An initialized audio recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier

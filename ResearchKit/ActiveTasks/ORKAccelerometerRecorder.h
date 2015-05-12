@@ -53,6 +53,7 @@ ORK_CLASS_AVAILABLE
  @param frequency           The frequency of accelerometer data collected from CoreMotion, in hertz (Hz).
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the accelerometer data should be stored.
+ 
  @return An initialized accelerometer recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifer

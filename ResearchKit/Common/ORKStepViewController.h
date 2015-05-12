@@ -222,7 +222,6 @@ ORK_CLASS_AVAILABLE
  Most steps display a button that enables forward navigation. This button can have titles
  such as Next, Continue, or Done. Use this property to override the forward navigation
  button title for the step.
-
  */
 @property (nonatomic, copy, nullable) NSString *continueButtonTitle;
 

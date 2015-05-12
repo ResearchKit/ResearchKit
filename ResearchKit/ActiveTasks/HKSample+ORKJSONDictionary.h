@@ -41,8 +41,7 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 };
 
 /**
- * JSON serialization aid for HKSample.
- *
+ JSON serialization aid for HKSample.
  */
 @interface HKSample (ORKJSONDictionary)
 
@@ -52,8 +51,7 @@ typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {
 
 
 /**
- * JSON serialization aid for HKCorrelation.
- *
+ JSON serialization aid for HKCorrelation.
  */
 @interface HKCorrelation (ORKJSONDictionary)
 

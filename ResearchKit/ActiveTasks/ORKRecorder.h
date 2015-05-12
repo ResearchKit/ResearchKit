@@ -264,7 +264,6 @@ ORK_CLASS_AVAILABLE
  To use a recorder, include its configuration in the `recorderConfigurations` property
  of an `ORKActiveStep` object, include that step in a task, and present it with
  a task view controller.
- 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPedometerRecorderConfiguration : ORKRecorderConfiguration

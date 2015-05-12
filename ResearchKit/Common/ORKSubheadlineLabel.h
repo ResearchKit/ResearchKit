@@ -33,7 +33,7 @@
 
 
 /**
- *  Step's details text under title.
+ Step's details text under title.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKSubheadlineLabel : ORKLabel
