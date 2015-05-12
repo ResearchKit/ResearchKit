@@ -67,7 +67,7 @@ ORKDefineStringKey(ORKTEndStepIdentifier);
 ORKDefineStringKey(ORKTOrderedTaskIdentifier);
 ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 
-- (void)getTaskSteps:(out NSArray **)outSteps stepIdentifiers:(out NSArray **)outStepIdentifiers {
+- (void)generateTaskSteps:(out NSArray **)outSteps stepIdentifiers:(out NSArray **)outStepIdentifiers {
     if (outSteps == NULL || outStepIdentifiers == NULL) {
         return;
     }
@@ -138,7 +138,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 - (void)setUpOrderedTask {
     NSArray *orderedTaskSteps = nil;
     NSArray *orderedTaskStepIdentifiers = nil;
-    [self getTaskSteps:&orderedTaskSteps stepIdentifiers:&orderedTaskStepIdentifiers];
+    [self generateTaskSteps:&orderedTaskSteps stepIdentifiers:&orderedTaskStepIdentifiers];
     _orderedTaskSteps = orderedTaskSteps;
     _orderedTaskStepIdentifiers = orderedTaskStepIdentifiers;
     
@@ -149,7 +149,7 @@ ORKDefineStringKey(ORKTNavigableOrderedTaskIdentifier);
 - (void)setUpNavigableOrderedTask {
     NSArray *navigableOrderedTaskSteps = nil;
     NSArray *navigableOrderedTaskStepIdentifiers = nil;
-    [self getTaskSteps:&navigableOrderedTaskSteps stepIdentifiers:&navigableOrderedTaskStepIdentifiers];
+    [self generateTaskSteps:&navigableOrderedTaskSteps stepIdentifiers:&navigableOrderedTaskStepIdentifiers];
     _navigableOrderedTaskSteps = navigableOrderedTaskSteps;
     _navigableOrderedTaskStepIdentifiers = navigableOrderedTaskStepIdentifiers;
 
