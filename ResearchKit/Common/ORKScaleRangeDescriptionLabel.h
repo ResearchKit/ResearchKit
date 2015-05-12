@@ -33,7 +33,7 @@
 
 
 /**
- *  Start/End description of the range in scale slider.
+ Start/End description of the range in scale slider.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKScaleRangeDescriptionLabel : ORKLabel
