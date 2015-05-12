@@ -1,23 +1,27 @@
-//
-//  ORKDeviceMotionReactionTimeContentView.m
-//  ResearchKit
-//
-//  Created by James Cox on 07/05/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+  ORKDeviceMotionReactionTimeContentView.m
+  ResearchKit
+
+  Created by James Cox on 07/05/2015.
+  Copyright (c) 2015 researchkit.org. All rights reserved.
+*/
+
 
 #import "ORKDeviceMotionReactionTimeContentView.h"
 #import "ORKDeviceMotionReactionTimeStimulusView.h"
 #import "ORKNavigationContainerView.h"
 
+
 @interface ORKDeviceMotionReactionTimeContentView ()
 
 @property (nonatomic, strong) ORKDeviceMotionReactionTimeStimulusView *stimulusView;
+
 @property (nonatomic,strong) ORKNavigationContainerView *continueView;
 
 @end
 
 @implementation ORKDeviceMotionReactionTimeContentView {
+    
     NSArray *_constraints;
 }
 

@@ -1,10 +1,11 @@
-//
-//  ORKDeviceMotionReactionTimeViewController.m
-//  ResearchKit
-//
-//  Created by James Cox on 07/05/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+  ORKDeviceMotionReactionTimeViewController.m
+  ResearchKit
+
+  Created by James Cox on 07/05/2015.
+  Copyright (c) 2015 researchkit.org. All rights reserved.
+*/
+
 
 #import "ORKDeviceMotionReactionTimeViewController.h"
 #import "ORKActiveStepViewController_Internal.h"
@@ -13,7 +14,9 @@
 #import "ORKDeviceMotionReactionTimeStep.h"
 #import <CoreMotion/CMDeviceMotion.h>
 
+
 @implementation ORKDeviceMotionReactionTimeViewController {
+    
     ORKDeviceMotionReactionTimeContentView *_reactionTimeContentView;
     NSMutableArray *_results;
     NSTimer *_stimulusTimer;

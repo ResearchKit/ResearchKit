@@ -1,14 +1,16 @@
-//
-//  ORKDeviceMotionReactionTimeStep.m
-//  ResearchKit
-//
-//  Created by James Cox on 07/05/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+  ORKDeviceMotionReactionTimeStep.m
+  ResearchKit
+
+  Created by James Cox on 07/05/2015.
+  Copyright (c) 2015 researchkit.org. All rights reserved.
+*/
+
 
 #import "ORKDeviceMotionReactionTimeStep.h"
 #import "ORKDeviceMotionReactionTimeViewController.h"
 #import "ORKHelpers.h"
+
 
 @implementation ORKDeviceMotionReactionTimeStep
 

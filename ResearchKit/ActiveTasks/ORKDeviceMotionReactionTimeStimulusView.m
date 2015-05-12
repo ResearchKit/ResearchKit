@@ -1,14 +1,17 @@
-//
-//  ORKDeviceMotionReactionTimeStimulusView.m
-//  ResearchKit
-//
-//  Created by James Cox on 07/05/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+  ORKDeviceMotionReactionTimeStimulusView.m
+  ResearchKit
+
+  Created by James Cox on 07/05/2015.
+  Copyright (c) 2015 researchkit.org. All rights reserved.
+*/
+
 
 #import "ORKDeviceMotionReactionTimeStimulusView.h"
 
+
 @implementation ORKDeviceMotionReactionTimeStimulusView {
+    
     CAShapeLayer *_concealLayer;
     CAShapeLayer *_tickLayer;
     CAShapeLayer *_crossLayer;
