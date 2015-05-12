@@ -87,10 +87,10 @@
 
 - (void)validateIdentifiersUnique {
     NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = _formItems.count != uniqueIdentifiers.count;
+    BOOL itemsHaveNonUniqueIdentifiers = ( [_formItems count] != [uniqueIdentifiers count] );
     
     if (itemsHaveNonUniqueIdentifiers) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"All form items should have unique identifier" userInfo:nil];
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Each form item should have a unique identifier" userInfo:nil];
     }
 }
 

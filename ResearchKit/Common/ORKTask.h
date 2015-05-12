@@ -167,6 +167,13 @@ ORK_AVAILABLE_DECL
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result;
 
 /**
+ Validates the task parameters.
+ 
+ This method should be used to check that all the task parameters are correct. E.g., `ORKOrderedTask` makes sure that all its step identifiers are unique. It should throw an exception if validation fails.
+ */
+- (void)validateParameters;
+
+/**
  The set of HealthKit types that steps in the task need to be able to
  read. (read-only)
  
@@ -213,11 +220,6 @@ requests access to these HealthKit types.
  the task.
  */
 @property (nonatomic, readonly) BOOL providesBackgroundAudioPrompts;
-
-/**
- *  Validates task parameters. Will throw excpetion if validation fails.
- */
-- (void)validateParameters;
 
 @end
 
