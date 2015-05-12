@@ -260,7 +260,7 @@
 
 
 - (void)updateMargins {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self)};
+    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
     _quantityPairView.layoutMargins = self.layoutMargins;
 }
 
@@ -287,8 +287,8 @@
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1
-                                                           constant:1000];
+                                                         multiplier:1.0
+                                                           constant:1000.0];
     constraint1.priority = UILayoutPriorityDefaultLow-1;
     [constraints addObject:constraint1];
     
@@ -310,23 +310,23 @@
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_quantityPairView
                                                         attribute:NSLayoutAttributeBottom
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
                                                         attribute:NSLayoutAttributeTop
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:_quantityPairView
                                                         attribute:NSLayoutAttributeTop
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                           attribute:NSLayoutAttributeWidth
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1
-                                                                           constant:10000];
+                                                                         multiplier:1.0
+                                                                           constant:10000.0];
     maxWidthConstraint.priority = UILayoutPriorityRequired-1;
     [constraints addObject:maxWidthConstraint];
     

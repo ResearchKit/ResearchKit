@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) UIColor *keyColor;
 @property (nonatomic, copy, nullable) UIColor *alertColor;
 
+@property (nonatomic, assign) BOOL failed;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign) NSTimeInterval timeLeft;
 

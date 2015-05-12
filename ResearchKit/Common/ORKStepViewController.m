@@ -65,14 +65,18 @@
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    [self initializeInternalButtonItems];
+    if (self) {
+        [self initializeInternalButtonItems];
+    }
     return self;
 }
 #pragma clang diagnostic pop
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    [self initializeInternalButtonItems];
+    if (self) {
+        [self initializeInternalButtonItems];
+    }
     return self;
 }
 

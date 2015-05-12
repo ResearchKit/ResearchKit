@@ -127,7 +127,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         _defaultSource = [ORKAnswerDefaultSource sourceWithHealthStore:[HKHealthStore new]];
@@ -378,25 +377,27 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     ORKStepResult *parentResult = [super result];
     ORKQuestionStep *questionStep = self.questionStep;
     
-    ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
-    ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
-    
-    if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
-        ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
-        if (dateQuestionResult.dateAnswer) {
-            NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? : _savedSystemCalendar;
-            dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier ? : [NSCalendar currentCalendar].calendarIdentifier];
-            dateQuestionResult.timeZone = _savedSystemTimeZone? : [NSTimeZone systemTimeZone];
+    if (self.answer) {
+        ORKQuestionResult *result = [questionStep.answerFormat resultWithIdentifier:questionStep.identifier answer:self.answer];
+        ORKAnswerFormat *impliedAnswerFormat = [questionStep impliedAnswerFormat];
+        
+        if ([impliedAnswerFormat isKindOfClass:[ORKDateAnswerFormat class]]) {
+            ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
+            if (dateQuestionResult.dateAnswer) {
+                NSCalendar *usedCalendar = [(ORKDateAnswerFormat *)impliedAnswerFormat calendar]? : _savedSystemCalendar;
+                dateQuestionResult.calendar = [NSCalendar calendarWithIdentifier:usedCalendar.calendarIdentifier ? : [NSCalendar currentCalendar].calendarIdentifier];
+                dateQuestionResult.timeZone = _savedSystemTimeZone? : [NSTimeZone systemTimeZone];
+            }
+        } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
+            ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
+            nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
         }
-    } else if ([impliedAnswerFormat isKindOfClass:[ORKNumericAnswerFormat class]]) {
-        ORKNumericQuestionResult *nqr = (ORKNumericQuestionResult *)result;
-        nqr.unit = [(ORKNumericAnswerFormat *)impliedAnswerFormat unit];
+        
+        result.startDate = parentResult.startDate;
+        result.endDate = parentResult.endDate;
+        
+        parentResult.results = @[result];
     }
-    
-    result.startDate = parentResult.startDate;
-    result.endDate = parentResult.endDate;
-    
-    parentResult.results = @[result];
     
     return parentResult;
 }
@@ -590,7 +591,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = (UIEdgeInsets){.left=ORKTableViewCellLeftMargin(tableView)};
+    cell.separatorInset = (UIEdgeInsets){.left=ORKStandardLeftMarginForTableViewCell(tableView)};
 }
 
 - (BOOL)shouldContinue {

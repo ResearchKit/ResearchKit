@@ -101,13 +101,13 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
-    self.layoutMargins = ORKDefaultTableViewCellLayoutMargins(self);
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                  options:0 metrics:nil views:views]];

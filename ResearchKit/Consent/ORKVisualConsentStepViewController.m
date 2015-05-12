@@ -105,7 +105,7 @@
     [super willMoveToWindow:newWindow];
     
     CGRect frame = self.frame;
-    frame.size.height = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, ORKGetScreenTypeForWindow(newWindow));
+    frame.size.height = ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, newWindow);
     self.frame = frame;
 }
 
@@ -115,9 +115,13 @@
     _playerView.frame = self.bounds;
 }
 
+- (CGPoint)defaultFrameOrigin {
+    return (CGPoint){0, ORKGetMetricForWindow(ORKScreenMetricTopToIllustration, self.superview.window)};
+}
+
 - (void)scrollToTopAnimated:(BOOL)animated completion:(void (^)(BOOL finished))completion {
     CGRect targetFrame = self.frame;
-    targetFrame.origin = CGPointZero;
+    targetFrame.origin = [self defaultFrameOrigin];
     if (animated) {
         [UIView animateWithDuration:ORKScrollToTopAnimationDuration
                          animations:^{
@@ -272,7 +276,7 @@
 
 - (void)showNextViewController {
     CGRect animationViewFrame = _animationView.frame;
-    animationViewFrame.origin = CGPointZero;
+    animationViewFrame.origin = [ORKDynamicCast(_animationView, ORKAnimationPlaceholderView) defaultFrameOrigin];
     _animationView.frame = animationViewFrame;
     ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
     [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:NO completion:nil];
@@ -407,7 +411,8 @@
     if (scrollView == _scrollViewObserver.target) {
         CGRect animationViewFrame = _animationView.frame;
         CGPoint scrollViewBoundsOrigin = scrollView.bounds.origin;
-        animationViewFrame.origin = (CGPoint){-scrollViewBoundsOrigin.x, -scrollViewBoundsOrigin.y};
+        CGPoint defaultFrameOrigin = [ORKDynamicCast(_animationView, ORKAnimationPlaceholderView) defaultFrameOrigin];
+        animationViewFrame.origin = (CGPoint){defaultFrameOrigin.x - scrollViewBoundsOrigin.x, defaultFrameOrigin.y - scrollViewBoundsOrigin.y};
         _animationView.frame = animationViewFrame;
     }
 }

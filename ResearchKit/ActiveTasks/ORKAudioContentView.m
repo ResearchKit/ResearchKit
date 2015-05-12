@@ -218,7 +218,7 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
+        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         
         self.alertLabel = [ORKHeadlineLabel new];
         _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -249,6 +249,12 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)tintColorDidChange {
     [self applyKeyColor];
+}
+
+-(void)setFailed:(BOOL)failed {
+    _failed = failed;
+    _alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+    [self updateAlertLabelHidden];
 }
 
 - (void)setFinished:(BOOL)finished {
@@ -299,7 +305,7 @@ static const CGFloat kValueLineMargin = 1.5;
                                                        multiplier:1
                                                          constant:0]];
     
-    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKTableViewCellLeftMargin(self));
+    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
     const CGFloat innerMargin = 2;
 
     [constraints addObjectsFromArray:
@@ -356,8 +362,8 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = [_samples lastObject];
-    BOOL hide = _finished || !([sample doubleValue] > _alertThreshold);
-    _alertLabel.hidden = hide;
+    BOOL show = (! _finished && ([sample doubleValue] > _alertThreshold)) || _failed;
+    _alertLabel.hidden = !show;
 }
 
 - (void)setSamples:(NSArray *)samples {

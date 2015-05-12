@@ -202,3 +202,5 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
 
+#define ORKDefineStringKey(x) static NSString * const x = @STRINGIFY(x)
+

@@ -37,8 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKAudioStep : ORKActiveStep
 
-@property (nonatomic, assign) NSTimeInterval duration;
-
 @end
 
 NS_ASSUME_NONNULL_END

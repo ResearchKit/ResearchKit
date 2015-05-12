@@ -68,7 +68,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layoutMargins = ORKDefaultFullScreenViewLayoutMargins(self);
+        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         

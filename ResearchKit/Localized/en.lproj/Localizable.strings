@@ -173,6 +173,7 @@
 "AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
 "AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
 "AUDIO_TOO_LOUD_LABEL" = "Too Loud";
+"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
