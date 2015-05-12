@@ -1,33 +1,36 @@
-// Copyright (c) 2015, Apple Inc. All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without modification,
-// are permitted provided that the following conditions are met:
-// 
-// 1.  Redistributions of source code must retain the above copyright notice, this
-// list of conditions and the following disclaimer.
-// 
-// 2.  Redistributions in binary form must reproduce the above copyright notice, 
-// this list of conditions and the following disclaimer in the documentation and/or 
-// other materials provided with the distribution. 
-// 
-// 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
-// may be used to endorse or promote products derived from this software without 
-// specific prior written permission. No license is granted to the trademarks of 
-// the copyright holders even if such marks are included in this software. 
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
-// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
-// 
+/*
+Copyright (c) 2015, Apple Inc. All rights reserved.
  
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice, 
+ this list of conditions and the following disclaimer in the documentation and/or 
+ other materials provided with the distribution. 
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
+ may be used to endorse or promote products derived from this software without 
+ specific prior written permission. No license is granted to the trademarks of 
+ the copyright holders even if such marks are included in this software. 
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+*/
+
+
 #import "ORKPieChartView.h"
+
 
 static CGFloat const kAnimationDuration = 0.35f;
 
@@ -52,8 +55,7 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 #pragma mark - Init
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self sharedInit];
@@ -61,8 +63,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self sharedInit];
@@ -70,8 +71,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     return self;
 }
 
-- (void)sharedInit
-{
+- (void)sharedInit {
     _legendPaddingHeight = CGRectGetHeight(self.frame) * 0.3;
     _plotRegionHeight = (CGRectGetHeight(self.frame) - _legendPaddingHeight);
     _pieChartRadius = _plotRegionHeight * 0.55 * 0.5; //The 0.5 is to get radius from diameter
@@ -110,10 +110,8 @@ static CGFloat const kAnimationDuration = 0.35f;
     _emptyText = NSLocalizedString(@"No Data", @"No Data");
 }
 
-- (void)setupEmptyView
-{
+- (void)setupEmptyView {
     if (!_emptyLabel) {
-        
         _emptyLabel = [[UILabel alloc] initWithFrame:self.bounds];
         _emptyLabel.text = self.emptyText;
         _emptyLabel.textAlignment = NSTextAlignmentCenter;
@@ -127,8 +125,7 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 #pragma mark - Layout
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -158,8 +155,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     }
 }
 
-- (void)updateValues
-{
+- (void)updateValues {
     _plotRegionHeight = (CGRectGetHeight(self.frame) - _legendPaddingHeight);
     
     _pieChartRadius = _plotRegionHeight * 0.55 * 0.5;
@@ -169,8 +165,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     [_valueLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
 }
 
-- (UIBezierPath *)circularPath
-{
+- (UIBezierPath *)circularPath {
     CGPoint center = CGPointMake(CGRectGetWidth(self.circleLayer.bounds)/2, CGRectGetHeight(self.circleLayer.bounds)/2);
     CGFloat radius = self.pieChartRadius;
     
@@ -189,8 +184,7 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 #pragma mark - Private Methods
 
-- (NSInteger)numberOfSegments
-{
+- (NSInteger)numberOfSegments {
     NSInteger count = 0;
     
     if ([self.datasource respondsToSelector:@selector(numberOfSegmentsInPieChartView)]) {
@@ -200,8 +194,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     return count;
 }
 
-- (UIColor *)colorForSegmentAtIndex:(NSInteger)index
-{
+- (UIColor *)colorForSegmentAtIndex:(NSInteger)index {
     UIColor *color = nil;
     
     if ([self.datasource respondsToSelector:@selector(pieChartView:colorForSegmentAtIndex:)]) {
@@ -221,8 +214,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     return color;
 }
 
-- (CGFloat)valueForSegmentAtIndex:(NSInteger)index
-{
+- (CGFloat)valueForSegmentAtIndex:(NSInteger)index {
     CGFloat value = 0;
     
     if ([self.datasource respondsToSelector:@selector(pieChartView:valueForSegmentAtIndex:)]) {
@@ -234,8 +226,7 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 #pragma mark - Draw 
 
-- (void)drawPieChart
-{
+- (void)drawPieChart {
     CGFloat cumulativeValue = 0;
     
     for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
@@ -280,8 +271,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     }
 }
 
-- (void)drawPercentageLabels
-{
+- (void)drawPercentageLabels {
     CGFloat cumulativeValue = 0;
     
     NSMutableArray * textLayers = [NSMutableArray array];
@@ -411,8 +401,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     return NO;
 }
 
-- (void)drawLegend
-{
+- (void)drawLegend {
     for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
         
         CGFloat dotSegmentWidth = (CGRectGetWidth(self.frame)/[self numberOfSegments]);
@@ -468,8 +457,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     }
 }
 
-- (void)drawTitleLabels
-{
+- (void)drawTitleLabels {
     CGFloat labelWidth = self.pieChartRadius * 1.2;
     
     CGFloat labelXPos = CGRectGetMidX(self.circleLayer.frame) - labelWidth/2;
@@ -484,8 +472,7 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 #pragma mark - Data Normalization
 
-- (void)normalizeActualValues
-{
+- (void)normalizeActualValues {
     self.sumOfValues = 0;
     
     for (int idx=0; idx < [self numberOfSegments]; idx++) {

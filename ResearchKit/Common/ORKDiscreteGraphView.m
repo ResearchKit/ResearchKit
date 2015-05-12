@@ -1,35 +1,38 @@
-// Copyright (c) 2015, Apple Inc. All rights reserved. 
-// 
-// Redistribution and use in source and binary forms, with or without modification,
-// are permitted provided that the following conditions are met:
-// 
-// 1.  Redistributions of source code must retain the above copyright notice, this
-// list of conditions and the following disclaimer.
-// 
-// 2.  Redistributions in binary form must reproduce the above copyright notice, 
-// this list of conditions and the following disclaimer in the documentation and/or 
-// other materials provided with the distribution. 
-// 
-// 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
-// may be used to endorse or promote products derived from this software without 
-// specific prior written permission. No license is granted to the trademarks of 
-// the copyright holders even if such marks are included in this software. 
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
-// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
-// 
+/*
+Copyright (c) 2015, Apple Inc. All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice, 
+ this list of conditions and the following disclaimer in the documentation and/or 
+ other materials provided with the distribution. 
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
+ may be used to endorse or promote products derived from this software without 
+ specific prior written permission. No license is granted to the trademarks of 
+ the copyright holders even if such marks are included in this software. 
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+*/
+
  
 #import "ORKDiscreteGraphView.h"
 #import <ResearchKit/ORKAxisView.h>
 #import <ResearchKit/ORKCircleView.h>
+
 
 NSString * const kORKDiscreteGraphViewTriggerAnimationsNotification = @"ORKDiscreteGraphViewTriggerAnimationsNotification";
 NSString * const kORKDiscreteGraphViewRefreshNotification = @"ORKDiscreteGraphViewRefreshNotification";
@@ -50,33 +53,45 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 @interface ORKDiscreteGraphView ()
 
 @property (nonatomic, strong) NSMutableArray *dataPoints;//actual data
+
 @property (nonatomic, strong) NSMutableArray *xAxisPoints;
+
 @property (nonatomic, strong) NSMutableArray *yAxisPoints;//normalised for this view
 
 @property (nonatomic, strong) UIView *plotsView; //Holds the plots
 
 @property (nonatomic, strong) ORKAxisView *xAxisView;
+
 @property (nonatomic, strong) UIView *yAxisView;
+
 @property (nonatomic, strong) UILabel *emptyLabel;
+
 @property (nonatomic) BOOL hasDataPoint;
 
 @property (nonatomic, strong) UIView *scrubberLine;
+
 @property (nonatomic, strong) UILabel *scrubberLabel;
+
 @property (nonatomic, strong) UIView *scrubberThumbView;
 
 @property (nonatomic, readwrite) CGFloat minimumValue;
+
 @property (nonatomic, readwrite) CGFloat maximumValue;
 
 @property (nonatomic, strong) NSMutableArray *xAxisTitles;
+
 @property (nonatomic) NSInteger numberOfXAxisTitles;
 
 @property (nonatomic, strong) NSMutableArray *referenceLines;
+
 @property (nonatomic, strong) NSMutableArray *pathLines;
+
 @property (nonatomic, strong) NSMutableArray *dots;
 
 @property (nonatomic) BOOL shouldAnimate;
 
 @end
+
 
 @implementation ORKDiscreteGraphView
 
@@ -86,22 +101,19 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Init
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
     }
     return self;
 }
 
-- (void)sharedInit
-{
+- (void)sharedInit {
     [super sharedInit];
     
     _dataPoints = [NSMutableArray new];
@@ -127,8 +139,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGraph) name:kORKDiscreteGraphViewRefreshNotification object:nil];
 }
 
-- (void)setupViews
-{
+- (void)setupViews {
     /* ----------------- */
     /* Basic Views */
     /* ----------------- */
@@ -168,14 +179,12 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     [self addGestureRecognizer:self.panGestureRecognizer];
 }
 
-- (void)setDefaults
-{
+- (void)setDefaults {
     self.minimumValue = MAXFLOAT;
     self.maximumValue = -MAXFLOAT;
 }
 
-- (NSString *)formatNumber:(NSNumber *)value
-{
+- (NSString *)formatNumber:(NSNumber *)value {
     NSString *formattedNumber = nil;
     NSString *suffix = @"k";
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -195,8 +204,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Appearance
 
-- (void)updateScrubberLabel
-{
+- (void)updateScrubberLabel {
     if (self.isLandscapeMode) {
         self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:14.0f];
     } else {
@@ -204,8 +212,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (CGSize)scrubberThumbSize
-{
+- (CGSize)scrubberThumbSize {
     CGSize thumbSize;
     
     if (self.isLandscapeMode) {
@@ -220,8 +227,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - View Layout
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     CGFloat yAxisPadding = CGRectGetWidth(self.frame)*kYAxisPaddingFactor;
@@ -241,11 +247,9 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height/2;
     
     [self.xAxisView layoutSubviews];
-    
 }
 
-- (void)refreshGraph
-{
+- (void)refreshGraph {
     //Clear subviews and sublayers
     [self.plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [self.plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
@@ -281,11 +285,9 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
     
     [self animateLayersSequentially];
-    
 }
 
-- (void)setupEmptyView
-{
+- (void)setupEmptyView {
     if (!_emptyLabel) {
         
         _emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(kORKGraphLeftPadding, kORKGraphTopPadding, CGRectGetWidth(self.frame) - kORKGraphLeftPadding, CGRectGetHeight(self.frame) - kXAxisHeight - kORKGraphTopPadding)];
@@ -300,8 +302,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Data
 
-- (NSInteger)numberOfPlots
-{
+- (NSInteger)numberOfPlots {
     NSInteger numberOfPlots = 1;
     
     if ([self.datasource respondsToSelector:@selector(numberOfPlotsInDiscreteGraph:)]) {
@@ -311,8 +312,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return numberOfPlots;
 }
 
-- (NSInteger)numberOfPointsinPlot:(NSInteger)plotIndex
-{
+- (NSInteger)numberOfPointsinPlot:(NSInteger)plotIndex {
     NSInteger numberOfPoints = 0;
     
     if ([self.datasource respondsToSelector:@selector(discreteGraph:numberOfPointsInPlot:)]) {
@@ -323,8 +323,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return numberOfPoints;
 }
 
-- (NSInteger)numberOfXAxisTitles
-{
+- (NSInteger)numberOfXAxisTitles {
     _numberOfXAxisTitles = 0;
     
     if ([self.datasource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraph:)]) {
@@ -336,8 +335,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return _numberOfXAxisTitles;
 }
 
-- (void)calculateXAxisPoints
-{
+- (void)calculateXAxisPoints {
     [self.xAxisPoints removeAllObjects];
     
     for (int i=0 ; i<[self numberOfXAxisTitles]; i++) {
@@ -348,8 +346,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)prepareDataForPlotIndex:(NSInteger)plotIndex
-{
+- (void)prepareDataForPlotIndex:(NSInteger)plotIndex {
     [self.dataPoints removeAllObjects];
     [self.yAxisPoints removeAllObjects];
     self.hasDataPoint = NO;
@@ -370,8 +367,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Draw
 
-- (void)drawXAxis
-{
+- (void)drawXAxis {
     //Add Title Labels
     [self.xAxisTitles removeAllObjects];
     
@@ -418,8 +414,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)drawYAxis
-{
+- (void)drawYAxis {
     [self prepareDataForPlotIndex:0];
     
     if (self.yAxisView) {
@@ -494,11 +489,9 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
             [self.yAxisView addSubview:axisTitleLabel];
         }
     }
-    
 }
 
-- (void)drawhorizontalReferenceLines
-{
+- (void)drawhorizontalReferenceLines {
     [self.referenceLines removeAllObjects];
     
     UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
@@ -514,8 +507,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     [self.referenceLines addObject:referenceLineLayer];
 }
 
-- (void)drawVerticalReferenceLines
-{
+- (void)drawVerticalReferenceLines {
     for (int i=1; i<self.numberOfXAxisTitles; i++) {
         
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
@@ -534,8 +526,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)drawGraphForPlotIndex:(NSInteger)plotIndex
-{
+- (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
     [self prepareDataForPlotIndex:plotIndex];
     
     if ([self numberOfValidValues] > 0 && self.shouldConnectRanges) {
@@ -544,8 +535,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     [self drawPointCirclesForPlotIndex:plotIndex];
 }
 
-- (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex
-{
+- (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
     CGFloat pointSize = self.isLandscapeMode ? 10.0f : 8.0f;
     
     for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
@@ -586,13 +576,11 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
                 
                 [self.dots addObject:point];
             }
-            
         }
     }
 }
 
-- (void)drawLinesForPlotIndex:(NSInteger)plotIndex
-{
+- (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     CGFloat positionOnXAxis = CGFLOAT_MAX;
     ORKRangePoint *positionOnYAxis = nil;
     
@@ -632,8 +620,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex
-{
+- (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
     CGFloat pointWidth = self.isLandscapeMode ? 10.0 : 8.0;
     
     NSInteger numberOfPlots = [self numberOfPlots];
@@ -653,8 +640,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Graph Calculations
 
-- (NSInteger)numberOfValidValues
-{
+- (NSInteger)numberOfValidValues {
     NSInteger count = 0;
     
     for (ORKRangePoint *dataVal in self.dataPoints) {
@@ -665,8 +651,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return count;
 }
 
-- (void)calculateMinAndMaxPoints
-{
+- (void)calculateMinAndMaxPoints {
     [self setDefaults];
     
     //Min
@@ -704,8 +689,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (NSArray *)normalizeCanvasPoints:(NSArray *) __unused dataPoints forRect:(CGSize)canvasSize
-{
+- (NSArray *)normalizeCanvasPoints:(NSArray *) __unused dataPoints forRect:(CGSize)canvasSize {
     [self calculateMinAndMaxPoints];
     
     NSMutableArray *normalizedPoints = [NSMutableArray new];
@@ -736,8 +720,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 /* Used when the user scrubs the plot */
 
 //Scrubbing Value
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition
-{
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
     
     CGFloat value = NSNotFound;
@@ -760,8 +743,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 }
 
 //Scrubber Y position
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition
-{
+- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
     
     CGFloat canvasYPosition = 0;
@@ -783,8 +765,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 }
 
 //Valid - dataPoints[index]!= NSNotFound
-- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex
-{
+- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
     while (validPosition < (self.dataPoints.count-1)) {
@@ -797,8 +778,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return validPosition;
 }
 
-- (NSInteger)prevValidPositionIndexForPosition:(NSInteger)positionIndex
-{
+- (NSInteger)prevValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     
     while (validPosition > 0) {
@@ -811,8 +791,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return validPosition;
 }
 
-- (CGFloat)snappedXPosition:(CGFloat)xPosition
-{
+- (CGFloat)snappedXPosition:(CGFloat)xPosition {
     CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame)/self.xAxisPoints.count;
     
     NSUInteger positionIndex;
@@ -830,14 +809,12 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
         
     }
     
-    
     return xPosition;
 }
 
 #pragma mark - Animations
 
-- (void)animateLayersSequentially
-{
+- (void)animateLayersSequentially {
     CGFloat delay = 0.1;
     
     for (NSUInteger i=0; i<self.dots.count; i++) {
@@ -853,23 +830,19 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType
-{
+- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType {
     [self animateLayer:shapeLayer withAnimationType:animationType toValue:1.0];
 }
 
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue
-{
+- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue {
     [self animateLayer:shapeLayer withAnimationType:animationType toValue:toValue startDelay:0.0];
 }
 
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay
-{
+- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay {
     [self animateLayer:shapeLayer withAnimationType:animationType toValue:1.0 startDelay:delay];
 }
 
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue startDelay:(CGFloat)delay
-{
+- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue startDelay:(CGFloat)delay {
     if (animationType == kORKGraphAnimationTypeFade) {
         
         CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -909,8 +882,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated
-{
+- (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
     if ([self numberOfValidValues] > 0) {
         CGFloat alpha = hidden ? 0 : 1;
         
@@ -930,8 +902,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Touch
 
-- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer
-{
+- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     if ((self.dataPoints.count > 0) && [self numberOfValidValues] > 0) {
         CGPoint location = [gestureRecognizer locationInView:self.plotsView];
         
@@ -968,8 +939,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     }
 }
 
-- (void)scrubberViewForXPosition:(CGFloat)xPosition
-{
+- (void)scrubberViewForXPosition:(CGFloat)xPosition {
     
     self.scrubberLine.center = CGPointMake(xPosition + kORKGraphLeftPadding, self.scrubberLine.center.y);
     
@@ -998,31 +968,23 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 
 #pragma mark - Public Methods
 
-- (void)scrubReferenceLineForXPosition:(CGFloat)xPosition
-{
+- (void)scrubReferenceLineForXPosition:(CGFloat)xPosition {
     if (self.dataPoints.count > 1) {
         [self scrubberViewForXPosition:xPosition];
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kORKDiscreteGraphViewTriggerAnimationsNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kORKDiscreteGraphViewRefreshNotification object:nil];
 }
 
 @end
 
 
-/******************************/
-/* Range Point Implementation */
-/******************************/
-
 @implementation ORKRangePoint
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         _minimumValue = NSNotFound;
@@ -1031,8 +993,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return self;
 }
 
-- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue
-{
+- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue {
     self = [super init];
     if (self) {
         _minimumValue = minValue;
@@ -1041,8 +1002,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return self;
 }
 
-- (BOOL)isEmpty
-{
+- (BOOL)isEmpty {
     _empty = NO;
     
     if (self.minimumValue == NSNotFound && self.maximumValue == NSNotFound) {
@@ -1052,16 +1012,12 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     return _empty;
 }
 
-- (BOOL)isRangeZero
-{
+- (BOOL)isRangeZero {
     return (self.minimumValue == self.maximumValue);
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"Min:%0.0f,Max:%0.0f", self.minimumValue, self.maximumValue];
 }
+
 @end
-
-
-
