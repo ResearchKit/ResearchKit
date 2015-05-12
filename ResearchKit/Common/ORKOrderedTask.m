@@ -98,6 +98,15 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - ORKTask
 
+- (void)validateParameters {
+    NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
+    BOOL itemsHaveNonUniqueIdentifiers = self.steps.count != uniqueIdentifiers.count;
+    
+    if (itemsHaveNonUniqueIdentifiers) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"All steps should have unique identifier" userInfo:nil];
+    }
+}
+
 - (NSString *)identifier {
     return _identifier;
 }
@@ -289,7 +298,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
+static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step){
     [step validateParameters];
     [array addObject:step];
 }
