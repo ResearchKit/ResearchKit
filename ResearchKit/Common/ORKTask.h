@@ -169,7 +169,12 @@ ORK_AVAILABLE_DECL
 /**
  Validates the task parameters.
  
- This method should be used to check that all the task parameters are correct. E.g., `ORKOrderedTask` makes sure that all its step identifiers are unique. It should throw an exception if validation fails.
+ The implementation of this method should check that all the task parameters are correct. An invalid task
+ is considered an unrecoverable error: the implementation should throw an exception on parameter validation failure.
+ For example, the `ORKOrderedTask` implementation makes sure that all its step identifiers are unique, throwing an
+ exception otherwise.
+ 
+ This method is usually called by a task view controller when its task is set.
  */
 - (void)validateParameters;
 
