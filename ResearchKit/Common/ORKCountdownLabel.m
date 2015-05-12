@@ -41,13 +41,24 @@
 @end
 
 
-@implementation ORKCountdownLabel
+@implementation ORKCountdownLabel {
+    NSInteger _currentCountDownValue;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _currentCountDownValue = 0;
+    }
+    return self;
+}
 
 - (void)updateAppearance {
-    [self setCountDownValue:0];
+    [self setCountDownValue:_currentCountDownValue];
 }
 
 - (void)setCountDownValue:(NSInteger)value {
+    _currentCountDownValue = value;
     _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
     _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
     

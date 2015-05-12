@@ -71,6 +71,7 @@
 
 - (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
+    [self setNeedsLayout];
 }
 
 - (void)setVertical:(BOOL)vertical {
@@ -109,7 +110,7 @@
 - (CGSize)intrinsicContentSize {
     CGSize intrinsicContentSize = [super intrinsicContentSize];
     // If we have a layout width provided by our delegate and we are vertical, use the provided
-    // width for the instrinsic content height, and leave the intrinsic content width alone.
+    // width for the intrinsic content height, and leave the intrinsic content width alone.
     // The intrinsic content width is typically -1, which will allow the slider to fill the
     // available width in the superview.
     CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
@@ -119,20 +120,20 @@
     return intrinsicContentSize;
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *view = nil;
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL pointInside = NO;
     if (_vertical) {
         // In vertical mode, we need to ignore the touch area for the needed extra width
         const CGFloat desiredSliderWidth = 44.0;
         const CGFloat actualWidth = [self bounds].size.width;
         const CGFloat centerX = actualWidth / 2;
         if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
-            view = [super hitTest:point withEvent:event];
+            pointInside = [super pointInside:point withEvent:event];
         }
     } else {
-        view = [super hitTest:point withEvent:event];
+        pointInside = [super pointInside:point withEvent:event];
     }
-    return view;
+    return pointInside;
 }
 
 - (void)sliderTouched:(UIGestureRecognizer *)gesture {

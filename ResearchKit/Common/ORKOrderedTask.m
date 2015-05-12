@@ -429,7 +429,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.title = shortSpeechInstruction ? : ORKLocalizedString(@"AUDIO_INSTRUCTION", nil);
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:ORKAudioRecorderIdentifier
                                                                                  recorderSettings:recordingSettings]];
-        step.duration = duration;
+        step.stepDuration = duration;
         step.shouldContinueOnFinish = YES;
         
         ORKStepArrayAddStep(steps, step);
@@ -528,7 +528,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             fitnessStep.title = [NSString stringWithFormat:ORKLocalizedString(@"FITNESS_WALK_INSTRUCTION_FORMAT", nil), [formatter stringFromTimeInterval:walkDuration]];
             fitnessStep.spokenInstruction = fitnessStep.title;
             fitnessStep.recorderConfigurations = recorderConfigurations;
-            fitnessStep.shouldShowDefaultTimer = NO;
             fitnessStep.shouldContinueOnFinish = YES;
             fitnessStep.optional = NO;
             fitnessStep.shouldStartTimerAutomatically = YES;
@@ -560,7 +559,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             stillStep.title = [NSString stringWithFormat:ORKLocalizedString(@"FITNESS_SIT_INSTRUCTION_FORMAT", nil), [formatter stringFromTimeInterval:restDuration]];
             stillStep.spokenInstruction = stillStep.title;
             stillStep.recorderConfigurations = recorderConfigurations;
-            stillStep.shouldShowDefaultTimer = NO;
             stillStep.shouldContinueOnFinish = YES;
             stillStep.optional = NO;
             stillStep.shouldStartTimerAutomatically = YES;
@@ -641,7 +639,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             walkingStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_OUTBOUND_INSTRUCTION_FORMAT", nil), (long long)numberOfStepsPerLeg];
             walkingStep.spokenInstruction = walkingStep.title;
             walkingStep.recorderConfigurations = recorderConfigurations;
-            walkingStep.shouldShowDefaultTimer = NO;
             walkingStep.shouldContinueOnFinish = YES;
             walkingStep.optional = NO;
             walkingStep.shouldStartTimerAutomatically = YES;
@@ -671,7 +668,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             walkingStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_RETURN_INSTRUCTION_FORMAT", nil), (long long)numberOfStepsPerLeg];
             walkingStep.spokenInstruction = walkingStep.title;
             walkingStep.recorderConfigurations = recorderConfigurations;
-            walkingStep.shouldShowDefaultTimer = NO;
             walkingStep.shouldContinueOnFinish = YES;
             walkingStep.shouldStartTimerAutomatically = YES;
             walkingStep.optional = NO;
@@ -700,7 +696,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             activeStep.spokenInstruction = [NSString stringWithFormat:ORKLocalizedString(@"WALK_STAND_VOICE_INSTRUCTION_FORMAT", nil), durationString];
             activeStep.shouldStartTimerAutomatically = YES;
             activeStep.stepDuration = restDuration;
-            activeStep.shouldShowDefaultTimer = NO;
             activeStep.shouldContinueOnFinish = YES;
             activeStep.optional = NO;
             activeStep.shouldVibrateOnStart = YES;

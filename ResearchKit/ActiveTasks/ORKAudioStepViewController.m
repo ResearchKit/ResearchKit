@@ -70,7 +70,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _audioContentView = [ORKAudioContentView new];
-    _audioContentView.timeLeft = self.audioStep.duration;
+    _audioContentView.timeLeft = self.audioStep.stepDuration;
     self.activeStepView.activeCustomView = _audioContentView;
 }
 
@@ -114,7 +114,7 @@
 
 - (void)startNewTimerIfNeeded {
     if (! _timer) {
-        NSTimeInterval duration = self.audioStep.duration;
+        NSTimeInterval duration = self.audioStep.stepDuration;
         __weak typeof(self) weakSelf = self;
         _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration/100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
             typeof(self) strongSelf = weakSelf;
@@ -153,6 +153,9 @@
 }
 
 - (void)finish {
+    if (_audioRecorderError) {
+        return;
+    }
     [super finish];
     [_timer reset];
     _timer = nil;
@@ -170,6 +173,7 @@
 - (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
     [super recorder:recorder didFailWithError:error];
     _audioRecorderError = error;
+    _audioContentView.failed = YES;
 }
 
 @end

@@ -69,7 +69,7 @@
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
         _tableView.preservesSuperviewLayoutMargins = YES;
         _tableView.clipsToBounds = NO; // Do not clip scroll indicators on iPad
-        _tableView.scrollIndicatorInsets = ORKDefaultScrollIndicatorInsets(self);
+        _tableView.scrollIndicatorInsets = ORKScrollIndicatorInsetsForScrollView(self);
         [self addSubview:_tableView];
         
         _scrollView = _tableView;
@@ -109,7 +109,7 @@
     [super layoutSubviews];
 
     CGRect bounds = self.bounds;
-    _tableView.frame = UIEdgeInsetsInsetRect(bounds, ORKDefaultFullScreenViewLayoutMargins(self));
+    _tableView.frame = UIEdgeInsetsInsetRect(bounds, ORKStandardFullScreenLayoutMarginsForView(self));
     // make the contentSize to be correct after changing the frame
     [_tableView layoutIfNeeded];
     {
@@ -151,7 +151,6 @@
         [NSLayoutConstraint deactivateConstraints:_constraints];
         _constraints = nil;
     }
-    [super updateConstraints];
     
     NSMutableArray *constraints = [NSMutableArray array];
     
@@ -184,6 +183,8 @@
     [self updateContinueButtonConstraints];
     [NSLayoutConstraint activateConstraints:constraints];
     _constraints = constraints;
+    
+    [super updateConstraints];
 }
 
 - (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
