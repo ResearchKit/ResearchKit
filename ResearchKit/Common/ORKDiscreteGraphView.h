@@ -31,32 +31,32 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKBaseGraphView.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 FOUNDATION_EXPORT NSString * const kORKDiscreteGraphViewTriggerAnimationsNotification;
 FOUNDATION_EXPORT NSString * const kORKDiscreteGraphViewRefreshNotification;
 
-@protocol APCDiscreteGraphViewDataSource;
-@protocol APCDiscreteGraphViewDelegate;
-@class APCRangePoint;
+@protocol ORKDiscreteGraphViewDataSource;
+@protocol ORKDiscreteGraphViewDelegate;
+@class ORKRangePoint;
 
 ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphView : ORKBaseGraphView
 
-
-@property (nonatomic, weak) IBOutlet id <APCDiscreteGraphViewDataSource> datasource;
+@property (nonatomic, weak) id <ORKDiscreteGraphViewDataSource> datasource;
 
 @property (nonatomic) BOOL shouldConnectRanges;
 
 @end
 
 ORK_AVAILABLE_DECL
-@protocol APCDiscreteGraphViewDataSource <NSObject>
-
+@protocol ORKDiscreteGraphViewDataSource <NSObject>
 
 @required
 
 - (NSInteger)discreteGraph:(ORKDiscreteGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
 
-- (APCRangePoint *)discreteGraph:(ORKDiscreteGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
+- (ORKRangePoint *)discreteGraph:(ORKDiscreteGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
 
 @optional
 
@@ -77,7 +77,7 @@ ORK_AVAILABLE_DECL
 /******************************/
 
 ORK_AVAILABLE_DECL
-@interface APCRangePoint : NSObject
+@interface ORKRangePoint : NSObject
 
 @property (nonatomic) CGFloat maximumValue;
 
@@ -91,3 +91,4 @@ ORK_AVAILABLE_DECL
 
 @end
 
+NS_ASSUME_NONNULL_END

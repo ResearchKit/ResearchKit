@@ -30,11 +30,13 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
+@protocol ORKBaseGraphViewDelegate;
+
 /**
  *  IMPORTANT: THIS IS AN ABSTRACT CLASS. IT HOLDS PROPERTIES & METHODS COMMON TO CLASSES LIKE ORKLineGraphView & ORKDiscreteGraphView.
  */
 
-@protocol ORKBaseGraphViewDelegate;
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKBaseGraphView : UIView
@@ -49,30 +51,30 @@ ORK_CLASS_AVAILABLE
 
 /* Appearance */
 
-@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong, nullable) UIColor *tintColor;
 
-@property (nonatomic, strong) UIColor *axisColor;
+@property (nonatomic, strong, nullable) UIColor *axisColor;
 
-@property (nonatomic, strong) UIColor *axisTitleColor;
+@property (nonatomic, strong, nullable) UIColor *axisTitleColor;
 
-@property (nonatomic, strong) UIFont *axisTitleFont;
+@property (nonatomic, strong, nullable) UIFont *axisTitleFont;
 
-@property (nonatomic, strong) UIColor *referenceLineColor;
+@property (nonatomic, strong, nullable) UIColor *referenceLineColor;
 
-@property (nonatomic, strong) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, nullable) UIColor *scrubberThumbColor;
 
-@property (nonatomic, strong) UIColor *scrubberLineColor;
+@property (nonatomic, strong, nullable) UIColor *scrubberLineColor;
 
-@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, strong, nullable) UIPanGestureRecognizer *panGestureRecognizer;
 
-@property (nonatomic, strong) NSString *emptyText;
+@property (nonatomic, strong, nullable) NSString *emptyText;
 
 //Support for image icons as legends
-@property (nonatomic, strong) UIImage *maximumValueImage;
+@property (nonatomic, strong, nullable) UIImage *maximumValueImage;
 
-@property (nonatomic, strong) UIImage *minimumValueImage;
+@property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
-@property (nonatomic, weak) id <ORKBaseGraphViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <ORKBaseGraphViewDelegate> delegate;
 
 - (void)sharedInit;
 
@@ -88,7 +90,6 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-
 ORK_AVAILABLE_DECL
 @protocol ORKBaseGraphViewDelegate <NSObject>
 
@@ -101,3 +102,5 @@ ORK_AVAILABLE_DECL
 - (void)graphViewTouchesEnded:(ORKBaseGraphView *)graphView;
 
 @end
+
+NS_ASSUME_NONNULL_END

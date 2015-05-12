@@ -356,7 +356,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     for (int i = 0; i<[self numberOfPointsinPlot:plotIndex]; i++) {
         
         if ([self.datasource respondsToSelector:@selector(discreteGraph:plot:valueForPointAtIndex:)]) {
-            APCRangePoint *value = [self.datasource discreteGraph:self plot:plotIndex valueForPointAtIndex:i];
+            ORKRangePoint *value = [self.datasource discreteGraph:self plot:plotIndex valueForPointAtIndex:i];
             [self.dataPoints addObject:value];
             
             if (!value.isEmpty){
@@ -550,14 +550,14 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     
     for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
         
-        APCRangePoint *dataPointVal = (APCRangePoint *)self.dataPoints[i];
+        ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
         
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
         
         if (!dataPointVal.isEmpty) {
             
-            APCRangePoint *positionOnYAxis = (APCRangePoint *)self.yAxisPoints[i];
+            ORKRangePoint *positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
             
             {
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
@@ -594,11 +594,11 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex
 {
     CGFloat positionOnXAxis = CGFLOAT_MAX;
-    APCRangePoint *positionOnYAxis = nil;
+    ORKRangePoint *positionOnYAxis = nil;
     
     for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
         
-        APCRangePoint *dataPointVal = self.dataPoints[i];
+        ORKRangePoint *dataPointVal = self.dataPoints[i];
         
         if (!dataPointVal.isEmpty && !dataPointVal.isRangeZero) {
             
@@ -607,7 +607,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
             positionOnXAxis = [self.xAxisPoints[i] floatValue];
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
                 
-            positionOnYAxis = ((APCRangePoint *)self.yAxisPoints[i]);
+            positionOnYAxis = ((ORKRangePoint *)self.yAxisPoints[i]);
             
             [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             
@@ -657,7 +657,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 {
     NSInteger count = 0;
     
-    for (APCRangePoint *dataVal in self.dataPoints) {
+    for (ORKRangePoint *dataVal in self.dataPoints) {
         if (!dataVal.isEmpty) {
             count ++;
         }
@@ -675,10 +675,10 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     } else {
         
         if (self.dataPoints.count) {
-            self.minimumValue = ((APCRangePoint *)self.dataPoints[0]).minimumValue;
+            self.minimumValue = ((ORKRangePoint *)self.dataPoints[0]).minimumValue;
             
             for (NSUInteger i=1; i<self.dataPoints.count; i++) {
-                CGFloat num = ((APCRangePoint *)self.dataPoints[i]).minimumValue;
+                CGFloat num = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
                 if ((self.minimumValue == NSNotFound) || (num < self.minimumValue)) {
                     self.minimumValue = num;
                 }
@@ -692,10 +692,10 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
         self.maximumValue = [self.datasource maximumValueForDiscreteGraph:self];
     } else {
         if (self.dataPoints.count) {
-            self.maximumValue = ((APCRangePoint *)self.dataPoints[0]).maximumValue;
+            self.maximumValue = ((ORKRangePoint *)self.dataPoints[0]).maximumValue;
             
             for (NSUInteger i=1; i<self.dataPoints.count; i++) {
-                CGFloat num = ((APCRangePoint *)self.dataPoints[i]).maximumValue;
+                CGFloat num = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
                 if (((num != NSNotFound) && (num > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
                     self.maximumValue = num;
                 }
@@ -712,8 +712,8 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     
     for (NSUInteger i=0; i<self.dataPoints.count; i++) {
         
-        APCRangePoint *normalizedRangePoint = [APCRangePoint new];
-        APCRangePoint *dataPointValue = (APCRangePoint *)self.dataPoints[i];
+        ORKRangePoint *normalizedRangePoint = [ORKRangePoint new];
+        ORKRangePoint *dataPointValue = (ORKRangePoint *)self.dataPoints[i];
         
         if (dataPointValue.isEmpty){
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height;
@@ -752,7 +752,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
             }
         }
         
-        value = ((APCRangePoint *)self.dataPoints[positionIndex]).maximumValue;
+        value = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
         
     }
 
@@ -776,7 +776,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
             }
         }
         
-        canvasYPosition = ((APCRangePoint *)self.yAxisPoints[positionIndex]).maximumValue;
+        canvasYPosition = ((ORKRangePoint *)self.yAxisPoints[positionIndex]).maximumValue;
     }
     
     return canvasYPosition;
@@ -788,7 +788,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     NSUInteger validPosition = positionIndex;
     
     while (validPosition < (self.dataPoints.count-1)) {
-        if (((APCRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
             break;
         }
         validPosition ++;
@@ -802,7 +802,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     NSInteger validPosition = positionIndex - 1;
     
     while (validPosition > 0) {
-        if (((APCRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
             break;
         }
         validPosition --;
@@ -818,7 +818,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
     NSUInteger positionIndex;
     for (positionIndex = 0; positionIndex<self.xAxisPoints.count; positionIndex++) {
         
-        CGFloat dataPointVal = ((APCRangePoint *)self.dataPoints[positionIndex]).maximumValue;
+        CGFloat dataPointVal = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
         
         if (dataPointVal != NSNotFound) {
             CGFloat num = [self.xAxisPoints[positionIndex] floatValue];
@@ -1019,7 +1019,7 @@ static CGFloat const kSnappingClosenessFactor = 0.3f;
 /* Range Point Implementation */
 /******************************/
 
-@implementation APCRangePoint
+@implementation ORKRangePoint
 
 - (instancetype)init
 {

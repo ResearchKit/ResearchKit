@@ -33,6 +33,7 @@
 
 @property (nonatomic, strong) NSMutableArray *titleLabels;
 @property (nonatomic) ORKGraphAxisType axisType;
+
 @end
 
 @implementation ORKAxisView
