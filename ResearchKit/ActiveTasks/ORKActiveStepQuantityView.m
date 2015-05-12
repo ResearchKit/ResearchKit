@@ -84,8 +84,7 @@
             view.isAccessibilityElement = NO;
         }
         
-        [self setupConstraints];
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
@@ -111,7 +110,7 @@
     _imageView.image = image;
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     
     const CGFloat TitleBaselineToValueBaseline = 40;
     const CGFloat ValueBaselineToBottom = 36;
@@ -185,17 +184,15 @@
     
     [NSLayoutConstraint activateConstraints:additionalConstraints];
     
-    
-    NSLayoutConstraint *zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                           attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0
-                                                                            constant:0.0];
-    zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
-    _zeroWidthConstraint = zeroWidthConstraint;
-    _zeroWidthConstraint.active = !_enabled;
+    _zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:0.0];
+    _zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {
@@ -245,12 +242,12 @@
         [self addSubview:_leftView];
         [self addSubview:_rightView];
         [self addSubview:_metricKeyline];
-        [self setupConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     
     NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_leftView, _rightView, _metricKeyline);
