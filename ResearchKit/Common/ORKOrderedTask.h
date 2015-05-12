@@ -289,27 +289,25 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  In a device motion reaction task the participant is asked to move the device sharply in any direction in response to a visual cue. You can use this task to accurately assess the participant's 'Simple Reaction Time'.
  
- A device motion reaction time task finishes when the uses has completed the required 'numberOfAttempts' successfully. An attempt is successful when the user exerts a g-force greater than 'terminationGs' to the device after the stimulus has been delivered and before the timeout has elapsed. An attempt is unsuccessful if a g-force greater than 'terminationGs' is applied to the device before the stimulus or if this does not occur before the timeout interval has elapsed. If unsuccessful, the result is not reported and the user must try again to proceed with the task.
+ A device motion reaction time task finishes when the uses has completed the required 'numberOfAttempts' successfully. An attempt is successful when the user exerts acceleration greater than 'thresholdAcceleration' to the device after the stimulus has been delivered and before the timeout has elapsed. An attempt is unsuccessful if acceleration greater than 'thresholdAcceleration' is applied to the device before the stimulus or if this does not occur before the timeout interval has elapsed. If unsuccessful, the result is not reported and the user must try again to proceed with the task.
  
- Data collected by the task is in the form of ORKDeviceMotionReactionTimeResult objects. These objects contain a timeInterval for the delivery of the stimulus and an ORKFileResult which references the motion data collected during an attempt. The developer / researcher may use this data to accurately determine the first movement in response to the stimulus.
- 
- TODO: A standard implementation of response time for convenience should the researcher / developer not wish to calculate this themselves.
+ Data collected by the task is in the form of ORKDeviceMotionReactionTimeResult objects. These objects contain a timestamp represeting the delivery of the stimulus and an ORKFileResult which references the motion data collected during an attempt. The developer / researcher can use these to evaluate the response to the stimulus and calculate the reaction time.
  
  @param identifier                  The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription      A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, the default localized text is displayed.
  @param getReadyInterval            The animated interval between the user pressing ready and the stimulus
  @param maximumStimulusInterval     The maximum interval before the stimulus is delivered
  @param minimumStimulusInterval     The minimum interval before the stimulus is delivered
- @param terminationGs               The g-force required to end a reaction time test 
- @param timeout                     The interval permitted after the stimulus until the test fails, if the termination magnitude is not breached
- @param numberOfAttempts            The number of successful attempts required before the task is complete, the active step result will contain this many child results if the task is completed.
+ @param thresholdAcceleration       The acceleration required to end a reaction time test
+ @param timeout                     The interval permitted after the stimulus until the test fails, if the threshold is not reached
+ @param numberOfAttempts            The number of successful attempts required before the task is complete. The active step result will contain this many child results if the task is completed.
  */
 + (ORKOrderedTask *)deviceMotionReactionTimeTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(nullable NSString *)intendedUseDescription
                                               getReadyInterval:(NSTimeInterval)getReady
-                                        maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
-                                         minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
-                                                 terminationGs:(double)terminationGs
+                                       maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                                       minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                                         thresholdAcceleration:(double)thresholdAcceleration
                                               numberOfAttempts:(int)numberOFAttempts
                                                        timeout:(NSTimeInterval)timeout
                                                        options:(ORKPredefinedTaskOption)options;

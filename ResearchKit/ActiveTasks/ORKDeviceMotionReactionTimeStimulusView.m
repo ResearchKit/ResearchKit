@@ -104,7 +104,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     [self.layer addSublayer:_tickLayer];
 }
 
-- (CGPathRef) concealPath: (CGFloat) radius {
+- (CGPathRef)concealPath:(CGFloat)radius {
     return [[UIBezierPath bezierPathWithArcCenter:CGPointMake(radius, radius)
                                            radius: radius / 2
                                        startAngle:M_PI + M_PI_2
@@ -112,7 +112,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
                                         clockwise:NO] CGPath];
 }
 
-- (CGPathRef) tickPath {
+- (CGPathRef)tickPath {
     UIBezierPath *path = [self linePath];
     [path moveToPoint:(CGPoint){37,65}];
     [path addLineToPoint:(CGPoint){50,78}];
@@ -120,7 +120,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     return path.CGPath;
 }
 
-- (CGPathRef) crossPath {
+- (CGPathRef)crossPath {
     UIBezierPath *path = [self linePath];
     [path moveToPoint:(CGPoint){37,78}];
     [path addLineToPoint:(CGPoint){87,42}];

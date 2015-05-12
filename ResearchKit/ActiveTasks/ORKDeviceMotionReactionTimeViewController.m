@@ -29,15 +29,11 @@ static const float ReactionTimeResetAnimationDuration = 0.3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _results = [@[]mutableCopy];
+    _results = [@[] mutableCopy];
     _reactionTimeContentView = [ORKDeviceMotionReactionTimeContentView new];
     self.activeStepView.activeCustomView = _reactionTimeContentView;
     _reactionTimeContentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle: ORKLocalizedString(@"REACTION_TIME_TASK_READY_BUTTON_TITLE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(start)];
     [self enableReady];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
 }
 
 #pragma mark - ORKActiveStepViewController
@@ -86,7 +82,7 @@ static const float ReactionTimeResetAnimationDuration = 0.3;
 - (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion {
     CMAcceleration ua = motion.userAcceleration;
     double vectormag = sqrt(((ua.x * ua.x) + (ua.y * ua.y) + (ua.z * ua.z)));
-    if (vectormag > [self reactionTimeStep].terminationGs) {
+    if (vectormag > [self reactionTimeStep].thresholdAcceleration) {
         for (ORKRecorder *r in self.recorders) {
             [r stop];
         }
@@ -99,7 +95,7 @@ static const float ReactionTimeResetAnimationDuration = 0.3;
     void (^completion)(void) = ^{
         _results.count == [self reactionTimeStep].numberOfAttempts ? [self finish] : [self enableReady];
     };
-    float t = ReactionTimeResetAnimationDuration;
+    NSTimeInterval t = ReactionTimeResetAnimationDuration;
     _validResult ? [_reactionTimeContentView startSuccessAnimationWithDuration:t completion:completion] : [_reactionTimeContentView startFailureAnimationWithDuration:t completion:completion];
     _validResult = false;
     [_stimulusTimer invalidate];
@@ -144,7 +140,7 @@ static const float ReactionTimeResetAnimationDuration = 0.3;
 - (float)stimulusInterval {
     ORKDeviceMotionReactionTimeStep *step = [self reactionTimeStep];
     float range = step.maximumStimulusInterval - step.minimumStimulusInterval;
-    float randfac = ((float) rand() / RAND_MAX) * range;
+    float randfac = ((NSTimeInterval) rand() / RAND_MAX) * range;
     return randfac + step.minimumStimulusInterval;
 }
 

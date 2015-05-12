@@ -27,7 +27,7 @@
     step.getReadyInterval = self.getReadyInterval;
     step.maximumStimulusInterval = self.maximumStimulusInterval;
     step.minimumStimulusInterval = self.minimumStimulusInterval;
-    step.terminationGs = self.terminationGs;
+    step.thresholdAcceleration = self.thresholdAcceleration;
     step.timeout = self.timeout;
     step.numberOfAttempts = self.numberOfAttempts;
     return step;
@@ -41,9 +41,9 @@
                                        reason:@"maximumStimulusInterval can not be less than minimumStimulusInterval"
                                      userInfo:nil];
     }
-    if (self.terminationGs <= 0) {
+    if (self.thresholdAcceleration <= 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"terminationGs must be greater than zero"
+                                       reason:@"thresholdAcceleration must be greater than zero"
                                      userInfo:nil];
     }
     if (self.numberOfAttempts <= 0) {
@@ -59,7 +59,7 @@
         ORK_DECODE_DOUBLE(aDecoder, getReadyInterval);
         ORK_DECODE_DOUBLE(aDecoder, maximumStimulusInterval);
         ORK_DECODE_DOUBLE(aDecoder, minimumStimulusInterval);
-        ORK_DECODE_DOUBLE(aDecoder, terminationGs);
+        ORK_DECODE_DOUBLE(aDecoder, thresholdAcceleration);
         ORK_DECODE_DOUBLE(aDecoder, timeout);
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
     }
@@ -71,7 +71,7 @@
         ORK_ENCODE_DOUBLE(aCoder, getReadyInterval);
         ORK_ENCODE_DOUBLE(aCoder, maximumStimulusInterval);
         ORK_ENCODE_DOUBLE(aCoder, minimumStimulusInterval);
-        ORK_ENCODE_DOUBLE(aCoder, terminationGs);
+        ORK_ENCODE_DOUBLE(aCoder, thresholdAcceleration);
         ORK_ENCODE_DOUBLE(aCoder, timeout);
         ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
 }
@@ -88,7 +88,7 @@
             (self.getReadyInterval == castObject.getReadyInterval) &&
             (self.maximumStimulusInterval == castObject.maximumStimulusInterval) &&
             (self.minimumStimulusInterval == castObject.minimumStimulusInterval) &&
-            (self.terminationGs == castObject.terminationGs) &&
+            (self.thresholdAcceleration == castObject.thresholdAcceleration) &&
             (self.timeout == castObject.timeout) &&
             (self.numberOfAttempts == castObject.numberOfAttempts));
 }

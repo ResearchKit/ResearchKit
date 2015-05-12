@@ -192,9 +192,9 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates your reaction time by measuring the time it takes for you to respond to a visual cue";
+"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates your reaction time by measuring the time it takes for you to respond to a visual cue.";
 "REACTION_TIME_TASK_INTRO_TEXT" = "A blue circle will appear on the screen, as soon as it disappears, move the device sharply in any direction. You will be asked to make three attempts.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "REACTION_TIME_TASK_READY_BUTTON_TITLE" = "Ready";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %D of %D";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Move the device sharply when the blue circle disappears";

@@ -17,7 +17,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
 @property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
 @property (nonatomic, assign) NSTimeInterval timeout;
-@property (nonatomic, assign) double terminationGs;
+@property (nonatomic, assign) double thresholdAcceleration;
 @property (nonatomic, assign) NSInteger numberOfAttempts;
 
 @end

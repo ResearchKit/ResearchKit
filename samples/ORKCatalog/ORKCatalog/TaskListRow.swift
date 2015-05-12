@@ -287,7 +287,7 @@ enum TaskListRow: Int, Printable {
                 return audioTask
             
             case .DeviceMotionReactionTimeTask:
-                return devicMotionReactionTimeTask
+                return deviceMotionReactionTimeTask
             
             case .Survey:
                 return surveyTask
@@ -578,8 +578,8 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
     
-    private var devicMotionReactionTimeTask: ORKTask {
-        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, getReadyInterval: 1, maximumStimulusInterval: 10, minimumStimulusInterval: 4, terminationGs: 0.5, numberOfAttempts: 3, timeout: 3, options: nil)
+    private var deviceMotionReactionTimeTask: ORKTask {
+        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, getReadyInterval: 1, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, options: nil)
     }
 
     /**

@@ -53,6 +53,7 @@ static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
+static NSString * const ReactionTimeTaskIdentifier = @"react";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
@@ -211,6 +212,14 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         buttons[buttonKeys.lastObject] = button;
     }
     
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Reaction Time" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -335,6 +344,17 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
                                                                  duration:20.0 options:(ORKPredefinedTaskOption)0];
+    }
+    else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
+        return [ORKOrderedTask deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+                                                   intendedUseDescription:nil
+                                                         getReadyInterval:1
+                                                  maximumStimulusInterval:8
+                                                  minimumStimulusInterval:4
+                                                    thresholdAcceleration:0.5
+                                                         numberOfAttempts:3
+                                                                  timeout:10
+                                                                  options:0];
     }
     return nil;
 }
@@ -1277,6 +1297,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 
 - (IBAction)showTwoFingerTappingTask:(id)sender {
     [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
+}
+
+- (IBAction)showReactionTimeTask:(id)sender {
+    [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
 }
 
 #pragma mark Dynamic task
