@@ -179,11 +179,9 @@
 }
 
 - (void)playbackDidFinish:(NSNotification *)notification {
-    NSNotificationCenter *nfc = [NSNotificationCenter defaultCenter];
-    [nfc removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:notification.object];
-    [nfc removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:notification.object];
-    [nfc removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:notification.object];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:notification.object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:notification.object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:notification.object];
     
     [_moviePlayer pause];
     
@@ -300,11 +298,6 @@
     _videoOutput = nil;
     _videoOutputQueue = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)dealloc {
-    [self finish];
-    [_displayLink invalidate];
 }
 
 @end
