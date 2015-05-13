@@ -708,6 +708,7 @@ ORK_CLASS_AVAILABLE
  Looks up the child result containing an identifier that matches the specified identifier.
  
  @param identifier The identifier of the step for which to search.
+ 
  @return The matching result, or `nil` if none was found.
  */
 - (nullable ORKResult *)resultForIdentifier:(NSString *)identifier;
@@ -736,6 +737,7 @@ ORK_CLASS_AVAILABLE
  `ORKTaskResult` object (which itself implements this protocol).
  
  @param stepIdentifier The identifier for which to search.
+ 
  @return The result for the specified step, or `nil` for none.
  */
 - (nullable ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier;
@@ -763,8 +765,8 @@ ORK_CLASS_AVAILABLE
  @param identifier      The identifier of the task that produced this result.
  @param taskRunUUID     The UUID of the run of the task that produced this result.
  @param outputDirectory The directory in which any files referenced by results can be found.
- @return An initialized task result.
  
+ @return An initialized task result.
  */
 - (instancetype)initWithTaskIdentifier:(NSString *)identifier
                            taskRunUUID:(NSUUID *)taskRunUUID
@@ -819,6 +821,7 @@ ORK_CLASS_AVAILABLE
  @param stepIdentifier      The identifier of the step.
  @param results             The array of child results. The value of this parameter can be `nil` or empty
             if no results were collected.
+ 
  @return An initialized step result.
  */
 - (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray *)results;

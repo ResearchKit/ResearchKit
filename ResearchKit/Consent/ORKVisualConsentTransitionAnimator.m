@@ -60,7 +60,7 @@
 @end
 
 
-@interface ORKVisualConsentTransitionAnimator() <AVPlayerItemOutputPullDelegate>
+@interface ORKVisualConsentTransitionAnimator () <AVPlayerItemOutputPullDelegate>
 
 @end
 

@@ -68,7 +68,7 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-@interface ORKRecorder()
+@interface ORKRecorder ()
 
 /**
  Returns an initialized recorder.
@@ -116,7 +116,7 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-@interface ORKRecorderConfiguration()
+@interface ORKRecorderConfiguration ()
 
 /**
  Returns an initialized recorder configuration.

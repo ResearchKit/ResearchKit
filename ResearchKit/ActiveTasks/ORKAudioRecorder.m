@@ -28,11 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAudioRecorder.h"
 #import "ORKHelpers.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
 #import "ORKDefines_Private.h"
+
 
 @interface ORKAudioRecorder ()
 
@@ -42,6 +44,7 @@
 
 @end
 
+
 @implementation ORKAudioRecorder
 
 - (void)dealloc {
@@ -49,7 +52,6 @@
     [_audioRecorder stop];
     _audioRecorder = nil;
 }
-
 
 + (NSDictionary *)defaultRecorderSettings {
     return @{AVFormatIDKey              : @(kAudioFormatMPEG4AAC),
@@ -98,7 +100,6 @@
             return;
         }
         
-        
         ORK_Log_Debug(@"Create audioRecorder %p", self);
         _audioRecorder = [[AVAudioRecorder alloc]
                           initWithURL:soundFileURL
@@ -129,7 +130,6 @@
 - (void)stop {
     if (! _audioRecorder) {
         // Error has already been returned.
-        
         return;
     }
     
@@ -155,31 +155,30 @@
     
     NSString *contentType = @"audio";
     switch (recorderFormat) {
-        case kAudioFormatLinearPCM:
-        {
+        case kAudioFormatLinearPCM: {
             int numBits = [recorderSettings[AVLinearPCMBitDepthKey] intValue] ? : 16;
             contentType = [NSString stringWithFormat:@"audio/L%d", numBits];
             break;
         }
-        case kAudioFormatAC3:
+        case kAudioFormatAC3: {
             contentType = @"audio/ac3";
             break;
+        }
         case kAudioFormatMPEG4AAC:
         case kAudioFormatMPEG4CELP:
         case kAudioFormatMPEG4HVXC:
         case kAudioFormatMPEG4TwinVQ:
-        case kAudioFormatAppleLossless:
+        case kAudioFormatAppleLossless: {
             contentType = @"audio/m4a";
             break;
-        case kAudioFormatULaw:
+        }
+        case kAudioFormatULaw: {
             contentType = @"audio/basic";
             break;
+        }
     }
-    
     return contentType;
-    
 }
-
 
 - (NSString *)recorderType {
     return @"audio";
@@ -187,7 +186,7 @@
 
 - (void)doStopRecording {
     if (self.isRecording) {
-#if ! TARGET_IPHONE_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
         [_audioRecorder stop];
         
         [self applyFileProtection:ORKFileProtectionComplete toFileAtURL:[self recordingFileURL]];
@@ -212,16 +211,18 @@
             extension = @"pcm";
             break;
         }
-        case kAudioFormatAC3:
+        case kAudioFormatAC3: {
             extension = @"ac3";
             break;
+        }
         case kAudioFormatMPEG4AAC:
         case kAudioFormatMPEG4CELP:
         case kAudioFormatMPEG4HVXC:
         case kAudioFormatMPEG4TwinVQ:
-        case kAudioFormatAppleLossless:
+        case kAudioFormatAppleLossless: {
             extension = @"m4a";
             break;
+        }
     }
     return extension;
 }
@@ -229,7 +230,6 @@
 - (NSURL *)recordingFileURL {
     return [[self recordingDirectoryURL] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [self logName], [self extension]]];
 }
-
 
 - (BOOL)recreateFileWithError:(NSError * __autoreleasing *)error {
     NSURL *url = [self recordingFileURL];
@@ -257,17 +257,17 @@
     return YES;
 }
 
-
 - (void)reset {
     [_audioRecorder stop];
     _audioRecorder = nil;
     [super reset];
 }
 
-
 @end
 
+
 @interface ORKAudioRecorderConfiguration ()
+
 @end
 
 
@@ -275,7 +275,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
 }
@@ -291,7 +290,6 @@
     }
     return self;
 }
-
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step
@@ -324,9 +322,8 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.recorderSettings, castObject.recorderSettings)) ;
+            ORKEqualObjects(self.recorderSettings, castObject.recorderSettings));
 }
-
 
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionAudioRecording;

@@ -40,7 +40,6 @@
  Instead, add a completion step to a task, and present the task with a
  task view controller. The task view controller instantiates the step
  view controller for the completion step.
- 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKCompletionStepViewController : ORKInstructionStepViewController

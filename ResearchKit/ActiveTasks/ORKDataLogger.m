@@ -45,11 +45,13 @@ static const char * kORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded
 static const NSTimeInterval kORKDataLoggerManagerDefaultLogFileLifetime = 60*60*24*3; // 3 days
 static const unsigned long long kORKDataLoggerManagerDefaultLogFileSize = 1024*1024; // 1 MB
 
-static NSString * const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
+static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
 
-@interface ORKDataLogger()
+
+@interface ORKDataLogger ()
 
 @property (copy, setter=_setLogName:) NSString *logName;
+
 @property (strong, setter=_setLogFormatter:) ORKLogFormatter *logFormatter;
 
 - (void)fileSizeLimitsDidChange;
@@ -220,7 +222,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
 @end
 
 
-@interface ORKLogFormatter() {
+@interface ORKLogFormatter () {
     unsigned long long _checkpoint;
 }
 
@@ -296,9 +298,9 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
 @end
 
 
-static NSString * const kJSONLogEmptyLogString = @"{\"items\":[]}" ;
-static NSString * const kJSONLogFooterString = @"]}";  // The part of the log string that comes after the logged objects
-static NSString * const kJSONObjectSeparatorString = @",";
+static NSString *const kJSONLogEmptyLogString = @"{\"items\":[]}";
+static NSString *const kJSONLogFooterString = @"]}";  // The part of the log string that comes after the logged objects
+static NSString *const kJSONObjectSeparatorString = @",";
 
 static NSInteger _ORKJSON_emptyLogLength = 0;
 static NSInteger _ORKJSON_terminatorLength = 0;

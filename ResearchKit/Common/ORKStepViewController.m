@@ -338,9 +338,9 @@
 
 #pragma mark - UIStateRestoring
 
-static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
-static NSString * const _ORKPresentedDateRestoreKey = @"presentedDate";
-static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
+static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
+static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
+static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

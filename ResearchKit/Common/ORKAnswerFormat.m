@@ -465,7 +465,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.textChoices, castObject.textChoices)) ;
+            ORKEqualObjects(self.textChoices, castObject.textChoices));
 }
 
 - (NSUInteger)hash {
@@ -534,7 +534,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.imageChoices, castObject.imageChoices)) ;
+            ORKEqualObjects(self.imageChoices, castObject.imageChoices));
 }
 
 - (NSUInteger)hash {
@@ -596,7 +596,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.textChoices, castObject.textChoices) &&
-            (_style == castObject.style)) ;
+            (_style == castObject.style));
 }
 
 - (NSUInteger)hash {
@@ -847,7 +847,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.defaultComponents, castObject.defaultComponents)) ;
+            ORKEqualObjects(self.defaultComponents, castObject.defaultComponents));
 }
 
 - (NSUInteger)hash {
@@ -913,7 +913,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             ORKEqualObjects(self.minimumDate, castObject.minimumDate) &&
             ORKEqualObjects(self.maximumDate, castObject.maximumDate) &&
             ORKEqualObjects(self.calendar, castObject.calendar) &&
-            (_style == castObject.style)) ;
+            (_style == castObject.style));
 }
 
 - (NSUInteger)hash {
@@ -1320,7 +1320,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_maximum == castObject.maximum) &&
             (_minimum == castObject.minimum) &&
             (_step == castObject.step) &&
-            (_defaultValue == castObject.defaultValue)) ;
+            (_defaultValue == castObject.defaultValue));
 }
 
 - (ORKQuestionType) questionType {
@@ -1463,7 +1463,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_maximum == castObject.maximum) &&
             (_minimum == castObject.minimum) &&
             (_defaultValue == castObject.defaultValue) &&
-            (_maximumFractionDigits == castObject.maximumFractionDigits)) ;
+            (_maximumFractionDigits == castObject.maximumFractionDigits));
 }
 
 - (ORKQuestionType) questionType {
@@ -1553,7 +1553,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
-             self.multipleLines == castObject.multipleLines)) ;
+             self.multipleLines == castObject.multipleLines));
 }
 
 @end
@@ -1633,7 +1633,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             (_defaultInterval == castObject.defaultInterval) &&
-            (_step == castObject.step)) ;
+            (_step == castObject.step));
 }
 
 @end

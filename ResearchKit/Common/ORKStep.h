@@ -113,13 +113,11 @@ ORK_CLASS_AVAILABLE
  
  This property may not be meaningful for all steps; for example, an active step
  might not provide a way to skip, because it requires a timer to finish.
- 
  */
 @property (nonatomic, getter=isOptional) BOOL optional;
 
 /**
  The primary text to display for the step in a localized string.
- 
  */
 @property (nonatomic, copy, nullable) NSString *title;
 
@@ -129,7 +127,6 @@ ORK_CLASS_AVAILABLE
  The additional text is displayed in a smaller font below `title`. If you need to display a
  long question, it can work well to keep the title short and put the additional content in
  the `text` property.
- 
  */
 @property (nonatomic, copy, nullable) NSString *text;
 

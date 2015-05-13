@@ -40,7 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  To use the consent sharing step, include it in a task and present that task
  with a task view controller. It's easy to incorporate a consent sharing step into the review flow, because it provides default content for its title, text, and answer format.
- 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKConsentSharingStep : ORKQuestionStep

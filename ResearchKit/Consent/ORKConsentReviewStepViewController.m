@@ -159,9 +159,9 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
     [self updateNavLeftBarButtonItem];
 }
 
-static NSString * const _NameFormIdentifier = @"nameForm";
-static NSString * const _GivenNameIdentifier = @"given";
-static NSString * const _FamilyNameIdentifier = @"family";
+static NSString *const _NameFormIdentifier = @"nameForm";
+static NSString *const _GivenNameIdentifier = @"given";
+static NSString *const _FamilyNameIdentifier = @"family";
 
 - (BOOL)currentLocalePresentsFamilyNameFirst {
     NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
@@ -456,12 +456,12 @@ static NSString * const _FamilyNameIdentifier = @"family";
     [self navigateDelta:-1];
 }
 
-static NSString * const _ORKCurrentSignatureRestoreKey = @"currentSignature";
-static NSString * const _ORKSignatureFirstRestoreKey = @"signatureFirst";
-static NSString * const _ORKSignatureLastRestoreKey = @"signatureLast";
-static NSString * const _ORKSignatureImageRestoreKey = @"signatureImage";
-static NSString * const _ORKDocumentReviewedRestoreKey = @"documentReviewed";
-static NSString * const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
+static NSString *const _ORKCurrentSignatureRestoreKey = @"currentSignature";
+static NSString *const _ORKSignatureFirstRestoreKey = @"signatureFirst";
+static NSString *const _ORKSignatureLastRestoreKey = @"signatureLast";
+static NSString *const _ORKSignatureImageRestoreKey = @"signatureImage";
+static NSString *const _ORKDocumentReviewedRestoreKey = @"documentReviewed";
+static NSString *const _ORKCurrentPageIndexRestoreKey = @"currentPageIndex";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

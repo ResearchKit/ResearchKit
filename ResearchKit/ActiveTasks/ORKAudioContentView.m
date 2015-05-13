@@ -200,7 +200,7 @@ static const CGFloat kValueLineMargin = 1.5;
 @end
 
 
-@interface ORKAudioContentView()
+@interface ORKAudioContentView ()
 
 @property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) UILabel *timerLabel;

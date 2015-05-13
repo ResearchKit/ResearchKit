@@ -93,7 +93,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg)) ;
+            (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg));
 }
 
 @end

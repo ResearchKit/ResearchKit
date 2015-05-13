@@ -36,7 +36,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Base class, not being used directly.
+ Base class, not being used directly.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTableViewCell : UITableViewCell

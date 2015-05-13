@@ -210,8 +210,8 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     }
 }
 
-static NSString * const _PageViewControllerRestorationKey = @"pageViewController";
-static NSString * const _ChildNavigationControllerRestorationKey = @"childNavigationController";
+static NSString *const _PageViewControllerRestorationKey = @"pageViewController";
+static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigationController";
 
 + (UIPageViewController *)pageViewController {
     UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
@@ -1207,19 +1207,19 @@ static NSString * const _ChildNavigationControllerRestorationKey = @"childNaviga
 
 #pragma mark - UIStateRestoring
 
-static NSString * const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
-static NSString * const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
-static NSString * const _ORKManagedResultsRestoreKey = @"managedResults";
-static NSString * const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
-static NSString * const _ORKHaveSetProgressLabelRestoreKey = @"haveSetProgressLabel";
-static NSString * const _ORKHasRequestedHealthDataRestoreKey = @"hasRequestedHealthData";
-static NSString * const _ORKRequestedHealthTypesForReadRestoreKey = @"requestedHealthTypesForRead";
-static NSString * const _ORKRequestedHealthTypesForWriteRestoreKey = @"requestedHealthTypesForWrite";
-static NSString * const _ORKOutputDirectoryRestoreKey = @"outputDirectory";
-static NSString * const _ORKLastBeginningInstructionStepIdentifierKey = @"lastBeginningInstructionStepIdentifier";
-static NSString * const _ORKTaskIdentifierRestoreKey = @"taskIdentifier";
-static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
-static NSString * const _ORKPresentedDate = @"presentedDate";
+static NSString *const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
+static NSString *const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
+static NSString *const _ORKManagedResultsRestoreKey = @"managedResults";
+static NSString *const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
+static NSString *const _ORKHaveSetProgressLabelRestoreKey = @"haveSetProgressLabel";
+static NSString *const _ORKHasRequestedHealthDataRestoreKey = @"hasRequestedHealthData";
+static NSString *const _ORKRequestedHealthTypesForReadRestoreKey = @"requestedHealthTypesForRead";
+static NSString *const _ORKRequestedHealthTypesForWriteRestoreKey = @"requestedHealthTypesForWrite";
+static NSString *const _ORKOutputDirectoryRestoreKey = @"outputDirectory";
+static NSString *const _ORKLastBeginningInstructionStepIdentifierKey = @"lastBeginningInstructionStepIdentifier";
+static NSString *const _ORKTaskIdentifierRestoreKey = @"taskIdentifier";
+static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
+static NSString *const _ORKPresentedDate = @"presentedDate";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKHealthQuantityTypeRecorder.h"
 #import "ORKHelpers.h"
 #import "ORKDataLogger.h"
@@ -35,7 +36,8 @@
 #import "ORKRecorder_Internal.h"
 #import "HKSample+ORKJSONDictionary.h"
 
-@interface ORKHealthQuantityTypeRecorder() {
+
+@interface ORKHealthQuantityTypeRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
     HKHealthStore *_healthStore;
@@ -49,7 +51,6 @@
 
 
 @implementation ORKHealthQuantityTypeRecorder
-
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                 healthQuantityType:(HKQuantityType *)quantityType
@@ -71,7 +72,6 @@
     return self;
 }
 
-
 - (void)dealloc {
     [_logger finishCurrentLog];
 }
@@ -85,7 +85,6 @@
     if (delegate && [delegate respondsToSelector:@selector(healthQuantityTypeRecorderDidUpdate:)]) {
         [delegate healthQuantityTypeRecorderDidUpdate:self];
     }
-    
 }
 
 static const NSInteger _HealthAnchoredQueryLimit = 100;
@@ -119,18 +118,14 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
             // Do another fetch immediately rather than wait for an observation
             [self doFetchNewData];
         }
-        
     });
-    
 }
-
 
 - (void)doFetchNewData {
     if (! _healthStore || ! _isRecording) {
         return;
     }
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
-    
     
     __weak typeof(self) weakSelf = self;
     HKAnchoredObjectQuery *anchoredQuery = [[HKAnchoredObjectQuery alloc]
@@ -153,11 +148,8 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [_healthStore executeQuery:anchoredQuery];
 }
 
-
 - (void)start {
-    
     [super start];
-    
     
     if (! _logger) {
         NSError *err = nil;
@@ -225,11 +217,9 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [_healthStore executeQuery:_observerQuery];
 }
 
-
 - (NSString *)recorderType {
     return _quantityType.identifier;
 }
-
 
 - (void)stop {
     if (! _isRecording) {
@@ -244,7 +234,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         fileUrl = logFileUrl;
     } error:&error];
-    
     
     [self reportFileResultWithFile:fileUrl error:error];
     
@@ -285,14 +274,16 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 @end
 
-@interface ORKHealthQuantityTypeRecorderConfiguration()
+
+@interface ORKHealthQuantityTypeRecorderConfiguration ()
+
 @end
+
 
 @implementation ORKHealthQuantityTypeRecorderConfiguration
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
 }
@@ -308,7 +299,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }
     return self;
 }
-
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
@@ -343,9 +333,8 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.quantityType, castObject.quantityType)&&
-            ORKEqualObjects(self.unit, castObject.unit)) ;
+            ORKEqualObjects(self.unit, castObject.unit));
 }
-
 
 - (NSSet *)requestedHealthKitTypesForReading {
     return [NSSet setWithObject:_quantityType];
