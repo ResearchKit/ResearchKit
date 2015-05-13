@@ -455,8 +455,8 @@
     }
 }
 
-static NSString * const _ORKFinishedRestoreKey = @"finished";
-static NSString * const _ORKRecorderResultsRestoreKey = @"recorderResults";
+static NSString *const _ORKFinishedRestoreKey = @"finished";
+static NSString *const _ORKRecorderResultsRestoreKey = @"recorderResults";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

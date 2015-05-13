@@ -32,6 +32,7 @@
 #import "HKSample+ORKJSONDictionary.h"
 #import "ORKHelpers.h"
 
+
 static NSString *const kHKSampleIdentifierKey = @"type"; // For compatibility with Health XML export
 static NSString *const kHKUUIDKey = @"uuid";
 static NSString *const kHKSampleStartDateKey = @"startDate";

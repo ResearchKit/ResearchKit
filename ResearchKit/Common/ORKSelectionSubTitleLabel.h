@@ -33,7 +33,7 @@
 
 
 /**
- *  Details text in selection question's choice cell.
+ Details text in selection question's choice cell.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKSelectionSubTitleLabel : ORKLabel

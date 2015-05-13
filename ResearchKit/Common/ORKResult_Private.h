@@ -81,7 +81,7 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-@interface ORKQuestionResult()
+@interface ORKQuestionResult ()
 
 // Used internally for unit testing.
 + (nullable Class)answerClass;

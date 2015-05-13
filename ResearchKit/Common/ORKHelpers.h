@@ -228,8 +228,6 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
+#define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
-
-#define ORKDefineStringKey(x) static NSString * const x = @STRINGIFY(x)
-

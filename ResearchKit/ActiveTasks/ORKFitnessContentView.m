@@ -40,7 +40,7 @@
 // #define LAYOUT_TEST 1
 // #define LAYOUT_DEBUG 1
 
-@interface ORKFitnessContentView() {
+@interface ORKFitnessContentView () {
     ORKQuantityLabel *_timerLabel;
     ORKQuantityPairView *_quantityPairView;
     UIView *_imageSpacer1;

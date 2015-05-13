@@ -35,7 +35,7 @@
 
 
 /**
- *  Answer's text field.
+ Answer's text field.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKAnswerTextField : UITextField <ORKDefaultFont>

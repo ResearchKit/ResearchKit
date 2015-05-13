@@ -100,7 +100,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 @end
 
 
-@interface ORKSpatialSpanMemoryStepViewController() <ORKSpatialSpanMemoryGameViewDelegate>
+@interface ORKSpatialSpanMemoryStepViewController () <ORKSpatialSpanMemoryGameViewDelegate>
 
 @end
 
@@ -154,7 +154,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.gameView.delegate = self;
     self.activeStepView.activeCustomView = _contentView;
     self.activeStepView.stepViewFillsAvailableSpace = NO;
-    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForScreenType(ORKScreenMetricMinimumStepHeaderHeightForMemoryGame, ORKGetScreenTypeForWindow(self.view.window));
+    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForMemoryGame, self.view.window);
     
     [self resetUI];
     

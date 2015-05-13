@@ -58,8 +58,8 @@
         }
         
         _orkSeparatorColor = defaultSeparatorColor;
-        _topSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
-        _bottomSeparatorLeftInset = ORKTableViewCellLeftMargin(self);
+        _topSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
+        _bottomSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
         
         _topSeparator = [UIView new];
         _bottomSeparator = [UIView new];
@@ -72,10 +72,10 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     if (self.topSeparatorLeftInset > 0) {
-        self.topSeparatorLeftInset = ORKStandardMarginForView(self);
+        self.topSeparatorLeftInset = ORKStandardHorizMarginForView(self);
     }
     if (self.bottomSeparatorLeftInset > 0) {
-        self.bottomSeparatorLeftInset = ORKStandardMarginForView(self);
+        self.bottomSeparatorLeftInset = ORKStandardHorizMarginForView(self);
     }
 }
 

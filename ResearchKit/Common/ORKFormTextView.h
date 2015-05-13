@@ -33,7 +33,7 @@
 
 
 /**
- *  Text view for use in forms
+ Text view for use in forms
  */
 ORK_CLASS_AVAILABLE
 @interface ORKFormTextView : ORKAnswerTextView

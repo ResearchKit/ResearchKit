@@ -259,24 +259,24 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - Predefined
 
-static NSString * const ORKInstruction0StepIdentifier = @"instruction";
-static NSString * const ORKInstruction1StepIdentifier = @"instruction1";
-static NSString * const ORKCountdownStepIdentifier = @"countdown";
-static NSString * const ORKAudioStepIdentifier = @"audio";
-static NSString * const ORKTappingStepIdentifier = @"tapping";
-static NSString * const ORKConclusionStepIdentifier = @"conclusion";
-static NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-static NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
-static NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-static NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
-static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
-static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-static NSString * const ORKAudioRecorderIdentifier = @"audio";
-static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
-static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
-static NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
-static NSString * const ORKLocationRecorderIdentifier = @"location";
-static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
+static NSString *const ORKInstruction0StepIdentifier = @"instruction";
+static NSString *const ORKInstruction1StepIdentifier = @"instruction1";
+static NSString *const ORKCountdownStepIdentifier = @"countdown";
+static NSString *const ORKAudioStepIdentifier = @"audio";
+static NSString *const ORKTappingStepIdentifier = @"tapping";
+static NSString *const ORKConclusionStepIdentifier = @"conclusion";
+static NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+static NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
+static NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+static NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
+static NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
+static NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+static NSString *const ORKAudioRecorderIdentifier = @"audio";
+static NSString *const ORKAccelerometerRecorderIdentifier = @"accelerometer";
+static NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
+static NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
+static NSString *const ORKLocationRecorderIdentifier = @"location";
+static NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -417,7 +417,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         step.title = shortSpeechInstruction ? : ORKLocalizedString(@"AUDIO_INSTRUCTION", nil);
         step.recorderConfigurations = @[[[ORKAudioRecorderConfiguration alloc] initWithIdentifier:ORKAudioRecorderIdentifier
                                                                                  recorderSettings:recordingSettings]];
-        step.duration = duration;
+        step.stepDuration = duration;
         step.shouldContinueOnFinish = YES;
         
         ORKStepArrayAddStep(steps, step);
@@ -516,7 +516,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             fitnessStep.title = [NSString stringWithFormat:ORKLocalizedString(@"FITNESS_WALK_INSTRUCTION_FORMAT", nil), [formatter stringFromTimeInterval:walkDuration]];
             fitnessStep.spokenInstruction = fitnessStep.title;
             fitnessStep.recorderConfigurations = recorderConfigurations;
-            fitnessStep.shouldShowDefaultTimer = NO;
             fitnessStep.shouldContinueOnFinish = YES;
             fitnessStep.optional = NO;
             fitnessStep.shouldStartTimerAutomatically = YES;
@@ -548,7 +547,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             stillStep.title = [NSString stringWithFormat:ORKLocalizedString(@"FITNESS_SIT_INSTRUCTION_FORMAT", nil), [formatter stringFromTimeInterval:restDuration]];
             stillStep.spokenInstruction = stillStep.title;
             stillStep.recorderConfigurations = recorderConfigurations;
-            stillStep.shouldShowDefaultTimer = NO;
             stillStep.shouldContinueOnFinish = YES;
             stillStep.optional = NO;
             stillStep.shouldStartTimerAutomatically = YES;
@@ -629,7 +627,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             walkingStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_OUTBOUND_INSTRUCTION_FORMAT", nil), (long long)numberOfStepsPerLeg];
             walkingStep.spokenInstruction = walkingStep.title;
             walkingStep.recorderConfigurations = recorderConfigurations;
-            walkingStep.shouldShowDefaultTimer = NO;
             walkingStep.shouldContinueOnFinish = YES;
             walkingStep.optional = NO;
             walkingStep.shouldStartTimerAutomatically = YES;
@@ -659,7 +656,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             walkingStep.title = [NSString stringWithFormat:ORKLocalizedString(@"WALK_RETURN_INSTRUCTION_FORMAT", nil), (long long)numberOfStepsPerLeg];
             walkingStep.spokenInstruction = walkingStep.title;
             walkingStep.recorderConfigurations = recorderConfigurations;
-            walkingStep.shouldShowDefaultTimer = NO;
             walkingStep.shouldContinueOnFinish = YES;
             walkingStep.shouldStartTimerAutomatically = YES;
             walkingStep.optional = NO;
@@ -688,7 +684,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             activeStep.spokenInstruction = [NSString stringWithFormat:ORKLocalizedString(@"WALK_STAND_VOICE_INSTRUCTION_FORMAT", nil), durationString];
             activeStep.shouldStartTimerAutomatically = YES;
             activeStep.stepDuration = restDuration;
-            activeStep.shouldShowDefaultTimer = NO;
             activeStep.shouldContinueOnFinish = YES;
             activeStep.optional = NO;
             activeStep.shouldVibrateOnStart = YES;

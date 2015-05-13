@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKDataLogger;
 
-@interface ORKRecorderConfiguration()
+@interface ORKRecorderConfiguration ()
 
 @end
 

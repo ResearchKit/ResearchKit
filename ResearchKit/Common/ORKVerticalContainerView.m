@@ -34,8 +34,6 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-#define DEF_KEY(x) static NSString * const x = @STRINGIFY(x)
-
 ORKDefineStringKey(_TopToIllustrationConstraintKey);
 ORKDefineStringKey(_IllustrationHeightConstraintKey);
 ORKDefineStringKey(_StepViewToContinueKey);
@@ -72,7 +70,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self)};
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
         self.layoutMargins = layoutMargins;
         _screenType = ORKScreenTypeiPhone4;
         _scrollContainer = [UIView new];
@@ -380,8 +378,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     [NSLayoutConstraint deactivateConstraints:[_scrollContainer constraints]];
     [NSLayoutConstraint deactivateConstraints:[_container constraints]];
     [NSLayoutConstraint deactivateConstraints:[_stepViewContainer constraints]];
@@ -576,6 +572,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self updateCustomViewContainerConstraints];
     [self updateStepViewContainerConstraints];
     [self updateConstraintConstants];
+    
+    [super updateConstraints];
 }
 
 - (void)updateStepViewContainerConstraints {

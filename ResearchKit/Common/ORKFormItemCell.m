@@ -257,8 +257,6 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     CGFloat labelMinWidth = self.maxLabelWidth;
     CGFloat boundWidth = self.expectedLayoutWidth;
     
@@ -318,7 +316,9 @@ static const CGFloat kHMargin = 15.0;
     
     
     
-    [self.contentView addConstraints: self.myConstraints];
+    [self.contentView addConstraints:self.myConstraints];
+    
+    [super updateConstraints];
 }
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {

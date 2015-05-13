@@ -33,7 +33,7 @@
 
 
 /**
- *  Text label for units during numeric value entry
+ Text label for units during numeric value entry
  */
 ORK_CLASS_AVAILABLE
 @interface ORKUnitLabel : ORKLabel

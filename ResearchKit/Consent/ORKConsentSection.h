@@ -142,7 +142,6 @@ typedef NS_ENUM(NSInteger, ORKConsentSectionType) {
  avoid any prepopulation.
  
  If you provide content for the `ORKConsentSection` object, be sure to use localized content.
- 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKConsentSection : NSObject <NSSecureCoding, NSCopying>
@@ -176,7 +175,6 @@ ORK_CLASS_AVAILABLE
  The formal title of the section in a localized string, for use in the legal document.
  
  If the value of this property is `nil`, the value of `title` is used in the legal document instead.
- 
  */
 @property (nonatomic, copy, nullable) NSString *formalTitle;
 

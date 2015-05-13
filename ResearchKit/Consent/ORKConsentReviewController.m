@@ -38,14 +38,13 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-@interface ORKConsentReviewController()<UIWebViewDelegate>
+@interface ORKConsentReviewController () <UIWebViewDelegate>
 
 @end
 
 
 @implementation ORKConsentReviewController {
     UIToolbar *_toolbar;
-    NSLayoutConstraint *_toolbarHeightConstraint;
     NSString *_htmlString;
 }
 
@@ -73,35 +72,51 @@
     
     _webView = [UIWebView new];
     [_webView loadHTMLString:_htmlString baseURL:ORKCreateRandomBaseURL()];
-    _webView.scrollView.bounces = NO;
+    _webView.backgroundColor = ORKColor(ORKBackgroundColorKey);
+    _webView.scrollView.backgroundColor = ORKColor(ORKBackgroundColorKey);
     _webView.delegate = self;
     [_webView setClipsToBounds:YES];
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     _toolbar.translatesAutoresizingMaskIntoConstraints = NO;
     _toolbar.translucent = YES;
-    
+
+    const CGFloat horizMargin = ORKStandardHorizMarginForView(self.view);
+    _webView.clipsToBounds = NO;
+    _webView.scrollView.clipsToBounds = NO;
+    _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
+
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
-    NSDictionary *dict = NSDictionaryOfVariableBindings(_webView, _toolbar);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|"
-                                                                      options:(NSLayoutFormatOptions)0
-                                                                      metrics:nil views:dict]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0
-                                                                      metrics:nil views:dict]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0 metrics:nil views:dict]];
+    [self setupConstraints];
+}
+
+- (void)setupConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     
-    _toolbarHeightConstraint = [NSLayoutConstraint constraintWithItem:_toolbar
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
+    const CGFloat horizMargin = ORKStandardHorizMarginForView(self.view);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
+                                                                      options:(NSLayoutFormatOptions)0
+                                                                      metrics:@{ @"horizMargin": @(horizMargin) }
+                                                                        views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
+                                                                      options:(NSLayoutFormatOptions)0
+                                                                      metrics:nil
+                                                                        views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
+                                                                      options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                        views:views]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
                                                             attribute:NSLayoutAttributeHeight
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:nil
                                                             attribute:NSLayoutAttributeNotAnAttribute
-                                                           multiplier:1
-                                                             constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4) ];
-    [self.view addConstraint:_toolbarHeightConstraint];
-
+                                                           multiplier:1.0
+                                                         constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4)]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (IBAction)cancel {

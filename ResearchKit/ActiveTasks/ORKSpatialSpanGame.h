@@ -37,7 +37,6 @@
  
  A game consists of a subset of a permutation of the integers [0 .. gameSize-1],
  which represent the sequence of targets that should be tapped.
- 
  */
 @interface ORKSpatialSpanGame : NSObject
 

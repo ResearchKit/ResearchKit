@@ -33,6 +33,8 @@
 #import "ORKSkin.h"
 #import "ORKSelectionTitleLabel.h"
 
+#import <UIKit/UIGestureRecognizerSubclass.h>
+
 
 @protocol ORKSignatureGestureRecognizerDelegate <NSObject>
 
@@ -53,6 +55,7 @@
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateBegan;
     [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
@@ -61,17 +64,21 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateEnded;
     [self.eventDelegate gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event];
 }
 
-- (BOOL)shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // Disable swipe gestureRecognizer
-    if ([otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
-        // Cancel the gesture recognition in progress.
-        otherGestureRecognizer.enabled = NO;
-        otherGestureRecognizer.enabled = YES;
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateFailed;
+}
+
+- (BOOL)shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    // Prioritize over scrollView's pan gesture recognizer and swipe gesture recognizer
+    if ([otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]
+        || [otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
+        return YES;
     }
-    return YES;
+    return NO;
 }
 
 @end
@@ -80,7 +87,7 @@
 static const CGFloat kPointMinDistance = 5;
 static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
 
-@interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate>{
+@interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate> {
     CGPoint currentPoint;
     CGPoint previousPoint1;
     CGPoint previousPoint2;
@@ -114,15 +121,15 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                         multiplier:1
-                                                          constant:156]];
+                                                          constant:ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, self.window)]];
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                            attribute:NSLayoutAttributeWidth
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1
-                                                                            constant:10000];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel-5;
+                                                                          multiplier:1.0
+                                                                            constant:10000.0];
+        widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
         [self addConstraint:widthConstraint];
     }
     return self;

@@ -35,7 +35,7 @@
 @interface ORKActiveStep ()
 
 /**
- * Convenience methods.
+ Convenience methods.
  */
 - (BOOL)startsFinished;
 - (BOOL)hasCountDown;

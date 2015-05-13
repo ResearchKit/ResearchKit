@@ -71,6 +71,7 @@
 
 - (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
+    [self setNeedsLayout];
 }
 
 - (void)setVertical:(BOOL)vertical {
@@ -109,7 +110,7 @@
 - (CGSize)intrinsicContentSize {
     CGSize intrinsicContentSize = [super intrinsicContentSize];
     // If we have a layout width provided by our delegate and we are vertical, use the provided
-    // width for the instrinsic content height, and leave the intrinsic content width alone.
+    // width for the intrinsic content height, and leave the intrinsic content width alone.
     // The intrinsic content width is typically -1, which will allow the slider to fill the
     // available width in the superview.
     CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
