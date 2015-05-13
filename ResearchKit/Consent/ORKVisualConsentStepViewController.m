@@ -181,8 +181,7 @@
     //_pageViewController.dataSource = self;
     _pageViewController.delegate = self;
     
-    
-    [[self scrollView] setBounces:NO];
+    [self scrollView].bounces = NO;
     
     if ([_pageViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
         _pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
@@ -250,7 +249,7 @@
 }
 
 - (void)updateBackButton {
-    if (! _hasAppeared) {
+    if (!_hasAppeared) {
         return;
     }
     
@@ -345,14 +344,14 @@
     return nil;
 }
 
-- (void)doShowViewController:(ORKConsentSceneViewController *)viewController direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated semaphore:(dispatch_semaphore_t)sem {
+- (void)doShowViewController:(ORKConsentSceneViewController *)viewController direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated semaphore:(dispatch_semaphore_t)semaphore {
     
-    UIView *pvcView = self.pageViewController.view;
-    pvcView.userInteractionEnabled = NO;
+    UIView *pageViewControllerView = self.pageViewController.view;
+    pageViewControllerView.userInteractionEnabled = NO;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        pvcView.userInteractionEnabled = YES;
+        pageViewControllerView.userInteractionEnabled = YES;
         if (animated) {
-            dispatch_semaphore_signal(sem);
+            dispatch_semaphore_signal(semaphore);
         }
     }];
 }
@@ -418,7 +417,7 @@
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
-    if (! viewController) {
+    if (!viewController) {
         return;
     }
     
@@ -476,7 +475,7 @@
     
     UIPageViewControllerNavigationDirection direction = forward?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
     
-    if (! url) {
+    if (!url) {
         [self doShowViewController:viewController direction:direction animated:animated semaphore:semaphore];
     }
     
@@ -496,12 +495,12 @@
             if (url && transitionBeforeAnimate) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     animator = [strongSelf doAnimateFromViewController:fromController
-                                                           toController:viewController
-                                                              direction:direction
-                                                              semaphore:semaphore
-                                                                    url:url
-                                                animateBeforeTransition:animateBeforeTransition
-                                                transitionBeforeAnimate:transitionBeforeAnimate];
+                                                          toController:viewController
+                                                             direction:direction
+                                                             semaphore:semaphore
+                                                                   url:url
+                                               animateBeforeTransition:animateBeforeTransition
+                                               transitionBeforeAnimate:transitionBeforeAnimate];
                 });
             }
             
@@ -527,15 +526,15 @@
                 [self doShowViewController:viewController direction:direction animated:YES semaphore:semaphore];
             } else {
                 [self doAnimateFromViewController:fromController
-                                      toController:viewController
-                                         direction:direction
-                                         semaphore:semaphore
-                                               url:url
-                           animateBeforeTransition:animateBeforeTransition
-                           transitionBeforeAnimate:transitionBeforeAnimate];
+                                     toController:viewController
+                                        direction:direction
+                                        semaphore:semaphore
+                                              url:url
+                          animateBeforeTransition:animateBeforeTransition
+                          transitionBeforeAnimate:transitionBeforeAnimate];
             }
         } else {
-            // No animation - complete now.
+            // No video animation URL, just a regular push transition animation. Signal semaphore now.
             viewController.imageHidden = NO;
             dispatch_semaphore_signal(semaphore);
         }
