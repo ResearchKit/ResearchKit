@@ -194,7 +194,7 @@
     
     NSInteger index = (button == _tappingContentView.tapButton1) ? ORKTappingButtonIdentifierLeft : ORKTappingButtonIdentifierRight;
     
-    [self receiveTouch:[[event touchesForView:button] anyObject] onButton:index] ;
+    [self receiveTouch:[[event touchesForView:button] anyObject] onButton:index];
 }
 
 #pragma mark UIGestureRecognizerDelegate

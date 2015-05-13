@@ -65,7 +65,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     return string;
 }
 
-@interface ORKHealthKitCharacteristicTypeAnswerFormat()
+@interface ORKHealthKitCharacteristicTypeAnswerFormat ()
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -112,7 +112,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.characteristicType, castObject.characteristicType)) ;
+            ORKEqualObjects(self.characteristicType, castObject.characteristicType));
 }
 
 - (NSUInteger)hash {
@@ -186,7 +186,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 @end
 
 
-@interface ORKHealthKitQuantityTypeAnswerFormat()
+@interface ORKHealthKitQuantityTypeAnswerFormat ()
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
@@ -238,7 +238,7 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     return (isParentSame &&
             ORKEqualObjects(self.quantityType, castObject.quantityType) &&
             ORKEqualObjects(self.unit, castObject.unit) &&
-            (_numericAnswerStyle == castObject.numericAnswerStyle)) ;
+            (_numericAnswerStyle == castObject.numericAnswerStyle));
 }
 
 - (NSUInteger)hash {

@@ -33,6 +33,7 @@
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKRecorder.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKStep;
@@ -105,7 +106,6 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  */
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(nullable NSError *)error;
 
-
 /**
  Tells the delegate when a recorder error has been detected during the step.
  
@@ -119,7 +119,6 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
 - (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
 @optional
-
 /**
  Tells the delegate that the step view controller's view is about to appear.
  
@@ -156,6 +155,7 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController;
 
 @end
+
 
 /**
  The `ORKStepViewController` class is a base class for view controllers that are

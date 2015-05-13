@@ -261,24 +261,24 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - Predefined
 
-static NSString * const ORKInstruction0StepIdentifier = @"instruction";
-static NSString * const ORKInstruction1StepIdentifier = @"instruction1";
-static NSString * const ORKCountdownStepIdentifier = @"countdown";
-static NSString * const ORKAudioStepIdentifier = @"audio";
-static NSString * const ORKTappingStepIdentifier = @"tapping";
-static NSString * const ORKConclusionStepIdentifier = @"conclusion";
-static NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-static NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
-static NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-static NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
-static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
-static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-static NSString * const ORKAudioRecorderIdentifier = @"audio";
-static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
-static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
-static NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
-static NSString * const ORKLocationRecorderIdentifier = @"location";
-static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
+static NSString *const ORKInstruction0StepIdentifier = @"instruction";
+static NSString *const ORKInstruction1StepIdentifier = @"instruction1";
+static NSString *const ORKCountdownStepIdentifier = @"countdown";
+static NSString *const ORKAudioStepIdentifier = @"audio";
+static NSString *const ORKTappingStepIdentifier = @"tapping";
+static NSString *const ORKConclusionStepIdentifier = @"conclusion";
+static NSString *const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+static NSString *const ORKFitnessRestStepIdentifier = @"fitness.rest";
+static NSString *const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+static NSString *const ORKShortWalkReturnStepIdentifier = @"walking.return";
+static NSString *const ORKShortWalkRestStepIdentifier = @"walking.rest";
+static NSString *const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+static NSString *const ORKAudioRecorderIdentifier = @"audio";
+static NSString *const ORKAccelerometerRecorderIdentifier = @"accelerometer";
+static NSString *const ORKPedometerRecorderIdentifier = @"pedometer";
+static NSString *const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
+static NSString *const ORKLocationRecorderIdentifier = @"location";
+static NSString *const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
     

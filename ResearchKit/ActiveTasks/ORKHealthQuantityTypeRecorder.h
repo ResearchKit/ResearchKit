@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKRecorder.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,10 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKHealthQuantityTypeRecorderDelegate <ORKRecorderDelegate>
 
 @optional
-
 - (void)healthQuantityTypeRecorderDidUpdate:(ORKHealthQuantityTypeRecorder *)healthQuantityTypeRecorder;
 
 @end
+
 
 /**
  The `ORKHealthQuantityTypeRecorder` class represents a recorder for collecting real time sample data from HealthKit, such as heart rate, during
@@ -50,7 +52,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKHealthQuantityTypeRecorder : ORKRecorder
 
 @property (nonatomic, copy, readonly) HKQuantityType *quantityType;
+
 @property (nonatomic, copy, readonly) HKUnit *unit;
+
 @property (nonatomic, copy, readonly, nullable) HKQuantitySample *lastSample;
 
 /**

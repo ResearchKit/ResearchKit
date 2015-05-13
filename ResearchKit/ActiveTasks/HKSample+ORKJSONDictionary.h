@@ -32,6 +32,7 @@
 #import <HealthKit/HealthKit.h>
 #import <ResearchKit/ResearchKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSInteger, ORKSampleJSONOptions) {

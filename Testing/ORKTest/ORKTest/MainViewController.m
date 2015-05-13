@@ -38,21 +38,21 @@
 #import "AppDelegate.h"
 
 
-static NSString * const DatePickingTaskIdentifier = @"dates_001";
-static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
-static NSString * const ActiveStepTaskIdentifier = @"tid_002";
-static NSString * const ConsentReviewTaskIdentifier = @"consent-review";
-static NSString * const ConsentTaskIdentifier = @"consent";
-static NSString * const MiniFormTaskIdentifier = @"miniform";
-static NSString * const ScreeningTaskIdentifier = @"screening";
-static NSString * const ScalesTaskIdentifier = @"scales";
-static NSString * const ImageChoicesTaskIdentifier = @"images";
-static NSString * const AudioTaskIdentifier = @"audio";
-static NSString * const FitnessTaskIdentifier = @"fitness";
-static NSString * const GaitTaskIdentifier = @"gait";
-static NSString * const MemoryTaskIdentifier = @"memory";
-static NSString * const DynamicTaskIdentifier = @"dynamic_task";
-static NSString * const TwoFingerTapTaskIdentifier = @"tap";
+static NSString *const DatePickingTaskIdentifier = @"dates_001";
+static NSString *const SelectionSurveyTaskIdentifier = @"tid_001";
+static NSString *const ActiveStepTaskIdentifier = @"tid_002";
+static NSString *const ConsentReviewTaskIdentifier = @"consent-review";
+static NSString *const ConsentTaskIdentifier = @"consent";
+static NSString *const MiniFormTaskIdentifier = @"miniform";
+static NSString *const ScreeningTaskIdentifier = @"screening";
+static NSString *const ScalesTaskIdentifier = @"scales";
+static NSString *const ImageChoicesTaskIdentifier = @"images";
+static NSString *const AudioTaskIdentifier = @"audio";
+static NSString *const FitnessTaskIdentifier = @"fitness";
+static NSString *const GaitTaskIdentifier = @"gait";
+static NSString *const MemoryTaskIdentifier = @"memory";
+static NSString *const DynamicTaskIdentifier = @"dynamic_task";
+static NSString *const TwoFingerTapTaskIdentifier = @"tap";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {

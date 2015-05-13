@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKDeviceMotionRecorder.h"
 #import "ORKHelpers.h"
 #import "ORKRecorder_Internal.h"
@@ -36,11 +37,13 @@
 #import <CoreMotion/CoreMotion.h>
 #import "CMDeviceMotion+ORKJSONDictionary.h"
 
-@interface ORKDeviceMotionRecorder() {
+
+@interface ORKDeviceMotionRecorder () {
     ORKDataLogger *_logger;
 }
 
 @property (nonatomic, strong) CMMotionManager *motionManager;
+
 @property (nonatomic) NSTimeInterval uptime;
 
 @end
@@ -48,11 +51,10 @@
 
 @implementation ORKDeviceMotionRecorder
 
-
 - (instancetype)initWithIdentifier:(NSString *)identifier
                          frequency:(double)frequency
-                             step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory {
+                              step:(ORKStep *)step
+                   outputDirectory:(NSURL *)outputDirectory {
     self = [super initWithIdentifier:identifier
                                 step:step
                      outputDirectory:outputDirectory];
@@ -62,7 +64,6 @@
     }
     return self;
 }
-
 
 - (void)dealloc {
     [_logger finishCurrentLog];
@@ -81,7 +82,6 @@
 }
 
 - (void)start {
-    
     [super start];
     
     if (! _logger) {
@@ -118,11 +118,9 @@
      }];
 }
 
-
 - (NSString *)recorderType {
     return @"deviceMotion";
 }
-
 
 - (void)stop {
     [self doStopRecording];
@@ -168,7 +166,8 @@
 @end
 
 
-@interface ORKDeviceMotionRecorderConfiguration()
+@interface ORKDeviceMotionRecorderConfiguration ()
+
 @end
 
 
@@ -176,7 +175,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
 }
@@ -188,7 +186,6 @@
     }
     return self;
 }
-
 #pragma clang diagnostic pop
 
 - (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
@@ -220,7 +217,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.frequency == castObject.frequency)) ;
+            (self.frequency == castObject.frequency));
 }
 
 - (ORKPermissionMask)requestedPermissionMask {

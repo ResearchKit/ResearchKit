@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLocationRecorder.h"
 #import <CoreLocation/CoreLocation.h>
 #import "CLLocation+ORKJSONDictionary.h"
@@ -35,12 +36,15 @@
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
 
-@interface ORKLocationRecorder() <CLLocationManagerDelegate> {
+
+@interface ORKLocationRecorder () <CLLocationManagerDelegate> {
     ORKDataLogger *_logger;
     NSError *_recordingError;
     BOOL _started;
 }
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
 @property (nonatomic) NSTimeInterval uptime;
 
 @end
@@ -109,7 +113,6 @@
     [self doStopRecording];
     [_logger finishCurrentLog];
     
-    
     NSError *error = _recordingError;
     _recordingError = nil;
     __block NSURL *fileUrl = nil;
@@ -159,7 +162,6 @@
     _logger = nil;
 }
 
-
 - (NSString *)mimeType {
     return @"application/json";
 }
@@ -167,8 +169,10 @@
 @end
 
 
-@interface ORKLocationRecorderConfiguration()
+@interface ORKLocationRecorderConfiguration ()
+
 @end
+
 
 @implementation ORKLocationRecorderConfiguration
 
@@ -189,13 +193,11 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     return isParentSame;
 }
-
 
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionCoreLocation;
