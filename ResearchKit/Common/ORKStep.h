@@ -144,6 +144,19 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, weak, nullable) id<ORKTask> task;
 
 /**
+ The set of access permissions required for the step. (read-only)
+ 
+ The permission mask is used by the task view controller to determine the types of
+ access to request from users when they complete the initial instruction steps
+ in a task. If your step requires access to APIs that limit access, include
+ the permissions you require in this mask.
+ 
+ By default, the property scans the recorders and collates the permissions
+ required by the recorders. Subclasses may override this implementation.
+ */
+@property (nonatomic, readonly) ORKPermissionMask requestedPermissions;
+
+/**
  Checks the parameters of the step and throws exceptions on invalid parameters.
  
  This method is called when there is a need to validate the step's parameters, which is typically the case

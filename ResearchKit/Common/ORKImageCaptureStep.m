@@ -79,4 +79,9 @@
                         && self.shouldUsePercentageBasedTemplateImageInsets==castObject.shouldUsePercentageBasedTemplateImageInsets;
 }
 
+- (ORKPermissionMask)requestedPermissions {
+    ORKPermissionMask mask = [super requestedPermissions];
+    return mask | ORKPermissionCamera;
+}
+
 @end

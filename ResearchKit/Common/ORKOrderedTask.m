@@ -211,9 +211,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (ORKPermissionMask)requestedPermissions {
     ORKPermissionMask mask = ORKPermissionNone;
     for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKActiveStep class]]) {
-            mask |= [(ORKActiveStep *)step requestedPermissions];
-        }
+        mask |= [step requestedPermissions];
     }
     return mask;
 }

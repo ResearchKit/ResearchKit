@@ -135,4 +135,8 @@
     
 }
 
+- (ORKPermissionMask)requestedPermissions {
+    return ORKPermissionNone;
+}
+
 @end
