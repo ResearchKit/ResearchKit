@@ -12,7 +12,6 @@
 
 @implementation ORKDeviceMotionReactionTimeStimulusView {
     
-    CAShapeLayer *_concealLayer;
     CAShapeLayer *_tickLayer;
     CAShapeLayer *_crossLayer;
 }
@@ -23,30 +22,12 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     self = [super init];
     if (self) {
         self.layer.cornerRadius = RoundReactionTimeViewDiameter * 0.5;
-        [self addConcealLayer];
     }
     return self;
 }
 
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(RoundReactionTimeViewDiameter, RoundReactionTimeViewDiameter);
-}
-
-- (void)startReadyAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
-    [_tickLayer removeFromSuperlayer];
-    [_crossLayer removeFromSuperlayer];
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:completion];
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.delegate = self;
-    animation.duration = duration*2;
-    animation.removedOnCompletion = NO;
-    animation.values = @[@(1.0), @(0.0), @(0.0)];
-    animation.keyTimes =  @[@(0.0), @(0.5), @(1.0)];
-    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-    animation.fillMode = kCAFillModeForwards;
-    [_concealLayer addAnimation:animation forKey:@"drawCircleAnimation"];
-    [CATransaction commit];
 }
 
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
@@ -67,7 +48,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 
 
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
-    [self hideStimulus:true];
+    [self setStimulusHidden:true];
     [self addCrossLayer];
     [CATransaction begin];
     [CATransaction setCompletionBlock:completion];
@@ -81,28 +62,20 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     [CATransaction commit];
 }
 
-- (void)hideStimulus: (BOOL) hidden {
+- (void)setStimulusHidden: (BOOL) hidden {
     self.layer.backgroundColor = hidden ? [UIColor clearColor].CGColor : self.tintColor.CGColor;
-}
-
-- (void)addConcealLayer {
-    CGFloat radius = RoundReactionTimeViewDiameter * 0.5;
-    _concealLayer = [CAShapeLayer layer];
-    _concealLayer.path = [self concealPath:radius];
-    _concealLayer.fillColor = [UIColor clearColor].CGColor;
-    _concealLayer.strokeColor = [UIColor whiteColor].CGColor;
-    _concealLayer.lineWidth = radius + 1;
-    [self.layer addSublayer:_concealLayer];
 }
 
 - (void)addCrossLayer {
      _crossLayer =  [self lineDrawingLayer];
+    _crossLayer.strokeColor = [UIColor redColor].CGColor;
     _crossLayer.path = [self crossPath];
     [self.layer addSublayer:_crossLayer];
 }
 
 - (void)addTickLayer {
     _tickLayer =  [self lineDrawingLayer];
+    _tickLayer.strokeColor = [UIColor whiteColor].CGColor;
     _tickLayer.path = [self tickPath];
     [self.layer addSublayer:_tickLayer];
 }
@@ -125,10 +98,10 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 
 - (CGPathRef)crossPath {
     UIBezierPath *path = [self linePath];
-    [path moveToPoint:(CGPoint){37,78}];
-    [path addLineToPoint:(CGPoint){87,42}];
-    [path moveToPoint:(CGPoint){87,78}];
-    [path addLineToPoint:(CGPoint){37,42}];
+    [path moveToPoint:(CGPoint){45,78}];
+    [path addLineToPoint:(CGPoint){82,42}];
+    [path moveToPoint:(CGPoint){45,42}];
+    [path addLineToPoint:(CGPoint){82,78}];
     return path.CGPath;
 }
 
@@ -146,7 +119,6 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     shapeLayer.lineCap = kCALineCapRound;
     shapeLayer.lineJoin = kCALineJoinRound;
     shapeLayer.frame = self.layer.bounds;
-    shapeLayer.strokeColor = [UIColor blackColor].CGColor;
     shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
     shapeLayer.fillColor = nil;
     return shapeLayer;

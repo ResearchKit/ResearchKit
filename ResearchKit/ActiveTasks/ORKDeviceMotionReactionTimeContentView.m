@@ -16,8 +16,6 @@
 
 @property (nonatomic, strong) ORKDeviceMotionReactionTimeStimulusView *stimulusView;
 
-@property (nonatomic,strong) ORKNavigationContainerView *continueView;
-
 @end
 
 @implementation ORKDeviceMotionReactionTimeContentView {
@@ -28,61 +26,53 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
-        self.continueView = [ORKNavigationContainerView new];
-        
-        self.stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.continueView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        self.stimulusView.backgroundColor = self.tintColor;
-        
-        [self addSubview:_stimulusView];
-        [self addSubview:_continueView];
-        
-        _continueView.continueEnabled = YES;
-        _continueView.bottomMargin = 20;
-        
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self setNeedsUpdateConstraints];
+        [self addStimulusView];
     }
     return  self;
 }
 
-- (void)startReadyAnimationWithDuration:(NSTimeInterval)duration completion: (void(^)(void)) completion {
-    [_stimulusView startReadyAnimationWithDuration:duration completion:completion];
-}
-
-- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion: (void (^)(void)) completion {
+- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion {
     [_stimulusView startSuccessAnimationWithDuration:duration completion:completion];
 }
 
-- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion: (void (^ __nullable)(void)) completion {
+- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion {
     [_stimulusView startFailureAnimationWithDuration:duration completion:completion];
 }
 
-- (void)setButtonItem:(UIBarButtonItem *)buttonItem {
-    _continueView.continueButtonItem = buttonItem;
+- (void)resetAfterDelay:(NSTimeInterval)delay completion: (nullable void (^)(void))completion {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self removeConstraints];
+        [_stimulusView removeFromSuperview];
+        [self addStimulusView];
+        [_stimulusView setStimulusHidden:true];
+        completion();
+    });
+}
+
+- (void)addStimulusView {
+    _stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
+    _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
+    _stimulusView.backgroundColor = self.tintColor;
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_stimulusView];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)setStimulusHidden:(BOOL)hidden {
-    [_stimulusView hideStimulus:hidden];
+    [_stimulusView setStimulusHidden:hidden];
 }
 
-- (void)setReadyHidden:(BOOL)hidden {
-    _continueView.hidden = hidden;
-}
-
-- (void)updateConstraints {
+- (void)removeConstraints {
     if ([_constraints count]) {
         [NSLayoutConstraint deactivateConstraints:_constraints];
         _constraints = nil;
     }
-    
+}
+
+- (void)updateConstraints {
+    [self removeConstraints];
     NSMutableArray *constraints = [NSMutableArray array];
-    
-    NSDictionary *views = NSDictionaryOfVariableBindings(_continueView, _stimulusView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_stimulusView);
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_stimulusView
                                                                attribute:NSLayoutAttributeCenterX
@@ -98,7 +88,7 @@
                                                                attribute:NSLayoutAttributeTop
                                                               multiplier:1 constant: 8]];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_stimulusView]-(>=8)-[_continueView]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_stimulusView]-(>=0)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];

@@ -295,21 +295,26 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  @param identifier                  The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription      A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, the default localized text is displayed.
- @param getReadyInterval            The animated interval between the user pressing ready and the stimulus
  @param maximumStimulusInterval     The maximum interval before the stimulus is delivered
  @param minimumStimulusInterval     The minimum interval before the stimulus is delivered
  @param thresholdAcceleration       The acceleration required to end a reaction time test
- @param timeout                     The interval permitted after the stimulus until the test fails, if the threshold is not reached
  @param numberOfAttempts            The number of successful attempts required before the task is complete. The active step result will contain this many child results if the task is completed.
+ @param timeout                     The interval permitted after the stimulus until the test fails, if the threshold is not reached
+ @param successSoundID              The sound to play after a successful attempt
+ @param timeoutSoundID              The sound to play after an attempt that times out
+ @param failureSoundID              The sound to play after an unsuccessful attempt
  */
+
 + (ORKOrderedTask *)deviceMotionReactionTimeTaskWithIdentifier:(NSString *)identifier
                                         intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                              getReadyInterval:(NSTimeInterval)getReady
                                        maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
                                        minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
                                          thresholdAcceleration:(double)thresholdAcceleration
                                               numberOfAttempts:(int)numberOFAttempts
                                                        timeout:(NSTimeInterval)timeout
+                                                  successSound:(UInt32)successSoundID
+                                                  timeoutSound:(UInt32)timeoutSoundID
+                                                  failureSound:(UInt32)failureSoundID
                                                        options:(ORKPredefinedTaskOption)options;
 
 @end

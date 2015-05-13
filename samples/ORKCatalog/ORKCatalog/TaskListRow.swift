@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import ResearchKit
+import AudioToolbox
 
 /**
     An enum that corresponds to a row displayed in a `TaskListViewController`.
@@ -579,7 +580,14 @@ enum TaskListRow: Int, Printable {
     }
     
     private var deviceMotionReactionTimeTask: ORKTask {
-        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, getReadyInterval: 1, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, options: nil)
+        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    private var exampleSuccessSound: UInt32 {
+        var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf")!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(successSoundPath, &soundID)
+        return soundID
     }
 
     /**

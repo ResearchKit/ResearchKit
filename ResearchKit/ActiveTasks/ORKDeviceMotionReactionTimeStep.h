@@ -15,17 +15,21 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKDeviceMotionReactionTimeStep : ORKActiveStep
 
-@property (nonatomic, assign) NSTimeInterval getReadyInterval;
-
 @property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
 
 @property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
 
 @property (nonatomic, assign) NSTimeInterval timeout;
 
+@property (nonatomic, assign) NSInteger numberOfAttempts;
+
 @property (nonatomic, assign) double thresholdAcceleration;
 
-@property (nonatomic, assign) NSInteger numberOfAttempts;
+@property (nonatomic, assign) UInt32 successSound;
+
+@property (nonatomic, assign) UInt32 timeoutSound;
+
+@property (nonatomic, assign) UInt32 failureSound;
 
 @end
 

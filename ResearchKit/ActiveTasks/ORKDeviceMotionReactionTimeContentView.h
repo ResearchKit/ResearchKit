@@ -12,16 +12,12 @@
 
 @interface ORKDeviceMotionReactionTimeContentView : ORKActiveStepCustomView
 
-@property (nonatomic, strong, nonnull) UIBarButtonItem *buttonItem;
-
 - (void)setStimulusHidden:(BOOL)hidden;
 
-- (void)setReadyHidden:(BOOL)hidden;
+- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void (^)(void))completion;
 
-- (void)startReadyAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void (^)(void)) completion;
+- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void (^)(void))completion;
 
-- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void (^)(void)) completion;
-
-- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void (^)(void)) completion;
+- (void)resetAfterDelay:(NSTimeInterval)delay completion: (nullable void (^)(void))completion;
 
 @end

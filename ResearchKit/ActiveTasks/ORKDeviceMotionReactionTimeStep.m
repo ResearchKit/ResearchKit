@@ -26,12 +26,14 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKDeviceMotionReactionTimeStep *step = [super copyWithZone:zone];
-    step.getReadyInterval = self.getReadyInterval;
     step.maximumStimulusInterval = self.maximumStimulusInterval;
     step.minimumStimulusInterval = self.minimumStimulusInterval;
     step.thresholdAcceleration = self.thresholdAcceleration;
     step.timeout = self.timeout;
     step.numberOfAttempts = self.numberOfAttempts;
+    self.successSound = self.successSound;
+    self.timeoutSound = self.timeoutSound;
+    self.failureSound = self.failureSound;
     return step;
 }
 
@@ -58,11 +60,13 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, getReadyInterval);
         ORK_DECODE_DOUBLE(aDecoder, maximumStimulusInterval);
         ORK_DECODE_DOUBLE(aDecoder, minimumStimulusInterval);
         ORK_DECODE_DOUBLE(aDecoder, thresholdAcceleration);
         ORK_DECODE_DOUBLE(aDecoder, timeout);
+        ORK_DECODE_UINT32(aDecoder, successSound);
+        ORK_DECODE_UINT32(aDecoder, timeoutSound);
+        ORK_DECODE_UINT32(aDecoder, failureSound);
         ORK_DECODE_INTEGER(aDecoder, numberOfAttempts);
     }
     return self;
@@ -70,11 +74,13 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-        ORK_ENCODE_DOUBLE(aCoder, getReadyInterval);
         ORK_ENCODE_DOUBLE(aCoder, maximumStimulusInterval);
         ORK_ENCODE_DOUBLE(aCoder, minimumStimulusInterval);
         ORK_ENCODE_DOUBLE(aCoder, thresholdAcceleration);
         ORK_ENCODE_DOUBLE(aCoder, timeout);
+        ORK_ENCODE_UINT32(aCoder, successSound);
+        ORK_ENCODE_UINT32(aCoder, timeoutSound);
+        ORK_ENCODE_UINT32(aCoder, failureSound);
         ORK_ENCODE_INTEGER(aCoder, numberOfAttempts);
 }
 
@@ -87,11 +93,13 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.getReadyInterval == castObject.getReadyInterval) &&
             (self.maximumStimulusInterval == castObject.maximumStimulusInterval) &&
             (self.minimumStimulusInterval == castObject.minimumStimulusInterval) &&
             (self.thresholdAcceleration == castObject.thresholdAcceleration) &&
             (self.timeout == castObject.timeout) &&
+            (self.successSound == castObject.successSound) &&
+            (self.timeoutSound == castObject.timeoutSound) &&
+            (self.failureSound == castObject.failureSound) &&
             (self.numberOfAttempts == castObject.numberOfAttempts));
 }
 

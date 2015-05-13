@@ -12,12 +12,10 @@
 
 @interface ORKDeviceMotionReactionTimeStimulusView : UIView
 
-- (void)startReadyAnimationWithDuration:(NSTimeInterval)duration completion: (nullable void(^)(void))completion;
-
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
 
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
 
-- (void)hideStimulus: (BOOL) hidden;
+- (void)setStimulusHidden: (BOOL) hidden;
 
 @end
