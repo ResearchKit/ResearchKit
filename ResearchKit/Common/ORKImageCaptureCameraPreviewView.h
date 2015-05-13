@@ -30,7 +30,6 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ORKTintedImageView.h"
 #import <AVFoundation/AVFoundation.h>
 
 

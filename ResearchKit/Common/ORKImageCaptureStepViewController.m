@@ -30,16 +30,13 @@
 
 
 #import "ORKStepViewController_Internal.h"
-#import "ORKNavigationContainerView_Internal.h"
 #import "ORKImageCaptureStepViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ORKImageCaptureCameraPreviewView.h"
 #import "ORKImageCaptureView.h"
 #import "ORKHelpers.h"
-#import "ORKNavigationContainerView.h"
 
 
-@interface ORKImageCaptureStepViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, ORKImageCaptureViewDelegate>
+@interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>
 
 @property (nonatomic, strong) ORKImageCaptureView *imageCaptureView;
 @property (nonatomic, strong) dispatch_queue_t sessionQueue;

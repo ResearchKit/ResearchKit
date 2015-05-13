@@ -30,6 +30,7 @@
 
 
 #import "ORKImageCaptureCameraPreviewView.h"
+#import "ORKTintedImageView.h"
 #import "ORKHelpers.h"
 #import <tgmath.h>
 
