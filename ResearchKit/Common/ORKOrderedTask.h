@@ -287,11 +287,17 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that tests the participant's reaction time.
  
- In a device motion reaction task the participant is asked to move the device sharply in any direction in response to a visual cue. You can use this task to accurately assess the participant's 'Simple Reaction Time'.
+ In a device motion reaction task the participant is asked to move the device sharply in any direction in response to a visual cue.
+ You can use this task to accurately assess the participant's Simple Reaction Time.
  
- A device motion reaction time task finishes when the uses has completed the required 'numberOfAttempts' successfully. An attempt is successful when the user exerts acceleration greater than 'thresholdAcceleration' to the device after the stimulus has been delivered and before the timeout has elapsed. An attempt is unsuccessful if acceleration greater than 'thresholdAcceleration' is applied to the device before the stimulus or if this does not occur before the timeout interval has elapsed. If unsuccessful, the result is not reported and the user must try again to proceed with the task.
+ A device motion reaction time task finishes when the participant has completed the required `numberOfAttempts` successfully.
+ An attempt is successful when the participant exerts acceleration greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before  `timeout` has elapsed.
+ An attempt is unsuccessful if acceleration greater than 'thresholdAcceleration' is applied to the device before the stimulus or if this does not occur before `timeout` has elapsed.
+ If unsuccessful, the result is not reported and the participant must try again to proceed with the task.
  
- Data collected by the task is in the form of ORKDeviceMotionReactionTimeResult objects. These objects contain a timestamp represeting the delivery of the stimulus and an ORKFileResult which references the motion data collected during an attempt. The developer / researcher can use these to evaluate the response to the stimulus and calculate the reaction time.
+ Data collected by the task is in the form of ORKDeviceMotionReactionTimeResult objects.
+ These objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult which references the motion data collected during an attempt.
+ The developer / researcher can use these to evaluate the response to the stimulus and calculate the reaction time.
  
  @param identifier                  The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription      A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, the default localized text is displayed.
