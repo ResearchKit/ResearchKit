@@ -74,8 +74,8 @@
 @property (nonatomic, strong) ORKContinueButton *continueActionButton;
 
 - (ORKConsentSceneViewController *)viewControllerForIndex:(NSUInteger)index;
-- (NSUInteger)currentIndex ;
-- (NSUInteger)indexOfViewController:(UIViewController *)viewController ;
+- (NSUInteger)currentIndex;
+- (NSUInteger)indexOfViewController:(UIViewController *)viewController;
 
 @end
 
@@ -623,9 +623,9 @@
     }
 }
 
-static NSString * const _ORKCurrentPageRestoreKey = @"currentPage";
-static NSString * const _ORKHasAppearedRestoreKey = @"hasAppeared";
-static NSString * const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
+static NSString *const _ORKCurrentPageRestoreKey = @"currentPage";
+static NSString *const _ORKHasAppearedRestoreKey = @"hasAppeared";
+static NSString *const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

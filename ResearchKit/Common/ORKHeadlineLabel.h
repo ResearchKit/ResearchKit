@@ -33,7 +33,7 @@
 
 
 /**
- *  Primary title for any step view controller.
+ Primary title for any step view controller.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKHeadlineLabel : ORKLabel

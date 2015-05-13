@@ -32,13 +32,14 @@
 #import "CMMotionActivity+ORKJSONDictionary.h"
 #import "ORKHelpers.h"
 
-static NSString * const kActivityUnknown = @"unknown";
-static NSString * const kActivityStationary = @"stationary";
-static NSString * const kActivityWalking = @"walking";
-static NSString * const kActivityRunning = @"running";
-static NSString * const kActivityAutomotive = @"automotive";
-static NSString * const kStartDateKey = @"startDate";
-static NSString * const kEndDateKey = @"endDate";
+
+static NSString *const kActivityUnknown = @"unknown";
+static NSString *const kActivityStationary = @"stationary";
+static NSString *const kActivityWalking = @"walking";
+static NSString *const kActivityRunning = @"running";
+static NSString *const kActivityAutomotive = @"automotive";
+static NSString *const kStartDateKey = @"startDate";
+static NSString *const kEndDateKey = @"endDate";
 
 static NSString *stringFromActivityConfidence(CMMotionActivityConfidence confidence) {
     NSDictionary *confidences = @{@(CMMotionActivityConfidenceHigh) : @"high",
@@ -67,10 +68,9 @@ static NSArray *activityArray(CMMotionActivity *activity) {
     return array;
 }
 
-    
-static NSString * const kActivityKey = @"activity";
+static NSString *const kActivityKey = @"activity";
 
-static NSString * const kConfidenceKey = @"confidence";
+static NSString *const kConfidenceKey = @"confidence";
 
 @implementation CMMotionActivity (ORKJSONDictionary)
 

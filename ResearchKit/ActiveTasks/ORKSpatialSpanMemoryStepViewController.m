@@ -100,7 +100,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 @end
 
 
-@interface ORKSpatialSpanMemoryStepViewController() <ORKSpatialSpanMemoryGameViewDelegate>
+@interface ORKSpatialSpanMemoryStepViewController () <ORKSpatialSpanMemoryGameViewDelegate>
 
 @end
 

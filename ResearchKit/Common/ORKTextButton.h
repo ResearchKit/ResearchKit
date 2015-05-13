@@ -35,7 +35,7 @@
 
 
 /**
- *  "Skip" button or "Learn More" button.
+ "Skip" button or "Learn More" button.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextButton : UIButton <ORKDefaultFont>

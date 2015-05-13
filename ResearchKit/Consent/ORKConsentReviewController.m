@@ -38,7 +38,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-@interface ORKConsentReviewController() <UIWebViewDelegate>
+@interface ORKConsentReviewController () <UIWebViewDelegate>
 
 @end
 

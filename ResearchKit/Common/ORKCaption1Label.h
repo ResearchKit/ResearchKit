@@ -33,8 +33,9 @@
 
 
 /**
- *  Intro step's first piece details text.
- *  @note Used as cell's caption text: in ORKConsentDocumentCell and ORKFormItemCell
+ Intro step's first piece details text.
+ 
+ @note Used as cell's caption text: in ORKConsentDocumentCell and ORKFormItemCell
  */
 ORK_CLASS_AVAILABLE
 @interface ORKCaption1Label : ORKLabel

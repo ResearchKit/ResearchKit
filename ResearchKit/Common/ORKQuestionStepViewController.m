@@ -725,8 +725,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     [self showValidityAlertWithMessage:input];
 }
 
-static NSString * const _ORKAnswerRestoreKey = @"answer";
-static NSString * const _ORKHaveChangedAnswerRestoreKey = @"haveChangedAnswer";
+static NSString *const _ORKAnswerRestoreKey = @"answer";
+static NSString *const _ORKHaveChangedAnswerRestoreKey = @"haveChangedAnswer";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

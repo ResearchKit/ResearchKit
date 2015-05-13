@@ -908,10 +908,10 @@
 
 #pragma mark UIStateRestoration
 
-static NSString * const _ORKSavedAnswersRestoreKey = @"savedAnswers";
-static NSString * const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
-static NSString * const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
-static NSString * const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
+static NSString *const _ORKSavedAnswersRestoreKey = @"savedAnswers";
+static NSString *const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
+static NSString *const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
+static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
