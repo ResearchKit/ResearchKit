@@ -476,6 +476,8 @@
     UIPageViewControllerNavigationDirection direction = forward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
 
     if (!animated) {
+        // No animation at all
+        viewController.imageHidden = NO;
         [self doShowViewController:viewController direction:direction animated:animated completion:nil];
     } else {
         NSUInteger toIndex = [self indexOfViewController:viewController];
