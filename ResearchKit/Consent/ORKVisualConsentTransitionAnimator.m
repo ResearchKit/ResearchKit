@@ -113,7 +113,7 @@
 }
 
 - (void)animateTransitionWithDirection:(UIPageViewControllerNavigationDirection)direction
-                       withLoadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
+                           loadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
                      completionHandler:(ORKVisualConsentAnimationCompletionHandler)handler {
     ORKVisualConsentAnimationContext *context = [ORKVisualConsentAnimationContext new];
     context.handler = handler;
