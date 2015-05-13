@@ -51,7 +51,7 @@ typedef void (^ORKVisualConsentAnimationCompletionHandler)(ORKVisualConsentTrans
                        withLoadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
                      completionHandler:(ORKVisualConsentAnimationCompletionHandler)handler;
 
-// Call to remove player layer from superview and clean up any observations.
+// Call to invalidate display link and remove any observations.
 - (void)finish;
 
 @end
