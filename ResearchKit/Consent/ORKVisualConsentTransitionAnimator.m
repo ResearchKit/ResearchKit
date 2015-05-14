@@ -257,7 +257,10 @@
         pixelBuffer = [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
         
         ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
-        playerView.presentationRect = [_playerItem presentationSize];
+        CGSize playerItemPresentationSize = _playerItem.presentationSize;
+        if (!CGSizeEqualToSize(playerView.presentationSize, playerItemPresentationSize)) {
+            playerView.presentationSize = playerItemPresentationSize;
+        }
         BOOL canDisplay = [playerView consumePixelBuffer:pixelBuffer];
         if (pixelBuffer != NULL) {
             CFRelease(pixelBuffer);
@@ -267,7 +270,7 @@
             [playerView render];
         }
         
-        if (_frameCounter > 0) {
+        if (_frameCounter == 1) {
             [self initialFrameDidDisplay];
         }
         _frameCounter ++;
