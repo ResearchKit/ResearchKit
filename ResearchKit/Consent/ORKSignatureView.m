@@ -55,8 +55,14 @@
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.state = UIGestureRecognizerStateBegan;
-    [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
+    if (touches.count > 1 || self.numberOfTouches > 1) {
+        for (UITouch *touch in touches) {
+            [self ignoreTouch:touch forEvent:event];
+        }
+    } else {
+        self.state = UIGestureRecognizerStateBegan;
+        [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -212,10 +218,6 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 #pragma mark Touch Event Handlers
 
 - (void)gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (touches.count > 1 ) {
-        return;
-    }
-    
     UITouch *touch = [touches anyObject];
     
     self.currentPath = [self pathWithRoundedStyle];
@@ -235,10 +237,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (touches.count > 1) {
-        return;
-    }
-    
     UITouch *touch = [touches anyObject];
     
     CGPoint point = [touch locationInView:self];
@@ -276,7 +274,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     CGRect rect = [self.currentPath bounds];
-    if (touches.count > 1 || CGSizeEqualToSize(rect.size, CGSizeZero)) {
+    if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
     }
     
