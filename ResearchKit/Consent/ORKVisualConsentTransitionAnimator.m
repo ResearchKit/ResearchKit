@@ -189,23 +189,21 @@
 }
 
 - (void)performAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
-    AVPlayer *moviePlayer = _moviePlayer;
-
-    __weak AVPlayer *weakPlayer = moviePlayer;
     
     _pendingContext = context;
     
     [[_stepViewController animationPlayerView] setupGL];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:[moviePlayer currentItem]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:[moviePlayer currentItem]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:[_moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[_moviePlayer currentItem]];
     
-    [moviePlayer seekToTime:[context.startTime CMTimeValue]
-            toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
-                AVPlayer *localPlayer = weakPlayer;
-                [localPlayer play];
-            }];
+    __weak AVPlayer *weakPlayer = _moviePlayer;
+    [_moviePlayer seekToTime:[context.startTime CMTimeValue]
+             toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
+                 AVPlayer *localPlayer = weakPlayer;
+                 [localPlayer play];
+             }];
 }
 
 - (void)finishAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
@@ -286,6 +284,7 @@
 }
 
 - (void)finish {
+    [_moviePlayer pause];
     [_displayLink invalidate]; // This makes animator single-use
     
     if (_observingPlayerStatusKey) {
@@ -297,6 +296,9 @@
         _observingPlayerItemDurationKey = NO;
     }
     
+    _videoOutputQueue = nil;
+    _moviePlayer = nil;
+    _displayLink = nil;
     _pendingContext = nil;
     _videoOutput = nil;
     _videoOutputQueue = nil;
