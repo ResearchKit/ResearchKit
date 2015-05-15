@@ -53,6 +53,7 @@ enum TaskListRow: Int, Printable {
     case Fitness
     case ShortWalk
     case Audio
+    case ToneAudiometry
     case Survey
     case Consent
     case Form
@@ -125,6 +126,9 @@ enum TaskListRow: Int, Printable {
 
             case .Audio:
                 return NSLocalizedString("Audio Active Task", comment: "")
+
+            case .ToneAudiometry:
+                return NSLocalizedString("Tone Audiometry Active Task", comment: "")
 
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
@@ -206,6 +210,7 @@ enum TaskListRow: Int, Printable {
         case FitnessTask =                                          "FitnessTask"
         case ShortWalkTask =                                        "ShortWalkTask"
         case AudioTask =                                            "AudioTask"
+        case ToneAudiometryTask =                                   "ToneAudiometry"
 
         // Survey task specific identifiers.
         case SurveyTask =                                           "SurveyTask"
@@ -281,6 +286,9 @@ enum TaskListRow: Int, Printable {
             case .Audio:
                 return audioTask
             
+            case .ToneAudiometry:
+                return toneAudiometryTask
+
             case .Survey:
                 return surveyTask
             
@@ -571,6 +579,11 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
 
+    /// This task presents the Tone Audiometry pre-defined active task.
+    private var toneAudiometryTask: ORKTask {
+        return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: nil)
+    }
+    
     /**
         A task demonstrating how the ResearchKit framework can be used to present a simple
         survey with an introduction, a question, and a conclusion.
