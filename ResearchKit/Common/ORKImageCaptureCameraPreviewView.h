@@ -33,6 +33,8 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ORKImageCaptureCameraPreviewView : UIView
 
 @property (nonatomic, weak, nullable) AVCaptureSession *session;
@@ -43,3 +45,5 @@
 @property (nonatomic, weak, nullable) UIImage *capturedImage;
 
 @end
+
+NS_ASSUME_NONNULL_END

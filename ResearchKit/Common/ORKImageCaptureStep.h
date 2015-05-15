@@ -32,10 +32,33 @@
 #import <ResearchKit/ResearchKit.h>
 
 
+/**
+ The `ORKImageCaptureStep` class represents a step that captures an image via the device
+ camera.  A template image can optionally be overlaid the camera preview to assist in properly
+ capturing the image.
+ 
+ To use the image capture step, optionally set the `templateImage` and `templateImageInsets`
+ properties, incorporate the step into a task, and present the task with a task view controller.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKImageCaptureStep : ORKStep
 
+/**
+ An image to be displayed over the camera preview.
+ 
+ The image will be stretched to fit the available space while retaining its aspect ratio.
+ When choosing a size for this asset, be sure to take into account the variations in device
+ form factors.
+ */
 @property (nonatomic, strong) UIImage *templateImage;
+
+/**
+ Insets to be used in positioning and sizing the `templateImage`.
+ 
+ The insets are interpreted as percentages relative to the preview frame size.  The `left`
+ and `right` insets are relative to the width of the preview frame.  The `top` and `bottom`
+ insets are relative to the height of the preview frame.
+ */
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
 @end

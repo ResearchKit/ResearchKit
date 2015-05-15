@@ -34,6 +34,8 @@
 #import "ORKImageCaptureStep.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ORKImageCaptureViewDelegate <NSObject>
 
 - (void)capturePressed:(void (^ __nullable)(BOOL captureSuccess))handler;
@@ -53,3 +55,5 @@
 @property (nonatomic, strong, nullable) NSError *error;
 
 @end
+
+NS_ASSUME_NONNULL_END
