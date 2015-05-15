@@ -400,7 +400,10 @@
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Defensive timeouts in case the animator doesn't complete
+        // The semaphore waits for both 'animateTransitionWithDirection:loadHandler:completionHandler:' and
+        // 'doShowViewController:direction:animated:completion:' methods to complete (both of these methods
+        // signal the semaphore on completion). It doesn't matter which of the two finishes first.
+        // Defensive 5-second timeout in case the animator doesn't complete.
         dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
         dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
         
