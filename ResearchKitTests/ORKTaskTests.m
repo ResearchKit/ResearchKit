@@ -34,6 +34,7 @@
 #import "ORKHelpers.h"
 #import "ORKResult_Private.h"
 #import "ORKStepNavigationRule_Private.h"
+#import "ORKStepNavigationRule_Internal.h"
 
 
 @interface ORKTaskTests : XCTestCase

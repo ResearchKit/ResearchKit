@@ -32,15 +32,18 @@
 #import <ResearchKit/ORKStepNavigationRule.h>
 
 
-// This 'Private' header is needed because ORKESerialization needs access to ORKPredicateStepNavigationRule's internal initializer
 NS_ASSUME_NONNULL_BEGIN
+
+@interface ORKStepNavigationRule ()
+
+- (instancetype)init_ork;
+
+@end
+
 
 @interface ORKPredicateStepNavigationRule ()
 
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
-                   defaultStepIdentifier:(NSString *)defaultStepIdentifier
-                          validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
++ (NSArray *)leafResultsFromTaskResult:(ORKTaskResult *)ORKTaskResult;
 
 @end
 

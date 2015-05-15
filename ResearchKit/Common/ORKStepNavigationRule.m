@@ -34,6 +34,7 @@
 
 #import "ORKHelpers.h"
 #import "ORKResult.h"
+#import "ORKResultPredicate.h"
 
 
 @implementation ORKResultPredicate
@@ -137,8 +138,8 @@
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
-                                    maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
+                                      minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
