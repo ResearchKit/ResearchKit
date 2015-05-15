@@ -90,7 +90,10 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKSpatialSpanMemoryResult:
                 providerType = SpatialSpanMemoryResultTableViewProvider.self
-
+            
+            case is ORKDeviceMotionReactionTimeResult:
+                providerType = DeviceMotionReactionTimeViewProvider.self
+            
             case is ORKFileResult:
                 providerType = FileResultTableViewProvider.self
 
@@ -578,6 +581,33 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
             // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
             return ResultRow(text: "game", detail: gameRecord.score, selectable: true)
         }
+    }
+}
+
+class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "File Results"
+    }
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let reactionTimeResult = result as! ORKDeviceMotionReactionTimeResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp, selectable: true) ]
+        }
+        
+        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString, selectable: false) ]
     }
 }
 

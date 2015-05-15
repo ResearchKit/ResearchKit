@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import ResearchKit
+import AudioToolbox
 
 /**
     An enum that corresponds to a row displayed in a `TaskListViewController`.
@@ -54,6 +55,7 @@ enum TaskListRow: Int, Printable {
     case ShortWalk
     case Audio
     case ToneAudiometry
+    case DeviceMotionReactionTimeTask
     case Survey
     case Consent
     case Form
@@ -130,6 +132,9 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return NSLocalizedString("Tone Audiometry Active Task", comment: "")
 
+            case .DeviceMotionReactionTimeTask:
+                return NSLocalizedString("Device Motion Reaction Time Task", comment: "")
+            
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
 
@@ -211,6 +216,7 @@ enum TaskListRow: Int, Printable {
         case ShortWalkTask =                                        "ShortWalkTask"
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
+        case DeviceMotionReactionTimeTask =                         "DeviceMotionReactionTimeTask"
 
         // Survey task specific identifiers.
         case SurveyTask =                                           "SurveyTask"
@@ -289,6 +295,9 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return toneAudiometryTask
 
+            case .DeviceMotionReactionTimeTask:
+                return deviceMotionReactionTimeTask
+            
             case .Survey:
                 return surveyTask
             
@@ -577,6 +586,17 @@ enum TaskListRow: Int, Printable {
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
+    }
+    
+    private var deviceMotionReactionTimeTask: ORKTask {
+        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    private var exampleSuccessSound: UInt32 {
+        var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf")!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(successSoundPath, &soundID)
+        return soundID
     }
 
     /// This task presents the Tone Audiometry pre-defined active task.

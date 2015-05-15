@@ -34,6 +34,14 @@
 		147503BA1AEE807C004B17F3 /* ORKToneAudiometryStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */; };
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
+		25ECC0951AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0931AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h */; };
+		25ECC0961AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC0941AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m */; };
+		25ECC09B1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0991AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.h */; };
+		25ECC09C1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC09A1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.m */; };
+		25ECC09F1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC09D1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h */; };
+		25ECC0A01AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC09E1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.m */; };
+		25ECC0A31AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0A11AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.h */; };
+		25ECC0A41AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC0A21AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.m */; };
 		2EBFE11D1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */; };
 		2EBFE1201AE1B74100CB8254 /* ORKVoiceEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */; };
 		618DA04E1A93D0D600E63AA8 /* ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA0481A93D0D600E63AA8 /* ORKAccessibility.h */; };
@@ -392,6 +400,14 @@
 		147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStep.m; sourceTree = "<group>"; };
 		147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryStepViewController.h; sourceTree = "<group>"; };
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
+		25ECC0931AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKDeviceMotionReactionTimeStep.h; sourceTree = "<group>"; };
+		25ECC0941AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDeviceMotionReactionTimeStep.m; sourceTree = "<group>"; };
+		25ECC0991AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKDeviceMotionReactionTimeViewController.h; sourceTree = "<group>"; };
+		25ECC09A1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDeviceMotionReactionTimeViewController.m; sourceTree = "<group>"; };
+		25ECC09D1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKDeviceMotionReactionTimeContentView.h; sourceTree = "<group>"; };
+		25ECC09E1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDeviceMotionReactionTimeContentView.m; sourceTree = "<group>"; };
+		25ECC0A11AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKDeviceMotionReactionTimeStimulusView.h; sourceTree = "<group>"; };
+		25ECC0A21AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKDeviceMotionReactionTimeStimulusView.m; sourceTree = "<group>"; };
 		2EBFE11C1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKUIViewAccessibilityTests.m; sourceTree = "<group>"; };
 		2EBFE11E1AE1B68800CB8254 /* ORKVoiceEngine_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKVoiceEngine_Internal.h; sourceTree = "<group>"; };
 		2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKVoiceEngineTests.m; sourceTree = "<group>"; };
@@ -804,6 +820,21 @@
 			name = "Tone Audiometry";
 			sourceTree = "<group>";
 		};
+		25ECC0921AFBD64800F3D63B /* Reaction Time */ = {
+			isa = PBXGroup;
+			children = (
+				25ECC0931AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h */,
+				25ECC0941AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m */,
+				25ECC0991AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.h */,
+				25ECC09A1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.m */,
+				25ECC09D1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h */,
+				25ECC09E1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.m */,
+				25ECC0A11AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.h */,
+				25ECC0A21AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.m */,
+			);
+			name = "Reaction Time";
+			sourceTree = "<group>";
+		};
 		3FFF18341829DB1D00167070 = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +901,7 @@
 				B12EFF4E1AB2161500A80147 /* Audio */,
 				B12EFF5D1AB2177700A80147 /* Fitness */,
 				B12EFF5E1AB2177D00A80147 /* Spatial Span Memory */,
+				25ECC0921AFBD64800F3D63B /* Reaction Time */,
 				B12EFF5F1AB2178500A80147 /* Tapping */,
 				B12EFF601AB2178B00A80147 /* Walking */,
 				147503AC1AEE8058004B17F3 /* Tone Audiometry */,
@@ -1629,8 +1661,10 @@
 				86B781BB1AA668ED00688151 /* ORKTimeIntervalPicker.h in Headers */,
 				86C40C6A1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.h in Headers */,
 				86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */,
+				25ECC0951AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h in Headers */,
 				86C40D0A1A8D7C5C00081FAC /* ORKCustomStepView.h in Headers */,
 				86C40DCE1A8D7C5C00081FAC /* ORKTaskViewController_Internal.h in Headers */,
+				25ECC09F1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h in Headers */,
 				86C40C361A8D7C5C00081FAC /* ORKSpatialSpanGame.h in Headers */,
 				86C40CAC1A8D7C5C00081FAC /* ORKRecorder.h in Headers */,
 				865EA1681ABA1AA10037C68E /* ORKPicker.h in Headers */,
@@ -1649,6 +1683,7 @@
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
 				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				86C40C661A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.h in Headers */,
+				25ECC0A31AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.h in Headers */,
 				86C40D701A8D7C5C00081FAC /* ORKRoundTappingButton.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
@@ -1740,6 +1775,7 @@
 				86C40D281A8D7C5C00081FAC /* ORKFormTextView.h in Headers */,
 				86C40DEE1A8D7C5C00081FAC /* UIResponder+ResearchKit.h in Headers */,
 				86C40E041A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h in Headers */,
+				25ECC09B1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.h in Headers */,
 				86C40D061A8D7C5C00081FAC /* ORKCountdownLabel.h in Headers */,
 				86C40C2A1A8D7C5C00081FAC /* ORKFitnessContentView.h in Headers */,
 				86C40DC21A8D7C5C00081FAC /* ORKTapCountLabel.h in Headers */,
@@ -2012,6 +2048,7 @@
 				86C40CA61A8D7C5C00081FAC /* ORKLocationRecorder.m in Sources */,
 				86C40CB61A8D7C5C00081FAC /* ORKTouchRecorder.m in Sources */,
 				86C40DC41A8D7C5C00081FAC /* ORKTapCountLabel.m in Sources */,
+				25ECC0A01AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.m in Sources */,
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
@@ -2031,6 +2068,7 @@
 				86C40C801A8D7C5C00081FAC /* ORKActiveStep.m in Sources */,
 				86C40D721A8D7C5C00081FAC /* ORKRoundTappingButton.m in Sources */,
 				86C40E2A1A8D7C5C00081FAC /* ORKSignatureView.m in Sources */,
+				25ECC0A41AFBDD2700F3D63B /* ORKDeviceMotionReactionTimeStimulusView.m in Sources */,
 				86C40CBA1A8D7C5C00081FAC /* ORKVoiceEngine.m in Sources */,
 				861D11B61AA7D073003C98A7 /* ORKTextChoiceCellGroup.m in Sources */,
 				86C40CCA1A8D7C5C00081FAC /* ORKFormItemCell.m in Sources */,
@@ -2097,6 +2135,7 @@
 				86C40D6C1A8D7C5C00081FAC /* ORKResult.m in Sources */,
 				86C40CD21A8D7C5C00081FAC /* ORKInstructionStepView.m in Sources */,
 				86C40D181A8D7C5C00081FAC /* ORKErrors.m in Sources */,
+				25ECC09C1AFBD8B300F3D63B /* ORKDeviceMotionReactionTimeViewController.m in Sources */,
 				86C40DB01A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.m in Sources */,
 				86C40C281A8D7C5C00081FAC /* ORKCountdownStepViewController.m in Sources */,
 				86C40C641A8D7C5C00081FAC /* CLLocation+ORKJSONDictionary.m in Sources */,
@@ -2124,6 +2163,7 @@
 				86C40C8E1A8D7C5C00081FAC /* ORKActiveStepViewController.m in Sources */,
 				B183A5011A8535D100C76870 /* (null) in Sources */,
 				86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */,
+				25ECC0961AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m in Sources */,
 				B11C54A11A9EF4A700265E61 /* ORKConsentSharingStepViewController.m in Sources */,
 				86C40E161A8D7C5C00081FAC /* ORKConsentSection+AssetLoading.m in Sources */,
 				86C40DA81A8D7C5C00081FAC /* ORKSurveyAnswerCellForImageSelection.m in Sources */,
