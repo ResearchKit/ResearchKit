@@ -234,8 +234,6 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-<<<<<<< HEAD
-=======
 /**
  The `ORKToneAudiometryResult` class records the results of a tone audiometry test.
 
@@ -303,7 +301,6 @@ ORK_CLASS_AVAILABLE
 @end
 
 
->>>>>>> 075dc1f7b63c4df7aa546e4545e452be4d8fbdd5
 /**
  The `ORKSpatialSpanMemoryGameTouchSample` class represents a tap during the
  spatial span memory game.
