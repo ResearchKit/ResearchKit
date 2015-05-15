@@ -1432,11 +1432,28 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                              vertical:YES];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
-                                                                      title:@"How would you measure your mood improvement?"
+                                                                      title:@"How was your mood yesterday?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
 
+    {
+        /*
+         Vertical continuous scale with three decimal places, a default, and a format style.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:1.0
+                                                                                                             minimumValue:0.0
+                                                                                                             defaultValue:0.8725
+                                                                                                    maximumFractionDigits:0
+                                                                                                                 vertical:YES];
+        scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+                                                                      title:@"How much has your mood improved?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScalesTaskIdentifier steps:steps];
     return task;
     

@@ -307,8 +307,9 @@ enum TaskListRow: Int, Printable {
         
         steps += [questionStep1]
         
-        // The second step is a scale control that allows continuous movement.
-        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: false)
+        // The second step is a scale control that allows continuous movement with a percent formatter.
+        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false)
+        step2AnswerFormat.numberStyle = .Percent
         
         let questionStep2 = ORKQuestionStep(identifier: Identifier.ContinuousScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step2AnswerFormat)
         

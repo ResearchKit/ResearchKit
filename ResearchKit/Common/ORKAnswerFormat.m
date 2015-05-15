@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Scott Guelich.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -59,6 +60,10 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(TimeInterval);
     }
 #undef SQT_CASE
+}
+
+NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle style) {
+    return style == ORKNumberFormattingStylePercent ? NSNumberFormatterPercentStyle : NSNumberFormatterDecimalStyle;
 }
 
 @implementation ORKAnswerDefaultSource {
@@ -1180,7 +1185,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 #pragma mark - ORKScaleAnswerFormat
 
-@implementation ORKScaleAnswerFormat
+@implementation ORKScaleAnswerFormat {
+    NSNumberFormatter *_numberFormatter;
+}
 
 - (Class)questionResultClass {
     return [ORKScaleQuestionResult class];
@@ -1231,7 +1238,17 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return @(integer);
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
-    return [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterDecimalStyle];
+    return [self.numberFormatter stringFromNumber:number];
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    if (! _numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+        _numberFormatter.maximumFractionDigits = 0;
+    }
+    return _numberFormatter;
 }
 
 - (NSInteger)numberOfSteps {
@@ -1382,13 +1399,16 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return @(_defaultValue);
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
+    return [self.numberFormatter stringFromNumber:number];
+}
+
+- (NSNumberFormatter *)numberFormatter {
     if (! _numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
-        _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+        _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
         _numberFormatter.maximumFractionDigits = _maximumFractionDigits;
     }
-    return [_numberFormatter stringFromNumber:number];
+    return _numberFormatter;
 }
 
 - (NSInteger)numberOfSteps {
@@ -1438,6 +1458,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_DOUBLE(aDecoder, defaultValue);
         ORK_DECODE_INTEGER(aDecoder, maximumFractionDigits);
         ORK_DECODE_BOOL(aDecoder, vertical);
+        ORK_DECODE_ENUM(aDecoder, numberStyle);
     }
     return self;
 }
@@ -1449,6 +1470,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_DOUBLE(aCoder, defaultValue);
     ORK_ENCODE_INTEGER(aCoder, maximumFractionDigits);
     ORK_ENCODE_BOOL(aCoder, vertical);
+    ORK_ENCODE_ENUM(aCoder, numberStyle);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1463,7 +1485,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_maximum == castObject.maximum) &&
             (_minimum == castObject.minimum) &&
             (_defaultValue == castObject.defaultValue) &&
-            (_maximumFractionDigits == castObject.maximumFractionDigits));
+            (_maximumFractionDigits == castObject.maximumFractionDigits) &&
+            (_numberStyle == castObject.numberStyle));
 }
 
 - (ORKQuestionType) questionType {
