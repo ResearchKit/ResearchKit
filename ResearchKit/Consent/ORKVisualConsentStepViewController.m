@@ -404,9 +404,13 @@
         // 'doShowViewController:direction:animated:completion:' methods to complete (both of these methods
         // signal the semaphore on completion). It doesn't matter which of the two finishes first.
         // Defensive 5-second timeout in case the animator doesn't complete.
-        dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
-        dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+        BOOL semaphoreATimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+        BOOL semaphoreBTimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
         
+        if (semaphoreATimedOut || semaphoreBTimedOut) {
+            ORK_Log_Debug(@"[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
+        }
+            
         dispatch_async(dispatch_get_main_queue(), ^{
             BOOL animationAndTransitionFinished = (transitionFinished && animatorFinished);
 
