@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -26,50 +26,16 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
-#import <ResearchKit/ORKRecorder.h>
+
+#import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class CMDeviceMotion;
-
-@protocol ORKDeviceMotionRecorderDelegate <ORKRecorderDelegate>
-
-@optional
-
-- (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion;
-
-@end
-
-/**
- The `ORKDeviceMotionRecorder` class represents a recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
- 
- To ensure that the motion recorder continues to record when the app enters the
- background, use the background task support provided by `UIApplication`.
- */
 ORK_CLASS_AVAILABLE
-@interface ORKDeviceMotionRecorder : ORKRecorder
-
-/**
- The frequency of motion data collection from CoreMotion in hertz (Hz).
- */
-@property (nonatomic, readonly) double frequency;
-
-/**
- Returns an initialized device motion recorder using the specified frequency.
- 
- @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
- @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
- @param step                The step that requested this recorder.
- @param outputDirectory     The directory in which the device motion data should be stored.
- 
- @return An initialized motion data recorder.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                         frequency:(double)frequency
-                              step:(nullable ORKStep *)step
-                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+@interface ORKDeviceMotionReactionTimeViewController : ORKActiveStepViewController
 
 @end
 
