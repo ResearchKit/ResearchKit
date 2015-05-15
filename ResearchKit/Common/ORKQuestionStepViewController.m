@@ -560,7 +560,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     tableView.layoutMargins = UIEdgeInsetsZero;
     
     if (indexPath.section == ORKQuestionSectionSpace1 || indexPath.section == ORKQuestionSectionSpace2) {
-        static NSString * SpaceIdentifier = @"Space";
+        static NSString *SpaceIdentifier = @"Space";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpaceIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpaceIdentifier];
@@ -591,7 +591,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
-    cell.separatorInset = (UIEdgeInsets){.left=ORKStandardLeftMarginForTableViewCell(tableView)};
+    if (indexPath.section == ORKQuestionSectionSpace2) {
+        cell.separatorInset = (UIEdgeInsets){.left = 10000.0};
+    } else {
+        cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
+    };
 }
 
 - (BOOL)shouldContinue {
