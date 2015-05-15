@@ -50,6 +50,7 @@
 
 // Specific active task modules
 #import <ResearchKit/ORKAudioStep.h>
+#import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
@@ -58,6 +59,7 @@
 #import <ResearchKit/ORKCompletionStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
+#import <ResearchKit/ORKToneAudiometryStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>
 #import <ResearchKit/ORKCountdownStepViewController.h>
