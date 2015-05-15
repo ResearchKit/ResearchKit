@@ -361,15 +361,18 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
                                                                  duration:20.0 options:(ORKPredefinedTaskOption)0];
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
-        return [ORKOrderedTask deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                                   intendedUseDescription:nil
-                                                         getReadyInterval:1
-                                                  maximumStimulusInterval:8
-                                                  minimumStimulusInterval:4
-                                                    thresholdAcceleration:0.5
-                                                         numberOfAttempts:3
-                                                                  timeout:10
-                                                                  options:0];
+        return [ORKOrderedTask
+                deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+                intendedUseDescription:nil
+                maximumStimulusInterval:8
+                minimumStimulusInterval:4
+                thresholdAcceleration:0.5
+                numberOfAttempts:3
+                timeout:10
+                successSound:0
+                timeoutSound:0
+                failureSound:0
+                options:0];
     }
     return nil;
 }
