@@ -1550,7 +1550,10 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                              minimumValue:0.0
                                                                                                              defaultValue:0.8725
                                                                                                     maximumFractionDigits:0
-                                                                                                                 vertical:YES];
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
+
         scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
