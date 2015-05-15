@@ -1609,7 +1609,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
         step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
         step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
-        step.shouldUsePercentageBasedTemplateImageInsets = YES;
         [steps addObject:step];
     }
     {
@@ -1630,7 +1629,6 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
         step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
         step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
-        step.shouldUsePercentageBasedTemplateImageInsets = YES;
         [steps addObject:step];
     }
     {

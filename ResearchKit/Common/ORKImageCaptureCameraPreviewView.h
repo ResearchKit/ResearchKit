@@ -39,7 +39,6 @@
 @property (nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (nonatomic, weak, nullable) UIImage *templateImage;
 @property (nonatomic) UIEdgeInsets templateImageInsets;
-@property (nonatomic) BOOL shouldUsePercentageBasedTemplateImageInsets;
 @property (nonatomic) BOOL hideTemplateImage;
 @property (nonatomic, weak, nullable) UIImage *capturedImage;
 

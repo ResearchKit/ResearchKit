@@ -391,7 +391,6 @@ ret =
       return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
   },
   (@{
-    PROPERTY(shouldUsePercentageBasedTemplateImageInsets, NSNumber, NSObject, YES, nil, nil),
     PROPERTY(templateImageInsets, NSValue, NSObject, NO,
             ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
             ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),

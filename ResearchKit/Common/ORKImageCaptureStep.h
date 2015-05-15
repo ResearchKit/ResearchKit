@@ -37,6 +37,5 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, strong) UIImage *templateImage;
 @property (nonatomic) UIEdgeInsets templateImageInsets;
-@property (nonatomic) BOOL shouldUsePercentageBasedTemplateImageInsets;
 
 @end

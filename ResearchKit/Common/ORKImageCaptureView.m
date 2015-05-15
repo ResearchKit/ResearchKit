@@ -123,7 +123,6 @@
     
     _previewView.templateImage = imageCaptureStep.templateImage;
     _previewView.templateImageInsets = imageCaptureStep.templateImageInsets;
-    _previewView.shouldUsePercentageBasedTemplateImageInsets = imageCaptureStep.shouldUsePercentageBasedTemplateImageInsets;
 }
 
 - (void)setCapturedImage:(UIImage * __nullable)capturedImage {

@@ -46,7 +46,6 @@
     if (self) {
         ORK_DECODE_IMAGE(aDecoder, templateImage);
         ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
-        ORK_DECODE_BOOL(aDecoder, shouldUsePercentageBasedTemplateImageInsets);
     }
     return self;
 }
@@ -55,7 +54,6 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_IMAGE(aCoder, templateImage);
     ORK_ENCODE_UIEDGEINSETS(aCoder, templateImageInsets);
-    ORK_ENCODE_BOOL(aCoder, shouldUsePercentageBasedTemplateImageInsets);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -66,7 +64,6 @@
     ORKImageCaptureStep *step = [super copyWithZone:zone];
     step.templateImage = self.templateImage;
     step.templateImageInsets = self.templateImageInsets;
-    step.shouldUsePercentageBasedTemplateImageInsets = self.shouldUsePercentageBasedTemplateImageInsets;
     return step;
 }
 
@@ -75,8 +72,7 @@
     
     __typeof(self) castObject = object;
     return isParentSame && ORKEqualObjects(self.templateImage, castObject.templateImage)
-                        && UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets)
-                        && self.shouldUsePercentageBasedTemplateImageInsets==castObject.shouldUsePercentageBasedTemplateImageInsets;
+                        && UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets);
 }
 
 - (ORKPermissionMask)requestedPermissions {

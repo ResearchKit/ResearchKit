@@ -138,11 +138,10 @@
     
     // Update the insets on the template image view, if needed
     CGRect previewLayerContentFrame = UIEdgeInsetsInsetRect(_previewLayer.frame, previewLayerContentFrameInsets);
-    UIEdgeInsets insets = !self.shouldUsePercentageBasedTemplateImageInsets ? self.templateImageInsets :
-                        UIEdgeInsetsMake(round(self.templateImageInsets.top * previewLayerContentFrame.size.height),
-                                         round(self.templateImageInsets.left * previewLayerContentFrame.size.width),
-                                         round(self.templateImageInsets.bottom * previewLayerContentFrame.size.height),
-                                         round(self.templateImageInsets.right * previewLayerContentFrame.size.width));
+    UIEdgeInsets insets = UIEdgeInsetsMake(round(self.templateImageInsets.top * previewLayerContentFrame.size.height),
+                                           round(self.templateImageInsets.left * previewLayerContentFrame.size.width),
+                                           round(self.templateImageInsets.bottom * previewLayerContentFrame.size.height),
+                                           round(self.templateImageInsets.right * previewLayerContentFrame.size.width));
     
     if (_templateImageViewTopInset.constant!=insets.top) {
         _templateImageViewTopInset.constant = insets.top;
