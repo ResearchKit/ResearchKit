@@ -53,7 +53,7 @@
 
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
     BOOL _hasAppeared;
-    ORKStepViewControllerNavigationDirection _navDirection;
+    ORKStepViewControllerNavigationDirection _navigationDirection;
     
     ORKVisualConsentTransitionAnimator *_animator;
     
@@ -159,7 +159,7 @@
     
     _viewControllers = nil;
     
-    [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO completion:nil];
+    [self showViewController:[self viewControllerForIndex:0] forward:YES animated:NO];
 }
 
 - (ORKEAGLMoviePlayerView *)animationPlayerView {
@@ -215,17 +215,17 @@
         
         // Add first viewController
         NSUInteger idx = 0;
-        if (_navDirection == ORKStepViewControllerNavigationDirectionReverse) {
+        if (_navigationDirection == ORKStepViewControllerNavigationDirectionReverse) {
             idx = [self pageCount]-1;
         }
         
-        [self showViewController:[self viewControllerForIndex:idx] forward:YES animated:NO completion:nil];
+        [self showViewController:[self viewControllerForIndex:idx] forward:YES animated:NO];
     }
     [self updatePageIndex];
 }
 
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction {
-    _navDirection = direction;
+    _navigationDirection = direction;
 }
 
 - (UIBarButtonItem *)goToPreviousPageButton {
@@ -257,7 +257,7 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES completion:nil];
+    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
@@ -279,7 +279,7 @@
     [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:NO completion:nil];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
         // 'finished' is always YES when not animated
-        [self showViewController:nextConsentSceneViewController forward:YES animated:YES completion:nil];
+        [self showViewController:nextConsentSceneViewController forward:YES animated:YES];
         ORKAccessibilityPostNotificationAfterDelay(UIAccessibilityScreenChangedNotification, nil, 0.5);
     }];
 }
@@ -349,6 +349,13 @@
     UIView *pageViewControllerView = self.pageViewController.view;
     pageViewControllerView.userInteractionEnabled = NO;
     
+    if (!viewController || !self.pageViewController) {
+        if (completion) {
+            completion(NO);
+        }
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
         __strong typeof(self) strongSelf = weakSelf;
@@ -361,8 +368,8 @@
     }];
 }
 
-- (void)doAnimateFromViewController:(ORKConsentSceneViewController *)fromController
-                       toController:(ORKConsentSceneViewController *)viewController
+- (void)doAnimateFromViewController:(ORKConsentSceneViewController *)fromViewController
+                       toController:(ORKConsentSceneViewController *)toViewController
                           direction:(UIPageViewControllerNavigationDirection)direction
                                 url:(NSURL *)url
             animateBeforeTransition:(BOOL)animateBeforeTransition
@@ -378,8 +385,8 @@
         [animator finish];
         if (strongSelf->_animator == animator) {
             // Do not show images and hide animationPlayerView if it's not the current animator
-            fromController.imageHidden = NO;
-            viewController.imageHidden = NO;
+            fromViewController.imageHidden = NO;
+            toViewController.imageHidden = NO;
             [strongSelf animationPlayerView].hidden = YES;
             strongSelf->_animator = nil;
         }
@@ -414,11 +421,11 @@
         [_animator animateTransitionWithDirection:direction
                                       loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
                                           
-                                          fromController.imageHidden = YES;
-                                          viewController.imageHidden = YES;
+                                          fromViewController.imageHidden = YES;
+                                          toViewController.imageHidden = YES;
                                           
                                           __strong typeof(self) strongSelf = weakSelf;
-                                          [strongSelf doShowViewController:viewController
+                                          [strongSelf doShowViewController:toViewController
                                                                  direction:direction
                                                                   animated:YES
                                                                 completion:^(BOOL finished) {
@@ -438,7 +445,7 @@
         [_animator animateTransitionWithDirection:direction
                                       loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
                                           
-                                          fromController.imageHidden = YES;
+                                          fromViewController.imageHidden = YES;
                                       }
                                 completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
                                     
@@ -446,7 +453,7 @@
                                     finishAndNilAnimator(animator);
                                     
                                     __strong typeof(self) strongSelf = weakSelf;
-                                    [strongSelf doShowViewController:viewController
+                                    [strongSelf doShowViewController:toViewController
                                                            direction:direction
                                                             animated:YES
                                                           completion:^(BOOL finished) {
@@ -459,8 +466,8 @@
                                 }];
 
     } else if (!animateBeforeTransition && transitionBeforeAnimate) {
-        viewController.imageHidden = YES;
-        [self doShowViewController:viewController
+        toViewController.imageHidden = YES;
+        [self doShowViewController:toViewController
                          direction:direction
                           animated:YES
                         completion:^(BOOL finished) {
@@ -491,7 +498,17 @@
     }
 }
 
-- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated                   completion:(void (^)(BOOL finished))completion {
+- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
+    [self showViewController:viewController
+                     forward:forward
+                    animated:animated
+                  completion:nil];
+}
+
+- (void)showViewController:(ORKConsentSceneViewController *)viewController
+                   forward:(BOOL)forward
+                  animated:(BOOL)animated
+                completion:(void (^)(BOOL finished))completion {
     if (!viewController) {
         if (completion) {
             completion(NO);
@@ -502,16 +519,16 @@
     _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView delegate:self];
     [self.taskViewController setRegisteredScrollView:viewController.scrollView];
 
-    ORKConsentSceneViewController *fromController = nil;
+    ORKConsentSceneViewController *fromViewController = nil;
     NSUInteger currentIndex = [self currentIndex];
     if (currentIndex == NSNotFound) {
         animated = NO;
     } else {
-        fromController = _viewControllers[@(currentIndex)];
+        fromViewController = _viewControllers[@(currentIndex)];
     }
     
     // Cancel any previous video animation
-    fromController.imageHidden = NO;
+    fromViewController.imageHidden = NO;
     viewController.imageHidden = NO;
     if (_animator) {
         [self animationPlayerView].hidden = YES;
@@ -560,7 +577,7 @@
             // No video animation URL, just a regular push transition animation.
             [self doShowViewController:viewController direction:direction animated:animated completion:completion];
         } else {
-            [self doAnimateFromViewController:fromController
+            [self doAnimateFromViewController:fromViewController
                                  toController:viewController
                                     direction:direction
                                           url:url
@@ -670,7 +687,7 @@ static NSString *const _ORKInitialBackButtonRestoreKey = @"initialBackButton";
     _hasAppeared = [coder decodeBoolForKey:_ORKHasAppearedRestoreKey];
     
     _viewControllers = nil;
-    [self showViewController:[self viewControllerForIndex:_currentPage] forward:YES animated:NO completion:nil];
+    [self showViewController:[self viewControllerForIndex:_currentPage] forward:YES animated:NO];
 }
 
 @end
