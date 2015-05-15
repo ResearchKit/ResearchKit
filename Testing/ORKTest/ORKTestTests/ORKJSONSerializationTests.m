@@ -269,6 +269,7 @@
                                               @"ORKConsentDocument.writer",
                                               @"ORKConsentDocument.sections",
                                               @"ORKConsentDocument.signatures",
+                                              @"ORKContinuousScaleAnswerFormat.numberFormatter",
                                               @"ORKFormItem.step",
                                               @"ORKHealthKitCharacteristicTypeAnswerFormat.characteristicType",
                                               @"ORKTimeIntervalAnswerFormat.maximumInterval",
@@ -283,6 +284,7 @@
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKActiveStep.requestedPermissions",
                                               @"ORKOrderedTask.providesBackgroundAudioPrompts",
+                                              @"ORKScaleAnswerFormat.numberFormatter",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKStep.allowsBackNavigation",
                                               @"ORKAnswerFormat.healthKitUserUnit",
@@ -347,6 +349,7 @@
         
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
+            [instance setValue:@(ORKNumberFormattingStylePercent) forKey:@"numberStyle"];
         } else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
             [instance setValue:@(0) forKey:@"minimum"];
             [instance setValue:@(100) forKey:@"maximum"];

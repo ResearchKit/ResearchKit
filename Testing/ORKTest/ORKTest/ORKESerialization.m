@@ -288,6 +288,15 @@ static NSArray *memoryGameStatusTable() {
     return table;
 }
 
+static NSArray *numberFormattingStyleTable() {
+    static NSArray *table = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        table = @[@"default", @"percent"];
+    });
+    return table;
+}
+
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
@@ -628,7 +637,10 @@ ret =
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(numberStyle, NSNumber, NSObject, YES,
+                   ^id(id numeric) { return tableMapForward([numeric integerValue], numberFormattingStyleTable()); },
+                   ^id(id string) { return @(tableMapReverse(string, numberFormattingStyleTable())); })
           })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

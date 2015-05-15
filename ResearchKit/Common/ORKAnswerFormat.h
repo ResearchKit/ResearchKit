@@ -84,6 +84,14 @@ typedef NS_ENUM(NSInteger, ORKChoiceAnswerStyle) {
     ORKChoiceAnswerStyleMultipleChoice
 } ORK_ENUM_AVAILABLE;
 
+/// An enumeration of the format styles available for scale answers.
+typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
+    /// The default decimal style.
+    ORKNumberFormattingStyleDefault,
+    
+    /// Percent style.
+    ORKNumberFormattingStylePercent
+} ORK_ENUM_AVAILABLE;
 
 @class ORKScaleAnswerFormat;
 @class ORKContinuousScaleAnswerFormat;
@@ -270,6 +278,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly, getter=isVertical) BOOL vertical;
 
+/**
+ Number formatter applied to the minimum, maximum, and slider values. Can be overridden by subclasses.
+ */
+@property (readonly) NSNumberFormatter *numberFormatter;
+
 @end
 
 
@@ -344,6 +357,16 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
 @property (readonly, getter=isVertical) BOOL vertical;
+
+/**
+ Formatting style applied to the minimum, maximum, and slider values.
+ */
+@property ORKNumberFormattingStyle numberStyle;
+
+/**
+ Number formatter applied to the minimum, maximum, and slider values. Can be overridden by subclasses.
+ */
+@property (readonly) NSNumberFormatter *numberFormatter;
 
 @end
 
