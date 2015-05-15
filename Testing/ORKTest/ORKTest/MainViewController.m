@@ -685,7 +685,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                                   minimumValue:1
                                                                                                                   defaultValue:NSIntegerMax
                                                                                                                           step:1
-                                                                                                                      vertical:NO]];
+                                                                                                                      vertical:NO
+                                                                                                       maximumValueDescription:@"High value"
+                                                                                                       minimumValueDescription:@"Low value"]];
         [steps addObject:step];
     }
     
@@ -1349,7 +1351,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                              minimumValue:1
                                                                                                              defaultValue:NSIntegerMax
                                                                                                     maximumFractionDigits:2
-                                                                                                                 vertical:NO];
+                                                                                                                 vertical:NO
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
@@ -1365,7 +1369,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                          minimumValue:100
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:50
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_02"
                                                                     title:@"How much money do you need?"
@@ -1381,7 +1387,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                          minimumValue:1
                                                                                          defaultValue:5
                                                                                                  step:1
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_03"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
@@ -1397,7 +1405,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                          minimumValue:100
                                                                                          defaultValue:174
                                                                                                  step:50
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_04"
                                                                     title:@"How much money do you need?"
@@ -1413,7 +1423,9 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                                              minimumValue:1
                                                                                                              defaultValue:8.725
                                                                                                     maximumFractionDigits:3
-                                                                                                                 vertical:YES];
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
                                                                       title:@"On a scale of 1 to 10, what is your mood?"
@@ -1429,10 +1441,84 @@ static NSString *const TwoFingerTapTaskIdentifier = @"tap";
                                                                                          minimumValue:1
                                                                                          defaultValue:5
                                                                                                  step:1
-                                                                                             vertical:YES];
+                                                                                             vertical:YES
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
                                                                       title:@"How was your mood yesterday?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical discrete scale, with min and max labels.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:YES
+                                                                              maximumValueDescription:@"A lot"
+                                                                              minimumValueDescription:@"Not at all"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical continuous scale, with min and max labels.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:99
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:@"High value"
+                                                                                                  minimumValueDescription:@"Low value"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_08"
+                                                                      title:@"How would you measure your mood improvement?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical discrete scale, with min and max labels.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:@"A lot"
+                                                                              minimumValueDescription:@"Not at all"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_09"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical continuous scale, with min and max labels.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:99
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:NO
+                                                                                                  maximumValueDescription:@"High value"
+                                                                                                  minimumValueDescription:@"Low value"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_10"
+                                                                      title:@"How would you measure your mood improvement?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
