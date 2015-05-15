@@ -132,8 +132,8 @@
 /* Image catpure step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
-"CAPTURE_ERROR_INPUT_NOT_FOUND" = "This device does not contain a camera.  This step cannot be completed.";
-"CAPTURE_ERROR_OUTPUT_NOT_FOUND" = "This device cannot capture an image.  In order to complete this step, allow this app access to the camera in the settings.";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in the settings.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
 

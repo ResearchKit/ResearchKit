@@ -174,31 +174,30 @@
     
     _captureSession.sessionPreset = AVCaptureSessionPresetPhoto;
     
-    // Configure the input
+    // Get the camera
     AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput* input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
-    if ([_captureSession canAddInput:input]) {
-        [_captureSession addInput:input];
+    if(device) {
+        // Configure the input and output
+        AVCaptureDeviceInput* input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+        if ([_captureSession canAddInput:input] && [_captureSession canAddOutput:stillImageOutput]) {
+            [_captureSession addInput:input];
+            [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
+            [_captureSession addOutput:stillImageOutput];
+            [self setStillImageOutput:stillImageOutput];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)}]];
+            });
+            _captureSession = nil;
+        }
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_INPUT_NOT_FOUND", nil)}]];
+            [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CAMERA_NOT_FOUND", nil)}]];
         });
         _captureSession = nil;
     }
     
-    // Configure the output
-    AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    if ([_captureSession canAddOutput:stillImageOutput])
-    {
-        [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
-        [_captureSession addOutput:stillImageOutput];
-        [self setStillImageOutput:stillImageOutput];
-    } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_OUTPUT_NOT_FOUND", nil)}]];
-        });
-        _captureSession = nil;
-    }
     
     [_captureSession commitConfiguration];
     
