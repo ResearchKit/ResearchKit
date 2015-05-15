@@ -843,7 +843,6 @@ ret =
             })),
    ENTRY(ORKTaskResult,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             NSLog(@"blah");
              return [[ORKTaskResult alloc] initWithTaskIdentifier:GETPROP(dict, identifier) taskRunUUID:GETPROP(dict, taskRunUUID) outputDirectory:GETPROP(dict, outputDirectory)];
          },
          (@{
