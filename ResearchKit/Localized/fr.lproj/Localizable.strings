@@ -166,6 +166,15 @@
 "AUDIO_INTENDED_USE" = "Cette activité évalue votre voix en l’enregistrant dans le micro au bas de votre téléphone.";
 "AUDIO_TOO_LOUD_LABEL" = "Trop fort";
 
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiométrie Tonale";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Cette activité évalue votre audition en testant votre réponse à différents sons.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Mettez vos écouteurs, et réglez le volume à un niveau confortable. Appuyez sur le bouton dès que vous entendez un son.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Appuyez sur le bouton dès que vous entendez un son.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, gauche";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, droite";
+
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Mémoire spatiale";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Cette activité évalue votre mémoire spatiale à court terme en vous demandant de répéter l’ordre dans lequel les images de %@ s’éclairent.";

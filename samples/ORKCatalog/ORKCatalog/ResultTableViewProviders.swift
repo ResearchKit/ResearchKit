@@ -100,6 +100,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKTaskResult:
                 providerType = TaskResultTableViewProvider.self
 
+            case is ORKToneAudiometryResult:
+                providerType = ToneAudiometryResultTableViewProvider.self
+
             /*
                 Refer to the comment near the switch statement for why the
                 additional guard is here.
@@ -465,6 +468,65 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
             let text = String(format: "%.3f", tappingSample.timestamp)
             let detail = "\(buttonText) \(tappingSample.location)"
             
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKToneAudiometryResult` instance.
+class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+
+        return "Samples"
+    }
+
+    // MARK: UITableViewDelegate
+
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+
+    // MARK: ResultTableViewProvider
+
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let toneAudiometryResult = result as! ORKToneAudiometryResult
+        let rows = super.resultRowsForSection(section)
+
+        if section == 0 {
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
+            ]
+        }
+
+        // Add a `ResultRow` for each sample.
+        return rows + toneAudiometryResult.samples!.map { sample in
+            let toneSample = sample as! ORKToneAudiometrySample
+
+            let text : String
+            let detail : String
+
+            if let frequency = toneSample.frequency,
+                amplitude = toneSample.amplitude {
+                    let channelName = toneSample.channel == ORKAudioChannel.Left ? "Left" : "Right"
+
+                    text = "\(frequency) \(channelName)"
+                    detail = "\(amplitude)"
+            }
+            else {
+                text = ""
+                detail = ""
+            }
+
             return ResultRow(text: text, detail: detail)
         }
     }

@@ -123,6 +123,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (NSInteger)numberOfSteps;
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
 - (BOOL)isVertical;
+- (NSString *)maximumValueDescription;
+- (NSString *)minimumValueDescription;
 
 @end
 
