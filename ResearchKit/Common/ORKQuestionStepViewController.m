@@ -592,7 +592,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.layoutMargins = UIEdgeInsetsZero;
     if (indexPath.section == ORKQuestionSectionSpace2) {
-        cell.separatorInset = (UIEdgeInsets){.left = 10000.0};
+        // Hide double bottom separator (the last answer cell already has one)
+        cell.separatorInset = (UIEdgeInsets){.left = cell.bounds.size.width};
     } else {
         cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
     };
