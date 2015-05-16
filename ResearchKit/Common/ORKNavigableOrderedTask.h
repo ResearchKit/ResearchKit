@@ -67,6 +67,15 @@ ORK_CLASS_AVAILABLE
 - (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
 
 /**
+ Returns the step navigation rule (if any) associated to a trigger step identifier.
+ 
+ @param triggerStepIdentifier   The identifier of the step whose rule you want to retrieve.
+
+ @return A step navigation rule, or `nil` if the trigger step identifier has none.
+ */
+- (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier;
+
+/**
  Removes the navigation rule (if any) associated to the specified trigger step identifier.
  
  @param triggerStepIdentifier   The identifier of the step whose rule is to be removed.

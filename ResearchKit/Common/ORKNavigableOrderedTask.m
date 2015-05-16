@@ -59,6 +59,12 @@
     _stepNavigationRules[triggerStepIdentifier] = stepNavigationRule;
 }
 
+- (ORKStepNavigationRule *)navigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
+    ORKThrowInvalidArgumentExceptionIfNil(triggerStepIdentifier);
+
+    return _stepNavigationRules[triggerStepIdentifier];
+}
+
 - (void)removeNavigationRuleForTriggerStepIdentifier:(NSString *)triggerStepIdentifier {
     ORKThrowInvalidArgumentExceptionIfNil(triggerStepIdentifier);
     
@@ -82,12 +88,12 @@
         nextStep = [super stepAfterStep:step withResult:result];
     }
     if (nextStep) {
-        [self updateStepIdentifierStackWithSourceIdenfier:step.identifier destinationIdentifier:nextStep.identifier];
+        [self updateStepIdentifierStackWithSourceIdentifier:step.identifier destinationIdentifier:nextStep.identifier];
     }
     return nextStep;
 }
     
-- (void)updateStepIdentifierStackWithSourceIdenfier:(NSString *)sourceIdentifer destinationIdentifier:(NSString *)destinationIdentifier {
+- (void)updateStepIdentifierStackWithSourceIdentifier:(NSString *)sourceIdentifer destinationIdentifier:(NSString *)destinationIdentifier {
     if (!_stepIdentifierStack) {
         _stepIdentifierStack = [NSMutableOrderedSet new];
         // sourceIdentifier is nil if the task starts fresh,

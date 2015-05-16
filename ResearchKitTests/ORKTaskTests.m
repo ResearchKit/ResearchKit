@@ -379,19 +379,23 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertEqualObjects(_navigableOrderedTask.steps, _navigableOrderedTaskSteps);
     XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules, _stepNavigationRules);
 
+    for (NSString *triggerStepIdentifier in [_stepNavigationRules allKeys]) {
+        XCTAssertEqualObjects(_stepNavigationRules[triggerStepIdentifier], [_navigableOrderedTask navigationRuleForTriggerStepIdentifier:triggerStepIdentifier]);
+    }
+    
     ORKDefineStringKey(MockTriggerStepIdentifier);
     ORKDefineStringKey(MockDestinationStepIdentifier);
 
     // Test adding and removing a step navigation rule
-    XCTAssertNil(_navigableOrderedTask.stepNavigationRules[MockTriggerStepIdentifier]);
+    XCTAssertNil([_navigableOrderedTask navigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier]);
 
     ORKDirectStepNavigationRule *mockNavigationRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MockDestinationStepIdentifier];
     [_navigableOrderedTask setNavigationRule:mockNavigationRule forTriggerStepIdentifier:MockTriggerStepIdentifier];
  
-    XCTAssertEqualObjects(_navigableOrderedTask.stepNavigationRules[MockTriggerStepIdentifier], [mockNavigationRule copy]);
+    XCTAssertEqualObjects([_navigableOrderedTask navigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier], [mockNavigationRule copy]);
     
     [_navigableOrderedTask removeNavigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier];
-    XCTAssertNil(_navigableOrderedTask.stepNavigationRules[MockTriggerStepIdentifier]);
+    XCTAssertNil([_navigableOrderedTask navigationRuleForTriggerStepIdentifier:MockTriggerStepIdentifier]);
 }
 
 - (void)testNavigableOrderedTaskEmpty {
