@@ -35,6 +35,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern const double ORKIgnoreDoubleValue;
+extern const NSTimeInterval ORKIgnoreTimeIntervalValue;
+
 /**
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
  `ORKQuestionResult` subtypes.
@@ -70,8 +73,12 @@ ORK_CLASS_AVAILABLE
  specified double values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerValue  The minimum expected double value.
- @param maximumExpectedAnswerValue  The maximum expected double value.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
  
  @return A result predicate.
  */
@@ -196,8 +203,12 @@ ORK_CLASS_AVAILABLE
  specified double values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerValue  The minimum expected double value.
- @param maximumExpectedAnswerValue  The maximum expected double value.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a minimum
+                                        double value.
  
  @return A result predicate.
  */
@@ -255,8 +266,12 @@ ORK_CLASS_AVAILABLE
  is within the specified `NSTimeInterval` values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
- @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
+ @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
+                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+                                        answer against a maximum `NSTimeInterval` value.
+ @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value. Pass
+                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+                                        answer against a minimum `NSTimeInterval` value.
  
  @return A result predicate.
  */

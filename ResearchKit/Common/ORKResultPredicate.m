@@ -33,6 +33,9 @@
 #import "ORKHelpers.h"
 
 
+const double ORKIgnoreDoubleValue = DBL_MAX;
+const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
+
 @implementation ORKResultPredicate
 
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer {
@@ -137,28 +140,35 @@
                                       minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                       maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
-                              resultIdentifier, @(minimumExpectedAnswerValue), @(maximumExpectedAnswerValue)];
+    
+    NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:resultIdentifier, nil];
+    NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
+    if (minimumExpectedAnswerValue != ORKIgnoreDoubleValue) {
+        [format appendString:@" AND $x.answer >= %@"];
+        [arguments addObject:@(minimumExpectedAnswerValue)];
+    }
+    if (maximumExpectedAnswerValue != ORKIgnoreDoubleValue) {
+        [format appendString:@" AND $x.answer <= %@"];
+        [arguments addObject:@(maximumExpectedAnswerValue)];
+    }
+    [format appendString:@").@count > 0"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:format argumentArray:arguments];
     return predicate;
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
                                       minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
-    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@).@count > 0",
-                              resultIdentifier, @(minimumExpectedAnswerValue)];
-    return predicate;
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:ORKIgnoreDoubleValue];
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
                                       maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer <= %@).@count > 0",
-                              resultIdentifier, @(maximumExpectedAnswerValue)];
-    return predicate;
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      minimumExpectedAnswerValue:ORKIgnoreDoubleValue
+                                      maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForTimeOfDayQuestionResultWithIdentifier:(NSString *)resultIdentifier
@@ -197,6 +207,7 @@
                                     minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
                                     maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+    
     NSMutableArray *arguments = [[NSMutableArray alloc] initWithObjects:resultIdentifier, nil];
     NSMutableString *format = [@"SUBQUERY(SELF, $x, $x.identifier like %@" mutableCopy];
     if (minimumExpectedAnswerDate) {
