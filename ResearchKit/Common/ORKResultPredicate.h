@@ -30,6 +30,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <ResearchKit/ORKDefines.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,6 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
  `ORKQuestionResult` subtypes.
+ 
+ You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
+ are used to match specific `ORKQuestionResult` instances (created in response of the participant's
+ answers) and navigate accordingly. You can match results both in an ongoing task or in previously
+ completed tasks.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject

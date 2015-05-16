@@ -41,10 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
  In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can
  be represented as an ordered task.
  
- The `ORKNavigableOrderedTask` subclass implements conditional step navigation behavior. 
- For example, this subclass allows you to display a survey question only when the user answered Yes
- to a specific question, or to define arbitrary jumps between the steps.
- 
  If you want further custom conditional behaviors in a task, it can be easier to subclass
  `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
  to implement the `ORKTask` protocol directly. Override `stepAfterStep:withResult:` and
@@ -189,8 +185,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                     count down timer is displayed for each leg of the walk.
  @param restDuration            The duration of the rest period. When the value of this parameter is
                                     nonzero, the user is asked to stand still for the specified rest
-                                    period after the turn sequence has been completed, and baseline data
-                                    is collected.
+                                    period after the turn sequence has been completed, and baseline
+                                    data is collected.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active short walk task that can be presented with an `ORKTaskViewController` object.

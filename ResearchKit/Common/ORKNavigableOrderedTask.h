@@ -53,11 +53,11 @@ ORK_CLASS_AVAILABLE
 @interface ORKNavigableOrderedTask : ORKOrderedTask
 
 /**
- Adds a navigation rule for a trigger step identifier. The rule will be used to obtain a new
- destination step when the participant is continuing forward from the trigger step in the task.
+ Adds a navigation rule for a trigger step identifier.
  
- You cannot add two different navigation rules to the same trigger step identifier: only the most
- recently added rule is kept.
+ The rule will be used to obtain a new destination step when the participant goes forward from the
+ trigger step. You cannot add two different navigation rules to the same trigger step identifier:
+ only the most recently added rule is kept.
  
  @param stepNavigationRule      The step navigation rule to be used when navigating forward from the
                                     trigger step. A strong reference to the rule is maintained by

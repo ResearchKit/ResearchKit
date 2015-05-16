@@ -78,9 +78,14 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKPredicateStepNavigationRule` class is a concrete step navigation rule class.
  
- It can be used to match any answer combination in the results of the ongoing task and jump
- accordingly. You must provide one or more result predicates (each predicate can match one or more
- step result within the task).
+ It can be used to match any answer combination in the results of the ongoing task (or in those of
+ previously completed tasks) and jump accordingly. You must provide one or more result predicates
+ (each predicate can match one or more step result within the task).
+ 
+ Predicate step navigations rules contain an arbitrary number of result predicates with a
+ corresponding number of matching step identifiers, plus an optional default step identifier that is
+ used if none of the result predicates match. This allows you to define discretionarily complex task
+ navigation behaviors.
  
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
  `ORKQuestionResult` subtypes.
@@ -135,10 +140,13 @@ ORK_CLASS_AVAILABLE
 /**
  An optional array of additional task results.
  
- The predicate step navigation rule will use the child step results within these tasks, in addition
- to the current task results, to math the result predicates. You must ensure that all the step
- identifiers within the additional task results are unique, and that they are different from the
- step identifiers within the current task result.
+ This allows for a task to have different navigation behavior depending on the results of related
+ tasks that the user may have already completed. The predicate step navigation rule will use the
+ child step results within these tasks, in addition to the current task results, to match the result
+ predicates.
+ 
+ You must ensure that all the step identifiers within the additional task results are unique, and 
+ that they are different from the step identifiers within the current task result.
  
  Each object in the array should be of the `ORKTaskResult` class.
  */

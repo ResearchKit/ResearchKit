@@ -32,11 +32,33 @@
 #import <ResearchKit/ORKStepNavigationRule.h>
 
 
-// This 'Private' header is needed because ORKESerialization needs access to ORKPredicateStepNavigationRule's internal initializer
+// This 'Private' header is needed because ORKESerialization uses ORKPredicateStepNavigationRule's
+// internal initializer in order to avoid argument array validation.
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface ORKPredicateStepNavigationRule ()
 
+/**
+ Returns an initialized predicate step navigation rule using the specified result predicates,
+ matching step identifiers, and an optional default step identifier.
+ 
+ @param resultPredicates            An array of result predicates. Each result predicate can match
+                                        one or more step results in the ongoing task.
+ @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in `resultPredicates`.
+ @param defaultStepIdentifier       The identifier of the step which will be used if none of the
+                                    result predicates match. If this argument is `nil` and none
+                                    of the predicates match, the default ordered task navigation
+                                    behavior takes place (i.e, the task goes to the next step in
+                                    order).
+ @param validateArrays              `YES` to throw an exception if `resultPredicates` or
+                                        `matchingStepIdentifiers` are `nil` or empty; `NO` to skip
+                                        their validation.
+ 
+ @return An initialized predicate step navigation rule.
+ */
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
                  matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier
