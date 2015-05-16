@@ -79,8 +79,8 @@
 
 @interface ORKPredicateStepNavigationRule ()
 
-@property (nonatomic, strong) NSArray *resultPredicates;
-@property (nonatomic, strong) NSArray *matchingStepIdentifiers;
+@property (nonatomic, copy) NSArray *resultPredicates;
+@property (nonatomic, copy) NSArray *matchingStepIdentifiers;
 @property (nonatomic, copy) NSString *defaultStepIdentifier;
 
 @end

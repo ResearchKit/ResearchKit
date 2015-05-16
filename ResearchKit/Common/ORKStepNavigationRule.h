@@ -152,6 +152,23 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, nullable) NSArray *additionalTaskResults;
 
+/**
+ The array of result predicates. It contains one result predicate for each of the step identifiers
+ in `matchingStepIdentifiers`.
+*/
+@property (nonatomic, copy, readonly) NSArray *resultPredicates;
+
+/**
+ The array of destination step identifiers. It contains one step identifier for each of the
+ predicates in `resultPredicates`.
+ */
+@property (nonatomic, copy, readonly) NSArray *matchingStepIdentifiers;
+
+/**
+ The identifier of the step which will be used if none of the result predicates match.
+ */
+@property (nonatomic, copy, readonly, nullable) NSString *defaultStepIdentifier;
+
 @end
 
 
@@ -179,6 +196,11 @@ ORK_CLASS_AVAILABLE
  @return A new direct step navigation rule.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+
+/**
+ The identifier of the destination step.
+ */
+@property (nonatomic, copy, readonly) NSString *destinationStepIdentifier;
 
 @end
 

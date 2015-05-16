@@ -617,12 +617,43 @@ ORKDefineStringKey(AdditionalTextValue);
     ORKTaskResult *taskResult = nil;
     ORKTaskResult *additionalTaskResult = nil;
     
-    // No additional task results
+    NSArray *resultPredicates = nil;
+    NSArray *matchingStepIdentifiers = nil;
+    NSString *defaultStepIdentifier = nil;
+    
+    // Test predicate step navigation rule initializers
     predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
                                                                   expectedString:TextValue];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
-                                                              defaultStepIdentifier:DefaultDestinationStepIdentifier];
+    resultPredicates = @[ predicate ];
+    matchingStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
+    predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
+                                                                  expectedString:TextValue];
+    
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                             matchingStepIdentifiers:matchingStepIdentifiers];
+
+    XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
+    XCTAssertEqualObjects(predicateRule.matchingStepIdentifiers, ORKArrayCopyObjects(matchingStepIdentifiers));
+    XCTAssertNil(predicateRule.defaultStepIdentifier);
+
+    defaultStepIdentifier = DefaultDestinationStepIdentifier;
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                             matchingStepIdentifiers:matchingStepIdentifiers
+                                                               defaultStepIdentifier:defaultStepIdentifier];
+
+    XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
+    XCTAssertEqualObjects(predicateRule.matchingStepIdentifiers, ORKArrayCopyObjects(matchingStepIdentifiers));
+    XCTAssertEqualObjects(predicateRule.defaultStepIdentifier, defaultStepIdentifier);
+
+    // Predicate matching, no additional task results
+    resultPredicates = @[ predicate ];
+    matchingStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
+    predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
+                                                                  expectedString:TextValue];
+    defaultStepIdentifier = DefaultDestinationStepIdentifier;
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                             matchingStepIdentifiers:matchingStepIdentifiers
+                                                               defaultStepIdentifier:defaultStepIdentifier];
 
     taskResult = [ORKTaskResult new];
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
@@ -630,7 +661,7 @@ ORKDefineStringKey(AdditionalTextValue);
     taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
 
-    // Additional task results
+    // Predicate matching, additional task results
     NSPredicate *currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
                                                                                       expectedString:TextValue];
     NSPredicate *additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:AdditionalTextStepIdentifier
@@ -660,7 +691,8 @@ ORKDefineStringKey(AdditionalTextValue);
     ORKTaskResult *mockTaskResult = [ORKTaskResult new];
     
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MatchedDestinationStepIdentifier];
-    XCTAssertEqualObjects([directRule identifierForDestinationStepWithTaskResult:mockTaskResult], MatchedDestinationStepIdentifier);
+    XCTAssertEqualObjects(directRule.destinationStepIdentifier, [MatchedDestinationStepIdentifier copy] );
+    XCTAssertEqualObjects([directRule identifierForDestinationStepWithTaskResult:mockTaskResult], [MatchedDestinationStepIdentifier copy]);
 }
 
 - (void)testResultPredicates {
