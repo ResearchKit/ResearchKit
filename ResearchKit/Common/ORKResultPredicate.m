@@ -40,21 +40,21 @@
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
-                                    maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
+                                    minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                    maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
                                       minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                       maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue {
+                                    minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
                                       minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                    maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
+                                    maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
                                       maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
@@ -134,8 +134,8 @@
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                      minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue
-                                      maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
+                                      minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@ AND $x.answer <= %@).@count > 0",
@@ -144,7 +144,7 @@
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                      minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue {
+                                      minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer >= %@).@count > 0",
@@ -153,7 +153,7 @@
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier
-                                      maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue {
+                                      maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"SUBQUERY(SELF, $x, $x.identifier like %@ AND $x.answer <= %@).@count > 0",
@@ -173,8 +173,24 @@
     return predicate;
 }
 
-+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer {
-    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier expectedAnswer:expectedAnswer];
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                           minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
+                                           maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                      maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                           minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      minimumExpectedAnswerValue:minimumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier
+                                           maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithIdentifier:resultIdentifier
+                                      maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForDateQuestionResultWithIdentifier:(NSString *)resultIdentifier

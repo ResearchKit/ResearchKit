@@ -830,10 +830,29 @@ ORKDefineStringKey(AdditionalTextValue);
                                                               maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
 
     // ORKTimeIntervalQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:TimeIntervalStepIdentifier
-                                                                             expectedAnswer:IntegerValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:TimeIntervalStepIdentifier
-                                                                              expectedAnswer:IntegerValue + 1] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:FloatValue - 0.01
+                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:FloatValue + 0.05
+                                                             maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:FloatValue - 0.01
+                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:FloatValue + 0.05
+                                                             maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                            minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                             minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
+                                                             maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
 
     // ORKDateQuestionResult
     NSDate *expectedDate = Date();
