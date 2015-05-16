@@ -174,6 +174,103 @@
 @end
 
 
+@implementation ORKToneAudiometryResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, outputVolume);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, outputVolume);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKToneAudiometrySample);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.outputVolume, castObject.outputVolume) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKToneAudiometryResult *result = [super copyWithZone:zone];
+    result.outputVolume = [self.outputVolume copy];
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@", [super description], self.outputVolume, self.samples];
+}
+
+@end
+
+
+@implementation ORKToneAudiometrySample
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, frequency);
+    ORK_ENCODE_ENUM(aCoder, channel);
+    ORK_ENCODE_OBJ(aCoder, amplitude);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, frequency);
+        ORK_DECODE_ENUM(aDecoder, channel);
+        ORK_DECODE_OBJ(aDecoder, amplitude);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+
+    __typeof(self) castObject = object;
+
+    return ((self.channel == castObject.channel) &&
+            ([self.frequency isEqualToNumber:castObject.frequency]) &&
+            ([self.amplitude isEqualToNumber:castObject.amplitude])) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKToneAudiometrySample *sample = [[[self class] allocWithZone:zone] init];
+    sample.frequency = self.frequency;
+    sample.channel = self.channel;
+    sample.amplitude = self.amplitude;
+    return sample;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], self.frequency, @(self.channel), self.amplitude];
+}
+
+@end
+
+
 @implementation ORKSpatialSpanMemoryGameTouchSample
 
 + (BOOL)supportsSecureCoding {

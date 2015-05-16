@@ -48,6 +48,7 @@ static NSString * const ScreeningTaskIdentifier = @"screening";
 static NSString * const ScalesTaskIdentifier = @"scales";
 static NSString * const ImageChoicesTaskIdentifier = @"images";
 static NSString * const AudioTaskIdentifier = @"audio";
+static NSString * const ToneAudiometryTaskIdentifier = @"tone_audiometry";
 static NSString * const FitnessTaskIdentifier = @"fitness";
 static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
@@ -123,6 +124,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [button addTarget:self action:@selector(showAudioTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Audio Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"audio"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showToneAudiometryTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Tone Audiometry Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"tone_audiometry"];
         buttons[buttonKeys.lastObject] = button;
     }
     {
@@ -311,6 +319,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                           duration:10
                                                  recordingSettings:nil
                                                            options:(ORKPredefinedTaskOption)0];
+        return task;
+    } else if ([identifier isEqualToString:ToneAudiometryTaskIdentifier]) {
+        id<ORKTask> task = [ORKOrderedTask toneAudiometryTaskWithIdentifier:ToneAudiometryTaskIdentifier
+                                                     intendedUseDescription:nil
+                                                          speechInstruction:nil
+                                                     shortSpeechInstruction:nil
+                                                               toneDuration:20
+                                                                    options:(ORKPredefinedTaskOption)0];
         return task;
     } else if ([identifier isEqualToString:MiniFormTaskIdentifier]) {
         return [self makeMiniFormTask];
@@ -725,7 +741,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                                   minimumValue:1
                                                                                                                   defaultValue:NSIntegerMax
                                                                                                                           step:1
-                                                                                                                      vertical:NO]];
+                                                                                                                      vertical:NO
+                                                                                                       maximumValueDescription:@"High value"
+                                                                                                       minimumValueDescription:@"Low value"]];
         [steps addObject:step];
     }
     
@@ -1315,6 +1333,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:AudioTaskIdentifier];
 }
 
+- (IBAction)showToneAudiometryTask:(id)sender {
+    [self beginTaskWithIdentifier:ToneAudiometryTaskIdentifier];
+}
+
 - (IBAction)showTwoFingerTappingTask:(id)sender {
     [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
 }
@@ -1389,7 +1411,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                              minimumValue:1
                                                                                                              defaultValue:NSIntegerMax
                                                                                                     maximumFractionDigits:2
-                                                                                                                 vertical:NO];
+                                                                                                                 vertical:NO
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
@@ -1405,7 +1429,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                          minimumValue:100
                                                                                          defaultValue:NSIntegerMax
                                                                                                  step:50
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_02"
                                                                     title:@"How much money do you need?"
@@ -1421,7 +1447,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                          minimumValue:1
                                                                                          defaultValue:5
                                                                                                  step:1
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_03"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
@@ -1437,7 +1465,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                          minimumValue:100
                                                                                          defaultValue:174
                                                                                                  step:50
-                                                                                             vertical:NO];
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_04"
                                                                     title:@"How much money do you need?"
@@ -1453,7 +1483,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                              minimumValue:1
                                                                                                              defaultValue:8.725
                                                                                                     maximumFractionDigits:3
-                                                                                                                 vertical:YES];
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_05"
                                                                       title:@"On a scale of 1 to 10, what is your mood?"
@@ -1469,14 +1501,107 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                          minimumValue:1
                                                                                          defaultValue:5
                                                                                                  step:1
-                                                                                             vertical:YES];
+                                                                                             vertical:YES
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_06"
+                                                                      title:@"How was your mood yesterday?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical discrete scale, with min and max labels.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:YES
+                                                                              maximumValueDescription:@"A lot"
+                                                                              minimumValueDescription:@"Not at all"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical continuous scale, with min and max labels.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:99
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:@"High value"
+                                                                                                  minimumValueDescription:@"Low value"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_08"
+                                                                      title:@"How would you measure your mood improvement?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical discrete scale, with min and max labels.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:@"A lot"
+                                                                              minimumValueDescription:@"Not at all"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_09"
+                                                                      title:@"On a scale of 1 to 10, what is your mood?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Vertical continuous scale, with min and max labels.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:99
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:NO
+                                                                                                  maximumValueDescription:@"High value"
+                                                                                                  minimumValueDescription:@"Low value"];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_10"
                                                                       title:@"How would you measure your mood improvement?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
 
+    {
+        /*
+         Vertical continuous scale with three decimal places, a default, and a format style.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:1.0
+                                                                                                             minimumValue:0.0
+                                                                                                             defaultValue:0.8725
+                                                                                                    maximumFractionDigits:0
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:nil
+                                                                                                  minimumValueDescription:nil];
+        scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+                                                                      title:@"How much has your mood improved?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScalesTaskIdentifier steps:steps];
     return task;
     
@@ -2104,6 +2229,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKFileResult class]]) {
                 ORKFileResult *fileResult = (ORKFileResult *)result;
                 NSLog(@"    File: %@", fileResult.fileURL);
+            } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
+                ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
+                NSLog(@"    %@:     %@", tor.identifier, tor.samples);
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

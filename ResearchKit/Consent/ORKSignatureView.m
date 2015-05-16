@@ -227,6 +227,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     [self.currentPath moveToPoint:currentPoint];
+    [self.currentPath addArcWithCenter:currentPoint radius:0.1 startAngle:0.0 endAngle:2.0 * M_PI clockwise:YES];
     [self gestureTouchesMoved:touches withEvent:event];
 }
 
