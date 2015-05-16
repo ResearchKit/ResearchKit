@@ -201,12 +201,15 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    // Intercept the continue button press
-    self.continueAction = continueButtonItem.action;
-    self.continueTarget = continueButtonItem.target;
-    self.continueTitle = continueButtonItem.title;
-    continueButtonItem.action = @selector(continuePressed);
-    continueButtonItem.target = self;
+    // Intercept the continue button press.  This can be called multiple
+    // times with the same UIBarButtonItem, so only capture it the first time
+    if(!self.continueAction) {
+        self.continueAction = continueButtonItem.action;
+        self.continueTarget = continueButtonItem.target;
+        self.continueTitle = continueButtonItem.title;
+        continueButtonItem.action = @selector(continuePressed);
+        continueButtonItem.target = self;
+    }
     
     // If we do not have an error to show, and we haven't already gotten a captured
     // image, then change the title of the button to be appropriate for the capture action

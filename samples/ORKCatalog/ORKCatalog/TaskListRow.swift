@@ -53,6 +53,7 @@ enum TaskListRow: Int, Printable {
     case Fitness
     case ShortWalk
     case Audio
+    case ImageCapture
     case Survey
     case Consent
     case Form
@@ -125,6 +126,9 @@ enum TaskListRow: Int, Printable {
 
             case .Audio:
                 return NSLocalizedString("Audio Active Task", comment: "")
+
+            case .ImageCapture:
+                return NSLocalizedString("Image Capture Task", comment: "")
 
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
@@ -206,6 +210,10 @@ enum TaskListRow: Int, Printable {
         case FitnessTask =                          "FitnessTask"
         case ShortWalkTask =                        "ShortWalkTask"
         case AudioTask =                            "AudioTask"
+        
+        // Image capture task
+        case ImageCaptureStep =                     "ImageCaptureStep"
+        case ImageCaptureTask =                     "ImageCaptureTask"
 
         // Survey task specific identifiers.
         case SurveyTask =                           "SurveyTask"
@@ -280,6 +288,9 @@ enum TaskListRow: Int, Printable {
             
             case .Audio:
                 return audioTask
+            
+            case .ImageCapture:
+                return imageCaptureTask
             
             case .Survey:
                 return surveyTask
@@ -568,6 +579,32 @@ enum TaskListRow: Int, Printable {
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
+    }
+
+    /// This task presents the image capture step in an ordered task.
+    private var imageCaptureTask: ORKTask {
+        var steps = [ORKStep]()
+        
+        // Create the intro step.
+        let instructionStep = ORKInstructionStep(identifier: Identifier.IntroStep.rawValue)
+        
+        instructionStep.title = NSLocalizedString("Sample Survey", comment: "")
+        
+        instructionStep.text = exampleDescription
+        
+        instructionStep.image = UIImage(named: "hand_solid")!
+        
+        steps += [instructionStep]
+        
+        let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
+        
+        imageCaptureStep.templateImage = UIImage(named: "hand_outline")!
+        
+        imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.10, left: 0.10, bottom: 0.10, right: 0.10)
+        
+        steps += [imageCaptureStep]
+        
+        return ORKOrderedTask(identifier: Identifier.ImageCaptureTask.rawValue, steps: steps)
     }
 
     /**
