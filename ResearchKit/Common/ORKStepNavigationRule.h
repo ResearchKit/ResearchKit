@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
 
-/**
+/*
  The `init` and `new` methods are unavailable.
  
  `ORKStepNavigationRule` classes should be initialized with custom designated

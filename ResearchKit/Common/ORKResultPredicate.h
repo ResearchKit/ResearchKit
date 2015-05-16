@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
 
-/**
+/*
  The `init` and `new` methods are unavailable. `ORKResultPredicate` only provides class methods and
  should not be instantiated.
  */

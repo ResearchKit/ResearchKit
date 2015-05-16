@@ -36,7 +36,6 @@
 // internal initializer in order to avoid argument array validation.
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface ORKPredicateStepNavigationRule ()
 
 /**
