@@ -38,22 +38,30 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStepNavigationRule;
 
 /**
- The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from `ORKOrderedTask`.
+ The `ORKNavigableOrderedTask` class adds conditional step navigation to the behavior inherited from
+ `ORKOrderedTask`.
  
- For implementing conditional task navigation, you must instantiate concrete subclasses of `ORKStepNavigationRule` and attach them to
- trigger steps by using `setNavigationRule:forTriggerStepIdentifier:`.
+ For implementing conditional task navigation, you must instantiate concrete subclasses of
+ `ORKStepNavigationRule` and attach them to trigger steps by using
+ `setNavigationRule:forTriggerStepIdentifier:`.
  
- For example, if you want to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
+ For example, if you want to display a survey question only when the user answered Yes to a previous
+ question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump
+ between two steps you can use `ORKDirectStepNavigationRule`.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKNavigableOrderedTask : ORKOrderedTask
 
 /**
- Adds a navigation rule for a trigger step identifier. The rule will be used to obtain a new destination step when the participant is continuing forward from the trigger step in the task.
+ Adds a navigation rule for a trigger step identifier. The rule will be used to obtain a new
+ destination step when the participant is continuing forward from the trigger step in the task.
  
- You cannot add two different navigation rules to the same trigger step identifier: only the most recently added rule is kept.
+ You cannot add two different navigation rules to the same trigger step identifier: only the most
+ recently added rule is kept.
  
- @param stepNavigationRule      The step navigation rule to be used when navigating forward from the trigger step. A strong reference to the rule is maintained by the task.
+ @param stepNavigationRule      The step navigation rule to be used when navigating forward from the
+                                    trigger step. A strong reference to the rule is maintained by
+                                    the task.
  @param triggerStepIdentifier   The identifier of the step that should trigger the rule.
  */
 - (void)setNavigationRule:(ORKStepNavigationRule *)stepNavigationRule forTriggerStepIdentifier:(NSString *)triggerStepIdentifier;

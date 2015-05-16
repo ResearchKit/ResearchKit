@@ -38,11 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTaskResult;
 
 /**
- The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules. Several navigation rules can be set on a navigable ordered task (`ORKNavigableOrderedTask`), for different trigger step identifiers.
+ The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules.
+ Several navigation rules can be set on a navigable ordered task (`ORKNavigableOrderedTask`), for
+ different trigger step identifiers.
 
- Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns the identifier of the destination step for the rule.
+ Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns
+ the identifier of the destination step for the rule.
  
- Two concrete subclasses are included: `ORKPredicateStepNavigationRule` can match any answer combination in the results of the ongoing task and jump accordingly; `ORKDirectStepNavigationRule` unconditionally navigates to the step specified by the destination step identifier.
+ Two concrete subclasses are included: `ORKPredicateStepNavigationRule` can match any answer
+ combination in the results of the ongoing task and jump accordingly; `ORKDirectStepNavigationRule`
+ unconditionally navigates to the step specified by the destination step identifier.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKStepNavigationRule : NSObject <NSCopying, NSSecureCoding>
@@ -73,19 +78,30 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKPredicateStepNavigationRule` class is a concrete step navigation rule class.
  
- It can be used to match any answer combination in the results of the ongoing task and jump accordingly. You must provide one or more result predicates (each predicate can match one or more step result within the task).
+ It can be used to match any answer combination in the results of the ongoing task and jump
+ accordingly. You must provide one or more result predicates (each predicate can match one or more
+ step result within the task).
  
- The `ORKResultPredicate` class provides convenience class methods to build predicates for all the `ORKQuestionResult` subtypes.
+ The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
+ `ORKQuestionResult` subtypes.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
 
 /**
- Returns an initialized predicate step navigation rule using the specified result predicates, matching step identifiers, and an optional default step identifier.
+ Returns an initialized predicate step navigation rule using the specified result predicates,
+ matching step identifiers, and an optional default step identifier.
  
- @param resultPredicates            An array of result predicates. Each result predicate can match one or more step results in the ongoing task.
- @param matchingStepIdentifiers     An array of possible destination step identifiers. This array must contain one step identifier for each of the predicates in `resultPredicates`.
- @param defaultStepIdentifier       The identifier of the step which will be used if none of the result predicates match. If this argument is `nil` and none of the predicates match, the default ordered task navigation behavior takes place (i.e, the task goes to the next step in order).
+ @param resultPredicates            An array of result predicates. Each result predicate can match
+                                        one or more step results in the ongoing task.
+ @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in `resultPredicates`.
+ @param defaultStepIdentifier       The identifier of the step which will be used if none of the
+                                        result predicates match. If this argument is `nil` and none
+                                        of the predicates match, the default ordered task navigation
+                                        behavior takes place (i.e, the task goes to the next step in
+                                        order).
  
  @return An initialized predicate step navigation rule.
  */
@@ -94,10 +110,14 @@ ORK_CLASS_AVAILABLE
                    defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns an initialized predicate step navigation rule using the specified result predicates and matching step identifiers.
+ Returns an initialized predicate step navigation rule using the specified result predicates and
+ matching step identifiers.
  
- @param resultPredicates            An array of result predicates. Each result predicate can match one or more step results in the ongoing task.
- @param matchingStepIdentifiers     An array of possible destination step identifiers. This array must contain one step identifier for each of the predicates in resultPredicates.
+ @param resultPredicates            An array of result predicates. Each result predicate can match
+                                        one or more step results in the ongoing task.
+ @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+                                        must contain one step identifier for each of the predicates
+                                        in resultPredicates.
  
  @return An initialized predicate step navigation rule.
  */
@@ -115,7 +135,10 @@ ORK_CLASS_AVAILABLE
 /**
  An optional array of additional task results.
  
- The predicate step navigation rule will use the child step results within these tasks, in addition to the current task results, to math the result predicates. You must ensure that all the step identifiers within the additional task results are unique, and that they are different from the step identifiers within the current task result.
+ The predicate step navigation rule will use the child step results within these tasks, in addition
+ to the current task results, to math the result predicates. You must ensure that all the step
+ identifiers within the additional task results are unique, and that they are different from the
+ step identifiers within the current task result.
  
  Each object in the array should be of the `ORKTaskResult` class.
  */

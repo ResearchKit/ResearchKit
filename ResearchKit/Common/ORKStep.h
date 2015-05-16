@@ -108,8 +108,8 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the user can skip the step
  without providing an answer.
  
- The default value of this property is `YES`. When the value is `NO`, the Skip button does not appear 
- on this step.
+ The default value of this property is `YES`. When the value is `NO`, the Skip button does not
+ appear on this step.
  
  This property may not be meaningful for all steps; for example, an active step
  might not provide a way to skip, because it requires a timer to finish.
@@ -143,8 +143,8 @@ ORK_CLASS_AVAILABLE
 /**
  Checks the parameters of the step and throws exceptions on invalid parameters.
  
- This method is called when there is a need to validate the step's parameters, which is typically the case
-when adding a step to an `ORKStepViewController` object, and when presenting the
+ This method is called when there is a need to validate the step's parameters, which is typically
+ the case when adding a step to an `ORKStepViewController` object, and when presenting the
  step view controller.
  
  Subclasses should override this method to provide validation of their additional

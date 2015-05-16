@@ -35,19 +35,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKResultPredicate` class provides convenience class methods to build predicates for all the `ORKQuestionResult` subtypes.
+ The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
+ `ORKQuestionResult` subtypes.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
 
 /**
- The `init` and `new` methods are unavailable. `ORKResultPredicate` only provides class methods and should not be instantiated.
+ The `init` and `new` methods are unavailable. `ORKResultPredicate` only provides class methods and
+ should not be instantiated.
  */
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the specified integer value.
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
+ specified integer value.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedAnswer      The expected integer value.
@@ -57,7 +60,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForScaleQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
 
 /**
- Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the specified float values.
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
+ specified float values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param minimumExpectedAnswerValue  The minimum expected float value.
@@ -70,7 +74,8 @@ ORK_CLASS_AVAILABLE
                                     maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than or equal to the specified float value.
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
+ or equal to the specified float value.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param minimumExpectedAnswerValue  The minimum expected float value.
@@ -81,7 +86,8 @@ ORK_CLASS_AVAILABLE
                                     minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or equal to the specified float value.
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
+ equal to the specified float value.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param maximumExpectedAnswerValue  The maximum expected float value.
@@ -92,7 +98,8 @@ ORK_CLASS_AVAILABLE
                                     maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to the specified string.
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
+ the specified string.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedAnswer      The expected string answer.
@@ -102,7 +109,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString;
 
 /**
- Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to the specified strings.
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
+ the specified strings.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedStrings      An array with all the expected string answers.
@@ -112,7 +120,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedStrings:(NSArray *)expectedStrings;
 
 /**
- Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the specified regular expression pattern.
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
+ specified regular expression pattern.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
@@ -122,7 +131,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern;
 
 /**
- Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the specified regular expression patterns.
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
+ specified regular expression patterns.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param patterns            An array of ICU-compliant regular expression patterns that match the answer strings.
@@ -132,7 +142,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForChoiceQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPatterns:(NSArray *)patterns;
 
 /**
- Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the specified boolean value.
+ Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
+ specified boolean value.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedAnswer      The expected boolean value.
@@ -142,7 +153,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForBooleanQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(BOOL)expectedAnswer;
 
 /**
- Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the specified string.
+ Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
+ specified string.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedString      The expected result string.
@@ -152,7 +164,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedString:(NSString *)expectedString;
 
 /**
- Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the specified regular expression pattern.
+ Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
+ specified regular expression pattern.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
@@ -162,7 +175,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForTextQuestionResultWithIdentifier:(NSString *)resultIdentifier matchingPattern:(NSString *)pattern;
 
 /**
- Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the specified integer value.
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
+ specified integer value.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedAnswer      The expected integer value.
@@ -172,7 +186,8 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForNumericQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
 
 /**
- Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the specified float values.
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
+ specified float values.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param minimumExpectedAnswerValue  The minimum expected float value.
@@ -185,7 +200,8 @@ ORK_CLASS_AVAILABLE
                                       maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater than or equal to the specified float value.
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
+ than or equal to the specified float value.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param minimumExpectedAnswerValue  The minimum expected float value.
@@ -196,7 +212,8 @@ ORK_CLASS_AVAILABLE
                                       minimumExpectedAnswerValue:(float)minimumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than or equal to the specified float value.
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
+ or equal to the specified float value.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
  @param maximumExpectedAnswerValue  The maximum expected float value.
@@ -207,9 +224,11 @@ ORK_CLASS_AVAILABLE
                                       maximumExpectedAnswerValue:(float)maximumExpectedAnswerValue;
 
 /**
- Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within the specified hour and minute values.
+ Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
+ the specified hour and minute values.
  
- Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object. If you are interested in additional components, you will have to build the predicate manually.
+ Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
+ If you are interested in additional components, you will have to build the predicate manually.
  
  @param resultIdentifier                The identifier of the question result you want to match against.
  @param minimumExpectedAnswerHour       The minimum expected hour component value.
@@ -226,7 +245,8 @@ ORK_CLASS_AVAILABLE
                                        maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute;
 
 /**
- Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the specified integer value.
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ specified integer value.
  
  @param resultIdentifier    The identifier of the question result you want to match against.
  @param expectedAnswer      The expected integer value.
@@ -236,11 +256,14 @@ ORK_CLASS_AVAILABLE
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithIdentifier:(NSString *)resultIdentifier expectedAnswer:(NSInteger)expectedAnswer;
 
 /**
- Returns a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within the specified dates.
+ Returns a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
+ the specified dates.
  
  @param resultIdentifier            The identifier of the question result you want to match against.
- @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to compare the answer against a minimum date.
- @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to compare the answer against a maximum date.
+ @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
+                                        compare the answer against a minimum date.
+ @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to
+                                        compare the answer against a maximum date.
  
  @return A result predicate.
  */
