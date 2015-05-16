@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,15 +29,15 @@
  */
 
 
-#import <UIKit/UIKit.h>
+#import "ORKCustomStepView_Internal.h"
 
 
-@interface ORKEAGLMoviePlayerView : UIView
+@interface ORKDeviceMotionReactionTimeStimulusView : UIView
 
-@property (nonatomic) CGSize presentationSize;
+- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
 
-- (void)setupGL;
-- (BOOL)consumePixelBuffer:(CVPixelBufferRef)pixelBuffer;
-- (void)render;
+- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void(^)(void))completion;
+
+- (void)setStimulusHidden: (BOOL) hidden;
 
 @end

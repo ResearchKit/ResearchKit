@@ -48,10 +48,10 @@ typedef void (^ORKVisualConsentAnimationCompletionHandler)(ORKVisualConsentTrans
 @property (nonatomic, readonly, copy) NSURL *movieURL;
 
 - (void)animateTransitionWithDirection:(UIPageViewControllerNavigationDirection)direction
-                       withLoadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
-                     completionHandler:(ORKVisualConsentAnimationCompletionHandler)handler;
+                           loadHandler:(nullable ORKVisualConsentAnimationCompletionHandler)loadHandler
+                     completionHandler:(nullable ORKVisualConsentAnimationCompletionHandler)handler;
 
-// Call to remove player layer from superview and clean up any observations.
+// Call to invalidate display link and remove any observations.
 - (void)finish;
 
 @end

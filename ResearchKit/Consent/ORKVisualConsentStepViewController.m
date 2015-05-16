@@ -53,9 +53,8 @@
 
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
     BOOL _hasAppeared;
-    ORKStepViewControllerNavigationDirection _navDirection;
+    ORKStepViewControllerNavigationDirection _navigationDirection;
     
-    BOOL _transitioning;
     ORKVisualConsentTransitionAnimator *_animator;
     
     NSArray *_visualSections;
@@ -181,8 +180,7 @@
     //_pageViewController.dataSource = self;
     _pageViewController.delegate = self;
     
-    
-    [[self scrollView] setBounces:NO];
+    [self scrollView].bounces = NO;
     
     if ([_pageViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
         _pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
@@ -217,18 +215,17 @@
         
         // Add first viewController
         NSUInteger idx = 0;
-        if (_navDirection == ORKStepViewControllerNavigationDirectionReverse) {
+        if (_navigationDirection == ORKStepViewControllerNavigationDirectionReverse) {
             idx = [self pageCount]-1;
         }
         
         [self showViewController:[self viewControllerForIndex:idx] forward:YES animated:NO];
     }
-    [self updateBackButton];
     [self updatePageIndex];
 }
 
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction {
-    _navDirection = direction;
+    _navigationDirection = direction;
 }
 
 - (UIBarButtonItem *)goToPreviousPageButton {
@@ -250,7 +247,7 @@
 }
 
 - (void)updateBackButton {
-    if (! _hasAppeared) {
+    if (!_hasAppeared) {
         return;
     }
     
@@ -345,65 +342,156 @@
     return nil;
 }
 
-- (void)doShowViewController:(ORKConsentSceneViewController *)viewController direction:(UIPageViewControllerNavigationDirection)direction animated:(BOOL)animated semaphore:(dispatch_semaphore_t)sem {
+- (void)doShowViewController:(ORKConsentSceneViewController *)viewController
+                   direction:(UIPageViewControllerNavigationDirection)direction
+                    animated:(BOOL)animated
+                  completion:(void (^)(BOOL finished))completion {
+    UIView *pageViewControllerView = self.pageViewController.view;
+    pageViewControllerView.userInteractionEnabled = NO;
     
-    UIView *pvcView = self.pageViewController.view;
-    pvcView.userInteractionEnabled = NO;
+    if (!viewController || !self.pageViewController) {
+        if (completion) {
+            completion(NO);
+        }
+        return;
+    }
+    
+    __weak typeof(self) weakSelf = self;
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
-        pvcView.userInteractionEnabled = YES;
-        if (animated) {
-            dispatch_semaphore_signal(sem);
+        __strong typeof(self) strongSelf = weakSelf;
+        pageViewControllerView.userInteractionEnabled = YES;
+        [strongSelf updatePageIndex];
+
+        if (completion != NULL) {
+            completion(finished);
         }
     }];
 }
 
-- (ORKVisualConsentTransitionAnimator *)doAnimateFromViewController:(ORKConsentSceneViewController *)fromController toController:(ORKConsentSceneViewController *)viewController direction:(UIPageViewControllerNavigationDirection)direction semaphore:(dispatch_semaphore_t)sem url:(NSURL *)url animateBeforeTransition:(BOOL)animateBeforeTransition transitionBeforeAnimate:(BOOL)transitionBeforeAnimate {
-    
+- (void)doAnimateFromViewController:(ORKConsentSceneViewController *)fromViewController
+                       toController:(ORKConsentSceneViewController *)toViewController
+                          direction:(UIPageViewControllerNavigationDirection)direction
+                                url:(NSURL *)url
+            animateBeforeTransition:(BOOL)animateBeforeTransition
+            transitionBeforeAnimate:(BOOL)transitionBeforeAnimate
+                         completion:(void (^)(BOOL finished))completion {
+
+    NSAssert(url, @"url cannot be nil");
+    NSAssert(!(animateBeforeTransition && transitionBeforeAnimate), @"Both flags cannot be set");
+
     __weak typeof(self) weakSelf = self;
-    _animator = [[ORKVisualConsentTransitionAnimator alloc] initWithVisualConsentStepViewController:self movieURL:url];
-    
-    [_animator animateTransitionWithDirection:direction
-                                          withLoadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
-                                              fromController.imageHidden = YES;
-                                              viewController.imageHidden = YES;
-                                              
-                                              if (!animateBeforeTransition && !transitionBeforeAnimate) {
-                                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                                      __strong typeof(self) strongSelf = weakSelf;
-                                                      [strongSelf doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
-                                              }
-                                          }
-                                        completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
-                                            
-                                            if (animateBeforeTransition && !transitionBeforeAnimate) {
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    __strong typeof(self) strongSelf = weakSelf;
-                                                    [strongSelf doShowViewController:viewController direction:direction animated:YES semaphore:sem];                                         });
-                                            } else {
-                                                viewController.imageHidden = NO;
-                                                fromController.imageHidden = NO;
-                                            }
-                                            
-                                            __strong typeof(self) strongSelf = weakSelf;
-                                            [strongSelf finishTransitioningAnimator:animator];
+    void (^finishAndNilAnimator)(ORKVisualConsentTransitionAnimator *animator) = ^(ORKVisualConsentTransitionAnimator *animator) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [animator finish];
+        if (strongSelf->_animator == animator) {
+            // Do not show images and hide animationPlayerView if it's not the current animator
+            fromViewController.imageHidden = NO;
+            toViewController.imageHidden = NO;
+            [strongSelf animationPlayerView].hidden = YES;
+            strongSelf->_animator = nil;
+        }
+    };
 
-                                            dispatch_semaphore_signal(sem);
-                                        }];
-    return _animator;
-}
+    ORKVisualConsentTransitionAnimator *animator = [[ORKVisualConsentTransitionAnimator alloc] initWithVisualConsentStepViewController:self movieURL:url];
+    _animator = animator;
 
-- (void)finishTransitioningAnimator:(ORKVisualConsentTransitionAnimator *)animator {
-    if (animator == nil) {
-        animator = _animator;
-    }
+    __block BOOL transitionFinished = NO;
+    __block BOOL animatorFinished = NO;
     
-    [animator finish];
-    if (_transitioning && animator == _animator) {
-        _transitioning = NO;
-        [[self animationPlayerView] setHidden:YES];
-    }
-    if (animator == _animator) {
-        _animator = nil;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // The semaphore waits for both 'animateTransitionWithDirection:loadHandler:completionHandler:' and
+        // 'doShowViewController:direction:animated:completion:' methods to complete (both of these methods
+        // signal the semaphore on completion). It doesn't matter which of the two finishes first.
+        // Defensive 5-second timeout in case the animator doesn't complete.
+        BOOL semaphoreATimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+        BOOL semaphoreBTimedOut = dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
+        
+        if (semaphoreATimedOut || semaphoreBTimedOut) {
+            ORK_Log_Debug(@"[Semaphore timed out] semaphoreATimedOut: %d, semaphoreBTimedOut: %d, transitionFinished: %d, animatorFinished: %d", semaphoreATimedOut, semaphoreBTimedOut, transitionFinished, animatorFinished);
+        }
+            
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL animationAndTransitionFinished = (transitionFinished && animatorFinished);
+
+            if (!animatorFinished) {
+                finishAndNilAnimator(animator);
+            }
+            
+            if (completion) {
+                completion(animationAndTransitionFinished);
+            }
+        });
+    });
+
+    if (!animateBeforeTransition && !transitionBeforeAnimate) {
+        [_animator animateTransitionWithDirection:direction
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                          
+                                          fromViewController.imageHidden = YES;
+                                          toViewController.imageHidden = YES;
+                                          
+                                          __strong typeof(self) strongSelf = weakSelf;
+                                          [strongSelf doShowViewController:toViewController
+                                                                 direction:direction
+                                                                  animated:YES
+                                                                completion:^(BOOL finished) {
+                                                                    
+                                                                    transitionFinished = finished;
+                                                                    dispatch_semaphore_signal(semaphore);
+                                                                }];
+                                      }
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+        
+                                    animatorFinished = YES;
+                                    finishAndNilAnimator(animator);
+                                    dispatch_semaphore_signal(semaphore);
+                                }];
+        
+    } else if (animateBeforeTransition && !transitionBeforeAnimate) {
+        [_animator animateTransitionWithDirection:direction
+                                      loadHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                          
+                                          fromViewController.imageHidden = YES;
+                                      }
+                                completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                    
+                                    animatorFinished = YES;
+                                    finishAndNilAnimator(animator);
+                                    
+                                    __strong typeof(self) strongSelf = weakSelf;
+                                    [strongSelf doShowViewController:toViewController
+                                                           direction:direction
+                                                            animated:YES
+                                                          completion:^(BOOL finished) {
+                                                              
+                                                              transitionFinished = finished;
+                                                              dispatch_semaphore_signal(semaphore);
+                                                          }];
+                                    
+                                    dispatch_semaphore_signal(semaphore);
+                                }];
+
+    } else if (!animateBeforeTransition && transitionBeforeAnimate) {
+        toViewController.imageHidden = YES;
+        [self doShowViewController:toViewController
+                         direction:direction
+                          animated:YES
+                        completion:^(BOOL finished) {
+                            
+                            transitionFinished = finished;
+                            
+                            [_animator animateTransitionWithDirection:direction
+                                                          loadHandler:nil
+                                                    completionHandler:^(ORKVisualConsentTransitionAnimator *animator, UIPageViewControllerNavigationDirection direction) {
+                                                        
+                                                        animatorFinished = YES;
+                                                        finishAndNilAnimator(animator);
+                                                        dispatch_semaphore_signal(semaphore);
+                                                    }];
+                            
+                            dispatch_semaphore_signal(semaphore);
+                        }];
     }
 }
 
@@ -418,39 +506,60 @@
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
-    if (! viewController) {
+    [self showViewController:viewController
+                     forward:forward
+                    animated:animated
+                  completion:nil];
+}
+
+- (void)showViewController:(ORKConsentSceneViewController *)viewController
+                   forward:(BOOL)forward
+                  animated:(BOOL)animated
+                completion:(void (^)(BOOL finished))completion {
+    if (!viewController) {
+        if (completion) {
+            completion(NO);
+        }
         return;
     }
-    
-    // Stop old observer and start new one
+    // Stop old hairline scroll view observer and start new one
     _scrollViewObserver = [[ORKScrollViewObserver alloc] initWithTargetView:viewController.scrollView delegate:self];
     [self.taskViewController setRegisteredScrollView:viewController.scrollView];
 
-    ORKConsentSceneViewController *fromController = nil;
+    ORKConsentSceneViewController *fromViewController = nil;
     NSUInteger currentIndex = [self currentIndex];
     if (currentIndex == NSNotFound) {
         animated = NO;
     } else {
-        fromController = _viewControllers[@(currentIndex)];
+        fromViewController = _viewControllers[@(currentIndex)];
     }
     
-    if (_transitioning) {
-        [self finishTransitioningAnimator:nil];
+    // Cancel any previous video animation
+    fromViewController.imageHidden = NO;
+    viewController.imageHidden = NO;
+    if (_animator) {
+        [self animationPlayerView].hidden = YES;
+        [_animator finish];
+        _animator = nil;
+    }
+    
+    UIPageViewControllerNavigationDirection direction = forward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+
+    if (!animated) {
+        // No animation at all
+        viewController.imageHidden = NO;
+        [self doShowViewController:viewController direction:direction animated:animated completion:completion];
+    } else {
+        NSUInteger toIndex = [self indexOfViewController:viewController];
         
-        fromController.imageHidden = NO;
-    }
-    
-    NSUInteger toIndex = [self indexOfViewController:viewController];
-    
-    NSURL *url = nil;
-    BOOL animateBeforeTransition = NO;
-    BOOL transitionBeforeAnimate = NO;
-    if (animated) {
+        NSURL *url = nil;
+        BOOL animateBeforeTransition = NO;
+        BOOL transitionBeforeAnimate = NO;
         
         ORKConsentSectionType currentSection = [(ORKConsentSection *)_visualSections[currentIndex] type];
-        ORKConsentSectionType destSection = (toIndex != NSNotFound) ? [(ORKConsentSection *)_visualSections[toIndex] type] : ORKConsentSectionTypeCustom;
+        ORKConsentSectionType destinationSection = (toIndex != NSNotFound) ? [(ORKConsentSection *)_visualSections[toIndex] type] : ORKConsentSectionTypeCustom;
         
-        // Only animate when going forward
+        // Only use video animation when going forward
         if (toIndex > currentIndex) {
             
             // Use the custom animation URL, if there is one for the destination index.
@@ -462,82 +571,26 @@
             // If there's no custom URL, use an animation only if transitioning in the expected order.
             // Exception for datagathering, which does an arrival animation AFTER.
             if (!isCustomURL) {
-                if (destSection == ORKConsentSectionTypeDataGathering) {
+                if (destinationSection == ORKConsentSectionTypeDataGathering) {
                     transitionBeforeAnimate = YES;
                     url = ORKMovieURLForConsentSectionType(ORKConsentSectionTypeOverview);
-                } else if ( (destSection - currentSection) == 1) {
+                } else if ((destinationSection - currentSection) == 1) {
                     url = ORKMovieURLForConsentSectionType(currentSection);
                 }
             }
         }
-    }
-    
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
-    UIPageViewControllerNavigationDirection direction = forward?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
-    
-    if (! url) {
-        [self doShowViewController:viewController direction:direction animated:animated semaphore:semaphore];
-    }
-    
-    if (animated) {
-        // Disable user interaction during the animated transition, and re-enable when finished
-        _transitioning = YES;
         
-        __weak typeof(self) weakSelf = self;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Defensive timeouts
-            typeof(self) strongSelf = weakSelf;
-            
-            dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
-            
-            __block ORKVisualConsentTransitionAnimator *animator = nil;
-            
-            if (url && transitionBeforeAnimate) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    animator = [strongSelf doAnimateFromViewController:fromController
-                                                           toController:viewController
-                                                              direction:direction
-                                                              semaphore:semaphore
-                                                                    url:url
-                                                animateBeforeTransition:animateBeforeTransition
-                                                transitionBeforeAnimate:transitionBeforeAnimate];
-                });
-            }
-            
-            dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5));
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                __strong typeof(self) strongSelf = weakSelf;
-                
-                viewController.imageHidden = NO;
-                fromController.imageHidden = NO;
-                
-                if (animator) {
-                    [strongSelf finishTransitioningAnimator:animator];
-                }
-                
-                [strongSelf updatePageIndex];
-            });
-        });
-        
-        if (url) {
-            if (transitionBeforeAnimate) {
-                viewController.imageHidden = YES;
-                [self doShowViewController:viewController direction:direction animated:YES semaphore:semaphore];
-            } else {
-                [self doAnimateFromViewController:fromController
-                                      toController:viewController
-                                         direction:direction
-                                         semaphore:semaphore
-                                               url:url
-                           animateBeforeTransition:animateBeforeTransition
-                           transitionBeforeAnimate:transitionBeforeAnimate];
-            }
+        if (!url) {
+            // No video animation URL, just a regular push transition animation.
+            [self doShowViewController:viewController direction:direction animated:animated completion:completion];
         } else {
-            // No animation - complete now.
-            viewController.imageHidden = NO;
-            dispatch_semaphore_signal(semaphore);
+            [self doAnimateFromViewController:fromViewController
+                                 toController:viewController
+                                    direction:direction
+                                          url:url
+                      animateBeforeTransition:animateBeforeTransition
+                      transitionBeforeAnimate:transitionBeforeAnimate
+                                   completion:completion];
         }
     }
 }

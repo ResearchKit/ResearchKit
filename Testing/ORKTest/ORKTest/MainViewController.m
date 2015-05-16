@@ -54,6 +54,7 @@ static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
+static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
@@ -220,6 +221,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [buttonKeys addObject:@"imageChoices"];
         buttons[buttonKeys.lastObject] = button;
     }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Reaction Time" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
 
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -367,6 +376,20 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
                                                                  duration:20.0 options:(ORKPredefinedTaskOption)0];
+    }
+    else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
+        return [ORKOrderedTask
+                deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+                intendedUseDescription:nil
+                maximumStimulusInterval:8
+                minimumStimulusInterval:4
+                thresholdAcceleration:0.5
+                numberOfAttempts:3
+                timeout:10
+                successSound:0
+                timeoutSound:0
+                failureSound:0
+                options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
@@ -1341,6 +1364,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
 }
 
+- (IBAction)showReactionTimeTask:(id)sender {
+    [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
+}
+
 #pragma mark Dynamic task
 
 /*
@@ -1594,6 +1621,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                                  vertical:YES
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
+
         scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"

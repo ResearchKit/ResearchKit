@@ -298,13 +298,13 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     
     XCTAssertEqualObjects(_orderedTask.identifier, OrderedTaskIdentifier);
     XCTAssertEqualObjects(_orderedTask.steps, _orderedTaskSteps);
-
+    
     NSUInteger expectedTotalProgress = [_orderedTaskSteps count];
     
     for (NSUInteger stepIndex = 0; stepIndex < [_orderedTaskStepIdentifiers count]; stepIndex++) {
         ORKStep *currentStep = _orderedTaskSteps[stepIndex];
         XCTAssertEqualObjects(currentStep, [_orderedTask stepWithIdentifier:_orderedTaskStepIdentifiers[stepIndex]]);
-
+        
         const NSUInteger expectedCurrentProgress = stepIndex;
         ORKTaskProgress currentProgress = [_orderedTask progressOfCurrentStep:currentStep withResult:mockTaskResult];
         XCTAssertTrue(currentProgress.total == expectedTotalProgress && currentProgress.current == expectedCurrentProgress);
@@ -314,6 +314,45 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
         XCTAssertEqualObjects(expectedPreviousStep, [_orderedTask stepBeforeStep:currentStep withResult:mockTaskResult]);
         XCTAssertEqualObjects(expectedNextStep, [_orderedTask stepAfterStep:currentStep withResult:mockTaskResult]);
     }
+    
+    // Test duplicate step identifier validation
+    XCTAssertNoThrow([_orderedTask validateParameters]);
+
+    NSMutableArray *steps = [[NSMutableArray alloc] initWithArray:ORKArrayCopyObjects(_orderedTaskSteps)];
+    ORKStep *step = [[ORKInstructionStep alloc] initWithIdentifier:BlankStepIdentifier];
+    [steps addObject:step];
+    
+    ORKOrderedTask *orderedTask = [[ORKOrderedTask alloc] initWithIdentifier:OrderedTaskIdentifier
+                                                                       steps:steps];
+    XCTAssertThrows([orderedTask validateParameters]);
+}
+
+- (void)testFormStep {
+    // Test duplicate form step identifier validation
+    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"form" title:@"Form" text:@"Form test"];
+    NSMutableArray *items = [NSMutableArray new];
+    
+    ORKFormItem *item = nil;
+    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem1"
+                                              text:@"formItem1"
+                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+    [items addObject:item];
+
+    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
+                                              text:@"formItem2"
+                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+    [items addObject:item];
+
+    [formStep setFormItems:items];
+    XCTAssertNoThrow([formStep validateParameters]);
+
+    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
+                                              text:@"formItem2"
+                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+    [items addObject:item];
+
+    [formStep setFormItems:items];
+    XCTAssertThrows([formStep validateParameters]);
 }
 
 #define getIndividualNavigableOrderedTaskSteps() \
