@@ -93,23 +93,27 @@
     return nextStep;
 }
     
-- (void)updateStepIdentifierStackWithSourceIdentifier:(NSString *)sourceIdentifer destinationIdentifier:(NSString *)destinationIdentifier {
+- (void)updateStepIdentifierStackWithSourceIdentifier:(NSString *)sourceIdentifier destinationIdentifier:(NSString *)destinationIdentifier {
+    NSParameterAssert(destinationIdentifier);
+    
     if (!_stepIdentifierStack) {
         _stepIdentifierStack = [NSMutableOrderedSet new];
         // sourceIdentifier is nil if the task starts fresh,
         // but can have a value if the task is being restored to a specific step
-        if (sourceIdentifer) {
-            [_stepIdentifierStack addObject:sourceIdentifer];
+        if (sourceIdentifier) {
+            [_stepIdentifierStack addObject:sourceIdentifier];
         }
         [_stepIdentifierStack addObject:destinationIdentifier];
         return;
     }
     
-    NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifer];
+    NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifier];
     if (indexOfSource == NSNotFound) {
-        ORK_Log_Debug(@"Warning: you are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifer, destinationIdentifier);
+        ORK_Log_Debug(@"WARNING: you are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifier, destinationIdentifier);
         [_stepIdentifierStack removeAllObjects];
-        [_stepIdentifierStack addObject:sourceIdentifer];
+        if (sourceIdentifier) {
+            [_stepIdentifierStack addObject:sourceIdentifier];
+        }
         [_stepIdentifierStack addObject:destinationIdentifier];
         return;
     }
