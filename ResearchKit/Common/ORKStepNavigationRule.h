@@ -80,15 +80,19 @@ ORK_CLASS_AVAILABLE
  
  It can be used to match any answer combination in the results of the ongoing task (or in those of
  previously completed tasks) and jump accordingly. You must provide one or more result predicates
- (each predicate can match one or more step result within the task).
+ (each predicate can match one or more step results within the task).
  
  Predicate step navigations rules contain an arbitrary number of result predicates with a
  corresponding number of matching step identifiers, plus an optional default step identifier that is
- used if none of the result predicates match. This allows you to define discretionarily complex task
- navigation behaviors.
+ used if none of the result predicates match. One result predicate can match one or more question
+ results; if matching several question results, they can belong to the same or to different task
+ results). This allows you to define discretionarily complex task navigation behaviors.
  
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
- `ORKQuestionResult` subtypes.
+ `ORKQuestionResult` subtypes. Predicates must supply both the task result identifier (which can be
+ the one of the ongoing task, or the one of any of the tasks whose results are part of
+ `additionalTaskResults`) and the question result identifier, in addition to one or more
+ expected answers.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPredicateStepNavigationRule : ORKStepNavigationRule
@@ -98,7 +102,8 @@ ORK_CLASS_AVAILABLE
  matching step identifiers, and an optional default step identifier.
  
  @param resultPredicates            An array of result predicates. Each result predicate can match
-                                        one or more step results in the ongoing task.
+                                        one or more question results in the ongoing task result or
+                                        in any of the additional task results.
  @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
                                         in `resultPredicates`.
@@ -119,7 +124,8 @@ ORK_CLASS_AVAILABLE
  matching step identifiers.
  
  @param resultPredicates            An array of result predicates. Each result predicate can match
-                                        one or more step results in the ongoing task.
+                                        one or more question results in the ongoing task result or
+                                        in any of the additional task results.
  @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
                                         in resultPredicates.
@@ -141,12 +147,14 @@ ORK_CLASS_AVAILABLE
  An optional array of additional task results.
  
  This allows for a task to have different navigation behavior depending on the results of related
- tasks that the user may have already completed. The predicate step navigation rule will use the
- child step results within these tasks, in addition to the current task results, to match the result
- predicates.
+ tasks that the user may have already completed. The predicate step navigation rule can use the
+ question results within these tasks, in addition to the current task question results, to match the
+ result predicates.
  
- You must ensure that all the step identifiers within the additional task results are unique, and 
- that they are different from the step identifiers within the current task result.
+ You must ensure that all the task result identifiers are unique, and that they are different from
+ the ongoing task result identifier. You must also ensure that no task result contains question
+ results with duplicate identifiers. Question results *can have* equal identifiers provided they
+ belong to different task results.
  
  Each object in the array should be of the `ORKTaskResult` class.
  */

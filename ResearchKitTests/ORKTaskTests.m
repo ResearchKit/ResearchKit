@@ -162,7 +162,9 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     // Individual predicates
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SymptomStepIdentifier expectedString:HeadacheChoiceValue];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:NavigableOrderedTaskIdentifier
+                                                                                           resultIdentifier:SymptomStepIdentifier
+                                                                                             expectedString:HeadacheChoiceValue];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
@@ -172,13 +174,17 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
     
     // User chose YES at the severity step
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:SeverityStepIdentifier expectedAnswer:YES];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithTaskIdentifier:NavigableOrderedTaskIdentifier
+                                                                                             resultIdentifier:SeverityStepIdentifier
+                                                                                               expectedAnswer:YES];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
     
     // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:SeverityStepIdentifier expectedAnswer:NO];
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithTaskIdentifier:NavigableOrderedTaskIdentifier
+                                                                                            resultIdentifier:SeverityStepIdentifier
+                                                                                              expectedAnswer:NO];
     
     
     // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
@@ -548,7 +554,7 @@ static NSDateComponents *(^DateComponents)() = ^NSDateComponents *{
     return dateComponents;
 };
 
-ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKStepResult *(NSString *stepIdentifier, Class choiceQuestionResultClass, ORKQuestionType questionType, id answer) {
+static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKStepResult *(NSString *stepIdentifier, Class choiceQuestionResultClass, ORKQuestionType questionType, id answer) {
     ORKQuestionResult *questionResult = [[choiceQuestionResultClass alloc] init];
     questionResult.identifier = stepIdentifier;
     questionResult.answer = answer;
@@ -591,6 +597,8 @@ ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKSt
 ORKDefineStringKey(MatchedDestinationStepIdentifier);
 ORKDefineStringKey(DefaultDestinationStepIdentifier);
 
+ORKDefineStringKey(AdditionalTaskIdentifier);
+
 ORKDefineStringKey(AdditionalTextStepIdentifier);
 ORKDefineStringKey(AdditionalTextValue);
 
@@ -602,6 +610,20 @@ ORKDefineStringKey(AdditionalTextValue);
     } else {
         [stepResults addObject:getStepResult(AdditionalTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, AdditionalTextValue)];
     }
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:!isAdditional ? OrderedTaskIdentifier : AdditionalTaskIdentifier
+                                                                  taskRunUUID:[NSUUID UUID]
+                                                              outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    taskResult.results = stepResults;
+    
+    return taskResult;
+}
+
+- (ORKTaskResult *)getSmallTaskResultTreeWithDuplicateStepIdentifiers {
+    NSMutableArray *stepResults = [NSMutableArray new];
+    
+    [stepResults addObject:getStepResult(TextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, TextValue)];
+    [stepResults addObject:getStepResult(TextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, TextValue)];
     
     ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
                                                                   taskRunUUID:[NSUUID UUID]
@@ -622,13 +644,11 @@ ORKDefineStringKey(AdditionalTextValue);
     NSString *defaultStepIdentifier = nil;
     
     // Test predicate step navigation rule initializers
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                  expectedString:TextValue];
+    predicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                    resultIdentifier:TextStepIdentifier
+                                                                      expectedString:TextValue];
     resultPredicates = @[ predicate ];
     matchingStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                  expectedString:TextValue];
-    
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
                                                              matchingStepIdentifiers:matchingStepIdentifiers];
 
@@ -645,26 +665,39 @@ ORKDefineStringKey(AdditionalTextValue);
     XCTAssertEqualObjects(predicateRule.matchingStepIdentifiers, ORKArrayCopyObjects(matchingStepIdentifiers));
     XCTAssertEqualObjects(predicateRule.defaultStepIdentifier, defaultStepIdentifier);
 
-    // Predicate matching, no additional task results
-    resultPredicates = @[ predicate ];
-    matchingStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                  expectedString:TextValue];
-    defaultStepIdentifier = DefaultDestinationStepIdentifier;
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                             matchingStepIdentifiers:matchingStepIdentifiers
-                                                               defaultStepIdentifier:defaultStepIdentifier];
-
+    // Predicate matching, no additional task results, matching
     taskResult = [ORKTaskResult new];
+    taskResult.identifier = OrderedTaskIdentifier;
+
+    predicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                    resultIdentifier:TextStepIdentifier
+                                                                      expectedString:TextValue];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                               defaultStepIdentifier:DefaultDestinationStepIdentifier];
+
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
 
     taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
 
+    // Predicate matching, no additional task results, non matching
+    predicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                    resultIdentifier:TextStepIdentifier
+                                                                      expectedString:OtherTextValue];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                               defaultStepIdentifier:DefaultDestinationStepIdentifier];
+    taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
+    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+
+    
     // Predicate matching, additional task results
-    NSPredicate *currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                                      expectedString:TextValue];
-    NSPredicate *additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithIdentifier:AdditionalTextStepIdentifier
+    NSPredicate *currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                                        resultIdentifier:TextStepIdentifier
+                                                                                          expectedString:TextValue];
+    NSPredicate *additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                                           resultIdentifier:AdditionalTextStepIdentifier
                                                                                          expectedString:AdditionalTextValue];
     predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
@@ -672,6 +705,7 @@ ORKDefineStringKey(AdditionalTextValue);
                                                                defaultStepIdentifier:DefaultDestinationStepIdentifier];
     
     taskResult = [ORKTaskResult new];
+    taskResult.identifier = OrderedTaskIdentifier;
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
     
     taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
@@ -681,9 +715,12 @@ ORKDefineStringKey(AdditionalTextValue);
     predicateRule.additionalTaskResults = @[ additionalTaskResult ];
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
 
-    // Test duplicate predicate identifiers check
+    // Test duplicate task identifiers check
     predicateRule.additionalTaskResults = @[ taskResult ];
     XCTAssertThrows([predicateRule identifierForDestinationStepWithTaskResult:taskResult]);
+
+    // Test duplicate question result identifiers check
+    XCTAssertThrows(predicateRule.additionalTaskResults = @[ [self getSmallTaskResultTreeWithDuplicateStepIdentifiers] ]);
 }
 
 - (void)testDirectStepNavigationRule {
@@ -697,197 +734,252 @@ ORKDefineStringKey(AdditionalTextValue);
 
 - (void)testResultPredicates {
     ORKTaskResult *taskResult = [self getGeneralTaskResultTree];
-    NSArray *leafResults = [ORKPredicateStepNavigationRule leafResultsFromTaskResult:taskResult];
 
+    NSArray *taskResults = @[ taskResult ];
+    
     // ORKScaleQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ScaleStepIdentifier
-                                                                      expectedAnswer:IntegerValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ScaleStepIdentifier
-                                                                       expectedAnswer:IntegerValue + 1] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:ScaleStepIdentifier
+                                                                          expectedAnswer:IntegerValue] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:ScaleStepIdentifier
+                                                                           expectedAnswer:IntegerValue + 1] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                          minimumExpectedAnswerValue:FloatValue - 0.01
-                                                          maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                           minimumExpectedAnswerValue:FloatValue + 0.05
-                                                           maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:ContinuousScaleStepIdentifier
+                                                              minimumExpectedAnswerValue:FloatValue - 0.01
+                                                              maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:ContinuousScaleStepIdentifier
+                                                               minimumExpectedAnswerValue:FloatValue + 0.05
+                                                               maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                          minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                           minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:ContinuousScaleStepIdentifier
+                                                              minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:ContinuousScaleStepIdentifier
+                                                               minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                          maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithIdentifier:ContinuousScaleStepIdentifier
-                                                           maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:ContinuousScaleStepIdentifier
+                                                              maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:ContinuousScaleStepIdentifier
+                                                               maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
 
     // ORKChoiceQuestionResult (strings)
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SingleChoiceStepIdentifier
-                                                                       expectedString:SingleChoiceValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SingleChoiceStepIdentifier
-                                                                        expectedString:OtherTextValue] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:SingleChoiceStepIdentifier
+                                                                           expectedString:SingleChoiceValue] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:SingleChoiceStepIdentifier
+                                                                            expectedString:OtherTextValue] evaluateWithObject:taskResults]);
     
     NSArray *expectedAnswers = nil;
     expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2];
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:MultipleChoiceStepIdentifier
-                                                                      expectedStrings:expectedAnswers] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:MultipleChoiceStepIdentifier
+                                                                          expectedStrings:expectedAnswers] evaluateWithObject:taskResults]);
     expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, OtherTextValue];
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:MultipleChoiceStepIdentifier
-                                                                       expectedStrings:expectedAnswers] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:MultipleChoiceStepIdentifier
+                                                                           expectedStrings:expectedAnswers] evaluateWithObject:taskResults]);
 
     // ORKChoiceQuestionResult (regular expressions)
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SingleChoiceStepIdentifier
-                                                                      matchingPattern:@"...gleChoiceValue"] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:SingleChoiceStepIdentifier
-                                                                        expectedString:@"...SingleChoiceValue"] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:SingleChoiceStepIdentifier
+                                                                          matchingPattern:@"...gleChoiceValue"] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:SingleChoiceStepIdentifier
+                                                                            expectedString:@"...SingleChoiceValue"] evaluateWithObject:taskResults]);
     
     expectedAnswers = @[@"...tipleChoiceValue1", @"...tipleChoiceValue2"];
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:MultipleChoiceStepIdentifier
-                                                                     matchingPatterns:expectedAnswers] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                         resultIdentifier:MultipleChoiceStepIdentifier
+                                                                         matchingPatterns:expectedAnswers] evaluateWithObject:taskResults]);
     expectedAnswers = @[@"...MultipleChoiceValue1", @"...MultipleChoiceValue2", @"...OtherTextValue"];
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithIdentifier:MultipleChoiceStepIdentifier
-                                                                      matchingPatterns:expectedAnswers] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:MultipleChoiceStepIdentifier
+                                                                          matchingPatterns:expectedAnswers] evaluateWithObject:taskResults]);
 
     // ORKBooleanQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:BooleanStepIdentifier
-                                                                        expectedAnswer:BooleanValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForBooleanQuestionResultWithIdentifier:BooleanStepIdentifier
-                                                                         expectedAnswer:!BooleanValue] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForBooleanQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:BooleanStepIdentifier
+                                                                            expectedAnswer:BooleanValue] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForBooleanQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:BooleanStepIdentifier
+                                                                             expectedAnswer:!BooleanValue] evaluateWithObject:taskResults]);
 
     // ORKTextQuestionResult (strings)
-    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                     expectedString:TextValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                      expectedString:OtherTextValue] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:TextStepIdentifier
+                                                                         expectedString:TextValue] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:TextStepIdentifier
+                                                                          expectedString:OtherTextValue] evaluateWithObject:taskResults]);
 
     // ORKTextQuestionResult (regular expressions)
-    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                     matchingPattern:@"...tValue"] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithIdentifier:TextStepIdentifier
-                                                                     matchingPattern:@"...TextValue"] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:TextStepIdentifier
+                                                                        matchingPattern:@"...tValue"] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:TextStepIdentifier
+                                                                         matchingPattern:@"...TextValue"] evaluateWithObject:taskResults]);
 
     // ORKNumericQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:IntegerNumericStepIdentifier
-                                                                        expectedAnswer:IntegerValue] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:IntegerNumericStepIdentifier
-                                                                         expectedAnswer:IntegerValue + 1] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:IntegerNumericStepIdentifier
+                                                                            expectedAnswer:IntegerValue] evaluateWithObject:taskResults]);
+    
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:IntegerNumericStepIdentifier
+                                                                             expectedAnswer:IntegerValue + 1] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                            minimumExpectedAnswerValue:ORKIgnoreDoubleValue
-                                                            maximumExpectedAnswerValue:ORKIgnoreDoubleValue] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:FloatNumericStepIdentifier
+                                                                minimumExpectedAnswerValue:ORKIgnoreDoubleValue
+                                                                maximumExpectedAnswerValue:ORKIgnoreDoubleValue] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                            minimumExpectedAnswerValue:FloatValue - 0.01
-                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                             minimumExpectedAnswerValue:FloatValue + 0.05
-                                                             maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:FloatNumericStepIdentifier
+                                                                minimumExpectedAnswerValue:FloatValue - 0.01
+                                                                maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:FloatNumericStepIdentifier
+                                                                 minimumExpectedAnswerValue:FloatValue + 0.05
+                                                                 maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                            minimumExpectedAnswerValue:FloatValue - 0.01
-                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                             minimumExpectedAnswerValue:FloatValue + 0.05
-                                                             maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:FloatNumericStepIdentifier
+                                                                minimumExpectedAnswerValue:FloatValue - 0.01
+                                                                maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:FloatNumericStepIdentifier
+                                                                 minimumExpectedAnswerValue:FloatValue + 0.05
+                                                                 maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                            minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                             minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:FloatNumericStepIdentifier
+                                                                minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:FloatNumericStepIdentifier
+                                                                 minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                            maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                             maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                          resultIdentifier:FloatNumericStepIdentifier
+                                                                maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                           resultIdentifier:FloatNumericStepIdentifier
+                                                                 maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
 
     // ORKTimeOfDayQuestionResult
     NSDateComponents *expectedDateComponentsMinimum = DateComponents();
     NSDateComponents *expectedDateComponentsMaximum = DateComponents();
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:TimeOfDayStepIdentifier
-                                                               minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                             minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                               maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                             maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                            resultIdentifier:TimeOfDayStepIdentifier
+                                                                   minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                                 minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                   maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                                 maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults]);
     expectedDateComponentsMinimum.minute -= 2;
     expectedDateComponentsMaximum.minute += 2;
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:TimeOfDayStepIdentifier
-                                                               minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                             minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                               maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                             maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                            resultIdentifier:TimeOfDayStepIdentifier
+                                                                   minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                                 minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                   maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                                 maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults]);
     
     expectedDateComponentsMinimum.minute += 3;
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:TimeOfDayStepIdentifier
-                                                                minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                              minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                              maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                             resultIdentifier:TimeOfDayStepIdentifier
+                                                                    minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                                  minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                    maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                                  maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults]);
 
     expectedDateComponentsMinimum.minute -= 3;
     expectedDateComponentsMinimum.hour += 1;
     expectedDateComponentsMaximum.hour += 2;
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithIdentifier:TimeOfDayStepIdentifier
-                                                                minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                              minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                              maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:leafResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                             resultIdentifier:TimeOfDayStepIdentifier
+                                                                    minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
+                                                                  minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
+                                                                    maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
+                                                                  maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults]);
 
     // ORKTimeIntervalQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                 minimumExpectedAnswerValue:ORKIgnoreTimeIntervalValue
-                                                                 maximumExpectedAnswerValue:ORKIgnoreTimeIntervalValue] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                               resultIdentifier:FloatNumericStepIdentifier
+                                                                     minimumExpectedAnswerValue:ORKIgnoreTimeIntervalValue
+                                                                     maximumExpectedAnswerValue:ORKIgnoreTimeIntervalValue] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                 minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                 maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                  maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                               resultIdentifier:FloatNumericStepIdentifier
+                                                                     minimumExpectedAnswerValue:FloatValue - 0.01
+                                                                     maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                                resultIdentifier:FloatNumericStepIdentifier
+                                                                      minimumExpectedAnswerValue:FloatValue + 0.05
+                                                                      maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults]);
     
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                 minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                 maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                  maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                               resultIdentifier:FloatNumericStepIdentifier
+                                                                     minimumExpectedAnswerValue:FloatValue - 0.01
+                                                                     maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                                resultIdentifier:FloatNumericStepIdentifier
+                                                                      minimumExpectedAnswerValue:FloatValue + 0.05
+                                                                      maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults]);
     
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                 minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                               resultIdentifier:FloatNumericStepIdentifier
+                                                                     minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                                resultIdentifier:FloatNumericStepIdentifier
+                                                                      minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
     
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                 maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithIdentifier:FloatNumericStepIdentifier
-                                                                  maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                               resultIdentifier:FloatNumericStepIdentifier
+                                                                     maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                                resultIdentifier:FloatNumericStepIdentifier
+                                                                      maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults]);
 
     // ORKDateQuestionResult
     NSDate *expectedDate = Date();
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                          minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
-                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                           minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]
-                                                           maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+120]] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:DateStepIdentifier
+                                                              minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
+                                                              maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:DateStepIdentifier
+                                                               minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]
+                                                               maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+120]] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                          minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
-                                                          maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                           minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+1]
-                                                           maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:DateStepIdentifier
+                                                              minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
+                                                              maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:DateStepIdentifier
+                                                               minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+1]
+                                                               maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                          minimumExpectedAnswerDate:nil
-                                                          maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:leafResults]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                           minimumExpectedAnswerDate:nil
-                                                           maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-1]] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:DateStepIdentifier
+                                                              minimumExpectedAnswerDate:nil
+                                                              maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:taskResults]);
+    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                        resultIdentifier:DateStepIdentifier
+                                                               minimumExpectedAnswerDate:nil
+                                                               maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-1]] evaluateWithObject:taskResults]);
 
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithIdentifier:DateStepIdentifier
-                                                          minimumExpectedAnswerDate:nil
-                                                          maximumExpectedAnswerDate:nil] evaluateWithObject:leafResults]);
+    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithTaskIdentifier:OrderedTaskIdentifier
+                                                                       resultIdentifier:DateStepIdentifier
+                                                              minimumExpectedAnswerDate:nil
+                                                              maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults]);
 }
 
 @end

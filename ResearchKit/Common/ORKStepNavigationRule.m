@@ -135,7 +135,7 @@
                     defaultStepIdentifier:nil];
 }
 
-+ (NSArray *)leafResultsFromTaskResult:(ORKTaskResult *)ORKTaskResult {
+static NSArray *ORKLeafQuestionResultsFromTaskResult(ORKTaskResult *ORKTaskResult) {
     NSMutableArray *leafResults = [NSMutableArray new];
     for (ORKResult *result in ORKTaskResult.results) {
         if ([result isKindOfClass:[ORKCollectionResult class]]) {
@@ -145,8 +145,12 @@
     return leafResults;
 }
 
-// the results array should only containt instances of the ORKResult class or its subclasses
-static void ORKValidateResultIdentifiersUnique(NSArray *results, NSString* exceptionReason) {
+// the results array should only contain objects that respond to the 'identifier' method (e.g., ORKResult objects).
+// Usually you want all result objects to be of the same type.
+static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionReason) {
+    NSCParameterAssert(results);
+    NSCParameterAssert(exceptionReason);
+
     NSArray *uniqueIdentifiers = [results valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
     BOOL itemsHaveNonUniqueIdentifiers = ([results count] != [uniqueIdentifiers count]);
     if (itemsHaveNonUniqueIdentifiers) {
@@ -154,22 +158,24 @@ static void ORKValidateResultIdentifiersUnique(NSArray *results, NSString* excep
     }
 }
 
-- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
-    NSMutableArray *leafResults = [[NSMutableArray alloc] initWithArray:[[self class] leafResultsFromTaskResult:taskResult]];
-    
-    for (ORKTaskResult *additionalTaskResult in _additionalTaskResults) {
-        if (![additionalTaskResult isKindOfClass:[ORKTaskResult class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"additionalTaskResults should only contain instances of the ORKTaskResult class or its subclasses" userInfo:nil];
-        }
-        [leafResults addObjectsFromArray:[[self class] leafResultsFromTaskResult:additionalTaskResult]];
+- (void)setAdditionalTaskResults:(NSArray *)additionalTaskResults {
+    for (ORKTaskResult *taskResult in additionalTaskResults) {
+        ORKValidateIdentifiersUnique(ORKLeafQuestionResultsFromTaskResult(taskResult), @"All question results should have unique identifiers");
     }
-    
-    ORKValidateResultIdentifiersUnique(leafResults, @"All steps should have a unique identifier");
-    
+    _additionalTaskResults = additionalTaskResults;
+}
+
+- (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
+    NSMutableArray *allTaskResults = [[NSMutableArray alloc] initWithObjects:taskResult, nil];
+    if (_additionalTaskResults) {
+        [allTaskResults addObjectsFromArray:_additionalTaskResults];
+    }
+    ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
+
     NSString *matchedPredicateIdentifier = nil;
     for (NSInteger i = 0; i < [_resultPredicates count]; i++) {
         NSPredicate *predicate = _resultPredicates[i];
-        if ([predicate evaluateWithObject:leafResults]) {
+        if ([predicate evaluateWithObject:allTaskResults]) {
             matchedPredicateIdentifier = _matchingStepIdentifiers[i];
             break;
         }
