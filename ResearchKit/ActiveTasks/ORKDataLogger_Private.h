@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  Exposing a minimal set of extra facilities to permit unit testing.
  */
-@interface ORKDataLogger()
+@interface ORKDataLogger ()
 
 - (nullable NSFileHandle *)fileHandle;
 

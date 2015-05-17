@@ -211,7 +211,7 @@
 @end
 
 
-@interface ORKConsentSignatureController()
+@interface ORKConsentSignatureController ()
 
 @property (nonatomic, strong) ORKConsentSigningView *signingView;
 

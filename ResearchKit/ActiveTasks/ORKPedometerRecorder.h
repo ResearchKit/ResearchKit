@@ -28,7 +28,9 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKRecorder.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,10 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKPedometerRecorderDelegate <ORKRecorderDelegate>
 
 @optional
-
 - (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder;
 
 @end
+
 
 /**
  A recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
@@ -52,6 +54,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKPedometerRecorder : ORKRecorder
 
 @property (nonatomic, readonly, nullable) NSDate *lastUpdateDate;
+
 @property (nonatomic, readonly) NSInteger totalNumberOfSteps;
 
 // Negative if an invalid value.
@@ -63,6 +66,7 @@ ORK_CLASS_AVAILABLE
  @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the pedometer data should be stored.
+ 
  @return An initialized pedometer recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier

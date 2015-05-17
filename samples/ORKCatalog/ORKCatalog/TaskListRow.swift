@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 import ResearchKit
+import AudioToolbox
 
 /**
     An enum that corresponds to a row displayed in a `TaskListViewController`.
@@ -53,6 +54,8 @@ enum TaskListRow: Int, Printable {
     case Fitness
     case ShortWalk
     case Audio
+    case ToneAudiometry
+    case DeviceMotionReactionTimeTask
     case Survey
     case Consent
     case Form
@@ -126,6 +129,12 @@ enum TaskListRow: Int, Printable {
             case .Audio:
                 return NSLocalizedString("Audio Active Task", comment: "")
 
+            case .ToneAudiometry:
+                return NSLocalizedString("Tone Audiometry Active Task", comment: "")
+
+            case .DeviceMotionReactionTimeTask:
+                return NSLocalizedString("Device Motion Reaction Time Task", comment: "")
+            
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
 
@@ -153,79 +162,81 @@ enum TaskListRow: Int, Printable {
     */
     private enum Identifier: String {
         // Task with examples of questions with sliding scales.
-        case ScaleQuestionTask =                    "ScaleQuestionTask"
-        case DiscreteScaleQuestionStep =            "DiscreteScaleQuestionStep"
-        case ContinuousScaleQuestionStep =          "ContinuousScaleQuestionStep"
-        case DiscreteVerticalScaleQuestionStep =    "DiscreteVerticalScaleQuestionStep"
-        case ContinuousVerticalScaleQuestionStep =  "ContinuousVerticalScaleQuestionStep"
+        case ScaleQuestionTask =                                    "ScaleQuestionTask"
+        case DiscreteScaleQuestionStep =                            "DiscreteScaleQuestionStep"
+        case ContinuousScaleQuestionStep =                          "ContinuousScaleQuestionStep"
+        case DiscreteVerticalScaleQuestionStep =                    "DiscreteVerticalScaleQuestionStep"
+        case ContinuousVerticalScaleQuestionStep =                  "ContinuousVerticalScaleQuestionStep"
 
         // Task with examples of numeric questions.
-        case NumericQuestionTask =                  "NumericQuestionTask"
-        case NumericQuestionStep =                  "NumericQuestionStep"
-        case NumericNoUnitQuestionStep =            "NumericNoUnitQuestionStep"
+        case NumericQuestionTask =                                  "NumericQuestionTask"
+        case NumericQuestionStep =                                  "NumericQuestionStep"
+        case NumericNoUnitQuestionStep =                            "NumericNoUnitQuestionStep"
         
         // Task with an example of time of day entry.
-        case TimeOfDayQuestionTask =                "TimeOfDayQuestionTask"
-        case TimeOfDayQuestionStep =                "TimeOfDayQuestionStep"
+        case TimeOfDayQuestionTask =                                "TimeOfDayQuestionTask"
+        case TimeOfDayQuestionStep =                                "TimeOfDayQuestionStep"
 
         // Task with an example of date entry.
-        case DateQuestionTask =                     "DateQuestionTask"
-        case DateQuestionStep =                     "DateQuestionStep"
+        case DateQuestionTask =                                     "DateQuestionTask"
+        case DateQuestionStep =                                     "DateQuestionStep"
 
         // Task with an example of date and time entry.
-        case DateTimeQuestionTask =                 "DateTimeQuestionTask"
-        case DateTimeQuestionStep =                 "DateTimeQuestionStep"
+        case DateTimeQuestionTask =                                 "DateTimeQuestionTask"
+        case DateTimeQuestionStep =                                 "DateTimeQuestionStep"
 
         // Task with an example of time interval entry.
-        case TimeIntervalQuestionTask =             "TimeIntervalQuestionTask"
-        case TimeIntervalQuestionStep =             "TimeIntervalQuestionStep"
+        case TimeIntervalQuestionTask =                             "TimeIntervalQuestionTask"
+        case TimeIntervalQuestionStep =                             "TimeIntervalQuestionStep"
 
         // Task with an example of free text entry.
-        case TextQuestionTask =                     "TextQuestionTask"
-        case TextQuestionStep =                     "TextQuestionStep"
+        case TextQuestionTask =                                     "TextQuestionTask"
+        case TextQuestionStep =                                     "TextQuestionStep"
 
         // Task with a value picker.
-        case ValuePickerChoiceQuestionTask =        "ValuePickerChoiceQuestionTask"
-        case ValuePickerChoiceQuestionStep =        "ValuePickerChoiceQuestionStep"
+        case ValuePickerChoiceQuestionTask =                        "ValuePickerChoiceQuestionTask"
+        case ValuePickerChoiceQuestionStep =                        "ValuePickerChoiceQuestionStep"
         
         // Task with an example of a multiple choice question.
-        case TextChoiceQuestionTask =               "TextChoiceQuestionTask"
-        case TextChoiceQuestionStep =               "TextChoiceQuestionStep"
+        case TextChoiceQuestionTask =                               "TextChoiceQuestionTask"
+        case TextChoiceQuestionStep =                               "TextChoiceQuestionStep"
         
         // Task with an image choice question.
-        case ImageChoiceQuestionTask =              "ImageChoiceQuestionTask"
-        case ImageChoiceQuestionStep =              "ImageChoiceQuestionStep"
+        case ImageChoiceQuestionTask =                              "ImageChoiceQuestionTask"
+        case ImageChoiceQuestionStep =                              "ImageChoiceQuestionStep"
 
         // Survey example with a Boolean question.
-        case BooleanQuestionTask =                  "BooleanQuestionTask"
-        case BooleanQuestionStep =                  "BooleanQuestionStep"
+        case BooleanQuestionTask =                                  "BooleanQuestionTask"
+        case BooleanQuestionStep =                                  "BooleanQuestionStep"
 
         // Active tasks.
-        case TwoFingerTappingIntervalTask =         "TwoFingerTappingIntervalTask"
-        case SpatialSpanMemoryTask =                "SpatialSpanMemoryTask"
-        case FitnessTask =                          "FitnessTask"
-        case ShortWalkTask =                        "ShortWalkTask"
-        case AudioTask =                            "AudioTask"
+        case TwoFingerTappingIntervalTask =                         "TwoFingerTappingIntervalTask"
+        case SpatialSpanMemoryTask =                                "SpatialSpanMemoryTask"
+        case FitnessTask =                                          "FitnessTask"
+        case ShortWalkTask =                                        "ShortWalkTask"
+        case AudioTask =                                            "AudioTask"
+        case ToneAudiometryTask =                                   "ToneAudiometry"
+        case DeviceMotionReactionTimeTask =                         "DeviceMotionReactionTimeTask"
 
         // Survey task specific identifiers.
-        case SurveyTask =                           "SurveyTask"
-        case IntroStep =                            "IntroStep"
-        case QuestionStep =                         "QuestionStep"
-        case SummaryStep =                          "SummaryStep"
+        case SurveyTask =                                           "SurveyTask"
+        case IntroStep =                                            "IntroStep"
+        case QuestionStep =                                         "QuestionStep"
+        case SummaryStep =                                          "SummaryStep"
         
         // Consent task specific identifiers.
-        case ConsentTask =                          "ConsentTask"
-        case VisualConsentStep =                    "VisualConsentStep"
-        case ConsentSharingStep =                   "ConsentSharingStep"
-        case ConsentReviewStep =                    "ConsentReviewStep"
-        case ConsentDocumentParticipantSignature =  "ConsentDocumentParticipantSignature"
-        case ConsentDocumentInvestigatorSignature = "ConsentDocumentInvestigatorSignature"
+        case ConsentTask =                                          "ConsentTask"
+        case VisualConsentStep =                                    "VisualConsentStep"
+        case ConsentSharingStep =                                   "ConsentSharingStep"
+        case ConsentReviewStep =                                    "ConsentReviewStep"
+        case ConsentDocumentParticipantSignature =                  "ConsentDocumentParticipantSignature"
+        case ConsentDocumentInvestigatorSignature =                 "ConsentDocumentInvestigatorSignature"
 
         // Task with a form, where multiple items appear on one page.
-        case FormTask =                             "FormTask"
-        case FormStep =                             "FormStep"
-        case FormItem01 =                           "FormItem01"
-        case FormItem02 =                           "FormItem02"
+        case FormTask =                                             "FormTask"
+        case FormStep =                                             "FormStep"
+        case FormItem01 =                                           "FormItem01"
+        case FormItem02 =                                           "FormItem02"
     }
     
     // MARK: Properties
@@ -281,6 +292,12 @@ enum TaskListRow: Int, Printable {
             case .Audio:
                 return audioTask
             
+            case .ToneAudiometry:
+                return toneAudiometryTask
+
+            case .DeviceMotionReactionTimeTask:
+                return deviceMotionReactionTimeTask
+            
             case .Survey:
                 return surveyTask
             
@@ -299,7 +316,7 @@ enum TaskListRow: Int, Printable {
         var steps = [ORKStep]()
         
         // The first step is a scale control with 10 discrete ticks.
-        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false)
+        let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
         let questionStep1 = ORKQuestionStep(identifier: Identifier.DiscreteScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step1AnswerFormat)
         
@@ -307,8 +324,9 @@ enum TaskListRow: Int, Printable {
         
         steps += [questionStep1]
         
-        // The second step is a scale control that allows continuous movement.
-        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: false)
+        // The second step is a scale control that allows continuous movement with a percent formatter.
+        let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
+        step2AnswerFormat.numberStyle = .Percent
         
         let questionStep2 = ORKQuestionStep(identifier: Identifier.ContinuousScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step2AnswerFormat)
         
@@ -317,7 +335,7 @@ enum TaskListRow: Int, Printable {
         steps += [questionStep2]
 
         // The third step is a vertical scale control with 10 discrete ticks.
-        let step3AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true)
+        let step3AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
         
         let questionStep3 = ORKQuestionStep(identifier: Identifier.DiscreteVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step3AnswerFormat)
         
@@ -326,14 +344,14 @@ enum TaskListRow: Int, Printable {
         steps += [questionStep3]
 
         // The fourth step is a vertical scale control that allows continuous movement.
-        let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true)
+        let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
         let questionStep4 = ORKQuestionStep(identifier: Identifier.ContinuousVerticalScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step4AnswerFormat)
         
         questionStep4.text = exampleDetailText
         
         steps += [questionStep4]
-
+        
         return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: steps)
     }
     
@@ -569,7 +587,23 @@ enum TaskListRow: Int, Printable {
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
+    
+    private var deviceMotionReactionTimeTask: ORKTask {
+        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    private var exampleSuccessSound: UInt32 {
+        var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(successSoundPath, &soundID)
+        return soundID
+    }
 
+    /// This task presents the Tone Audiometry pre-defined active task.
+    private var toneAudiometryTask: ORKTask {
+        return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: nil)
+    }
+    
     /**
         A task demonstrating how the ResearchKit framework can be used to present a simple
         survey with an introduction, a question, and a conclusion.
@@ -805,6 +839,14 @@ enum TaskListRow: Int, Printable {
     
     private var exampleQuestionText: String {
         return NSLocalizedString("Your question goes here.", comment: "")
+    }
+    
+    private var exampleHighValueText: String {
+        return NSLocalizedString("High Value", comment: "")
+    }
+    
+    private var exampleLowValueText: String {
+        return NSLocalizedString("Low Value", comment: "")
     }
     
     private var exampleDetailText: String {

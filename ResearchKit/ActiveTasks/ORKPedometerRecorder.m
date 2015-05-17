@@ -28,13 +28,15 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKPedometerRecorder.h"
 #import "ORKDataLogger.h"
 #import "CMPedometerData+ORKJSONDictionary.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
 
-@interface ORKPedometerRecorder() {
+
+@interface ORKPedometerRecorder () {
     ORKDataLogger *_logger;
     BOOL _isRecording;
 }
@@ -45,7 +47,6 @@
 
 
 @implementation ORKPedometerRecorder
-
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               step:(ORKStep *)step
@@ -59,15 +60,11 @@
     return self;
 }
 
-
 - (void)dealloc {
     [_logger finishCurrentLog];
 }
 
-
-
 - (void)updateStatisticsWithData:(CMPedometerData *)pedometerData {
-    
     _lastUpdateDate = pedometerData.endDate;
     _totalNumberOfSteps = [pedometerData.numberOfSteps integerValue];
     if (pedometerData.distance) {
@@ -87,7 +84,6 @@
 }
 
 - (void)start {
-    
     [super start];
     
     _lastUpdateDate = nil;
@@ -133,11 +129,9 @@
     }];
 }
 
-
 - (NSString *)recorderType {
     return @"pedometer";
 }
-
 
 - (void)stop {
     [self doStopRecording];
@@ -147,9 +141,8 @@
     __block NSURL *fileUrl = nil;
     [_logger enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
         fileUrl = logFileUrl;
-    } error:&error];
-    
-    
+    }
+                     error:&error];
     
     [self reportFileResultWithFile:fileUrl error:error];
     
@@ -186,7 +179,8 @@
 @end
 
 
-@interface ORKPedometerRecorderConfiguration()
+@interface ORKPedometerRecorderConfiguration ()
+
 @end
 
 
@@ -202,7 +196,6 @@
                                             outputDirectory:outputDirectory];
 }
 
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     return self;
@@ -212,18 +205,14 @@
     return YES;
 }
 
-
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
-    return (isParentSame) ;
+    return (isParentSame);
 }
-
-
 
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionCoreMotionActivity;
 }
 
 @end
-

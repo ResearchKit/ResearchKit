@@ -207,6 +207,7 @@ ORK_CLASS_AVAILABLE
  
  @param object Should be an object of a class that is accepted by the logFormatter.
  @param error  Error output, if the append fails.
+ 
  @return `YES` if appending succeeds; otherwise, `NO`.
  */
 - (BOOL)append:(id)object error:(NSError * __autoreleasing *)error;
@@ -537,6 +538,7 @@ ORK_CLASS_AVAILABLE
  
  @param bytes       The threshold down to which to remove old log files. File removal stops when the total bytes managed by all the data loggers reaches this threshold.
  @param error       The error, on failure.
+ 
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
 - (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * __nullable __autoreleasing *)error;

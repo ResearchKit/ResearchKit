@@ -90,7 +90,7 @@
     return (isParentSame &&
             ORKEqualObjects(self.consentDocument, castObject.consentDocument) &&
             ORKEqualObjects(self.signature, castObject.signature) &&
-            ORKEqualObjects(self.reasonForConsent, castObject.reasonForConsent)) ;
+            ORKEqualObjects(self.reasonForConsent, castObject.reasonForConsent));
 }
 
 - (NSUInteger)hash {

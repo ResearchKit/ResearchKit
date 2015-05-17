@@ -156,7 +156,7 @@
     
     return ((self.timestamp == castObject.timestamp) &&
             CGPointEqualToPoint(self.location, castObject.location) &&
-            (self.buttonIdentifier == castObject.buttonIdentifier)) ;
+            (self.buttonIdentifier == castObject.buttonIdentifier));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -169,6 +169,103 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@ %.03f %@", [super description], @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+}
+
+@end
+
+
+@implementation ORKToneAudiometryResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, outputVolume);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, outputVolume);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKToneAudiometrySample);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.outputVolume, castObject.outputVolume) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKToneAudiometryResult *result = [super copyWithZone:zone];
+    result.outputVolume = [self.outputVolume copy];
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@", [super description], self.outputVolume, self.samples];
+}
+
+@end
+
+
+@implementation ORKToneAudiometrySample
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, frequency);
+    ORK_ENCODE_ENUM(aCoder, channel);
+    ORK_ENCODE_OBJ(aCoder, amplitude);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, frequency);
+        ORK_DECODE_ENUM(aDecoder, channel);
+        ORK_DECODE_OBJ(aDecoder, amplitude);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+
+    __typeof(self) castObject = object;
+
+    return ((self.channel == castObject.channel) &&
+            ([self.frequency isEqualToNumber:castObject.frequency]) &&
+            ([self.amplitude isEqualToNumber:castObject.amplitude])) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKToneAudiometrySample *sample = [[[self class] allocWithZone:zone] init];
+    sample.frequency = self.frequency;
+    sample.channel = self.channel;
+    sample.amplitude = self.amplitude;
+    return sample;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], self.frequency, @(self.channel), self.amplitude];
 }
 
 @end
@@ -207,7 +304,7 @@
     return ((self.timestamp == castObject.timestamp) &&
             (self.targetIndex == castObject.targetIndex) &&
             (CGPointEqualToPoint(self.location, castObject.location)) &&
-            (self.isCorrect == castObject.isCorrect)) ;
+            (self.isCorrect == castObject.isCorrect));
 }
 
 - (NSUInteger)hash {
@@ -273,7 +370,7 @@
             (self.gameSize == castObject.gameSize) &&
             (self.gameStatus == castObject.gameStatus) &&
             (self.score == castObject.score) &&
-            (ORKEqualObjects(self.targetRects, castObject.targetRects))) ;
+            (ORKEqualObjects(self.targetRects, castObject.targetRects)));
 }
 
 - (NSUInteger)hash {
@@ -334,7 +431,7 @@
             (self.score == castObject.score) &&
             (self.numberOfGames == castObject.numberOfGames) &&
             (self.numberOfFailures == castObject.numberOfFailures) &&
-            (ORKEqualObjects(self.gameRecords, castObject.gameRecords))) ;
+            (ORKEqualObjects(self.gameRecords, castObject.gameRecords)));
 }
 
 - (NSUInteger)hash {
@@ -390,7 +487,7 @@
             ORKEqualObjects(self.samples, castObject.samples) &&
             CGRectEqualToRect(self.buttonRect1, castObject.buttonRect1) &&
             CGRectEqualToRect(self.buttonRect2, castObject.buttonRect2) &&
-            CGSizeEqualToSize(self.stepViewSize, castObject.stepViewSize)) ;
+            CGSizeEqualToSize(self.stepViewSize, castObject.stepViewSize));
 }
 
 - (NSUInteger)hash {
@@ -444,7 +541,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.fileURL, castObject.fileURL) &&
-            ORKEqualObjects(self.contentType, castObject.contentType)) ;
+            ORKEqualObjects(self.contentType, castObject.contentType));
 }
 
 - (NSUInteger)hash {
@@ -464,6 +561,53 @@
 
 @end
 
+
+@implementation ORKDeviceMotionReactionTimeResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_OBJ(aCoder, fileResult);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_OBJ_CLASS(aDecoder, fileResult, ORKFileResult);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.timestamp == castObject.timestamp) &&
+            ORKEqualObjects(self.fileResult, castObject.fileResult)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [[NSNumber numberWithDouble:self.timestamp] hash] ^ [self.fileResult hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKDeviceMotionReactionTimeResult *result = [super copyWithZone:zone];
+    result.fileResult = [self.fileResult copy];
+    result.timestamp = self.timestamp;
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %f %@", [super description], self.timestamp, self.fileResult.description];
+}
+
+@end
 
 @implementation ORKDataResult
 
@@ -499,7 +643,7 @@
     return (isParentSame &&
             ORKEqualObjects(self.data, castObject.data) &&
             ORKEqualObjects(self.filename, castObject.filename) &&
-            ORKEqualObjects(self.contentType, castObject.contentType)) ;
+            ORKEqualObjects(self.contentType, castObject.contentType));
 }
 
 - (NSUInteger)hash {
@@ -548,7 +692,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.signature, castObject.signature)) ;
+            ORKEqualObjects(self.signature, castObject.signature));
 }
 
 - (NSUInteger)hash {
@@ -603,7 +747,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (_questionType == castObject.questionType)) ;
+            (_questionType == castObject.questionType));
 }
 
 - (NSUInteger)hash {
@@ -662,7 +806,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_scaleAnswer, castObject.scaleAnswer)) ;
+            ORKEqualObjects(_scaleAnswer, castObject.scaleAnswer));
 }
 
 - (NSUInteger)hash {
@@ -715,7 +859,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_choiceAnswers, castObject.choiceAnswers)) ;
+            ORKEqualObjects(_choiceAnswers, castObject.choiceAnswers));
 }
 
 - (NSUInteger)hash {
@@ -768,7 +912,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_booleanAnswer, castObject.booleanAnswer)) ;
+            ORKEqualObjects(_booleanAnswer, castObject.booleanAnswer));
 }
 
 - (NSUInteger)hash {
@@ -826,7 +970,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_textAnswer, castObject.textAnswer)) ;
+            ORKEqualObjects(_textAnswer, castObject.textAnswer));
 }
 
 - (NSUInteger)hash {
@@ -939,7 +1083,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_dateComponentsAnswer, castObject.dateComponentsAnswer)) ;
+            ORKEqualObjects(_dateComponentsAnswer, castObject.dateComponentsAnswer));
 }
 
 - (NSUInteger)hash {
@@ -992,7 +1136,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(_intervalAnswer, castObject.intervalAnswer)) ;
+            ORKEqualObjects(_intervalAnswer, castObject.intervalAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1052,7 +1196,7 @@
     return (isParentSame &&
             ORKEqualObjects(_timeZone, castObject.timeZone) &&
             ORKEqualObjects(_calendar, castObject.calendar) &&
-            ORKEqualObjects(_dateAnswer, castObject.dateAnswer)) ;
+            ORKEqualObjects(_dateAnswer, castObject.dateAnswer));
 }
 
 - (NSUInteger)hash {
@@ -1128,7 +1272,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.results, castObject.results)) ;
+            ORKEqualObjects(self.results, castObject.results));
 }
 
 - (NSUInteger)hash {
@@ -1223,7 +1367,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.taskRunUUID, castObject.taskRunUUID) &&
-            ORKEqualObjects(self.outputDirectory, castObject.outputDirectory)) ;
+            ORKEqualObjects(self.outputDirectory, castObject.outputDirectory));
 }
 
 - (NSUInteger)hash {

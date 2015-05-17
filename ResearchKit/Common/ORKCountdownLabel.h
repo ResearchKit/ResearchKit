@@ -33,7 +33,7 @@
 
 
 /**
- *  Coundown label in active steps
+ Coundown label in active steps
  */
 ORK_CLASS_AVAILABLE
 @interface ORKCountdownLabel : ORKLabel

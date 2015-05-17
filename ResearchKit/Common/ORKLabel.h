@@ -35,7 +35,7 @@
 
 
 /**
- *  This is a base class, not being used directly.
+ This is a base class, not being used directly.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKLabel : UILabel <ORKDefaultFont>

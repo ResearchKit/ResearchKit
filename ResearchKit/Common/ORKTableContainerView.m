@@ -41,7 +41,7 @@
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
-@interface ORKTableContainerView() <UIGestureRecognizerDelegate>
+@interface ORKTableContainerView () <UIGestureRecognizerDelegate>
 
 @end
 

@@ -81,6 +81,17 @@
     for (ORKFormItem *item in _formItems) {
         [item.answerFormat validateParameters];
     }
+    
+    [self validateIdentifiersUnique];
+}
+
+- (void)validateIdentifiersUnique {
+    NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
+    BOOL itemsHaveNonUniqueIdentifiers = ( [_formItems count] != [uniqueIdentifiers count] );
+    
+    if (itemsHaveNonUniqueIdentifiers) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Each form item should have a unique identifier" userInfo:nil];
+    }
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

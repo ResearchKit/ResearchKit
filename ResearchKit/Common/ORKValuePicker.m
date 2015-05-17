@@ -43,7 +43,7 @@
 
 
 @implementation ORKValuePicker {
-    UIPickerView* _pickerView;
+    UIPickerView *_pickerView;
     id _answer;
     __weak id<ORKPickerDelegate> _pickerDelegate;
 }
