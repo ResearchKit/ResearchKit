@@ -38,7 +38,8 @@
 #import "ORKHeadlineLabel.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKBodyLabel.h"
-#import "ORKDefines_Private.h"
+#import "ORKConsentSectionFormatter.h"
+#import "ORKConsentSignatureFormatter.h"
 
 
 @implementation ORKConsentDocument {
@@ -48,12 +49,18 @@
 #pragma mark - Initializers
 
 - (instancetype)init {
-    return [self initWithHTMLPDFWriter:[[ORKHTMLPDFWriter alloc] init]];
+    return [self initWithHTMLPDFWriter:[[ORKHTMLPDFWriter alloc] init]
+            consentSectionFormatter:[[ORKConsentSectionFormatter alloc] init]
+            consentSignatureFormatter:[[ORKConsentSignatureFormatter alloc] init]];
 }
 
-- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter * __nonnull)writer {
+- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
+              consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
+            consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter{
     if (self = [super init]) {
         _writer = writer;
+        _sectionFormatter = sectionFormatter;
+        _signatureFormatter = signatureFormatter;
     }
     return self;
 }
@@ -176,8 +183,7 @@
         
         // scenes
         for (ORKConsentSection *section in _sections) {
-            [body appendFormat:@"<h4>%@</h4>", section.formalTitle?:(section.title?:@"")];
-            [body appendFormat:@"<p>%@</p>", section.htmlContent?:(section.escapedContent?:@"")];
+            [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
         }
         
         if (! mobile) {
@@ -185,62 +191,8 @@
             [body appendFormat:@"<h4 class=\"pagebreak\" >%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
             
-            NSString *hr = @"<hr align='left' width='100%' style='height:1px; border:none; color:#000; background-color:#000; margin-top: -10px; margin-bottom: 0px;' />";
-            
-            NSString *signatureElementWrapper = @"<p><br/><div class='sigbox'><div class='inbox'>%@</div></div>%@%@</p>";
             for (ORKConsentSignature *signature in self.signatures) {
-                BOOL addedSig = NO;
-                
-                NSMutableArray *signatureElements = [NSMutableArray array];
-                
-                // Signature
-                if (signature.requiresName || signature.familyName || signature.givenName) {
-                    addedSig = YES;
-                    NSString *nameStr = @"&nbsp;";
-                    if (signature.familyName || signature.givenName) {
-                        NSMutableArray *names = [NSMutableArray array];
-                        if (signature.givenName) {
-                            [names addObject:signature.givenName];
-                        }
-                        if (signature.familyName) {
-                            [names addObject:signature.familyName];
-                        }
-                        nameStr = [names componentsJoinedByString:@"&nbsp;"];
-                    }
-                    
-                    NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);
-                    [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, nameStr, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
-                }
-                
-                if (signature.requiresSignatureImage || signature.signatureImage) {
-                    addedSig = YES;
-                    NSString *imageTag = nil;
-                    
-                    if (signature.signatureImage) {
-                        NSString *base64 = [UIImagePNGRepresentation(signature.signatureImage) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                        imageTag = [NSString stringWithFormat:@"<img width='100%%' alt='star' src='data:image/png;base64,%@' />", base64];
-                    } else {
-                        [body appendString:@"<br/>"];
-                    }
-                    NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil);
-                    [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag?:@"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
-                }
-                
-                if (addedSig) {
-                    [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate?:@"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
-                }
-                
-                NSInteger numElements = [signatureElements count];
-                if (numElements > 1) {
-                    [body appendString:[NSString stringWithFormat:@"<div class='grid border'>"]];
-                    for (NSString *element in signatureElements) {
-                        [body appendString:[NSString stringWithFormat:@"<div class='col-1-3 border'>%@</div>",element]];
-                    }
-                    
-                    [body appendString:@"</div>"];
-                } else if (numElements == 1) {
-                    [body appendString:[NSString stringWithFormat:@"<div width='200'>%@</div>",[signatureElements lastObject]]];
-                }
+                [body appendFormat:@"%@", [_signatureFormatter HTMLForSignature:signature]];
             }
         }
     }

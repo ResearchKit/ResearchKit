@@ -33,6 +33,8 @@
 #import <ResearchKit/ORKConsentSignature.h>
 
 @class ORKHTMLPDFWriter;
+@class ORKConsentSectionFormatter;
+@class ORKConsentSignatureFormatter;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -148,7 +150,9 @@ ORK_CLASS_AVAILABLE
 
  @param writer   The instance of the ORKHTMLPDFWriter upon which the class depends.
  */
-- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer;
+- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
+              consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
+            consentSignatureFormatter:(ORKConsentSignatureFormatter *)signatureFormatter;
 
 /**
  Writes the document's content into a PDF file.
