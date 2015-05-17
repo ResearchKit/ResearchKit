@@ -124,6 +124,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         [buttonKeys addObject:@"audio"];
         buttons[buttonKeys.lastObject] = button;
     }
+    
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showToneAudiometryTask:) forControlEvents:UIControlEventTouchUpInside];
@@ -131,6 +132,15 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         [buttonKeys addObject:@"tone_audiometry"];
         buttons[buttonKeys.lastObject] = button;
     }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Reaction Time Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showMiniForm:) forControlEvents:UIControlEventTouchUpInside];
@@ -216,14 +226,6 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         [button addTarget:self action:@selector(showImageChoices:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Image Choices" forState:UIControlStateNormal];
         [buttonKeys addObject:@"imageChoices"];
-        buttons[buttonKeys.lastObject] = button;
-    }
-    
-    {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Reaction Time" forState:UIControlStateNormal];
-        [buttonKeys addObject:@"react"];
         buttons[buttonKeys.lastObject] = button;
     }
     
