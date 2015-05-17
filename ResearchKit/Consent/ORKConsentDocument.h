@@ -32,6 +32,8 @@
 #import <ResearchKit/ResearchKit.h>
 #import <ResearchKit/ORKConsentSignature.h>
 
+@class ORKHTMLPDFWriter;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -139,6 +141,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *htmlReviewContent;
 
 /// @name PDF generation
+
+/**
+ Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
+ purposes of isolated unit testing.
+
+ @param writer   The instance of the ORKHTMLPDFWriter upon which the class depends.
+ */
+- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer;
 
 /**
  Writes the document's content into a PDF file.

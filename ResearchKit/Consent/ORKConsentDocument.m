@@ -45,9 +45,30 @@
     NSMutableArray *_signatures;
 }
 
+#pragma mark - Initializers
+
+- (instancetype)init {
+    return [self initWithHTMLPDFWriter:[[ORKHTMLPDFWriter alloc] init]];
+}
+
+- (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter * __nonnull)writer {
+    if (self = [super init]) {
+        _writer = writer;
+    }
+    return self;
+}
+
+#pragma mark - Accessors
+
 - (void)setSignatures:(NSArray *)signatures {
     _signatures = [signatures mutableCopy];
 }
+
+- (NSArray *)signatures {
+    return [_signatures copy];
+}
+
+#pragma mark - Public
 
 - (void)addSignature:(ORKConsentSignature *)signature {
     if (! _signatures) {
@@ -56,12 +77,7 @@
     [_signatures addObject:signature];
 }
 
-- (NSArray *)signatures {
-    return [_signatures copy];
-}
-
 - (void)makePDFWithCompletionHandler:(void (^)(NSData *data, NSError *error))completionBlock {
-    self.writer = [[ORKHTMLPDFWriter alloc] init];
     return [_writer writePDFFromHTML:[self htmlForMobile:NO withTitle:nil detail:nil] withCompletionBlock:^(NSData *data, NSError *error) {
         if (error) {
             // Pass the webview error straight through. This is a pretty exceptional
@@ -72,6 +88,8 @@
         }
     }];
 }
+
+#pragma mark - Private
 
 - (NSString *)mobileHTMLWithTitle:(NSString *)title detail:(NSString *)detail {
     return [self htmlForMobile:YES withTitle:title detail:detail];
@@ -229,9 +247,7 @@
     return [[self class] wrapHTMLBody:body mobile:mobile];
 }
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
+#pragma mark - <NSSecureCoding>
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -256,23 +272,11 @@
     ORK_ENCODE_OBJ(aCoder, sections);
 }
 
-- (BOOL)isEqual:(id)object {
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
-    __typeof(self) castObject = object;
-    return (ORKEqualObjects(self.title, castObject.title)
-            && ORKEqualObjects(self.signaturePageTitle, castObject.signaturePageTitle)
-            && ORKEqualObjects(self.signaturePageContent, castObject.signaturePageContent)
-            && ORKEqualObjects(self.htmlReviewContent, castObject.htmlReviewContent)
-            && ORKEqualObjects(self.signatures, castObject.signatures)
-            && ORKEqualObjects(self.sections, castObject.sections));
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
-- (NSUInteger)hash {
-    return [_title hash] ^ [_sections hash];
-}
+#pragma mark - <NSCopying>
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentDocument *doc = [[[self class] allocWithZone:zone] init];
@@ -288,6 +292,26 @@
     doc.sections = ORKArrayCopyObjects(_sections);
     
     return doc;
+}
+
+#pragma mark - <NSObject>
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.title, castObject.title)
+            && ORKEqualObjects(self.signaturePageTitle, castObject.signaturePageTitle)
+            && ORKEqualObjects(self.signaturePageContent, castObject.signaturePageContent)
+            && ORKEqualObjects(self.htmlReviewContent, castObject.htmlReviewContent)
+            && ORKEqualObjects(self.signatures, castObject.signatures)
+            && ORKEqualObjects(self.sections, castObject.sections));
+}
+
+- (NSUInteger)hash {
+    return [_title hash] ^ [_sections hash];
 }
 
 @end
