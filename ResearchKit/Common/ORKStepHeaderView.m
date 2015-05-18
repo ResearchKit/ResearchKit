@@ -224,7 +224,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
         NSMutableArray *constraints = [NSMutableArray array];
         
         // Request that the width grow
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1
+                                                                       constant:ORKScreenMetricMaxDimension];
         constraint.priority = UILayoutPriorityDefaultLow-1;
         [constraints addObject:constraint];
         
