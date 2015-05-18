@@ -373,6 +373,7 @@
 		FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */; };
 		FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */; };
 		FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */; };
+		FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -789,6 +790,7 @@
 		FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatter.m; sourceTree = "<group>"; };
 		FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureFormatter.h; sourceTree = "<group>"; };
 		FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureFormatter.m; sourceTree = "<group>"; };
+		FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -951,11 +953,10 @@
 		86CC8EA61AC09383001CCD89 /* ResearchKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				FA7A9D351B09362D005A2BEA /* Consent */,
 				86D348001AC16175006DB02B /* ORKRecorderTests.m */,
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
-				86CC8EAA1AC09383001CCD89 /* ORKConsentTests.m */,
-				FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */,
 				86CC8EAB1AC09383001CCD89 /* ORKDataLoggerManagerTests.m */,
 				86CC8EAC1AC09383001CCD89 /* ORKDataLoggerTests.m */,
 				86CC8EAD1AC09383001CCD89 /* ORKHKSampleTests.m */,
@@ -1671,6 +1672,16 @@
 			name = Formatters;
 			sourceTree = "<group>";
 		};
+		FA7A9D351B09362D005A2BEA /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				86CC8EAA1AC09383001CCD89 /* ORKConsentTests.m */,
+				FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */,
+				FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */,
+			);
+			name = Consent;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2059,6 +2070,7 @@
 				BCAD50E81B0201EE0034806A /* ORKTaskTests.m in Sources */,
 				86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */,
 				FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */,
+				FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				86CC8EB61AC09383001CCD89 /* ORKDataLoggerManagerTests.m in Sources */,
 				86CC8EB31AC09383001CCD89 /* ORKAccessibilityTests.m in Sources */,
