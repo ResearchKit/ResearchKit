@@ -35,6 +35,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString *const ORKTaskIdentifierResultPredicateVariableName;
+
 #define ORKIgnoreDoubleValue (NAN)
 #define ORKIgnoreTimeIntervalValue (ORKIgnoreDoubleValue)
 
@@ -72,21 +74,35 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
  specified integer value.
 
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedAnswer      The expected integer value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                                     expectedAnswer:(NSInteger)expectedAnswer;
+
+/**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedAnswer      The expected integer value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                      expectedAnswer:(NSInteger)expectedAnswer;
 
 /**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
  specified double values.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
                                         if you don't want to compare the answer against a maximum
@@ -97,156 +113,309 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
 
 /**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is within the
+ specified double values.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+
+/**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
  or equal to the specified double value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected double value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is greater than
+ or equal to the specified double value.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
  equal to the specified double value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param maximumExpectedAnswerValue  The maximum expected double value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKScaleQuestionResult` whose answer is less than or
+ equal to the specified double value.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
  the specified string.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedAnswer      The expected string answer.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
+                                                     expectedString:(NSString *)expectedString;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer is equal to
+ the specified string.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedAnswer      The expected string answer.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
                                                      expectedString:(NSString *)expectedString;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
  the specified strings.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
- @param expectedStrings      An array with all the expected string answers.
+ @param expectedStrings     An array with all the expected string answers.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     expectedStrings:(NSArray *)expectedStrings;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
+ the specified strings.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedStrings     An array with all the expected string answers.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                      expectedStrings:(NSArray *)expectedStrings;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
  specified regular expression pattern.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     matchingPattern:(NSString *)pattern;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
+ specified regular expression pattern.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                      matchingPattern:(NSString *)pattern;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
  specified regular expression patterns.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param patterns            An array of ICU-compliant regular expression patterns that match the answer strings.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                    matchingPatterns:(NSArray *)patterns;
+
+/**
+ Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
+ specified regular expression patterns.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param patterns            An array of ICU-compliant regular expression patterns that match the answer strings.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                     matchingPatterns:(NSArray *)patterns;
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
  specified boolean value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedAnswer      The expected boolean value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForBooleanQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForBooleanQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                                       expectedAnswer:(BOOL)expectedAnswer;
+
+/**
+ Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
+ specified boolean value.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedAnswer      The expected boolean value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForBooleanQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                        expectedAnswer:(BOOL)expectedAnswer;
 
 /**
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
  specified string.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedString      The expected result string.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                                    expectedString:(NSString *)expectedString;
+
+/**
+ Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
+ specified string.
+ 
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedString      The expected result string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTextQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                     expectedString:(NSString *)expectedString;
 
 /**
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
  specified regular expression pattern.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                                   matchingPattern:(NSString *)pattern;
+
+/**
+ Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
+ specified regular expression pattern.
+ 
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTextQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                    matchingPattern:(NSString *)pattern;
 
 /**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
  specified integer value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
+                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedAnswer      The expected integer value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                                       expectedAnswer:(NSInteger)expectedAnswer;
+
+/**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultIdentifier    The identifier of the question result you are interested in.
+ @param expectedAnswer      The expected integer value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                        expectedAnswer:(NSInteger)expectedAnswer;
 
 /**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
  specified double values.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
                                         if you don't want to compare the answer against a maximum
@@ -257,38 +426,82 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
 
 /**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is within the
+ specified double values.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a maximum
+                                        double value.
+ @param maximumExpectedAnswerValue  The maximum expected double value. Pass `ORKIgnoreDoubleValue`
+                                        if you don't want to compare the answer against a minimum
+                                        double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                            minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                            maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+
+/**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
  than or equal to the specified double value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected double value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is greater
+ than or equal to the specified double value.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                            minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
  or equal to the specified double value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param maximumExpectedAnswerValue  The maximum expected double value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKNumericQuestionResult` whose answer is less than
+ or equal to the specified double value.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected double value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                            maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
@@ -297,7 +510,8 @@ ORK_CLASS_AVAILABLE
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
  If you are interested in additional components, you will have to build the predicate manually.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier                  The identifier of the task whose result you want to match.
+                                            Pass `nil` to match the ongoing task.
  @param resultIdentifier                The identifier of the question result you are interested in.
  @param minimumExpectedAnswerHour       The minimum expected hour component value.
  @param minimumExpectedAnswerMinute     The minimum expected minute component value.
@@ -306,7 +520,7 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTimeOfDayQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTimeOfDayQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                       resultIdentifier:(NSString *)resultIdentifier
                                              minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
                                            minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
@@ -314,10 +528,32 @@ ORK_CLASS_AVAILABLE
                                            maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute;
 
 /**
+ Returns a predicate matching a result of type `ORKTimeOfDayQuestionResult` whose answer is within
+ the specified hour and minute values.
+ 
+ Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
+ If you are interested in additional components, you will have to build the predicate manually.
+ 
+ @param resultIdentifier                The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerHour       The minimum expected hour component value.
+ @param minimumExpectedAnswerMinute     The minimum expected minute component value.
+ @param maximumExpectedAnswerHour       The maximum integer hour component value.
+ @param maximumExpectedAnswerMinute     The maximum expected minute component value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTimeOfDayQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                               minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
+                                             minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
+                                               maximumExpectedAnswerHour:(NSInteger)maximumExpectedAnswerHour
+                                             maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute;
+
+/**
  Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
  is within the specified `NSTimeInterval` values.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass 
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
                                         `ORKIgnoreTimeIntervlValue` if you don't want to compare the
@@ -328,22 +564,41 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ is within the specified `NSTimeInterval` values.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value. Pass
+                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+                                        answer against a maximum `NSTimeInterval` value.
+ @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value. Pass
+                                        `ORKIgnoreTimeIntervlValue` if you don't want to compare the
+                                        answer against a minimum `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                 minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
+                                                 maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
  specified integer value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue;
 
@@ -351,21 +606,47 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
  specified integer value.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerValue  The minimum expected `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                 minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass 
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
+
+/**
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
+ specified integer value.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param maximumExpectedAnswerValue  The maximum expected `NSTimeInterval` value.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                 maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue;
 
 /**
  Returns a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
  the specified dates.
  
- @param taskIdentifier      The identifier of the task whose result you want to match.
+ @param taskIdentifier              The identifier of the task whose result you want to match. Pass
+                                        `nil` to match the ongoing task.
  @param resultIdentifier            The identifier of the question result you are interested in.
  @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
                                         compare the answer against a minimum date.
@@ -374,10 +655,26 @@ ORK_CLASS_AVAILABLE
  
  @return A result predicate.
  */
-+ (NSPredicate *)predicateForDateQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
++ (NSPredicate *)predicateForDateQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
                                         maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
+
+/**
+ Returns a predicate matching a result of type `ORKDateQuestionResult` whose answer is a date within
+ the specified dates.
+ 
+ @param resultIdentifier            The identifier of the question result you are interested in.
+ @param minimumExpectedAnswerDate   The minimum expected date. Pass `nil` if you don't want to
+                                        compare the answer against a minimum date.
+ @param maximumExpectedAnswerDate   The maximum expected date. Pass `nil` if you don't want to
+                                        compare the answer against a maximum date.
+ 
+ @return A result predicate.
+ */
++ (NSPredicate *)predicateForDateQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                          minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
+                                          maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate;
 
 @end
 
