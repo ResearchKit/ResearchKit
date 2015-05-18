@@ -134,7 +134,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                                           multiplier:1.0
-                                                                            constant:10000.0];
+                                                                            constant:ORKScreenMetricMaxDimension];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
         [self addConstraint:widthConstraint];
     }

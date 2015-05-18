@@ -544,7 +544,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if ([self.questionStep isFormatTextfield] ||
         [cell isKindOfClass:[ORKSurveyAnswerCellForScale class]] ||
         [cell isKindOfClass:[ORKSurveyAnswerCellForPicker class]]) {
-        cell.separatorInset = UIEdgeInsetsMake(0, self.view.bounds.size.width, 0, 0);
+        cell.separatorInset = UIEdgeInsetsMake(0, ORKScreenMetricMaxDimension, 0, 0);
     }
 
     if ([cell isKindOfClass:[ORKSurveyAnswerCellForPicker class]] && _visible) {
@@ -593,7 +593,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     cell.layoutMargins = UIEdgeInsetsZero;
     if (indexPath.section == ORKQuestionSectionSpace2) {
         // Hide double bottom separator (the last answer cell already has one)
-        cell.separatorInset = (UIEdgeInsets){.left = cell.bounds.size.width};
+        cell.separatorInset = (UIEdgeInsets){.left = ORKScreenMetricMaxDimension};
     } else {
         cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
     };

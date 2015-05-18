@@ -307,7 +307,7 @@
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
-                                                                           constant:10000.0];
+                                                                           constant:ORKScreenMetricMaxDimension];
     maxWidthConstraint.priority = UILayoutPriorityRequired-2;
     [constraints addObject:maxWidthConstraint];
     
