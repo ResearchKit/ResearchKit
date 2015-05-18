@@ -86,7 +86,7 @@ ORK_CLASS_AVAILABLE
  corresponding number of matching step identifiers, plus an optional default step identifier that is
  used if none of the result predicates match. One result predicate can match one or more question
  results; if matching several question results, they can belong to the same or to different task
- results). This allows you to define discretionarily complex task navigation behaviors.
+ results). This allows you to define arbitrarily complex task navigation behaviors.
  
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
  `ORKQuestionResult` subtypes. Predicates must supply both the task result identifier (which can be
