@@ -374,6 +374,7 @@
 		FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */; };
 		FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */; };
 		FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */; };
+		FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -791,6 +792,7 @@
 		FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureFormatter.h; sourceTree = "<group>"; };
 		FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureFormatter.m; sourceTree = "<group>"; };
 		FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatterTests.m; sourceTree = "<group>"; };
+		FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureFormatterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1678,6 +1680,7 @@
 				86CC8EAA1AC09383001CCD89 /* ORKConsentTests.m */,
 				FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */,
 				FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */,
+				FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */,
 			);
 			name = Consent;
 			sourceTree = "<group>";
@@ -2062,6 +2065,7 @@
 			files = (
 				86CC8EB71AC09383001CCD89 /* ORKDataLoggerTests.m in Sources */,
 				86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */,
+				FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */,
 				86CC8EB81AC09383001CCD89 /* ORKHKSampleTests.m in Sources */,
 				86CC8EB51AC09383001CCD89 /* ORKConsentTests.m in Sources */,
 				2EBFE11D1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m in Sources */,
