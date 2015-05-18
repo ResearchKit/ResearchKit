@@ -278,7 +278,7 @@
     ORKConsentDocument *doc = [[[self class] allocWithZone:zone] init];
     doc.title = _title;
     doc.signaturePageTitle = _signaturePageTitle;
-    doc.signaturePageContent = _signaturePageTitle;
+    doc.signaturePageContent = _signaturePageContent;
     doc.htmlReviewContent = _htmlReviewContent;
     
     // Deep copy the signatures
