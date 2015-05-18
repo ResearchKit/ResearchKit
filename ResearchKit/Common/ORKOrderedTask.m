@@ -814,7 +814,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
             step.text = intendedUseDescription;
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_INTENDED_USE", nil);
-            step.image = [UIImage imageNamed:@"phonewaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.image = [UIImage imageNamed:@"phonewaves_inverted" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
 
             ORKStepArrayAddStep(steps, step);
@@ -824,7 +824,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
             step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_CALL_TO_ACTION", nil);
-            step.image = [UIImage imageNamed:@"phonesoundwaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.image = [UIImage imageNamed:@"phonefrequencywaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
 
             ORKStepArrayAddStep(steps, step);
@@ -877,7 +877,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                 step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
                 step.text = intendedUseDescription;
                 step.detailText = ORKLocalizedString(@"REACTION_TIME_TASK_INTENDED_USE", nil);
-                step.image = [UIImage imageNamed:@"phonewaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                step.image = [UIImage imageNamed:@"phoneshake" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
                 step.shouldTintImages = YES;
             
                 ORKStepArrayAddStep(steps, step);
@@ -887,7 +887,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                 step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
                 step.text = [NSString stringWithFormat: ORKLocalizedString(@"REACTION_TIME_TASK_INTRO_TEXT_FORMAT", nil), numberOfAttempts];
                 step.detailText = ORKLocalizedString(@"REACTION_TIME_TASK_CALL_TO_ACTION", nil);
-                step.image = [UIImage imageNamed:@"phonesoundwaves" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+                step.image = [UIImage imageNamed:@"phoneshakecircle" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
                 step.shouldTintImages = YES;
               
                 ORKStepArrayAddStep(steps, step);
