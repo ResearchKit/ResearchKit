@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Alex Basson. All rights reserved.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -148,7 +149,9 @@ ORK_CLASS_AVAILABLE
  Initializer with ORKHTMLPDFWriter parameter. Allows for injecting mock dependency for the
  purposes of isolated unit testing.
 
- @param writer   The instance of the ORKHTMLPDFWriter upon which the class depends.
+ @param writer              The instance of the ORKHTMLPDFWriter upon which the class depends.
+ @param sectionFormatter    An instance of ORKConsentSectionFormatter
+ @param signatureFormatter  An instance of ORKConsentSignatureFormatter
  */
 - (instancetype)initWithHTMLPDFWriter:(ORKHTMLPDFWriter *)writer
               consentSectionFormatter:(ORKConsentSectionFormatter *)sectionFormatter
