@@ -33,9 +33,6 @@
 #import "ORKHelpers.h"
 
 
-const double ORKIgnoreDoubleValue = DBL_MAX;
-const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
-
 @implementation ORKResultPredicate
 
 + (NSPredicate *)predicateMatchingTaskIdentifier:(NSString *)taskIdentifier
@@ -45,7 +42,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
                   areSubPredicateFormatsSubquery:(BOOL)areSubPredicateFormatsSubquery {
     ORKThrowInvalidArgumentExceptionIfNil(taskIdentifier);
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
-
+    
     NSMutableString *format = [[NSMutableString alloc] init];
     NSMutableArray *formatArgumentArray = [[NSMutableArray alloc] init];
     
@@ -95,7 +92,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                                     expectedAnswer:(NSInteger)expectedAnswer {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                                       expectedAnswer:expectedAnswer];
 }
@@ -104,7 +101,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
@@ -113,7 +110,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                     minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
@@ -121,7 +118,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
@@ -129,7 +126,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                      expectedString:(NSString *)expectedString {
-    return [self predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:@[ expectedString ]
                                                         usePatterns:NO];
@@ -138,7 +135,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     expectedStrings:(NSArray *)expectedStrings {
-    return [self predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                          resultIdentifier:resultIdentifier
                                                     expectedAnswers:expectedStrings
                                                         usePatterns:NO];
@@ -147,7 +144,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     matchingPattern:(NSString *)pattern {
-    return [self predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:@[ pattern ]
                                                         usePatterns:YES];
@@ -156,7 +153,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                    matchingPatterns:(NSArray *)patterns {
-    return [self predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:patterns
                                                         usePatterns:YES];
@@ -234,11 +231,11 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
     NSMutableArray *subPredicateFormatArray = [NSMutableArray new];
     NSMutableArray *subPredicateFormatArgumentArray = [NSMutableArray new];
     
-    if (minimumExpectedAnswerValue != ORKIgnoreDoubleValue) {
+    if (!isnan(minimumExpectedAnswerValue)) {
         [subPredicateFormatArray addObject:@"answer >= %@"];
         [subPredicateFormatArgumentArray addObject:@(minimumExpectedAnswerValue)];
     }
-    if (maximumExpectedAnswerValue != ORKIgnoreDoubleValue) {
+    if (!isnan(maximumExpectedAnswerValue)) {
         [subPredicateFormatArray addObject:@"answer <= %@"];
         [subPredicateFormatArgumentArray addObject:@(maximumExpectedAnswerValue)];
     }
@@ -252,7 +249,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:ORKIgnoreDoubleValue];
@@ -261,7 +258,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:ORKIgnoreDoubleValue
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
@@ -289,7 +286,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
@@ -298,7 +295,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
@@ -306,7 +303,7 @@ const NSTimeInterval ORKIgnoreTimeIntervalValue = ORKIgnoreDoubleValue;
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
                                                     resultIdentifier:resultIdentifier
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }

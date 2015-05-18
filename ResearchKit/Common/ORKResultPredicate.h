@@ -35,8 +35,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern const double ORKIgnoreDoubleValue;
-extern const NSTimeInterval ORKIgnoreTimeIntervalValue;
+#define ORKIgnoreDoubleValue (NAN)
+#define ORKIgnoreTimeIntervalValue (ORKIgnoreDoubleValue)
 
 /**
  The `ORKResultPredicate` class provides convenience class methods to build predicates for all the
