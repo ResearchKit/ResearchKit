@@ -368,6 +368,13 @@
 		BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = BC4194271AE8453A00073D6B /* ORKObserver.h */; };
 		BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4194281AE8453A00073D6B /* ORKObserver.m */; };
 		BCAD50E81B0201EE0034806A /* ORKTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCAD50E71B0201EE0034806A /* ORKTaskTests.m */; };
+		FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */; };
+		FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */; };
+		FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */; };
+		FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */; };
+		FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */; };
+		FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */; };
+		FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -779,6 +786,13 @@
 		BC4194281AE8453A00073D6B /* ORKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKObserver.m; sourceTree = "<group>"; };
 		BCAD50E71B0201EE0034806A /* ORKTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTaskTests.m; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
+		FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentDocumentTests.m; sourceTree = "<group>"; };
+		FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSectionFormatter.h; sourceTree = "<group>"; };
+		FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatter.m; sourceTree = "<group>"; };
+		FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSignatureFormatter.h; sourceTree = "<group>"; };
+		FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureFormatter.m; sourceTree = "<group>"; };
+		FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSectionFormatterTests.m; sourceTree = "<group>"; };
+		FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSignatureFormatterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -929,6 +943,7 @@
 		86C40BEB1A8D7C5C00081FAC /* Consent */ = {
 			isa = PBXGroup;
 			children = (
+				FA7A9D2C1B083D90005A2BEA /* Formatters */,
 				B12EFF451AB214E000A80147 /* Model */,
 				B12EFF461AB2150C00A80147 /* Visual */,
 				B12EFF481AB2152D00A80147 /* Sharing */,
@@ -940,10 +955,10 @@
 		86CC8EA61AC09383001CCD89 /* ResearchKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				FA7A9D351B09362D005A2BEA /* Consent */,
 				86D348001AC16175006DB02B /* ORKRecorderTests.m */,
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
-				86CC8EAA1AC09383001CCD89 /* ORKConsentTests.m */,
 				86CC8EAB1AC09383001CCD89 /* ORKDataLoggerManagerTests.m */,
 				86CC8EAC1AC09383001CCD89 /* ORKDataLoggerTests.m */,
 				86CC8EAD1AC09383001CCD89 /* ORKHKSampleTests.m */,
@@ -1648,6 +1663,28 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		FA7A9D2C1B083D90005A2BEA /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */,
+				FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */,
+				FA7A9D311B0843A9005A2BEA /* ORKConsentSignatureFormatter.h */,
+				FA7A9D321B0843A9005A2BEA /* ORKConsentSignatureFormatter.m */,
+			);
+			name = Formatters;
+			sourceTree = "<group>";
+		};
+		FA7A9D351B09362D005A2BEA /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				86CC8EAA1AC09383001CCD89 /* ORKConsentTests.m */,
+				FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */,
+				FA7A9D361B09365F005A2BEA /* ORKConsentSectionFormatterTests.m */,
+				FA7A9D381B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m */,
+			);
+			name = Consent;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1742,6 +1779,7 @@
 				86C40D7C1A8D7C5C00081FAC /* ORKScaleValueLabel.h in Headers */,
 				86C40E2C1A8D7C5C00081FAC /* ORKVisualConsentStep.h in Headers */,
 				86C40CB81A8D7C5C00081FAC /* ORKVoiceEngine.h in Headers */,
+				FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */,
 				86C40C5A1A8D7C5C00081FAC /* ORKWalkingTaskStep.h in Headers */,
 				86C40E361A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.h in Headers */,
 				86AD910D1AB7AE4100361FEB /* ORKNavigationContainerView_Internal.h in Headers */,
@@ -1788,6 +1826,7 @@
 				86C40C821A8D7C5C00081FAC /* ORKActiveStep_Internal.h in Headers */,
 				86C40D481A8D7C5C00081FAC /* ORKInstructionStepViewController_Internal.h in Headers */,
 				86C40D341A8D7C5C00081FAC /* ORKHelpers.h in Headers */,
+				FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */,
 				86C40E341A8D7C5C00081FAC /* ORKVisualConsentStepViewController_Internal.h in Headers */,
 				86C40D381A8D7C5C00081FAC /* ORKHTMLPDFWriter.h in Headers */,
 				86C40D561A8D7C5C00081FAC /* ORKOrderedTask.h in Headers */,
@@ -2026,6 +2065,7 @@
 			files = (
 				86CC8EB71AC09383001CCD89 /* ORKDataLoggerTests.m in Sources */,
 				86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */,
+				FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */,
 				86CC8EB81AC09383001CCD89 /* ORKHKSampleTests.m in Sources */,
 				86CC8EB51AC09383001CCD89 /* ORKConsentTests.m in Sources */,
 				2EBFE11D1AE1B32D00CB8254 /* ORKUIViewAccessibilityTests.m in Sources */,
@@ -2033,6 +2073,8 @@
 				2EBFE1201AE1B74100CB8254 /* ORKVoiceEngineTests.m in Sources */,
 				BCAD50E81B0201EE0034806A /* ORKTaskTests.m in Sources */,
 				86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */,
+				FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */,
+				FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				86CC8EB61AC09383001CCD89 /* ORKDataLoggerManagerTests.m in Sources */,
 				86CC8EB31AC09383001CCD89 /* ORKAccessibilityTests.m in Sources */,
@@ -2112,6 +2154,7 @@
 				86C40D7E1A8D7C5C00081FAC /* ORKScaleValueLabel.m in Sources */,
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
+				FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,
 				86C40CDE1A8D7C5C00081FAC /* ORKTintedImageView.m in Sources */,
@@ -2177,6 +2220,7 @@
 				86C40D661A8D7C5C00081FAC /* ORKQuestionStepViewController.m in Sources */,
 				86C40DF41A8D7C5C00081FAC /* ORKConsentReviewController.m in Sources */,
 				147503BA1AEE807C004B17F3 /* ORKToneAudiometryStep.m in Sources */,
+				FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */,
 				86C40D2A1A8D7C5C00081FAC /* ORKFormTextView.m in Sources */,
 				86C40DD41A8D7C5C00081FAC /* ORKTextButton.m in Sources */,
 				86C40C981A8D7C5C00081FAC /* ORKDataLogger.m in Sources */,
