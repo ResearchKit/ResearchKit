@@ -166,8 +166,8 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
         [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
     
-        // Float the contine view over the previewView if in landscape to give more room for the preview
-        if ([self floatContinueView]) {
+        // Float the continue view over the previewView if in landscape to give more room for the preview
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
             [self.mconstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
             _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
@@ -180,10 +180,6 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     [self addConstraints:self.mconstraints];
     
     [super updateConstraints];
-}
-
-- (BOOL)floatContinueView {
-    return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation);
 }
 
 - (AVCaptureSession *)session {
