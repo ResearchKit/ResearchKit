@@ -48,6 +48,9 @@
 @property (nonatomic, assign) id continueTarget;
 @property (nonatomic, strong) NSString* continueTitle;
 
+@property (nonatomic) BOOL capturePressesIgnored;
+@property (nonatomic) BOOL retakePressesIgnored;
+
 @end
 
 
@@ -200,11 +203,11 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     // Intercept the continue button press.  This can be called multiple
     // times with the same UIBarButtonItem, or with different UIBarButtonItems,
     // so capture it whenever the button does not point to our selector
-    if(continueButtonItem.action != @selector(continuePressed)) {
+    if (continueButtonItem.action != @selector(capturePressed)) {
         self.continueAction = continueButtonItem.action;
         self.continueTarget = continueButtonItem.target;
         self.continueTitle = continueButtonItem.title;
-        continueButtonItem.action = @selector(continuePressed);
+        continueButtonItem.action = @selector(capturePressed);
         continueButtonItem.target = self;
     }
     
@@ -219,9 +222,16 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     _continueSkipContainer.continueButtonItem = continueButtonItem;
 }
 
-- (void)continuePressed {
+- (void)capturePressed {
+    // If we are still waiting for the delegate to complete, ignore futher presses
+    if (_capturePressesIgnored)
+        return;
+    
     // If we don't have an error to show, and we have not yet captured an image, then do so
     if (!self.capturedImage && !self.error) {
+        // Ignore futher presses until the delegate completes
+        _capturePressesIgnored = YES;
+        
         // Capture the image via the delegate
         [self.delegate capturePressed:^(BOOL captureSuccess){
             if(captureSuccess) {
@@ -232,6 +242,8 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
                 _continueSkipContainer.continueButtonItem.title = self.continueTitle;
                 _continueSkipContainer.skipButtonItem = _skipButtonItem;
             }
+            // Stop ignoring presses
+            _capturePressesIgnored = NO;
         }];
     } else {
         // Perform the original action of the Continue button
@@ -240,6 +252,13 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 }
 
 - (void)retakePressed {
+    // If we are still waiting for the delegate to complete, ignore futher presses
+    if (_retakePressesIgnored)
+        return;
+    
+    // Ignore futher presses until the delegate completes
+    _retakePressesIgnored = YES;
+    
     // Tell the delegate to start capturing again
     [self.delegate retakePressed:^{
         // Show the template image
@@ -248,6 +267,9 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         // Change the continue button title back to capture, and hide the recapture button
         _continueSkipContainer.continueButtonItem.title = ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil);
         _continueSkipContainer.skipButtonItem = nil;
+        
+        // Stop ignoring presses
+        _retakePressesIgnored = NO;
     }];
 }
 
