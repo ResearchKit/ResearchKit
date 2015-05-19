@@ -129,11 +129,11 @@
 "TASK_COMPLETE_TITLE" = "Activity Complete";
 "TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
 
-/* Image catpure step. */
+/* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
-"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in the settings.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
 
