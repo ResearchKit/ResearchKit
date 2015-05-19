@@ -1176,14 +1176,14 @@ ORKDefineStringKey(AdditionalTextValue);
                            substitutionVariables:nil
                                      taskResults:taskResults];
     [self testResultPredicatesWithTaskIdentifier:OrderedTaskIdentifier
-                           substitutionVariables:@{ORKTaskIdentifierResultPredicateVariableName: OrderedTaskIdentifier}
+                           substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
                                      taskResults:taskResults];
     // Test nil task identifier variable substitution
     [self testResultPredicatesWithTaskIdentifier:nil
-                           substitutionVariables:@{ORKTaskIdentifierResultPredicateVariableName: OrderedTaskIdentifier}
+                           substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
                                      taskResults:taskResults];
     // Test nil task identifier convenience methods
-    [self testResultPredicatesWithSubstitutionVariables:@{ORKTaskIdentifierResultPredicateVariableName: OrderedTaskIdentifier}
+    [self testResultPredicatesWithSubstitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
                                             taskResults:taskResults];
 }
 

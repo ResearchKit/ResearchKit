@@ -33,7 +33,7 @@
 #import "ORKHelpers.h"
 
 
-NSString *const ORKTaskIdentifierResultPredicateVariableName = @"TASK_IDENTIFIER";
+NSString *const ORKResultPredicateTaskIdentifierVariableName = @"TASK_IDENTIFIER";
 
 @implementation ORKResultPredicate
 
@@ -56,7 +56,7 @@ NSString *const ORKTaskIdentifierResultPredicateVariableName = @"TASK_IDENTIFIER
         // If taskIdentifier is nil, ORKPredicateStepNavigationRule will substitute the
         // ORKResultPredicateTaskIdentifierSubstitutionVariableName variable by the identifier of the ongoing task
         [format appendString:@"SUBQUERY(SELF, $x, $x.identifier like $"];
-        [format appendString:ORKTaskIdentifierResultPredicateVariableName];
+        [format appendString:ORKResultPredicateTaskIdentifierVariableName];
     }
     
     {

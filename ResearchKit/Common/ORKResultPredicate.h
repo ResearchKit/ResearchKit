@@ -35,7 +35,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const ORKTaskIdentifierResultPredicateVariableName;
+ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAILABLE_DECL;
 
 #define ORKIgnoreDoubleValue (NAN)
 #define ORKIgnoreTimeIntervalValue (ORKIgnoreDoubleValue)
