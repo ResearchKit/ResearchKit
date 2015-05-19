@@ -592,7 +592,7 @@ enum TaskListRow: Int, Printable {
         
         instructionStep.text = exampleDescription
         
-        instructionStep.image = UIImage(named: "hand_solid")!
+        instructionStep.image = UIImage(named: "hand_solid")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
         steps += [instructionStep]
         

@@ -1587,21 +1587,21 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
         step.title = @"Hands";
-        step.image = [UIImage imageNamed:@"hands_solid"];
+        step.image = [[UIImage imageNamed:@"hands_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         step.detailText = @"In this step we will capture images of both of your hands";
         [steps addObject:step];
     }
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
         step.title = @"Right Hand";
-        step.image = [UIImage imageNamed:@"right_hand_solid"];
+        step.image = [[UIImage imageNamed:@"right_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         step.detailText = @"Let's start by capturing an image of your right hand";
         [steps addObject:step];
     }
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
         step.title = @"Right Hand";
-        step.image = [UIImage imageNamed:@"right_hand_outline"];
+        step.image = [[UIImage imageNamed:@"right_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         step.detailText = @"Align your right hand with the onscreen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
         [steps addObject:step];
     }
@@ -1614,14 +1614,14 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
         step.title = @"Left Hand";
-        step.image = [UIImage imageNamed:@"left_hand_solid"];
+        step.image = [[UIImage imageNamed:@"left_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         step.detailText = @"Now let's capture an image of your left hand";
         [steps addObject:step];
     }
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
         step.title = @"Left Hand";
-        step.image = [UIImage imageNamed:@"left_hand_outline"];
+        step.image = [[UIImage imageNamed:@"left_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         step.detailText = @"Align your left hand with the onscreen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
         [steps addObject:step];
     }
