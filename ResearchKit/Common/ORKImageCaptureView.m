@@ -225,7 +225,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         // Capture the image via the delegate
         [self.delegate capturePressed:^(BOOL captureSuccess){
             if(captureSuccess) {
-                // Hide the template image before capturing
+                // Hide the template image after capturing
                 _previewView.templateImageHidden = YES;
         
                 // Reset the continue button title and configure the skip button as a recapture button
@@ -234,7 +234,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
             }
         }];
     } else {
-        //Perform the original action of the Continue button
+        // Perform the original action of the Continue button
         [self.continueTarget performSelector:self.continueAction withObject:_continueSkipContainer.continueButtonItem afterDelay:0];
     }
 }
