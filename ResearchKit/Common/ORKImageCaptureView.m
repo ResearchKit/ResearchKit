@@ -76,7 +76,7 @@
         
         _skipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_RECAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(retakePressed)];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
     }
     return self;
@@ -92,7 +92,7 @@
     });
 }
 
-- (void)orientationChange {
+- (void)orientationDidChange {
     AVCaptureVideoOrientation orientation;
     // The device orientation and the application orientation may not agree.
     // so only use the actual orientation of the application
@@ -193,7 +193,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 - (void)setSession:(AVCaptureSession * __nullable)session {
     _previewView.session = session;
     // Set up the proper videoOrientation from the start
-    [self orientationChange];
+    [self orientationDidChange];
 }
 
 - (UIBarButtonItem *)continueButtonItem {
