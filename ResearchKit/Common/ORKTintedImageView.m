@@ -66,14 +66,14 @@ static UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFlo
     
     // If this is a single image, and it has an automatic rendering mode, and we are supposed to be tinting,
     // then get a version with tint.
-    if(!isAnimatedImage && renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint) {
+    if (!isAnimatedImage && renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint) {
         image = [image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
     // If this is an animated image, and it is a fixed template rendering mode, or, it is an automatic
     // rendering mode and we are supposed to be tinting, then get a version with tint.  We have to
     // manually apply the tint to animated images, even if they are in a fixed template rendering mode,
     // due to:
     // <rdar://problem/19792197>
-    } else if(isAnimatedImage && (renderMode == UIImageRenderingModeAlwaysTemplate || (renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
+    } else if (isAnimatedImage && (renderMode == UIImageRenderingModeAlwaysTemplate || (renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
             NSMutableArray *images = [NSMutableArray array];
             UIColor *tintColor = [self tintColor];
             for (UIImage *im in image.images) {
