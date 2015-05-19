@@ -77,6 +77,9 @@
         _continueSkipContainer.backgroundColor = [UIColor whiteColor];
         [self addSubview:_continueSkipContainer];
         
+        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
+        ORKEnableAutoLayoutForViews([dictionary allValues]);
+        
         _skipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_RECAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(retakePressed)];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -157,7 +160,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         [self.mconstraints removeAllObjects];
     }
     
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_previewView, _continueSkipContainer, _headerView);
+    NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
     ORKEnableAutoLayoutForViews([dictionary allValues]);
     if (_error) {
         // If we have an error to show, do not display the previewView at all

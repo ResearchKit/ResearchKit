@@ -68,7 +68,7 @@
         _capturedImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:_capturedImageView];
         
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(_templateImageView, _capturedImageView);
+        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _templateImageView, _capturedImageView);
         ORKEnableAutoLayoutForViews([dictionary allValues]);
         // Make the insets for the template image view changable later
         _templateImageViewTopInset = [NSLayoutConstraint constraintWithItem:_templateImageView attribute: NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
