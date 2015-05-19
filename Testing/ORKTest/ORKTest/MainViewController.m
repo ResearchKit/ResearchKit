@@ -1585,7 +1585,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
 
         scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_11"
                                                                       title:@"How much has your mood improved?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
