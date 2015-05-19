@@ -127,6 +127,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [buttonKeys addObject:@"audio"];
         buttons[buttonKeys.lastObject] = button;
     }
+    
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showToneAudiometryTask:) forControlEvents:UIControlEventTouchUpInside];
@@ -134,6 +135,15 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [buttonKeys addObject:@"tone_audiometry"];
         buttons[buttonKeys.lastObject] = button;
     }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Reaction Time Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showMiniForm:) forControlEvents:UIControlEventTouchUpInside];

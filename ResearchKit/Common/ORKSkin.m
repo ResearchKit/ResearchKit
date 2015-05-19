@@ -128,6 +128,8 @@ ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     return screenType;
 }
 
+const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
         // iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad

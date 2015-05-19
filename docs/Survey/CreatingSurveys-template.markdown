@@ -150,7 +150,7 @@ For example, the following code shows how to create a form that requests some ba
     [items addObject:dateOfBirthItem];
 
     // ... And so on, adding additional items
-    step.items = items;
+    step.formItems = items;
 
 
 The code above gives you something like this:

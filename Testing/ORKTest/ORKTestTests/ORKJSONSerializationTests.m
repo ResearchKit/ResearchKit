@@ -275,6 +275,8 @@
                                               @"ORKConsentSection.escapedContent",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentDocument.writer",
+                                              @"ORKConsentDocument.signatureFormatter",
+                                              @"ORKConsentDocument.sectionFormatter",
                                               @"ORKConsentDocument.sections",
                                               @"ORKConsentDocument.signatures",
                                               @"ORKContinuousScaleAnswerFormat.numberFormatter",
@@ -480,6 +482,8 @@
                                        @"firstResult",
                                        ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
+                                              @"ORKConsentDocument.signatureFormatter", // created on demand
+                                              @"ORKConsentDocument.sectionFormatter", // created on demand
                                               @"ORKStep.task", // weak ref - object will be nil
                                               @"ORKFormItem.step",  // weak ref - object will be nil
                                               
