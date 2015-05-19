@@ -202,9 +202,9 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     // Intercept the continue button press.  This can be called multiple
-    // times with the same UIBarButtonItem, so capture it the first time
-    // and if it subsequently changes from the originally used selector
-    if(self.continueAction != continueButtonItem.action && continueButtonItem.action != @selector(continuePressed)) {
+    // times with the same UIBarButtonItem, or with different UIBarButtonItems,
+    // so capture it whenever the button does not point to our selector
+    if(continueButtonItem.action != @selector(continuePressed)) {
         self.continueAction = continueButtonItem.action;
         self.continueTarget = continueButtonItem.target;
         self.continueTitle = continueButtonItem.title;
