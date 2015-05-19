@@ -83,8 +83,8 @@
             ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
         }
         #endif
-        
-    } else {
+    // If ORKDirectStepNavigationRule returns nil we mean that next step is nil, so don't fall back to super behaviour
+    } else if (![navigationRule isKindOfClass:[ORKDirectStepNavigationRule class]]) {
         nextStep = [super stepAfterStep:step withResult:result];
     }
     if (nextStep) {

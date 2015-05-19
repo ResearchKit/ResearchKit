@@ -64,6 +64,7 @@ ORKDefineStringKey(SevereHeadacheStepIdentifier);
 ORKDefineStringKey(LightHeadacheStepIdentifier);
 ORKDefineStringKey(OtherSymptomStepIdentifier);
 ORKDefineStringKey(EndStepIdentifier);
+ORKDefineStringKey(BlankBStepIdentifier);
 
 ORKDefineStringKey(OrderedTaskIdentifier);
 ORKDefineStringKey(NavigableOrderedTaskIdentifier);
@@ -132,6 +133,12 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     [stepIdentifiers addObject:stepIdentifier];
     [steps addObject:step];
     
+    stepIdentifier = BlankBStepIdentifier;
+    step = [[ORKInstructionStep alloc] initWithIdentifier:stepIdentifier];
+    step.title = @"This step is intentionally left blank (you should not see it)";
+    [stepIdentifiers addObject:stepIdentifier];
+    [steps addObject:step];
+
     *outSteps = steps;
     *outStepIdentifiers = stepIdentifiers;
 }
@@ -222,8 +229,9 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
 
     
     // Add end direct rules to skip unneeded steps
-    ORKDirectStepNavigationRule *directRule =
-    [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:EndStepIdentifier];
+    ORKDirectStepNavigationRule *directRule = nil;
+    
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:EndStepIdentifier];
     
     [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:SevereHeadacheStepIdentifier];
     [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:LightHeadacheStepIdentifier];
@@ -232,6 +240,10 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     _stepNavigationRules[SevereHeadacheStepIdentifier] = [directRule copy];
     _stepNavigationRules[LightHeadacheStepIdentifier] = [directRule copy];
     _stepNavigationRules[OtherSymptomStepIdentifier] = [directRule copy];
+    
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:nil];
+    [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:EndStepIdentifier];
+    _stepNavigationRules[EndStepIdentifier] = [directRule copy];
 }
 
 typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
@@ -723,6 +735,10 @@ ORKDefineStringKey(AdditionalTextValue);
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:MatchedDestinationStepIdentifier];
     XCTAssertEqualObjects(directRule.destinationStepIdentifier, [MatchedDestinationStepIdentifier copy] );
     XCTAssertEqualObjects([directRule identifierForDestinationStepWithTaskResult:mockTaskResult], [MatchedDestinationStepIdentifier copy]);
+
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:nil];
+    XCTAssertNil(directRule.destinationStepIdentifier);
+    XCTAssertNil([directRule identifierForDestinationStepWithTaskResult:mockTaskResult]);
 }
 
 - (void)testResultPredicatesWithTaskIdentifier:(NSString *)taskIdentifier

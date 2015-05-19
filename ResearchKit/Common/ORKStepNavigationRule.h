@@ -139,6 +139,7 @@ ORK_CLASS_AVAILABLE
  Returns a new predicate step navigation rule initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the step navigation rule.
+ 
  @return A new predicate step navigation rule.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -183,7 +184,8 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKDirectStepNavigationRule` class is a concrete step navigation rule class.
  
- It can be used to unconditionally jump to a destination step specified by its identifier.
+ It can be used to unconditionally jump to a destination step specified by its identifier
+ or to finish the task early.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKDirectStepNavigationRule : ORKStepNavigationRule
@@ -191,16 +193,19 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized direct step navigation rule using the specified destination step identifier.
  
- @param destinationStepIdentifier   The identifier of the destination step.
+ @param destinationStepIdentifier   The identifier of the destination step. Pass `nil` if you want
+                                        to finish the ongoing task when the direct step navigation
+                                        rule is triggered.
  
  @return An direct step navigation rule.
  */
-- (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDestinationStepIdentifier:(nullable NSString *)destinationStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new direct step navigation rule initialized from data in the given unarchiver.
  
  @param aDecoder    Coder from which to initialize the step navigation rule.
+ 
  @return A new direct step navigation rule.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -208,7 +213,7 @@ ORK_CLASS_AVAILABLE
 /**
  The identifier of the destination step.
  */
-@property (nonatomic, copy, readonly) NSString *destinationStepIdentifier;
+@property (nonatomic, copy, readonly, nullable) NSString *destinationStepIdentifier;
 
 @end
 

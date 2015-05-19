@@ -250,7 +250,6 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 @implementation ORKDirectStepNavigationRule
 
 - (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier {
-    ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifier);
     self = [super init_ork];
     if (self) {
         self.destinationStepIdentifier = destinationStepIdentifier;
