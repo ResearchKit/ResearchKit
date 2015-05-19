@@ -88,7 +88,7 @@
 
 -(void)queue_sessionRunning {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _previewView.hideTemplateImage = NO;
+        _previewView.templateImageHidden = NO;
     });
 }
 
@@ -230,7 +230,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         [self.delegate capturePressed:^(BOOL captureSuccess){
             if(captureSuccess) {
                 // Hide the template image before capturing
-                _previewView.hideTemplateImage = YES;
+                _previewView.templateImageHidden = YES;
         
                 // Reset the continue button title and configure the skip button as a recapture button
                 _continueSkipContainer.continueButtonItem.title = self.continueTitle;
@@ -247,7 +247,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     // Tell the delegate to start capturing again
     [self.delegate retakePressed:^{
         // Show the template image
-        _previewView.hideTemplateImage = NO;
+        _previewView.templateImageHidden = NO;
     
         // Change the continue button title back to capture, and hide the recapture button
         _continueSkipContainer.continueButtonItem.title = ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil);

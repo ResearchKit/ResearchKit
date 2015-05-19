@@ -102,11 +102,11 @@
     _templateImageView.image = templateImage;
 }
 
-- (void)setHideTemplateImage:(BOOL)hideTemplateImage {
-    _templateImageView.alpha = hideTemplateImage ? 0 : 1;
+- (void)setTemplateImageHidden:(BOOL)hidden {
+    _templateImageView.alpha = hidden ? 0 : 1;
 }
 
-- (BOOL)hideTemplateImage {
+- (BOOL)isTemplateImageHidden {
     return _templateImageView.alpha==0;
 }
 

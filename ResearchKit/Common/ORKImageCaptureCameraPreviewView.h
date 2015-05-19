@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (nonatomic, weak, nullable) UIImage *templateImage;
 @property (nonatomic) UIEdgeInsets templateImageInsets;
-@property (nonatomic) BOOL hideTemplateImage;
+@property (nonatomic, getter=isTemplateImageHidden) BOOL templateImageHidden;
 @property (nonatomic, weak, nullable) UIImage *capturedImage;
 
 @end
