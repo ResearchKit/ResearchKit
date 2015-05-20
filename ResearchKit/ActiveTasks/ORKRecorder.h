@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKRecorderConfiguration : NSObject <NSSecureCoding>
 
-/**
+/*
  The `init` and `new` methods are unavailable outside the framework on `ORKRecorderConfiguration`,
  because it is an abstract class.
  

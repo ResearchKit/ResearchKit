@@ -1,6 +1,5 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -73,7 +72,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
-        
         _identifier = [identifier copy];
         _steps = steps;
     }
@@ -255,7 +253,6 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, steps);
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -297,7 +294,6 @@ static NSString * const ORKLocationRecorderIdentifier = @"location";
 static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
-    
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
     step.title = ORKLocalizedString(@"TASK_COMPLETE_TITLE", nil);
     step.text = ORKLocalizedString(@"TASK_COMPLETE_TEXT", nil);

@@ -257,7 +257,15 @@
     NSArray *classesWithORKSerialization = [ORKESerializer serializableClasses];
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"requestedHealthKitTypesForWriting", @"healthKitUnit", @"answer", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"healthKitUnit",
+                                       @"answer",
+                                       @"firstResult"];
     NSArray *knownNotSerializedProperties = @[@"ORKStep.task",
                                               @"ORKStep.restorable",
                                               @"ORKAnswerFormat.questionType",
@@ -359,7 +367,7 @@
         } else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
             [instance setValue:@"blah" forKey:@"value"];
         } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
-            [instance setValue:[NSURL URLWithString:@"http://www.google.com/"] forKey:@"customAnimationURL"];
+            [instance setValue:[NSURL URLWithString:@"http://www.apple.com/"] forKey:@"customAnimationURL"];
         }
         
         // Serialization
@@ -398,7 +406,7 @@
         BOOL isMatch = [mockDictionary isEqualToDictionary:dictionary2];
         if (! isMatch)
         {
-            XCTAssertTrue(isMatch,@"Should be equal for class: %@", NSStringFromClass(aClass));
+            XCTAssertTrue(isMatch, @"Should be equal for class: %@", NSStringFromClass(aClass));
         }
     }
 
@@ -464,12 +472,20 @@
     }
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"requestedHealthKitTypesForWriting", @"healthKitUnit", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"healthKitUnit",
+                                       @"firstResult",
+                                       ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
                                               @"ORKConsentDocument.signatureFormatter", // created on demand
                                               @"ORKConsentDocument.sectionFormatter", // created on demand
                                               @"ORKStep.task", // weak ref - object will be nil
-                                              @"ORKFormItem.step",  // weak ref- object will be nil
+                                              @"ORKFormItem.step",  // weak ref - object will be nil
                                               
                                               // id<> properties - these are actually serialized, but we can't fill them in properly for this test
                                               @"ORKTextChoice.value",
@@ -549,11 +565,11 @@
         }
         
         NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:newInstance];
-        if (! [data isEqualToData:data2]) { // allow breakpointing
+        if (![data isEqualToData:data2]) { // allow breakpointing
             XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
         }
         
-        if (! [newInstance isEqual:instance]) {
+        if (![newInstance isEqual:instance]) {
             XCTAssertEqualObjects(newInstance, instance, @"equality mismatch for %@", NSStringFromClass(aClass));
         }
     }
@@ -586,7 +602,16 @@
     }
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"healthKitUnit", @"requestedHealthKitTypesForWriting", @"answer", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"healthKitUnit",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"answer",
+                                       @"firstResult",
+];
     
     // Test Each class
     for (Class aClass in classesWithSecureCodingAndCopying) {

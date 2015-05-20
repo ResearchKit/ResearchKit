@@ -239,7 +239,7 @@
 }
 
 - (void)prepareStep {
-    if (self.activeStep==nil) {
+    if (self.activeStep == nil) {
         return;
     }
     

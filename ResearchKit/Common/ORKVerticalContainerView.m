@@ -36,11 +36,9 @@
 
 ORKDefineStringKey(_TopToIllustrationConstraintKey);
 ORKDefineStringKey(_IllustrationHeightConstraintKey);
-
 ORKDefineStringKey(_StepViewToContinueKey);
 ORKDefineStringKey(_StepViewToContinueMinimumKey);
 ORKDefineStringKey(_HeaderMinimumHeightKey);
-
 ORKDefineStringKey(_StepViewCenteringOnWholeViewKey);
 
 static const CGFloat AssumedNavBarHeight = 44;
