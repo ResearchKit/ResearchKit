@@ -136,7 +136,8 @@ enum ResultRow {
     // MARK: Cases
 
     case Text(String, detail: String, selectable: Bool)
-    case Image(String, image: UIImage?)
+    case TextImage(String, image: UIImage?)
+    case Image(UIImage?)
     
     // MARK: Types
     
@@ -148,6 +149,7 @@ enum ResultRow {
         case Default =          "Default"
         case NoResultSet =      "NoResultSet"
         case NoChildResults =   "NoChildResults"
+        case TextImage =        "TextImage"
         case Image =            "Image"
     }
     
@@ -244,11 +246,18 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
             
                 return cell
 
-            case let .Image(text, image):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Image.rawValue, forIndexPath: indexPath) as! ImageTableViewCell
+            case let .TextImage(text, image):
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.TextImage.rawValue, forIndexPath: indexPath) as! TextImageTableViewCell
 
                 cell.leftTextLabel.text = text
                 cell.rightImageView.image = image
+
+                return cell
+
+            case let .Image(image):
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Image.rawValue, forIndexPath: indexPath) as! ImageTableViewCell
+
+                cell.fullImageView.image = image
 
                 return cell
 
@@ -618,13 +627,42 @@ class FileResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let questionResult = result as! ORKFileResult
         
-        return super.resultRowsForSection(section) + [
+        var rows = [
             // The MIME content type for the file produced.
             ResultRow(text: "contentType", detail: questionResult.contentType),
 
             // The URL of the generated file on disk.
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
+        if let fileURL = questionResult.fileURL {
+            if let contentType = questionResult.contentType {
+                if contentType.hasPrefix("image/") {
+                    if let data = NSData(contentsOfURL: fileURL) {
+                        if let image = UIImage(data: data) {
+                            rows += [
+                                // The image of the generated file on disk.
+                                .Image(image)
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+        return super.resultRowsForSection(section) + rows
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let resultRows = resultRowsForSection(indexPath.section)
+        if !resultRows.isEmpty {
+            switch resultRows[indexPath.row] {
+                case let .Image(image):
+                    // Keep the aspect ratio the same
+                    return tableView.frame.size.width/(image!.size.width/image!.size.height)
+                default:
+                    break
+            }
+        }
+        return UITableViewAutomaticDimension
     }
 }
 
@@ -659,7 +697,7 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "date", detail: signature.signatureDate),
             
             // The captured image.
-            .Image("signature", image: signature.signatureImage)
+            .TextImage("signature", image: signature.signatureImage)
         ]
     }
     

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,34 +29,55 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import "ORKImageCaptureStep.h"
+#import "ORKHelpers.h"
+#import "ORKStep_Private.h"
+#import "ORKImageCaptureStepViewController.h"
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+@implementation ORKImageCaptureStep
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
++ (Class)stepViewControllerClass {
+    return [ORKImageCaptureStepViewController class];
+}
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_IMAGE(aDecoder, templateImage);
+        ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
+    }
+    return self;
+}
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_IMAGE(aCoder, templateImage);
+    ORK_ENCODE_UIEDGEINSETS(aCoder, templateImageInsets);
+}
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKImageCaptureStep *step = [super copyWithZone:zone];
+    step.templateImage = self.templateImage;
+    step.templateImageInsets = self.templateImageInsets;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame && ORKEqualObjects(self.templateImage, castObject.templateImage)
+                        && UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets);
+}
+
+- (ORKPermissionMask)requestedPermissions {
+    ORKPermissionMask mask = [super requestedPermissions];
+    return mask | ORKPermissionCamera;
+}
+
+@end

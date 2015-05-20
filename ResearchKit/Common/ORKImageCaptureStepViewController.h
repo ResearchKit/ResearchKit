@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,34 +29,18 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+/**
+ The `ORKImageCaptureStepViewController` class represents the step view controller that
+ corresponds to an `ORKImageCaptureStep`.
+ 
+ It is not usually necessary to instantiate this view controller directly.
+ Instead, add an image capture step to a task, and present the task in a task
+ view controller.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKImageCaptureStepViewController : ORKStepViewController
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
-
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
-
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@end

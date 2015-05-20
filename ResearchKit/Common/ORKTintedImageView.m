@@ -57,28 +57,29 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 - (void)setShouldApplyTint:(BOOL)shouldApplyTint {
     _shouldApplyTint = shouldApplyTint;
     
-    [self setImage:self.image];
+    self.image = _originalImage;
 }
 
 - (UIImage *)imageByTintingImage:(UIImage *)image {
     UIImageRenderingMode renderMode = [image renderingMode];
     BOOL isAnimatedImage = [[image images] count] > 1;
-    if (isAnimatedImage) {
-        renderMode = UIImageRenderingModeAutomatic;
-    }
-    if (_shouldApplyTint != (renderMode == UIImageRenderingModeAlwaysTemplate) ) {
-        if (! isAnimatedImage) {
-            image = [image imageWithRenderingMode:(_shouldApplyTint ? UIImageRenderingModeAlwaysTemplate : UIImageRenderingModeAutomatic)];
-        } else {
-            // Have to manually apply the tint to the input images if it's an animated sequence.
-            // <rdar://problem/19792197>
+    
+    // If this is a single image, and it has an automatic rendering mode, and we are supposed to be tinting,
+    // then get a version with tint.
+    if (!isAnimatedImage && renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint) {
+        image = [image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
+    // If this is an animated image, and it is a fixed template rendering mode, or, it is an automatic
+    // rendering mode and we are supposed to be tinting, then get a version with tint.  We have to
+    // manually apply the tint to animated images, even if they are in a fixed template rendering mode,
+    // due to:
+    // <rdar://problem/19792197>
+    } else if (isAnimatedImage && (renderMode == UIImageRenderingModeAlwaysTemplate || (renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
             NSMutableArray *images = [NSMutableArray array];
             UIColor *tintColor = [self tintColor];
             for (UIImage *im in image.images) {
                 [images addObject:ORKImageByTintingImage(im, tintColor, self.contentScaleFactor)];
             }
             image = [UIImage animatedImageWithImages:images duration:image.duration];
-        }
     }
     return image;
 }

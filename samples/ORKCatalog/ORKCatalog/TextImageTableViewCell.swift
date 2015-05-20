@@ -31,12 +31,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 
 /**
-    A simple `UITableViewCell` subclass that can display an image view.
-    Properties in this table view cell are set in Interface Builder in the main
-    storyboard.
+A simple `UITableViewCell` subclass that can display an image view and label.
+Properties in this table view cell are set in Interface Builder in the main
+storyboard.
 */
-class ImageTableViewCell: UITableViewCell {
+class TextImageTableViewCell: UITableViewCell {
     // MARK: Properties
     
-    @IBOutlet weak var fullImageView: UIImageView!
+    @IBOutlet weak var leftTextLabel: UILabel!
+    
+    @IBOutlet weak var rightImageView: UIImageView!
 }

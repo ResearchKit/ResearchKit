@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,34 +29,36 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+/**
+ The `ORKImageCaptureStep` class represents a step that captures an image via the device
+ camera.  A template image can optionally be overlaid the camera preview to assist in properly
+ capturing the image.
+ 
+ To use the image capture step, optionally set the `templateImage` and `templateImageInsets`
+ properties, incorporate the step into a task, and present the task with a task view controller.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKImageCaptureStep : ORKStep
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+/**
+ An image to be displayed over the camera preview.
+ 
+ The image will be stretched to fit the available space while retaining its aspect ratio.
+ When choosing a size for this asset, be sure to take into account the variations in device
+ form factors.
+ */
+@property (nonatomic, strong) UIImage *templateImage;
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+/**
+ Insets to be used in positioning and sizing the `templateImage`.
+ 
+ The insets are interpreted as percentages relative to the preview frame size.  The `left`
+ and `right` insets are relative to the width of the preview frame.  The `top` and `bottom`
+ insets are relative to the height of the preview frame.
+ */
+@property (nonatomic) UIEdgeInsets templateImageInsets;
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
-
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@end
