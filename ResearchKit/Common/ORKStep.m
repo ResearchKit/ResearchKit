@@ -36,6 +36,8 @@
 #import "ORKOrderedTask.h"
 
 
+NSString *const ORKNullStepIdentifier = @"ORKNullStepIdentifier";
+
 @implementation ORKStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

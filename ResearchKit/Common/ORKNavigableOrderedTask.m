@@ -76,6 +76,7 @@
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
     NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
     if (nextStepIdentifier) {
+        // If nextStepIdentifier is ORKNullStepIdentifier, nextStep will become 'nil' and the ongoing task will end (no fallback to superclass behavior) 
         nextStep = [self stepWithIdentifier:nextStepIdentifier];
         
         #if defined(DEBUG) && DEBUG
@@ -83,8 +84,7 @@
             ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
         }
         #endif
-    // If ORKDirectStepNavigationRule returns nil we mean that next step is nil, so don't fall back to super behaviour
-    } else if (![navigationRule isKindOfClass:[ORKDirectStepNavigationRule class]]) {
+    } else {
         nextStep = [super stepAfterStep:step withResult:result];
     }
     if (nextStep) {

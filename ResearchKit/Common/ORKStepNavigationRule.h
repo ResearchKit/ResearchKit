@@ -199,7 +199,7 @@ ORK_CLASS_AVAILABLE
  
  @return An direct step navigation rule.
  */
-- (instancetype)initWithDestinationStepIdentifier:(nullable NSString *)destinationStepIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns a new direct step navigation rule initialized from data in the given unarchiver.
@@ -213,7 +213,7 @@ ORK_CLASS_AVAILABLE
 /**
  The identifier of the destination step.
  */
-@property (nonatomic, copy, readonly, nullable) NSString *destinationStepIdentifier;
+@property (nonatomic, copy, readonly) NSString *destinationStepIdentifier;
 
 @end
 

@@ -241,7 +241,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     _stepNavigationRules[LightHeadacheStepIdentifier] = [directRule copy];
     _stepNavigationRules[OtherSymptomStepIdentifier] = [directRule copy];
     
-    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:nil];
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
     [_navigableOrderedTask setNavigationRule:directRule forTriggerStepIdentifier:EndStepIdentifier];
     _stepNavigationRules[EndStepIdentifier] = [directRule copy];
 }
@@ -736,9 +736,9 @@ ORKDefineStringKey(AdditionalTextValue);
     XCTAssertEqualObjects(directRule.destinationStepIdentifier, [MatchedDestinationStepIdentifier copy] );
     XCTAssertEqualObjects([directRule identifierForDestinationStepWithTaskResult:mockTaskResult], [MatchedDestinationStepIdentifier copy]);
 
-    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:nil];
-    XCTAssertNil(directRule.destinationStepIdentifier);
-    XCTAssertNil([directRule identifierForDestinationStepWithTaskResult:mockTaskResult]);
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    XCTAssertEqualObjects(directRule.destinationStepIdentifier, [ORKNullStepIdentifier copy]);
+    XCTAssertEqualObjects([directRule identifierForDestinationStepWithTaskResult:mockTaskResult], [ORKNullStepIdentifier copy]);
 }
 
 - (void)testResultPredicatesWithTaskIdentifier:(NSString *)taskIdentifier

@@ -1815,6 +1815,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     step.title = @"You have finished the task";
     [steps addObject:step];
 
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blankB"];
+    step.title = @"This step is intentionally left blank (you should not see it)";
+    [steps addObject:step];
+
     ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:StepNavigationTaskIdentifier
                                                                                   steps:steps];
     
@@ -1881,12 +1885,15 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     
     // Add end direct rules to skip unneeded steps
-    ORKDirectStepNavigationRule *directRule =
-    [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
+    ORKDirectStepNavigationRule *directRule = nil;
     
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"end"];
     
     return task;
 }
