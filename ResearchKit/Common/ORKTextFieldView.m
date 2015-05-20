@@ -346,8 +346,6 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     _textField.translatesAutoresizingMaskIntoConstraints = NO;
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
@@ -364,11 +362,16 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     
     // Ask to fill the available horizontal space
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_textField
-                                                         attribute:NSLayoutAttributeWidth
-                                                         relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1
+                                                                   constant:ORKScreenMetricMaxDimension];
     constraint.priority = UILayoutPriorityDefaultLow;
     [self addConstraint:constraint];
     
+    [super updateConstraints];
 }
 
 

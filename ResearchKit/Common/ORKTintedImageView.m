@@ -32,7 +32,7 @@
 #import "ORKTintedImageView.h"
 
 
-static UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
+UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
     CGContextRef context     = UIGraphicsGetCurrentContext();
     CGContextSetBlendMode(context, kCGBlendModeNormal);

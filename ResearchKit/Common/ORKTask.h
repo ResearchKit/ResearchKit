@@ -167,6 +167,18 @@ ORK_AVAILABLE_DECL
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)result;
 
 /**
+ Validates the task parameters.
+ 
+ The implementation of this method should check that all the task parameters are correct. An invalid task
+ is considered an unrecoverable error: the implementation should throw an exception on parameter validation failure.
+ For example, the `ORKOrderedTask` implementation makes sure that all its step identifiers are unique, throwing an
+ exception otherwise.
+ 
+ This method is usually called by a task view controller when its task is set.
+ */
+- (void)validateParameters;
+
+/**
  The set of HealthKit types that steps in the task need to be able to
  read. (read-only)
  

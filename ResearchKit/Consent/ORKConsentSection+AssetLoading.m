@@ -31,6 +31,7 @@
 
 #import "ORKConsentSection+AssetLoading.h"
 #import "ORKHelpers.h"
+#import "ORKTintedImageView.h"
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
@@ -56,7 +57,8 @@ NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
     return url;
 }
 
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
+UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type, UIColor *tintColor, CGFloat scale) {
     NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    return [[UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    // Use ORKImageByTintingImage becase it's more performant than 'imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate'
+    return ORKImageByTintingImage([UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil], tintColor, scale);
 }

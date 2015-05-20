@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Alex Basson. All rights reserved.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -35,10 +36,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKHTMLPDFWriter;
+@class ORKConsentSectionFormatter;
+@class ORKConsentSignatureFormatter;
 
 @interface ORKConsentDocument ()
 
 @property (nonatomic, strong, nullable) ORKHTMLPDFWriter *writer;
+@property (nonatomic, strong, nullable) ORKConsentSectionFormatter *sectionFormatter;
+@property (nonatomic, strong, nullable) ORKConsentSignatureFormatter *signatureFormatter;
 
 + (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile;
 

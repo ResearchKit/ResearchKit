@@ -32,6 +32,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CMDeviceMotion;
+
+@protocol ORKDeviceMotionRecorderDelegate <ORKRecorderDelegate>
+
+@optional
+
+- (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion;
+
+@end
+
 /**
  The `ORKDeviceMotionRecorder` class represents a recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
  
@@ -42,7 +52,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKDeviceMotionRecorder : ORKRecorder
 
 /**
- * The frequency of motion data collection from CoreMotion in hertz (Hz).
+ The frequency of motion data collection from CoreMotion in hertz (Hz).
  */
 @property (nonatomic, readonly) double frequency;
 
@@ -53,6 +63,7 @@ ORK_CLASS_AVAILABLE
  @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
  @param step                The step that requested this recorder.
  @param outputDirectory     The directory in which the device motion data should be stored.
+ 
  @return An initialized motion data recorder.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier

@@ -50,7 +50,7 @@
 @property (nonatomic, strong) NSValue *startTime;
 
 // Establish a retain cycle by setting this to ourselves, to lengthen lifetime
-@property (nonatomic, strong) id selfRef;
+@property (nonatomic, strong) id selfReference;
 
 @end
 
@@ -60,7 +60,7 @@
 @end
 
 
-@interface ORKVisualConsentTransitionAnimator() <AVPlayerItemOutputPullDelegate>
+@interface ORKVisualConsentTransitionAnimator () <AVPlayerItemOutputPullDelegate>
 
 @end
 
@@ -71,8 +71,8 @@
     AVPlayer *_moviePlayer;
     AVPlayerItem *_playerItem;
     
-    BOOL _observingPlayerDurationKey;
-    BOOL _observingPlayerItemStatusKey;
+    BOOL _observingPlayerStatusKey;
+    BOOL _observingPlayerItemDurationKey;
     
     CADisplayLink *_displayLink;
     AVPlayerItemVideoOutput *_videoOutput;
@@ -100,8 +100,8 @@
         [_displayLink setPaused:YES];
         
         // Setup AVPlayerItemVideoOutput with the required pixelbuffer attributes.
-        NSDictionary *pixBuffAttributes = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)};
-        _videoOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:pixBuffAttributes];
+        NSDictionary *pixelBufferAttributes = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange)};
+        _videoOutput = [[AVPlayerItemVideoOutput alloc] initWithPixelBufferAttributes:pixelBufferAttributes];
         _videoOutputQueue = dispatch_queue_create("_ork_animationVideoQueue", DISPATCH_QUEUE_SERIAL);
         [_videoOutput setDelegate:self queue:_videoOutputQueue];
     }
@@ -113,7 +113,7 @@
 }
 
 - (void)animateTransitionWithDirection:(UIPageViewControllerNavigationDirection)direction
-                       withLoadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
+                           loadHandler:(ORKVisualConsentAnimationCompletionHandler)loadHandler
                      completionHandler:(ORKVisualConsentAnimationCompletionHandler)handler {
     ORKVisualConsentAnimationContext *context = [ORKVisualConsentAnimationContext new];
     context.handler = handler;
@@ -136,29 +136,29 @@
     BOOL playerItemIsReady = CMTimeGetSeconds([_playerItem duration]) > 0;
     
     // Observe the properties for which we still need to wait
-    if (!playerIsReady && !_observingPlayerDurationKey) {
+    if (!playerIsReady && !_observingPlayerStatusKey) {
         [_moviePlayer addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:(void *)context];
-        _observingPlayerDurationKey = YES;
-        context.selfRef = context;
+        _observingPlayerStatusKey = YES;
+        context.selfReference = context;
     }
-    if (!playerItemIsReady && !_observingPlayerDurationKey) {
+    if (!playerItemIsReady && !_observingPlayerItemDurationKey) {
         [_playerItem addObserver:self forKeyPath:@"duration" options:NSKeyValueObservingOptionNew context:(void *)context];
-        _observingPlayerItemStatusKey = YES;
-        context.selfRef = context;
+        _observingPlayerItemDurationKey = YES;
+        context.selfReference = context;
     }
     
     // Stop observing properties that have now changed to a ready state
-    if (playerIsReady && _observingPlayerDurationKey) {
+    if (playerIsReady && _observingPlayerStatusKey) {
         [_moviePlayer removeObserver:self forKeyPath:@"status"];
-        _observingPlayerDurationKey = NO;
+        _observingPlayerStatusKey = NO;
     }
-    if (playerItemIsReady && _observingPlayerItemStatusKey) {
+    if (playerItemIsReady && _observingPlayerItemDurationKey) {
         [_playerItem removeObserver:self forKeyPath:@"duration"];
-        _observingPlayerItemStatusKey = NO;
+        _observingPlayerItemDurationKey = NO;
     }
     
     if (playerIsReady && playerItemIsReady) {
-        context.selfRef = nil;
+        context.selfReference = nil;
         [self performAnimationWithContext:context];
     }
 }
@@ -179,11 +179,9 @@
 }
 
 - (void)playbackDidFinish:(NSNotification *)notification {
-    NSNotificationCenter *nfc = [NSNotificationCenter defaultCenter];
-    [nfc removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:notification.object];
-    [nfc removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:notification.object];
-    [nfc removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:notification.object];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:notification.object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemFailedToPlayToEndTimeNotification object:notification.object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:notification.object];
     
     [_moviePlayer pause];
     
@@ -191,23 +189,21 @@
 }
 
 - (void)performAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
-    AVPlayer *moviePlayer = _moviePlayer;
-
-    __weak AVPlayer *weakPlayer = moviePlayer;
     
     _pendingContext = context;
     
     [[_stepViewController animationPlayerView] setupGL];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:[moviePlayer currentItem]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:[moviePlayer currentItem]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:[_moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemFailedToPlayToEndTimeNotification object:[_moviePlayer currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[_moviePlayer currentItem]];
     
-    [moviePlayer seekToTime:[context.startTime CMTimeValue]
-            toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
-                AVPlayer *localPlayer = weakPlayer;
-                [localPlayer play];
-            }];
+    __weak AVPlayer *weakPlayer = _moviePlayer;
+    [_moviePlayer seekToTime:[context.startTime CMTimeValue]
+             toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
+                 AVPlayer *localPlayer = weakPlayer;
+                 [localPlayer play];
+             }];
 }
 
 - (void)finishAnimationWithContext:(ORKVisualConsentAnimationContext *)context {
@@ -222,7 +218,7 @@
     // Clear the handler so it is not called twice
     context.handler = nil;
     // Make sure the context is released
-    context.selfRef = nil;
+    context.selfReference = nil;
 }
 
 #pragma mark - CADisplayLink Callback
@@ -259,7 +255,10 @@
         pixelBuffer = [_videoOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
         
         ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
-        playerView.presentationRect = [_playerItem presentationSize];
+        CGSize playerItemPresentationSize = _playerItem.presentationSize;
+        if (!CGSizeEqualToSize(playerView.presentationSize, playerItemPresentationSize)) {
+            playerView.presentationSize = playerItemPresentationSize;
+        }
         BOOL canDisplay = [playerView consumePixelBuffer:pixelBuffer];
         if (pixelBuffer != NULL) {
             CFRelease(pixelBuffer);
@@ -269,7 +268,7 @@
             [playerView render];
         }
         
-        if (_frameCounter > 0) {
+        if (_frameCounter == 1) {
             [self initialFrameDidDisplay];
         }
         _frameCounter ++;
@@ -285,26 +284,25 @@
 }
 
 - (void)finish {
+    [_moviePlayer pause];
     [_displayLink invalidate]; // This makes animator single-use
     
-    if (_observingPlayerDurationKey) {
+    if (_observingPlayerStatusKey) {
         [_moviePlayer removeObserver:self forKeyPath:@"status"];
-        _observingPlayerDurationKey = NO;
+        _observingPlayerStatusKey = NO;
     }
-    if (_observingPlayerItemStatusKey) {
+    if (_observingPlayerItemDurationKey) {
         [_playerItem removeObserver:self forKeyPath:@"duration"];
-        _observingPlayerItemStatusKey = NO;
+        _observingPlayerItemDurationKey = NO;
     }
     
+    _videoOutputQueue = nil;
+    _moviePlayer = nil;
+    _displayLink = nil;
     _pendingContext = nil;
     _videoOutput = nil;
     _videoOutputQueue = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)dealloc {
-    [self finish];
-    [_displayLink invalidate];
 }
 
 @end

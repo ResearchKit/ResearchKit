@@ -38,7 +38,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-@interface ORKConsentReviewController() <UIWebViewDelegate>
+@interface ORKConsentReviewController () <UIWebViewDelegate>
 
 @end
 
@@ -72,7 +72,8 @@
     
     _webView = [UIWebView new];
     [_webView loadHTMLString:_htmlString baseURL:ORKCreateRandomBaseURL()];
-    _webView.scrollView.bounces = NO;
+    _webView.backgroundColor = ORKColor(ORKBackgroundColorKey);
+    _webView.scrollView.backgroundColor = ORKColor(ORKBackgroundColorKey);
     _webView.delegate = self;
     [_webView setClipsToBounds:YES];
     _webView.translatesAutoresizingMaskIntoConstraints = NO;

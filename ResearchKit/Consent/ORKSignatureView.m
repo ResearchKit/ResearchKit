@@ -55,8 +55,14 @@
 @implementation ORKSignatureGestureRecognizer
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.state = UIGestureRecognizerStateBegan;
-    [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
+    if (touches.count > 1 || self.numberOfTouches > 1) {
+        for (UITouch *touch in touches) {
+            [self ignoreTouch:touch forEvent:event];
+        }
+    } else {
+        self.state = UIGestureRecognizerStateBegan;
+        [self.eventDelegate gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -128,7 +134,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                                           multiplier:1.0
-                                                                            constant:10000.0];
+                                                                            constant:ORKScreenMetricMaxDimension];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
         [self addConstraint:widthConstraint];
     }
@@ -212,10 +218,6 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 #pragma mark Touch Event Handlers
 
 - (void)gestureTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (touches.count > 1 ) {
-        return;
-    }
-    
     UITouch *touch = [touches anyObject];
     
     self.currentPath = [self pathWithRoundedStyle];
@@ -227,6 +229,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     previousPoint2 = [touch previousLocationInView:self];
     currentPoint = [touch locationInView:self];
     [self.currentPath moveToPoint:currentPoint];
+    [self.currentPath addArcWithCenter:currentPoint radius:0.1 startAngle:0.0 endAngle:2.0 * M_PI clockwise:YES];
     [self gestureTouchesMoved:touches withEvent:event];
 }
 
@@ -235,10 +238,6 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (touches.count > 1) {
-        return;
-    }
-    
     UITouch *touch = [touches anyObject];
     
     CGPoint point = [touch locationInView:self];
@@ -276,7 +275,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     CGRect rect = [self.currentPath bounds];
-    if (touches.count > 1 || CGSizeEqualToSize(rect.size, CGSizeZero)) {
+    if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
     }
     

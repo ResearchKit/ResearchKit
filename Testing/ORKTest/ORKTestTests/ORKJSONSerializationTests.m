@@ -221,7 +221,7 @@
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];
 
     ORKQuestionStep *questionStep3 = [ORKQuestionStep questionStepWithIdentifier:@"id"
-                                                                           title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES]];
+                                                                           title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES maximumValueDescription:@"High value" minimumValueDescription:@"Low value"]];
 
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"id" steps:@[activeStep, questionStep, questionStep2, questionStep3]];
     
@@ -267,8 +267,11 @@
                                               @"ORKConsentSection.escapedContent",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentDocument.writer",
+                                              @"ORKConsentDocument.signatureFormatter",
+                                              @"ORKConsentDocument.sectionFormatter",
                                               @"ORKConsentDocument.sections",
                                               @"ORKConsentDocument.signatures",
+                                              @"ORKContinuousScaleAnswerFormat.numberFormatter",
                                               @"ORKFormItem.step",
                                               @"ORKHealthKitCharacteristicTypeAnswerFormat.characteristicType",
                                               @"ORKTimeIntervalAnswerFormat.maximumInterval",
@@ -283,6 +286,7 @@
                                               @"ORKImageChoice.selectedStateImage",
                                               @"ORKActiveStep.requestedPermissions",
                                               @"ORKOrderedTask.providesBackgroundAudioPrompts",
+                                              @"ORKScaleAnswerFormat.numberFormatter",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKStep.allowsBackNavigation",
                                               @"ORKAnswerFormat.healthKitUserUnit",
@@ -347,6 +351,7 @@
         
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
+            [instance setValue:@(ORKNumberFormattingStylePercent) forKey:@"numberStyle"];
         } else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
             [instance setValue:@(0) forKey:@"minimum"];
             [instance setValue:@(100) forKey:@"maximum"];
@@ -461,6 +466,8 @@
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"requestedHealthKitTypesForWriting", @"healthKitUnit", @"firstResult"];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
+                                              @"ORKConsentDocument.signatureFormatter", // created on demand
+                                              @"ORKConsentDocument.sectionFormatter", // created on demand
                                               @"ORKStep.task", // weak ref - object will be nil
                                               @"ORKFormItem.step",  // weak ref- object will be nil
                                               

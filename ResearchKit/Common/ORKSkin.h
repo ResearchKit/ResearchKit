@@ -72,6 +72,8 @@ void ORKColorSetColorForKey(NSString *key, UIColor *color);
 
 @end
 
+extern const CGFloat ORKScreenMetricMaxDimension;
+
 typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricTopToCaptionBaseline,
     ORKScreenMetricFontSizeHeadline,

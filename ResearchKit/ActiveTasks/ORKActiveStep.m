@@ -153,7 +153,7 @@
             (self.shouldVibrateOnStart == castObject.shouldVibrateOnStart) &&
             (self.shouldVibrateOnFinish == castObject.shouldVibrateOnFinish) &&
             (self.shouldContinueOnFinish == castObject.shouldContinueOnFinish) &&
-            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton)) ;
+            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
 
 - (NSSet *)requestedHealthKitTypesForReading {

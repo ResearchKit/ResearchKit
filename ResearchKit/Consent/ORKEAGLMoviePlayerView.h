@@ -34,7 +34,7 @@
 
 @interface ORKEAGLMoviePlayerView : UIView
 
-@property CGSize presentationRect;
+@property (nonatomic) CGSize presentationSize;
 
 - (void)setupGL;
 - (BOOL)consumePixelBuffer:(CVPixelBufferRef)pixelBuffer;

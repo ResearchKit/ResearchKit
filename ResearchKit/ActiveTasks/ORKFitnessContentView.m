@@ -40,7 +40,7 @@
 // #define LAYOUT_TEST 1
 // #define LAYOUT_DEBUG 1
 
-@interface ORKFitnessContentView() {
+@interface ORKFitnessContentView () {
     ORKQuantityLabel *_timerLabel;
     ORKQuantityPairView *_quantityPairView;
     UIView *_imageSpacer1;
@@ -233,7 +233,7 @@
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1
-                                                                           constant:10000];
+                                                                           constant:ORKScreenMetricMaxDimension];
     maxWidthConstraint.priority = UILayoutPriorityRequired-1;
     [constraints addObject:maxWidthConstraint];
     

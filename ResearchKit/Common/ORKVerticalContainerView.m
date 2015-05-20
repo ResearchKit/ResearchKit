@@ -34,19 +34,14 @@
 #import "ORKVerticalContainerView_Internal.h"
 
 
-#define DEF_KEY(x) static NSString * const x = @STRINGIFY(x)
+ORKDefineStringKey(_TopToIllustrationConstraintKey);
+ORKDefineStringKey(_IllustrationHeightConstraintKey);
 
-DEF_KEY(_TopToIllustrationConstraintKey);
-DEF_KEY(_IllustrationHeightConstraintKey);
+ORKDefineStringKey(_StepViewToContinueKey);
+ORKDefineStringKey(_StepViewToContinueMinimumKey);
+ORKDefineStringKey(_HeaderMinimumHeightKey);
 
-DEF_KEY(_StepViewToContinueKey);
-DEF_KEY(_StepViewToContinueMinimumKey);
-DEF_KEY(_HeaderMinimumHeightKey);
-
-DEF_KEY(_StepViewCenteringOnWholeViewKey);
-
-#undef DEF_KEY
-
+ORKDefineStringKey(_StepViewCenteringOnWholeViewKey);
 
 static const CGFloat AssumedNavBarHeight = 44;
 static const CGFloat AssumedStatusBarHeight = 20;
@@ -385,8 +380,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     [NSLayoutConstraint deactivateConstraints:[_scrollContainer constraints]];
     [NSLayoutConstraint deactivateConstraints:[_container constraints]];
     [NSLayoutConstraint deactivateConstraints:[_stepViewContainer constraints]];
@@ -581,12 +574,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self updateCustomViewContainerConstraints];
     [self updateStepViewContainerConstraints];
     [self updateConstraintConstants];
+    
+    [super updateConstraints];
 }
 
 - (void)updateStepViewContainerConstraints {
     [NSLayoutConstraint deactivateConstraints:[_stepViewContainer constraints]];
-    
-    static const CGFloat ConstraintMaxValue = 10000;
     
     if (_stepView) {
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer
@@ -594,7 +587,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:nil
                                                                            attribute:NSLayoutAttributeNotAnAttribute multiplier:1
-                                                                            constant:ConstraintMaxValue];
+                                                                            constant:ORKScreenMetricMaxDimension];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
         [_stepViewContainer addConstraint:widthConstraint];
         
@@ -623,7 +616,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1
-                                                                           constant:ConstraintMaxValue];
+                                                                           constant:ORKScreenMetricMaxDimension];
             constraint.priority = UILayoutPriorityFittingSizeLevel;
             [_stepViewContainer addConstraint:constraint];
 

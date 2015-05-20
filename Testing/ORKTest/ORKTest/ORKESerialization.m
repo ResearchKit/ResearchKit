@@ -288,6 +288,15 @@ static NSArray *memoryGameStatusTable() {
     return table;
 }
 
+static NSArray *numberFormattingStyleTable() {
+    static NSArray *table = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        table = @[@"default", @"percent"];
+    });
+    return table;
+}
+
 #define GETPROP(d,x) getter(d, @ESTRINGIFY(x))
 static NSMutableDictionary *ORKESerializationEncodingTable() {
     static dispatch_once_t onceToken;
@@ -383,8 +392,14 @@ ret =
             return [[ORKAudioStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
         (@{
-          PROPERTY(duration, NSNumber, NSObject, YES, nil, nil),
           })),
+  ENTRY(ORKToneAudiometryStep,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKToneAudiometryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+        },
+        (@{
+           PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
+           })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -611,25 +626,32 @@ ret =
           })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+            return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) integerValue] minimumValue:[GETPROP(dict, minimum) integerValue] defaultValue:[GETPROP(dict, defaultValue) integerValue] step:[GETPROP(dict, step) integerValue] vertical:[GETPROP(dict, vertical) boolValue] maximumValueDescription:GETPROP(dict, maximumValueDescription) minimumValueDescription:GETPROP(dict, minimumValueDescription)];
         },
         (@{
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
   ENTRY(ORKContinuousScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue]];
+            return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:[GETPROP(dict, maximum) doubleValue] minimumValue:[GETPROP(dict, minimum) doubleValue] defaultValue:[GETPROP(dict, defaultValue) doubleValue] maximumFractionDigits:[GETPROP(dict, maximumFractionDigits) integerValue] vertical:[GETPROP(dict, vertical) boolValue] maximumValueDescription:GETPROP(dict, maximumValueDescription) minimumValueDescription:GETPROP(dict, minimumValueDescription)];
         },
         (@{
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(defaultValue, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumFractionDigits, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(numberStyle, NSNumber, NSObject, YES,
+                   ^id(id numeric) { return tableMapForward([numeric integerValue], numberFormattingStyleTable()); },
+                   ^id(id string) { return @(tableMapReverse(string, numberFormattingStyleTable())); }),
+          PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -745,6 +767,19 @@ ret =
            PROPERTY(fileURL, NSURL, NSObject, NO,
                     ^id(id url) { return [url absoluteString]; },
                     ^id(id string) { return [NSURL URLWithString:string]; })
+           })),
+  ENTRY(ORKToneAudiometrySample,
+        nil,
+        (@{
+           PROPERTY(frequency, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(channel, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(amplitude, NSNumber, NSObject, NO, nil, nil)
+           })),
+  ENTRY(ORKToneAudiometryResult,
+        nil,
+        (@{
+           PROPERTY(outputVolume, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(samples, ORKToneAudiometrySample, NSArray, NO, nil, nil),
            })),
   ENTRY(ORKQuestionResult,
         nil,

@@ -65,14 +65,18 @@
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    [self initializeInternalButtonItems];
+    if (self) {
+        [self initializeInternalButtonItems];
+    }
     return self;
 }
 #pragma clang diagnostic pop
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    [self initializeInternalButtonItems];
+    if (self) {
+        [self initializeInternalButtonItems];
+    }
     return self;
 }
 
@@ -334,9 +338,9 @@
 
 #pragma mark - UIStateRestoring
 
-static NSString * const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
-static NSString * const _ORKPresentedDateRestoreKey = @"presentedDate";
-static NSString * const _ORKOutputDirectoryKey = @"outputDirectory";
+static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
+static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
+static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];

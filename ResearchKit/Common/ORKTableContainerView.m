@@ -41,7 +41,7 @@
 // Enable this define to see outlines and colors of all the views laid out at this level.
 // #define LAYOUT_DEBUG
 
-@interface ORKTableContainerView() <UIGestureRecognizerDelegate>
+@interface ORKTableContainerView () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -151,7 +151,6 @@
         [NSLayoutConstraint deactivateConstraints:_constraints];
         _constraints = nil;
     }
-    [super updateConstraints];
     
     NSMutableArray *constraints = [NSMutableArray array];
     
@@ -184,6 +183,8 @@
     [self updateContinueButtonConstraints];
     [NSLayoutConstraint activateConstraints:constraints];
     _constraints = constraints;
+    
+    [super updateConstraints];
 }
 
 - (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {

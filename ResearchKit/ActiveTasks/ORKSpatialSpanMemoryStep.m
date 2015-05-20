@@ -43,8 +43,10 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
-    self.shouldStartTimerAutomatically = YES;
-    self.shouldContinueOnFinish = YES;
+    if (self) {
+        self.shouldStartTimerAutomatically = YES;
+        self.shouldContinueOnFinish = YES;
+    }
     return self;
 }
 
@@ -166,7 +168,7 @@
             (self.maxTests == castObject.maxTests) &&
             (self.maxConsecutiveFailures == castObject.maxConsecutiveFailures) &&
             (ORKEqualObjects(self.customTargetPluralName, castObject.customTargetPluralName)) &&
-            (self.requireReversal == castObject.requireReversal)) ;
+            (self.requireReversal == castObject.requireReversal));
 }
 
 - (BOOL)allowsBackNavigation {

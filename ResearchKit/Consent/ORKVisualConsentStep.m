@@ -78,7 +78,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.consentDocument, castObject.consentDocument)) ;
+            ORKEqualObjects(self.consentDocument, castObject.consentDocument));
 }
 
 - (NSUInteger)hash {

@@ -90,7 +90,10 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKSpatialSpanMemoryResult:
                 providerType = SpatialSpanMemoryResultTableViewProvider.self
-
+            
+            case is ORKDeviceMotionReactionTimeResult:
+                providerType = DeviceMotionReactionTimeViewProvider.self
+            
             case is ORKFileResult:
                 providerType = FileResultTableViewProvider.self
 
@@ -99,6 +102,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKTaskResult:
                 providerType = TaskResultTableViewProvider.self
+
+            case is ORKToneAudiometryResult:
+                providerType = ToneAudiometryResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -470,6 +476,65 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKToneAudiometryResult` instance.
+class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+
+        return "Samples"
+    }
+
+    // MARK: UITableViewDelegate
+
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+
+    // MARK: ResultTableViewProvider
+
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let toneAudiometryResult = result as! ORKToneAudiometryResult
+        let rows = super.resultRowsForSection(section)
+
+        if section == 0 {
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
+            ]
+        }
+
+        // Add a `ResultRow` for each sample.
+        return rows + toneAudiometryResult.samples!.map { sample in
+            let toneSample = sample as! ORKToneAudiometrySample
+
+            let text : String
+            let detail : String
+
+            if let frequency = toneSample.frequency,
+                amplitude = toneSample.amplitude {
+                    let channelName = toneSample.channel == ORKAudioChannel.Left ? "Left" : "Right"
+
+                    text = "\(frequency) \(channelName)"
+                    detail = "\(amplitude)"
+            }
+            else {
+                text = ""
+                detail = ""
+            }
+
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
 /// Table view provider specific to an `ORKSpatialSpanMemoryResult` instance.
 class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -516,6 +581,33 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
             // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
             return ResultRow(text: "game", detail: gameRecord.score, selectable: true)
         }
+    }
+}
+
+class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "File Results"
+    }
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let reactionTimeResult = result as! ORKDeviceMotionReactionTimeResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp, selectable: true) ]
+        }
+        
+        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString, selectable: false) ]
     }
 }
 

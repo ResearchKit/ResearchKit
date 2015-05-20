@@ -128,6 +128,8 @@ ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     return screenType;
 }
 
+const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType) {
     static  const CGFloat metrics[ORKScreenMetric_COUNT][ORKScreenType_COUNT] = {
         // iPhone 6+,  iPhone 6,  iPhone 5,  iPhone 4,      iPad
@@ -150,7 +152,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {        198,       198,       194,       152,       297},      // ORKScreenMetricIllustrationHeight
         {        300,       300,       176,       152,       300},      // ORKScreenMetricInstructionImageHeight
         {        150,       150,       146,       146,       150},      // ORKScreenMetricContinueButtonWidth
-        {        162,       162,       120,       116,       162},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
+        {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
         {         60,        60,        60,        44,        60},      // ORKScreenMetricTableCellDefaultHeight
         {         55,        55,        55,        44,        55},      // ORKScreenMetricTextFieldCellHeight
         {         36,        36,        36,        26,        36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,

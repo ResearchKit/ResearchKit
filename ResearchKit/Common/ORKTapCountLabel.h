@@ -33,7 +33,7 @@
 
 
 /**
- *  Display tapping count in tapping interval active task
+ Display tapping count in tapping interval active task
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTapCountLabel : ORKLabel
