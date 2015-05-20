@@ -581,6 +581,18 @@ ORK_CLASS_AVAILABLE
 + (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
+ Returns a text choice object that includes the specified primary text, detail text, and exclusivity.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param detailText  The detail text to display below the primary text, in a localized string.
+ @param value       The value to record in a result object when this item is selected.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
+
+/**
  Returns a choice object that includes the specified primary text.
  
  @param text        The primary text that describes the choice in a localized string.
@@ -591,9 +603,20 @@ ORK_CLASS_AVAILABLE
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
+ Returns a choice object that includes the specified primary text and exclusivity.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param value       The value to record in a result object when this item is selected.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return A text choice instance.
+ */
++ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
+
+/**
  Returns an initialized text choice object using the specified primary and detail text.
  
- This method is the designated initializer.
+ This method is a convenience initializer.
  
  @param text        The primary text that describes the choice in a localized string.
  @param detailText  The detail text to display below the primary text, in a localized string.
@@ -603,7 +626,24 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithText:(NSString *)text
                   detailText:(nullable NSString *)detailText
-                       value:(id<NSCopying, NSCoding, NSObject>)value NS_DESIGNATED_INITIALIZER;
+                       value:(id<NSCopying, NSCoding, NSObject>)value;
+
+/**
+ Returns an initialized text choice object using the specified primary text, detail text, and exclusivity.
+ 
+ This method is the designated initializer.
+ 
+ @param text        The primary text that describes the choice in a localized string.
+ @param detailText  The detail text to display below the primary text, in a localized string.
+ @param value       The value to record in a result object when this item is selected.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
+ 
+ @return An initialized text choice.
+ */
+- (instancetype)initWithText:(NSString *)text
+                  detailText:(nullable NSString *)detailText
+                       value:(id<NSCopying, NSCoding, NSObject>)value
+                    exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
 
 /**
  The text that describes the choice in a localized string.
@@ -627,6 +667,13 @@ ORK_CLASS_AVAILABLE
  The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail text.
   */
 @property (copy, readonly, nullable) NSString *detailText;
+
+/**
+ In a multiple choice format, this indicates whether this choice requires all other choices to be unselected.
+ 
+ In general, this is used to indicate a "None of the above" choice.
+ */
+@property BOOL exclusive;
 
 @end
 

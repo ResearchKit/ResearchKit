@@ -602,7 +602,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         /*
          A single-choice question presented in the tableview format.
          */
-        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Less than seven"
                                                                         detailText:nil
@@ -616,6 +616,32 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
                                                                       title:@"How many hours did you sleep last night?"
+                                                                     answer:answerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A multiple-choice question presented in the tableview format.
+         */
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cough"
+                                                                        detailText:nil
+                                                                             value:@"cough"],
+                                                     [ORKTextChoice choiceWithText:@"Fever"
+                                                                        detailText:nil
+                                                                             value:@"fever"],
+                                                     [ORKTextChoice choiceWithText:@"Headaches"
+                                                                        detailText:nil
+                                                                             value:@"headache"],
+                                                     [ORKTextChoice choiceWithText:@"None of the above"
+                                                                        detailText:nil
+                                                                             value:@"none"
+                                                                          exclusive:YES]
+                                                     ]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004a"
+                                                                      title:@"Which symptoms do you have?"
                                                                      answer:answerFormat];
         [steps addObject:step];
     }

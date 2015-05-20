@@ -654,23 +654,36 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     id<NSCopying, NSCoding, NSObject> _value;
 }
 
-+ (instancetype)choiceWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value {
-    ORKTextChoice *option = [[ORKTextChoice alloc] initWithText:text detailText:detailText value:value];
++ (instancetype)choiceWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive {
+    ORKTextChoice *option = [[ORKTextChoice alloc] initWithText:text detailText:detailText value:value exclusive:exclusive];
     return option;
+}
+
++ (instancetype)choiceWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value {
+    return [ORKTextChoice choiceWithText:text detailText:detailText value:value exclusive:NO];
+}
+
++ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive {
+    return [ORKTextChoice choiceWithText:text detailText:nil value:value exclusive:exclusive];
 }
 
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value {
     return [ORKTextChoice choiceWithText:text detailText:nil value:value];
 }
 
-- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value {
+- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value exclusive:(BOOL)exclusive {
     self = [super init];
     if (self) {
         _text = [text copy];
         _detailText = [detailText copy];
         _value = value;
+        _exclusive = exclusive;
     }
     return self;
+}
+
+- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value {
+    return [self initWithText:text detailText:detailText value:value exclusive:NO];
 }
 
 + (BOOL)supportsSecureCoding {
@@ -690,7 +703,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.text, castObject.text)
             && ORKEqualObjects(self.detailText, castObject.detailText)
-            && ORKEqualObjects(self.value, castObject.value));
+            && ORKEqualObjects(self.value, castObject.value)
+            && self.exclusive == castObject.exclusive);
 }
 
 - (NSUInteger)hash {
@@ -704,6 +718,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
         ORK_DECODE_OBJ(aDecoder, value);
+        ORK_DECODE_BOOL(aDecoder, exclusive);
     }
     return self;
 }
@@ -712,6 +727,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, value);
     ORK_ENCODE_OBJ(aCoder, detailText);
+    ORK_ENCODE_BOOL(aCoder, exclusive);
 }
 
 @end
