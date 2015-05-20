@@ -1,22 +1,21 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Alex Basson. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
- 
+
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
- 
+
  2.  Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
- 
+
  3.  Neither the name of the copyright holder(s) nor the names of any contributors
  may be used to endorse or promote products derived from this software without
  specific prior written permission. No license is granted to the trademarks of
  the copyright holders even if such marks are included in this software.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -30,25 +29,15 @@
  */
 
 
-#import <ResearchKit/ORKConsentDocument.h>
+#import "ORKConsentSectionFormatter.h"
+#import "ORKConsentSection_Internal.h"
 
+@implementation ORKConsentSectionFormatter
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKHTMLPDFWriter;
-@class ORKConsentSectionFormatter;
-@class ORKConsentSignatureFormatter;
-
-@interface ORKConsentDocument ()
-
-@property (nonatomic, strong, nullable) ORKHTMLPDFWriter *writer;
-@property (nonatomic, strong, nullable) ORKConsentSectionFormatter *sectionFormatter;
-@property (nonatomic, strong, nullable) ORKConsentSignatureFormatter *signatureFormatter;
-
-+ (NSString *)wrapHTMLBody:(NSString *)body mobile:(BOOL)mobile;
-
-- (NSString *)mobileHTMLWithTitle:(nullable NSString *)title detail:(nullable NSString *)detail;
+- (NSString *)HTMLForSection:(ORKConsentSection *)section {
+    NSString *title = [NSString stringWithFormat:@"<h4>%@</h4>", section.formalTitle?:(section.title?:@"")];
+    NSString *content = [NSString stringWithFormat:@"<p>%@</p>", section.htmlContent?:(section.escapedContent?:@"")];
+    return [NSString stringWithFormat:@"%@%@", title, content];
+}
 
 @end
-
-NS_ASSUME_NONNULL_END
