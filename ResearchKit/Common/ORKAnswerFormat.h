@@ -673,7 +673,7 @@ ORK_CLASS_AVAILABLE
  
  In general, this is used to indicate a "None of the above" choice.
  */
-@property BOOL exclusive;
+@property (readonly) BOOL exclusive;
 
 @end
 
