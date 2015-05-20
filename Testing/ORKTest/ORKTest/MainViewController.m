@@ -234,14 +234,6 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Reaction Time" forState:UIControlStateNormal];
-        [buttonKeys addObject:@"react"];
-        buttons[buttonKeys.lastObject] = button;
-    }
-
-    {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showStepNavigationTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Step Navigation Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"step"];
