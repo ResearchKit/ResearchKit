@@ -54,7 +54,7 @@
 }
 
 ORKDefineStringKey(HeadacheChoiceValue);
-ORKDefineStringKey(DizinessChoiceValue);
+ORKDefineStringKey(DizzinessChoiceValue);
 ORKDefineStringKey(NauseaChoiceValue);
 
 ORKDefineStringKey(SymptomStepIdentifier);
@@ -84,7 +84,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     NSArray *textChoices =
     @[
       [ORKTextChoice choiceWithText:@"Headache" value:HeadacheChoiceValue],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:DizinessChoiceValue],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:DizzinessChoiceValue],
       [ORKTextChoice choiceWithText:@"Nausea" value:NauseaChoiceValue]
       ];
     
@@ -248,7 +248,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
 
 typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     TestsTaskResultOptionSymptomHeadache    = 1 << 0,
-    TestsTaskResultOptionSymptomDiziness    = 2 << 0,
+    TestsTaskResultOptionSymptomDizziness   = 2 << 0,
     TestsTaskResultOptionSymptomNausea      = 3 << 0,
     
     TestsTaskResultOptionSeverityYes        = 1 << 2,
@@ -262,14 +262,14 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     ORKStepResult *stepResult = nil;
     NSString *stepIdentifier = nil;
     
-    if (resultOptions & (TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSymptomDiziness | TestsTaskResultOptionSymptomNausea)) {
+    if (resultOptions & (TestsTaskResultOptionSymptomHeadache | TestsTaskResultOptionSymptomDizziness | TestsTaskResultOptionSymptomNausea)) {
         stepIdentifier = SymptomStepIdentifier;
         questionResult = [[ORKChoiceQuestionResult alloc] init];
         questionResult.identifier = stepIdentifier;
         if (resultOptions & TestsTaskResultOptionSymptomHeadache) {
             questionResult.answer = @[HeadacheChoiceValue];
-        } else if (resultOptions & TestsTaskResultOptionSymptomDiziness) {
-            questionResult.answer = @[DizinessChoiceValue];
+        } else if (resultOptions & TestsTaskResultOptionSymptomDizziness) {
+            questionResult.answer = @[DizzinessChoiceValue];
         } else if (resultOptions & TestsTaskResultOptionSymptomNausea) {
             questionResult.answer = @[NauseaChoiceValue];
         }
@@ -470,13 +470,13 @@ BOOL (^testStepBeforeStep)(ORKNavigableOrderedTask *, ORKTaskResult *, ORKStep *
     XCTAssertTrue(testStepBeforeStep(_navigableOrderedTask, taskResult, symptomStep, nil));
 }
 
-- (void)testNavigableOrderedTaskDiziness {
+- (void)testNavigableOrderedTaskDizziness {
     getIndividualNavigableOrderedTaskSteps();
     
     //
-    // Only diziness symptom question answered
+    // Only dizziness symptom question answered
     //
-    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDiziness];
+    ORKTaskResult *taskResult = [self getResultTreeWithTaskIdentifier:NavigableOrderedTaskIdentifier resultOptions:TestsTaskResultOptionSymptomDizziness];
     
     // Test forward navigation
     XCTAssertTrue(testStepAfterStep(_navigableOrderedTask, taskResult, symptomStep, otherSymptomStep));

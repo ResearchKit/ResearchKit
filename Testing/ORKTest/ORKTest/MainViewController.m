@@ -1788,7 +1788,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     NSArray *textChoices =
     @[
       [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:@"diziness"],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:@"dizziness"],
       [ORKTextChoice choiceWithText:@"Nausea" value:@"nausea"]
       ];
     
