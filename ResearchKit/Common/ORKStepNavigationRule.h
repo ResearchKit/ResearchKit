@@ -34,13 +34,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ The `ORKNullStepIdentifier` constant can be used as the destination step identifier for any
+ `ORKStepNavigationRule` concrete subclass to denote that the ongoing task should end after the
+ navigation rule is triggered.
+ */
+ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
+
 @class ORKResult;
 @class ORKTaskResult;
 
 /**
  The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules.
- Several navigation rules can be set on a navigable ordered task (`ORKNavigableOrderedTask`), for
- different trigger step identifiers.
+ 
+ Step navigation rules can be used within an `ORKNavigableOrderedTask` object. You assign step
+ navigation rules to be triggered by the task steps (each step can have one rule at most).
 
  Subclasses must implement the `identifierForDestinationStepWithTaskResult:` method, which returns
  the identifier of the destination step for the rule.
@@ -55,8 +63,7 @@ ORK_CLASS_AVAILABLE
 /*
  The `init` and `new` methods are unavailable.
  
- `ORKStepNavigationRule` classes should be initialized with custom designated
- initializers on each subclass.
+ `ORKStepNavigationRule` classes should be initialized with custom designated initializers on each subclass.
  */
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -65,6 +72,8 @@ ORK_CLASS_AVAILABLE
  Returns the target step identifier.
  
  Subclasses must implement this method to calculate the next step based on the passed task result.
+ The `ORKNullStepIdentifier` constant can be returned to indicate that the ongoing task should end
+ after the step navigation rule is triggered.
  
  @param taskResult      The up-to-date task result, used for calculating the destination step.
  

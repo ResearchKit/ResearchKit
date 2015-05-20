@@ -33,7 +33,7 @@
 #import "ORKHelpers.h"
 
 
-NSString *const ORKResultPredicateTaskIdentifierVariableName = @"TASK_IDENTIFIER";
+NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTIFIER";
 
 @implementation ORKResultPredicate
 

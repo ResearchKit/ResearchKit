@@ -37,6 +37,8 @@
 #import "ORKResultPredicate.h"
 
 
+NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
+
 @implementation ORKStepNavigationRule
 
 - (instancetype)init_ork {

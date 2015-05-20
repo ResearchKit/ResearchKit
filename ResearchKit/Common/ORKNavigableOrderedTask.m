@@ -75,20 +75,21 @@
     ORKStep *nextStep = nil;
     ORKStepNavigationRule *navigationRule = _stepNavigationRules[step.identifier];
     NSString *nextStepIdentifier = [navigationRule identifierForDestinationStepWithTaskResult:result];
-    if (nextStepIdentifier) {
-        // If nextStepIdentifier is ORKNullStepIdentifier, nextStep will become 'nil' and the ongoing task will end (no fallback to superclass behavior) 
-        nextStep = [self stepWithIdentifier:nextStepIdentifier];
-        
-        #if defined(DEBUG) && DEBUG
-        if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
-            ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
+    if (![nextStepIdentifier isEqualToString:ORKNullStepIdentifier]) { // If ORKNullStepIdentifier, return nil to end task
+        if (nextStepIdentifier) {
+            nextStep = [self stepWithIdentifier:nextStepIdentifier];
+            
+            #if defined(DEBUG) && DEBUG
+            if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
+                ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
+            }
+            #endif
+        } else {
+            nextStep = [super stepAfterStep:step withResult:result];
         }
-        #endif
-    } else {
-        nextStep = [super stepAfterStep:step withResult:result];
-    }
-    if (nextStep) {
-        [self updateStepIdentifierStackWithSourceIdentifier:step.identifier destinationIdentifier:nextStep.identifier];
+        if (nextStep) {
+            [self updateStepIdentifierStackWithSourceIdentifier:step.identifier destinationIdentifier:nextStep.identifier];
+        }
     }
     return nextStep;
 }
