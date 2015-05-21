@@ -37,23 +37,23 @@ static inline BOOL ORKIsImageAnimated(UIImage *image) {
 }
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
-    UIImage *outputImage = nil;
-    if (image && tintColor && scale > 0) {
-        UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
-        CGContextRef context     = UIGraphicsGetCurrentContext();
-        CGContextSetBlendMode(context, kCGBlendModeNormal);
-        CGContextSetAlpha(context, 1);
-        
-        CGRect r = (CGRect){{0,0},image.size};
-        CGContextBeginTransparencyLayerWithRect(context, r, NULL);
-        [tintColor setFill];
-        [image drawInRect:r];
-        UIRectFillUsingBlendMode(r, kCGBlendModeSourceIn);
-        CGContextEndTransparencyLayer(context);
-        
-        outputImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+    if (!image || !tintColor || !(scale > 0)) {
+        return nil;
     }
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
+    CGContextRef context     = UIGraphicsGetCurrentContext();
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGContextSetAlpha(context, 1);
+    
+    CGRect r = (CGRect){{0,0},image.size};
+    CGContextBeginTransparencyLayerWithRect(context, r, NULL);
+    [tintColor setFill];
+    [image drawInRect:r];
+    UIRectFillUsingBlendMode(r, kCGBlendModeSourceIn);
+    CGContextEndTransparencyLayer(context);
+    
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     return outputImage;
 }
 
@@ -72,6 +72,7 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 - (UIImage *)imageByTintingImage:(UIImage *)image {
     if (image && (image.renderingMode == UIImageRenderingModeAlwaysTemplate
                   || (image.renderingMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
+        
         UIColor *tintColor = self.tintColor;
         CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
         if ((![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
