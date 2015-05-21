@@ -29,7 +29,7 @@
  */
 
 #import "ORKToneAudiometryStepViewController.h"
-#import "ORKActiveStepViewController_internal.h"
+#import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKToneAudiometryContentView.h"
 #import "ORKAudioGenerator.h"
