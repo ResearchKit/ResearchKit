@@ -30,8 +30,9 @@
 
 
 #import "ORKVerticalContainerView.h"
-#import "ORKHelpers.h"
 #import "ORKVerticalContainerView_Internal.h"
+#import "ORKHelpers.h"
+#import "ORKTintedImageView.h"
 
 
 ORKDefineStringKey(_TopToIllustrationConstraintKey);
@@ -51,7 +52,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     UIView *_scrollContainer;
     UIView *_container;
     
-    UIImageView *_imageView;
+    ORKTintedImageView *_imageView;
     
     NSDictionary *_adjustableConstraints;
     
@@ -749,7 +750,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (UIImageView *)imageView {
     if(_imageView == nil) {
-        _imageView = [[UIImageView alloc] init];
+        _imageView = [[ORKTintedImageView alloc] init];
         [_customViewContainer addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         _imageView.userInteractionEnabled = YES;

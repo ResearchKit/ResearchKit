@@ -59,5 +59,5 @@ NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
 
 UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
     NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    return [[UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    return [UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil];
 }
