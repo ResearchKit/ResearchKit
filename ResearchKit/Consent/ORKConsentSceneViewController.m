@@ -74,7 +74,7 @@
     
     UIImage *image = nil;
     if (consentSection.type == ORKConsentSectionTypeCustom) {
-        image = [consentSection.customImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        image = consentSection.customImage;
     } else {
         image = ORKImageForConsentSectionType(consentSection.type);
     }
