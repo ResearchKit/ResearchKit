@@ -325,14 +325,14 @@ static CGFloat const kAnimationDuration = 0.35f;
     [self adjustIntersectionsOfLayers:textLayers];
 }
 
-- (CGPoint) getCirclePointForAngle:(CGFloat) angle {
+- (CGPoint)getCirclePointForAngle:(CGFloat) angle {
     CGRect boundingBox = CGPathGetBoundingBox(self.circleLayer.path);
     NSInteger offset = self.lineWidth/2 + 20;
     CGPoint labelCenter = CGPointMake(cos(angle - M_PI_2) * (self.pieChartRadius + offset) + boundingBox.size.width/2, sin(angle - M_PI_2) * (self.pieChartRadius + offset) + boundingBox.size.height/2);
     return labelCenter;
 }
 
-- (void) adjustIntersectionsOfLayers:(NSArray*) layers {
+- (void)adjustIntersectionsOfLayers:(NSArray*) layers {
     if (!layers.count){
         return;
     }
@@ -387,7 +387,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     }
 }
 
-- (BOOL) shiftLayerDictionary:(NSMutableDictionary*)nextLayerDictionary fromLayerDictionary:(NSMutableDictionary*)fromLayerDictionary inDirection:(CGFloat) direction {
+- (BOOL)shiftLayerDictionary:(NSMutableDictionary*)nextLayerDictionary fromLayerDictionary:(NSMutableDictionary*)fromLayerDictionary inDirection:(CGFloat) direction {
     CGFloat shiftStep = 0.01;
     CALayer * layer = fromLayerDictionary[@"layer"];
     CALayer * nextLayer = nextLayerDictionary[@"layer"];

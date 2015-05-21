@@ -41,16 +41,14 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if (self = [super initWithFrame:frame]) {
-        // Initialization code
-        [self setupCircle];
+        [self sharedInit];
     }
     return self;
 }
 
-- (void)setupCircle {
+- (void)sharedInit {
     self.backgroundColor = [UIColor clearColor];
     self.layer.borderWidth = 2.0f;
-    
     self.shapeLayer.cornerRadius = self.frame.size.width / 2.0f;
     self.shapeLayer.path = [self layoutPath].CGPath;
 }
@@ -73,7 +71,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     self.shapeLayer.cornerRadius = self.frame.size.width / 2.0f;
     self.shapeLayer.path = [self layoutPath].CGPath;
 }
@@ -82,7 +79,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 - (void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
-    
     self.shapeLayer.fillColor = [UIColor whiteColor].CGColor;
     self.shapeLayer.borderColor = _tintColor.CGColor;
 }

@@ -69,11 +69,11 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     CGFloat segmentWidth = (CGFloat)CGRectGetWidth(self.bounds)/(self.titleLabels.count - 1);
     CGFloat labelWidth = segmentWidth;
     
-    CGFloat labelHeight = (self.axisType == kORKGraphAxisTypeX) ? CGRectGetHeight(self.bounds)*0.77 : 20;
+    CGFloat labelHeight = (self.axisType == ORKGraphAxisTypeX) ? CGRectGetHeight(self.bounds)*0.77 : 20;
     
     for (NSUInteger i=0; i<self.titleLabels.count; i++) {
         
-        CGFloat positionX = (self.axisType == kORKGraphAxisTypeX) ? (self.leftOffset + i*segmentWidth) : 0;
+        CGFloat positionX = (self.axisType == ORKGraphAxisTypeX) ? (self.leftOffset + i*segmentWidth) : 0;
         
         if (i==0) {
             //Shift the first label to acoomodate the month text.

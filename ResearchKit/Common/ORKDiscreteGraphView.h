@@ -35,59 +35,12 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const kORKDiscreteGraphViewTriggerAnimationsNotification;
-FOUNDATION_EXPORT NSString * const kORKDiscreteGraphViewRefreshNotification;
-
 @protocol ORKDiscreteGraphViewDataSource;
-@protocol ORKDiscreteGraphViewDelegate;
-@class ORKRangePoint;
 
 ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphView : ORKBaseGraphView
 
-@property (nonatomic, weak) id <ORKDiscreteGraphViewDataSource> datasource;
-
 @property (nonatomic) BOOL shouldConnectRanges;
-
-@end
-
-
-ORK_AVAILABLE_DECL
-@protocol ORKDiscreteGraphViewDataSource <NSObject>
-
-@required
-
-- (NSInteger)discreteGraph:(ORKDiscreteGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
-
-- (ORKRangePoint *)discreteGraph:(ORKDiscreteGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
-
-@optional
-
-- (NSInteger)numberOfPlotsInDiscreteGraph:(ORKDiscreteGraphView *)graphView;
-
-- (NSInteger)numberOfDivisionsInXAxisForGraph:(ORKDiscreteGraphView *)graphView;
-
-- (CGFloat)maximumValueForDiscreteGraph:(ORKDiscreteGraphView *)graphView;
-
-- (CGFloat)minimumValueForDiscreteGraph:(ORKDiscreteGraphView *)graphView;
-
-- (NSString *)discreteGraph:(ORKDiscreteGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex;
-
-@end
-
-
-ORK_AVAILABLE_DECL
-@interface ORKRangePoint : NSObject
-
-@property (nonatomic) CGFloat maximumValue;
-
-@property (nonatomic) CGFloat minimumValue;
-
-@property (nonatomic, getter=isEmpty) BOOL empty;
-
-- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue;
-
-- (BOOL)isRangeZero;
 
 @end
 

@@ -207,6 +207,9 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %D of %D";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Move the device sharply when the blue circle appears";
 
+/* Charts */
+"BASE_GRAPH_VIEW_EMPTY_TEXT" = "No Data";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

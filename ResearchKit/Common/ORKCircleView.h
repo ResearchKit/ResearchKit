@@ -32,8 +32,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
-
-ORK_CLASS_AVAILABLE
 @interface ORKCircleView : UIView
 
 @property (nonatomic, strong) UIColor *tintColor;

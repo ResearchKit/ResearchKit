@@ -1,10 +1,32 @@
-//
-//  ChartDataSources.swift
-//  ORKCatalog
-//
-//  Created by James Cox on 11/05/2015.
-//  Copyright (c) 2015 researchkit.org. All rights reserved.
-//
+/*
+Copyright (c) 2015, James Cox. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1.  Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+2.  Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation and/or
+other materials provided with the distribution.
+
+3.  Neither the name of the copyright holder(s) nor the names of any contributors
+may be used to endorse or promote products derived from this software without
+specific prior written permission. No license is granted to the trademarks of
+the copyright holders even if such marks are included in this software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
 import ResearchKit
 
@@ -32,75 +54,75 @@ class PieChartDataSource: NSObject, ORKPieChartViewDatasource {
     }
 }
 
-class LineGraphDataSource: NSObject, ORKLineGraphViewDataSource {
+class LineGraphDataSource: NSObject, ORKBaseGraphViewDataSource {
     
-    var firstPlot = [20,30,40,50,60,70] as [CGFloat]
-    var secondPlot = [2,4,8,16,32,64] as [CGFloat]
+    var firstPlot = [ORKRangePoint(value: 20), ORKRangePoint(), ORKRangePoint(value: 40), ORKRangePoint(value: 50), ORKRangePoint(), ORKRangePoint(value: 70)] as [ORKRangePoint]
+    var secondPlot = [ORKRangePoint(value: 2), ORKRangePoint(value: 4), ORKRangePoint(value: 8), ORKRangePoint(value: 16), ORKRangePoint(value: 32), ORKRangePoint(value: 64)] as [ORKRangePoint]
     
-    func lineGraph(graphView: ORKLineGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
+    func graphView(graphView: ORKBaseGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> ORKRangePoint {
+        return  plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
+    }
+    
+    func graphView(graphView: ORKBaseGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
         return plotIndex == 0 ? firstPlot.count : secondPlot.count
     }
     
-    func lineGraph(graphView: ORKLineGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> CGFloat {
-        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
-    }
-    
-    func numberOfPlotsInLineGraph(graphView: ORKLineGraphView) -> Int {
+    func numberOfPlotsInGraphView(graphView: ORKBaseGraphView) -> Int {
         return 2
     }
     
-    func numberOfDivisionsInXAxisForGraph(graphView: ORKLineGraphView) -> Int {
+    func numberOfDivisionsInXAxisForGraphView(graphView: ORKBaseGraphView) -> Int {
         return max(firstPlot.count, secondPlot.count)
     }
     
-    func maximumValueForLineGraph(graphView: ORKLineGraphView) -> CGFloat {
-        return 70
+    func maximumValueForGraphView(graphView: ORKBaseGraphView) -> CGFloat {
+        return 70;
     }
     
-    func minimumValueForLineGraph(graphView: ORKLineGraphView) -> CGFloat {
+    func minimumValueForGraphView(graphView: ORKBaseGraphView) -> CGFloat {
         return 0
     }
     
-    func lineGraph(graphView: ORKLineGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphView(graphView: ORKBaseGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
 }
 
-class DiscreteGraphDataSource: NSObject, ORKDiscreteGraphViewDataSource {
+class DiscreteGraphDataSource: NSObject, ORKBaseGraphViewDataSource {
     
     var firstPlot: [ORKRangePoint] {
-        return [ORKRangePoint(minimumValue: 0, maximumValue: 2), ORKRangePoint(minimumValue: 2, maximumValue: 3), ORKRangePoint(minimumValue: 3, maximumValue: 5), ORKRangePoint(minimumValue: 6, maximumValue: 6)]
+        return [ORKRangePoint(minimumValue: 0, maximumValue: 2), ORKRangePoint(minimumValue: 2, maximumValue: 3), ORKRangePoint(minimumValue: 3, maximumValue: 5), ORKRangePoint(minimumValue: 5, maximumValue: 6)]
     }
     
     var secondPlot: [ORKRangePoint] {
         return [ORKRangePoint(minimumValue: 0, maximumValue: 1), ORKRangePoint(minimumValue: 1, maximumValue: 5), ORKRangePoint(minimumValue: 4, maximumValue: 6), ORKRangePoint(minimumValue: 6, maximumValue: 8)]
     }
     
-    func discreteGraph(graphView: ORKDiscreteGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
+    func graphView(graphView: ORKBaseGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> ORKRangePoint {
+        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[plotIndex]
+    }
+
+    func graphView(graphView: ORKBaseGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
         return plotIndex == 0 ? firstPlot.count : secondPlot.count
     }
     
-    func discreteGraph(graphView: ORKDiscreteGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> ORKRangePoint {
-        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[plotIndex]
+    func maximumValueForGraphView(graphView: ORKBaseGraphView) -> CGFloat {
+        return 8;
     }
     
-    func maximumValueForDiscreteGraph(graphView: ORKDiscreteGraphView) -> CGFloat {
-        return 8
-    }
-    
-    func minimumValueForDiscreteGraph(graphView: ORKDiscreteGraphView) -> CGFloat {
+    func minimumValueForGraphView(graphView: ORKBaseGraphView) -> CGFloat {
         return 0
     }
     
-    func discreteGraph(graphView: ORKDiscreteGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphView(graphView: ORKBaseGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
     
-    func numberOfPlotsInDiscreteGraph(graphView: ORKDiscreteGraphView) -> Int {
+    func numberOfPlotsInGraphView(graphView: ORKBaseGraphView) -> Int {
         return 2
     }
     
-    func numberOfDivisionsInXAxisForGraph(graphView: ORKDiscreteGraphView) -> Int {
+    func numberOfDivisionsInXAxisForGraphView(graphView: ORKBaseGraphView) -> Int {
         return max(firstPlot.count, secondPlot.count)
     }
 }

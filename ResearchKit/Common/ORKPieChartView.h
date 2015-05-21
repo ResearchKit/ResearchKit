@@ -32,10 +32,26 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
+@class ORKPieChartView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKPieChartViewDatasource;
+ORK_AVAILABLE_DECL
+@protocol ORKPieChartViewDatasource <NSObject>
+
+@required
+
+- (NSInteger)numberOfSegmentsInPieChartView;
+
+- (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index;
+
+@optional
+
+- (UIColor *)pieChartView:(ORKPieChartView *)pieChartView colorForSegmentAtIndex:(NSInteger)index;
+
+- (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
+
+@end
 
 ORK_CLASS_AVAILABLE
 @interface ORKPieChartView : UIView
@@ -73,24 +89,6 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL shouldDrawClockwise;
 
 @property (nonatomic, strong, nullable) NSString *emptyText;
-
-@end
-
-
-ORK_AVAILABLE_DECL
-@protocol ORKPieChartViewDatasource <NSObject>
-
-@required
-
-- (NSInteger)numberOfSegmentsInPieChartView;
-
-- (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index;
-
-@optional
-
-- (UIColor *)pieChartView:(ORKPieChartView *)pieChartView colorForSegmentAtIndex:(NSInteger)index;
-
-- (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
 
 @end
 

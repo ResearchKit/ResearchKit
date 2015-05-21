@@ -35,7 +35,46 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKBaseGraphViewDelegate;
+@class ORKBaseGraphView;
+@class ORKRangePoint;
+
+ORK_AVAILABLE_DECL
+@protocol ORKBaseGraphViewDelegate <NSObject>
+
+@optional
+
+- (void)graphViewTouchesBegan:(ORKBaseGraphView *)graphView;
+
+- (void)graphView:(ORKBaseGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition;
+
+- (void)graphViewTouchesEnded:(ORKBaseGraphView *)graphView;
+
+@end
+
+
+ORK_AVAILABLE_DECL
+@protocol ORKBaseGraphViewDataSource <NSObject>
+
+@required
+
+- (NSInteger)graphView:(ORKBaseGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
+
+- (ORKRangePoint *)graphView:(ORKBaseGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
+
+@optional
+
+- (NSInteger)numberOfPlotsInGraphView:(ORKBaseGraphView *)graphView;
+
+- (NSInteger)numberOfDivisionsInXAxisForGraphView:(ORKBaseGraphView *)graphView;
+
+- (CGFloat)maximumValueForGraphView:(ORKBaseGraphView *)graphView;
+
+- (CGFloat)minimumValueForGraphView:(ORKBaseGraphView *)graphView;
+
+- (NSString *)graphView:(ORKBaseGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex;
+
+@end
+
 
 /**
  *  IMPORTANT: THIS IS AN ABSTRACT CLASS. IT HOLDS PROPERTIES & METHODS COMMON TO CLASSES LIKE ORKLineGraphView & ORKDiscreteGraphView.
@@ -53,9 +92,9 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, weak, nullable) id <ORKBaseGraphViewDelegate> delegate;
 
-/* Appearance */
+@property (nonatomic, weak) IBOutlet id <ORKBaseGraphViewDataSource> dataSource;
 
-@property (nonatomic, strong, nullable) UIColor *tintColor;
+/* Appearance */
 
 @property (nonatomic, strong, nullable) UIColor *axisColor;
 
@@ -94,16 +133,20 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-ORK_AVAILABLE_DECL
-@protocol ORKBaseGraphViewDelegate <NSObject>
+ORK_CLASS_AVAILABLE
+@interface ORKRangePoint : NSObject
 
-@optional
+@property (nonatomic) CGFloat maximumValue;
 
-- (void)graphViewTouchesBegan:(ORKBaseGraphView *)graphView;
+@property (nonatomic) CGFloat minimumValue;
 
-- (void)graphView:(ORKBaseGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition;
+@property (nonatomic, getter=isEmpty) BOOL empty;
 
-- (void)graphViewTouchesEnded:(ORKBaseGraphView *)graphView;
+- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue;
+
+- (instancetype)initWithValue:(CGFloat)value;
+
+- (BOOL)isRangeZero;
 
 @end
 

@@ -35,40 +35,10 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 NS_ASSUME_NONNULL_BEGIN
 
-FOUNDATION_EXPORT NSString * const kORKLineGraphViewTriggerAnimationsNotification;
-FOUNDATION_EXPORT NSString * const kORKLineGraphViewRefreshNotification;
-
 @protocol ORKLineGraphViewDataSource;
-@protocol ORKLineGraphViewDelegate;
 
 ORK_CLASS_AVAILABLE
 @interface ORKLineGraphView : ORKBaseGraphView
-
-@property (nonatomic, weak) IBOutlet id <ORKLineGraphViewDataSource> datasource;
-
-@end
-
-
-ORK_AVAILABLE_DECL
-@protocol ORKLineGraphViewDataSource <NSObject>
-
-@required
-
-- (NSInteger)lineGraph:(ORKLineGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
-
-- (CGFloat)lineGraph:(ORKLineGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
-
-@optional
-
-- (NSInteger)numberOfPlotsInLineGraph:(ORKLineGraphView *)graphView;
-
-- (NSInteger)numberOfDivisionsInXAxisForGraph:(ORKLineGraphView *)graphView;
-
-- (CGFloat)maximumValueForLineGraph:(ORKLineGraphView *)graphView;
-
-- (CGFloat)minimumValueForLineGraph:(ORKLineGraphView *)graphView;
-
-- (NSString *)lineGraph:(ORKLineGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex;
 
 @end
 

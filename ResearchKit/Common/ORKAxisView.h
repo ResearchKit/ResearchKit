@@ -30,10 +30,12 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKGraphConstants.h>
 
+typedef NS_ENUM(NSUInteger, ORKGraphAxisType) {
+    ORKGraphAxisTypeX,
+    ORKGraphAxisTypeY
+};
 
-ORK_CLASS_AVAILABLE
 @interface ORKAxisView : UIView
 
 @property (nonatomic, getter=isLandscapeMode) BOOL landscapeMode;
