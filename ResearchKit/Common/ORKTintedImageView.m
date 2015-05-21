@@ -70,30 +70,30 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 }
 
 - (UIImage *)imageByTintingImage:(UIImage *)image {
-    if (image && (image.renderingMode == UIImageRenderingModeAlwaysTemplate
-                  || (image.renderingMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
-        
-        UIColor *tintColor = self.tintColor;
-        CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
-        if ((![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
-            _appliedTintColor = tintColor;
-            _appliedScaleFactor = screenScale;
-
-            if (!ORKIsImageAnimated(image)) {
-                _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            } else {
-                // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
-                NSMutableArray *images = [NSMutableArray array];
-                for (UIImage *image in image.images) {
-                    [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
-                }
-                _tintedImage = [UIImage animatedImageWithImages:images duration:image.duration];
-            }
-            
-        }
-        image = _tintedImage;
+    if (!image || (image.renderingMode == UIImageRenderingModeAlwaysOriginal
+                   || (image.renderingMode == UIImageRenderingModeAutomatic && !_shouldApplyTint))) {
+        return image;
     }
-    return image;
+    
+    UIColor *tintColor = self.tintColor;
+    CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
+    if ((![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
+        _appliedTintColor = tintColor;
+        _appliedScaleFactor = screenScale;
+        
+        if (!ORKIsImageAnimated(image)) {
+            _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
+            NSMutableArray *images = [NSMutableArray array];
+            for (UIImage *image in image.images) {
+                [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
+            }
+            _tintedImage = [UIImage animatedImageWithImages:images duration:image.duration];
+        }
+        
+    }
+    return _tintedImage;
 }
 
 - (void)setImage:(UIImage *)image {
