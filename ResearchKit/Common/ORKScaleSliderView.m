@@ -189,18 +189,18 @@
                                                               constant:kSideLabelMargin]];
             
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeTop
+                                                             attribute:NSLayoutAttributeBaseline
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.rightRangeLabel
-                                                             attribute:NSLayoutAttributeTop
+                                                             attribute:NSLayoutAttributeBaseline
                                                             multiplier:1.0
                                                               constant:0]];
             
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeBottom
+                                                             attribute:NSLayoutAttributeBaseline
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:self.leftRangeLabel
-                                                             attribute:NSLayoutAttributeBottom
+                                                             attribute:NSLayoutAttributeBaseline
                                                             multiplier:1.0
                                                               constant:0]];
         } else {
