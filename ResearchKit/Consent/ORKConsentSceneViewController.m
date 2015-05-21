@@ -42,6 +42,7 @@
 #import "ORKConsentSection_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKTintedImageView.h"
 
 
 @interface ORKConsentSceneView : ORKVerticalContainerView
@@ -52,6 +53,14 @@
 
 
 @implementation ORKConsentSceneView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.imageView.shouldApplyTint = YES;
+    }
+    return self;
+}
 
 - (void)setConsentSection:(ORKConsentSection *)consentSection {
     _consentSection = consentSection;
@@ -65,9 +74,9 @@
     
     UIImage *image = nil;
     if (consentSection.type == ORKConsentSectionTypeCustom) {
-        image = [consentSection.customImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        image = consentSection.customImage;
     } else {
-        image = ORKImageForConsentSectionType(consentSection.type, self.imageView.tintColor, self.imageView.contentScaleFactor);
+        image = ORKImageForConsentSectionType(consentSection.type);
     }
     
     self.imageView.image = image;

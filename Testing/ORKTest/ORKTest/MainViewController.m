@@ -248,7 +248,15 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [buttonKeys addObject:@"imageCapture"];
         buttons[buttonKeys.lastObject] = button;
     }
-    
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(toggleTintColor:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Toggle Tint Color" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"toggleTintColor"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -1849,6 +1857,22 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 }
 - (IBAction)showStepNavigationTask:(id)sender {
     [self beginTaskWithIdentifier:StepNavigationTaskIdentifier];
+}
+
+- (IBAction)toggleTintColor:(id)sender {
+    static UIColor *defaultTintColor = nil;
+    if (!defaultTintColor) {
+        defaultTintColor = self.view.tintColor;
+    }
+    if ([[UIView appearance].tintColor isEqual:[UIColor redColor]]) {
+        [UIView appearance].tintColor = defaultTintColor;
+    } else {
+        [UIView appearance].tintColor = [UIColor redColor];
+    }
+    // Update appearance
+    UIView *superview = self.view.superview;
+    [self.view removeFromSuperview];
+    [superview addSubview:self.view];
 }
 
 #pragma mark - Step navigation task

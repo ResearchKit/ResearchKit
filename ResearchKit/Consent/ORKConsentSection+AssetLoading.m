@@ -57,8 +57,7 @@ NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
     return url;
 }
 
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type, UIColor *tintColor, CGFloat scale) {
+UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
     NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    // Use ORKImageByTintingImage becase it's more performant than 'imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate'
-    return ORKImageByTintingImage([UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil], tintColor, scale);
+    return [UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil];
 }

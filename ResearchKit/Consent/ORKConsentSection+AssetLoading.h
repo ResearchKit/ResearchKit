@@ -37,6 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 NSURL *__nullable ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
 
-UIImage *__nullable ORKImageForConsentSectionType(ORKConsentSectionType type, UIColor *tintColor, CGFloat scale);
+UIImage *__nullable ORKImageForConsentSectionType(ORKConsentSectionType type);
 
 NS_ASSUME_NONNULL_END

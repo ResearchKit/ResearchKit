@@ -30,9 +30,16 @@
 
 
 #import "ORKTintedImageView.h"
+#import "ORKHelpers.h"
 
+static inline BOOL ORKIsImageAnimated(UIImage *image) {
+    return [[image images] count] > 1;
+}
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
+    if (!image || !tintColor || !(scale > 0)) {
+        return nil;
+    }
     UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
     CGContextRef context     = UIGraphicsGetCurrentContext();
     CGContextSetBlendMode(context, kCGBlendModeNormal);
@@ -52,36 +59,41 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 
 @implementation ORKTintedImageView {
     UIImage *_originalImage;
+    UIImage *_tintedImage;
+    UIColor *_appliedTintColor;
+    CGFloat _appliedScaleFactor;
 }
 
 - (void)setShouldApplyTint:(BOOL)shouldApplyTint {
     _shouldApplyTint = shouldApplyTint;
-    
     self.image = _originalImage;
 }
 
 - (UIImage *)imageByTintingImage:(UIImage *)image {
-    UIImageRenderingMode renderMode = [image renderingMode];
-    BOOL isAnimatedImage = [[image images] count] > 1;
-    
-    // If this is a single image, and it has an automatic rendering mode, and we are supposed to be tinting,
-    // then get a version with tint.
-    if (!isAnimatedImage && renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint) {
-        image = [image imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)];
-    // If this is an animated image, and it is a fixed template rendering mode, or, it is an automatic
-    // rendering mode and we are supposed to be tinting, then get a version with tint.  We have to
-    // manually apply the tint to animated images, even if they are in a fixed template rendering mode,
-    // due to:
-    // <rdar://problem/19792197>
-    } else if (isAnimatedImage && (renderMode == UIImageRenderingModeAlwaysTemplate || (renderMode == UIImageRenderingModeAutomatic && _shouldApplyTint))) {
-            NSMutableArray *images = [NSMutableArray array];
-            UIColor *tintColor = [self tintColor];
-            for (UIImage *im in image.images) {
-                [images addObject:ORKImageByTintingImage(im, tintColor, self.contentScaleFactor)];
-            }
-            image = [UIImage animatedImageWithImages:images duration:image.duration];
+    if (!image || (image.renderingMode == UIImageRenderingModeAlwaysOriginal
+                   || (image.renderingMode == UIImageRenderingModeAutomatic && !_shouldApplyTint))) {
+        return image;
     }
-    return image;
+    
+    UIColor *tintColor = self.tintColor;
+    CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
+    if ((![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
+        _appliedTintColor = tintColor;
+        _appliedScaleFactor = screenScale;
+        
+        if (!ORKIsImageAnimated(image)) {
+            _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        } else {
+            // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
+            NSMutableArray *images = [NSMutableArray array];
+            for (UIImage *image in image.images) {
+                [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
+            }
+            _tintedImage = [UIImage animatedImageWithImages:images duration:image.duration];
+        }
+        
+    }
+    return _tintedImage;
 }
 
 - (void)setImage:(UIImage *)image {
@@ -92,9 +104,16 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    
-    // If we're an animated, image we have to recompute for the new tint color
-    if ([[_originalImage images] count] > 1) {
+    if (ORKIsImageAnimated(_originalImage)) {
+        // recompute for new tint color
+        self.image = _originalImage;
+    }
+}
+
+- (void)didMoveToWindow {
+    [super didMoveToWindow];
+    if (ORKIsImageAnimated(_originalImage)) {
+        // recompute for new screen.scale
         self.image = _originalImage;
     }
 }
