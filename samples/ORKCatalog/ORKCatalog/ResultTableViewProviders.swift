@@ -325,6 +325,7 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
         return super.resultRowsForSection(section) + [
             // The numeric value the user entered.
             ResultRow(text: "numericAnswer", detail: questionResult.numericAnswer),
+
             // The unit string that was displayed with the numeric value.
             ResultRow(text: "unit", detail: questionResult.unit)
         ]
@@ -627,41 +628,42 @@ class FileResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let questionResult = result as! ORKFileResult
         
-        var rows = [
+        let rows = super.resultRowsForSection(section) + [
             // The MIME content type for the file produced.
             ResultRow(text: "contentType", detail: questionResult.contentType),
 
             // The URL of the generated file on disk.
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
-        if let fileURL = questionResult.fileURL {
-            if let contentType = questionResult.contentType {
-                if contentType.hasPrefix("image/") {
-                    if let data = NSData(contentsOfURL: fileURL) {
-                        if let image = UIImage(data: data) {
-                            rows += [
-                                // The image of the generated file on disk.
-                                .Image(image)
-                            ]
-                        }
-                    }
-                }
+
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
+            if let data = NSData(contentsOfURL: fileURL), let image = UIImage(data: data) {
+                return rows + [
+                    // The image of the generated file on disk.
+                    .Image(image)
+                ]
             }
         }
-        return super.resultRowsForSection(section) + rows
+        
+        return rows
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let resultRows = resultRowsForSection(indexPath.section)
+        
         if !resultRows.isEmpty {
             switch resultRows[indexPath.row] {
-                case let .Image(image):
-                    // Keep the aspect ratio the same
-                    return tableView.frame.size.width/(image!.size.width/image!.size.height)
+                case .Image(.Some(let image)):
+                    // Keep the aspect ratio the same.
+                    let imageAspectRatio = image.size.width / image.size.height
+
+                    return tableView.frame.size.width / imageAspectRatio
+
                 default:
                     break
             }
         }
+        
         return UITableViewAutomaticDimension
     }
 }
@@ -703,9 +705,11 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let lastRow = self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1
+        
         if indexPath.row == lastRow {
             return 200
         }
+       
         return UITableViewAutomaticDimension
     }
 }
