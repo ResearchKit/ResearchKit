@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -612,21 +613,6 @@ ORK_CLASS_AVAILABLE
  @return A text choice instance.
  */
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
-
-/**
- Returns an initialized text choice object using the specified primary and detail text.
- 
- This method is a convenience initializer.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param detailText  The detail text to display below the primary text, in a localized string.
- @param value       The value to record in a result object when this item is selected.
- 
- @return An initialized text choice.
- */
-- (instancetype)initWithText:(NSString *)text
-                  detailText:(nullable NSString *)detailText
-                       value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
  Returns an initialized text choice object using the specified primary text, detail text, and exclusivity.

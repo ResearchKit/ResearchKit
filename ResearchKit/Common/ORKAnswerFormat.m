@@ -682,10 +682,6 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return self;
 }
 
-- (instancetype)initWithText:(NSString *)text detailText:(NSString *)detailText value:(id<NSCopying,NSCoding,NSObject>)value {
-    return [self initWithText:text detailText:detailText value:value exclusive:NO];
-}
-
 + (BOOL)supportsSecureCoding {
     return YES;
 }
