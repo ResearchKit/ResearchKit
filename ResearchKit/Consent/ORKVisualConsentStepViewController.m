@@ -383,7 +383,7 @@
     void (^finishAndNilAnimator)(ORKVisualConsentTransitionAnimator *animator) = ^(ORKVisualConsentTransitionAnimator *animator) {
         __strong typeof(self) strongSelf = weakSelf;
         [animator finish];
-        if (strongSelf->_animator == animator) {
+        if (strongSelf && strongSelf->_animator == animator) {
             // Do not show images and hide animationPlayerView if it's not the current animator
             fromViewController.imageHidden = NO;
             toViewController.imageHidden = NO;
