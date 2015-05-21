@@ -39,6 +39,10 @@
  
  To use the image capture step, optionally set the `templateImage` and `templateImageInsets`
  properties, incorporate the step into a task, and present the task with a task view controller.
+ 
+ If implementing an image capture task like this one, remember that people will
+ take your instructions literally. So, be cautious. Make sure your template image
+ is high contrast and very visible against a variety of backgrounds.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKImageCaptureStep : ORKStep

@@ -1780,6 +1780,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 - (id<ORKTask>)makeImageCaptureTask {
     NSMutableArray *steps = [NSMutableArray new];
     
+    /*
+     If implementing an image capture task like this one, remember that people will
+     take your instructions literally. So, be cautious. Make sure your template image
+     is high contrast and very visible against a variety of backgrounds.
+     */
+     
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
         step.title = @"Hands";

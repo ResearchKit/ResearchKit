@@ -438,12 +438,17 @@ ret =
         (@{
            PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
            })),
+   ENTRY(ORKToneAudiometryPracticeStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{})),
   ENTRY(ORKImageCaptureStep,
   ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
       return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
   },
   (@{
-    PROPERTY(templateImageInsets, NSValue, NSObject, NO,
+    PROPERTY(templateImageInsets, NSValue, NSObject, YES,
             ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
             ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
     })),
