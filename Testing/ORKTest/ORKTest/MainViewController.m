@@ -605,13 +605,10 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Less than seven"
-                                                                        detailText:nil
                                                                              value:@(7)],
                                                      [ORKTextChoice choiceWithText:@"Between seven and eight"
-                                                                        detailText:nil
                                                                              value:@(8)],
                                                      [ORKTextChoice choiceWithText:@"More than eight"
-                                                                        detailText:nil
                                                                              value:@(9)]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
@@ -627,13 +624,10 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Cough"
-                                                                        detailText:nil
                                                                              value:@"cough"],
                                                      [ORKTextChoice choiceWithText:@"Fever"
-                                                                        detailText:nil
                                                                              value:@"fever"],
                                                      [ORKTextChoice choiceWithText:@"Headaches"
-                                                                        detailText:nil
                                                                              value:@"headache"],
                                                      [ORKTextChoice choiceWithText:@"None of the above"
                                                                         detailText:nil
@@ -654,13 +648,16 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
             @[
               [ORKTextChoice choiceWithText:@"Cough"
                                  detailText:@"A cough and/or sore throat"
-                                      value:@"cough"],
+                                      value:@"cough"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Fever"
                                  detailText:@"A 100F or higher fever or feeling feverish"
-                                      value:@"fever"],
+                                      value:@"fever"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Headaches"
                                  detailText:@"Headaches and/or body aches"
-                                      value:@"headache"]
+                                      value:@"headache"
+                                  exclusive:NO]
               ]];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004"
@@ -715,13 +712,10 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
                                                     @[
                                                       [ORKTextChoice choiceWithText:@"Cough"
-                                                                         detailText:nil
                                                                               value:@"cough"],
                                                       [ORKTextChoice choiceWithText:@"Fever"
-                                                                         detailText:nil
                                                                               value:@"fever"],
                                                       [ORKTextChoice choiceWithText:@"Headaches"
-                                                                         detailText:nil
                                                                               value:@"headache"]
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_081"
@@ -817,13 +811,16 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Cough, A cough and/or sore throat, A cough and/or sore throat"
                                                                         detailText:@"A cough and/or sore throat, A cough and/or sore throat, A cough and/or sore throat"
-                                                                             value:@"cough"],
+                                                                             value:@"cough"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@"Fever, A 100F or higher fever or feeling feverish"
                                                                         detailText:nil
-                                                                             value:@"fever"],
+                                                                             value:@"fever"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@""
                                                                         detailText:@"Headaches, Headaches and/or body aches"
-                                                                             value:@"headache"]
+                                                                             value:@"headache"
+                                                                         exclusive:NO]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000a"
                                                                       title:@"(Misused) Which symptoms do you have?"

@@ -571,17 +571,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
 
 /**
- Returns a text choice object that includes the specified primary and detail text.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param detailText  The detail text to display below the primary text, in a localized string.
- @param value       The value to record in a result object when this item is selected.
- 
- @return A text choice instance.
- */
-+ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value;
-
-/**
  Returns a text choice object that includes the specified primary text, detail text, and exclusivity.
  
  @param text        The primary text that describes the choice in a localized string.
@@ -602,17 +591,6 @@ ORK_CLASS_AVAILABLE
  @return A text choice instance.
  */
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
-
-/**
- Returns a choice object that includes the specified primary text and exclusivity.
- 
- @param text        The primary text that describes the choice in a localized string.
- @param value       The value to record in a result object when this item is selected.
- @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
- 
- @return A text choice instance.
- */
-+ (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
 
 /**
  Returns an initialized text choice object using the specified primary text, detail text, and exclusivity.
