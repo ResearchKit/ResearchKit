@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,34 +29,11 @@
  */
 
 
-#import "ORKConsentSection+AssetLoading.h"
-#import "ORKHelpers.h"
-#import "ORKTintedImageView.h"
+#import <UIKit/UIKit.h>
 
 
-static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
-    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
-    fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
-    return fullMovieName;
-}
+@interface ORKTintedImageCache : NSCache
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [[UIScreen mainScreen] scale];
-    
-    // For iPad, use the movie for the next scale up
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && scale < 3) {
-        scale++;
-    }
-    
-    NSURL *url = [ORKAssetsBundle() URLForResource:movieNameForType(type, scale) withExtension:@"m4v"];
-    if (url == nil) {
-        // This can fail on 3x devices when the display is set to zoomed. Try an asset at 2x instead.
-        url = [ORKAssetsBundle() URLForResource:movieNameForType(type, 2.0) withExtension:@"m4v"];
-    }
-    return url;
-}
++ (instancetype)sharedCache;
 
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
-    NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    return [UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil];
-}
+@end

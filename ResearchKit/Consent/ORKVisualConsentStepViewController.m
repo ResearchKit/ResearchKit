@@ -49,6 +49,8 @@
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 #import "ORKContinueButton.h"
 #import "ORKAccessibility.h"
+#import "ORKTintedImageView.h"
+#import "ORKTintedImageView_Internal.h"
 
 
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
@@ -138,6 +140,10 @@
 
 
 @implementation ORKVisualConsentStepViewController
+
+- (void)dealloc {
+    [[ORKTintedImageCache sharedCache] removeAllObjects];
+}
 
 - (void)stepDidChange {
     [super stepDidChange];
@@ -257,7 +263,7 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES];
+    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES preloadNextViewController:NO];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
@@ -506,10 +512,24 @@
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
+    [self showViewController:viewController forward:forward animated:animated preloadNextViewController:YES];
+}
+
+- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated preloadNextViewController:(BOOL)preloadNextViewController {
     [self showViewController:viewController
                      forward:forward
                     animated:animated
-                  completion:nil];
+                  completion:^(BOOL finished) {
+                      if (preloadNextViewController) {
+                          ORKConsentSceneViewController *nextViewController = [self viewControllerForIndex:[self currentIndex]+1];
+                          ORKConsentSceneView *currentSceneView = viewController.sceneView;
+                          // Load next controller view into memory
+                          __unused UIView *view = nextViewController.view;
+                          ORKConsentSceneView *nextSceneView = nextViewController.sceneView;
+                          [nextSceneView.imageView cacheImageForTintColor:currentSceneView.imageView.tintColor
+                                                                    scale:currentSceneView.imageView.window.screen.scale];
+                      }
+                  }];
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController

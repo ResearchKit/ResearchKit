@@ -38,4 +38,8 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 
 @property (nonatomic, assign) BOOL shouldApplyTint;
 
+@property (nonatomic, assign) BOOL enableTintedImageCaching;
+
+- (void)cacheImageForTintColor:(UIColor *)tintColor scale:(CGFloat)scale;
+
 @end

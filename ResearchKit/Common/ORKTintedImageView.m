@@ -30,7 +30,11 @@
 
 
 #import "ORKTintedImageView.h"
+#import "ORKTintedImageView_Internal.h"
 #import "ORKHelpers.h"
+
+
+#define ORKTintedImageLog(...)
 
 static inline BOOL ORKIsImageAnimated(UIImage *image) {
     return [[image images] count] > 1;
@@ -40,6 +44,9 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     if (!image || !tintColor || !(scale > 0)) {
         return nil;
     }
+    
+    ORKTintedImageLog(@"%@ %@ %f", image, tintColor, scale);
+    
     UIGraphicsBeginImageContextWithOptions(image.size, NO, scale);
     CGContextRef context     = UIGraphicsGetCurrentContext();
     CGContextSetBlendMode(context, kCGBlendModeNormal);
@@ -56,6 +63,80 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     UIGraphicsEndImageContext();
     return outputImage;
 }
+
+
+@interface ORKTintedImageCacheKey : NSObject
+
+- (instancetype)initWithImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
+
+@end
+
+
+@implementation ORKTintedImageCacheKey {
+    UIImage *_image;
+    UIColor *_tintColor;
+    CGFloat _scale;
+}
+
+- (instancetype)initWithImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale {
+    self = [super init];
+    if (self) {
+        _image = image;
+        _tintColor = tintColor;
+        _scale = scale;
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(_image, castObject->_image)
+            && ORKEqualObjects(_tintColor, castObject->_tintColor)
+            && ORKCGFloatNearlyEqualToFloat(_scale, castObject->_scale));
+}
+
+@end
+
+
+@interface ORKTintedImageCache ()
+
+- (UIImage *)tintedImageForImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
+
+@end
+
+
+@implementation ORKTintedImageCache
+
++ (instancetype)sharedCache
+{
+    static dispatch_once_t pred;
+    static id sharedInstance = nil;
+    dispatch_once(&pred, ^{
+        sharedInstance = [[[self class] alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (UIImage *)tintedImageForImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale {
+    UIImage *tintedImage = nil;
+    
+    ORKTintedImageCacheKey *key = [[ORKTintedImageCacheKey alloc] initWithImage:image tintColor:tintColor scale:scale];
+    tintedImage = [self objectForKey:key];
+    if (!tintedImage) {
+        tintedImage = ORKImageByTintingImage(image, tintColor, scale);
+        if (tintedImage) {
+            [self setObject:tintedImage forKey:key];
+        }
+    }
+    return tintedImage;
+}
+
+@end
+
 
 @implementation ORKTintedImageView {
     UIImage *_originalImage;
@@ -77,17 +158,25 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     
     UIColor *tintColor = self.tintColor;
     CGFloat screenScale = self.window.screen.scale; // Use screen.scale; self.contentScaleFactor remains 1.0 until later
-    if ((![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
+    if (screenScale > 0 && (![_appliedTintColor isEqual:tintColor] || !ORKCGFloatNearlyEqualToFloat(_appliedScaleFactor, screenScale))) {
         _appliedTintColor = tintColor;
         _appliedScaleFactor = screenScale;
         
         if (!ORKIsImageAnimated(image)) {
-            _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            if (_enableTintedImageCaching) {
+                _tintedImage = [[ORKTintedImageCache sharedCache] tintedImageForImage:image tintColor:tintColor scale:screenScale];
+            } else {
+                _tintedImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            }
         } else {
             // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
             NSMutableArray *images = [NSMutableArray array];
             for (UIImage *image in image.images) {
-                [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
+                if (_enableTintedImageCaching) {
+                    [[ORKTintedImageCache sharedCache] tintedImageForImage:image tintColor:tintColor scale:screenScale];
+                } else {
+                    [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
+                }
             }
             _tintedImage = [UIImage animatedImageWithImages:images duration:image.duration];
         }
@@ -104,17 +193,19 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    if (ORKIsImageAnimated(_originalImage)) {
-        // recompute for new tint color
-        self.image = _originalImage;
-    }
+    // recompute for new tint color
+    self.image = _originalImage;
 }
 
 - (void)didMoveToWindow {
     [super didMoveToWindow];
-    if (ORKIsImageAnimated(_originalImage)) {
-        // recompute for new screen.scale
-        self.image = _originalImage;
+    // recompute for new screen.scale
+    self.image = _originalImage;
+}
+
+- (void)cacheImageForTintColor:(UIColor *)tintColor scale:(CGFloat)scale {
+    if (_enableTintedImageCaching) {
+        [[ORKTintedImageCache sharedCache] tintedImageForImage:_originalImage tintColor:tintColor scale:scale];
     }
 }
 

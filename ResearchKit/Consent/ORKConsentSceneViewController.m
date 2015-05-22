@@ -31,6 +31,7 @@
 
 
 #import "ORKConsentSceneViewController.h"
+#import "ORKConsentSceneViewController_Internal.h"
 #import "ORKConsentLearnMoreViewController.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
@@ -45,7 +46,7 @@
 #import "ORKTintedImageView.h"
 
 
-@interface ORKConsentSceneView : ORKVerticalContainerView
+@interface ORKConsentSceneView ()
 
 @property (nonatomic, strong) ORKConsentSection *consentSection;
 
@@ -58,6 +59,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.imageView.shouldApplyTint = YES;
+        self.imageView.enableTintedImageCaching = YES;
     }
     return self;
 }
@@ -84,13 +86,6 @@
     
     self.continueSkipContainer.continueEnabled = YES;
     [self.continueSkipContainer updateContinueAndSkipEnabled];
-}
-
-@end
-
-
-@interface ORKConsentSceneViewController () {
-    ORKConsentSceneView *_sceneView;
 }
 
 @end
