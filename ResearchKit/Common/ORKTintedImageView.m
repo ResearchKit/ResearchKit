@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -170,17 +171,21 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
             }
         } else {
             // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
-            NSMutableArray *images = [NSMutableArray array];
-            for (UIImage *image in image.images) {
+            NSArray *animationImages = image.images;
+            NSMutableArray *tintedAnimationImages = [[NSMutableArray alloc] initWithCapacity:[animationImages count]];
+            for (UIImage *animationImage in animationImages) {
+                UIImage *tintedAnimationImage = nil;
                 if (_enableTintedImageCaching) {
-                    [[ORKTintedImageCache sharedCache] tintedImageForImage:image tintColor:tintColor scale:screenScale];
+                    tintedAnimationImage = [[ORKTintedImageCache sharedCache] tintedImageForImage:animationImage tintColor:tintColor scale:screenScale];
                 } else {
-                    [images addObject:ORKImageByTintingImage(image, tintColor, screenScale)];
+                    tintedAnimationImage = ORKImageByTintingImage(animationImage, tintColor, screenScale);
+                }
+                if (tintedAnimationImage) {
+                    [tintedAnimationImages addObject:tintedAnimationImage];
                 }
             }
-            _tintedImage = [UIImage animatedImageWithImages:images duration:image.duration];
+            _tintedImage = [UIImage animatedImageWithImages:tintedAnimationImages duration:image.duration];
         }
-        
     }
     return _tintedImage;
 }
