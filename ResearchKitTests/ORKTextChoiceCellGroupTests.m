@@ -61,7 +61,7 @@
     
     if (choicesWithOneExclusive == nil) {
         choicesWithOneExclusive = @[[ORKTextChoice choiceWithText:@"choice 01" value:@"c1"],
-                                [ORKTextChoice choiceWithText:@"choice 02" value:@"c2" exclusive:YES],
+                                    [ORKTextChoice choiceWithText:@"choice 02" detailText:nil value:@"c2" exclusive:YES],
                                 [ORKTextChoice choiceWithText:@"choice 03" value:@"c3"],
                                 [ORKTextChoice choiceWithText:@"choice 04" value:@"c4"]];
     }
@@ -74,8 +74,8 @@
     
     if (choicesWithTwoExclusives == nil) {
         choicesWithTwoExclusives = @[[ORKTextChoice choiceWithText:@"choice 01" value:@"c1"],
-                                 [ORKTextChoice choiceWithText:@"choice 02" value:@"c2" exclusive:YES],
-                                 [ORKTextChoice choiceWithText:@"choice 03" value:@"c3" exclusive:YES],
+                                 [ORKTextChoice choiceWithText:@"choice 02" detailText:nil value:@"c2" exclusive:YES],
+                                 [ORKTextChoice choiceWithText:@"choice 03" detailText:nil value:@"c3" exclusive:YES],
                                  [ORKTextChoice choiceWithText:@"choice 04" value:@"c4"]];
     }
     
@@ -86,10 +86,10 @@
     static NSArray *choicesWithAllExclusives = nil;
     
     if (choicesWithAllExclusives == nil) {
-        choicesWithAllExclusives = @[[ORKTextChoice choiceWithText:@"choice 01" value:@"c1" exclusive:YES],
-                                 [ORKTextChoice choiceWithText:@"choice 02" value:@"c2" exclusive:YES],
-                                 [ORKTextChoice choiceWithText:@"choice 03" value:@"c3" exclusive:YES],
-                                 [ORKTextChoice choiceWithText:@"choice 04" value:@"c4" exclusive:YES]];
+        choicesWithAllExclusives = @[[ORKTextChoice choiceWithText:@"choice 01" detailText:nil value:@"c1" exclusive:YES],
+                                 [ORKTextChoice choiceWithText:@"choice 02" detailText:nil value:@"c2" exclusive:YES],
+                                 [ORKTextChoice choiceWithText:@"choice 03" detailText:nil value:@"c3" exclusive:YES],
+                                 [ORKTextChoice choiceWithText:@"choice 04" detailText:nil value:@"c4" exclusive:YES]];
     }
     
     return choicesWithAllExclusives;
