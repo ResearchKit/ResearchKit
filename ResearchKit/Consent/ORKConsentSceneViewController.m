@@ -155,7 +155,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     _sceneView.continueSkipContainer.continueButtonItem = _continueButtonItem;
     _sceneView.imageView.hidden = _imageHidden;
     
-    if ([_section.content length]||[_section.htmlContent length] || _section.contentRequest) {
+    if ([_section.content length]||[_section.htmlContent length] || _section.contentURL) {
         _sceneView.headerView.learnMoreButtonItem = [[UIBarButtonItem alloc] initWithTitle:_learnMoreButtonTitle ? : localizedLearnMoreForType(_section.type) style:UIBarButtonItemStylePlain target:self action:@selector(showContent:)];
     }
 }
@@ -205,9 +205,9 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 - (IBAction)showContent:(id)sender {
     ORKConsentLearnMoreViewController *viewController = nil;
     
-    if(_section.contentRequest)
+    if(_section.contentURL)
     {
-        viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentRequest:_section.contentRequest];
+        viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentRequest:_section.contentURL];
     }else{
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }

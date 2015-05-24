@@ -2070,6 +2070,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
              */
             consentSection.htmlContent = @"<ul><li>Lorem</li><li>ipsum</li><li>dolor</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p>\
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p> 研究";
+        } else if (type.integerValue == ORKConsentSectionTypeDataGathering) {
+            consentSection.contentRequest =  @" JAMIE DANIEL";
+            
         } else {
             /*
              Tests text Learn More content.
