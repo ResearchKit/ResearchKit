@@ -88,6 +88,10 @@ static NSDictionary *dictionaryFromCGRect(CGRect r) {
     return @{ @"origin" : dictionaryFromCGPoint(r.origin), @"size" : dictionaryFromCGSize(r.size) };
 }
 
+static NSDictionary *dictionaryFromUIEdgeInsets(UIEdgeInsets i) {
+    return @{ @"top" : @(i.top), @"left" : @(i.left), @"bottom" : @(i.bottom), @"right" : @(i.right) };
+}
+
 static CGSize sizeFromDictionary(NSDictionary *dict) {
     return (CGSize){.width = [dict[@"w"] doubleValue], .height = [dict[@"h"] doubleValue] };
 }
@@ -98,6 +102,10 @@ static CGPoint pointFromDictionary(NSDictionary *dict) {
 
 static CGRect rectFromDictionary(NSDictionary *dict) {
     return (CGRect){.origin = pointFromDictionary(dict[@"origin"]), .size = sizeFromDictionary(dict[@"size"])};
+}
+
+static UIEdgeInsets edgeInsetsFromDictionary(NSDictionary *dict) {
+    return (UIEdgeInsets){.top = [dict[@"top"] doubleValue], .left = [dict[@"left"] doubleValue], .bottom = [dict[@"bottom"] doubleValue], .right = [dict[@"right"] doubleValue]};
 }
 
 static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
@@ -430,6 +438,20 @@ ret =
         (@{
            PROPERTY(toneDuration, NSNumber, NSObject, YES, nil, nil),
            })),
+   ENTRY(ORKToneAudiometryPracticeStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{})),
+  ENTRY(ORKImageCaptureStep,
+  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+      return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+  },
+  (@{
+    PROPERTY(templateImageInsets, NSValue, NSObject, YES,
+            ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
+            ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
+    })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];

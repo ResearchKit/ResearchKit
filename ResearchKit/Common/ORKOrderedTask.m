@@ -51,7 +51,6 @@
 #import "ORKFitnessStep.h"
 #import "ORKWalkingTaskStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
-#import "ORKToneAudiometryInstructionStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKDeviceMotionReactionTimeStep.h"
 #import "ORKAccelerometerRecorder.h"
@@ -223,9 +222,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (ORKPermissionMask)requestedPermissions {
     ORKPermissionMask mask = ORKPermissionNone;
     for (ORKStep *step in self.steps) {
-        if ([step isKindOfClass:[ORKActiveStep class]]) {
-            mask |= [(ORKActiveStep *)step requestedPermissions];
-        }
+        mask |= [step requestedPermissions];
     }
     return mask;
 }
@@ -284,6 +281,7 @@ static NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound"
 static NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
 static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
 static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 static NSString * const ORKDeviceMotionReactionTimeStepIdentifier = @"reactionTime.deviceMotion";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
@@ -816,7 +814,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             ORKStepArrayAddStep(steps, step);
         }
         {
-            ORKToneAudiometryInstructionStep *step = [[ORKToneAudiometryInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
             step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_INTRO_TEXT", nil);
             step.detailText = ORKLocalizedString(@"TONE_AUDIOMETRY_CALL_TO_ACTION", nil);
@@ -827,6 +825,14 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
 
+    {
+        ORKToneAudiometryPracticeStep *step = [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:ORKToneAudiometryPracticeStepIdentifier];
+        step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
+        step.text = speechInstruction?:ORKLocalizedString(@"TONE_AUDIOMETRY_PREP_TEXT", nil);
+        ORKStepArrayAddStep(steps, step);
+        
+    }
+    
     {
         ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
         step.stepDuration = 5.0;

@@ -132,7 +132,7 @@
     return _activeStepView.customViewContainer;
 }
 
-- (UIImageView *)imageView {
+- (ORKTintedImageView *)imageView {
     __unused UIView *view = [self view];
     return _activeStepView.imageView;
 }

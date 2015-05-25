@@ -292,7 +292,8 @@
                                               @"ORKInstructionStep.image",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
-                                              @"ORKActiveStep.requestedPermissions",
+                                              @"ORKImageCaptureStep.templateImage",
+                                              @"ORKStep.requestedPermissions",
                                               @"ORKOrderedTask.providesBackgroundAudioPrompts",
                                               @"ORKScaleAnswerFormat.numberFormatter",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
@@ -368,6 +369,8 @@
             [instance setValue:@"blah" forKey:@"value"];
         } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
             [instance setValue:[NSURL URLWithString:@"http://www.apple.com/"] forKey:@"customAnimationURL"];
+        } else if ([aClass isSubclassOfClass:[ORKImageCaptureStep class]]) {
+            [instance setValue:[NSValue valueWithUIEdgeInsets:(UIEdgeInsets){1,1,1,1}] forKey:@"templateImageInsets"];
         }
         
         // Serialization
@@ -500,6 +503,7 @@
                                               // Images: ignored so we can do the equality test and pass
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
+                                              @"ORKImageCaptureStep.templateImage",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",

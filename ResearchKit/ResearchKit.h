@@ -39,6 +39,7 @@
 #import <ResearchKit/ORKInstructionStep.h>
 #import <ResearchKit/ORKFormStep.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
+#import <ResearchKit/ORKImageCaptureStep.h>
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>

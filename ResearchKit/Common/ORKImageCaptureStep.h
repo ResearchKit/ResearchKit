@@ -1,21 +1,21 @@
 /*
- Copyright (c) 2015, Shazino SAS. All rights reserved.
-
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
-
+ 
  1.  Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
-
+ 
  2.  Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation and/or
  other materials provided with the distribution.
-
+ 
  3.  Neither the name of the copyright holder(s) nor the names of any contributors
  may be used to endorse or promote products derived from this software without
  specific prior written permission. No license is granted to the trademarks of
  the copyright holders even if such marks are included in this software.
-
+ 
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -28,34 +28,41 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKToneAudiometryInstructionStepViewController.h"
 
-#import "ORKAudioGenerator.h"
+#import <ResearchKit/ResearchKit.h>
 
-@interface ORKToneAudiometryInstructionStepViewController ()
 
-@property (nonatomic, strong) ORKAudioGenerator *audioGenerator;
+/**
+ The `ORKImageCaptureStep` class represents a step that captures an image via the device
+ camera.  A template image can optionally be overlaid the camera preview to assist in properly
+ capturing the image.
+ 
+ To use the image capture step, optionally set the `templateImage` and `templateImageInsets`
+ properties, incorporate the step into a task, and present the task with a task view controller.
+ 
+ If implementing an image capture task like this one, remember that people will
+ take your instructions literally. So, be cautious. Make sure your template image
+ is high contrast and very visible against a variety of backgrounds.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKImageCaptureStep : ORKStep
 
-@end
+/**
+ An image to be displayed over the camera preview.
+ 
+ The image will be stretched to fit the available space while retaining its aspect ratio.
+ When choosing a size for this asset, be sure to take into account the variations in device
+ form factors.
+ */
+@property (nonatomic, strong) UIImage *templateImage;
 
-@implementation ORKToneAudiometryInstructionStepViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.audioGenerator = [ORKAudioGenerator new];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [self.audioGenerator playSoundAtFrequency:1000];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    [self.audioGenerator stop];
-}
+/**
+ Insets to be used in positioning and sizing the `templateImage`.
+ 
+ The insets are interpreted as percentages relative to the preview frame size.  The `left`
+ and `right` insets are relative to the width of the preview frame.  The `top` and `bottom`
+ insets are relative to the height of the preview frame.
+ */
+@property (nonatomic) UIEdgeInsets templateImageInsets;
 
 @end

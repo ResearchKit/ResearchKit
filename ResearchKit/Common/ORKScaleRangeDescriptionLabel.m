@@ -30,13 +30,16 @@
 
 
 #import "ORKScaleRangeDescriptionLabel.h"
-
+#import "ORKSkin.h"
 
 @implementation ORKScaleRangeDescriptionLabel
 
-+ (UIFont *)defaultFont {
-    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleCaption1];
-    return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.textColor = [UIColor ork_grayColor];
+    }
+    return self;
 }
 
 @end

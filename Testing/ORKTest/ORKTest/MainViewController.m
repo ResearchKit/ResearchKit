@@ -47,6 +47,7 @@ static NSString * const MiniFormTaskIdentifier = @"miniform";
 static NSString * const ScreeningTaskIdentifier = @"screening";
 static NSString * const ScalesTaskIdentifier = @"scales";
 static NSString * const ImageChoicesTaskIdentifier = @"images";
+static NSString * const ImageCaptureTaskIdentifier = @"imageCapture";
 static NSString * const AudioTaskIdentifier = @"audio";
 static NSString * const ToneAudiometryTaskIdentifier = @"tone_audiometry";
 static NSString * const FitnessTaskIdentifier = @"fitness";
@@ -240,6 +241,22 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         buttons[buttonKeys.lastObject] = button;
     }
 
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showImageCapture:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Image Capture" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"imageCapture"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(toggleTintColor:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Toggle Tint Color" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"toggleTintColor"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -374,6 +391,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         return [self makeScalesTask];
     } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
         return [self makeImageChoicesTask];
+    } else if ([identifier isEqualToString:ImageCaptureTaskIdentifier]) {
+        return [self makeImageCaptureTask];
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
@@ -1626,7 +1645,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
         scaleAnswerFormat.numberStyle = ORKNumberFormattingStylePercent;
         
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_07"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_11"
                                                                       title:@"How much has your mood improved?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
@@ -1765,8 +1784,95 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
 }
 
+# pragma mark - Image Capture
+- (id<ORKTask>)makeImageCaptureTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    /*
+     If implementing an image capture task like this one, remember that people will
+     take your instructions literally. So, be cautious. Make sure your template image
+     is high contrast and very visible against a variety of backgrounds.
+     */
+     
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
+        step.title = @"Hands";
+        step.image = [[UIImage imageNamed:@"hands_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"In this step we will capture images of both of your hands";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Let's start by capturing an image of your right hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your right hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
+        step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Now let's capture an image of your left hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your left hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
+        step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+        step.title = @"Complete";
+        step.detailText = @"Hand image capture complete";
+        [steps addObject:step];
+    }
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageCaptureTaskIdentifier steps:steps];
+    return task;
+    
+}
+- (IBAction)showImageCapture:(id)sender {
+    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
+}
 - (IBAction)showStepNavigationTask:(id)sender {
     [self beginTaskWithIdentifier:StepNavigationTaskIdentifier];
+}
+
+- (IBAction)toggleTintColor:(id)sender {
+    static UIColor *defaultTintColor = nil;
+    if (!defaultTintColor) {
+        defaultTintColor = self.view.tintColor;
+    }
+    if ([[UIView appearance].tintColor isEqual:[UIColor redColor]]) {
+        [UIView appearance].tintColor = defaultTintColor;
+    } else {
+        [UIView appearance].tintColor = [UIColor redColor];
+    }
+    // Update appearance
+    UIView *superview = self.view.superview;
+    [self.view removeFromSuperview];
+    [superview addSubview:self.view];
 }
 
 #pragma mark - Step navigation task
@@ -1786,12 +1892,12 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                                     textChoices:textChoices];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"symptom" title:@"What is your symptom?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"symptom" title:@"Which is your most severe symptom?" answer:answerFormat];
     step.optional = NO;
     [steps addObject:step];
 
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom interferes with your daily life?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom interfere with your daily life?" answer:answerFormat];
     step.optional = NO;
     [steps addObject:step];
 
@@ -1808,7 +1914,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [steps addObject:step];
 
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"other_symptom"];
-    step.title = @"You have other symptom";
+    step.title = @"Your symptom is not a headache";
     [steps addObject:step];
 
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
