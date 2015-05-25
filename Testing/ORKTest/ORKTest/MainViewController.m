@@ -1853,33 +1853,33 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
     // the regular ORKOrderedTask order applies).
     NSMutableArray *resultPredicates = [NSMutableArray new];
-    NSMutableArray *matchingStepIdentifiers = [NSMutableArray new];
+    NSMutableArray *destinationStepIdentifiers = [NSMutableArray new];
     
     [resultPredicates addObject:predicateNotHeadache];
-    [matchingStepIdentifiers addObject:@"other_symptom"];
+    [destinationStepIdentifiers addObject:@"other_symptom"];
     
     ORKPredicateStepNavigationRule *predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                             matchingStepIdentifiers:matchingStepIdentifiers];
+                                          destinationStepIdentifiers:destinationStepIdentifiers];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
     resultPredicates = [NSMutableArray new];
-    matchingStepIdentifiers = [NSMutableArray new];
+    destinationStepIdentifiers = [NSMutableArray new];
     
     NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:@"severe_headache"];
+    [destinationStepIdentifiers addObject:@"severe_headache"];
 
     predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:@"light_headache"];
+    [destinationStepIdentifiers addObject:@"light_headache"];
     
     predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                             matchingStepIdentifiers:matchingStepIdentifiers];
+                                          destinationStepIdentifiers:destinationStepIdentifiers];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     

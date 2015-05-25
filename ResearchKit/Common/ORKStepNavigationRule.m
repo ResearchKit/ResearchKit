@@ -82,7 +82,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 @interface ORKPredicateStepNavigationRule ()
 
 @property (nonatomic, copy) NSArray *resultPredicates;
-@property (nonatomic, copy) NSArray *matchingStepIdentifiers;
+@property (nonatomic, copy) NSArray *destinationStepIdentifiers;
 @property (nonatomic, copy) NSString *defaultStepIdentifier;
 
 @end
@@ -92,26 +92,26 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 // Internal init without array validation, for serialization support
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays {
     if (validateArrays) {
         ORKThrowInvalidArgumentExceptionIfNil(resultPredicates);
-        ORKThrowInvalidArgumentExceptionIfNil(matchingStepIdentifiers);
+        ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifiers);
         
         NSUInteger resultPredicatesCount = [resultPredicates count];
-        NSUInteger matchingStepIdentifiersCount = [matchingStepIdentifiers count];
+        NSUInteger destinationStepIdentifiersCount = [destinationStepIdentifiers count];
         if (resultPredicatesCount == 0) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates can not be an empty array" userInfo:nil];
         }
-        if (resultPredicatesCount != matchingStepIdentifiersCount) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Each predicate in resultPredicates must have a matching step identifier in matchingStepIdentifiers" userInfo:nil];
+        if (resultPredicatesCount != destinationStepIdentifiersCount) {
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Each predicate in resultPredicates must have a destination step identifier in destinationStepIdentifiers" userInfo:nil];
         }
     }
     self = [super init_ork];
     if (self) {
         self.resultPredicates = resultPredicates;
-        self.matchingStepIdentifiers = matchingStepIdentifiers;
+        self.destinationStepIdentifiers = destinationStepIdentifiers;
         self.defaultStepIdentifier = defaultStepIdentifier;
     }
     
@@ -121,19 +121,19 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier {
     return [self initWithResultPredicates:resultPredicates
-                      matchingStepIdentifiers:matchingStepIdentifiers
+               destinationStepIdentifiers:destinationStepIdentifiers
                         defaultStepIdentifier:defaultStepIdentifier
                            validateArrays:YES];
 }
 #pragma clang diagnostic pop
 
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers {
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers {
     return [self initWithResultPredicates:resultPredicates
-                  matchingStepIdentifiers:matchingStepIdentifiers
+               destinationStepIdentifiers:destinationStepIdentifiers
                     defaultStepIdentifier:nil];
 }
 
@@ -174,7 +174,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     }
     ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
 
-    NSString *matchedPredicateIdentifier = nil;
+    NSString *destinationStepIdentifier = nil;
     for (NSInteger i = 0; i < [_resultPredicates count]; i++) {
         NSPredicate *predicate = _resultPredicates[i];
         // The predicate can either have:
@@ -182,11 +182,11 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
         // - a hardcoded task identifier set by the developer (the substituionVariables dictionary is ignored in this case)
         if ([predicate evaluateWithObject:allTaskResults
                     substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: taskResult.identifier}]) {
-            matchedPredicateIdentifier = _matchingStepIdentifiers[i];
+            destinationStepIdentifier = _destinationStepIdentifiers[i];
             break;
         }
     }
-    return matchedPredicateIdentifier ? : _defaultStepIdentifier;
+    return destinationStepIdentifier ? : _defaultStepIdentifier;
 }
 
 #pragma mark NSSecureCoding
@@ -199,7 +199,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, resultPredicates, NSPredicate);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, matchingStepIdentifiers, NSString);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, destinationStepIdentifiers, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, defaultStepIdentifier, NSString);
         ORK_DECODE_OBJ_ARRAY(aDecoder, additionalTaskResults, ORKTaskResult);
     }
@@ -209,7 +209,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, resultPredicates);
-    ORK_ENCODE_OBJ(aCoder, matchingStepIdentifiers);
+    ORK_ENCODE_OBJ(aCoder, destinationStepIdentifiers);
     ORK_ENCODE_OBJ(aCoder, defaultStepIdentifier);
     ORK_ENCODE_OBJ(aCoder, additionalTaskResults);
 }
@@ -219,7 +219,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 - (instancetype)copyWithZone:(NSZone *)zone {
     typeof(self) rule = [[[self class] allocWithZone:zone] init];
     rule->_resultPredicates = ORKArrayCopyObjects(_resultPredicates);
-    rule->_matchingStepIdentifiers = ORKArrayCopyObjects(_matchingStepIdentifiers);
+    rule->_destinationStepIdentifiers = ORKArrayCopyObjects(_destinationStepIdentifiers);
     rule->_defaultStepIdentifier = [_defaultStepIdentifier copy];
     rule->_additionalTaskResults = ORKArrayCopyObjects(_additionalTaskResults);
     return rule;
@@ -230,13 +230,13 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     __typeof(self) castObject = object;
     return (isParentSame
             && ORKEqualObjects(self.resultPredicates, castObject.resultPredicates)
-            && ORKEqualObjects(self.matchingStepIdentifiers, castObject.matchingStepIdentifiers)
+            && ORKEqualObjects(self.destinationStepIdentifiers, castObject.destinationStepIdentifiers)
             && ORKEqualObjects(self.defaultStepIdentifier, castObject.defaultStepIdentifier)
             && ORKEqualObjects(self.additionalTaskResults, castObject.additionalTaskResults));
 }
 
 - (NSUInteger)hash {
-    return [_resultPredicates hash] ^ [_matchingStepIdentifiers hash] ^ [_defaultStepIdentifier hash] ^ [_additionalTaskResults hash];
+    return [_resultPredicates hash] ^ [_destinationStepIdentifiers hash] ^ [_defaultStepIdentifier hash] ^ [_additionalTaskResults hash];
 }
 
 @end

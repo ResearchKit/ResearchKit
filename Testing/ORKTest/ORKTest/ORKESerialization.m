@@ -308,13 +308,13 @@ ret =
    ENTRY(ORKPredicateStepNavigationRule,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKPredicateStepNavigationRule *rule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:GETPROP(dict, resultPredicates)
-                                                                                             matchingStepIdentifiers:GETPROP(dict, matchingStepIdentifiers)
+                                                                                          destinationStepIdentifiers:GETPROP(dict, destinationStepIdentifiers)
                                                                                                defaultStepIdentifier:GETPROP(dict, defaultStepIdentifier)
                                                                                                       validateArrays:NO];
              return rule;
          },(@{
               PROPERTY(resultPredicates, NSPredicate, NSArray, NO, nil, nil),
-              PROPERTY(matchingStepIdentifiers, NSString, NSArray, NO, nil, nil),
+              PROPERTY(destinationStepIdentifiers, NSString, NSArray, NO, nil, nil),
               PROPERTY(defaultStepIdentifier, NSString, NSObject, NO, nil, nil),
               PROPERTY(additionalTaskResults, ORKTaskResult, NSArray, YES, nil, nil)
               })),
