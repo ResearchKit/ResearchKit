@@ -40,11 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates,
- matching step identifiers, and an optional default step identifier.
+ destination step identifiers, and an optional default step identifier.
  
  @param resultPredicates            An array of result predicates. Each result predicate can match
                                         one or more step results in the ongoing task.
- @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+ @param destinationStepIdentifiers  An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
                                         in `resultPredicates`.
  @param defaultStepIdentifier       The identifier of the step which will be used if none of the
@@ -53,13 +53,13 @@ NS_ASSUME_NONNULL_BEGIN
                                     behavior takes place (i.e, the task goes to the next step in
                                     order).
  @param validateArrays              `YES` to throw an exception if `resultPredicates` or
-                                        `matchingStepIdentifiers` are `nil` or empty; `NO` to skip
+                                        `destinationStepIdentifiers` are `nil` or empty; `NO` to skip
                                         their validation.
  
  @return An initialized predicate step navigation rule.
  */
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
 

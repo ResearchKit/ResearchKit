@@ -195,33 +195,33 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
     // the regular ORKOrderedTask order applies).
     NSMutableArray *resultPredicates = [NSMutableArray new];
-    NSMutableArray *matchingStepIdentifiers = [NSMutableArray new];
+    NSMutableArray *destinationStepIdentifiers = [NSMutableArray new];
     
     [resultPredicates addObject:predicateNotHeadache];
-    [matchingStepIdentifiers addObject:OtherSymptomStepIdentifier];
+    [destinationStepIdentifiers addObject:OtherSymptomStepIdentifier];
     
     ORKPredicateStepNavigationRule *predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                             matchingStepIdentifiers:matchingStepIdentifiers];
+                                          destinationStepIdentifiers:destinationStepIdentifiers];
     
     [_navigableOrderedTask setNavigationRule:predicateRule forTriggerStepIdentifier:SymptomStepIdentifier];
     _stepNavigationRules[SymptomStepIdentifier] = [predicateRule copy];
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
     resultPredicates = [NSMutableArray new];
-    matchingStepIdentifiers = [NSMutableArray new];
+    destinationStepIdentifiers = [NSMutableArray new];
     
     NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:SevereHeadacheStepIdentifier];
+    [destinationStepIdentifiers addObject:SevereHeadacheStepIdentifier];
     
     predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
     [resultPredicates addObject:predicate];
-    [matchingStepIdentifiers addObject:LightHeadacheStepIdentifier];
+    [destinationStepIdentifiers addObject:LightHeadacheStepIdentifier];
     
     predicateRule =
     [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                             matchingStepIdentifiers:matchingStepIdentifiers
+                                          destinationStepIdentifiers:destinationStepIdentifiers
                                                defaultStepIdentifier:OtherSymptomStepIdentifier];
     
     [_navigableOrderedTask setNavigationRule:predicateRule forTriggerStepIdentifier:SeverityStepIdentifier];
@@ -649,28 +649,28 @@ ORKDefineStringKey(AdditionalTextValue);
     ORKTaskResult *additionalTaskResult = nil;
     
     NSArray *resultPredicates = nil;
-    NSArray *matchingStepIdentifiers = nil;
+    NSArray *destinationStepIdentifiers = nil;
     NSString *defaultStepIdentifier = nil;
     
     // Test predicate step navigation rule initializers
     predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
                                                                         expectedString:TextValue];
     resultPredicates = @[ predicate ];
-    matchingStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
+    destinationStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                             matchingStepIdentifiers:matchingStepIdentifiers];
+                                                          destinationStepIdentifiers:destinationStepIdentifiers];
 
     XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
-    XCTAssertEqualObjects(predicateRule.matchingStepIdentifiers, ORKArrayCopyObjects(matchingStepIdentifiers));
+    XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
     XCTAssertNil(predicateRule.defaultStepIdentifier);
 
     defaultStepIdentifier = DefaultDestinationStepIdentifier;
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                             matchingStepIdentifiers:matchingStepIdentifiers
+                                                          destinationStepIdentifiers:destinationStepIdentifiers
                                                                defaultStepIdentifier:defaultStepIdentifier];
 
     XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
-    XCTAssertEqualObjects(predicateRule.matchingStepIdentifiers, ORKArrayCopyObjects(matchingStepIdentifiers));
+    XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
     XCTAssertEqualObjects(predicateRule.defaultStepIdentifier, defaultStepIdentifier);
 
     // Predicate matching, no additional task results, matching
@@ -680,7 +680,7 @@ ORKDefineStringKey(AdditionalTextValue);
     predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
                                                                         expectedString:TextValue];
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                defaultStepIdentifier:DefaultDestinationStepIdentifier];
 
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
@@ -692,7 +692,7 @@ ORKDefineStringKey(AdditionalTextValue);
     predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
                                                                         expectedString:OtherTextValue];
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                defaultStepIdentifier:DefaultDestinationStepIdentifier];
     taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
     XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
@@ -706,7 +706,7 @@ ORKDefineStringKey(AdditionalTextValue);
                                                                                          expectedString:AdditionalTextValue];
     predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                             matchingStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                defaultStepIdentifier:DefaultDestinationStepIdentifier];
     
     taskResult = [ORKTaskResult new];
