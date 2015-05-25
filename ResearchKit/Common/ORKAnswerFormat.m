@@ -237,6 +237,28 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                       minimumValueDescription:minimumValueDescription];
 }
 
++ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
+                                               minimumValue:(NSInteger)scaleMinimum
+                                               defaultValue:(NSInteger)defaultValue
+                                                       step:(NSInteger)step
+                                                   vertical:(BOOL)vertical {
+    return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                 minimumValue:scaleMinimum
+                                                 defaultValue:defaultValue
+                                                         step:step
+                                                     vertical:vertical];
+}
+
++ (ORKScaleAnswerFormat *)scaleAnswerFormatWithMaximumValue:(NSInteger)scaleMaximum
+                                               minimumValue:(NSInteger)scaleMinimum
+                                               defaultValue:(NSInteger)defaultValue
+                                                       step:(NSInteger)step {
+    return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                 minimumValue:scaleMinimum
+                                                 defaultValue:defaultValue
+                                                         step:step];
+}
+
 + (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
                                                                    minimumValue:(double)scaleMinimum
                                                                    defaultValue:(double)defaultValue
@@ -251,6 +273,28 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                                vertical:vertical
                                                 maximumValueDescription:maximumValueDescription
                                                 minimumValueDescription:minimumValueDescription];
+}
+
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                                   defaultValue:(double)defaultValue
+                                                          maximumFractionDigits:(NSInteger)maximumFractionDigits
+                                                                       vertical:(BOOL)vertical {
+    return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                           minimumValue:scaleMinimum
+                                                           defaultValue:defaultValue
+                                                  maximumFractionDigits:maximumFractionDigits
+                                                               vertical:vertical];
+}
+
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                                   defaultValue:(double)defaultValue
+                                                          maximumFractionDigits:(NSInteger)maximumFractionDigits {
+    return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                           minimumValue:scaleMinimum
+                                                           defaultValue:defaultValue
+                                                  maximumFractionDigits:maximumFractionDigits];
 }
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
