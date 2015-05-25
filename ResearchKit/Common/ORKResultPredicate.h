@@ -197,7 +197,7 @@ ORK_CLASS_AVAILABLE
  @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
                                 to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
- @param expectedAnswer      The expected string answer.
+ @param expectedString      The expected string answer.
  
  @return A result predicate.
  */
@@ -210,12 +210,12 @@ ORK_CLASS_AVAILABLE
  the specified string.
  
  @param resultIdentifier    The identifier of the question result you are interested in.
- @param expectedAnswer      The expected string answer.
+ @param expectedString      The expected string answer.
  
  @return A result predicate.
  */
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                     expectedString:(NSString *)expectedString;
+                                                       expectedString:(NSString *)expectedString;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
@@ -344,8 +344,6 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer is equal to the
  specified string.
  
- @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
-                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param expectedString      The expected result string.
  
@@ -373,8 +371,6 @@ ORK_CLASS_AVAILABLE
  Returns a predicate matching a result of type `ORKTextQuestionResult` whose answer matches the
  specified regular expression pattern.
  
- @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
-                                to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
  @param pattern             An ICU-compliant regular expression pattern that matches the answer string.
  
