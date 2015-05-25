@@ -41,9 +41,9 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKConsentSceneViewController.h"
 #import "ORKConsentSceneViewController_Internal.h"
+#import "ORKConsentSection_Internal.h"
 #import "ORKConsentDocument.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ORKConsentSection+AssetLoading.h"
 #import "ORKVisualConsentTransitionAnimator.h"
 #import "ORKEAGLMoviePlayerView.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"

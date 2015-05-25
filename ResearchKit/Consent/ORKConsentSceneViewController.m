@@ -38,7 +38,6 @@
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "ORKConsentSection+AssetLoading.h"
 #import "ORKConsentDocument_Internal.h"
 #import "ORKConsentSection_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
@@ -74,14 +73,7 @@
     self.headerView.instructionLabel.hidden = ! [[consentSection summary] length];
     self.headerView.captionLabel.text = consentSection.title;
     
-    UIImage *image = nil;
-    if (consentSection.type == ORKConsentSectionTypeCustom) {
-        image = consentSection.customImage;
-    } else {
-        image = ORKImageForConsentSectionType(consentSection.type);
-    }
-    
-    self.imageView.image = image;
+    self.imageView.image = consentSection.image;
     self.headerView.instructionLabel.text = [consentSection summary];
     
     self.continueSkipContainer.continueEnabled = YES;
