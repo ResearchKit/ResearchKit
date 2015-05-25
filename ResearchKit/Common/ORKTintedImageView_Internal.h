@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,14 +29,13 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKConsentSection.h"
+#import <UIKit/UIKit.h>
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKTintedImageCache : NSCache
 
-NSURL *__nullable ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
++ (instancetype)sharedCache;
 
-UIImage *__nullable ORKImageForConsentSectionType(ORKConsentSectionType type);
+- (void)cacheImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
 
-NS_ASSUME_NONNULL_END
+@end

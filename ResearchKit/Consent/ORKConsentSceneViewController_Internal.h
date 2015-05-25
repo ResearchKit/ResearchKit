@@ -30,9 +30,17 @@
 
 
 #import "ORKStepViewController.h"
+#import "ORKVerticalContainerView.h"
+
+
+@interface ORKConsentSceneView : ORKVerticalContainerView
+
+@end
 
 
 @interface ORKConsentSceneViewController ()
+
+@property (nonatomic, readonly) ORKConsentSceneView *sceneView;
 
 @property (nonatomic, readonly) UIScrollView *scrollView;
 
