@@ -36,4 +36,6 @@
 
 + (instancetype)sharedCache;
 
+- (void)cacheImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale;
+
 @end

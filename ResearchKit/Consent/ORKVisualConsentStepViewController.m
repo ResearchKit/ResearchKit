@@ -263,7 +263,7 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES preloadNextViewController:NO];
+    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES preloadNextConsentSectionImage:NO];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
@@ -332,7 +332,7 @@
 }
 
 - (NSUInteger)pageCount {
-    return _visualSections.count;
+    return [_visualSections count];
 }
 
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
@@ -511,23 +511,30 @@
     }
 }
 
-- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
-    [self showViewController:viewController forward:forward animated:animated preloadNextViewController:YES];
+- (ORKConsentSection *)consentSectionForIndex:(NSUInteger)index {
+    ORKConsentSection *consentSection = nil;
+    NSArray *visualSections = [self visualSections];
+    if (index < [visualSections count]) {
+        consentSection = visualSections[index];
+    }
+    return consentSection;
 }
 
-- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated preloadNextViewController:(BOOL)preloadNextViewController {
+- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
+    [self showViewController:viewController forward:forward animated:animated preloadNextConsentSectionImage:YES];
+}
+
+- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated preloadNextConsentSectionImage:(BOOL)preloadNextViewController {
     [self showViewController:viewController
                      forward:forward
                     animated:animated
                   completion:^(BOOL finished) {
                       if (preloadNextViewController) {
-                          ORKConsentSceneViewController *nextViewController = [self viewControllerForIndex:[self currentIndex]+1];
-                          ORKConsentSceneView *currentSceneView = viewController.sceneView;
-                          // Load next controller view into memory
-                          __unused UIView *view = nextViewController.view;
-                          ORKConsentSceneView *nextSceneView = nextViewController.sceneView;
-                          [nextSceneView.imageView cacheImageForTintColor:currentSceneView.imageView.tintColor
-                                                                    scale:currentSceneView.imageView.window.screen.scale];
+                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex]+1];
+                          ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
+                          [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
+                                                              tintColor:currentSceneImageView.tintColor
+                                                                  scale:currentSceneImageView.window.screen.scale];
                       }
                   }];
 }
@@ -624,7 +631,7 @@
     
     if (_viewControllers[@(index)]) {
         consentViewController = _viewControllers[@(index)];
-    } else if (index>=[self pageCount]) {
+    } else if (index >= [self pageCount]) {
         consentViewController = nil;
     } else {
         ORKConsentSceneViewController *sceneViewController = [[ORKConsentSceneViewController alloc] initWithSection:[self visualSections][index]];

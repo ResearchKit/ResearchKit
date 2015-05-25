@@ -136,6 +136,10 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     return tintedImage;
 }
 
+- (void)cacheImage:(UIImage *)image tintColor:(UIColor *)tintColor scale:(CGFloat)scale {
+    [[ORKTintedImageCache sharedCache] tintedImageForImage:image tintColor:tintColor scale:scale];
+}
+
 @end
 
 
@@ -206,12 +210,6 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
     [super didMoveToWindow];
     // recompute for new screen.scale
     self.image = _originalImage;
-}
-
-- (void)cacheImageForTintColor:(UIColor *)tintColor scale:(CGFloat)scale {
-    if (_enableTintedImageCaching) {
-        [[ORKTintedImageCache sharedCache] tintedImageForImage:_originalImage tintColor:tintColor scale:scale];
-    }
 }
 
 @end
