@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKScaleRangeLabel;
 @class ORKScaleValueLabel;
+@class ORKScaleRangeDescriptionLabel;
 
 @interface ORKScaleSliderView : UIView
 
@@ -51,6 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) ORKScaleRangeLabel *leftRangeLabel;
 
 @property (nonatomic, strong, readonly) ORKScaleRangeLabel *rightRangeLabel;
+
+@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *leftRangeDescriptionLabel;
+
+@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
 
 @property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
 

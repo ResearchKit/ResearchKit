@@ -33,6 +33,7 @@
 #import "ORKTintedImageView.h"
 #import "ORKHelpers.h"
 #import <tgmath.h>
+#import "ORKDefines_Private.h"
 
 
 @interface ORKImageCaptureCameraPreviewView ()
@@ -182,6 +183,20 @@
 
 - (void)setVideoOrientation:(AVCaptureVideoOrientation)videoOrientation {
     _previewLayer.connection.videoOrientation = videoOrientation;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return YES;
+}
+
+- (NSString * __nullable)accessibilityLabel {
+    return ORKLocalizedString(@"AX_IMAGE_CAPTURE_LABEL", nil);
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    return [super accessibilityTraits] | UIAccessibilityTraitImage;
 }
 
 @end

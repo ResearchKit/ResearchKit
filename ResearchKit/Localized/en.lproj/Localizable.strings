@@ -253,3 +253,5 @@
 "AX.MEMORY.TILE.QUIESCENT" = "quiescent";
 "AX.MEMORY.TILE.LABEL" = "Memory game tile";
 
+"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
+
