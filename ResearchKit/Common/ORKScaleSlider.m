@@ -36,6 +36,8 @@
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKSkin.h"
+#import "ORKScaleSliderView.h"
+#import "ORKScaleRangeDescriptionLabel.h"
 
 
 @implementation ORKScaleSlider {
@@ -218,10 +220,16 @@ static CGFloat kPadding = 2.0;
 }
 
 - (NSString *)accessibilityLabel {
-    return [NSString stringWithFormat:
-            ORKLocalizedString(@"AX_SLIDER_LABEL", nil),
-            [self _axFormattedValue:self.minimumValue],
-            [self _axFormattedValue:self.maximumValue]];
+    ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[self ork_superviewOfType:[ORKScaleSliderView class]];
+    NSString *minimumValue = [self _axFormattedValue:self.minimumValue];
+    NSString *maximumValue = [self _axFormattedValue:self.maximumValue];
+    
+    // Include the range description labels if they are set.
+    if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
+        minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@", sliderView.rightRangeDescriptionLabel.text];
+    }
+    return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 
 - (NSString *)accessibilityValue {
