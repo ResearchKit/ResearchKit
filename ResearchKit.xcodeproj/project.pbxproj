@@ -2119,7 +2119,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ! -x /usr/local/bin/appledoc ]; then\n    echo \"error: appledoc is required for building ResearchKit's documentation. See http://appledoc.gentlebytes.com\" 1>&2\n    exit 1\nfi\n\necho \"warning: warnings are a result of https://github.com/tomaz/appledoc/issues/348\"\n\n/usr/local/bin/appledoc --print-settings --publish-docset --install-docset --output \"${BUILT_PRODUCTS_DIR}/docs/\" --include \"docs/ActiveTasks\" --include \"docs/InformedConsent\" --include \"docs/Overview\" --include \"docs/Survey\"  --ignore \"docs/templates\" --templates \"docs/templates\" \"${BUILT_PRODUCTS_DIR}/ResearchKit.framework\" \"docs\"\n\necho \"warning: Opening documentation in browser...\"\nopen \"$HOME/Library/Developer/Shared/Documentation/DocSets/org.researchkit.ResearchKit.docset/Contents/Resources/Documents/index.html\"";
+			shellScript = "if [ ! -x /usr/local/bin/appledoc ]; then\n    echo \"error: appledoc is required for building ResearchKit's documentation. See http://appledoc.gentlebytes.com\" 1>&2\n    exit 1\nfi\n\n/usr/local/bin/appledoc --print-settings --publish-docset --install-docset --output \"${BUILT_PRODUCTS_DIR}/docs/\" --include \"docs/ActiveTasks\" --include \"docs/InformedConsent\" --include \"docs/Overview\" --include \"docs/Survey\"  --ignore \"docs/templates\" --templates \"docs/templates\" \"${BUILT_PRODUCTS_DIR}/ResearchKit.framework\" \"docs\"\n\necho \"note: Opening documentation in browser...\"\nopen \"$HOME/Library/Developer/Shared/Documentation/DocSets/org.researchkit.ResearchKit.docset/Contents/Resources/Documents/index.html\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
