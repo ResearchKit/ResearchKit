@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
-    ORKScreenMetricVerticalScaleHorizontalMargin,
+    ORKScreenMetricVerticalScaleHeight,
     ORKScreenMetricSignatureViewHeight,
     ORKScreenMetric_COUNT
 };

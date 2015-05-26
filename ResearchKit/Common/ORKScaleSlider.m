@@ -35,11 +35,7 @@
 #import "ORKAccessibility.h"
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
-
-
-@interface ORKScaleSlider ()
-
-@end
+#import "ORKSkin.h"
 
 
 @implementation ORKScaleSlider {
@@ -79,6 +75,7 @@
         _vertical = vertical;
         self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
         _thumbImageNeedsTransformUpdate = YES;
+        [self invalidateIntrinsicContentSize];
     }
 }
 
@@ -109,13 +106,9 @@
 
 - (CGSize)intrinsicContentSize {
     CGSize intrinsicContentSize = [super intrinsicContentSize];
-    // If we have a layout width provided by our delegate and we are vertical, use the provided
-    // width for the intrinsic content height, and leave the intrinsic content width alone.
-    // The intrinsic content width is typically -1, which will allow the slider to fill the
-    // available width in the superview.
-    CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
-    if(_vertical && sliderLayoutWidth > 0) {
-        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth);
+    if (_vertical) {
+        CGFloat verticalScaleHeight = ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHeight, self.window);
+        intrinsicContentSize = (CGSize){.width = verticalScaleHeight, .height = verticalScaleHeight};
     }
     return intrinsicContentSize;
 }

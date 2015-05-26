@@ -41,7 +41,7 @@
 
 // #define LAYOUT_DEBUG 1
 
-@interface ORKScaleSliderView () <ORKScaleSliderLayoutWidthProvider>
+@interface ORKScaleSliderView ()
 
 @property (nonatomic, strong) id<ORKScaleAnswerFormatProvider> formatProvider;
 
@@ -56,8 +56,6 @@
 @property (nonatomic, strong) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
 
 @property (nonatomic, strong) ORKScaleValueLabel *valueLabel;
-
-@property (nonatomic) CGFloat previousLayoutWidth;
 
 @end
 
@@ -102,11 +100,13 @@
             // Keep the shadow of the thumb inside the bounds
             const CGFloat kSliderMargin = 20.0;
             const CGFloat kSideLabelMargin = 24;
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kVerticalSliderHorizontalMargin-[_slider]-kVerticalSliderHorizontalMargin-|"
-                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:@{@"kVerticalSliderHorizontalMargin": @(ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHorizontalMargin, self.window))}
-                                                       views:views]];
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:_slider
+                                                             attribute:NSLayoutAttributeCenterX
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self
+                                                             attribute:NSLayoutAttributeCenterX
+                                                            multiplier:1.0
+                                                              constant:0.0]];
             
             [self addConstraints:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
@@ -246,7 +246,6 @@
     if (self) {
         self.slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
         self.slider.userInteractionEnabled = YES;
-        self.slider.delegate = self;
         self.slider.contentMode = UIViewContentModeRedraw;
         [self addSubview:_slider];
         
@@ -300,25 +299,6 @@
 - (IBAction)sliderValueChanged:(id)sender {
     NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(self.slider.value)];
     [self setCurrentValue:newValue];
-}
-
-- (CGFloat)sliderLayoutWidth {
-    // Use the delegate expected width, if available, or if we have no delegate, then use our own width.
-    // Subtract the left and right margins from the width, to give the appropriate slider width.
-    return (self.delegate ? self.delegate.sliderLayoutWidth : self.previousLayoutWidth) -
-    (ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHorizontalMargin, self.window) * 2);
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    // This is currently only used by vertical sliders, but keep track of the width to implement the Protocol anyway
-    CGFloat currentLayoutWidth = self.delegate ? self.delegate.sliderLayoutWidth : self.bounds.size.width;
-    if (self.previousLayoutWidth != currentLayoutWidth) {
-        self.previousLayoutWidth = currentLayoutWidth;
-        if ([_formatProvider isVertical]) {
-            [self.slider invalidateIntrinsicContentSize];
-        }
-    }
 }
 
 #pragma mark - Accessibility
