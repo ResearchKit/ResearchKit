@@ -207,7 +207,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     
     if(_section.contentURL)
     {
-        viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentRequest:_section.contentURL];
+        viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
     }else{
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }
