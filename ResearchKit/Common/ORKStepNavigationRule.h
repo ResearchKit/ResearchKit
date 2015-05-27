@@ -92,7 +92,7 @@ ORK_CLASS_AVAILABLE
  (each predicate can match one or more step results within the task).
  
  Predicate step navigations rules contain an arbitrary number of result predicates with a
- corresponding number of matching step identifiers, plus an optional default step identifier that is
+ corresponding number of destination step identifiers, plus an optional default step identifier that is
  used if none of the result predicates match. One result predicate can match one or more question
  results; if matching several question results, they can belong to the same or to different task
  results). This allows you to define arbitrarily complex task navigation behaviors.
@@ -108,12 +108,12 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates,
- matching step identifiers, and an optional default step identifier.
+ destination step identifiers, and an optional default step identifier.
  
  @param resultPredicates            An array of result predicates. Each result predicate can match
                                         one or more question results in the ongoing task result or
                                         in any of the additional task results.
- @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+ @param destinationStepIdentifiers  An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
                                         in `resultPredicates`.
  @param defaultStepIdentifier       The identifier of the step which will be used if none of the
@@ -125,24 +125,24 @@ ORK_CLASS_AVAILABLE
  @return An initialized predicate step navigation rule.
  */
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
                    defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates and
- matching step identifiers.
+ destination step identifiers.
  
  @param resultPredicates            An array of result predicates. Each result predicate can match
                                         one or more question results in the ongoing task result or
                                         in any of the additional task results.
- @param matchingStepIdentifiers     An array of possible destination step identifiers. This array
+ @param destinationStepIdentifiers  An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
                                         in resultPredicates.
  
  @return An initialized predicate step navigation rule.
  */
 - (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-                 matchingStepIdentifiers:(NSArray *)matchingStepIdentifiers;
+              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers;
 
 /**
  Returns a new predicate step navigation rule initialized from data in the given unarchiver.
@@ -172,7 +172,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  The array of result predicates. It contains one result predicate for each of the step identifiers
- in `matchingStepIdentifiers`.
+ in `destinationStepIdentifiers`.
 */
 @property (nonatomic, copy, readonly) NSArray *resultPredicates;
 
@@ -180,7 +180,7 @@ ORK_CLASS_AVAILABLE
  The array of destination step identifiers. It contains one step identifier for each of the
  predicates in `resultPredicates`.
  */
-@property (nonatomic, copy, readonly) NSArray *matchingStepIdentifiers;
+@property (nonatomic, copy, readonly) NSArray *destinationStepIdentifiers;
 
 /**
  The identifier of the step which will be used if none of the result predicates match.

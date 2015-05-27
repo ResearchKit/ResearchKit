@@ -35,6 +35,33 @@
 #import "ORKDefines_Private.h"
 
 
+static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
+    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
+    fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
+    return fullMovieName;
+}
+
+NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    
+    // For iPad, use the movie for the next scale up
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && scale < 3) {
+        scale++;
+    }
+    
+    NSURL *url = [ORKAssetsBundle() URLForResource:movieNameForType(type, scale) withExtension:@"m4v"];
+    if (url == nil) {
+        // This can fail on 3x devices when the display is set to zoomed. Try an asset at 2x instead.
+        url = [ORKAssetsBundle() URLForResource:movieNameForType(type, 2.0) withExtension:@"m4v"];
+    }
+    return url;
+}
+
+UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
+    NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
+    return [UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil];
+}
+
 // Copied from CFXMLParser.c in http://www.opensource.apple.com/source/CF/CF-550.13/CFXMLParser.c
 /*
  At the very least we need to do <, >, &, ", and '. In addition, we'll have to do everything else in the string.
@@ -159,6 +186,16 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
         _escapedContent = [_escapedContent stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
     }
     return _escapedContent;
+}
+
+- (UIImage *)image {
+    UIImage *image = nil;
+    if (_type == ORKConsentSectionTypeCustom) {
+        image = _customImage;
+    } else {
+        image = ORKImageForConsentSectionType(_type);
+    }
+    return image;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

@@ -341,7 +341,7 @@ ORK_CLASS_AVAILABLE
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
  @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.
- @param step                        The size of each discrete offset on the scale.
+ @param maximumFractionDigits       The maximum number of fractional digits to display.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
  @param maximumValueDescription     A localized label to describe the maximum value of the scale. For none, pass `nil`.
  @param minimumValueDescription     A localized label to describe the minimum value of the scale. For none, pass `nil`.
@@ -380,7 +380,7 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
- @param step                    The size of each discrete offset on the scale.
+ @param defaultValue            The default value of the scale. If this value is out of range, the slider is displayed without a default value.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
  
  @return An initialized scale answer format.
