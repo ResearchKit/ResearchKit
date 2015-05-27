@@ -35,43 +35,40 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKBaseGraphView;
+@class ORKGraphView;
 @class ORKRangePoint;
 
 ORK_AVAILABLE_DECL
-@protocol ORKBaseGraphViewDelegate <NSObject>
+@protocol ORKGraphViewDelegate <NSObject>
 
 @optional
+- (void)graphViewTouchesBegan:(ORKGraphView *)graphView;
 
-- (void)graphViewTouchesBegan:(ORKBaseGraphView *)graphView;
+- (void)graphView:(ORKGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition;
 
-- (void)graphView:(ORKBaseGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition;
-
-- (void)graphViewTouchesEnded:(ORKBaseGraphView *)graphView;
+- (void)graphViewTouchesEnded:(ORKGraphView *)graphView;
 
 @end
 
 
 ORK_AVAILABLE_DECL
-@protocol ORKBaseGraphViewDataSource <NSObject>
+@protocol ORKGraphViewDataSource <NSObject>
 
 @required
+- (NSInteger)graphView:(ORKGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
 
-- (NSInteger)graphView:(ORKBaseGraphView *)graphView numberOfPointsInPlot:(NSInteger)plotIndex;
-
-- (ORKRangePoint *)graphView:(ORKBaseGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
+- (ORKRangePoint *)graphView:(ORKGraphView *)graphView plot:(NSInteger)plotIndex valueForPointAtIndex:(NSInteger)pointIndex;
 
 @optional
+- (NSInteger)numberOfPlotsInGraphView:(ORKGraphView *)graphView;
 
-- (NSInteger)numberOfPlotsInGraphView:(ORKBaseGraphView *)graphView;
+- (NSInteger)numberOfDivisionsInXAxisForGraphView:(ORKGraphView *)graphView;
 
-- (NSInteger)numberOfDivisionsInXAxisForGraphView:(ORKBaseGraphView *)graphView;
+- (CGFloat)maximumValueForGraphView:(ORKGraphView *)graphView;
 
-- (CGFloat)maximumValueForGraphView:(ORKBaseGraphView *)graphView;
+- (CGFloat)minimumValueForGraphView:(ORKGraphView *)graphView;
 
-- (CGFloat)minimumValueForGraphView:(ORKBaseGraphView *)graphView;
-
-- (NSString *)graphView:(ORKBaseGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex;
+- (NSString *)graphView:(ORKGraphView *)graphView titleForXAxisAtIndex:(NSInteger)pointIndex;
 
 @end
 
@@ -80,7 +77,7 @@ ORK_AVAILABLE_DECL
  *  IMPORTANT: THIS IS AN ABSTRACT CLASS. IT HOLDS PROPERTIES & METHODS COMMON TO CLASSES LIKE ORKLineGraphView & ORKDiscreteGraphView.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKBaseGraphView : UIView
+@interface ORKGraphView : UIView
 
 @property (nonatomic, readonly) CGFloat minimumValue;
 
@@ -90,9 +87,9 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic) BOOL showsVerticalReferenceLines;
 
-@property (nonatomic, weak, nullable) id <ORKBaseGraphViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <ORKGraphViewDelegate> delegate;
 
-@property (nonatomic, weak) IBOutlet id <ORKBaseGraphViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id <ORKGraphViewDataSource> dataSource;
 
 /* Appearance */
 
@@ -142,7 +139,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, getter=isEmpty) BOOL empty;
 
-- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue;
+- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue;
 
 - (instancetype)initWithValue:(CGFloat)value;
 

@@ -29,16 +29,16 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 */
 
  
-#import "ORKBaseGraphView.h"
-#import "ORKBaseGraphView_Internal.h"
+#import "ORKGraphView.h"
+#import "ORKGraphView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKAxisView.h"
 #import <ResearchKit/ORKCircleView.h>
 
-NSString * const ORKGraphViewTriggerAnimationsNotification = @"ORKGraphViewTriggerAnimationsNotification";
-NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotification";
+NSString *const ORKGraphViewTriggerAnimationsNotification = @"ORKGraphViewTriggerAnimationsNotification";
+NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotification";
 
-@implementation ORKBaseGraphView
+@implementation ORKGraphView
 
 #pragma mark - Init
 
@@ -85,7 +85,6 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
 }
 
 - (void)setupViews {
-    
     self.plotsView = [UIView new];
     self.plotsView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.plotsView];
@@ -123,18 +122,15 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     CGFloat yAxisPadding = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
     
-    //Basic Views
-    
+    // Basic Views
     self.plotsView.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - ORKGraphTopPadding);
-    
     if (self.emptyLabel) {
         self.emptyLabel.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - ORKGraphTopPadding);
     }
     
-    //Scrubber Views
+    // Scrubber Views
     self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), ORKGraphTopPadding, 1, CGRectGetHeight(self.plotsView.frame));
     [self updateScrubberLabel];
     self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame), CGRectGetMinY(self.scrubberThumbView.frame), [self scrubberThumbSize].width, [self scrubberThumbSize].height);
@@ -151,7 +147,7 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
 #pragma mark - Drawing
 
 - (void)refreshGraph {
-    //Clear subviews and sublayers
+    // Clear subviews and sublayers
     [self.plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [self.plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
@@ -165,7 +161,6 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
     }
     
     [self calculateXAxisPoints];
-    
     [self.dots removeAllObjects];
     [self.pathLines removeAllObjects];
     
@@ -193,11 +188,9 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
     [_yAxisPoints removeAllObjects];
     _hasDataPoint = NO;
     for (int i = 0; i<[self numberOfPointsinPlot:plotIndex]; i++) {
-        
         if ([_dataSource respondsToSelector:@selector(graphView:plot:valueForPointAtIndex:)]) {
             ORKRangePoint *value = [self.dataSource graphView:self plot:plotIndex valueForPointAtIndex:i];
             [_dataPoints addObject:value];
-            
             if (!value.isEmpty){
                 _hasDataPoint = YES;
             }
@@ -208,41 +201,34 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
     [self prepareDataForPlotIndex:plotIndex];
-    [self drawPointCirclesForPlotIndex:plotIndex];
     if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
         [self drawLinesForPlotIndex:plotIndex];
     }
+    [self drawPointCirclesForPlotIndex:plotIndex];
 }
 
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
     CGFloat pointSize = self.isLandscapeMode ? 10.0f : 8.0f;
     
     for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
-        
         ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
-        
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
         
         if (!dataPointVal.isEmpty) {
-            
             ORKRangePoint *positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
-            
-            {
-                ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
-                point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
-                point.center = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
-                [self.plotsView.layer addSublayer:point.layer];
-                
-                if (self.shouldAnimate) {
-                    point.alpha = 0;
-                }
-                
-                [self.dots addObject:point];
+            ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
+            point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
+            point.center = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
+            [self.plotsView.layer addSublayer:point.layer];
+    
+            if (self.shouldAnimate) {
+                point.alpha = 0;
             }
             
+            [self.dots addObject:point];
+            
             if (![positionOnYAxis isRangeZero]) {
-                
                 CGFloat pointSize = self.isLandscapeMode ? 10.0f : 8.0f;
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
@@ -319,13 +305,10 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
     
     self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition, ORKGraphTopPadding, axisViewWidth, CGRectGetHeight(self.plotsView.frame))];
     [self addSubview:self.yAxisView];
-    
-    
     CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - AxisMarkingRulerLength + 2;
     
     if (self.maximumValueImage && self.minimumValueImage) {
-        //Use image icons as legends
-        
+        // Use image icons as legends
         CGFloat width = CGRectGetWidth(self.yAxisView.frame)/2;
         CGFloat verticalPadding = 3.f;
         
@@ -674,11 +657,11 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height/2;
         } else {
             CGFloat range = self.maximumValue - self.minimumValue;
-            CGFloat normalizedMinValue = (dataPointValue.minimumValue - self.minimumValue)/range * canvasSize.height;
-            CGFloat normalizedMaxValue = (dataPointValue.maximumValue - self.minimumValue)/range * canvasSize.height;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue)/range * canvasSize.height;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue)/range * canvasSize.height;
             
-            normalizedRangePoint.minimumValue = canvasSize.height - normalizedMinValue;
-            normalizedRangePoint.maximumValue = canvasSize.height - normalizedMaxValue;
+            normalizedRangePoint.minimumValue = canvasSize.height - normalizedMinimumValue;
+            normalizedRangePoint.maximumValue = canvasSize.height - normalizedMaximumValue;
         }
         [normalizedPoints addObject:normalizedRangePoint];
     }
@@ -717,7 +700,6 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
                 }
             }
         }
-        
     }
     
     // Maximum
@@ -791,7 +773,7 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
     layer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
     layer.lineJoin = kCALineJoinRound;
     layer.lineCap = kCALineCapRound;
-    layer.opacity = 0.4;
+    layer.opacity = 1.0;
     if (_shouldAnimate) {
         layer.strokeEnd = 0;
     }
@@ -836,11 +818,11 @@ NSString * const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotifica
     return self;
 }
 
-- (instancetype)initWithMinimumValue:(CGFloat)minValue maximumValue:(CGFloat)maxValue {
+- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
     self = [super init];
     if (self) {
-        _minimumValue = minValue;
-        _maximumValue = maxValue;
+        _minimumValue = minimumValue;
+        _maximumValue = maximumValue;
     }
     return self;
 }

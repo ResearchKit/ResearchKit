@@ -30,15 +30,13 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKBaseGraphView.h>
+#import <ResearchKit/ORKGraphView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKDiscreteGraphViewDataSource;
-
 ORK_CLASS_AVAILABLE
-@interface ORKDiscreteGraphView : ORKBaseGraphView
+@interface ORKDiscreteGraphView : ORKGraphView
 
 @property (nonatomic) BOOL shouldConnectRanges;
 

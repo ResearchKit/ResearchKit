@@ -40,13 +40,11 @@ ORK_AVAILABLE_DECL
 @protocol ORKPieChartViewDatasource <NSObject>
 
 @required
-
 - (NSInteger)numberOfSegmentsInPieChartView;
 
 - (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index;
 
 @optional
-
 - (UIColor *)pieChartView:(ORKPieChartView *)pieChartView colorForSegmentAtIndex:(NSInteger)index;
 
 - (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;

@@ -30,15 +30,13 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
  
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKBaseGraphView.h>
+#import <ResearchKit/ORKGraphView.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKLineGraphViewDataSource;
-
 ORK_CLASS_AVAILABLE
-@interface ORKLineGraphView : ORKBaseGraphView
+@interface ORKLineGraphView : ORKGraphView
 
 @end
 

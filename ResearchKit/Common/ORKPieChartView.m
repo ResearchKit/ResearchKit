@@ -72,22 +72,16 @@ static CGFloat const kAnimationDuration = 0.35f;
 }
 
 - (void)sharedInit {
-    _legendPaddingHeight = CGRectGetHeight(self.frame) * 0.3;
-    _plotRegionHeight = (CGRectGetHeight(self.frame) - _legendPaddingHeight);
-    _pieChartRadius = _plotRegionHeight * 0.55 * 0.5; //The 0.5 is to get radius from diameter
-    
     _lineWidth = CGRectGetHeight(self.frame)/20.0f;
     
     _circleLayer = [CAShapeLayer layer];
     _circleLayer.fillColor = [UIColor clearColor].CGColor;
     _circleLayer.strokeColor = [UIColor colorWithWhite:0.96 alpha:1.000].CGColor;
     _circleLayer.lineWidth = _lineWidth;
-    
     _legendDotRadius = 9;
     
     _shouldAnimate = YES;
     _shouldAnimateLegend = YES;
-    
     _shouldDrawClockwise = YES;
     
     _actualValues = [NSMutableArray new];
@@ -133,19 +127,16 @@ static CGFloat const kAnimationDuration = 0.35f;
     [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     [self updateValues];
-    
     self.circleLayer.frame = CGRectMake(CGRectGetWidth(self.frame)/2 - self.pieChartRadius, _plotRegionHeight/2 - self.pieChartRadius, self.pieChartRadius * 2, self.pieChartRadius * 2);
     self.circleLayer.path = [self circularPath].CGPath;
     [self.layer addSublayer:self.circleLayer];
 
-    //Reset Data
+    // Reset Data
     [self.actualValues removeAllObjects];
     [self.normalizedValues removeAllObjects];
-    
     [self normalizeActualValues];
     
     [self drawTitleLabels];
-    
     [self drawPieChart];
     [self drawPercentageLabels];
     [self drawLegend];
@@ -156,19 +147,16 @@ static CGFloat const kAnimationDuration = 0.35f;
 }
 
 - (void)updateValues {
-    _plotRegionHeight = (CGRectGetHeight(self.frame) - _legendPaddingHeight);
-    
+    _legendPaddingHeight = CGRectGetHeight(self.frame) * 0.35;
+    _plotRegionHeight = (CGRectGetHeight(self.frame)) - _legendPaddingHeight;
     _pieChartRadius = _plotRegionHeight * 0.55 * 0.5;
-    
     [_titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/6.0f]];
-    
     [_valueLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
 }
 
 - (UIBezierPath *)circularPath {
     CGPoint center = CGPointMake(CGRectGetWidth(self.circleLayer.bounds)/2, CGRectGetHeight(self.circleLayer.bounds)/2);
     CGFloat radius = self.pieChartRadius;
-    
     CGFloat startAngle = -M_PI_2;
     CGFloat endAngle = 3*M_PI_2;
     
@@ -186,11 +174,9 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 - (NSInteger)numberOfSegments {
     NSInteger count = 0;
-    
     if ([self.datasource respondsToSelector:@selector(numberOfSegmentsInPieChartView)]) {
         count = [self.datasource numberOfSegmentsInPieChartView];
     }
-    
     return count;
 }
 
@@ -201,7 +187,7 @@ static CGFloat const kAnimationDuration = 0.35f;
         color = [self.datasource pieChartView:self colorForSegmentAtIndex:index];
     } else{
         
-        //Default colors
+        // Default colors
         NSInteger numberOfSegments = [self numberOfSegments];
         if(numberOfSegments > 1){
             CGFloat divisionFactor = (CGFloat)(1/(CGFloat)(numberOfSegments -1));
@@ -216,11 +202,9 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 - (CGFloat)valueForSegmentAtIndex:(NSInteger)index {
     CGFloat value = 0;
-    
     if ([self.datasource respondsToSelector:@selector(pieChartView:valueForSegmentAtIndex:)]) {
         value = [self.datasource pieChartView:self valueForSegmentAtIndex:index];
     }
-    
     return value;
 }
 
@@ -237,9 +221,7 @@ static CGFloat const kAnimationDuration = 0.35f;
         segmentLayer.path = self.circleLayer.path;
         segmentLayer.lineCap = self.circleLayer.lineCap;
         segmentLayer.lineWidth = self.circleLayer.lineWidth;
-        
         segmentLayer.strokeColor = [self colorForSegmentAtIndex:idx].CGColor;
-        
         CGFloat value = ((NSNumber *)self.normalizedValues[idx]).floatValue;
         
         if (value != 0) {
@@ -251,7 +233,6 @@ static CGFloat const kAnimationDuration = 0.35f;
             }
             
             segmentLayer.strokeEnd = cumulativeValue;
-            
             [self.circleLayer addSublayer:segmentLayer];
             
             if (self.shouldAnimate) {
@@ -266,21 +247,18 @@ static CGFloat const kAnimationDuration = 0.35f;
                 [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
             }
         }
-        
         cumulativeValue += value;
     }
 }
 
 - (void)drawPercentageLabels {
     CGFloat cumulativeValue = 0;
-    
     NSMutableArray * textLayers = [NSMutableArray array];
+    
     for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
         CGFloat value = ((NSNumber *)self.normalizedValues[idx]).floatValue;
         
-        
         if (value != 0) {
-            
             CGFloat angle = (value/2 + cumulativeValue) * M_PI * 2;
             
             if (!self.shouldDrawClockwise) {
@@ -336,12 +314,12 @@ static CGFloat const kAnimationDuration = 0.35f;
     if (!layers.count){
         return;
     }
-    //Adjust labels while we have intersections
+    // Adjust labels while we have intersections
     BOOL intersections = YES;
-    //We alternate directions in each iteration
+    // We alternate directions in each iteration
     BOOL shiftClockwise = NO;
     CGFloat rotateDirection = self.shouldDrawClockwise ? 1 : -1;
-    //We use totalAngle to prevent from infinite loop
+    // We use totalAngle to prevent from infinite loop
     CGFloat totalAngle = 0;
     while (intersections) {
         intersections = NO;
@@ -349,7 +327,7 @@ static CGFloat const kAnimationDuration = 0.35f;
         
         if (shiftClockwise) {
             for (NSUInteger idx = 0; idx < layers.count - 1; idx++) {
-                //prevent from infinite loop
+                // Prevent from infinite loop
                 if (!idx) {
                     totalAngle+= 0.01;
                     if (totalAngle >= 2*M_PI) {
@@ -371,7 +349,7 @@ static CGFloat const kAnimationDuration = 0.35f;
                 }
             }
         }
-        //Adjust space between last and first element
+        // Adjust space between last and first element
         NSMutableDictionary* lastLayerDict = layers.lastObject;
         CALayer * lastLayer = lastLayerDict[@"layer"];
         NSMutableDictionary* firstLayerDict = layers.firstObject;
@@ -411,7 +389,7 @@ static CGFloat const kAnimationDuration = 0.35f;
         dot.frame = CGRectMake(0, 0, self.legendDotRadius*2, self.legendDotRadius*2);
         dot.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(dot.bounds), CGRectGetHeight(dot.bounds))
                                               cornerRadius:self.legendDotRadius].CGPath;
-        dot.position = CGPointMake(dotXPosition, self.plotRegionHeight + self.legendDotRadius*2);
+        dot.position = CGPointMake(dotXPosition, self.plotRegionHeight + self.legendDotRadius*3.5);
         dot.fillColor = [self colorForSegmentAtIndex:idx].CGColor;
         [self.layer addSublayer:dot];
         
@@ -419,15 +397,13 @@ static CGFloat const kAnimationDuration = 0.35f;
         if ([self.datasource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
             text = [self.datasource pieChartView:self titleForSegmentAtIndex:idx];
         }
-        
         CGFloat labelPadding = 5;
-        
         UILabel *textLabel = [UILabel new];
         textLabel.text = text;
         textLabel.font = self.legendFont;
         textLabel.textAlignment = NSTextAlignmentCenter;
         textLabel.adjustsFontSizeToFitWidth = NO;
-        textLabel.frame = CGRectMake(labelPadding + dotSegmentWidth * idx, self.plotRegionHeight + 3*self.legendDotRadius, dotSegmentWidth - 2*labelPadding, self.legendPaddingHeight - self.legendDotRadius*2);
+        textLabel.frame = CGRectMake(labelPadding + dotSegmentWidth * idx, self.plotRegionHeight + 3.5*self.legendDotRadius, dotSegmentWidth - 2*labelPadding, self.legendPaddingHeight - self.legendDotRadius*2);
         textLabel.numberOfLines = 1;
         textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:textLabel];
@@ -459,13 +435,11 @@ static CGFloat const kAnimationDuration = 0.35f;
 
 - (void)drawTitleLabels {
     CGFloat labelWidth = self.pieChartRadius * 1.2;
-    
     CGFloat labelXPos = CGRectGetMidX(self.circleLayer.frame) - labelWidth/2;
     CGFloat labelYPos = CGRectGetMidY(self.circleLayer.frame);
     
     [self.valueLabel setFrame:CGRectMake(labelXPos, labelYPos, labelWidth, self.pieChartRadius*0.4)];
     [self addSubview:self.valueLabel];
-    
     [self.titleLabel setFrame:CGRectMake(labelXPos, CGRectGetMaxY(self.valueLabel.frame), labelWidth, CGRectGetHeight(self.valueLabel.frame)*0.6)];
     [self addSubview:self.titleLabel];    
 }
@@ -476,20 +450,16 @@ static CGFloat const kAnimationDuration = 0.35f;
     self.sumOfValues = 0;
     
     for (int idx=0; idx < [self numberOfSegments]; idx++) {
-        
         CGFloat value = [self valueForSegmentAtIndex:idx];
-        
         [self.actualValues addObject:@(value)];
         self.sumOfValues += value;
     }
     
     for (int idx=0; idx < [self numberOfSegments]; idx++) {
         CGFloat value = 0;
-        
         if (self.sumOfValues != 0) {
             value = ((NSNumber *)self.actualValues[idx]).floatValue/self.sumOfValues;
         }
-        
         [self.normalizedValues addObject:@(value)];
     }
 }

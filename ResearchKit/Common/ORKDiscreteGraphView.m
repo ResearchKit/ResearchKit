@@ -30,7 +30,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
  
 #import "ORKDiscreteGraphView.h"
-#import "ORKBaseGraphView_Internal.h"
+#import "ORKGraphView_Internal.h"
 #import "ORKHelpers.h"
 #import <ResearchKit/ORKAxisView.h>
 #import <ResearchKit/ORKCircleView.h>

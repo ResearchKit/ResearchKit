@@ -55,7 +55,7 @@ static CGFloat const GrowAnimationDuration = 0.1;
 static CGFloat const PopAnimationDuration  = 0.3;
 static CGFloat const SnappingClosenessFactor = 0.3f;
 
-@interface ORKBaseGraphView ()
+@interface ORKGraphView ()
 
 ORK_EXTERN NSString * const ORKGraphViewTriggerAnimationsNotification;
 ORK_EXTERN NSString * const ORKGraphViewRefreshNotification;

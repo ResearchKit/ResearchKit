@@ -75,7 +75,7 @@ class ChartListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if let graph = (cell as? BaseGraphTableViewCell)?.graphView {
+        if let graph = (cell as? GraphTableViewCell)?.graphView {
             configureGraphView(graph)
         }
         else if let pieChartView = (cell as? PieChartTableViewCell)?.pieChartView {
@@ -90,9 +90,9 @@ class ChartListViewController: UITableViewController {
 
 extension ChartListViewController {
     
-    func configureGraphView(graphView: ORKBaseGraphView) {
+    func configureGraphView(graphView: ORKGraphView) {
         graphView.showsVerticalReferenceLines = true
-        /* set more ORKBaseGraphView properties as desired */
+        /* set more ORKGraphView properties as desired */
         graphView.setNeedsLayout()
         graphView.layoutIfNeeded()
         graphView.refreshGraph()

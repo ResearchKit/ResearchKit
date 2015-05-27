@@ -38,8 +38,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 #pragma mark - Init
 
-- (instancetype)initWithFrame:(CGRect)frame{
-    
+- (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self sharedInit];
     }
