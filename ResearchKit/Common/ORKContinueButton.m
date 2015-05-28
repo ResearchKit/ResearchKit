@@ -37,7 +37,6 @@ static const CGFloat kContinueButtonTouchMargin = 10;
 
 @implementation ORKContinueButton {
     NSLayoutConstraint *_widthConstraint;
-    NSLayoutConstraint *_heightConstraint;
 }
 
 - (instancetype)initWithTitle:(NSString *)title isDoneButton:(BOOL)isDoneButton {
@@ -46,48 +45,38 @@ static const CGFloat kContinueButtonTouchMargin = 10;
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
         self.contentEdgeInsets = (UIEdgeInsets){.left=6,.right=6};
-        
-        [self setNeedsUpdateConstraints];
+
+        [self setUpConstraints];
     }
     return self;
 }
 
 - (void)didMoveToWindow {
-    [self updateConstraintConstants];
+    [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraintConstants {
+- (void)setUpConstraints {
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:44.0];
+    heightConstraint.active = YES;
     
-    UIWindow *window = [self window];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
-    _widthConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType);
+    _widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                    attribute:NSLayoutAttributeWidth
+                                                    relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                       toItem:nil
+                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                   multiplier:1.0
+                                                     constant:ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window)];
+    _widthConstraint.active = YES;
 }
 
 - (void)updateConstraints {
-    if (! _heightConstraint) {
-        _heightConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:nil
-                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1
-                                                          constant:44];
-        _heightConstraint.active = YES;
-    }
-    if (! _widthConstraint) {
-        UIWindow *window = [self window];
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
-        _widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
-                                                         constant:ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType)];
-    }
-    _heightConstraint.active = YES;
-    _widthConstraint.active = YES;
-    
+    _widthConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window);
     [super updateConstraints];
 }
 
