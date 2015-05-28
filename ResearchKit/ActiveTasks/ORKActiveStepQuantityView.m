@@ -115,74 +115,74 @@
     const CGFloat TitleBaselineToValueBaseline = 40;
     const CGFloat ValueBaselineToBottom = 36;
     
-    NSMutableArray *additionalConstraints = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]"
                                                                                        options:(NSLayoutFormatOptions)0
                                                                                        metrics:nil
                                                                                          views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
                                                                                        options:(NSLayoutFormatOptions)0
                                                                                        metrics:nil
                                                                                          views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|"
                                                                                        options:NSLayoutFormatAlignAllCenterY
                                                                                        metrics:nil
                                                                                          views:views]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeFirstBaseline
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:_titleLabel
                                                                   attribute:NSLayoutAttributeLastBaseline
                                                                  multiplier:1.0
                                                                    constant:TitleBaselineToValueBaseline]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:self
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:_valueLabel
                                                                   attribute:NSLayoutAttributeLastBaseline
                                                                  multiplier:1.0
                                                                    constant:ValueBaselineToBottom]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeCenterX
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeCenterX
                                                                  multiplier:1.0
                                                                    constant:0.0]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:_valueHolder
                                                                   attribute:NSLayoutAttributeTop
                                                                  multiplier:1.0
                                                                    constant:0.0]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationLessThanOrEqual
                                                                      toItem:_valueHolder
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0
                                                                    constant:0.0]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeLeft
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeLeft
                                                                  multiplier:1.0
                                                                    constant:0.0]];
-    [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeRight
                                                                   relatedBy:NSLayoutRelationLessThanOrEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeRight
                                                                  multiplier:1.0
                                                                    constant:0.0]];
-    for (NSLayoutConstraint *constraint in additionalConstraints) {
+    for (NSLayoutConstraint *constraint in constraints) {
         constraint.priority = UILayoutPriorityRequired-2;
     }
     
-    [NSLayoutConstraint activateConstraints:additionalConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
     
     _zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                         attribute:NSLayoutAttributeWidth
