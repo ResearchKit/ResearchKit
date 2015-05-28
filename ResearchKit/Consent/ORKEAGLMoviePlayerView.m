@@ -103,7 +103,7 @@ static const GLfloat kColorConversion709[] = {
     GLuint _frameBufferHandle;
     GLuint _colorBufferHandle;
     
-    BOOL _haveSetup;
+    BOOL _glIsSetup;
 }
 
 @property (nonatomic) const GLfloat *preferredConversion;
@@ -156,10 +156,13 @@ const GLfloat DefaultPreferredRotation = 0;
 # pragma mark - OpenGL setup
 
 - (void)setupGL {
-    if (_haveSetup) {
+    if (_glIsSetup) {
         return;
     }
+    _glIsSetup = YES;
+
     [EAGLContext setCurrentContext:_context];
+    glDisable(GL_DEPTH_TEST);
     [self setupBuffers];
     
     glUseProgram(_programHandle);
@@ -186,14 +189,17 @@ const GLfloat DefaultPreferredRotation = 0;
     glGenVertexArraysOES(1, &_vertexArrayHandle);
     glGenBuffers(1, &_vertexBufferHandle);
 
-    _haveSetup = YES;
     ORKEAGLLog(@"");
 }
 
 #pragma mark - Utilities
 
 - (void)setupBuffers {
-    glDisable(GL_DEPTH_TEST);
+    if (!_glIsSetup) {
+        return;
+    }
+    
+    [self deleteBuffers];
     
     glGenFramebuffers(1, &_frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, _frameBufferHandle);
@@ -209,7 +215,22 @@ const GLfloat DefaultPreferredRotation = 0;
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         ORK_Log_Debug(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
+    
+    // Set the view port to the entire view.
+    glViewport(0, 0, _backingWidth, _backingHeight);
+
     ORKEAGLLog(@"");
+}
+
+- (void)deleteBuffers {
+    if (_frameBufferHandle) {
+        glDeleteFramebuffers(1, &_frameBufferHandle);
+        _frameBufferHandle = 0;
+    }
+    if (_colorBufferHandle) {
+        glDeleteRenderbuffers(1, &_colorBufferHandle);
+        _colorBufferHandle = 0;
+    }
 }
 
 - (void)cleanUpTextures {
@@ -231,8 +252,13 @@ const GLfloat DefaultPreferredRotation = 0;
     ORKEAGLLog(@"");
     [self cleanUpTextures];
     
-    if(_videoTextureCache) {
+    if (_videoTextureCache) {
         CFRelease(_videoTextureCache);
+    }
+    [self deleteBuffers];
+    if (_programHandle) {
+        glDeleteProgram(_programHandle);
+        _programHandle = 0;
     }
     if (_context == [EAGLContext currentContext]) {
         [EAGLContext setCurrentContext:nil];
@@ -256,9 +282,19 @@ const GLfloat DefaultPreferredRotation = 0;
     }
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self setupBuffers];
+    [self updateVertexAndTextureData];
+}
+
 #pragma mark - OpenGLES drawing
 
 - (BOOL)consumePixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    if (!_glIsSetup) {
+        return NO;
+    }
+
     CVReturn err;
     if (pixelBuffer != NULL) {
         ORKEAGLLog(@"Have buffer");
@@ -343,6 +379,10 @@ const GLfloat DefaultPreferredRotation = 0;
 }
 
 - (void)updateVertexAndTextureData {
+    if (!_glIsSetup) {
+        return;
+    }
+
     // Set up the quad vertices with respect to the orientation and aspect ratio of the video.
     CGRect vertexSamplingRect = AVMakeRectWithAspectRatioInsideRect(_presentationSize, self.layer.bounds);
     ORKEAGLLog(@"%@", NSStringFromCGRect(vertexSamplingRect));
@@ -394,21 +434,30 @@ const GLfloat DefaultPreferredRotation = 0;
 }
 
 - (void)updateTintColorUniform {
+    if (!_glIsSetup) {
+        return;
+    }
+
     CGFloat tintColorCG[4];
     [self.tintColor getRed:&tintColorCG[0] green:&tintColorCG[1] blue:&tintColorCG[2] alpha:&tintColorCG[3]];
     glUniform3f(uniforms[UNIFORM_TINT_COLOR], tintColorCG[0], tintColorCG[1], tintColorCG[2]);
 }
 
 - (void)updatePreferredConversionUniform {
+    if (!_glIsSetup) {
+        return;
+    }
+
     glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
 }
 
 - (void)render {
+    if (!_glIsSetup) {
+        return;
+    }
+
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-
-    // Set the view port to the entire view.
-    glViewport(0, 0, _backingWidth, _backingHeight);
     
     glBindFramebuffer(GL_FRAMEBUFFER, _frameBufferHandle);
     
@@ -426,7 +475,7 @@ const GLfloat DefaultPreferredRotation = 0;
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glBindVertexArrayOES(0);
     glUseProgram(0);
-    glBindFramebuffer(GL_FRAMEBUFFER,0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

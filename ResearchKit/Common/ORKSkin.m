@@ -161,7 +161,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         30,        30,        20,        20,        30},      // ORKScreenMetricLearnMoreButtonSideMargin
         {         10,        10,         0,         0,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
-        {         48,        51,        52,        48,        48},      // ORKScreenMetricVerticalScaleHorizontalMargin
+        {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
     };
     return metrics[metric][screenType];

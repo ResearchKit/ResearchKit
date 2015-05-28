@@ -28,37 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <ResearchKit/ResearchKit.h>
 
-#import "ORKConsentSection+AssetLoading.h"
-#import "ORKHelpers.h"
-#import "ORKTintedImageView.h"
+NS_ASSUME_NONNULL_BEGIN
 
+ORK_CLASS_AVAILABLE
+@interface ORKToneAudiometryPracticeStep : ORKActiveStep
 
-static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
-    
-    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
-    fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
-    return fullMovieName;
-}
+@end
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [[UIScreen mainScreen] scale];
-    
-    // For iPad, use the movie for the next scale up
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && scale < 3) {
-        scale++;
-    }
-    
-    NSURL *url = [ORKAssetsBundle() URLForResource:movieNameForType(type, scale) withExtension:@"m4v"];
-    if (url == nil) {
-        // This can fail on 3x devices when the display is set to zoomed. Try an asset at 2x instead.
-        url = [ORKAssetsBundle() URLForResource:movieNameForType(type, 2.0) withExtension:@"m4v"];
-    }
-    return url;
-}
-
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type, UIColor *tintColor, CGFloat scale) {
-    NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    // Use ORKImageByTintingImage becase it's more performant than 'imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate'
-    return ORKImageByTintingImage([UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil], tintColor, scale);
-}
+NS_ASSUME_NONNULL_END

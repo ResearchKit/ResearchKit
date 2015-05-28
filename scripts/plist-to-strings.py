@@ -68,16 +68,14 @@ args = parser.parse_args()
 masterFileName = args.master
 targetFileName = args.target
 
-if not os.path.isfile(masterFileName):
-    print('Master .strings file not found: ' + masterFileName + '\n')
-    parser.print_usage()
-    sys.exit(1)
+def checkIfEssentialFileExists(fileName, fileTag):
+    if not os.path.isfile(fileName):
+        print(fileTag + ' .strings file not found: ' + fileName + '\n')
+        parser.print_usage()
+        sys.exit(1)
 
-if not os.path.isfile(targetFileName):
-    print('Target .strings file not found: ' + targetFileName + '\n')
-    parser.print_usage()
-    sys.exit(1)
-
+checkIfEssentialFileExists(masterFileName, "Master")
+checkIfEssentialFileExists(targetFileName, "Target")
 
 def convertBinaryPlistToStrings(masterFileName, targetFileName):
     def buildStringsLine(stringKey, localizedString):

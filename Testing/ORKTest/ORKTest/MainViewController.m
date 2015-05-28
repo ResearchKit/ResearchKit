@@ -37,31 +37,34 @@
 #import "CustomRecorder.h"
 #import "AppDelegate.h"
 
+
 static NSString * const DatePickingTaskIdentifier = @"dates_001";
 static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
 static NSString * const ActiveStepTaskIdentifier = @"tid_002";
-static NSString * const ConsentReviewTaskIdentifier = @"consent-review";
+static NSString * const ConsentReviewTaskIdentifier = @"consent_review";
 static NSString * const ConsentTaskIdentifier = @"consent";
 static NSString * const MiniFormTaskIdentifier = @"miniform";
 static NSString * const ScreeningTaskIdentifier = @"screening";
 static NSString * const ScalesTaskIdentifier = @"scales";
 static NSString * const ImageChoicesTaskIdentifier = @"images";
+static NSString * const ImageCaptureTaskIdentifier = @"imageCapture";
 static NSString * const AudioTaskIdentifier = @"audio";
-static NSString * const ToneAudiometryTaskIdentifier = @"tone-audiometry";
+static NSString * const ToneAudiometryTaskIdentifier = @"tone_audiometry";
 static NSString * const FitnessTaskIdentifier = @"fitness";
 static NSString * const GaitTaskIdentifier = @"gait";
 static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
-    // A dictionary mapping task identifiers to restoration data.
-    NSMutableDictionary *_savedViewControllers;
+    NSMutableDictionary *_savedTasks;               // Maps task identifiers to archived task data
+    NSMutableDictionary *_savedViewControllers;     // Maps task identifiers to task view controller restoration data
 }
 
 @property (nonatomic, strong) ORKTaskViewController *taskViewController;
@@ -82,6 +85,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _savedTasks = [NSMutableDictionary new];
     _savedViewControllers = [NSMutableDictionary new];
     
     NSMutableDictionary *buttons = [NSMutableDictionary dictionary];
@@ -229,39 +233,63 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         buttons[buttonKeys.lastObject] = button;
     }
     
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showStepNavigationTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Step Navigation Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"step"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showImageCapture:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Image Capture" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"imageCapture"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(toggleTintColor:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Toggle Tint Color" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"toggleTintColor"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
     }];
    
     if (buttons.count > 0) {
-         NSString *hvfl = @"";
+         NSString *horizVisualFormatString  = @"";
         if (buttons.count == 1) {
-            hvfl= [NSString stringWithFormat:@"H:|[%@]|", buttonKeys.firstObject];
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@]|", buttonKeys.firstObject];
         } else {
-            hvfl= [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
         }
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:hvfl
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizVisualFormatString 
                                                                           options:(NSLayoutFormatOptions)0
                                                                           metrics:nil
                                                                             views:buttons]];
         
-        NSArray *allkeys = buttonKeys;
+        NSArray *allKeys = buttonKeys;
         BOOL left = YES;
-        NSMutableString *leftVfl = [NSMutableString stringWithString:@"V:|-20-"];
-        NSMutableString *rightVfl = [NSMutableString stringWithString:@"V:|-20-"];
+        NSMutableString *leftVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
+        NSMutableString *rightVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
         
         NSString *leftFirstKey = nil;
         NSString *rightFirstKey = nil;
         
-        for (NSString *key in allkeys) {
+        for (NSString *key in allKeys) {
         
             if (left == YES) {
             
                 if (leftFirstKey) {
-                    [leftVfl appendFormat:@"[%@(==%@)]", key, leftFirstKey];
+                    [leftVisualFormatString appendFormat:@"[%@(==%@)]", key, leftFirstKey];
                 } else {
-                    [leftVfl appendFormat:@"[%@]", key];
+                    [leftVisualFormatString appendFormat:@"[%@]", key];
                 }
                 
                 if (leftFirstKey == nil) {
@@ -270,9 +298,9 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
             } else {
                 
                 if (rightFirstKey) {
-                    [rightVfl appendFormat:@"[%@(==%@)]", key, rightFirstKey];
+                    [rightVisualFormatString appendFormat:@"[%@(==%@)]", key, rightFirstKey];
                 } else {
-                    [rightVfl appendFormat:@"[%@]", key];
+                    [rightVisualFormatString appendFormat:@"[%@]", key];
                 }
                 
                 if (rightFirstKey == nil) {
@@ -283,11 +311,17 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
             left = !left;
         }
         
-        [leftVfl appendString:@"-20-|"];
-        [rightVfl appendString:@"-20-|"];
+        [leftVisualFormatString appendString:@"-20-|"];
+        [rightVisualFormatString appendString:@"-20-|"];
         
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVfl options:NSLayoutFormatAlignAllCenterX metrics:nil views:buttons]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVfl options:NSLayoutFormatAlignAllCenterX metrics:nil views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
         
     }
 }
@@ -296,7 +330,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
 
 - (id<ORKTask>)makeTaskWithIdentifier:(NSString *)identifier {
     if ([identifier isEqualToString:DatePickingTaskIdentifier]) {
-        return [self datePickingTask];
+        return [self makeDatePickingTask];
     } else if ([identifier isEqualToString:SelectionSurveyTaskIdentifier]) {
         return [self makeSelectionSurveyTask];
     } else if ([identifier isEqualToString:ActiveStepTaskIdentifier]) {
@@ -357,6 +391,8 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
         return [self makeScalesTask];
     } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
         return [self makeImageChoicesTask];
+    } else if ([identifier isEqualToString:ImageCaptureTaskIdentifier]) {
+        return [self makeImageCaptureTask];
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
@@ -375,6 +411,8 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
                 timeoutSound:0
                 failureSound:0
                 options:0];
+    } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
+        return [self makeStepNavigationTask];
     }
     return nil;
 }
@@ -383,22 +421,44 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
  Creates a task and presents it with a task view controller.
  */
 - (void)beginTaskWithIdentifier:(NSString *)identifier {
-    id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
+    /*
+     This is our implementation of restoration after saving during a task.
+     If the user saved their work on a previous run of a task with the same
+     identifier, we attempt to restore the view controller here.
+     
+     We also attempt to restore the task when data for an archived task is found. Task restoration
+     is not always possible nor desirable. Some objects implementing the ORKTask
+     protocol can chose not to adopt NSSecureCoding (such as this project's DynamicTask).
+     Task archival and restoration is recommended for ORKNavigableOrderedTask, since
+     that preserves the navigation stack (which allows you to navigate steps backwards).
+     
+     Since unarchiving can throw an exception, in a real application we would
+     need to attempt to catch that exception here.
+     */
+
+    id<ORKTask> task = nil;
+    NSData *taskData = _savedTasks[identifier];
+    if (taskData)
+    {
+        /*
+         We assume any restored task is of the ORKNavigableOrderedTask since that's the only kind
+         we're archiving in this example. You have to make sure your are unarchiving a task of the proper class.
+         */
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:taskData];
+        task = [unarchiver decodeObjectOfClass:[ORKNavigableOrderedTask class] forKey:NSKeyedArchiveRootObjectKey];
+    } else {
+        /*
+         No task was previously stored
+         */
+        task = [self makeTaskWithIdentifier:identifier];
+    }
     
     if (_savedViewControllers[identifier])
     {
-        /*
-         This is our implementation of restoration after saving during a task.
-         If the user saved their work on a previous run of a task with the same
-         identifier, we attempt to restore it here.
-         
-         Since unarchiving can throw an exception, in a real application we would
-         need to attempt to catch that exception here.
-         */
         NSData *data = _savedViewControllers[identifier];
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data];
     } else {
-        // No saved data, just create a task view controller.
+        // No saved data, just create the task and the corresponding task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }
     
@@ -445,7 +505,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
  This task presents several questions which exercise functionality based on
  `UIDatePicker`.
  */
-- (ORKOrderedTask *)datePickingTask {
+- (ORKOrderedTask *)makeDatePickingTask {
     NSMutableArray *steps = [NSMutableArray new];
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"iid_001"];
@@ -1719,10 +1779,230 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
     return task;
     
 }
+
 - (IBAction)showImageChoices:(id)sender {
     [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
 }
 
+# pragma mark - Image Capture
+- (id<ORKTask>)makeImageCaptureTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    /*
+     If implementing an image capture task like this one, remember that people will
+     take your instructions literally. So, be cautious. Make sure your template image
+     is high contrast and very visible against a variety of backgrounds.
+     */
+     
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
+        step.title = @"Hands";
+        step.image = [[UIImage imageNamed:@"hands_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"In this step we will capture images of both of your hands";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Let's start by capturing an image of your right hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
+        step.title = @"Right Hand";
+        step.image = [[UIImage imageNamed:@"right_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your right hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
+        step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_solid"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Now let's capture an image of your left hand";
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
+        step.title = @"Left Hand";
+        step.image = [[UIImage imageNamed:@"left_hand_outline"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        step.detailText = @"Align your left hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
+        [steps addObject:step];
+    }
+    {
+        ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
+        step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
+        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        [steps addObject:step];
+    }
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+        step.title = @"Complete";
+        step.detailText = @"Hand image capture complete";
+        [steps addObject:step];
+    }
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageCaptureTaskIdentifier steps:steps];
+    return task;
+    
+}
+- (IBAction)showImageCapture:(id)sender {
+    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
+}
+- (IBAction)showStepNavigationTask:(id)sender {
+    [self beginTaskWithIdentifier:StepNavigationTaskIdentifier];
+}
+
+- (IBAction)toggleTintColor:(id)sender {
+    static UIColor *defaultTintColor = nil;
+    if (!defaultTintColor) {
+        defaultTintColor = self.view.tintColor;
+    }
+    if ([[UIView appearance].tintColor isEqual:[UIColor redColor]]) {
+        [UIView appearance].tintColor = defaultTintColor;
+    } else {
+        [UIView appearance].tintColor = [UIColor redColor];
+    }
+    // Update appearance
+    UIView *superview = self.view.superview;
+    [self.view removeFromSuperview];
+    [superview addSubview:self.view];
+}
+
+#pragma mark - Step navigation task
+
+- (id<ORKTask>)makeStepNavigationTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    ORKAnswerFormat *answerFormat = nil;
+    ORKStep *step = nil;
+    
+    NSArray *textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
+      [ORKTextChoice choiceWithText:@"Dizziness" value:@"dizziness"],
+      [ORKTextChoice choiceWithText:@"Nausea" value:@"nausea"]
+      ];
+    
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"symptom" title:@"Which is your most severe symptom?" answer:answerFormat];
+    step.optional = NO;
+    [steps addObject:step];
+
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom interfere with your daily life?" answer:answerFormat];
+    step.optional = NO;
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blank"];
+    step.title = @"This step is intentionally left blank (you should not see it)";
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"severe_headache"];
+    step.title = @"You have a severe headache";
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"light_headache"];
+    step.title = @"You have a light headache";
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"other_symptom"];
+    step.title = @"Your symptom is not a headache";
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+    step.title = @"You have finished the task";
+    [steps addObject:step];
+
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blankB"];
+    step.title = @"This step is intentionally left blank (you should not see it)";
+    [steps addObject:step];
+
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:StepNavigationTaskIdentifier
+                                                                                  steps:steps];
+    
+    // Build navigation rules
+    
+    // Individual predicates
+    
+    // User chose headache at the symptom step
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
+                                                                                               expectedString:@"headache"];
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
+    //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
+
+    // User didn't chose headache at the symptom step
+    NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
+
+    // User chose YES at the severity step
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                 expectedAnswer:YES];
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
+
+    // User chose NO at the severity step
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                expectedAnswer:NO];
+
+    
+    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
+    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
+    // the regular ORKOrderedTask order applies).
+    NSMutableArray *resultPredicates = [NSMutableArray new];
+    NSMutableArray *destinationStepIdentifiers = [NSMutableArray new];
+    
+    [resultPredicates addObject:predicateNotHeadache];
+    [destinationStepIdentifiers addObject:@"other_symptom"];
+    
+    ORKPredicateStepNavigationRule *predicateRule =
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
+
+    
+    // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
+    resultPredicates = [NSMutableArray new];
+    destinationStepIdentifiers = [NSMutableArray new];
+    
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
+    [resultPredicates addObject:predicate];
+    [destinationStepIdentifiers addObject:@"severe_headache"];
+
+    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
+    [resultPredicates addObject:predicate];
+    [destinationStepIdentifiers addObject:@"light_headache"];
+    
+    predicateRule =
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
+    
+    
+    // Add end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule = nil;
+    
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"end"];
+    
+    return task;
+}
 
 #pragma mark - Helpers
 
@@ -1904,7 +2184,7 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
     NSString *task_identifier = taskViewController.task.identifier;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier] containsObject:task_identifier]);
+            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, StepNavigationTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
@@ -2047,7 +2327,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
              Save the restoration data, dismiss the task VC, and do an early return
              so we don't clear the restoration data.
              */
-            _savedViewControllers[[taskViewController.task identifier]] = [taskViewController restorationData];
+            id<ORKTask> task = taskViewController.task;
+            _savedViewControllers[task.identifier] = [taskViewController restorationData];
+            /*
+             Save only tasks of the ORKNavigableOrderedTask class, as it's useful to preserve its navigation stack
+             */
+            if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
+                _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
+            }
             [self dismissTaskViewController:taskViewController];
             return;
         }
@@ -2057,7 +2344,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             break;
     }
     
-    [_savedViewControllers removeObjectForKey:[taskViewController.task identifier]];
+    [_savedViewControllers removeObjectForKey:taskViewController.task.identifier];
+    [_savedTasks removeObjectForKey:taskViewController.task.identifier];
     _taskViewController = nil;
 }
 
@@ -2117,7 +2405,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 [pdfData writeToURL:outputUrl atomically:YES];
                 NSLog(@"Wrote PDF to %@", [outputUrl path]);
             }
-            
         }];
         
         _currentDocument = nil;

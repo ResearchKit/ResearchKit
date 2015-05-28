@@ -834,18 +834,9 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark - ORKFormItemScaleCell
 
-@interface ORKFormItemScaleCell () <ORKScaleSliderLayoutWidthProvider>
-
-@end
-
-
 @implementation ORKFormItemScaleCell {
     ORKScaleSliderView *_sliderView;
     id<ORKScaleAnswerFormatProvider> _formatProvider;
-}
-
-- (CGFloat)sliderLayoutWidth {
-    return self.expectedLayoutWidth;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
@@ -859,7 +850,6 @@ static const CGFloat kHMargin = 15.0;
     self.labelLabel.text = nil;
     
     _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
-    _sliderView.delegate = self;
     [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
     
     [self.contentView addSubview:_sliderView];

@@ -34,9 +34,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
+
 @interface ORKConsentSection ()
 
 @property (nonatomic, readonly, nullable) NSString *escapedContent;
+
+@property (nonatomic, readonly, nullable) UIImage *image;
 
 @end
 

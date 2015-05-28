@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,14 +29,31 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKConsentSection.h"
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "ORKImageCaptureStep.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSURL *__nullable ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
+@protocol ORKImageCaptureViewDelegate <NSObject>
 
-UIImage *__nullable ORKImageForConsentSectionType(ORKConsentSectionType type, UIColor *tintColor, CGFloat scale);
+- (void)capturePressed:(void (^ __nullable)(BOOL captureSuccess))handler;
+- (void)retakePressed:(void (^ __nullable)())handler;
+- (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation;
+
+@end
+
+
+@interface ORKImageCaptureView : UIView
+
+@property (nonatomic, strong, nullable) ORKImageCaptureStep *imageCaptureStep;
+@property (nonatomic, weak, nullable) id<ORKImageCaptureViewDelegate> delegate;
+@property (nonatomic, weak, nullable) AVCaptureSession *session;
+@property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
+@property (nonatomic, strong, nullable) UIImage *capturedImage;
+@property (nonatomic, strong, nullable) NSError *error;
+
+@end
 
 NS_ASSUME_NONNULL_END

@@ -417,6 +417,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }];
 }
 
+- (void)requestCameraAccessWithHandler:(void (^)(BOOL success))handler {
+    NSParameterAssert(handler != nil);
+	[AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(granted);
+        });
+    }];
+}
+
 - (void)requestLocationAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
     
@@ -511,6 +520,21 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                         _grantedPermissions |= ORKPermissionCoreLocation;
                     } else {
                         _grantedPermissions &= ~ORKPermissionCoreLocation;
+                    }
+                    dispatch_semaphore_signal(semaphore);
+                }];
+            });
+            
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        }
+        if (permissions & ORKPermissionCamera) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ORK_Log_Debug(@"Requesting camera access");
+                [self requestCameraAccessWithHandler:^(BOOL success) {
+                    if (success) {
+                        _grantedPermissions |= ORKPermissionCamera;
+                    } else {
+                        _grantedPermissions &= ~ORKPermissionCamera;
                     }
                     dispatch_semaphore_signal(semaphore);
                 }];
@@ -1285,7 +1309,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
 }
 
 
-- (void) applicationFinishedRestoringState {
+- (void)applicationFinishedRestoringState {
     [super applicationFinishedRestoringState];
     
     _pageViewController = (UIPageViewController *)[self.childNavigationController viewControllers][0];
