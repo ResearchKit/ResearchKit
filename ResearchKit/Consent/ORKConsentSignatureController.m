@@ -50,7 +50,7 @@
 
 
 @implementation ORKConsentSignatureWrapperView {
-    NSArray *_constraints;
+    NSLayoutConstraint *_signatureViewWidthConstraint;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
@@ -86,7 +86,7 @@
         
         self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
         
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
@@ -107,12 +107,8 @@
     }
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
+    // Static constraints
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_clearButton, _signatureView);
@@ -129,14 +125,6 @@
                                                         attribute:NSLayoutAttributeCenterX
                                                        multiplier:1.0
                                                          constant:0.0]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_signatureView
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1.0
-                                                         constant:ORKWidthForSignatureView(self.window)]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_clearButton]-(>=0)-|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -172,9 +160,20 @@
                                                        multiplier:1.0
                                                          constant:30.0]];
     
-    [self addConstraints:constraints];
-    _constraints = constraints;
-    
+    _signatureViewWidthConstraint = [NSLayoutConstraint constraintWithItem:_signatureView
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:ORKWidthForSignatureView(self.window)];
+    [constraints addObject:_signatureViewWidthConstraint];
+
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    _signatureViewWidthConstraint.constant = ORKWidthForSignatureView(self.window);
     [super updateConstraints];
 }
 
