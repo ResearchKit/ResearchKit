@@ -32,11 +32,17 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #import "ORKPieChartView.h"
 
 
-static CGFloat const kAnimationDuration = 0.35f;
-
 @interface ORKPieChartView ()
 
+@property (nonatomic) CGFloat pieChartRadius;
+
+@property (nonatomic) CGFloat lineWidth;
+
 @property (nonatomic, strong) CAShapeLayer *circleLayer;
+
+@property (nonatomic) CGFloat legendDotRadius;
+
+@property (nonatomic) CGFloat legendPaddingHeight;
 
 @property (nonatomic) CGFloat plotRegionHeight;
 
@@ -82,6 +88,7 @@ static CGFloat const kAnimationDuration = 0.35f;
     
     _shouldAnimate = YES;
     _shouldAnimateLegend = YES;
+    _animationDuration = 0.35f;
     _shouldDrawClockwise = YES;
     
     _actualValues = [NSMutableArray new];
@@ -91,15 +98,15 @@ static CGFloat const kAnimationDuration = 0.35f;
     _legendFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
     _percentageFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
     
-    _titleLabel = [UILabel new];
-    [_titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/6.0f]];
-    [_titleLabel setTextColor:[UIColor colorWithWhite:0.55 alpha:1.0]];
-    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    _centreTitleLabel = [UILabel new];
+    [_centreTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
+    [_centreTitleLabel setTextColor:[UIColor colorWithWhite:0.17 alpha:1.0]];
+    [_centreTitleLabel setTextAlignment:NSTextAlignmentCenter];
     
-    _valueLabel = [UILabel new];
-    [_valueLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
-    [_valueLabel setTextColor:[UIColor colorWithWhite:0.17 alpha:1.0]];
-    [_valueLabel setTextAlignment:NSTextAlignmentCenter];
+    _centreSubtitleLabel = [UILabel new];
+    [_centreSubtitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/6.0f]];
+    [_centreSubtitleLabel setTextColor:[UIColor colorWithWhite:0.55 alpha:1.0]];
+    [_centreSubtitleLabel setTextAlignment:NSTextAlignmentCenter];
     
     _emptyText = NSLocalizedString(@"No Data", @"No Data");
 }
@@ -141,17 +148,29 @@ static CGFloat const kAnimationDuration = 0.35f;
     [self drawPercentageLabels];
     [self drawLegend];
     
-    if (self.sumOfValues == 100) {
+    if (self.sumOfValues == 0) {
         [self setupEmptyView];
     }
+}
+
+- (void)drawTitleLabels {
+    CGFloat labelWidth = self.pieChartRadius * 1.2;
+    CGFloat labelXPos = CGRectGetMidX(self.circleLayer.frame) - labelWidth/2;
+    CGFloat labelYPos = CGRectGetMidY(self.circleLayer.frame);
+    
+    [self.centreTitleLabel setFrame:CGRectMake(labelXPos, labelYPos, labelWidth, self.pieChartRadius*0.4)];
+    [self.centreSubtitleLabel setFrame:CGRectMake(labelXPos, CGRectGetMaxY(self.centreTitleLabel.frame), labelWidth, CGRectGetHeight(self.centreTitleLabel.frame)*0.6)];
+    
+    [self addSubview:self.centreTitleLabel];
+    [self addSubview:self.centreSubtitleLabel];
 }
 
 - (void)updateValues {
     _legendPaddingHeight = CGRectGetHeight(self.frame) * 0.35;
     _plotRegionHeight = (CGRectGetHeight(self.frame)) - _legendPaddingHeight;
     _pieChartRadius = _plotRegionHeight * 0.55 * 0.5;
-    [_titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/6.0f]];
-    [_valueLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
+    [_centreTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/3.0f]];
+    [_centreSubtitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:_pieChartRadius/6.0f]];
 }
 
 - (UIBezierPath *)circularPath {
@@ -240,11 +259,14 @@ static CGFloat const kAnimationDuration = 0.35f;
                 CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
                 strokeAnimation.fromValue = @(segmentLayer.strokeStart);
                 strokeAnimation.toValue = @(cumulativeValue + value);
-                strokeAnimation.duration = kAnimationDuration + 0.1;
+                strokeAnimation.duration = _animationDuration + 0.1;
                 strokeAnimation.removedOnCompletion = NO;
                 strokeAnimation.fillMode = kCAFillModeForwards;
                 strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
                 [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
+            }
+            else {
+                segmentLayer.strokeEnd = cumulativeValue + value;
             }
         }
         cumulativeValue += value;
@@ -414,7 +436,7 @@ static CGFloat const kAnimationDuration = 0.35f;
             dotAnimation.fromValue = [NSValue valueWithCGPoint:self.circleLayer.position];
             dotAnimation.toValue = [NSValue valueWithCGPoint:dot.position];
             dotAnimation.beginTime = CACurrentMediaTime() + 0.05*idx;
-            dotAnimation.duration = kAnimationDuration;
+            dotAnimation.duration = _animationDuration;
             dotAnimation.removedOnCompletion = NO;
             dotAnimation.fillMode = kCAFillModeForwards;
             dotAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -431,17 +453,6 @@ static CGFloat const kAnimationDuration = 0.35f;
             [textLabel.layer addAnimation:textAnimation forKey:@"textAnimation"];
         }
     }
-}
-
-- (void)drawTitleLabels {
-    CGFloat labelWidth = self.pieChartRadius * 1.2;
-    CGFloat labelXPos = CGRectGetMidX(self.circleLayer.frame) - labelWidth/2;
-    CGFloat labelYPos = CGRectGetMidY(self.circleLayer.frame);
-    
-    [self.valueLabel setFrame:CGRectMake(labelXPos, labelYPos, labelWidth, self.pieChartRadius*0.4)];
-    [self addSubview:self.valueLabel];
-    [self.titleLabel setFrame:CGRectMake(labelXPos, CGRectGetMaxY(self.valueLabel.frame), labelWidth, CGRectGetHeight(self.valueLabel.frame)*0.6)];
-    [self addSubview:self.titleLabel];    
 }
 
 #pragma mark - Data Normalization

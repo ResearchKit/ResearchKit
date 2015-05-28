@@ -43,8 +43,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 @implementation ORKAxisView
 
-@synthesize tintColor = _tintColor;
-
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -125,8 +123,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
-    
+    [super setTintColor:tintColor];
     for (UILabel *label in self.titleLabels) {
         label.textColor = tintColor;
     }

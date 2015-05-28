@@ -34,8 +34,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 @implementation ORKCircleView
 
-@synthesize tintColor = _tintColor;
-
 #pragma mark - Init
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -77,9 +75,9 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #pragma mark - Setter methods
 
 - (void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
+    [super setTintColor: tintColor];
     self.shapeLayer.fillColor = [UIColor whiteColor].CGColor;
-    self.shapeLayer.borderColor = _tintColor.CGColor;
+    self.shapeLayer.borderColor = tintColor.CGColor;
 }
 
 @end

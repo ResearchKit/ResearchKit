@@ -102,7 +102,8 @@ extension ChartListViewController {
         let font = UIFont(name: "HelveticaNeue", size: 11)
         pieChartView.legendFont = font
         pieChartView.percentageFont = font
-        pieChartView.legendPaddingHeight = 42
+        pieChartView.centreTitleLabel.text = "TITLE"
+        pieChartView.centreSubtitleLabel.text = "SUBTITLE"
         /* set more ORKPieChartView properties as desired */
     }
 }

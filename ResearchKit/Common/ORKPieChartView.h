@@ -36,56 +36,135 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+    The pie chart view data source is responsible for providing the data required to populate
+    a pie chart view.
+ */
 ORK_AVAILABLE_DECL
 @protocol ORKPieChartViewDatasource <NSObject>
 
 @required
+/**
+    Returns the number of segments in the pie chart.
+    Defaults to zero if not implemented.
+    
+    @return The number of segments in the pie chart.
+ */
 - (NSInteger)numberOfSegmentsInPieChartView;
 
+/**
+    Returns the value of a segment in the pie chart.
+    Defaults to zero if not implemented.
+ 
+    @param pieChartView     The pie chart view instance using the returned value.
+    @param index            The index of the segment of `pieChartView` displaying the returned value.
+ 
+    @return The value of the segment at the given `index` in `pieChartView`.
+ */
 - (CGFloat)pieChartView:(ORKPieChartView *)pieChartView valueForSegmentAtIndex:(NSInteger)index;
 
 @optional
+/**
+    Returns the color of a segment in the pie chart.
+    Defaults to a unique grayscale shade per segment if not implemented.
+ 
+    @param pieChartView     The pie chart view instance using the returned value.
+    @param index            The index of the segment of `pieChartView` displaying the returned value.
+ 
+    @return The color of the segment at the given `index` in `pieChartView`.
+ */
 - (UIColor *)pieChartView:(ORKPieChartView *)pieChartView colorForSegmentAtIndex:(NSInteger)index;
 
+/**
+    Returns the title which appears in the legend for a segment in the pie chart.
+    Defaults to an empty string if not implemented.
+ 
+    @param pieChartView     The pie chart view instance using the returned value.
+    @param index            The index of the segment of `pieChartView` corresponding to the returned value.
+ 
+    @return The string value to appear as the title for the segement at the given `index` in the legend of `pieChartView`.
+ */
 - (NSString *)pieChartView:(ORKPieChartView *)pieChartView titleForSegmentAtIndex:(NSInteger)index;
 
 @end
 
+/* 
+    The `ORKPieChartView` class presents data provided by an object conforming to the `ORKPieChartViewDataSource`
+    protocol as a pie chart.
+ */
 ORK_CLASS_AVAILABLE
 @interface ORKPieChartView : UIView
 
-@property (nonatomic) CGFloat pieChartRadius;
-
-@property (nonatomic) CGFloat legendDotRadius;
-
-@property (nonatomic) CGFloat legendPaddingHeight;
-
-@property (nonatomic) CGFloat lineWidth;
-
-@property (nonatomic) BOOL shouldAnimate;
-
-@property (nonatomic) BOOL shouldAnimateLegend;
-
-@property (nonatomic) CGFloat animationDuration;
-
-@property (nonatomic, strong, nullable) UIFont *legendFont;
-
-@property (nonatomic, strong, nullable) UIFont *percentageFont;
-
+/**
+    The data source responsible for populating the pie chart with data.
+    If nil, the pie chart will be empty.
+ */
 @property (nonatomic, weak, nullable) id <ORKPieChartViewDatasource> datasource;
 
+/**
+    A Boolean value indicating whether the pie chart should animate when it is drawn.
+    Defaults to YES.
+ */
+@property (nonatomic) BOOL shouldAnimate;
+
+/**
+    A Boolean value indicating whether the legend should animate when it is drawn.
+    Defaults to YES.
+ */
+@property (nonatomic) BOOL shouldAnimateLegend;
+
+/**
+    The duration, measured in seconds, of the pie chart and legend animations.
+    Defaults to a sensible value.
+ */
+@property (nonatomic) CGFloat animationDuration;
+
+/**
+    The font used to display titles appearing in the legend.
+    Defaults to a system font.
+ */
+@property (nonatomic, strong, nullable) UIFont *legendFont;
+
+/**
+    The font used to display the percentages appearing adjacent to each segment.
+    Defaults to a system font.
+ */
+@property (nonatomic, strong, nullable) UIFont *percentageFont;
+
+/**
+    A Boolean value indicating whether the percentage labels drawn adjacent to each segement are hidden.
+    Defaults to NO.
+ */
 @property (nonatomic) BOOL hidesPercentageLabels;
 
+/**
+    A Boolean value indicating whether the legend is hidden.
+    Defaults to NO.
+ */
 @property (nonatomic) BOOL hidesLegend;
 
-@property (nonatomic) BOOL hidesCenterLabels;
+/**
+    A label drawn centrally, within the bounds of the pie chart.
+    The value of the `text` property of this label is empty by default.
+ */
+@property (nonatomic) UILabel *centreTitleLabel;
 
-@property (nonatomic, nullable) UILabel *titleLabel;
+/*
+    A label drawn centrally, within the bounds of the pie chart, beneath the `centreTitleLabel`
+    The value of the `text` property of this label is empty by default.
+ */
+@property (nonatomic) UILabel *centreSubtitleLabel;
 
-@property (nonatomic, nullable) UILabel *valueLabel;
-
+/**
+    A Boolean value indicating whether the pie chart drawing animation should proceed clockwise or anticlockwise.
+    Defaults to YES.
+ */
 @property (nonatomic) BOOL shouldDrawClockwise;
 
+/*
+    A string that will be displayed in the UI if the sum of the values of all segments is zero.
+    Defaults to a sensible value.
+ */
 @property (nonatomic, strong, nullable) NSString *emptyText;
 
 @end

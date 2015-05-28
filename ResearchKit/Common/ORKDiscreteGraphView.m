@@ -105,6 +105,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 #pragma mark - Graph Calculations
 
+
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
     CGFloat canvasYPosition = 0;

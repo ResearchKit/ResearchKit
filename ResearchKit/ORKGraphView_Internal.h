@@ -34,7 +34,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 @class ORKAxisView;
 
-ORK_ENUM_AVAILABLE
 typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
     ORkGraphAnimationTypeNone,
     ORKGraphAnimationTypeFade,
@@ -97,6 +96,10 @@ ORK_EXTERN NSString * const ORKGraphViewRefreshNotification;
 @property (nonatomic, strong) NSMutableArray *dots;
 
 @property (nonatomic) BOOL shouldAnimate;
+
+- (void)sharedInit;
+
+- (NSInteger)numberOfPlots;
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
 

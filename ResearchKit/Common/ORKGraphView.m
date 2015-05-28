@@ -497,7 +497,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         
         
         CGFloat snappedXPosition = [self snappedXPosition:location.x];
-        [self scrubberViewForXPosition:snappedXPosition];
+        [self updateScrubberViewForXPosition:snappedXPosition];
         
         
         if ([self.delegate respondsToSelector:@selector(graphView:touchesMovedToXPosition:)]) {
@@ -518,7 +518,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     }
 }
 
-- (void)scrubberViewForXPosition:(CGFloat)xPosition {
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
     self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
     
     CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
@@ -557,6 +557,17 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             self.scrubberLabel.alpha = alpha;
         }
     }
+}
+
+- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
+    NSUInteger positionIndex = 0;
+    for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+        CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
+        if (xAxisPointVal > xPosition) {
+            break;
+        }
+    }
+    return positionIndex;
 }
 
 #pragma Mark - Animation
@@ -741,7 +752,6 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
     CGFloat value = NSNotFound;
     NSUInteger positionIndex = 0;
-    
     if (snapped) {
         for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
@@ -751,19 +761,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         }
         value = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
     }
-    
     return value;
-}
-
-- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
-    NSUInteger positionIndex = 0;
-    for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
-        CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
-        if (xAxisPointVal == xPosition) {
-            break;
-        }
-    }
-    return positionIndex;
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
@@ -832,13 +830,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 }
 
 - (BOOL)isEmpty {
-    _empty = NO;
-    
-    if (self.minimumValue == NSNotFound && self.maximumValue == NSNotFound) {
-        _empty = YES;
-    }
-    
-    return _empty;
+    return (self.minimumValue == NSNotFound && self.maximumValue == NSNotFound);
 }
 
 - (BOOL)isRangeZero {
