@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #import "ORKDeviceMotionReactionTimeStep.h"
 #import "ORKDeviceMotionReactionTimeViewController.h"
 #import "ORKHelpers.h"
@@ -35,7 +36,7 @@
 
 @implementation ORKDeviceMotionReactionTimeStep
 
-+ (Class) stepViewControllerClass {
++ (Class)stepViewControllerClass {
     return [ORKDeviceMotionReactionTimeViewController class];
 }
 
@@ -52,9 +53,9 @@
     step.thresholdAcceleration = self.thresholdAcceleration;
     step.timeout = self.timeout;
     step.numberOfAttempts = self.numberOfAttempts;
-    self.successSound = self.successSound;
-    self.timeoutSound = self.timeoutSound;
-    self.failureSound = self.failureSound;
+    step.successSound = self.successSound;
+    step.timeoutSound = self.timeoutSound;
+    step.failureSound = self.failureSound;
     return step;
 }
 

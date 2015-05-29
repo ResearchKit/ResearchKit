@@ -39,7 +39,6 @@
 
 
 @implementation ORKDeviceMotionReactionTimeViewController {
-    
     ORKDeviceMotionReactionTimeContentView *_reactionTimeContentView;
     NSMutableArray *_results;
     NSTimer *_stimulusTimer;
@@ -57,40 +56,41 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _results = [@[] mutableCopy];
+    [self configureTitle];
+    _results = [NSMutableArray new];
     _reactionTimeContentView = [ORKDeviceMotionReactionTimeContentView new];
     self.activeStepView.activeCustomView = _reactionTimeContentView;
-    [_reactionTimeContentView setStimulusHidden:true];
-    [self configureTitle];
+    self.activeStepView.stepViewFillsAvailableSpace = YES;
+    [_reactionTimeContentView setStimulusHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self start];
-    _shouldIndicateFailure = true;
+    _shouldIndicateFailure = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    _shouldIndicateFailure = false;
+    _shouldIndicateFailure = NO;
 }
 
 #pragma mark - ORKActiveStepViewController
 
-- (void) start {
+- (void)start {
     [super start];
     [self startStimulusTimer];
 }
 
-- (ORKStepResult *) result {
-    ORKStepResult *sResult = [super result];
-    sResult.results = _results;
-    return sResult;
+- (ORKStepResult *)result {
+    ORKStepResult *stepResult = [super result];
+    stepResult.results = _results;
+    return stepResult;
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     [super applicationWillResignActive:notification];
-    _validResult = false;
+    _validResult = NO;
     [_stimulusTimer invalidate];
     [_timeoutTimer invalidate];
 }
@@ -104,10 +104,10 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
     if (_validResult) {
-        ORKDeviceMotionReactionTimeResult *rtResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier: self.step.identifier];
-        rtResult.timestamp = _stimulusTimestamp;
-        rtResult.fileResult = (ORKFileResult *) result;
-        [_results addObject: rtResult];
+        ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
+        reactionTimeResult.timestamp = _stimulusTimestamp;
+        reactionTimeResult.fileResult = (ORKFileResult *)result;
+        [_results addObject:reactionTimeResult];
     }
     [self attemptDidFinish];
 }
@@ -115,11 +115,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKDeviceMotionRecorderDelegate
 
 - (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion {
-    CMAcceleration ua = motion.userAcceleration;
-    double vectormag = sqrt(((ua.x * ua.x) + (ua.y * ua.y) + (ua.z * ua.z)));
-    if (vectormag > [self reactionTimeStep].thresholdAcceleration) {
-        for (ORKRecorder *r in self.recorders) {
-            [r stop];
+    CMAcceleration v = motion.userAcceleration;
+    double vectorMagnitude = sqrt(((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
+    if (vectorMagnitude > [self reactionTimeStep].thresholdAcceleration) {
+        for (ORKRecorder *recorder in self.recorders) {
+            [recorder stop];
         }
     }
 }
@@ -127,41 +127,45 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 #pragma mark - ORKReactionTimeStepViewController
 
 - (ORKDeviceMotionReactionTimeStep *)reactionTimeStep {
-    return (ORKDeviceMotionReactionTimeStep *) self.step;
+    return (ORKDeviceMotionReactionTimeStep *)self.step;
 }
 
 - (void)configureTitle {
     NSString *format = ORKLocalizedString(@"REACTION_TIME_TASK_ATTEMPTS_FORMAT", nil);
     NSString *text = [NSString stringWithFormat:format, _results.count + 1, [self reactionTimeStep].numberOfAttempts];
-    [self.activeStepView updateTitle: ORKLocalizedString(@"REACTION_TIME_TASK_ACTIVE_STEP_TITLE", nil) text: text];
+    [self.activeStepView updateTitle:ORKLocalizedString(@"REACTION_TIME_TASK_ACTIVE_STEP_TITLE", nil) text:text];
 }
 
 - (void)attemptDidFinish {
     void (^completion)(void) = ^{
-        _results.count == [self reactionTimeStep].numberOfAttempts ? [self finish] : [self resetAfterDelay:2];
+        if ([_results count] == [self reactionTimeStep].numberOfAttempts) {
+            [self finish];
+        } else {
+            [self resetAfterDelay:2];
+        }
     };
     _validResult ? [self indicateSuccess:completion] : [self indicateFailure:completion];
-    _validResult = false;
-    _timedOut = false;
+    _validResult = NO;
+    _timedOut = NO;
     [_stimulusTimer invalidate];
     [_timeoutTimer invalidate];
 }
 
-- (void)indicateSuccess:(void(^)(void)) completion {
+- (void)indicateSuccess:(void(^)(void))completion {
     [_reactionTimeContentView startSuccessAnimationWithDuration:OutcomeAnimationDuration completion:completion];
     AudioServicesPlaySystemSound([self reactionTimeStep].successSound);
 }
 
-- (void)indicateFailure:(void(^)(void)) completion {
+- (void)indicateFailure:(void(^)(void))completion {
     if (!_shouldIndicateFailure) {
         return;
     }
     [_reactionTimeContentView startFailureAnimationWithDuration:OutcomeAnimationDuration completion:completion];
-    UInt32 sound = _timedOut ? [self reactionTimeStep].timeoutSound : [self reactionTimeStep].failureSound;
+    SystemSoundID sound = _timedOut ? [self reactionTimeStep].timeoutSound : [self reactionTimeStep].failureSound;
     AudioServicesPlayAlertSound(sound);
 }
 
-- (void)resetAfterDelay:(NSTimeInterval) delay {
+- (void)resetAfterDelay:(NSTimeInterval)delay {
     __weak __typeof(self) weakSelf = self;
     [_reactionTimeContentView resetAfterDelay:delay completion:^{
         [weakSelf configureTitle];
@@ -170,34 +174,34 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (void)startStimulusTimer {
-    _stimulusTimer = [NSTimer scheduledTimerWithTimeInterval: [self stimulusInterval] target:self selector:@selector(stimulusTimerDidFire) userInfo:nil repeats:NO];
+    _stimulusTimer = [NSTimer scheduledTimerWithTimeInterval:[self stimulusInterval] target:self selector:@selector(stimulusTimerDidFire) userInfo:nil repeats:NO];
 }
 
 - (void)stimulusTimerDidFire {
     _stimulusTimestamp = [NSProcessInfo processInfo].systemUptime;
-    [_reactionTimeContentView setStimulusHidden:false];
-    _validResult = true;
+    [_reactionTimeContentView setStimulusHidden:NO];
+    _validResult = YES;
     [self startTimeoutTimer];
 }
 
 - (void)startTimeoutTimer {
     NSTimeInterval timeout = [self reactionTimeStep].timeout;
     if (timeout > 0) {
-        _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: timeout target:self selector:@selector(timeoutTimerDidFire) userInfo:nil repeats:NO];
+        _timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(timeoutTimerDidFire) userInfo:nil repeats:NO];
     }
 }
 
 - (void)timeoutTimerDidFire {
-    _validResult = false;
-    _timedOut = true;
+    _validResult = NO;
+    _timedOut = YES;
     [self attemptDidFinish];
 }
 
 - (NSTimeInterval)stimulusInterval {
     ORKDeviceMotionReactionTimeStep *step = [self reactionTimeStep];
     NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
-    NSTimeInterval randfac = ((NSTimeInterval) rand() / RAND_MAX) * range;
-    return randfac + step.minimumStimulusInterval;
+    NSTimeInterval randomFactor = ((NSTimeInterval)rand() / RAND_MAX) * range;
+    return randomFactor + step.minimumStimulusInterval;
 }
 
 @end

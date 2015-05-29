@@ -465,6 +465,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKFileResult` class is a result that references the location of a file produced
  during a task.
@@ -508,6 +509,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The 'ORKDeviceMotionReactionTimeResult' class represents the result of a single successful attempt within an ORKDeviceMotionReactionTimeStep.
  
@@ -520,7 +522,6 @@ Using the time taken to reach the thresholdAcceleration as the reactionTime of a
  completes, it may be appropriate to serialize the sample for transmission to a server,
  or to immediately perform analysis on it.
  */
-
 ORK_CLASS_AVAILABLE
 @interface ORKDeviceMotionReactionTimeResult: ORKResult
 
@@ -529,6 +530,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong) ORKFileResult *fileResult;
 
 @end
+
 
 /**
  The `ORKQuestionResult` class is the base class for leaf results from an item that uses an answer format (`ORKAnswerFormat`).
