@@ -342,34 +342,6 @@ typedef NS_OPTIONS(NSUInteger, TestsTaskResultOptions) {
     XCTAssertThrows([orderedTask validateParameters]);
 }
 
-- (void)testFormStep {
-    // Test duplicate form step identifier validation
-    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"form" title:@"Form" text:@"Form test"];
-    NSMutableArray *items = [NSMutableArray new];
-    
-    ORKFormItem *item = nil;
-    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem1"
-                                              text:@"formItem1"
-                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-    [items addObject:item];
-
-    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
-                                              text:@"formItem2"
-                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-    [items addObject:item];
-
-    [formStep setFormItems:items];
-    XCTAssertNoThrow([formStep validateParameters]);
-
-    item = [[ORKFormItem alloc] initWithIdentifier:@"formItem2"
-                                              text:@"formItem2"
-                                      answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-    [items addObject:item];
-
-    [formStep setFormItems:items];
-    XCTAssertThrows([formStep validateParameters]);
-}
-
 #define getIndividualNavigableOrderedTaskSteps() \
     __unused ORKStep *symptomStep = _navigableOrderedTaskSteps[0];\
     __unused ORKStep *severityStep = _navigableOrderedTaskSteps[1];\

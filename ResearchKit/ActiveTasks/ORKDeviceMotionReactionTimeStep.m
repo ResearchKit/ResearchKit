@@ -62,6 +62,11 @@
 - (void)validateParameters {
     [super validateParameters];
     
+    if (self.minimumStimulusInterval <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"minimumStimulusInterval must be greater than zero"
+                                     userInfo:nil];
+    }
     if (self.maximumStimulusInterval < self.minimumStimulusInterval) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"maximumStimulusInterval can not be less than minimumStimulusInterval"
@@ -70,6 +75,11 @@
     if (self.thresholdAcceleration <= 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"thresholdAcceleration must be greater than zero"
+                                     userInfo:nil];
+    }
+    if (self.timeout <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"timeout must be greater than zero"
                                      userInfo:nil];
     }
     if (self.numberOfAttempts <= 0) {
