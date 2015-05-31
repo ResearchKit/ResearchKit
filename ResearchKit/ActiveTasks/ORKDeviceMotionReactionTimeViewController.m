@@ -118,9 +118,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     CMAcceleration v = motion.userAcceleration;
     double vectorMagnitude = sqrt(((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
     if (vectorMagnitude > [self reactionTimeStep].thresholdAcceleration) {
-        for (ORKRecorder *recorder in self.recorders) {
-            [recorder stop];
-        }
+        [self stopRecorders];
     }
 }
 
@@ -144,7 +142,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
             [self resetAfterDelay:2];
         }
     };
-    _validResult ? [self indicateSuccess:completion] : [self indicateFailure:completion];
+    if (_validResult) {
+        [self indicateSuccess:completion];
+    } else {
+        [self indicateFailure:completion];
+    }
     _validResult = NO;
     _timedOut = NO;
     [_stimulusTimer invalidate];
@@ -194,7 +196,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)timeoutTimerDidFire {
     _validResult = NO;
     _timedOut = YES;
-    [self attemptDidFinish];
+    [self stopRecorders];
 }
 
 - (NSTimeInterval)stimulusInterval {

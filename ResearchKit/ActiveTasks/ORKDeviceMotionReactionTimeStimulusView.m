@@ -57,7 +57,6 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     _tickLayer = nil;
     _crossLayer = nil;
     self.layer.backgroundColor = self.tintColor.CGColor;
-    self.hidden = YES;
 }
 
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
@@ -84,12 +83,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 }
 
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
-    if (self.hidden) {
-        if (completion) {
-            completion();
-        }
-        return;
-    }
+    self.hidden = NO;
 
     self.layer.backgroundColor = [UIColor clearColor].CGColor;
     [self addCrossLayer];
@@ -103,6 +97,11 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     _crossLayer.strokeEnd = 1;
     [_crossLayer addAnimation:animation forKey:@"strokeEnd"];
     [CATransaction commit];
+}
+
+- (void)setHidden:(BOOL)hidden {
+    [self reset];
+    [super setHidden:hidden];
 }
 
 - (void)addCrossLayer {
