@@ -82,7 +82,7 @@
         
         _skipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_RECAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(retakePressed)];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
     }
     return self;
@@ -100,28 +100,25 @@
 
 - (void)orientationDidChange {
     AVCaptureVideoOrientation orientation;
-    // The device orientation and the application orientation may not agree.
-    // so only use the actual orientation of the application
-    switch ([UIApplication sharedApplication].statusBarOrientation) {
-        case UIDeviceOrientationLandscapeLeft:
+    switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+        case UIInterfaceOrientationLandscapeRight:
             orientation = AVCaptureVideoOrientationLandscapeRight;
             break;
-        case UIDeviceOrientationLandscapeRight:
+        case UIInterfaceOrientationLandscapeLeft:
             orientation = AVCaptureVideoOrientationLandscapeLeft;
             break;
-        case UIDeviceOrientationPortraitUpsideDown:
+        case UIInterfaceOrientationPortraitUpsideDown:
             orientation = AVCaptureVideoOrientationPortraitUpsideDown;
             break;
-        default:
-        case UIDeviceOrientationPortrait:
+        case UIInterfaceOrientationPortrait:
             orientation = AVCaptureVideoOrientationPortrait;
             break;
+        case UIInterfaceOrientationUnknown:
+            // Do nothing in these cases, since we don't need to change display orientation.
+            return;
     }
-    if ([_previewView videoOrientation] != orientation) {
-        [_previewView setVideoOrientation:orientation];
-        [self.delegate videoOrientationDidChange:orientation];
-        [self setNeedsUpdateConstraints];
-    }
+    [_previewView setVideoOrientation:orientation];
+    [self.delegate videoOrientationDidChange:orientation];
 }
 
 - (void)setImageCaptureStep:(ORKImageCaptureStep *)imageCaptureStep {
@@ -147,6 +144,11 @@
         _continueSkipContainer.continueButtonItem.title = self.continueTitle;
         _continueSkipContainer.skipButtonItem = nil;
     }
+    
+    if (self.mconstraints) {
+        [self removeConstraints:self.mconstraints];
+        [self.mconstraints removeAllObjects];
+    }
     [self setNeedsUpdateConstraints];
 }
 
@@ -154,36 +156,34 @@ const CGFloat CONTINUE_ALPHA_TRANSLUCENT = 0.5;
 const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 
 - (void)updateConstraints {
-    // Remove the existing constraints
-    if (self.mconstraints) {
-        [self removeConstraints:self.mconstraints];
-        [self.mconstraints removeAllObjects];
-    }
     
     NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
     ORKEnableAutoLayoutForViews([dictionary allValues]);
-    if (_error) {
-        // If we have an error to show, do not display the previewView at all
-        [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-        [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-        [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-    } else {
-        // If we do not have an error to show, layout the previewView and continueSkipContainer
-        [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-        [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-    
-        // Float the continue view over the previewView if in landscape to give more room for the preview
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            [self.mconstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
+    if (! [self.mconstraints count]) {
+        if (_error) {
+            // If we have an error to show, do not display the previewView at all
+            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
         } else {
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
+            // If we do not have an error to show, layout the previewView and continueSkipContainer
+            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+            
+            // Float the continue view over the previewView if in landscape to give more room for the preview
+            if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+                [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+                [self.mconstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+                _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
+            } else {
+                [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+                _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
+            }
         }
+        
+        [self addConstraints:self.mconstraints];
     }
     
-    [self addConstraints:self.mconstraints];
     
     [super updateConstraints];
 }
