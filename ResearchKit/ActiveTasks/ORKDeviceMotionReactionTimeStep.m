@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #import "ORKDeviceMotionReactionTimeStep.h"
 #import "ORKDeviceMotionReactionTimeViewController.h"
 #import "ORKHelpers.h"
@@ -35,7 +36,7 @@
 
 @implementation ORKDeviceMotionReactionTimeStep
 
-+ (Class) stepViewControllerClass {
++ (Class)stepViewControllerClass {
     return [ORKDeviceMotionReactionTimeViewController class];
 }
 
@@ -52,15 +53,20 @@
     step.thresholdAcceleration = self.thresholdAcceleration;
     step.timeout = self.timeout;
     step.numberOfAttempts = self.numberOfAttempts;
-    self.successSound = self.successSound;
-    self.timeoutSound = self.timeoutSound;
-    self.failureSound = self.failureSound;
+    step.successSound = self.successSound;
+    step.timeoutSound = self.timeoutSound;
+    step.failureSound = self.failureSound;
     return step;
 }
 
 - (void)validateParameters {
     [super validateParameters];
     
+    if (self.minimumStimulusInterval <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"minimumStimulusInterval must be greater than zero"
+                                     userInfo:nil];
+    }
     if (self.maximumStimulusInterval < self.minimumStimulusInterval) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"maximumStimulusInterval can not be less than minimumStimulusInterval"
@@ -69,6 +75,11 @@
     if (self.thresholdAcceleration <= 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"thresholdAcceleration must be greater than zero"
+                                     userInfo:nil];
+    }
+    if (self.timeout <= 0) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"timeout must be greater than zero"
                                      userInfo:nil];
     }
     if (self.numberOfAttempts <= 0) {

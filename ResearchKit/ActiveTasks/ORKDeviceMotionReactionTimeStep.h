@@ -30,6 +30,7 @@
 
 
 #import <ResearchKit/ResearchKit.h>
+#import <AudioToolbox/AudioServices.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -47,11 +48,11 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, assign) double thresholdAcceleration;
 
-@property (nonatomic, assign) UInt32 successSound;
+@property (nonatomic, assign) SystemSoundID successSound;
 
-@property (nonatomic, assign) UInt32 timeoutSound;
+@property (nonatomic, assign) SystemSoundID timeoutSound;
 
-@property (nonatomic, assign) UInt32 failureSound;
+@property (nonatomic, assign) SystemSoundID failureSound;
 
 @end
 

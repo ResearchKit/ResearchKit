@@ -137,7 +137,7 @@ const GLfloat DefaultPreferredRotation = 0;
         // Get and configure the layer.
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
         
-        eaglLayer.opaque = TRUE;
+        eaglLayer.opaque = YES;
         eaglLayer.drawableProperties = @{ kEAGLDrawablePropertyRetainedBacking : @YES,
                                           kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8};
         

@@ -33,14 +33,13 @@
 
 
 @implementation ORKDeviceMotionReactionTimeStimulusView {
-    
     CAShapeLayer *_tickLayer;
     CAShapeLayer *_crossLayer;
 }
 
 static const CGFloat RoundReactionTimeViewDiameter = 122;
 
-- (instancetype) init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.layer.cornerRadius = RoundReactionTimeViewDiameter * 0.5;
@@ -52,7 +51,23 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     return CGSizeMake(RoundReactionTimeViewDiameter, RoundReactionTimeViewDiameter);
 }
 
+- (void)reset {
+    [_tickLayer removeFromSuperlayer];
+    [_crossLayer removeFromSuperlayer];
+    _tickLayer = nil;
+    _crossLayer = nil;
+    self.layer.backgroundColor = self.tintColor.CGColor;
+    self.hidden = YES;
+}
+
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
+    if (self.hidden) {
+        if (completion) {
+            completion();
+        }
+        return;
+    }
+    
     [self addTickLayer];
     [CATransaction begin];
     [CATransaction setCompletionBlock:completion];
@@ -68,9 +83,15 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     [CATransaction commit];
 }
 
-
 - (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(void(^)(void))completion {
-    [self setStimulusHidden:true];
+    if (self.hidden) {
+        if (completion) {
+            completion();
+        }
+        return;
+    }
+
+    self.layer.backgroundColor = [UIColor clearColor].CGColor;
     [self addCrossLayer];
     [CATransaction begin];
     [CATransaction setCompletionBlock:completion];
@@ -84,19 +105,15 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
     [CATransaction commit];
 }
 
-- (void)setStimulusHidden: (BOOL) hidden {
-    self.layer.backgroundColor = hidden ? [UIColor clearColor].CGColor : self.tintColor.CGColor;
-}
-
 - (void)addCrossLayer {
-     _crossLayer =  [self lineDrawingLayer];
+    _crossLayer = [self lineDrawingLayer];
     _crossLayer.strokeColor = [UIColor redColor].CGColor;
     _crossLayer.path = [self crossPath];
     [self.layer addSublayer:_crossLayer];
 }
 
 - (void)addTickLayer {
-    _tickLayer =  [self lineDrawingLayer];
+    _tickLayer = [self lineDrawingLayer];
     _tickLayer.strokeColor = [UIColor whiteColor].CGColor;
     _tickLayer.path = [self tickPath];
     [self.layer addSublayer:_tickLayer];
@@ -104,7 +121,7 @@ static const CGFloat RoundReactionTimeViewDiameter = 122;
 
 - (CGPathRef)concealPath:(CGFloat)radius {
     return [[UIBezierPath bezierPathWithArcCenter:CGPointMake(radius, radius)
-                                           radius: radius / 2
+                                           radius:radius / 2
                                        startAngle:M_PI + M_PI_2
                                          endAngle:-M_PI_2
                                         clockwise:NO] CGPath];
