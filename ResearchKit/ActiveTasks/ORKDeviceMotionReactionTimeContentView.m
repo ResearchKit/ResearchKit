@@ -62,7 +62,7 @@
 
 - (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_stimulusView reset];
+        _stimulusView.hidden = YES;
         if (completion) {
             completion();
         }
