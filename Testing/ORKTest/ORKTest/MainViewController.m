@@ -396,21 +396,21 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
-                                                                 duration:20.0 options:(ORKPredefinedTaskOption)0];
+                                                                 duration:20.0
+                                                                  options:(ORKPredefinedTaskOption)0];
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
-        return [ORKOrderedTask
-                deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                intendedUseDescription:nil
-                maximumStimulusInterval:8
-                minimumStimulusInterval:4
-                thresholdAcceleration:0.5
-                numberOfAttempts:3
-                timeout:10
-                successSound:0
-                timeoutSound:0
-                failureSound:0
-                options:0];
+        return [ORKOrderedTask deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+                                                   intendedUseDescription:nil
+                                                  maximumStimulusInterval:8
+                                                  minimumStimulusInterval:4
+                                                    thresholdAcceleration:0.5
+                                                         numberOfAttempts:3
+                                                                  timeout:10
+                                                             successSound:0
+                                                             timeoutSound:0
+                                                             failureSound:0
+                                                                  options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }

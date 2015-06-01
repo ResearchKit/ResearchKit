@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)applicationWillResignActive:(NSNotification *)notification;
 - (void)applicationDidBecomeActive:(NSNotification *)notification;
 
+- (void)stopRecorders;
+
 @end
 
 NS_ASSUME_NONNULL_END

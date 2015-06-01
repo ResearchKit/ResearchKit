@@ -751,17 +751,21 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];
     }
     
-    BOOL isDir;
-    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDir];
-    
-    if (! exist) {
-        NSError *error = nil;
-        if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
+    // Only verify existence if the output directory is non-nil.
+    // But, even if the output directory is nil, we still set it and forward to the step VC.
+    if (outputDirectory != nil) {
+        BOOL isDir;
+        BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDir];
+        
+        if (! exist) {
+            NSError *error = nil;
+            if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+                @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
+            }
+            isDir = YES;
+        } else if (! isDir) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
         }
-        isDir = YES;
-    } else if (! isDir) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
     }
     
     _outputDirectory = [outputDirectory copy];

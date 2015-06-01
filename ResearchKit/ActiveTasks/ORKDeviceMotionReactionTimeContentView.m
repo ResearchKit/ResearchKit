@@ -40,17 +40,16 @@
 
 @end
 
-@implementation ORKDeviceMotionReactionTimeContentView {
-    
-    NSArray *_constraints;
-}
+
+@implementation ORKDeviceMotionReactionTimeContentView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         [self addStimulusView];
     }
-    return  self;
+    return self;
 }
 
 - (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(void (^)(void))completion {
@@ -61,63 +60,54 @@
     [_stimulusView startFailureAnimationWithDuration:duration completion:completion];
 }
 
-- (void)resetAfterDelay:(NSTimeInterval)delay completion: (nullable void (^)(void))completion {
+- (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self removeConstraints];
-        [_stimulusView removeFromSuperview];
-        [self addStimulusView];
-        [_stimulusView setStimulusHidden:true];
-        completion();
+        _stimulusView.hidden = YES;
+        if (completion) {
+            completion();
+        }
     });
 }
 
 - (void)addStimulusView {
-    _stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
-    _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
-    _stimulusView.backgroundColor = self.tintColor;
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:_stimulusView];
-    [self setNeedsUpdateConstraints];
-}
-
-- (void)setStimulusHidden:(BOOL)hidden {
-    [_stimulusView setStimulusHidden:hidden];
-}
-
-- (void)removeConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
+    if (!_stimulusView) {
+        _stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
+        _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
+        _stimulusView.backgroundColor = self.tintColor;
+        [self addSubview:_stimulusView];
+        [self setUpStimulusViewConstraints];
     }
 }
 
-- (void)updateConstraints {
-    [self removeConstraints];
+- (void)setStimulusHidden:(BOOL)hidden {
+    _stimulusView.hidden = hidden;
+}
+
+- (void)setUpStimulusViewConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_stimulusView);
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_stimulusView
-                                                               attribute:NSLayoutAttributeCenterX
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeCenterX
-                                                              multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_stimulusView
-                                                               attribute:NSLayoutAttributeTop
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeTop
-                                                              multiplier:1 constant: 8]];
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:8.0]];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_stimulusView]-(>=0)-|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_stimulusView]-(>=0)-|"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
-                                                                               views:views]];
+                                                                               views:NSDictionaryOfVariableBindings(_stimulusView)]];
     
-    _constraints = constraints;
     [NSLayoutConstraint activateConstraints:constraints];
-    [super updateConstraints];
 }
 
 @end
