@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 /**
- *  Coundown label in active steps
+ Coundown label in active steps
  */
 ORK_CLASS_AVAILABLE
 @interface ORKCountdownLabel : ORKLabel

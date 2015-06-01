@@ -31,25 +31,32 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
 /*
  Exposing a minimal set of extra facilities to permit unit testing.
  */
+@interface ORKDataLogger ()
 
-
-@interface ORKDataLogger()
 - (nullable NSFileHandle *)fileHandle;
+
 @end
 
+
 @protocol ORKDataLoggerExtendedDelegate <ORKDataLoggerDelegate>
+
 @optional
 - (void)dataLoggerThresholdsDidChange:(ORKDataLogger *)dataLogger;
+
 @end
 
 
 @interface NSURL (ORKDataLogger)
+
 - (BOOL)ork_isUploaded;
 - (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * __autoreleasing *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

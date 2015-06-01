@@ -31,12 +31,10 @@
 
 #import <ResearchKit/ORKTaskViewController.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKTaskViewController () <UIViewControllerRestoration>
-
-- (void)collectToolbarItemsFromViewController:(UIViewController *)viewController;
-- (void)registeredScrollViewDidScroll:(UIScrollView *)scrollView;
 
 - (nullable NSSet *)requestedHealthTypesForRead;
 - (nullable NSSet *)requestedHealthTypesForWrite;

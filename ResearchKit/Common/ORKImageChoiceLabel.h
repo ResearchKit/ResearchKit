@@ -28,11 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
+
 /**
- *  Text label under image answer option icon
+ Text label under image answer option icon
  */
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoiceLabel : ORKLabel

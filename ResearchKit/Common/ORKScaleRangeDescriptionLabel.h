@@ -29,15 +29,13 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import "ORKScaleRangeLabel.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
-@interface UIApplication (ORKFirstResponderAdditions)
-
-- (nullable UIResponder *)ork_currentFirstResponder;
+/**
+ Start/End description of the range in scale slider.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKScaleRangeDescriptionLabel : ORKScaleRangeLabel
 
 @end
-
-NS_ASSUME_NONNULL_END

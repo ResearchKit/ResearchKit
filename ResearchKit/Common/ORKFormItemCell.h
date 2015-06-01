@@ -28,21 +28,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKFormStep.h>
 #import "ORKSkin.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKFormItemCell;
+
 @protocol ORKFormItemCellDelegate <NSObject>
 
 @required
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(nullable id)answer;
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
-- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;;
+- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
 
 @end
+
 
 @interface ORKFormItemCell : UITableViewCell
 
@@ -52,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
                           maxLabelWidth:(CGFloat)maxLabelWidth
                              screenType:(ORKScreenType)screenType;
 
-@property (nonatomic, weak) id<ORKFormItemCellDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
 
 @property (nonatomic, copy, nullable) id answer;
 @property (nonatomic, strong, nullable) ORKFormItem *formItem;
@@ -60,27 +65,42 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) ORKScreenType screenType;
 
-@property(nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic) CGFloat expectedLayoutWidth;
 
 @end
 
 
 @interface ORKFormItemTextFieldBasedCell : ORKFormItemCell <UITextFieldDelegate>
+
 @end
+
 
 @interface ORKFormItemTextFieldCell : ORKFormItemTextFieldBasedCell
+
 @end
+
 
 @interface ORKFormItemNumericCell : ORKFormItemTextFieldBasedCell
+
 @end
+
 
 @interface ORKFormItemTextCell : ORKFormItemCell <UITextViewDelegate>
+
 @end
+
 
 @interface ORKFormItemImageSelectionCell : ORKFormItemCell
+
 @end
 
+
 @interface ORKFormItemPickerCell : ORKFormItemTextFieldBasedCell
+
+@end
+
+@interface ORKFormItemScaleCell : ORKFormItemCell
+
 @end
 
 NS_ASSUME_NONNULL_END

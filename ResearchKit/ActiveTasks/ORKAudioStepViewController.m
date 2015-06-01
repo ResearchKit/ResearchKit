@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAudioStepViewController.h"
 #import "ORKAudioContentView.h"
 #import "ORKActiveStepViewController_Internal.h"
@@ -41,22 +42,22 @@
 #import "ORKActiveStepView.h"
 #import "ORKCustomStepView_Internal.h"
 
+
 @interface ORKAudioStepViewController ()
 
 @property (nonatomic, strong) AVAudioRecorder *avAudioRecorder;
 
 @end
 
-@implementation ORKAudioStepViewController
-{
+
+@implementation ORKAudioStepViewController {
     ORKAudioContentView *_audioContentView;
     ORKAudioRecorder *_audioRecorder;
-    
     ORKActiveStepTimer *_timer;
+    NSError *_audioRecorderError;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         // Continue audio recording in the background
@@ -68,15 +69,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     _audioContentView = [ORKAudioContentView new];
-    _audioContentView.timeLeft = self.audioStep.duration;
+    _audioContentView.timeLeft = self.audioStep.stepDuration;
     self.activeStepView.activeCustomView = _audioContentView;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self start];
 }
 
@@ -93,7 +92,6 @@
             break;
         }
     }
-    
     _audioRecorder = audioRecorder;
     [self audioRecorderDidChange];
 }
@@ -103,26 +101,26 @@
 }
 
 - (void)doSample {
+    if (_audioRecorderError) {
+        return;
+    }
     [_avAudioRecorder updateMeters];
     float value = [_avAudioRecorder averagePowerForChannel:0];
-    
     // Assume value is in range roughly -60dB to 0dB
     float clampedValue = MAX(value/60.0, -1) + 1;
-    
     [_audioContentView addSample:@(clampedValue)];
     _audioContentView.timeLeft = [_timer duration] - [_timer runtime];
 }
 
 - (void)startNewTimerIfNeeded {
     if (! _timer) {
-        
-        NSTimeInterval duration = self.audioStep.duration;
+        NSTimeInterval duration = self.audioStep.stepDuration;
         __weak typeof(self) weakSelf = self;
         _timer = [[ORKActiveStepTimer alloc] initWithDuration:duration interval:duration/100 runtime:0 handler:^(ORKActiveStepTimer *timer, BOOL finished) {
             typeof(self) strongSelf = weakSelf;
             [strongSelf doSample];
             if (finished) {
-                [self finish];
+                [strongSelf finish];
             }
         }];
         [_timer resume];
@@ -130,16 +128,15 @@
     _audioContentView.finished = NO;
 }
 
-
 - (void)start {
     [super start];
     [self audioRecorderDidChange];
-    
     [_timer reset];
     _timer = nil;
     [self startNewTimerIfNeeded];
     
 }
+
 - (void)suspend {
     [super suspend];
     [_timer pause];
@@ -147,13 +144,18 @@
         [_audioContentView addSample:@(0)];
     }
 }
+
 - (void)resume {
     [super resume];
     [self audioRecorderDidChange];
     [self startNewTimerIfNeeded];
     [_timer resume];
 }
+
 - (void)finish {
+    if (_audioRecorderError) {
+        return;
+    }
     [super finish];
     [_timer reset];
     _timer = nil;
@@ -166,7 +168,12 @@
 - (void)setAvAudioRecorder:(AVAudioRecorder *)recorder {
     _avAudioRecorder = nil;
     _avAudioRecorder = recorder;
-    
+}
+
+- (void) recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error {
+    [super recorder:recorder didFailWithError:error];
+    _audioRecorderError = error;
+    _audioContentView.failed = YES;
 }
 
 @end

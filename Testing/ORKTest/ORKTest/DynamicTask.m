@@ -29,9 +29,9 @@
  */
 
 
-
 #import "DynamicTask.h"
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 @interface DynamicTask ()
 
@@ -43,11 +43,10 @@
 
 @end
 
+
 @implementation DynamicTask
 
-
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
 
@@ -67,13 +66,12 @@
  behavior.
  */
 - (ORKStep *)stepAfterStep:(ORKStep *)step withResult:(id<ORKTaskResultSource>)result {
-    
-    NSString *ident = step.identifier;
+    NSString *identifier = step.identifier;
     if (step == nil) {
         return self.step1;
-    } else if ([ident isEqualToString:self.step1.identifier]) {
+    } else if ([identifier isEqualToString:self.step1.identifier]) {
         return self.step2;
-    } else if ([ident isEqualToString:self.step2.identifier]) {
+    } else if ([identifier isEqualToString:self.step2.identifier]) {
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
         ORKQuestionResult *result = stepResult.results.count > 0 ? [stepResult.results firstObject] : nil;
         if (result.answer != nil) {
@@ -84,7 +82,7 @@
                 return self.step3b;
             }
         }
-    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]){
+    } else if ([identifier isEqualToString:self.step3a.identifier] || [identifier isEqualToString:self.step3b.identifier]) {
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
         ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
         if (result.answer != nil) {
@@ -93,21 +91,19 @@
             }
         }
     }
-
     return nil;
 }
 
-
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
-    NSString *ident = step.identifier;
-    if (ident == nil || [ident isEqualToString:self.step1.identifier]) {
+    NSString *identifier = step.identifier;
+    if (identifier == nil || [identifier isEqualToString:self.step1.identifier]) {
         return nil;
-    } else if ([ident isEqualToString:self.step2.identifier]) {
+    } else if ([identifier isEqualToString:self.step2.identifier]) {
         return self.step1;
-    } else if ([ident isEqualToString:self.step3a.identifier] || [ident isEqualToString:self.step3b.identifier]) {
+    } else if ([identifier isEqualToString:self.step3a.identifier] || [identifier isEqualToString:self.step3b.identifier]) {
         return self.step2;
-    } else if ([ident isEqualToString:self.step4.identifier] ) {
-        ORKQuestionResult *questionResult = (ORKQuestionResult *)[(ORKStepResult *)[result stepResultForStepIdentifier:self.step3a.identifier] firstResult];
+    } else if ([identifier isEqualToString:self.step4.identifier] ) {
+        ORKQuestionResult *questionResult = (ORKQuestionResult *)[[result stepResultForStepIdentifier:self.step3a.identifier] firstResult];
         
         if (questionResult != nil) {
              return self.step3a;
@@ -118,7 +114,6 @@
     
     return nil;
 }
-
 
 // Explicitly hide progress indication for all steps in this dynamic task.
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResultProvider:(NSArray *)surveyResults {
@@ -134,7 +129,6 @@
     return _step1;
 }
 
-
 - (ORKQuestionStep *)step2 {
     if (_step2 == nil) {
         _step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"step2"];
@@ -143,7 +137,6 @@
         _step2.answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:@[@"route1", @"route2"]];
         _step2.optional = NO;
     }
-    
     return _step2;
 }
 
@@ -154,7 +147,6 @@
         _step3a.answerFormat = [ORKBooleanAnswerFormat new];
         _step3a.optional = NO;
     }
-    
     return _step3a;
 }
 
@@ -165,21 +157,16 @@
         _step3b.answerFormat = [ORKBooleanAnswerFormat new];
         _step3b.optional = NO;
     }
-    
     return _step3b;
 }
-
 
 - (ORKActiveStep *)step4 {
     if (_step4 == nil) {
         _step4 = [[ORKActiveStep alloc] initWithIdentifier:@"step4"];
         _step4.title = @"Thank you.";
         _step4.spokenInstruction = @"Thank you.";
-        
     }
-    
     return _step4;
 }
-
 
 @end

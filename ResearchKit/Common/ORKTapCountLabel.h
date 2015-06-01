@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 /**
- *  Display tapping count in tapping interval active task
+ Display tapping count in tapping interval active task
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTapCountLabel : ORKLabel

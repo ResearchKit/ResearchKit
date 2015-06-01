@@ -32,6 +32,7 @@
 #import <UIKit/UIKit.h>
 #import "ORKAnswerTextField.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKCaretOptionalTextField : ORKAnswerTextField
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL hitClearButton;
 
 @end
+
 
 @interface ORKUnitTextField : ORKCaretOptionalTextField
 

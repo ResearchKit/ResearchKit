@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ORKStep.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKConsentDocument;
@@ -49,7 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  An `ORKVisualConsentStep` object produces an `ORKStepResult` object, in which the dates indicate the total amount of time participants have spent in the consent process, and the route by which they can exit the consent process.
  */
-
 ORK_CLASS_AVAILABLE
 @interface ORKVisualConsentStep : ORKStep
 

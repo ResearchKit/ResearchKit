@@ -1,6 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+ Copyright (c) 2015, Bruce Duncan.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -33,17 +35,17 @@
 #import "ORKAccessibility.h"
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKSkin.h"
+#import "ORKScaleSliderView.h"
+#import "ORKScaleRangeDescriptionLabel.h"
 
-@interface ORKScaleSlider ()
-
-@end
 
 @implementation ORKScaleSlider {
     CFAbsoluteTime _axLastOutputTime;
+    BOOL _thumbImageNeedsTransformUpdate;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sliderTouched:)];
@@ -60,17 +62,76 @@
         self.showThumb = NO;
         
         _axLastOutputTime = 0;
+        _thumbImageNeedsTransformUpdate = NO;
     }
     return self;
 }
 
-- (void)setShowThumb:(BOOL)showThumb
-{
+- (void)setShowThumb:(BOOL)showThumb {
     _showThumb = showThumb;
+    [self setNeedsLayout];
 }
 
-- (void)sliderTouched:(UIGestureRecognizer *)gesture
-{
+- (void)setVertical:(BOOL)vertical {
+    if (vertical != _vertical) {
+        _vertical = vertical;
+        self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
+        _thumbImageNeedsTransformUpdate = YES;
+        [self invalidateIntrinsicContentSize];
+    }
+}
+
+// Error prone: needs to be replaced by a custom thumb asset
+// Details here: https://github.com/ResearchKit/ResearchKit/pull/33#discussion_r28804792
+// Tracked here: https://github.com/ResearchKit/ResearchKit/issues/67
+- (UIView *)thumbImageSubview {
+    UIView *thumbImageSubview = nil;
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGRect thumbRect = [self thumbRectForBounds:bounds trackRect:trackRect value:self.value];
+    for (UIView *subview in self.subviews) {
+        if (CGRectEqualToRect(thumbRect, subview.frame)) {
+            thumbImageSubview = subview;
+            break;
+        }
+    }
+    return thumbImageSubview;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (_thumbImageNeedsTransformUpdate) {
+        _thumbImageNeedsTransformUpdate = NO;
+        [self thumbImageSubview].transform = _vertical ? CGAffineTransformMakeRotation(M_PI_2) : CGAffineTransformIdentity;
+    }
+}
+
+- (CGSize)intrinsicContentSize {
+    CGSize intrinsicContentSize = [super intrinsicContentSize];
+    if (_vertical) {
+        CGFloat verticalScaleHeight = ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHeight, self.window);
+        intrinsicContentSize = (CGSize){.width = verticalScaleHeight, .height = verticalScaleHeight};
+    }
+    return intrinsicContentSize;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    BOOL pointInside = NO;
+    if (_vertical) {
+        // In vertical mode, we need to ignore the touch area for the needed extra width
+        const CGFloat desiredSliderWidth = 44.0;
+        const CGFloat actualWidth = [self bounds].size.width;
+        const CGFloat centerX = actualWidth / 2;
+        if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
+            pointInside = [super pointInside:point withEvent:event];
+        }
+    } else {
+        pointInside = [super pointInside:point withEvent:event];
+    }
+    return pointInside;
+}
+
+- (void)sliderTouched:(UIGestureRecognizer *)gesture {
     self.showThumb = YES;
     
     CGPoint touchPoint = [gesture locationInView:self];
@@ -81,6 +142,10 @@
 }
 
 - (void)updateValueForTouchAtPoint:(CGPoint)touchPoint {
+    // Ignore negative (out of bounds) positions
+    if (touchPoint.x < 0) {
+        touchPoint.x = 0;
+    }
     CGRect trackRect = [self trackRectForBounds:[self bounds]];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
@@ -91,15 +156,14 @@
         
         newValue = stepSize*steps * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
     }
-    
     [self setValue:newValue animated:YES];
 }
 
 static CGFloat kLineWidth = 1.0;
-- (void)drawRect:(CGRect)rect
-{
-    CGRect trackRect = [self trackRectForBounds:[self bounds]];
-    CGFloat centerY = [self bounds].size.height / 2.0;
+- (void)drawRect:(CGRect)rect {
+    CGRect bounds = [self bounds];
+    CGRect trackRect = [self trackRectForBounds:bounds];
+    CGFloat centerY = bounds.size.height / 2.0;
     
     [[UIColor blackColor] set];
     
@@ -115,23 +179,18 @@ static CGFloat kLineWidth = 1.0;
             [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
         }
         [path stroke];
-        
     }
-    
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
+
 static CGFloat kPadding = 2.0;
-- (CGRect)trackRectForBounds:(CGRect)bounds
-{
-    
+- (CGRect)trackRectForBounds:(CGRect)bounds {
     CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
     CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
-    
     return rect;
 }
 
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)trackRect value:(float)value {
-    
     CGRect rect = [super thumbRectForBounds:bounds trackRect:trackRect value:value];
     
     // VO needs the thumb to be visible, so we don't hide it if VO is running.
@@ -161,7 +220,16 @@ static CGFloat kPadding = 2.0;
 }
 
 - (NSString *)accessibilityLabel {
-    return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), [self _axFormattedValue:self.minimumValue], [self _axFormattedValue:self.maximumValue]];
+    ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[self ork_superviewOfType:[ORKScaleSliderView class]];
+    NSString *minimumValue = [self _axFormattedValue:self.minimumValue];
+    NSString *maximumValue = [self _axFormattedValue:self.maximumValue];
+    
+    // Include the range description labels if they are set.
+    if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
+        minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@", sliderView.rightRangeDescriptionLabel.text];
+    }
+    return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 
 - (NSString *)accessibilityValue {
@@ -170,7 +238,6 @@ static CGFloat kPadding = 2.0;
     if (!self.showThumb) {
         return nil;
     }
-    
     return [self _axFormattedValue:self.value];
 }
 
@@ -181,7 +248,6 @@ static CGFloat kPadding = 2.0;
     if ([self isDescendantOfView:containingCell]) {
         return UIAccessibilityConvertFrameToScreenCoordinates(containingCell.bounds, containingCell);
     }
-    
     return CGRectZero;
 }
 
@@ -190,8 +256,7 @@ static CGFloat kPadding = 2.0;
 - (NSString *)_axFormattedValue:(CGFloat)value {
     if (_numberOfSteps == 0) {
         return ORKAccessibilityFormatContinuousScaleSliderValue(value, self);
-    }
-    else {
+    } else {
         return ORKAccessibilityFormatScaleSliderValue(value, self);
     }
 }
@@ -212,8 +277,7 @@ static CGFloat kPadding = 2.0;
 
 static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
-    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold )
-    {
+    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [self accessibilityValue]);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }

@@ -33,18 +33,17 @@
 #import "ORKHelpers.h"
 #import <CoreMotion/CoreMotion.h>
 
+
 @implementation CMPedometerData (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionary
-{
-    NSMutableDictionary *dict = [@{@"startDate": ORKStringFromDateISO8601(self.startDate),
-                                   @"endDate": ORKStringFromDateISO8601(self.endDate)
-                                   } mutableCopy];
-    for (NSString *key in @[@"numberOfSteps", @"distance", @"floorsAscended", @"floorsDescended"])
-    {
-        [dict setValue:[self valueForKey:key] forKey:key];
+- (NSDictionary *)ork_JSONDictionary {
+    NSMutableDictionary *dictionary = [@{@"startDate": ORKStringFromDateISO8601(self.startDate),
+                                         @"endDate": ORKStringFromDateISO8601(self.endDate)
+                                         } mutableCopy];
+    for (NSString *key in @[@"numberOfSteps", @"distance", @"floorsAscended", @"floorsDescended"]) {
+        [dictionary setValue:[self valueForKey:key] forKey:key];
     }
-    return dict;
+    return dictionary;
 }
 
 @end

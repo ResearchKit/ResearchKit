@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)picker:(id)picker answerDidChangeTo:(nullable id)answer;
 
 @end
+
 
 @protocol ORKPicker <NSObject>
 
@@ -55,11 +58,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface ORKPicker : NSObject
 
 + (id<ORKPicker>)pickerWithAnswerFormat:(ORKAnswerFormat *)answerFormat answer:(nullable id)answer delegate:(id<ORKPickerDelegate>) delegate;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

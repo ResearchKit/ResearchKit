@@ -10,18 +10,21 @@ the user to walk a short distance, while collecting accelerometer
 sample data on iPhone.
 
 
-##predefined Active Tasks
+##Predefined Active Tasks
 
 At release, the ResearchKit™ framework includes five predefined tasks, which fall into four categories: motor activities, fitness, cognition, and voice. The table below summarizes each task and describes the data it generates.
 
 <table>
 <caption>Active task in ResearchKit</caption>
+<thead>
     <tr>
         <td>Category</td>
         <td>Task</td>
         <td>Sensor</td>
         <td>Data collected</td>
     </tr>
+</thead>
+<tbody>
  <tr><td rowspan = 2>Motor activities</td> 
      <td>Gait and Balance</td>
      <td>Accelerometer<br>
@@ -57,6 +60,7 @@ Correct and actual sequences<br>
     <td>Microphone</td>
     <td>Uncompressed audio</td>
 </tr>
+</tbody>
 </table>
 
 
@@ -136,7 +140,7 @@ targets on the touch screen. The resulting touch data can be used to
 assess basic motor capabilities such as speed, accuracy, and rhythm.
 
 Touch data, and optionally accelerometer data from CoreMotion on iOS, are
-collected using public APIs. No analysis is preformed by the ResearchKit framework
+collected using public APIs. No analysis is performed by the ResearchKit framework
 on the data.
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Motivation for the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep2.png" style="width: 100%;border: solid black 1px;">Providing instruction for the task.</p><p style="clear: both;">
@@ -173,9 +177,9 @@ the game, and the touch inputs made by the user.
 
 The data collected in active tasks is recorded in a hierarchy of
 `ORKResult` objects in memory. It is up to you to serialize this
-hierarchy for storage or transmission n a way that’s appropriate for your application.
+hierarchy for storage or transmission in a way that’s appropriate for your application.
 
-If the data collected is to too large for in-memory delivery, an
+If the data collected is too large for in-memory delivery, an
 `ORKFileResult` is included in the hierarchy instead. The file result
 references a file in the output directory (specified by the
 `outputDirectory` property of `ORKTaskViewController`). For example,

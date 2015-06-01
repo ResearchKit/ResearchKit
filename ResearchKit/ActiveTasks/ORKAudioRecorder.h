@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKRecorder.h>
 #import <AVFoundation/AVFoundation.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -58,20 +60,22 @@ ORK_CLASS_AVAILABLE
  Passed to  AVAudioRecorder`'s `-initWithURL:settings:error:`
  For information on the settings available for an audio recorder, see "AV Foundation Audio Settings Constants".
  */
-@property (nonatomic, copy, readonly, nullable) NSDictionary *recorderSettings;
+@property (nonatomic, copy, readonly) NSDictionary *recorderSettings;
 
 /**
  Returns an initialized audio recorder using the specified settings, step, and output directory.
  
- @param recorderSettings The settings for the recording session.
- @param step The step that requested this recording.
- @param outputDirectory The directory in which the audio output should be stored.
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param recorderSettings    The settings for the recording session.
+ @param step                The step that requested this recorder.
+ @param outputDirectory     The directory in which the audio output should be stored.
+ 
  @return An initialized audio recorder.
  */
-- (instancetype)initWithRecorderSettings:(NSDictionary *)recorderSettings
-                                    step:(ORKStep *)step
-                         outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
-
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                  recorderSettings:(nullable NSDictionary *)recorderSettings
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 /**
  Reference to the audio recorder being used.

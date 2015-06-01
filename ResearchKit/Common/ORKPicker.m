@@ -28,32 +28,27 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKPicker.h"
 #import "ORKDateTimePicker.h"
 #import "ORKTimeIntervalPicker.h"
 #import "ORKValuePicker.h"
 #import "ORKAnswerFormat.h"
 
+
 id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPickerDelegate> delegate) {
-    
     id<ORKPicker> picker;
     
-    if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])
-    {
+    if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    }
-    else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]])
-    {
+    } else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]]) {
         picker = [[ORKTimeIntervalPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    }
-    else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]])
-    {
+    } else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]]) {
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
     
     return picker;
 }
-
 
 @implementation ORKPicker : NSObject
 
@@ -61,16 +56,11 @@ id<ORKPicker> createORKPicker(ORKAnswerFormat *answerFormat, id answer, id<ORKPi
     
     id<ORKPicker> picker;
     
-    if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])
-    {
+    if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         picker = [[ORKValuePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    }
-    else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]])
-    {
+    } else if ([answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]]) {
         picker = [[ORKTimeIntervalPicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
-    }
-    else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]])
-    {
+    } else if ([answerFormat isKindOfClass:[ORKDateAnswerFormat class]] || [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]]) {
         picker = [[ORKDateTimePicker alloc] initWithAnswerFormat:answerFormat answer:answer pickerDelegate:delegate];
     }
     

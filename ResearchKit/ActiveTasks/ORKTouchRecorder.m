@@ -28,11 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTouchRecorder.h"
 #import "ORKDataLogger.h"
 #import "ORKRecorder_Internal.h"
 #import "ORKRecorder_Private.h"
 #import "UITouch+ORKJSONDictionary.h"
+
 
 @protocol ORKTouchRecordingDelegate <NSObject>
 
@@ -40,22 +42,15 @@
 
 @end
 
+
 @interface ORKTouchGestureRecognizer : UIGestureRecognizer
 
 @property (nonatomic, weak) id<ORKTouchRecordingDelegate> eventDelegate;
 
 @end
 
-@implementation ORKTouchGestureRecognizer
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
+@implementation ORKTouchGestureRecognizer
 
 - (void)reportTouches:(NSSet *)touches {
     
@@ -65,22 +60,20 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    [self reportTouches:touches];
-}
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    [self reportTouches:touches];
-}
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    [self reportTouches:touches];
-}
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     [self reportTouches:touches];
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self reportTouches:touches];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self reportTouches:touches];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self reportTouches:touches];
+}
 
 @end
 
@@ -91,10 +84,11 @@
 
 @end
 
-@interface ORKTouchRecorder () <ORKTouchRecordingDelegate>
-{
+
+@interface ORKTouchRecorder () <ORKTouchRecordingDelegate> {
     ORKDataLogger *_logger;
 }
+
 @property (nonatomic, strong) ORKTouchGestureRecognizer *gestureRecognizer;
 
 @property (nonatomic, strong) NSMutableArray *touchArray;
@@ -105,18 +99,10 @@
 
 @end
 
+
 @implementation ORKTouchRecorder
 
-- (instancetype)initWithStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
-    self = [super initWithStep:step
-               outputDirectory:(NSURL *)outputDirectory];
-    return self;
-}
-
-
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
@@ -127,7 +113,6 @@
 }
 
 - (void)start {
-    
     if (! _logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
@@ -144,10 +129,7 @@
         
         self.touchArray = [NSMutableArray array];
         _uptime = [NSProcessInfo processInfo].systemUptime;
-        
-    }
-    else
-    {
+    } else {
         @throw [NSException exceptionWithName:NSGenericException
                                        reason:@"No touch capture view provided"
                                      userInfo:@{@"recorder": self}];
@@ -177,33 +159,27 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
-    if (_touchView)
-    {
+- (void)doStopRecording {
+    if (_touchView) {
         [self.touchView removeGestureRecognizer:self.gestureRecognizer];
         _touchView = nil;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"touch";
 }
-
 
 - (NSString *)mimeType {
     return @"application/json";
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
@@ -218,8 +194,7 @@
     }
     
     NSError *err = nil;
-    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&err])
-    {
+    if (![_logger append:[touch ork_JSONDictionaryInView:view allTouches:self.touchArray] error:&err]) {
         assert(err != nil);
         [self finishRecordingWithError:err];
     }
@@ -227,39 +202,32 @@
 
 @end
 
-@interface ORKTouchRecorderConfiguration()
+
+@interface ORKTouchRecorderConfiguration ()
 
 @end
 
 
 @implementation ORKTouchRecorderConfiguration
 
-- (instancetype)init
-{
-    return [self ork_init];
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [super initWithIdentifier:identifier];
 }
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-               outputDirectory:(NSURL *)outputDirectory {
-    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithStep:step
-                                                      outputDirectory:outputDirectory];
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    ORKTouchRecorder *recorder = [[ORKTouchRecorder alloc] initWithIdentifier:self.identifier
+                                                                         step:step
+                                                              outputDirectory:outputDirectory];
     return recorder;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-    }
-    return self;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    return [super initWithCoder:aDecoder];
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 @end
 

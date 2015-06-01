@@ -35,18 +35,15 @@
 #import "ORKStepViewController.h"
 #import "ORKOrderedTask.h"
 
+
 @implementation ORKStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
-    
     self = [super init];
-    if (self)
-    {
-        if (nil == identifier)
-        {
+    if (self) {
+        if (nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
-        
         _identifier = [identifier copy];
     }
     return self;
@@ -56,8 +53,7 @@
     return [ORKStepViewController class];
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKStep *step = [[[self class] allocWithZone:zone] init];
     step->_identifier = [_identifier copy];
     step.title = _title;
@@ -68,14 +64,12 @@
     return step;
 }
 
-
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
     }
     
     // Ignore the task reference - it's not part of the content of the step.
-    
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.title, castObject.title)
@@ -90,16 +84,13 @@
     return [_identifier hash] ^ [_title hash] ^ [_text hash] ^ (_optional ? 0xf : 0x0);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
@@ -111,8 +102,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, title);
     ORK_ENCODE_OBJ(aCoder, text);
@@ -129,8 +119,7 @@
     return [NSString stringWithFormat:@"<%@ %@ %@>", [super description], self.identifier, self.title];
 }
 
-- (BOOL)showsProgress
-{
+- (BOOL)showsProgress {
     return YES;
 }
 
@@ -146,5 +135,8 @@
     
 }
 
+- (ORKPermissionMask)requestedPermissions {
+    return ORKPermissionNone;
+}
 
 @end

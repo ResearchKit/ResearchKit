@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAccelerometerRecorder.h"
 #import "ORKDataLogger.h"
 #import "CMAccelerometerData+ORKJSONDictionary.h"
@@ -37,36 +38,34 @@
 #import "ORKHelpers.h"
 
 
-@interface ORKAccelerometerRecorder()
-{
+@interface ORKAccelerometerRecorder () {
     ORKDataLogger *_logger;
     NSError *_recordingError;
 }
+
 @property (nonatomic, strong) CMMotionManager *motionManager;
+
 @property (nonatomic) NSTimeInterval uptime;
 
 @end
 
+
 @implementation ORKAccelerometerRecorder
 
-- (instancetype)initWithFrequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
-    self = [super initWithStep:step outputDirectory:outputDirectory];
-    if (self)
-    {
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency step:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    self = [super initWithIdentifier:identifier step:step outputDirectory:outputDirectory];
+    if (self) {
         self.frequency = frequency;
         self.continuesInBackground = YES;
     }
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [_logger finishCurrentLog];
 }
 
-- (NSString *)recorderType
-{
+- (NSString *)recorderType {
     return @"accel";
 }
 
@@ -83,8 +82,8 @@
 }
 
 - (void)start {
-    
     [super start];
+    
     self.motionManager = [self createMotionManager];
     
     if (! _logger) {
@@ -96,8 +95,7 @@
         }
     }
     
-    if (! self.motionManager || ! self.motionManager.accelerometerAvailable)
-    {
+    if (! self.motionManager || ! self.motionManager.accelerometerAvailable) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
                                          userInfo:@{@"recorder" : self}];
@@ -131,7 +129,7 @@
 }
 
 - (NSDictionary *)userInfo {
-    return  @{ @"frequency" : @(self.frequency) };;
+    return  @{ @"frequency" : @(self.frequency) };
 }
 
 - (void)stop {
@@ -150,27 +148,23 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     if (self.isRecording) {
         [self.motionManager stopAccelerometerUpdates];
         self.motionManager = nil;
     }
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:nil];
 }
 
-- (void)reset
-{
+- (void)reset {
     [super reset];
     
     _logger = nil;
 }
-
 
 - (BOOL)isRecording {
     return self.motionManager.accelerometerActive;
@@ -180,67 +174,65 @@
     return @"application/json";
 }
 
-
-
 @end
 
 
-@interface ORKAccelerometerRecorderConfiguration()
+@interface ORKAccelerometerRecorderConfiguration ()
+
 @end
+
 
 @implementation ORKAccelerometerRecorderConfiguration
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithFrequency:(double)freq {
-    self = [self ork_init];
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    @throw [NSException exceptionWithName:NSGenericException reason:@"Use subclass designated initializer" userInfo:nil];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier frequency:(double)frequency {
+    self = [super initWithIdentifier:identifier];
     if (self) {
-        _frequency = freq;
+        _frequency = frequency;
     }
     return self;
 }
 #pragma clang diagnostic pop
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory
-{
-    return [[ORKAccelerometerRecorder alloc] initWithFrequency:self.frequency step:step outputDirectory:outputDirectory];
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    return [[ORKAccelerometerRecorder alloc] initWithIdentifier:self.identifier
+                                                      frequency:self.frequency
+                                                           step:step
+                                                outputDirectory:outputDirectory];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_DOUBLE(aDecoder, frequency);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, frequency);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.frequency == castObject.frequency)) ;
+            (self.frequency == castObject.frequency));
 }
-
 
 - (ORKPermissionMask)requestedPermissionMask {
     return ORKPermissionCoreMotionAccelerometer;
 }
-
-
 
 @end

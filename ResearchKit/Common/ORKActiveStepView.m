@@ -28,17 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKActiveStepView.h"
 #import "ORKTintedImageView.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKActiveStep_Internal.h"
 #import "ORKStep_Private.h"
 
-@implementation  ORKActiveStepView
-{
+
+@implementation  ORKActiveStepView {
     ORKTintedImageView *_imageView;
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -48,7 +48,6 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self tintColorDidChange];
-        
     }
     return self;
 }
@@ -63,8 +62,7 @@
     }
 }
 
-- (void)setActiveStep:(ORKActiveStep *)step
-{
+- (void)setActiveStep:(ORKActiveStep *)step {
     self.continueSkipContainer.useNextForSkip = step.shouldUseNextAsSkipButton;
     _activeStep = step;
     self.headerView.instructionLabel.hidden = ! (_activeStep.hasText);
@@ -92,12 +90,9 @@
     [headerView updateCaptionLabelPreferredWidth];
 }
 
-- (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView
-{
+- (void)setActiveCustomView:(ORKActiveStepCustomView *)activeCustomView {
     _activeCustomView = activeCustomView;
     [self updateStepView];
-    
 }
-
 
 @end

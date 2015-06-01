@@ -28,11 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
+
 
 @interface ORKEAGLMoviePlayerView : UIView
 
-@property CGSize presentationRect;
+@property (nonatomic) CGSize presentationSize;
 
 - (void)setupGL;
 - (BOOL)consumePixelBuffer:(CVPixelBufferRef)pixelBuffer;

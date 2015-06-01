@@ -28,12 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAnswerTextView.h"
+
 
 @implementation ORKAnswerTextView
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self init_ORKAnswerTextView];
@@ -41,8 +42,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self init_ORKAnswerTextView];
@@ -59,7 +59,6 @@
 }
 
 - (void)init_ORKAnswerTextView {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
@@ -73,8 +72,6 @@
     self.font = [[self class] defaultFont];
     [self invalidateIntrinsicContentSize];
 }
-
-
 
 - (void)setFont:(UIFont *)font {
     [super setFont:font];

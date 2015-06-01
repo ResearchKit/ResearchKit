@@ -28,38 +28,48 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCountdownLabel.h"
 #import "ORKHelpers.h"
 
+
 @interface ORKCountdownLabel ()
 
-
-@property (nonatomic, strong) NSString *mmString;
-@property (nonatomic, strong) NSString *ssString;
+@property (nonatomic, copy) NSString *minutesString;
+@property (nonatomic, copy) NSString *secondsString;
 
 @end
 
 
-@implementation ORKCountdownLabel
+@implementation ORKCountdownLabel {
+    NSInteger _currentCountDownValue;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _currentCountDownValue = 0;
+    }
+    return self;
+}
 
 - (void)updateAppearance {
-    [self setCountDownValue:0];
+    [self setCountDownValue:_currentCountDownValue];
 }
 
 - (void)setCountDownValue:(NSInteger)value {
-    
-    _mmString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
-    _ssString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
+    _currentCountDownValue = value;
+    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
+    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
     
     [self renderText];
 }
 
 - (void)renderText {
-    if (_mmString.length==0 || _ssString.length==0) {
+    if (_minutesString.length==0 || _secondsString.length==0) {
         return;
     }
-    
-    [self setText:[NSString stringWithFormat:@"%@:%@", _mmString, _ssString]];
+    [self setText:[NSString stringWithFormat:@"%@:%@", _minutesString, _secondsString]];
     
     [self invalidateIntrinsicContentSize];
 }
@@ -69,8 +79,7 @@
     [self renderText];
 }
 
-- (CGSize)intrinsicContentSize
-{
+- (CGSize)intrinsicContentSize {
     CGSize intrinsic = [super intrinsicContentSize];
     return (CGSize){.width=intrinsic.width,ORKExpectedLabelHeight(self)};
 }

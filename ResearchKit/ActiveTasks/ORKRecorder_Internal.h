@@ -31,21 +31,17 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKDataLogger;
 
-@interface ORKRecorderConfiguration()
-
-- (instancetype)ork_init;  
+@interface ORKRecorderConfiguration ()
 
 @end
 
 
-
 @interface ORKRecorder ()
-
-- (instancetype)ork_init;
 
 @property (nonatomic, strong, nullable) ORKStep *step;
 

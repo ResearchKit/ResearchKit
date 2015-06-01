@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKSpatialSpanMemoryStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKSpatialSpanMemoryStep
 
@@ -41,13 +43,14 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
-    self.shouldStartTimerAutomatically = YES;
-    self.shouldContinueOnFinish = YES;
+    if (self) {
+        self.shouldStartTimerAutomatically = YES;
+        self.shouldContinueOnFinish = YES;
+    }
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKSpatialSpanMemoryStep *step = [super copyWithZone:zone];
     step.initialSpan = self.initialSpan;
     step.minimumSpan = self.minimumSpan;
@@ -62,7 +65,6 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSInteger const ORKSpatialSpanMemoryTaskMinimumInitialSpan = 2;
@@ -72,53 +74,45 @@
     NSInteger const ORKSpatialSpanMemoryTaskMinimumMaxTests = 1;
     NSInteger const ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures = 1;
     
-    if ( self.initialSpan < ORKSpatialSpanMemoryTaskMinimumInitialSpan)
-    {
+    if ( self.initialSpan < ORKSpatialSpanMemoryTaskMinimumInitialSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"initialSpan can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumInitialSpan)]
                                      userInfo:nil];
     }
     
-    if ( self.minimumSpan > self.initialSpan)
-    {
+    if ( self.minimumSpan > self.initialSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"initialSpan can not be less than minimumSpan." userInfo:nil];
     }
     
-    if ( self.initialSpan > self.maximumSpan)
-    {
+    if ( self.initialSpan > self.maximumSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"maximumSpan can not be less than initialSpan." userInfo:nil];
     }
     
-    if ( self.maximumSpan > ORKSpatialSpanMemoryTaskMaximumSpan)
-    {
+    if ( self.maximumSpan > ORKSpatialSpanMemoryTaskMaximumSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"maximumSpan can not be more than %@.", @(ORKSpatialSpanMemoryTaskMaximumSpan)]
                                      userInfo:nil];
     }
     
-    if  (self.playSpeed < ORKSpatialSpanMemoryTaskMinimumPlaySpeed)
-    {
+    if  (self.playSpeed < ORKSpatialSpanMemoryTaskMinimumPlaySpeed) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"playSpeed can not be shorter than %@ seconds.", @(ORKSpatialSpanMemoryTaskMinimumPlaySpeed)]
                                      userInfo:nil];
     }
     
-    if  (self.playSpeed > ORKSpatialSpanMemoryTaskMaximumPlaySpeed)
-    {
+    if  (self.playSpeed > ORKSpatialSpanMemoryTaskMaximumPlaySpeed) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"playSpeed can not be longer than %@ seconds.", @(ORKSpatialSpanMemoryTaskMaximumPlaySpeed)]
                                      userInfo:nil];
     }
     
-    if  (self.maxTests < ORKSpatialSpanMemoryTaskMinimumMaxTests)
-    {
+    if  (self.maxTests < ORKSpatialSpanMemoryTaskMinimumMaxTests) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"maxTests can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxTests)]
                                      userInfo:nil];
     }
     
-    if  (self.maxConsecutiveFailures < ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)
-    {
+    if  (self.maxConsecutiveFailures < ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"maxConsecutiveFailures can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)]
                                      userInfo:nil];
@@ -129,11 +123,9 @@
     return NO;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_INTEGER(aDecoder, initialSpan);
         ORK_DECODE_INTEGER(aDecoder, minimumSpan);
         ORK_DECODE_INTEGER(aDecoder, maximumSpan);
@@ -147,8 +139,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, initialSpan);
     ORK_ENCODE_INTEGER(aCoder, minimumSpan);
@@ -161,11 +152,9 @@
     ORK_ENCODE_OBJ(aCoder, customTargetPluralName);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -179,14 +168,11 @@
             (self.maxTests == castObject.maxTests) &&
             (self.maxConsecutiveFailures == castObject.maxConsecutiveFailures) &&
             (ORKEqualObjects(self.customTargetPluralName, castObject.customTargetPluralName)) &&
-            (self.requireReversal == castObject.requireReversal)) ;
+            (self.requireReversal == castObject.requireReversal));
 }
-
-
 
 - (BOOL)allowsBackNavigation {
     return NO;
 }
 
 @end
-

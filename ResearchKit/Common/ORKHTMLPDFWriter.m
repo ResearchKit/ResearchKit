@@ -33,9 +33,14 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 
+
 #define PPI 72
 #define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
 
+static const CGFloat A4Width = 8.26666667;
+static const CGFloat A4Height = 11.6916667;
+static const CGFloat LetterWidth = 8.5f;
+static const CGFloat LetterHeight = 11.0f;
 
 #pragma mark - ORKHTMLPDFWriter Interface
 
@@ -60,9 +65,6 @@
 
 - (void)drawFooterForPageAtIndex:(NSInteger)pageIndex
                           inRect:(CGRect)footerRect {
-    
-    
-    
     NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex+1), (long)[self numberOfPages]];
     
     if (footer) {
@@ -80,20 +82,20 @@
 
 @end
 
-@interface ORKHTMLPDFWriter () <UIWebViewDelegate>
-{
+
+@interface ORKHTMLPDFWriter () <UIWebViewDelegate> {
     id _selfRetain;
 }
-
 
 @property (nonatomic) CGSize pageSize;
 @property (nonatomic) UIEdgeInsets pageMargins;
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) NSData *data;
-@property (nonatomic, strong) NSError *error;
+@property (nonatomic, copy) NSError *error;
 @property (nonatomic, copy) void (^completionBlock)(NSData *data, NSError *error);
 
 @end
+
 
 @implementation ORKHTMLPDFWriter
 
@@ -166,7 +168,7 @@ static const CGFloat kPageEdge = 72.0f/4;
 + (CGSize)defaultPageSize {
     NSLocale *locale = [NSLocale currentLocale];
     BOOL useMetric = [[locale objectForKey:NSLocaleUsesMetricSystem] boolValue];
-    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(8.26666667, 11.6916667) : ORKSizeMakeWithPPI(8.5f, 11.0f)); // A4 and Letter
+    CGSize pageSize = (useMetric ? ORKSizeMakeWithPPI(A4Width, A4Height) : ORKSizeMakeWithPPI(LetterWidth, LetterHeight)); // A4 and Letter
     
     return pageSize;
 }

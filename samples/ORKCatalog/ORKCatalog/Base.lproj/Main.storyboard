@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D107a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -124,7 +124,7 @@
                                     <segue destination="J8z-1J-U8Z" kind="show" identifier="ShowTaskResult" id="lv2-Jt-0jn"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Image" rowHeight="210" id="Beg-AA-D0T" customClass="ImageTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TextImage" rowHeight="210" id="Beg-AA-D0T" customClass="TextImageTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Beg-AA-D0T" id="Ajx-o2-wnx">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -169,6 +169,29 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Image" id="s1W-oe-ufC" customClass="ImageTableViewCell" customModule="ORKCatalog" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s1W-oe-ufC" id="Rbc-9j-Axi">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1L5-c3-13Z">
+                                            <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1L5-c3-13Z" firstAttribute="trailing" secondItem="Rbc-9j-Axi" secondAttribute="trailingMargin" id="8Oj-5Z-Kqt"/>
+                                        <constraint firstAttribute="centerX" secondItem="1L5-c3-13Z" secondAttribute="centerX" id="AIq-CN-K3j"/>
+                                        <constraint firstItem="1L5-c3-13Z" firstAttribute="leading" secondItem="Rbc-9j-Axi" secondAttribute="leadingMargin" id="UVF-6Z-Rx3"/>
+                                        <constraint firstItem="1L5-c3-13Z" firstAttribute="top" secondItem="Rbc-9j-Axi" secondAttribute="topMargin" id="bPg-mZ-VUQ"/>
+                                        <constraint firstAttribute="centerY" secondItem="1L5-c3-13Z" secondAttribute="centerY" id="fYE-pv-tQB"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="1L5-c3-13Z" secondAttribute="bottom" id="ki3-H3-ZRf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="fullImageView" destination="1L5-c3-13Z" id="qER-BC-N1R"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

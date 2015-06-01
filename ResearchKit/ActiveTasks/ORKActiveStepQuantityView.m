@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKActiveStepQuantityView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
@@ -44,12 +45,13 @@
 @end
 
 
-@implementation ORKActiveStepQuantityView
-{
+@implementation ORKActiveStepQuantityView {
     ORKSubheadlineLabel *_titleLabel;
     ORKQuantityLabel *_valueLabel;
     ORKTintedImageView *_imageView;
     UIView *_valueHolder;
+    
+    NSLayoutConstraint *_zeroWidthConstraint;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -82,8 +84,8 @@
             view.isAccessibilityElement = NO;
         }
         
+        [self setupConstraints];
         [self setNeedsUpdateConstraints];
-        
     }
     return self;
 }
@@ -109,69 +111,95 @@
     _imageView.image = image;
 }
 
-- (void)updateConstraints {
-    [self removeConstraints:[self constraints]];
+- (void)setupConstraints {
     
     const CGFloat TitleBaselineToValueBaseline = 40;
     const CGFloat ValueBaselineToBottom = 36;
     
-    if (! _enabled) {
-        NSLayoutConstraint *zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
-        zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
-        [self addConstraint:zeroWidthConstraint];
-    }
-    NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
     NSMutableArray *additionalConstraints = [NSMutableArray array];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]" options:0 metrics:nil views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
-    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _valueLabel, _imageView);
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]"
+                                                                                       options:(NSLayoutFormatOptions)0
+                                                                                       metrics:nil
+                                                                                         views:views]];
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|"
+                                                                                       options:(NSLayoutFormatOptions)0
+                                                                                       metrics:nil
+                                                                                         views:views]];
+    [additionalConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageView]-10-[_valueLabel]|"
+                                                                                       options:NSLayoutFormatAlignAllCenterY
+                                                                                       metrics:nil
+                                                                                         views:views]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeFirstBaseline
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:_titleLabel
                                                                   attribute:NSLayoutAttributeLastBaseline
-                                                                 multiplier:1 constant:TitleBaselineToValueBaseline]];
+                                                                 multiplier:1.0
+                                                                   constant:TitleBaselineToValueBaseline]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:_valueLabel
                                                                   attribute:NSLayoutAttributeLastBaseline
-                                                                 multiplier:1 constant:ValueBaselineToBottom]];
+                                                                 multiplier:1.0
+                                                                   constant:ValueBaselineToBottom]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeCenterX
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeCenterX
-                                                                 multiplier:1 constant:0]];
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeTop
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:_valueHolder
                                                                   attribute:NSLayoutAttributeTop
-                                                                 multiplier:1 constant:0]];
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueLabel
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationLessThanOrEqual
                                                                      toItem:_valueHolder
                                                                   attribute:NSLayoutAttributeBottom
-                                                                 multiplier:1 constant:0]];
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeLeft
                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeLeft
-                                                                 multiplier:1 constant:0]];
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     [additionalConstraints addObject:[NSLayoutConstraint constraintWithItem:_valueHolder
                                                                   attribute:NSLayoutAttributeRight
                                                                   relatedBy:NSLayoutRelationLessThanOrEqual
                                                                      toItem:self
                                                                   attribute:NSLayoutAttributeRight
-                                                                 multiplier:1 constant:0]];
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
     for (NSLayoutConstraint *constraint in additionalConstraints) {
-        constraint.priority = UILayoutPriorityDefaultHigh;
+        constraint.priority = UILayoutPriorityRequired-2;
     }
-    [self addConstraints:additionalConstraints];
     
+    [NSLayoutConstraint activateConstraints:additionalConstraints];
+    
+    
+    NSLayoutConstraint *zeroWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:0.0];
+    zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
+    _zeroWidthConstraint = zeroWidthConstraint;
+    _zeroWidthConstraint.active = !_enabled;
+}
+
+- (void)updateConstraints {
+    _zeroWidthConstraint.active = !_enabled;
     [super updateConstraints];
 }
 
@@ -195,10 +223,9 @@
 
 @end
 
-@implementation ORKQuantityPairView
-{
+
+@implementation ORKQuantityPairView {
     UIView *_metricKeyline;
-    NSArray *_constraints;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -215,59 +242,88 @@
         [self setKeylineHidden:NO];
         _metricKeyline.backgroundColor = [UIColor ork_midGrayTintColor];
         
-        
         [self addSubview:_leftView];
         [self addSubview:_rightView];
         [self addSubview:_metricKeyline];
-        [self setNeedsUpdateConstraints];
-        
+        [self setupConstraints];
     }
     return self;
 }
 
-- (void)updateConstraints {
+- (void)setupConstraints {
     
-    
-    if (_constraints) {
-        [self removeConstraints:_constraints];
-        _constraints = nil;
-    }
     NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_leftView, _rightView, _metricKeyline);
     
     // Leave space for the keyline between these views, and then constrain it to be 1px wide and go from top to bottom baseline of metric views.
     CGFloat scale = [[UIScreen mainScreen] scale];
-    NSArray *vertConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views];
+    NSArray *vertConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftView]|"
+                                                                       options:(NSLayoutFormatOptions)0
+                                                                       metrics:nil
+                                                                         views:views];
     [constraints addObjectsFromArray:vertConstraints];
     
-    NSArray *horizConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_leftView]-s-[_rightView]-|" options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom|NSLayoutFormatDirectionLeftToRight metrics:@{@"s":@(1/scale)} views:views];
+    NSArray *horizConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_leftView]-s-[_rightView]-|"
+                                                                        options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom|NSLayoutFormatDirectionLeftToRight
+                                                                        metrics:@{ @"s": @(1/scale) }
+                                                                          views:views];
     for (NSLayoutConstraint *constraint in horizConstraints) {
         constraint.priority = UILayoutPriorityDefaultHigh+1;
     }
     [constraints addObjectsFromArray:horizConstraints];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]" options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight metrics:@{@"s":@(1/scale)} views:views]];
+    // Ensure baseline alignment of title and value
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftView.titleLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_rightView.titleLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftView.valueLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_rightView.valueLabel
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]"
+                                                                             options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight
+                                                                             metrics:@{ @"s": @(1/scale) }
+                                                                               views:views]];
     NSLayoutConstraint *keylineBottom = [NSLayoutConstraint constraintWithItem:_metricKeyline
                                                                      attribute:NSLayoutAttributeBottom
                                                                      relatedBy:NSLayoutRelationEqual
                                                                         toItem:_leftView.valueLabel
                                                                      attribute:NSLayoutAttributeLastBaseline
-                                                                    multiplier:1 constant:0];
+                                                                    multiplier:1.0
+                                                                      constant:0.0];
     [constraints addObject:keylineBottom];
     
-    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1.0
+                                                                           constant:ORKScreenMetricMaxDimension];
     maxWidthConstraint.priority = UILayoutPriorityRequired-2;
     [constraints addObject:maxWidthConstraint];
     
     
     // This constraint should be beaten out by the full-width-coverage and zero-width constraints if only one of the views is enabled.
-    NSLayoutConstraint *equalWidthConstraint = [NSLayoutConstraint constraintWithItem:_leftView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_rightView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    NSLayoutConstraint *equalWidthConstraint = [NSLayoutConstraint constraintWithItem:_leftView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_rightView
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
     equalWidthConstraint.priority = UILayoutPriorityDefaultLow;
     [constraints addObject:equalWidthConstraint];
     
-    [self addConstraints:constraints];
-    _constraints = constraints;
-    [super updateConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setKeylineHidden:(BOOL)keylineHidden {
@@ -276,4 +332,3 @@
 }
 
 @end
-

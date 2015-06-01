@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForNumber.h"
 #import "ORKSkin.h"
 #import "ORKAnswerFormat_Internal.h"
@@ -45,8 +44,8 @@
 
 @end
 
-@implementation ORKSurveyAnswerCellForNumber
-{
+
+@implementation ORKSurveyAnswerCellForNumber {
     NSNumberFormatter *_numberFormatter;
 }
 
@@ -54,8 +53,7 @@
     return _textFieldView.textField;
 }
 
-- (void)numberCell_initialize
-{
+- (void)numberCell_initialize {
     ORKQuestionType questionType = self.step.questionType;
     _numberFormatter = [(ORKNumericAnswerFormat *)[[self.step answerFormat] impliedAnswerFormat] makeNumberFormatter];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
@@ -67,12 +65,9 @@
     textField.allowsSelection = YES;
     
     
-    if (questionType == ORKQuestionTypeDecimal)
-    {
+    if (questionType == ORKQuestionTypeDecimal) {
         textField.keyboardType = UIKeyboardTypeDecimalPad;
-    }
-    else if (questionType == ORKQuestionTypeInteger)
-    {
+    } else if (questionType == ORKQuestionTypeInteger) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
@@ -89,7 +84,6 @@
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -100,23 +94,20 @@
     [self answerDidChange];
 }
 
-- (void)setNeedsUpdateConstraints
-{
+- (void)setNeedsUpdateConstraints {
     [NSLayoutConstraint deactivateConstraints:[self constraints]];
     [NSLayoutConstraint deactivateConstraints:[_containerView constraints]];
     [super setNeedsUpdateConstraints];
 }
 
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints
-{
+- (void)updateConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                  options:0 metrics:nil views:views]];
@@ -126,9 +117,7 @@
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|" options:0 metrics:nil views:views]];
     [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|" options:0 metrics:nil views:views]];
 
-    
     [super updateConstraints];
-    
 }
 
 - (BOOL)becomeFirstResponder {
@@ -136,7 +125,6 @@
 }
 
 - (void)prepareView {
-    
     if (self.textField == nil ) {
         [self numberCell_initialize];
     }
@@ -168,15 +156,12 @@
     return isValid;
 }
 
-
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKNumericAnswerFormat *numericFormat = (ORKNumericAnswerFormat *)answerFormat;
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
-    if ([answer isKindOfClass:[NSNumber class]])
-    {
+    if ([answer isKindOfClass:[NSNumber class]]) {
         displayValue = [_numberFormatter stringFromNumber:answer];
     }
    
@@ -188,11 +173,9 @@
     self.textField.text = displayValue;
 }
 
-
 #pragma mark - UITextFieldDelegate
 
 - (void)valueFieldDidChange:(UITextField *)textField {
-    
     ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.step impliedAnswerFormat];
     NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
     textField.text = sanitizedText;
@@ -200,7 +183,6 @@
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    
     [self ork_setAnswer:ORKNullAnswerValue()];
     return YES;
 }
@@ -222,8 +204,7 @@
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
     if (! isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
@@ -232,17 +213,14 @@
     return YES;
 }
 
-
 + (BOOL)shouldDisplayWithSeparators {
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid)
-    {
+    if (! isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
@@ -255,6 +233,5 @@
     NSString *text = self.textField.text;
     [self setAnswerWithText:text];
 }
-
 
 @end

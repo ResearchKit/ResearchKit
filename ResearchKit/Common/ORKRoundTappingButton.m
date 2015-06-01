@@ -28,21 +28,21 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKRoundTappingButton.h"
+
 
 @implementation ORKRoundTappingButton
 
 static const CGFloat RoundTappingButtonDiameter = 104;
 
 - (void)init_ORKTextButton {
-    
     [super init_ORKTextButton];
     self.fadeDelay = 0.2;
     self.layer.cornerRadius = RoundTappingButtonDiameter*0.5;
 }
 
 - (CGSize)intrinsicContentSize {
-    
     return CGSizeMake(RoundTappingButtonDiameter, RoundTappingButtonDiameter);
 }
 

@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKHeadlineLabel.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
+
 
 @implementation ORKHeadlineLabel
 
@@ -61,8 +63,7 @@
 }
 
 // Nasty override (hack)
-- (void)updateAppearance
-{
+- (void)updateAppearance {
     self.font = [self defaultFont];
     [self invalidateIntrinsicContentSize];
 }

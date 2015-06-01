@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKValuePicker.h"
 #import "ORKResult_Private.h"
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKAnswerFormat_Internal.h"
+
 
 @interface ORKValuePicker () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -39,8 +41,9 @@
 
 @end
 
+
 @implementation ORKValuePicker {
-    UIPickerView* _pickerView;
+    UIPickerView *_pickerView;
     id _answer;
     __weak id<ORKPickerDelegate> _pickerDelegate;
 }
@@ -50,7 +53,6 @@
 - (instancetype)initWithAnswerFormat:(ORKValuePickerAnswerFormat *)answerFormat answer:(id)answer pickerDelegate:(id<ORKPickerDelegate>)delegate {
     self = [super init];
     if (self) {
-        
         NSAssert([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]], @"answerFormat should be ORKValuePickerAnswerFormat");
         
         self.helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
@@ -62,7 +64,6 @@
 }
 
 - (UIView *)pickerView {
-    
     if (_pickerView == nil) {
         _pickerView = [[UIPickerView alloc] init];
         _pickerView.dataSource = self;
@@ -73,10 +74,9 @@
 }
 
 - (void)setAnswer:(id)answer {
-    
     _answer = answer;
-    NSNumber *indexNumber = [_helper selectedIndexForAnswer:answer];
     
+    NSNumber *indexNumber = [_helper selectedIndexForAnswer:answer];
     if (indexNumber) {
         [_pickerView selectRow:[indexNumber unsignedIntegerValue] inComponent:0 animated:NO];
     } else {
@@ -89,7 +89,6 @@
 }
 
 - (NSString *)selectedLabelText {
-    
     if ( _answer == ORKNullAnswerValue() || _answer == nil ) {
         return nil;
     }
@@ -125,19 +124,15 @@
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
     return _helper.choiceCount;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
     return [[_helper textChoiceAtIndex:row] text];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
     [self valueDidChange];
 }
-
 
 @end

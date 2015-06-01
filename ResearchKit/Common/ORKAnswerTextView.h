@@ -28,20 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
 #import "ORKDefaultFont.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  The `ORKAnswerTextView` class represents the text view of the answer.
- *  @note The answer text view is used in the answer page and the form page.
+ The `ORKAnswerTextView` class represents the text view of the answer.
+ 
+ @note The answer text view is used in the answer page and the form page.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKAnswerTextView : UITextView <ORKDefaultFont>
 
 @end
+
 
 @interface ORKAnswerTextView ()
 

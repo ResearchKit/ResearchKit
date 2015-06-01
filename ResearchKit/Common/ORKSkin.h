@@ -33,6 +33,7 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Color used for toolbar
@@ -71,6 +72,8 @@ void ORKColorSetColorForKey(NSString *key, UIColor *color);
 
 @end
 
+extern const CGFloat ORKScreenMetricMaxDimension;
+
 typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricTopToCaptionBaseline,
     ORKScreenMetricFontSizeHeadline,
@@ -86,6 +89,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore,
     ORKScreenMetricContinueButtonTopMargin,
     ORKScreenMetricContinueButtonTopMarginForIntroStep,
+    ORKScreenMetricTopToIllustration,
     ORKScreenMetricIllustrationToCaptionBaseline,
     ORKScreenMetricIllustrationHeight,
     ORKScreenMetricInstructionImageHeight,
@@ -99,18 +103,32 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
+    ORKScreenMetricVerticalScaleHeight,
+    ORKScreenMetricSignatureViewHeight,
     ORKScreenMetric_COUNT
 };
 
 typedef NS_ENUM(NSInteger, ORKScreenType) {
+    ORKScreenTypeiPhone6Plus,
     ORKScreenTypeiPhone6,
     ORKScreenTypeiPhone5,
     ORKScreenTypeiPhone4,
+    ORKScreenTypeiPad,
     ORKScreenType_COUNT
 };
 
 ORKScreenType ORKGetScreenTypeForWindow(UIWindow *__nullable window);
 CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenType);
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable window);
+
+CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
+CGFloat ORKStandardHorizMarginForView(UIView *view);
+UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
+UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
+UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
+CGFloat ORKWidthForSignatureView(UIWindow *window);
+
+void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
+
 
 NS_ASSUME_NONNULL_END

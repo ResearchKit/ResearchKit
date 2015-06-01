@@ -28,29 +28,21 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "ORKTextChoiceCellGroup.h"
 #import "ORKAnswerFormat_Internal.h"
 
+
 @interface ORKTextChoiceCellGroupTests : XCTestCase
 
 @end
 
+
 @implementation ORKTextChoiceCellGroupTests
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 - (NSArray *)textChoices {
-    
     static NSArray *choices = nil;
     
     if (choices == nil) {
@@ -64,10 +56,9 @@
 }
 
 - (void)testSingleChoice {
+    ORKTextChoiceAnswerFormat *answerFormat = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[self textChoices]];
     
-    ORKTextChoiceAnswerFormat *af = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:[self textChoices]];
-    
-    ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:af
+    ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
                                                                                             answer:nil
                                                                                 beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                                                                immediateNavigation:YES];
@@ -83,14 +74,13 @@
     XCTAssertTrue([group containsIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]], @"");
     XCTAssertTrue([group containsIndexPath:[NSIndexPath indexPathForRow:[self textChoices].count-1 inSection:0]], @"");
     
-    
     // Test cell generation
     NSUInteger index = 0;
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertNotNil(cell, @"");
         XCTAssertEqualObjects(cell.reuseIdentifier, @"abc", @"");
-        XCTAssertEqual(cell.immediateNavigation , YES, @"");
+        XCTAssertEqual(cell.immediateNavigation, YES, @"");
         XCTAssertEqual(cell.accessoryType, UITableViewCellAccessoryDisclosureIndicator, @"");
     }
     
@@ -98,7 +88,7 @@
     XCTAssertNil(cell, @"");
     
     // Regenerate cell group
-    group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:af
+    group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
                                                                     answer:nil
                                                         beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                                        immediateNavigation:YES];
@@ -123,16 +113,16 @@
         XCTAssertEqual( cell.selectedItem, YES);
     }
     
-    // Test cell deselection
+    // Test cell deselection (ORKChoiceAnswerStyleSingleChoice: selected cell should not deselect if chosen again)
     [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:group.size-1 inSection:0]];
     
     id answer = group.answer;
     XCTAssert([answer isKindOfClass:[NSArray class]]);
-    XCTAssertEqual([answer count], 0);
-    
+    XCTAssertEqual([answer count], 1);
     
     // Test set nil/null answer
     [group setAnswer:nil];
+    answer = group.answer;
     XCTAssertEqual([answer count], 0);
     for ( index = 0 ; index < group.size; index++) {
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
@@ -148,7 +138,6 @@
     
     // Test set answer
     for ( index = 0 ; index < group.size; index++) {
-        
         ORKTextChoice *choice = [self textChoices][index];
         id value = [choice value];
         
@@ -161,22 +150,18 @@
         id answer = group.answer;
         XCTAssert([answer isKindOfClass:[NSArray class]]);
         XCTAssertEqual([answer count], 1);
-        
        
         XCTAssertEqualObjects([answer firstObject], value, @"%@ vs %@", [answer firstObject], value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertTrue( cell.selectedItem );
-        
     }
-    
 }
 
 - (void)testMultiChoice {
+    ORKTextChoiceAnswerFormat *answerFormat = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[self textChoices]];
     
-    ORKTextChoiceAnswerFormat *af = [ORKTextChoiceAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:[self textChoices]];
-    
-    ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:af
+    ORKTextChoiceCellGroup *group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
                                                                                             answer:nil
                                                                                 beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                                                                immediateNavigation:NO];
@@ -206,7 +191,7 @@
     XCTAssertNil(cell, @"");
     
     // Regenerate cellGroup
-    group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:af
+    group = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:answerFormat
                                                                     answer:nil
                                                         beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                                        immediateNavigation:NO];
@@ -246,7 +231,6 @@
     XCTAssert([answer isKindOfClass:[NSArray class]]);
     XCTAssertEqual([answer count], 0);
     
-    
     // Test set nil/null answer
     [group setAnswer:nil];
     XCTAssertEqual([answer count], 0);
@@ -261,12 +245,10 @@
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual(cell.selectedItem, NO);
     }
-    
 
     // Test set answers
     NSMutableArray *answers = [NSMutableArray new];
     for ( index = 0 ; index < group.size; index++) {
-        
         ORKTextChoice *choice = [self textChoices][index];
         id value = [choice value];
         
@@ -287,15 +269,7 @@
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertTrue( cell.selectedItem );
-        
     }
-    
-    
 }
-
-
-
-
-
 
 @end

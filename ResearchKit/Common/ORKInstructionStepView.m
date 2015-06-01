@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKInstructionStepView.h"
 #import "ORKInstructionStep.h"
 #import "ORKHelpers.h"
@@ -40,12 +41,12 @@
 #import "ORKNavigationContainerView_Internal.h"
 
 
-@implementation ORKInstructionStepView
-{
+@implementation ORKInstructionStepView {
     ORKTintedImageView *_instructionImageView;
     BOOL _isCompletionStep;
     NSLayoutConstraint *_instructionImageHeightConstraint;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -58,8 +59,7 @@
     return self;
 }
 
-- (void)setInstructionStep:(ORKInstructionStep *)instructionStep
-{
+- (void)setInstructionStep:(ORKInstructionStep *)instructionStep {
     _instructionStep = instructionStep;
     UIImage *image = _instructionStep.image;
     BOOL hasImage = (image != nil);
@@ -80,20 +80,21 @@
                                                                           relatedBy:NSLayoutRelationLessThanOrEqual
                                                                              toItem:_instructionImageView
                                                                           attribute:NSLayoutAttributeWidth
-                                                                         multiplier:imageSize.height/imageSize.width constant:0]];
+                                                                         multiplier:imageSize.height/imageSize.width
+                                                                           constant:0]];
         
         _instructionImageHeightConstraint = [NSLayoutConstraint constraintWithItem:_instructionImageView
                                                                          attribute:NSLayoutAttributeHeight
                                                                          relatedBy:NSLayoutRelationLessThanOrEqual
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0 constant:300];
+                                                                        multiplier:1.0
+                                                                          constant:300];
         
         [_instructionImageView addConstraint:_instructionImageHeightConstraint];
         _instructionImageView.isAccessibilityElement = YES;
         _instructionImageView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), _instructionStep.title];
-    }
-    else {
+    } else {
         _instructionImageView.isAccessibilityElement = NO;
     }
     
@@ -136,8 +137,8 @@
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
     
     {
-        NSLayoutConstraint *c = _instructionImageHeightConstraint;
-        c.constant = (_instructionImageView.image ? IllustrationHeight : 0);
+        NSLayoutConstraint *constraint = _instructionImageHeightConstraint;
+        constraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
     }
 }
 

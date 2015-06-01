@@ -29,7 +29,6 @@
  */
 
 
-
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSkin.h"
 #import "ORKHelpers.h"
@@ -38,39 +37,29 @@
 #import "ORKAnswerTextField.h"
 #import "ORKAnswerTextView.h"
 
+
 @interface ORKSurveyAnswerCellForText () <UITextViewDelegate>
 
 @property (nonatomic, strong) ORKAnswerTextView *textView;
 @property (nonatomic, strong) UILabel *placeHolder;
 
-
-
 @end
+
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
     NSArray *_constraints;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        
-    }
-    return self;
-}
-
 - (void)applyAnswerFormat {
-    ORKAnswerFormat *af = [self.step.answerFormat impliedAnswerFormat];
+    ORKAnswerFormat *answerFormat = [self.step.answerFormat impliedAnswerFormat];
     
-    if ([af isKindOfClass:[ORKTextAnswerFormat class]]) {
-        ORKTextAnswerFormat *taf = (ORKTextAnswerFormat *)af;
-        _maxLength = [taf maximumLength];
-        self.textView.autocorrectionType = taf.autocorrectionType;
-        self.textView.autocapitalizationType = taf.autocapitalizationType;
-        self.textView.spellCheckingType = taf.spellCheckingType;
+    if ([answerFormat isKindOfClass:[ORKTextAnswerFormat class]]) {
+        ORKTextAnswerFormat *textAnswerFormat = (ORKTextAnswerFormat *)answerFormat;
+        _maxLength = [textAnswerFormat maximumLength];
+        self.textView.autocorrectionType = textAnswerFormat.autocorrectionType;
+        self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
+        self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
     } else {
         _maxLength = 0;
     }
@@ -86,26 +75,23 @@
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)prepareView {
-    
     if (self.textView == nil ) {
         self.preservesSuperviewLayoutMargins = NO;
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self), .top=8, .bottom=8};
+        self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
         
         self.textView = [[ORKAnswerTextView alloc] initWithFrame:CGRectZero];
         
         self.textView.delegate = self;
         self.textView.editable = YES;
         
-        
         [self addSubview:self.textView];
         
-        self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0 , self.bounds.size.width, 36)];
+        self.placeHolder = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0, self.bounds.size.width, 36)];
         self.textView.placeHolder = self.placeHolder;
         self.placeHolder.text = self.step.placeholder? :ORKLocalizedString(@"PLACEHOLDER_LONG_TEXT", nil);
         self.placeHolder.textColor = [UIColor lightGrayColor];
@@ -118,13 +104,10 @@
         
         [self answerDidChange];
     }
-    
-    
     [super prepareView];
 }
 
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
     self.placeHolder.hidden = (self.textView.text.length > 0) && ! [self.textView isFirstResponder];
@@ -197,7 +180,6 @@
     return 180.0;
 }
 
-
 @end
 
 
@@ -207,16 +189,14 @@
 
 @end
 
-@implementation ORKSurveyAnswerCellForTextField
 
+@implementation ORKSurveyAnswerCellForTextField
 
 - (BOOL)becomeFirstResponder {
     return [self.textField becomeFirstResponder];
 }
 
-- (void)textFieldCell_initialize
-{
-    
+- (void)textFieldCell_initialize {
     _textField = [[ORKAnswerTextField alloc] initWithFrame:CGRectZero];
     _textField.text = @"";
     
@@ -231,18 +211,14 @@
     [self setNeedsUpdateConstraints];
 }
 
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    self.contentView.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
+    self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
 }
 
+- (void)updateConstraints {
+    self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
 
-- (void)updateConstraints
-{
-    // Want to use ORKTableViewLeftMargin(), but tableview is not available here.
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
-    self.contentView.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self),.bottom=8,.top=8};
-   
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|" options:0 metrics:nil views:views]];
 
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|" options:0 metrics:nil views:views]];
@@ -250,13 +226,11 @@
     [super updateConstraints];
 }
 
-
 + (BOOL)shouldDisplayWithSeparators {
     return YES;
 }
 
 - (void)prepareView {
-    
     if (self.textField == nil ) {
         [self textFieldCell_initialize];
     }
@@ -269,15 +243,11 @@
     [super prepareView];
 }
 
-
-
 - (BOOL)shouldContinue {
     return ![self correctValueIfNeeded];
 }
 
-
-- (void)answerDidChange
-{
+- (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
@@ -293,9 +263,7 @@
 
 #pragma mark - UITextFieldDelegate
 
-
-- (BOOL)correctValueIfNeeded
-{
+- (BOOL)correctValueIfNeeded {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     NSString *text = self.textField.text;
@@ -311,8 +279,7 @@
     }
 }
 
-- (BOOL)correctionNeededForText:(NSString *)text
-{
+- (BOOL)correctionNeededForText:(NSString *)text {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
@@ -322,11 +289,9 @@
     return NO;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (! [self correctionNeededForText:text])
-    {
+    if (! [self correctionNeededForText:text]) {
         [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     } else {
         return NO;
@@ -335,18 +300,15 @@
     return YES;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [self correctValueIfNeeded];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
     BOOL canContinue = ![self correctValueIfNeeded];
     
-    if (! canContinue)
-    {
+    if (! canContinue) {
         return NO;
     }
     
@@ -359,7 +321,6 @@
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
 }
-
 
 @end
 

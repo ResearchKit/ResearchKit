@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCompletionStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKInstructionStepViewController_Internal.h"
@@ -35,15 +36,17 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 
+
 @interface ORKCompletionStepView : ORKActiveStepCustomView
 
 @property (nonatomic) CGFloat animationPoint;
+
 - (void)setAnimationPoint:(CGFloat)animationPoint animated:(BOOL)animated;
 
 @end
 
-@implementation ORKCompletionStepView
-{
+
+@implementation ORKCompletionStepView {
     CAShapeLayer *_shapeLayer;
 }
 
@@ -107,7 +110,7 @@ static const CGFloat TickViewSize = 122;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     [animation setTimingFunction:timing];
     [animation setFillMode:kCAFillModeBoth];
-    animation.fromValue = @( [(CAShapeLayer *)[_shapeLayer presentationLayer] strokeEnd]);
+    animation.fromValue = @([(CAShapeLayer *)[_shapeLayer presentationLayer] strokeEnd]);
     animation.toValue = @(animationPoint);
     
     animation.duration = 0.3;
@@ -128,10 +131,11 @@ static const CGFloat TickViewSize = 122;
 
 @end
 
-@implementation ORKCompletionStepViewController
-{
+
+@implementation ORKCompletionStepViewController {
     ORKCompletionStepView *_completionStepView;
 }
+
 - (void)stepDidChange {
     [super stepDidChange];
     

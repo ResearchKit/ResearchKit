@@ -28,11 +28,13 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKImageSelectionView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
 #import "ORKImageChoiceLabel.h"
 #import "ORKChoiceAnswerFormatHelper.h"
+
 
 @interface ORKChoiceButtonView : UIView
 
@@ -43,21 +45,18 @@
 
 @end
 
+
 @implementation ORKChoiceButtonView
 
-- (instancetype)initWithImageOption:(ORKImageChoice *)option
-{
+- (instancetype)initWithImageOption:(ORKImageChoice *)option {
     self = [super init];
     if (self) {
-        
         _labelText = option.text.length > 0? option.text: @" ";
-        
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.exclusiveTouch = YES;
        
-        if (option.selectedStateImage)
-        {
+        if (option.selectedStateImage) {
             [_button setImage:option.selectedStateImage forState:UIControlStateSelected];
         }
         
@@ -67,11 +66,9 @@
         
         [self addSubview:_button];
         
-        
         UIView *imageView = _button.imageView;
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(_button, imageView);
         ORKEnableAutoLayoutForViews([dictionary allValues]);
-        
         
         {
             // Add rules for button
@@ -81,31 +78,23 @@
         }
         
         {
-            if(option.normalStateImage.size.height > 0 && option.normalStateImage.size.width > 0)
-            {
+            if (option.normalStateImage.size.height > 0 && option.normalStateImage.size.width > 0) {
                 // Keep Aspect ratio
                 [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:option.normalStateImage.size.height/option.normalStateImage.size.width constant:0]];
                 // button's height <= image
                 [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:option.normalStateImage.size.height]];
-            }
-            else
-            {
+            } else {
                 // Keep Aspect ratio
                 [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
                 ORK_Log_Oops(@"The size of imageChoice's normal image should not be zero. %@",  option.normalStateImage);
             }
-            
-            
         }
         
         // Accessibility
         NSString *trimmedText = [self.labelText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ( trimmedText.length == 0 )
-        {
+        if ( trimmedText.length == 0 ) {
             self.button.accessibilityLabel = ORKLocalizedString(@"AX_UNLABELED_IMAGE", nil);
-        }
-        else
-        {
+        } else {
             self.button.accessibilityLabel = self.labelText;
         }
     }
@@ -114,20 +103,18 @@
 
 @end
 
+
 static const CGFloat kSpacerWidth = 10.0;
 
 @implementation ORKImageSelectionView {
-    
     ORKChoiceAnswerFormatHelper *_helper;
-    
     NSArray *_buttonViews;
     ORKImageChoiceLabel *_choiceLabel;
     ORKImageChoiceLabel *_placeHolderLabel;
     ORKImageChoiceLabel *_invisibleLabel; // Hold tallest text to make sure this view allocate enough space to accommodate _choiceLabel
 }
 
-- (ORKImageChoiceLabel *)makeLabel
-{
+- (ORKImageChoiceLabel *)makeLabel {
     ORKImageChoiceLabel *label = [[ORKImageChoiceLabel alloc] init];
     label.textAlignment = NSTextAlignmentCenter;
     label.numberOfLines = 0;
@@ -166,12 +153,10 @@ static const CGFloat kSpacerWidth = 10.0;
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_choiceLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_invisibleLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_placeHolderLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_invisibleLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
-        
         ORKChoiceButtonView *previousView;
         NSMutableArray *buttonViews = [NSMutableArray new];
         NSMutableArray *labelTextArray = [NSMutableArray new];
         for (ORKImageChoice *option in choices) {
-            
             if (option.text) {
                 [labelTextArray addObject:option.text];
             }
@@ -185,7 +170,6 @@ static const CGFloat kSpacerWidth = 10.0;
             ORKEnableAutoLayoutForViews([dictionary allValues]);
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[buttonView]-30-[_invisibleLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            
             
             if (previousView) {
                 
@@ -219,7 +203,6 @@ static const CGFloat kSpacerWidth = 10.0;
 }
 
 - (void)setAnswer:(id)answer {
-    
     _answer = answer;
     
     NSArray *selectedIndexes = [_helper selectedIndexesForAnswer:answer];
@@ -228,14 +211,12 @@ static const CGFloat kSpacerWidth = 10.0;
 }
 
 - (void)resetLabelText {
-    
     _placeHolderLabel.hidden = NO;
     _choiceLabel.hidden = !_placeHolderLabel.hidden;
     
 }
 
 - (void)setLabelText:(NSString *)text {
-    
     _choiceLabel.text = text;
     _choiceLabel.textColor = [UIColor blackColor];
     
@@ -245,41 +226,32 @@ static const CGFloat kSpacerWidth = 10.0;
 }
 
 - (IBAction)buttonTapped:(UIButton *)button {
-    
     button.selected = !button.selected;
     
-    if (button.selected)
-    {
+    if (button.selected) {
         [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
          {
              ORKChoiceButtonView *buttonView = obj;
-             if (buttonView.button != button)
-             {
+             if (buttonView.button != button) {
                  buttonView.button.selected = NO;
-             }
-             else
-             {
+             } else {
                  [self setLabelText:buttonView.labelText];
              }
              
          }];
         
-    }
-    else
-    {
+    } else {
         [self resetLabelText];
     }
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];
     
-    if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]){
+    if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]) {
         [_delegate selectionViewSelectionDidChange:self];
     }
-    
 }
 
 - (NSArray *)selectedIndexes {
-    
     NSMutableArray *array = [NSMutableArray new];
     
     [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
@@ -295,11 +267,9 @@ static const CGFloat kSpacerWidth = 10.0;
 }
 
 - (void)setSelectedIndexes:(NSArray *)selectedIndexes {
-    
-    [selectedIndexes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-       
-        if ([obj unsignedIntegerValue] < [_buttonViews count]) {
-            ORKChoiceButtonView *buttonView = _buttonViews[[obj unsignedIntegerValue]];
+    [selectedIndexes enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
+        if ([object unsignedIntegerValue] < [_buttonViews count]) {
+            ORKChoiceButtonView *buttonView = _buttonViews[[object unsignedIntegerValue]];
             [buttonView button].selected = YES;
             [self setLabelText:buttonView.labelText];
         }

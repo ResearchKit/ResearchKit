@@ -34,6 +34,7 @@
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKStep;
@@ -42,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKTaskResult;
 @class ORKTaskViewController;
 @protocol ORKTaskResultSource;
-
 
 /**
  The `ORKTaskViewControllerFinishReason` value indicates how the task view controller has finished
@@ -81,23 +81,22 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
  in response to this method, and may also need to collect and process the results
  of the task.
 
- @param      taskViewController     The `ORKTaskViewController `instance that is returning the result.
- @param      reason                 An `ORKTaskViewControllerFinishReason` value indicating how the user chose to complete the task.
- @param      error                  If failure occurred, an `NSError` object indicating the reason for the failure. The value of this parameter is `nil` if `result` does not indicate failure.
+ @param taskViewController  The `ORKTaskViewController `instance that is returning the result.
+ @param reason              An `ORKTaskViewControllerFinishReason` value indicating how the user chose to complete the task.
+ @param error               If failure occurred, an `NSError` object indicating the reason for the failure. The value of this parameter is `nil` if `result` does not indicate failure.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(nullable NSError *)error;
 
 @optional
-
 /**
  Signals that an error has been detected by a recorder.
  
  Recorder errors can occur during active steps, typically because sensor data is unavailable or there isn't enough disk space to record the results.
  You can use this method as an opportunity to respond to the error by, for example, logging and ignoring it.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      recorder               The recorder that detected the error. `ORKStep` and `ORKRecorderConfiguration` objects can be found in the recorder instance.
- @param      error                  The error that was detected.
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param recorder            The recorder that detected the error. `ORKStep` and `ORKRecorderConfiguration` objects can be found in the recorder instance.
+ @param error               The error that was detected.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
 
@@ -112,7 +111,8 @@ typedef NS_ENUM(NSInteger, ORKTaskViewControllerFinishReason) {
 task view controller and pass that data to `initWithTask:restorationData:` when it is time
  to create a new task view controller to continue from the point at which the user stopped.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ 
  @return `YES` if save and restore should be supported; otherwise, `NO`.
  */
 - (BOOL)taskViewControllerSupportsSaveAndRestore:(ORKTaskViewController *)taskViewController;
@@ -129,8 +129,9 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  the task view controller asks its delegate to determine if Learn More content is available,
  and to request that it be displayed.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      step                   The step for which the task view controller needs to know if there is Learn More content.
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The step for which the task view controller needs to know if there is Learn More content.
+ 
  @return `NO` if there is no Learn More content to display.
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController hasLearnMoreForStep:(ORKStep *)step;
@@ -150,9 +151,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  When this method is called, the app should respond to the Learn More action by
  presenting a dialog or other view (possibly modal) that contains the Learn More content.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      stepViewController     The `ORKStepViewController` that reported the Learn More event to the task view controller.
- 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param stepViewController  The `ORKStepViewController` that reported the Learn More event to the task view controller.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController learnMoreForStep:(ORKStepViewController *)stepViewController;
 
@@ -168,8 +168,9 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  
  The delegate should provide a step view controller implementation for any custom step.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      step                   The step for which a view controller is requested.
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The step for which a view controller is requested.
+ 
  @return A custom view controller, or `nil` to request the default step controller for this step.
  */
 - (nullable ORKStepViewController *)taskViewController:(ORKTaskViewController *)taskViewController viewControllerForStep:(ORKStep *)step;
@@ -187,10 +188,10 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  If you return `NO`, it's often appropriate to present a dialog or take
  some other UI action to explain why navigation was denied.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      step                   The step for which presentation is requested.
- @return `YES` if navigation should proceed to the specified step; `NO` if navigation
-  should not proceed.
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param step                The step for which presentation is requested.
+ 
+ @return `YES` if navigation should proceed to the specified step; `NO` if navigation should not proceed.
  */
 - (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldPresentStep:(ORKStep *)step;
 
@@ -205,9 +206,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  properties, or modify other button state. Another possible use case is when a particular
  step view controller requires additional setup before presentation.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      stepViewController     The `ORKStepViewController` that is about to be displayed.
- 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param stepViewController  The `ORKStepViewController` that is about to be displayed.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController stepViewControllerWillAppear:(ORKStepViewController *)stepViewController;
 
@@ -217,14 +217,12 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  The task view controller calls this method when steps start or finish, or if an answer has
  changed in the current step due to editing or other user interaction.
  
- @param      taskViewController     The calling `ORKTaskViewController` instance.
- @param      result                 The current value of the result.
- 
+ @param taskViewController  The calling `ORKTaskViewController` instance.
+ @param result              The current value of the result.
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
 
 @end
-
 
 
 /**
@@ -258,26 +256,25 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
 ORK_CLASS_AVAILABLE
 @interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
 
-
 /**
  Returns a newly initialized task view controller.
  
  This method is the primary designated initializer.
 
- @param task             The task to be presented.
- @param taskRunUUID      The UUID of this instance of the task. If `nil`, a new UUID
-    is generated.
+ @param task            The task to be presented.
+ @param taskRunUUID     The UUID of this instance of the task. If `nil`, a new UUID is generated.
+ 
  @return A new task view controller.
  */
 - (instancetype)initWithTask:(nullable id<ORKTask>)task taskRunUUID:(nullable NSUUID *)taskRunUUID NS_DESIGNATED_INITIALIZER;
-
 
 /**
  Returns a new task view controller initialized from data in the given unarchiver.
  
  This method lets you instantiate a task view controller from a storyboard, although this is an atypical use case. This method is a designated initializer.
  
- @param aDecoder             The coder from which to initialize the task view controller.
+ @param aDecoder    The coder from which to initialize the task view controller.
+ 
  @return A new task view controller.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -287,8 +284,9 @@ ORK_CLASS_AVAILABLE
  
  This method is a designated initializer.
  
- @param nibNameOrNil             The name of the nib file from which to instantiate the task view controller.
- @param nibBundleOrNil           The name of the bundle in which to search for the nib file.
+ @param nibNameOrNil    The name of the nib file from which to instantiate the task view controller.
+ @param nibBundleOrNil  The name of the bundle in which to search for the nib file.
+ 
  @return A new task view controller.
  */
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
@@ -302,9 +300,10 @@ ORK_CLASS_AVAILABLE
  This method restores the presentation of the task to the point at which the user stopped.
  If the restoration data is not valid, an exception may be thrown.
  
- @param task      The task to be presented.
- @param data      Data obtained from the `restorationData` property of a previous
+ @param task    The task to be presented.
+ @param data    Data obtained from the `restorationData` property of a previous
     task view controller instance.
+ 
  @return A new task view controller.
  */
 - (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(NSData *)data;
@@ -353,7 +352,6 @@ ORK_CLASS_AVAILABLE
  is presented.
  */
 @property (nonatomic, copy) NSUUID *taskRunUUID;
-
 
 /**
  The current state of the task result. (read-only)
@@ -445,7 +443,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 
-
 /**
  Shows or hides the navigation bar, with optional animation.
  
@@ -464,4 +461,3 @@ ORK_CLASS_AVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
-

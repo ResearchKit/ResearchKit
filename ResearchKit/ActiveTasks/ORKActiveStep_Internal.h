@@ -28,18 +28,19 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKActiveStep.h>
+
 
 @interface ORKActiveStep ()
 
 /**
- * Convenience methods.
+ Convenience methods.
  */
 - (BOOL)startsFinished;
 - (BOOL)hasCountDown;
 - (BOOL)hasTitle;
 - (BOOL)hasText;
 - (BOOL)hasVoice;
-
 
 @end

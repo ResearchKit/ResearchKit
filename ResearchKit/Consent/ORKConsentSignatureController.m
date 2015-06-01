@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSignatureController.h"
 #import "ORKTextButton.h"
 #import "ORKSkin.h"
@@ -35,6 +36,7 @@
 #import "ORKVerticalContainerView_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
+
 
 @interface ORKConsentSignatureWrapperView : UIView
 
@@ -47,8 +49,7 @@
 @end
 
 
-@implementation ORKConsentSignatureWrapperView
-{
+@implementation ORKConsentSignatureWrapperView {
     NSArray *_constraints;
 }
 
@@ -72,7 +73,6 @@
             [self addSubview:_clearButton];
         }
         {
-            
             _signatureView = [ORKSignatureView new];
             [_signatureView setClipsToBounds:YES];
             
@@ -84,7 +84,7 @@
             [self addSubview:_signatureView];
         }
         
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self)*2,.right=ORKStandardMarginForView(self)*2};
+        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
         
         [self setNeedsUpdateConstraints];
     }
@@ -113,16 +113,35 @@
         _constraints = nil;
     }
     
-    
-    [super updateConstraints];
-    
     NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_clearButton, _signatureView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_signatureView]-(>=0)-[_clearButton]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_signatureView]-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_clearButton]-(>=0)-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_signatureView]-(>=0)-[_clearButton]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_signatureView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_signatureView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:ORKWidthForSignatureView(self.window)]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_clearButton]-(>=0)-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     
     /*
      Using top margin here is a hack to get the drawable area of the signature view to poke up
@@ -134,29 +153,32 @@
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeTop
-                                                       multiplier:1 constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_clearButton
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1 constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_clearButton
                                                         attribute:NSLayoutAttributeBaseline
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_signatureView
                                                         attribute:NSLayoutAttributeBottom
-                                                       multiplier:1 constant:30]];
+                                                       multiplier:1.0
+                                                         constant:30.0]];
     
     [self addConstraints:constraints];
     _constraints = constraints;
+    
+    [super updateConstraints];
 }
 
-
 @end
-
 
 
 @interface ORKConsentSigningView : ORKVerticalContainerView
@@ -164,6 +186,7 @@
 @property (nonatomic, strong) ORKConsentSignatureWrapperView *wrapperView;
 
 @end
+
 
 @implementation ORKConsentSigningView
 
@@ -185,16 +208,15 @@
     return self;
 }
 
-
-
 @end
 
-@interface ORKConsentSignatureController()
 
+@interface ORKConsentSignatureController ()
 
 @property (nonatomic, strong) ORKConsentSigningView *signingView;
 
 @end
+
 
 @implementation ORKConsentSignatureController
 
@@ -251,6 +273,5 @@
     _signingView.continueSkipContainer.continueEnabled = signatureView.signatureExists;
     [_signingView.wrapperView setClearButtonEnabled:YES];
 }
-
 
 @end

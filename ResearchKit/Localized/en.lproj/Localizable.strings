@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Activity Complete";
 "TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Take a deep breath and say “Aaaaah” into the microphone for as long as you can. Keep a steady vocal volume so the audio bars remain blue.";
 "AUDIO_INTENDED_USE" = "This activity evaluates your voice by recording it with the microphone at the bottom of your phone.";
 "AUDIO_TOO_LOUD_LABEL" = "Too Loud";
+"AUDIO_GENERIC_ERROR_LABEL" = "Unable to record audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
+"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap the button when you are ready to begin.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time you start hearing a sound.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatial Memory";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Game Complete";
 "MEMORY_GAME_PAUSED_TITLE" = "Paused";
 "MEMORY_GAME_PAUSED_MESSAGE" = "To continue, tap Next";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaction Time";
+"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %D of %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorrect";
 "AX.MEMORY.TILE.QUIESCENT" = "quiescent";
 "AX.MEMORY.TILE.LABEL" = "Memory game tile";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
 

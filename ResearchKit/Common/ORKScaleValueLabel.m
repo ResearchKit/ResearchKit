@@ -28,14 +28,23 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKScaleValueLabel.h"
 #import "ORKHelpers.h"
+
 
 @implementation ORKScaleValueLabel
 
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
     return ORKLightFontWithSize([[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue]+18.0);
+}
+
+- (CGSize)intrinsicContentSize {
+    CGSize intrinsic = [super intrinsicContentSize];
+    // Force the intrinsic content height to always be the height of the font, so that an
+    // empty label height doesnt go to 0, which would cause slider controls to jump
+    return (CGSize){.width=intrinsic.width,self.font.lineHeight};
 }
 
 @end

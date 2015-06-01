@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKWalkingTaskStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
@@ -41,12 +42,16 @@
 #import "ORKPedometerRecorder.h"
 #import "ORKActiveStepView.h"
 
+
 static const CGFloat kProgressCircleDiameter = 10;
 static const CGFloat kProgressCircleSpacing = 4;
 
 @interface ORKWalkingProgressCircleView : UIView
+
 @property (nonatomic, assign) BOOL completed;
+
 @end
+
 
 @implementation ORKWalkingProgressCircleView
 
@@ -80,14 +85,15 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 @end
 
+
 @interface ORKWalkingProgressView : UIView
 
 @property (nonatomic, assign) NSInteger count;
 
 @end
 
-@implementation ORKWalkingProgressView
-{
+
+@implementation ORKWalkingProgressView {
     NSArray *_circles;
     NSInteger _index;
     NSTimer *_timer;
@@ -175,14 +181,10 @@ static const CGFloat kProgressCircleSpacing = 4;
     }
 }
 
-
 @end
 
 
-
-
-@interface ORKWalkingContentView : ORKActiveStepCustomView
-{
+@interface ORKWalkingContentView : ORKActiveStepCustomView {
     ORKScreenType _screenType;
     NSLayoutConstraint *_topConstraint;
 }
@@ -190,6 +192,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 @property  (nonatomic, strong, readonly) ORKWalkingProgressView *progressView;
 
 @end
+
 
 @implementation ORKWalkingContentView
 
@@ -238,21 +241,20 @@ static const CGFloat kProgressCircleSpacing = 4;
     [super updateConstraints];
 }
 
-
 @end
 
-@interface ORKWalkingTaskStepViewController () <ORKPedometerRecorderDelegate>
-{
+
+@interface ORKWalkingTaskStepViewController () <ORKPedometerRecorderDelegate> {
     NSInteger _intendedSteps;
     ORKWalkingContentView *_contentView;
 }
+
 @end
+
 
 @implementation ORKWalkingTaskStepViewController
 
-
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = NO;
@@ -263,7 +265,6 @@ static const CGFloat kProgressCircleSpacing = 4;
 - (ORKWalkingTaskStep *)walkingTaskStep {
     return (ORKWalkingTaskStep *)self.step;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

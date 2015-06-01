@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,21 +29,17 @@
  */
 
 
-#import "UIApplication+ResearchKit.h"
-#import "UIResponder+ResearchKit.h"
+#import "ORKCustomStepView_Internal.h"
 
-@implementation UIApplication (ResearchKit)
 
-- (UIResponder *)ork_currentFirstResponder {
-    NSMutableArray *sender = [NSMutableArray new] ;
-    [self sendAction:@selector(ork_updateCurrentFirstResponder:)
-                                               to:nil
-                                             from:sender
-                                         forEvent:nil];
-    
-    
-    return [sender firstObject];
-}
+@interface ORKDeviceMotionReactionTimeContentView : ORKActiveStepCustomView
 
+- (void)setStimulusHidden:(BOOL)hidden;
+
+- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+
+- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+
+- (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion;
 
 @end

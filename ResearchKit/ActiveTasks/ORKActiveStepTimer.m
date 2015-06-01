@@ -28,24 +28,23 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKActiveStepTimer.h"
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 #import <UIKit/UIKit.h>
 
+
 static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
-    
     static mach_timebase_info_data_t    sTimebaseInfo;
     if ( sTimebaseInfo.denom == 0 ) {
         (void) mach_timebase_info(&sTimebaseInfo);
     }
     uint64_t elapsedNano = delta * sTimebaseInfo.numer / sTimebaseInfo.denom;
-    
     return elapsedNano * 1.0 / NSEC_PER_SEC;
 }
 
-@implementation ORKActiveStepTimer
-{
+@implementation ORKActiveStepTimer {
     uint64_t _startTime;
     NSTimeInterval _preExistingRuntime;
     dispatch_queue_t _queue;
@@ -53,7 +52,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     UIBackgroundTaskIdentifier _backgroundTaskIdentifier;
     uint32_t _isRunning;
 }
-
 
 - (instancetype)initWithDuration:(NSTimeInterval)duration interval:(NSTimeInterval)interval runtime:(NSTimeInterval)runtime handler:(ORKActiveStepTimerHandler)handler {
     self = [super init];
@@ -158,10 +156,10 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     if (_backgroundTaskIdentifier == UIBackgroundTaskInvalid) {
         return;
     }
-    UIBackgroundTaskIdentifier ident = _backgroundTaskIdentifier;
+    UIBackgroundTaskIdentifier identifier = _backgroundTaskIdentifier;
     _backgroundTaskIdentifier = UIBackgroundTaskInvalid;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] endBackgroundTask:ident];
+        [[UIApplication sharedApplication] endBackgroundTask:identifier];
     });
 }
 
@@ -178,7 +176,6 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
 }
 
 - (void)queue_resume {
-    
     if (_timer != NULL) {
         // Already resumed
         return;
@@ -211,7 +208,7 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     _startTime = mach_absolute_time();
     dispatch_source_set_timer(_timer,
                               dispatch_time(DISPATCH_TIME_NOW, timeUntilNextFire * NSEC_PER_SEC),
-                              _interval * NSEC_PER_SEC ,
+                              _interval * NSEC_PER_SEC,
                               0.05 * NSEC_PER_SEC);
     dispatch_resume(_timer);
 }
@@ -238,6 +235,5 @@ static NSTimeInterval timeIntervalFromMachTime(uint64_t delta) {
     _preExistingRuntime = 0;
     [self queue_releaseBackgroundTask];
 }
-
 
 @end

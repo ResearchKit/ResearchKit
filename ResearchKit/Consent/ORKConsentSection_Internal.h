@@ -28,13 +28,19 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKConsentSection.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
 
 @interface ORKConsentSection ()
 
 @property (nonatomic, readonly, nullable) NSString *escapedContent;
+
+@property (nonatomic, readonly, nullable) UIImage *image;
 
 @end
 

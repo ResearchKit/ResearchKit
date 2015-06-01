@@ -41,6 +41,7 @@
 #import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
 
+
 @interface ClassProperty : NSObject
 
 @property (nonatomic, copy) NSString *propertyName;
@@ -50,6 +51,7 @@
 - (instancetype)initWithObjcProperty:(objc_property_t)property;
 
 @end
+
 
 @implementation ClassProperty
 
@@ -69,13 +71,10 @@
         if ([typeAttribute hasPrefix:@"T@"]) {
              _isPrimitiveType = NO;
             Class typeClass = nil;
-            if ([typeAttribute length] > 4)
-            {
+            if ([typeAttribute length] > 4) {
                 NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  //turns @"NSDate" into NSDate
                 typeClass = NSClassFromString(typeClassName);
-            }
-            else
-            {
+            } else {
                 typeClass = [NSObject class];
             }
             self.propertyClass = typeClass;
@@ -88,6 +87,7 @@
 }
 
 @end
+
 
 @interface MockCountingDictionary : NSObject
 
@@ -103,8 +103,8 @@
 
 @end
 
-@implementation MockCountingDictionary
-{
+
+@implementation MockCountingDictionary {
     NSDictionary *_d;
 }
 
@@ -125,18 +125,16 @@
     return [_d methodSignatureForSelector:aSelector];
 }
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
-    if ([_d respondsToSelector:
-         [anInvocation selector]])
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([_d respondsToSelector:[anInvocation selector]]) {
         [anInvocation invokeWithTarget:_d];
-    else
+    } else {
         [super forwardInvocation:anInvocation];
+    }
 }
 
 - (void)startObserving {
     self.touchedKeys = [NSMutableSet new];
-    
 }
 
 - (void)stopObserving {
@@ -151,7 +149,6 @@
             [unTouchedKeys addObject:key];
         }
     }
-    
     return [unTouchedKeys copy];
 }
 
@@ -172,10 +169,10 @@
 @end
 
 
-
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
 @end
+
 
 @implementation ORKJSONSerializationTests
 
@@ -184,24 +181,19 @@
     return nil;
 }
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
-- (void)tearDown
-{
+- (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-
-
 - (void)testTaskResult {
     
     //ORKTaskResult *result = [[ORKTaskResult alloc] initWithTaskIdentifier:@"a000012" taskRunUUID:[NSUUID UUID] outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
-
     
     ORKQuestionResult *qr = [[ORKQuestionResult alloc] init];
     qr.answer = @(1010);
@@ -210,8 +202,6 @@
     
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:@"stepIdentifier" results:@[qr]];
     stepResult.results = @[qr];
-    
-
 }
 
 - (void)testTaskModel {
@@ -220,14 +210,20 @@
     activeStep.shouldPlaySoundOnStart = YES;
     activeStep.shouldVibrateOnStart = YES;
     activeStep.stepDuration = 100.0;
-    activeStep.recorderConfigurations = @[[[ORKAccelerometerRecorderConfiguration alloc] initWithFrequency:11.0], [ORKTouchRecorderConfiguration new] , [ORKAudioRecorderConfiguration new]];
+    activeStep.recorderConfigurations =
+    @[[[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:@"id.accelerometer" frequency:11.0],
+      [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
+      [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
     ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1)]  ]]];
     
     ORKQuestionStep *questionStep2 = [ORKQuestionStep questionStepWithIdentifier:@"id"
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"id" steps:@[activeStep, questionStep, questionStep2]];
+
+    ORKQuestionStep *questionStep3 = [ORKQuestionStep questionStepWithIdentifier:@"id"
+                                                                           title:@"question" answer:[ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10.0 minimumValue:1.0 defaultValue:5.0 step:1.0 vertical:YES maximumValueDescription:@"High value" minimumValueDescription:@"Low value"]];
+
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:@"id" steps:@[activeStep, questionStep, questionStep2, questionStep3]];
     
     NSDictionary *dict1 = [ORKESerializer JSONObjectForObject:task error:nil];
     
@@ -251,7 +247,7 @@
     NSLog(@"----%@",dict2);
     
     
-    XCTAssertTrue([dict1 isEqualToDictionary:dict2],@"Should be equal");
+    XCTAssertTrue([dict1 isEqualToDictionary:dict2], @"Should be equal");
     
 }
 
@@ -261,7 +257,15 @@
     NSArray *classesWithORKSerialization = [ORKESerializer serializableClasses];
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"requestedHealthKitTypesForWriting", @"healthKitUnit", @"answer", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"healthKitUnit",
+                                       @"answer",
+                                       @"firstResult"];
     NSArray *knownNotSerializedProperties = @[@"ORKStep.task",
                                               @"ORKStep.restorable",
                                               @"ORKAnswerFormat.questionType",
@@ -271,8 +275,11 @@
                                               @"ORKConsentSection.escapedContent",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentDocument.writer",
+                                              @"ORKConsentDocument.signatureFormatter",
+                                              @"ORKConsentDocument.sectionFormatter",
                                               @"ORKConsentDocument.sections",
                                               @"ORKConsentDocument.signatures",
+                                              @"ORKContinuousScaleAnswerFormat.numberFormatter",
                                               @"ORKFormItem.step",
                                               @"ORKHealthKitCharacteristicTypeAnswerFormat.characteristicType",
                                               @"ORKTimeIntervalAnswerFormat.maximumInterval",
@@ -285,8 +292,10 @@
                                               @"ORKInstructionStep.image",
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
-                                              @"ORKActiveStep.requestedPermissions",
+                                              @"ORKImageCaptureStep.templateImage",
+                                              @"ORKStep.requestedPermissions",
                                               @"ORKOrderedTask.providesBackgroundAudioPrompts",
+                                              @"ORKScaleAnswerFormat.numberFormatter",
                                               @"ORKSpatialSpanMemoryStep.customTargetImage",
                                               @"ORKStep.allowsBackNavigation",
                                               @"ORKAnswerFormat.healthKitUserUnit",
@@ -351,17 +360,17 @@
         
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
+            [instance setValue:@(ORKNumberFormattingStylePercent) forKey:@"numberStyle"];
+        } else if ([aClass isSubclassOfClass:[ORKScaleAnswerFormat class]]) {
             [instance setValue:@(0) forKey:@"minimum"];
             [instance setValue:@(100) forKey:@"maximum"];
             [instance setValue:@(10) forKey:@"step"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
+        } else if ([aClass isSubclassOfClass:[ORKImageChoice class]] || [aClass isSubclassOfClass:[ORKTextChoice class]]) {
             [instance setValue:@"blah" forKey:@"value"];
-        }
-        else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
-            [instance setValue:[NSURL URLWithString:@"http://www.google.com/"] forKey:@"customAnimationURL"];
+        } else if ([aClass isSubclassOfClass:[ORKConsentSection class]]) {
+            [instance setValue:[NSURL URLWithString:@"http://www.apple.com/"] forKey:@"customAnimationURL"];
+        } else if ([aClass isSubclassOfClass:[ORKImageCaptureStep class]]) {
+            [instance setValue:[NSValue valueWithUIEdgeInsets:(UIEdgeInsets){1,1,1,1}] forKey:@"templateImageInsets"];
         }
         
         // Serialization
@@ -370,7 +379,7 @@
         // Must contain corrected _class field
         XCTAssertTrue([NSStringFromClass(aClass) isEqualToString:mockDictionary[@"_class"]]);
         
-        // All properties should have matching fields in dictionary( allow predefined exceptions)
+        // All properties should have matching fields in dictionary (allow predefined exceptions)
         for (NSString *pName in propertyNames) {
             if (mockDictionary[pName] == nil) {
                 NSString *notSerializedProperty = dottedPropertyNames[pName];
@@ -400,7 +409,7 @@
         BOOL isMatch = [mockDictionary isEqualToDictionary:dictionary2];
         if (! isMatch)
         {
-            XCTAssertTrue(isMatch,@"Should be equal for class: %@", NSStringFromClass(aClass));
+            XCTAssertTrue(isMatch, @"Should be equal for class: %@", NSStringFromClass(aClass));
         }
     }
 
@@ -466,10 +475,20 @@
     }
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"requestedHealthKitTypesForWriting", @"healthKitUnit", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"healthKitUnit",
+                                       @"firstResult",
+                                       ];
     NSArray *knownNotSerializedProperties = @[@"ORKConsentDocument.writer", // created on demand
+                                              @"ORKConsentDocument.signatureFormatter", // created on demand
+                                              @"ORKConsentDocument.sectionFormatter", // created on demand
                                               @"ORKStep.task", // weak ref - object will be nil
-                                              @"ORKFormItem.step",  // weak ref- object will be nil
+                                              @"ORKFormItem.step",  // weak ref - object will be nil
                                               
                                               // id<> properties - these are actually serialized, but we can't fill them in properly for this test
                                               @"ORKTextChoice.value",
@@ -484,6 +503,7 @@
                                               // Images: ignored so we can do the equality test and pass
                                               @"ORKImageChoice.normalStateImage",
                                               @"ORKImageChoice.selectedStateImage",
+                                              @"ORKImageCaptureStep.templateImage",
                                               @"ORKConsentSignature.signatureImage",
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
@@ -493,7 +513,6 @@
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
-        
         id instance = [[aClass alloc] init];
         
         // Find all properties of this class
@@ -541,7 +560,6 @@
                     break;
                 }
             }
-            
         }
     
         // NSData and NSDateComponents in your properties mess up the following test.
@@ -551,18 +569,14 @@
         }
         
         NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:newInstance];
-        if (! [data isEqualToData:data2]) { // allow breakpointing
+        if (![data isEqualToData:data2]) { // allow breakpointing
             XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
         }
         
-        
-        if (! [newInstance isEqual:instance]) {
+        if (![newInstance isEqual:instance]) {
             XCTAssertEqualObjects(newInstance, instance, @"equality mismatch for %@", NSStringFromClass(aClass));
         }
-        
-        
     }
-    
 }
 
 - (void)testEquality {
@@ -592,11 +606,19 @@
     }
     
     // Predefined exception
-    NSArray *propertyExclusionList = @[@"superclass", @"description",@"debugDescription", @"hash", @"requestedHealthKitTypesForReading", @"healthKitUnit", @"requestedHealthKitTypesForWriting", @"answer", @"firstResult"];
+    NSArray *propertyExclusionList = @[@"superclass",
+                                       @"description",
+                                       @"debugDescription",
+                                       @"hash",
+                                       @"requestedHealthKitTypesForReading",
+                                       @"healthKitUnit",
+                                       @"requestedHealthKitTypesForWriting",
+                                       @"answer",
+                                       @"firstResult",
+];
     
     // Test Each class
     for (Class aClass in classesWithSecureCodingAndCopying) {
-        
         id instance = [[aClass alloc] init];
         
         // Find all properties of this class
@@ -646,9 +668,7 @@
             }
         }
     }
-
 }
-
 
 - (void)testDateComponentsSerialization {
     

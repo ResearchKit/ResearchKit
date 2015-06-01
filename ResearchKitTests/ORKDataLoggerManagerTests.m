@@ -34,8 +34,7 @@
 #import "ORKDataLogger.h"
 
 
-@interface ORKDataLoggerManagerTests : XCTestCase <ORKDataLoggerManagerDelegate>
-{
+@interface ORKDataLoggerManagerTests : XCTestCase <ORKDataLoggerManagerDelegate> {
     NSURL *_directory;
     ORKDataLoggerManager *_manager;
     
@@ -44,24 +43,21 @@
     NSInteger _totalBytesReachedCounter;
     unsigned long long _lastTotalBytes;
 }
+
 @end
+
 
 @implementation ORKDataLoggerManagerTests
 
-
-
-- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger pendingUploadBytesReachedThreshold:(unsigned long long)pendingUploadBytes
-{
+- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger pendingUploadBytesReachedThreshold:(unsigned long long)pendingUploadBytes {
     _pendingUploadBytesReachedCounter ++;
     _lastPendingUploadBytes = pendingUploadBytes;
 }
 
-- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger totalBytesReachedThreshold:(unsigned long long)totalBytes
-{
+- (void)dataLoggerManager:(ORKDataLoggerManager *)dataLogger totalBytesReachedThreshold:(unsigned long long)totalBytes {
     _totalBytesReachedCounter ++;
     _lastTotalBytes = totalBytes;
 }
-
 
 - (void)setUp {
     [super setUp];
@@ -91,8 +87,7 @@
     
 }
 
-- (void)addLoggers123
-{
+- (void)addLoggers123 {
     [_manager addJSONDataLoggerForLogName:@"test1"];
     [_manager addJSONDataLoggerForLogName:@"test2"];
     [_manager addJSONDataLoggerForLogName:@"test3"];
@@ -100,8 +95,7 @@
     XCTAssertEqual([[_manager logNames] count], 3);
 }
 
-- (void)testPreservesParameters
-{
+- (void)testPreservesParameters {
     _manager.totalBytesThreshold = 10;
     _manager.pendingUploadBytesThreshold = 12;
     _manager.delegate = nil;
@@ -115,17 +109,14 @@
     
 }
 
-- (void)testAddingLoggers
-{
+- (void)testAddingLoggers {
     [self addLoggers123];
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test1"].logName, @"test1");
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test2"].logName, @"test2");
     XCTAssertEqualObjects([_manager dataLoggerForLogName:@"test3"].logName, @"test3");
 }
 
-- (void)testEnumerationSortOrder
-{
-    
+- (void)testEnumerationSortOrder {
     [self addLoggers123];
     
     ORKDataLogger *dm3 = [_manager dataLoggerForLogName:@"test3"];
@@ -174,9 +165,7 @@
     
 }
 
-
-- (void)testRemoveOldLogs
-{
+- (void)testRemoveOldLogs {
     [self addLoggers123];
     
     _manager.totalBytesThreshold = 10;
@@ -202,7 +191,6 @@
     XCTAssertEqual(_totalBytesReachedCounter, 1);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
     
-    
     NSError *err = nil;
     XCTAssertTrue([_manager removeOldAndUploadedLogsToThreshold:9 error:&err]);
     XCTAssertNil(err);
@@ -213,17 +201,14 @@
     [dm3 finishCurrentLog];
     [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:filesystemSettleTime]];
     
-    
     bytes = _manager.totalBytes;
     XCTAssertGreaterThan(bytes, _manager.totalBytesThreshold);
     XCTAssertTrue(bytes > _manager.totalBytesThreshold);
     XCTAssertEqual(_totalBytesReachedCounter, 2);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 0);
-    
 }
 
-- (void)testDelegateThresholds
-{
+- (void)testDelegateThresholds {
     [self addLoggers123];
     
     _manager.pendingUploadBytesThreshold = 10;
@@ -256,7 +241,6 @@
     bytes = _manager.pendingUploadBytes;
     XCTAssertTrue(bytes < _manager.pendingUploadBytesThreshold);
     
-    
     XCTAssertTrue([dm3 append:@{@"test":@"blah"} error:nil]);
     XCTAssertTrue([dm2 append:@{@"test":@"blah"} error:nil]);
     XCTAssertTrue([dm1 append:@{@"test":@"blah"} error:nil]);
@@ -269,7 +253,6 @@
     XCTAssertTrue(bytes > _manager.pendingUploadBytesThreshold);
     XCTAssertEqual(_totalBytesReachedCounter, 0);
     XCTAssertEqual(_pendingUploadBytesReachedCounter, 2);
-    
 }
 
 @end

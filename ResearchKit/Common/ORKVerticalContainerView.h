@@ -35,12 +35,14 @@
 #import <ResearchKit/ORKStepHeaderView_Internal.h>
 #import <ResearchKit/ORKNavigationContainerView.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKTintedImageView;
 
 @interface ORKVerticalContainerView : UIScrollView
 
-
-@property (nonatomic, strong, readonly) UIImageView *imageView;
+@property (nonatomic, strong, readonly) ORKTintedImageView *imageView;
 
 @property (nonatomic, strong, readonly) UIView *customViewContainer;
 

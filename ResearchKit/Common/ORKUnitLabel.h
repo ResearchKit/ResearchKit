@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 /**
- *  Text label for units during numeric value entry
+ Text label for units during numeric value entry
  */
 ORK_CLASS_AVAILABLE
 @interface ORKUnitLabel : ORKLabel

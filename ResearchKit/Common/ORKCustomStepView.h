@@ -31,13 +31,10 @@
 
 #import <ResearchKit/ResearchKit.h>
 
-@protocol ORKCustomActiveStepView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @class ORKQuestionStepCustomView;
-
 
 /**
  The `ORKQuestionStepCustomViewDelegate` protocol defines the methods that a question step custom view should implement.
@@ -76,6 +73,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) id answer;
 
 @end
+
 
 @class ORKSurveyAnswerCell;
 

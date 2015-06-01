@@ -37,19 +37,16 @@
 #import "ORKStep_Private.h"
 #import "ORKFormStepViewController.h"
 
+
 @implementation ORKFormStep
 
-
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKFormStepViewController class];
 }
-
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text {
-    
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
@@ -69,8 +66,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.optional = YES;
@@ -80,21 +76,30 @@
 }
 
 - (void)validateParameters {
-    
     [super validateParameters];
     
     for (ORKFormItem *item in _formItems) {
         [item.answerFormat validateParameters];
     }
+    
+    [self validateIdentifiersUnique];
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (void)validateIdentifiersUnique {
+    NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
+    NSArray *nonUniqueIdentifiers = [_formItems valueForKeyPath:@"@unionOfObjects.identifier"];
+    BOOL itemsHaveNonUniqueIdentifiers = ( [nonUniqueIdentifiers count] != [uniqueIdentifiers count] );
+    
+    if (itemsHaveNonUniqueIdentifiers) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Each form item should have a unique identifier" userInfo:nil];
+    }
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormStep *step = [super copyWithZone:zone];
     step.formItems = ORKArrayCopyObjects(_formItems);
     return step;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -107,31 +112,24 @@
     return [super hash] ^ [self.formItems hash];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_ARRAY(aDecoder, formItems, ORKFormItem);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, formItems);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-
-
 - (void)setFormItems:(NSArray *)formItems {
-    
     // unset removed formItems
     for (ORKFormItem *item in _formItems) {
          item.step = nil;
@@ -140,30 +138,19 @@
     _formItems = formItems;
     
     for (ORKFormItem *item in _formItems) {
-        ORKAnswerFormat *answerFormat = [item impliedAnswerFormat];
-        
-        ORKQuestionType type = answerFormat.questionType;
-        if (type == ORKQuestionTypeScale) {
-            
-            NSString *typeName = @"ORKQuestionTypeScale";
-            
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"ORKFormItem doesn't support type %@", typeName] userInfo:nil];
-        }
-        
         item.step = self;
     }
 }
 
 @end
 
+
 @implementation ORKFormItem
 
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat: (ORKAnswerFormat *) answerFormat {
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        
-        if ( nil == identifier)
-        {
+        if ( nil == identifier) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
         }
         
@@ -182,24 +169,19 @@
     return self;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormItem *item = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy] text:[_text copy] answerFormat:[_answerFormat copy]];
     item.placeholder = self.placeholder;
     return item;
 }
 
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
@@ -209,8 +191,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, placeholder);
@@ -219,14 +200,12 @@
 
 }
 
-
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
         return NO;
     }
     
-    // Ignore the step reference - it's not part of the content of this item.
-    
+    // Ignore the step reference - it's not part of the content of this item
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.text, castObject.text)
@@ -235,19 +214,15 @@
 }
 
 - (NSUInteger)hash {
-     // Ignore the step reference - it's not part of the content of this item.
+     // Ignore the step reference - it's not part of the content of this item
     return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash];
 }
 
-
-
-- (ORKAnswerFormat *)impliedAnswerFormat
-{
+- (ORKAnswerFormat *)impliedAnswerFormat {
     return [self.answerFormat impliedAnswerFormat];
 }
 
-- (ORKQuestionType)questionType
-{
+- (ORKQuestionType)questionType {
     return [[self impliedAnswerFormat] questionType];
 }
 

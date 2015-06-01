@@ -30,6 +30,18 @@
 
 #import <ResearchKit/ORKRecorder.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class CMDeviceMotion;
+
+@protocol ORKDeviceMotionRecorderDelegate <ORKRecorderDelegate>
+
+@optional
+
+- (void)deviceMotionRecorderDidUpdateWithMotion:(CMDeviceMotion *)motion;
+
+@end
+
 /**
  The `ORKDeviceMotionRecorder` class represents a recorder that requests and collects device motion data from CoreMotion at a fixed frequency.
  
@@ -40,18 +52,25 @@ ORK_CLASS_AVAILABLE
 @interface ORKDeviceMotionRecorder : ORKRecorder
 
 /**
- * The frequency of motion data collection from CoreMotion in hertz (Hz).
+ The frequency of motion data collection from CoreMotion in hertz (Hz).
  */
 @property (nonatomic, readonly) double frequency;
 
 /**
  Returns an initialized device motion recorder using the specified frequency.
  
- @param frequency    The frequency of motion data collection from CoreMotion in hertz (Hz).
+ @param identifier          The unique identifier of the recorder (assigned by the recorder configuration).
+ @param frequency           The frequency of motion data collection from CoreMotion in hertz (Hz).
+ @param step                The step that requested this recorder.
+ @param outputDirectory     The directory in which the device motion data should be stored.
+ 
  @return An initialized motion data recorder.
  */
-- (instancetype)initWithFrequency:(double)frequency
-                             step:(ORKStep *)step
-                  outputDirectory:(NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                         frequency:(double)frequency
+                              step:(nullable ORKStep *)step
+                   outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END
