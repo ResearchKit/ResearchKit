@@ -33,6 +33,7 @@
 #import "ORKImageCaptureCameraPreviewView.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKHelpers.h"
+#import "ORKSkin.h"
 #import "ORKStepHeaderView_Internal.h"
 
 
@@ -73,8 +74,7 @@
         _continueSkipContainer.topMargin = 5;
         _continueSkipContainer.bottomMargin = 15;
         _continueSkipContainer.optional = YES;
-        //FIXME: is this color someplace in the skin?
-        _continueSkipContainer.backgroundColor = [UIColor whiteColor];
+        _continueSkipContainer.backgroundColor = ORKColor(ORKBackgroundColorKey);
         [self addSubview:_continueSkipContainer];
         
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
