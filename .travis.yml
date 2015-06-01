@@ -1,3 +1,4 @@
+osx_image: beta-xcode6.3
 language: objective-c
 script:
   - xcodebuild -scheme ResearchKit test
