@@ -66,6 +66,7 @@
         _templateImageView = [[ORKTintedImageView alloc] init];
         _templateImageView.contentMode = UIViewContentModeScaleAspectFit;
         _templateImageView.shouldApplyTint = YES;
+        _templateImageView.hidden = 0;
         _templateImageView.alpha = 0;
         [_capturedImageView addSubview:_templateImageView];
 
@@ -134,11 +135,19 @@
 }
 
 - (void)setTemplateImageHidden:(BOOL)hidden {
-    _templateImageView.alpha = hidden ? 0 : 1;
+    if (!hidden) {
+        _templateImageView.hidden = NO;
+    }
+    [UIView animateWithDuration:0.15
+                     animations:^{
+                         _templateImageView.alpha = hidden ? 0 : 1;
+                     } completion:^(BOOL finished) {
+                         _templateImageView.hidden = hidden;
+                     }];
 }
 
 - (BOOL)isTemplateImageHidden {
-    return _templateImageView.alpha==0;
+    return _templateImageView.hidden;
 }
 
 - (UIImage *)capturedImage {
