@@ -31,10 +31,11 @@
 
 #import "ORKStepViewController_Internal.h"
 #import "ORKImageCaptureStepViewController.h"
-#import <AVFoundation/AVFoundation.h>
 #import "ORKImageCaptureView.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
+
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>
@@ -228,7 +229,7 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (NSURL* )writeCapturedDataWithError:(NSError * __autoreleasing *)error {
+- (NSURL *)writeCapturedDataWithError:(NSError * __autoreleasing *)error {
     NSURL *url = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
     if (!url) {
@@ -239,7 +240,11 @@
     }
     
     // If set properly, the outputDirectory is already created, so write the file into it
-    if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:nil]) {
+    NSError *writeError = nil;
+    if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
+        if (writeError) {
+            ORK_Log_Oops(@"%@", writeError);
+        }
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];
         }
