@@ -80,7 +80,22 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 - (void)start {
     [super start];
     [self startStimulusTimer];
+
 }
+
+#if TARGET_IPHONE_SIMULATOR
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if(event.type == UIEventSubtypeMotionShake)
+    {
+        ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
+        reactionTimeResult.timestamp = _stimulusTimestamp;
+        [_results addObject:reactionTimeResult];
+        [self attemptDidFinish];
+    }
+}
+#endif
+
 
 - (ORKStepResult *)result {
     ORKStepResult *stepResult = [super result];
@@ -197,6 +212,11 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     _validResult = NO;
     _timedOut = YES;
     [self stopRecorders];
+    
+#if TARGET_IPHONE_SIMULATOR
+    // Device motion recorder won't work, so manually trigger didfinish
+    [self attemptDidFinish];
+#endif
 }
 
 - (NSTimeInterval)stimulusInterval {
