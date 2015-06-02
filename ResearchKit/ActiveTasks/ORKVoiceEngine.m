@@ -71,7 +71,7 @@
     }
     
     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
-    utterance.rate = AVSpeechUtteranceMaximumSpeechRate / 7;
+    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
 
     [self.speechSynthesizer speakUtterance:utterance];
 }
