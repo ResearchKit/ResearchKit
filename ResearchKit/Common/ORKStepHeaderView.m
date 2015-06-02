@@ -235,6 +235,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
         [constraints addObject:constraint];
         
         NSArray *views = @[_captionLabel, _instructionLabel, _learnMoreButton];
+        [_captionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+        [_instructionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+        [_learnMoreButton setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
         ORKEnableAutoLayoutForViews(views);
         
         NSMutableDictionary *adjustableConstraintsTable = [NSMutableDictionary dictionary];
@@ -309,13 +312,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
         
         for (UIView *view in views) {
 #ifdef LAYOUT_DEBUG
-            v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
-            v.layer.borderColor = [UIColor redColor].CGColor;
-            v.layer.borderWidth = 1.0;
+            view.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
+            view.layer.borderColor = [UIColor redColor].CGColor;
+            view.layer.borderWidth = 1.0;
 #endif
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
+            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
             
             NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
                                                                                 attribute:NSLayoutAttributeBottom
