@@ -427,6 +427,7 @@
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
         _tableContainer.delegate = self;
         [self.view addSubview:_tableContainer];
+        _tableContainer.tapOffView = self.view;
         
         _tableView = _tableContainer.tableView;
         _tableView.delegate = self;
