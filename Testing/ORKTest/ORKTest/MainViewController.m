@@ -1143,6 +1143,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Pre1"];
+            [items addObject:item];
+        }
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Basic Information"];
             [items addObject:item];
         }
