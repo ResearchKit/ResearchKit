@@ -548,7 +548,7 @@
         }
     }
     
-    return array;
+    return [array copy];
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
