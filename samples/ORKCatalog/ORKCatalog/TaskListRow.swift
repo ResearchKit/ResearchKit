@@ -632,9 +632,9 @@ enum TaskListRow: Int, Printable {
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
         
-        imageCaptureStep.templateImage = UIImage(named: "hand_outline")!
+        imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
         
-        imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.10, left: 0.10, bottom: 0.10, right: 0.10)
+        imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
         
         steps += [imageCaptureStep]
         
