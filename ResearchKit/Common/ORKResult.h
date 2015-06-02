@@ -761,9 +761,20 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) ORKConsentSignature *signature;
 
 /**
+ A boolean value indicating whether the participant consented.
+ 
+ `YES` if the user confirmed consent to the contents of the consent review. Note
+ that the signature could still be invalid if the name or signature image is
+ empty; this indicates only that the user gave a positive acknowledgement of the
+ document.
+ */
+@property (nonatomic, assign) BOOL consented;
+
+/**
  Applies the signature to the consent document.
  
- This method uses the identifier to look up the matching signature placeholder in the consent document and replaces it with this signature. It may throw an exception if
+ This method uses the identifier to look up the matching signature placeholder
+ in the consent document and replaces it with this signature. It may throw an exception if
  the document does not contain a signature with a matching identifier.
  
  @param document     The document to which to apply the signature.
