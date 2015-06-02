@@ -466,7 +466,7 @@
         // Section header
         if ([item impliedAnswerFormat] == nil) {
             // Add new section
-            section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
+            section = [[ORKTableSection alloc] initWithSectionIndex:_sections.count];
             [_sections addObject:section];
             
             // Save title
@@ -505,14 +505,6 @@
             }
         }
     }
-    
-    // Remove empty sections
-    [_sections enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ORKTableSection *section = obj;
-        if (section.items.count == 0) {
-            [_sections removeObject:section];
-        }
-    }];
 }
 
 - (NSInteger)numAnswered {
@@ -549,14 +541,13 @@
 }
 
 - (NSArray *)formItems {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[self allFormItems]];
-    
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ORKFormItem *item = obj;
-        if (item.answerFormat == nil) {
-            [array removeObject:item];
+    NSArray *formItems = [self allFormItems];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[formItems count]];
+    for (ORKFormItem *item in formItems) {
+        if (item.answerFormat != nil) {
+            [array addObject:item];
         }
-    }];
+    }
     
     return [array copy];
 }
