@@ -1260,7 +1260,8 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeObject:_requestedHealthTypesForRead forKey:_ORKRequestedHealthTypesForReadRestoreKey];
     [coder encodeObject:_requestedHealthTypesForWrite forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
-    [coder encodeObject:_outputDirectory forKey:_ORKOutputDirectoryRestoreKey];
+    
+    [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryRestoreKey];
     [coder encodeObject:_lastBeginningInstructionStepIdentifier forKey:_ORKLastBeginningInstructionStepIdentifierKey];
     
     [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
@@ -1279,7 +1280,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
     
-    _outputDirectory = [coder decodeObjectOfClass:[NSURL class] forKey:_ORKOutputDirectoryRestoreKey];
+    _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
     
     // Must have a task object already provided by this point in the restoration, in order to restore any other state.
     if (_task) {

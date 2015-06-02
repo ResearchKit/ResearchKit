@@ -395,6 +395,84 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
     return font;
 }
 
+NSURL *ORKURLFromBookmarkData(NSData *data) {
+    if (data == nil) {
+        return nil;
+    }
+    
+    BOOL bookmarkIsStale = NO;
+    NSError *bookmarkError = nil;
+    NSURL *bookmarkURL = [NSURL URLByResolvingBookmarkData:data
+                                                   options:NSURLBookmarkResolutionWithoutUI
+                                             relativeToURL:nil
+                                       bookmarkDataIsStale:&bookmarkIsStale
+                                                     error:&bookmarkError];
+    if (! bookmarkURL) {
+        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+    }
+    
+    return bookmarkURL;
+}
+
+NSData *ORKBookmarkDataFromURL(NSURL *url) {
+    if (! url) {
+        return nil;
+    }
+    
+    NSError *error = nil;
+    NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
+                     includingResourceValuesForKeys:nil
+                                      relativeToURL:nil
+                                              error:&error];
+    if (! bookmark) {
+        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+    }
+    return bookmark;
+}
+
+NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
+    NSURL *url1 = [url URLByStandardizingPath];
+    NSURL *baseURL1 = [baseURL URLByStandardizingPath];
+    
+    NSString *path = [url1 absoluteString];
+    NSString *basePath = [baseURL1 absoluteString];
+    
+    if ([path hasPrefix:basePath]) {
+        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        if ([relativePath hasPrefix:@"/"]) {
+            relativePath = [relativePath substringFromIndex:1];
+        }
+        return relativePath;
+    } else {
+        return path;
+    }
+}
+
+static NSURL *homeDirectory() {
+    static NSURL *homeDirectory = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        homeDirectory = [NSURL fileURLWithPath:NSHomeDirectory()];
+    });
+    return homeDirectory;
+}
+
+NSURL *ORKURLForRelativePath(NSString *relativePath) {
+    if (! relativePath) {
+        return nil;
+    }
+    
+    return [NSURL fileURLWithPath:relativePath relativeToURL:homeDirectory()];
+}
+
+NSString *ORKRelativePathForURL(NSURL *url) {
+    if (! url) {
+        return nil;
+    }
+    
+    return ORKPathRelativeToURL(url, homeDirectory());
+}
+
 id ORKDynamicCast_(id x, Class objClass) {
     return [x isKindOfClass:objClass] ? x : nil;
 }
