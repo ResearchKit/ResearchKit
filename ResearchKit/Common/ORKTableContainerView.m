@@ -56,6 +56,8 @@
     BOOL _keyboardIsUp;
     
     UIScrollView *_scrollView;
+    
+    UITapGestureRecognizer *_tapOffGestureRecognizer;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -98,11 +100,21 @@
         
         [self setNeedsUpdateConstraints];
         
-        UITapGestureRecognizer *tapOffRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
-        tapOffRecognizer.delegate = self;
-        [_tableView addGestureRecognizer:tapOffRecognizer];
+        _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
+        _tapOffGestureRecognizer.delegate = self;
+        [_tableView addGestureRecognizer:_tapOffGestureRecognizer];
     }
     return self;
+}
+
+- (void)setTapOffView:(UIView * __nullable)tapOffView {
+    _tapOffView = tapOffView;
+    
+    [_tapOffGestureRecognizer.view removeGestureRecognizer:_tapOffGestureRecognizer];
+    
+    _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
+    _tapOffGestureRecognizer.delegate = self;
+    [(tapOffView ? : _tableView) addGestureRecognizer:_tapOffGestureRecognizer];
 }
 
 - (void)layoutSubviews {
@@ -193,7 +205,6 @@
     while (subview) {
         // Ignore table view cells, since first responder will be manually managed for taps on them
         if ([subview isFirstResponder] || [subview isKindOfClass:[UITableViewCell class]]) {
-            ORK_Log_Debug(@"v=%@",subview);
             viewIsChildOfFirstResponder = YES;
             break;
         }
