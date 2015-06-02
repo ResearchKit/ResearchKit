@@ -431,11 +431,11 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
 }
 
 NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
-    NSURL *url1 = [url URLByStandardizingPath];
-    NSURL *baseURL1 = [baseURL URLByStandardizingPath];
+    NSURL *standardizedURL = [url URLByStandardizingPath];
+    NSURL *standardizedBaseURL = [baseURL URLByStandardizingPath];
     
-    NSString *path = [url1 absoluteString];
-    NSString *basePath = [baseURL1 absoluteString];
+    NSString *path = [standardizedURL absoluteString];
+    NSString *basePath = [standardizedBaseURL absoluteString];
     
     if ([path hasPrefix:basePath]) {
         NSString *relativePath = [path substringFromIndex:[basePath length]];
@@ -448,7 +448,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
     }
 }
 
-static NSURL *homeDirectory() {
+static NSURL *ORKHomeDirectory() {
     static NSURL *homeDirectory = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -462,7 +462,18 @@ NSURL *ORKURLForRelativePath(NSString *relativePath) {
         return nil;
     }
     
-    return [NSURL fileURLWithPath:relativePath relativeToURL:homeDirectory()];
+    NSURL *homeDirectory = ORKHomeDirectory();
+    CFURLRef url = CFURLCreateWithFileSystemPathRelativeToBase(kCFAllocatorDefault, (CFStringRef)relativePath, kCFURLPOSIXPathStyle, false, (CFURLRef)homeDirectory);
+    if (url != NULL) {
+        NSNumber *isDirectory;
+        if ([(__bridge NSURL *)url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil] && [isDirectory boolValue]) {
+            CFRelease(url);
+            url = CFURLCreateWithFileSystemPathRelativeToBase(kCFAllocatorDefault, (CFStringRef)relativePath, kCFURLPOSIXPathStyle, true, (CFURLRef)homeDirectory);
+        }
+    }
+    
+    NSURL *nsurl = (__bridge_transfer NSURL *)url;
+    return nsurl;
 }
 
 NSString *ORKRelativePathForURL(NSURL *url) {
@@ -470,7 +481,7 @@ NSString *ORKRelativePathForURL(NSURL *url) {
         return nil;
     }
     
-    return ORKPathRelativeToURL(url, homeDirectory());
+    return ORKPathRelativeToURL(url, ORKHomeDirectory());
 }
 
 id ORKDynamicCast_(id x, Class objClass) {

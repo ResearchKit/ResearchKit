@@ -746,11 +746,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [data copy];
 }
 
-- (void)setOutputDirectory:(NSURL *)outputDirectory {
-    if (_hasBeenPresented) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];
-    }
-    
+- (void)ensureDirectoryExists:(NSURL *)outputDirectory {
     // Only verify existence if the output directory is non-nil.
     // But, even if the output directory is nil, we still set it and forward to the step VC.
     if (outputDirectory != nil) {
@@ -767,6 +763,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
         }
     }
+}
+
+- (void)setOutputDirectory:(NSURL *)outputDirectory {
+    if (_hasBeenPresented) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];
+    }
+    [self ensureDirectoryExists:outputDirectory];
     
     _outputDirectory = [outputDirectory copy];
     
@@ -1281,6 +1284,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
     
     _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
+    [self ensureDirectoryExists:_outputDirectory];
     
     // Must have a task object already provided by this point in the restoration, in order to restore any other state.
     if (_task) {
