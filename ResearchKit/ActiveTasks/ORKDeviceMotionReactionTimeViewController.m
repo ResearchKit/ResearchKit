@@ -88,10 +88,12 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 {
     if(event.type == UIEventSubtypeMotionShake)
     {
-        ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
-        reactionTimeResult.timestamp = _stimulusTimestamp;
-        [_results addObject:reactionTimeResult];
-        [self attemptDidFinish];
+        if (_validResult) {
+            ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
+            reactionTimeResult.timestamp = _stimulusTimestamp;
+            [_results addObject:reactionTimeResult];
+            [self attemptDidFinish];
+        }
     }
 }
 #endif
