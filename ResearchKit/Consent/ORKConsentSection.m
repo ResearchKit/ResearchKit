@@ -208,7 +208,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
         ORK_DECODE_OBJ_CLASS(aDecoder, htmlContent, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, formalTitle, NSString);
         ORK_DECODE_IMAGE(aDecoder, customImage);
-        ORK_DECODE_URL(aDecoder, customAnimationURL);
+        ORK_DECODE_URL_BOOKMARK(aDecoder, customAnimationURL);
         ORK_DECODE_OBJ_CLASS(aDecoder, customLearnMoreButtonTitle, NSString);
     }
     return self;
@@ -222,7 +222,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     ORK_ENCODE_OBJ(aCoder, content);
     ORK_ENCODE_OBJ(aCoder, htmlContent);
     ORK_ENCODE_IMAGE(aCoder, customImage);
-    ORK_ENCODE_OBJ(aCoder, customAnimationURL);
+    ORK_ENCODE_URL_BOOKMARK(aCoder, customAnimationURL);
     ORK_ENCODE_OBJ(aCoder, customLearnMoreButtonTitle);
 }
 
