@@ -66,7 +66,7 @@
         _templateImageView = [[ORKTintedImageView alloc] init];
         _templateImageView.contentMode = UIViewContentModeScaleAspectFit;
         _templateImageView.shouldApplyTint = YES;
-        _templateImageView.hidden = 0;
+        _templateImageView.hidden = YES;
         _templateImageView.alpha = 0;
         [_capturedImageView addSubview:_templateImageView];
 

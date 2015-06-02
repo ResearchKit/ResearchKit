@@ -6,7 +6,8 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "right_hand_solid@2x.png"
     },
     {
       "idiom" : "iphone",
@@ -16,7 +17,7 @@
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "hand_solid.png"
+      "filename" : "right_hand_solid@3x.png"
     },
     {
       "idiom" : "ipad",
@@ -25,7 +26,7 @@
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "hand_solid-1.png"
+      "filename" : "right_hand_solid@2x~ipad.png"
     }
   ],
   "info" : {
