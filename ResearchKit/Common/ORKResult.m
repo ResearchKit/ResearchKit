@@ -668,12 +668,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, signature);
+    ORK_ENCODE_BOOL(aCoder, consented);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, signature, ORKConsentSignature);
+        ORK_DECODE_BOOL(aDecoder, consented);
     }
     return self;
 }
@@ -685,6 +687,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSignatureResult *result = [super copyWithZone:zone];
     result.signature = _signature;
+    result.consented = _consented;
     return result;
 }
 
@@ -693,7 +696,8 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.signature, castObject.signature));
+            ORKEqualObjects(self.signature, castObject.signature) &&
+            (self.consented == castObject.consented));
 }
 
 - (NSUInteger)hash {
