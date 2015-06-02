@@ -92,8 +92,8 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
             ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
             reactionTimeResult.timestamp = _stimulusTimestamp;
             [_results addObject:reactionTimeResult];
-            [self attemptDidFinish];
         }
+        [self attemptDidFinish];
     }
 }
 #endif
