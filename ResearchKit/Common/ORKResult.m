@@ -540,7 +540,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualURLs(self.fileURL, castObject.fileURL) &&
+            ORKEqualFileURLs(self.fileURL, castObject.fileURL) &&
             ORKEqualObjects(self.contentType, castObject.contentType));
 }
 
@@ -1371,7 +1371,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.taskRunUUID, castObject.taskRunUUID) &&
-            ORKEqualURLs(self.outputDirectory, castObject.outputDirectory));
+            ORKEqualFileURLs(self.outputDirectory, castObject.outputDirectory));
 }
 
 - (NSUInteger)hash {

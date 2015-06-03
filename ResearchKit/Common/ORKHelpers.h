@@ -176,7 +176,7 @@ ORKEqualObjects(id o1, id o2) {
 }
 
 ORK_INLINE BOOL
-ORKEqualURLs(NSURL *url1, NSURL *url2) {
+ORKEqualFileURLs(NSURL *url1, NSURL *url2) {
     return ORKEqualObjects(url1, url2) || ([url1 isFileURL] && [url2 isFileURL] && [[url1 absoluteString] isEqualToString:[url2 absoluteString]]);
 }
 
