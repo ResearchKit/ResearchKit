@@ -55,7 +55,7 @@ enum TaskListRow: Int, Printable {
     case ShortWalk
     case Audio
     case ToneAudiometry
-    case DeviceMotionReactionTimeTask
+    case ReactionTime
     case ImageCapture
     case Survey
     case Consent
@@ -133,7 +133,7 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return NSLocalizedString("Tone Audiometry Active Task", comment: "")
 
-            case .DeviceMotionReactionTimeTask:
+            case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
             
             case .ImageCapture:
@@ -220,7 +220,7 @@ enum TaskListRow: Int, Printable {
         case ShortWalkTask =                                        "ShortWalkTask"
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
-        case DeviceMotionReactionTimeTask =                         "DeviceMotionReactionTimeTask"
+        case ReactionTime =                                         "ReactionTime"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -303,8 +303,8 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return toneAudiometryTask
 
-            case .DeviceMotionReactionTimeTask:
-                return deviceMotionReactionTimeTask
+            case .ReactionTime:
+                return reactionTimeTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -599,8 +599,8 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
     
-    private var deviceMotionReactionTimeTask: ORKTask {
-        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    private var reactionTimeTask: ORKTask {
+        return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

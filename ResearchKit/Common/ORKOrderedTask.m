@@ -52,7 +52,7 @@
 #import "ORKWalkingTaskStep.h"
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKToneAudiometryStep.h"
-#import "ORKDeviceMotionReactionTimeStep.h"
+#import "ORKReactionTimeStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -283,7 +283,7 @@ static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
 static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
 static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
-static NSString * const ORKDeviceMotionReactionTimeStepIdentifier = @"reactionTime.deviceMotion";
+static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -859,17 +859,17 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKOrderedTask *)deviceMotionReactionTimeTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                       maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
-                                       minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
-                                         thresholdAcceleration:(double)thresholdAcceleration
-                                              numberOfAttempts:(int)numberOfAttempts
-                                                       timeout:(NSTimeInterval)timeout
-                                                  successSound:(UInt32)successSoundID
-                                                  timeoutSound:(UInt32)timeoutSoundID
-                                                  failureSound:(UInt32)failureSoundID
-                                                       options:(ORKPredefinedTaskOption)options {
++ (ORKOrderedTask *)reactionTimeTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                           minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                             thresholdAcceleration:(double)thresholdAcceleration
+                                  numberOfAttempts:(int)numberOfAttempts
+                                           timeout:(NSTimeInterval)timeout
+                                      successSound:(UInt32)successSoundID
+                                      timeoutSound:(UInt32)timeoutSoundID
+                                      failureSound:(UInt32)failureSoundID
+                                           options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
     
@@ -896,7 +896,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
     }
     
-    ORKDeviceMotionReactionTimeStep *step = [[ORKDeviceMotionReactionTimeStep alloc] initWithIdentifier:ORKDeviceMotionReactionTimeStepIdentifier];
+    ORKReactionTimeStep *step = [[ORKReactionTimeStep alloc] initWithIdentifier:ORKReactionTimeStepIdentifier];
     step.maximumStimulusInterval = maximumStimulusInterval;
     step.minimumStimulusInterval = minimumStimulusInterval;
     step.thresholdAcceleration = thresholdAcceleration;

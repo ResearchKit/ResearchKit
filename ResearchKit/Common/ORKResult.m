@@ -518,14 +518,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, fileURL);
+    ORK_ENCODE_URL(aCoder, fileURL);
     ORK_ENCODE_OBJ(aCoder, contentType);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, fileURL, NSURL);
+        ORK_DECODE_URL(aDecoder, fileURL);
         ORK_DECODE_OBJ_CLASS(aDecoder, contentType, NSString);
     }
     return self;
@@ -540,7 +540,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.fileURL, castObject.fileURL) &&
+            ORKEqualFileURLs(self.fileURL, castObject.fileURL) &&
             ORKEqualObjects(self.contentType, castObject.contentType));
 }
 
@@ -562,7 +562,7 @@
 @end
 
 
-@implementation ORKDeviceMotionReactionTimeResult
+@implementation ORKReactionTimeResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -597,7 +597,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKDeviceMotionReactionTimeResult *result = [super copyWithZone:zone];
+    ORKReactionTimeResult *result = [super copyWithZone:zone];
     result.fileResult = [self.fileResult copy];
     result.timestamp = self.timestamp;
     return result;
@@ -668,12 +668,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, signature);
+    ORK_ENCODE_BOOL(aCoder, consented);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, signature, ORKConsentSignature);
+        ORK_DECODE_BOOL(aDecoder, consented);
     }
     return self;
 }
@@ -685,6 +687,7 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSignatureResult *result = [super copyWithZone:zone];
     result.signature = _signature;
+    result.consented = _consented;
     return result;
 }
 
@@ -693,7 +696,8 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.signature, castObject.signature));
+            ORKEqualObjects(self.signature, castObject.signature) &&
+            (self.consented == castObject.consented));
 }
 
 - (NSUInteger)hash {
@@ -1345,14 +1349,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, taskRunUUID);
-    ORK_ENCODE_OBJ(aCoder, outputDirectory);
+    ORK_ENCODE_URL(aCoder, outputDirectory);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, taskRunUUID, NSUUID);
-        ORK_DECODE_OBJ_CLASS(aDecoder, outputDirectory, NSURL);
+        ORK_DECODE_URL(aDecoder, outputDirectory);
     }
     return self;
 }
@@ -1367,7 +1371,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.taskRunUUID, castObject.taskRunUUID) &&
-            ORKEqualObjects(self.outputDirectory, castObject.outputDirectory));
+            ORKEqualFileURLs(self.outputDirectory, castObject.outputDirectory));
 }
 
 - (NSUInteger)hash {

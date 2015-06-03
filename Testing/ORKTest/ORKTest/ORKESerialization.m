@@ -833,6 +833,12 @@ ret =
            PROPERTY(outputVolume, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(samples, ORKToneAudiometrySample, NSArray, NO, nil, nil),
            })),
+   ENTRY(ORKReactionTimeResult,
+         nil,
+         (@{
+            PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
   ENTRY(ORKQuestionResult,
          nil,
          (@{
@@ -892,7 +898,8 @@ ret =
    ENTRY(ORKConsentSignatureResult,
          nil,
          (@{
-            PROPERTY(signature, ORKConsentSignature, NSObject, NO, nil, nil)
+            PROPERTY(signature, ORKConsentSignature, NSObject, YES, nil, nil),
+            PROPERTY(consented, NSNumber, NSObject, YES, nil, nil),
             })),
    ENTRY(ORKCollectionResult,
          nil,

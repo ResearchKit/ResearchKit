@@ -29,15 +29,15 @@
 */
 
 
-#import "ORKDeviceMotionReactionTimeStep.h"
-#import "ORKDeviceMotionReactionTimeViewController.h"
+#import "ORKReactionTimeStep.h"
+#import "ORKReactionTimeViewController.h"
 #import "ORKHelpers.h"
 
 
-@implementation ORKDeviceMotionReactionTimeStep
+@implementation ORKReactionTimeStep
 
 + (Class)stepViewControllerClass {
-    return [ORKDeviceMotionReactionTimeViewController class];
+    return [ORKReactionTimeViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -47,7 +47,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKDeviceMotionReactionTimeStep *step = [super copyWithZone:zone];
+    ORKReactionTimeStep *step = [super copyWithZone:zone];
     step.maximumStimulusInterval = self.maximumStimulusInterval;
     step.minimumStimulusInterval = self.minimumStimulusInterval;
     step.thresholdAcceleration = self.thresholdAcceleration;

@@ -400,7 +400,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                   options:(ORKPredefinedTaskOption)0];
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
-        return [ORKOrderedTask deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+        return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
                                                    intendedUseDescription:nil
                                                   maximumStimulusInterval:8
                                                   minimumStimulusInterval:4
@@ -474,7 +474,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     if (_taskViewController.outputDirectory == nil) {
         // Sets an output directory in Documents, using the `taskRunUUID` in the path.
-        NSURL *documents = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        NSURL *documents =  [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSURL *outputDir = [documents URLByAppendingPathComponent:[self.taskViewController.taskRunUUID UUIDString]];
         [[NSFileManager defaultManager] createDirectoryAtURL:outputDir withIntermediateDirectories:YES attributes:nil error:nil];
         self.taskViewController.outputDirectory = outputDir;
@@ -1142,6 +1142,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             [items addObject:item];
         }
         
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Pre1"];
+            [items addObject:item];
+        }
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Basic Information"];
             [items addObject:item];

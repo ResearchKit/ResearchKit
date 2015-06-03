@@ -511,7 +511,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The 'ORKDeviceMotionReactionTimeResult' class represents the result of a single successful attempt within an ORKDeviceMotionReactionTimeStep.
+ The 'ORKReactionTimeResult' class represents the result of a single successful attempt within an ORKReactionTimeStep.
  
  'timestamp' is equal to the value of NSProcessInfo's systemUptime when the stimulus occurred.
  'fileResult' references the motion data recorded from the beginning of the attempt until the thresholdAcceleration was reached. Each entry of motion data in this file contains a time interval which may be directly compared to the 'timestamp' in order to determine the elapsed time since the stimulus.
@@ -523,7 +523,7 @@ Using the time taken to reach the thresholdAcceleration as the reactionTime of a
  or to immediately perform analysis on it.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKDeviceMotionReactionTimeResult: ORKResult
+@interface ORKReactionTimeResult: ORKResult
 
 @property (nonatomic, assign) NSTimeInterval timestamp;
 
@@ -761,9 +761,20 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) ORKConsentSignature *signature;
 
 /**
+ A boolean value indicating whether the participant consented.
+ 
+ `YES` if the user confirmed consent to the contents of the consent review. Note
+ that the signature could still be invalid if the name or signature image is
+ empty; this indicates only that the user gave a positive acknowledgement of the
+ document.
+ */
+@property (nonatomic, assign) BOOL consented;
+
+/**
  Applies the signature to the consent document.
  
- This method uses the identifier to look up the matching signature placeholder in the consent document and replaces it with this signature. It may throw an exception if
+ This method uses the identifier to look up the matching signature placeholder
+ in the consent document and replaces it with this signature. It may throw an exception if
  the document does not contain a signature with a matching identifier.
  
  @param document     The document to which to apply the signature.

@@ -358,11 +358,11 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that tests the participant's reaction time.
  
- In a device motion reaction task the participant is asked to move the device sharply in any
+ In a reaction time task the participant is asked to move the device sharply in any
  direction in response to a visual cue. You can use this task to accurately assess the participant's
  Simple Reaction Time.
  
- A device motion reaction time task finishes when the participant has completed the required
+ A reaction time task finishes when the participant has completed the required
  `numberOfAttempts` successfully. An attempt is successful when the participant exerts acceleration
  greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
  `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
@@ -370,7 +370,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  before `timeout` has elapsed. If unsuccessful, the result is not reported and the participant must
  try again to proceed with the task.
  
- Data collected by the task is in the form of ORKDeviceMotionReactionTimeResult objects. These
+ Data collected by the task is in the form of ORKReactionTimeResult objects. These
  objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult which
  references the motion data collected during an attempt. The researcher can use these to evaluate
  the response to the stimulus and calculate the reaction time.
@@ -396,17 +396,17 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
  */
 
-+ (ORKOrderedTask *)deviceMotionReactionTimeTaskWithIdentifier:(NSString *)identifier
-                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                       maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
-                                       minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
-                                         thresholdAcceleration:(double)thresholdAcceleration
-                                              numberOfAttempts:(int)numberOfAttempts
-                                                       timeout:(NSTimeInterval)timeout
-                                                  successSound:(UInt32)successSoundID
-                                                  timeoutSound:(UInt32)timeoutSoundID
-                                                  failureSound:(UInt32)failureSoundID
-                                                       options:(ORKPredefinedTaskOption)options;
++ (ORKOrderedTask *)reactionTimeTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                           minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                             thresholdAcceleration:(double)thresholdAcceleration
+                                  numberOfAttempts:(int)numberOfAttempts
+                                           timeout:(NSTimeInterval)timeout
+                                      successSound:(UInt32)successSoundID
+                                      timeoutSound:(UInt32)timeoutSoundID
+                                      failureSound:(UInt32)failureSoundID
+                                           options:(ORKPredefinedTaskOption)options;
 
 @end
 

@@ -309,6 +309,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] init];
     result.signature = _currentSignature;
     result.identifier = _currentSignature.identifier;
+    result.consented = _documentReviewed;
     result.startDate = parentResult.startDate;
     result.endDate = parentResult.endDate;
     parentResult.results = @[result];

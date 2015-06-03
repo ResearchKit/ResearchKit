@@ -32,7 +32,7 @@
 #import "ORKCustomStepView_Internal.h"
 
 
-@interface ORKDeviceMotionReactionTimeStimulusView : UIView
+@interface ORKReactionTimeStimulusView : UIView
 
 - (void)reset;
 
