@@ -91,8 +91,8 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKSpatialSpanMemoryResult:
                 providerType = SpatialSpanMemoryResultTableViewProvider.self
             
-            case is ORKDeviceMotionReactionTimeResult:
-                providerType = DeviceMotionReactionTimeViewProvider.self
+            case is ORKReactionTimeResult:
+                providerType = ReactionTimeViewProvider.self
             
             case is ORKFileResult:
                 providerType = FileResultTableViewProvider.self
@@ -576,8 +576,8 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
-/// Table view provider specific to an `ORKDeviceMotionReactionTimeResult` instance.
-class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKReactionTimeResult` instance.
+class ReactionTimeViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -595,7 +595,7 @@ class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
 
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let reactionTimeResult = result as! ORKDeviceMotionReactionTimeResult
+        let reactionTimeResult = result as! ORKReactionTimeResult
         
         let rows = super.resultRowsForSection(section)
         
