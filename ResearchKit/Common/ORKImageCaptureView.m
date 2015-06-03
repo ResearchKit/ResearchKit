@@ -37,30 +37,26 @@
 #import "ORKStepHeaderView_Internal.h"
 
 
-@interface ORKImageCaptureView ()
+@implementation ORKImageCaptureView {
+    ORKStepHeaderView *_headerView;
+    ORKImageCaptureCameraPreviewView *_previewView;
+    ORKNavigationContainerView *_continueSkipContainer;
+    UIBarButtonItem *_skipButtonItem;
 
-@property (nonatomic, strong) ORKStepHeaderView *headerView;
-@property (nonatomic, strong) ORKImageCaptureCameraPreviewView *previewView;
-@property (nonatomic, strong) ORKNavigationContainerView *continueSkipContainer;
-@property (nonatomic, strong) UIBarButtonItem *skipButtonItem;
-@property (nonatomic, strong) NSMutableArray *mconstraints;
+    SEL _continueAction;
+    id _continueTarget;
+    NSString *_continueTitle;
 
-@property (nonatomic) SEL continueAction;
-@property (nonatomic, assign) id continueTarget;
-@property (nonatomic, strong) NSString* continueTitle;
+    BOOL _capturePressesIgnored;
+    BOOL _retakePressesIgnored;
 
-@property (nonatomic) BOOL capturePressesIgnored;
-@property (nonatomic) BOOL retakePressesIgnored;
-
-@end
-
-
-@implementation ORKImageCaptureView
+    NSMutableArray *_variableConstraints;
+}
 
 - (instancetype)initWithFrame:(CGRect)aRect {
     self = [super initWithFrame:aRect];
     if (self) {
-        _mconstraints = [[NSMutableArray alloc] init];
+        _variableConstraints = [[NSMutableArray alloc] init];
         
         _previewView = [[ORKImageCaptureCameraPreviewView alloc] init];
         [self addSubview:_previewView];
@@ -119,6 +115,7 @@
     }
     [_previewView setVideoOrientation:orientation];
     [self.delegate videoOrientationDidChange:orientation];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)setImageCaptureStep:(ORKImageCaptureStep *)imageCaptureStep {
@@ -140,15 +137,11 @@
     _error = error;
     _headerView.alpha = error==nil ? 0 : 1;
     _headerView.instructionLabel.text = [error.userInfo valueForKey:NSLocalizedDescriptionKey];
-    if (error && self.continueTitle) {
-        _continueSkipContainer.continueButtonItem.title = self.continueTitle;
+    if (error && _continueTitle) {
+        _continueSkipContainer.continueButtonItem.title = _continueTitle;
         _continueSkipContainer.skipButtonItem = nil;
     }
     
-    if (self.mconstraints) {
-        [self removeConstraints:self.mconstraints];
-        [self.mconstraints removeAllObjects];
-    }
     [self setNeedsUpdateConstraints];
 }
 
@@ -156,34 +149,56 @@ const CGFloat CONTINUE_ALPHA_TRANSLUCENT = 0.5;
 const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 
 - (void)updateConstraints {
+    if (_variableConstraints) {
+        [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+        [_variableConstraints removeAllObjects];
+    }
     
     NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
     ORKEnableAutoLayoutForViews([dictionary allValues]);
-    if (! [self.mconstraints count]) {
-        if (_error) {
-            // If we have an error to show, do not display the previewView at all
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    if (_error) {
+        // If we have an error to show, do not display the previewView at all
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
+                                                                                            views:dictionary]];
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                          metrics:nil
+                                                                                            views:dictionary]];
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    } else {
+        // If we do not have an error to show, layout the previewView and continueSkipContainer
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                          metrics:nil
+                                                                                            views:dictionary]];
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
+                                                                                            views:dictionary]];
+        
+        // Float the continue view over the previewView if in landscape to give more room for the preview
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+            [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
+                                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                              metrics:nil
+                                                                                                views:dictionary]];
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                        multiplier:1.0
+                                                                          constant:0.0]];
+            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
         } else {
-            // If we do not have an error to show, layout the previewView and continueSkipContainer
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            
-            // Float the continue view over the previewView if in landscape to give more room for the preview
-            if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-                [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-                [self.mconstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-                _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
-            } else {
-                [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-                _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
-            }
+            [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
+                                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                              metrics:nil
+                                                                                                views:dictionary]];
+            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
         }
         
-        [self addConstraints:self.mconstraints];
+        [NSLayoutConstraint activateConstraints:_variableConstraints];
     }
-    
     
     [super updateConstraints];
 }
@@ -207,9 +222,9 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     // times with the same UIBarButtonItem, or with different UIBarButtonItems,
     // so capture it whenever the button does not point to our selector
     if (continueButtonItem.action != @selector(capturePressed)) {
-        self.continueAction = continueButtonItem.action;
-        self.continueTarget = continueButtonItem.target;
-        self.continueTitle = continueButtonItem.title;
+        _continueAction = continueButtonItem.action;
+        _continueTarget = continueButtonItem.target;
+        _continueTitle = continueButtonItem.title;
         continueButtonItem.action = @selector(capturePressed);
         continueButtonItem.target = self;
     }
@@ -242,7 +257,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
                 _previewView.templateImageHidden = YES;
         
                 // Reset the continue button title and configure the skip button as a recapture button
-                _continueSkipContainer.continueButtonItem.title = self.continueTitle;
+                _continueSkipContainer.continueButtonItem.title = _continueTitle;
                 _continueSkipContainer.skipButtonItem = _skipButtonItem;
             }
             // Stop ignoring presses
@@ -250,7 +265,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         }];
     } else {
         // Perform the original action of the Continue button
-        [self.continueTarget performSelector:self.continueAction withObject:_continueSkipContainer.continueButtonItem afterDelay:0];
+        [_continueTarget performSelector:_continueAction withObject:_continueSkipContainer.continueButtonItem afterDelay:0];
     }
 }
 
