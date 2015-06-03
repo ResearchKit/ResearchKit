@@ -750,16 +750,16 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Only verify existence if the output directory is non-nil.
     // But, even if the output directory is nil, we still set it and forward to the step VC.
     if (outputDirectory != nil) {
-        BOOL isDir;
-        BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDir];
+        BOOL isDirectory = NO;
+        BOOL directoryExists = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDirectory];
         
-        if (! exist) {
+        if (!directoryExists) {
             NSError *error = nil;
             if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
                 @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
             }
-            isDir = YES;
-        } else if (! isDir) {
+            isDirectory = YES;
+        } else if (!isDirectory) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
         }
     }
