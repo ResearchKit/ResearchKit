@@ -407,7 +407,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
                                              relativeToURL:nil
                                        bookmarkDataIsStale:&bookmarkIsStale
                                                      error:&bookmarkError];
-    if (! bookmarkURL) {
+    if (!bookmarkURL) {
         ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
     }
     
@@ -415,7 +415,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
 }
 
 NSData *ORKBookmarkDataFromURL(NSURL *url) {
-    if (! url) {
+    if (!url) {
         return nil;
     }
     
@@ -424,7 +424,7 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
                      includingResourceValuesForKeys:nil
                                       relativeToURL:nil
                                               error:&error];
-    if (! bookmark) {
+    if (!bookmark) {
         ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
     }
     return bookmark;
@@ -448,40 +448,38 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
     }
 }
 
-static NSURL *ORKHomeDirectory() {
-    static NSURL *homeDirectory = nil;
+static NSURL *ORKHomeDirectoryURL() {
+    static NSURL *homeDirectoryURL = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        homeDirectory = [NSURL fileURLWithPath:NSHomeDirectory()];
+        homeDirectoryURL = [NSURL fileURLWithPath:NSHomeDirectory()];
     });
-    return homeDirectory;
+    return homeDirectoryURL;
 }
 
 NSURL *ORKURLForRelativePath(NSString *relativePath) {
-    if (! relativePath) {
+    if (!relativePath) {
         return nil;
     }
     
-    NSURL *homeDirectory = ORKHomeDirectory();
-    CFURLRef url = CFURLCreateWithFileSystemPathRelativeToBase(kCFAllocatorDefault, (CFStringRef)relativePath, kCFURLPOSIXPathStyle, false, (CFURLRef)homeDirectory);
-    if (url != NULL) {
-        NSNumber *isDirectory;
-        if ([(__bridge NSURL *)url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil] && [isDirectory boolValue]) {
-            CFRelease(url);
-            url = CFURLCreateWithFileSystemPathRelativeToBase(kCFAllocatorDefault, (CFStringRef)relativePath, kCFURLPOSIXPathStyle, true, (CFURLRef)homeDirectory);
+    NSURL *homeDirectoryURL = ORKHomeDirectoryURL();
+    NSURL *url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:NO relativeToURL:homeDirectoryURL];
+    
+    if (url != nil) {
+        BOOL isDirectory = NO;;
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:url.path isDirectory:&isDirectory];
+        if (fileExists && isDirectory) {
+            url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:YES relativeToURL:homeDirectoryURL];
         }
     }
-    
-    NSURL *nsurl = (__bridge_transfer NSURL *)url;
-    return nsurl;
+    return url;
 }
-
 NSString *ORKRelativePathForURL(NSURL *url) {
-    if (! url) {
+    if (!url) {
         return nil;
     }
     
-    return ORKPathRelativeToURL(url, ORKHomeDirectory());
+    return ORKPathRelativeToURL(url, ORKHomeDirectoryURL());
 }
 
 id ORKDynamicCast_(id x, Class objClass) {
