@@ -239,7 +239,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
             && ORKEqualObjects(self.htmlContent, castObject.htmlContent)
             && ORKEqualObjects(self.customImage, castObject.customImage)
             && ORKEqualObjects(self.customLearnMoreButtonTitle, castObject.customLearnMoreButtonTitle)
-            && ORKEqualObjects(self.customAnimationURL, castObject.customAnimationURL) &&
+            && ORKEqualFileURLs(self.customAnimationURL, castObject.customAnimationURL) &&
             (self.type == castObject.type));
 }
 

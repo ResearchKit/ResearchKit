@@ -29,19 +29,19 @@
  */
 
 
-#import "ORKDeviceMotionReactionTimeContentView.h"
-#import "ORKDeviceMotionReactionTimeStimulusView.h"
+#import "ORKReactionTimeContentView.h"
+#import "ORKReactionTimeStimulusView.h"
 #import "ORKNavigationContainerView.h"
 
 
-@interface ORKDeviceMotionReactionTimeContentView ()
+@interface ORKReactionTimeContentView ()
 
-@property (nonatomic, strong) ORKDeviceMotionReactionTimeStimulusView *stimulusView;
+@property (nonatomic, strong) ORKReactionTimeStimulusView *stimulusView;
 
 @end
 
 
-@implementation ORKDeviceMotionReactionTimeContentView
+@implementation ORKReactionTimeContentView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -71,7 +71,7 @@
 
 - (void)addStimulusView {
     if (!_stimulusView) {
-        _stimulusView = [ORKDeviceMotionReactionTimeStimulusView new];
+        _stimulusView = [ORKReactionTimeStimulusView new];
         _stimulusView.translatesAutoresizingMaskIntoConstraints = NO;
         _stimulusView.backgroundColor = self.tintColor;
         [self addSubview:_stimulusView];

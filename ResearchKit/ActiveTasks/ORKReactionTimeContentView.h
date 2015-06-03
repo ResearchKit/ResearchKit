@@ -26,17 +26,20 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import "ORKCustomStepView_Internal.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKReactionTimeContentView : ORKActiveStepCustomView
 
-ORK_CLASS_AVAILABLE
-@interface ORKDeviceMotionReactionTimeViewController : ORKActiveStepViewController
+- (void)setStimulusHidden:(BOOL)hidden;
+
+- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+
+- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+
+- (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion;
 
 @end
-
-NS_ASSUME_NONNULL_END

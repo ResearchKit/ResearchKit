@@ -511,7 +511,7 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The 'ORKDeviceMotionReactionTimeResult' class represents the result of a single successful attempt within an ORKDeviceMotionReactionTimeStep.
+ The 'ORKReactionTimeResult' class represents the result of a single successful attempt within an ORKReactionTimeStep.
  
  'timestamp' is equal to the value of NSProcessInfo's systemUptime when the stimulus occurred.
  'fileResult' references the motion data recorded from the beginning of the attempt until the thresholdAcceleration was reached. Each entry of motion data in this file contains a time interval which may be directly compared to the 'timestamp' in order to determine the elapsed time since the stimulus.
@@ -523,7 +523,7 @@ Using the time taken to reach the thresholdAcceleration as the reactionTime of a
  or to immediately perform analysis on it.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKDeviceMotionReactionTimeResult: ORKResult
+@interface ORKReactionTimeResult: ORKResult
 
 @property (nonatomic, assign) NSTimeInterval timestamp;
 

@@ -29,10 +29,10 @@
  */
 
 
-#import "ORKDeviceMotionReactionTimeStimulusView.h"
+#import "ORKReactionTimeStimulusView.h"
 
 
-@implementation ORKDeviceMotionReactionTimeStimulusView {
+@implementation ORKReactionTimeStimulusView {
     CAShapeLayer *_tickLayer;
     CAShapeLayer *_crossLayer;
 }

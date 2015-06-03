@@ -400,7 +400,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                   options:(ORKPredefinedTaskOption)0];
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
-        return [ORKOrderedTask deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+        return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
                                                    intendedUseDescription:nil
                                                   maximumStimulusInterval:8
                                                   minimumStimulusInterval:4

@@ -30,29 +30,12 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import <AudioToolbox/AudioServices.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKDeviceMotionReactionTimeStep : ORKActiveStep
-
-@property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
-
-@property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
-
-@property (nonatomic, assign) NSTimeInterval timeout;
-
-@property (nonatomic, assign) NSInteger numberOfAttempts;
-
-@property (nonatomic, assign) double thresholdAcceleration;
-
-@property (nonatomic, assign) SystemSoundID successSound;
-
-@property (nonatomic, assign) SystemSoundID timeoutSound;
-
-@property (nonatomic, assign) SystemSoundID failureSound;
+@interface ORKReactionTimeViewController : ORKActiveStepViewController
 
 @end
 

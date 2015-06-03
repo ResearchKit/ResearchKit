@@ -29,17 +29,17 @@
  */
 
 
-#import "ORKDeviceMotionReactionTimeViewController.h"
+#import "ORKReactionTimeViewController.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKActiveStepView.h"
-#import "ORKDeviceMotionReactionTimeContentView.h"
-#import "ORKDeviceMotionReactionTimeStep.h"
+#import "ORKReactionTimeContentView.h"
+#import "ORKReactionTimeStep.h"
 #import <CoreMotion/CMDeviceMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
 
-@implementation ORKDeviceMotionReactionTimeViewController {
-    ORKDeviceMotionReactionTimeContentView *_reactionTimeContentView;
+@implementation ORKReactionTimeViewController {
+    ORKReactionTimeContentView *_reactionTimeContentView;
     NSMutableArray *_results;
     NSTimer *_stimulusTimer;
     NSTimer *_timeoutTimer;
@@ -58,7 +58,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     // Do any additional setup after loading the view.
     [self configureTitle];
     _results = [NSMutableArray new];
-    _reactionTimeContentView = [ORKDeviceMotionReactionTimeContentView new];
+    _reactionTimeContentView = [ORKReactionTimeContentView new];
     self.activeStepView.activeCustomView = _reactionTimeContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     [_reactionTimeContentView setStimulusHidden:YES];
@@ -89,7 +89,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
     if(event.type == UIEventSubtypeMotionShake)
     {
         if (_validResult) {
-            ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
+            ORKReactionTimeResult *reactionTimeResult = [[ORKReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
             reactionTimeResult.timestamp = _stimulusTimestamp;
             [_results addObject:reactionTimeResult];
         }
@@ -121,7 +121,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (void)recorder:(ORKRecorder *)recorder didCompleteWithResult:(ORKResult *)result {
     if (_validResult) {
-        ORKDeviceMotionReactionTimeResult *reactionTimeResult = [[ORKDeviceMotionReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
+        ORKReactionTimeResult *reactionTimeResult = [[ORKReactionTimeResult alloc] initWithIdentifier:self.step.identifier];
         reactionTimeResult.timestamp = _stimulusTimestamp;
         reactionTimeResult.fileResult = (ORKFileResult *)result;
         [_results addObject:reactionTimeResult];
@@ -141,8 +141,8 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 #pragma mark - ORKReactionTimeStepViewController
 
-- (ORKDeviceMotionReactionTimeStep *)reactionTimeStep {
-    return (ORKDeviceMotionReactionTimeStep *)self.step;
+- (ORKReactionTimeStep *)reactionTimeStep {
+    return (ORKReactionTimeStep *)self.step;
 }
 
 - (void)configureTitle {
@@ -222,7 +222,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 }
 
 - (NSTimeInterval)stimulusInterval {
-    ORKDeviceMotionReactionTimeStep *step = [self reactionTimeStep];
+    ORKReactionTimeStep *step = [self reactionTimeStep];
     NSTimeInterval range = step.maximumStimulusInterval - step.minimumStimulusInterval;
     NSTimeInterval randomFactor = ((NSTimeInterval)rand() / RAND_MAX) * range;
     return randomFactor + step.minimumStimulusInterval;

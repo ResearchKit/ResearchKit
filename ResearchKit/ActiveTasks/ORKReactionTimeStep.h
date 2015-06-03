@@ -26,20 +26,34 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 
-#import "ORKCustomStepView_Internal.h"
+#import <ResearchKit/ResearchKit.h>
+#import <AudioToolbox/AudioServices.h>
 
 
-@interface ORKDeviceMotionReactionTimeContentView : ORKActiveStepCustomView
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)setStimulusHidden:(BOOL)hidden;
+ORK_CLASS_AVAILABLE
+@interface ORKReactionTimeStep : ORKActiveStep
 
-- (void)startSuccessAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+@property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
 
-- (void)startFailureAnimationWithDuration:(NSTimeInterval)duration completion:(nullable void (^)(void))completion;
+@property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
 
-- (void)resetAfterDelay:(NSTimeInterval)delay completion:(nullable void (^)(void))completion;
+@property (nonatomic, assign) NSTimeInterval timeout;
+
+@property (nonatomic, assign) NSInteger numberOfAttempts;
+
+@property (nonatomic, assign) double thresholdAcceleration;
+
+@property (nonatomic, assign) SystemSoundID successSound;
+
+@property (nonatomic, assign) SystemSoundID timeoutSound;
+
+@property (nonatomic, assign) SystemSoundID failureSound;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -31,7 +31,7 @@
 
 #import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
-#import "ORKDeviceMotionReactionTimeStep.h"
+#import "ORKReactionTimeStep.h"
 
 
 @interface ORKStepTests : XCTestCase
@@ -69,8 +69,8 @@
     XCTAssertThrows([formStep validateParameters]);
 }
 
-- (void)testDeviceMotionReactionTimeStep {
-    ORKDeviceMotionReactionTimeStep *validReactionTimeStep = [[ORKDeviceMotionReactionTimeStep alloc] initWithIdentifier:@"ReactionTimeStep"];
+- (void)testReactionTimeStep {
+    ORKReactionTimeStep *validReactionTimeStep = [[ORKReactionTimeStep alloc] initWithIdentifier:@"ReactionTimeStep"];
     
     validReactionTimeStep.maximumStimulusInterval = 8;
     validReactionTimeStep.minimumStimulusInterval = 4;
@@ -80,7 +80,7 @@
 
     XCTAssertNoThrow([validReactionTimeStep validateParameters]);
     
-    ORKDeviceMotionReactionTimeStep *reactionTimeStep = [validReactionTimeStep copy];
+    ORKReactionTimeStep *reactionTimeStep = [validReactionTimeStep copy];
     XCTAssertEqualObjects(reactionTimeStep, validReactionTimeStep);
 
     // minimumStimulusInterval cannot be zero or less

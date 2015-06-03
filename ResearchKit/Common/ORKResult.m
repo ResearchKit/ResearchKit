@@ -540,7 +540,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.fileURL, castObject.fileURL) &&
+            ORKEqualFileURLs(self.fileURL, castObject.fileURL) &&
             ORKEqualObjects(self.contentType, castObject.contentType));
 }
 
@@ -562,7 +562,7 @@
 @end
 
 
-@implementation ORKDeviceMotionReactionTimeResult
+@implementation ORKReactionTimeResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
@@ -597,7 +597,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKDeviceMotionReactionTimeResult *result = [super copyWithZone:zone];
+    ORKReactionTimeResult *result = [super copyWithZone:zone];
     result.fileResult = [self.fileResult copy];
     result.timestamp = self.timestamp;
     return result;
@@ -1371,7 +1371,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.taskRunUUID, castObject.taskRunUUID) &&
-            ORKEqualObjects(self.outputDirectory, castObject.outputDirectory));
+            ORKEqualFileURLs(self.outputDirectory, castObject.outputDirectory));
 }
 
 - (NSUInteger)hash {
