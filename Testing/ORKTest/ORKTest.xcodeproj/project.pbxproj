@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */; };
 		86717A901AC0C0FE00AC2A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A8F1AC0C0FE00AC2A23 /* main.m */; };
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
 		86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86717A9A1AC0C0FE00AC2A23 /* Images.xcassets */; };
@@ -77,6 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SAMPLE_PDF_TEST.pdf; sourceTree = "<group>"; };
 		86717A8A1AC0C0FE00AC2A23 /* ORKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86717A8E1AC0C0FE00AC2A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86717A8F1AC0C0FE00AC2A23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		86717B011AC0C9D400AC2A23 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				335418E81B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf */,
 				86717AE01AC0C53800AC2A23 /* image_example.png */,
 				86717AE31AC0C53800AC2A23 /* signature.png */,
 				86717A9A1AC0C0FE00AC2A23 /* Images.xcassets */,
@@ -400,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86717A9E1AC0C0FE00AC2A23 /* LaunchScreen.xib in Resources */,
+				335418E91B118EAD00A38F5E /* SAMPLE_PDF_TEST.pdf in Resources */,
 				86717AED1AC0C53800AC2A23 /* signature.png in Resources */,
 				86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */,
 				86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */,

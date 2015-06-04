@@ -209,6 +209,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *htmlContent;
 
 /**
+ The NSURL used to override the 'htmlContent' and 'consent' property if a document should be required.
+ 
+ This property is used to display a document when required by an authortity.
+ 
+ */
+@property (nonatomic, copy, nullable) NSURL *contentURL;
+
+/**
  A custom illustration for the consent.
  
  The custom image can override the image associated with any of the predefined
