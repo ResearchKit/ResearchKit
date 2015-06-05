@@ -38,7 +38,13 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 NSString *const ORKGraphViewTriggerAnimationsNotification = @"ORKGraphViewTriggerAnimationsNotification";
 NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotification";
 
-@implementation ORKGraphView
+@interface ORKGraphView () <UIGestureRecognizerDelegate>
+
+@end
+
+@implementation ORKGraphView {
+    BOOL _isScrubbing;
+}
 
 #pragma mark - Init
 
@@ -77,6 +83,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     self.hasDataPoint = NO;
     self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     self.panGestureRecognizer.delaysTouchesBegan = YES;
+    self.panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:self.panGestureRecognizer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animateLayersSequentially) name:ORKGraphViewTriggerAnimationsNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGraph) name:ORKGraphViewRefreshNotification object:nil];
@@ -188,8 +195,8 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     [_yAxisPoints removeAllObjects];
     _hasDataPoint = NO;
     for (int i = 0; i<[self numberOfPointsinPlot:plotIndex]; i++) {
-        if ([_dataSource respondsToSelector:@selector(graphView:plot:valueForPointAtIndex:)]) {
-            ORKRangePoint *value = [self.dataSource graphView:self plot:plotIndex valueForPointAtIndex:i];
+        if ([_dataSource respondsToSelector:@selector(graphView:pointForForPointIndex:plotIndex:)]) {
+            ORKRangePoint *value = [self.dataSource graphView:self pointForForPointIndex:i plotIndex:plotIndex];
             [_dataPoints addObject:value];
             if (!value.isEmpty){
                 _hasDataPoint = YES;
@@ -432,8 +439,8 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 - (NSInteger)numberOfPointsinPlot:(NSInteger)plotIndex {
     NSInteger numberOfPoints = 0;
     
-    if ([_dataSource respondsToSelector:@selector(graphView:numberOfPointsInPlot:)]) {
-        numberOfPoints = [_dataSource graphView:self numberOfPointsInPlot:plotIndex];
+    if ([_dataSource respondsToSelector:@selector(graphView:numberOfPointsForPlotIndex:)]) {
+        numberOfPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
     }
     
     return numberOfPoints;
@@ -461,7 +468,15 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     }
 }
 
-#pragma Mark - Scrubbing
+#pragma Mark - Scrubbing / UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
+    CGPoint translation = [gestureRecognizer translationInView:self];
+    if (fabs(translation.x) > fabs(translation.y)) {
+        return YES;
+    }
+    return NO;
+}
 
 - (CGSize)scrubberThumbSize {
     CGSize thumbSize;
@@ -485,36 +500,48 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     if ((self.dataPoints.count > 0) && [self numberOfValidValues] > 0) {
+        
         CGPoint location = [gestureRecognizer locationInView:self.plotsView];
-        
         location = CGPointMake(location.x, location.y);
-        
         CGFloat maxX = round(CGRectGetWidth(self.plotsView.bounds));
         CGFloat minX = 0;
-        
         CGFloat normalizedX = MAX(MIN(location.x, maxX), minX);
         location = CGPointMake(normalizedX, location.y);
-        
-        
         CGFloat snappedXPosition = [self snappedXPosition:location.x];
-        [self updateScrubberViewForXPosition:snappedXPosition];
         
+        BOOL shouldAnimate = location.x != snappedXPosition;
+        [self updateScrubberViewForXPosition:snappedXPosition animated: shouldAnimate];
         
         if ([self.delegate respondsToSelector:@selector(graphView:touchesMovedToXPosition:)]) {
             [self.delegate graphView:self touchesMovedToXPosition:snappedXPosition];
         }
         
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            _isScrubbing = YES;
             [self setScrubberViewsHidden:NO animated:YES];
             if ([self.delegate respondsToSelector:@selector(graphViewTouchesBegan:)]) {
                 [self.delegate graphViewTouchesBegan:self];
             }
-        } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        }
+        
+        else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+            _isScrubbing = NO;
             [self setScrubberViewsHidden:YES animated:YES];
             if ([self.delegate respondsToSelector:@selector(graphViewTouchesEnded:)]) {
                 [self.delegate graphViewTouchesEnded:self];
             }
         }
+    }
+}
+
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition animated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.1 animations:^{
+            [self updateScrubberViewForXPosition:xPosition];
+        }];
+    }
+    else {
+        [self updateScrubberViewForXPosition:xPosition];
     }
 }
 
@@ -532,13 +559,48 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     
     [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphLeftPadding, scrubberYPos + ORKGraphTopPadding)];
     
-    if (scrubbingVal >= self.minimumValue && scrubbingVal <= self.maximumValue) {
+    
+    if (scrubbingVal >= self.minimumValue && scrubbingVal <= self.maximumValue && _isScrubbing) {
         self.scrubberLabel.alpha = 1;
         self.scrubberThumbView.alpha = 1;
     } else {
         self.scrubberLabel.alpha = 0;
         self.scrubberThumbView.alpha = 0;
     }
+}
+
+- (CGFloat)snappedXPosition:(CGFloat)xPosition {
+    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame) / self.xAxisPoints.count;
+    NSUInteger positionIndex;
+    for (positionIndex = 0; positionIndex < self.xAxisPoints.count; positionIndex++) {
+        
+        CGFloat dataPointValue = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
+        
+        if (dataPointValue != NSNotFound) {
+            CGFloat value = [self.xAxisPoints[positionIndex] floatValue];
+            
+            if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
+                xPosition = value;
+            }
+        }
+    }
+    return xPosition;
+}
+
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
+    BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
+    CGFloat value = NSNotFound;
+    NSUInteger positionIndex = 0;
+    if (snapped) {
+        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+            CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
+            if (xAxisPointVal == xPosition) {
+                break;
+            }
+        }
+        value = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
+    }
+    return value;
 }
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
@@ -705,9 +767,9 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             self.minimumValue = ((ORKRangePoint *)self.dataPoints[0]).minimumValue;
             
             for (NSUInteger i=1; i<self.dataPoints.count; i++) {
-                CGFloat num = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
-                if ((self.minimumValue == NSNotFound) || (num < self.minimumValue)) {
-                    self.minimumValue = num;
+                CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
+                if ((self.minimumValue == NSNotFound) || (value < self.minimumValue)) {
+                    self.minimumValue = value;
                 }
             }
         }
@@ -721,47 +783,13 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             self.maximumValue = ((ORKRangePoint *)self.dataPoints[0]).maximumValue;
             
             for (NSUInteger i=1; i<self.dataPoints.count; i++) {
-                CGFloat num = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
-                if (((num != NSNotFound) && (num > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
-                    self.maximumValue = num;
+                CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
+                if (((value != NSNotFound) && (value > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
+                    self.maximumValue = value;
                 }
             }
         }
     }
-}
-
-- (CGFloat)snappedXPosition:(CGFloat)xPosition {
-    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame)/self.xAxisPoints.count;
-    NSUInteger positionIndex;
-    for (positionIndex = 0; positionIndex<self.xAxisPoints.count; positionIndex++) {
-        
-        CGFloat dataPointVal = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
-        
-        if (dataPointVal != NSNotFound) {
-            CGFloat num = [self.xAxisPoints[positionIndex] floatValue];
-            
-            if (fabs(num - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
-                xPosition = num;
-            }
-        }
-    }
-    return xPosition;
-}
-
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
-    BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
-    CGFloat value = NSNotFound;
-    NSUInteger positionIndex = 0;
-    if (snapped) {
-        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
-            CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
-            if (xAxisPointVal == xPosition) {
-                break;
-            }
-        }
-        value = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
-    }
-    return value;
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {

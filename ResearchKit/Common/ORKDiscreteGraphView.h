@@ -36,15 +36,14 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 NS_ASSUME_NONNULL_BEGIN
 
 /**
-    The `ORKDiscreteGraphView` class presents data provided by an object conforming to the
-    `ORKGraphViewDataSource` as a discrete graph.
+    The `ORKDiscreteGraphView` class presents data provided by an object conforming to the `ORKGraphViewDataSource` as a discrete graph.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphView : ORKGraphView
 
 /**
-    A Boolean value indicating whether to draw a line to connect the `minimumValue`
-    and `maximumValue` of each `ORKRangePoint represented by the graphView.
+    A Boolean value indicating whether to draw a line to connect the `minimumValue` and `maximumValue` of each `ORKRangePoint
+    represented by the graphView.
  */
 @property (nonatomic) BOOL shouldConnectRanges;
 

@@ -99,11 +99,8 @@ extension ChartListViewController {
     }
     
     func configurePieChartView(pieChartView: ORKPieChartView) {
-        let font = UIFont(name: "HelveticaNeue", size: 11)
-        pieChartView.legendFont = font
-        pieChartView.percentageFont = font
-        pieChartView.centreTitleLabel.text = "TITLE"
-        pieChartView.centreSubtitleLabel.text = "SUBTITLE"
+        pieChartView.title = "TITLE"
+        pieChartView.text = "TEXT"
         /* set more ORKPieChartView properties as desired */
     }
 }

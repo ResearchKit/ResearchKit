@@ -30,27 +30,39 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class PieChartDataSource: NSObject, ORKPieChartViewDatasource {
+class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
-    var colors = [
-        UIColor(red: 217/225, green: 217/255, blue: 217/225, alpha: 1),
-        UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1),
-        UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)]
+    lazy var backingStore: [UIColor] = { [unowned self] in
+        return self.randomColors(8)
+    }()
+    
+    func randomColors(number: Int) -> [UIColor] {
+        
+        func random() -> CGFloat {
+            return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+        }
+        
+        var colors: [UIColor] = []
+        for index in 0...number {
+            colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
+        }
+        return colors
+    }
     
     func numberOfSegmentsInPieChartView() -> Int {
-        return colors.count
+        return backingStore.count
     }
     
     func pieChartView(pieChartView: ORKPieChartView, valueForSegmentAtIndex index: Int) -> CGFloat {
-        return 20
+        return CGFloat(index + 1)
     }
     
     func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
-        return colors[index]
+        return backingStore[index]
     }
     
     func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
-        return "\(index + 1)"
+        return "Title \(index + 1)"
     }
 }
 
@@ -59,11 +71,11 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     var firstPlot = [ORKRangePoint(value: 20), ORKRangePoint(), ORKRangePoint(value: 40), ORKRangePoint(value: 50), ORKRangePoint(), ORKRangePoint(value: 70)] as [ORKRangePoint]
     var secondPlot = [ORKRangePoint(value: 2), ORKRangePoint(value: 4), ORKRangePoint(value: 8), ORKRangePoint(value: 16), ORKRangePoint(value: 32), ORKRangePoint(value: 64)] as [ORKRangePoint]
     
-    func graphView(graphView: ORKGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> ORKRangePoint {
+    func graphView(graphView: ORKGraphView, pointForForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangePoint {
         return  plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
     }
     
-    func graphView(graphView: ORKGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
+    func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
         return plotIndex == 0 ? firstPlot.count : secondPlot.count
     }
     
@@ -98,11 +110,11 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
         return [ORKRangePoint(minimumValue: 0, maximumValue: 1), ORKRangePoint(minimumValue: 1, maximumValue: 5), ORKRangePoint(minimumValue: 4, maximumValue: 6), ORKRangePoint(minimumValue: 6, maximumValue: 8)]
     }
     
-    func graphView(graphView: ORKGraphView, plot plotIndex: Int, valueForPointAtIndex pointIndex: Int) -> ORKRangePoint {
+    func graphView(graphView: ORKGraphView, pointForForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangePoint {
         return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[plotIndex]
     }
-
-    func graphView(graphView: ORKGraphView, numberOfPointsInPlot plotIndex: Int) -> Int {
+    
+    func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
         return plotIndex == 0 ? firstPlot.count : secondPlot.count
     }
     

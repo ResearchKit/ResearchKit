@@ -105,7 +105,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 #pragma mark - Graph Calculations
 
-
 - (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
     CGFloat canvasYPosition = 0;
@@ -114,6 +113,21 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
         canvasYPosition = ((ORKRangePoint *)self.yAxisPoints[positionIndex]).maximumValue;
     }
     return canvasYPosition;
+}
+
+#pragma mark -- Animation
+
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition animated:(BOOL)animated {
+    if (animated) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+        } completion:^(BOOL finished) {
+                [self updateScrubberViewForXPosition:xPosition];
+            }];
+    }
+    else {
+        [self updateScrubberViewForXPosition:xPosition];
+    }
 }
 
 @end
