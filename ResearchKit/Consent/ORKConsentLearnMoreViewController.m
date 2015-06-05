@@ -76,7 +76,7 @@
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setupConstraints];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(cancel:)];
 }
 
 - (void)setupConstraints {
