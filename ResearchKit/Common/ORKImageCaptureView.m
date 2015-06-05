@@ -140,10 +140,18 @@
 - (void)setError:(NSError * __nullable)error {
     _error = error;
     _headerView.alpha = error==nil ? 0 : 1;
-    _headerView.instructionLabel.text = [error.userInfo valueForKey:NSLocalizedDescriptionKey];
-    if (error && self.continueTitle) {
+    _headerView.instructionLabel.text = error==nil ? nil : [error.userInfo valueForKey:NSLocalizedDescriptionKey];
+    
+    if (error) {
+        // If current step is optional, allow user to skip on error.
         _continueSkipContainer.continueButtonItem.title = self.continueTitle;
+        [_continueSkipContainer setContinueEnabled:self.imageCaptureStep.optional];
         _continueSkipContainer.skipButtonItem = nil;
+    } else {
+        // Recover when the error is cleared.
+        [_continueSkipContainer setContinueEnabled:YES];
+        _continueSkipContainer.continueButtonItem.title = self.capturedImage ? ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil) : self.continueTitle;
+        _continueSkipContainer.skipButtonItem = self.capturedImage ? _skipButtonItem : nil;
     }
     
     [self setNeedsUpdateConstraints];
@@ -180,10 +188,9 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
             [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
             _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
         }
-        
-        [NSLayoutConstraint activateConstraints:_mconstraints];
     }
     
+    [NSLayoutConstraint activateConstraints:_mconstraints];
     [super updateConstraints];
 }
 
@@ -213,11 +220,16 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         continueButtonItem.target = self;
     }
     
-    // If we do not have an error to show, and we haven't already gotten a captured
-    // image, then change the title of the button to be appropriate for the capture action
-    if (!self.capturedImage && !self.error) {
+    // If we are in an error state, just save the action/target/title, but do not configure the continue button
+    if (self.error) {
+        return;
+    }
+    
+    // If we haven't already gotten a captured image, then change the title
+    // of the button to be appropriate for the capture action
+    if (!self.capturedImage) {
         continueButtonItem.title = ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil);
-    } else if(self.capturedImage) {
+    } else if (self.capturedImage) {
         _continueSkipContainer.skipButtonItem = _skipButtonItem;
     }
     
@@ -240,9 +252,14 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
                 // Hide the template image after capturing
                 _previewView.templateImageHidden = YES;
         
-                // Reset the continue button title and configure the skip button as a recapture button
-                _continueSkipContainer.continueButtonItem.title = self.continueTitle;
-                _continueSkipContainer.skipButtonItem = _skipButtonItem;
+                // If we experienced an error during the capture (likely writing the file to disk),
+                // very likely, the error has been handled in (setError:).
+                // then do not reconfigure the buttons,
+                if (!self.error) {
+                    // Reset the continue button title and configure the skip button as a recapture button
+                    _continueSkipContainer.continueButtonItem.title = self.continueTitle;
+                    _continueSkipContainer.skipButtonItem = _skipButtonItem;
+                }
             }
             // Stop ignoring presses
             _capturePressesIgnored = NO;
