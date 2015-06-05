@@ -89,6 +89,11 @@
     _imageCaptureView.continueButtonItem = continueButtonItem;
 }
 
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    [super setSkipButtonItem:skipButtonItem];
+    _imageCaptureView.skipButtonItem = skipButtonItem;
+}
+
 - (void)retakePressed:(void (^ __nullable)())handler {
     // Start the capture session, and reset the captured image to nil
     dispatch_async(self.sessionQueue, ^{
