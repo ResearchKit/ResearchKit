@@ -232,6 +232,15 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     }
 }
 
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    _continueButtonItem = continueButtonItem;
+    
+    // If the capture button is not currently being used as the continue button, then use this new button
+    if (_continueSkipContainer.continueButtonItem != _captureButtonItem) {
+        _continueSkipContainer.continueButtonItem = continueButtonItem;
+    }
+}
+
 - (void)capturePressed {
     // If we are still waiting for the delegate to complete, ignore futher presses
     if (_capturePressesIgnored)
