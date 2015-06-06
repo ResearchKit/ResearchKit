@@ -236,7 +236,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     _continueButtonItem = continueButtonItem;
     
     // If the capture button is not currently being used as the continue button, then use this new button
-    if (_continueSkipContainer.continueButtonItem != _captureButtonItem) {
+    if (!self.error && _continueSkipContainer.continueButtonItem != _captureButtonItem) {
         _continueSkipContainer.continueButtonItem = continueButtonItem;
     }
 }
