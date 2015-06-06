@@ -246,20 +246,14 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     if (_capturePressesIgnored)
         return;
     
-    // If we don't have an error to show, and we have not yet captured an image, then do so
-    if (!self.capturedImage && !self.error) {
-        // Ignore futher presses until the delegate completes
-        _capturePressesIgnored = YES;
+    // Ignore futher presses until the delegate completes
+    _capturePressesIgnored = YES;
         
-        // Capture the image via the delegate
-        [self.delegate capturePressed:^(BOOL captureSuccess){
-            // Stop ignoring presses
-            _capturePressesIgnored = NO;
-        }];
-    } else {
-        // Perform the action of the saved Continue button
-        [_continueButtonItem.target performSelector:_continueButtonItem.action withObject:_continueButtonItem afterDelay:0];
-    }
+    // Capture the image via the delegate
+    [self.delegate capturePressed:^(BOOL captureSuccess){
+        // Stop ignoring presses
+        _capturePressesIgnored = NO;
+    }];
 }
 
 - (void)retakePressed {
