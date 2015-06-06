@@ -59,9 +59,9 @@
         if (stepResult && [stepResult results].count > 0) {
             ORKFileResult *fileResult = [[stepResult results] firstObject];
             if(fileResult.fileURL) {
-                self.fileUrl = fileResult.fileURL;
-                //this will actually cause the fileURL above to be removed..
+                // Setting these properties in this order allows us to reuse the existing file on disk
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
+                self.fileUrl = fileResult.fileURL;
             }
         }
     }
@@ -212,16 +212,21 @@
 }
 
 - (void)handleError:(NSError *)error {
-    // Set the captured image data to nil before calling the delegate, as the call may result
-    // in an attempt to create a new result, which will in turn check the captured image data.
-    _capturedImageData = nil;
+    // Shut down the session, if running
+    if(_captureSession.isRunning) {
+        STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
+        dispatch_async(self.sessionQueue, ^{
+            [strongCaptureSession stopRunning];
+        });
+    }
     
-    // Shut everything down
-    [_captureSession stopRunning];
+    // Reset the state to before the capture session was setup.  Order here is important
     _captureSession = nil;
     _stillImageOutput = nil;
     _imageCaptureView.session = nil;
     _imageCaptureView.capturedImage = nil;
+    _capturedImageData = nil;
+    _fileUrl = nil;
     
     // Show the error in the image capture view
     _imageCaptureView.error = error;
