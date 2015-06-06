@@ -109,7 +109,9 @@
 
 - (void)ork_setSuffix:(NSString *)suffix withColor:(UIColor *)color
 {
+    CGRect previousSuffixFrame = CGRectZero;
     if (_suffixLabel) {
+        previousSuffixFrame = _suffixLabel.frame;
         [_suffixLabel removeFromSuperview];
         _suffixLabel = nil;
         [self setNeedsLayout];
@@ -123,7 +125,8 @@
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
     _suffixLabel.userInteractionEnabled = NO;
     _suffixLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-    
+    _suffixLabel.frame = previousSuffixFrame;
+
     // re-layout to position the suffix
     [self setNeedsLayout];
 }
