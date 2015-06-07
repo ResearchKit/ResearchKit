@@ -1,6 +1,6 @@
 The ResearchKit™ framework is an open source framework that developers and researchers can use to create apps that let iOS users participate in medical research.
 
-This is the API documentation for the ResearchKit framework. For an overview of framework and a more general guide to using and extending the framework, see the [Programming Guide](GuideOverview).
+This is the API documentation for the ResearchKit framework. For an overview of framework and a more general guide to using and extending the framework, see the [Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html).
 
 
 Constructing Tasks
