@@ -21,7 +21,7 @@ and even create completely new modules of your own.
 The survey module's predefined user interface lets you quickly build
 surveys simply by specifying the questions and types of answers. The
 survey module is already localized, so all you need to do is localize
-your questions. To learn more about surveys, see [Creating Surveys](CreatingSurveys-template).
+your questions. To learn more about surveys, see [Creating Surveys](https://github.com/ResearchKit/ResearchKit/blob/master/docs/Survey/CreatingSurveys-template.markdown).
 
 ###Consent
 
@@ -31,11 +31,11 @@ study. That’s why it’s critical to clarify exactly what information
 will be collected from users and who will have access to their
 information. The ResearchKit framework provides templates that you can customize to
 explain the details of your study and to obtain the participant’s
-consent. To learn more about consent, see [Creating a Consent Document](InformedConsent-template).
+consent. To learn more about consent, see [Creating a Consent Document](https://github.com/ResearchKit/ResearchKit/blob/master/docs/InformedConsent/InformedConsent-template.markdown).
 
 ### Active Tasks
 Some studies may need more data than is provided by responses to survey questions or the data collection capabilities of the HealthKit and CoreMotion APIs on iOS. Active tasks invite users to perform activities under partially controlled conditions using iPhone sensors to actively collect data. To learn more
-about active tasks, see [Active Tasks](ActiveTasks-template).
+about active tasks, see [Active Tasks](https://github.com/ResearchKit/ResearchKit/blob/master/docs/ActiveTasks/ActiveTasks-template.markdown).
 
 ##Tasks and Steps
 
