@@ -76,7 +76,6 @@
         _continueSkipContainer.bottomMargin = 15;
         _continueSkipContainer.optional = YES;
         _continueSkipContainer.backgroundColor = ORKColor(ORKBackgroundColorKey);
-        _continueSkipContainer.continueButtonItem = _captureButtonItem;
         [self addSubview:_continueSkipContainer];
         
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
@@ -84,6 +83,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
+        
+        [self updateAppearance];
     }
     return self;
 }
@@ -130,10 +131,15 @@
     _showSkipButtonItem = imageCaptureStep.optional;
 }
 
-- (void)setCapturedImage:(UIImage * __nullable)capturedImage {
-    _previewView.capturedImage = capturedImage;
-    
-    if (capturedImage) {
+- (void)updateAppearance {
+    if (self.error) {
+        // Hide the template image if there is an error
+        _previewView.templateImageHidden = YES;
+        
+        // Show skip, if available, and hide the template and continue/capture button
+        _continueSkipContainer.continueButtonItem = nil;
+        _continueSkipContainer.skipButtonItem = _skipButtonItem;
+    } else if (self.capturedImage) {
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
 
@@ -150,6 +156,11 @@
     }
 }
 
+- (void)setCapturedImage:(UIImage * __nullable)capturedImage {
+    _previewView.capturedImage = capturedImage;
+    [self updateAppearance];
+}
+
 - (UIImage *)capturedImage {
     return _previewView.capturedImage;
 }
@@ -158,19 +169,7 @@
     _error = error;
     _headerView.alpha = error==nil ? 0 : 1;
     _headerView.instructionLabel.text = error==nil ? nil : [error.userInfo valueForKey:NSLocalizedDescriptionKey];
-    
-    if (error) {
-        // Show skip, if available, and hide the template and continue/capture button
-        _previewView.templateImageHidden = YES;
-        _continueSkipContainer.continueButtonItem = nil;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
-    } else {
-        // Reset to running state
-        _previewView.templateImageHidden = NO;
-        _continueSkipContainer.continueButtonItem = _captureButtonItem;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
-    }
-    
+    [self updateAppearance];
     [self setNeedsUpdateConstraints];
 }
 
@@ -224,21 +223,13 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     if (_showSkipButtonItem) {
         _skipButtonItem = skipButtonItem;
-    
-        // If the recapture button is not currently being used as the skip button, then use this new button
-        if (_continueSkipContainer.skipButtonItem != _recaptureButtonItem) {
-            _continueSkipContainer.skipButtonItem = skipButtonItem;
-        }
+        [self updateAppearance];
     }
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     _continueButtonItem = continueButtonItem;
-    
-    // If the capture button is not currently being used as the continue button, then use this new button
-    if (!self.error && _continueSkipContainer.continueButtonItem != _captureButtonItem) {
-        _continueSkipContainer.continueButtonItem = continueButtonItem;
-    }
+    [self updateAppearance];
 }
 
 - (void)capturePressed {
