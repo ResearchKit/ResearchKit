@@ -34,7 +34,7 @@
 "CONSENT_NAME_LAST" = "Apellidos";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatorio";
 "CONSENT_REVIEW_TITLE" = "Revisar";
-"CONSENT_REVIEW_INSTRUCTION" = "Revise el formulario siguiente y pulse Acepto si está listo para continuar.";
+"CONSENT_REVIEW_INSTRUCTION" = "Revise el siguiente formulario y pulse Acepto si está listo para continuar.";
 "CONSENT_REVIEW_ALERT_TITLE" = "Revisar";
 "CONSENT_SIGNATURE_TITLE" = "Firma";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Firme con el dedo sobre la línea de abajo.";
@@ -132,16 +132,16 @@
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Forma física";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distancia (%@)";
-"FITNESS_HEARTRATE_TITLE" = "Frecuencia cardiaca (ppm)";
+"FITNESS_HEARTRATE_TITLE" = "Frecuencia cardíaca (ppm)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Siéntese cómodamente durante %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Camine lo más rápido que pueda durante %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "Esta actividad controla su frecuencia cardiaca y mide la distancia que puede recorrer andando en %1$@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Esta actividad controla su frecuencia cardíaca y mide la distancia que puede recorrer andando en %1$@.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Camine al aire libre lo más rápido que pueda durante %1$@. Transcurrido este tiempo, siéntese y descanse durante %2$@. Para comenzar, pulse Empezar.";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Marcha y equilibrio";
 "WALK_INTRO_TEXT" = "Esta actividad mide su forma de andar y su equilibrio al caminar y al permanecer quieto de pie. No siga adelante si no puede caminar de forma segura sin ayuda.";
-"WALK_INTRO_2_TEXT_%ld" = "Busque un lugar en el que pueda dar de forma segura sin ayuda unos %ld pasos en línea recta.";
+"WALK_INTRO_2_TEXT_%ld" = "Busque un lugar en el que pueda dar de un modo seguro sin ayuda unos %ld pasos en línea recta.";
 "WALK_INTRO_2_DETAIL" = "Guárdese el teléfono en un bolsillo o un bolso y siga las instrucciones de audio.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Ahora permanezca quieto de pie durante %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Permanezca quieto de pie durante %@.";
