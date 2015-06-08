@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Операцію завершено";
 "TASK_COMPLETE_TEXT" = "Ваші дані буде проаналізовано, і ви отримаєте сповіщення, коли будуть готові результати.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Зробити знімок";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Зробити знімок ще раз";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Камери не знайдено.  Неможливо виконати цей крок.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Щоб завершити цей крок, надайте цій програмі доступ до камери в Параметрах.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Для зроблених знімків не вказано вихідного каталогу.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не вдається зберегти зроблений знімок.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Фітнес";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Відстань (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Зробіть глибокий подих і вимовляйте «А-а-а-а» у мікрофон якомога довше. Тримайте однакову гучність голосу, щоб смуги звуку залишалися синіми.";
 "AUDIO_INTENDED_USE" = "Ця операція оцінює ваш голос, записуючи його через мікрофон внизу вашого телефону.";
 "AUDIO_TOO_LOUD_LABEL" = "Надто гучно";
+"AUDIO_GENERIC_ERROR_LABEL" = "Не вдається записати аудіо";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Аудіометрія";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ця операція вимірює вашу здатність чути різні звуки.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Перед початком приєднайте і надягніть навушники.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Зараз ви почуєте звук. Регулюйте гучність кнопками на боці вашого пристрою.\n\nТоркніть кнопку, коли ви готові починати.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Торкайте кнопку щоразу, коли почуєте звук.";
+"TONE_LABEL_%@_LEFT" = "%@ Гц, зліва";
+"TONE_LABEL_%@_RIGHT" = "%@ Гц, справа";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Просторова пам’ять";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Гру завершено";
 "MEMORY_GAME_PAUSED_TITLE" = "Припинено";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Щоб продовжити, торкніть «Далі»";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Час реакції";
+"REACTION_TIME_TASK_INTENDED_USE" = "Ця операція оцінює час, потрібний вам, щоб зреагувати на візуальну команду.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Трясніть пристроєм в будь-який бік, щойно на екрані з’явиться синя точка. Вас попросять зробити це кілька разів: %D.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %D із %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Швидко трусніть пристроєм, коли з’явиться синє коло";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "неправильноб";
 "AX.MEMORY.TILE.QUIESCENT" = "неактивний";
 "AX.MEMORY.TILE.LABEL" = "Клітинка тесту на пам’ять";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Перегляд знімку";
 

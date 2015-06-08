@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Activiteit voltooid";
 "TASK_COMPLETE_TEXT" = "Uw gegevens worden geanalyseerd. U ontvangt bericht als de resultaten gereed zijn.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Leg afbeelding vast";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Leg afbeelding opnieuw vast";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Geen camera gevonden. Deze stap kan niet worden voltooid.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Om deze stap te voltooien, moet u in Instellingen deze app toegang tot de camera geven.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Er is geen uitvoermap voor vastgelegde afbeeldingen opgegeven.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "De vastgelegde afbeelding kan niet worden bewaard.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Conditie";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Afstand (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Haal diep adem en zeg zo lang mogelijk 'aaaaah' in de microfoon. Houd daarbij dezelfde geluidssterkte aan zodat de audiobalken blauw blijven.";
 "AUDIO_INTENDED_USE" = "Tijdens deze activiteit wordt uw stemgeluid gemeten door dit op te nemen met de microfoon aan de onderkant van uw telefoon.";
 "AUDIO_TOO_LOUD_LABEL" = "Te hard";
+"AUDIO_GENERIC_ERROR_LABEL" = "Geluid opnemen niet mogelijk";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toonaudiometrie";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Met deze activiteit wordt gemeten of u verschillende geluiden kunt horen.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sluit om te beginnen uw koptelefoon aan en zet deze op.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "U moet nu een toon horen. Pas het volume aan met de knoppen aan de zijkant van uw apparaat.\n\nTik op de knop wanneer u klaar bent om te beginnen.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tik op de knop telkens wanneer u een geluid begint te horen.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, links";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, rechts";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Ruimtelijk geheugen";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Spel voltooid";
 "MEMORY_GAME_PAUSED_TITLE" = "Pauze";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Tik op 'Ga door' om verder te gaan";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reactietijd";
+"REACTION_TIME_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe snel u op een visuele aanwijzing reageert.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schud het apparaat in een willekeurige richting zodra de blauwe stip op het scherm verschijnt. U wordt gevraagd om dit %D keer te doen.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %D van %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schud het apparaat snel heen en weer als de blauwe cirkel verschijnt";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Bestand aanmaken mislukt";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "fout";
 "AX.MEMORY.TILE.QUIESCENT" = "inactief";
 "AX.MEMORY.TILE.LABEL" = "Tegel in geheugenspel";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Voorvertoning opname";
 

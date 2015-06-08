@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Exercício concluído";
 "TASK_COMPLETE_TEXT" = "Os seus dados serão analisados e receberá um aviso quando os resultados estiverem disponíveis.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar imagem";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Voltar a capturar imagem";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nenhuma câmara encontrada. This step cannot be completed.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Para completar este passo, permita que esta aplicação aceda à câmara nas Definições.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum directório de saída para as imagens capturadas.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Não foi possível guardar a imagem capturada.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distância (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Respire fundo e diga “Aaaaah” ao microfone durante o máximo de tempo possível. Mantenha um nível vocal estável - as barras de áudio devem permanecer azuis.";
 "AUDIO_INTENDED_USE" = "Este exercício avalia a sua voz, gravando‑a através do microfone na parte inferior do telefone.";
 "AUDIO_TOO_LOUD_LABEL" = "Demasiado alto";
+"AUDIO_GENERIC_ERROR_LABEL" = "Não é possível gravar áudio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria de tom";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Esta actividade mede a sua capacidade de ouvir sons diferentes.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de começar, ligue os auscultadores e coloque-os na cabeça.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Deve ouvir um som agora. Ajuste o volume usando os controlos na parte lateral do dispositivo.\n\nToque no botão quando estiver pronto para começar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Toque no botão sempre que começar a ouvir um som.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, esquerda";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, direita";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memória espacial";
@@ -189,11 +208,19 @@
 "MEMORY_GAME_PAUSED_TITLE" = "Em pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Para continuar, toque em Seguinte";
 
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Tempo de reacção";
+"REACTION_TIME_TASK_INTENDED_USE" = "Esta actividade avalia o seu tempo de resposta a uma pista visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite o dispositivo em qualquer direcção assim que o ponto azul aparecer no ecrã. Ser-lhe-á pedido para fazer isto %D vezes.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativa %D de %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agite rapidamente o dispositivo quando o círculo azul aparecer";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar ficheiro";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Não foi possível remover ficheiros de registo suficientes para atingir o limite.";
 "ERROR_DATALOGGER_SET_ATTRIBUTE" = "Erro ao definir atributo.";
-"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ficheiro não marcado como apagado (não marcado como enviado).";
+"ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ficheiro não marcado como pagado (não marcado como enviado).";
 "ERROR_DATALOGGER_MULTIPLE" = "Vários erros ao remover registos.";
 "ERROR_RECORDER_NO_DATA" = "Os dados recolhidos não foram encontrados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum directório de saída.";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorrecto";
 "AX.MEMORY.TILE.QUIESCENT" = "quiescente";
 "AX.MEMORY.TILE.LABEL" = "Mosaico do jogo de memória";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Pré‑visualização da captura";
 

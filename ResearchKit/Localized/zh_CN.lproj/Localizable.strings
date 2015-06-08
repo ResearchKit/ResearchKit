@@ -129,22 +129,30 @@
 "TASK_COMPLETE_TITLE" = "活动完成";
 "TASK_COMPLETE_TEXT" = "将对您的数据进行分析并在结果可用时通知您。";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "捕捉图像";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新捕捉图像";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "未找到相机。此步骤无法完成。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "为了完成此步骤，请在“设置”中允许本应用程序访问相机。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "未指定捕捉图像的输出目录。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "无法存储捕捉的图像。";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "健身";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "距离（%@）";
 "FITNESS_HEARTRATE_TITLE" = "心率（次/分）";
-"FITNESS_SIT_INSTRUCTION_FORMAT" = "请静坐%@。";
-"FITNESS_WALK_INSTRUCTION_FORMAT" = "以最快速度步行%@。";
-"FITNESS_INTRO_TEXT_FORMAT" = "本活动监控您的心率并测量%1$@内的步行距离。";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "请在室外以最快的速度步行%1$@。步行完成后，请静坐%2$@。若要开始，请轻按“开始”。";
+"FITNESS_SIT_INSTRUCTION_FORMAT" = "请静坐 %@。";
+"FITNESS_WALK_INSTRUCTION_FORMAT" = "以最快速度步行 %@。";
+"FITNESS_INTRO_TEXT_FORMAT" = "本活动监控您的心率并测量 %1$@内的步行距离。";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "请在室外以最快的速度步行 %1$@。步行完成后，请静坐 %2$@。若要开始，请轻按“开始”。";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步态和平衡";
 "WALK_INTRO_TEXT" = "本活动测量您在步行和站立时的步态和平衡。请仅在步行安全区域（无外力辅助条件下）进行。";
 "WALK_INTRO_2_TEXT_%ld" = "请在步行安全区域（无外力辅助条件下）直线行走大约 %ld 步。";
 "WALK_INTRO_2_DETAIL" = "请将手机放入口袋或背包中，然后跟随音频指示操作。";
-"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在请站立%@。";
-"WALK_STAND_INSTRUCTION_FORMAT" = "请站立%@。";
+"WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "现在请站立 %@。";
+"WALK_STAND_INSTRUCTION_FORMAT" = "请站立 %@。";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "转身并走回起点。";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "请直线步行最多 %ld 步。";
 
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "请深呼吸并对着麦克风说“啊啊啊”，时间越长越好。保持平稳的声音大小以使音频条保持蓝色。";
 "AUDIO_INTENDED_USE" = "本活动通过将您的嗓音录制到手机底部的麦克风来对其进行评估。";
 "AUDIO_TOO_LOUD_LABEL" = "太大声";
+"AUDIO_GENERIC_ERROR_LABEL" = "无法录音";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "纯音测听";
+"TONE_AUDIOMETRY_INTENDED_USE" = "本活动测量您是否可听见不同的声音。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "请在开始前插入并戴上耳机。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "现在您应该听到一个音调。使用设备一侧的控制来调整音量。\n\n请在准备好后轻按该按钮来开始测试。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "请在每次开始听到声音时轻按该按钮。";
+"TONE_LABEL_%@_LEFT" = "%@ Hz，左";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空间记忆";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "游戏完成";
 "MEMORY_GAME_PAUSED_TITLE" = "暂停";
 "MEMORY_GAME_PAUSED_MESSAGE" = "轻按“下一步”来继续";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反应时间";
+"REACTION_TIME_TASK_INTENDED_USE" = "本活动评估您对视觉提示的反应时间。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕出现蓝色圆点时立刻朝任意方向摇动设备。您将需要完成此操作 %D 次。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D/%D 次尝试";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "蓝色圆圈出现时快速摇动设备";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "不正确";
 "AX.MEMORY.TILE.QUIESCENT" = "不活跃";
 "AX.MEMORY.TILE.LABEL" = "记忆游戏拼贴";
+
+"AX_IMAGE_CAPTURE_LABEL" = "捕捉预览";
 
