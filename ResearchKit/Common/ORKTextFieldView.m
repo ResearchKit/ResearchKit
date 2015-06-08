@@ -115,6 +115,8 @@
         [_suffixLabel removeFromSuperview];
         _suffixLabel = nil;
         [self setNeedsLayout];
+    } else {
+        previousSuffixFrame.size.height = CGRectGetHeight(self.bounds);
     }
     if ([suffix length] == 0) {
         return;
