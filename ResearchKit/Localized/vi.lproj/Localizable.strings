@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Hoạt động Hoàn thành";
 "TASK_COMPLETE_TEXT" = "Dữ liệu của bạn sẽ được phân tích và bạn sẽ được thông báo khi có kết quả.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Chụp Ảnh";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Chụp lại Ảnh";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Không tìm thấy camera nào. Không thể hoàn thành bước này.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Để hoàn thành bước này, hãy cho phép ứng dụng này truy cập camera trong Cài đặt.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Không có thư mục đầu ra nào được chỉ định cho hình ảnh được chụp.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Không thể lưu hình ảnh đã chụp.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Thể dục";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Quãng đường (%@)";
@@ -152,7 +160,7 @@
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Tốc độ Chạm";
 "TAPPING_INTRO_TEXT" = "Hoạt động này sẽ đo tốc độ chạm của bạn.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Đặt điện thoại trên bề mặt phẳng. Hai nút sẽ xuất hiện trên màn hình trong %@. Hãy chạm vào các nút đó nhanh hết mức có thể, bằng hai ngón tay trên một bàn tay.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Đặt điện thoại trên bề mặt phẳng. Hai nút sẽ xuất hiện trên màn hình trong %@. Dùng hai ngón tay trên một bàn tay thay phiên nhau chạm vào các nút đó nhanh hết mức có thể.";
 "TAPPING_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
 "TAP_BUTTON_TITLE" = "Chạm";
 "TOTAL_TAPS_LABEL" = "Tổng Lần chạm";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Hít một hơi thật sâu và nói “Aaaaah” lâu hết mức có thể vào micrô. Giữ thật đều giọng nói để các thanh tiếng vẫn ở trong vùng màu lam.";
 "AUDIO_INTENDED_USE" = "Hoạt động này sẽ đánh giá giọng nói của bạn bằng cách ghi âm bằng micrô ở dưới đáy điện thoại.";
 "AUDIO_TOO_LOUD_LABEL" = "Quá To";
+"AUDIO_GENERIC_ERROR_LABEL" = "Không thể ghi âm";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Trắc thính Âm báo";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Hoạt động này giúp đánh giá khả năng nghe các âm thanh khác nhau của bạn.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Trước khi bạn bắt đầu, hãy cắm và đeo tai nghe.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Bây giờ, bạn sẽ nghe thấy âm báo. Điều chỉnh âm lượng bằng các bộ điều khiển ở bên hông thiết bị.\n\nChạm vào nút khi bạn sẵn sàng bắt đầu.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Chạm vào nút mỗi khi bạn bắt đầu nghe thấy âm thanh.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Trái";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Phải";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Trí nhớ Không gian";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Hoàn tất Trò chơi";
 "MEMORY_GAME_PAUSED_TITLE" = "Đã tạm dừng";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Để tiếp tục, hãy chạm vào Tiếp";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Thời gian Phản ứng";
+"REACTION_TIME_TASK_INTENDED_USE" = "Hoạt động này giúp đánh giá thời gian bạn phản ứng trước gợi ý bằng hình ảnh.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Lắc thiết bị theo bất kỳ hướng nào ngay khi chấm màu lam xuất hiện trên màn hình. Bạn sẽ được yêu cầu làm việc này %D lần.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %D/%D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Lắc nhanh thiết bị khi vòng tròn màu lam xuất hiện";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "sai";
 "AX.MEMORY.TILE.QUIESCENT" = "yên lặng";
 "AX.MEMORY.TILE.LABEL" = "Ô trò chơi ghi nhớ";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Chụp bản xem trước";
 

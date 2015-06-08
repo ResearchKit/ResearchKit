@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "הפעילות הושלמה";
 "TASK_COMPLETE_TEXT" = "הנתונים שלך ינותחו וכאשר התוצאות יהיו מוכנות תקבל/י הודעה.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "צלם תמונה";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "צלם תמונה שוב";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "לא נמצאה מצלמה. לא ניתן להשלים שלב זה.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "על-מנת לסיים שלב זה, אפשר/י ליישום זה לגשת למצלמה שלך ב״הגדרות״.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "לא צוינה ספריית פלט עבור התמונות שצולמו.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "לא ניתן היה לשמור את התמונה שצולמה.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "כושר";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "מרחק (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "נשום/י נשימה עמוקה ואמור/י ״אהההה״ לתוך המיקרופון למשך זמן ארוך ככל שתוכל/י. נסה/י לשמור על עוצמת קול קבועה כך שפסי השמע יישארו כחולים.";
 "AUDIO_INTENDED_USE" = "פעילות זו מעריכה את קולך על-ידי הקלטתו דרך המיקרופון שבתחתית הטלפון.";
 "AUDIO_TOO_LOUD_LABEL" = "חזק מדי";
+"AUDIO_GENERIC_ERROR_LABEL" = "לא ניתן להקליט שמע";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "מדידת היכולת לשמוע צלילים";
+"TONE_AUDIOMETRY_INTENDED_USE" = "פעילות זו מודדת את יכולתך לשמוע צלילים שונים.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "לפני שתתחיל/י, חבר/י את האזניות והרכב/י אותן באזניים.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "כעת הינך אמור/ה לשמוע צליל. כוונן/י את עוצמת הקול בעזרת פקדי הבקרה בצד המכשיר.\n\nהקש/י על הכפתור בכל שלב בכדי להתחיל.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "הקש/י על הכפתור בכל פעם שתתחיל/י לשמוע צליל.";
+"TONE_LABEL_%@_LEFT" = "‏%@ הרץ, שמאל";
+"TONE_LABEL_%@_RIGHT" = "‏%@ הרץ, ימין";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "זכרון מרחבי";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "המשחק הושלם";
 "MEMORY_GAME_PAUSED_TITLE" = "מושהה";
 "MEMORY_GAME_PAUSED_MESSAGE" = "להמשך, הקש/י על ״הבא״.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "זמן תגובה";
+"REACTION_TIME_TASK_INTENDED_USE" = "פעילות זו מעריכה את משך הזמן שלוקח לך להגיב לרמז חזותי.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "נער/י את המכשיר בכיוון כלשהו ברגע שהנקודה הכחולה מופיעה על המסך. תתבקש/י לעשות זאת %D פעמים.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ניסיון %D מתוך %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "נער/י את המכשיר במהירות כשמופיע העיגול הכחול";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "לא ניתן ליצור את הקובץ";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "לא נכון";
 "AX.MEMORY.TILE.QUIESCENT" = "ללא תנועה";
 "AX.MEMORY.TILE.LABEL" = "אריח משחק זכרון";
+
+"AX_IMAGE_CAPTURE_LABEL" = "צלם תצוגה מקדימה";
 

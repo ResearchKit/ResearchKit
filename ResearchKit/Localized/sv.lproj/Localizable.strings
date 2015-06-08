@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktiviteten är klar";
 "TASK_COMPLETE_TEXT" = "Dina data kommer att analyseras, och du blir meddelad när resultaten är klara.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Spara bild";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Spara bild igen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Ingen kamera hittades. Steget kan inte slutföras.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "För att slutföra det här steget måste du ge denna app tillgång till kameran i Inställningar.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Ingen utmatningskatalog har angetts för de sparade bilderna.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Bilden kunde inte sparas.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Motion";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distans (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Ta ett djupt andetag och säg ”aaah” i mikrofonen så länge du kan. Håll röststyrkan stadig så att ljudstaplarna förblir blå.";
 "AUDIO_INTENDED_USE" = "Den här aktiviteten utvärderar din röst genom att spela in den med mikrofonen i nederkanten av telefonen.";
 "AUDIO_TOO_LOUD_LABEL" = "För högt";
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan inte spela in ljud";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonaudiometri";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Den här aktiviteten mäter din förmåga att höra olika ljud.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Anslut och ta på dig hörlurarna innan du börjar.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nu bör du höra en ton. Justera volymen med reglagen på sidan av enheten.\n\nTryck på knappen när du är redo att börja.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tryck på knappen varje gång du börjar höra ett ljud.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, vänster";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, höger";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Spatialt minne";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Spelet är klart";
 "MEMORY_GAME_PAUSED_TITLE" = "Pausat";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Tryck på Nästa när du vill fortsätta";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktionstid";
+"REACTION_TIME_TASK_INTENDED_USE" = "Den här aktiviteten utvärderar den tid det tar för dig att reagera på visuella stimuli.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Skaka enheten i valfri riktning så fort den blå punkten visas på skärmen. Du blir ombedd att göra detta %D gånger.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Försök %D av %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Skaka snabbt enheten när den blå cirkeln visas";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunde inte skapa fil";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "fel";
 "AX.MEMORY.TILE.QUIESCENT" = "inaktiv";
 "AX.MEMORY.TILE.LABEL" = "Minnesspelbricka";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Spara förhandsvisning";
 

@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "活動已完成";
 "TASK_COMPLETE_TEXT" = "活動將會通過分析。當得到結果時，你將會收到通知。";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "截取圖案";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新截取圖案";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "找不到相機，無法完成此步驟。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "若要完成此步驟，請前往「設定」以允許此 App 使用相機。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "未指定截取圖案的輸出目錄。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "無法儲存截取的圖案。";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "體能";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "距離（%@）";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "深呼吸，然後對着咪高風發出「呀─」的聲音，時間愈長愈好。請保持穩定的音量，以使音量棒圖維持藍色。";
 "AUDIO_INTENDED_USE" = "此活動會使用電話底部的咪高風錄音，以評估你的聲音。";
 "AUDIO_TOO_LOUD_LABEL" = "太大聲";
+"AUDIO_GENERIC_ERROR_LABEL" = "無法錄音";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
+"TONE_AUDIOMETRY_INTENDED_USE" = "此活動能評估你聆聽不同聲音的能力。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請插入並戴上耳筒。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n若你準備好開始，請點一下按鈕。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "每次當你開始聽到聲音時，請點一下按鈕。";
+"TONE_LABEL_%@_LEFT" = "%@ Hz，左";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz，右";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "遊戲結束";
 "MEMORY_GAME_PAUSED_TITLE" = "已暫停";
 "MEMORY_GAME_PAUSED_MESSAGE" = "如要繼續，點一下「下一步」";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反應時間";
+"REACTION_TIME_TASK_INTENDED_USE" = "此活動會評估你對視覺提示作出反應所需的時間。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "當螢幕顯示藍色圓點時，請立刻以任何方向搖動裝置。你將需要執行此操作 %D 次。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始」。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D/%D 次嘗試";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "當藍色圓圈出現時，請快速搖動裝置";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "不正確";
 "AX.MEMORY.TILE.QUIESCENT" = "靜態";
 "AX.MEMORY.TILE.LABEL" = "記憶遊戲圖樣";
+
+"AX_IMAGE_CAPTURE_LABEL" = "截取預覽";
 
