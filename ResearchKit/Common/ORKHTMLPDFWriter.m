@@ -144,7 +144,7 @@ static const CGFloat kPageEdge = 72.0f/4;
     CGSize pageSize = [self pageSize];
     CGRect pageRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
     
-    UIGraphicsBeginPDFContextToData(currentReportData, pageRect, nil);
+    UIGraphicsBeginPDFContextToData(currentReportData, pageRect, @{});
     
     [renderer prepareForDrawingPages:NSMakeRange(0, 1)];
     

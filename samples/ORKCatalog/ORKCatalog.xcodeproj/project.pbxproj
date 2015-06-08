@@ -20,6 +20,7 @@
 		86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */; };
 		B115EE121AC1221F001DDE62 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; };
 		B115EE131AC1221F001DDE62 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B125E3D41B1BA47600FF8759 /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = B125E3D31B1BA47600FF8759 /* tap.aif */; };
 		D401B1321B070ADF000E6D3C /* TextImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		86B89A9A1AB2C0A5001626A4 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ResultViewController.swift; path = ORKCatalog/ResultViewController.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		86B89A9B1AB2C0A5001626A4 /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = ORKCatalog/TaskListViewController.swift; sourceTree = SOURCE_ROOT; };
 		86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ORKCatalog/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		B125E3D31B1BA47600FF8759 /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap.aif; sourceTree = "<group>"; };
 		D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 		869230C11AAA890A00BFE11B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B125E3D31B1BA47600FF8759 /* tap.aif */,
 				86B89A981AB2C0A5001626A4 /* Info.plist */,
 				3ED967BA1AC13D37007E2D83 /* Localizable.strings */,
 			);
@@ -259,6 +262,7 @@
 			files = (
 				3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */,
 				3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */,
+				B125E3D41B1BA47600FF8759 /* tap.aif in Resources */,
 				3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */,
 				3ED967B81AC13D37007E2D83 /* Localizable.strings in Resources */,
 			);
@@ -339,6 +343,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -406,6 +411,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ORKCatalog;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -421,6 +427,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ORKCatalog;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

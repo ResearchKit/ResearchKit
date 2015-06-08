@@ -48,6 +48,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType);
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER; \
 @end
 
+ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKImageChoiceAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKValuePickerAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextChoiceAnswerFormat);
@@ -64,6 +65,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 
 @interface ORKAnswerFormat ()
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 - (ORKAnswerFormat *)impliedAnswerFormat;
 

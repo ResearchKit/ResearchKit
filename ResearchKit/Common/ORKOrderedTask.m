@@ -65,12 +65,16 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     NSString *_identifier;
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray *)steps {
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super init];
     if (self) {
-        if ( nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-        }
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
+        
         _identifier = [identifier copy];
         _steps = steps;
     }
@@ -78,9 +82,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKOrderedTask *task = [[[self class] allocWithZone:zone] init];
-    task->_identifier = [_identifier copy];
-    task->_steps = ORKArrayCopyObjects(_steps);
+    ORKOrderedTask *task = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy]
+                                                                           steps:ORKArrayCopyObjects(_steps)];
     return task;
 }
 

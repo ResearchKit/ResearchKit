@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /// @name Initializers
 
 /**
@@ -60,7 +62,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized ordered task.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray *)steps NS_DESIGNATED_INITIALIZER;
+                             steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an ordered task initialized from data in the given unarchiver.
@@ -84,7 +86,7 @@ ORK_CLASS_AVAILABLE
  The associated task view controller presents the steps in
  array order.
  */
-@property (nonatomic, copy, readonly) NSArray *steps;
+@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
 @end
 

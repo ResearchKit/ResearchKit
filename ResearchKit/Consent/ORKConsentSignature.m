@@ -72,9 +72,7 @@
 }
 
 - (void)setIdentifier:(NSString *)identifier {
-    if ( nil == identifier) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-    }
+    ORKThrowInvalidArgumentExceptionIfNil(identifier);
     
     _identifier = identifier;
 }

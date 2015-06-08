@@ -101,6 +101,8 @@ ORK_CLASS_AVAILABLE
  */
 + (ORKDataLogger *)JSONDataLoggerWithDirectory:(NSURL *)url logName:(NSString *)logName delegate:(nullable id<ORKDataLoggerDelegate>)delegate;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized data logger using the specified URL, log name, formatter, and delegate.
  
@@ -263,7 +265,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if removing the files succeeded; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray *)fileURLs withError:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * __nullable __autoreleasing *)error;
 
 /**
  Removes all files managed by this logger (files that have the `logName` prefix).
@@ -423,6 +425,8 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKDataLoggerManager : NSObject <ORKDataLoggerDelegate>
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized data logger manager using the specified directory and delegate.
  
@@ -489,7 +493,7 @@ ORK_CLASS_AVAILABLE
 - (void)removeDataLogger:(ORKDataLogger *)logger;
 
 /// Returns the set of log names of the data loggers managed by this object.
-- (NSArray *)logNames;
+- (NSArray<NSString *> *)logNames;
 
 /**
  Enumerates all the logs that need upload across all data loggers, sorted from oldest to first.
@@ -514,7 +518,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)unmarkUploadedFiles:(NSArray *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
 
 /**
  Removes a set of uploaded files.
@@ -528,7 +532,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
 
 /**
  Removes old and uploaded logs to bring total bytes down to a threshold.
