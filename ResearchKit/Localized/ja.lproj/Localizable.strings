@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "アクティビティ完了";
 "TASK_COMPLETE_TEXT" = "データは分析され、結果の準備ができると通知されます。";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "イメージを取り込む";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "再度イメージを取り込む";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "カメラが見つからないため、この手順を完了できません。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "この手順を完了するには、“設定”でこのAppがカメラにアクセスすることを許可してください。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "取り込んだイメージの出力ディレクトリが指定されていません。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "取り込んだイメージを保存できませんでした。";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "体力";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "距離（%@）";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "大きく息を吸ってから、マイクに向かってできるだけ長く「あーーーー」と声を出してください。声の大きさを一定に保って、オーディオバーを青色のままにしてください。";
 "AUDIO_INTENDED_USE" = "このアクティビティでは、電話の下部にあるマイクで録音することで、あなたの声を評価します。";
 "AUDIO_TOO_LOUD_LABEL" = "大きすぎる";
+"AUDIO_GENERIC_ERROR_LABEL" = "声を録音できません";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "聴力検査";
+"TONE_AUDIOMETRY_INTENDED_USE" = "このアクティビティでは、さまざまな音がどのように聞こえるかが測定されます。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "始める前にヘッドフォンを接続し、装着してください。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "すると音が聞こえてくるはずです。デバイスの横にあるコントロールで音量を調整してください。\n\n始める準備ができたらボタンをタップしてください。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "音が聞こえるたびにボタンをタップしてください。";
+"TONE_LABEL_%@_LEFT" = "%@ Hz、左";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz、右";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "ゲーム完了";
 "MEMORY_GAME_PAUSED_TITLE" = "一時停止";
 "MEMORY_GAME_PAUSED_MESSAGE" = "続けるには、“次へ”をタップしてください";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反応時間";
+"REACTION_TIME_TASK_INTENDED_USE" = "このアクティビティでは、視覚的な合図に反応するまでの時間が測定されます。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "画面に青い点が表示されたらすぐにデバイスを振ってください。測定は%D回行います。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "測定%D/%D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "青い円が表示されたら、すぐにデバイスを振ってください";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "不正解";
 "AX.MEMORY.TILE.QUIESCENT" = "止まっている";
 "AX.MEMORY.TILE.LABEL" = "記憶ゲームタイル";
+
+"AX_IMAGE_CAPTURE_LABEL" = "プレビューを取り込む";
 

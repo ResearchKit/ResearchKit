@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "गतिविधि पूर्ण";
 "TASK_COMPLETE_TEXT" = "आपके डेटा का विश्लेषण किया जाएगा और परिणाम के तैयार होते ही आपको सूचित किया जाएगा।";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "छवि कैप्चर करें";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "छवि पुनः कैप्चर करें";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "कोई कैमरा नहीं मिला। यह चरण पूरा नहीं किया जा सकता है।";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "इस चरण को पूरा करने के लिए “सेटिंग्ज़” में इस ऐप को कैमरे तक पहुँच प्रदान करें।";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "कैप्चर की गई छवियों के लिए कोई आउटपुट निर्देशिका निर्दिष्ट नहीं की गई थी।";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "कैप्चर की गई छवि सहेजी नहीं जा सकी।";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "तंदुरुस्ती";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "दूरी (%@)";
@@ -165,10 +173,21 @@
 "AUDIO_INTRO_TEXT" = "गहरी साँस लें और जितनी देर तक बोल सकें, माइक्रोफ़ोन में “आह” बोलें। अपनी बोलने की गति और आवाज़ स्थिर रखें ताकि ऑडियो बारों का रंग नीला बना रहे।";
 "AUDIO_INTENDED_USE" = "इस गतिविधि द्वारा आपके फ़ोन के नीचे लगे माइक्रोफ़ोन से आपकी आवाज़ को रिकॉर्ड करके उसका मूल्यांकन किया जाता है।";
 "AUDIO_TOO_LOUD_LABEL" = "बहुत तेज़";
+"AUDIO_GENERIC_ERROR_LABEL" = "ऑडियो रिकॉर्ड करने में असमर्थ";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "टोन ऑडियोमेट्री";
+"TONE_AUDIOMETRY_INTENDED_USE" = "यह गतिविधि अलग-अलग प्रकार की ध्वनियाँ सुनने की आपकी क्षमता का आकलन करती है।";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "आरंभ करने से पहले अपने हेडफ़ोन को प्लग इन करें और कानों पर लगाएं।";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"TONE_AUDIOMETRY_PREP_TEXT" = "अब आपको एक टोन सुनाई देनी चाहिए। अपने उपकरण के किनारे दिए गए नियंत्रणों का उपयोग करके वॉल्यूम समायोजित करें।\n\nजब आप आरंभ करने के लिए तैयार हो जाएँ, तो बटन को टैप करें।";
+"TONE_AUDIOMETRY_INSTRUCTION" = "आपको जितनी बार भी आवाज़ सुनाई दे, उतनी बार बटन को टैप करें।";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, बाएँ";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, दाएँ";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "स्थानिक याददाश्त";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "%@ जिस क्रम में चमके थे, उसे दोहराने के लिए कहकर इस गतिविधि द्वारा आपकी अल्पावधि स्थानिक याददाश्त का मापन किया जाता है।";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "%@ के चमकने के क्रम को दोहराने के लिए कहकर इस गतिविधि द्वारा आपकी अल्पावधि स्थानिक याददाश्त का मापन किया जाता है।";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "फूलों";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "फूल";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@ में से कुछ एक-एक करके चमकेंगे। उन %@ पर उनके चमकने के क्रम में टैप करें।";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "गेम पूर्ण हुआ";
 "MEMORY_GAME_PAUSED_TITLE" = "ठहरा हुआ";
 "MEMORY_GAME_PAUSED_MESSAGE" = "जारी रखने के लिए “अगला” पर टैप करें";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "प्रतिक्रिया समय";
+"REACTION_TIME_TASK_INTENDED_USE" = "यह गतिविधि किसी दृश्यात्मक संकेत की प्रतिक्रिया देने में आपके द्वारा लिए जाने वाले समय का आकलन करती है।";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "स्क्रीन पर नीले रंग का बिंदु दिखाई देते ही उपकरण को किसी भी दिशा में हिलाएँ। आपसे %D बार ऐसा करने का अनुरोध किया जाएगा।";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %1$D/%2$D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "नीले रंग का वृत्त दिखाई देने पर शीघ्रता से उपकरण को हिलाएँ";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "ग़लत";
 "AX.MEMORY.TILE.QUIESCENT" = "निष्क्रिय";
 "AX.MEMORY.TILE.LABEL" = "याददाश्त के खेल की टाइल";
+
+"AX_IMAGE_CAPTURE_LABEL" = "पूर्वावलोकन को कैप्चर करें";
 

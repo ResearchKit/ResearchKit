@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktivitet færdig";
 "TASK_COMPLETE_TEXT" = "Dine data vil blive analyseret, og du får besked, når resultaterne er klar.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tag billede";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tag billede igen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Intet kamera fundet. Dette trin kan ikke gennemføres.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "For at kunne gennemføre dette trin skal du give denne app adgang til kameraet i Indstillinger.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Der blev ikke anført noget resultatbibliotek til billederne.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Billedet kunne ikke arkiveres.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Tag en dyb indånding, og sig “Aaaaah” ind i mikrofonen i så lang tid, som du kan. Hold den samme styrke, så lydmålerne bliver ved med at være blå.";
 "AUDIO_INTENDED_USE" = "Denne aktivitet vurderer din stemme ved at optage den med mikrofonen nederst i telefonen.";
 "AUDIO_TOO_LOUD_LABEL" = "For højt";
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke optage lyd";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Denne aktivitet måler din evne til at høre forskellige lyde.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Før du starter, skal du tilslutte dine hovedtelefoner og tage dem på.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du skulle nu høre en tone. Juster lydstyrken vha. betjeningsmulighederne på siden af enheden.\n\nTryk på knappen, når du er klar til at starte.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tryk på knappen, hver gang du begynder at høre en lyd.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, højre";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Rumlig hukommelse";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Spil udført";
 "MEMORY_GAME_PAUSED_TITLE" = "På pause";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Tryk på Næste for at fortsætte";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktionstid";
+"REACTION_TIME_TASK_INTENDED_USE" = "Denne aktivitet vurderer, hvor lang tid du er om at reagere på et visuelt tegn.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ryst enheden i tilfældig retning, lige så snart den blå prik vises på skærmen. Du vil blive bedt om at gøre det %D gange.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøg %D af %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ryst hurtigt enheden, når den blå cirkel vises";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "forkert";
 "AX.MEMORY.TILE.QUIESCENT" = "passiv";
 "AX.MEMORY.TILE.LABEL" = "Brik i memoryspil";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Tag billede af eksempel";
 

@@ -125,9 +125,17 @@
 "BUTTON_OPTION_STOP_TASK" = "Fine attività";
 
 /* General active tasks. */
-"COUNTDOWN_LABEL" = "Inizio attività";
+"COUNTDOWN_LABEL" = "Inizio attività tra";
 "TASK_COMPLETE_TITLE" = "Attività completa";
 "TASK_COMPLETE_TEXT" = "I dati verranno analizzati, riceverai una notifica quando i risultati saranno pronti.";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Scatta foto";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Scatta altra foto";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Fotocamera non trovata. Non è possibile completare l'operazione.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Per completare l'operazione, consenti a questa app di accedere alla fotocamera in Impostazioni.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Non è stata specificata nessuna directory di output per le immagini acquisite.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "L'immagine acquisita non può essere salvata.";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Forma fisica";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Fai un respiro profondo e di' “Aaaaa” nel microfono il più a lungo possibile. Mantieni un volume uniforme in modo tale che le barre dell'audio rimangano di colore blu.";
 "AUDIO_INTENDED_USE" = "L'attività valuta la tua voce registrandola tramite il microfono di iPhone.";
 "AUDIO_TOO_LOUD_LABEL" = "Volume troppo alto";
+"AUDIO_GENERIC_ERROR_LABEL" = "Impossibile registrare l'audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonale";
+"TONE_AUDIOMETRY_INTENDED_USE" = "L'attività valuta la tua capacità di sentire suoni differenti.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Prima di cominciare collega gli auricolari e indossali.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ora sentirai un tono, regola il volume mediante i tasti laterali del tuo dispositivo.\n\nTocca il pulsante quando sei pronto per iniziare.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Tocca il pulsante ogni volta che senti un suono.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, a sinistra";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, a destra";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memoria spaziale";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Fine";
 "MEMORY_GAME_PAUSED_TITLE" = "In pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Per continuare, tocca Avanti";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Tempo di reazione";
+"REACTION_TIME_TASK_INTENDED_USE" = "L'attività valuta il tuo tempo di risposta quando ricevi un'indicazione visiva.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Quando vedi comparire il cerchio di colore blu sullo schermo, agita il dispositivo in qualsiasi direzione. Dovrai ripetere l'operazione %D volte.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativo %D di %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agita velocemente il dispositivo quando compare il cerchio di colore blu";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Impossibile creare file";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "non corretto";
 "AX.MEMORY.TILE.QUIESCENT" = "inattivo";
 "AX.MEMORY.TILE.LABEL" = "Tassello gioco mnemonico";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Anteprima immagine";
 

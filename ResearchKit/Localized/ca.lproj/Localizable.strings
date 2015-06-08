@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Activitat completa";
 "TASK_COMPLETE_TEXT" = "S’analitzaran les dades i rebreu una notificació quan tingueu els resultats a punt.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar la imatge";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tornar a capturar la imatge";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No s’ha trobat cap càmera. Aquest pas no es pot completar.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Per completar aquest pas, permeteu que aquesta aplicació tingui accés a la càmera a Configuració.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida per a les imatges capturades.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No s’ha pogut desar la imatge capturada.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Activitat física";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distància (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Inspireu profundament i feu un “Aaaaah” tan llarg com pugueu al micròfon. Mantingueu un volum de veu estable fent que les barres d’àudio es mantinguin en blau.";
 "AUDIO_INTENDED_USE" = "Aquesta activitat avalua la vostra veu tot gravant-la amb el micròfon de la part inferior del telèfon.";
 "AUDIO_TOO_LOUD_LABEL" = "Massa alt";
+"AUDIO_GENERIC_ERROR_LABEL" = "No s’ha pogut gravar l’àudio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonal";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aquesta activitat mesura la capacitat de sentir diversos sons.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Abans de començar, connecteu i poseu-vos els auriculars.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Per iniciar, premeu Començar.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ara hauríeu d’escoltar un to. Ajusteu el volum amb els controls de la part lateral del dispositiu.\n\nPremeu el botó quan estigueu a punt per començar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Premeu el botó cada vegada que comenceu a escoltar un so.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, esquerra";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, dreta";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memòria espacial";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Joc completat";
 "MEMORY_GAME_PAUSED_TITLE" = "En pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Per continuar, premeu Següent";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Temps de reacció";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aquesta activitat avalua el temps que trigueu a respondre a un senyal visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agiteu el dispositiu en qualsevol direcció de seguida que aparegui el punt blau a la pantalla. Se us demanarà que feu això %D vegades.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Per iniciar, premeu Començar.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %D de %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agiteu ràpidament el dispositiu quan aparegui el cercle blau";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorrecte";
 "AX.MEMORY.TILE.QUIESCENT" = "inactiu";
 "AX.MEMORY.TILE.LABEL" = "Joc de memòria";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Previsualització de la captura";
 
