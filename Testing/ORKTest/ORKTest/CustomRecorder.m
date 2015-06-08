@@ -29,12 +29,11 @@
  */
 
 
-
 #import "CustomRecorder.h"
 #import <ResearchKit/ResearchKit_Private.h>
 
-@interface CustomRecorder ()
-{
+
+@interface CustomRecorder () {
     UIView *_containerFiller;
 }
 
@@ -44,6 +43,7 @@
 @property (nonatomic, strong) NSMutableArray *records;
 
 @end
+
 
 @implementation CustomRecorder
 
@@ -97,11 +97,10 @@
     
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
     });
 }
-
 
 - (IBAction)timerFired:(id)sender {
     _button.hidden = !_button.hidden;
@@ -139,7 +138,6 @@
                                 userInfo:@{NSLocalizedDescriptionKey:NSLocalizedString(@"Records object is nil.", nil)}];
     }
     
-    
     id<ORKRecorderDelegate> localDelegate = self.delegate;
     if (! error)
     {
@@ -153,8 +151,7 @@
     [super stop];
 }
 
-- (void)doStopRecording
-{
+- (void)doStopRecording {
     [self.timer invalidate];
     [_button removeFromSuperview];
     _button = nil;
@@ -162,8 +159,7 @@
     _containerFiller = nil;
 }
 
-- (void)finishRecordingWithError:(NSError *)error
-{
+- (void)finishRecordingWithError:(NSError *)error {
     [self doStopRecording];
     [super finishRecordingWithError:error];
 }
@@ -182,24 +178,24 @@
 
 @end
 
+
 @implementation CustomRecorderConfiguration
 
-- (ORKRecorder *)recorderForStep:(ORKStep *)step
-    outputDirectory:(NSURL *)outputDirectory {
-    return [[CustomRecorder alloc] initWithStep:step
-                     outputDirectory:outputDirectory];
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [super initWithIdentifier:identifier];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (ORKRecorder *)recorderForStep:(ORKStep *)step outputDirectory:(NSURL *)outputDirectory {
+    return [[CustomRecorder alloc] initWithIdentifier:self.identifier step:step outputDirectory:outputDirectory];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
 }
 
 @end
-

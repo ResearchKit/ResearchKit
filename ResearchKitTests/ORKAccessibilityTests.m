@@ -28,32 +28,24 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <XCTest/XCTest.h>
 #import "ORKAccessibilityFunctions.h"
+
 
 @interface ORKAccessibilityTests : XCTestCase
 
 @end
 
+
 @implementation ORKAccessibilityTests
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
 - (void)testAccessibilityString {
-    
     {
         NSString *result = ORKAccessibilityStringForVariables(@"a", @"b", nil);
         XCTAssert([result isEqualToString:@"a, b"]);
     }
-    
+
     {
         NSString *result = ORKAccessibilityStringForVariables(@"a", nil, @"b");
         XCTAssert([result isEqualToString:@"a, b"]);
@@ -64,6 +56,5 @@
         XCTAssert([result isEqualToString:@"a"]);
     }
 }
-
 
 @end

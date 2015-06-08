@@ -28,13 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "CLLocation+ORKJSONDictionary.h"
 #import "ORKHelpers.h"
 
+
 @implementation CLLocation (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionary
-{
+- (NSDictionary *)ork_JSONDictionary {
     CLLocationCoordinate2D coord = self.coordinate;
     CLLocationDistance altitude = self.altitude;
     CLLocationAccuracy horizAccuracy = self.horizontalAccuracy;
@@ -44,32 +45,27 @@
     NSDate *timestamp = self.timestamp;
     CLFloor *floor = self.floor;
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:ORKStringFromDateISO8601(timestamp) forKey:@"timestamp"];
+    NSMutableDictionary *dictionary = [@{@"timestamp" : ORKStringFromDateISO8601(timestamp)} mutableCopy];
     
-    if (horizAccuracy >= 0)
-    {
-        dict[@"coordinate"] = @{ @"latitude" : [NSDecimalNumber numberWithDouble:coord.latitude], @"longitude" : [NSDecimalNumber numberWithDouble:coord.longitude]};
-        dict[@"horizontalAccuracy"] = [NSDecimalNumber numberWithDouble:horizAccuracy];
+    if (horizAccuracy >= 0) {
+        dictionary[@"coordinate"] = @{ @"latitude" : [NSDecimalNumber numberWithDouble:coord.latitude], @"longitude" : [NSDecimalNumber numberWithDouble:coord.longitude]};
+        dictionary[@"horizontalAccuracy"] = [NSDecimalNumber numberWithDouble:horizAccuracy];
     }
-    if (vertAccuracy >= 0)
-    {
-        dict[@"altitude"] = [NSDecimalNumber numberWithDouble:altitude];
-        dict[@"verticalAccuracy"] = [NSDecimalNumber numberWithDouble:vertAccuracy];
+    if (vertAccuracy >= 0) {
+        dictionary[@"altitude"] = [NSDecimalNumber numberWithDouble:altitude];
+        dictionary[@"verticalAccuracy"] = [NSDecimalNumber numberWithDouble:vertAccuracy];
     }
-    if (course >= 0)
-    {
-        dict[@"course"] = [NSDecimalNumber numberWithDouble:course];
+    if (course >= 0) {
+        dictionary[@"course"] = [NSDecimalNumber numberWithDouble:course];
     }
-    if (speed >= 0)
-    {
-        dict[@"speed"] = [NSDecimalNumber numberWithDouble:speed];
+    if (speed >= 0) {
+        dictionary[@"speed"] = [NSDecimalNumber numberWithDouble:speed];
     }
-    if (floor)
-    {
-        dict[@"floor"] = @(floor.level);
+    if (floor) {
+        dictionary[@"floor"] = @(floor.level);
     }
 
-    return dict;
+    return dictionary;
 }
 
 @end

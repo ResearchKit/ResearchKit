@@ -31,23 +31,23 @@
 
 #import "UITouch+ORKJSONDictionary.h"
 
+
 @implementation UITouch (ORKJSONDictionary)
 
-- (NSDictionary *)ork_JSONDictionaryInView:(UIView *)view allTouches:(NSArray *)allTouches
-{
-    CGPoint p = [self locationInView:view];
+- (NSDictionary *)ork_JSONDictionaryInView:(UIView *)view allTouches:(NSArray *)allTouches {
+    CGPoint point = [self locationInView:view];
     
     CGRect touchViewBounds = view.bounds;
     
-    NSDictionary *data = @{@"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
-                           @"phase": @(self.phase),
-                           @"index": @([allTouches indexOfObject:self]),
-                           @"x": @(p.x),
-                           @"y": @(p.y),
-                           @"width": @(touchViewBounds.size.width),
-                           @"height": @(touchViewBounds.size.height)
-                           };
-    return data;
+    NSDictionary *dictionary = @{@"timestamp": [NSDecimalNumber numberWithDouble:self.timestamp],
+                                 @"phase": @(self.phase),
+                                 @"index": @([allTouches indexOfObject:self]),
+                                 @"x": @(point.x),
+                                 @"y": @(point.y),
+                                 @"width": @(touchViewBounds.size.width),
+                                 @"height": @(touchViewBounds.size.height)
+                                 };
+    return dictionary;
 }
 
 @end

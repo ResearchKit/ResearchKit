@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 /**
- *  Large label shown separately from the scale slider to indicate the current value.
+ Large label shown separately from the scale slider to indicate the current value.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKScaleValueLabel : ORKLabel

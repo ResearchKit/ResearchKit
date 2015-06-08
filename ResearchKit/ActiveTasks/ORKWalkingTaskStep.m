@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKWalkingTaskStep.h"
 #import "ORKHelpers.h"
 #import "ORKWalkingTaskStepViewController.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKWalkingTaskStep
 
@@ -39,24 +41,27 @@
     return [ORKWalkingTaskStepViewController class];
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+    }
+    return self;
+}
+
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSInteger const ORKShortWalkTaskMinimumNumberOfStepsPerLeg = 1;
     
-    if ( self.numberOfStepsPerLeg < ORKShortWalkTaskMinimumNumberOfStepsPerLeg)
-    {
+    if ( self.numberOfStepsPerLeg < ORKShortWalkTaskMinimumNumberOfStepsPerLeg) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"numberOfStepsPerLeg can not be less than %@.", @(ORKShortWalkTaskMinimumNumberOfStepsPerLeg)]
                                      userInfo:nil];
     }
 }
 
-
-
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKWalkingTaskStep *step = [super copyWithZone:zone];
     step.numberOfStepsPerLeg = self.numberOfStepsPerLeg;
     return step;
@@ -66,35 +71,29 @@
     return NO;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_INTEGER(aDecoder, numberOfStepsPerLeg);
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, numberOfStepsPerLeg);
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg)) ;
+            (self.numberOfStepsPerLeg == castObject.numberOfStepsPerLeg));
 }
-
 
 @end

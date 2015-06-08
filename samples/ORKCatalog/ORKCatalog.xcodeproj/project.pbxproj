@@ -20,6 +20,7 @@
 		86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */; };
 		B115EE121AC1221F001DDE62 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; };
 		B115EE131AC1221F001DDE62 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D401B1321B070ADF000E6D3C /* TextImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		86B89A9A1AB2C0A5001626A4 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ResultViewController.swift; path = ORKCatalog/ResultViewController.swift; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		86B89A9B1AB2C0A5001626A4 /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = ORKCatalog/TaskListViewController.swift; sourceTree = SOURCE_ROOT; };
 		86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ORKCatalog/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				3E4104A31AC0E938001B2302 /* ImageTableViewCell.swift */,
+				D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */,
 				3E838B8A1ABFDCED006AE2D4 /* ResultTableViewProviders.swift */,
 				86B89A9A1AB2C0A5001626A4 /* ResultViewController.swift */,
 			);
@@ -270,6 +273,7 @@
 			files = (
 				86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */,
 				86B89AA41AB2C0A5001626A4 /* TaskListViewController.swift in Sources */,
+				D401B1321B070ADF000E6D3C /* TextImageTableViewCell.swift in Sources */,
 				3E838B8B1ABFDCED006AE2D4 /* ResultTableViewProviders.swift in Sources */,
 				3E4104A41AC0E938001B2302 /* ImageTableViewCell.swift in Sources */,
 				86B89AA21AB2C0A5001626A4 /* TaskListRow.swift in Sources */,
@@ -403,6 +407,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = ORKCatalog;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -417,6 +422,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = ORKCatalog;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

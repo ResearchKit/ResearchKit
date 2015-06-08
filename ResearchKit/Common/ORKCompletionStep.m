@@ -28,18 +28,18 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCompletionStep.h"
 #import "ORKCompletionStepViewController.h"
 
+
 @implementation ORKCompletionStep
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKCompletionStepViewController class];
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 

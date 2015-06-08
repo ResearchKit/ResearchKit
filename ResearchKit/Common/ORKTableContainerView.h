@@ -28,19 +28,39 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKTableContainerView;
+
+@protocol ORKTableContainerViewDelegate <NSObject>
+
+@required
+- (UITableViewCell *)currentFirstResponderCellForTableContainerView:(ORKTableContainerView *)tableContainerView;
+
+@end
+
 
 @class ORKStepHeaderView;
 @class ORKNavigationContainerView;
 
 @interface ORKTableContainerView : UIView
 
+@property (nonatomic, weak, nullable) id<ORKTableContainerViewDelegate> delegate;
+
 @property (nonatomic, strong, readonly) UITableView *tableView;
 @property (nonatomic, strong, readonly) ORKStepHeaderView *stepHeaderView;
 @property (nonatomic, strong, readonly) ORKNavigationContainerView *continueSkipContainerView;
+
+/*
+ If tap off events should be accepted from outside this view's bounds, provide
+ the parent view where the tap off gesture recognizer should be attached.
+ */
+@property (nonatomic, weak, nullable) UIView *tapOffView;
 
 - (void)scrollCellVisible:(UITableViewCell *)cell animated:(BOOL)animated;
 

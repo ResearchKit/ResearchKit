@@ -28,14 +28,17 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKLabel.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKQuantityLabel : ORKLabel
 
 @end
+
 
 @interface ORKActiveStepQuantityView : UIView
 
@@ -44,12 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) UIImage *image;
 @property (nonatomic) BOOL enabled;
 
-
-@property (nonatomic, readonly, strong, nullable) UILabel *titleLabel;
-@property (nonatomic, readonly, strong, nullable) UILabel *valueLabel;
-
+@property (nonatomic, strong, readonly, nullable) UILabel *titleLabel;
+@property (nonatomic, strong, readonly, nullable) UILabel *valueLabel;
 
 @end
+
 
 @interface ORKQuantityPairView : UIView
 

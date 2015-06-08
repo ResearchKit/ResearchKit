@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanMemoryContentView.h"
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKActiveStepQuantityView.h"
@@ -122,20 +123,20 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect bds = [self bounds];
-    CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bds.size.width / _gridSize.width, bds.size.height / _gridSize.height), self);
+    CGRect bounds = [self bounds];
+    CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bounds.size.width / _gridSize.width, bounds.size.height / _gridSize.height), self);
     
     gridItemEdgeLength = MIN(gridItemEdgeLength, 114);
     CGSize gridItemSize = (CGSize){gridItemEdgeLength, gridItemEdgeLength};
     
     CGPoint centeringOffset = CGPointZero;
-    centeringOffset.x = 0.5*(bds.size.width - (gridItemSize.width * _gridSize.width));
-    centeringOffset.y = 0.5*(bds.size.height - (gridItemSize.height * _gridSize.height));
+    centeringOffset.x = 0.5*(bounds.size.width - (gridItemSize.width * _gridSize.width));
+    centeringOffset.y = 0.5*(bounds.size.height - (gridItemSize.height * _gridSize.height));
     
     NSInteger tileIndex = 0;
     for (NSInteger x = 0; x < _gridSize.width; x++) {
         for (NSInteger y = 0; y < _gridSize.height; y++) {
-            ORKSpatialSpanTargetView *targetView = [_tileViews objectAtIndex:tileIndex];
+            ORKSpatialSpanTargetView *targetView = _tileViews[tileIndex];
             
             CGPoint origin = (CGPoint){.x = ORKFloorToViewScale(centeringOffset.x + x * gridItemSize.width, self),
                 .y = ORKFloorToViewScale(centeringOffset.y + y * gridItemSize.height, self)};
@@ -147,12 +148,12 @@
 }
 
 - (void)setState:(ORKSpatialSpanTargetState)state forTileIndex:(NSInteger)tileIndex animated:(BOOL)animated {
-    ORKSpatialSpanTargetView *view = [_tileViews objectAtIndex:tileIndex];
+    ORKSpatialSpanTargetView *view = _tileViews[tileIndex];
     [view setState:state animated:animated];
 }
 
 - (ORKSpatialSpanTargetState)stateForTileIndex:(NSInteger)tileIndex {
-    return [(ORKSpatialSpanTargetView *)[_tileViews objectAtIndex:tileIndex] state];
+    return [(ORKSpatialSpanTargetView *)_tileViews[tileIndex] state];
 }
 
 #pragma mark Accessibility
@@ -162,6 +163,7 @@
 }
 
 @end
+
 
 @implementation ORKSpatialSpanMemoryContentView {
     ORKQuantityPairView *_quantityPairView;
@@ -219,7 +221,6 @@
         [self countView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
         
-        
         [self setNeedsUpdateConstraints];
     }
     return self;
@@ -259,7 +260,7 @@
 
 
 - (void)updateMargins {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardMarginForView(self),.right=ORKStandardMarginForView(self)};
+    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
     _quantityPairView.layoutMargins = self.layoutMargins;
 }
 
@@ -277,29 +278,62 @@
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    NSLayoutConstraint *c1 = [NSLayoutConstraint constraintWithItem:_gameView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:1000];
-    c1.priority = UILayoutPriorityDefaultLow-1;
-    [constraints addObject:c1];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:views]];
+    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_gameView
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1.0
+                                                           constant:1000.0];
+    constraint1.priority = UILayoutPriorityDefaultLow-1;
+    [constraints addObject:constraint1];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_quantityPairView attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_quantityPairView attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_quantityPairView
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueView
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                           toItem:_quantityPairView
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
-    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10000];
+    NSLayoutConstraint *maxWidthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1.0
+                                                                           constant:ORKScreenMetricMaxDimension];
     maxWidthConstraint.priority = UILayoutPriorityRequired-1;
     [constraints addObject:maxWidthConstraint];
-
     
     [NSLayoutConstraint activateConstraints:constraints];
     _constraints = constraints;
     
     [super updateConstraints];
 }
-
-
 
 @end

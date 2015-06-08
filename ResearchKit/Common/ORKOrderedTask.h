@@ -28,17 +28,23 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKTask.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a task that assumes a fixed order for its steps.
+ The `ORKOrderedTask` class implements all the methods in the `ORKTask` protocol and represents a 
+ task that assumes a fixed order for its steps.
  
- In the ResearchKit framework, any simple sequential task, such as a survey or an
- active task, can be represented as an ordered task.
+ In the ResearchKit framework, any simple sequential task, such as a survey or an active task, can
+ be represented as an ordered task.
  
- To enable conditional behaviors in a task, it can be easier to subclass `ORKOrderedTask` and override particular `ORKTask` methods than it is to implement the `ORKTask` protocol directly. For example, if you want to display a survey question only when the user answered Yes to the previous question, you can override `stepAfterStep:withResult:` and `stepBeforeStep:withResult:` and call super for all other methods.
+ If you want further custom conditional behaviors in a task, it can be easier to subclass
+ `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
+ to implement the `ORKTask` protocol directly. Override `stepAfterStep:withResult:` and
+ `stepBeforeStep:withResult:` and call super for all other methods.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
@@ -83,14 +89,14 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-
 /**
- The `ORKPredefinedTaskOption` flags let you exclude particular behaviors from
- the predefined active tasks in the Predefined category of `ORKOrderedTask`.
+ The `ORKPredefinedTaskOption` flags let you exclude particular behaviors from the predefined active
+ tasks in the predefined category of `ORKOrderedTask`.
  
- By default, all predefined tasks include instructions and conclusion steps, and may also include one or more data collection recorder configurations. Although not
- all predefined tasks include all of these data collection types, the predefined task option
- flags can be used to explicitly specify that a task option not be included.
+ By default, all predefined tasks include instructions and conclusion steps, and may also include
+ one or more data collection recorder configurations. Although not all predefined tasks include all
+ of these data collection types, the predefined task option flags can be used to explicitly specify
+ that a task option not be included.
  */
 
 typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
@@ -128,64 +134,68 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 /**
  Returns a predefined task that consists of a fitness check.
  
- In a fitness check task, the participant is asked to walk for a specified
- duration (typically several minutes). During this period, various sensor data
- is collected and returned by the task view controller's delegate. Sensor data can include accelerometer, device motion, pedometer, location, and heart rate
- data where available.
+ In a fitness check task, the participant is asked to walk for a specified duration
+ (typically several minutes). During this period, various sensor data is collected and returned by
+ the task view controller's delegate. Sensor data can include accelerometer, device motion,
+ pedometer, location, and heart rate data where available.
  
- At the conclusion of the walk, if heart rate data is available, the participant
- is asked to sit down and rest for a period. Data collection continues during this
- period.
+ At the conclusion of the walk, if heart rate data is available, the participant is asked to sit
+ down and rest for a period. Data collection continues during this period.
  
- By default, the task includes an instruction step that explains what the user needs to do
- during the task, but this can be excluded with `ORKPredefinedTaskOptionExcludeInstructions`.
+ By default, the task includes an instruction step that explains what the user needs to do during
+ the task, but this can be excluded with `ORKPredefinedTaskOptionExcludeInstructions`.
  
  Data collected from this task can be used to compute measures of general fitness.
  
- @param identifier   The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription  A localized string describing the intended use of the data collected.
- If the value of this parameter is `nil`, the default localized text is displayed.
- @param walkDuration The duration of the walk (the maximum is 10 minutes).
- @param restDuration The duration of the post walk rest period.
- @param options      Options that affect the features of the predefined task.
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text is displayed.
+ @param walkDuration            The duration of the walk (the maximum is 10 minutes).
+ @param restDuration            The duration of the post walk rest period.
+ @param options                 Options that affect the features of the predefined task.
+ 
  @return An active fitness check task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)fitnessCheckTaskWithIdentifier:(NSString *)identifier
-                           intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                     walkDuration:(NSTimeInterval)walkDuration
-                                     restDuration:(NSTimeInterval)restDuration
-                                          options:(ORKPredefinedTaskOption)options;
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                      walkDuration:(NSTimeInterval)walkDuration
+                                      restDuration:(NSTimeInterval)restDuration
+                                           options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that consists of a short walk.
  
- In a short walk task, the participant is asked to walk a short distance,
- which may be indoors. Typical uses of the resulting data are to assess stride length,
- smoothness, sway, or other aspects of the participant's gait.
+ In a short walk task, the participant is asked to walk a short distance, which may be indoors.
+ Typical uses of the resulting data are to assess stride length, smoothness, sway, or other aspects
+ of the participant's gait.
  
- The presentation of the short walk task differs from the fitness check task in that the
- distance is replaced by the number of steps taken, and the walk is split into
- a series of legs. After each leg, the user is asked to turn and reverse direction.
+ The presentation of the short walk task differs from the fitness check task in that the distance is
+ replaced by the number of steps taken, and the walk is split into a series of legs. After each leg,
+ the user is asked to turn and reverse direction.
  
  The data collected by this task can include accelerometer, device motion, and pedometer data.
  
- @param identifier    The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription   A localized string describing the intended use of the data collected.
- If the value of this parameter is `nil`, the default localized text is displayed.
- @param numberOfStepsPerLeg The number of steps the participant is asked to walk.
- If the pedometer is unavailable, a distance is suggested
- and a suitable count down timer is displayed for each leg of the walk.
- @param restDuration  The duration of the rest period. When the value of this parameter is nonzero, the user is asked to stand still for the specified rest period after the turn sequence has been completed, and baseline data is collected.
- @param options       Options that affect the features of the predefined task.
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text is displayed.
+ @param numberOfStepsPerLeg     The number of steps the participant is asked to walk. If the
+                                    pedometer is unavailable, a distance is suggested and a suitable
+                                    count down timer is displayed for each leg of the walk.
+ @param restDuration            The duration of the rest period. When the value of this parameter is
+                                    nonzero, the user is asked to stand still for the specified rest
+                                    period after the turn sequence has been completed, and baseline
+                                    data is collected.
+ @param options                 Options that affect the features of the predefined task.
  
  @return An active short walk task that can be presented with an `ORKTaskViewController` object.
- 
  */
 + (ORKOrderedTask *)shortWalkTaskWithIdentifier:(NSString *)identifier
-                        intendedUseDescription:(nullable NSString *)intendedUseDescription
-                           numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
-                                  restDuration:(NSTimeInterval)restDuration
-                                       options:(ORKPredefinedTaskOption)options;
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                            numberOfStepsPerLeg:(NSInteger)numberOfStepsPerLeg
+                                   restDuration:(NSTimeInterval)restDuration
+                                        options:(ORKPredefinedTaskOption)options;
 
 
 /**
@@ -199,97 +209,204 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  Data collected in this task consists of audio information.
  
- @param identifier        The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription       A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, default localized text is used.
- @param speechInstruction  Instructional content describing what the user needs to do when recording begins. If the value of this parameter is `nil`, default localized text is used.
- @param shortSpeechInstruction Instructional content shown during audio recording. If the value of this parameter is `nil`, default localized text is used.
- @param duration          The length of the count down timer that runs while audio data is collected.
- @param recordingSettings See "AV Foundation Audio Settings Constants" for possible values.
- @param options           Options that affect the features of the predefined task.
- @return An active audio task that can be presented with an `ORKTaskViewController` object.
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, default
+                                    localized text is used.
+ @param speechInstruction       Instructional content describing what the user needs to do when
+                                    recording begins. If the value of this parameter is `nil`,
+                                    default localized text is used.
+ @param shortSpeechInstruction  Instructional content shown during audio recording. If the value of
+                                    this parameter is `nil`, default localized text is used.
+ @param duration                The length of the count down timer that runs while audio data is
+                                    collected.
+ @param recordingSettings       See "AV Foundation Audio Settings Constants" for possible values.
+ @param options                 Options that affect the features of the predefined task.
  
+ @return An active audio task that can be presented with an `ORKTaskViewController` object.
  */
-
 + (ORKOrderedTask *)audioTaskWithIdentifier:(NSString *)identifier
-                    intendedUseDescription:(nullable NSString *)intendedUseDescription
-                         speechInstruction:(nullable NSString *)speechInstruction
-                    shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
-                                  duration:(NSTimeInterval)duration
-                         recordingSettings:(nullable NSDictionary *)recordingSettings
-                                   options:(ORKPredefinedTaskOption)options;
-
+                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                          speechInstruction:(nullable NSString *)speechInstruction
+                     shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                   duration:(NSTimeInterval)duration
+                          recordingSettings:(nullable NSDictionary *)recordingSettings
+                                    options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that consists of two finger tapping.
  
- In a two finger tapping task, the participant is asked to rhythmically and alternately
- tap two targets on the device screen.
+ In a two finger tapping task, the participant is asked to rhythmically and alternately tap two
+ targets on the device screen.
  
- A two finger tapping task can be used to assess basic motor
- capabilities including speed, accuracy, and rhythm.
+ A two finger tapping task can be used to assess basic motor capabilities including speed, accuracy,
+ and rhythm.
  
  Data collected in this task includes touch activity and accelerometer information.
  
- @param identifier        The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription       A localized string describing the intended use of the data collected. If the value of this parameter is `nil`,
-            the default localized text will be displayed.
- @param duration          The length of the count down timer that runs while touch data is collected.
- @param options           Options that affect the features of the predefined task.
- @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text will be displayed.
+ @param duration                The length of the count down timer that runs while touch data is
+                                    collected.
+ @param options                 Options that affect the features of the predefined task.
  
+ @return An active two finger tapping task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)twoFingerTappingIntervalTaskWithIdentifier:(NSString *)identifier
-                                       intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                                     duration:(NSTimeInterval)duration
-                                                      options:(ORKPredefinedTaskOption)options;
+                                        intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                                      duration:(NSTimeInterval)duration
+                                                       options:(ORKPredefinedTaskOption)options;
 
 /**
  Returns a predefined task that tests spatial span memory.
  
  In a spatial span memory task, the participant is asked to repeat pattern sequences of increasing
- length in a game-like environment. You can use this task to assess visuospatial memory and executive function.
+ length in a game-like environment. You can use this task to assess visuospatial memory and
+ executive function.
 
  
  In each round of the task, an array of
  target images are shown in a grid (by default, the images are flowers). The round consists of a
- demonstration phase and an interactive phase. In the demonstration phase,
- some of the flowers change color in a specific sequence. After the demonstration, the user is asked to tap the flowers in the same sequence for the interactive phase.
+ demonstration phase and an interactive phase. In the demonstration phase, some of the flowers
+ change color in a specific sequence. After the demonstration, the user is asked to tap the flowers
+ in the same sequence for the interactive phase.
  
- The span (that is, the length of the pattern sequence) is automatically varied during the
- task, increasing after users succeed and decreasing after they fail, within
- the range specified by minimum and maximum values that you specify. You can also customize the speed of sequence playback and the shape of the tap target.
+ The span (that is, the length of the pattern sequence) is automatically varied during the task,
+ increasing after users succeed and decreasing after they fail, within the range specified by
+ minimum and maximum values that you specify. You can also customize the speed of sequence playback
+ and the shape of the tap target.
  
- A spatial span memory task finishes when the user has either completed the maximum number of tests or made the maximum number of errors.
+ A spatial span memory task finishes when the user has either completed the maximum number of tests
+ or made the maximum number of errors.
  
  Data collected by the task is in the form of an `ORKSpatialSpanMemoryResult` object.
  
- @param identifier        The task identifier to use for this task, appropriate to the study.
- @param intendedUseDescription       A localized string describing the intended use of the data collected. If the value of this parameter is `nil`, the default localized text is displayed.
- @param initialSpan       The  sequence length of the initial memory pattern.
- @param minimumSpan           The minimum pattern sequence length.
- @param maximumSpan           The maximum pattern sequence length.
- @param playSpeed         The time per sequence item; a smaller value means faster sequence play.
- @param maxTests          The maximum number of rounds to conduct.
- @param maxConsecutiveFailures       The maximum number of consecutive failures the user can make before the task is terminated.
- @param customTargetImage The image to use for the task. By default, and if the value of this parameter is `nil`, the image is a flower. To supply a custom image, create a template image to which iOS adds the tint color.
- @param customTargetPluralName    The name associated with `customTargetImage`; by default, the value of this parameter is @"flowers".
- @param requireReversal   A Boolean value that indicates whether to require the user to tap the sequence in reverse order.
- @param options           Options that affect the features of the predefined task.
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the default
+                                    localized text is displayed.
+ @param initialSpan             The  sequence length of the initial memory pattern.
+ @param minimumSpan             The minimum pattern sequence length.
+ @param maximumSpan             The maximum pattern sequence length.
+ @param playSpeed               The time per sequence item; a smaller value means faster sequence
+                                    play.
+ @param maxTests                The maximum number of rounds to conduct.
+ @param maxConsecutiveFailures  The maximum number of consecutive failures the user can make before
+                                    the task is terminated.
+ @param customTargetImage       The image to use for the task. By default, and if the value of this
+                                    parameter is `nil`, the image is a flower. To supply a custom
+                                    image, create a template image to which iOS adds the tint color.
+ @param customTargetPluralName  The name associated with `customTargetImage`; by default, the value
+                                    of this parameter is @"flowers".
+ @param requireReversal         A Boolean value that indicates whether to require the user to tap
+                                    the sequence in reverse order.
+ @param options                 Options that affect the features of the predefined task.
+ 
  @return An active spatial span memory task that can be presented with an `ORKTaskViewController` object.
  */
 + (ORKOrderedTask *)spatialSpanMemoryTaskWithIdentifier:(NSString *)identifier
-                                intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                           initialSpan:(NSInteger)initialSpan
-                                           minimumSpan:(NSInteger)minimumSpan
-                                           maximumSpan:(NSInteger)maximumSpan
-                                             playSpeed:(NSTimeInterval)playSpeed
-                                              maxTests:(NSInteger)maxTests
-                                maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
-                                     customTargetImage:(nullable UIImage *)customTargetImage
-                                customTargetPluralName:(nullable NSString *)customTargetPluralName
-                                       requireReversal:(BOOL)requireReversal
-                                               options:(ORKPredefinedTaskOption)options;
+                                 intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                            initialSpan:(NSInteger)initialSpan
+                                            minimumSpan:(NSInteger)minimumSpan
+                                            maximumSpan:(NSInteger)maximumSpan
+                                              playSpeed:(NSTimeInterval)playSpeed
+                                               maxTests:(NSInteger)maxTests
+                                 maxConsecutiveFailures:(NSInteger)maxConsecutiveFailures
+                                      customTargetImage:(nullable UIImage *)customTargetImage
+                                 customTargetPluralName:(nullable NSString *)customTargetPluralName
+                                        requireReversal:(BOOL)requireReversal
+                                                options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that tests tone audiometry.
+
+ In a tone audiometry task, the participant is asked to listen to some tones with different audio
+ frequencies, playing on different channels (left and right), with the volume being progressively
+ increased until the participant taps a button.
+
+ A tone audiometry task can be used to measure properties of the user's hearing, based on their
+ reaction to a wide range of frequencies.
+
+ Data collected in this task consists of audio signal amplitude for specific frequencies and
+ channels.
+
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, default
+                                    localized text is used.
+ @param speechInstruction       Instructional content describing what the user needs to do when
+                                    recording begins. If the value of this parameter is `nil`,
+                                    default localized text is used.
+ @param shortSpeechInstruction  Instructional content shown during audio recording. If the value of
+                                    this parameter is `nil`, default localized text is used.
+ @param toneDuration            The maximum length of the duration for each tone (each tone can be
+                                    interrupted sooner, after the participant presses the main
+                                    button).
+ @param options                 Options that affect the features of the predefined task.
+
+ @return An active tone audiometry task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)toneAudiometryTaskWithIdentifier:(NSString *)identifier
+                              intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                   speechInstruction:(nullable NSString *)speechInstruction
+                              shortSpeechInstruction:(nullable NSString *)shortSpeechInstruction
+                                        toneDuration:(NSTimeInterval)toneDuration
+                                             options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that tests the participant's reaction time.
+ 
+ In a reaction time task the participant is asked to move the device sharply in any
+ direction in response to a visual cue. You can use this task to accurately assess the participant's
+ Simple Reaction Time.
+ 
+ A reaction time task finishes when the participant has completed the required
+ `numberOfAttempts` successfully. An attempt is successful when the participant exerts acceleration
+ greater than `thresholdAcceleration` to the device after the stimulus has been delivered and before
+ `timeout` has elapsed. An attempt is unsuccessful if acceleration greater than
+ `thresholdAcceleration` is applied to the device before the stimulus or if this does not occur
+ before `timeout` has elapsed. If unsuccessful, the result is not reported and the participant must
+ try again to proceed with the task.
+ 
+ Data collected by the task is in the form of ORKReactionTimeResult objects. These
+ objects contain a timestamp representing the delivery of the stimulus and an ORKFileResult which
+ references the motion data collected during an attempt. The researcher can use these to evaluate
+ the response to the stimulus and calculate the reaction time.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the
+                                        study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                        collected. If the value of this parameter is `nil`, the
+                                        default localized text is displayed.
+ @param maximumStimulusInterval     The maximum interval before the stimulus is delivered.
+ @param minimumStimulusInterval     The minimum interval before the stimulus is delivered.
+ @param thresholdAcceleration       The acceleration required to end a reaction time test.
+ @param numberOfAttempts            The number of successful attempts required before the task is
+                                        complete. The active step result will contain this many
+                                        child results if the task is completed.
+ @param timeout                     The interval permitted after the stimulus until the test fails,
+                                        if the threshold is not reached.
+ @param successSoundID              The sound to play after a successful attempt.
+ @param timeoutSoundID              The sound to play after an attempt that times out.
+ @param failureSoundID              The sound to play after an unsuccessful attempt.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
+ */
+
++ (ORKOrderedTask *)reactionTimeTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                           maximumStimulusInterval:(NSTimeInterval)maximumStimulusInterval
+                           minimumStimulusInterval:(NSTimeInterval)minimumStimulusInterval
+                             thresholdAcceleration:(double)thresholdAcceleration
+                                  numberOfAttempts:(int)numberOfAttempts
+                                           timeout:(NSTimeInterval)timeout
+                                      successSound:(UInt32)successSoundID
+                                      timeoutSound:(UInt32)timeoutSoundID
+                                      failureSound:(UInt32)failureSoundID
+                                           options:(ORKPredefinedTaskOption)options;
 
 @end
 

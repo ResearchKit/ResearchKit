@@ -39,10 +39,12 @@ instruction step does not collect any data, it yields an empty
 `ORKStepResult` that nonetheless records how long the instruction was
 on screen.
 
+```
     ORKInstructionStep *step =
       [[ORKInstructionStep alloc] initWithIdentifier:@"identifier"];
     step.title = @"Selection Survey";
     step.text = @"This survey can help us understand your eligibility for the fitness study";
+```
 
 Creating a step as shown in the code above, including it in a task, and
 presenting with a task view controller, yields something like this:
@@ -72,6 +74,7 @@ user's answer.
 
 The following code configures a simple numeric question step.
 
+```
     ORKNumericAnswerFormat *format =
       [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years"];
     format.minimum = @(18);
@@ -80,6 +83,7 @@ The following code configures a simple numeric question step.
       [ORKQuestionStep questionStepWithIdentifier:kIdentifierAge
                                             title:@"How old are you?"
                                            answer:format];
+```
 
 Adding this question step to a task and presenting the task produces
 a screen that looks like this:
@@ -91,9 +95,7 @@ a screen that looks like this:
 </figure>
 </center>
 
-
 ###Form Step
-
 
 When the user needs to answer several related questions together, it
 may be preferable to use a form step (`ORKFormStep`) in order to present them all on one page.  Form steps support all the same answer formats as question
@@ -111,6 +113,7 @@ their identifiers (the `identifier` property).
 
 For example, the following code shows how to create a form that requests some basic details, using default values extracted from HealthKit on iOS to accelerate data entry:
 
+```
     ORKFormStep *step =
     [[ORKFormStep alloc] initWithIdentifier:kFormIdentifier
                                        title:@"Form"
@@ -150,8 +153,8 @@ For example, the following code shows how to create a form that requests some ba
     [items addObject:dateOfBirthItem];
 
     // ... And so on, adding additional items
-    step.items = items;
-
+    step.formItems = items;
+```
 
 The code above gives you something like this:
 <center>
@@ -179,7 +182,7 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p>
-<p style="clear: both;">
+<p style="clear: both;"></p>
 
 In addition to the preceding answer formats, the ResearchKit framework provides
 special answer formats for asking questions about quantities or
@@ -196,6 +199,7 @@ Health database.
 Once you create one or more steps, create an `ORKOrderedTask` to
 hold them. The code below shows a Boolean step being added to a task.
 
+```
     // Create a boolean step to include in the task.
     ORKStep *booleanStep = 
       [[ORKQuestionStep alloc] initWithIdentifier:kNutritionIdentifier];
@@ -206,13 +210,14 @@ hold them. The code below shows a Boolean step being added to a task.
     ORKOrderedTask *task =
       [[ORKOrderedTask alloc] initWithIdentifier:kTaskIdentifier
                                            steps:@[booleanStep]];
-
+```
 
 You must assign a string identifier to each step. The step identifier should be unique within the task, because it is the key that connects a step in the task hierarchy with the step result in the result hierarchy.
 
 To present the task, attach it to a task view controller and present
 it. The code below shows how to create a task view controller and present it modally.
 
+```
     // Create a task view controller using the task and set a delegate.
     ORKTaskViewController *taskViewController =
       [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
@@ -220,7 +225,7 @@ it. The code below shows how to create a task view controller and present it mod
 
     // Present the task view controller.
     [self presentViewController:taskViewController animated:YES completion:nil];
-
+```
 
 <p><i>Note: `ORKOrderedTask` assumes that you will always present all the questions,
 and will never decide what question to show based on previous answers.
@@ -263,7 +268,6 @@ includes start and end times, using the `startDate` and `endDate`
 properties respectively. These properties can be used to infer how long the user
 spent on the step.
 
- 
 #### Step Results That Determine the Next Step
 
 Sometimes it's important to know the result of a step before
@@ -277,19 +281,19 @@ The following example demonstrates how to subclass
 user's answer to a Boolean question. Although the code shows the step after step method, a corresponding implementation of "step before step"
 is usually necessary.
 
+```
     - (ORKStep *)stepAfterStep:(ORKStep *)step
                     withResult:(id<ORKTaskResultSource>)result {
-        NSString *ident = step.identiifer;
-        ORKStepResult *stepResult = [result stepResultForStepIdentifier:ident];  
-        if ([ident isEqualToString:self.qualificationStep.identifier])
+        NSString *identifier = step.identifier;  
+        if ([identifier isEqualToString:self.qualificationStep.identifier])
         {
-            ORKStepResult *stepResult = [result stepResultForStepIdentifier:ident];
-            ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
+            ORKStepResult *stepResult = [result stepResultForStepIdentifier:identifier];
+            ORKQuestionResult *result = (ORKQuestionResult *)stepResult.firstResult;
             if ([result isKindOfClass:[ORKBooleanQuestionResult class]])
             {
                 ORKBooleanQuestionResult *booleanResult = result;
                 NSNumber *booleanAnswer = booleanResult.booleanAnswer;
-                if (booleanAnswer )
+                if (booleanAnswer)
                 {
                     return booleanAnswer.boolValue ? self.regularQuestionStep : self.terminationStep;
                 }
@@ -297,7 +301,7 @@ is usually necessary.
         }
         return [super stepAfterStep:step withResult:result];
     }
-     
+```
 
 #### Saving Results on Task Completion
 
@@ -306,7 +310,7 @@ will likely include serializing the result hierarchy in some form,
 either using the built-in `NSSecureCoding` support, or to another
 format appropriate for your application.
 
-“If your task can produce file output, the files are generally referenced by an `ORKFileResult`, and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
+If your task can produce file output, the files are generally referenced by an `ORKFileResult`, and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
 directory, and share it.
 
 In the following example, the result is archived with
@@ -315,6 +319,7 @@ saving and restoring tasks, the user may save the task, so this
 example also demonstrates how to obtain the restoration data that
 would later be needed to restore the task.
 
+```
     - (void)taskViewController:(ORKTaskViewController *)taskViewController
            didFinishWithReason:(ORKTaskViewControllerFinishReason)reason
                          error:(NSError *)error
@@ -341,3 +346,4 @@ would later be needed to restore the task.
             break;
         }
     }
+```

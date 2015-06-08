@@ -32,20 +32,22 @@ You use the predefined sections in the expected order, the ResearchKit framework
 
 After you create a section, you create a step to present the section. 
 
+```
     ORKConsentDocument *document = [ORKConsentDocument new];
-    ORKConsentSection *section =
+    ORKConsentSection *section1 =
       [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
-    section.title = @"The title of the section goes here ...";
-    section.summary = @"The summary about the section goes here ...";
-    section.content = @"The content to show in learn more ...";
+    section1.title = @"The title of the section goes here ...";
+    section1.summary = @"The summary about the section goes here ...";
+    section1.content = @"The content to show in learn more ...";
     
     // Create additional section objects for later sections
-    document.sections = @[s, ...];
+    document.sections = @[section1, ...];
     
     ORKVisualConsentStep *step =
       [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsent document:document];
     
     // And then create and present a task including this step.
+```
 
 If the predefined consent sections do not adequately cover the sections of your consent document, you can create your own custom sections. You can also create your own images and animations and add them to your consent section, to complete the experience. The animations you add should be H.264 videos; for best results, try to match the assets included with the ResearchKit framework.
 
@@ -56,6 +58,7 @@ It is your responsibility to populate the visual consent step with
 content; the `ORKVisualConsentStep` object doesn't contain any
 default content.
 
+```
     // Add consent sections for each page of visual consent; for example:
     ORKConsentSection *section1 =
       [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeDataGathering];
@@ -66,6 +69,8 @@ default content.
       [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier document:document];
     
     // Create and present a task including this step.
+```
+
 Visual step is presented as:
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_1.png" style="width: 100%;border: solid black 1px; ">Consent overview screen (ORKConsentSectionTypeOverview object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_2.png" style="width: 100%;border: solid black 1px;">Data gathering (ORKConsentSectionTypeDataGathering object).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_3.png" style="width: 100%;border: solid black 1px;">Privacy (ORKConsentSectionTypePrivacy object)</p>
@@ -76,6 +81,7 @@ Visual step is presented as:
 <p style="clear: both;">
 
 ### Add a Review Step
+
 Users review the consent review document in the consent review step (`ORKConsentReviewStep`). Depending on your signature requirements, users can also be asked to enter their name and write a signature on the screen.
 
 The content for consent review can either be produced as a concatenation of all the consent sections in your document model, or you can provide entirely separate review content as HTML in the consent document's `htmlReviewContent` property.
@@ -84,18 +90,21 @@ When the user agrees to the content in the consent form, a confirmation dialog i
 
 The name entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresName` property is YES. Similarly, the signature entry page is included in a consent review step if the step’s `signature` property contains a signature object in which the `requiresSignature` property is YES.
 
+```
     ORKConsentDocument *consent = [[ORKConsentDocument alloc] init];
     consent.title = @"Demo Consent";
     consent.signaturePageTitle = @"Consent";
     
     ORKConsentReviewStep *reviewStep =
       [[ORKConsentReviewStep alloc] initWithIdentifier:kConsentReviewIdentifier
-                                             signature:consentDocument.signatures[0]
-                                            inDocument:consentDocument];
+                                             signature:consent.signatures[0]
+                                            inDocument:consent];
     reviewStep.text = @"Lorem ipsum ..";
     reviewStep.reasonForConsent = @"Lorem ipsum ...";
     
     // Add the content to a task and present it.
+```
+
 Review step is presented as:
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_10.png" style="width: 100%;border: solid black 1px; ">Consent review (ORKConsentReviewStep object)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_11.png" style="width: 100%;border: solid black 1px;"> Agreeing to the consent document (reasonForConsent property of ORKConsentReviewStep object).</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="VisualStep_Images/VisualStep_12.png" style="width: 100%;border: solid black 1px;"> Consent review name entry (signature property in ORKConsentReviewStep)</p>
@@ -114,6 +123,7 @@ to share their data that you collect for your study with other researchers, if a
 your IRB or EC if applicable. To use a consent sharing step, include it in a task, perhaps
 just before a consent review step.
 
+```
     ORKConsentSharingStep *sharingStep =
       [[ORKConsentSharingStep alloc] initWithIdentifier:kConsentSharingIdentifier
                            investigatorShortDescription:@"MyInstitution"
@@ -121,6 +131,7 @@ just before a consent review step.
                           localizedLearnMoreHTMLContent:@"Lorem ipsum..."];
 
     // Then include this step to a task and present with a task view controller.
+```
 
 The consent sharing step looks like this:
 <center>
@@ -136,6 +147,7 @@ After you create the step(s), create an `ORKOrderedTask` task and add them to it
 
 The following code snippet shows how to create a task with a visual consent step and a consent review step:
 
+```
     ORKVisualConsentStep *visualStep =
       [[ORKVisualConsentStep alloc] initWithIdentifier:kVisualConsentIdentifier
                                               document:consent];
@@ -154,18 +166,24 @@ The following code snippet shows how to create a task with a visual consent step
       [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:nil];
 
     // And then present the task view controller.
-    
+```
 
 ##3. Optionally, Generate a PDF
 
 The ResearchKit framework can help you generate a PDF of the signed consent form and provide it to the user. For example, your app could generate the PDF locally, write it to disk, email it to the participant, display it in the app, or send it to a server.
 
-To do this, first take any signature results from the completed consent review, and apply the resulting signatures to your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
+To do this, first take any signature results from the completed consent review, and apply the resulting signatures to a copy of your consent document. Then, call the `makePDFWithCompletionHandler:` method of `ORKConsentDocument` as shown here.
+
+```
+    ORKConsentDocument *documentCopy = [document copy];
 
     ORKConsentSignatureResult *signatureResult =
       (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:kConsentReviewIdentifier] firstResult];
-    [signatureResult applyToDocument:document];
+    [signatureResult applyToDocument:documentCopy];
     
-    [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
+    [documentCopy makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
         // Write the PDF data to disk, email it, display it, or send it to a server.
     }];
+```
+
+You can only apply a signature result to a new copy of a consent document. 

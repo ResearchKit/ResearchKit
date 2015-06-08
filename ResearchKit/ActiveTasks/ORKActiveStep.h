@@ -33,6 +33,7 @@
 #import <ResearchKit/ORKStep.h>
 #import <UIKit/UIKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -99,7 +100,6 @@ automatically navigates forward when the timer expires.
  The default value of this property is `NO`.
  */
 @property (nonatomic) BOOL shouldSpeakCountDown;
-
 
 /**
  A Boolean value indicating whether to start the count down timer automatically when the step starts, or
@@ -193,7 +193,6 @@ The default value of this property is `NO`.
  */
 @property (nonatomic, copy, nullable) NSArray *recorderConfigurations;
 
-
 /**
  The set of HealthKit types the step requests for reading. (read-only)
  
@@ -205,20 +204,6 @@ The default value of this property is `NO`.
  types the recorders require. Subclasses may override this implementation.
  */
 @property (nonatomic, readonly, nullable) NSSet *requestedHealthKitTypesForReading;
-
-/**
- The set of access permissions required for the step. (read-only)
- 
- The permission mask is used by the task view controller to determine the types of
- access to request from users when they complete the initial instruction steps
- in a task. If your step requires access to APIs that limit access, include
- the permissions you require in this mask.
- 
- By default, the property scans the recorders and collates the permissions
- required by the recorders. Subclasses may override this implementation.
- */
-@property (nonatomic, readonly) ORKPermissionMask requestedPermissions;
-
 
 @end
 

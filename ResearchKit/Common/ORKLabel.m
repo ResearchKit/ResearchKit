@@ -28,14 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 #import "ORKHelpers.h"
 
 
 @implementation ORKLabel
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         [self init_ORKLabel];
@@ -43,8 +43,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self init_ORKLabel];
@@ -53,12 +52,10 @@
 }
 
 - (void)init_ORKLabel {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
-    
     [self updateAppearance];
 }
 
@@ -68,7 +65,6 @@
 }
 
 - (void)updateAppearance {
-    
     self.font = [[self class] defaultFont];
     [self invalidateIntrinsicContentSize];
 }

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanTargetView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
@@ -35,10 +36,10 @@
 #import "ORKAccessibility.h"
 #import "ORKDefines_Private.h"
 
+
 static const UIEdgeInsets _ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};
 static const CGSize ORKFlowerBezierPathSize = (CGSize){90,90};
 static UIBezierPath *ORKFlowerBezierPath() {
-    
     UIBezierPath *bezierPath = UIBezierPath.bezierPath;
     [bezierPath moveToPoint: CGPointMake(58.8, 45)];
     [bezierPath addCurveToPoint: CGPointMake(51.9, 33.2) controlPoint1: CGPointMake(107.8, 41.8) controlPoint2: CGPointMake(79.3, -7.2)];
@@ -61,7 +62,6 @@ static UIBezierPath *ORKFlowerBezierPath() {
 
 static const CGSize ORKCheckBezierPathSize = (CGSize){28,28};
 static UIBezierPath *ORKCheckBezierPath() {
-    
     UIBezierPath *bezierPath = UIBezierPath.bezierPath;
     [bezierPath moveToPoint: CGPointMake(11.6, 19)];
     [bezierPath addCurveToPoint: CGPointMake(11.1, 18.8) controlPoint1: CGPointMake(11.4, 19) controlPoint2: CGPointMake(11.2, 18.9)];
@@ -82,7 +82,6 @@ static UIBezierPath *ORKCheckBezierPath() {
 
 static const CGSize ORKErrorBezierPathSize = (CGSize){28,28};
 static UIBezierPath *ORKErrorBezierPath() {
-    
     UIBezierPath *bezier3Path = UIBezierPath.bezierPath;
     [bezier3Path moveToPoint: CGPointMake(15.1, 14)];
     [bezier3Path addLineToPoint: CGPointMake(18.8, 10.3)];
@@ -114,17 +113,17 @@ static UIBezierPath *ORKErrorBezierPath() {
 
 @property (nonatomic, readonly) UIEdgeInsets canvasMargins;
 @property (nonatomic, readonly) CGSize canvasSize;
-@property (nonatomic, readonly, strong) UIBezierPath *path;
-@property (nonatomic, readonly, strong) UIColor *color;
+@property (nonatomic, strong, readonly) UIBezierPath *path;
+@property (nonatomic, strong, readonly) UIColor *color;
 
 @end
 
+
 @implementation ORKPathView
 
-- (instancetype)initWithBezierPath:(UIBezierPath *)path canvasSize:(CGSize)canvasSize canvasMargins:(UIEdgeInsets)margins color:(UIColor *)color
-{
-    CGRect r = (CGRect){CGPointZero, canvasSize};
-    CGRect outsetRect = UIEdgeInsetsInsetRect(r, (UIEdgeInsets){.top=-margins.top,.left=-margins.left,.right=-margins.right,.bottom=-margins.bottom});
+- (instancetype)initWithBezierPath:(UIBezierPath *)path canvasSize:(CGSize)canvasSize canvasMargins:(UIEdgeInsets)margins color:(UIColor *)color {
+    CGRect canvasRect = (CGRect){CGPointZero, canvasSize};
+    CGRect outsetRect = UIEdgeInsetsInsetRect(canvasRect, (UIEdgeInsets){.top=-margins.top, .left=-margins.left, .right=-margins.right, .bottom=-margins.bottom});
     self = [super initWithFrame:outsetRect];
     if (self) {
         _canvasMargins = margins;
@@ -145,16 +144,16 @@ static UIBezierPath *ORKErrorBezierPath() {
 }
 
 - (void)drawRect:(CGRect)rect {
-    CGRect bds = [self bounds];
+    CGRect bounds = [self bounds];
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [[UIColor clearColor] setFill];
-    CGContextFillRect(ctx, bds);
+    CGContextFillRect(ctx, bounds);
     
     CGFloat baseWidth = _canvasSize.width + _canvasMargins.left + _canvasMargins.right;
     CGFloat baseHeight = _canvasSize.height + _canvasMargins.top + _canvasMargins.bottom;
     
-    CGFloat aspectRatio = MIN( bds.size.width / baseWidth, bds.size.height / baseHeight);
+    CGFloat aspectRatio = MIN( bounds.size.width / baseWidth, bounds.size.height / baseHeight);
     
     CGContextSaveGState(ctx);
     
@@ -165,13 +164,11 @@ static UIBezierPath *ORKErrorBezierPath() {
     [_path fill];
     
     CGContextRestoreGState(ctx);
-    
 }
 
 - (void)tintColorDidChange {
     [self setNeedsDisplay];
 }
-
 
 @end
 
@@ -245,7 +242,6 @@ static UIBezierPath *ORKErrorBezierPath() {
 }
 
 - (void)setState:(ORKSpatialSpanTargetState)state {
-    
     [self setState:state animated:NO];
 }
 
@@ -278,12 +274,14 @@ static UIBezierPath *ORKErrorBezierPath() {
             newCircleAlpha = 0.0;
             newCircleTransform = CGAffineTransformMakeScale(0.2, 0.2);
             break;
+            
         case ORKSpatialSpanTargetStateActive:
             _flowerView.tintColor = [self tintColor];
             newAlpha = 1.0;
             newCircleTransform = CGAffineTransformMakeScale(0.2, 0.2);
             newCircleAlpha = 0.0;
             break;
+            
         case ORKSpatialSpanTargetStateIncorrect:
             _flowerView.tintColor = [UIColor ork_redColor];
             newTransform = CGAffineTransformMakeScale(0.9*_flowerScaleFactor, 0.9*_flowerScaleFactor);
@@ -295,6 +293,7 @@ static UIBezierPath *ORKErrorBezierPath() {
             errorHidden = NO;
             useSpring = NO;
             break;
+            
         case ORKSpatialSpanTargetStateCorrect:
             _flowerView.tintColor = [self tintColor];
             newTransform = CGAffineTransformMakeScale(1.1*_flowerScaleFactor, 1.1*_flowerScaleFactor);
@@ -318,7 +317,6 @@ static UIBezierPath *ORKErrorBezierPath() {
     _checkView.hidden = checkHidden;
     _flowerView.transform = CGAffineTransformMakeScale(_flowerScaleFactor, _flowerScaleFactor);
     
-    
     [UIView animateWithDuration:(animated?duration:0) delay:0 usingSpringWithDamping:useSpring?0.5:1 initialSpringVelocity:0 options:(UIViewAnimationOptions)UIViewAnimationOptionBeginFromCurrentState animations:^{
         _errorView.alpha = newCircleAlpha;
         _checkView.alpha = newCircleAlpha;
@@ -326,19 +324,18 @@ static UIBezierPath *ORKErrorBezierPath() {
         _checkView.transform = newCircleTransform;
         self.alpha = newAlpha;
         _flowerView.transform = newTransform;
-        
     } completion:NULL];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGRect bds = self.bounds;
-    _flowerView.center = (CGPoint){CGRectGetMidX(bds), CGRectGetMidY(bds)};
-    _flowerView.bounds = bds;
+    CGRect bounds = self.bounds;
+    _flowerView.center = (CGPoint){CGRectGetMidX(bounds), CGRectGetMidY(bounds)};
+    _flowerView.bounds = bounds;
     _flowerView.transform = CGAffineTransformMakeScale(_flowerScaleFactor, _flowerScaleFactor);
     
     CGFloat designWidth = ORKFlowerBezierPathSize.width + _ORKFlowerMargins.left + _ORKFlowerMargins.right;
-    CGFloat scaleFactor = bds.size.width / designWidth;
+    CGFloat scaleFactor = bounds.size.width / designWidth;
     CGAffineTransform tfm = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
     
     CGRect checkRect = CGRectApplyAffineTransform((CGRect){CGPointZero,ORKCheckBezierPathSize}, tfm);

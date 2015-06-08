@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKTextChoiceCellGroup.h"
 #import "ORKChoiceAnswerFormatHelper.h"
 #import "ORKAnswerFormat_Internal.h"
+
 
 @implementation ORKTextChoiceCellGroup {
     ORKChoiceAnswerFormatHelper *_helper;
@@ -63,7 +65,7 @@
 
 - (void)setAnswer:(id)answer {
     _answer = answer;
-    
+
     [self setSelectedIndexes:[_helper selectedIndexesForAnswer:answer]];
 }
 
@@ -76,7 +78,6 @@
 }
 
 - (ORKChoiceViewCell *)cellAtIndex:(NSUInteger)index withReuseIdentifier:(NSString *)identifier {
-    
     ORKChoiceViewCell *cell = _cells[@(index)];
     
     if (cell == nil) {
@@ -95,19 +96,27 @@
 }
 
 - (void)didSelectCellAtIndex:(NSUInteger)index {
-        
     ORKChoiceViewCell *touchedCell = [self cellAtIndex:index withReuseIdentifier:nil];
-    
-    touchedCell.selectedItem = !touchedCell.selectedItem;
-    
-    if (touchedCell.selectedItem && _singleChoice) {
         
+    if (_singleChoice) {
+        touchedCell.selectedItem = YES;
         for (ORKChoiceViewCell *cell in [_cells allValues]) {
             if (cell != touchedCell) {
                 cell.selectedItem = NO;
             }
         }
-        
+    } else {
+        touchedCell.selectedItem = !touchedCell.selectedItem;
+        if (touchedCell.selectedItem) {
+            ORKTextChoice *touchedChoice = [_helper textChoiceAtIndex:index];
+            for (NSNumber *num in [_cells allKeys]) {
+                ORKChoiceViewCell *cell = _cells[num];
+                ORKTextChoice *choice = [_helper textChoiceAtIndex:[num unsignedIntegerValue]];
+                if (cell != touchedCell && (touchedChoice.exclusive || (cell.selectedItem && choice.exclusive))) {
+                    cell.selectedItem = NO;
+                }
+            }
+        }
     }
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];
@@ -129,7 +138,6 @@
 }
 
 - (void)setSelectedIndexes:(NSArray *)indexes {
-    
     for (NSUInteger index = 0; index < self.size; index++ ) {
         BOOL selected = [indexes containsObject:@(index)];
         
@@ -139,25 +147,23 @@
             cell.selectedItem = YES;
         } else {
             // It is ok to not create the cell at here
-            ORKChoiceViewCell *cell = [_cells objectForKey:@(index)];
+            ORKChoiceViewCell *cell = _cells[@(index)];
             cell.selectedItem = NO;
         }
     }
 }
 
 - (NSArray *)selectedIndexes {
-    
     NSMutableArray *indexes = [NSMutableArray new];
     
     for (NSUInteger index = 0; index < self.size; index++ ) {
-        ORKChoiceViewCell *cell = [_cells objectForKey:@(index)];
+        ORKChoiceViewCell *cell = _cells[@(index)];
         if (cell.selectedItem) {
             [indexes addObject:@(index)];
         }
     }
     
     return [indexes copy];
-    
 }
 
 - (id)answerForBoolean {
@@ -166,9 +172,7 @@
         NSArray *answerArray = _answer;
         return (answerArray.count > 0)? [answerArray firstObject] : nil;
     }
-    
     return _answer;
-    
 }
 
 @end

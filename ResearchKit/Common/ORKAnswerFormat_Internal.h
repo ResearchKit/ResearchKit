@@ -33,6 +33,7 @@
 #import <HealthKit/HealthKit.h>
 #import <ResearchKit/ORKAnswerFormat.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 id ORKNullAnswerValue();
@@ -61,6 +62,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKContinuousScaleAnswerForm
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTextAnswerFormat);
 ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat);
 
+
 @interface ORKAnswerFormat ()
 
 - (ORKAnswerFormat *)impliedAnswerFormat;
@@ -77,9 +79,11 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
 - (nonnull Class)questionResultClass;
+
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer;
 
 @end
+
 
 @interface ORKNumericAnswerFormat ()
 
@@ -109,7 +113,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
-@protocol ORKScaleAnswerFormatProvider<NSObject>
+
+@protocol ORKScaleAnswerFormatProvider <NSObject>
 
 - (nullable NSNumber *)minimumNumber;
 - (nullable NSNumber *)maximumNumber;
@@ -117,23 +122,29 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (nullable NSString *)localizedStringForNumber:(nullable NSNumber *)number;
 - (NSInteger)numberOfSteps;
 - (nullable NSNumber *)normalizedValueForNumber:(nullable NSNumber *)number;
-
-@end
-
-@interface ORKScaleAnswerFormat() <ORKScaleAnswerFormatProvider>
-
-@end
-
-@interface ORKContinuousScaleAnswerFormat() <ORKScaleAnswerFormatProvider>
+- (BOOL)isVertical;
+- (NSString *)maximumValueDescription;
+- (NSString *)minimumValueDescription;
 
 @end
 
 
-@interface ORKTextChoice() <ORKAnswerOption>
+@interface ORKScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
 
 @end
 
-@interface ORKImageChoice() <ORKAnswerOption>
+
+@interface ORKContinuousScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
+
+@end
+
+
+@interface ORKTextChoice () <ORKAnswerOption>
+
+@end
+
+
+@interface ORKImageChoice () <ORKAnswerOption>
 
 @end
 
@@ -143,6 +154,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (NSDate *)pickerDefaultDate;
 
 @end
+
 
 @interface ORKDateAnswerFormat ()
 
@@ -154,15 +166,18 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
+
 @interface ORKTimeIntervalAnswerFormat ()
 
 - (NSTimeInterval)pickerDefaultDuration;
 
 @end
 
+
 @interface ORKTextAnswerFormat ()
 
 @end
+
 
 @interface ORKAnswerDefaultSource : NSObject
 

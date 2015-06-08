@@ -28,9 +28,11 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKNavigationContainerView.h"
 #import "ORKTextButton.h"
 #import "ORKContinueButton.h"
+
 
 @interface ORKNavigationContainerView ()
 
@@ -38,7 +40,7 @@
 @property (nonatomic, strong, readonly) ORKTextButton *skipButton;
 
 @property (nonatomic) BOOL useNextForSkip;
-@property (nonatomic,getter=isOptional) BOOL optional;
+@property (nonatomic, getter=isOptional) BOOL optional;
 
 - (void)updateContinueAndSkipEnabled;
 

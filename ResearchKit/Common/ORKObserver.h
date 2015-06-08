@@ -28,13 +28,41 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ResearchKit_Private.h>
-#import "ORKConsentSection.h"
+
+#import <UIKit/UIKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSURL *__nullable ORKMovieURLForConsentSectionType(ORKConsentSectionType type);
+@interface ORKObserver : NSObject
 
-UIImage *__nullable ORKImageForConsentSectionType(ORKConsentSectionType type);
+@property (nonatomic, strong) NSArray *keyPaths;
+@property (nonatomic, strong) id target;
+@property (nonatomic) BOOL observing;
+@property (nonatomic) void *context;
+
+@property (nonatomic, weak, nullable) id delegate;
+@property (nonatomic) SEL action;
+
+- (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context NS_DESIGNATED_INITIALIZER;
+
+- (void)startObserving;
+
+@end
+
+
+@protocol ORKScrollViewObserverDelegate <NSObject>
+
+@required
+- (void)observedScrollViewDidScroll:(UIScrollView *)scrollView;
+
+@end
+
+
+@interface ORKScrollViewObserver  : ORKObserver
+
+- (instancetype)initWithTargetView:(UIScrollView *)scrollView delegate:(id <ORKScrollViewObserverDelegate>)delegate;
+
+@end
 
 NS_ASSUME_NONNULL_END

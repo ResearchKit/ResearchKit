@@ -29,7 +29,6 @@
  */
 
 
-
 varying highp vec2 texCoordVarying;
 precision mediump float;
 
@@ -38,8 +37,7 @@ uniform sampler2D SamplerUV;
 uniform mat3 colorConversionMatrix;
 uniform lowp vec3 tintColor;
 
-void main()
-{
+void main() {
 	mediump vec3 yuv;
 	lowp vec3 rgb;
 	

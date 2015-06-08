@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -26,17 +26,33 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*/
 
 
-#import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
+#import <AudioToolbox/AudioServices.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIApplication (ORKFirstResponderAdditions)
+ORK_CLASS_AVAILABLE
+@interface ORKReactionTimeStep : ORKActiveStep
 
-- (nullable UIResponder *)ork_currentFirstResponder;
+@property (nonatomic, assign) NSTimeInterval maximumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval minimumStimulusInterval;
+
+@property (nonatomic, assign) NSTimeInterval timeout;
+
+@property (nonatomic, assign) NSInteger numberOfAttempts;
+
+@property (nonatomic, assign) double thresholdAcceleration;
+
+@property (nonatomic, assign) SystemSoundID successSound;
+
+@property (nonatomic, assign) SystemSoundID timeoutSound;
+
+@property (nonatomic, assign) SystemSoundID failureSound;
 
 @end
 

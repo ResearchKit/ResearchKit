@@ -35,7 +35,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 /**
  The `ORKActiveStepViewController` class is the base class for displaying `ORKActiveStep`
  subclasses. The predefined active tasks defined in `ORKOrderedTask` all make use
@@ -105,9 +104,7 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, readonly, nullable) NSArray *recorders;
 
-
 /// @name Active step life cycle
-
 
 /**
  A Boolean value that indicates whether the step has finished. (read-only)
@@ -118,8 +115,7 @@ ORK_CLASS_AVAILABLE
  
  In addition, when a step is finished, all recorders are stopped.
  */
-@property (nonatomic, assign, getter=isFinished, readonly) BOOL finished;
-
+@property (nonatomic, assign, readonly, getter=isFinished) BOOL finished;
 
 /**
  A Boolean value that indicates whether the step has started. (read-only)
@@ -139,7 +135,6 @@ ORK_CLASS_AVAILABLE
  enabled. When countdown is enabled in a step, the view controller attempts to navigate automatically to the next step, if so configured.
  */
 - (void)stepDidFinish;
-
 
 /**
  A Boolean value that indicates whether to suspend the step if the app is not

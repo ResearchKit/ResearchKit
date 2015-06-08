@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ORKConsentSignature.h>
 #import "ORKHelpers.h"
+
 
 @implementation ORKConsentSignature
 
@@ -39,8 +41,7 @@
                                           givenName:(NSString *)givenName
                                            familyName:(NSString *)familyName
                                      signatureImage:(UIImage *)signatureImage
-                                         dateString:(NSString *)signatureDate
-{
+                                         dateString:(NSString *)signatureDate {
     ORKConsentSignature *sig = [ORKConsentSignature new];
     sig.title = title;
     sig.givenName = givenName;
@@ -55,17 +56,14 @@
 
 + (ORKConsentSignature *)signatureForPersonWithTitle:(NSString *)title
                                    dateFormatString:(NSString *)dateFormatString
-                                         identifier:(NSString *)identifier
-{
+                                         identifier:(NSString *)identifier {
     ORKConsentSignature *sig = [ORKConsentSignature signatureForPersonWithTitle:title dateFormatString:dateFormatString identifier:identifier givenName:nil familyName:nil signatureImage:nil dateString:nil ];
     return sig;
 }
 
-- (id)init
-{
+- (instancetype)init {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         _requiresName = YES;
         _requiresSignatureImage = YES;
         self.identifier = [[NSUUID UUID] UUIDString];
@@ -74,25 +72,20 @@
 }
 
 - (void)setIdentifier:(NSString *)identifier {
-    
-    if ( nil == identifier)
-    {
+    if ( nil == identifier) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
     }
     
     _identifier = identifier;
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, title, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, givenName, NSString);
@@ -106,8 +99,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
     ORK_ENCODE_OBJ(aCoder, title);
     ORK_ENCODE_OBJ(aCoder, givenName);
@@ -118,7 +110,6 @@
     ORK_ENCODE_IMAGE(aCoder, signatureImage);
     ORK_ENCODE_OBJ(aCoder, signatureDateFormatString);
 }
-
 
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
@@ -141,9 +132,7 @@
     return [_identifier hash] ^ [_title hash] ^ [_givenName hash] ^ [_familyName hash] ^ [_signatureDate hash];
 }
 
-
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKConsentSignature *sig = [[[self class] allocWithZone:zone] init];
     sig.identifier = [_identifier copy];
     sig.title = [_title copy];
@@ -156,6 +145,5 @@
     sig.signatureDate = [_signatureDate copy];
     return sig;
 }
-
 
 @end

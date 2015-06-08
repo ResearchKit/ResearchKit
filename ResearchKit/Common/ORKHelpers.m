@@ -37,8 +37,6 @@
 #import "ORKDefines_Private.h"
 
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen);
-
 NSURL *ORKCreateRandomBaseURL() {
     return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [[ NSUUID UUID] UUIDString]]];
 }
@@ -54,8 +52,7 @@ NSBundle *ORKAssetsBundle(void) {
     return __bundle;
 }
 
-static inline CGFloat ORKCGFloor(CGFloat value)
-{
+static inline CGFloat ORKCGFloor(CGFloat value) {
     if (sizeof(value) == sizeof(float)) {
         return (CGFloat)floorf((float)value);
     } else {
@@ -63,7 +60,7 @@ static inline CGFloat ORKCGFloor(CGFloat value)
     }
 }
 
-static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFloat s) {
+static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFloat s) {
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
@@ -71,35 +68,30 @@ static inline CGFloat AdjustToScale(CGFloat (ajdustFn)(CGFloat), CGFloat v, CGFl
         s = __s;
     }
     if (s == 1.0) {
-        return ajdustFn(v);
+        return adjustFn(v);
     } else {
-        return ajdustFn(v * s) / s;
+        return adjustFn(v * s) / s;
     }
 }
 
-CGFloat ORKFloorToViewScale(CGFloat value, UIView *view)
-{
+CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return AdjustToScale(ORKCGFloor, value, [view contentScaleFactor]);
 }
 
-static id findInArrayByKey(NSArray * array, NSString *key, id value)
-{
+static id findInArrayByKey(NSArray * array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
-    if (matches.count)
-    {
+    if (matches.count) {
         return matches[0];
     }
     return nil;
 }
 
-id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier)
-{
+id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
     return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
 }
 
-NSString *ORKStringFromDateISO8601(NSDate *date)
-{
+NSString *ORKStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -110,8 +102,7 @@ NSString *ORKStringFromDateISO8601(NSDate *date)
     return [__formatter stringFromDate:date];
 }
 
-NSDate *ORKDateFromStringISO8601(NSString *string)
-{
+NSDate *ORKDateFromStringISO8601(NSString *string) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -122,39 +113,29 @@ NSDate *ORKDateFromStringISO8601(NSString *string)
     return [__formatter dateFromString:string];
 }
 
-NSString *ORKSignatureStringFromDate(NSDate *date){
-    
+NSString *ORKSignatureStringFromDate(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         __formatter = [NSDateFormatter new];
         __formatter.dateStyle = NSDateFormatterShortStyle;
         __formatter.timeStyle = NSDateFormatterNoStyle;
     });
     return [__formatter stringFromDate:date];
-
 }
 
-UIColor *ORKRGBA(uint32_t x, CGFloat alpha)
-{
+UIColor *ORKRGBA(uint32_t x, CGFloat alpha) {
     CGFloat b = (x & 0xff) / 255.0f; x >>= 8;
     CGFloat g = (x & 0xff) / 255.0f; x >>= 8;
     CGFloat r = (x & 0xff) / 255.0f;
     return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
 }
 
-UIColor *ORKRGB(uint32_t x)
-{
+UIColor *ORKRGB(uint32_t x) {
     return ORKRGBA(x, 1.0f);
 }
 
-CGFloat ORKStandardMarginForView(UIView *view) {
-    return ORKWantsWideContentMargins([UIScreen mainScreen]) ? 20.0 : 16.0;
-}
-
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor) {
-    
     UIFontDescriptor *fontDescriptor = [descriptor
                       fontDescriptorByAddingAttributes:
                       @{ UIFontDescriptorFeatureSettingsAttribute: @[
@@ -167,15 +148,12 @@ UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor
 UIFont *ORKTimeFontForSize(CGFloat size) {
     UIFontDescriptor *fontDescriptor = [ORKLightFontWithSize(size) fontDescriptor];
     fontDescriptor = ORKFontDescriptorForLightStylisticAlternative(fontDescriptor);
-    
     UIFont *font = [UIFont fontWithDescriptor:fontDescriptor size:0];
     return font;
 }
 
-NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode)
-{
-    switch (mode)
-    {
+NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode) {
+    switch (mode) {
         case ORKFileProtectionComplete:
             return NSFileProtectionComplete;
         case ORKFileProtectionCompleteUnlessOpen:
@@ -189,26 +167,21 @@ NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode)
     return NSFileProtectionNone;
 }
 
-CGFloat ORKExpectedLabelHeight(UILabel *label){
-    
+CGFloat ORKExpectedLabelHeight(UILabel *label) {
     CGSize expectedLabelSize = [label.text boundingRectWithSize:CGSizeMake(label.frame.size.width, CGFLOAT_MAX)
                                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                                     attributes:@{
-                                                                  NSFontAttributeName : label.font
-                                                                  }
-                                                        context:nil ].size;
-    
-    
+                                                     attributes:@{ NSFontAttributeName : label.font }
+                                                        context:nil].size;
     return expectedLabelSize.height;
 }
 
-void ORKAdjustHeightForLabel(UILabel *label){
+void ORKAdjustHeightForLabel(UILabel *label) {
     CGRect rect = label.frame;
     rect.size.height = ORKExpectedLabelHeight(label);
     label.frame = rect;
 }
 
-UIImage *ORKImageWithColor(UIColor *color){
+UIImage *ORKImageWithColor(UIColor *color) {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -222,13 +195,13 @@ UIImage *ORKImageWithColor(UIColor *color){
     return image;
 }
 
-void ORKEnableAutoLayoutForViews(NSArray *views){
+void ORKEnableAutoLayoutForViews(NSArray *views) {
     [views enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(UIView *) obj setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [(UIView *)obj setTranslatesAutoresizingMaskIntoConstraints:NO];
     }];
 }
 
-NSDateFormatter *ORKResultDateTimeFormatter(){
+NSDateFormatter *ORKResultDateTimeFormatter() {
     static NSDateFormatter *dateTimeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -236,24 +209,21 @@ NSDateFormatter *ORKResultDateTimeFormatter(){
         [dateTimeformatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
         dateTimeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return dateTimeformatter;
 }
-NSDateFormatter *ORKResultTimeFormatter(){
 
+NSDateFormatter *ORKResultTimeFormatter() {
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-    
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return timeformatter;
 }
-NSDateFormatter *ORKResultDateFormatter(){
 
+NSDateFormatter *ORKResultDateFormatter() {
     static NSDateFormatter *dateformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -261,35 +231,29 @@ NSDateFormatter *ORKResultDateFormatter(){
         [dateformatter setDateFormat:@"yyyy-MM-dd"];
         dateformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return dateformatter;
 }
 
-NSDateFormatter *ORKTimeOfDayLabelFormatter(){
+NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         timeformatter = [[NSDateFormatter alloc] init];
         NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"hma" options:0 locale:[NSLocale currentLocale]];
         [timeformatter setDateFormat:dateFormat];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return timeformatter;
 }
 
 NSBundle *ORKBundle() {
-    
-    NSBundle *b = [NSBundle bundleForClass:[ORKStep class]];
-    return b;
+    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
+    return bundle;
 }
 
-NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(){
-
+NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         durationFormatter = [[NSDateComponentsFormatter alloc] init];
         [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleFull];
@@ -297,15 +261,12 @@ NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter(){
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
     });
-    
     return durationFormatter;
 }
 
-NSDateComponentsFormatter *ORKDurationStringFormatter(){
-    
+NSDateComponentsFormatter *ORKDurationStringFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         durationFormatter = [[NSDateComponentsFormatter alloc] init];
         [durationFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStyleFull];
@@ -313,66 +274,55 @@ NSDateComponentsFormatter *ORKDurationStringFormatter(){
         [durationFormatter setFormattingContext:NSFormattingContextStandalone];
         [durationFormatter setMaximumUnitCount: 2];
     });
-    
     return durationFormatter;
 }
 
-NSCalendar *ORKTimeOfDayReferenceCalendar(){
+NSCalendar *ORKTimeOfDayReferenceCalendar() {
     static NSCalendar *calendar;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     return calendar;
 }
 
-NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents){
-    
+NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) {
     static NSDateComponentsFormatter *timeOfDayFormatter = nil;
     static dispatch_once_t onceToken;
-    
     dispatch_once(&onceToken, ^{
         timeOfDayFormatter = [[NSDateComponentsFormatter alloc] init];
         [timeOfDayFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStylePositional];
         [timeOfDayFormatter setAllowedUnits:NSCalendarUnitHour | NSCalendarUnitMinute];
         [timeOfDayFormatter setZeroFormattingBehavior:NSDateComponentsFormatterZeroFormattingBehaviorPad];
     });
-    
     return [timeOfDayFormatter stringFromDateComponents:dateComponents];
 }
 
-NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string){
+NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) {
     // NSDateComponentsFormatter don't support parsing, this is a work around.
-    
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         timeformatter = [[NSDateFormatter alloc] init];
         [timeformatter setDateFormat:@"HH:mm"];
         timeformatter.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     });
-    
     NSDate *date = [timeformatter dateFromString:string];
     return [ORKTimeOfDayReferenceCalendar() components:(NSCalendarUnitMinute |NSCalendarUnitHour) fromDate:date];
 }
 
-NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date){
-
+NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date) {
     if (date == nil) {
         return nil;
     }
-
     return [ORKTimeOfDayReferenceCalendar() components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:date];
 }
 
-NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents){
+NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
     return [ORKTimeOfDayReferenceCalendar() dateFromComponents:dateComponents];
 }
 
-BOOL ORKWantsWideContentMargins(UIScreen *screen){
+BOOL ORKWantsWideContentMargins(UIScreen *screen) {
     
     if (screen != [UIScreen mainScreen]) {
         return NO;
@@ -392,17 +342,15 @@ BOOL ORKWantsWideContentMargins(UIScreen *screen){
 #define ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT 16.0
 #define ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL 15.0
 
-CGFloat ORKTableViewLeftMargin(UITableView *tableView){
+CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
     if (ORKWantsWideContentMargins(tableView.window.screen)) {
         if (CGRectGetWidth(tableView.frame) > 320.0) {
             return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_REGULAR;
             
-        }
-        else {
+        } else {
             return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
         }
-    }
-    else {
+    } else {
         // Probably should be ORK_LAYOUT_MARGIN_WIDTH_REGULAR_BEZEL
         return ORK_LAYOUT_MARGIN_WIDTH_THIN_BEZEL_COMPACT;
     }
@@ -410,12 +358,9 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView){
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
-    } else
-#endif
-    {
+    } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -426,12 +371,9 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
-    } else
-#endif
-    {
+    } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -442,12 +384,9 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
-#if __IPHONE_8_2
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.2) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
-    } else
-#endif
-    {
+    } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
         if (! font) {
             font = [UIFont systemFontOfSize:size];
@@ -456,5 +395,95 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
     return font;
 }
 
+NSURL *ORKURLFromBookmarkData(NSData *data) {
+    if (data == nil) {
+        return nil;
+    }
+    
+    BOOL bookmarkIsStale = NO;
+    NSError *bookmarkError = nil;
+    NSURL *bookmarkURL = [NSURL URLByResolvingBookmarkData:data
+                                                   options:NSURLBookmarkResolutionWithoutUI
+                                             relativeToURL:nil
+                                       bookmarkDataIsStale:&bookmarkIsStale
+                                                     error:&bookmarkError];
+    if (!bookmarkURL) {
+        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+    }
+    
+    return bookmarkURL;
+}
 
+NSData *ORKBookmarkDataFromURL(NSURL *url) {
+    if (!url) {
+        return nil;
+    }
+    
+    NSError *error = nil;
+    NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
+                     includingResourceValuesForKeys:nil
+                                      relativeToURL:nil
+                                              error:&error];
+    if (!bookmark) {
+        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+    }
+    return bookmark;
+}
 
+NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
+    NSURL *standardizedURL = [url URLByStandardizingPath];
+    NSURL *standardizedBaseURL = [baseURL URLByStandardizingPath];
+    
+    NSString *path = [standardizedURL absoluteString];
+    NSString *basePath = [standardizedBaseURL absoluteString];
+    
+    if ([path hasPrefix:basePath]) {
+        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        if ([relativePath hasPrefix:@"/"]) {
+            relativePath = [relativePath substringFromIndex:1];
+        }
+        return relativePath;
+    } else {
+        return path;
+    }
+}
+
+static NSURL *ORKHomeDirectoryURL() {
+    static NSURL *homeDirectoryURL = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        homeDirectoryURL = [NSURL fileURLWithPath:NSHomeDirectory()];
+    });
+    return homeDirectoryURL;
+}
+
+NSURL *ORKURLForRelativePath(NSString *relativePath) {
+    if (!relativePath) {
+        return nil;
+    }
+    
+    NSURL *homeDirectoryURL = ORKHomeDirectoryURL();
+    NSURL *url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:NO relativeToURL:homeDirectoryURL];
+    
+    if (url != nil) {
+        BOOL isDirectory = NO;;
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:url.path isDirectory:&isDirectory];
+        if (fileExists && isDirectory) {
+            url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:YES relativeToURL:homeDirectoryURL];
+        }
+    }
+    return url;
+}
+NSString *ORKRelativePathForURL(NSURL *url) {
+    if (!url) {
+        return nil;
+    }
+    
+    return ORKPathRelativeToURL(url, ORKHomeDirectoryURL());
+}
+
+id ORKDynamicCast_(id x, Class objClass) {
+    return [x isKindOfClass:objClass] ? x : nil;
+}
+
+const CGFloat ORKScrollToTopAnimationDuration = 0.2;

@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAudioStep.h"
 #import "ORKAudioStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKStep_Private.h"
+
 
 @implementation ORKAudioStep
 
@@ -39,58 +41,26 @@
     return [ORKAudioStepViewController class];
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.shouldShowDefaultTimer = NO;
+    }
+    return self;
+}
+
 - (void)validateParameters {
-    
     [super validateParameters];
     
     NSTimeInterval const ORKAudioTaskMinimumDuration = 5.0;
     
-    if ( self.duration < ORKAudioTaskMinimumDuration)
-    {
+    if ( self.stepDuration < ORKAudioTaskMinimumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKAudioTaskMinimumDuration)]  userInfo:nil];
     }
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone
-{
-    ORKAudioStep *step = [super copyWithZone:zone];
-    step.duration = self.duration;
-    return step;
 }
 
 - (BOOL)startsFinished {
     return NO;
 }
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-        ORK_DECODE_DOUBLE(aDecoder, duration);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_DOUBLE(aCoder, duration);
-}
-
-+ (BOOL)supportsSecureCoding
-{
-    return YES;
-}
-
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            (self.duration == castObject.duration)) ;
-}
-
 
 @end

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKCountdownStepViewController.h"
 #import "ORKCustomStepView_Internal.h"
 #import "ORKActiveStepViewController_internal.h"
@@ -41,6 +42,7 @@
 #import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
 
+
 @interface ORKCountDownViewLabel : ORKLabel
 
 @end
@@ -50,6 +52,7 @@
     return ORKThinFontWithSize(56);
 }
 @end
+
 
 @interface ORKCountdownView : ORKActiveStepCustomView
 
@@ -61,15 +64,14 @@
 
 @end
 
+
 @implementation ORKCountdownView {
     CAShapeLayer *_circleLayer;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
-        
         _textLabel = [ORKSubheadlineLabel new];
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -93,9 +95,18 @@
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _timeLabel, _progressView);
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]-(>=0)-[_progressView(==d)]|" options:NSLayoutFormatDirectionLeadingToTrailing|NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_textLabel]-(>=0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_progressView(==d)]-(>=0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]-(>=0)-[_progressView(==d)]|"
+                                                                     options:NSLayoutFormatDirectionLeadingToTrailing|NSLayoutFormatAlignAllCenterX
+                                                                     metrics:metrics
+                                                                       views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_textLabel]-(>=0)-|"
+                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:metrics
+                                                                       views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_progressView(==d)]-(>=0)-|"
+                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                     metrics:metrics
+                                                                       views:views]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView
                                                          attribute:NSLayoutAttributeCenterX
                                                          relatedBy:NSLayoutRelationEqual
@@ -134,13 +145,11 @@
         _circleLayer.strokeColor = self.tintColor.CGColor;
         _circleLayer.lineWidth = 1;
         
-        
         [_progressView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
         [_progressView.layer addSublayer:_circleLayer];
         
         _textLabel.isAccessibilityElement = NO;
         _timeLabel.isAccessibilityElement = NO;
-        
     }
     return self;
 }
@@ -150,7 +159,6 @@
 }
 
 - (void)startAnimateWithDuration:(NSTimeInterval)duration {
-    
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = duration*2;
     animation.removedOnCompletion = YES;
@@ -158,7 +166,6 @@
     animation.keyTimes =  @[@(0.0), @(0.5), @(1.0)];
     animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     [_circleLayer addAnimation:animation forKey:@"drawCircleAnimation"];
-
 }
 
 #pragma mark Accessibility
@@ -184,12 +191,12 @@
 
 @end
 
+
 @implementation ORKCountdownStepViewController {
     NSInteger _countDown;
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = NO;
@@ -226,7 +233,6 @@
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-
     _countDown = MAX((_countDown-1), 0);
     [self updateCountdownLabel];
     
@@ -240,17 +246,13 @@
                                                               [super countDownTimerFired:timer finished:finished];
                                                           }];
             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_ANNOUNCE_BEGIN_TASK", nil));
-        }
-        else {
+        } else {
             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [@(_countDown) stringValue]);
             [super countDownTimerFired:timer finished:finished];
         }
-    }
-    else
-    {
+    } else {
         [super countDownTimerFired:timer finished:finished];
     }
 }
-
 
 @end

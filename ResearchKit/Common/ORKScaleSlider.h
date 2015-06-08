@@ -31,12 +31,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface ORKScaleSlider : UISlider
 
 @property (nonatomic, assign) BOOL showThumb;
 
 @property (nonatomic, assign) NSUInteger numberOfSteps;
 
+@property (nonatomic, assign, getter=isVertical) BOOL vertical;
+
 @end
-
-

@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSpatialSpanMemoryStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKActiveStep_Internal.h"
@@ -44,6 +45,7 @@
 #import <QuartzCore/CABase.h>
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKActiveStepView.h"
+
 
 static const NSTimeInterval kMemoryGameActivityTimeout = 20;
 
@@ -83,6 +85,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 @end
 
+
 @implementation ORKState;
 
 + (ORKState *)stateWithState:(NSInteger)state entryHandler:(_ORKStateHandler)entryHandler exitHandler:(_ORKStateHandler)exitHandler context:(id)context {
@@ -94,15 +97,15 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     return s;
 }
 
+@end
+
+
+@interface ORKSpatialSpanMemoryStepViewController () <ORKSpatialSpanMemoryGameViewDelegate>
 
 @end
 
-@interface ORKSpatialSpanMemoryStepViewController() <ORKSpatialSpanMemoryGameViewDelegate>
 
-@end
-
-@implementation ORKSpatialSpanMemoryStepViewController
-{
+@implementation ORKSpatialSpanMemoryStepViewController {
     ORKSpatialSpanMemoryContentView *_contentView;
     ORKState *_state;
     NSDictionary *_states;
@@ -126,7 +129,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     
     NSTimer *_playbackTimer;
     NSTimer *_activityTimer;
-
 }
 
 - (ORKSpatialSpanMemoryStep *)spatialSpanStep {
@@ -134,7 +136,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 - (instancetype)initWithStep:(ORKStep *)step {
-    
     self = [super initWithStep:step];
     if (self) {
         self.suspendIfInactive = YES;
@@ -143,7 +144,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 #pragma mark Overrides
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -154,14 +154,13 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.gameView.delegate = self;
     self.activeStepView.activeCustomView = _contentView;
     self.activeStepView.stepViewFillsAvailableSpace = NO;
-    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForScreenType(ORKScreenMetricMinimumStepHeaderHeightForMemoryGame, ORKGetScreenTypeForWindow(self.view.window));
+    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForMemoryGame, self.view.window);
     
     [self resetUI];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUserTap:)];
     [self.activeStepView addGestureRecognizer:tapGestureRecognizer];
 }
-
 
 - (void)stepDidChange {
     [super stepDidChange];
@@ -179,6 +178,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     
     [self transitionToState:ORKSpatialSpanStepStatePlayback];
 }
+
 - (void)suspend {
     [super suspend];
     switch (_state.state) {
@@ -190,26 +190,27 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             break;
     }
 }
+
 - (void)resume {
     [super resume];
 }
+
 - (void)finish {
     [super finish];
     [self transitionToState:ORKSpatialSpanStepStateStopped];
 }
 
-
 - (ORKStepResult *)result {
-    ORKStepResult *sResult = [super result];
+    ORKStepResult *stepResult = [super result];
     
     // "Now" is the end time of the result, which is either actually now,
     // or the last time we were in the responder chain.
-    NSDate *now = sResult.endDate;
+    NSDate *now = stepResult.endDate;
     
-    NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
+    NSMutableArray *results = [NSMutableArray arrayWithArray:stepResult.results];
     
-    ORKSpatialSpanMemoryResult *memoryResult = [[ORKSpatialSpanMemoryResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    memoryResult.startDate = sResult.startDate;
+    ORKSpatialSpanMemoryResult *memoryResult = [[ORKSpatialSpanMemoryResult alloc] initWithIdentifier:self.step.identifier];
+    memoryResult.startDate = stepResult.startDate;
     memoryResult.endDate = now;
     
     NSMutableArray *records = [NSMutableArray new];
@@ -224,8 +225,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             
             score += record.score;
             
-            if (record.gameStatus != ORKSpatialSpanMemoryGameStatusSuccess)
-            {
+            if (record.gameStatus != ORKSpatialSpanMemoryGameStatusSuccess) {
                 numberOfFailures++;
             }
         }
@@ -237,9 +237,9 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     memoryResult.gameRecords = [records copy];
     
     [results addObject:memoryResult];
-    sResult.results = [results copy];
+    stepResult.results = [results copy];
     
-    return sResult;
+    return stepResult;
 }
 
 #pragma mark UpdateGameRecord
@@ -249,7 +249,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 - (void)createGameRecord {
-    
     if (_gameRecords == nil) {
         _gameRecords = [NSMutableArray new];
     }
@@ -268,8 +267,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _lastRoundScore = _score;
 }
 
-- (void)updateGameRecordTargetRects
-{
+- (void)updateGameRecordTargetRects {
     ORKSpatialSpanMemoryGameRecord *record = [self currentGameRecord];
     NSArray *tileViews = _contentView.gameView.tileViews;
     NSMutableArray *targetRects = [NSMutableArray new];
@@ -281,21 +279,18 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     NSAssert(tileViews.count == 0 || tileViews.count == record.gameSize, nil);
 }
 
-- (void)updateGameRecordOnStartingGamePlay
-{
+- (void)updateGameRecordOnStartingGamePlay {
     _gameStartTime = CACurrentMediaTime();
 }
 
-- (void)handleUserTap:(UITapGestureRecognizer *)tapRecognizer
-{
+- (void)handleUserTap:(UITapGestureRecognizer *)tapRecognizer {
     if (_state.state != ORKSpatialSpanStepStateGameplay) {
         return;
     }
     [self updateGameRecordOnTouch:-1 location:[tapRecognizer locationInView: self.view]];
 }
 
-- (void)updateGameRecordOnTouch:(NSInteger)targetIndex location:(CGPoint)location
-{
+- (void)updateGameRecordOnTouch:(NSInteger)targetIndex location:(CGPoint)location {
     ORKSpatialSpanMemoryGameTouchSample *sample = [ORKSpatialSpanMemoryGameTouchSample new];
     
     sample.timestamp = CACurrentMediaTime() - _gameStartTime;
@@ -321,34 +316,27 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     [sampleArray addObject:sample];
     
     record.touchSamples = [sampleArray copy];
-    
 }
 
-- (void)updateGameRecordOnSuccess
-{
+- (void)updateGameRecordOnSuccess {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusSuccess;
 }
 
-- (void)updateGameRecordOnFailure
-{
+- (void)updateGameRecordOnFailure {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusFailure;
 }
 
-- (void)updateGameRecordOnTimeout
-{
+- (void)updateGameRecordOnTimeout {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusTimeout;
 }
 
-- (void)updateGameRecordScore
-{
+- (void)updateGameRecordScore {
     [self currentGameRecord].score = _score - _lastRoundScore;
 }
 
-- (void)updateGameRecordOnPause
-{
+- (void)updateGameRecordOnPause {
     [self currentGameRecord].gameStatus = ORKSpatialSpanMemoryGameStatusUnknown;
 }
-
 
 #pragma mark ORKSpatialSpanStepStateInitial
 
@@ -397,9 +385,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     [self createGameRecord];
     
     [self resetUI];
-    
 }
-
 
 #pragma mark ORKSpatialSpanStepStatePlayback
 
@@ -453,7 +439,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     NSString *title = [NSString stringWithFormat:ORKLocalizedString(@"MEMORY_GAME_PLAYBACK_TITLE_%@", nil), step.customTargetPluralName ? : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TARGET_PLURAL", nil)];
     
     [self.activeStepView updateTitle:title text:nil];
-    
     
     [_contentView.gameView resetTilesAnimated:NO];
     
@@ -521,7 +506,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _activityTimer = nil;
 }
 
-
 - (void)gameView:(ORKSpatialSpanMemoryGameView *)gameView didTapTileWithIndex:(NSInteger)tileIndex recognizer:(UITapGestureRecognizer *)recognizer {
     if (_state.state != ORKSpatialSpanStepStateGameplay) {
         return;
@@ -533,6 +517,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     switch (result) {
         case ORKSpatialSpanResultIgnore:
             break;
+            
         case ORKSpatialSpanResultCorrect:
             [gameView setState:ORKSpatialSpanTargetStateCorrect forTileIndex:tileIndex animated:YES];
             NSInteger stepIndex = [_currentGameState currentStepIndex];
@@ -544,9 +529,8 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             if ([_currentGameState isComplete]) {
                 [self transitionToState:ORKSpatialSpanStepStateSuccess];
             }
-            
-            
             break;
+            
         case ORKSpatialSpanResultIncorrect:
             [gameView setState:ORKSpatialSpanTargetStateIncorrect forTileIndex:tileIndex animated:YES];
             [self transitionToState:ORKSpatialSpanStepStateFailed];
@@ -557,7 +541,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 #pragma mark ORKSpatialSpanStepStateSuccess
 
 - (void)updateGameCountersForSuccess:(BOOL)success {
-    
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
     if (success) {
         NSInteger sequenceLength = [_currentGameState.game sequenceLength];
@@ -573,7 +556,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 - (void)continueAction {
-    
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
     if (_gamesCounter < step.maxTests && _consecutiveGamesFailed < step.maxConsecutiveFailures) {
         // Generate a new game
@@ -585,14 +567,12 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 - (void)showSuccess {
-    
     [self updateGameRecordOnSuccess];
     
     [self updateGameCountersForSuccess:YES];
     if ([self finishIfCompletedGames]) {
         return;
     }
-    
     
     [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_COMPLETE_MESSAGE", nil)];
     
@@ -603,16 +583,13 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 
 #pragma mark ORKSpatialSpanStepStateFailed
 
-
 - (void)tryAgainAction {
     // Restart with a new, shorter game
     [self transitionToState:ORKSpatialSpanStepStateRestart];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
-
 - (BOOL)finishIfCompletedGames {
-    
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
     if (_consecutiveGamesFailed >= step.maxConsecutiveFailures || _gamesCounter >= step.maxTests) {
         [self transitionToState:ORKSpatialSpanStepStateComplete];
@@ -622,7 +599,6 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 }
 
 - (void)showFailed {
-    
     [self updateGameRecordOnFailure];
     
     [self updateGameCountersForSuccess:NO];
@@ -631,14 +607,12 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     }
     [self.activeStepView updateTitle:ORKLocalizedString(@"MEMORY_GAME_FAILED_TITLE", nil) text:ORKLocalizedString(@"MEMORY_GAME_FAILED_MESSAGE", nil)];
     
-    
     _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(tryAgainAction)];
 }
 
 #pragma mark ORKSpatialSpanStepStateTimeout
 
 - (void)showTimeout {
-    
     [self updateGameRecordOnTimeout];
     
     [self updateGameCountersForSuccess:NO];
@@ -686,37 +660,36 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     _contentView.buttonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(continueAction)];
 }
 
-
 #pragma mark State machine
 
 - (void)initializeStates {
     NSMutableDictionary *states = [NSMutableDictionary dictionary];
     
     states[@(ORKSpatialSpanStepStateInitial)] = [ORKState stateWithState:ORKSpatialSpanStepStateInitial
-                                                           entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                               [this resetGameAndUI];
-                                                           }
-                                                            exitHandler:nil context:self];
+                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                [this resetGameAndUI];
+                                                            }
+                                                             exitHandler:nil context:self];
     
     states[@(ORKSpatialSpanStepStatePlayback)] = [ORKState stateWithState:ORKSpatialSpanStepStatePlayback
-                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                     [this startPlayback];
-                                                 }
-                                                             exitHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                     [this finishPlayback];
-                                                 } context:self];
+                                                             entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                 [this startPlayback];
+                                                             }
+                                                              exitHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                  [this finishPlayback];
+                                                              } context:self];
     
     states[@(ORKSpatialSpanStepStateGameplay)] = [ORKState stateWithState:ORKSpatialSpanStepStateGameplay
-                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                                [this startGameplay];
-                                                            }
-                                                             exitHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                                 [this finishGameplay];
-                                                             } context:self];
+                                                             entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                 [this startGameplay];
+                                                             }
+                                                              exitHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                  [this finishGameplay];
+                                                              } context:self];
     
     states[@(ORKSpatialSpanStepStateSuccess)] = [ORKState stateWithState:ORKSpatialSpanStepStateSuccess
-                                                           entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                               [this showSuccess];
+                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                [this showSuccess];
                                                             }
                                                              exitHandler:nil context:self];
     
@@ -727,31 +700,31 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
                                                             exitHandler:nil context:self];
     
     states[@(ORKSpatialSpanStepStateTimeout)] = [ORKState stateWithState:ORKSpatialSpanStepStateTimeout
-                                                          entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                              [this showTimeout];
-                                                          }
-                                                           exitHandler:nil context:self];
+                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                [this showTimeout];
+                                                            }
+                                                             exitHandler:nil context:self];
     
     states[@(ORKSpatialSpanStepStateRestart)] = [ORKState stateWithState:ORKSpatialSpanStepStateRestart
-                                                           entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                               [this doRestart];
-                                                           }
-                                                            exitHandler:nil context:self];
+                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                [this doRestart];
+                                                            }
+                                                             exitHandler:nil context:self];
     
     states[@(ORKSpatialSpanStepStateComplete)] = [ORKState stateWithState:ORKSpatialSpanStepStateComplete
-                                                            entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                                [this showComplete];
-                                                            } exitHandler:nil context:self];
+                                                             entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                                 [this showComplete];
+                                                             } exitHandler:nil context:self];
     
     states[@(ORKSpatialSpanStepStateStopped)] = [ORKState stateWithState:ORKSpatialSpanStepStateStopped
-                                                           entryHandler:nil
-                                                            exitHandler:nil
-                                                                context:self];
+                                                            entryHandler:nil
+                                                             exitHandler:nil
+                                                                 context:self];
     
     states[@(ORKSpatialSpanStepStatePaused)] = [ORKState stateWithState:ORKSpatialSpanStepStatePaused
-                                                          entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
-                                                              [this showPausedFromState:from];
-                                                          } exitHandler:nil context:self];
+                                                           entryHandler:^(ORKState *from, ORKState *to, ORKSpatialSpanMemoryStepViewController *this) {
+                                                               [this showPausedFromState:from];
+                                                           } exitHandler:nil context:self];
     
     _states = states;
     
@@ -770,7 +743,5 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
         stateObject.entryHandler(oldState, stateObject, stateObject.context);
     }
 }
-
-
 
 @end

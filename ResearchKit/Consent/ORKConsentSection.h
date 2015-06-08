@@ -48,7 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
  are likely to require additional sections.
  */
 typedef NS_ENUM(NSInteger, ORKConsentSectionType) {
-
     /**
      Overview of the informed consent process.
      
@@ -56,7 +55,6 @@ typedef NS_ENUM(NSInteger, ORKConsentSectionType) {
      and provide general background information on the purpose of the study.
      */
     ORKConsentSectionTypeOverview,
-    
     
     /**
      A section informing the user that sensor data will be collected.
@@ -108,7 +106,6 @@ typedef NS_ENUM(NSInteger, ORKConsentSectionType) {
      */
     ORKConsentSectionTypeStudyTasks,
     
-    
     /**
      A section describing how to withdraw from the study.
      
@@ -145,7 +142,6 @@ typedef NS_ENUM(NSInteger, ORKConsentSectionType) {
  avoid any prepopulation.
  
  If you provide content for the `ORKConsentSection` object, be sure to use localized content.
- 
  */
 ORK_CLASS_AVAILABLE
 @interface ORKConsentSection : NSObject <NSSecureCoding, NSCopying>
@@ -179,7 +175,6 @@ ORK_CLASS_AVAILABLE
  The formal title of the section in a localized string, for use in the legal document.
  
  If the value of this property is `nil`, the value of `title` is used in the legal document instead.
- 
  */
 @property (nonatomic, copy, nullable) NSString *formalTitle;
 
@@ -210,10 +205,16 @@ ORK_CLASS_AVAILABLE
  
  In a consent review step or in PDF file generation, the value of this property is printed as the section's
  content; in a visual consent step, the content is displayed as Learn More content.
- 
- 
   */
 @property (nonatomic, copy, nullable) NSString *htmlContent;
+
+/**
+ The NSURL used to override the 'htmlContent' and 'consent' property if a document should be required.
+ 
+ This property is used to display a document when required by an authortity.
+ 
+ */
+@property (nonatomic, copy, nullable) NSURL *contentURL;
 
 /**
  A custom illustration for the consent.
@@ -225,7 +226,6 @@ ORK_CLASS_AVAILABLE
  The image is used in template rendering mode, and is tinted using the tint color.
  */
 @property (nonatomic, copy, nullable) UIImage *customImage;
-
 
 /**
  A custom Learn More button title in a localized string.
@@ -252,4 +252,3 @@ ORK_CLASS_AVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
-

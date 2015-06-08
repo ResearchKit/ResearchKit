@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,29 +28,41 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ORKConsentSection+AssetLoading.h"
-#import "ORKHelpers.h"
+
+#import <ResearchKit/ResearchKit.h>
 
 
-static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
-    
-    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
-    fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
-    return fullMovieName;
-}
+/**
+ The `ORKImageCaptureStep` class represents a step that captures an image via the device
+ camera.  A template image can optionally be overlaid the camera preview to assist in properly
+ capturing the image.
+ 
+ To use the image capture step, optionally set the `templateImage` and `templateImageInsets`
+ properties, incorporate the step into a task, and present the task with a task view controller.
+ 
+ If implementing an image capture task like this one, remember that people will
+ take your instructions literally. So, be cautious. Make sure your template image
+ is high contrast and very visible against a variety of backgrounds.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKImageCaptureStep : ORKStep
 
-NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [[UIScreen mainScreen] scale];
-    
-    NSURL *url = [ORKAssetsBundle() URLForResource:movieNameForType(type, scale) withExtension:@"m4v"];
-    if (url == nil) {
-        // This can fail on 3x devices when the display is set to zoomed. Try an asset at 2x instead.
-        url = [ORKAssetsBundle() URLForResource:movieNameForType(type, 2.0) withExtension:@"m4v"];
-    }
-    return url;
-}
+/**
+ An image to be displayed over the camera preview.
+ 
+ The image will be stretched to fit the available space while retaining its aspect ratio.
+ When choosing a size for this asset, be sure to take into account the variations in device
+ form factors.
+ */
+@property (nonatomic, strong) UIImage *templateImage;
 
-UIImage *ORKImageForConsentSectionType(ORKConsentSectionType type) {
-    NSString *imageName = [NSString stringWithFormat:@"consent_%02ld", (long)type];
-    return [[UIImage imageNamed:imageName inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-}
+/**
+ Insets to be used in positioning and sizing the `templateImage`.
+ 
+ The insets are interpreted as percentages relative to the preview frame size.  The `left`
+ and `right` insets are relative to the width of the preview frame.  The `top` and `bottom`
+ insets are relative to the height of the preview frame.
+ */
+@property (nonatomic) UIEdgeInsets templateImageInsets;
+
+@end

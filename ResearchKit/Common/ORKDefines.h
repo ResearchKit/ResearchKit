@@ -31,6 +31,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 #if defined(__cplusplus)
 #define ORK_EXTERN extern "C" __attribute__((visibility("default")))
 #else
@@ -48,7 +49,6 @@
  that have been acquired for a task or step.
  */
 typedef NS_OPTIONS(NSInteger, ORKPermissionMask) {
-    
     /// No permissions.
     ORKPermissionNone                     = 0,
     
@@ -63,6 +63,9 @@ typedef NS_OPTIONS(NSInteger, ORKPermissionMask) {
     
     /// Access to location.
     ORKPermissionCoreLocation             = (1 << 4),
+    
+    /// Access to camera.
+    ORKPermissionCamera                   = (1 << 5),
 } ORK_ENUM_AVAILABLE;
 
 
@@ -88,4 +91,15 @@ typedef NS_ENUM(NSInteger, ORKFileProtectionMode) {
     ORKFileProtectionComplete
 } ORK_ENUM_AVAILABLE;
 
+
+/**
+ Audio channel constants.
+ */
+typedef NS_ENUM(NSInteger, ORKAudioChannel) {
+    /// The left audio channel.
+    ORKAudioChannelLeft,
+    
+    /// The right audio channel.
+    ORKAudioChannelRight
+} ORK_ENUM_AVAILABLE;
 

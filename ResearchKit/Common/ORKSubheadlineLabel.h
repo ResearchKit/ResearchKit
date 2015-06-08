@@ -28,10 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLabel.h"
 
+
 /**
- *  Step's details text under title.
+ Step's details text under title.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKSubheadlineLabel : ORKLabel

@@ -31,11 +31,11 @@
 
 #import <ResearchKit/ResearchKit.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKConsentDocument;
 @class ORKConsentSignature;
-
 
 /**
  The `ORKConsentReviewStep` class is used to represent the consent review process.
@@ -69,6 +69,7 @@ ORK_CLASS_AVAILABLE
  @param identifier      The identifier for the step.
  @param signature       The signature to be collected, if any.
  @param consentDocument The consent document to be reviewed.
+ 
  @return An initialized consent review step.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier

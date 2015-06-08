@@ -32,9 +32,6 @@
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKDefines.h>
 
-@class ORKQuestionResult;
-@class ORKQuestionStep;
-@class ORKQuestionStepCustomView;
 
 /**
  The `ORKQuestionStepViewController` class is the concrete `ORKStepViewController`

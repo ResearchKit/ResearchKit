@@ -28,12 +28,14 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKAudioContentView.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
 #import "ORKLabel.h"
 #import "ORKHeadlineLabel.h"
 #import "ORKAccessibility.h"
+
 
 // The central blue region.
 static const CGFloat GraphViewBlueZoneHeight = 170;
@@ -53,6 +55,7 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 
 @end
 
+
 static const CGFloat kValueLineWidth = 4.5;
 static const CGFloat kValueLineMargin = 1.5;
 
@@ -61,17 +64,23 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLayoutConstraint *c1 = [NSLayoutConstraint constraintWithItem:self
-                                                              attribute:NSLayoutAttributeWidth
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:CGFLOAT_MAX];
-        c1.priority = UILayoutPriorityFittingSizeLevel;
-        NSLayoutConstraint *c2 = [NSLayoutConstraint constraintWithItem:self
+        NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:self
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1
+                                                                        constant:CGFLOAT_MAX];
+        constraint1.priority = UILayoutPriorityFittingSizeLevel;
+        NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self
                                                               attribute:NSLayoutAttributeHeight
                                                               relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:CGFLOAT_MAX];
-        c2.priority = UILayoutPriorityFittingSizeLevel;
-        [NSLayoutConstraint activateConstraints:@[c1,c2]];
+                                                                 toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1
+                                                                        constant:CGFLOAT_MAX];
+        constraint2.priority = UILayoutPriorityFittingSizeLevel;
+        [NSLayoutConstraint activateConstraints:@[constraint1, constraint2]];
         
 #if TARGET_IPHONE_SIMULATOR
         _values = @[@(0.2),@(0.6),@(0.55), @(0.1), @(0.75), @(0.7)];
@@ -101,39 +110,39 @@ static const CGFloat kValueLineMargin = 1.5;
 }
 
 - (void)drawRect:(CGRect)rect {
-    CGRect r = self.bounds;
+    CGRect bounds = self.bounds;
     
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
-    CGContextFillRect(ctx, r);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextFillRect(context, bounds);
     
     CGFloat scale = [self.window.screen scale];
     
-    CGFloat midY = CGRectGetMidY(r);
-    CGFloat maxX = CGRectGetMaxX(r);
-    CGFloat halfHeight = r.size.height/2;
-    CGContextSaveGState(ctx);
+    CGFloat midY = CGRectGetMidY(bounds);
+    CGFloat maxX = CGRectGetMaxX(bounds);
+    CGFloat halfHeight = bounds.size.height/2;
+    CGContextSaveGState(context);
     {
         UIBezierPath *centerLine = [UIBezierPath new];
         [centerLine moveToPoint:(CGPoint){.x=0,.y=midY}];
         [centerLine addLineToPoint:(CGPoint){.x=maxX,.y=midY}];
         
-        CGContextSetLineWidth(ctx, 1/scale);
+        CGContextSetLineWidth(context, 1/scale);
         [_keyColor setStroke];
         CGFloat lengths[2] = {3,3};
-        CGContextSetLineDash(ctx, 0, lengths, 2);
+        CGContextSetLineDash(context, 0, lengths, 2);
         
         [centerLine stroke];
     }
-    CGContextRestoreGState(ctx);
+    CGContextRestoreGState(context);
     
     CGFloat lineStep = kValueLineMargin + kValueLineWidth;
     
-    CGContextSaveGState(ctx);
+    CGContextSaveGState(context);
     {
         CGFloat x = maxX - lineStep/2;
-        CGContextSetLineWidth(ctx, kValueLineWidth);
-        CGContextSetLineCap(ctx, kCGLineCapRound);
+        CGContextSetLineWidth(context, kValueLineWidth);
+        CGContextSetLineCap(context, kCGLineCapRound);
         
         UIBezierPath *path1 = [UIBezierPath new];
         path1.lineCapStyle = kCGLineCapRound;
@@ -143,16 +152,16 @@ static const CGFloat kValueLineMargin = 1.5;
         for (NSNumber *value in [_values reverseObjectEnumerator]) {
             CGFloat floatValue = [value doubleValue];
             
-            UIBezierPath *p = nil;
+            UIBezierPath *path = nil;
             if (floatValue > _alertThreshold) {
-                p = path1;
+                path = path1;
                 [_alertColor setStroke];
             } else {
-                p = path2;
+                path = path2;
                 [_keyColor setStroke];
             }
-            [p moveToPoint:(CGPoint){.x=x,.y=midY-floatValue*halfHeight}];
-            [p addLineToPoint:(CGPoint){.x=x,.y=midY+floatValue*halfHeight}];
+            [path moveToPoint:(CGPoint){.x=x,.y=midY-floatValue*halfHeight}];
+            [path addLineToPoint:(CGPoint){.x=x,.y=midY+floatValue*halfHeight}];
             
             x -= lineStep;
             
@@ -169,29 +178,29 @@ static const CGFloat kValueLineMargin = 1.5;
         [path2 stroke];
         
     }
-    CGContextRestoreGState(ctx);
-    
+    CGContextRestoreGState(context);
 }
 
 @end
+
 
 @interface ORKAudioTimerLabel : ORKLabel
 
 @end
 
+
 @implementation ORKAudioTimerLabel
 
 + (UIFont *)defaultFont {
-    
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
     UIFontDescriptor *alternativeDescriptor = ORKFontDescriptorForLightStylisticAlternative(descriptor);
     return [UIFont fontWithDescriptor:alternativeDescriptor size:[alternativeDescriptor pointSize]+4];
 }
 
-
 @end
 
-@interface ORKAudioContentView()
+
+@interface ORKAudioContentView ()
 
 @property (nonatomic, strong) ORKHeadlineLabel *alertLabel;
 @property (nonatomic, strong) UILabel *timerLabel;
@@ -199,8 +208,8 @@ static const CGFloat kValueLineMargin = 1.5;
 
 @end
 
-@implementation ORKAudioContentView
-{
+
+@implementation ORKAudioContentView {
     NSArray *_constraints;
     NSMutableArray *_samples;
     UIColor *_keyColor;
@@ -209,8 +218,7 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        CGFloat margin = ORKStandardMarginForView(self);
-        self.layoutMargins = (UIEdgeInsets){.left=2*margin,.right=2*margin};
+        self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
         
         self.alertLabel = [ORKHeadlineLabel new];
         _alertLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -243,6 +251,12 @@ static const CGFloat kValueLineMargin = 1.5;
     [self applyKeyColor];
 }
 
+-(void)setFailed:(BOOL)failed {
+    _failed = failed;
+    _alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
+    [self updateAlertLabelHidden];
+}
+
 - (void)setFinished:(BOOL)finished {
     _finished = finished;
     [self updateAlertLabelHidden];
@@ -265,7 +279,6 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)setAlertColor:(UIColor *)alertColor {
     _alertColor = alertColor;
-    
     _alertLabel.textColor = alertColor;
     _graphView.alertColor = alertColor;
 }
@@ -281,21 +294,34 @@ static const CGFloat kValueLineMargin = 1.5;
     NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _alertLabel, _graphView);
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_graphView]-[_alertLabel]|"
-                                             options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             options:0
+                                             metrics:nil
+                                               views:views]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_alertLabel
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1 constant:0]];
+                                                       multiplier:1
+                                                         constant:0]];
+    
+    const CGFloat sideMargin = self.layoutMargins.left + (2 * ORKStandardLeftMarginForTableViewCell(self));
+    const CGFloat innerMargin = 2;
+
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_graphView]-2-[_timerLabel]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-sideMargin-[_graphView]-innerMargin-[_timerLabel]-sideMargin-|"
                                              options:NSLayoutFormatAlignAllCenterY
-                                             metrics:nil views:views]];
+                                             metrics:@{@"sideMargin": @(sideMargin), @"innerMargin": @(innerMargin)}
+                                               views:views]];
     
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_graphView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(GraphViewBlueZoneHeight+GraphViewRedZoneHeight*2)]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_graphView
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1
+                                                         constant:(GraphViewBlueZoneHeight+GraphViewRedZoneHeight*2)]];
     
     _constraints = constraints;
     [NSLayoutConstraint activateConstraints:constraints];
@@ -317,17 +343,16 @@ static const CGFloat kValueLineMargin = 1.5;
     static NSDateComponentsFormatter *_formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDateComponentsFormatter *fmt = [NSDateComponentsFormatter new];
-        fmt.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
-        fmt.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-        fmt.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-        _formatter = fmt;
+        NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
+        formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+        formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+        formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
+        _formatter = formatter;
     });
     
-    NSString *s = [_formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
-    _timerLabel.text = s;
-    _timerLabel.hidden = (s == nil);
-    
+    NSString *string = [_formatter stringFromTimeInterval:MAX(round(_timeLeft),0)];
+    _timerLabel.text = string;
+    _timerLabel.hidden = (string == nil);    
 }
 
 - (void)updateGraphSamples {
@@ -337,8 +362,8 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = [_samples lastObject];
-    BOOL hide = _finished || !([sample doubleValue] > _alertThreshold);
-    _alertLabel.hidden = hide;
+    BOOL show = (! _finished && ([sample doubleValue] > _alertThreshold)) || _failed;
+    _alertLabel.hidden = !show;
 }
 
 - (void)setSamples:(NSArray *)samples {

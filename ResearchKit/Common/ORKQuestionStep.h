@@ -33,6 +33,7 @@
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKAnswerFormat.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -63,7 +64,6 @@ ORK_CLASS_AVAILABLE
  @param title         A localized string that represents the primary text of the question.
  @param answerFormat  The format in which the answer is expected.
  */
-
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
                                      title:(nullable NSString *)title
                                     answer:(nullable ORKAnswerFormat *)answerFormat;

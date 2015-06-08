@@ -28,15 +28,16 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 typedef id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
 typedef id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
 typedef id (^ORKESerializationObjectToJSONBlock)(id object);
 typedef id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
-
 
 
 @interface ORKESerializer : NSObject
@@ -53,6 +54,7 @@ typedef id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 @end
 
+
 @interface ORKESerializer(Registration)
 
 + (void)registerSerializableClass:(Class)serializableClass
@@ -67,4 +69,3 @@ typedef id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
                             jsonToObjectBlock:(ORKESerializationJSONToObjectBlock)jsonToObjectBlock;
 
 @end
-

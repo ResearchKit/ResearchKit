@@ -29,8 +29,8 @@
  */
 
 
-
 #import <ResearchKit/ResearchKit_Private.h>
+
 
 /*
  These classes demonstrate a new recorder and recorder configuration created
@@ -42,8 +42,11 @@
 
 @end
 
+
 @interface CustomRecorderConfiguration : ORKRecorderConfiguration
 
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end

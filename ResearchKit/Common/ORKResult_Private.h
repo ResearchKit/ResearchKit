@@ -31,6 +31,7 @@
 
 #import <ResearchKit/ResearchKit_Private.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -59,6 +60,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 @interface ORKResult ()
 
 /**
@@ -78,7 +80,8 @@ ORK_CLASS_AVAILABLE
 
 @end
 
-@interface ORKQuestionResult()
+
+@interface ORKQuestionResult ()
 
 // Used internally for unit testing.
 + (nullable Class)answerClass;

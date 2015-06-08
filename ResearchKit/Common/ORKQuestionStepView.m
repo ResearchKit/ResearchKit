@@ -28,22 +28,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKQuestionStepView.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKStep_Private.h"
 
+
 @implementation ORKQuestionStepView
 
-- (void)setQuestionCustomView:(ORKQuestionStepCustomView *)questionCustomView
-{
+- (void)setQuestionCustomView:(ORKQuestionStepCustomView *)questionCustomView {
     _questionCustomView = questionCustomView;
     questionCustomView.translatesAutoresizingMaskIntoConstraints = NO;
     self.stepView = _questionCustomView;
 }
 
-- (void)setQuestionStep:(ORKQuestionStep *)step
-{
+- (void)setQuestionStep:(ORKQuestionStep *)step {
     self.continueSkipContainer.useNextForSkip = (step ? NO : YES);
     _questionStep = step;
     self.headerView.instructionLabel.hidden = ! [[_questionStep text] length];
@@ -88,7 +88,6 @@
     if (self.continueSkipContainer.skipButton != nil) {
         [elements addObject:self.continueSkipContainer.skipButton];
     }
-    
     return elements;
 }
 

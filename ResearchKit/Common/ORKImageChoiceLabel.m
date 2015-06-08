@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKImageChoiceLabel.h"
 #import "ORKSubheadlineLabel.h"
+
 
 @implementation ORKImageChoiceLabel
 
@@ -53,7 +55,6 @@
             }
         }
     }
-    
     return [super intrinsicContentSize];
 }
 

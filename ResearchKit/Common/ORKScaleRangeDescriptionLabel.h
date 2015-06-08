@@ -29,21 +29,13 @@
  */
 
 
-#import "UIApplication+ResearchKit.h"
-#import "UIResponder+ResearchKit.h"
+#import "ORKScaleRangeLabel.h"
 
-@implementation UIApplication (ResearchKit)
 
-- (UIResponder *)ork_currentFirstResponder {
-    NSMutableArray *sender = [NSMutableArray new] ;
-    [self sendAction:@selector(ork_updateCurrentFirstResponder:)
-                                               to:nil
-                                             from:sender
-                                         forEvent:nil];
-    
-    
-    return [sender firstObject];
-}
-
+/**
+ Start/End description of the range in scale slider.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKScaleRangeDescriptionLabel : ORKScaleRangeLabel
 
 @end

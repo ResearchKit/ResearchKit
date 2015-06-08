@@ -90,7 +90,10 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKSpatialSpanMemoryResult:
                 providerType = SpatialSpanMemoryResultTableViewProvider.self
-
+            
+            case is ORKReactionTimeResult:
+                providerType = ReactionTimeViewProvider.self
+            
             case is ORKFileResult:
                 providerType = FileResultTableViewProvider.self
 
@@ -99,6 +102,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKTaskResult:
                 providerType = TaskResultTableViewProvider.self
+
+            case is ORKToneAudiometryResult:
+                providerType = ToneAudiometryResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -130,7 +136,8 @@ enum ResultRow {
     // MARK: Cases
 
     case Text(String, detail: String, selectable: Bool)
-    case Image(String, image: UIImage?)
+    case TextImage(String, image: UIImage?)
+    case Image(UIImage?)
     
     // MARK: Types
     
@@ -142,6 +149,7 @@ enum ResultRow {
         case Default =          "Default"
         case NoResultSet =      "NoResultSet"
         case NoChildResults =   "NoChildResults"
+        case TextImage =        "TextImage"
         case Image =            "Image"
     }
     
@@ -238,11 +246,18 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
             
                 return cell
 
-            case let .Image(text, image):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Image.rawValue, forIndexPath: indexPath) as! ImageTableViewCell
+            case let .TextImage(text, image):
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.TextImage.rawValue, forIndexPath: indexPath) as! TextImageTableViewCell
 
                 cell.leftTextLabel.text = text
                 cell.rightImageView.image = image
+
+                return cell
+
+            case let .Image(image):
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Image.rawValue, forIndexPath: indexPath) as! ImageTableViewCell
+
+                cell.fullImageView.image = image
 
                 return cell
 
@@ -310,6 +325,7 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
         return super.resultRowsForSection(section) + [
             // The numeric value the user entered.
             ResultRow(text: "numericAnswer", detail: questionResult.numericAnswer),
+
             // The unit string that was displayed with the numeric value.
             ResultRow(text: "unit", detail: questionResult.unit)
         ]
@@ -429,12 +445,6 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
         return "Samples"
     }
     
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
@@ -470,6 +480,59 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKToneAudiometryResult` instance.
+class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+
+        return "Samples"
+    }
+
+    // MARK: ResultTableViewProvider
+
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let toneAudiometryResult = result as! ORKToneAudiometryResult
+        let rows = super.resultRowsForSection(section)
+
+        if section == 0 {
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
+            ]
+        }
+
+        // Add a `ResultRow` for each sample.
+        return rows + toneAudiometryResult.samples!.map { sample in
+            let toneSample = sample as! ORKToneAudiometrySample
+
+            let text : String
+            let detail : String
+
+            if let frequency = toneSample.frequency,
+                amplitude = toneSample.amplitude {
+                    let channelName = toneSample.channel == ORKAudioChannel.Left ? "Left" : "Right"
+
+                    text = "\(frequency) \(channelName)"
+                    detail = "\(amplitude)"
+            }
+            else {
+                text = ""
+                detail = ""
+            }
+
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
 /// Table view provider specific to an `ORKSpatialSpanMemoryResult` instance.
 class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -484,12 +547,6 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
         }
         
         return "Game Records"
-    }
-    
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
     }
     
     // MARK: ResultTableViewProvider
@@ -514,8 +571,39 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
         
         return rows + questionResult.gameRecords!.map { gameRecord in
             // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
-            return ResultRow(text: "game", detail: gameRecord.score, selectable: true)
+            return ResultRow(text: "game", detail: gameRecord.score)
         }
+    }
+}
+
+/// Table view provider specific to an `ORKReactionTimeResult` instance.
+class ReactionTimeViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "File Results"
+    }
+    
+    // MARK: ResultTableViewProvider
+
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let reactionTimeResult = result as! ORKReactionTimeResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp) ]
+        }
+        
+        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
     }
 }
 
@@ -526,13 +614,43 @@ class FileResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let questionResult = result as! ORKFileResult
         
-        return super.resultRowsForSection(section) + [
+        let rows = super.resultRowsForSection(section) + [
             // The MIME content type for the file produced.
             ResultRow(text: "contentType", detail: questionResult.contentType),
 
             // The URL of the generated file on disk.
             ResultRow(text: "fileURL", detail: questionResult.fileURL)
         ]
+
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
+            if let data = NSData(contentsOfURL: fileURL), let image = UIImage(data: data) {
+                return rows + [
+                    // The image of the generated file on disk.
+                    .Image(image)
+                ]
+            }
+        }
+        
+        return rows
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let resultRows = resultRowsForSection(indexPath.section)
+        
+        if !resultRows.isEmpty {
+            switch resultRows[indexPath.row] {
+                case .Image(.Some(let image)):
+                    // Keep the aspect ratio the same.
+                    let imageAspectRatio = image.size.width / image.size.height
+
+                    return tableView.frame.size.width / imageAspectRatio
+
+                default:
+                    break
+            }
+        }
+        
+        return UITableViewAutomaticDimension
     }
 }
 
@@ -567,15 +685,17 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "date", detail: signature.signatureDate),
             
             // The captured image.
-            .Image("signature", image: signature.signatureImage)
+            .TextImage("signature", image: signature.signatureImage)
         ]
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let lastRow = self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1
+        
         if indexPath.row == lastRow {
             return 200
         }
+       
         return UITableViewAutomaticDimension
     }
 }

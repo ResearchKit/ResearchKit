@@ -36,10 +36,10 @@
 #import "ORKActiveStepViewController.h"
 #import "ORKRecorder_Private.h"
 
+
 @implementation ORKActiveStep
 
-+ (Class)stepViewControllerClass
-{
++ (Class)stepViewControllerClass {
     return [ORKActiveStepViewController class];
 }
 
@@ -53,25 +53,23 @@
 
 - (BOOL)hasTitle {
     NSString *title = self.title;
-    return  ( title != nil && title.length > 0);
+    return  (title != nil && title.length > 0);
 }
 
 - (BOOL)hasText {
     NSString *text = self.text;
-    return  ( text != nil && text.length > 0);
+    return  (text != nil && text.length > 0);
 }
 
 - (BOOL)hasVoice {
-    return  ( _spokenInstruction != nil && _spokenInstruction.length > 0);
+    return  (_spokenInstruction != nil && _spokenInstruction.length > 0);
 }
 
 - (BOOL)isRestorable {
     return NO;
 }
 
-
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -83,8 +81,7 @@
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKActiveStep *step = [super copyWithZone:zone];
     step.stepDuration = self.stepDuration;
     step.shouldStartTimerAutomatically = self.shouldStartTimerAutomatically;
@@ -102,12 +99,9 @@
     return step;
 }
 
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self ) {
         ORK_DECODE_DOUBLE(aDecoder, stepDuration);
         ORK_DECODE_BOOL(aDecoder, shouldStartTimerAutomatically);
         ORK_DECODE_BOOL(aDecoder, shouldSpeakCountDown);
@@ -125,8 +119,7 @@
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_DOUBLE(aCoder, stepDuration);
     ORK_ENCODE_BOOL(aCoder, shouldStartTimerAutomatically);
@@ -142,8 +135,6 @@
     ORK_ENCODE_OBJ(aCoder, spokenInstruction);
     ORK_ENCODE_OBJ(aCoder, recorderConfigurations);
 }
-
-
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
@@ -162,12 +153,8 @@
             (self.shouldVibrateOnStart == castObject.shouldVibrateOnStart) &&
             (self.shouldVibrateOnFinish == castObject.shouldVibrateOnFinish) &&
             (self.shouldContinueOnFinish == castObject.shouldContinueOnFinish) &&
-            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton)) ;
+            (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
-
-
-
-
 
 - (NSSet *)requestedHealthKitTypesForReading {
     NSMutableSet *set = [NSMutableSet set];
@@ -178,11 +165,10 @@
         }
     }
     return set;
-    
 }
 
 - (ORKPermissionMask)requestedPermissions {
-    ORKPermissionMask mask = ORKPermissionNone;
+    ORKPermissionMask mask = [super requestedPermissions];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
         mask |= [config requestedPermissionMask];
     }
