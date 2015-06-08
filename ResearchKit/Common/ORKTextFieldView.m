@@ -102,8 +102,7 @@
     return textLabel;
 }
 
-- (void)ork_setSuffix:(NSString *)suffix withColor:(UIColor *)color
-{
+- (void)ork_setSuffix:(NSString *)suffix withColor:(UIColor *)color {
     CGRect previousSuffixFrame = CGRectZero;
     if (_suffixLabel) {
         previousSuffixFrame = _suffixLabel.frame;
