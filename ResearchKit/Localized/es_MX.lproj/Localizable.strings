@@ -183,7 +183,7 @@
 "TONE_AUDIOMETRY_PREP_TEXT" = "Debe escuchar un tono ahora. Ajuste el volumen con los controles laterales de su dispositivo.\n\nToque el botón cuando desee comenzar.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Toque el botón en cuanto escuche un sonido.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, izquierda";
-"TONE_LABEL_%@_RIGHT" = "%@ HZ, derecha";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, derecha";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memoria espacial";
