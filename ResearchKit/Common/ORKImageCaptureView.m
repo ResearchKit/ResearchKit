@@ -42,15 +42,13 @@
 @property (nonatomic, strong) ORKStepHeaderView *headerView;
 @property (nonatomic, strong) ORKImageCaptureCameraPreviewView *previewView;
 @property (nonatomic, strong) ORKNavigationContainerView *continueSkipContainer;
-@property (nonatomic, strong) UIBarButtonItem *skipButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *captureButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *recaptureButtonItem;
 @property (nonatomic, strong) NSMutableArray *mconstraints;
-
-@property (nonatomic) SEL continueAction;
-@property (nonatomic, assign) id continueTarget;
-@property (nonatomic, strong) NSString* continueTitle;
 
 @property (nonatomic) BOOL capturePressesIgnored;
 @property (nonatomic) BOOL retakePressesIgnored;
+@property (nonatomic) BOOL showSkipButtonItem;
 
 @end
 
@@ -69,6 +67,9 @@
         _headerView.alpha = 0;
         [self addSubview:_headerView];
         
+        _captureButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(capturePressed)];
+        _recaptureButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_RECAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(retakePressed)];
+        
         _continueSkipContainer = [ORKNavigationContainerView new];
         _continueSkipContainer.continueEnabled = YES;
         _continueSkipContainer.topMargin = 5;
@@ -80,10 +81,10 @@
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
         ORKEnableAutoLayoutForViews([dictionary allValues]);
         
-        _skipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_RECAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(retakePressed)];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
+        
+        [self updateAppearance];
     }
     return self;
 }
@@ -127,10 +128,37 @@
     
     _previewView.templateImage = imageCaptureStep.templateImage;
     _previewView.templateImageInsets = imageCaptureStep.templateImageInsets;
+    _showSkipButtonItem = imageCaptureStep.optional;
+}
+
+- (void)updateAppearance {
+    if (self.error) {
+        // Hide the template image if there is an error
+        _previewView.templateImageHidden = YES;
+        
+        // Show skip, if available, and hide the template and continue/capture button
+        _continueSkipContainer.continueButtonItem = nil;
+        _continueSkipContainer.skipButtonItem = _skipButtonItem;
+    } else if (self.capturedImage) {
+        // Hide the template image after capturing
+        _previewView.templateImageHidden = YES;
+
+        // Set the continue button to the one we've saved and configure the skip button as a recapture button
+        _continueSkipContainer.continueButtonItem = _continueButtonItem;
+        _continueSkipContainer.skipButtonItem = _recaptureButtonItem;
+    } else {
+        // Show the template image during capturing
+        _previewView.templateImageHidden = NO;
+    
+        // Change the continue button back to capture, and change the recapture button back to skip (if available)
+        _continueSkipContainer.continueButtonItem = _captureButtonItem;
+        _continueSkipContainer.skipButtonItem = _skipButtonItem;
+    }
 }
 
 - (void)setCapturedImage:(UIImage * __nullable)capturedImage {
     _previewView.capturedImage = capturedImage;
+    [self updateAppearance];
 }
 
 - (UIImage *)capturedImage {
@@ -140,12 +168,8 @@
 - (void)setError:(NSError * __nullable)error {
     _error = error;
     _headerView.alpha = error==nil ? 0 : 1;
-    _headerView.instructionLabel.text = [error.userInfo valueForKey:NSLocalizedDescriptionKey];
-    if (error && self.continueTitle) {
-        _continueSkipContainer.continueButtonItem.title = self.continueTitle;
-        _continueSkipContainer.skipButtonItem = nil;
-    }
-    
+    _headerView.instructionLabel.text = error==nil ? nil : [error.userInfo valueForKey:NSLocalizedDescriptionKey];
+    [self updateAppearance];
     [self setNeedsUpdateConstraints];
 }
 
@@ -180,10 +204,9 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
             [self.mconstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
             _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
         }
-        
-        [NSLayoutConstraint activateConstraints:_mconstraints];
     }
     
+    [NSLayoutConstraint activateConstraints:_mconstraints];
     [super updateConstraints];
 }
 
@@ -197,31 +220,16 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     [self orientationDidChange];
 }
 
-- (UIBarButtonItem *)continueButtonItem {
-    return _continueSkipContainer.continueButtonItem;
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    if (_showSkipButtonItem) {
+        _skipButtonItem = skipButtonItem;
+        [self updateAppearance];
+    }
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    // Intercept the continue button press.  This can be called multiple
-    // times with the same UIBarButtonItem, or with different UIBarButtonItems,
-    // so capture it whenever the button does not point to our selector
-    if (continueButtonItem.action != @selector(capturePressed)) {
-        self.continueAction = continueButtonItem.action;
-        self.continueTarget = continueButtonItem.target;
-        self.continueTitle = continueButtonItem.title;
-        continueButtonItem.action = @selector(capturePressed);
-        continueButtonItem.target = self;
-    }
-    
-    // If we do not have an error to show, and we haven't already gotten a captured
-    // image, then change the title of the button to be appropriate for the capture action
-    if (!self.capturedImage && !self.error) {
-        continueButtonItem.title = ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil);
-    } else if(self.capturedImage) {
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
-    }
-    
-    _continueSkipContainer.continueButtonItem = continueButtonItem;
+    _continueButtonItem = continueButtonItem;
+    [self updateAppearance];
 }
 
 - (void)capturePressed {
@@ -229,28 +237,14 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     if (_capturePressesIgnored)
         return;
     
-    // If we don't have an error to show, and we have not yet captured an image, then do so
-    if (!self.capturedImage && !self.error) {
-        // Ignore futher presses until the delegate completes
-        _capturePressesIgnored = YES;
+    // Ignore futher presses until the delegate completes
+    _capturePressesIgnored = YES;
         
-        // Capture the image via the delegate
-        [self.delegate capturePressed:^(BOOL captureSuccess){
-            if(captureSuccess) {
-                // Hide the template image after capturing
-                _previewView.templateImageHidden = YES;
-        
-                // Reset the continue button title and configure the skip button as a recapture button
-                _continueSkipContainer.continueButtonItem.title = self.continueTitle;
-                _continueSkipContainer.skipButtonItem = _skipButtonItem;
-            }
-            // Stop ignoring presses
-            _capturePressesIgnored = NO;
-        }];
-    } else {
-        // Perform the original action of the Continue button
-        [self.continueTarget performSelector:self.continueAction withObject:_continueSkipContainer.continueButtonItem afterDelay:0];
-    }
+    // Capture the image via the delegate
+    [self.delegate capturePressed:^(BOOL captureSuccess){
+        // Stop ignoring presses
+        _capturePressesIgnored = NO;
+    }];
 }
 
 - (void)retakePressed {
@@ -263,13 +257,6 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     
     // Tell the delegate to start capturing again
     [self.delegate retakePressed:^{
-        // Show the template image
-        _previewView.templateImageHidden = NO;
-    
-        // Change the continue button title back to capture, and hide the recapture button
-        _continueSkipContainer.continueButtonItem.title = ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil);
-        _continueSkipContainer.skipButtonItem = nil;
-        
         // Stop ignoring presses
         _retakePressesIgnored = NO;
     }];
