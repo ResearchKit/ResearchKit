@@ -222,7 +222,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     ORK_ENCODE_OBJ(aCoder, summary);
     ORK_ENCODE_OBJ(aCoder, content);
     ORK_ENCODE_OBJ(aCoder, htmlContent);
-    ORK_ENCODE_OBJ(aCoder, contentURL);
+    ORK_ENCODE_URL(aCoder, contentURL);
     ORK_ENCODE_IMAGE(aCoder, customImage);
     ORK_ENCODE_URL_BOOKMARK(aCoder, customAnimationURL);
     ORK_ENCODE_OBJ(aCoder, customLearnMoreButtonTitle);
