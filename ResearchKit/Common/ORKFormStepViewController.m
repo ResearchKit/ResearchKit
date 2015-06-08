@@ -882,7 +882,7 @@
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {
-    if (answer && cell.formItem.identifier) {
+    if (answer && cell.formItem.identifier && [cell isAnswerValid]) {
         [self setAnswer:answer forIdentifier:cell.formItem.identifier];
     } else if (answer == nil && cell.formItem.identifier) {
         [self removeAnswerForIdentifier:cell.formItem.identifier];

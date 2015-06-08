@@ -57,14 +57,14 @@ NS_ASSUME_NONNULL_BEGIN
                           maxLabelWidth:(CGFloat)maxLabelWidth
                              screenType:(ORKScreenType)screenType;
 
-@property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
+- (BOOL)isAnswerValid;
 
+@property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
 @property (nonatomic, copy, nullable) id answer;
 @property (nonatomic, strong, nullable) ORKFormItem *formItem;
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) ORKScreenType screenType;
-
 @property (nonatomic) CGFloat expectedLayoutWidth;
 
 @end
