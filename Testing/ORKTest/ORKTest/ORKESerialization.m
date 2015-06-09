@@ -29,6 +29,8 @@
  */
 
 
+#import <ResearchKit/ResearchKit_Private.h>
+
 #import "ORKESerialization.h"
 
 
