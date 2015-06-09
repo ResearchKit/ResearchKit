@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) id<ORKPVSATKeyboardViewDelegate> delegate;
 
-@property (nonatomic, strong) ORKBorderedButton *selectedAnswerButton;
+@property (nonatomic, weak) ORKBorderedButton *selectedAnswerButton;
 
 - (void)setEnabled:(BOOL)enabled;
 

@@ -35,120 +35,25 @@
 
 @interface ORKPVSATKeyboardView ()
 
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer2Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer3Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer4Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer5Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer6Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer7Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer8Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer9Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer10Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer11Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer12Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer13Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer14Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer15Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer16Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer17Button;
-@property (nonatomic, strong, readonly) ORKBorderedButton *answer18Button;
+@property (nonatomic, strong, readonly) NSArray *answerButtons;
+@property (nonatomic, strong) NSArray *constraints;
 
 @end
 
 
-@implementation ORKPVSATKeyboardView {
-    NSArray *_constraints;
-}
+@implementation ORKPVSATKeyboardView
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _answer2Button = [ORKBorderedButton new];
-        _answer2Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer2Button setTitle:@"2" forState:UIControlStateNormal];
-        [_answer2Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer3Button = [ORKBorderedButton new];
-        _answer3Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer3Button setTitle:@"3" forState:UIControlStateNormal];
-        [_answer3Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer4Button = [ORKBorderedButton new];
-        _answer4Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer4Button setTitle:@"4" forState:UIControlStateNormal];
-        [_answer4Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer5Button = [ORKBorderedButton new];
-        _answer5Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer5Button setTitle:@"5" forState:UIControlStateNormal];
-        [_answer5Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer6Button = [ORKBorderedButton new];
-        _answer6Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer6Button setTitle:@"6" forState:UIControlStateNormal];
-        [_answer6Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer7Button = [ORKBorderedButton new];
-        _answer7Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer7Button setTitle:@"7" forState:UIControlStateNormal];
-        [_answer7Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer8Button = [ORKBorderedButton new];
-        _answer8Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer8Button setTitle:@"8" forState:UIControlStateNormal];
-        [_answer8Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer9Button = [ORKBorderedButton new];
-        _answer9Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer9Button setTitle:@"9" forState:UIControlStateNormal];
-        [_answer9Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer10Button = [ORKBorderedButton new];
-        _answer10Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer10Button setTitle:@"10" forState:UIControlStateNormal];
-        [_answer10Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer11Button = [ORKBorderedButton new];
-        _answer11Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer11Button setTitle:@"11" forState:UIControlStateNormal];
-        [_answer11Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer12Button = [ORKBorderedButton new];
-        _answer12Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer12Button setTitle:@"12" forState:UIControlStateNormal];
-        [_answer12Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer13Button = [ORKBorderedButton new];
-        _answer13Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer13Button setTitle:@"13" forState:UIControlStateNormal];
-        [_answer13Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer14Button = [ORKBorderedButton new];
-        _answer14Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer14Button setTitle:@"14" forState:UIControlStateNormal];
-        [_answer14Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer15Button = [ORKBorderedButton new];
-        _answer15Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer15Button setTitle:@"15" forState:UIControlStateNormal];
-        [_answer15Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer16Button = [ORKBorderedButton new];
-        _answer16Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer16Button setTitle:@"16" forState:UIControlStateNormal];
-        [_answer16Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer17Button = [ORKBorderedButton new];
-        _answer17Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer17Button setTitle:@"17" forState:UIControlStateNormal];
-        [_answer17Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-        _answer18Button = [ORKBorderedButton new];
-        _answer18Button.translatesAutoresizingMaskIntoConstraints = NO;
-        [_answer18Button setTitle:@"18" forState:UIControlStateNormal];
-        [_answer18Button addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
-
-        [self addSubview:_answer2Button];
-        [self addSubview:_answer3Button];
-        [self addSubview:_answer4Button];
-        [self addSubview:_answer5Button];
-        [self addSubview:_answer6Button];
-        [self addSubview:_answer7Button];
-        [self addSubview:_answer8Button];
-        [self addSubview:_answer9Button];
-        [self addSubview:_answer10Button];
-        [self addSubview:_answer11Button];
-        [self addSubview:_answer12Button];
-        [self addSubview:_answer13Button];
-        [self addSubview:_answer14Button];
-        [self addSubview:_answer15Button];
-        [self addSubview:_answer16Button];
-        [self addSubview:_answer17Button];
-        [self addSubview:_answer18Button];
+        NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:17];
+        ORKBorderedButton *answerButton = nil;
+        for (NSUInteger i = 2; i <= 18; i++) {
+            answerButton = [self answerButtonWithTitle:@(i).stringValue];
+            [buttonsArray addObject:answerButton];
+            [self addSubview:answerButton];
+        }
+        _answerButtons = [NSArray arrayWithArray:buttonsArray];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -158,56 +63,68 @@
     return self;
 }
 
+- (ORKBorderedButton *)answerButtonWithTitle:(NSString *)title {
+    ORKBorderedButton *answerButton = [ORKBorderedButton new];
+    answerButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [answerButton setTitle:title forState:UIControlStateNormal];
+    [answerButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
+    return answerButton;
+}
+
 - (void)setEnabled:(BOOL)enabled {
-    [_answer2Button setEnabled:enabled];
-    [_answer3Button setEnabled:enabled];
-    [_answer4Button setEnabled:enabled];
-    [_answer5Button setEnabled:enabled];
-    [_answer6Button setEnabled:enabled];
-    [_answer7Button setEnabled:enabled];
-    [_answer8Button setEnabled:enabled];
-    [_answer9Button setEnabled:enabled];
-    [_answer10Button setEnabled:enabled];
-    [_answer11Button setEnabled:enabled];
-    [_answer12Button setEnabled:enabled];
-    [_answer13Button setEnabled:enabled];
-    [_answer14Button setEnabled:enabled];
-    [_answer15Button setEnabled:enabled];
-    [_answer16Button setEnabled:enabled];
-    [_answer17Button setEnabled:enabled];
-    [_answer18Button setEnabled:enabled];
+    for (ORKBorderedButton *answerButton in self.answerButtons) {
+        [answerButton setEnabled:enabled];
+    }
 }
 
 - (void)updateConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
+    if ([self.constraints count]) {
+        [NSLayoutConstraint deactivateConstraints:self.constraints];
+        self.constraints = nil;
     }
     
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraintsArray = [NSMutableArray array];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_answer2Button, _answer3Button, _answer4Button, _answer5Button, _answer6Button, _answer7Button, _answer8Button, _answer9Button, _answer10Button, _answer11Button, _answer12Button, _answer13Button, _answer14Button, _answer15Button, _answer16Button, _answer17Button, _answer18Button);
+    ORKBorderedButton *answer2Button = self.answerButtons[0];
+    ORKBorderedButton *answer3Button = self.answerButtons[1];
+    ORKBorderedButton *answer4Button = self.answerButtons[2];
+    ORKBorderedButton *answer5Button = self.answerButtons[3];
+    ORKBorderedButton *answer6Button = self.answerButtons[4];
+    ORKBorderedButton *answer7Button = self.answerButtons[5];
+    ORKBorderedButton *answer8Button = self.answerButtons[6];
+    ORKBorderedButton *answer9Button = self.answerButtons[7];
+    ORKBorderedButton *answer10Button = self.answerButtons[8];
+    ORKBorderedButton *answer11Button = self.answerButtons[9];
+    ORKBorderedButton *answer12Button = self.answerButtons[10];
+    ORKBorderedButton *answer13Button = self.answerButtons[11];
+    ORKBorderedButton *answer14Button = self.answerButtons[12];
+    ORKBorderedButton *answer15Button = self.answerButtons[13];
+    ORKBorderedButton *answer16Button = self.answerButtons[14];
+    ORKBorderedButton *answer17Button = self.answerButtons[15];
+    ORKBorderedButton *answer18Button = self.answerButtons[16];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(answer2Button, answer3Button, answer4Button, answer5Button, answer6Button, answer7Button, answer8Button, answer9Button, answer10Button, answer11Button, answer12Button, answer13Button, answer14Button, answer15Button, answer16Button, answer17Button, answer18Button);
     
     // First line of answer buttons
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_answer2Button]-[_answer3Button(==_answer2Button)]-[_answer4Button(==_answer2Button)]-[_answer5Button(==_answer2Button)]-[_answer6Button(==_answer2Button)]-[_answer7Button(==_answer2Button)]-|"
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer2Button]-[answer3Button(==answer2Button)]-[answer4Button(==answer2Button)]-[answer5Button(==answer2Button)]-[answer6Button(==answer2Button)]-[answer7Button(==answer2Button)]-|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Second line of answer buttons
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_answer8Button]-[_answer9Button(==_answer8Button)]-[_answer10Button(==_answer8Button)]-[_answer11Button(==_answer8Button)]-[_answer12Button(==_answer8Button)]"
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:[answer8Button]-[answer9Button(==answer8Button)]-[answer10Button(==answer8Button)]-[answer11Button(==answer8Button)]-[answer12Button(==answer8Button)]"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_answer8Button
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:answer8Button
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
-                                                           toItem:_answer2Button
+                                                           toItem:answer2Button
                                                         attribute:NSLayoutAttributeWidth
                                                        multiplier:1.f constant:0.f]];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_answer10Button
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:answer10Button
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
@@ -215,21 +132,21 @@
                                                        multiplier:1.f constant:0.f]];
     
     // Third line of answer buttons
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_answer13Button]-[_answer14Button(==_answer13Button)]-[_answer15Button(==_answer13Button)]-[_answer16Button(==_answer13Button)]-[_answer17Button(==_answer13Button)]-[_answer18Button(==_answer13Button)]-|"
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer13Button]-[answer14Button(==answer13Button)]-[answer15Button(==answer13Button)]-[answer16Button(==answer13Button)]-[answer17Button(==answer13Button)]-[answer18Button(==answer13Button)]-|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Align vertically
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_answer2Button]-[_answer8Button(==_answer2Button)]-[_answer13Button(==_answer2Button)]-|"
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[answer2Button]-[answer8Button(==answer2Button)]-[answer13Button(==answer2Button)]-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
-    _constraints = constraints;
-    [self addConstraints:_constraints];
+    self.constraints = constraintsArray;
+    [self addConstraints:self.constraints];
     
-    [NSLayoutConstraint activateConstraints:constraints];
+    [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
 }
 

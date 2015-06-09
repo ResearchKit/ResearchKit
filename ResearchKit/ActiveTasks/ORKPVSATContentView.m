@@ -35,23 +35,19 @@
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
 
-
-#define LAYOUT_DEBUG 0
-
 static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 
 @interface ORKPVSATContentView ()
 
 @property (nonatomic, strong) ORKSubheadlineLabel *answerCaptionLabel;
 @property (nonatomic, strong) ORKTapCountLabel *digitLabel;
+@property (nonatomic, assign) ORKScreenType screenType;
+@property (nonatomic, strong) NSArray *constraints;
 
 @end
 
 
-@implementation ORKPVSATContentView {
-    ORKScreenType _screenType;
-    NSArray *_constraints;
-}
+@implementation ORKPVSATContentView
 
 - (instancetype)init {
     self = [super init];
@@ -74,13 +70,6 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
         self.translatesAutoresizingMaskIntoConstraints = NO;
 
         [self setNeedsUpdateConstraints];
-        
-#if LAYOUT_DEBUG
-        self.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.5];
-        self.answerCaptionLabel.backgroundColor = [UIColor orangeColor];
-        self.digitLabel.backgroundColor = [UIColor greenColor];
-        _keyboardView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.25];
-#endif
     }
     
     return self;
@@ -88,7 +77,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    _digitLabel.textColor= [self tintColor];
+    self.digitLabel.textColor= [self tintColor];
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -97,52 +86,52 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 
 - (void)setAddition:(NSUInteger)additionIndex withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        _digitLabel.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.3f];
-        _digitLabel.text = @"-";
+        self.digitLabel.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        self.digitLabel.text = @"-";
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];
-        _digitLabel.textColor= [self tintColor];
-        _digitLabel.text = digit.stringValue;
+        self.digitLabel.textColor= [self tintColor];
+        self.digitLabel.text = digit.stringValue;
         if (additionIndex == 0) {
-            _answerCaptionLabel.text = ORKLocalizedString(@"PVSAT_INITIAL_ADDITION", nil);
+            self.answerCaptionLabel.text = ORKLocalizedString(@"PVSAT_INITIAL_ADDITION", nil);
         } else {
-            _answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_ADDITION_%@", nil), @(additionIndex), @(ORKPVSATNumberOfAdditions)];
+            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_ADDITION_%@", nil), @(additionIndex), @(ORKPVSATNumberOfAdditions)];
         }
     }
 }
 
 - (void)updateConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
+    if ([self.constraints count]) {
+        [NSLayoutConstraint deactivateConstraints:self.constraints];
+        self.constraints = nil;
     }
     
-    const CGFloat ORKPVSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewWidth, _screenType);
-    const CGFloat ORKPVSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewHeight, _screenType);
+    const CGFloat ORKPVSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewWidth, self.screenType);
+    const CGFloat ORKPVSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewHeight, self.screenType);
     
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraintsArray = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_answerCaptionLabel, _digitLabel, _keyboardView);
     
-    [constraints addObjectsFromArray:
+    [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-[_keyboardView(==%f)]-|", ORKPVSATKeyboardWidth]
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
-    [constraints addObjectsFromArray:
+    [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[_keyboardView(==%f)]", ORKPVSATKeyboardHeight]
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
-    [constraints addObjectsFromArray:
+    [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_answerCaptionLabel][_digitLabel]-(>=10)-[_keyboardView]-|"
                                              options:NSLayoutFormatAlignAllCenterX
                                              metrics:nil views:views]];
     
-    _constraints = constraints;
-    [self addConstraints:_constraints];
+    self.constraints = constraintsArray;
+    [self addConstraints:self.constraints];
     
-    [NSLayoutConstraint activateConstraints:constraints];
+    [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
 }
 

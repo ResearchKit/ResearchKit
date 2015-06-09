@@ -41,17 +41,16 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 @interface ORKPVSATStepViewController ()
 
 @property (nonatomic, strong) NSMutableArray *samples;
+@property (nonatomic, strong) ORKPVSATContentView *pvsatContentView;
+@property (nonatomic, strong) NSArray *digits;
+@property (nonatomic, assign) NSUInteger currentDigitIndex;
+@property (nonatomic, assign) NSInteger currentAnswer;
+@property (nonatomic, assign) NSTimeInterval answerStart;
+@property (nonatomic, assign) NSTimeInterval answerEnd;
 
 @end
 
-@implementation ORKPVSATStepViewController {
-    ORKPVSATContentView *_pvsatContentView;
-    NSArray *_digits;
-    NSUInteger _currentDigitIndex;
-    NSInteger _currentAnswer;
-    NSTimeInterval _answerStart;
-    NSTimeInterval _answerEnd;
-}
+@implementation ORKPVSATStepViewController
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
@@ -89,10 +88,10 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     [super viewDidLoad];
     
     self.activeStepView.stepViewFillsAvailableSpace = YES;
-    _pvsatContentView = [[ORKPVSATContentView alloc] init];
-    _pvsatContentView.keyboardView.delegate = self;
-    [_pvsatContentView setEnabled:NO];
-    self.activeStepView.activeCustomView = _pvsatContentView;
+    self.pvsatContentView = [[ORKPVSATContentView alloc] init];
+    self.pvsatContentView.keyboardView.delegate = self;
+    [self.pvsatContentView setEnabled:NO];
+    self.activeStepView.activeCustomView = self.pvsatContentView;
 }
 
 - (ORKStepResult *)result {
@@ -103,7 +102,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     
     ORKPVSATResult *PVSATResult = [[ORKPVSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
     PVSATResult.version = [self pvsatStep].version;
-    PVSATResult.initialDigit = [(NSNumber *)[_digits objectAtIndex:0] integerValue];
+    PVSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
     NSInteger totalCorrect = 0;
     CGFloat totalTime = 0.0;
     for (ORKPVSATSample *sample in self.samples) {
@@ -114,7 +113,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     }
     PVSATResult.totalCorrect = totalCorrect;
     PVSATResult.totalTime = totalTime;
-    PVSATResult.samples = _samples;
+    PVSATResult.samples = self.samples;
 
     [results addObject:PVSATResult];
     
@@ -126,11 +125,11 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 - (void)start {
     [super start];
     
-    _digits = [self arrayWithPVSATDigits];
-    _currentDigitIndex = 0;
-    [_pvsatContentView setAddition:_currentDigitIndex withDigit:[_digits objectAtIndex:_currentDigitIndex]];
-    _currentAnswer = -1;
-    _samples = [NSMutableArray array];
+    self.digits = [self arrayWithPVSATDigits];
+    self.currentDigitIndex = 0;
+    [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    self.currentAnswer = -1;
+    self.samples = [NSMutableArray array];
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
@@ -140,24 +139,24 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     NSUInteger remainder = runtimeValue % pvsatVersion;
     
     if (remainder == 1) {
-        [_pvsatContentView setAddition:_currentDigitIndex withDigit:@(-1)];
+        [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:@(-1)];
     } else if (remainder == 0) {
-        if (_currentDigitIndex == 0) {
-            [_pvsatContentView setEnabled:YES];
+        if (self.currentDigitIndex == 0) {
+            [self.pvsatContentView setEnabled:YES];
             [self.activeStepView updateTitle:ORKLocalizedString(@"PVSAT_INSTRUCTION", nil) text:nil];
         } else {
             [self saveSample];
         }
         
-        _currentDigitIndex++;
-        _answerStart = CACurrentMediaTime();
-        _answerEnd = 0;
+        self.currentDigitIndex++;
+        self.answerStart = CACurrentMediaTime();
+        self.answerEnd = 0;
         
-        if (_currentDigitIndex <= ORKPVSATNumberOfAdditions) {
-            [_pvsatContentView setAddition:_currentDigitIndex withDigit:[_digits objectAtIndex:_currentDigitIndex]];
+        if (self.currentDigitIndex <= ORKPVSATNumberOfAdditions) {
+            [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
         }
         
-        _currentAnswer = -1;
+        self.currentAnswer = -1;
     }
     
     [super countDownTimerFired:timer finished:finished];
@@ -165,12 +164,12 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 
 - (void)saveSample {
     ORKPVSATSample *sample = [[ORKPVSATSample alloc] init];
-    NSInteger previousDigit = [(NSNumber *)[_digits objectAtIndex:_currentDigitIndex-1] integerValue];
-    NSInteger currentDigit = [(NSNumber *)[_digits objectAtIndex:_currentDigitIndex] integerValue];
-    sample.correct = previousDigit + currentDigit == _currentAnswer ? YES : NO;
+    NSInteger previousDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex-1] integerValue];
+    NSInteger currentDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex] integerValue];
+    sample.correct = previousDigit + currentDigit == self.currentAnswer ? YES : NO;
     sample.digit = currentDigit;
-    sample.answer = _currentAnswer;
-    sample.time = _answerEnd == 0 ? ([self pvsatStep].version == ORKPVSATVersionTwoSecond ? 2.0 : 3.0) : _answerEnd - _answerStart;
+    sample.answer = self.currentAnswer;
+    sample.time = self.answerEnd == 0 ? ([self pvsatStep].version == ORKPVSATVersionTwoSecond ? 2.0 : 3.0) : self.answerEnd - self.answerStart;
     
     [self.samples addObject:sample];
 }
@@ -178,8 +177,8 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 #pragma mark - keyboard view delegate
 
 - (void)keyboardView:(ORKPVSATKeyboardView *)keyboardView didSelectAnswer:(NSInteger)answer {
-    _currentAnswer = answer;
-    _answerEnd = CACurrentMediaTime();
+    self.currentAnswer = answer;
+    self.answerEnd = CACurrentMediaTime();
 }
 
 @end
