@@ -47,85 +47,85 @@ import ResearchKit
     and are not user visible (see description in `ResultViewController`), none
     of the properties / content are localized.
 */
-func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableViewDataSource, UITableViewDelegate>? {
-    if let result = result {
-        // The type that will be used to create an instance of a table view provider.
-        let providerType: ResultTableViewProvider.Type
-        
+func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableViewDataSource, UITableViewDelegate> {
+    guard let result = result else {
         /*
-            Map the type of the result to its associated `ResultTableViewProvider`.
-            To reduce the possible effects of someone modifying this code--i.e.
-            cases getting reordered and accidentally getting matches for subtypes
-            of the intended result type, we guard against any subtype matches
-            (e.g. the `ORKCollectionResult` guard against `result` being an 
-            `ORKTaskResult` instance).
+            Use a table view provider that shows that there hasn't been a recently
+            provided result.
         */
-        switch result {
-            case is ORKScaleQuestionResult:
-                providerType = ScaleQuestionResultTableViewProvider.self
-
-            case is ORKNumericQuestionResult:
-                providerType = NumericQuestionResultTableViewProvider.self
-
-            case is ORKTimeOfDayQuestionResult:
-                providerType = TimeOfDayQuestionResultTableViewProvider.self
-
-            case is ORKDateQuestionResult:
-                providerType = DateQuestionResultTableViewProvider.self
-
-            case is ORKTimeIntervalQuestionResult:
-                providerType = TimeIntervalQuestionResultTableViewProvider.self
-
-            case is ORKTextQuestionResult:
-                providerType = TextQuestionResultTableViewProvider.self
-
-            case is ORKChoiceQuestionResult:
-                providerType = ChoiceQuestionResultTableViewProvider.self
-
-            case is ORKBooleanQuestionResult:
-                providerType = BooleanQuestionResultTableViewProvider.self
-
-            case is ORKTappingIntervalResult:
-                providerType = TappingIntervalResultTableViewProvider.self
-
-            case is ORKSpatialSpanMemoryResult:
-                providerType = SpatialSpanMemoryResultTableViewProvider.self
-            
-            case is ORKReactionTimeResult:
-                providerType = ReactionTimeViewProvider.self
-            
-            case is ORKFileResult:
-                providerType = FileResultTableViewProvider.self
-
-            case is ORKConsentSignatureResult:
-                providerType = ConsentSignatureResultTableViewProvider.self
-
-            case is ORKTaskResult:
-                providerType = TaskResultTableViewProvider.self
-
-            case is ORKToneAudiometryResult:
-                providerType = ToneAudiometryResultTableViewProvider.self
-
-            /*
-                Refer to the comment near the switch statement for why the
-                additional guard is here.
-            */
-            case is ORKCollectionResult where !(result is ORKTaskResult):
-                providerType = CollectionResultTableViewProvider.self
-
-            default:
-                fatalError("No ResultTableViewProvider defined for \(NSStringFromClass(result.dynamicType)).")
-        }
-        
-        // Return a new instance of the specific `ResultTableViewProvider`.
-        return providerType(result: result)
+        return NoRecentResultTableViewProvider()
     }
+
+    // The type that will be used to create an instance of a table view provider.
+    let providerType: ResultTableViewProvider.Type
     
     /*
-        Use a table view provider that shows that there hasn't been a recently
-        provided result.
+        Map the type of the result to its associated `ResultTableViewProvider`.
+        To reduce the possible effects of someone modifying this code--i.e.
+        cases getting reordered and accidentally getting matches for subtypes
+        of the intended result type, we guard against any subtype matches
+        (e.g. the `ORKCollectionResult` guard against `result` being an 
+        `ORKTaskResult` instance).
     */
-    return NoRecentResultTableViewProvider()
+    switch result {
+        case is ORKScaleQuestionResult:
+            providerType = ScaleQuestionResultTableViewProvider.self
+
+        case is ORKNumericQuestionResult:
+            providerType = NumericQuestionResultTableViewProvider.self
+
+        case is ORKTimeOfDayQuestionResult:
+            providerType = TimeOfDayQuestionResultTableViewProvider.self
+
+        case is ORKDateQuestionResult:
+            providerType = DateQuestionResultTableViewProvider.self
+
+        case is ORKTimeIntervalQuestionResult:
+            providerType = TimeIntervalQuestionResultTableViewProvider.self
+
+        case is ORKTextQuestionResult:
+            providerType = TextQuestionResultTableViewProvider.self
+
+        case is ORKChoiceQuestionResult:
+            providerType = ChoiceQuestionResultTableViewProvider.self
+
+        case is ORKBooleanQuestionResult:
+            providerType = BooleanQuestionResultTableViewProvider.self
+
+        case is ORKTappingIntervalResult:
+            providerType = TappingIntervalResultTableViewProvider.self
+
+        case is ORKSpatialSpanMemoryResult:
+            providerType = SpatialSpanMemoryResultTableViewProvider.self
+        
+        case is ORKReactionTimeResult:
+            providerType = ReactionTimeViewProvider.self
+        
+        case is ORKFileResult:
+            providerType = FileResultTableViewProvider.self
+
+        case is ORKConsentSignatureResult:
+            providerType = ConsentSignatureResultTableViewProvider.self
+
+        case is ORKTaskResult:
+            providerType = TaskResultTableViewProvider.self
+
+        case is ORKToneAudiometryResult:
+            providerType = ToneAudiometryResultTableViewProvider.self
+
+        /*
+            Refer to the comment near the switch statement for why the
+            additional guard is here.
+        */
+        case is ORKCollectionResult where !(result is ORKTaskResult):
+            providerType = CollectionResultTableViewProvider.self
+
+        default:
+            fatalError("No ResultTableViewProvider defined for \(result.dynamicType).")
+    }
+    
+    // Return a new instance of the specific `ResultTableViewProvider`.
+    return providerType(result: result)
 }
 
 /**
@@ -162,7 +162,7 @@ enum ResultRow {
             it's "nil". Use Optional's map method to map the value to a string
             if the detail is not `nil`.
         */
-        let detailText = detail.map { toString($0) } ?? "nil"
+        let detailText = detail.map { String($0) } ?? "nil"
         
         self = .Text(text, detail: detailText, selectable: selectable)
     }
@@ -180,7 +180,7 @@ class NoRecentResultTableViewProvider: NSObject, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoResultSet.rawValue, forIndexPath: indexPath) as! UITableViewCell
+        return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoResultSet.rawValue, forIndexPath: indexPath)
     }
 }
 
@@ -207,7 +207,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let resultRows = resultRowsForSection(section)
 
@@ -224,7 +224,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         
         // Show an empty row if there isn't any metadata in the rows for this section.
         if resultRows.isEmpty {
-            return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoChildResults.rawValue, forIndexPath: indexPath) as! UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.NoChildResults.rawValue, forIndexPath: indexPath)
         }
 
         // Fetch the `ResultRow` that corresponds to `indexPath`.
@@ -232,7 +232,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         
         switch resultRow {
             case let .Text(text, detail: detailText, selectable):
-                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath) as! UITableViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(ResultRow.TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
 
                 cell.textLabel!.text = text
                 cell.detailTextLabel!.text = detailText
@@ -260,12 +260,7 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
                 cell.fullImageView.image = image
 
                 return cell
-
-            default:
-                fatalError("Unexpected result table row type.")
         }
-
-        fatalError("No cell could be created in the current context.")
     }
     
     // MARK: UITableViewDelegate
@@ -277,27 +272,25 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     // MARK: Overridable Methods
     
     func resultRowsForSection(section: Int) -> [ResultRow] {
-        if section == 0 {
-            return [
-                // The class name of the result object.
-                ResultRow(text: "type", detail: NSStringFromClass(result.dynamicType)),
-
-                /*
-                    The identifier of the result, which corresponds to the task,
-                    step or item that generated it.
-                */
-                ResultRow(text: "identifier", detail: result.identifier),
-                
-                // The start date for the result.
-                ResultRow(text: "start", detail: result.startDate),
-                
-                // The end date for the result.
-                ResultRow(text: "end", detail: result.endDate)
-            ]
-        }
-        
         // Default to an empty array.
-        return []
+        guard section == 0 else { return [] }
+        
+        return [
+            // The class name of the result object.
+            ResultRow(text: "type", detail: result.dynamicType),
+
+            /*
+                The identifier of the result, which corresponds to the task,
+                step or item that generated it.
+            */
+            ResultRow(text: "identifier", detail: result.identifier),
+            
+            // The start date for the result.
+            ResultRow(text: "start", detail: result.startDate),
+            
+            // The end date for the result.
+            ResultRow(text: "end", detail: result.endDate)
+        ]
     }
 }
 
@@ -466,8 +459,7 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
         }
         
         // Add a `ResultRow` for each sample.
-        return rows + questionResult.samples!.map { sample in
-            let tappingSample = sample as! ORKTappingSample
+        return rows + questionResult.samples!.map { tappingSample in
             
             // These tap locations are relative to the rectangle defined by `stepViewSize`.
             let buttonText = tappingSample.buttonIdentifier == .None ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
@@ -510,23 +502,14 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
         }
 
         // Add a `ResultRow` for each sample.
-        return rows + toneAudiometryResult.samples!.map { sample in
-            let toneSample = sample as! ORKToneAudiometrySample
+        return rows + toneAudiometryResult.samples!.map { toneSample in
+            let text: String
+            let detail: String
 
-            let text : String
-            let detail : String
-
-            if let frequency = toneSample.frequency,
-                amplitude = toneSample.amplitude {
-                    let channelName = toneSample.channel == ORKAudioChannel.Left ? "Left" : "Right"
-
-                    text = "\(frequency) \(channelName)"
-                    detail = "\(amplitude)"
-            }
-            else {
-                text = ""
-                detail = ""
-            }
+            let channelName = toneSample.channel == .Left ? "Left" : "Right"
+            
+            text = "\(toneSample.frequency) \(channelName)"
+            detail = "\(toneSample.amplitude)"
 
             return ResultRow(text: text, detail: detail)
         }
@@ -600,10 +583,16 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
-            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp) ]
+            return rows + [
+                ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp)
+            ]
         }
         
-        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
+        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
+        
+        return rows + [
+            ResultRow(text: "File Result", detail: fileResultDetail)
+        ]
     }
 }
 
@@ -752,7 +741,7 @@ class CollectionResultTableViewProvider: ResultTableViewProvider {
         // Show the child results in section 1.
         if section == 1 {
             return rows + collectionResult.results!.map { childResult in
-                let childResultClassName = NSStringFromClass(childResult.dynamicType)
+                let childResultClassName = "\(childResult.dynamicType)"
 
                 return ResultRow(text: childResultClassName, detail: childResult.identifier, selectable: true)
             }

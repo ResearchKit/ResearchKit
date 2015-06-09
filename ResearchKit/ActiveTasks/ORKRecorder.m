@@ -40,12 +40,14 @@
 
 @implementation ORKRecorderConfiguration
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
-        if (nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
-        }
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
     }
     return self;
@@ -82,7 +84,7 @@
     return nil;
 }
 
-- (NSSet *)requestedHealthKitTypesForReading {
+- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     return nil;
 }
 - (ORKPermissionMask)requestedPermissionMask {

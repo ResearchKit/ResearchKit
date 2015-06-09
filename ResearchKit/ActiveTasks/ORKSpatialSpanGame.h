@@ -40,6 +40,8 @@
  */
 @interface ORKSpatialSpanGame : NSObject
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized spatial span game using the specified game size, sequence length, and seed.
  

@@ -57,6 +57,8 @@ ORK_CLASS_AVAILABLE
  */
 + (instancetype)answerFormatWithCharacteristicType:(HKCharacteristicType *)characteristicType;
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized HealthKit characteristic type answer format using the specified characteristic type.
  
@@ -100,6 +102,8 @@ ORK_CLASS_AVAILABLE
  @return A HealthKit quantity answer format instance.
  */
 + (instancetype)answerFormatWithQuantityType:(HKQuantityType *)quantityType unit:(nullable HKUnit *)unit style:(ORKNumericAnswerStyle)style;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /**
  Returns an initialized HealthKit quantity answer format using the specified quantity type, unit, and numeric answer style.

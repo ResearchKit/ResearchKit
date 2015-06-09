@@ -168,6 +168,34 @@
 
 @end
 
+#define ORK_MAKE_TEST_INIT(class, block) \
+@interface class (ORKTest) \
+- (instancetype)orktest_init; \
+@end \
+\
+@implementation class (ORKTest) \
+- (instancetype)orktest_init { \
+    return block(); \
+} \
+@end \
+
+
+/*
+ Add an orktest_init method to all the classes which make init unavailable. This
+ allows us to write very short code to instantiate valid objects during these tests.
+ */
+ORK_MAKE_TEST_INIT(ORKStepNavigationRule, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKAnswerFormat, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKStep, ^{return [self initWithIdentifier:[[NSUUID UUID] UUIDString]];});
+ORK_MAKE_TEST_INIT(ORKOrderedTask, ^{return [self initWithIdentifier:@"test1" steps:nil];});
+ORK_MAKE_TEST_INIT(ORKImageChoice, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKTextChoice, ^{return [super init];});
+ORK_MAKE_TEST_INIT(ORKPredicateStepNavigationRule, ^{return [self initWithResultPredicates:@[[ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"test" expectedAnswer:YES]] destinationStepIdentifiers:@[@"test2"]];});
+ORK_MAKE_TEST_INIT(ORKRecorderConfiguration, ^{return [self initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKAccelerometerRecorderConfiguration, ^{return [super initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKHealthQuantityTypeRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKAudioRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
+ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
@@ -308,7 +336,7 @@
     // Test Each class
     for (Class aClass in classesWithORKSerialization) {
         
-        id instance = [[aClass alloc] init];
+        id instance = [self instanceForClass:aClass];
         
         // Find all properties of this class
         NSMutableArray *propertyNames = [NSMutableArray array];
@@ -347,7 +375,8 @@
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
                         } else {
-                            [instance setValue:[[p.propertyClass alloc] init] forKey:p.propertyName];
+                            id itemInstance = [self instanceForClass:p.propertyClass];
+                            [instance setValue:itemInstance forKey:p.propertyName];
                         }
                     }
                     [propertyNames addObject:p.propertyName];
@@ -371,6 +400,8 @@
             [instance setValue:[NSURL URLWithString:@"http://www.apple.com/"] forKey:@"customAnimationURL"];
         } else if ([aClass isSubclassOfClass:[ORKImageCaptureStep class]]) {
             [instance setValue:[NSValue valueWithUIEdgeInsets:(UIEdgeInsets){1,1,1,1}] forKey:@"templateImageInsets"];
+        } else if ([aClass isSubclassOfClass:[ORKTimeIntervalAnswerFormat class]]) {
+            [instance setValue:@(1) forKey:@"step"];
         }
         
         // Serialization
@@ -444,7 +475,8 @@
         // do nothing - meaningless for the equality check
         return NO;
     } else {
-        [instance setValue:[[p.propertyClass alloc] init] forKey:p.propertyName];
+        id instanceForChild = [self instanceForClass:p.propertyClass];
+        [instance setValue:instanceForChild forKey:p.propertyName];
         return NO;
     }
     return YES;
@@ -515,7 +547,7 @@
     
     // Test Each class
     for (Class aClass in classesWithSecureCoding) {
-        id instance = [[aClass alloc] init];
+        id instance = [self instanceForClass:aClass];
         
         // Find all properties of this class
         NSMutableArray *propertyNames = [NSMutableArray array];
@@ -604,6 +636,21 @@
     }
 }
 
+- (id)instanceForClass:(Class)c {
+    if (([c isSubclassOfClass:[ORKStepNavigationRule class]]) ||
+        ([c isSubclassOfClass:[ORKStep class]] ||
+         ([c isSubclassOfClass:[ORKOrderedTask class]]) ||
+         (c == [ORKTextChoice class]) ||
+         (c == [ORKImageChoice class]) ||
+         ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
+         ([c isSubclassOfClass:[ORKRecorderConfiguration class]]))
+    ) {
+        return [[c alloc] orktest_init];
+    }
+    
+    return [[c alloc] init];
+}
+
 - (void)testEquality {
     NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
     NSMutableArray *stringsForClassesExcluded = [NSMutableArray array];
@@ -640,11 +687,11 @@
                                        @"requestedHealthKitTypesForWriting",
                                        @"answer",
                                        @"firstResult",
-];
+                                       ];
     
     // Test Each class
     for (Class aClass in classesWithSecureCodingAndCopying) {
-        id instance = [[aClass alloc] init];
+        id instance = [self instanceForClass:aClass];
         
         // Find all properties of this class
         NSMutableArray *propertyNames = [NSMutableArray array];
@@ -656,7 +703,9 @@
             
             if ([propertyExclusionList containsObject: p.propertyName] == NO) {
                 if (p.isPrimitiveType == NO) {
-                    [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
+                    if ([instance valueForKey:p.propertyName] == nil) {
+                        [self applySomeValueToClassProperty:p forObject:instance index:0 forEqualityCheck:YES];
+                    }
                 }
                 [propertyNames addObject:p.propertyName];
             }

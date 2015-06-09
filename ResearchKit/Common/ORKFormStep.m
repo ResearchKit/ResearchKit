@@ -66,14 +66,6 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.optional = YES;
-        self.useSurveyMode = YES;
-    }
-    return self;
-}
 
 - (void)validateParameters {
     [super validateParameters];
@@ -129,7 +121,7 @@
     return YES;
 }
 
-- (void)setFormItems:(NSArray *)formItems {
+- (void)setFormItems:(NSArray<ORKFormItem *> *)formItems {
     // unset removed formItems
     for (ORKFormItem *item in _formItems) {
          item.step = nil;
@@ -150,9 +142,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        if ( nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-        }
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
         
         _identifier = [identifier copy];
         _text = [text copy];
