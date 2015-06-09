@@ -612,24 +612,20 @@
 
 @implementation ORKPVSATSample
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_BOOL(aCoder, correct);
     ORK_ENCODE_INTEGER(aCoder, digit);
     ORK_ENCODE_INTEGER(aCoder, answer);
     ORK_ENCODE_DOUBLE(aCoder, time);
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_BOOL(aDecoder, correct);
         ORK_DECODE_INTEGER(aDecoder, digit);
         ORK_DECODE_INTEGER(aDecoder, answer);
@@ -637,7 +633,6 @@
     }
     return self;
 }
-
 
 - (BOOL)isEqual:(id)object {
     if ([self class] != [object class]) {
@@ -652,8 +647,7 @@
             (self.time == castObject.time)) ;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKPVSATSample *sample = [[[self class] allocWithZone:zone] init];
     sample.correct = self.isCorrect;
     sample.digit = self.digit;
@@ -662,8 +656,7 @@
     return sample;
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
 }
 
@@ -672,8 +665,7 @@
 
 @implementation ORKPVSATResult
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, version);
     ORK_ENCODE_INTEGER(aCoder, totalCorrect);
@@ -682,11 +674,9 @@
     ORK_ENCODE_OBJ(aCoder, samples);
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if (self)
-    {
+    if (self) {
         ORK_DECODE_ENUM(aDecoder, version);
         ORK_DECODE_INTEGER(aDecoder, totalCorrect);
         ORK_DECODE_DOUBLE(aDecoder, totalTime);
@@ -697,8 +687,7 @@
     
 }
 
-+ (BOOL)supportsSecureCoding
-{
++ (BOOL)supportsSecureCoding {
     return YES;
 }
 
@@ -718,8 +707,7 @@
     return [super hash] ^ [self.samples hash];
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
-{
+- (instancetype)copyWithZone:(NSZone *)zone {
     ORKPVSATResult *result = [super copyWithZone:zone];
     result.version = self.version;
     result.totalCorrect = self.totalCorrect;
@@ -729,8 +717,7 @@
     return result;
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@ total correct=%@ %@", [super description], @(self.totalCorrect), self.samples];
 }
 
