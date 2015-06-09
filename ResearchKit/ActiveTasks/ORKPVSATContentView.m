@@ -31,6 +31,7 @@
 
 #import "ORKPVSATContentView.h"
 #import "ORKSkin.h"
+#import "ORKPVSATKeyboardView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"

@@ -923,16 +923,16 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                    version:(ORKPVSATVersion)version
+                           additionDuration:(NSTimeInterval)additionDuration
+                                serieLength:(NSInteger)serieLength
                                     options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
-    NSNumber *pvsatVersion = version == ORKPVSATVersionTwoSecond ? @(2) : @(3);
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_TITLE_%@", nil), pvsatVersion];
+            step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
             step.text = intendedUseDescription;
             step.detailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
             step.image = [UIImage imageNamed:@"phonepvsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -942,8 +942,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_TITLE_%@", nil), pvsatVersion];
-            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_INTRO_TEXT_2_%@", nil), pvsatVersion];
+            step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_INTRO_TEXT_2_%@", nil), @(additionDuration)];
             step.detailText = ORKLocalizedString(@"PVSAT_CALL_TO_ACTION", nil);
             
             ORKStepArrayAddStep(steps, step);
@@ -960,9 +960,9 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         ORKPVSATStep *step = [[ORKPVSATStep alloc] initWithIdentifier:ORKPVSATStepIdentifier];
         step.title = ORKLocalizedString(@"PVSAT_INITIAL_INSTRUCTION", nil);
-        NSUInteger ORKPVSATNumberOfAdditions = 60;
-        step.stepDuration = version == ORKPVSATVersionTwoSecond ? (2 * (ORKPVSATNumberOfAdditions + 1)) : (3 * (ORKPVSATNumberOfAdditions + 1));
-        step.version = version;
+        step.stepDuration = (serieLength + 1) * additionDuration;
+        step.serieLength = serieLength;
+        step.additionDuration = additionDuration;
         
         ORKStepArrayAddStep(steps, step);
     }

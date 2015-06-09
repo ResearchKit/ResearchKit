@@ -30,10 +30,11 @@
 
 
 #import "ORKCustomStepView_Internal.h"
-#import "ORKPVSATKeyboardView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKPVSATKeyboardView;
 
 @interface ORKPVSATContentView : ORKActiveStepCustomView
 

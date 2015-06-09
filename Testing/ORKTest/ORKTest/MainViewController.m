@@ -423,7 +423,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     } else if ([identifier isEqualToString:PVSATTaskIdentifier]) {
         return [ORKOrderedTask PVSATTaskWithIdentifier:PVSATTaskIdentifier
                                 intendedUseDescription:nil
-                                               version:ORKPVSATVersionThreeSecond
+                                      additionDuration:3.0
+                                           serieLength:60
                                                options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
@@ -2431,7 +2432,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
             } else if ([result isKindOfClass:[ORKPVSATResult class]]) {
                 ORKPVSATResult *pr = (ORKPVSATResult *)result;
-                NSLog(@"    %@:     %@\n    Total correct:     %@", pr.identifier, pr.samples, @(pr.totalCorrect));
+                NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

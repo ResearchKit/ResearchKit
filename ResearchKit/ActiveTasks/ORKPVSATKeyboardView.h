@@ -32,17 +32,14 @@
 #import <ResearchKit/ResearchKit.h>
 
 
-@class ORKBorderedButton;
-
-
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKBorderedButton;
 @protocol ORKPVSATKeyboardViewDelegate;
 
 @interface ORKPVSATKeyboardView : UIView
 
 @property (nonatomic, weak) id<ORKPVSATKeyboardViewDelegate> delegate;
-
 @property (nonatomic, weak) ORKBorderedButton *selectedAnswerButton;
 
 - (void)setEnabled:(BOOL)enabled;

@@ -36,8 +36,6 @@
 #import "ORKVerticalContainerView.h"
 #import "ORKActiveStepView.h"
 
-static const NSUInteger ORKPVSATNumberOfAdditions = 60;
-
 @interface ORKPVSATStepViewController ()
 
 @property (nonatomic, strong) NSMutableArray *samples;
@@ -67,9 +65,9 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 }
 
 - (NSArray *)arrayWithPVSATDigits {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:ORKPVSATNumberOfAdditions+1];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[self pvsatStep].serieLength + 1];
     NSUInteger digit = 0;
-    for (NSUInteger i = 0; i < ORKPVSATNumberOfAdditions+1; i++) {
+    for (NSUInteger i = 0; i < [self pvsatStep].serieLength + 1; i++) {
         digit = (arc4random() % (8)) + 1;
         [array addObject:@(digit)];
     }
@@ -92,6 +90,8 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     self.pvsatContentView.keyboardView.delegate = self;
     [self.pvsatContentView setEnabled:NO];
     self.activeStepView.activeCustomView = self.pvsatContentView;
+    
+    self.timerUpdateInterval = 0.1;
 }
 
 - (ORKStepResult *)result {
@@ -101,7 +101,8 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
     ORKPVSATResult *PVSATResult = [[ORKPVSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    PVSATResult.version = [self pvsatStep].version;
+    PVSATResult.duration = [self pvsatStep].additionDuration;
+    PVSATResult.length = [self pvsatStep].serieLength;
     PVSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
     NSInteger totalCorrect = 0;
     CGFloat totalTime = 0.0;
@@ -133,14 +134,14 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    NSInteger runtimeValue = (NSInteger)round(timer.runtime);
+    NSTimeInterval remainder = fmod(timer.runtime, [self pvsatStep].additionDuration);
+    NSTimeInterval timeframe = self.timerUpdateInterval / 2;
     
-    NSUInteger pvsatVersion = [self pvsatStep].version == ORKPVSATVersionTwoSecond ? 2 : 3;
-    NSUInteger remainder = runtimeValue % pvsatVersion;
-    
-    if (remainder == 1) {
+    if (remainder > (1 - timeframe) &&
+        remainder < (1 + timeframe)) {
         [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:@(-1)];
-    } else if (remainder == 0) {
+    } else if (remainder > -timeframe &&
+               remainder < timeframe) {
         if (self.currentDigitIndex == 0) {
             [self.pvsatContentView setEnabled:YES];
             [self.activeStepView updateTitle:ORKLocalizedString(@"PVSAT_INSTRUCTION", nil) text:nil];
@@ -152,7 +153,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
         self.answerStart = CACurrentMediaTime();
         self.answerEnd = 0;
         
-        if (self.currentDigitIndex <= ORKPVSATNumberOfAdditions) {
+        if (self.currentDigitIndex <= [self pvsatStep].serieLength) {
             [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
         }
         
@@ -169,7 +170,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     sample.correct = previousDigit + currentDigit == self.currentAnswer ? YES : NO;
     sample.digit = currentDigit;
     sample.answer = self.currentAnswer;
-    sample.time = self.answerEnd == 0 ? ([self pvsatStep].version == ORKPVSATVersionTwoSecond ? 2.0 : 3.0) : self.answerEnd - self.answerStart;
+    sample.time = self.answerEnd == 0 ? [self pvsatStep].additionDuration : self.answerEnd - self.answerStart;
     
     [self.samples addObject:sample];
 }

@@ -667,7 +667,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_ENUM(aCoder, version);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
+    ORK_ENCODE_INTEGER(aCoder, length);
     ORK_ENCODE_INTEGER(aCoder, totalCorrect);
     ORK_ENCODE_DOUBLE(aCoder, totalTime);
     ORK_ENCODE_INTEGER(aCoder, initialDigit);
@@ -677,7 +678,8 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_ENUM(aDecoder, version);
+        ORK_DECODE_DOUBLE(aDecoder, duration);
+        ORK_DECODE_INTEGER(aDecoder, length);
         ORK_DECODE_INTEGER(aDecoder, totalCorrect);
         ORK_DECODE_DOUBLE(aDecoder, totalTime);
         ORK_DECODE_INTEGER(aDecoder, initialDigit);
@@ -696,7 +698,8 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.version == castObject.version) &&
+            (self.duration == castObject.duration) &&
+            (self.length == castObject.length) &&
             (self.totalCorrect == castObject.totalCorrect) &&
             (self.totalTime == castObject.totalTime) &&
             (self.initialDigit == castObject.initialDigit) &&
@@ -709,7 +712,8 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPVSATResult *result = [super copyWithZone:zone];
-    result.version = self.version;
+    result.duration = self.duration;
+    result.length = self.length;
     result.totalCorrect = self.totalCorrect;
     result.totalTime = self.totalTime;
     result.initialDigit = self.initialDigit;
@@ -718,7 +722,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ total correct=%@ %@", [super description], @(self.totalCorrect), self.samples];
+    return [NSString stringWithFormat:@"%@ total correct=%@/%@ %@", [super description], @(self.totalCorrect), @(self.length),self.samples];
 }
 
 @end

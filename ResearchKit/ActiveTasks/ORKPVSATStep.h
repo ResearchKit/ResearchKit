@@ -29,7 +29,6 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
 #import <ResearchKit/ResearchKit_Private.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,7 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKPVSATStep : ORKActiveStep
 
-@property (nonatomic, assign) ORKPVSATVersion version;
+@property (nonatomic, assign) NSInteger serieLength;
+@property (nonatomic, assign) NSTimeInterval additionDuration;
 
 @end
 

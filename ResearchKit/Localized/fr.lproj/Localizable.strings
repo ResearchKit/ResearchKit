@@ -217,7 +217,7 @@
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
 /* PVSAT active task. */
-"PVSAT_TITLE_%@" = "PVSAT-%@\"";
+"PVSAT_TITLE" = "PVSAT";
 "PVSAT_INTRO_TEXT" = "Le test d'addition visuelle en série rythmée mesure votre vitesse de traitement des informations visuelles et votre capacité de calcul.";
 "PVSAT_INTRO_TEXT_2_%@" = "Des chiffres sont présentés toutes les %@ secondes.\nVous devez ajouter chaque nouveau chiffre au précédent.\nAttention, vous ne devez pas calculer un total cumulé, mais seulement la somme des deux derniers chiffres.";
 "PVSAT_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";

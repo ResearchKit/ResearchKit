@@ -613,7 +613,7 @@ enum TaskListRow: Int, Printable {
     
     /// This task presents the PVSAT pre-defined active task.
     private var PVSATTask: ORKTask {
-        return ORKOrderedTask.PVSATTaskWithIdentifier(Identifier.PVSATTask.rawValue, intendedUseDescription: exampleDescription, version: ORKPVSATVersion.ThreeSecond, options: nil)
+        return ORKOrderedTask.PVSATTaskWithIdentifier(Identifier.PVSATTask.rawValue, intendedUseDescription: exampleDescription, additionDuration: 3.0, serieLength: 60, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

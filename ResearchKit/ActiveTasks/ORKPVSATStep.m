@@ -32,7 +32,6 @@
 #import "ORKPVSATStep.h"
 #import "ORKPVSATStepViewController.h"
 
-static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 
 @implementation ORKPVSATStep
 
@@ -53,22 +52,17 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
 - (void)validateParameters {
     [super validateParameters];
 
-    NSTimeInterval const ORKPVSAT2Duration = 2 * (ORKPVSATNumberOfAdditions + 1);
-    NSTimeInterval const ORKPVSAT3Duration = 3 * (ORKPVSATNumberOfAdditions + 1);
+    NSTimeInterval const ORKPVSATAdditionMinimumDuration = 2.0;
+    NSTimeInterval const ORKPVSATAdditionMaximumDuration = 5.0;
 
-    if (self.version != ORKPVSATVersionTwoSecond &&
-        self.version != ORKPVSATVersionThreeSecond) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"version must be either %@ seconds or %@ seconds.", @(ORKPVSATVersionTwoSecond), @(ORKPVSATVersionThreeSecond)] userInfo:nil];
+    if (self.additionDuration < ORKPVSATAdditionMinimumDuration ||
+        self.additionDuration > ORKPVSATAdditionMaximumDuration) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than %@ seconds and less than %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
     }
     
-    if (self.version == ORKPVSATVersionTwoSecond &&
-        self.stepDuration != ORKPVSAT2Duration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration must be %@ seconds for the PVSAT-2\".", @(ORKPVSAT2Duration)] userInfo:nil];
-    }
-    
-    if (self.version == ORKPVSATVersionThreeSecond &&
-        self.stepDuration != ORKPVSAT3Duration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration must be %@ seconds for the PVSAT-3\".", @(ORKPVSAT3Duration)] userInfo:nil];
+    NSTimeInterval totalDuration = (self.serieLength + 1) * self.additionDuration;
+    if (self.stepDuration != totalDuration) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step duration must be equal to %@ seconds.", @(totalDuration)] userInfo:nil];
     }
 }
 

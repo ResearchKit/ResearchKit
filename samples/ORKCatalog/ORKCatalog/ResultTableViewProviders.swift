@@ -640,10 +640,12 @@ class PVSATResultTableViewProvider: ResultTableViewProvider {
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
-            let version = PVSATResult.version == ORKPVSATVersion.TwoSecond ? "PVSAT 2\"" : "PVSAT 3\""
             return rows + [
-                // The version of the PVSAT.
-                ResultRow(text: "version", detail: version),
+                // The duration for an addition of the PVSAT.
+                ResultRow(text: "duration", detail: PVSATResult.duration),
+                
+                // The serie length of the PVSAT.
+                ResultRow(text: "length", detail: PVSATResult.length),
                 
                 // The number of correct answers.
                 ResultRow(text: "totalCorrect", detail: PVSATResult.totalCorrect),
