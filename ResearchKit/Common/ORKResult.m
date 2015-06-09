@@ -610,6 +610,133 @@
 @end
 
 
+@implementation ORKPVSATSample
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    ORK_ENCODE_BOOL(aCoder, correct);
+    ORK_ENCODE_INTEGER(aCoder, digit);
+    ORK_ENCODE_INTEGER(aCoder, answer);
+    ORK_ENCODE_DOUBLE(aCoder, time);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self)
+    {
+        ORK_DECODE_BOOL(aDecoder, correct);
+        ORK_DECODE_INTEGER(aDecoder, digit);
+        ORK_DECODE_INTEGER(aDecoder, answer);
+        ORK_DECODE_DOUBLE(aDecoder, time);
+    }
+    return self;
+}
+
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.isCorrect == castObject.isCorrect) &&
+            (self.digit == castObject.digit) &&
+            (self.answer == castObject.answer) &&
+            (self.time == castObject.time)) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    ORKPVSATSample *sample = [[[self class] allocWithZone:zone] init];
+    sample.correct = self.isCorrect;
+    sample.digit = self.digit;
+    sample.answer = self.answer;
+    sample.time = self.time;
+    return sample;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
+}
+
+@end
+
+
+@implementation ORKPVSATResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, version);
+    ORK_ENCODE_INTEGER(aCoder, totalCorrect);
+    ORK_ENCODE_DOUBLE(aCoder, totalTime);
+    ORK_ENCODE_INTEGER(aCoder, initialDigit);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        ORK_DECODE_ENUM(aDecoder, version);
+        ORK_DECODE_INTEGER(aDecoder, totalCorrect);
+        ORK_DECODE_DOUBLE(aDecoder, totalTime);
+        ORK_DECODE_INTEGER(aDecoder, initialDigit);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPVSATSample);
+    }
+    return self;
+    
+}
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.version == castObject.version) &&
+            (self.totalCorrect == castObject.totalCorrect) &&
+            (self.totalTime == castObject.totalTime) &&
+            (self.initialDigit == castObject.initialDigit) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    ORKPVSATResult *result = [super copyWithZone:zone];
+    result.version = self.version;
+    result.totalCorrect = self.totalCorrect;
+    result.totalTime = self.totalTime;
+    result.initialDigit = self.initialDigit;
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ total correct=%@ %@", [super description], @(self.totalCorrect), self.samples];
+}
+
+@end
+
+
 @implementation ORKDataResult
 
 - (BOOL)isSaveable {

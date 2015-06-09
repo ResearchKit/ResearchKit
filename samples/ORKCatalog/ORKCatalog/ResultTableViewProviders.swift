@@ -105,6 +105,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKToneAudiometryResult:
                 providerType = ToneAudiometryResultTableViewProvider.self
+            
+            case is ORKPVSATResult:
+                providerType = PVSATResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -604,6 +607,64 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
         }
         
         return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
+    }
+}
+
+/// Table view provider specific to an `ORKPVSATResult` instance.
+class PVSATResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Samples"
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let PVSATResult = result as! ORKPVSATResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            let version = PVSATResult.version == ORKPVSATVersion.TwoSecond ? "PVSAT 2\"" : "PVSAT 3\""
+            return rows + [
+                // The version of the PVSAT.
+                ResultRow(text: "version", detail: version),
+                
+                // The number of correct answers.
+                ResultRow(text: "totalCorrect", detail: PVSATResult.totalCorrect),
+                
+                // The total time for the 60 answers.
+                ResultRow(text: "totalTime", detail: PVSATResult.totalTime),
+                
+                // The initial digit number.
+                ResultRow(text: "initialDigit", detail: PVSATResult.initialDigit)
+            ]
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + PVSATResult.samples!.map { sample in
+            let PVSATSample = sample as! ORKPVSATSample
+            
+            let text = String(format: "%@", PVSATSample.correct ? "correct" : "error")
+            let detail = "\(PVSATSample.answer) (digit: \(PVSATSample.digit), time: \(PVSATSample.time))"
+            
+            return ResultRow(text: text, detail: detail)
+        }
     }
 }
 

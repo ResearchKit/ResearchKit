@@ -475,6 +475,13 @@ ret =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
+   ENTRY(ORKPVSATStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPVSATStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(version, NSNumber, NSObject, YES, nil, nil),
+            })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
@@ -844,6 +851,23 @@ ret =
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKPVSATSample,
+         nil,
+         (@{
+            PROPERTY(correct, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(digit, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(answer, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(time, NSNumber, NSObject, NO, nil, nil),
+            })),
+   ENTRY(ORKPVSATResult,
+         nil,
+         (@{
+            PROPERTY(version, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalCorrect, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalTime, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(initialDigit, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(samples, ORKPVSATSample, NSArray, NO, nil, nil),
             })),
   ENTRY(ORKQuestionResult,
          nil,

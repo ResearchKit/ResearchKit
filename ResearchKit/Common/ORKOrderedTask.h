@@ -408,6 +408,32 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that consists of the paced visual serial addition test (PVSAT).
+ 
+ In a PVSAT task, the participant is asked to add a new digit to the one immediately prior to it
+ every 2 or 3 seconds.
+ 
+ A PVSAT task can be used to measure the cognitive function that assesses
+ visual information processing speed and flexibility, as well as calculation ability.
+ 
+ Data collected by the task is in the form of an `ORKPVSATResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param version                 The version (2-second or 3-second) of the PVSAT task.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active PVSAT task that can be presented with an `ORKTaskViewController` object.
+ 
+ */
++ (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
+                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    version:(ORKPVSATVersion)version
+                                    options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -53,6 +53,7 @@
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKPVSATStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -284,6 +285,7 @@ static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.
 static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
+static NSString * const ORKPVSATStepIdentifier = @"pvsat";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -915,6 +917,63 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
+    
+    return task;
+}
+
++ (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
+                     intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    version:(ORKPVSATVersion)version
+                                    options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    NSNumber *pvsatVersion = version == ORKPVSATVersionTwoSecond ? @(2) : @(3);
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_TITLE_%@", nil), pvsatVersion];
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
+            step.image = [UIImage imageNamed:@"phonepvsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_TITLE_%@", nil), pvsatVersion];
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_INTRO_TEXT_2_%@", nil), pvsatVersion];
+            step.detailText = ORKLocalizedString(@"PVSAT_CALL_TO_ACTION", nil);
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 5.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {
+        ORKPVSATStep *step = [[ORKPVSATStep alloc] initWithIdentifier:ORKPVSATStepIdentifier];
+        step.title = ORKLocalizedString(@"PVSAT_INITIAL_INSTRUCTION", nil);
+        NSUInteger ORKPVSATNumberOfAdditions = 60;
+        step.stepDuration = version == ORKPVSATVersionTwoSecond ? (2 * (ORKPVSATNumberOfAdditions + 1)) : (3 * (ORKPVSATNumberOfAdditions + 1));
+        step.version = version;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:[steps copy]];
     
     return task;
 }
