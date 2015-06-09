@@ -57,8 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
                           maxLabelWidth:(CGFloat)maxLabelWidth
                              screenType:(ORKScreenType)screenType;
 
-- (BOOL)isAnswerValid;
-
 @property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
 @property (nonatomic, copy, nullable) id answer;
 @property (nonatomic, strong, nullable) ORKFormItem *formItem;

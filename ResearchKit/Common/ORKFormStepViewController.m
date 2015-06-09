@@ -521,8 +521,19 @@
     return ([self numAnswered] == [self formItems].count);
 }
 
+- (BOOL)allAnswersValid {
+    for (ORKFormItem *item in [self formItems]) {
+        id answer = _savedAnswers[item.identifier];
+        BOOL isNonNull = answer && ![answer isKindOfClass:[NSNull class]];
+        if (isNonNull && ![item.impliedAnswerFormat isAnswerValid:answer]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    return ([self allAnswered] || (self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem)));
+    return ([self allAnswersValid] && ([self allAnswered] || (self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem))));
 }
 
 - (void)updateButtonStates {
@@ -882,7 +893,7 @@
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {
-    if (answer && cell.formItem.identifier && [cell isAnswerValid]) {
+    if (answer && cell.formItem.identifier) {
         [self setAnswer:answer forIdentifier:cell.formItem.identifier];
     } else if (answer == nil && cell.formItem.identifier) {
         [self removeAnswerForIdentifier:cell.formItem.identifier];
