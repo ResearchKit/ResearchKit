@@ -54,10 +54,18 @@
 
     NSTimeInterval const ORKPVSATAdditionMinimumDuration = 2.0;
     NSTimeInterval const ORKPVSATAdditionMaximumDuration = 5.0;
+    
+    NSInteger const ORKPVSATSerieMinimumLength = 10;
+    NSInteger const ORKPVSATSerieMaximumLength = 100;
 
     if (self.additionDuration < ORKPVSATAdditionMinimumDuration ||
         self.additionDuration > ORKPVSATAdditionMaximumDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than %@ seconds and less than %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
+    }
+    
+    if (self.serieLength < ORKPVSATSerieMinimumLength ||
+        self.serieLength > ORKPVSATSerieMaximumLength) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than %@ additions and less than %@ additions.", @(ORKPVSATSerieMinimumLength), @(ORKPVSATSerieMaximumLength)] userInfo:nil];
     }
     
     NSTimeInterval totalDuration = (self.serieLength + 1) * self.additionDuration;

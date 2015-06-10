@@ -43,6 +43,7 @@
 @property (nonatomic, strong) NSArray *digits;
 @property (nonatomic, assign) NSUInteger currentDigitIndex;
 @property (nonatomic, assign) NSInteger currentAnswer;
+@property (nonatomic, strong) ORKActiveStepTimer *timeoutTimer;
 @property (nonatomic, assign) NSTimeInterval answerStart;
 @property (nonatomic, assign) NSTimeInterval answerEnd;
 
@@ -68,7 +69,10 @@
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[self pvsatStep].serieLength + 1];
     NSUInteger digit = 0;
     for (NSUInteger i = 0; i < [self pvsatStep].serieLength + 1; i++) {
-        digit = (arc4random() % (8)) + 1;
+        do
+        {
+            digit = (arc4random() % (9)) + 1;
+        } while (digit == ((NSNumber *)[array lastObject]).integerValue);
         [array addObject:@(digit)];
     }
     return array;
@@ -91,7 +95,20 @@
     [self.pvsatContentView setEnabled:NO];
     self.activeStepView.activeCustomView = self.pvsatContentView;
     
-    self.timerUpdateInterval = 0.1;
+    self.timerUpdateInterval = [self pvsatStep].additionDuration;
+}
+
+- (void)setupTimeoutTimer {
+    [self timeoutTimerFired];
+    __weak typeof(self) weakSelf = self;
+    self.timeoutTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self pvsatStep].stepDuration
+                                                            interval:[self pvsatStep].additionDuration
+                                                             runtime:0
+                                                             handler:^(ORKActiveStepTimer *timer, BOOL finished) {
+                                                                 typeof(self) strongSelf = weakSelf;
+                                                                 [strongSelf timeoutTimerFired];
+                                                             }];
+    [self.timeoutTimer resume];
 }
 
 - (ORKStepResult *)result {
@@ -124,43 +141,59 @@
 }
 
 - (void)start {
-    [super start];
-    
     self.digits = [self arrayWithPVSATDigits];
     self.currentDigitIndex = 0;
     [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf setupTimeoutTimer];
+    });
+    
+    [super start];
+}
+
+- (void)suspend {
+    [self.timeoutTimer pause];
+    [super suspend];
+}
+
+- (void)resume {
+    [self.timeoutTimer resume];
+    [super resume];
+}
+
+- (void)finish {
+    [self.timeoutTimer reset];
+    [super finish];
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    NSTimeInterval remainder = fmod(timer.runtime, [self pvsatStep].additionDuration);
-    NSTimeInterval timeframe = self.timerUpdateInterval / 2;
-    
-    if (remainder > (1 - timeframe) &&
-        remainder < (1 + timeframe)) {
-        [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:@(-1)];
-    } else if (remainder > -timeframe &&
-               remainder < timeframe) {
-        if (self.currentDigitIndex == 0) {
-            [self.pvsatContentView setEnabled:YES];
-            [self.activeStepView updateTitle:ORKLocalizedString(@"PVSAT_INSTRUCTION", nil) text:nil];
-        } else {
-            [self saveSample];
-        }
-        
-        self.currentDigitIndex++;
-        self.answerStart = CACurrentMediaTime();
-        self.answerEnd = 0;
-        
-        if (self.currentDigitIndex <= [self pvsatStep].serieLength) {
-            [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
-        }
-        
-        self.currentAnswer = -1;
+    if (self.currentDigitIndex == 0) {
+        [self.pvsatContentView setEnabled:YES];
+        [self.activeStepView updateTitle:ORKLocalizedString(@"PVSAT_INSTRUCTION", nil) text:nil];
+    } else {
+        [self saveSample];
     }
     
+    self.currentDigitIndex++;
+    self.answerStart = CACurrentMediaTime();
+    self.answerEnd = 0;
+    
+    if (self.currentDigitIndex <= [self pvsatStep].serieLength) {
+        [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    }
+    
+    self.currentAnswer = -1;
+    
     [super countDownTimerFired:timer finished:finished];
+}
+
+- (void)timeoutTimerFired {
+    [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:@(-1)];
 }
 
 - (void)saveSample {
