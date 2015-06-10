@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ORKPVSATKeyboardView *keyboardView;
 
 - (void)setEnabled:(BOOL)enabled;
-- (void)setAddition:(NSUInteger)additionIndex withDigit:(NSNumber *)digit;
+- (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;
 
 @end
 

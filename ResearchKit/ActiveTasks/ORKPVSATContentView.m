@@ -36,8 +36,6 @@
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
 
-static const NSUInteger ORKPVSATNumberOfAdditions = 60;
-
 @interface ORKPVSATContentView ()
 
 @property (nonatomic, strong) ORKSubheadlineLabel *answerCaptionLabel;
@@ -85,7 +83,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
     [self.keyboardView setEnabled:enabled];
 }
 
-- (void)setAddition:(NSUInteger)additionIndex withDigit:(NSNumber *)digit {
+- (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
         self.digitLabel.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.3f];
         self.digitLabel.text = @"-";
@@ -96,7 +94,7 @@ static const NSUInteger ORKPVSATNumberOfAdditions = 60;
         if (additionIndex == 0) {
             self.answerCaptionLabel.text = ORKLocalizedString(@"PVSAT_INITIAL_ADDITION", nil);
         } else {
-            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_ADDITION_%@", nil), @(additionIndex), @(ORKPVSATNumberOfAdditions)];
+            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_ADDITION_%@", nil), @(additionIndex), @(totalAddition)];
         }
     }
 }

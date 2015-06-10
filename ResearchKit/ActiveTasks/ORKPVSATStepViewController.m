@@ -143,7 +143,7 @@
 - (void)start {
     self.digits = [self arrayWithPVSATDigits];
     self.currentDigitIndex = 0;
-    [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
@@ -184,7 +184,7 @@
     self.answerEnd = 0;
     
     if (self.currentDigitIndex <= [self pvsatStep].serieLength) {
-        [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+        [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
     }
     
     self.currentAnswer = -1;
@@ -193,7 +193,7 @@
 }
 
 - (void)timeoutTimerFired {
-    [self.pvsatContentView setAddition:self.currentDigitIndex withDigit:@(-1)];
+    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:@(-1)];
 }
 
 - (void)saveSample {

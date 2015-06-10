@@ -60,12 +60,12 @@
 
     if (self.additionDuration < ORKPVSATAdditionMinimumDuration ||
         self.additionDuration > ORKPVSATAdditionMaximumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than %@ seconds and less than %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
     }
     
     if (self.serieLength < ORKPVSATSerieMinimumLength ||
         self.serieLength > ORKPVSATSerieMaximumLength) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than %@ additions and less than %@ additions.", @(ORKPVSATSerieMinimumLength), @(ORKPVSATSerieMaximumLength)] userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPVSATSerieMinimumLength), @(ORKPVSATSerieMaximumLength)] userInfo:nil];
     }
     
     NSTimeInterval totalDuration = (self.serieLength + 1) * self.additionDuration;
