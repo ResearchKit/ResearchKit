@@ -278,7 +278,7 @@
 #pragma mark - Action Handlers
 
 - (void)goForward {
-
+    
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);

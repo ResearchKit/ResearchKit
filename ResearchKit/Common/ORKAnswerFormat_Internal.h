@@ -76,6 +76,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text;
 
+- (BOOL)isAnswerValid:(id)answer;
+
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
 - (nonnull Class)questionResultClass;

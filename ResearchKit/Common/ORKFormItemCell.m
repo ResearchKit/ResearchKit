@@ -158,6 +158,11 @@ static const CGFloat kHMargin = 15.0;
 - (void)answerDidChange {
 }
 
+- (BOOL)isAnswerValid {
+    // Subclasses should override this if validation of the answer is required.
+    return YES;
+}
+
 - (void)defaultAnswerDidChange {
     if (! self.haveChangedAnswer && ! self.answer) {
         if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
