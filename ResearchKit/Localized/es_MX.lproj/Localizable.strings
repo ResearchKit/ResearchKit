@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Actividad completada";
 "TASK_COMPLETE_TEXT" = "Se analizarán sus datos y se le avisará cuando los resultados estén listos.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturar imagen";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapturar imagen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No se encontraron cámaras. Este paso no se puede finalizar.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Para finalizar este paso, permita el acceso de la app a la cámara en Configuración.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No se especificó un directorio de salida para las imágenes capturadas.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "No se pudo guardar la imagen capturada.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Condición";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distancia (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Inhale profundamente y diga “Aaaaah” en el micrófono el mayor tiempo que pueda. Mantenga la misma intensidad de volumen de manera que las barras de audio permanezcan azules.";
 "AUDIO_INTENDED_USE" = "Esta actividad evalúa el habla grabándola con el micrófono en la parte inferior del teléfono.";
 "AUDIO_TOO_LOUD_LABEL" = "Demasiado fuerte";
+"AUDIO_GENERIC_ERROR_LABEL" = "No se pudo grabar audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometría tonal";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Esta actividad mide su capacidad para escuchar sonidos distintos.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de comenzar, conecte y póngase sus audífonos.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Toque Empezar para comenzar.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Debe escuchar un tono ahora. Ajuste el volumen con los controles laterales de su dispositivo.\n\nToque el botón cuando desee comenzar.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Toque el botón en cuanto escuche un sonido.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, izquierda";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, derecha";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memoria espacial";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Juego completado";
 "MEMORY_GAME_PAUSED_TITLE" = "En pausa";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Para continuar, toque Siguiente";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Tiempo de reacción";
+"REACTION_TIME_TASK_INTENDED_USE" = "Esta actividad evalúa el tiempo que le toma responder a una indicación visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite el dispositivo en cualquier dirección en cuanto el punto azul se muestre en la pantalla. Se le pedirá esto %D veces.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Toque Empezar para comenzar.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intento %D de %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agite rápidamente el dispositivo cuando se muestre el círculo azul";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se pudo crear el archivo";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorrecto";
 "AX.MEMORY.TILE.QUIESCENT" = "sin actividad";
 "AX.MEMORY.TILE.LABEL" = "Cuadro del juego de memoria";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Previsualización de captura";
 

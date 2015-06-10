@@ -427,6 +427,7 @@
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
         _tableContainer.delegate = self;
         [self.view addSubview:_tableContainer];
+        _tableContainer.tapOffView = self.view;
         
         _tableView = _tableContainer.tableView;
         _tableView.delegate = self;
@@ -465,7 +466,7 @@
         // Section header
         if ([item impliedAnswerFormat] == nil) {
             // Add new section
-            section = [[ORKTableSection alloc]  initWithSectionIndex:_sections.count];
+            section = [[ORKTableSection alloc] initWithSectionIndex:_sections.count];
             [_sections addObject:section];
             
             // Save title
@@ -504,14 +505,6 @@
             }
         }
     }
-    
-    // Remove empty sections
-    [_sections enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ORKTableSection *section = obj;
-        if (section.items.count == 0) {
-            [_sections removeObject:section];
-        }
-    }];
 }
 
 - (NSInteger)numAnswered {
@@ -528,8 +521,25 @@
     return ([self numAnswered] == [self formItems].count);
 }
 
+- (BOOL)allAnswersValid {
+    for (ORKFormItem *item in [self formItems]) {
+        id answer = _savedAnswers[item.identifier];
+        BOOL isNonNull = answer && ![answer isKindOfClass:[NSNull class]];
+        if (isNonNull && ![item.impliedAnswerFormat isAnswerValid:answer]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    return ([self allAnswered] || (self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem)));
+    //  Enable the continue button if case (1) or (2) is true below:
+    //  (1) All answers are valid and all questions are answered.
+    //  (2) All answers are valid and either:
+    //      a) The step is optional and there is no skip button.
+    //      b) The step is optional and at least one question has been answered.
+    BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
+    return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
 }
 
 - (void)updateButtonStates {
@@ -548,14 +558,13 @@
 }
 
 - (NSArray *)formItems {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[self allFormItems]];
-    
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ORKFormItem *item = obj;
-        if (item.answerFormat == nil) {
-            [array removeObject:item];
+    NSArray *formItems = [self allFormItems];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[formItems count]];
+    for (ORKFormItem *item in formItems) {
+        if (item.answerFormat != nil) {
+            [array addObject:item];
         }
-    }];
+    }
     
     return [array copy];
 }

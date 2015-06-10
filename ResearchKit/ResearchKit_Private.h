@@ -44,6 +44,7 @@
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
 #import <ResearchKit/ORKFormStepViewController.h>
+#import <ResearchKit/ORKImageCaptureStepViewController.h>
 
 // Custom steps
 #import <ResearchKit/ORKCustomStepView.h>
@@ -51,6 +52,7 @@
 // Specific active task modules
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
+#import <ResearchKit/ORKToneAudiometryPracticeStep.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStep.h>
 #import <ResearchKit/ORKWalkingTaskStep.h>
 #import <ResearchKit/ORKCountdownStep.h>
@@ -60,6 +62,7 @@
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
+#import <ResearchKit/ORKToneAudiometryPracticeStepViewController.h>
 #import <ResearchKit/ORKSpatialSpanMemoryStepViewController.h>
 #import <ResearchKit/ORKWalkingTaskStepViewController.h>
 #import <ResearchKit/ORKCountdownStepViewController.h>
@@ -71,5 +74,4 @@
 #import <ResearchKit/ORKResult_Private.h>
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
-
-
+#import <ResearchKit/ORKStepNavigationRule_Private.h>

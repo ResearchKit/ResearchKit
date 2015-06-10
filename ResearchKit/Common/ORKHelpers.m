@@ -358,7 +358,7 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
@@ -371,7 +371,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
@@ -384,7 +384,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
@@ -393,6 +393,93 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
         }
     }
     return font;
+}
+
+NSURL *ORKURLFromBookmarkData(NSData *data) {
+    if (data == nil) {
+        return nil;
+    }
+    
+    BOOL bookmarkIsStale = NO;
+    NSError *bookmarkError = nil;
+    NSURL *bookmarkURL = [NSURL URLByResolvingBookmarkData:data
+                                                   options:NSURLBookmarkResolutionWithoutUI
+                                             relativeToURL:nil
+                                       bookmarkDataIsStale:&bookmarkIsStale
+                                                     error:&bookmarkError];
+    if (!bookmarkURL) {
+        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+    }
+    
+    return bookmarkURL;
+}
+
+NSData *ORKBookmarkDataFromURL(NSURL *url) {
+    if (!url) {
+        return nil;
+    }
+    
+    NSError *error = nil;
+    NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationSuitableForBookmarkFile
+                     includingResourceValuesForKeys:nil
+                                      relativeToURL:nil
+                                              error:&error];
+    if (!bookmark) {
+        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+    }
+    return bookmark;
+}
+
+NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
+    NSURL *standardizedURL = [url URLByStandardizingPath];
+    NSURL *standardizedBaseURL = [baseURL URLByStandardizingPath];
+    
+    NSString *path = [standardizedURL absoluteString];
+    NSString *basePath = [standardizedBaseURL absoluteString];
+    
+    if ([path hasPrefix:basePath]) {
+        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        if ([relativePath hasPrefix:@"/"]) {
+            relativePath = [relativePath substringFromIndex:1];
+        }
+        return relativePath;
+    } else {
+        return path;
+    }
+}
+
+static NSURL *ORKHomeDirectoryURL() {
+    static NSURL *homeDirectoryURL = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        homeDirectoryURL = [NSURL fileURLWithPath:NSHomeDirectory()];
+    });
+    return homeDirectoryURL;
+}
+
+NSURL *ORKURLForRelativePath(NSString *relativePath) {
+    if (!relativePath) {
+        return nil;
+    }
+    
+    NSURL *homeDirectoryURL = ORKHomeDirectoryURL();
+    NSURL *url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:NO relativeToURL:homeDirectoryURL];
+    
+    if (url != nil) {
+        BOOL isDirectory = NO;;
+        BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:url.path isDirectory:&isDirectory];
+        if (fileExists && isDirectory) {
+            url = [NSURL fileURLWithFileSystemRepresentation:relativePath.fileSystemRepresentation isDirectory:YES relativeToURL:homeDirectoryURL];
+        }
+    }
+    return url;
+}
+NSString *ORKRelativePathForURL(NSURL *url) {
+    if (!url) {
+        return nil;
+    }
+    
+    return ORKPathRelativeToURL(url, ORKHomeDirectoryURL());
 }
 
 id ORKDynamicCast_(id x, Class objClass) {

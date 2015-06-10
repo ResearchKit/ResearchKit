@@ -55,7 +55,8 @@ enum TaskListRow: Int, Printable {
     case ShortWalk
     case Audio
     case ToneAudiometry
-    case DeviceMotionReactionTimeTask
+    case ReactionTime
+    case ImageCapture
     case Survey
     case Consent
     case Form
@@ -132,9 +133,12 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return NSLocalizedString("Tone Audiometry Active Task", comment: "")
 
-            case .DeviceMotionReactionTimeTask:
+            case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
             
+            case .ImageCapture:
+                return NSLocalizedString("Image Capture Task", comment: "")
+
             case .Survey:
                 return NSLocalizedString("Simple Survey", comment: "")
 
@@ -216,7 +220,11 @@ enum TaskListRow: Int, Printable {
         case ShortWalkTask =                                        "ShortWalkTask"
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
-        case DeviceMotionReactionTimeTask =                         "DeviceMotionReactionTimeTask"
+        case ReactionTime =                                         "ReactionTime"
+        
+        // Image capture task specific identifiers.
+        case ImageCaptureTask =                                    "ImageCaptureTask"
+        case ImageCaptureStep =                                    "ImageCaptureStep"
 
         // Survey task specific identifiers.
         case SurveyTask =                                           "SurveyTask"
@@ -295,8 +303,11 @@ enum TaskListRow: Int, Printable {
             case .ToneAudiometry:
                 return toneAudiometryTask
 
-            case .DeviceMotionReactionTimeTask:
-                return deviceMotionReactionTimeTask
+            case .ReactionTime:
+                return reactionTimeTask
+            
+            case .ImageCapture:
+                return imageCaptureTask
             
             case .Survey:
                 return surveyTask
@@ -588,8 +599,8 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
     }
     
-    private var deviceMotionReactionTimeTask: ORKTask {
-        return ORKOrderedTask.deviceMotionReactionTimeTaskWithIdentifier(Identifier.DeviceMotionReactionTimeTask.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    private var reactionTimeTask: ORKTask {
+        return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {
@@ -604,6 +615,33 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: nil)
     }
     
+    /// This task presents the image capture step in an ordered task.
+    private var imageCaptureTask: ORKTask {
+        var steps = [ORKStep]()
+        
+        // Create the intro step.
+        let instructionStep = ORKInstructionStep(identifier: Identifier.IntroStep.rawValue)
+        
+        instructionStep.title = NSLocalizedString("Sample Survey", comment: "")
+        
+        instructionStep.text = exampleDescription
+        
+        instructionStep.image = UIImage(named: "hand_solid")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        
+        steps += [instructionStep]
+        
+        let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
+        imageCaptureStep.optional = false
+        
+        imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
+        
+        imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
+        
+        steps += [imageCaptureStep]
+        
+        return ORKOrderedTask(identifier: Identifier.ImageCaptureTask.rawValue, steps: steps)
+    }
+
     /**
         A task demonstrating how the ResearchKit framework can be used to present a simple
         survey with an introduction, a question, and a conclusion.

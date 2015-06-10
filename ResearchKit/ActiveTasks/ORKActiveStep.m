@@ -168,7 +168,7 @@
 }
 
 - (ORKPermissionMask)requestedPermissions {
-    ORKPermissionMask mask = ORKPermissionNone;
+    ORKPermissionMask mask = [super requestedPermissions];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
         mask |= [config requestedPermissionMask];
     }

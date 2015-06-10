@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Bruce Duncan.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -341,7 +342,7 @@ ORK_CLASS_AVAILABLE
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
  @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.
- @param step                        The size of each discrete offset on the scale.
+ @param maximumFractionDigits       The maximum number of fractional digits to display.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
  @param maximumValueDescription     A localized label to describe the maximum value of the scale. For none, pass `nil`.
  @param minimumValueDescription     A localized label to describe the minimum value of the scale. For none, pass `nil`.
@@ -380,7 +381,7 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
- @param step                    The size of each discrete offset on the scale.
+ @param defaultValue            The default value of the scale. If this value is out of range, the slider is displayed without a default value.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
  
  @return An initialized scale answer format.
@@ -570,15 +571,16 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextChoice : NSObject <NSSecureCoding, NSCopying, NSObject>
 
 /**
- Returns a text choice object that includes the specified primary and detail text.
+ Returns a text choice object that includes the specified primary text, detail text, and exclusivity.
  
  @param text        The primary text that describes the choice in a localized string.
  @param detailText  The detail text to display below the primary text, in a localized string.
  @param value       The value to record in a result object when this item is selected.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
  
  @return A text choice instance.
  */
-+ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value;
++ (instancetype)choiceWithText:(NSString *)text detailText:(nullable NSString *)detailText value:(id<NSCopying, NSCoding, NSObject>)value exclusive:(BOOL)exclusive;
 
 /**
  Returns a choice object that includes the specified primary text.
@@ -591,19 +593,21 @@ ORK_CLASS_AVAILABLE
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
- Returns an initialized text choice object using the specified primary and detail text.
+ Returns an initialized text choice object using the specified primary text, detail text, and exclusivity.
  
  This method is the designated initializer.
  
  @param text        The primary text that describes the choice in a localized string.
  @param detailText  The detail text to display below the primary text, in a localized string.
  @param value       The value to record in a result object when this item is selected.
+ @param exclusive   Whether this choice is to be considered exclusive within the set of choices.
  
  @return An initialized text choice.
  */
 - (instancetype)initWithText:(NSString *)text
                   detailText:(nullable NSString *)detailText
-                       value:(id<NSCopying, NSCoding, NSObject>)value NS_DESIGNATED_INITIALIZER;
+                       value:(id<NSCopying, NSCoding, NSObject>)value
+                    exclusive:(BOOL)exclusive NS_DESIGNATED_INITIALIZER;
 
 /**
  The text that describes the choice in a localized string.
@@ -627,6 +631,13 @@ ORK_CLASS_AVAILABLE
  The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail text.
   */
 @property (copy, readonly, nullable) NSString *detailText;
+
+/**
+ In a multiple choice format, this indicates whether this choice requires all other choices to be unselected.
+ 
+ In general, this is used to indicate a "None of the above" choice.
+ */
+@property (readonly) BOOL exclusive;
 
 @end
 

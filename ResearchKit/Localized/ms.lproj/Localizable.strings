@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Pilihan Perkongsian";
 "CONSENT_SHARE_WIDELY_%@" = "Kongsi data saya dengan %@ dan penyelidik yang layak di seluruh dunia";
 "CONSENT_SHARE_ONLY_%@" = "Kongsi data saya dengan %@ sahaja";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data kajian anda daripada penyertaan anda dalam kajian ini.\n\nBerkongsi data kajian berkod anda dengan lebih luas (tanpa maklumat seperti nama anda) mungkin memberi manfaat kepada kajian ini dan kajian masa hadapan.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data kajian anda daripada penyertaan anda dalam kajian ini.\n\nBerkongsi data kajian berkod anda dengan lebih luas (tanpa maklumat seperti nama anda) mungkin memberi manfaat kepada penyelidikan ini dan penyelidikan masa hadapan.";
 "LEARN_MORE_CONSENT_SHARING" = "Ketahui lebih lanjut mengenai perkongsian data";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktiviti Selesai";
 "TASK_COMPLETE_TEXT" = "Data anda akan dianalisis dan anda akan dimaklumkan apabila keputusan anda tersedia.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Tangkap Imej";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Tangkap Semula Imej";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Tiada kamera ditemui.  Langkah ini tidak boleh dilengkapkan.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan aplikasi ini mengakses kamera dalam Seting.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan untuk imej yang ditangkap.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak boleh disimpan.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kecergasan";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Jarak (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Tarik nafas panjang dan sebut “Aaaaah” ke dalam mikrofon selama yang anda boleh. Kekalkan kelantangan suara yang tetap agar bar audio kekal biru.";
 "AUDIO_INTENDED_USE" = "Aktiviti ini menilai suara anda dengan merakamnya menggunakan mikrofon di bahagian bawah telefon anda.";
 "AUDIO_TOO_LOUD_LABEL" = "Terlalu Kuat";
+"AUDIO_GENERIC_ERROR_LABEL" = "Tidak dapat merakam audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviti ini mengukur keupayaan anda untuk mendengar bunyi berlainan.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum anda bermula, pasang dan pakai fon kepala anda.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Anda sepatutnya mendengar nada sekarang. Laraskan kelantangan menggunakan kawalan di sisi peranti anda.\n\nKetik butang apabila anda sedia untuk bermula.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Ketik butang setiap kali anda mula mendengar bunyi.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Ruang";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Permainan Selesai";
 "MEMORY_GAME_PAUSED_TITLE" = "Dijedakan";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Untuk meneruskan, ketik Seterusnya";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Masa Reaksi";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aktiviti ini menilai masa yang diambil untuk anda membalas kepada isyarat visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goncang peranti dalam sebarang arah sebaik sahaja titik biru muncul pada skrin. Anda akan diminta untuk melakukan ini %D kali.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percubaan %D daripada %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goncang peranti dengan cepat apabila bulatan biru muncul";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat mencipta fail";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "salah";
 "AX.MEMORY.TILE.QUIESCENT" = "kuisen";
 "AX.MEMORY.TILE.LABEL" = "Jubin permainan memori";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Pratonton tangkapan";
 

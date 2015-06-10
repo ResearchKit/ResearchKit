@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "اكتمل النشاط";
 "TASK_COMPLETE_TEXT" = "سيتم تحليل بياناتك وسيتم إعلامك عندما تصبح النتائج جاهزة.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "التقاط صورة";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "إعادة التقاط الصورة";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "لم يتم العثور على كاميرا.  لا يمكن إكمال هذه الخطوة.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "لإكمال هذه الخطوة، اسمح لهذا التطبيق بالوصول إلى الكاميرا في الإعدادات.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "لم يتم تحديد دليل إخراج للصور الملتقطة.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "لا يمكن حفظ الصورة الملتقطة.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "اللياقة";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "المسافة ‏(%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "خذ نفسًا عميقًا وانطق \"آااااه\" في الميكروفون لأطول فترة ممكنة بالنسبة إليك. حافظ على ثبات مستوى صوتك حتى تظل أشرطة الصوت باللون الأزرق.";
 "AUDIO_INTENDED_USE" = "يعمل هذا النشاط على تقييم صوتك من خلال تسجيله بالميكروفون الموجود في أسفل هاتفك.";
 "AUDIO_TOO_LOUD_LABEL" = "عالٍ جدًا";
+"AUDIO_GENERIC_ERROR_LABEL" = "غير قادر على تسجيل الصوت";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "قياس سمع النغمة";
+"TONE_AUDIOMETRY_INTENDED_USE" = "يقيس هذا النشاط قدرتك على سماع الأصوات المختلفة.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "قبل البدء، قم بتوصيل سماعات الرأس وارتدائها.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "من المفترض أن تسمع نغمة الآن. قم بضبط مستوى الصوت باستخدام عناصر التحكم في جانب الجهاز.\n\nاضغط على الزر عندما تكون مستعدًا للبدء.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "اضغط على الزر في كل مرة تبدأ في سماع صوت فيها.";
+"TONE_LABEL_%@_LEFT" = "‏%@ هرتز، يسار";
+"TONE_LABEL_%@_RIGHT" = "‏%@ هرتز، يمين";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "الذاكرة المكانية";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "اكتملت اللعبة";
 "MEMORY_GAME_PAUSED_TITLE" = "تم الإيقاف مؤقتاً";
 "MEMORY_GAME_PAUSED_MESSAGE" = "للمتابعة اضغط على التالي.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "زمن رد الفعل";
+"REACTION_TIME_TASK_INTENDED_USE" = "يعمل هذا النشاط على تقييم الوقت الذي تستغرقه في الاستجابة للتلميح البصري.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "قم بهز الجهاز في أي اتجاه فور ظهور النقطة الزرقاء على الشاشة. سيُطلب منك فعل ذلك %D من المرات.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "المحاولة %D من %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "قم بهز الجهاز سريعًا عندما تظهر الدائرة الزرقاء";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "تعذر إنشاء الملف";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "غير صحيحة";
 "AX.MEMORY.TILE.QUIESCENT" = "هادئ";
 "AX.MEMORY.TILE.LABEL" = "عنوان لعبة الذاكرة";
+
+"AX_IMAGE_CAPTURE_LABEL" = "معاينة الالتقاط";
 

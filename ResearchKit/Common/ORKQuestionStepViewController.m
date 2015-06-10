@@ -158,8 +158,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _tableView = _tableContainer.tableView;
             _tableView.delegate = self;
             _tableView.dataSource = self;
+            _tableView.clipsToBounds = YES;
             
             [self.view addSubview:_tableContainer];
+            _tableContainer.tapOffView = self.view;
             
             _headerView = _tableContainer.stepHeaderView;
             _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;

@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktivita byla dokončena";
 "TASK_COMPLETE_TEXT" = "Data budou analyzována a jakmile budou k dispozici výsledky, obdržíte oznámení.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Pořídit obrázek";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Pořídit obrázek znovu";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Fotoaparát nebyl nalezen. Tento krok nelze dokončit.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Před dokončením tohoto kroku musíte v Nastavení povolit této aplikaci přístup k fotoaparátu.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nebyl určen žádný výstupní adresář pro pořízené obrázky.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Pořízený obrázek se nepodařilo uložit.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondice";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Vzdálenost (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Hluboce se nadechněte a při výdechu hlasitě a co nejdéle do mikrofonu vyslovujte \"Ááááá\". Udržujte konstantní úroveň hlasitosti, při které budou proužky zbarvené modře.";
 "AUDIO_INTENDED_USE" = "Tato aktivita vyhodnotí váš hlas, který bude zaznamenán pomocí mikrofonu u dolního okraje telefonu.";
 "AUDIO_TOO_LOUD_LABEL" = "Příliš nahlas";
+"AUDIO_GENERIC_ERROR_LABEL" = "Nelze zaznamenávat zvuk";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tónová audiometrie";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Tato aktivita měří vaši schopnost slyšet různé zvuky.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Než začnete, zapněte sluchátka a nasaďte si je.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Nyní byste měli slyšet tón. Nastavte hlasitost pomocí ovládacích prvků po straně zařízení.\n\nAž budete připraveni začít, klepněte na tlačítko.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Jakmile uslyšíte zvuk, klepněte na tlačítko.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, vlevo";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, vpravo";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Prostorová paměť";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Hra byla dokončena";
 "MEMORY_GAME_PAUSED_TITLE" = "Pozastaveno";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Pokračujte klepnutím na Další.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakční doba";
+"REACTION_TIME_TASK_INTENDED_USE" = "Tato aktivita zjišťuje, jak dlouho vám trvá, než zareagujete na vizuální podnět.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Jakmile se na displeji objeví modrá tečka, zatřeste zařízením v libovolném směru. Budete k tomu vyzváni celkem %Dx.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %D z %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Jakmile se objeví modrý kroužek, krátce zařízením zatřeste";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "nesprávně";
 "AX.MEMORY.TILE.QUIESCENT" = "klid";
 "AX.MEMORY.TILE.LABEL" = "Kostka paměťové hry";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Náhled";
 
