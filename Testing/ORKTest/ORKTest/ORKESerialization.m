@@ -29,6 +29,8 @@
  */
 
 
+#import <ResearchKit/ResearchKit_Private.h>
+
 #import "ORKESerialization.h"
 
 
@@ -524,6 +526,9 @@ ret =
           PROPERTY(summary, NSString, NSObject, YES, nil, nil),
           PROPERTY(content, NSString, NSObject, YES, nil, nil),
           PROPERTY(htmlContent, NSString, NSObject, YES, nil, nil),
+          PROPERTY(contentURL, NSURL, NSObject, YES,
+                   ^id(id url) { return [(NSURL *)url absoluteString]; },
+                   ^id(id string) { return [NSURL URLWithString:string]; }),
           PROPERTY(customLearnMoreButtonTitle, NSString, NSObject, YES, nil, nil),
           PROPERTY(customAnimationURL, NSURL, NSObject, YES,
                    ^id(id url) { return [(NSURL *)url absoluteString]; },
@@ -618,12 +623,13 @@ ret =
           })),
   ENTRY(ORKTextChoice,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKTextChoice alloc] initWithText:GETPROP(dict, text) detailText:GETPROP(dict, detailText) value:GETPROP(dict, value)];
+            return [[ORKTextChoice alloc] initWithText:GETPROP(dict, text) detailText:GETPROP(dict, detailText) value:GETPROP(dict, value) exclusive:[GETPROP(dict, exclusive) boolValue]];
         },
         (@{
           PROPERTY(text, NSString, NSObject, NO, nil, nil),
           PROPERTY(value, NSObject, NSObject, NO, nil, nil),
           PROPERTY(detailText, NSString, NSObject, NO, nil, nil),
+          PROPERTY(exclusive, NSNumber, NSObject, NO, nil, nil),
           })),
   ENTRY(ORKImageChoice,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Ćwiczenie zakończone";
 "TASK_COMPLETE_TEXT" = "Twoje dane zostaną przeanalizowane i otrzymasz powiadomienie o wynikach.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Przechwyć obrazek";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Przechwyć ponownie obrazek";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nie znaleziono aparatu. Nie można wykonać kroku.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Aby wykonać ten krok, przejdź do Ustawień i daj temu programowi dostęp do aparatu.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego dla przechwyconych obrazków.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nie można było zachować przechwyconego obrazka.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Sprawność";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Dystans (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Weź głęboki oddech i mów „Aaaaa” do mikrofonu najdłużej jak potrafisz. Utrzymuj stały poziom głośności, aby paski dźwięku były przez cały czas niebieskie.";
 "AUDIO_INTENDED_USE" = "To ćwiczenie ocenia Twój głos, nagrywając go przy użyciu mikrofonu znajdującego się u dołu telefonu.";
 "AUDIO_TOO_LOUD_LABEL" = "Zbyt głośno";
+"AUDIO_GENERIC_ERROR_LABEL" = "Nie można nagrać dźwięku";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
+"TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność do słyszenia różnych dźwięków.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Dźwięk powinien być teraz słyszalny. Zmień głośność, używając przycisków z boku urządzenia.\n\nAby rozpocząć, stuknij w przycisk.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Stuknij w przycisk za każdym razem, gdy usłyszysz dźwięk.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, lewy";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, prawy";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Pamięć przestrzenna";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Gra zakończona";
 "MEMORY_GAME_PAUSED_TITLE" = "Wstrzymana";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Aby kontynuować, stuknij w Dalej";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Czas reakcji";
+"REACTION_TIME_TASK_INTENDED_USE" = "To ćwiczenie ocenia Twój czas odpowiedzi na bodziec wzrokowy.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Potrząśnij urządzeniem w dowolnym kierunku, gdy tylko zobaczysz na ekranie niebieską kropkę. Test zostanie powtórzony %D razy.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Próba %D z %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gdy pojawi się niebieskie kółko, szybko potrząśnij urządzeniem";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nie można było utworzyć pliku";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "nieprawidłowa";
 "AX.MEMORY.TILE.QUIESCENT" = "nieaktywna";
 "AX.MEMORY.TILE.LABEL" = "Płytka gry pamięciowej";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Przechwyć podgląd obrazka";
 

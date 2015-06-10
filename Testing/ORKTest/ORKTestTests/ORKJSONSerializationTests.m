@@ -215,7 +215,7 @@
       [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
       [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
-    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1)]  ]]];
+    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1) exclusive:NO]  ]]];
     
     ORKQuestionStep *questionStep2 = [ORKQuestionStep questionStepWithIdentifier:@"id"
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];

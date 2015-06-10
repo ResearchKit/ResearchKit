@@ -662,20 +662,40 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         /*
          A single-choice question presented in the tableview format.
          */
-        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Less than seven"
-                                                                        detailText:nil
                                                                              value:@(7)],
                                                      [ORKTextChoice choiceWithText:@"Between seven and eight"
-                                                                        detailText:nil
                                                                              value:@(8)],
                                                      [ORKTextChoice choiceWithText:@"More than eight"
-                                                                        detailText:nil
                                                                              value:@(9)]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
                                                                       title:@"How many hours did you sleep last night?"
+                                                                     answer:answerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A multiple-choice question presented in the tableview format.
+         */
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cough"
+                                                                             value:@"cough"],
+                                                     [ORKTextChoice choiceWithText:@"Fever"
+                                                                             value:@"fever"],
+                                                     [ORKTextChoice choiceWithText:@"Headaches"
+                                                                             value:@"headache"],
+                                                     [ORKTextChoice choiceWithText:@"None of the above"
+                                                                        detailText:nil
+                                                                             value:@"none"
+                                                                          exclusive:YES]
+                                                     ]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004a"
+                                                                      title:@"Which symptoms do you have?"
                                                                      answer:answerFormat];
         [steps addObject:step];
     }
@@ -688,13 +708,16 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             @[
               [ORKTextChoice choiceWithText:@"Cough"
                                  detailText:@"A cough and/or sore throat"
-                                      value:@"cough"],
+                                      value:@"cough"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Fever"
                                  detailText:@"A 100F or higher fever or feeling feverish"
-                                      value:@"fever"],
+                                      value:@"fever"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Headaches"
                                  detailText:@"Headaches and/or body aches"
-                                      value:@"headache"]
+                                      value:@"headache"
+                                  exclusive:NO]
               ]];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004"
@@ -749,13 +772,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
                                                     @[
                                                       [ORKTextChoice choiceWithText:@"Cough"
-                                                                         detailText:nil
                                                                               value:@"cough"],
                                                       [ORKTextChoice choiceWithText:@"Fever"
-                                                                         detailText:nil
                                                                               value:@"fever"],
                                                       [ORKTextChoice choiceWithText:@"Headaches"
-                                                                         detailText:nil
                                                                               value:@"headache"]
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_081"
@@ -851,13 +871,16 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Cough, A cough and/or sore throat, A cough and/or sore throat"
                                                                         detailText:@"A cough and/or sore throat, A cough and/or sore throat, A cough and/or sore throat"
-                                                                             value:@"cough"],
+                                                                             value:@"cough"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@"Fever, A 100F or higher fever or feeling feverish"
                                                                         detailText:nil
-                                                                             value:@"fever"],
+                                                                             value:@"fever"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@""
                                                                         detailText:@"Headaches, Headaches and/or body aches"
-                                                                             value:@"headache"]
+                                                                             value:@"headache"
+                                                                         exclusive:NO]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000a"
                                                                       title:@"(Misused) Which symptoms do you have?"
@@ -2074,6 +2097,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
              */
             consentSection.htmlContent = @"<ul><li>Lorem</li><li>ipsum</li><li>dolor</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p>\
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p> 研究";
+        } else if (type.integerValue == ORKConsentSectionTypeDataGathering) {
+            /*
+             Tests PDF content instead of text, HTML for Learn More.
+             */
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"SAMPLE_PDF_TEST" ofType:@"pdf"];
+            consentSection.contentURL = [NSURL URLWithString:path];
+
         } else {
             /*
              Tests text Learn More content.

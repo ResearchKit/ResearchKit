@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Η δραστηριότητα ολοκληρώθηκε";
 "TASK_COMPLETE_TEXT" = "Τα δεδομένα σας θα αναλυθούν και θα ειδοποιηθείτε όταν είναι έτοιμα τα αποτελέσματα.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Καταγραφή εικόνας";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Επανάληψη καταγραφής εικόνας";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Δεν βρέθηκε κάμερα. Δεν είναι δυνατή η ολοκλήρωση αυτού του βήματος.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Για να ολοκληρώσετε αυτό το βήμα, επιτρέψτε σε αυτήν την εφαρμογή να προσπελάζει την κάμερα στις Ρυθμίσεις.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Δεν καθορίστηκε κατάλογος εξόδου για καταγεγραμμένες εικόνες.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Δεν ήταν δυνατή η αποθήκευση της καταγεγραμμένης εικόνας.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Φυσική κατάσταση";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Απόσταση (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Πάρτε μια βαθιά ανάσα και πείτε «Ααααα» στο μικρόφωνο για όση περισσότερη ώρα μπορέσετε. Κρατήστε σταθερή την ένταση ήχου της φωνής σας για να παραμείνουν μπλε οι γραμμές ήχου.";
 "AUDIO_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τη φωνή σας μέσω εγγραφής ενώ μιλάτε στο μικρόφωνο που βρίσκεται στο κάτω μέρος του τηλεφώνου.";
 "AUDIO_TOO_LOUD_LABEL" = "Πολύ δυνατά";
+"AUDIO_GENERIC_ERROR_LABEL" = "Δεν είναι δυνατή η εγγραφή ήχου";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Τονική ακοομετρία";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Η δραστηριότητα αυτή μετρά την ικανότητά σας να ακούτε διαφορετικούς ήχους.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Πριν ξεκινήσετε, συνδέστε τα ακουστικά και φορέστε τα.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Τώρα θα πρέπει να ακούσετε έναν τόνο. Προσαρμόστε την ένταση ήχου χρησιμοποιώντας τα χειριστήρια στο πλάι της συσκευής σας.\n\nΌταν είστε έτοιμοι να ξεκινήσετε, αγγίξτε το κουμπί.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Αγγίξτε το κουμπί κάθε φορά που θα ακούτε έναν ήχο.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, αριστερά";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, δεξιά";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Χωρική μνήμη";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Το παιχνίδι ολοκληρώθηκε";
 "MEMORY_GAME_PAUSED_TITLE" = "Σε παύση";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Για να συνεχίσετε, αγγίξτε «Επόμενο»";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Χρόνος αντίδρασης";
+"REACTION_TIME_TASK_INTENDED_USE" = "Η δραστηριότητα αυτή υπολογίζει τον χρόνο που χρειάζεστε για να αποκριθείτε σε μια οπτική ένδειξη.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ανακινήστε τη συσκευή προς οποιαδήποτε κατεύθυνση αμέσως μόλις εμφανιστεί η μπλε κουκκίδα στην οθόνη. Θα σας ζητηθεί να το κάνετε αυτό %D φορές.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Προσπάθεια %D από %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ανακινήστε γρήγορα τη συσκευή όταν εμφανιστεί ο μπλε κύκλος";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Δεν ήταν δυνατή η δημιουργία αρχείου";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "λάθος";
 "AX.MEMORY.TILE.QUIESCENT" = "αδρανές";
 "AX.MEMORY.TILE.LABEL" = "Πλακίδιο παιχνιδιού μνήμης";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Προεπισκόπηση καταγραφής";
 

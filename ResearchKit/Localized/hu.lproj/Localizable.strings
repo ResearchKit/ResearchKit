@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Tevékenység befejezve";
 "TASK_COMPLETE_TEXT" = "Az adatok ki lesznek elemezve, és értesítést fog kapni, ha az eredmény elkészült.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kép készítése";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Kép készítése újra";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nem található kamera. Ezt a lépést nem lehet végrehajtani.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "A lépés végrehajtásához a Beállításokban engedélyezze az alkalmazás számára, hogy hozzáférjen a kamerához.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Az elkészített képekhez nem lett megadva kimeneti könyvtár.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Az elkészített képet nem sikerült menteni.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitnesz";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Távolság (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Vegyen mély levegőt, és amilyen hosszan csak tudja, mondja a mikrofonba, hogy „Áááááá”. Próbáljon egyenletes hangerőt tartani, hogy a hangsávok kékek maradjanak.";
 "AUDIO_INTENDED_USE" = "Ez a tevékenység kiértékeli a hangját, rögzítve, ahogy a telefon alján lévő mikrofonba beszél.";
 "AUDIO_TOO_LOUD_LABEL" = "Túl hangos";
+"AUDIO_GENERIC_ERROR_LABEL" = "Nem sikerült hangot felvenni";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Hangaudiometria";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ez a tevékenység azt méri fel, hogyan hallja Ön a különböző hangokat.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Először is csatlakoztassa és tegye fel a fejhallgatót.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ön most valószínűleg hall egy hangot. Állítsa be a hangerőt a készülék oldalán található vezérlőkkel.\n\nKoppintson a gombra, amikor készen áll a kezdésre.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Koppintson a gombra mindig, amikor egy hangot hall.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, bal";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, jobb";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Térbeli memória";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Játék befejezve";
 "MEMORY_GAME_PAUSED_TITLE" = "Szüneteltetve";
 "MEMORY_GAME_PAUSED_MESSAGE" = "A folytatáshoz koppintson a Következő gombra";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reakcióidő";
+"REACTION_TIME_TASK_INTENDED_USE" = "Ez a tevékenység felméri, hogy mennyi ideig tart Önnek válaszolni egy vizuális jelzésre.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rázza meg a készüléket tetszőleges irányban, amint megjelenik a képernyőn a kék pont. A készülék %D alkalommal fogja megkérni erre.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%D/%D. kísérlet";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gyorsan rázza meg a készüléket, amikor megjelenik a kék kör";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "helytelen";
 "AX.MEMORY.TILE.QUIESCENT" = "nyugodt";
 "AX.MEMORY.TILE.LABEL" = "Memóriajáték címe";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Előnézet rögzítése";
 

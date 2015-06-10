@@ -206,6 +206,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
         ORK_DECODE_OBJ_CLASS(aDecoder, summary, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, content, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, htmlContent, NSString);
+        ORK_DECODE_URL_BOOKMARK(aDecoder, contentURL);
         ORK_DECODE_OBJ_CLASS(aDecoder, formalTitle, NSString);
         ORK_DECODE_IMAGE(aDecoder, customImage);
         ORK_DECODE_URL_BOOKMARK(aDecoder, customAnimationURL);
@@ -221,6 +222,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     ORK_ENCODE_OBJ(aCoder, summary);
     ORK_ENCODE_OBJ(aCoder, content);
     ORK_ENCODE_OBJ(aCoder, htmlContent);
+    ORK_ENCODE_URL_BOOKMARK(aCoder, contentURL);
     ORK_ENCODE_IMAGE(aCoder, customImage);
     ORK_ENCODE_URL_BOOKMARK(aCoder, customAnimationURL);
     ORK_ENCODE_OBJ(aCoder, customLearnMoreButtonTitle);
@@ -237,6 +239,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
             && ORKEqualObjects(self.summary, castObject.summary)
             && ORKEqualObjects(self.content, castObject.content)
             && ORKEqualObjects(self.htmlContent, castObject.htmlContent)
+            && ORKEqualFileURLs(self.contentURL, castObject.contentURL)
             && ORKEqualObjects(self.customImage, castObject.customImage)
             && ORKEqualObjects(self.customLearnMoreButtonTitle, castObject.customLearnMoreButtonTitle)
             && ORKEqualFileURLs(self.customAnimationURL, castObject.customAnimationURL) &&
@@ -254,6 +257,7 @@ static NSString *localizedTitleForConsentSectionType(ORKConsentSectionType secti
     sec.summary = _summary;
     sec.content = _content;
     sec.htmlContent = _htmlContent;
+    sec.contentURL = _contentURL;
     sec.customImage = _customImage;
     sec->_type = _type;
     sec.customAnimationURL = _customAnimationURL;

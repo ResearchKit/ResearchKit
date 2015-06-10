@@ -129,13 +129,21 @@
 "TASK_COMPLETE_TITLE" = "Aktiviteetti valmis";
 "TASK_COMPLETE_TEXT" = "Datasi analysoidaan ja sinulle ilmoitetaan, kun tuloksesi ovat valmiina.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Kaappaa kuva";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Kaappaa kuva uudelleen";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kameraa ei löydy. Tätä vaihetta ei voida suorittaa.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Jotta tämä vaihe voidaan suorittaa, anna Asetuksissa tälle ohjelmalle käyttöoikeus kameraan.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Kaapatuille kuville ei ole määritetty kohdehakemistoa.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Kaapattua kuvaa ei voitu tallentaa.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kuntoilu";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Matka (%@)";
 "FITNESS_HEARTRATE_TITLE" = "Syke (bpm)";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Istu %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Kävele niin nopeasti kuin voit %@.";
-"FITNESS_INTRO_TEXT_FORMAT" = "Tämä aktiviteetti seuraa sykettäsi ja mittaa, kuinka kauas pystyt kävelemään ajassa %1$@.";
+"FITNESS_INTRO_TEXT_FORMAT" = "Tämä aktiviteetti seuraa sykettäsi ja mittaa kuinka kauas voit kävellä, kun aikaa on %1$@.";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "Kävele ulkona kovinta mahdollista vauhtia %1$@. Kun olet valmis, istu ja lepää %2$@. Aloita napauttamalla Aloita.";
 
 /* Short walk active task. */
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Hengitä syvään ja sano ”Aaaaa\" mikrofoniin niin pitkään kuin pystyt. Pidä äänenvoimakkuus tasaisena siten, että äänipalkit pysyvät sinisinä.";
 "AUDIO_INTENDED_USE" = "Tämä aktiviteetti arvioi ääntäsi tallentamalla sitä puhelimen alareunassa olevalla mikrofonilla.";
 "AUDIO_TOO_LOUD_LABEL" = "Liian kovaa";
+"AUDIO_GENERIC_ERROR_LABEL" = "Ei voida äänittää";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Tämä aktiviteetti mittaa kykyäsi kuulla erilaisia ääniä.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Ennen aloittamista liitä kuulokkeet ja laita ne korvillesi.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aloita napauttamalla Aloita.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Sinun pitäisi nyt kuulla ääni. Säädä voimakkuutta laitteen sivussa olevilla säätimillä.\n\nNapauta painiketta kun olet valmis aloittamaan.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Napauta painiketta heti, kun alat kuulla äänen.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, vasen";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, oikea";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Avaruudellinen muisti";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Peli päättyi";
 "MEMORY_GAME_PAUSED_TITLE" = "Keskeytetty";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Jatka napauttamalla Seuraava";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaktioaika";
+"REACTION_TIME_TASK_INTENDED_USE" = "Tämä aktiviteetti mittaa aikaa, joka sinulta kuluu vastata visuaaliseen tapahtumaan.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ravista laitetta mihin tahansa suuntaan heti, kun sininen piste tulee näkyviin. Sinua pyydetään tekemään tämä %D kertaa.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Aloita napauttamalla Aloita.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Yritys %D / %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kun sininen ympyrä tulee näkyviin, ravista nopeasti laitetta";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tiedostoa ei voitu luoda";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "väärin";
 "AX.MEMORY.TILE.QUIESCENT" = "lepotilassa";
 "AX.MEMORY.TILE.LABEL" = "Muistipelin ruutu";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Kaappauksen esikatselu";
 
