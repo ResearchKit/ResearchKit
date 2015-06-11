@@ -924,7 +924,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 + (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(nullable NSString *)intendedUseDescription
                            additionDuration:(NSTimeInterval)additionDuration
-                                serieLength:(NSInteger)serieLength
+                               seriesLength:(NSInteger)seriesLength
                                     options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
@@ -960,8 +960,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         ORKPVSATStep *step = [[ORKPVSATStep alloc] initWithIdentifier:ORKPVSATStepIdentifier];
         step.title = ORKLocalizedString(@"PVSAT_INITIAL_INSTRUCTION", nil);
-        step.stepDuration = (serieLength + 1) * additionDuration;
-        step.serieLength = serieLength;
+        step.stepDuration = (seriesLength + 1) * additionDuration;
+        step.seriesLength = seriesLength;
         step.additionDuration = additionDuration;
         
         ORKStepArrayAddStep(steps, step);

@@ -28,7 +28,7 @@
 		10864CA11B27146B000F4158 /* ORKPVSATStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C991B27146B000F4158 /* ORKPVSATStepViewController.m */; };
 		10864CA21B27146B000F4158 /* ORKPVSATContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9A1B27146B000F4158 /* ORKPVSATContentView.h */; };
 		10864CA31B27146B000F4158 /* ORKPVSATContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9B1B27146B000F4158 /* ORKPVSATContentView.m */; };
-		10864CA41B27146B000F4158 /* ORKPVSATKeyboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9C1B27146B000F4158 /* ORKPVSATKeyboardView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		10864CA41B27146B000F4158 /* ORKPVSATKeyboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9C1B27146B000F4158 /* ORKPVSATKeyboardView.h */; };
 		10864CA51B27146B000F4158 /* ORKPVSATKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9D1B27146B000F4158 /* ORKPVSATKeyboardView.m */; };
 		147503AF1AEE8071004B17F3 /* ORKAudioGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */; };
 		147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */; };

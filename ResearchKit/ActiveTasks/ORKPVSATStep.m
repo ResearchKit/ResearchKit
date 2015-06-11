@@ -63,12 +63,12 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
     }
     
-    if (self.serieLength < ORKPVSATSerieMinimumLength ||
-        self.serieLength > ORKPVSATSerieMaximumLength) {
+    if (self.seriesLength < ORKPVSATSerieMinimumLength ||
+        self.seriesLength > ORKPVSATSerieMaximumLength) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPVSATSerieMinimumLength), @(ORKPVSATSerieMaximumLength)] userInfo:nil];
     }
     
-    NSTimeInterval totalDuration = (self.serieLength + 1) * self.additionDuration;
+    NSTimeInterval totalDuration = (self.seriesLength + 1) * self.additionDuration;
     if (self.stepDuration != totalDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step duration must be equal to %@ seconds.", @(totalDuration)] userInfo:nil];
     }

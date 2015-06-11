@@ -30,13 +30,12 @@
 
 
 #import <ResearchKit/ResearchKit_Private.h>
-#import "ORKPVSATKeyboardView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKPVSATStepViewController : ORKActiveStepViewController <ORKPVSATKeyboardViewDelegate>
+@interface ORKPVSATStepViewController : ORKActiveStepViewController
 
 @end
 

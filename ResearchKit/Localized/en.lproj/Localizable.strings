@@ -218,7 +218,7 @@
 
 /* PVSAT active task. */
 "PVSAT_TITLE" = "PVSAT";
-"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test mesures your visual information processing speed and calculation ability.";
+"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
 "PVSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
 "PVSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "PVSAT_INITIAL_INSTRUCTION" = "Remember the first digit below.";

@@ -423,7 +423,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param intendedUseDescription  A localized string describing the intended use of the data
  collected. If the value of this parameter is `nil`, the default
  localized text is displayed.
- @param serieLength             The number of digits that will be presented during the task.
+ @param seriesLength            The number of digits that will be presented during the task.
  @param additionDuration        The time available for a participant to select right answer.
  
  @return An active PVSAT task that can be presented with an `ORKTaskViewController` object.
@@ -432,7 +432,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
                      intendedUseDescription:(nullable NSString *)intendedUseDescription
                            additionDuration:(NSTimeInterval)additionDuration
-                                serieLength:(NSInteger)serieLength
+                               seriesLength:(NSInteger)seriesLength
                                     options:(ORKPredefinedTaskOption)options;
 
 @end

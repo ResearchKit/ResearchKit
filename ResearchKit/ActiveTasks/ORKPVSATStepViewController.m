@@ -35,8 +35,9 @@
 #import "ORKPVSATStep.h"
 #import "ORKVerticalContainerView.h"
 #import "ORKActiveStepView.h"
+#import "ORKPVSATKeyboardView.h"
 
-@interface ORKPVSATStepViewController ()
+@interface ORKPVSATStepViewController () <ORKPVSATKeyboardViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *samples;
 @property (nonatomic, strong) ORKPVSATContentView *pvsatContentView;
@@ -66,9 +67,9 @@
 }
 
 - (NSArray *)arrayWithPVSATDigits {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[self pvsatStep].serieLength + 1];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:[self pvsatStep].seriesLength + 1];
     NSUInteger digit = 0;
-    for (NSUInteger i = 0; i < [self pvsatStep].serieLength + 1; i++) {
+    for (NSUInteger i = 0; i < [self pvsatStep].seriesLength + 1; i++) {
         do
         {
             digit = (arc4random() % (9)) + 1;
@@ -119,7 +120,7 @@
     
     ORKPVSATResult *PVSATResult = [[ORKPVSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
     PVSATResult.duration = [self pvsatStep].additionDuration;
-    PVSATResult.length = [self pvsatStep].serieLength;
+    PVSATResult.length = [self pvsatStep].seriesLength;
     PVSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
     NSInteger totalCorrect = 0;
     CGFloat totalTime = 0.0;
@@ -143,7 +144,7 @@
 - (void)start {
     self.digits = [self arrayWithPVSATDigits];
     self.currentDigitIndex = 0;
-    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].seriesLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
@@ -183,8 +184,8 @@
     self.answerStart = CACurrentMediaTime();
     self.answerEnd = 0;
     
-    if (self.currentDigitIndex <= [self pvsatStep].serieLength) {
-        [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    if (self.currentDigitIndex <= [self pvsatStep].seriesLength) {
+        [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].seriesLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
     }
     
     self.currentAnswer = -1;
@@ -193,12 +194,12 @@
 }
 
 - (void)timeoutTimerFired {
-    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].serieLength withDigit:@(-1)];
+    [self.pvsatContentView setAddition:self.currentDigitIndex forTotal:[self pvsatStep].seriesLength withDigit:@(-1)];
 }
 
 - (void)saveSample {
     ORKPVSATSample *sample = [[ORKPVSATSample alloc] init];
-    NSInteger previousDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex-1] integerValue];
+    NSInteger previousDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex - 1] integerValue];
     NSInteger currentDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex] integerValue];
     sample.correct = previousDigit + currentDigit == self.currentAnswer ? YES : NO;
     sample.digit = currentDigit;

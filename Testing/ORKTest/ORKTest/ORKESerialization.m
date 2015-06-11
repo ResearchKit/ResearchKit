@@ -480,7 +480,7 @@ ret =
              return [[ORKPVSATStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(serieLength, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(additionDuration, NSNumber, NSObject, YES, nil, nil),
             })),
   ENTRY(ORKAccelerometerRecorderConfiguration,

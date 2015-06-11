@@ -424,7 +424,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         return [ORKOrderedTask PVSATTaskWithIdentifier:PVSATTaskIdentifier
                                 intendedUseDescription:nil
                                       additionDuration:3.0
-                                           serieLength:60
+                                          seriesLength:60
                                                options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
