@@ -104,7 +104,7 @@
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "點一下來回答";
-"NULL_ANSWER" = "選取答案。";
+"NULL_ANSWER" = "選取答案";
 "PLACEHOLDER_IMAGE_CHOICES" = "點一下來選取";
 "PLACEHOLDER_LONG_TEXT" = "點一下來寫入";
 
@@ -128,6 +128,14 @@
 "COUNTDOWN_LABEL" = "準備開始活動：";
 "TASK_COMPLETE_TITLE" = "活動完成";
 "TASK_COMPLETE_TEXT" = "您的資料會經過分析，收到結果時會通知您。";
+
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "擷取影像";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "重新擷取影像";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "找不到相機。無法完成此步驟。";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "為了完成此步驟，請在「設定」中允許此 App 取用相機。";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "尚未指定擷取影像的輸出目錄。";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "無法儲存擷取的影像。";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "健身";
@@ -165,14 +173,25 @@
 "AUDIO_INTRO_TEXT" = "請深呼吸，然後對著麥克風說「啊」，時間越久越好。請保持穩定的音量，讓音訊條顯示為藍色。";
 "AUDIO_INTENDED_USE" = "此活動會用電話底部的麥克風錄下您的聲音以進行評估。";
 "AUDIO_TOO_LOUD_LABEL" = "太大聲了";
+"AUDIO_GENERIC_ERROR_LABEL" = "無法錄音";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
+"TONE_AUDIOMETRY_INTENDED_USE" = "此活動會測量您是否能聽到不同種的測試音。";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請將耳機插入並戴上。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
+"TONE_AUDIOMETRY_PREP_TEXT" = "您現在應該可聽到測試音。請使用裝置側邊的控制按鈕來調整音量。\n\n當您準備好開始時，請點一下按鈕。";
+"TONE_AUDIOMETRY_INSTRUCTION" = "請在每次聽到測試音時點一下按鈕。";
+"TONE_LABEL_%@_LEFT" = "左側，%@ 赫茲";
+"TONE_LABEL_%@_RIGHT" = "右側，%@ 赫茲";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此活動會讓您重複%@亮起來的順序以測量您的短期空間記憶。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花朵";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分的%@會一次點亮一個。以與亮起來相同的順序點一下這些%@。";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "部分的%@會一次點亮一個。以與亮起來相反的順序點一下這些%@。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分的%@會一次點亮一個。按照相同的點亮順序點一下這些%@。";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "部分的%@會一次點亮一個。按照相反的點亮順序點一下這些%@。";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "若要開始，請點一下「開始測試」，然後仔細觀看螢幕。";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "分數";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "遊戲完成";
 "MEMORY_GAME_PAUSED_TITLE" = "已暫停";
 "MEMORY_GAME_PAUSED_MESSAGE" = "若要繼續，請點一下「下一步」";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "反應時間";
+"REACTION_TIME_TASK_INTENDED_USE" = "此活動會評估您對於視覺提示的回應時間。";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "看到螢幕上顯示藍色圓點後，請立即往任意方向晃動裝置。您將被要求進行 %D 次晃動操作。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D 次（共 %D 次）";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "顯示藍色圓圈時快速晃動裝置";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
@@ -224,5 +251,7 @@
 "AX.MEMORY.TILE.CORRECT" = "正確";
 "AX.MEMORY.TILE.INCORRECT" = "不正確";
 "AX.MEMORY.TILE.QUIESCENT" = "靜態";
-"AX.MEMORY.TILE.LABEL" = "記憶遊戲標題";
+"AX.MEMORY.TILE.LABEL" = "記憶遊戲圖塊";
+
+"AX_IMAGE_CAPTURE_LABEL" = "擷取預覽";
 

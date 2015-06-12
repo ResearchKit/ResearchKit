@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Etkinlik Tamamlandı";
 "TASK_COMPLETE_TEXT" = "Verileriniz incelenecek ve sonuçlarınız hazır olduğunuzda size haber verilecektir.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Görüntü Yakala";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Görüntüyü Yeniden Yakala";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera bulunamadı. Bu adım tamamlanamıyor.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Bu adımı tamamlamak için Ayarlar'da bu uygulamanın kameraya erişimine izin verin.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Yakalanan görüntülerin kaydedileceği bir dizin belirtilmemiş.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Yakalanan görüntü kaydedilemedi.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Mesafe (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Derin bir nefes alın ve mikrofona, söyleyebildiğiniz kadar uzun “Aaaaa” deyin. Ses çubukları mavi kalacak şekilde ses yüksekliğini sabit tutmaya çalışın.";
 "AUDIO_INTENDED_USE" = "Bu etkinlik, telefonunuzun alt tarafındaki mikrofonla kayıt yaparak sesinizi değerlendirir.";
 "AUDIO_TOO_LOUD_LABEL" = "Çok Yüksek";
+"AUDIO_GENERIC_ERROR_LABEL" = "Ses kaydı yapılamıyor";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Ses Tonu Odyometrisi";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Bu işlem, farklı sesleri duyabilme becerinizi ölçer.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "\nBaşlamadan önce kulaklığınızı bağlayın ve takın.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Bir ses duyacaksınız. Aygıtınızın yan tarafında bulunan denetimleri kullanarak ses seviyesini ayarlayın.\n\nBaşlamaya hazır olduğunuzda düğmeye dokunun.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Her ses duymaya başladığınızda düğmeye dokunun.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Sol";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Sağ";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Konumsal Bellek";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Oyun Tamamlandı";
 "MEMORY_GAME_PAUSED_TITLE" = "Duraklatıldı";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Devam etmek için İleri’ye dokunun";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Tepki Süresi";
+"REACTION_TIME_TASK_INTENDED_USE" = "Bu işlem, görünen bir ipucuna yanıt verebildiğiniz süreyi hesaplar.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ekranda mavi nokta görünür görünmez aygıtı herhangi bir yönde hızlıca sallayın. Bunu %D kez yapmanız istenecek.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%D / %D Girişim";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mavi çember göründüğünde aygıtı hızlıca sallayın";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "yanlış";
 "AX.MEMORY.TILE.QUIESCENT" = "hareketsiz";
 "AX.MEMORY.TILE.LABEL" = "Bellek oyunu taşı";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Yakalanan görüntü önizlemesi";
 

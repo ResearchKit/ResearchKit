@@ -521,8 +521,25 @@
     return ([self numAnswered] == [self formItems].count);
 }
 
+- (BOOL)allAnswersValid {
+    for (ORKFormItem *item in [self formItems]) {
+        id answer = _savedAnswers[item.identifier];
+        BOOL isNonNull = answer && ![answer isKindOfClass:[NSNull class]];
+        if (isNonNull && ![item.impliedAnswerFormat isAnswerValid:answer]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    return ([self allAnswered] || (self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem)));
+    //  Enable the continue button if case (1) or (2) is true below:
+    //  (1) All answers are valid and all questions are answered.
+    //  (2) All answers are valid and either:
+    //      a) The step is optional and there is no skip button.
+    //      b) The step is optional and at least one question has been answered.
+    BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
+    return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
 }
 
 - (void)updateButtonStates {

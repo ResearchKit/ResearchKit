@@ -82,7 +82,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     if (self) {
         _healthStore = healthStore;
         
-        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+        if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
             [[NSNotificationCenter defaultCenter] addObserver:self
                                                      selector:@selector(healthKitUserPreferencesDidChange:)
                                                          name:HKUserPreferencesDidChangeNotification
@@ -176,7 +176,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 - (HKUnit *)defaultHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat {
     __block HKUnit *unit = [answerFormat healthKitUnit];
     HKObjectType *objectType = [answerFormat healthKitObjectType];
-    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if (![[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         return unit;
     }
     
@@ -395,6 +395,15 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     questionResult.answer = answer;
     questionResult.questionType = self.questionType;
     return questionResult;
+}
+
+- (BOOL)isAnswerValid:(id)answer {
+    ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
+    if (impliedFormat == self) {
+        return YES;
+    } else {
+        return [impliedFormat isAnswerValid:answer];
+    }
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
@@ -1111,20 +1120,34 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     
 }
 
+- (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = NO;
+    if ([answer isKindOfClass:[NSNumber class]]) {
+        return [self isAnswerValidWithNumber:(NSNumber *)answer];
+    }
+    return isValid;
+}
+
+- (BOOL)isAnswerValidWithNumber:(NSNumber *)number {
+    BOOL isValid = NO;
+    if (number) {
+        isValid = YES;
+        if (isnan([number doubleValue])) {
+            isValid = NO;
+        } else if (self.minimum && ([self.minimum doubleValue] > [number doubleValue])) {
+            isValid = NO;
+        } else if (self.maximum && ([self.maximum doubleValue] < [number doubleValue])) {
+            isValid = NO;
+        }
+    }
+    return isValid;
+}
+
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     BOOL isValid = NO;
     if ([text length] > 0) {
-        NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
-        if (num) {
-            isValid = YES;
-            if (isnan([num doubleValue])) {
-                isValid = NO;
-            } else if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
-                isValid = NO;
-            } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
-                isValid = NO;
-            }
-        }
+        NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
+        isValid = [self isAnswerValidWithNumber:number];
     }
     return isValid;
 }
@@ -1597,6 +1620,14 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     fmt->_spellCheckingType = _spellCheckingType;
     fmt->_multipleLines = _multipleLines;
     return fmt;
+}
+
+- (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = NO;
+    if ([answer isKindOfClass:[NSString class]]) {
+        return [self isAnswerValidWithString:(NSString *)answer];
+    }
+    return isValid;
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {

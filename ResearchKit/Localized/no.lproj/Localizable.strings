@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktivitet fullført";
 "TASK_COMPLETE_TEXT" = "Dataene vil bli analysert, og du blir varslet når resultatene er klare.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ta bilde";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ta nytt bilde";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Finner ikke kamera. Trinnet kunne ikke fullføres.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "For å fullføre trinnet må du først gi appen tilgang til kameraet i Innstillinger.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Du har ikke angitt en katalog for bildene du tar.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Bildet kunne ikke arkiveres.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondisjon";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Strekning (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Trekk pusten dypt inn og si «aaa» inn i mikrofonen så lenge du klarer. Hold et jevnt volum slik at lydstolpene forblir blå.";
 "AUDIO_INTENDED_USE" = "Aktiviteten vil evaluere stemmen din ved å ta den opp i mikrofonen i nedre kant av telefonen.";
 "AUDIO_TOO_LOUD_LABEL" = "For høyt";
+"AUDIO_GENERIC_ERROR_LABEL" = "Kan ikke ta opp lyd";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Toneaudiometri";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aktiviteten måler hvor godt du hører ulike lyder.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Koble til og ta på deg hodetelefonene før du begynner.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Du bør nå høre en tone. Juster volumet med kontrollene på siden av enheten.\n\nTrykk på knappen når du er klar til å begynne.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Trykk på knappen hver gang du hører en lyd.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, venstre";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, høyre";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Visuell hukommelse";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Spill ferdig";
 "MEMORY_GAME_PAUSED_TITLE" = "Pause";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Trykk på Neste for å fortsette";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Reaksjonstid";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aktiviteten måler hvor lang tid det tar før du reagerer på visuelle signaler.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rist enheten så snart du ser den blå prikken vises på skjermen. Du vil bli bedt om å gjøre dette %D ganger.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %D av %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten fort når den blå sirkelen vises";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "feil";
 "AX.MEMORY.TILE.QUIESCENT" = "inaktiv";
 "AX.MEMORY.TILE.LABEL" = "Brikke i bildelottospill";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Forhåndsvisning av bilde";
 

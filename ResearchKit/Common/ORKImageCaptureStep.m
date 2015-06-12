@@ -41,6 +41,14 @@
     return [ORKImageCaptureStepViewController class];
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    self = [super initWithIdentifier:identifier];
+    if (self) {
+        self.optional = YES;
+    }
+    return self;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "กิจกรรมเสร็จสมบูรณ์";
 "TASK_COMPLETE_TEXT" = "ข้อมูลของคุณจะได้รับการวินิจฉัยและคุณจะได้รับแจ้งเมื่อได้ผลลัพธ์ของคุณแล้ว";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "จับภาพ";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "จับภาพอีกครั้ง";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "ไม่พบกล้อง  ไม่สามารถทำให้ขั้นตอนนี้เสร็จสมบูรณ์";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "อนุญาตให้แอพนี้เข้าถึงกล้องได้ในการตั้งค่าเพื่อทำขั้นตอนนี้ให้เสร็จสมบูรณ์";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "ไม่ได้ระบุสารบบผลลัพธ์ไว้สำหรับรูปภาพที่จับภาพ";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "รูปภาพที่จับภาพไว้บันทึกไม่ได้";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "ฟิตเนส";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "ระยะทาง (%@)";
@@ -165,20 +173,31 @@
 "AUDIO_INTRO_TEXT" = "สูดลมหายใจเข้าลึกๆ แล้วพูด “อาาาาา” ใส่ไมโครโฟนให้นานที่สุดเท่าที่คุณจะทำได้ ให้ออกเสียงด้วยความดังที่คงที่เพื่อให้แถบเสียงคงสีฟ้าไว้";
 "AUDIO_INTENDED_USE" = "กิจกรรมนี้จะประเมินเสียงของคุณโดยใช้ไมโครโฟนที่อยู่ด้านล่างสุดของโทรศัพท์ของคุณบันทึกเสียงคุณไว้";
 "AUDIO_TOO_LOUD_LABEL" = "ดังเกินไป";
+"AUDIO_GENERIC_ERROR_LABEL" = "ไม่สามารถบันทึกเสียง";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "การตรวจวัดการได้ยินเสียง";
+"TONE_AUDIOMETRY_INTENDED_USE" = "กิจกรรมนี้จะวัดความสามารถของคุณในการฟังเสียงต่างๆ";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "ก่อนที่คุณจะเริ่ม ให้เสียบสายแล้วสวมหูฟังของคุณ";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
+"TONE_AUDIOMETRY_PREP_TEXT" = "ตอนนี้คุณจะได้ยินเสียงเตือน ให้ปรับความดังโดยใช้ตัวควบคุมที่อยู่ด้านข้างอุปกรณ์ของคุณ\n\nแตะปุ่มเมื่อคุณพร้อมที่จะเริ่ม";
+"TONE_AUDIOMETRY_INSTRUCTION" = "แตะที่ปุ่มทุกครั้งที่คุณเริ่มได้ยินเสียง";
+"TONE_LABEL_%@_LEFT" = "%@ Hz ซ้าย";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz ขวา";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "ความจำเชิงพื้นที่";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "กิจกรรมนี้จะวัดความจำเชิงพื้นที่ระยะสั้นของคุณโดยจะขอให้คุณทวนลำดับการสว่างขึ้นของ %@";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "กิจกรรมนี้จะวัดความจำเชิงพื้นที่ระยะสั้นของคุณโดยจะขอให้คุณทวนลำดับการสว่างขึ้นของ%@";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "ดอกไม้";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "ดอกไม้";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@ บางตัวจะสว่างขึ้นครั้งละหนึ่งตัว ให้แตะ %@ เหล่านั้นแบบตามลำดับการสว่าง";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@ บางตัวจะสว่างขึ้นครั้งละหนึ่งตัว ให้แตะ %@ เหล่านั้นแบบย้อนลำดับการสว่าง";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "%@บางตัวจะสว่างขึ้นครั้งละหนึ่งตัว ให้แตะ%@เหล่านั้นแบบตามลำดับการสว่าง";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "%@บางตัวจะสว่างขึ้นครั้งละหนึ่งตัว ให้แตะ%@เหล่านั้นแบบย้อนลำดับการสว่าง";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "ในการเริ่มต้น ให้แตะเริ่มต้นใช้งาน แล้วจับตาดูอย่างใกล้ชิด";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "คะแนน";
-"MEMORY_GAME_PLAYBACK_TITLE_%@" = "ดู %@ สว่างขึ้น";
-"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "แตะ %@ เพื่อให้สว่างขึ้น";
-"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "แตะ %@ แบบย้อนกลับลำดับ";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "ดู%@สว่างขึ้น";
+"MEMORY_GAME_GAMEPLAY_TITLE_%@" = "แตะ%@ตามลำดับการสว่างขึ้น";
+"MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "แตะ%@แบบย้อนกลับลำดับ";
 "MEMORY_GAME_COMPLETE_TITLE" = "ลำดับเสร็จสมบูรณ์";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "ในการดำเนินการต่อ ให้แตะถัดไป";
 "MEMORY_GAME_FAILED_TITLE" = "ลองอีกครั้ง";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "เกมเสร็จสมบูรณ์";
 "MEMORY_GAME_PAUSED_TITLE" = "พักอยู่";
 "MEMORY_GAME_PAUSED_MESSAGE" = "ในการดำเนินการต่อ ให้แตะถัดไป";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "เวลาตอบสนอง";
+"REACTION_TIME_TASK_INTENDED_USE" = "กิจกรรมนี้จะประเมินเวลาที่คุณใช้ในการตอบสนองต่อการมองเห็น";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "เขย่าอุปกรณ์ในทิศทางใดก็ได้ทันทีที่มีจุดสีน้ำเงินปรากฏขึ้นมาบนหน้าจอ ระบบจะขอให้คุณทำสิ่งนี้ %D ครั้ง";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ความพยายาม %D จาก %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "เขย่าอุปกรณ์อย่างรวดเร็วเมื่อมีวงกลมสีนำ้เงินปรากฏขึ้น";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "สร้างไฟล์ไม่ได้";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "ไม่ถูกต้อง";
 "AX.MEMORY.TILE.QUIESCENT" = "ไม่ได้ใช้งาน";
 "AX.MEMORY.TILE.LABEL" = "เกมเปิดป้ายจับคู่";
+
+"AX_IMAGE_CAPTURE_LABEL" = "แสดงตัวอย่างการเก็บภาพ";
 

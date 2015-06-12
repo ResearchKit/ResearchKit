@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) id<ORKImageCaptureViewDelegate> delegate;
 @property (nonatomic, weak, nullable) AVCaptureSession *session;
 @property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;
+@property (nonatomic, strong, nullable) UIBarButtonItem *skipButtonItem;
 @property (nonatomic, strong, nullable) UIImage *capturedImage;
 @property (nonatomic, strong, nullable) NSError *error;
 

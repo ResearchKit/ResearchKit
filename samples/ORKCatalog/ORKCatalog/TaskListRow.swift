@@ -631,6 +631,7 @@ enum TaskListRow: Int, Printable {
         steps += [instructionStep]
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
+        imageCaptureStep.optional = false
         
         imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
         

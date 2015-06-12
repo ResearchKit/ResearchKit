@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Упражнение завершено";
 "TASK_COMPLETE_TEXT" = "Данные будут проанализированы. Вы получите уведомление, когда результаты будут готовы.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Захват изображения";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Повторный захват изображения";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Камера не найдена. Невозможно завершить этот шаг.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Для выполнения этого шага необходимо в Настройках разрешить этой программе доступ к камере.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Не указана папка для сохранения полученных изображений.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Не удается сохранить полученное изображение.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Выносливость";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Расстояние (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Сделайте глубокий вдох и произнесите «Ааааа» в микрофон как можно дольше. Сохраняйте такую громкость голоса, чтобы полоски звука на диаграмме оставались синими.";
 "AUDIO_INTENDED_USE" = "Во время этого упражнения программа записывает Вашу речь через микрофон телефона и затем оценивает характеристики Вашего голоса.";
 "AUDIO_TOO_LOUD_LABEL" = "Слишком громко";
+"AUDIO_GENERIC_ERROR_LABEL" = "Не удается записать аудио.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Аудиометрия";
+"TONE_AUDIOMETRY_INTENDED_USE" = "В этом упражнении оценивается Ваша способность слышать различные звуки.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Перед началом подключите наушники и наденьте их.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Сейчас Вы услышите звук. Настройте громкость с помощью регулятора на боковой панели устройства.\n\nКоснитесь кнопки, когда будете готовы.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Касайтесь кнопки каждый раз, когда будете слышать звук.";
+"TONE_LABEL_%@_LEFT" = "%@ Гц, левый";
+"TONE_LABEL_%@_RIGHT" = "%@ Гц, правый";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Пространственная память";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Игра завершена";
 "MEMORY_GAME_PAUSED_TITLE" = "Пауза";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Нажмите «Далее», чтобы продолжить";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Время реакции";
+"REACTION_TIME_TASK_INTENDED_USE" = "В этом упражнении измеряется время реакции на визуальный сигнал.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Как только на экране появится синяя точка, встряхните устройство в любом направлении. Количество повторений этого задания: %D.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Попытка %D из %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "При появлении синего круга быстро встряхните устройство";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не удалось создать файл";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "неверно";
 "AX.MEMORY.TILE.QUIESCENT" = "неподвижно";
 "AX.MEMORY.TILE.LABEL" = "Игра на проверку памяти";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Просмотр изображения";
 

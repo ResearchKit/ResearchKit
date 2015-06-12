@@ -38,7 +38,7 @@
 "CONSENT_REVIEW_ALERT_TITLE" = "Tinjauan";
 "CONSENT_SIGNATURE_TITLE" = "Tanda Tangan";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Silakan tanda tangan menggunakan jari Anda pada baris di bawah.";
-"CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan Di sini";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan di sini";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Halaman %1$ld dari %2$ld";
 
 /* Consent section titles. */
@@ -46,8 +46,8 @@
 "CONSENT_SECTION_DATA_GATHERING" = "Pengumpulan Data";
 "CONSENT_SECTION_PRIVACY" = "Privasi";
 "CONSENT_SECTION_DATA_USE" = "Penggunaan Data";
-"CONSENT_SECTION_STUDY_SURVEY" = "Survei Penelitian";
-"CONSENT_SECTION_STUDY_TASKS" = "Tugas Penelitian";
+"CONSENT_SECTION_STUDY_SURVEY" = "Survei Studi";
+"CONSENT_SECTION_STUDY_TASKS" = "Tugas Studi";
 "CONSENT_SECTION_TIME_COMMITMENT" = "Komitmen Waktu";
 "CONSENT_SECTION_WITHDRAWING" = "Penarikan Diri";
 "CONSENT_LEARN_MORE_TITLE" = "Lebih Lanjut";
@@ -56,9 +56,9 @@
 "LEARN_MORE_DATA_GATHERING" = "Lebih lanjut mengenai cara data dikumpulkan";
 "LEARN_MORE_DATA_USE" = "Lebih lanjut mengenai cara data digunakan";
 "LEARN_MORE_PRIVACY" = "Lebih lanjut mengenai cara privasi dan identitas Anda dilindungi";
-"LEARN_MORE_WELCOME" = "Pelajari lebih lanjut mengenai penelitian terlebih dahulu";
-"LEARN_MORE_STUDY_SURVEY" = "Lebih lanjut mengenai survei penelitian";
-"LEARN_MORE_TIME_COMMITMENT" = "Lebih lanjut mengenai dampak penelitian terhadap waktu Anda";
+"LEARN_MORE_WELCOME" = "Pelajari lebih lanjut mengenai studi terlebih dahulu";
+"LEARN_MORE_STUDY_SURVEY" = "Lebih lanjut mengenai survei studi";
+"LEARN_MORE_TIME_COMMITMENT" = "Lebih lanjut mengenai dampak studi terhadap waktu Anda";
 "LEARN_MORE_TASKS" = "Lebih lanjut mengenai tugas yang bersangkutan";
 "LEARN_MORE_WITHDRAWING" = "Lebih lanjut mengenai penarikan diri";
 
@@ -66,7 +66,7 @@
 "CONSENT_SHARING_TITLE" = "Pilihan Berbagi";
 "CONSENT_SHARE_WIDELY_%@" = "Bagikan data saya dengan %@ dan peneliti berkualifikasi di seluruh dunia";
 "CONSENT_SHARE_ONLY_%@" = "Hanya bagikan data saya dengan %@";
-"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data penelitian dari partisipasi Anda dalam penelitian ini.\n\nBerbagi data penelitian yang dikodekan dengan lebih banyak pihak (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan yang akan datang.";
+"CONSENT_SHARING_DESCRIPTION_%@" = "%@ akan menerima data penelitian dari partisipasi Anda dalam studi ini.\n\nBerbagi data studi yang dikodekan dengan lebih banyak pihak (tanpa informasi seperti nama Anda) dapat bermanfaat bagi penelitian ini dan yang akan datang.";
 "LEARN_MORE_CONSENT_SHARING" = "Pelajari berbagi data lebih lanjut";
 
 /* Lines beneath typewritten signatures on documents. Argument is the title of the signatory, e.g. "Participant's Signature" */
@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktivitas Selesai";
 "TASK_COMPLETE_TEXT" = "Data Anda akan dianalisis dan Anda akan diberi tahu setelah hasil Anda siap.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Ambil Gambar";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ambil Ulang Gambar";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera tidak ditemukan.  Langkah ini tidak dapat diselesaikan.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk menyelesaikan langkah ini, izinkan app ini untuk mengakses kamera di Pengaturan.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tidak ada direktori output yang ditentukan untuk gambar yang diambil.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Gambar yang diambil tidak dapat disimpan.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kebugaran";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Jarak (%@)";
@@ -152,7 +160,7 @@
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Kecepatan Mengetuk";
 "TAPPING_INTRO_TEXT" = "Aktivitas ini mengukur kecepatan mengetuk Anda.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Letakkan telepon Anda di permukaan rata. Dua tombol akan muncul di layar Anda untuk %@. Dengan menggunakan dua jari di tangan yang sama, ketuk tombol secara bergantian secepat Anda bisa.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Letakkan telepon Anda di permukaan rata. Dua tombol akan muncul di layar Anda selama %@. Dengan menggunakan dua jari di tangan yang sama, ketuk tombol secara bergantian secepat Anda bisa.";
 "TAPPING_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
 "TAP_BUTTON_TITLE" = "Ketuk";
 "TOTAL_TAPS_LABEL" = "Total Ketukan";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Tarik nafas dalam-dalam dan katakan “Aaaaah” ke mikrofon selama Anda bisa. Pertahankan volume suara sehingga bar audio tetap berwarna biru.";
 "AUDIO_INTENDED_USE" = "Tes ini mengevaluasi suara Anda dengan merekamnya saat Anda berbicara melalui mikrofon di bagian bawah telepon Anda.";
 "AUDIO_TOO_LOUD_LABEL" = "Terlalu Keras";
+"AUDIO_GENERIC_ERROR_LABEL" = "Tidak dapat merekam audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometri Nada";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengukur kemampuan Anda untuk mendengar bunyi yang berbeda.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, sambungkan dan pakai headphone Anda.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di samping perangkat Anda.\n\nKetuk tombol saat siap untuk memulai.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Ketuk tombol setiap kali Anda mulai mendengar bunyi.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memori Spasial";
@@ -173,7 +192,7 @@
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "bunga";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut sesuai urutan menyalanya.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Beberapa %@ akan menyala satu per satu. Ketuk %@ tersebut berkebalikan dengan urutan menyalanya.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Untuk memulai, ketuk Mulai, lalu perhatikan dengan seksama.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Untuk memulai, ketuk Mulai, lalu perhatikan dengan saksama.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Skor";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Lihat %@ menyala";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Permainan Selesai";
 "MEMORY_GAME_PAUSED_TITLE" = "Dijeda";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Untuk melanjutkan, ketuk Berikutnya";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Waktu Reaksi";
+"REACTION_TIME_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi waktu yang Anda butuhkan untuk merespons isyarat visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goyang perangkat ke arah mana pun segera setelah titik biru muncul di layar. Anda akan diminta untuk melakukannya sebanyak %D kali.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %D dari %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyang perangkat dengan cepat saat lingkaran biru muncul";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "salah";
 "AX.MEMORY.TILE.QUIESCENT" = "diam";
 "AX.MEMORY.TILE.LABEL" = "Ubin permainan memori";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Pratinjau gambar";
 

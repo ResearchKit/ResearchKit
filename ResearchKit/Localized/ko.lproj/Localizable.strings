@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "실험 완료";
 "TASK_COMPLETE_TEXT" = "데이터를 분석하여 결과가 준비되면 통보합니다.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "이미지 캡처";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "이미지 다시 캡처";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "카메라를 찾을 수 없습니다.  이 단계를 완료할 수 없습니다.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "이 단계를 완료하려면 설정에서 이 App이 카메라에 접근할 수 있도록 허용하십시오.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "캡처한 이미지를 위한 출력 디렉토리가 지정되지 않았습니다.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "캡처한 이미지를 저장할 수 없습니다.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "피트니스";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "거리(%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "숨을 크게 들이쉰 다음 마이크에 대고 최대한 길게 ‘아’하고 말하십시오. 오디오 막대가 파란색으로 지속되도록 발성 음량을 꾸준하게 유지하십시오.";
 "AUDIO_INTENDED_USE" = "이 실험은 전화 하단에 있는 마이크로 목소리를 녹음하여 사용자의 음성을 평가합니다.";
 "AUDIO_TOO_LOUD_LABEL" = "소리가 너무 큼";
+"AUDIO_GENERIC_ERROR_LABEL" = "오디오를 녹음할 수 없습니다.";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "순음 청력 검사";
+"TONE_AUDIOMETRY_INTENDED_USE" = "이 실험은 다른 사운드를 들을 수 있는 사용자의 청력을 측정합니다.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "시작하기 전에 헤드폰을 연결하고 착용하십시오.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "이제 소리가 들립니다. 기기 측면에 있는 제어기를 사용하여 음량을 조절하십시오.\n\n시작할 준비가 되었으면 버튼을 탭하십시오.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "사운드가 들리기 시작할 때마다 버튼을 탭하십시오.";
+"TONE_LABEL_%@_LEFT" = "%@Hz, 왼쪽";
+"TONE_LABEL_%@_RIGHT" = "%@Hz, 오른쪽";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "공간 기억";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "게임 종료";
 "MEMORY_GAME_PAUSED_TITLE" = "일시 정지됨";
 "MEMORY_GAME_PAUSED_MESSAGE" = "계속하려면 다음을 탭하십시오.";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "반응 시간";
+"REACTION_TIME_TASK_INTENDED_USE" = "이 실험은 시각 신호에 대한 사용자의 반응 시간을 평가합니다.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "파란 점이 화면에 나타나면 방향에 상관없이 즉시 기기를 흔드십시오. 이 동작을 %D번 해야 합니다.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%D/%D 시도";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "파란 원이 나타나면 재빨리 기기를 흔드십시오.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "파일을 생성할 수 없습니다.";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "틀림";
 "AX.MEMORY.TILE.QUIESCENT" = "대기";
 "AX.MEMORY.TILE.LABEL" = "메모리 게임 타일";
+
+"AX_IMAGE_CAPTURE_LABEL" = "캡처 미리보기";
 

@@ -358,7 +358,7 @@ CGFloat ORKTableViewLeftMargin(UITableView *tableView) {
 
 UIFont *ORKThinFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
@@ -371,7 +371,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
 
 UIFont *ORKMediumFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
@@ -384,7 +384,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
 
 UIFont *ORKLightFontWithSize(CGFloat size) {
     UIFont *font = nil;
-    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 2, 0}]) {
+    if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){.majorVersion = 8, .minorVersion = 2, .patchVersion = 0}]) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];

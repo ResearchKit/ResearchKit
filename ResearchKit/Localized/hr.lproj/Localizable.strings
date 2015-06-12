@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Aktivnost je dovršena";
 "TASK_COMPLETE_TEXT" = "Vaši podaci će se analizirati i bit ćete obaviješteni kad vaši rezultati budu spremni.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Snimi sliku";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Ponovno snimi sliku";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Kamera nije pronađena.  Korak se ne može dovršiti.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Za dovršetak ovog koraka, u Postavkama dopustite aplikaciji pristup kameri.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nije naveden izlazni direktorij za snimljene slike.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Snimljena slika ne može se spremiti.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kondicija";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Udaljenost (%@)";
@@ -165,29 +173,48 @@
 "AUDIO_INTRO_TEXT" = "Duboko udahnite i izgovorite \"Aaaaaa\" u mikrofon što dulje možete. Održavajte ujednačenu glasnoću glasa tako da audio stupci ostanu plavi.";
 "AUDIO_INTENDED_USE" = "Ova aktivnost evaluira vaš glas tako što ga snima pomoću mikrofona na dnu vašeg telefona.";
 "AUDIO_TOO_LOUD_LABEL" = "Preglasno";
+"AUDIO_GENERIC_ERROR_LABEL" = "Zvuk se ne može snimati";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiometrija";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Ovom se aktivnošću mjeri vaša sposobnost da čujete različite zvukove.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Prije početka priključite i stavite slušalice.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Sada biste trebali čuti ton. Podesite glasnoću uz pomoć kontrola s bočne strane uređaja.\n\nDodirnite tipku kada ste spremni za početak.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Dodirnite tipku svaki put kada začujete zvuk.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, lijevo";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, desno";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Prostorna memorija";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ova aktivnost mjeri vašu kratkotrajnu prostornu memoriju tako što traži da ponovite redoslijed kojim je %@ zasvijetlilo.";
-"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "cvijeće";
-"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "cvijeće";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Neko %@ će pojedičano zasvijetliti. Dodirnite to %@ istim redoslijedom kojim je zasvijetlilo.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Neko %@ će pojedičano zasvijetliti. Dodirnite to %@ obrnutim redoslijedom od onog kojim je zasvijetlilo.";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Ova aktivnost mjeri vašu kratkotrajnu prostornu memoriju tako što traži da dodirnete %@ redoslijedom kojim su zasvijetlili.";
+"SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "cvjetove";
+"SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "cvjetovi";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ istim redoslijedom kojim su zasvijetlili.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ obrnutim redoslijedom od onog kojim su zasvijetlili.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Dodirnite Pokreni, zatim gledajte pažljivo.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Rezultat";
-"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Gledajte kako %@ svijetli";
+"MEMORY_GAME_PLAYBACK_TITLE_%@" = "Gledajte %@ kako svijetle";
 "MEMORY_GAME_GAMEPLAY_TITLE_%@" = "Dodirnite %@ redoslijedom kojim su zasvijetlili";
 "MEMORY_GAME_GAMEPLAY_REVERSE_TITLE_%@" = "Dodirnite %@ obrnutim redoslijedom";
 "MEMORY_GAME_COMPLETE_TITLE" = "Niz je dovršen";
 "MEMORY_GAME_COMPLETE_MESSAGE" = "Za nastavak, dodirnite Sljedeće";
-"MEMORY_GAME_FAILED_TITLE" = "Pokušajte ponovno";
+"MEMORY_GAME_FAILED_TITLE" = "Pokušaj ponovno";
 "MEMORY_GAME_FAILED_MESSAGE" = "Ovaj put niste uspjeli. Dodirnite Sljedeće za nastavak.";
 "MEMORY_GAME_TIMEOUT_TITLE" = "Vrijeme je isteklo";
 "MEMORY_GAME_TIMEOUT_MESSAGE" = "Ponestalo vam je vremena.\nDodirnite Sljedeće za nastavak.";
 "MEMORY_GAME_COMPLETE" = "Igra je dovršena";
 "MEMORY_GAME_PAUSED_TITLE" = "Pauzirano";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Za nastavak, dodirnite Sljedeće";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Vrijeme reakcije";
+"REACTION_TIME_TASK_INTENDED_USE" = "Ovom se aktivnošću procjenjuje koliko vam je vremena potrebno za reakciju na vizualni znak.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Protresite uređaj u bilo kojem smjeru čim se na zaslonu pojavi plava točka. Od vas će se zatražiti da to učinite %D puta.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %D od %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kada se pojavi plavi krug, brzo protresite uređaj";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Datoteka se ne može izraditi";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "netočno";
 "AX.MEMORY.TILE.QUIESCENT" = "neaktivno";
 "AX.MEMORY.TILE.LABEL" = "Igra memorije s pločicama";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Snimi pregled";
 

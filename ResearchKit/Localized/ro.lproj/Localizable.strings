@@ -129,6 +129,14 @@
 "TASK_COMPLETE_TITLE" = "Activitate finalizată";
 "TASK_COMPLETE_TEXT" = "Datele dvs. vor fi analizate și veți primi o notificare atunci când rezultatele vor fi disponibile.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capturați imaginea";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapturați imaginea";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nicio cameră găsită. Această etapă nu poate fi finalizată.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "Pentru a finaliza această etapă, acordați acestei aplicații acces la cameră în Configurări.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire pentru imaginile capturate.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imaginea capturată nu a putut fi salvată.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distanță (%@)";
@@ -165,6 +173,17 @@
 "AUDIO_INTRO_TEXT" = "Inspirați adânc și spuneți “Aaaaah” în microfon cât de mult timp puteți. Mențineți un volum vocal constant, astfel încât barele audio să rămână albastre.";
 "AUDIO_INTENDED_USE" = "Această activitate vă evaluează vocea prin înregistrarea acesteia cu microfonul din partea de jos a telefonului dvs.";
 "AUDIO_TOO_LOUD_LABEL" = "Prea tare";
+"AUDIO_GENERIC_ERROR_LABEL" = "Imposibil de înregistrat audio";
+
+/* Tone audiometry active task. */
+"TONE_AUDIOMETRY_TASK_TITLE" = "Audiometrie tonală";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Această activitate vă măsoară capacitatea de a auzi diferite sunete.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Înainte de a începe, conectați căștile și puneți-le pe cap.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Ar trebui să auziți un ton acum. Reglați volumul folosind comenzile de pe partea laterală a dispozitivului.\n\nApăsați butonul când sunteți gata să începeți.";
+"TONE_AUDIOMETRY_INSTRUCTION" = "Apăsați butonul de fiecare dată când începeți să auziți un sunet.";
+"TONE_LABEL_%@_LEFT" = "%@ Hz, stânga";
+"TONE_LABEL_%@_RIGHT" = "%@ Hz, dreapta";
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "Memorie spațială";
@@ -188,6 +207,14 @@
 "MEMORY_GAME_COMPLETE" = "Joc finalizat";
 "MEMORY_GAME_PAUSED_TITLE" = "Suspendat";
 "MEMORY_GAME_PAUSED_MESSAGE" = "Pentru a continua, apăsați “Înainte”";
+
+/* Reaction time active task. */
+"REACTION_TIME_TASK_TITLE" = "Timp de reacție";
+"REACTION_TIME_TASK_INTENDED_USE" = "Această activitate evaluează timpul de care aveți nevoie pentru a răspunde la un stimul vizual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agitați dispozitivul în orice direcție imediat ce apare punctul albastru pe ecran. Va trebui să repetați acțiunea de %D ori.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Încercarea %D din %D";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agitați rapid dispozitivul atunci când apare cercul albastru";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Fișierul nu a putut fi creat";
@@ -225,4 +252,6 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorect";
 "AX.MEMORY.TILE.QUIESCENT" = "pasiv";
 "AX.MEMORY.TILE.LABEL" = "Piesă joc memorie";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Previzualizare captură";
 
