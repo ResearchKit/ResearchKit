@@ -119,8 +119,14 @@ static const CGFloat AssumedStatusBarHeight = 20;
         
 #ifdef LAYOUT_DEBUG
         _captionLabel.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.2];
+        _captionLabel.layer.borderColor = [UIColor yellowColor].CGColor;
+        _captionLabel.layer.borderWidth = 1.0;
         _learnMoreButton.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        _learnMoreButton.layer.borderColor = [UIColor blueColor].CGColor;
+        _learnMoreButton.layer.borderWidth = 1.0;
         _instructionLabel.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
+        _instructionLabel.layer.borderColor = [UIColor greenColor].CGColor;
+        _instructionLabel.layer.borderWidth = 1.0;
         self.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
         [self setNeedsUpdateConstraints];
@@ -321,11 +327,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         }
         
         for (UIView *view in views) {
-#ifdef LAYOUT_DEBUG
-            view.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
-            view.layer.borderColor = [UIColor redColor].CGColor;
-            view.layer.borderWidth = 1.0;
-#endif
             [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
             [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
             
