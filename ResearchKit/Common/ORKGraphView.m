@@ -43,7 +43,6 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 @end
 
 @implementation ORKGraphView {
-    BOOL _isScrubbing;
 }
 
 #pragma mark - Init
@@ -139,9 +138,13 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     
     // Scrubber Views
     self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), ORKGraphTopPadding, 1, CGRectGetHeight(self.plotsView.frame));
-    [self updateScrubberLabel];
     self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame), CGRectGetMinY(self.scrubberThumbView.frame), [self scrubberThumbSize].width, [self scrubberThumbSize].height);
     self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height/2;
+    if (self.isLandscapeMode) {
+        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:14.0f];
+    } else {
+        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
+    }
     
     [_xAxisView layoutSubviews];
 }
@@ -490,34 +493,21 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     return thumbSize;
 }
 
-- (void)updateScrubberLabel {
-    if (self.isLandscapeMode) {
-        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:14.0f];
-    } else {
-        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
-    }
-}
-
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     if ((self.dataPoints.count > 0) && [self numberOfValidValues] > 0) {
         
         CGPoint location = [gestureRecognizer locationInView:self.plotsView];
-        location = CGPointMake(location.x, location.y);
         CGFloat maxX = round(CGRectGetWidth(self.plotsView.bounds));
-        CGFloat minX = 0;
-        CGFloat normalizedX = MAX(MIN(location.x, maxX), minX);
+        CGFloat normalizedX = MAX(MIN(location.x, maxX), 0);
         location = CGPointMake(normalizedX, location.y);
         CGFloat snappedXPosition = [self snappedXPosition:location.x];
-        
-        BOOL shouldAnimate = location.x != snappedXPosition;
-        [self updateScrubberViewForXPosition:snappedXPosition animated: shouldAnimate];
+        [self updateScrubberViewForXPosition:snappedXPosition];
         
         if ([self.delegate respondsToSelector:@selector(graphView:touchesMovedToXPosition:)]) {
             [self.delegate graphView:self touchesMovedToXPosition:snappedXPosition];
         }
         
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-            _isScrubbing = YES;
             [self setScrubberViewsHidden:NO animated:YES];
             if ([self.delegate respondsToSelector:@selector(graphViewTouchesBegan:)]) {
                 [self.delegate graphViewTouchesBegan:self];
@@ -525,7 +515,6 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         }
         
         else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-            _isScrubbing = NO;
             [self setScrubberViewsHidden:YES animated:YES];
             if ([self.delegate respondsToSelector:@selector(graphViewTouchesEnded:)]) {
                 [self.delegate graphViewTouchesEnded:self];
@@ -534,39 +523,20 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     }
 }
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition animated:(BOOL)animated {
-    if (animated) {
-        [UIView animateWithDuration:0.1 animations:^{
-            [self updateScrubberViewForXPosition:xPosition];
-        }];
-    }
-    else {
-        [self updateScrubberViewForXPosition:xPosition];
-    }
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
+    [UIView animateWithDuration:0.1 animations:^{
+        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+        [self updateScrubberLineAccessories:xPosition];
+    }];
 }
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
-    
-    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
-    self.scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingVal];
-    
-    CGSize textSize = [self.scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(self.scrubberLabel.bounds)) options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.scrubberLabel.font} context:nil].size;
-    
-    [self.scrubberLabel setFrame:CGRectMake(CGRectGetMaxX(self.scrubberLine.frame) + 6, CGRectGetMinY(self.scrubberLine.frame), textSize.width + 8, CGRectGetHeight(self.scrubberLabel.frame))];
-    
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition {
     CGFloat scrubberYPos = [self canvasYPointForXPosition:xPosition];
-    
-    [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphLeftPadding, scrubberYPos + ORKGraphTopPadding)];
-    
-    
-    if (scrubbingVal >= self.minimumValue && scrubbingVal <= self.maximumValue && _isScrubbing) {
-        self.scrubberLabel.alpha = 1;
-        self.scrubberThumbView.alpha = 1;
-    } else {
-        self.scrubberLabel.alpha = 0;
-        self.scrubberThumbView.alpha = 0;
-    }
+    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
+   [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphLeftPadding, scrubberYPos + ORKGraphTopPadding)];
+    self.scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingVal];
+   CGSize textSize = [self.scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(self.scrubberLabel.bounds)) options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.scrubberLabel.font} context:nil].size;
+   [self.scrubberLabel setFrame:CGRectMake(CGRectGetMaxX(self.scrubberLine.frame) + 6, CGRectGetMinY(self.scrubberLine.frame), textSize.width + 8, CGRectGetHeight(self.scrubberLabel.frame))];
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {

@@ -39,7 +39,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 
 @implementation ORKPieChartView {
-    CGFloat _lineWidth;
     CGFloat _pieRadius;
     CGFloat _sumOfValues;
     CGFloat _originAngle;
@@ -97,7 +96,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
     
-    _lineWidth = CGRectGetHeight(self.frame) / 20.0f;
+    _lineWidth = 10;
     _percentageLabelOffset = 10;
     
     _circleLayer = [CAShapeLayer layer];
@@ -174,9 +173,13 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     // circle path
     CGFloat startAngle = _originAngle;
     CGFloat endAngle = startAngle + (2 * M_PI);
+    CGFloat unlabelledRadius = plotHeight * 0.5;
     CGFloat labelHeight = [@"100%" boundingRectWithSize: CGRectInfinite.size options:0 attributes:@{NSFontAttributeName : _percentageFont} context:nil].size.height;
-    CGFloat radiusPadding = labelHeight + _percentageLabelOffset + (_lineWidth * 0.5);
-    _pieRadius = (plotHeight - (radiusPadding * 2)) * 0.5;
+    CGFloat labelledRadius = unlabelledRadius - (labelHeight + _percentageLabelOffset);
+    _lineWidth = MIN(_lineWidth, labelledRadius);
+    _circleLayer.lineWidth = _lineWidth;
+    _pieRadius = labelledRadius - (_lineWidth * 0.5);
+    
     if (!self.shouldDrawClockwise) {
         startAngle = 3*M_PI_2;
         endAngle = -M_PI_2;

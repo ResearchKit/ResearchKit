@@ -126,6 +126,12 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) CGFloat animationDuration;
 
 /**
+    The width of the line used to draw the pie chart.
+    If you do not set a value for this property, the pie chart view will assume a sensible value.
+ */
+@property (nonatomic) CGFloat lineWidth;
+
+/**
     The text to display as a title in the pie chart view.
     If you do not set a value for this property, the pie chart will not display a title.
  */

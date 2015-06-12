@@ -117,17 +117,24 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 #pragma mark -- Animation
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition animated:(BOOL)animated {
-    if (animated) {
-        [UIView animateWithDuration:0.1 animations:^{
-            self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
-        } completion:^(BOOL finished) {
-                [self updateScrubberViewForXPosition:xPosition];
-            }];
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
+    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
+    if (scrubbingVal == NSNotFound) {
+        [self setScrubberLineAccessoriesHidden: YES];
     }
-    else {
-        [self updateScrubberViewForXPosition:xPosition];
-    }
+    [UIView animateWithDuration:0.1 animations:^{
+       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+    } completion:^(BOOL finished) {
+       if (scrubbingVal != NSNotFound) {
+           [self setScrubberLineAccessoriesHidden:NO];
+           [self updateScrubberLineAccessories:xPosition];
+        }
+    }];
+}
+
+- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden {
+    self.scrubberLabel.hidden = hidden;
+    self.scrubberThumbView.hidden = hidden;
 }
 
 @end

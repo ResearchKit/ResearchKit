@@ -117,8 +117,8 @@ ORK_EXTERN NSString * const ORKGraphViewRefreshNotification;
 
 - (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay;
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition animated:(BOOL)animated;
-
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
+
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition;
 
 @end
