@@ -226,14 +226,23 @@ You can optionally use one (and only one) blank like to separate:
 
 #### 2.1. Variable Declarations
 
-Declare one variable per line even if they have the same type. In general it's a good idea to initialize variables with a reasonable value.
+Declare one variable per line even if they have the same type. In general it's a good idea to initialize primitive type variables with a reasonable value.
 
     // DO
-    int variable1 = -1;
-    int variable2 = -1;
-    int *variablePointer = NULL;
+    int floatVariable = -1;
+    double doubleVariable = 0.0;
+    int *cPointerVariable = NULL;
+
+Strong, weak, and autoreleasing object pointer stack variables are [implicitly initialized with `nil`](https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW5) so you can either explicitly initialize them (with `nil` or any valid object) for visual homogeneity, or skip initializing them altogether.
+
+    // DO
     id object = nil;
     NSString *string = nil;
+    UIView *view = nil;
+    // ALSO OK
+    id object;
+    NSString *string;
+    UIView *view;
 
 When declaring pointers, there should be a space between the asterisk and the variable type, but none between the asterisk and the variable.
 
