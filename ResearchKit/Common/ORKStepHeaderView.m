@@ -114,15 +114,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
             [self addSubview:_instructionLabel];
         }
         
-        [_captionLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
-        [_instructionLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
         [_learnMoreButton setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
         [_learnMoreButton setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
         
 #ifdef LAYOUT_DEBUG
-        _captionLabel.backgroundColor = [UIColor yellowColor];
-        _learnMoreButton.backgroundColor = [UIColor blueColor];
-        _instructionLabel.backgroundColor = [UIColor greenColor];
+        _captionLabel.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.2];
+        _learnMoreButton.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        _instructionLabel.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
         self.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
         [self setNeedsUpdateConstraints];
