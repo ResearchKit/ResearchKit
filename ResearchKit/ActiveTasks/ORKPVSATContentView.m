@@ -36,6 +36,7 @@
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
 
+
 @interface ORKPVSATContentView ()
 
 @property (nonatomic, strong) ORKSubheadlineLabel *answerCaptionLabel;
@@ -56,7 +57,7 @@
         _answerCaptionLabel.textAlignment = NSTextAlignmentCenter;
         _answerCaptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _digitLabel = [ORKTapCountLabel new];
-        _digitLabel.textColor= [self tintColor];
+        _digitLabel.textColor = [self tintColor];
         _digitLabel.textAlignment = NSTextAlignmentCenter;
         _digitLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _keyboardView = [ORKPVSATKeyboardView new];
@@ -76,7 +77,7 @@
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    self.digitLabel.textColor= [self tintColor];
+    self.digitLabel.textColor = [self tintColor];
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -85,11 +86,11 @@
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        self.digitLabel.textColor= [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
         self.digitLabel.text = @"-";
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];
-        self.digitLabel.textColor= [self tintColor];
+        self.digitLabel.textColor = [self tintColor];
         self.digitLabel.text = digit.stringValue;
         if (additionIndex == 0) {
             self.answerCaptionLabel.text = ORKLocalizedString(@"PVSAT_INITIAL_ADDITION", nil);
