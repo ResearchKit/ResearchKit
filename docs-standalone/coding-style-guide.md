@@ -138,12 +138,24 @@ Method invocations should be formatted much like method declarations. Invocation
               name:arg2
               error:arg3];
 
+#### 1.4. Appledoc Header Comments
 
-#### 1.4. Newlines
+*ResearchKit* uses [appledoc](http://appledoc.gentlebytes.com/appledoc/) to generate its documentation from specially marked comments in header files.
+
+Follow these guidelines when writing *appledoc comments*:
+
+- Multiline *appledoc comments* start with the `/**` character sequence.
+- When documenting methods, use the `@param` and `@return` keywords to detail the parameters and return value.
+- When you name classes or methods, enclose them in backticks so *appledoc* creates a reference (`` `ORKStep` is ...``).
+- For multiline code examples, surround them with a triple backtick (```) for cross references within the code block not to be automatically generated.
+- Don't use abbreviations such as *e.g.* or *i.e.* in the documentation.
+- Read the latest *ResearchKit* documentation for inspiration and try to follow the same literary style.
+
+#### 1.5. Newlines
 
 Use exactly two empty lines to separate:
 - The `/* Copyright header */` and the `#import` section.
-- The `#import` section and the class `@interface` or `@implementation` line (or its associated *forward declarations* or *HeaderDoc comment*).
+- The `#import` section and the class `@interface` or `@implementation` line (or its associated *forward declarations* or *appledoc comment*).
 - Different `@interface` or `@implementation` sections within the same file.
 
 Do not use two or more empty lines in any other cases.
@@ -154,23 +166,24 @@ Use exactly one empty line to separate:
 - The last *method* or *property declaration* and the *`@end` keyword*.
 - The *`@implementation` line* and the first *method definition*.
 - The closing bracket of the last *method definition* and the *`@end` keyword*.
-- The *`@param` section* and the *`@return` line* in a *[HeaderDoc](https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/HeaderDoc/intro/intro.html) comment*.
+- The *`@param` section* and the *`@return` line* in an *appledoc comment*.
 
 *Header* and *implementation* files must have one, and only one, trailing empty line.
 
 Do not use empty lines to separate:
 - *Forward declarations* from other contiguous *forward declarations*.
-- A *HeaderDoc comment* from its related *class* or *method*.
-- Contiguous *`@param` lines* within the same *HeaderDoc comment*.
+- An *appledoc comment* from its related *class* or *method*.
+- Contiguous *`@param` lines* within the same *appledoc comment*.
 - Last statement in a method definition and its closing bracket.
 
-Note that *forward declarations* should appear before any *class HeaderDoc comment*.
+Note that *forward declarations* should appear before any *class appledoc comment*.
 
 You can optionally use one (and only one) blank like to separate:
 - Groups of related `#import` statements.
 - Groups of related statements in a single method implementation.
 
-##### Header File Example
+
+#### 1.6. Header File Example
 
     /*
      Copyright (c) 2015, Apple Inc. All rights reserved.
@@ -188,13 +201,13 @@ You can optionally use one (and only one) blank like to separate:
     @class ORKStep;
 
     /**
-     HeaderDoc class comment.
+     appledoc class comment.
      */
     ORK_CLASS_AVAILABLE
     @interface ORKMyClass : NSObject <NSSecureCoding, NSCopying>
 
     /**
-     HeaderDoc method comment.
+     appledoc method comment.
      
      @param parameterA   The first parameter.
      @param parameterB   The second parameter.
@@ -204,7 +217,7 @@ You can optionally use one (and only one) blank like to separate:
     - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
 
     /**
-     HeaderDoc property comment.
+     appledoc property comment.
      */
     @property (nonatomic, copy, readonly) NSString *aProperty;
 
@@ -212,7 +225,7 @@ You can optionally use one (and only one) blank like to separate:
 
 
     /**
-     HeaderDoc class comment.
+     appledoc class comment.
      */
     ORK_CLASS_AVAILABLE
     @interface ORKMyOtherClass : ORKMyClass
