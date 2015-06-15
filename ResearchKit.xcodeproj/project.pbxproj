@@ -22,14 +22,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		10864C9E1B27146B000F4158 /* ORKPVSATStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C961B27146B000F4158 /* ORKPVSATStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		10864C9F1B27146B000F4158 /* ORKPVSATStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C971B27146B000F4158 /* ORKPVSATStep.m */; };
-		10864CA01B27146B000F4158 /* ORKPVSATStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C981B27146B000F4158 /* ORKPVSATStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		10864CA11B27146B000F4158 /* ORKPVSATStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C991B27146B000F4158 /* ORKPVSATStepViewController.m */; };
-		10864CA21B27146B000F4158 /* ORKPVSATContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9A1B27146B000F4158 /* ORKPVSATContentView.h */; };
-		10864CA31B27146B000F4158 /* ORKPVSATContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9B1B27146B000F4158 /* ORKPVSATContentView.m */; };
-		10864CA41B27146B000F4158 /* ORKPVSATKeyboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9C1B27146B000F4158 /* ORKPVSATKeyboardView.h */; };
-		10864CA51B27146B000F4158 /* ORKPVSATKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9D1B27146B000F4158 /* ORKPVSATKeyboardView.m */; };
+		10864C9E1B27146B000F4158 /* ORKPSATStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C961B27146B000F4158 /* ORKPSATStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		10864C9F1B27146B000F4158 /* ORKPSATStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C971B27146B000F4158 /* ORKPSATStep.m */; };
+		10864CA01B27146B000F4158 /* ORKPSATStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C981B27146B000F4158 /* ORKPSATStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		10864CA11B27146B000F4158 /* ORKPSATStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C991B27146B000F4158 /* ORKPSATStepViewController.m */; };
+		10864CA21B27146B000F4158 /* ORKPSATContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9A1B27146B000F4158 /* ORKPSATContentView.h */; };
+		10864CA31B27146B000F4158 /* ORKPSATContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9B1B27146B000F4158 /* ORKPSATContentView.m */; };
+		10864CA41B27146B000F4158 /* ORKPSATKeyboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10864C9C1B27146B000F4158 /* ORKPSATKeyboardView.h */; };
+		10864CA51B27146B000F4158 /* ORKPSATKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10864C9D1B27146B000F4158 /* ORKPSATKeyboardView.m */; };
 		147503AF1AEE8071004B17F3 /* ORKAudioGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */; };
 		147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */; };
 		147503B71AEE807C004B17F3 /* ORKToneAudiometryContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */; };
@@ -420,14 +420,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10864C961B27146B000F4158 /* ORKPVSATStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPVSATStep.h; sourceTree = "<group>"; };
-		10864C971B27146B000F4158 /* ORKPVSATStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPVSATStep.m; sourceTree = "<group>"; };
-		10864C981B27146B000F4158 /* ORKPVSATStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPVSATStepViewController.h; sourceTree = "<group>"; };
-		10864C991B27146B000F4158 /* ORKPVSATStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPVSATStepViewController.m; sourceTree = "<group>"; };
-		10864C9A1B27146B000F4158 /* ORKPVSATContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPVSATContentView.h; sourceTree = "<group>"; };
-		10864C9B1B27146B000F4158 /* ORKPVSATContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPVSATContentView.m; sourceTree = "<group>"; };
-		10864C9C1B27146B000F4158 /* ORKPVSATKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPVSATKeyboardView.h; sourceTree = "<group>"; };
-		10864C9D1B27146B000F4158 /* ORKPVSATKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPVSATKeyboardView.m; sourceTree = "<group>"; };
+		10864C961B27146B000F4158 /* ORKPSATStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPSATStep.h; sourceTree = "<group>"; };
+		10864C971B27146B000F4158 /* ORKPSATStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPSATStep.m; sourceTree = "<group>"; };
+		10864C981B27146B000F4158 /* ORKPSATStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPSATStepViewController.h; sourceTree = "<group>"; };
+		10864C991B27146B000F4158 /* ORKPSATStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPSATStepViewController.m; sourceTree = "<group>"; };
+		10864C9A1B27146B000F4158 /* ORKPSATContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPSATContentView.h; sourceTree = "<group>"; };
+		10864C9B1B27146B000F4158 /* ORKPSATContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPSATContentView.m; sourceTree = "<group>"; };
+		10864C9C1B27146B000F4158 /* ORKPSATKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPSATKeyboardView.h; sourceTree = "<group>"; };
+		10864C9D1B27146B000F4158 /* ORKPSATKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPSATKeyboardView.m; sourceTree = "<group>"; };
 		147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAudioGenerator.h; sourceTree = "<group>"; };
 		147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAudioGenerator.m; sourceTree = "<group>"; };
 		147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryContentView.h; sourceTree = "<group>"; };
@@ -865,19 +865,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		10864C951B271456000F4158 /* PVSAT */ = {
+		10864C951B271456000F4158 /* PSAT */ = {
 			isa = PBXGroup;
 			children = (
-				10864C961B27146B000F4158 /* ORKPVSATStep.h */,
-				10864C971B27146B000F4158 /* ORKPVSATStep.m */,
-				10864C981B27146B000F4158 /* ORKPVSATStepViewController.h */,
-				10864C991B27146B000F4158 /* ORKPVSATStepViewController.m */,
-				10864C9A1B27146B000F4158 /* ORKPVSATContentView.h */,
-				10864C9B1B27146B000F4158 /* ORKPVSATContentView.m */,
-				10864C9C1B27146B000F4158 /* ORKPVSATKeyboardView.h */,
-				10864C9D1B27146B000F4158 /* ORKPVSATKeyboardView.m */,
+				10864C961B27146B000F4158 /* ORKPSATStep.h */,
+				10864C971B27146B000F4158 /* ORKPSATStep.m */,
+				10864C981B27146B000F4158 /* ORKPSATStepViewController.h */,
+				10864C991B27146B000F4158 /* ORKPSATStepViewController.m */,
+				10864C9A1B27146B000F4158 /* ORKPSATContentView.h */,
+				10864C9B1B27146B000F4158 /* ORKPSATContentView.m */,
+				10864C9C1B27146B000F4158 /* ORKPSATKeyboardView.h */,
+				10864C9D1B27146B000F4158 /* ORKPSATKeyboardView.m */,
 			);
-			name = PVSAT;
+			name = PSAT;
 			sourceTree = "<group>";
 		};
 		147503AC1AEE8058004B17F3 /* Tone Audiometry */ = {
@@ -976,15 +976,15 @@
 		86C40AF91A8D7C5B00081FAC /* ActiveTasks */ = {
 			isa = PBXGroup;
 			children = (
-				10864C951B271456000F4158 /* PVSAT */,
 				B12EFF4F1AB2165B00A80147 /* Common */,
 				B12EFF4E1AB2161500A80147 /* Audio */,
 				B12EFF5D1AB2177700A80147 /* Fitness */,
 				B12EFF5E1AB2177D00A80147 /* Spatial Span Memory */,
-				25ECC0921AFBD64800F3D63B /* Reaction Time */,
 				B12EFF5F1AB2178500A80147 /* Tapping */,
 				B12EFF601AB2178B00A80147 /* Walking */,
 				147503AC1AEE8058004B17F3 /* Tone Audiometry */,
+				25ECC0921AFBD64800F3D63B /* Reaction Time */,
+				10864C951B271456000F4158 /* PSAT */,
 			);
 			path = ActiveTasks;
 			sourceTree = "<group>";
@@ -1826,7 +1826,7 @@
 				86C40C8C1A8D7C5C00081FAC /* ORKActiveStepViewController.h in Headers */,
 				618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */,
 				86C40C3A1A8D7C5C00081FAC /* ORKSpatialSpanGameState.h in Headers */,
-				10864CA21B27146B000F4158 /* ORKPVSATContentView.h in Headers */,
+				10864CA21B27146B000F4158 /* ORKPSATContentView.h in Headers */,
 				618DA0501A93D0D600E63AA8 /* ORKAccessibilityFunctions.h in Headers */,
 				86C40C721A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.h in Headers */,
 				86C40CA41A8D7C5C00081FAC /* ORKLocationRecorder.h in Headers */,
@@ -1905,7 +1905,7 @@
 				86C40CF61A8D7C5C00081FAC /* ORKBorderedButton.h in Headers */,
 				86C40D4A1A8D7C5C00081FAC /* ORKLabel.h in Headers */,
 				861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */,
-				10864CA01B27146B000F4158 /* ORKPVSATStepViewController.h in Headers */,
+				10864CA01B27146B000F4158 /* ORKPSATStepViewController.h in Headers */,
 				BC13CE3E1B0662A80044153C /* ORKOrderedTask_Internal.h in Headers */,
 				86C40C3E1A8D7C5C00081FAC /* ORKSpatialSpanMemoryContentView.h in Headers */,
 				86C40CC01A8D7C5C00081FAC /* ORKCompletionStep.h in Headers */,
@@ -1940,7 +1940,7 @@
 				86C40CD81A8D7C5C00081FAC /* ORKTextFieldView.h in Headers */,
 				86C40DD01A8D7C5C00081FAC /* ORKTaskViewController_Private.h in Headers */,
 				86C40DAE1A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.h in Headers */,
-				10864CA41B27146B000F4158 /* ORKPVSATKeyboardView.h in Headers */,
+				10864CA41B27146B000F4158 /* ORKPSATKeyboardView.h in Headers */,
 				86C40CFE1A8D7C5C00081FAC /* ORKChoiceViewCell.h in Headers */,
 				86C40DC61A8D7C5C00081FAC /* ORKTask.h in Headers */,
 				86C40C561A8D7C5C00081FAC /* ORKTappingIntervalStepViewController.h in Headers */,
@@ -1956,7 +1956,7 @@
 				86C40CB01A8D7C5C00081FAC /* ORKRecorder_Internal.h in Headers */,
 				86C40E101A8D7C5C00081FAC /* ORKConsentSceneViewController.h in Headers */,
 				86C40DAA1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.h in Headers */,
-				10864C9E1B27146B000F4158 /* ORKPVSATStep.h in Headers */,
+				10864C9E1B27146B000F4158 /* ORKPSATStep.h in Headers */,
 				86C40D6E1A8D7C5C00081FAC /* ORKResult_Private.h in Headers */,
 				86C40D161A8D7C5C00081FAC /* ORKErrors.h in Headers */,
 				861D11B51AA7D073003C98A7 /* ORKTextChoiceCellGroup.h in Headers */,
@@ -2243,7 +2243,7 @@
 				86C40D001A8D7C5C00081FAC /* ORKChoiceViewCell.m in Sources */,
 				86C40C4C1A8D7C5C00081FAC /* ORKSpatialSpanTargetView.m in Sources */,
 				86C40D9E1A8D7C5C00081FAC /* ORKSubheadlineLabel.m in Sources */,
-				10864CA31B27146B000F4158 /* ORKPVSATContentView.m in Sources */,
+				10864CA31B27146B000F4158 /* ORKPSATContentView.m in Sources */,
 				D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */,
 				86C40C401A8D7C5C00081FAC /* ORKSpatialSpanMemoryContentView.m in Sources */,
 				147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */,
@@ -2302,7 +2302,7 @@
 				86C40D761A8D7C5C00081FAC /* ORKScaleRangeLabel.m in Sources */,
 				86C40C741A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.m in Sources */,
 				86AD91151AB7B97E00361FEB /* ORKQuestionStepView.m in Sources */,
-				10864CA11B27146B000F4158 /* ORKPVSATStepViewController.m in Sources */,
+				10864CA11B27146B000F4158 /* ORKPSATStepViewController.m in Sources */,
 				86C40C5C1A8D7C5C00081FAC /* ORKWalkingTaskStep.m in Sources */,
 				86C40C3C1A8D7C5C00081FAC /* ORKSpatialSpanGameState.m in Sources */,
 				86C40CF41A8D7C5C00081FAC /* ORKBodyLabel.m in Sources */,
@@ -2320,7 +2320,7 @@
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
 				86C40C8E1A8D7C5C00081FAC /* ORKActiveStepViewController.m in Sources */,
 				B183A5011A8535D100C76870 /* (null) in Sources */,
-				10864CA51B27146B000F4158 /* ORKPVSATKeyboardView.m in Sources */,
+				10864CA51B27146B000F4158 /* ORKPSATKeyboardView.m in Sources */,
 				86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */,
 				25ECC0961AFBD68300F3D63B /* ORKReactionTimeStep.m in Sources */,
 				BC13CE3A1B0660220044153C /* ORKNavigableOrderedTask.m in Sources */,
@@ -2345,7 +2345,7 @@
 				86C40D581A8D7C5C00081FAC /* ORKOrderedTask.m in Sources */,
 				86C40D601A8D7C5C00081FAC /* ORKQuestionStep.m in Sources */,
 				86C40E381A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.m in Sources */,
-				10864C9F1B27146B000F4158 /* ORKPVSATStep.m in Sources */,
+				10864C9F1B27146B000F4158 /* ORKPSATStep.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

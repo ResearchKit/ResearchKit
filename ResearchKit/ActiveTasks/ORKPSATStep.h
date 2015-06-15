@@ -29,19 +29,17 @@
  */
 
 
-#import "ORKCustomStepView_Internal.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKPVSATKeyboardView;
+ORK_CLASS_AVAILABLE
+@interface ORKPSATStep : ORKActiveStep
 
-@interface ORKPVSATContentView : ORKActiveStepCustomView
-
-@property (nonatomic, strong) ORKPVSATKeyboardView *keyboardView;
-
-- (void)setEnabled:(BOOL)enabled;
-- (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;
+@property (nonatomic, assign) ORKPSATVersion PSATVersion;
+@property (nonatomic, assign) NSInteger seriesLength;
+@property (nonatomic, assign) NSTimeInterval additionDuration;
 
 @end
 

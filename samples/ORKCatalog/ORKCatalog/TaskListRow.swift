@@ -56,7 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
-    case PVSAT
+    case PSAT
     case ImageCapture
     case Survey
     case Consent
@@ -137,8 +137,8 @@ enum TaskListRow: Int, Printable {
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
             
-            case .PVSAT:
-                return NSLocalizedString("PVSAT Active Task", comment: "")
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -225,7 +225,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
-        case PVSATTask =                                            "PVSATTask"
+        case PSATTask =                                             "PSATTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -311,8 +311,8 @@ enum TaskListRow: Int, Printable {
             case .ReactionTime:
                 return reactionTimeTask
             
-            case .PVSAT:
-                return PVSATTask
+            case .PSAT:
+                return PSATTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -611,9 +611,9 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
-    /// This task presents the PVSAT pre-defined active task.
-    private var PVSATTask: ORKTask {
-        return ORKOrderedTask.PVSATTaskWithIdentifier(Identifier.PVSATTask.rawValue, intendedUseDescription: exampleDescription, additionDuration: 3.0, seriesLength: 60, options: nil)
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, PSATVersion: ORKPSATVersion.PAVSAT, additionDuration: 3.0, seriesLength: 60, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

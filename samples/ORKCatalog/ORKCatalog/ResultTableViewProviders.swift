@@ -106,8 +106,8 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKToneAudiometryResult:
                 providerType = ToneAudiometryResultTableViewProvider.self
             
-            case is ORKPVSATResult:
-                providerType = PVSATResultTableViewProvider.self
+            case is ORKPSATResult:
+                providerType = PSATResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -610,8 +610,8 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
     }
 }
 
-/// Table view provider specific to an `ORKPVSATResult` instance.
-class PVSATResultTableViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKPSATResult` instance.
+class PSATResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -635,35 +635,46 @@ class PVSATResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let PVSATResult = result as! ORKPVSATResult
+        let PSATResult = result as! ORKPSATResult
         
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
+            var version = ""
+            switch PSATResult.PSATVersion {
+            case .PASAT: version = "PASAT"
+            case .PVSAT: version = "PVSAT"
+            case .PAVSAT: version = "PAVSAT"
+            default: version = "Unknown"
+            }
+            
             return rows + [
-                // The duration for an addition of the PVSAT.
-                ResultRow(text: "duration", detail: PVSATResult.duration),
+                // The version (Auditory and/or Visual) of the PSAT.
+                ResultRow(text: "version", detail: version),
                 
-                // The serie length of the PVSAT.
-                ResultRow(text: "length", detail: PVSATResult.length),
+                // The duration for an addition of the PSAT.
+                ResultRow(text: "duration", detail: PSATResult.duration),
+                
+                // The serie length of the PSAT.
+                ResultRow(text: "length", detail: PSATResult.length),
                 
                 // The number of correct answers.
-                ResultRow(text: "totalCorrect", detail: PVSATResult.totalCorrect),
+                ResultRow(text: "totalCorrect", detail: PSATResult.totalCorrect),
                 
                 // The total time for the 60 answers.
-                ResultRow(text: "totalTime", detail: PVSATResult.totalTime),
+                ResultRow(text: "totalTime", detail: PSATResult.totalTime),
                 
                 // The initial digit number.
-                ResultRow(text: "initialDigit", detail: PVSATResult.initialDigit)
+                ResultRow(text: "initialDigit", detail: PSATResult.initialDigit)
             ]
         }
         
         // Add a `ResultRow` for each sample.
-        return rows + PVSATResult.samples!.map { sample in
-            let PVSATSample = sample as! ORKPVSATSample
+        return rows + PSATResult.samples!.map { sample in
+            let PSATSample = sample as! ORKPSATSample
             
-            let text = String(format: "%@", PVSATSample.correct ? "correct" : "error")
-            let detail = "\(PVSATSample.answer) (digit: \(PVSATSample.digit), time: \(PVSATSample.time))"
+            let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
+            let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"
             
             return ResultRow(text: text, detail: detail)
         }

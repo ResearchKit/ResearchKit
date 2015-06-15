@@ -216,15 +216,19 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %D sur %D";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
-/* PVSAT active task. */
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Le test d'addition auditive en série rythmée mesure votre vitesse de traitement des informations auditives et votre capacité de calcul.";
 "PVSAT_INTRO_TEXT" = "Le test d'addition visuelle en série rythmée mesure votre vitesse de traitement des informations visuelles et votre capacité de calcul.";
-"PVSAT_INTRO_TEXT_2_%@" = "Des chiffres sont présentés toutes les %@ secondes.\nVous devez ajouter chaque nouveau chiffre au précédent.\nAttention, vous ne devez pas calculer un total cumulé, mais seulement la somme des deux derniers chiffres.";
-"PVSAT_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
-"PVSAT_INITIAL_INSTRUCTION" = "Mémorisez le premier chiffre ci-dessous.";
-"PVSAT_INSTRUCTION" = "Ajoutez le chiffre ci-dessous au précédent.";
-"PVSAT_INITIAL_ADDITION" = "Initial digit";
-"PVSAT_ADDITION_%@" = "Addition %@/%@";
+"PAVSAT_INTRO_TEXT" = "Le test d'addition auditive et visuelle en série rythmée mesure votre vitesse de traitement des informations auditives et visuelles et votre capacité de calcul.";
+"PSAT_INTRO_TEXT_2_%@" = "Des chiffres sont présentés toutes les %@ secondes.\nVous devez ajouter chaque nouveau chiffre au précédent.\nAttention, vous ne devez pas calculer un total cumulé, mais seulement la somme des deux derniers chiffres.";
+"PSAT_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"PSAT_INITIAL_INSTRUCTION" = "Mémorisez ce premier chiffre.";
+"PSAT_INSTRUCTION" = "Ajoutez ce nouveau chiffre au précédent.";
+"PSAT_INITIAL_ADDITION" = "Chiffre initial";
+"PSAT_ADDITION_%@" = "Addition %@/%@";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";

@@ -56,7 +56,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
-static NSString * const PVSATTaskIdentifier = @"PVSAT";
+static NSString * const PSATTaskIdentifier = @"PSAT";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
@@ -188,9 +188,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button addTarget:self action:@selector(showPVSATTask:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"PVSAT" forState:UIControlStateNormal];
-        [buttonKeys addObject:@"PVSAT"];
+        [button addTarget:self action:@selector(showPSATTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"PSAT" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"PSAT"];
         buttons[buttonKeys.lastObject] = button;
     }
     
@@ -420,9 +420,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                              timeoutSound:0
                                                              failureSound:0
                                                                   options:0];
-    } else if ([identifier isEqualToString:PVSATTaskIdentifier]) {
-        return [ORKOrderedTask PVSATTaskWithIdentifier:PVSATTaskIdentifier
+    } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
+        return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
                                 intendedUseDescription:nil
+                                          PSATVersion:ORKPSATVersionPAVSAT
                                       additionDuration:3.0
                                           seriesLength:60
                                                options:(ORKPredefinedTaskOption)0];
@@ -1431,8 +1432,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
 }
 
-- (IBAction)showPVSATTask:(id)sender {
-    [self beginTaskWithIdentifier:PVSATTaskIdentifier];
+- (IBAction)showPSATTask:(id)sender {
+    [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
 #pragma mark Dynamic task
@@ -2430,8 +2431,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
-            } else if ([result isKindOfClass:[ORKPVSATResult class]]) {
-                ORKPVSATResult *pr = (ORKPVSATResult *)result;
+            } else if ([result isKindOfClass:[ORKPSATResult class]]) {
+                ORKPSATResult *pr = (ORKPSATResult *)result;
                 NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);

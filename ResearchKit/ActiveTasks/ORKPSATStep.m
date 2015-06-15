@@ -29,14 +29,14 @@
  */
 
 
-#import "ORKPVSATStep.h"
-#import "ORKPVSATStepViewController.h"
+#import "ORKPSATStep.h"
+#import "ORKPSATStepViewController.h"
 
 
-@implementation ORKPVSATStep
+@implementation ORKPSATStep
 
 + (Class)stepViewControllerClass {
-    return [ORKPVSATStepViewController class];
+    return [ORKPSATStepViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -52,25 +52,31 @@
 - (void)validateParameters {
     [super validateParameters];
 
-    NSTimeInterval const ORKPVSATAdditionMinimumDuration = 2.0;
-    NSTimeInterval const ORKPVSATAdditionMaximumDuration = 5.0;
+    NSTimeInterval const ORKPSATAdditionMinimumDuration = 2.0;
+    NSTimeInterval const ORKPSATAdditionMaximumDuration = 5.0;
     
-    NSInteger const ORKPVSATSerieMinimumLength = 10;
-    NSInteger const ORKPVSATSerieMaximumLength = 100;
+    NSInteger const ORKPSATSerieMinimumLength = 10;
+    NSInteger const ORKPSATSerieMaximumLength = 100;
 
-    if (self.additionDuration < ORKPVSATAdditionMinimumDuration ||
-        self.additionDuration > ORKPVSATAdditionMaximumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPVSATAdditionMinimumDuration), @(ORKPVSATAdditionMaximumDuration)] userInfo:nil];
+    if (self.additionDuration < ORKPSATAdditionMinimumDuration ||
+        self.additionDuration > ORKPSATAdditionMaximumDuration) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATAdditionMinimumDuration), @(ORKPSATAdditionMaximumDuration)] userInfo:nil];
     }
     
-    if (self.seriesLength < ORKPVSATSerieMinimumLength ||
-        self.seriesLength > ORKPVSATSerieMaximumLength) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPVSATSerieMinimumLength), @(ORKPVSATSerieMaximumLength)] userInfo:nil];
+    if (self.seriesLength < ORKPSATSerieMinimumLength ||
+        self.seriesLength > ORKPSATSerieMaximumLength) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSerieMinimumLength), @(ORKPSATSerieMaximumLength)] userInfo:nil];
     }
     
     NSTimeInterval totalDuration = (self.seriesLength + 1) * self.additionDuration;
     if (self.stepDuration != totalDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step duration must be equal to %@ seconds.", @(totalDuration)] userInfo:nil];
+    }
+    
+    if (self.PSATVersion != ORKPSATVersionPAVSAT &&
+        self.PSATVersion != ORKPSATVersionPASAT &&
+        self.PSATVersion != ORKPSATVersionPVSAT) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"step version must be PASAT, PVSAT or PAVSAT." userInfo:nil];
     }
 }
 

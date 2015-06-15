@@ -29,16 +29,18 @@
  */
 
 
-#import "ORKPVSATContentView.h"
+#import "ORKPSATContentView.h"
 #import "ORKSkin.h"
-#import "ORKPVSATKeyboardView.h"
+#import "ORKPSATKeyboardView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
+#import "ORKVoiceEngine.h"
 
 
-@interface ORKPVSATContentView ()
+@interface ORKPSATContentView ()
 
+@property (nonatomic, assign, getter = isAuditory) BOOL auditory;
 @property (nonatomic, strong) ORKSubheadlineLabel *answerCaptionLabel;
 @property (nonatomic, strong) ORKTapCountLabel *digitLabel;
 @property (nonatomic, assign) ORKScreenType screenType;
@@ -47,24 +49,33 @@
 @end
 
 
-@implementation ORKPVSATContentView
+@implementation ORKPSATContentView
 
-- (instancetype)init {
+- (instancetype)initWithPSATVersion:(ORKPSATVersion)PSATVersion {
     self = [super init];
+    
     if (self) {
+        
         _screenType = ORKGetScreenTypeForWindow(self.window);
-        _answerCaptionLabel = [ORKSubheadlineLabel new];
-        _answerCaptionLabel.textAlignment = NSTextAlignmentCenter;
-        _answerCaptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        
         _digitLabel = [ORKTapCountLabel new];
         _digitLabel.textColor = [self tintColor];
         _digitLabel.textAlignment = NSTextAlignmentCenter;
         _digitLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _keyboardView = [ORKPVSATKeyboardView new];
-        _keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self addSubview:_answerCaptionLabel];
         [self addSubview:_digitLabel];
+        _auditory = (PSATVersion == ORKPSATVersionPAVSAT || PSATVersion == ORKPSATVersionPASAT) ? YES : NO;
+        if (PSATVersion != ORKPSATVersionPAVSAT &&
+            PSATVersion != ORKPSATVersionPVSAT) {
+            _digitLabel.hidden = YES;
+        }
+        
+        _answerCaptionLabel = [ORKSubheadlineLabel new];
+        _answerCaptionLabel.textAlignment = NSTextAlignmentCenter;
+        _answerCaptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_answerCaptionLabel];
+        
+        _keyboardView = [ORKPSATKeyboardView new];
+        _keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_keyboardView];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -81,7 +92,7 @@
 }
 
 - (void)setEnabled:(BOOL)enabled {
-    [self.keyboardView setEnabled:enabled];
+    self.keyboardView.enabled = enabled;
 }
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
@@ -92,10 +103,13 @@
         [self.keyboardView.selectedAnswerButton setSelected:NO];
         self.digitLabel.textColor = [self tintColor];
         self.digitLabel.text = digit.stringValue;
+        if (self.isAuditory) {
+            [[ORKVoiceEngine sharedVoiceEngine] speakInt:digit.integerValue];
+        }
         if (additionIndex == 0) {
-            self.answerCaptionLabel.text = ORKLocalizedString(@"PVSAT_INITIAL_ADDITION", nil);
+            self.answerCaptionLabel.text = ORKLocalizedString(@"PSAT_INITIAL_ADDITION", nil);
         } else {
-            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_ADDITION_%@", nil), @(additionIndex), @(totalAddition)];
+            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_ADDITION_%@", nil), @(additionIndex), @(totalAddition)];
         }
     }
 }
@@ -106,20 +120,20 @@
         self.constraints = nil;
     }
     
-    const CGFloat ORKPVSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewWidth, self.screenType);
-    const CGFloat ORKPVSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPVSATKeyboardViewHeight, self.screenType);
+    const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewWidth, self.screenType);
+    const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewHeight, self.screenType);
     
     NSMutableArray *constraintsArray = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_answerCaptionLabel, _digitLabel, _keyboardView);
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-[_keyboardView(==%f)]-|", ORKPVSATKeyboardWidth]
+     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-[_keyboardView(==%f)]-|", ORKPSATKeyboardWidth]
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[_keyboardView(==%f)]", ORKPVSATKeyboardHeight]
+     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[_keyboardView(==%f)]", ORKPSATKeyboardHeight]
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     

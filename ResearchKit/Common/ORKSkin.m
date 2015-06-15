@@ -163,8 +163,8 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
-        {        384,       324,       304,       304,       384},      // ORKScreenMetricPVSATKeyboardViewWidth
-        {        197,       167,       157,       157,       197},      // ORKScreenMetricPVSATKeyboardViewHeight
+        {        384,       324,       304,       304,       384},      // ORKScreenMetricPSATKeyboardViewWidth
+        {        197,       167,       157,       157,       197},      // ORKScreenMetricPSATKeyboardViewHeight
     };
     return metrics[metric][screenType];
 }

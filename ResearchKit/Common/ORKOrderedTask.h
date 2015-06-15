@@ -409,31 +409,33 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                            options:(ORKPredefinedTaskOption)options;
 
 /**
- Returns a predefined task that consists of the paced visual serial addition test (PVSAT).
+ Returns a predefined task that consists of the paced serial addition test (PSAT).
  
- In a PVSAT task, the participant is asked to add a new digit to the one immediately prior to it
+ In a PSAT task, the participant is asked to add a new digit to the one immediately prior to it
  every 2 or 3 seconds.
  
- A PVSAT task can be used to measure the cognitive function that assesses
+ A PSAT task can be used to measure the cognitive function that assesses auditory and/or
  visual information processing speed and flexibility, as well as calculation ability.
  
- Data collected by the task is in the form of an `ORKPVSATResult` object.
+ Data collected by the task is in the form of an `ORKPSATResult` object.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
  collected. If the value of this parameter is `nil`, the default
  localized text is displayed.
+ @param PSATVersion             The version of the PSAT test (Auditory and/or Visual).
  @param seriesLength            The number of digits that will be presented during the task.
  @param additionDuration        The time available for a participant to select right answer.
  
- @return An active PVSAT task that can be presented with an `ORKTaskViewController` object.
+ @return An active PSAT task that can be presented with an `ORKTaskViewController` object.
  
  */
-+ (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                           additionDuration:(NSTimeInterval)additionDuration
-                               seriesLength:(NSInteger)seriesLength
-                                    options:(ORKPredefinedTaskOption)options;
++ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
+                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               PSATVersion:(ORKPSATVersion)PSATVersion
+                          additionDuration:(NSTimeInterval)additionDuration
+                              seriesLength:(NSInteger)seriesLength
+                                   options:(ORKPredefinedTaskOption)options;
 
 @end
 

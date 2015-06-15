@@ -53,7 +53,7 @@
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKReactionTimeStep.h"
-#import "ORKPVSATStep.h"
+#import "ORKPSATStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -285,7 +285,7 @@ static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.
 static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
-static NSString * const ORKPVSATStepIdentifier = @"pvsat";
+static NSString * const ORKPSATStepIdentifier = @"psat";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -921,30 +921,53 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     return task;
 }
 
-+ (ORKOrderedTask *)PVSATTaskWithIdentifier:(NSString *)identifier
-                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                           additionDuration:(NSTimeInterval)additionDuration
-                               seriesLength:(NSInteger)seriesLength
-                                    options:(ORKPredefinedTaskOption)options {
++ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
+                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               PSATVersion:(ORKPSATVersion)PSATVersion
+                          additionDuration:(NSTimeInterval)additionDuration
+                              seriesLength:(NSInteger)seriesLength
+                                   options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
+            switch (PSATVersion) {
+                case ORKPSATVersionPASAT:
+                    step.title = ORKLocalizedString(@"PASAT_TITLE", nil);
+                    step.detailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
+                    break;
+                case ORKPSATVersionPVSAT:
+                    step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
+                    step.detailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
+                    break;
+                default:
+                    step.title = ORKLocalizedString(@"PAVSAT_TITLE", nil);
+                    step.detailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
+                    break;
+            }
             step.text = intendedUseDescription;
-            step.detailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
-            step.image = [UIImage imageNamed:@"phonepvsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.image = [UIImage imageNamed:@"phonepsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
             
             ORKStepArrayAddStep(steps, step);
         }
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
-            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PVSAT_INTRO_TEXT_2_%@", nil), @(additionDuration)];
-            step.detailText = ORKLocalizedString(@"PVSAT_CALL_TO_ACTION", nil);
+            switch (PSATVersion) {
+                case ORKPSATVersionPASAT:
+                    step.title = ORKLocalizedString(@"PASAT_TITLE", nil);
+                    break;
+                case ORKPSATVersionPVSAT:
+                    step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
+                    break;
+                default:
+                    step.title = ORKLocalizedString(@"PAVSAT_TITLE", nil);
+                    break;
+            }
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), @(additionDuration)];
+            step.detailText = ORKLocalizedString(@"PSAT_CALL_TO_ACTION", nil);
             
             ORKStepArrayAddStep(steps, step);
         }
@@ -958,8 +981,9 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     {
-        ORKPVSATStep *step = [[ORKPVSATStep alloc] initWithIdentifier:ORKPVSATStepIdentifier];
-        step.title = ORKLocalizedString(@"PVSAT_INITIAL_INSTRUCTION", nil);
+        ORKPSATStep *step = [[ORKPSATStep alloc] initWithIdentifier:ORKPSATStepIdentifier];
+        step.title = ORKLocalizedString(@"PSAT_INITIAL_INSTRUCTION", nil);
+        step.PSATVersion = PSATVersion;
         step.stepDuration = (seriesLength + 1) * additionDuration;
         step.seriesLength = seriesLength;
         step.additionDuration = additionDuration;

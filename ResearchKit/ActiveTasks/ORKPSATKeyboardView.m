@@ -29,11 +29,11 @@
  */
 
 
-#import "ORKPVSATKeyboardView.h"
+#import "ORKPSATKeyboardView.h"
 #import "ORKBorderedButton.h"
 
 
-@interface ORKPVSATKeyboardView ()
+@interface ORKPSATKeyboardView ()
 
 @property (nonatomic, strong, readonly) NSArray *answerButtons;
 @property (nonatomic, strong) NSArray *constraints;
@@ -41,7 +41,7 @@
 @end
 
 
-@implementation ORKPVSATKeyboardView
+@implementation ORKPSATKeyboardView
 
 - (instancetype)init {
     self = [super init];

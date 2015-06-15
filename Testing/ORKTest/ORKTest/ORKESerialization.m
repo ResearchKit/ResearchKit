@@ -475,11 +475,12 @@ ret =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
-   ENTRY(ORKPVSATStep,
+   ENTRY(ORKPSATStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKPVSATStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+             return [[ORKPSATStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
+            PROPERTY(PSATVersion, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(additionDuration, NSNumber, NSObject, YES, nil, nil),
             })),
@@ -853,7 +854,7 @@ ret =
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
             })),
-   ENTRY(ORKPVSATSample,
+   ENTRY(ORKPSATSample,
          nil,
          (@{
             PROPERTY(correct, NSNumber, NSObject, NO, nil, nil),
@@ -861,15 +862,16 @@ ret =
             PROPERTY(answer, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(time, NSNumber, NSObject, NO, nil, nil),
             })),
-   ENTRY(ORKPVSATResult,
+   ENTRY(ORKPSATResult,
          nil,
          (@{
+            PROPERTY(PSATVersion, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(duration, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(length, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(totalCorrect, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(totalTime, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(initialDigit, NSNumber, NSObject, NO, nil, nil),
-            PROPERTY(samples, ORKPVSATSample, NSArray, NO, nil, nil),
+            PROPERTY(samples, ORKPSATSample, NSArray, NO, nil, nil),
             })),
   ENTRY(ORKQuestionResult,
          nil,

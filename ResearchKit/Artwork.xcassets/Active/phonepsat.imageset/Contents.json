@@ -7,7 +7,7 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "phonepvsat@2x.png"
+      "filename" : "phonepsat@2x.png"
     },
     {
       "idiom" : "iphone",
@@ -17,7 +17,7 @@
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "phonepvsat@3x.png"
+      "filename" : "phonepsat@3x.png"
     },
     {
       "idiom" : "ipad",
@@ -26,7 +26,7 @@
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "phonepvsat@2x~ipad.png"
+      "filename" : "phonepsat@2x~ipad.png"
     }
   ],
   "info" : {

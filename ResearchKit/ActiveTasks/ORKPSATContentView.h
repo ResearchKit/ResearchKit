@@ -30,12 +30,20 @@
 
 
 #import <ResearchKit/ResearchKit_Private.h>
+#import "ORKCustomStepView_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-ORK_CLASS_AVAILABLE
-@interface ORKPVSATStepViewController : ORKActiveStepViewController
+@class ORKPSATKeyboardView;
+
+@interface ORKPSATContentView : ORKActiveStepCustomView
+
+@property (nonatomic, strong) ORKPSATKeyboardView *keyboardView;
+
+- (instancetype)initWithPSATVersion:(ORKPSATVersion)PSATVersion NS_DESIGNATED_INITIALIZER;
+- (void)setEnabled:(BOOL)enabled;
+- (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;
 
 @end
 

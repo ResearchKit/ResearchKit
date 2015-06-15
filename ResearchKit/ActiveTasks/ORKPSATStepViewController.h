@@ -35,10 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKPVSATStep : ORKActiveStep
-
-@property (nonatomic, assign) NSInteger seriesLength;
-@property (nonatomic, assign) NSTimeInterval additionDuration;
+@interface ORKPSATStepViewController : ORKActiveStepViewController
 
 @end
 

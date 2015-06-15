@@ -610,7 +610,7 @@
 @end
 
 
-@implementation ORKPVSATSample
+@implementation ORKPSATSample
 
 + (BOOL)supportsSecureCoding {
     return YES;
@@ -648,7 +648,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKPVSATSample *sample = [[[self class] allocWithZone:zone] init];
+    ORKPSATSample *sample = [[[self class] allocWithZone:zone] init];
     sample.correct = self.isCorrect;
     sample.digit = self.digit;
     sample.answer = self.answer;
@@ -663,10 +663,11 @@
 @end
 
 
-@implementation ORKPVSATResult
+@implementation ORKPSATResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, PSATVersion);
     ORK_ENCODE_DOUBLE(aCoder, duration);
     ORK_ENCODE_INTEGER(aCoder, length);
     ORK_ENCODE_INTEGER(aCoder, totalCorrect);
@@ -678,12 +679,13 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        ORK_DECODE_ENUM(aDecoder, PSATVersion);
         ORK_DECODE_DOUBLE(aDecoder, duration);
         ORK_DECODE_INTEGER(aDecoder, length);
         ORK_DECODE_INTEGER(aDecoder, totalCorrect);
         ORK_DECODE_DOUBLE(aDecoder, totalTime);
         ORK_DECODE_INTEGER(aDecoder, initialDigit);
-        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPVSATSample);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPSATSample);
     }
     return self;
     
@@ -698,6 +700,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
+            (self.PSATVersion == castObject.PSATVersion) &&
             (self.duration == castObject.duration) &&
             (self.length == castObject.length) &&
             (self.totalCorrect == castObject.totalCorrect) &&
@@ -711,7 +714,8 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKPVSATResult *result = [super copyWithZone:zone];
+    ORKPSATResult *result = [super copyWithZone:zone];
+    result.PSATVersion = self.PSATVersion;
     result.duration = self.duration;
     result.length = self.length;
     result.totalCorrect = self.totalCorrect;
