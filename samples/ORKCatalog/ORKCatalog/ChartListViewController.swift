@@ -59,7 +59,7 @@ class ChartListViewController: UITableViewController {
     }
     
     var chartTableViewCells: [UITableViewCell] {
-        return [lineGraphTableViewCell, discreteGraphTableViewCell, pieChartTableViewCell]
+        return [pieChartTableViewCell, lineGraphTableViewCell, discreteGraphTableViewCell]
     }
     
     override func viewDidLoad() {

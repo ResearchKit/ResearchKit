@@ -84,8 +84,14 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     self.panGestureRecognizer.delaysTouchesBegan = YES;
     self.panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:self.panGestureRecognizer];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(animateLayersSequentially) name:ORKGraphViewTriggerAnimationsNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGraph) name:ORKGraphViewRefreshNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(animateLayersSequentially)
+                                                 name:ORKGraphViewTriggerAnimationsNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshGraph)
+                                                 name:ORKGraphViewRefreshNotification
+                                               object:nil];
     
     [self setupViews];
 }
@@ -535,7 +541,10 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
    [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphLeftPadding, scrubberYPos + ORKGraphTopPadding)];
     self.scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingVal];
-   CGSize textSize = [self.scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(self.scrubberLabel.bounds)) options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin) attributes:@{NSFontAttributeName:self.scrubberLabel.font} context:nil].size;
+   CGSize textSize = [self.scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(self.scrubberLabel.bounds))
+                                                           options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin)
+                                                        attributes:@{NSFontAttributeName:self.scrubberLabel.font}
+                                                           context:nil].size;
    [self.scrubberLabel setFrame:CGRectMake(CGRectGetMaxX(self.scrubberLine.frame) + 6, CGRectGetMinY(self.scrubberLine.frame), textSize.width + 8, CGRectGetHeight(self.scrubberLabel.frame))];
 }
 
@@ -779,7 +788,9 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 #pragma mark - Abstract
 
 - (void)throwOverrideException {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__] userInfo:nil];
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];
 }
 
 - (void)scrubReferenceLineForXPosition:(CGFloat) __unused xPosition {

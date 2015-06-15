@@ -143,6 +143,8 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     [self addSubview: _contentView];
     [_contentView addSubview:_plotView];
     [_contentView addSubview:_legendView];
+    [_contentView addSubview:_titleLabel];
+    [_contentView addSubview:_textLabel];
     
     [self updateAppearance];
 }
@@ -152,33 +154,43 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    // title / text height
+    [self drawTitles];
+    CGFloat titleTextHeight = _titleLabel.bounds.size.height + _textLabel.bounds.size.height;
+    
     // legendView height
     [_contentView layoutIfNeeded];
     CGFloat legendHeight = [_legendView.collectionViewLayout collectionViewContentSize].height;
-    _legendView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), legendHeight);
     
-    // plotView height
-    CGFloat remainingHeight = CGRectGetHeight(_contentView.frame) - legendHeight;
-    CGFloat plotHeight = MIN(remainingHeight, _contentView.frame.size.width); // The largest diameter possible within the bounds.
-    
-    // padding height
-    CGFloat contentHeight = legendHeight + plotHeight;
-    CGFloat verticalPadding = (CGRectGetHeight(_contentView.frame) - contentHeight) / 2;
+    // element padding
+    CGFloat titlePlotPadding = 8;
     CGFloat plotLegendPadding = 8;
     
+    // plotView height
+    CGFloat plotAccessoriesHeight = (titleTextHeight + titlePlotPadding + plotLegendPadding + legendHeight);
+    CGFloat maximumPlotHeight = CGRectGetHeight(_contentView.frame) - plotAccessoriesHeight;
+    CGFloat plotHeight = MIN(maximumPlotHeight, _contentView.frame.size.width); // The largest diameter possible within the bounds.
+    
+    // content padding
+    CGFloat contentHeight = plotAccessoriesHeight + plotHeight;
+    CGFloat verticalWhiteSpace = CGRectGetHeight(_contentView.frame) - contentHeight;
+    
     // vertically centered frames
-    _plotView.frame = CGRectMake(0, verticalPadding - (plotLegendPadding * 0.5), CGRectGetWidth(_contentView.frame), plotHeight);
-    _legendView.frame = CGRectMake(0, verticalPadding + plotHeight + (plotLegendPadding * 0.5), CGRectGetWidth(_contentView.frame), legendHeight);
+    _plotView.frame = CGRectMake(0, (verticalWhiteSpace * 0.5) + titleTextHeight + titlePlotPadding, CGRectGetWidth(_contentView.frame), plotHeight);
+    _legendView.frame = CGRectMake(0, CGRectGetMaxY(_plotView.frame) + plotLegendPadding, CGRectGetWidth(_contentView.frame), legendHeight);
     
     // circle path
     CGFloat startAngle = _originAngle;
     CGFloat endAngle = startAngle + (2 * M_PI);
-    CGFloat unlabelledRadius = plotHeight * 0.5;
-    CGFloat labelHeight = [@"100%" boundingRectWithSize: CGRectInfinite.size options:0 attributes:@{NSFontAttributeName : _percentageFont} context:nil].size.height;
-    CGFloat labelledRadius = unlabelledRadius - (labelHeight + _percentageLabelOffset);
-    _lineWidth = MIN(_lineWidth, labelledRadius);
+    CGFloat unlabeledRadius = plotHeight * 0.5;
+    CGFloat labelHeight = [@"100%" boundingRectWithSize: CGRectInfinite.size
+                                                options:0
+                                             attributes:@{NSFontAttributeName : _percentageFont}
+                                                context:nil].size.height;
+    CGFloat labeledRadius = unlabeledRadius - (labelHeight + _percentageLabelOffset);
+    _lineWidth = MIN(_lineWidth, labeledRadius);
     _circleLayer.lineWidth = _lineWidth;
-    _pieRadius = labelledRadius - (_lineWidth * 0.5);
+    _pieRadius = labeledRadius - (_lineWidth * 0.5);
     
     if (!self.shouldDrawClockwise) {
         startAngle = 3*M_PI_2;
@@ -202,8 +214,6 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     [_circleLayer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_plotView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_emptyLabel removeFromSuperview];
-    [_titleLabel removeFromSuperview];
-    [_textLabel removeFromSuperview];
     [self drawPieChart];
     [self drawPercentageLabels];
     [self drawLegend];
@@ -212,9 +222,17 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
         _emptyLabel.center = _plotView.center;
         [_plotView addSubview:_emptyLabel];
     }
-    else {
-        [self drawTitles];
-    }
+}
+
+- (void)drawTitles {
+    _titleLabel.font = _titleFont;
+    _textLabel.font = _textFont;
+    _titleLabel.text = _title;
+    _textLabel.text = _text;
+    [_titleLabel sizeToFit];
+    [_textLabel sizeToFit];
+    _titleLabel.center = CGPointMake(CGRectGetMidX(_contentView.bounds), CGRectGetMinY(_contentView.bounds) + _titleLabel.bounds.size.height * 0.5);
+    _textLabel.center =  CGPointMake(_titleLabel.center.x, CGRectGetMaxY(_titleLabel.frame) + _textLabel.bounds.size.height * 0.5);
 }
 
 #pragma mark -- Layout
@@ -227,10 +245,22 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _plotView, _legendView, _titleLabel, _textLabel);
     
     // These constraints describe the layout used to calculate the height of _legendView in layoutSubviews, not the final layout.
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_legendView]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                              metrics:nil
+                                                                                views:views]];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                              metrics:nil
+                                                                                views:views]];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                              metrics:nil
+                                                                                views:views]];
+    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_legendView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                              metrics:nil
+                                                                                views:views]];
     [NSLayoutConstraint activateConstraints:_constraints];
     [super updateConstraints];
 }
@@ -239,6 +269,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ORKLegendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.tag = indexPath.item;
     cell.titleLabel.text = [_datasource pieChartView:self titleForSegmentAtIndex:indexPath.item];
     cell.titleLabel.font = _legendFont;
     cell.dotView.backgroundColor = [_datasource pieChartView:self colorForSegmentAtIndex:indexPath.item];
@@ -251,12 +282,11 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ORKLegendCollectionViewCell *c = [[ORKLegendCollectionViewCell alloc]initWithFrame:CGRectZero];
-    c.titleLabel.text = [_datasource pieChartView:self titleForSegmentAtIndex:indexPath.item];
-    c.titleLabel.font = _legendFont;
-    [c.contentView setNeedsUpdateConstraints];
-    CGSize s = [c.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return s;
+    ORKLegendCollectionViewCell *cell = [[ORKLegendCollectionViewCell alloc]initWithFrame:CGRectZero];
+    cell.titleLabel.text = [_datasource pieChartView:self titleForSegmentAtIndex:indexPath.item];
+    cell.titleLabel.font = _legendFont;
+    [cell.contentView setNeedsUpdateConstraints];
+    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
@@ -309,37 +339,18 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 - (void)drawLegend {
     if (self.shouldAnimate) {
         NSArray *sorted = [_legendView.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
-            return cell1.frame.origin.x > cell2.frame.origin.x;
+            return cell1.tag > cell2.tag;
         }];
-        for (UICollectionViewCell *c in sorted) {
-            [UIView animateWithDuration:0.75 delay: [sorted indexOfObject:c] * 0.01 options:0 animations:^{
-                c.transform = CGAffineTransformIdentity;
+        for (UICollectionViewCell *cell in sorted) {
+            [UIView animateWithDuration:0.75 delay: [sorted indexOfObject:cell] * 0.075 options:0 animations:^{
+                cell.transform = CGAffineTransformIdentity;
             } completion:nil];
         }
     }
     else {
-        for (UICollectionViewCell *c in _legendView.visibleCells) {
-            c.transform = CGAffineTransformIdentity;
+        for (UICollectionViewCell *cell in _legendView.visibleCells) {
+            cell.transform = CGAffineTransformIdentity;
         }
-    }
-}
-
-- (void)drawTitles {
-    _titleLabel.font = _titleFont;
-    _titleLabel.text = _title;
-    [_titleLabel sizeToFit];
-    _titleLabel.center = CGPointMake(CGRectGetMidX(_plotView.bounds), CGRectGetMidY(_plotView.bounds));
-    [_plotView addSubview:_titleLabel];
-    
-    _textLabel.font = _textFont;
-    _textLabel.text = _text;
-    [_textLabel sizeToFit];
-    _textLabel.center = CGPointMake(CGRectGetMidX(_plotView.bounds), CGRectGetMidY(_plotView.bounds));
-    [_plotView addSubview:_textLabel];
-    
-    if (_titleLabel.text && _textLabel.text) {
-        _titleLabel.center = CGPointMake(_titleLabel.center.x, _titleLabel.center.y - (_titleLabel.frame.size.height * 0.5));
-        _textLabel.center = CGPointMake(_textLabel.center.x, _textLabel.center.y + (_textLabel.frame.size.height * 0.5));
     }
 }
 
