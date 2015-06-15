@@ -149,6 +149,7 @@ Follow these guidelines when writing *appledoc comments*:
 - When you name classes or methods, enclose them in backticks so *appledoc* creates a reference (`` `ORKStep` is ...``).
 - For multiline code examples, surround them with a triple backtick (```) for cross references within the code block not to be automatically generated.
 - Don't use abbreviations such as *e.g.* or *i.e.* in the documentation.
+- Hard wrap comment lines at column 100.
 - Read the latest *ResearchKit* documentation for inspiration and try to follow the same literary style.
 
 #### 1.5. Newlines
