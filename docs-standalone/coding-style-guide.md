@@ -155,6 +155,7 @@ Follow these guidelines when writing *appledoc comments*:
 #### 1.5. Newlines
 
 Use exactly two empty lines to separate:
+
 - The `/* Copyright header */` and the `#import` section.
 - The `#import` section and the class `@interface` or `@implementation` line (or its associated *forward declarations* or *appledoc comment*).
 - Different `@interface` or `@implementation` sections within the same file.
@@ -162,6 +163,7 @@ Use exactly two empty lines to separate:
 Do not use two or more empty lines in any other cases.
 
 Use exactly one empty line to separate:
+
 - The last *forward declaration* and the *`@interface` declaration*.
 - The *`@interface` declaration* and the first *method* or *property declaration*.
 - The last *method* or *property declaration* and the *`@end` keyword*.
@@ -172,6 +174,7 @@ Use exactly one empty line to separate:
 *Header* and *implementation* files must have one, and only one, trailing empty line.
 
 Do not use empty lines to separate:
+
 - *Forward declarations* from other contiguous *forward declarations*.
 - An *appledoc comment* from its related *class* or *method*.
 - Contiguous *`@param` lines* within the same *appledoc comment*.
@@ -180,6 +183,7 @@ Do not use empty lines to separate:
 Note that *forward declarations* should appear before any *class appledoc comment*.
 
 You can optionally use one (and only one) blank like to separate:
+
 - Groups of related `#import` statements.
 - Groups of related statements in a single method implementation.
 
@@ -187,7 +191,7 @@ You can optionally use one (and only one) blank like to separate:
 #### 1.6. Header File Example
 
     /*
-     Copyright (c) 2015, Apple Inc. All rights reserved.
+     Copyright (c) 2015, John Appleseed. All rights reserved.
      ...
      */
 
