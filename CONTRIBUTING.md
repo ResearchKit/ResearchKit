@@ -57,7 +57,7 @@ Develop your changes in your fork<a name="develop"></a>
 
 Develop your changes using your normal development process. If you
 already have code from an existing project, you may need to adjust its
-style to more closely match that in the ResearchKit framework.
+style to more closely match the [ResearchKit framework coding style](./docs-standalone/coding-style-guide.md).
 
 New components may need to expose new Public or Private
 headers. Public headers are for APIs that are likely to be a stable
