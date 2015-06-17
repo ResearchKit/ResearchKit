@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -32,8 +32,8 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #import "ORKDiscreteGraphView.h"
 #import "ORKGraphView_Internal.h"
 #import "ORKHelpers.h"
-#import <ResearchKit/ORKAxisView.h>
-#import <ResearchKit/ORKCircleView.h>
+#import "ORKAxisView.h"
+#import "ORKCircleView.h"
 
 
 @implementation ORKDiscreteGraphView
@@ -53,7 +53,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
     CAShapeLayer *layer = [super plotLineLayerForPlotIndex:plotIndex withPath:path];
-    layer.lineWidth = self.isLandscapeMode ? 10.0 : 8.0;
+    layer.lineWidth = 8.0;
     return layer;
 }
 
@@ -86,7 +86,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointWidth = self.isLandscapeMode ? 10.0 : 8.0;
+    CGFloat pointWidth = 8.0;
     
     NSInteger numberOfPlots = [self numberOfPlots];
     

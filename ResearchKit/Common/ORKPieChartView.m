@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,8 +30,8 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 
 #import "ORKPieChartView.h"
-#import <ResearchKit/ORKLegendCollectionViewCell.h>
-#import <ResearchKit/ORKCentredCollectionViewLayout.h>
+#import "ORKLegendCollectionViewCell.h"
+#import "ORKCentredCollectionViewLayout.h"
 
 @interface ORKPieChartView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -126,7 +126,7 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
     _emptyLabel.text = _emptyText;
     _emptyLabel.textAlignment = NSTextAlignmentCenter;
     
-    _legendLayout = [[ORKCentredCollectionViewLayout alloc] init];
+    _legendLayout = [[ORKCenteredCollectionViewLayout alloc] init];
     _legendView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout: _legendLayout];
     [_legendView registerClass: NSClassFromString(@"ORKLegendCollectionViewCell") forCellWithReuseIdentifier:@"cell"];
     _legendView.backgroundColor = [UIColor clearColor];
@@ -154,32 +154,37 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    // title / text height
-    [self drawTitles];
-    CGFloat titleTextHeight = _titleLabel.bounds.size.height + _textLabel.bounds.size.height;
-    
-    // legendView height
-    [_contentView layoutIfNeeded];
-    CGFloat legendHeight = [_legendView.collectionViewLayout collectionViewContentSize].height;
-    
-    // element padding
+    // element padding.
     CGFloat titlePlotPadding = 8;
     CGFloat plotLegendPadding = 8;
     
-    // plotView height
-    CGFloat plotAccessoriesHeight = (titleTextHeight + titlePlotPadding + plotLegendPadding + legendHeight);
+    // title / text height.
+    _titleLabel.font = _titleFont;
+    _textLabel.font = _textFont;
+    _titleLabel.text = _title;
+    _textLabel.text = _text;
+    [_titleLabel sizeToFit];
+    [_textLabel sizeToFit];
+    CGFloat titleTextHeight = _shouldDrawTitleAboveChart ? _titleLabel.bounds.size.height + _textLabel.bounds.size.height + titlePlotPadding : 0;
+
+    // legendView height.
+    [_contentView layoutIfNeeded];
+    CGFloat legendHeight = [_legendView.collectionViewLayout collectionViewContentSize].height;
+    
+    // plotView height.
+    CGFloat plotAccessoriesHeight = (titleTextHeight + plotLegendPadding + legendHeight);
     CGFloat maximumPlotHeight = CGRectGetHeight(_contentView.frame) - plotAccessoriesHeight;
     CGFloat plotHeight = MIN(maximumPlotHeight, _contentView.frame.size.width); // The largest diameter possible within the bounds.
     
-    // content padding
+    // content padding.
     CGFloat contentHeight = plotAccessoriesHeight + plotHeight;
     CGFloat verticalWhiteSpace = CGRectGetHeight(_contentView.frame) - contentHeight;
     
-    // vertically centered frames
-    _plotView.frame = CGRectMake(0, (verticalWhiteSpace * 0.5) + titleTextHeight + titlePlotPadding, CGRectGetWidth(_contentView.frame), plotHeight);
+    // vertically centered frames.
+    _plotView.frame = CGRectMake(0, (verticalWhiteSpace * 0.5) + titleTextHeight, CGRectGetWidth(_contentView.frame), plotHeight);
     _legendView.frame = CGRectMake(0, CGRectGetMaxY(_plotView.frame) + plotLegendPadding, CGRectGetWidth(_contentView.frame), legendHeight);
     
-    // circle path
+    // circle path.
     CGFloat startAngle = _originAngle;
     CGFloat endAngle = startAngle + (2 * M_PI);
     CGFloat unlabeledRadius = plotHeight * 0.5;
@@ -203,36 +208,28 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
                                                                       clockwise:self.shouldDrawClockwise];
     
     _circleLayer.path = circularArcBezierPath.CGPath;
-    [self.layer addSublayer: _circleLayer];
+    [_plotView.layer addSublayer: _circleLayer];
     
-    // Reset Data
+    // reset data.
     [_actualValues removeAllObjects];
     [_normalizedValues removeAllObjects];
     [self normalizeActualValues];
     
-    // Redraw
+    // redraw.
     [_circleLayer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_plotView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_emptyLabel removeFromSuperview];
+    [self drawTitleText];
     [self drawPieChart];
     [self drawPercentageLabels];
     [self drawLegend];
+    
+    // emptyLabel.
     if (!_sumOfValues) {
         [_emptyLabel sizeToFit];
         _emptyLabel.center = _plotView.center;
         [_plotView addSubview:_emptyLabel];
     }
-}
-
-- (void)drawTitles {
-    _titleLabel.font = _titleFont;
-    _textLabel.font = _textFont;
-    _titleLabel.text = _title;
-    _textLabel.text = _text;
-    [_titleLabel sizeToFit];
-    [_textLabel sizeToFit];
-    _titleLabel.center = CGPointMake(CGRectGetMidX(_contentView.bounds), CGRectGetMinY(_contentView.bounds) + _titleLabel.bounds.size.height * 0.5);
-    _textLabel.center =  CGPointMake(_titleLabel.center.x, CGRectGetMaxY(_titleLabel.frame) + _textLabel.bounds.size.height * 0.5);
 }
 
 #pragma mark -- Layout
@@ -335,6 +332,31 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 }
 
 #pragma mark - Draw
+
+- (void)drawTitleText {
+    if (_titleColor) {
+        _titleLabel.textColor = _titleColor;
+    }
+    if (_textColor) {
+        _textLabel.textColor = _textColor;
+    }
+    _shouldDrawTitleAboveChart ? [self drawTitleTextAboveChart] : [self drawTitleTextInFrontOfChart];
+}
+
+- (void)drawTitleTextAboveChart {
+    _titleLabel.center = CGPointMake(CGRectGetMidX(_contentView.bounds), CGRectGetMinY(_contentView.bounds) + _titleLabel.bounds.size.height * 0.5);
+    _textLabel.center =  CGPointMake(_titleLabel.center.x, CGRectGetMaxY(_titleLabel.frame) + _textLabel.bounds.size.height * 0.5);
+}
+
+- (void)drawTitleTextInFrontOfChart {
+    _titleLabel.center = _plotView.center;
+    _textLabel.center =  _plotView.center;
+    
+    if (_textLabel.text && _titleLabel.text) {
+        _titleLabel.frame = CGRectOffset(_titleLabel.frame, 0, - CGRectGetHeight(_titleLabel.frame) * 0.5);
+        _textLabel.frame = CGRectOffset(_textLabel.frame, 0, CGRectGetHeight(_textLabel.frame) * 0.5);
+    }
+}
 
 - (void)drawLegend {
     if (self.shouldAnimate) {

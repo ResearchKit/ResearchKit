@@ -30,6 +30,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ORKCentredCollectionViewLayout : UICollectionViewFlowLayout
+@interface ORKCenteredCollectionViewLayout : UICollectionViewFlowLayout
 
 @end

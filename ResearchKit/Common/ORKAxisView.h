@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -31,17 +31,8 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, ORKGraphAxisType) {
-    ORKGraphAxisTypeX,
-    ORKGraphAxisTypeY
-};
-
 @interface ORKAxisView : UIView
 
-@property (nonatomic, getter=isLandscapeMode) BOOL landscapeMode;
-
-@property (nonatomic) CGFloat leftOffset;
-
-- (void)setupLabels:(NSArray *)titles forAxisType:(ORKGraphAxisType)type;
+- (void)setupTitles:(NSArray *)titles;
 
 @end

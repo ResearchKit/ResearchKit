@@ -71,14 +71,37 @@
     NSMutableArray *constraints = [@[] mutableCopy];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _dotView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_titleLabel]-(>=0)-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_dotView]-(>=0)-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dotView][_titleLabel]|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_titleLabel]-(>=0)-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_dotView]-(>=0)-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dotView][_titleLabel]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:[self titleHeight]]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:[self titleHeight]]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_titleLabel attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil attribute:0
+                                                       multiplier:1
+                                                         constant:[self titleHeight]]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeHeight
+                                                       multiplier:1
+                                                         constant:[self titleHeight]]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_titleLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1
+                                                         constant:0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];

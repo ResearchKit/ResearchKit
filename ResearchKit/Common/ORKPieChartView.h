@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+#import "ORKDefines.h"
 
 @class ORKPieChartView;
 
@@ -147,6 +147,25 @@ ORK_CLASS_AVAILABLE
  title.
 */
 @property (nonatomic, strong, nullable) NSString *text;
+
+/**
+ The color of the title label's text.
+ If you do not set a value for this property, the system font color will be used.
+ */
+@property (nonatomic, strong) UIColor *titleColor;
+
+/**
+ The color of the text label's text.
+ If you do not set a value for this property, the system font color will be used.
+ */
+@property (nonatomic, strong) UIColor *textColor;
+
+/**
+ A Boolean value indicating wheter the title and text labels should be drawn above the chart.
+ If this value of this property is NO, the title and text are drawn in front of the chart.
+ The default value for this property is NO.
+ */
+@property (nonatomic) BOOL shouldDrawTitleAboveChart;
 
 /**
  A Boolean value indicating whether the percentage labels drawn adjacent to each segement are

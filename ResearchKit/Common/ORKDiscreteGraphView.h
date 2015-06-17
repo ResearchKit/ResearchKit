@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKGraphView.h>
+#import "ORKGraphView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -30,7 +30,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import <ResearchKit/ORKDefines.h>
+#import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -217,13 +217,6 @@ ORK_CLASS_AVAILABLE
  `graphView:plot:valueForPointAtIndex:` method.
 */
 @property (nonatomic, readonly) CGFloat maximumValue;
-
-/**
- A Boolean value indicating whether the graph view should draw its content for a landscape or
- portrait presentation.
- The default value of this property is NO.
-*/
-@property (nonatomic, getter=isLandscapeMode) BOOL landscapeMode;
 
 /**
  A Boolean value indicating whether the graph view should draw vertical refrerence lines.

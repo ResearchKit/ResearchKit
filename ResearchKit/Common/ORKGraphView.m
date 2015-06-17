@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -33,17 +33,26 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 #import "ORKGraphView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKAxisView.h"
-#import <ResearchKit/ORKCircleView.h>
+#import "ORKCircleView.h"
 
 NSString *const ORKGraphViewTriggerAnimationsNotification = @"ORKGraphViewTriggerAnimationsNotification";
 NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotification";
+CGFloat const ORKGraphTopPadding = 0.0;
+CGFloat const ORKGraphXAxisHeight = 30.0;
+CGFloat const ORKGraphYAxisPaddingFactor = 0.15;
+CGFloat const ORKGraphLeftPadding = 10.0;
+CGFloat const ORKGraphAxisMarkingRulerLength = 8.0;
+CGFloat const ORKGraphFadeAnimationDuration = 0.2;
+CGFloat const ORKGraphGrowAnimationDuration = 0.1;
+CGFloat const ORKGraphPopAnimationDuration  = 0.3;
+CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
 
 @end
 
-@implementation ORKGraphView {
-}
+@implementation ORKGraphView
+
 
 #pragma mark - Init
 
@@ -134,24 +143,20 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat yAxisPadding = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
+    CGFloat yAxisPadding = CGRectGetWidth(self.frame) *ORKGraphYAxisPaddingFactor;
     
     // Basic Views
-    self.plotsView.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - ORKGraphTopPadding);
+    self.plotsView.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding);
     if (self.emptyLabel) {
-        self.emptyLabel.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - ORKGraphTopPadding);
+        self.emptyLabel.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding);
     }
     
     // Scrubber Views
     self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), ORKGraphTopPadding, 1, CGRectGetHeight(self.plotsView.frame));
     self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame), CGRectGetMinY(self.scrubberThumbView.frame), [self scrubberThumbSize].width, [self scrubberThumbSize].height);
     self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height/2;
-    if (self.isLandscapeMode) {
-        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:14.0f];
-    } else {
-        self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
-    }
-    
+    self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
+ 
     [_xAxisView layoutSubviews];
 }
 
@@ -224,7 +229,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 }
 
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointSize = self.isLandscapeMode ? 10.0f : 8.0f;
+    CGFloat pointSize = 8.0f;
     
     for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
         ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
@@ -245,7 +250,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             [self.dots addObject:point];
             
             if (![positionOnYAxis isRangeZero]) {
-                CGFloat pointSize = self.isLandscapeMode ? 10.0f : 8.0f;
+                CGFloat pointSize = 8.0f;
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
                 point.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
@@ -278,12 +283,10 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         self.xAxisView = nil;
     }
     
-    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.plotsView.frame), CGRectGetWidth(self.plotsView.frame), XAxisHeight)];
-    self.xAxisView.landscapeMode = self.landscapeMode;
+    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.plotsView.frame), CGRectGetMaxY(self.plotsView.frame), CGRectGetWidth(self.plotsView.frame), ORKGraphXAxisHeight)];
     self.xAxisView.tintColor = self.tintColor;
-    [self.xAxisView setupLabels:self.xAxisTitles forAxisType:ORKGraphAxisTypeX];
-    self.xAxisView.leftOffset = ORKGraphLeftPadding;
-    [self insertSubview:self.xAxisView belowSubview:self.plotsView];
+    [self.xAxisView setupTitles:self.xAxisTitles];
+    [self addSubview:self.xAxisView];
     
     UIBezierPath *xAxispath = [UIBezierPath bezierPath];
     [xAxispath moveToPoint:CGPointMake(0, 0)];
@@ -295,10 +298,10 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     [self.xAxisView.layer addSublayer:xAxisLineLayer];
     
     for (NSUInteger i=0; i<self.xAxisTitles.count; i++) {
-        CGFloat positionOnXAxis = ORKGraphLeftPadding + ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
+        CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
         UIBezierPath *rulerPath = [UIBezierPath bezierPath];
-        [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - AxisMarkingRulerLength)];
+        [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - ORKGraphAxisMarkingRulerLength)];
         [rulerPath addLineToPoint:CGPointMake(positionOnXAxis, 0)];
         
         CAShapeLayer *rulerLayer = [CAShapeLayer layer];
@@ -316,12 +319,12 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         self.yAxisView = nil;
     }
     
-    CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
-    CGFloat axisViewWidth = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
+    CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - ORKGraphYAxisPaddingFactor);
+    CGFloat axisViewWidth = CGRectGetWidth(self.frame)*ORKGraphYAxisPaddingFactor;
     
     self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition, ORKGraphTopPadding, axisViewWidth, CGRectGetHeight(self.plotsView.frame))];
     [self addSubview:self.yAxisView];
-    CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - AxisMarkingRulerLength + 2;
+    CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - ORKGraphAxisMarkingRulerLength + 2;
     
     if (self.maximumValueImage && self.minimumValueImage) {
         // Use image icons as legends
@@ -367,7 +370,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             
             CGFloat yValue = self.minimumValue + (self.maximumValue - self.minimumValue)*factor;
             
-            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(self.yAxisView.frame) - AxisMarkingRulerLength, labelHeight)];
+            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(self.yAxisView.frame) - ORKGraphAxisMarkingRulerLength, labelHeight)];
             
             if (yValue != 0) {
                 axisTitleLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
@@ -375,7 +378,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
             axisTitleLabel.backgroundColor = [UIColor clearColor];
             axisTitleLabel.textColor = self.axisTitleColor;
             axisTitleLabel.textAlignment = NSTextAlignmentRight;
-            axisTitleLabel.font = self.isLandscapeMode ? [UIFont fontWithName:self.axisTitleFont.familyName size:16.0f] : self.axisTitleFont;
+            axisTitleLabel.font = self.axisTitleFont;
             axisTitleLabel.minimumScaleFactor = 0.8;
             [self.yAxisView addSubview:axisTitleLabel];
         }
@@ -392,7 +395,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
     referenceLineLayer.strokeColor = self.referenceLineColor.CGColor;
     referenceLineLayer.path = referenceLinePath.CGPath;
-    referenceLineLayer.lineDashPattern = self.isLandscapeMode ? @[@12, @7] : @[@6, @4];
+    referenceLineLayer.lineDashPattern = @[@6, @4];
     [self.plotsView.layer addSublayer:referenceLineLayer];
     
     [self.referenceLines addObject:referenceLineLayer];
@@ -410,7 +413,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
         referenceLineLayer.strokeColor = self.referenceLineColor.CGColor;
         referenceLineLayer.path = referenceLinePath.CGPath;
-        referenceLineLayer.lineDashPattern = self.isLandscapeMode ? @[@12, @7] : @[@6, @4];
+        referenceLineLayer.lineDashPattern = @[@6, @4];
         [self.plotsView.layer addSublayer:referenceLineLayer];
         
         [self.referenceLines addObject:referenceLineLayer];
@@ -419,7 +422,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 
 - (void)setupEmptyView {
     if (!self.emptyLabel) {
-        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - ORKGraphTopPadding)];
+        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding)];
         self.emptyLabel.text = self.emptyText;
         self.emptyLabel.textAlignment = NSTextAlignmentCenter;
         self.emptyLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
@@ -488,15 +491,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 }
 
 - (CGSize)scrubberThumbSize {
-    CGSize thumbSize;
-    
-    if (self.isLandscapeMode) {
-        thumbSize = CGSizeMake(15, 15);
-    } else{
-        thumbSize = CGSizeMake(10, 10);
-    }
-    
-    return thumbSize;
+    return CGSizeMake(10, 10);
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
@@ -558,7 +553,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         if (dataPointValue != NSNotFound) {
             CGFloat value = [self.xAxisPoints[positionIndex] floatValue];
             
-            if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
+            if (fabs(value - xPosition) < (widthBetweenPoints * ORKGraphSnappingClosenessFactor)) {
                 xPosition = value;
             }
         }
@@ -625,7 +620,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
     for (NSUInteger i=0; i<self.pathLines.count; i++) {
         CAShapeLayer *layer = self.pathLines[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
-        delay += GrowAnimationDuration;
+        delay += ORKGraphGrowAnimationDuration;
     }
     return delay;
 }
@@ -649,7 +644,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         fadeAnimation.beginTime = CACurrentMediaTime() + delay;
         fadeAnimation.fromValue = @0;
         fadeAnimation.toValue = @(toValue);
-        fadeAnimation.duration = FadeAnimationDuration;
+        fadeAnimation.duration = ORKGraphFadeAnimationDuration;
         fadeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         fadeAnimation.fillMode = kCAFillModeForwards;
         fadeAnimation.removedOnCompletion = NO;
@@ -661,7 +656,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         growAnimation.beginTime = CACurrentMediaTime() + delay;
         growAnimation.fromValue = @0;
         growAnimation.toValue = @(toValue);
-        growAnimation.duration = GrowAnimationDuration;
+        growAnimation.duration = ORKGraphGrowAnimationDuration;
         growAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         growAnimation.fillMode = kCAFillModeForwards;
         growAnimation.removedOnCompletion = NO;
@@ -673,7 +668,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
         popAnimation.beginTime = CACurrentMediaTime() + delay;
         popAnimation.fromValue = @0;
         popAnimation.toValue = @(toValue);
-        popAnimation.duration = PopAnimationDuration;
+        popAnimation.duration = ORKGraphPopAnimationDuration;
         popAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         popAnimation.fillMode = kCAFillModeForwards;
         popAnimation.removedOnCompletion = NO;

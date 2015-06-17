@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,12 +36,14 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 @property (nonatomic, strong) NSMutableArray *titleLabels;
 
-@property (nonatomic) ORKGraphAxisType axisType;
-
 @end
 
 
-@implementation ORKAxisView
+@implementation ORKAxisView {
+    
+    NSArray *_constraints;
+    CGFloat _lastLabelPadding;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -61,66 +63,77 @@ Copyright (c) 2015, Apple Inc. All rights reserved.
 
 - (void)sharedInit {
     _titleLabels = [NSMutableArray new];
-    _leftOffset = 0;
+    _lastLabelPadding = 10;
 }
 
-- (void)layoutSubviews {
-    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / (self.titleLabels.count - 1);
-    CGFloat labelWidth = segmentWidth;
+- (void)updateConstraints {
+    [super updateConstraints];
+    [NSLayoutConstraint deactivateConstraints:_constraints];
+    _constraints = nil;
     
-    CGFloat labelHeight = (self.axisType == ORKGraphAxisTypeX) ? CGRectGetHeight(self.bounds) * 0.77 : 20;
+    NSMutableArray *constraints = [@[]mutableCopy];
+    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / (self.titleLabels.count - 1);
     
     for (NSUInteger i = 0; i < self.titleLabels.count; i++) {
-        
-        CGFloat positionX = (self.axisType == ORKGraphAxisTypeX) ? (self.leftOffset + i * segmentWidth) : 0;
-        
-        if (i == 0) {
-            // Shift the first label to accomodate the month text.
-            positionX -= self.leftOffset;
-        }
-        
-        UILabel *label = (UILabel *)self.titleLabels[i];
-        
-        if (label.text) {
-            labelWidth = [label.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, labelHeight)
-                                                  options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
-                                               attributes:@{NSFontAttributeName:label.font}
-                                                  context:nil].size.width;
-            labelWidth = MAX(labelWidth, 15);
-            labelWidth += self.landscapeMode ? 14 : 8; //padding
-        }
-        
-        if (i == 0) {
-            label.frame  = CGRectMake(positionX, (CGRectGetHeight(self.bounds) - labelHeight) / 2, labelWidth, labelHeight);
-        } else {
-            label.frame  = CGRectMake(positionX - labelWidth / 2, (CGRectGetHeight(self.bounds) - labelHeight) / 2, labelWidth, labelHeight);
-        }
-        
+        UILabel *label = self.titleLabels[i];
+        CGFloat offset = i * segmentWidth;
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                            attribute:NSLayoutAttributeCenterY
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:label.superview
+                                                            attribute:NSLayoutAttributeCenterY
+                                                           multiplier:1
+                                                             constant:0]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                            attribute:NSLayoutAttributeCenterX
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem: label.superview
+                                                            attribute:NSLayoutAttributeLeading
+                                                           multiplier:1
+                                                             constant:offset]];
         if (i == self.titleLabels.count - 1) {
-            // Last label.
-            label.textColor = [UIColor whiteColor];
-            label.backgroundColor = self.tintColor;
-            label.layer.cornerRadius = CGRectGetHeight(label.frame) / 2;
-            label.layer.masksToBounds = YES;
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                                attribute:NSLayoutAttributeHeight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem: label.superview
+                                                                attribute:NSLayoutAttributeHeight
+                                                               multiplier:1
+                                                                 constant: -_lastLabelPadding]];
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem: label.superview
+                                                                attribute: NSLayoutAttributeHeight
+                                                               multiplier:1
+                                                                 constant: -_lastLabelPadding]];
         }
     }
+    [NSLayoutConstraint activateConstraints:constraints];
+    _constraints = constraints;
 }
 
-- (void)setupLabels:(NSArray *)titles forAxisType:(ORKGraphAxisType)type {
-    self.axisType = type;
+- (void)setupTitles:(NSArray *)titles {
     
     for (NSUInteger i = 0; i < titles.count; i++) {
         
         UILabel *label = [UILabel new];
         label.text = titles[i];
-        label.font = self.isLandscapeMode ? [UIFont fontWithName:@"Helvetica-Light" size:19.0] : [UIFont fontWithName:@"Helvetica-Light" size:12.0];
+        label.font = [UIFont systemFontOfSize:12.0];
         label.numberOfLines = 2;
         label.textAlignment = NSTextAlignmentCenter;
         label.adjustsFontSizeToFitWidth = YES;
         label.minimumScaleFactor = 0.7;
         label.textColor = self.tintColor;
-        [self addSubview:label];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
         
+        if (i == titles.count - 1) {
+            label.textColor = [UIColor whiteColor];
+            label.backgroundColor = self.tintColor;
+            label.layer.cornerRadius = (self.bounds.size.height - _lastLabelPadding) * 0.5;
+            label.layer.masksToBounds = YES;
+        }
+        
+        [self addSubview:label];
         [self.titleLabels addObject:label];
     }
 }

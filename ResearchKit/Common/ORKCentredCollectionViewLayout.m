@@ -30,7 +30,7 @@
 
 #import "ORKCentredCollectionViewLayout.h"
 
-@implementation ORKCentredCollectionViewLayout
+@implementation ORKCenteredCollectionViewLayout
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
@@ -43,10 +43,10 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     NSInteger count = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:indexPath.section];
-    NSIndexPath *finalIp = [NSIndexPath indexPathForItem:count-1 inSection:indexPath.section];
-    UICollectionViewLayoutAttributes *finalAttributes =  [super layoutAttributesForItemAtIndexPath:finalIp];
-    if(attributes.frame.origin.y == finalAttributes.frame.origin.y) {
-        CGFloat trailing = self.collectionView.bounds.size.width - finalAttributes.frame.origin.x - attributes.frame.size.width;
+    NSIndexPath *lastItemIndexPath = [NSIndexPath indexPathForItem:count - 1 inSection:indexPath.section];
+    UICollectionViewLayoutAttributes *lastItemAttributes =  [super layoutAttributesForItemAtIndexPath:lastItemIndexPath];
+    if(attributes.frame.origin.y == lastItemAttributes.frame.origin.y) {
+        CGFloat trailing = self.collectionView.bounds.size.width - lastItemAttributes.frame.origin.x - attributes.frame.size.width;
         attributes.frame = CGRectOffset(attributes.frame, trailing * 0.5, 0);
     }
     return attributes;
