@@ -929,24 +929,29 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
                                    options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
+    NSString *versionTitle = @"";
+    NSString *versionDetailText = @"";
+    
+    switch (PSATVersion) {
+        case ORKPSATVersionPASAT:
+            versionTitle = ORKLocalizedString(@"PASAT_TITLE", nil);
+            versionDetailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
+            break;
+        case ORKPSATVersionPVSAT:
+            versionTitle = ORKLocalizedString(@"PVSAT_TITLE", nil);
+            versionDetailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
+            break;
+        default:
+            versionTitle = ORKLocalizedString(@"PAVSAT_TITLE", nil);
+            versionDetailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
+            break;
+    }
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            switch (PSATVersion) {
-                case ORKPSATVersionPASAT:
-                    step.title = ORKLocalizedString(@"PASAT_TITLE", nil);
-                    step.detailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
-                    break;
-                case ORKPSATVersionPVSAT:
-                    step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
-                    step.detailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
-                    break;
-                default:
-                    step.title = ORKLocalizedString(@"PAVSAT_TITLE", nil);
-                    step.detailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
-                    break;
-            }
+            step.title = versionTitle;
+            step.detailText = versionDetailText;
             step.text = intendedUseDescription;
             step.image = [UIImage imageNamed:@"phonepsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.shouldTintImages = YES;
@@ -955,17 +960,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         }
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            switch (PSATVersion) {
-                case ORKPSATVersionPASAT:
-                    step.title = ORKLocalizedString(@"PASAT_TITLE", nil);
-                    break;
-                case ORKPSATVersionPVSAT:
-                    step.title = ORKLocalizedString(@"PVSAT_TITLE", nil);
-                    break;
-                default:
-                    step.title = ORKLocalizedString(@"PAVSAT_TITLE", nil);
-                    break;
-            }
+            step.title = versionTitle;
             step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), @(additionDuration)];
             step.detailText = ORKLocalizedString(@"PSAT_CALL_TO_ACTION", nil);
             
