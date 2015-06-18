@@ -108,7 +108,6 @@
         }
     }
     [NSLayoutConstraint activateConstraints:_variableConstraints];
-    [super updateConstraints];
 }
 
 - (void)setupTitles:(NSArray *)titles {
