@@ -613,7 +613,7 @@ enum TaskListRow: Int, Printable {
     
     /// This task presents the PSAT pre-defined active task.
     private var PSATTask: ORKTask {
-        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, PSATVersion: ORKPSATVersion.PAVSAT, additionDuration: 3.0, seriesLength: 60, options: nil)
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, PSATVersion: ORKPSATVersion.PAVSAT, interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

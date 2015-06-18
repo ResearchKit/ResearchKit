@@ -421,11 +421,14 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
- collected. If the value of this parameter is `nil`, the default
- localized text is displayed.
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
  @param PSATVersion             The version of the PSAT test (Auditory and/or Visual).
+ @param interStimulusInterval   The time interval between two digits presented.
+ @param stimulusDuration        The time duration the digit is shown on screen (only for
+                                    visual PSAT, ie. PVSAT and PAVSAT).
  @param seriesLength            The number of digits that will be presented during the task.
- @param additionDuration        The time available for a participant to select right answer.
+ @param options                 Options that affect the features of the predefined task.
  
  @return An active PSAT task that can be presented with an `ORKTaskViewController` object.
  
@@ -433,7 +436,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
                     intendedUseDescription:(nullable NSString *)intendedUseDescription
                                PSATVersion:(ORKPSATVersion)PSATVersion
-                          additionDuration:(NSTimeInterval)additionDuration
+                     interStimulusInterval:(NSTimeInterval)interStimulusInterval
+                          stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
 

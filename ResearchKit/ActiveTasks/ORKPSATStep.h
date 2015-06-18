@@ -38,8 +38,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKPSATStep : ORKActiveStep
 
 @property (nonatomic, assign) ORKPSATVersion PSATVersion;
+@property (nonatomic, assign) NSTimeInterval interStimulusInterval;
+@property (nonatomic, assign) NSTimeInterval stimulusDuration;
 @property (nonatomic, assign) NSInteger seriesLength;
-@property (nonatomic, assign) NSTimeInterval additionDuration;
 
 @end
 

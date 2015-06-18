@@ -481,8 +481,9 @@ ret =
          },
          (@{
             PROPERTY(PSATVersion, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(interStimulusInterval, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(stimulusDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
-            PROPERTY(additionDuration, NSNumber, NSObject, YES, nil, nil),
             })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -866,9 +867,11 @@ ret =
          nil,
          (@{
             PROPERTY(PSATVersion, NSNumber, NSObject, NO, nil, nil),
-            PROPERTY(duration, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(interStimulusInterval, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(stimulusDuration, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(length, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(totalCorrect, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalDyad, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(totalTime, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(initialDigit, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(samples, ORKPSATSample, NSArray, NO, nil, nil),

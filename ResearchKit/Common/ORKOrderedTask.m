@@ -924,7 +924,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 + (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
                     intendedUseDescription:(nullable NSString *)intendedUseDescription
                                PSATVersion:(ORKPSATVersion)PSATVersion
-                          additionDuration:(NSTimeInterval)additionDuration
+                     interStimulusInterval:(NSTimeInterval)interStimulusInterval
+                          stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options {
     
@@ -961,7 +962,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = versionTitle;
-            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), @(additionDuration)];
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), @(interStimulusInterval)];
             step.detailText = ORKLocalizedString(@"PSAT_CALL_TO_ACTION", nil);
             
             ORKStepArrayAddStep(steps, step);
@@ -978,10 +979,11 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     {
         ORKPSATStep *step = [[ORKPSATStep alloc] initWithIdentifier:ORKPSATStepIdentifier];
         step.title = ORKLocalizedString(@"PSAT_INITIAL_INSTRUCTION", nil);
+        step.stepDuration = (seriesLength + 1) * interStimulusInterval;
         step.PSATVersion = PSATVersion;
-        step.stepDuration = (seriesLength + 1) * additionDuration;
+        step.interStimulusInterval = interStimulusInterval;
+        step.stimulusDuration = stimulusDuration;
         step.seriesLength = seriesLength;
-        step.additionDuration = additionDuration;
         
         ORKStepArrayAddStep(steps, step);
     }

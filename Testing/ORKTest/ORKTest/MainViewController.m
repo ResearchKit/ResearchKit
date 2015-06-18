@@ -407,8 +407,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                    intendedUseDescription:nil
                                                                  duration:20.0
                                                                   options:(ORKPredefinedTaskOption)0];
-    }
-    else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
                                                    intendedUseDescription:nil
                                                   maximumStimulusInterval:8
@@ -422,11 +421,12 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                   options:0];
     } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
         return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
-                                intendedUseDescription:nil
+                               intendedUseDescription:nil
                                           PSATVersion:ORKPSATVersionPAVSAT
-                                      additionDuration:3.0
-                                          seriesLength:60
-                                               options:(ORKPredefinedTaskOption)0];
+                                interStimulusInterval:3.0
+                                     stimulusDuration:1.0
+                                         seriesLength:60
+                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }

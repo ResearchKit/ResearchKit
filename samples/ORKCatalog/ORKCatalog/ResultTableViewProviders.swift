@@ -623,7 +623,7 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
             return super.tableView(tableView, titleForHeaderInSection: 0)
         }
         
-        return "Samples"
+        return "Answers"
     }
     
     // MARK: UITableViewDelegate
@@ -637,7 +637,7 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let PSATResult = result as! ORKPSATResult
         
-        let rows = super.resultRowsForSection(section)
+        var rows = super.resultRowsForSection(section)
         
         if section == 0 {
             var version = ""
@@ -648,25 +648,31 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
             default: version = "Unknown"
             }
             
-            return rows + [
-                // The version (Auditory and/or Visual) of the PSAT.
-                ResultRow(text: "version", detail: version),
+            // The version (Auditory and/or Visual) of the PSAT.
+            rows.append(ResultRow(text: "version", detail: version))
                 
-                // The duration for an addition of the PSAT.
-                ResultRow(text: "duration", detail: PSATResult.duration),
+            // The time interval between two digits.
+            rows.append(ResultRow(text: "ISI", detail: PSATResult.interStimulusInterval))
                 
-                // The serie length of the PSAT.
-                ResultRow(text: "length", detail: PSATResult.length),
+            // The time duration the digit is shown on screen.
+            rows.append(ResultRow(text: "stimulus", detail: PSATResult.stimulusDuration))
                 
-                // The number of correct answers.
-                ResultRow(text: "totalCorrect", detail: PSATResult.totalCorrect),
+            // The serie length of the PSAT.
+            rows.append(ResultRow(text: "length", detail: PSATResult.length))
                 
-                // The total time for the 60 answers.
-                ResultRow(text: "totalTime", detail: PSATResult.totalTime),
+            // The number of correct answers.
+            rows.append(ResultRow(text: "total correct", detail: PSATResult.totalCorrect))
+            
+            // The total number of consecutive correct answers.
+            rows.append(ResultRow(text: "total dyad", detail: PSATResult.totalDyad))
+            
+            // The total time for the answers.
+            rows.append(ResultRow(text: "total time", detail: PSATResult.totalTime))
                 
-                // The initial digit number.
-                ResultRow(text: "initialDigit", detail: PSATResult.initialDigit)
-            ]
+            // The initial digit number.
+            rows.append(ResultRow(text: "initial digit", detail: PSATResult.initialDigit))
+            
+            return rows
         }
         
         // Add a `ResultRow` for each sample.

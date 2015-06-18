@@ -52,23 +52,15 @@
 - (void)validateParameters {
     [super validateParameters];
 
-    NSTimeInterval const ORKPSATAdditionMinimumDuration = 2.0;
-    NSTimeInterval const ORKPSATAdditionMaximumDuration = 5.0;
+    NSTimeInterval const ORKPSATInterStimulusMinimumInterval = 2.0;
+    NSTimeInterval const ORKPSATInterStimulusMaximumInterval = 5.0;
+    
+    NSTimeInterval const ORKPSATStimulusMinimumDuration = 0.2;
     
     NSInteger const ORKPSATSerieMinimumLength = 10;
     NSInteger const ORKPSATSerieMaximumLength = 100;
 
-    if (self.additionDuration < ORKPSATAdditionMinimumDuration ||
-        self.additionDuration > ORKPSATAdditionMaximumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"addition duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATAdditionMinimumDuration), @(ORKPSATAdditionMaximumDuration)] userInfo:nil];
-    }
-    
-    if (self.seriesLength < ORKPSATSerieMinimumLength ||
-        self.seriesLength > ORKPSATSerieMaximumLength) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSerieMinimumLength), @(ORKPSATSerieMaximumLength)] userInfo:nil];
-    }
-    
-    NSTimeInterval totalDuration = (self.seriesLength + 1) * self.additionDuration;
+    NSTimeInterval totalDuration = (self.seriesLength + 1) * self.interStimulusInterval;
     if (self.stepDuration != totalDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step duration must be equal to %@ seconds.", @(totalDuration)] userInfo:nil];
     }
@@ -77,6 +69,21 @@
         self.PSATVersion != ORKPSATVersionPASAT &&
         self.PSATVersion != ORKPSATVersionPVSAT) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"step version must be PASAT, PVSAT or PAVSAT." userInfo:nil];
+    }
+    
+    if (self.interStimulusInterval < ORKPSATInterStimulusMinimumInterval ||
+        self.interStimulusInterval > ORKPSATInterStimulusMaximumInterval) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"inter stimulus interval must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATInterStimulusMinimumInterval), @(ORKPSATInterStimulusMaximumInterval)] userInfo:nil];
+    }
+    
+    if ((self.PSATVersion == ORKPSATVersionPAVSAT || self.PSATVersion == ORKPSATVersionPVSAT) &&
+        (self.stimulusDuration < ORKPSATStimulusMinimumDuration || self.stimulusDuration > self.interStimulusInterval)) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"stimulus duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATStimulusMinimumDuration), @(self.interStimulusInterval)] userInfo:nil];
+    }
+    
+    if (self.seriesLength < ORKPSATSerieMinimumLength ||
+        self.seriesLength > ORKPSATSerieMaximumLength) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"serie length must be greater than or equal to %@ additions and less than or equal to %@ additions.", @(ORKPSATSerieMinimumLength), @(ORKPSATSerieMaximumLength)] userInfo:nil];
     }
 }
 

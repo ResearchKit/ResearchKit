@@ -98,14 +98,14 @@
     [self.psatContentView setEnabled:NO];
     self.activeStepView.activeCustomView = self.psatContentView;
     
-    self.timerUpdateInterval = [self psatStep].additionDuration;
+    self.timerUpdateInterval = [self psatStep].interStimulusInterval;
 }
 
 - (void)setupTimeoutTimer {
     [self timeoutTimerFired];
     __weak typeof(self) weakSelf = self;
     self.timeoutTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self psatStep].stepDuration
-                                                            interval:[self psatStep].additionDuration
+                                                            interval:[self psatStep].interStimulusInterval
                                                              runtime:0
                                                              handler:^(ORKActiveStepTimer *timer, BOOL finished) {
                                                                  typeof(self) strongSelf = weakSelf;
@@ -122,19 +122,35 @@
     
     ORKPSATResult *PSATResult = [[ORKPSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
     PSATResult.PSATVersion = [self psatStep].PSATVersion;
-    PSATResult.duration = [self psatStep].additionDuration;
+    PSATResult.interStimulusInterval = [self psatStep].interStimulusInterval;
+    switch ([self psatStep].PSATVersion) {
+        case ORKPSATVersionPAVSAT:
+        case ORKPSATVersionPVSAT:
+            PSATResult.stimulusDuration = [self psatStep].stimulusDuration;
+            break;
+        default:
+            PSATResult.stimulusDuration = 0.0;
+            break;
+    }
     PSATResult.length = [self psatStep].seriesLength;
     PSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
     NSInteger totalCorrect = 0;
+    BOOL previousAnswerCorrect = NO;
+    NSInteger totalDyad = 0;
     CGFloat totalTime = 0.0;
     for (ORKPSATSample *sample in self.samples) {
         totalTime += sample.time;
         if (sample.isCorrect) {
             totalCorrect++;
+            if (previousAnswerCorrect) {
+                totalDyad++;
+            }
         }
+        previousAnswerCorrect = sample.isCorrect;
     }
     PSATResult.totalCorrect = totalCorrect;
     PSATResult.totalTime = totalTime;
+    PSATResult.totalDyad = totalDyad;
     PSATResult.samples = self.samples;
 
     [results addObject:PSATResult];
@@ -151,11 +167,14 @@
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
-        [strongSelf setupTimeoutTimer];
-    });
+    if ([self psatStep].PSATVersion == ORKPSATVersionPAVSAT ||
+        [self psatStep].PSATVersion == ORKPSATVersionPVSAT) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self psatStep].stimulusDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            typeof(self) strongSelf = weakSelf;
+            [strongSelf setupTimeoutTimer];
+        });
+    }
     
     [super start];
 }
@@ -172,6 +191,7 @@
 
 - (void)finish {
     [self.timeoutTimer reset];
+    self.timeoutTimer = nil;
     [super finish];
 }
 
@@ -207,7 +227,7 @@
     sample.correct = previousDigit + currentDigit == self.currentAnswer ? YES : NO;
     sample.digit = currentDigit;
     sample.answer = self.currentAnswer;
-    sample.time = self.answerEnd == 0 ? [self psatStep].additionDuration : self.answerEnd - self.answerStart;
+    sample.time = self.answerEnd == 0 ? [self psatStep].interStimulusInterval : self.answerEnd - self.answerStart;
     
     [self.samples addObject:sample];
 }

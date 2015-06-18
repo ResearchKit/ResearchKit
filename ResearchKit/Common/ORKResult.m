@@ -668,9 +668,11 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_ENUM(aCoder, PSATVersion);
-    ORK_ENCODE_DOUBLE(aCoder, duration);
+    ORK_ENCODE_DOUBLE(aCoder, interStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, stimulusDuration);
     ORK_ENCODE_INTEGER(aCoder, length);
     ORK_ENCODE_INTEGER(aCoder, totalCorrect);
+    ORK_ENCODE_INTEGER(aCoder, totalDyad);
     ORK_ENCODE_DOUBLE(aCoder, totalTime);
     ORK_ENCODE_INTEGER(aCoder, initialDigit);
     ORK_ENCODE_OBJ(aCoder, samples);
@@ -680,9 +682,11 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_ENUM(aDecoder, PSATVersion);
-        ORK_DECODE_DOUBLE(aDecoder, duration);
+        ORK_DECODE_DOUBLE(aDecoder, interStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, stimulusDuration);
         ORK_DECODE_INTEGER(aDecoder, length);
         ORK_DECODE_INTEGER(aDecoder, totalCorrect);
+        ORK_DECODE_INTEGER(aDecoder, totalDyad);
         ORK_DECODE_DOUBLE(aDecoder, totalTime);
         ORK_DECODE_INTEGER(aDecoder, initialDigit);
         ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPSATSample);
@@ -701,9 +705,11 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.PSATVersion == castObject.PSATVersion) &&
-            (self.duration == castObject.duration) &&
+            (self.interStimulusInterval == castObject.interStimulusInterval) &&
+            (self.stimulusDuration == castObject.stimulusDuration) &&
             (self.length == castObject.length) &&
             (self.totalCorrect == castObject.totalCorrect) &&
+            (self.totalDyad == castObject.totalDyad) &&
             (self.totalTime == castObject.totalTime) &&
             (self.initialDigit == castObject.initialDigit) &&
             ORKEqualObjects(self.samples, castObject.samples)) ;
@@ -716,9 +722,11 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPSATResult *result = [super copyWithZone:zone];
     result.PSATVersion = self.PSATVersion;
-    result.duration = self.duration;
+    result.interStimulusInterval = self.interStimulusInterval;
+    result.stimulusDuration = self.stimulusDuration;
     result.length = self.length;
     result.totalCorrect = self.totalCorrect;
+    result.totalDyad = self.totalDyad;
     result.totalTime = self.totalTime;
     result.initialDigit = self.initialDigit;
     result.samples = [self.samples copy];
