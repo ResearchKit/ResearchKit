@@ -164,6 +164,7 @@
     self.digits = [self arrayWithPSATDigits];
     self.currentDigitIndex = 0;
     [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    [self.psatContentView setProgress:0.001 animated:NO];
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
@@ -212,6 +213,9 @@
     }
     
     self.currentAnswer = -1;
+    
+    CGFloat progress = finished ? 1 : (timer.runtime / timer.duration);
+    [self.psatContentView setProgress:progress animated:YES];
     
     [super countDownTimerFired:timer finished:finished];
 }

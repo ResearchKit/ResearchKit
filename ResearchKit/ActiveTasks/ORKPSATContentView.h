@@ -44,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithPSATVersion:(ORKPSATVersion)PSATVersion NS_DESIGNATED_INITIALIZER;
 - (void)setEnabled:(BOOL)enabled;
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 @end
 

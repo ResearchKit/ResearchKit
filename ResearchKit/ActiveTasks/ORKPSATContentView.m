@@ -32,7 +32,6 @@
 #import "ORKPSATContentView.h"
 #import "ORKSkin.h"
 #import "ORKPSATKeyboardView.h"
-#import "ORKSubheadlineLabel.h"
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
 #import "ORKVoiceEngine.h"
@@ -41,7 +40,7 @@
 @interface ORKPSATContentView ()
 
 @property (nonatomic, assign, getter = isAuditory) BOOL auditory;
-@property (nonatomic, strong) ORKSubheadlineLabel *answerCaptionLabel;
+@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) ORKTapCountLabel *digitLabel;
 @property (nonatomic, assign) ORKScreenType screenType;
 @property (nonatomic, strong) NSArray *constraints;
@@ -59,7 +58,6 @@
         _screenType = ORKGetScreenTypeForWindow(self.window);
         
         _digitLabel = [ORKTapCountLabel new];
-        _digitLabel.textColor = [self tintColor];
         _digitLabel.textAlignment = NSTextAlignmentCenter;
         _digitLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_digitLabel];
@@ -69,10 +67,11 @@
             _digitLabel.hidden = YES;
         }
         
-        _answerCaptionLabel = [ORKSubheadlineLabel new];
-        _answerCaptionLabel.textAlignment = NSTextAlignmentCenter;
-        _answerCaptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_answerCaptionLabel];
+        _progressView = [UIProgressView new];
+        _progressView.translatesAutoresizingMaskIntoConstraints = NO;
+        _progressView.progressTintColor = [self tintColor];
+        [_progressView setAlpha:0];
+        [self addSubview:_progressView];
         
         _keyboardView = [ORKPSATKeyboardView new];
         _keyboardView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -86,32 +85,27 @@
     return self;
 }
 
-- (void)tintColorDidChange {
-    [super tintColorDidChange];
-    self.digitLabel.textColor = [self tintColor];
-}
-
 - (void)setEnabled:(BOOL)enabled {
     self.keyboardView.enabled = enabled;
 }
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
-        self.digitLabel.text = @"-";
+        self.digitLabel.text = @"";
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];
-        self.digitLabel.textColor = [self tintColor];
         self.digitLabel.text = digit.stringValue;
         if (self.isAuditory) {
             [[ORKVoiceEngine sharedVoiceEngine] speakInt:digit.integerValue];
         }
-        if (additionIndex == 0) {
-            self.answerCaptionLabel.text = ORKLocalizedString(@"PSAT_INITIAL_ADDITION", nil);
-        } else {
-            self.answerCaptionLabel.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_ADDITION_%@", nil), @(additionIndex), @(totalAddition)];
-        }
     }
+}
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
+    [self.progressView setProgress:progress animated:animated];
+    [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+        [self.progressView setAlpha:(progress == 0) ? 0 : 1];
+    }];
 }
 
 - (void)updateConstraints {
@@ -125,7 +119,12 @@
     
     NSMutableArray *constraintsArray = [NSMutableArray array];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_answerCaptionLabel, _digitLabel, _keyboardView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _digitLabel, _keyboardView);
+    
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-[_keyboardView(==%f)]-|", ORKPSATKeyboardWidth]
@@ -138,7 +137,7 @@
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_answerCaptionLabel][_digitLabel]-(>=10)-[_keyboardView]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]-[_digitLabel]-(>=10)-[_keyboardView]-|"
                                              options:NSLayoutFormatAlignAllCenterX
                                              metrics:nil views:views]];
     
