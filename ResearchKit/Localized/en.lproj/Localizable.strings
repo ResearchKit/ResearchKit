@@ -227,8 +227,6 @@
 "PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
 "PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
-"PSAT_INITIAL_ADDITION" = "Initial digit";
-"PSAT_ADDITION_%@" = "Addition %@/%@";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
