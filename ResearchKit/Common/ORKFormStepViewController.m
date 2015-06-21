@@ -538,9 +538,6 @@
     //      a) The step is optional and there is no skip button.
     //      b) The step is optional and at least one question has been answered.
     BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
-    NSLog(@"numAnswered = %@" , @([self numAnswered]));
-     NSLog(@"allAnswersValid = %@" , @([self allAnswersValid]));
-    NSLog(@"optionalButNotEmpty = %@" , @(optionalButNotEmpty));
     return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
 }
 
