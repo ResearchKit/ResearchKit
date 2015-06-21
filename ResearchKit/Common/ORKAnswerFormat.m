@@ -42,6 +42,11 @@ id ORKNullAnswerValue() {
     return [NSNull null];
 }
 
+BOOL ORKIsAnswerEmpty(id answer) {
+    return  (answer == nil) ||
+            (answer == ORKNullAnswerValue()) ||
+            ([answer isKindOfClass:[NSArray class]] && [(NSArray *)answer count] == 0);     // Empty answer of choice or value picker 
+}
 
 NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
 #define SQT_CASE(x) case ORKQuestionType ## x : return @STRINGIFY(ORKQuestionType ## x);

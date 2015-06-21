@@ -1372,6 +1372,18 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     }
     
     {
+        
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Non optional form step" text:nil];
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_001"
+                                                               text:@"Value"
+                                                       answerFormat:[ORKNumericAnswerFormat valuePickerAnswerFormatWithTextChoices:@[@"1", @"2", @"3"]]];
+        item.placeholder = @"Pick a value";
+        [step setFormItems:@[item]];
+        step.optional = NO;
+        [steps addObject:step];
+    }
+    
+    {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"aid_001"];
         step.title = @"Thanks";
         [steps addObject:step];

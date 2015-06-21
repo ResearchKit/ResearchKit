@@ -412,7 +412,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)hasAnswer {
-    return !(self.answer == nil || (self.answer == ORKNullAnswerValue()) || ([self.answer isKindOfClass:[NSArray class]] && [(NSArray *)self.answer count] == 0) );
+    return !ORKIsAnswerEmpty(self.answer);
 }
 
 - (void)saveAnswer:(id)answer {

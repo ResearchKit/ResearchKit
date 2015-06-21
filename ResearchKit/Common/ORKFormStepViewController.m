@@ -509,8 +509,8 @@
 
 - (NSInteger)numAnswered {
     __block NSInteger nonNilCount = 0;
-    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if (obj != ORKNullAnswerValue()) {
+    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
+        if (ORKIsAnswerEmpty(answer) == NO) {
             nonNilCount ++;
         }
     }];
@@ -524,8 +524,7 @@
 - (BOOL)allAnswersValid {
     for (ORKFormItem *item in [self formItems]) {
         id answer = _savedAnswers[item.identifier];
-        BOOL isNonNull = answer && ![answer isKindOfClass:[NSNull class]];
-        if (isNonNull && ![item.impliedAnswerFormat isAnswerValid:answer]) {
+        if (ORKIsAnswerEmpty(answer) == NO && ![item.impliedAnswerFormat isAnswerValid:answer]) {
             return NO;
         }
     }
@@ -539,6 +538,9 @@
     //      a) The step is optional and there is no skip button.
     //      b) The step is optional and at least one question has been answered.
     BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
+    NSLog(@"numAnswered = %@" , @([self numAnswered]));
+     NSLog(@"allAnswersValid = %@" , @([self allAnswersValid]));
+    NSLog(@"optionalButNotEmpty = %@" , @(optionalButNotEmpty));
     return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
 }
 
