@@ -37,6 +37,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 id ORKNullAnswerValue();
+BOOL ORKIsAnswerEmpty(__nullable id answer);
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
 NSString *ORKHKBloodTypeString(HKBloodType bloodType);

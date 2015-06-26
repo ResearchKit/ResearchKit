@@ -509,8 +509,8 @@
 
 - (NSInteger)numAnswered {
     __block NSInteger nonNilCount = 0;
-    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if (obj != ORKNullAnswerValue()) {
+    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
+        if (ORKIsAnswerEmpty(answer) == NO) {
             nonNilCount ++;
         }
     }];
@@ -524,8 +524,7 @@
 - (BOOL)allAnswersValid {
     for (ORKFormItem *item in [self formItems]) {
         id answer = _savedAnswers[item.identifier];
-        BOOL isNonNull = answer && ![answer isKindOfClass:[NSNull class]];
-        if (isNonNull && ![item.impliedAnswerFormat isAnswerValid:answer]) {
+        if (ORKIsAnswerEmpty(answer) == NO && ![item.impliedAnswerFormat isAnswerValid:answer]) {
             return NO;
         }
     }
