@@ -423,7 +423,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param intendedUseDescription  A localized string describing the intended use of the data
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
- @param PSATVersion             The version of the PSAT test (Auditory and/or Visual).
+ @param presentationMode        The presentation mode of the PSAT test (auditory and/or Visual).
  @param interStimulusInterval   The time interval between two digits presented.
  @param stimulusDuration        The time duration the digit is shown on screen (only for
                                     visual PSAT, ie. PVSAT and PAVSAT).
@@ -435,7 +435,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  */
 + (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                               PSATVersion:(ORKPSATVersion)PSATVersion
+                          presentationMode:(ORKPSATPresentationMode)presentationMode
                      interStimulusInterval:(NSTimeInterval)interStimulusInterval
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength

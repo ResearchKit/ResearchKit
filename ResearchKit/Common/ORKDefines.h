@@ -105,16 +105,12 @@ typedef NS_ENUM(NSInteger, ORKAudioChannel) {
 
 
 /**
- Values that identify the version of PSAT (Auditory and/or visual).
+ Values that identify the presentation mode of PSAT (auditory and/or visual).
  */
-typedef NS_ENUM(NSInteger, ORKPSATVersion) {
-    
+typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
     /// The PASAT (Paced Auditory Series Addition Test).
-    ORKPSATVersionPASAT,
+    ORKPSATPresentationModeAuditory = 1 << 0,
     
     /// The PVSAT (Paced Visual Series Addition Test).
-    ORKPSATVersionPVSAT,
-    
-    /// The PAVSAT (Paced Auditory and Visual Series Addition Test).
-    ORKPSATVersionPAVSAT
+    ORKPSATPresentationModeVisual = 1 << 1
 } ORK_ENUM_AVAILABLE;

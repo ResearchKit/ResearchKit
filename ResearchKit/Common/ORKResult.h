@@ -546,9 +546,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKPSATResult : ORKResult
 
 /**
- The PSAT version.
+ The PSAT presentation mode.
  */
-@property (nonatomic, assign) ORKPSATVersion PSATVersion;
+@property (nonatomic, assign) ORKPSATPresentationMode presentationMode;
 
 /**
  The time interval between two digits presented.

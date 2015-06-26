@@ -422,7 +422,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
         return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
                                intendedUseDescription:nil
-                                          PSATVersion:ORKPSATVersionPAVSAT
+                                     presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
                                 interStimulusInterval:3.0
                                      stimulusDuration:1.0
                                          seriesLength:60

@@ -52,23 +52,22 @@
 - (void)validateParameters {
     [super validateParameters];
 
-    NSTimeInterval const ORKPSATInterStimulusMinimumInterval = 2.0;
+    NSTimeInterval const ORKPSATInterStimulusMinimumInterval = 1.0;
     NSTimeInterval const ORKPSATInterStimulusMaximumInterval = 5.0;
     
     NSTimeInterval const ORKPSATStimulusMinimumDuration = 0.2;
     
     NSInteger const ORKPSATSerieMinimumLength = 10;
-    NSInteger const ORKPSATSerieMaximumLength = 100;
+    NSInteger const ORKPSATSerieMaximumLength = 120;
 
     NSTimeInterval totalDuration = (self.seriesLength + 1) * self.interStimulusInterval;
     if (self.stepDuration != totalDuration) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"step duration must be equal to %@ seconds.", @(totalDuration)] userInfo:nil];
     }
     
-    if (self.PSATVersion != ORKPSATVersionPAVSAT &&
-        self.PSATVersion != ORKPSATVersionPASAT &&
-        self.PSATVersion != ORKPSATVersionPVSAT) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"step version must be PASAT, PVSAT or PAVSAT." userInfo:nil];
+    if (!(self.presentationMode & ORKPSATPresentationModeAuditory) &&
+        !(self.presentationMode & ORKPSATPresentationModeVisual)) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"step presentation mode must be auditory and/or visual." userInfo:nil];
     }
     
     if (self.interStimulusInterval < ORKPSATInterStimulusMinimumInterval ||
@@ -76,7 +75,7 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"inter stimulus interval must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATInterStimulusMinimumInterval), @(ORKPSATInterStimulusMaximumInterval)] userInfo:nil];
     }
     
-    if ((self.PSATVersion == ORKPSATVersionPAVSAT || self.PSATVersion == ORKPSATVersionPVSAT) &&
+    if ((self.presentationMode & ORKPSATPresentationModeVisual) &&
         (self.stimulusDuration < ORKPSATStimulusMinimumDuration || self.stimulusDuration > self.interStimulusInterval)) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"stimulus duration must be greater than or equal to %@ seconds and less than or equal to %@ seconds.", @(ORKPSATStimulusMinimumDuration), @(self.interStimulusInterval)] userInfo:nil];
     }

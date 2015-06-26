@@ -667,7 +667,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_ENUM(aCoder, PSATVersion);
+    ORK_ENCODE_ENUM(aCoder, presentationMode);
     ORK_ENCODE_DOUBLE(aCoder, interStimulusInterval);
     ORK_ENCODE_DOUBLE(aCoder, stimulusDuration);
     ORK_ENCODE_INTEGER(aCoder, length);
@@ -681,7 +681,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_ENUM(aDecoder, PSATVersion);
+        ORK_DECODE_ENUM(aDecoder, presentationMode);
         ORK_DECODE_DOUBLE(aDecoder, interStimulusInterval);
         ORK_DECODE_DOUBLE(aDecoder, stimulusDuration);
         ORK_DECODE_INTEGER(aDecoder, length);
@@ -704,7 +704,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.PSATVersion == castObject.PSATVersion) &&
+            (self.presentationMode == castObject.presentationMode) &&
             (self.interStimulusInterval == castObject.interStimulusInterval) &&
             (self.stimulusDuration == castObject.stimulusDuration) &&
             (self.length == castObject.length) &&
@@ -721,7 +721,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPSATResult *result = [super copyWithZone:zone];
-    result.PSATVersion = self.PSATVersion;
+    result.presentationMode = self.presentationMode;
     result.interStimulusInterval = self.interStimulusInterval;
     result.stimulusDuration = self.stimulusDuration;
     result.length = self.length;

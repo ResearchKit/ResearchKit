@@ -640,16 +640,20 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
         var rows = super.resultRowsForSection(section)
         
         if section == 0 {
-            var version = ""
-            switch PSATResult.PSATVersion {
-            case .PASAT: version = "PASAT"
-            case .PVSAT: version = "PVSAT"
-            case .PAVSAT: version = "PAVSAT"
-            default: version = "Unknown"
+            var presentation = ""
+            let presentationMode = PSATResult.presentationMode
+            if (presentationMode == .Auditory) {
+                presentation = "PASAT"
+            } else if (presentationMode == .Visual) {
+                presentation = "PVSAT"
+            } else if (presentationMode == (.Auditory | .Visual)) {
+                presentation = "PAVSAT"
+            } else {
+                presentation = "Unknown"
             }
             
-            // The version (Auditory and/or Visual) of the PSAT.
-            rows.append(ResultRow(text: "version", detail: version))
+            // The presentation mode (auditory and/or visual) of the PSAT.
+            rows.append(ResultRow(text: "presentation", detail: presentation))
                 
             // The time interval between two digits.
             rows.append(ResultRow(text: "ISI", detail: PSATResult.interStimulusInterval))

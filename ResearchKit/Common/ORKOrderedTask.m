@@ -923,7 +923,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                               PSATVersion:(ORKPSATVersion)PSATVersion
+                          presentationMode:(ORKPSATPresentationMode)presentationMode
                      interStimulusInterval:(NSTimeInterval)interStimulusInterval
                           stimulusDuration:(NSTimeInterval)stimulusDuration
                               seriesLength:(NSInteger)seriesLength
@@ -933,19 +933,15 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSString *versionTitle = @"";
     NSString *versionDetailText = @"";
     
-    switch (PSATVersion) {
-        case ORKPSATVersionPASAT:
-            versionTitle = ORKLocalizedString(@"PASAT_TITLE", nil);
-            versionDetailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
-            break;
-        case ORKPSATVersionPVSAT:
-            versionTitle = ORKLocalizedString(@"PVSAT_TITLE", nil);
-            versionDetailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
-            break;
-        default:
-            versionTitle = ORKLocalizedString(@"PAVSAT_TITLE", nil);
-            versionDetailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
-            break;
+    if (presentationMode == ORKPSATPresentationModeAuditory) {
+        versionTitle = ORKLocalizedString(@"PASAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
+    } else if (presentationMode == ORKPSATPresentationModeVisual) {
+        versionTitle = ORKLocalizedString(@"PVSAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
+    } else {
+        versionTitle = ORKLocalizedString(@"PAVSAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
     }
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
@@ -980,7 +976,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         ORKPSATStep *step = [[ORKPSATStep alloc] initWithIdentifier:ORKPSATStepIdentifier];
         step.title = ORKLocalizedString(@"PSAT_INITIAL_INSTRUCTION", nil);
         step.stepDuration = (seriesLength + 1) * interStimulusInterval;
-        step.PSATVersion = PSATVersion;
+        step.presentationMode = presentationMode;
         step.interStimulusInterval = interStimulusInterval;
         step.stimulusDuration = stimulusDuration;
         step.seriesLength = seriesLength;

@@ -93,7 +93,7 @@
     [super viewDidLoad];
     
     self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.psatContentView = [[ORKPSATContentView alloc] initWithPSATVersion:[self psatStep].PSATVersion];
+    self.psatContentView = [[ORKPSATContentView alloc] initWithPresentationMode:[self psatStep].presentationMode];
     self.psatContentView.keyboardView.delegate = self;
     [self.psatContentView setEnabled:NO];
     self.activeStepView.activeCustomView = self.psatContentView;
@@ -121,16 +121,12 @@
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
     ORKPSATResult *PSATResult = [[ORKPSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    PSATResult.PSATVersion = [self psatStep].PSATVersion;
+    PSATResult.presentationMode = [self psatStep].presentationMode;
     PSATResult.interStimulusInterval = [self psatStep].interStimulusInterval;
-    switch ([self psatStep].PSATVersion) {
-        case ORKPSATVersionPAVSAT:
-        case ORKPSATVersionPVSAT:
-            PSATResult.stimulusDuration = [self psatStep].stimulusDuration;
-            break;
-        default:
-            PSATResult.stimulusDuration = 0.0;
-            break;
+    if ([self psatStep].presentationMode & ORKPSATPresentationModeVisual) {
+        PSATResult.stimulusDuration = [self psatStep].stimulusDuration;
+    } else {
+        PSATResult.stimulusDuration = 0.0;
     }
     PSATResult.length = [self psatStep].seriesLength;
     PSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
@@ -168,8 +164,7 @@
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
-    if ([self psatStep].PSATVersion == ORKPSATVersionPAVSAT ||
-        [self psatStep].PSATVersion == ORKPSATVersionPVSAT) {
+    if ([self psatStep].presentationMode & ORKPSATPresentationModeVisual) {
         __weak typeof(self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self psatStep].stimulusDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             typeof(self) strongSelf = weakSelf;

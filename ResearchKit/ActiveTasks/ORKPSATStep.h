@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKPSATStep : ORKActiveStep
 
-@property (nonatomic, assign) ORKPSATVersion PSATVersion;
+@property (nonatomic, assign) ORKPSATPresentationMode presentationMode;
 @property (nonatomic, assign) NSTimeInterval interStimulusInterval;
 @property (nonatomic, assign) NSTimeInterval stimulusDuration;
 @property (nonatomic, assign) NSInteger seriesLength;

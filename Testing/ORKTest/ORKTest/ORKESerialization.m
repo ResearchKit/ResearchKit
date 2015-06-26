@@ -480,7 +480,7 @@ ret =
              return [[ORKPSATStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(PSATVersion, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(presentationMode, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(interStimulusInterval, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(stimulusDuration, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(seriesLength, NSNumber, NSObject, YES, nil, nil),
@@ -866,7 +866,7 @@ ret =
    ENTRY(ORKPSATResult,
          nil,
          (@{
-            PROPERTY(PSATVersion, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(presentationMode, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(interStimulusInterval, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(stimulusDuration, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(length, NSNumber, NSObject, NO, nil, nil),

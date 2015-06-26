@@ -50,7 +50,7 @@
 
 @implementation ORKPSATContentView
 
-- (instancetype)initWithPSATVersion:(ORKPSATVersion)PSATVersion {
+- (instancetype)initWithPresentationMode:(ORKPSATPresentationMode)presentationMode {
     self = [super init];
     
     if (self) {
@@ -61,9 +61,8 @@
         _digitLabel.textAlignment = NSTextAlignmentCenter;
         _digitLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_digitLabel];
-        _auditory = (PSATVersion == ORKPSATVersionPAVSAT || PSATVersion == ORKPSATVersionPASAT) ? YES : NO;
-        if (PSATVersion != ORKPSATVersionPAVSAT &&
-            PSATVersion != ORKPSATVersionPVSAT) {
+        _auditory = (presentationMode & ORKPSATPresentationModeAuditory) ? YES : NO;
+        if (!(presentationMode & ORKPSATPresentationModeVisual)) {
             _digitLabel.hidden = YES;
         }
         
