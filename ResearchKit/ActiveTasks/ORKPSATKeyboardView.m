@@ -46,9 +46,11 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:17];
+        NSUInteger const ORKPSATMinimumAnswer = 3;
+        NSUInteger const ORKPSATMaximumAnswer = 17;
+        NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:(ORKPSATMaximumAnswer - ORKPSATMinimumAnswer) + 1];
         ORKBorderedButton *answerButton = nil;
-        for (NSUInteger i = 3; i <= 17; i++) {
+        for (NSUInteger i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
             answerButton = [self answerButtonWithTitle:@(i).stringValue];
             [buttonsArray addObject:answerButton];
             [self addSubview:answerButton];
