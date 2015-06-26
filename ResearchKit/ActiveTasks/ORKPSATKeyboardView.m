@@ -51,10 +51,9 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     if (self) {
         NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:(ORKPSATMaximumAnswer - ORKPSATMinimumAnswer) + 1];
         ORKBorderedButton *answerButton = nil;
-        NSString *answerButtonTitle = nil;
-        for (NSUInteger i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
-            answerButtonTitle = [NSString stringWithFormat:@"PSAT_BUTTON_TITLE_%li", i];
-            answerButton = [self answerButtonWithTitle:ORKLocalizedString(answerButtonTitle, nil)];
+        for (int i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
+            answerButton = [self answerButtonWithTitle:[NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInt:i]
+                                                                                        numberStyle:NSNumberFormatterNoStyle]];
             [buttonsArray addObject:answerButton];
             [self addSubview:answerButton];
         }

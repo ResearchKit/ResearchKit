@@ -229,22 +229,7 @@
 "PSAT_INSTRUCTION" = "Ajoutez ce nouveau chiffre au précédent.";
 "PSAT_INITIAL_ADDITION" = "Chiffre initial";
 "PSAT_ADDITION_%@" = "Addition %@/%@";
-"PSAT_BUTTON_NO_TITLE" = "-";
-"PSAT_BUTTON_TITLE_3" = "3";
-"PSAT_BUTTON_TITLE_4" = "4";
-"PSAT_BUTTON_TITLE_5" = "5";
-"PSAT_BUTTON_TITLE_6" = "6";
-"PSAT_BUTTON_TITLE_7" = "7";
-"PSAT_BUTTON_TITLE_8" = "8";
-"PSAT_BUTTON_TITLE_9" = "9";
-"PSAT_BUTTON_TITLE_10" = "10";
-"PSAT_BUTTON_TITLE_11" = "11";
-"PSAT_BUTTON_TITLE_12" = "12";
-"PSAT_BUTTON_TITLE_13" = "13";
-"PSAT_BUTTON_TITLE_14" = "14";
-"PSAT_BUTTON_TITLE_15" = "15";
-"PSAT_BUTTON_TITLE_16" = "16";
-"PSAT_BUTTON_TITLE_17" = "17";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";
