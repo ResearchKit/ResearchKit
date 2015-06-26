@@ -227,6 +227,22 @@
 "PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
 "PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+"PSAT_BUTTON_NO_TITLE" = "-";
+"PSAT_BUTTON_TITLE_3" = "3";
+"PSAT_BUTTON_TITLE_4" = "4";
+"PSAT_BUTTON_TITLE_5" = "5";
+"PSAT_BUTTON_TITLE_6" = "6";
+"PSAT_BUTTON_TITLE_7" = "7";
+"PSAT_BUTTON_TITLE_8" = "8";
+"PSAT_BUTTON_TITLE_9" = "9";
+"PSAT_BUTTON_TITLE_10" = "10";
+"PSAT_BUTTON_TITLE_11" = "11";
+"PSAT_BUTTON_TITLE_12" = "12";
+"PSAT_BUTTON_TITLE_13" = "13";
+"PSAT_BUTTON_TITLE_14" = "14";
+"PSAT_BUTTON_TITLE_15" = "15";
+"PSAT_BUTTON_TITLE_16" = "16";
+"PSAT_BUTTON_TITLE_17" = "17";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

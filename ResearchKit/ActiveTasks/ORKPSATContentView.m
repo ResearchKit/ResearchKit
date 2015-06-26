@@ -90,9 +90,11 @@
 
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit {
     if (digit.integerValue == -1) {
-        self.digitLabel.text = @"";
+        self.digitLabel.textColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+        self.digitLabel.text = ORKLocalizedString(@"PSAT_BUTTON_NO_TITLE", nil);
     } else {
         [self.keyboardView.selectedAnswerButton setSelected:NO];
+        self.digitLabel.textColor = nil;
         self.digitLabel.text = digit.stringValue;
         if (self.isAuditory) {
             [[ORKVoiceEngine sharedVoiceEngine] speakInt:digit.integerValue];

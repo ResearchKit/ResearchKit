@@ -33,6 +33,9 @@
 #import "ORKBorderedButton.h"
 
 
+NSUInteger const ORKPSATMinimumAnswer = 3;
+NSUInteger const ORKPSATMaximumAnswer = 17;
+
 @interface ORKPSATKeyboardView ()
 
 @property (nonatomic, strong, readonly) NSArray *answerButtons;
@@ -46,12 +49,12 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSUInteger const ORKPSATMinimumAnswer = 3;
-        NSUInteger const ORKPSATMaximumAnswer = 17;
         NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:(ORKPSATMaximumAnswer - ORKPSATMinimumAnswer) + 1];
         ORKBorderedButton *answerButton = nil;
+        NSString *answerButtonTitle = nil;
         for (NSUInteger i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
-            answerButton = [self answerButtonWithTitle:@(i).stringValue];
+            answerButtonTitle = [NSString stringWithFormat:@"PSAT_BUTTON_TITLE_%li", i];
+            answerButton = [self answerButtonWithTitle:ORKLocalizedString(answerButtonTitle, nil)];
             [buttonsArray addObject:answerButton];
             [self addSubview:answerButton];
         }
@@ -147,7 +150,8 @@
     [self.selectedAnswerButton setSelected:YES];
     
     if ([self.delegate respondsToSelector:@selector(keyboardView:didSelectAnswer:)]) {
-        [self.delegate keyboardView:self didSelectAnswer:[tappedAnswerButton.titleLabel.text integerValue]];
+        NSInteger answerValue = [self.answerButtons indexOfObject:tappedAnswerButton] + ORKPSATMinimumAnswer;
+        [self.delegate keyboardView:self didSelectAnswer:answerValue];
     }
 }
 
