@@ -52,7 +52,7 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
         NSMutableArray *buttonsArray = [[NSMutableArray alloc] initWithCapacity:(ORKPSATMaximumAnswer - ORKPSATMinimumAnswer) + 1];
         ORKBorderedButton *answerButton = nil;
         for (int i = ORKPSATMinimumAnswer; i <= ORKPSATMaximumAnswer; i++) {
-            answerButton = [self answerButtonWithTitle:[NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInt:i]
+            answerButton = [self answerButtonWithTitle:[NSNumberFormatter localizedStringFromNumber:@(i)
                                                                                         numberStyle:NSNumberFormatterNoStyle]];
             [buttonsArray addObject:answerButton];
             [self addSubview:answerButton];

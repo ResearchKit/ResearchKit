@@ -958,7 +958,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = versionTitle;
-            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), @(interStimulusInterval)];
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), [NSNumberFormatter localizedStringFromNumber:@(interStimulusInterval) numberStyle:NSNumberFormatterDecimalStyle]];
             step.detailText = ORKLocalizedString(@"PSAT_CALL_TO_ACTION", nil);
             
             ORKStepArrayAddStep(steps, step);
