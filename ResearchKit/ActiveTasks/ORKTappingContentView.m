@@ -116,7 +116,10 @@
 }
 
 - (void)setTapCount:(NSUInteger)tapCount {
-    _tapCountLabel.text = [NSString stringWithFormat:@"%02lu", (unsigned long)tapCount];
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    formatter.locale = [NSLocale currentLocale];
+    formatter.minimumIntegerDigits = 2;
+    _tapCountLabel.text = [NSString stringWithFormat:@"%2@", [formatter stringFromNumber:@(tapCount)]];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
