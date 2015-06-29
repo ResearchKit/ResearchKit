@@ -79,7 +79,7 @@
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valoare nevalidă";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1@” depășește maximul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1$@” depășește maximul permis (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Valoarea “%1$@” este mai mică decât minimul permis (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ nu este o valoare validă.";
 

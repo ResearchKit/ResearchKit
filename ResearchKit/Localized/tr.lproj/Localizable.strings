@@ -79,7 +79,7 @@
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Geçersiz değer";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@, izin verilen maksimum değeri (%2$@) aşıyor.";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@, izin verilen maksimum değeri (%2$@) aşıyor.";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@, izin verilen minimum değerden (%2$@) küçük.";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ geçerli bir değer değil.";
 

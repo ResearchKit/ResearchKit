@@ -79,7 +79,7 @@
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ogiltigt värde";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ överskrider det högsta tillåtna värdet (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ överskrider det högsta tillåtna värdet (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ är mindre än det minsta tillåtna värdet (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ är inte ett giltigt värde.";
 

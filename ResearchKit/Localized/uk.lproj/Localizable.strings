@@ -79,7 +79,7 @@
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Неправильне значення";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ перевищує максимально дозволене значення (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ перевищує максимально дозволене значення (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ є меншим мінімально дозволеного значення (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ не є правильним значенням.";
 

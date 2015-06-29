@@ -79,7 +79,7 @@
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nilai tidak sah";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ melebihi nilai maksimum yang diizinkan (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ melebihi nilai maksimum yang diizinkan (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ kurang dari nilai minimum yang diizinkan (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ bukan nilai yang sah.";
 
