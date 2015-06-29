@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Krok %1$lu z %2$lu";
+"STEP_PROGRESS_FORMAT" = "Krok %@ z %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nieprawidłowa wartość";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "To ćwiczenie ocenia Twój czas odpowiedzi na bodziec wzrokowy.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Potrząśnij urządzeniem w dowolnym kierunku, gdy tylko zobaczysz na ekranie niebieską kropkę. Test zostanie powtórzony %D razy.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Próba %D z %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Próba %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gdy pojawi się niebieskie kółko, szybko potrząśnij urządzeniem";
 
 /* Potentially user visible error messages. */

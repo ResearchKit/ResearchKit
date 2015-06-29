@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "วันที่";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "ขั้นที่ %1$lu จาก %2$lu";
+"STEP_PROGRESS_FORMAT" = "ขั้นที่ %@ จาก %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "ค่าไม่ถูกต้อง";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "กิจกรรมนี้จะประเมินเวลาที่คุณใช้ในการตอบสนองต่อการมองเห็น";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "เขย่าอุปกรณ์ในทิศทางใดก็ได้ทันทีที่มีจุดสีน้ำเงินปรากฏขึ้นมาบนหน้าจอ ระบบจะขอให้คุณทำสิ่งนี้ %D ครั้ง";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ความพยายาม %D จาก %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ความพยายาม %@ จาก %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "เขย่าอุปกรณ์อย่างรวดเร็วเมื่อมีวงกลมสีนำ้เงินปรากฏขึ้น";
 
 /* Potentially user visible error messages. */

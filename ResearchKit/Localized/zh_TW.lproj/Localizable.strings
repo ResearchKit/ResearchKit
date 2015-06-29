@@ -75,11 +75,11 @@
 "CONSENT_DOC_LINE_DATE" = "日期";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "第 %1$lu 步（共 %2$lu 步）";
+"STEP_PROGRESS_FORMAT" = "第 %@ 步（共 %@ 步）";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "無效值";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ 超過最大的允許值 (%2$@)。";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ 超過最大的允許值 (%2$@)。";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ 低於最小的允許值 (%2$@)。";
 "RANGE_ALERT_MESSAGE_OTHER" = "「%@」不是有效值。";
 
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "此活動會評估您對於視覺提示的回應時間。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "看到螢幕上顯示藍色圓點後，請立即往任意方向晃動裝置。您將被要求進行 %D 次晃動操作。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D 次（共 %D 次）";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@ 次（共 %@ 次）";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "顯示藍色圓圈時快速晃動裝置";
 
 /* Potentially user visible error messages. */

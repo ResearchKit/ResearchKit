@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Date";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Étape %1$lu sur %2$lu";
+"STEP_PROGRESS_FORMAT" = "Étape %@ sur %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valeur non valide";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Cette activité évalue le temps qu’il vous faut pour réagir à un signal visuel.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Secouez l’appareil dans n’importe quelle direction dès que le point bleu apparaît à l’écran. Il vous sera demandé de le faire %D fois.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %D sur %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %@ sur %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
 /* Potentially user visible error messages. */

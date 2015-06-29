@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Ημερομηνία";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Βήμα %1$lu από %2$lu";
+"STEP_PROGRESS_FORMAT" = "Βήμα %@ από %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Μη έγκυρη τιμή";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Η δραστηριότητα αυτή υπολογίζει τον χρόνο που χρειάζεστε για να αποκριθείτε σε μια οπτική ένδειξη.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ανακινήστε τη συσκευή προς οποιαδήποτε κατεύθυνση αμέσως μόλις εμφανιστεί η μπλε κουκκίδα στην οθόνη. Θα σας ζητηθεί να το κάνετε αυτό %D φορές.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Προσπάθεια %D από %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Προσπάθεια %@ από %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ανακινήστε γρήγορα τη συσκευή όταν εμφανιστεί ο μπλε κύκλος";
 
 /* Potentially user visible error messages. */

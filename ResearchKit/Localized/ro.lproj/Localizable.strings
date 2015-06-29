@@ -75,11 +75,11 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Pasul %1$lu din %2$lu";
+"STEP_PROGRESS_FORMAT" = "Pasul %@ din %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valoare nevalidă";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1$@” depășește maximul permis (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Valoarea “%1@” depășește maximul permis (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Valoarea “%1$@” este mai mică decât minimul permis (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ nu este o valoare validă.";
 
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Această activitate evaluează timpul de care aveți nevoie pentru a răspunde la un stimul vizual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agitați dispozitivul în orice direcție imediat ce apare punctul albastru pe ecran. Va trebui să repetați acțiunea de %D ori.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Încercarea %D din %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Încercarea %@ din %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agitați rapid dispozitivul atunci când apare cercul albastru";
 
 /* Potentially user visible error messages. */

@@ -75,11 +75,11 @@
 "CONSENT_DOC_LINE_DATE" = "Дата";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Крок %1$lu із %2$lu";
+"STEP_PROGRESS_FORMAT" = "Крок %@ із %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Неправильне значення";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ перевищує максимально дозволене значення (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ перевищує максимально дозволене значення (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ є меншим мінімально дозволеного значення (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ не є правильним значенням.";
 
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Ця операція оцінює час, потрібний вам, щоб зреагувати на візуальну команду.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Трясніть пристроєм в будь-який бік, щойно на екрані з’явиться синя точка. Вас попросять зробити це кілька разів: %D.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %D із %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %@ із %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Швидко трусніть пристроєм, коли з’явиться синє коло";
 
 /* Potentially user visible error messages. */

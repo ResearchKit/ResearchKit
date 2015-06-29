@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Schritt %1$lu von %2$lu";
+"STEP_PROGRESS_FORMAT" = "Schritt %@ von %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ungültiger Wert";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Mit dieser Aktivität wird bewertet, wie lange Sie brauchen, um auf optische Reize zu reagieren.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schütteln Sie das Gerät, sobald der blaue Punkt auf dem Bildschirm angezeigt wird. Sie werden %D mal darum gebeten.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %D von %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Versuch %@ von %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Wenn der blaue Kreis angezeigt wird, schütteln Sie das Gerät schnell";
 
 /* Potentially user visible error messages. */

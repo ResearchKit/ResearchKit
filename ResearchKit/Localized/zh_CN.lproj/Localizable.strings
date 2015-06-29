@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日期";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "第 %1$lu/%2$lu 步";
+"STEP_PROGRESS_FORMAT" = "第 %@/%@ 步";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "无效值";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "本活动评估您对视觉提示的反应时间。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "屏幕出现蓝色圆点时立刻朝任意方向摇动设备。您将需要完成此操作 %D 次。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D/%D 次尝试";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次尝试";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "蓝色圆圈出现时快速摇动设备";
 
 /* Potentially user visible error messages. */

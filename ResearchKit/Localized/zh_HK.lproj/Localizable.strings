@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日期";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "步驟 %1$lu/%2$lu";
+"STEP_PROGRESS_FORMAT" = "步驟 %@/%@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "無效值";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "此活動會評估你對視覺提示作出反應所需的時間。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "當螢幕顯示藍色圓點時，請立刻以任何方向搖動裝置。你將需要執行此操作 %D 次。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始」。";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %D/%D 次嘗試";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次嘗試";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "當藍色圓圈出現時，請快速搖動裝置";
 
 /* Potentially user visible error messages. */

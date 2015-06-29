@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Pas %1$lu de %2$lu";
+"STEP_PROGRESS_FORMAT" = "Pas %@ de %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valor no vàlid";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Aquesta activitat avalua el temps que trigueu a respondre a un senyal visual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agiteu el dispositiu en qualsevol direcció de seguida que aparegui el punt blau a la pantalla. Se us demanarà que feu això %D vegades.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Per iniciar, premeu Començar.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %D de %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agiteu ràpidament el dispositiu quan aparegui el cercle blau";
 
 /* Potentially user visible error messages. */

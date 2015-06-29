@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "날짜";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$lu/%2$lu단계";
+"STEP_PROGRESS_FORMAT" = "%@/%@단계";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "유효하지 않은 값";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "이 실험은 시각 신호에 대한 사용자의 반응 시간을 평가합니다.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "파란 점이 화면에 나타나면 방향에 상관없이 즉시 기기를 흔드십시오. 이 동작을 %D번 해야 합니다.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%D/%D 시도";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@ 시도";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "파란 원이 나타나면 재빨리 기기를 흔드십시오.";
 
 /* Potentially user visible error messages. */

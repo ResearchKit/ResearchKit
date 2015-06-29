@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Дата";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Шаг %1$lu из %2$lu";
+"STEP_PROGRESS_FORMAT" = "Шаг %@ из %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Недопустимое значение";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "В этом упражнении измеряется время реакции на визуальный сигнал.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Как только на экране появится синяя точка, встряхните устройство в любом направлении. Количество повторений этого задания: %D.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Попытка %D из %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Попытка %@ из %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "При появлении синего круга быстро встряхните устройство";
 
 /* Potentially user visible error messages. */

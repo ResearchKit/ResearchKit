@@ -229,7 +229,7 @@
 }
 
 - (void)updateCountdownLabel {
-    _countdownView.timeLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)_countDown];
+    _countdownView.timeLabel.text = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInteger:_countDown] numberStyle:NSNumberFormatterNoStyle];
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {

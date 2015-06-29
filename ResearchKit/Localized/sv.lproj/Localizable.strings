@@ -75,11 +75,11 @@
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Steg %1$lu av %2$lu";
+"STEP_PROGRESS_FORMAT" = "Steg %@ av %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ogiltigt värde";
-"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ överskrider det högsta tillåtna värdet (%2$@).";
+"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1@ överskrider det högsta tillåtna värdet (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ är mindre än det minsta tillåtna värdet (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ är inte ett giltigt värde.";
 
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Den här aktiviteten utvärderar den tid det tar för dig att reagera på visuella stimuli.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Skaka enheten i valfri riktning så fort den blå punkten visas på skärmen. Du blir ombedd att göra detta %D gånger.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Försök %D av %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Försök %@ av %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Skaka snabbt enheten när den blå cirkeln visas";
 
 /* Potentially user visible error messages. */

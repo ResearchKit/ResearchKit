@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Fecha";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Paso %1$lu de %2$lu";
+"STEP_PROGRESS_FORMAT" = "Paso %@ de %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valor no válido";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Esta actividad evalúa el tiempo que tarda en responder a un estímulo visual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite el dispositivo en cualquier dirección en cuanto el punto azul aparezca en pantalla. Se le pedirá que lo haga %D veces.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Pulse Empezar para comenzar.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intento %D de %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intento %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Cuando aparezca el círculo azul, agite rápidamente el dispositivo";
 
 /* Potentially user visible error messages. */

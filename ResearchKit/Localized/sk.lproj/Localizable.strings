@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Krok %1$lu z %2$lu";
+"STEP_PROGRESS_FORMAT" = "Krok %@ z %@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Neplatná hodnota";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Táto aktivita hodnotí, aký dlhý čas vám trvá reakcia na vizuálny podnet.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Hneď ako sa na obrazovke objaví modrý bod, potraste zariadením v ľubovoľnom smere. Budete vyzvaní, aby ste to urobili %D-krát.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Začnite klepnutím na Začať.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %D z %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Keď sa zobrazí modrý kruh, rýchlo potraste zariadením.";
 
 /* Potentially user visible error messages. */

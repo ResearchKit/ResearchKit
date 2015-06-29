@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%1$lu/%2$lu. lépés";
+"STEP_PROGRESS_FORMAT" = "%@/%@. lépés";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Érvénytelen érték";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Ez a tevékenység felméri, hogy mennyi ideig tart Önnek válaszolni egy vizuális jelzésre.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rázza meg a készüléket tetszőleges irányban, amint megjelenik a képernyőn a kék pont. A készülék %D alkalommal fogja megkérni erre.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%D/%D. kísérlet";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@. kísérlet";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gyorsan rázza meg a készüléket, amikor megjelenik a kék kör";
 
 /* Potentially user visible error messages. */
