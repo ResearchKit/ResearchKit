@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Trin %@ af %@";
+"STEP_PROGRESS_FORMAT" = "Trin %1$@ af %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig værdi";

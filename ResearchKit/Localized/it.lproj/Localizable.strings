@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Passaggio %@ di %@";
+"STEP_PROGRESS_FORMAT" = "Passaggio %1$@ di %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valore non valido";

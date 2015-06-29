@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "วันที่";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "ขั้นที่ %@ จาก %@";
+"STEP_PROGRESS_FORMAT" = "ขั้นที่ %1$@ จาก %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "ค่าไม่ถูกต้อง";

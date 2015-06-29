@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "날짜";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%@/%@단계";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@단계";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "유효하지 않은 값";

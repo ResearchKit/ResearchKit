@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "तिथि";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "चरण %@/%@";
+"STEP_PROGRESS_FORMAT" = "चरण %1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "अमान्य मान";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "यह गतिविधि किसी दृश्यात्मक संकेत की प्रतिक्रिया देने में आपके द्वारा लिए जाने वाले समय का आकलन करती है।";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "स्क्रीन पर नीले रंग का बिंदु दिखाई देते ही उपकरण को किसी भी दिशा में हिलाएँ। आपसे %D बार ऐसा करने का अनुरोध किया जाएगा।";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %@/%@";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %1$@/%2$@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "नीले रंग का वृत्त दिखाई देने पर शीघ्रता से उपकरण को हिलाएँ";
 
 /* Potentially user visible error messages. */

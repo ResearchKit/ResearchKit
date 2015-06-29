@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dátum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "%@/%@. lépés";
+"STEP_PROGRESS_FORMAT" = "%1$@/%2$@. lépés";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Érvénytelen érték";

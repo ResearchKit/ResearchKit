@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Päivämäärä";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Vaihe %@ / %@";
+"STEP_PROGRESS_FORMAT" = "Vaihe %1$@ / %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Virheellinen arvo";

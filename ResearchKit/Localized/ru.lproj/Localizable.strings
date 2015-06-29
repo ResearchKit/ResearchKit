@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Дата";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Шаг %@ из %@";
+"STEP_PROGRESS_FORMAT" = "Шаг %1$@ из %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Недопустимое значение";

@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Korak %@ od %@";
+"STEP_PROGRESS_FORMAT" = "Korak %1$@ od %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nevažeća vrijednost";

@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日付";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "ステップ%@/%@";
+"STEP_PROGRESS_FORMAT" = "ステップ%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "値が無効です";

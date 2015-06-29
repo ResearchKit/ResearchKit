@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Ημερομηνία";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Βήμα %@ από %@";
+"STEP_PROGRESS_FORMAT" = "Βήμα %1$@ από %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Μη έγκυρη τιμή";
