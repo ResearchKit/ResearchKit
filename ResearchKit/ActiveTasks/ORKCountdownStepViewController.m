@@ -229,7 +229,7 @@
 }
 
 - (void)updateCountdownLabel {
-    _countdownView.timeLabel.text = [NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInteger:_countDown] numberStyle:NSNumberFormatterNoStyle];
+    _countdownView.timeLabel.text = ORKLocalizedStringFromNumber(@(_countDown));
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {

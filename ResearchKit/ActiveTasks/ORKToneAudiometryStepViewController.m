@@ -200,13 +200,9 @@
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
     ORKAudioChannel channel = ((testIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
 
-    NSString *frequencyLocalizedString = [NSString stringWithFormat:@"%@", [NSNumberFormatter
-                                                       localizedStringFromNumber:frequency
-                                                       numberStyle:NSNumberFormatterNoStyle]];
-
     CGFloat progress = 0.001 + (CGFloat)testIndex / (self.testingFrequencies.count * 2);
     [self.toneAudiometryContentView setProgress:progress
-                                        caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), frequencyLocalizedString] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), frequencyLocalizedString]
+                                        caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), ORKLocalizedStringFromNumber(frequency)] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), ORKLocalizedStringFromNumber(frequency)]
                                        animated:YES];
 
     [self.audioGenerator playSoundAtFrequency:frequency.doubleValue

@@ -234,6 +234,10 @@ NSDateFormatter *ORKResultDateFormatter() {
     return dateformatter;
 }
 
+NSString *ORKLocalizedStringFromNumber(NSNumber *number) {
+    return [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle];
+}
+
 NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     static NSDateFormatter *timeformatter = nil;
     static dispatch_once_t onceToken;

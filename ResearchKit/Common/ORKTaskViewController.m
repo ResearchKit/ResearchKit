@@ -910,13 +910,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
 
         if (progress.total > 0) {
-            NSString *currentStepLocalizedString = [NSNumberFormatter
-                                                    localizedStringFromNumber:[NSNumber numberWithUnsignedLong:progress.current+1]
-                                                    numberStyle:NSNumberFormatterNoStyle];
-            NSString *totalStepsLocalizedString = [NSNumberFormatter
-                                                    localizedStringFromNumber:[NSNumber numberWithUnsignedLong:progress.total]
-                                                    numberStyle:NSNumberFormatterNoStyle];
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,currentStepLocalizedString, totalStepsLocalizedString];
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
     }
     
