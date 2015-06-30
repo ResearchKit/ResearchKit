@@ -234,6 +234,10 @@
     return ORKLocalizedString(@"AX_IMAGE_CAPTURE_LABEL", nil);
 }
 
+- (NSString * __nullable)accessibilityHint{
+    return self.templateImageAccessibilityHint;
+}
+
 - (UIAccessibilityTraits)accessibilityTraits {
     return [super accessibilityTraits] | UIAccessibilityTraitImage;
 }

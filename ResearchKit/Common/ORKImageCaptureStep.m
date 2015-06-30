@@ -88,4 +88,12 @@
     return mask | ORKPermissionCamera;
 }
 
+- (void)validateParameters{
+    [super validateParameters];
+    
+    if ( self.templateImage != nil && self.templateImageAccessibilityHint == nil) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"templateImageAccessibilityHint is required for a templateImage" userInfo:nil];
+    }
+}
+
 @end

@@ -65,4 +65,12 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
+/**
+ Accessibility hint to be used in Voice Over for `templateImage`.
+ 
+ The accessibility hint provides voice over instructions for the user. When setting the
+ accessibility hint, be sure to clearly state what the 'templateImage' is displaying.
+ */
+@property (nonatomic, strong) NSString *templateImageAccessibilityHint;
+
 @end
