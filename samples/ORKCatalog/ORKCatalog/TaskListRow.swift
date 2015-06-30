@@ -637,6 +637,8 @@ enum TaskListRow: Int, Printable {
         
         imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
         
+        imageCaptureStep.templateImageAccessibilityHint = NSLocalizedString("Hand", comment: "")
+        
         steps += [imageCaptureStep]
         
         return ORKOrderedTask(identifier: Identifier.ImageCaptureTask.rawValue, steps: steps)
