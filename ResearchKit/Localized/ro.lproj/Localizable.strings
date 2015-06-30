@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nu au fost găsite date colectate.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Apăsați pentru a captura altă imagine";
-"MEDIA_BUTTON" = "Apăsați pentru a captura o imagine";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Înapoi";
 

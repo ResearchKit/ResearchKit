@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nebyla nalezena žádná shromážděná data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nebyl určen výstupní adresář";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Klepnutím zachyťte jiný obrázek";
-"MEDIA_BUTTON" = "Klepnutím zachyťte obrázek";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Zpět";
 

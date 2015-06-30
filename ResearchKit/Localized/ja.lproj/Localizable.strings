@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "収集したデータが見つかりませんでした。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "出力ディレクトリが指定されていません";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "タップで別のイメージを取り込む";
-"MEDIA_BUTTON" = "タップでイメージを取り込む";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "戻る";
 

@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Δεν βρέθηκαν συλλεγμένα δεδομένα.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Δεν έχει καθοριστεί κατάλογος εξόδου";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Αγγίξτε για καταγραφή διαφορετικής εικόνας";
-"MEDIA_BUTTON" = "Αγγίξτε για καταγραφή εικόνας";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Πίσω";
 

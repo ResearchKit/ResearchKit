@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Không tìm thấy dữ liệu được thu thập.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Không có thư mục đầu ra nào được chỉ định";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Chạm để chụp một hình ảnh khác";
-"MEDIA_BUTTON" = "Chạm để chụp hình ảnh";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Quay lại";
 

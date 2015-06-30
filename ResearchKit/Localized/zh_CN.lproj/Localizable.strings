@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "未找到任何已收集的数据。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定输出目录";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "轻按来捕捉其他图像";
-"MEDIA_BUTTON" = "轻按来捕捉图像";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
 

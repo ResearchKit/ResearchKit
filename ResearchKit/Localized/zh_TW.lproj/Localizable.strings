@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "找不到收集的資料。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "尚未指定輸出的目錄";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "點一下來擷取其他影像";
-"MEDIA_BUTTON" = "點一下來擷取影像";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "返回";
 

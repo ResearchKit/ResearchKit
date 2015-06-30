@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Geen verzamelde gegevens gevonden.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Geen uitvoerdirectory opgegeven";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Tik om een andere afbeelding vast te leggen";
-"MEDIA_BUTTON" = "Tik om een afbeelding vast te leggen";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Terug";
 
