@@ -55,6 +55,7 @@
     NSArray *_constraints;
     ORKScreenType _screenType;
     UIView *_buttonContainer;
+    NSNumberFormatter *_formatter;
 }
 
 - (instancetype)init {
@@ -116,10 +117,12 @@
 }
 
 - (void)setTapCount:(NSUInteger)tapCount {
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    formatter.locale = [NSLocale currentLocale];
-    formatter.minimumIntegerDigits = 2;
-    _tapCountLabel.text = [NSString stringWithFormat:@"%2@", [formatter stringFromNumber:@(tapCount)]];
+    if (_formatter == nil){
+        _formatter = [NSNumberFormatter new];
+        _formatter.locale = [NSLocale currentLocale];
+        _formatter.minimumIntegerDigits = 2;
+    }
+    _tapCountLabel.text = [_formatter stringFromNumber:@(tapCount)];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {

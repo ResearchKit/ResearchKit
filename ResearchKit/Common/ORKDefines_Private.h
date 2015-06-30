@@ -39,11 +39,12 @@ ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
 #define ORKLocalizedString(key, comment) \
 [ORKBundle() localizedStringForKey:(key) value:@"" table:nil]
 
+#define ORKLocalizedStringFromNumber(number) \
+[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+
 ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
 
 ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
-
-ORK_EXTERN NSString *ORKLocalizedStringFromNumber(NSNumber *number) ORK_AVAILABLE_DECL;
