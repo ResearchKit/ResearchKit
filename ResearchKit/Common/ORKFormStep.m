@@ -36,7 +36,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKFormStepViewController.h"
-
+#import "ORKDefines_Private.h"
 
 @implementation ORKFormStep
 
@@ -214,6 +214,113 @@
 
 - (ORKQuestionType)questionType {
     return [[self impliedAnswerFormat] questionType];
+}
+
+@end
+
+@implementation ORKReviewStep: ORKFormStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text {
+    self = [super initWithIdentifier:identifier title:title text:text];
+    if (self) {
+        _skippedItemText = ORKLocalizedString(@"SKIPPED_REVIEWITEM_TITLE", nil);
+    }
+    return self;
+}
+
+- (void)setTaskResult:(ORKTaskResult * __nullable)taskResult {
+    [self setFormItems:nil];
+    if (taskResult && [self task]) {
+        NSArray<ORKStepResult*>* stepResults = (NSArray<ORKStepResult*>*) taskResult.results;
+        NSMutableArray<ORKFormItem*>* formItems = [NSMutableArray<ORKFormItem*> new];
+        for (ORKStepResult* stepResult in stepResults) {
+            ORKStep* step = [[self task] stepWithIdentifier:stepResult.identifier];
+            if (step && step.identifier != self.identifier) {
+                [formItems addObjectsFromArray:[self reviewItemsForStep:step result:stepResult]];
+            }
+        }
+        [self setFormItems:formItems];
+    }
+}
+
+- (NSArray<ORKFormItem*>*)reviewItemsForStep:(ORKStep*)step result:(ORKStepResult*)result {
+    NSMutableArray<ORKFormItem*>* reviewItems = [NSMutableArray<ORKFormItem *> new];
+    if ([step isKindOfClass:[ORKQuestionStep class]]) {
+        [reviewItems addObject: [[ORKFormItem alloc] initWithSectionTitle:step.title]];
+        ORKQuestionStep* questionStep = (ORKQuestionStep*) step;
+        if ([[result resultForIdentifier:questionStep.identifier] isKindOfClass:[ORKQuestionResult class]]) {
+            ORKQuestionResult* questionResult = (ORKQuestionResult*) [result resultForIdentifier:questionStep.identifier];
+            [reviewItems addObjectsFromArray:[self reviewItemsForAnswerWithFormat:questionStep.answerFormat result:questionResult targetStepIdentifier:questionStep.identifier]];
+        }
+        
+    } else if ([step isKindOfClass:[ORKFormStep class]]) {
+        ORKFormStep* formStep = (ORKFormStep*) step;
+        for (ORKFormItem* formItem in formStep.formItems) {
+            [reviewItems addObject: [[ORKFormItem alloc] initWithSectionTitle:[[step.title stringByAppendingString:@" - "] stringByAppendingString:formItem.text]]];
+            if ([[result resultForIdentifier:formItem.identifier] isKindOfClass:[ORKQuestionResult class]]){
+                ORKQuestionResult* questionResult = (ORKQuestionResult*) [result resultForIdentifier:formItem.identifier];
+                [reviewItems addObjectsFromArray: [self reviewItemsForAnswerWithFormat:formItem.answerFormat result:questionResult targetStepIdentifier:formStep.identifier]];
+            }
+        }
+    }
+    return reviewItems;
+}
+
+- (NSArray<ORKFormItem*>*)reviewItemsForAnswerWithFormat:(ORKAnswerFormat*)answerFormat result:(ORKQuestionResult*)result targetStepIdentifier:(NSString*)targetStepIdentifier {
+    NSMutableArray<ORKFormItem *>* reviewItems = [NSMutableArray<ORKFormItem *> new];
+    if ([answerFormat questionResultClass] != [result class]) {
+        return reviewItems;
+    }
+    BOOL skipped = NO;
+    NSString* reviewItemIdentifier = [[NSUUID alloc] init].UUIDString;
+    if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
+        ORKTextChoiceAnswerFormat* textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat*) answerFormat;
+        ORKChoiceQuestionResult* choiceQuestionResult = (ORKChoiceQuestionResult*) result;
+        skipped = choiceQuestionResult.choiceAnswers == nil;
+        if (!skipped) {
+            NSString* reviewItemText = nil;
+            NSString* reviewItemDetailText = nil;
+            for (id<NSCopying,NSCoding,NSObject> choiceAnswer in choiceQuestionResult.choiceAnswers) {
+                for (ORKTextChoice* textChoice in textChoiceAnswerFormat.textChoices) {
+                    if (textChoice.value == choiceAnswer) {
+                        reviewItemText = reviewItemText == nil ? textChoice.text : [[reviewItemText stringByAppendingString:@"\n"] stringByAppendingString:textChoice.text];
+                        reviewItemDetailText = reviewItemDetailText == nil ? textChoice.detailText : [[reviewItemDetailText stringByAppendingString:@"\n"] stringByAppendingString:textChoice.detailText];
+                    }
+                }
+            }
+            if (reviewItemText != nil) {
+                ORKReviewAnswerFormat* reviewItemAnswerFormat = [[ORKReviewAnswerFormat alloc] initWithTargetStepIdentifier:targetStepIdentifier text:reviewItemText detailText:reviewItemDetailText];
+                ORKFormItem* reviewItem = [[ORKFormItem alloc] initWithIdentifier:reviewItemIdentifier text:nil answerFormat: reviewItemAnswerFormat];
+                [reviewItems addObject:reviewItem];
+            }
+        }
+    } else if ([answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]])  {
+        ORKBooleanQuestionResult* booleanQuestionResult = (ORKBooleanQuestionResult*) result;
+        skipped = booleanQuestionResult.booleanAnswer == nil;
+        if (!skipped) {
+            NSString* reviewItemText = booleanQuestionResult.booleanAnswer.boolValue == NO ? ORKLocalizedString(@"BOOL_NO", nil) : ORKLocalizedString(@"BOOL_YES", nil);;
+            ORKReviewAnswerFormat* reviewItemAnswerFormat = [[ORKReviewAnswerFormat alloc] initWithTargetStepIdentifier:targetStepIdentifier text:reviewItemText detailText: nil];
+            ORKFormItem* reviewItem = [[ORKFormItem alloc] initWithIdentifier:reviewItemIdentifier text:nil answerFormat: reviewItemAnswerFormat];
+            [reviewItems addObject:reviewItem];
+        }
+    } else if ([answerFormat isKindOfClass: [ORKTimeIntervalAnswerFormat class]]) {
+        ORKTimeIntervalQuestionResult* timeIntervalQuestionResult = (ORKTimeIntervalQuestionResult*) result;
+        skipped = timeIntervalQuestionResult.intervalAnswer == nil;
+        if (!skipped) {
+            NSString* reviewItemText = [ORKTimeIntervalLabelFormatter() stringFromTimeInterval: [timeIntervalQuestionResult.intervalAnswer floatValue]];
+            ORKReviewAnswerFormat* reviewItemAnswerFormat = [[ORKReviewAnswerFormat alloc] initWithTargetStepIdentifier:targetStepIdentifier text:reviewItemText detailText: nil];
+            ORKFormItem* reviewItem = [[ORKFormItem alloc] initWithIdentifier:reviewItemIdentifier text:nil answerFormat: reviewItemAnswerFormat];
+            [reviewItems addObject:reviewItem];
+        }
+    }
+    if (skipped) {
+        ORKReviewAnswerFormat* reviewItemAnswerFormat = [[ORKReviewAnswerFormat alloc] initWithTargetStepIdentifier:targetStepIdentifier text:_skippedItemText detailText:nil];
+        ORKFormItem* reviewItem = [[ORKFormItem alloc] initWithIdentifier:reviewItemIdentifier text:nil answerFormat: reviewItemAnswerFormat];
+        [reviewItems addObject:reviewItem];
+    }
+    return reviewItems;
 }
 
 @end

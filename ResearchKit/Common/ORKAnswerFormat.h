@@ -63,6 +63,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /// In a text question, the participant can enter multiple lines of text.
     ORKQuestionTypeText,
     
+    ORKQuestionTypeReview,
+    
     /// In a time of day question, the participant can enter a time of day by using a picker.
     ORKQuestionTypeTimeOfDay,
     
@@ -1007,6 +1009,18 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is `UITextSpellCheckingTypeDefault`.
  */
 @property UITextSpellCheckingType spellCheckingType;
+
+@end
+
+
+ORK_CLASS_AVAILABLE
+@interface ORKReviewAnswerFormat : ORKAnswerFormat
+
+@property (copy, nonatomic) NSString *targetStepIdentifier;
+@property (copy, nonatomic) NSString *text;
+@property (copy, nonatomic) NSString *detailText;
+
+- (instancetype)initWithTargetStepIdentifier:(NSString *)targetStepIdentifier text:(nullable NSString *) text detailText:(nullable NSString *) detailText;
 
 @end
 

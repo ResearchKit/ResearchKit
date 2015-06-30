@@ -58,6 +58,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
+            SQT_CASE(Review);
     }
 #undef SQT_CASE
 }
@@ -1705,6 +1706,71 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @end
 
+#pragma mark - ORKReviewAnswerFormat
+
+@implementation ORKReviewAnswerFormat
+
+/*
+- (Class)questionResultClass {
+    return [ORKReviewResult class];
+}
+*/
+
+- (instancetype)initWithTargetStepIdentifier:(NSString *)targetStepIdentifier text:(nullable NSString *) text detailText:(nullable NSString *) detailText {
+    self = [super init];
+    if (self) {
+        _targetStepIdentifier = targetStepIdentifier;
+        _text = text;
+        _detailText = detailText;
+    }
+    return self;
+}
+
+- (ORKQuestionType) questionType {
+    return ORKQuestionTypeReview;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKReviewAnswerFormat *result = [[[self class] allocWithZone:zone] init];
+    result -> _targetStepIdentifier = _targetStepIdentifier;
+    result -> _text = _text;
+    result -> _detailText = _detailText;
+    return result;
+}
+
+#pragma mark NSSecureCoding
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, targetStepIdentifier, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, detailText, NSString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, targetStepIdentifier);
+    ORK_ENCODE_OBJ(aCoder, text);
+    ORK_ENCODE_OBJ(aCoder, detailText);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.targetStepIdentifier == castObject.targetStepIdentifier &&
+            self.text == castObject.text && self.detailText == castObject.detailText);
+}
+
+@end
 
 #pragma mark - ORKTimeIntervalAnswerFormat
 

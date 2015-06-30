@@ -102,6 +102,9 @@
 "BOOL_NO" = "No";
 "BOOL_YES" = "Yes";
 
+/* Review item strings */
+"SKIPPED_REVIEWITEM_TITLE" = "Skipped";
+
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
 "NULL_ANSWER" = "Select an answer";
