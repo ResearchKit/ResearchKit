@@ -851,6 +851,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return (desiredMask == 0 || ((desiredMask & _grantedPermissions) != 0));
 }
 
+- (void)goToStepViewControllerWithIdentifier:(NSString *)identifier inDirection:(UIPageViewControllerNavigationDirection)direction {
+    if ([self task]) {
+        ORKStep* step = [[self task] stepWithIdentifier:identifier];
+        if (step && [self shouldPresentStep:step]) {
+            ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+            if (stepViewController) {
+                [self showViewController:stepViewController goForward:direction == UIPageViewControllerNavigationDirectionForward animated:YES];
+            }
+        }
+    }
+}
+
 - (void)showViewController:(ORKStepViewController *)viewController goForward:(BOOL)goForward animated:(BOOL)animated {
     if (nil == viewController) {
         return;
@@ -891,8 +903,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             return;
         }
     }
-    
-    if (step.identifier && ![[_managedStepIdentifiers lastObject] isEqualToString:step.identifier]) {
+
+    BOOL containsStepIdentifier = [_managedStepIdentifiers containsObject:step.identifier];
+    if (step.identifier && !containsStepIdentifier) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
     if ([step isRestorable]) {
@@ -1158,8 +1171,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         if (stepViewController) {
             // Remove the identifier from the list
-            assert([itemId isEqualToString:[_managedStepIdentifiers lastObject]]);
-            [_managedStepIdentifiers removeLastObject];
+            if ([_managedStepIdentifiers containsObject:itemId]) {
+                [_managedStepIdentifiers removeObjectAtIndex:[_managedStepIdentifiers indexOfObject:itemId]];
+            }
 
             [self showViewController:stepViewController goForward:NO animated:YES];
         }

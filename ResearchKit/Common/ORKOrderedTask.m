@@ -143,6 +143,12 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         if (NSNotFound != index && index != (steps.count-1)) {
             nextStep = steps[index+1];
         }
+        
+        if ([nextStep isKindOfClass:[ORKReviewStep class]]) {
+            ORKReviewStep *reviewStep = (ORKReviewStep*) nextStep;
+            reviewStep.task = self;
+            reviewStep.taskResult = result;
+        }
     }
     return nextStep;
 }

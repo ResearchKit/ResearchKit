@@ -30,6 +30,7 @@
 
 
 #import <ResearchKit/ORKStep.h>
+#import <ResearchKit/ORKResult.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -79,6 +80,12 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+@interface ORKReviewStep : ORKFormStep
+
+@property (nonatomic, nonnull) NSString *skippedItemText;
+@property (nonatomic, nullable) ORKTaskResult *taskResult;
+
+@end
 
 /**
  The `ORKFormItem` class represents a single item in a form step (`ORKFormStep`), and typically

@@ -458,6 +458,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
+- (void)goToStepViewControllerWithIdentifier:(NSString *)identifier inDirection:(UIPageViewControllerNavigationDirection)direction;
+
 @end
 
 NS_ASSUME_NONNULL_END

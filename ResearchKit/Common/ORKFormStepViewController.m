@@ -526,7 +526,12 @@
 }
 
 - (void)updateButtonStates {
-    _continueSkipView.continueEnabled = [self continueButtonEnabled];
+    if ([[self step] isKindOfClass:[ORKReviewStep class]]) {
+        _continueSkipView.continueEnabled = YES;
+        _continueSkipView.optional = NO;
+    } else {
+        _continueSkipView.continueEnabled = [self continueButtonEnabled];        
+    }
 }
 
 #pragma mark Helpers
@@ -716,6 +721,11 @@
                         break;
                     }
                         
+                    case ORKQuestionTypeReview: {
+                        class = [ORKChoiceViewCell class];
+                        break;
+                    }
+                        
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
                         break;
@@ -723,7 +733,16 @@
                 
                 if (class) {
                     if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
-                        NSAssert(NO, @"SHOULD NOT FALL IN HERE");
+                        ORKChoiceViewCell *choiceCell = nil;
+                        choiceCell = [[class alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                        if ([answerFormat isKindOfClass:[ORKReviewAnswerFormat class]]) {
+                            ORKReviewAnswerFormat *reviewAnswerFormat = (ORKReviewAnswerFormat*) answerFormat;
+                            choiceCell.shortLabel.text = reviewAnswerFormat.text;
+                            choiceCell.longLabel.text = reviewAnswerFormat.detailText;
+                        }
+                        choiceCell.immediateNavigation = YES;
+                        choiceCell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                        cell = choiceCell;
                     } else {
                         ORKFormItemCell *formCell = nil;
                         formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetScreenTypeForWindow(self.view.window)];
@@ -786,6 +805,14 @@
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
         
         id answer = (cellItem.formItem.questionType == ORKQuestionTypeBoolean)? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
+
+        if ([cellItem.formItem.answerFormat isKindOfClass:[ORKReviewAnswerFormat class]]) {
+            ORKReviewAnswerFormat *reviewAnswerFormat = (ORKReviewAnswerFormat *) cellItem.formItem.answerFormat;
+            if ([self taskViewController]) {
+                [[self taskViewController] goToStepViewControllerWithIdentifier:reviewAnswerFormat.targetStepIdentifier inDirection:UIPageViewControllerNavigationDirectionReverse];
+            }
+            return;
+        }
         
         NSString *formItemIdentifier = cellItem.formItem.identifier;
         if (answer && formItemIdentifier) {
@@ -809,8 +836,9 @@
             return 40;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
-        return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
+        ORKChoiceViewCell *choiceViewCell = (ORKChoiceViewCell*) [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return [ORKChoiceViewCell suggestedCellHeightForShortText:choiceViewCell.shortLabel.text LongText:choiceViewCell.longLabel.text inTableView:_tableView];
+
     }
     return UITableViewAutomaticDimension;
 }
