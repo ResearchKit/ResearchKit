@@ -637,7 +637,7 @@ enum TaskListRow: Int, Printable {
         
         imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
         
-        imageCaptureStep.templateImageAccessibilityHint = NSLocalizedString("Hand", comment: "")
+        imageCaptureStep.templateImageAccessibilityHint = NSLocalizedString("Align your hand with the on-screen outline and capture the image.", comment: "")
         
         steps += [imageCaptureStep]
         
