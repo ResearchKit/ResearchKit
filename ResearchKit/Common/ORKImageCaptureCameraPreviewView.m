@@ -235,7 +235,7 @@
 }
 
 - (NSString * __nullable)accessibilityHint{
-    return self.templateImageAccessibilityHint;
+    return self.capturePreviewAccessibilityHint;
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

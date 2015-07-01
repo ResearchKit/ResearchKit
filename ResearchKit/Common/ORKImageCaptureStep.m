@@ -91,8 +91,8 @@
 - (void)validateParameters{
     [super validateParameters];
     
-    if ( self.templateImage != nil && (self.templateImageAccessibilityHint == nil || self.templateImageAccessibilityHint.length == 0) ){
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"templateImageAccessibilityHint is required for a templateImage" userInfo:nil];
+    if ( self.templateImage != nil && (self.capturePreviewAccessibilityHint == nil || self.capturePreviewAccessibilityHint.length == 0) ){
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"capturePreviewAccessibilityHint is required for a templateImage" userInfo:nil];
     }
 }
 
