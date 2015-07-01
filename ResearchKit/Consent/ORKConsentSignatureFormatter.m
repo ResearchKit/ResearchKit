@@ -62,7 +62,7 @@
             if (ORKCurrentLocalePresentsFamilyNameFirst()) {
                 names = [[[names reverseObjectEnumerator] allObjects] mutableCopy];
             }
-            nameStr = [names componentsJoinedByString:nameStr];
+            nameStr = [names componentsJoinedByString:@"&nbsp;"];
         }
 
         NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);
