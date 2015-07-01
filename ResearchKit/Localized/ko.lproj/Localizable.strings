@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "수집된 데이터를 찾을 수 없습니다.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "지정된 출력 디렉토리 없음";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "다른 이미지를 캡처하려면 탭하십시오.";
-"MEDIA_BUTTON" = "이미지를 캡처하려면 탭하십시오.";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "뒤로";
 

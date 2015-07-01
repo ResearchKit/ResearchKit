@@ -632,6 +632,8 @@ enum TaskListRow: Int, Printable {
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
         imageCaptureStep.optional = false
+        imageCaptureStep.captureAccessibilityHint = NSLocalizedString("Your instructions for capturing the image", comment: "")
+        imageCaptureStep.recaptureAccessibilityHint = NSLocalizedString("Your description of the captured image", comment: "")
         
         imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
         

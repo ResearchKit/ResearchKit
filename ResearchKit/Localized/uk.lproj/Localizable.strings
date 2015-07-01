@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Не знайдено жодних зібраних даних.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не задано вихідний каталог";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Торкніть, щоб зняти інше зображення";
-"MEDIA_BUTTON" = "Торкніть, щоб зняти зображення";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Назад";
 

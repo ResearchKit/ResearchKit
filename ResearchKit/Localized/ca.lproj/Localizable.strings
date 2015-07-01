@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "No s’han trobat dades recollides.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Premeu per capturar una altra imatge";
-"MEDIA_BUTTON" = "Premeu per capturar una imatge";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Enrere";
 

@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Kerättyjä tietoja ei löytynyt.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ei määritettyä tulostehakemistoa";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Kaappaa toinen kuva napauttamalla";
-"MEDIA_BUTTON" = "Kaappaa kuva napauttamalla";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Takaisin";
 

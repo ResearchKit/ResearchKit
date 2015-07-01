@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nie znaleziono zgromadzonych danych.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Stuknij, aby zarejestrować inny obrazek";
-"MEDIA_BUTTON" = "Stuknij, aby zarejestrować obrazek";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Wróć";
 

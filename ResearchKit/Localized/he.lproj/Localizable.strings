@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "לא נמצאו נתונים שנאספו.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "לא צוינה ספריית פלט";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "הקש/י בכדי לצלם תמונה אחרת";
-"MEDIA_BUTTON" = "הקש/י בכדי לצלם תמונה";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "הקודם";
 

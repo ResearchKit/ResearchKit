@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Toplanmış bir veri bulunamadı.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Çıkış dizini belirtilmemiş";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Farklı bir görüntü yakalamak için dokunun";
-"MEDIA_BUTTON" = "Bir görüntü yakalamak için dokunun";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Geri";
 
