@@ -58,7 +58,11 @@
             if (signature.familyName) {
                 [names addObject:signature.familyName];
             }
-            nameStr = [names componentsJoinedByString:@"&nbsp;"];
+            if ([ORKConsentSignature currentLocalePresentsFamilyNameFirst]) {
+                nameStr = @"";
+                names = [[[names reverseObjectEnumerator] allObjects] mutableCopy];
+            }
+            nameStr = [names componentsJoinedByString:nameStr];
         }
 
         NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);

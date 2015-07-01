@@ -90,6 +90,13 @@ ORK_CLASS_AVAILABLE
                                     dateFormatString:(nullable NSString *)dateFormatString
                                           identifier:(NSString *)identifier;
 
+/**
+ Returns a boolean to indicate family name order.
+ 
+ Use this factory method to indicate family name first in the languages with a prefix @"zh", @"ko" and @"ja".
+ */
++ (BOOL)currentLocalePresentsFamilyNameFirst;
+
 /// @name Consent review configuration
 
 /**
