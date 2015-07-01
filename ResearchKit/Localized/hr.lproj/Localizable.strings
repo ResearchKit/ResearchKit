@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Korak %1$lu od %2$lu";
+"STEP_PROGRESS_FORMAT" = "Korak %1$@ od %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nevažeća vrijednost";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Ovom se aktivnošću procjenjuje koliko vam je vremena potrebno za reakciju na vizualni znak.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Protresite uređaj u bilo kojem smjeru čim se na zaslonu pojavi plava točka. Od vas će se zatražiti da to učinite %D puta.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %D od %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %@ od %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kada se pojavi plavi krug, brzo protresite uređaj";
 
 /* Potentially user visible error messages. */

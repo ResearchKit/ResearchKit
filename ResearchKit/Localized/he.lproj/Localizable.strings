@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "תאריך";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "שלב %1$lu מתוך %2$lu";
+"STEP_PROGRESS_FORMAT" = "שלב %1$@ מתוך %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "ערך שאינו תקין";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "פעילות זו מעריכה את משך הזמן שלוקח לך להגיב לרמז חזותי.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "נער/י את המכשיר בכיוון כלשהו ברגע שהנקודה הכחולה מופיעה על המסך. תתבקש/י לעשות זאת %D פעמים.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ניסיון %D מתוך %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ניסיון %@ מתוך %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "נער/י את המכשיר במהירות כשמופיע העיגול הכחול";
 
 /* Potentially user visible error messages. */

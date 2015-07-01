@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "日付";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "ステップ%1$lu/%2$lu";
+"STEP_PROGRESS_FORMAT" = "ステップ%1$@/%2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "値が無効です";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "このアクティビティでは、視覚的な合図に反応するまでの時間が測定されます。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "画面に青い点が表示されたらすぐにデバイスを振ってください。測定は%D回行います。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "測定%D/%D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "測定%@/%@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "青い円が表示されたら、すぐにデバイスを振ってください";
 
 /* Potentially user visible error messages. */
