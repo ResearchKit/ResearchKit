@@ -185,7 +185,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     familyName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
     NSArray *formItems = @[givenName, familyName];
-    if ([ORKConsentSignature currentLocalePresentsFamilyNameFirst]) {
+    if (ORKCurrentLocalePresentsFamilyNameFirst()) {
         formItems = @[familyName, givenName];
     }
     

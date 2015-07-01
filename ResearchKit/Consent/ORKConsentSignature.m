@@ -83,16 +83,6 @@
     return YES;
 }
 
-+ (BOOL)currentLocalePresentsFamilyNameFirst {
-    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
-    static dispatch_once_t onceToken;
-    static NSArray *familyNameFirstLangs = nil;
-    dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
-    });
-    return (language != nil) && [familyNameFirstLangs containsObject:language];
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
