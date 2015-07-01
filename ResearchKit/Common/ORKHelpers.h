@@ -165,6 +165,8 @@ NSCalendar *ORKTimeOfDayReferenceCalendar();
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
+BOOL ORKCurrentLocalePresentsFamilyNameFirst();
+
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
