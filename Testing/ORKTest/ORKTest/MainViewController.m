@@ -747,7 +747,6 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         format.autocapitalizationType = UITextAutocapitalizationTypeWords;
         format.autocorrectionType = UITextAutocorrectionTypeNo;
         format.spellCheckingType = UITextSpellCheckingTypeNo;
-        format.keyboardType = UIKeyboardTypeNumberPad;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005a"
                                                                       title:@"What is your name?"
                                                                      answer:format];
@@ -761,6 +760,20 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005b"
                                                                       title:@"How did you feel last night?"
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
+        [steps addObject:step];
+    }
+    
+    
+    {
+        /*
+         A text question with single-line text entry, with a number pad for keyboard.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
+        format.multipleLines = NO;
+        format.keyboardType = UIKeyboardTypeNumberPad;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
+                                                                      title:@"What is your age?"
+                                                                     answer:format];
         [steps addObject:step];
     }
     
