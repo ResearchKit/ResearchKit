@@ -1859,6 +1859,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
         step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
         step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
+        step.capturePreviewAccessibilityHint = NSLocalizedString(@"Align your right hand with the on-screen outline and capture the image.", comment:"");
         [steps addObject:step];
     }
     {
@@ -1879,6 +1880,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
         step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
         step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
+        step.capturePreviewAccessibilityHint = NSLocalizedString(@"Align your left hand with the on-screen outline and capture the image.", comment:"");
         [steps addObject:step];
     }
     {

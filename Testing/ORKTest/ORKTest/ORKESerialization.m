@@ -453,6 +453,7 @@ ret =
     PROPERTY(templateImageInsets, NSValue, NSObject, YES,
             ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
             ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
+    PROPERTY(capturePreviewAccessibilityHint, NSString, NSObject, YES, nil, nil),
     })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

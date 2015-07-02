@@ -65,4 +65,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
+/**
+ Accessibility hint to be used in Voice Over for the capture preview.
+ 
+ The accessibility hint provides voice over instructions for the user. When setting the
+ accessibility hint, be sure to clearly state what the capture preview is intended for 
+ including descriptions of the 'templateImage' if applicable.
+ */
+@property (nonatomic, copy) NSString *capturePreviewAccessibilityHint;
+
 @end

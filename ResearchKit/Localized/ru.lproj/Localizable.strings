@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Собранные данные не найдены.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не указан каталог для выходных данных";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Коснитесь, чтобы сделать другой снимок";
-"MEDIA_BUTTON" = "Коснитесь, чтобы сделать снимок";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Назад";
 

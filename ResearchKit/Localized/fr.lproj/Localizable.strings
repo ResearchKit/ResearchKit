@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Aucune donnée collectée n’a été détectée.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Aucun répertoire de sortie spécifié";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Toucher pour capturer une autre image";
-"MEDIA_BUTTON" = "Toucher pour capturer une image";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Retour";
 

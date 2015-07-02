@@ -231,7 +231,11 @@
 }
 
 - (NSString * __nullable)accessibilityLabel {
-    return ORKLocalizedString(@"AX_IMAGE_CAPTURE_LABEL", nil);
+    return (_capturedImageView.image == nil) ? ORKLocalizedString(@"AX_IMAGE_CAPTURE_LABEL", nil) : ORKLocalizedString(@"AX_CAPTURED_IMAGE_LABEL", nil);
+}
+
+- (NSString * __nullable)accessibilityHint{
+    return (_capturedImageView.image == nil) ? self.capturePreviewAccessibilityHint : @"";
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

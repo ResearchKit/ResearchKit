@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nenhum dado coletado foi encontrado.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Um diretório de saída não foi especificado";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Toque para capturar uma imagem diferente";
-"MEDIA_BUTTON" = "Toque para capturar uma imagem";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Voltar";
 
