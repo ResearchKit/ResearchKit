@@ -121,16 +121,14 @@
     
     _previewView.templateImage = imageCaptureStep.templateImage;
     _previewView.templateImageInsets = imageCaptureStep.templateImageInsets;
+    _previewView.accessibilityHint = imageCaptureStep.accessibilityHint;
     _showSkipButtonItem = imageCaptureStep.optional;
-    
-    [self updateAppearance];
 }
 
 - (void)updateAppearance {
     if (self.error) {
         // Hide the template image if there is an error
         _previewView.templateImageHidden = YES;
-        _previewView.accessibilityHint = nil;
         
         // Show skip, if available, and hide the template and continue/capture button
         _continueSkipContainer.continueButtonItem = nil;
@@ -138,7 +136,6 @@
     } else if (self.capturedImage) {
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
-        _previewView.accessibilityHint = self.imageCaptureStep.recaptureAccessibilityHint;
 
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
         _continueSkipContainer.continueButtonItem = _continueButtonItem;
@@ -146,7 +143,6 @@
     } else {
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
-        _previewView.accessibilityHint = self.imageCaptureStep.captureAccessibilityHint;
     
         // Change the continue button back to capture, and change the recapture button back to skip (if available)
         _continueSkipContainer.continueButtonItem = _captureButtonItem;

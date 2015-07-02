@@ -231,7 +231,7 @@
 }
 
 - (NSString * __nullable)accessibilityLabel {
-    return ORKLocalizedString(@"AX_IMAGE_CAPTURE_LABEL", nil);
+    return ORKLocalizedString(self.capturedImage ? @"AX_IMAGE_CAPTURED_LABEL" : @"AX_IMAGE_CAPTURE_LABEL", nil);
 }
 
 - (UIAccessibilityTraits)accessibilityTraits {

@@ -250,4 +250,5 @@
 "AX.MEMORY.TILE.LABEL" = "Memory game tile";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
+"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
 

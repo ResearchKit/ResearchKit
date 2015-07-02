@@ -66,13 +66,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
 /**
- Acessibility hint of the preview when the Step is in capture mode.
+ Accessibility hint of the preview.
  */
-@property (nonatomic, strong) NSString *captureAccessibilityHint;
-
-/**
- Acessibility hint of the preview when the Step is in recapture mode.
- */
-@property (nonatomic, strong) NSString *recaptureAccessibilityHint;
+@property (nonatomic, strong) NSString *accessibilityHint;
 
 @end
