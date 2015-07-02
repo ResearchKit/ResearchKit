@@ -431,12 +431,12 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)cellInit {
     [super cellInit];
-    self.textField.keyboardType = UIKeyboardTypeDefault;
     self.textField.allowsSelection = YES;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     self.textField.autocorrectionType = answerFormat.autocorrectionType;
     self.textField.autocapitalizationType = answerFormat.autocapitalizationType;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
+    self.textField.keyboardType = answerFormat.keyboardType;
 
     [self answerDidChange];
 }
@@ -686,6 +686,7 @@ static const CGFloat kHMargin = 15.0;
         _textView.autocorrectionType = textAnswerFormat.autocorrectionType;
         _textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
+        _textView.keyboardType = textAnswerFormat.keyboardType;
     } else {
         _maxLength = 0;
     }

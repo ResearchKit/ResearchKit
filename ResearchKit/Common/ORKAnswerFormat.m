@@ -1603,6 +1603,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         _autocapitalizationType = UITextAutocapitalizationTypeSentences;
         _autocorrectionType = UITextAutocorrectionTypeDefault;
         _spellCheckingType = UITextSpellCheckingTypeDefault;
+        _keyboardType = UIKeyboardTypeDefault;
         _multipleLines = YES;
     }
     return self;
@@ -1623,6 +1624,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     fmt->_autocapitalizationType = _autocapitalizationType;
     fmt->_autocorrectionType = _autocorrectionType;
     fmt->_spellCheckingType = _spellCheckingType;
+    fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
     return fmt;
 }
@@ -1649,6 +1651,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
+        ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
     }
     return self;
@@ -1660,6 +1663,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
+    ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
 }
 
@@ -1676,6 +1680,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
+             self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines));
 }
 

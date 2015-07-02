@@ -747,6 +747,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         format.autocapitalizationType = UITextAutocapitalizationTypeWords;
         format.autocorrectionType = UITextAutocorrectionTypeNo;
         format.spellCheckingType = UITextSpellCheckingTypeNo;
+        format.keyboardType = UIKeyboardTypeNumberPad;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005a"
                                                                       title:@"What is your name?"
                                                                      answer:format];

@@ -987,6 +987,13 @@ ORK_CLASS_AVAILABLE
  */
 @property UITextSpellCheckingType spellCheckingType;
 
+/**
+ The keyboard type that applies to the user's input.
+ 
+ By default, the value of this property is `UIKeyboardTypeDefault`.
+ */
+@property UIKeyboardType keyboardType;
+
 @end
 
 
