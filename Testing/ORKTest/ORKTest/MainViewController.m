@@ -766,7 +766,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         /*
-         A text question with single-line text entry, with a number pad for keyboard.
+         A text question with single-line text entry and a number pad for keyboard.
          */
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
         format.multipleLines = NO;
