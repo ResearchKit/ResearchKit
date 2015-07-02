@@ -179,6 +179,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @interface ORKTextAnswerFormat ()
 
+@property BOOL isEmail;
+
 @end
 
 

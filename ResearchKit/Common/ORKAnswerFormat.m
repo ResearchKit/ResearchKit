@@ -59,6 +59,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Integer);
             SQT_CASE(Boolean);
             SQT_CASE(Text);
+            SQT_CASE(Email);
             SQT_CASE(DateAndTime);
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
@@ -1605,6 +1606,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         _spellCheckingType = UITextSpellCheckingTypeDefault;
         _keyboardType = UIKeyboardTypeDefault;
         _multipleLines = YES;
+        _isEmail = NO;
     }
     return self;
 }
@@ -1638,6 +1640,12 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
+    if (self.isEmail){
+        NSString *emailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailValidationRegex];
+        return [emailValidationTest evaluateWithObject:text];
+    }
+    
     return (_maximumLength == 0 || [text length] <= _maximumLength);
 }
 
@@ -1682,6 +1690,28 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines));
+}
+
+@end
+
+
+#pragma mark - ORKEmailAnswerFormat
+
+@implementation ORKEmailAnswerFormat
+
+- (ORKQuestionType) questionType{
+    return ORKQuestionTypeEmail;
+}
+
+- (ORKAnswerFormat *) impliedAnswerFormat{
+    ORKTextAnswerFormat *answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
+    answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
+    answerFormat.multipleLines = NO;
+    answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+    answerFormat.isEmail = YES;
+    return answerFormat;
 }
 
 @end

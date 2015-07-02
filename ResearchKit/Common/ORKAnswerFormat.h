@@ -63,6 +63,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /// In a text question, the participant can enter multiple lines of text.
     ORKQuestionTypeText,
     
+    /// In a email question, the participant can enter an email.
+    ORKQuestionTypeEmail,
+    
     /// In a time of day question, the participant can enter a time of day by using a picker.
     ORKQuestionTypeTimeOfDay,
     
@@ -104,6 +107,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
 @class ORKTextAnswerFormat;
+@class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
 
 
@@ -993,6 +997,18 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is `UIKeyboardTypeDefault`.
  */
 @property UIKeyboardType keyboardType;
+
+@end
+
+
+/**
+ The `ORKTextAnswerFormat` class represents the answer format for questions that collect a text response
+ from the user.
+ 
+ An `ORKTextAnswerFormat` object produces an `ORKTextQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEmailAnswerFormat : ORKAnswerFormat
 
 @end
 
