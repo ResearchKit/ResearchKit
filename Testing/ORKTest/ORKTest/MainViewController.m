@@ -1259,6 +1259,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_005" text:@"Email"
+                                                           answerFormat:[ORKAnswerFormat emailAnswerFormat]];
+            item.placeholder = @"Enter Email";
+            [items addObject:item];
+        }
+        
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
             item.placeholder = @"Pick a date";

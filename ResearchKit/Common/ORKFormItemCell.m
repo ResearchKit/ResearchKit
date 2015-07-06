@@ -469,11 +469,41 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
+- (BOOL)isAnswerValid {
+    NSString *text = self.textField.text;
+    BOOL isValid = YES;
+    if ([text length]) {
+        isValid = [[self.formItem impliedAnswerFormat] isAnswerValidWithString:text];
+    }
+    return isValid;
+}
+
 #pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    NSString *text = textField.text;
+    BOOL isValid = [self isAnswerValid];
+    if (! isValid) {
+        [self showValidityAlertWithMessage:text];
+    }
+    return YES;
+}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [super textFieldDidEndEditing:textField];
     [self inputValueDidChange];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    BOOL isValid = [self isAnswerValid];
+    
+    if (! isValid) {
+        [self showValidityAlertWithMessage:textField.text];
+        return NO;
+    }
+    
+    [self.textField resignFirstResponder];
+    return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
