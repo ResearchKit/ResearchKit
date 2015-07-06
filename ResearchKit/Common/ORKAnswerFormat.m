@@ -59,7 +59,6 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Integer);
             SQT_CASE(Boolean);
             SQT_CASE(Text);
-            SQT_CASE(Email);
             SQT_CASE(DateAndTime);
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
@@ -1705,10 +1704,6 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
-}
-
-- (ORKQuestionType) questionType{
-    return ORKQuestionTypeEmail;
 }
 
 - (ORKAnswerFormat *) impliedAnswerFormat{

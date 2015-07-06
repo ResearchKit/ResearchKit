@@ -63,9 +63,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /// In a text question, the participant can enter multiple lines of text.
     ORKQuestionTypeText,
     
-    /// In a email question, the participant can enter an email.
-    ORKQuestionTypeEmail,
-    
     /// In a time of day question, the participant can enter a time of day by using a picker.
     ORKQuestionTypeTimeOfDay,
     
