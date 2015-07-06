@@ -1004,10 +1004,10 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKTextAnswerFormat` class represents the answer format for questions that collect a text response
+ The `ORKEmailAnswerFormat` class represents the answer format for questions that collect an email response
  from the user.
  
- An `ORKTextAnswerFormat` object produces an `ORKTextQuestionResult` object.
+ An `ORKEmailAnswerFormat` object produces an `ORKTextQuestionResult` object.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKEmailAnswerFormat : ORKAnswerFormat
