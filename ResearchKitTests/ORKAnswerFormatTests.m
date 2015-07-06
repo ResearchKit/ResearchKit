@@ -31,9 +31,6 @@
 
 #import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
-#import "ORKSurveyAnswerCellForText.h"
-#import "ORKSkin.h"
-#import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 
 
