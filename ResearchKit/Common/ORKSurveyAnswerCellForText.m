@@ -280,9 +280,8 @@
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     
-    ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)impliedFormat;
     NSString *text = self.textField.text;
-    NSInteger maxLength = [textFormat maximumLength];
+    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
     if (maxLength > 0 && [text length] > maxLength) {
         NSString *corrected = [text substringToIndex:maxLength];
         ORK_Log_Debug(@"%@ -> %@", text, corrected);
