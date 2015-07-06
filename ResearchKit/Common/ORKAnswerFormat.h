@@ -193,6 +193,8 @@ ORK_CLASS_AVAILABLE
 + (ORKTextAnswerFormat *)textAnswerFormat;
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
++ (ORKEmailAnswerFormat *)emailAnswerFormat;
+
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
 
