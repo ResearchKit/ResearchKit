@@ -1703,6 +1703,10 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 @implementation ORKEmailAnswerFormat
 
+- (Class)questionResultClass {
+    return [ORKTextQuestionResult class];
+}
+
 - (ORKQuestionType) questionType{
     return ORKQuestionTypeEmail;
 }
