@@ -779,6 +779,17 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         /*
+         An email question with single-line text entry.
+         */
+        ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+                                                                      title:@"What is your email?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
          A single-select value-picker question. Rather than seeing the items in a tableview,
          the user sees them in a picker wheel. This is suitable where the list
          of items can be long, and the text describing the options can be kept short.

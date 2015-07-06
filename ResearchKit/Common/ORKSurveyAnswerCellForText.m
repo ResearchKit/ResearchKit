@@ -245,7 +245,18 @@
 }
 
 - (BOOL)shouldContinue {
-    return ![self correctValueIfNeeded];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    if (answerFormat.isEmail) {
+        BOOL isValid = [answerFormat isAnswerValidWithString:self.answer];
+
+        if (!isValid){
+            [self showValidityAlertWithMessage:self.answer];
+        }
+        
+        return isValid;
+    } else {
+        return ![self correctValueIfNeeded];
+    }
 }
 
 - (void)answerDidChange {
@@ -268,14 +279,18 @@
 - (BOOL)correctValueIfNeeded {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
+    
+    ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)impliedFormat;
     NSString *text = self.textField.text;
-    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
+    NSInteger maxLength = [textFormat maximumLength];
     if (maxLength > 0 && [text length] > maxLength) {
         NSString *corrected = [text substringToIndex:maxLength];
         ORK_Log_Debug(@"%@ -> %@", text, corrected);
         
         self.textField.text = corrected;
+        
         return YES;
+        
     } else {
         return NO;
     }
