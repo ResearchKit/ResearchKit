@@ -1706,7 +1706,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return [ORKTextQuestionResult class];
 }
 
-- (ORKAnswerFormat *) impliedAnswerFormat{
+- (ORKAnswerFormat *)impliedAnswerFormat {
     ORKTextAnswerFormat *answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
     answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
     answerFormat.multipleLines = NO;

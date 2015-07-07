@@ -250,7 +250,7 @@
         BOOL isValid = [answerFormat isAnswerValidWithString:self.answer];
 
         if (!isValid){
-            [self showValidityAlertWithMessage:self.answer];
+            [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
         }
         
         return isValid;
