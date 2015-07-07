@@ -184,13 +184,6 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @end
 
 
-@interface ORKEmailAnswerFormat ()
-
-@property (nonatomic, strong) ORKTextAnswerFormat *answerFormat;
-
-@end
-
-
 @interface ORKAnswerDefaultSource : NSObject
 
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore;

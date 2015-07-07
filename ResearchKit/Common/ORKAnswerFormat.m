@@ -1710,23 +1710,25 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 #pragma mark - ORKEmailAnswerFormat
 
-@implementation ORKEmailAnswerFormat
+@implementation ORKEmailAnswerFormat {
+    ORKTextAnswerFormat *_answerFormat;
+}
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
-    if (self.answerFormat == nil) {
-        self.answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
-        self.answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
-        self.answerFormat.multipleLines = NO;
-        self.answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-        self.answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        self.answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.answerFormat.emailAddress = YES;
+    if (!_answerFormat) {
+        _answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
+        _answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
+        _answerFormat.multipleLines = NO;
+        _answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        _answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        _answerFormat.emailAddress = YES;
     }
-    return self.answerFormat;
+    return _answerFormat;
 }
 
 @end
