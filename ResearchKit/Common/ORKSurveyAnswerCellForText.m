@@ -161,12 +161,13 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    if (_maxLength > 0) {
-        NSUInteger oldLength = [textView.text length];
-        NSUInteger replacementLength = [text length];
-        NSUInteger rangeLength = range.length;
-        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-        return (newLength <= _maxLength);
+    NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    if(_maxLength > 0 && [string length] > _maxLength)
+    {
+        NSString *string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_ALERT_MESSAGE", nil), [@(_maxLength) stringValue]];
+        [self showValidityAlertWithMessage:string];
+        return NO;
     }
     
     return YES;
@@ -238,9 +239,6 @@
     
     [self answerDidChange];
     
-    // Truncate if needed
-    [self correctValueIfNeeded];
-    
     [super prepareView];
 }
 
@@ -265,9 +263,9 @@
         }
         
         return isValid;
-    } else {
-        return ![self correctValueIfNeeded];
     }
+    
+    return YES;
 }
 
 - (void)answerDidChange {
@@ -287,64 +285,36 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)correctValueIfNeeded {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     
-    NSString *text = self.textField.text;
-    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
-    if (maxLength > 0 && [text length] > maxLength) {
-        NSString *corrected = [text substringToIndex:maxLength];
-        ORK_Log_Debug(@"%@ -> %@", text, corrected);
-        
-        self.textField.text = corrected;
-        
-        return YES;
-        
-    } else {
-        return NO;
-    }
-}
-
-- (BOOL)correctionNeededForText:(NSString *)text {
-    ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
-    NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
-    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
-    if (maxLength > 0 && [text length] > maxLength) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (! [self correctionNeededForText:text]) {
-        [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
-    } else {
+    
+    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
+    
+    if(maxLength > 0 && [text length] > maxLength)
+    {
+        NSString *string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_ALERT_MESSAGE", nil), [@(maxLength) stringValue]];
+        [self showValidityAlertWithMessage:string];
         return NO;
     }
+    
+    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    [self correctValueIfNeeded];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL canContinue = ![self correctValueIfNeeded];
-    
-    if (! canContinue) {
-        return NO;
-    }
-    
     [self.textField resignFirstResponder];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self correctValueIfNeeded];
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
 }

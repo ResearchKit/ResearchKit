@@ -790,6 +790,18 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         /*
+         A text question with single-line text entry and a length limit.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:20];
+        format.multipleLines = NO;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005e"
+                                                                      title:@"What is your name?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
          A single-select value-picker question. Rather than seeing the items in a tableview,
          the user sees them in a picker wheel. This is suitable where the list
          of items can be long, and the text describing the options can be kept short.
