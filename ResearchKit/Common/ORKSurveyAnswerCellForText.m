@@ -246,11 +246,11 @@
 
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (answerFormat.isEmail) {
+    if (answerFormat.isEmailAddress) {
         BOOL isValid = [answerFormat isAnswerValidWithString:self.answer];
 
         if (!isValid){
-            [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
+            [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
         }
         
         return isValid;

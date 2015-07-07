@@ -179,7 +179,14 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @interface ORKTextAnswerFormat ()
 
-@property BOOL isEmail;
+@property (nonatomic, assign, getter=isEmailAddress) BOOL emailAddress;
+
+@end
+
+
+@interface ORKEmailAnswerFormat ()
+
+@property (nonatomic, strong) ORKTextAnswerFormat *answerFormat;
 
 @end
 

@@ -1609,7 +1609,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         _spellCheckingType = UITextSpellCheckingTypeDefault;
         _keyboardType = UIKeyboardTypeDefault;
         _multipleLines = YES;
-        _isEmail = NO;
+        _emailAddress = NO;
     }
     return self;
 }
@@ -1643,13 +1643,18 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    if (self.isEmail){
+    if (self.isEmailAddress){
         NSString *emailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
         NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailValidationRegex];
         return [emailValidationTest evaluateWithObject:text];
     }
     
     return (_maximumLength == 0 || [text length] <= _maximumLength);
+}
+
+- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
+    NSString *string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
+    return string;
 }
 
 #pragma mark NSSecureCoding
@@ -1664,6 +1669,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
+        ORK_DECODE_BOOL(aDecoder, emailAddress);
     }
     return self;
 }
@@ -1676,6 +1682,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
+    ORK_ENCODE_BOOL(aCoder, emailAddress);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1707,14 +1714,16 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
-    ORKTextAnswerFormat *answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
-    answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
-    answerFormat.multipleLines = NO;
-    answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-    answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-    answerFormat.isEmail = YES;
-    return answerFormat;
+    if (self.answerFormat == nil) {
+        self.answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
+        self.answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
+        self.answerFormat.multipleLines = NO;
+        self.answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        self.answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        self.answerFormat.emailAddress = YES;
+    }
+    return self.answerFormat;
 }
 
 @end
