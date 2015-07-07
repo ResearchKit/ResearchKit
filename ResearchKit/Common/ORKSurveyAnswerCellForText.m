@@ -244,10 +244,21 @@
     [super prepareView];
 }
 
+- (BOOL)isAnswerValid {
+    id answer = self.answer;
+    
+    if (answer == ORKNullAnswerValue()) {
+        return YES;
+    }
+    
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    return [answerFormat isAnswerValidWithString:self.textField.text];
+}
+
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
     if (answerFormat.isEmailAddress) {
-        BOOL isValid = [answerFormat isAnswerValidWithString:self.answer];
+        BOOL isValid = [self isAnswerValid];
 
         if (!isValid){
             [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
