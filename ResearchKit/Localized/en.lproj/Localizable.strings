@@ -84,7 +84,7 @@
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
 
 /* Alert for invalid email address value */
-"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: ";
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";

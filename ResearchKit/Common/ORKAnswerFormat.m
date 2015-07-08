@@ -1655,7 +1655,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
     if (self.emailAddress) {
-        string = [ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil) stringByAppendingString:text];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
     return string;
 }
