@@ -99,7 +99,6 @@
 
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
     
-    [self setupButtons];
 }
 
 - (void)setupButtons {
@@ -140,6 +139,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     ORK_Log_Debug(@"%@", self);
+    
     [self setupButtons];
     
     if ([self.delegate respondsToSelector:@selector(stepViewControllerWillAppear:)]) {
