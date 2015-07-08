@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Trinn %1$lu av %2$lu";
+"STEP_PROGRESS_FORMAT" = "Trinn %1$@ av %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig verdi";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Aktiviteten måler hvor lang tid det tar før du reagerer på visuelle signaler.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Rist enheten så snart du ser den blå prikken vises på skjermen. Du vil bli bedt om å gjøre dette %D ganger.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %D av %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %@ av %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten fort når den blå sirkelen vises";
 
 /* Potentially user visible error messages. */

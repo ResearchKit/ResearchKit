@@ -147,7 +147,11 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             HKQuantitySample *sample = [results firstObject];
             id value = nil;
             if (sample) {
-                value = @([sample.quantity doubleValueForUnit:unit]);
+                if (unit == [HKUnit percentUnit]) {
+                    value = @(100 * [sample.quantity doubleValueForUnit:unit]);
+                } else {
+                    value = @([sample.quantity doubleValueForUnit:unit]);
+                }
             }
             handler(value, error);
         }];

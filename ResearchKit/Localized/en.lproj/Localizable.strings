@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Date";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Step %1$lu of %2$lu";
+"STEP_PROGRESS_FORMAT" = "Step %1$@ of %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Invalid value";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %D of %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 
 /* Potentially user visible error messages. */

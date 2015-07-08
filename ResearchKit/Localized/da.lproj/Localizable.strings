@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Dato";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Trin %1$lu af %2$lu";
+"STEP_PROGRESS_FORMAT" = "Trin %1$@ af %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ugyldig værdi";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Denne aktivitet vurderer, hvor lang tid du er om at reagere på et visuelt tegn.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ryst enheden i tilfældig retning, lige så snart den blå prik vises på skærmen. Du vil blive bedt om at gøre det %D gange.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøg %D af %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøg %@ af %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ryst hurtigt enheden, når den blå cirkel vises";
 
 /* Potentially user visible error messages. */
