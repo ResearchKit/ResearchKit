@@ -416,6 +416,25 @@ static const CGFloat kHMargin = 15.0;
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
+    
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    NSInteger maxLength = answerFormat.maximumLength;
+    
+    if(maxLength > 0 && [text length] > maxLength)
+    {
+        [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
+        return NO;
+    }
+    
+    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [super inputValueDidChange];
+    
+    return YES;
+}
+
 #pragma mark Accessibility
 
 - (BOOL)isAccessibilityElement {
@@ -498,7 +517,7 @@ static const CGFloat kHMargin = 15.0;
     BOOL isValid = [self isAnswerValid];
     
     if (! isValid) {
-        [self showValidityAlertWithMessage:textField.text];
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
     
@@ -508,17 +527,20 @@ static const CGFloat kHMargin = 15.0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
+    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    if (answerFormat.maximumLength > 0) {
-        if ([text length] > answerFormat.maximumLength) {
-            return NO;
-        }
+    NSInteger maxLength = answerFormat.maximumLength;
+    
+    if(maxLength > 0 && [text length] > maxLength)
+    {
+        [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
+        return NO;
     }
     
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
-    
+
     return YES;
 }
 
@@ -806,15 +828,17 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (_maxLength > 0) {
-        NSUInteger oldLength = [textView.text length];
-        NSUInteger replacementLength = [text length];
-        NSUInteger rangeLength = range.length;
-        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-        return (newLength <= _maxLength);
+    NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    if(_maxLength > 0 && [string length] > _maxLength)
+    {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
+        return NO;
     }
+    
     return YES;
 }
+
 @end
 
 

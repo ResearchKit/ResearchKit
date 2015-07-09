@@ -1256,6 +1256,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             [items addObject:item];
         }
         
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_004a" text:@"BP Diastolic"
                                                          answerFormat:[ORKAnswerFormat integerAnswerFormatWithUnit:@"mm Hg"]];
@@ -1274,6 +1275,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_005" text:@"Email"
                                                            answerFormat:[ORKAnswerFormat emailAnswerFormat]];
             item.placeholder = @"Enter Email";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+                                                           answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
+            item.placeholder = @"Your message (limit 20 characters).";
             [items addObject:item];
         }
         
