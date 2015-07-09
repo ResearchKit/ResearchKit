@@ -165,8 +165,7 @@
     
     if(_maxLength > 0 && [string length] > _maxLength)
     {
-        NSString *string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_ALERT_MESSAGE", nil), [@(_maxLength) stringValue]];
-        [self showValidityAlertWithMessage:string];
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
         return NO;
     }
     
@@ -295,8 +294,7 @@
     
     if(maxLength > 0 && [text length] > maxLength)
     {
-        NSString *string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_ALERT_MESSAGE", nil), [@(maxLength) stringValue]];
-        [self showValidityAlertWithMessage:string];
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
         return NO;
     }
     

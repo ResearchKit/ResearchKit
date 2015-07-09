@@ -1663,7 +1663,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
-    if (self.emailAddress) {
+    if (_maximumLength != 0 && [text length] > _maximumLength) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), [@(_maximumLength) stringValue]];
+    } else if (self.emailAddress) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
     return string;
