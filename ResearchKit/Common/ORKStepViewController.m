@@ -278,7 +278,7 @@
 #pragma mark - Action Handlers
 
 - (void)goForward {
-
+    
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
@@ -347,13 +347,13 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     
     [coder encodeObject:_step.identifier forKey:_ORKStepIdentifierRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDateRestoreKey];
-    [coder encodeObject:_outputDirectory forKey:_ORKOutputDirectoryKey];
+    [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    self.outputDirectory = [coder decodeObjectOfClass:[NSURL class] forKey:_ORKOutputDirectoryKey];
+    self.outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryKey]);
     
     if (! self.step) {
         // Just logging to the console in this case, since this can happen during a taskVC restoration of a dynamic task.

@@ -94,19 +94,23 @@
     [self goForward];
 }
 
+- (void)playReferenceTone {
+    [self.audioGenerator playSoundAtFrequency:1000.0];
+}
+
 - (void)start {
     [super start];
-    
-    [self.audioGenerator playSoundAtFrequency:1000];
+    [self playReferenceTone];
 }
 
 - (void)suspend {
     [super suspend];
+    [self.audioGenerator stop];
 }
 
 - (void)resume {
     [super resume];
-    // ...
+    [self playReferenceTone];
 }
 
 - (void)finish {
@@ -115,7 +119,6 @@
 }
 
 - (IBAction)buttonPressed:(id)button forEvent:(UIEvent *)event {
-
     [self finish];
 }
 

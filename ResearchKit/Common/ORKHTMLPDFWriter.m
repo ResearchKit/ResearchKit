@@ -37,8 +37,8 @@
 #define PPI 72
 #define ORKSizeMakeWithPPI(width, height) CGSizeMake(width * PPI, height * PPI)
 
-static const CGFloat A4Width = 8.26666667;
-static const CGFloat A4Height = 11.6916667;
+static const CGFloat A4Width = 8.27;
+static const CGFloat A4Height = 11.69;
 static const CGFloat LetterWidth = 8.5f;
 static const CGFloat LetterHeight = 11.0f;
 

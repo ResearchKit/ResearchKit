@@ -746,23 +746,30 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [data copy];
 }
 
+- (void)ensureDirectoryExists:(NSURL *)outputDirectory {
+    // Only verify existence if the output directory is non-nil.
+    // But, even if the output directory is nil, we still set it and forward to the step VC.
+    if (outputDirectory != nil) {
+        BOOL isDirectory = NO;
+        BOOL directoryExists = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDirectory];
+        
+        if (!directoryExists) {
+            NSError *error = nil;
+            if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+                @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
+            }
+            isDirectory = YES;
+        } else if (!isDirectory) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
+        }
+    }
+}
+
 - (void)setOutputDirectory:(NSURL *)outputDirectory {
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot change outputDirectory after presenting task controller" userInfo:nil];
     }
-    
-    BOOL isDir;
-    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:outputDirectory.path isDirectory:&isDir];
-    
-    if (! exist) {
-        NSError *error = nil;
-        if (![[NSFileManager defaultManager] createDirectoryAtURL:outputDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Could not create output directory and output directory does not exist" userInfo:@{@"error" : error}];
-        }
-        isDir = YES;
-    } else if (! isDir) {
-        @throw [NSException exceptionWithName:NSGenericException reason:@"Desired outputDirectory is not a directory or could not be created." userInfo:nil];
-    }
+    [self ensureDirectoryExists:outputDirectory];
     
     _outputDirectory = [outputDirectory copy];
     
@@ -903,7 +910,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
 
         if (progress.total > 0) {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,(unsigned long)progress.current+1, (unsigned long)progress.total];
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
     }
     
@@ -1256,7 +1263,8 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeObject:_requestedHealthTypesForRead forKey:_ORKRequestedHealthTypesForReadRestoreKey];
     [coder encodeObject:_requestedHealthTypesForWrite forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
-    [coder encodeObject:_outputDirectory forKey:_ORKOutputDirectoryRestoreKey];
+    
+    [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryRestoreKey];
     [coder encodeObject:_lastBeginningInstructionStepIdentifier forKey:_ORKLastBeginningInstructionStepIdentifierKey];
     
     [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
@@ -1275,7 +1283,8 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     _taskRunUUID = [coder decodeObjectOfClass:[NSUUID class] forKey:_ORKTaskRunUUIDRestoreKey];
     self.showsProgressInNavigationBar = [coder decodeBoolForKey:_ORKShowsProgressInNavigationBarRestoreKey];
     
-    _outputDirectory = [coder decodeObjectOfClass:[NSURL class] forKey:_ORKOutputDirectoryRestoreKey];
+    _outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryRestoreKey]);
+    [self ensureDirectoryExists:_outputDirectory];
     
     // Must have a task object already provided by this point in the restoration, in order to restore any other state.
     if (_task) {

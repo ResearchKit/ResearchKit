@@ -91,8 +91,8 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKSpatialSpanMemoryResult:
                 providerType = SpatialSpanMemoryResultTableViewProvider.self
             
-            case is ORKDeviceMotionReactionTimeResult:
-                providerType = DeviceMotionReactionTimeViewProvider.self
+            case is ORKReactionTimeResult:
+                providerType = ReactionTimeViewProvider.self
             
             case is ORKFileResult:
                 providerType = FileResultTableViewProvider.self
@@ -445,12 +445,6 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
         return "Samples"
     }
     
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
@@ -500,12 +494,6 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
         }
 
         return "Samples"
-    }
-
-    // MARK: UITableViewDelegate
-
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
     }
 
     // MARK: ResultTableViewProvider
@@ -561,12 +549,6 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
         return "Game Records"
     }
     
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
@@ -589,13 +571,15 @@ class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
         
         return rows + questionResult.gameRecords!.map { gameRecord in
             // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
-            return ResultRow(text: "game", detail: gameRecord.score, selectable: true)
+            return ResultRow(text: "game", detail: gameRecord.score)
         }
     }
 }
 
-class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
-    
+/// Table view provider specific to an `ORKReactionTimeResult` instance.
+class ReactionTimeViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
@@ -608,16 +592,18 @@ class DeviceMotionReactionTimeViewProvider: ResultTableViewProvider {
         return "File Results"
     }
     
+    // MARK: ResultTableViewProvider
+
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let reactionTimeResult = result as! ORKDeviceMotionReactionTimeResult
+        let reactionTimeResult = result as! ORKReactionTimeResult
         
         let rows = super.resultRowsForSection(section)
         
         if section == 0 {
-            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp, selectable: true) ]
+            return rows + [ ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp) ]
         }
         
-        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString, selectable: false) ]
+        return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
     }
 }
 

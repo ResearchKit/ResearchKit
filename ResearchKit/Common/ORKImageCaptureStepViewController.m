@@ -31,10 +31,11 @@
 
 #import "ORKStepViewController_Internal.h"
 #import "ORKImageCaptureStepViewController.h"
-#import <AVFoundation/AVFoundation.h>
 #import "ORKImageCaptureView.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
+
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>
@@ -58,9 +59,9 @@
         if (stepResult && [stepResult results].count > 0) {
             ORKFileResult *fileResult = [[stepResult results] firstObject];
             if(fileResult.fileURL) {
-                self.fileUrl = fileResult.fileURL;
-                //this will actually cause the fileURL above to be removed..
+                // Setting these properties in this order allows us to reuse the existing file on disk
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
+                self.fileUrl = fileResult.fileURL;
             }
         }
     }
@@ -86,6 +87,11 @@
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
     [super setContinueButtonItem:continueButtonItem];
     _imageCaptureView.continueButtonItem = continueButtonItem;
+}
+
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    [super setSkipButtonItem:skipButtonItem];
+    _imageCaptureView.skipButtonItem = skipButtonItem;
 }
 
 - (void)retakePressed:(void (^ __nullable)())handler {
@@ -206,12 +212,28 @@
 }
 
 - (void)handleError:(NSError *)error {
-    // Tell the task view controller that we have failed so that it removes our result
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
-    [strongDelegate stepViewControllerDidFail:self withError:error];
+    // Shut down the session, if running
+    if(_captureSession.isRunning) {
+        STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
+        dispatch_async(self.sessionQueue, ^{
+            [strongCaptureSession stopRunning];
+        });
+    }
+    
+    // Reset the state to before the capture session was setup.  Order here is important
+    _captureSession = nil;
+    _stillImageOutput = nil;
+    _imageCaptureView.session = nil;
+    _imageCaptureView.capturedImage = nil;
+    _capturedImageData = nil;
+    _fileUrl = nil;
     
     // Show the error in the image capture view
     _imageCaptureView.error = error;
+    
+    // Tell the task view controller that we have failed so that it removes our result
+    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
+    [strongDelegate stepViewControllerDidFail:self withError:error];
 }
 
 - (void)setCapturedImageData:(NSData *)capturedImageData {
@@ -228,7 +250,7 @@
     [self notifyDelegateOnResultChange];
 }
 
-- (NSURL* )writeCapturedDataWithError:(NSError * __autoreleasing *)error {
+- (NSURL *)writeCapturedDataWithError:(NSError * __autoreleasing *)error {
     NSURL *url = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
     if (!url) {
@@ -239,7 +261,11 @@
     }
     
     // If set properly, the outputDirectory is already created, so write the file into it
-    if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:nil]) {
+    NSError *writeError = nil;
+    if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
+        if (writeError) {
+            ORK_Log_Oops(@"%@", writeError);
+        }
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];
         }

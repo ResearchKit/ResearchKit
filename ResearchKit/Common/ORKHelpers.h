@@ -56,6 +56,8 @@
 
 #define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_URL(c,x)  [c encodeObject:ORKRelativePathForURL(_ ## x) forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@STRINGIFY(x)]
 
 #define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
 #define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
@@ -67,7 +69,8 @@
 #define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
 #define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
 
-#define ORK_DECODE_URL(d,x) _ ## x = (NSURL *)[d decodeObjectOfClass:[NSURL class] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_URL(d,x) _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@STRINGIFY(x)])
+#define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@STRINGIFY(x)])
 
 #define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
@@ -162,6 +165,8 @@ NSCalendar *ORKTimeOfDayReferenceCalendar();
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
+BOOL ORKCurrentLocalePresentsFamilyNameFirst();
+
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
@@ -170,6 +175,11 @@ CGFloat ORKFloorToViewScale(CGFloat value, UIView *view);
 ORK_INLINE bool
 ORKEqualObjects(id o1, id o2) {
     return (o1 == o2) || (o1 && o2 && [o1 isEqual:o2]);
+}
+
+ORK_INLINE BOOL
+ORKEqualFileURLs(NSURL *url1, NSURL *url2) {
+    return ORKEqualObjects(url1, url2) || ([url1 isFileURL] && [url2 isFileURL] && [[url1 absoluteString] isEqualToString:[url2 absoluteString]]);
 }
 
 ORK_INLINE NSArray *
@@ -219,6 +229,13 @@ _Pragma("clang diagnostic pop") \
 UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
+
+NSURL *ORKURLFromBookmarkData(NSData *data);
+NSData *ORKBookmarkDataFromURL(NSURL *url);
+
+NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
+NSURL *ORKURLForRelativePath(NSString *relativePath);
+NSString *ORKRelativePathForURL(NSURL *url);
 
 id ORKDynamicCast_(id x, Class objClass);
 

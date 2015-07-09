@@ -161,6 +161,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _tableView.clipsToBounds = YES;
             
             [self.view addSubview:_tableContainer];
+            _tableContainer.tapOffView = self.view;
             
             _headerView = _tableContainer.stepHeaderView;
             _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
@@ -411,7 +412,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)hasAnswer {
-    return !(self.answer == nil || (self.answer == ORKNullAnswerValue()) || ([self.answer isKindOfClass:[NSArray class]] && [(NSArray *)self.answer count] == 0) );
+    return !ORKIsAnswerEmpty(self.answer);
 }
 
 - (void)saveAnswer:(id)answer {

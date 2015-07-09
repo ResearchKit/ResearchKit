@@ -163,16 +163,6 @@ static NSString *const _NameFormIdentifier = @"nameForm";
 static NSString *const _GivenNameIdentifier = @"given";
 static NSString *const _FamilyNameIdentifier = @"family";
 
-- (BOOL)currentLocalePresentsFamilyNameFirst {
-    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
-    static dispatch_once_t onceToken;
-    static NSArray *familyNameFirstLangs = nil;
-    dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
-    });
-    return (language != nil) && [familyNameFirstLangs containsObject:language];
-}
-
 - (ORKFormStepViewController *)makeNameFormViewController {
     ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:_NameFormIdentifier
                                                             title:self.step.title ? : ORKLocalizedString(@"CONSENT_NAME_TITLE", nil)
@@ -195,7 +185,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     familyName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
     NSArray *formItems = @[givenName, familyName];
-    if ([self currentLocalePresentsFamilyNameFirst]) {
+    if (ORKCurrentLocalePresentsFamilyNameFirst()) {
         formItems = @[familyName, givenName];
     }
     
@@ -309,6 +299,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
     ORKConsentSignatureResult *result = [[ORKConsentSignatureResult alloc] init];
     result.signature = _currentSignature;
     result.identifier = _currentSignature.identifier;
+    result.consented = _documentReviewed;
     result.startDate = parentResult.startDate;
     result.endDate = parentResult.endDate;
     parentResult.results = @[result];

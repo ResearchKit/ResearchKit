@@ -215,7 +215,7 @@
       [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"id.touch"],
       [[ORKAudioRecorderConfiguration alloc] initWithIdentifier:@"id.audio" recorderSettings:@{}]];
     
-    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1)]  ]]];
+    ORKQuestionStep *questionStep = [ORKQuestionStep questionStepWithIdentifier:@"id" title:@"question" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:@[[[ORKTextChoice alloc] initWithText:@"test1" detailText:nil value:@(1) exclusive:NO]  ]]];
     
     ORKQuestionStep *questionStep2 = [ORKQuestionStep questionStepWithIdentifier:@"id"
                                                                      title:@"question" answer:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:@"kg"]];
@@ -427,7 +427,9 @@
     } else if (p.propertyClass == [NSNumber class]) {
         [instance setValue:index?@(12):@(123) forKey:p.propertyName];
     } else if (p.propertyClass == [NSURL class]) {
-        [instance setValue:[NSURL fileURLWithPath:index?@"/xxx":@"/blah"] forKey:p.propertyName];
+        NSURL *url = [NSURL fileURLWithFileSystemRepresentation:[index?@"xxx":@"blah" UTF8String]  isDirectory:NO relativeToURL:[NSURL fileURLWithPath:NSHomeDirectory()]];
+        [instance setValue:url forKey:p.propertyName];
+        [[NSFileManager defaultManager] createFileAtPath:[url path] contents:nil attributes:nil];
     } else if (p.propertyClass == [HKUnit class]) {
         [instance setValue:[HKUnit unitFromString:index?@"g":@"kg"] forKey:p.propertyName];
     } else if (p.propertyClass == [HKQuantityType class]) {
@@ -556,7 +558,13 @@
             }
             for (Class c in checkableClasses) {
                 if ([oldValue isKindOfClass:c]) {
-                    XCTAssertEqualObjects(newValue, oldValue);
+                    if ([newValue isKindOfClass:[NSURL class]] || [oldValue isKindOfClass:[NSURL class]]) {
+                        if (! [[newValue absoluteString] isEqualToString:[oldValue absoluteString]]) {
+                            XCTAssertTrue([[newValue absoluteString] isEqualToString:[oldValue absoluteString]]);
+                        }
+                    } else {
+                        XCTAssertEqualObjects(newValue, oldValue);
+                    }
                     break;
                 }
             }
@@ -569,12 +577,29 @@
         }
         
         NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:newInstance];
+        
+        NSKeyedUnarchiver *unarchiver2 = [[NSKeyedUnarchiver alloc] initForReadingWithData:data2];
+        unarchiver2.requiresSecureCoding = YES;
+        unarchiver2.delegate = self;
+        id newInstance2 = [unarchiver2 decodeObjectOfClasses:[NSSet setWithArray:classesWithSecureCoding] forKey:NSKeyedArchiveRootObjectKey];
+        NSData *data3 = [NSKeyedArchiver archivedDataWithRootObject:newInstance2];
+        
         if (![data isEqualToData:data2]) { // allow breakpointing
-            XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
+            if (! [aClass isSubclassOfClass:[ORKConsentSection class]]) {
+                // ORKConsentSection mis-matches, but it is still "equal" because
+                // the net custom animation URL is a match.
+                XCTAssertEqualObjects(data, data2, @"data mismatch for %@", NSStringFromClass(aClass));
+            }
+        }
+        if (![data2 isEqualToData:data3]) { // allow breakpointing
+            XCTAssertEqualObjects(data2, data3, @"data mismatch for %@", NSStringFromClass(aClass));
         }
         
         if (![newInstance isEqual:instance]) {
             XCTAssertEqualObjects(newInstance, instance, @"equality mismatch for %@", NSStringFromClass(aClass));
+        }
+        if (![newInstance2 isEqual:instance]) {
+            XCTAssertEqualObjects(newInstance2, instance, @"equality mismatch for %@", NSStringFromClass(aClass));
         }
     }
 }

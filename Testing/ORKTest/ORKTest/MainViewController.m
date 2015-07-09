@@ -396,21 +396,21 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     } else if ([identifier isEqualToString:TwoFingerTapTaskIdentifier]) {
         return [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:TwoFingerTapTaskIdentifier
                                                    intendedUseDescription:nil
-                                                                 duration:20.0 options:(ORKPredefinedTaskOption)0];
+                                                                 duration:20.0
+                                                                  options:(ORKPredefinedTaskOption)0];
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
-        return [ORKOrderedTask
-                deviceMotionReactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                intendedUseDescription:nil
-                maximumStimulusInterval:8
-                minimumStimulusInterval:4
-                thresholdAcceleration:0.5
-                numberOfAttempts:3
-                timeout:10
-                successSound:0
-                timeoutSound:0
-                failureSound:0
-                options:0];
+        return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
+                                                   intendedUseDescription:nil
+                                                  maximumStimulusInterval:8
+                                                  minimumStimulusInterval:4
+                                                    thresholdAcceleration:0.5
+                                                         numberOfAttempts:3
+                                                                  timeout:10
+                                                             successSound:0
+                                                             timeoutSound:0
+                                                             failureSound:0
+                                                                  options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
@@ -474,7 +474,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     if (_taskViewController.outputDirectory == nil) {
         // Sets an output directory in Documents, using the `taskRunUUID` in the path.
-        NSURL *documents = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+        NSURL *documents =  [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         NSURL *outputDir = [documents URLByAppendingPathComponent:[self.taskViewController.taskRunUUID UUIDString]];
         [[NSFileManager defaultManager] createDirectoryAtURL:outputDir withIntermediateDirectories:YES attributes:nil error:nil];
         self.taskViewController.outputDirectory = outputDir;
@@ -662,20 +662,40 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         /*
          A single-choice question presented in the tableview format.
          */
-        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Less than seven"
-                                                                        detailText:nil
                                                                              value:@(7)],
                                                      [ORKTextChoice choiceWithText:@"Between seven and eight"
-                                                                        detailText:nil
                                                                              value:@(8)],
                                                      [ORKTextChoice choiceWithText:@"More than eight"
-                                                                        detailText:nil
                                                                              value:@(9)]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
                                                                       title:@"How many hours did you sleep last night?"
+                                                                     answer:answerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A multiple-choice question presented in the tableview format.
+         */
+        ORKTextChoiceAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:
+                                                   @[
+                                                     [ORKTextChoice choiceWithText:@"Cough"
+                                                                             value:@"cough"],
+                                                     [ORKTextChoice choiceWithText:@"Fever"
+                                                                             value:@"fever"],
+                                                     [ORKTextChoice choiceWithText:@"Headaches"
+                                                                             value:@"headache"],
+                                                     [ORKTextChoice choiceWithText:@"None of the above"
+                                                                        detailText:nil
+                                                                             value:@"none"
+                                                                          exclusive:YES]
+                                                     ]];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004a"
+                                                                      title:@"Which symptoms do you have?"
                                                                      answer:answerFormat];
         [steps addObject:step];
     }
@@ -688,13 +708,16 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             @[
               [ORKTextChoice choiceWithText:@"Cough"
                                  detailText:@"A cough and/or sore throat"
-                                      value:@"cough"],
+                                      value:@"cough"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Fever"
                                  detailText:@"A 100F or higher fever or feeling feverish"
-                                      value:@"fever"],
+                                      value:@"fever"
+                                  exclusive:NO],
               [ORKTextChoice choiceWithText:@"Headaches"
                                  detailText:@"Headaches and/or body aches"
-                                      value:@"headache"]
+                                      value:@"headache"
+                                  exclusive:NO]
               ]];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_004"
@@ -749,13 +772,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:
                                                     @[
                                                       [ORKTextChoice choiceWithText:@"Cough"
-                                                                         detailText:nil
                                                                               value:@"cough"],
                                                       [ORKTextChoice choiceWithText:@"Fever"
-                                                                         detailText:nil
                                                                               value:@"fever"],
                                                       [ORKTextChoice choiceWithText:@"Headaches"
-                                                                         detailText:nil
                                                                               value:@"headache"]
                                                       ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_081"
@@ -851,13 +871,16 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                    @[
                                                      [ORKTextChoice choiceWithText:@"Cough, A cough and/or sore throat, A cough and/or sore throat"
                                                                         detailText:@"A cough and/or sore throat, A cough and/or sore throat, A cough and/or sore throat"
-                                                                             value:@"cough"],
+                                                                             value:@"cough"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@"Fever, A 100F or higher fever or feeling feverish"
                                                                         detailText:nil
-                                                                             value:@"fever"],
+                                                                             value:@"fever"
+                                                                         exclusive:NO],
                                                      [ORKTextChoice choiceWithText:@""
                                                                         detailText:@"Headaches, Headaches and/or body aches"
-                                                                             value:@"headache"]
+                                                                             value:@"headache"
+                                                                         exclusive:NO]
                                                      ]];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000a"
                                                                       title:@"(Misused) Which symptoms do you have?"
@@ -1143,6 +1166,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Pre1"];
+            [items addObject:item];
+        }
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Basic Information"];
             [items addObject:item];
         }
@@ -1341,6 +1368,18 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         }
         
         [step setFormItems:items];
+        [steps addObject:step];
+    }
+    
+    {
+        
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Non optional form step" text:nil];
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_001"
+                                                               text:@"Value"
+                                                       answerFormat:[ORKNumericAnswerFormat valuePickerAnswerFormatWithTextChoices:@[@"1", @"2", @"3"]]];
+        item.placeholder = @"Pick a value";
+        [step setFormItems:@[item]];
+        step.optional = NO;
         [steps addObject:step];
     }
     
@@ -1819,7 +1858,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     {
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
         step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
-        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
         [steps addObject:step];
     }
     {
@@ -1839,7 +1878,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     {
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
         step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
-        step.templateImageInsets = UIEdgeInsetsMake(0.10, 0.10, 0.10, 0.10);
+        step.templateImageInsets = UIEdgeInsetsMake(0.05, 0.05, 0.05, 0.05);
         [steps addObject:step];
     }
     {
@@ -2070,6 +2109,13 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
              */
             consentSection.htmlContent = @"<ul><li>Lorem</li><li>ipsum</li><li>dolor</li></ul><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p>\
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?</p> 研究";
+        } else if (type.integerValue == ORKConsentSectionTypeDataGathering) {
+            /*
+             Tests PDF content instead of text, HTML for Learn More.
+             */
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"SAMPLE_PDF_TEST" ofType:@"pdf"];
+            consentSection.contentURL = [NSURL URLWithString:path];
+
         } else {
             /*
              Tests text Learn More content.

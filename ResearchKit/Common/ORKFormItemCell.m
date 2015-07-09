@@ -158,6 +158,11 @@ static const CGFloat kHMargin = 15.0;
 - (void)answerDidChange {
 }
 
+- (BOOL)isAnswerValid {
+    // Subclasses should override this if validation of the answer is required.
+    return YES;
+}
+
 - (void)defaultAnswerDidChange {
     if (! self.haveChangedAnswer && ! self.answer) {
         if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
@@ -305,19 +310,19 @@ static const CGFloat kHMargin = 15.0;
     }
     
     CGFloat height = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
-        
-    [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                               attribute:NSLayoutAttributeHeight
-                                                               relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                  toItem:nil
-                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                              multiplier:1 constant:height]];
     
-    
-    
+    NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1
+                                                                          constant:height];
+    // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
+    heightConstraint.priority = 999;
+    [self.myConstraints addObject:heightConstraint];
     
     [self.contentView addConstraints:self.myConstraints];
-    
     [super updateConstraints];
 }
 
