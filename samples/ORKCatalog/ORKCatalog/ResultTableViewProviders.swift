@@ -125,7 +125,7 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
     }
     
     // Return a new instance of the specific `ResultTableViewProvider`.
-    return providerType(result: result)
+    return providerType.init(result: result)
 }
 
 /**
