@@ -229,17 +229,17 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, frequency);
+    ORK_ENCODE_DOUBLE(aCoder, frequency);
     ORK_ENCODE_ENUM(aCoder, channel);
-    ORK_ENCODE_OBJ(aCoder, amplitude);
+    ORK_ENCODE_DOUBLE(aCoder, amplitude);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, frequency);
+        ORK_DECODE_DOUBLE(aDecoder, frequency);
         ORK_DECODE_ENUM(aDecoder, channel);
-        ORK_DECODE_OBJ(aDecoder, amplitude);
+        ORK_DECODE_DOUBLE(aDecoder, amplitude);
     }
     return self;
 }
@@ -252,8 +252,8 @@
     __typeof(self) castObject = object;
 
     return ((self.channel == castObject.channel) &&
-            ([self.frequency isEqualToNumber:castObject.frequency]) &&
-            ([self.amplitude isEqualToNumber:castObject.amplitude])) ;
+            (ABS(self.frequency - castObject.frequency) < DBL_EPSILON) &&
+            (ABS(self.amplitude - castObject.amplitude) < DBL_EPSILON)) ;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -265,7 +265,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"%@ %.1lf %@ %.4lf", [super description], self.frequency, @(self.channel), self.amplitude];
 }
 
 @end

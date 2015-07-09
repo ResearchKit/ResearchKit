@@ -167,8 +167,8 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     BOOL _hasBeenPresented;
     BOOL _hasRequestedHealthData;
     ORKPermissionMask _grantedPermissions;
-    NSSet *_requestedHealthTypesForRead;
-    NSSet *_requestedHealthTypesForWrite;
+    NSSet<HKObjectType *> *_requestedHealthTypesForRead;
+    NSSet<HKObjectType *> *_requestedHealthTypesForWrite;
     NSURL *_outputDirectory;
     
     NSDate *_presentedDate;
@@ -607,11 +607,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
 }
 
-- (NSSet *)requestedHealthTypesForRead {
+- (NSSet<HKObjectType *> *)requestedHealthTypesForRead {
     return _requestedHealthTypesForRead;
 }
 
-- (NSSet *)requestedHealthTypesForWrite {
+- (NSSet<HKObjectType *> *)requestedHealthTypesForWrite {
     return _requestedHealthTypesForWrite;
 }
 

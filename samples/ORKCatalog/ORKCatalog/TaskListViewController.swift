@@ -64,7 +64,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
         
         let taskListRow = taskListRows[indexPath.row]
         
@@ -94,7 +94,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         taskViewController.delegate = self
         
         // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String, isDirectory: true)
+        taskViewController.outputDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
 
         /*
             We present the task directly, but it is also possible to use segues.

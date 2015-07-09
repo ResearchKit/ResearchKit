@@ -30,10 +30,14 @@
 
 
 #import "ORKSpatialSpanGame.h"
-
+#import "ORKHelpers.h"
 
 @implementation ORKSpatialSpanGame {
     NSInteger *_sequence;
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
 }
 
 - (void)generateSequence {
