@@ -173,6 +173,50 @@
 
 @end
 
+@implementation ORKTowerOfHanoiResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfMoves);
+    ORK_ENCODE_BOOL(aCoder, puzzleWasSolved);
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfMoves);
+        ORK_DECODE_BOOL(aDecoder, puzzleWasSolved);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame && self.numberOfMoves == castObject.numberOfMoves && self.puzzleWasSolved == castObject.puzzleWasSolved;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ self.numberOfMoves ^ self.puzzleWasSolved;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTowerOfHanoiResult *result = [super copyWithZone:zone];
+    result.numberOfMoves = self.numberOfMoves;
+    result.puzzleWasSolved = self.puzzleWasSolved;
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %d, %d", [super description], (int)self.numberOfMoves, self.puzzleWasSolved];
+}
+
+@end
 
 @implementation ORKToneAudiometryResult
 

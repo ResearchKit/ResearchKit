@@ -105,6 +105,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKToneAudiometryResult:
                 providerType = ToneAudiometryResultTableViewProvider.self
+            
+            case is ORKTowerOfHanoiResult:
+                providerType = TowerOfHanoiResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -477,6 +480,25 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
             
             return ResultRow(text: text, detail: detail)
         }
+    }
+}
+
+/// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
+class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
+        let rows = super.resultRowsForSection(section)
+        return rows + [
+            ResultRow(text: "moves", detail: "\(towerOfHanoiResult.numberOfMoves)"),
+            ResultRow(text: "solved", detail: towerOfHanoiResult.puzzleWasSolved ? "true" : "false")]
     }
 }
 

@@ -254,12 +254,15 @@
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1 constant:0]];
     } else if (_neverHasContinueButton) {
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueButton
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1 constant:0]];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_continueButton
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1
+                                                                             constant:0];
+        heightConstraint.priority = UILayoutPriorityDefaultHigh+1;
+        [_localConstraints addObject:heightConstraint];
     }
     [self addConstraints:_localConstraints];
     
