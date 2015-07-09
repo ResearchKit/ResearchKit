@@ -1631,6 +1631,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     fmt->_spellCheckingType = _spellCheckingType;
     fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
+    fmt->_emailAddress = _emailAddress;
     return fmt;
 }
 
@@ -1643,13 +1644,21 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
+    return ([self isTextAnswerValidWithString:text] && [self isEmailAddressValidWithString:text]);
+}
+
+- (BOOL)isTextAnswerValidWithString:(NSString *)text {
+    return (_maximumLength == 0 || [text length] <= _maximumLength);
+}
+
+- (BOOL)isEmailAddressValidWithString:(NSString *)text {
     if (self.isEmailAddress){
         NSString *emailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
         NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailValidationRegex];
         return [emailValidationTest evaluateWithObject:text];
+    } else {
+        return YES;
     }
-    
-    return (_maximumLength == 0 || [text length] <= _maximumLength);
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
@@ -1711,7 +1720,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 #pragma mark - ORKEmailAnswerFormat
 
 @implementation ORKEmailAnswerFormat {
-    ORKTextAnswerFormat *_answerFormat;
+    ORKTextAnswerFormat *_impliedAnswerFormat;
 }
 
 - (Class)questionResultClass {
@@ -1719,16 +1728,16 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
-    if (!_answerFormat) {
-        _answerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
-        _answerFormat.keyboardType = UIKeyboardTypeEmailAddress;
-        _answerFormat.multipleLines = NO;
-        _answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-        _answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        _answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        _answerFormat.emailAddress = YES;
+    if (!_impliedAnswerFormat) {
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
+        _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
+        _impliedAnswerFormat.multipleLines = NO;
+        _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        _impliedAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _impliedAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        _impliedAnswerFormat.emailAddress = YES;
     }
-    return _answerFormat;
+    return _impliedAnswerFormat;
 }
 
 @end
