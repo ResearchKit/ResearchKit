@@ -452,6 +452,7 @@ ret =
                 ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
                 ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
             PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
+            PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
             })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

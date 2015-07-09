@@ -68,6 +68,11 @@ ORK_CLASS_AVAILABLE
 /**
  Accessibility hint of the preview.
  */
+@property (nonatomic, strong) NSString *accessibilityInstructions;
+
+/**
+ Accessibility hint of the capture button.
+ */
 @property (nonatomic, strong) NSString *accessibilityHint;
 
 @end

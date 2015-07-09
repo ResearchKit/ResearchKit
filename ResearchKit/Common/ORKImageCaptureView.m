@@ -121,7 +121,10 @@
     
     _previewView.templateImage = imageCaptureStep.templateImage;
     _previewView.templateImageInsets = imageCaptureStep.templateImageInsets;
-    _previewView.accessibilityHint = imageCaptureStep.accessibilityHint;
+    _previewView.accessibilityHint = imageCaptureStep.accessibilityInstructions;
+    
+    _captureButtonItem.accessibilityHint = imageCaptureStep.accessibilityHint;
+    
     _showSkipButtonItem = imageCaptureStep.optional;
 }
 
