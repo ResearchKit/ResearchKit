@@ -87,7 +87,7 @@
 "INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
 /* Alert for exceeding length limit in text answer */
-"TEXT_ANSWER_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
