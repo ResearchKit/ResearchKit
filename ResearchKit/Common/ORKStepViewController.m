@@ -145,9 +145,7 @@
     if ([self.delegate respondsToSelector:@selector(stepViewControllerWillAppear:)]) {
         [self.delegate stepViewControllerWillAppear:self];
     }
-    
-    [self stepDidChange];
-    
+        
     if (!_step) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot present step view controller without a step" userInfo:nil];
     }
@@ -199,6 +197,7 @@
 
 - (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle {
     self.learnMoreButtonItem.title = learnMoreButtonTitle;
+    self.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (NSString *)learnMoreButtonTitle {
