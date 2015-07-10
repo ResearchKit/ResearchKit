@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Tanggal";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Langkah %1$lu dari %2$lu";
+"STEP_PROGRESS_FORMAT" = "Langkah %1$@ dari %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Nilai tidak sah";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi waktu yang Anda butuhkan untuk merespons isyarat visual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Goyang perangkat ke arah mana pun segera setelah titik biru muncul di layar. Anda akan diminta untuk melakukannya sebanyak %D kali.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %D dari %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %@ dari %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyang perangkat dengan cepat saat lingkaran biru muncul";
 
 /* Potentially user visible error messages. */

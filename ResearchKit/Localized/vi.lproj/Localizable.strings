@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Ngày";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Bước %1$lu / %2$lu";
+"STEP_PROGRESS_FORMAT" = "Bước %1$@ / %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Giá trị không hợp lệ";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Hoạt động này giúp đánh giá thời gian bạn phản ứng trước gợi ý bằng hình ảnh.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Lắc thiết bị theo bất kỳ hướng nào ngay khi chấm màu lam xuất hiện trên màn hình. Bạn sẽ được yêu cầu làm việc này %D lần.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %D/%D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %@/%@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Lắc nhanh thiết bị khi vòng tròn màu lam xuất hiện";
 
 /* Potentially user visible error messages. */

@@ -149,14 +149,14 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     if (_toneUnit) {
-        OSErr err = AudioOutputUnitStart(_toneUnit);
+        __unused OSErr err = AudioOutputUnitStart(_toneUnit);
         NSAssert1(err == noErr, @"Error starting unit: %hd", err);
     }
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     if (_toneUnit) {
-        OSErr err = AudioOutputUnitStop(_toneUnit);
+        __unused OSErr err = AudioOutputUnitStop(_toneUnit);
         NSAssert1(err == noErr, @"Error stopping unit: %hd", err);
     }
 }

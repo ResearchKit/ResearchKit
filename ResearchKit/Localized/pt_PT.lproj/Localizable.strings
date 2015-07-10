@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Data";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Passo %1$lu de %2$lu";
+"STEP_PROGRESS_FORMAT" = "Passo %1$@ de %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valor inválido";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Esta actividade avalia o seu tempo de resposta a uma pista visual.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite o dispositivo em qualquer direcção assim que o ponto azul aparecer no ecrã. Ser-lhe-á pedido para fazer isto %D vezes.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativa %D de %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativa %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agite rapidamente o dispositivo quando o círculo azul aparecer";
 
 /* Potentially user visible error messages. */

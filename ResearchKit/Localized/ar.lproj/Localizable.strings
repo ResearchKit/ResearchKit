@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "التاريخ";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "الخطوة %1$lu من %2$lu";
+"STEP_PROGRESS_FORMAT" = "الخطوة %1$@ من %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "القيمة غير صالحة";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "يعمل هذا النشاط على تقييم الوقت الذي تستغرقه في الاستجابة للتلميح البصري.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "قم بهز الجهاز في أي اتجاه فور ظهور النقطة الزرقاء على الشاشة. سيُطلب منك فعل ذلك %D من المرات.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "المحاولة %D من %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "المحاولة %@ من %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "قم بهز الجهاز سريعًا عندما تظهر الدائرة الزرقاء";
 
 /* Potentially user visible error messages. */

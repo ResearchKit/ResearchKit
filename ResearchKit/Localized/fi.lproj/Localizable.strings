@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Päivämäärä";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Vaihe %1$lu / %2$lu";
+"STEP_PROGRESS_FORMAT" = "Vaihe %1$@ / %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Virheellinen arvo";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Tämä aktiviteetti mittaa aikaa, joka sinulta kuluu vastata visuaaliseen tapahtumaan.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ravista laitetta mihin tahansa suuntaan heti, kun sininen piste tulee näkyviin. Sinua pyydetään tekemään tämä %D kertaa.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Aloita napauttamalla Aloita.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Yritys %D / %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Yritys %@ / %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kun sininen ympyrä tulee näkyviin, ravista nopeasti laitetta";
 
 /* Potentially user visible error messages. */

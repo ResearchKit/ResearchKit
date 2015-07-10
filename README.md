@@ -110,7 +110,7 @@ target as shown in the figure below.
 </figure>
 </center>
 
-Note: You can also import ResearchKit into your project using a [dependency manager](./dependency_management.md) such as CocoaPods or Carthage.
+Note: You can also import ResearchKit into your project using a [dependency manager](./docs-standalone/dependency-management.md) such as CocoaPods or Carthage.
 
 ###2. Create a Step
 

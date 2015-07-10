@@ -75,7 +75,7 @@
 "CONSENT_DOC_LINE_DATE" = "Datum";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Stap %1$lu van %2$lu";
+"STEP_PROGRESS_FORMAT" = "Stap %1$@ van %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Ongeldige waarde";
@@ -213,7 +213,7 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe snel u op een visuele aanwijzing reageert.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Schud het apparaat in een willekeurige richting zodra de blauwe stip op het scherm verschijnt. U wordt gevraagd om dit %D keer te doen.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %D van %D";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %@ van %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schud het apparaat snel heen en weer als de blauwe cirkel verschijnt";
 
 /* Potentially user visible error messages. */
