@@ -519,8 +519,7 @@ static const CGFloat kHMargin = 15.0;
     
     NSInteger maxLength = answerFormat.maximumLength;
     
-    if(maxLength > 0 && [text length] > maxLength)
-    {
+    if (maxLength > 0 && [text length] > maxLength) {
         [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
         return NO;
     }
