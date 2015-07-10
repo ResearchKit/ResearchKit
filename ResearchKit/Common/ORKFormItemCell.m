@@ -423,8 +423,7 @@ static const CGFloat kHMargin = 15.0;
     
     NSInteger maxLength = answerFormat.maximumLength;
     
-    if(maxLength > 0 && [text length] > maxLength)
-    {
+    if (maxLength > 0 && [text length] > maxLength) {
         [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
         return NO;
     }
@@ -488,22 +487,11 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
-- (BOOL)isAnswerValid {
-    NSString *text = self.textField.text;
-    BOOL isValid = YES;
-    if ([text length]) {
-        isValid = [[self.formItem impliedAnswerFormat] isAnswerValidWithString:text];
-    }
-    return isValid;
-}
-
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    NSString *text = textField.text;
-    BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
-        [self showValidityAlertWithMessage:text];
+    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:textField.text];
     }
     return YES;
 }
@@ -514,9 +502,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValid];
     
-    if (! isValid) {
+    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
@@ -604,22 +591,11 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
-- (BOOL)isAnswerValid {
-    NSString *text = self.textField.text;
-    BOOL isValid = YES;
-    if ([text length]) {
-        isValid = [[self.formItem impliedAnswerFormat] isAnswerValidWithString:text];
-    }
-    return isValid;
-}
-
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    NSString *text = textField.text;
-    BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
+    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
 }
@@ -629,10 +605,9 @@ static const CGFloat kHMargin = 15.0;
     
     [self inputValueDidChange];
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (! isValid) {
+    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }

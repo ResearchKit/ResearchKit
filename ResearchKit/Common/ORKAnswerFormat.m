@@ -1644,28 +1644,32 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    return ([self isTextAnswerValidWithString:text] && [self isEmailAddressValidWithString:text]);
+    if ([text length] > 0) {
+        return ([self isTextLengthValidWithString:text] && [self isEmailAddressValidWithString:text]);
+    }
+    
+    return YES;
 }
 
-- (BOOL)isTextAnswerValidWithString:(NSString *)text {
+- (BOOL)isTextLengthValidWithString:(NSString *)text {
     return (_maximumLength == 0 || [text length] <= _maximumLength);
 }
 
 - (BOOL)isEmailAddressValidWithString:(NSString *)text {
-    if (self.isEmailAddress){
+    if (self.isEmailAddress) {
         NSString *emailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
         NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailValidationRegex];
         return [emailValidationTest evaluateWithObject:text];
-    } else {
-        return YES;
     }
+    
+    return YES;
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
-    if (_maximumLength != 0 && [text length] > _maximumLength) {
+    if (! [self isTextLengthValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), [@(_maximumLength) stringValue]];
-    } else if (self.emailAddress) {
+    } else if (! [self isEmailAddressValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
     return string;

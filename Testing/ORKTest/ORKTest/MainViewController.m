@@ -1256,7 +1256,6 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             [items addObject:item];
         }
         
-        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_004a" text:@"BP Diastolic"
                                                          answerFormat:[ORKAnswerFormat integerAnswerFormatWithUnit:@"mm Hg"]];
