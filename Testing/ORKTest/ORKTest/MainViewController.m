@@ -56,6 +56,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
@@ -142,6 +143,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Reaction Time Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showTowerOfHanoiTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Tower Of Hanoi Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"tower"];
         buttons[buttonKeys.lastObject] = button;
     }
 
@@ -411,7 +420,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                              timeoutSound:0
                                                              failureSound:0
                                                                   options:0];
-    } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
+    }
+    else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
+        return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
+                                       intendedUseDescription:nil
+                                                numberOfDisks:5
+                                                      options:0];
+    }
+    else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
     return nil;
@@ -1426,6 +1442,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 - (IBAction)showReactionTimeTask:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
+}
+
+- (IBAction)showTowerOfHanoiTask:(id)sender {
+    [self beginTaskWithIdentifier:TowerOfHanoiTaskIdentifier];
 }
 
 #pragma mark Dynamic task

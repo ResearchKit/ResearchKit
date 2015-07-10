@@ -31,6 +31,7 @@
 
 #import "ORKTowerOfHanoiTowerView.h"
 #import "ORKActiveStepView.h"
+#import "ORKSkin.h"
 
 @implementation ORKTowerOfHanoiTowerView {
     NSInteger _maximumNumberOfDisks;
@@ -51,12 +52,12 @@
         _diskHeight = 10;
         _diskSpacing = 8;
         _base = [[UIView alloc]initWithFrame:CGRectZero];
-        _base.backgroundColor = [[UIColor alloc]initWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
+        _base.backgroundColor = [UIColor ork_midGrayTintColor];
         [_base setTranslatesAutoresizingMaskIntoConstraints:NO];
         _base.layer.cornerRadius = 2.5;
         _base.layer.masksToBounds = YES;
         [self addSubview:_base];
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userDidTapTower)]];
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userDidTapTower)]];
     }
     return self;
 }
@@ -127,7 +128,8 @@
     for (NSInteger index = 0 ; index < numberOfDisks ; index++) {
         [diskSizes addObject:@([self.dataSource towerOfHanoiView:self sizeForDiskAtIndex:index])];
         UIView *v = [[UIView alloc]initWithFrame:CGRectZero];
-        v.backgroundColor = [[UIColor alloc]initWithRed:244/255.0 green:190/255.0 blue:74/255.0 alpha:1];
+        v.backgroundColor = [self tintColor];
+        v.alpha = 0.2;
         v.translatesAutoresizingMaskIntoConstraints = NO;
         v.layer.cornerRadius = _diskHeight * 0.5;
         v.clipsToBounds = YES;
@@ -146,13 +148,13 @@
 
 - (void)highlightIfNeeded {
     if (self.highlighted) {
-        ((UIView *)_diskViews.lastObject).backgroundColor = [UIColor redColor];
+        ((UIView *)_diskViews.lastObject).alpha = 1.0;
     }
 }
 
 - (void)indicateTargetIfNeeded {
     if (self.targetTower) {
-        _base.backgroundColor = [[UIColor alloc]initWithRed:244/255.0 green:190/255.0 blue:74/255.0 alpha:1];
+        _base.backgroundColor = [self tintColor];
     }
 }
 
