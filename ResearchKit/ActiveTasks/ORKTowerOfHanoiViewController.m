@@ -143,14 +143,11 @@
 }
 
 - (NSString *)timeElapsedString {
-    NSString *seconds = [NSString stringWithFormat:@"%02d", (int)_secondsElapsed % 60];
-    NSString *minutes = [NSString stringWithFormat:@"%02d", (int)(_secondsElapsed / 60) % 60];
-    NSString *hours = [NSString stringWithFormat:@"%02d",(int)_secondsElapsed / 3600];
-    NSString *time = [NSString stringWithFormat:@"%@:%@", minutes,seconds];
-    if (![hours isEqualToString: @"00"]) {
-        time = [NSString stringWithFormat:@"%@:%@",hours,time];
-    }
-    return time;
+    NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    formatter.allowedUnits =  NSCalendarUnitMinute | NSCalendarUnitSecond;
+    return [formatter stringFromTimeInterval: _secondsElapsed];
 }
 
 - (void)reloadData {
