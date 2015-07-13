@@ -140,6 +140,10 @@
     [super viewWillAppear:animated];
     ORK_Log_Debug(@"%@", self);
     
+    // Required here (instead of viewDidLoad) because any custom buttons are set once the delegate responds to the stepViewControllerWillAppear,
+    // otherwise there is a minor visual glitch, where the original buttons are displayed on the UI for a short period. This is not placed after
+    // the delegate responds to the stepViewControllerWillAppear, so that the target from the button's item can be used, if the intention is to
+    // only modify the title of the button.
     [self setupButtons];
     
     if ([self.delegate respondsToSelector:@selector(stepViewControllerWillAppear:)]) {
