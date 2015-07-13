@@ -1717,7 +1717,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
-             self.multipleLines == castObject.multipleLines));
+             self.multipleLines == castObject.multipleLines &&
+             self.isEmailAddress == castObject.isEmailAddress));
 }
 
 @end
