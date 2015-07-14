@@ -66,13 +66,23 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) UIEdgeInsets templateImageInsets;
 
 /**
- Accessibility hint of the preview.
+ Accessibility hint of the capture preview.
+ 
+ This property can be used to specify accessible instructions for capturing the image.  The
+ use of this property can assist in situations where the `templateImage` may not be visible
+ to the user.
+ 
+ For example, if you wish to capture an image of the user's right hand, you may use a template
+ image that displays the outline of the right hand.  You may also wish to set this property
+ to a string such as @"Extend your right hand, palm side down, one foot from your device.
+ Tap the Capture Image button, or two finger tap on the preview, to capture an image of your
+ extended right hand."
  */
-@property (nonatomic, strong) NSString *accessibilityInstructions;
+@property (nonatomic, copy) NSString *accessibilityInstructions;
 
 /**
  Accessibility hint of the capture button.
  */
-@property (nonatomic, strong) NSString *accessibilityHint;
+@property (nonatomic, copy) NSString *accessibilityHint;
 
 @end
