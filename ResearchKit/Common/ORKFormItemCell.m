@@ -420,7 +420,8 @@ static const CGFloat kHMargin = 15.0;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+
     NSInteger maxLength = answerFormat.maximumLength;
     
     if (maxLength > 0 && [text length] > maxLength) {
@@ -516,6 +517,7 @@ static const CGFloat kHMargin = 15.0;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
     
     NSInteger maxLength = answerFormat.maximumLength;
     
@@ -792,7 +794,6 @@ static const CGFloat kHMargin = 15.0;
     [self.delegate formItemCellDidBecomeFirstResponder:self];
 }
 
-
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length == 0) {
         textView.text = self.formItem.placeholder;
@@ -803,9 +804,9 @@ static const CGFloat kHMargin = 15.0;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    
-    if(_maxLength > 0 && [string length] > _maxLength)
-    {
+    string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+
+    if(_maxLength > 0 && [string length] > _maxLength) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
         return NO;
     }

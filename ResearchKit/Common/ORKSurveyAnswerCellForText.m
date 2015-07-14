@@ -160,11 +160,11 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
+
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
-    if(_maxLength > 0 && [string length] > _maxLength)
-    {
+    if(_maxLength > 0 && [string length] > _maxLength) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
         return NO;
     }
@@ -243,7 +243,7 @@
 
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (answerFormat.isEmailAddress && ![answerFormat isAnswerValidWithString:self.textField.text]) {
+    if (! [answerFormat isAnswerValidWithString:self.textField.text]) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
         return NO;
     }
@@ -273,11 +273,11 @@
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
     
     NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
     
-    if(maxLength > 0 && [text length] > maxLength)
-    {
+    if(maxLength > 0 && [text length] > maxLength) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
         return NO;
     }
