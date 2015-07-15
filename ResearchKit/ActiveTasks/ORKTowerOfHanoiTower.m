@@ -46,7 +46,7 @@
 - (instancetype)initWithDisks:(NSArray *)disks {
     self = [super init];
     if (self) {
-        _disks = [disks mutableCopy];
+        _disks = disks;
     }
     return self;
 }
