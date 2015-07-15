@@ -36,8 +36,8 @@
 @protocol ORKTowerOfHanoiTowerViewDataSource <NSObject>
 
 @required
-- (NSInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView;
-- (NSInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSInteger)index;
+- (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView;
+- (NSUInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSUInteger)index;
 
 @end
 
@@ -56,7 +56,7 @@
 @property (nonatomic, weak) id <ORKTowerOfHanoiTowerViewDataSource> dataSource;
 @property (nonatomic, weak) id <ORKTowerOfHanoiTowerViewDelegate> delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame maximumNumberOfDisks:(NSInteger)maximumNumberOfDisks;
+- (instancetype)initWithFrame:(CGRect)frame maximumNumberOfDisks:(NSUInteger)maximumNumberOfDisks;
 
 - (void)reloadData;
 

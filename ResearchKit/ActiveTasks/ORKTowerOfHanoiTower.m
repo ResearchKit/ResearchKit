@@ -31,22 +31,37 @@
 
 #import "ORKTowerOfHanoiTower.h"
 
+@interface ORKTowerOfHanoiTower ()
+
+@property(nonatomic, strong, readwrite) NSArray *disks;
+
+@end
+
 @implementation ORKTowerOfHanoiTower
 
-+ (instancetype)empty {
++ (instancetype)emptyTower {
     return [[ORKTowerOfHanoiTower alloc]initWithDisks:@[]];
 }
 
 - (instancetype)initWithDisks:(NSArray *)disks {
     self = [super init];
     if (self) {
-        _disks = disks;
+        _disks = [disks mutableCopy];
     }
     return self;
 }
 
 - (BOOL)canRecieveDisk:(NSNumber *)disk {
     return _disks.count == 0 || [_disks.lastObject integerValue] > disk.integerValue;
+}
+
+- (void)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
+    NSMutableArray *recipientDisks = [self.disks mutableCopy];
+    NSMutableArray *donorDisks = [donorTower.disks mutableCopy];
+    [recipientDisks addObject:donorTower.disks.lastObject];
+    [donorDisks removeLastObject];
+    self.disks = recipientDisks;
+    donorTower.disks = donorDisks;
 }
 
 @end

@@ -31,6 +31,9 @@
 
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKTowerOfHanoiViewController.h"
+#import "ORKHelpers.h"
+
+static const NSUInteger maximumNumberOfDisks = 8;
 
 @implementation ORKTowerOfHanoiStep
 
@@ -53,6 +56,13 @@
         self.optional = YES;
     }
     return self;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    if (self.numberOfDisks > maximumNumberOfDisks) {
+        ORK_Log_Oops(@"Having a large number of disks provides a poor user experience, consider reducing the number below %d.", (int)maximumNumberOfDisks);
+    }
 }
 
 - (BOOL)allowsBackNavigation {

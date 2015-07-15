@@ -35,9 +35,11 @@
 
 @property(nonatomic, strong, readonly) NSArray *disks;
 
-+ (instancetype)empty;
++ (instancetype)emptyTower;
 
 - (instancetype)initWithDisks:(NSArray *)disks;
+
+- (void)recieveDiskFrom:(ORKTowerOfHanoiTower *)donorTower;
 
 - (BOOL)canRecieveDisk:(NSNumber *)disk;
 

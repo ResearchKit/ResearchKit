@@ -37,7 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTowerOfHanoiStep : ORKActiveStep
 
-@property (nonatomic, assign) NSInteger numberOfDisks;
+/**
+ The number of disks in the puzzle.
+ It is not recommended that you use a large number of disks. As this provides a poor user experience.
+ The default value of this property is 3.
+ */
+@property (nonatomic, assign) NSUInteger numberOfDisks;
 
 @end
 

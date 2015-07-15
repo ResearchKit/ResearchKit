@@ -106,13 +106,13 @@
 
 #pragma Mark -- ORKTowerOfHanoiTowerViewDataSource
  
-- (NSInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView {
+- (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView {
      NSInteger towerIndex = [_towerViews indexOfObject:towerView];
      ORKTowerOfHanoiTower *tower = _towers[towerIndex];
      return tower.disks.count;
 }
  
-- (NSInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSInteger)index {
+- (NSUInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSUInteger)index {
      NSInteger towerIndex = [_towerViews indexOfObject:towerView];
      ORKTowerOfHanoiTower *tower = _towers[towerIndex];
      return [tower.disks[index]integerValue];
@@ -172,7 +172,7 @@
     for (NSInteger disk = _numberOfDisks ; disk > 0 ; disk--) {
         [diskStack addObject: @(disk)];
     }
-    _towers = [@[[[ORKTowerOfHanoiTower alloc]initWithDisks:diskStack], [ORKTowerOfHanoiTower empty], [ORKTowerOfHanoiTower empty]] mutableCopy];
+    _towers = [@[[[ORKTowerOfHanoiTower alloc] initWithDisks:diskStack], [ORKTowerOfHanoiTower emptyTower], [ORKTowerOfHanoiTower emptyTower]] mutableCopy];
 }
 
 - (void)setupTowerViews {
@@ -193,12 +193,7 @@
     ORKTowerOfHanoiTower *donorTower = _towers[donorTowerIndex];
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
     if (donorTower.disks.count > 0 && [recipientTower canRecieveDisk:(NSNumber *)donorTower.disks.lastObject]) {
-        NSMutableArray *recipientDisks = [recipientTower.disks mutableCopy];
-        NSMutableArray *donorDisks = [donorTower.disks mutableCopy];
-        [recipientDisks addObject:donorDisks.lastObject];
-        [donorDisks removeLastObject];
-        _towers[recipientTowerIndex] = [[ORKTowerOfHanoiTower alloc]initWithDisks:recipientDisks];
-        _towers[donorTowerIndex] = [[ORKTowerOfHanoiTower alloc]initWithDisks:donorDisks];
+        [recipientTower recieveDiskFrom:donorTower];
         [self didTransferDisk];
     }
 }

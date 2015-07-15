@@ -33,10 +33,11 @@
 #import "ORKActiveStepView.h"
 #import "ORKSkin.h"
 
+static const CGFloat diskHeight = 10;
+static const CGFloat diskSpacing = 8;
+
 @implementation ORKTowerOfHanoiTowerView {
     NSInteger _maximumNumberOfDisks;
-    CGFloat _diskHeight;
-    CGFloat _diskSpacing;
     UIView *_base;
     NSMutableArray *_diskViews;
     NSMutableArray *_diskSizes;
@@ -45,12 +46,10 @@
 
 #pragma Mark -- Init
 
-- (instancetype)initWithFrame:(CGRect)frame maximumNumberOfDisks:(NSInteger)maximumNumberOfDisks {
+- (instancetype)initWithFrame:(CGRect)frame maximumNumberOfDisks:(NSUInteger)maximumNumberOfDisks {
     self = [super initWithFrame:frame];
     if (self) {
         _maximumNumberOfDisks = maximumNumberOfDisks;
-        _diskHeight = 10;
-        _diskSpacing = 8;
         _base = [[UIView alloc]initWithFrame:CGRectZero];
         _base.backgroundColor = [UIColor ork_midGrayTintColor];
         [_base setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -69,7 +68,7 @@
         [NSLayoutConstraint deactivateConstraints:_currentConstraints];
     }
     NSMutableArray *newConstraints = [NSMutableArray new];
-    CGFloat height = (_diskHeight * _maximumNumberOfDisks) + (_diskSpacing * _maximumNumberOfDisks);
+    CGFloat height = (diskHeight * _maximumNumberOfDisks) + (diskSpacing * _maximumNumberOfDisks);
     
     [newConstraints addObject:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height + 10]];
     
@@ -87,7 +86,7 @@
             [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:height * 0.5]];
         }
         else {
-            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:topDisk attribute:NSLayoutAttributeTop multiplier:1 constant:-_diskSpacing]];
+            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:topDisk attribute:NSLayoutAttributeTop multiplier:1 constant:-diskSpacing]];
         }
         
         [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -95,7 +94,7 @@
         CGFloat divide = 1.0 / _maximumNumberOfDisks;
         CGFloat multiply = [(NSNumber *)_diskSizes[idx] floatValue] * divide;
         [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_base attribute:NSLayoutAttributeWidth multiplier:multiply constant:0]];
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:_diskHeight]];
+        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:diskHeight]];
         
         topDisk = disk;
     }
@@ -131,7 +130,7 @@
         v.backgroundColor = [self tintColor];
         v.alpha = 0.2;
         v.translatesAutoresizingMaskIntoConstraints = NO;
-        v.layer.cornerRadius = _diskHeight * 0.5;
+        v.layer.cornerRadius = diskHeight * 0.5;
         v.clipsToBounds = YES;
         [self addSubview:v];
         [diskViews addObject:v];
