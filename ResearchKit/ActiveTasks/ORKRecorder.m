@@ -178,7 +178,7 @@
 }
 
 - (NSString *)logName {
-    return [NSString stringWithFormat:@"%@_%@_%@", [self recorderType], self.identifier, self.step.identifier];
+    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID];
 }
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
