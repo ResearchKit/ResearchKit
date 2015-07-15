@@ -33,7 +33,7 @@
 
 @interface ORKTowerOfHanoiTower ()
 
-@property(nonatomic, strong, readwrite) NSArray *disks;
+@property(nonatomic, copy, readwrite) NSArray *disks;
 
 @end
 
@@ -55,13 +55,17 @@
     return _disks.count == 0 || [_disks.lastObject integerValue] > disk.integerValue;
 }
 
-- (void)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
+- (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
+    if (![self canRecieveDisk:donorTower.disks.lastObject]) {
+        return NO;
+    }
     NSMutableArray *recipientDisks = [self.disks mutableCopy];
     NSMutableArray *donorDisks = [donorTower.disks mutableCopy];
     [recipientDisks addObject:donorTower.disks.lastObject];
     [donorDisks removeLastObject];
     self.disks = recipientDisks;
     donorTower.disks = donorDisks;
+    return YES;
 }
 
 @end

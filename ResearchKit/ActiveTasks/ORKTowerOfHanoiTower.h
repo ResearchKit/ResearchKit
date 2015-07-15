@@ -33,14 +33,12 @@
 
 @interface ORKTowerOfHanoiTower : NSObject
 
-@property(nonatomic, strong, readonly) NSArray *disks;
+@property(nonatomic, copy, readonly) NSArray *disks;
 
 + (instancetype)emptyTower;
 
 - (instancetype)initWithDisks:(NSArray *)disks;
 
-- (void)recieveDiskFrom:(ORKTowerOfHanoiTower *)donorTower;
-
-- (BOOL)canRecieveDisk:(NSNumber *)disk;
+- (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower *)donorTower;
 
 @end

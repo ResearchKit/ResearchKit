@@ -192,8 +192,7 @@
 - (void)transferDiskFromTowerAtIndex:(NSInteger)donorTowerIndex toTowerAtIndex:(NSInteger)recipientTowerIndex {
     ORKTowerOfHanoiTower *donorTower = _towers[donorTowerIndex];
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
-    if (donorTower.disks.count > 0 && [recipientTower canRecieveDisk:(NSNumber *)donorTower.disks.lastObject]) {
-        [recipientTower recieveDiskFrom:donorTower];
+    if (donorTower.disks.count > 0 && [recipientTower recieveDiskFrom:donorTower]) {
         [self didTransferDisk];
     }
 }
