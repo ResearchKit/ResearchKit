@@ -894,6 +894,13 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKTowerOfHanoiStep *towerOfHanoiStep = [[ORKTowerOfHanoiStep alloc]initWithIdentifier:ORKTowerOfHanoiStepIdentifier];
     towerOfHanoiStep.numberOfDisks = numberOfDisks;
     [steps addObject:towerOfHanoiStep];
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc]initWithIdentifier:identifier steps:steps];
     
     return task;
