@@ -300,13 +300,14 @@ ORK_CLASS_AVAILABLE
  This method restores the presentation of the task to the point at which the user stopped.
  If the restoration data is not valid, an exception may be thrown.
  
- @param task    The task to be presented.
- @param data    Data obtained from the `restorationData` property of a previous
-    task view controller instance.
+ @param task        The task to be presented.
+ @param data        Data obtained from the `restorationData` property of a previous
+                    task view controller instance.
+ @param delegate    The deleagte for the task view controller.
  
  @return A new task view controller.
  */
-- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(NSData *)data;
+- (instancetype)initWithTask:(nullable id<ORKTask>)task restorationData:(NSData *)data delegate:(id<ORKTaskViewControllerDelegate>)delegate;
 
 /**
  The delegate for the task view controller.
