@@ -128,7 +128,6 @@ static const CGFloat diskSpacing = 8;
         [diskSizes addObject:@([self.dataSource towerOfHanoiView:self sizeForDiskAtIndex:index])];
         UIView *v = [[UIView alloc]initWithFrame:CGRectZero];
         v.backgroundColor = [self tintColor];
-        v.alpha = 0.2;
         v.translatesAutoresizingMaskIntoConstraints = NO;
         v.layer.cornerRadius = diskHeight * 0.5;
         v.clipsToBounds = YES;
@@ -147,7 +146,7 @@ static const CGFloat diskSpacing = 8;
 
 - (void)highlightIfNeeded {
     if (self.highlighted) {
-        ((UIView *)_diskViews.lastObject).alpha = 1.0;
+        ((UIView *)_diskViews.lastObject).alpha = 0.2;
     }
 }
 
