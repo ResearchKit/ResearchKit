@@ -684,21 +684,23 @@ static const CGFloat kHMargin = 15.0;
     [self.contentView addSubview:_textView];
     
     {
-        NSDictionary *dictionary = @{@"textView":_textView};
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
+        NSDictionary *views = @{ @"textView": _textView };
+        ORKEnableAutoLayoutForViews([views allValues]);
+        NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
 
-        [self.contentView addConstraints:
+        NSMutableArray *constraints = [NSMutableArray new];
+        
+        [constraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                  metrics:metrics
-                                                   views:dictionary]];
+                                                   views:views]];
         
-        [self.contentView addConstraints:
+        [constraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                  metrics:metrics
-                                                   views:dictionary]];
+                                                   views:views]];
         
         
         NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
@@ -709,7 +711,9 @@ static const CGFloat kHMargin = 15.0;
                                                                            multiplier:1.0
                                                                              constant:120.0];
         heightConstraint.priority = UILayoutPriorityDefaultHigh;
-        [self.contentView addConstraint:heightConstraint];
+        [constraints addObject:heightConstraint];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
     }
 }
 
@@ -846,11 +850,24 @@ static const CGFloat kHMargin = 15.0;
     
     [self.contentView addSubview:_selectionView];
     
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_selectionView);
-    
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    {
+        NSMutableArray *constraints = [NSMutableArray new];
+        
+        NSDictionary *views = @{@"selectionView": _selectionView };
+        ORKEnableAutoLayoutForViews([views allValues]);
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[selectionView]-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
     
     [super cellInit];
 }
@@ -894,18 +911,25 @@ static const CGFloat kHMargin = 15.0;
     
     [self.contentView addSubview:_sliderView];
     
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_sliderView);
-    
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:dictionary]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:dictionary]];
-    
+    {
+        NSMutableArray *constraints = [NSMutableArray new];
+        
+        NSDictionary *views = @{ @"sliderView": _sliderView };
+        ORKEnableAutoLayoutForViews([views allValues]);
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
+
     [super cellInit];
 }
 
