@@ -33,8 +33,8 @@
 #import "ORKActiveStepView.h"
 #import "ORKSkin.h"
 
-static const CGFloat diskHeight = 10;
-static const CGFloat diskSpacing = 8;
+static const CGFloat kDiskHeight = 10;
+static const CGFloat kDiskSpacing = 8;
 
 @implementation ORKTowerOfHanoiTowerView {
     NSInteger _maximumNumberOfDisks;
@@ -50,7 +50,7 @@ static const CGFloat diskSpacing = 8;
     self = [super initWithFrame:frame];
     if (self) {
         _maximumNumberOfDisks = maximumNumberOfDisks;
-        _base = [[UIView alloc]initWithFrame:CGRectZero];
+        _base = [[UIView alloc] initWithFrame:CGRectZero];
         _base.backgroundColor = [UIColor ork_midGrayTintColor];
         [_base setTranslatesAutoresizingMaskIntoConstraints:NO];
         _base.layer.cornerRadius = 2.5;
@@ -68,7 +68,7 @@ static const CGFloat diskSpacing = 8;
         [NSLayoutConstraint deactivateConstraints:_currentConstraints];
     }
     NSMutableArray *newConstraints = [NSMutableArray new];
-    CGFloat height = (diskHeight * _maximumNumberOfDisks) + (diskSpacing * _maximumNumberOfDisks);
+    CGFloat height = (kDiskHeight * _maximumNumberOfDisks) + (kDiskSpacing * _maximumNumberOfDisks);
     
     [newConstraints addObject:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height + 10]];
     
@@ -86,7 +86,7 @@ static const CGFloat diskSpacing = 8;
             [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:height * 0.5]];
         }
         else {
-            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:topDisk attribute:NSLayoutAttributeTop multiplier:1 constant:-diskSpacing]];
+            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:topDisk attribute:NSLayoutAttributeTop multiplier:1 constant:-kDiskSpacing]];
         }
         
         [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
@@ -94,7 +94,7 @@ static const CGFloat diskSpacing = 8;
         CGFloat divide = 1.0 / _maximumNumberOfDisks;
         CGFloat multiply = [(NSNumber *)_diskSizes[idx] floatValue] * divide;
         [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_base attribute:NSLayoutAttributeWidth multiplier:multiply constant:0]];
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:diskHeight]];
+        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:kDiskHeight]];
         
         topDisk = disk;
     }
@@ -107,7 +107,7 @@ static const CGFloat diskSpacing = 8;
 #pragma Mark -- Public
 
 - (void)reloadData {
-    [self removeDisks];
+    [_diskViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self addDisks];
     [self highlightIfNeeded];
     [self indicateTargetIfNeeded];
@@ -125,11 +125,11 @@ static const CGFloat diskSpacing = 8;
     NSMutableArray *diskViews = [NSMutableArray new];
     NSMutableArray *diskSizes = [NSMutableArray new];
     for (NSInteger index = 0 ; index < numberOfDisks ; index++) {
-        [diskSizes addObject:@([self.dataSource towerOfHanoiView:self sizeForDiskAtIndex:index])];
-        UIView *v = [[UIView alloc]initWithFrame:CGRectZero];
+        [diskSizes addObject:[self.dataSource towerOfHanoiView:self diskAtIndex:index]];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
         v.backgroundColor = [self tintColor];
         v.translatesAutoresizingMaskIntoConstraints = NO;
-        v.layer.cornerRadius = diskHeight * 0.5;
+        v.layer.cornerRadius = kDiskHeight * 0.5;
         v.clipsToBounds = YES;
         [self addSubview:v];
         [diskViews addObject:v];
@@ -138,20 +138,14 @@ static const CGFloat diskSpacing = 8;
     _diskViews = diskViews;
 }
 
-- (void)removeDisks {
-    for (UIView *disk in _diskViews) {
-        [disk removeFromSuperview];
-    }
-}
-
 - (void)highlightIfNeeded {
-    if (self.highlighted) {
+    if (self.isHighLighted) {
         ((UIView *)_diskViews.lastObject).alpha = 0.2;
     }
 }
 
 - (void)indicateTargetIfNeeded {
-    if (self.targetTower) {
+    if (self.isTargeted) {
         _base.backgroundColor = [self tintColor];
     }
 }

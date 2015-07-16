@@ -32,8 +32,8 @@
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */; };
 		250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */; };
-		250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.h */; };
-		250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.m */; };
+		250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */; };
+		250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m */; };
 		257FCE1F1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 257FCE1D1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.h */; };
 		257FCE201B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FCE1E1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m */; };
 		257FCE231B4D37A80001EF06 /* ORKTowerOfHanoiTower.h in Headers */ = {isa = PBXBuildFile; fileRef = 257FCE211B4D37A80001EF06 /* ORKTowerOfHanoiTower.h */; };
@@ -430,8 +430,8 @@
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
 		250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiStep.h; sourceTree = "<group>"; };
 		250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTowerOfHanoiStep.m; sourceTree = "<group>"; };
-		250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiViewController.h; sourceTree = "<group>"; };
-		250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTowerOfHanoiViewController.m; sourceTree = "<group>"; };
+		250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiStepViewController.h; sourceTree = "<group>"; };
+		250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTowerOfHanoiStepViewController.m; sourceTree = "<group>"; };
 		257FCE1D1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiTowerView.h; sourceTree = "<group>"; };
 		257FCE1E1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTowerOfHanoiTowerView.m; sourceTree = "<group>"; };
 		257FCE211B4D37A80001EF06 /* ORKTowerOfHanoiTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiTower.h; sourceTree = "<group>"; };
@@ -904,8 +904,8 @@
 			children = (
 				250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */,
 				250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */,
-				250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.h */,
-				250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.m */,
+				250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */,
+				250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m */,
 				257FCE1D1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.h */,
 				257FCE1E1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m */,
 				257FCE211B4D37A80001EF06 /* ORKTowerOfHanoiTower.h */,
@@ -1871,7 +1871,7 @@
 				86C40D921A8D7C5C00081FAC /* ORKStep_Private.h in Headers */,
 				86C40CC41A8D7C5C00081FAC /* ORKCompletionStepViewController.h in Headers */,
 				86C40D7C1A8D7C5C00081FAC /* ORKScaleValueLabel.h in Headers */,
-				250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.h in Headers */,
+				250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h in Headers */,
 				86C40E2C1A8D7C5C00081FAC /* ORKVisualConsentStep.h in Headers */,
 				257FCE1F1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.h in Headers */,
 				86C40CB81A8D7C5C00081FAC /* ORKVoiceEngine.h in Headers */,
@@ -2232,7 +2232,7 @@
 				250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */,
 				86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */,
 				86C40D1E1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.m in Sources */,
-				250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiViewController.m in Sources */,
+				250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,

@@ -173,18 +173,19 @@
 
 @end
 
+
 @implementation ORKTowerOfHanoiResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_INTEGER(aCoder, numberOfMoves);
+    ORK_ENCODE_OBJ(aCoder, moves);
     ORK_ENCODE_BOOL(aCoder, puzzleWasSolved);
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_INTEGER(aDecoder, numberOfMoves);
+        ORK_DECODE_OBJ(aDecoder, moves);
         ORK_DECODE_BOOL(aDecoder, puzzleWasSolved);
     }
     return self;
@@ -196,27 +197,79 @@
 
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
-    
     __typeof(self) castObject = object;
-    return isParentSame && self.numberOfMoves == castObject.numberOfMoves && self.puzzleWasSolved == castObject.puzzleWasSolved;
+    return isParentSame &&
+    self.puzzleWasSolved == castObject.puzzleWasSolved &&
+    ORKEqualObjects(self.moves, castObject.moves);
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ self.numberOfMoves ^ self.puzzleWasSolved;
+    return [super hash] ^ self.puzzleWasSolved ^ self.moves.hash;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTowerOfHanoiResult *result = [super copyWithZone:zone];
-    result.numberOfMoves = self.numberOfMoves;
     result.puzzleWasSolved = self.puzzleWasSolved;
+    result.moves = [self.moves copy];
     return result;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %d, %d", [super description], (int)self.numberOfMoves, self.puzzleWasSolved];
+    return [NSString stringWithFormat:@"%@, %d, %@", [super description], self.puzzleWasSolved, self.moves];
 }
 
 @end
+
+
+@implementation ORKTowerOfHanoiMove
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_DOUBLE(aCoder, timestamp);
+    ORK_ENCODE_INTEGER(aCoder, donorTowerIndex);
+    ORK_ENCODE_INTEGER(aCoder, recipientTowerIndex);
+    
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, timestamp);
+        ORK_DECODE_INTEGER(aDecoder, donorTowerIndex);
+        ORK_DECODE_INTEGER(aDecoder, recipientTowerIndex);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return self.timestamp == castObject.timestamp &&
+            self.donorTowerIndex == castObject.donorTowerIndex &&
+            self.recipientTowerIndex == castObject.recipientTowerIndex;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTowerOfHanoiMove *move = [[[self class] allocWithZone:zone] init];
+    move.timestamp = self.timestamp;
+    move.donorTowerIndex = self.donorTowerIndex;
+    move.recipientTowerIndex = self.recipientTowerIndex;
+    return move;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
+}
+
+@end
+
 
 @implementation ORKToneAudiometryResult
 

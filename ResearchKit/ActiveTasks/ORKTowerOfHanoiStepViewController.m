@@ -29,14 +29,19 @@
  */
 
 
-#import "ORKTowerOfHanoiViewController.h"
+#import "ORKTowerOfHanoiStepViewController.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKTowerOfHanoiTowerView.h"
 #import "ORKActiveStepView.h"
 #import "ORKTowerOfHanoiTower.h"
 #import "ORKTowerOfHanoiStep.h"
 
+const NSInteger kNumberOfTowers = 3;
+
 @interface ORKTowerOfHanoiViewController () <ORKTowerOfHanoiTowerViewDataSource, ORKTowerOfHanoiTowerViewDelegate>
+
+@property (nonatomic, strong) NSDateComponentsFormatter *dateComponentsFormatter;
+@property (nonatomic, strong) NSMutableArray *moves;
 
 @end
 
@@ -46,8 +51,6 @@
     NSArray *_currentConstraints;
     NSMutableArray *_towers;
     NSArray *_towerViews;
-    NSInteger _numberOfDisks;
-    NSInteger _numberOfMoves;
     NSTimer *_timer;
     NSInteger _secondsElapsed;
     NSDate *_firstMoveDate;
@@ -60,12 +63,11 @@
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     [_towerOfHanoiCustomView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
-    _numberOfDisks = ((ORKTowerOfHanoiStep *)self.step).numberOfDisks;
     
     [self setupTowers];
     [self setupTowerViews];
     [self reloadData];
-    [self.activeStepView updateTitle:nil text: ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT", nil)];
+    [self.activeStepView updateTitle:nil text:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT", nil)];
     [self setSkipButtonTitle:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE", nil)];
 }
 
@@ -96,7 +98,7 @@
 
 - (ORKResult *)result {
     ORKTowerOfHanoiResult *result = [[ORKTowerOfHanoiResult alloc] initWithIdentifier:self.step.identifier];
-    result.numberOfMoves = _numberOfMoves;
+    result.moves = self.moves;
     result.puzzleWasSolved = [self puzzleIsSolved];
     if (_firstMoveDate != nil) {
         result.startDate = _firstMoveDate;
@@ -112,10 +114,10 @@
      return tower.disks.count;
 }
  
-- (NSUInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSUInteger)index {
+- (NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index {
      NSInteger towerIndex = [_towerViews indexOfObject:towerView];
      ORKTowerOfHanoiTower *tower = _towers[towerIndex];
-     return [tower.disks[index]integerValue];
+     return tower.disks[index];
 }
 
 #pragma Mark -- ORKTowerOfHanoiTowerViewDelegate
@@ -125,10 +127,9 @@
     if (_selectedIndex == nil) {
         _selectedIndex = @(newSelectedIndex);
     }
-    else if ([_selectedIndex isEqual: @(newSelectedIndex)]) {
+    else if ([_selectedIndex isEqual:@(newSelectedIndex)]) {
         _selectedIndex = nil;
-    }
-    else {
+    } else {
         [self transferDiskFromTowerAtIndex:_selectedIndex.integerValue toTowerAtIndex:newSelectedIndex];
     }
     [self reloadData];
@@ -137,17 +138,34 @@
 
 #pragma Mark -- ORKTowerOfHanoiViewController
 
-- (void)updateTitleText {
-    NSString *text = [NSString stringWithFormat: ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), (int)_numberOfMoves, [self timeElapsedString]];
-    [self.activeStepView updateTitle:nil text: text];
+- (NSMutableArray *)moves {
+    if (_moves) {
+        return _moves;
+    }
+    _moves = [NSMutableArray array];
+    return _moves;
 }
 
-- (NSString *)timeElapsedString {
-    NSDateComponentsFormatter *formatter = [NSDateComponentsFormatter new];
-    formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
-    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-    formatter.allowedUnits =  NSCalendarUnitMinute | NSCalendarUnitSecond;
-    return [formatter stringFromTimeInterval: _secondsElapsed];
+- (NSDateComponentsFormatter *)dateComponentsFormatter {
+    if (_dateComponentsFormatter) {
+        return _dateComponentsFormatter;
+    }
+    _dateComponentsFormatter = [NSDateComponentsFormatter new];
+    _dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+    _dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    _dateComponentsFormatter.allowedUnits =  NSCalendarUnitMinute | NSCalendarUnitSecond;
+    return _dateComponentsFormatter;
+}
+
+- (NSUInteger) numberOfDisks {
+    return ((ORKTowerOfHanoiStep *)self.step).numberOfDisks;
+}
+
+- (void)updateTitleText {
+    NSString *moves = ORKLocalizedStringFromNumber(@(self.moves.count));
+    NSString *time = [self.dateComponentsFormatter stringFromTimeInterval:_secondsElapsed];
+    NSString *text = [NSString stringWithFormat:ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT", nil), moves, time];
+    [self.activeStepView updateTitle:nil text:text];
 }
 
 - (void)reloadData {
@@ -158,7 +176,7 @@
 }
 
 - (BOOL)puzzleIsSolved {
-    return ((ORKTowerOfHanoiTower *)_towers.lastObject).disks.count == _numberOfDisks;
+    return ((ORKTowerOfHanoiTower *)_towers.lastObject).disks.count == [self numberOfDisks];
 }
 
 - (void)evaluatePuzzle {
@@ -169,7 +187,7 @@
 
 - (void)setupTowers {
     NSMutableArray *diskStack = [NSMutableArray array];
-    for (NSInteger disk = _numberOfDisks ; disk > 0 ; disk--) {
+    for (NSInteger disk = [self numberOfDisks] ; disk > 0 ; disk--) {
         [diskStack addObject: @(disk)];
     }
     _towers = [@[[[ORKTowerOfHanoiTower alloc] initWithDisks:diskStack], [ORKTowerOfHanoiTower emptyTower], [ORKTowerOfHanoiTower emptyTower]] mutableCopy];
@@ -177,11 +195,11 @@
 
 - (void)setupTowerViews {
     NSMutableArray *towerViews = [NSMutableArray array];
-    for (NSInteger idx = 0 ; idx < 3 ; idx++) {
-        ORKTowerOfHanoiTowerView *towerView = [[ORKTowerOfHanoiTowerView alloc] initWithFrame:CGRectZero maximumNumberOfDisks:_numberOfDisks];
+    for (NSInteger index = 0 ; index < 3 ; index++) {
+        ORKTowerOfHanoiTowerView *towerView = [[ORKTowerOfHanoiTowerView alloc] initWithFrame:CGRectZero maximumNumberOfDisks:[self numberOfDisks]];
         towerView.delegate = self;
         towerView.dataSource = self;
-        towerView.targetTower = idx == 2;
+        towerView.targeted = (index == kNumberOfTowers - 1);
         [towerViews addObject:towerView];
         [towerView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_towerOfHanoiCustomView addSubview:towerView];
@@ -193,17 +211,25 @@
     ORKTowerOfHanoiTower *donorTower = _towers[donorTowerIndex];
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
     if (donorTower.disks.count > 0 && [recipientTower recieveDiskFrom:donorTower]) {
-        [self didTransferDisk];
+        [self makeMoveFromTowerAtIndex:donorTowerIndex toTowerAtIndex:recipientTowerIndex];
     }
 }
 
-- (void)didTransferDisk {
+- (void)makeMoveFromTowerAtIndex:(NSUInteger)donorTowerIndex toTowerAtIndex:(NSUInteger)recipientTowerIndex {
+    ORKTowerOfHanoiMove *move = [[ORKTowerOfHanoiMove alloc] init];
+    move.donorTowerIndex = donorTowerIndex;
+    move.recipientTowerIndex = recipientTowerIndex;
+    move.timestamp = (self.moves.count == 0) ? 0 : fabs([_firstMoveDate timeIntervalSinceNow]);
+    [_moves addObject:move];
+    [self didMakeMove];
+}
+
+- (void)didMakeMove {
     _selectedIndex = nil;
-    if (_numberOfMoves == 0) {
+    if (self.moves.count == 1) {
         _firstMoveDate = [NSDate date];
         _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerTicked) userInfo:nil repeats:YES];
     }
-    _numberOfMoves++;
     [self updateTitleText];
 }
 

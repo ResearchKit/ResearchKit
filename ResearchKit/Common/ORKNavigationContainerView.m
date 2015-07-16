@@ -261,6 +261,8 @@
                                                                             attribute:NSLayoutAttributeNotAnAttribute
                                                                            multiplier:1
                                                                              constant:0];
+        
+        // This covers the case in which there is no continue button but there is a skip button.
         heightConstraint.priority = UILayoutPriorityDefaultHigh+1;
         [_localConstraints addObject:heightConstraint];
     }

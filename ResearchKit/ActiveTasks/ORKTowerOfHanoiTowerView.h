@@ -37,7 +37,7 @@
 
 @required
 - (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView;
-- (NSUInteger)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView sizeForDiskAtIndex:(NSUInteger)index;
+- (NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index;
 
 @end
 
@@ -51,8 +51,8 @@
 
 @interface ORKTowerOfHanoiTowerView : UIView
 
-@property (nonatomic) BOOL highlighted;
-@property (nonatomic) BOOL targetTower;
+@property (nonatomic, getter=isHighLighted) BOOL highlighted;
+@property (nonatomic, getter=isTargeted) BOOL targeted;
 @property (nonatomic, weak) id <ORKTowerOfHanoiTowerViewDataSource> dataSource;
 @property (nonatomic, weak) id <ORKTowerOfHanoiTowerViewDelegate> delegate;
 
