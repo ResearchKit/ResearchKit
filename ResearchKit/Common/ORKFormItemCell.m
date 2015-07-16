@@ -91,8 +91,6 @@ static const CGFloat kHMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
-@property (nonatomic, strong) NSMutableArray *myConstraints;
-
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
 @end
@@ -225,7 +223,9 @@ static const CGFloat kHMargin = 15.0;
 @end
 
 
-@implementation ORKFormItemTextFieldBasedCell
+@implementation ORKFormItemTextFieldBasedCell {
+    NSMutableArray *_variableConstraints;
+}
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth screenType:(ORKScreenType)screenType {
     self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth screenType:screenType];
@@ -254,75 +254,110 @@ static const CGFloat kHMargin = 15.0;
     
     [self.contentView addSubview:_textFieldView];
     
-    NSLayoutConstraint *contentConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    contentConstraint.priority = UILayoutPriorityDefaultHigh;
-    [self addConstraint:contentConstraint];
+    self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _textFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    [self setUpContentConstraint];
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setUpContentConstraint {
+    NSLayoutConstraint *contentConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+    contentConstraint.priority = UILayoutPriorityDefaultHigh;
+    contentConstraint.active = YES;
+}
+
 - (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
+    }
+    
     CGFloat labelMinWidth = self.maxLabelWidth;
     CGFloat boundWidth = self.expectedLayoutWidth;
     
-    id labelLabel = self.labelLabel, textFieldView = _textFieldView;
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    
-    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left), @"hSpacer":@(16), @"vSpacer":@(15), @"labelMinWidth": @(labelMinWidth)};
-    
-    [self.contentView removeConstraints:self.myConstraints];
-    
-    self.myConstraints = [NSMutableArray new];
-    
-    if ((labelMinWidth) >= 0.6*boundWidth) {
+    NSDictionary *metrics = @{@"vMargin":@(10),
+                              @"hMargin":@(self.separatorInset.left),
+                              @"hSpacer":@(16), @"vSpacer":@(15),
+                              @"labelMinWidth": @(labelMinWidth)};
 
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    id labelLabel = self.labelLabel;
+    id textFieldView = _textFieldView;
+    NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
+    
+    if (labelMinWidth >= 0.6 * boundWidth) {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
         
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textFieldView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textFieldView]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
         
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[labelLabel]-vSpacer-[textFieldView]-vMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[labelLabel]-vSpacer-[textFieldView]-vMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
         
     } else {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelMinWidth)]-hSpacer-[textFieldView]|"
+                                                 options:NSLayoutFormatAlignAllCenterY
+                                                 metrics:metrics
+                                                   views:views]];
         
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelMinWidth)]-hSpacer-[textFieldView]|" options:NSLayoutFormatAlignAllCenterY metrics:metrics views:dictionary]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:labelLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.0
+                                                                      constant:0]];
         
-        [self.myConstraints addObject:
-         [NSLayoutConstraint constraintWithItem:labelLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:labelLabel
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
         
-        [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                      toItem:labelLabel
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                  multiplier:1.0 constant:0.0]];
-        
-        [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                      toItem:textFieldView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                  multiplier:1.0 constant:0.0]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:textFieldView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
     }
     
-    CGFloat height = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
+    CGFloat defaultTableCelltHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
     
     NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
                                                                          attribute:NSLayoutAttributeHeight
                                                                          relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1
-                                                                          constant:height];
+                                                                        multiplier:1.0
+                                                                          constant:defaultTableCelltHeight];
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
-    [self.myConstraints addObject:heightConstraint];
-    
-    [self.contentView addConstraints:self.myConstraints];
+    [_variableConstraints addObject:heightConstraint];
+
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
 
