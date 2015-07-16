@@ -456,7 +456,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     if (_savedViewControllers[identifier])
     {
         NSData *data = _savedViewControllers[identifier];
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data];
+        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     } else {
         // No saved data, just create the task and the corresponding task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
