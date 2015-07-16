@@ -262,7 +262,8 @@
                                                                            multiplier:1
                                                                              constant:0];
         
-        // This covers the case in which there is no continue button but there is a skip button.
+        // This covers the case which occurs in the view hierarchy of instances of `ORKTowerOfHanoiStepViewController`
+        // in which there is no continue button but there is a skip button.
         heightConstraint.priority = UILayoutPriorityDefaultHigh+1;
         [_localConstraints addObject:heightConstraint];
     }

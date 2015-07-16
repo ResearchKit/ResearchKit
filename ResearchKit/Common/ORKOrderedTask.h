@@ -432,7 +432,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
                                      numberOfDisks:(int)numberOfDisks
-                                        options:(ORKPredefinedTaskOption)options;
+                                           options:(ORKPredefinedTaskOption)options;
 
 @end
 

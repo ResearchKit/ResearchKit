@@ -56,7 +56,7 @@
 }
 
 - (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
-    if (![self canRecieveDisk:donorTower.disks.lastObject]) {
+    if (donorTower.disks.count == 0  || ![self canRecieveDisk:donorTower.disks.lastObject]) {
         return NO;
     }
     NSMutableArray *recipientDisks = [self.disks mutableCopy];

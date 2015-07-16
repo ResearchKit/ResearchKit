@@ -37,7 +37,7 @@
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKSkin.h"
 
-const NSInteger kNumberOfTowers = 3;
+static const NSUInteger kNumberOfTowers = 3;
 
 @interface ORKTowerOfHanoiViewController () <ORKTowerOfHanoiTowerViewDataSource, ORKTowerOfHanoiTowerViewDelegate>
 
@@ -61,6 +61,7 @@ const NSInteger kNumberOfTowers = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     [_towerOfHanoiCustomView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
@@ -99,13 +100,15 @@ const NSInteger kNumberOfTowers = 3;
 #pragma Mark -- ORKActiveTaskViewController
 
 - (ORKResult *)result {
+    ORKStepResult *stepResult = [super result];
     ORKTowerOfHanoiResult *result = [[ORKTowerOfHanoiResult alloc] initWithIdentifier:self.step.identifier];
     result.moves = self.moves;
     result.puzzleWasSolved = [self puzzleIsSolved];
     if (_firstMoveDate != nil) {
         result.startDate = _firstMoveDate;
     }
-    return result;
+    stepResult.results = @[result];
+    return stepResult;
 }
 
 #pragma Mark -- ORKTowerOfHanoiTowerViewDataSource
@@ -141,25 +144,23 @@ const NSInteger kNumberOfTowers = 3;
 #pragma Mark -- ORKTowerOfHanoiViewController
 
 - (NSMutableArray *)moves {
-    if (_moves) {
-        return _moves;
+    if (_moves == nil) {
+        _moves = [NSMutableArray array];
     }
-    _moves = [NSMutableArray array];
     return _moves;
 }
 
 - (NSDateComponentsFormatter *)dateComponentsFormatter {
-    if (_dateComponentsFormatter) {
-        return _dateComponentsFormatter;
+    if (_dateComponentsFormatter == nil) {
+        _dateComponentsFormatter = [NSDateComponentsFormatter new];
+        _dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+        _dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+        _dateComponentsFormatter.allowedUnits =  NSCalendarUnitMinute | NSCalendarUnitSecond;
     }
-    _dateComponentsFormatter = [NSDateComponentsFormatter new];
-    _dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
-    _dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-    _dateComponentsFormatter.allowedUnits =  NSCalendarUnitMinute | NSCalendarUnitSecond;
     return _dateComponentsFormatter;
 }
 
-- (NSUInteger) numberOfDisks {
+- (NSUInteger)numberOfDisks {
     return ((ORKTowerOfHanoiStep *)self.step).numberOfDisks;
 }
 
@@ -212,7 +213,7 @@ const NSInteger kNumberOfTowers = 3;
 - (void)transferDiskFromTowerAtIndex:(NSInteger)donorTowerIndex toTowerAtIndex:(NSInteger)recipientTowerIndex {
     ORKTowerOfHanoiTower *donorTower = _towers[donorTowerIndex];
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
-    if (donorTower.disks.count > 0 && [recipientTower recieveDiskFrom:donorTower]) {
+    if ([recipientTower recieveDiskFrom:donorTower]) {
         [self makeMoveFromTowerAtIndex:donorTowerIndex toTowerAtIndex:recipientTowerIndex];
     }
 }

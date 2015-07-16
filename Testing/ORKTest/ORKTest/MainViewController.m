@@ -407,8 +407,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                    intendedUseDescription:nil
                                                                  duration:20.0
                                                                   options:(ORKPredefinedTaskOption)0];
-    }
-    else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
                                                    intendedUseDescription:nil
                                                   maximumStimulusInterval:8
@@ -420,14 +419,12 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                              timeoutSound:0
                                                              failureSound:0
                                                                   options:0];
-    }
-    else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
+    } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
-    }
-    else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
+    } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
     return nil;
