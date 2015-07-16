@@ -95,6 +95,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricInstructionImageHeight,
     ORKScreenMetricContinueButtonWidth,
     ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
+    ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle,
     ORKScreenMetricTableCellDefaultHeight,
     ORKScreenMetricTextFieldCellHeight,
     ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,

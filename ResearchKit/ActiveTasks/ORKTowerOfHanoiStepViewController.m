@@ -35,6 +35,7 @@
 #import "ORKActiveStepView.h"
 #import "ORKTowerOfHanoiTower.h"
 #import "ORKTowerOfHanoiStep.h"
+#import "ORKSkin.h"
 
 const NSInteger kNumberOfTowers = 3;
 
@@ -63,6 +64,7 @@ const NSInteger kNumberOfTowers = 3;
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     [_towerOfHanoiCustomView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
+    self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle, self.view.window);
     
     [self setupTowers];
     [self setupTowerViews];
