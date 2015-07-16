@@ -61,7 +61,6 @@ static const NSUInteger kNumberOfTowers = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
     [_towerOfHanoiCustomView setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;

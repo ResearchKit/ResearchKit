@@ -35,7 +35,7 @@
 
 static const CGFloat kDiskHeight = 10;
 static const CGFloat kDiskSpacing = 8;
-static const CGFloat baseSpacing = 10;
+static const CGFloat kBaseSpacing = 10;
 
 @implementation ORKTowerOfHanoiTowerView {
     NSInteger _maximumNumberOfDisks;
@@ -77,7 +77,7 @@ static const CGFloat baseSpacing = 10;
                                                               toItem:nil
                                                            attribute:NSLayoutAttributeNotAnAttribute
                                                           multiplier:1
-                                                            constant:height + baseSpacing]];
+                                                            constant:height + kBaseSpacing]];
     
     [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
                                                            attribute:NSLayoutAttributeWidth
@@ -109,7 +109,7 @@ static const CGFloat baseSpacing = 10;
                                                               toItem:self
                                                            attribute:NSLayoutAttributeCenterY
                                                           multiplier:1
-                                                            constant:(height * 0.5) + baseSpacing]];
+                                                            constant:(height * 0.5) + kBaseSpacing]];
     
     UIView *topDisk;
     for (NSInteger index = 0 ; index < _diskSizes.count ; index++) {
