@@ -674,6 +674,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
                                                                       title:@"How many hours did you sleep last night?"
                                                                      answer:answerFormat];
+        
+        step.optional = NO;
         [steps addObject:step];
     }
     
