@@ -72,7 +72,7 @@ static const NSUInteger kNumberOfTowers = 3;
     NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
     NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil);
     NSString *skip = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE", nil);
-    [self.activeStepView updateTitle: title text: text];
+    [self.activeStepView updateTitle:title text:text];
     [self setSkipButtonTitle:skip];
 }
 
