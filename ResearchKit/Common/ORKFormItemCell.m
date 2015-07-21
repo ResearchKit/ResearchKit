@@ -400,9 +400,17 @@ static const CGFloat kHMargin = 15.0;
     UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
+    }
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.editingHighlight = NO;
     [self.delegate formItemCellDidResignFirstResponder:self];
+    [self inputValueDidChange];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -411,27 +419,13 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
-    
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-
-    NSInteger maxLength = answerFormat.maximumLength;
-    
-    if (maxLength > 0 && [text length] > maxLength) {
-        [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
+    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }
     
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
-    [super inputValueDidChange];
-    
+    [textField resignFirstResponder];
+    UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
     return YES;
 }
 
@@ -490,29 +484,6 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:textField.text];
-    }
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [super textFieldDidEndEditing:textField];
-    [self inputValueDidChange];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-        return NO;
-    }
-    
-    [self.textField resignFirstResponder];
-    return YES;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
@@ -528,7 +499,7 @@ static const CGFloat kHMargin = 15.0;
     
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
-
+    
     return YES;
 }
 
@@ -592,45 +563,6 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
-#pragma mark UITextFieldDelegate
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-    }
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [super textFieldDidEndEditing:textField];
-    
-    [self inputValueDidChange];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-        return NO;
-    }
-    
-    [self.textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-    [self inputValueDidClear];
-    
-    return YES;
-}
-
-- (void)valueFieldDidChange:(UITextField *)textField {
-    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.formItem impliedAnswerFormat];
-    NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
-    textField.text = sanitizedText;
-    
-    [self inputValueDidChange];
-}
-
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
@@ -646,6 +578,16 @@ static const CGFloat kHMargin = 15.0;
     if (updateInput) {
         [self answerDidChange];
     }
+}
+
+#pragma mark UITextFieldDelegate
+
+- (void)valueFieldDidChange:(UITextField *)textField {
+    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.formItem impliedAnswerFormat];
+    NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
+    textField.text = sanitizedText;
+    
+    [self inputValueDidChange];
 }
 
 @end
