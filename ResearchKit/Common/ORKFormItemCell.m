@@ -420,7 +420,7 @@ static const CGFloat kHMargin = 15.0;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
 
     NSInteger maxLength = answerFormat.maximumLength;
     
@@ -517,7 +517,7 @@ static const CGFloat kHMargin = 15.0;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     NSInteger maxLength = answerFormat.maximumLength;
     

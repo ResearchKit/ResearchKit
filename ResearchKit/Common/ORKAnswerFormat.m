@@ -37,6 +37,7 @@
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 
+#define EMAIL_VALIDATION_REGEX @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
 
 id ORKNullAnswerValue() {
     return [NSNull null];
@@ -1657,8 +1658,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 - (BOOL)isEmailAddressValidWithString:(NSString *)text {
     if (self.isEmailAddress) {
-        NSString *emailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
-        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",emailValidationRegex];
+        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", EMAIL_VALIDATION_REGEX];
         return [emailValidationTest evaluateWithObject:text];
     }
     
@@ -1668,7 +1668,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
     if (! [self isTextLengthValidWithString:text]) {
-        string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), [@(_maximumLength) stringValue]];
+        string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
     } else if (! [self isEmailAddressValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }

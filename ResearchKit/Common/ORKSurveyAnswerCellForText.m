@@ -273,7 +273,7 @@
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
     
