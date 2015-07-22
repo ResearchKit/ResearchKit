@@ -29,31 +29,20 @@
  */
 
 
-#import "ORKWalkingTaskStepViewController.h"
-#import "ORKHelpers.h"
-#import "ORKStep_Private.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKCustomStepView_Internal.h"
-#import "ORKActiveStepViewController_Internal.h"
-#import "ORKVerticalContainerView_Internal.h"
-#import "ORKSkin.h"
-#import "ORKWalkingTaskStep.h"
-#import "ORKPedometerRecorder.h"
-#import "ORKActiveStepView.h"
+#import "ORKProgressView.h"
 
 
 static const CGFloat kProgressCircleDiameter = 10;
 static const CGFloat kProgressCircleSpacing = 4;
 
-@interface ORKWalkingProgressCircleView : UIView
+@interface ORKProgressCircleView : UIView
 
 @property (nonatomic, assign) BOOL completed;
 
 @end
 
 
-@implementation ORKWalkingProgressCircleView
+@implementation ORKProgressCircleView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -86,14 +75,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 @end
 
 
-@interface ORKWalkingProgressView : UIView
-
-@property (nonatomic, assign) NSInteger count;
-
-@end
-
-
-@implementation ORKWalkingProgressView {
+@implementation ORKProgressView {
     NSArray *_circles;
     NSInteger _index;
     NSTimer *_timer;
@@ -120,7 +102,7 @@ static const CGFloat kProgressCircleSpacing = 4;
         }
         NSMutableArray *newCircles = [NSMutableArray array];
         for (NSInteger idx = 0; idx < count; idx ++) {
-            ORKWalkingProgressCircleView *circle = [ORKWalkingProgressCircleView new];
+            ORKProgressCircleView *circle = [ORKProgressCircleView new];
             [newCircles addObject:circle];
             [self addSubview:circle];
         }
@@ -134,7 +116,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 - (void)setIndex:(NSInteger)index {
     _index = index;
-    [_circles enumerateObjectsUsingBlock:^(ORKWalkingProgressCircleView *circle, NSUInteger idx, BOOL *stop) {
+    [_circles enumerateObjectsUsingBlock:^(ORKProgressCircleView *circle, NSUInteger idx, BOOL *stop) {
         circle.completed = (idx < _index);
     }];
 }
@@ -178,113 +160,6 @@ static const CGFloat kProgressCircleSpacing = 4;
     for (UIView *v in _circles) {
         v.frame = (CGRect){{x0,0},sz};
         x0 += xStep;
-    }
-}
-
-@end
-
-
-@interface ORKWalkingContentView : ORKActiveStepCustomView {
-    ORKScreenType _screenType;
-    NSLayoutConstraint *_topConstraint;
-}
-
-@property  (nonatomic, strong, readonly) ORKWalkingProgressView *progressView;
-
-@end
-
-
-@implementation ORKWalkingContentView
-
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
-    [self updateConstraintConstants];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _progressView = [ORKWalkingProgressView new];
-        _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-        _screenType = ORKScreenTypeiPhone4;
-        
-#if LAYOUT_DEBUG
-        self.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
-        _progressView.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.2];
-#endif
-        
-        [self addSubview:_progressView];
-        [self setNeedsUpdateConstraints];
-        
-    }
-    return self;
-}
-
-- (void)updateConstraintConstants {
-    
-    ORKScreenType screenType = _screenType;
-    const CGFloat CaptionBaselineToProgressTop = 100;
-    const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    [_topConstraint setConstant:(CaptionBaselineToProgressTop - CaptionBaselineToStepViewTop)];
-}
-
-- (void)updateConstraints {
-    [self removeConstraints:[self constraints]];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    _topConstraint = [NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    [self updateConstraintConstants];
-    [self addConstraint:_topConstraint];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    
-    [super updateConstraints];
-}
-
-@end
-
-
-@interface ORKWalkingTaskStepViewController () <ORKPedometerRecorderDelegate> {
-    NSInteger _intendedSteps;
-    ORKWalkingContentView *_contentView;
-}
-
-@end
-
-
-@implementation ORKWalkingTaskStepViewController
-
-- (instancetype)initWithStep:(ORKStep *)step {
-    self = [super initWithStep:step];
-    if (self) {
-        self.suspendIfInactive = NO;
-    }
-    return self;
-}
-
-- (ORKWalkingTaskStep *)walkingTaskStep {
-    return (ORKWalkingTaskStep *)self.step;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    _contentView = [ORKWalkingContentView new];
-    _contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.activeStepView.activeCustomView = _contentView;
-}
-
-- (void)stepDidChange {
-    [super stepDidChange];
-    
-    _intendedSteps = [[self walkingTaskStep] numberOfStepsPerLeg];
-}
-
-- (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder {
-    NSInteger numberOfSteps = [pedometerRecorder totalNumberOfSteps];
-    ORK_Log_Debug(@"Steps: %lld", (long long)numberOfSteps);
-    if (_intendedSteps > 0 && numberOfSteps >= _intendedSteps) {
-        [self finish];
     }
 }
 
