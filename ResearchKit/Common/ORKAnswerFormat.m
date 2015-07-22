@@ -37,7 +37,7 @@
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 
-#define EMAIL_VALIDATION_REGEX @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+NSString *const kEmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
 
 id ORKNullAnswerValue() {
     return [NSNull null];
@@ -1658,7 +1658,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 - (BOOL)isEmailAddressValidWithString:(NSString *)text {
     if (self.isEmailAddress) {
-        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", EMAIL_VALIDATION_REGEX];
+        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kEmailValidationRegex];
         return [emailValidationTest evaluateWithObject:text];
     }
     

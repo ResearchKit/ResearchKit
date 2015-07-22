@@ -488,6 +488,11 @@ static const CGFloat kHMargin = 15.0;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if ([text length] < [textField.text length]) {
+        return YES;
+    }
+    
     text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     NSInteger maxLength = answerFormat.maximumLength;
@@ -746,6 +751,11 @@ static const CGFloat kHMargin = 15.0;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    if ([string length] < [textView.text length]) {
+        return YES;
+    }
+    
     string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
 
     if(_maxLength > 0 && [string length] > _maxLength) {

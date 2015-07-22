@@ -162,6 +162,11 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
 
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+
+    if ([string length] < [textView.text length]) {
+        return YES;
+    }
+    
     string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     if (_maxLength > 0 && [string length] > _maxLength) {
@@ -273,6 +278,11 @@
     NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if ([text length] < [textField.text length]) {
+        return YES;
+    }
+    
     text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
