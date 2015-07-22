@@ -56,6 +56,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const TimedWalkTaskIdentifier = @"timed_walk";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
@@ -142,6 +143,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Reaction Time Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showTimedWalkTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Timed Walk" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"timed_walk"];
         buttons[buttonKeys.lastObject] = button;
     }
 
@@ -398,8 +407,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                    intendedUseDescription:nil
                                                                  duration:20.0
                                                                   options:(ORKPredefinedTaskOption)0];
-    }
-    else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
+    } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
                                                    intendedUseDescription:nil
                                                   maximumStimulusInterval:8
@@ -411,6 +419,12 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                              timeoutSound:0
                                                              failureSound:0
                                                                   options:0];
+    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
+        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
+                                    intendedUseDescription:nil
+                                                  distance:100
+                                                 timeLimit:180
+                                                   options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
@@ -1430,6 +1444,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
 }
 
+- (IBAction)showTimedWalkTask:(id)sender {
+    [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
+}
+
 #pragma mark Dynamic task
 
 /*
@@ -2429,6 +2447,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
+            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
+                ORKTimedWalkResult *tw = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", tw.identifier, @(tw.distance), @(tw.timeLimit), @(tw.duration));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

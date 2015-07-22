@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case TimedWalk
     case ImageCapture
     case Survey
     case Consent
@@ -135,6 +136,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .TimedWalk:
+                return NSLocalizedString("Timed Walk Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -221,6 +225,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case TimedWalkTask =                                        "TimedWalkTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -305,6 +310,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return reactionTimeTask
+            
+            case .TimedWalk:
+                return timedWalkTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -601,6 +609,11 @@ enum TaskListRow: Int, Printable {
     
     private var reactionTimeTask: ORKTask {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    /// This task presents the Timed Walk pre-defined active task.
+    private var timedWalkTask: ORKTask {
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distance: 100, timeLimit: 180, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {
