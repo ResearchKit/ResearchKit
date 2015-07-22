@@ -853,6 +853,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10BAA2CC1B5FCDB1004FE478 /* Walking */ = {
+			isa = PBXGroup;
+			children = (
+				B12EFF601AB2178B00A80147 /* Short Walk */,
+			);
+			name = Walking;
+			sourceTree = "<group>";
+		};
 		147503AC1AEE8058004B17F3 /* Tone Audiometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,7 +963,7 @@
 				B12EFF5E1AB2177D00A80147 /* Spatial Span Memory */,
 				25ECC0921AFBD64800F3D63B /* Reaction Time */,
 				B12EFF5F1AB2178500A80147 /* Tapping */,
-				B12EFF601AB2178B00A80147 /* Walking */,
+				10BAA2CC1B5FCDB1004FE478 /* Walking */,
 				147503AC1AEE8058004B17F3 /* Tone Audiometry */,
 			);
 			path = ActiveTasks;
@@ -1638,7 +1646,7 @@
 			name = Tapping;
 			sourceTree = "<group>";
 		};
-		B12EFF601AB2178B00A80147 /* Walking */ = {
+		B12EFF601AB2178B00A80147 /* Short Walk */ = {
 			isa = PBXGroup;
 			children = (
 				86C40B1E1A8D7C5B00081FAC /* ORKWalkingTaskStep.h */,
@@ -1646,7 +1654,7 @@
 				86C40B201A8D7C5B00081FAC /* ORKWalkingTaskStepViewController.h */,
 				86C40B211A8D7C5B00081FAC /* ORKWalkingTaskStepViewController.m */,
 			);
-			name = Walking;
+			name = "Short Walk";
 			sourceTree = "<group>";
 		};
 		B12EFF611AB217AE00A80147 /* Speech Synthesis */ = {
