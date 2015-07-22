@@ -164,7 +164,7 @@
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
     string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
-    if(_maxLength > 0 && [string length] > _maxLength) {
+    if (_maxLength > 0 && [string length] > _maxLength) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
         return NO;
     }
@@ -277,7 +277,7 @@
     
     NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
     
-    if(maxLength > 0 && [text length] > maxLength) {
+    if (maxLength > 0 && [text length] > maxLength) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
         return NO;
     }

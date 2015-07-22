@@ -770,9 +770,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
          */
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
         format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeNumberPad;
+        format.keyboardType = UIKeyboardTypeURL;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your age?"
+                                                                      title:@"What is your website?"
                                                                      answer:format];
         [steps addObject:step];
     }
