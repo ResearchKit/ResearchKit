@@ -50,7 +50,6 @@
     UIView *_realFooterView;
     
     NSLayoutConstraint *_bottomConstraint;
-    NSArray *_constraints;
     
     CGFloat _keyboardOverlap;
     BOOL _keyboardIsUp;
@@ -98,7 +97,7 @@
 #endif
         [_realFooterView addSubview:_continueSkipContainerView];
         
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
         
         _tapOffGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
         _tapOffGestureRecognizer.delegate = self;
@@ -154,49 +153,49 @@
     }
 }
 
-- (void)updateContinueButtonConstraints {
+- (void)updateBottomConstraint {
     _bottomConstraint.constant = -_keyboardOverlap;
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                         attribute:NSLayoutAttributeTop
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:_realFooterView
-                                                        attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     _bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueSkipContainerView
                                                      attribute:NSLayoutAttributeBottom
                                                      relatedBy:NSLayoutRelationEqual
                                                         toItem:_realFooterView
-                                                     attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0];
+                                                     attribute:NSLayoutAttributeBottomMargin
+                                                    multiplier:1.0
+                                                      constant:0.0];
     _bottomConstraint.priority = UILayoutPriorityDefaultHigh-1;
     [constraints addObject:_bottomConstraint];
     
-    [self updateContinueButtonConstraints];
+    [self updateBottomConstraint];
     [NSLayoutConstraint activateConstraints:constraints];
-    _constraints = constraints;
-    
-    [super updateConstraints];
 }
 
 - (BOOL)view:(UIView *)view hasFirstResponderOrTableViewCellContainingPoint:(CGPoint)point {
@@ -343,7 +342,7 @@
         // Keep track of the keyboard overlap, so we can adjust the constraint properly.
         _keyboardOverlap = intersectionSize.height;
         
-        [self updateContinueButtonConstraints];
+        [self updateBottomConstraint];
         
         // Trigger layout inside the animation block to get the constraint change to animate.
         [scrollView layoutIfNeeded];
