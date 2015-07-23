@@ -56,10 +56,19 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     [self updateConstraintConstants];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange: previousTraitCollection];
+    if (self.traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass) {
+        [self updateConstraintConstants];
+    }
+}
+
 - (void)updateConstraintConstants {
-    
-    UIWindow *window = [self window];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
+    CGFloat height = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ?
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightCompact, screenType) :
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightRegular, screenType);
+    _heightConstraint.constant = height;
     _widthConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType);
 }
 
@@ -70,21 +79,21 @@ static const CGFloat kContinueButtonTouchMargin = 10;
                                                          relatedBy:NSLayoutRelationEqual
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1
-                                                          constant:44];
+                                                        multiplier:1.0
+                                                          constant:0.0];
         _heightConstraint.active = YES;
     }
     if (! _widthConstraint) {
-        UIWindow *window = [self window];
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
         _widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
-                                                         constant:ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType)];
+                                                       multiplier:1.0
+                                                         constant:0.0];
     }
+    [self updateConstraintConstants];
+    
     _heightConstraint.active = YES;
     _widthConstraint.active = YES;
     
