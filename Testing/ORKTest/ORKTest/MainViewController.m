@@ -1975,62 +1975,50 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     // Build navigation rules
     
-    // Individual predicates
+    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
+    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
+    // the regular ORKOrderedTask order applies).
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
-                                                                                               expectedString:@"headache"];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
     //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
+                                                                                               expectedString:@"headache"];
+    
     // User didn't chose headache at the symptom step
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
 
-    // User chose YES at the severity step
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
-                                                                                                 expectedAnswer:YES];
-    // Equivalent to:
-    //      [NSPredicate predicateWithFormat:
-    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-
-    // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
-                                                                                                expectedAnswer:NO];
-
-    
-    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
-    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
-    // the regular ORKOrderedTask order applies).
-    NSMutableArray *resultPredicates = [NSMutableArray new];
-    NSMutableArray *destinationStepIdentifiers = [NSMutableArray new];
-    
-    [resultPredicates addObject:predicateNotHeadache];
-    [destinationStepIdentifiers addObject:@"other_symptom"];
-    
     ORKPredicateStepNavigationRule *predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
+                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
-    resultPredicates = [NSMutableArray new];
-    destinationStepIdentifiers = [NSMutableArray new];
     
-    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
-    [resultPredicates addObject:predicate];
-    [destinationStepIdentifiers addObject:@"severe_headache"];
+    // User chose YES at the severity step
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                 expectedAnswer:YES];
+    
+    // User chose NO at the severity step
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                expectedAnswer:NO];
 
-    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
-    [resultPredicates addObject:predicate];
-    [destinationStepIdentifiers addObject:@"light_headache"];
+    NSPredicate *predicateSevereHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
+
+    NSPredicate *predicateLightHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
     
     predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateSevereHeadache,
+                                                                        predicateLightHeadache ]
+                                          destinationStepIdentifiers:@[ @"severe_headache",
+                                                                        @"light_headache" ] ];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     

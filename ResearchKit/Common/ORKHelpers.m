@@ -497,3 +497,16 @@ id ORKDynamicCast_(id x, Class objClass) {
 }
 
 const CGFloat ORKScrollToTopAnimationDuration = 0.2;
+
+void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason) {
+    NSCParameterAssert(array);
+    NSCParameterAssert(expectedObjectClass);
+    NSCParameterAssert(exceptionReason);
+
+    for (id object in array) {
+        if (![object isKindOfClass:expectedObjectClass]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
+        }
+    }
+}
+
