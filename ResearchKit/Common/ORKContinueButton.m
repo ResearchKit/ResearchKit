@@ -45,7 +45,7 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
-        self.contentEdgeInsets = (UIEdgeInsets){.left=6,.right=6};
+        self.contentEdgeInsets = (UIEdgeInsets){.left=6, .right=6};
         
         [self setNeedsUpdateConstraints];
     }
@@ -73,30 +73,27 @@ static const CGFloat kContinueButtonTouchMargin = 10;
 }
 
 - (void)updateConstraints {
-    if (! _heightConstraint) {
+    if (!_heightConstraint) {
         _heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeHeight
                                                          relatedBy:NSLayoutRelationEqual
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                         multiplier:1.0
-                                                          constant:0.0];
+                                                          constant:0.0]; // constant will be set in updateConstraintConstants
         _heightConstraint.active = YES;
     }
-    if (! _widthConstraint) {
+    if (!_widthConstraint) {
         _widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
-                                                         constant:0.0];
+                                                         constant:0.0]; // constant will be set in updateConstraintConstants
+        _widthConstraint.active = YES;
     }
     [self updateConstraintConstants];
-    
-    _heightConstraint.active = YES;
-    _widthConstraint.active = YES;
-    
     [super updateConstraints];
 }
 
