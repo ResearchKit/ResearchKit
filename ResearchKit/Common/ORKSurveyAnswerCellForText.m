@@ -48,7 +48,6 @@
 
 @implementation ORKSurveyAnswerCellForText {
     NSInteger _maxLength;
-    NSArray *_constraints;
 }
 
 - (void)applyAnswerFormat {
@@ -100,6 +99,8 @@
         
         ORKEnableAutoLayoutForViews(@[_placeHolder, _textView]);
         
+        [self setUpConstraints];
+        
         [self applyAnswerFormat];
         
         [self answerDidChange];
@@ -114,27 +115,49 @@
     
 }
 
-- (void)updateConstraints {
-    [super updateConstraints];
-    
-    if (_constraints) {
-        [self removeConstraints:_constraints];
-        _constraints = nil;
-    }
-    
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_textView, _placeHolder);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textView]-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textView]-|" options:(NSLayoutFormatOptions)0 metrics:nil views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_textView attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:_textView attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:_textView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:_textView attribute:NSLayoutAttributeTopMargin multiplier:1 constant:0]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
+                                                        attribute:NSLayoutAttributeLeading
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_textView
+                                                        attribute:NSLayoutAttributeLeading
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationLessThanOrEqual
+                                                           toItem:_textView
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationLessThanOrEqual
+                                                           toItem:_textView
+                                                        attribute:NSLayoutAttributeHeight
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolder
+                                                        attribute:NSLayoutAttributeTopMargin
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_textView
+                                                        attribute:NSLayoutAttributeTopMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
-    [self addConstraints:constraints];
-    _constraints = constraints;
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 + (BOOL)shouldDisplayWithSeparators {
