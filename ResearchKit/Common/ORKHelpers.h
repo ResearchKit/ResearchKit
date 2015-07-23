@@ -251,3 +251,5 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 #define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
+
+void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
