@@ -49,13 +49,11 @@ static const CGFloat AssumedNavBarHeight = 44;
 static const CGFloat AssumedStatusBarHeight = 20;
 
 @implementation ORKStepHeaderView {
-    NSDictionary *_adjustableConstraints;
-    NSArray *_myConstraints;
-    ORKScreenType _screenType;
+    NSMutableDictionary *_adjustableConstraints;
 }
 
 - (void)updateCaptionLabelPreferredWidth {
-    CGFloat sideMargin = ORKGetMetricForScreenType(ORKScreenMetricHeadlineSideMargin, _screenType);
+    CGFloat sideMargin = ORKGetMetricForWindow(ORKScreenMetricHeadlineSideMargin, self.window);
     UIEdgeInsets layoutMargins = self.layoutMargins;
     
     // If we don't do this, sometimes the label doesn't split onto two lines properly.
@@ -84,7 +82,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _screenType = ORKGetScreenTypeForWindow(nil);
         // Text Label
         {
             _captionLabel = [ORKHeadlineLabel new];
@@ -128,6 +125,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
         _instructionLabel.layer.borderWidth = 1.0;
         self.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
+        [self setUpConstraints];
         [self setNeedsUpdateConstraints];
     }
     return self;
@@ -135,7 +133,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
     [self updateConstraintConstants];
     [self updateCaptionLabelPreferredWidth];
 }
@@ -165,7 +162,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraintConstants {
-    ORKScreenType screenType = _screenType;
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
     
     const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForScreenType(ORKScreenMetricIllustrationToCaptionBaseline, screenType);
     const CGFloat TopToCaptionBaseline = (ORKGetMetricForScreenType(ORKScreenMetricTopToCaptionBaseline, screenType) - AssumedStatusBarHeight - AssumedNavBarHeight);
@@ -234,143 +231,159 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints {
-    if (!_myConstraints) {
-        NSMutableArray *constraints = [NSMutableArray array];
-        
-        // Request that the width grow
+- (void)setUpConstraints {
+    _adjustableConstraints = [NSMutableDictionary dictionary];
+    NSMutableArray *otherConstraints = [NSMutableArray array];
+
+    // Fill all available horizontal space
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:ORKScreenMetricMaxDimension];
+    constraint.priority = UILayoutPriorityDefaultLow-1;
+    [otherConstraints addObject:constraint];
+    
+    NSArray *views = @[_captionLabel, _instructionLabel, _learnMoreButton];
+    [_captionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+    [_instructionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+    [_learnMoreButton setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
+    ORKEnableAutoLayoutForViews(views);
+    
+    
+    _adjustableConstraints[CaptionToInstructionConstraintKey] = [NSLayoutConstraint constraintWithItem:_instructionLabel
+                                                                                             attribute:NSLayoutAttributeFirstBaseline
+                                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                                toItem:_captionLabel
+                                                                                             attribute:NSLayoutAttributeLastBaseline
+                                                                                            multiplier:1.0
+                                                                                              constant:36.0];
+    
+    _adjustableConstraints[InstructionToLearnMoreConstraintKey] = [NSLayoutConstraint constraintWithItem:_learnMoreButton
+                                                                                               attribute:NSLayoutAttributeFirstBaseline
+                                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                                  toItem:_instructionLabel
+                                                                                               attribute:NSLayoutAttributeLastBaseline
+                                                                                              multiplier:1.0
+                                                                                                constant:30.0];
+    
+    {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_captionLabel
+                                                                      attribute:NSLayoutAttributeFirstBaseline
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0
+                                                                       constant:44.0];
+        [constraint setPriority:UILayoutPriorityRequired-1];
+        _adjustableConstraints[IllustrationToCaptionBaselineConstraintKey] = constraint;
+    }
+    {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_captionLabel
+                                                                      attribute:NSLayoutAttributeTop
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeTop
+                                                                     multiplier:1.0
+                                                                       constant:0.0];
+        constraint.priority = UILayoutPriorityRequired-1;
+        _adjustableConstraints[IllustrationToCaptionTopConstraintKey] = constraint;
+    }
+    {
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
-                                                                      attribute:NSLayoutAttributeWidth
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:_learnMoreButton
+                                                                      attribute:NSLayoutAttributeLastBaseline
+                                                                     multiplier:1.0
+                                                                       constant:44.0];
+        constraint.priority = UILayoutPriorityRequired-1;
+        _adjustableConstraints[LearnMoreToStepViewConstraintKey] = constraint;
+    }
+    {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:_captionLabel
+                                                                      attribute:NSLayoutAttributeLastBaseline
+                                                                     multiplier:1.0
+                                                                       constant:44.0];
+        constraint.priority = UILayoutPriorityDefaultHigh-1;
+        _adjustableConstraints[CaptionMinBottomSpacingConstraintKey] = constraint;
+    }
+    {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                      attribute:NSLayoutAttributeBottom
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:_instructionLabel
+                                                                      attribute:NSLayoutAttributeLastBaseline
+                                                                     multiplier:1.0
+                                                                       constant:44.0];
+        constraint.priority = UILayoutPriorityDefaultHigh-2;
+        _adjustableConstraints[InstructionMinBottomSpacingConstraintKey] = constraint;
+    }
+    
+    for (UIView *view in views) {
+        [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                 attribute:NSLayoutAttributeLeft
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeLeftMargin
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                 attribute:NSLayoutAttributeRight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeRightMargin
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
+        bottomConstraint.priority = UILayoutPriorityDefaultHigh;
+        // All views must fit inside, vertically
+        [otherConstraints addObject:bottomConstraint];
+        [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                 attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeTop
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+        
+    }
+    {
+        // This constraint will only be set active if there is no content.
+        // Priority is less than required, so that if it is temporarily active it doesn't cause an
+        // exception.
+        NSLayoutConstraint *zeroHeight = [NSLayoutConstraint constraintWithItem:self
+                                                                      attribute:NSLayoutAttributeHeight
                                                                       relatedBy:NSLayoutRelationEqual
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1
-                                                                       constant:ORKScreenMetricMaxDimension];
-        constraint.priority = UILayoutPriorityDefaultLow-1;
-        [constraints addObject:constraint];
-        
-        NSArray *views = @[_captionLabel, _instructionLabel, _learnMoreButton];
-        [_captionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
-        [_instructionLabel setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
-        [_learnMoreButton setContentHuggingPriority:UILayoutPriorityFittingSizeLevel forAxis:UILayoutConstraintAxisHorizontal];
-        ORKEnableAutoLayoutForViews(views);
-        
-        NSMutableDictionary *adjustableConstraintsTable = [NSMutableDictionary dictionary];
-        NSMutableArray *otherConstraints = [NSMutableArray array];
-        
-        adjustableConstraintsTable[CaptionToInstructionConstraintKey] =
-        [NSLayoutConstraint constraintWithItem:_instructionLabel
-                                     attribute:NSLayoutAttributeFirstBaseline
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_captionLabel
-                                     attribute:NSLayoutAttributeLastBaseline
-                                    multiplier:1 constant:36];
-        
-        adjustableConstraintsTable[InstructionToLearnMoreConstraintKey] =
-        [NSLayoutConstraint constraintWithItem:_learnMoreButton
-                                     attribute:NSLayoutAttributeFirstBaseline
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:_instructionLabel
-                                     attribute:NSLayoutAttributeLastBaseline
-                                    multiplier:1 constant:30];
-        
-        {
-            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_captionLabel
-                                                                          attribute:NSLayoutAttributeFirstBaseline
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeTop
-                                                                         multiplier:1 constant:44];
-            [constraint setPriority:UILayoutPriorityRequired-1];
-            adjustableConstraintsTable[IllustrationToCaptionBaselineConstraintKey] = constraint;
-        }
-        {
-            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_captionLabel
-                                                                          attribute:NSLayoutAttributeTop
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:self
-                                                                          attribute:NSLayoutAttributeTop
-                                                                         multiplier:1 constant:0];
-            constraint.priority = UILayoutPriorityRequired-1;
-            adjustableConstraintsTable[IllustrationToCaptionTopConstraintKey] = constraint;
-        }
-        {
-            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_learnMoreButton
-                                                                          attribute:NSLayoutAttributeLastBaseline
-                                                                         multiplier:1 constant:44];
-            constraint.priority = UILayoutPriorityRequired-1;
-            adjustableConstraintsTable[LearnMoreToStepViewConstraintKey] = constraint;
-        }
-        {
-            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_captionLabel
-                                                                          attribute:NSLayoutAttributeLastBaseline
-                                                                         multiplier:1 constant:44];
-            constraint.priority = UILayoutPriorityDefaultHigh-1;
-            adjustableConstraintsTable[CaptionMinBottomSpacingConstraintKey] = constraint;
-        }
-        {
-            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self
-                                                                          attribute:NSLayoutAttributeBottom
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:_instructionLabel
-                                                                          attribute:NSLayoutAttributeLastBaseline
-                                                                         multiplier:1 constant:44];
-            constraint.priority = UILayoutPriorityDefaultHigh-2;
-            adjustableConstraintsTable[InstructionMinBottomSpacingConstraintKey] = constraint;
-        }
-        
-        for (UIView *view in views) {
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
-            
-            NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:view
-                                                                                attribute:NSLayoutAttributeBottom
-                                                                                relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                                   toItem:self
-                                                                                attribute:NSLayoutAttributeBottom
-                                                                               multiplier:1 constant:0];
-            bottomConstraint.priority = UILayoutPriorityDefaultHigh;
-            // All views must fit inside, vertically
-            [otherConstraints addObject:bottomConstraint];
-            [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view
-                                                                     attribute:NSLayoutAttributeTop
-                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                        toItem:self
-                                                                     attribute:NSLayoutAttributeTop
-                                                                    multiplier:1 constant:0]];
-            
-        }
-        {
-            // This constraint will only be set active if there is no content.
-            // Priority is less than required, so that if it is temporarily active it doesn't cause an
-            // exception.
-            NSLayoutConstraint *zeroHeight = [NSLayoutConstraint constraintWithItem:self
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:nil
-                                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1 constant:0];
-            zeroHeight.priority = UILayoutPriorityRequired-1;
-            adjustableConstraintsTable[HeaderZeroHeightConstraintKey] = zeroHeight;
-        }
-        
-        [constraints addObjectsFromArray:otherConstraints];
-        [constraints addObjectsFromArray:[adjustableConstraintsTable allValues]];
-        
-        for (NSString *key in [adjustableConstraintsTable allKeys]) {
-            [adjustableConstraintsTable[key] setIdentifier:key];
-        }
-        _myConstraints = constraints;
-        _adjustableConstraints = adjustableConstraintsTable;
-        [self addConstraints:constraints];
+                                                                     multiplier:1.0
+                                                                       constant:0.0];
+        zeroHeight.priority = UILayoutPriorityRequired - 1;
+        _adjustableConstraints[HeaderZeroHeightConstraintKey] = zeroHeight;
     }
-        
+    
+    for (NSString *key in [_adjustableConstraints allKeys]) {
+        [_adjustableConstraints[key] setIdentifier:key];
+    }
+
+    [NSLayoutConstraint activateConstraints:otherConstraints];
+    [NSLayoutConstraint activateConstraints:[_adjustableConstraints allValues]];
+}
+
+- (void)updateConstraints {
     [self updateConstraintConstants];
     [super updateConstraints];
 }
