@@ -80,8 +80,7 @@
     [self addSubview:_containerView];
     
     ORKEnableAutoLayoutForViews(@[_containerView, _textFieldView]);
-        
-    [self setNeedsUpdateConstraints];
+    [self setUpConstraints];
 }
 
 - (void)dealloc {
@@ -94,30 +93,33 @@
     [self answerDidChange];
 }
 
-- (void)setNeedsUpdateConstraints {
-    [NSLayoutConstraint deactivateConstraints:[self constraints]];
-    [NSLayoutConstraint deactivateConstraints:[_containerView constraints]];
-    [super setNeedsUpdateConstraints];
-}
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
-    [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints {
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
     self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
-                                                                 options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_containerView(>=0)]-|"
-                                                                 options:0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_containerView(>=0)]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|" options:0 metrics:nil views:views]];
-
-    [super updateConstraints];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (BOOL)becomeFirstResponder {
