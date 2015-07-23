@@ -35,7 +35,7 @@
 
 @implementation ORKNavigationContainerView {
     NSLayoutConstraint *_gapConstraint;
-    NSMutableArray *_localConstraints;
+    NSMutableArray *_variableConstraints;
     BOOL _continueButtonJustTapped;
 }
 
@@ -48,6 +48,7 @@
             _skipButton.exclusiveTouch = YES;
             [_skipButton setTitle:nil forState:UIControlStateNormal];
             [_skipButton addTarget:self action:@selector(skipButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+            _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_skipButton];
         }
         {
@@ -55,12 +56,14 @@
             _continueButton.alpha = 0;
             _continueButton.exclusiveTouch = YES;
             _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
+            _continueButton.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_continueButton];
             [_continueButton addTarget:self action:@selector(continueButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         self.preservesSuperviewLayoutMargins = NO;
         self.layoutMargins = (UIEdgeInsets){};
         
+        [self setUpConstraints];
         [self updateContinueAndSkipEnabled];
         [self setNeedsUpdateConstraints];
     }
@@ -122,19 +125,19 @@
 }
 
 - (BOOL)neverHasSkipButton {
-    return ! self.optional;
+    return !self.optional;
 }
 
 - (BOOL)skipButtonHidden {
-    return (! _skipButtonItem) || _useNextForSkip || ! self.optional;
+    return (!_skipButtonItem) || _useNextForSkip || !self.optional;
 }
 
 - (CGFloat)skipButtonAlpha {
-    return ( [self skipButtonHidden] ? 0.0 : 1.0);
+    return ([self skipButtonHidden] ? 0.0 : 1.0);
 }
 
 - (BOOL)hasContinueOrSkip {
-    return ! ([self neverHasContinueButton] && [self neverHasSkipButton]);
+    return !([self neverHasContinueButton] && [self neverHasSkipButton]);
 }
 
 - (void)updateContinueAndSkipEnabled {
@@ -185,7 +188,7 @@
 }
 
 - (void)updateConstraintConstants {
-    const CGFloat ContinueBottomToSkipButtonBaseline = 30;
+    const CGFloat ContinueBottomToSkipButtonBaseline = 30.0;
     
     if ([self neverHasSkipButton] || _neverHasContinueButton) {
         _gapConstraint.active = NO;
@@ -195,20 +198,16 @@
     }
 }
 
-- (void)updateConstraints {
-    if (_localConstraints) {
-        [NSLayoutConstraint deactivateConstraints:_localConstraints];
-        _localConstraints = nil;
-    }
-    
-    [super updateConstraints];
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_skipButton, _continueButton);
-    ORKEnableAutoLayoutForViews([views allValues]);
     
-    _localConstraints = [NSMutableArray array];
-    
-    [_localConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_continueButton]" options:0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_continueButton]"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
     
     _gapConstraint =
     [NSLayoutConstraint constraintWithItem:_skipButton
@@ -216,54 +215,98 @@
                                  relatedBy:NSLayoutRelationEqual
                                     toItem:_continueButton
                                  attribute:NSLayoutAttributeBottom
-                                multiplier:1 constant:30];
+                                multiplier:1.0
+                                  constant:30.0];
     _gapConstraint.priority = UILayoutPriorityDefaultHigh+1;
-    [_localConstraints addObject:_gapConstraint];
+    [constraints addObject:_gapConstraint];
     
-    for (UIView *v in [views allValues]) {
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:v attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+    for (UIView *view in [views allValues]) {
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                     attribute:NSLayoutAttributeCenterX
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeCenterX
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                    multiplier:1.0
+                                                                      constant:0]];
         
 #ifdef LAYOUT_DEBUG
-        v.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
-        v.layer.borderColor = [UIColor cyanColor].CGColor;
-        v.layer.borderWidth = 1.0;
+        view.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+        view.layer.borderColor = [UIColor cyanColor].CGColor;
+        view.layer.borderWidth = 1.0;
 #endif
     }
     {
-        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationLessThanOrEqual toItem:self attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0];
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueButton
+                                                                            attribute:NSLayoutAttributeBottom
+                                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeBottomMargin
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         bottomConstraint.priority = UILayoutPriorityDefaultHigh+1;
-        [_localConstraints addObject:bottomConstraint];
+        [constraints addObject:bottomConstraint];
     }
     {
-        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_skipButton attribute:NSLayoutAttributeBaseline relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0];
+        NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_skipButton
+                                                                            attribute:NSLayoutAttributeBaseline
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self
+                                                                            attribute:NSLayoutAttributeBottomMargin
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         bottomConstraint.priority = UILayoutPriorityDefaultHigh+1;
-        [_localConstraints addObject:bottomConstraint];
+        [constraints addObject:bottomConstraint];
     }
     {
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0
+                                                                             constant:0.0];
         heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
-        [_localConstraints addObject:heightConstraint];
+        [constraints addObject:heightConstraint];
+    }
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+    
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
     }
     
     if (_neverHasContinueButton && [self neverHasSkipButton]) {
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1 constant:0]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
     } else if (_neverHasContinueButton) {
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueButton
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1 constant:0]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueButton
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
     }
-    [self addConstraints:_localConstraints];
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
     
     [self updateConstraintConstants];
+    [super updateConstraints];
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
