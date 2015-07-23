@@ -489,17 +489,18 @@ static const CGFloat kHMargin = 15.0;
     
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    if ([text length] < [textField.text length]) {
-        return YES;
-    }
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textField.text = researchki` and the `text = researchkit`.
+    if ([textField.text length] < [text length]) {
     
-    text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
-    NSInteger maxLength = answerFormat.maximumLength;
+        NSInteger maxLength = answerFormat.maximumLength;
     
-    if (maxLength > 0 && [text length] > maxLength) {
-        [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
-        return NO;
+        if (maxLength > 0 && [text length] > maxLength) {
+            [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
+            return NO;
+        }
     }
     
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
@@ -752,15 +753,16 @@ static const CGFloat kHMargin = 15.0;
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
     
-    if ([string length] < [textView.text length]) {
-        return YES;
-    }
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textView.text = researchki` and the `string = researchkit`.
+    if ([textView.text length] < [string length]) {
     
-    string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
 
-    if(_maxLength > 0 && [string length] > _maxLength) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
-        return NO;
+        if (_maxLength > 0 && [string length] > _maxLength) {
+            [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
+            return NO;
+        }
     }
     
     return YES;
