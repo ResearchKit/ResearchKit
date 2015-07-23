@@ -231,22 +231,26 @@
     [self.contentView addSubview:_textField];
     ORKEnableAutoLayoutForViews(@[_textField]);
     
-    [self setNeedsUpdateConstraints];
+    [self setUpConstraints];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
 }
 
-- (void)updateConstraints {
-    self.contentView.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
-
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|" options:0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textField]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
 
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|" options:0 metrics:nil views:views]];
-    
-    [super updateConstraints];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textField]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 + (BOOL)shouldDisplayWithSeparators {
