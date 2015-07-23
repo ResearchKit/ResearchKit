@@ -133,7 +133,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    [self updateConstraintConstants];
+    [self updateConstraintConstantsForWindow:newWindow];
     [self updateCaptionLabelPreferredWidth];
 }
 
@@ -147,7 +147,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     _learnMoreButtonItem = learnMoreButtonItem;
     [_learnMoreButton setTitle:learnMoreButtonItem.title forState:UIControlStateNormal];
     _learnMoreButton.alpha = ([learnMoreButtonItem.title length] > 0) ? 1 : 0;
-    [self updateConstraintConstants];
+    [self updateConstraintConstantsForWindow:self.window];
 }
 
 - (void)layoutSubviews {
@@ -161,8 +161,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
     _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin*2;
 }
 
-- (void)updateConstraintConstants {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     
     const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForScreenType(ORKScreenMetricIllustrationToCaptionBaseline, screenType);
     const CGFloat TopToCaptionBaseline = (ORKGetMetricForScreenType(ORKScreenMetricTopToCaptionBaseline, screenType) - AssumedStatusBarHeight - AssumedNavBarHeight);
@@ -384,7 +384,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraints {
-    [self updateConstraintConstants];
+    [self updateConstraintConstantsForWindow:self.window];
     [super updateConstraints];
 }
 
