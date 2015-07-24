@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case NineHolePegTest
     case ImageCapture
     case Survey
     case Consent
