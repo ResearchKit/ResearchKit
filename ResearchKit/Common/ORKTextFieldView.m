@@ -345,38 +345,39 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     if (self) {
         _textField = [[ORKUnitTextField alloc] init];
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _textField.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_textField];
+        [self setUpConstraints];
     }
     return self;
 }
 
-- (void)updateConstraints {
-    _textField.translatesAutoresizingMaskIntoConstraints = NO;
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
-                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                  metrics:nil
-                                                                    views:views]];
-    
-    [self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField]|"
-                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                  metrics:nil
-                                                                    views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
     
     // Ask to fill the available horizontal space
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_textField
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_textField
                                                                   attribute:NSLayoutAttributeWidth
                                                                   relatedBy:NSLayoutRelationEqual
                                                                      toItem:nil
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1
                                                                    constant:ORKScreenMetricMaxDimension];
-    constraint.priority = UILayoutPriorityDefaultLow;
-    [self addConstraint:constraint];
+    widthConstraint.priority = UILayoutPriorityDefaultLow;
+    [constraints addObject:widthConstraint];
     
-    [super updateConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 
