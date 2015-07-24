@@ -632,7 +632,7 @@ ORK_CLASS_AVAILABLE
 /**
  The timed walk distance in meters.
  */
-@property (nonatomic, assign) double distance;
+@property (nonatomic, assign) double distanceInMeters;
 
 /**
  The time limit to complete the trials.

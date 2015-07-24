@@ -927,7 +927,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                       distance:(double)distance
+                               distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
                                         options:(ORKPredefinedTaskOption)options {
     
@@ -936,7 +936,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSLengthFormatter *lengthFormatter = [NSLengthFormatter new];
     lengthFormatter.numberFormatter.maximumFractionDigits = 1;
     lengthFormatter.numberFormatter.maximumSignificantDigits = 3;
-    NSString *formattedLength = [lengthFormatter stringFromMeters:distance];
+    NSString *formattedLength = [lengthFormatter stringFromMeters:distanceInMeters];
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
@@ -1020,7 +1020,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
             step.spokenInstruction = step.title;
             step.recorderConfigurations = recorderConfigurations;
-            step.distance = distance;
+            step.distanceInMeters = distanceInMeters;
             step.shouldTintImages = YES;
             step.image = [UIImage imageNamed:@"timed-walkingman-outbound" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
@@ -1050,7 +1050,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"TIMED_WALK_INSTRUCTION_TEXT", nil);
             step.spokenInstruction = step.title;
             step.recorderConfigurations = recorderConfigurations;
-            step.distance = distance;
+            step.distanceInMeters = distanceInMeters;
             step.shouldTintImages = YES;
             step.image = [UIImage imageNamed:@"timed-walkingman-return" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;

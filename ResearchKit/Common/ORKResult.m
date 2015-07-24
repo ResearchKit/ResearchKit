@@ -614,7 +614,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_DOUBLE(aCoder, distance);
+    ORK_ENCODE_DOUBLE(aCoder, distanceInMeters);
     ORK_ENCODE_DOUBLE(aCoder, timeLimit);
     ORK_ENCODE_DOUBLE(aCoder, duration);
 }
@@ -622,7 +622,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_DOUBLE(aDecoder, distance);
+        ORK_DECODE_DOUBLE(aDecoder, distanceInMeters);
         ORK_DECODE_DOUBLE(aDecoder, timeLimit);
         ORK_DECODE_DOUBLE(aDecoder, duration);
     }
@@ -639,7 +639,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.duration == castObject.distance) &&
+            (self.duration == castObject.distanceInMeters) &&
             (self.duration == castObject.timeLimit) &&
             (self.duration == castObject.duration));
 }
@@ -650,14 +650,14 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTimedWalkResult *result = [super copyWithZone:zone];
-    result.duration = self.distance;
+    result.duration = self.distanceInMeters;
     result.duration = self.timeLimit;
     result.duration = self.duration;
     return result;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.distance), @(self.timeLimit), @(self.duration)];
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.distanceInMeters), @(self.timeLimit), @(self.duration)];
 }
 
 @end

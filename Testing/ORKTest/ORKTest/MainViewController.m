@@ -422,7 +422,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
         return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
                                     intendedUseDescription:nil
-                                                  distance:100
+                                          distanceInMeters:100
                                                  timeLimit:180
                                                    options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
@@ -2448,8 +2448,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
             } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
-                ORKTimedWalkResult *tw = (ORKTimedWalkResult *)result;
-                NSLog(@"%@ %@ %@ %@", tw.identifier, @(tw.distance), @(tw.timeLimit), @(tw.duration));
+                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

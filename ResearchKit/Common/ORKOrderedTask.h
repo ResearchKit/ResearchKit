@@ -429,7 +429,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param intendedUseDescription  A localized string describing the intended use of the data
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
- @param distance                The timed walk distance in meters.
+ @param distanceInMeters        The timed walk distance in meters.
  @param timeLimit               The time limit to complete the trials.
  @param options                 Options that affect the features of the predefined task.
  
@@ -438,7 +438,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  */
 + (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
                          intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                       distance:(double)distance
+                               distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
                                         options:(ORKPredefinedTaskOption)options;
 

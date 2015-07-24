@@ -480,7 +480,7 @@ ret =
              return [[ORKTimedWalkStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(distance, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(distanceInMeters, NSNumber, NSObject, YES, nil, nil),
             })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -855,7 +855,7 @@ ret =
    ENTRY(ORKTimedWalkResult,
          nil,
          (@{
-            PROPERTY(distance, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(distanceInMeters, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(timeLimit, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(duration, NSNumber, NSObject, NO, nil, nil),
             })),

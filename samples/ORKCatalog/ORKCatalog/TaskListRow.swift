@@ -613,7 +613,7 @@ enum TaskListRow: Int, Printable {
     
     /// This task presents the Timed Walk pre-defined active task.
     private var timedWalkTask: ORKTask {
-        return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distance: 100, timeLimit: 180, options: nil)
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distanceInMeters: 100, timeLimit: 180, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

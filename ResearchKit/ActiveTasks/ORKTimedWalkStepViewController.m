@@ -39,7 +39,7 @@
 #import "ORKActiveStepView.h"
 
 
-double const kDistanceTrackingThreshold = 100.0;
+double const kDistanceInMetersTrackingThreshold = 100.0;
 
 
 @interface ORKTimedWalkStepViewController ()
@@ -102,7 +102,7 @@ double const kDistanceTrackingThreshold = 100.0;
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
     ORKTimedWalkResult *timedWalkResult = [[ORKTimedWalkResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    timedWalkResult.distance = [self timedWalkStep].distance;
+    timedWalkResult.distanceInMeters = [self timedWalkStep].distanceInMeters;
     timedWalkResult.timeLimit = [self timedWalkStep].stepDuration;
     timedWalkResult.duration = self.trialDuration;
     
@@ -116,11 +116,11 @@ double const kDistanceTrackingThreshold = 100.0;
 #pragma mark - ORKPedometerRecorderDelegate
 
 - (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder {
-    double timedWalkDistance = [self timedWalkStep].distance;
-    if (timedWalkDistance >= kDistanceTrackingThreshold) {
-        double distanceInMeters = timedWalkDistance - pedometerRecorder.totalDistance;
+    double timedWalkDistanceInMeters = [self timedWalkStep].distanceInMeters;
+    if (timedWalkDistanceInMeters >= kDistanceInMetersTrackingThreshold) {
+        double remainingDistanceInMeters = timedWalkDistanceInMeters - pedometerRecorder.totalDistance;
         BOOL isValid = pedometerRecorder.totalDistance > 0;
-        [(ORKTimedWalkContentView *)self.activeStepView.activeCustomView setDistanceInMeters:distanceInMeters visible:isValid];
+        [(ORKTimedWalkContentView *)self.activeStepView.activeCustomView setDistanceInMeters:remainingDistanceInMeters visible:isValid];
     }
 }
 

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKTimedWalkStep : ORKActiveStep
 
-@property (nonatomic, assign) double distance;
+@property (nonatomic, assign) double distanceInMeters;
 
 @end
 

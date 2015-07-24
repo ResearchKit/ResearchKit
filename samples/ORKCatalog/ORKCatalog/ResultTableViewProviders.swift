@@ -637,7 +637,7 @@ class TimedWalkResultTableViewProvider: ResultTableViewProvider {
         
         return rows + [
             // The timed walk distance in meters.
-            ResultRow(text: "distance (m)", detail: TimedWalkResult.distance),
+            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
             
             // The time limit to complete the trials.
             ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),

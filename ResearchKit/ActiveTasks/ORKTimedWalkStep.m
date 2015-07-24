@@ -56,14 +56,14 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    double const ORKTimedWalkMinimumDistance = 1.0;
-    double const ORKTimedWalkMaximumDistance = 10000.0;
+    double const ORKTimedWalkMinimumDistanceInMeters = 1.0;
+    double const ORKTimedWalkMaximumDistanceInMeters = 10000.0;
     
     NSTimeInterval const ORKTimedWalkMinimumDuration = 1.0;
     
-    if (self.distance < ORKTimedWalkMinimumDistance ||
-        self.distance > ORKTimedWalkMaximumDistance) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"timed walk distance must be greater than or equal to %@ meters and less than or equal to %@ meters.", @(ORKTimedWalkMinimumDistance), @(ORKTimedWalkMaximumDistance)] userInfo:nil];
+    if (self.distanceInMeters < ORKTimedWalkMinimumDistanceInMeters ||
+        self.distanceInMeters > ORKTimedWalkMaximumDistanceInMeters) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"timed walk distance must be greater than or equal to %@ meters and less than or equal to %@ meters.", @(ORKTimedWalkMinimumDistanceInMeters), @(ORKTimedWalkMaximumDistanceInMeters)] userInfo:nil];
     }
     
     if (self.stepDuration < ORKTimedWalkMinimumDuration) {
