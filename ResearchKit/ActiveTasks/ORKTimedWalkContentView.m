@@ -43,7 +43,7 @@
 @property (nonatomic, strong) NSLayoutConstraint *imageRatioConstraint;
 @property (nonatomic, assign) double distanceInMeters;
 @property (nonatomic, strong) NSLengthFormatter *lengthFormatter;
-@property (nonatomic, strong) NSArray *constraints;
+@property (nonatomic, copy) NSArray *constraints;
 
 @end
 
