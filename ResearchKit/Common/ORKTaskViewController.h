@@ -303,7 +303,7 @@ ORK_CLASS_AVAILABLE
  @param task        The task to be presented.
  @param data        Data obtained from the `restorationData` property of a previous
                     task view controller instance.
- @param delegate    The deleagte for the task view controller.
+ @param delegate    The delegate for the task view controller.
  
  @return A new task view controller.
  */
