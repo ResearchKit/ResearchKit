@@ -30,6 +30,7 @@
 		147503BA1AEE807C004B17F3 /* ORKToneAudiometryStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */; };
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
+		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
 		25ECC0951AFBD68300F3D63B /* ORKReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0931AFBD68300F3D63B /* ORKReactionTimeStep.h */; };
 		25ECC0961AFBD68300F3D63B /* ORKReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC0941AFBD68300F3D63B /* ORKReactionTimeStep.m */; };
 		25ECC09B1AFBD8B300F3D63B /* ORKReactionTimeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0991AFBD8B300F3D63B /* ORKReactionTimeViewController.h */; };
@@ -420,6 +421,7 @@
 		147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStep.m; sourceTree = "<group>"; };
 		147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryStepViewController.h; sourceTree = "<group>"; };
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
+		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
 		25ECC0931AFBD68300F3D63B /* ORKReactionTimeStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReactionTimeStep.h; sourceTree = "<group>"; };
 		25ECC0941AFBD68300F3D63B /* ORKReactionTimeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReactionTimeStep.m; sourceTree = "<group>"; };
 		25ECC0991AFBD8B300F3D63B /* ORKReactionTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReactionTimeViewController.h; sourceTree = "<group>"; };
@@ -992,6 +994,7 @@
 				FA7A9D351B09362D005A2BEA /* Consent */,
 				86CC8EA71AC09383001CCD89 /* Info.plist */,
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
+				248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
 				86CC8EAB1AC09383001CCD89 /* ORKDataLoggerManagerTests.m */,
 				86CC8EAC1AC09383001CCD89 /* ORKDataLoggerTests.m */,
@@ -2133,6 +2136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86CC8EB71AC09383001CCD89 /* ORKDataLoggerTests.m in Sources */,
+				248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */,
 				86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */,
 				FA7A9D391B0969A7005A2BEA /* ORKConsentSignatureFormatterTests.m in Sources */,
 				86CC8EB81AC09383001CCD89 /* ORKHKSampleTests.m in Sources */,

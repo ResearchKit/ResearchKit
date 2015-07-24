@@ -765,6 +765,43 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [steps addObject:step];
     }
     
+    
+    {
+        /*
+         A text question with single-line text entry and a URL keyboard.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
+        format.multipleLines = NO;
+        format.keyboardType = UIKeyboardTypeURL;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
+                                                                      title:@"What is your website?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         An email question with single-line text entry.
+         */
+        ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+                                                                      title:@"What is your email?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A text question with single-line text entry and a length limit.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:20];
+        format.multipleLines = NO;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005e"
+                                                                      title:@"What is your name?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
     {
         /*
          A single-select value-picker question. Rather than seeing the items in a tableview,
@@ -1232,6 +1269,20 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_004b" text:@"BP Systolic"
                                                          answerFormat:[ORKAnswerFormat integerAnswerFormatWithUnit:@"mm Hg"]];
             item.placeholder = @"Enter value";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_005" text:@"Email"
+                                                           answerFormat:[ORKAnswerFormat emailAnswerFormat]];
+            item.placeholder = @"Enter Email";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+                                                           answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
+            item.placeholder = @"Your message (limit 20 characters).";
             [items addObject:item];
         }
         
