@@ -185,7 +185,6 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 
 @interface ORKWalkingContentView : ORKActiveStepCustomView {
-    ORKScreenType _screenType;
     NSLayoutConstraint *_topConstraint;
 }
 
@@ -196,18 +195,11 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 @implementation ORKWalkingContentView
 
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
-    [self updateConstraintConstants];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         _progressView = [ORKWalkingProgressView new];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-        _screenType = ORKScreenTypeiPhone4;
         
 #if LAYOUT_DEBUG
         self.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
@@ -215,29 +207,54 @@ static const CGFloat kProgressCircleSpacing = 4;
 #endif
         
         [self addSubview:_progressView];
-        [self setNeedsUpdateConstraints];
-        
+        [self setUpConstraints];
+        [self updateConstraintConstantsForWindow:self.window];
     }
     return self;
 }
 
-- (void)updateConstraintConstants {
-    
-    ORKScreenType screenType = _screenType;
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     const CGFloat CaptionBaselineToProgressTop = 100;
     const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    [_topConstraint setConstant:(CaptionBaselineToProgressTop - CaptionBaselineToStepViewTop)];
+    _topConstraint.constant = CaptionBaselineToProgressTop - CaptionBaselineToStepViewTop;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|"
+                                             options:NSLayoutFormatAlignAllCenterX
+                                             metrics:nil
+                                               views:views]];
+    _topConstraint = [NSLayoutConstraint constraintWithItem:_progressView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    [constraints addObject:_topConstraint];
+   
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
+                                                         attribute:NSLayoutAttributeCenterX
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterX
+                                                        multiplier:1.0
+                                                          constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)updateConstraints {
-    [self removeConstraints:[self constraints]];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    _topConstraint = [NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    [self updateConstraintConstants];
-    [self addConstraint:_topConstraint];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    
+    [self updateConstraintConstantsForWindow:self.window];
     [super updateConstraints];
 }
 
