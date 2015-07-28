@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case PSAT
     case ImageCapture
     case Survey
     case Consent
@@ -135,6 +136,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -221,6 +225,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case PSATTask =                                             "PSATTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -305,6 +310,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return reactionTimeTask
+            
+            case .PSAT:
+                return PSATTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -601,6 +609,11 @@ enum TaskListRow: Int, Printable {
     
     private var reactionTimeTask: ORKTask {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, presentationMode: (.Auditory | .Visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

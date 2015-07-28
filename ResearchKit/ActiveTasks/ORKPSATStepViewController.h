@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,15 +29,13 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIBarButtonItem (ORKBarButtonItem)
-
-+ (instancetype)ork_backBarButtonItemWithTarget:(nullable id)target action:(nullable SEL)selector;
+ORK_CLASS_AVAILABLE
+@interface ORKPSATStepViewController : ORKActiveStepViewController
 
 @end
 

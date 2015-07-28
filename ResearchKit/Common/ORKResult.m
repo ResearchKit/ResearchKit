@@ -610,6 +610,136 @@
 @end
 
 
+@implementation ORKPSATSample
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_BOOL(aCoder, correct);
+    ORK_ENCODE_INTEGER(aCoder, digit);
+    ORK_ENCODE_INTEGER(aCoder, answer);
+    ORK_ENCODE_DOUBLE(aCoder, time);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, correct);
+        ORK_DECODE_INTEGER(aDecoder, digit);
+        ORK_DECODE_INTEGER(aDecoder, answer);
+        ORK_DECODE_DOUBLE(aDecoder, time);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    
+    return ((self.isCorrect == castObject.isCorrect) &&
+            (self.digit == castObject.digit) &&
+            (self.answer == castObject.answer) &&
+            (self.time == castObject.time)) ;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPSATSample *sample = [[[self class] allocWithZone:zone] init];
+    sample.correct = self.isCorrect;
+    sample.digit = self.digit;
+    sample.answer = self.answer;
+    sample.time = self.time;
+    return sample;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
+}
+
+@end
+
+
+@implementation ORKPSATResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_ENUM(aCoder, presentationMode);
+    ORK_ENCODE_DOUBLE(aCoder, interStimulusInterval);
+    ORK_ENCODE_DOUBLE(aCoder, stimulusDuration);
+    ORK_ENCODE_INTEGER(aCoder, length);
+    ORK_ENCODE_INTEGER(aCoder, totalCorrect);
+    ORK_ENCODE_INTEGER(aCoder, totalDyad);
+    ORK_ENCODE_DOUBLE(aCoder, totalTime);
+    ORK_ENCODE_INTEGER(aCoder, initialDigit);
+    ORK_ENCODE_OBJ(aCoder, samples);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_ENUM(aDecoder, presentationMode);
+        ORK_DECODE_DOUBLE(aDecoder, interStimulusInterval);
+        ORK_DECODE_DOUBLE(aDecoder, stimulusDuration);
+        ORK_DECODE_INTEGER(aDecoder, length);
+        ORK_DECODE_INTEGER(aDecoder, totalCorrect);
+        ORK_DECODE_INTEGER(aDecoder, totalDyad);
+        ORK_DECODE_DOUBLE(aDecoder, totalTime);
+        ORK_DECODE_INTEGER(aDecoder, initialDigit);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, samples, ORKPSATSample);
+    }
+    return self;
+    
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.presentationMode == castObject.presentationMode) &&
+            (self.interStimulusInterval == castObject.interStimulusInterval) &&
+            (self.stimulusDuration == castObject.stimulusDuration) &&
+            (self.length == castObject.length) &&
+            (self.totalCorrect == castObject.totalCorrect) &&
+            (self.totalDyad == castObject.totalDyad) &&
+            (self.totalTime == castObject.totalTime) &&
+            (self.initialDigit == castObject.initialDigit) &&
+            ORKEqualObjects(self.samples, castObject.samples)) ;
+}
+
+- (NSUInteger)hash {
+    return [super hash] ^ [self.samples hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPSATResult *result = [super copyWithZone:zone];
+    result.presentationMode = self.presentationMode;
+    result.interStimulusInterval = self.interStimulusInterval;
+    result.stimulusDuration = self.stimulusDuration;
+    result.length = self.length;
+    result.totalCorrect = self.totalCorrect;
+    result.totalDyad = self.totalDyad;
+    result.totalTime = self.totalTime;
+    result.initialDigit = self.initialDigit;
+    result.samples = [self.samples copy];
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ total correct=%@/%@ %@", [super description], @(self.totalCorrect), @(self.length),self.samples];
+}
+
+@end
+
+
 @implementation ORKDataResult
 
 - (BOOL)isSaveable {

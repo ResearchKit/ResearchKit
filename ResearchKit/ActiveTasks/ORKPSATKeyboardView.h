@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,15 +29,26 @@
  */
 
 
-#import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIBarButtonItem (ORKBarButtonItem)
+@class ORKBorderedButton;
+@protocol ORKPSATKeyboardViewDelegate;
 
-+ (instancetype)ork_backBarButtonItemWithTarget:(nullable id)target action:(nullable SEL)selector;
+@interface ORKPSATKeyboardView : UIView
+
+@property (nonatomic, weak) id<ORKPSATKeyboardViewDelegate> delegate;
+@property (nonatomic, weak) ORKBorderedButton *selectedAnswerButton;
+
+- (void)setEnabled:(BOOL)enabled;
+
+@end
+
+@protocol ORKPSATKeyboardViewDelegate <NSObject>
+
+- (void)keyboardView:(ORKPSATKeyboardView *)keyboardView didSelectAnswer:(NSInteger)answer;
 
 @end
 
