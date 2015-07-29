@@ -350,6 +350,13 @@ ORK_CLASS_AVAILABLE
  */
 - (void)goBackward;
 
+/**
+ Returns a Boolean value indicating whether the step has been presented before.
+ 
+ @return `YES` if the step has been presented; otherwise `NO`.
+ */
+- (BOOL)hasBeenPresented;
+
 @end
 
 NS_ASSUME_NONNULL_END
