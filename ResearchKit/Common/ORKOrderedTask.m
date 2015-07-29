@@ -53,6 +53,7 @@
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKReactionTimeStep.h"
+#import "ORKHolePegTestStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -284,6 +285,8 @@ static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.
 static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
+static NSString * const ORKHolePegTestQuestionStepIdentifier = @"hole.peg.test.question";
+static NSString * const ORKHolePegTestStepIdentifier = @"hole.peg.test";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -916,6 +919,77 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
+    return task;
+}
+
++ (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    numberOfHoles:(int)numberOfHoles
+                                        timeLimit:(NSTimeInterval)timeLimit
+                                          options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), [NSNumberFormatter localizedStringFromNumber:@(numberOfHoles)
+                                                                                                                                               numberStyle:NSNumberFormatterNoStyle]];
+            step.text = intendedUseDescription;
+            step.detailText = ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_DETAIL", nil);
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        NSArray *textChoices = @[ORKLocalizedString(@"HOLE_PEG_TEST_QUESTION_2_CHOICE", nil),
+                                 ORKLocalizedString(@"HOLE_PEG_TEST_QUESTION_2_CHOICE_2", nil),];
+        ORKAnswerFormat *answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                                         textChoices:textChoices];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:ORKHolePegTestQuestionStepIdentifier
+                                                                      title:ORKLocalizedString(@"HOLE_PEG_TEST_QUESTION_TITLE", nil)
+                                                                     answer:answerFormat];
+        
+        step.optional = NO;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        
+    }
+    
+    {
+        {
+            ORKHolePegTestStep *step = [[ORKHolePegTestStep alloc] initWithIdentifier:ORKHolePegTestStepIdentifier];
+            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION_%@", nil), @(numberOfHoles)];
+            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
+            step.numberOfHoles = numberOfHoles;
+            step.shouldTintImages = YES;
+            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
+
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep * step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 5.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 

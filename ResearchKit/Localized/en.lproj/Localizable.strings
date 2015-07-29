@@ -216,6 +216,15 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
 
+/* Nine hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+"HOLE_PEG_TEST_INTRO_DETAIL" = "This activity measures your upper extremity function.";
+"HOLE_PEG_TEST_QUESTION_TITLE" = "Are you right- or left-handed?";
+"HOLE_PEG_TEST_QUESTION_2_CHOICE" = "Right";
+"HOLE_PEG_TEST_QUESTION_2_CHOICE_2" = "Left";
+"HOLE_PEG_TEST_INSTRUCTION_%@" = "Move the arrow to the %@.";
+"HOLE_PEG_TEST_TEXT" = "Use two fingers to rotate the arrow.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

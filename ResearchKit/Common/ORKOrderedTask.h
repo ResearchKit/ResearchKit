@@ -407,6 +407,30 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                       timeoutSound:(UInt32)timeoutSoundID
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
+/**
+ Returns a predefined task that measures the upper extremity function.
+ 
+ In a hole peg test task, the participant is asked to fill holes with pegs.
+ 
+ A hole peg test task can be used to assess arm and hand function, especially in patients with severe disability.
+ 
+ Data collected in this task is in the form of an `ORKHolePegTestResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text will be displayed.
+ @param numberOfHoles           The number of holes to fill in.
+ @param timeLimit               The time limit to complete the trials.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
+                           intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                    numberOfHoles:(int)numberOfHoles
+                                        timeLimit:(NSTimeInterval)timeLimit
+                                          options:(ORKPredefinedTaskOption)options;
 
 @end
 

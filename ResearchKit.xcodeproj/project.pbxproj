@@ -22,6 +22,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		106FF29E1B663FCE004EACF2 /* ORKHolePegTestStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF29C1B663FCE004EACF2 /* ORKHolePegTestStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		106FF29F1B663FCE004EACF2 /* ORKHolePegTestStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 106FF29D1B663FCE004EACF2 /* ORKHolePegTestStep.m */; };
+		106FF2A21B665B86004EACF2 /* ORKHolePegTestStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF2A01B665B86004EACF2 /* ORKHolePegTestStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		106FF2A31B665B86004EACF2 /* ORKHolePegTestStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 106FF2A11B665B86004EACF2 /* ORKHolePegTestStepViewController.m */; };
+		106FF2A61B665CF5004EACF2 /* ORKHolePegTestContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 106FF2A41B665CF5004EACF2 /* ORKHolePegTestContentView.h */; };
+		106FF2A71B665CF5004EACF2 /* ORKHolePegTestContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 106FF2A51B665CF5004EACF2 /* ORKHolePegTestContentView.m */; };
 		147503AF1AEE8071004B17F3 /* ORKAudioGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */; };
 		147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */; };
 		147503B71AEE807C004B17F3 /* ORKToneAudiometryContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */; };
@@ -412,6 +418,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		106FF29C1B663FCE004EACF2 /* ORKHolePegTestStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestStep.h; sourceTree = "<group>"; };
+		106FF29D1B663FCE004EACF2 /* ORKHolePegTestStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestStep.m; sourceTree = "<group>"; };
+		106FF2A01B665B86004EACF2 /* ORKHolePegTestStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestStepViewController.h; sourceTree = "<group>"; };
+		106FF2A11B665B86004EACF2 /* ORKHolePegTestStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestStepViewController.m; sourceTree = "<group>"; };
+		106FF2A41B665CF5004EACF2 /* ORKHolePegTestContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKHolePegTestContentView.h; sourceTree = "<group>"; };
+		106FF2A51B665CF5004EACF2 /* ORKHolePegTestContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestContentView.m; sourceTree = "<group>"; };
 		147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAudioGenerator.h; sourceTree = "<group>"; };
 		147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAudioGenerator.m; sourceTree = "<group>"; };
 		147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryContentView.h; sourceTree = "<group>"; };
@@ -849,6 +861,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		106FF29B1B663F5C004EACF2 /* Hole Peg Test */ = {
+			isa = PBXGroup;
+			children = (
+				106FF29C1B663FCE004EACF2 /* ORKHolePegTestStep.h */,
+				106FF29D1B663FCE004EACF2 /* ORKHolePegTestStep.m */,
+				106FF2A01B665B86004EACF2 /* ORKHolePegTestStepViewController.h */,
+				106FF2A11B665B86004EACF2 /* ORKHolePegTestStepViewController.m */,
+				106FF2A41B665CF5004EACF2 /* ORKHolePegTestContentView.h */,
+				106FF2A51B665CF5004EACF2 /* ORKHolePegTestContentView.m */,
+			);
+			name = "Hole Peg Test";
+			sourceTree = "<group>";
+		};
 		147503AC1AEE8058004B17F3 /* Tone Audiometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -953,6 +978,7 @@
 				B12EFF5F1AB2178500A80147 /* Tapping */,
 				B12EFF601AB2178B00A80147 /* Walking */,
 				147503AC1AEE8058004B17F3 /* Tone Audiometry */,
+				106FF29B1B663F5C004EACF2 /* Hole Peg Test */,
 			);
 			path = ActiveTasks;
 			sourceTree = "<group>";
@@ -1796,6 +1822,7 @@
 				86C40C3A1A8D7C5C00081FAC /* ORKSpatialSpanGameState.h in Headers */,
 				618DA0501A93D0D600E63AA8 /* ORKAccessibilityFunctions.h in Headers */,
 				86C40C721A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.h in Headers */,
+				106FF2A61B665CF5004EACF2 /* ORKHolePegTestContentView.h in Headers */,
 				86C40CA41A8D7C5C00081FAC /* ORKLocationRecorder.h in Headers */,
 				86C40D201A8D7C5C00081FAC /* ORKFormStep.h in Headers */,
 				86C40C761A8D7C5C00081FAC /* HKSample+ORKJSONDictionary.h in Headers */,
@@ -1803,6 +1830,7 @@
 				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
 				86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */,
+				106FF29E1B663FCE004EACF2 /* ORKHolePegTestStep.h in Headers */,
 				86C40D021A8D7C5C00081FAC /* ORKContinueButton.h in Headers */,
 				86C40D681A8D7C5C00081FAC /* ORKQuestionStepViewController_Private.h in Headers */,
 				86C40D121A8D7C5C00081FAC /* ORKDefines.h in Headers */,
@@ -1925,6 +1953,7 @@
 				86C40D161A8D7C5C00081FAC /* ORKErrors.h in Headers */,
 				861D11B51AA7D073003C98A7 /* ORKTextChoiceCellGroup.h in Headers */,
 				147503B91AEE807C004B17F3 /* ORKToneAudiometryStep.h in Headers */,
+				106FF2A21B665B86004EACF2 /* ORKHolePegTestStepViewController.h in Headers */,
 				86C40C9A1A8D7C5C00081FAC /* ORKDataLogger_Private.h in Headers */,
 				861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */,
 				86C40C461A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.h in Headers */,
@@ -2182,6 +2211,7 @@
 				86C40D721A8D7C5C00081FAC /* ORKRoundTappingButton.m in Sources */,
 				86C40E2A1A8D7C5C00081FAC /* ORKSignatureView.m in Sources */,
 				BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */,
+				106FF2A31B665B86004EACF2 /* ORKHolePegTestStepViewController.m in Sources */,
 				25ECC0A41AFBDD2700F3D63B /* ORKReactionTimeStimulusView.m in Sources */,
 				86C40CBA1A8D7C5C00081FAC /* ORKVoiceEngine.m in Sources */,
 				861D11B61AA7D073003C98A7 /* ORKTextChoiceCellGroup.m in Sources */,
@@ -2262,12 +2292,14 @@
 				86C40DEC1A8D7C5C00081FAC /* UIBarButtonItem+ORKBarButtonItem.m in Sources */,
 				86C40CAA1A8D7C5C00081FAC /* ORKPedometerRecorder.m in Sources */,
 				BCA5C0361AEC05F20092AC8D /* ORKStepNavigationRule.m in Sources */,
+				106FF2A71B665CF5004EACF2 /* ORKHolePegTestContentView.m in Sources */,
 				86C40D761A8D7C5C00081FAC /* ORKScaleRangeLabel.m in Sources */,
 				86C40C741A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.m in Sources */,
 				86AD91151AB7B97E00361FEB /* ORKQuestionStepView.m in Sources */,
 				86C40C5C1A8D7C5C00081FAC /* ORKWalkingTaskStep.m in Sources */,
 				86C40C3C1A8D7C5C00081FAC /* ORKSpatialSpanGameState.m in Sources */,
 				86C40CF41A8D7C5C00081FAC /* ORKBodyLabel.m in Sources */,
+				106FF29F1B663FCE004EACF2 /* ORKHolePegTestStep.m in Sources */,
 				86C40C941A8D7C5C00081FAC /* ORKAudioRecorder.m in Sources */,
 				86C40C581A8D7C5C00081FAC /* ORKTappingIntervalStepViewController.m in Sources */,
 				86C40E0E1A8D7C5C00081FAC /* ORKConsentReviewStepViewController.m in Sources */,
