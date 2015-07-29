@@ -351,11 +351,9 @@ ORK_CLASS_AVAILABLE
 - (void)goBackward;
 
 /**
- Returns a Boolean value indicating whether the step has been presented before.
- 
- @return `YES` if the step has been presented; otherwise `NO`.
+ A Boolean value indicating whether the view controller has been presented before.
  */
-- (BOOL)hasBeenPresented;
+@property (nonatomic, readonly) BOOL hasBeenPresented;
 
 @end
 
