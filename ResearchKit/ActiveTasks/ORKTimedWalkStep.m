@@ -48,7 +48,6 @@
         self.shouldPlaySoundOnFinish = YES;
         self.shouldVibrateOnStart = YES;
         self.shouldVibrateOnFinish = YES;
-        self.shouldContinueOnFinish = NO;
     }
     return self;
 }
