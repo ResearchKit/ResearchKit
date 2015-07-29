@@ -130,10 +130,10 @@
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraintConstants {
-    [super updateConstraintConstants];
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    [super updateConstraintConstantsForWindow:window];
     
-    ORKScreenType screenType = self.screenType;
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
     
     {
