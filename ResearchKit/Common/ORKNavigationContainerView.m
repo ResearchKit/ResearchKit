@@ -153,9 +153,11 @@
     if (_useNextForSkip && _skipButtonItem) {
         _continueButton.alpha = (_continueButtonItem == nil && _skipButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title ? : _skipButtonItem.title forState:UIControlStateNormal];
+        _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint ? : _skipButtonItem.accessibilityHint;
     } else {
         _continueButton.alpha = (_continueButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title forState:UIControlStateNormal];
+        _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint;
     }
     
     _continueButton.enabled = (_continueEnabled || (_useNextForSkip && _skipButtonItem));

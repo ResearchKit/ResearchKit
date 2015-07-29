@@ -80,7 +80,7 @@
 
 @interface ORKTouchRecordingView : UIView
 
-@property (nonatomic, weak) id<ORKTouchRecordingDelegate> deleagte;
+@property (nonatomic, weak) id<ORKTouchRecordingDelegate> delegate;
 
 @end
 

@@ -29,8 +29,6 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
-
 #import "ORKESerialization.h"
 
 
@@ -446,14 +444,16 @@ ret =
          },
          (@{})),
   ENTRY(ORKImageCaptureStep,
-  ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-      return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-  },
-  (@{
-    PROPERTY(templateImageInsets, NSValue, NSObject, YES,
-            ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
-            ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
-    })),
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+        },
+        (@{
+            PROPERTY(templateImageInsets, NSValue, NSObject, YES,
+                ^id(id value) { return value?dictionaryFromUIEdgeInsets([value UIEdgeInsetsValue]):nil; },
+                ^id(id dict) { return [NSValue valueWithUIEdgeInsets:edgeInsetsFromDictionary(dict)]; }),
+            PROPERTY(accessibilityHint, NSString, NSObject, YES, nil, nil),
+            PROPERTY(accessibilityInstructions, NSString, NSObject, YES, nil, nil),
+            })),
   ENTRY(ORKSpatialSpanMemoryStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKSpatialSpanMemoryStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
@@ -720,7 +720,9 @@ ret =
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil)
           })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

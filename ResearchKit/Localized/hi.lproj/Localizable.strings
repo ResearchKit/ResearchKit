@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "कोई संग्रहित डेटा नहीं मिला।";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "कोई आउटपुट निर्देशिका निर्दिष्ट नहीं";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "अलग छवि कैप्चर करने के लिए टैप करें";
-"MEDIA_BUTTON" = "छवि कैप्चर करने के लिए टैप करें";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "वापस";
 

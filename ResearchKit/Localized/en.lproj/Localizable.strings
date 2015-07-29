@@ -83,6 +83,12 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -234,10 +240,6 @@
 "ERROR_RECORDER_NO_DATA" = "No collected data was found.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Tap to capture a different image";
-"MEDIA_BUTTON" = "Tap to capture an image";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
 
@@ -263,4 +265,5 @@
 "AX.MEMORY.TILE.LABEL" = "Memory game tile";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
+"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
 

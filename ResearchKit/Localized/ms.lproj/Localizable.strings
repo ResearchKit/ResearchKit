@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Tiada data yang dikumpulkan ditemui.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Ketik untuk menangkap imej berlainan";
-"MEDIA_BUTTON" = "Ketik untuk menangkap imej";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Balik";
 

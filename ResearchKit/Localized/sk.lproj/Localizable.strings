@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nenašli sa žiadne zhromaždené dáta.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nie je špecifikovaný výstupný adresár";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Klepnutím spravte iný obrázok";
-"MEDIA_BUTTON" = "Klepnutím spravte obrázok";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Späť";
 
