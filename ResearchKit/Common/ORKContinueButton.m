@@ -36,6 +36,7 @@
 static const CGFloat kContinueButtonTouchMargin = 10;
 
 @implementation ORKContinueButton {
+    NSLayoutConstraint *_heightConstraint;
     NSLayoutConstraint *_widthConstraint;
 }
 
@@ -44,26 +45,43 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
-        self.contentEdgeInsets = (UIEdgeInsets){.left=6,.right=6};
+        self.contentEdgeInsets = (UIEdgeInsets){.left=6, .right=6};
 
         [self setUpConstraints];
     }
     return self;
 }
 
-- (void)didMoveToWindow {
-    [self setNeedsUpdateConstraints];
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange: previousTraitCollection];
+    if (self.traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass) {
+        [self updateConstraintConstantsForWindow:self.window];
+    }
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    CGFloat height = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ?
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightCompact, screenType) :
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightRegular, screenType);
+    _heightConstraint.constant = height;
+    _widthConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType);
 }
 
 - (void)setUpConstraints {
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                        attribute:NSLayoutAttributeHeight
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:nil
-                                                                        attribute:NSLayoutAttributeNotAnAttribute
-                                                                       multiplier:1.0
-                                                                         constant:44.0];
-    heightConstraint.active = YES;
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    _heightConstraint.active = YES;
     
     _widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                     attribute:NSLayoutAttributeWidth
@@ -71,12 +89,13 @@ static const CGFloat kContinueButtonTouchMargin = 10;
                                                        toItem:nil
                                                     attribute:NSLayoutAttributeNotAnAttribute
                                                    multiplier:1.0
-                                                     constant:ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window)];
+                                                     constant:0.0];  // constant will be set in updateConstraintConstantsForWindow:
     _widthConstraint.active = YES;
+    [self updateConstraintConstantsForWindow:self.window];
 }
 
 - (void)updateConstraints {
-    _widthConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window);
+    [self updateConstraintConstantsForWindow:self.window];
     [super updateConstraints];
 }
 

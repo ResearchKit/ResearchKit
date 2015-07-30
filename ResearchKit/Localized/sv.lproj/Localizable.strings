@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Inga insamlade data hittades.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen utmatningskatalog har angetts";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Tryck för att ta en annan bild";
-"MEDIA_BUTTON" = "Tryck för att ta en bild";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tillbaka";
 

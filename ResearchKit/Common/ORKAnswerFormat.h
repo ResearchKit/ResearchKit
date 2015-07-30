@@ -104,6 +104,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
 @class ORKTextAnswerFormat;
+@class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
 
 
@@ -188,6 +189,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
+
++ (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
@@ -986,6 +989,25 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is `UITextSpellCheckingTypeDefault`.
  */
 @property UITextSpellCheckingType spellCheckingType;
+
+/**
+ The keyboard type that applies to the user's input.
+ 
+ By default, the value of this property is `UIKeyboardTypeDefault`.
+ */
+@property UIKeyboardType keyboardType;
+
+@end
+
+
+/**
+ The `ORKEmailAnswerFormat` class represents the answer format for questions that collect an email response
+ from the user.
+ 
+ An `ORKEmailAnswerFormat` object produces an `ORKTextQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEmailAnswerFormat : ORKAnswerFormat
 
 @end
 

@@ -298,11 +298,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return [self commonInitWithTask:task taskRunUUID:taskRunUUID];
 }
 
-- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data {
+- (instancetype)initWithTask:(id<ORKTask>)task restorationData:(NSData *)data delegate:(nonnull id<ORKTaskViewControllerDelegate>)delegate {
     
     self = [self initWithTask:task taskRunUUID:nil];
     
     if (self) {
+        self.delegate = delegate;
         self.restorationClass = [self class];
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
         [self decodeRestorableStateWithCoder:unarchiver];

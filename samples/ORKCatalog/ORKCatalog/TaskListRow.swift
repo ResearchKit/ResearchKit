@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case TowerOfHanoi
     case ImageCapture
     case Survey
     case Consent
@@ -135,6 +136,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .TowerOfHanoi:
+                return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -221,6 +225,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case TowerOfHanoi =                                         "TowerOfHanoi"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -305,6 +310,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return reactionTimeTask
+            
+            case .TowerOfHanoi:
+                return towerOfHanoiTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -603,6 +611,10 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
+    private var towerOfHanoiTask: ORKTask {
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+    }
+    
     private var exampleSuccessSound: UInt32 {
         var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!
         var soundID: SystemSoundID = 0
@@ -632,6 +644,8 @@ enum TaskListRow: Int, Printable {
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
         imageCaptureStep.optional = false
+        imageCaptureStep.accessibilityInstructions = NSLocalizedString("Your instructions for capturing the image", comment: "")
+        imageCaptureStep.accessibilityHint = NSLocalizedString("Captures the image visible in the preview", comment: "")
         
         imageCaptureStep.templateImage = UIImage(named: "hand_outline_big")!
         
