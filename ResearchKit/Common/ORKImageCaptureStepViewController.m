@@ -40,17 +40,17 @@
 
 @interface ORKImageCaptureStepViewController () <ORKImageCaptureViewDelegate>
 
-@property (nonatomic, strong) ORKImageCaptureView *imageCaptureView;
-@property (nonatomic, strong) dispatch_queue_t sessionQueue;
-@property (nonatomic, strong) AVCaptureSession *captureSession;
-@property (nonatomic, strong) AVCaptureStillImageOutput *stillImageOutput;
-@property (nonatomic, strong) NSData *capturedImageData;
-@property (nonatomic, strong) NSURL *fileUrl;
-
 @end
 
 
-@implementation ORKImageCaptureStepViewController
+@implementation ORKImageCaptureStepViewController {
+    ORKImageCaptureView *_imageCaptureView;
+    dispatch_queue_t _sessionQueue;
+    AVCaptureSession *_captureSession;
+    AVCaptureStillImageOutput *_stillImageOutput;
+    NSData *_capturedImageData;
+    NSURL *_fileURL;
+}
 
 - (instancetype)initWithStep:(ORKStep *)step result:(ORKResult *)result {
     self = [self initWithStep:step];
@@ -61,7 +61,7 @@
             if(fileResult.fileURL) {
                 // Setting these properties in this order allows us to reuse the existing file on disk
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
-                self.fileUrl = fileResult.fileURL;
+                _fileURL = fileResult.fileURL;
             }
         }
     }
@@ -96,11 +96,11 @@
 
 - (void)retakePressed:(void (^ __nullable)())handler {
     // Start the capture session, and reset the captured image to nil
-    dispatch_async(self.sessionQueue, ^{
-        [self.captureSession startRunning];
+    dispatch_async(_sessionQueue, ^{
+        [_captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.capturedImageData = nil;
-            if(handler) {
+            if (handler) {
                 handler();
             }
         });
@@ -109,24 +109,24 @@
 
 - (void)capturePressed:(void (^ __nullable)(BOOL))handler {
     // Capture the image via the output
-    dispatch_async(self.sessionQueue, ^{
-    	[[self stillImageOutput] captureStillImageAsynchronouslyFromConnection:[[self stillImageOutput] connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-            [self queue_captureImageFromData:imageDataSampleBuffer withHandler:handler];
+    dispatch_async(_sessionQueue, ^{
+    	[_stillImageOutput captureStillImageAsynchronouslyFromConnection:[_stillImageOutput connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+            [self queueCaptureImageFromData:imageDataSampleBuffer handler:handler];
     	}];
     });
 }
 
 - (void)videoOrientationDidChange:(AVCaptureVideoOrientation)videoOrientation {
     // Keep the output orientation in sync with the input orientation
-    ((AVCaptureConnection *)self.stillImageOutput.connections[0]).videoOrientation = videoOrientation;
+    ((AVCaptureConnection *)_stillImageOutput.connections[0]).videoOrientation = videoOrientation;
 }
 
-- (void)queue_captureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer withHandler:(void (^ __nullable)(BOOL))handler {
+- (void)queueCaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^ __nullable)(BOOL))handler {
     // Capture the JPEG image data, if available
     NSData *capturedImageData = !imageDataSampleBuffer ? nil : [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
     // If something was captured, stop the capture session
     if (capturedImageData) {
-        [self.captureSession stopRunning];
+        [_captureSession stopRunning];
     }
     
     // Use the main queue, as UI components may need to be updated
@@ -143,11 +143,11 @@
     [super viewDidLoad];
     
     // Capture actions should be performed off the main queue to keep the UI responsive
-    self.sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
+    _sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     
     // Setup the capture session
-    dispatch_async(self.sessionQueue, ^{
-        [self queue_setupCaptureSession];
+    dispatch_async(_sessionQueue, ^{
+        [self queueSetupCaptureSession];
     });
 }
 
@@ -155,26 +155,25 @@
     [super viewWillAppear:animated];
     
     // If we don't already have a captured image, then start the capture session running
-    if(!self.capturedImageData) {
-        dispatch_async(self.sessionQueue, ^{
-            [[self captureSession] startRunning];
+    if(!_capturedImageData) {
+        dispatch_async(_sessionQueue, ^{
+            [_captureSession startRunning];
         });
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     // If the capture session is running, stop it
-    if(self.captureSession.isRunning) {
-        dispatch_async(self.sessionQueue, ^{
-            [[self captureSession] stopRunning];
+    if(_captureSession.isRunning) {
+        dispatch_async(_sessionQueue, ^{
+            [_captureSession stopRunning];
         });
     }
     
     [super viewWillDisappear:animated];
 }
 
-- (void)queue_setupCaptureSession
-{
+- (void)queueSetupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
     [_captureSession beginConfiguration];
@@ -183,7 +182,7 @@
     
     // Get the camera
     AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if(device) {
+    if (device) {
         // Configure the input and output
         AVCaptureDeviceInput* input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -191,7 +190,7 @@
             [_captureSession addInput:input];
             [stillImageOutput setOutputSettings:@{AVVideoCodecKey : AVVideoCodecJPEG}];
             [_captureSession addOutput:stillImageOutput];
-            [self setStillImageOutput:stillImageOutput];
+            _stillImageOutput = stillImageOutput;
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self handleError:[NSError errorWithDomain:NSCocoaErrorDomain code:NSFeatureUnsupportedError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_PERMISSIONS", nil)}]];
@@ -213,9 +212,9 @@
 
 - (void)handleError:(NSError *)error {
     // Shut down the session, if running
-    if(_captureSession.isRunning) {
+    if (_captureSession.isRunning) {
         STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
-        dispatch_async(self.sessionQueue, ^{
+        dispatch_async(_sessionQueue, ^{
             [strongCaptureSession stopRunning];
         });
     }
@@ -226,7 +225,7 @@
     _imageCaptureView.session = nil;
     _imageCaptureView.capturedImage = nil;
     _capturedImageData = nil;
-    _fileUrl = nil;
+    _fileURL = nil;
     
     // Show the error in the image capture view
     _imageCaptureView.error = error;
@@ -241,19 +240,19 @@
     _imageCaptureView.capturedImage = capturedImageData ? [UIImage imageWithData:capturedImageData] : nil;
     
     // Remove the old file, if it exists, now that new data was acquired or reset
-    if (_fileUrl) {
-        [[NSFileManager defaultManager] removeItemAtURL:_fileUrl error:nil];
+    if (_fileURL) {
+        [[NSFileManager defaultManager] removeItemAtURL:_fileURL error:nil];
         // Force the file to be rewritten the next time the result is requested
-        _fileUrl = nil;
+        _fileURL = nil;
     }
     
     [self notifyDelegateOnResultChange];
 }
 
 - (NSURL *)writeCapturedDataWithError:(NSError * __autoreleasing *)error {
-    NSURL *url = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
+    NSURL *URL = [self.outputDirectory URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",self.step.identifier]];
     // Confirm the outputDirectory was set properly
-    if (!url) {
+    if (!URL) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY", nil)}];
         }
@@ -262,7 +261,7 @@
     
     // If set properly, the outputDirectory is already created, so write the file into it
     NSError *writeError = nil;
-    if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
+    if (![_capturedImageData writeToURL:URL options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
         if (writeError) {
             ORK_Log_Oops(@"%@", writeError);
         }
@@ -272,7 +271,7 @@
         return nil;
     }
     
-    return url;
+    return URL;
 }
 
 - (ORKStepResult *)result {
@@ -280,9 +279,9 @@
     NSDate *now = stepResult.endDate;
     
     // If we have captured data, but have not yet written that data to a file, do it now
-    if (!_fileUrl && _capturedImageData) {
+    if (!_fileURL && _capturedImageData) {
         NSError *error = nil;
-        _fileUrl = [self writeCapturedDataWithError:&error];
+        _fileURL = [self writeCapturedDataWithError:&error];
         if (error) {
             [self handleError:error];
         }
@@ -293,7 +292,7 @@
     fileResult.startDate = stepResult.startDate;
     fileResult.endDate = now;
     fileResult.contentType = @"image/jpeg";
-    fileResult.fileURL = _fileUrl;
+    fileResult.fileURL = _fileURL;
     [results addObject:fileResult];
     stepResult.results = [results copy];
     return stepResult;
