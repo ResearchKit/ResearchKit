@@ -113,11 +113,11 @@
     
     NSMutableArray *constraints = [NSMutableArray new];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[activeStepView]|"
-                                                                             options:0
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:@{@"activeStepView": _activeStepView}]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topLayoutGuide][activeStepView]|"
-                                                                             options:0
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:@{@"activeStepView": _activeStepView,
                                                                                        @"topLayoutGuide": self.topLayoutGuide}]];
