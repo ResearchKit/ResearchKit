@@ -83,25 +83,53 @@
 }
 
 - (void)setCell:(ORKSurveyAnswerCell *)cell {
-    [self removeConstraints:[self constraints]];
+    // Removing old cell from superview automatically removes its constraints
     [_cell removeFromSuperview];
     _cell = cell;
     
-    [_cell setTranslatesAutoresizingMaskIntoConstraints:NO];
+    _cell.translatesAutoresizingMaskIntoConstraints = NO;
     
     if ([[_cell class] shouldDisplayWithSeparators]) {
         _cell.showTopSeparator = YES;
         _cell.showBottomSeparator = YES;
-        //_cell.topSeparatorLeftInset = 0;
-        //_cell.bottomSeparatorLeftInset = 0;
     }
     
     [self addSubview:_cell];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTopMargin multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottomMargin multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeftMargin multiplier:1 constant:0]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_cell attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRightMargin multiplier:1 constant:0]];
+    [self setUpCellConstraints];
+}
 
+- (void)setUpCellConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeTopMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeBottomMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
+                                                        attribute:NSLayoutAttributeLeft
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeLeftMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_cell
+                                                        attribute:NSLayoutAttributeRight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeRightMargin
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 @end
