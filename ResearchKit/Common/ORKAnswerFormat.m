@@ -1169,6 +1169,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 - (NSNumberFormatter *)makeNumberFormatter {
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.maximumFractionDigits = NSDecimalNoScale;
     numberFormatter.usesGroupingSeparator = NO;
     return numberFormatter;
 }
