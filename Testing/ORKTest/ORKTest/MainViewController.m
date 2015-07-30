@@ -258,7 +258,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     }
 
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
-        [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
+        obj.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:obj];
     }];
    
@@ -269,10 +269,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         } else {
             horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
         }
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizVisualFormatString 
-                                                                          options:(NSLayoutFormatOptions)0
-                                                                          metrics:nil
-                                                                            views:buttons]];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizVisualFormatString
+                                                                                        options:(NSLayoutFormatOptions)0
+                                                                                        metrics:nil
+                                                                                          views:buttons]];
         
         NSArray *allKeys = buttonKeys;
         BOOL left = YES;
@@ -314,14 +314,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [leftVisualFormatString appendString:@"-20-|"];
         [rightVisualFormatString appendString:@"-20-|"];
         
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVisualFormatString
-                                                                          options:NSLayoutFormatAlignAllCenterX
-                                                                          metrics:nil
-                                                                            views:buttons]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVisualFormatString
-                                                                          options:NSLayoutFormatAlignAllCenterX
-                                                                          metrics:nil
-                                                                            views:buttons]];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVisualFormatString
+                                                                                        options:NSLayoutFormatAlignAllCenterX
+                                                                                        metrics:nil
+                                                                                          views:buttons]];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVisualFormatString
+                                                                                        options:NSLayoutFormatAlignAllCenterX
+                                                                                        metrics:nil
+                                                                                          views:buttons]];
         
     }
 }
@@ -2299,14 +2299,20 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
-        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
+        customView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]"
+                                                                               options:(NSLayoutFormatOptions)0
+                                                                               metrics:nil
+                                                                                 views:@{@"c": customView}];
         for (NSLayoutConstraint *constraint in verticalConstraints)
         {
             constraint.priority = UILayoutPriorityFittingSizeLevel;
         }
-        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-        [customView addConstraints:verticalConstraints];
+        [NSLayoutConstraint activateConstraints:verticalConstraints];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]"
+                                                                                        options:(NSLayoutFormatOptions)0
+                                                                                        metrics:nil
+                                                                                          views:@{@"c": customView}]];
         
         [(ORKActiveStepViewController *)stepViewController setCustomView:customView];
         
