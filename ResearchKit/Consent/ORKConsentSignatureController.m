@@ -50,14 +50,12 @@
 
 
 @implementation ORKConsentSignatureWrapperView {
-    NSLayoutConstraint *_signatureViewWidthConstraint;
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
     _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([[ORKTextButton defaultFont] descender])-1 };
-    [self updateConstraintConstantsForWindow:newWindow];
     [self setNeedsLayout];
 }
 
@@ -106,10 +104,6 @@
         _clearButton.alpha = 0;
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _signatureView);
     }
-}
-
-- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    _signatureViewWidthConstraint.constant = ORKWidthForSignatureView(window);
 }
 
 - (void)setUpConstraints {
@@ -165,22 +159,7 @@
                                                        multiplier:1.0
                                                          constant:30.0]];
     
-    _signatureViewWidthConstraint = [NSLayoutConstraint constraintWithItem:_signatureView
-                                                                 attribute:NSLayoutAttributeWidth
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:nil
-                                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                                multiplier:1.0
-                                                                  constant:0.0]; // constant set in updateConstraintConstantsForWindow:
-    [constraints addObject:_signatureViewWidthConstraint];
-
     [NSLayoutConstraint activateConstraints:constraints];
-    [self updateConstraintConstantsForWindow:self.window];
-}
-
-- (void)updateConstraints {
-    [self updateConstraintConstantsForWindow:self.window];
-    [super updateConstraints];
 }
 
 @end

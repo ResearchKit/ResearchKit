@@ -106,7 +106,10 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 @end
 
 
-@implementation ORKSignatureView
+@implementation ORKSignatureView {
+    NSLayoutConstraint *_heightConstraint;
+    NSLayoutConstraint *_widthConstraint;
+}
 
 + (void)initialize {
     if (self == [ORKSignatureView class]) {
@@ -120,25 +123,50 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     self = [super init];
     if (self) {
         [self makeSignatureGestureRecognizer];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:nil
-                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1
-                                                          constant:ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, self.window)]];
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                           attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0
-                                                                            constant:ORKScreenMetricMaxDimension];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
-        [self addConstraint:widthConstraint];
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    _heightConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricSignatureViewHeight, screenType);
+    _widthConstraint.constant = ORKWidthForSignatureView(window);
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:0.0]; // constant set in updateConstraintConstantsForWindow:
+    [constraints addObject:_heightConstraint];
+
+    _widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                    attribute:NSLayoutAttributeWidth
+                                                    relatedBy:NSLayoutRelationEqual
+                                                       toItem:nil
+                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                   multiplier:1.0
+                                                     constant:0.0]; // constant set in updateConstraintConstantsForWindow:
+    [constraints addObject:_widthConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    [self updateConstraintConstantsForWindow:self.window];
+}
+
+- (void)updateConstraints {
+    [self updateConstraintConstantsForWindow:self.window];
+    [super updateConstraints];
 }
 
 - (UIBezierPath *)pathWithRoundedStyle {
