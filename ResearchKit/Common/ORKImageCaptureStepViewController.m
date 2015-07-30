@@ -76,12 +76,24 @@
         _imageCaptureView.delegate = self;
         [self.view addSubview:_imageCaptureView];
         
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(_imageCaptureView);
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_imageCaptureView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imageCaptureView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+        _imageCaptureView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    NSDictionary *views = @{ @"imageCaptureView": _imageCaptureView };
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageCaptureView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageCaptureView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
