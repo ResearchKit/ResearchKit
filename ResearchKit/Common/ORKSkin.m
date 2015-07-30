@@ -235,6 +235,9 @@ UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view) {
 }
 
 CGFloat ORKWidthForSignatureView(UIWindow *window) {
+    if (!window) {
+        return 0.0;
+    }
     const CGSize windowSize = window.bounds.size;
     const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
     const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardHorizMarginForView(window) + 2*ORKStandardLeftMarginForTableViewCell(window) );
