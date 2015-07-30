@@ -762,7 +762,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     if (_customView && [[_customView constraints] count] == 0) {
         [_customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        CGSize requiredSize = [_customView sizeThatFits:(CGSize){self.bounds.size.width,CGFLOAT_MAX}];
+        CGSize requiredSize = [_customView sizeThatFits:(CGSize){self.bounds.size.width, CGFLOAT_MAX}];
         
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_customView
                                                                            attribute:NSLayoutAttributeWidth

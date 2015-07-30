@@ -56,15 +56,27 @@
     // to add a custom view to the active step controller, and then
     // find that view here and attach to it.
     //
-    // As it is, in this example we are adding constraints to "view" without
+    // As it is, in this example we are adding constraints to 'view' (= self.containerView) without
     // really owning its constraint space.
     [_containerFiller removeFromSuperview];
     _containerFiller = [UIView new];
-    [_containerFiller setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.containerView addSubview:_containerFiller];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[c]|" options:0 metrics:nil views:@{@"c":_containerFiller}]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[c]|" options:0 metrics:nil views:@{@"c":_containerFiller}]];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_containerFiller attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:160];
+    _containerFiller.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:_containerFiller];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[containerFiller]|"
+                                                                 options:(NSLayoutFormatOptions)0
+                                                                 metrics:nil
+                                                                   views:@{@"containerFiller": _containerFiller}]];
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[containerFiller]|"
+                                                                 options:(NSLayoutFormatOptions)0
+                                                                 metrics:nil
+                                                                   views:@{@"containerFiller": _containerFiller}]];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_containerFiller
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:160.0];
     heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
     [_containerFiller addConstraint:heightConstraint];
     
@@ -88,8 +100,20 @@
     _button.hidden = YES;
     [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchDown];
     [_containerFiller addSubview:_button];
-    [_containerFiller addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_containerFiller attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    [_containerFiller addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_containerFiller attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    [_containerFiller addConstraint:[NSLayoutConstraint constraintWithItem:_button
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:_containerFiller
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
+    [_containerFiller addConstraint:[NSLayoutConstraint constraintWithItem:_button
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:_containerFiller
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
     
     _records = [NSMutableArray array];
     
