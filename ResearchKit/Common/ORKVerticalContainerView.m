@@ -600,8 +600,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
         }
     }
     
-    [self addCustomViewContainerConstraints];
-    [self addStepViewContainerConstraints];
+    [self prepareCustomViewContainerConstraints];
+    [self prepareStepViewContainerConstraints];
     
     [NSLayoutConstraint activateConstraints:_variableConstraints];
 
@@ -613,7 +613,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     [super updateConstraints];
 }
 
-- (void)addStepViewContainerConstraints {
+- (void)prepareStepViewContainerConstraints {
     if (_stepView) {
         NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_stepViewContainer
                                                                            attribute:NSLayoutAttributeWidth
@@ -710,7 +710,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
 }
 
-- (void)addCustomViewContainerConstraints {
+- (void)prepareCustomViewContainerConstraints {
     if (_customView) {
         [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[customView]|"
                                                                                           options:(NSLayoutFormatOptions)0
