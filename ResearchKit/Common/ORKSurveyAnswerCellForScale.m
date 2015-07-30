@@ -66,13 +66,15 @@
         [self addSubview:_sliderView];
         
         self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSDictionary *views = NSDictionaryOfVariableBindings(_sliderView);
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
+        NSDictionary *views = @{ @"sliderView": _sliderView };
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
+                                                                     metrics:nil
+                                                                       views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
+                                                                     metrics:nil
+                                                                       views:views]];
     }
     
     [self answerDidChange];
