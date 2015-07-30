@@ -36,9 +36,6 @@
 
 #define ORKVerticalContainerLog(...)
 
-static const CGFloat AssumedNavBarHeight = 44;
-static const CGFloat AssumedStatusBarHeight = 20;
-
 @implementation ORKStepHeaderView {
     NSLayoutConstraint *_captionMinBottomSpacingConstraint;
     NSLayoutConstraint *_captionToInstructionConstraint;
@@ -160,6 +157,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    static const CGFloat AssumedNavBarHeight = 44;
+    static const CGFloat AssumedStatusBarHeight = 20;
+    
     ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     
     const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForScreenType(ORKScreenMetricIllustrationToCaptionBaseline, screenType);
@@ -226,12 +226,12 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
     // Fill all available horizontal space
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1.0
-                                                                   constant:ORKScreenMetricMaxDimension];
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:ORKScreenMetricMaxDimension];
     widthConstraint.priority = UILayoutPriorityDefaultLow - 1;
     [constraints addObject:widthConstraint];
     
