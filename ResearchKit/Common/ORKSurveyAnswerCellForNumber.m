@@ -79,6 +79,7 @@
 
     [self addSubview:_containerView];
     
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     ORKEnableAutoLayoutForViews(@[_containerView, _textFieldView]);
     [self setUpConstraints];
 }
@@ -100,7 +101,6 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
-    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
                                                                              options:(NSLayoutFormatOptions)0
