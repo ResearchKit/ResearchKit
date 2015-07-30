@@ -186,30 +186,38 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
             } else {
-                ORKQuestionStepCellHolderView *holder = [ORKQuestionStepCellHolderView new];
-                holder.delegate = self;
-                holder.cell = [self answerCellForTableView:nil];
-                [holder addConstraints:[holder.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
-                holder.answer = [self answer];
+                ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
+                cellHolderView.delegate = self;
+                cellHolderView.cell = [self answerCellForTableView:nil];
+                [NSLayoutConstraint activateConstraints:
+                 [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
+                cellHolderView.answer = [self answer];
                 
-                _questionView.questionCustomView = holder;
+                _questionView.questionCustomView = cellHolderView;
             }
             
-            [_questionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+            _questionView.translatesAutoresizingMaskIntoConstraints = NO;
             _questionView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
             
-            NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[s]|" options:0 metrics:nil views:@{@"s":_questionView}]];
-            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tg][s][bg]" options:0 metrics:nil views:@{@"s":_questionView,@"tg":self.topLayoutGuide,@"bg":self.bottomLayoutGuide}]];
+            NSMutableArray *constraints = [NSMutableArray new];
+            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
+                                                                                     options:0
+                                                                                     metrics:nil
+                                                                                       views:@{@"questionView": _questionView}]];
+            [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][questionView][bottomGuide]"
+                                                                                     options:0
+                                                                                     metrics:nil
+                                                                                       views:@{@"questionView": _questionView,
+                                                                                               @"topGuide": self.topLayoutGuide,
+                                                                                               @"bottomGuide": self.bottomLayoutGuide}]];
             for (NSLayoutConstraint *constraint in constraints) {
                 constraint.priority = UILayoutPriorityRequired;
             }
-            [self.view addConstraints:constraints];
-            
+            [NSLayoutConstraint activateConstraints:constraints];
         }
-        
     }
     
     if ([self allowContinue] == NO) {
@@ -330,16 +338,29 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)setCustomQuestionView:(ORKQuestionStepCustomView *)customQuestionView {
     [_customQuestionView removeFromSuperview];
     _customQuestionView = customQuestionView;
-    if (! [[_customQuestionView constraints] count]) {
-        CGSize requiredSize = [_customQuestionView sizeThatFits:(CGSize){self.view.bounds.size.width,CGFLOAT_MAX}];
+    if ([[_customQuestionView constraints] count] == 0) {
+        _customQuestionView.translatesAutoresizingMaskIntoConstraints = NO;
+
+        CGSize requiredSize = [_customQuestionView sizeThatFits:(CGSize){self.view.bounds.size.width, CGFLOAT_MAX}];
         
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_customQuestionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:requiredSize.width];
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_customQuestionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:requiredSize.height];
+        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_customQuestionView
+                                                                           attribute:NSLayoutAttributeWidth
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
+                                                                            constant:requiredSize.width];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_customQuestionView
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1.0
+                                                                             constant:requiredSize.height];
         
         widthConstraint.priority = UILayoutPriorityDefaultLow;
         heightConstraint.priority = UILayoutPriorityDefaultLow;
-        [_customQuestionView addConstraints:@[widthConstraint, heightConstraint]];
-        [_customQuestionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [NSLayoutConstraint activateConstraints:@[widthConstraint, heightConstraint]];
     }
     [self stepDidChange];
 }
