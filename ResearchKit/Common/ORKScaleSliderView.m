@@ -115,7 +115,7 @@
         
         [constraints addObjectsFromArray
          :[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeLabel(==_leftRangeLabel)]"
-                                                  options:0
+                                                  options:(NSLayoutFormatOptions)0
                                                   metrics:nil
                                                     views:views]];
         
