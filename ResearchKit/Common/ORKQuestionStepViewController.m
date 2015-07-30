@@ -204,11 +204,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             
             NSMutableArray *constraints = [NSMutableArray new];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
-                                                                                     options:0
+                                                                                     options:(NSLayoutFormatOptions)0
                                                                                      metrics:nil
                                                                                        views:@{@"questionView": _questionView}]];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][questionView][bottomGuide]"
-                                                                                     options:0
+                                                                                     options:(NSLayoutFormatOptions)0
                                                                                      metrics:nil
                                                                                        views:@{@"questionView": _questionView,
                                                                                                @"topGuide": self.topLayoutGuide,
