@@ -153,7 +153,7 @@
     }
 }
 
-- (void)updateBottomConstraint {
+- (void)updateBottomConstraintConstant {
     _bottomConstraint.constant = -_keyboardOverlap;
 }
 
@@ -191,10 +191,10 @@
                                                      attribute:NSLayoutAttributeBottomMargin
                                                     multiplier:1.0
                                                       constant:0.0];
-    _bottomConstraint.priority = UILayoutPriorityDefaultHigh-1;
+    _bottomConstraint.priority = UILayoutPriorityDefaultHigh - 1;
     [constraints addObject:_bottomConstraint];
     
-    [self updateBottomConstraint];
+    [self updateBottomConstraintConstant];
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
@@ -342,7 +342,7 @@
         // Keep track of the keyboard overlap, so we can adjust the constraint properly.
         _keyboardOverlap = intersectionSize.height;
         
-        [self updateBottomConstraint];
+        [self updateBottomConstraintConstant];
         
         // Trigger layout inside the animation block to get the constraint change to animate.
         [scrollView layoutIfNeeded];
