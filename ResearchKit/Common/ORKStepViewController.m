@@ -280,6 +280,10 @@
     }
 }
 
+- (BOOL)hasBeenPresented {
+    return _hasBeenPresented;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
