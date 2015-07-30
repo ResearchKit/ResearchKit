@@ -196,7 +196,13 @@
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
-    return @[[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:[[self class] suggestedCellHeightForView:view]]];
+    return @[[NSLayoutConstraint constraintWithItem:self
+                                          attribute:NSLayoutAttributeHeight
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:nil
+                                          attribute:NSLayoutAttributeHeight
+                                         multiplier:1.0
+                                           constant:[[self class] suggestedCellHeightForView:view]]];
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
