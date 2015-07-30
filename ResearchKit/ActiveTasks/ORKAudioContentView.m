@@ -64,29 +64,35 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:nil
-                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1.0
-                                                                        constant:CGFLOAT_MAX];
-        constraint1.priority = UILayoutPriorityFittingSizeLevel;
-        NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:nil
-                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1.0
-                                                                        constant:CGFLOAT_MAX];
-        constraint2.priority = UILayoutPriorityFittingSizeLevel;
-        [NSLayoutConstraint activateConstraints:@[constraint1, constraint2]];
+        [self setUpConstraints];
         
 #if TARGET_IPHONE_SIMULATOR
         _values = @[@(0.2),@(0.6),@(0.55), @(0.1), @(0.75), @(0.7)];
 #endif
     }
     return self;
+}
+
+- (void)setUpConstraints {
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:CGFLOAT_MAX];
+    widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
+    
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:CGFLOAT_MAX];
+    heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
+    
+    [NSLayoutConstraint activateConstraints:@[widthConstraint, heightConstraint]];
 }
 
 - (void)setValues:(NSArray *)values {
@@ -194,7 +200,7 @@ static const CGFloat kValueLineMargin = 1.5;
 + (UIFont *)defaultFont {
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
     UIFontDescriptor *alternativeDescriptor = ORKFontDescriptorForLightStylisticAlternative(descriptor);
-    return [UIFont fontWithDescriptor:alternativeDescriptor size:[alternativeDescriptor pointSize]+4];
+    return [UIFont fontWithDescriptor:alternativeDescriptor size:[alternativeDescriptor pointSize] + 4];
 }
 
 @end
@@ -210,7 +216,6 @@ static const CGFloat kValueLineMargin = 1.5;
 
 
 @implementation ORKAudioContentView {
-    NSArray *_constraints;
     NSMutableArray *_samples;
     UIColor *_keyColor;
 }
@@ -314,7 +319,7 @@ static const CGFloat kValueLineMargin = 1.5;
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
-                                                         constant:(GraphViewBlueZoneHeight+GraphViewRedZoneHeight*2)]];
+                                                         constant:(GraphViewBlueZoneHeight + GraphViewRedZoneHeight*2)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
