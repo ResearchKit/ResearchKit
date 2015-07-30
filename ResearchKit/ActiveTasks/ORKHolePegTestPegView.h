@@ -29,46 +29,14 @@
  */
 
 
-#import "ORKHolePegTestStepViewController.h"
-#import "ORKHolePegTestContentView.h"
-#import "ORKActiveStepViewController_internal.h"
-#import "ORKStepViewController_internal.h"
-#import "ORKActiveStepView.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
-@interface ORKHolePegTestStepViewController ()
+NS_ASSUME_NONNULL_BEGIN
 
-@property (nonatomic, strong) ORKHolePegTestContentView *holePegTestContentView;
+ORK_CLASS_AVAILABLE
+@interface ORKHolePegTestPegView : UIView
 
 @end
 
-
-@implementation ORKHolePegTestStepViewController
-
-- (instancetype)initWithStep:(ORKStep *)step {
-    self = [super initWithStep:step];
-    if (self) {
-        self.suspendIfInactive = YES;
-    }
-    return self;
-}
-
-- (void)initializeInternalButtonItems {
-    [super initializeInternalButtonItems];
-    
-    // Don't show next button
-    self.internalContinueButtonItem = nil;
-    self.internalDoneButtonItem = nil;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
-    self.holePegTestContentView = [[ORKHolePegTestContentView alloc] init];
-    self.activeStepView.activeCustomView = self.holePegTestContentView;
-    
-    NSLog(@"results: %@", [((ORKChoiceQuestionResult *)[[self.taskViewController.result stepResultForStepIdentifier:@"hole.peg.test.question"].results firstObject]).choiceAnswers firstObject]);
-}
-
-@end
+NS_ASSUME_NONNULL_END

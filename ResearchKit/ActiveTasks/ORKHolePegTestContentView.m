@@ -30,8 +30,69 @@
 
 
 #import "ORKHolePegTestContentView.h"
+#import "ORKHolePegTestPegView.h"
+
+
+#define LAYOUT_DEBUG 1
+
+
+@interface ORKHolePegTestContentView ()
+
+@property (nonatomic, strong) ORKHolePegTestPegView *pegView;
+@property (nonatomic, copy) NSArray *constraints;
+
+@end
 
 
 @implementation ORKHolePegTestContentView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        NSLog(@"[super initWithFrame:frame]");
+        
+        _pegView = [[ORKHolePegTestPegView alloc] init];
+        _pegView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_pegView];
+        
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setNeedsUpdateConstraints];
+#if LAYOUT_DEBUG
+        self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
+#endif
+    }
+    return self;
+}
+
+- (void)updateConstraints {
+    if ([_constraints count]) {
+        [NSLayoutConstraint deactivateConstraints:_constraints];
+        _constraints = nil;
+    }
+    
+    NSMutableArray *constraints = [NSMutableArray array];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:0
+                                                         constant:40]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeHeight
+                                                       multiplier:0
+                                                         constant:40]];
+    
+    _constraints = constraints;
+    [self addConstraints:_constraints];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    [super updateConstraints];
+}
 
 @end
