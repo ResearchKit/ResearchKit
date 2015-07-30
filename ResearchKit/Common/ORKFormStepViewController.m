@@ -845,21 +845,32 @@
         
         [view addSubview:label];
         
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                         attribute:NSLayoutAttributeTop
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:label
-                                                         attribute:NSLayoutAttributeFirstBaseline multiplier:1.0 constant:-20.0]];
-        
-        [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)} views:@{@"label": label}]];
-        
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:label
-                                                         attribute:NSLayoutAttributeLastBaseline
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:view
-                                                         attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-10.0]];
+        {
+            NSMutableArray *constraints = [NSMutableArray new];
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:label
+                                                                attribute:NSLayoutAttributeFirstBaseline
+                                                               multiplier:1.0
+                                                                 constant:-20.0]];
+            
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)}
+                                                       views:@{@"label": label}]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                                attribute:NSLayoutAttributeLastBaseline
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:view
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:-10.0]];
+            
+            [NSLayoutConstraint activateConstraints:constraints];
+        }
     } else {
         view = nil;
     }
