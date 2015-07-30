@@ -682,39 +682,40 @@ static const CGFloat kHMargin = 15.0;
     [self answerDidChange];
     
     [self.contentView addSubview:_textView];
-    
-    {
-        NSDictionary *views = @{ @"textView": _textView };
-        ORKEnableAutoLayoutForViews([views allValues]);
-        NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
+    [self setUpConstraints];
+}
 
-        NSMutableArray *constraints = [NSMutableArray new];
-        
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:metrics
-                                                   views:views]];
-        
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:metrics
-                                                   views:views]];
-        
-        
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                           multiplier:1.0
-                                                                             constant:120.0];
-        heightConstraint.priority = UILayoutPriorityDefaultHigh;
-        [constraints addObject:heightConstraint];
-        
-        [NSLayoutConstraint activateConstraints:constraints];
-    }
+- (void)setUpConstraints {
+    NSDictionary *views = @{ @"textView": _textView };
+    ORKEnableAutoLayoutForViews([views allValues]);
+    NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:metrics
+                                               views:views]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:metrics
+                                               views:views]];
+    
+    
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:1.0
+                                                                         constant:120.0];
+    heightConstraint.priority = UILayoutPriorityDefaultHigh;
+    [constraints addObject:heightConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)applyAnswerFormat {
@@ -849,27 +850,28 @@ static const CGFloat kHMargin = 15.0;
     self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
     
     [self.contentView addSubview:_selectionView];
-    
-    {
-        NSMutableArray *constraints = [NSMutableArray new];
-        
-        NSDictionary *views = @{@"selectionView": _selectionView };
-        ORKEnableAutoLayoutForViews([views allValues]);
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[selectionView]-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        
-        [NSLayoutConstraint activateConstraints:constraints];
-    }
+    [self setUpConstraints];
     
     [super cellInit];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = @{@"selectionView": _selectionView };
+    ORKEnableAutoLayoutForViews([views allValues]);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[selectionView]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark ORKImageSelectionViewDelegate
@@ -910,27 +912,28 @@ static const CGFloat kHMargin = 15.0;
     [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
     
     [self.contentView addSubview:_sliderView];
-    
-    {
-        NSMutableArray *constraints = [NSMutableArray new];
-        
-        NSDictionary *views = @{ @"sliderView": _sliderView };
-        ORKEnableAutoLayoutForViews([views allValues]);
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:nil
-                                                   views:views]];
-        
-        [NSLayoutConstraint activateConstraints:constraints];
-    }
+    [self setUpConstraints];
 
     [super cellInit];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = @{ @"sliderView": _sliderView };
+    ORKEnableAutoLayoutForViews([views allValues]);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark recover answer
