@@ -56,7 +56,8 @@
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
-    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType)-ABS([[ORKTextButton defaultFont] descender])-1 };
+    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([[ORKTextButton defaultFont] descender])-1 };
+    [self updateConstraintConstantsForWindow:newWindow];
     [self setNeedsLayout];
 }
 
@@ -105,6 +106,10 @@
         _clearButton.alpha = 0;
         UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, _signatureView);
     }
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    _signatureViewWidthConstraint.constant = ORKWidthForSignatureView(window);
 }
 
 - (void)setUpConstraints {
@@ -166,14 +171,15 @@
                                                                     toItem:nil
                                                                  attribute:NSLayoutAttributeNotAnAttribute
                                                                 multiplier:1.0
-                                                                  constant:ORKWidthForSignatureView(self.window)];
+                                                                  constant:0.0]; // constant set in updateConstraintConstantsForWindow:
     [constraints addObject:_signatureViewWidthConstraint];
 
     [NSLayoutConstraint activateConstraints:constraints];
+    [self updateConstraintConstantsForWindow:self.window];
 }
 
 - (void)updateConstraints {
-    _signatureViewWidthConstraint.constant = ORKWidthForSignatureView(self.window);
+    [self updateConstraintConstantsForWindow:self.window];
     [super updateConstraints];
 }
 
