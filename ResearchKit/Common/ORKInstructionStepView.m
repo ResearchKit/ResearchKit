@@ -74,14 +74,15 @@
     _instructionImageView.shouldApplyTint = instructionStep.shouldTintImages;
     CGSize imageSize = image.size;
     if (imageSize.width > 0 && imageSize.height > 0) {
-        [_instructionImageView removeConstraints:[_instructionImageView constraints]];
-        [_instructionImageView addConstraint:[NSLayoutConstraint constraintWithItem:_instructionImageView
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                          relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                             toItem:_instructionImageView
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                         multiplier:imageSize.height/imageSize.width
-                                                                           constant:0]];
+        [NSLayoutConstraint deactivateConstraints:[_instructionImageView constraints]];
+        NSMutableArray *constraints = [NSMutableArray new];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_instructionImageView
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                               toItem:_instructionImageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:imageSize.height / imageSize.width
+                                                             constant:0.0]];
         
         _instructionImageHeightConstraint = [NSLayoutConstraint constraintWithItem:_instructionImageView
                                                                          attribute:NSLayoutAttributeHeight
@@ -89,9 +90,11 @@
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                                         multiplier:1.0
-                                                                          constant:300];
+                                                                          constant:300.0];
         
-        [_instructionImageView addConstraint:_instructionImageHeightConstraint];
+        [constraints addObject:_instructionImageHeightConstraint];
+        [NSLayoutConstraint activateConstraints:constraints];
+        
         _instructionImageView.isAccessibilityElement = YES;
         _instructionImageView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), _instructionStep.title];
     } else {
@@ -135,11 +138,7 @@
     
     ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
-    
-    {
-        NSLayoutConstraint *constraint = _instructionImageHeightConstraint;
-        constraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
-    }
+    _instructionImageHeightConstraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
 }
 
 @end
