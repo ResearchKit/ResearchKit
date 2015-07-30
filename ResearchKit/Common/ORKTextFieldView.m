@@ -368,12 +368,12 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     
     // Ask to fill the available horizontal space
     NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_textField
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:ORKScreenMetricMaxDimension];
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:ORKScreenMetricMaxDimension];
     widthConstraint.priority = UILayoutPriorityDefaultLow;
     [constraints addObject:widthConstraint];
     

@@ -207,9 +207,9 @@
                                                                                    relatedBy:NSLayoutRelationEqual
                                                                                       toItem:nil
                                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                                  multiplier:1
+                                                                                  multiplier:1.0
                                                                                     constant:ORKScreenMetricMaxDimension];
-    progressViewWidthConstraint.priority = UILayoutPriorityRequired-1;
+    progressViewWidthConstraint.priority = UILayoutPriorityRequired - 1;
     [constraints addObject:progressViewWidthConstraint];
     
     [constraints addObjectsFromArray:

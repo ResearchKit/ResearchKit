@@ -107,6 +107,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
         ORKEnableAutoLayoutForViews(@[_scrollContainer, _container, _headerView, _stepViewContainer, _continueSkipContainer, _customViewContainer]);
 
         [self setUpStaticConstraints];
+        [self setNeedsUpdateConstraints];
         
         UITapGestureRecognizer *tapOffRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOffAction:)];
         [self addGestureRecognizer:tapOffRecognizer];
@@ -453,7 +454,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                                            toItem:_scrollContainer
                                                                         attribute:NSLayoutAttributeHeight
-                                                                       multiplier:1
+                                                                       multiplier:1.0
                                                                          constant:0.0];
     [_variableConstraints addObject:heightConstraint];
     
@@ -463,8 +464,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                                         views:@{@"container":_container}]];
 #ifdef LAYOUT_DEBUG
     _container.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.3];
-#endif
-#ifdef LAYOUT_DEBUG
     _scrollContainer.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
 #endif
 
@@ -619,7 +618,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                            attribute:NSLayoutAttributeWidth
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute multiplier:1
+                                                                           attribute:NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1.0
                                                                             constant:ORKScreenMetricMaxDimension];
         widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
         [_variableConstraints addObject:widthConstraint];
@@ -648,7 +648,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1
+                                                                         multiplier:1.0
                                                                            constant:ORKScreenMetricMaxDimension];
             constraint.priority = UILayoutPriorityFittingSizeLevel;
             [_variableConstraints addObject:constraint];
