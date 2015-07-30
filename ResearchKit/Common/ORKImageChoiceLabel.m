@@ -45,18 +45,23 @@
         // Find the tallest text to make sure cell allocate enough space to accommodate _choiceLabel
         for (NSString *text in _textArray) {
             CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(self.preferredMaxLayoutWidth, CGFLOAT_MAX)
-                                             options:NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:nil
-                                             context:nil];
+                                                     options:NSStringDrawingUsesLineFragmentOrigin
+                                                  attributes:@{NSFontAttributeName: self.font}
+                                                     context:nil];
             
             if (textSize.height < boundingRect.size.height) {
                 textSize = boundingRect.size;
             }
         }
-        return textSize;
+        return CGSizeMake(ceil(textSize.width), ceil(textSize.height));
     } else {
         return [super intrinsicContentSize];
     }
+}
+
+- (void)setTextArray:(NSArray *)textArray {
+    _textArray = textArray;
+    [self invalidateIntrinsicContentSize];
 }
 
 @end
