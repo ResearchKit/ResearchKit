@@ -179,7 +179,7 @@
                                                                  multiplier:1.0
                                                                    constant:0.0]];
     for (NSLayoutConstraint *constraint in constraints) {
-        constraint.priority = UILayoutPriorityRequired-2;
+        constraint.priority = UILayoutPriorityRequired - 2;
     }
     
     [NSLayoutConstraint activateConstraints:constraints];
@@ -191,7 +191,7 @@
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
                                                          constant:0.0];
-    _zeroWidthConstraint.priority = UILayoutPriorityRequired-1;
+    _zeroWidthConstraint.priority = UILayoutPriorityRequired - 1;
     [self setNeedsUpdateConstraints];
 }
 
@@ -262,7 +262,7 @@
     
     NSArray *horizConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_leftView]-s-[_rightView]-|"
                                                                         options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom|NSLayoutFormatDirectionLeftToRight
-                                                                        metrics:@{ @"s": @(1/scale) }
+                                                                        metrics:@{ @"s": @(1 / scale) }
                                                                           views:views];
     for (NSLayoutConstraint *constraint in horizConstraints) {
         constraint.priority = UILayoutPriorityDefaultHigh+1;
@@ -287,7 +287,7 @@
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftView][_metricKeyline(==s)]"
                                                                              options:NSLayoutFormatAlignAllTop|NSLayoutFormatDirectionLeftToRight
-                                                                             metrics:@{ @"s": @(1/scale) }
+                                                                             metrics:@{ @"s": @(1 / scale) }
                                                                                views:views]];
     NSLayoutConstraint *keylineBottom = [NSLayoutConstraint constraintWithItem:_metricKeyline
                                                                      attribute:NSLayoutAttributeBottom
@@ -305,7 +305,7 @@
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
                                                                            constant:ORKScreenMetricMaxDimension];
-    maxWidthConstraint.priority = UILayoutPriorityRequired-2;
+    maxWidthConstraint.priority = UILayoutPriorityRequired - 2;
     [constraints addObject:maxWidthConstraint];
     
     
