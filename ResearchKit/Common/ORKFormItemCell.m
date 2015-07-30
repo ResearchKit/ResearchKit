@@ -101,11 +101,9 @@ static const CGFloat kHMargin = 15.0;
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
                                  answer:(id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth
-                             screenType:(ORKScreenType)screenType {
+                          maxLabelWidth:(CGFloat)maxLabelWidth {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        _screenType = screenType;
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
         self.formItem = formItem;
@@ -227,8 +225,8 @@ static const CGFloat kHMargin = 15.0;
     NSMutableArray *_variableConstraints;
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth screenType:(ORKScreenType)screenType {
-    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth screenType:screenType];
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth {
+    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth];
     if (self != nil) {
         UILabel *label = self.labelLabel;
         label.isAccessibilityElement = NO;
@@ -258,6 +256,11 @@ static const CGFloat kHMargin = 15.0;
     _textFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self setUpContentConstraint];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
     [self setNeedsUpdateConstraints];
 }
 
@@ -344,15 +347,14 @@ static const CGFloat kHMargin = 15.0;
                                                                       constant:0.0]];
     }
     
-    CGFloat defaultTableCelltHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
-    
-    NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                                         attribute:NSLayoutAttributeHeight
-                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1.0
-                                                                          constant:defaultTableCelltHeight];
+    CGFloat defaultTableCelltHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.window);
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:defaultTableCelltHeight];
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
     [_variableConstraints addObject:heightConstraint];

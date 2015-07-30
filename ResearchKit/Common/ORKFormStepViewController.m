@@ -738,7 +738,7 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetScreenTypeForWindow(self.view.window)];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.delegate  = self;
