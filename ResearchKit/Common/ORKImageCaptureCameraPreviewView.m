@@ -44,10 +44,10 @@
 @implementation ORKImageCaptureCameraPreviewView {
     AVCaptureVideoPreviewLayer *_previewLayer;
     ORKTintedImageView *_templateImageView;
-    NSLayoutConstraint *_templateImageViewTopInset;
-    NSLayoutConstraint *_templateImageViewLeftInset;
-    NSLayoutConstraint *_templateImageViewBottomInset;
-    NSLayoutConstraint *_templateImageViewRightInset;
+    NSLayoutConstraint *_templateImageViewTopInsetConstraint;
+    NSLayoutConstraint *_templateImageViewLeftInsetConstraint;
+    NSLayoutConstraint *_templateImageViewBottomInsetConstraint;
+    NSLayoutConstraint *_templateImageViewRightInseConstraint;
     UIImageView *_capturedImageView;
 }
 
@@ -70,52 +70,66 @@
         _templateImageView.alpha = 0;
         [_capturedImageView addSubview:_templateImageView];
 
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _templateImageView, _capturedImageView);
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        // Make the insets for the template image view changable later
-        _templateImageViewTopInset = [NSLayoutConstraint constraintWithItem:_templateImageView
-                                                                  attribute:NSLayoutAttributeTop
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:_capturedImageView
-                                                                  attribute:NSLayoutAttributeTop
-                                                                 multiplier:1.0
-                                                                   constant:0.0];
-        [self addConstraint:_templateImageViewTopInset];
-        _templateImageViewLeftInset = [NSLayoutConstraint constraintWithItem:_templateImageView
-                                                                   attribute:NSLayoutAttributeLeft
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:_capturedImageView
-                                                                   attribute:NSLayoutAttributeLeft
-                                                                  multiplier:1.0
-                                                                    constant:0.0];
-        [self addConstraint:_templateImageViewLeftInset];
-        _templateImageViewBottomInset = [NSLayoutConstraint constraintWithItem:_templateImageView
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                     relatedBy:NSLayoutRelationEqual
-                                                                        toItem:_capturedImageView
-                                                                     attribute:NSLayoutAttributeBottom
-                                                                    multiplier:1.0
-                                                                      constant:0.0];
-        [self addConstraint:_templateImageViewBottomInset];
-        _templateImageViewRightInset = [NSLayoutConstraint constraintWithItem:_templateImageView
-                                                                    attribute:NSLayoutAttributeRight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:_capturedImageView
-                                                                    attribute:NSLayoutAttributeRight
-                                                                   multiplier:1.0
-                                                                     constant:0.0];
-        [self addConstraint:_templateImageViewRightInset];
-        // Make the captured image view use the available space (taking into account the layout margins)
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_capturedImageView]-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil
-                                                                       views:dictionary]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_capturedImageView]-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil
-                                                                       views:dictionary]];
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _templateImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        _capturedImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    // Make the insets for the template image view changeable later
+    _templateImageViewTopInsetConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:_capturedImageView
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1.0
+                                                               constant:0.0];
+    [constraints addObject:_templateImageViewTopInsetConstraint];
+    
+    _templateImageViewLeftInsetConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
+                                                               attribute:NSLayoutAttributeLeft
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:_capturedImageView
+                                                               attribute:NSLayoutAttributeLeft
+                                                              multiplier:1.0
+                                                                constant:0.0];
+    [constraints addObject:_templateImageViewLeftInsetConstraint];
+    
+    _templateImageViewBottomInsetConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:_capturedImageView
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0
+                                                                  constant:0.0];
+    [constraints addObject:_templateImageViewBottomInsetConstraint];
+    
+    _templateImageViewRightInseConstraint = [NSLayoutConstraint constraintWithItem:_templateImageView
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_capturedImageView
+                                                                attribute:NSLayoutAttributeRight
+                                                               multiplier:1.0
+                                                                 constant:0.0];
+    [constraints addObject:_templateImageViewRightInseConstraint];
+    
+    // Make the captured image view use the available space (taking into account the layout margins)
+    NSDictionary *views = @{ @"capturedImageView": _capturedImageView };
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[capturedImageView]-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[capturedImageView]-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (AVCaptureSession *)session {
@@ -183,17 +197,17 @@
                                            round(self.templateImageInsets.bottom * previewLayerContentFrame.size.height),
                                            round(self.templateImageInsets.right * previewLayerContentFrame.size.width));
     
-    if (_templateImageViewTopInset.constant!=insets.top) {
-        _templateImageViewTopInset.constant = insets.top;
+    if (_templateImageViewTopInsetConstraint.constant != insets.top) {
+        _templateImageViewTopInsetConstraint.constant = insets.top;
     }
-    if (_templateImageViewLeftInset.constant!=insets.left) {
-        _templateImageViewLeftInset.constant = insets.left;
+    if (_templateImageViewLeftInsetConstraint.constant != insets.left) {
+        _templateImageViewLeftInsetConstraint.constant = insets.left;
     }
-    if (_templateImageViewBottomInset.constant!=-insets.bottom) {
-        _templateImageViewBottomInset.constant = -insets.bottom;
+    if (_templateImageViewBottomInsetConstraint.constant != -insets.bottom) {
+        _templateImageViewBottomInsetConstraint.constant = -insets.bottom;
     }
-    if (_templateImageViewRightInset.constant!=-insets.right) {
-        _templateImageViewRightInset.constant = -insets.right;
+    if (_templateImageViewRightInseConstraint.constant != -insets.right) {
+        _templateImageViewRightInseConstraint.constant = -insets.right;
     }
 }
 
