@@ -48,8 +48,6 @@
     ORKTintedImageView *_imageView;
     NSLengthFormatter *_lengthFormatter;
     NSLayoutConstraint *_imageRatioConstraint;
-    ORKScreenType _screenType;
-    NSArray *_constraints;
     NSLayoutConstraint *_topConstraint;
 }
 
@@ -69,13 +67,12 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _screenType = ORKScreenTypeiPhone4;
         _timerLabel = [ORKQuantityLabel new];
         _quantityPairView = [ORKQuantityPairView new];
         _imageSpacer1 = [UIView new];
-        [_imageSpacer1 setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _imageSpacer1.translatesAutoresizingMaskIntoConstraints = NO;
         _imageSpacer2 = [UIView new];
-        [_imageSpacer2 setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _imageSpacer2.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_imageSpacer1];
         [self addSubview:_imageSpacer2];
         [self heartRateView].image = [UIImage imageNamed:@"heart-fitness" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -113,7 +110,7 @@
         [self addSubview:_quantityPairView];
         [self addSubview:_imageView];
         [self addSubview:_timerLabel];
-        [self setupConstraints];
+        [self setUpConstraints];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localeDidChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
         
@@ -139,88 +136,94 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
-    [self updateConstraintConstants];
+    [self updateConstraintConstantsForWindow:newWindow];
 }
 
-- (void)updateConstraintConstants {
-    ORKScreenType screenType = _screenType;
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
     const CGFloat CaptionBaselineToTimerTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToFitnessTimerTop, screenType);
     const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
     _topConstraint.constant = (CaptionBaselineToTimerTop - CaptionBaselineToStepViewTop);
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     NSDictionary *views = NSDictionaryOfVariableBindings(_timerLabel, _imageView, _quantityPairView, _imageSpacer1, _imageSpacer2);
+    
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_timerLabel][_imageSpacer1(>=0)][_imageView]"
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:views]];
+    
     _topConstraint = [NSLayoutConstraint constraintWithItem:_timerLabel
                                                   attribute:NSLayoutAttributeTop
                                                   relatedBy:NSLayoutRelationEqual
                                                      toItem:self
                                                   attribute:NSLayoutAttributeTop
-                                                 multiplier:1
-                                                   constant:0];
-    [self updateConstraintConstants];
+                                                 multiplier:1.0
+                                                   constant:0.0];
     [constraints addObject:_topConstraint];
-    [constraints addObject:[NSLayoutConstraint
-                            constraintWithItem:_timerLabel
-                            attribute:NSLayoutAttributeCenterX
-                            relatedBy:NSLayoutRelationEqual
-                            toItem:self
-                            attribute:NSLayoutAttributeCenterX
-                            multiplier:1
-                            constant:0]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_timerLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_timerLabel
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                            toItem:self attribute:NSLayoutAttributeWidth
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_imageView
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                            toItem:self attribute:NSLayoutAttributeWidth
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_imageView][_imageSpacer2(>=0)][_quantityPairView]|"
-                                                                             options:0
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
+    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_imageSpacer1
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_imageSpacer2
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_imageSpacer1
                                                         attribute:NSLayoutAttributeHeight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_imageSpacer2
                                                         attribute:NSLayoutAttributeHeight
-                                                       multiplier:1
-                                                         constant:0]];
-    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_imageSpacer1
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1
-                                                           constant:1000];
-    constraint1.priority = UILayoutPriorityDefaultLow-1;
-    [constraints addObject:constraint1];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
+    NSLayoutConstraint *imageSpacerHeightConstraint = [NSLayoutConstraint constraintWithItem:_imageSpacer1
+                                                                                   attribute:NSLayoutAttributeHeight
+                                                                                   relatedBy:NSLayoutRelationEqual
+                                                                                      toItem:nil
+                                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                                  multiplier:1.0
+                                                                                    constant:ORKScreenMetricMaxDimension];
+    imageSpacerHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
+    [constraints addObject:imageSpacerHeightConstraint];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_quantityPairView]|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -232,12 +235,13 @@
                                                                           relatedBy:NSLayoutRelationEqual
                                                                              toItem:nil
                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                         multiplier:1
+                                                                         multiplier:1.0
                                                                            constant:ORKScreenMetricMaxDimension];
-    maxWidthConstraint.priority = UILayoutPriorityRequired-1;
+    maxWidthConstraint.priority = UILayoutPriorityRequired - 1;
     [constraints addObject:maxWidthConstraint];
     
-    [self addConstraints:constraints];
+    [NSLayoutConstraint activateConstraints:constraints];
+    [self updateConstraintConstantsForWindow:self.window];
 }
 
 - (void)setImage:(UIImage *)image {
@@ -253,8 +257,8 @@
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:_imageView
                                                              attribute:NSLayoutAttributeWidth
-                                                            multiplier:size
-                                 .height/size.width constant:0];
+                                                            multiplier:size.height / size.width
+                                                              constant:0.0];
         _imageRatioConstraint.active = YES;
     }
 }
