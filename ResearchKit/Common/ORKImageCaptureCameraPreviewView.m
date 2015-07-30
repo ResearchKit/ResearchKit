@@ -38,18 +38,18 @@
 
 @interface ORKImageCaptureCameraPreviewView ()
 
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer *previewLayer;
-@property (nonatomic, strong) ORKTintedImageView *templateImageView;
-@property (nonatomic, strong) NSLayoutConstraint *templateImageViewTopInset;
-@property (nonatomic, strong) NSLayoutConstraint *templateImageViewLeftInset;
-@property (nonatomic, strong) NSLayoutConstraint *templateImageViewBottomInset;
-@property (nonatomic, strong) NSLayoutConstraint *templateImageViewRightInset;
-@property (nonatomic, strong) UIImageView *capturedImageView;
-
 @end
 
 
-@implementation ORKImageCaptureCameraPreviewView
+@implementation ORKImageCaptureCameraPreviewView {
+    AVCaptureVideoPreviewLayer *_previewLayer;
+    ORKTintedImageView *_templateImageView;
+    NSLayoutConstraint *_templateImageViewTopInset;
+    NSLayoutConstraint *_templateImageViewLeftInset;
+    NSLayoutConstraint *_templateImageViewBottomInset;
+    NSLayoutConstraint *_templateImageViewRightInset;
+    UIImageView *_capturedImageView;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -163,7 +163,7 @@
     [super layoutSubviews];
     
     // Ensure that the preview layer takes up all the space
-    self.previewLayer.frame = self.frame;
+    _previewLayer.frame = self.frame;
     
     // Update the insets for the template and catpured image views
     [self updateInsets];
