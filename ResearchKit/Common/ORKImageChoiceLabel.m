@@ -40,22 +40,23 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    if (self.textArray) {
+    CGSize textSize = CGSizeZero;
+    if (self.textArray && [self.textArray count] > 0) {
         // Find the tallest text to make sure cell allocate enough space to accommodate _choiceLabel
-        // This feature is for invisbleLabel only
-        NSInteger textHeight = 0;
         for (NSString *text in _textArray) {
+            CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(self.preferredMaxLayoutWidth, CGFLOAT_MAX)
+                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:nil
+                                             context:nil];
             
-            CGRect rect = [text boundingRectWithSize:CGSizeMake(self.preferredMaxLayoutWidth, CGFLOAT_MAX)
-                                             options:NSStringDrawingUsesLineFragmentOrigin attributes:nil context:nil];
-            
-            if (textHeight < rect.size.height) {
-                textHeight = rect.size.height;
-                self.text = text;
+            if (textSize.height < boundingRect.size.height) {
+                textSize = boundingRect.size;
             }
         }
+        return textSize;
+    } else {
+        return [super intrinsicContentSize];
     }
-    return [super intrinsicContentSize];
 }
 
 @end
