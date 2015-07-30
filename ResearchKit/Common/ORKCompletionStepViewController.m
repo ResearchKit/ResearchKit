@@ -77,7 +77,7 @@ static const CGFloat TickViewSize = 122;
         [self.layer addSublayer:shapeLayer];
         _shapeLayer = shapeLayer;
         
-        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
