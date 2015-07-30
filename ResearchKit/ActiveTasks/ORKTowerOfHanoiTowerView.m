@@ -42,7 +42,7 @@ static const CGFloat kBaseSpacing = 10;
     UIView *_base;
     NSMutableArray *_diskViews;
     NSMutableArray *_diskSizes;
-    NSArray *_currentConstraints;
+    NSMutableArray *_variableConstraints;
 }
 
 #pragma Mark -- Init
@@ -53,7 +53,7 @@ static const CGFloat kBaseSpacing = 10;
         _maximumNumberOfDisks = maximumNumberOfDisks;
         _base = [[UIView alloc] initWithFrame:CGRectZero];
         _base.backgroundColor = [UIColor ork_midGrayTintColor];
-        [_base setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _base.translatesAutoresizingMaskIntoConstraints = NO;
         _base.layer.cornerRadius = 2.5;
         _base.layer.masksToBounds = YES;
         [self addSubview:_base];
@@ -65,51 +65,53 @@ static const CGFloat kBaseSpacing = 10;
 #pragma Mark -- UIView
 
 - (void)updateConstraints {
-    if (_currentConstraints != nil) {
-        [NSLayoutConstraint deactivateConstraints:_currentConstraints];
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+    
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
     }
-    NSMutableArray *newConstraints = [NSMutableArray new];
+    
     CGFloat height = (kDiskHeight * _maximumNumberOfDisks) + (kDiskSpacing * _maximumNumberOfDisks);
+    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:height + kBaseSpacing]];
     
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                           attribute:NSLayoutAttributeHeight
-                                                           relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                              toItem:nil
-                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                          multiplier:1
-                                                            constant:height + kBaseSpacing]];
+    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
     
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
-                                                           attribute:NSLayoutAttributeWidth
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:self
-                                                           attribute:NSLayoutAttributeWidth
-                                                          multiplier:1
-                                                            constant:0]];
+    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:2.0]];
     
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
-                                                           attribute:NSLayoutAttributeHeight
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:nil
-                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                          multiplier:1
-                                                            constant:2]];
+    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:0.0]];
     
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
-                                                           attribute:NSLayoutAttributeCenterX
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:self
-                                                           attribute:NSLayoutAttributeCenterX
-                                                          multiplier:1
-                                                            constant:0]];
-    
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
-                                                           attribute:NSLayoutAttributeBottom
-                                                           relatedBy:NSLayoutRelationEqual
-                                                              toItem:self
-                                                           attribute:NSLayoutAttributeCenterY
-                                                          multiplier:1
-                                                            constant:(height * 0.5) + kBaseSpacing]];
+    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self
+                                                                 attribute:NSLayoutAttributeCenterY
+                                                                multiplier:1.0
+                                                                  constant:(height * 0.5) + kBaseSpacing]];
     
     UIView *topDisk;
     for (NSInteger index = 0 ; index < _diskSizes.count ; index++) {
@@ -117,53 +119,50 @@ static const CGFloat kBaseSpacing = 10;
         CGFloat divide = 1.0 / _maximumNumberOfDisks;
         CGFloat multiply = [(NSNumber *)_diskSizes[index] floatValue] * divide;
         
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
-                                                               attribute:NSLayoutAttributeCenterX
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:self
-                                                               attribute:NSLayoutAttributeCenterX
-                                                              multiplier:1
-                                                                constant:0]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
+                                                                     attribute:NSLayoutAttributeCenterX
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeCenterX
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
         
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:_base
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                    multiplier:multiply
+                                                                      constant:0.0]];
         
-        
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
-                                                               attribute:NSLayoutAttributeWidth
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:_base
-                                                               attribute:NSLayoutAttributeWidth
-                                                              multiplier:multiply
-                                                                constant:0]];
-        
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
-                                                               attribute:NSLayoutAttributeHeight
-                                                               relatedBy:NSLayoutRelationEqual
-                                                                  toItem:nil
-                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                              multiplier:1
-                                                                constant:kDiskHeight]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:nil
+                                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                                    multiplier:1.0
+                                                                      constant:kDiskHeight]];
         
         if (index == 0) {
-            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self
-                                                                   attribute:NSLayoutAttributeCenterY
-                                                                  multiplier:1
-                                                                    constant:height * 0.5]];
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeCenterY
+                                                                        multiplier:1.0
+                                                                          constant:height * 0.5]];
         } else {
-            [newConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:topDisk
-                                                                   attribute:NSLayoutAttributeTop
-                                                                  multiplier:1
-                                                                    constant:-kDiskSpacing]];
+            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
+                                                                         attribute:NSLayoutAttributeBottom
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:topDisk
+                                                                         attribute:NSLayoutAttributeTop
+                                                                        multiplier:1.0
+                                                                          constant:-kDiskSpacing]];
         }
         topDisk = disk;
     }
-    _currentConstraints = newConstraints;
-    [NSLayoutConstraint activateConstraints:newConstraints];
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
 

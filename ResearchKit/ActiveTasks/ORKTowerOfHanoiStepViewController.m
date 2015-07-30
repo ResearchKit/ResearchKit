@@ -37,6 +37,7 @@
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKSkin.h"
 
+
 static const NSUInteger kNumberOfTowers = 3;
 
 @interface ORKTowerOfHanoiViewController () <ORKTowerOfHanoiTowerViewDataSource, ORKTowerOfHanoiTowerViewDelegate>
@@ -46,10 +47,11 @@ static const NSUInteger kNumberOfTowers = 3;
 
 @end
 
+
 @implementation ORKTowerOfHanoiViewController {
     ORKActiveStepCustomView *_towerOfHanoiCustomView;
     NSNumber *_selectedIndex;
-    NSArray *_currentConstraints;
+    NSArray *_variableConstraints;
     NSMutableArray *_towers;
     NSArray *_towerViews;
     NSTimer *_timer;
@@ -62,12 +64,12 @@ static const NSUInteger kNumberOfTowers = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     _towerOfHanoiCustomView = [ORKActiveStepCustomView new];
-    [_towerOfHanoiCustomView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    _towerOfHanoiCustomView.translatesAutoresizingMaskIntoConstraints = NO;
     self.activeStepView.activeCustomView = _towerOfHanoiCustomView;
     self.activeStepView.minimumStepHeaderHeight = ORKGetMetricForWindow(ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle, self.view.window);
     
-    [self setupTowers];
-    [self setupTowerViews];
+    [self setUpTowers];
+    [self setUpTowerViews];
     [self reloadData];
     NSString *title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT",nil);
     NSString *text = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_INTRO_TEXT",nil);
@@ -83,14 +85,19 @@ static const NSUInteger kNumberOfTowers = 3;
 
 - (void)updateViewConstraints {
     [super updateViewConstraints];
-    if (_currentConstraints) {
-        [NSLayoutConstraint deactivateConstraints:_currentConstraints];
-        _currentConstraints = nil;
+    
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    _variableConstraints = nil;
+    
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
     }
-    BOOL needCompactLayout = self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact &&
-    self.traitCollection.verticalSizeClass != UIUserInterfaceSizeClassCompact;
-    _currentConstraints = needCompactLayout ? [self compactConstraints] : [self regularConstraints];
-    [NSLayoutConstraint activateConstraints:_currentConstraints];
+    
+    BOOL needCompactLayout =
+    (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) &&
+    (self.traitCollection.verticalSizeClass != UIUserInterfaceSizeClassCompact);
+    _variableConstraints = needCompactLayout ? [self compactConstraints] : [self regularConstraints];
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
 }
 
 #pragma Mark -- ORKStepViewController
@@ -191,7 +198,7 @@ static const NSUInteger kNumberOfTowers = 3;
     }
 }
 
-- (void)setupTowers {
+- (void)setUpTowers {
     NSMutableArray *diskStack = [NSMutableArray array];
     for (NSInteger disk = [self numberOfDisks] ; disk > 0 ; disk--) {
         [diskStack addObject: @(disk)];
@@ -199,7 +206,7 @@ static const NSUInteger kNumberOfTowers = 3;
     _towers = [@[[[ORKTowerOfHanoiTower alloc] initWithDisks:diskStack], [ORKTowerOfHanoiTower emptyTower], [ORKTowerOfHanoiTower emptyTower]] mutableCopy];
 }
 
-- (void)setupTowerViews {
+- (void)setUpTowerViews {
     NSMutableArray *towerViews = [NSMutableArray array];
     for (NSInteger index = 0 ; index < 3 ; index++) {
         ORKTowerOfHanoiTowerView *towerView = [[ORKTowerOfHanoiTowerView alloc] initWithFrame:CGRectZero maximumNumberOfDisks:[self numberOfDisks]];
@@ -207,7 +214,7 @@ static const NSUInteger kNumberOfTowers = 3;
         towerView.dataSource = self;
         towerView.targeted = (index == kNumberOfTowers - 1);
         [towerViews addObject:towerView];
-        [towerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        towerView.translatesAutoresizingMaskIntoConstraints = NO;
         [_towerOfHanoiCustomView addSubview:towerView];
     }
     _towerViews = towerViews;
@@ -249,13 +256,41 @@ static const NSUInteger kNumberOfTowers = 3;
     NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
 
-    [newConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-[A]-[B]-[C]-|"] options:0 metrics:nil views:views]];
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[0] attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_towerViews[1] attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[2] attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_towerViews[1] attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+    [newConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-[A]-[B]-[C]-|"]
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
+    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[0]
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:_towerViews[1]
+                                                           attribute:NSLayoutAttributeHeight
+                                                          multiplier:1.0
+                                                            constant:0.0]];
+    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[2]
+                                                           attribute:NSLayoutAttributeHeight
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:_towerViews[1]
+                                                           attribute:NSLayoutAttributeHeight
+                                                          multiplier:1.0
+                                                            constant:0.0]];
     
     for (int index = 0 ; index < _towerViews.count ; index++) {
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[index] attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:compactWidth]];
-        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[index] attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_towerOfHanoiCustomView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[index]
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1.0
+                                                                constant:compactWidth]];
+        [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[index]
+                                                               attribute:NSLayoutAttributeCenterX
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:_towerOfHanoiCustomView
+                                                               attribute:NSLayoutAttributeCenterX
+                                                              multiplier:1.0
+                                                                constant:0.0]];
     }
 
     return newConstraints;
@@ -265,13 +300,41 @@ static const NSUInteger kNumberOfTowers = 3;
     NSDictionary *views = @{ @"A" : _towerViews[0], @"B" : _towerViews[1], @"C" : _towerViews[2]};
     NSMutableArray *newConstraints = [NSMutableArray new];
     
-    [newConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[A]-|" options:0 metrics:nil views:views]];
-    [newConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[B]-|" options:0 metrics:nil views:views]];
-    [newConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[C]-|" options:0 metrics:nil views:views]];
-    [newConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[A]-[B]-[C]-|" options:0 metrics:nil views:views]];
+    [newConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[A]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
+    [newConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[B]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
+    [newConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[C]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
+    [newConstraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[A]-[B]-[C]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil
+                                               views:views]];
     
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[0] attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_towerViews[1] attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[2] attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_towerViews[1] attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[0]
+                                                           attribute:NSLayoutAttributeWidth
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:_towerViews[1]
+                                                           attribute:NSLayoutAttributeWidth
+                                                          multiplier:1.0
+                                                            constant:0.0]];
+    [newConstraints addObject:[NSLayoutConstraint constraintWithItem:_towerViews[2]
+                                                           attribute:NSLayoutAttributeWidth
+                                                           relatedBy:NSLayoutRelationEqual
+                                                              toItem:_towerViews[1]
+                                                           attribute:NSLayoutAttributeWidth
+                                                          multiplier:1.0
+                                                            constant:0.0]];
     
     return newConstraints;
 }
