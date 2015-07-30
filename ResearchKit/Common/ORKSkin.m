@@ -155,6 +155,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        32,        32,        32,        44},      // ORKScreenMetricContinueButtonHeightCompact
         {        150,       150,       146,       146,       150},      // ORKScreenMetricContinueButtonWidth
         {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
+        {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle
         {         60,        60,        60,        44,        60},      // ORKScreenMetricTableCellDefaultHeight
         {         55,        55,        55,        44,        55},      // ORKScreenMetricTextFieldCellHeight
         {         36,        36,        36,        26,        36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
