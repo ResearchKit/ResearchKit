@@ -37,7 +37,6 @@
     UIView *_containerFiller;
 }
 
-@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSMutableArray *records;
@@ -49,33 +48,29 @@
 
 - (void)viewController:(UIViewController *)viewController willStartStepWithView:(UIView *)view {
     [super viewController:viewController willStartStepWithView:view];
-    self.containerView = view;
     
-    // Here we try to keep the recorder self-contained by adding our own view to the container.
-    // However, it might be better (as in, the results will be more clearly defined)
-    // to add a custom view to the active step controller, and then
-    // find that view here and attach to it.
-    //
-    // As it is, in this example we are adding constraints to "view" without
-    // really owning its constraint space.
-    [_containerFiller removeFromSuperview];
-    _containerFiller = [UIView new];
-    [_containerFiller setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.containerView addSubview:_containerFiller];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[c]|" options:0 metrics:nil views:@{@"c":_containerFiller}]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[c]|" options:0 metrics:nil views:@{@"c":_containerFiller}]];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_containerFiller attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:160];
-    heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
-    [_containerFiller addConstraint:heightConstraint];
-    
-    _containerFiller.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.25];
+    if ([viewController isKindOfClass:[ORKActiveStepViewController class]]) {
+        ORKActiveStepViewController *activeStepViewController = (ORKActiveStepViewController *)viewController;
+        
+        // Add the containerFiller as a custom view to the active step view controller
+        [_containerFiller removeFromSuperview];
+        _containerFiller = [UIView new];
+        
+        _containerFiller.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.25];
+        
+        [_containerFiller setTranslatesAutoresizingMaskIntoConstraints:NO];
+        activeStepViewController.customView = _containerFiller;
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_containerFiller attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:160];
+        heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
+        [_containerFiller addConstraint:heightConstraint];
+    }
 }
 
 - (void)start {
     [super start];
     
-    NSAssert(self.containerView != nil, @"No container view attached.");
-    
+    NSAssert(_containerFiller != nil, @"No container filler view attached.");
+
     if (_button) {
         [_button removeFromSuperview];
     }
@@ -83,7 +78,7 @@
     _button = [UIButton buttonWithType:UIButtonTypeSystem];
     [_button setTitle:@"Tap here" forState:UIControlStateNormal];
     [_button setTranslatesAutoresizingMaskIntoConstraints:NO];
-    _button.frame = CGRectInset(_containerView.bounds, 10, 10);
+    _button.frame = CGRectInset(_containerFiller.bounds, 10, 10);
     _button.backgroundColor = [UIColor orangeColor];
     _button.hidden = YES;
     [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchDown];
