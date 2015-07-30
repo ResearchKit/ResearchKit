@@ -88,10 +88,10 @@
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
-    [self setupConstraints];
+    [self setUpConstraints];
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
@@ -105,15 +105,16 @@
                                                                       metrics:nil
                                                                         views:views]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                      options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
                                                                         views:views]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
-                                                            attribute:NSLayoutAttributeHeight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:nil
-                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                           multiplier:1.0
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
                                                          constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
