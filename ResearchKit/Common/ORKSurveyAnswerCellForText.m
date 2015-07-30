@@ -75,7 +75,6 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
-    [self setNeedsUpdateConstraints];
 }
 
 - (void)prepareView {
