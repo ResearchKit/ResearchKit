@@ -103,7 +103,7 @@
     [super viewDidLoad];
     
     _activeStepView = [[ORKActiveStepView alloc] initWithFrame:self.view.bounds];
-    [_activeStepView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    _activeStepView.translatesAutoresizingMaskIntoConstraints = NO;
     [_activeStepView setCustomView:_customView];
     [self updateContinueButtonItem];
     _activeStepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
@@ -111,9 +111,17 @@
     _activeStepView.continueSkipContainer.continueEnabled = _finished;
     [self.view addSubview:_activeStepView];
     
-    NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[s]|" options:0 metrics:nil views:@{@"s":_activeStepView}]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tg][s]|" options:0 metrics:nil views:@{@"s":_activeStepView,@"tg":self.topLayoutGuide}]];
-    [self.view addConstraints:constraints];
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[activeStepView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"activeStepView": _activeStepView}]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topLayoutGuide][activeStepView]|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:@{@"activeStepView": _activeStepView,
+                                                                                       @"topLayoutGuide": self.topLayoutGuide}]];
+    [NSLayoutConstraint activateConstraints:constraints];
     
     [self prepareStep];
 }
