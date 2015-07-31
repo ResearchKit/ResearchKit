@@ -142,8 +142,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORKGraphViewTriggerAnimationsNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORKGraphViewRefreshNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Layout
