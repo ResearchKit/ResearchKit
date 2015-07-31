@@ -63,11 +63,11 @@
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     
-    for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
         
         ORKRangePoint *dataPointVal = self.dataPoints[i];
         
-        if (!dataPointVal.isEmpty && !dataPointVal.isRangeZero) {
+        if (!dataPointVal.isUnset && !dataPointVal.hasEmptyRange) {
             
             UIBezierPath *plotLinePath = [UIBezierPath bezierPath];
             
@@ -93,12 +93,12 @@
     
     CGFloat offset = 0;
     
-    if (numberOfPlots%2 == 0) {
-        //Even
-        offset = (plotIndex - numberOfPlots/2 + 0.5) * pointWidth;
+    if (numberOfPlots % 2 == 0) {
+        // Even
+        offset = (plotIndex - numberOfPlots / 2 + 0.5) * pointWidth;
     } else {
-        //Odd
-        offset = (plotIndex - numberOfPlots/2) * pointWidth;
+        // Odd
+        offset = (plotIndex - numberOfPlots / 2) * pointWidth;
     }
     
     return offset;
@@ -123,7 +123,7 @@
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden: YES];
     }
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
     } completion:^(BOOL finished) {
        if (scrubbingValue != ORKCGFloatInvalidValue) {

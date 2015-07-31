@@ -71,7 +71,7 @@
     ORKRangePoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
-    for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
         
         if ([self.dataPoints[i] isEmpty]) {
             emptyDataPresent = YES;
@@ -131,7 +131,7 @@
     NSUInteger positionIndex = 0;
     
     if (value == ORKCGFloatInvalidValue) {
-        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+        for (positionIndex = 0; positionIndex < self.xAxisPoints.count - 1; positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal > xPosition) {
                 break;
@@ -144,8 +144,8 @@
         CGFloat x1 = [(NSNumber *)self.xAxisPoints[prevValidIndex] floatValue];
         CGFloat x2 = [(NSNumber *)self.xAxisPoints[nextValidIndex] floatValue];
         
-        CGFloat y1 = [(ORKRangePoint *)self.dataPoints[prevValidIndex] minimumValue];
-        CGFloat y2 = [(ORKRangePoint *)self.dataPoints[nextValidIndex] minimumValue];
+        CGFloat y1 = ((ORKRangePoint *)self.dataPoints[prevValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangePoint *)self.dataPoints[nextValidIndex]).minimumValue;
         
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
@@ -163,8 +163,8 @@
     CGFloat x1 = [self.xAxisPoints[previousValidIndex] floatValue];
     CGFloat x2 = [self.xAxisPoints[nextValidIndex] floatValue];
     
-    CGFloat y1 = [(ORKRangePoint *)self.yAxisPoints[previousValidIndex] minimumValue];
-    CGFloat y2 = [(ORKRangePoint *)self.yAxisPoints[nextValidIndex] minimumValue];
+    CGFloat y1 = ((ORKRangePoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangePoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
     
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -178,7 +178,7 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if ([(ORKRangePoint *)self.dataPoints[validPosition] minimumValue] != ORKCGFloatInvalidValue) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;
@@ -190,7 +190,7 @@
 
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = [super animateLayersSequentially];
-    for (NSUInteger i=0; i<self.fillLayers.count; i++) {
+    for (NSUInteger i = 0; i < self.fillLayers.count; i++) {
         CAShapeLayer *layer = self.fillLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;

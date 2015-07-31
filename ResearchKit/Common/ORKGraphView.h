@@ -308,33 +308,30 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The ORKRangePoint class models the attributes of a point used in a graph plot.
+ The `ORKRangePoint` class represents a ranged point used in a graph plot.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKRangePoint : NSObject
 
 /**
- Returns an initialized ORKRangePoint using the specified minimumValue and maximumValue.
-
- Convenience Initializer.
+ Returns a range point initialized using the specified `minimumValue` and `maximumValue`.
 
  @param minimumValue     The `minimumValue` to set.
  @param maximumValue     The `maximumValue` to set.
 
- @return An intialized ORKGraphView instance with `minimuValue` and `maximumValue` set 
- to the given parameter values.
+ @return A range point.
 */
-- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue;
+- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns an intialized ORKRangePoint using the specified value for both minimumValue and
- maximumValue, this is useful for creating points that model a single data value without a range.
+ Returns a range point initialized using the specified `value` for both `minimumValue` and
+ `maximumValue`. This is useful for creating points that model a single data value without a range.
 
- Convenience Initializer.
+ This method is a convenience initializer.
 
  @param value    The `minimumValue` and `maximumValue` to set.
 
- @return an intialized ORKGraphView instance with `minimuValue` and `maximumValue` equal to `value`.
+ @return A range point.
 */
 - (instancetype)initWithValue:(CGFloat)value;
 
@@ -353,12 +350,12 @@ ORK_CLASS_AVAILABLE
 /**
  A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
 */
-@property (nonatomic, readonly) BOOL isRangeZero;
+@property (nonatomic, readonly) BOOL hasEmptyRange;
 
 /**
  A Boolean value indicating that both `minimum value` and `maximum value` have not been set.  (read-only)
 */
-@property (nonatomic, readonly) BOOL isEmpty;
+@property (nonatomic, readonly) BOOL isUnset;
 
 @end
 

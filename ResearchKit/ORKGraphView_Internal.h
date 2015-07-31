@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
 extern const CGFloat ORKGraphViewLeftPadding;
 extern const CGFloat ORKGraphViewGrowAnimationDuration;
 extern const CGFloat ORKGraphViewPointAndLineSize;
+extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 extern NSString *const ORKGraphViewTriggerAnimationsNotification;
 extern NSString *const ORKGraphViewRefreshNotification;
@@ -54,7 +55,7 @@ extern NSString *const ORKGraphViewRefreshNotification;
 
 @property (nonatomic, strong) NSMutableArray *xAxisPoints;
 
-@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalised for this view
+@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for this view
 
 @property (nonatomic, strong) UIView *plotsView; // Holds the plots
 

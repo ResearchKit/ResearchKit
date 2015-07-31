@@ -43,6 +43,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 const CGFloat ORKGraphViewLeftPadding = 10.0;
 const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
 const CGFloat ORKGraphViewPointAndLineSize = 8.0;
+const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
 
 ORKDefineStringKey(FadeAnimationKey);
 ORKDefineStringKey(GrowAnimationKey);
@@ -56,7 +57,6 @@ static const CGFloat FadeAnimationDuration = 0.2;
 static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
-static const CGFloat ScrubberMoveAnimationDuration = 0.1;
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
 static const CGFloat LayerAnimationDelay = 0.1;
 
@@ -230,7 +230,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
         if ([_dataSource respondsToSelector:@selector(graphView:pointForForPointIndex:plotIndex:)]) {
             ORKRangePoint *value = [self.dataSource graphView:self pointForForPointIndex:i plotIndex:plotIndex];
             [_dataPoints addObject:value];
-            if (!value.isEmpty){
+            if (!value.isUnset) {
                 _hasDataPoint = YES;
             }
         }
@@ -254,7 +254,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
         
-        if (!dataPointVal.isEmpty) {
+        if (!dataPointVal.isUnset) {
             ORKRangePoint *positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
             ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
             point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
@@ -267,7 +267,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
             
             [self.dots addObject:point];
             
-            if (![positionOnYAxis isRangeZero]) {
+            if (!positionOnYAxis.hasEmptyRange) {
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
                 point.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
@@ -547,7 +547,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    [UIView animateWithDuration:ScrubberMoveAnimationDuration animations:^{
+    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
         self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
         [self updateScrubberLineAccessories:xPosition];
     }];
@@ -696,7 +696,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     NSInteger count = 0;
     
     for (ORKRangePoint *rangePoint in self.dataPoints) {
-        if (!rangePoint.isEmpty) {
+        if (!rangePoint.isUnset) {
             count++;
         }
     }
@@ -713,7 +713,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
         ORKRangePoint *normalizedRangePoint = [ORKRangePoint new];
         ORKRangePoint *dataPointValue = (ORKRangePoint *)self.dataPoints[i];
         
-        if (dataPointValue.isEmpty) {
+        if (dataPointValue.isUnset) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height;
         } else if (self.minimumValue == self.maximumValue) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height / 2;
@@ -826,15 +826,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 @implementation ORKRangePoint
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _minimumValue = ORKCGFloatInvalidValue;
-        _maximumValue = ORKCGFloatInvalidValue;
-    }
-    return self;
-}
-
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
     self = [super init];
     if (self) {
@@ -842,6 +833,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
         _maximumValue = maximumValue;
     }
     return self;
+}
+
+- (instancetype)init {
+    return [self initWithMinimumValue:ORKCGFloatInvalidValue maximumValue:ORKCGFloatInvalidValue];
 }
 
 - (instancetype)initWithValue:(CGFloat)value {
