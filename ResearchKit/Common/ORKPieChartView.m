@@ -32,7 +32,7 @@
 
 #import "ORKPieChartView.h"
 #import "ORKLegendCollectionViewCell.h"
-#import "ORKCentredCollectionViewLayout.h"
+#import "ORKCenteredCollectionViewLayout.h"
 
 @interface ORKPieChartView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
