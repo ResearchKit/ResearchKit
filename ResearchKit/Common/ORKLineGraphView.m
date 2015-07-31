@@ -193,7 +193,7 @@
     for (NSUInteger i=0; i<self.fillLayers.count; i++) {
         CAShapeLayer *layer = self.fillLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += ORKGraphGrowAnimationDuration;
+        delay += ORKGraphViewGrowAnimationDuration;
     }
     return delay;
 }

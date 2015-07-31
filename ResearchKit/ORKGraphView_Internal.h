@@ -41,23 +41,13 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
     ORKGraphAnimationTypePop
 };
 
-ORKDefineStringKey(FadeAnimationKey);
-ORKDefineStringKey(GrowAnimationKey);
+extern const CGFloat ORKGraphViewLeftPadding;
+extern const CGFloat ORKGraphViewGrowAnimationDuration;
 
-extern CGFloat const ORKGraphTopPadding;
-extern CGFloat const ORKGraphXAxisHeight;
-extern CGFloat const ORKGraphYAxisPaddingFactor;
-extern CGFloat const ORKGraphLeftPadding;
-extern CGFloat const ORKGraphAxisMarkingRulerLength;
-extern CGFloat const ORKGraphFadeAnimationDuration;
-extern CGFloat const ORKGraphGrowAnimationDuration;
-extern CGFloat const ORKGraphPopAnimationDuration;
-extern CGFloat const ORKGraphSnappingClosenessFactor;
+extern NSString *const ORKGraphViewTriggerAnimationsNotification;
+extern NSString *const ORKGraphViewRefreshNotification;
 
 @interface ORKGraphView ()
-
-extern NSString * const ORKGraphViewTriggerAnimationsNotification;
-extern NSString * const ORKGraphViewRefreshNotification;
 
 @property (nonatomic, strong) NSMutableArray *dataPoints; // Actual data
 

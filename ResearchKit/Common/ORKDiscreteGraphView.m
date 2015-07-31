@@ -126,7 +126,7 @@ static const CGFloat LineWidth = 8.0;
         [self setScrubberLineAccessoriesHidden: YES];
     }
     [UIView animateWithDuration:0.1 animations:^{
-       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
     } completion:^(BOOL finished) {
        if (scrubbingVal != NSNotFound) {
            [self setScrubberLineAccessoriesHidden:NO];
