@@ -35,6 +35,31 @@
 #import "ORKCenteredCollectionViewLayout.h"
 
 
+@interface ORKPieChartLabel : NSObject
+
+- (instancetype)initWithLabel:(UILabel *)label angle:(CGFloat)angle;
+
+@property (nonatomic) UILabel *label;
+@property (nonatomic) CGFloat angle;
+
+@end
+
+
+@implementation ORKPieChartLabel
+
+- (instancetype)initWithLabel:(UILabel *)label angle:(CGFloat)angle {
+    if (self = [super init])
+    {
+        _label = label;
+        _angle = angle;
+    }
+    return self;
+}
+
+@end
+
+
+
 @interface ORKPieChartView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -240,7 +265,7 @@
     if (_constraints) {
         [NSLayoutConstraint deactivateConstraints:_constraints];
     }
-    _constraints = [@[] mutableCopy];
+    _constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _plotView, _legendView, _titleLabel, _textLabel);
     
     // These constraints describe the layout used to calculate the height of _legendView in layoutSubviews, not the final layout.
@@ -393,11 +418,9 @@
         CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
         
         if (value != 0) {
-            
             if (idx == 0) {
                 segmentLayer.strokeStart = 0.0;
-            }
-            else {
+            } else {
                 segmentLayer.strokeStart = cumulativeValue;
             }
             
@@ -413,8 +436,7 @@
                 strokeAnimation.fillMode = kCAFillModeForwards;
                 strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
                 [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
-            }
-            else {
+            } else {
                 segmentLayer.strokeEnd = cumulativeValue + value;
             }
         }
@@ -424,7 +446,7 @@
 
 - (void)drawPercentageLabels {
     CGFloat cumulativeValue = 0;
-    NSMutableArray *labelDictionaries = [@[]mutableCopy];
+    NSMutableArray *pieLabels = [NSMutableArray new];
     
     for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
         CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
@@ -444,11 +466,12 @@
                 angle = (value / 2 + cumulativeValue) * - M_PI * 2;
             }
             
-            label.center = [self percentageLabel:label calculateCentreForAngle:angle];
+            label.center = [self percentageLabel:label calculateCenterForAngle:angle];
             [_plotView addSubview:label];
             
             cumulativeValue += value;
-            [labelDictionaries addObject: [@{@"angle" : @(angle), @"label": label}mutableCopy]];
+            ORKPieChartLabel *pieLabel = [[ORKPieChartLabel alloc] initWithLabel:label angle:angle];
+            [pieLabels addObject:pieLabel];
             
             if (_shouldAnimate) {
                 label.alpha = 0;
@@ -458,10 +481,10 @@
             }
         }
     }
-    [self adjustIntersectionsOfPercentageLabels:labelDictionaries];
+    [self adjustIntersectionsOfPercentageLabels:pieLabels];
 }
 
-- (CGPoint)percentageLabel: (UILabel *)label calculateCentreForAngle:(CGFloat)angle {
+- (CGPoint)percentageLabel: (UILabel *)label calculateCenterForAngle:(CGFloat)angle {
     
     // Calculate the desired distance from the circle's centre.
     NSInteger lineOffset = _lineWidth / 2;
@@ -485,8 +508,8 @@
     return  CGPointMake(x, y);
 }
 
-- (void)adjustIntersectionsOfPercentageLabels:(NSArray*) labelDictionaries {
-    if (![labelDictionaries count]) {
+- (void)adjustIntersectionsOfPercentageLabels:(NSArray *)pieLabels {
+    if ([pieLabels count] == 0) {
         return;
     }
     // Adjust labels while we have intersections
@@ -501,7 +524,7 @@
         shiftClockwise = !shiftClockwise;
         
         if (shiftClockwise) {
-            for (NSUInteger idx = 0; idx < ([labelDictionaries count] - 1); idx++) {
+            for (NSUInteger idx = 0; idx < ([pieLabels count] - 1); idx++) {
                 // Prevent from infinite loop
                 if (!idx) {
                     totalAngle += 0.01;
@@ -509,47 +532,47 @@
                         return;
                     }
                 }
-                NSMutableDictionary *dictionary  = labelDictionaries[idx];
-                NSMutableDictionary *nextDictionary = labelDictionaries[(idx + 1)];
-                if ([self shiftLabelDictionary:nextDictionary fromLabelDictionary:dictionary inDirection:rotateDirection]) {
+                ORKPieChartLabel *pieLabel  = pieLabels[idx];
+                ORKPieChartLabel *nextPieLabel = pieLabels[(idx + 1)];
+                if ([self shiftLabel:nextPieLabel fromLabel:pieLabel inDirection:rotateDirection]) {
                     intersections = YES;
                 }
             }
         } else {
-            for (NSInteger i = [labelDictionaries count] - 1; i > 0; i--) {
-                NSMutableDictionary *dictionary = labelDictionaries[i];
-                NSMutableDictionary *nextDictionary = labelDictionaries[i - 1];
-                if ([self shiftLabelDictionary:nextDictionary fromLabelDictionary:dictionary inDirection:-rotateDirection]) {
+            for (NSInteger i = [pieLabels count] - 1; i > 0; i--) {
+                ORKPieChartLabel *pieLabel = pieLabels[i];
+                ORKPieChartLabel *nextPieLabel = pieLabels[i - 1];
+                if ([self shiftLabel:nextPieLabel fromLabel:pieLabel inDirection:-rotateDirection]) {
                     intersections = YES;
                 }
             }
         }
         
         // Adjust space between last and first element
-        NSMutableDictionary *lastDictionary = labelDictionaries.lastObject;
-        NSMutableDictionary *firstDictionary = labelDictionaries.firstObject;
-        UILabel *lastLabel = lastDictionary[@"label"];
-        UILabel *firstLabel = firstDictionary[@"label"];
+        ORKPieChartLabel *firstPieLabel = pieLabels.firstObject;
+        ORKPieChartLabel *lastPieLabel = pieLabels.lastObject;
+        UILabel *firstLabel = firstPieLabel.label;
+        UILabel *lastLabel = lastPieLabel.label;
         if (CGRectIntersectsRect(lastLabel.frame, firstLabel.frame)) {
-            CGFloat firstLabelAngle = [firstDictionary[@"angle"] floatValue];
-            CGFloat lastLabelAngle = [lastDictionary[@"angle"] floatValue];
+            CGFloat firstLabelAngle = firstPieLabel.angle;
+            CGFloat lastLabelAngle = lastPieLabel.angle;
             firstLabelAngle += rotateDirection * 0.01;
             lastLabelAngle -= rotateDirection*0.01;
-            firstDictionary[@"angle"] = [NSNumber numberWithFloat:firstLabelAngle];
-            lastDictionary[@"angle"] = [NSNumber numberWithFloat:lastLabelAngle];
+            firstPieLabel.angle = firstLabelAngle;
+            lastPieLabel.angle = lastLabelAngle;
         }
     }
 }
 
-- (BOOL)shiftLabelDictionary:(NSMutableDictionary*)nextLabelDictionary fromLabelDictionary:(NSMutableDictionary*)fromLabelDictionary inDirection:(CGFloat) direction {
+- (BOOL)shiftLabel:(ORKPieChartLabel *)nextPieLabel fromLabel:(ORKPieChartLabel *)fromPieLabel inDirection:(CGFloat) direction {
     CGFloat shiftStep = 0.01;
-    UILabel *label = fromLabelDictionary[@"label"];
-    UILabel *nextLabel = nextLabelDictionary[@"label"];
+    UILabel *label = fromPieLabel.label;
+    UILabel *nextLabel = nextPieLabel.label;
     if (CGRectIntersectsRect(label.frame, nextLabel.frame)) {
-        CGFloat nextLabelAngle = [nextLabelDictionary[@"angle"] floatValue];
+        CGFloat nextLabelAngle = nextPieLabel.angle;
         nextLabelAngle += direction * shiftStep;
-        nextLabelDictionary[@"angle"] = [NSNumber numberWithFloat:nextLabelAngle];
-        nextLabel.center = [self percentageLabel:nextLabel calculateCentreForAngle:nextLabelAngle];
+        nextPieLabel.angle = nextLabelAngle;
+        nextLabel.center = [self percentageLabel:nextLabel calculateCenterForAngle:nextLabelAngle];
         return YES;
     }
     return NO;
@@ -560,13 +583,13 @@
 - (void)normalizeActualValues {
     _sumOfValues = 0;
     
-    for (int idx=0; idx < [self numberOfSegments]; idx++) {
+    for (int idx = 0; idx < [self numberOfSegments]; idx++) {
         CGFloat value = [self valueForSegmentAtIndex:idx];
         [_actualValues addObject:@(value)];
         _sumOfValues += value;
     }
     
-    for (int idx=0; idx < [self numberOfSegments]; idx++) {
+    for (int idx = 0; idx < [self numberOfSegments]; idx++) {
         CGFloat value = 0;
         if (_sumOfValues != 0) {
             value = ((NSNumber *)_actualValues[idx]).floatValue/_sumOfValues;
