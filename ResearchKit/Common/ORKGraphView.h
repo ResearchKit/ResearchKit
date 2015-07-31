@@ -314,18 +314,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKRangePoint : NSObject
 
 /**
- The upper limit of the range represented by this point.
- The default value of this property is zero.
-*/
-@property (nonatomic) CGFloat maximumValue;
-
-/**
- The lower limit of the range represented by this point.
- The default value of this property is zero.
-*/
-@property (nonatomic) CGFloat minimumValue;
-
-/**
  Returns an initialized ORKRangePoint using the specified minimumValue and maximumValue.
 
  Convenience Initializer.
@@ -351,14 +339,26 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithValue:(CGFloat)value;
 
 /**
- Returns true if `minimumValue` is equal to `maximumValue`, otherwise returns false.
-*/
-- (BOOL)isRangeZero;
+ The upper limit of the range represented by this point.
+ The default value of this property is zero.
+ */
+@property (nonatomic) CGFloat maximumValue;
 
 /**
- Return true if both `minimum value` and `maximum value` are not set, otherwise returns false.
+ The lower limit of the range represented by this point.
+ The default value of this property is zero.
+ */
+@property (nonatomic) CGFloat minimumValue;
+
+/**
+ A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
 */
-- (BOOL)isEmpty;
+@property (nonatomic, readonly) BOOL isRangeZero;
+
+/**
+ A Boolean value indicating that both `minimum value` and `maximum value` have not been set.  (read-only)
+*/
+@property (nonatomic, readonly) BOOL isEmpty;
 
 @end
 

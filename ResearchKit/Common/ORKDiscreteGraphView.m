@@ -39,8 +39,6 @@
 
 @implementation ORKDiscreteGraphView
 
-static const CGFloat LineWidth = 8.0;
-
 #pragma mark - Init
 
 - (void)sharedInit {
@@ -56,7 +54,7 @@ static const CGFloat LineWidth = 8.0;
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
     CAShapeLayer *layer = [super plotLineLayerForPlotIndex:plotIndex withPath:path];
-    layer.lineWidth = LineWidth;
+    layer.lineWidth = ORKGraphViewPointAndLineSize;
     return layer;
 }
 
@@ -89,7 +87,7 @@ static const CGFloat LineWidth = 8.0;
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointWidth = LineWidth;
+    CGFloat pointWidth = ORKGraphViewPointAndLineSize;
     
     NSInteger numberOfPlots = [self numberOfPlots];
     

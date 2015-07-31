@@ -42,6 +42,7 @@ NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotificat
 
 const CGFloat ORKGraphViewLeftPadding = 10.0;
 const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
+const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 
 ORKDefineStringKey(FadeAnimationKey);
 ORKDefineStringKey(GrowAnimationKey);
@@ -53,6 +54,10 @@ static const CGFloat AxisMarkingRulerLength = 8.0;
 static const CGFloat FadeAnimationDuration = 0.2;
 static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;
+static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
+static const CGFloat ScrubberMoveAnimationDuration = 0.1;
+static const CGFloat ScrubberFadeAnimationDuration = 0.2;
+static const CGFloat LayerAnimationDelay = 0.1;
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
 
@@ -133,7 +138,10 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     self.scrubberLabel.backgroundColor = [UIColor colorWithWhite:0.98 alpha:0.8];
     [self addSubview:self.scrubberLabel];
     
-    self.scrubberThumbView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self scrubberThumbSize].width, [self scrubberThumbSize].height)];
+    self.scrubberThumbView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                      0,
+                                                                      ScrubberThumbSize.width,
+                                                                      ScrubberThumbSize.height)];
     self.scrubberThumbView.layer.borderWidth = 1.0;
     self.scrubberThumbView.backgroundColor = self.scrubberThumbColor;
     self.scrubberThumbView.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -159,8 +167,11 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     
     // Scrubber Views
     self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), TopPadding, 1, CGRectGetHeight(self.plotsView.frame));
-    self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame), CGRectGetMinY(self.scrubberThumbView.frame), [self scrubberThumbSize].width, [self scrubberThumbSize].height);
-    self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height/2;
+    self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame),
+                                              CGRectGetMinY(self.scrubberThumbView.frame),
+                                              ScrubberThumbSize.width,
+                                              ScrubberThumbSize.height);
+    self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height / 2;
     self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
  
     [_xAxisView layoutSubviews];
@@ -191,7 +202,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     [self.dots removeAllObjects];
     [self.pathLines removeAllObjects];
     
-    for (int i=0; i<[self numberOfPlots]; i++) {
+    for (int i = 0; i < [self numberOfPlots]; i++) {
         if ([self numberOfPointsinPlot:i] <= 1) {
             return;
         } else {
@@ -214,7 +225,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     [_dataPoints removeAllObjects];
     [_yAxisPoints removeAllObjects];
     _hasDataPoint = NO;
-    for (int i = 0; i<[self numberOfPointsinPlot:plotIndex]; i++) {
+    for (int i = 0; i < [self numberOfPointsinPlot:plotIndex]; i++) {
         if ([_dataSource respondsToSelector:@selector(graphView:pointForForPointIndex:plotIndex:)]) {
             ORKRangePoint *value = [self.dataSource graphView:self pointForForPointIndex:i plotIndex:plotIndex];
             [_dataPoints addObject:value];
@@ -223,7 +234,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
             }
         }
     }
-    [self.yAxisPoints addObjectsFromArray:[self normalizeCanvasPoints:self.dataPoints forRect:self.plotsView.frame.size]];
+    [self.yAxisPoints addObjectsFromArray:[self normalizeCanvasPointsForRect:self.plotsView.frame.size]];
 }
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
@@ -235,9 +246,9 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 }
 
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointSize = 8.0f;
+    CGFloat pointSize = ORKGraphViewPointAndLineSize;
     
-    for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
         ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
@@ -256,7 +267,6 @@ static const CGFloat SnappingClosenessFactor = 0.3;
             [self.dots addObject:point];
             
             if (![positionOnYAxis isRangeZero]) {
-                CGFloat pointSize = 8.0f;
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
                 point.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
@@ -276,7 +286,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     //Add Title Labels
     [self.xAxisTitles removeAllObjects];
     
-    for (int i=0; i<self.numberOfXAxisTitles; i++) {
+    for (int i = 0; i < self.numberOfXAxisTitles; i++) {
         if ([self.dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
             NSString *title = [self.dataSource graphView:self titleForXAxisAtIndex:i];
             
@@ -289,7 +299,10 @@ static const CGFloat SnappingClosenessFactor = 0.3;
         self.xAxisView = nil;
     }
     
-    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.plotsView.frame), CGRectGetMaxY(self.plotsView.frame), CGRectGetWidth(self.plotsView.frame), XAxisHeight)];
+    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.plotsView.frame),
+                                                                   CGRectGetMaxY(self.plotsView.frame),
+                                                                   CGRectGetWidth(self.plotsView.frame),
+                                                                   XAxisHeight)];
     self.xAxisView.tintColor = self.tintColor;
     [self.xAxisView setupTitles:self.xAxisTitles];
     [self addSubview:self.xAxisView];
@@ -303,7 +316,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     xAxisLineLayer.path = xAxispath.CGPath;
     [self.xAxisView.layer addSublayer:xAxisLineLayer];
     
-    for (NSUInteger i=0; i<self.xAxisTitles.count; i++) {
+    for (NSUInteger i = 0; i < self.xAxisTitles.count; i++) {
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
         UIBezierPath *rulerPath = [UIBezierPath bezierPath];
@@ -328,13 +341,16 @@ static const CGFloat SnappingClosenessFactor = 0.3;
     CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
     CGFloat axisViewWidth = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
     
-    self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition, TopPadding, axisViewWidth, CGRectGetHeight(self.plotsView.frame))];
+    self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition,
+                                                              TopPadding,
+                                                              axisViewWidth,
+                                                              CGRectGetHeight(self.plotsView.frame))];
     [self addSubview:self.yAxisView];
     CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - AxisMarkingRulerLength + 2;
     
     if (self.maximumValueImage && self.minimumValueImage) {
         // Use image icons as legends
-        CGFloat width = CGRectGetWidth(self.yAxisView.frame)/2;
+        CGFloat width = CGRectGetWidth(self.yAxisView.frame) / 2;
         CGFloat verticalPadding = 3.f;
         
         UIImageView *maxImageView = [[UIImageView alloc] initWithImage:self.maximumValueImage];
@@ -357,7 +373,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
             yAxisLabelFactors = @[@0.2f,@1.0f];
         }
         
-        for (NSUInteger i =0; i<yAxisLabelFactors.count; i++) {
+        for (NSUInteger i = 0; i < yAxisLabelFactors.count; i++) {
             
             CGFloat factor = [yAxisLabelFactors[i] floatValue];
             CGFloat positionOnYAxis = CGRectGetHeight(self.plotsView.frame) * (1 - factor);
@@ -408,7 +424,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 }
 
 - (void)drawVerticalReferenceLines {
-    for (int i=1; i<self.numberOfXAxisTitles; i++) {
+    for (int i = 1; i < self.numberOfXAxisTitles; i++) {
         
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
@@ -428,7 +444,10 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 
 - (void)setupEmptyView {
     if (!self.emptyLabel) {
-        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding, TopPadding, CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
+        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
+                                                                    TopPadding,
+                                                                    CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
+                                                                    CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
         self.emptyLabel.text = self.emptyText;
         self.emptyLabel.textAlignment = NSTextAlignmentCenter;
         self.emptyLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
@@ -479,7 +498,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 - (void)calculateXAxisPoints {
     [_xAxisPoints removeAllObjects];
     
-    for (int i=0 ; i<[self numberOfXAxisTitles]; i++) {
+    for (int i = 0; i < [self numberOfXAxisTitles]; i++) {
         CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / (_yAxisPoints.count - 1)) * i);
         positionOnXAxis = round(positionOnXAxis);
         [_xAxisPoints addObject:@(positionOnXAxis)];
@@ -494,10 +513,6 @@ static const CGFloat SnappingClosenessFactor = 0.3;
         return YES;
     }
     return NO;
-}
-
-- (CGSize)scrubberThumbSize {
-    return CGSizeMake(10, 10);
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
@@ -531,7 +546,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 }
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:ScrubberMoveAnimationDuration animations:^{
         self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
         [self updateScrubberLineAccessories:xPosition];
     }];
@@ -588,7 +603,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
         CGFloat alpha = hidden ? 0 : 1;
         
         if (animated) {
-            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
                 self.scrubberThumbView.alpha = alpha;
                 self.scrubberLine.alpha = alpha;
                 self.scrubberLabel.alpha = alpha;
@@ -615,15 +630,15 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 #pragma Mark - Animation
 
 - (CGFloat)animateLayersSequentially {
-    CGFloat delay = 0.1;
+    CGFloat delay = LayerAnimationDelay;
     
-    for (NSUInteger i=0; i<self.dots.count; i++) {
+    for (NSUInteger i = 0; i < self.dots.count; i++) {
         CAShapeLayer *layer = [self.dots[i] shapeLayer];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += 0.1;
+        delay += LayerAnimationDelay;
     }
     
-    for (NSUInteger i=0; i<self.pathLines.count; i++) {
+    for (NSUInteger i = 0; i < self.pathLines.count; i++) {
         CAShapeLayer *layer = self.pathLines[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;
@@ -686,32 +701,32 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 - (NSInteger)numberOfValidValues {
     NSInteger count = 0;
     
-    for (ORKRangePoint *dataVal in self.dataPoints) {
-        if (!dataVal.isEmpty) {
-            count ++;
+    for (ORKRangePoint *rangePoint in self.dataPoints) {
+        if (!rangePoint.isEmpty) {
+            count++;
         }
     }
     return count;
 }
 
-- (NSArray *)normalizeCanvasPoints:(NSArray *) __unused dataPoints forRect:(CGSize)canvasSize {
+- (NSArray *)normalizeCanvasPointsForRect:(CGSize)canvasSize {
     [self calculateMinAndMaxPoints];
     
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
-    for (NSUInteger i=0; i<self.dataPoints.count; i++) {
+    for (NSUInteger i = 0; i < self.dataPoints.count; i++) {
         
         ORKRangePoint *normalizedRangePoint = [ORKRangePoint new];
         ORKRangePoint *dataPointValue = (ORKRangePoint *)self.dataPoints[i];
         
-        if (dataPointValue.isEmpty){
+        if (dataPointValue.isEmpty) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height;
         } else if (self.minimumValue == self.maximumValue) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height/2;
+            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height / 2;
         } else {
             CGFloat range = self.maximumValue - self.minimumValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue)/range * canvasSize.height;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue)/range * canvasSize.height;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue) / range * canvasSize.height;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue) / range * canvasSize.height;
             
             normalizedRangePoint.minimumValue = canvasSize.height - normalizedMinimumValue;
             normalizedRangePoint.maximumValue = canvasSize.height - normalizedMaximumValue;
@@ -725,7 +740,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
-    while (validPosition < (self.dataPoints.count-1)) {
+    while (validPosition < (self.dataPoints.count - 1)) {
         if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
             break;
         }
@@ -746,7 +761,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
         if (self.dataPoints.count) {
             self.minimumValue = ((ORKRangePoint *)self.dataPoints[0]).minimumValue;
             
-            for (NSUInteger i=1; i<self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
                 if ((self.minimumValue == NSNotFound) || (value < self.minimumValue)) {
                     self.minimumValue = value;
@@ -762,7 +777,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
         if (self.dataPoints.count) {
             self.maximumValue = ((ORKRangePoint *)self.dataPoints[0]).maximumValue;
             
-            for (NSUInteger i=1; i<self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
                 if (((value != NSNotFound) && (value > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
                     self.maximumValue = value;
@@ -848,7 +863,7 @@ static const CGFloat SnappingClosenessFactor = 0.3;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Min:%0.0f,Max:%0.0f", self.minimumValue, self.maximumValue];
+    return [NSString stringWithFormat:@"{min: %0.0f, max: %0.0f}", self.minimumValue, self.maximumValue];
 }
 
 @end

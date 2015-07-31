@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
 
 extern const CGFloat ORKGraphViewLeftPadding;
 extern const CGFloat ORKGraphViewGrowAnimationDuration;
+extern const CGFloat ORKGraphViewPointAndLineSize;
 
 extern NSString *const ORKGraphViewTriggerAnimationsNotification;
 extern NSString *const ORKGraphViewRefreshNotification;
