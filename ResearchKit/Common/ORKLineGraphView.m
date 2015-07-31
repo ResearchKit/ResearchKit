@@ -71,7 +71,7 @@
     ORKRangePoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
-    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         
         if ([self.dataPoints[i] isEmpty]) {
             emptyDataPresent = YES;
@@ -131,7 +131,7 @@
     NSUInteger positionIndex = 0;
     
     if (value == ORKCGFloatInvalidValue) {
-        for (positionIndex = 0; positionIndex < self.xAxisPoints.count - 1; positionIndex++) {
+        for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal > xPosition) {
                 break;
@@ -190,7 +190,7 @@
 
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = [super animateLayersSequentially];
-    for (NSUInteger i = 0; i < self.fillLayers.count; i++) {
+    for (NSUInteger i = 0; i < [self.fillLayers count]; i++) {
         CAShapeLayer *layer = self.fillLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;

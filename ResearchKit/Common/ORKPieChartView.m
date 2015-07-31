@@ -34,6 +34,7 @@
 #import "ORKLegendCollectionViewCell.h"
 #import "ORKCenteredCollectionViewLayout.h"
 
+
 @interface ORKPieChartView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -485,7 +486,7 @@
 }
 
 - (void)adjustIntersectionsOfPercentageLabels:(NSArray*) labelDictionaries {
-    if (!labelDictionaries.count){
+    if (![labelDictionaries count]) {
         return;
     }
     // Adjust labels while we have intersections
@@ -500,11 +501,11 @@
         shiftClockwise = !shiftClockwise;
         
         if (shiftClockwise) {
-            for (NSUInteger idx = 0; idx < labelDictionaries.count - 1; idx++) {
+            for (NSUInteger idx = 0; idx < ([labelDictionaries count] - 1); idx++) {
                 // Prevent from infinite loop
                 if (!idx) {
-                    totalAngle+= 0.01;
-                    if (totalAngle >= 2*M_PI) {
+                    totalAngle += 0.01;
+                    if (totalAngle >= 2 * M_PI) {
                         return;
                     }
                 }
@@ -515,7 +516,7 @@
                 }
             }
         } else {
-            for (NSInteger i = labelDictionaries.count - 1; i > 0; i--) {
+            for (NSInteger i = [labelDictionaries count] - 1; i > 0; i--) {
                 NSMutableDictionary *dictionary = labelDictionaries[i];
                 NSMutableDictionary *nextDictionary = labelDictionaries[i - 1];
                 if ([self shiftLabelDictionary:nextDictionary fromLabelDictionary:dictionary inDirection:-rotateDirection]) {

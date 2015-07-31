@@ -63,7 +63,7 @@
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     
-    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         
         ORKRangePoint *dataPointVal = self.dataPoints[i];
         

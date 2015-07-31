@@ -249,7 +249,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
     CGFloat pointSize = ORKGraphViewPointAndLineSize;
     
-    for (NSUInteger i = 0; i < self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
@@ -317,7 +317,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     xAxisLineLayer.path = xAxispath.CGPath;
     [self.xAxisView.layer addSublayer:xAxisLineLayer];
     
-    for (NSUInteger i = 0; i < self.xAxisTitles.count; i++) {
+    for (NSUInteger i = 0; i < [self.xAxisTitles count]; i++) {
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
         UIBezierPath *rulerPath = [UIBezierPath bezierPath];
@@ -371,10 +371,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
         if (self.minimumValue == self.maximumValue) {
             yAxisLabelFactors = @[@0.5f];
         } else {
-            yAxisLabelFactors = @[@0.2f,@1.0f];
+            yAxisLabelFactors = @[@0.2f, @1.0f];
         }
         
-        for (NSUInteger i = 0; i < yAxisLabelFactors.count; i++) {
+        for (NSUInteger i = 0; i < [yAxisLabelFactors count]; i++) {
             
             CGFloat factor = [yAxisLabelFactors[i] floatValue];
             CGFloat positionOnYAxis = CGRectGetHeight(self.plotsView.frame) * (1 - factor);
@@ -500,7 +500,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_xAxisPoints removeAllObjects];
     
     for (int i = 0; i < [self numberOfXAxisTitles]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / (_yAxisPoints.count - 1)) * i);
+        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([_yAxisPoints count] - 1)) * i);
         positionOnXAxis = round(positionOnXAxis);
         [_xAxisPoints addObject:@(positionOnXAxis)];
     }
@@ -517,7 +517,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    if ((self.dataPoints.count > 0) && [self numberOfValidValues] > 0) {
+    if (([self.dataPoints count] > 0) && [self numberOfValidValues] > 0) {
         
         CGPoint location = [gestureRecognizer locationInView:self.plotsView];
         CGFloat maxX = round(CGRectGetWidth(self.plotsView.bounds));
@@ -566,9 +566,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
-    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame) / self.xAxisPoints.count;
+    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame) / [self.xAxisPoints count];
     NSUInteger positionIndex;
-    for (positionIndex = 0; positionIndex < self.xAxisPoints.count; positionIndex++) {
+    for (positionIndex = 0; positionIndex < [self.xAxisPoints count]; positionIndex++) {
         
         CGFloat dataPointValue = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
         
@@ -588,7 +588,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
     if (snapped) {
-        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+        for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal == xPosition) {
                 break;
@@ -621,7 +621,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
     NSUInteger positionIndex = 0;
-    for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+    for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
         CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
         if (xAxisPointVal > xPosition) {
             break;
@@ -635,13 +635,13 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = LayerAnimationDelay;
     
-    for (NSUInteger i = 0; i < self.dots.count; i++) {
+    for (NSUInteger i = 0; i < [self.dots count]; i++) {
         CAShapeLayer *layer = [self.dots[i] shapeLayer];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
         delay += LayerAnimationDelay;
     }
     
-    for (NSUInteger i = 0; i < self.pathLines.count; i++) {
+    for (NSUInteger i = 0; i < [self.pathLines count]; i++) {
         CAShapeLayer *layer = self.pathLines[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;
@@ -708,7 +708,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
-    for (NSUInteger i = 0; i < self.dataPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.dataPoints count]; i++) {
         
         ORKRangePoint *normalizedRangePoint = [ORKRangePoint new];
         ORKRangePoint *dataPointValue = (ORKRangePoint *)self.dataPoints[i];
@@ -734,7 +734,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
-    while (validPosition < (self.dataPoints.count - 1)) {
+    while (validPosition < ([self.dataPoints count] - 1)) {
         if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
@@ -752,10 +752,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
         self.minimumValue = [self.dataSource minimumValueForGraphView:self];
     } else {
         
-        if (self.dataPoints.count) {
+        if ([self.dataPoints count]) {
             self.minimumValue = ((ORKRangePoint *)self.dataPoints[0]).minimumValue;
             
-            for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < [self.dataPoints count]; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
                 if ((self.minimumValue == ORKCGFloatInvalidValue) || (value < self.minimumValue)) {
                     self.minimumValue = value;
@@ -768,10 +768,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
     if ([self.dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
         self.maximumValue = [self.dataSource maximumValueForGraphView:self];
     } else {
-        if (self.dataPoints.count) {
+        if ([self.dataPoints count]) {
             self.maximumValue = ((ORKRangePoint *)self.dataPoints[0]).maximumValue;
             
-            for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < [self.dataPoints count]; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
                 if (((value != ORKCGFloatInvalidValue) && (value > self.maximumValue)) || (self.maximumValue == ORKCGFloatInvalidValue)) {
                     self.maximumValue = value;

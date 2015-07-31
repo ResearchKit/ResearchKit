@@ -237,7 +237,7 @@ ORK_CLASS_AVAILABLE
 
  see also: `ORKGraphViewDataSource` protocol.
 */
-@property (nonatomic, weak) IBOutlet id <ORKGraphViewDataSource> dataSource;
+@property (nonatomic, weak) id <ORKGraphViewDataSource> dataSource;
 
 /**
  The color of the axes drawn by the graphView.
