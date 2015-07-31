@@ -35,8 +35,6 @@
 
 @interface ORKCircleView : UIView
 
-@property (nonatomic) CGFloat value;
-
 - (CAShapeLayer *)shapeLayer;
 
 @end
