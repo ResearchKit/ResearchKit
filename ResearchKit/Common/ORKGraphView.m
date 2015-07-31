@@ -46,6 +46,7 @@ const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 
 ORKDefineStringKey(FadeAnimationKey);
 ORKDefineStringKey(GrowAnimationKey);
+ORKDefineStringKey(PopAnimationKey);
 
 static const CGFloat TopPadding = 0.0;
 static const CGFloat XAxisHeight = 30.0;
@@ -661,43 +662,34 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue startDelay:(CGFloat)delay {
+    
+    NSString *animationKeyPath = nil;
+    CGFloat animationDuration = 0.0;
+    NSString *animationKey = nil;
     if (animationType == ORKGraphAnimationTypeFade) {
-        
-        CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        fadeAnimation.beginTime = CACurrentMediaTime() + delay;
-        fadeAnimation.fromValue = @0;
-        fadeAnimation.toValue = @(toValue);
-        fadeAnimation.duration = FadeAnimationDuration;
-        fadeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        fadeAnimation.fillMode = kCAFillModeForwards;
-        fadeAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:fadeAnimation forKey:FadeAnimationKey];
-        
+        animationKeyPath = @"opacity";
+        animationDuration = FadeAnimationDuration;
+        animationKey = FadeAnimationKey;
     } else if (animationType == ORKGraphAnimationTypeGrow) {
-        
-        CABasicAnimation *growAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        growAnimation.beginTime = CACurrentMediaTime() + delay;
-        growAnimation.fromValue = @0;
-        growAnimation.toValue = @(toValue);
-        growAnimation.duration = ORKGraphViewGrowAnimationDuration;
-        growAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        growAnimation.fillMode = kCAFillModeForwards;
-        growAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:growAnimation forKey:GrowAnimationKey];
-        
+        animationKeyPath = @"strokeEnd";
+        animationDuration = ORKGraphViewGrowAnimationDuration;
+        animationKey = GrowAnimationKey;
     } else if (animationType == ORKGraphAnimationTypePop) {
-        
-        CABasicAnimation *popAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-        popAnimation.beginTime = CACurrentMediaTime() + delay;
-        popAnimation.fromValue = @0;
-        popAnimation.toValue = @(toValue);
-        popAnimation.duration = PopAnimationDuration;
-        popAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        popAnimation.fillMode = kCAFillModeForwards;
-        popAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:popAnimation forKey:GrowAnimationKey];
-        
+        animationKeyPath = @"transform.scale";
+        animationDuration = PopAnimationDuration;
+        animationKey = PopAnimationKey;
     }
+    NSAssert(animationKeyPath && animationKey && animationDuration > 0.0, @"");
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+    animation.beginTime = CACurrentMediaTime() + delay;
+    animation.fromValue = @0;
+    animation.toValue = @(toValue);
+    animation.duration = animationDuration;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    [shapeLayer addAnimation:animation forKey:animationKey];
 }
 
 - (NSInteger)numberOfValidValues {
