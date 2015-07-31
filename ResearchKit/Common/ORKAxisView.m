@@ -40,10 +40,11 @@
 @end
 
 
+static const CGFloat LastLabelPadding = 10.0;
+
 @implementation ORKAxisView {
     
     NSMutableArray *_variableConstraints;
-    CGFloat _lastLabelPadding;
 }
 
 - (instancetype)init {
@@ -65,7 +66,6 @@
 - (void)sharedInit {
     _titleLabels = [NSMutableArray new];
     _variableConstraints = [NSMutableArray new];
-    _lastLabelPadding = 10;
 }
 
 - (void)setupConstraints {
@@ -98,14 +98,14 @@
                                                                    toItem:label.superview
                                                                 attribute:NSLayoutAttributeHeight
                                                                multiplier:1.0
-                                                                 constant:-_lastLabelPadding]];
+                                                                 constant:-LastLabelPadding]];
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                 attribute:NSLayoutAttributeWidth
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:label.superview
                                                                 attribute: NSLayoutAttributeHeight
                                                                multiplier:1.0
-                                                                 constant:-_lastLabelPadding]];
+                                                                 constant:-LastLabelPadding]];
         }
     }
     [NSLayoutConstraint activateConstraints:_variableConstraints];
@@ -128,7 +128,7 @@
         if (i == titles.count - 1) {
             label.textColor = [UIColor whiteColor];
             label.backgroundColor = self.tintColor;
-            label.layer.cornerRadius = (self.bounds.size.height - _lastLabelPadding) * 0.5;
+            label.layer.cornerRadius = (self.bounds.size.height - LastLabelPadding) * 0.5;
             label.layer.masksToBounds = YES;
         }
         
