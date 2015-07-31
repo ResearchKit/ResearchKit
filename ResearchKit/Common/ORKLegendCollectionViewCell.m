@@ -32,7 +32,7 @@
 
 @implementation ORKLegendCollectionViewCell
 
-#pragma mark -- Init
+#pragma mark - Init
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
@@ -58,7 +58,7 @@
     [self.contentView addSubview:_dotView];
 }
 
-#pragma mark -- Layout
+#pragma mark - Layout
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -84,24 +84,27 @@
                                                                              metrics:nil
                                                                                views:views]];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeHeight
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
+                                                        attribute:NSLayoutAttributeHeight
                                                         relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil attribute:0
-                                                       multiplier:1
+                                                           toItem:nil
+                                                        attribute:0
+                                                       multiplier:1.0
                                                          constant:[self titleHeight]]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView attribute:NSLayoutAttributeWidth
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
+                                                        attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeHeight
-                                                       multiplier:1
+                                                       multiplier:1.0
                                                          constant:[self titleHeight]]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_titleLabel
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1
-                                                         constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];
@@ -111,7 +114,7 @@
     return YES;
 }
 
-#pragma mark -- Helper
+#pragma mark - Helper
 
 - (CGFloat)titleHeight {
     return [_titleLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;

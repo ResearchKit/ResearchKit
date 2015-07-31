@@ -233,7 +233,7 @@
     }
 }
 
-#pragma mark -- Layout
+#pragma mark - Layout
 
 - (void)updateConstraints {
     if (_constraints) {
@@ -263,7 +263,7 @@
     [super updateConstraints];
 }
 
-#pragma mark -- UICollectionViewDataSource /  UICollectionViewDelegate
+#pragma mark - UICollectionViewDataSource / UICollectionViewDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ORKLegendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];

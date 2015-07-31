@@ -572,7 +572,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
         
         CGFloat dataPointValue = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
         
-        if (dataPointValue != NSNotFound) {
+        if (dataPointValue != ORKCGFloatInvalidValue) {
             CGFloat value = [self.xAxisPoints[positionIndex] floatValue];
             
             if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
@@ -585,7 +585,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
-    CGFloat value = NSNotFound;
+    CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
     if (snapped) {
         for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
@@ -735,7 +735,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     NSUInteger validPosition = positionIndex;
     
     while (validPosition < (self.dataPoints.count - 1)) {
-        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition ++;
@@ -757,7 +757,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
             
             for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
-                if ((self.minimumValue == NSNotFound) || (value < self.minimumValue)) {
+                if ((self.minimumValue == ORKCGFloatInvalidValue) || (value < self.minimumValue)) {
                     self.minimumValue = value;
                 }
             }
@@ -773,7 +773,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
             
             for (NSUInteger i = 1; i < self.dataPoints.count; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
-                if (((value != NSNotFound) && (value > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
+                if (((value != ORKCGFloatInvalidValue) && (value > self.maximumValue)) || (self.maximumValue == ORKCGFloatInvalidValue)) {
                     self.maximumValue = value;
                 }
             }
@@ -829,8 +829,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _minimumValue = NSNotFound;
-        _maximumValue = NSNotFound;
+        _minimumValue = ORKCGFloatInvalidValue;
+        _maximumValue = ORKCGFloatInvalidValue;
     }
     return self;
 }
@@ -849,7 +849,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (BOOL)isEmpty {
-    return (self.minimumValue == NSNotFound && self.maximumValue == NSNotFound);
+    return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
 }
 
 - (BOOL)isRangeZero {

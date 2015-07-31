@@ -60,7 +60,7 @@
 
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     
-    CGFloat positionOnXAxis = CGFLOAT_MAX;
+    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     
     for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
@@ -116,17 +116,17 @@
     return canvasYPosition;
 }
 
-#pragma mark -- Animation
+#pragma mark - Animation
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
-    if (scrubbingVal == NSNotFound) {
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:(xPosition)];
+    if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden: YES];
     }
     [UIView animateWithDuration:0.1 animations:^{
        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
     } completion:^(BOOL finished) {
-       if (scrubbingVal != NSNotFound) {
+       if (scrubbingValue != ORKCGFloatInvalidValue) {
            [self setScrubberLineAccessoriesHidden:NO];
            [self updateScrubberLineAccessories:xPosition];
         }

@@ -67,7 +67,7 @@
 
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
-    CGFloat positionOnXAxis = CGFLOAT_MAX;
+    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
@@ -80,7 +80,7 @@
             
         UIBezierPath *plotLinePath = [UIBezierPath bezierPath];
         
-        if (positionOnXAxis != CGFLOAT_MAX) {
+        if (positionOnXAxis != ORKCGFloatInvalidValue) {
             // Previous point exists.
             [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
@@ -130,7 +130,7 @@
     CGFloat value = [super valueForCanvasXPosition:xPosition];
     NSUInteger positionIndex = 0;
     
-    if (value == NSNotFound){
+    if (value == ORKCGFloatInvalidValue) {
         for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal > xPosition) {
@@ -178,10 +178,10 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if ([(ORKRangePoint *)self.dataPoints[validPosition] minimumValue] != NSNotFound) {
+        if ([(ORKRangePoint *)self.dataPoints[validPosition] minimumValue] != ORKCGFloatInvalidValue) {
             break;
         }
-        validPosition --;
+        validPosition--;
     }
     return validPosition;
 }
