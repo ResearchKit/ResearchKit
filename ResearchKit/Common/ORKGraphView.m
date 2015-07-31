@@ -600,18 +600,20 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
     if ([self numberOfValidValues] > 0) {
-        CGFloat alpha = hidden ? 0 : 1;
         
-        if (animated) {
-            [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
-                self.scrubberThumbView.alpha = alpha;
-                self.scrubberLine.alpha = alpha;
-                self.scrubberLabel.alpha = alpha;
-            }];
-        } else {
+        void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
+            CGFloat alpha = hidden ? 0.0 : 1.0;
             self.scrubberThumbView.alpha = alpha;
             self.scrubberLine.alpha = alpha;
             self.scrubberLabel.alpha = alpha;
+        };
+        
+        if (animated) {
+            [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
+                updateAlpha(hidden);
+            }];
+        } else {
+            updateAlpha(hidden);
         }
     }
 }
