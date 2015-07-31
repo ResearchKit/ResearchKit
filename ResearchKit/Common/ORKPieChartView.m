@@ -225,7 +225,7 @@
     _pieRadius = labeledRadius - (_lineWidth * 0.5);
     
     if (!self.shouldDrawClockwise) {
-        startAngle = 3*M_PI_2;
+        startAngle = 3 * M_PI_2;
         endAngle = -M_PI_2;
     }
     UIBezierPath *circularArcBezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(_plotView.frame), CGRectGetMidY(_plotView.frame))
@@ -557,7 +557,7 @@
             CGFloat firstLabelAngle = firstPieLabel.angle;
             CGFloat lastLabelAngle = lastPieLabel.angle;
             firstLabelAngle += rotateDirection * 0.01;
-            lastLabelAngle -= rotateDirection*0.01;
+            lastLabelAngle -= rotateDirection * 0.01;
             firstPieLabel.angle = firstLabelAngle;
             lastPieLabel.angle = lastLabelAngle;
         }
