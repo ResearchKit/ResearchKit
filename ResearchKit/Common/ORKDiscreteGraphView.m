@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, James Cox.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -53,20 +54,20 @@
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
     CAShapeLayer *layer = [super plotLineLayerForPlotIndex:plotIndex withPath:path];
-    layer.lineWidth = 8.0;
+    layer.lineWidth = ORKGraphViewPointAndLineSize;
     return layer;
 }
 
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     
-    CGFloat positionOnXAxis = CGFLOAT_MAX;
+    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     
-    for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         
         ORKRangePoint *dataPointVal = self.dataPoints[i];
         
-        if (!dataPointVal.isEmpty && !dataPointVal.isRangeZero) {
+        if (!dataPointVal.isUnset && !dataPointVal.hasEmptyRange) {
             
             UIBezierPath *plotLinePath = [UIBezierPath bezierPath];
             
@@ -86,18 +87,18 @@
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointWidth = 8.0;
+    CGFloat pointWidth = ORKGraphViewPointAndLineSize;
     
     NSInteger numberOfPlots = [self numberOfPlots];
     
     CGFloat offset = 0;
     
-    if (numberOfPlots%2 == 0) {
-        //Even
-        offset = (plotIndex - numberOfPlots/2 + 0.5) * pointWidth;
+    if (numberOfPlots % 2 == 0) {
+        // Even
+        offset = (plotIndex - numberOfPlots / 2 + 0.5) * pointWidth;
     } else {
-        //Odd
-        offset = (plotIndex - numberOfPlots/2) * pointWidth;
+        // Odd
+        offset = (plotIndex - numberOfPlots / 2) * pointWidth;
     }
     
     return offset;
@@ -115,17 +116,17 @@
     return canvasYPosition;
 }
 
-#pragma mark -- Animation
+#pragma mark - Animation
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
-    if (scrubbingVal == NSNotFound) {
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:(xPosition)];
+    if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden: YES];
     }
-    [UIView animateWithDuration:0.1 animations:^{
-       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
+       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
     } completion:^(BOOL finished) {
-       if (scrubbingVal != NSNotFound) {
+       if (scrubbingValue != ORKCGFloatInvalidValue) {
            [self setScrubberLineAccessoriesHidden:NO];
            [self updateScrubberLineAccessories:xPosition];
         }

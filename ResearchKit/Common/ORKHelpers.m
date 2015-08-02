@@ -400,3 +400,5 @@ id ORKDynamicCast_(id x, Class objClass) {
 }
 
 const CGFloat ORKScrollToTopAnimationDuration = 0.2;
+
+const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;

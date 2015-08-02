@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, James Cox.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -66,11 +67,11 @@
 
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
-    CGFloat positionOnXAxis = CGFLOAT_MAX;
+    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangePoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
-    for (NSUInteger i=0; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         
         if ([self.dataPoints[i] isEmpty]) {
             emptyDataPresent = YES;
@@ -79,7 +80,7 @@
             
         UIBezierPath *plotLinePath = [UIBezierPath bezierPath];
         
-        if (positionOnXAxis != CGFLOAT_MAX) {
+        if (positionOnXAxis != ORKCGFloatInvalidValue) {
             // Previous point exists.
             [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
@@ -129,8 +130,8 @@
     CGFloat value = [super valueForCanvasXPosition:xPosition];
     NSUInteger positionIndex = 0;
     
-    if (value == NSNotFound){
-        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+    if (value == ORKCGFloatInvalidValue) {
+        for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal > xPosition) {
                 break;
@@ -143,8 +144,8 @@
         CGFloat x1 = [(NSNumber *)self.xAxisPoints[prevValidIndex] floatValue];
         CGFloat x2 = [(NSNumber *)self.xAxisPoints[nextValidIndex] floatValue];
         
-        CGFloat y1 = [(ORKRangePoint *)self.dataPoints[prevValidIndex] minimumValue];
-        CGFloat y2 = [(ORKRangePoint *)self.dataPoints[nextValidIndex] minimumValue];
+        CGFloat y1 = ((ORKRangePoint *)self.dataPoints[prevValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangePoint *)self.dataPoints[nextValidIndex]).minimumValue;
         
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
@@ -162,8 +163,8 @@
     CGFloat x1 = [self.xAxisPoints[previousValidIndex] floatValue];
     CGFloat x2 = [self.xAxisPoints[nextValidIndex] floatValue];
     
-    CGFloat y1 = [(ORKRangePoint *)self.yAxisPoints[previousValidIndex] minimumValue];
-    CGFloat y2 = [(ORKRangePoint *)self.yAxisPoints[nextValidIndex] minimumValue];
+    CGFloat y1 = ((ORKRangePoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangePoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
     
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -177,10 +178,10 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if ([(ORKRangePoint *)self.dataPoints[validPosition] minimumValue] != NSNotFound) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
-        validPosition --;
+        validPosition--;
     }
     return validPosition;
 }
@@ -189,10 +190,10 @@
 
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = [super animateLayersSequentially];
-    for (NSUInteger i=0; i<self.fillLayers.count; i++) {
+    for (NSUInteger i = 0; i < [self.fillLayers count]; i++) {
         CAShapeLayer *layer = self.fillLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += ORKGraphGrowAnimationDuration;
+        delay += ORKGraphViewGrowAnimationDuration;
     }
     return delay;
 }

@@ -41,29 +41,21 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
     ORKGraphAnimationTypePop
 };
 
-ORKDefineStringKey(FadeAnimationKey);
-ORKDefineStringKey(GrowAnimationKey);
+extern const CGFloat ORKGraphViewLeftPadding;
+extern const CGFloat ORKGraphViewGrowAnimationDuration;
+extern const CGFloat ORKGraphViewPointAndLineSize;
+extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
-extern CGFloat const ORKGraphTopPadding;
-extern CGFloat const ORKGraphXAxisHeight;
-extern CGFloat const ORKGraphYAxisPaddingFactor;
-extern CGFloat const ORKGraphLeftPadding;
-extern CGFloat const ORKGraphAxisMarkingRulerLength;
-extern CGFloat const ORKGraphFadeAnimationDuration;
-extern CGFloat const ORKGraphGrowAnimationDuration;
-extern CGFloat const ORKGraphPopAnimationDuration;
-extern CGFloat const ORKGraphSnappingClosenessFactor;
+extern NSString *const ORKGraphViewTriggerAnimationsNotification;
+extern NSString *const ORKGraphViewRefreshNotification;
 
 @interface ORKGraphView ()
-
-extern NSString * const ORKGraphViewTriggerAnimationsNotification;
-extern NSString * const ORKGraphViewRefreshNotification;
 
 @property (nonatomic, strong) NSMutableArray *dataPoints; // Actual data
 
 @property (nonatomic, strong) NSMutableArray *xAxisPoints;
 
-@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalised for this view
+@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for this view
 
 @property (nonatomic, strong) UIView *plotsView; // Holds the plots
 

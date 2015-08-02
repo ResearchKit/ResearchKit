@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -236,7 +237,7 @@ ORK_CLASS_AVAILABLE
 
  see also: `ORKGraphViewDataSource` protocol.
 */
-@property (nonatomic, weak) IBOutlet id <ORKGraphViewDataSource> dataSource;
+@property (nonatomic, weak) id <ORKGraphViewDataSource> dataSource;
 
 /**
  The color of the axes drawn by the graphView.
@@ -307,57 +308,54 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The ORKRangePoint class models the attributes of a point used in a graph plot.
+ The `ORKRangePoint` class represents a ranged point used in a graph plot.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKRangePoint : NSObject
 
 /**
+ Returns a range point initialized using the specified `minimumValue` and `maximumValue`.
+
+ @param minimumValue     The `minimumValue` to set.
+ @param maximumValue     The `maximumValue` to set.
+
+ @return A range point.
+*/
+- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns a range point initialized using the specified `value` for both `minimumValue` and
+ `maximumValue`. This is useful for creating points that model a single data value without a range.
+
+ This method is a convenience initializer.
+
+ @param value    The `minimumValue` and `maximumValue` to set.
+
+ @return A range point.
+*/
+- (instancetype)initWithValue:(CGFloat)value;
+
+/**
  The upper limit of the range represented by this point.
  The default value of this property is zero.
-*/
+ */
 @property (nonatomic) CGFloat maximumValue;
 
 /**
  The lower limit of the range represented by this point.
  The default value of this property is zero.
-*/
+ */
 @property (nonatomic) CGFloat minimumValue;
 
 /**
- Returns an initialized ORKRangePoint using the specified minimumValue and maximumValue.
-
- Convenience Initializer.
-
- @param minimumValue     The `minimumValue` to set.
- @param maximumValue     The `maximumValue` to set.
-
- @return An intialized ORKGraphView instance with `minimuValue` and `maximumValue` set 
- to the given parameter values.
+ A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
 */
-- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue;
+@property (nonatomic, readonly) BOOL hasEmptyRange;
 
 /**
- Returns an intialized ORKRangePoint using the specified value for both minimumValue and
- maximumValue, this is useful for creating points that model a single data value without a range.
-
- Convenience Initializer.
-
- @param value    The `minimumValue` and `maximumValue` to set.
-
- @return an intialized ORKGraphView instance with `minimuValue` and `maximumValue` equal to `value`.
+ A Boolean value indicating that both `minimum value` and `maximum value` have not been set.  (read-only)
 */
-- (instancetype)initWithValue:(CGFloat)value;
-
-/**
- Returns true if `minimumValue` is equal to `maximumValue`, otherwise returns false.
-*/
-- (BOOL)isRangeZero;
-
-/**
- Return true if both `minimum value` and `maximum value` are not set, otherwise returns false.
-*/
-- (BOOL)isEmpty;
+@property (nonatomic, readonly) BOOL isUnset;
 
 @end
 

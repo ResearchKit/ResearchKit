@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, James Cox.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -39,10 +40,11 @@
 @end
 
 
+static const CGFloat LastLabelPadding = 10.0;
+
 @implementation ORKAxisView {
     
     NSMutableArray *_variableConstraints;
-    CGFloat _lastLabelPadding;
 }
 
 - (instancetype)init {
@@ -64,16 +66,15 @@
 - (void)sharedInit {
     _titleLabels = [NSMutableArray new];
     _variableConstraints = [NSMutableArray new];
-    _lastLabelPadding = 10;
 }
 
 - (void)setupConstraints {
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
     
-    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / (self.titleLabels.count - 1);
+    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / ([self.titleLabels count] - 1);
     
-    for (NSUInteger i = 0; i < self.titleLabels.count; i++) {
+    for (NSUInteger i = 0; i < [self.titleLabels count]; i++) {
         UILabel *label = self.titleLabels[i];
         CGFloat offset = i * segmentWidth;
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
@@ -90,21 +91,21 @@
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:offset]];
-        if (i == self.titleLabels.count - 1) {
+        if (i == [self.titleLabels count] - 1) {
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                 attribute:NSLayoutAttributeHeight
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:label.superview
                                                                 attribute:NSLayoutAttributeHeight
                                                                multiplier:1.0
-                                                                 constant:-_lastLabelPadding]];
+                                                                 constant:-LastLabelPadding]];
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                 attribute:NSLayoutAttributeWidth
                                                                 relatedBy:NSLayoutRelationEqual
                                                                    toItem:label.superview
                                                                 attribute: NSLayoutAttributeHeight
                                                                multiplier:1.0
-                                                                 constant:-_lastLabelPadding]];
+                                                                 constant:-LastLabelPadding]];
         }
     }
     [NSLayoutConstraint activateConstraints:_variableConstraints];
@@ -112,7 +113,7 @@
 
 - (void)setupTitles:(NSArray *)titles {
     
-    for (NSUInteger i = 0; i < titles.count; i++) {
+    for (NSUInteger i = 0; i < [titles count]; i++) {
         
         UILabel *label = [UILabel new];
         label.text = titles[i];
@@ -124,10 +125,10 @@
         label.textColor = self.tintColor;
         label.translatesAutoresizingMaskIntoConstraints = NO;
         
-        if (i == titles.count - 1) {
+        if (i == ([titles count] - 1)) {
             label.textColor = [UIColor whiteColor];
             label.backgroundColor = self.tintColor;
-            label.layer.cornerRadius = (self.bounds.size.height - _lastLabelPadding) * 0.5;
+            label.layer.cornerRadius = (self.bounds.size.height - LastLabelPadding) * 0.5;
             label.layer.masksToBounds = YES;
         }
         

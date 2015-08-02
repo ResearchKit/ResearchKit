@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, James Cox.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -35,24 +36,36 @@
 #import "ORKAxisView.h"
 #import "ORKCircleView.h"
 
+
 NSString *const ORKGraphViewTriggerAnimationsNotification = @"ORKGraphViewTriggerAnimationsNotification";
 NSString *const ORKGraphViewRefreshNotification = @"ORKGraphViewRefreshNotification";
-CGFloat const ORKGraphTopPadding = 0.0;
-CGFloat const ORKGraphXAxisHeight = 30.0;
-CGFloat const ORKGraphYAxisPaddingFactor = 0.15;
-CGFloat const ORKGraphLeftPadding = 10.0;
-CGFloat const ORKGraphAxisMarkingRulerLength = 8.0;
-CGFloat const ORKGraphFadeAnimationDuration = 0.2;
-CGFloat const ORKGraphGrowAnimationDuration = 0.1;
-CGFloat const ORKGraphPopAnimationDuration  = 0.3;
-CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
+
+const CGFloat ORKGraphViewLeftPadding = 10.0;
+const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
+const CGFloat ORKGraphViewPointAndLineSize = 8.0;
+const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
+
+ORKDefineStringKey(FadeAnimationKey);
+ORKDefineStringKey(GrowAnimationKey);
+ORKDefineStringKey(PopAnimationKey);
+
+static const CGFloat TopPadding = 0.0;
+static const CGFloat XAxisHeight = 30.0;
+static const CGFloat YAxisPaddingFactor = 0.15;
+static const CGFloat AxisMarkingRulerLength = 8.0;
+static const CGFloat FadeAnimationDuration = 0.2;
+static const CGFloat PopAnimationDuration  = 0.3;
+static const CGFloat SnappingClosenessFactor = 0.3;
+static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
+static const CGFloat ScrubberFadeAnimationDuration = 0.2;
+static const CGFloat LayerAnimationDelay = 0.1;
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
 
 @end
 
-@implementation ORKGraphView
 
+@implementation ORKGraphView
 
 #pragma mark - Init
 
@@ -126,7 +139,10 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     self.scrubberLabel.backgroundColor = [UIColor colorWithWhite:0.98 alpha:0.8];
     [self addSubview:self.scrubberLabel];
     
-    self.scrubberThumbView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [self scrubberThumbSize].width, [self scrubberThumbSize].height)];
+    self.scrubberThumbView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                      0,
+                                                                      ScrubberThumbSize.width,
+                                                                      ScrubberThumbSize.height)];
     self.scrubberThumbView.layer.borderWidth = 1.0;
     self.scrubberThumbView.backgroundColor = self.scrubberThumbColor;
     self.scrubberThumbView.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -135,26 +151,28 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORKGraphViewTriggerAnimationsNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORKGraphViewRefreshNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Layout
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat yAxisPadding = CGRectGetWidth(self.frame) *ORKGraphYAxisPaddingFactor;
+    CGFloat yAxisPadding = CGRectGetWidth(self.frame) *YAxisPaddingFactor;
     
     // Basic Views
-    self.plotsView.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding);
+    self.plotsView.frame = CGRectMake(ORKGraphViewLeftPadding, TopPadding, CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
     if (self.emptyLabel) {
-        self.emptyLabel.frame = CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding);
+        self.emptyLabel.frame = CGRectMake(ORKGraphViewLeftPadding, TopPadding, CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding, CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
     }
     
     // Scrubber Views
-    self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), ORKGraphTopPadding, 1, CGRectGetHeight(self.plotsView.frame));
-    self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame), CGRectGetMinY(self.scrubberThumbView.frame), [self scrubberThumbSize].width, [self scrubberThumbSize].height);
-    self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height/2;
+    self.scrubberLine.frame = CGRectMake(CGRectGetMinX(self.scrubberLine.frame), TopPadding, 1, CGRectGetHeight(self.plotsView.frame));
+    self.scrubberThumbView.frame = CGRectMake(CGRectGetMinX(self.scrubberThumbView.frame),
+                                              CGRectGetMinY(self.scrubberThumbView.frame),
+                                              ScrubberThumbSize.width,
+                                              ScrubberThumbSize.height);
+    self.scrubberThumbView.layer.cornerRadius = self.scrubberThumbView.bounds.size.height / 2;
     self.scrubberLabel.font = [UIFont fontWithName:self.scrubberLabel.font.familyName size:12.0f];
  
     [_xAxisView layoutSubviews];
@@ -185,7 +203,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     [self.dots removeAllObjects];
     [self.pathLines removeAllObjects];
     
-    for (int i=0; i<[self numberOfPlots]; i++) {
+    for (int i = 0; i < [self numberOfPlots]; i++) {
         if ([self numberOfPointsinPlot:i] <= 1) {
             return;
         } else {
@@ -208,16 +226,16 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     [_dataPoints removeAllObjects];
     [_yAxisPoints removeAllObjects];
     _hasDataPoint = NO;
-    for (int i = 0; i<[self numberOfPointsinPlot:plotIndex]; i++) {
+    for (int i = 0; i < [self numberOfPointsinPlot:plotIndex]; i++) {
         if ([_dataSource respondsToSelector:@selector(graphView:pointForForPointIndex:plotIndex:)]) {
             ORKRangePoint *value = [self.dataSource graphView:self pointForForPointIndex:i plotIndex:plotIndex];
             [_dataPoints addObject:value];
-            if (!value.isEmpty){
+            if (!value.isUnset) {
                 _hasDataPoint = YES;
             }
         }
     }
-    [self.yAxisPoints addObjectsFromArray:[self normalizeCanvasPoints:self.dataPoints forRect:self.plotsView.frame.size]];
+    [self.yAxisPoints addObjectsFromArray:[self normalizeCanvasPointsForRect:self.plotsView.frame.size]];
 }
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
@@ -229,14 +247,14 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointSize = 8.0f;
+    CGFloat pointSize = ORKGraphViewPointAndLineSize;
     
-    for (NSUInteger i=0 ; i<self.yAxisPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         ORKRangePoint *dataPointVal = (ORKRangePoint *)self.dataPoints[i];
         CGFloat positionOnXAxis = [self.xAxisPoints[i] floatValue];
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
         
-        if (!dataPointVal.isEmpty) {
+        if (!dataPointVal.isUnset) {
             ORKRangePoint *positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
             ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
             point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
@@ -249,8 +267,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
             
             [self.dots addObject:point];
             
-            if (![positionOnYAxis isRangeZero]) {
-                CGFloat pointSize = 8.0f;
+            if (!positionOnYAxis.hasEmptyRange) {
                 ORKCircleView *point = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 point.tintColor = (plotIndex == 0) ? self.tintColor : self.referenceLineColor;
                 point.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
@@ -270,7 +287,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     //Add Title Labels
     [self.xAxisTitles removeAllObjects];
     
-    for (int i=0; i<self.numberOfXAxisTitles; i++) {
+    for (int i = 0; i < self.numberOfXAxisTitles; i++) {
         if ([self.dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
             NSString *title = [self.dataSource graphView:self titleForXAxisAtIndex:i];
             
@@ -283,7 +300,10 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
         self.xAxisView = nil;
     }
     
-    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.plotsView.frame), CGRectGetMaxY(self.plotsView.frame), CGRectGetWidth(self.plotsView.frame), ORKGraphXAxisHeight)];
+    self.xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.plotsView.frame),
+                                                                   CGRectGetMaxY(self.plotsView.frame),
+                                                                   CGRectGetWidth(self.plotsView.frame),
+                                                                   XAxisHeight)];
     self.xAxisView.tintColor = self.tintColor;
     [self.xAxisView setupTitles:self.xAxisTitles];
     [self addSubview:self.xAxisView];
@@ -297,11 +317,11 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     xAxisLineLayer.path = xAxispath.CGPath;
     [self.xAxisView.layer addSublayer:xAxisLineLayer];
     
-    for (NSUInteger i=0; i<self.xAxisTitles.count; i++) {
+    for (NSUInteger i = 0; i < [self.xAxisTitles count]; i++) {
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
         UIBezierPath *rulerPath = [UIBezierPath bezierPath];
-        [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - ORKGraphAxisMarkingRulerLength)];
+        [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - AxisMarkingRulerLength)];
         [rulerPath addLineToPoint:CGPointMake(positionOnXAxis, 0)];
         
         CAShapeLayer *rulerLayer = [CAShapeLayer layer];
@@ -319,16 +339,19 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
         self.yAxisView = nil;
     }
     
-    CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - ORKGraphYAxisPaddingFactor);
-    CGFloat axisViewWidth = CGRectGetWidth(self.frame)*ORKGraphYAxisPaddingFactor;
+    CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
+    CGFloat axisViewWidth = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
     
-    self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition, ORKGraphTopPadding, axisViewWidth, CGRectGetHeight(self.plotsView.frame))];
+    self.yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition,
+                                                              TopPadding,
+                                                              axisViewWidth,
+                                                              CGRectGetHeight(self.plotsView.frame))];
     [self addSubview:self.yAxisView];
-    CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - ORKGraphAxisMarkingRulerLength + 2;
+    CGFloat rulerXPosition = CGRectGetWidth(self.yAxisView.bounds) - AxisMarkingRulerLength + 2;
     
     if (self.maximumValueImage && self.minimumValueImage) {
         // Use image icons as legends
-        CGFloat width = CGRectGetWidth(self.yAxisView.frame)/2;
+        CGFloat width = CGRectGetWidth(self.yAxisView.frame) / 2;
         CGFloat verticalPadding = 3.f;
         
         UIImageView *maxImageView = [[UIImageView alloc] initWithImage:self.maximumValueImage];
@@ -348,10 +371,10 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
         if (self.minimumValue == self.maximumValue) {
             yAxisLabelFactors = @[@0.5f];
         } else {
-            yAxisLabelFactors = @[@0.2f,@1.0f];
+            yAxisLabelFactors = @[@0.2f, @1.0f];
         }
         
-        for (NSUInteger i =0; i<yAxisLabelFactors.count; i++) {
+        for (NSUInteger i = 0; i < [yAxisLabelFactors count]; i++) {
             
             CGFloat factor = [yAxisLabelFactors[i] floatValue];
             CGFloat positionOnYAxis = CGRectGetHeight(self.plotsView.frame) * (1 - factor);
@@ -370,7 +393,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
             
             CGFloat yValue = self.minimumValue + (self.maximumValue - self.minimumValue)*factor;
             
-            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(self.yAxisView.frame) - ORKGraphAxisMarkingRulerLength, labelHeight)];
+            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(self.yAxisView.frame) - AxisMarkingRulerLength, labelHeight)];
             
             if (yValue != 0) {
                 axisTitleLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
@@ -389,8 +412,8 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     [self.referenceLines removeAllObjects];
     
     UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
-    [referenceLinePath moveToPoint:CGPointMake(ORKGraphLeftPadding, ORKGraphTopPadding + CGRectGetHeight(self.plotsView.frame)/2)];
-    [referenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), ORKGraphTopPadding + CGRectGetHeight(self.plotsView.frame)/2)];
+    [referenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding, TopPadding + CGRectGetHeight(self.plotsView.frame)/2)];
+    [referenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), TopPadding + CGRectGetHeight(self.plotsView.frame)/2)];
     
     CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
     referenceLineLayer.strokeColor = self.referenceLineColor.CGColor;
@@ -402,7 +425,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (void)drawVerticalReferenceLines {
-    for (int i=1; i<self.numberOfXAxisTitles; i++) {
+    for (int i = 1; i < self.numberOfXAxisTitles; i++) {
         
         CGFloat positionOnXAxis = ((CGRectGetWidth(self.plotsView.frame) / (self.numberOfXAxisTitles - 1)) * i);
         
@@ -422,7 +445,10 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 
 - (void)setupEmptyView {
     if (!self.emptyLabel) {
-        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphLeftPadding, ORKGraphTopPadding, CGRectGetWidth(self.frame) - ORKGraphLeftPadding, CGRectGetHeight(self.frame) - ORKGraphXAxisHeight - ORKGraphTopPadding)];
+        self.emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
+                                                                    TopPadding,
+                                                                    CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
+                                                                    CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
         self.emptyLabel.text = self.emptyText;
         self.emptyLabel.textAlignment = NSTextAlignmentCenter;
         self.emptyLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
@@ -473,8 +499,8 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 - (void)calculateXAxisPoints {
     [_xAxisPoints removeAllObjects];
     
-    for (int i=0 ; i<[self numberOfXAxisTitles]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / (_yAxisPoints.count - 1)) * i);
+    for (int i = 0; i < [self numberOfXAxisTitles]; i++) {
+        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([_yAxisPoints count] - 1)) * i);
         positionOnXAxis = round(positionOnXAxis);
         [_xAxisPoints addObject:@(positionOnXAxis)];
     }
@@ -490,12 +516,8 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     return NO;
 }
 
-- (CGSize)scrubberThumbSize {
-    return CGSizeMake(10, 10);
-}
-
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    if ((self.dataPoints.count > 0) && [self numberOfValidValues] > 0) {
+    if (([self.dataPoints count] > 0) && [self numberOfValidValues] > 0) {
         
         CGPoint location = [gestureRecognizer locationInView:self.plotsView];
         CGFloat maxX = round(CGRectGetWidth(self.plotsView.bounds));
@@ -525,8 +547,8 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    [UIView animateWithDuration:0.1 animations:^{
-        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphLeftPadding, self.scrubberLine.center.y);
+    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
+        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
         [self updateScrubberLineAccessories:xPosition];
     }];
 }
@@ -534,7 +556,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition {
     CGFloat scrubberYPos = [self canvasYPointForXPosition:xPosition];
     CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
-   [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphLeftPadding, scrubberYPos + ORKGraphTopPadding)];
+   [self.scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPos + TopPadding)];
     self.scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingVal];
    CGSize textSize = [self.scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(self.scrubberLabel.bounds))
                                                            options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin)
@@ -544,16 +566,16 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
-    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame) / self.xAxisPoints.count;
+    CGFloat widthBetweenPoints = CGRectGetWidth(self.plotsView.frame) / [self.xAxisPoints count];
     NSUInteger positionIndex;
-    for (positionIndex = 0; positionIndex < self.xAxisPoints.count; positionIndex++) {
+    for (positionIndex = 0; positionIndex < [self.xAxisPoints count]; positionIndex++) {
         
         CGFloat dataPointValue = ((ORKRangePoint *)self.dataPoints[positionIndex]).maximumValue;
         
-        if (dataPointValue != NSNotFound) {
+        if (dataPointValue != ORKCGFloatInvalidValue) {
             CGFloat value = [self.xAxisPoints[positionIndex] floatValue];
             
-            if (fabs(value - xPosition) < (widthBetweenPoints * ORKGraphSnappingClosenessFactor)) {
+            if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
                 xPosition = value;
             }
         }
@@ -563,10 +585,10 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
     BOOL snapped = [self.xAxisPoints containsObject:@(xPosition)];
-    CGFloat value = NSNotFound;
+    CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
     if (snapped) {
-        for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+        for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
             CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
             if (xAxisPointVal == xPosition) {
                 break;
@@ -579,25 +601,27 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
     if ([self numberOfValidValues] > 0) {
-        CGFloat alpha = hidden ? 0 : 1;
         
-        if (animated) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.scrubberThumbView.alpha = alpha;
-                self.scrubberLine.alpha = alpha;
-                self.scrubberLabel.alpha = alpha;
-            }];
-        } else {
+        void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
+            CGFloat alpha = hidden ? 0.0 : 1.0;
             self.scrubberThumbView.alpha = alpha;
             self.scrubberLine.alpha = alpha;
             self.scrubberLabel.alpha = alpha;
+        };
+        
+        if (animated) {
+            [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
+                updateAlpha(hidden);
+            }];
+        } else {
+            updateAlpha(hidden);
         }
     }
 }
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
     NSUInteger positionIndex = 0;
-    for (positionIndex = 0; positionIndex<self.xAxisPoints.count-1; positionIndex++) {
+    for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
         CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
         if (xAxisPointVal > xPosition) {
             break;
@@ -609,18 +633,18 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 #pragma Mark - Animation
 
 - (CGFloat)animateLayersSequentially {
-    CGFloat delay = 0.1;
+    CGFloat delay = LayerAnimationDelay;
     
-    for (NSUInteger i=0; i<self.dots.count; i++) {
+    for (NSUInteger i = 0; i < [self.dots count]; i++) {
         CAShapeLayer *layer = [self.dots[i] shapeLayer];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += 0.1;
+        delay += LayerAnimationDelay;
     }
     
-    for (NSUInteger i=0; i<self.pathLines.count; i++) {
+    for (NSUInteger i = 0; i < [self.pathLines count]; i++) {
         CAShapeLayer *layer = self.pathLines[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
-        delay += ORKGraphGrowAnimationDuration;
+        delay += ORKGraphViewGrowAnimationDuration;
     }
     return delay;
 }
@@ -638,74 +662,65 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue startDelay:(CGFloat)delay {
+    
+    NSString *animationKeyPath = nil;
+    CGFloat animationDuration = 0.0;
+    NSString *animationKey = nil;
     if (animationType == ORKGraphAnimationTypeFade) {
-        
-        CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        fadeAnimation.beginTime = CACurrentMediaTime() + delay;
-        fadeAnimation.fromValue = @0;
-        fadeAnimation.toValue = @(toValue);
-        fadeAnimation.duration = ORKGraphFadeAnimationDuration;
-        fadeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        fadeAnimation.fillMode = kCAFillModeForwards;
-        fadeAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:fadeAnimation forKey:FadeAnimationKey];
-        
+        animationKeyPath = @"opacity";
+        animationDuration = FadeAnimationDuration;
+        animationKey = FadeAnimationKey;
     } else if (animationType == ORKGraphAnimationTypeGrow) {
-        
-        CABasicAnimation *growAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-        growAnimation.beginTime = CACurrentMediaTime() + delay;
-        growAnimation.fromValue = @0;
-        growAnimation.toValue = @(toValue);
-        growAnimation.duration = ORKGraphGrowAnimationDuration;
-        growAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        growAnimation.fillMode = kCAFillModeForwards;
-        growAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:growAnimation forKey:GrowAnimationKey];
-        
+        animationKeyPath = @"strokeEnd";
+        animationDuration = ORKGraphViewGrowAnimationDuration;
+        animationKey = GrowAnimationKey;
     } else if (animationType == ORKGraphAnimationTypePop) {
-        
-        CABasicAnimation *popAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-        popAnimation.beginTime = CACurrentMediaTime() + delay;
-        popAnimation.fromValue = @0;
-        popAnimation.toValue = @(toValue);
-        popAnimation.duration = ORKGraphPopAnimationDuration;
-        popAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        popAnimation.fillMode = kCAFillModeForwards;
-        popAnimation.removedOnCompletion = NO;
-        [shapeLayer addAnimation:popAnimation forKey:GrowAnimationKey];
-        
+        animationKeyPath = @"transform.scale";
+        animationDuration = PopAnimationDuration;
+        animationKey = PopAnimationKey;
     }
+    NSAssert(animationKeyPath && animationKey && animationDuration > 0.0, @"");
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+    animation.beginTime = CACurrentMediaTime() + delay;
+    animation.fromValue = @0;
+    animation.toValue = @(toValue);
+    animation.duration = animationDuration;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    [shapeLayer addAnimation:animation forKey:animationKey];
 }
 
 - (NSInteger)numberOfValidValues {
     NSInteger count = 0;
     
-    for (ORKRangePoint *dataVal in self.dataPoints) {
-        if (!dataVal.isEmpty) {
-            count ++;
+    for (ORKRangePoint *rangePoint in self.dataPoints) {
+        if (!rangePoint.isUnset) {
+            count++;
         }
     }
     return count;
 }
 
-- (NSArray *)normalizeCanvasPoints:(NSArray *) __unused dataPoints forRect:(CGSize)canvasSize {
+- (NSArray *)normalizeCanvasPointsForRect:(CGSize)canvasSize {
     [self calculateMinAndMaxPoints];
     
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
-    for (NSUInteger i=0; i<self.dataPoints.count; i++) {
+    for (NSUInteger i = 0; i < [self.dataPoints count]; i++) {
         
         ORKRangePoint *normalizedRangePoint = [ORKRangePoint new];
         ORKRangePoint *dataPointValue = (ORKRangePoint *)self.dataPoints[i];
         
-        if (dataPointValue.isEmpty){
+        if (dataPointValue.isUnset) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height;
         } else if (self.minimumValue == self.maximumValue) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height/2;
+            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height / 2;
         } else {
             CGFloat range = self.maximumValue - self.minimumValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue)/range * canvasSize.height;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue)/range * canvasSize.height;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - self.minimumValue) / range * canvasSize.height;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - self.minimumValue) / range * canvasSize.height;
             
             normalizedRangePoint.minimumValue = canvasSize.height - normalizedMinimumValue;
             normalizedRangePoint.maximumValue = canvasSize.height - normalizedMaximumValue;
@@ -719,8 +734,8 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
-    while (validPosition < (self.dataPoints.count-1)) {
-        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != NSNotFound) {
+    while (validPosition < ([self.dataPoints count] - 1)) {
+        if (((ORKRangePoint *)self.dataPoints[validPosition]).maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition ++;
@@ -737,12 +752,12 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
         self.minimumValue = [self.dataSource minimumValueForGraphView:self];
     } else {
         
-        if (self.dataPoints.count) {
+        if ([self.dataPoints count]) {
             self.minimumValue = ((ORKRangePoint *)self.dataPoints[0]).minimumValue;
             
-            for (NSUInteger i=1; i<self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < [self.dataPoints count]; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).minimumValue;
-                if ((self.minimumValue == NSNotFound) || (value < self.minimumValue)) {
+                if ((self.minimumValue == ORKCGFloatInvalidValue) || (value < self.minimumValue)) {
                     self.minimumValue = value;
                 }
             }
@@ -753,12 +768,12 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     if ([self.dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
         self.maximumValue = [self.dataSource maximumValueForGraphView:self];
     } else {
-        if (self.dataPoints.count) {
+        if ([self.dataPoints count]) {
             self.maximumValue = ((ORKRangePoint *)self.dataPoints[0]).maximumValue;
             
-            for (NSUInteger i=1; i<self.dataPoints.count; i++) {
+            for (NSUInteger i = 1; i < [self.dataPoints count]; i++) {
                 CGFloat value = ((ORKRangePoint *)self.dataPoints[i]).maximumValue;
-                if (((value != NSNotFound) && (value > self.maximumValue)) || (self.maximumValue == NSNotFound)) {
+                if (((value != ORKCGFloatInvalidValue) && (value > self.maximumValue)) || (self.maximumValue == ORKCGFloatInvalidValue)) {
                     self.maximumValue = value;
                 }
             }
@@ -811,15 +826,6 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 
 @implementation ORKRangePoint
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _minimumValue = NSNotFound;
-        _maximumValue = NSNotFound;
-    }
-    return self;
-}
-
 - (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue {
     self = [super init];
     if (self) {
@@ -829,12 +835,16 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
     return self;
 }
 
+- (instancetype)init {
+    return [self initWithMinimumValue:ORKCGFloatInvalidValue maximumValue:ORKCGFloatInvalidValue];
+}
+
 - (instancetype)initWithValue:(CGFloat)value {
     return [self initWithMinimumValue:value maximumValue:value];
 }
 
 - (BOOL)isEmpty {
-    return (self.minimumValue == NSNotFound && self.maximumValue == NSNotFound);
+    return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
 }
 
 - (BOOL)isRangeZero {
@@ -842,7 +852,7 @@ CGFloat const ORKGraphSnappingClosenessFactor = 0.3;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Min:%0.0f,Max:%0.0f", self.minimumValue, self.maximumValue];
+    return [NSString stringWithFormat:@"{min: %0.0f, max: %0.0f}", self.minimumValue, self.maximumValue];
 }
 
 @end
