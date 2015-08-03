@@ -294,13 +294,18 @@ Dot notation is syntactic sugar added in Objective-C 2.0. Its usage is equivalen
     - (PropertyType *)property
     - (void)setProperty:(PropertyType *)property
 
-Dot notation may be used when accessing proper properties, but should not be used to invoke regular methods.
+Dot notation should be used when accessing proper properties, but should not be used to invoke regular methods. Use the syntax corresponding to the declaration on the official documentation.
 
     // DO
-    oldName = myObject.name;    // Equivalent to 'oldName = [myObject name]'
-    myObject.name = @"Alice";   // Equivalent to '[myObject setName:@"Alice"]'
+    oldName = myObject.name;                    // Equivalent to 'oldName = [myObject name]'
+    myObject.name = @"John Appleseed";          // Equivalent to '[myObject setName:@"Alice"]'
+    NSUInteger numberOfItems = array.count;     // A property since iOS 8
+    NSUInteger stringLength = string.length;    // A property since iOS 8
+    [autoreleasePool drain];
+    NSArray *constraints = [view constraints];
 
     // DON'T
-    NSUInteger numberOfItems = array.count;     // Not a property
-    NSUInteger stringLength = string.length;    // Not a property
-    array.release;                              // Not a property
+    NSUInteger numberOfItems = [array count];   // No longer a method
+    NSUInteger stringLength = [string length];  // No longer a method
+    autoreleasePool.drain;                      // Not a property
+    NSArray *constraints = view.constraints;    // Not a property
