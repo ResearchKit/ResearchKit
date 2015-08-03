@@ -33,12 +33,17 @@
 #import "ORKHolePegTestPegView.h"
 
 
-#define LAYOUT_DEBUG 1
+static const CGFloat ORKPegViewDiameter = 148.0f;
+static const CGFloat ORKPegViewSensibility = 4.0f;
 
 
-@interface ORKHolePegTestContentView ()
+// #define LAYOUT_DEBUG 1
+
+
+@interface ORKHolePegTestContentView () <ORKHolePegTestPegViewDelegate>
 
 @property (nonatomic, strong) ORKHolePegTestPegView *pegView;
+@property (nonatomic, strong) ORKHolePegTestPegView *holeView;
 @property (nonatomic, copy) NSArray *constraints;
 
 @end
@@ -49,14 +54,18 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"[super initWithFrame:frame]");
+        _holeView = [[ORKHolePegTestPegView alloc] initWithType:ORKHolePegTypeHole];
+        _holeView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_holeView];
         
-        _pegView = [[ORKHolePegTestPegView alloc] init];
+        _pegView = [[ORKHolePegTestPegView alloc] initWithType:ORKHolePegTypePeg];
+        _pegView.delegate = self;
         _pegView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_pegView];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self setNeedsUpdateConstraints];
+        
 #if LAYOUT_DEBUG
         self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
 #endif
@@ -72,27 +81,83 @@
     
     NSMutableArray *constraints = [NSMutableArray array];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
-                                                        attribute:NSLayoutAttributeWidth
-                                                       multiplier:0
-                                                         constant:40]];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_pegView, _holeView);
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.pegView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:0
+                                                         constant:ORKPegViewDiameter]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.pegView
                                                         attribute:NSLayoutAttributeHeight
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeHeight
                                                        multiplier:0
-                                                         constant:40]];
+                                                         constant:ORKPegViewDiameter]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.holeView
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:0
+                                                         constant:ORKPegViewDiameter]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.holeView
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeHeight
+                                                       multiplier:0
+                                                         constant:ORKPegViewDiameter]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_pegView]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_pegView]"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_holeView]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_holeView]-|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
     
     _constraints = constraints;
     [self addConstraints:_constraints];
     
     [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];
+}
+
+#pragma mark - peg view delegate
+
+- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView {
+    CGRect holeFrame = CGRectMake(CGRectGetMidX(self.holeView.frame) - ORKPegViewSensibility,
+                                  CGRectGetMidY(self.holeView.frame) - ORKPegViewSensibility,
+                                  2 * ORKPegViewSensibility,
+                                  2 * ORKPegViewSensibility);
+    
+    CGPoint pegCenter = CGPointMake(CGRectGetMaxX(pegView.frame) - CGRectGetMidX(pegView.bounds),
+                                    CGRectGetMaxY(pegView.frame) - CGRectGetMidY(pegView.bounds));
+    
+    if (CGRectContainsPoint(holeFrame, pegCenter)) {
+        pegView.alpha = 1.0f;
+    } else {
+        pegView.alpha = 0.2f;
+    }
 }
 
 @end

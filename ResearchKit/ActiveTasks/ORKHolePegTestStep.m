@@ -42,13 +42,9 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-//        self.shouldStartTimerAutomatically = YES;
-//        self.shouldShowDefaultTimer = NO;
-//        self.shouldPlaySoundOnStart = YES;
-//        self.shouldPlaySoundOnFinish = YES;
-//        self.shouldVibrateOnStart = YES;
-//        self.shouldVibrateOnFinish = YES;
-//        self.shouldContinueOnFinish = NO;
+        self.shouldStartTimerAutomatically = YES;
+        self.shouldShowDefaultTimer = NO;
+        self.shouldContinueOnFinish = YES;
     }
     return self;
 }

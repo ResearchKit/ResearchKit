@@ -34,8 +34,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, ORKHolePegType) {
+    ORKHolePegTypeHole,
+    ORKHolePegTypePeg
+} ORK_ENUM_AVAILABLE;
+
+@protocol ORKHolePegTestPegViewDelegate;
+
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPegView : UIView
+@interface ORKHolePegTestPegView : UIView <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) id<ORKHolePegTestPegViewDelegate> delegate;
+
+- (instancetype)initWithType:(ORKHolePegType)type NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@protocol ORKHolePegTestPegViewDelegate <NSObject>
+
+- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView;
 
 @end
 

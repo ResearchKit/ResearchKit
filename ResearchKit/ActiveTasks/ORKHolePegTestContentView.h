@@ -32,6 +32,11 @@
 #import "ORKCustomStepView_Internal.h"
 
 
-@interface ORKHolePegTestContentView : ORKActiveStepCustomView
+NS_ASSUME_NONNULL_BEGIN
+
+ORK_CLASS_AVAILABLE
+@interface ORKHolePegTestContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
 
 @end
+
+NS_ASSUME_NONNULL_END

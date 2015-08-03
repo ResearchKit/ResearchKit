@@ -32,38 +32,147 @@
 #import "ORKHolePegTestPegView.h"
 
 
-static const UIEdgeInsets _ORKFlowerMargins = (UIEdgeInsets){12,12,12,12};
-static const CGSize ORKFlowerBezierPathSize = (CGSize){90,90};
-static UIBezierPath *ORKFlowerBezierPath() {
-    UIBezierPath *bezierPath = UIBezierPath.bezierPath;
-    [bezierPath moveToPoint: CGPointMake(58.8, 45)];
-    [bezierPath addCurveToPoint: CGPointMake(51.9, 33.2) controlPoint1: CGPointMake(107.8, 41.8) controlPoint2: CGPointMake(79.3, -7.2)];
-    [bezierPath addCurveToPoint: CGPointMake(38.1, 33.2) controlPoint1: CGPointMake(73.6, -10.4) controlPoint2: CGPointMake(16.5, -10.4)];
-    [bezierPath addCurveToPoint: CGPointMake(31.2, 45) controlPoint1: CGPointMake(10.8, -7.2) controlPoint2: CGPointMake(-17.8, 41.8)];
-    [bezierPath addCurveToPoint: CGPointMake(38.1, 56.8) controlPoint1: CGPointMake(-17.8, 48.2) controlPoint2: CGPointMake(10.7, 97.2)];
-    [bezierPath addCurveToPoint: CGPointMake(51.9, 56.8) controlPoint1: CGPointMake(16.4, 100.4) controlPoint2: CGPointMake(73.5, 100.4)];
-    [bezierPath addCurveToPoint: CGPointMake(58.8, 45) controlPoint1: CGPointMake(79.2, 97.2) controlPoint2: CGPointMake(107.8, 48.2)];
-    [bezierPath closePath];
-    [bezierPath moveToPoint: CGPointMake(45, 53.1)];
-    [bezierPath addCurveToPoint: CGPointMake(36.7, 45) controlPoint1: CGPointMake(40.4, 53.1) controlPoint2: CGPointMake(36.7, 49.5)];
-    [bezierPath addCurveToPoint: CGPointMake(45, 36.9) controlPoint1: CGPointMake(36.7, 40.5) controlPoint2: CGPointMake(40.4, 36.9)];
-    [bezierPath addCurveToPoint: CGPointMake(53.3, 45) controlPoint1: CGPointMake(49.6, 36.9) controlPoint2: CGPointMake(53.3, 40.5)];
-    [bezierPath addCurveToPoint: CGPointMake(45, 53.1) controlPoint1: CGPointMake(53.3, 49.5) controlPoint2: CGPointMake(49.6, 53.1)];
-    [bezierPath closePath];
-    bezierPath.miterLimit = 4;
-    
-    return bezierPath;
-}
+static const UIEdgeInsets kPegViewMargins = (UIEdgeInsets){22, 22, 22, 22};
+static const CGFloat kPegViewRotation = 45.0f;
+
+
+@interface ORKHolePegTestPegView ()
+
+@property (nonatomic, assign) ORKHolePegType type;
+@property (nonatomic, assign) CGFloat transformX;
+@property (nonatomic, assign) CGFloat transformY;
+@property (nonatomic, assign) CGFloat initialRotation;
+@property (nonatomic, assign) CGFloat transformRotation;
+@property (nonatomic, assign, getter=isMoving) BOOL moving;
+
+@end
 
 
 @implementation ORKHolePegTestPegView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - gesture recognizer methods
+
+- (instancetype)initWithType:(ORKHolePegType)type
+{
+    self = [super init];
+    if (self) {
+        if (type == ORKHolePegTypeHole) {
+            _type = ORKHolePegTypeHole;
+            _initialRotation = 0.0f;
+        } else {
+            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                            action:@selector(handlePan:)];
+            panRecognizer.minimumNumberOfTouches = 2;
+            panRecognizer.maximumNumberOfTouches = 2;
+            panRecognizer.delegate = self;
+            [self addGestureRecognizer:panRecognizer];
+            
+            UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                                                           action:@selector(handleRotation:)];
+            rotationRecognizer.delegate = self;
+            [self addGestureRecognizer:rotationRecognizer];
+            
+            _type = ORKHolePegTypePeg;
+            _initialRotation = kPegViewRotation * (M_PI / 180);
+        }
+        
+        self.backgroundColor = [UIColor clearColor];
+        self.transform = CGAffineTransformMakeRotation(_initialRotation);
+        self.moving = NO;
+    }
+    
+    return self;
 }
-*/
+
+- (void)updateTransform
+{
+    self.transform = CGAffineTransformMakeTranslation(self.transformX, self.transformY);
+    self.transform = CGAffineTransformRotate(self.transform, self.transformRotation + self.initialRotation);
+    
+    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:)]) {
+        [self.delegate pegViewDidMove:self];
+    }
+    
+    if (!self.isMoving) {
+        self.alpha = 0.2f;
+        self.moving = YES;
+    }
+}
+
+- (void)resetTransform {
+    [UIView animateWithDuration:0.15f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(){
+                         self.transform = CGAffineTransformMakeRotation(self.initialRotation);
+                         self.transformX = 0.0f;
+                         self.transformY = 0.0f;
+                         self.transformRotation = 0.0f;
+                         self.alpha = 1.0f;
+                     }
+                     completion:^(BOOL finished){
+                         self.moving = NO;
+                     }];
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint translation = [gestureRecognizer translationInView:self.superview];
+    self.transformX = translation.x;
+    self.transformY = translation.y;
+    [self updateTransform];
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        [self resetTransform];
+    }
+}
+
+- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
+{
+    self.transformRotation = gestureRecognizer.rotation;
+    [self updateTransform];
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        [self resetTransform];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+#pragma mark - drawing method
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    
+    CGRect bounds = [self bounds];
+    [self.tintColor setFill];
+    
+    CGRect verticalRect = CGRectMake(bounds.size.width * 7/16, bounds.size.height * 1/4,
+                                     bounds.size.width * 1/8, bounds.size.height * 1/2);
+    CGRect horizontalRect = CGRectMake(bounds.size.width * 1/4, bounds.size.height * 7/16,
+                                       bounds.size.width * 1/2, bounds.size.height * 1/8);
+    
+    if (self.type == ORKHolePegTypeHole) {
+        CGContextFillRect(context, verticalRect);
+        CGContextFillRect(context, horizontalRect);
+    } else {
+        CGRect intersectionRect = CGRectIntersection(verticalRect, horizontalRect);
+        CGContextAddRect(context, verticalRect);
+        CGContextAddRect(context, horizontalRect);
+        CGContextAddRect(context, intersectionRect);
+        CGRect boundingRect = CGContextGetClipBoundingBox(context);
+        CGContextAddRect(context, boundingRect);
+        CGContextEOClip(context);
+        
+        bounds = CGRectInset([self bounds], kPegViewMargins.left, kPegViewMargins.top);
+        UIBezierPath *pegPath = [UIBezierPath bezierPathWithOvalInRect:bounds];
+        [pegPath fill];
+    }
+    
+    CGContextRestoreGState(context);
+}
 
 @end
