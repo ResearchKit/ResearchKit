@@ -981,6 +981,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _pageViewController.toolbarItems = viewController.toolbarItems;
     _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
     _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
+    if (!_showsProgressInNavigationBar) {
+        _pageViewController.navigationItem.title = viewController.navigationItem.title;
+        _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+    }
 }
 
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
