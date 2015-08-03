@@ -32,12 +32,12 @@ In `@interface` declarations, there should be one space between: the subclass na
 In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attributes; the property type; and the pointer asterisk.
 
     // DO
-    @property (nonatomic, weak) UIView<DelegateProtocol> *delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol> delegate;
 
     // DON'T
-    @property (nonatomic,weak) UIView <DelegateProtocol> *delegate;
-    @property(nonatomic, weak) UIView <DelegateProtocol> *delegate;
-    @property (nonatomic, weak) UIView<DelegateProtocol>*delegate;
+    @property (nonatomic,weak,nullable) id <ORKDelegateProtocol> delegate;
+    @property(nonatomic, weak, nullable) id <ORKDelegateProtocol> delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol>delegate;
 
 ---
 
@@ -56,18 +56,18 @@ In *method* declarations, there should be one space between: the `-` or `+` char
 Use spaces if the operator has two or more arguments:
 
     // DO
-    a += 2
-    a = 5
-    z == 3
-    aFlag && aBoolean
-    zOrder > 4
+    steps += 2
+    calories = 5
+    calories == caloryGoal
+    goalAchieved && notReminded
+    flightsClimbed > 4
     success ? YES : NO
 
 Omit the space when the operator takes only one argument:
 
     // DO
-    a++
-    &var
+    calories++
+    &error
     !success
 
 
@@ -116,27 +116,27 @@ Hard wrap lines that exceed 140 characters. You can configure the column guide o
 When hard wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
 
     // DO
-    - (void)doSomethingWith:(Foo *)foo
-                       rect:(NSRect)rect
-                   interval:(float)interval {
+    - (void)doSomethingWithFoo:(Foo *)foo
+                           bar:(Bar *)bar
+                      interval:(NSTimeInterval)interval {
         ...
 
 Method invocations should be formatted much like method declarations. Invocations should have all arguments on one line or have one argument per line, with colons aligned.
 
     // DO
-    [myObject doFooWith:arg1 name:arg2 error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar interval:interval];
 
-    [myObject doFooWith:arg1
-                   name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo
+                             bar:bar
+                        interval:interval];
 
     // DON'T
-    [myObject doFooWith:arg1 name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar
+                        interval:interval];
 
-    [myObject doFooWith:arg1
-              name:arg2
-              error:arg3];
+    [myObject doSomethingWithFoo:foo
+              bar:bar
+              interval:interval];
 
 #### 1.4. Appledoc Header Comments
 
@@ -250,6 +250,7 @@ Declare one variable per line even if they have the same type. In general it's a
     int floatVariable = -1;
     double doubleVariable = 0.0;
     int *cPointerVariable = NULL;
+    CGContextRef context = NULL;
 
 Strong, weak, and autoreleasing stack variables are [implicitly initialized with `nil`](https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW5) so you can either explicitly initialize them (with `nil` or any valid object) for visual homogeneity, or skip initializing them altogether.
 
@@ -267,6 +268,7 @@ When declaring pointers, there should be a space between the asterisk and the va
     // DON'T
     int* variablePointer2;
     int* variablePointer, variable;
+    UIView* view;
 
 
 #### 2.2. Forward Declarations
@@ -274,14 +276,15 @@ When declaring pointers, there should be a space between the asterisk and the va
 Use one line for each forward declarations:
 
     // DO
-    @protocol forwardProtocol;
-    @class aClass;
-    @class anotherClass;
-    @class yetAnotherClass;
+    @protocol ORKProtocol;
+    @protocol ORKAnotherProtocol;
+    @class ORKClass;
+    @class ORKAnotherClass;
+    @class ORKYetAnotherClass;
 
     // DON'T
-    @protocol forwardProtocol, anotherProtocol;
-    @class aClass, anotherClass, yetAnotherClass;
+    @protocol ORKProtocol, ORKAnotherProtocol;
+    @class ORKClass, ORKAnotherClass, ORKYetAnotherClass;
 
 
 #### 2.3. Dot Notation
