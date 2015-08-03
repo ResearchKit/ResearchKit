@@ -1598,6 +1598,86 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 @end
 
 
+#pragma mark - ORKTextScaleAnswerFormat
+
+@implementation ORKTextScaleAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKChoiceQuestionResult class];
+}
+
+- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices
+                           vertical:(BOOL)vertical
+                             labels:(BOOL)labels
+                            numbers:(BOOL)numbers {
+    self = [super init];
+    if (self) {
+        _textChoices = textChoices;
+        _vertical = vertical;
+        _labels = labels;
+        _numbers = numbers;
+        
+        [self validateParameters];
+    }
+    return self;
+}
+
+- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices
+                           vertical:(BOOL)vertical {
+    return [self initWithTextChoices:textChoices
+                            vertical:vertical
+                              labels:YES
+                             numbers:NO];
+}
+
+- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices {
+    return [self initWithTextChoices:textChoices
+                            vertical:NO
+                              labels:YES
+                             numbers:NO];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, textChoices);
+        ORK_DECODE_BOOL(aDecoder, vertical);
+        ORK_DECODE_BOOL(aDecoder, labels);
+        ORK_DECODE_BOOL(aDecoder, numbers);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, textChoices);
+    ORK_ENCODE_BOOL(aCoder, vertical);
+    ORK_ENCODE_BOOL(aCoder, labels);
+    ORK_ENCODE_BOOL(aCoder, numbers);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (_textChoices == castObject.textChoices) &&
+            (_vertical == castObject.vertical) &&
+            (_labels == castObject.labels) &&
+            (_numbers == castObject.numbers));
+}
+
+- (ORKQuestionType) questionType {
+    return ORKQuestionTypeSingleChoice;
+}
+
+@end
+
+
 #pragma mark - ORKTextAnswerFormat
 
 @implementation ORKTextAnswerFormat
