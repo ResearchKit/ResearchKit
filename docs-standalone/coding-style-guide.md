@@ -287,7 +287,56 @@ Use one line for each forward declarations:
     @class ORKClass, ORKAnotherClass, ORKYetAnotherClass;
 
 
-#### 2.3. Dot Notation
+#### 2.3. Constant Declarations
+
+If a constant is only used inside one method, declare it locally to that method. If a constant is used in several methods of a single class, declare it as a `static` constant in the class implementation file. If a constant is used from several files, declare it as an `extern` constant and prefix its name with a suitable `ORK*` prefix.
+
+Static or global constant names should start in uppercase. Constants should never start with the `k` prefix (that naming convention is deprecated). These rules also apply to `enum` value names.
+
+    // Method-local constant
+    - (void)animateView {
+        const CGFloat animationDuration = 0.2;
+        ...
+    }
+
+
+    // Class-local constant
+    static const CGFloat DefaultLineWidth = 10.0;
+    - (void)init {
+        if (self = [super init]) {
+            _lineWidth = DefaultLineWidth
+            ...
+        }
+        return self;
+    }
+
+    - (void)resetView {
+        _lineWidth = DefaultLineWidth
+        ...
+    }
+
+
+    // Global constant
+
+    // ORKSkin.h
+    ORK_EXTERN NSString *const ORKToolBarTintColorKey;
+    ORK_EXTERN const CGFloat ORKScreenMetricMaxDimension;
+
+    // ORKSkin.m
+    NSString *const ORKBackgroundColorKey = @"ORKBackgroundColorKey";
+    const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+
+
+    // Global enum
+    typedef NS_ENUM(NSInteger, ORKQuestionType) {
+        ORKQuestionTypeNone,
+        ORKQuestionTypeScale,
+        ...
+    } ORK_ENUM_AVAILABLE;
+
+
+
+#### 2.4. Dot Notation
 
 Dot notation is syntactic sugar added in Objective-C 2.0. Its usage is equivalent to using the auto-synthesized methods:
 
