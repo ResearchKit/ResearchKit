@@ -338,23 +338,27 @@ Static or global constant names should start in uppercase. Constants should neve
 
 #### 2.4. Dot Notation
 
-Dot notation is syntactic sugar added in Objective-C 2.0. Its usage is equivalent to using the auto-synthesized methods:
+Dot notation (`object.property`) is a syntax for using properties in a convenient and compact way. Accessing or setting a property through dot notation is completely equivalent to calling the property accessor methods:
 
     - (PropertyType *)property
     - (void)setProperty:(PropertyType *)property
 
-Dot notation should be used when accessing proper properties, but should not be used to invoke regular methods. Use the syntax corresponding to the declaration on the official documentation.
+    // DO
+    NSString *oldName = user.name;              // Equivalent to 'NSString *oldName = [user name]'
+    user.name = @"John Appleseed";              // Equivalent to '[user setName:@"John Appleseed"]'
+
+Dot notation should be used when accessing proper properties, but should be avoided when invoking regular methods. Use the syntax corresponding to the official documentation or relevant header declaration.
 
     // DO
-    oldName = myObject.name;                    // Equivalent to 'oldName = [myObject name]'
-    myObject.name = @"John Appleseed";          // Equivalent to '[myObject setName:@"Alice"]'
-    NSUInteger numberOfItems = array.count;     // A property since iOS 8
-    NSUInteger stringLength = string.length;    // A property since iOS 8
-    [autoreleasePool drain];
-    NSArray *constraints = [view constraints];
+    CGRect viewFrame = view.frame;              // Declared as a property
+    NSUInteger numberOfItems = array.count;     // Declared as a property since iOS 8
+    NSUInteger stringLength = string.length;    // Declared as a property since iOS 8
+    [autoreleasePool drain];                    // A method
+    NSArray *constraints = [view constraints];  // A method
 
     // DON'T
-    NSUInteger numberOfItems = [array count];   // No longer a method
-    NSUInteger stringLength = [string length];  // No longer a method
+    CGRect viewFrame = [view frame];            // 'frame' is not declared as a method
+    NSUInteger numberOfItems = [array count];   // 'count' is no longer declared as a method
+    NSUInteger stringLength = [string length];  // 'length' is no longer declared as a method
     autoreleasePool.drain;                      // Not a property
     NSArray *constraints = view.constraints;    // Not a property
