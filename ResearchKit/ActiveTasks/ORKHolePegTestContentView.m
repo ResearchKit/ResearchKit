@@ -31,7 +31,7 @@
 
 #import "ORKHolePegTestContentView.h"
 #import "ORKHolePegTestPegView.h"
-#import "ORKArrowView.h"
+#import "ORKDirectionView.h"
 
 
 static const CGFloat ORKPegViewDiameter = 148.0f;
@@ -45,7 +45,7 @@ static const CGFloat ORKPegViewSensibility = 4.0f;
 
 @property (nonatomic, strong) ORKHolePegTestPegView *pegView;
 @property (nonatomic, strong) ORKHolePegTestPegView *holeView;
-@property (nonatomic, strong) ORKArrowView *arrowView;
+@property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, copy) NSArray *constraints;
 
 @end
@@ -65,9 +65,9 @@ static const CGFloat ORKPegViewSensibility = 4.0f;
         _pegView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_pegView];
         
-        _arrowView = [[ORKArrowView alloc] init];
-        _arrowView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_arrowView];
+        _directionView = [[ORKDirectionView alloc] init];
+        _directionView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_directionView];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self setNeedsUpdateConstraints];
@@ -87,7 +87,7 @@ static const CGFloat ORKPegViewSensibility = 4.0f;
     
     NSMutableArray *constraints = [NSMutableArray array];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_pegView, _holeView, _arrowView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_pegView, _holeView, _directionView);
     NSDictionary *metrics = @{@"diameter" : @(ORKPegViewDiameter)};
     
     [constraints addObjectsFromArray:
@@ -103,16 +103,24 @@ static const CGFloat ORKPegViewSensibility = 4.0f;
                                                views:views]];
 
     [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pegView(diameter)]->=0-[_arrowView]->=0-[_holeView(diameter)]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pegView(diameter)]->=0-[_holeView(diameter)]|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:metrics
                                                views:views]];
 
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.arrowView
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.directionView
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1
+                                                         constant:0]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.directionView
+                                                        attribute:NSLayoutAttributeCenterY
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterY
                                                        multiplier:1
                                                          constant:0]];
     

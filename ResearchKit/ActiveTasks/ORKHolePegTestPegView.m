@@ -164,9 +164,6 @@ static const CGFloat kPegViewRotation = 45.0f;
                                        bounds.size.width * 1/2, bounds.size.height * 1/8);
     
     if (self.type == ORKHolePegTypeHole) {
-        CGContextFillRect(context, verticalRect);
-        CGContextFillRect(context, horizontalRect);
-    } else {
         CGRect intersectionRect = CGRectIntersection(verticalRect, horizontalRect);
         CGContextAddRect(context, verticalRect);
         CGContextAddRect(context, horizontalRect);
@@ -178,6 +175,9 @@ static const CGFloat kPegViewRotation = 45.0f;
         bounds = CGRectInset([self bounds], kPegViewMargins.left, kPegViewMargins.top);
         UIBezierPath *pegPath = [UIBezierPath bezierPathWithOvalInRect:bounds];
         [pegPath fill];
+    } else {
+        CGContextFillRect(context, verticalRect);
+        CGContextFillRect(context, horizontalRect);
     }
     
     CGContextRestoreGState(context);

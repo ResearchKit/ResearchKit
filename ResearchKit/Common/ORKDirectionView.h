@@ -34,6 +34,6 @@
 
 
 ORK_CLASS_AVAILABLE
-@interface ORKArrowView : UIView
+@interface ORKDirectionView : UIView
 
 @end
