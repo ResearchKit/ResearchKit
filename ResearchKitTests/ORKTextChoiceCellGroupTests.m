@@ -147,7 +147,7 @@
         XCTAssertEqual(answerArray.count, 1);
 
         ORKTextChoice *choice = choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = @(index);
@@ -188,7 +188,7 @@
     // Test set answer
     for ( index = 0 ; index < group.size; index++) {
         ORKTextChoice *choice = choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = @(index);
@@ -255,7 +255,7 @@
         XCTAssertEqual(answerArray.count, index+1);
         
         ORKTextChoice *choice = [self textChoices][index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = @(index);
@@ -304,7 +304,7 @@
     NSMutableArray *answers = [NSMutableArray new];
     for ( index = 0 ; index < group.size; index++) {
         ORKTextChoice *choice = [self textChoices][index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = @(index);
@@ -400,7 +400,7 @@
             NSArray *answerArray = answer;
             XCTAssertEqual(answerArray.count, nonExclusiveIndexI+1);
             
-            id value = [choice value];
+            id value = choice.value;
             
             if (value == nil) {
                 value = @(index);
@@ -531,7 +531,7 @@
     NSMutableArray *answers = [NSMutableArray new];
     for (index = 0 ; index < group.size; index++) {
         ORKTextChoice *choice = choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = @(index);

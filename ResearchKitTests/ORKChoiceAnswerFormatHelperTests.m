@@ -157,7 +157,7 @@
         XCTAssert([answer isKindOfClass:[NSArray class]]);
         NSArray *answerArray = answer;
         
-        id value = [(ORKTextChoice *)choices[idx] value];
+        id value = ((ORKTextChoice *)choices[idx]).value;
         
         if (value == nil) {
             value = @(idx);
@@ -202,7 +202,7 @@
             
             id answer = [formatHelper answerForSelectedIndex:idx+1];
             
-            id value = [(ORKTextChoice *)textChoices[idx] value];
+            id value = ((ORKTextChoice *)textChoices[idx]).value;
             
             if (value == nil) {
                 value = @(idx);
@@ -264,7 +264,7 @@
     
     [choices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        id value = [(ORKTextChoice *)obj value];
+        id value = ((ORKTextChoice *)obj).value;
         
         if (value == nil) {
             value = @(idx);
@@ -307,7 +307,7 @@
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
-            id value = [(ORKTextChoice *)obj value];
+            id value = ((ORKTextChoice *)obj).value;
             
             if (value == nil) {
                 value = @(idx);

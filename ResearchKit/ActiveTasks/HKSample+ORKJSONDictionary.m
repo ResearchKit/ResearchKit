@@ -115,7 +115,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:unit];
     
-    NSInteger value = [self value];
+    NSInteger value = self.value;
     dictionary[kHKSampleValue] = @(value);
     
     return dictionary;

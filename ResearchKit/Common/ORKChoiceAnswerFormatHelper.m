@@ -105,7 +105,7 @@
         }
         
         id<ORKAnswerOption> choice = _choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
             value = _isValuePicker? @(index-1) : @(index);
