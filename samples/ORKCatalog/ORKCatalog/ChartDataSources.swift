@@ -49,7 +49,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         return colors
     }
     
-    func numberOfSegmentsInPieChartView() -> Int {
+    func numberOfSegmentsInPieChartView(pieChartView: ORKPieChartView ) -> Int {
         return backingStore.count
     }
     

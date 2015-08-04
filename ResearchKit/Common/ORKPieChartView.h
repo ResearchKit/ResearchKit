@@ -55,10 +55,12 @@ ORK_AVAILABLE_DECL
 @required
 /**
  Asks the data source for the number of segments in the pie chart view.
-
+ 
+ @param pieChartView     The pie chart view asking for the number of segments.
+ 
  @return The number of segments in the pie chart view.
 */
-- (NSInteger)numberOfSegmentsInPieChartView;
+- (NSInteger)numberOfSegmentsInPieChartView:(ORKPieChartView *)pieChartView;
 
 /**
  Asks the data source for the value of a segment in the pie chart view.

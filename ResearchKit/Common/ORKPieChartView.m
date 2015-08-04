@@ -302,7 +302,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_datasource numberOfSegmentsInPieChartView];
+    return [_datasource numberOfSegmentsInPieChartView:self];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -325,8 +325,8 @@
 
 - (NSInteger)numberOfSegments {
     NSInteger count = 0;
-    if ([self.datasource respondsToSelector:@selector(numberOfSegmentsInPieChartView)]) {
-        count = [self.datasource numberOfSegmentsInPieChartView];
+    if ([_datasource respondsToSelector:@selector(numberOfSegmentsInPieChartView:)]) {
+        count = [_datasource numberOfSegmentsInPieChartView:self];
     }
     return count;
 }
