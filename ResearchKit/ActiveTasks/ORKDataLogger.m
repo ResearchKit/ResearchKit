@@ -125,7 +125,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
     }
     
     NSMutableData *data = [NSMutableData dataWithLength:length];
-    length = getxattr(path, attr, [data mutableBytes], length, 0, 0);
+    length = getxattr(path, attr, data.mutableBytes, length, 0, 0);
     if (length <= 0) {
         return nil;
     }
@@ -135,7 +135,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 
 - (BOOL)ork_setData:(NSData *)data forAttr:(const char *)attr error:(NSError * __autoreleasing *)error {
     const char *path = [self fileSystemRepresentation];
-    int rc = setxattr(path, attr, [data bytes], data.length, 0, 0);
+    int rc = setxattr(path, attr, data.bytes, data.length, 0, 0);
     if (rc != 0) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:rc userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_SET_ATTRIBUTE", nil)}];

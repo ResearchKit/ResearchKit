@@ -231,7 +231,7 @@
             ORKFileResult *result = [[ORKFileResult alloc] initWithIdentifier:self.identifier];
             result.contentType = [self mimeType];
             result.fileURL = fileUrl;
-            result.userInfo = [self userInfo];
+            result.userInfo = self.userInfo;
             result.startDate = self.startDate;
             
             [localDelegate recorder:self didCompleteWithResult:result];

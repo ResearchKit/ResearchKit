@@ -142,7 +142,7 @@
     _cachedContentInsets = tableView.contentInset;
     _cachedScrollIndicatorInsets = tableView.scrollIndicatorInsets;
     
-    NSDictionary *info = [aNotification userInfo];
+    NSDictionary *info = aNotification.userInfo;
     CGSize kbSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     kbSize.height = kbSize.height-44;
     
