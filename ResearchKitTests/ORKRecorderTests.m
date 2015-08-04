@@ -593,8 +593,8 @@ static const NSInteger kNumberOfSamples = 5;
         XCTAssertTrue(ork_doubleEqual([touch locationInView:nil].x, [sample[@"x"] doubleValue]), @"");
         XCTAssertTrue(ork_doubleEqual([touch locationInView:nil].y, [sample[@"y"] doubleValue]), @"");
         XCTAssertTrue(ork_doubleEqual([touch timestamp], [sample[@"timestamp"] doubleValue]), @"");
-        XCTAssertEqual([view bounds].size.width, [sample[@"width"] floatValue], @"");
-        XCTAssertEqual([view bounds].size.height, [sample[@"height"] floatValue], @"");
+        XCTAssertEqual(view.bounds.size.width, [sample[@"width"] floatValue], @"");
+        XCTAssertEqual(view.bounds.size.height, [sample[@"height"] floatValue], @"");
         XCTAssertEqual(0, [sample[@"index"] integerValue], @"");
         XCTAssertEqual([touch phase], [sample[@"phase"] integerValue], @"");
     }

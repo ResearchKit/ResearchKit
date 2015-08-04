@@ -341,7 +341,7 @@ BOOL ORKWantsWideContentMargins(UIScreen *screen) {
     // If our screen's minimum dimension is bigger than a fixed threshold,
     // decide to use wide content margins. This is less restrictive than UIKit,
     // but a good enough approximation.
-    CGRect screenRect = [screen bounds];
+    CGRect screenRect = screen.bounds;
     CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
     BOOL isWideScreenFormat = (minDimension > 375.);
     

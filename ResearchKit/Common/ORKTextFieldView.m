@@ -284,11 +284,11 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
     
     // Get the maximum size of the actual editable area (taking into account prefix/suffix/views/clear button
-    CGRect textFrame = [self textRectForBounds:[self bounds]];
+    CGRect textFrame = [self textRectForBounds:self.bounds];
     
     // Work out the size of our suffix frame
-    CGRect suffixFrame = [super placeholderRectForBounds:[self bounds]];
-    suffixFrame.size.width = [self suffixWidthForBounds:[self bounds]];
+    CGRect suffixFrame = [super placeholderRectForBounds:self.bounds];
+    suffixFrame.size.width = [self suffixWidthForBounds:self.bounds];
     
     // Take padding into account
     CGFloat xMaximum = CGRectGetMaxX(textFrame);

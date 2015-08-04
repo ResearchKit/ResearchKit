@@ -144,7 +144,7 @@ static UIBezierPath *ORKErrorBezierPath() {
 }
 
 - (void)drawRect:(CGRect)rect {
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [[UIColor clearColor] setFill];

@@ -302,7 +302,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGRect rect = [self.currentPath bounds];
+    CGRect rect = self.currentPath.bounds;
     if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
     }

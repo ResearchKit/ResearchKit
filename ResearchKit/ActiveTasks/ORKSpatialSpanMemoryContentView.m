@@ -123,7 +123,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
     CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bounds.size.width / _gridSize.width, bounds.size.height / _gridSize.height), self);
     
     gridItemEdgeLength = MIN(gridItemEdgeLength, 114);

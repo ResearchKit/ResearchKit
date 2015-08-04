@@ -117,13 +117,13 @@ ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
     if (!window) {
         window = [[UIApplication sharedApplication] windows].firstObject;
     }
-    return ORKGetScreenTypeForBounds([window bounds]);
+    return ORKGetScreenTypeForBounds(window.bounds);
 }
 
 ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     if (screen == [UIScreen mainScreen]) {
-        screenType = ORKGetScreenTypeForBounds([screen bounds]);
+        screenType = ORKGetScreenTypeForBounds(screen.bounds);
     }
     return screenType;
 }
