@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if (self) {
 		ORKStepResult *stepResult = (ORKStepResult *)result;
 		if (stepResult && [stepResult results].count > 0) {
-            ORKQuestionResult *questionResult = [[stepResult results] firstObject];
+            ORKQuestionResult *questionResult = [stepResult results].firstObject;
             id answer = [questionResult answer];
             if (questionResult != nil && answer == nil) {
                 answer = ORKNullAnswerValue();

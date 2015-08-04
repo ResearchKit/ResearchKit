@@ -322,7 +322,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.detailText = ORKLocalizedString(@"TAPPING_INTRO_TEXT", nil);
             
             NSString *imageName = @"phonetapping";
-            if (! [[[NSLocale preferredLanguages] firstObject] hasPrefix:@"en"]) {
+            if (! [[NSLocale preferredLanguages].firstObject hasPrefix:@"en"]) {
                 imageName = [imageName stringByAppendingString:@"_notap"];
             }
             step.image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -455,7 +455,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     // Exception list: Korean, Chinese (all), Thai, and Vietnamese.
     NSArray *nonSpelledOutLanguages = @[@"ko", @"zh", @"th", @"vi", @"ja"];
-    NSString *currentLanguage = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
+    NSString *currentLanguage = [[NSBundle mainBundle] preferredLocalizations].firstObject;
     NSString *currentLanguageCode = [NSLocale componentsFromLocaleIdentifier:currentLanguage][NSLocaleLanguageCode];
     if ((currentLanguageCode != nil) && [nonSpelledOutLanguages containsObject:currentLanguageCode]) {
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;

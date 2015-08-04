@@ -122,7 +122,7 @@
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {
     NSArray *indexes = [self selectedIndexesForAnswer:answer];
-    return indexes.count > 0 ? [indexes firstObject] : nil;
+    return indexes.count > 0 ? indexes.firstObject : nil;
 }
 
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer {

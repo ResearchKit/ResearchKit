@@ -323,7 +323,7 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
 }
 
 BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
-    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
+    NSString * language = [[NSLocale preferredLanguages].firstObject substringToIndex:2];
     static dispatch_once_t onceToken;
     static NSArray *familyNameFirstLangs = nil;
     dispatch_once(&onceToken, ^{

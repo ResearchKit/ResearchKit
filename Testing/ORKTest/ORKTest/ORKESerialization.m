@@ -971,7 +971,7 @@ static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJS
         NSArray *classEncodings = classEncodingsForClass(NSClassFromString(className));
         NSCAssert([classEncodings count] > 0, @"Expected serializable class but got %@", className);
         
-        ORKESerializableTableEntry *leafClassEncoding = [classEncodings firstObject];
+        ORKESerializableTableEntry *leafClassEncoding = classEncodings.firstObject;
         ORKESerializationInitBlock initBlock = leafClassEncoding.initBlock;
         BOOL writeAllProperties = YES;
         if (initBlock != nil) {

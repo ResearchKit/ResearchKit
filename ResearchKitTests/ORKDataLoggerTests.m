@@ -143,7 +143,7 @@
     } error:nil];
     XCTAssertEqual(count, 1);
     
-    NSDictionary *jsonOut = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[_finishedLogFiles lastObject]] options:(NSJSONReadingOptions)0 error:nil];
+    NSDictionary *jsonOut = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:_finishedLogFiles.lastObject] options:(NSJSONReadingOptions)0 error:nil];
     XCTAssertEqualObjects(jsonOut[@"items"][0][@"val"], @(1));
     XCTAssertEqualObjects(jsonOut[@"items"][1][@"val"], @(2));
 }

@@ -163,13 +163,13 @@
             value = @(idx);
         }
         
-        XCTAssert(answerArray.count == 1 && [[answerArray firstObject] isEqual:value], @"%@", answerArray);
+        XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answerArray);
         
         answer = [formatHelper answerForSelectedIndexes:@[@(idx)]];
         XCTAssert([answer isKindOfClass:[NSArray class]]);
         answerArray = answer;
 
-        XCTAssert(answerArray.count == 1 && [[answerArray firstObject] isEqual:value], @"%@", answerArray);
+        XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answerArray);
         
         [indexArray addObject:@(idx)];
         
@@ -208,11 +208,15 @@
                 value = @(idx);
             }
             
-            XCTAssert(((NSArray *)answer).count == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert([answer isKindOfClass:[NSArray class]]);
+            NSArray *answerArray = answer;
+            XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answer);
             
             answer = [formatHelper answerForSelectedIndexes:@[@(idx+1)]];
+            XCTAssert([answer isKindOfClass:[NSArray class]]);
+            answerArray = answer;
             
-            XCTAssert(((NSArray *)answer).count == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answer);
         }];
         
     }
@@ -272,7 +276,7 @@
         
         NSArray *indexArray = [formatHelper selectedIndexesForAnswer:@[value]];
         
-        XCTAssertEqualObjects( [indexArray firstObject], @(idx), @"%@ vs %@", indexArray[0], @(idx));
+        XCTAssertEqualObjects( indexArray.firstObject, @(idx), @"%@ vs %@", indexArray[0], @(idx));
         
     }];
 }
@@ -287,11 +291,11 @@
         
         NSArray *indexes = [formatHelper selectedIndexesForAnswer:nil];
         
-        XCTAssertEqualObjects([indexes firstObject], @(0), @"%@", indexes);
+        XCTAssertEqualObjects(indexes.firstObject, @(0), @"%@", indexes);
         
         indexes = [formatHelper selectedIndexesForAnswer:ORKNullAnswerValue()];
         
-        XCTAssertEqualObjects([indexes firstObject], @(0), @"%@", indexes);
+        XCTAssertEqualObjects(indexes.firstObject, @(0), @"%@", indexes);
         
         NSNumber *indexNumber = [formatHelper selectedIndexForAnswer:nil];
         
@@ -315,7 +319,7 @@
             
             NSArray *indexArray = [formatHelper selectedIndexesForAnswer:@[value]];
             
-            XCTAssertEqualObjects([indexArray firstObject], @(idx+1), @"%@ vs %@", indexArray[0], @(idx+1));
+            XCTAssertEqualObjects(indexArray.firstObject, @(idx+1), @"%@ vs %@", indexArray[0], @(idx+1));
             
         }];
         

@@ -115,7 +115,7 @@ ORKScreenType ORKGetScreenTypeForBounds(CGRect bounds) {
 
 ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
     if (!window) {
-        window = [[[UIApplication sharedApplication] windows] firstObject];
+        window = [[UIApplication sharedApplication] windows].firstObject;
     }
     return ORKGetScreenTypeForBounds([window bounds]);
 }

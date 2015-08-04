@@ -1033,8 +1033,9 @@
 - (void)setAnswer:(id)answer {
     if ([answer isKindOfClass:[NSArray class]]) {
         // Because ORKBooleanAnswerFormat has ORKChoiceAnswerFormat as its implied format.
-        NSAssert(((NSArray *)answer).count <= 1, @"Should be no more than one answer");
-        answer = [answer firstObject];
+        NSArray *answerArray = answer;
+        NSAssert(answerArray.count <= 1, @"Should be no more than one answer");
+        answer = answerArray.firstObject;
     }
     answer = [self validateAnswer:answer];
     self.booleanAnswer = answer;
@@ -1424,7 +1425,7 @@
 
 - (ORKResult *)firstResult {
     
-    return [self.results firstObject];
+    return self.results.firstObject;
 }
 
 @end

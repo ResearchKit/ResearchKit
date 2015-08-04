@@ -96,7 +96,7 @@
 
         [body appendString:@"</div>"];
     } else if (numElements == 1) {
-        [body appendString:[NSString stringWithFormat:@"<div width='200'>%@</div>",[signatureElements lastObject]]];
+        [body appendString:[NSString stringWithFormat:@"<div width='200'>%@</div>",signatureElements.lastObject]];
     }
     return body;
 }

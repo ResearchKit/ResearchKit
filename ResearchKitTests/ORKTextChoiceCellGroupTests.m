@@ -153,7 +153,7 @@
             value = @(index);
         }
         
-        XCTAssertEqualObjects([answer firstObject], value, @"%@ vs %@", [answer firstObject], value );
+        XCTAssertEqualObjects(answerArray.firstObject, value, @"%@ vs %@", answerArray.firstObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual( cell.selectedItem, YES);
@@ -201,7 +201,7 @@
         NSArray *answerArray = answer;
         XCTAssertEqual(answerArray.count, 1);
        
-        XCTAssertEqualObjects([answerArray firstObject], value, @"%@ vs %@", [answerArray firstObject], value );
+        XCTAssertEqualObjects(answerArray.firstObject, value, @"%@ vs %@", answerArray.firstObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertTrue( cell.selectedItem );
@@ -261,7 +261,7 @@
             value = @(index);
         }
         
-        XCTAssertEqualObjects([answer lastObject], value, @"%@ vs %@", [answer lastObject], value );
+        XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual( cell.selectedItem, YES);
@@ -319,7 +319,7 @@
         NSArray *answerArray = answer;
         XCTAssertEqual(answerArray.count, index + 1);
         
-        XCTAssertEqualObjects([answer lastObject], value, @"%@ vs %@", [answer lastObject], value );
+        XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertTrue( cell.selectedItem );
@@ -406,7 +406,7 @@
                 value = @(index);
             }
             
-            XCTAssertEqualObjects([answer lastObject], value, @"%@ vs %@", [answer lastObject], value );
+            XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
             
             ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
             XCTAssertEqual( cell.selectedItem, YES);
@@ -547,7 +547,7 @@
         XCTAssertEqual(answerArray.count, index + 1);
         
         
-        XCTAssertEqualObjects([answerArray lastObject], value, @"%@ vs %@", [answer lastObject], value );
+        XCTAssertEqualObjects(answerArray.lastObject, value, @"%@ vs %@", answerArray.lastObject, value );
         
         ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertTrue(cell.selectedItem );

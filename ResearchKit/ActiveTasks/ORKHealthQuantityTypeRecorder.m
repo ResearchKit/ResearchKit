@@ -103,7 +103,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateMostRecentSample:[results lastObject]];
+        [self updateMostRecentSample:results.lastObject];
         
         NSError *error = nil;
         if (! [_logger appendObjects:dictionaries error:&error]) {

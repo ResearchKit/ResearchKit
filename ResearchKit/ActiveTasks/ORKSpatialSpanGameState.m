@@ -105,7 +105,7 @@
     if (! _plays.count) {
         return NSNotFound;
     }
-    return [[_plays lastObject] integerValue];
+    return [_plays.lastObject integerValue];
 }
 
 @end

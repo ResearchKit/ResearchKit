@@ -2504,7 +2504,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          and then generate a PDF From the document that includes the signature.
          */
         
-        ORKStep *lastStep = [[(ORKOrderedTask *)taskViewController.task steps] lastObject];
+        ORKStep *lastStep = [(ORKOrderedTask *)taskViewController.task steps].lastObject;
         ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:lastStep.identifier] firstResult];
         
         [signatureResult applyToDocument:_currentDocument];
@@ -2513,7 +2513,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)[pdfData length], error);
             
             if (! error) {
-                NSURL *documents = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+                NSURL *documents = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject];
                 NSURL *outputUrl = [documents URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [taskViewController.taskRunUUID UUIDString]]];
                 
                 [pdfData writeToURL:outputUrl atomically:YES];

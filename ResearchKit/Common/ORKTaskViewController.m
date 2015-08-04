@@ -893,7 +893,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         }
     }
     
-    if (step.identifier && ![[_managedStepIdentifiers lastObject] isEqualToString:step.identifier]) {
+    if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
     if ([step isRestorable]) {
@@ -1159,7 +1159,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         if (stepViewController) {
             // Remove the identifier from the list
-            assert([itemId isEqualToString:[_managedStepIdentifiers lastObject]]);
+            assert([itemId isEqualToString:_managedStepIdentifiers.lastObject]);
             [_managedStepIdentifiers removeLastObject];
 
             [self showViewController:stepViewController goForward:NO animated:YES];
@@ -1361,20 +1361,20 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
 }
 
 + (UIViewController *) viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
-    if ([[identifierComponents lastObject] isEqualToString:_PageViewControllerRestorationKey]) {
+    if ([identifierComponents.lastObject isEqualToString:_PageViewControllerRestorationKey]) {
         UIPageViewController *pageViewController = [self pageViewController];
-        pageViewController.restorationIdentifier = [identifierComponents lastObject];
+        pageViewController.restorationIdentifier = identifierComponents.lastObject;
         pageViewController.restorationClass = self;
         return pageViewController;
-    } else if ([[identifierComponents lastObject] isEqualToString:_ChildNavigationControllerRestorationKey]) {
+    } else if ([identifierComponents.lastObject isEqualToString:_ChildNavigationControllerRestorationKey]) {
         UINavigationController *navigationController = [UINavigationController new];
-        navigationController.restorationIdentifier = [identifierComponents lastObject];
+        navigationController.restorationIdentifier = identifierComponents.lastObject;
         navigationController.restorationClass = self;
         return navigationController;
     }
     
     ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] initWithTask:nil taskRunUUID:nil];
-    taskViewController.restorationIdentifier = [identifierComponents lastObject];
+    taskViewController.restorationIdentifier = identifierComponents.lastObject;
     taskViewController.restorationClass = self;
     return taskViewController;
 }

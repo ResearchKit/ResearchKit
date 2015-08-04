@@ -671,7 +671,7 @@
 }
 
 - (NSUInteger)currentIndex {
-    return [self indexOfViewController:[_pageViewController.viewControllers firstObject]];
+    return [self indexOfViewController:_pageViewController.viewControllers.firstObject];
 }
 
 #pragma mark - UIPageViewControllerDataSource
