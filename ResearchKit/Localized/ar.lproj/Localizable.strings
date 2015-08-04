@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "لم يتم العثور على أي بيانات تم جمعها.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "لم يتم تحديد دليل إخراج";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "اضغط لالتقاط صورة مختلفة";
-"MEDIA_BUTTON" = "اضغط لالتقاط صورة";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "السابق";
 

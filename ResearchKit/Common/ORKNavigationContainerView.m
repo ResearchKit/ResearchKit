@@ -153,9 +153,11 @@
     if (_useNextForSkip && _skipButtonItem) {
         _continueButton.alpha = (_continueButtonItem == nil && _skipButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title ? : _skipButtonItem.title forState:UIControlStateNormal];
+        _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint ? : _skipButtonItem.accessibilityHint;
     } else {
         _continueButton.alpha = (_continueButtonItem == nil) ? 0 : 1;
         [_continueButton setTitle: _continueButtonItem.title forState:UIControlStateNormal];
+        _continueButton.accessibilityHint = _continueButtonItem.accessibilityHint;
     }
     
     _continueButton.enabled = (_continueEnabled || (_useNextForSkip && _skipButtonItem));
@@ -254,12 +256,18 @@
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1 constant:0]];
     } else if (_neverHasContinueButton) {
-        [_localConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueButton
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1 constant:0]];
+        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_continueButton
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1
+                                                                             constant:0];
+        
+        // This covers the case which occurs in the view hierarchy of instances of `ORKTowerOfHanoiStepViewController`
+        // in which there is no continue button but there is a skip button.
+        heightConstraint.priority = UILayoutPriorityDefaultHigh+1;
+        [_localConstraints addObject:heightConstraint];
     }
     [self addConstraints:_localConstraints];
     

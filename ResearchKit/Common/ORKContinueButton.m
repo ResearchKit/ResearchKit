@@ -45,7 +45,7 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
         self.isDoneButton = isDoneButton;
-        self.contentEdgeInsets = (UIEdgeInsets){.left=6,.right=6};
+        self.contentEdgeInsets = (UIEdgeInsets){.left=6, .right=6};
         
         [self setNeedsUpdateConstraints];
     }
@@ -56,38 +56,44 @@ static const CGFloat kContinueButtonTouchMargin = 10;
     [self updateConstraintConstants];
 }
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange: previousTraitCollection];
+    if (self.traitCollection.verticalSizeClass != previousTraitCollection.verticalSizeClass) {
+        [self updateConstraintConstants];
+    }
+}
+
 - (void)updateConstraintConstants {
-    
-    UIWindow *window = [self window];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
+    CGFloat height = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ?
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightCompact, screenType) :
+        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightRegular, screenType);
+    _heightConstraint.constant = height;
     _widthConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType);
 }
 
 - (void)updateConstraints {
-    if (! _heightConstraint) {
+    if (!_heightConstraint) {
         _heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeHeight
                                                          relatedBy:NSLayoutRelationEqual
                                                             toItem:nil
                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1
-                                                          constant:44];
+                                                        multiplier:1.0
+                                                          constant:0.0]; // constant will be set in updateConstraintConstants
         _heightConstraint.active = YES;
     }
-    if (! _widthConstraint) {
-        UIWindow *window = [self window];
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    if (!_widthConstraint) {
         _widthConstraint = [NSLayoutConstraint constraintWithItem:self
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                       multiplier:1
-                                                         constant:ORKGetMetricForScreenType(ORKScreenMetricContinueButtonWidth, screenType)];
+                                                       multiplier:1.0
+                                                         constant:0.0]; // constant will be set in updateConstraintConstants
+        _widthConstraint.active = YES;
     }
-    _heightConstraint.active = YES;
-    _widthConstraint.active = YES;
-    
+    [self updateConstraintConstants];
     [super updateConstraints];
 }
 

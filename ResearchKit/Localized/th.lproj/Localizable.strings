@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "ไม่พบข้อมูลที่เก็บรวบรวม";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "ไม่ได้ระบุสารบบผลลัพธ์ไว้";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "แตะเพื่อจับภาพอื่น";
-"MEDIA_BUTTON" = "แตะเพื่อจับภาพ";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "ย้อนกลับ";
 
