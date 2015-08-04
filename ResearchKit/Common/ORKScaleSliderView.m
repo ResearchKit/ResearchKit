@@ -64,8 +64,8 @@
         
         _slider.vertical = [formatProvider isVertical];
         
-        _slider.maximumValue = [[formatProvider maximumNumber] floatValue];
-        _slider.minimumValue = [[formatProvider minimumNumber] floatValue];
+        _slider.maximumValue = [formatProvider maximumNumber].floatValue;
+        _slider.minimumValue = [formatProvider minimumNumber].floatValue;
         
         NSInteger numberOfSteps = [formatProvider numberOfSteps];
         _slider.numberOfSteps = numberOfSteps;
@@ -284,7 +284,7 @@
     
     if (value) {
         NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
-        _slider.value = [newValue floatValue];
+        _slider.value = newValue.floatValue;
         _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
     } else {
         _valueLabel.text = @"";

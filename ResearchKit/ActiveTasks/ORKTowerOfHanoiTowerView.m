@@ -117,7 +117,7 @@ static const CGFloat kBaseSpacing = 10;
     for (NSInteger index = 0 ; index < _diskSizes.count ; index++) {
         UIView *disk = _diskViews[index];
         CGFloat divide = 1.0 / _maximumNumberOfDisks;
-        CGFloat multiply = [(NSNumber *)_diskSizes[index] floatValue] * divide;
+        CGFloat multiply = ((NSNumber *)_diskSizes[index]).floatValue * divide;
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
                                                                      attribute:NSLayoutAttributeCenterX

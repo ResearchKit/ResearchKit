@@ -1146,11 +1146,11 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     BOOL isValid = NO;
     if (number) {
         isValid = YES;
-        if (isnan([number doubleValue])) {
+        if (isnan(number.doubleValue)) {
             isValid = NO;
-        } else if (self.minimum && ([self.minimum doubleValue] > [number doubleValue])) {
+        } else if (self.minimum && (self.minimum.doubleValue > number.doubleValue)) {
             isValid = NO;
-        } else if (self.maximum && ([self.maximum doubleValue] < [number doubleValue])) {
+        } else if (self.maximum && (self.maximum.doubleValue < number.doubleValue)) {
             isValid = NO;
         }
     }
@@ -1184,9 +1184,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     }
     NSString *string = nil;
     NSNumberFormatter *formatter = [self makeNumberFormatter];
-    if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
+    if (self.minimum && (self.minimum.doubleValue > num.doubleValue)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
-    } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
+    } else if (self.maximum && (self.maximum.doubleValue < num.doubleValue)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
     } else {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
@@ -1326,7 +1326,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
-    return @([number integerValue]);
+    return @(number.integerValue);
 }
 
 - (void)validateParameters {

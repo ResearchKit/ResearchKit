@@ -247,7 +247,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
         return nil;
     }
     
-    ORKConsentReviewPhase phase = [_pageIndices[index] integerValue];
+    ORKConsentReviewPhase phase = ((NSNumber *)_pageIndices[index]).integerValue;
     
     UIViewController *viewController = nil;
     switch (phase) {

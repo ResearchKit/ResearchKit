@@ -333,8 +333,12 @@ static const CGFloat kSpacerWidth = 10.0;
 
 - (void)setSelectedIndexes:(NSArray *)selectedIndexes {
     [selectedIndexes enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if ([object unsignedIntegerValue] < _buttonViews.count) {
-            ORKChoiceButtonView *buttonView = _buttonViews[[object unsignedIntegerValue]];
+        if (![object isKindOfClass:[NSNumber class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"selectedIndexes should only containt objects of the NSNumber kind" userInfo:nil];
+        }
+        NSNumber *number = object;
+        if (number.unsignedIntegerValue < _buttonViews.count) {
+            ORKChoiceButtonView *buttonView = _buttonViews[number.unsignedIntegerValue];
             [buttonView button].selected = YES;
             [self setLabelText:buttonView.labelText];
         }

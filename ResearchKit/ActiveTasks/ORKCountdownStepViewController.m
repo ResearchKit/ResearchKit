@@ -235,7 +235,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [@(_countDown) stringValue]);
+    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
     [_countdownView startAnimateWithDuration:[(ORKActiveStep *)self.step stepDuration]];
 }
 
@@ -258,7 +258,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
                                                           }];
             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_ANNOUNCE_BEGIN_TASK", nil));
         } else {
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [@(_countDown) stringValue]);
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
             [super countDownTimerFired:timer finished:finished];
         }
     } else {

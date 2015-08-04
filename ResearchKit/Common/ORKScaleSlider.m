@@ -149,12 +149,12 @@
     CGRect trackRect = [self trackRectForBounds:self.bounds];
     CGFloat position = (touchPoint.x - CGRectGetMinX(trackRect)) / CGRectGetWidth(trackRect);
     
-    CGFloat newValue = position * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
+    CGFloat newValue = position * (self.maximumValue - self.minimumValue) + self.minimumValue;
     if (_numberOfSteps > 0) {
         CGFloat stepSize = 1.0/_numberOfSteps;
         NSUInteger steps = round(position/stepSize);
         
-        newValue = stepSize*steps * ([self maximumValue] - [self minimumValue]) + [self minimumValue];
+        newValue = stepSize*steps * (self.maximumValue - self.minimumValue) + self.minimumValue;
     }
     [self setValue:newValue animated:YES];
 }
@@ -199,7 +199,7 @@ static CGFloat kPadding = 2.0;
         return rect;
     }
     
-    CGFloat centerX = (value - [self minimumValue]) / ([self maximumValue] - [self minimumValue]) * trackRect.size.width + trackRect.origin.x;
+    CGFloat centerX = (value - self.minimumValue) / (self.maximumValue - self.minimumValue) * trackRect.size.width + trackRect.origin.x;
     rect.origin.x = centerX - rect.size.width / 2.0;
     
     return rect;
@@ -278,7 +278,7 @@ static CGFloat kPadding = 2.0;
 static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
     if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [self accessibilityValue]);
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self.accessibilityValue);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }
 }

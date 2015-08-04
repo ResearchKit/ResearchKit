@@ -1790,8 +1790,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         
         for (NSNumber *dimension in @[@(360), @(60)])
         {
-            CGSize size1 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].x, [dimension floatValue] * [ratio CGPointValue].y);
-            CGSize size2 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].y, [dimension floatValue] * [ratio CGPointValue].x);
+            CGSize size1 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.x, dimension.floatValue * ratio.CGPointValue.y);
+            CGSize size2 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.y, dimension.floatValue * ratio.CGPointValue.x);
             
             ORKImageChoice *option1 = [ORKImageChoice choiceWithNormalImage:[self imageWithColor:[UIColor redColor] size:size1 border:NO]
                                                               selectedImage:[self imageWithColor:[UIColor redColor] size:size1 border:YES]
@@ -1834,8 +1834,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [steps addObject:step];
         
         for (NSNumber *dimension in @[@(360), @(60), @(20)]) {
-            CGSize size1 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].x, [dimension floatValue] * [ratio CGPointValue].y);
-            CGSize size2 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].y, [dimension floatValue] * [ratio CGPointValue].x);
+            CGSize size1 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.x, dimension.floatValue * ratio.CGPointValue.y);
+            CGSize size2 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.y, dimension.floatValue * ratio.CGPointValue.x);
             
             ORKImageChoice *option1 = [ORKImageChoice choiceWithNormalImage:[self imageWithColor:[UIColor redColor] size:size1 border:NO]
                                                               selectedImage:[self imageWithColor:[UIColor redColor] size:size1 border:YES]
@@ -2312,8 +2312,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
          enter a valid answer.
          */
         
-        ORKQuestionResult *qr = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
-        if (qr == nil || [(NSNumber *)qr.answer integerValue] < 18) {
+        ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
+        if (questionResult == nil || ((NSNumber *)questionResult.answer).integerValue < 18) {
             UIAlertController *alertViewController =
             [UIAlertController alertControllerWithTitle:@"Warning"
                                                 message:@"You can't participate if you are under 18."

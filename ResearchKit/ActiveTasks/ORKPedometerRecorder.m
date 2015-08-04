@@ -66,9 +66,9 @@
 
 - (void)updateStatisticsWithData:(CMPedometerData *)pedometerData {
     _lastUpdateDate = pedometerData.endDate;
-    _totalNumberOfSteps = [pedometerData.numberOfSteps integerValue];
+    _totalNumberOfSteps = pedometerData.numberOfSteps.integerValue;
     if (pedometerData.distance) {
-        _totalDistance = [pedometerData.distance doubleValue];
+        _totalDistance = pedometerData.distance.doubleValue;
     } else {
         _totalDistance = -1;
     }

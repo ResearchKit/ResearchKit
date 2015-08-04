@@ -156,7 +156,7 @@ static const CGFloat kValueLineMargin = 1.5;
         UIBezierPath *path2 = [path1 copy];
         
         for (NSNumber *value in [_values reverseObjectEnumerator]) {
-            CGFloat floatValue = [value doubleValue];
+            CGFloat floatValue = value.doubleValue;
             
             UIBezierPath *path = nil;
             if (floatValue > _alertThreshold) {
@@ -358,7 +358,7 @@ static const CGFloat kValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = _samples.lastObject;
-    BOOL show = (! _finished && ([sample doubleValue] > _alertThreshold)) || _failed;
+    BOOL show = (! _finished && (sample.doubleValue > _alertThreshold)) || _failed;
     _alertLabel.hidden = !show;
 }
 

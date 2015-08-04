@@ -199,7 +199,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[_moviePlayer currentItem]];
     
     __weak AVPlayer *weakPlayer = _moviePlayer;
-    [_moviePlayer seekToTime:[context.startTime CMTimeValue]
+    [_moviePlayer seekToTime:context.startTime.CMTimeValue
              toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
                  AVPlayer *localPlayer = weakPlayer;
                  [localPlayer play];

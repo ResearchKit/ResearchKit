@@ -86,7 +86,7 @@
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
         ORKQuestionResult *result = (ORKQuestionResult *)[stepResult firstResult];
         if (result.answer != nil) {
-            if ([(NSNumber *)result.answer boolValue]) {
+            if (((NSNumber *)result.answer).boolValue) {
                 return self.step4;
             }
         }

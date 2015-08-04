@@ -151,12 +151,12 @@
 
 - (NSString *)mimeType {
     NSDictionary *recorderSettings = [self recorderSettings];
-    unsigned int recorderFormat = [recorderSettings[AVFormatIDKey] unsignedIntValue];
+    unsigned int recorderFormat = ((NSNumber *)recorderSettings[AVFormatIDKey]).unsignedIntValue;
     
     NSString *contentType = @"audio";
     switch (recorderFormat) {
         case kAudioFormatLinearPCM: {
-            int numBits = [recorderSettings[AVLinearPCMBitDepthKey] intValue] ? : 16;
+            int numBits = ((NSNumber *)recorderSettings[AVLinearPCMBitDepthKey]).intValue ? : 16;
             contentType = [NSString stringWithFormat:@"audio/L%d", numBits];
             break;
         }
@@ -202,7 +202,7 @@
 
 - (NSString *)extension {
     NSDictionary *recorderSettings = [self recorderSettings];
-    unsigned int recorderFormat = [recorderSettings[AVFormatIDKey] unsignedIntValue];
+    unsigned int recorderFormat = ((NSNumber *)recorderSettings[AVFormatIDKey]).unsignedIntValue;
     
     NSString *extension = @"au";
     switch (recorderFormat) {

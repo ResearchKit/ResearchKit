@@ -375,7 +375,7 @@
     // Get the indexes of the exclusive and non-exclusive choices
     NSMutableArray *exclusiveIndexes = [[NSMutableArray alloc] init];
     NSMutableArray *nonExclusiveIndexes = [[NSMutableArray alloc] init];
-    for ( index = 0 ; index < group.size; index++) {
+    for (index = 0 ; index < group.size; index++) {
         ORKTextChoice *choice = choices[index];
         if (choice.exclusive) {
             [exclusiveIndexes addObject:@(index)];
@@ -386,13 +386,13 @@
     
     // Test cell selection.  First select all the non-exclusive choices, then do one exclusive
     NSUInteger exclusiveIndexI = 0;
-    for ( exclusiveIndexI = 0 ; exclusiveIndexI < exclusiveIndexes.count; exclusiveIndexI++) {
-        NSUInteger exclusiveIndex = [exclusiveIndexes[exclusiveIndexI] unsignedIntegerValue];
+    for (exclusiveIndexI = 0 ; exclusiveIndexI < exclusiveIndexes.count; exclusiveIndexI++) {
+        NSUInteger exclusiveIndex = ((NSNumber *)exclusiveIndexes[exclusiveIndexI]).unsignedIntegerValue;
         
         // Select all the non-exclusive choices, confirming the answer is including them all
         NSUInteger nonExclusiveIndexI = 0;
         for ( nonExclusiveIndexI = 0 ; nonExclusiveIndexI < nonExclusiveIndexes.count; nonExclusiveIndexI++) {
-            NSUInteger index = [nonExclusiveIndexes[nonExclusiveIndexI] unsignedIntegerValue];
+            NSUInteger index = ((NSNumber *)nonExclusiveIndexes[nonExclusiveIndexI]).unsignedIntegerValue;
             ORKTextChoice *choice = choices[index];
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             id answer = group.answer;
@@ -438,23 +438,23 @@
         XCTAssertEqual(exclusiveAnswerArray.count, 1);
         exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual(exclusiveCell.selectedItem, YES);
-        [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:[nonExclusiveIndexes[0] unsignedIntegerValue] inSection:0]];
+        [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0]];
         exclusiveAnswer = group.answer;
         XCTAssert([exclusiveAnswer isKindOfClass:[NSArray class]]);
         exclusiveAnswerArray = exclusiveAnswer;
         XCTAssertEqual(exclusiveAnswerArray.count, 1);
-        ORKChoiceViewCell *nonExclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:[nonExclusiveIndexes[0] unsignedIntegerValue] inSection:0] withReuseIdentifier:@"abc"];
+        ORKChoiceViewCell *nonExclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual(nonExclusiveCell.selectedItem, YES);
         exclusiveCell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0] withReuseIdentifier:@"abc"];
         XCTAssertEqual(exclusiveCell.selectedItem, NO);
 
         // Deselect the non-exclusive to reset for the next test
-        [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:[nonExclusiveIndexes[0] unsignedIntegerValue] inSection:0]];
+        [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:((NSNumber *)nonExclusiveIndexes[0]).unsignedIntegerValue inSection:0]];
         
         // If there are more than one exclusive choice, try selecting the current exclusive choice, and then
         // selecting another exclusive choice, which should deselect the first
         if (exclusiveIndexes.count > 1) {
-            NSUInteger otherExclusiveIndex = [exclusiveIndexes[(exclusiveIndexI+1)%exclusiveIndexes.count] unsignedIntegerValue];
+            NSUInteger otherExclusiveIndex = ((NSNumber *)exclusiveIndexes[(exclusiveIndexI+1)%exclusiveIndexes.count]).unsignedIntegerValue;
             
             // Select the current exclusive choice and confirm its selected
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:exclusiveIndex inSection:0]];
@@ -483,7 +483,7 @@
         
         // Now select all the non-exclusive choices
         for (nonExclusiveIndexI = 0 ; nonExclusiveIndexI < nonExclusiveIndexes.count; nonExclusiveIndexI++) {
-            NSUInteger index = [nonExclusiveIndexes[nonExclusiveIndexI] unsignedIntegerValue];
+            NSUInteger index = ((NSNumber *)nonExclusiveIndexes[nonExclusiveIndexI]).unsignedIntegerValue;
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             ORKChoiceViewCell *cell = [group cellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] withReuseIdentifier:@"abc"];
             XCTAssertEqual( cell.selectedItem, YES);
@@ -492,7 +492,7 @@
         
         // Now, deselect all the non-exclusive choices one at a time
         for (nonExclusiveIndexI = 0 ; nonExclusiveIndexI < nonExclusiveIndexes.count; nonExclusiveIndexI++) {
-            NSUInteger index = [nonExclusiveIndexes[nonExclusiveIndexI] unsignedIntegerValue];
+            NSUInteger index = ((NSNumber *)nonExclusiveIndexes[nonExclusiveIndexI]).unsignedIntegerValue;
             [group didSelectCellAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
             id answer = group.answer;
             XCTAssert([answer isKindOfClass:[NSArray class]]);

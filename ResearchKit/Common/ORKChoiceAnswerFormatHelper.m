@@ -98,7 +98,7 @@
     
     for (NSNumber *indexNumber in indexes) {
         
-        NSUInteger index = [indexNumber unsignedIntegerValue];
+        NSUInteger index = indexNumber.unsignedIntegerValue;
         
         if (index >= _choices.count) {
             continue;
@@ -149,9 +149,9 @@
             if (nil == matchedChoice) {
                 NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
                 if (_isValuePicker) {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]+1];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue + 1];
                 } else {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue];
                 }
             }
             

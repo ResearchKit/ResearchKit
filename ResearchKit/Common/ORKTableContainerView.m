@@ -329,7 +329,7 @@
 }
 
 - (void)animateLayoutForKeyboardNotification:(NSNotification *)notification {
-    NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSTimeInterval animationDuration = ((NSNumber *)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey]).doubleValue;
     
     UIScrollView *scrollView = _scrollView;
     

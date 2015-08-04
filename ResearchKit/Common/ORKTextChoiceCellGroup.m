@@ -111,7 +111,7 @@
             ORKTextChoice *touchedChoice = [_helper textChoiceAtIndex:index];
             for (NSNumber *num in [_cells allKeys]) {
                 ORKChoiceViewCell *cell = _cells[num];
-                ORKTextChoice *choice = [_helper textChoiceAtIndex:[num unsignedIntegerValue]];
+                ORKTextChoice *choice = [_helper textChoiceAtIndex:num.unsignedIntegerValue];
                 if (cell != touchedCell && (touchedChoice.exclusive || (cell.selectedItem && choice.exclusive))) {
                     cell.selectedItem = NO;
                 }

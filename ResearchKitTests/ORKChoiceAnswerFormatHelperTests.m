@@ -299,11 +299,11 @@
         
         NSNumber *indexNumber = [formatHelper selectedIndexForAnswer:nil];
         
-        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && [indexNumber unsignedIntegerValue] == 0, @"%@", indexNumber);
+        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && indexNumber.unsignedIntegerValue == 0, @"%@", indexNumber);
         
         indexNumber = [formatHelper selectedIndexForAnswer:ORKNullAnswerValue()];
         
-        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && [indexNumber unsignedIntegerValue] == 0, @"%@", indexNumber);
+        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && indexNumber.unsignedIntegerValue == 0, @"%@", indexNumber);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             

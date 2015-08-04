@@ -664,7 +664,7 @@
     NSUInteger index = NSNotFound;
     for (NSNumber *key in _viewControllers) {
         if (_viewControllers[key] == viewController) {
-            index = [key unsignedIntegerValue];
+            index = key.unsignedIntegerValue;
         }
     }
     return index;

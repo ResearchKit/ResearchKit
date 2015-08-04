@@ -766,7 +766,7 @@
             if (value) {
                 isSelected = ([answer isEqual:value]);
             } else {
-                isSelected = ([(NSNumber *)answer integerValue] == index);
+                isSelected = (((NSNumber *)answer).integerValue == index);
             }
         }
     }

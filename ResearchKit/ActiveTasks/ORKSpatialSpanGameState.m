@@ -102,10 +102,10 @@
 }
 
 - (NSInteger)lastSuccessfulTileIndex {
-    if (! _plays.count) {
+    if (!_plays.count) {
         return NSNotFound;
     }
-    return [_plays.lastObject integerValue];
+    return ((NSNumber *)_plays.lastObject).integerValue;
 }
 
 @end
