@@ -448,7 +448,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
     NSString *basePath = [standardizedBaseURL absoluteString];
     
     if ([path hasPrefix:basePath]) {
-        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        NSString *relativePath = [path substringFromIndex:basePath.length];
         if ([relativePath hasPrefix:@"/"]) {
             relativePath = [relativePath substringFromIndex:1];
         }

@@ -135,7 +135,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 
 - (BOOL)ork_setData:(NSData *)data forAttr:(const char *)attr error:(NSError * __autoreleasing *)error {
     const char *path = [self fileSystemRepresentation];
-    int rc = setxattr(path, attr, [data bytes], [data length], 0, 0);
+    int rc = setxattr(path, attr, [data bytes], data.length, 0, 0);
     if (rc != 0) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:rc userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_SET_ATTRIBUTE", nil)}];
@@ -312,8 +312,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (self) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            _ORKJSON_emptyLogLength = [[kJSONLogEmptyLogString dataUsingEncoding:NSUTF8StringEncoding] length];
-            _ORKJSON_terminatorLength = [[kJSONLogFooterString dataUsingEncoding:NSUTF8StringEncoding] length];
+            _ORKJSON_emptyLogLength = [kJSONLogEmptyLogString dataUsingEncoding:NSUTF8StringEncoding].length;
+            _ORKJSON_terminatorLength = [kJSONLogFooterString dataUsingEncoding:NSUTF8StringEncoding].length;
         });
     }
     return self;
@@ -456,7 +456,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         if ([logName hasSuffix:@"-"]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName should not terminate with '-'" userInfo:nil];
         }
-        if (! [logName length]) {
+        if (! logName.length) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName must be non-empty" userInfo:nil];
         }
         

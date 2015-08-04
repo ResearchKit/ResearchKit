@@ -493,7 +493,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)inputValueDidChange {
     NSString *text = self.textField.text;
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     
     [super inputValueDidChange];
 }
@@ -506,7 +506,7 @@ static const CGFloat kHMargin = 15.0;
         NSString *text = (NSString *)answer;
         NSInteger maxLength = answerFormat.maximumLength;
         BOOL changedValue = NO;
-        if (maxLength > 0 && [text length] > maxLength) {
+        if (maxLength > 0 && text.length > maxLength) {
             text = [text substringToIndex:maxLength];
             changedValue = YES;
         }
@@ -528,19 +528,19 @@ static const CGFloat kHMargin = 15.0;
     
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
-    if ([textField.text length] < [text length]) {
+    if (textField.text.length < text.length) {
     
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
         NSInteger maxLength = answerFormat.maximumLength;
     
-        if (maxLength > 0 && [text length] > maxLength) {
+        if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
         }
     }
     
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
     
     return YES;
@@ -609,7 +609,7 @@ static const CGFloat kHMargin = 15.0;
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
-    if ([text length]) {
+    if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
         if (! answer) {
             answer = ORKNullAnswerValue();
@@ -745,7 +745,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)inputValueDidChange {
     NSString *text = _textView.text;
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
 }
 
@@ -797,11 +797,11 @@ static const CGFloat kHMargin = 15.0;
     
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
-    if ([textView.text length] < [string length]) {
+    if (textView.text.length < string.length) {
     
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
 
-        if (_maxLength > 0 && [string length] > _maxLength) {
+        if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
         }

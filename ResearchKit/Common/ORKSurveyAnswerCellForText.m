@@ -187,11 +187,11 @@
 
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
-    if ([textView.text length] < [string length]) {
+    if (textView.text.length < string.length) {
     
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
-        if (_maxLength > 0 && [string length] > _maxLength) {
+        if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
         }
@@ -308,19 +308,19 @@
     
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
-    if ([textField.text length] < [text length]) {
+    if (textField.text.length < text.length) {
     
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
         NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
     
-        if (maxLength > 0 && [text length] > maxLength) {
+        if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
             return NO;
         }
     }
     
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     
     return YES;
 }
@@ -336,7 +336,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSString *text = self.textField.text;
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
 }
 
 @end

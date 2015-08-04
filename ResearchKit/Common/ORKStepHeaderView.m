@@ -141,7 +141,7 @@
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     _learnMoreButtonItem = learnMoreButtonItem;
     [_learnMoreButton setTitle:learnMoreButtonItem.title forState:UIControlStateNormal];
-    _learnMoreButton.alpha = ([learnMoreButtonItem.title length] > 0) ? 1 : 0;
+    _learnMoreButton.alpha = (learnMoreButtonItem.title.length > 0) ? 1 : 0;
     [self updateConstraintConstantsForWindow:self.window];
 }
 
@@ -170,8 +170,8 @@
     const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
     const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType);
     
-    BOOL haveCaption = [_captionLabel.text length] > 0;
-    BOOL haveInstruction = [_instructionLabel.text length] > 0;
+    BOOL haveCaption = _captionLabel.text.length > 0;
+    BOOL haveInstruction = _instructionLabel.text.length > 0;
     BOOL haveLearnMore = (_learnMoreButton.alpha > 0);
     ORKVerticalContainerLog(@"haveCaption=%@ haveInstruction=%@ haveLearnMore=%@", @(haveCaption), @(haveInstruction), @(haveLearnMore));
     

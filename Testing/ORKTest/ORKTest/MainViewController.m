@@ -2510,7 +2510,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [signatureResult applyToDocument:_currentDocument];
         
         [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
-            NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)[pdfData length], error);
+            NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)pdfData.length, error);
             
             if (! error) {
                 NSURL *documents = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject];

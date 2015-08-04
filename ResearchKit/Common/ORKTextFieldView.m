@@ -112,7 +112,7 @@
     } else {
         previousSuffixFrame.size.height = CGRectGetHeight(self.bounds);
     }
-    if ([suffix length] == 0) {
+    if (suffix.length == 0) {
         return;
     }
     _suffixLabel = [self ork_createTextLabelWithTextColor:color ?: [UIColor grayColor]];
@@ -237,7 +237,7 @@
 
 - (BOOL)isPlaceholderVisible {
     BOOL editing = [self isEditing];
-    return (! editing) && ([[self placeholder] length] > 0);
+    return (! editing) && ([self placeholder].length > 0);
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
@@ -252,7 +252,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGRect textRect = [super textRectForBounds:bounds];
     
     // Leave room for the suffix label
-    if ([_suffixLabel.text length]) {
+    if (_suffixLabel.text.length) {
         CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
@@ -267,7 +267,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGRect r = [super editingRectForBounds:bounds];
     
     // Leave room for the suffix label
-    if ([_suffixLabel.text length]) {
+    if (_suffixLabel.text.length) {
         CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;

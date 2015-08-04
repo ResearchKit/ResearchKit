@@ -1159,7 +1159,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     BOOL isValid = NO;
-    if ([text length] > 0) {
+    if (text.length > 0) {
         NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
         isValid = [self isAnswerValidWithNumber:number];
     }
@@ -1175,7 +1175,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    if (! [text length]) {
+    if (! text.length) {
         return nil;
     }
     NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
@@ -1650,7 +1650,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    if ([text length] > 0) {
+    if (text.length > 0) {
         return ([self isTextLengthValidWithString:text] && [self isEmailAddressValidWithString:text]);
     }
     
@@ -1658,7 +1658,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (BOOL)isTextLengthValidWithString:(NSString *)text {
-    return (_maximumLength == 0 || [text length] <= _maximumLength);
+    return (_maximumLength == 0 || text.length <= _maximumLength);
 }
 
 - (BOOL)isEmailAddressValidWithString:(NSString *)text {

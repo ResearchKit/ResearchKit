@@ -320,8 +320,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (void)updateStepViewCenteringConstraint {
     BOOL hasIllustration = (_imageView.image != nil);
-    BOOL hasCaption = [_headerView.captionLabel.text length] > 0;
-    BOOL hasInstruction = [_headerView.instructionLabel.text length] > 0;
+    BOOL hasCaption = _headerView.captionLabel.text.length > 0;
+    BOOL hasInstruction = _headerView.instructionLabel.text.length > 0;
     BOOL hasLearnMore = (_headerView.learnMoreButton.alpha > 0);
     BOOL hasContinueOrSkip = [_continueSkipContainer hasContinueOrSkip];
 

@@ -192,7 +192,7 @@
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
-    if ([text length]) {
+    if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
         if (! answer) {
             answer = ORKNullAnswerValue();

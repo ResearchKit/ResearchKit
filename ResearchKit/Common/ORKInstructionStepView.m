@@ -106,8 +106,8 @@
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
     NSString *detail = _instructionStep.detailText;
     NSString *text = _instructionStep.text;
-    detail = [detail length] ? detail : nil;
-    text = [text length] ? text : nil;
+    detail = detail.length ? detail : nil;
+    text = text.length ? text : nil;
     
     if (detail && text) {
         [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];

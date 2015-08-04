@@ -318,7 +318,7 @@
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
     
-    if (! [text length]) {
+    if (! text.length) {
         // No alert if the value is empty
         return;
     }
