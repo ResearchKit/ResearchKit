@@ -38,8 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) UIImage *image;
 
-- (void)setDistanceInMeters:(double)distanceInMeters visible:(BOOL)isVisible;
-
 @end
 
 NS_ASSUME_NONNULL_END

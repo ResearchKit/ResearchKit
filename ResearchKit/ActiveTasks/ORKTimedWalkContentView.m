@@ -38,11 +38,8 @@
 @interface ORKTimedWalkContentView ()
 
 @property (nonatomic, strong) ORKProgressView *progressView;
-@property (nonatomic, strong) ORKQuantityLabel *distanceLabel;
 @property (nonatomic, strong) ORKTintedImageView *imageView;
 @property (nonatomic, strong) NSLayoutConstraint *imageRatioConstraint;
-@property (nonatomic, assign) double distanceInMeters;
-@property (nonatomic, strong) NSLengthFormatter *lengthFormatter;
 @property (nonatomic, copy) NSArray *constraints;
 
 @end
@@ -56,11 +53,6 @@
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_progressView];
         
-        _distanceLabel = [ORKQuantityLabel new];
-        _distanceLabel.textAlignment = NSTextAlignmentCenter;
-        _distanceLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_distanceLabel];
-        
         _imageView = [ORKTintedImageView new];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -71,13 +63,6 @@
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self setNeedsUpdateConstraints];
-        
-        [self updateLengthFormatter];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(localeDidChange:)
-                                                     name:NSCurrentLocaleDidChangeNotification
-                                                   object:nil];
     }
     
     return self;
@@ -85,17 +70,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)updateLengthFormatter {
-    self.lengthFormatter = [NSLengthFormatter new];
-    self.lengthFormatter.numberFormatter.maximumFractionDigits = 1;
-    self.lengthFormatter.numberFormatter.maximumSignificantDigits = 3;
-}
-
-- (void)localeDidChange:(NSNotification *)notification {
-    [self updateLengthFormatter];
-    [self setDistanceInMeters:self.distanceInMeters];
 }
 
 - (void)setImage:(UIImage *)image {
@@ -117,18 +91,6 @@
     }
 }
 
-
-- (void)setDistanceInMeters:(double)distanceInMeters visible:(BOOL)isVisible {
-    if (isVisible) {
-        _distanceInMeters = distanceInMeters;
-        self.progressView.hidden = YES;
-        self.distanceLabel.text = [self.lengthFormatter stringFromMeters:distanceInMeters];
-    } else {
-        self.progressView.hidden = NO;
-        self.distanceLabel.text = nil;
-    }
-}
-
 - (void)updateConstraints {
     if ([self.constraints count]) {
         [NSLayoutConstraint deactivateConstraints:self.constraints];
@@ -137,7 +99,7 @@
     
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _distanceLabel, _imageView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _imageView);
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressView]|"
@@ -148,22 +110,6 @@
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_progressView]-(>=10)-[_imageView]-|"
                                              options:NSLayoutFormatAlignAllCenterX
                                              metrics:nil views:views]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.distanceLabel
-                                                             attribute:NSLayoutAttributeCenterX
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.progressView
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1
-                                                              constant:0]];
-    
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.distanceLabel
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.progressView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1
-                                                              constant:0]];
     
     self.constraints = constraintsArray;
     [self addConstraints:self.constraints];

@@ -32,7 +32,6 @@
 #import "ORKTimedWalkStepViewController.h"
 #import "ORKTimedWalkContentView.h"
 #import "ORKTimedWalkStep.h"
-#import "ORKPedometerRecorder.h"
 #import "ORKActiveStepViewController_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -111,17 +110,6 @@ double const kDistanceInMetersTrackingThreshold = 100.0;
     sResult.results = [results copy];
     
     return sResult;
-}
-
-#pragma mark - ORKPedometerRecorderDelegate
-
-- (void)pedometerRecorderDidUpdate:(ORKPedometerRecorder *)pedometerRecorder {
-    double timedWalkDistanceInMeters = [self timedWalkStep].distanceInMeters;
-    if (timedWalkDistanceInMeters >= kDistanceInMetersTrackingThreshold) {
-        double remainingDistanceInMeters = timedWalkDistanceInMeters - pedometerRecorder.totalDistance;
-        BOOL isValid = pedometerRecorder.totalDistance > 0;
-        [(ORKTimedWalkContentView *)self.activeStepView.activeCustomView setDistanceInMeters:remainingDistanceInMeters visible:isValid];
-    }
 }
 
 @end
