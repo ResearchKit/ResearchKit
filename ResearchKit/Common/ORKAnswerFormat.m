@@ -262,6 +262,25 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                 maximumValueDescription:maximumValueDescription
                                                 minimumValueDescription:minimumValueDescription];
 }
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                                   defaultValue:(double)defaultValue
+                                                          maximumFractionDigits:(NSInteger)maximumFractionDigits
+                                                                       vertical:(BOOL)vertical
+                                                        maximumValueDescription:(nullable NSString *)maximumValueDescription
+                                                        minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                                                   maximumImage:(nullable UIImage *)maximumImage
+                                                                   minimumImage:(nullable UIImage *)minimumImage{
+    return [[ORKContinuousScaleAnswerFormat alloc] initWithMaximumValue:scaleMaximum
+                                                           minimumValue:scaleMinimum
+                                                           defaultValue:defaultValue
+                                                  maximumFractionDigits:maximumFractionDigits
+                                                               vertical:vertical
+                                                maximumValueDescription:maximumValueDescription
+                                                minimumValueDescription:minimumValueDescription
+                                                           maximumImage:maximumImage
+                                                           minimumImage:minimumImage];
+}
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
@@ -1329,6 +1348,14 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return @([number integerValue]);
 }
 
+- (UIImage *)rightImage {
+    return nil;
+}
+
+- (UIImage *)leftImage {
+    return nil;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     
@@ -1439,7 +1466,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
                maximumFractionDigits:(NSInteger)maximumFractionDigits
                             vertical:(BOOL)vertical
              maximumValueDescription:(nullable NSString *)maximumValueDescription
-             minimumValueDescription:(nullable NSString *)minimumValueDescription {
+             minimumValueDescription:(nullable NSString *)minimumValueDescription
+                        maximumImage:(nullable UIImage *)maximumImage
+                        minimumImage:(nullable UIImage *)minimumImage{
     self = [super init];
     if (self) {
         _minimum = minimumValue;
@@ -1449,10 +1478,30 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         _vertical = vertical;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
+        _maximumImage = maximumImage;
+        _minimumImage = minimumImage;
         
         [self validateParameters];
     }
     return self;
+}
+
+- (instancetype)initWithMaximumValue:(double)maximumValue
+                        minimumValue:(double)minimumValue
+                        defaultValue:(double)defaultValue
+               maximumFractionDigits:(NSInteger)maximumFractionDigits
+                            vertical:(BOOL)vertical
+             maximumValueDescription:(nullable NSString *)maximumValueDescription
+             minimumValueDescription:(nullable NSString *)minimumValueDescription {
+    return [self initWithMaximumValue:maximumValue
+                         minimumValue:minimumValue
+                         defaultValue:defaultValue
+                maximumFractionDigits:maximumFractionDigits
+                             vertical:vertical
+              maximumValueDescription:nil
+              minimumValueDescription:nil
+                         maximumImage:nil
+                         minimumImage:nil];
 }
 
 - (instancetype)initWithMaximumValue:(double)maximumValue
@@ -1515,6 +1564,14 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return number;
 }
 
+- (UIImage *)rightImage {
+    return _maximumImage;
+}
+
+- (UIImage *)leftImage {
+    return _minimumImage;
+}
+
 - (void)validateParameters {
     [super validateParameters];
     
@@ -1557,6 +1614,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_ENUM(aDecoder, numberStyle);
         ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_OBJ(aDecoder, maximumImage);
+        ORK_DECODE_OBJ(aDecoder, minimumImage);
     }
     return self;
 }
@@ -1571,6 +1630,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_ENUM(aCoder, numberStyle);
     ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+    ORK_ENCODE_OBJ(aCoder, maximumImage);
+    ORK_ENCODE_OBJ(aCoder, minimumImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1588,7 +1649,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_maximumFractionDigits == castObject.maximumFractionDigits) &&
             (_numberStyle == castObject.numberStyle) &&
             ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
-            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription)) ;
+            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
+            ORKEqualObjects(_maximumImage, castObject.maximumImage) &&
+            ORKEqualObjects(_minimumImage, castObject.minimumImage));
 }
 
 - (ORKQuestionType) questionType {

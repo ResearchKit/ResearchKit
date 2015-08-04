@@ -160,6 +160,16 @@ ORK_CLASS_AVAILABLE
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
++ (ORKContinuousScaleAnswerFormat *)continuousScaleAnswerFormatWithMaximumValue:(double)scaleMaximum
+                                                                   minimumValue:(double)scaleMinimum
+                                                                   defaultValue:(double)defaultValue
+                                                          maximumFractionDigits:(NSInteger)maximumFractionDigits
+                                                                       vertical:(BOOL)vertical
+                                                        maximumValueDescription:(nullable NSString *)maximumValueDescription
+                                                        minimumValueDescription:(nullable NSString *)minimumValueDescription
+                                                                   maximumImage:(nullable UIImage *)maximumImage
+                                                                   minimumImage:(nullable UIImage *)minimumImage;
+
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray *)textChoices;
@@ -358,7 +368,30 @@ ORK_CLASS_AVAILABLE
                maximumFractionDigits:(NSInteger)maximumFractionDigits
                             vertical:(BOOL)vertical
              maximumValueDescription:(nullable NSString *)maximumValueDescription
-             minimumValueDescription:(nullable NSString *)minimumValueDescription NS_DESIGNATED_INITIALIZER;
+             minimumValueDescription:(nullable NSString *)minimumValueDescription
+                        maximumImage:(nullable UIImage *)maximumImage
+                        minimumImage:(nullable UIImage *)minimumImage NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized continuous scale answer format using the specified values.
+ 
+ @param maximumValue                The upper bound of the scale.
+ @param minimumValue                The lower bound of the scale.
+ @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param maximumFractionDigits       The maximum number of fractional digits to display.
+ @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
+ @param maximumValueDescription     A localized label to describe the maximum value of the scale. For none, pass `nil`.
+ @param minimumValueDescription     A localized label to describe the minimum value of the scale. For none, pass `nil`.
+ 
+ @return An initialized scale answer format.
+ */
+- (instancetype)initWithMaximumValue:(double)maximumValue
+                        minimumValue:(double)minimumValue
+                        defaultValue:(double)defaultValue
+               maximumFractionDigits:(NSInteger)maximumFractionDigits
+                            vertical:(BOOL)vertical
+             maximumValueDescription:(nullable NSString *)maximumValueDescription
+             minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
 /**
  Returns an initialized continuous scale answer format using the specified values.
@@ -440,6 +473,16 @@ ORK_CLASS_AVAILABLE
  A localized label to describe the minimum value of the scale. (read-only)
  */
 @property (readonly, nullable) NSString *minimumValueDescription;
+
+/**
+ An image for the upper bound of the slider. (read-only)
+ */
+@property (readonly, nullable) UIImage *maximumImage;
+
+/**
+ An image for the lower bound of the slider. (read-only)
+ */
+@property (readonly, nullable) UIImage *minimumImage;
 
 @end
 

@@ -1571,10 +1571,22 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                                  vertical:NO
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
-        
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                    answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Continuous scale with two decimal places.
+         */
+        UIImage *maximumImage = [UIImage imageNamed:@"image_example"];
+        UIImage *minimumImage = [UIImage imageNamed:@"image_example"];
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:100 minimumValue:1 defaultValue:NSIntegerMax maximumFractionDigits:2 vertical:NO maximumValueDescription:@"Happy" minimumValueDescription:@"Sad" maximumImage:maximumImage minimumImage:minimumImage];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01a"
+                                                                      title:@"On a scale of 1 to 10, how much pain do you feel?"
+                                                                     answer:scaleAnswerFormat];
         [steps addObject:step];
     }
     

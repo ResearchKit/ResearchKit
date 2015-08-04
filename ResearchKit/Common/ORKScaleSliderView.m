@@ -237,6 +237,9 @@
                                                      metrics:@{@"kMargin": @(kMargin)}
                                                        views:views]];
         }
+        
+        [self setupRangeLabelsWithLeftImage:[formatProvider leftImage] andRightImage:[formatProvider rightImage]];
+        
     }
     return self;
 }
@@ -282,6 +285,20 @@
     }
     return self;
 }
+
+- (void)setupRangeLabelsWithLeftImage:(UIImage *)leftImage andRightImage:(UIImage *)rightImage {
+    
+    if ([leftImage isKindOfClass:[UIImage class]]) {
+        self.leftRangeLabel.backgroundColor = [UIColor colorWithPatternImage:leftImage];
+        self.leftRangeLabel.text = @"     ";
+    }
+    
+    if ([rightImage isKindOfClass:[UIImage class]]){
+        self.rightRangeLabel.backgroundColor = [UIColor colorWithPatternImage:rightImage];
+        self.rightRangeLabel.text = @"     ";
+    }
+}
+
 
 - (void)setCurrentValue:(NSNumber *)value {
     _currentValue = value;
