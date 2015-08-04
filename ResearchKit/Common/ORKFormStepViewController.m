@@ -266,7 +266,7 @@
     }
     
     BOOL refreshDefaultsPending = NO;
-    if ([types count]) {
+    if (types.count) {
         NSSet *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
         if (! [types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
@@ -558,7 +558,7 @@
 
 - (NSArray *)formItems {
     NSArray *formItems = [self allFormItems];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[formItems count]];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:formItems.count];
     for (ORKFormItem *item in formItems) {
         if (item.answerFormat != nil) {
             [array addObject:item];

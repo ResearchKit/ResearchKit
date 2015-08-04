@@ -169,7 +169,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                     expectedAnswers:(NSArray *)expectedAnswers
                                                         usePatterns:(BOOL)usePatterns {
     ORKThrowInvalidArgumentExceptionIfNil(expectedAnswers);
-    if ([expectedAnswers count] == 0) {
+    if (expectedAnswers.count == 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"expectedAnswer can not be empty." userInfo:nil];
     }
     
@@ -180,7 +180,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     @"answer, $w, $w matches %@" :
     @"answer, $w, $w like %@";
     
-    for (NSInteger i = 0; i < [expectedAnswers count]; i++) {
+    for (NSInteger i = 0; i < expectedAnswers.count; i++) {
         [subPredicateFormatArray addObject:repeatingSubPredicateFormat];
     }
     

@@ -41,7 +41,7 @@
 
 - (CGSize)intrinsicContentSize {
     CGSize textSize = CGSizeZero;
-    if (self.textArray && [self.textArray count] > 0) {
+    if (self.textArray && self.textArray.count > 0) {
         // Find the tallest text to make sure cell allocate enough space to accommodate _choiceLabel
         for (NSString *text in _textArray) {
             CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(self.preferredMaxLayoutWidth, CGFLOAT_MAX)

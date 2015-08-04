@@ -333,7 +333,7 @@ static const CGFloat kSpacerWidth = 10.0;
 
 - (void)setSelectedIndexes:(NSArray *)selectedIndexes {
     [selectedIndexes enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if ([object unsignedIntegerValue] < [_buttonViews count]) {
+        if ([object unsignedIntegerValue] < _buttonViews.count) {
             ORKChoiceButtonView *buttonView = _buttonViews[[object unsignedIntegerValue]];
             [buttonView button].selected = YES;
             [self setLabelText:buttonView.labelText];

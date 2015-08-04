@@ -332,7 +332,7 @@
 }
 
 - (NSUInteger)pageCount {
-    return [_visualSections count];
+    return _visualSections.count;
 }
 
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
@@ -514,7 +514,7 @@
 - (ORKConsentSection *)consentSectionForIndex:(NSUInteger)index {
     ORKConsentSection *consentSection = nil;
     NSArray *visualSections = [self visualSections];
-    if (index < [visualSections count]) {
+    if (index < visualSections.count) {
         consentSection = visualSections[index];
     }
     return consentSection;
@@ -590,7 +590,7 @@
         if (toIndex > currentIndex) {
             
             // Use the custom animation URL, if there is one for the destination index.
-            if (toIndex != NSNotFound && toIndex < [_visualSections count]) {
+            if (toIndex != NSNotFound && toIndex < _visualSections.count) {
                 url = [ORKDynamicCast(_visualSections[toIndex], ORKConsentSection) customAnimationURL];
             }
             BOOL isCustomURL = (url != nil);

@@ -103,7 +103,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 - (void)validateParameters {
     NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( [self.steps count] != [uniqueIdentifiers count] );
+    BOOL itemsHaveNonUniqueIdentifiers = ( self.steps.count != uniqueIdentifiers.count );
     
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Each step should have a unique identifier" userInfo:nil];
@@ -182,7 +182,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
     ORKTaskProgress progress;
     progress.current = [self indexOfStep:step];
-    progress.total = [_steps count];
+    progress.total = _steps.count;
     
     if (! [step showsProgress]) {
         progress.total = 0;
@@ -213,7 +213,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
     }
-    return [healthTypes count] ? healthTypes : nil;
+    return healthTypes.count ? healthTypes : nil;
 }
 
 - (NSSet *)requestedHealthKitTypesForWriting {

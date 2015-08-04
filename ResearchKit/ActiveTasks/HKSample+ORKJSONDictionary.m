@@ -76,7 +76,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
         }
     }
     
-    if ( (options & ORKSampleIncludeMetadata) && [self.metadata count] > 0) {
+    if ( (options & ORKSampleIncludeMetadata) && self.metadata.count > 0) {
         NSMutableDictionary *metadata = [self.metadata mutableCopy];
         for (NSString *k in metadata) {
             id obj = metadata[k];
@@ -151,7 +151,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     NSMutableDictionary *mutableDictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:nil];
     
     // The correlated objects
-    NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:[sampleTypes count]];
+    NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:sampleTypes.count];
     for (HKSample *sample in self.objects) {
         NSUInteger idx = [sampleTypes indexOfObject:sample.sampleType];
         if (idx == NSNotFound) {

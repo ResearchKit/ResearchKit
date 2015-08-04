@@ -46,7 +46,7 @@ id ORKNullAnswerValue() {
 BOOL ORKIsAnswerEmpty(id answer) {
     return  (answer == nil) ||
             (answer == ORKNullAnswerValue()) ||
-            ([answer isKindOfClass:[NSArray class]] && [(NSArray *)answer count] == 0);     // Empty answer of choice or value picker 
+            ([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0);     // Empty answer of choice or value picker
 }
 
 NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
@@ -459,12 +459,12 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         } else if ([object isKindOfClass:[NSArray class]]) {
             
             NSArray *array = (NSArray *)object;
-            if ([array count] > 1 &&
+            if (array.count > 1 &&
                 [array[0] isKindOfClass:[NSString class]] &&
                 [array[1] isKindOfClass:[NSString class]]) {
                 
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
-            } else if ([array count] == 1 &&
+            } else if (array.count == 1 &&
                        [array[0] isKindOfClass:[NSString class]]) {
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
             } else {

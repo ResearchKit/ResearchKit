@@ -260,7 +260,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     BOOL scheduledRefresh = NO;
-    if ([types count]) {
+    if (types.count) {
         NSSet *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
         if (! [types isSubsetOfSet:alreadyRequested]) {
             scheduledRefresh = YES;
@@ -338,7 +338,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)setCustomQuestionView:(ORKQuestionStepCustomView *)customQuestionView {
     [_customQuestionView removeFromSuperview];
     _customQuestionView = customQuestionView;
-    if ([[_customQuestionView constraints] count] == 0) {
+    if ([_customQuestionView constraints].count == 0) {
         _customQuestionView.translatesAutoresizingMaskIntoConstraints = NO;
 
         CGSize requiredSize = [_customQuestionView sizeThatFits:(CGSize){self.view.bounds.size.width, CGFLOAT_MAX}];

@@ -99,8 +99,8 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
         ORKThrowInvalidArgumentExceptionIfNil(resultPredicates);
         ORKThrowInvalidArgumentExceptionIfNil(destinationStepIdentifiers);
         
-        NSUInteger resultPredicatesCount = [resultPredicates count];
-        NSUInteger destinationStepIdentifiersCount = [destinationStepIdentifiers count];
+        NSUInteger resultPredicatesCount = resultPredicates.count;
+        NSUInteger destinationStepIdentifiersCount = destinationStepIdentifiers.count;
         if (resultPredicatesCount == 0) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates can not be an empty array" userInfo:nil];
         }
@@ -159,7 +159,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     NSCParameterAssert(exceptionReason);
 
     NSArray *uniqueIdentifiers = [results valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ([results count] != [uniqueIdentifiers count]);
+    BOOL itemsHaveNonUniqueIdentifiers = (results.count != uniqueIdentifiers.count);
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
     }
@@ -180,7 +180,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
     ORKValidateIdentifiersUnique(allTaskResults, @"All tasks should have unique identifiers");
 
     NSString *destinationStepIdentifier = nil;
-    for (NSInteger i = 0; i < [_resultPredicates count]; i++) {
+    for (NSInteger i = 0; i < _resultPredicates.count; i++) {
         NSPredicate *predicate = _resultPredicates[i];
         // The predicate can either have:
         // - an ORKResultPredicateTaskIdentifierVariableName variable which will be substituted by the ongoign task identifier;

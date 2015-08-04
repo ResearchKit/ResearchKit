@@ -756,8 +756,8 @@ static const CGFloat kHMargin = 15.0;
 #pragma mark UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    NSInteger lineCount = [[textView.text componentsSeparatedByCharactersInSet:
-                         [NSCharacterSet newlineCharacterSet]] count];
+    NSInteger lineCount = [textView.text componentsSeparatedByCharactersInSet:
+                         [NSCharacterSet newlineCharacterSet]].count;
     
     if (_lastSeenLineCount != lineCount) {
         _lastSeenLineCount = lineCount;

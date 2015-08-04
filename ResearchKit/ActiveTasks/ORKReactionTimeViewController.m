@@ -153,7 +153,7 @@ static const NSTimeInterval OutcomeAnimationDuration = 0.3;
 
 - (void)attemptDidFinish {
     void (^completion)(void) = ^{
-        if ([_results count] == [self reactionTimeStep].numberOfAttempts) {
+        if (_results.count == [self reactionTimeStep].numberOfAttempts) {
             [self finish];
         } else {
             [self resetAfterDelay:2];

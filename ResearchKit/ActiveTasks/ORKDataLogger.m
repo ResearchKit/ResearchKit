@@ -364,7 +364,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (! fileHandle) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Filehandle is nil" userInfo:nil];
     }
-    NSInteger numObjects = [objects count];
+    NSInteger numObjects = objects.count;
     if (numObjects == 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"No objects" userInfo:nil];
     }
@@ -608,7 +608,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (BOOL)appendObjects:(NSArray *)objects error:(NSError * __autoreleasing *)error {
-    if (![objects count]) {
+    if (!objects.count) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Empty array" userInfo:nil];
     }
     __block BOOL success = NO;
@@ -962,7 +962,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     } error:error];
     
     // Reporting multiple errors
-    if ([errors count]) {
+    if (errors.count) {
         if (!success && error && *error) {
             [errors addObject:*error];
             *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_MULTIPLE", nil), @"errors" : errors}];
@@ -1227,7 +1227,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             success = NO;
         }
     }
-    if (error && [notRemoved count]) {
+    if (error && notRemoved.count) {
         *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{@"notRemoved":notRemoved}];
     }
     return success;
@@ -1259,7 +1259,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             success = NO;
         }
     }
-    if (error && [notRemoved count]) {
+    if (error && notRemoved.count) {
         *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{@"notRemoved":notRemoved}];
     }
     return success;

@@ -114,7 +114,7 @@ static const CGFloat kProgressCircleSpacing = 4;
 
 - (void)setCount:(NSInteger)count {
     _count = count;
-    if (count != [_circles count]) {
+    if (count != _circles.count) {
         for (UIView *v in _circles) {
             [v removeFromSuperview];
         }

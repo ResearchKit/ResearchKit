@@ -154,23 +154,30 @@
         
         id answer = [formatHelper answerForSelectedIndex:idx];
         
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        NSArray *answerArray = answer;
+        
         id value = [(ORKTextChoice *)choices[idx] value];
         
         if (value == nil) {
             value = @(idx);
         }
         
-        XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+        XCTAssert(answerArray.count == 1 && [[answerArray firstObject] isEqual:value], @"%@", answerArray);
         
         answer = [formatHelper answerForSelectedIndexes:@[@(idx)]];
-        
-        XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        answerArray = answer;
+
+        XCTAssert(answerArray.count == 1 && [[answerArray firstObject] isEqual:value], @"%@", answerArray);
         
         [indexArray addObject:@(idx)];
         
         answer = [formatHelper answerForSelectedIndexes:indexArray];
-        
-        XCTAssertEqual([answer count], idx + 1, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        answerArray = answer;
+
+        XCTAssertEqual(answerArray.count, idx + 1, @"%@", answerArray);
         
     }];
 }
@@ -185,11 +192,11 @@
         
         id answer = [formatHelper answerForSelectedIndexes:@[@(0)]];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && [answer count] == 0, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
         
         answer = [formatHelper answerForSelectedIndex:0];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && [answer count] == 0, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
@@ -201,11 +208,11 @@
                 value = @(idx);
             }
             
-            XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert(((NSArray *)answer).count == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
             
             answer = [formatHelper answerForSelectedIndexes:@[@(idx+1)]];
             
-            XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert(((NSArray *)answer).count == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
         }];
         
     }

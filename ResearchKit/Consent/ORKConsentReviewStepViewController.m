@@ -243,7 +243,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 }
 
 - (UIViewController *)viewControllerForIndex:(NSUInteger)index {
-    if (index >= [_pageIndices count]) {
+    if (index >= _pageIndices.count) {
         return nil;
     }
     
@@ -330,7 +330,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (void)navigateDelta:(NSInteger)delta {
     // Entry point for forward/back navigation.
-    NSUInteger pageCount = [_pageIndices count];
+    NSUInteger pageCount = _pageIndices.count;
     
     if (_currentPageIndex == 0 && delta < 0) {
         // Navigate back in our parent task VC.
@@ -399,7 +399,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 }
 
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController {
-    if (_currentPageIndex < [_pageIndices count]-1) {
+    if (_currentPageIndex < _pageIndices.count-1) {
         return YES;
     }
     return [self hasNextStep];

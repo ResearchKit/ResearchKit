@@ -187,7 +187,7 @@ ORKArrayCopyObjects(NSArray *a) {
     if (!a) {
         return nil;
     }
-    NSMutableArray *b = [NSMutableArray arrayWithCapacity:[a count]];
+    NSMutableArray *b = [NSMutableArray arrayWithCapacity:a.count];
     [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [b addObject:[obj copy]];
     }];
@@ -199,7 +199,7 @@ ORKMutableOrderedSetCopyObjects(NSOrderedSet *a) {
     if (!a) {
         return nil;
     }
-    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:[a count]];
+    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:a.count];
     [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [b addObject:[obj copy]];
     }];
@@ -211,7 +211,7 @@ ORKMutableDictionaryCopyObjects(NSDictionary *a) {
     if (!a) {
         return nil;
     }
-    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:[a count]];
+    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:a.count];
     [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         b[key] = [obj copy];
     }];

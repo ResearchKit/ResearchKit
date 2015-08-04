@@ -215,7 +215,7 @@
     // Determine the insets on the preview layer frame that correspond to the actual video content
     // when using a videoGravity of AVLayerVideoGravityResizeAspect;
     NSArray *inputs = _previewLayer.session.inputs;
-    if (!inputs || [inputs count] == 0)
+    if (!inputs || inputs.count == 0)
         return UIEdgeInsetsZero;
     AVCaptureDeviceInput* input = (AVCaptureDeviceInput*)inputs[0];
     CMVideoDimensions cmd = CMVideoFormatDescriptionGetDimensions(input.device.activeFormat.formatDescription);

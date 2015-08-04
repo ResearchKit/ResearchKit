@@ -91,7 +91,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 - (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
     
-    NSUInteger resultCount = [results count];
+    NSUInteger resultCount = results.count;
     if (resultCount == 0) {
         return;
     }

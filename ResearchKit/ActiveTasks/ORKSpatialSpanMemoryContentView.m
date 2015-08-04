@@ -63,7 +63,7 @@
 
 - (void)resetTilesAnimated:(BOOL)animated {
     NSArray *currentViews = _tileViews;
-    NSInteger numberOfTilesOld = [_tileViews count];
+    NSInteger numberOfTilesOld = _tileViews.count;
     NSInteger numberOfTilesNew = _gridSize.width*_gridSize.height;
     NSMutableArray *newViews = [NSMutableArray arrayWithCapacity:numberOfTilesNew];
     NSArray *viewsToRemove = nil;

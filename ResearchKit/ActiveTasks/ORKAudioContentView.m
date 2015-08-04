@@ -374,7 +374,7 @@ static const CGFloat kValueLineMargin = 1.5;
     }
     [_samples addObject:sample];
     // Try to keep around 250 samples
-    if ([_samples count] > 500) {
+    if (_samples.count > 500) {
         _samples = [[_samples subarrayWithRange:(NSRange){250,_samples.count-250}] mutableCopy];
     }
     [self updateGraphSamples];
