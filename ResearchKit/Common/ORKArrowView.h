@@ -29,31 +29,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <UIKit/UIKit.h>
+#import "ORKDefines_Private.h"
 
-
-NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, ORKHolePegType) {
-    ORKHolePegTypeHole,
-    ORKHolePegTypePeg
-} ORK_ENUM_AVAILABLE;
-
-@protocol ORKHolePegTestPegViewDelegate;
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPegView : UIView <UIGestureRecognizerDelegate>
-
-@property (nonatomic, weak) id<ORKHolePegTestPegViewDelegate> delegate;
-
-- (instancetype)initWithType:(ORKHolePegType)type NS_DESIGNATED_INITIALIZER;
+@interface ORKArrowView : UIView
 
 @end
-
-@protocol ORKHolePegTestPegViewDelegate <NSObject>
-
-- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success;
-
-@end
-
-NS_ASSUME_NONNULL_END

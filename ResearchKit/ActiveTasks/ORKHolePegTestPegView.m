@@ -76,7 +76,7 @@ static const CGFloat kPegViewRotation = 45.0f;
             _initialRotation = kPegViewRotation * (M_PI / 180);
         }
         
-        self.backgroundColor = [UIColor clearColor];
+        self.opaque = NO;
         self.transform = CGAffineTransformMakeRotation(_initialRotation);
         self.moving = NO;
     }
@@ -89,8 +89,16 @@ static const CGFloat kPegViewRotation = 45.0f;
     self.transform = CGAffineTransformMakeTranslation(self.transformX, self.transformY);
     self.transform = CGAffineTransformRotate(self.transform, self.transformRotation + self.initialRotation);
     
-    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:)]) {
-        [self.delegate pegViewDidMove:self];
+    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:success:)]) {
+        [self.delegate pegViewDidMove:self
+                              success:^(BOOL succeded){
+                                  if (succeded) {
+                                      [self resetTransformAnimated:NO];
+                                      for (UIGestureRecognizer __block *gestureRecognizer in self.gestureRecognizers) {
+                                          gestureRecognizer.enabled = NO;
+                                      }
+                                  }
+                           }];
     }
     
     if (!self.isMoving) {
@@ -99,8 +107,8 @@ static const CGFloat kPegViewRotation = 45.0f;
     }
 }
 
-- (void)resetTransform {
-    [UIView animateWithDuration:0.15f
+- (void)resetTransformAnimated:(BOOL)animated {
+    [UIView animateWithDuration:animated ? 0.15f : 0.0f
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^(){
@@ -123,7 +131,7 @@ static const CGFloat kPegViewRotation = 45.0f;
     [self updateTransform];
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self resetTransform];
+        [self resetTransformAnimated:YES];
     }
 }
 
@@ -133,7 +141,7 @@ static const CGFloat kPegViewRotation = 45.0f;
     [self updateTransform];
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self resetTransform];
+        [self resetTransformAnimated:YES];
     }
 }
 
