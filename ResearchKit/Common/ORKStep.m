@@ -116,7 +116,7 @@
 
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@ %@ %@>", [super description], self.identifier, self.title];
+    return [NSString stringWithFormat:@"<%@ %@ %@>", super.description, self.identifier, self.title];
 }
 
 - (BOOL)showsProgress {
