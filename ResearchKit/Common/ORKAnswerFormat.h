@@ -326,13 +326,13 @@ ORK_CLASS_AVAILABLE
 @property (readonly, nullable) NSString *minimumValueDescription;
 
 /**
- An image for the upper bound of the slider. Recommendation image size is 40px by 40px.
+ An image for the upper bound of the slider. Recommendation image size is 30px by 30px.
  The maximum range label will not be visible.
  */
 @property (strong, nullable) UIImage *maximumImage;
 
 /**
- An image for the upper bound of the slider. Recommendation image size is 40px by 40px.
+ An image for the upper bound of the slider. Recommendation image size is 30px by 30px.
  The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;
@@ -452,13 +452,13 @@ ORK_CLASS_AVAILABLE
 @property (readonly, nullable) NSString *minimumValueDescription;
 
 /**
- An image for the upper bound of the slider. Recommendation image size is 40px by 40px.
+ An image for the upper bound of the slider. Recommendation image size is 30px by 30px.
  The maximum range label will not be visible.
  */
 @property (strong, nullable) UIImage *maximumImage;
 
 /**
- An image for the upper bound of the slider. Recommendation image size is 40px by 40px.
+ An image for the upper bound of the slider. Recommendation image size is 30px by 30px.
  The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;

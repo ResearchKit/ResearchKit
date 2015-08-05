@@ -31,13 +31,13 @@
 
 #import "ORKScaleRangeImageView.h"
 
-static const CGFloat kRangeImageHeight = 30;
-static const CGFloat kRangeImageWidth = 30;
+static const CGFloat kScaleRangeImageHeight = 30;
+static const CGFloat kScaleRangeImageWidth = 30;
 
 @implementation ORKScaleRangeImageView
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(kRangeImageWidth, kRangeImageHeight);
+    return CGSizeMake(kScaleRangeImageWidth, kScaleRangeImageHeight);
 }
 
 @end
