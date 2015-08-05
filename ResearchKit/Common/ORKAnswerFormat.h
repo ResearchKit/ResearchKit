@@ -352,6 +352,8 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized continuous scale answer format using the specified values.
  
+ This method is the designated initializer.
+ 
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
  @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.

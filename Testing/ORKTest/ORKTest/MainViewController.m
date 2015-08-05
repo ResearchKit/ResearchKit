@@ -1596,6 +1596,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                                                  vertical:NO
                                                                                                   maximumValueDescription:nil
                                                                                                   minimumValueDescription:nil];
+        
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_01"
                                                                     title:@"On a scale of 1 to 10, how much pain do you feel?"
                                                                    answer:scaleAnswerFormat];

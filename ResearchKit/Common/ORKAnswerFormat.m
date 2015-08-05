@@ -1521,7 +1521,6 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return number;
 }
 
-
 - (void)validateParameters {
     [super validateParameters];
     
