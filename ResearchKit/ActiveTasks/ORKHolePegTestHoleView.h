@@ -34,19 +34,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKHolePegTestPegViewDelegate;
-
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPegView : UIView <UIGestureRecognizerDelegate>
+@interface ORKHolePegTestHoleView : UIView
 
-@property (nonatomic, weak) id<ORKHolePegTestPegViewDelegate> delegate;
-
-@end
-
-@protocol ORKHolePegTestPegViewDelegate <NSObject>
-
-- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView;
-- (void)pegViewMoveEnded:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success;
+@property (nonatomic, assign, getter = isSuccess) BOOL success;
 
 @end
 

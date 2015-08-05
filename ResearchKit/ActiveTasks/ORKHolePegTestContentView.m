@@ -31,10 +31,10 @@
 
 #import "ORKHolePegTestContentView.h"
 #import "ORKHolePegTestPegView.h"
+#import "ORKHolePegTestHoleView.h"
 #import "ORKDirectionView.h"
 
 
-static const CGFloat ORKPegViewDiameter = 148.0f;
 static const CGFloat ORKPegViewTranslationSensibility = 6.0f;
 static const CGFloat ORKPegViewRotationSensibility = 12.0f;
 
@@ -47,7 +47,7 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
 
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) ORKHolePegTestPegView *pegView;
-@property (nonatomic, strong) ORKHolePegTestPegView *holeView;
+@property (nonatomic, strong) ORKHolePegTestHoleView *holeView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, copy) NSArray *constraints;
 
@@ -60,25 +60,25 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
     self = [super initWithFrame:frame];
     if (self) {
         _progressView = [UIProgressView new];
-        _progressView.translatesAutoresizingMaskIntoConstraints = NO;
         _progressView.progressTintColor = [self tintColor];
+        [_progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_progressView setAlpha:0];
         [self addSubview:_progressView];
         
-        _holeView = [[ORKHolePegTestPegView alloc] initWithType:ORKHolePegTypeHole];
-        _holeView.translatesAutoresizingMaskIntoConstraints = NO;
+        _holeView = [[ORKHolePegTestHoleView alloc] init];
+        [_holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:_holeView];
         
-        _pegView = [[ORKHolePegTestPegView alloc] initWithType:ORKHolePegTypePeg];
+        _pegView = [[ORKHolePegTestPegView alloc] init];
         _pegView.delegate = self;
-        _pegView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:_pegView];
         
         _directionView = [[ORKDirectionView alloc] init];
-        _directionView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:_directionView];
         
-        self.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self setNeedsUpdateConstraints];
         
 #if LAYOUT_DEBUG
@@ -96,19 +96,24 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
 }
 
 - (void)updateConstraints {
-    if ([_constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
+    if ([self.constraints count]) {
+        [NSLayoutConstraint deactivateConstraints:self.constraints];
+        self.constraints = nil;
     }
     
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(ORKPegViewDiameter)};
+    NSDictionary *metrics = @{@"pegViewDiameter" : @(_pegView.intrinsicContentSize.height)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
                                              options:(NSLayoutFormatOptions)0
+                                             metrics:nil views:views]];
+    
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pegView]->=0-[_holeView]|"
+                                             options:NSLayoutFormatAlignAllCenterY
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
@@ -117,22 +122,14 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pegView(diameter)]->=0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pegView(pegViewDiameter)]->=0-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:metrics
-                                               views:views]];
+                                             metrics:metrics views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_holeView(diameter)]->=0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_holeView]->=0-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:metrics
-                                               views:views]];
-
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pegView(diameter)]->=0-[_holeView(diameter)]|"
-                                             options:NSLayoutFormatAlignAllCenterY
-                                             metrics:metrics
-                                               views:views]];
+                                             metrics:nil views:views]];
 
     [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.pegView
                                                              attribute:NSLayoutAttributeCenterY
@@ -182,6 +179,7 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
         if ([self.delegate respondsToSelector:@selector(holePegTestDidSucceed:)]) {
             [self.delegate holePegTestDidSucceed:self];
         }
+        self.holeView.success = YES;
         success(YES);
     } else {
         success(NO);

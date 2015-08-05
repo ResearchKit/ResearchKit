@@ -59,7 +59,7 @@ static const CGFloat kArrowLineWidth = 4;
 }
 
 - (CGSize)intrinsicContentSize {
-    return (CGSize){kArrowWidth + 2 * kArrowLineWidth, 2 * (kArrowWidth + kArrowLineWidth)};
+    return CGSizeMake(kArrowWidth + 2 * kArrowLineWidth, 2 * (kArrowWidth + kArrowLineWidth));
 }
 
 - (void)setCompleted:(BOOL)completed {
@@ -196,6 +196,10 @@ static const CGFloat kArrowLineWidth = 4;
     
     [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
+}
+
+- (void)dealloc {
+    [self stopAnimating];
 }
 
 @end

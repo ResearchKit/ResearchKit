@@ -32,37 +32,16 @@
 #import "ORKHolePegTestPegView.h"
 
 
-static const UIEdgeInsets kPegViewMargins = (UIEdgeInsets){22, 22, 22, 22};
-static const CGFloat kPegViewRotation = 45.0f;
-
-
-static UIBezierPath *ORKCheckBezierPath() {
-    UIBezierPath *bezierPath = UIBezierPath.bezierPath;
-    [bezierPath moveToPoint: CGPointMake(11.6, 19)];
-    [bezierPath addCurveToPoint: CGPointMake(11.1, 18.8) controlPoint1: CGPointMake(11.4, 19) controlPoint2: CGPointMake(11.2, 18.9)];
-    [bezierPath addLineToPoint: CGPointMake(7.5, 15.5)];
-    [bezierPath addCurveToPoint: CGPointMake(7.5, 14.4) controlPoint1: CGPointMake(7.2, 15.2) controlPoint2: CGPointMake(7.2, 14.7)];
-    [bezierPath addCurveToPoint: CGPointMake(8.6, 14.4) controlPoint1: CGPointMake(7.8, 14.1) controlPoint2: CGPointMake(8.3, 14.1)];
-    [bezierPath addLineToPoint: CGPointMake(11.6, 17.2)];
-    [bezierPath addLineToPoint: CGPointMake(19.6, 9.2)];
-    [bezierPath addCurveToPoint: CGPointMake(20.7, 9.2) controlPoint1: CGPointMake(19.9, 8.9) controlPoint2: CGPointMake(20.4, 8.9)];
-    [bezierPath addCurveToPoint: CGPointMake(20.7, 10.3) controlPoint1: CGPointMake(21, 9.5) controlPoint2: CGPointMake(21, 10)];
-    [bezierPath addLineToPoint: CGPointMake(12.2, 18.8)];
-    [bezierPath addCurveToPoint: CGPointMake(11.6, 19) controlPoint1: CGPointMake(12, 18.9) controlPoint2: CGPointMake(11.8, 19)];
-    [bezierPath closePath];
-    bezierPath.miterLimit = 4;
-    
-    return bezierPath;
-}
+static const CGFloat ORKPegViewDiameter = 148.0f;
+static const CGFloat ORKPegViewRotation = 45.0f;
 
 
 @interface ORKHolePegTestPegView ()
 
-@property (nonatomic, assign) ORKHolePegType type;
-@property (nonatomic, assign) CGFloat transformX;
-@property (nonatomic, assign) CGFloat transformY;
 @property (nonatomic, assign) CGFloat initialRotation;
 @property (nonatomic, assign) CGFloat transformRotation;
+@property (nonatomic, assign) CGFloat transformX;
+@property (nonatomic, assign) CGFloat transformY;
 @property (nonatomic, assign, getter = isMoving) BOOL moving;
 @property (nonatomic, assign, getter = isMoveEnded) BOOL moveEnded;
 
@@ -71,41 +50,38 @@ static UIBezierPath *ORKCheckBezierPath() {
 
 @implementation ORKHolePegTestPegView
 
-#pragma mark - gesture recognizer methods
-
-- (instancetype)initWithType:(ORKHolePegType)type
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
-        if (type == ORKHolePegTypeHole ||
-            type == ORKHolePegTypeSuccess) {
-            _type = type;
-            _initialRotation = 0.0f;
-        } else {
-            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                            action:@selector(handlePan:)];
-            panRecognizer.minimumNumberOfTouches = 2;
-            panRecognizer.maximumNumberOfTouches = 2;
-            panRecognizer.delegate = self;
-            [self addGestureRecognizer:panRecognizer];
-            
-            UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                                           action:@selector(handleRotation:)];
-            rotationRecognizer.delegate = self;
-            [self addGestureRecognizer:rotationRecognizer];
-            
-            _type = ORKHolePegTypePeg;
-            _initialRotation = kPegViewRotation * (M_PI / 180);
-        }
+        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                                                       action:@selector(handleRotation:)];
+        rotationRecognizer.delegate = self;
+        [self addGestureRecognizer:rotationRecognizer];
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                        action:@selector(handlePan:)];
+        panRecognizer.minimumNumberOfTouches = 2;
+        panRecognizer.maximumNumberOfTouches = 2;
+        panRecognizer.delegate = self;
+        [self addGestureRecognizer:panRecognizer];
+        
+        self.initialRotation = ORKPegViewRotation * (M_PI / 180);
         
         self.opaque = NO;
-        self.transform = CGAffineTransformMakeRotation(_initialRotation);
+        self.transform = CGAffineTransformMakeRotation(self.initialRotation);
         self.moving = NO;
         self.moveEnded = NO;
     }
     
     return self;
 }
+
+- (CGSize)intrinsicContentSize {
+    return CGSizeMake(ORKPegViewDiameter, ORKPegViewDiameter);
+}
+
+#pragma mark - gesture recognizer methods
 
 - (void)updateTransform
 {
@@ -142,14 +118,27 @@ static UIBezierPath *ORKCheckBezierPath() {
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^(){
                              self.transform = CGAffineTransformMakeRotation(self.initialRotation);
+                             self.transformRotation = 0.0f;
                              self.transformX = 0.0f;
                              self.transformY = 0.0f;
-                             self.transformRotation = 0.0f;
                              self.alpha = 1.0f;
                          }
                          completion:^(BOOL finished){
                              self.moveEnded = NO;
                          }];
+    }
+}
+
+- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.numberOfTouches != 2 ||
+        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
+        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
+        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
+        [self resetTransform];
+    } else {
+        self.transformRotation = gestureRecognizer.rotation;
+        [self updateTransform];
     }
 }
 
@@ -164,19 +153,6 @@ static UIBezierPath *ORKCheckBezierPath() {
         CGPoint translation = [gestureRecognizer translationInView:self.superview];
         self.transformX = translation.x;
         self.transformY = translation.y;
-        [self updateTransform];
-    }
-}
-
-- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.numberOfTouches != 2 ||
-        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
-        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
-        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self resetTransform];
-    } else {
-        self.transformRotation = gestureRecognizer.rotation;
         [self updateTransform];
     }
 }
@@ -199,24 +175,8 @@ static UIBezierPath *ORKCheckBezierPath() {
     CGRect horizontalRect = CGRectMake(bounds.size.width * 1/4, bounds.size.height * 7/16,
                                        bounds.size.width * 1/2, bounds.size.height * 1/8);
     
-    if (self.type == ORKHolePegTypeHole) {
-        CGRect intersectionRect = CGRectIntersection(verticalRect, horizontalRect);
-        CGContextAddRect(context, verticalRect);
-        CGContextAddRect(context, horizontalRect);
-        CGContextAddRect(context, intersectionRect);
-        CGRect boundingRect = CGContextGetClipBoundingBox(context);
-        CGContextAddRect(context, boundingRect);
-        CGContextEOClip(context);
-        
-        bounds = CGRectInset([self bounds], kPegViewMargins.left, kPegViewMargins.top);
-        UIBezierPath *pegPath = [UIBezierPath bezierPathWithOvalInRect:bounds];
-        [pegPath fill];
-    } else if (self.type == ORKHolePegTypePeg) {
-        CGContextFillRect(context, verticalRect);
-        CGContextFillRect(context, horizontalRect);
-    } else {
-        [ORKCheckBezierPath() fill];
-    }
+    CGContextFillRect(context, verticalRect);
+    CGContextFillRect(context, horizontalRect);
     
     CGContextRestoreGState(context);
 }
