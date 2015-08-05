@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nem található összegyűjtött adat.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nincs megadva kimeneti könyvtár";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Koppintson egy másik kép rögzítéséhez";
-"MEDIA_BUTTON" = "Koppintson egy kép rögzítéséhez";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Vissza";
 

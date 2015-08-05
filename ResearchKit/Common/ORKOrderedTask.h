@@ -410,6 +410,32 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                       failureSound:(UInt32)failureSoundID
                                            options:(ORKPredefinedTaskOption)options;
 
+/**
+ Returns a predefined task that consists of a Tower of Hanoi Puzzle.
+ 
+ In a Tower of Hanoi task the participant is asked to solve the classic puzzle in as few moves as possible.
+ You can use this task to assess the participant's problem solving skills.
+ 
+ A Tower of Hanoi task finishes when the participant has completed the puzzle correctly or conceeds that he/she cannot solve the puzzle.
+ 
+ Data collected by the task is in the form of an `ORKTowerOfHanoiResult` object. Data collected in this task consists of the number of moves
+ taken and whether the puzzle was successfully completed or not.
+ 
+ @param identifier                  The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription      A localized string describing the intended use of the data
+                                    collected. If the value of this parameter is `nil`, the
+                                    default localized text is displayed.
+ @param numberOfDisks               The number of disks in the puzzle, the default value for this property is 3.
+ @param options                     Options that affect the features of the predefined task.
+ 
+ @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
+ */
+
++ (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
+                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                     numberOfDisks:(int)numberOfDisks
+                                           options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END

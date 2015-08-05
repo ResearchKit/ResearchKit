@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Nisu pronađeni prikupljeni podaci.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Izlazni direktorij nije naveden";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Dodirnite za snimanje druge slike";
-"MEDIA_BUTTON" = "Dodirnite za snimanje slike";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Natrag";
 

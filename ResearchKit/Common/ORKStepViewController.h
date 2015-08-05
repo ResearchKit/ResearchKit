@@ -350,6 +350,11 @@ ORK_CLASS_AVAILABLE
  */
 - (void)goBackward;
 
+/**
+ A Boolean value indicating whether the view controller has been presented before.
+ */
+@property (nonatomic, readonly) BOOL hasBeenPresented;
+
 @end
 
 NS_ASSUME_NONNULL_END

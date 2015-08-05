@@ -225,10 +225,6 @@
 "ERROR_RECORDER_NO_DATA" = "Fant ingen innsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen katalog angitt";
 
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Trykk for å ta et nytt bilde";
-"MEDIA_BUTTON" = "Trykk for å ta bilde";
-
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbake";
 
