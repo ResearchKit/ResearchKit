@@ -222,8 +222,9 @@
 "HOLE_PEG_TEST_QUESTION_TITLE" = "Are you right- or left-handed?";
 "HOLE_PEG_TEST_QUESTION_2_CHOICE" = "Right";
 "HOLE_PEG_TEST_QUESTION_2_CHOICE_2" = "Left";
-"HOLE_PEG_TEST_INSTRUCTION_%@" = "Put the cross peg in the hole.";
+"HOLE_PEG_TEST_INSTRUCTION" = "Put the cross peg in the hole.";
 "HOLE_PEG_TEST_TEXT" = "Use two fingers to move the peg.";
+"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

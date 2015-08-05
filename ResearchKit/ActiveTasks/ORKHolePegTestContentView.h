@@ -47,6 +47,7 @@ ORK_CLASS_AVAILABLE
 
 @protocol ORKHolePegTestContentViewDelegate <NSObject>
 
+- (void)holePegTestDidProgress:(ORKHolePegTestContentView *)holePegTestContentView;
 - (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView;
 
 @end

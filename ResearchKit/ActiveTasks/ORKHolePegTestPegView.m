@@ -34,14 +34,14 @@
 
 static const CGFloat ORKPegViewDiameter = 148.0f;
 static const CGFloat ORKPegViewRotation = 45.0f;
+static const CGFloat ORKMaximumTouchesDistance = 210.0f;
 
 
 @interface ORKHolePegTestPegView ()
 
-@property (nonatomic, assign) CGFloat initialRotation;
-@property (nonatomic, assign) CGFloat transformRotation;
 @property (nonatomic, assign) CGFloat transformX;
 @property (nonatomic, assign) CGFloat transformY;
+@property (nonatomic, assign) CGFloat transformRotation;
 @property (nonatomic, assign, getter = isMoving) BOOL moving;
 @property (nonatomic, assign, getter = isMoveEnded) BOOL moveEnded;
 
@@ -54,11 +54,6 @@ static const CGFloat ORKPegViewRotation = 45.0f;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                                       action:@selector(handleRotation:)];
-        rotationRecognizer.delegate = self;
-        [self addGestureRecognizer:rotationRecognizer];
-        
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                                         action:@selector(handlePan:)];
         panRecognizer.minimumNumberOfTouches = 2;
@@ -66,10 +61,12 @@ static const CGFloat ORKPegViewRotation = 45.0f;
         panRecognizer.delegate = self;
         [self addGestureRecognizer:panRecognizer];
         
-        self.initialRotation = ORKPegViewRotation * (M_PI / 180);
-        
+        UIRotationGestureRecognizer *rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                                                       action:@selector(handleRotation:)];
+        rotationRecognizer.delegate = self;
+        [self addGestureRecognizer:rotationRecognizer];
+
         self.opaque = NO;
-        self.transform = CGAffineTransformMakeRotation(self.initialRotation);
         self.moving = NO;
         self.moveEnded = NO;
     }
@@ -85,16 +82,18 @@ static const CGFloat ORKPegViewRotation = 45.0f;
 
 - (void)updateTransform
 {
-    self.transform = CGAffineTransformMakeTranslation(self.transformX, self.transformY);
-    self.transform = CGAffineTransformRotate(self.transform, self.transformRotation + self.initialRotation);
-    
-    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:)]) {
-        [self.delegate pegViewDidMove:self];
-    }
-    
-    if (!self.isMoving) {
-        self.alpha = 0.2f;
-        self.moving = YES;
+    if (!self.isMoveEnded) {
+        self.transform = CGAffineTransformMakeTranslation(self.transformX, self.transformY);
+        self.transform = CGAffineTransformRotate(self.transform, self.transformRotation);
+        
+        if ([self.delegate respondsToSelector:@selector(pegViewDidMove:)]) {
+            [self.delegate pegViewDidMove:self];
+        }
+        
+        if (!self.isMoving) {
+            self.alpha = 0.2f;
+            self.moving = YES;
+        }
     }
 }
 
@@ -108,24 +107,48 @@ static const CGFloat ORKPegViewRotation = 45.0f;
         if ([self.delegate respondsToSelector:@selector(pegViewMoveEnded:success:)]) {
             [self.delegate pegViewMoveEnded:self
                                     success:^(BOOL succeeded){
-                                        self.moveEnded = NO;
                                         animated = !succeeded;
+                                        self.hidden = succeeded;
                                     }];
         }
         
         [UIView animateWithDuration:animated ? 0.15f : 0.0f
-                              delay:animated ? 0.0f : 1.0f
+                              delay:animated ? 0.0f : 0.05f
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^(){
-                             self.transform = CGAffineTransformMakeRotation(self.initialRotation);
-                             self.transformRotation = 0.0f;
-                             self.transformX = 0.0f;
-                             self.transformY = 0.0f;
+                             self.transform = CGAffineTransformIdentity;
                              self.alpha = 1.0f;
                          }
                          completion:^(BOOL finished){
+                             self.transformX = 0.0f;
+                             self.transformY = 0.0f;
+                             self.transformRotation = 0.0f;
                              self.moveEnded = NO;
+                             self.hidden = NO;
                          }];
+    }
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.numberOfTouches != 2 ||
+        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
+        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
+        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
+        [self resetTransform];
+    } else {
+        CGPoint firstPoint = [gestureRecognizer locationOfTouch:0 inView:nil];
+        CGPoint secondPoint = [gestureRecognizer locationOfTouch:1 inView:nil];
+        double touchesDistance = hypot(firstPoint.x - secondPoint.x, firstPoint.y - secondPoint.y);
+        
+        if (touchesDistance > ORKMaximumTouchesDistance) {
+            [self resetTransform];
+        } else {
+            CGPoint translation = [gestureRecognizer translationInView:self.superview];
+            self.transformX = translation.x;
+            self.transformY = translation.y;
+            [self updateTransform];
+        }
     }
 }
 
@@ -142,21 +165,6 @@ static const CGFloat ORKPegViewRotation = 45.0f;
     }
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.numberOfTouches != 2 ||
-        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
-        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
-        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self resetTransform];
-    } else {
-        CGPoint translation = [gestureRecognizer translationInView:self.superview];
-        self.transformX = translation.x;
-        self.transformY = translation.y;
-        [self updateTransform];
-    }
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
@@ -168,15 +176,33 @@ static const CGFloat ORKPegViewRotation = 45.0f;
     CGContextSaveGState(context);
     
     CGRect bounds = [self bounds];
-    [self.tintColor setFill];
     
-    CGRect verticalRect = CGRectMake(bounds.size.width * 7/16, bounds.size.height * 1/4,
-                                     bounds.size.width * 1/8, bounds.size.height * 1/2);
-    CGRect horizontalRect = CGRectMake(bounds.size.width * 1/4, bounds.size.height * 7/16,
-                                       bounds.size.width * 1/2, bounds.size.height * 1/8);
+    UIBezierPath *crossPath = [[UIBezierPath alloc] init];
+    [crossPath moveToPoint:CGPointMake(bounds.size.width * 7/16, bounds.size.height * 1/4)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 7/16, bounds.size.height * 7/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 1/4, bounds.size.height * 7/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 1/4, bounds.size.height * 9/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 7/16, bounds.size.height * 9/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 7/16, bounds.size.height * 3/4)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 9/16, bounds.size.height * 3/4)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 9/16, bounds.size.height * 9/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 3/4, bounds.size.height * 9/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 3/4, bounds.size.height * 7/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 9/16, bounds.size.height * 7/16)];
+    [crossPath addLineToPoint:CGPointMake(bounds.size.width * 9/16, bounds.size.height * 1/4)];
+    [crossPath closePath];
     
-    CGContextFillRect(context, verticalRect);
-    CGContextFillRect(context, horizontalRect);
+    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+    shapeLayer.path = crossPath.CGPath;
+    shapeLayer.bounds = CGPathGetBoundingBox(shapeLayer.path);
+    shapeLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    shapeLayer.fillColor = [self.tintColor CGColor];
+    
+    CATransform3D transform = CATransform3DMakeTranslation(ORKPegViewDiameter/2, ORKPegViewDiameter/2, 1);
+    transform = CATransform3DRotate(transform, ORKPegViewRotation * (M_PI / 180), 0, 0, 1);
+    shapeLayer.transform = transform;
+    
+    [self.layer addSublayer:shapeLayer];
     
     CGContextRestoreGState(context);
 }

@@ -35,24 +35,12 @@
 static const UIEdgeInsets ORKHoleViewMargins = (UIEdgeInsets){22, 22, 22, 22};
 static const CGFloat ORKHoleViewDiameter = 148.0f;
 
-static UIBezierPath *ORKCheckBezierPath() {
-    UIBezierPath *bezierPath = UIBezierPath.bezierPath;
-    [bezierPath moveToPoint:CGPointMake(23.2, 82.1)];
-    [bezierPath addCurveToPoint:CGPointMake(22.2, 81.7) controlPoint1:CGPointMake(22.8, 82.1) controlPoint2:CGPointMake(22.4, 81.9)];
-    [bezierPath addLineToPoint:CGPointMake(15, 75.1)];
-    [bezierPath addCurveToPoint:CGPointMake(15, 72.9) controlPoint1:CGPointMake(14.4, 74.5) controlPoint2:CGPointMake(14.4, 73.5)];
-    [bezierPath addCurveToPoint:CGPointMake(17.2, 72.9) controlPoint1:CGPointMake(15.6, 72.3) controlPoint2:CGPointMake(16.6, 72.3)];
-    [bezierPath addLineToPoint:CGPointMake(23.2, 78.5)];
-    [bezierPath addLineToPoint:CGPointMake(39.2, 62.5)];
-    [bezierPath addCurveToPoint:CGPointMake(41.4, 62.5) controlPoint1:CGPointMake(39.8, 61.9) controlPoint2:CGPointMake(40.8, 61.9)];
-    [bezierPath addCurveToPoint:CGPointMake(41.4, 64.7) controlPoint1:CGPointMake(42, 63.1) controlPoint2:CGPointMake(42, 64.1)];
-    [bezierPath addLineToPoint:CGPointMake(24.4, 81.7)];
-    [bezierPath addCurveToPoint:CGPointMake(23.2, 82.1) controlPoint1:CGPointMake(24, 81.9) controlPoint2:CGPointMake(23.6, 82.1)];
-    [bezierPath closePath];
-    bezierPath.miterLimit = 4;
-    
-    return bezierPath;
-}
+
+@interface ORKHolePegTestHoleView ()
+
+@property (nonatomic, strong) CAShapeLayer *shapeLayer;
+
+@end
 
 
 @implementation ORKHolePegTestHoleView
@@ -61,6 +49,24 @@ static UIBezierPath *ORKCheckBezierPath() {
 {
     self = [super initWithFrame:frame];
     if (self) {
+        UIBezierPath *path = [[UIBezierPath alloc] init];
+        [path moveToPoint:CGPointMake(52.2f, 78.3f)];
+        [path addLineToPoint:CGPointMake(63.8f, 89.4f)];
+        [path addLineToPoint:CGPointMake(95.4f, 58.7f)];
+        path.lineCapStyle = kCGLineCapRound;
+        path.lineWidth = 5.0f;
+        
+        CAShapeLayer *shapeLayer = [CAShapeLayer new];
+        shapeLayer.path = path.CGPath;
+        shapeLayer.lineWidth = 5;
+        shapeLayer.lineCap = kCALineCapRound;
+        shapeLayer.lineJoin = kCALineJoinRound;
+        shapeLayer.frame = self.layer.bounds;
+        shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
+        shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
+        shapeLayer.fillColor = nil;
+        self.shapeLayer = shapeLayer;
+        
         self.opaque = NO;
         self.success = NO;
     }
@@ -88,25 +94,9 @@ static UIBezierPath *ORKCheckBezierPath() {
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:bounds];
     [self.tintColor setFill];
     [path fill];
-    
+
     if (self.isSuccess) {
-        UIBezierPath *path = [UIBezierPath new];
-        [path moveToPoint:CGPointMake(52.2f, 78.3f)];
-        [path addLineToPoint:CGPointMake(63.8f, 89.4f)];
-        [path addLineToPoint:CGPointMake(95.4f, 58.7f)];
-        path.lineCapStyle = kCGLineCapRound;
-        path.lineWidth = 5.0f;
-        
-        CAShapeLayer *shapeLayer = [CAShapeLayer new];
-        shapeLayer.path = path.CGPath;
-        shapeLayer.lineWidth = 5;
-        shapeLayer.lineCap = kCALineCapRound;
-        shapeLayer.lineJoin = kCALineJoinRound;
-        shapeLayer.frame = self.layer.bounds;
-        shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
-        shapeLayer.backgroundColor = [UIColor clearColor].CGColor;
-        shapeLayer.fillColor = nil;
-        [self.layer addSublayer:shapeLayer];
+        [self.layer addSublayer:self.shapeLayer];
         
         CAMediaTimingFunction *timing = [[CAMediaTimingFunction alloc] initWithControlPoints:0.180739998817444
                                                                                             :0
@@ -116,10 +106,12 @@ static UIBezierPath *ORKCheckBezierPath() {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         [animation setTimingFunction:timing];
         [animation setFillMode:kCAFillModeBoth];
-        animation.fromValue = @([(CAShapeLayer *)[shapeLayer presentationLayer] strokeEnd]);
-        [shapeLayer addAnimation:animation forKey:@"strokeEnd"];
+        animation.fromValue = @(0);
+        animation.toValue = @(1);
+        animation.delegate = self;
+        [self.shapeLayer addAnimation:animation forKey:@"strokeEnd"];
     } else {
-        CGRect bounds = [self bounds];
+        bounds = [self bounds];
         [[UIColor whiteColor] setFill];
         
         CGRect verticalRect = CGRectMake(bounds.size.width * 7/16, bounds.size.height * 1/4,
@@ -132,6 +124,11 @@ static UIBezierPath *ORKCheckBezierPath() {
     }
     
     CGContextRestoreGState(context);
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+    [self.shapeLayer removeFromSuperlayer];
+    self.success = NO;
 }
 
 @end

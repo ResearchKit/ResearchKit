@@ -83,9 +83,16 @@
 
 #pragma mark - hole peg test content view delegate
 
+- (void)holePegTestDidProgress:(ORKHolePegTestContentView *)holePegTestContentView {
+    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
+}
+
 - (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView {
     self.successes++;
     [holePegTestContentView setProgress:(self.successes / 9.0f) animated:YES];
+    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
 }
 
 @end

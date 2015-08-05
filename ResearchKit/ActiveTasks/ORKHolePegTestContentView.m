@@ -88,6 +88,11 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
     return self;
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    self.progressView.progressTintColor = [self tintColor];
+}
+
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [self.progressView setProgress:progress animated:animated];
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
@@ -172,6 +177,7 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
     }
     
     self.directionView.hidden = YES;
+    [self.delegate holePegTestDidProgress:self];
 }
 
 - (void)pegViewMoveEnded:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success {
@@ -182,6 +188,7 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
         self.holeView.success = YES;
         success(YES);
     } else {
+        self.holeView.success = NO;
         success(NO);
     }
     
@@ -200,8 +207,8 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
     if (CGRectContainsPoint(detectionFrame, pegCenter)) {
         double rotation = atan2(pegView.transform.b, pegView.transform.a);
         double angle = fmod(fabs(rotation), M_PI_2);
-        if (angle < degreesToRadians(ORKPegViewRotationSensibility) ||
-            angle > M_PI_2 - degreesToRadians(ORKPegViewRotationSensibility)) {
+        if (angle > M_PI_4 - degreesToRadians(ORKPegViewRotationSensibility) &&
+            angle < M_PI_4 + degreesToRadians(ORKPegViewRotationSensibility)) {
             return YES;
         }
     }

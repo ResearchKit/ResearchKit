@@ -972,7 +972,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         
         {
             ORKHolePegTestStep *step = [[ORKHolePegTestStep alloc] initWithIdentifier:ORKHolePegTestStepIdentifier];
-            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION_%@", nil), @(numberOfHoles)];
+            step.title = ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
             step.numberOfHoles = numberOfHoles;
