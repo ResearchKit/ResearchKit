@@ -1579,49 +1579,6 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     
     {
         /*
-         Continuous scale with images.
-         */
-        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
-                                                                                                             minimumValue:1
-                                                                                                             defaultValue:NSIntegerMax
-                                                                                                    maximumFractionDigits:2
-                                                                                                                 vertical:YES
-                                                                                                  maximumValueDescription:@"Warm"
-                                                                                                  minimumValueDescription:@"Hot"];
-        
-        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
-        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
-        
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_12"
-                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
-                                                                     answer:scaleAnswerFormat];
-        [steps addObject:step];
-    }
-    
-    {
-        /*
-         Discrete scale with images.
-         */
-        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
-                                                                                         minimumValue:1
-                                                                                         defaultValue:NSIntegerMax
-                                                                                                 step:1
-                                                                                             vertical:NO
-                                                                              maximumValueDescription:nil
-                                                                              minimumValueDescription:nil];
-        
-        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
-        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
-        
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_13"
-                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
-                                                                     answer:scaleAnswerFormat];
-        [steps addObject:step];
-    }
-    
-    
-    {
-        /*
          Discrete scale, no default.
          */
         ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:300
@@ -1798,6 +1755,48 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_11"
                                                                       title:@"How much has your mood improved?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Continuous scale with images.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:NSIntegerMax
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:@"Hot"
+                                                                                                  minimumValueDescription:@"Warm"];
+        
+        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_12"
+                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Discrete scale with images.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
+        
+        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_13"
+                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
