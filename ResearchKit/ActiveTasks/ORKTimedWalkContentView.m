@@ -68,10 +68,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)setImage:(UIImage *)image {
     _image = image;
     self.imageView.image = image;
