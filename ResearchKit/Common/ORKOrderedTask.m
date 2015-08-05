@@ -863,7 +863,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                     numberOfDisks:(int)numberOfDisks
+                                     numberOfDisks:(NSUInteger)numberOfDisks
                                            options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
