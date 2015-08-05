@@ -115,7 +115,7 @@ ORK_AVAILABLE_DECL
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
  specified `graphView`.
 */
-- (ORKRangePoint *)graphView:(ORKGraphView *)graphView pointForForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKRangePoint *)graphView:(ORKGraphView *)graphView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @optional
 /**

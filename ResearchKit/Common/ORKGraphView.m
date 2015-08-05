@@ -227,8 +227,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_yAxisPoints removeAllObjects];
     _hasDataPoint = NO;
     for (int i = 0; i < [self numberOfPointsinPlot:plotIndex]; i++) {
-        if ([_dataSource respondsToSelector:@selector(graphView:pointForForPointIndex:plotIndex:)]) {
-            ORKRangePoint *value = [self.dataSource graphView:self pointForForPointIndex:i plotIndex:plotIndex];
+        if ([_dataSource respondsToSelector:@selector(graphView:pointForPointIndex:plotIndex:)]) {
+            ORKRangePoint *value = [self.dataSource graphView:self pointForPointIndex:i plotIndex:plotIndex];
             [_dataPoints addObject:value];
             if (!value.isUnset) {
                 _hasDataPoint = YES;
