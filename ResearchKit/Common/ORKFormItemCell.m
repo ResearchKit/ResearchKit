@@ -450,6 +450,7 @@ static const CGFloat kHMargin = 15.0;
     self.textField.autocapitalizationType = answerFormat.autocapitalizationType;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
+    self.textField.secureTextEntry = answerFormat.secureTextEntry;
 
     [self answerDidChange];
 }
@@ -663,6 +664,7 @@ static const CGFloat kHMargin = 15.0;
         _textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         _textView.keyboardType = textAnswerFormat.keyboardType;
+        _textView.secureTextEntry = textAnswerFormat.secureTextEntry;
     } else {
         _maxLength = 0;
     }
