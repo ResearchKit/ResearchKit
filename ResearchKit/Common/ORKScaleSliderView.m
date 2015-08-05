@@ -78,8 +78,9 @@
         if ([[formatProvider minimumImage] isKindOfClass:[UIImage class]]) {
             self.leftRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
             leftRangeView = self.leftRangeImageView;
-
         } else {
+            self.leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            self.leftRangeLabel.textAlignment = NSTextAlignmentCenter;
             self.leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
             leftRangeView = self.leftRangeLabel;
         }
@@ -88,6 +89,8 @@
             self.rightRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
             rightRangeView = self.rightRangeImageView;
         } else {
+            self.rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            self.rightRangeLabel.textAlignment = NSTextAlignmentCenter;
             self.rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
             rightRangeView = self.rightRangeLabel;
         }
@@ -112,15 +115,11 @@
         rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.slider.translatesAutoresizingMaskIntoConstraints = NO;
-        self.leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.leftRangeImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.rightRangeImageView.translatesAutoresizingMaskIntoConstraints = NO;
         self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(_slider,leftRangeView,rightRangeView,_valueLabel,_leftRangeDescriptionLabel,_rightRangeDescriptionLabel);
+        NSDictionary *views = NSDictionaryOfVariableBindings(_slider, leftRangeView, rightRangeView, _valueLabel, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
         
         if ([formatProvider isVertical]) {
             // Vertical slider constraints
@@ -279,16 +278,10 @@
         self.slider.contentMode = UIViewContentModeRedraw;
         [self addSubview:_slider];
         
-        self.leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-        self.leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-        
         self.leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
         self.leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
         self.leftRangeDescriptionLabel.numberOfLines = -1;
         [self addSubview:_leftRangeDescriptionLabel];
-        
-        self.rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-        self.rightRangeLabel.textAlignment = NSTextAlignmentCenter;
         
         self.rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
         self.rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
