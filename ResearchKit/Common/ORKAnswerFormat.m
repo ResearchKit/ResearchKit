@@ -1698,6 +1698,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
     fmt->_emailAddress = _emailAddress;
+    fmt->_secureTextEntry = _secureTextEntry;
     return fmt;
 }
 
@@ -1753,6 +1754,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
         ORK_DECODE_BOOL(aDecoder, emailAddress);
+        ORK_DECODE_BOOL(aDecoder, secureTextEntry);
     }
     return self;
 }
@@ -1766,6 +1768,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
     ORK_ENCODE_BOOL(aCoder, emailAddress);
+    ORK_ENCODE_BOOL(aCoder, secureTextEntry);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1783,7 +1786,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines &&
-             self.isEmailAddress == castObject.isEmailAddress));
+             self.isEmailAddress == castObject.isEmailAddress) &&
+             self.secureTextEntry == castObject.secureTextEntry);
 }
 
 @end
