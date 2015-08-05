@@ -631,7 +631,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     }
     
     private var towerOfHanoiTask: ORKTask {
-        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: [])
     }
     
     private var exampleSuccessSound: UInt32 {
