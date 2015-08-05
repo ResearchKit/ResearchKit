@@ -34,7 +34,6 @@
 
 static const CGFloat kArrowWidth = 8;
 static const CGFloat kArrowLineWidth = 4;
-static const CGFloat kArrowSpacing = 0;
 
 
 @interface ORKArrowView : UIView
@@ -175,29 +174,27 @@ static const CGFloat kArrowSpacing = 0;
         _constraints = nil;
     }
     
-    NSMutableArray *constraints = [NSMutableArray array];
+    NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_leftArrow, _middleArrow, _rightArrow);
-    NSDictionary *metrics = @{@"arrowSpacing" : @(kArrowSpacing)};
     
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_leftArrow]-(arrowSpacing)-[_middleArrow]-(arrowSpacing)-[_rightArrow]|"
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_leftArrow][_middleArrow][_rightArrow]|"
                                              options:NSLayoutFormatAlignAllCenterY
-                                             metrics:metrics
-                                               views:views]];
+                                             metrics:nil views:views]];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self.middleArrow
-                                                        attribute:NSLayoutAttributeCenterY
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeCenterY
-                                                       multiplier:1
-                                                         constant:0]];
+    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.middleArrow
+                                                             attribute:NSLayoutAttributeCenterY
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self
+                                                             attribute:NSLayoutAttributeCenterY
+                                                            multiplier:1
+                                                              constant:0]];
     
-    _constraints = constraints;
-    [self addConstraints:_constraints];
+    self.constraints = constraintsArray;
+    [self addConstraints:self.constraints];
     
-    [NSLayoutConstraint activateConstraints:constraints];
+    [NSLayoutConstraint activateConstraints:self.constraints];
     [super updateConstraints];
 }
 

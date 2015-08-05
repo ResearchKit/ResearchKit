@@ -34,8 +34,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ORKHolePegTestContentViewDelegate;
+
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) id<ORKHolePegTestContentViewDelegate> delegate;
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
+@end
+
+@protocol ORKHolePegTestContentViewDelegate <NSObject>
+
+- (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView;
 
 @end
 

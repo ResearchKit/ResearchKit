@@ -36,7 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, ORKHolePegType) {
     ORKHolePegTypeHole,
-    ORKHolePegTypePeg
+    ORKHolePegTypePeg,
+    ORKHolePegTypeSuccess
 } ORK_ENUM_AVAILABLE;
 
 @protocol ORKHolePegTestPegViewDelegate;
@@ -52,7 +53,8 @@ ORK_CLASS_AVAILABLE
 
 @protocol ORKHolePegTestPegViewDelegate <NSObject>
 
-- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success;
+- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView;
+- (void)pegViewMoveEnded:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success;
 
 @end
 

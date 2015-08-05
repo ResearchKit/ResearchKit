@@ -36,9 +36,11 @@
 #import "ORKActiveStepView.h"
 
 
-@interface ORKHolePegTestStepViewController ()
+@interface ORKHolePegTestStepViewController () <ORKHolePegTestContentViewDelegate>
 
 @property (nonatomic, strong) ORKHolePegTestContentView *holePegTestContentView;
+
+@property (nonatomic, assign) NSUInteger successes;
 
 @end
 
@@ -64,11 +66,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.activeStepView.stepViewFillsAvailableSpace = YES;
+    self.successes = 0;
+    
     self.holePegTestContentView = [[ORKHolePegTestContentView alloc] init];
+    self.holePegTestContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestContentView;
+    self.activeStepView.stepViewFillsAvailableSpace = YES;
     
     NSLog(@"results: %@", [((ORKChoiceQuestionResult *)[[self.taskViewController.result stepResultForStepIdentifier:@"hole.peg.test.question"].results firstObject]).choiceAnswers firstObject]);
+}
+
+- (void)start {
+    [self.holePegTestContentView setProgress:0.001 animated:NO];
+    [super start];
+}
+
+#pragma mark - hole peg test content view delegate
+
+- (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView {
+    self.successes++;
+    [holePegTestContentView setProgress:(self.successes / 9.0f) animated:YES];
 }
 
 @end

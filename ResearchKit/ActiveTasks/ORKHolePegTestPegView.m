@@ -36,6 +36,26 @@ static const UIEdgeInsets kPegViewMargins = (UIEdgeInsets){22, 22, 22, 22};
 static const CGFloat kPegViewRotation = 45.0f;
 
 
+static UIBezierPath *ORKCheckBezierPath() {
+    UIBezierPath *bezierPath = UIBezierPath.bezierPath;
+    [bezierPath moveToPoint: CGPointMake(11.6, 19)];
+    [bezierPath addCurveToPoint: CGPointMake(11.1, 18.8) controlPoint1: CGPointMake(11.4, 19) controlPoint2: CGPointMake(11.2, 18.9)];
+    [bezierPath addLineToPoint: CGPointMake(7.5, 15.5)];
+    [bezierPath addCurveToPoint: CGPointMake(7.5, 14.4) controlPoint1: CGPointMake(7.2, 15.2) controlPoint2: CGPointMake(7.2, 14.7)];
+    [bezierPath addCurveToPoint: CGPointMake(8.6, 14.4) controlPoint1: CGPointMake(7.8, 14.1) controlPoint2: CGPointMake(8.3, 14.1)];
+    [bezierPath addLineToPoint: CGPointMake(11.6, 17.2)];
+    [bezierPath addLineToPoint: CGPointMake(19.6, 9.2)];
+    [bezierPath addCurveToPoint: CGPointMake(20.7, 9.2) controlPoint1: CGPointMake(19.9, 8.9) controlPoint2: CGPointMake(20.4, 8.9)];
+    [bezierPath addCurveToPoint: CGPointMake(20.7, 10.3) controlPoint1: CGPointMake(21, 9.5) controlPoint2: CGPointMake(21, 10)];
+    [bezierPath addLineToPoint: CGPointMake(12.2, 18.8)];
+    [bezierPath addCurveToPoint: CGPointMake(11.6, 19) controlPoint1: CGPointMake(12, 18.9) controlPoint2: CGPointMake(11.8, 19)];
+    [bezierPath closePath];
+    bezierPath.miterLimit = 4;
+    
+    return bezierPath;
+}
+
+
 @interface ORKHolePegTestPegView ()
 
 @property (nonatomic, assign) ORKHolePegType type;
@@ -43,7 +63,8 @@ static const CGFloat kPegViewRotation = 45.0f;
 @property (nonatomic, assign) CGFloat transformY;
 @property (nonatomic, assign) CGFloat initialRotation;
 @property (nonatomic, assign) CGFloat transformRotation;
-@property (nonatomic, assign, getter=isMoving) BOOL moving;
+@property (nonatomic, assign, getter = isMoving) BOOL moving;
+@property (nonatomic, assign, getter = isMoveEnded) BOOL moveEnded;
 
 @end
 
@@ -56,8 +77,9 @@ static const CGFloat kPegViewRotation = 45.0f;
 {
     self = [super init];
     if (self) {
-        if (type == ORKHolePegTypeHole) {
-            _type = ORKHolePegTypeHole;
+        if (type == ORKHolePegTypeHole ||
+            type == ORKHolePegTypeSuccess) {
+            _type = type;
             _initialRotation = 0.0f;
         } else {
             UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -79,6 +101,7 @@ static const CGFloat kPegViewRotation = 45.0f;
         self.opaque = NO;
         self.transform = CGAffineTransformMakeRotation(_initialRotation);
         self.moving = NO;
+        self.moveEnded = NO;
     }
     
     return self;
@@ -89,16 +112,8 @@ static const CGFloat kPegViewRotation = 45.0f;
     self.transform = CGAffineTransformMakeTranslation(self.transformX, self.transformY);
     self.transform = CGAffineTransformRotate(self.transform, self.transformRotation + self.initialRotation);
     
-    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:success:)]) {
-        [self.delegate pegViewDidMove:self
-                              success:^(BOOL succeded){
-                                  if (succeded) {
-                                      [self resetTransformAnimated:NO];
-                                      for (UIGestureRecognizer __block *gestureRecognizer in self.gestureRecognizers) {
-                                          gestureRecognizer.enabled = NO;
-                                      }
-                                  }
-                           }];
+    if ([self.delegate respondsToSelector:@selector(pegViewDidMove:)]) {
+        [self.delegate pegViewDidMove:self];
     }
     
     if (!self.isMoving) {
@@ -107,41 +122,62 @@ static const CGFloat kPegViewRotation = 45.0f;
     }
 }
 
-- (void)resetTransformAnimated:(BOOL)animated {
-    [UIView animateWithDuration:animated ? 0.15f : 0.0f
-                          delay:0.0f
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^(){
-                         self.transform = CGAffineTransformMakeRotation(self.initialRotation);
-                         self.transformX = 0.0f;
-                         self.transformY = 0.0f;
-                         self.transformRotation = 0.0f;
-                         self.alpha = 1.0f;
-                     }
-                     completion:^(BOOL finished){
-                         self.moving = NO;
-                     }];
+- (void)resetTransform {
+    if (!self.isMoveEnded) {
+        self.moving = NO;
+        self.moveEnded = YES;
+        
+        __block BOOL animated = NO;
+        
+        if ([self.delegate respondsToSelector:@selector(pegViewMoveEnded:success:)]) {
+            [self.delegate pegViewMoveEnded:self
+                                    success:^(BOOL succeeded){
+                                        self.moveEnded = NO;
+                                        animated = !succeeded;
+                                    }];
+        }
+        
+        [UIView animateWithDuration:animated ? 0.15f : 0.0f
+                              delay:animated ? 0.0f : 1.0f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^(){
+                             self.transform = CGAffineTransformMakeRotation(self.initialRotation);
+                             self.transformX = 0.0f;
+                             self.transformY = 0.0f;
+                             self.transformRotation = 0.0f;
+                             self.alpha = 1.0f;
+                         }
+                         completion:^(BOOL finished){
+                             self.moveEnded = NO;
+                         }];
+    }
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    CGPoint translation = [gestureRecognizer translationInView:self.superview];
-    self.transformX = translation.x;
-    self.transformY = translation.y;
-    [self updateTransform];
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self resetTransformAnimated:YES];
+    if (gestureRecognizer.numberOfTouches != 2 ||
+        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
+        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
+        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
+        [self resetTransform];
+    } else {
+        CGPoint translation = [gestureRecognizer translationInView:self.superview];
+        self.transformX = translation.x;
+        self.transformY = translation.y;
+        [self updateTransform];
     }
 }
 
 - (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
 {
-    self.transformRotation = gestureRecognizer.rotation;
-    [self updateTransform];
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [self resetTransformAnimated:YES];
+    if (gestureRecognizer.numberOfTouches != 2 ||
+        gestureRecognizer.state == UIGestureRecognizerStateEnded ||
+        gestureRecognizer.state == UIGestureRecognizerStateCancelled ||
+        gestureRecognizer.state == UIGestureRecognizerStateFailed) {
+        [self resetTransform];
+    } else {
+        self.transformRotation = gestureRecognizer.rotation;
+        [self updateTransform];
     }
 }
 
@@ -175,9 +211,11 @@ static const CGFloat kPegViewRotation = 45.0f;
         bounds = CGRectInset([self bounds], kPegViewMargins.left, kPegViewMargins.top);
         UIBezierPath *pegPath = [UIBezierPath bezierPathWithOvalInRect:bounds];
         [pegPath fill];
-    } else {
+    } else if (self.type == ORKHolePegTypePeg) {
         CGContextFillRect(context, verticalRect);
         CGContextFillRect(context, horizontalRect);
+    } else {
+        [ORKCheckBezierPath() fill];
     }
     
     CGContextRestoreGState(context);
