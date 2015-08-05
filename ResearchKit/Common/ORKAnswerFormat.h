@@ -1019,6 +1019,13 @@ ORK_CLASS_AVAILABLE
  */
 @property UIKeyboardType keyboardType;
 
+/**
+ Identifies whether the text object should hide the text being entered.
+ 
+ By default, the value of this property is NO.
+ */
+@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+
 @end
 
 

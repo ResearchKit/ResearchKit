@@ -44,8 +44,7 @@ static const NSUInteger kMaximumNumberOfDisks = 8;
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.optional = YES;
-        self.numberOfDisks = 3;
+        [self commonInit];
     }
     return self;
 }
@@ -53,9 +52,45 @@ static const NSUInteger kMaximumNumberOfDisks = 8;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.optional = YES;
+        [self commonInit];
     }
     return self;
+}
+
+- (void)commonInit {
+    self.optional = YES;
+    self.numberOfDisks = 3;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, numberOfDisks);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, numberOfDisks);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTowerOfHanoiStep *step = [super copyWithZone:zone];
+    step.numberOfDisks = self.numberOfDisks;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.numberOfDisks == castObject.numberOfDisks));
 }
 
 - (void)validateParameters {
