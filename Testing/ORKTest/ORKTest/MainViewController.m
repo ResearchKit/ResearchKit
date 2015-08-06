@@ -246,7 +246,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showStepNavigationTask:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Step Navigation Task" forState:UIControlStateNormal];
+        [button setTitle:@"Navigable Ordered Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"step"];
         buttons[buttonKeys.lastObject] = button;
     }
@@ -434,7 +434,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
                                                 numberOfDisks:5
                                                       options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
-        return [self makeStepNavigationTask];
+        return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
     }
@@ -2028,15 +2028,35 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [superview addSubview:self.view];
 }
 
-#pragma mark - Step navigation task
+#pragma mark - Navigable Ordered Task
 
-- (id<ORKTask>)makeStepNavigationTask {
+- (id<ORKTask>)makeNavigableOrderedTask {
     NSMutableArray *steps = [NSMutableArray new];
     
     ORKAnswerFormat *answerFormat = nil;
     ORKStep *step = nil;
+    NSArray *textChoices = nil;
     
-    NSArray *textChoices =
+    // Form step
+    textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Good" value:@"good"],
+      [ORKTextChoice choiceWithText:@"Bad" value:@"bad"]
+      ];
+
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    
+    ORKFormItem *formItemFeeling = [[ORKFormItem alloc] initWithIdentifier:@"formFeeling" text:@"How do you feel" answerFormat:answerFormat];
+    ORKFormItem *formItemMood = [[ORKFormItem alloc] initWithIdentifier:@"formMood" text:@"How is your mood" answerFormat:answerFormat];
+    
+    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"introForm"];
+    formStep.optional = NO;
+    formStep.formItems = @[ formItemFeeling, formItemMood ];
+    [steps addObject:formStep];
+
+    // Question steps
+    textChoices =
     @[
       [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
       [ORKTextChoice choiceWithText:@"Dizziness" value:@"dizziness"],
@@ -2054,6 +2074,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     step.optional = NO;
     [steps addObject:step];
 
+    // Instruction steps
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"blank"];
     step.title = @"This step is intentionally left blank (you should not see it)";
     [steps addObject:step];
@@ -2070,6 +2091,10 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     step.title = @"Your symptom is not a headache";
     [steps addObject:step];
 
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"survey_skipped"];
+    step.title = @"Please come back to this survey when you don't feel good or your mood is low.";
+    [steps addObject:step];
+
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
     step.title = @"You have finished the task";
     [steps addObject:step];
@@ -2082,10 +2107,24 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
                                                                                   steps:steps];
     
     // Build navigation rules
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+
+    // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
+    NSPredicate *predicateGoodFeeling = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"formFeeling"
+                                                                                                  expectedString:@"good"];
+    NSPredicate *predicateGoodMood = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"formMood"
+                                                                                               expectedString:@"good"];
+    NSPredicate *predicateGoodMoodAndFeeling = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateGoodFeeling, predicateGoodMood]];
+    
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateGoodMoodAndFeeling ]
+                                                          destinationStepIdentifiers:@[ @"survey_skipped" ] ];
+    
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"introForm"];
+
     
     // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
-    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
-    // the regular ORKOrderedTask order applies).
+    // Otherwise, default to going to next step (the regular ORKOrderedTask order applies
+    //  when the defaultStepIdentifier argument is omitted).
     
     // User chose headache at the symptom step
     // Equivalent to:
@@ -2098,9 +2137,8 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     // User didn't chose headache at the symptom step
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
 
-    ORKPredicateStepNavigationRule *predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
-                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
+                                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
@@ -2138,6 +2176,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"survey_skipped"];
 
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"end"];
