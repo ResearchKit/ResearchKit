@@ -30,6 +30,9 @@
 
 
 #import "ORKReviewStepViewController.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKReviewStep.h"
+#import "ORKTask.h"
 
 
 @interface ORKReviewStepViewController ()
@@ -37,5 +40,45 @@
 @end
 
 @implementation ORKReviewStepViewController
+
+- (nonnull instancetype)initWithStep:(ORKStep *)step {
+    self = [super initWithStep:step];
+    if (self) {
+        _reviewDirection = ORKReviewStepViewControllerReviewDirectionReverse;
+    }
+    return self;
+}
+
+- (nonnull instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _reviewDirection = ORKReviewStepViewControllerReviewDirectionReverse;
+    }
+    return self;
+}
+
+- (void)discoverStepsWithResult:(ORKTaskResult *)result {
+    ORKReviewStep *reviewStep = (ORKReviewStep*) self.step;
+    if (reviewStep && result) {
+        NSMutableArray *steps = [NSMutableArray alloc];
+        ORKStep *nextStep = self.step;
+        do {
+            switch (_reviewDirection) {
+                case ORKReviewStepViewControllerReviewDirectionForward:
+                    nextStep = [[reviewStep task] stepAfterStep:nextStep withResult:result];
+                    break;
+                case ORKReviewStepViewControllerReviewDirectionReverse:
+                    nextStep = [[reviewStep task] stepBeforeStep:nextStep withResult:result];
+                    break;
+            }
+            if (nextStep != nil && ![nextStep isKindOfClass:[ORKReviewStep class]]) {
+                [steps addObject:nextStep];
+            }
+        } while (nextStep != nil && ![nextStep isKindOfClass:[ORKReviewStep class]]);
+        _steps = [steps copy];
+    }
+}
+
+//TODO: state restoration
 
 @end

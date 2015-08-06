@@ -32,19 +32,19 @@
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKResult.h>
 
-NS_ASSUME_NONNULL_BEGIN
 
+NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStep : ORKStep
 
-@property (nonatomic, copy, readonly, nullable) NSArray *steps;
+@property (nonatomic, readonly, nullable) NSArray *steps;
 
-@property (nonatomic, copy, readonly, nullable) id<ORKTaskResultSource> resultSource;
+@property (nonatomic, readonly, nullable) id<ORKTaskResultSource> resultSource;
 
-- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
-                             steps:(nonnull NSArray *)steps
-                      resultSource:(nonnull id<ORKTaskResultSource>)resultSource;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             steps:(NSArray *)steps
+                      resultSource:(id<ORKTaskResultSource>)resultSource;
 
 @end
 

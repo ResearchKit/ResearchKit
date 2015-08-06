@@ -31,10 +31,14 @@
 
 #import "ORKReviewStep.h"
 #import "ORKHelpers.h"
+#import "ORKReviewStepViewController.h"
+
 
 @implementation ORKReviewStep
 
-- (nonnull instancetype)initWithIdentifier:(nonnull NSString *)identifier steps:(nullable NSArray *)steps resultSource:(nonnull id<ORKTaskResultSource>)resultSource {
+- (nonnull instancetype)initWithIdentifier:(NSString *)identifier
+                                     steps:(NSArray *)steps
+                              resultSource:(id<ORKTaskResultSource>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
         _steps = steps;
@@ -43,22 +47,34 @@
     return self;
 }
 
-- (nonnull instancetype)initWithIdentifier:(nonnull NSString *)identifier {
+- (nonnull instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _steps = NULL;
-        _resultSource = NULL;
+        _steps = nil;
+        _resultSource = nil;
     }
     return self;
 }
 
-- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
++ (Class)stepViewControllerClass {
+    return [ORKReviewStepViewController class];
+}
+
+- (nonnull instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
-        ORK_DECODE_OBJ(aDecoder, resultSource);
     }
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, steps);
+}
+
+- (BOOL)isEqual:(id)object {
+    __typeof(self) castObject = object;
+    return [super isEqual:object] && ORKEqualObjects(self.steps, castObject.steps) && ORKEqualObjects(self.resultSource, castObject.resultSource);
+}
 @end

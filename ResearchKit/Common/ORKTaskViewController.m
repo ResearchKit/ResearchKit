@@ -42,12 +42,14 @@
 #import "ORKTaskViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
+#import "ORKReviewStepViewController.h"
 
 #import "ORKActiveStep.h"
 #import "ORKQuestionStep.h"
 #import "ORKVisualConsentStep.h"
 #import "ORKInstructionStep.h"
 #import "ORKFormStep.h"
+#import "ORKReviewStep.h"
 #import "ORKStep_Private.h"
 #import "ORKHelpers.h"
 #import "ORKObserver.h"
@@ -968,9 +970,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (ORKStep *)prevStep {
-    ORKStep *step = nil;
+    ORKStep *step = [self popStepFromNavigationStack];
     
-    if ([self.task respondsToSelector:@selector(stepBeforeStep:withResult:)]) {
+    if (step == nil && [self.task respondsToSelector:@selector(stepBeforeStep:withResult:)]) {
         step = [self.task stepBeforeStep:self.currentStepViewController.step withResult:[self result]];
     }
     
@@ -1022,6 +1024,20 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         stepViewController.restorationIdentifier = step.identifier;
         stepViewController.restorationClass = stepViewControllerClass;
         
+        if ([stepViewController isKindOfClass:[ORKReviewStepViewController class]]) {
+            ORKReviewStepViewController *reviewStepViewController = (ORKReviewStepViewController*) stepViewController;
+            if ([reviewStepViewController.step isKindOfClass:[ORKReviewStep class]]) {
+                ORKReviewStep *reviewStep = (ORKReviewStep*) reviewStepViewController.step;
+                if (reviewStep.steps != NULL) {
+                    reviewStepViewController.steps = reviewStep.steps;
+                } else {
+                    [reviewStepViewController discoverStepsWithResult:self.result];
+                }
+                reviewStepViewController.resultSource = self.result;
+                reviewStepViewController.reviewDelegate = self;
+            }
+        }
+        
     } else if (![stepViewController isKindOfClass:[ORKStepViewController class]]) {
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"View controller should be of class %@", [ORKStepViewController class]] userInfo:@{@"viewController": stepViewController}];
     }
@@ -1048,6 +1064,22 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (BOOL)shouldDisplayProgressLabel {
     return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)];
+}
+
+- (void)pushStepOnNavigationStack:(ORKStep *)step {
+    NSMutableArray *steps = [[NSMutableArray alloc] initWithArray:self.navigationStack];
+    [steps addObject:step];
+    self.navigationStack = [steps copy];
+}
+
+- (ORKStep *)popStepFromNavigationStack {
+    NSMutableArray *steps = [[NSMutableArray alloc] initWithArray:self.navigationStack];
+    ORKStep *step = [steps lastObject];
+    if (step) {
+        [steps removeLastObject];
+        self.navigationStack = [steps copy];
+    }
+    return step;
 }
 
 #pragma mark - internal action Handlers
@@ -1243,6 +1275,21 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (ORKStep *)stepAfterStep:(ORKStep *)step {
     return [self.task stepAfterStep:step withResult:[self result]];
+}
+
+#pragma mark - ORKReviewStepViewControllerDelegate
+
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController canChangeStep:(ORKStep *)step {
+    return reviewStepViewController.step.task == step.task;
+}
+
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController canReviewStep:(ORKStep *)step {
+    return YES;
+}
+
+- (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController reviewStep:(ORKStep *)step {
+    ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+    [self showViewController:stepViewController goForward:YES animated:YES];
 }
 
 #pragma mark - UIStateRestoring

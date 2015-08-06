@@ -39,24 +39,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKReviewStepViewControllerDelegate <NSObject>
 
-- (BOOL)reviewStepViewController:(nonnull ORKReviewStepViewController *)reviewStepViewController
-                shouldReviewStep:(nonnull ORKStep *)step;
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                   canReviewStep:(ORKStep *)step;
 
-- (BOOL)reviewStepViewController:(nonnull ORKReviewStepViewController *)reviewStepViewController
-                   canChangeStep:(nonnull ORKStep *)step;
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                   canChangeStep:(ORKStep *)step;
 
-- (BOOL)reviewStepViewController:(nonnull ORKReviewStepViewController *)reviewStepViewController
-                  willReviewStep:(nonnull ORKStep *)step;
+- (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                      reviewStep:(ORKStep *)step;
 @end
+
+typedef NS_ENUM(NSInteger, ORKReviewStepViewControllerReviewDirection) {
+    
+    ORKReviewStepViewControllerReviewDirectionForward,
+    
+    ORKReviewStepViewControllerReviewDirectionReverse
+} ORK_ENUM_AVAILABLE;
 
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStepViewController : ORKStepViewController
 
-@property (weak, nonatomic, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
+@property (nonatomic) ORKReviewStepViewControllerReviewDirection reviewDirection;
 
-@property (nonatomic, copy, readonly, nullable) NSArray *steps;
+@property (nonatomic, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 
-@property (nonatomic, copy, readonly, nullable) id<ORKTaskResultSource> resultSource;
+@property (nonatomic, nullable) NSArray *steps;
+
+@property (nonatomic, nullable) id<ORKTaskResultSource> resultSource;
+
+- (void)discoverStepsWithResult:(ORKTaskResult *)result;
 
 @end
 
