@@ -60,6 +60,7 @@
         self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
         self.textView.keyboardType = textAnswerFormat.keyboardType;
+        self.textView.secureTextEntry = textAnswerFormat.secureTextEntry;
     } else {
         _maxLength = 0;
     }
@@ -292,6 +293,7 @@
         self.textField.autocapitalizationType = textFormat.autocapitalizationType;
         self.textField.spellCheckingType = textFormat.spellCheckingType;
         self.textField.keyboardType = textFormat.keyboardType;
+        self.textField.secureTextEntry = textFormat.secureTextEntry;
     }
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     

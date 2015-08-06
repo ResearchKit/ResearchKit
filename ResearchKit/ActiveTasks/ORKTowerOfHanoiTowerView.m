@@ -166,6 +166,10 @@ static const CGFloat kBaseSpacing = 10;
     [super updateConstraints];
 }
 
+- (void)tintColorDidChange {
+    [self reloadData];
+}
+
 #pragma Mark -- Public
 
 - (void)reloadData {

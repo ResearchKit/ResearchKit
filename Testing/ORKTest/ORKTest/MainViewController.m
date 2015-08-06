@@ -58,6 +58,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
+static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
@@ -266,6 +267,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         buttons[buttonKeys.lastObject] = button;
     }
 
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showCustomNavigationItemTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Custom Navigation Item" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"customNavigationItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         obj.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:obj];
@@ -426,6 +435,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                       options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
+    } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
+        return [self makeCustomNavigationItemTask];
     }
     return nil;
 }
@@ -508,6 +519,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
      for state restoration of a ResearchKit framework task VC.
      */
     _taskViewController.restorationIdentifier = [task identifier];
+    
+    if ([[task identifier] isEqualToString:CustomNavigationItemTaskIdentifier]) {
+        _taskViewController.showsProgressInNavigationBar = NO;
+    }
     
     [self presentViewController:_taskViewController animated:YES completion:nil];
 }
@@ -800,6 +815,20 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
                                                                       title:@"What is your email?"
                                                                      answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A text question demos secureTextEntry feature
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:10];
+        format.secureTextEntry = YES;
+        format.multipleLines = NO;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005sec"
+                                                                      title:@"What is your passcode?"
+                                                                     answer:format];
+        step.placeholder = @"Tap your passcode here";
         [steps addObject:step];
     }
     
@@ -1296,6 +1325,17 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
                                                            answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
             item.placeholder = @"Your message (limit 20 characters).";
+            [items addObject:item];
+        }
+        
+        {
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
+            format.secureTextEntry = YES;
+            format.multipleLines = NO;
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Passcode"
+                                                           answerFormat:format];
+            item.placeholder = @"Enter Passcode";
             [items addObject:item];
         }
         
@@ -2105,6 +2145,23 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     return task;
 }
 
+#pragma mark - Custom navigation item task
+
+- (id<ORKTask>)makeCustomNavigationItemTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step1"];
+    step1.title = @"Custom Navigation Item Title";
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step2"];
+    step2.title = @"Custom Navigation Item Title View";
+    [steps addObject: step1];
+    [steps addObject: step2];
+    return [[ORKOrderedTask alloc] initWithIdentifier: CustomNavigationItemTaskIdentifier steps:steps];
+}
+
+- (IBAction)showCustomNavigationItemTask:(id)sender {
+    [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
+}
+
 #pragma mark - Helpers
 
 /*
@@ -2405,6 +2462,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                                                                             target:stepViewController.backButtonItem.target
                                                                             action:stepViewController.backButtonItem.action];
         stepViewController.cancelButtonItem.title = @"Cancel1";
+    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step1"]) {
+        stepViewController.navigationItem.title = @"Custom title";
+    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step2"]) {
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        [items addObject:@"Item1"];
+        [items addObject:@"Item2"];
+        [items addObject:@"Item3"];
+        stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
     }
 }
 

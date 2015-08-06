@@ -185,7 +185,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, moves);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, moves, ORKTowerOfHanoiMove);
         ORK_DECODE_BOOL(aDecoder, puzzleWasSolved);
     }
     return self;

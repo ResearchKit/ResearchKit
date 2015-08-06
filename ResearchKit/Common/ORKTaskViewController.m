@@ -907,7 +907,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
     NSString *progressLabel = nil;
-    if (self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)]) {
+    if ([self shouldDisplayProgressLabel]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
 
         if (progress.total > 0) {
@@ -981,6 +981,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _pageViewController.toolbarItems = viewController.toolbarItems;
     _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
     _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
+    if (![self shouldDisplayProgressLabel]) {
+        _pageViewController.navigationItem.title = viewController.navigationItem.title;
+        _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+    }
 }
 
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
@@ -1040,6 +1044,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     _stepViewControllerObserver = [[ORKViewControllerToolbarObserver alloc] initWithTargetViewController:stepViewController delegate:self];
     return stepViewController;
+}
+
+- (BOOL)shouldDisplayProgressLabel {
+    return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)];
 }
 
 #pragma mark - internal action Handlers
