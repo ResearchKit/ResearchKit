@@ -38,6 +38,8 @@ ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestStep : ORKActiveStep
 
 @property (nonatomic, assign) int numberOfHoles;
+@property (nonatomic, assign) double translationThreshold;
+@property (nonatomic, assign) double rotationThreshold;
 
 @end
 

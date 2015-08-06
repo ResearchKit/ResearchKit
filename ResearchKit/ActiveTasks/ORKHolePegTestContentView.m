@@ -35,12 +35,7 @@
 #import "ORKDirectionView.h"
 
 
-static const CGFloat ORKPegViewTranslationSensibility = 6.0f;
-static const CGFloat ORKPegViewRotationSensibility = 12.0f;
-
-
 #define degreesToRadians(degrees) ((degrees) / 180.0 * M_PI)
-// #define LAYOUT_DEBUG 1
 
 
 @interface ORKHolePegTestContentView () <ORKHolePegTestPegViewDelegate>
@@ -80,10 +75,6 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
         
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self setNeedsUpdateConstraints];
-        
-#if LAYOUT_DEBUG
-        self.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
-#endif
     }
     return self;
 }
@@ -196,10 +187,10 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
 }
 
 - (BOOL)holeViewContainsPegView:(ORKHolePegTestPegView *)pegView {
-    CGRect detectionFrame = CGRectMake(CGRectGetMidX(self.holeView.frame) - ORKPegViewTranslationSensibility,
-                                       CGRectGetMidY(self.holeView.frame) - ORKPegViewTranslationSensibility,
-                                       2 * ORKPegViewTranslationSensibility,
-                                       2 * ORKPegViewTranslationSensibility);
+    CGRect detectionFrame = CGRectMake(CGRectGetMidX(self.holeView.frame) - self.translationThreshold / 2,
+                                       CGRectGetMidY(self.holeView.frame) - self.translationThreshold / 2,
+                                       self.translationThreshold,
+                                       self.translationThreshold);
     
     CGPoint pegCenter = CGPointMake(CGRectGetMaxX(pegView.frame) - CGRectGetWidth(pegView.frame) / 2,
                                     CGRectGetMaxY(pegView.frame) - CGRectGetHeight(pegView.frame) / 2);
@@ -207,8 +198,8 @@ static const CGFloat ORKPegViewRotationSensibility = 12.0f;
     if (CGRectContainsPoint(detectionFrame, pegCenter)) {
         double rotation = atan2(pegView.transform.b, pegView.transform.a);
         double angle = fmod(fabs(rotation), M_PI_2);
-        if (angle > M_PI_4 - degreesToRadians(ORKPegViewRotationSensibility) &&
-            angle < M_PI_4 + degreesToRadians(ORKPegViewRotationSensibility)) {
+        if (angle > M_PI_4 - degreesToRadians(self.rotationThreshold / 2) &&
+            angle < M_PI_4 + degreesToRadians(self.rotationThreshold / 2)) {
             return YES;
         }
     }

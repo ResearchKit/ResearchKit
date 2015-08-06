@@ -925,6 +925,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 + (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(nullable NSString *)intendedUseDescription
                                     numberOfHoles:(int)numberOfHoles
+                             translationThreshold:(double)translationThreshold
+                                rotationThreshold:(double)rotationThreshold
                                         timeLimit:(NSTimeInterval)timeLimit
                                           options:(ORKPredefinedTaskOption)options {
     
@@ -976,6 +978,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
             step.numberOfHoles = numberOfHoles;
+            step.translationThreshold = translationThreshold;
+            step.rotationThreshold = rotationThreshold;
             step.shouldTintImages = YES;
             step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
 

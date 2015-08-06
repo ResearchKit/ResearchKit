@@ -421,7 +421,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text will be displayed.
  @param numberOfHoles           The number of holes to fill in.
- @param timeLimit               The time limit to complete the trials.
+ @param translationThreshold    The width and height of the hole detection area.
+ @param timeLimit               The orientation allowed to validate the peg position.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
@@ -429,6 +430,8 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(nullable NSString *)intendedUseDescription
                                     numberOfHoles:(int)numberOfHoles
+                             translationThreshold:(double)translationThreshold
+                                rotationThreshold:(double)rotationThreshold
                                         timeLimit:(NSTimeInterval)timeLimit
                                           options:(ORKPredefinedTaskOption)options;
 

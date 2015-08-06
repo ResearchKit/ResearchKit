@@ -30,6 +30,7 @@
 
 
 #import "ORKHolePegTestStepViewController.h"
+#import "ORKHolePegTestStep.h"
 #import "ORKHolePegTestContentView.h"
 #import "ORKActiveStepViewController_internal.h"
 #import "ORKStepViewController_internal.h"
@@ -55,6 +56,10 @@
     return self;
 }
 
+- (ORKHolePegTestStep *)holePegTestStep {
+    return (ORKHolePegTestStep *)self.step;
+}
+
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
     
@@ -69,6 +74,8 @@
     self.successes = 0;
     
     self.holePegTestContentView = [[ORKHolePegTestContentView alloc] init];
+    self.holePegTestContentView.translationThreshold = [self holePegTestStep].translationThreshold;
+    self.holePegTestContentView.rotationThreshold = [self holePegTestStep].rotationThreshold;
     self.holePegTestContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
@@ -77,7 +84,7 @@
 }
 
 - (void)start {
-    [self.holePegTestContentView setProgress:0.001 animated:NO];
+    [self.holePegTestContentView setProgress:0.001f animated:NO];
     [super start];
 }
 
@@ -90,9 +97,14 @@
 
 - (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView {
     self.successes++;
-    [holePegTestContentView setProgress:(self.successes / 9.0f) animated:YES];
+    
+    [holePegTestContentView setProgress:((CGFloat)self.successes / [self holePegTestStep].numberOfHoles) animated:YES];
     [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+    
+    if (self.successes >= [self holePegTestStep].numberOfHoles) {
+        [self finish];
+    }
 }
 
 @end
