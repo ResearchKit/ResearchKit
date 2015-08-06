@@ -75,7 +75,7 @@
         UIView *rightRangeView = nil;
         UIView *leftRangeView = nil;
         
-        if ([[formatProvider minimumImage] isKindOfClass:[UIImage class]]) {
+        if ([formatProvider minimumImage]) {
             self.leftRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
             leftRangeView = self.leftRangeImageView;
         } else {
@@ -85,7 +85,7 @@
             leftRangeView = self.leftRangeLabel;
         }
         
-        if ([[formatProvider maximumImage] isKindOfClass:[UIImage class]]) {
+        if ([formatProvider maximumImage]) {
             self.rightRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
             rightRangeView = self.rightRangeImageView;
         } else {
