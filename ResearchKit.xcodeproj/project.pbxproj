@@ -369,7 +369,7 @@
 		B1A860F61A9693C400EA57B7 /* consent_06@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E81A9693C400EA57B7 /* consent_06@3x.m4v */; };
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* Localizable.strings */; };
-		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B8760F291AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h */; };
 		B8760F2C1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8760F2A1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.m */; };
 		BC01B0FB1B0EB99700863803 /* ORKTintedImageView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BC01B0FA1B0EB99700863803 /* ORKTintedImageView_Internal.h */; };
@@ -2434,6 +2434,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2451,6 +2452,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
+				TOOLCHAINS = default;
 			};
 			name = Debug;
 		};
@@ -2481,6 +2483,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
+				TOOLCHAINS = default;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2505,6 +2508,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -2526,6 +2530,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -2553,6 +2558,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "apple.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2580,6 +2586,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "apple.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ResearchKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

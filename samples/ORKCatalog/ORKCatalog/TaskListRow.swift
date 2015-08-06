@@ -32,12 +32,32 @@ import ResearchKit
 import AudioToolbox
 
 /**
+    Wraps a SystemSoundID.
+
+    A class is used in order to provide appropriate cleanup when the sound is
+    no longer needed.
+*/
+class SystemSound {
+    var soundID: SystemSoundID = 0
+    
+    init?(soundURL: NSURL) {
+        if AudioServicesCreateSystemSoundID(soundURL as CFURLRef, &soundID) != noErr {
+           return nil
+        }
+    }
+    
+    deinit {
+        AudioServicesDisposeSystemSoundID(soundID)
+    }
+}
+
+/**
     An enum that corresponds to a row displayed in a `TaskListViewController`.
 
     Each of the tasks is composed of one or more steps giving examples of the
     types of functionality supported by the ResearchKit framework.
 */
-enum TaskListRow: Int, Printable {
+enum TaskListRow: Int, CustomStringConvertible {
     case ScaleQuestion = 0
     case NumericQuestion
     case TimeOfDayQuestion
@@ -71,15 +91,14 @@ enum TaskListRow: Int, Printable {
             cases represented by `caseIndex`.
         */
         var caseIndex = 0
-        let caseGenerator = GeneratorOf { TaskListRow(rawValue: caseIndex++) }
-
-        // Create a sequence that will consume the generator to create an array.
-        let caseSequence = SequenceOf(caseGenerator)
+        let caseGenerator: AnyGenerator<TaskListRow> = anyGenerator { _ in
+             return TaskListRow(rawValue: caseIndex++)
+        }
         
-        return Array(caseSequence)
+        return Array(caseGenerator)
     }
     
-    // MARK: Printable
+    // MARK: CustomStringConvertible
     
     var description: String {
         switch self {
@@ -157,8 +176,8 @@ enum TaskListRow: Int, Printable {
     // MARK: Types
 
     /**
-        Every step and task in the ResearchKit framework has to have an identifier. Within a
-        task, the step identifiers should be unique.
+        Every step and task in the ResearchKit framework has to have an identifier.
+        Within a task, the step identifiers should be unique.
 
         Here we use an enum to ensure that the identifiers are kept unique. Since
         the enum has a raw underlying type of a `String`, the compiler can determine
@@ -332,16 +351,12 @@ enum TaskListRow: Int, Printable {
     
     /// This task presents two options for questions displaying a scale control.
     private var scaleQuestionTask: ORKTask {
-        var steps = [ORKStep]()
-        
         // The first step is a scale control with 10 discrete ticks.
         let step1AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
         let questionStep1 = ORKQuestionStep(identifier: Identifier.DiscreteScaleQuestionStep.rawValue, title: exampleQuestionText, answer: step1AnswerFormat)
         
         questionStep1.text = exampleDetailText
-        
-        steps += [questionStep1]
         
         // The second step is a scale control that allows continuous movement with a percent formatter.
         let step2AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
@@ -351,8 +366,6 @@ enum TaskListRow: Int, Printable {
         
         questionStep2.text = exampleDetailText
         
-        steps += [questionStep2]
-
         // The third step is a vertical scale control with 10 discrete ticks.
         let step3AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
         
@@ -360,8 +373,6 @@ enum TaskListRow: Int, Printable {
         
         questionStep3.text = exampleDetailText
         
-        steps += [questionStep3]
-
         // The fourth step is a vertical scale control that allows continuous movement.
         let step4AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(5.0, minimumValue: 1.0, defaultValue: 99.0, maximumFractionDigits: 2, vertical: true, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
         
@@ -369,9 +380,12 @@ enum TaskListRow: Int, Printable {
         
         questionStep4.text = exampleDetailText
         
-        steps += [questionStep4]
-        
-        return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: steps)
+        return ORKOrderedTask(identifier: Identifier.ScaleQuestionTask.rawValue, steps: [
+            questionStep1,
+            questionStep2,
+            questionStep3,
+            questionStep4
+        ])
     }
     
     /**
@@ -380,8 +394,6 @@ enum TaskListRow: Int, Printable {
         in the expected unit. The unit string propagates into the result object.
     */
     private var numericQuestionTask: ORKTask {
-        var steps = [ORKStep]()
-        
         // This answer format will display a unit in-line with the numeric entry field.
         let localizedQuestionStep1AnswerFormatUnit = NSLocalizedString("Your unit", comment: "")
         let questionStep1AnswerFormat = ORKAnswerFormat.decimalAnswerFormatWithUnit(localizedQuestionStep1AnswerFormatUnit)
@@ -390,18 +402,17 @@ enum TaskListRow: Int, Printable {
         
         questionStep1.text = exampleDetailText
         questionStep1.placeholder = NSLocalizedString("Your placeholder.", comment: "")
-        
-        steps += [questionStep1]
-        
+                
         // This answer format is similar to the previous one, but this time without displaying a unit.
         let questionStep2 = ORKQuestionStep(identifier: Identifier.NumericNoUnitQuestionStep.rawValue, title: exampleQuestionText, answer: ORKAnswerFormat.decimalAnswerFormatWithUnit(nil))
         
         questionStep2.text = exampleDetailText
         questionStep2.placeholder = NSLocalizedString("Placeholder without unit.", comment: "")
         
-        steps += [questionStep2]
-        
-        return ORKOrderedTask(identifier: Identifier.NumericQuestionTask.rawValue, steps: steps)
+        return ORKOrderedTask(identifier: Identifier.NumericQuestionTask.rawValue, steps: [
+            questionStep1,
+            questionStep2
+        ])
     }
 
     /// This task demonstrates a question asking for a time of day.
@@ -479,7 +490,7 @@ enum TaskListRow: Int, Printable {
     private var textQuestionTask: ORKTask {
         let answerFormat = ORKAnswerFormat.textAnswerFormat()
         
-        let step = ORKQuestionStep(identifier: Identifier.TextQuestionStep.rawValue, title: exampleQuestionText, answer: ORKAnswerFormat.textAnswerFormat())
+        let step = ORKQuestionStep(identifier: Identifier.TextQuestionStep.rawValue, title: exampleQuestionText, answer: answerFormat)
         
         step.text = exampleDetailText
         
@@ -580,12 +591,12 @@ enum TaskListRow: Int, Printable {
 
     /// This task presents the Two Finger Tapping pre-defined active task.
     private var twoFingerTappingIntervalTask: ORKTask {
-        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(Identifier.TwoFingerTappingIntervalTask.rawValue, intendedUseDescription: exampleDescription, duration: 20, options: nil)
+        return ORKOrderedTask.twoFingerTappingIntervalTaskWithIdentifier(Identifier.TwoFingerTappingIntervalTask.rawValue, intendedUseDescription: exampleDescription, duration: 20, options: [])
     }
 
     /// This task presents the Spatial Span Memory pre-defined active task.
     private var spatialSpanMemoryTask: ORKTask {
-        return ORKOrderedTask.spatialSpanMemoryTaskWithIdentifier(Identifier.SpatialSpanMemoryTask.rawValue, intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maxTests: 5, maxConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: nil)
+        return ORKOrderedTask.spatialSpanMemoryTaskWithIdentifier(Identifier.SpatialSpanMemoryTask.rawValue, intendedUseDescription: exampleDescription, initialSpan: 3, minimumSpan: 2, maximumSpan: 15, playSpeed: 1.0, maxTests: 5, maxConsecutiveFailures: 3, customTargetImage: nil, customTargetPluralName: nil, requireReversal: false, options: [])
     }
     
     /**
@@ -594,25 +605,33 @@ enum TaskListRow: Int, Printable {
         realistic durations might be several minutes each.
     */
     private var fitnessTask: ORKTask {
-        return ORKOrderedTask.fitnessCheckTaskWithIdentifier(Identifier.FitnessTask.rawValue, intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: nil)
+        return ORKOrderedTask.fitnessCheckTaskWithIdentifier(Identifier.FitnessTask.rawValue, intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: [])
     }
 
     /// This task presents the Gait and Balance pre-defined active task.
     private var shortWalkTask: ORKTask {
-        return ORKOrderedTask.shortWalkTaskWithIdentifier(Identifier.ShortWalkTask.rawValue, intendedUseDescription: exampleDescription, numberOfStepsPerLeg: 20, restDuration: 20, options: nil)
+        return ORKOrderedTask.shortWalkTaskWithIdentifier(Identifier.ShortWalkTask.rawValue, intendedUseDescription: exampleDescription, numberOfStepsPerLeg: 20, restDuration: 20, options: [])
     }
 
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
-        return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: nil)
+        return ORKOrderedTask.audioTaskWithIdentifier(Identifier.AudioTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
     }
     
+    /// An example of a custom sound being used for the reaction time task.
+    static var exampleSuccessSound: SystemSound = {
+        let soundURL = NSBundle.mainBundle().URLForResource("tap", withExtension: "aif")!
+
+        return SystemSound(soundURL: soundURL)!
+    }()
+    
+    /// This task presents the Reaction Time pre-defined active task.
     private var reactionTimeTask: ORKTask {
-        return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+        return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: TaskListRow.exampleSuccessSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }
     
     private var towerOfHanoiTask: ORKTask {
-        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: [])
     }
     
     private var exampleSuccessSound: UInt32 {
@@ -624,13 +643,11 @@ enum TaskListRow: Int, Printable {
 
     /// This task presents the Tone Audiometry pre-defined active task.
     private var toneAudiometryTask: ORKTask {
-        return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: nil)
+        return ORKOrderedTask.toneAudiometryTaskWithIdentifier(Identifier.ToneAudiometryTask.rawValue, intendedUseDescription: exampleDescription, speechInstruction: nil, shortSpeechInstruction: nil, toneDuration: 20, options: [])
     }
     
     /// This task presents the image capture step in an ordered task.
-    private var imageCaptureTask: ORKTask {
-        var steps = [ORKStep]()
-        
+    private var imageCaptureTask: ORKTask {        
         // Create the intro step.
         let instructionStep = ORKInstructionStep(identifier: Identifier.IntroStep.rawValue)
         
@@ -638,9 +655,8 @@ enum TaskListRow: Int, Printable {
         
         instructionStep.text = exampleDescription
         
-        instructionStep.image = UIImage(named: "hand_solid")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        
-        steps += [instructionStep]
+        let handSolidImage = UIImage(named: "hand_solid")!
+        instructionStep.image = handSolidImage.imageWithRenderingMode(.AlwaysTemplate)
         
         let imageCaptureStep = ORKImageCaptureStep(identifier: Identifier.ImageCaptureStep.rawValue)
         imageCaptureStep.optional = false
@@ -651,9 +667,10 @@ enum TaskListRow: Int, Printable {
         
         imageCaptureStep.templateImageInsets = UIEdgeInsets(top: 0.05, left: 0.05, bottom: 0.05, right: 0.05)
         
-        steps += [imageCaptureStep]
-        
-        return ORKOrderedTask(identifier: Identifier.ImageCaptureTask.rawValue, steps: steps)
+        return ORKOrderedTask(identifier: Identifier.ImageCaptureTask.rawValue, steps: [
+            instructionStep,
+            imageCaptureStep
+        ])
     }
 
     /**
@@ -661,8 +678,6 @@ enum TaskListRow: Int, Printable {
         survey with an introduction, a question, and a conclusion.
     */
     private var surveyTask: ORKTask {
-        var steps = [ORKStep]()
-        
         // Create the intro step.
         let instructionStep = ORKInstructionStep(identifier: Identifier.IntroStep.rawValue)
         
@@ -670,37 +685,31 @@ enum TaskListRow: Int, Printable {
         
         instructionStep.text = exampleDescription
         
-        steps += [instructionStep]
-        
         // Add a question step.
         let questionStepAnswerFormat = ORKBooleanAnswerFormat()
         
         let questionStepTitle = NSLocalizedString("Would you like to subscribe to our newsletter?", comment: "")
         let questionStep = ORKQuestionStep(identifier: Identifier.QuestionStep.rawValue, title: questionStepTitle, answer: questionStepAnswerFormat)
         
-        steps += [questionStep]
-        
         // Add a summary step.
         let summaryStep = ORKInstructionStep(identifier: Identifier.SummaryStep.rawValue)
         summaryStep.title = NSLocalizedString("Thanks", comment: "")
         summaryStep.text = NSLocalizedString("Thank you for participating in this sample survey.", comment: "")
         
-        steps += [summaryStep]
-        
-        return ORKOrderedTask(identifier: Identifier.SurveyTask.rawValue, steps: steps)
+        return ORKOrderedTask(identifier: Identifier.SurveyTask.rawValue, steps: [
+            instructionStep,
+            questionStep,
+            summaryStep
+        ])
     }
 
     /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.
     private var consentTask: ORKTask {
-        var steps = [ORKStep]()
-        
         /*
             Informed consent starts by presenting an animated sequence conveying
             the main points of your consent document.
         */
         let visualConsentStep = ORKVisualConsentStep(identifier: Identifier.VisualConsentStep.rawValue, document: consentDocument)
-        
-        steps += [visualConsentStep]
         
         let investigatorShortDescription = NSLocalizedString("Institution", comment: "")
         let investigatorLongDescription = NSLocalizedString("Institution and its partners", comment: "")
@@ -714,8 +723,6 @@ enum TaskListRow: Int, Printable {
         */
         let sharingConsentStep = ORKConsentSharingStep(identifier: Identifier.ConsentSharingStep.rawValue, investigatorShortDescription: investigatorShortDescription, investigatorLongDescription: investigatorLongDescription, localizedLearnMoreHTMLContent: localizedLearnMoreHTMLContent)
         
-        steps += [sharingConsentStep]
-        
         /*
             After the visual presentation, the consent review step displays
             your consent document and can obtain a signature from the participant.
@@ -724,7 +731,7 @@ enum TaskListRow: Int, Printable {
             This effectively tells the consent review step which signatory is
             reviewing the document.
         */
-        let signature = consentDocument.signatures!.first as! ORKConsentSignature
+        let signature = consentDocument.signatures!.first
 
         let reviewConsentStep = ORKConsentReviewStep(identifier: Identifier.ConsentReviewStep.rawValue, signature: signature, inDocument: consentDocument)
 
@@ -732,9 +739,11 @@ enum TaskListRow: Int, Printable {
         reviewConsentStep.text = loremIpsumText
         reviewConsentStep.reasonForConsent = loremIpsumText
         
-        steps += [reviewConsentStep]
-        
-        return ORKOrderedTask(identifier: Identifier.ConsentTask.rawValue, steps: steps)
+        return ORKOrderedTask(identifier: Identifier.ConsentTask.rawValue, steps: [
+            visualConsentStep,
+            sharingConsentStep,
+            reviewConsentStep
+        ])
     }
     
     /**
@@ -756,7 +765,10 @@ enum TaskListRow: Int, Printable {
         let formItem02 = ORKFormItem(identifier: Identifier.FormItem02.rawValue, text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
         formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
         
-        step.formItems = [formItem01, formItem02]
+        step.formItems = [
+            formItem01,
+            formItem02
+        ]
 
         return ORKOrderedTask(identifier: Identifier.FormTask.rawValue, steps: [step])
     }
@@ -850,13 +862,13 @@ enum TaskListRow: Int, Printable {
         var consentSections: [ORKConsentSection] = consentSectionTypes.map { contentSectionType in
             let consentSection = ORKConsentSection(type: contentSectionType)
             
-            consentSection.summary = self.loremIpsumShortText
+            consentSection.summary = loremIpsumShortText
             
             if contentSectionType == .Overview {
                 consentSection.htmlContent = htmlContentString
             }
             else {
-                consentSection.content = self.loremIpsumLongText
+                consentSection.content = loremIpsumLongText
             }
             
             return consentSection

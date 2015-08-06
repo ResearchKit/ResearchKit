@@ -87,7 +87,7 @@ ORK_CLASS_AVAILABLE
  
  Each object in the dictionary should be a `ORKStepNavigationRule` subclass.
  */
-@property (nonatomic, copy, readonly) NSDictionary *stepNavigationRules;
+@property (nonatomic, copy, readonly) NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
 
 @end
 

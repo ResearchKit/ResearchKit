@@ -66,7 +66,8 @@ static const CGFloat kBaseSpacing = 10;
 
 - (void)updateConstraints {
     if (_currentConstraints != nil) {
-        [NSLayoutConstraint deactivateConstraints:_currentConstraints];
+        [self removeConstraints:_currentConstraints];
+        _currentConstraints = nil;
     }
     NSMutableArray *newConstraints = [NSMutableArray new];
     CGFloat height = (kDiskHeight * _maximumNumberOfDisks) + (kDiskSpacing * _maximumNumberOfDisks);

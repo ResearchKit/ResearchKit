@@ -58,8 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return An initialized predicate step navigation rule.
  */
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays NS_DESIGNATED_INITIALIZER;
 
