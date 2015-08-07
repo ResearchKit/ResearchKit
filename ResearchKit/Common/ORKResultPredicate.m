@@ -50,13 +50,17 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     // Match task identifier
 
     if (taskIdentifier) {
-        [format appendString:@"SUBQUERY(SELF, $x, $x.identifier like %@"];
+        [format appendString:@"SUBQUERY(SELF, $x, ($x.identifier like %@ OR\
+         (%@.length == 0 and $x.identifier.length == 0))"];
+        [formatArgumentArray addObject:taskIdentifier];
         [formatArgumentArray addObject:taskIdentifier];
     } else {
         // If taskIdentifier is nil, ORKPredicateStepNavigationRule will substitute the
         // ORKResultPredicateTaskIdentifierSubstitutionVariableName variable by the identifier of the ongoing task
-        [format appendString:@"SUBQUERY(SELF, $x, $x.identifier like $"];
-        [format appendString:ORKResultPredicateTaskIdentifierVariableName];
+        [format appendFormat:@"SUBQUERY(SELF, $x, ($x.identifier like $%@ OR\
+         ($%@.length == 0 AND $x.identifier.length == 0))",
+         ORKResultPredicateTaskIdentifierVariableName,
+         ORKResultPredicateTaskIdentifierVariableName];
     }
     
     {
