@@ -181,6 +181,9 @@
         self.holeView.success = YES;
         success(YES);
     } else {
+        if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidFail:)]) {
+            [self.delegate holePegTestPlaceDidFail:self];
+        }
         self.holeView.success = NO;
         success(NO);
     }

@@ -107,4 +107,9 @@
     }
 }
 
+- (void)holePegTestPlaceDidFail:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
+    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+                                text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
+}
+
 @end

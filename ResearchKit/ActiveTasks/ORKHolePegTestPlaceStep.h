@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceStep : ORKActiveStep
 
+@property (nonatomic, assign) ORKSide dominantHand;
 @property (nonatomic, assign) int numberOfHoles;
 @property (nonatomic, assign) double translationThreshold;
 @property (nonatomic, assign) double rotationThreshold;

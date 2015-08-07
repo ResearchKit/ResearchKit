@@ -612,7 +612,7 @@ enum TaskListRow: Int, Printable {
     }
     
     private var holePegTestTask: ORKTask {
-        return ORKOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, numberOfHoles: 9, translationThreshold: 12, rotationThreshold: 12, timeLimit: 300, options: nil)
+        return ORKOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfHoles: 9, translationThreshold: 20, rotationThreshold: 25, timeLimit: 300, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

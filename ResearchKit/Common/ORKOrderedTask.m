@@ -925,6 +925,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 + (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(nullable NSString *)intendedUseDescription
+                                     dominantHand:(ORKSide)dominantHand
                                     numberOfHoles:(int)numberOfHoles
                              translationThreshold:(double)translationThreshold
                                 rotationThreshold:(double)rotationThreshold
@@ -978,6 +979,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.title = ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
+            step.dominantHand = dominantHand;
             step.numberOfHoles = numberOfHoles;
             step.translationThreshold = translationThreshold;
             step.rotationThreshold = rotationThreshold;
