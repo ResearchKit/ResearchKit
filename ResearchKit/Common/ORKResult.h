@@ -363,7 +363,7 @@ ORK_CLASS_AVAILABLE
 
  The channel, either left or right, for the tone associated to this sample.
  */
-@property (nonatomic, assign) ORKAudioChannel channel;
+@property (nonatomic, assign) ORKSide channel;
 
 /**
  The audio signal amplitude.

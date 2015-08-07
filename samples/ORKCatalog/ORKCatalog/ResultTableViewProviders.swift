@@ -556,7 +556,7 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
 
             if let frequency = toneSample.frequency,
                 amplitude = toneSample.amplitude {
-                    let channelName = toneSample.channel == ORKAudioChannel.Left ? "Left" : "Right"
+                    let channelName = toneSample.channel == ORKSide.Left ? "Left" : "Right"
 
                     text = "\(frequency) \(channelName)"
                     detail = "\(amplitude)"

@@ -60,7 +60,7 @@
 @public
     double _frequency;
     double _theta;
-    ORKAudioChannel _activeChannel;
+    ORKSide _activeChannel;
     BOOL _playsStereo;
     double _fadeInFactor;
     NSTimeInterval _fadeInDuration;
@@ -179,7 +179,7 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
 }
 
 - (void)playSoundAtFrequency:(double)playFrequency
-                   onChannel:(ORKAudioChannel)playChannel
+                   onChannel:(ORKSide)playChannel
               fadeInDuration:(NSTimeInterval)duration {
     _frequency = playFrequency;
     _activeChannel = playChannel;

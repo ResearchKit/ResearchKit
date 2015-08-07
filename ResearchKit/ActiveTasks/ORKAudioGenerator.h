@@ -80,7 +80,7 @@ ORK_CLASS_AVAILABLE
  @param duration The fade-in duration.
  */
 - (void)playSoundAtFrequency:(double)frequency
-                   onChannel:(ORKAudioChannel)channel
+                   onChannel:(ORKSide)channel
               fadeInDuration:(NSTimeInterval)duration;
 
 /**
