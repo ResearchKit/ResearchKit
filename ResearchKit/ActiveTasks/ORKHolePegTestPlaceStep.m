@@ -42,7 +42,6 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.shouldStartTimerAutomatically = YES;
         self.shouldShowDefaultTimer = NO;
         self.shouldContinueOnFinish = YES;
     }

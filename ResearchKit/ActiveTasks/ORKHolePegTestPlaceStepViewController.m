@@ -79,8 +79,6 @@
     self.holePegTestPlaceContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestPlaceContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
-    
-    NSLog(@"results: %@", [((ORKChoiceQuestionResult *)[[self.taskViewController.result stepResultForStepIdentifier:@"hole.peg.test.question"].results firstObject]).choiceAnswers firstObject]);
 }
 
 - (void)start {
@@ -91,6 +89,10 @@
 #pragma mark - hole peg test content view delegate
 
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
+    if (!self.isStarted) {
+        [self start];
+    }
+    
     [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
 }
