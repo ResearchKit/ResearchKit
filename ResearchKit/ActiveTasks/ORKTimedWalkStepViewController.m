@@ -49,6 +49,7 @@ double const kDistanceInMetersTrackingThreshold = 100.0;
 
 @end
 
+
 @implementation ORKTimedWalkStepViewController
 
 - (instancetype)initWithStep:(ORKStep *)step {

@@ -35,6 +35,7 @@
 #import "ORKActiveStepQuantityView.h"
 #import "ORKTintedImageView.h"
 
+
 @interface ORKTimedWalkContentView ()
 
 @property (nonatomic, strong) ORKProgressView *progressView;
@@ -43,6 +44,7 @@
 @property (nonatomic, copy) NSArray *constraints;
 
 @end
+
 
 @implementation ORKTimedWalkContentView
 
