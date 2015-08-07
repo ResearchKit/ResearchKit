@@ -974,12 +974,12 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 //            ORKStepArrayAddStep(steps, step);
 //        }
         
-        {
+        {            
             ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestPlaceStepIdentifier];
             step.title = ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
-            step.dominantHand = dominantHand;
+            step.orientation = dominantHand;
             step.numberOfHoles = numberOfHoles;
             step.translationThreshold = translationThreshold;
             step.rotationThreshold = rotationThreshold;

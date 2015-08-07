@@ -39,6 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
 
+- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, assign) ORKSide orientation;
 @property (nonatomic, assign) double translationThreshold;
 @property (nonatomic, assign) double rotationThreshold;
 @property (nonatomic, weak) id<ORKHolePegTestPlaceContentViewDelegate> delegate;
@@ -46,6 +49,7 @@ ORK_CLASS_AVAILABLE
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 @end
+
 
 @protocol ORKHolePegTestPlaceContentViewDelegate <NSObject>
 

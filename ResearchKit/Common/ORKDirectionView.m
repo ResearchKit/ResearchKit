@@ -38,6 +38,9 @@ static const CGFloat kArrowLineWidth = 4;
 
 @interface ORKArrowView : UIView
 
+- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, assign) ORKSide orientation;
 @property (nonatomic, assign) BOOL completed;
 
 @end
@@ -45,10 +48,11 @@ static const CGFloat kArrowLineWidth = 4;
 
 @implementation ORKArrowView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithOrientation:(ORKSide)orientation {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.opaque = NO;
+        self.orientation = orientation;
     }
     return self;
 }
@@ -77,9 +81,16 @@ static const CGFloat kArrowLineWidth = 4;
     [self.tintColor setStroke];
     
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth);
-    CGPathAddLineToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth + kArrowWidth);
-    CGPathAddLineToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth + 2 * kArrowWidth);
+    if (self.orientation == ORKSideLeft) {
+        CGPathMoveToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth);
+        CGPathAddLineToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth + kArrowWidth);
+        CGPathAddLineToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth + 2 * kArrowWidth);
+    } else {
+        CGPathMoveToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth);
+        CGPathAddLineToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth + kArrowWidth);
+        CGPathAddLineToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth + 2 * kArrowWidth);
+    }
+    
     CGContextAddPath(context, path);
     CGContextStrokePath(context);
     
@@ -91,6 +102,7 @@ static const CGFloat kArrowLineWidth = 4;
 
 @interface ORKDirectionView ()
 
+@property (nonatomic, assign) ORKSide orientation;
 @property (nonatomic, strong) ORKArrowView *leftArrow;
 @property (nonatomic, strong) ORKArrowView *middleArrow;
 @property (nonatomic, strong) ORKArrowView *rightArrow;
@@ -103,22 +115,23 @@ static const CGFloat kArrowLineWidth = 4;
 
 @implementation ORKDirectionView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithOrientation:(ORKSide)orientation {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         self.opaque = NO;
+        self.orientation = orientation;
         
-        _leftArrow = [[ORKArrowView alloc] init];
-        _leftArrow.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_leftArrow];
+        self.leftArrow = [[ORKArrowView alloc] initWithOrientation:self.orientation];
+        self.leftArrow.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.leftArrow];
         
-        _middleArrow = [[ORKArrowView alloc] init];
-        _middleArrow.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_middleArrow];
+        self.middleArrow = [[ORKArrowView alloc] initWithOrientation:self.orientation];
+        self.middleArrow.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.middleArrow];
         
-        _rightArrow = [[ORKArrowView alloc] init];
-        _rightArrow.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_rightArrow];
+        self.rightArrow = [[ORKArrowView alloc] initWithOrientation:self.orientation];
+        self.rightArrow.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:self.rightArrow];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self setNeedsUpdateConstraints];
@@ -133,15 +146,28 @@ static const CGFloat kArrowLineWidth = 4;
     self.middleArrow.completed = NO;
     self.rightArrow.completed = NO;
     
-    switch (index) {
-        case 3:
-            self.rightArrow.completed = YES;
-        case 2:
-            self.middleArrow.completed = YES;
-        case 1:
-            self.leftArrow.completed = YES;
-        default:
-            break;
+    if (self.orientation == ORKSideLeft) {
+        switch (index) {
+            case 3:
+                self.leftArrow.completed = YES;
+            case 2:
+                self.middleArrow.completed = YES;
+            case 1:
+                self.rightArrow.completed = YES;
+            default:
+                break;
+        }
+    } else {
+        switch (index) {
+            case 3:
+                self.rightArrow.completed = YES;
+            case 2:
+                self.middleArrow.completed = YES;
+            case 1:
+                self.leftArrow.completed = YES;
+            default:
+                break;
+        }
     }
 }
 

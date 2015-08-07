@@ -73,7 +73,7 @@
     
     self.successes = 0;
     
-    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] init];
+    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithOrientation:[self holePegTestPlaceStep].orientation];
     self.holePegTestPlaceContentView.translationThreshold = [self holePegTestPlaceStep].translationThreshold;
     self.holePegTestPlaceContentView.rotationThreshold = [self holePegTestPlaceStep].rotationThreshold;
     self.holePegTestPlaceContentView.delegate = self;

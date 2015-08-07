@@ -36,4 +36,6 @@
 ORK_CLASS_AVAILABLE
 @interface ORKDirectionView : UIView
 
+- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+
 @end

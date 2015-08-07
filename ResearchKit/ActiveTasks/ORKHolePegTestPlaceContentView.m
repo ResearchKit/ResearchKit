@@ -51,27 +51,29 @@
 
 @implementation ORKHolePegTestPlaceContentView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithOrientation:(ORKSide)orientation {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
-        _progressView = [UIProgressView new];
-        _progressView.progressTintColor = [self tintColor];
-        [_progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_progressView setAlpha:0];
-        [self addSubview:_progressView];
+        self.orientation = orientation;
+
+        self.progressView = [UIProgressView new];
+        self.progressView.progressTintColor = [self tintColor];
+        [self.progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.progressView setAlpha:0];
+        [self addSubview:self.progressView];
         
-        _holeView = [[ORKHolePegTestPlaceHoleView alloc] init];
-        [_holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addSubview:_holeView];
+        self.holeView = [[ORKHolePegTestPlaceHoleView alloc] init];
+        [self.holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addSubview:self.holeView];
         
-        _pegView = [[ORKHolePegTestPlacePegView alloc] init];
-        _pegView.delegate = self;
-        [_pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addSubview:_pegView];
+        self.pegView = [[ORKHolePegTestPlacePegView alloc] init];
+        self.pegView.delegate = self;
+        [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addSubview:self.pegView];
         
-        _directionView = [[ORKDirectionView alloc] init];
-        [_directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addSubview:_directionView];
+        self.directionView = [[ORKDirectionView alloc] initWithOrientation:self.orientation];
+        [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addSubview:self.directionView];
         
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self setNeedsUpdateConstraints];
@@ -108,7 +110,7 @@
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pegView]->=0-[_holeView]|"
+     [NSLayoutConstraint constraintsWithVisualFormat:self.orientation == ORKSideLeft ? @"H:|[_holeView]->=0-[_pegView]|" : @"H:|[_pegView]->=0-[_holeView]|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:nil views:views]];
     

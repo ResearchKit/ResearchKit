@@ -43,6 +43,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 @protocol ORKHolePegTestPlacePegViewDelegate <NSObject>
 
 - (void)pegViewDidMove:(ORKHolePegTestPlacePegView *)pegView;

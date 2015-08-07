@@ -62,6 +62,11 @@
     
     NSTimeInterval const ORKHolePegTestMinimumDuration = 1.0f;
     
+    if (self.orientation != ORKSideLeft &&
+        self.orientation != ORKSideRight) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"orientation should be Left or Right."] userInfo:nil];
+    }
+    
     if (self.numberOfHoles < ORKHolePegTestMinimumNumberOfHoles) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of holes must be greater than or equal to %@.", @(ORKHolePegTestMinimumNumberOfHoles)] userInfo:nil];
     }
