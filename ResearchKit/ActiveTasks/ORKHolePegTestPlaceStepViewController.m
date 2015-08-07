@@ -29,24 +29,24 @@
  */
 
 
-#import "ORKHolePegTestStepViewController.h"
-#import "ORKHolePegTestStep.h"
-#import "ORKHolePegTestContentView.h"
+#import "ORKHolePegTestPlaceStepViewController.h"
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestPlaceContentView.h"
 #import "ORKActiveStepViewController_internal.h"
 #import "ORKStepViewController_internal.h"
 #import "ORKActiveStepView.h"
 
 
-@interface ORKHolePegTestStepViewController () <ORKHolePegTestContentViewDelegate>
+@interface ORKHolePegTestPlaceStepViewController () <ORKHolePegTestPlaceContentViewDelegate>
 
-@property (nonatomic, strong) ORKHolePegTestContentView *holePegTestContentView;
+@property (nonatomic, strong) ORKHolePegTestPlaceContentView *holePegTestPlaceContentView;
 
 @property (nonatomic, assign) NSUInteger successes;
 
 @end
 
 
-@implementation ORKHolePegTestStepViewController
+@implementation ORKHolePegTestPlaceStepViewController
 
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
@@ -56,8 +56,8 @@
     return self;
 }
 
-- (ORKHolePegTestStep *)holePegTestStep {
-    return (ORKHolePegTestStep *)self.step;
+- (ORKHolePegTestPlaceStep *)holePegTestPlaceStep {
+    return (ORKHolePegTestPlaceStep *)self.step;
 }
 
 - (void)initializeInternalButtonItems {
@@ -73,36 +73,36 @@
     
     self.successes = 0;
     
-    self.holePegTestContentView = [[ORKHolePegTestContentView alloc] init];
-    self.holePegTestContentView.translationThreshold = [self holePegTestStep].translationThreshold;
-    self.holePegTestContentView.rotationThreshold = [self holePegTestStep].rotationThreshold;
-    self.holePegTestContentView.delegate = self;
-    self.activeStepView.activeCustomView = self.holePegTestContentView;
+    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] init];
+    self.holePegTestPlaceContentView.translationThreshold = [self holePegTestPlaceStep].translationThreshold;
+    self.holePegTestPlaceContentView.rotationThreshold = [self holePegTestPlaceStep].rotationThreshold;
+    self.holePegTestPlaceContentView.delegate = self;
+    self.activeStepView.activeCustomView = self.holePegTestPlaceContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     
     NSLog(@"results: %@", [((ORKChoiceQuestionResult *)[[self.taskViewController.result stepResultForStepIdentifier:@"hole.peg.test.question"].results firstObject]).choiceAnswers firstObject]);
 }
 
 - (void)start {
-    [self.holePegTestContentView setProgress:0.001f animated:NO];
+    [self.holePegTestPlaceContentView setProgress:0.001f animated:NO];
     [super start];
 }
 
 #pragma mark - hole peg test content view delegate
 
-- (void)holePegTestDidProgress:(ORKHolePegTestContentView *)holePegTestContentView {
+- (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
     [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
 }
 
-- (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView {
+- (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
     self.successes++;
     
-    [holePegTestContentView setProgress:((CGFloat)self.successes / [self holePegTestStep].numberOfHoles) animated:YES];
+    [holePegTestPlaceContentView setProgress:((CGFloat)self.successes / [self holePegTestPlaceStep].numberOfHoles) animated:YES];
     [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
     
-    if (self.successes >= [self holePegTestStep].numberOfHoles) {
+    if (self.successes >= [self holePegTestPlaceStep].numberOfHoles) {
         [self finish];
     }
 }

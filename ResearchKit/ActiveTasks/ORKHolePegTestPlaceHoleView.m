@@ -29,21 +29,21 @@
  */
 
 
-#import "ORKHolePegTestHoleView.h"
+#import "ORKHolePegTestPlaceHoleView.h"
 
 
-static const UIEdgeInsets ORKHoleViewMargins = (UIEdgeInsets){22, 22, 22, 22};
-static const CGFloat ORKHoleViewDiameter = 148.0f;
+static const UIEdgeInsets ORKPlaceHoleViewMargins = (UIEdgeInsets){22, 22, 22, 22};
+static const CGFloat ORKPlaceHoleViewDiameter = 148.0f;
 
 
-@interface ORKHolePegTestHoleView ()
+@interface ORKHolePegTestPlaceHoleView ()
 
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
 @end
 
 
-@implementation ORKHolePegTestHoleView
+@implementation ORKHolePegTestPlaceHoleView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -75,7 +75,7 @@ static const CGFloat ORKHoleViewDiameter = 148.0f;
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(ORKHoleViewDiameter, ORKHoleViewDiameter);
+    return CGSizeMake(ORKPlaceHoleViewDiameter, ORKPlaceHoleViewDiameter);
 }
 
 - (void)setSuccess:(BOOL)success
@@ -90,7 +90,7 @@ static const CGFloat ORKHoleViewDiameter = 148.0f;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGRect bounds = CGRectInset([self bounds], ORKHoleViewMargins.left, ORKHoleViewMargins.top);
+    CGRect bounds = CGRectInset([self bounds], ORKPlaceHoleViewMargins.left, ORKPlaceHoleViewMargins.top);
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:bounds];
     [self.tintColor setFill];
     [path fill];

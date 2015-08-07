@@ -29,27 +29,27 @@
  */
 
 
-#import "ORKHolePegTestContentView.h"
-#import "ORKHolePegTestPegView.h"
-#import "ORKHolePegTestHoleView.h"
+#import "ORKHolePegTestPlaceContentView.h"
+#import "ORKHolePegTestPlacePegView.h"
+#import "ORKHolePegTestPlaceHoleView.h"
 #import "ORKDirectionView.h"
 
 
 #define degreesToRadians(degrees) ((degrees) / 180.0 * M_PI)
 
 
-@interface ORKHolePegTestContentView () <ORKHolePegTestPegViewDelegate>
+@interface ORKHolePegTestPlaceContentView () <ORKHolePegTestPlacePegViewDelegate>
 
 @property (nonatomic, strong) UIProgressView *progressView;
-@property (nonatomic, strong) ORKHolePegTestPegView *pegView;
-@property (nonatomic, strong) ORKHolePegTestHoleView *holeView;
+@property (nonatomic, strong) ORKHolePegTestPlacePegView *pegView;
+@property (nonatomic, strong) ORKHolePegTestPlaceHoleView *holeView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, copy) NSArray *constraints;
 
 @end
 
 
-@implementation ORKHolePegTestContentView
+@implementation ORKHolePegTestPlaceContentView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -60,11 +60,11 @@
         [_progressView setAlpha:0];
         [self addSubview:_progressView];
         
-        _holeView = [[ORKHolePegTestHoleView alloc] init];
+        _holeView = [[ORKHolePegTestPlaceHoleView alloc] init];
         [_holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:_holeView];
         
-        _pegView = [[ORKHolePegTestPegView alloc] init];
+        _pegView = [[ORKHolePegTestPlacePegView alloc] init];
         _pegView.delegate = self;
         [_pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:_pegView];
@@ -160,7 +160,7 @@
 
 #pragma mark - peg view delegate
 
-- (void)pegViewDidMove:(ORKHolePegTestPegView *)pegView {
+- (void)pegViewDidMove:(ORKHolePegTestPlacePegView *)pegView {
     if ([self holeViewContainsPegView:pegView]) {
         pegView.alpha = 1.0f;
     } else {
@@ -168,13 +168,15 @@
     }
     
     self.directionView.hidden = YES;
-    [self.delegate holePegTestDidProgress:self];
+    if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidProgress:)]) {
+        [self.delegate holePegTestPlaceDidProgress:self];
+    }
 }
 
-- (void)pegViewMoveEnded:(ORKHolePegTestPegView *)pegView success:(void (^)(BOOL succeded))success {
+- (void)pegViewMoveEnded:(ORKHolePegTestPlacePegView *)pegView success:(void (^)(BOOL succeded))success {
     if ([self holeViewContainsPegView:pegView]) {
-        if ([self.delegate respondsToSelector:@selector(holePegTestDidSucceed:)]) {
-            [self.delegate holePegTestDidSucceed:self];
+        if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidSucceed:)]) {
+            [self.delegate holePegTestPlaceDidSucceed:self];
         }
         self.holeView.success = YES;
         success(YES);
@@ -186,7 +188,7 @@
     self.directionView.hidden = NO;
 }
 
-- (BOOL)holeViewContainsPegView:(ORKHolePegTestPegView *)pegView {
+- (BOOL)holeViewContainsPegView:(ORKHolePegTestPlacePegView *)pegView {
     CGRect detectionFrame = CGRectMake(CGRectGetMidX(self.holeView.frame) - self.translationThreshold / 2,
                                        CGRectGetMidY(self.holeView.frame) - self.translationThreshold / 2,
                                        self.translationThreshold,

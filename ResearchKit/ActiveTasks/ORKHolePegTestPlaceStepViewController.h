@@ -35,11 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestStep : ORKActiveStep
-
-@property (nonatomic, assign) int numberOfHoles;
-@property (nonatomic, assign) double translationThreshold;
-@property (nonatomic, assign) double rotationThreshold;
+@interface ORKHolePegTestPlaceStepViewController : ORKActiveStepViewController
 
 @end
 

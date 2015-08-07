@@ -29,14 +29,14 @@
  */
 
 
-#import "ORKHolePegTestStep.h"
-#import "ORKHolePegTestStepViewController.h"
+#import "ORKHolePegTestPlaceStep.h"
+#import "ORKHolePegTestPlaceStepViewController.h"
 
 
-@implementation ORKHolePegTestStep
+@implementation ORKHolePegTestPlaceStep
 
 + (Class)stepViewControllerClass {
-    return [ORKHolePegTestStepViewController class];
+    return [ORKHolePegTestPlaceStepViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

@@ -53,7 +53,7 @@
 #import "ORKSpatialSpanMemoryStep.h"
 #import "ORKToneAudiometryStep.h"
 #import "ORKReactionTimeStep.h"
-#import "ORKHolePegTestStep.h"
+#import "ORKHolePegTestPlaceStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -286,7 +286,8 @@ static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiome
 static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
 static NSString * const ORKHolePegTestQuestionStepIdentifier = @"hole.peg.test.question";
-static NSString * const ORKHolePegTestStepIdentifier = @"hole.peg.test";
+static NSString * const ORKHolePegTestPlaceStepIdentifier = @"hole.peg.test.place";
+static NSString * const ORKHolePegTestRemoveStepIdentifier = @"hole.peg.test.remove";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -973,7 +974,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 //        }
         
         {
-            ORKHolePegTestStep *step = [[ORKHolePegTestStep alloc] initWithIdentifier:ORKHolePegTestStepIdentifier];
+            ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestPlaceStepIdentifier];
             step.title = ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;

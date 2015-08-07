@@ -29,28 +29,17 @@
  */
 
 
-#import "ORKCustomStepView_Internal.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ORKHolePegTestContentViewDelegate;
-
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
+@interface ORKHolePegTestPlaceStep : ORKActiveStep
 
+@property (nonatomic, assign) int numberOfHoles;
 @property (nonatomic, assign) double translationThreshold;
 @property (nonatomic, assign) double rotationThreshold;
-@property (nonatomic, weak) id<ORKHolePegTestContentViewDelegate> delegate;
-
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-
-@end
-
-@protocol ORKHolePegTestContentViewDelegate <NSObject>
-
-- (void)holePegTestDidProgress:(ORKHolePegTestContentView *)holePegTestContentView;
-- (void)holePegTestDidSucceed:(ORKHolePegTestContentView *)holePegTestContentView;
 
 @end
 

@@ -29,15 +29,15 @@
  */
 
 
-#import "ORKHolePegTestPegView.h"
+#import "ORKHolePegTestPlacePegView.h"
 
 
-static const CGFloat ORKPegViewDiameter = 148.0f;
-static const CGFloat ORKPegViewRotation = 45.0f;
+static const CGFloat ORKPlacePegViewDiameter = 148.0f;
+static const CGFloat ORKPlacePegViewRotation = 45.0f;
 static const CGFloat ORKMaximumTouchesDistance = 210.0f;
 
 
-@interface ORKHolePegTestPegView ()
+@interface ORKHolePegTestPlacePegView ()
 
 @property (nonatomic, assign) CGFloat transformX;
 @property (nonatomic, assign) CGFloat transformY;
@@ -48,7 +48,7 @@ static const CGFloat ORKMaximumTouchesDistance = 210.0f;
 @end
 
 
-@implementation ORKHolePegTestPegView
+@implementation ORKHolePegTestPlacePegView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -75,7 +75,7 @@ static const CGFloat ORKMaximumTouchesDistance = 210.0f;
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(ORKPegViewDiameter, ORKPegViewDiameter);
+    return CGSizeMake(ORKPlacePegViewDiameter, ORKPlacePegViewDiameter);
 }
 
 #pragma mark - gesture recognizer methods
@@ -198,8 +198,8 @@ static const CGFloat ORKMaximumTouchesDistance = 210.0f;
     shapeLayer.anchorPoint = CGPointMake(0.5, 0.5);
     shapeLayer.fillColor = [self.tintColor CGColor];
     
-    CATransform3D transform = CATransform3DMakeTranslation(ORKPegViewDiameter/2, ORKPegViewDiameter/2, 1);
-    transform = CATransform3DRotate(transform, ORKPegViewRotation * (M_PI / 180), 0, 0, 1);
+    CATransform3D transform = CATransform3DMakeTranslation(ORKPlacePegViewDiameter/2, ORKPlacePegViewDiameter/2, 1);
+    transform = CATransform3DRotate(transform, ORKPlacePegViewRotation * (M_PI / 180), 0, 0, 1);
     shapeLayer.transform = transform;
     
     [self.layer addSublayer:shapeLayer];
