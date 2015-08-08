@@ -1266,6 +1266,11 @@
 @end
 
 
+@implementation ORKBodyShaderQuestionResult
+
+@end
+
+
 @implementation ORKDateQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

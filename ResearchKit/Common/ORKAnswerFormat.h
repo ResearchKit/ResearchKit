@@ -73,7 +73,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeDate,
     
     /// In a time interval question, the participant can enter a time span by using a picker.
-    ORKQuestionTypeTimeInterval
+    ORKQuestionTypeTimeInterval,
+    
+    /// In a body shader question, the participant can draw shaded areas on a body shape.
+    ORKQuestionTypeBodyShader
 } ORK_ENUM_AVAILABLE;
 
 /// An enumeration of the types of answer choices available.
@@ -1078,6 +1081,17 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is 1. The minimum value is 1, and the maximum value is 30.
  */
 @property (readonly) NSInteger step;
+
+@end
+
+
+/**
+ The `ORKBodyShaderAnswerFormat` class represents the answer format for questions that let the user color a body shape to indicate the locations of certain medical conditions. It will also calculate the percentage of shaded area.
+ 
+ A body shader answer format produces an `ORKBodyShaderQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKBodyShaderAnswerFormat : ORKAnswerFormat
 
 @end
 

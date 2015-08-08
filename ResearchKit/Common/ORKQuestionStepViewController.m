@@ -42,6 +42,7 @@
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKSurveyAnswerCellForImageSelection.h"
+#import "ORKSurveyAnswerCellForBodyShader.h"
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
 #import "ORKCustomStepView.h"
@@ -522,7 +523,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDate) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
-                               @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class]};
+                               @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
+                               @(ORKQuestionTypeBodyShader) : [ORKSurveyAnswerCellForBodyShader class]};
     });
     
     // SingleSelectionPicker Cell && Other Cells

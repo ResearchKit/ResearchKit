@@ -779,6 +779,16 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKBodyShaderQuestionResult` class represents the result of a question
+ that uses the `ORKBodyShaderAnswerFormat` format.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKBodyShaderQuestionResult : ORKQuestionResult
+
+@end
+
+
+/**
  The `ORKDateQuestionResult` class represents the result of a question or form item that asks for a date (`ORKDateAnswerFormat`).
  
  The calendar and time zone are recorded in addition to the answer itself,
