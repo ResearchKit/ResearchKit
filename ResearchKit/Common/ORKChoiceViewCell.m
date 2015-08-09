@@ -55,7 +55,7 @@ static const CGFloat kLabelRightMargin = 44.0;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.window);
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
@@ -153,7 +153,7 @@ static const CGFloat kLabelRightMargin = 44.0;
 + (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(tableView.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(tableView.window);
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);

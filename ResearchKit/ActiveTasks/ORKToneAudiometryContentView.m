@@ -51,7 +51,7 @@
     self = [super init];
     if (self) {
 
-        _screenType = ORKGetScreenTypeForWindow(self.window);
+        _screenType = ORKGetVerticalScreenTypeForWindow(self.window);
         _captionLabel = [ORKUnitLabel new];
         _captionLabel.textAlignment = NSTextAlignmentCenter;
         _captionLabel.translatesAutoresizingMaskIntoConstraints = NO;

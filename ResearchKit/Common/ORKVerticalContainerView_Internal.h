@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKVerticalContainerView ()
 
-@property (nonatomic, readonly) ORKScreenType screenType;
+@property (nonatomic, readonly) ORKScreenType verticalScreenType;
+@property (nonatomic, readonly) ORKScreenType horizontalScreenType;
 
 - (void)updateConstraintConstants;
 
