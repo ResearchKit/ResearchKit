@@ -30,6 +30,20 @@
 
 #import "ORKBodyShaderView.h"
 
-@implementation ORKBodyShaderView
+@implementation ORKBodyShaderView {
+    ORKShaderView *_bodyFrontShaderView, *_bodyBackShaderView;
+}
+
+
+#pragma mark - Init
+
+
+
+#pragma mark - ORKShaderViewDelegate
+
+- (void)shaderView:(ORKShaderView * __nonnull)shaderView drawingImageChangedTo:(UIImage * __nullable)image withNumberOfShadedPixel:(int)numberOfShadedPixels onTotalNumberOnPixels:(int)totalNumberOfPixels {
+    
+    
+}
 
 @end

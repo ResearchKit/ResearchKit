@@ -30,8 +30,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class ORKShaderView;
+
+@protocol ORKShaderViewDelegate <NSObject>
+
+- (void)shaderView:(__nonnull ORKShaderView*)shaderView drawingImageChangedTo:(__nullable UIImage*)image withNumberOfShadedPixel:(int)numberOfShadedPixels onTotalNumberOnPixels:(int)totalNumberOfPixels;
+
+@end
+
 @interface ORKShaderView : UIView
 
-- (instancetype)initWithSize:(CGSize)size overlayView:(UIView*)overlayView;
+- (__nonnull instancetype)initWithSize:(CGSize)size overlayView:(__nonnull UIView*)overlayView;
+
+@property (nonatomic, weak, nullable) id<ORKShaderViewDelegate> delegate;
 
 @end

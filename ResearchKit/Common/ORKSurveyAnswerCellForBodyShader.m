@@ -32,11 +32,6 @@
 #import "ORKSurveyAnswerCellForBodyShader.h"
 
 
-@interface ORKSurveyAnswerCellForBodyShader ()
-
-@end
-
-
 @implementation ORKSurveyAnswerCellForBodyShader
 
 @end

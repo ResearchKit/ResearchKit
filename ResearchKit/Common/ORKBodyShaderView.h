@@ -30,11 +30,20 @@
 
 
 #import <UIKit/UIKit.h>
+#import "ORKShaderView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKBodyShaderView : UIView
+@class ORKBodyShaderView;
+
+@protocol ORKBodyShaderViewDelegate <NSObject>
+
+- (void)bodyShaderView:(__nonnull ORKBodyShaderView*)bodyShaderView drawingImageChangedTo:(__nullable UIImage*)image withShadedPercentage:(float)shadedPercentage;
+
+@end
+
+@interface ORKBodyShaderView : UIView <ORKShaderViewDelegate>
 
 @end
 

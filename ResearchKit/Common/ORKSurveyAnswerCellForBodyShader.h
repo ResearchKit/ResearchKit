@@ -30,8 +30,9 @@
 
 
 #import "ORKSurveyAnswerCell.h"
+#import "ORKBodyShaderView.h"
 
 
-@interface ORKSurveyAnswerCellForBodyShader : ORKSurveyAnswerCell
+@interface ORKSurveyAnswerCellForBodyShader : ORKSurveyAnswerCell <ORKBodyShaderViewDelegate>
 
 @end
