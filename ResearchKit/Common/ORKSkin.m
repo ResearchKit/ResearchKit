@@ -257,7 +257,7 @@ CGFloat ORKStandardHorizMarginForView(UIView *view) {
             break;
         }
     }
-    NSLog(@"margin = %@ [%@]", @(margin), @(view.bounds.size.width));
+
     return margin;
 }
 
