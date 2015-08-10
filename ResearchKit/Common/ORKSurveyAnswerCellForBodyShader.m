@@ -49,7 +49,9 @@
     
     if (!_bodyShaderView) {
         
-        //TODO: Setup body shader view here
+        _bodyShaderView = [[ORKBodyShaderView alloc] initWithDelegate:self];
+        
+        [self addSubview:_bodyShaderView];
     }
     
     [super prepareView];
