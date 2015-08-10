@@ -50,6 +50,7 @@
     if (!_bodyShaderView) {
         
         _bodyShaderView = [[ORKBodyShaderView alloc] initWithDelegate:self];
+        _bodyShaderView.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self.contentView addSubview:_bodyShaderView];
         
@@ -90,8 +91,8 @@
     [self ork_setAnswer:answer];
 }
 
--(void)touchesBegan:(nonnull NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
-    NSLog(@"touhces began in cell");
-}
+//-(void)touchesBegan:(nonnull NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+//    NSLog(@"touhces began in cell");
+//}
 
 @end

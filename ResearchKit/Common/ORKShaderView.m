@@ -52,12 +52,20 @@
     
     self = [super initWithFrame:(CGRect){CGPointZero, size}];
     if (self) {
+        
         _size = size;
         _overlayView = overlayView;
+        
         self.delegate = delegate;
+        
+        _drawingEnabled = YES;
+        _drawingLineWidth = 10.0;
+        _drawingColor = [UIColor colorWithRed:55.0f/255.0f green:130.0f/255.0f blue:232.0f/255.0f alpha:1];
+        
         if (![self initContext]) {
             //TODO: Handle error here
         }
+        
         [self setupOverlayView];
     }
     return self;
@@ -151,6 +159,7 @@
 - (void)calculateDrawingPercentage:(CGContextRef)ctx {
     
     CGImageRef workingImage = CGBitmapContextCreateImage(ctx);
+    UIImage *image = [UIImage imageWithCGImage:workingImage];
     
 //    [self.questionnaireController updateImage:[UIImage imageWithCGImage:workingImage]];
     
@@ -198,21 +207,18 @@
     
     NSLog(@"%i / %i", _shadedPixels, _totalPixels);
     
-    free(rawData);
-    
     if ([self.delegate respondsToSelector:@selector(shaderView:drawingImageChangedTo:withNumberOfShadedPixels:onTotalNumberOnPixels:)]) {
-        [self.delegate shaderView:self drawingImageChangedTo:[UIImage imageWithCGImage:workingImage] withNumberOfShadedPixels:_shadedPixels onTotalNumberOnPixels:_totalPixels];
+        [self.delegate shaderView:self drawingImageChangedTo:image withNumberOfShadedPixels:_shadedPixels onTotalNumberOnPixels:_totalPixels];
     }
+    
+    free(rawData);
 }
 
 
 
 #pragma mark - Touches
 
-
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    NSLog(@"touches moved");
     
     if (_drawingEnabled) {
         UITouch *touch = [touches anyObject];
@@ -223,11 +229,6 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
     [self calculateDrawingPercentage:_savedCurrentContext];
-    
-//    self.drawingPercentage = [self calculateDrawingPercentage:_savedCurrentContext];
-//    NSLog(@"%f", self.drawingPercentage);
-//    
-//    [self.questionnaireController.qObject setItchPercentage:self.drawingPercentage];
 }
 
 @end
