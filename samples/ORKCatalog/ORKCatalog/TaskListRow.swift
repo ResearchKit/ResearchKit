@@ -81,6 +81,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case Survey
     case Consent
     case Form
+    case BodyShader
     
     /// Returns an array of all the task list row enum cases.
     static var allCases: [TaskListRow] {
@@ -170,6 +171,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
             case .Form:
                 return NSLocalizedString("Form", comment: "")
+            
+            case .BodyShader:
+                return NSLocalizedString("Body Shader", comment: "")
         }
     }
     
@@ -269,6 +273,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case FormStep =                                             "FormStep"
         case FormItem01 =                                           "FormItem01"
         case FormItem02 =                                           "FormItem02"
+        
+        case BodyShaderTask =                                       "BodyShaderTask"
+        case BodyShaderStep =                                       "BodyShaderStep"
     }
     
     // MARK: Properties
@@ -344,6 +351,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             case .Form:
                 return formTask
+            
+            case .BodyShader:
+                return bodyShaderTask
         }
     }
 
@@ -771,6 +781,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         ]
 
         return ORKOrderedTask(identifier: Identifier.FormTask.rawValue, steps: [step])
+    }
+    
+    private var bodyShaderTask: ORKTask {
+        let answerFormat = ORKBodyShaderAnswerFormat()
+        
+        let step = ORKQuestionStep(identifier: Identifier.BodyShaderStep.rawValue, title: exampleQuestionText, answer: answerFormat)
+        
+        return ORKOrderedTask(identifier: Identifier.BodyShaderTask.rawValue, steps: [step])
     }
     
     // MARK: Consent Document Creation Convenience

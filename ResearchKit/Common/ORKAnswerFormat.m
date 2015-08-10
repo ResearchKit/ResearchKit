@@ -64,6 +64,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
+            SQT_CASE(BodyShader);
     }
 #undef SQT_CASE
 }
@@ -1894,6 +1895,21 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             (_defaultInterval == castObject.defaultInterval) &&
             (_step == castObject.step));
+}
+
+@end
+
+
+#pragma mark - ORKBodyShaderAnswerFormat
+
+@implementation ORKBodyShaderAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKBodyShaderQuestionResult class];
+}
+
+- (ORKQuestionType) questionType {
+    return ORKQuestionTypeBodyShader;
 }
 
 @end
