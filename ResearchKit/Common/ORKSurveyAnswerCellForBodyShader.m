@@ -32,6 +32,47 @@
 #import "ORKSurveyAnswerCellForBodyShader.h"
 
 
+@interface ORKSurveyAnswerCellForBodyShader () {
+}
+
+@property (nonatomic, strong) ORKBodyShaderView *bodyShaderView;
+
+@end
+
+
 @implementation ORKSurveyAnswerCellForBodyShader
+
+
+#pragma mark - View Preparation
+
+- (void)prepareView {
+    
+    if (!_bodyShaderView) {
+        
+        //TODO: Setup body shader view here
+    }
+    
+    [super prepareView];
+}
+
+- (void)ork_setAnswer:(id)answer {
+    
+    _answer = [answer copy];
+    [self.delegate answerCell:self answerDidChangeTo:answer dueUserAction:YES];
+}
+
+
+
+#pragma mark - ORKBodyShaderViewDelegate
+
+- (void)bodyShaderView:(ORKBodyShaderView * __nonnull)bodyShaderView drawingImageChangedTo:(UIImage * __nullable)image withShadedPercentage:(float)shadedPercentage {
+    
+    NSMutableDictionary *answer = [[NSMutableDictionary alloc] init];
+    
+    [answer setObject:UIImagePNGRepresentation(image) forKey:@"image"];
+    [answer setObject:[NSNumber numberWithFloat:shadedPercentage] forKey:@"shadedPercentage"];
+    
+    [self ork_setAnswer:answer];
+}
 
 @end

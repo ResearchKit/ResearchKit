@@ -45,6 +45,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKBodyShaderView : UIView <ORKShaderViewDelegate>
 
+- (instancetype) initWithDelegate:(id<ORKBodyShaderViewDelegate>)delegate;
+
+@property (nonatomic, weak, nullable) id<ORKBodyShaderViewDelegate> delegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -40,18 +40,21 @@
     UIColor *_drawingColor;
     CGFloat _drawingLineWidth;
     BOOL _drawingEnabled;
+    
+    int _shadedPixels, _totalPixels;
 }
 
 
 
 #pragma mark - Init
 
-- (instancetype)initWithSize:(CGSize)size overlayView:(UIView *)overlayView {
+- (instancetype)initWithSize:(CGSize)size overlayView:(UIView *)overlayView delegate:(id<ORKShaderViewDelegate>)delegate {
     
     self = [super initWithFrame:(CGRect){CGPointZero, size}];
     if (self) {
         _size = size;
         _overlayView = overlayView;
+        self.delegate = delegate;
         if (![self initContext]) {
             //TODO: Handle error here
         }
@@ -59,6 +62,22 @@
     }
     return self;
 }
+
+- (void) setupOverlayView {
+    
+    if (_overlayView) {
+        [self addSubview:_overlayView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(_overlayView);
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V|[_overlayView]|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H|[_overlayView]|" options:0 metrics:nil views:views]];
+    }
+}
+
+
+
+#pragma mark - AutoLayout
 
 - (CGSize)intrinsicContentSize {
     return _size;
@@ -129,7 +148,7 @@
     [self setNeedsDisplay];
 }
 
-- (float)calculateDrawingPercentage:(CGContextRef)ctx {
+- (void)calculateDrawingPercentage:(CGContextRef)ctx {
     
     CGImageRef workingImage = CGBitmapContextCreateImage(ctx);
     
@@ -156,48 +175,33 @@
     CGContextRelease(context);
     
     
-    float bluePixels = 0;
-    float totalPixels = 0;
+    _shadedPixels = 0;
+    _totalPixels = 0;
     
     int byteIndex = 0;
     for (int i = 0 ; i < width * height ; ++i)
     {
         if ((rawData[byteIndex] >= 52 && rawData[byteIndex] <= 58) && (rawData[byteIndex + 1] >= 127 && rawData[byteIndex + 1] <= 133) && (rawData[byteIndex + 2] >= 229 && rawData[byteIndex + 2] <= 235)) {
             
-            bluePixels++;
-            totalPixels++;
+            _shadedPixels++;
+            _totalPixels++;
             //NSLog(@"R:%i G:%i B:%i", rawData[byteIndex], rawData[byteIndex+1], rawData[byteIndex+2]);
         }
         
         if ((rawData[byteIndex] >= 197 && rawData[byteIndex] <= 203) && (rawData[byteIndex + 1] >= 197 && rawData[byteIndex + 1] <= 203) && (rawData[byteIndex + 2] >= 197 && rawData[byteIndex + 2] <= 203)) {
             
-            totalPixels++;
+            _totalPixels++;
         }
         
         byteIndex += 4;
     }
     
-    NSLog(@"%f / %f", bluePixels, totalPixels);
+    NSLog(@"%i / %i", _shadedPixels, _totalPixels);
     
     free(rawData);
     
-    
-    return (bluePixels/totalPixels)*100;
-}
-
-
-
-#pragma mark - Overlay View Handling
-
-- (void) setupOverlayView {
-    
-    if (_overlayView) {
-        [self addSubview:_overlayView];
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(_overlayView);
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V|[_overlayView]|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H|[_overlayView]|" options:0 metrics:nil views:views]];
+    if ([self.delegate respondsToSelector:@selector(shaderView:drawingImageChangedTo:withNumberOfShadedPixels:onTotalNumberOnPixels:)]) {
+        [self.delegate shaderView:self drawingImageChangedTo:[UIImage imageWithCGImage:workingImage] withNumberOfShadedPixels:_shadedPixels onTotalNumberOnPixels:_totalPixels];
     }
 }
 
@@ -215,6 +219,8 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [self calculateDrawingPercentage:_savedCurrentContext];
     
 //    self.drawingPercentage = [self calculateDrawingPercentage:_savedCurrentContext];
 //    NSLog(@"%f", self.drawingPercentage);
