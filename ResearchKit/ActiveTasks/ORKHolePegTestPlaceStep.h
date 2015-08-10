@@ -38,9 +38,10 @@ ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceStep : ORKActiveStep
 
 @property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign, getter=isDominantHandTested) BOOL dominantHandTested;
 @property (nonatomic, assign) int numberOfHoles;
-@property (nonatomic, assign) double translationThreshold;
-@property (nonatomic, assign) double rotationThreshold;
+@property (nonatomic, assign) double threshold;
+@property (nonatomic, assign, getter = isRotated) BOOL rotated;
 
 @end
 

@@ -39,9 +39,11 @@
 
 @interface ORKHolePegTestPlaceStepViewController () <ORKHolePegTestPlaceContentViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *samples;
 @property (nonatomic, strong) ORKHolePegTestPlaceContentView *holePegTestPlaceContentView;
-
+@property (nonatomic, assign) NSTimeInterval sampleStart;
 @property (nonatomic, assign) NSUInteger successes;
+@property (nonatomic, assign) NSUInteger failures;
 
 @end
 
@@ -72,36 +74,85 @@
     [super viewDidLoad];
     
     self.successes = 0;
+    self.failures = 0;
     
-    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithOrientation:[self holePegTestPlaceStep].orientation];
-    self.holePegTestPlaceContentView.translationThreshold = [self holePegTestPlaceStep].translationThreshold;
-    self.holePegTestPlaceContentView.rotationThreshold = [self holePegTestPlaceStep].rotationThreshold;
+    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithOrientation:[self holePegTestPlaceStep].orientation
+                                                                                           rotated:[self holePegTestPlaceStep].rotated];
+    self.holePegTestPlaceContentView.threshold = [self holePegTestPlaceStep].threshold;
     self.holePegTestPlaceContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestPlaceContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
 }
 
 - (void)start {
+    self.samples = [NSMutableArray array];
     [self.holePegTestPlaceContentView setProgress:0.001f animated:NO];
+    
     [super start];
+}
+
+- (ORKStepResult *)result {
+    ORKStepResult *sResult = [super result];
+
+    NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
+
+    ORKHolePegTestResult *holePegTestResult = [[ORKHolePegTestResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    holePegTestResult.dominantHand = [self holePegTestPlaceStep].orientation;
+    holePegTestResult.dominantHandTested = [self holePegTestPlaceStep].isDominantHandTested;
+    holePegTestResult.numberOfHoles = [self holePegTestPlaceStep].numberOfHoles;
+    holePegTestResult.threshold = [self holePegTestPlaceStep].threshold;
+    holePegTestResult.rotated = [self holePegTestPlaceStep].isRotated;
+    holePegTestResult.totalSuccesses = self.successes;
+    holePegTestResult.totalFailures = self.failures;
+    holePegTestResult.totalTime = [self holePegTestPlaceStep].stepDuration - self.timeRemaining;
+    double totalDistance = 0.0;
+    for (ORKHolePegTestSample *sample in self.samples) {
+        totalDistance += sample.distance;
+    }
+    holePegTestResult.totalDistance = totalDistance;
+    holePegTestResult.samples = self.samples;
+
+    [results addObject:holePegTestResult];
+    
+    sResult.results = [results copy];
+    
+    return sResult;
+}
+
+- (void)saveSampleWithDistance:(CGFloat)distance {
+    ORKHolePegTestSample *sample = [[ORKHolePegTestSample alloc] init];
+    sample.time = CACurrentMediaTime() - self.sampleStart;
+    sample.distance = distance;
+    self.sampleStart = CACurrentMediaTime();
+    
+    [self.samples addObject:sample];
 }
 
 #pragma mark - hole peg test content view delegate
 
+- (NSString *)stepTitle {
+    NSString *title = [self holePegTestPlaceStep].rotated ? ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION_ROTATED_%@", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION_%@", nil);
+    NSString *hand = [self holePegTestPlaceStep].orientation == ORKSideLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
+    return [NSString stringWithFormat:title, hand];
+}
+
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
     if (!self.isStarted) {
+        self.sampleStart = CACurrentMediaTime();
         [self start];
     }
     
-    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+    [self.activeStepView updateTitle:[self stepTitle]
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT_2", nil)];
 }
 
-- (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
+- (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView withDistance:(CGFloat)distance {
     self.successes++;
     
+    [self saveSampleWithDistance:distance];
+    
     [holePegTestPlaceContentView setProgress:((CGFloat)self.successes / [self holePegTestPlaceStep].numberOfHoles) animated:YES];
-    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+    [self.activeStepView updateTitle:[self stepTitle]
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
     
     if (self.successes >= [self holePegTestPlaceStep].numberOfHoles) {
@@ -110,7 +161,9 @@
 }
 
 - (void)holePegTestPlaceDidFail:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView {
-    [self.activeStepView updateTitle:ORKLocalizedString(@"HOLE_PEG_TEST_INSTRUCTION", nil)
+    self.failures++;
+    
+    [self.activeStepView updateTitle:[self stepTitle]
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
 }
 

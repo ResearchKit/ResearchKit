@@ -53,11 +53,8 @@
     
     int const ORKHolePegTestMinimumNumberOfHoles = 1;
     
-    double const ORKHolePegTestMinimumTranslationThreshold = 0.0f;
-    double const ORKHolePegTestMaximumTranslationThreshold = 148.0f;
-    
-    double const ORKHolePegTestMinimumRotationThreshold = 0.0f;
-    double const ORKHolePegTestMaximumRotationThreshold = 90.0f;
+    double const ORKHolePegTestMinimumThreshold = 0.0f;
+    double const ORKHolePegTestMaximumThreshold = 1.0f;
     
     NSTimeInterval const ORKHolePegTestMinimumDuration = 1.0f;
     
@@ -70,14 +67,9 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"number of holes must be greater than or equal to %@.", @(ORKHolePegTestMinimumNumberOfHoles)] userInfo:nil];
     }
     
-    if (self.translationThreshold < ORKHolePegTestMinimumTranslationThreshold ||
-        self.translationThreshold > ORKHolePegTestMaximumTranslationThreshold) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"translation threshold must be greater than or equal to %@ and lower or equal to %@.", @(ORKHolePegTestMinimumTranslationThreshold), @(ORKHolePegTestMaximumTranslationThreshold)] userInfo:nil];
-    }
-    
-    if (self.rotationThreshold < ORKHolePegTestMinimumRotationThreshold ||
-        self.rotationThreshold > ORKHolePegTestMaximumRotationThreshold) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"rotation threshold must be greater than or equal to %@ and lower or equal to %@.", @(ORKHolePegTestMinimumRotationThreshold), @(ORKHolePegTestMaximumRotationThreshold)] userInfo:nil];
+    if (self.threshold < ORKHolePegTestMinimumThreshold ||
+        self.threshold > ORKHolePegTestMaximumThreshold) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"threshold must be greater than or equal to %@ and lower or equal to %@.", @(ORKHolePegTestMinimumThreshold), @(ORKHolePegTestMaximumThreshold)] userInfo:nil];
     }
     
     if (self.stepDuration < ORKHolePegTestMinimumDuration) {

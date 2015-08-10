@@ -219,11 +219,11 @@
 /* Nine hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
 "HOLE_PEG_TEST_INTRO_DETAIL" = "This activity measures your upper extremity function.";
-"HOLE_PEG_TEST_QUESTION_TITLE" = "Are you right- or left-handed?";
-"HOLE_PEG_TEST_QUESTION_2_CHOICE" = "Right";
-"HOLE_PEG_TEST_QUESTION_2_CHOICE_2" = "Left";
-"HOLE_PEG_TEST_INSTRUCTION" = "Put the cross peg in the hole.";
-"HOLE_PEG_TEST_TEXT" = "Use two fingers to move the peg.";
+"HOLE_PEG_TEST_RIGHT" = "right";
+"HOLE_PEG_TEST_LEFT" = "left";
+"HOLE_PEG_TEST_INSTRUCTION_%@" = "Put the peg in the hole using your %@ hand.";
+"HOLE_PEG_TEST_INSTRUCTION_ROTATED_%@" = "Put the cross peg in the hole using your %@ hand.";
+"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
 "HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
 
 /* Potentially user visible error messages. */

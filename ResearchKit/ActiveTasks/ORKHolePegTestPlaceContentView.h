@@ -37,13 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol ORKHolePegTestPlaceContentViewDelegate;
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPlaceContentView : ORKActiveStepCustomView <UIGestureRecognizerDelegate>
+@interface ORKHolePegTestPlaceContentView : ORKActiveStepCustomView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOrientation:(ORKSide)orientation rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign) ORKSide orientation;
-@property (nonatomic, assign) double translationThreshold;
-@property (nonatomic, assign) double rotationThreshold;
+@property (nonatomic, assign) double threshold;
+@property (nonatomic, assign, getter = isRotated) BOOL rotated;
 @property (nonatomic, weak) id<ORKHolePegTestPlaceContentViewDelegate> delegate;
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
@@ -54,7 +54,7 @@ ORK_CLASS_AVAILABLE
 @protocol ORKHolePegTestPlaceContentViewDelegate <NSObject>
 
 - (void)holePegTestPlaceDidProgress:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView;
-- (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView;
+- (void)holePegTestPlaceDidSucceed:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView withDistance:(CGFloat)distance;
 - (void)holePegTestPlaceDidFail:(ORKHolePegTestPlaceContentView *)holePegTestPlaceContentView;
 
 @end

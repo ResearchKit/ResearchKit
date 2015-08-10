@@ -105,6 +105,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
 
             case is ORKToneAudiometryResult:
                 providerType = ToneAudiometryResultTableViewProvider.self
+            
+            case is ORKHolePegTestResult:
+                providerType = HolePegTestResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -604,6 +607,86 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
         }
         
         return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
+    }
+}
+
+/// Table view provider specific to an `ORKHolePegTestResult` instance.
+class HolePegTestResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Moves"
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let holePegTestResult = result as! ORKHolePegTestResult
+        
+        var rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            var side = ""
+            let dominantHand = holePegTestResult.dominantHand
+            if (dominantHand == .Left) {
+                side = "Left"
+            } else if (dominantHand == .Right) {
+                side = "Right"
+            }
+            
+            // The hole peg test dominant hand.
+            rows.append(ResultRow(text: "dominant hand", detail: side))
+            
+            // The step is for the dominant hand.
+            rows.append(ResultRow(text: "dominant hand test", detail: holePegTestResult.dominantHandTested))
+            
+            // The number of holes to test.
+            rows.append(ResultRow(text: "number of holes", detail: holePegTestResult.numberOfHoles))
+            
+            // The detection area sensitivity.
+            rows.append(ResultRow(text: "threshold", detail: holePegTestResult.threshold))
+            
+            // The hole peg test also assesses the rotation capabilities.
+            rows.append(ResultRow(text: "rotated", detail: holePegTestResult.rotated))
+            
+            // The number of succeeded moves (out of `numberOfHoles` possible).
+            rows.append(ResultRow(text: "total successes", detail: holePegTestResult.totalSuccesses))
+            
+            // The number of failed moves.
+            rows.append(ResultRow(text: "total failures", detail: holePegTestResult.totalFailures))
+            
+            // The total time needed to perform the test step (ie. the sum of all samples time).
+            rows.append(ResultRow(text: "total time", detail: holePegTestResult.totalTime))
+            
+            // The total distance needed to perform the test step (ie. the sum of all samples distance).
+            rows.append(ResultRow(text: "total distance", detail: holePegTestResult.totalDistance))
+            
+            return rows
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + holePegTestResult.samples!.map { sample in
+            let holePegTestSample = sample as! ORKHolePegTestSample
+            
+            let text = "\(holePegTestSample.time))"
+            let detail = "distance: \(holePegTestSample.distance)"
+            
+            return ResultRow(text: text, detail: detail)
+        }
     }
 }
 
