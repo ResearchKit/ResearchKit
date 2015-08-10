@@ -70,8 +70,8 @@
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_overlayView);
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V|[_overlayView]|" options:0 metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H|[_overlayView]|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_overlayView]|" options:0 metrics:nil views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_overlayView]|" options:0 metrics:nil views:views]];
     }
 }
 
@@ -211,6 +211,8 @@
 
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    NSLog(@"touches moved");
     
     if (_drawingEnabled) {
         UITouch *touch = [touches anyObject];

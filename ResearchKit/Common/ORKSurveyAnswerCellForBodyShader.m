@@ -43,7 +43,7 @@
 @implementation ORKSurveyAnswerCellForBodyShader
 
 
-#pragma mark - View Preparation
+#pragma mark - View Settings
 
 - (void)prepareView {
     
@@ -51,11 +51,24 @@
         
         _bodyShaderView = [[ORKBodyShaderView alloc] initWithDelegate:self];
         
-        [self addSubview:_bodyShaderView];
+        [self.contentView addSubview:_bodyShaderView];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(_bodyShaderView);
+        
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_bodyShaderView]|" options:0 metrics:nil views:views]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_bodyShaderView]|" options:0 metrics:nil views:views]];
     }
     
     [super prepareView];
 }
+
+- (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
+    return @[];
+}
+
+
+
+#pragma mark - Answer Handling
 
 - (void)ork_setAnswer:(id)answer {
     
@@ -75,6 +88,10 @@
     [answer setObject:[NSNumber numberWithFloat:shadedPercentage] forKey:@"shadedPercentage"];
     
     [self ork_setAnswer:answer];
+}
+
+-(void)touchesBegan:(nonnull NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
+    NSLog(@"touhces began in cell");
 }
 
 @end

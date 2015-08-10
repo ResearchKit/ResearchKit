@@ -82,6 +82,9 @@
     
 //    NSDictionary *views = NSDictionaryOfVariableBindings(_frontShaderView, _backShaderView);
     
+    _frontShaderView.translatesAutoresizingMaskIntoConstraints = NO;
+    _backShaderView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_frontShaderView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_backShaderView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_frontShaderView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_backShaderView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_frontShaderView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
