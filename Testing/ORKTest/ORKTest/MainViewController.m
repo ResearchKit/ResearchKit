@@ -34,7 +34,6 @@
 #import <ResearchKit/ResearchKit_Private.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DynamicTask.h"
-#import "CustomRecorder.h"
 #import "AppDelegate.h"
 
 
@@ -1055,22 +1054,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         step.recorderConfigurations = @[[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"aid_001a.touch"]];
         [steps addObject:step];
     }
-    
-    {
-        /*
-         Demo of how to use a custom recorder to customize an active step.
-         
-         Not a recommended way of customizing active steps with the ResearchKit framework.
-         */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001b"];
-        step.title = @"Button Tap";
-        step.text = @"Please tap the orange button when it appears in the green area below.";
-        step.stepDuration = 10.0;
-        step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[[CustomRecorderConfiguration alloc] initWithIdentifier:@"aid_001b.audio"]];
-        [steps addObject:step];
-    }
-    
+        
     {
         /*
          Test for device motion recorder directly on an active step.
