@@ -352,10 +352,8 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 }
 
 - (void)sessionInterruptionEnded:(NSNotification *)notification {
-    if ([notification.name isEqualToString:AVCaptureSessionInterruptionEndedNotification]) {
-        _splitView = NO;
-        [self updateAppearance];
-    }
+    _splitView = NO;
+    [self updateAppearance];
 }
 
 - (BOOL)accessibilityPerformMagicTap {
