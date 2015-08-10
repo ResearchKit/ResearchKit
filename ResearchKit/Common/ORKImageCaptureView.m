@@ -44,10 +44,12 @@
     UIBarButtonItem *_captureButtonItem;
     UIBarButtonItem *_recaptureButtonItem;
     NSMutableArray *_variableConstraints;
+    ORKLabel *_cameraUnavailableLabel;
     
     BOOL _capturePressesIgnored;
     BOOL _retakePressesIgnored;
     BOOL _showSkipButtonItem;
+    BOOL _splitView;
 }
 
 - (instancetype)initWithFrame:(CGRect)aRect {
@@ -71,11 +73,19 @@
         _continueSkipContainer.backgroundColor = ORKColor(ORKBackgroundColorKey);
         [self addSubview:_continueSkipContainer];
         
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
+        _cameraUnavailableLabel = [ORKLabel new];
+        _cameraUnavailableLabel.text = ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil);
+        _cameraUnavailableLabel.textAlignment = NSTextAlignmentCenter;
+        _cameraUnavailableLabel.hidden = YES;
+        [self addSubview:_cameraUnavailableLabel];
+        
+        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView, _cameraUnavailableLabel);
         ORKEnableAutoLayoutForViews([dictionary allValues]);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
         
         [self updateAppearance];
     }
@@ -131,6 +141,9 @@
 
 - (void)updateAppearance {
     if (self.error) {
+        // Show the preview view.
+        _previewView.hidden = NO;
+        
         // Hide the template image if there is an error
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -138,7 +151,13 @@
         // Show skip, if available, and hide the template and continue/capture button
         _continueSkipContainer.continueButtonItem = nil;
         _continueSkipContainer.skipButtonItem = _skipButtonItem;
+        
+        // Hide the camera unavailable label.
+        _cameraUnavailableLabel.hidden = YES;
     } else if (self.capturedImage) {
+        // Show the preview view.
+        _previewView.hidden = NO;
+        
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -146,7 +165,24 @@
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
         _continueSkipContainer.continueButtonItem = _continueButtonItem;
         _continueSkipContainer.skipButtonItem = _recaptureButtonItem;
+        
+        // Hide the camera unavailable label.
+        _cameraUnavailableLabel.hidden = YES;
+    } else if (_splitView) {
+        // Hide the preview view.
+        _previewView.hidden = YES;
+        
+        // Remove the continue button.
+        _continueSkipContainer.continueButtonItem = nil;
+        _continueSkipContainer.skipButtonItem = _skipButtonItem;
+        
+        // Show the camera unavailable label.
+        _cameraUnavailableLabel.hidden = NO;
+        
     } else {
+        // Show the preview view.
+        _previewView.hidden = NO;
+        
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
         _previewView.accessibilityHint = _imageCaptureStep.accessibilityInstructions;
@@ -154,6 +190,9 @@
         // Change the continue button back to capture, and change the recapture button back to skip (if available)
         _continueSkipContainer.continueButtonItem = _captureButtonItem;
         _continueSkipContainer.skipButtonItem = _skipButtonItem;
+        
+        // Hide the camera unavailable label.
+        _cameraUnavailableLabel.hidden = YES;
     }
 }
 
@@ -187,7 +226,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         _variableConstraints = [[NSMutableArray alloc] init];
     }
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView, _cameraUnavailableLabel);
     ORKEnableAutoLayoutForViews([views allValues]);
     
     if (_error) {
@@ -210,11 +249,22 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
                                                                                           options:NSLayoutFormatDirectionLeadingToTrailing
                                                                                           metrics:nil
                                                                                             views:views]];
+        
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraUnavailableLabel]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                          metrics:nil
+                                                                                            views:views]];
+        
         [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
                                                                                           options:NSLayoutFormatDirectionLeadingToTrailing
                                                                                           metrics:nil
                                                                                             views:views]];
         
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraUnavailableLabel]-[_continueSkipContainer]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                          metrics:nil
+                                                                                            views:views]];
+
         // Float the continue view over the previewView if in landscape to give more room for the preview
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
@@ -291,6 +341,19 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         // Stop ignoring presses
         _retakePressesIgnored = NO;
     }];
+}
+
+- (void)sessionWasInterrupted:(NSNotification *)notification {
+    AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey] integerValue];
+    if (reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps) {
+        _splitView = YES;
+        [self updateAppearance];
+    }
+}
+
+- (void)sessionInterruptionEnded:(NSNotification *)notification {
+    _splitView = NO;
+    [self updateAppearance];
 }
 
 - (BOOL)accessibilityPerformMagicTap {
