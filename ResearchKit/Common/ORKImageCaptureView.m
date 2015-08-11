@@ -44,12 +44,10 @@
     UIBarButtonItem *_captureButtonItem;
     UIBarButtonItem *_recaptureButtonItem;
     NSMutableArray *_variableConstraints;
-    ORKLabel *_cameraUnavailableLabel;
     
     BOOL _capturePressesIgnored;
     BOOL _retakePressesIgnored;
     BOOL _showSkipButtonItem;
-    BOOL _splitView;
 }
 
 - (instancetype)initWithFrame:(CGRect)aRect {
@@ -59,7 +57,7 @@
         [self addSubview:_previewView];
         
         _headerView = [[ORKStepHeaderView alloc] init];
-        _headerView.alpha = 0;
+        _headerView.instructionLabel.text = @" "; // Need error placeholder string for constraints.
         [self addSubview:_headerView];
         
         _captureButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"CAPTURE_BUTTON_CAPTURE_IMAGE", nil) style:UIBarButtonItemStylePlain target:self action:@selector(capturePressed)];
@@ -73,20 +71,12 @@
         _continueSkipContainer.backgroundColor = ORKColor(ORKBackgroundColorKey);
         [self addSubview:_continueSkipContainer];
         
-        _cameraUnavailableLabel = [ORKLabel new];
-        _cameraUnavailableLabel.text = ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil);
-        _cameraUnavailableLabel.textAlignment = NSTextAlignmentCenter;
-        _cameraUnavailableLabel.hidden = YES;
-        [self addSubview:_cameraUnavailableLabel];
-        
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView, _cameraUnavailableLabel);
+        NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
         ORKEnableAutoLayoutForViews([dictionary allValues]);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
-        
+
         [self updateAppearance];
     }
     return self;
@@ -99,6 +89,8 @@
 -(void)queue_sessionRunning {
     dispatch_async(dispatch_get_main_queue(), ^{
         _previewView.templateImageHidden = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
     });
 }
 
@@ -121,6 +113,7 @@
             // Do nothing in these cases, since we don't need to change display orientation.
             return;
     }
+    
     [_previewView setVideoOrientation:orientation];
     [self.delegate videoOrientationDidChange:orientation];
     [self setNeedsUpdateConstraints];
@@ -141,13 +134,13 @@
 
 - (void)updateAppearance {
     
-    // Show the previewView.
-    _previewView.hidden = NO;
-    
-    // Hide the cameraUnavailableLabel.
-    _cameraUnavailableLabel.hidden = YES;
+    _headerView.alpha = (self.error) ? 1 : 0;
+    _previewView.alpha = (self.error) ? 0 : 1;
     
     if (self.error) {
+        // Display the error instruction.
+        _headerView.instructionLabel.text = [self.error.userInfo valueForKey:NSLocalizedDescriptionKey];
+        
         // Hide the template image if there is an error
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -163,16 +156,6 @@
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
         _continueSkipContainer.continueButtonItem = _continueButtonItem;
         _continueSkipContainer.skipButtonItem = _recaptureButtonItem;
-    } else if (_splitView) {
-        // Hide the previewView.
-        _previewView.hidden = YES;
-        
-        // Show the camera unavailable label.
-        _cameraUnavailableLabel.hidden = NO;
-        
-        // Remove the continue button.
-        _continueSkipContainer.continueButtonItem = nil;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
     } else {
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
@@ -195,16 +178,14 @@
 
 - (void)setError:(NSError * __nullable)error {
     _error = error;
-    _headerView.alpha = error==nil ? 0 : 1;
-    _headerView.instructionLabel.text = error==nil ? nil : [error.userInfo valueForKey:NSLocalizedDescriptionKey];
     [self updateAppearance];
-    [self setNeedsUpdateConstraints];
 }
 
 const CGFloat CONTINUE_ALPHA_TRANSLUCENT = 0.5;
 const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 
 - (void)updateConstraints {
+    
     if (_variableConstraints) {
         [NSLayoutConstraint deactivateConstraints:_variableConstraints];
         [_variableConstraints removeAllObjects];
@@ -214,65 +195,49 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
         _variableConstraints = [[NSMutableArray alloc] init];
     }
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView, _cameraUnavailableLabel);
+    NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    if (_error) {
-        // If we have an error to show, do not display the previewView at all
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-    } else {
-        // If we do not have an error to show, layout the previewView and continueSkipContainer
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraUnavailableLabel]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
-        
-        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraUnavailableLabel]-[_continueSkipContainer]|"
-                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                          metrics:nil
-                                                                                            views:views]];
+    
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"
+                                                                                    options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                    metrics:nil
+                                                                                      views:views]];
 
-        // Float the continue view over the previewView if in landscape to give more room for the preview
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
-                                                                                              options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
-                                                                                                views:views]];
-            [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer
-                                                                         attribute:NSLayoutAttributeBottom
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:self
-                                                                         attribute:NSLayoutAttributeBottom
-                                                                        multiplier:1.0
-                                                                          constant:0.0]];
-            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
-        } else {
-            [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
-                                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                                              metrics:nil
-                                                                                                views:views]];
-            _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
-        }
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_previewView]|"
+                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                      metrics:nil
+                                                                                        views:views]];
+    
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_continueSkipContainer]|"
+                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                      metrics:nil
+                                                                                        views:views]];
+    
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headerView]-[_continueSkipContainer]|"
+                                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                      metrics:nil
+                                                                                        views:views]];
+    
+    // Float the continue view over the previewView if in landscape to give more room for the preview
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil
+                                                                                            views:views]];
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_continueSkipContainer
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self
+                                                                     attribute:NSLayoutAttributeBottom
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_TRANSLUCENT];
+    } else {
+        [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_previewView]-[_continueSkipContainer]|"
+                                                                                          options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                          metrics:nil
+                                                                                            views:views]];
+        _continueSkipContainer.backgroundColor = [_continueSkipContainer.backgroundColor colorWithAlphaComponent:CONTINUE_ALPHA_OPAQUE];
     }
     
     [NSLayoutConstraint activateConstraints:_variableConstraints];
@@ -334,14 +299,12 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
 - (void)sessionWasInterrupted:(NSNotification *)notification {
     AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey] integerValue];
     if (reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps) {
-        _splitView = YES;
-        [self updateAppearance];
+        [self setError:[[NSError alloc] initWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"CAMERA_UNAVAILABLE_MESSAGE", nil)}]];
     }
 }
 
 - (void)sessionInterruptionEnded:(NSNotification *)notification {
-    _splitView = NO;
-    [self updateAppearance];
+    [self setError:nil];
 }
 
 - (BOOL)accessibilityPerformMagicTap {
