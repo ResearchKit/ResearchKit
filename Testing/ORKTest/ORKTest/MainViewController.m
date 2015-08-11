@@ -1799,6 +1799,8 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         
         scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
         scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.minimumImage.accessibilityHint = @"A yellow colored square to represent warmness.";
+        scaleAnswerFormat.maximumImage.accessibilityHint = @"A red colored square to represent hot.";
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_12"
                                                                       title:@"On a scale of 1 to 10, how warm do you feel?"
