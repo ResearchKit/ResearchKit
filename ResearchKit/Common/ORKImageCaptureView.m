@@ -140,10 +140,14 @@
 }
 
 - (void)updateAppearance {
+    
+    // Show the previewView.
+    _previewView.hidden = NO;
+    
+    // Hide the cameraUnavailableLabel.
+    _cameraUnavailableLabel.hidden = YES;
+    
     if (self.error) {
-        // Show the preview view.
-        _previewView.hidden = NO;
-        
         // Hide the template image if there is an error
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -151,13 +155,7 @@
         // Show skip, if available, and hide the template and continue/capture button
         _continueSkipContainer.continueButtonItem = nil;
         _continueSkipContainer.skipButtonItem = _skipButtonItem;
-        
-        // Hide the camera unavailable label.
-        _cameraUnavailableLabel.hidden = YES;
     } else if (self.capturedImage) {
-        // Show the preview view.
-        _previewView.hidden = NO;
-        
         // Hide the template image after capturing
         _previewView.templateImageHidden = YES;
         _previewView.accessibilityHint = nil;
@@ -165,24 +163,17 @@
         // Set the continue button to the one we've saved and configure the skip button as a recapture button
         _continueSkipContainer.continueButtonItem = _continueButtonItem;
         _continueSkipContainer.skipButtonItem = _recaptureButtonItem;
-        
-        // Hide the camera unavailable label.
-        _cameraUnavailableLabel.hidden = YES;
     } else if (_splitView) {
-        // Hide the preview view.
+        // Hide the previewView.
         _previewView.hidden = YES;
-        
-        // Remove the continue button.
-        _continueSkipContainer.continueButtonItem = nil;
-        _continueSkipContainer.skipButtonItem = _skipButtonItem;
         
         // Show the camera unavailable label.
         _cameraUnavailableLabel.hidden = NO;
         
+        // Remove the continue button.
+        _continueSkipContainer.continueButtonItem = nil;
+        _continueSkipContainer.skipButtonItem = _skipButtonItem;
     } else {
-        // Show the preview view.
-        _previewView.hidden = NO;
-        
         // Show the template image during capturing
         _previewView.templateImageHidden = NO;
         _previewView.accessibilityHint = _imageCaptureStep.accessibilityInstructions;
@@ -190,9 +181,6 @@
         // Change the continue button back to capture, and change the recapture button back to skip (if available)
         _continueSkipContainer.continueButtonItem = _captureButtonItem;
         _continueSkipContainer.skipButtonItem = _skipButtonItem;
-        
-        // Hide the camera unavailable label.
-        _cameraUnavailableLabel.hidden = YES;
     }
 }
 
