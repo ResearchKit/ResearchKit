@@ -75,7 +75,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
         UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
         self.layoutMargins = layoutMargins;
         _verticalScreenType = ORKScreenTypeiPhone4;
-        _horizontalScreenType = ORKScreenTypeiPhone4;
         _scrollContainer = [UIView new];
         [self addSubview:_scrollContainer];
         _container = [UIView new];
@@ -188,7 +187,6 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     _verticalScreenType = ORKGetVerticalScreenTypeForWindow(newWindow);
-    _horizontalScreenType = ORKGetHorizontalScreenTypeForWindow(newWindow);
     [self updateConstraintConstants];
     if (newWindow) {
         [self registerForKeyboardNotifications:YES];
@@ -313,11 +311,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
     UIWindow *window = self.window;
     if (window) {
         _verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
-        _horizontalScreenType = ORKGetHorizontalScreenTypeForWindow(window);
     }
     
     ORKScreenType verticalScreenType = _verticalScreenType;
-    ORKScreenType horizontalScreenType = _horizontalScreenType;
     
     const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, verticalScreenType);
     const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, verticalScreenType);
@@ -328,7 +324,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     {
         const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, verticalScreenType);
-        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, horizontalScreenType);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, verticalScreenType);
 
         NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
         constraint.constant = (_imageView.image ? IllustrationHeight : 0);
