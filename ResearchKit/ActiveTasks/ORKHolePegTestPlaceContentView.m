@@ -47,7 +47,6 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
 @property (nonatomic, strong) ORKHolePegTestPlaceHoleView *holeView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, copy) NSArray *constraints;
-@property (nonatomic, assign) CGPoint initialPosition;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
@@ -58,6 +57,7 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
 @property (nonatomic, assign) CGFloat rotationOffset;
 @property (nonatomic, assign) CGPoint translation;
 @property (nonatomic, assign) CGPoint translationOffset;
+@property (nonatomic, assign) CGPoint startPoint;
 
 @end
 
@@ -95,6 +95,7 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
         
         self.movable = NO;
         self.moveEnded = NO;
+        self.startPoint = CGPointZero;
         
         self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                          action:@selector(handlePinch:)];
@@ -198,20 +199,21 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
 #pragma mark - gesture recognizer methods
 
 - (void)pickupPegWithGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
-    if ([gestureRecognizer numberOfTouches] == 2) {
-        CGPoint touch1 = [gestureRecognizer locationOfTouch:0 inView:self];
-        CGPoint touch2 = [gestureRecognizer locationOfTouch:1 inView:self];
-        double distance = hypot(touch1.x - touch2.x, touch1.y - touch2.y);
-        
-        if (distance < 3 * CGRectGetWidth(self.pegView.frame) &&
-            CGRectContainsPoint(CGRectInset(self.pegView.frame, CGRectGetWidth(self.pegView.frame)/4, CGRectGetHeight(self.pegView.frame)/4), [gestureRecognizer locationInView:self])) {
-            self.movable = YES;
-        }
+    CGPoint touch = [gestureRecognizer locationInView:self];
+    CGPoint touch1 = [gestureRecognizer locationOfTouch:0 inView:self];
+    CGPoint touch2 = [gestureRecognizer locationOfTouch:1 inView:self];
+    double distance = hypot(touch1.x - touch2.x, touch1.y - touch2.y);
+    
+    if (distance < 3 * CGRectGetWidth(self.pegView.frame) &&
+        CGRectContainsPoint(self.pegView.frame, touch)) {
+        self.movable = YES;
+    } else {
+        self.movable = NO;
     }
 }
 
 - (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer {
-    if (!self.isMovable) {
+    if ([pinchGestureRecognizer numberOfTouches] == 2) {
         [self pickupPegWithGestureRecognizer:pinchGestureRecognizer];
     }
 }
@@ -221,16 +223,16 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
         panGestureRecognizer.state == UIGestureRecognizerStateEnded ||
         panGestureRecognizer.state == UIGestureRecognizerStateCancelled ||
         panGestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self resetTransform];
+        [self resetTransformAtPoint:[panGestureRecognizer locationInView:self]];
     } else {
         if (self.isMovable) {
             self.translation = CGPointMake([panGestureRecognizer translationInView:self].x - self.translationOffset.x,
                                            [panGestureRecognizer translationInView:self].y - self.translationOffset.y);
-            [self updateTransform];
+            [self updateTransformAtPoint:[panGestureRecognizer locationInView:self]];
         } else {
             self.translationOffset = CGPointMake([panGestureRecognizer translationInView:self].x - self.translation.x,
                                                  [panGestureRecognizer translationInView:self].y - self.translation.y);
-            if (!self.isMovable) {
+            if (CGPointEqualToPoint(self.startPoint, CGPointZero)) {
                 [self pickupPegWithGestureRecognizer:panGestureRecognizer];
             }
         }
@@ -242,27 +244,24 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
         rotationGestureRecognizer.state == UIGestureRecognizerStateEnded ||
         rotationGestureRecognizer.state == UIGestureRecognizerStateCancelled ||
         rotationGestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self resetTransform];
+        [self resetTransformAtPoint:[rotationGestureRecognizer locationInView:self]];
     } else {
         if (self.isMovable) {
             self.rotation = rotationGestureRecognizer.rotation - self.rotationOffset;
-            [self updateTransform];
+            [self updateTransformAtPoint:[rotationGestureRecognizer locationInView:self]];
         } else {
             self.rotationOffset = rotationGestureRecognizer.rotation - self.rotation;
-            if (!self.isMovable) {
-                [self pickupPegWithGestureRecognizer:rotationGestureRecognizer];
-            }
         }
     }
 }
 
-- (void)updateTransform {
+- (void)updateTransformAtPoint:(CGPoint)point {
     self.pegView.transform = CGAffineTransformMakeTranslation(self.translation.x, self.translation.y);
     self.pegView.transform = CGAffineTransformRotate(self.pegView.transform, self.rotation);
-    [self pegViewDidMove];
+    [self pegViewDidMoveAtPoint:point];
 }
 
-- (void)resetTransform {
+- (void)resetTransformAtPoint:(CGPoint)point {
     if (!self.isMoveEnded) {
         self.movable = NO;
         self.moveEnded = YES;
@@ -271,7 +270,7 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
         self.panRecognizer.enabled = NO;
         self.rotationRecognizer.enabled = NO;
 
-        BOOL animated = ![self pegViewMoveEnded];
+        BOOL animated = ![self pegViewMoveEndedAtPoint:point];
         self.pegView.hidden = !animated;
 
         [UIView animateWithDuration:animated ? 0.15f : 0.0f
@@ -302,8 +301,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 #pragma mark - peg view delegate
 
-- (void)pegViewDidMove {
+- (void)pegViewDidMoveAtPoint:(CGPoint)point {
     self.directionView.hidden = YES;
+    
+    if (CGPointEqualToPoint(self.startPoint, CGPointZero)) {
+        self.startPoint = point;
+    }
     
     if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidProgress:)]) {
         [self.delegate holePegTestPlaceDidProgress:self];
@@ -320,22 +323,25 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (BOOL)pegViewMoveEnded {
+- (BOOL)pegViewMoveEndedAtPoint:(CGPoint)point {
     self.directionView.hidden = NO;
     
+    BOOL succeeded = NO;
     if ([self holeViewContainsPegView]) {
         if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidSucceed:withDistance:)]) {
-            [self.delegate holePegTestPlaceDidSucceed:self withDistance:0];
+            CGFloat distance = hypotf(point.x - self.startPoint.x, point.y - self.startPoint.y);
+            [self.delegate holePegTestPlaceDidSucceed:self withDistance:distance];
         }
         self.holeView.success = YES;
-        return YES;
+        succeeded = YES;
     } else {
         if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidFail:)]) {
             [self.delegate holePegTestPlaceDidFail:self];
         }
         self.holeView.success = NO;
-        return NO;
     }
+    self.startPoint = CGPointZero;
+    return succeeded;
 }
 
 - (BOOL)holeViewContainsPegView {

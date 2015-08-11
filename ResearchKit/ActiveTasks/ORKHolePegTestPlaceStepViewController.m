@@ -73,9 +73,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.successes = 0;
-    self.failures = 0;
-    
     self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithOrientation:[self holePegTestPlaceStep].orientation
                                                                                            rotated:[self holePegTestPlaceStep].rotated];
     self.holePegTestPlaceContentView.threshold = [self holePegTestPlaceStep].threshold;
@@ -85,6 +82,8 @@
 }
 
 - (void)start {
+    self.successes = 0;
+    self.failures = 0;
     self.samples = [NSMutableArray array];
     [self.holePegTestPlaceContentView setProgress:0.001f animated:NO];
     
