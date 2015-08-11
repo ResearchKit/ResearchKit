@@ -47,11 +47,11 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
 @property (nonatomic, strong) ORKHolePegTestPlaceHoleView *holeView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, copy) NSArray *constraints;
+@property (nonatomic, assign) CGPoint initialPosition;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
-
 @property (nonatomic, assign, getter=isMovable) BOOL movable;
 @property (nonatomic, assign, getter=isMoveEnded) BOOL moveEnded;
 @property (nonatomic, assign) CGFloat rotation;
@@ -197,17 +197,22 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
 
 #pragma mark - gesture recognizer methods
 
-- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer {
-    if ([pinchGestureRecognizer numberOfTouches] == 2) {
-        CGPoint touch1 = [pinchGestureRecognizer locationOfTouch:0 inView:self];
-        CGPoint touch2 = [pinchGestureRecognizer locationOfTouch:1 inView:self];
+- (void)pickupPegWithGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer numberOfTouches] == 2) {
+        CGPoint touch1 = [gestureRecognizer locationOfTouch:0 inView:self];
+        CGPoint touch2 = [gestureRecognizer locationOfTouch:1 inView:self];
         double distance = hypot(touch1.x - touch2.x, touch1.y - touch2.y);
         
-        if (!self.isMovable &&
-            distance < 3 * CGRectGetWidth(self.pegView.frame) &&
-            CGRectContainsPoint(CGRectInset(self.pegView.frame, CGRectGetWidth(self.pegView.frame)/4, CGRectGetHeight(self.pegView.frame)/4), [pinchGestureRecognizer locationInView:self])) {
+        if (distance < 3 * CGRectGetWidth(self.pegView.frame) &&
+            CGRectContainsPoint(CGRectInset(self.pegView.frame, CGRectGetWidth(self.pegView.frame)/4, CGRectGetHeight(self.pegView.frame)/4), [gestureRecognizer locationInView:self])) {
             self.movable = YES;
         }
+    }
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer *)pinchGestureRecognizer {
+    if (!self.isMovable) {
+        [self pickupPegWithGestureRecognizer:pinchGestureRecognizer];
     }
 }
 
@@ -225,6 +230,9 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
         } else {
             self.translationOffset = CGPointMake([panGestureRecognizer translationInView:self].x - self.translation.x,
                                                  [panGestureRecognizer translationInView:self].y - self.translation.y);
+            if (!self.isMovable) {
+                [self pickupPegWithGestureRecognizer:panGestureRecognizer];
+            }
         }
     }
 }
@@ -241,6 +249,9 @@ static const CGFloat ORKHoleViewDiameter = 88.0f;
             [self updateTransform];
         } else {
             self.rotationOffset = rotationGestureRecognizer.rotation - self.rotation;
+            if (!self.isMovable) {
+                [self pickupPegWithGestureRecognizer:rotationGestureRecognizer];
+            }
         }
     }
 }
