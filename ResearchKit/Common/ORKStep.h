@@ -32,7 +32,6 @@
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
@@ -166,6 +165,8 @@ ORK_CLASS_AVAILABLE
  properties, and must call super.
  */
 - (void)validateParameters;
+
+@property (nonatomic) BOOL isBeingReviewed;
 
 @end
 

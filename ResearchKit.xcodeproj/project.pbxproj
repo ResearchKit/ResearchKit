@@ -386,9 +386,9 @@
 		BCAD50E81B0201EE0034806A /* ORKTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCAD50E71B0201EE0034806A /* ORKTaskTests.m */; };
 		BCB96C131B19C0EC002A0B96 /* ORKStepTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB96C121B19C0EC002A0B96 /* ORKStepTests.m */; };
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
-		BFD319D61B73268400B93D66 /* ORKReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD319D21B73268400B93D66 /* ORKReviewStep.h */; };
+		BFD319D61B73268400B93D66 /* ORKReviewStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD319D21B73268400B93D66 /* ORKReviewStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFD319D71B73268400B93D66 /* ORKReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD319D31B73268400B93D66 /* ORKReviewStep.m */; };
-		BFD319D81B73268400B93D66 /* ORKReviewStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */; };
+		BFD319D81B73268400B93D66 /* ORKReviewStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFD319D91B73268400B93D66 /* ORKReviewStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD319D51B73268400B93D66 /* ORKReviewStepViewController.m */; };
 		BFD319DC1B73F1DB00B93D66 /* ORKReviewStep.md in Sources */ = {isa = PBXBuildFile; fileRef = BFD319DB1B73F1DB00B93D66 /* ORKReviewStep.md */; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
@@ -1170,7 +1170,7 @@
 				86C40B771A8D7C5C00081FAC /* ORKCustomStepView.h */,
 				86C40B781A8D7C5C00081FAC /* ORKCustomStepView.m */,
 				86C40B791A8D7C5C00081FAC /* ORKCustomStepView_Internal.h */,
-				BFD319DA1B73268C00B93D66 /* ORKReviewStep */,
+				BFD319DA1B73268C00B93D66 /* ReviewStep */,
 				B12EFF351AB2116400A80147 /* Instruction Step */,
 				B12EFF361AB2117B00A80147 /* Question Step */,
 				B12EFF3C1AB211FB00A80147 /* Form Step */,
@@ -1753,7 +1753,7 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
-		BFD319DA1B73268C00B93D66 /* ORKReviewStep */ = {
+		BFD319DA1B73268C00B93D66 /* ReviewStep */ = {
 			isa = PBXGroup;
 			children = (
 				BFD319DB1B73F1DB00B93D66 /* ORKReviewStep.md */,
@@ -1762,7 +1762,7 @@
 				BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */,
 				BFD319D51B73268400B93D66 /* ORKReviewStepViewController.m */,
 			);
-			name = ORKReviewStep;
+			name = ReviewStep;
 			sourceTree = "<group>";
 		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
@@ -1809,6 +1809,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD319D61B73268400B93D66 /* ORKReviewStep.h in Headers */,
+				BFD319D81B73268400B93D66 /* ORKReviewStepViewController.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
 				BC13CE391B0660220044153C /* ORKNavigableOrderedTask.h in Headers */,
 				86C40C921A8D7C5C00081FAC /* ORKAudioRecorder.h in Headers */,
@@ -1875,7 +1877,6 @@
 				86C40D141A8D7C5C00081FAC /* ORKDefines_Private.h in Headers */,
 				86C40CA81A8D7C5C00081FAC /* ORKPedometerRecorder.h in Headers */,
 				86C40CD01A8D7C5C00081FAC /* ORKInstructionStepView.h in Headers */,
-				BFD319D81B73268400B93D66 /* ORKReviewStepViewController.h in Headers */,
 				86C40E021A8D7C5C00081FAC /* ORKConsentDocument_Internal.h in Headers */,
 				86C40E181A8D7C5C00081FAC /* ORKConsentSection.h in Headers */,
 				86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */,
@@ -1969,7 +1970,6 @@
 				86C40CD81A8D7C5C00081FAC /* ORKTextFieldView.h in Headers */,
 				86C40DD01A8D7C5C00081FAC /* ORKTaskViewController_Private.h in Headers */,
 				86C40DAE1A8D7C5C00081FAC /* ORKSurveyAnswerCellForScale.h in Headers */,
-				BFD319D61B73268400B93D66 /* ORKReviewStep.h in Headers */,
 				86C40CFE1A8D7C5C00081FAC /* ORKChoiceViewCell.h in Headers */,
 				86C40DC61A8D7C5C00081FAC /* ORKTask.h in Headers */,
 				86C40C561A8D7C5C00081FAC /* ORKTappingIntervalStepViewController.h in Headers */,

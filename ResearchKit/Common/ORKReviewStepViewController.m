@@ -28,57 +28,158 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #import "ORKReviewStepViewController.h"
-#import "ORKStepViewController_Internal.h"
 #import "ORKReviewStep.h"
-#import "ORKTask.h"
+#import "ORKStep_Private.h"
+#import "ORKTaskViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
+#import "ORKSkin.h"
+#import "ORKTableContainerView.h"
+#import "ORKChoiceViewCell.h"
+#import "ORKStepHeaderView_Internal.h"
+#import "ORKNavigationContainerView_Internal.h"
+#import "ORKResult.h"
 
+@interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@interface ORKReviewStepViewController ()
+@property (nonatomic, strong) ORKTableContainerView *tableContainer;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ORKStepHeaderView *headerView;
+@property (nonatomic, strong) ORKNavigationContainerView *continueSkipView;
 
 @end
 
 @implementation ORKReviewStepViewController
 
-- (nonnull instancetype)initWithStep:(ORKStep *)step {
-    self = [super initWithStep:step];
+- (instancetype)initWithStep:(nonnull ORKStep *)step result:(nonnull ORKResult *)result {
+    self = [super initWithStep:step result:result];
     if (self) {
-        _reviewDirection = ORKReviewStepViewControllerReviewDirectionReverse;
+        if (!self.reviewStep) {
+            //TODO: throw exception
+        }
     }
     return self;
 }
 
-- (nonnull instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        _reviewDirection = ORKReviewStepViewControllerReviewDirectionReverse;
+        if (!self.reviewStep) {
+            //TODO: throw exception
+        }
     }
     return self;
 }
 
-- (void)discoverStepsWithResult:(ORKTaskResult *)result {
-    ORKReviewStep *reviewStep = (ORKReviewStep*) self.step;
-    if (reviewStep && result) {
-        NSMutableArray *steps = [NSMutableArray alloc];
-        ORKStep *nextStep = self.step;
-        do {
-            switch (_reviewDirection) {
-                case ORKReviewStepViewControllerReviewDirectionForward:
-                    nextStep = [[reviewStep task] stepAfterStep:nextStep withResult:result];
-                    break;
-                case ORKReviewStepViewControllerReviewDirectionReverse:
-                    nextStep = [[reviewStep task] stepBeforeStep:nextStep withResult:result];
-                    break;
-            }
-            if (nextStep != nil && ![nextStep isKindOfClass:[ORKReviewStep class]]) {
-                [steps addObject:nextStep];
-            }
-        } while (nextStep != nil && ![nextStep isKindOfClass:[ORKReviewStep class]]);
-        _steps = [steps copy];
+- (void)viewWillAppear:(BOOL)animated {
+    self.completed = NO;
+    if (!self.hasBeenPresented && self.steps.count == 0) {
+        //TODO: localize string
+        _headerView.instructionLabel.text = @"No steps available for review";
     }
+    [super viewWillAppear:animated];
+    [self.taskViewController setRegisteredScrollView:_tableView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem);
+}
+
+- (void)goForward {
+    self.completed = YES;
+    [super goForward];
+}
+
+//TODO: defaults
+
+- (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
+    [super setLearnMoreButtonItem:learnMoreButtonItem];
+    _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+    [_tableContainer setNeedsLayout];
+}
+
+- (void)stepDidChange {
+    [super stepDidChange];
+    
+    [_tableContainer removeFromSuperview];
+    _tableContainer = nil;
+    
+    _tableView.delegate = nil;
+    _tableView.dataSource = nil;
+    _tableView = nil;
+    _headerView = nil;
+    _continueSkipView = nil;
+    
+    if ([self reviewStep]) {
+        _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:_tableContainer];
+        _tableContainer.tapOffView = self.view;
+        
+        _tableView = _tableContainer.tableView;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+        ORKScreenType screenType = ORKGetScreenTypeForWindow(self.view.window);
+        _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+        [_tableView registerClass:[ORKChoiceViewCell class] forCellReuseIdentifier:@"reviewCell"];
+        
+        _headerView = _tableContainer.stepHeaderView;
+        _headerView.captionLabel.text = [[self reviewStep] title];
+        _headerView.captionLabel.useSurveyMode = [[self reviewStep] useSurveyMode];
+        _headerView.instructionLabel.text = [[self reviewStep] text];
+        _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+        
+        _continueSkipView = _tableContainer.continueSkipContainerView;
+        _continueSkipView.skipButtonItem = self.skipButtonItem;
+        _continueSkipView.continueEnabled = YES;
+        _continueSkipView.continueButtonItem = self.continueButtonItem;
+        _continueSkipView.optional = self.step.optional;
+        _continueSkipView.hidden = self.step.isBeingReviewed;
+    }
+}
+
+- (ORKReviewStep *)reviewStep {
+    return [self.step isKindOfClass:[ORKReviewStep class]] ? (ORKReviewStep *) self.step : nil;
+}
+
+- (ORKStepResult *)result {
+    ORKStepResult *parentResult = [super result];
+    parentResult.endDate = self.completed ? [NSDate date] : nil;
+    return parentResult;
 }
 
 //TODO: state restoration
 
+#pragma mark UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _steps.count;
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    //TODO: change cell appearance
+    ORKChoiceViewCell *cell = (ORKChoiceViewCell *) [tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
+    cell.immediateNavigation = YES;
+    cell.shortLabel.text = [_steps[indexPath.row] title];
+    //TODO: process results
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+
+- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:reviewStep:)]) {
+        [self.reviewDelegate reviewStepViewController:self reviewStep:_steps[indexPath.row]];
+    }
+}
+
+
+
 @end
+

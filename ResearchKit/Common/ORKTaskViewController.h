@@ -223,6 +223,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
 
+- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldReviewStep:(ORKStep *)step;
+
 @end
 
 

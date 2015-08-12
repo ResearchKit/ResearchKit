@@ -174,6 +174,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
+            _continueSkipView.hidden = self.step.isBeingReviewed;
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -185,13 +186,14 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
+                _customQuestionView.userInteractionEnabled = self.canChangeStepResult;
             } else {
                 ORKQuestionStepCellHolderView *holder = [ORKQuestionStepCellHolderView new];
                 holder.delegate = self;
                 holder.cell = [self answerCellForTableView:nil];
+                holder.cell.userInteractionEnabled = self.canChangeStepResult;
                 [holder addConstraints:[holder.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
                 holder.answer = [self answer];
-                
                 _questionView.questionCustomView = holder;
             }
             
@@ -594,6 +596,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     }
     
+    cell.userInteractionEnabled = self.canChangeStepResult;
     return cell;
 }
 

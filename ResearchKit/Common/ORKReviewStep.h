@@ -35,16 +35,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, ORKReviewStepReviewDirection) {
+    
+    ORKReviewStepReviewDirectionForward,
+    
+    ORKReviewStepReviewDirectionReverse
+} ORK_ENUM_AVAILABLE;
+
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStep : ORKStep
+
+@property (nonatomic) ORKReviewStepReviewDirection reviewDirection;
 
 @property (nonatomic, readonly, nullable) NSArray *steps;
 
 @property (nonatomic, readonly, nullable) id<ORKTaskResultSource> resultSource;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(NSArray *)steps
-                      resultSource:(id<ORKTaskResultSource>)resultSource;
+@property (nonatomic, readonly) BOOL isStandalone;
+
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
+                             steps:(nullable NSArray *)steps
+                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
 
 @end
 

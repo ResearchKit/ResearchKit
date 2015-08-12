@@ -284,6 +284,18 @@
     return _hasBeenPresented;
 }
 
+- (BOOL)canChangeStepResult {
+    if (!self.step || !self.taskViewController) {
+        return NO;
+    }
+    BOOL isReviewStepStandalone = NO;
+    ORKReviewStep *reviewStep = [self.taskViewController reviewStepForStep:self.step];
+    if (reviewStep) {
+        isReviewStepStandalone = reviewStep.isStandalone;
+    }
+    return self.step.isBeingReviewed ? !isReviewStepStandalone : YES;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
@@ -346,7 +358,7 @@
 }
 
 #pragma mark - UIStateRestoring
-
+//TODO: canChangeStepResult
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";

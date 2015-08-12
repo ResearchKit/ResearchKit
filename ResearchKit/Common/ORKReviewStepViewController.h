@@ -30,7 +30,8 @@
 
 
 #import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKQuestionStepViewController.h>
+#import <ResearchKit/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,27 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKReviewStepViewControllerDelegate <NSObject>
 
-- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
-                   canReviewStep:(ORKStep *)step;
-
-- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
-                   canChangeStep:(ORKStep *)step;
-
 - (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
                       reviewStep:(ORKStep *)step;
 @end
 
-typedef NS_ENUM(NSInteger, ORKReviewStepViewControllerReviewDirection) {
-    
-    ORKReviewStepViewControllerReviewDirectionForward,
-    
-    ORKReviewStepViewControllerReviewDirectionReverse
-} ORK_ENUM_AVAILABLE;
-
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStepViewController : ORKStepViewController
-
-@property (nonatomic) ORKReviewStepViewControllerReviewDirection reviewDirection;
 
 @property (nonatomic, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 
@@ -67,7 +53,10 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) id<ORKTaskResultSource> resultSource;
 
-- (void)discoverStepsWithResult:(ORKTaskResult *)result;
+//TODO: move to internal header
+@property (nonatomic, nonnull, readonly) ORKReviewStep *reviewStep;
+//TODO: move to internal header
+@property (nonatomic) BOOL completed;
 
 @end
 
