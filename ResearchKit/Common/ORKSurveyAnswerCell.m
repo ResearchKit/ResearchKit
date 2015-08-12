@@ -200,7 +200,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(view.window);
     return ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
 }
 

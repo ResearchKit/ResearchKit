@@ -147,7 +147,7 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
+    _screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
     [self setNeedsUpdateConstraints];
 }
 

@@ -434,7 +434,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(self.view.window);
+        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.view.window);
         _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
@@ -742,7 +742,7 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetScreenTypeForWindow(self.view.window)];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetVerticalScreenTypeForWindow(self.view.window)];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.delegate  = self;
@@ -947,7 +947,6 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
     for (ORKFormItemCell *cell in _formItemCells) {
         [cell setExpectedLayoutWidth:size.width];
     }
