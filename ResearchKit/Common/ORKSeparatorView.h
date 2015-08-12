@@ -29,20 +29,11 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <UIKit/UIKit.h>
+#import "ORKDefines_Private.h"
 
-
-NS_ASSUME_NONNULL_BEGIN
 
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPlaceStep : ORKActiveStep
-
-@property (nonatomic, assign) ORKSide orientation;
-@property (nonatomic, assign, getter=isDominantHandTested) BOOL dominantHandTested;
-@property (nonatomic, assign) int numberOfPegs;
-@property (nonatomic, assign) double threshold;
-@property (nonatomic, assign, getter = isRotated) BOOL rotated;
+@interface ORKSeparatorView : UIView
 
 @end
-
-NS_ASSUME_NONNULL_END

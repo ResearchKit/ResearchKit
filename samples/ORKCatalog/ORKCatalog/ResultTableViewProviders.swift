@@ -641,29 +641,31 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
         
         if section == 0 {
             var side = ""
-            let dominantHand = holePegTestResult.dominantHand
-            if (dominantHand == .Left) {
-                side = "Left"
-            } else if (dominantHand == .Right) {
-                side = "Right"
+            let orientation = holePegTestResult.orientation
+            if (orientation == .Left) {
+                side = "left"
+            } else if (orientation == .Right) {
+                side = "right"
             }
             
-            // The hole peg test dominant hand.
-            rows.append(ResultRow(text: "dominant hand", detail: side))
+            // The hole peg test orientation.
+            rows.append(ResultRow(text: "orientation", detail: side))
             
             // The step is for the dominant hand.
-            rows.append(ResultRow(text: "dominant hand test", detail: holePegTestResult.dominantHandTested))
+            rows.append(ResultRow(text: "dominant hand", detail: holePegTestResult.dominantHandTested))
             
-            // The number of holes to test.
-            rows.append(ResultRow(text: "number of holes", detail: holePegTestResult.numberOfHoles))
+            // The number of pegs to test.
+            rows.append(ResultRow(text: "number of pegs", detail: holePegTestResult.numberOfPegs))
             
             // The detection area sensitivity.
             rows.append(ResultRow(text: "threshold", detail: holePegTestResult.threshold))
             
             // The hole peg test also assesses the rotation capabilities.
-            rows.append(ResultRow(text: "rotated", detail: holePegTestResult.rotated))
+            if result.identifier.rangeOfString("place") != nil {
+                rows.append(ResultRow(text: "rotated", detail: holePegTestResult.rotated))
+            }
             
-            // The number of succeeded moves (out of `numberOfHoles` possible).
+            // The number of succeeded moves (out of `numberOfPegs` possible).
             rows.append(ResultRow(text: "total successes", detail: holePegTestResult.totalSuccesses))
             
             // The number of failed moves.

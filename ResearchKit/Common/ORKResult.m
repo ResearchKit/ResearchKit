@@ -614,9 +614,9 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_ENUM(aCoder, dominantHand);
+    ORK_ENCODE_ENUM(aCoder, orientation);
     ORK_ENCODE_BOOL(aCoder, dominantHandTested);
-    ORK_ENCODE_INTEGER(aCoder, numberOfHoles);
+    ORK_ENCODE_INTEGER(aCoder, numberOfPegs);
     ORK_ENCODE_INTEGER(aCoder, threshold);
     ORK_ENCODE_BOOL(aCoder, rotated);
     ORK_ENCODE_INTEGER(aCoder, totalSuccesses);
@@ -629,9 +629,9 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_ENUM(aDecoder, dominantHand);
+        ORK_DECODE_ENUM(aDecoder, orientation);
         ORK_DECODE_BOOL(aDecoder, dominantHandTested);
-        ORK_DECODE_INTEGER(aDecoder, numberOfHoles);
+        ORK_DECODE_INTEGER(aDecoder, numberOfPegs);
         ORK_DECODE_INTEGER(aDecoder, threshold);
         ORK_DECODE_BOOL(aDecoder, rotated);
         ORK_DECODE_INTEGER(aDecoder, totalSuccesses);
@@ -652,9 +652,9 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.dominantHand == castObject.dominantHand) &&
+            (self.orientation == castObject.orientation) &&
             (self.isDominantHandTested == castObject.isDominantHandTested) &&
-            (self.numberOfHoles == castObject.numberOfHoles) &&
+            (self.numberOfPegs == castObject.numberOfPegs) &&
             (self.threshold == castObject.threshold) &&
             (self.isRotated == castObject.isRotated) &&
             (self.totalSuccesses == castObject.totalSuccesses) &&
@@ -670,9 +670,9 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKHolePegTestResult *result = [super copyWithZone:zone];
-    result.dominantHand = self.dominantHand;
+    result.orientation = self.orientation;
     result.dominantHandTested = self.isDominantHandTested;
-    result.numberOfHoles = self.numberOfHoles;
+    result.numberOfPegs = self.numberOfPegs;
     result.threshold = self.threshold;
     result.rotated = self.isRotated;
     result.totalSuccesses = self.totalSuccesses;

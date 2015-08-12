@@ -29,35 +29,25 @@
  */
 
 
-#import "ORKHolePegTestPlacePegView.h"
+#import "ORKSeparatorView.h"
 
 
-@implementation ORKHolePegTestPlacePegView
+static const CGFloat ORKLineWidth = 2.0f;
+static const CGFloat ORKLengths[2] = {4.0f, 4.0f};
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+
+@implementation ORKSeparatorView
+
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.opaque = NO;
     }
-    
     return self;
 }
 
-- (CGSize)intrinsicContentSize {
-    return CGSizeMake(self.frame.size.width, self.frame.size.height);
-}
-
-#pragma mark - drawing method
-
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    [self setNeedsDisplay];
-}
-
-- (void)setRotated:(BOOL)rotated
-{
-    _rotated = rotated;
     [self setNeedsDisplay];
 }
 
@@ -65,27 +55,13 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGRect bounds = self.bounds;
-    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:bounds];
-    
-    if (self.isRotated) {
-        [path moveToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 1/4)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 7/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 1/4, CGRectGetHeight(bounds) * 7/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 1/4, CGRectGetHeight(bounds) * 9/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 9/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 3/4)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 3/4)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 9/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 3/4, CGRectGetHeight(bounds) * 9/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 3/4, CGRectGetHeight(bounds) * 7/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 7/16)];
-        [path addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 1/4)];
-        [path closePath];
-    }
-    
-    [self.tintColor setFill];
-    [path fill];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(ORKLineWidth / 2, 0.0f)];
+    [path addLineToPoint:CGPointMake(ORKLineWidth / 2, CGRectGetHeight(self.bounds))];
+    path.lineWidth = ORKLineWidth;
+    [path setLineDash:ORKLengths count:2 phase:0.0f];
+    [self.tintColor setStroke];
+    [path stroke];
     
     CGContextRestoreGState(context);
 }

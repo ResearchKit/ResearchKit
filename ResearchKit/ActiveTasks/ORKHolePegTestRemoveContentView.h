@@ -29,19 +29,32 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import "ORKCustomStepView_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol ORKHolePegTestRemoveContentViewDelegate;
+
 ORK_CLASS_AVAILABLE
-@interface ORKHolePegTestPlaceStep : ORKActiveStep
+@interface ORKHolePegTestRemoveContentView : ORKActiveStepCustomView
+
+- (instancetype)initWithOrientation:(ORKSide)orientation;
 
 @property (nonatomic, assign) ORKSide orientation;
-@property (nonatomic, assign, getter=isDominantHandTested) BOOL dominantHandTested;
-@property (nonatomic, assign) int numberOfPegs;
 @property (nonatomic, assign) double threshold;
-@property (nonatomic, assign, getter = isRotated) BOOL rotated;
+@property (nonatomic, weak) id<ORKHolePegTestRemoveContentViewDelegate> delegate;
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
+@end
+
+
+@protocol ORKHolePegTestRemoveContentViewDelegate <NSObject>
+
+- (void)holePegTestRemoveDidProgress:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView;
+- (void)holePegTestRemoveDidSucceed:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView withDistance:(CGFloat)distance;
+- (void)holePegTestRemoveDidFail:(ORKHolePegTestRemoveContentView *)holePegTestRemoveContentView;
 
 @end
 

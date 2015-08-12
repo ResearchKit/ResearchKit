@@ -421,7 +421,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text will be displayed.
  @param dominantHand            The participant dominant hand that will be tested first.
- @param numberOfHoles           The number of holes to fill in.
+ @param numberOfPegs            The number of pegs to place in the pegboard.
  @param threshold               The detection area.
  @param rotated                 A test variant that also requires peg rotation.
  @param timeLimit               The orientation allowed to validate the peg position.
@@ -432,7 +432,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 + (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                            intendedUseDescription:(nullable NSString *)intendedUseDescription
                                      dominantHand:(ORKSide)dominantHand
-                                    numberOfHoles:(int)numberOfHoles
+                                     numberOfPegs:(int)numberOfPegs
                                         threshold:(double)threshold
                                           rotated:(BOOL)rotated
                                         timeLimit:(NSTimeInterval)timeLimit

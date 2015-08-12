@@ -29,21 +29,17 @@
  */
 
 
-#import "ORKHolePegTestPlaceHoleView.h"
+#import "ORKHolePegTestRemovePegView.h"
 
 
-static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
-
-
-@interface ORKHolePegTestPlaceHoleView ()
+@interface ORKHolePegTestRemovePegView ()
 
 @property (nonatomic, strong) CAShapeLayer *checkLayer;
-@property (nonatomic, strong) CAShapeLayer *crossLayer;
 
 @end
 
 
-@implementation ORKHolePegTestPlaceHoleView
+@implementation ORKHolePegTestRemovePegView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -62,7 +58,7 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
         checkLayer.lineCap = kCALineCapRound;
         checkLayer.lineJoin = kCALineJoinRound;
         checkLayer.frame = self.layer.bounds;
-        checkLayer.strokeColor = self.tintColor.CGColor;
+        checkLayer.strokeColor = [UIColor whiteColor].CGColor;
         checkLayer.backgroundColor = [UIColor clearColor].CGColor;
         checkLayer.fillColor = nil;
         self.checkLayer = checkLayer;
@@ -74,29 +70,17 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
     return self;
 }
 
-- (CGSize)intrinsicContentSize {
-    return CGSizeMake(self.frame.size.width, self.frame.size.height);
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self setNeedsDisplay];
 }
 
 #pragma mark - drawing method
-
-- (void)tintColorDidChange {
-    [super tintColorDidChange];
-    self.checkLayer.strokeColor = self.tintColor.CGColor;
-    [self setNeedsDisplay];
-}
 
 - (void)setSuccess:(BOOL)success
 {
     _success = success;
     [self.checkLayer removeFromSuperlayer];
-    [self.crossLayer removeFromSuperlayer];
-    [self setNeedsDisplay];
-}
-
-- (void)setRotated:(BOOL)rotated
-{
-    _rotated = rotated;
     [self setNeedsDisplay];
 }
 
@@ -105,11 +89,11 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
     CGContextSaveGState(context);
     
     CGRect bounds = self.bounds;
-    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(bounds, 1.0f, 1.0f)];
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:bounds];
     path.lineWidth = 2.0f;
-    [self.tintColor setStroke];
-    [path stroke];
-
+    [self.tintColor setFill];
+    [path fill];
+    
     if (self.isSuccess) {
         [self.layer addSublayer:self.checkLayer];
         
@@ -123,49 +107,16 @@ static const CGFloat ORKPlaceHoleViewRotation = 45.0f;
         [animation setFillMode:kCAFillModeBoth];
         animation.fromValue = @(0);
         animation.toValue = @(1);
-        animation.duration = 0.3f;
+        animation.duration = 0.25f;
         animation.delegate = self;
         [self.checkLayer addAnimation:animation forKey:@"strokeEnd"];
-    } else if (self.isRotated) {
-        UIBezierPath *crossPath = [[UIBezierPath alloc] init];
-        [crossPath moveToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 1/4)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 7/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 1/4, CGRectGetHeight(bounds) * 7/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 1/4, CGRectGetHeight(bounds) * 9/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 9/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 7/16, CGRectGetHeight(bounds) * 3/4)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 3/4)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 9/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 3/4, CGRectGetHeight(bounds) * 9/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 3/4, CGRectGetHeight(bounds) * 7/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 7/16)];
-        [crossPath addLineToPoint:CGPointMake(CGRectGetWidth(bounds) * 9/16, CGRectGetHeight(bounds) * 1/4)];
-        [crossPath closePath];
-        
-        CAShapeLayer *crossLayer = [[CAShapeLayer alloc] init];
-        crossLayer.path = crossPath.CGPath;
-        crossLayer.bounds = CGPathGetBoundingBox(crossLayer.path);
-        crossLayer.anchorPoint = CGPointMake(0.5, 0.5);
-        crossLayer.fillColor = self.tintColor.CGColor;
-        
-        CATransform3D transform = CATransform3DMakeTranslation(CGRectGetMidX(bounds), CGRectGetMidY(bounds), 1);
-        transform = CATransform3DRotate(transform, ORKPlaceHoleViewRotation * (M_PI / 180), 0, 0, 1);
-        crossLayer.transform = transform;
-        
-        self.crossLayer = crossLayer;
-        
-        [self.layer addSublayer:self.crossLayer];
     }
     
     CGContextRestoreGState(context);
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-    __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        typeof(self) strongSelf = weakSelf;
-        strongSelf.success = NO;
-    });
+    self.success = NO;
 }
 
 @end

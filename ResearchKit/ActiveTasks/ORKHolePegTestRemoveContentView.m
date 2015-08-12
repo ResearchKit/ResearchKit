@@ -29,32 +29,30 @@
  */
 
 
-#import "ORKHolePegTestPlaceContentView.h"
-#import "ORKHolePegTestPlacePegView.h"
-#import "ORKHolePegTestPlaceHoleView.h"
+#import "ORKHolePegTestRemoveContentView.h"
+#import "ORKHolePegTestRemovePegView.h"
+#import "ORKSeparatorView.h"
 #import "ORKDirectionView.h"
+#import "ORKSkin.h"
 
 
-static const CGFloat ORKOrientationThreshold = 12.0f;
-static const CGFloat ORKHolePegViewDiameter = 88.0f;
-#define degreesToRadians(degrees) ((degrees) / 180.0 * M_PI)
+static const CGFloat ORKPegViewDiameter = 88.0f;
+static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
 
 
-@interface ORKHolePegTestPlaceContentView () <UIGestureRecognizerDelegate>
+@interface ORKHolePegTestRemoveContentView () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIProgressView *progressView;
-@property (nonatomic, strong) ORKHolePegTestPlacePegView *pegView;
-@property (nonatomic, strong) ORKHolePegTestPlaceHoleView *holeView;
+@property (nonatomic, strong) ORKHolePegTestRemovePegView *pegView;
+@property (nonatomic, strong) ORKSeparatorView *separatorView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
+@property (nonatomic, strong) UIView *container;
 @property (nonatomic, copy) NSArray *constraints;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
-@property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
 @property (nonatomic, assign, getter=isMovable) BOOL movable;
 @property (nonatomic, assign, getter=isMoveEnded) BOOL moveEnded;
-@property (nonatomic, assign) CGFloat rotation;
-@property (nonatomic, assign) CGFloat rotationOffset;
 @property (nonatomic, assign) CGPoint translation;
 @property (nonatomic, assign) CGPoint translationOffset;
 @property (nonatomic, assign) CGPoint startPoint;
@@ -62,33 +60,36 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 @end
 
 
-@implementation ORKHolePegTestPlaceContentView
+@implementation ORKHolePegTestRemoveContentView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation rotated:(BOOL)rotated {
+- (instancetype)initWithOrientation:(ORKSide)orientation {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.orientation = orientation;
-        self.rotated = rotated;
-
+        self.opaque = NO;
+        
+        self.container = [UIView new];
+        self.container.translatesAutoresizingMaskIntoConstraints = NO;
+        
         self.progressView = [UIProgressView new];
         self.progressView.progressTintColor = self.tintColor;
         [self.progressView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.progressView setAlpha:0];
         [self addSubview:self.progressView];
         
-        self.holeView = [[ORKHolePegTestPlaceHoleView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegViewDiameter, ORKHolePegViewDiameter)];
-        self.holeView.rotated = self.isRotated;
-        [self.holeView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addSubview:self.holeView];
-        
-        self.pegView = [[ORKHolePegTestPlacePegView alloc] initWithFrame:CGRectMake(0, 0, ORKHolePegViewDiameter, ORKHolePegViewDiameter)];
-        self.pegView.rotated = self.isRotated;
+        self.pegView = [[ORKHolePegTestRemovePegView alloc] initWithFrame:CGRectMake(0, 0, ORKPegViewDiameter, ORKPegViewDiameter)];
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addSubview:self.pegView];
+        [self.container addSubview:self.pegView];
+        
+        self.separatorView = [[ORKSeparatorView alloc] init];
+        [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.container addSubview:self.separatorView];
         
         self.directionView = [[ORKDirectionView alloc] initWithOrientation:self.orientation == ORKSideLeft ? ORKSideRight : ORKSideLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.directionView];
+        
+        [self addSubview:self.container];
         
         [self setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self setNeedsUpdateConstraints];
@@ -106,13 +107,6 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
                                                                      action:@selector(handlePan:)];
         self.panRecognizer.delegate = self;
         [self addGestureRecognizer:self.panRecognizer];
-        
-        if (rotated) {
-            self.rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self
-                                                                                   action:@selector(handleRotate:)];
-            self.rotationRecognizer.delegate = self;
-            [self addGestureRecognizer:self.rotationRecognizer];
-        }
     }
     return self;
 }
@@ -137,8 +131,8 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(ORKHolePegViewDiameter)};
+    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _container, _pegView, _separatorView, _directionView);
+    NSDictionary *metrics = @{@"diameter" : @(ORKPegViewDiameter), @"separator" : @(ORKPegViewSeparatorWidth), @"margin" : @((1 + self.threshold) * ORKPegViewDiameter)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
@@ -146,32 +140,29 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:self.orientation == ORKSideLeft ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:self.orientation == ORKSideLeft ? @"H:|-[_pegView(diameter)]->=0-[_separatorView(separator)]-(margin)-|" : @"H:|-(margin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-|"
                                              options:NSLayoutFormatAlignAllCenterY
-                                             metrics:nil views:views]];
+                                             metrics:metrics views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_container]|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pegView(diameter)]->=0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_pegView(diameter)]-(>=0)-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:metrics views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_holeView]->=0-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_separatorView]-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
-
-    [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.pegView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1
-                                                              constant:0]];
+    
+    [constraintsArray addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView][_container]|"
+                                             options:(NSLayoutFormatOptions)0
+                                             metrics:metrics views:views]];
     
     [constraintsArray addObject:[NSLayoutConstraint constraintWithItem:self.directionView
                                                              attribute:NSLayoutAttributeCenterX
@@ -239,25 +230,8 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     }
 }
 
-- (void)handleRotate:(UIRotationGestureRecognizer *)rotationGestureRecognizer {
-    if ([rotationGestureRecognizer numberOfTouches] != 2 ||
-        rotationGestureRecognizer.state == UIGestureRecognizerStateEnded ||
-        rotationGestureRecognizer.state == UIGestureRecognizerStateCancelled ||
-        rotationGestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        [self resetTransformAtPoint:[rotationGestureRecognizer locationInView:self]];
-    } else {
-        if (self.isMovable) {
-            self.rotation = rotationGestureRecognizer.rotation - self.rotationOffset;
-            [self updateTransformAtPoint:[rotationGestureRecognizer locationInView:self]];
-        } else {
-            self.rotationOffset = rotationGestureRecognizer.rotation - self.rotation;
-        }
-    }
-}
-
 - (void)updateTransformAtPoint:(CGPoint)point {
     self.pegView.transform = CGAffineTransformMakeTranslation(self.translation.x, self.translation.y);
-    self.pegView.transform = CGAffineTransformRotate(self.pegView.transform, self.rotation);
     [self pegViewDidMoveAtPoint:point];
 }
 
@@ -265,29 +239,24 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     if (!self.isMoveEnded) {
         self.movable = NO;
         self.moveEnded = YES;
-
+        
         self.pinchRecognizer.enabled = NO;
         self.panRecognizer.enabled = NO;
-        self.rotationRecognizer.enabled = NO;
-
+        
         BOOL animated = ![self pegViewMoveEndedAtPoint:point];
-        self.pegView.hidden = !animated;
-
+        
         [UIView animateWithDuration:animated ? 0.15f : 0.0f
-                              delay:0.0f
+                              delay:animated ? 0.0f : 0.30f
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^(){
                              self.pegView.transform = CGAffineTransformIdentity;
                              self.pegView.alpha = 1.0f;
                          }
                          completion:^(BOOL finished){
-                             self.rotation = 0.0f;
-                             self.rotationOffset = 0.0f;
                              self.translation = CGPointZero;
                              self.translationOffset = CGPointZero;
                              self.pinchRecognizer.enabled = YES;
                              self.panRecognizer.enabled = YES;
-                             self.rotationRecognizer.enabled = YES;
                              self.moveEnded = NO;
                              self.pegView.hidden = NO;
                          }];
@@ -308,15 +277,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         self.startPoint = point;
     }
     
-    if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidProgress:)]) {
-        [self.delegate holePegTestPlaceDidProgress:self];
+    if ([self.delegate respondsToSelector:@selector(holePegTestRemoveDidProgress:)]) {
+        [self.delegate holePegTestRemoveDidProgress:self];
     }
     
-    if (self.holeView.isSuccess) {
-        self.holeView.success = NO;
+    if (self.pegView.isSuccess) {
+        self.pegView.success = NO;
     }
     
-    if ([self holeViewContainsPegView]) {
+    if ([self pegViewBehindLine]) {
         self.pegView.alpha = 1.0f;
     } else {
         self.pegView.alpha = 0.2f;
@@ -327,46 +296,37 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.directionView.hidden = NO;
     
     BOOL succeeded = NO;
-    if ([self holeViewContainsPegView]) {
-        if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidSucceed:withDistance:)]) {
+    if ([self pegViewBehindLine]) {
+        if ([self.delegate respondsToSelector:@selector(holePegTestRemoveDidSucceed:withDistance:)]) {
             CGFloat distance = hypotf(point.x - self.startPoint.x, point.y - self.startPoint.y);
-            [self.delegate holePegTestPlaceDidSucceed:self withDistance:distance];
+            [self.delegate holePegTestRemoveDidSucceed:self withDistance:distance];
         }
-        self.holeView.success = YES;
+        self.pegView.success = YES;
         succeeded = YES;
     } else {
-        if ([self.delegate respondsToSelector:@selector(holePegTestPlaceDidFail:)]) {
-            [self.delegate holePegTestPlaceDidFail:self];
+        if ([self.delegate respondsToSelector:@selector(holePegTestRemoveDidFail:)]) {
+            [self.delegate holePegTestRemoveDidFail:self];
         }
-        self.holeView.success = NO;
+        self.pegView.success = NO;
     }
     self.startPoint = CGPointZero;
     return succeeded;
 }
 
-- (BOOL)holeViewContainsPegView {
-    CGRect detectionFrame = CGRectMake(CGRectGetMidX(self.holeView.frame) - (self.threshold * CGRectGetWidth(self.holeView.frame) / 2),
-                                       CGRectGetMidY(self.holeView.frame) - (self.threshold * CGRectGetHeight(self.holeView.frame) / 2),
-                                       self.threshold * CGRectGetWidth(self.holeView.frame),
-                                       self.threshold * CGRectGetHeight(self.holeView.frame));
-    
-    CGPoint pegCenter = CGPointMake(CGRectGetMaxX(self.pegView.frame) - CGRectGetWidth(self.pegView.frame) / 2,
-                                    CGRectGetMaxY(self.pegView.frame) - CGRectGetHeight(self.pegView.frame) / 2);
-    
-    if (CGRectContainsPoint(detectionFrame, pegCenter)) {
-        if (self.isRotated) {
-            double rotation = atan2(self.pegView.transform.b, self.pegView.transform.a);
-            double angle = fmod(fabs(rotation), M_PI_2);
-            if (angle > M_PI_4 - degreesToRadians(ORKOrientationThreshold) &&
-                angle < M_PI_4 + degreesToRadians(ORKOrientationThreshold)) {
-                return YES;
-            }
-        } else {
+- (BOOL)pegViewBehindLine {
+    if (self.orientation == ORKSideLeft) {
+        if (CGRectGetMinX(self.pegView.frame) > CGRectGetMaxX(self.separatorView.frame)) {
             return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        if (CGRectGetMaxX(self.pegView.frame) < CGRectGetMinX(self.separatorView.frame)) {
+            return YES;
+        } else {
+            return NO;
         }
     }
-    
-    return NO;
 }
 
 @end

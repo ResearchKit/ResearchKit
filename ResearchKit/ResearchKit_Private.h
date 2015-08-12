@@ -58,6 +58,8 @@
 #import <ResearchKit/ORKCountdownStep.h>
 #import <ResearchKit/ORKFitnessStep.h>
 #import <ResearchKit/ORKTappingIntervalStep.h>
+#import <ResearchKit/ORKHolePegTestPlaceStep.h>
+#import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
@@ -68,6 +70,8 @@
 #import <ResearchKit/ORKCountdownStepViewController.h>
 #import <ResearchKit/ORKFitnessStepViewController.h>
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
+#import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
+#import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
 
 // More internal stuff
