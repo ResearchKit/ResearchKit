@@ -325,6 +325,18 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly, nullable) NSString *minimumValueDescription;
 
+/**
+ An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
+ The maximum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *maximumImage;
+
+/**
+ An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
+ The minimum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *minimumImage;
+
 @end
 
 
@@ -440,6 +452,18 @@ ORK_CLASS_AVAILABLE
  A localized label to describe the minimum value of the scale. (read-only)
  */
 @property (readonly, nullable) NSString *minimumValueDescription;
+
+/**
+ An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
+ The maximum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *maximumImage;
+
+/**
+ An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
+ The minimum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *minimumImage;
 
 @end
 
