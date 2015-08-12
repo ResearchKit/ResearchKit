@@ -1067,7 +1067,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                     }
                 } while (nextStep || [nextStep isKindOfClass:[ORKReviewStep class]]);
             }
-            reviewStepViewController.steps = [steps copy];
+            if (reviewStepViewController.reviewStep.reviewDirection == ORKReviewStepReviewDirectionReverse) {
+                reviewStepViewController.steps = [[steps reverseObjectEnumerator] allObjects];
+            } else {
+                reviewStepViewController.steps = [steps copy];
+            }
             reviewStepViewController.resultSource = self.result;
             reviewStepViewController.reviewDelegate = self;
         }

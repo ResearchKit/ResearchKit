@@ -59,7 +59,8 @@ static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
-
+static NSString * const ReviewStepTaskIdentifier = @"reviewStepTask";
+static NSString * const ReviewStepStandaloneTaskIdentifier = @"reviewStepStandaloneTask";
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
@@ -275,6 +276,22 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         buttons[buttonKeys.lastObject] = button;
     }
     
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReviewStepTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Review Step" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"reviewStepItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReviewStepStandaloneTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Review Step Standalone" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"reviewStepStandaloneItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -437,6 +454,10 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         return [self makeStepNavigationTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:ReviewStepTaskIdentifier]) {
+        return [self makeReviewStepTask];
+    } else if ([identifier isEqualToString:ReviewStepStandaloneTaskIdentifier]) {
+        return [self makeReviewStepStandaloneTask];
     }
     return nil;
 }
@@ -2160,6 +2181,50 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
 
 - (IBAction)showCustomNavigationItemTask:(id)sender {
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
+}
+
+#pragma mark - Review step task
+
+- (id<ORKTask>)makeReviewStepTask {
+    ORKQuestionStep *step1 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepTask.step1"];
+    step1.title = @"step 1 title";
+    step1.text = @"step 1 text";
+    step1.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepTask.step2"];
+    step2.title = @"step 2 title";
+    step2.text = @"step 2 text";
+    step2.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.reviewStep"];
+    reviewStep.title = @"review step title";
+    reviewStep.text = @"review step text";
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:@[step1, step2, reviewStep]];
+}
+
+- (IBAction)showReviewStepTask:(id)sender {
+    [self beginTaskWithIdentifier:ReviewStepTaskIdentifier];
+}
+
+#pragma mark - Review step task
+
+- (id<ORKTask>)makeReviewStepStandaloneTask {
+    ORKQuestionStep *step1 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step1"];
+    step1.title = @"step 1 title";
+    step1.text = @"step 1 text";
+    step1.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step2"];
+    step2.title = @"step 2 title";
+    step2.text = @"step 2 text";
+    step2.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.reviewStep"
+                                                                    steps:@[step1, step2]
+                                                             resultSource:nil];
+    reviewStep.title = @"review step title";
+    reviewStep.text = @"review step text";
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepStandaloneTaskIdentifier steps:@[reviewStep]];
+}
+
+- (IBAction)showReviewStepStandaloneTask:(id)sender {
+    [self beginTaskWithIdentifier:ReviewStepStandaloneTaskIdentifier];
 }
 
 #pragma mark - Helpers

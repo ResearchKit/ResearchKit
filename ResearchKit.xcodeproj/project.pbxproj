@@ -390,7 +390,6 @@
 		BFD319D71B73268400B93D66 /* ORKReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD319D31B73268400B93D66 /* ORKReviewStep.m */; };
 		BFD319D81B73268400B93D66 /* ORKReviewStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFD319D91B73268400B93D66 /* ORKReviewStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD319D51B73268400B93D66 /* ORKReviewStepViewController.m */; };
-		BFD319DC1B73F1DB00B93D66 /* ORKReviewStep.md in Sources */ = {isa = PBXBuildFile; fileRef = BFD319DB1B73F1DB00B93D66 /* ORKReviewStep.md */; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
 		D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */; };
 		D44239791AF17F5100559D96 /* ORKImageCaptureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -839,7 +838,6 @@
 		BFD319D31B73268400B93D66 /* ORKReviewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStep.m; sourceTree = "<group>"; };
 		BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStepViewController.h; sourceTree = "<group>"; };
 		BFD319D51B73268400B93D66 /* ORKReviewStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStepViewController.m; sourceTree = "<group>"; };
-		BFD319DB1B73F1DB00B93D66 /* ORKReviewStep.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = ORKReviewStep.md; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureView.m; sourceTree = "<group>"; };
 		D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureStep.h; sourceTree = "<group>"; };
@@ -1170,7 +1168,7 @@
 				86C40B771A8D7C5C00081FAC /* ORKCustomStepView.h */,
 				86C40B781A8D7C5C00081FAC /* ORKCustomStepView.m */,
 				86C40B791A8D7C5C00081FAC /* ORKCustomStepView_Internal.h */,
-				BFD319DA1B73268C00B93D66 /* ReviewStep */,
+				BFD319DA1B73268C00B93D66 /* Review Step */,
 				B12EFF351AB2116400A80147 /* Instruction Step */,
 				B12EFF361AB2117B00A80147 /* Question Step */,
 				B12EFF3C1AB211FB00A80147 /* Form Step */,
@@ -1753,16 +1751,15 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
-		BFD319DA1B73268C00B93D66 /* ReviewStep */ = {
+		BFD319DA1B73268C00B93D66 /* Review Step */ = {
 			isa = PBXGroup;
 			children = (
-				BFD319DB1B73F1DB00B93D66 /* ORKReviewStep.md */,
 				BFD319D21B73268400B93D66 /* ORKReviewStep.h */,
 				BFD319D31B73268400B93D66 /* ORKReviewStep.m */,
 				BFD319D41B73268400B93D66 /* ORKReviewStepViewController.h */,
 				BFD319D51B73268400B93D66 /* ORKReviewStepViewController.m */,
 			);
-			name = ReviewStep;
+			name = "Review Step";
 			sourceTree = "<group>";
 		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
@@ -2343,7 +2340,6 @@
 				86C40E261A8D7C5C00081FAC /* ORKEAGLMoviePlayerView.m in Sources */,
 				86C40CC21A8D7C5C00081FAC /* ORKCompletionStep.m in Sources */,
 				86C40C301A8D7C5C00081FAC /* ORKFitnessStep.m in Sources */,
-				BFD319DC1B73F1DB00B93D66 /* ORKReviewStep.md in Sources */,
 				86C40C501A8D7C5C00081FAC /* ORKTappingContentView.m in Sources */,
 				86C40CEC1A8D7C5C00081FAC /* ORKAnswerTextField.m in Sources */,
 				86C40C441A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.m in Sources */,
