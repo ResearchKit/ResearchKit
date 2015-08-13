@@ -148,6 +148,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     }
     
     {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showTowerOfHanoiTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Tower Of Hanoi Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"tower"];
@@ -159,6 +160,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showTimedWalkTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Timed Walk" forState:UIControlStateNormal];
         [buttonKeys addObject:@"timed_walk"];
+        buttons[buttonKeys.lastObject] = button;
     }
 
     {
