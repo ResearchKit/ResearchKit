@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -33,23 +34,37 @@
 #import "ORKPieChartView.h"
 #import "ORKLegendCollectionViewCell.h"
 #import "ORKCenteredCollectionViewLayout.h"
+#import "ORKSkin.h"
 
 
-@interface ORKPieChartLabel : NSObject
+static const CGFloat TitleToPiePadding = 8.0;
+static const CGFloat PieToLegendPadding = 8.0;
+static const CGFloat OriginAngle = -M_PI_2;
+static const CGFloat PercentageLabelOffset = 10.0;
+static const CGFloat InterAnimationDelay = 0.05;
+
+
+@interface ORKPieChartView ()
+
+- (UIColor *)colorForSegmentAtIndex:(NSInteger)index;
+
+@end
+
+
+@interface ORKPieChartSection : NSObject
 
 - (instancetype)initWithLabel:(UILabel *)label angle:(CGFloat)angle;
 
-@property (nonatomic) UILabel *label;
+@property (nonatomic, readonly) UILabel *label;
 @property (nonatomic) CGFloat angle;
 
 @end
 
 
-@implementation ORKPieChartLabel
+@implementation ORKPieChartSection
 
 - (instancetype)initWithLabel:(UILabel *)label angle:(CGFloat)angle {
-    if (self = [super init])
-    {
+    if (self = [super init]) {
         _label = label;
         _angle = angle;
     }
@@ -59,35 +74,575 @@
 @end
 
 
+@interface ORKPieChartPieView : UIView
 
-@interface ORKPieChartView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@property (nonatomic) UIFont *percentageLabelFont;
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithFrame:(CGRect)frame
+           parentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+
+@end
+
+
+@implementation ORKPieChartPieView {
+    __weak ORKPieChartView *_parentPieChartView;
+    
+    CAShapeLayer *_circleLayer;
+    NSMutableArray *_normalizedValues;
+    NSMutableArray *_segmentLayers;
+    NSMutableArray *_pieSections;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+           parentPieChartView:(ORKPieChartView *)parentPieChartView {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _parentPieChartView = parentPieChartView;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _circleLayer = [CAShapeLayer layer];
+        _circleLayer.fillColor = [UIColor clearColor].CGColor;
+        _circleLayer.strokeColor = [UIColor colorWithWhite:0.96 alpha:1.000].CGColor;
+        [self.layer addSublayer:_circleLayer];
+
+        _normalizedValues = [NSMutableArray new];
+        _segmentLayers = [NSMutableArray new];
+        _pieSections = [NSMutableArray new];
+    }
+    return self;
+}
+
+#pragma mark - Data Normalization
+
+- (CGFloat)normalizeValues {
+    [_normalizedValues removeAllObjects];
+    
+    CGFloat sumOfValues = 0;
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (int idx = 0; idx < numberOfSegments; idx++) {
+        CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx];
+        sumOfValues += value;
+    }
+    
+    for (int idx = 0; idx < numberOfSegments; idx++) {
+        CGFloat value = 0;
+        if (sumOfValues != 0) {
+            value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx] / sumOfValues;
+        }
+        [_normalizedValues addObject:@(value)];
+    }
+    return sumOfValues;
+}
+
+#pragma mark - Layout and drawing
+
+- (void)setUpSublayersAndLabels {
+    [_circleLayer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self addPieChartLayers];
+    [self addPercentageLabels];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGRect bounds = self.bounds;
+    CGFloat startAngle = OriginAngle;
+    CGFloat endAngle = startAngle + (2 * M_PI);
+    CGFloat outerRadius = bounds.size.height * 0.5;
+    CGFloat labelHeight = [@"100%" boundingRectWithSize:CGRectInfinite.size
+                                                options:(NSStringDrawingOptions)0
+                                             attributes:@{NSFontAttributeName : _percentageLabelFont}
+                                                context:nil].size.height;
+    CGFloat innerRadius = outerRadius - (labelHeight + PercentageLabelOffset);
+    CGFloat lineWidth = MIN(_parentPieChartView.lineWidth, innerRadius);
+    _circleLayer.lineWidth = lineWidth;
+    CGFloat drawingRadius = innerRadius - (lineWidth * 0.5);
+    
+    if (!_parentPieChartView.shouldDrawClockwise) {
+        startAngle = 3 * M_PI_2;
+        endAngle = -M_PI_2;
+    }
+    UIBezierPath *circularArcBezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(bounds),
+                                                                                            CGRectGetMidY(bounds))
+                                                                         radius:drawingRadius
+                                                                     startAngle:startAngle
+                                                                       endAngle:endAngle
+                                                                      clockwise:_parentPieChartView.shouldDrawClockwise];
+    
+    _circleLayer.path = circularArcBezierPath.CGPath;
+    
+    [self updatePieChartLayers];
+    [self updatePercentageLabelsWithRadius:innerRadius];
+}
+
+- (void)addPieChartLayers {
+    [_segmentLayers removeAllObjects];
+    
+    CGFloat cumulativeValue = 0;
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        
+        CAShapeLayer *segmentLayer = [CAShapeLayer layer];
+        segmentLayer.fillColor = [[UIColor clearColor] CGColor];
+        segmentLayer.frame = _circleLayer.bounds;
+        segmentLayer.path = _circleLayer.path;
+        segmentLayer.lineWidth = _circleLayer.lineWidth;
+        segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
+        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        
+        if (value != 0) {
+            if (idx == 0) {
+                segmentLayer.strokeStart = 0.0;
+            } else {
+                segmentLayer.strokeStart = cumulativeValue;
+            }
+            
+            segmentLayer.strokeEnd = cumulativeValue;
+            [_circleLayer addSublayer:segmentLayer];
+            [_segmentLayers addObject:segmentLayer];
+            segmentLayer.strokeEnd = cumulativeValue + value;
+        }
+        cumulativeValue += value;
+    }
+}
+
+- (void)addPercentageLabels {
+    CGFloat cumulativeValue = 0;
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        
+        if (value != 0) {
+            
+            // Create a label
+            UILabel *label = [UILabel new];
+            label.text = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 :value * 100];
+            label.font = _percentageLabelFont;
+            label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
+            [label sizeToFit];
+            
+            // Calculate the angle to the centre of this segment in radians
+            CGFloat angle = 0;
+            if (_parentPieChartView.shouldDrawClockwise) {
+                angle = (value / 2 + cumulativeValue) * M_PI * 2;
+            } else {
+                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
+            }
+            
+            cumulativeValue += value;
+            ORKPieChartSection *pieSection = [[ORKPieChartSection alloc] initWithLabel:label angle:angle];
+            [_pieSections addObject:pieSection];
+            [self addSubview:label];
+        }
+    }
+}
+
+- (void)updatePieChartLayers {
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        CAShapeLayer *segmentLayer = _segmentLayers[idx];
+        segmentLayer.frame = _circleLayer.bounds;
+        segmentLayer.path = _circleLayer.path;
+        segmentLayer.lineWidth = _circleLayer.lineWidth;
+    }
+}
+
+- (void)updatePercentageLabelsWithRadius:(CGFloat)pieRadius {
+    CGFloat cumulativeValue = 0;
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        if (value != 0) {
+            // Create a label
+            ORKPieChartSection *pieSection = _pieSections[idx];
+            UILabel *label = pieSection.label;
+            
+            // Calculate the angle to the centre of this segment in radians
+            CGFloat angle = (value / 2 + cumulativeValue) * M_PI * 2;
+            if (!_parentPieChartView.shouldDrawClockwise) {
+                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
+            }
+            
+            label.center = [self percentageLabel:label calculateCenterForAngle:angle pieRadius:pieRadius];
+            cumulativeValue += value;
+        }
+    }
+    [self adjustIntersectionsOfPercentageLabels:_pieSections pieRadius:pieRadius];
+}
+
+- (CGPoint)percentageLabel:(UILabel *)label calculateCenterForAngle:(CGFloat)angle pieRadius:(CGFloat)pieRadius {
+    // Calculate the desired distance from the circle's centre.
+    const CGFloat offset = 10;
+    CGFloat length = pieRadius + offset;
+    
+    // Calculate x and y coordinates for the point at this distance at the specified angle.
+    CGSize size = self.bounds.size;
+    CGFloat cosine = cos(angle + OriginAngle);
+    CGFloat sine = sin(angle + OriginAngle);
+    CGFloat x = cosine * length + size.width / 2;
+    CGFloat y = sine *  length + size.height / 2;
+    
+    // Offset (x,y) to normalise the spacing from the circle's centre to the intersection with the label's frame rather than its centre.
+    CGSize labelSize = [label systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    CGFloat xIn = cosine * labelSize.width / 2;
+    CGFloat yIn = sine * labelSize.height / 2;
+    x += xIn;
+    y += yIn;
+    
+    return  CGPointMake(x, y);
+}
+
+- (void)adjustIntersectionsOfPercentageLabels:(NSArray *)pieSections pieRadius:(CGFloat)pieRadius {
+    if (pieSections.count == 0) {
+        return;
+    }
+    // Adjust labels while we have intersections
+    BOOL intersections = YES;
+    // We alternate directions in each iteration
+    BOOL shiftClockwise = NO;
+    CGFloat rotateDirection = _parentPieChartView.shouldDrawClockwise ? 1 : -1;
+    // We use totalAngle to prevent from infinite loop
+    CGFloat totalAngle = 0;
+    while (intersections) {
+        intersections = NO;
+        shiftClockwise = !shiftClockwise;
+        
+        if (shiftClockwise) {
+            for (NSUInteger idx = 0; idx < ([pieSections count] - 1); idx++) {
+                // Prevent from infinite loop
+                if (!idx) {
+                    totalAngle += 0.01;
+                    if (totalAngle >= 2 * M_PI) {
+                        return;
+                    }
+                }
+                ORKPieChartSection *pieLabel  = pieSections[idx];
+                ORKPieChartSection *nextPieLabel = pieSections[(idx + 1)];
+                if ([self shiftSectionLabel:nextPieLabel fromSectionLabel:pieLabel direction:rotateDirection pieRadius:pieRadius]) {
+                    intersections = YES;
+                }
+            }
+        } else {
+            for (NSInteger i = [pieSections count] - 1; i > 0; i--) {
+                ORKPieChartSection *pieLabel = pieSections[i];
+                ORKPieChartSection *nextPieLabel = pieSections[i - 1];
+                if ([self shiftSectionLabel:nextPieLabel fromSectionLabel:pieLabel direction:-rotateDirection pieRadius:pieRadius]) {
+                    intersections = YES;
+                }
+            }
+        }
+        
+        // Adjust space between last and first element
+        ORKPieChartSection *firstPieLabel = pieSections.firstObject;
+        ORKPieChartSection *lastPieLabel = pieSections.lastObject;
+        UILabel *firstLabel = firstPieLabel.label;
+        UILabel *lastLabel = lastPieLabel.label;
+        if (CGRectIntersectsRect(lastLabel.frame, firstLabel.frame)) {
+            CGFloat firstLabelAngle = firstPieLabel.angle;
+            CGFloat lastLabelAngle = lastPieLabel.angle;
+            firstLabelAngle += rotateDirection * 0.01;
+            lastLabelAngle -= rotateDirection * 0.01;
+            firstPieLabel.angle = firstLabelAngle;
+            lastPieLabel.angle = lastLabelAngle;
+        }
+    }
+}
+
+- (BOOL)shiftSectionLabel:(ORKPieChartSection *)nextPieSection
+         fromSectionLabel:(ORKPieChartSection *)fromPieSection
+                direction:(CGFloat)direction
+                pieRadius:(CGFloat)pieRadius {
+    CGFloat shiftStep = 0.01;
+    UILabel *label = fromPieSection.label;
+    UILabel *nextLabel = nextPieSection.label;
+    if (CGRectIntersectsRect(label.frame, nextLabel.frame)) {
+        CGFloat nextLabelAngle = nextPieSection.angle;
+        nextLabelAngle += direction * shiftStep;
+        nextPieSection.angle = nextLabelAngle;
+        nextLabel.center = [self percentageLabel:nextLabel calculateCenterForAngle:nextLabelAngle pieRadius:pieRadius];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    NSUInteger pieSectionCount = _pieSections.count;
+    NSTimeInterval interAnimationDelay = InterAnimationDelay;
+    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (pieSectionCount-1));
+    if (singleAnimationDuration < 0) {
+        interAnimationDelay = 0;
+        singleAnimationDuration = animationDuration;
+    }
+    
+    CGFloat cumulativeValue = 0;
+    for (int idx = 0; idx < pieSectionCount; idx++) {
+        ORKPieChartSection *section = _pieSections[idx];
+        UILabel *label = section.label;
+        label.alpha = 0;
+        [UIView animateWithDuration:singleAnimationDuration
+                              delay:interAnimationDelay * idx
+                            options:(UIViewAnimationOptions)0
+                         animations:^{
+                             label.alpha = 1.0;
+                         }
+                         completion:nil];
+    
+        CAShapeLayer *segmentLayer = _segmentLayers[idx];
+        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        strokeAnimation.fromValue = @(segmentLayer.strokeStart);
+        strokeAnimation.toValue = @(cumulativeValue + value);
+        strokeAnimation.duration = animationDuration;
+        strokeAnimation.removedOnCompletion = NO;
+        strokeAnimation.fillMode = kCAFillModeForwards;
+        strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
+
+        cumulativeValue += value;
+    }
+}
+
+@end
+
+
+@interface ORKPieChartLegendView : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic) UIFont *labelFont;
+
+- (instancetype)initWithFrame:(CGRect)frame
+         collectionViewLayout:(UICollectionViewLayout *)collectionViewLayout NS_UNAVAILABLE;
+
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+
+@end
+
+
+@implementation ORKPieChartLegendView {
+    __weak ORKPieChartView *_parentPieChartView;
+}
+
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
+    ORKCenteredCollectionViewLayout *centeredCollectionViewLayout = [[ORKCenteredCollectionViewLayout alloc] init];
+    self = [super initWithFrame:CGRectZero collectionViewLayout:centeredCollectionViewLayout];
+    if (self) {
+        _parentPieChartView = parentPieChartView;
+        [self registerClass:[ORKLegendCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        self.backgroundColor = [UIColor clearColor];
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.dataSource = self;
+        self.delegate = self;
+        
+        [self setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+        [self setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+        
+    }
+    return self;
+}
+
+- (CGSize)intrinsicContentSize {
+    CGSize size = CGSizeMake(UIViewNoIntrinsicMetric, [self.collectionViewLayout collectionViewContentSize].height);
+    return size;
+}
+
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    NSArray *sortedCells = [self.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
+        return cell1.tag > cell2.tag;
+    }];
+    NSUInteger cellCount = sortedCells.count;
+    NSTimeInterval interAnimationDelay = 0.05;
+    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (cellCount-1));
+    if (singleAnimationDuration < 0) {
+        interAnimationDelay = 0;
+        singleAnimationDuration = animationDuration;
+    }
+    for (int idx = 0; idx < cellCount; idx++) {
+        UICollectionViewCell *cell = sortedCells[idx];
+        cell.transform = CGAffineTransformMakeScale(0, 0);
+        [UIView animateWithDuration:singleAnimationDuration
+                              delay:interAnimationDelay * idx
+                            options:(UIViewAnimationOptions)0
+                         animations:^{
+            cell.transform = CGAffineTransformIdentity;
+        } completion:nil];
+    }
+}
+
+#pragma mark - UICollectionViewDataSource / UICollectionViewDelegate
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ORKLegendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.tag = indexPath.item;
+    cell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView
+                                                 titleForSegmentAtIndex:indexPath.item];
+    cell.titleLabel.font = _labelFont;
+    cell.dotView.backgroundColor = [_parentPieChartView.dataSource pieChartView:_parentPieChartView
+                                                         colorForSegmentAtIndex:indexPath.item];
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ORKLegendCollectionViewCell *cell = [[ORKLegendCollectionViewCell alloc] initWithFrame:CGRectZero];
+    cell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
+    cell.titleLabel.font = _labelFont;
+    [cell.contentView setNeedsUpdateConstraints];
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    // NSLog(@"%@", NSStringFromCGSize(size));
+    return size;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 15;
+}
+
+@end
+
+
+@interface ORKPieChartTitleTextView : UIView
+
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UILabel *textLabel;
+@property (nonatomic) UILabel *noDataLabel;
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithFrame:(CGRect)frame
+           parentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+
+
+@end
+
+
+@implementation ORKPieChartTitleTextView  {
+    __weak ORKPieChartView *_parentPieChartView;
+    
+    NSMutableArray *_variableConstraints;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+           parentPieChartView:(ORKPieChartView *)parentPieChartView {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _parentPieChartView = parentPieChartView;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        _titleLabel = [UILabel new];
+        [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+
+        _textLabel = [UILabel new];
+        [_textLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        _noDataLabel = [UILabel new];
+        _noDataLabel.textColor = [UIColor lightGrayColor];
+        _noDataLabel.text = NSLocalizedString(@"No Data", @"No Data");;
+        _noDataLabel.textAlignment = NSTextAlignmentCenter;
+        _noDataLabel.hidden = YES;
+
+        [self addSubview:_titleLabel];
+        [self addSubview:_textLabel];
+        [self addSubview:_noDataLabel];
+        
+        _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _noDataLabel.translatesAutoresizingMaskIntoConstraints = NO;
+
+        [self setUpConstraints];
+        [self setNeedsUpdateConstraints];
+    }
+    return self;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_titleLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_noDataLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
+    }
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _textLabel, _noDataLabel);
+    if (_noDataLabel.hidden) {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel][_textLabel]|"
+                                                 options:(NSLayoutFormatOptions)0
+                                                 metrics:nil
+                                                   views:views]];
+    } else {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_noDataLabel]|"
+                                                 options:(NSLayoutFormatOptions)0
+                                                 metrics:nil
+                                                   views:views]];
+    }
+    
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
+    [super updateConstraints];
+}
+
+- (void)showNoDataLabel:(BOOL)showNoDataLabel {
+    _titleLabel.hidden = showNoDataLabel;
+    _textLabel.hidden = showNoDataLabel;
+    _noDataLabel.hidden = !showNoDataLabel;
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    _titleLabel.alpha = 0.0;
+    _textLabel.alpha = 0.0;
+    _noDataLabel.alpha = 0.0;
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         _titleLabel.alpha = 1.0;
+                         _textLabel.alpha = 1.0;
+                         _noDataLabel.alpha = 1.0;
+                     }];
+}
 
 @end
 
 
 @implementation ORKPieChartView {
-    CGFloat _pieRadius;
-    CGFloat _sumOfValues;
-    CGFloat _originAngle;
-    CGFloat _percentageLabelOffset;
-    
-    NSMutableArray *_actualValues;
-    NSMutableArray *_normalizedValues;
-    NSMutableArray *_constraints;
-    
-    CAShapeLayer *_circleLayer;
-    UILabel *_emptyLabel;
-    UILabel *_titleLabel;
-    UILabel *_textLabel;
-    UIView *_contentView;
-    UIView *_plotView;
-    UICollectionView *_legendView;
-    UICollectionViewFlowLayout *_legendLayout;
-    
-    UIFont *_titleFont;
-    UIFont *_textFont;
-    UIFont *_legendFont;
-    UIFont *_percentageFont;
+    NSMutableArray *_variableConstraints;
+
+    ORKPieChartPieView *_pieView;
+    ORKPieChartLegendView *_legendView;
+    ORKPieChartTitleTextView *_titleTextView;
 }
 
 #pragma mark - Init
@@ -108,237 +663,175 @@
     return self;
 }
 
-- (void)updateAppearance {
-    _titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _emptyLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _emptyLabel.textColor = [UIColor lightGrayColor];
-    _textFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-    _legendFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    _percentageFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+- (void)updateContentSizeFonts {
+    _titleTextView.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    _titleTextView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    _titleTextView.noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    _pieView.percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
 }
 
 - (void)sharedInit {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateAppearance)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+    _drawTitleAboveChart = NO;
     
     _lineWidth = 10;
-    _percentageLabelOffset = 10;
-    
-    _circleLayer = [CAShapeLayer layer];
-    _circleLayer.fillColor = [UIColor clearColor].CGColor;
-    _circleLayer.strokeColor = [UIColor colorWithWhite:0.96 alpha:1.000].CGColor;
-    _circleLayer.lineWidth = _lineWidth;
-    
-    _originAngle = -M_PI_2;
-    
-    _shouldAnimate = YES;
-    _shouldAnimateLegend = YES;
-    _animationDuration = 0.35f;
     _shouldDrawClockwise = YES;
     
-    _actualValues = [NSMutableArray new];
-    _normalizedValues = [NSMutableArray new];
-    _sumOfValues = 0;
-
-    _titleLabel = [UILabel new];
-    _textLabel = [UILabel new];
-    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [_textLabel setTextAlignment:NSTextAlignmentCenter];
+    _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
     
-    _emptyText = NSLocalizedString(@"No Data", @"No Data");
+    _pieView = [[ORKPieChartPieView alloc] initWithFrame:CGRectZero parentPieChartView:self];
     
-    _emptyLabel = [UILabel new];
-    _emptyLabel.text = _emptyText;
-    _emptyLabel.textAlignment = NSTextAlignmentCenter;
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithFrame:CGRectZero parentPieChartView:self];
     
-    _legendLayout = [[ORKCenteredCollectionViewLayout alloc] init];
-    _legendView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout: _legendLayout];
-    [_legendView registerClass: NSClassFromString(@"ORKLegendCollectionViewCell") forCellWithReuseIdentifier:@"cell"];
-    _legendView.backgroundColor = [UIColor clearColor];
-    _legendView.translatesAutoresizingMaskIntoConstraints = NO;
-    _legendView.dataSource = self;
-    _legendView.delegate = self;
+    [self addSubview:_pieView];
+    [self addSubview:_legendView];
+    [self addSubview:_titleTextView];
     
-    _plotView = [UIView new];
-    _plotView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    _contentView = [UIView new];
-    _contentView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self addSubview: _contentView];
-    [_contentView addSubview:_plotView];
-    [_contentView addSubview:_legendView];
-    [_contentView addSubview:_titleLabel];
-    [_contentView addSubview:_textLabel];
-    
-    [self updateAppearance];
+    [self updateContentSizeFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    [self setUpConstraints];
+    [self setNeedsUpdateConstraints];
 }
 
-#pragma mark - Layout
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_pieView, _legendView);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                              metrics:nil
+                                                                                views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pieView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pieView]-PlotToLegendPadding-[_legendView]|"
+                                                                              options:(NSLayoutFormatOptions)0
+                                                                             metrics:@{ @"PlotToLegendPadding": @(PieToLegendPadding) }
+                                                                                views:views]];
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    // element padding.
-    CGFloat titlePlotPadding = 8;
-    CGFloat plotLegendPadding = 8;
-    
-    // title / text height.
-    _titleLabel.font = _titleFont;
-    _textLabel.font = _textFont;
-    _titleLabel.text = _title;
-    _textLabel.text = _text;
-    [_titleLabel sizeToFit];
-    [_textLabel sizeToFit];
-    CGFloat titleTextHeight = _shouldDrawTitleAboveChart ? _titleLabel.bounds.size.height + _textLabel.bounds.size.height + titlePlotPadding : 0;
+    NSLayoutConstraint *maximumHeightConstraint = [NSLayoutConstraint constraintWithItem:_pieView
+                                                                               attribute:NSLayoutAttributeHeight
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                                              multiplier:1.0
+                                                                                constant:ORKScreenMetricMaxDimension];
+    maximumHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
+    [constraints addObject:maximumHeightConstraint];
 
-    // legendView height.
-    [_contentView layoutIfNeeded];
-    CGFloat legendHeight = [_legendView.collectionViewLayout collectionViewContentSize].height;
-    
-    // plotView height.
-    CGFloat plotAccessoriesHeight = (titleTextHeight + plotLegendPadding + legendHeight);
-    CGFloat maximumPlotHeight = CGRectGetHeight(_contentView.frame) - plotAccessoriesHeight;
-    CGFloat plotHeight = MIN(maximumPlotHeight, _contentView.frame.size.width); // The largest diameter possible within the bounds.
-    
-    // content padding.
-    CGFloat contentHeight = plotAccessoriesHeight + plotHeight;
-    CGFloat verticalWhiteSpace = CGRectGetHeight(_contentView.frame) - contentHeight;
-    
-    // vertically centered frames.
-    _plotView.frame = CGRectMake(0, (verticalWhiteSpace * 0.5) + titleTextHeight, CGRectGetWidth(_contentView.frame), plotHeight);
-    _legendView.frame = CGRectMake(0, CGRectGetMaxY(_plotView.frame) + plotLegendPadding, CGRectGetWidth(_contentView.frame), legendHeight);
-    
-    // circle path.
-    CGFloat startAngle = _originAngle;
-    CGFloat endAngle = startAngle + (2 * M_PI);
-    CGFloat unlabeledRadius = plotHeight * 0.5;
-    CGFloat labelHeight = [@"100%" boundingRectWithSize: CGRectInfinite.size
-                                                options:0
-                                             attributes:@{NSFontAttributeName : _percentageFont}
-                                                context:nil].size.height;
-    CGFloat labeledRadius = unlabeledRadius - (labelHeight + _percentageLabelOffset);
-    _lineWidth = MIN(_lineWidth, labeledRadius);
-    _circleLayer.lineWidth = _lineWidth;
-    _pieRadius = labeledRadius - (_lineWidth * 0.5);
-    
-    if (!self.shouldDrawClockwise) {
-        startAngle = 3 * M_PI_2;
-        endAngle = -M_PI_2;
-    }
-    UIBezierPath *circularArcBezierPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetMidX(_plotView.frame), CGRectGetMidY(_plotView.frame))
-                                                                         radius:_pieRadius
-                                                                     startAngle:startAngle
-                                                                       endAngle:endAngle
-                                                                      clockwise:self.shouldDrawClockwise];
-    
-    _circleLayer.path = circularArcBezierPath.CGPath;
-    [_plotView.layer addSublayer: _circleLayer];
-    
-    // reset data.
-    [_actualValues removeAllObjects];
-    [_normalizedValues removeAllObjects];
-    [self normalizeActualValues];
-    
-    // redraw.
-    [_circleLayer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [_plotView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [_emptyLabel removeFromSuperview];
-    [self drawTitleText];
-    [self drawPieChart];
-    [self drawPercentageLabels];
-    [self drawLegend];
-    
-    // emptyLabel.
-    if (!_sumOfValues) {
-        [_emptyLabel sizeToFit];
-        _emptyLabel.center = _plotView.center;
-        [_plotView addSubview:_emptyLabel];
-    }
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_titleTextView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_pieView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+
+    [NSLayoutConstraint activateConstraints:constraints];
 }
-
-#pragma mark - Layout
 
 - (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
     }
-    _constraints = [NSMutableArray new];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _plotView, _legendView, _titleLabel, _textLabel);
+
+    if (_drawTitleAboveChart) {
+        NSDictionary *views = NSDictionaryOfVariableBindings(_pieView, _titleTextView);
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleTextView]-TitleToPiePading-[_pieView]"
+                                                 options:(NSLayoutFormatOptions)0
+                                                 metrics:@{ @"TitleToPiePading": @(TitleToPiePadding) }
+                                                   views:views]];
+
+    } else {
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_titleTextView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:_pieView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+    }
     
-    // These constraints describe the layout used to calculate the height of _legendView in layoutSubviews, not the final layout.
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView]|"
-                                                                              options:(NSLayoutFormatOptions)0
-                                                                              metrics:nil
-                                                                                views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView]|"
-                                                                              options:(NSLayoutFormatOptions)0
-                                                                              metrics:nil
-                                                                                views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|"
-                                                                              options:(NSLayoutFormatOptions)0
-                                                                              metrics:nil
-                                                                                views:views]];
-    [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_legendView]|"
-                                                                              options:(NSLayoutFormatOptions)0
-                                                                              metrics:nil
-                                                                                views:views]];
-    [NSLayoutConstraint activateConstraints:_constraints];
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
 
-#pragma mark - UICollectionViewDataSource / UICollectionViewDelegate
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ORKLegendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.tag = indexPath.item;
-    cell.titleLabel.text = [_datasource pieChartView:self titleForSegmentAtIndex:indexPath.item];
-    cell.titleLabel.font = _legendFont;
-    cell.dotView.backgroundColor = [_datasource pieChartView:self colorForSegmentAtIndex:indexPath.item];
-    cell.transform = CGAffineTransformMakeScale(0, 0);
-    return cell;
+- (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    CGFloat sumOfValues = [_pieView normalizeValues];
+    [_pieView setUpSublayersAndLabels];
+    [_titleTextView showNoDataLabel:(sumOfValues == 0)];
+    [_legendView invalidateIntrinsicContentSize];
+    [self layoutIfNeeded];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [_datasource numberOfSegmentsInPieChartView:self];
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    if (![self.traitCollection isEqual:previousTraitCollection]) {
+        [_legendView invalidateIntrinsicContentSize];
+    }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ORKLegendCollectionViewCell *cell = [[ORKLegendCollectionViewCell alloc]initWithFrame:CGRectZero];
-    cell.titleLabel.text = [_datasource pieChartView:self titleForSegmentAtIndex:indexPath.item];
-    cell.titleLabel.font = _legendFont;
-    [cell.contentView setNeedsUpdateConstraints];
-    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+- (void)setTitle:(NSString *)title {
+    _titleTextView.titleLabel.text = title;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+- (NSString *)title {
+    return _titleTextView.titleLabel.text;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 15;
+- (void)setText:(NSString *)text {
+    _titleTextView.textLabel.text = text;
+}
+
+- (NSString *)text {
+    return _titleTextView.textLabel.text;
+}
+
+- (void)setNoDataText:(NSString *)noDataText {
+    _titleTextView.noDataLabel.text = noDataText;
+}
+
+- (NSString *)noDataText {
+    return _titleTextView.noDataLabel.text;
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleTextView.titleLabel.textColor = titleColor;
+}
+
+- (UIColor *)titleColor {
+    return _titleTextView.titleLabel.textColor;
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    _titleTextView.textLabel.textColor = textColor;
+}
+
+- (UIColor *)textColor {
+    return _titleTextView.textLabel.textColor;
+}
+
+- (void)setDrawTitleAboveChart:(BOOL)drawTitleAboveChart {
+    _drawTitleAboveChart = drawTitleAboveChart;
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark - DataSource
 
-- (NSInteger)numberOfSegments {
-    NSInteger count = 0;
-    if ([_datasource respondsToSelector:@selector(numberOfSegmentsInPieChartView:)]) {
-        count = [_datasource numberOfSegmentsInPieChartView:self];
-    }
-    return count;
-}
-
 - (UIColor *)colorForSegmentAtIndex:(NSInteger)index {
     UIColor *color = nil;
-    if ([self.datasource respondsToSelector:@selector(pieChartView:colorForSegmentAtIndex:)]) {
-        color = [self.datasource pieChartView:self colorForSegmentAtIndex:index];
+    if ([_dataSource respondsToSelector:@selector(pieChartView:colorForSegmentAtIndex:)]) {
+        color = [_dataSource pieChartView:self colorForSegmentAtIndex:index];
     }
     else {
         // Default colors
-        NSInteger numberOfSegments = [self numberOfSegments];
+        NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
         if (numberOfSegments > 1) {
             CGFloat divisionFactor = (CGFloat)(1/(CGFloat)(numberOfSegments -1));
             color = [UIColor colorWithWhite:(divisionFactor * index) alpha:1.0f];
@@ -350,252 +843,13 @@
     return color;
 }
 
-- (CGFloat)valueForSegmentAtIndex:(NSInteger)index {
-    CGFloat value = 0;
-    if ([self.datasource respondsToSelector:@selector(pieChartView:valueForSegmentAtIndex:)]) {
-        value = [self.datasource pieChartView:self valueForSegmentAtIndex:index];
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    if (animationDuration < 0) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
     }
-    return value;
-}
-
-#pragma mark - Draw
-
-- (void)drawTitleText {
-    if (_titleColor) {
-        _titleLabel.textColor = _titleColor;
-    }
-    if (_textColor) {
-        _textLabel.textColor = _textColor;
-    }
-    _shouldDrawTitleAboveChart ? [self drawTitleTextAboveChart] : [self drawTitleTextInFrontOfChart];
-}
-
-- (void)drawTitleTextAboveChart {
-    _titleLabel.center = CGPointMake(CGRectGetMidX(_contentView.bounds), CGRectGetMinY(_contentView.bounds) + _titleLabel.bounds.size.height * 0.5);
-    _textLabel.center =  CGPointMake(_titleLabel.center.x, CGRectGetMaxY(_titleLabel.frame) + _textLabel.bounds.size.height * 0.5);
-}
-
-- (void)drawTitleTextInFrontOfChart {
-    _titleLabel.center = _plotView.center;
-    _textLabel.center =  _plotView.center;
-    
-    if (_textLabel.text && _titleLabel.text) {
-        _titleLabel.frame = CGRectOffset(_titleLabel.frame, 0, - CGRectGetHeight(_titleLabel.frame) * 0.5);
-        _textLabel.frame = CGRectOffset(_textLabel.frame, 0, CGRectGetHeight(_textLabel.frame) * 0.5);
-    }
-}
-
-- (void)drawLegend {
-    if (self.shouldAnimate) {
-        NSArray *sorted = [_legendView.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
-            return cell1.tag > cell2.tag;
-        }];
-        for (UICollectionViewCell *cell in sorted) {
-            [UIView animateWithDuration:0.75 delay: [sorted indexOfObject:cell] * 0.075 options:0 animations:^{
-                cell.transform = CGAffineTransformIdentity;
-            } completion:nil];
-        }
-    }
-    else {
-        for (UICollectionViewCell *cell in _legendView.visibleCells) {
-            cell.transform = CGAffineTransformIdentity;
-        }
-    }
-}
-
-- (void)drawPieChart {
-    CGFloat cumulativeValue = 0;
-    
-    for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
-        
-        CAShapeLayer *segmentLayer = [CAShapeLayer layer];
-        segmentLayer.fillColor = [[UIColor clearColor] CGColor];
-        segmentLayer.frame = _circleLayer.bounds;
-        segmentLayer.path = _circleLayer.path;
-        segmentLayer.lineCap = _circleLayer.lineCap;
-        segmentLayer.lineWidth = _circleLayer.lineWidth;
-        segmentLayer.strokeColor = [self colorForSegmentAtIndex:idx].CGColor;
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
-        
-        if (value != 0) {
-            if (idx == 0) {
-                segmentLayer.strokeStart = 0.0;
-            } else {
-                segmentLayer.strokeStart = cumulativeValue;
-            }
-            
-            segmentLayer.strokeEnd = cumulativeValue;
-            [_circleLayer addSublayer:segmentLayer];
-            
-            if (self.shouldAnimate) {
-                CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-                strokeAnimation.fromValue = @(segmentLayer.strokeStart);
-                strokeAnimation.toValue = @(cumulativeValue + value);
-                strokeAnimation.duration = _animationDuration + 0.1;
-                strokeAnimation.removedOnCompletion = NO;
-                strokeAnimation.fillMode = kCAFillModeForwards;
-                strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-                [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
-            } else {
-                segmentLayer.strokeEnd = cumulativeValue + value;
-            }
-        }
-        cumulativeValue += value;
-    }
-}
-
-- (void)drawPercentageLabels {
-    CGFloat cumulativeValue = 0;
-    NSMutableArray *pieLabels = [NSMutableArray new];
-    
-    for (NSInteger idx = 0; idx < [self numberOfSegments]; idx++) {
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
-        
-        if (value != 0) {
-            
-            // Create a label
-            UILabel *label = [UILabel new];
-            label.text = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 :value * 100];
-            label.font = _percentageFont;
-            label.textColor = [self colorForSegmentAtIndex:idx];
-            [label sizeToFit];
-            
-            // Calculate the angle to the centre of this segment in radians
-            CGFloat angle = (value / 2 + cumulativeValue) * M_PI * 2;
-            if (!self.shouldDrawClockwise) {
-                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
-            }
-            
-            label.center = [self percentageLabel:label calculateCenterForAngle:angle];
-            [_plotView addSubview:label];
-            
-            cumulativeValue += value;
-            ORKPieChartLabel *pieLabel = [[ORKPieChartLabel alloc] initWithLabel:label angle:angle];
-            [pieLabels addObject:pieLabel];
-            
-            if (_shouldAnimate) {
-                label.alpha = 0;
-                [UIView animateWithDuration:0.3 animations:^{
-                    label.alpha = 1.0;
-                }];
-            }
-        }
-    }
-    [self adjustIntersectionsOfPercentageLabels:pieLabels];
-}
-
-- (CGPoint)percentageLabel: (UILabel *)label calculateCenterForAngle:(CGFloat)angle {
-    
-    // Calculate the desired distance from the circle's centre.
-    NSInteger lineOffset = _lineWidth / 2;
-    CGFloat radius = _pieRadius;
-    CGFloat offset = 10;
-    CGFloat length = radius + lineOffset + offset;
-    
-    // Calculate x and y coordinates for the point at this distance at the specified angle.
-    CGFloat cosine = cos(angle + _originAngle);
-    CGFloat sine = sin(angle + _originAngle);
-    CGFloat x = cosine * length + _plotView.frame.size.width / 2;
-    CGFloat y = sine *  length + _plotView.frame.size.height / 2;
-    
-    // Offset (x,y) to normalise the spacing from the circle's centre to the intersection with the label's frame rather than its centre.
-    CGSize labelSize = [label systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    CGFloat xIn = cosine * labelSize.width / 2;
-    CGFloat yIn = sine * labelSize.height / 2;
-    x += xIn;
-    y+= yIn;
-    
-    return  CGPointMake(x, y);
-}
-
-- (void)adjustIntersectionsOfPercentageLabels:(NSArray *)pieLabels {
-    if ([pieLabels count] == 0) {
-        return;
-    }
-    // Adjust labels while we have intersections
-    BOOL intersections = YES;
-    // We alternate directions in each iteration
-    BOOL shiftClockwise = NO;
-    CGFloat rotateDirection = self.shouldDrawClockwise ? 1 : -1;
-    // We use totalAngle to prevent from infinite loop
-    CGFloat totalAngle = 0;
-    while (intersections) {
-        intersections = NO;
-        shiftClockwise = !shiftClockwise;
-        
-        if (shiftClockwise) {
-            for (NSUInteger idx = 0; idx < ([pieLabels count] - 1); idx++) {
-                // Prevent from infinite loop
-                if (!idx) {
-                    totalAngle += 0.01;
-                    if (totalAngle >= 2 * M_PI) {
-                        return;
-                    }
-                }
-                ORKPieChartLabel *pieLabel  = pieLabels[idx];
-                ORKPieChartLabel *nextPieLabel = pieLabels[(idx + 1)];
-                if ([self shiftLabel:nextPieLabel fromLabel:pieLabel inDirection:rotateDirection]) {
-                    intersections = YES;
-                }
-            }
-        } else {
-            for (NSInteger i = [pieLabels count] - 1; i > 0; i--) {
-                ORKPieChartLabel *pieLabel = pieLabels[i];
-                ORKPieChartLabel *nextPieLabel = pieLabels[i - 1];
-                if ([self shiftLabel:nextPieLabel fromLabel:pieLabel inDirection:-rotateDirection]) {
-                    intersections = YES;
-                }
-            }
-        }
-        
-        // Adjust space between last and first element
-        ORKPieChartLabel *firstPieLabel = pieLabels.firstObject;
-        ORKPieChartLabel *lastPieLabel = pieLabels.lastObject;
-        UILabel *firstLabel = firstPieLabel.label;
-        UILabel *lastLabel = lastPieLabel.label;
-        if (CGRectIntersectsRect(lastLabel.frame, firstLabel.frame)) {
-            CGFloat firstLabelAngle = firstPieLabel.angle;
-            CGFloat lastLabelAngle = lastPieLabel.angle;
-            firstLabelAngle += rotateDirection * 0.01;
-            lastLabelAngle -= rotateDirection * 0.01;
-            firstPieLabel.angle = firstLabelAngle;
-            lastPieLabel.angle = lastLabelAngle;
-        }
-    }
-}
-
-- (BOOL)shiftLabel:(ORKPieChartLabel *)nextPieLabel fromLabel:(ORKPieChartLabel *)fromPieLabel inDirection:(CGFloat) direction {
-    CGFloat shiftStep = 0.01;
-    UILabel *label = fromPieLabel.label;
-    UILabel *nextLabel = nextPieLabel.label;
-    if (CGRectIntersectsRect(label.frame, nextLabel.frame)) {
-        CGFloat nextLabelAngle = nextPieLabel.angle;
-        nextLabelAngle += direction * shiftStep;
-        nextPieLabel.angle = nextLabelAngle;
-        nextLabel.center = [self percentageLabel:nextLabel calculateCenterForAngle:nextLabelAngle];
-        return YES;
-    }
-    return NO;
-}
-
-#pragma mark - Data Normalization
-
-- (void)normalizeActualValues {
-    _sumOfValues = 0;
-    
-    for (int idx = 0; idx < [self numberOfSegments]; idx++) {
-        CGFloat value = [self valueForSegmentAtIndex:idx];
-        [_actualValues addObject:@(value)];
-        _sumOfValues += value;
-    }
-    
-    for (int idx = 0; idx < [self numberOfSegments]; idx++) {
-        CGFloat value = 0;
-        if (_sumOfValues != 0) {
-            value = ((NSNumber *)_actualValues[idx]).floatValue/_sumOfValues;
-        }
-        [_normalizedValues addObject:@(value)];
-    }
+    [self layoutIfNeeded]; // Needed so _pieView (a UICollectionView subclass) dequees and displays the cells
+    [_pieView animateWithDuration:animationDuration];
+    [_legendView animateWithDuration:animationDuration];
 }
 
 @end
