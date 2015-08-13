@@ -681,9 +681,9 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
             var side = ""
             let orientation = holePegTestResult.orientation
             if (orientation == .Left) {
-                side = "left"
+                side = "left > right"
             } else if (orientation == .Right) {
-                side = "right"
+                side = "right > left"
             }
             
             // The hole peg test orientation.
@@ -722,8 +722,8 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
         return rows + holePegTestResult.samples!.map { sample in
             let holePegTestSample = sample as! ORKHolePegTestSample
             
-            let text = "time: \(holePegTestSample.time))"
-            let detail = "distance: \(holePegTestSample.distance)"
+            let text = "time (s): \(holePegTestSample.time))"
+            let detail = "distance (pt): \(holePegTestSample.distance)"
             
             return ResultRow(text: text, detail: detail)
         }

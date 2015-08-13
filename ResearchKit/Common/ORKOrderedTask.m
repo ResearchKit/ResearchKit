@@ -285,6 +285,7 @@ NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatial
 NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
 NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
 NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
+NSString * const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
 NSString * const ORKAudioRecorderIdentifier = @"audio";
 NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
