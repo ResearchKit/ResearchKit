@@ -89,6 +89,9 @@
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
 
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
