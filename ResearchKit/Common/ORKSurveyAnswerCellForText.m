@@ -60,6 +60,8 @@
         self.textView.autocorrectionType = textAnswerFormat.autocorrectionType;
         self.textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         self.textView.spellCheckingType = textAnswerFormat.spellCheckingType;
+        self.textView.keyboardType = textAnswerFormat.keyboardType;
+        self.textView.secureTextEntry = textAnswerFormat.secureTextEntry;
     } else {
         _maxLength = 0;
     }
@@ -159,13 +161,19 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+
+    NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textView.text = researchki` and the `string = researchkit`.
+    if ([textView.text length] < [string length]) {
     
-    if (_maxLength > 0) {
-        NSUInteger oldLength = [textView.text length];
-        NSUInteger replacementLength = [text length];
-        NSUInteger rangeLength = range.length;
-        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-        return (newLength <= _maxLength);
+        string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+        if (_maxLength > 0 && [string length] > _maxLength) {
+            [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
+            return NO;
+        }
     }
     
     return YES;
@@ -237,14 +245,17 @@
     
     [self answerDidChange];
     
-    // Truncate if needed
-    [self correctValueIfNeeded];
-    
     [super prepareView];
 }
 
 - (BOOL)shouldContinue {
-    return ![self correctValueIfNeeded];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    if (! [answerFormat isAnswerValidWithString:self.textField.text]) {
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)answerDidChange {
@@ -255,6 +266,8 @@
         self.textField.autocorrectionType = textFormat.autocorrectionType;
         self.textField.autocapitalizationType = textFormat.autocapitalizationType;
         self.textField.spellCheckingType = textFormat.spellCheckingType;
+        self.textField.keyboardType = textFormat.keyboardType;
+        self.textField.secureTextEntry = textFormat.secureTextEntry;
     }
     NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
     
@@ -263,61 +276,41 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)correctValueIfNeeded {
-    ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
-    NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
-    NSString *text = self.textField.text;
-    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
-    if (maxLength > 0 && [text length] > maxLength) {
-        NSString *corrected = [text substringToIndex:maxLength];
-        ORK_Log_Debug(@"%@ -> %@", text, corrected);
-        
-        self.textField.text = corrected;
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-- (BOOL)correctionNeededForText:(NSString *)text {
-    ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
-    NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
-    NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
-    if (maxLength > 0 && [text length] > maxLength) {
-        return YES;
-    }
-    return NO;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    ORKAnswerFormat *impliedFormat = [self.step impliedAnswerFormat];
+    NSAssert([impliedFormat isKindOfClass:[ORKTextAnswerFormat class]], @"answerFormat should be ORKTextAnswerFormat type instance.");
+    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (! [self correctionNeededForText:text]) {
-        [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
-    } else {
-        return NO;
+    
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textField.text = researchki` and the `text = researchkit`.
+    if ([textField.text length] < [text length]) {
+    
+        text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+        NSInteger maxLength = [(ORKTextAnswerFormat *)impliedFormat maximumLength];
+    
+        if (maxLength > 0 && [text length] > maxLength) {
+            [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
+            return NO;
+        }
     }
+    
+    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
     
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    [self correctValueIfNeeded];
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL canContinue = ![self correctValueIfNeeded];
-    
-    if (! canContinue) {
-        return NO;
-    }
-    
     [self.textField resignFirstResponder];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self correctValueIfNeeded];
     NSString *text = self.textField.text;
     [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
 }

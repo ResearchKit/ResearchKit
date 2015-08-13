@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,43 +29,43 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKScaleSlider.h"
+#import "ORKTowerOfHanoiTower.h"
 
+@interface ORKTowerOfHanoiTower ()
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKScaleRangeLabel;
-@class ORKScaleValueLabel;
-@class ORKScaleRangeDescriptionLabel;
-@class ORKScaleRangeImageView;
-
-@interface ORKScaleSliderView : UIView
-
-- (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleSlider *slider;
-
-@property (nonatomic, strong, readonly) id<ORKScaleAnswerFormatProvider> formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *leftRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *rightRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *leftRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *rightRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *leftRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
-
-@property (nonatomic, strong, nullable) NSNumber *currentValue;
+@property(nonatomic, copy, readwrite) NSArray *disks;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation ORKTowerOfHanoiTower
+
++ (instancetype)emptyTower {
+    return [[ORKTowerOfHanoiTower alloc]initWithDisks:@[]];
+}
+
+- (instancetype)initWithDisks:(NSArray *)disks {
+    self = [super init];
+    if (self) {
+        _disks = disks;
+    }
+    return self;
+}
+
+- (BOOL)canRecieveDisk:(NSNumber *)disk {
+    return _disks.count == 0 || [_disks.lastObject integerValue] > disk.integerValue;
+}
+
+- (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
+    if (donorTower.disks.count == 0  || ![self canRecieveDisk:donorTower.disks.lastObject]) {
+        return NO;
+    }
+    NSMutableArray *recipientDisks = [self.disks mutableCopy];
+    NSMutableArray *donorDisks = [donorTower.disks mutableCopy];
+    [recipientDisks addObject:donorTower.disks.lastObject];
+    [donorDisks removeLastObject];
+    self.disks = recipientDisks;
+    donorTower.disks = donorDisks;
+    return YES;
+}
+
+@end

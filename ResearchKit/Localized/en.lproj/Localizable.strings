@@ -83,6 +83,12 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -215,6 +221,15 @@
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";

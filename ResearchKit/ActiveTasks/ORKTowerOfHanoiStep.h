@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,42 +29,20 @@
  */
 
 
-#import <UIKit/UIKit.h>
 #import <ResearchKit/ResearchKit.h>
-#import "ORKAnswerFormat_Internal.h"
-#import "ORKScaleSlider.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKScaleRangeLabel;
-@class ORKScaleValueLabel;
-@class ORKScaleRangeDescriptionLabel;
-@class ORKScaleRangeImageView;
+ORK_CLASS_AVAILABLE
+@interface ORKTowerOfHanoiStep : ORKActiveStep
 
-@interface ORKScaleSliderView : UIView
-
-- (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleSlider *slider;
-
-@property (nonatomic, strong, readonly) id<ORKScaleAnswerFormatProvider> formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *leftRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *rightRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *leftRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *rightRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *leftRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
-
-@property (nonatomic, strong, nullable) NSNumber *currentValue;
+/**
+ The number of disks in the puzzle.
+ It is not recommended that you use a large number of disks. As this provides a poor user experience.
+ The default value of this property is 3.
+ */
+@property (nonatomic, assign) NSUInteger numberOfDisks;
 
 @end
 

@@ -57,6 +57,7 @@ enum TaskListRow: Int, Printable {
     case ToneAudiometry
     case ReactionTime
     case HolePegTest
+    case TowerOfHanoi
     case ImageCapture
     case Survey
     case Consent
@@ -136,6 +137,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .TowerOfHanoi:
+                return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
             
             case .HolePegTest:
                 return NSLocalizedString("Hole Peg Test Task", comment: "")
@@ -225,6 +229,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case TowerOfHanoi =                                         "TowerOfHanoi"
         case HolePegTestTask =                                      "HolePegTestTask"
         
         // Image capture task specific identifiers.
@@ -310,6 +315,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return reactionTimeTask
+            
+            case .TowerOfHanoi:
+                return towerOfHanoiTask
             
             case .HolePegTest:
                 return holePegTestTask
@@ -611,10 +619,13 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
+    private var towerOfHanoiTask: ORKTask {
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+    }
+    
     /// This task presents the Hole Peg Test pre-defined active task.
     private var holePegTestTask: ORKTask {
         return ORKNavigableOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: nil)
-    }
     
     private var exampleSuccessSound: UInt32 {
         var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!

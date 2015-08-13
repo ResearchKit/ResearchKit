@@ -29,43 +29,34 @@
  */
 
 
-#import <UIKit/UIKit.h>
+#import <XCTest/XCTest.h>
 #import <ResearchKit/ResearchKit.h>
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKScaleSlider.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ORKScaleRangeLabel;
-@class ORKScaleValueLabel;
-@class ORKScaleRangeDescriptionLabel;
-@class ORKScaleRangeImageView;
-
-@interface ORKScaleSliderView : UIView
-
-- (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleSlider *slider;
-
-@property (nonatomic, strong, readonly) id<ORKScaleAnswerFormatProvider> formatProvider;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *leftRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeLabel *rightRangeLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *leftRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeImageView *rightRangeImageView;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *leftRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
-
-@property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
-
-@property (nonatomic, strong, nullable) NSNumber *currentValue;
+@interface ORKAnswerFormatTests : XCTestCase
 
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation ORKAnswerFormatTests
+
+- (void)testValidEmailAnswerFormat {
+    // Test email regex validation with correct input.
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone@researchkit.org"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some.one@researchkit.org"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone@researchkit.org.uk"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some_one@researchkit.org"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"some-one@researchkit.org"]);
+    XCTAssert([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"someone1@researchkit.org"]);
+}
+
+- (void)testInvalidEmailAnswerFormat {
+    // Test email regex validation with incorrect input.
+    XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest"]);
+    XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@"]);
+    XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@researchkit"]);
+    XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"emailtest@.org"]);
+    XCTAssertFalse([[ORKEmailAnswerFormat emailAnswerFormat] isAnswerValidWithString:@"12345"]);
+}
+
+@end
