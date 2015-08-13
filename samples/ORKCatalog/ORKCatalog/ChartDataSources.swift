@@ -68,11 +68,23 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
 
 class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     
-    var firstPlot = [ORKRangePoint(value: 20), ORKRangePoint(), ORKRangePoint(value: 40), ORKRangePoint(value: 50), ORKRangePoint(), ORKRangePoint(value: 70)] as [ORKRangePoint]
-    var secondPlot = [ORKRangePoint(value: 2), ORKRangePoint(value: 4), ORKRangePoint(value: 8), ORKRangePoint(value: 16), ORKRangePoint(value: 32), ORKRangePoint(value: 64)] as [ORKRangePoint]
+    var firstPlot = [
+        ORKRangedPoint(value: 20),
+        ORKRangedPoint(value: 25),
+        ORKRangedPoint(),
+        ORKRangedPoint(value: 30),
+        ORKRangedPoint(value: 40),
+        ORKRangedPoint(value: 70)] as [ORKRangedPoint]
+    var secondPlot = [
+        ORKRangedPoint(value: 2),
+        ORKRangedPoint(value: 4),
+        ORKRangedPoint(value: 8),
+        ORKRangedPoint(value: 16),
+        ORKRangedPoint(value: 32),
+        ORKRangedPoint(value: 64)] as [ORKRangedPoint]
     
-    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangePoint {
-        return  plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
+    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
     }
     
     func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
@@ -102,16 +114,25 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
 
 class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     
-    var firstPlot: [ORKRangePoint] {
-        return [ORKRangePoint(minimumValue: 0, maximumValue: 2), ORKRangePoint(minimumValue: 2, maximumValue: 3), ORKRangePoint(minimumValue: 3, maximumValue: 5), ORKRangePoint(minimumValue: 5, maximumValue: 6)]
+    var firstPlot: [ORKRangedPoint] {
+        return [
+            ORKRangedPoint(minimumValue: 0, maximumValue: 2),
+            ORKRangedPoint(minimumValue: 1, maximumValue: 4),
+            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
+            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
+            ORKRangedPoint(minimumValue: 4, maximumValue: 10)]
     }
     
-    var secondPlot: [ORKRangePoint] {
-        return [ORKRangePoint(minimumValue: 0, maximumValue: 1), ORKRangePoint(minimumValue: 1, maximumValue: 5), ORKRangePoint(minimumValue: 4, maximumValue: 6), ORKRangePoint(minimumValue: 6, maximumValue: 8)]
+    var secondPlot: [ORKRangedPoint] {
+        return [
+            ORKRangedPoint(value: 1),
+            ORKRangedPoint(minimumValue: 2, maximumValue: 3),
+            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
+            ORKRangedPoint(minimumValue: 2, maximumValue: 9)]
     }
     
-    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangePoint {
-        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[plotIndex]
+    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+        return plotIndex == 0 ? firstPlot[pointIndex] : secondPlot[pointIndex]
     }
     
     func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
@@ -119,7 +140,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     }
     
     func maximumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
-        return 8;
+        return 10;
     }
     
     func minimumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
