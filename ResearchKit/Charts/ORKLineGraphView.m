@@ -35,6 +35,7 @@
 #import "ORKCircleView.h"
 #import "ORKAxisView.h"
 #import "ORKHelpers.h"
+#import "ORKRangedPoint.h"
 
 
 @interface ORKLineGraphView ()
@@ -68,7 +69,7 @@
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangePoint *positionOnYAxis = nil;
+    ORKRangedPoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
     for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
@@ -90,7 +91,7 @@
         }
         
         positionOnXAxis = [self.xAxisPoints[i] floatValue];
-        positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
+        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[i];
         
         if ([plotLinePath isEmpty]) {
             emptyDataPresent = NO;
@@ -144,8 +145,8 @@
         CGFloat x1 = [(NSNumber *)self.xAxisPoints[prevValidIndex] floatValue];
         CGFloat x2 = [(NSNumber *)self.xAxisPoints[nextValidIndex] floatValue];
         
-        CGFloat y1 = ((ORKRangePoint *)self.dataPoints[prevValidIndex]).minimumValue;
-        CGFloat y2 = ((ORKRangePoint *)self.dataPoints[nextValidIndex]).minimumValue;
+        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[prevValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[nextValidIndex]).minimumValue;
         
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
@@ -163,8 +164,8 @@
     CGFloat x1 = [self.xAxisPoints[previousValidIndex] floatValue];
     CGFloat x2 = [self.xAxisPoints[nextValidIndex] floatValue];
     
-    CGFloat y1 = ((ORKRangePoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
-    CGFloat y2 = ((ORKRangePoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
+    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
     
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -178,7 +179,7 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if (((ORKRangePoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
+        if (((ORKRangedPoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;

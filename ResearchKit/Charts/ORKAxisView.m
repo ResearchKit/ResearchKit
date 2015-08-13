@@ -111,7 +111,7 @@ static const CGFloat LastLabelPadding = 10.0;
     [NSLayoutConstraint activateConstraints:_variableConstraints];
 }
 
-- (void)setupTitles:(NSArray *)titles {
+- (void)setUpTitles:(NSArray *)titles {
     
     for (NSUInteger i = 0; i < [titles count]; i++) {
         

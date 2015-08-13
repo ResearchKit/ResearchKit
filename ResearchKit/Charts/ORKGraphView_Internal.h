@@ -46,8 +46,6 @@ extern const CGFloat ORKGraphViewGrowAnimationDuration;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
-extern NSString *const ORKGraphViewTriggerAnimationsNotification;
-extern NSString *const ORKGraphViewRefreshNotification;
 
 @interface ORKGraphView ()
 
