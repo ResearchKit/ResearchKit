@@ -2197,7 +2197,11 @@ static NSString * const ReviewStepStandaloneTaskIdentifier = @"reviewStepStandal
     ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.reviewStep"];
     reviewStep.title = @"review step title";
     reviewStep.text = @"review step text";
-    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:@[step1, step2, reviewStep]];
+    ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step3"];
+    step3.title = @"step 3 title";
+    step3.text = @"step 3 text";
+    step3.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
 }
 
 - (IBAction)showReviewStepTask:(id)sender {
@@ -2220,7 +2224,11 @@ static NSString * const ReviewStepStandaloneTaskIdentifier = @"reviewStepStandal
                                                              resultSource:nil];
     reviewStep.title = @"review step title";
     reviewStep.text = @"review step text";
-    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepStandaloneTaskIdentifier steps:@[reviewStep]];
+    ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step3"];
+    step3.title = @"step 3 title";
+    step3.text = @"step 3 text";
+    step3.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepStandaloneTaskIdentifier steps:@[reviewStep, step3]];
 }
 
 - (IBAction)showReviewStepStandaloneTask:(id)sender {

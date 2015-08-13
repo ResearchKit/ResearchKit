@@ -1107,16 +1107,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (!self.task || ![self.task respondsToSelector:@selector(stepWithIdentifier:)]) {
         return nil;
     }
-    NSMutableArray *stepIdentifiers = [[NSMutableArray alloc] initWithArray:_managedStepIdentifiers];
-    ORKStep *nextStep = nil;
-    while (stepIdentifiers.count > 0) {
-        nextStep = [self.task stepWithIdentifier:stepIdentifiers.lastObject];
-        if ([nextStep isKindOfClass:[ORKReviewStep class]] && nextStep != step) {
-            return (ORKReviewStep*) nextStep;
-        }
-        [stepIdentifiers removeLastObject];
-    }
-    return nil;
+    __block ORKStep *reviewStep = nil;
+    [[[_managedStepIdentifiers reverseObjectEnumerator] allObjects] enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
+        reviewStep = [self.task stepWithIdentifier:object];
+        *stop = [reviewStep isKindOfClass:[ORKReviewStep class]] && reviewStep != step;
+    }];
+    return [reviewStep isKindOfClass:[ORKReviewStep class]] && reviewStep != step ? (ORKReviewStep*) reviewStep : nil;
 }
 
 - (BOOL)isReviewStepCompleted:(ORKReviewStep*)reviewStep {

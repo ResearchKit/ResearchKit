@@ -140,6 +140,11 @@
     }
 }
 
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    [super setContinueButtonItem:continueButtonItem];
+    _continueSkipView.continueButtonItem = continueButtonItem;
+}
+
 - (ORKReviewStep *)reviewStep {
     return [self.step isKindOfClass:[ORKReviewStep class]] ? (ORKReviewStep *) self.step : nil;
 }
