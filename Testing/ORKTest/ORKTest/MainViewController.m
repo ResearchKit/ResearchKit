@@ -160,6 +160,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showTowerOfHanoiTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Tower Of Hanoi Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"tower"];
+        buttons[buttonKeys.lastObject] = button;
     }
 
     {
