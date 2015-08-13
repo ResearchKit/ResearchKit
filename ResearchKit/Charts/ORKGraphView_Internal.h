@@ -63,7 +63,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 @property (nonatomic, strong) UILabel *emptyLabel;
 
-@property (nonatomic) BOOL hasDataPoint;
+@property (nonatomic) BOOL hasDataPoints;
 
 @property (nonatomic, strong) UIView *scrubberLine;
 
