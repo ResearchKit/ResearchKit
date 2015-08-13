@@ -50,6 +50,8 @@
 #import <ResearchKit/ORKCustomStepView.h>
 
 // Specific active task modules
+#import <ResearchKit/ORKOrderedTask_Private.h>
+
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>

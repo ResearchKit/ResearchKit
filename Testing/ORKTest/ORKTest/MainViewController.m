@@ -56,6 +56,7 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const HolePegTestTaskIdentifier = @"hole_peg_test";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 
@@ -142,6 +143,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [button addTarget:self action:@selector(showReactionTimeTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Reaction Time Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"react"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showHolePegTestTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Hole Peg Test Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"hole_peg_test"];
         buttons[buttonKeys.lastObject] = button;
     }
 
@@ -401,16 +410,25 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     }
     else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                                   intendedUseDescription:nil
-                                                  maximumStimulusInterval:8
-                                                  minimumStimulusInterval:4
-                                                    thresholdAcceleration:0.5
-                                                         numberOfAttempts:3
-                                                                  timeout:10
-                                                             successSound:0
-                                                             timeoutSound:0
-                                                             failureSound:0
-                                                                  options:0];
+                                       intendedUseDescription:nil
+                                      maximumStimulusInterval:8
+                                      minimumStimulusInterval:4
+                                        thresholdAcceleration:0.5
+                                             numberOfAttempts:3
+                                                      timeout:10
+                                                 successSound:0
+                                                 timeoutSound:0
+                                                 failureSound:0
+                                                      options:0];
+    } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
+        return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
+                                               intendedUseDescription:nil
+                                                         dominantHand:ORKSideRight
+                                                         numberOfPegs:9
+                                                            threshold:0.2
+                                                              rotated:NO
+                                                            timeLimit:300.0
+                                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeStepNavigationTask];
     }
@@ -1430,6 +1448,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
 }
 
+- (IBAction)showHolePegTestTask:(id)sender {
+    [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
+}
+
 #pragma mark Dynamic task
 
 /*
@@ -2429,6 +2451,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
+            } else if ([result isKindOfClass:[ORKHolePegTestResult class]]) {
+                ORKHolePegTestResult *hptr = (ORKHolePegTestResult *)result;
+                NSLog(@"    %@:   totalTime: %@     %@", hptr.identifier, @(hptr.totalTime), hptr.samples);
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

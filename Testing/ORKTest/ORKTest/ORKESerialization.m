@@ -443,7 +443,28 @@ ret =
              return [[ORKToneAudiometryPracticeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{})),
-  ENTRY(ORKImageCaptureStep,
+   ENTRY(ORKHolePegTestPlaceStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(orientation, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(dominantHandTested, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(numberOfPegs, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(threshold, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(rotated, NSNumber, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKHolePegTestRemoveStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(orientation, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(dominantHandTested, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(numberOfPegs, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(threshold, NSNumber, NSObject, YES, nil, nil)
+            })),
+   ENTRY(ORKImageCaptureStep,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKImageCaptureStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
         },
@@ -845,7 +866,27 @@ ret =
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
             })),
-  ENTRY(ORKQuestionResult,
+   ENTRY(ORKHolePegTestSample,
+         nil,
+         (@{
+            PROPERTY(time, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(distance, NSNumber, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKHolePegTestResult,
+         nil,
+         (@{
+            PROPERTY(orientation, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(dominantHandTested, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(numberOfPegs, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(threshold, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(rotated, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalSuccesses, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalFailures, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalTime, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(totalDistance, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(samples, ORKHolePegTestSample, NSArray, NO, nil, nil),
+            })),
+   ENTRY(ORKQuestionResult,
          nil,
          (@{
             PROPERTY(questionType, NSNumber, NSObject, NO, nil, nil)

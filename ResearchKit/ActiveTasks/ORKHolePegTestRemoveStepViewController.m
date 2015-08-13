@@ -79,13 +79,14 @@
     self.activeStepView.activeCustomView = self.holePegTestRemoveContentView;
     self.activeStepView.stepViewFillsAvailableSpace = YES;
     
-    NSString *identifier = [[self holePegTestRemoveStep].identifier stringByReplacingOccurrencesOfString:@"place" withString:@"remove"];
-    NSDate *startDate = [self.taskViewController.result stepResultForStepIdentifier:identifier].startDate;
-    NSDate *endDate = [self.taskViewController.result stepResultForStepIdentifier:identifier].endDate;
-    NSTimeInterval duration = [endDate timeIntervalSinceDate:startDate];
-    [self holePegTestRemoveStep].stepDuration -= duration;
+    NSString *identifier = [[self holePegTestRemoveStep].identifier stringByReplacingOccurrencesOfString:@"remove" withString:@"place"];
+    NSTimeInterval placeStepDuration = ((ORKHolePegTestResult *)[[self.taskViewController.result stepResultForStepIdentifier:identifier].results firstObject]).totalTime;
+    [self holePegTestRemoveStep].stepDuration -= placeStepDuration;
+    
     [self start];
 }
+
+#pragma mark - step life cycle methods
 
 - (void)start {
     self.sampleStart = CACurrentMediaTime();
@@ -96,6 +97,8 @@
     
     [super start];
 }
+
+#pragma mark - result methods
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];

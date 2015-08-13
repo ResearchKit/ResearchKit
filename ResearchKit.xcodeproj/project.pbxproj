@@ -44,6 +44,7 @@
 		10FF9AD41B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FF9AD21B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.m */; };
 		10FF9AD71B7A045E00ECB5B4 /* ORKSeparatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 10FF9AD51B7A045E00ECB5B4 /* ORKSeparatorView.h */; };
 		10FF9AD81B7A045E00ECB5B4 /* ORKSeparatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10FF9AD61B7A045E00ECB5B4 /* ORKSeparatorView.m */; };
+		10FF9ADB1B7BA78400ECB5B4 /* ORKOrderedTask_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 10FF9AD91B7BA78400ECB5B4 /* ORKOrderedTask_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503AF1AEE8071004B17F3 /* ORKAudioGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */; };
 		147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */; };
 		147503B71AEE807C004B17F3 /* ORKToneAudiometryContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */; };
@@ -456,6 +457,7 @@
 		10FF9AD21B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKHolePegTestRemovePegView.m; sourceTree = "<group>"; };
 		10FF9AD51B7A045E00ECB5B4 /* ORKSeparatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSeparatorView.h; sourceTree = "<group>"; };
 		10FF9AD61B7A045E00ECB5B4 /* ORKSeparatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSeparatorView.m; sourceTree = "<group>"; };
+		10FF9AD91B7BA78400ECB5B4 /* ORKOrderedTask_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKOrderedTask_Private.h; sourceTree = "<group>"; };
 		147503AD1AEE8071004B17F3 /* ORKAudioGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAudioGenerator.h; sourceTree = "<group>"; };
 		147503AE1AEE8071004B17F3 /* ORKAudioGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAudioGenerator.m; sourceTree = "<group>"; };
 		147503B11AEE807C004B17F3 /* ORKToneAudiometryContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryContentView.h; sourceTree = "<group>"; };
@@ -1191,6 +1193,7 @@
 				86C40B9D1A8D7C5C00081FAC /* ORKOrderedTask.h */,
 				86C40B9E1A8D7C5C00081FAC /* ORKOrderedTask.m */,
 				BC13CE3D1B0662A80044153C /* ORKOrderedTask_Internal.h */,
+				10FF9AD91B7BA78400ECB5B4 /* ORKOrderedTask_Private.h */,
 				86C40BD71A8D7C5C00081FAC /* ORKTaskViewController.h */,
 				86C40BD81A8D7C5C00081FAC /* ORKTaskViewController.m */,
 				86C40BD91A8D7C5C00081FAC /* ORKTaskViewController_Internal.h */,
@@ -1907,6 +1910,7 @@
 				86C40D981A8D7C5C00081FAC /* ORKStepViewController_Internal.h in Headers */,
 				86B89ABB1AB3BECC001626A4 /* ORKStepHeaderView.h in Headers */,
 				D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */,
+				10FF9ADB1B7BA78400ECB5B4 /* ORKOrderedTask_Private.h in Headers */,
 				86C40D1A1A8D7C5C00081FAC /* ORKFormItem_Internal.h in Headers */,
 				86C40E1C1A8D7C5C00081FAC /* ORKConsentSection_Internal.h in Headers */,
 				86C40C7A1A8D7C5C00081FAC /* ORKAccelerometerRecorder.h in Headers */,

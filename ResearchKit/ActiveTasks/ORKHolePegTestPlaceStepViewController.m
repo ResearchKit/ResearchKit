@@ -81,6 +81,8 @@
     self.activeStepView.stepViewFillsAvailableSpace = YES;
 }
 
+#pragma mark - step life cycle methods
+
 - (void)start {
     self.successes = 0;
     self.failures = 0;
@@ -89,6 +91,8 @@
     
     [super start];
 }
+
+#pragma mark - result methods
 
 - (ORKStepResult *)result {
     ORKStepResult *sResult = [super result];
@@ -154,6 +158,7 @@
                                 text:ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil)];
     
     if (self.successes >= [self holePegTestPlaceStep].numberOfPegs) {
+        [((ORKNavigableOrderedTask *)self.taskViewController.task) removeNavigationRuleForTriggerStepIdentifier:[self holePegTestPlaceStep].identifier];
         [self finish];
     }
 }

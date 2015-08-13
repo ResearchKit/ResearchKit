@@ -271,32 +271,27 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - Predefined
 
-static NSString * const ORKInstruction0StepIdentifier = @"instruction";
-static NSString * const ORKInstruction1StepIdentifier = @"instruction1";
-static NSString * const ORKCountdownStepIdentifier = @"countdown";
-static NSString * const ORKAudioStepIdentifier = @"audio";
-static NSString * const ORKTappingStepIdentifier = @"tapping";
-static NSString * const ORKConclusionStepIdentifier = @"conclusion";
-static NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-static NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
-static NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-static NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
-static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
-static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
-static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
-static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
-static NSString * const ORKHolePegTestQuestionStepIdentifier = @"hole.peg.test.question";
-static NSString * const ORKHolePegTestDominantPlaceStepIdentifier = @"hole.peg.test.dominant.place";
-static NSString * const ORKHolePegTestDominantRemoveStepIdentifier = @"hole.peg.test.dominant.remove";
-static NSString * const ORKHolePegTestNonDominantPlaceStepIdentifier = @"hole.peg.test.non.dominant.place";
-static NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test.non.dominant.remove";
-static NSString * const ORKAudioRecorderIdentifier = @"audio";
-static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
-static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
-static NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
-static NSString * const ORKLocationRecorderIdentifier = @"location";
-static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
+NSString * const ORKInstruction0StepIdentifier = @"instruction";
+NSString * const ORKInstruction1StepIdentifier = @"instruction1";
+NSString * const ORKCountdownStepIdentifier = @"countdown";
+NSString * const ORKAudioStepIdentifier = @"audio";
+NSString * const ORKTappingStepIdentifier = @"tapping";
+NSString * const ORKConclusionStepIdentifier = @"conclusion";
+NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
+NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
+NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
+NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
+NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
+NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
+NSString * const ORKAudioRecorderIdentifier = @"audio";
+NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
+NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
+NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
+NSString * const ORKLocationRecorderIdentifier = @"location";
+NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -306,7 +301,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
+void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }
@@ -923,122 +918,6 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     
-    return task;
-}
-
-+ (ORKOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
-                           intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                     dominantHand:(ORKSide)dominantHand
-                                     numberOfPegs:(int)numberOfPegs
-                                        threshold:(double)threshold
-                                          rotated:(BOOL)rotated
-                                        timeLimit:(NSTimeInterval)timeLimit
-                                          options:(ORKPredefinedTaskOption)options {
-    
-    NSMutableArray *steps = [NSMutableArray array];
-    NSString *dHand = dominantHand == ORKSideLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
-    NSString *ndHand = dominantHand == ORKSideLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil);
-    
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
-        NSString *pegs = [NSNumberFormatter localizedStringFromNumber:@(numberOfPegs) numberStyle:NSNumberFormatterNoStyle];
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
-            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), pegs];
-            step.text = intendedUseDescription;
-            step.detailText = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_%@", nil), pegs];
-            step.image = [UIImage imageNamed:@"phoneholepeg" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.shouldTintImages = YES;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-        
-        {
-            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
-            step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), pegs];
-            step.text = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_%@", nil), dHand, ndHand, pegs, pegs];
-            step.detailText = ORKLocalizedString(@"HOLE_PEG_TEST_CALL_TO_ACTION", nil);
-            UIImage *image1 = [UIImage imageNamed:@"holepegtest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            UIImage *image2 = [UIImage imageNamed:@"holepegtest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            UIImage *image3 = [UIImage imageNamed:@"holepegtest3" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            UIImage *image4 = [UIImage imageNamed:@"holepegtest4" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-            step.image = [UIImage animatedImageWithImages:@[image1, image2, image3, image4] duration:2];
-            step.shouldTintImages = YES;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-    
-    {
-        {
-            ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestDominantPlaceStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), dHand];
-            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.orientation = dominantHand;
-            step.dominantHandTested = YES;
-            step.numberOfPegs = numberOfPegs;
-            step.threshold = threshold;
-            step.rotated = rotated;
-            step.shouldTintImages = YES;
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-
-            ORKStepArrayAddStep(steps, step);
-        }
-        
-        {
-            ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestDominantRemoveStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), dHand];
-            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.orientation = dominantHand == ORKSideLeft ? ORKSideRight : ORKSideLeft;
-            step.dominantHandTested = YES;
-            step.numberOfPegs = numberOfPegs;
-            step.threshold = threshold;
-            step.shouldTintImages = YES;
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-        
-        {
-            ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestNonDominantPlaceStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), ndHand];
-            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.orientation = dominantHand == ORKSideLeft ? ORKSideRight : ORKSideLeft;
-            step.dominantHandTested = NO;
-            step.numberOfPegs = numberOfPegs;
-            step.threshold = threshold;
-            step.rotated = rotated;
-            step.shouldTintImages = YES;
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-        
-        {
-            ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestNonDominantRemoveStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), ndHand];
-            step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
-            step.spokenInstruction = step.title;
-            step.orientation = dominantHand;
-            step.dominantHandTested = NO;
-            step.numberOfPegs = numberOfPegs;
-            step.threshold = threshold;
-            step.shouldTintImages = YES;
-            step.stepDuration = timeLimit == 0 ? CGFLOAT_MAX : timeLimit;
-            
-            ORKStepArrayAddStep(steps, step);
-        }
-    }
-    
-    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
-        ORKInstructionStep *step = [self makeCompletionStep];
-        
-        ORKStepArrayAddStep(steps, step);
-    }
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
 

@@ -611,8 +611,9 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
+    /// This task presents the Hole Peg Test pre-defined active task.
     private var holePegTestTask: ORKTask {
-        return ORKOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 2, threshold: 0.2, rotated: false, timeLimit: 20, options: nil)
+        return ORKNavigableOrderedTask.holePegTestTaskWithIdentifier(Identifier.HolePegTestTask.rawValue, intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {
