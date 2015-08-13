@@ -684,7 +684,7 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
         return rows + holePegTestResult.samples!.map { sample in
             let holePegTestSample = sample as! ORKHolePegTestSample
             
-            let text = "\(holePegTestSample.time))"
+            let text = "time: \(holePegTestSample.time))"
             let detail = "distance: \(holePegTestSample.distance)"
             
             return ResultRow(text: text, detail: detail)
