@@ -108,6 +108,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             
             case is ORKTowerOfHanoiResult:
                 providerType = TowerOfHanoiResultTableViewProvider.self
+            
+            case is ORKTimedWalkResult:
+                providerType = TimedWalkResultTableViewProvider.self
 
             /*
                 Refer to the comment near the switch statement for why the
@@ -642,6 +645,44 @@ class ReactionTimeViewProvider: ResultTableViewProvider {
         }
         
         return rows + [ ResultRow(text: "File Result", detail: reactionTimeResult.fileResult.fileURL!.absoluteString) ]
+    }
+}
+
+/// Table view provider specific to an `ORKTimedWalkResult` instance.
+class TimedWalkResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return super.tableView(tableView, titleForHeaderInSection: 0)
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let TimedWalkResult = result as! ORKTimedWalkResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        return rows + [
+            // The timed walk distance in meters.
+            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
+            
+            // The time limit to complete the trials.
+            ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),
+            
+            // The duration for an addition of the PVSAT.
+            ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
+        ]
     }
 }
 

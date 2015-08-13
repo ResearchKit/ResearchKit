@@ -56,6 +56,7 @@ static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
+static NSString * const TimedWalkTaskIdentifier = @"timed_walk";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
@@ -151,6 +152,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showTowerOfHanoiTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Tower Of Hanoi Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"tower"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showTimedWalkTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Timed Walk" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"timed_walk"];
         buttons[buttonKeys.lastObject] = button;
     }
 
@@ -432,6 +441,12 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
+    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
+        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
+                                    intendedUseDescription:nil
+                                          distanceInMeters:100
+                                                 timeLimit:180
+                                                   options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1520,6 +1535,10 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
 
 - (IBAction)showTowerOfHanoiTask:(id)sender {
     [self beginTaskWithIdentifier:TowerOfHanoiTaskIdentifier];
+}
+
+- (IBAction)showTimedWalkTask:(id)sender {
+    [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
 }
 
 #pragma mark Dynamic task
@@ -2617,6 +2636,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
+            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
+                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

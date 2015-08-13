@@ -57,6 +57,7 @@ enum TaskListRow: Int, Printable {
     case ToneAudiometry
     case ReactionTime
     case TowerOfHanoi
+    case TimedWalk
     case ImageCapture
     case Survey
     case Consent
@@ -139,6 +140,9 @@ enum TaskListRow: Int, Printable {
             
             case .TowerOfHanoi:
                 return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
+            
+            case .TimedWalk:
+                return NSLocalizedString("Timed Walk Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -226,6 +230,7 @@ enum TaskListRow: Int, Printable {
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
         case TowerOfHanoi =                                         "TowerOfHanoi"
+        case TimedWalkTask =                                        "TimedWalkTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -313,6 +318,9 @@ enum TaskListRow: Int, Printable {
             
             case .TowerOfHanoi:
                 return towerOfHanoiTask
+        
+            case .TimedWalk:
+                return timedWalkTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -613,6 +621,11 @@ enum TaskListRow: Int, Printable {
     
     private var towerOfHanoiTask: ORKTask {
         return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+    }
+    
+    /// This task presents the Timed Walk pre-defined active task.
+    private var timedWalkTask: ORKTask {
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distanceInMeters: 100, timeLimit: 180, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {
