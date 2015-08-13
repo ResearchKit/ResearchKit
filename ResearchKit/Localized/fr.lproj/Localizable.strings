@@ -216,6 +216,18 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %@ sur %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité mesure le fonctionnement de vos membres supérieurs en vous demandant de placer un rond dans un trou. Il vous sera demandé de le faire %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Vos main %@ et %@ seront testées toutes les deux.\nVous devez prendre un cercle aussi vite que possible, le mettre dans le trou et, après l'avoir fait %@ fois, le retirer %@ fois encore.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"HOLE_PEG_TEST_RIGHT" = "droite";
+"HOLE_PEG_TEST_LEFT" = "gauche";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Mettez la pièce dans le trou en utilisant votre main %@.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Mettez la pièce derrière la ligne en utilisant votre main %@.";
+"HOLE_PEG_TEST_TEXT" = "Prenez la pièce en utilisant deux doigts.";
+"HOLE_PEG_TEST_TEXT_2" = "Soulevez vos doigts pour laisser tomber la pièce.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Impossible de supprimer assez de fichiers journaux pour atteindre le seuil";
