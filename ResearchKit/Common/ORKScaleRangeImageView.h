@@ -29,24 +29,14 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <UIKit/UIKit.h>
+#import "ORKDefines_Private.h"
 
 
-/*
- These classes demonstrate a new recorder and recorder configuration created
- outside the ResearchKit framework, extending the use of recorders on active
- tasks to include one that can capture touch events.
+/**
+ Start/End image of the range in scale slider.
  */
-
-@interface CustomRecorder : ORKRecorder
-
-@end
-
-
-@interface CustomRecorderConfiguration : ORKRecorderConfiguration
-
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+ORK_CLASS_AVAILABLE
+@interface ORKScaleRangeImageView : UIImageView
 
 @end
