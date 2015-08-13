@@ -106,6 +106,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKToneAudiometryResult:
                 providerType = ToneAudiometryResultTableViewProvider.self
             
+            case is ORKTowerOfHanoiResult:
+                providerType = TowerOfHanoiResultTableViewProvider.self
+            
             case is ORKTimedWalkResult:
                 providerType = TimedWalkResultTableViewProvider.self
 
@@ -480,6 +483,41 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
             
             return ResultRow(text: text, detail: detail)
         }
+    }
+}
+
+/// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
+class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
+        return towerOfHanoiResult.moves != nil ? (towerOfHanoiResult.moves!.count + 1) : 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Move \(section )"
+    }
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
+        let rows = super.resultRowsForSection(section)
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "solved", detail: towerOfHanoiResult.puzzleWasSolved ? "true" : "false"),
+                ResultRow(text: "moves", detail: "\(towerOfHanoiResult.moves?.count ?? 0 )")]
+        }
+        // Add a `ResultRow` for each sample.
+        let move = towerOfHanoiResult.moves![section - 1] as! ORKTowerOfHanoiMove
+        return rows + [
+            ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
+            ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
+            ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
     }
 }
 

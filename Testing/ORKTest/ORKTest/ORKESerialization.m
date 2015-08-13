@@ -727,7 +727,10 @@ ret =
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
           })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

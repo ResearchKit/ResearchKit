@@ -56,6 +56,7 @@ enum TaskListRow: Int, Printable {
     case Audio
     case ToneAudiometry
     case ReactionTime
+    case TowerOfHanoi
     case TimedWalk
     case ImageCapture
     case Survey
@@ -136,6 +137,9 @@ enum TaskListRow: Int, Printable {
 
             case .ReactionTime:
                 return NSLocalizedString("Reaction Time Active Task", comment: "")
+            
+            case .TowerOfHanoi:
+                return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
             
             case .TimedWalk:
                 return NSLocalizedString("Timed Walk Active Task", comment: "")
@@ -225,6 +229,7 @@ enum TaskListRow: Int, Printable {
         case AudioTask =                                            "AudioTask"
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
+        case TowerOfHanoi =                                         "TowerOfHanoi"
         case TimedWalkTask =                                        "TimedWalkTask"
         
         // Image capture task specific identifiers.
@@ -311,6 +316,9 @@ enum TaskListRow: Int, Printable {
             case .ReactionTime:
                 return reactionTimeTask
             
+            case .TowerOfHanoi:
+                return towerOfHanoiTask
+        
             case .TimedWalk:
                 return timedWalkTask
             
@@ -609,6 +617,10 @@ enum TaskListRow: Int, Printable {
     
     private var reactionTimeTask: ORKTask {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
+    }
+    
+    private var towerOfHanoiTask: ORKTask {
+        return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
     }
     
     /// This task presents the Timed Walk pre-defined active task.

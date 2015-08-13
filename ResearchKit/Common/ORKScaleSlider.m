@@ -38,6 +38,7 @@
 #import "ORKSkin.h"
 #import "ORKScaleSliderView.h"
 #import "ORKScaleRangeDescriptionLabel.h"
+#import "ORKScaleRangeImageView.h"
 
 
 @implementation ORKScaleSlider {
@@ -227,8 +228,18 @@ static CGFloat kPadding = 2.0;
     // Include the range description labels if they are set.
     if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
         minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
-        maximumValue = [maximumValue stringByAppendingFormat:@", %@", sliderView.rightRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@, ", sliderView.rightRangeDescriptionLabel.text];
     }
+    
+    // Include the range image accessibilty hints if they are set.
+    if (sliderView.leftRangeImageView.image.accessibilityHint.length > 0) {
+        minimumValue = [minimumValue stringByAppendingString:sliderView.leftRangeImageView.image.accessibilityHint];
+    }
+    if (sliderView.rightRangeImageView.image.accessibilityHint.length > 0) {
+        maximumValue = [maximumValue stringByAppendingString:sliderView.rightRangeImageView.image.accessibilityHint];
+    }
+    
+    
     return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 

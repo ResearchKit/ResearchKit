@@ -34,7 +34,6 @@
 #import <ResearchKit/ResearchKit_Private.h>
 #import <AVFoundation/AVFoundation.h>
 #import "DynamicTask.h"
-#import "CustomRecorder.h"
 #import "AppDelegate.h"
 
 
@@ -56,8 +55,10 @@ static NSString * const MemoryTaskIdentifier = @"memory";
 static NSString * const DynamicTaskIdentifier = @"dynamic_task";
 static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const TimedWalkTaskIdentifier = @"timed_walk";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
+static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
 
 @interface MainViewController () <ORKTaskViewControllerDelegate> {
@@ -147,11 +148,17 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     }
     
     {
+        [button addTarget:self action:@selector(showTowerOfHanoiTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Tower Of Hanoi Task" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"tower"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showTimedWalkTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Timed Walk" forState:UIControlStateNormal];
         [buttonKeys addObject:@"timed_walk"];
-        buttons[buttonKeys.lastObject] = button;
     }
 
     {
@@ -245,7 +252,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showStepNavigationTask:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Step Navigation Task" forState:UIControlStateNormal];
+        [button setTitle:@"Navigable Ordered Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"step"];
         buttons[buttonKeys.lastObject] = button;
     }
@@ -266,6 +273,14 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         buttons[buttonKeys.lastObject] = button;
     }
 
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showCustomNavigationItemTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Custom Navigation Item" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"customNavigationItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
     [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
         [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.view addSubview:obj];
@@ -419,6 +434,11 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                              timeoutSound:0
                                                              failureSound:0
                                                                   options:0];
+    } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
+        return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
+                                       intendedUseDescription:nil
+                                                numberOfDisks:5
+                                                      options:0];
     } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
         return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
                                     intendedUseDescription:nil
@@ -426,7 +446,9 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                  timeLimit:180
                                                    options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
-        return [self makeStepNavigationTask];
+        return [self makeNavigableOrderedTask];
+    } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
+        return [self makeCustomNavigationItemTask];
     }
     return nil;
 }
@@ -509,6 +531,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
      for state restoration of a ResearchKit framework task VC.
      */
     _taskViewController.restorationIdentifier = [task identifier];
+    
+    if ([[task identifier] isEqualToString:CustomNavigationItemTaskIdentifier]) {
+        _taskViewController.showsProgressInNavigationBar = NO;
+    }
     
     [self presentViewController:_taskViewController animated:YES completion:nil];
 }
@@ -779,6 +805,57 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [steps addObject:step];
     }
     
+    
+    {
+        /*
+         A text question with single-line text entry and a URL keyboard.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
+        format.multipleLines = NO;
+        format.keyboardType = UIKeyboardTypeURL;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
+                                                                      title:@"What is your website?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         An email question with single-line text entry.
+         */
+        ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+                                                                      title:@"What is your email?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A text question demos secureTextEntry feature
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:10];
+        format.secureTextEntry = YES;
+        format.multipleLines = NO;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005sec"
+                                                                      title:@"What is your passcode?"
+                                                                     answer:format];
+        step.placeholder = @"Tap your passcode here";
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         A text question with single-line text entry and a length limit.
+         */
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:20];
+        format.multipleLines = NO;
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005e"
+                                                                      title:@"What is your name?"
+                                                                     answer:format];
+        [steps addObject:step];
+    }
+    
     {
         /*
          A single-select value-picker question. Rather than seeing the items in a tableview,
@@ -990,22 +1067,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         step.recorderConfigurations = @[[[ORKTouchRecorderConfiguration alloc] initWithIdentifier:@"aid_001a.touch"]];
         [steps addObject:step];
     }
-    
-    {
-        /*
-         Demo of how to use a custom recorder to customize an active step.
-         
-         Not a recommended way of customizing active steps with the ResearchKit framework.
-         */
-        ORKActiveStep *step = [[ORKActiveStep alloc] initWithIdentifier:@"aid_001b"];
-        step.title = @"Button Tap";
-        step.text = @"Please tap the orange button when it appears in the green area below.";
-        step.stepDuration = 10.0;
-        step.shouldUseNextAsSkipButton = YES;
-        step.recorderConfigurations = @[[[CustomRecorderConfiguration alloc] initWithIdentifier:@"aid_001b.audio"]];
-        [steps addObject:step];
-    }
-    
+        
     {
         /*
          Test for device motion recorder directly on an active step.
@@ -1250,6 +1312,31 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_005" text:@"Email"
+                                                           answerFormat:[ORKAnswerFormat emailAnswerFormat]];
+            item.placeholder = @"Enter Email";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+                                                           answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
+            item.placeholder = @"Your message (limit 20 characters).";
+            [items addObject:item];
+        }
+        
+        {
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
+            format.secureTextEntry = YES;
+            format.multipleLines = NO;
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Passcode"
+                                                           answerFormat:format];
+            item.placeholder = @"Enter Passcode";
+            [items addObject:item];
+        }
+        
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_date_001" text:@"Birthdate"
                                                          answerFormat:[ORKAnswerFormat dateAnswerFormat]];
             item.placeholder = @"Pick a date";
@@ -1442,6 +1529,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 
 - (IBAction)showReactionTimeTask:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
+}
+
+- (IBAction)showTowerOfHanoiTask:(id)sender {
+    [self beginTaskWithIdentifier:TowerOfHanoiTaskIdentifier];
 }
 
 - (IBAction)showTimedWalkTask:(id)sender {
@@ -1710,6 +1801,50 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
         [steps addObject:step];
     }
     
+    {
+        /*
+         Continuous scale with images.
+         */
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                             minimumValue:1
+                                                                                                             defaultValue:NSIntegerMax
+                                                                                                    maximumFractionDigits:2
+                                                                                                                 vertical:YES
+                                                                                                  maximumValueDescription:@"Hot"
+                                                                                                  minimumValueDescription:@"Warm"];
+        
+        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.minimumImage.accessibilityHint = @"A yellow colored square to represent warmness.";
+        scaleAnswerFormat.maximumImage.accessibilityHint = @"A red colored square to represent hot.";
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_12"
+                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
+    {
+        /*
+         Discrete scale with images.
+         */
+        ORKScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10
+                                                                                         minimumValue:1
+                                                                                         defaultValue:NSIntegerMax
+                                                                                                 step:1
+                                                                                             vertical:NO
+                                                                              maximumValueDescription:nil
+                                                                              minimumValueDescription:nil];
+        
+        scaleAnswerFormat.minimumImage = [self imageWithColor:[UIColor yellowColor] size:CGSizeMake(30, 30) border:NO];
+        scaleAnswerFormat.maximumImage = [self imageWithColor:[UIColor redColor] size:CGSizeMake(30, 30) border:NO];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_13"
+                                                                      title:@"On a scale of 1 to 10, how warm do you feel?"
+                                                                     answer:scaleAnswerFormat];
+        [steps addObject:step];
+    }
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScalesTaskIdentifier steps:steps];
     return task;
     
@@ -1938,15 +2073,35 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [superview addSubview:self.view];
 }
 
-#pragma mark - Step navigation task
+#pragma mark - Navigable Ordered Task
 
-- (id<ORKTask>)makeStepNavigationTask {
+- (id<ORKTask>)makeNavigableOrderedTask {
     NSMutableArray *steps = [NSMutableArray new];
     
     ORKAnswerFormat *answerFormat = nil;
     ORKStep *step = nil;
+    NSArray *textChoices = nil;
     
-    NSArray *textChoices =
+    // Form step
+    textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Good" value:@"good"],
+      [ORKTextChoice choiceWithText:@"Bad" value:@"bad"]
+      ];
+
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    
+    ORKFormItem *formItemFeeling = [[ORKFormItem alloc] initWithIdentifier:@"formFeeling" text:@"How do you feel" answerFormat:answerFormat];
+    ORKFormItem *formItemMood = [[ORKFormItem alloc] initWithIdentifier:@"formMood" text:@"How is your mood" answerFormat:answerFormat];
+    
+    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"introForm"];
+    formStep.optional = NO;
+    formStep.formItems = @[ formItemFeeling, formItemMood ];
+    [steps addObject:formStep];
+
+    // Question steps
+    textChoices =
     @[
       [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
       [ORKTextChoice choiceWithText:@"Dizziness" value:@"dizziness"],
@@ -1964,6 +2119,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     step.optional = NO;
     [steps addObject:step];
 
+    // Instruction steps
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"blank"];
     step.title = @"This step is intentionally left blank (you should not see it)";
     [steps addObject:step];
@@ -1980,6 +2136,10 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     step.title = @"Your symptom is not a headache";
     [steps addObject:step];
 
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"survey_skipped"];
+    step.title = @"Please come back to this survey when you don't feel good or your mood is low.";
+    [steps addObject:step];
+
     step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
     step.title = @"You have finished the task";
     [steps addObject:step];
@@ -1992,63 +2152,64 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
                                                                                   steps:steps];
     
     // Build navigation rules
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+
+    // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
+    NSPredicate *predicateGoodFeeling = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"formFeeling"
+                                                                                                  expectedString:@"good"];
+    NSPredicate *predicateGoodMood = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"formMood"
+                                                                                               expectedString:@"good"];
+    NSPredicate *predicateGoodMoodAndFeeling = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateGoodFeeling, predicateGoodMood]];
     
-    // Individual predicates
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateGoodMoodAndFeeling ]
+                                                          destinationStepIdentifiers:@[ @"survey_skipped" ] ];
+    
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"introForm"];
+
+    
+    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
+    // Otherwise, default to going to next step (the regular ORKOrderedTask order applies
+    //  when the defaultStepIdentifier argument is omitted).
     
     // User chose headache at the symptom step
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
-                                                                                               expectedString:@"headache"];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
     //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
+                                                                                               expectedString:@"headache"];
+    
     // User didn't chose headache at the symptom step
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
 
-    // User chose YES at the severity step
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
-                                                                                                 expectedAnswer:YES];
-    // Equivalent to:
-    //      [NSPredicate predicateWithFormat:
-    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-
-    // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
-                                                                                                expectedAnswer:NO];
-
-    
-    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
-    // Otherwise, default to going to next step (when the defaultStepIdentifier argument is omitted,
-    // the regular ORKOrderedTask order applies).
-    NSMutableArray *resultPredicates = [NSMutableArray new];
-    NSMutableArray *destinationStepIdentifiers = [NSMutableArray new];
-    
-    [resultPredicates addObject:predicateNotHeadache];
-    [destinationStepIdentifiers addObject:@"other_symptom"];
-    
-    ORKPredicateStepNavigationRule *predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
+                                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
     
     // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
-    resultPredicates = [NSMutableArray new];
-    destinationStepIdentifiers = [NSMutableArray new];
     
-    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
-    [resultPredicates addObject:predicate];
-    [destinationStepIdentifiers addObject:@"severe_headache"];
+    // User chose YES at the severity step
+    // Equivalent to:
+    //      [NSPredicate predicateWithFormat:
+    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                 expectedAnswer:YES];
+    
+    // User chose NO at the severity step
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+                                                                                                expectedAnswer:NO];
 
-    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
-    [resultPredicates addObject:predicate];
-    [destinationStepIdentifiers addObject:@"light_headache"];
+    NSPredicate *predicateSevereHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
+
+    NSPredicate *predicateLightHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
     
     predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                          destinationStepIdentifiers:destinationStepIdentifiers];
+    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateSevereHeadache,
+                                                                        predicateLightHeadache ]
+                                          destinationStepIdentifiers:@[ @"severe_headache",
+                                                                        @"light_headache" ] ];
     
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
     
@@ -2060,11 +2221,29 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"survey_skipped"];
 
     directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
     [task setNavigationRule:directRule forTriggerStepIdentifier:@"end"];
     
     return task;
+}
+
+#pragma mark - Custom navigation item task
+
+- (id<ORKTask>)makeCustomNavigationItemTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step1"];
+    step1.title = @"Custom Navigation Item Title";
+    ORKInstructionStep *step2 = [[ORKInstructionStep alloc] initWithIdentifier:@"customNavigationItemTask.step2"];
+    step2.title = @"Custom Navigation Item Title View";
+    [steps addObject: step1];
+    [steps addObject: step2];
+    return [[ORKOrderedTask alloc] initWithIdentifier: CustomNavigationItemTaskIdentifier steps:steps];
+}
+
+- (IBAction)showCustomNavigationItemTask:(id)sender {
+    [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
 #pragma mark - Helpers
@@ -2361,6 +2540,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
                                                                             target:stepViewController.backButtonItem.target
                                                                             action:stepViewController.backButtonItem.action];
         stepViewController.cancelButtonItem.title = @"Cancel1";
+    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step1"]) {
+        stepViewController.navigationItem.title = @"Custom title";
+    } else if ([stepViewController.step.identifier isEqualToString:@"customNavigationItemTask.step2"]) {
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        [items addObject:@"Item1"];
+        [items addObject:@"Item2"];
+        [items addObject:@"Item3"];
+        stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
     }
 }
 

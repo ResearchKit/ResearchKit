@@ -104,6 +104,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
 @class ORKTextAnswerFormat;
+@class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
 
 
@@ -188,6 +189,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
+
++ (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
@@ -322,6 +325,18 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly, nullable) NSString *minimumValueDescription;
 
+/**
+ An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
+ The maximum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *maximumImage;
+
+/**
+ An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
+ The minimum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *minimumImage;
+
 @end
 
 
@@ -437,6 +452,18 @@ ORK_CLASS_AVAILABLE
  A localized label to describe the minimum value of the scale. (read-only)
  */
 @property (readonly, nullable) NSString *minimumValueDescription;
+
+/**
+ An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
+ The maximum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *maximumImage;
+
+/**
+ An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
+ The minimum range label will not be visible.
+ */
+@property (strong, nullable) UIImage *minimumImage;
 
 @end
 
@@ -986,6 +1013,32 @@ ORK_CLASS_AVAILABLE
  By default, the value of this property is `UITextSpellCheckingTypeDefault`.
  */
 @property UITextSpellCheckingType spellCheckingType;
+
+/**
+ The keyboard type that applies to the user's input.
+ 
+ By default, the value of this property is `UIKeyboardTypeDefault`.
+ */
+@property UIKeyboardType keyboardType;
+
+/**
+ Identifies whether the text object should hide the text being entered.
+ 
+ By default, the value of this property is NO.
+ */
+@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;
+
+@end
+
+
+/**
+ The `ORKEmailAnswerFormat` class represents the answer format for questions that collect an email response
+ from the user.
+ 
+ An `ORKEmailAnswerFormat` object produces an `ORKTextQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEmailAnswerFormat : ORKAnswerFormat
 
 @end
 

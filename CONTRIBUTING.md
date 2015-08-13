@@ -160,21 +160,22 @@ The `master` branch is used for work in progress. On `master`:
   project:
 
   1.  If you are submitting a patch to the existing codebase, you
-  represent that you have the right to license the patch to the
-  community, and agree by submitting the patch that your changes are
+  represent that you have the right to license the patch, including 
+  all code and content, to Apple and the community, and agree by 
+  submitting the patch that your changes are
   licensed under the existing license terms of the file you are
   modifying (i.e., [ResearchKit BSD license](LICENSE)).
-  Please also add your copyright (name and year) to the relevant
-  files for changes that are more than 10 lines of code.
-  2.  If you are submitting a new file for inclusion in the ResearchKit framework (no
-  code copied from another source), please include your copyright (name
-  and year) and a copy of the ResearchKit BSD license.  By submitting
-  your new file you represent that you have the right to license your
-  file to the community, and agree that your file is licensed under the
-  ResearchKit BSD license.
-  3.  If you aren't the author of the patch, you agree to include the
-  original copyright notices and licensing terms with it, to the extent
-  that they exist.  If there wasn't a copyright notice or license,
-  please make a note of it.  Generally we can only take in patches that
-  are BSD-licensed in order to maintain license compatibility within the
-  project.
+  You confirm that you have added your copyright (name and year) to 
+  the relevant files for changes that are more than 10 lines of code.
+  2.  If you are submitting a new file for inclusion in the ResearchKit 
+  framework (no code or other content is copied from another source), you 
+  have included your copyright (name and year) and a copy of the ResearchKit 
+  BSD license. By submitting your new file you represent that you have the 
+  right to license your file to Apple and the community, and agree that your 
+  file submission is licensed under the ResearchKit BSD license.
+  3.  If you aren't the author of the patch, you agree that you have 
+  the right to submit the patch, and have included the original copyright 
+  notices and licensing terms with it, to the extent that they exist. 
+  If there wasn't a copyright notice or license, please make a note of it 
+  in your response. Generally we can only take in patches that are 
+  BSD-licensed in order to maintain license compatibility within the project.

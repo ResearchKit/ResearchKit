@@ -32,12 +32,12 @@ In `@interface` declarations, there should be one space between: the subclass na
 In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attributes; the property type; and the pointer asterisk.
 
     // DO
-    @property (nonatomic, weak) UIView<DelegateProtocol> *delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol> delegate;
 
     // DON'T
-    @property (nonatomic,weak) UIView <DelegateProtocol> *delegate;
-    @property(nonatomic, weak) UIView <DelegateProtocol> *delegate;
-    @property (nonatomic, weak) UIView<DelegateProtocol>*delegate;
+    @property (nonatomic,weak,nullable) id <ORKDelegateProtocol> delegate;
+    @property(nonatomic, weak, nullable) id <ORKDelegateProtocol> delegate;
+    @property (nonatomic, weak, nullable) id<ORKDelegateProtocol>delegate;
 
 ---
 
@@ -56,18 +56,18 @@ In *method* declarations, there should be one space between: the `-` or `+` char
 Use spaces if the operator has two or more arguments:
 
     // DO
-    a += 2
-    a = 5
-    z == 3
-    aFlag && aBoolean
-    zOrder > 4
+    steps += 2
+    calories = 5
+    calories == caloryGoal
+    goalAchieved && notReminded
+    flightsClimbed > 4
     success ? YES : NO
 
 Omit the space when the operator takes only one argument:
 
     // DO
-    a++
-    &var
+    calories++
+    &error
     !success
 
 
@@ -116,27 +116,27 @@ Hard wrap lines that exceed 140 characters. You can configure the column guide o
 When hard wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
 
     // DO
-    - (void)doSomethingWith:(Foo *)foo
-                       rect:(NSRect)rect
-                   interval:(float)interval {
+    - (void)doSomethingWithFoo:(Foo *)foo
+                           bar:(Bar *)bar
+                      interval:(NSTimeInterval)interval {
         ...
 
 Method invocations should be formatted much like method declarations. Invocations should have all arguments on one line or have one argument per line, with colons aligned.
 
     // DO
-    [myObject doFooWith:arg1 name:arg2 error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar interval:interval];
 
-    [myObject doFooWith:arg1
-                   name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo
+                             bar:bar
+                        interval:interval];
 
     // DON'T
-    [myObject doFooWith:arg1 name:arg2
-                  error:arg3];
+    [myObject doSomethingWithFoo:foo bar:bar
+                        interval:interval];
 
-    [myObject doFooWith:arg1
-              name:arg2
-              error:arg3];
+    [myObject doSomethingWithFoo:foo
+              bar:bar
+              interval:interval];
 
 #### 1.4. Appledoc Header Comments
 
@@ -250,6 +250,7 @@ Declare one variable per line even if they have the same type. In general it's a
     int floatVariable = -1;
     double doubleVariable = 0.0;
     int *cPointerVariable = NULL;
+    CGContextRef context = NULL;
 
 Strong, weak, and autoreleasing stack variables are [implicitly initialized with `nil`](https://developer.apple.com/library/ios/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011226-CH1-SW5) so you can either explicitly initialize them (with `nil` or any valid object) for visual homogeneity, or skip initializing them altogether.
 
@@ -267,6 +268,7 @@ When declaring pointers, there should be a space between the asterisk and the va
     // DON'T
     int* variablePointer2;
     int* variablePointer, variable;
+    UIView* view;
 
 
 #### 2.2. Forward Declarations
@@ -274,30 +276,89 @@ When declaring pointers, there should be a space between the asterisk and the va
 Use one line for each forward declarations:
 
     // DO
-    @protocol forwardProtocol;
-    @class aClass;
-    @class anotherClass;
-    @class yetAnotherClass;
+    @protocol ORKProtocol;
+    @protocol ORKAnotherProtocol;
+    @class ORKClass;
+    @class ORKAnotherClass;
+    @class ORKYetAnotherClass;
 
     // DON'T
-    @protocol forwardProtocol, anotherProtocol;
-    @class aClass, anotherClass, yetAnotherClass;
+    @protocol ORKProtocol, ORKAnotherProtocol;
+    @class ORKClass, ORKAnotherClass, ORKYetAnotherClass;
 
 
-#### 2.3. Dot Notation
+#### 2.3. Constant Declarations
 
-Dot notation is syntactic sugar added in Objective-C 2.0. Its usage is equivalent to using the auto-synthesized methods:
+If a constant is only used inside one method, declare it locally to that method. If a constant is used in several methods of a single class, declare it as a `static` constant in the class implementation file. If a constant is used from several files, declare it as an `extern` constant and prefix its name with a suitable `ORK*` prefix.
+
+Static or global constant names should start in uppercase. Constants should never start with the `k` prefix (that naming convention is deprecated). These rules also apply to `enum` value names.
+
+    // Method-local constant
+    - (void)animateView {
+        const CGFloat animationDuration = 0.2;
+        ...
+    }
+
+
+    // Class-local constant
+    static const CGFloat DefaultLineWidth = 10.0;
+    - (void)init {
+        if (self = [super init]) {
+            _lineWidth = DefaultLineWidth
+            ...
+        }
+        return self;
+    }
+
+    - (void)resetView {
+        _lineWidth = DefaultLineWidth
+        ...
+    }
+
+
+    // Global constant
+
+    // ORKSkin.h
+    ORK_EXTERN NSString *const ORKToolBarTintColorKey;
+    ORK_EXTERN const CGFloat ORKScreenMetricMaxDimension;
+
+    // ORKSkin.m
+    NSString *const ORKBackgroundColorKey = @"ORKBackgroundColorKey";
+    const CGFloat ORKScreenMetricMaxDimension = 10000.0;
+
+
+    // Global enum
+    typedef NS_ENUM(NSInteger, ORKQuestionType) {
+        ORKQuestionTypeNone,
+        ORKQuestionTypeScale,
+        ...
+    } ORK_ENUM_AVAILABLE;
+
+
+
+#### 2.4. Dot Notation
+
+Dot notation (`object.property`) is a syntax for using properties in a convenient and compact way. Accessing or setting a property through dot notation is completely equivalent to calling the property accessor methods:
 
     - (PropertyType *)property
     - (void)setProperty:(PropertyType *)property
 
-Dot notation may be used when accessing proper properties, but should not be used to invoke regular methods.
+    // DO
+    NSString *oldName = user.name;              // Equivalent to 'NSString *oldName = [user name]'
+    user.name = @"John Appleseed";              // Equivalent to '[user setName:@"John Appleseed"]'
+
+Dot notation should be used when accessing proper properties, but should be avoided when invoking regular methods. Use the syntax corresponding to the official documentation or relevant header declaration.
 
     // DO
-    oldName = myObject.name;    // Equivalent to 'oldName = [myObject name]'
-    myObject.name = @"Alice";   // Equivalent to '[myObject setName:@"Alice"]'
+    CGRect viewFrame = view.frame;              // Declared as a property
+    NSUInteger numberOfItems = array.count;     // Declared as a property since iOS 8
+    NSUInteger stringLength = string.length;    // Declared as a property since iOS 8
+    [autoreleasePool drain];                    // A method
+    NSArray *constraints = [view constraints];  // A method
 
     // DON'T
-    NSUInteger numberOfItems = array.count;     // Not a property
-    NSUInteger stringLength = string.length;    // Not a property
-    array.release;                              // Not a property
+    CGRect viewFrame = [view frame];            // 'frame' is not declared as a method
+    NSUInteger numberOfItems = [array count];   // 'count' is no longer declared as a method
+    NSUInteger stringLength = [string length];  // 'length' is no longer declared as a method
+    autoreleasePool.drain;                      // Not a property
+    NSArray *constraints = view.constraints;    // Not a property

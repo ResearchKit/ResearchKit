@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,24 +29,16 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <Foundation/Foundation.h>
 
+@interface ORKTowerOfHanoiTower : NSObject
 
-/*
- These classes demonstrate a new recorder and recorder configuration created
- outside the ResearchKit framework, extending the use of recorders on active
- tasks to include one that can capture touch events.
- */
+@property(nonatomic, copy, readonly) NSArray *disks;
 
-@interface CustomRecorder : ORKRecorder
++ (instancetype)emptyTower;
 
-@end
+- (instancetype)initWithDisks:(NSArray *)disks;
 
-
-@interface CustomRecorderConfiguration : ORKRecorderConfiguration
-
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+- (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower *)donorTower;
 
 @end
