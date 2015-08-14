@@ -47,13 +47,18 @@ extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 
+static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
+    return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
+}
+
+
 @interface ORKGraphView ()
+
+@property (nonatomic) NSInteger numberOfXAxisPoints;
 
 @property (nonatomic, strong) NSMutableArray *dataPoints; // Actual data
 
-@property (nonatomic, strong) NSMutableArray *xAxisPoints;
-
-@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for this view
+@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic, strong) UIView *plotView; // Holds the plots
 
@@ -73,7 +78,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition;
 
-- (NSInteger)numberOfValidValues;
+- (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
 
@@ -88,5 +93,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition;
 
 - (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
+
+- (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 
 @end

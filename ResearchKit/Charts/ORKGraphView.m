@@ -75,6 +75,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     CGFloat _maximumValue;
     NSMutableArray *_xAxisTitles;
     NSMutableArray *_referenceLines;
+    NSMutableArray *_lineLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
 }
@@ -96,6 +97,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)sharedInit {
+    _numberOfXAxisPoints = -1;
     _axisColor =  ORKColor(ORKGraphAxisColorKey);
     _axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
     _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
@@ -105,20 +107,21 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _showsVerticalReferenceLines = NO;
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
-    _xAxisPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
     _xAxisTitles = [NSMutableArray new];
     _referenceLines = [NSMutableArray new];
     _pathLines = [NSMutableArray new];
     _circleViews = [NSMutableArray new];
+    _lineLayers = [NSMutableArray new];
     self.tintColor = [UIColor colorWithRed:244/255.f green:190/255.f blue:74/255.f alpha:1.f];
-    _shouldAnimate = YES;
     _hasDataPoints = NO;
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
+    _shouldAnimate = YES;
+
     [self setUpViews];
 }
 
@@ -154,10 +157,53 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [self addSubview:_scrubberThumbView];
 }
 
+- (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    _numberOfXAxisPoints = -1; // reset cached number of x axis points
+    [self calculateMinimumAndMaximumValues];
+    [self obtainDataPoints];
+
+    [self setNeedsLayout];
+}
+
+- (void)obtainDataPoints {
+    [_dataPoints removeAllObjects];
+    _hasDataPoints = NO;
+    
+    NSInteger numberOfPlots = [self numberOfPlots];
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
+        
+        [_dataPoints addObject:[NSMutableArray new]];
+        NSInteger numberOfPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
+        for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+            ORKRangedPoint *value = [_dataSource graphView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+            [_dataPoints[plotIndex] addObject:value];
+            if (!value.isUnset) {
+                _hasDataPoints = YES;
+            }
+        }
+
+        // Add dummy points for empty data points
+        if (_dataPoints.count < self.numberOfXAxisPoints ) {
+            ORKRangedPoint *dummyPoint = [[ORKRangedPoint alloc] init];
+            for (NSInteger idx = 0; idx < self.numberOfXAxisPoints - _dataPoints.count; idx++) {
+                [_dataPoints[plotIndex] addObject:dummyPoint];
+            }
+        }
+        
+    }
+}
+
 #pragma mark - Layout
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self setNeedsLayout];
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+        
     CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisPaddingFactor;
     
     // Basic Views
@@ -184,7 +230,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _scrubberThumbView.layer.cornerRadius = _scrubberThumbView.bounds.size.height / 2;
     _scrubberLabel.font = [UIFont fontWithName:_scrubberLabel.font.familyName size:12.0f];
     
-    [_xAxisView layoutSubviews];
+    [self refreshGraph];
 }
 
 #pragma mark - Drawing
@@ -194,8 +240,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
-    [self calculateMinimumAndMaximumValues];
-
     [self drawXAxis];
     [self drawYAxis];
     
@@ -205,55 +249,32 @@ static const CGFloat LayerAnimationDelay = 0.1;
         [self drawVerticalReferenceLines];
     }
     
-    [self calculateXAxisPoints];
     [_circleViews removeAllObjects];
     [_pathLines removeAllObjects];
-    
-    for (int i = 0; i < [self numberOfPlots]; i++) {
-        if ([_dataSource graphView:self numberOfPointsForPlotIndex:i] <= 1) {
+    [_lineLayers removeAllObjects];
+
+    [_yAxisPoints removeAllObjects];
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        if ([_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex] <= 1) {
             break;
         } else {
-            [self drawGraphForPlotIndex:i];
+            [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
+            [self drawGraphForPlotIndex:plotIndex];
         }
     }
     
     if (!_hasDataPoints) {
         [self setupEmptyView];
-    } else {
-        if (_noDataLabel) {
-            [_noDataLabel removeFromSuperview];
-        }
+    } else if (_noDataLabel) {
+        [_noDataLabel removeFromSuperview];
     }
     
-    [self animateLayersSequentially];
-}
-
-- (void)prepareDataForPlotIndex:(NSInteger)plotIndex {
-    [_dataPoints removeAllObjects];
-    [_yAxisPoints removeAllObjects];
-    _hasDataPoints = NO;
-    
-    NSInteger numberOfPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
-    for (int i = 0; i < numberOfPoints; i++) {
-        ORKRangedPoint *value = [_dataSource graphView:self pointForPointIndex:i plotIndex:plotIndex];
-        [_dataPoints addObject:value];
-        if (!value.isUnset) {
-            _hasDataPoints = YES;
-        }
-    }
-    [_yAxisPoints addObjectsFromArray:[self normalizeCanvasPointsForRect:_plotView.frame.size]];
-    if (_yAxisPoints.count < _xAxisPoints.count) {
-        for (NSInteger idx = 0; idx < _xAxisPoints.count-_yAxisPoints.count; idx++) {
-            // Add dummy points for empty data points
-            ORKRangedPoint *dummyPoint = [[ORKRangedPoint alloc] init];
-            [_yAxisPoints addObject:dummyPoint];
-            [_dataPoints addObject:dummyPoint];
-        }
+    if (_shouldAnimate) {
+        [self animateLayersSequentially];
     }
 }
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
-    [self prepareDataForPlotIndex:plotIndex];
     if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
         [self drawLinesForPlotIndex:plotIndex];
     }
@@ -263,35 +284,31 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
     CGFloat pointSize = ORKGraphViewPointAndLineSize;
     
-    for (NSUInteger i = 0; i < [_yAxisPoints count]; i++) {
-        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[i];
-        CGFloat positionOnXAxis = [_xAxisPoints[i] floatValue];
+    for (NSUInteger i = 0; i < ((NSArray *)_yAxisPoints[plotIndex]).count; i++) {
+        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
+        CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, _plotView.bounds.size.width);
         positionOnXAxis += [self offsetForPlotIndex:plotIndex];
         
         if (!dataPointValue.isUnset) {
-            ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[i];
+            ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][i];
             ORKCircleView *circleView = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
             circleView.tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
             circleView.center = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
             [_plotView.layer addSublayer:circleView.layer];
-            
+            [_circleViews addObject:circleView];
             if (_shouldAnimate) {
                 circleView.alpha = 0;
             }
-            
-            [_circleViews addObject:circleView];
             
             if (!positionOnYAxis.hasEmptyRange) {
                 ORKCircleView *circleView = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
                 circleView.tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
                 circleView.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
                 [_plotView.layer addSublayer:circleView.layer];
-                
+                [_circleViews addObject:circleView];
                 if (_shouldAnimate) {
                     circleView.alpha = 0;
                 }
-                
-                [_circleViews addObject:circleView];
             }
         }
     }
@@ -304,7 +321,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     for (int i = 0; i < [self numberOfXAxisPoints]; i++) {
         if ([_dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
             NSString *title = [_dataSource graphView:self titleForXAxisAtIndex:i];
-            
             [_xAxisTitles addObject:title];
         }
     }
@@ -318,13 +334,12 @@ static const CGFloat LayerAnimationDelay = 0.1;
                                                                CGRectGetMaxY(_plotView.frame),
                                                                CGRectGetWidth(_plotView.frame),
                                                                XAxisHeight)];
-    _xAxisView.tintColor = self.tintColor;
     [_xAxisView setUpTitles:_xAxisTitles];
     [self addSubview:_xAxisView];
     
     UIBezierPath *xAxisPath = [UIBezierPath bezierPath];
     [xAxisPath moveToPoint:CGPointMake(0, 0)];
-    [xAxisPath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), 0)];
+    [xAxisPath addLineToPoint:CGPointMake(CGRectGetWidth(_xAxisView.frame), 0)];
     
     CAShapeLayer *xAxisLineLayer = [CAShapeLayer layer];
     xAxisLineLayer.strokeColor = _axisColor.CGColor;
@@ -346,8 +361,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)drawYAxis {
-    [self prepareDataForPlotIndex:0];
-    
     if (_yAxisView) {
         [_yAxisView removeFromSuperview];
         _yAxisView = nil;
@@ -489,30 +502,24 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (NSInteger)numberOfXAxisPoints {
-    NSInteger numberOfXAxisPoints = 0;
+    if (_numberOfXAxisPoints != -1) {
+        return _numberOfXAxisPoints;
+    }
+    
+    _numberOfXAxisPoints = 0;
     
     if ([_dataSource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraphView:)]) {
-        numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
+        _numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
     }
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger idx = 0; idx < numberOfPlots; idx++) {
         NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:idx];
-        if (numberOfXAxisPoints < numberOfPlotPoints) {
-            numberOfXAxisPoints = numberOfPlotPoints;
+        if (_numberOfXAxisPoints < numberOfPlotPoints) {
+            _numberOfXAxisPoints = numberOfPlotPoints;
         }
     }
     
-    return numberOfXAxisPoints;
-}
-
-- (void)calculateXAxisPoints {
-    [_xAxisPoints removeAllObjects];
-    
-    for (int i = 0; i < [self numberOfXAxisPoints]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
-        positionOnXAxis = round(positionOnXAxis);
-        [_xAxisPoints addObject:@(positionOnXAxis)];
-    }
+    return _numberOfXAxisPoints;
 }
 
 #pragma Mark - Scrubbing / UIGestureRecognizerDelegate
@@ -526,7 +533,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (([_dataPoints count] > 0) && [self numberOfValidValues] > 0) {
+    if (([_dataPoints count] > 0) && ([_dataPoints[0] count] > 0) && [self numberOfValidValuesForPlotIndex:0] > 0) {
         
         CGPoint location = [gestureRecognizer locationInView:_plotView];
         CGFloat maxX = round(CGRectGetWidth(_plotView.bounds));
@@ -561,14 +568,14 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition {
-    CGFloat scrubberYPos = [self canvasYPointForXPosition:xPosition];
+    CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition];
     CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
-    if (scrubberYPos == ORKCGFloatInvalidValue) {
+    if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden:YES];
         return;
     }
     [self setScrubberLineAccessoriesHidden:NO];
-    [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPos + TopPadding)];
+    [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPosition + TopPadding)];
     _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(_scrubberLabel.bounds))
                                                         options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin)
@@ -578,13 +585,14 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
-    CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / [_xAxisPoints count];
-    for (NSUInteger positionIndex = 0; positionIndex < [_dataPoints count]; positionIndex++) {
+    CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+    CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / numberOfXAxisPoints;
+    for (NSUInteger positionIndex = 0; positionIndex < ((NSMutableArray *)_dataPoints[0]).count; positionIndex++) {
         
-        CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[positionIndex]).maximumValue;
+        CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[0][positionIndex]).maximumValue;
         
         if (dataPointValue != ORKCGFloatInvalidValue) {
-            CGFloat value = [_xAxisPoints[positionIndex] floatValue];
+            CGFloat value = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
             
             if (fabs(value - xPosition) < (widthBetweenPoints * SnappingClosenessFactor)) {
                 xPosition = value;
@@ -595,23 +603,24 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
-    BOOL snapped = [_xAxisPoints containsObject:@(xPosition)];
+    BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
     if (snapped) {
-        for (positionIndex = 0; positionIndex < ([_xAxisPoints count] - 1); positionIndex++) {
-            CGFloat xAxisPointVal = [_xAxisPoints[positionIndex] floatValue];
-            if (xAxisPointVal == xPosition) {
+        CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+        for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
+            CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
+            if (xAxisPointValue == xPosition) {
                 break;
             }
         }
-        value = ((ORKRangedPoint *)_dataPoints[positionIndex]).maximumValue;
+        value = ((ORKRangedPoint *)_dataPoints[0][positionIndex]).maximumValue;
     }
     return value;
 }
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
-    if ([self numberOfValidValues] > 0) {
+    if ([self numberOfValidValuesForPlotIndex:0] > 0) {
         
         void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
             CGFloat alpha = hidden ? 0.0 : 1.0;
@@ -632,9 +641,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
     NSUInteger positionIndex = 0;
-    for (positionIndex = 0; positionIndex < ([_xAxisPoints count] - 1); positionIndex++) {
-        CGFloat xAxisPointVal = [_xAxisPoints[positionIndex] floatValue];
-        if (xAxisPointVal > xPosition) {
+    CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+    for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
+        CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
+        if (xAxisPointValue > xPosition) {
             break;
         }
     }
@@ -703,10 +713,10 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [shapeLayer addAnimation:animation forKey:animationKey];
 }
 
-- (NSInteger)numberOfValidValues {
+- (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex {
     NSInteger count = 0;
     
-    for (ORKRangedPoint *rangePoint in _dataPoints) {
+    for (ORKRangedPoint *rangePoint in _dataPoints[plotIndex]) {
         if (!rangePoint.isUnset) {
             count++;
         }
@@ -714,25 +724,25 @@ static const CGFloat LayerAnimationDelay = 0.1;
     return count;
 }
 
-- (NSArray *)normalizeCanvasPointsForRect:(CGSize)canvasSize {
+- (NSArray *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
-    for (NSUInteger i = 0; i < [_dataPoints count]; i++) {
+    for (NSUInteger i = 0; i < ((NSMutableArray *)_dataPoints[plotIndex]).count; i++) {
         
         ORKRangedPoint *normalizedRangePoint = [ORKRangedPoint new];
-        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[i];
+        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         
         if (dataPointValue.isUnset) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height;
+            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight;
         } else if (_minimumValue == _maximumValue) {
-            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = canvasSize.height / 2;
+            normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
         } else {
             CGFloat range = _maximumValue - _minimumValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * canvasSize.height;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * canvasSize.height;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * viewHeight;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * viewHeight;
             
-            normalizedRangePoint.minimumValue = canvasSize.height - normalizedMinimumValue;
-            normalizedRangePoint.maximumValue = canvasSize.height - normalizedMaximumValue;
+            normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
+            normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
         }
         [normalizedPoints addObject:normalizedRangePoint];
     }
@@ -743,8 +753,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
-    while (validPosition < ([_dataPoints count] - 1)) {
-        if (((ORKRangedPoint *)_dataPoints[validPosition]).maximumValue != ORKCGFloatInvalidValue) {
+    while (validPosition < (((NSMutableArray *)_dataPoints[0]).count - 1)) {
+        if (((ORKRangedPoint *)_dataPoints[0][validPosition]).maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition ++;
@@ -782,7 +792,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
                 }
                 if (!maximumValueProvided &&
                     ((_maximumValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maximumValue))) {
-                        _maximumValue = point.maximumValue;
+                    _maximumValue = point.maximumValue;
                 }
             }
         }
@@ -797,17 +807,30 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    layer.path = path;
-    layer.fillColor = [UIColor clearColor].CGColor;
-    layer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : _referenceLineColor.CGColor;
-    layer.lineJoin = kCALineJoinRound;
-    layer.lineCap = kCALineCapRound;
-    layer.opacity = 1.0;
+    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    lineLayer.path = path;
+    lineLayer.fillColor = [UIColor clearColor].CGColor;
+    lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : _referenceLineColor.CGColor;
+    lineLayer.lineJoin = kCALineJoinRound;
+    lineLayer.lineCap = kCALineCapRound;
+    lineLayer.opacity = 1.0;
+    [_lineLayers addObject:lineLayer];
     if (_shouldAnimate) {
-        layer.strokeEnd = 0;
+        lineLayer.strokeEnd = 0;
     }
-    return layer;
+    return lineLayer;
+}
+
+- (BOOL)isXPositionSnapped:(CGFloat)xPosition {
+    BOOL snapped = NO;
+    CGFloat viewWidth = _plotView.bounds.size.width;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+    for (NSInteger idx = 0; idx < numberOfXAxisPoints; idx++) {
+        if (xPosition == xAxisPoint(idx, numberOfXAxisPoints, viewWidth)) {
+            snapped = YES;
+        }
+    }
+    return snapped;
 }
 
 #pragma mark - Abstract
@@ -837,7 +860,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
-    return true;
+    return NO;
 }
 
 @end

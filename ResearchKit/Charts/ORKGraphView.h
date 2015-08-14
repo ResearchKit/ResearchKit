@@ -300,11 +300,6 @@ ORK_CLASS_AVAILABLE
 */
 @property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
-/**
- Redraws the content of the graphView.
- */
-- (void)refreshGraph;
-
 @end
 
 NS_ASSUME_NONNULL_END

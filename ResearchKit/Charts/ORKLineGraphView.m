@@ -38,26 +38,21 @@
 #import "ORKRangedPoint.h"
 
 
-@interface ORKLineGraphView ()
-
-@property (nonatomic, strong) NSMutableArray *fillLayers;
-
-@end
-
-
-@implementation ORKLineGraphView
+@implementation ORKLineGraphView {
+    NSMutableArray *_fillLayers;
+}
 
 #pragma mark - Init
 
 - (void)sharedInit {
     [super sharedInit];
-    self.fillLayers = [NSMutableArray new];
+    _fillLayers = [NSMutableArray new];
 }
 
 #pragma mark - Drawing
 
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
-    return [self numberOfValidValues] > 1;
+    return [self numberOfValidValuesForPlotIndex:plotIndex] > 1;
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
@@ -72,9 +67,8 @@
     ORKRangedPoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
-    for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
-        
-        if ([self.dataPoints[i] isEmpty]) {
+    for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
+        if (((ORKRangedPoint *)self.dataPoints[plotIndex][i]).isUnset) {
             emptyDataPresent = YES;
             continue;
         }
@@ -90,8 +84,8 @@
             [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         }
         
-        positionOnXAxis = [self.xAxisPoints[i] floatValue];
-        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[i];
+        positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
+        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[plotIndex][i];
         
         if ([plotLinePath isEmpty]) {
             emptyDataPresent = NO;
@@ -113,16 +107,16 @@
     
     [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
     
-    CAShapeLayer *fillPathLayer = [CAShapeLayer layer];
-    fillPathLayer.path = fillPath.CGPath;
-    fillPathLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.2].CGColor;
-    [self.plotView.layer addSublayer:fillPathLayer];
+    CAShapeLayer *fillLayer = [CAShapeLayer layer];
+    fillLayer.path = fillPath.CGPath;
+    fillLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.2].CGColor;
+    [self.plotView.layer addSublayer:fillLayer];
+    
+    [_fillLayers addObject:fillLayer];
     
     if (self.shouldAnimate) {
-        fillPathLayer.opacity = 0;
+        fillLayer.opacity = 0;
     }
-    
-    [self.fillLayers addObject:fillPathLayer];
 }
 
 #pragma mark - Graph Calculations
@@ -131,23 +125,30 @@
     CGFloat value = [super valueForCanvasXPosition:xPosition];
     NSUInteger positionIndex = 0;
     
+    CGFloat viewWidth = self.plotView.bounds.size.width;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+
     if (value == ORKCGFloatInvalidValue) {
-        for (positionIndex = 0; positionIndex < ([self.xAxisPoints count] - 1); positionIndex++) {
-            CGFloat xAxisPointVal = [self.xAxisPoints[positionIndex] floatValue];
-            if (xAxisPointVal > xPosition) {
+        for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
+            CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, viewWidth);
+            if (xAxisPointValue > xPosition) {
                 break;
             }
         }
         
+        NSInteger previousValidIndex = [self previousValidPositionIndexForPosition:positionIndex];
         NSInteger nextValidIndex = [self nextValidPositionIndexForPosition:positionIndex];
-        NSInteger prevValidIndex = [self previousValidPositionIndexForPosition:positionIndex];
         
-        CGFloat x1 = [(NSNumber *)self.xAxisPoints[prevValidIndex] floatValue];
-        CGFloat x2 = [(NSNumber *)self.xAxisPoints[nextValidIndex] floatValue];
+        CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+        CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[prevValidIndex]).minimumValue;
-        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[nextValidIndex]).minimumValue;
+        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[0][previousValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[0][nextValidIndex]).minimumValue;
         
+        if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
+            return ORKCGFloatInvalidValue;
+        }
+
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
         //  (y2 - y3)/(x2 - x3) = m
@@ -161,16 +162,15 @@
     NSInteger nextValidIndex = [self nextValidPositionIndexForPosition:positionIndex];
     NSInteger previousValidIndex = [self previousValidPositionIndexForPosition:positionIndex];
     
-    CGFloat x1 = [self.xAxisPoints[previousValidIndex] floatValue];
-    CGFloat x2 = [self.xAxisPoints[nextValidIndex] floatValue];
+    CGFloat viewWidth = self.plotView.bounds.size.width;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+
+    CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
+    CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
     
-    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
-    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
-    
-    if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
-        return ORKCGFloatInvalidValue;
-    }
-    
+    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[0][previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[0][nextValidIndex]).minimumValue;
+        
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
     //  (y2 - y3)/(x2 - x3) = m
@@ -183,7 +183,7 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if (((ORKRangedPoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
+        if (((ORKRangedPoint *)self.dataPoints[0][validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;
@@ -202,8 +202,8 @@
 
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = [super animateLayersSequentially];
-    for (NSUInteger i = 0; i < [self.fillLayers count]; i++) {
-        CAShapeLayer *layer = self.fillLayers[i];
+    for (NSUInteger i = 0; i < _fillLayers.count; i++) {
+        CAShapeLayer *layer = _fillLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;
     }

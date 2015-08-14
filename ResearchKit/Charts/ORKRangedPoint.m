@@ -53,7 +53,7 @@
     return [self initWithMinimumValue:value maximumValue:value];
 }
 
-- (BOOL)isEmpty {
+- (BOOL)isUnset {
     return (self.minimumValue == ORKCGFloatInvalidValue && self.maximumValue == ORKCGFloatInvalidValue);
 }
 
