@@ -55,13 +55,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 @property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for this view
 
-@property (nonatomic, strong) UIView *plotsView; // Holds the plots
-
-@property (nonatomic, strong) ORKAxisView *xAxisView;
-
-@property (nonatomic, strong) UIView *yAxisView;
-
-@property (nonatomic) BOOL hasDataPoints;
+@property (nonatomic, strong) UIView *plotView; // Holds the plots
 
 @property (nonatomic, strong) UIView *scrubberLine;
 
@@ -69,17 +63,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 @property (nonatomic, strong) UIView *scrubberThumbView;
 
-@property (nonatomic, readwrite) CGFloat minimumValue;
-
-@property (nonatomic, readwrite) CGFloat maximumValue;
-
-@property (nonatomic, strong) NSMutableArray *xAxisTitles;
-
-@property (nonatomic, strong) NSMutableArray *referenceLines;
-
 @property (nonatomic, strong) NSMutableArray *pathLines;
-
-@property (nonatomic, strong) NSMutableArray *dots;
 
 @property (nonatomic) BOOL shouldAnimate;
 

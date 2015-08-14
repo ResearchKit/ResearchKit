@@ -81,7 +81,7 @@
             
             CAShapeLayer *plotLineLayer = [self plotLineLayerForPlotIndex:plotIndex withPath:plotLinePath.CGPath];
             
-            [self.plotsView.layer addSublayer:plotLineLayer];
+            [self.plotView.layer addSublayer:plotLineLayer];
             [self.pathLines addObject:plotLineLayer];
         }
     }
