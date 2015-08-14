@@ -33,17 +33,10 @@
 #import "ORKAxisView.h"
 
 
-@interface ORKAxisView ()
-
-@property (nonatomic, strong) NSMutableArray *titleLabels;
-
-@end
-
-
 static const CGFloat LastLabelPadding = 10.0;
 
 @implementation ORKAxisView {
-    
+    NSMutableArray *_titleLabels;
     NSMutableArray *_variableConstraints;
 }
 
@@ -68,14 +61,14 @@ static const CGFloat LastLabelPadding = 10.0;
     _variableConstraints = [NSMutableArray new];
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
     
-    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / ([self.titleLabels count] - 1);
+    CGFloat segmentWidth = CGRectGetWidth(self.bounds) / (_titleLabels.count - 1);
     
-    for (NSUInteger i = 0; i < [self.titleLabels count]; i++) {
-        UILabel *label = self.titleLabels[i];
+    for (NSUInteger i = 0; i < _titleLabels.count; i++) {
+        UILabel *label = _titleLabels[i];
         CGFloat offset = i * segmentWidth;
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                      attribute:NSLayoutAttributeCenterY
@@ -91,7 +84,7 @@ static const CGFloat LastLabelPadding = 10.0;
                                                                      attribute:NSLayoutAttributeLeading
                                                                     multiplier:1.0
                                                                       constant:offset]];
-        if (i == [self.titleLabels count] - 1) {
+        if (i == _titleLabels.count - 1) {
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
                                                                          attribute:NSLayoutAttributeHeight
                                                                          relatedBy:NSLayoutRelationEqual
@@ -112,9 +105,11 @@ static const CGFloat LastLabelPadding = 10.0;
 }
 
 - (void)setUpTitles:(NSArray *)titles {
+    [_titleLabels makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_titleLabels removeAllObjects];
     
-    for (NSUInteger i = 0; i < [titles count]; i++) {
-        
+    NSUInteger numberOfTitleLabels = titles.count;
+    for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
         UILabel *label = [UILabel new];
         label.text = titles[i];
         label.font = [UIFont systemFontOfSize:12.0];
@@ -122,10 +117,11 @@ static const CGFloat LastLabelPadding = 10.0;
         label.textAlignment = NSTextAlignmentCenter;
         label.adjustsFontSizeToFitWidth = YES;
         label.minimumScaleFactor = 0.7;
-        label.textColor = self.tintColor;
         label.translatesAutoresizingMaskIntoConstraints = NO;
         
-        if (i == ([titles count] - 1)) {
+        if (i < (numberOfTitleLabels - 1)) {
+            label.textColor = self.tintColor;
+        } else {
             label.textColor = [UIColor whiteColor];
             label.backgroundColor = self.tintColor;
             label.layer.cornerRadius = (self.bounds.size.height - LastLabelPadding) * 0.5;
@@ -133,15 +129,21 @@ static const CGFloat LastLabelPadding = 10.0;
         }
         
         [self addSubview:label];
-        [self.titleLabels addObject:label];
+        [_titleLabels addObject:label];
     }
-    [self setupConstraints];
+    [self setUpConstraints];
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
-    [super setTintColor:tintColor];
-    for (UILabel *label in self.titleLabels) {
-        label.textColor = tintColor;
+- (void)tintColorDidChange {
+    NSUInteger numberOfTitleLabels = _titleLabels.count;
+    for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
+        UILabel *label = _titleLabels[i];
+        if (i < (numberOfTitleLabels - 1)) {
+            label.textColor = self.tintColor;
+        } else {
+            label.textColor = [UIColor whiteColor];
+            label.backgroundColor = self.tintColor;
+        }
     }
 }
 
