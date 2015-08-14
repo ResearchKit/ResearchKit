@@ -51,8 +51,8 @@ ORKDefineStringKey(PopAnimationKey);
 
 static const CGFloat TopPadding = 0.0;
 static const CGFloat XAxisHeight = 30.0;
-static const CGFloat YAxisPaddingFactor = 0.15;
-static const CGFloat AxisMarkingRulerLength = 8.0;
+static const CGFloat YAxisPaddingFactor = 0.12;
+static const CGFloat AxisMarkingRulerLength = 10.0;
 static const CGFloat FadeAnimationDuration = 0.2;
 static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;

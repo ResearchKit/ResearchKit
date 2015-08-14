@@ -103,10 +103,6 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     func minimumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
         return 0
     }
-
-    func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
-        return 7
-    }
     
     func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
