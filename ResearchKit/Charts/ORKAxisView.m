@@ -78,34 +78,34 @@ static const CGFloat LastLabelPadding = 10.0;
         UILabel *label = self.titleLabels[i];
         CGFloat offset = i * segmentWidth;
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:label.superview
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0
-                                                             constant:0.0]];
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:label.superview
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
-                                                            attribute:NSLayoutAttributeCenterX
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:label.superview
-                                                            attribute:NSLayoutAttributeLeading
-                                                           multiplier:1.0
-                                                             constant:offset]];
+                                                                     attribute:NSLayoutAttributeCenterX
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:label.superview
+                                                                     attribute:NSLayoutAttributeLeading
+                                                                    multiplier:1.0
+                                                                      constant:offset]];
         if (i == [self.titleLabels count] - 1) {
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:label.superview
-                                                                attribute:NSLayoutAttributeHeight
-                                                               multiplier:1.0
-                                                                 constant:-LastLabelPadding]];
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:label.superview
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                        multiplier:1.0
+                                                                          constant:-LastLabelPadding]];
             [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:label
-                                                                attribute:NSLayoutAttributeWidth
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:label.superview
-                                                                attribute: NSLayoutAttributeHeight
-                                                               multiplier:1.0
-                                                                 constant:-LastLabelPadding]];
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:label.superview
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                        multiplier:1.0
+                                                                          constant:-LastLabelPadding]];
         }
     }
     [NSLayoutConstraint activateConstraints:_variableConstraints];

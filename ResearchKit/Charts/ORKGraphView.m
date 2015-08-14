@@ -153,9 +153,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
     if (_emptyLabel) {
         _emptyLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
-                                           TopPadding,
-                                           CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
-                                           CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
+                                       TopPadding,
+                                       CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
+                                       CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
     }
     
     // Scrubber Views
@@ -173,11 +173,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_xAxisView layoutSubviews];
 }
 
-- (void)setDefaults {
-    _minimumValue = MAXFLOAT;
-    _maximumValue = -MAXFLOAT;
-}
-
 #pragma mark - Drawing
 
 - (void)refreshGraph {
@@ -185,6 +180,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_plotsView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
+    [self calculateMinimumAndMaximumValues];
+
     [self drawXAxis];
     [self drawYAxis];
     
@@ -296,9 +293,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
     }
     
     _xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_plotsView.frame),
-                                                                   CGRectGetMaxY(_plotsView.frame),
-                                                                   CGRectGetWidth(_plotsView.frame),
-                                                                   XAxisHeight)];
+                                                               CGRectGetMaxY(_plotsView.frame),
+                                                               CGRectGetWidth(_plotsView.frame),
+                                                               XAxisHeight)];
     _xAxisView.tintColor = self.tintColor;
     [_xAxisView setUpTitles:_xAxisTitles];
     [self addSubview:_xAxisView];
@@ -338,9 +335,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
     CGFloat axisViewWidth = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
     
     _yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition,
-                                                              TopPadding,
-                                                              axisViewWidth,
-                                                              CGRectGetHeight(_plotsView.frame))];
+                                                          TopPadding,
+                                                          axisViewWidth,
+                                                          CGRectGetHeight(_plotsView.frame))];
     [self addSubview:_yAxisView];
     CGFloat rulerXPosition = CGRectGetWidth(_yAxisView.bounds) - AxisMarkingRulerLength + 2;
     
@@ -441,9 +438,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
 - (void)setupEmptyView {
     if (!_emptyLabel) {
         _emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
-                                                                    TopPadding,
-                                                                    CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
-                                                                    CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
+                                                                TopPadding,
+                                                                CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
+                                                                CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
         _emptyLabel.text = _noDataText;
         _emptyLabel.textAlignment = NSTextAlignmentCenter;
         _emptyLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
@@ -474,15 +471,15 @@ static const CGFloat LayerAnimationDelay = 0.1;
     
     if ([_dataSource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraphView:)]) {
         numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
-    } else {
-        NSInteger numberOfPlots = [self numberOfPlots];
-        for (NSInteger idx = 0; idx < numberOfPlots; idx++) {
-            NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:idx];
-            if (numberOfXAxisPoints < numberOfPlotPoints) {
-                numberOfXAxisPoints = numberOfPlotPoints;
-            }
+    }
+    NSInteger numberOfPlots = [self numberOfPlots];
+    for (NSInteger idx = 0; idx < numberOfPlots; idx++) {
+        NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:idx];
+        if (numberOfXAxisPoints < numberOfPlotPoints) {
+            numberOfXAxisPoints = numberOfPlotPoints;
         }
     }
+    
     return numberOfXAxisPoints;
 }
 
@@ -696,8 +693,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (NSArray *)normalizeCanvasPointsForRect:(CGSize)canvasSize {
-    [self calculateMinAndMaxPoints];
-    
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
     for (NSUInteger i = 0; i < [_dataPoints count]; i++) {
@@ -736,41 +731,41 @@ static const CGFloat LayerAnimationDelay = 0.1;
     return validPosition;
 }
 
-- (void)calculateMinAndMaxPoints {
-    [self setDefaults];
+- (void)calculateMinimumAndMaximumValues {
+    _minimumValue = ORKCGFloatInvalidValue;
+    _maximumValue = ORKCGFloatInvalidValue;
     
-    // Minimum
+    BOOL minimumValueProvided = NO;
+    BOOL maximumValueProvided = NO;
+    
     if ([_dataSource respondsToSelector:@selector(minimumValueForGraphView:)]) {
         _minimumValue = [_dataSource minimumValueForGraphView:self];
-    } else {
-        
-        if ([_dataPoints count]) {
-            _minimumValue = ((ORKRangedPoint *)_dataPoints[0]).minimumValue;
-            
-            for (NSUInteger i = 1; i < [_dataPoints count]; i++) {
-                CGFloat value = ((ORKRangedPoint *)_dataPoints[i]).minimumValue;
-                if ((_minimumValue == ORKCGFloatInvalidValue) || (value < _minimumValue)) {
-                    _minimumValue = value;
-                }
-            }
-        }
+        minimumValueProvided = YES;
     }
     
     // Maximum
     if ([_dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
         _maximumValue = [_dataSource maximumValueForGraphView:self];
-    } else {
-        if ([_dataPoints count]) {
-            _maximumValue = ((ORKRangedPoint *)_dataPoints[0]).maximumValue;
-            
-            for (NSUInteger i = 1; i < [_dataPoints count]; i++) {
-                CGFloat value = ((ORKRangedPoint *)_dataPoints[i]).maximumValue;
-                if (((value != ORKCGFloatInvalidValue) && (value > _maximumValue)) || (_maximumValue == ORKCGFloatInvalidValue)) {
-                    _maximumValue = value;
+        maximumValueProvided = YES;
+    }
+    
+    if (!minimumValueProvided || !maximumValueProvided) {
+        NSInteger numberOfPlots = [self numberOfPlots];
+        for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
+            NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
+            for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
+                ORKRangedPoint *point = [_dataSource graphView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+                if (!minimumValueProvided &&
+                    ((_minimumValue == ORKCGFloatInvalidValue) || (point.minimumValue < _minimumValue))) {
+                    _minimumValue = point.minimumValue;
+                }
+                if (!maximumValueProvided &&
+                    ((_maximumValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maximumValue))) {
+                        _maximumValue = point.maximumValue;
                 }
             }
         }
-    }
+    }    
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {

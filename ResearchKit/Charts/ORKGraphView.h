@@ -134,11 +134,11 @@ ORK_AVAILABLE_DECL
  If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
  returned in `graphView:plot:valueForPointAtIndex:` will be used.
 
+ See also: `graphView:plot:valueForPointAtIndex:`.
+
  @param graphView    The graph view asking for the maximum value.
 
  @return The maximum value of the y-axis drawn by `graphView`.
-
- see also: `graphView:plot:valueForPointAtIndex:`.
 */
 - (CGFloat)maximumValueForGraphView:(ORKGraphView *)graphView;
 
@@ -148,17 +148,18 @@ ORK_AVAILABLE_DECL
  If this method is not implemented, The smallest `minimumValue` of all ORKRangedPoint instances
  returned in `graphView:plot:valueForPointAtIndex:` will be used.
 
+ See also: `graphView:plot:valueForPointAtIndex:`.
+
  @param graphView    The graph view asking for the minimum value.
 
  @return The minimum value of the y-axis drawn by `graphView`.
-
- see also: `graphView:plot:valueForPointAtIndex:`.
 */
 - (CGFloat)minimumValueForGraphView:(ORKGraphView *)graphView;
 
 /**
- Asks the data source for the number of divisions in the x-axis. A title appearing adjacent to each
- division may optionally be returned in `graphView:titleForXAxisAtIndex:`
+ Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
+ than the number of data points. A title appearing adjacent to each
+ division may optionally be returned in `graphView:titleForXAxisAtIndex:`.
 
  @param graphView    The graph view asking for the number of divisions in its x-axis.
 
@@ -172,13 +173,13 @@ ORK_AVAILABLE_DECL
 
  If this method is not implemented, the x-axis will not have titles.
 
+ See also: `numberOfDivisionsInXAxisForGraphView:`.
+
  @param graphView    The graph view asking for the tile.
  @param pointIndex   The index corresponding to the number returned by 
  `numberoFDivisionsInXAxisForGraphView:`.
 
  @return The title string to be displayed adjacent to each division of the x-axis of `graphView`.
-
- see also: `numberOfDivisionsInXAxisForGraphView:`.
 */
 - (NSString *)graphView:(ORKGraphView *)graphView titleForXAxisAtIndex:(NSInteger)index;
 
