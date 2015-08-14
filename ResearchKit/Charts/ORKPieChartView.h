@@ -55,10 +55,12 @@ ORK_AVAILABLE_DECL
 @required
 /**
  Asks the data source for the number of segments in the pie chart view.
-
+ 
+ @param pieChartView     The pie chart view asking for the number of segments.
+ 
  @return The number of segments in the pie chart view.
 */
-- (NSInteger)numberOfSegmentsInPieChartView;
+- (NSInteger)numberOfSegmentsInPieChartView:(ORKPieChartView *)pieChartView;
 
 /**
  Asks the data source for the value of a segment in the pie chart view.
@@ -110,25 +112,7 @@ ORK_CLASS_AVAILABLE
 /**
  The data source object responsible for populating the pie chart with data.
 */
-@property (nonatomic, weak, nullable) id <ORKPieChartViewDataSource> datasource;
-
-/**
- A Boolean value indicating whether the pie chart should animate when it is drawn.
- The default value for this property is YES.
-*/
-@property (nonatomic) BOOL shouldAnimate;
-
-/**
- A Boolean value indicating whether the legend should animate when it is drawn.
- The default value for this property is YES.
-*/
-@property (nonatomic) BOOL shouldAnimateLegend;
-
-/**
- The duration, measured in seconds, of the pie chart and legend animations.
- If you do not set a value for this property, the pie chart view will assume a sensible value.
-*/
-@property (nonatomic) CGFloat animationDuration;
+@property (nonatomic, weak, nullable) id <ORKPieChartViewDataSource> dataSource;
 
 /**
  The width of the line used to draw the pie chart.
@@ -166,7 +150,7 @@ ORK_CLASS_AVAILABLE
  If this value of this property is NO, the title and text are drawn in front of the chart.
  The default value for this property is NO.
  */
-@property (nonatomic) BOOL shouldDrawTitleAboveChart;
+@property (nonatomic) BOOL drawTitleAboveChart;
 
 /**
  A Boolean value indicating whether the percentage labels drawn adjacent to each segement are
@@ -188,11 +172,19 @@ ORK_CLASS_AVAILABLE
 */
 @property (nonatomic) BOOL shouldDrawClockwise;
 
-/*
- A string that will be displayed in the UI if the sum of the values of all segments is zero.
+/**
+ The string that will be displayed if the sum of the values of all segments is zero.
  If you do not set a value for this property, the pie chart will use a sensible value.
 */
-@property (nonatomic, strong, nullable) NSString *emptyText;
+@property (nonatomic, strong, nullable) NSString *noDataText;
+
+/**
+ Animates the pie chart when it first displays on the screen. You can optionally call this method
+ from the `- viewDidAppear:` implementation of the view controller that owns the pie chart view.
+ 
+ @param animationDuration       The duration of the appearing animation.
+*/
+- (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
 @end
 

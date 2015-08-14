@@ -37,7 +37,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKGraphView;
-@class ORKRangePoint;
+@class ORKRangedPoint;
 
 /**
  The graph view delegate protocol declares methods which forward pan gesture events occuring within
@@ -81,7 +81,7 @@ ORK_AVAILABLE_DECL
  At a minimum, a data source object must implement the graphView:numberOfPointsInPlot: and 
  graphView:plot:valueForPointAtIndex: methods. These methods are responsible for returning the
  number of points in a plot and the points themselves. A point in a plot is represented by an 
- instance of `ORKRangePoint`. Optionally, a data source object may provide additional information
+ instance of `ORKRangedPoint`. Optionally, a data source object may provide additional information
  to the graph view by implementing the remaining `ORKGraphViewDataSouce` methods.
 
  When configuring an `ORKGraphView` object, assign your data source to its dataSource property.
@@ -115,7 +115,7 @@ ORK_AVAILABLE_DECL
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
  specified `graphView`.
 */
-- (ORKRangePoint *)graphView:(ORKGraphView *)graphView pointForForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKRangedPoint *)graphView:(ORKGraphView *)graphView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @optional
 /**
@@ -131,34 +131,35 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph view.
 
- If this method is not implemented, the greatest `maximumValue` of all `ORKRangePoint` instances
+ If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
  returned in `graphView:plot:valueForPointAtIndex:` will be used.
+
+ See also: `graphView:plot:valueForPointAtIndex:`.
 
  @param graphView    The graph view asking for the maximum value.
 
  @return The maximum value of the y-axis drawn by `graphView`.
-
- see also: `graphView:plot:valueForPointAtIndex:`.
 */
 - (CGFloat)maximumValueForGraphView:(ORKGraphView *)graphView;
 
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph view.
 
- If this method is not implemented, The smallest `minimumValue` of all ORKRangePoint instances
+ If this method is not implemented, The smallest `minimumValue` of all ORKRangedPoint instances
  returned in `graphView:plot:valueForPointAtIndex:` will be used.
+
+ See also: `graphView:plot:valueForPointAtIndex:`.
 
  @param graphView    The graph view asking for the minimum value.
 
  @return The minimum value of the y-axis drawn by `graphView`.
-
- see also: `graphView:plot:valueForPointAtIndex:`.
 */
 - (CGFloat)minimumValueForGraphView:(ORKGraphView *)graphView;
 
 /**
- Asks the data source for the number of divisions in the x-axis. A title appearing adjacent to each
- division may optionally be returned in `graphView:titleForXAxisAtIndex:`
+ Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
+ than the number of data points. A title appearing adjacent to each
+ division may optionally be returned in `graphView:titleForXAxisAtIndex:`.
 
  @param graphView    The graph view asking for the number of divisions in its x-axis.
 
@@ -172,13 +173,13 @@ ORK_AVAILABLE_DECL
 
  If this method is not implemented, the x-axis will not have titles.
 
+ See also: `numberOfDivisionsInXAxisForGraphView:`.
+
  @param graphView    The graph view asking for the tile.
  @param pointIndex   The index corresponding to the number returned by 
  `numberoFDivisionsInXAxisForGraphView:`.
 
  @return The title string to be displayed adjacent to each division of the x-axis of `graphView`.
-
- see also: `numberOfDivisionsInXAxisForGraphView:`.
 */
 - (NSString *)graphView:(ORKGraphView *)graphView titleForXAxisAtIndex:(NSInteger)index;
 
@@ -200,7 +201,7 @@ ORK_CLASS_AVAILABLE
  optional `maximumValueForGraphView:` method of the `ORKGraphViewDataSource` protocol.
 
  If `maximumValueForGraphView:` is not implemented, the minimum value will be assigned
- the smallest value of the `minimumValue` property belonging to the `ORKRangePoint`
+ the smallest value of the `minimumValue` property belonging to the `ORKRangedPoint`
  instances returned by the `ORKGraphViewDataSource` protocol's
  `graphView:plot:valueForPointAtIndex:` method.
 */
@@ -213,7 +214,7 @@ ORK_CLASS_AVAILABLE
  optional `maximumValueForGraphView:` method of the `ORKGraphViewDataSource` protocol.
 
  If `maximumValueForGraphView:` is not implemented, the maximum value will be assigned
- the largest value of the `maximumValue` property belonging to the `ORKRangePoint`
+ the largest value of the `maximumValue` property belonging to the `ORKRangedPoint`
  instances returned by the `ORKGraphViewDataSource` protocol's
  `graphView:plot:valueForPointAtIndex:` method.
 */
@@ -282,10 +283,10 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**
- A string that will be displayed in the UI if no data points are provided by the `dataSource`.
+ The string that will be displayed if no data points are provided by the `dataSource`.
  If you do not set a value for this property, the graph view will assume a sensible value.
 */
-@property (nonatomic, strong, nullable) NSString *emptyText;
+@property (nonatomic, strong, nullable) NSString *noDataText;
 
 /**
  An image that will be displayed adjacent to the maximum value of the y-axis.
@@ -303,59 +304,6 @@ ORK_CLASS_AVAILABLE
  Redraws the content of the graphView.
  */
 - (void)refreshGraph;
-
-@end
-
-
-/**
- The `ORKRangePoint` class represents a ranged point used in a graph plot.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKRangePoint : NSObject
-
-/**
- Returns a range point initialized using the specified `minimumValue` and `maximumValue`.
-
- @param minimumValue     The `minimumValue` to set.
- @param maximumValue     The `maximumValue` to set.
-
- @return A range point.
-*/
-- (instancetype)initWithMinimumValue:(CGFloat)minimumValue maximumValue:(CGFloat)maximumValue NS_DESIGNATED_INITIALIZER;
-
-/**
- Returns a range point initialized using the specified `value` for both `minimumValue` and
- `maximumValue`. This is useful for creating points that model a single data value without a range.
-
- This method is a convenience initializer.
-
- @param value    The `minimumValue` and `maximumValue` to set.
-
- @return A range point.
-*/
-- (instancetype)initWithValue:(CGFloat)value;
-
-/**
- The upper limit of the range represented by this point.
- The default value of this property is zero.
- */
-@property (nonatomic) CGFloat maximumValue;
-
-/**
- The lower limit of the range represented by this point.
- The default value of this property is zero.
- */
-@property (nonatomic) CGFloat minimumValue;
-
-/**
- A Boolean value indicating that `minimumValue` is equal to `maximumValue`. (read-only)
-*/
-@property (nonatomic, readonly) BOOL hasEmptyRange;
-
-/**
- A Boolean value indicating that both `minimum value` and `maximum value` have not been set.  (read-only)
-*/
-@property (nonatomic, readonly) BOOL isUnset;
 
 @end
 

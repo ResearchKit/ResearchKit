@@ -35,6 +35,7 @@
 #import "ORKHelpers.h"
 #import "ORKAxisView.h"
 #import "ORKCircleView.h"
+#import "ORKRangedPoint.h"
 
 
 @implementation ORKDiscreteGraphView
@@ -61,11 +62,11 @@
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangePoint *positionOnYAxis = nil;
+    ORKRangedPoint *positionOnYAxis = nil;
     
     for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
         
-        ORKRangePoint *dataPointVal = self.dataPoints[i];
+        ORKRangedPoint *dataPointVal = self.dataPoints[i];
         
         if (!dataPointVal.isUnset && !dataPointVal.hasEmptyRange) {
             
@@ -73,14 +74,14 @@
             
             positionOnXAxis = [self.xAxisPoints[i] floatValue];
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            positionOnYAxis = ((ORKRangePoint *)self.yAxisPoints[i]);
+            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[i]);
             
             [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             [plotLinePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
             
             CAShapeLayer *plotLineLayer = [self plotLineLayerForPlotIndex:plotIndex withPath:plotLinePath.CGPath];
             
-            [self.plotsView.layer addSublayer:plotLineLayer];
+            [self.plotView.layer addSublayer:plotLineLayer];
             [self.pathLines addObject:plotLineLayer];
         }
     }
@@ -111,7 +112,7 @@
     CGFloat canvasYPosition = 0;
     if (snapped) {
         NSInteger positionIndex = [self yAxisPositionIndexForXPosition:xPosition];
-        canvasYPosition = ((ORKRangePoint *)self.yAxisPoints[positionIndex]).maximumValue;
+        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[positionIndex-1]).maximumValue;
     }
     return canvasYPosition;
 }
@@ -119,9 +120,9 @@
 #pragma mark - Animation
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:(xPosition)];
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
     if (scrubbingValue == ORKCGFloatInvalidValue) {
-        [self setScrubberLineAccessoriesHidden: YES];
+        [self setScrubberLineAccessoriesHidden:YES];
     }
     [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
@@ -131,11 +132,6 @@
            [self updateScrubberLineAccessories:xPosition];
         }
     }];
-}
-
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden {
-    self.scrubberLabel.hidden = hidden;
-    self.scrubberThumbView.hidden = hidden;
 }
 
 @end

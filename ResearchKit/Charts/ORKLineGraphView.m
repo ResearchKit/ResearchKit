@@ -35,6 +35,7 @@
 #import "ORKCircleView.h"
 #import "ORKAxisView.h"
 #import "ORKHelpers.h"
+#import "ORKRangedPoint.h"
 
 
 @interface ORKLineGraphView ()
@@ -68,7 +69,7 @@
 - (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangePoint *positionOnYAxis = nil;
+    ORKRangedPoint *positionOnYAxis = nil;
     BOOL emptyDataPresent = NO;
     
     for (NSUInteger i = 0; i < [self.yAxisPoints count]; i++) {
@@ -84,13 +85,13 @@
             // Previous point exists.
             [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             if ([fillPath isEmpty]) {
-                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotsView.frame))];
+                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
             }
             [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         }
         
         positionOnXAxis = [self.xAxisPoints[i] floatValue];
-        positionOnYAxis = (ORKRangePoint *)self.yAxisPoints[i];
+        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[i];
         
         if ([plotLinePath isEmpty]) {
             emptyDataPresent = NO;
@@ -106,16 +107,16 @@
             emptyDataPresent = NO;
         }
         
-        [self.plotsView.layer addSublayer:plotLineLayer];
+        [self.plotView.layer addSublayer:plotLineLayer];
         [self.pathLines addObject:plotLineLayer];
     }
     
-    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotsView.frame))];
+    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
     
     CAShapeLayer *fillPathLayer = [CAShapeLayer layer];
     fillPathLayer.path = fillPath.CGPath;
     fillPathLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.2].CGColor;
-    [self.plotsView.layer addSublayer:fillPathLayer];
+    [self.plotView.layer addSublayer:fillPathLayer];
     
     if (self.shouldAnimate) {
         fillPathLayer.opacity = 0;
@@ -144,8 +145,8 @@
         CGFloat x1 = [(NSNumber *)self.xAxisPoints[prevValidIndex] floatValue];
         CGFloat x2 = [(NSNumber *)self.xAxisPoints[nextValidIndex] floatValue];
         
-        CGFloat y1 = ((ORKRangePoint *)self.dataPoints[prevValidIndex]).minimumValue;
-        CGFloat y2 = ((ORKRangePoint *)self.dataPoints[nextValidIndex]).minimumValue;
+        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[prevValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[nextValidIndex]).minimumValue;
         
         CGFloat slope = (y2 - y1)/(x2 - x1);
         
@@ -163,8 +164,12 @@
     CGFloat x1 = [self.xAxisPoints[previousValidIndex] floatValue];
     CGFloat x2 = [self.xAxisPoints[nextValidIndex] floatValue];
     
-    CGFloat y1 = ((ORKRangePoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
-    CGFloat y2 = ((ORKRangePoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
+    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
+    
+    if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
+        return ORKCGFloatInvalidValue;
+    }
     
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -178,7 +183,7 @@
 - (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSInteger validPosition = positionIndex - 1;
     while (validPosition > 0) {
-        if (((ORKRangePoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
+        if (((ORKRangedPoint *)self.dataPoints[validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;
@@ -187,6 +192,13 @@
 }
 
 #pragma mark - Animations
+
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
+    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
+        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
+        [self updateScrubberLineAccessories:xPosition];
+    }];
+}
 
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = [super animateLayersSequentially];

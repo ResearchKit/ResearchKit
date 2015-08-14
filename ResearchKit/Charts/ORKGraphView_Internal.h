@@ -46,8 +46,6 @@ extern const CGFloat ORKGraphViewGrowAnimationDuration;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
-extern NSString *const ORKGraphViewTriggerAnimationsNotification;
-extern NSString *const ORKGraphViewRefreshNotification;
 
 @interface ORKGraphView ()
 
@@ -57,35 +55,11 @@ extern NSString *const ORKGraphViewRefreshNotification;
 
 @property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for this view
 
-@property (nonatomic, strong) UIView *plotsView; // Holds the plots
-
-@property (nonatomic, strong) ORKAxisView *xAxisView;
-
-@property (nonatomic, strong) UIView *yAxisView;
-
-@property (nonatomic, strong) UILabel *emptyLabel;
-
-@property (nonatomic) BOOL hasDataPoint;
+@property (nonatomic, strong) UIView *plotView; // Holds the plots
 
 @property (nonatomic, strong) UIView *scrubberLine;
 
-@property (nonatomic, strong) UILabel *scrubberLabel;
-
-@property (nonatomic, strong) UIView *scrubberThumbView;
-
-@property (nonatomic, readwrite) CGFloat minimumValue;
-
-@property (nonatomic, readwrite) CGFloat maximumValue;
-
-@property (nonatomic, strong) NSMutableArray *xAxisTitles;
-
-@property (nonatomic) NSInteger numberOfXAxisTitles;
-
-@property (nonatomic, strong) NSMutableArray *referenceLines;
-
 @property (nonatomic, strong) NSMutableArray *pathLines;
-
-@property (nonatomic, strong) NSMutableArray *dots;
 
 @property (nonatomic) BOOL shouldAnimate;
 
@@ -112,5 +86,7 @@ extern NSString *const ORKGraphViewRefreshNotification;
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition;
+
+- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
 
 @end

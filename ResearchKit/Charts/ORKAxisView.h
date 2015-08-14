@@ -27,28 +27,13 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
- */
+*/
 
 
 #import <UIKit/UIKit.h>
-#import "ORKGraphView.h"
 
+@interface ORKAxisView : UIView
 
-NS_ASSUME_NONNULL_BEGIN
-
-/**
- The `ORKDiscreteGraphView` class presents data provided by an object conforming to the
- `ORKGraphViewDataSource` as a discrete graph.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKDiscreteGraphView : ORKGraphView
-
-/**
- A Boolean value indicating whether to draw a line to connect the `minimumValue` and `maximumValue` of each `ORKRangePoint
- represented by the graphView.
- */
-@property (nonatomic) BOOL shouldConnectRanges;
+- (void)setUpTitles:(NSArray *)titles;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -117,7 +117,8 @@
 #pragma mark - Helper
 
 - (CGFloat)titleHeight {
-    return [_titleLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    CGFloat height = [_titleLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height;
 }
 
 @end

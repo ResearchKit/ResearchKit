@@ -44,7 +44,7 @@
     UICollectionViewLayoutAttributes *attributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     NSInteger count = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:indexPath.section];
     NSIndexPath *lastItemIndexPath = [NSIndexPath indexPathForItem:count - 1 inSection:indexPath.section];
-    UICollectionViewLayoutAttributes *lastItemAttributes =  [super layoutAttributesForItemAtIndexPath:lastItemIndexPath];
+    UICollectionViewLayoutAttributes *lastItemAttributes = [super layoutAttributesForItemAtIndexPath:lastItemIndexPath];
     if (attributes.frame.origin.y == lastItemAttributes.frame.origin.y) {
         CGFloat trailing = self.collectionView.bounds.size.width - lastItemAttributes.frame.origin.x - attributes.frame.size.width;
         attributes.frame = CGRectOffset(attributes.frame, trailing * 0.5, 0);

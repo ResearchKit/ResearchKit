@@ -33,36 +33,41 @@ import ResearchKit
 
 class ChartListViewController: UITableViewController {
     
-    let discreteGraphDataSource: DiscreteGraphDataSource = DiscreteGraphDataSource()
-    let lineGraphDataSource: LineGraphDataSource = LineGraphDataSource()
-    let pieChartDataSource: PieChartDataSource = PieChartDataSource()
+    let discreteGraphDataSource = DiscreteGraphDataSource()
+    let lineGraphDataSource = LineGraphDataSource()
+    let pieChartDataSource = PieChartDataSource()
     let discreteGraphIdentifier = "DiscreteGraphCell"
     let lineGraphIdentifier = "LineGraphCell"
     let pieChartIdentifier = "PieChartCell"
     
-    var lineGraphTableViewCell: UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(lineGraphIdentifier) as! LineGraphTableViewCell
-        (cell.graphView as! ORKLineGraphView).dataSource = lineGraphDataSource
-        return cell
-    }
-    
-    var discreteGraphTableViewCell: UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(discreteGraphIdentifier) as! DiscreteGraphTableViewCell
-        (cell.graphView as! ORKDiscreteGraphView).dataSource = discreteGraphDataSource
-        return cell
-    }
-    
-     var pieChartTableViewCell: UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
-        cell.pieChartView.datasource = pieChartDataSource
-        return cell
-    }
-    
-    var chartTableViewCells: [UITableViewCell] {
-        return [pieChartTableViewCell, lineGraphTableViewCell, discreteGraphTableViewCell]
-    }
+    var pieChartTableViewCell: PieChartTableViewCell!
+    var lineGraphTableViewCell: LineGraphTableViewCell!
+    var discreteGraphTableViewCell: DiscreteGraphTableViewCell!
+    var chartTableViewCells: [UITableViewCell]!
     
     override func viewDidLoad() {
+        // ORKPieChartView
+        pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
+        pieChartTableViewCell.pieChartView.dataSource = pieChartDataSource
+        // Optional custom configuration
+        pieChartTableViewCell.pieChartView.title = "TITLE"
+        pieChartTableViewCell.pieChartView.text = "TEXT"
+        pieChartTableViewCell.pieChartView.lineWidth = 12
+        
+        // ORKLineGraphView
+        lineGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphIdentifier) as! LineGraphTableViewCell
+        lineGraphTableViewCell.graphView.dataSource = lineGraphDataSource
+        // Optional custom configuration
+        lineGraphTableViewCell.graphView.showsVerticalReferenceLines = true
+
+        // ORKDiscreteGraphView
+        discreteGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphIdentifier) as! DiscreteGraphTableViewCell
+        discreteGraphTableViewCell.graphView.dataSource = discreteGraphDataSource
+        // Optional custom configuration
+        discreteGraphTableViewCell.graphView.showsVerticalReferenceLines = true
+
+        chartTableViewCells = [pieChartTableViewCell, lineGraphTableViewCell, discreteGraphTableViewCell]
+        
         tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
@@ -71,36 +76,25 @@ class ChartListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return chartTableViewCells[indexPath.row]
+        let cell = chartTableViewCells[indexPath.row];
+        return cell
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if let graph = (cell as? GraphTableViewCell)?.graphView {
-            configureGraphView(graph)
-        }
-        else if let pieChartView = (cell as? PieChartTableViewCell)?.pieChartView {
-            configurePieChartView(pieChartView)
+        if let graphView = (cell as? GraphTableViewCell)?.graphView {
+            graphView.setNeedsLayout()
+            graphView.layoutIfNeeded()
+            graphView.refreshGraph()
         }
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         tableView.reloadData()
     }
-}
 
-extension ChartListViewController {
-    
-    func configureGraphView(graphView: ORKGraphView) {
-        graphView.showsVerticalReferenceLines = true
-        /* set more ORKGraphView properties as desired */
-        graphView.setNeedsLayout()
-        graphView.layoutIfNeeded()
-        graphView.refreshGraph()
-    }
-    
-    func configurePieChartView(pieChartView: ORKPieChartView) {
-        pieChartView.title = "TITLE"
-        pieChartView.text = "TEXT"
-        /* set more ORKPieChartView properties as desired */
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // Optional animation on first appearance
+        pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
     }
 }
