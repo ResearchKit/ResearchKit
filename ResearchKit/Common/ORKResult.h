@@ -697,6 +697,32 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKTimedWalkResult` class records the results of a Timed Walk test.
+ 
+ The timed walk result object records the duration to complete the trial with a specific distance
+ and time limit.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTimedWalkResult : ORKResult
+/**
+ The timed walk distance in meters.
+ */
+@property (nonatomic, assign) double distanceInMeters;
+
+/**
+ The time limit to complete the trials.
+ */
+@property (nonatomic, assign) NSTimeInterval timeLimit;
+
+/**
+ The trial duration (ie. time taken to do the walk).
+ */
+@property (nonatomic, assign) NSTimeInterval duration;
+
+@end
+
+
+/**
  The `ORKTextQuestionResult` class represents the answer to a question or
  form item that uses an `ORKTextAnswerFormat` format.
  

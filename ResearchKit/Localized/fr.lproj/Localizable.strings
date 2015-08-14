@@ -216,6 +216,26 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %@ sur %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Marche Chronométrée";
+"TIMED_WALK_INTRO_DETAIL" = "Cette activité mesure le fonctionnement de vos membres inférieurs.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Trouvez un lieu, de préférence à l'extérieur, où vous pouvez marcher en ligne droite environ %@ aussi vite que possible, mais en sécurité. Ne ralentissez pas avant d'avoir franchi la ligne d'arrivée.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Touchez Suivant pour commencer.";
+"TIMED_WALK_FORM_TITLE" = "Dispositif d'assistance";
+"TIMED_WALK_FORM_TEXT" = "Utilisez le même dispositif d'assistance à chaque test.";
+"TIMED_WALK_QUESTION_TEXT" = "Portez-vous une orthèse de cheville?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Utilisez-vous un dispositif d'assistance?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Touchez ici pour sélectionner une réponse.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Aucun";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Une canne";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "une béquille";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Deux cannes";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Deux béquilles";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Déambulateur";
+"TIMED_WALK_INSTRUCTION_%@" = "Marchez %@ en ligne droite.";
+"TIMED_WALK_INSTRUCTION_2" = "Faites demi-tour et revenez à votre point de départ.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Touchez terminé lorsque vous êtes arrivé.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Impossible de supprimer assez de fichiers journaux pour atteindre le seuil";

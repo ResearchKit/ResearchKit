@@ -234,6 +234,26 @@
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
 
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Timed Walk";
+"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
+"TIMED_WALK_FORM_TITLE" = "Assistive device";
+"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
+"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "None";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
+"TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

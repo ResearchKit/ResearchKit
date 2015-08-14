@@ -12,7 +12,6 @@
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
 		86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86717A9A1AC0C0FE00AC2A23 /* Images.xcassets */; };
 		86717A9E1AC0C0FE00AC2A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86717A9C1AC0C0FE00AC2A23 /* LaunchScreen.xib */; };
-		86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD61AC0C53800AC2A23 /* CustomRecorder.m */; };
 		86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD71AC0C53800AC2A23 /* MainViewController.m */; };
 		86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717ADD1AC0C53800AC2A23 /* DynamicTask.m */; };
 		86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */ = {isa = PBXBuildFile; fileRef = 86717AE01AC0C53800AC2A23 /* image_example.png */; };
@@ -88,10 +87,8 @@
 		86717A9D1AC0C0FE00AC2A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		86717AA31AC0C0FE00AC2A23 /* ORKTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORKTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86717AA81AC0C0FE00AC2A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86717AD61AC0C53800AC2A23 /* CustomRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecorder.m; sourceTree = "<group>"; };
 		86717AD71AC0C53800AC2A23 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		86717AD81AC0C53800AC2A23 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKESerialization.m; path = ../ORKTest/ORKESerialization.m; sourceTree = "<group>"; };
-		86717ADB1AC0C53800AC2A23 /* CustomRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecorder.h; sourceTree = "<group>"; };
 		86717ADC1AC0C53800AC2A23 /* DynamicTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicTask.h; sourceTree = "<group>"; };
 		86717ADD1AC0C53800AC2A23 /* DynamicTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicTask.m; sourceTree = "<group>"; };
 		86717ADE1AC0C53800AC2A23 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -239,8 +236,6 @@
 		86717B001AC0C9B100AC2A23 /* CustomizationExamples */ = {
 			isa = PBXGroup;
 			children = (
-				86717ADB1AC0C53800AC2A23 /* CustomRecorder.h */,
-				86717AD61AC0C53800AC2A23 /* CustomRecorder.m */,
 				86717ADC1AC0C53800AC2A23 /* DynamicTask.h */,
 				86717ADD1AC0C53800AC2A23 /* DynamicTask.m */,
 			);
@@ -443,7 +438,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
-				86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,

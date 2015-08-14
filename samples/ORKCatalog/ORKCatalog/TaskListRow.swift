@@ -77,6 +77,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ToneAudiometry
     case ReactionTime
     case TowerOfHanoi
+    case TimedWalk
     case ImageCapture
     case Survey
     case Consent
@@ -158,6 +159,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             case .TowerOfHanoi:
                 return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
+            
+            case .TimedWalk:
+                return NSLocalizedString("Timed Walk Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -245,6 +249,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
         case TowerOfHanoi =                                         "TowerOfHanoi"
+        case TimedWalkTask =                                        "TimedWalkTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -332,6 +337,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             case .TowerOfHanoi:
                 return towerOfHanoiTask
+        
+            case .TimedWalk:
+                return timedWalkTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -634,8 +642,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: [])
     }
     
+    /// This task presents the Timed Walk pre-defined active task.
+    private var timedWalkTask: ORKTask {
+
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, options: [])
+    }
+    
     private var exampleSuccessSound: UInt32 {
-        var successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!
+        let successSoundPath: CFURLRef! = NSURL(fileURLWithPath: "///System/Library/Audio/UISounds/Modern/sms_alert_complete.caf") as CFURLRef!
         var soundID: SystemSoundID = 0
         AudioServicesCreateSystemSoundID(successSoundPath, &soundID)
         return soundID

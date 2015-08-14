@@ -430,11 +430,43 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  
  @return An active device motion reaction time task that can be presented with an `ORKTaskViewController` object.
  */
-
 + (ORKOrderedTask *)towerOfHanoiTaskWithIdentifier:(NSString *)identifier
                             intendedUseDescription:(nullable NSString *)intendedUseDescription
                                      numberOfDisks:(NSUInteger)numberOfDisks
                                            options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of a timed walk.
+ 
+ In a timed walk task, the participant is asked to walk for a specific distance as quickly as
+ possible, but safely. The task is immediately administered again by having the patient walk back
+ the same distance.
+ A timed walk task can be used to measure lower extremity function.
+ 
+ The presentation of the timed walk task differs from both the fitness check task and the short
+ walk task in that the distance is fixed. After a first walk, the user is asked to turn and reverse
+ direction.
+ 
+ The data collected by this task can include accelerometer, device motion, pedometer data
+ and location where available.
+ 
+ Data collected by the task is in the form of an `ORKTimedWalkResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+ collected. If the value of this parameter is `nil`, the default
+ localized text is displayed.
+ @param distanceInMeters        The timed walk distance in meters.
+ @param timeLimit               The time limit to complete the trials.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active Timed Walk task that can be presented with an `ORKTaskViewController` object.
+ */
++ (ORKOrderedTask *)timedWalkTaskWithIdentifier:(NSString *)identifier
+                         intendedUseDescription:(nullable NSString *)intendedUseDescription
+                               distanceInMeters:(double)distanceInMeters
+                                      timeLimit:(NSTimeInterval)timeLimit
+                                        options:(ORKPredefinedTaskOption)options;
 
 @end
 

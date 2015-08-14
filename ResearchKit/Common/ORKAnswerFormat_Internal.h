@@ -130,6 +130,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (BOOL)isVertical;
 - (NSString *)maximumValueDescription;
 - (NSString *)minimumValueDescription;
+- (UIImage *)maximumImage;
+- (UIImage *)minimumImage;
 
 @end
 
