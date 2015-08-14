@@ -35,6 +35,7 @@
 #import "ORKLegendCollectionViewCell.h"
 #import "ORKCenteredCollectionViewLayout.h"
 #import "ORKSkin.h"
+#import "ORKDefines_Private.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;
@@ -545,7 +546,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         
         _noDataLabel = [UILabel new];
         _noDataLabel.textColor = [UIColor lightGrayColor];
-        _noDataLabel.text = NSLocalizedString(@"No Data", @"No Data");;
+        _noDataLabel.text = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
         _noDataLabel.textAlignment = NSTextAlignmentCenter;
         _noDataLabel.hidden = YES;
 

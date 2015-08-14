@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -36,6 +37,7 @@
 #import "ORKAxisView.h"
 #import "ORKCircleView.h"
 #import "ORKRangedPoint.h"
+#import "ORKDefines_Private.h"
 
 
 const CGFloat ORKGraphViewLeftPadding = 10.0;
@@ -63,7 +65,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
 @end
 
 
-@implementation ORKGraphView
+@implementation ORKGraphView {
+    UILabel *_noDataLabel;
+}
 
 #pragma mark - Init
 
@@ -89,7 +93,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
     _axisTitleFont = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
     _showsVerticalReferenceLines = NO;
-    _noDataText = NSLocalizedString(@"BASE_GRAPH_VIEW_EMPTY_TEXT", nil);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
     _xAxisPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
@@ -151,8 +155,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
                                   TopPadding,
                                   CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
-    if (_emptyLabel) {
-        _emptyLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
+    if (_noDataLabel) {
+        _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
                                        TopPadding,
                                        CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
                                        CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
@@ -197,7 +201,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     
     for (int i = 0; i < [self numberOfPlots]; i++) {
         if ([_dataSource graphView:self numberOfPointsForPlotIndex:i] <= 1) {
-            return;
+            break;
         } else {
             [self drawGraphForPlotIndex:i];
         }
@@ -206,8 +210,8 @@ static const CGFloat LayerAnimationDelay = 0.1;
     if (!_hasDataPoints) {
         [self setupEmptyView];
     } else {
-        if (_emptyLabel) {
-            [_emptyLabel removeFromSuperview];
+        if (_noDataLabel) {
+            [_noDataLabel removeFromSuperview];
         }
     }
     
@@ -436,18 +440,18 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)setupEmptyView {
-    if (!_emptyLabel) {
-        _emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
-                                                                TopPadding,
-                                                                CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
-                                                                CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
-        _emptyLabel.text = _noDataText;
-        _emptyLabel.textAlignment = NSTextAlignmentCenter;
-        _emptyLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
-        _emptyLabel.textColor = [UIColor lightGrayColor];
+    if (!_noDataLabel) {
+        _noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
+                                                                 TopPadding,
+                                                                 CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
+                                                                 CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
+        _noDataLabel.text = _noDataText;
+        _noDataLabel.textAlignment = NSTextAlignmentCenter;
+        _noDataLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
+        _noDataLabel.textColor = [UIColor lightGrayColor];
     }
     
-    [self addSubview:_emptyLabel];
+    [self addSubview:_noDataLabel];
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
@@ -743,7 +747,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
         minimumValueProvided = YES;
     }
     
-    // Maximum
     if ([_dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
         _maximumValue = [_dataSource maximumValueForGraphView:self];
         maximumValueProvided = YES;
@@ -765,7 +768,14 @@ static const CGFloat LayerAnimationDelay = 0.1;
                 }
             }
         }
-    }    
+    }
+    
+    if (_minimumValue == ORKCGFloatInvalidValue) {
+        _minimumValue = 0;
+    }
+    if (_maximumValue == ORKCGFloatInvalidValue) {
+        _maximumValue = 0;
+    }
 }
 
 - (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {

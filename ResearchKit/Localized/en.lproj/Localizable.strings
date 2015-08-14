@@ -208,7 +208,7 @@
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Move the device sharply when the blue circle appears";
 
 /* Charts */
-"BASE_GRAPH_VIEW_EMPTY_TEXT" = "No Data";
+"CHART_NO_DATA_TEXT" = "No Data";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
