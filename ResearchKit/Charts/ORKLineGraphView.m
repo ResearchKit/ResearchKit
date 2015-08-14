@@ -167,6 +167,10 @@
     CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[previousValidIndex]).minimumValue;
     CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[nextValidIndex]).minimumValue;
     
+    if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
+        return ORKCGFloatInvalidValue;
+    }
+    
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
     //  (y2 - y3)/(x2 - x3) = m

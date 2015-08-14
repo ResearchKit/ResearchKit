@@ -59,10 +59,6 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 @property (nonatomic, strong) UIView *scrubberLine;
 
-@property (nonatomic, strong) UILabel *scrubberLabel;
-
-@property (nonatomic, strong) UIView *scrubberThumbView;
-
 @property (nonatomic, strong) NSMutableArray *pathLines;
 
 @property (nonatomic) BOOL shouldAnimate;
@@ -90,5 +86,7 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition;
+
+- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
 
 @end

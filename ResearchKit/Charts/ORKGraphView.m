@@ -74,7 +74,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
     CGFloat _minimumValue;
     CGFloat _maximumValue;
     NSMutableArray *_xAxisTitles;
-    NSMutableArray *_referenceLines;    
+    NSMutableArray *_referenceLines;
+    UILabel *_scrubberLabel;
+    UIView *_scrubberThumbView;
 }
 
 #pragma mark - Init
@@ -240,6 +242,14 @@ static const CGFloat LayerAnimationDelay = 0.1;
         }
     }
     [_yAxisPoints addObjectsFromArray:[self normalizeCanvasPointsForRect:_plotView.frame.size]];
+    if (_yAxisPoints.count < _xAxisPoints.count) {
+        for (NSInteger idx = 0; idx < _xAxisPoints.count-_yAxisPoints.count; idx++) {
+            // Add dummy points for empty data points
+            ORKRangedPoint *dummyPoint = [[ORKRangedPoint alloc] init];
+            [_yAxisPoints addObject:dummyPoint];
+            [_dataPoints addObject:dummyPoint];
+        }
+    }
 }
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
@@ -545,11 +555,21 @@ static const CGFloat LayerAnimationDelay = 0.1;
     }
 }
 
+- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden {
+    _scrubberLabel.hidden = hidden;
+    _scrubberThumbView.hidden = hidden;
+}
+
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition {
     CGFloat scrubberYPos = [self canvasYPointForXPosition:xPosition];
-    CGFloat scrubbingVal = [self valueForCanvasXPosition:(xPosition)];
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
+    if (scrubberYPos == ORKCGFloatInvalidValue) {
+        [self setScrubberLineAccessoriesHidden:YES];
+        return;
+    }
+    [self setScrubberLineAccessoriesHidden:NO];
     [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPos + TopPadding)];
-    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingVal];
+    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(_scrubberLabel.bounds))
                                                         options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin)
                                                      attributes:@{NSFontAttributeName:_scrubberLabel.font}
@@ -559,7 +579,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
     CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / [_xAxisPoints count];
-    for (NSUInteger positionIndex = 0; positionIndex < [_xAxisPoints count]; positionIndex++) {
+    for (NSUInteger positionIndex = 0; positionIndex < [_dataPoints count]; positionIndex++) {
         
         CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[positionIndex]).maximumValue;
         
@@ -624,8 +644,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
 #pragma Mark - Animation
 
 - (CGFloat)animateLayersSequentially {
-    //    NSLog(@"animate: %@", self);
-    //
     CGFloat delay = LayerAnimationDelay;
     
     for (NSUInteger i = 0; i < [_circleViews count]; i++) {
@@ -719,7 +737,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
         [normalizedPoints addObject:normalizedRangePoint];
     }
     
-    return [NSArray arrayWithArray:normalizedPoints];
+    return [normalizedPoints copy];
 }
 
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {

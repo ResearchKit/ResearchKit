@@ -112,7 +112,7 @@
     CGFloat canvasYPosition = 0;
     if (snapped) {
         NSInteger positionIndex = [self yAxisPositionIndexForXPosition:xPosition];
-        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[positionIndex]).maximumValue;
+        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[positionIndex-1]).maximumValue;
     }
     return canvasYPosition;
 }
@@ -120,7 +120,7 @@
 #pragma mark - Animation
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:(xPosition)];
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden:YES];
     }
@@ -132,11 +132,6 @@
            [self updateScrubberLineAccessories:xPosition];
         }
     }];
-}
-
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden {
-    self.scrubberLabel.hidden = hidden;
-    self.scrubberThumbView.hidden = hidden;
 }
 
 @end
