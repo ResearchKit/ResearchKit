@@ -282,7 +282,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     // Add Title Labels
     [_xAxisTitles removeAllObjects];
     
-    for (int i = 0; i < _numberOfXAxisTitles; i++) {
+    for (int i = 0; i < [self numberOfXAxisPoints]; i++) {
         if ([_dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
             NSString *title = [_dataSource graphView:self titleForXAxisAtIndex:i];
             
@@ -313,7 +313,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_xAxisView.layer addSublayer:xAxisLineLayer];
     
     for (NSUInteger i = 0; i < [_xAxisTitles count]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / (_numberOfXAxisTitles - 1)) * i);
+        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
         
         UIBezierPath *rulerPath = [UIBezierPath bezierPath];
         [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - AxisMarkingRulerLength)];
@@ -420,9 +420,9 @@ static const CGFloat LayerAnimationDelay = 0.1;
 }
 
 - (void)drawVerticalReferenceLines {
-    for (int i = 1; i < _numberOfXAxisTitles; i++) {
+    for (int i = 1; i < [self numberOfXAxisPoints]; i++) {
         
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / (_numberOfXAxisTitles - 1)) * i);
+        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
         
         UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
         [referenceLinePath moveToPoint:CGPointMake(positionOnXAxis, 0)];
@@ -469,23 +469,28 @@ static const CGFloat LayerAnimationDelay = 0.1;
     return numberOfPlots;
 }
 
-- (NSInteger)numberOfXAxisTitles {
-    NSInteger numberOfXAxisTitles = 0;
+- (NSInteger)numberOfXAxisPoints {
+    NSInteger numberOfXAxisPoints = 0;
     
     if ([_dataSource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraphView:)]) {
-        numberOfXAxisTitles = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
+        numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
     } else {
-        numberOfXAxisTitles = [_dataSource graphView:self numberOfPointsForPlotIndex:0];
+        NSInteger numberOfPlots = [self numberOfPlots];
+        for (NSInteger idx = 0; idx < numberOfPlots; idx++) {
+            NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:idx];
+            if (numberOfXAxisPoints < numberOfPlotPoints) {
+                numberOfXAxisPoints = numberOfPlotPoints;
+            }
+        }
     }
-    
-    return numberOfXAxisTitles;
+    return numberOfXAxisPoints;
 }
 
 - (void)calculateXAxisPoints {
     [_xAxisPoints removeAllObjects];
     
-    for (int i = 0; i < [self numberOfXAxisTitles]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([_yAxisPoints count] - 1)) * i);
+    for (int i = 0; i < [self numberOfXAxisPoints]; i++) {
+        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotsView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
         positionOnXAxis = round(positionOnXAxis);
         [_xAxisPoints addObject:@(positionOnXAxis)];
     }

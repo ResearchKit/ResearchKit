@@ -77,8 +77,6 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 
 @property (nonatomic, strong) NSMutableArray *xAxisTitles;
 
-@property (nonatomic) NSInteger numberOfXAxisTitles;
-
 @property (nonatomic, strong) NSMutableArray *referenceLines;
 
 @property (nonatomic, strong) NSMutableArray *pathLines;
