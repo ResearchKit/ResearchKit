@@ -46,7 +46,7 @@ static const CGFloat kBaseSpacing = 10;
     NSArray *_currentConstraints;
 }
 
-#pragma mark -- Init
+#pragma mark - Init
 
 - (instancetype)initWithFrame:(CGRect)frame maximumNumberOfDisks:(NSUInteger)maximumNumberOfDisks {
     self = [super initWithFrame:frame];
@@ -63,7 +63,7 @@ static const CGFloat kBaseSpacing = 10;
     return self;
 }
 
-#pragma mark -- UIView
+#pragma mark - UIView
 
 - (void)updateConstraints {
     if (_currentConstraints != nil) {
@@ -173,7 +173,7 @@ static const CGFloat kBaseSpacing = 10;
     [self reloadData];
 }
 
-#pragma mark -- Public
+#pragma mark - Public
 
 - (void)reloadData {
     [_diskViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -183,7 +183,7 @@ static const CGFloat kBaseSpacing = 10;
     [self setNeedsUpdateConstraints];
 }
 
-#pragma mark -- Private
+#pragma mark - Private
 
 - (void)userDidTapTower {
     [self.delegate towerOfHanoiTowerViewWasSelected:self];
