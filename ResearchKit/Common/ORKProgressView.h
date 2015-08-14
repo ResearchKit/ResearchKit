@@ -29,24 +29,12 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <UIKit/UIKit.h>
+#import "ORKDefines_Private.h"
 
+ORK_CLASS_AVAILABLE
+@interface ORKProgressView : UIView
 
-/*
- These classes demonstrate a new recorder and recorder configuration created
- outside the ResearchKit framework, extending the use of recorders on active
- tasks to include one that can capture touch events.
- */
-
-@interface CustomRecorder : ORKRecorder
-
-@end
-
-
-@interface CustomRecorderConfiguration : ORKRecorderConfiguration
-
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, assign) NSInteger count;
 
 @end

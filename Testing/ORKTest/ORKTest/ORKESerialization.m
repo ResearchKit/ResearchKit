@@ -475,6 +475,13 @@ ret =
         (@{
           PROPERTY(numberOfStepsPerLeg, NSNumber, NSObject, YES, nil, nil),
           })),
+   ENTRY(ORKTimedWalkStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTimedWalkStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+            PROPERTY(distanceInMeters, NSNumber, NSObject, YES, nil, nil),
+            })),
   ENTRY(ORKAccelerometerRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKAccelerometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:[GETPROP(dict, frequency) doubleValue]];
@@ -722,7 +729,8 @@ ret =
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil)
+          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil),
+          PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
           })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -846,6 +854,13 @@ ret =
          (@{
             PROPERTY(timestamp, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(fileResult, ORKResult, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKTimedWalkResult,
+         nil,
+         (@{
+            PROPERTY(distanceInMeters, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(timeLimit, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(duration, NSNumber, NSObject, NO, nil, nil),
             })),
   ENTRY(ORKQuestionResult,
          nil,

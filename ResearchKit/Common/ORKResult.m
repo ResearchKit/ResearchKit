@@ -185,7 +185,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, moves);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, moves, ORKTowerOfHanoiMove);
         ORK_DECODE_BOOL(aDecoder, puzzleWasSolved);
     }
     return self;
@@ -702,6 +702,59 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@ %f %@", [super description], self.timestamp, self.fileResult.description];
+}
+
+@end
+
+
+@implementation ORKTimedWalkResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_DOUBLE(aCoder, distanceInMeters);
+    ORK_ENCODE_DOUBLE(aCoder, timeLimit);
+    ORK_ENCODE_DOUBLE(aCoder, duration);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_DOUBLE(aDecoder, distanceInMeters);
+        ORK_DECODE_DOUBLE(aDecoder, timeLimit);
+        ORK_DECODE_DOUBLE(aDecoder, duration);
+    }
+    return self;
+    
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            (self.duration == castObject.distanceInMeters) &&
+            (self.duration == castObject.timeLimit) &&
+            (self.duration == castObject.duration));
+}
+
+- (NSUInteger)hash {
+    return [super hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKTimedWalkResult *result = [super copyWithZone:zone];
+    result.duration = self.distanceInMeters;
+    result.duration = self.timeLimit;
+    result.duration = self.duration;
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.distanceInMeters), @(self.timeLimit), @(self.duration)];
 }
 
 @end

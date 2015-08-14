@@ -1384,6 +1384,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_BOOL(aDecoder, vertical);
         ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_IMAGE(aDecoder, maximumImage);
+        ORK_DECODE_IMAGE(aDecoder, minimumImage);
     }
     return self;
 }
@@ -1397,6 +1399,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_BOOL(aCoder, vertical);
     ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+    ORK_ENCODE_IMAGE(aCoder, maximumImage);
+    ORK_ENCODE_IMAGE(aCoder, minimumImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1413,7 +1417,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_step == castObject.step) &&
             (_defaultValue == castObject.defaultValue) &&
             ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
-            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription));
+            ORKEqualObjects(_minimumValueDescription, castObject.minimumValueDescription) &&
+            ORKEqualObjects(_maximumImage, castObject.maximumImage) &&
+            ORKEqualObjects(_minimumImage, castObject.minimumImage));
 }
 
 - (ORKQuestionType) questionType {
@@ -1557,6 +1563,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_ENUM(aDecoder, numberStyle);
         ORK_DECODE_OBJ(aDecoder, maximumValueDescription);
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
+        ORK_DECODE_IMAGE(aDecoder, maximumImage);
+        ORK_DECODE_IMAGE(aDecoder, minimumImage);
     }
     return self;
 }
@@ -1571,6 +1579,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_ENUM(aCoder, numberStyle);
     ORK_ENCODE_OBJ(aCoder, maximumValueDescription);
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
+    ORK_ENCODE_IMAGE(aCoder, maximumImage);
+    ORK_ENCODE_IMAGE(aCoder, minimumImage);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1588,7 +1598,9 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
             (_maximumFractionDigits == castObject.maximumFractionDigits) &&
             (_numberStyle == castObject.numberStyle) &&
             ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription) &&
-            ORKEqualObjects(_maximumValueDescription, castObject.maximumValueDescription)) ;
+            ORKEqualObjects(_minimumValueDescription, castObject.minimumValueDescription) &&
+            ORKEqualObjects(_maximumImage, castObject.maximumImage) &&
+            ORKEqualObjects(_minimumImage, castObject.minimumImage));
 }
 
 - (ORKQuestionType) questionType {
@@ -1718,6 +1730,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
     fmt->_emailAddress = _emailAddress;
+    fmt->_secureTextEntry = _secureTextEntry;
     return fmt;
 }
 
@@ -1773,6 +1786,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
         ORK_DECODE_BOOL(aDecoder, emailAddress);
+        ORK_DECODE_BOOL(aDecoder, secureTextEntry);
     }
     return self;
 }
@@ -1786,6 +1800,7 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
     ORK_ENCODE_BOOL(aCoder, emailAddress);
+    ORK_ENCODE_BOOL(aCoder, secureTextEntry);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1803,7 +1818,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
              self.multipleLines == castObject.multipleLines &&
-             self.isEmailAddress == castObject.isEmailAddress));
+             self.isEmailAddress == castObject.isEmailAddress) &&
+             self.secureTextEntry == castObject.secureTextEntry);
 }
 
 @end

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,87 +29,49 @@
  */
 
 
-#import "ORKTowerOfHanoiStep.h"
-#import "ORKTowerOfHanoiStepViewController.h"
-#import "ORKHelpers.h"
+#import "ORKTimedWalkStep.h"
+#import "ORKTimedWalkStepViewController.h"
 
-static const NSUInteger kMaximumNumberOfDisks = 8;
 
-@implementation ORKTowerOfHanoiStep
+@implementation ORKTimedWalkStep
 
 + (Class)stepViewControllerClass {
-    return [ORKTowerOfHanoiViewController class];
+    return [ORKTimedWalkStepViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        [self commonInit];
+        self.shouldStartTimerAutomatically = YES;
+        self.shouldShowDefaultTimer = NO;
+        self.shouldPlaySoundOnStart = YES;
+        self.shouldPlaySoundOnFinish = YES;
+        self.shouldVibrateOnStart = YES;
+        self.shouldVibrateOnFinish = YES;
     }
     return self;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (void)commonInit {
-    self.optional = YES;
-    self.numberOfDisks = 3;
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_INTEGER(aDecoder, numberOfDisks);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_INTEGER(aCoder, numberOfDisks);
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKTowerOfHanoiStep *step = [super copyWithZone:zone];
-    step.numberOfDisks = self.numberOfDisks;
-    return step;
-}
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            (self.numberOfDisks == castObject.numberOfDisks));
 }
 
 - (void)validateParameters {
     [super validateParameters];
-    if (self.numberOfDisks > kMaximumNumberOfDisks) {
-        ORK_Log_Oops(@"Having a large number of disks provides a poor user experience, consider reducing the number below %@.", @(kMaximumNumberOfDisks));
+    
+    double const ORKTimedWalkMinimumDistanceInMeters = 1.0;
+    double const ORKTimedWalkMaximumDistanceInMeters = 10000.0;
+    
+    NSTimeInterval const ORKTimedWalkMinimumDuration = 1.0;
+    
+    if (self.distanceInMeters < ORKTimedWalkMinimumDistanceInMeters ||
+        self.distanceInMeters > ORKTimedWalkMaximumDistanceInMeters) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"timed walk distance must be greater than or equal to %@ meters and less than or equal to %@ meters.", @(ORKTimedWalkMinimumDistanceInMeters), @(ORKTimedWalkMaximumDistanceInMeters)] userInfo:nil];
+    }
+    
+    if (self.stepDuration < ORKTimedWalkMinimumDuration) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"duration can not be shorter than %@ seconds.", @(ORKTimedWalkMinimumDuration)] userInfo:nil];
     }
 }
 
 - (BOOL)allowsBackNavigation {
     return NO;
-}
-
-- (BOOL)startsFinished {
-    return NO;
-}
-
-- (BOOL)shouldContinueOnFinish {
-    return YES;
 }
 
 @end
