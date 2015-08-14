@@ -57,7 +57,7 @@ static const NSUInteger kNumberOfTowers = 3;
     NSDate *_firstMoveDate;
 }
 
-#pragma Mark -- UIViewController
+#pragma mark -- UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,13 +93,13 @@ static const NSUInteger kNumberOfTowers = 3;
     [NSLayoutConstraint activateConstraints:_currentConstraints];
 }
 
-#pragma Mark -- ORKStepViewController
+#pragma mark -- ORKStepViewController
 
 - (void)skipForward {
     [self finish];
 }
 
-#pragma Mark -- ORKActiveTaskViewController
+#pragma mark -- ORKActiveTaskViewController
 
 - (ORKResult *)result {
     ORKStepResult *stepResult = [super result];
@@ -113,7 +113,7 @@ static const NSUInteger kNumberOfTowers = 3;
     return stepResult;
 }
 
-#pragma Mark -- ORKTowerOfHanoiTowerViewDataSource
+#pragma mark -- ORKTowerOfHanoiTowerViewDataSource
  
 - (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView {
      NSInteger towerIndex = [_towerViews indexOfObject:towerView];
@@ -127,7 +127,7 @@ static const NSUInteger kNumberOfTowers = 3;
      return tower.disks[index];
 }
 
-#pragma Mark -- ORKTowerOfHanoiTowerViewDelegate
+#pragma mark -- ORKTowerOfHanoiTowerViewDelegate
 
 - (void)towerOfHanoiTowerViewWasSelected:(ORKTowerOfHanoiTowerView *)towerView {
     NSInteger newSelectedIndex = [_towerViews indexOfObject:towerView];
@@ -147,7 +147,7 @@ static const NSUInteger kNumberOfTowers = 3;
     return (_selectedIndex != nil ? _towerViews[_selectedIndex.integerValue] : nil);
 }
 
-#pragma Mark -- ORKTowerOfHanoiViewController
+#pragma mark -- ORKTowerOfHanoiViewController
 
 - (NSMutableArray *)moves {
     if (_moves == nil) {
