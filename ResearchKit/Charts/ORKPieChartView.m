@@ -773,9 +773,8 @@ static const CGFloat InterAnimationDelay = 0.05;
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    if (![self.traitCollection isEqual:previousTraitCollection]) {
-        [_legendView invalidateIntrinsicContentSize];
-    }
+    [super traitCollectionDidChange:previousTraitCollection];
+    [_legendView invalidateIntrinsicContentSize]; // this method triggers a new layout pass as a side effect
 }
 
 - (void)setTitle:(NSString *)title {
