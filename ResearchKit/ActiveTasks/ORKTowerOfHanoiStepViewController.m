@@ -143,6 +143,10 @@ static const NSUInteger kNumberOfTowers = 3;
     [self evaluatePuzzle];
 }
 
+- (ORKTowerOfHanoiTowerView *)towerOfHanoiHighlightedTowerView {
+    return (_selectedIndex != nil ? _towerViews[_selectedIndex.integerValue] : nil);
+}
+
 #pragma Mark -- ORKTowerOfHanoiViewController
 
 - (NSMutableArray *)moves {
@@ -218,6 +222,12 @@ static const NSUInteger kNumberOfTowers = 3;
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
     if ([recipientTower recieveDiskFrom:donorTower]) {
         [self makeMoveFromTowerAtIndex:donorTowerIndex toTowerAtIndex:recipientTowerIndex];
+    }
+    else {
+        NSNumber *donorSize = [self towerOfHanoiView:_towerViews[donorTowerIndex] diskAtIndex:0];
+        NSNumber *recipientSize = [self towerOfHanoiView:_towerViews[recipientTowerIndex] diskAtIndex:0];
+        NSString *invalidMoveAnnouncement = [NSString stringWithFormat:ORKLocalizedString(@"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT", nil), donorSize.stringValue, recipientSize.stringValue];
+        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, invalidMoveAnnouncement);
     }
 }
 

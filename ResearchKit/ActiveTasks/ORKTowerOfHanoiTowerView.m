@@ -32,6 +32,7 @@
 #import "ORKTowerOfHanoiTowerView.h"
 #import "ORKActiveStepView.h"
 #import "ORKSkin.h"
+#import "ORKAccessibility.h"
 
 static const CGFloat kDiskHeight = 10;
 static const CGFloat kDiskSpacing = 8;
@@ -193,7 +194,8 @@ static const CGFloat kBaseSpacing = 10;
     NSMutableArray *diskViews = [NSMutableArray new];
     NSMutableArray *diskSizes = [NSMutableArray new];
     for (NSInteger index = 0 ; index < numberOfDisks ; index++) {
-        [diskSizes addObject:[self.dataSource towerOfHanoiView:self diskAtIndex:index]];
+        NSNumber *diskSize = [self.dataSource towerOfHanoiView:self diskAtIndex:index];
+        [diskSizes addObject:diskSize];
         UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
         v.backgroundColor = [self tintColor];
         v.translatesAutoresizingMaskIntoConstraints = NO;
@@ -216,6 +218,48 @@ static const CGFloat kBaseSpacing = 10;
     if (self.isTargeted) {
         _base.backgroundColor = [self tintColor];
     }
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return YES;
+}
+
+- (NSString * _Nullable)accessibilityLabel {
+    NSString *targetDisk = (self.isTargeted ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_TARGET_DISK", nil) : nil);
+    return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER", nil), targetDisk);
+}
+
+- (NSString * _Nullable)accessibilityHint {
+    if (!self.isHighLighted && [self.delegate towerOfHanoiHighlightedTowerView] != nil) {
+        return ORKLocalizedString(@"AX_TOWER_OF_HANOI_PLACE_DISK", nil);
+    }
+    
+    BOOL hasDisks = ([self.dataSource numberOfDisksInTowerOfHanoiView:self] > 0);
+    return (self.isHighLighted ? nil : (hasDisks ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_SELECT_DISK", nil) : nil));
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    UIAccessibilityTraits traits = [super accessibilityTraits];
+    if (self.isHighLighted) {
+        traits |= UIAccessibilityTraitSelected;
+    }
+    
+    // Don't echo if when a disk is placed.
+    if (!self.isHighLighted && UIAccessibilityFocusedElement(UIAccessibilityNotificationVoiceOverIdentifier) == self) {
+        traits |= UIAccessibilityTraitStartsMediaSession;
+    }
+    
+    return traits;
+}
+
+- (NSString * _Nullable)accessibilityValue {
+    NSString *value = (_diskSizes.count > 0 ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_CONTAINS", nil) : ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_EMPTY", nil));
+    for (NSNumber *diskSize in _diskSizes) {
+        value = ORKAccessibilityStringForVariables(value, diskSize.stringValue, @", ");
+    }
+    return value;
 }
 
 @end
