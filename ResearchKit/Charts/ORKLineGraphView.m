@@ -93,6 +93,7 @@
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.4].CGColor;
+    
     [self.plotView.layer addSublayer:fillLayer];
     [_fillLayers addObject:fillLayer];
     

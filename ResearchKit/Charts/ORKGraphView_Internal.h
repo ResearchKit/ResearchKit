@@ -55,9 +55,11 @@ inline static CAShapeLayer *graphLineLayer(BOOL shouldAnimate) {
     lineLayer.lineJoin = kCALineJoinRound;
     lineLayer.lineCap = kCALineCapRound;
     lineLayer.opacity = 1.0;
+
     if (shouldAnimate) {
         lineLayer.strokeEnd = 0;
     }
+    
     return lineLayer;
 }
 

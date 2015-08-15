@@ -173,6 +173,7 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
             titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
             titleTickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+
             [self.layer addSublayer:titleTickLayer];
             [_titleTickLayers addObject:titleTickLayer];
         }

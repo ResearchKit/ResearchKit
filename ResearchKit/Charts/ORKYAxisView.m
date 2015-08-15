@@ -138,6 +138,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
             CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
             tickLayer.frame = CGRectMake(tickXOrigin, tickYPosition - 0.5, ORKGraphViewAxisTickLength + 2, 1);
             tickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+
             [self.layer addSublayer:tickLayer];
             _tickLayersByFactor[factorNumber] = tickLayer;
             

@@ -115,7 +115,7 @@ ORKDefineStringKey(PopAnimationKey);
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
-    _shouldAnimate = YES;
+    _shouldAnimate = NO;
 
     [self setUpViews];
 }
@@ -128,7 +128,7 @@ ORKDefineStringKey(PopAnimationKey);
     [self addSubview:_yAxisView];
 
     _plotView = [UIView new];
-    _plotView.backgroundColor = [UIColor clearColor];
+    _plotView.backgroundColor = [UIColor whiteColor];
     [self addSubview:_plotView];
     
     [self setUpHorizontalReferenceLines];
@@ -164,6 +164,7 @@ ORKDefineStringKey(PopAnimationKey);
     _horizontalReferenceLineLayer = [CAShapeLayer layer];
     _horizontalReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
     _horizontalReferenceLineLayer.lineDashPattern = @[@6, @4];
+    
     [_plotView.layer insertSublayer:_horizontalReferenceLineLayer atIndex:0];
 }
 
@@ -177,8 +178,8 @@ ORKDefineStringKey(PopAnimationKey);
             CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
             referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
             referenceLineLayer.lineDashPattern = @[@6, @4];
+
             [_plotView.layer insertSublayer:referenceLineLayer atIndex:0];
-            
             [_verticalReferenceLineLayers addObject:referenceLineLayer];
         }
     }
