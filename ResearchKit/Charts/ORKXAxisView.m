@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -37,9 +38,9 @@
 static const CGFloat LastLabelBackgroundPadding = 10.0;
 
 @implementation ORKXAxisView {
-    NSMutableArray *_titleLabels;
     __weak ORKGraphView *_parentGraphView;
     CALayer *_lineLayer;
+    NSMutableArray *_titleLabels;
     NSMutableArray *_titleTickLayers;
 }
 
@@ -47,6 +48,7 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _titleLabels = [NSMutableArray new];
+        _titleTickLayers = [NSMutableArray new];
         _parentGraphView = parentGraphView;
         
         _lineLayer = [CALayer layer];
@@ -162,18 +164,18 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             
             [self addSubview:label];
             [_titleLabels addObject:label];
-            
-            // Add vertical tick layers above labels
-            for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
-                CALayer *titleTickLayer = [CALayer layer];
-                CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
-                titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
-                titleTickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
-                [self.layer addSublayer:titleTickLayer];
-                [_titleTickLayers addObject:titleTickLayer];
-            }
-
         }
+        
+        // Add vertical tick layers above labels
+        for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
+            CALayer *titleTickLayer = [CALayer layer];
+            CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
+            titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
+            titleTickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+            [self.layer addSublayer:titleTickLayer];
+            [_titleTickLayers addObject:titleTickLayer];
+        }
+
         [self setUpConstraints];
     }
 }
