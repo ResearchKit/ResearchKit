@@ -68,6 +68,7 @@ ORKDefineStringKey(PopAnimationKey);
 
 
 @implementation ORKGraphView {
+    UIView *_referenceLineView;
     UILabel *_noDataLabel;
     NSMutableArray *_circleViews;
     ORKXAxisView *_xAxisView;
@@ -75,7 +76,8 @@ ORKDefineStringKey(PopAnimationKey);
     BOOL _hasDataPoints;
     CGFloat _minimumValue;
     CGFloat _maximumValue;
-    NSMutableArray *_referenceLines;
+    CAShapeLayer *_horizReferenceLineLayer;
+    NSMutableArray *_vertReferenceLineLayers;
     NSMutableArray *_lineLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
@@ -109,7 +111,6 @@ ORKDefineStringKey(PopAnimationKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
-    _referenceLines = [NSMutableArray new];
     _pathLines = [NSMutableArray new];
     _circleViews = [NSMutableArray new];
     _lineLayers = [NSMutableArray new];
@@ -132,9 +133,16 @@ ORKDefineStringKey(PopAnimationKey);
     _yAxisView = [[ORKYAxisView alloc] initWithParentGraphView:self];
     [self addSubview:_yAxisView];
 
+    _referenceLineView = [UIView new];
+    _referenceLineView.backgroundColor = [UIColor clearColor];
+    [self addSubview:_referenceLineView];
+
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
+    
+    [self setUpHorizReferenceLine];
+    [self updateVertReferenceLines];
     
     _scrubberLine = [UIView new];
     _scrubberLine.backgroundColor = _scrubberLineColor;
@@ -163,6 +171,30 @@ ORKDefineStringKey(PopAnimationKey);
     [self addSubview:_scrubberThumbView];
 }
 
+- (void)setUpHorizReferenceLine {
+    _horizReferenceLineLayer = [CAShapeLayer layer];
+    _horizReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
+    _horizReferenceLineLayer.lineDashPattern = @[@6, @4];
+    [_referenceLineView.layer addSublayer:_horizReferenceLineLayer];
+}
+
+- (void)updateVertReferenceLines {
+    [_vertReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    _vertReferenceLineLayers = nil;
+    if (_showsVerticalReferenceLines) {
+        _vertReferenceLineLayers = [NSMutableArray new];
+        
+        for (int i = 1; i < [self numberOfXAxisPoints]; i++) {
+            CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
+            referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
+            referenceLineLayer.lineDashPattern = @[@6, @4];
+            [_referenceLineView.layer addSublayer:referenceLineLayer];
+            
+            [_vertReferenceLineLayers addObject:referenceLineLayer];
+        }
+    }
+}
+
 - (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
@@ -170,6 +202,7 @@ ORKDefineStringKey(PopAnimationKey);
     [self obtainDataPoints];
     [_xAxisView updateTitles];
     [_yAxisView updateTicks];
+    [self updateVertReferenceLines];
     [self setNeedsLayout];
 }
 
@@ -181,6 +214,11 @@ ORKDefineStringKey(PopAnimationKey);
 - (void)setMinimumValueImage:(UIImage *)minimumValueImage {
     _minimumValueImage = minimumValueImage;
     [_yAxisView updateTicks];
+}
+
+- (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
+    _showsVerticalReferenceLines = showsVerticalReferenceLines;
+    [self updateVertReferenceLines];
 }
 
 - (void)obtainDataPoints {
@@ -229,6 +267,8 @@ ORKDefineStringKey(PopAnimationKey);
                                   CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
     
+    _referenceLineView.frame = _plotView.frame;
+    
     _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
                                   CGRectGetMaxY(_plotView.frame),
                                   CGRectGetWidth(_plotView.frame),
@@ -241,6 +281,7 @@ ORKDefineStringKey(PopAnimationKey);
                                   yAxisViewWidth,
                                   CGRectGetHeight(_plotView.frame));
 
+    [self layoutReferenceLines];
     
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
@@ -261,26 +302,14 @@ ORKDefineStringKey(PopAnimationKey);
     _scrubberThumbView.layer.cornerRadius = _scrubberThumbView.bounds.size.height / 2;
     _scrubberLabel.font = [UIFont fontWithName:_scrubberLabel.font.familyName size:12.0f];
     
-    [self refreshGraph];
-}
-
-#pragma mark - Drawing
-
-- (void)refreshGraph {
     // Clear subviews and sublayers
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-        
-    [self drawHorizontalReferenceLines];
-    
-    if (_showsVerticalReferenceLines) {
-        [self drawVerticalReferenceLines];
-    }
     
     [_circleViews removeAllObjects];
     [_pathLines removeAllObjects];
     [_lineLayers removeAllObjects];
-
+    
     [_yAxisPoints removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         if ([_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex] <= 1) {
@@ -301,6 +330,32 @@ ORKDefineStringKey(PopAnimationKey);
         [self animateLayersSequentially];
     }
 }
+
+- (void)layoutReferenceLines {
+    CGFloat plotViewHeight = _plotView.bounds.size.height;
+    CGFloat plotViewWidth = _plotView.bounds.size.width;
+    UIBezierPath *horizReferenceLinePath = [UIBezierPath bezierPath];
+    [horizReferenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding,
+                                                    TopPadding + plotViewHeight / 2)];
+    [horizReferenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame),
+                                                       TopPadding + plotViewHeight / 2)];
+    _horizReferenceLineLayer.path = horizReferenceLinePath.CGPath;
+
+    if (_showsVerticalReferenceLines) {
+        for (int i = 0; i < _vertReferenceLineLayers.count; i++) {
+            CAShapeLayer *vertReferenceLineLayer = _vertReferenceLineLayers[i];
+            
+            CGFloat positionOnXAxis = xAxisPoint(i + 1, [self numberOfXAxisPoints], plotViewWidth);
+            UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
+            [referenceLinePath moveToPoint:CGPointMake(positionOnXAxis, 0)];
+            [referenceLinePath addLineToPoint:CGPointMake(positionOnXAxis, plotViewHeight)];
+            
+            vertReferenceLineLayer.path = referenceLinePath.CGPath;
+        }
+    }
+}
+
+#pragma mark - Drawing
 
 - (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
     if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
@@ -339,41 +394,6 @@ ORKDefineStringKey(PopAnimationKey);
                 }
             }
         }
-    }
-}
-
-- (void)drawHorizontalReferenceLines {
-    [_referenceLines removeAllObjects];
-    
-    UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
-    [referenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding, TopPadding + CGRectGetHeight(_plotView.frame)/2)];
-    [referenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame), TopPadding + CGRectGetHeight(_plotView.frame)/2)];
-    
-    CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
-    referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
-    referenceLineLayer.path = referenceLinePath.CGPath;
-    referenceLineLayer.lineDashPattern = @[@6, @4];
-    [_plotView.layer addSublayer:referenceLineLayer];
-    
-    [_referenceLines addObject:referenceLineLayer];
-}
-
-- (void)drawVerticalReferenceLines {
-    for (int i = 1; i < [self numberOfXAxisPoints]; i++) {
-        
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
-        
-        UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
-        [referenceLinePath moveToPoint:CGPointMake(positionOnXAxis, 0)];
-        [referenceLinePath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(_plotView.frame))];
-        
-        CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
-        referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
-        referenceLineLayer.path = referenceLinePath.CGPath;
-        referenceLineLayer.lineDashPattern = @[@6, @4];
-        [_plotView.layer addSublayer:referenceLineLayer];
-        
-        [_referenceLines addObject:referenceLineLayer];
     }
 }
 
