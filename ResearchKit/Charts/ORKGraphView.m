@@ -34,7 +34,7 @@
 #import "ORKGraphView.h"
 #import "ORKGraphView_Internal.h"
 #import "ORKSkin.h"
-#import "ORKAxisView.h"
+#import "ORKXAxisView.h"
 #import "ORKCircleView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
@@ -44,21 +44,22 @@ const CGFloat ORKGraphViewLeftPadding = 10.0;
 const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
 const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
-
-ORKDefineStringKey(FadeAnimationKey);
-ORKDefineStringKey(GrowAnimationKey);
-ORKDefineStringKey(PopAnimationKey);
+const CGFloat ORKGraphViewAxisTickLength = 10.0;
 
 static const CGFloat TopPadding = 0.0;
 static const CGFloat XAxisHeight = 30.0;
 static const CGFloat YAxisPaddingFactor = 0.12;
-static const CGFloat AxisMarkingRulerLength = 10.0;
 static const CGFloat FadeAnimationDuration = 0.2;
 static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
 static const CGFloat LayerAnimationDelay = 0.1;
+
+ORKDefineStringKey(FadeAnimationKey);
+ORKDefineStringKey(GrowAnimationKey);
+ORKDefineStringKey(PopAnimationKey);
+
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
 
@@ -68,12 +69,11 @@ static const CGFloat LayerAnimationDelay = 0.1;
 @implementation ORKGraphView {
     UILabel *_noDataLabel;
     NSMutableArray *_circleViews;
-    ORKAxisView *_xAxisView;
+    ORKXAxisView *_xAxisView;
     UIView *_yAxisView;
     BOOL _hasDataPoints;
     CGFloat _minimumValue;
     CGFloat _maximumValue;
-    NSMutableArray *_xAxisTitles;
     NSMutableArray *_referenceLines;
     NSMutableArray *_lineLayers;
     UILabel *_scrubberLabel;
@@ -108,7 +108,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
-    _xAxisTitles = [NSMutableArray new];
     _referenceLines = [NSMutableArray new];
     _pathLines = [NSMutableArray new];
     _circleViews = [NSMutableArray new];
@@ -120,12 +119,15 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
-    _shouldAnimate = YES;
+    _shouldAnimate = NO;
 
     [self setUpViews];
 }
 
 - (void)setUpViews {
+    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphView:self];
+    [self addSubview:_xAxisView];
+
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
@@ -162,7 +164,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
     [self calculateMinimumAndMaximumValues];
     [self obtainDataPoints];
-
+    [_xAxisView updateTitles];
     [self setNeedsLayout];
 }
 
@@ -203,7 +205,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-        
+    
     CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisPaddingFactor;
     
     // Basic Views
@@ -211,6 +213,12 @@ static const CGFloat LayerAnimationDelay = 0.1;
                                   TopPadding,
                                   CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
+    
+    _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
+                                  CGRectGetMaxY(_plotView.frame),
+                                  CGRectGetWidth(_plotView.frame),
+                                  XAxisHeight);
+
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
                                        TopPadding,
@@ -240,7 +248,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
-    [self drawXAxis];
     [self drawYAxis];
     
     [self drawHorizontalReferenceLines];
@@ -314,52 +321,6 @@ static const CGFloat LayerAnimationDelay = 0.1;
     }
 }
 
-- (void)drawXAxis {
-    // Add Title Labels
-    [_xAxisTitles removeAllObjects];
-    
-    for (int i = 0; i < [self numberOfXAxisPoints]; i++) {
-        if ([_dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
-            NSString *title = [_dataSource graphView:self titleForXAxisAtIndex:i];
-            [_xAxisTitles addObject:title];
-        }
-    }
-    
-    if (_xAxisView) {
-        [_xAxisView removeFromSuperview];
-        _xAxisView = nil;
-    }
-    
-    _xAxisView = [[ORKAxisView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_plotView.frame),
-                                                               CGRectGetMaxY(_plotView.frame),
-                                                               CGRectGetWidth(_plotView.frame),
-                                                               XAxisHeight)];
-    [_xAxisView setUpTitles:_xAxisTitles];
-    [self addSubview:_xAxisView];
-    
-    UIBezierPath *xAxisPath = [UIBezierPath bezierPath];
-    [xAxisPath moveToPoint:CGPointMake(0, 0)];
-    [xAxisPath addLineToPoint:CGPointMake(CGRectGetWidth(_xAxisView.frame), 0)];
-    
-    CAShapeLayer *xAxisLineLayer = [CAShapeLayer layer];
-    xAxisLineLayer.strokeColor = _axisColor.CGColor;
-    xAxisLineLayer.path = xAxisPath.CGPath;
-    [_xAxisView.layer addSublayer:xAxisLineLayer];
-    
-    for (NSUInteger i = 0; i < [_xAxisTitles count]; i++) {
-        CGFloat positionOnXAxis = ((CGRectGetWidth(_plotView.frame) / ([self numberOfXAxisPoints] - 1)) * i);
-        
-        UIBezierPath *rulerPath = [UIBezierPath bezierPath];
-        [rulerPath moveToPoint:CGPointMake(positionOnXAxis, - AxisMarkingRulerLength)];
-        [rulerPath addLineToPoint:CGPointMake(positionOnXAxis, 0)];
-        
-        CAShapeLayer *rulerLayer = [CAShapeLayer layer];
-        rulerLayer.strokeColor = _axisColor.CGColor;
-        rulerLayer.path = rulerPath.CGPath;
-        [_xAxisView.layer addSublayer:rulerLayer];
-    }
-}
-
 - (void)drawYAxis {
     if (_yAxisView) {
         [_yAxisView removeFromSuperview];
@@ -374,7 +335,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
                                                           axisViewWidth,
                                                           CGRectGetHeight(_plotView.frame))];
     [self addSubview:_yAxisView];
-    CGFloat rulerXPosition = CGRectGetWidth(_yAxisView.bounds) - AxisMarkingRulerLength + 2;
+    CGFloat rulerXPosition = CGRectGetWidth(_yAxisView.bounds) - ORKGraphViewAxisTickLength + 2;
     
     if (_maximumValueImage && _minimumValueImage) {
         // Use image icons as legends
@@ -420,7 +381,7 @@ static const CGFloat LayerAnimationDelay = 0.1;
             
             CGFloat yValue = _minimumValue + (_maximumValue - _minimumValue)*factor;
             
-            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(_yAxisView.frame) - AxisMarkingRulerLength, labelHeight)];
+            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(_yAxisView.frame) - ORKGraphViewAxisTickLength, labelHeight)];
             
             if (yValue != 0) {
                 axisTitleLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];

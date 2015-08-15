@@ -29,10 +29,11 @@
 */
 
 
+#import "ORKGraphView.h"
 #import "ORKHelpers.h"
 
 
-@class ORKAxisView;
+@class ORKXAxisView;
 
 typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
     ORkGraphAnimationTypeNone,
@@ -45,6 +46,7 @@ extern const CGFloat ORKGraphViewLeftPadding;
 extern const CGFloat ORKGraphViewGrowAnimationDuration;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
+extern const CGFloat ORKGraphViewAxisTickLength;
 
 
 static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {

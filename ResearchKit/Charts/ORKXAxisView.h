@@ -32,8 +32,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ORKAxisView : UIView
+@class ORKGraphView;
 
-- (void)setUpTitles:(NSArray *)titles;
+@interface ORKXAxisView : UIView
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView NS_DESIGNATED_INITIALIZER;
+
+- (void)updateTitles;
 
 @end
