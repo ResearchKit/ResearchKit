@@ -71,8 +71,8 @@ ORKDefineStringKey(PopAnimationKey);
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
-    CGFloat _minimumValue;
-    CGFloat _maximumValue;
+    CGFloat _minValue;
+    CGFloat _maxValue;
     CAShapeLayer *_horizReferenceLineLayer;
     NSMutableArray *_vertReferenceLineLayers;
     NSMutableArray *_pointLayers;
@@ -190,8 +190,8 @@ ORKDefineStringKey(PopAnimationKey);
 - (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
-    [self calculateMinimumAndMaximumValues];
     [self obtainDataPoints];
+    [self calculateMinAndMaxValues];
     [_xAxisView updateTitles];
     [_yAxisView updateTicks];
     [self updateVertReferenceLines];
@@ -258,7 +258,7 @@ ORKDefineStringKey(PopAnimationKey);
                                   TopPadding,
                                   CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
-        
+    
     _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
                                   CGRectGetMaxY(_plotView.frame),
                                   CGRectGetWidth(_plotView.frame),
@@ -352,7 +352,7 @@ ORKDefineStringKey(PopAnimationKey);
     if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
         [self drawLinesForPlotIndex:plotIndex];
     }
-    [self drawPointCirclesForPlotIndex:plotIndex];
+    [self drawPointsForPlotIndex:plotIndex];
 }
 
 static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
@@ -367,7 +367,7 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     return circleLayer;
 }
 
-- (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
+- (void)drawPointsForPlotIndex:(NSInteger)plotIndex {
     UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
     for (NSUInteger i = 0; i < ((NSArray *)_yAxisPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
@@ -661,12 +661,12 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
         
         if (dataPointValue.isUnset) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight;
-        } else if (_minimumValue == _maximumValue) {
+        } else if (_minValue == _maxValue) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
         } else {
-            CGFloat range = _maximumValue - _minimumValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * viewHeight;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * viewHeight;
+            CGFloat range = _maxValue - _minValue;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minValue) / range * viewHeight;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minValue) / range * viewHeight;
             
             normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
             normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
@@ -690,46 +690,48 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     return validPosition;
 }
 
-- (void)calculateMinimumAndMaximumValues {
-    _minimumValue = ORKCGFloatInvalidValue;
-    _maximumValue = ORKCGFloatInvalidValue;
+- (void)calculateMinAndMaxValues {
+    _minValue = ORKCGFloatInvalidValue;
+    _maxValue = ORKCGFloatInvalidValue;
     
     BOOL minimumValueProvided = NO;
     BOOL maximumValueProvided = NO;
     
     if ([_dataSource respondsToSelector:@selector(minimumValueForGraphView:)]) {
-        _minimumValue = [_dataSource minimumValueForGraphView:self];
+        _minValue = [_dataSource minimumValueForGraphView:self];
         minimumValueProvided = YES;
     }
     
     if ([_dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
-        _maximumValue = [_dataSource maximumValueForGraphView:self];
+        _maxValue = [_dataSource maximumValueForGraphView:self];
         maximumValueProvided = YES;
     }
     
     if (!minimumValueProvided || !maximumValueProvided) {
         NSInteger numberOfPlots = [self numberOfPlots];
         for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-            NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
+            NSInteger numberOfPlotPoints = ((NSMutableArray *)_dataPoints[plotIndex]).count;
             for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
-                ORKRangedPoint *point = [_dataSource graphView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+                ORKRangedPoint *point = _dataPoints[plotIndex][pointIndex];
                 if (!minimumValueProvided &&
-                    ((_minimumValue == ORKCGFloatInvalidValue) || (point.minimumValue < _minimumValue))) {
-                    _minimumValue = point.minimumValue;
+                    point.minimumValue != ORKCGFloatInvalidValue &&
+                    ((_minValue == ORKCGFloatInvalidValue) || (point.minimumValue < _minValue))) {
+                    _minValue = point.minimumValue;
                 }
                 if (!maximumValueProvided &&
-                    ((_maximumValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maximumValue))) {
-                    _maximumValue = point.maximumValue;
+                    point.maximumValue != ORKCGFloatInvalidValue &&
+                    ((_maxValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maxValue))) {
+                    _maxValue = point.maximumValue;
                 }
             }
         }
     }
     
-    if (_minimumValue == ORKCGFloatInvalidValue) {
-        _minimumValue = 0;
+    if (_minValue == ORKCGFloatInvalidValue) {
+        _minValue = 0;
     }
-    if (_maximumValue == ORKCGFloatInvalidValue) {
-        _maximumValue = 0;
+    if (_maxValue == ORKCGFloatInvalidValue) {
+        _maxValue = 0;
     }
 }
 
