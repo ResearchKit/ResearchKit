@@ -35,6 +35,7 @@
 #import "ORKGraphView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKXAxisView.h"
+#import "ORKYAxisView.h"
 #import "ORKCircleView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
@@ -70,7 +71,7 @@ ORKDefineStringKey(PopAnimationKey);
     UILabel *_noDataLabel;
     NSMutableArray *_circleViews;
     ORKXAxisView *_xAxisView;
-    UIView *_yAxisView;
+    ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
     CGFloat _minimumValue;
     CGFloat _maximumValue;
@@ -128,6 +129,9 @@ ORKDefineStringKey(PopAnimationKey);
     _xAxisView = [[ORKXAxisView alloc] initWithParentGraphView:self];
     [self addSubview:_xAxisView];
 
+    _yAxisView = [[ORKYAxisView alloc] initWithParentGraphView:self];
+    [self addSubview:_yAxisView];
+
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
@@ -165,7 +169,18 @@ ORKDefineStringKey(PopAnimationKey);
     [self calculateMinimumAndMaximumValues];
     [self obtainDataPoints];
     [_xAxisView updateTitles];
+    [_yAxisView updateTicks];
     [self setNeedsLayout];
+}
+
+- (void)setMaximumValueImage:(UIImage *)maximumValueImage {
+    _maximumValueImage = maximumValueImage;
+    [_yAxisView updateTicks];
+}
+
+- (void)setMinimumValueImage:(UIImage *)minimumValueImage {
+    _minimumValueImage = minimumValueImage;
+    [_yAxisView updateTicks];
 }
 
 - (void)obtainDataPoints {
@@ -219,6 +234,14 @@ ORKDefineStringKey(PopAnimationKey);
                                   CGRectGetWidth(_plotView.frame),
                                   XAxisHeight);
 
+    CGFloat yAxisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
+    CGFloat yAxisViewWidth = CGRectGetWidth(self.frame) * YAxisPaddingFactor;
+    _yAxisView.frame = CGRectMake(yAxisViewXPosition,
+                                  TopPadding,
+                                  yAxisViewWidth,
+                                  CGRectGetHeight(_plotView.frame));
+
+    
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
                                        TopPadding,
@@ -247,9 +270,7 @@ ORKDefineStringKey(PopAnimationKey);
     // Clear subviews and sublayers
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    
-    [self drawYAxis];
-    
+        
     [self drawHorizontalReferenceLines];
     
     if (_showsVerticalReferenceLines) {
@@ -317,81 +338,6 @@ ORKDefineStringKey(PopAnimationKey);
                     circleView.alpha = 0;
                 }
             }
-        }
-    }
-}
-
-- (void)drawYAxis {
-    if (_yAxisView) {
-        [_yAxisView removeFromSuperview];
-        _yAxisView = nil;
-    }
-    
-    CGFloat axisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
-    CGFloat axisViewWidth = CGRectGetWidth(self.frame)*YAxisPaddingFactor;
-    
-    _yAxisView = [[UIView alloc] initWithFrame:CGRectMake(axisViewXPosition,
-                                                          TopPadding,
-                                                          axisViewWidth,
-                                                          CGRectGetHeight(_plotView.frame))];
-    [self addSubview:_yAxisView];
-    CGFloat rulerXPosition = CGRectGetWidth(_yAxisView.bounds) - ORKGraphViewAxisTickLength + 2;
-    
-    if (_maximumValueImage && _minimumValueImage) {
-        // Use image icons as legends
-        CGFloat width = CGRectGetWidth(_yAxisView.frame) / 2;
-        CGFloat verticalPadding = 3.f;
-        
-        UIImageView *maxImageView = [[UIImageView alloc] initWithImage:_maximumValueImage];
-        maxImageView.contentMode = UIViewContentModeScaleAspectFit;
-        maxImageView.frame = CGRectMake(CGRectGetWidth(_yAxisView.bounds) - width, -width/2, width, width);
-        [_yAxisView addSubview:maxImageView];
-        
-        UIImageView *minImageView = [[UIImageView alloc] initWithImage:_minimumValueImage];
-        minImageView.contentMode = UIViewContentModeScaleAspectFit;
-        minImageView.frame = CGRectMake(CGRectGetWidth(_yAxisView.bounds) - width, CGRectGetMaxY(_yAxisView.bounds) - width - verticalPadding, width, width);
-        [_yAxisView addSubview:minImageView];
-        
-    } else {
-        
-        NSArray *yAxisLabelFactors;
-        
-        if (_minimumValue == _maximumValue) {
-            yAxisLabelFactors = @[@0.5f];
-        } else {
-            yAxisLabelFactors = @[@0.2f, @1.0f];
-        }
-        
-        for (NSUInteger i = 0; i < [yAxisLabelFactors count]; i++) {
-            
-            CGFloat factor = [yAxisLabelFactors[i] floatValue];
-            CGFloat positionOnYAxis = CGRectGetHeight(_plotView.frame) * (1 - factor);
-            
-            UIBezierPath *rulerPath = [UIBezierPath bezierPath];
-            [rulerPath moveToPoint:CGPointMake(rulerXPosition, positionOnYAxis)];
-            [rulerPath addLineToPoint:CGPointMake(CGRectGetMaxX(_yAxisView.bounds), positionOnYAxis)];
-            
-            CAShapeLayer *rulerLayer = [CAShapeLayer layer];
-            rulerLayer.strokeColor = _axisColor.CGColor;
-            rulerLayer.path = rulerPath.CGPath;
-            [_yAxisView.layer addSublayer:rulerLayer];
-            
-            CGFloat labelHeight = 20;
-            CGFloat labelYPosition = positionOnYAxis - labelHeight/2;
-            
-            CGFloat yValue = _minimumValue + (_maximumValue - _minimumValue)*factor;
-            
-            UILabel *axisTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, labelYPosition, CGRectGetWidth(_yAxisView.frame) - ORKGraphViewAxisTickLength, labelHeight)];
-            
-            if (yValue != 0) {
-                axisTitleLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
-            }
-            axisTitleLabel.backgroundColor = [UIColor clearColor];
-            axisTitleLabel.textColor = _axisTitleColor;
-            axisTitleLabel.textAlignment = NSTextAlignmentRight;
-            axisTitleLabel.font = _axisTitleFont;
-            axisTitleLabel.minimumScaleFactor = 0.8;
-            [_yAxisView addSubview:axisTitleLabel];
         }
     }
 }

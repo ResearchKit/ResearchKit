@@ -47,8 +47,6 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
 - (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        _titleLabels = [NSMutableArray new];
-        _titleTickLayers = [NSMutableArray new];
         _parentGraphView = parentGraphView;
         
         _lineLayer = [CALayer layer];
@@ -60,12 +58,12 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat viewWidth = self.bounds.size.width;
-    _lineLayer.frame = CGRectMake(0, -0.5, viewWidth, 1);
+    CGFloat width = self.bounds.size.width;
+    _lineLayer.frame = CGRectMake(0, -0.5, width, 1);
     NSUInteger index = 0;
     NSUInteger numberOfTitleLabels = _titleTickLayers.count;
     for (CALayer *titleTickLayer in _titleTickLayers) {
-        CGFloat positionOnXAxis = xAxisPoint(index, numberOfTitleLabels, viewWidth);
+        CGFloat positionOnXAxis = xAxisPoint(index, numberOfTitleLabels, width);
         titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
         index++;
     }
@@ -136,11 +134,14 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
 
 - (void)updateTitles {
     [_titleLabels makeObjectsPerformSelector:@selector(removeFromSuperview)]; // Old constraints automatically removed when removing the views
-    [_titleLabels removeAllObjects];
     [_titleTickLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [_titleTickLayers removeAllObjects];
+    _titleLabels = nil;
+    _titleTickLayers = nil;
     
     if ([_parentGraphView.dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
+        _titleLabels = [NSMutableArray new];
+        _titleTickLayers = [NSMutableArray new];
+
         NSUInteger numberOfTitleLabels = [_parentGraphView numberOfXAxisPoints];
         for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
             NSString *title = [_parentGraphView.dataSource graphView:_parentGraphView titleForXAxisAtIndex:i];
