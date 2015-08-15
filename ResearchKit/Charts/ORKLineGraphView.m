@@ -61,6 +61,9 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
+    NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
+    [self.lineLayers addObject:currentPlotLineLayers];
+
     BOOL previousPointExists = NO;
     BOOL emptyDataPresent = NO;
     for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
@@ -85,7 +88,7 @@
         }
         
         [self.plotView.layer addSublayer:lineLayer];
-        [self.lineLayers addObject:lineLayer];
+        [currentPlotLineLayers addObject:lineLayer];
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
@@ -98,53 +101,47 @@
     }
 }
 
-- (void)layoutLineLayers {
+- (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger lineLayerIndex = 0;
-    NSUInteger fillLayerIndex = 0;
-    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
-        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
-            UIBezierPath *fillPath = [UIBezierPath bezierPath];
-            CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-            ORKRangedPoint *positionOnYAxis = nil;
-            BOOL previousPointExists = NO;
-            for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
-                if (((ORKRangedPoint *)self.dataPoints[plotIndex][i]).isUnset) {
-                    continue;
-                }
-                
-                UIBezierPath *linePath = [UIBezierPath bezierPath];
-                
-                if (positionOnXAxis != ORKCGFloatInvalidValue) {
-                    previousPointExists = YES;
-                    [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-                    if ([fillPath isEmpty]) {
-                        [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
-                    }
-                    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-                }
-                
-                positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-                positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[plotIndex][i];
-                
-                if (!previousPointExists) {
-                    continue;
-                }
-                
-                [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-                [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-                
-                CAShapeLayer *lineLayer = self.lineLayers[lineLayerIndex];
-                lineLayer.path = linePath.CGPath;
-                lineLayerIndex++;
-            }
-            
-            [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
-            
-            CAShapeLayer *fillLayer = _fillLayers[fillLayerIndex];
-            fillLayer.path = fillPath.CGPath;
-            fillLayerIndex++;
+    UIBezierPath *fillPath = [UIBezierPath bezierPath];
+    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
+    ORKRangedPoint *positionOnYAxis = nil;
+    BOOL previousPointExists = NO;
+    for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
+        if (((ORKRangedPoint *)self.dataPoints[plotIndex][i]).isUnset) {
+            continue;
         }
+        
+        UIBezierPath *linePath = [UIBezierPath bezierPath];
+        
+        if (positionOnXAxis != ORKCGFloatInvalidValue) {
+            previousPointExists = YES;
+            [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+            if ([fillPath isEmpty]) {
+                [fillPath moveToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+            }
+            [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+        }
+        
+        positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
+        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[plotIndex][i];
+        
+        if (!previousPointExists) {
+            continue;
+        }
+        
+        [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+        [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+        
+        CAShapeLayer *lineLayer = self.lineLayers[plotIndex][lineLayerIndex];
+        lineLayer.path = linePath.CGPath;
+        lineLayerIndex++;
     }
+    
+    [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
+    
+    CAShapeLayer *fillLayer = _fillLayers[plotIndex];
+    fillLayer.path = fillPath.CGPath;
 }
 
 #pragma mark - Graph Calculations

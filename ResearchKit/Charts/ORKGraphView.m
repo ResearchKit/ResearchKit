@@ -115,7 +115,7 @@ ORKDefineStringKey(PopAnimationKey);
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
-    _shouldAnimate = NO;
+    _shouldAnimate = YES;
 
     [self setUpViews];
 }
@@ -360,13 +360,15 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
+    NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
+    [_pointLayers addObject:currentPlotPointLayers];
     UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
     for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         if (!dataPoint.isUnset) {
             CAShapeLayer *pointLayer = graphPointLayer(tintColor);
             [_plotView.layer addSublayer:pointLayer];
-            [_pointLayers addObject:pointLayer];
+            [currentPlotPointLayers addObject:pointLayer];
             if (_shouldAnimate) {
                 pointLayer.opacity = 0;
             }
@@ -374,7 +376,7 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
             if (!dataPoint.hasEmptyRange) {
                 CAShapeLayer *pointLayer = graphPointLayer(tintColor);
                 [_plotView.layer addSublayer:pointLayer];
-                [_pointLayers addObject:pointLayer];
+                [currentPlotPointLayers addObject:pointLayer];
                 if (_shouldAnimate) {
                     pointLayer.opacity = 0;
                 }
@@ -384,24 +386,28 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)layoutPointLayers {
-    NSUInteger pointLayerIndex = 0;
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
-        [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
-        for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_dataPoints[plotIndex]).count; pointIndex++) {
-            ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][pointIndex];
-            if (!dataPointValue.isUnset) {
-                CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
-                positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-                ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][pointIndex];
-                CAShapeLayer *pointLayer = _pointLayers[pointLayerIndex];
-                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
+        [self layoutPointLayersForPlotIndex:plotIndex];
+    }
+}
+
+- (void)layoutPointLayersForPlotIndex:(NSInteger)plotIndex {
+    NSUInteger pointLayerIndex = 0;
+    [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
+    for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_dataPoints[plotIndex]).count; pointIndex++) {
+        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][pointIndex];
+        if (!dataPointValue.isUnset) {
+            CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
+            positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+            ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][pointIndex];
+            CAShapeLayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
+            pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
+            pointLayerIndex++;
+            
+            if (!positionOnYAxis.hasEmptyRange) {
+                CAShapeLayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
+                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
                 pointLayerIndex++;
-                
-                if (!positionOnYAxis.hasEmptyRange) {
-                    CAShapeLayer *pointLayer = _pointLayers[pointLayerIndex];
-                    pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
-                    pointLayerIndex++;
-                }
             }
         }
     }
@@ -414,6 +420,14 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
             [self updateLineLayersForPlotIndex:plotIndex];
+        }
+    }
+}
+
+- (void)layoutLineLayers {
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
+            [self layoutLineLayersForPlotIndex:plotIndex];
         }
     }
 }
@@ -604,16 +618,20 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = LayerAnimationDelay;
     
-    for (NSUInteger i = 0; i < _pointLayers.count; i++) {
-        CAShapeLayer *layer = _pointLayers[i];
-        [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += LayerAnimationDelay;
+    for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
+        for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_pointLayers[plotIndex]).count; pointIndex++) {
+            CAShapeLayer *layer = _pointLayers[plotIndex][pointIndex];
+            [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
+            delay += LayerAnimationDelay;
+        }
     }
     
-    for (NSUInteger i = 0; i < _lineLayers.count; i++) {
-        CAShapeLayer *layer = _lineLayers[i];
-        [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
-        delay += ORKGraphViewGrowAnimationDuration;
+    for (NSUInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
+        for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_lineLayers[plotIndex]).count; pointIndex++) {
+            CAShapeLayer *layer = _lineLayers[plotIndex][pointIndex];
+            [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
+            delay += ORKGraphViewGrowAnimationDuration;
+        }
     }
     return delay;
 }
@@ -793,7 +811,7 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     [self throwOverrideException];
 }
 
-- (void)layoutLineLayers {
+- (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
 }
 

@@ -47,7 +47,7 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether to draw a line to connect the `minimumValue` and `maximumValue` of each `ORKRangedPoint
  represented by the graphView.
  */
-@property (nonatomic) BOOL shouldConnectRanges;
+@property (nonatomic) BOOL drawsConnectedRanges;
 
 @end
 
