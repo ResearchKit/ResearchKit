@@ -67,7 +67,6 @@ ORKDefineStringKey(PopAnimationKey);
 
 
 @implementation ORKGraphView {
-    UIView *_referenceLineView;
     UILabel *_noDataLabel;
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
@@ -131,10 +130,6 @@ ORKDefineStringKey(PopAnimationKey);
     _yAxisView = [[ORKYAxisView alloc] initWithParentGraphView:self];
     [self addSubview:_yAxisView];
 
-    _referenceLineView = [UIView new];
-    _referenceLineView.backgroundColor = [UIColor clearColor];
-    [self addSubview:_referenceLineView];
-
     _plotView = [UIView new];
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
@@ -172,7 +167,7 @@ ORKDefineStringKey(PopAnimationKey);
     _horizReferenceLineLayer = [CAShapeLayer layer];
     _horizReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
     _horizReferenceLineLayer.lineDashPattern = @[@6, @4];
-    [_referenceLineView.layer addSublayer:_horizReferenceLineLayer];
+    [_plotView.layer addSublayer:_horizReferenceLineLayer];
 }
 
 - (void)updateVertReferenceLines {
@@ -185,7 +180,7 @@ ORKDefineStringKey(PopAnimationKey);
             CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
             referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
             referenceLineLayer.lineDashPattern = @[@6, @4];
-            [_referenceLineView.layer addSublayer:referenceLineLayer];
+            [_plotView.layer addSublayer:referenceLineLayer];
             
             [_vertReferenceLineLayers addObject:referenceLineLayer];
         }
@@ -263,9 +258,7 @@ ORKDefineStringKey(PopAnimationKey);
                                   TopPadding,
                                   CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
                                   CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
-    
-    _referenceLineView.frame = _plotView.frame;
-    
+        
     _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
                                   CGRectGetMaxY(_plotView.frame),
                                   CGRectGetWidth(_plotView.frame),
