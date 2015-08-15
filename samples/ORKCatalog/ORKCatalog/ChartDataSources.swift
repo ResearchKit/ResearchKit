@@ -71,6 +71,7 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     var plotPoints =
     [
         [
+            ORKRangedPoint(),
             ORKRangedPoint(value: 20),
             ORKRangedPoint(value: 25),
             ORKRangedPoint(),
@@ -121,6 +122,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     var plotPoints =
     [
         [
+            ORKRangedPoint(),
             ORKRangedPoint(minimumValue: 0, maximumValue: 2),
             ORKRangedPoint(minimumValue: 1, maximumValue: 3),
             ORKRangedPoint(minimumValue: 2, maximumValue: 6),
