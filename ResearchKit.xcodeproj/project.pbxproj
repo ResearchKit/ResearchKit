@@ -383,8 +383,6 @@
 		BCB6E6611B7D534C000D5B34 /* ORKLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E65A1B7D534C000D5B34 /* ORKLineGraphView.m */; };
 		BCB6E6661B7D535F000D5B34 /* ORKXAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */; };
 		BCB6E6671B7D535F000D5B34 /* ORKXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */; };
-		BCB6E6681B7D535F000D5B34 /* ORKCircleView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6641B7D535F000D5B34 /* ORKCircleView.h */; };
-		BCB6E6691B7D535F000D5B34 /* ORKCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6651B7D535F000D5B34 /* ORKCircleView.m */; };
 		BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */; };
 		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; };
@@ -821,8 +819,6 @@
 		BCB6E65A1B7D534C000D5B34 /* ORKLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKLineGraphView.m; path = Charts/ORKLineGraphView.m; sourceTree = "<group>"; };
 		BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKXAxisView.h; path = Charts/ORKXAxisView.h; sourceTree = "<group>"; };
 		BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKXAxisView.m; path = Charts/ORKXAxisView.m; sourceTree = "<group>"; };
-		BCB6E6641B7D535F000D5B34 /* ORKCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKCircleView.h; path = Charts/ORKCircleView.h; sourceTree = "<group>"; };
-		BCB6E6651B7D535F000D5B34 /* ORKCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKCircleView.m; path = Charts/ORKCircleView.m; sourceTree = "<group>"; };
 		BCB6E66A1B7D537B000D5B34 /* ORKRangedPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKRangedPoint.h; path = Charts/ORKRangedPoint.h; sourceTree = "<group>"; };
 		BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKRangedPoint.m; path = Charts/ORKRangedPoint.m; sourceTree = "<group>"; };
 		BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKYAxisView.h; path = Charts/ORKYAxisView.h; sourceTree = "<group>"; };
@@ -909,8 +905,6 @@
 				BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */,
 				BCB6E6621B7D535F000D5B34 /* ORKXAxisView.h */,
 				BCB6E6631B7D535F000D5B34 /* ORKXAxisView.m */,
-				BCB6E6641B7D535F000D5B34 /* ORKCircleView.h */,
-				BCB6E6651B7D535F000D5B34 /* ORKCircleView.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1879,7 +1873,6 @@
 				86C40DCA1A8D7C5C00081FAC /* ORKTaskViewController.h in Headers */,
 				86C40C7E1A8D7C5C00081FAC /* ORKActiveStep.h in Headers */,
 				BCB6E65E1B7D534C000D5B34 /* ORKGraphView.h in Headers */,
-				BCB6E6681B7D535F000D5B34 /* ORKCircleView.h in Headers */,
 				86C40DD21A8D7C5C00081FAC /* ORKTextButton.h in Headers */,
 				86C40CD41A8D7C5C00081FAC /* ORKTableContainerView.h in Headers */,
 				86C40D0E1A8D7C5C00081FAC /* ORKCustomStepView_Internal.h in Headers */,
@@ -2322,7 +2315,6 @@
 				86C40D361A8D7C5C00081FAC /* ORKHelpers.m in Sources */,
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
 				86C40C8E1A8D7C5C00081FAC /* ORKActiveStepViewController.m in Sources */,
-				BCB6E6691B7D535F000D5B34 /* ORKCircleView.m in Sources */,
 				B183A5011A8535D100C76870 /* (null) in Sources */,
 				86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */,
 				25ECC0961AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.m in Sources */,

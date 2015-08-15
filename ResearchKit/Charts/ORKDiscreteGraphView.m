@@ -33,7 +33,6 @@
 #import "ORKDiscreteGraphView.h"
 #import "ORKGraphView_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKCircleView.h"
 #import "ORKRangedPoint.h"
 
 

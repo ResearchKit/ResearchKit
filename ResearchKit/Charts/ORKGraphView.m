@@ -36,7 +36,6 @@
 #import "ORKSkin.h"
 #import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
-#import "ORKCircleView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
 
@@ -55,7 +54,7 @@ static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
-static const CGFloat LayerAnimationDelay = 0.1;
+static const CGFloat LayerAnimationDelay = 0.02;
 
 ORKDefineStringKey(FadeAnimationKey);
 ORKDefineStringKey(GrowAnimationKey);
@@ -70,7 +69,6 @@ ORKDefineStringKey(PopAnimationKey);
 @implementation ORKGraphView {
     UIView *_referenceLineView;
     UILabel *_noDataLabel;
-    NSMutableArray *_circleViews;
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
@@ -78,6 +76,7 @@ ORKDefineStringKey(PopAnimationKey);
     CGFloat _maximumValue;
     CAShapeLayer *_horizReferenceLineLayer;
     NSMutableArray *_vertReferenceLineLayers;
+    NSMutableArray *_pointLayers;
     NSMutableArray *_lineLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
@@ -111,7 +110,7 @@ ORKDefineStringKey(PopAnimationKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
-    _circleViews = [NSMutableArray new];
+    _pointLayers = [NSMutableArray new];
     _lineLayers = [NSMutableArray new];
     self.tintColor = [UIColor colorWithRed:244/255.f green:190/255.f blue:74/255.f alpha:1.f];
     _hasDataPoints = NO;
@@ -301,10 +300,12 @@ ORKDefineStringKey(PopAnimationKey);
     _scrubberLabel.font = [UIFont fontWithName:_scrubberLabel.font.familyName size:12.0f];
     
     // Clear subviews and sublayers
-    [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-    [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_pointLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    [_pointLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_lineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    [_lineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
-    [_circleViews removeAllObjects];
+    [_pointLayers removeAllObjects];
     [_lineLayers removeAllObjects];
     
     [_yAxisPoints removeAllObjects];
@@ -361,9 +362,20 @@ ORKDefineStringKey(PopAnimationKey);
     [self drawPointCirclesForPlotIndex:plotIndex];
 }
 
-- (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
+static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     const CGFloat pointSize = ORKGraphViewPointAndLineSize;
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-pointSize/2, -pointSize/2, pointSize, pointSize)];
+    CAShapeLayer *circleLayer = [CAShapeLayer new];
+    circleLayer.path = circlePath.CGPath;
+    circleLayer.fillColor = [UIColor whiteColor].CGColor;
+    circleLayer.strokeColor = tintColor.CGColor;
+    circleLayer.lineWidth = 2.0;
     
+    return circleLayer;
+}
+
+- (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
+    UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
     for (NSUInteger i = 0; i < ((NSArray *)_yAxisPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, _plotView.bounds.size.width);
@@ -371,23 +383,21 @@ ORKDefineStringKey(PopAnimationKey);
         
         if (!dataPointValue.isUnset) {
             ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][i];
-            ORKCircleView *circleView = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
-            circleView.tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
-            circleView.center = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
-            [_plotView.layer addSublayer:circleView.layer];
-            [_circleViews addObject:circleView];
+            CAShapeLayer *pointLayer = graphPointLayer(tintColor);
+            pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
+            [_plotView.layer addSublayer:pointLayer];
+            [_pointLayers addObject:pointLayer];
             if (_shouldAnimate) {
-                circleView.alpha = 0;
+                pointLayer.opacity = 0;
             }
             
             if (!positionOnYAxis.hasEmptyRange) {
-                ORKCircleView *circleView = [[ORKCircleView alloc] initWithFrame:CGRectMake(0, 0, pointSize, pointSize)];
-                circleView.tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
-                circleView.center = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
-                [_plotView.layer addSublayer:circleView.layer];
-                [_circleViews addObject:circleView];
+                CAShapeLayer *pointLayer = graphPointLayer(tintColor);
+                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
+                [_plotView.layer addSublayer:pointLayer];
+                [_pointLayers addObject:pointLayer];
                 if (_shouldAnimate) {
-                    circleView.alpha = 0;
+                    pointLayer.opacity = 0;
                 }
             }
         }
@@ -580,13 +590,13 @@ ORKDefineStringKey(PopAnimationKey);
 - (CGFloat)animateLayersSequentially {
     CGFloat delay = LayerAnimationDelay;
     
-    for (NSUInteger i = 0; i < [_circleViews count]; i++) {
-        CAShapeLayer *layer = [_circleViews[i] shapeLayer];
+    for (NSUInteger i = 0; i < _pointLayers.count; i++) {
+        CAShapeLayer *layer = _pointLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
         delay += LayerAnimationDelay;
     }
     
-    for (NSUInteger i = 0; i < [_lineLayers count]; i++) {
+    for (NSUInteger i = 0; i < _lineLayers.count; i++) {
         CAShapeLayer *layer = _lineLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;

@@ -32,7 +32,6 @@
  
 #import "ORKLineGraphView.h"
 #import "ORKGraphView_Internal.h"
-#import "ORKCircleView.h"
 #import "ORKHelpers.h"
 #import "ORKRangedPoint.h"
 
@@ -46,6 +45,12 @@
 - (void)sharedInit {
     [super sharedInit];
     _fillLayers = [NSMutableArray new];
+}
+
+- (void)layoutSubviews {
+    [_fillLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    [_fillLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [super layoutSubviews];
 }
 
 #pragma mark - Drawing
