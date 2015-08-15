@@ -49,6 +49,18 @@ extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphViewAxisTickLength;
 
 
+inline static CAShapeLayer *graphLineLayer(BOOL shouldAnimate) {
+    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    lineLayer.fillColor = [UIColor clearColor].CGColor;
+    lineLayer.lineJoin = kCALineJoinRound;
+    lineLayer.lineCap = kCALineCapRound;
+    lineLayer.opacity = 1.0;
+    if (shouldAnimate) {
+        lineLayer.strokeEnd = 0;
+    }
+    return lineLayer;
+}
+
 static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
     return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
 }
@@ -56,15 +68,17 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 @interface ORKGraphView ()
 
+@property (nonatomic) NSMutableArray *lineLayers;
+
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic, strong) NSMutableArray *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray *dataPoints; // Actual data
 
-@property (nonatomic, strong) NSMutableArray *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray *yAxisPoints; // Normalized for the plot view height
 
-@property (nonatomic, strong) UIView *plotView; // Holds the plots
+@property (nonatomic) UIView *plotView; // Holds the plots
 
-@property (nonatomic, strong) UIView *scrubberLine;
+@property (nonatomic) UIView *scrubberLine;
 
 @property (nonatomic) BOOL shouldAnimate;
 
@@ -82,8 +96,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
 
-- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex path:(CGPathRef)path;
-
 - (CGFloat)animateLayersSequentially;
 
 - (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay;
@@ -95,5 +107,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
+
+- (void)updateLineLayers;
 
 @end

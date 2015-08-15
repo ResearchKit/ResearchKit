@@ -71,12 +71,9 @@ ORKDefineStringKey(PopAnimationKey);
     ORKXAxisView *_xAxisView;
     ORKYAxisView *_yAxisView;
     BOOL _hasDataPoints;
-    CGFloat _minValue;
-    CGFloat _maxValue;
-    CAShapeLayer *_horizReferenceLineLayer;
-    NSMutableArray *_vertReferenceLineLayers;
+    CAShapeLayer *_horizontalReferenceLineLayer;
+    NSMutableArray *_verticalReferenceLineLayers;
     NSMutableArray *_pointLayers;
-    NSMutableArray *_lineLayers;
     UILabel *_scrubberLabel;
     UIView *_scrubberThumbView;
 }
@@ -134,7 +131,7 @@ ORKDefineStringKey(PopAnimationKey);
     _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
     
-    [self setUpHorizReferenceLine];
+    [self setUpHorizontalReferenceLines];
     
     _scrubberLine = [UIView new];
     _scrubberLine.backgroundColor = _scrubberLineColor;
@@ -163,26 +160,26 @@ ORKDefineStringKey(PopAnimationKey);
     [self addSubview:_scrubberThumbView];
 }
 
-- (void)setUpHorizReferenceLine {
-    _horizReferenceLineLayer = [CAShapeLayer layer];
-    _horizReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
-    _horizReferenceLineLayer.lineDashPattern = @[@6, @4];
-    [_plotView.layer addSublayer:_horizReferenceLineLayer];
+- (void)setUpHorizontalReferenceLines {
+    _horizontalReferenceLineLayer = [CAShapeLayer layer];
+    _horizontalReferenceLineLayer.strokeColor = _referenceLineColor.CGColor;
+    _horizontalReferenceLineLayer.lineDashPattern = @[@6, @4];
+    [_plotView.layer insertSublayer:_horizontalReferenceLineLayer atIndex:0];
 }
 
-- (void)updateVertReferenceLines {
-    [_vertReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    _vertReferenceLineLayers = nil;
+- (void)updateVerticalReferenceLines {
+    [_verticalReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    _verticalReferenceLineLayers = nil;
     if (_showsVerticalReferenceLines) {
-        _vertReferenceLineLayers = [NSMutableArray new];
+        _verticalReferenceLineLayers = [NSMutableArray new];
         
         for (int i = 1; i < [self numberOfXAxisPoints]; i++) {
             CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
             referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
             referenceLineLayer.lineDashPattern = @[@6, @4];
-            [_plotView.layer addSublayer:referenceLineLayer];
+            [_plotView.layer insertSublayer:referenceLineLayer atIndex:0];
             
-            [_vertReferenceLineLayers addObject:referenceLineLayer];
+            [_verticalReferenceLineLayers addObject:referenceLineLayer];
         }
     }
 }
@@ -194,7 +191,9 @@ ORKDefineStringKey(PopAnimationKey);
     [self calculateMinAndMaxValues];
     [_xAxisView updateTitles];
     [_yAxisView updateTicks];
-    [self updateVertReferenceLines];
+    [self updateVerticalReferenceLines];
+    [self updateLineLayers];
+    [self updatePointLayers];
     [self setNeedsLayout];
 }
 
@@ -210,7 +209,7 @@ ORKDefineStringKey(PopAnimationKey);
 
 - (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
     _showsVerticalReferenceLines = showsVerticalReferenceLines;
-    [self updateVertReferenceLines];
+    [self updateVerticalReferenceLines];
 }
 
 - (void)obtainDataPoints {
@@ -271,7 +270,7 @@ ORKDefineStringKey(PopAnimationKey);
                                   yAxisViewWidth,
                                   CGRectGetHeight(_plotView.frame));
 
-    [self layoutReferenceLines];
+    [self layoutReferenceLineLayers];
     
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
@@ -292,25 +291,13 @@ ORKDefineStringKey(PopAnimationKey);
     _scrubberThumbView.layer.cornerRadius = _scrubberThumbView.bounds.size.height / 2;
     _scrubberLabel.font = [UIFont fontWithName:_scrubberLabel.font.familyName size:12.0f];
     
-    // Clear subviews and sublayers
-    [_pointLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-    [_pointLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [_lineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-    [_lineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    
-    [_pointLayers removeAllObjects];
-    [_lineLayers removeAllObjects];
-    
     [_yAxisPoints removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
-        if ([_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex] <= 1) {
-            break;
-        } else {
-            [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
-            [self drawGraphForPlotIndex:plotIndex];
-        }
+        [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
     }
-    
+    [self layoutLineLayers];
+    [self layoutPointLayers];
+
     if (!_hasDataPoints) {
         [self setupEmptyView];
     } else if (_noDataLabel) {
@@ -322,77 +309,111 @@ ORKDefineStringKey(PopAnimationKey);
     }
 }
 
-- (void)layoutReferenceLines {
+- (void)layoutReferenceLineLayers {
     CGFloat plotViewHeight = _plotView.bounds.size.height;
     CGFloat plotViewWidth = _plotView.bounds.size.width;
-    UIBezierPath *horizReferenceLinePath = [UIBezierPath bezierPath];
-    [horizReferenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding,
+    UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
+    [horizontalReferenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding,
                                                     TopPadding + plotViewHeight / 2)];
-    [horizReferenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame),
+    [horizontalReferenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame),
                                                        TopPadding + plotViewHeight / 2)];
-    _horizReferenceLineLayer.path = horizReferenceLinePath.CGPath;
+    _horizontalReferenceLineLayer.path = horizontalReferenceLinePath.CGPath;
 
     if (_showsVerticalReferenceLines) {
-        for (int i = 0; i < _vertReferenceLineLayers.count; i++) {
-            CAShapeLayer *vertReferenceLineLayer = _vertReferenceLineLayers[i];
+        for (int i = 0; i < _verticalReferenceLineLayers.count; i++) {
+            CAShapeLayer *verticalReferenceLineLayer = _verticalReferenceLineLayers[i];
             
             CGFloat positionOnXAxis = xAxisPoint(i + 1, [self numberOfXAxisPoints], plotViewWidth);
             UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
             [referenceLinePath moveToPoint:CGPointMake(positionOnXAxis, 0)];
             [referenceLinePath addLineToPoint:CGPointMake(positionOnXAxis, plotViewHeight)];
             
-            vertReferenceLineLayer.path = referenceLinePath.CGPath;
+            verticalReferenceLineLayer.path = referenceLinePath.CGPath;
         }
     }
 }
 
 #pragma mark - Drawing
 
-- (void)drawGraphForPlotIndex:(NSInteger)plotIndex {
-    if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
-        [self drawLinesForPlotIndex:plotIndex];
-    }
-    [self drawPointsForPlotIndex:plotIndex];
-}
-
-static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
+inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     const CGFloat pointSize = ORKGraphViewPointAndLineSize;
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-pointSize/2, -pointSize/2, pointSize, pointSize)];
-    CAShapeLayer *circleLayer = [CAShapeLayer new];
-    circleLayer.path = circlePath.CGPath;
-    circleLayer.fillColor = [UIColor whiteColor].CGColor;
-    circleLayer.strokeColor = tintColor.CGColor;
-    circleLayer.lineWidth = 2.0;
+    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-pointSize/2 + 1.0,
+                                                                                 -pointSize/2 + 1.0,
+                                                                                 pointSize - 2.0,
+                                                                                 pointSize - 2.0)];
+    CAShapeLayer *pointLayer = [CAShapeLayer new];
+    pointLayer.path = circlePath.CGPath;
+    pointLayer.fillColor = [UIColor whiteColor].CGColor;
+    pointLayer.strokeColor = tintColor.CGColor;
+    pointLayer.lineWidth = 2.0;
     
-    return circleLayer;
+    return pointLayer;
 }
 
-- (void)drawPointsForPlotIndex:(NSInteger)plotIndex {
+- (void)updatePointLayers {
+    [_pointLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    [_pointLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_pointLayers removeAllObjects];
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        [self updatePointLayersForPlotIndex:plotIndex];
+    }
+}
+
+- (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
     UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
-    for (NSUInteger i = 0; i < ((NSArray *)_yAxisPoints[plotIndex]).count; i++) {
-        ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
-        CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, _plotView.bounds.size.width);
-        positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-        
-        if (!dataPointValue.isUnset) {
-            ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][i];
+    for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
+        ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
+        if (!dataPoint.isUnset) {
             CAShapeLayer *pointLayer = graphPointLayer(tintColor);
-            pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
             [_plotView.layer addSublayer:pointLayer];
             [_pointLayers addObject:pointLayer];
             if (_shouldAnimate) {
                 pointLayer.opacity = 0;
             }
             
-            if (!positionOnYAxis.hasEmptyRange) {
+            if (!dataPoint.hasEmptyRange) {
                 CAShapeLayer *pointLayer = graphPointLayer(tintColor);
-                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers addObject:pointLayer];
                 if (_shouldAnimate) {
                     pointLayer.opacity = 0;
                 }
             }
+        }
+    }
+}
+
+- (void)layoutPointLayers {
+    NSUInteger pointLayerIndex = 0;
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
+        for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_dataPoints[plotIndex]).count; pointIndex++) {
+            ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][pointIndex];
+            if (!dataPointValue.isUnset) {
+                CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
+                positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+                ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][pointIndex];
+                CAShapeLayer *pointLayer = _pointLayers[pointLayerIndex];
+                pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
+                pointLayerIndex++;
+                
+                if (!positionOnYAxis.hasEmptyRange) {
+                    CAShapeLayer *pointLayer = _pointLayers[pointLayerIndex];
+                    pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue);
+                    pointLayerIndex++;
+                }
+            }
+        }
+    }
+}
+
+- (void)updateLineLayers {
+    [_lineLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
+    [_lineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_lineLayers removeAllObjects];
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
+            [self updateLineLayersForPlotIndex:plotIndex];
         }
     }
 }
@@ -661,12 +682,12 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
         
         if (dataPointValue.isUnset) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight;
-        } else if (_minValue == _maxValue) {
+        } else if (_minimumValue == _maximumValue) {
             normalizedRangePoint.minimumValue = normalizedRangePoint.maximumValue = viewHeight / 2;
         } else {
-            CGFloat range = _maxValue - _minValue;
-            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minValue) / range * viewHeight;
-            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minValue) / range * viewHeight;
+            CGFloat range = _maximumValue - _minimumValue;
+            CGFloat normalizedMinimumValue = (dataPointValue.minimumValue - _minimumValue) / range * viewHeight;
+            CGFloat normalizedMaximumValue = (dataPointValue.maximumValue - _minimumValue) / range * viewHeight;
             
             normalizedRangePoint.minimumValue = viewHeight - normalizedMinimumValue;
             normalizedRangePoint.maximumValue = viewHeight - normalizedMaximumValue;
@@ -691,19 +712,19 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)calculateMinAndMaxValues {
-    _minValue = ORKCGFloatInvalidValue;
-    _maxValue = ORKCGFloatInvalidValue;
+    _minimumValue = ORKCGFloatInvalidValue;
+    _maximumValue = ORKCGFloatInvalidValue;
     
     BOOL minimumValueProvided = NO;
     BOOL maximumValueProvided = NO;
     
     if ([_dataSource respondsToSelector:@selector(minimumValueForGraphView:)]) {
-        _minValue = [_dataSource minimumValueForGraphView:self];
+        _minimumValue = [_dataSource minimumValueForGraphView:self];
         minimumValueProvided = YES;
     }
     
     if ([_dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
-        _maxValue = [_dataSource maximumValueForGraphView:self];
+        _maximumValue = [_dataSource maximumValueForGraphView:self];
         maximumValueProvided = YES;
     }
     
@@ -715,39 +736,24 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
                 ORKRangedPoint *point = _dataPoints[plotIndex][pointIndex];
                 if (!minimumValueProvided &&
                     point.minimumValue != ORKCGFloatInvalidValue &&
-                    ((_minValue == ORKCGFloatInvalidValue) || (point.minimumValue < _minValue))) {
-                    _minValue = point.minimumValue;
+                    ((_minimumValue == ORKCGFloatInvalidValue) || (point.minimumValue < _minimumValue))) {
+                    _minimumValue = point.minimumValue;
                 }
                 if (!maximumValueProvided &&
                     point.maximumValue != ORKCGFloatInvalidValue &&
-                    ((_maxValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maxValue))) {
-                    _maxValue = point.maximumValue;
+                    ((_maximumValue == ORKCGFloatInvalidValue) || (point.maximumValue > _maximumValue))) {
+                    _maximumValue = point.maximumValue;
                 }
             }
         }
     }
     
-    if (_minValue == ORKCGFloatInvalidValue) {
-        _minValue = 0;
+    if (_minimumValue == ORKCGFloatInvalidValue) {
+        _minimumValue = 0;
     }
-    if (_maxValue == ORKCGFloatInvalidValue) {
-        _maxValue = 0;
+    if (_maximumValue == ORKCGFloatInvalidValue) {
+        _maximumValue = 0;
     }
-}
-
-- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex path:(CGPathRef)path {
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    lineLayer.path = path;
-    lineLayer.fillColor = [UIColor clearColor].CGColor;
-    lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : _referenceLineColor.CGColor;
-    lineLayer.lineJoin = kCALineJoinRound;
-    lineLayer.lineCap = kCALineCapRound;
-    lineLayer.opacity = 1.0;
-    [_lineLayers addObject:lineLayer];
-    if (_shouldAnimate) {
-        lineLayer.strokeEnd = 0;
-    }
-    return lineLayer;
 }
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition {
@@ -783,7 +789,11 @@ static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     return 0;
 }
 
-- (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
+- (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
+    [self throwOverrideException];
+}
+
+- (void)layoutLineLayers {
     [self throwOverrideException];
 }
 

@@ -51,35 +51,46 @@
     return [self numberOfValidValuesForPlotIndex:plotIndex] > 0 && self.shouldConnectRanges;
 }
 
-- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
-    CAShapeLayer *layer = [super lineLayerForPlotIndex:plotIndex path:path];
-    layer.lineWidth = ORKGraphViewPointAndLineSize;
-    return layer;
-}
-
-- (void)drawLinesForPlotIndex:(NSInteger)plotIndex {
-    
-    CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
-    ORKRangedPoint *positionOnYAxis = nil;
-    
-    for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
-        
+- (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
+    for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
-        
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
-            
-            UIBezierPath *linePath = [UIBezierPath bezierPath];
-            
-            positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-            positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][i]);
-            
-            [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-            [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
-            
-            CAShapeLayer *lineLayer = [self lineLayerForPlotIndex:plotIndex withPath:linePath.CGPath];
+            CAShapeLayer *lineLayer = graphLineLayer(self.shouldAnimate);
+            lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
+            lineLayer.lineWidth = ORKGraphViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];
+            [self.lineLayers addObject:lineLayer];
+        }
+    }
+}
+
+- (void)layoutLineLayers {
+    NSUInteger lineLayerIndex = 0;
+    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
+            CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
+            ORKRangedPoint *positionOnYAxis = nil;
+            for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
+                
+                ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
+                
+                if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
+                    
+                    UIBezierPath *linePath = [UIBezierPath bezierPath];
+                    
+                    positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
+                    positionOnXAxis += [self offsetForPlotIndex:plotIndex];
+                    positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][i]);
+                    
+                    [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+                    [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
+                    
+                    CAShapeLayer *lineLayer = self.lineLayers[lineLayerIndex];
+                    lineLayer.path = linePath.CGPath;
+                    lineLayerIndex++;
+                }
+            }
         }
     }
 }

@@ -71,7 +71,10 @@ static const CGFloat ImageVerticalPadding = 3.0;
         CALayer *tickLayer = _tickLayersByFactor[factorNumber];
         CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
         CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
-        tickLayer.frame = CGRectMake(tickXOrigin, tickYPosition - 0.5, ORKGraphViewAxisTickLength + 2, 1);
+        tickLayer.frame = CGRectMake(tickXOrigin,
+                                     tickYPosition - 0.5,
+                                     ORKGraphViewAxisTickLength + 2,
+                                     1);
 
         UILabel *tickLabel = _tickLabelsByFactor[factorNumber];
         CGFloat labelHeight = 20;
