@@ -81,8 +81,7 @@ static const CGFloat InterAnimationDelay = 0.05;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
-- (instancetype)initWithFrame:(CGRect)frame
-           parentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -96,9 +95,8 @@ static const CGFloat InterAnimationDelay = 0.05;
     NSMutableArray *_pieSections;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-           parentPieChartView:(ORKPieChartView *)parentPieChartView {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         _parentPieChartView = parentPieChartView;
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -518,8 +516,7 @@ static const CGFloat InterAnimationDelay = 0.05;
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
-- (instancetype)initWithFrame:(CGRect)frame
-           parentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
 
 
 @end
@@ -531,9 +528,8 @@ static const CGFloat InterAnimationDelay = 0.05;
     NSMutableArray *_variableConstraints;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-           parentPieChartView:(ORKPieChartView *)parentPieChartView {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
+    self = [super initWithFrame:CGRectZero];
     if (self) {
         _parentPieChartView = parentPieChartView;
         self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -680,9 +676,9 @@ static const CGFloat InterAnimationDelay = 0.05;
     
     _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
     
-    _pieView = [[ORKPieChartPieView alloc] initWithFrame:CGRectZero parentPieChartView:self];
+    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
     
-    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithFrame:CGRectZero parentPieChartView:self];
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
     
     [self addSubview:_pieView];
     [self addSubview:_legendView];
