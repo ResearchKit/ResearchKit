@@ -159,7 +159,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     _circleLayer.lineWidth = lineWidth;
     CGFloat drawingRadius = innerRadius - (lineWidth * 0.5);
     
-    if (!_parentPieChartView.shouldDrawClockwise) {
+    if (!_parentPieChartView.drawsClockwise) {
         startAngle = 3 * M_PI_2;
         endAngle = -M_PI_2;
     }
@@ -168,7 +168,7 @@ static const CGFloat InterAnimationDelay = 0.05;
                                                                          radius:drawingRadius
                                                                      startAngle:startAngle
                                                                        endAngle:endAngle
-                                                                      clockwise:_parentPieChartView.shouldDrawClockwise];
+                                                                      clockwise:_parentPieChartView.drawsClockwise];
     
     _circleLayer.path = circularArcBezierPath.CGPath;
     
@@ -224,7 +224,7 @@ static const CGFloat InterAnimationDelay = 0.05;
             
             // Calculate the angle to the centre of this segment in radians
             CGFloat angle = 0;
-            if (_parentPieChartView.shouldDrawClockwise) {
+            if (_parentPieChartView.drawsClockwise) {
                 angle = (value / 2 + cumulativeValue) * M_PI * 2;
             } else {
                 angle = (value / 2 + cumulativeValue) * - M_PI * 2;
@@ -260,7 +260,7 @@ static const CGFloat InterAnimationDelay = 0.05;
             
             // Calculate the angle to the centre of this segment in radians
             CGFloat angle = (value / 2 + cumulativeValue) * M_PI * 2;
-            if (!_parentPieChartView.shouldDrawClockwise) {
+            if (!_parentPieChartView.drawsClockwise) {
                 angle = (value / 2 + cumulativeValue) * - M_PI * 2;
             }
             
@@ -301,7 +301,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     BOOL intersections = YES;
     // We alternate directions in each iteration
     BOOL shiftClockwise = NO;
-    CGFloat rotateDirection = _parentPieChartView.shouldDrawClockwise ? 1 : -1;
+    CGFloat rotateDirection = _parentPieChartView.drawsClockwise ? 1 : -1;
     // We use totalAngle to prevent from infinite loop
     CGFloat totalAngle = 0;
     while (intersections) {
@@ -669,10 +669,10 @@ static const CGFloat InterAnimationDelay = 0.05;
 }
 
 - (void)sharedInit {
-    _drawTitleAboveChart = NO;
+    _drawsTitleAboveChart = NO;
     
     _lineWidth = 10;
-    _shouldDrawClockwise = YES;
+    _drawsClockwise = YES;
     
     _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
     
@@ -737,7 +737,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         _variableConstraints = [NSMutableArray new];
     }
 
-    if (_drawTitleAboveChart) {
+    if (_drawsTitleAboveChart) {
         NSDictionary *views = NSDictionaryOfVariableBindings(_pieView, _titleTextView);
         [_variableConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleTextView]-TitleToPiePading-[_pieView]"
@@ -813,9 +813,14 @@ static const CGFloat InterAnimationDelay = 0.05;
     return _titleTextView.textLabel.textColor;
 }
 
-- (void)setDrawTitleAboveChart:(BOOL)drawTitleAboveChart {
-    _drawTitleAboveChart = drawTitleAboveChart;
+- (void)setDrawsTitleAboveChart:(BOOL)drawsTitleAboveChart {
+    _drawsTitleAboveChart = drawsTitleAboveChart;
     [self setNeedsUpdateConstraints];
+}
+
+- (void)setDrawsClockwise:(BOOL)drawsClockwise {
+    _drawsClockwise = drawsClockwise;
+    [self setNeedsLayout];
 }
 
 #pragma mark - DataSource

@@ -150,7 +150,7 @@ ORK_CLASS_AVAILABLE
  If this value of this property is NO, the title and text are drawn in front of the chart.
  The default value for this property is NO.
  */
-@property (nonatomic) BOOL drawTitleAboveChart;
+@property (nonatomic) BOOL drawsTitleAboveChart;
 
 /**
  A Boolean value indicating whether the percentage labels drawn adjacent to each segement are
@@ -166,11 +166,10 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL hidesLegend;
 
 /**
- A Boolean value indicating whether the pie chart drawing animation should proceed clockwise or
- anticlockwise.
+ A Boolean value indicating whether the pie chart drawing animation draws clockwise or anticlockwise.
  The default value for this property is YES.
 */
-@property (nonatomic) BOOL shouldDrawClockwise;
+@property (nonatomic) BOOL drawsClockwise;
 
 /**
  The string that will be displayed if the sum of the values of all segments is zero.
