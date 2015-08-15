@@ -111,7 +111,6 @@ ORKDefineStringKey(PopAnimationKey);
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
     _yAxisPoints = [NSMutableArray new];
-    _pathLines = [NSMutableArray new];
     _circleViews = [NSMutableArray new];
     _lineLayers = [NSMutableArray new];
     self.tintColor = [UIColor colorWithRed:244/255.f green:190/255.f blue:74/255.f alpha:1.f];
@@ -142,7 +141,6 @@ ORKDefineStringKey(PopAnimationKey);
     [self addSubview:_plotView];
     
     [self setUpHorizReferenceLine];
-    [self updateVertReferenceLines];
     
     _scrubberLine = [UIView new];
     _scrubberLine.backgroundColor = _scrubberLineColor;
@@ -307,7 +305,6 @@ ORKDefineStringKey(PopAnimationKey);
     [_plotView.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     [_circleViews removeAllObjects];
-    [_pathLines removeAllObjects];
     [_lineLayers removeAllObjects];
     
     [_yAxisPoints removeAllObjects];
@@ -365,7 +362,7 @@ ORKDefineStringKey(PopAnimationKey);
 }
 
 - (void)drawPointCirclesForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointSize = ORKGraphViewPointAndLineSize;
+    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
     
     for (NSUInteger i = 0; i < ((NSArray *)_yAxisPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
@@ -589,8 +586,8 @@ ORKDefineStringKey(PopAnimationKey);
         delay += LayerAnimationDelay;
     }
     
-    for (NSUInteger i = 0; i < [_pathLines count]; i++) {
-        CAShapeLayer *layer = _pathLines[i];
+    for (NSUInteger i = 0; i < [_lineLayers count]; i++) {
+        CAShapeLayer *layer = _lineLayers[i];
         [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
         delay += ORKGraphViewGrowAnimationDuration;
     }
@@ -733,7 +730,7 @@ ORKDefineStringKey(PopAnimationKey);
     }
 }
 
-- (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
+- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex path:(CGPathRef)path {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.path = path;
     lineLayer.fillColor = [UIColor clearColor].CGColor;

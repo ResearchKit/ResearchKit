@@ -54,8 +54,8 @@
     return [self numberOfValidValuesForPlotIndex:plotIndex] > 1;
 }
 
-- (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
-    CAShapeLayer *layer = [super plotLineLayerForPlotIndex:plotIndex withPath:path];
+- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
+    CAShapeLayer *layer = [super lineLayerForPlotIndex:plotIndex path:path];
     layer.lineWidth = 2.0;
     return layer;
 }
@@ -93,7 +93,7 @@
         
         [plotLinePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
         [fillPath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-        CAShapeLayer *plotLineLayer = [self plotLineLayerForPlotIndex:plotIndex withPath:plotLinePath.CGPath];
+        CAShapeLayer *plotLineLayer = [self lineLayerForPlotIndex:plotIndex withPath:plotLinePath.CGPath];
         
         if (emptyDataPresent) {
             plotLineLayer.lineDashPattern = @[@12, @6];
@@ -101,7 +101,6 @@
         }
         
         [self.plotView.layer addSublayer:plotLineLayer];
-        [self.pathLines addObject:plotLineLayer];
     }
     
     [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];

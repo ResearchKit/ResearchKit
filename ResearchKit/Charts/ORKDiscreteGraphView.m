@@ -52,8 +52,8 @@
     return [self numberOfValidValuesForPlotIndex:plotIndex] > 0 && self.shouldConnectRanges;
 }
 
-- (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
-    CAShapeLayer *layer = [super plotLineLayerForPlotIndex:plotIndex withPath:path];
+- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path {
+    CAShapeLayer *layer = [super lineLayerForPlotIndex:plotIndex path:path];
     layer.lineWidth = ORKGraphViewPointAndLineSize;
     return layer;
 }
@@ -69,19 +69,18 @@
         
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             
-            UIBezierPath *plotLinePath = [UIBezierPath bezierPath];
+            UIBezierPath *linePath = [UIBezierPath bezierPath];
             
             positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
             positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][i]);
             
-            [plotLinePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
-            [plotLinePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
+            [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
+            [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
             
-            CAShapeLayer *plotLineLayer = [self plotLineLayerForPlotIndex:plotIndex withPath:plotLinePath.CGPath];
+            CAShapeLayer *lineLayer = [self lineLayerForPlotIndex:plotIndex withPath:linePath.CGPath];
             
-            [self.plotView.layer addSublayer:plotLineLayer];
-            [self.pathLines addObject:plotLineLayer];
+            [self.plotView.layer addSublayer:lineLayer];
         }
     }
 }

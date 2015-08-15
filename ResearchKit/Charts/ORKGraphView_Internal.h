@@ -66,8 +66,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 @property (nonatomic, strong) UIView *scrubberLine;
 
-@property (nonatomic, strong) NSMutableArray *pathLines;
-
 @property (nonatomic) BOOL shouldAnimate;
 
 - (void)sharedInit;
@@ -84,7 +82,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
 
-- (CAShapeLayer *)plotLineLayerForPlotIndex:(NSInteger)plotIndex withPath:(CGPathRef)path;
+- (CAShapeLayer *)lineLayerForPlotIndex:(NSInteger)plotIndex path:(CGPathRef)path;
 
 - (CGFloat)animateLayersSequentially;
 
