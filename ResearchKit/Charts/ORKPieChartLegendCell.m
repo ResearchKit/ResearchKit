@@ -33,6 +33,9 @@
 #import "ORKSkin.h"
 
 
+const CGFloat DotViewSize = 10.0;
+const CGFloat DotToLabelPadding = 6.0;
+
 @implementation ORKPieChartLegendCell
 
 #pragma mark - Init
@@ -58,34 +61,29 @@
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _dotView = [UIView new];
     _dotView.translatesAutoresizingMaskIntoConstraints = NO;
+    _dotView.layer.cornerRadius = DotViewSize * 0.5;
+    _dotView.layer.masksToBounds = YES;
     [self.contentView addSubview:_titleLabel];
     [self.contentView addSubview:_dotView];
 }
 
 #pragma mark - Layout
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [_titleLabel sizeToFit];
-    _dotView.layer.cornerRadius = [self titleHeight] * 0.5;
-    _dotView.layer.masksToBounds = YES;
-}
-
 - (void)updateConstraints {
     NSMutableArray *constraints = [@[] mutableCopy];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _dotView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_titleLabel]-(>=0)-|"
-                                                                             options:0
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_titleLabel]-(>=0)-|"
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_dotView]-(>=0)-|"
-                                                                             options:0
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_dotView]-(>=0)-|"
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_dotView][_titleLabel]|"
-                                                                             options:0
-                                                                             metrics:nil
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dotView]-DotToLabelPadding-[_titleLabel]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:@{@"DotToLabelPadding": @(DotToLabelPadding)}
                                                                                views:views]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
@@ -94,19 +92,19 @@
                                                            toItem:nil
                                                         attribute:0
                                                        multiplier:1.0
-                                                         constant:[self titleHeight]]];
+                                                         constant:DotViewSize]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
                                                         attribute:NSLayoutAttributeWidth
                                                         relatedBy:NSLayoutRelationEqual
-                                                           toItem:nil
+                                                           toItem:_dotView
                                                         attribute:NSLayoutAttributeHeight
                                                        multiplier:1.0
-                                                         constant:[self titleHeight]]];
+                                                         constant:0.0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_dotView
-                                                        attribute:NSLayoutAttributeCenterX
+                                                        attribute:NSLayoutAttributeCenterY
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:_titleLabel
-                                                        attribute:NSLayoutAttributeCenterX
+                                                        attribute:NSLayoutAttributeCenterY
                                                        multiplier:1.0
                                                          constant:0.0]];
     
@@ -116,13 +114,6 @@
 
 + (BOOL)requiresConstraintBasedLayout {
     return YES;
-}
-
-#pragma mark - Helper
-
-- (CGFloat)titleHeight {
-    CGFloat height = [_titleLabel systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return height;
 }
 
 @end

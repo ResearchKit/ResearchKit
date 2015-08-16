@@ -96,8 +96,7 @@
     cell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView
                                                  titleForSegmentAtIndex:indexPath.item];
     cell.titleLabel.font = _labelFont;
-    cell.dotView.backgroundColor = [_parentPieChartView.dataSource pieChartView:_parentPieChartView
-                                                         colorForSegmentAtIndex:indexPath.item];
+    cell.dotView.backgroundColor = [_parentPieChartView colorForSegmentAtIndex:indexPath.item];
     return cell;
 }
 
@@ -116,12 +115,12 @@
     return size;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 10.0;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 15;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 6.0;
 }
 
 @end
