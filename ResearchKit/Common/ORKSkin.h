@@ -57,19 +57,22 @@ ORK_EXTERN NSString *const ORKCaptionTextColorKey;
 /// Color used for a "blue" highlight
 ORK_EXTERN NSString *const ORKBlueHighlightColorKey;
 
-///Color used for axes of ORKBaseGraphView
+/// Default color used for legend, title and text on ORKPieChartView
+ORK_EXTERN NSString *const ORKChartDefaultTextColorKey;
+
+/// Color used for axes of ORKBaseGraphView
 ORK_EXTERN NSString *const ORKGraphAxisColorKey;
 
 ///Color used for titles on axes of ORKBaseGraphView
 ORK_EXTERN NSString *const ORKGraphAxisTitleColorKey;
 
-///Color used for scrubber line of ORKBaseGraphView
+/// Color used for scrubber line of ORKBaseGraphView
 ORK_EXTERN NSString *const ORKGraphScrubberLineColorKey;
 
-///Color used for scrubber thumb of ORKBaseGraphView
+/// Color used for scrubber thumb of ORKBaseGraphView
 ORK_EXTERN NSString *const ORKGraphScrubberThumbColorKey;
 
-///color used for reference line of ORKBaseGraphView
+/// Color used for reference line of ORKBaseGraphView
 ORK_EXTERN NSString *const ORKGraphReferenceLineColorKey;
 
 /// Return the color for a specified ORK..ColorKey

@@ -28,7 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLegendCollectionViewCell.h"
+#import "ORKSkin.h"
+
 
 @implementation ORKLegendCollectionViewCell
 
@@ -50,6 +53,7 @@
 
 - (void)sharedInit {
     _titleLabel = [UILabel new];
+    _titleLabel.textColor = ORKColor(ORKChartDefaultTextColorKey);
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _dotView = [UIView new];

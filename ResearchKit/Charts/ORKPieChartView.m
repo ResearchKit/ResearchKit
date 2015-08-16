@@ -536,9 +536,11 @@ static const CGFloat InterAnimationDelay = 0.05;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _titleLabel = [UILabel new];
+        _titleLabel.textColor = ORKColor(ORKChartDefaultTextColorKey);
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
 
         _textLabel = [UILabel new];
+        _textLabel.textColor = ORKColor(ORKChartDefaultTextColorKey);
         [_textLabel setTextAlignment:NSTextAlignmentCenter];
         
         _noDataLabel = [UILabel new];
