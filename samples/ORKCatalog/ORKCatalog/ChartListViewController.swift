@@ -59,13 +59,13 @@ class ChartListViewController: UITableViewController {
         lineGraphTableViewCell.graphView.dataSource = lineGraphDataSource
         // Optional custom configuration
         lineGraphTableViewCell.graphView.showsVerticalReferenceLines = true
-
+        
         // ORKDiscreteGraphView
         discreteGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphIdentifier) as! DiscreteGraphTableViewCell
         discreteGraphTableViewCell.graphView.dataSource = discreteGraphDataSource
         // Optional custom configuration
         discreteGraphTableViewCell.graphView.showsVerticalReferenceLines = true
-
+        
         chartTableViewCells = [pieChartTableViewCell, lineGraphTableViewCell, discreteGraphTableViewCell]
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -80,18 +80,12 @@ class ChartListViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if let graphView = (cell as? GraphTableViewCell)?.graphView {
-            graphView.setNeedsLayout()
-            graphView.layoutIfNeeded()
-            graphView.refreshGraph()
-        }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        lineGraphTableViewCell.graphView.animateWithDuration(0.5)
+        discreteGraphTableViewCell.graphView.animateWithDuration(0.5)
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
-        tableView.reloadData()
-    }
-
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // Optional animation on first appearance
