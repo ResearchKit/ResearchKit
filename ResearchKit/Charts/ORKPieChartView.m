@@ -428,6 +428,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     if (self) {
         _parentPieChartView = parentPieChartView;
         [self registerClass:[ORKLegendCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        
         self.backgroundColor = [UIColor clearColor];
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.dataSource = self;
@@ -493,7 +494,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     cell.titleLabel.font = _labelFont;
     [cell.contentView setNeedsUpdateConstraints];
     CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    // NSLog(@"%@", NSStringFromCGSize(size));
+    NSLog(@"%@", NSStringFromCGSize(size));
     return size;
 }
 
@@ -640,6 +641,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     ORKPieChartPieView *_pieView;
     ORKPieChartLegendView *_legendView;
     ORKPieChartTitleTextView *_titleTextView;
+    BOOL _shouldInvalidateLegendViewIntrinsicContentSize;
 }
 
 #pragma mark - Init
@@ -674,14 +676,12 @@ static const CGFloat InterAnimationDelay = 0.05;
     _lineWidth = 10;
     _drawsClockwise = YES;
     
-    _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
-    
+    _legendView = nil; // legend lazily initialized on demand
+
     _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
-    
-    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
-    
     [self addSubview:_pieView];
-    [self addSubview:_legendView];
+
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
     [self addSubview:_titleTextView];
     
     [self updateContentSizeFonts];
@@ -695,16 +695,12 @@ static const CGFloat InterAnimationDelay = 0.05;
 
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_pieView, _legendView);
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|"
-                                                                              options:(NSLayoutFormatOptions)0
-                                                                              metrics:nil
-                                                                                views:views]];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_pieView);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pieView]|"
                                                                              options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
                                                                                views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pieView]-PlotToLegendPadding-[_legendView]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=0-[_pieView]->=0-|"
                                                                               options:(NSLayoutFormatOptions)0
                                                                              metrics:@{ @"PlotToLegendPadding": @(PieToLegendPadding) }
                                                                                 views:views]];
@@ -755,6 +751,20 @@ static const CGFloat InterAnimationDelay = 0.05;
                                                                       constant:0.0]];
     }
     
+    if (_legendView) {
+        NSDictionary *views = NSDictionaryOfVariableBindings(_pieView, _legendView);
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_legendView]|"
+                                                 options:(NSLayoutFormatOptions)0
+                                                 metrics:nil
+                                                   views:views]];
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_pieView]-PlotToLegendPadding-[_legendView]|"
+                                                 options:(NSLayoutFormatOptions)0
+                                                 metrics:@{ @"PlotToLegendPadding": @(PieToLegendPadding) }
+                                                   views:views]];
+    }
+    
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
@@ -764,13 +774,34 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGFloat sumOfValues = [_pieView normalizeValues];
     [_pieView setUpSublayersAndLabels];
     [_titleTextView showNoDataLabel:(sumOfValues == 0)];
-    [_legendView invalidateIntrinsicContentSize];
-    [self layoutIfNeeded];
+    [self updateLegendView];
+}
+
+- (void)updateLegendView {
+    if ([_dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
+        _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
+        [self addSubview:_legendView];
+        _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+        _shouldInvalidateLegendViewIntrinsicContentSize = YES;
+    } else {
+        [_legendView removeFromSuperview];
+        _legendView = nil;
+    }
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (_shouldInvalidateLegendViewIntrinsicContentSize) {
+        _shouldInvalidateLegendViewIntrinsicContentSize = NO;
+        [_legendView invalidateIntrinsicContentSize];
+    }
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [_legendView invalidateIntrinsicContentSize]; // this method triggers a new layout pass as a side effect
+    [_legendView invalidateIntrinsicContentSize];
+    [self setNeedsLayout];
 }
 
 - (void)setTitle:(NSString *)title {
