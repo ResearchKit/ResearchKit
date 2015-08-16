@@ -113,6 +113,15 @@ static const CGFloat InterAnimationDelay = 0.05;
     return self;
 }
 
+- (void)setPercentageLabelFont:(UIFont *)percentageLabelFont {
+    _percentageLabelFont = percentageLabelFont;
+    for (ORKPieChartSection *pieSection in _pieSections) {
+        pieSection.label.font = percentageLabelFont;
+        [pieSection.label sizeToFit];
+    }
+    [self setNeedsLayout];
+}
+
 #pragma mark - Data Normalization
 
 - (CGFloat)normalizeValues {
@@ -172,8 +181,8 @@ static const CGFloat InterAnimationDelay = 0.05;
     
     _circleLayer.path = circularArcBezierPath.CGPath;
     
-    [self updatePieChartLayers];
-    [self updatePercentageLabelsWithRadius:innerRadius];
+    [self layoutPieChartLayers];
+    [self layoutPercentageLabelsWithRadius:innerRadius];
 }
 
 - (void)addPieChartLayers {
@@ -238,7 +247,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
 }
 
-- (void)updatePieChartLayers {
+- (void)layoutPieChartLayers {
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
         CAShapeLayer *segmentLayer = _segmentLayers[idx];
@@ -248,7 +257,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
 }
 
-- (void)updatePercentageLabelsWithRadius:(CGFloat)pieRadius {
+- (void)layoutPercentageLabelsWithRadius:(CGFloat)pieRadius {
     CGFloat cumulativeValue = 0;
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
