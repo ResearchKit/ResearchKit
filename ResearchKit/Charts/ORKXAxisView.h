@@ -36,6 +36,8 @@
 
 @interface ORKXAxisView : UIView
 
+@property (nonatomic) UIFont *titleFont;
+
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView NS_DESIGNATED_INITIALIZER;

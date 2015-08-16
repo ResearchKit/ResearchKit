@@ -35,7 +35,7 @@
 #import "ORKGraphView_Internal.h"
 
 
-static const CGFloat LastLabelBackgroundPadding = 10.0;
+static const CGFloat LastLabelHeight = 20.0;
 
 @implementation ORKXAxisView {
     __weak ORKGraphView *_parentGraphView;
@@ -67,7 +67,7 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
         titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
         index++;
     }
-    ((UILabel *)_titleLabels.lastObject).layer.cornerRadius = (self.bounds.size.height - LastLabelBackgroundPadding) * 0.5;
+    ((UILabel *)_titleLabels.lastObject).layer.cornerRadius = LastLabelHeight * 0.5;
 }
 
 - (void)setUpConstraints {
@@ -111,20 +111,20 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             constraint = [NSLayoutConstraint constraintWithItem:label
                                                       attribute:NSLayoutAttributeHeight
                                                       relatedBy:NSLayoutRelationEqual
-                                                         toItem:label.superview
-                                                      attribute:NSLayoutAttributeHeight
+                                                         toItem:nil
+                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                      multiplier:1.0
-                                                       constant:-LastLabelBackgroundPadding];
+                                                       constant:LastLabelHeight];
             constraint.priority = UILayoutPriorityRequired - 1;
             [constraints addObject:constraint];
             
             constraint = [NSLayoutConstraint constraintWithItem:label
                                                       attribute:NSLayoutAttributeWidth
-                                                      relatedBy:NSLayoutRelationEqual
-                                                         toItem:label.superview
-                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                         toItem:nil
+                                                      attribute:NSLayoutAttributeNotAnAttribute
                                                      multiplier:1.0
-                                                       constant:-LastLabelBackgroundPadding];
+                                                       constant:LastLabelHeight];
             constraint.priority = UILayoutPriorityRequired - 1;
             [constraints addObject:constraint];
         }
@@ -147,7 +147,7 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             NSString *title = [_parentGraphView.dataSource graphView:_parentGraphView titleForXAxisAtIndex:i];
             UILabel *label = [UILabel new];
             label.text = title;
-            label.font = [UIFont systemFontOfSize:12.0];
+            label.font = _titleFont;
             label.numberOfLines = 2;
             label.textAlignment = NSTextAlignmentCenter;
             label.adjustsFontSizeToFitWidth = YES;
@@ -159,7 +159,7 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             } else {
                 label.textColor = [UIColor whiteColor];
                 label.backgroundColor = self.tintColor;
-                label.layer.cornerRadius = (self.bounds.size.height - LastLabelBackgroundPadding) * 0.5;
+                label.layer.cornerRadius = LastLabelHeight * 0.5;
                 label.layer.masksToBounds = YES;
             }
             
@@ -193,6 +193,15 @@ static const CGFloat LastLabelBackgroundPadding = 10.0;
             label.backgroundColor = self.tintColor;
         }
     }
+}
+
+- (void)setTitleFont:(UIFont *)titleFont {
+    _titleFont = titleFont;
+    for (UILabel *label in _titleLabels) {
+        label.font = _titleFont;
+        [label sizeToFit];
+    }
+    [self setNeedsLayout];
 }
 
 @end

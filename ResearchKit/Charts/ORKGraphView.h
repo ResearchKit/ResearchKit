@@ -245,43 +245,35 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is a very light gray color.
 */
-@property (nonatomic, strong, nullable) UIColor *axisColor;
+@property (nonatomic, strong) UIColor *axisColor;
 
 /**
  The color of the axes titles.
  
  The default value for this property is a light gray color.
 */
-@property (nonatomic, strong, nullable) UIColor *axisTitleColor;
-
-/**
- The font of the axes titles.
- 
- If you do not set a value for this property, a system font of an appropriate size will be used.
-
-*/
-@property (nonatomic, strong, nullable) UIFont *axisTitleFont;
+@property (nonatomic, strong) UIColor *axisTitleColor;
 
 /**
  The color of the reference lines.
  
  The default value for this property is a light gray color.
 */
-@property (nonatomic, strong, nullable) UIColor *referenceLineColor;
+@property (nonatomic, strong) UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
  
  The default value for this property is a white color.
 */
-@property (nonatomic, strong, nullable) UIColor *scrubberThumbColor;
+@property (nonatomic, strong) UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
  
  The default value for this property is a gray color.
 */
-@property (nonatomic, strong, nullable) UIColor *scrubberLineColor;
+@property (nonatomic, strong) UIColor *scrubberLineColor;
 
 /**
  The string that will be displayed if no data points are provided by the `dataSource`.

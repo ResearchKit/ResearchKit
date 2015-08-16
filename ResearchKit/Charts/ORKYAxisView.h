@@ -35,10 +35,12 @@
 
 @interface ORKYAxisView : UIView
 
+@property (nonatomic) UIFont *titleFont;
+
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView NS_DESIGNATED_INITIALIZER;
 
-- (void)updateTicks;
+- (void)updateTicksAndLabels;
 
 @end

@@ -51,7 +51,11 @@ static const CGFloat YAxisPaddingFactor = 0.12;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
-
+static const CGFloat ScrubberLineToLabelPadding = 6.0;
+static const CGFloat ScrubberLabelCornerRadius = 4.0;
+static const CGFloat ScrubberLabelHorizontalPadding = 12.0;
+static const CGFloat ScrubberLabelVerticalPadding = 4.0;
+#define ScrubberLabelColor ([UIColor colorWithWhite:0.98 alpha:0.8])
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
 
@@ -86,6 +90,36 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     return self;
 }
 
+- (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
+    _dataSource = dataSource;
+    _numberOfXAxisPoints = -1; // reset cached number of x axis points
+    [self obtainDataPoints];
+    [self calculateMinAndMaxValues];
+    [_xAxisView updateTitles];
+    [_yAxisView updateTicksAndLabels];
+    [self updateVerticalReferenceLines];
+    [self updateLineLayers];
+    [self updatePointLayers];
+    [self updateEmptyView];
+    
+    [self setNeedsLayout];
+}
+
+- (void)setMaximumValueImage:(UIImage *)maximumValueImage {
+    _maximumValueImage = maximumValueImage;
+    [_yAxisView updateTicksAndLabels];
+}
+
+- (void)setMinimumValueImage:(UIImage *)minimumValueImage {
+    _minimumValueImage = minimumValueImage;
+    [_yAxisView updateTicksAndLabels];
+}
+
+- (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
+    _showsVerticalReferenceLines = showsVerticalReferenceLines;
+    [self updateVerticalReferenceLines];
+}
+
 - (void)sharedInit {
     _numberOfXAxisPoints = -1;
     _axisColor =  ORKColor(ORKGraphAxisColorKey);
@@ -93,7 +127,6 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _axisTitleFont = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
     _showsVerticalReferenceLines = NO;
     _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
     _dataPoints = [NSMutableArray new];
@@ -102,12 +135,26 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     _lineLayers = [NSMutableArray new];
     self.tintColor = [UIColor colorWithRed:244/255.f green:190/255.f blue:74/255.f alpha:1.f];
     _hasDataPoints = NO;
+    
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     _panGestureRecognizer.delaysTouchesBegan = YES;
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
     [self setUpViews];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+}
+
+- (void)updateContentSizeCategoryFonts {
+    _xAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    _yAxisView.titleFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+    _scrubberLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
 }
 
 - (void)setUpViews {
@@ -129,14 +176,13 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     [self addSubview:_scrubberLine];
     
     _scrubberLabel = [UILabel new];
-    _scrubberLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:12.0f];
     _scrubberLabel.alpha = 0;
-    _scrubberLabel.layer.cornerRadius = 2.0f;
-    _scrubberLabel.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    _scrubberLabel.layer.cornerRadius = ScrubberLabelCornerRadius;
+    _scrubberLabel.layer.borderColor = _scrubberLineColor.CGColor;
     _scrubberLabel.layer.borderWidth = 1.0f;
+    _scrubberLabel.textColor = [UIColor darkGrayColor];
     _scrubberLabel.textAlignment = NSTextAlignmentCenter;
-    _scrubberLabel.frame = CGRectMake(2, 0, 100, 20);
-    _scrubberLabel.backgroundColor = [UIColor colorWithWhite:0.98 alpha:0.8];
+    _scrubberLabel.backgroundColor = ScrubberLabelColor;
     [self addSubview:_scrubberLabel];
     
     _scrubberThumbView = [[UIView alloc] initWithFrame:CGRectMake(0,
@@ -173,34 +219,6 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
             [_verticalReferenceLineLayers addObject:referenceLineLayer];
         }
     }
-}
-
-- (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
-    _dataSource = dataSource;
-    _numberOfXAxisPoints = -1; // reset cached number of x axis points
-    [self obtainDataPoints];
-    [self calculateMinAndMaxValues];
-    [_xAxisView updateTitles];
-    [_yAxisView updateTicks];
-    [self updateVerticalReferenceLines];
-    [self updateLineLayers];
-    [self updatePointLayers];
-    [self setNeedsLayout];
-}
-
-- (void)setMaximumValueImage:(UIImage *)maximumValueImage {
-    _maximumValueImage = maximumValueImage;
-    [_yAxisView updateTicks];
-}
-
-- (void)setMinimumValueImage:(UIImage *)minimumValueImage {
-    _minimumValueImage = minimumValueImage;
-    [_yAxisView updateTicks];
-}
-
-- (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
-    _showsVerticalReferenceLines = showsVerticalReferenceLines;
-    [self updateVerticalReferenceLines];
 }
 
 - (void)obtainDataPoints {
@@ -264,10 +282,10 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     [self layoutReferenceLineLayers];
     
     if (_noDataLabel) {
-        _noDataLabel.frame = CGRectMake(ORKGraphViewLeftPadding,
-                                       TopPadding,
-                                       CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
-                                       CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
+        _noDataLabel.frame = CGRectMake(0,
+                                        0,
+                                        CGRectGetWidth(_plotView.frame),
+                                        CGRectGetHeight(_plotView.frame));
     }
     
     // Scrubber Views
@@ -280,7 +298,6 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
                                           ScrubberThumbSize.width,
                                           ScrubberThumbSize.height);
     _scrubberThumbView.layer.cornerRadius = _scrubberThumbView.bounds.size.height / 2;
-    _scrubberLabel.font = [UIFont fontWithName:_scrubberLabel.font.familyName size:12.0f];
     
     [_yAxisPoints removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
@@ -288,12 +305,6 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     }
     [self layoutLineLayers];
     [self layoutPointLayers];
-
-    if (!_hasDataPoints) {
-        [self setupEmptyView];
-    } else if (_noDataLabel) {
-        [_noDataLabel removeFromSuperview];
-    }
 }
 
 - (void)layoutReferenceLineLayers {
@@ -430,19 +441,18 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     }
 }
 
-- (void)setupEmptyView {
-    if (!_noDataLabel) {
-        _noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(ORKGraphViewLeftPadding,
-                                                                 TopPadding,
-                                                                 CGRectGetWidth(self.frame) - ORKGraphViewLeftPadding,
-                                                                 CGRectGetHeight(self.frame) - XAxisHeight - TopPadding)];
+- (void)updateEmptyView {
+    if (!_hasDataPoints && !_noDataLabel) {
+        _noDataLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _noDataLabel.text = _noDataText;
         _noDataLabel.textAlignment = NSTextAlignmentCenter;
-        _noDataLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
+        _noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         _noDataLabel.textColor = [UIColor lightGrayColor];
+        [_plotView addSubview:_noDataLabel];
+    } else if (!_hasDataPoints && _noDataLabel) {
+        [_noDataLabel removeFromSuperview];
+        _noDataLabel = nil;
     }
-    
-    [self addSubview:_noDataLabel];
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
@@ -537,11 +547,15 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     [self setScrubberLineAccessoriesHidden:NO];
     [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPosition + TopPadding)];
     _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue];
-    CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(320, CGRectGetHeight(_scrubberLabel.bounds))
-                                                        options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin)
-                                                     attributes:@{NSFontAttributeName:_scrubberLabel.font}
+    CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
+                                                                           _plotView.bounds.size.height)
+                                                        options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
+                                                     attributes:@{NSFontAttributeName: _scrubberLabel.font}
                                                         context:nil].size;
-    [_scrubberLabel setFrame:CGRectMake(CGRectGetMaxX(_scrubberLine.frame) + 6, CGRectGetMinY(_scrubberLine.frame), textSize.width + 8, CGRectGetHeight(_scrubberLabel.frame))];
+    _scrubberLabel.frame = CGRectMake(CGRectGetMaxX(_scrubberLine.frame) + ScrubberLineToLabelPadding,
+                                      CGRectGetMinY(_scrubberLine.frame),
+                                      textSize.width + ScrubberLabelHorizontalPadding,
+                                      textSize.height + ScrubberLabelVerticalPadding);
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {

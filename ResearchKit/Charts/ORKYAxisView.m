@@ -57,36 +57,10 @@ static const CGFloat ImageVerticalPadding = 3.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGRect bounds = self.bounds;
-    CGFloat width = bounds.size.width;
-    CGFloat halfWidth = width / 2;
-    _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
-    _minImageView.frame = CGRectMake(width - halfWidth,
-                                     CGRectGetMaxY(bounds) - halfWidth - ImageVerticalPadding,
-                                     halfWidth,
-                                     halfWidth);
-    
-    for (NSNumber *factorNumber in [_tickLayersByFactor allKeys]) {
-        CGFloat factor = factorNumber.floatValue;
-        CALayer *tickLayer = _tickLayersByFactor[factorNumber];
-        CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
-        tickLayer.frame = CGRectMake(tickXOrigin,
-                                     tickYPosition - 0.5,
-                                     ORKGraphViewAxisTickLength + 2,
-                                     1);
-
-        UILabel *tickLabel = _tickLabelsByFactor[factorNumber];
-        CGFloat labelHeight = 20;
-        CGFloat labelYPosition = tickYPosition - labelHeight / 2;
-        tickLabel.frame = CGRectMake(0,
-                                     labelYPosition,
-                                     width - ORKGraphViewAxisTickLength,
-                                     labelHeight);
-    }
+    [self layoutTicksAndLabels];
 }
 
-- (void)updateTicks {
+- (void)updateTicksAndLabels {
     [_maxImageView removeFromSuperview];
     _maxImageView = nil;
     [_minImageView removeFromSuperview];
@@ -156,11 +130,45 @@ static const CGFloat ImageVerticalPadding = 3.0;
             tickLabel.backgroundColor = [UIColor clearColor];
             tickLabel.textColor = _parentGraphView.axisTitleColor;
             tickLabel.textAlignment = NSTextAlignmentRight;
-            tickLabel.font = _parentGraphView.axisTitleFont;
+            tickLabel.font = _titleFont;
             tickLabel.minimumScaleFactor = 0.8;
+            [tickLabel sizeToFit];
             [self addSubview:tickLabel];
             _tickLabelsByFactor[factorNumber] = tickLabel;
         }
+    }
+}
+
+- (void)layoutTicksAndLabels {
+    CGRect bounds = self.bounds;
+    CGFloat width = bounds.size.width;
+    CGFloat halfWidth = width / 2;
+    _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
+    _minImageView.frame = CGRectMake(width - halfWidth,
+                                     CGRectGetMaxY(bounds) - halfWidth - ImageVerticalPadding,
+                                     halfWidth,
+                                     halfWidth);
+    
+    for (NSNumber *factorNumber in [_tickLayersByFactor allKeys]) {
+        CGFloat factor = factorNumber.floatValue;
+        CALayer *tickLayer = _tickLayersByFactor[factorNumber];
+        CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
+        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
+        tickLayer.frame = CGRectMake(tickXOrigin,
+                                     tickYPosition - 0.5,
+                                     ORKGraphViewAxisTickLength + 2,
+                                     1);
+        
+        UILabel *tickLabel = _tickLabelsByFactor[factorNumber];
+        tickLabel.center = CGPointMake(tickXOrigin - (tickLabel.bounds.size.width / 2 + 2.0), tickYPosition);
+    }
+}
+
+- (void)setTitleFont:(UIFont *)titleFont {
+    _titleFont = titleFont;
+    for (UILabel *label in [_tickLabelsByFactor allValues]) {
+        label.font = _titleFont;
+        [label sizeToFit];
     }
 }
 
