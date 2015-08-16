@@ -67,6 +67,8 @@
 - (void)setLabelFont:(UIFont *)labelFont {
     _labelFont = labelFont;
     _sizingCell.titleLabel.font = _labelFont;
+    [self reloadData];
+    [self invalidateIntrinsicContentSize];
 }
 
 - (CGSize)intrinsicContentSize {

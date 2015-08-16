@@ -83,7 +83,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     return self;
 }
 
-- (void)updateContentSizeFonts {
+- (void)updateContentSizeCategoryFonts {
     _titleTextView.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _titleTextView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     _titleTextView.noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -105,9 +105,9 @@ static const CGFloat PieToLegendPadding = 8.0;
     _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
     [self addSubview:_titleTextView];
     
-    [self updateContentSizeFonts];
+    [self updateContentSizeCategoryFonts];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeFonts)
+                                             selector:@selector(updateContentSizeCategoryFonts)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
     [self setUpConstraints];
