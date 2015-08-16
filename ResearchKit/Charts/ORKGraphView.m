@@ -118,7 +118,7 @@ static const CGFloat ScrubberFadeAnimationDuration = 0.2;
     [self addSubview:_yAxisView];
 
     _plotView = [UIView new];
-    _plotView.backgroundColor = [UIColor whiteColor];
+    _plotView.backgroundColor = [UIColor clearColor];
     [self addSubview:_plotView];
     
     [self setUpHorizontalReferenceLines];
