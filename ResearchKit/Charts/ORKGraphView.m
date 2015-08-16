@@ -325,17 +325,31 @@ static const CGFloat LayerAnimationDelay = 0.1;
 
 #pragma mark - Drawing
 
-inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
-    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
-    UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(-pointSize/2 + 1.0,
-                                                                                 -pointSize/2 + 1.0,
-                                                                                 pointSize - 2.0,
-                                                                                 pointSize - 2.0)];
-    CAShapeLayer *pointLayer = [CAShapeLayer new];
-    pointLayer.path = circlePath.CGPath;
-    pointLayer.fillColor = [UIColor whiteColor].CGColor;
-    pointLayer.strokeColor = tintColor.CGColor;
-    pointLayer.lineWidth = 2.0;
+inline static CALayer *graphPointLayer(UIColor *tintColor) {
+    const CGFloat pointSide = ORKGraphViewPointAndLineSize;
+    const CGFloat pointLineWidth = 2.0;
+    
+    static UIImage *pointImage = nil;
+    static UIColor *pointImageColor = nil;
+    if (!pointImage || ![pointImageColor isEqual:tintColor]) {
+        pointImageColor = tintColor;
+        UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
+                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSide - pointLineWidth, pointSide - pointLineWidth}}];
+        CAShapeLayer *pointLayer = [CAShapeLayer new];
+        pointLayer.path = circlePath.CGPath;
+        pointLayer.fillColor = [UIColor whiteColor].CGColor;
+        pointLayer.strokeColor = tintColor.CGColor;
+        pointLayer.lineWidth = pointLineWidth;
+
+        UIGraphicsBeginImageContextWithOptions((CGSize){pointSide, pointSide}, NO, [UIScreen mainScreen].scale);
+        [pointLayer renderInContext:UIGraphicsGetCurrentContext()];
+        pointImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    CALayer *pointLayer = [CALayer new];
+    pointLayer.frame = (CGRect){{0, 0}, {pointSide, pointSide}};
+    pointLayer.contents = (__bridge id)(pointImage.CGImage);
     
     return pointLayer;
 }
@@ -356,12 +370,12 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         if (!dataPoint.isUnset) {
-            CAShapeLayer *pointLayer = graphPointLayer(tintColor);
+            CALayer *pointLayer = graphPointLayer(tintColor);
             [_plotView.layer addSublayer:pointLayer];
             [_pointLayers[plotIndex] addObject:pointLayer];
             
             if (!dataPoint.hasEmptyRange) {
-                CAShapeLayer *pointLayer = graphPointLayer(tintColor);
+                CALayer *pointLayer = graphPointLayer(tintColor);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
             }
