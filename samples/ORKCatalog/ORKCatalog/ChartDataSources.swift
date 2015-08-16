@@ -77,6 +77,7 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
             ORKRangedPoint(),
             ORKRangedPoint(value: 30),
             ORKRangedPoint(value: 40),
+            ORKRangedPoint(),
         ],
         [
             ORKRangedPoint(value: 2),
@@ -84,6 +85,7 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
             ORKRangedPoint(value: 8),
             ORKRangedPoint(value: 16),
             ORKRangedPoint(value: 32),
+            ORKRangedPoint(value: 50),
             ORKRangedPoint(value: 64),
         ]
     ]
@@ -97,7 +99,7 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     }
     
     func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
-        return plotPoints[plotIndex].count
+       return plotPoints[plotIndex].count
     }
     
     func maximumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
@@ -109,7 +111,7 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     }
     
     func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
-        return 7
+        return 8
     }
 
     func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
@@ -136,6 +138,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
             ORKRangedPoint(minimumValue: 5, maximumValue: 11),
             ORKRangedPoint(minimumValue: 7, maximumValue: 13),
             ORKRangedPoint(minimumValue: 10, maximumValue: 13),
+            ORKRangedPoint(minimumValue: 12, maximumValue: 15),
         ]
     ]
     
@@ -152,7 +155,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     }
     
     func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
-        return 7
+        return 8
     }
     
     func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
