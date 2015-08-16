@@ -286,10 +286,12 @@ static const CGFloat PieToLegendPadding = 8.0;
         // Default colors
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
         if (numberOfSegments > 1) {
-            CGFloat divisionFactor = (CGFloat)(1/(CGFloat)(numberOfSegments -1));
-            color = [UIColor colorWithWhite:(divisionFactor * index) alpha:1.0f];
-        }
-        else {
+            // Avoid pure white and pure black
+            CGFloat divisionFactor = (1.0 / (numberOfSegments + 1));
+            CGFloat whiteComponent = (divisionFactor + (divisionFactor * index));
+            color = [UIColor colorWithWhite:whiteComponent
+                                      alpha:1.0f];
+        } else {
             color = [UIColor grayColor];
         }
     }
