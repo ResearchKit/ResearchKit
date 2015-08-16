@@ -242,67 +242,80 @@ ORK_CLASS_AVAILABLE
 
 /**
  The color of the axes drawn by the graphView.
- If you do not set a value for this property, the graph view will assume a sensible value.
+ 
+ The default value for this property is a very light gray color.
 */
 @property (nonatomic, strong, nullable) UIColor *axisColor;
 
 /**
  The color of the axes titles.
- If you do not set a value for this property, the graph view will assume a sensible value.
+ 
+ The default value for this property is a light gray color.
 */
 @property (nonatomic, strong, nullable) UIColor *axisTitleColor;
 
 /**
  The font of the axes titles.
- The default value for this peoperty is a system font.
+ 
+ If you do not set a value for this property, a system font of an appropriate size will be used.
+
 */
 @property (nonatomic, strong, nullable) UIFont *axisTitleFont;
 
 /**
  The color of the reference lines.
-  If you do not set a value for this property, the graph view will assume a sensible value.
+ 
+ The default value for this property is a light gray color.
 */
 @property (nonatomic, strong, nullable) UIColor *referenceLineColor;
 
 /**
- The color of the thub circle on the scrubber line.
- If you do not set a value for this property, the graph view will assume a sensible value.
+ The background color of the thumb on the scrubber line.
+ 
+ The default value for this property is a white color.
 */
 @property (nonatomic, strong, nullable) UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
- If you do not set a value for this property, the graph view will assume a sensible value.
+ 
+ The default value for this property is a gray color.
 */
 @property (nonatomic, strong, nullable) UIColor *scrubberLineColor;
 
 /**
- The gesture recogniser that is added to this view.
- This object is instatiated and added to the view on initialisation.
-*/
-@property (nonatomic, strong, nullable) UIPanGestureRecognizer *panGestureRecognizer;
-
-/**
  The string that will be displayed if no data points are provided by the `dataSource`.
- If you do not set a value for this property, the graph view will assume a sensible value.
+ 
+ The default value for this property is an appropriate message string.
 */
 @property (nonatomic, strong, nullable) NSString *noDataText;
 
 /**
  An image that will be displayed adjacent to the maximum value of the y-axis.
+ 
  The default value for this property is nil.
 */
 @property (nonatomic, strong, nullable) UIImage *maximumValueImage;
 
 /**
  An image that will be displayed adjacent to the minimum value of the y-axis.
+ 
  The default value for this property is nil.
 */
 @property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
 /**
- Animates the graph when it first displays on the screen. You can optionally call this method
- from the `- viewWillAppear:` implementation of the view controller that owns the graph view.
+ The gesture recogniser that is used for scrubbint by the graph view.
+ 
+ This object is instatiated and added to the view on initialisation.
+ */
+@property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+
+/**
+ Animates the graph when it first displays on the screen.
+ 
+ You can optionally call this method from the `- viewWillAppear:` implementation of the view
+ controller that owns the graph view.
  
  @param animationDuration       The duration of the appearing animation.
  */
