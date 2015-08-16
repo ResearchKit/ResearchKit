@@ -44,8 +44,6 @@ const CGFloat ORKGraphViewLeftPadding = 10.0;
 const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
 const CGFloat ORKGraphViewAxisTickLength = 10.0;
-const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
-const CGFloat ORKGraphViewFadeAnimationDuration = 0.2;
 
 static const CGFloat TopPadding = 0.0;
 static const CGFloat XAxisHeight = 30.0;
@@ -53,7 +51,6 @@ static const CGFloat YAxisPaddingFactor = 0.12;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
-static const CGFloat LayerAnimationDelay = 0.1;
 
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
@@ -616,8 +613,8 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 
 #pragma Mark - Animation
 
-- (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    if (animationDuration < 0) {
+- (void)animateWithDuration:(NSTimeInterval)duration {
+    if (duration < 0) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
     }
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
@@ -628,41 +625,62 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
             pointLayer.opacity = 0;
         }
     }
-    [self animateLayersSequentially];
+    [self animateLayersSequentiallyWithDuration:duration];
 }
 
-- (CGFloat)animateLayersSequentially {
-    CGFloat startDelay = LayerAnimationDelay;
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
-        for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_pointLayers[plotIndex]).count; pointIndex++) {
+        NSUInteger numberOfPoints = ((NSMutableArray *)_pointLayers[plotIndex]).count;
+        NSUInteger numberOfLines = ((NSMutableArray *)_lineLayers[plotIndex]).count;
+        
+        CGFloat pointFadeDuration = duration / (numberOfPoints - 1);
+        CGFloat lineFadeDuration = duration / (numberOfLines - 1);
+        
+        CGFloat pointDelay = 0.0;
+        CGFloat lineDelay = 0.0;
+        for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
             CAShapeLayer *layer = _pointLayers[plotIndex][pointIndex];
-            animateLayer(layer, @"opacity", ORKGraphViewFadeAnimationDuration, startDelay);
-            startDelay += LayerAnimationDelay;
+            [self animateLayer:layer keyPath:@"opacity" duration:pointFadeDuration startDelay:pointDelay];
+            pointDelay += pointFadeDuration;
         }
-        for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_lineLayers[plotIndex]).count; pointIndex++) {
+        
+        for (NSUInteger pointIndex = 0; pointIndex < numberOfLines; pointIndex++) {
             CAShapeLayer *layer = _lineLayers[plotIndex][pointIndex];
-            animateLayer(layer, @"strokeEnd", ORKGraphViewGrowAnimationDuration, startDelay);
-            startDelay += ORKGraphViewGrowAnimationDuration;
+            [self animateLayer:layer keyPath:@"strokeEnd" duration:lineFadeDuration startDelay:lineDelay];
+            lineDelay += lineFadeDuration;
         }
-
     }
-    
-    return startDelay;
 }
 
-void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat animationDuration, CGFloat startDelay) {
-    NSCAssert(animationKeyPath && animationDuration > 0.0, @"");
+- (void)animateLayer:(CAShapeLayer *)layer
+             keyPath:(NSString *)keyPath
+            duration:(CGFloat)duration
+          startDelay:(CGFloat)startDelay {
+    [self animateLayer:layer
+               keyPath:keyPath
+              duration:duration
+            startDelay:startDelay
+        timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+}
+
+- (void)animateLayer:(CALayer *)layer
+             keyPath:(NSString *)keyPath
+            duration:(CGFloat)duration
+          startDelay:(CGFloat)startDelay
+      timingFunction:(CAMediaTimingFunction *)timingFunction
+{
+    NSCAssert(layer && keyPath && duration >= 0.0 && startDelay >= 0.0 && timingFunction, @"");
     
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.beginTime = CACurrentMediaTime() + startDelay;
     animation.fromValue = @(0.0);
     animation.toValue = @(1.0);
-    animation.duration = animationDuration;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.duration = duration;
+    animation.timingFunction = timingFunction;
     animation.fillMode = kCAFillModeForwards;
     animation.removedOnCompletion = NO;
-    [shapeLayer addAnimation:animation forKey:animationKeyPath];
+    [layer addAnimation:animation forKey:keyPath];
 }
 
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex {

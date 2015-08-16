@@ -46,8 +46,6 @@ extern const CGFloat ORKGraphViewLeftPadding;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphViewAxisTickLength;
-extern const CGFloat ORKGraphViewGrowAnimationDuration;
-extern const CGFloat ORKGraphViewFadeAnimationDuration;
 
 
 inline static CAShapeLayer *graphLineLayer() {
@@ -55,15 +53,13 @@ inline static CAShapeLayer *graphLineLayer() {
     lineLayer.fillColor = [UIColor clearColor].CGColor;
     lineLayer.lineJoin = kCALineJoinRound;
     lineLayer.lineCap = kCALineCapRound;
-    lineLayer.opacity = 1.0;    
+    lineLayer.opacity = 1.0;
     return lineLayer;
 }
 
 static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
     return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
 }
-
-void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat animationDuration, CGFloat startDelay);
 
 
 @interface ORKGraphView ()
@@ -94,7 +90,7 @@ void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat 
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
 
-- (CGFloat)animateLayersSequentially;
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
 
@@ -105,5 +101,11 @@ void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 
 - (void)updateLineLayers;
+
+- (void)animateLayer:(CALayer *)layer
+             keyPath:(NSString *)keyPath
+            duration:(CGFloat)duration
+          startDelay:(CGFloat)startDelay
+      timingFunction:(CAMediaTimingFunction *)timingFunction;
 
 @end

@@ -229,14 +229,16 @@
     }];
 }
 
-- (CGFloat)animateLayersSequentially {
-    CGFloat startDelay = [super animateLayersSequentially];
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
+    [super animateLayersSequentiallyWithDuration:duration];
     for (NSUInteger i = 0; i < _fillLayers.count; i++) {
         CAShapeLayer *layer = _fillLayers[i];
-        animateLayer(layer, @"opacity", ORKGraphViewFadeAnimationDuration, startDelay);
-        startDelay += ORKGraphViewGrowAnimationDuration;
+        [self animateLayer:layer
+                   keyPath:@"opacity"
+                  duration:duration * (1/3.0)
+                startDelay:duration * (2/3.0)
+            timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
     }
-    return startDelay;
 }
 
 @end
