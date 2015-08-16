@@ -1,5 +1,7 @@
 /*
- Copyright (c) 2015, James Cox. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,12 +30,26 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
 
-@interface ORKLegendCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) UILabel *titleLabel;
+@class ORKPieChartView;
 
-@property (nonatomic, strong) UIView *dotView;
+@interface ORKPieChartPieView : UIView
+
+@property (nonatomic) UIFont *percentageLabelFont;
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
+
+- (CGFloat)normalizeValues;
+
+- (void)setUpSublayersAndLabels;
+
+- (void)layoutSubviews;
+
+- (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
 @end

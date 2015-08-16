@@ -33,9 +33,10 @@
 #import <UIKit/UIKit.h>
 #import "ORKDefines.h"
 
-@class ORKPieChartView;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ORKPieChartView;
 
 /**
  An object that adopts the `ORKPieChartViewDataSource` protocol is responsible for providing the

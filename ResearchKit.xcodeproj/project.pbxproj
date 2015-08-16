@@ -372,8 +372,8 @@
 		BCB6E64B1B7D531C000D5B34 /* ORKPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6491B7D531C000D5B34 /* ORKPieChartView.m */; };
 		BCB6E6501B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E64C1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h */; };
 		BCB6E6511B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E64D1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.m */; };
-		BCB6E6521B7D533B000D5B34 /* ORKLegendCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E64E1B7D533B000D5B34 /* ORKLegendCollectionViewCell.h */; };
-		BCB6E6531B7D533B000D5B34 /* ORKLegendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E64F1B7D533B000D5B34 /* ORKLegendCollectionViewCell.m */; };
+		BCB6E6521B7D533B000D5B34 /* ORKPieChartLegendCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E64E1B7D533B000D5B34 /* ORKPieChartLegendCell.h */; };
+		BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E64F1B7D533B000D5B34 /* ORKPieChartLegendCell.m */; };
 		BCB6E65B1B7D534C000D5B34 /* ORKDiscreteGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6541B7D534C000D5B34 /* ORKDiscreteGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6E65C1B7D534C000D5B34 /* ORKDiscreteGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E6551B7D534C000D5B34 /* ORKDiscreteGraphView.m */; };
 		BCB6E65D1B7D534C000D5B34 /* ORKGraphView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6E6561B7D534C000D5B34 /* ORKGraphView_Internal.h */; };
@@ -387,6 +387,13 @@
 		BCB6E66D1B7D537B000D5B34 /* ORKRangedPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */; };
 		BCC1CD9A1B7ED64F00D86886 /* ORKYAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */; };
 		BCC1CD9B1B7ED64F00D86886 /* ORKYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */; };
+		BCD192DF1B81240400FCC08A /* ORKPieChartPieView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */; };
+		BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */; };
+		BCD192E71B81243900FCC08A /* ORKPieChartLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192E51B81243900FCC08A /* ORKPieChartLegendView.h */; };
+		BCD192E81B81243900FCC08A /* ORKPieChartLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192E61B81243900FCC08A /* ORKPieChartLegendView.m */; };
+		BCD192EB1B81245500FCC08A /* ORKPieChartTitleTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192E91B81245500FCC08A /* ORKPieChartTitleTextView.h */; };
+		BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */; };
+		BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */; };
 		FA7A9D2B1B082688005A2BEA /* ORKConsentDocumentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */; };
 		FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */; };
 		FA7A9D301B083DD3005A2BEA /* ORKConsentSectionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A9D2E1B083DD3005A2BEA /* ORKConsentSectionFormatter.m */; };
@@ -808,8 +815,8 @@
 		BCB6E6491B7D531C000D5B34 /* ORKPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartView.m; path = Charts/ORKPieChartView.m; sourceTree = "<group>"; };
 		BCB6E64C1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKCenteredCollectionViewLayout.h; path = Charts/ORKCenteredCollectionViewLayout.h; sourceTree = "<group>"; };
 		BCB6E64D1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKCenteredCollectionViewLayout.m; path = Charts/ORKCenteredCollectionViewLayout.m; sourceTree = "<group>"; };
-		BCB6E64E1B7D533B000D5B34 /* ORKLegendCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKLegendCollectionViewCell.h; path = Charts/ORKLegendCollectionViewCell.h; sourceTree = "<group>"; };
-		BCB6E64F1B7D533B000D5B34 /* ORKLegendCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKLegendCollectionViewCell.m; path = Charts/ORKLegendCollectionViewCell.m; sourceTree = "<group>"; };
+		BCB6E64E1B7D533B000D5B34 /* ORKPieChartLegendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartLegendCell.h; path = Charts/ORKPieChartLegendCell.h; sourceTree = "<group>"; };
+		BCB6E64F1B7D533B000D5B34 /* ORKPieChartLegendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartLegendCell.m; path = Charts/ORKPieChartLegendCell.m; sourceTree = "<group>"; };
 		BCB6E6541B7D534C000D5B34 /* ORKDiscreteGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKDiscreteGraphView.h; path = Charts/ORKDiscreteGraphView.h; sourceTree = "<group>"; };
 		BCB6E6551B7D534C000D5B34 /* ORKDiscreteGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKDiscreteGraphView.m; path = Charts/ORKDiscreteGraphView.m; sourceTree = "<group>"; };
 		BCB6E6561B7D534C000D5B34 /* ORKGraphView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKGraphView_Internal.h; path = Charts/ORKGraphView_Internal.h; sourceTree = "<group>"; };
@@ -823,6 +830,13 @@
 		BCB6E66B1B7D537B000D5B34 /* ORKRangedPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKRangedPoint.m; path = Charts/ORKRangedPoint.m; sourceTree = "<group>"; };
 		BCC1CD981B7ED64F00D86886 /* ORKYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKYAxisView.h; path = Charts/ORKYAxisView.h; sourceTree = "<group>"; };
 		BCC1CD991B7ED64F00D86886 /* ORKYAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKYAxisView.m; path = Charts/ORKYAxisView.m; sourceTree = "<group>"; };
+		BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartPieView.h; path = Charts/ORKPieChartPieView.h; sourceTree = "<group>"; };
+		BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartPieView.m; path = Charts/ORKPieChartPieView.m; sourceTree = "<group>"; };
+		BCD192E51B81243900FCC08A /* ORKPieChartLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartLegendView.h; path = Charts/ORKPieChartLegendView.h; sourceTree = "<group>"; };
+		BCD192E61B81243900FCC08A /* ORKPieChartLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartLegendView.m; path = Charts/ORKPieChartLegendView.m; sourceTree = "<group>"; };
+		BCD192E91B81245500FCC08A /* ORKPieChartTitleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartTitleTextView.h; path = Charts/ORKPieChartTitleTextView.h; sourceTree = "<group>"; };
+		BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKPieChartTitleTextView.m; path = Charts/ORKPieChartTitleTextView.m; sourceTree = "<group>"; };
+		BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartView_Internal.h; path = Charts/ORKPieChartView_Internal.h; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
 		FA7A9D2A1B082688005A2BEA /* ORKConsentDocumentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentDocumentTests.m; sourceTree = "<group>"; };
 		FA7A9D2D1B083DD3005A2BEA /* ORKConsentSectionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSectionFormatter.h; sourceTree = "<group>"; };
@@ -912,6 +926,7 @@
 		25BD76671B00B37100478C5D /* Pie */ = {
 			isa = PBXGroup;
 			children = (
+				BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */,
 				BCB6E6481B7D531C000D5B34 /* ORKPieChartView.h */,
 				BCB6E6491B7D531C000D5B34 /* ORKPieChartView.m */,
 				25C17CBB1B2058D4001ADDD2 /* Components */,
@@ -924,8 +939,14 @@
 			children = (
 				BCB6E64C1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h */,
 				BCB6E64D1B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.m */,
-				BCB6E64E1B7D533B000D5B34 /* ORKLegendCollectionViewCell.h */,
-				BCB6E64F1B7D533B000D5B34 /* ORKLegendCollectionViewCell.m */,
+				BCB6E64E1B7D533B000D5B34 /* ORKPieChartLegendCell.h */,
+				BCB6E64F1B7D533B000D5B34 /* ORKPieChartLegendCell.m */,
+				BCD192DD1B81240400FCC08A /* ORKPieChartPieView.h */,
+				BCD192DE1B81240400FCC08A /* ORKPieChartPieView.m */,
+				BCD192E51B81243900FCC08A /* ORKPieChartLegendView.h */,
+				BCD192E61B81243900FCC08A /* ORKPieChartLegendView.m */,
+				BCD192E91B81245500FCC08A /* ORKPieChartTitleTextView.h */,
+				BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1798,6 +1819,7 @@
 				86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */,
 				25ECC0951AFBD68300F3D63B /* ORKDeviceMotionReactionTimeStep.h in Headers */,
 				86C40D0A1A8D7C5C00081FAC /* ORKCustomStepView.h in Headers */,
+				BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */,
 				86C40DCE1A8D7C5C00081FAC /* ORKTaskViewController_Internal.h in Headers */,
 				25ECC09F1AFBD92D00F3D63B /* ORKDeviceMotionReactionTimeContentView.h in Headers */,
 				86C40C361A8D7C5C00081FAC /* ORKSpatialSpanGame.h in Headers */,
@@ -1812,6 +1834,7 @@
 				86C40DD61A8D7C5C00081FAC /* ORKUnitLabel.h in Headers */,
 				86C40D9C1A8D7C5C00081FAC /* ORKSubheadlineLabel.h in Headers */,
 				147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */,
+				BCD192DF1B81240400FCC08A /* ORKPieChartPieView.h in Headers */,
 				86C40D441A8D7C5C00081FAC /* ORKInstructionStepViewController.h in Headers */,
 				86C40D841A8D7C5C00081FAC /* ORKSelectionTitleLabel.h in Headers */,
 				86C40E141A8D7C5C00081FAC /* ORKConsentSection+AssetLoading.h in Headers */,
@@ -1836,6 +1859,7 @@
 				86C40C721A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.h in Headers */,
 				86C40CA41A8D7C5C00081FAC /* ORKLocationRecorder.h in Headers */,
 				86C40D201A8D7C5C00081FAC /* ORKFormStep.h in Headers */,
+				BCD192EB1B81245500FCC08A /* ORKPieChartTitleTextView.h in Headers */,
 				86C40C761A8D7C5C00081FAC /* HKSample+ORKJSONDictionary.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
@@ -1882,7 +1906,7 @@
 				86C40D7C1A8D7C5C00081FAC /* ORKScaleValueLabel.h in Headers */,
 				86C40E2C1A8D7C5C00081FAC /* ORKVisualConsentStep.h in Headers */,
 				86C40CB81A8D7C5C00081FAC /* ORKVoiceEngine.h in Headers */,
-				BCB6E6521B7D533B000D5B34 /* ORKLegendCollectionViewCell.h in Headers */,
+				BCB6E6521B7D533B000D5B34 /* ORKPieChartLegendCell.h in Headers */,
 				FA7A9D331B0843A9005A2BEA /* ORKConsentSignatureFormatter.h in Headers */,
 				86C40C5A1A8D7C5C00081FAC /* ORKWalkingTaskStep.h in Headers */,
 				86C40E361A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.h in Headers */,
@@ -1903,6 +1927,7 @@
 				86C40C621A8D7C5C00081FAC /* CLLocation+ORKJSONDictionary.h in Headers */,
 				86C40D801A8D7C5C00081FAC /* ORKSelectionSubTitleLabel.h in Headers */,
 				86C40CB21A8D7C5C00081FAC /* ORKRecorder_Private.h in Headers */,
+				BCD192E71B81243900FCC08A /* ORKPieChartLegendView.h in Headers */,
 				86C40C881A8D7C5C00081FAC /* ORKActiveStepTimerView.h in Headers */,
 				86C40C161A8D7C5C00081FAC /* ORKAudioContentView.h in Headers */,
 				86C40CB41A8D7C5C00081FAC /* ORKTouchRecorder.h in Headers */,
@@ -2202,7 +2227,7 @@
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
-				BCB6E6531B7D533B000D5B34 /* ORKLegendCollectionViewCell.m in Sources */,
+				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
 				86C40D221A8D7C5C00081FAC /* ORKFormStep.m in Sources */,
 				86C40CD61A8D7C5C00081FAC /* ORKTableContainerView.m in Sources */,
@@ -2229,10 +2254,12 @@
 				86C40CF01A8D7C5C00081FAC /* ORKAnswerTextView.m in Sources */,
 				86C40D3E1A8D7C5C00081FAC /* ORKImageChoiceLabel.m in Sources */,
 				86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */,
+				BCD192E81B81243900FCC08A /* ORKPieChartLegendView.m in Sources */,
 				86C40D1E1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
+				BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
 				618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */,
@@ -2328,6 +2355,7 @@
 				86C40C861A8D7C5C00081FAC /* ORKActiveStepTimer.m in Sources */,
 				B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */,
 				86C40DE01A8D7C5C00081FAC /* ORKVerticalContainerView.m in Sources */,
+				BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */,
 				86C40CC61A8D7C5C00081FAC /* ORKCompletionStepViewController.m in Sources */,
 				BCB6E65F1B7D534C000D5B34 /* ORKGraphView.m in Sources */,
 				86C40D661A8D7C5C00081FAC /* ORKQuestionStepViewController.m in Sources */,

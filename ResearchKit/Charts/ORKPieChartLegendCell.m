@@ -29,11 +29,11 @@
  */
 
 
-#import "ORKLegendCollectionViewCell.h"
+#import "ORKPieChartLegendCell.h"
 #import "ORKSkin.h"
 
 
-@implementation ORKLegendCollectionViewCell
+@implementation ORKPieChartLegendCell
 
 #pragma mark - Init
 
