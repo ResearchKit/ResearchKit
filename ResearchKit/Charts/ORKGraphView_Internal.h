@@ -43,29 +43,27 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
 };
 
 extern const CGFloat ORKGraphViewLeftPadding;
-extern const CGFloat ORKGraphViewGrowAnimationDuration;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphViewAxisTickLength;
+extern const CGFloat ORKGraphViewGrowAnimationDuration;
+extern const CGFloat ORKGraphViewFadeAnimationDuration;
 
 
-inline static CAShapeLayer *graphLineLayer(BOOL shouldAnimate) {
+inline static CAShapeLayer *graphLineLayer() {
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.fillColor = [UIColor clearColor].CGColor;
     lineLayer.lineJoin = kCALineJoinRound;
     lineLayer.lineCap = kCALineCapRound;
-    lineLayer.opacity = 1.0;
-
-    if (shouldAnimate) {
-        lineLayer.strokeEnd = 0;
-    }
-    
+    lineLayer.opacity = 1.0;    
     return lineLayer;
 }
 
 static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
     return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
 }
+
+void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat animationDuration, CGFloat startDelay);
 
 
 @interface ORKGraphView ()
@@ -82,8 +80,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 @property (nonatomic) UIView *scrubberLine;
 
-@property (nonatomic) BOOL shouldAnimate;
-
 - (void)sharedInit;
 
 - (NSInteger)numberOfPlots;
@@ -99,8 +95,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
 
 - (CGFloat)animateLayersSequentially;
-
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay;
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
 

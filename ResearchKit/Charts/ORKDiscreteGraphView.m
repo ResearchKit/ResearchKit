@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -52,17 +53,15 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
-    NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
-    [self.lineLayers addObject:currentPlotLineLayers];
     for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
-            CAShapeLayer *lineLayer = graphLineLayer(self.shouldAnimate);
+            CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
             lineLayer.lineWidth = ORKGraphViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];
-            [currentPlotLineLayers addObject:lineLayer];
+            [self.lineLayers[plotIndex] addObject:lineLayer];
         }
     }
 }

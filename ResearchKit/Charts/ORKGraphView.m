@@ -41,24 +41,19 @@
 
 
 const CGFloat ORKGraphViewLeftPadding = 10.0;
-const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
 const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
 const CGFloat ORKGraphViewAxisTickLength = 10.0;
+const CGFloat ORKGraphViewGrowAnimationDuration = 0.1;
+const CGFloat ORKGraphViewFadeAnimationDuration = 0.2;
 
 static const CGFloat TopPadding = 0.0;
 static const CGFloat XAxisHeight = 30.0;
 static const CGFloat YAxisPaddingFactor = 0.12;
-static const CGFloat FadeAnimationDuration = 0.2;
-static const CGFloat PopAnimationDuration  = 0.3;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
-static const CGFloat LayerAnimationDelay = 0.02;
-
-ORKDefineStringKey(FadeAnimationKey);
-ORKDefineStringKey(GrowAnimationKey);
-ORKDefineStringKey(PopAnimationKey);
+static const CGFloat LayerAnimationDelay = 0.1;
 
 
 @interface ORKGraphView () <UIGestureRecognizerDelegate>
@@ -115,8 +110,6 @@ ORKDefineStringKey(PopAnimationKey);
     _panGestureRecognizer.delegate = self;
     [self addGestureRecognizer:_panGestureRecognizer];
     
-    _shouldAnimate = NO;
-
     [self setUpViews];
 }
 
@@ -304,10 +297,6 @@ ORKDefineStringKey(PopAnimationKey);
     } else if (_noDataLabel) {
         [_noDataLabel removeFromSuperview];
     }
-    
-    if (_shouldAnimate) {
-        [self animateLayersSequentially];
-    }
 }
 
 - (void)layoutReferenceLineLayers {
@@ -356,31 +345,25 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     [_pointLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_pointLayers removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
+        [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
     }
 }
 
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
-    NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
-    [_pointLayers addObject:currentPlotPointLayers];
     UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
     for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         if (!dataPoint.isUnset) {
             CAShapeLayer *pointLayer = graphPointLayer(tintColor);
             [_plotView.layer addSublayer:pointLayer];
-            [currentPlotPointLayers addObject:pointLayer];
-            if (_shouldAnimate) {
-                pointLayer.opacity = 0;
-            }
+            [_pointLayers[plotIndex] addObject:pointLayer];
             
             if (!dataPoint.hasEmptyRange) {
                 CAShapeLayer *pointLayer = graphPointLayer(tintColor);
                 [_plotView.layer addSublayer:pointLayer];
-                [currentPlotPointLayers addObject:pointLayer];
-                if (_shouldAnimate) {
-                    pointLayer.opacity = 0;
-                }
+                [_pointLayers[plotIndex] addObject:pointLayer];
             }
         }
     }
@@ -419,6 +402,9 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
     [_lineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_lineLayers removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+        // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
+        NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
+        [self.lineLayers addObject:currentPlotLineLayers];
         if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
             [self updateLineLayersForPlotIndex:plotIndex];
         }
@@ -616,68 +602,53 @@ inline static CAShapeLayer *graphPointLayer(UIColor *tintColor) {
 
 #pragma Mark - Animation
 
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    if (animationDuration < 0) {
+        @throw [NSException exceptionWithName:NSGenericException reason:@"animationDuration cannot be lower than 0" userInfo:nil];
+    }
+    for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
+        for (CAShapeLayer *lineLayer in _lineLayers[plotIndex]) {
+            lineLayer.strokeEnd = 0;
+        }
+        for (CAShapeLayer *pointLayer in _pointLayers[plotIndex]) {
+            pointLayer.opacity = 0;
+        }
+    }
+    [self animateLayersSequentially];
+}
+
 - (CGFloat)animateLayersSequentially {
-    CGFloat delay = LayerAnimationDelay;
+    CGFloat startDelay = LayerAnimationDelay;
     
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
         for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_pointLayers[plotIndex]).count; pointIndex++) {
             CAShapeLayer *layer = _pointLayers[plotIndex][pointIndex];
-            [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-            delay += LayerAnimationDelay;
+            animateLayer(layer, @"opacity", ORKGraphViewFadeAnimationDuration, startDelay);
+            startDelay += LayerAnimationDelay;
         }
-    }
-    
-    for (NSUInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
         for (NSUInteger pointIndex = 0; pointIndex < ((NSMutableArray *)_lineLayers[plotIndex]).count; pointIndex++) {
             CAShapeLayer *layer = _lineLayers[plotIndex][pointIndex];
-            [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeGrow startDelay:delay];
-            delay += ORKGraphViewGrowAnimationDuration;
+            animateLayer(layer, @"strokeEnd", ORKGraphViewGrowAnimationDuration, startDelay);
+            startDelay += ORKGraphViewGrowAnimationDuration;
         }
+
     }
-    return delay;
-}
-
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType {
-    [self animateLayer:shapeLayer withAnimationType:animationType toValue:1.0];
-}
-
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue {
-    [self animateLayer:shapeLayer withAnimationType:animationType toValue:toValue startDelay:0.0];
-}
-
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType startDelay:(CGFloat)delay {
-    [self animateLayer:shapeLayer withAnimationType:animationType toValue:1.0 startDelay:delay];
-}
-
-- (void)animateLayer:(CAShapeLayer *)shapeLayer withAnimationType:(ORKGraphAnimationType)animationType toValue:(CGFloat)toValue startDelay:(CGFloat)delay {
     
-    NSString *animationKeyPath = nil;
-    CGFloat animationDuration = 0.0;
-    NSString *animationKey = nil;
-    if (animationType == ORKGraphAnimationTypeFade) {
-        animationKeyPath = @"opacity";
-        animationDuration = FadeAnimationDuration;
-        animationKey = FadeAnimationKey;
-    } else if (animationType == ORKGraphAnimationTypeGrow) {
-        animationKeyPath = @"strokeEnd";
-        animationDuration = ORKGraphViewGrowAnimationDuration;
-        animationKey = GrowAnimationKey;
-    } else if (animationType == ORKGraphAnimationTypePop) {
-        animationKeyPath = @"transform.scale";
-        animationDuration = PopAnimationDuration;
-        animationKey = PopAnimationKey;
-    }
-    NSAssert(animationKeyPath && animationKey && animationDuration > 0.0, @"");
+    return startDelay;
+}
+
+void animateLayer(CAShapeLayer *shapeLayer, NSString *animationKeyPath, CGFloat animationDuration, CGFloat startDelay) {
+    NSCAssert(animationKeyPath && animationDuration > 0.0, @"");
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:animationKeyPath];
-    animation.beginTime = CACurrentMediaTime() + delay;
-    animation.fromValue = @0;
-    animation.toValue = @(toValue);
+    animation.beginTime = CACurrentMediaTime() + startDelay;
+    animation.fromValue = @(0.0);
+    animation.toValue = @(1.0);
     animation.duration = animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animation.fillMode = kCAFillModeForwards;
     animation.removedOnCompletion = NO;
-    [shapeLayer addAnimation:animation forKey:animationKey];
+    [shapeLayer addAnimation:animation forKey:animationKeyPath];
 }
 
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex {

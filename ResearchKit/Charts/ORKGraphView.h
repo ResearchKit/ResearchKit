@@ -300,6 +300,14 @@ ORK_CLASS_AVAILABLE
 */
 @property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
+/**
+ Animates the graph when it first displays on the screen. You can optionally call this method
+ from the `- viewWillAppear:` implementation of the view controller that owns the graph view.
+ 
+ @param animationDuration       The duration of the appearing animation.
+ */
+- (void)animateWithDuration:(NSTimeInterval)animationDuration;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -61,9 +62,6 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
-    NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
-    [self.lineLayers addObject:currentPlotLineLayers];
-
     BOOL previousPointExists = NO;
     BOOL emptyDataPresent = NO;
     for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
@@ -78,7 +76,7 @@
             continue;
         }
         
-        CAShapeLayer *lineLayer = graphLineLayer(self.shouldAnimate);
+        CAShapeLayer *lineLayer = graphLineLayer();
         lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
         lineLayer.lineWidth = 2.0;
         
@@ -88,18 +86,14 @@
         }
         
         [self.plotView.layer addSublayer:lineLayer];
-        [currentPlotLineLayers addObject:lineLayer];
+        [self.lineLayers[plotIndex] addObject:lineLayer];
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.4].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
-    [_fillLayers addObject:fillLayer];
-    
-    if (self.shouldAnimate) {
-        fillLayer.opacity = 0;
-    }
+    [_fillLayers addObject:fillLayer];    
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
@@ -219,6 +213,15 @@
 
 #pragma mark - Animations
 
+- (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    for (NSUInteger plotIndex = 0; plotIndex < _fillLayers.count; plotIndex++) {
+        for (CAShapeLayer *fillLayer in _fillLayers) {
+            fillLayer.opacity = 0;
+        }
+    }
+    [super animateWithDuration:animationDuration];
+}
+
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
     [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
         self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
@@ -227,13 +230,13 @@
 }
 
 - (CGFloat)animateLayersSequentially {
-    CGFloat delay = [super animateLayersSequentially];
+    CGFloat startDelay = [super animateLayersSequentially];
     for (NSUInteger i = 0; i < _fillLayers.count; i++) {
         CAShapeLayer *layer = _fillLayers[i];
-        [self animateLayer:layer withAnimationType:ORKGraphAnimationTypeFade startDelay:delay];
-        delay += ORKGraphViewGrowAnimationDuration;
+        animateLayer(layer, @"opacity", ORKGraphViewFadeAnimationDuration, startDelay);
+        startDelay += ORKGraphViewGrowAnimationDuration;
     }
-    return delay;
+    return startDelay;
 }
 
 @end
