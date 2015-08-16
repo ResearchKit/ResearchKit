@@ -82,13 +82,8 @@ class ChartListViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
         lineGraphTableViewCell.graphView.animateWithDuration(0.5)
         discreteGraphTableViewCell.graphView.animateWithDuration(0.5)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        // Optional animation on first appearance
-        pieChartTableViewCell.pieChartView.animateWithDuration(0.5)
-    }
+    }    
 }

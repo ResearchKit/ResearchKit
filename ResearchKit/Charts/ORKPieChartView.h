@@ -191,7 +191,7 @@ ORK_CLASS_AVAILABLE
 /**
  Animates the pie chart when it first displays on the screen.
  
- You can optionally call this method from the `- viewDidAppear:` implementation of the view
+ You can optionally call this method from the `- viewWillAppear:` implementation of the view
  controller that owns the pie chart view.
  
  @param animationDuration       The duration of the appearing animation.
