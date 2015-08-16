@@ -851,6 +851,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     [self layoutIfNeeded]; // Needed so _pieView (a UICollectionView subclass) dequees and displays the cells
     [_pieView animateWithDuration:animationDuration];
     [_legendView animateWithDuration:animationDuration];
+    [_titleTextView animateWithDuration:animationDuration];
 }
 
 @end
