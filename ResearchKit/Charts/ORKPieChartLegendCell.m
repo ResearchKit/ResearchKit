@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, James Cox. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -65,12 +66,14 @@ const CGFloat DotToLabelPadding = 6.0;
     _dotView.layer.masksToBounds = YES;
     [self.contentView addSubview:_titleLabel];
     [self.contentView addSubview:_dotView];
+    
+    [self setUpConstraints];
 }
 
 #pragma mark - Layout
 
-- (void)updateConstraints {
-    NSMutableArray *constraints = [@[] mutableCopy];
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _dotView);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_titleLabel]-(>=0)-|"
@@ -109,7 +112,6 @@ const CGFloat DotToLabelPadding = 6.0;
                                                          constant:0.0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
-    [super updateConstraints];
 }
 
 + (BOOL)requiresConstraintBasedLayout {

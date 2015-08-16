@@ -39,15 +39,19 @@
 
 @implementation ORKPieChartLegendView {
     __weak ORKPieChartView *_parentPieChartView;
+    ORKPieChartLegendCell *_sizingCell;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
     ORKCenteredCollectionViewLayout *centeredCollectionViewLayout = [[ORKCenteredCollectionViewLayout alloc] init];
+    centeredCollectionViewLayout.estimatedItemSize = CGSizeMake(100.0, 30.0);
     self = [super initWithFrame:CGRectZero collectionViewLayout:centeredCollectionViewLayout];
     if (self) {
         _parentPieChartView = parentPieChartView;
         [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:@"cell"];
-        
+
+        _sizingCell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
+
         self.backgroundColor = [UIColor clearColor];
         self.translatesAutoresizingMaskIntoConstraints = NO;
         self.dataSource = self;
@@ -58,6 +62,11 @@
         
     }
     return self;
+}
+
+- (void)setLabelFont:(UIFont *)labelFont {
+    _labelFont = labelFont;
+    _sizingCell.titleLabel.font = _labelFont;
 }
 
 - (CGSize)intrinsicContentSize {
@@ -107,11 +116,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ORKPieChartLegendCell *cell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
-    cell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
-    cell.titleLabel.font = _labelFont;
-    [cell.contentView setNeedsUpdateConstraints];
-    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    _sizingCell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
+    CGSize size = [_sizingCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return size;
 }
 
