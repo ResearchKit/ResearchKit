@@ -178,7 +178,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _yAxisPoints = [NSMutableArray new];
     _pointLayers = [NSMutableArray new];
     _lineLayers = [NSMutableArray new];
-    self.tintColor = [UIColor colorWithRed:244/255.f green:190/255.f blue:74/255.f alpha:1.f];
     _hasDataPoints = NO;
     
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -193,6 +192,13 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
                                              selector:@selector(updateContentSizeCategoryFonts)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
+}
+
+- (void)tintColorDidChange {
+    [self updateLineLayers];
+    [self updatePointLayers];
+    [self layoutLineLayers];
+    [self layoutPointLayers];
 }
 
 - (void)updateContentSizeCategoryFonts {
@@ -348,12 +354,16 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
                                      1,
                                      CGRectGetHeight(_plotView.frame));
     
+    [self updateYAxisPoints];
+    [self layoutLineLayers];
+    [self layoutPointLayers];
+}
+
+- (void)updateYAxisPoints {
     [_yAxisPoints removeAllObjects];
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
     }
-    [self layoutLineLayers];
-    [self layoutPointLayers];
 }
 
 - (void)layoutHorizontalReferenceLineLayers {
@@ -447,6 +457,9 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)layoutPointLayers {
+    NSUInteger numberOfPlots = [self numberOfPlots];
+    if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
+
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
     }
@@ -454,7 +467,6 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 
 - (void)layoutPointLayersForPlotIndex:(NSInteger)plotIndex {
     NSUInteger pointLayerIndex = 0;
-    [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
     for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_dataPoints[plotIndex]).count; pointIndex++) {
         ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][pointIndex];
         if (!dataPointValue.isUnset) {
@@ -490,6 +502,9 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)layoutLineLayers {
+    NSUInteger numberOfPlots = [self numberOfPlots];
+    if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
+    
     for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
             [self layoutLineLayersForPlotIndex:plotIndex];

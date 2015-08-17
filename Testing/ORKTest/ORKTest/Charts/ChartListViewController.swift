@@ -103,6 +103,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             lineGraphView.scrubberThumbColor = UIColor.greenColor()
         }
         executeAfterDelay(3.5) {
+            lineGraphView.tintColor = UIColor.purpleColor()
             let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
             let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
             lineGraphView.maximumValueImage = maximumValueImage

@@ -59,6 +59,7 @@ class ChartListViewController: UITableViewController {
         lineGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphIdentifier) as! LineGraphTableViewCell
         let lineGraphView = lineGraphTableViewCell.graphView as! ORKLineGraphView
         lineGraphView.dataSource = lineGraphDataSource
+        lineGraphView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
         // Optional custom configuration
         lineGraphView.showsHorizontalReferenceLines = true
         lineGraphView.showsVerticalReferenceLines = true
@@ -67,6 +68,7 @@ class ChartListViewController: UITableViewController {
         discreteGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphIdentifier) as! DiscreteGraphTableViewCell
         let discreteGraphView = discreteGraphTableViewCell.graphView as! ORKDiscreteGraphView
         discreteGraphView.dataSource = discreteGraphDataSource
+        discreteGraphView.tintColor = UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
         // Optional custom configuration
         lineGraphView.showsHorizontalReferenceLines = true
         discreteGraphView.showsVerticalReferenceLines = true
