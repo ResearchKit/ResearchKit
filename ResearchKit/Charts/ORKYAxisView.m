@@ -110,8 +110,11 @@ static const CGFloat ImageVerticalPadding = 3.0;
             
             CALayer *tickLayer = [CALayer layer];
             CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-            CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
-            tickLayer.frame = CGRectMake(tickXOrigin, tickYPosition - 0.5, ORKGraphViewAxisTickLength + 2, 1);
+            CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength;
+            tickLayer.frame = CGRectMake(tickXOrigin,
+                                         tickYPosition - 0.5,
+                                         ORKGraphViewAxisTickLength,
+                                         1);
             tickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
 
             [self.layer addSublayer:tickLayer];
@@ -121,7 +124,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
             CGFloat labelYPosition = tickYPosition - labelHeight / 2;
             UILabel *tickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,
                                                                            labelYPosition,
-                                                                           width - ORKGraphViewAxisTickLength,
+                                                                           width - (ORKGraphViewAxisTickLength + ORKGraphViewYAxisTickPadding),
                                                                            labelHeight)];
             
             CGFloat yValue = minimumValue + (maximumValue - minimumValue) * factor;
@@ -154,14 +157,14 @@ static const CGFloat ImageVerticalPadding = 3.0;
         CGFloat factor = factorNumber.floatValue;
         CALayer *tickLayer = _tickLayersByFactor[factorNumber];
         CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength + 2;
+        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength;
         tickLayer.frame = CGRectMake(tickXOrigin,
                                      tickYPosition - 0.5,
-                                     ORKGraphViewAxisTickLength + 2,
+                                     ORKGraphViewAxisTickLength,
                                      1);
         
         UILabel *tickLabel = _tickLabelsByFactor[factorNumber];
-        tickLabel.center = CGPointMake(tickXOrigin - (tickLabel.bounds.size.width / 2 + 2.0), tickYPosition);
+        tickLabel.center = CGPointMake(tickXOrigin - (ORKGraphViewYAxisTickPadding + tickLabel.bounds.size.width / 2), tickYPosition);
     }
 }
 

@@ -115,6 +115,7 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         let discreteGraphView = discreteGraphTableViewCell.graphView as! ORKDiscreteGraphView
         discreteGraphView.dataSource = discreteGraphDataSource
         // Optional custom configuration
+        discreteGraphView.showsHorizontalReferenceLines = true
         discreteGraphView.showsVerticalReferenceLines = true
         discreteGraphView.drawsConnectedRanges = false
         executeAfterDelay(3.5) {

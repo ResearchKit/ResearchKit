@@ -46,6 +46,7 @@ extern const CGFloat ORKGraphViewLeftPadding;
 extern const CGFloat ORKGraphViewPointAndLineSize;
 extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
 extern const CGFloat ORKGraphViewAxisTickLength;
+extern const CGFloat ORKGraphViewYAxisTickPadding;
 
 
 inline static CAShapeLayer *graphLineLayer() {

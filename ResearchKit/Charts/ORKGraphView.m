@@ -43,11 +43,12 @@
 const CGFloat ORKGraphViewLeftPadding = 10.0;
 const CGFloat ORKGraphViewPointAndLineSize = 8.0;
 const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
-const CGFloat ORKGraphViewAxisTickLength = 10.0;
+const CGFloat ORKGraphViewAxisTickLength = 12.0;
+const CGFloat ORKGraphViewYAxisTickPadding = 2.0;
 
-static const CGFloat TopPadding = 0.0;
-static const CGFloat XAxisHeight = 30.0;
-static const CGFloat YAxisPaddingFactor = 0.12;
+static const CGFloat TopPadding = 7.0;
+static const CGFloat XAxisViewHeight = 30.0;
+static const CGFloat YAxisViewWidthFactor = 0.12;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
@@ -98,7 +99,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self calculateMinAndMaxValues];
     [_xAxisView updateTitles];
     [_yAxisView updateTicksAndLabels];
-    [self updateVerticalReferenceLines];
     [self updateLineLayers];
     [self updatePointLayers];
     [self updateNoDataLabel];
@@ -120,9 +120,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 - (void)setReferenceLineColor:(UIColor *)referenceLineColor {
     _referenceLineColor = referenceLineColor;
     _horizontalReferenceLineLayer.strokeColor = referenceLineColor.CGColor;
-    for (CAShapeLayer *verticalReferenceLineLayer in _verticalReferenceLineLayers) {
-        verticalReferenceLineLayer.strokeColor = referenceLineColor.CGColor;
-    }
+    [self updateAndLayoutVerticalReferenceLineLayers];
     [self updatePlotColors];
 }
 
@@ -161,8 +159,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)setShowsVerticalReferenceLines:(BOOL)showsVerticalReferenceLines {
     _showsVerticalReferenceLines = showsVerticalReferenceLines;
-    [self updateVerticalReferenceLines];
-    [self layoutVerticalReferenceLineLayers];
+    [self updateAndLayoutVerticalReferenceLineLayers];
 }
 
 - (void)sharedInit {
@@ -275,21 +272,36 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     }
 }
 
-- (void)updateVerticalReferenceLines {
-    [_verticalReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    _verticalReferenceLineLayers = nil;
-    if (_showsVerticalReferenceLines) {
-        _verticalReferenceLineLayers = [NSMutableArray new];
-        
-        for (NSInteger i = 1; i < [self numberOfXAxisPoints]; i++) {
-            CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
-            referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
-            referenceLineLayer.lineDashPattern = @[@6, @4];
+inline static UIImage *graphVerticalReferenceLineLayerImageWithTintColor(UIColor *tintColor, CGFloat height) {
+    static UIImage *lineImage = nil;
+    static UIColor *lineImageColor = nil;
+    static CGFloat lineImageHeight = 0.0;
+    if (height > 0 && (!lineImage || ![lineImageColor isEqual:tintColor] || lineImageHeight != height)) {
+        lineImageColor = tintColor;
+        UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
+        [referenceLinePath moveToPoint:CGPointMake(0, 0)];
+        [referenceLinePath addLineToPoint:CGPointMake(0, height)];
 
-            [_referenceLinesView.layer insertSublayer:referenceLineLayer atIndex:0];
-            [_verticalReferenceLineLayers addObject:referenceLineLayer];
-        }
+        CAShapeLayer *referenceLineLayer = [CAShapeLayer new];
+        referenceLineLayer.path = referenceLinePath.CGPath;
+        referenceLineLayer.strokeColor = tintColor.CGColor;
+        referenceLineLayer.lineDashPattern = @[@6, @4];
+        
+        UIGraphicsBeginImageContextWithOptions((CGSize){1, height}, NO, [UIScreen mainScreen].scale);
+        [referenceLineLayer renderInContext:UIGraphicsGetCurrentContext()];
+        lineImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
+    return lineImage;
+}
+
+inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tintColor, CGFloat height) {
+    CALayer *referenceLineLayer = [CALayer new];
+    referenceLineLayer.frame = (CGRect){{0, 0}, {[UIScreen mainScreen].scale, height}};
+    referenceLineLayer.anchorPoint = CGPointMake(0, 0);
+    referenceLineLayer.contents = (__bridge id)(graphVerticalReferenceLineLayerImageWithTintColor(tintColor, height).CGImage);
+    
+    return referenceLineLayer;
 }
 
 - (void)obtainDataPoints {
@@ -329,11 +341,12 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisPaddingFactor;
+    
+    CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisViewWidthFactor;
     CGRect plotViewFrame = CGRectMake(ORKGraphViewLeftPadding,
                                       TopPadding,
                                       CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
-                                      CGRectGetHeight(self.frame) - XAxisHeight - TopPadding);
+                                      CGRectGetHeight(self.frame) - XAxisViewHeight - TopPadding);
 
     _referenceLinesView.frame = plotViewFrame;
     _plotView.frame = plotViewFrame;
@@ -341,17 +354,17 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _xAxisView.frame = CGRectMake(CGRectGetMinX(_plotView.frame),
                                   CGRectGetMaxY(_plotView.frame),
                                   CGRectGetWidth(_plotView.frame),
-                                  XAxisHeight);
+                                  XAxisViewHeight);
 
-    CGFloat yAxisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisPaddingFactor);
-    CGFloat yAxisViewWidth = CGRectGetWidth(self.frame) * YAxisPaddingFactor;
+    CGFloat yAxisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisViewWidthFactor);
+    CGFloat yAxisViewWidth = CGRectGetWidth(self.frame) * YAxisViewWidthFactor;
     _yAxisView.frame = CGRectMake(yAxisViewXPosition,
                                   TopPadding,
                                   yAxisViewWidth,
                                   CGRectGetHeight(_plotView.frame));
-
+    
     [self layoutHorizontalReferenceLineLayers];
-    [self layoutVerticalReferenceLineLayers];
+    [self updateAndLayoutVerticalReferenceLineLayers];
     
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(0,
@@ -380,29 +393,29 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)layoutHorizontalReferenceLineLayers {
     if (_showsHorizontalReferenceLines) {
-        CGFloat plotViewHeight = _plotView.bounds.size.height;
+        CGSize plotViewSize = _plotView.bounds.size;
         UIBezierPath *horizontalReferenceLinePath = [UIBezierPath bezierPath];
-        [horizontalReferenceLinePath moveToPoint:CGPointMake(ORKGraphViewLeftPadding,
-                                                             TopPadding + plotViewHeight / 2)];
-        [horizontalReferenceLinePath addLineToPoint:CGPointMake(CGRectGetWidth(self.frame),
-                                                                TopPadding + plotViewHeight / 2)];
+        [horizontalReferenceLinePath moveToPoint:CGPointMake(0,
+                                                             plotViewSize.height / 2)];
+        [horizontalReferenceLinePath addLineToPoint:CGPointMake(plotViewSize.width + _yAxisView.bounds.size.width,
+                                                                plotViewSize.height / 2)];
         _horizontalReferenceLineLayer.path = horizontalReferenceLinePath.CGPath;
     }
 }
 
-- (void)layoutVerticalReferenceLineLayers {
+- (void)updateAndLayoutVerticalReferenceLineLayers {
+    [_verticalReferenceLineLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    _verticalReferenceLineLayers = nil;
     if (_showsVerticalReferenceLines) {
+        _verticalReferenceLineLayers = [NSMutableArray new];
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
-        for (NSUInteger i = 0; i < _verticalReferenceLineLayers.count; i++) {
-            CAShapeLayer *verticalReferenceLineLayer = _verticalReferenceLineLayers[i];
-            
-            CGFloat positionOnXAxis = xAxisPoint(i + 1, [self numberOfXAxisPoints], plotViewWidth);
-            UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
-            [referenceLinePath moveToPoint:CGPointMake(positionOnXAxis, 0)];
-            [referenceLinePath addLineToPoint:CGPointMake(positionOnXAxis, plotViewHeight)];
-            
-            verticalReferenceLineLayer.path = referenceLinePath.CGPath;
+        for (NSUInteger i = 1; i < [self numberOfXAxisPoints]; i++) {
+            CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithTintColor(_referenceLineColor, plotViewHeight);
+            CGFloat positionOnXAxis = xAxisPoint(i, [self numberOfXAxisPoints], plotViewWidth);
+            verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
+            [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
+            [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
         }
     }
 }
