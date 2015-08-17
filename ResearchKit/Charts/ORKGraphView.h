@@ -78,8 +78,8 @@ ORK_AVAILABLE_DECL
  An object that adopts the `ORKGraphViewDataSource` protocol is responsible for providing the data
  required to populate an `ORKGraphView` object.
 
- At a minimum, a data source object must implement the graphView:numberOfPointsInPlot: and 
- graphView:plot:valueForPointAtIndex: methods. These methods are responsible for returning the
+ At a minimum, a data source object must implement the `graphView:numberOfPointsInPlot:` and
+ `graphView:plot:valueForPointAtIndex:` methods. These methods are responsible for returning the
  number of points in a plot and the points themselves. A point in a plot is represented by an 
  instance of `ORKRangedPoint`. Optionally, a data source object may provide additional information
  to the graph view by implementing the remaining `ORKGraphViewDataSouce` methods.
@@ -177,7 +177,7 @@ ORK_AVAILABLE_DECL
 
  @param graphView    The graph view asking for the tile.
  @param pointIndex   The index corresponding to the number returned by 
- `numberoFDivisionsInXAxisForGraphView:`.
+ `numberOfDivisionsInXAxisForGraphView:`.
 
  @return The title string to be displayed adjacent to each division of the x-axis of `graphView`.
 */
@@ -188,7 +188,7 @@ ORK_AVAILABLE_DECL
 
 /**
  The `ORKGraphView` class is an abstract class. It holds properties and methods common to classes
- like ORKLineGraphView and ORKDiscreteGraphView. You should not instantiate this class directly,
+ like `ORKLineGraphView` and `ORKDiscreteGraphView`. You should not instantiate this class directly,
  you should use a subclass.
 */
 ORK_CLASS_AVAILABLE
@@ -314,7 +314,7 @@ ORK_CLASS_AVAILABLE
 /**
  Animates the graph when it first displays on the screen.
  
- You can optionally call this method from the `- viewWillAppear:` implementation of the view
+ You can optionally call this method from the `viewWillAppear:` implementation of the view
  controller that owns the graph view.
  
  @param animationDuration       The duration of the appearing animation.

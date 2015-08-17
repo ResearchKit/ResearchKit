@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  data required to populate an `ORKPieChartView` object.
 
  At a minimumm a data source object must implement the `numberOfSegmentsInPieChartView` and
- `pieChartView:valueForSegmentAtIndex:`methods. These methods are responsible for returning the
+ `pieChartView:valueForSegmentAtIndex:` methods. These methods are responsible for returning the
  number of segments in a pie chart view and the value for each segment. Optionally, a data source
  object may provide additional information to the pie chart by implementing the remaining
  `ORKPieChartViewDataSource` methods.
@@ -182,7 +182,7 @@ ORK_CLASS_AVAILABLE
 /**
  Animates the pie chart when it first displays on the screen.
  
- You can optionally call this method from the `- viewWillAppear:` implementation of the view
+ You can optionally call this method from the `viewWillAppear:` implementation of the view
  controller that owns the pie chart view.
  
  @param animationDuration       The duration of the appearing animation.
