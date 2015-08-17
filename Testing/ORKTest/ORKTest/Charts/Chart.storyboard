@@ -136,7 +136,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="WZ6-mC-IEj" firstAttribute="top" secondItem="igJ-g1-C2g" secondAttribute="bottom" id="3si-iV-C5I"/>
                             <constraint firstItem="igJ-g1-C2g" firstAttribute="leading" secondItem="n8g-W7-H6f" secondAttribute="leading" id="Cvx-rr-Ohn"/>
