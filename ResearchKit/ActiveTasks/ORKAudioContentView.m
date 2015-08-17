@@ -251,7 +251,7 @@ static const CGFloat kValueLineMargin = 1.5;
     [self applyKeyColor];
 }
 
--(void)setFailed:(BOOL)failed {
+- (void)setFailed:(BOOL)failed {
     _failed = failed;
     _alertLabel.text = failed ? ORKLocalizedString(@"AUDIO_GENERIC_ERROR_LABEL", nil) : ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
     [self updateAlertLabelHidden];

@@ -86,7 +86,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)queue_sessionRunning {
+- (void)queue_sessionRunning {
     dispatch_async(dispatch_get_main_queue(), ^{
         _previewView.templateImageHidden = NO;
     });

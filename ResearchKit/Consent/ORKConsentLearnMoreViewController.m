@@ -54,7 +54,7 @@
     return self;
 }
 
--(instancetype)initWithContentURL:(NSURL * __nonnull)contentURL {
+- (instancetype)initWithContentURL:(NSURL * __nonnull)contentURL {
     self = [super init];
     if(self) {
         self.contentURL = contentURL;

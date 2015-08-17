@@ -162,7 +162,7 @@
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     // If the capture session is running, stop it
     if(self.captureSession.isRunning) {
         dispatch_async(self.sessionQueue, ^{
@@ -173,8 +173,7 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)queue_setupCaptureSession
-{
+- (void)queue_setupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
     [_captureSession beginConfiguration];
