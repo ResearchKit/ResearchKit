@@ -32,7 +32,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ORKGraphView;
+@class ORKGraphChartView;
 
 @interface ORKXAxisView : UIView
 
@@ -42,7 +42,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
-- (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView NS_DESIGNATED_INITIALIZER;
 
 - (void)updateTitles;
 

@@ -29,27 +29,22 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-
+ 
 #import <UIKit/UIKit.h>
-#import "ORKGraphView.h"
+#import "ORKGraphChartView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKDiscreteGraphView` class presents data provided by an object conforming to the
- `ORKGraphViewDataSource` as a discrete graph.
+ The `ORKLineGraphChartView` class presents data provided by an object conforming to the
+ `ORKGraphChartViewDataSource` as a line graph.
+ 
+ The primary plot is colored by the `tintColor`, and any additional plots are colored using the
+ `referenceLineColor`.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKDiscreteGraphView : ORKGraphView
-
-/**
- A Boolean value indicating whether to draw a line to connect the minimum value and maximum value
- of each ranged point represented by the graph view.
- 
- The default value for this property is YES.
- */
-@property (nonatomic) BOOL drawsConnectedRanges;
+@interface ORKLineGraphChartView : ORKGraphChartView
 
 @end
 

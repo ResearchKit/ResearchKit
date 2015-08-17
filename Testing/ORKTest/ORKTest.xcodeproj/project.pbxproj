@@ -25,7 +25,7 @@
 		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
-		BC9A271C1B81752800BDA84D /* Chart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Chart.storyboard */; };
+		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,18 +136,18 @@
 		B1337BA01B1E709B0098AA54 /* fr-CA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fr-CA"; path = "fr-CA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA11B1E709C0098AA54 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA21B1E70A00098AA54 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
-		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
 		B1337BA31B1E70A10098AA54 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B1337BA41B1E70A20098AA54 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
 		B1337BA51B1E70AA0098AA54 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B1337BA61B1E70AB0098AA54 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
 		B1337BA71B1E70AC0098AA54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		BC9A271B1B81752800BDA84D /* Chart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chart.storyboard; path = Charts/Chart.storyboard; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
+		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
+		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
+		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,7 +268,7 @@
 		BC9A27111B81732200BDA84D /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				BC9A271B1B81752800BDA84D /* Chart.storyboard */,
+				BC9A271B1B81752800BDA84D /* Charts.storyboard */,
 				BC9A27151B81743900BDA84D /* ChartDataSources.swift */,
 				BC9A27161B81743900BDA84D /* ChartListViewController.swift */,
 				BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */,
@@ -442,7 +442,7 @@
 				86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */,
 				86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */,
 				86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */,
-				BC9A271C1B81752800BDA84D /* Chart.storyboard in Resources */,
+				BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +463,6 @@
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
 				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
 				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
-				86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */,
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,

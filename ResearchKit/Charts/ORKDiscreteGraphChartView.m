@@ -31,13 +31,13 @@
 */
 
  
-#import "ORKDiscreteGraphView.h"
-#import "ORKGraphView_Internal.h"
+#import "ORKDiscreteGraphChartView.h"
+#import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
 #import "ORKRangedPoint.h"
 
 
-@implementation ORKDiscreteGraphView
+@implementation ORKDiscreteGraphChartView
 
 #pragma mark - Init
 
@@ -66,7 +66,7 @@
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
-            lineLayer.lineWidth = ORKGraphViewPointAndLineSize;
+            lineLayer.lineWidth = ORKGraphChartViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];
             [self.lineLayers[plotIndex] addObject:lineLayer];
@@ -101,7 +101,7 @@
 }
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex {
-    CGFloat pointWidth = ORKGraphViewPointAndLineSize;
+    CGFloat pointWidth = ORKGraphChartViewPointAndLineSize;
     
     NSInteger numberOfPlots = [self numberOfPlots];
     
@@ -137,8 +137,8 @@
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden:YES];
     }
-    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
-       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
+    [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
+       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
     } completion:^(BOOL finished) {
        if (scrubbingValue != ORKCGFloatInvalidValue) {
            [self setScrubberLineAccessoriesHidden:NO];

@@ -30,13 +30,13 @@
 
 
 #import "ORKYAxisView.h"
-#import "ORKGraphView_Internal.h"
+#import "ORKGraphChartView_Internal.h"
 
 
 static const CGFloat ImageVerticalPadding = 3.0;
 
 @implementation ORKYAxisView {
-    __weak ORKGraphView *_parentGraphView;
+    __weak ORKGraphChartView *_parentGraphChartView;
     NSMutableArray *_titleTickLayers;
     
     UIImageView *_maxImageView;
@@ -46,12 +46,12 @@ static const CGFloat ImageVerticalPadding = 3.0;
     NSMutableDictionary *_tickLabelsByFactor;
 }
 
-- (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView {
+- (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        _parentGraphView = parentGraphView;
-        _axisColor = _parentGraphView.axisColor;
-        _titleColor = _parentGraphView.axisTitleColor;
+        _parentGraphChartView = parentGraphChartView;
+        _axisColor = _parentGraphChartView.axisColor;
+        _titleColor = _parentGraphChartView.axisTitleColor;
     }
     return self;
 }
@@ -74,16 +74,16 @@ static const CGFloat ImageVerticalPadding = 3.0;
     
     CGRect bounds = self.bounds;
     CGFloat width = bounds.size.width;
-    if (_parentGraphView.maximumValueImage && _parentGraphView.minimumValueImage) {
+    if (_parentGraphChartView.maximumValueImage && _parentGraphChartView.minimumValueImage) {
         // Use image icons as legends
         CGFloat halfWidth = width / 2;
         
-        _maxImageView = [[UIImageView alloc] initWithImage:_parentGraphView.maximumValueImage];
+        _maxImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.maximumValueImage];
         _maxImageView.contentMode = UIViewContentModeScaleAspectFit;
         _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
         [self addSubview:_maxImageView];
         
-        _minImageView = [[UIImageView alloc] initWithImage:_parentGraphView.minimumValueImage];
+        _minImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.minimumValueImage];
         _minImageView.contentMode = UIViewContentModeScaleAspectFit;
         _minImageView.frame = CGRectMake(width - halfWidth,
                                         CGRectGetMaxY(bounds) - halfWidth - ImageVerticalPadding,
@@ -96,8 +96,8 @@ static const CGFloat ImageVerticalPadding = 3.0;
         _tickLabelsByFactor = [NSMutableDictionary new];
         
         NSArray *yAxisLabelFactors = nil;
-        CGFloat minimumValue = _parentGraphView.minimumValue;
-        CGFloat maximumValue = _parentGraphView.maximumValue;
+        CGFloat minimumValue = _parentGraphChartView.minimumValue;
+        CGFloat maximumValue = _parentGraphChartView.maximumValue;
         if (minimumValue == maximumValue) {
             yAxisLabelFactors = @[@0.5f];
         } else {
@@ -110,12 +110,12 @@ static const CGFloat ImageVerticalPadding = 3.0;
             
             CALayer *tickLayer = [CALayer layer];
             CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-            CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength;
+            CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphChartViewAxisTickLength;
             tickLayer.frame = CGRectMake(tickXOrigin,
                                          tickYPosition - 0.5,
-                                         ORKGraphViewAxisTickLength,
+                                         ORKGraphChartViewAxisTickLength,
                                          1);
-            tickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+            tickLayer.backgroundColor = _parentGraphChartView.axisColor.CGColor;
 
             [self.layer addSublayer:tickLayer];
             _tickLayersByFactor[factorNumber] = tickLayer;
@@ -124,7 +124,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
             CGFloat labelYPosition = tickYPosition - labelHeight / 2;
             UILabel *tickLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,
                                                                            labelYPosition,
-                                                                           width - (ORKGraphViewAxisTickLength + ORKGraphViewYAxisTickPadding),
+                                                                           width - (ORKGraphChartViewAxisTickLength + ORKGraphChartViewYAxisTickPadding),
                                                                            labelHeight)];
             
             CGFloat yValue = minimumValue + (maximumValue - minimumValue) * factor;
@@ -132,7 +132,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
                 tickLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
             }
             tickLabel.backgroundColor = [UIColor clearColor];
-            tickLabel.textColor = _parentGraphView.axisTitleColor;
+            tickLabel.textColor = _parentGraphChartView.axisTitleColor;
             tickLabel.textAlignment = NSTextAlignmentRight;
             tickLabel.font = _titleFont;
             tickLabel.minimumScaleFactor = 0.8;
@@ -157,14 +157,14 @@ static const CGFloat ImageVerticalPadding = 3.0;
         CGFloat factor = factorNumber.floatValue;
         CALayer *tickLayer = _tickLayersByFactor[factorNumber];
         CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
-        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphViewAxisTickLength;
+        CGFloat tickXOrigin = CGRectGetWidth(self.bounds) - ORKGraphChartViewAxisTickLength;
         tickLayer.frame = CGRectMake(tickXOrigin,
                                      tickYPosition - 0.5,
-                                     ORKGraphViewAxisTickLength,
+                                     ORKGraphChartViewAxisTickLength,
                                      1);
         
         UILabel *tickLabel = _tickLabelsByFactor[factorNumber];
-        tickLabel.center = CGPointMake(tickXOrigin - (ORKGraphViewYAxisTickPadding + tickLabel.bounds.size.width / 2), tickYPosition);
+        tickLabel.center = CGPointMake(tickXOrigin - (ORKGraphChartViewYAxisTickPadding + tickLabel.bounds.size.width / 2), tickYPosition);
     }
 }
 

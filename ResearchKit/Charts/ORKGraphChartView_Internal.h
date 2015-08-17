@@ -29,7 +29,7 @@
 */
 
 
-#import "ORKGraphView.h"
+#import "ORKGraphChartView.h"
 #import "ORKHelpers.h"
 
 
@@ -42,11 +42,11 @@ typedef NS_ENUM(NSUInteger, ORKGraphAnimationType) {
     ORKGraphAnimationTypePop
 };
 
-extern const CGFloat ORKGraphViewLeftPadding;
-extern const CGFloat ORKGraphViewPointAndLineSize;
-extern const CGFloat ORKGraphViewScrubberMoveAnimationDuration;
-extern const CGFloat ORKGraphViewAxisTickLength;
-extern const CGFloat ORKGraphViewYAxisTickPadding;
+extern const CGFloat ORKGraphChartViewLeftPadding;
+extern const CGFloat ORKGraphChartViewPointAndLineSize;
+extern const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration;
+extern const CGFloat ORKGraphChartViewAxisTickLength;
+extern const CGFloat ORKGraphChartViewYAxisTickPadding;
 
 
 inline static CAShapeLayer *graphLineLayer() {
@@ -63,7 +63,7 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 }
 
 
-@interface ORKGraphView ()
+@interface ORKGraphChartView ()
 
 @property (nonatomic) NSMutableArray *lineLayers;
 

@@ -34,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="50" width="600" height="550"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphCell" rowHeight="250" id="KFi-ZJ-545" customClass="DiscreteGraphTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DiscreteGraphChartCell" rowHeight="250" id="KFi-ZJ-545" customClass="DiscreteGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KFi-ZJ-545" id="e5L-1y-jED">
@@ -47,7 +47,7 @@
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-di-t1R" customClass="ORKDiscreteGraphView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT7-di-t1R" customClass="ORKDiscreteGraphChartView">
                                                     <rect key="frame" x="8" y="39" width="584" height="202"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -64,10 +64,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="graphView" destination="lT7-di-t1R" id="w75-Ly-1tP"/>
+                                            <outlet property="graphChartView" destination="lT7-di-t1R" id="w75-Ly-1tP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LineGraphCell" rowHeight="250" id="2i1-4y-xyD" customClass="LineGraphTableViewCell" customModule="ORKTest" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LineGraphChartCell" rowHeight="250" id="2i1-4y-xyD" customClass="LineGraphChartTableViewCell" customModule="ORKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2i1-4y-xyD" id="YJs-Dw-TiB">
@@ -80,7 +80,7 @@
                                                     <color key="textColor" red="0.01176470588" green="0.62352941179999999" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVp-LO-PWd" customClass="ORKLineGraphView">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVp-LO-PWd" customClass="ORKLineGraphChartView">
                                                     <rect key="frame" x="8" y="39" width="584" height="202"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -97,7 +97,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="graphView" destination="KVp-LO-PWd" id="xfV-gc-IdN"/>
+                                            <outlet property="graphChartView" destination="KVp-LO-PWd" id="xfV-gc-IdN"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PieChartCell" rowHeight="400" id="0oB-ve-dS5" customClass="PieChartTableViewCell" customModule="ORKTest" customModuleProvider="target">

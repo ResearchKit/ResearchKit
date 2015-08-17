@@ -31,8 +31,8 @@
  */
 
 
-#import "ORKGraphView.h"
-#import "ORKGraphView_Internal.h"
+#import "ORKGraphChartView.h"
+#import "ORKGraphChartView_Internal.h"
 #import "ORKSkin.h"
 #import "ORKXAxisView.h"
 #import "ORKYAxisView.h"
@@ -40,11 +40,11 @@
 #import "ORKDefines_Private.h"
 
 
-const CGFloat ORKGraphViewLeftPadding = 10.0;
-const CGFloat ORKGraphViewPointAndLineSize = 8.0;
-const CGFloat ORKGraphViewScrubberMoveAnimationDuration = 0.1;
-const CGFloat ORKGraphViewAxisTickLength = 12.0;
-const CGFloat ORKGraphViewYAxisTickPadding = 2.0;
+const CGFloat ORKGraphChartViewLeftPadding = 10.0;
+const CGFloat ORKGraphChartViewPointAndLineSize = 8.0;
+const CGFloat ORKGraphChartViewScrubberMoveAnimationDuration = 0.1;
+const CGFloat ORKGraphChartViewAxisTickLength = 12.0;
+const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 
 static const CGFloat TopPadding = 7.0;
 static const CGFloat XAxisViewHeight = 30.0;
@@ -58,12 +58,12 @@ static const CGFloat ScrubberLabelHorizontalPadding = 12.0;
 static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 #define ScrubberLabelColor ([UIColor colorWithWhite:0.98 alpha:0.8])
 
-@interface ORKGraphView () <UIGestureRecognizerDelegate>
+@interface ORKGraphChartView () <UIGestureRecognizerDelegate>
 
 @end
 
 
-@implementation ORKGraphView {
+@implementation ORKGraphChartView {
     UIView *_referenceLinesView;
     UILabel *_noDataLabel;
     ORKXAxisView *_xAxisView;
@@ -92,7 +92,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return self;
 }
 
-- (void)setDataSource:(id<ORKGraphViewDataSource>)dataSource {
+- (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
     [self obtainDataPoints];
@@ -221,10 +221,10 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _referenceLinesView = [UIView new];
     [self addSubview:_referenceLinesView];
     
-    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphView:self];
+    _xAxisView = [[ORKXAxisView alloc] initWithParentGraphChartView:self];
     [self addSubview:_xAxisView];
 
-    _yAxisView = [[ORKYAxisView alloc] initWithParentGraphView:self];
+    _yAxisView = [[ORKYAxisView alloc] initWithParentGraphChartView:self];
     [self addSubview:_yAxisView];
     
     _plotView = [UIView new];
@@ -312,9 +312,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         
         [_dataPoints addObject:[NSMutableArray new]];
-        NSInteger numberOfPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:plotIndex];
+        NSInteger numberOfPoints = [_dataSource graphChartView:self numberOfPointsForPlotIndex:plotIndex];
         for (NSInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
-            ORKRangedPoint *value = [_dataSource graphView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
+            ORKRangedPoint *value = [_dataSource graphChartView:self pointForPointIndex:pointIndex plotIndex:plotIndex];
             [_dataPoints[plotIndex] addObject:value];
             if (!value.isUnset) {
                 _hasDataPoints = YES;
@@ -346,9 +346,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
     [super layoutSubviews];
     
     CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisViewWidthFactor;
-    CGRect plotViewFrame = CGRectMake(ORKGraphViewLeftPadding,
+    CGRect plotViewFrame = CGRectMake(ORKGraphChartViewLeftPadding,
                                       TopPadding,
-                                      CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphViewLeftPadding,
+                                      CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphChartViewLeftPadding,
                                       CGRectGetHeight(self.frame) - XAxisViewHeight - TopPadding);
 
     _referenceLinesView.frame = plotViewFrame;
@@ -433,7 +433,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
 #pragma mark - Drawing
 
 inline static UIImage *graphPointLayerImageWithTintColor(UIColor *tintColor) {
-    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
+    const CGFloat pointSize = ORKGraphChartViewPointAndLineSize;
     const CGFloat pointLineWidth = 2.0;
     
     static UIImage *pointImage = nil;
@@ -457,7 +457,7 @@ inline static UIImage *graphPointLayerImageWithTintColor(UIColor *tintColor) {
 }
 
 inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
-    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
+    const CGFloat pointSize = ORKGraphChartViewPointAndLineSize;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
     pointLayer.contents = (__bridge id)(graphPointLayerImageWithTintColor(tintColor).CGImage);
@@ -574,8 +574,8 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
 - (NSInteger)numberOfPlots {
     NSInteger numberOfPlots = 1;
     
-    if ([_dataSource respondsToSelector:@selector(numberOfPlotsInGraphView:)]) {
-        numberOfPlots = [_dataSource numberOfPlotsInGraphView:self];
+    if ([_dataSource respondsToSelector:@selector(numberOfPlotsInGraphChartView:)]) {
+        numberOfPlots = [_dataSource numberOfPlotsInGraphChartView:self];
     }
     
     return numberOfPlots;
@@ -588,12 +588,12 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
     
     _numberOfXAxisPoints = 0;
     
-    if ([_dataSource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraphView:)]) {
-        _numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphView:self];
+    if ([_dataSource respondsToSelector:@selector(numberOfDivisionsInXAxisForGraphChartView:)]) {
+        _numberOfXAxisPoints = [_dataSource numberOfDivisionsInXAxisForGraphChartView:self];
     }
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger idx = 0; idx < numberOfPlots; idx++) {
-        NSInteger numberOfPlotPoints = [_dataSource graphView:self numberOfPointsForPlotIndex:idx];
+        NSInteger numberOfPlotPoints = [_dataSource graphChartView:self numberOfPointsForPlotIndex:idx];
         if (_numberOfXAxisPoints < numberOfPlotPoints) {
             _numberOfXAxisPoints = numberOfPlotPoints;
         }
@@ -622,21 +622,21 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
         CGFloat snappedXPosition = [self snappedXPosition:location.x];
         [self updateScrubberViewForXPosition:snappedXPosition];
         
-        if ([_delegate respondsToSelector:@selector(graphView:touchesMovedToXPosition:)]) {
-            [_delegate graphView:self touchesMovedToXPosition:snappedXPosition];
+        if ([_delegate respondsToSelector:@selector(graphChartView:touchesMovedToXPosition:)]) {
+            [_delegate graphChartView:self touchesMovedToXPosition:snappedXPosition];
         }
         
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
             [self setScrubberViewsHidden:NO animated:YES];
-            if ([_delegate respondsToSelector:@selector(graphViewTouchesBegan:)]) {
-                [_delegate graphViewTouchesBegan:self];
+            if ([_delegate respondsToSelector:@selector(graphChartViewTouchesBegan:)]) {
+                [_delegate graphChartViewTouchesBegan:self];
             }
         }
         
         else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
             [self setScrubberViewsHidden:YES animated:YES];
-            if ([_delegate respondsToSelector:@selector(graphViewTouchesEnded:)]) {
-                [_delegate graphViewTouchesEnded:self];
+            if ([_delegate respondsToSelector:@selector(graphChartViewTouchesEnded:)]) {
+                [_delegate graphChartViewTouchesEnded:self];
             }
         }
     }
@@ -655,7 +655,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
         return;
     }
     [self setScrubberLineAccessoriesHidden:NO];
-    [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphViewLeftPadding, scrubberYPosition + TopPadding)];
+    [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding)];
     _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
                                                                            _plotView.bounds.size.height)
@@ -866,13 +866,13 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
     BOOL minimumValueProvided = NO;
     BOOL maximumValueProvided = NO;
     
-    if ([_dataSource respondsToSelector:@selector(minimumValueForGraphView:)]) {
-        _minimumValue = [_dataSource minimumValueForGraphView:self];
+    if ([_dataSource respondsToSelector:@selector(minimumValueForGraphChartView:)]) {
+        _minimumValue = [_dataSource minimumValueForGraphChartView:self];
         minimumValueProvided = YES;
     }
     
-    if ([_dataSource respondsToSelector:@selector(maximumValueForGraphView:)]) {
-        _maximumValue = [_dataSource maximumValueForGraphView:self];
+    if ([_dataSource respondsToSelector:@selector(maximumValueForGraphChartView:)]) {
+        _maximumValue = [_dataSource maximumValueForGraphChartView:self];
         maximumValueProvided = YES;
     }
     

@@ -36,187 +36,187 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKGraphView;
+@class ORKGraphChartView;
 @class ORKRangedPoint;
 
 /**
  The graph view delegate protocol declares methods which forward pan gesture events occuring within
- the bounds of an `ORKGraphView` object.
+ the bounds of an `ORKGraphChartView` object.
 */
 ORK_AVAILABLE_DECL
-@protocol ORKGraphViewDelegate <NSObject>
+@protocol ORKGraphChartViewDelegate <NSObject>
 
 @optional
 /**
- Notifies the delegate that a pan gesture has begun within the bounds of an `ORKGraphView` object.
+ Notifies the delegate that a pan gesture has begun within the bounds of an `ORKGraphChartView` object.
 
- @param graphView    The `ORKGraphView` object in which the gesture occurred.
+ @param graphChartView      The `ORKGraphChartView` object in which the gesture occurred.
 */
-- (void)graphViewTouchesBegan:(ORKGraphView *)graphView;
+- (void)graphChartViewTouchesBegan:(ORKGraphChartView *)graphChartView;
 
 /**
  Notifies the delegate of updates in the x-coordinate of an ongoing pan gesture within the bounds
- of an `ORKGraphView` object.
+ of an `ORKGraphChartView` object.
 
- @param graphView    The `ORKGraphView` object in which the gesture occurred.
- @param xPosition    The updated xPosition of an ongoing pan gesture.
+ @param graphChartView      The `ORKGraphChartView` object in which the gesture occurred.
+ @param xPosition           The updated xPosition of an ongoing pan gesture.
 */
-- (void)graphView:(ORKGraphView *)graphView touchesMovedToXPosition:(CGFloat)xPosition;
+- (void)graphChartView:(ORKGraphChartView *)graphChartView touchesMovedToXPosition:(CGFloat)xPosition;
 
 /**
- Notifies the delegate that a pan gesture which began within the bounds of an `ORKGraphView` object
+ Notifies the delegate that a pan gesture which began within the bounds of an `ORKGraphChartView` object
  has ended.
 
-@param graphView    The `ORKGraphView` object in which the gesture occurred.
+@param graphChartView       The `ORKGraphChartView` object in which the gesture occurred.
 */
-- (void)graphViewTouchesEnded:(ORKGraphView *)graphView;
+- (void)graphChartViewTouchesEnded:(ORKGraphChartView *)graphChartView;
 
 @end
 
 
 /**
- An object that adopts the `ORKGraphViewDataSource` protocol is responsible for providing the data
- required to populate an `ORKGraphView` object.
+ An object that adopts the `ORKGraphChartViewDataSource` protocol is responsible for providing the data
+ required to populate an `ORKGraphChartView` object.
 
- At a minimum, a data source object must implement the `graphView:numberOfPointsInPlot:` and
- `graphView:plot:valueForPointAtIndex:` methods. These methods are responsible for returning the
+ At a minimum, a data source object must implement the `graphChartView:numberOfPointsInPlot:` and
+ `graphChartView:plot:valueForPointAtIndex:` methods. These methods are responsible for returning the
  number of points in a plot and the points themselves. A point in a plot is represented by an 
  instance of `ORKRangedPoint`. Optionally, a data source object may provide additional information
- to the graph view by implementing the remaining `ORKGraphViewDataSouce` methods.
+ to the graph view by implementing the remaining `ORKGraphChartViewDataSouce` methods.
 
- When configuring an `ORKGraphView` object, assign your data source to its dataSource property.
+ When configuring an `ORKGraphChartView` object, assign your data source to its dataSource property.
 */
 ORK_AVAILABLE_DECL
-@protocol ORKGraphViewDataSource <NSObject>
+@protocol ORKGraphChartViewDataSource <NSObject>
 
 @required
 /**
  Asks the data source for the number of range points to be plotted by the graph view at the
  specified plot index.
 
- @param graphView    The graph view asking for the number of range points.
- @param plotIndex    An index number identifying the plot in `graphView`. This index is 0 in 
+ @param graphChartView      The graph view asking for the number of range points.
+ @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
  single-plot graph views.
 
  @return The number of range points in the plot at `plotIndex`.
 */
-- (NSInteger)graphView:(ORKGraphView *)graphView numberOfPointsForPlotIndex:(NSInteger)plotIndex;
+- (NSInteger)graphChartView:(ORKGraphChartView *)graphChartView numberOfPointsForPlotIndex:(NSInteger)plotIndex;
 
 
 /**
  Asks the data source for the range point to be plotted at the specified point index for the
  specified plot.
 
- @param graphView    The graphView asking for the range point.
- @param plotIndex    An index number identifying the plot in `graphView`. This index is 0 in 
+ @param graphChartView      The graphChartView asking for the range point.
+ @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
  single-plot graph views.
- @param pointIndex   An index number identifying the range point in  `graphView`.
+ @param pointIndex          An index number identifying the range point in  `graphChartView`.
 
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
- specified `graphView`.
+ specified `graphChartView`.
 */
-- (ORKRangedPoint *)graphView:(ORKGraphView *)graphView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
+- (ORKRangedPoint *)graphChartView:(ORKGraphChartView *)graphChartView pointForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex;
 
 @optional
 /**
  Asks the data source for the number of plots to be plotted by the graph view. If this method is not
  implemented, the graph view will assume it has a single plot.
 
- @param graphView    The graph view asking for the number of plots.
+ @param graphChartView      The graph view asking for the number of plots.
 
- @return The number of plots in `graphView`.
+ @return The number of plots in `graphChartView`.
 */
-- (NSInteger)numberOfPlotsInGraphView:(ORKGraphView *)graphView;
+- (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph view.
 
  If this method is not implemented, the greatest `maximumValue` of all `ORKRangedPoint` instances
- returned in `graphView:plot:valueForPointAtIndex:` will be used.
+ returned in `graphChartView:plot:valueForPointAtIndex:` will be used.
 
- See also: `graphView:plot:valueForPointAtIndex:`.
+ See also: `graphChartView:plot:valueForPointAtIndex:`.
 
- @param graphView    The graph view asking for the maximum value.
+ @param graphChartView      The graph view asking for the maximum value.
 
- @return The maximum value of the y-axis drawn by `graphView`.
+ @return The maximum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)maximumValueForGraphView:(ORKGraphView *)graphView;
+- (CGFloat)maximumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the lower limit of the y-axis drawn by the graph view.
 
  If this method is not implemented, The smallest `minimumValue` of all ORKRangedPoint instances
- returned in `graphView:plot:valueForPointAtIndex:` will be used.
+ returned in `graphChartView:plot:valueForPointAtIndex:` will be used.
 
- See also: `graphView:plot:valueForPointAtIndex:`.
+ See also: `graphChartView:plot:valueForPointAtIndex:`.
 
- @param graphView    The graph view asking for the minimum value.
+ @param graphChartView      The graph view asking for the minimum value.
 
- @return The minimum value of the y-axis drawn by `graphView`.
+ @return The minimum value of the y-axis drawn by `graphChartView`.
 */
-- (CGFloat)minimumValueForGraphView:(ORKGraphView *)graphView;
+- (CGFloat)minimumValueForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
  than the number of data points. A title appearing adjacent to each
- division may optionally be returned in `graphView:titleForXAxisAtIndex:`.
+ division may optionally be returned in `graphChartView:titleForXAxisAtIndex:`.
 
- @param graphView    The graph view asking for the number of divisions in its x-axis.
+ @param graphChartView      The graph view asking for the number of divisions in its x-axis.
 
- @return The number of divisions in the x-axis for `graphView`.
+ @return The number of divisions in the x-axis for `graphChartView`.
 */
-- (NSInteger)numberOfDivisionsInXAxisForGraphView:(ORKGraphView *)graphView;
+- (NSInteger)numberOfDivisionsInXAxisForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the title to be displayed adjacent to each division in the x-axis (the 
- number returned by `numberOfDivisionsInXAxisForGraphView:`).
+ number returned by `numberOfDivisionsInXAxisForGraphChartView:`).
 
  If this method is not implemented, the x-axis will not have titles.
 
- See also: `numberOfDivisionsInXAxisForGraphView:`.
+ See also: `numberOfDivisionsInXAxisForGraphChartView:`.
 
- @param graphView    The graph view asking for the tile.
+ @param graphChartView    The graph view asking for the tile.
  @param pointIndex   The index corresponding to the number returned by 
- `numberOfDivisionsInXAxisForGraphView:`.
+ `numberOfDivisionsInXAxisForGraphChartView:`.
 
- @return The title string to be displayed adjacent to each division of the x-axis of `graphView`.
+ @return The title string to be displayed adjacent to each division of the x-axis of `graphChartView`.
 */
-- (NSString *)graphView:(ORKGraphView *)graphView titleForXAxisAtIndex:(NSInteger)index;
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtIndex:(NSInteger)index;
 
 @end
 
 
 /**
- The `ORKGraphView` class is an abstract class. It holds properties and methods common to classes
- like `ORKLineGraphView` and `ORKDiscreteGraphView`. You should not instantiate this class directly,
+ The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to classes
+ like `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate this class directly,
  you should use a subclass.
 */
 ORK_CLASS_AVAILABLE
-@interface ORKGraphView : UIView
+@interface ORKGraphChartView : UIView
 
 /**
  The minimum value of the y-axis.
 
- This value can be provided to an instance of `ORKGraphView` by implementing the
- optional `maximumValueForGraphView:` method of the `ORKGraphViewDataSource` protocol.
+ This value can be provided to an instance of `ORKGraphChartView` by implementing the
+ optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
- If `maximumValueForGraphView:` is not implemented, the minimum value will be assigned
+ If `maximumValueForGraphChartView:` is not implemented, the minimum value will be assigned
  the smallest value of the `minimumValue` property belonging to the `ORKRangedPoint`
- instances returned by the `ORKGraphViewDataSource` protocol's
- `graphView:plot:valueForPointAtIndex:` method.
+ instances returned by the `ORKGraphChartViewDataSource` protocol's
+ `graphChartView:plot:valueForPointAtIndex:` method.
 */
 @property (nonatomic, readonly) CGFloat minimumValue;
 
 /**
  The maximum value of the y-axis.
 
- This value can be provided to an instance of `ORKGraphView` by implementing the
- optional `maximumValueForGraphView:` method of the `ORKGraphViewDataSource` protocol.
+ This value can be provided to an instance of `ORKGraphChartView` by implementing the
+ optional `maximumValueForGraphChartView:` method of the `ORKGraphChartViewDataSource` protocol.
 
- If `maximumValueForGraphView:` is not implemented, the maximum value will be assigned
+ If `maximumValueForGraphChartView:` is not implemented, the maximum value will be assigned
  the largest value of the `maximumValue` property belonging to the `ORKRangedPoint`
- instances returned by the `ORKGraphViewDataSource` protocol's
- `graphView:plot:valueForPointAtIndex:` method.
+ instances returned by the `ORKGraphChartViewDataSource` protocol's
+ `graphChartView:plot:valueForPointAtIndex:` method.
 */
 @property (nonatomic, readonly) CGFloat maximumValue;
 
@@ -235,21 +235,21 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic) BOOL showsVerticalReferenceLines;
 
 /**
- The delegate will be notified of pan gesture events occuring within the bounds of the graphView.
+ The delegate will be notified of pan gesture events occuring within the bounds of the graphChartView.
 
- See the `ORKGraphViewDelegate` protocol.
+ See the `ORKGraphChartViewDelegate` protocol.
 */
-@property (nonatomic, weak, nullable) id <ORKGraphViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id <ORKGraphChartViewDelegate> delegate;
 
 /**
- The dataSource is responsible for providing the data required to populate the graphView.
+ The dataSource is responsible for providing the data required to populate the graphChartView.
 
- See the `ORKGraphViewDataSource` protocol.
+ See the `ORKGraphChartViewDataSource` protocol.
 */
-@property (nonatomic, weak) id <ORKGraphViewDataSource> dataSource;
+@property (nonatomic, weak) id <ORKGraphChartViewDataSource> dataSource;
 
 /**
- The color of the axes drawn by the graphView.
+ The color of the axes drawn by the graphChartView.
  
  The default value for this property is a very light gray color.
 */

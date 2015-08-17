@@ -66,7 +66,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     }
 }
 
-class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
+class LineGraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     
     var plotPoints =
     [
@@ -90,36 +90,36 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
         ]
     ]
     
-    func numberOfPlotsInGraphView(graphView: ORKGraphView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
-    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
        return plotPoints[plotIndex].count
     }
     
-    func maximumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 70
     }
     
-    func minimumValueForGraphView(graphView: ORKGraphView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 0
     }
     
-    func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
+    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return 10
     }
 
-    func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
 }
 
-class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
+class DiscreteGraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     
     var plotPoints =
     [
@@ -142,23 +142,23 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
         ]
     ]
     
-    func numberOfPlotsInGraphView(graphView: ORKGraphView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
-    func graphView(graphView: ORKGraphView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
+    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
         return plotPoints[plotIndex][pointIndex]
     }
     
-    func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
+    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
     }
     
-    func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
+    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return 8
     }
     
-    func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
 

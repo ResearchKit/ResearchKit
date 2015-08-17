@@ -62,7 +62,7 @@
 #import <ResearchKit/ORKActiveStepViewController.h>
 
 #import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphView.h>
-#import <ResearchKit/ORKDiscreteGraphView.h>
+#import <ResearchKit/ORKLineGraphChartView.h>
+#import <ResearchKit/ORKDiscreteGraphChartView.h>
 #import <ResearchKit/ORKPieChartView.h>
 

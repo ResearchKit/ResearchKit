@@ -2734,7 +2734,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 #pragma mark - Charts
 
 - (void)showCharts:(id)sender {
-    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Chart" bundle:nil];
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
     UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
     [self presentViewController:chartListViewController animated:YES completion:nil];
 }

@@ -32,23 +32,23 @@
 
 
 #import "ORKXAxisView.h"
-#import "ORKGraphView_Internal.h"
+#import "ORKGraphChartView_Internal.h"
 
 
 static const CGFloat LastLabelHeight = 20.0;
 
 @implementation ORKXAxisView {
-    __weak ORKGraphView *_parentGraphView;
+    __weak ORKGraphChartView *_parentGraphChartView;
     CALayer *_lineLayer;
     NSMutableArray *_titleLabels;
     NSMutableArray *_titleTickLayers;
 }
 
-- (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView {
+- (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        _parentGraphView = parentGraphView;
-        _axisColor = _parentGraphView.axisColor;
+        _parentGraphChartView = parentGraphChartView;
+        _axisColor = _parentGraphChartView.axisColor;
         
         _lineLayer = [CALayer layer];
         _lineLayer.backgroundColor = _axisColor.CGColor;
@@ -65,7 +65,7 @@ static const CGFloat LastLabelHeight = 20.0;
     NSUInteger numberOfTitleLabels = _titleTickLayers.count;
     for (CALayer *titleTickLayer in _titleTickLayers) {
         CGFloat positionOnXAxis = xAxisPoint(index, numberOfTitleLabels, width);
-        titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
+        titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
         index++;
     }
     ((UILabel *)_titleLabels.lastObject).layer.cornerRadius = LastLabelHeight * 0.5;
@@ -139,13 +139,13 @@ static const CGFloat LastLabelHeight = 20.0;
     _titleLabels = nil;
     _titleTickLayers = nil;
     
-    if ([_parentGraphView.dataSource respondsToSelector:@selector(graphView:titleForXAxisAtIndex:)]) {
+    if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtIndex:)]) {
         _titleLabels = [NSMutableArray new];
         _titleTickLayers = [NSMutableArray new];
 
-        NSUInteger numberOfTitleLabels = [_parentGraphView numberOfXAxisPoints];
+        NSUInteger numberOfTitleLabels = [_parentGraphChartView numberOfXAxisPoints];
         for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
-            NSString *title = [_parentGraphView.dataSource graphView:_parentGraphView titleForXAxisAtIndex:i];
+            NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtIndex:i];
             UILabel *label = [UILabel new];
             label.text = title;
             label.font = _titleFont;
@@ -172,7 +172,7 @@ static const CGFloat LastLabelHeight = 20.0;
         for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
             CALayer *titleTickLayer = [CALayer layer];
             CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
-            titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
+            titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
             titleTickLayer.backgroundColor = _axisColor.CGColor;
 
             [self.layer addSublayer:titleTickLayer];

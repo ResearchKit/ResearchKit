@@ -31,15 +31,15 @@
  */
 
  
-#import "ORKLineGraphView.h"
-#import "ORKGraphView_Internal.h"
+#import "ORKLineGraphChartView.h"
+#import "ORKGraphChartView_Internal.h"
 #import "ORKHelpers.h"
 #import "ORKRangedPoint.h"
 
 
 const CGFloat FillColorAlpha = 0.4;
 
-@implementation ORKLineGraphView {
+@implementation ORKLineGraphChartView {
     NSMutableArray *_fillLayers;
 }
 
@@ -235,8 +235,8 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    [UIView animateWithDuration:ORKGraphViewScrubberMoveAnimationDuration animations:^{
-        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphViewLeftPadding, self.scrubberLine.center.y);
+    [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
+        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
         [self updateScrubberLineAccessories:xPosition];
     }];
 }
