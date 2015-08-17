@@ -37,6 +37,8 @@
 #import "ORKRangedPoint.h"
 
 
+const CGFloat FillColorAlpha = 0.4;
+
 @implementation ORKLineGraphView {
     NSMutableArray *_fillLayers;
 }
@@ -48,10 +50,20 @@
     _fillLayers = [NSMutableArray new];
 }
 
-#pragma mark - Drawing
-
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
     return [self numberOfValidValuesForPlotIndex:plotIndex] > 1;
+}
+
+#pragma mark - Drawing
+
+- (void)updatePlotColors {
+    [super updatePlotColors];
+    for (NSUInteger plotIndex = 0; plotIndex < _fillLayers.count; plotIndex++) {
+        UIColor *fillColor = (plotIndex == 0) ?
+        [self.tintColor colorWithAlphaComponent:FillColorAlpha] : [self.referenceLineColor colorWithAlphaComponent:FillColorAlpha];
+        CAShapeLayer *fillLayer = _fillLayers[plotIndex];
+        fillLayer.fillColor = fillColor.CGColor;
+    }
 }
 
 - (void)updateLineLayers {

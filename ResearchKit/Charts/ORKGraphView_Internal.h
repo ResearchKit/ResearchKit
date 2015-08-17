@@ -100,6 +100,8 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 
+- (void)updatePlotColors;
+
 - (void)updateLineLayers;
 
 - (void)layoutLineLayers;

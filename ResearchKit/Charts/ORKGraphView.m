@@ -123,6 +123,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     for (CAShapeLayer *verticalReferenceLineLayer in _verticalReferenceLineLayers) {
         verticalReferenceLineLayer.strokeColor = referenceLineColor.CGColor;
     }
+    [self updatePlotColors];
 }
 
 - (void)setScrubberLineColor:(UIColor *)scrubberLineColor {
@@ -195,10 +196,21 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)tintColorDidChange {
-    [self updateLineLayers];
-    [self updatePointLayers];
-    [self layoutLineLayers];
-    [self layoutPointLayers];
+    [self updatePlotColors];
+}
+
+- (void)updatePlotColors {
+    for (NSUInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
+        UIColor *color = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
+        for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_lineLayers[plotIndex]).count; pointIndex++) {
+            CAShapeLayer *lineLayer = _lineLayers[plotIndex][pointIndex];
+            lineLayer.strokeColor = color.CGColor;
+        }
+        for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_pointLayers[plotIndex]).count; pointIndex++) {
+            CAShapeLayer *pointLayer = _pointLayers[plotIndex][pointIndex];
+            pointLayer.contents = (__bridge id)(graphPointLayerImageWithTintColor(color).CGImage);
+        }
+    }
 }
 
 - (void)updateContentSizeCategoryFonts {
@@ -397,8 +409,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 #pragma mark - Drawing
 
-inline static CALayer *graphPointLayer(UIColor *tintColor) {
-    const CGFloat pointSide = ORKGraphViewPointAndLineSize;
+inline static UIImage *graphPointLayerImageWithTintColor(UIColor *tintColor) {
+    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
     const CGFloat pointLineWidth = 2.0;
     
     static UIImage *pointImage = nil;
@@ -406,22 +418,26 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     if (!pointImage || ![pointImageColor isEqual:tintColor]) {
         pointImageColor = tintColor;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
-                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSide - pointLineWidth, pointSide - pointLineWidth}}];
+                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
         CAShapeLayer *pointLayer = [CAShapeLayer new];
         pointLayer.path = circlePath.CGPath;
         pointLayer.fillColor = [UIColor whiteColor].CGColor;
         pointLayer.strokeColor = tintColor.CGColor;
         pointLayer.lineWidth = pointLineWidth;
-
-        UIGraphicsBeginImageContextWithOptions((CGSize){pointSide, pointSide}, NO, [UIScreen mainScreen].scale);
+        
+        UIGraphicsBeginImageContextWithOptions((CGSize){pointSize, pointSize}, NO, [UIScreen mainScreen].scale);
         [pointLayer renderInContext:UIGraphicsGetCurrentContext()];
         pointImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
-    
+    return pointImage;
+}
+
+inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
+    const CGFloat pointSize = ORKGraphViewPointAndLineSize;
     CALayer *pointLayer = [CALayer new];
-    pointLayer.frame = (CGRect){{0, 0}, {pointSide, pointSide}};
-    pointLayer.contents = (__bridge id)(pointImage.CGImage);
+    pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
+    pointLayer.contents = (__bridge id)(graphPointLayerImageWithTintColor(tintColor).CGImage);
     
     return pointLayer;
 }
@@ -443,12 +459,12 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         if (!dataPoint.isUnset) {
-            CALayer *pointLayer = graphPointLayer(tintColor);
+            CALayer *pointLayer = graphPointLayerWithTintColor(tintColor);
             [_plotView.layer addSublayer:pointLayer];
             [_pointLayers[plotIndex] addObject:pointLayer];
             
             if (!dataPoint.hasEmptyRange) {
-                CALayer *pointLayer = graphPointLayer(tintColor);
+                CALayer *pointLayer = graphPointLayerWithTintColor(tintColor);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
             }
