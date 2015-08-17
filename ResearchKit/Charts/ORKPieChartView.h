@@ -90,8 +90,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the title to appear in the legend for a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view will not display a title in the legend for
- the segment at the specified index.
+ If this method is not implemented, the pie chart view will not display the legend.
 
  @param pieChartView     The pie chart view asking for the title.
  @param index            An index number specifying the segment in `pieChartView`.
@@ -127,7 +126,7 @@ ORK_CLASS_AVAILABLE
  
  If you do not set a value for this property, the pie chart will not display a title.
 */
-@property (nonatomic, strong, nullable) NSString *title;
+@property (nonatomic, copy, nullable) NSString *title;
 
 /**
  The text to display beneath a title in the pie chart view.
@@ -135,7 +134,7 @@ ORK_CLASS_AVAILABLE
  If you do not set a value for this property, the pie chart will not display any text beneath the
  title.
 */
-@property (nonatomic, strong, nullable) NSString *text;
+@property (nonatomic, copy, nullable) NSString *text;
 
 /**
  The color of the title label's text.
@@ -154,25 +153,17 @@ ORK_CLASS_AVAILABLE
 /**
  A Boolean value indicating wheter the title and text labels should be drawn above the chart.
  
- If this value of this property is NO, the title and text are drawn in front of the chart.
+ If this value of this property is NO, the title and text are drawn in the center of the chart.
  The default value for this property is NO.
  */
-@property (nonatomic) BOOL drawsTitleAboveChart;
+@property (nonatomic) BOOL showsTitleAboveChart;
 
 /**
- A Boolean value indicating whether the percentage labels drawn adjacent to each segement are
- hidden.
+ A Boolean value indicating whether the percentage labels drawn adjacent to each segement are shown.
  
- The default value for this property is NO.
+ The default value for this property is YES.
 */
-@property (nonatomic) BOOL hidesPercentageLabels;
-
-/**
- A Boolean value indicating whether the legend is hidden.
- 
- The default value for this property is NO.
-*/
-@property (nonatomic) BOOL hidesLegend;
+@property (nonatomic) BOOL showsPercentageLabels;
 
 /**
  A Boolean value indicating whether the pie chart drawing animation draws clockwise or anticlockwise.

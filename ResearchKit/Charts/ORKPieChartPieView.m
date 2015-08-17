@@ -99,13 +99,6 @@ static const CGFloat InterAnimationDelay = 0.05;
 
 #pragma mark - Layout and drawing
 
-- (void)setUpSublayersAndLabels {
-    [_circleLayer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self addPieChartLayers];
-    [self addPercentageLabels];
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect bounds = self.bounds;
@@ -117,9 +110,10 @@ static const CGFloat InterAnimationDelay = 0.05;
                                              attributes:@{NSFontAttributeName : _percentageLabelFont}
                                                 context:nil].size.height;
     CGFloat innerRadius = outerRadius - (labelHeight + PercentageLabelOffset);
-    CGFloat lineWidth = MIN(_parentPieChartView.lineWidth, innerRadius);
+    CGFloat targetRadius = _parentPieChartView.showsPercentageLabels ? innerRadius : outerRadius;
+    CGFloat lineWidth = MIN(_parentPieChartView.lineWidth, targetRadius);
     _circleLayer.lineWidth = lineWidth;
-    CGFloat drawingRadius = innerRadius - (lineWidth * 0.5);
+    CGFloat drawingRadius = targetRadius - (lineWidth * 0.5);
     
     if (!_parentPieChartView.drawsClockwise) {
         startAngle = 3 * M_PI_2;
@@ -135,10 +129,13 @@ static const CGFloat InterAnimationDelay = 0.05;
     _circleLayer.path = circularArcBezierPath.CGPath;
     
     [self layoutPieChartLayers];
-    [self layoutPercentageLabelsWithRadius:innerRadius];
+    if (_parentPieChartView.showsPercentageLabels) {
+        [self layoutPercentageLabelsWithRadius:innerRadius];
+    }
 }
 
-- (void)addPieChartLayers {
+- (void)updatePieLayers {
+    [_segmentLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_segmentLayers removeAllObjects];
     
     CGFloat cumulativeValue = 0;
@@ -169,33 +166,40 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
 }
 
-- (void)addPercentageLabels {
-    CGFloat cumulativeValue = 0;
-    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
-    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
-        
-        if (value != 0) {
+- (void)updatePercentageLabels {
+    for (ORKPieChartSection *pieSection in _pieSections) {
+        [pieSection.label removeFromSuperview];
+    }
+    [_pieSections removeAllObjects];
+    
+    if (_parentPieChartView.showsPercentageLabels) {
+        CGFloat cumulativeValue = 0;
+        NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+        for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+            CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
             
-            // Create a label
-            UILabel *label = [UILabel new];
-            label.text = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 :value * 100];
-            label.font = _percentageLabelFont;
-            label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
-            [label sizeToFit];
-            
-            // Calculate the angle to the centre of this segment in radians
-            CGFloat angle = 0;
-            if (_parentPieChartView.drawsClockwise) {
-                angle = (value / 2 + cumulativeValue) * M_PI * 2;
-            } else {
-                angle = (value / 2 + cumulativeValue) * - M_PI * 2;
+            if (value != 0) {
+                
+                // Create a label
+                UILabel *label = [UILabel new];
+                label.text = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 :value * 100];
+                label.font = _percentageLabelFont;
+                label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
+                [label sizeToFit];
+                
+                // Calculate the angle to the centre of this segment in radians
+                CGFloat angle = 0;
+                if (_parentPieChartView.drawsClockwise) {
+                    angle = (value / 2 + cumulativeValue) * M_PI * 2;
+                } else {
+                    angle = (value / 2 + cumulativeValue) * - M_PI * 2;
+                }
+                
+                cumulativeValue += value;
+                ORKPieChartSection *pieSection = [[ORKPieChartSection alloc] initWithLabel:label angle:angle];
+                [_pieSections addObject:pieSection];
+                [self addSubview:label];
             }
-            
-            cumulativeValue += value;
-            ORKPieChartSection *pieSection = [[ORKPieChartSection alloc] initWithLabel:label angle:angle];
-            [_pieSections addObject:pieSection];
-            [self addSubview:label];
         }
     }
 }

@@ -46,7 +46,9 @@
 
 - (CGFloat)normalizeValues;
 
-- (void)setUpSublayersAndLabels;
+- (void)updatePieLayers;
+
+- (void)updatePercentageLabels;
 
 - (void)layoutSubviews;
 
