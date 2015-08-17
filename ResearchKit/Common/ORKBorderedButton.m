@@ -86,7 +86,7 @@
     if (self.enabled && self.highlighted) {
         self.backgroundColor = _normalHighlightTintColor;
         self.layer.borderColor = [_normalHighlightTintColor CGColor]; // move
-    } else if(self.enabled && !self.highlighted) {
+    } else if (self.enabled && !self.highlighted) {
         if (self.fadeDelay > 0) {
             [self performSelector:@selector(fadeHighlightColor) withObject:nil afterDelay:self.fadeDelay];
         } else {

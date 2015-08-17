@@ -56,7 +56,7 @@
 
 - (instancetype)initWithContentURL:(NSURL * __nonnull)contentURL {
     self = [super init];
-    if(self) {
+    if (self) {
         self.contentURL = contentURL;
     }
     return self;
@@ -79,7 +79,7 @@
     _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
     _webView.opaque = NO; // If opaque is set to YES, _webView shows a black right margin during transition when modally presented. This is an artifact due to disabling clipsToBounds to be able to show the scroll indicator outside the view.
     
-    if(_contentURL) {
+    if (_contentURL) {
         [_webView setScalesPageToFit:YES];
         
         [_webView loadRequest:[NSURLRequest requestWithURL:_contentURL]];

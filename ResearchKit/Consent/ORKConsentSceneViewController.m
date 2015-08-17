@@ -192,7 +192,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 - (IBAction)showContent:(id)sender {
     ORKConsentLearnMoreViewController *viewController = nil;
     
-    if(_section.contentURL)
+    if (_section.contentURL)
     {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
     }else{
