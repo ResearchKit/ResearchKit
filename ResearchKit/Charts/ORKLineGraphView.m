@@ -55,7 +55,6 @@
 }
 
 - (void)updateLineLayers {
-    [_fillLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [_fillLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_fillLayers removeAllObjects];
     [super updateLineLayers];
@@ -214,6 +213,7 @@
 #pragma mark - Animations
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
+    [_fillLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     for (NSUInteger plotIndex = 0; plotIndex < _fillLayers.count; plotIndex++) {
         for (CAShapeLayer *fillLayer in _fillLayers) {
             fillLayer.opacity = 0;

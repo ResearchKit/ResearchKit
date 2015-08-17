@@ -221,7 +221,15 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) CGFloat maximumValue;
 
 /**
+ A Boolean value indicating whether the graph view should draw horizontal refrerence lines.
+
+ The default value of this property is NO.
+ */
+@property (nonatomic) BOOL showsHorizontalReferenceLines;
+
+/**
  A Boolean value indicating whether the graph view should draw vertical refrerence lines.
+
  The default value of this property is NO.
 */
 @property (nonatomic) BOOL showsVerticalReferenceLines;
@@ -229,14 +237,14 @@ ORK_CLASS_AVAILABLE
 /**
  The delegate will be notified of pan gesture events occuring within the bounds of the graphView.
 
- see also: `ORKGraphViewDelegate` protocol.
+ See the `ORKGraphViewDelegate` protocol.
 */
 @property (nonatomic, weak, nullable) id <ORKGraphViewDelegate> delegate;
 
 /**
  The dataSource is responsible for providing the data required to populate the graphView.
 
- see also: `ORKGraphViewDataSource` protocol.
+ See the `ORKGraphViewDataSource` protocol.
 */
 @property (nonatomic, weak) id <ORKGraphViewDataSource> dataSource;
 
@@ -280,17 +288,17 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is an appropriate message string.
 */
-@property (nonatomic, strong, nullable) NSString *noDataText;
+@property (nonatomic, copy, nullable) NSString *noDataText;
 
 /**
- An image that will be displayed adjacent to the maximum value of the y-axis.
+ An image to be optionally displayed in place of the maximum value label on the y-axis.
  
  The default value for this property is nil.
 */
 @property (nonatomic, strong, nullable) UIImage *maximumValueImage;
 
 /**
- An image that will be displayed adjacent to the minimum value of the y-axis.
+ An image to be optionally displayed in place of the minimum value label on the y-axis.
  
  The default value for this property is nil.
 */

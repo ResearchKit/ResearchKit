@@ -44,8 +44,10 @@ ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphView : ORKGraphView
 
 /**
- A Boolean value indicating whether to draw a line to connect the `minimumValue` and `maximumValue` of each `ORKRangedPoint
- represented by the graphView.
+ A Boolean value indicating whether to draw a line to connect the minimum value and maximum value
+ of each ranged point represented by the graph view.
+ 
+ The default value for this property is YES.
  */
 @property (nonatomic) BOOL drawsConnectedRanges;
 

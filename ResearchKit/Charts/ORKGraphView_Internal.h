@@ -102,6 +102,12 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (void)updateLineLayers;
 
+- (void)layoutLineLayers;
+
+- (void)updatePointLayers;
+
+- (void)layoutPointLayers;
+
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath
             duration:(CGFloat)duration

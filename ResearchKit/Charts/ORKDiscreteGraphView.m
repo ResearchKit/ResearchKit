@@ -46,6 +46,14 @@
     _drawsConnectedRanges = YES;
 }
 
+- (void)setDrawsConnectedRanges:(BOOL)drawsConnectedRanges {
+    _drawsConnectedRanges = drawsConnectedRanges;
+    [super updateLineLayers];
+    [super updatePointLayers];
+    [super layoutLineLayers];
+    [super layoutPointLayers];
+}
+
 #pragma mark - Draw
 
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {

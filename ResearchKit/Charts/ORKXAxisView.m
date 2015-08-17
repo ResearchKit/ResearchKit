@@ -48,9 +48,10 @@ static const CGFloat LastLabelHeight = 20.0;
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _parentGraphView = parentGraphView;
+        _axisColor = _parentGraphView.axisColor;
         
         _lineLayer = [CALayer layer];
-        _lineLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+        _lineLayer.backgroundColor = _axisColor.CGColor;
         [self.layer addSublayer:_lineLayer];
     }
     return self;
@@ -172,7 +173,7 @@ static const CGFloat LastLabelHeight = 20.0;
             CALayer *titleTickLayer = [CALayer layer];
             CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
             titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphViewAxisTickLength, 1, ORKGraphViewAxisTickLength);
-            titleTickLayer.backgroundColor = _parentGraphView.axisColor.CGColor;
+            titleTickLayer.backgroundColor = _axisColor.CGColor;
 
             [self.layer addSublayer:titleTickLayer];
             [_titleTickLayers addObject:titleTickLayer];
@@ -202,6 +203,14 @@ static const CGFloat LastLabelHeight = 20.0;
         [label sizeToFit];
     }
     [self setNeedsLayout];
+}
+
+- (void)setAxisColor:(UIColor *)axisColor {
+    _axisColor = axisColor;
+    _lineLayer.backgroundColor = _axisColor.CGColor;
+    for (CALayer *titleTickLayer in _titleTickLayers) {
+        titleTickLayer.backgroundColor = _axisColor.CGColor;
+    }
 }
 
 @end

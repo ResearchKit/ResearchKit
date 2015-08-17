@@ -37,6 +37,10 @@
 
 @property (nonatomic) UIFont *titleFont;
 
+@property (nonatomic) UIColor *titleColor;
+
+@property (nonatomic) UIColor *axisColor;
+
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithParentGraphView:(ORKGraphView *)parentGraphView NS_DESIGNATED_INITIALIZER;

@@ -50,7 +50,8 @@ static const CGFloat ImageVerticalPadding = 3.0;
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _parentGraphView = parentGraphView;
-        
+        _axisColor = _parentGraphView.axisColor;
+        _titleColor = _parentGraphView.axisTitleColor;
     }
     return self;
 }
@@ -169,6 +170,20 @@ static const CGFloat ImageVerticalPadding = 3.0;
     for (UILabel *label in [_tickLabelsByFactor allValues]) {
         label.font = _titleFont;
         [label sizeToFit];
+    }
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
+    for (UILabel *label in [_tickLabelsByFactor allValues]) {
+        label.textColor = titleColor;
+    }
+}
+
+- (void)setAxisColor:(UIColor *)axisColor {
+    _axisColor = axisColor;
+    for (CALayer *tickLayer in [_tickLayersByFactor allValues]) {
+        tickLayer.backgroundColor = _axisColor.CGColor;
     }
 }
 
