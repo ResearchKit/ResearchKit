@@ -189,7 +189,7 @@
         
         if (! mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\" >%@</h4>", _signaturePageTitle?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
             
             for (ORKConsentSignature *signature in self.signatures) {
