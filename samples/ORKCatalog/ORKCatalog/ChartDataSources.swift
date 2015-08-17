@@ -32,33 +32,23 @@ import ResearchKit
 
 class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
-    lazy var backingStore: [UIColor] = { [unowned self] in
-        return self.randomColors(8)
-    }()
-    
-    func randomColors(number: Int) -> [UIColor] {
-        
-        func random() -> CGFloat {
-            return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
-        }
-        
-        var colors: [UIColor] = []
-        for index in 0..<number {
-            colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
-        }
-        return colors
-    }
+    let colors = [
+        UIColor(red: 217/225, green: 217/255, blue: 217/225, alpha: 1),
+        UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1),
+        UIColor(red: 244/255, green: 190/255, blue: 74/255, alpha: 1)
+    ]
+    let values = [10.0, 25.0, 45.0]
     
     func numberOfSegmentsInPieChartView(pieChartView: ORKPieChartView ) -> Int {
-        return backingStore.count
+        return colors.count
     }
     
     func pieChartView(pieChartView: ORKPieChartView, valueForSegmentAtIndex index: Int) -> CGFloat {
-        return CGFloat(index + 1)
+        return CGFloat(values[index])
     }
     
     func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
-        return backingStore[index]
+        return colors[index]
     }
     
     func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
@@ -71,13 +61,12 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
     var plotPoints =
     [
         [
-            ORKRangedPoint(),
+            ORKRangedPoint(value: 10),
             ORKRangedPoint(value: 20),
             ORKRangedPoint(value: 25),
             ORKRangedPoint(),
             ORKRangedPoint(value: 30),
             ORKRangedPoint(value: 40),
-            ORKRangedPoint(),
         ],
         [
             ORKRangedPoint(value: 2),
@@ -85,7 +74,6 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
             ORKRangedPoint(value: 8),
             ORKRangedPoint(value: 16),
             ORKRangedPoint(value: 32),
-            ORKRangedPoint(value: 50),
             ORKRangedPoint(value: 64),
         ]
     ]
@@ -110,10 +98,6 @@ class LineGraphDataSource: NSObject, ORKGraphViewDataSource {
         return 0
     }
     
-    func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
-        return 8
-    }
-
     func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
@@ -124,21 +108,20 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     var plotPoints =
     [
         [
-            ORKRangedPoint(),
             ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-            ORKRangedPoint(minimumValue: 1, maximumValue: 3),
+            ORKRangedPoint(minimumValue: 1, maximumValue: 4),
             ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 9),
-            ORKRangedPoint(minimumValue: 4, maximumValue: 13),
+            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
+            ORKRangedPoint(minimumValue: 5, maximumValue: 10),
+            ORKRangedPoint(minimumValue: 8, maximumValue: 13),
         ],
         [
             ORKRangedPoint(value: 1),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 4),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
+            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
+            ORKRangedPoint(minimumValue: 3, maximumValue: 10),
             ORKRangedPoint(minimumValue: 5, maximumValue: 11),
             ORKRangedPoint(minimumValue: 7, maximumValue: 13),
             ORKRangedPoint(minimumValue: 10, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 12, maximumValue: 15),
         ]
     ]
     
@@ -152,10 +135,6 @@ class DiscreteGraphDataSource: NSObject, ORKGraphViewDataSource {
     
     func graphView(graphView: ORKGraphView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
         return plotPoints[plotIndex].count
-    }
-    
-    func numberOfDivisionsInXAxisForGraphView(graphView: ORKGraphView) -> Int {
-        return 8
     }
     
     func graphView(graphView: ORKGraphView, titleForXAxisAtIndex pointIndex: Int) -> String {

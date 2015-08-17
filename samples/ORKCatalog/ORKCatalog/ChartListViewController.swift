@@ -48,24 +48,29 @@ class ChartListViewController: UITableViewController {
     override func viewDidLoad() {
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
-        pieChartTableViewCell.pieChartView.dataSource = pieChartDataSource
+        let pieChartView = pieChartTableViewCell.pieChartView
+        pieChartView.dataSource = pieChartDataSource
         // Optional custom configuration
-        pieChartTableViewCell.pieChartView.title = "TITLE"
-        pieChartTableViewCell.pieChartView.text = "TEXT"
-        pieChartTableViewCell.pieChartView.lineWidth = 12
+        pieChartView.title = "TITLE"
+        pieChartView.text = "TEXT"
+        pieChartView.lineWidth = 14
         
         // ORKLineGraphView
         lineGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphIdentifier) as! LineGraphTableViewCell
-        lineGraphTableViewCell.graphView.dataSource = lineGraphDataSource
+        let lineGraphView = lineGraphTableViewCell.graphView as! ORKLineGraphView
+        lineGraphView.dataSource = lineGraphDataSource
         // Optional custom configuration
-        lineGraphTableViewCell.graphView.showsVerticalReferenceLines = true
+        lineGraphView.showsHorizontalReferenceLines = true
+        lineGraphView.showsVerticalReferenceLines = true
         
         // ORKDiscreteGraphView
         discreteGraphTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphIdentifier) as! DiscreteGraphTableViewCell
-        discreteGraphTableViewCell.graphView.dataSource = discreteGraphDataSource
+        let discreteGraphView = discreteGraphTableViewCell.graphView as! ORKDiscreteGraphView
+        discreteGraphView.dataSource = discreteGraphDataSource
         // Optional custom configuration
-        discreteGraphTableViewCell.graphView.showsVerticalReferenceLines = true
-        
+        lineGraphView.showsHorizontalReferenceLines = true
+        discreteGraphView.showsVerticalReferenceLines = true
+
         chartTableViewCells = [pieChartTableViewCell, lineGraphTableViewCell, discreteGraphTableViewCell]
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
