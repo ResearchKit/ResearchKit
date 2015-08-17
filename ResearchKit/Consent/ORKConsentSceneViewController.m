@@ -198,7 +198,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     }else{
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }
-    viewController.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
+	viewController.title = _section.title ?: ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navigationController animated:YES completion:nil];
