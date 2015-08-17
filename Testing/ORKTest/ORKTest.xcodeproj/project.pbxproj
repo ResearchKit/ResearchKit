@@ -22,6 +22,10 @@
 		86D347F41AC0E198006DB02B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; };
 		86D347F51AC0E198006DB02B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; };
+		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
+		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
+		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
+		BC9A271C1B81752800BDA84D /* Chart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Chart.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +139,11 @@
 		86717B2B1AC0CC4A00AC2A23 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86D347F91AC0E1B4006DB02B /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ORKTest.entitlements; sourceTree = "<group>"; };
+		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
+		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
+		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
+		BC9A271B1B81752800BDA84D /* Chart.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chart.storyboard; path = Charts/Chart.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +194,7 @@
 				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
 				86717ADE1AC0C53800AC2A23 /* MainViewController.h */,
 				86717AD71AC0C53800AC2A23 /* MainViewController.m */,
+				BC9A27111B81732200BDA84D /* Charts */,
 				86717B001AC0C9B100AC2A23 /* CustomizationExamples */,
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
@@ -250,6 +260,18 @@
 				86717B091AC0CC0400AC2A23 /* Localizable.strings */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		BC9A27111B81732200BDA84D /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				BC9A271B1B81752800BDA84D /* Chart.storyboard */,
+				BC9A27151B81743900BDA84D /* ChartDataSources.swift */,
+				BC9A27161B81743900BDA84D /* ChartListViewController.swift */,
+				BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */,
+				BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */,
+			);
+			name = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,6 +426,7 @@
 				86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */,
 				86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */,
 				86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */,
+				BC9A271C1B81752800BDA84D /* Chart.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +445,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
+				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
+				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
 				86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */,
+				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
@@ -582,6 +608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -589,6 +616,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/ORKTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -597,6 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -604,6 +634,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/ORKTest-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
