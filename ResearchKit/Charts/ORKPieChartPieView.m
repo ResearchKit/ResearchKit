@@ -82,12 +82,12 @@ static const CGFloat InterAnimationDelay = 0.05;
     
     CGFloat sumOfValues = 0;
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
-    for (int idx = 0; idx < numberOfSegments; idx++) {
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
         CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx];
         sumOfValues += value;
     }
     
-    for (int idx = 0; idx < numberOfSegments; idx++) {
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
         CGFloat value = 0;
         if (sumOfValues != 0) {
             value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx] / sumOfValues;
@@ -275,7 +275,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         shiftClockwise = !shiftClockwise;
         
         if (shiftClockwise) {
-            for (NSUInteger idx = 0; idx < ([pieSections count] - 1); idx++) {
+            for (NSUInteger idx = 0; idx < (pieSections.count - 1); idx++) {
                 // Prevent from infinite loop
                 if (!idx) {
                     totalAngle += 0.01;
@@ -290,9 +290,9 @@ static const CGFloat InterAnimationDelay = 0.05;
                 }
             }
         } else {
-            for (NSInteger i = [pieSections count] - 1; i > 0; i--) {
-                ORKPieChartSection *pieLabel = pieSections[i];
-                ORKPieChartSection *nextPieLabel = pieSections[i - 1];
+            for (NSInteger idx = pieSections.count - 1; idx > 0; idx--) {
+                ORKPieChartSection *pieLabel = pieSections[idx];
+                ORKPieChartSection *nextPieLabel = pieSections[idx - 1];
                 if ([self shiftSectionLabel:nextPieLabel fromSectionLabel:pieLabel direction:-rotateDirection pieRadius:pieRadius]) {
                     intersections = YES;
                 }
@@ -342,7 +342,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
     
     CGFloat cumulativeValue = 0;
-    for (int idx = 0; idx < pieSectionCount; idx++) {
+    for (NSInteger idx = 0; idx < pieSectionCount; idx++) {
         ORKPieChartSection *section = _pieSections[idx];
         UILabel *label = section.label;
         label.alpha = 0;

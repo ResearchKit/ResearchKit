@@ -87,7 +87,7 @@
         interAnimationDelay = 0;
         singleAnimationDuration = animationDuration;
     }
-    for (int idx = 0; idx < cellCount; idx++) {
+    for (NSUInteger idx = 0; idx < cellCount; idx++) {
         UICollectionViewCell *cell = sortedCells[idx];
         cell.transform = CGAffineTransformMakeScale(0, 0);
         [UIView animateWithDuration:singleAnimationDuration

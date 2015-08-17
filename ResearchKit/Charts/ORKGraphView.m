@@ -269,7 +269,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     if (_showsVerticalReferenceLines) {
         _verticalReferenceLineLayers = [NSMutableArray new];
         
-        for (int i = 1; i < [self numberOfXAxisPoints]; i++) {
+        for (NSInteger i = 1; i < [self numberOfXAxisPoints]; i++) {
             CAShapeLayer *referenceLineLayer = [CAShapeLayer layer];
             referenceLineLayer.strokeColor = _referenceLineColor.CGColor;
             referenceLineLayer.lineDashPattern = @[@6, @4];
@@ -361,7 +361,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
 - (void)updateYAxisPoints {
     [_yAxisPoints removeAllObjects];
-    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
     }
 }
@@ -382,7 +382,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     if (_showsVerticalReferenceLines) {
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
-        for (int i = 0; i < _verticalReferenceLineLayers.count; i++) {
+        for (NSUInteger i = 0; i < _verticalReferenceLineLayers.count; i++) {
             CAShapeLayer *verticalReferenceLineLayer = _verticalReferenceLineLayers[i];
             
             CGFloat positionOnXAxis = xAxisPoint(i + 1, [self numberOfXAxisPoints], plotViewWidth);
@@ -427,11 +427,11 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)updatePointLayers {
-    for (int plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
         [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     }
     [_pointLayers removeAllObjects];
-    for (int plotIndex = 0; plotIndex < self.numberOfPlots; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < self.numberOfPlots; plotIndex++) {
         NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
@@ -460,7 +460,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     NSUInteger numberOfPlots = [self numberOfPlots];
     if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
 
-    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
     }
 }
@@ -487,11 +487,11 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)updateLineLayers {
-    for (int plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
         [_lineLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     }
     [_lineLayers removeAllObjects];
-    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
         NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
         [self.lineLayers addObject:currentPlotLineLayers];
@@ -505,7 +505,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     NSUInteger numberOfPlots = [self numberOfPlots];
     if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
     
-    for (int plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
         if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
             [self layoutLineLayersForPlotIndex:plotIndex];
         }
@@ -574,7 +574,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (([_dataPoints count] > 0) && ([_dataPoints[0] count] > 0) && [self numberOfValidValuesForPlotIndex:0] > 0) {
+    if ((_dataPoints.count > 0) && (((NSArray *)_dataPoints[0]).count > 0) && [self numberOfValidValuesForPlotIndex:0] > 0) {
         
         CGPoint location = [gestureRecognizer locationInView:_plotView];
         CGFloat maxX = round(CGRectGetWidth(_plotView.bounds));
@@ -632,7 +632,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
     CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
     CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / numberOfXAxisPoints;
-    for (NSUInteger positionIndex = 0; positionIndex < ((NSMutableArray *)_dataPoints[0]).count; positionIndex++) {
+    for (NSUInteger positionIndex = 0; positionIndex < ((NSArray *)_dataPoints[0]).count; positionIndex++) {
         
         CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[0][positionIndex]).maximumValue;
         
@@ -718,8 +718,8 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
-        NSUInteger numberOfPoints = ((NSMutableArray *)_pointLayers[plotIndex]).count;
-        NSUInteger numberOfLines = ((NSMutableArray *)_lineLayers[plotIndex]).count;
+        NSUInteger numberOfPoints = ((NSArray *)_pointLayers[plotIndex]).count;
+        NSUInteger numberOfLines = ((NSArray *)_lineLayers[plotIndex]).count;
         
         CGFloat pointFadeDuration = duration / (numberOfPoints - 1);
         CGFloat lineFadeDuration = duration / (numberOfLines - 1);
@@ -784,7 +784,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 - (NSArray *)normalizedCanvasPointsForPlotIndex:(NSInteger)plotIndex canvasHeight:(CGFloat)viewHeight {
     NSMutableArray *normalizedPoints = [NSMutableArray new];
     
-    for (NSUInteger i = 0; i < ((NSMutableArray *)_dataPoints[plotIndex]).count; i++) {
+    for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         
         ORKRangedPoint *normalizedRangePoint = [ORKRangedPoint new];
         ORKRangedPoint *dataPointValue = (ORKRangedPoint *)_dataPoints[plotIndex][i];
@@ -810,7 +810,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
 - (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
     NSUInteger validPosition = positionIndex;
     
-    while (validPosition < (((NSMutableArray *)_dataPoints[0]).count - 1)) {
+    while (validPosition < (((NSArray *)_dataPoints[0]).count - 1)) {
         if (((ORKRangedPoint *)_dataPoints[0][validPosition]).maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
@@ -840,7 +840,7 @@ inline static CALayer *graphPointLayer(UIColor *tintColor) {
     if (!minimumValueProvided || !maximumValueProvided) {
         NSInteger numberOfPlots = [self numberOfPlots];
         for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-            NSInteger numberOfPlotPoints = ((NSMutableArray *)_dataPoints[plotIndex]).count;
+            NSInteger numberOfPlotPoints = ((NSArray *)_dataPoints[plotIndex]).count;
             for (NSInteger pointIndex = 0; pointIndex < numberOfPlotPoints; pointIndex++) {
                 ORKRangedPoint *point = _dataPoints[plotIndex][pointIndex];
                 if (!minimumValueProvided &&
