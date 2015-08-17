@@ -31,7 +31,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 
-class ChartListViewController: UITableViewController {
+func executeAfterDelay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
+
+class ChartListViewController: UIViewController, UITableViewDataSource {
+    
+    @IBOutlet var tableView: UITableView!
     
     let discreteGraphDataSource = DiscreteGraphDataSource()
     let lineGraphDataSource = LineGraphDataSource()
@@ -45,16 +56,12 @@ class ChartListViewController: UITableViewController {
     var discreteGraphTableViewCell: DiscreteGraphTableViewCell!
     var chartTableViewCells: [UITableViewCell]!
     
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
+    @IBAction func dimiss(sender: AnyObject) {        self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     override func viewDidLoad() {
+        self.tableView.dataSource = self;
+        
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
@@ -64,7 +71,7 @@ class ChartListViewController: UITableViewController {
         pieChartView.text = "TEXT"
         pieChartView.lineWidth = 1000
         pieChartView.showsTitleAboveChart = true
-        delay(1.5) {
+        executeAfterDelay(1.5) {
             pieChartView.showsTitleAboveChart = false
             pieChartView.lineWidth = 12
             pieChartView.title = "UPDATED"
@@ -72,10 +79,10 @@ class ChartListViewController: UITableViewController {
             pieChartView.titleColor = UIColor.redColor()
             pieChartView.textColor = UIColor.orangeColor()
         }
-        delay(2.5) {
+        executeAfterDelay(2.5) {
             pieChartView.drawsClockwise = false
         }
-        delay(3.5) {
+        executeAfterDelay(3.5) {
             pieChartView.showsPercentageLabels = false
         }
         
@@ -84,16 +91,18 @@ class ChartListViewController: UITableViewController {
         let lineGraphView = lineGraphTableViewCell.graphView as! ORKLineGraphView
         lineGraphView.dataSource = lineGraphDataSource
         // Optional custom configuration
-        delay(1) {
+        executeAfterDelay(1.5) {
             lineGraphView.showsHorizontalReferenceLines = true
             lineGraphView.showsVerticalReferenceLines = true
         }
-        delay(2) {
+        executeAfterDelay(2.5) {
             lineGraphView.axisColor = UIColor.redColor()
             lineGraphView.axisTitleColor = UIColor.redColor()
             lineGraphView.referenceLineColor = UIColor.orangeColor()
             lineGraphView.scrubberLineColor = UIColor.blueColor()
             lineGraphView.scrubberThumbColor = UIColor.greenColor()
+        }
+        executeAfterDelay(3.5) {
             let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
             let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
             lineGraphView.maximumValueImage = maximumValueImage
@@ -107,7 +116,7 @@ class ChartListViewController: UITableViewController {
         // Optional custom configuration
         discreteGraphView.showsVerticalReferenceLines = true
         discreteGraphView.drawsConnectedRanges = false
-        delay(2) {
+        executeAfterDelay(3.5) {
             discreteGraphView.drawsConnectedRanges = true
         }
 
@@ -116,11 +125,11 @@ class ChartListViewController: UITableViewController {
         tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chartTableViewCells.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = chartTableViewCells[indexPath.row];
         return cell
     }
