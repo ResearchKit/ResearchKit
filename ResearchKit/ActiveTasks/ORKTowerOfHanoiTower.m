@@ -65,6 +65,7 @@
     [donorDisks removeLastObject];
     self.disks = recipientDisks;
     donorTower.disks = donorDisks;
+    
     return YES;
 }
 
