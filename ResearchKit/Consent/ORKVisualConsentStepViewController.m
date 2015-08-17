@@ -297,6 +297,7 @@
         for (UIView *view in self.pageViewController.view.subviews) {
             if ([view isKindOfClass:[UIScrollView class]]) {
                 _scrollView = (UIScrollView *)view;
+                break;
             }
         }
     }
@@ -664,7 +665,7 @@
     NSUInteger index = NSNotFound;
     for (NSNumber *key in _viewControllers) {
         if (_viewControllers[key] == viewController) {
-            index = [key unsignedIntegerValue];
+            return [key unsignedIntegerValue];
         }
     }
     return index;
