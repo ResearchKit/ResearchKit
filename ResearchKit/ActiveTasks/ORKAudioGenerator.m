@@ -133,8 +133,32 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
     self = [super init];
     if (self) {
         [self setupAudioSession];
+        
+        // Automatically stop and then restart audio playback when the app resigns active.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self stop];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    if (_toneUnit) {
+        __unused OSErr err = AudioOutputUnitStart(_toneUnit);
+        NSAssert1(err == noErr, @"Error starting unit: %hd", err);
+    }
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    if (_toneUnit) {
+        __unused OSErr err = AudioOutputUnitStop(_toneUnit);
+        NSAssert1(err == noErr, @"Error stopping unit: %hd", err);
+    }
 }
 
 - (double)volumeInDecibels {

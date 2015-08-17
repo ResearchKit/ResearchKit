@@ -158,6 +158,11 @@ static const CGFloat kHMargin = 15.0;
 - (void)answerDidChange {
 }
 
+- (BOOL)isAnswerValid {
+    // Subclasses should override this if validation of the answer is required.
+    return YES;
+}
+
 - (void)defaultAnswerDidChange {
     if (! self.haveChangedAnswer && ! self.answer) {
         if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
@@ -305,19 +310,19 @@ static const CGFloat kHMargin = 15.0;
     }
     
     CGFloat height = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
-        
-    [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                               attribute:NSLayoutAttributeHeight
-                                                               relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                  toItem:nil
-                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                              multiplier:1 constant:height]];
     
-    
-    
+    NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                         attribute:NSLayoutAttributeHeight
+                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                            toItem:nil
+                                                                         attribute:NSLayoutAttributeNotAnAttribute
+                                                                        multiplier:1
+                                                                          constant:height];
+    // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
+    heightConstraint.priority = 999;
+    [self.myConstraints addObject:heightConstraint];
     
     [self.contentView addConstraints:self.myConstraints];
-    
     [super updateConstraints];
 }
 
@@ -395,9 +400,17 @@ static const CGFloat kHMargin = 15.0;
     UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
+    }
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.editingHighlight = NO;
     [self.delegate formItemCellDidResignFirstResponder:self];
+    [self inputValueDidChange];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
@@ -406,6 +419,11 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (!  [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
+        return NO;
+    }
+    
     [textField resignFirstResponder];
     UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
     return YES;
@@ -426,12 +444,13 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)cellInit {
     [super cellInit];
-    self.textField.keyboardType = UIKeyboardTypeDefault;
     self.textField.allowsSelection = YES;
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
     self.textField.autocorrectionType = answerFormat.autocorrectionType;
     self.textField.autocapitalizationType = answerFormat.autocapitalizationType;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
+    self.textField.keyboardType = answerFormat.keyboardType;
+    self.textField.secureTextEntry = answerFormat.secureTextEntry;
 
     [self answerDidChange];
 }
@@ -466,17 +485,21 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark UITextFieldDelegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [super textFieldDidEndEditing:textField];
-    [self inputValueDidChange];
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.formItem impliedAnswerFormat];
+    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    if (answerFormat.maximumLength > 0) {
-        if ([text length] > answerFormat.maximumLength) {
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textField.text = researchki` and the `text = researchkit`.
+    if ([textField.text length] < [text length]) {
+    
+        text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+        NSInteger maxLength = answerFormat.maximumLength;
+    
+        if (maxLength > 0 && [text length] > maxLength) {
+            [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
         }
     }
@@ -547,57 +570,6 @@ static const CGFloat kHMargin = 15.0;
     }
 }
 
-- (BOOL)isAnswerValid {
-    NSString *text = self.textField.text;
-    BOOL isValid = YES;
-    if ([text length]) {
-        isValid = [[self.formItem impliedAnswerFormat] isAnswerValidWithString:text];
-    }
-    return isValid;
-}
-
-#pragma mark UITextFieldDelegate
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    NSString *text = textField.text;
-    BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:text]];
-    }
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [super textFieldDidEndEditing:textField];
-    
-    [self inputValueDidChange];
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (! isValid) {
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-        return NO;
-    }
-    
-    [self.textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldClear:(UITextField *)textField {
-    [self inputValueDidClear];
-    
-    return YES;
-}
-
-- (void)valueFieldDidChange:(UITextField *)textField {
-    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.formItem impliedAnswerFormat];
-    NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
-    textField.text = sanitizedText;
-    
-    [self inputValueDidChange];
-}
-
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
@@ -613,6 +585,16 @@ static const CGFloat kHMargin = 15.0;
     if (updateInput) {
         [self answerDidChange];
     }
+}
+
+#pragma mark UITextFieldDelegate
+
+- (void)valueFieldDidChange:(UITextField *)textField {
+    ORKNumericAnswerFormat *answerFormat = (ORKNumericAnswerFormat *)[self.formItem impliedAnswerFormat];
+    NSString *sanitizedText = [answerFormat sanitizedTextFieldText:[textField text] decimalSeparator:[_numberFormatter decimalSeparator]];
+    textField.text = sanitizedText;
+    
+    [self inputValueDidChange];
 }
 
 @end
@@ -681,6 +663,8 @@ static const CGFloat kHMargin = 15.0;
         _textView.autocorrectionType = textAnswerFormat.autocorrectionType;
         _textView.autocapitalizationType = textAnswerFormat.autocapitalizationType;
         _textView.spellCheckingType = textAnswerFormat.spellCheckingType;
+        _textView.keyboardType = textAnswerFormat.keyboardType;
+        _textView.secureTextEntry = textAnswerFormat.secureTextEntry;
     } else {
         _maxLength = 0;
     }
@@ -760,7 +744,6 @@ static const CGFloat kHMargin = 15.0;
     [self.delegate formItemCellDidBecomeFirstResponder:self];
 }
 
-
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text.length == 0) {
         textView.text = self.formItem.placeholder;
@@ -770,15 +753,23 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if (_maxLength > 0) {
-        NSUInteger oldLength = [textView.text length];
-        NSUInteger replacementLength = [text length];
-        NSUInteger rangeLength = range.length;
-        NSUInteger newLength = oldLength - rangeLength + replacementLength;
-        return (newLength <= _maxLength);
+    NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    // Only need to validate the text if the user enters a character other than a backspace.
+    // For example, if the `textView.text = researchki` and the `string = researchkit`.
+    if ([textView.text length] < [string length]) {
+    
+        string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+
+        if (_maxLength > 0 && [string length] > _maxLength) {
+            [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
+            return NO;
+        }
     }
+    
     return YES;
 }
+
 @end
 
 
@@ -834,18 +825,9 @@ static const CGFloat kHMargin = 15.0;
 
 #pragma mark - ORKFormItemScaleCell
 
-@interface ORKFormItemScaleCell () <ORKScaleSliderLayoutWidthProvider>
-
-@end
-
-
 @implementation ORKFormItemScaleCell {
     ORKScaleSliderView *_sliderView;
     id<ORKScaleAnswerFormatProvider> _formatProvider;
-}
-
-- (CGFloat)sliderLayoutWidth {
-    return self.expectedLayoutWidth;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
@@ -859,7 +841,6 @@ static const CGFloat kHMargin = 15.0;
     self.labelLabel.text = nil;
     
     _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
-    _sliderView.delegate = self;
     [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
     
     [self.contentView addSubview:_sliderView];

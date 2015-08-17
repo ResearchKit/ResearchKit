@@ -54,26 +54,35 @@
 #define STRINGIFY2( x) #x
 #define STRINGIFY(x) STRINGIFY2(x)
 
-#define ORK_DECODE_OBJ(d,x) _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_OBJ(c,x) [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_CLASS(d,x,cl) _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_OBJ_ARRAY(d,x,cl) _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_COND_OBJ(c,x) [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
-#define ORK_DECODE_IMAGE(d,x) _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_URL(d,x) _ ## x = (NSURL *)[d decodeObjectOfClass:[NSURL class] forKey:@STRINGIFY(x)]
-#define ORK_ENCODE_IMAGE(c,x) { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
+#define ORK_DECODE_OBJ(d,x)  _ ## x = [d decodeObjectForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_OBJ(c,x)  [c encodeObject:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_URL(c,x)  [c encodeObject:ORKRelativePathForURL(_ ## x) forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_URL_BOOKMARK(c, x) [c encodeObject:ORKBookmarkDataFromURL(_ ## x) forKey:@STRINGIFY(x)]
 
-#define ORK_DECODE_BOOL(d,x) _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_BOOL(c,x) [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_CLASS(d,x,cl)  _ ## x = (cl *)[d decodeObjectOfClass:[cl class] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_ARRAY(d,x,cl)  _ ## x = (NSArray *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class],[cl class],nil] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(d,x,cl)  _ ## x = [(NSOrderedSet *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSOrderedSet class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
+#define ORK_DECODE_OBJ_MUTABLE_DICTIONARY(d,x,kcl,cl)  _ ## x = [(NSDictionary *)[d decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class],[kcl class],[cl class],nil] forKey:@STRINGIFY(x)] mutableCopy]
 
-#define ORK_DECODE_DOUBLE(d,x) _ ## x = [d decodeDoubleForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_DOUBLE(c,x) [c encodeDouble:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_COND_OBJ(c,x)  [c encodeConditionalObject:_ ## x forKey:@STRINGIFY(x)]
 
-#define ORK_DECODE_INTEGER(d,x) _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
-#define ORK_ENCODE_INTEGER(c,x) [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
+#define ORK_DECODE_IMAGE(d,x)  _ ## x = (UIImage *)[d decodeObjectOfClass:[UIImage class] forKey:@STRINGIFY(x)]
+#define ORK_ENCODE_IMAGE(c,x)  { if (_ ## x) { UIImage * __ ## x = [UIImage imageWithCGImage:[_ ## x CGImage] scale:[_ ## x scale] orientation:[_ ## x imageOrientation]]; [c encodeObject:__ ## x forKey:@STRINGIFY(x)]; } }
 
-#define ORK_ENCODE_UINT32(c,x) [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@STRINGIFY(x)]
-#define ORK_DECODE_UINT32(d,x) _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@STRINGIFY(x)] unsignedLongValue]
+#define ORK_DECODE_URL(d,x) _ ## x = ORKURLForRelativePath((NSString *)[d decodeObjectOfClass:[NSString class] forKey:@STRINGIFY(x)])
+#define ORK_DECODE_URL_BOOKMARK(d,x)  _ ## x = ORKURLFromBookmarkData((NSData *)[d decodeObjectOfClass:[NSData class] forKey:@STRINGIFY(x)])
+
+#define ORK_DECODE_BOOL(d,x)  _ ## x = [d decodeBoolForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_BOOL(c,x)  [c encodeBool:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_DECODE_DOUBLE(d,x)  _ ## x = [d decodeDoubleForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_DOUBLE(c,x)  [c encodeDouble:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_DECODE_INTEGER(d,x)  _ ## x = [d decodeIntegerForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_INTEGER(c,x)  [c encodeInteger:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_ENCODE_UINT32(c,x)  [c encodeObject:[NSNumber numberWithUnsignedLongLong:_ ## x] forKey:@STRINGIFY(x)]
+#define ORK_DECODE_UINT32(d,x)  _ ## x = (uint32_t)[(NSNumber *)[d decodeObjectForKey:@STRINGIFY(x)] unsignedLongValue]
 
 #define ORK_DECODE_ENUM(d,x)  _ ## x = (__typeof(_ ## x))[d decodeIntegerForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_ENUM(c,x)  [c encodeInteger:(NSInteger)_ ## x forKey:@STRINGIFY(x)]
@@ -86,6 +95,9 @@
 
 #define ORK_DECODE_CGPOINT(d,x)  _ ## x = (__typeof(_ ## x))[d decodeCGPointForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_CGPOINT(c,x)  [c encodeCGPoint:_ ## x forKey:@STRINGIFY(x)]
+
+#define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@STRINGIFY(x)]
+#define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@STRINGIFY(x)]
 
 /*
  * Helpers for completions which call the block only if non-nil
@@ -153,6 +165,8 @@ NSCalendar *ORKTimeOfDayReferenceCalendar();
 NSDateComponents *ORKTimeOfDayComponentsFromDate(NSDate *date);
 NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents);
 
+BOOL ORKCurrentLocalePresentsFamilyNameFirst();
+
 UIFont *ORKTimeFontForSize(CGFloat size);
 UIFontDescriptor *ORKFontDescriptorForLightStylisticAlternative(UIFontDescriptor *descriptor);
 
@@ -163,9 +177,14 @@ ORKEqualObjects(id o1, id o2) {
     return (o1 == o2) || (o1 && o2 && [o1 isEqual:o2]);
 }
 
+ORK_INLINE BOOL
+ORKEqualFileURLs(NSURL *url1, NSURL *url2) {
+    return ORKEqualObjects(url1, url2) || ([url1 isFileURL] && [url2 isFileURL] && [[url1 absoluteString] isEqualToString:[url2 absoluteString]]);
+}
+
 ORK_INLINE NSArray *
 ORKArrayCopyObjects(NSArray *a) {
-    if (! a) {
+    if (!a) {
         return nil;
     }
     NSMutableArray *b = [NSMutableArray arrayWithCapacity:[a count]];
@@ -173,6 +192,30 @@ ORKArrayCopyObjects(NSArray *a) {
         [b addObject:[obj copy]];
     }];
     return [b copy];
+}
+
+ORK_INLINE NSMutableOrderedSet *
+ORKMutableOrderedSetCopyObjects(NSOrderedSet *a) {
+    if (!a) {
+        return nil;
+    }
+    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:[a count]];
+    [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [b addObject:[obj copy]];
+    }];
+    return b;
+}
+
+ORK_INLINE NSMutableDictionary *
+ORKMutableDictionaryCopyObjects(NSDictionary *a) {
+    if (!a) {
+        return nil;
+    }
+    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:[a count]];
+    [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        b[key] = [obj copy];
+    }];
+    return b;
 }
 
 #define ORKSuppressPerformSelectorWarning(PerformCall) \
@@ -187,6 +230,13 @@ UIFont *ORKThinFontWithSize(CGFloat size);
 UIFont *ORKLightFontWithSize(CGFloat size);
 UIFont *ORKMediumFontWithSize(CGFloat size);
 
+NSURL *ORKURLFromBookmarkData(NSData *data);
+NSData *ORKBookmarkDataFromURL(NSURL *url);
+
+NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL);
+NSURL *ORKURLForRelativePath(NSString *relativePath);
+NSString *ORKRelativePathForURL(NSURL *url);
+
 id ORKDynamicCast_(id x, Class objClass);
 
 #define ORKDynamicCast(x, c) ((c *) ORKDynamicCast_(x, [c class]))
@@ -198,8 +248,10 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
     const CGFloat ORKCGFloatEpsilon = 0.01; // 0.01 should be safe enough when dealing with screen point and pixel values
     return (ABS(f1 - f2) <= ORKCGFloatEpsilon);
 }
-
-const CGFloat ORKCGFloatInvalidValue;
-
 #define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
+#define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
+
+void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
+
+const CGFloat ORKCGFloatInvalidValue;

@@ -163,8 +163,11 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        40,        40,        44},      // ORKScreenMetricIllustrationToCaptionBaseline
         {        198,       198,       194,       152,       297},      // ORKScreenMetricIllustrationHeight
         {        300,       300,       176,       152,       300},      // ORKScreenMetricInstructionImageHeight
+        {         44,        44,        44,        44,        44},      // ORKScreenMetricContinueButtonHeightRegular
+        {         44,        32,        32,        32,        44},      // ORKScreenMetricContinueButtonHeightCompact
         {        150,       150,       146,       146,       150},      // ORKScreenMetricContinueButtonWidth
         {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForMemoryGame
+        {        162,       162,       120,       116,       240},      // ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle
         {         60,        60,        60,        44,        60},      // ORKScreenMetricTableCellDefaultHeight
         {         55,        55,        55,        44,        55},      // ORKScreenMetricTextFieldCellHeight
         {         36,        36,        36,        26,        36},      // ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
@@ -173,7 +176,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         30,        30,        20,        20,        30},      // ORKScreenMetricLearnMoreButtonSideMargin
         {         10,        10,         0,         0,        10},      // ORKScreenMetricHeadlineSideMargin
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
-        {         48,        51,        52,        48,        48},      // ORKScreenMetricVerticalScaleHorizontalMargin
+        {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
     };
     return metrics[metric][screenType];

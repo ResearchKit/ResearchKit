@@ -32,6 +32,7 @@
 
 #import "ORKConsentSignatureFormatter.h"
 #import "ORKDefines_Private.h"
+#import "ORKHelpers.h"
 
 @implementation ORKConsentSignatureFormatter
 
@@ -57,6 +58,9 @@
             }
             if (signature.familyName) {
                 [names addObject:signature.familyName];
+            }
+            if (ORKCurrentLocalePresentsFamilyNameFirst()) {
+                names = [[[names reverseObjectEnumerator] allObjects] mutableCopy];
             }
             nameStr = [names componentsJoinedByString:@"&nbsp;"];
         }

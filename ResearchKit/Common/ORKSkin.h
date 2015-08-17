@@ -111,8 +111,11 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricIllustrationToCaptionBaseline,
     ORKScreenMetricIllustrationHeight,
     ORKScreenMetricInstructionImageHeight,
+    ORKScreenMetricContinueButtonHeightRegular,
+    ORKScreenMetricContinueButtonHeightCompact,
     ORKScreenMetricContinueButtonWidth,
     ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
+    ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle,
     ORKScreenMetricTableCellDefaultHeight,
     ORKScreenMetricTextFieldCellHeight,
     ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
@@ -121,7 +124,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
-    ORKScreenMetricVerticalScaleHorizontalMargin,
+    ORKScreenMetricVerticalScaleHeight,
     ORKScreenMetricSignatureViewHeight,
     ORKScreenMetric_COUNT
 };

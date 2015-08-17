@@ -31,20 +31,21 @@
 
 
 #import "ORKConsentSceneViewController.h"
+#import "ORKConsentSceneViewController_Internal.h"
 #import "ORKConsentLearnMoreViewController.h"
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKVerticalContainerView.h"
 #import "ORKVerticalContainerView_Internal.h"
-#import "ORKConsentSection+AssetLoading.h"
 #import "ORKConsentDocument_Internal.h"
 #import "ORKConsentSection_Internal.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
+#import "ORKTintedImageView.h"
 
 
-@interface ORKConsentSceneView : ORKVerticalContainerView
+@interface ORKConsentSceneView ()
 
 @property (nonatomic, strong) ORKConsentSection *consentSection;
 
@@ -52,6 +53,15 @@
 
 
 @implementation ORKConsentSceneView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.imageView.shouldApplyTint = YES;
+        self.imageView.enableTintedImageCaching = YES;
+    }
+    return self;
+}
 
 - (void)setConsentSection:(ORKConsentSection *)consentSection {
     _consentSection = consentSection;
@@ -63,25 +73,11 @@
     self.headerView.instructionLabel.hidden = ! [[consentSection summary] length];
     self.headerView.captionLabel.text = consentSection.title;
     
-    UIImage *image = nil;
-    if (consentSection.type == ORKConsentSectionTypeCustom) {
-        image = [consentSection.customImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    } else {
-        image = ORKImageForConsentSectionType(consentSection.type, self.imageView.tintColor, self.imageView.contentScaleFactor);
-    }
-    
-    self.imageView.image = image;
+    self.imageView.image = consentSection.image;
     self.headerView.instructionLabel.text = [consentSection summary];
     
     self.continueSkipContainer.continueEnabled = YES;
     [self.continueSkipContainer updateContinueAndSkipEnabled];
-}
-
-@end
-
-
-@interface ORKConsentSceneViewController () {
-    ORKConsentSceneView *_sceneView;
 }
 
 @end
@@ -146,7 +142,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     _sceneView.continueSkipContainer.continueButtonItem = _continueButtonItem;
     _sceneView.imageView.hidden = _imageHidden;
     
-    if ([_section.content length]||[_section.htmlContent length]) {
+    if ([_section.content length]||[_section.htmlContent length] || _section.contentURL) {
         _sceneView.headerView.learnMoreButtonItem = [[UIBarButtonItem alloc] initWithTitle:_learnMoreButtonTitle ? : localizedLearnMoreForType(_section.type) style:UIBarButtonItemStylePlain target:self action:@selector(showContent:)];
     }
 }
@@ -194,7 +190,14 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 #pragma mark - Action
 
 - (IBAction)showContent:(id)sender {
-    ORKConsentLearnMoreViewController *viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
+    ORKConsentLearnMoreViewController *viewController = nil;
+    
+    if(_section.contentURL)
+    {
+        viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
+    }else{
+        viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
+    }
     viewController.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;

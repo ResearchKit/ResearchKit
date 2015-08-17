@@ -99,7 +99,6 @@
 
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
     
-    [self setupButtons];
 }
 
 - (void)setupButtons {
@@ -140,12 +139,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     ORK_Log_Debug(@"%@", self);
+    
+    // Required here (instead of viewDidLoad) because any custom buttons are set once the delegate responds to the stepViewControllerWillAppear,
+    // otherwise there is a minor visual glitch, where the original buttons are displayed on the UI for a short period. This is not placed after
+    // the delegate responds to the stepViewControllerWillAppear, so that the target from the button's item can be used, if the intention is to
+    // only modify the title of the button.
     [self setupButtons];
     
     if ([self.delegate respondsToSelector:@selector(stepViewControllerWillAppear:)]) {
         [self.delegate stepViewControllerWillAppear:self];
     }
-    
+        
     if (!_step) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot present step view controller without a step" userInfo:nil];
     }
@@ -197,6 +201,7 @@
 
 - (void)setLearnMoreButtonTitle:(NSString *)learnMoreButtonTitle {
     self.learnMoreButtonItem.title = learnMoreButtonTitle;
+    self.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (NSString *)learnMoreButtonTitle {
@@ -275,10 +280,14 @@
     }
 }
 
+- (BOOL)hasBeenPresented {
+    return _hasBeenPresented;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
-
+    
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
     [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
@@ -347,13 +356,13 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     
     [coder encodeObject:_step.identifier forKey:_ORKStepIdentifierRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDateRestoreKey];
-    [coder encodeObject:_outputDirectory forKey:_ORKOutputDirectoryKey];
+    [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    self.outputDirectory = [coder decodeObjectOfClass:[NSURL class] forKey:_ORKOutputDirectoryKey];
+    self.outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryKey]);
     
     if (! self.step) {
         // Just logging to the console in this case, since this can happen during a taskVC restoration of a dynamic task.
