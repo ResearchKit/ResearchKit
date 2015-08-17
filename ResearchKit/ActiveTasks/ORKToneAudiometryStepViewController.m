@@ -29,7 +29,7 @@
  */
 
 #import "ORKToneAudiometryStepViewController.h"
-#import "ORKActiveStepViewController_internal.h"
+#import "ORKActiveStepViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKToneAudiometryContentView.h"
 #import "ORKAudioGenerator.h"
@@ -202,7 +202,7 @@
 
     CGFloat progress = 0.001 + (CGFloat)testIndex / (self.testingFrequencies.count * 2);
     [self.toneAudiometryContentView setProgress:progress
-                                        caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), frequency] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), frequency]
+                                        caption:(channel == ORKAudioChannelLeft) ? [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_LEFT", nil), ORKLocalizedStringFromNumber(frequency)] : [NSString stringWithFormat:ORKLocalizedString(@"TONE_LABEL_%@_RIGHT", nil), ORKLocalizedStringFromNumber(frequency)]
                                        animated:YES];
 
     [self.audioGenerator playSoundAtFrequency:frequency.doubleValue

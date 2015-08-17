@@ -75,13 +75,19 @@
 "CONSENT_DOC_LINE_DATE" = "Date";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Step %1$lu of %2$lu";
+"STEP_PROGRESS_FORMAT" = "Step %1$@ of %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Invalid value";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ exceeds the maximum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is less than the minimum allowed value (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is not a valid value.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -129,6 +135,14 @@
 "TASK_COMPLETE_TITLE" = "Activity Complete";
 "TASK_COMPLETE_TEXT" = "Your data will be analyzed and you will be notified when your results are ready.";
 
+/* Image capture step. */
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Capture Image";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Recapture Image";
+"CAPTURE_ERROR_CAMERA_NOT_FOUND" = "No camera found.  This step cannot be completed.";
+"CAPTURE_ERROR_NO_PERMISSIONS" = "In order to complete this step, allow this app access to the camera in Settings.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "No output directory was specified for captured images.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "The captured image could not be saved.";
+
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Fitness";
 "FITNESS_DISTANCE_TITLE_FORMAT" = "Distance (%@)";
@@ -169,9 +183,10 @@
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tone Audiometry";
-"TONE_AUDIOMETRY_INTENDED_USE" = "This activity evaluates your hearing by testing it with different types of sounds.";
-"TONE_AUDIOMETRY_INTRO_TEXT" = "Put your headphones on, and adjust the volume to a comfortable level. Tap the button every time you start hearing a sound.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "This activity measures your ability to hear different sounds.";
+"TONE_AUDIOMETRY_INTRO_TEXT" = "Before you begin, plug in and put your headphones on.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "You should now hear a tone. Adjust the volume using the controls on the side of your device.\n\nTap the button when you are ready to begin.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Tap the button every time you start hearing a sound.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Left";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Right";
@@ -201,11 +216,40 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "Reaction Time";
-"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates your reaction time by measuring the time it takes for you to respond to a visual cue.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "A blue circle will appear on the screen, as soon as it appears, move the device sharply in any direction. You will be asked to make %D attempts.";
+"REACTION_TIME_TASK_INTENDED_USE" = "This activity evaluates the time it takes for you to respond to a visual cue.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Shake the device in any direction as soon as the blue dot appears on screen. You will be asked to do this %D times.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Tap Get Started to begin.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %D of %D";
-"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Move the device sharply when the blue circle appears";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Attempt %@ of %@";
+"REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Quickly shake the device when the blue circle appears";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tower of Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "This activity evaluates your puzzle solving skills.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Move the entire stack to the highlighted platform in as few moves as possible.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tap Get Started to begin";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solve the Puzzle";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Number of Moves: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "I cannot solve this puzzle";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Timed Walk";
+"TIMED_WALK_INTRO_DETAIL" = "This activity measures your lower extremity function.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find a place, preferably outside, where you can walk for about %@ in a straight line as quickly as possible, but safely. Do not slow down until after you've passed the finish line.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tap Next to begin.";
+"TIMED_WALK_FORM_TITLE" = "Assistive device";
+"TIMED_WALK_FORM_TEXT" = "Use the same assistive device for each test.";
+"TIMED_WALK_QUESTION_TEXT" = "Do you wear an ankle foot orthosis?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Do you use assistive device?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tap here to select an answer.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "None";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Unilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Unilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bilateral Cane";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Bilateral Crutch";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Walk up to %@ in a straight line.";
+"TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
 /* Charts */
 "CHART_NO_DATA_TEXT" = "No Data";
@@ -218,10 +262,6 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
 "ERROR_RECORDER_NO_DATA" = "No collected data was found.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
-
-/* Media step */
-"MEDIA_BUTTON_HAVE_IMAGE" = "Tap to capture a different image";
-"MEDIA_BUTTON" = "Tap to capture an image";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";
@@ -246,4 +286,7 @@
 "AX.MEMORY.TILE.INCORRECT" = "incorrect";
 "AX.MEMORY.TILE.QUIESCENT" = "quiescent";
 "AX.MEMORY.TILE.LABEL" = "Memory game tile";
+
+"AX_IMAGE_CAPTURE_LABEL" = "Capture preview";
+"AX_IMAGE_CAPTURED_LABEL" = "Captured image";
 

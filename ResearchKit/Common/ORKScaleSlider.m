@@ -35,11 +35,10 @@
 #import "ORKAccessibility.h"
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Internal.h"
-
-
-@interface ORKScaleSlider ()
-
-@end
+#import "ORKSkin.h"
+#import "ORKScaleSliderView.h"
+#import "ORKScaleRangeDescriptionLabel.h"
+#import "ORKScaleRangeImageView.h"
 
 
 @implementation ORKScaleSlider {
@@ -79,6 +78,7 @@
         _vertical = vertical;
         self.transform = _vertical ? CGAffineTransformMakeRotation(-M_PI_2) : CGAffineTransformIdentity;
         _thumbImageNeedsTransformUpdate = YES;
+        [self invalidateIntrinsicContentSize];
     }
 }
 
@@ -109,13 +109,9 @@
 
 - (CGSize)intrinsicContentSize {
     CGSize intrinsicContentSize = [super intrinsicContentSize];
-    // If we have a layout width provided by our delegate and we are vertical, use the provided
-    // width for the intrinsic content height, and leave the intrinsic content width alone.
-    // The intrinsic content width is typically -1, which will allow the slider to fill the
-    // available width in the superview.
-    CGFloat sliderLayoutWidth = self.delegate.sliderLayoutWidth;
-    if(_vertical && sliderLayoutWidth > 0) {
-        intrinsicContentSize = CGSizeMake(intrinsicContentSize.width, sliderLayoutWidth);
+    if (_vertical) {
+        CGFloat verticalScaleHeight = ORKGetMetricForWindow(ORKScreenMetricVerticalScaleHeight, self.window);
+        intrinsicContentSize = (CGSize){.width = verticalScaleHeight, .height = verticalScaleHeight};
     }
     return intrinsicContentSize;
 }
@@ -225,10 +221,26 @@ static CGFloat kPadding = 2.0;
 }
 
 - (NSString *)accessibilityLabel {
-    return [NSString stringWithFormat:
-            ORKLocalizedString(@"AX_SLIDER_LABEL", nil),
-            [self _axFormattedValue:self.minimumValue],
-            [self _axFormattedValue:self.maximumValue]];
+    ORKScaleSliderView *sliderView = (ORKScaleSliderView *)[self ork_superviewOfType:[ORKScaleSliderView class]];
+    NSString *minimumValue = [self _axFormattedValue:self.minimumValue];
+    NSString *maximumValue = [self _axFormattedValue:self.maximumValue];
+    
+    // Include the range description labels if they are set.
+    if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
+        minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@, ", sliderView.rightRangeDescriptionLabel.text];
+    }
+    
+    // Include the range image accessibilty hints if they are set.
+    if (sliderView.leftRangeImageView.image.accessibilityHint.length > 0) {
+        minimumValue = [minimumValue stringByAppendingString:sliderView.leftRangeImageView.image.accessibilityHint];
+    }
+    if (sliderView.rightRangeImageView.image.accessibilityHint.length > 0) {
+        maximumValue = [maximumValue stringByAppendingString:sliderView.rightRangeImageView.image.accessibilityHint];
+    }
+    
+    
+    return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 
 - (NSString *)accessibilityValue {

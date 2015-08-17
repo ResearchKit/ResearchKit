@@ -37,6 +37,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 id ORKNullAnswerValue();
+BOOL ORKIsAnswerEmpty(__nullable id answer);
 
 NSString *ORKHKBiologicalSexString(HKBiologicalSex biologicalSex);
 NSString *ORKHKBloodTypeString(HKBloodType bloodType);
@@ -75,6 +76,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @property (nonatomic, strong, nullable) HKUnit *healthKitUserUnit;
 
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text;
+
+- (BOOL)isAnswerValid:(id)answer;
 
 - (nullable NSString *)localizedInvalidValueStringWithAnswerString:(nullable NSString *)text;
 
@@ -125,6 +128,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (BOOL)isVertical;
 - (NSString *)maximumValueDescription;
 - (NSString *)minimumValueDescription;
+- (UIImage *)maximumImage;
+- (UIImage *)minimumImage;
 
 @end
 
@@ -175,6 +180,8 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 
 @interface ORKTextAnswerFormat ()
+
+@property (nonatomic, assign, getter=isEmailAddress) BOOL emailAddress;
 
 @end
 

@@ -41,14 +41,16 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKConsentSceneViewController.h"
 #import "ORKConsentSceneViewController_Internal.h"
+#import "ORKConsentSection_Internal.h"
 #import "ORKConsentDocument.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ORKConsentSection+AssetLoading.h"
 #import "ORKVisualConsentTransitionAnimator.h"
 #import "ORKEAGLMoviePlayerView.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
 #import "ORKContinueButton.h"
 #import "ORKAccessibility.h"
+#import "ORKTintedImageView.h"
+#import "ORKTintedImageView_Internal.h"
 
 
 @interface ORKVisualConsentStepViewController () <UIPageViewControllerDelegate, ORKScrollViewObserverDelegate> {
@@ -138,6 +140,10 @@
 
 
 @implementation ORKVisualConsentStepViewController
+
+- (void)dealloc {
+    [[ORKTintedImageCache sharedCache] removeAllObjects];
+}
 
 - (void)stepDidChange {
     [super stepDidChange];
@@ -257,7 +263,7 @@
 #pragma mark - actions
 
 - (IBAction)goToPreviousPage {
-    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES];
+    [self showViewController:[self viewControllerForIndex:[self currentIndex]-1] forward:NO animated:YES preloadNextConsentSectionImage:NO];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
@@ -326,7 +332,7 @@
 }
 
 - (NSUInteger)pageCount {
-    return _visualSections.count;
+    return [_visualSections count];
 }
 
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
@@ -383,7 +389,7 @@
     void (^finishAndNilAnimator)(ORKVisualConsentTransitionAnimator *animator) = ^(ORKVisualConsentTransitionAnimator *animator) {
         __strong typeof(self) strongSelf = weakSelf;
         [animator finish];
-        if (strongSelf->_animator == animator) {
+        if (strongSelf && strongSelf->_animator == animator) {
             // Do not show images and hide animationPlayerView if it's not the current animator
             fromViewController.imageHidden = NO;
             toViewController.imageHidden = NO;
@@ -505,11 +511,32 @@
     }
 }
 
+- (ORKConsentSection *)consentSectionForIndex:(NSUInteger)index {
+    ORKConsentSection *consentSection = nil;
+    NSArray *visualSections = [self visualSections];
+    if (index < [visualSections count]) {
+        consentSection = visualSections[index];
+    }
+    return consentSection;
+}
+
 - (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated {
+    [self showViewController:viewController forward:forward animated:animated preloadNextConsentSectionImage:YES];
+}
+
+- (void)showViewController:(ORKConsentSceneViewController *)viewController forward:(BOOL)forward animated:(BOOL)animated preloadNextConsentSectionImage:(BOOL)preloadNextViewController {
     [self showViewController:viewController
                      forward:forward
                     animated:animated
-                  completion:nil];
+                  completion:^(BOOL finished) {
+                      if (preloadNextViewController) {
+                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex]+1];
+                          ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
+                          [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
+                                                              tintColor:currentSceneImageView.tintColor
+                                                                  scale:currentSceneImageView.window.screen.scale];
+                      }
+                  }];
 }
 
 - (void)showViewController:(ORKConsentSceneViewController *)viewController
@@ -604,7 +631,7 @@
     
     if (_viewControllers[@(index)]) {
         consentViewController = _viewControllers[@(index)];
-    } else if (index>=[self pageCount]) {
+    } else if (index >= [self pageCount]) {
         consentViewController = nil;
     } else {
         ORKConsentSceneViewController *sceneViewController = [[ORKConsentSceneViewController alloc] initWithSection:[self visualSections][index]];

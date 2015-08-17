@@ -57,8 +57,9 @@
     
     ORKStepResult *stepResult1 = [[ORKStepResult alloc] initWithStepIdentifier:@"StepIdentifier" results:@[fileResult1, questionResult1, consentResult1]];
     
-    ORKTaskResult *taskResult1 = [[ORKTaskResult alloc] initWithTaskIdentifier:@"taskIdetifier" taskRunUUID:[NSUUID UUID]
-                                                          outputDirectory: [NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    ORKTaskResult *taskResult1 = [[ORKTaskResult alloc] initWithTaskIdentifier:@"taskIdetifier"
+                                                                   taskRunUUID:[NSUUID UUID]
+                                                               outputDirectory: [NSURL fileURLWithPath:NSTemporaryDirectory()]];
     taskResult1.results = @[stepResult1];
     
     return taskResult1;
@@ -67,7 +68,7 @@
 - (void)compareTaskResult1:(ORKTaskResult *)taskResult1 andTaskResult2:(ORKTaskResult *)taskResult2 {
     // Compare
     XCTAssert([taskResult1.taskRunUUID isEqual:taskResult2.taskRunUUID], @"");
-    XCTAssert([taskResult1.outputDirectory isEqual:taskResult2.outputDirectory], @"");
+    XCTAssert([taskResult1.outputDirectory.absoluteString isEqual:taskResult2.outputDirectory.absoluteString], @"");
     XCTAssert([taskResult1.identifier isEqualToString:taskResult2.identifier], @"");
     
     XCTAssert(taskResult1!=taskResult2, @"");
@@ -106,7 +107,7 @@
                 ORKFileResult *f1 = (ORKFileResult *)result1;
                 ORKFileResult *f2 = (ORKFileResult *)result2;
                 
-                XCTAssert( [f1.fileURL isEqual:f2.fileURL], @"");
+                XCTAssert( [f1.fileURL.absoluteString isEqual:f2.fileURL.absoluteString], @"");
                 XCTAssert( [f1.contentType isEqualToString:f2.contentType], @"");
             } else if ([result1 isKindOfClass:[ORKConsentSignatureResult class]]) {
                 ORKConsentSignatureResult *c1 = (ORKConsentSignatureResult *)result1;

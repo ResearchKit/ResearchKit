@@ -57,25 +57,28 @@ ORK_EXTERN NSString *const ORKCaptionTextColorKey;
 /// Color used for a "blue" highlight
 ORK_EXTERN NSString *const ORKBlueHighlightColorKey;
 
-///Color used for axes of ORKBaseGraphView
+/// Default color used for legend, title and text on ORKPieChartView
+ORK_EXTERN NSString *const ORKChartDefaultTextColorKey;
+
+/// Default color used for axes of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphAxisColorKey;
 
-///Color used for titles on axes of ORKBaseGraphView
+/// Default color used for titles on axes of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphAxisTitleColorKey;
 
-///Color used for scrubber line of ORKBaseGraphView
+/// Default color used for scrubber line of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphScrubberLineColorKey;
 
-///Color used for scrubber thumb of ORKBaseGraphView
+/// Default color used for scrubber thumb of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphScrubberThumbColorKey;
 
-///color used for reference line of ORKBaseGraphView
+/// Default color used for reference line of ORKGraphChartView
 ORK_EXTERN NSString *const ORKGraphReferenceLineColorKey;
 
-/// Return the color for a specified ORK..ColorKey
+/// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
 
-/// Modify the color for a specified ORK..ColorKey. (for customization)
+/// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
 
 @interface UIColor (ORKColor)
@@ -108,8 +111,11 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricIllustrationToCaptionBaseline,
     ORKScreenMetricIllustrationHeight,
     ORKScreenMetricInstructionImageHeight,
+    ORKScreenMetricContinueButtonHeightRegular,
+    ORKScreenMetricContinueButtonHeightCompact,
     ORKScreenMetricContinueButtonWidth,
     ORKScreenMetricMinimumStepHeaderHeightForMemoryGame,
+    ORKScreenMetricMinimumStepHeaderHeightForTowerOfHanoiPuzzle,
     ORKScreenMetricTableCellDefaultHeight,
     ORKScreenMetricTextFieldCellHeight,
     ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop,
@@ -118,7 +124,7 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricLearnMoreButtonSideMargin,
     ORKScreenMetricHeadlineSideMargin,
     ORKScreenMetricToolbarHeight,
-    ORKScreenMetricVerticalScaleHorizontalMargin,
+    ORKScreenMetricVerticalScaleHeight,
     ORKScreenMetricSignatureViewHeight,
     ORKScreenMetric_COUNT
 };

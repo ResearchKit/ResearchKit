@@ -29,13 +29,13 @@
  */
 
 
-#import "ORKLabel.h"
+#import "ORKScaleRangeLabel.h"
 
 
 /**
  Start/End description of the range in scale slider.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKScaleRangeDescriptionLabel : ORKLabel
+@interface ORKScaleRangeDescriptionLabel : ORKScaleRangeLabel
 
 @end

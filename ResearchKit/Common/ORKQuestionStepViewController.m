@@ -158,8 +158,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _tableView = _tableContainer.tableView;
             _tableView.delegate = self;
             _tableView.dataSource = self;
+            _tableView.clipsToBounds = YES;
             
             [self.view addSubview:_tableContainer];
+            _tableContainer.tapOffView = self.view;
             
             _headerView = _tableContainer.stepHeaderView;
             _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
@@ -343,7 +345,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)updateButtonStates {
-    if ([self.questionStep isFormatImmediateNavigation]) {
+    if ([self isStepImmediateNavigation]) {
         _continueSkipView.neverHasContinueButton = YES;
         _continueSkipView.continueButtonItem = nil;
     }
@@ -410,7 +412,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)hasAnswer {
-    return !(self.answer == nil || (self.answer == ORKNullAnswerValue()) || ([self.answer isKindOfClass:[NSArray class]] && [(NSArray *)self.answer count] == 0) );
+    return !ORKIsAnswerEmpty(self.answer);
 }
 
 - (void)saveAnswer:(id)answer {
@@ -469,6 +471,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     return !(self.questionStep.optional == NO && [self hasAnswer] == NO);
 }
 
+// Not to use `ImmediateNavigation` when current step already has an answer.
+// So user is able to review the answer when it is present.
+- (BOOL)isStepImmediateNavigation {
+    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO;
+}
+
 #pragma mark - ORKQuestionStepCustomViewDelegate
 
 - (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer; {
@@ -494,7 +502,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:(ORKTextChoiceAnswerFormat *)impliedAnswerFormat
                                                                                        answer:self.answer
                                                                            beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]
-                                                                          immediateNavigation:[self.questionStep isFormatImmediateNavigation]];
+                                                                          immediateNavigation:[self isStepImmediateNavigation]];
         }
         return _choiceCellGroup.size;
     }
@@ -654,12 +662,15 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
     
+    // Capture `isStepImmediateNavigation` before saving an answer.
+    BOOL immediateNavigation = [self isStepImmediateNavigation];
+    
     id answer = (self.questionStep.questionType == ORKQuestionTypeBoolean) ? [_choiceCellGroup answerForBoolean] :[_choiceCellGroup answer];
     
     [self saveAnswer:answer];
     self.haveChangedAnswer = YES;
     
-    if ([self.questionStep isFormatImmediateNavigation]) {
+    if (immediateNavigation) {
         // Proceed as continueButton tapped
         ORKSuppressPerformSelectorWarning(
                                          [self.continueButtonItem.target performSelector:self.continueButtonItem.action withObject:self.continueButtonItem];);

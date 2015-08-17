@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSURL *contentURL;
 
 @end
 
@@ -53,11 +54,22 @@
     return self;
 }
 
+-(instancetype)initWithContentURL:(NSURL * __nonnull)contentURL
+{
+    self = [super init];
+    if(self)
+    {
+        self.contentURL = contentURL;
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = ORKColor(ORKBackgroundColorKey);
-
+    
     _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     
     const CGFloat horizMargin = ORKStandardLeftMarginForTableViewCell(self.view);
@@ -69,14 +81,22 @@
     _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
     _webView.opaque = NO; // If opaque is set to YES, _webView shows a black right margin during transition when modally presented. This is an artifact due to disabling clipsToBounds to be able to show the scroll indicator outside the view.
     
-    [_webView loadHTMLString:self.content baseURL:ORKCreateRandomBaseURL()];
+    if(_contentURL)
+    {
+        [_webView setScalesPageToFit:YES];
+        
+        [_webView loadRequest:[NSURLRequest requestWithURL:_contentURL]];
+    }else{
+        [_webView loadHTMLString:self.content baseURL:ORKCreateRandomBaseURL()];
+    }
+    
     _webView.delegate = self;
     [self.view addSubview:_webView];
-
+    
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
     [self setupConstraints];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
 - (void)setupConstraints {
@@ -95,7 +115,7 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (IBAction)cancel:(id)sender {
+- (IBAction)done:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

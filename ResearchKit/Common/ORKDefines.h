@@ -63,6 +63,9 @@ typedef NS_OPTIONS(NSInteger, ORKPermissionMask) {
     
     /// Access to location.
     ORKPermissionCoreLocation             = (1 << 4),
+    
+    /// Access to camera.
+    ORKPermissionCamera                   = (1 << 5),
 } ORK_ENUM_AVAILABLE;
 
 
@@ -93,7 +96,10 @@ typedef NS_ENUM(NSInteger, ORKFileProtectionMode) {
  Audio channel constants.
  */
 typedef NS_ENUM(NSInteger, ORKAudioChannel) {
+    /// The left audio channel.
     ORKAudioChannelLeft,
+    
+    /// The right audio channel.
     ORKAudioChannelRight
 } ORK_ENUM_AVAILABLE;
 

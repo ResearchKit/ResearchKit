@@ -107,6 +107,16 @@
         }
     } else {
         touchedCell.selectedItem = !touchedCell.selectedItem;
+        if (touchedCell.selectedItem) {
+            ORKTextChoice *touchedChoice = [_helper textChoiceAtIndex:index];
+            for (NSNumber *num in [_cells allKeys]) {
+                ORKChoiceViewCell *cell = _cells[num];
+                ORKTextChoice *choice = [_helper textChoiceAtIndex:[num unsignedIntegerValue]];
+                if (cell != touchedCell && (touchedChoice.exclusive || (cell.selectedItem && choice.exclusive))) {
+                    cell.selectedItem = NO;
+                }
+            }
+        }
     }
     
     _answer = [_helper answerForSelectedIndexes:[self selectedIndexes]];
