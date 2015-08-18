@@ -35,8 +35,8 @@
 @implementation ORKConsentSectionFormatter
 
 - (NSString *)HTMLForSection:(ORKConsentSection *)section {
-    NSString *content = section.htmlContent ?: (section.escapedContent ?: @"");
     NSString *title = section.formalTitle ?: (section.title ?: @"");
+    NSString *content = section.htmlContent ?: (section.escapedContent ?: @"");
     return [NSString stringWithFormat:@"<h4>%@</h4><p>%@<p>", title, content];
 }
 
