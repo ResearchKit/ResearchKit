@@ -184,7 +184,9 @@
         
         // scenes
         for (ORKConsentSection *section in _sections) {
-            [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            if (!section.omitFromDocument) {
+                [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            }
         }
         
         if (! mobile) {
