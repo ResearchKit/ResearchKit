@@ -302,7 +302,11 @@
                                               @"ORKOrderedTask.requestedPermissions",
                                               @"ORKStep.showsProgress",
                                               @"ORKResult.saveable",
-                                              @"ORKCollectionResult.firstResult"];
+                                              @"ORKCollectionResult.firstResult",
+                                              @"ORKScaleAnswerFormat.minimumImage",
+                                              @"ORKScaleAnswerFormat.maximumImage",
+                                              @"ORKContinuousScaleAnswerFormat.minimumImage",
+                                              @"ORKContinuousScaleAnswerFormat.maximumImage"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class
@@ -510,7 +514,11 @@
                                               @"ORKConsentSection.customImage",
                                               @"ORKInstructionStep.image",
                                               @"ORKActiveStep.image",
-                                              @"ORKSpatialSpanMemoryStep.customTargetImage"
+                                              @"ORKSpatialSpanMemoryStep.customTargetImage",
+                                              @"ORKScaleAnswerFormat.minimumImage",
+                                              @"ORKScaleAnswerFormat.maximumImage",
+                                              @"ORKContinuousScaleAnswerFormat.minimumImage",
+                                              @"ORKContinuousScaleAnswerFormat.maximumImage"
                                               ];
     
     // Test Each class
