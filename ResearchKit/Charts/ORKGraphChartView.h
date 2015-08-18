@@ -221,14 +221,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) CGFloat maximumValue;
 
 /**
- A Boolean value indicating whether the graph view should draw horizontal refrerence lines.
+ A Boolean value indicating whether the graph view should draw horizontal reference lines.
 
  The default value of this property is NO.
  */
 @property (nonatomic) BOOL showsHorizontalReferenceLines;
 
 /**
- A Boolean value indicating whether the graph view should draw vertical refrerence lines.
+ A Boolean value indicating whether the graph view should draw vertical reference lines.
 
  The default value of this property is NO.
 */
@@ -305,7 +305,7 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, nullable) UIImage *minimumValueImage;
 
 /**
- The gesture recogniser that is used for scrubbint by the graph view.
+ The gesture recogniser that is used for scrubbing by the graph view.
  
  This object is instatiated and added to the view on initialisation.
  */
