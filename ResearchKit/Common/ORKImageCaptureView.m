@@ -272,7 +272,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     _capturePressesIgnored = YES;
         
     // Capture the image via the delegate
-    [self.delegate capturePressed:^(BOOL captureSuccess){
+    [self.delegate capturePressed:^(BOOL captureSuccess) {
         // Stop ignoring presses
         _capturePressesIgnored = NO;
     }];

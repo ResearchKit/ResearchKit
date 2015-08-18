@@ -831,7 +831,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if (_formatProvider == nil){
+    if (_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
     }
     return _formatProvider;

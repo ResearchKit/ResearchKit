@@ -83,7 +83,7 @@
         [_webView setScalesPageToFit:YES];
         
         [_webView loadRequest:[NSURLRequest requestWithURL:_contentURL]];
-    }else{
+    } else {
         [_webView loadHTMLString:self.content baseURL:ORKCreateRandomBaseURL()];
     }
     

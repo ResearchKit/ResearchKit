@@ -194,7 +194,7 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
     
     if (_section.contentURL) {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
-    } else{
+    } else {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }
     viewController.title = ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
