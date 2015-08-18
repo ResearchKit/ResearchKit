@@ -662,12 +662,14 @@
         return NSNotFound;
     }
     
+    NSUInteger index = NSNotFound;
     for (NSNumber *key in _viewControllers) {
         if (_viewControllers[key] == viewController) {
-            return [key unsignedIntegerValue];
+            index = [key unsignedIntegerValue];
+            break;
         }
     }
-    return NSNotFound;
+    return index;
 }
 
 - (NSUInteger)currentIndex {
