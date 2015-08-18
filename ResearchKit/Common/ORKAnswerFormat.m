@@ -831,9 +831,11 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
+    NSString *yes = self.yesText ? self.yesText : ORKLocalizedString(@"BOOL_YES",nil);
+    NSString *no = self.noText ? self.noText : ORKLocalizedString(@"BOOL_NO",nil);
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                            textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
-                                                          [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO) ]]];
+                                            textChoices:@[[ORKTextChoice choiceWithText:yes value:@(YES)],
+                                                          [ORKTextChoice choiceWithText:no value:@(NO) ]]];
 }
 
 - (Class)questionResultClass {

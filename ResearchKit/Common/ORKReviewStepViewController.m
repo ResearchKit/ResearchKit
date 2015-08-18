@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKReviewStepViewController.h"
 #import "ORKReviewStep.h"
 #import "ORKStep_Private.h"
@@ -39,17 +40,30 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKResult.h"
+#import "ORKTextChoiceCellGroup.h"
+
+
+typedef NS_ENUM(NSInteger, ORKReviewSection) {
+    ORKReviewSectionSpace1 = 0,
+    ORKReviewSectionAnswer = 1,
+    ORKReviewSectionSpace2 = 2,
+    ORKReviewSectionCount
+};
+
 
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ORKStepHeaderView *headerView;
-@property (nonatomic, strong) ORKNavigationContainerView *continueSkipView;
 
 @end
 
-@implementation ORKReviewStepViewController
+@implementation ORKReviewStepViewController {
+    ORKNavigationContainerView *_continueSkipView;
+    ORKTextChoiceCellGroup *_choiceCellGroup;
+    ORKTextChoiceAnswerFormat *_answerFormat;
+}
 
 - (instancetype)initWithStep:(nonnull ORKStep *)step result:(nonnull ORKResult *)result {
     self = [super initWithStep:step result:result];
@@ -72,12 +86,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.completed = NO;
-    if (!self.hasBeenPresented && self.steps.count == 0) {
-        //TODO: localize string
-        _headerView.instructionLabel.text = @"No steps available for review";
-    }
     [super viewWillAppear:animated];
+    [self reloadSteps];
+    self.completed = NO;
     [self.taskViewController setRegisteredScrollView:_tableView];
 }
 
@@ -93,10 +104,19 @@
 
 //TODO: defaults
 
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    [super setContinueButtonItem:continueButtonItem];
+    _continueSkipView.continueButtonItem = continueButtonItem;
+}
+
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
     _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
-    [_tableContainer setNeedsLayout];
+}
+
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
+    [super setSkipButtonItem:skipButtonItem];
+    _continueSkipView.skipButtonItem = self.skipButtonItem;
 }
 
 - (void)stepDidChange {
@@ -113,22 +133,18 @@
     
     if ([self reviewStep]) {
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:_tableContainer];
-        _tableContainer.tapOffView = self.view;
-        
         _tableView = _tableContainer.tableView;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = UITableViewAutomaticDimension;
-        _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(self.view.window);
-        _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
-        [_tableView registerClass:[ORKChoiceViewCell class] forCellReuseIdentifier:@"reviewCell"];
+        _tableView.clipsToBounds = YES;
+
+        [self.view addSubview:_tableContainer];
+        _tableContainer.tapOffView = self.view;
         
         _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.text = [[self reviewStep] title];
-        _headerView.captionLabel.useSurveyMode = [[self reviewStep] useSurveyMode];
-        _headerView.instructionLabel.text = [[self reviewStep] text];
+        _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
+        _headerView.captionLabel.text = self.reviewStep.title;
+        _headerView.instructionLabel.text = self.reviewStep.text;
         _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         
         _continueSkipView = _tableContainer.continueSkipContainerView;
@@ -137,12 +153,8 @@
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
         _continueSkipView.hidden = self.step.isBeingReviewed;
+        [_tableContainer setNeedsLayout];
     }
-}
-
-- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    [super setContinueButtonItem:continueButtonItem];
-    _continueSkipView.continueButtonItem = continueButtonItem;
 }
 
 - (ORKReviewStep *)reviewStep {
@@ -160,31 +172,89 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
-    return 1;
+    return _steps.count > 0 ? ORKReviewSectionCount : 0;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _steps.count;
+    if (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) {
+        return 1;
+    }
+    NSMutableArray *textChoices = [[NSMutableArray alloc] init];
+    [_steps enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
+        ORKStep *step = (ORKStep*) object;
+        //TODO: process results
+        [textChoices addObject:@[step.title]];
+    }];
+    _answerFormat = [[ORKTextChoiceAnswerFormat alloc] initWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices: textChoices];
+    _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:_answerFormat answer:nil beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] immediateNavigation:YES];
+    return _choiceCellGroup.size;
+
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    //TODO: change cell appearance
-    ORKChoiceViewCell *cell = (ORKChoiceViewCell *) [tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
-    cell.immediateNavigation = YES;
-    cell.shortLabel.text = [_steps[indexPath.row] title];
-    //TODO: process results
+    tableView.layoutMargins = UIEdgeInsetsZero;
+    if (indexPath.section == ORKReviewSectionSpace1 || indexPath.section == ORKReviewSectionSpace2) {
+        static NSString *SpaceIdentifier = @"Space";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpaceIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpaceIdentifier];
+        }
+        return cell;
+    }
+    static NSString *identifier = nil;
+    identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
+    ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+    }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.layoutMargins = UIEdgeInsetsZero;
+    if (indexPath.section == ORKReviewSectionSpace2) {
+        cell.separatorInset = (UIEdgeInsets){.left = ORKScreenMetricMaxDimension};
+    } else {
+        cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
+    }
 }
 
 #pragma mark UITableViewDelegate
 
-- (void)tableView:(nonnull UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:reviewStep:)]) {
-        [self.reviewDelegate reviewStepViewController:self reviewStep:_steps[indexPath.row]];
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == ORKReviewSectionAnswer ? indexPath : nil;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == ORKReviewSectionAnswer;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
+    if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:willReviewStep:)]) {
+        [self.reviewDelegate reviewStepViewController:self willReviewStep:_steps[indexPath.row]];
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == ORKReviewSectionAnswer ? [self heightForChoiceItemOptionAtIndex:indexPath.row] : 1;
+}
 
+- (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
+    ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText inTableView:_tableView];
+    return height;
+}
+
+- (void)reloadSteps {
+    if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:stepsForReviewStep:)]) {
+        _steps = [self.reviewDelegate reviewStepViewController:self stepsForReviewStep:self.reviewStep];
+    }
+    _headerView.instructionLabel.text = _steps.count > 0 ? self.reviewStep.text : @"No steps available for review";
+    [_tableView reloadData];
+    [_tableContainer setNeedsLayout];
+}
 
 @end
 

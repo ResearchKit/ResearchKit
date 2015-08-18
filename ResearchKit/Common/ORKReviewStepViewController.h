@@ -40,8 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ORKReviewStepViewControllerDelegate <NSObject>
 
-- (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
-                      reviewStep:(ORKStep *)step;
+- (NSArray*)reviewStepViewController:(ORKReviewStepViewController*)reviewStepViewController
+                  stepsForReviewStep:(ORKReviewStep*)reviewStep;
+
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController*)reviewStepViewController
+                shouldReviewStep:(ORKStep*)step;
+
+- (void)reviewStepViewController:(ORKReviewStepViewController*)reviewStepViewController
+                      willReviewStep:(ORKStep*)step;
 @end
 
 ORK_CLASS_AVAILABLE
@@ -57,6 +63,8 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, nonnull, readonly) ORKReviewStep *reviewStep;
 //TODO: move to internal header
 @property (nonatomic) BOOL completed;
+
+- (void) reloadSteps;
 
 @end
 

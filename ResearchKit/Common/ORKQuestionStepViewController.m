@@ -202,6 +202,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
+            _questionView.continueSkipContainer.hidden = self.step.isBeingReviewed;
             
             NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[s]|" options:0 metrics:nil views:@{@"s":_questionView}]];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tg][s][bg]" options:0 metrics:nil views:@{@"s":_questionView,@"tg":self.topLayoutGuide,@"bg":self.bottomLayoutGuide}]];

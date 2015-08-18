@@ -560,6 +560,9 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
 
+@property (nullable) NSString *yesText;
+@property (nullable) NSString *noText;
+
 @end
 
 

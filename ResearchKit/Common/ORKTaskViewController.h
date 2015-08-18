@@ -223,8 +223,6 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
 
-- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController shouldReviewStep:(ORKStep *)step;
-
 @end
 
 
@@ -461,6 +459,7 @@ ORK_CLASS_AVAILABLE
  You can use this method to customize the appearance of the task view controller's navigation bar.
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
+
 
 @end
 

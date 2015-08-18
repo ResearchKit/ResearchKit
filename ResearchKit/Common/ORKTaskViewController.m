@@ -971,16 +971,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     return shouldPresent;
 }
 
-- (BOOL)shouldReviewStep:(ORKStep *)step {
-    BOOL shouldReview = ([step isKindOfClass:[ORKQuestionStep class]] || [step isKindOfClass:[ORKFormItem class]]);
-    
-    if (shouldReview && [self.delegate respondsToSelector:@selector(taskViewController:shouldReviewStep:)]) {
-        shouldReview = [self.delegate taskViewController:self shouldReviewStep:step];
-    }
-    
-    return shouldReview;
-}
-
 - (ORKStep *)nextStep {
     ORKStep *step = nil;
     
@@ -1042,36 +1032,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         stepViewController.restorationIdentifier = step.identifier;
         stepViewController.restorationClass = stepViewControllerClass;
-        if ([stepViewController isKindOfClass:[ORKReviewStepViewController class]]) {
+        if ([step isKindOfClass:[ORKReviewStep class]] && [stepViewController isKindOfClass:[ORKReviewStepViewController class]]) {
             ORKReviewStepViewController *reviewStepViewController = (ORKReviewStepViewController *) stepViewController;
-            NSMutableArray *steps = [[NSMutableArray alloc] init];
-            if (reviewStepViewController.reviewStep.isStandalone) {
-                for (ORKStep *step in reviewStepViewController.reviewStep.steps) {
-                    if ([self shouldReviewStep:step]) {
-                        [steps addObject:step];
-                    }
-                }
-            } else {
-                ORKStep *nextStep = step;
-                do {
-                    switch (reviewStepViewController.reviewStep.reviewDirection) {
-                        case ORKReviewStepReviewDirectionForward:
-                            nextStep = [self stepAfterStep:nextStep];
-                            break;
-                        case ORKReviewStepReviewDirectionReverse:
-                            nextStep = [self stepBeforeStep:nextStep];
-                            break;
-                    }
-                    if ([self shouldReviewStep:nextStep]) {
-                        [steps addObject:nextStep];
-                    }
-                } while (nextStep || [nextStep isKindOfClass:[ORKReviewStep class]]);
-            }
-            if (reviewStepViewController.reviewStep.reviewDirection == ORKReviewStepReviewDirectionReverse) {
-                reviewStepViewController.steps = [[steps reverseObjectEnumerator] allObjects];
-            } else {
-                reviewStepViewController.steps = [steps copy];
-            }
             reviewStepViewController.resultSource = self.result;
             reviewStepViewController.reviewDelegate = self;
         }
@@ -1338,7 +1300,44 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 #pragma mark - ORKReviewStepViewControllerDelegate
 
-- (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController reviewStep:(ORKStep *)step {
+- (nonnull NSArray *)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                           stepsForReviewStep:(ORKReviewStep *)reviewStep {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    if (reviewStep.isStandalone) {
+        for (ORKStep *step in reviewStep.steps) {
+            if ([reviewStepViewController.reviewDelegate respondsToSelector:@selector(reviewStepViewController:shouldReviewStep:)] && [reviewStepViewController.reviewDelegate reviewStepViewController:reviewStepViewController shouldReviewStep:step]) {
+                [steps addObject:step];
+            }
+        }
+    } else {
+        ORKStep *nextStep = reviewStep;
+        do {
+            switch (reviewStep.reviewDirection) {
+                case ORKReviewStepReviewDirectionForward:
+                    nextStep = [self stepAfterStep:nextStep];
+                    break;
+                case ORKReviewStepReviewDirectionReverse:
+                    nextStep = [self stepBeforeStep:nextStep];
+                    break;
+            }
+            if (nextStep && ![nextStep isKindOfClass:[ORKReviewStep class]]) {
+                BOOL shouldAddStep = [reviewStepViewController.reviewDelegate respondsToSelector:@selector(reviewStepViewController:shouldReviewStep:)] && [reviewStepViewController.reviewDelegate reviewStepViewController:reviewStepViewController shouldReviewStep:nextStep];
+                if (shouldAddStep) {
+                    [steps addObject:nextStep];
+                }
+            }
+        } while (nextStep || [nextStep isKindOfClass:[ORKReviewStep class]]);
+    }
+    return (reviewStep.reviewDirection == ORKReviewStepReviewDirectionReverse) ? [[steps reverseObjectEnumerator] allObjects] : [steps copy];
+}
+
+- (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                shouldReviewStep:(ORKStep *)step {
+    return ![step isKindOfClass:[ORKActiveStep class]];
+}
+
+- (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
+                      willReviewStep:(ORKStep *)step {
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     [self showViewController:stepViewController goForward:YES animated:YES];

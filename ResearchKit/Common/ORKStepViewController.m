@@ -358,7 +358,6 @@
 }
 
 #pragma mark - UIStateRestoring
-//TODO: canChangeStepResult
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";

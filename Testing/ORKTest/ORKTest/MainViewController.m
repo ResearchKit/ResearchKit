@@ -2197,6 +2197,7 @@ static NSString * const ReviewStepStandaloneTaskIdentifier = @"reviewStepStandal
     ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.reviewStep"];
     reviewStep.title = @"review step title";
     reviewStep.text = @"review step text";
+    reviewStep.optional = YES;
     ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step3"];
     step3.title = @"step 3 title";
     step3.text = @"step 3 text";
