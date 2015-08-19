@@ -1,6 +1,6 @@
 ## ResearchKit Coding Style Guide
 
-Always follow [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
+Always follow the [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
 
 
 ### 1. Visual Style
@@ -111,9 +111,9 @@ Always use brackets even when the conditional code is only one statement.
 
 #### 1.3. Line Wrapping
 
-Hard wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`. 
+Hard-wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`.
 
-When hard wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
+When hard-wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
 
     // DO
     - (void)doSomethingWithFoo:(Foo *)foo
@@ -149,7 +149,7 @@ Follow these guidelines when writing *appledoc comments*:
 - When you name classes or methods, enclose them in backticks so *appledoc* creates a reference (`` `ORKStep` is ...``).
 - For multiline code examples, surround them with a triple backtick (```) for cross references within the code block not to be automatically generated.
 - Don't use abbreviations such as *e.g.* or *i.e.* in the documentation.
-- Hard wrap comment lines at column 100.
+- Hard-wrap comment lines at column 100.
 - Read the latest *ResearchKit* documentation for inspiration and try to follow the same literary style.
 
 #### 1.5. Newlines
@@ -187,57 +187,6 @@ You can optionally use one (and only one) blank like to separate:
 - Groups of related `#import` statements.
 - Groups of related statements in a single method implementation.
 
-
-#### 1.6. Header File Example
-
-    /*
-     Copyright (c) 2015, John Appleseed. All rights reserved.
-     ...
-     */
-
-
-    #import <Foundation/Foundation.h>
-    #import <ResearchKit/ORKDefines.h>
-
-
-    NS_ASSUME_NONNULL_BEGIN
-
-    @protocol ORKTask;
-    @class ORKStep;
-
-    /**
-     appledoc class comment.
-     */
-    ORK_CLASS_AVAILABLE
-    @interface ORKMyClass : NSObject <NSSecureCoding, NSCopying>
-
-    /**
-     appledoc method comment.
-     
-     @param parameterA   The first parameter.
-     @param parameterB   The second parameter.
-     
-     @return A new MyClass.
-     */
-    - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
-
-    /**
-     appledoc property comment.
-     */
-    @property (nonatomic, copy, readonly) NSString *aProperty;
-
-    @end
-
-
-    /**
-     appledoc class comment.
-     */
-    ORK_CLASS_AVAILABLE
-    @interface ORKMyOtherClass : ORKMyClass
-
-    @end 
-
-    NS_ASSUME_NONNULL_END
 
 
 ### 2. Code Style
@@ -362,3 +311,70 @@ Dot notation should be used when accessing proper properties, but should be avoi
     NSUInteger stringLength = [string length];  // 'length' is no longer declared as a method
     autoreleasePool.drain;                      // Not a property
     NSArray *constraints = view.constraints;    // Not a property
+
+#### 2.5. Nullability Annotations
+
+Always include [*nullability annotations*](https://developer.apple.com/swift/blog/?id=25) in header files.
+
+Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt out any property or argument declaration that can take `nil` values by annotating it as `nullable`.
+
+Do not add *nullability annotations* to implementation files.
+
+See **Section 3** for an annotated *Header File Example*.
+
+
+### 3. Header File Example
+
+    /*
+     Copyright (c) 2015, John Appleseed. All rights reserved.
+     ...
+     */
+
+
+    #import <Foundation/Foundation.h>
+    #import <ResearchKit/ORKDefines.h>
+
+
+    NS_ASSUME_NONNULL_BEGIN
+
+    @protocol ORKTask;
+    @class ORKStep;
+
+    /**
+     appledoc class comment.
+     */
+    ORK_CLASS_AVAILABLE
+    @interface ORKMyClass : NSObject <NSSecureCoding, NSCopying>
+
+    /**
+     appledoc method comment.
+
+     @param parameterA   The first parameter.
+     @param parameterB   The second parameter.
+
+     @return A new MyClass.
+     */
+    - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
+
+    /**
+     appledoc property comment.
+     */
+    @property (nonatomic, copy, readonly) NSString *aProperty;
+
+    /**
+     appledoc property comment.
+     */
+    @property (nonatomic, copy, nullable) NSString *aNullableProperty;
+
+    @end
+
+
+    /**
+     appledoc class comment.
+     */
+    ORK_CLASS_AVAILABLE
+    @interface ORKMyOtherClass : ORKMyClass
+
+    @end
+
+    NS_ASSUME_NONNULL_END
