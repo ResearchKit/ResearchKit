@@ -58,6 +58,7 @@ enum TaskListRow: Int, Printable {
     case ReactionTime
     case TowerOfHanoi
     case TimedWalk
+    case PSAT
     case ImageCapture
     case Survey
     case Consent
@@ -143,6 +144,9 @@ enum TaskListRow: Int, Printable {
             
             case .TimedWalk:
                 return NSLocalizedString("Timed Walk Active Task", comment: "")
+
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -231,6 +235,7 @@ enum TaskListRow: Int, Printable {
         case ReactionTime =                                         "ReactionTime"
         case TowerOfHanoi =                                         "TowerOfHanoi"
         case TimedWalkTask =                                        "TimedWalkTask"
+        case PSATTask =                                             "PSATTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -321,6 +326,9 @@ enum TaskListRow: Int, Printable {
         
             case .TimedWalk:
                 return timedWalkTask
+
+            case .PSAT:
+                return PSATTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -619,6 +627,7 @@ enum TaskListRow: Int, Printable {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: exampleSuccessSound, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: nil)
     }
     
+
     private var towerOfHanoiTask: ORKTask {
         return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
     }
@@ -626,6 +635,11 @@ enum TaskListRow: Int, Printable {
     /// This task presents the Timed Walk pre-defined active task.
     private var timedWalkTask: ORKTask {
         return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distanceInMeters: 100, timeLimit: 180, options: nil)
+    }
+    
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, presentationMode: (.Auditory | .Visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: nil)
     }
     
     private var exampleSuccessSound: UInt32 {

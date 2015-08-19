@@ -57,6 +57,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const TimedWalkTaskIdentifier = @"timed_walk";
+static NSString * const PSATTaskIdentifier = @"PSAT";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
@@ -200,6 +201,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showTwoFingerTappingTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Two Finger Tapping" forState:UIControlStateNormal];
         [buttonKeys addObject:@"tapping"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showPSATTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"PSAT" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"PSAT"];
         buttons[buttonKeys.lastObject] = button;
     }
     
@@ -455,6 +464,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
                                           distanceInMeters:100
                                                  timeLimit:180
                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
+        return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
+                               intendedUseDescription:nil
+                                     presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
+                                interStimulusInterval:3.0
+                                     stimulusDuration:1.0
+                                         seriesLength:60
+                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1547,6 +1564,10 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
 
 - (IBAction)showTimedWalkTask:(id)sender {
     [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
+}
+
+- (IBAction)showPSATTask:(id)sender {
+    [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
@@ -2647,6 +2668,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
                 ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
                 NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
+            } else if ([result isKindOfClass:[ORKPSATResult class]]) {
+                ORKPSATResult *pr = (ORKPSATResult *)result;
+                NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }

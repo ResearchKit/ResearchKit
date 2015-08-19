@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Shazino SAS. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,15 +29,22 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ResearchKit_Private.h>
+#import "ORKCustomStepView_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIBarButtonItem (ORKBarButtonItem)
+@class ORKPSATKeyboardView;
 
-+ (instancetype)ork_backBarButtonItemWithTarget:(nullable id)target action:(nullable SEL)selector;
+@interface ORKPSATContentView : ORKActiveStepCustomView
+
+@property (nonatomic, strong) ORKPSATKeyboardView *keyboardView;
+
+- (instancetype)initWithPresentationMode:(ORKPSATPresentationMode)presentationMode NS_DESIGNATED_INITIALIZER;
+- (void)setEnabled:(BOOL)enabled;
+- (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 @end
 

@@ -55,6 +55,7 @@
 #import "ORKReactionTimeStep.h"
 #import "ORKTowerOfHanoiStep.h"
 #import "ORKTimedWalkStep.h"
+#import "ORKPSATStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
 
@@ -292,6 +293,7 @@ static NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.af
 static NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
 static NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
 static NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
+static NSString * const ORKPSATStepIdentifier = @"psat";
 static NSString * const ORKAudioRecorderIdentifier = @"audio";
 static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
 static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
@@ -1115,5 +1117,81 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:steps];
     return task;
 }
+
++ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
+                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                          presentationMode:(ORKPSATPresentationMode)presentationMode
+                     interStimulusInterval:(NSTimeInterval)interStimulusInterval
+                          stimulusDuration:(NSTimeInterval)stimulusDuration
+                              seriesLength:(NSInteger)seriesLength
+                                   options:(ORKPredefinedTaskOption)options {
+    
+    NSMutableArray *steps = [NSMutableArray array];
+    NSString *versionTitle = @"";
+    NSString *versionDetailText = @"";
+    
+    if (presentationMode == ORKPSATPresentationModeAuditory) {
+        versionTitle = ORKLocalizedString(@"PASAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PASAT_INTRO_TEXT", nil);
+    } else if (presentationMode == ORKPSATPresentationModeVisual) {
+        versionTitle = ORKLocalizedString(@"PVSAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PVSAT_INTRO_TEXT", nil);
+    } else {
+        versionTitle = ORKLocalizedString(@"PAVSAT_TITLE", nil);
+        versionDetailText = ORKLocalizedString(@"PAVSAT_INTRO_TEXT", nil);
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
+            step.title = versionTitle;
+            step.detailText = versionDetailText;
+            step.text = intendedUseDescription;
+            step.image = [UIImage imageNamed:@"phonepsat" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+            step.shouldTintImages = YES;
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+        {
+            ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
+            step.title = versionTitle;
+            step.text = [NSString stringWithFormat:ORKLocalizedString(@"PSAT_INTRO_TEXT_2_%@", nil), [NSNumberFormatter localizedStringFromNumber:@(interStimulusInterval) numberStyle:NSNumberFormatterDecimalStyle]];
+            step.detailText = ORKLocalizedString(@"PSAT_CALL_TO_ACTION", nil);
+            
+            ORKStepArrayAddStep(steps, step);
+        }
+    }
+    
+    {
+        ORKCountdownStep *step = [[ORKCountdownStep alloc] initWithIdentifier:ORKCountdownStepIdentifier];
+        step.stepDuration = 5.0;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    {
+        ORKPSATStep *step = [[ORKPSATStep alloc] initWithIdentifier:ORKPSATStepIdentifier];
+        step.title = ORKLocalizedString(@"PSAT_INITIAL_INSTRUCTION", nil);
+        step.stepDuration = (seriesLength + 1) * interStimulusInterval;
+        step.presentationMode = presentationMode;
+        step.interStimulusInterval = interStimulusInterval;
+        step.stimulusDuration = stimulusDuration;
+        step.seriesLength = seriesLength;
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    if (! (options & ORKPredefinedTaskOptionExcludeConclusion)) {
+        ORKInstructionStep *step = [self makeCompletionStep];
+        
+        ORKStepArrayAddStep(steps, step);
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:identifier steps:[steps copy]];
+    
+    return task;
+}
+
+
 
 @end

@@ -34,7 +34,7 @@
 
 @implementation ORKBorderedButton {
     UIColor *_normalTintColor;
-    UIColor *_normalHighlightTintColor;
+    UIColor *_normalHighlightOrSelectTintColor;
     UIColor *_disableTintColor;
 }
 
@@ -52,11 +52,12 @@
     [super tintColorDidChange];
     
     _normalTintColor = [[self tintColor] colorWithAlphaComponent:1.0f];
-    _normalHighlightTintColor = _normalTintColor;
+    _normalHighlightOrSelectTintColor = _normalTintColor;
     _disableTintColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
     
     [self setTitleColor:_normalTintColor forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self setTitleColor:_disableTintColor forState:UIControlStateDisabled];
     
     [self updateBorderColor];
@@ -68,29 +69,36 @@
     [self updateBorderColor];
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    [self updateBorderColor];
+}
+
 - (void)setEnabled:(BOOL)enabled {
     [super setEnabled:enabled];
     
     [self updateBorderColor];
 }
 
-- (void)fadeHighlightColor {
+- (void)fadeHighlightOrSelectColor {
     // Ignore if it's a race condition
-    if (self.enabled && ! self.highlighted) {
+    if (self.enabled && !(self.highlighted || self.selected)) {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = [_normalTintColor CGColor];
     }
 }
 
 - (void)updateBorderColor {
-    if (self.enabled && self.highlighted) {
-        self.backgroundColor = _normalHighlightTintColor;
-        self.layer.borderColor = [_normalHighlightTintColor CGColor]; // move
-    } else if (self.enabled && !self.highlighted) {
+
+    if (self.enabled && (self.highlighted || self.selected)) {
+        self.backgroundColor = _normalHighlightOrSelectTintColor;
+        self.layer.borderColor = [_normalHighlightOrSelectTintColor CGColor]; // move
+    } else if(self.enabled && !(self.highlighted || self.selected)) {
         if (self.fadeDelay > 0) {
-            [self performSelector:@selector(fadeHighlightColor) withObject:nil afterDelay:self.fadeDelay];
+            [self performSelector:@selector(fadeHighlightOrSelectColor) withObject:nil afterDelay:self.fadeDelay];
         } else {
-            [self fadeHighlightColor];
+            [self fadeHighlightOrSelectColor];
         }
     } else {
         self.backgroundColor = [UIColor whiteColor];
