@@ -117,7 +117,7 @@
 }
 
 - (void)setTapCount:(NSUInteger)tapCount {
-    if (_formatter == nil){
+    if (_formatter == nil) {
         _formatter = [NSNumberFormatter new];
         _formatter.locale = [NSLocale currentLocale];
         _formatter.minimumIntegerDigits = 2;

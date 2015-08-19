@@ -110,7 +110,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 + (void)initialize {
     if (self == [ORKSignatureView class]) {
-        if([[ORKSignatureView appearance] backgroundColor] == nil) {
+        if ([[ORKSignatureView appearance] backgroundColor] == nil) {
             [[ORKSignatureView appearance] setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
         }
     }

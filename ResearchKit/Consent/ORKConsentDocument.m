@@ -140,7 +140,7 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    [css appendString:[NSString stringWithFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n",mobile?@"66.6%" : @"33.3%"]];
+    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n", mobile ? @"66.6%" : @"33.3%"];
     [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
     [css appendString:@".inbox { position: relative; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];

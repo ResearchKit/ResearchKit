@@ -115,7 +115,6 @@
     }
 }
 
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"<%@ %@ %@>", [super description], self.identifier, self.title];
 }

@@ -78,6 +78,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ReactionTime
     case TowerOfHanoi
     case TimedWalk
+    case PSAT
     case ImageCapture
     case Survey
     case Consent
@@ -162,6 +163,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             case .TimedWalk:
                 return NSLocalizedString("Timed Walk Active Task", comment: "")
+
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
             
             case .ImageCapture:
                 return NSLocalizedString("Image Capture Task", comment: "")
@@ -250,6 +254,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ReactionTime =                                         "ReactionTime"
         case TowerOfHanoi =                                         "TowerOfHanoi"
         case TimedWalkTask =                                        "TimedWalkTask"
+        case PSATTask =                                             "PSATTask"
         
         // Image capture task specific identifiers.
         case ImageCaptureTask =                                    "ImageCaptureTask"
@@ -340,6 +345,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         
             case .TimedWalk:
                 return timedWalkTask
+
+            case .PSAT:
+                return PSATTask
             
             case .ImageCapture:
                 return imageCaptureTask
@@ -638,6 +646,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask.reactionTimeTaskWithIdentifier(Identifier.ReactionTime.rawValue, intendedUseDescription: exampleDescription, maximumStimulusInterval: 10, minimumStimulusInterval: 4, thresholdAcceleration: 0.5, numberOfAttempts: 3, timeout: 3, successSound: TaskListRow.exampleSuccessSound.soundID, timeoutSound: 0, failureSound: UInt32(kSystemSoundID_Vibrate), options: [])
     }
     
+
     private var towerOfHanoiTask: ORKTask {
         return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: [])
     }
@@ -646,6 +655,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var timedWalkTask: ORKTask {
 
         return ORKOrderedTask.timedWalkTaskWithIdentifier(Identifier.TimedWalkTask.rawValue, intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, options: [])
+    }
+    
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, presentationMode: ORKPSATPresentationMode.Auditory.union(.Visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: [])
     }
     
     private var exampleSuccessSound: UInt32 {
@@ -947,4 +961,4 @@ enum TaskListRow: Int, CustomStringConvertible {
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo? An potest, inquit ille, quicquam esse suavius quam nihil dolere? Cave putes quicquam esse verius. Quonam, inquit, modo?"
     }
 }
-    
+

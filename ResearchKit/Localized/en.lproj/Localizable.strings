@@ -254,6 +254,23 @@
 "TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No Data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "The Paced Auditory Serial Addition Test measures your auditory information processing speed and calculation ability.";
+"PVSAT_INTRO_TEXT" = "The Paced Visual Serial Addition Test measures your visual information processing speed and calculation ability.";
+"PAVSAT_INTRO_TEXT" = "The Paced Auditory and Visual Serial Addition Test measures your auditory and visual information processing speed and calculation ability.";
+"PSAT_INTRO_TEXT_2_%@" = "Single digits are presented every %@ seconds.\nYou must add each new digit to the one immediately prior to it.\nAttention, you mustn't calculate a running total, but only the sum of the last two numbers.";
+"PSAT_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"PSAT_INITIAL_INSTRUCTION" = "Remember this first digit.";
+"PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

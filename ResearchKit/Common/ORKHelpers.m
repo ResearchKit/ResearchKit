@@ -519,3 +519,5 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableA
         }
     }
 }
+
+const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;

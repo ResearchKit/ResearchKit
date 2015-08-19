@@ -40,6 +40,12 @@ NSString *const ORKLightTintColorKey = @"ORKLightTintColorKey";
 NSString *const ORKDarkTintColorKey = @"ORKDarkTintColorKey";
 NSString *const ORKCaptionTextColorKey = @"ORKCaptionTextColorKey";
 NSString *const ORKBlueHighlightColorKey = @"ORKBlueHighlightColorKey";
+NSString *const ORKChartDefaultTextColorKey = @"ORKChartDefaultTextColorKey";
+NSString *const ORKGraphAxisColorKey = @"ORKGraphAxisColorKey";
+NSString *const ORKGraphAxisTitleColorKey = @"ORKGraphAxisTitleColorKey";
+NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey";
+NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
+NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
 
 @implementation UIColor (ORKColor)
 
@@ -75,7 +81,13 @@ static NSMutableDictionary *colors() {
                     ORKLightTintColorKey : ORKRGB(0xeeeeee),
                     ORKDarkTintColorKey : ORKRGB(0x888888),
                     ORKCaptionTextColorKey : ORKRGB(0xcccccc),
-                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]
+                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+                    ORKChartDefaultTextColorKey : [UIColor lightGrayColor],
+                    ORKGraphAxisColorKey : [UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f],
+                    ORKGraphAxisTitleColorKey : [UIColor colorWithRed:142/255.f green:142/255.f blue:147/255.f alpha:1.f],
+                    ORKGraphReferenceLineColorKey : [UIColor colorWithRed:225/255.f green:225/255.f blue:229/255.f alpha:1.f],
+                    ORKGraphScrubberLineColorKey : [UIColor grayColor],
+                    ORKGraphScrubberThumbColorKey : [UIColor colorWithWhite:1 alpha:1.0]
                     } mutableCopy];
     });
     return colors;
@@ -193,6 +205,8 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
+        {        384,       324,       304,       304,       384},      // ORKScreenMetricPSATKeyboardViewWidth
+        {        197,       167,       157,       157,       197},      // ORKScreenMetricPSATKeyboardViewHeight
     };
     return metrics[metric][screenType];
 }

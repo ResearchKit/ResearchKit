@@ -54,13 +54,31 @@ ORK_EXTERN NSString *const ORKDarkTintColorKey;
 /// Color used for caption text
 ORK_EXTERN NSString *const ORKCaptionTextColorKey;
 
-/// Caption used for a "blue" highlight
+/// Color used for a "blue" highlight
 ORK_EXTERN NSString *const ORKBlueHighlightColorKey;
 
-/// Return the color for a specified ORK..ColorKey
+/// Default color used for legend, title and text on ORKPieChartView
+ORK_EXTERN NSString *const ORKChartDefaultTextColorKey;
+
+/// Default color used for axes of ORKGraphChartView
+ORK_EXTERN NSString *const ORKGraphAxisColorKey;
+
+/// Default color used for titles on axes of ORKGraphChartView
+ORK_EXTERN NSString *const ORKGraphAxisTitleColorKey;
+
+/// Default color used for scrubber line of ORKGraphChartView
+ORK_EXTERN NSString *const ORKGraphScrubberLineColorKey;
+
+/// Default color used for scrubber thumb of ORKGraphChartView
+ORK_EXTERN NSString *const ORKGraphScrubberThumbColorKey;
+
+/// Default color used for reference line of ORKGraphChartView
+ORK_EXTERN NSString *const ORKGraphReferenceLineColorKey;
+
+/// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
 
-/// Modify the color for a specified ORK..ColorKey. (for customization)
+/// Modify the color for a specified ORK...ColorKey. (for customization)
 void ORKColorSetColorForKey(NSString *key, UIColor *color);
 
 @interface UIColor (ORKColor)
@@ -108,6 +126,8 @@ typedef NS_ENUM(NSInteger, ORKScreenMetric) {
     ORKScreenMetricToolbarHeight,
     ORKScreenMetricVerticalScaleHeight,
     ORKScreenMetricSignatureViewHeight,
+    ORKScreenMetricPSATKeyboardViewWidth,
+    ORKScreenMetricPSATKeyboardViewHeight,
     ORKScreenMetric_COUNT
 };
 

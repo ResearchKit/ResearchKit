@@ -256,3 +256,6 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
 void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableArray *removedViews);
+
+const CGFloat ORKCGFloatInvalidValue;
+

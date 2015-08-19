@@ -83,7 +83,7 @@ static CFStringRef CFXMLCreateStringByEscapingEntities(CFAllocatorRef allocator,
     CFStringInitInlineBuffer(string, &inlineBuf, CFRangeMake(0, stringLength));
     for(idx = 0; idx < stringLength; idx++) {
         uc = CFStringGetCharacterFromInlineBuffer(&inlineBuf, idx);
-        if(CFCharacterSetIsCharacterMember(startChars, uc)) {
+        if (CFCharacterSetIsCharacterMember(startChars, uc)) {
             CFStringRef previousSubstring = CFStringCreateWithSubstring(allocator, string, CFRangeMake(mark, idx - mark));
             CFStringAppend(newString, previousSubstring);
             CFRelease(previousSubstring);
