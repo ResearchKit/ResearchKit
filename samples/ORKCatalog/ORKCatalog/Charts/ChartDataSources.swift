@@ -78,7 +78,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         ]
     ]
     
-    func numberOfPlotsIngraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
@@ -125,7 +125,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         ]
     ]
     
-    func numberOfPlotsIngraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
