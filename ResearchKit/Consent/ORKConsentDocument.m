@@ -184,12 +184,14 @@
         
         // scenes
         for (ORKConsentSection *section in _sections) {
-            [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            if (!section.omitFromDocument) {
+                [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            }
         }
         
         if (! mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\" >%@</h4>", _signaturePageTitle?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
             
             for (ORKConsentSignature *signature in self.signatures) {
