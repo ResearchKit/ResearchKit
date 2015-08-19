@@ -864,7 +864,7 @@
         }
     }];
     
-    if(indexToBeReplaced != NSNotFound) {
+    if (indexToBeReplaced != NSNotFound) {
         NSMutableArray *signatures = [[document signatures] mutableCopy];
         signatures[indexToBeReplaced] = [_signature copy];
         document.signatures = signatures;
