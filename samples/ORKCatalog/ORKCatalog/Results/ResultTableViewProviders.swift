@@ -112,6 +112,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
             case is ORKTimedWalkResult:
                 providerType = TimedWalkResultTableViewProvider.self
 
+            case is ORKPSATResult:
+                providerType = PSATResultTableViewProvider.self
+
             /*
                 Refer to the comment near the switch statement for why the
                 additional guard is here.
@@ -683,6 +686,87 @@ class TimedWalkResultTableViewProvider: ResultTableViewProvider {
             // The duration for an addition of the PVSAT.
             ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
         ]
+    }
+}
+
+/// Table view provider specific to an `ORKPSATResult` instance.
+class PSATResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Answers"
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let PSATResult = result as! ORKPSATResult
+        
+        var rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            var presentation = ""
+            let presentationMode = PSATResult.presentationMode
+            if (presentationMode == .Auditory) {
+                presentation = "PASAT"
+            } else if (presentationMode == .Visual) {
+                presentation = "PVSAT"
+            } else if (presentationMode == (.Auditory | .Visual)) {
+                presentation = "PAVSAT"
+            } else {
+                presentation = "Unknown"
+            }
+            
+            // The presentation mode (auditory and/or visual) of the PSAT.
+            rows.append(ResultRow(text: "presentation", detail: presentation))
+            
+            // The time interval between two digits.
+            rows.append(ResultRow(text: "ISI", detail: PSATResult.interStimulusInterval))
+            
+            // The time duration the digit is shown on screen.
+            rows.append(ResultRow(text: "stimulus", detail: PSATResult.stimulusDuration))
+            
+            // The serie length of the PSAT.
+            rows.append(ResultRow(text: "length", detail: PSATResult.length))
+            
+            // The number of correct answers.
+            rows.append(ResultRow(text: "total correct", detail: PSATResult.totalCorrect))
+            
+            // The total number of consecutive correct answers.
+            rows.append(ResultRow(text: "total dyad", detail: PSATResult.totalDyad))
+            
+            // The total time for the answers.
+            rows.append(ResultRow(text: "total time", detail: PSATResult.totalTime))
+            
+            // The initial digit number.
+            rows.append(ResultRow(text: "initial digit", detail: PSATResult.initialDigit))
+            
+            return rows
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + PSATResult.samples!.map { sample in
+            let PSATSample = sample as! ORKPSATSample
+            
+            let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
+            let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"
+            
+            return ResultRow(text: text, detail: detail)
+        }
     }
 }
 

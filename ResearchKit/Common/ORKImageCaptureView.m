@@ -86,7 +86,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)queue_sessionRunning {
+- (void)queue_sessionRunning {
     dispatch_async(dispatch_get_main_queue(), ^{
         _previewView.templateImageHidden = NO;
     });
@@ -272,7 +272,7 @@ const CGFloat CONTINUE_ALPHA_OPAQUE = 0;
     _capturePressesIgnored = YES;
         
     // Capture the image via the delegate
-    [self.delegate capturePressed:^(BOOL captureSuccess){
+    [self.delegate capturePressed:^(BOOL captureSuccess) {
         // Stop ignoring presses
         _capturePressesIgnored = NO;
     }];

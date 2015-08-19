@@ -100,21 +100,16 @@
     
     [self.motionManager stopDeviceMotionUpdates];
     
-    [self.motionManager
-     startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue]
-     withHandler:^(CMDeviceMotion *data, NSError *error)
-     {
+    [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *data, NSError *error) {
          BOOL success = NO;
-         if (data)
-         {
+         if (data) {
              success = [_logger append:[data ork_JSONDictionary] error:&error];
              id delegate = self.delegate;
              if ([delegate respondsToSelector:@selector(deviceMotionRecorderDidUpdateWithMotion:)]) {
                  [delegate deviceMotionRecorderDidUpdateWithMotion:data];
              }
          }
-         if (!success)
-         {
+         if (!success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  [self finishRecordingWithError:error];
              });

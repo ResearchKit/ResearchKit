@@ -183,7 +183,6 @@
     [self textDidChange];
 }
 
-
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
     return 180.0;
 }
