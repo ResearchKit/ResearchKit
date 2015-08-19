@@ -510,3 +510,4 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
     }
 }
 
+const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;

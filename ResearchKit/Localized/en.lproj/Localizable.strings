@@ -251,6 +251,9 @@
 "TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No Data";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

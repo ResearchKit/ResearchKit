@@ -1,5 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, James Cox.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,40 +31,27 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <UIKit/UIKit.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+@class ORKPieChartView;
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+@interface ORKPieChartPieView : UIView
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+@property (nonatomic) UIFont *percentageLabelFont;
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+- (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView NS_DESIGNATED_INITIALIZER;
 
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
+- (CGFloat)normalizeValues;
 
+- (void)updatePieLayers;
+
+- (void)updatePercentageLabels;
+
+- (void)layoutSubviews;
+
+- (void)animateWithDuration:(NSTimeInterval)animationDuration;
+
+@end
