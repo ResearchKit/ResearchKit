@@ -30,39 +30,44 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
+func randomColorArray(size: Int) -> [UIColor] {
     
-    lazy var backingStore: [UIColor] = { [unowned self] in
-        return self.randomColors(8)
-    }()
-    
-    func randomColors(number: Int) -> [UIColor] {
-        
-        func random() -> CGFloat {
-            return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
-        }
-        
-        var colors: [UIColor] = []
-        for index in 0..<number {
-            colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
-        }
-        return colors
+    func random() -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
     }
     
+    var colors: [UIColor] = []
+    for index in 0..<size {
+        colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
+    }
+    return colors
+}
+
+let NumberOfPieChartSegments = 8
+
+class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
+    
     func numberOfSegmentsInPieChartView(pieChartView: ORKPieChartView ) -> Int {
-        return backingStore.count
+        return NumberOfPieChartSegments
     }
     
     func pieChartView(pieChartView: ORKPieChartView, valueForSegmentAtIndex index: Int) -> CGFloat {
         return CGFloat(index + 1)
     }
     
-    func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
-        return backingStore[index]
-    }
-    
     func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
         return "Title \(index + 1)"
+    }
+}
+
+class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
+    
+    lazy var backingStore: [UIColor] = {
+        return randomColorArray(NumberOfPieChartSegments)
+        }()
+
+    func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
+        return backingStore[index]
     }
 }
 

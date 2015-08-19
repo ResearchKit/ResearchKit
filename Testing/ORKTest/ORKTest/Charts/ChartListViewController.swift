@@ -44,7 +44,8 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     
-    let pieChartDataSource = PieChartDataSource()
+    let colorlessPieChartDataSource = ColorlessPieChartDataSource()
+    let randomColorPieChartDataSource = RandomColorPieChartDataSource()
     let lineGraphChartDataSource = LineGraphChartDataSource()
     let discreteGraphChartDataSource = DiscreteGraphChartDataSource()
     let pieChartIdentifier = "PieChartCell"
@@ -66,12 +67,14 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
-        pieChartView.dataSource = pieChartDataSource
+        pieChartView.dataSource = randomColorPieChartDataSource
         // Optional custom configuration
         pieChartView.title = "TITLE"
         pieChartView.text = "TEXT"
         pieChartView.lineWidth = 1000
         pieChartView.showsTitleAboveChart = true
+        pieChartView.showsPercentageLabels = false
+        pieChartView.drawsClockwise = false
         executeAfterDelay(1.5) {
             pieChartView.showsTitleAboveChart = false
             pieChartView.lineWidth = 12
@@ -81,10 +84,12 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             pieChartView.textColor = UIColor.orangeColor()
         }
         executeAfterDelay(2.5) {
-            pieChartView.drawsClockwise = false
+            pieChartView.drawsClockwise = true
+            pieChartView.dataSource = self.colorlessPieChartDataSource
         }
         executeAfterDelay(3.5) {
-            pieChartView.showsPercentageLabels = false
+            pieChartView.showsPercentageLabels = true
+            pieChartView.tintColor = UIColor.purpleColor()
         }
         
         // ORKLineGraphChartView

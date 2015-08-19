@@ -157,6 +157,11 @@ static const CGFloat PieToLegendPadding = 8.0;
     [_pieView setNeedsLayout];
 }
 
+- (void)tintColorDidChange {
+    [_pieView updateColors];
+    [_legendView reloadData];
+}
+
 - (void)updateContentSizeCategoryFonts {
     _titleTextView.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _titleTextView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
@@ -299,16 +304,15 @@ static const CGFloat PieToLegendPadding = 8.0;
         color = [_dataSource pieChartView:self colorForSegmentAtIndex:index];
     }
     else {
-        // Default colors
+        // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
         if (numberOfSegments > 1) {
             // Avoid pure white and pure black
-            CGFloat divisionFactor = (1.0 / (numberOfSegments + 1));
-            CGFloat whiteComponent = (divisionFactor + (divisionFactor * index));
-            color = [UIColor colorWithWhite:whiteComponent
-                                      alpha:1.0f];
+            CGFloat divisionFactor = (1.0 / numberOfSegments);
+            CGFloat alphaComponent = 1 - (divisionFactor * index);
+            color = [self.tintColor colorWithAlphaComponent:alphaComponent];
         } else {
-            color = [UIColor grayColor];
+            color = self.tintColor;
         }
     }
     return color;

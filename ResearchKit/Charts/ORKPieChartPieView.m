@@ -204,6 +204,21 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
 }
 
+- (void)updateColors {
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        if (_segmentLayers.count == numberOfSegments) {
+            CAShapeLayer *segmentLayer = _segmentLayers[idx];
+            segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
+        }
+        if (_pieSections.count == numberOfSegments) {
+            ORKPieChartSection *pieSection = _pieSections[idx];
+            UILabel *label = pieSection.label;
+            label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
+        }
+    }
+}
+
 - (void)layoutPieChartLayers {
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
