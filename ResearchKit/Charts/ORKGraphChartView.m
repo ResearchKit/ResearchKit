@@ -377,13 +377,6 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
     [self layoutHorizontalReferenceLineLayers];
     [self updateAndLayoutVerticalReferenceLineLayers];
     
-    NSLog(@"\n%@\n%@\n%@\n%@\n = %f",
-          self,
-          NSStringFromCGRect(self.bounds),
-          NSStringFromCGRect(_plotView.frame),
-          NSStringFromCGRect(_yAxisView.frame),
-          _plotView.bounds.size.width + _yAxisView.bounds.size.width);
-
     if (_noDataLabel) {
         _noDataLabel.frame = CGRectMake(0,
                                         0,
