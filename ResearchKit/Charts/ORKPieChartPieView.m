@@ -361,27 +361,16 @@ static const CGFloat InterAnimationDelay = 0.05;
 }
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    NSUInteger pieSectionCount = _pieSections.count;
+    NSUInteger numberOfSegmentLayers  = _segmentLayers.count;
     NSTimeInterval interAnimationDelay = InterAnimationDelay;
-    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (pieSectionCount-1));
+    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (numberOfSegmentLayers - 1));
     if (singleAnimationDuration < 0) {
         interAnimationDelay = 0;
         singleAnimationDuration = animationDuration;
     }
     
     CGFloat cumulativeValue = 0;
-    for (NSInteger idx = 0; idx < pieSectionCount; idx++) {
-        ORKPieChartSection *section = _pieSections[idx];
-        UILabel *label = section.label;
-        label.alpha = 0;
-        [UIView animateWithDuration:singleAnimationDuration
-                              delay:interAnimationDelay * idx
-                            options:(UIViewAnimationOptions)0
-                         animations:^{
-                             label.alpha = 1.0;
-                         }
-                         completion:nil];
-        
+    for (NSInteger idx = 0; idx < numberOfSegmentLayers ; idx++) {
         CAShapeLayer *segmentLayer = _segmentLayers[idx];
         CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
@@ -392,6 +381,19 @@ static const CGFloat InterAnimationDelay = 0.05;
         strokeAnimation.fillMode = kCAFillModeForwards;
         strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
+        
+        if (_parentPieChartView.showsPercentageLabels && _pieSections.count == numberOfSegmentLayers) {
+            ORKPieChartSection *pieSection = _pieSections[idx];
+            UILabel *label = pieSection.label;
+            label.alpha = 0;
+            [UIView animateWithDuration:singleAnimationDuration
+                                  delay:interAnimationDelay * idx
+                                options:(UIViewAnimationOptions)0
+                             animations:^{
+                                 label.alpha = 1.0;
+                             }
+                             completion:nil];
+        }
         
         cumulativeValue += value;
     }
