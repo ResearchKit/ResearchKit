@@ -30,13 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
-    
-    lazy var backingStore: [UIColor] = { [unowned self] in
-        return self.randomColors(8)
-    }()
-    
-    func randomColors(number: Int) -> [UIColor] {
+func randomColorArray(size: Int) -> [UIColor] {
         
         func random() -> CGFloat {
             return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
@@ -48,21 +42,32 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         }
         return colors
     }
+
+let NumberOfPieChartSegments = 8
+
+class ColorlessPieChartDataSource: NSObject, ORKPieChartViewDataSource {
     
     func numberOfSegmentsInPieChartView(pieChartView: ORKPieChartView ) -> Int {
-        return backingStore.count
+        return NumberOfPieChartSegments
     }
     
     func pieChartView(pieChartView: ORKPieChartView, valueForSegmentAtIndex index: Int) -> CGFloat {
         return CGFloat(index + 1)
     }
     
-    func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
-        return backingStore[index]
-    }
-    
     func pieChartView(pieChartView: ORKPieChartView, titleForSegmentAtIndex index: Int) -> String {
         return "Title \(index + 1)"
+    }
+}
+
+class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
+    
+    lazy var backingStore: [UIColor] = {
+        return randomColorArray(NumberOfPieChartSegments)
+        }()
+
+    func pieChartView(pieChartView: ORKPieChartView, colorForSegmentAtIndex index: Int) -> UIColor {
+        return backingStore[index]
     }
 }
 
