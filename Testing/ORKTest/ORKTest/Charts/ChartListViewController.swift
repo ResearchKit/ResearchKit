@@ -95,7 +95,11 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             pieChartView.showsPercentageLabels = true
             pieChartView.tintColor = UIColor.purpleColor()
         }
-        
+        executeAfterDelay(4.5) {
+            pieChartView.titleColor = nil
+            pieChartView.textColor = nil
+        }
+
         // ORKLineGraphChartView
         lineGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphChartIdentifier) as! LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
