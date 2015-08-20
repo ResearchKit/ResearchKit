@@ -117,7 +117,7 @@
 }
 
 - (void)setTapCount:(NSUInteger)tapCount {
-    if (_formatter == nil){
+    if (_formatter == nil) {
         _formatter = [NSNumberFormatter new];
         _formatter.locale = [NSLocale currentLocale];
         _formatter.minimumIntegerDigits = 2;
@@ -147,7 +147,7 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
+    _screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
     [self setNeedsUpdateConstraints];
 }
 

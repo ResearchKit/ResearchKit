@@ -57,8 +57,10 @@
     if (self) {
         ORKStepResult *stepResult = (ORKStepResult *)result;
         if (stepResult && [stepResult results].count > 0) {
-            ORKFileResult *fileResult = [[stepResult results] firstObject];
-            if(fileResult.fileURL) {
+            
+            ORKFileResult *fileResult = ORKDynamicCast([[stepResult results] firstObject], ORKFileResult);
+
+            if (fileResult.fileURL) {
                 // Setting these properties in this order allows us to reuse the existing file on disk
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];
                 self.fileUrl = fileResult.fileURL;
@@ -100,7 +102,7 @@
         [self.captureSession startRunning];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.capturedImageData = nil;
-            if(handler) {
+            if (handler) {
                 handler();
             }
         });
@@ -155,16 +157,16 @@
     [super viewWillAppear:animated];
     
     // If we don't already have a captured image, then start the capture session running
-    if(!self.capturedImageData) {
+    if (!self.capturedImageData) {
         dispatch_async(self.sessionQueue, ^{
             [[self captureSession] startRunning];
         });
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     // If the capture session is running, stop it
-    if(self.captureSession.isRunning) {
+    if (self.captureSession.isRunning) {
         dispatch_async(self.sessionQueue, ^{
             [[self captureSession] stopRunning];
         });
@@ -173,8 +175,7 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)queue_setupCaptureSession
-{
+- (void)queue_setupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
     [_captureSession beginConfiguration];
@@ -183,7 +184,7 @@
     
     // Get the camera
     AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if(device) {
+    if (device) {
         // Configure the input and output
         AVCaptureDeviceInput* input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
         AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -213,7 +214,7 @@
 
 - (void)handleError:(NSError *)error {
     // Shut down the session, if running
-    if(_captureSession.isRunning) {
+    if (_captureSession.isRunning) {
         STRONGTYPE(_captureSession) strongCaptureSession = _captureSession;
         dispatch_async(self.sessionQueue, ^{
             [strongCaptureSession stopRunning];

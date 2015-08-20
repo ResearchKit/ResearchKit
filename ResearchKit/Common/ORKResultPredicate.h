@@ -230,7 +230,7 @@ ORK_CLASS_AVAILABLE
  */
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                    expectedStrings:(NSArray *)expectedStrings;
+                                                    expectedStrings:(NSArray<NSString *> *)expectedStrings;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers are equal to
@@ -242,7 +242,7 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                      expectedStrings:(NSArray *)expectedStrings;
+                                                      expectedStrings:(NSArray<NSString *> *)expectedStrings;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answer matches the
@@ -284,7 +284,7 @@ ORK_CLASS_AVAILABLE
  */
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(nullable NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                   matchingPatterns:(NSArray *)patterns;
+                                                   matchingPatterns:(NSArray<NSString *> *)patterns;
 
 /**
  Returns a predicate matching a result of type `ORKChoiceQuestionResult` whose answers match the
@@ -296,7 +296,7 @@ ORK_CLASS_AVAILABLE
  @return A result predicate.
  */
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                     matchingPatterns:(NSArray *)patterns;
+                                                     matchingPatterns:(NSArray<NSString *> *)patterns;
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the

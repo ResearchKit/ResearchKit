@@ -36,7 +36,7 @@
 @class ORKHTMLPDFWriter;
 @class ORKConsentSectionFormatter;
 @class ORKConsentSignatureFormatter;
-
+@class ORKConsentSection;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -95,7 +95,7 @@ ORK_CLASS_AVAILABLE
  
  The PDF file contains all sections.
  */
-@property (nonatomic, copy, nullable) NSArray *sections;
+@property (nonatomic, copy, nullable) NSArray<ORKConsentSection *> *sections;
 
 /// @name Signatures for consent review
 
@@ -120,7 +120,7 @@ ORK_CLASS_AVAILABLE
  needs to be modified to incorporate the new signature content prior to PDF
  generation. For more information, see `[ORKConsentSignatureResult applyToDocument:]`.
  */
-@property (nonatomic, copy, nullable) NSArray *signatures;
+@property (nonatomic, copy, nullable) NSArray<ORKConsentSignature *> *signatures;
 
 /**
  Adds a signature to the array of signatures.

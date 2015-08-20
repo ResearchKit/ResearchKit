@@ -71,9 +71,10 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
+        CGFloat margin = ORKStandardHorizMarginForView(self);
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
         self.layoutMargins = layoutMargins;
-        _screenType = ORKScreenTypeiPhone4;
+        _verticalScreenType = ORKScreenTypeiPhone4;
         _scrollContainer = [UIView new];
         [self addSubview:_scrollContainer];
         _container = [UIView new];
@@ -185,7 +186,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
+    _verticalScreenType = ORKGetVerticalScreenTypeForWindow(newWindow);
     [self updateConstraintConstants];
     if (newWindow) {
         [self registerForKeyboardNotifications:YES];
@@ -297,19 +298,34 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraintConstants {
-    ORKScreenType screenType = _screenType;
     
-    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
-    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, screenType);
+    CGFloat margin = ORKStandardHorizMarginForView(self);
+    
+    if (self.layoutMargins.left != margin) {
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
+        self.layoutMargins = layoutMargins;
+        _scrollContainer.layoutMargins = layoutMargins;
+        _container.layoutMargins = layoutMargins;
+    }
+    
+    UIWindow *window = self.window;
+    if (window) {
+        _verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
+    }
+    
+    ORKScreenType verticalScreenType = _verticalScreenType;
+    
+    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, verticalScreenType);
+    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, verticalScreenType);
     
     BOOL hasIllustration = (_imageView.image != nil);
     
     _headerView.hasContentAbove = hasIllustration;
     
     {
-        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
-        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
-        
+        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, verticalScreenType);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, verticalScreenType);
+
         NSLayoutConstraint *constraint = _adjustableConstraints[_IllustrationHeightConstraintKey];
         constraint.constant = (_imageView.image ? IllustrationHeight : 0);
         
@@ -516,9 +532,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
     // Force all to stay within the container's width.
     for (UIView *view in views) {
 #ifdef LAYOUT_DEBUG
-        v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
-        v.layer.borderColor = [UIColor redColor].CGColor;
-        v.layer.borderWidth = 1.0;
+        view.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
+        view.layer.borderColor = [UIColor redColor].CGColor;
+        view.layer.borderWidth = 1.0;
 #endif
         if (view == _stepViewContainer) {
             [otherConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth
@@ -749,7 +765,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (UIImageView *)imageView {
-    if(_imageView == nil) {
+    if (_imageView == nil) {
         _imageView = [[ORKTintedImageView alloc] init];
         [_customViewContainer addSubview:_imageView];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;

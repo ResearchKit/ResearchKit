@@ -235,7 +235,7 @@
 }
 
 - (UIBarButtonItem *)goToPreviousPageButton {
-    UIBarButtonItem *button = [UIBarButtonItem obk_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
+    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }
@@ -297,6 +297,7 @@
         for (UIView *view in self.pageViewController.view.subviews) {
             if ([view isKindOfClass:[UIScrollView class]]) {
                 _scrollView = (UIScrollView *)view;
+                break;
             }
         }
     }
@@ -665,6 +666,7 @@
     for (NSNumber *key in _viewControllers) {
         if (_viewControllers[key] == viewController) {
             index = [key unsignedIntegerValue];
+            break;
         }
     }
     return index;
