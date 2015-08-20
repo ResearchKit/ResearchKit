@@ -102,32 +102,32 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         lineGraphChartView.dataSource = lineGraphChartDataSource
         // Optional custom configuration
         executeAfterDelay(1.5) {
+            lineGraphChartView.tintColor = UIColor.purpleColor()
             lineGraphChartView.showsHorizontalReferenceLines = true
             lineGraphChartView.showsVerticalReferenceLines = true
         }
         executeAfterDelay(2.5) {
             lineGraphChartView.axisColor = UIColor.redColor()
-            lineGraphChartView.axisTitleColor = UIColor.redColor()
+            lineGraphChartView.verticalAxisTitleColor = UIColor.redColor()
             lineGraphChartView.referenceLineColor = UIColor.orangeColor()
             lineGraphChartView.scrubberLineColor = UIColor.blueColor()
             lineGraphChartView.scrubberThumbColor = UIColor.greenColor()
         }
         executeAfterDelay(3.5) {
-            lineGraphChartView.tintColor = UIColor.purpleColor()
-            let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
-            let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
-            lineGraphChartView.maximumValueImage = maximumValueImage
-            lineGraphChartView.minimumValueImage = minimumValueImage
+            lineGraphChartView.axisColor = nil
+            lineGraphChartView.verticalAxisTitleColor = nil
+            lineGraphChartView.referenceLineColor = nil
+            lineGraphChartView.scrubberLineColor = nil
+            lineGraphChartView.scrubberThumbColor = nil
         }
         executeAfterDelay(4.5) {
             lineGraphChartView.dataSource = self.coloredLineGraphChartDataSource
         }
-        executeAfterDelay(6.5) {
-            lineGraphChartView.axisColor = nil
-            lineGraphChartView.axisTitleColor = nil
-            lineGraphChartView.referenceLineColor = nil
-            lineGraphChartView.scrubberLineColor = nil
-            lineGraphChartView.scrubberThumbColor = nil
+        executeAfterDelay(5.5) {
+            let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
+            let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
+            lineGraphChartView.maximumValueImage = maximumValueImage
+            lineGraphChartView.minimumValueImage = minimumValueImage
         }
         
         // ORKDiscreteGraphChartView

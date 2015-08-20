@@ -281,11 +281,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, strong, null_resettable) UIColor *axisColor;
 
 /**
- The color of the axes titles.
+ The color of the vertical axis titles.
+ 
+ @note The horizontal axis titles use the current `tintColor`.
  
  The default value for this property is a light gray color.
 */
-@property (nonatomic, strong, null_resettable) UIColor *axisTitleColor;
+@property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.

@@ -104,7 +104,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 
     // init null resetable properties
     _axisColor =  ORKColor(ORKGraphAxisColorKey);
-    _axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+    _verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
     _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
     _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
     _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
@@ -147,12 +147,12 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     _yAxisView.axisColor = _axisColor;
 }
 
-- (void)setAxisTitleColor:(UIColor *)axisTitleColor {
-    if (!axisTitleColor) {
-        axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+- (void)setVerticalAxisTitleColor:(UIColor *)verticalAxisTitleColor {
+    if (!verticalAxisTitleColor) {
+        verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
     }
-    _axisTitleColor = axisTitleColor;
-    _yAxisView.titleColor = _axisTitleColor;
+    _verticalAxisTitleColor = verticalAxisTitleColor;
+    _yAxisView.titleColor = _verticalAxisTitleColor;
 }
 
 - (void)setReferenceLineColor:(UIColor *)referenceLineColor {
