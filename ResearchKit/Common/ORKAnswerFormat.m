@@ -263,6 +263,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                 minimumValueDescription:minimumValueDescription];
 }
 
++ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray *)textChoices
+                                                      defaultIndex:(NSInteger)defaultIndex
+                                                          vertical:(BOOL)vertical {
+    return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
+                                                    defaultIndex:defaultIndex
+                                                        vertical:vertical];
+}
+
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
 }
@@ -1311,6 +1319,10 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
+- (NSArray *)textChoices {
+    return nil;
+}
+
 - (NSNumberFormatter *)numberFormatter {
     if (! _numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1504,6 +1516,10 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
+- (NSArray *)textChoices {
+    return nil;
+}
+
 - (NSNumberFormatter *)numberFormatter {
     if (! _numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1612,50 +1628,100 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 
 #pragma mark - ORKTextScaleAnswerFormat
 
-@implementation ORKTextScaleAnswerFormat
-
-- (Class)questionResultClass {
-    return [ORKChoiceQuestionResult class];
+@implementation ORKTextScaleAnswerFormat {
+    NSNumberFormatter *_numberFormatter;
 }
 
-- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices
-                           vertical:(BOOL)vertical
-                             labels:(BOOL)labels
-                            numbers:(BOOL)numbers {
+- (Class)questionResultClass {
+    return [ORKScaleQuestionResult class];
+}
+
+- (instancetype)initWithTextChoices:(NSArray *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex
+                           vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
         _textChoices = textChoices;
         _vertical = vertical;
-        _labels = labels;
-        _numbers = numbers;
+        _defaultIndex = defaultIndex;
         
         [self validateParameters];
     }
     return self;
 }
 
-- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices
-                           vertical:(BOOL)vertical {
+- (instancetype)initWithTextChoices:(NSArray *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex{
     return [self initWithTextChoices:textChoices
-                            vertical:vertical
-                              labels:YES
-                             numbers:NO];
+                        defaultIndex:defaultIndex
+                            vertical:NO];
 }
 
-- (instancetype)initWithTextChoices:(NSArray * __nonnull)textChoices {
-    return [self initWithTextChoices:textChoices
-                            vertical:NO
-                              labels:YES
-                             numbers:NO];
+- (NSNumber *)minimumNumber {
+    return @(1);
+}
+- (NSNumber *)maximumNumber {
+    return @(self.textChoices.count);
+}
+- (NSNumber *)defaultNumber {
+    if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
+        return nil;
+    }
+    return @(_defaultIndex);
+}
+- (NSString *)localizedStringForNumber:(NSNumber *)number {
+    return [self.numberFormatter stringFromNumber:number];
+}
+- (NSString *)minimumValueDescription {
+    ORKTextChoice *firstObject = [self.textChoices firstObject];
+    return firstObject.text;
+}
+- (NSString *)maximumValueDescription {
+    ORKTextChoice *lastObject = [self.textChoices lastObject];
+    return lastObject.text;
+}
+- (UIImage *)minimumImage {
+    return nil;
+}
+- (UIImage *)maximumImage {
+    return nil;
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    if (! _numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+        _numberFormatter.maximumFractionDigits = 0;
+    }
+    return _numberFormatter;
+}
+
+- (NSInteger)numberOfSteps{
+    return self.textChoices.count - 1;
+}
+
+- (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
+    return @([number integerValue]);
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    for (id textChoice in _textChoices){
+        if (! [textChoice isKindOfClass:[ORKTextChoice class]]){
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Text choices must be of class ORKTextChoice." userInfo:nil];
+        }
+    }
+    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ(aDecoder, textChoices);
+        ORK_DECODE_INTEGER(aDecoder, defaultIndex);
         ORK_DECODE_BOOL(aDecoder, vertical);
-        ORK_DECODE_BOOL(aDecoder, labels);
-        ORK_DECODE_BOOL(aDecoder, numbers);
     }
     return self;
 }
@@ -1663,9 +1729,8 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, textChoices);
+    ORK_ENCODE_INTEGER(aCoder, defaultIndex);
     ORK_ENCODE_BOOL(aCoder, vertical);
-    ORK_ENCODE_BOOL(aCoder, labels);
-    ORK_ENCODE_BOOL(aCoder, numbers);
 }
 
 + (BOOL)supportsSecureCoding {
@@ -1678,14 +1743,14 @@ static NSArray *ork_processTextChoices(NSArray *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             (_textChoices == castObject.textChoices) &&
-            (_vertical == castObject.vertical) &&
-            (_labels == castObject.labels) &&
-            (_numbers == castObject.numbers));
+            (_defaultIndex == castObject.defaultIndex) &&
+            (_vertical == castObject.vertical));
 }
 
 - (ORKQuestionType) questionType {
-    return ORKQuestionTypeSingleChoice;
+    return ORKQuestionTypeScale;
 }
+
 
 @end
 

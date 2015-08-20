@@ -130,6 +130,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (NSString *)minimumValueDescription;
 - (UIImage *)maximumImage;
 - (UIImage *)minimumImage;
+- (NSArray *)textChoices;
 
 @end
 

@@ -162,9 +162,8 @@ ORK_CLASS_AVAILABLE
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray *)textChoices
-                                                          vertical:(BOOL)vertical
-                                                        showLabels:(BOOL)showLabels
-                                                     numericValues:(BOOL)numericValues;
+                                                      defaultIndex:(NSInteger)defaultIndex
+                                                          vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
@@ -211,77 +210,6 @@ ORK_CLASS_AVAILABLE
  about to be displayed.
  */
 - (void)validateParameters;
-
-@end
-
-/**
- The `ORKTextScaleAnswerFormat `class represents an answer format that includes a slider control with text choices.
- 
- The scale answer format produces an `ORKTextScaleQuestionResult` object that contains a string whose value is the selected slider value.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKTextScaleAnswerFormat : ORKAnswerFormat
-
-/**
- Returns an initialized text scale answer format using the specified values.
- 
- This method is the designated initializer.
- 
- @param textChoices                 Array of NSString objects.
- @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
- @param hideLabels                  Whether to show or hide all labels.
- @param numericValues               Pass 'YES' to show numeric values alongside text values.
- 
- @return An initialized text scale answer format.
- */
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
-                           vertical:(BOOL)vertical
-                             labels:(BOOL)labels
-                            numbers:(BOOL)numbers NS_DESIGNATED_INITIALIZER;
-
-/**
- Returns an initialized text scale answer format using the specified values.
- 
- This method is a convenience initializer.
- 
- @param textChoices                 Array of NSString objects.
- @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
-
- @return An initialized text scale answer format.
- */
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
-                           vertical:(BOOL)vertical;
-
-/**
- Returns an initialized text scale answer format using the specified values.
- 
- This method is a convenience initializer.
- 
- @param textChoices                 Array of NSString objects.
- 
- @return An initialized text scale answer format.
- */
-- (instancetype)initWithTextChoices:(NSArray *)textChoices;
-
-/**
- An array of text choices that represent the options to display in the slider. (read-only)
- */
-@property (copy, readonly) NSArray *textChoices;
-
-/**
- A Boolean value indicating whether the scale is oriented vertically. (read-only)
- */
-@property (readonly, getter=isVertical) BOOL vertical;
-
-/**
- A Boolean value indicating whether the labels are visible. (read-only)
- */
-@property (readonly) BOOL labels;
-
-/**
- A Boolean value indicating whether the numeric values are visible. (read-only)
- */
-@property (readonly) BOOL numbers;
 
 @end
 
@@ -541,6 +469,62 @@ ORK_CLASS_AVAILABLE
  The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;
+
+@end
+
+
+/**
+ The `ORKTextScaleAnswerFormat `class represents an answer format that includes a slider control with text choices.
+ 
+ The scale answer format produces an `ORKTextScaleQuestionResult` object that contains a number whose value is the selected slider value.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKTextScaleAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized text scale answer format using the specified values.
+ 
+ This method is the designated initializer.
+ 
+ @param textChoices                 Array of NSString objects.
+ @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
+ 
+ @return An initialized text scale answer format.
+ */
+- (instancetype)initWithTextChoices:(NSArray *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex
+                           vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized text scale answer format using the specified values.
+ 
+ This method is a convenience initializer.
+ 
+ @param textChoices                 Array of NSString objects.
+ @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
+ 
+ @return An initialized text scale answer format.
+ */
+- (instancetype)initWithTextChoices:(NSArray *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex;
+
+/**
+ An array of text choices that represent the options to display in the slider. (read-only)
+ */
+@property (copy, readonly) NSArray *textChoices;
+
+/**
+ The default index for the slider. (read-only)
+ 
+ If the value of this property is less than zero or greater than the number of text choices, the slider has no default value.
+ */
+@property (readonly) double defaultIndex;
+
+/**
+ A Boolean value indicating whether the scale is oriented vertically. (read-only)
+ */
+@property (readonly, getter=isVertical) BOOL vertical;
 
 @end
 

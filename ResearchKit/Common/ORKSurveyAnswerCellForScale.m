@@ -97,7 +97,13 @@
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
-    [self ork_setAnswer:_sliderView.currentValue];
+    NSArray *textChoices = [self.formatProvider textChoices];
+    if (textChoices) {
+        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
+        [self ork_setAnswer:textChoice.value];
+    } else {
+        [self ork_setAnswer:_sliderView.currentValue];
+    }
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
