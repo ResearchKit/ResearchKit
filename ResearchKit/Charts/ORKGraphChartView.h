@@ -131,16 +131,27 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the color of the specified plot.
  
- If this method is not implemented, the main plot will use chart view will use the current
- `tintColor`, and all secondary plots will use the current `referenceLineColor`.
+ If this method is not implemented, the first plot will use chart view will use the current
+ `tintColor`, and all subsequent plots will use the current `referenceLineColor`.
  
  @param graphChartView      The graph view asking for the color of the segment.
- @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
- single-plot graph views.
+ @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 
+ always 0 in single-plot graph views.
  
  @return The color of the segment at the specified `index` in `pieChartView`.
  */
 - (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
+
+/**
+ Asks the data source which plot should the scrubber snap to in multi-graph chart views.
+ 
+ If this method is not implemented, the scrubber snaps over the first plot.
+ 
+ @param graphChartView      The graph view asking for the scrubbing plot index.
+ 
+ @return The index of the plot the scrubber should snap to.
+ */
+- (NSInteger)scrubbingPlotIndexForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph view.

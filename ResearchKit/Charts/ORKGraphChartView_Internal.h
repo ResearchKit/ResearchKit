@@ -83,19 +83,17 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex;
-
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition;
-
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
+- (NSInteger)scrubbingPlotIndex;
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition;
 
-- (void)updateScrubberLineAccessories:(CGFloat)xPosition;
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
+
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
 
@@ -112,6 +110,8 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (void)layoutPointLayers;
 
 - (UIColor *)colorForplotIndex:(NSInteger)plotIndex;
+
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath

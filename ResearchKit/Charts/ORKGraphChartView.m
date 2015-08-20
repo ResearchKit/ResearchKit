@@ -630,6 +630,17 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 
 #pragma Mark - Scrubbing / UIGestureRecognizerDelegate
 
+- (NSInteger)scrubbingPlotIndex {
+    NSInteger plotIndex = 0;
+    if ([_dataSource respondsToSelector:@selector(scrubbingPlotIndexForGraphChartView:)]) {
+        plotIndex = [_dataSource scrubbingPlotIndexForGraphChartView:self];
+        if (plotIndex >= [self numberOfPlots]) {
+            plotIndex = 0;
+        }
+    }
+    return plotIndex;
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [gestureRecognizer translationInView:self];
     if (fabs(translation.x) > fabs(translation.y)) {
@@ -639,14 +650,15 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-    if ((_dataPoints.count > 0) && (((NSArray *)_dataPoints[0]).count > 0) && [self numberOfValidValuesForPlotIndex:0] > 0) {
+    NSInteger scrubbingPlotIndex = [self scrubbingPlotIndex];
+    if ((_dataPoints.count > scrubbingPlotIndex) && ([self numberOfValidValuesForPlotIndex:scrubbingPlotIndex] > 0)) {
         
         CGPoint location = [gestureRecognizer locationInView:_plotView];
         CGFloat maxX = round(CGRectGetWidth(_plotView.bounds));
         CGFloat normalizedX = MAX(MIN(location.x, maxX), 0);
         location = CGPointMake(normalizedX, location.y);
-        CGFloat snappedXPosition = [self snappedXPosition:location.x];
-        [self updateScrubberViewForXPosition:snappedXPosition];
+        CGFloat snappedXPosition = [self snappedXPosition:location.x plotIndex:scrubbingPlotIndex];
+        [self updateScrubberViewForXPosition:snappedXPosition plotIndex:scrubbingPlotIndex];
         
         if ([_delegate respondsToSelector:@selector(graphChartView:touchesMovedToXPosition:)]) {
             [_delegate graphChartView:self touchesMovedToXPosition:snappedXPosition];
@@ -673,9 +685,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     _scrubberThumbView.hidden = hidden;
 }
 
-- (void)updateScrubberLineAccessories:(CGFloat)xPosition {
-    CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition];
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition plotIndex:plotIndex];
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition plotIndex:plotIndex];
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden:YES];
         return;
@@ -694,12 +706,12 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                       textSize.height + ScrubberLabelVerticalPadding);
 }
 
-- (CGFloat)snappedXPosition:(CGFloat)xPosition {
+- (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
     CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / numberOfXAxisPoints;
-    for (NSUInteger positionIndex = 0; positionIndex < ((NSArray *)_dataPoints[0]).count; positionIndex++) {
+    for (NSUInteger positionIndex = 0; positionIndex < ((NSArray *)_dataPoints[plotIndex]).count; positionIndex++) {
         
-        CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[0][positionIndex]).maximumValue;
+        CGFloat dataPointValue = ((ORKRangedPoint *)_dataPoints[plotIndex][positionIndex]).maximumValue;
         
         if (dataPointValue != ORKCGFloatInvalidValue) {
             CGFloat value = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
@@ -712,7 +724,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     return xPosition;
 }
 
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
@@ -724,7 +736,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                 break;
             }
         }
-        value = ((ORKRangedPoint *)_dataPoints[0][positionIndex]).maximumValue;
+        value = ((ORKRangedPoint *)_dataPoints[plotIndex][positionIndex]).maximumValue;
     }
     return value;
 }
@@ -749,16 +761,16 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
-- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
-    NSUInteger positionIndex = 0;
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition {
+    NSInteger pointIndex = 0;
     CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
-    for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
-        CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
+    for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
+        CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
         if (xAxisPointValue > xPosition) {
             break;
         }
     }
-    return positionIndex;
+    return pointIndex;
 }
 
 #pragma Mark - Animation
@@ -872,19 +884,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     return [normalizedPoints copy];
 }
 
-- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex {
-    NSUInteger validPosition = positionIndex;
-    
-    while (validPosition < (((NSArray *)_dataPoints[0]).count - 1)) {
-        if (((ORKRangedPoint *)_dataPoints[0][validPosition]).maximumValue != ORKCGFloatInvalidValue) {
-            break;
-        }
-        validPosition ++;
-    }
-    
-    return validPosition;
-}
-
 - (void)calculateMinAndMaxValues {
     _minimumValue = ORKCGFloatInvalidValue;
     _maximumValue = ORKCGFloatInvalidValue;
@@ -950,15 +949,15 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                  userInfo:nil];
 }
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
 }
 
-- (void)scrubReferenceLineForXPosition:(CGFloat) __unused xPosition {
+- (void)scrubReferenceLineForXPosition:(CGFloat)xPosition {
     [self throwOverrideException];
 }
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
+- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
     return 0;
 }

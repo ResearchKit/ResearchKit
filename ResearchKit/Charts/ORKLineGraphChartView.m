@@ -158,29 +158,29 @@ const CGFloat FillColorAlpha = 0.4;
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition {
-    CGFloat value = [super valueForCanvasXPosition:xPosition];
-    NSUInteger positionIndex = 0;
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    CGFloat value = [super valueForCanvasXPosition:xPosition plotIndex:plotIndex];
+    NSUInteger pointIndex = 0;
     
     CGFloat viewWidth = self.plotView.bounds.size.width;
     NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
 
     if (value == ORKCGFloatInvalidValue) {
-        for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
-            CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, viewWidth);
+        for (pointIndex = 0; pointIndex < (numberOfXAxisPoints - 1); pointIndex++) {
+            CGFloat xAxisPointValue = xAxisPoint(pointIndex, numberOfXAxisPoints, viewWidth);
             if (xAxisPointValue > xPosition) {
                 break;
             }
         }
         
-        NSInteger previousValidIndex = [self previousValidPositionIndexForPosition:positionIndex];
-        NSInteger nextValidIndex = [self nextValidPositionIndexForPosition:positionIndex];
+        NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
+        NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
         
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[0][previousValidIndex]).minimumValue;
-        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[0][nextValidIndex]).minimumValue;
+        CGFloat y1 = ((ORKRangedPoint *)self.dataPoints[plotIndex][previousValidIndex]).minimumValue;
+        CGFloat y2 = ((ORKRangedPoint *)self.dataPoints[plotIndex][nextValidIndex]).minimumValue;
         
         if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
             return ORKCGFloatInvalidValue;
@@ -194,10 +194,10 @@ const CGFloat FillColorAlpha = 0.4;
     return value;
 }
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
-    NSUInteger positionIndex = [self yAxisPositionIndexForXPosition:xPosition];
-    NSInteger nextValidIndex = [self nextValidPositionIndexForPosition:positionIndex];
-    NSInteger previousValidIndex = [self previousValidPositionIndexForPosition:positionIndex];
+- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    NSUInteger pointIndex = [self pointIndexForXPosition:xPosition];
+    NSInteger nextValidIndex = [self nextValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
+    NSInteger previousValidIndex = [self previousValidPointIndexForPointIndex:pointIndex plotIndex:plotIndex];
     
     CGFloat viewWidth = self.plotView.bounds.size.width;
     NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
@@ -205,8 +205,8 @@ const CGFloat FillColorAlpha = 0.4;
     CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
     CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
     
-    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[0][previousValidIndex]).minimumValue;
-    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[0][nextValidIndex]).minimumValue;
+    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][previousValidIndex]).minimumValue;
+    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][nextValidIndex]).minimumValue;
         
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -216,11 +216,23 @@ const CGFloat FillColorAlpha = 0.4;
     return canvasYPosition;
 }
 
+- (NSInteger)nextValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    NSUInteger validPosition = pointIndex;
+    
+    while (validPosition < (((NSArray *)self.dataPoints[plotIndex]).count - 1)) {
+        if (((ORKRangedPoint *)self.dataPoints[plotIndex][validPosition]).maximumValue != ORKCGFloatInvalidValue) {
+            break;
+        }
+        validPosition ++;
+    }
+    
+    return validPosition;
+}
 
-- (NSInteger)previousValidPositionIndexForPosition:(NSInteger)positionIndex {
-    NSInteger validPosition = positionIndex - 1;
+- (NSInteger)previousValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
+    NSInteger validPosition = pointIndex - 1;
     while (validPosition > 0) {
-        if (((ORKRangedPoint *)self.dataPoints[0][validPosition]).minimumValue != ORKCGFloatInvalidValue) {
+        if (((ORKRangedPoint *)self.dataPoints[plotIndex][validPosition]).minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;
@@ -239,10 +251,10 @@ const CGFloat FillColorAlpha = 0.4;
     [super animateWithDuration:animationDuration];
 }
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
         self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
-        [self updateScrubberLineAccessories:xPosition];
+        [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
     }];
 }
 
