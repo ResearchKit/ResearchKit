@@ -196,16 +196,26 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updatePlotColors];
 }
 
+- (UIColor *)colorForplotIndex:(NSInteger)plotIndex {
+    UIColor *color = nil;
+    if ([_dataSource respondsToSelector:@selector(graphChartView:colorForPlotIndex:)]) {
+        color = [_dataSource graphChartView:self colorForPlotIndex:plotIndex];
+    } else {
+        color = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
+    }
+    return color;
+}
+
 - (void)updatePlotColors {
     for (NSUInteger plotIndex = 0; plotIndex < _lineLayers.count; plotIndex++) {
-        UIColor *color = (plotIndex == 0) ? self.tintColor : _referenceLineColor;
+        UIColor *color = [self colorForplotIndex:plotIndex];
         for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_lineLayers[plotIndex]).count; pointIndex++) {
             CAShapeLayer *lineLayer = _lineLayers[plotIndex][pointIndex];
             lineLayer.strokeColor = color.CGColor;
         }
         for (NSUInteger pointIndex = 0; pointIndex < ((NSArray *)_pointLayers[plotIndex]).count; pointIndex++) {
             CAShapeLayer *pointLayer = _pointLayers[plotIndex][pointIndex];
-            pointLayer.contents = (__bridge id)(graphPointLayerImageWithTintColor(color).CGImage);
+            pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
         }
     }
 }
@@ -272,19 +282,20 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     }
 }
 
-inline static UIImage *graphVerticalReferenceLineLayerImageWithTintColor(UIColor *tintColor, CGFloat height) {
+inline static UIImage *graphVerticalReferenceLineLayerImageWithColor(UIColor *color, CGFloat height) {
     static UIImage *lineImage = nil;
     static UIColor *lineImageColor = nil;
     static CGFloat lineImageHeight = 0.0;
-    if (height > 0 && (!lineImage || ![lineImageColor isEqual:tintColor] || lineImageHeight != height)) {
-        lineImageColor = tintColor;
+    if (height > 0 && (!lineImage || ![lineImageColor isEqual:color] || lineImageHeight != height)) {
+        lineImageColor = color;
+        lineImageHeight = height;
         UIBezierPath *referenceLinePath = [UIBezierPath bezierPath];
         [referenceLinePath moveToPoint:CGPointMake(0, 0)];
         [referenceLinePath addLineToPoint:CGPointMake(0, height)];
 
         CAShapeLayer *referenceLineLayer = [CAShapeLayer new];
         referenceLineLayer.path = referenceLinePath.CGPath;
-        referenceLineLayer.strokeColor = tintColor.CGColor;
+        referenceLineLayer.strokeColor = color.CGColor;
         referenceLineLayer.lineDashPattern = @[@6, @4];
         
         UIGraphicsBeginImageContextWithOptions((CGSize){1, height}, NO, [UIScreen mainScreen].scale);
@@ -295,11 +306,11 @@ inline static UIImage *graphVerticalReferenceLineLayerImageWithTintColor(UIColor
     return lineImage;
 }
 
-inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tintColor, CGFloat height) {
+inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, CGFloat height) {
     CALayer *referenceLineLayer = [CALayer new];
     referenceLineLayer.frame = (CGRect){{0, 0}, {[UIScreen mainScreen].scale, height}};
     referenceLineLayer.anchorPoint = CGPointMake(0, 0);
-    referenceLineLayer.contents = (__bridge id)(graphVerticalReferenceLineLayerImageWithTintColor(tintColor, height).CGImage);
+    referenceLineLayer.contents = (__bridge id)(graphVerticalReferenceLineLayerImageWithColor(color, height).CGImage);
     
     return referenceLineLayer;
 }
@@ -414,7 +425,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
         for (NSUInteger i = 1; i < [self numberOfXAxisPoints]; i++) {
-            CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithTintColor(_referenceLineColor, plotViewHeight);
+            CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
             CGFloat positionOnXAxis = xAxisPoint(i, [self numberOfXAxisPoints], plotViewWidth);
             verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
             [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
@@ -425,20 +436,20 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
 
 #pragma mark - Drawing
 
-inline static UIImage *graphPointLayerImageWithTintColor(UIColor *tintColor) {
+inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineSize;
     const CGFloat pointLineWidth = 2.0;
     
     static UIImage *pointImage = nil;
     static UIColor *pointImageColor = nil;
-    if (!pointImage || ![pointImageColor isEqual:tintColor]) {
-        pointImageColor = tintColor;
+    if (!pointImage || ![pointImageColor isEqual:color]) {
+        pointImageColor = color;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
                                     (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
         CAShapeLayer *pointLayer = [CAShapeLayer new];
         pointLayer.path = circlePath.CGPath;
         pointLayer.fillColor = [UIColor whiteColor].CGColor;
-        pointLayer.strokeColor = tintColor.CGColor;
+        pointLayer.strokeColor = color.CGColor;
         pointLayer.lineWidth = pointLineWidth;
         
         UIGraphicsBeginImageContextWithOptions((CGSize){pointSize, pointSize}, NO, [UIScreen mainScreen].scale);
@@ -449,11 +460,11 @@ inline static UIImage *graphPointLayerImageWithTintColor(UIColor *tintColor) {
     return pointImage;
 }
 
-inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
+inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     const CGFloat pointSize = ORKGraphChartViewPointAndLineSize;
     CALayer *pointLayer = [CALayer new];
     pointLayer.frame = (CGRect){{0, 0}, {pointSize, pointSize}};
-    pointLayer.contents = (__bridge id)(graphPointLayerImageWithTintColor(tintColor).CGImage);
+    pointLayer.contents = (__bridge id)(graphPointLayerImageWithColor(color).CGImage);
     
     return pointLayer;
 }
@@ -471,16 +482,16 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
 }
 
 - (void)updatePointLayersForPlotIndex:(NSInteger)plotIndex {
-    UIColor *tintColor = (plotIndex == 0) ? self.tintColor : _referenceLineColor;;
+    UIColor *color = [self colorForplotIndex:plotIndex];
     for (NSUInteger i = 0; i < ((NSArray *)_dataPoints[plotIndex]).count; i++) {
         ORKRangedPoint *dataPoint = (ORKRangedPoint *)_dataPoints[plotIndex][i];
         if (!dataPoint.isUnset) {
-            CALayer *pointLayer = graphPointLayerWithTintColor(tintColor);
+            CALayer *pointLayer = graphPointLayerWithColor(color);
             [_plotView.layer addSublayer:pointLayer];
             [_pointLayers[plotIndex] addObject:pointLayer];
             
             if (!dataPoint.hasEmptyRange) {
-                CALayer *pointLayer = graphPointLayerWithTintColor(tintColor);
+                CALayer *pointLayer = graphPointLayerWithColor(color);
                 [_plotView.layer addSublayer:pointLayer];
                 [_pointLayers[plotIndex] addObject:pointLayer];
             }

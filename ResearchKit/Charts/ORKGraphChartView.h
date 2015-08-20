@@ -108,9 +108,9 @@ ORK_AVAILABLE_DECL
  specified plot.
 
  @param graphChartView      The graphChartView asking for the range point.
+ @param pointIndex          An index number identifying the range point in `graphChartView`.
  @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
  single-plot graph views.
- @param pointIndex          An index number identifying the range point in  `graphChartView`.
 
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
  specified `graphChartView`.
@@ -127,6 +127,20 @@ ORK_AVAILABLE_DECL
  @return The number of plots in `graphChartView`.
 */
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
+
+/**
+ Asks the data source for the color of the specified plot.
+ 
+ If this method is not implemented, the main plot will use chart view will use the current
+ `tintColor`, and all secondary plots will use the current `referenceLineColor`.
+ 
+ @param graphChartView      The graph view asking for the color of the segment.
+ @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
+ single-plot graph views.
+ 
+ @return The color of the segment at the specified `index` in `pieChartView`.
+ */
+- (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
 
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph view.
@@ -189,7 +203,7 @@ ORK_AVAILABLE_DECL
 /**
  The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to classes
  like `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate this class directly,
- you should use a subclass.
+ use one of the subclasses instead.
 */
 ORK_CLASS_AVAILABLE
 @interface ORKGraphChartView : UIView

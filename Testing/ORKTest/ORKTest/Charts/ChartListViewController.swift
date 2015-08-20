@@ -46,9 +46,13 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     
     let colorlessPieChartDataSource = ColorlessPieChartDataSource()
     let randomColorPieChartDataSource = RandomColorPieChartDataSource()
+    
     let lineGraphChartDataSource = LineGraphChartDataSource()
+    let coloredLineGraphChartDataSource = ColoredLineGraphChartDataSource()
+    
     let discreteGraphChartDataSource = DiscreteGraphChartDataSource()
     let pieChartIdentifier = "PieChartCell"
+    
     let lineGraphChartIdentifier = "LineGraphChartCell"
     let discreteGraphChartIdentifier = "DiscreteGraphChartCell"
     
@@ -114,6 +118,9 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
             lineGraphChartView.maximumValueImage = maximumValueImage
             lineGraphChartView.minimumValueImage = minimumValueImage
+        }
+        executeAfterDelay(4.5) {
+            lineGraphChartView.dataSource = self.coloredLineGraphChartDataSource
         }
         
         // ORKDiscreteGraphChartView
