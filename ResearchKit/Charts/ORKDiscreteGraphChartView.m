@@ -120,20 +120,20 @@
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
+- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat canvasYPosition = 0;
     if (snapped) {
-        NSInteger positionIndex = [self yAxisPositionIndexForXPosition:xPosition];
-        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[0][positionIndex-1]).maximumValue;
+        NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex-1]).maximumValue;
     }
     return canvasYPosition;
 }
 
 #pragma mark - Animation
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition plotIndex:plotIndex];
     if (scrubbingValue == ORKCGFloatInvalidValue) {
         [self setScrubberLineAccessoriesHidden:YES];
     }
@@ -142,7 +142,7 @@
     } completion:^(BOOL finished) {
        if (scrubbingValue != ORKCGFloatInvalidValue) {
            [self setScrubberLineAccessoriesHidden:NO];
-           [self updateScrubberLineAccessories:xPosition];
+           [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
         }
     }];
 }

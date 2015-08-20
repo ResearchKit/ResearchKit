@@ -140,6 +140,10 @@ class LineGraphChartDataSource: BaseGraphChartDataSource {
     func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
+    
+    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 2
+    }
 }
 
 class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
@@ -193,4 +197,7 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
         return "\(pointIndex + 1)"
     }
 
+    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 1
+    }
 }
