@@ -30,14 +30,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import ResearchKit
 
-func randomColorArray(size: Int) -> [UIColor] {
+func randomColorArray(number: Int) -> [UIColor] {
         
         func random() -> CGFloat {
             return CGFloat(Float(arc4random()) / Float(UINT32_MAX))
         }
         
         var colors: [UIColor] = []
-        for _ in 0..<number {
+        for _ in 0 ..< number {
             colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
         }
         return colors
@@ -71,40 +71,58 @@ class RandomColorPieChartDataSource: ColorlessPieChartDataSource {
     }
 }
 
-class LineGraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
-    
-    var plotPoints =
-    [
-        [
-            ORKRangedPoint(),
-            ORKRangedPoint(value: 20),
-            ORKRangedPoint(value: 25),
-            ORKRangedPoint(),
-            ORKRangedPoint(value: 30),
-            ORKRangedPoint(value: 40),
-            ORKRangedPoint(),
-        ],
-        [
-            ORKRangedPoint(value: 2),
-            ORKRangedPoint(value: 4),
-            ORKRangedPoint(value: 8),
-            ORKRangedPoint(value: 16),
-            ORKRangedPoint(value: 32),
-            ORKRangedPoint(value: 50),
-            ORKRangedPoint(value: 64),
-        ]
-    ]
+class BaseGraphChartDataSource:  NSObject, ORKGraphChartViewDataSource {
+    var plotPoints: [[ORKRangedPoint]] = [[]]
     
     func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
-
+    
     func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
         return plotPoints[plotIndex][pointIndex]
     }
     
     func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
-       return plotPoints[plotIndex].count
+        return plotPoints[plotIndex].count
+    }
+}
+
+class LineGraphChartDataSource: BaseGraphChartDataSource {
+    
+    override init() {
+        super.init()
+        plotPoints =
+            [
+                [
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                ],
+                [
+                    ORKRangedPoint(value: 2),
+                    ORKRangedPoint(value: 4),
+                    ORKRangedPoint(value: 8),
+                    ORKRangedPoint(value: 16),
+                    ORKRangedPoint(value: 32),
+                    ORKRangedPoint(value: 50),
+                    ORKRangedPoint(value: 64),
+                ],
+                [
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                ],
+        ]
     }
     
     func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
@@ -124,39 +142,47 @@ class LineGraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
     }
 }
 
-class DiscreteGraphChartDataSource: NSObject, ORKGraphChartViewDataSource {
-    
-    var plotPoints =
-    [
-        [
-            ORKRangedPoint(),
-            ORKRangedPoint(minimumValue: 0, maximumValue: 2),
-            ORKRangedPoint(minimumValue: 1, maximumValue: 3),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 6),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 9),
-            ORKRangedPoint(minimumValue: 4, maximumValue: 13),
-        ],
-        [
-            ORKRangedPoint(value: 1),
-            ORKRangedPoint(minimumValue: 2, maximumValue: 4),
-            ORKRangedPoint(minimumValue: 3, maximumValue: 8),
-            ORKRangedPoint(minimumValue: 5, maximumValue: 11),
-            ORKRangedPoint(minimumValue: 7, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 10, maximumValue: 13),
-            ORKRangedPoint(minimumValue: 12, maximumValue: 15),
-        ]
-    ]
-    
-    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
-        return plotPoints.count
+class ColoredLineGraphChartDataSource: LineGraphChartDataSource {
+    func graphChartView(graphChartView: ORKGraphChartView, colorForPlotIndex plotIndex: Int) -> UIColor {
+        let color: UIColor
+        switch plotIndex {
+        case 0:
+            color = UIColor.cyanColor()
+        case 1:
+            color = UIColor.magentaColor()
+        case 2:
+            color = UIColor.yellowColor()
+        default:
+            color = UIColor.redColor()
+        }
+        return color
     }
+}
 
-    func graphChartView(graphChartView: ORKGraphChartView, pointForPointIndex pointIndex: Int, plotIndex: Int) -> ORKRangedPoint {
-        return plotPoints[plotIndex][pointIndex]
-    }
+class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
     
-    func graphChartView(graphChartView: ORKGraphChartView, numberOfPointsForPlotIndex plotIndex: Int) -> Int {
-        return plotPoints[plotIndex].count
+    override init() {
+        super.init()
+        plotPoints =
+            [
+                [
+                    ORKRangedPoint(),
+                    ORKRangedPoint(minimumValue: 0, maximumValue: 2),
+                    ORKRangedPoint(minimumValue: 1, maximumValue: 3),
+                    ORKRangedPoint(minimumValue: 2, maximumValue: 6),
+                    ORKRangedPoint(minimumValue: 3, maximumValue: 9),
+                    ORKRangedPoint(minimumValue: 4, maximumValue: 13),
+                ],
+                [
+                    ORKRangedPoint(value: 1),
+                    ORKRangedPoint(minimumValue: 2, maximumValue: 4),
+                    ORKRangedPoint(minimumValue: 3, maximumValue: 8),
+                    ORKRangedPoint(minimumValue: 5, maximumValue: 11),
+                    ORKRangedPoint(minimumValue: 7, maximumValue: 13),
+                    ORKRangedPoint(minimumValue: 10, maximumValue: 13),
+                    ORKRangedPoint(minimumValue: 12, maximumValue: 15),
+                ],
+        ]
     }
     
     func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {

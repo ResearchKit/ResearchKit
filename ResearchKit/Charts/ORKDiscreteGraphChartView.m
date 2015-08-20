@@ -65,7 +65,7 @@
         ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
-            lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
+            lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
             lineLayer.lineWidth = ORKGraphChartViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];

@@ -77,8 +77,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the color of a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view will use a unique grayscale shade for each
- segment.
+ If this method is not implemented, the pie chart view will use a unique shade of the current
+ `tintColor` for each segment.
 
  @param pieChartView     The pie chart view asking for the color of the segment.
  @param index            An index number specifying the segment in `pieChartView`.

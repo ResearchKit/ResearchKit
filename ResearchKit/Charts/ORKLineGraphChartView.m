@@ -60,8 +60,7 @@ const CGFloat FillColorAlpha = 0.4;
     [super updatePlotColors];
     NSInteger numberOfPlots = [self numberOfPlots];
     for (NSUInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
-        UIColor *fillColor = (plotIndex == 0) ?
-        [self.tintColor colorWithAlphaComponent:FillColorAlpha] : [self.referenceLineColor colorWithAlphaComponent:FillColorAlpha];
+        UIColor *fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
         CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
         fillLayer.fillColor = fillColor.CGColor;
     }
@@ -89,7 +88,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         CAShapeLayer *lineLayer = graphLineLayer();
-        lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
+        lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
         lineLayer.lineWidth = 2.0;
         
         if (emptyDataPresent) {
@@ -102,7 +101,7 @@ const CGFloat FillColorAlpha = 0.4;
     }
     
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
-    fillLayer.fillColor = (plotIndex == 0) ? [self.tintColor colorWithAlphaComponent:0.4].CGColor : [self.referenceLineColor colorWithAlphaComponent:0.4].CGColor;
+    fillLayer.fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
     _fillLayers[@(plotIndex)] = fillLayer;
