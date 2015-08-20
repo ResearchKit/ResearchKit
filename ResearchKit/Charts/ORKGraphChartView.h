@@ -276,7 +276,8 @@ ORK_CLASS_AVAILABLE
 /**
  The color of the axes drawn by the graphChartView.
  
- The default value for this property is a very light gray color.
+ The default value for this property is a very light gray color. Setting this property to `nil` 
+ resets it to its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *axisColor;
 
@@ -285,35 +286,40 @@ ORK_CLASS_AVAILABLE
  
  @note The horizontal axis titles use the current `tintColor`.
  
- The default value for this property is a light gray color.
+ The default value for this property is a light gray color. Setting this property to `nil` resets it
+ to its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.
  
- The default value for this property is a light gray color.
+ The default value for this property is a light gray color. Setting this property to `nil` resets it
+ to its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
  
- The default value for this property is a white color.
+ The default value for this property is a white color. Setting this property to `nil` resets it to
+ its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
  
- The default value for this property is a gray color.
+ The default value for this property is a gray color. Setting this property to `nil` resets it to
+ its default value.
 */
 @property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
 
 /**
  The string that will be displayed if no data points are provided by the `dataSource`.
  
- The default value for this property is an appropriate message string.
+ The default value for this property is an appropriate message string. Setting this property to
+ `nil` resets it to its default value.
 */
 @property (nonatomic, copy, null_resettable) NSString *noDataText;
 

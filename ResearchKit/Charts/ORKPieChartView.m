@@ -87,6 +87,29 @@ static const CGFloat PieToLegendPadding = 8.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)sharedInit {
+    _lineWidth = 10;
+    _showsTitleAboveChart = NO;
+    _showsPercentageLabels = YES;
+    _drawsClockwise = YES;
+    
+    _legendView = nil; // legend lazily initialized on demand
+    
+    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
+    [self addSubview:_pieView];
+    
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
+    [self addSubview:_titleTextView];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    [self setUpConstraints];
+    [self setNeedsUpdateConstraints];
+}
+
 - (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     CGFloat sumOfValues = [_pieView normalizeValues];
@@ -118,6 +141,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setNoDataText:(NSString *)noDataText {
+    if (!noDataText) {
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    }
     _titleTextView.noDataLabel.text = noDataText;
 }
 
@@ -126,6 +152,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
+    if (!titleColor) {
+        titleColor = ORKColor(ORKChartDefaultTextColorKey);
+    }
     _titleTextView.titleLabel.textColor = titleColor;
 }
 
@@ -134,6 +163,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setTextColor:(UIColor *)textColor {
+    if (!textColor) {
+        textColor = ORKColor(ORKChartDefaultTextColorKey);
+    }
     _titleTextView.textLabel.textColor = textColor;
 }
 
@@ -168,29 +200,6 @@ static const CGFloat PieToLegendPadding = 8.0;
     _titleTextView.noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _pieView.percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
     _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-}
-
-- (void)sharedInit {
-    _lineWidth = 10;
-    _showsTitleAboveChart = NO;
-    _showsPercentageLabels = YES;
-    _drawsClockwise = YES;
-    
-    _legendView = nil; // legend lazily initialized on demand
-
-    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
-    [self addSubview:_pieView];
-
-    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
-    [self addSubview:_titleTextView];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    [self setUpConstraints];
-    [self setNeedsUpdateConstraints];
 }
 
 - (void)setUpConstraints {
