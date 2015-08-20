@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
         _continueSkipView.continueEnabled = YES;
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        _continueSkipView.hidden = self.step.isBeingReviewed;
+        _continueSkipView.hidden = self.isBeingReviewed;
         [_tableContainer setNeedsLayout];
     }
 }
@@ -251,7 +251,13 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:stepsForReviewStep:)]) {
         _steps = [self.reviewDelegate reviewStepViewController:self stepsForReviewStep:self.reviewStep];
     }
-    _headerView.instructionLabel.text = _steps.count > 0 ? self.reviewStep.text : @"No steps available for review";
+    //TODO: localize string
+    
+    if (!self.noStepsAvailableText) {
+        self.noStepsAvailableText = @"No steps available for review";
+    }
+    
+    _headerView.instructionLabel.text = _steps.count > 0 ? self.reviewStep.text : self.noStepsAvailableText;
     [_tableView reloadData];
     [_tableContainer setNeedsLayout];
 }

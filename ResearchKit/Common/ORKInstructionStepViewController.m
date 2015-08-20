@@ -60,7 +60,7 @@
         self.stepView.continueSkipContainer.continueButtonItem = self.continueButtonItem;
         self.stepView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
         self.stepView.continueSkipContainer.continueEnabled = YES;
-        self.stepView.continueSkipContainer.hidden = self.step.isBeingReviewed;
+        self.stepView.continueSkipContainer.hidden = self.isBeingReviewed;
         
         self.stepView.instructionStep = [self instructionStep];
     }

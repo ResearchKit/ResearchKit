@@ -166,8 +166,6 @@ ORK_CLASS_AVAILABLE
  */
 - (void)validateParameters;
 
-@property (nonatomic) BOOL isBeingReviewed;
-
 @end
 
 NS_ASSUME_NONNULL_END

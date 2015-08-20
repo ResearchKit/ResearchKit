@@ -59,6 +59,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) id<ORKTaskResultSource> resultSource;
 
+@property (nonatomic, nullable) NSString *noStepsAvailableText;
+
 //TODO: move to internal header
 @property (nonatomic, nonnull, readonly) ORKReviewStep *reviewStep;
 //TODO: move to internal header

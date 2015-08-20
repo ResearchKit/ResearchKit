@@ -903,7 +903,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKReviewStep *reviewStep = [self reviewStepForStep:step];
-    step.isBeingReviewed = reviewStep && ![self isReviewStepCompleted:reviewStep];
+    viewController.isBeingReviewed = reviewStep && ![self isReviewStepCompleted:reviewStep];
     
     __weak typeof(self) weakSelf = self;
     
@@ -913,7 +913,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     NSString *progressLabel = nil;
     if ([self shouldDisplayProgressLabel]) {
-        if (step.isBeingReviewed) {
+        if (viewController.isBeingReviewed) {
             //TODO: localize string
             progressLabel = @"Review";
         } else {
@@ -951,14 +951,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         strongSelf->_haveSetProgressLabel = (progressLabel != nil);
         
-        if (![strongSelf shouldDisplayProgressLabel]) {
-            strongSelf.pageViewController.navigationItem.title = viewController.navigationItem.title;
-            strongSelf.pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
-        }
+        [strongSelf updateCustomProgressLabel];
         
         // Collect toolbarItems
         [strongSelf collectToolbarItemsFromViewController:viewController];
     }];
+}
+
+- (void)updateCustomProgressLabel {
+    if (![self shouldDisplayProgressLabel] && self.currentStepViewController) {
+        self.pageViewController.navigationItem.title = self.currentStepViewController.navigationItem.title;
+        self.pageViewController.navigationItem.titleView = self.currentStepViewController.navigationItem.titleView;
+    }
 }
 
 - (BOOL)shouldPresentStep:(ORKStep *)step {
@@ -1195,7 +1199,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKStep *step;
-    if (fromController.step.isBeingReviewed) {
+    if (fromController.isBeingReviewed) {
         step = [self reviewStepForStep:fromController.step];
     } else {
         step = [self prevStep];
@@ -1253,6 +1257,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
         [strongDelegate taskViewController:self didChangeResult: [self result]];
     }
+    
+    [self updateCustomProgressLabel];
 }
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
@@ -1262,7 +1268,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     }
     
     ORKStep *previousStep;
-    if (stepViewController.step.isBeingReviewed) {
+    if (stepViewController.isBeingReviewed) {
         previousStep = [self reviewStepForStep:thisStep];
     } else {
         previousStep = [self stepBeforeStep:thisStep];
@@ -1333,7 +1339,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (BOOL)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
                 shouldReviewStep:(ORKStep *)step {
-    return ![step isKindOfClass:[ORKActiveStep class]];
+    return ![step isKindOfClass:[ORKReviewStep class]] || ![step isKindOfClass:[ORKActiveStep class]];
 }
 
 - (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController

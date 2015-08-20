@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
-            _continueSkipView.hidden = self.step.isBeingReviewed;
+            _continueSkipView.hidden = self.isBeingReviewed;
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -202,7 +202,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-            _questionView.continueSkipContainer.hidden = self.step.isBeingReviewed;
+            _questionView.continueSkipContainer.hidden = self.isBeingReviewed;
             
             NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[s]|" options:0 metrics:nil views:@{@"s":_questionView}]];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[tg][s][bg]" options:0 metrics:nil views:@{@"s":_questionView,@"tg":self.topLayoutGuide,@"bg":self.bottomLayoutGuide}]];
@@ -477,7 +477,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 // Not to use `ImmediateNavigation` when current step already has an answer.
 // So user is able to review the answer when it is present.
 - (BOOL)isStepImmediateNavigation {
-    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO;
+    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.isBeingReviewed;
 }
 
 #pragma mark - ORKQuestionStepCustomViewDelegate
