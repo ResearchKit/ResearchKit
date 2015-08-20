@@ -28,8 +28,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
 
-// Shared header for accessibility functionality.
-#import "UIView+ORKAccessibility.h"
-#import "ORKAccessibilityFunctions.h"
-#import "ORKLineGraphAccessibilityElement.h"
+@interface ORKLineGraphAccessibilityElement : UIAccessibilityElement
+
+- (nonnull instancetype)initWithAccessibilityContainer:(nonnull UIView *)container index:(NSInteger)index maxIndex:(NSInteger)maxIndex;
+
+@end
