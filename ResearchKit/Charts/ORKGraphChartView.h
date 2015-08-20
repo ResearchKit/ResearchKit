@@ -278,42 +278,42 @@ ORK_CLASS_AVAILABLE
  
  The default value for this property is a very light gray color.
 */
-@property (nonatomic, strong) UIColor *axisColor;
+@property (nonatomic, strong, null_resettable) UIColor *axisColor;
 
 /**
  The color of the axes titles.
  
  The default value for this property is a light gray color.
 */
-@property (nonatomic, strong) UIColor *axisTitleColor;
+@property (nonatomic, strong, null_resettable) UIColor *axisTitleColor;
 
 /**
  The color of the reference lines.
  
  The default value for this property is a light gray color.
 */
-@property (nonatomic, strong) UIColor *referenceLineColor;
+@property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
  
  The default value for this property is a white color.
 */
-@property (nonatomic, strong) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
  
  The default value for this property is a gray color.
 */
-@property (nonatomic, strong) UIColor *scrubberLineColor;
+@property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
 
 /**
  The string that will be displayed if no data points are provided by the `dataSource`.
  
  The default value for this property is an appropriate message string.
 */
-@property (nonatomic, copy, nullable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) NSString *noDataText;
 
 /**
  An image to be optionally displayed in place of the maximum value label on the y-axis.

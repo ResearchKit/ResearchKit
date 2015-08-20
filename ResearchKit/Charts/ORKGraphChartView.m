@@ -93,6 +93,43 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return self;
 }
 
+- (void)sharedInit {
+    _numberOfXAxisPoints = -1;
+    _showsHorizontalReferenceLines = NO;
+    _showsVerticalReferenceLines = NO;
+    _dataPoints = [NSMutableArray new];
+    _yAxisPoints = [NSMutableArray new];
+    _pointLayers = [NSMutableArray new];
+    _lineLayers = [NSMutableArray new];
+    _hasDataPoints = NO;
+
+    // init null resetable properties
+    _axisColor =  ORKColor(ORKGraphAxisColorKey);
+    _axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
+    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
+    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    _panGestureRecognizer.delaysTouchesBegan = YES;
+    _panGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_panGestureRecognizer];
+    
+    [self setUpViews];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_axVoiceOverStatusChanged:)
+                                                 name:UIAccessibilityVoiceOverStatusChanged
+                                               object:nil];
+}
+
 - (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
@@ -108,17 +145,26 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)setAxisColor:(UIColor *)axisColor {
+    if (!axisColor) {
+        axisColor = ORKColor(ORKGraphAxisColorKey);
+    }
     _axisColor = axisColor;
     _xAxisView.axisColor = _axisColor;
     _yAxisView.axisColor = _axisColor;
 }
 
 - (void)setAxisTitleColor:(UIColor *)axisTitleColor {
+    if (!axisTitleColor) {
+        axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+    }
     _axisTitleColor = axisTitleColor;
     _yAxisView.titleColor = _axisTitleColor;
 }
 
 - (void)setReferenceLineColor:(UIColor *)referenceLineColor {
+    if (!referenceLineColor) {
+        referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
+    }
     _referenceLineColor = referenceLineColor;
     _horizontalReferenceLineLayer.strokeColor = referenceLineColor.CGColor;
     [self updateAndLayoutVerticalReferenceLineLayers];
@@ -126,6 +172,9 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)setScrubberLineColor:(UIColor *)scrubberLineColor {
+    if (!scrubberLineColor) {
+        scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
+    }
     _scrubberLineColor = scrubberLineColor;
     _scrubberLine.backgroundColor = _scrubberLineColor;
     _scrubberThumbView.layer.borderColor = _scrubberLineColor.CGColor;
@@ -133,11 +182,17 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 }
 
 - (void)setScrubberThumbColor:(UIColor *)scrubberThumbColor {
+    if (!scrubberThumbColor) {
+        scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
+    }
     _scrubberThumbColor = scrubberThumbColor;
     _scrubberThumbView.backgroundColor = _scrubberThumbColor;
 }
 
 - (void)setNoDataText:(NSString *)noDataText {
+    if (!noDataText) {
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    }
     _noDataText = [noDataText copy];
     _noDataLabel.text = _noDataText;
 }
@@ -163,38 +218,8 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateAndLayoutVerticalReferenceLineLayers];
 }
 
-- (void)sharedInit {
-    _numberOfXAxisPoints = -1;
-    _axisColor =  ORKColor(ORKGraphAxisColorKey);
-    _axisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
-    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
-    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
-    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _showsHorizontalReferenceLines = NO;
-    _showsVerticalReferenceLines = NO;
-    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
-    _dataPoints = [NSMutableArray new];
-    _yAxisPoints = [NSMutableArray new];
-    _pointLayers = [NSMutableArray new];
-    _lineLayers = [NSMutableArray new];
-    _hasDataPoints = NO;
-    
-    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    _panGestureRecognizer.delaysTouchesBegan = YES;
-    _panGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:_panGestureRecognizer];
-    
-    [self setUpViews];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_axVoiceOverStatusChanged:)
-                                                 name:UIAccessibilityVoiceOverStatusChanged
-                                               object:nil];
+- (void)tintColorDidChange {
+    [self updatePlotColors];
 }
 
 - (void)dealloc {

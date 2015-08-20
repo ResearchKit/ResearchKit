@@ -122,6 +122,13 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         executeAfterDelay(4.5) {
             lineGraphChartView.dataSource = self.coloredLineGraphChartDataSource
         }
+        executeAfterDelay(6.5) {
+            lineGraphChartView.axisColor = nil
+            lineGraphChartView.axisTitleColor = nil
+            lineGraphChartView.referenceLineColor = nil
+            lineGraphChartView.scrubberLineColor = nil
+            lineGraphChartView.scrubberThumbColor = nil
+        }
         
         // ORKDiscreteGraphChartView
         discreteGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(discreteGraphChartIdentifier) as! DiscreteGraphChartTableViewCell
