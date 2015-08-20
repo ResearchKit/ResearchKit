@@ -35,12 +35,21 @@
 #import "ORKPieChartView_Internal.h"
 #import "ORKDefines_Private.h"
 #import "ORKSkin.h"
-
+#import "ORKHelpers.h"
 
 @implementation ORKPieChartTitleTextView  {
     __weak ORKPieChartView *_parentPieChartView;
     
     NSMutableArray *_variableConstraints;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentPieChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {

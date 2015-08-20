@@ -57,7 +57,9 @@
     if (self) {
         ORKStepResult *stepResult = (ORKStepResult *)result;
         if (stepResult && [stepResult results].count > 0) {
-            ORKFileResult *fileResult = [[stepResult results] firstObject];
+            
+            ORKFileResult *fileResult = ORKDynamicCast([[stepResult results] firstObject], ORKFileResult);
+
             if (fileResult.fileURL) {
                 // Setting these properties in this order allows us to reuse the existing file on disk
                 self.capturedImageData = [NSData dataWithContentsOfURL:fileResult.fileURL];

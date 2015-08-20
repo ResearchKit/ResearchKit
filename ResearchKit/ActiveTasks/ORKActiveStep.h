@@ -32,7 +32,9 @@
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStep.h>
 #import <UIKit/UIKit.h>
+#import <HealthKit/HealthKit.h>
 
+@class ORKRecorderConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -191,7 +193,7 @@ The default value of this property is `NO`.
  
  See also: `ORKRecorderConfiguration` and `ORKRecorder`.
  */
-@property (nonatomic, copy, nullable) NSArray *recorderConfigurations;
+@property (nonatomic, copy, nullable) NSArray<ORKRecorderConfiguration *> *recorderConfigurations;
 
 /**
  The set of HealthKit types the step requests for reading. (read-only)
@@ -203,7 +205,7 @@ The default value of this property is `NO`.
  By default, the property scans the recorders and collates the HealthKit
  types the recorders require. Subclasses may override this implementation.
  */
-@property (nonatomic, readonly, nullable) NSSet *requestedHealthKitTypesForReading;
+@property (nonatomic, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
 
 @end
 

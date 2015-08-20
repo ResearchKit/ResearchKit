@@ -37,7 +37,7 @@
 
 + (UIFont *)defaultFont {
     UIWindow *window = [[[UIApplication sharedApplication] windows] firstObject];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleSubheadline];
     const CGFloat defaultSize = 15;
     return [UIFont systemFontOfSize:[[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultSize + ORKGetMetricForScreenType(ORKScreenMetricFontSizeSubheadline, screenType)];

@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKConsentDocument;
 @class ORKConsentSignatureResult;
 @class ORKStepResult;
+@class ORKToneAudiometrySample;
 
 /**
  The `ORKResult` class defines the attributes of a result from one step or a group
@@ -214,7 +215,7 @@ ORK_CLASS_AVAILABLE
  An array of collected samples, in which each item is an `ORKTappingSample` object that represents a
  tapping event.
  */
-@property (nonatomic, copy, nullable) NSArray *samples;
+@property (nonatomic, copy, nullable) NSArray<ORKTappingSample *> *samples;
 
 /**
  The size of the bounds of the step view containing the tap targets.
@@ -330,7 +331,7 @@ ORK_CLASS_AVAILABLE
  An array of collected samples, in which each item is an `ORKToneAudiometrySample`
  object that represents an audiometry sample.
  */
-@property (nonatomic, copy, nullable) NSArray *samples;
+@property (nonatomic, copy, nullable) NSArray<ORKToneAudiometrySample *> *samples;
 
 @end
 
@@ -356,7 +357,7 @@ ORK_CLASS_AVAILABLE
 
  The frequency value in hertz for the tone associated to this sample.
  */
-@property (nonatomic, copy, nullable) NSNumber *frequency;
+@property (nonatomic, assign) double frequency;
 
 /**
  The audio channel (left or right).
@@ -370,7 +371,7 @@ ORK_CLASS_AVAILABLE
 
  The minimum amplitude for the participant to recognize the sound (double value between 0 and 1).
  */
-@property (nonatomic, copy, nullable) NSNumber *amplitude;
+@property (nonatomic, assign) double amplitude;
 
 @end
 
@@ -458,7 +459,7 @@ ORK_CLASS_AVAILABLE
  
  The sequence is an array of length `sequenceLength` that contains a random permutation of integers (0..`gameSize`-1)
  */
-@property (nonatomic, copy, nullable) NSArray *sequence;
+@property (nonatomic, copy, nullable) NSArray<NSNumber *> *sequence;
 
 /**
  The size of the game.
@@ -471,13 +472,13 @@ ORK_CLASS_AVAILABLE
  An array of `NSValue` objects wrapped in `CGRect` that record the frames of the target
  tiles as displayed, relative to the step view.
  */
-@property (nonatomic, copy, nullable) NSArray *targetRects;
+@property (nonatomic, copy, nullable) NSArray<NSValue *> *targetRects;
 
 /**
  An array of `ORKSpatialSpanMemoryGameTouchSample` objects that record the onscreen locations
 the user tapped during the game.
  */
-@property (nonatomic, copy, nullable) NSArray *touchSamples;
+@property (nonatomic, copy, nullable) NSArray<ORKSpatialSpanMemoryGameTouchSample *> *touchSamples;
 
 /**
  A value indicating whether the user completed the sequence and, if the game was not completed, why not.
@@ -535,7 +536,7 @@ ORK_CLASS_AVAILABLE
  
  Each item in the array is an `ORKSpatialSpanMemoryGameRecord` object.
  */
-@property (nonatomic, copy, nullable) NSArray *gameRecords;
+@property (nonatomic, copy, nullable) NSArray<ORKSpatialSpanMemoryGameRecord *> *gameRecords;
 
 @end
 
@@ -771,7 +772,7 @@ ORK_CLASS_AVAILABLE
 @interface ORKChoiceQuestionResult : ORKQuestionResult
 
 /**
- An array of selected values, from the `value` property of an `ORKAnswerOption` object.
+ An array of selected values, from the `value` property of an `ORKTextChoice` or `ORKImageChoice` object.
  In the case of a single choice, the array has exactly one entry.
  
  If the user skipped the question, the value of the corresponding array member is `nil`.
@@ -1007,7 +1008,7 @@ ORK_CLASS_AVAILABLE
  For `ORKStepResult` the array contains concrete result objects such as `ORKFileResult`
  and `ORKQuestionResult`.
  */
-@property (nonatomic, copy, nullable) NSArray /* <ORKResult> */ *results;
+@property (nonatomic, copy, nullable) NSArray<ORKResult *> *results;
 
 /**
  Looks up the child result containing an identifier that matches the specified identifier.
@@ -1120,6 +1121,7 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKStepResult : ORKCollectionResult
 
+
 /**
  Returns an initialized step result using the specified identifier.
  
@@ -1129,7 +1131,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized step result.
  */
-- (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray *)results;
+- (instancetype)initWithStepIdentifier:(NSString *)stepIdentifier results:(nullable NSArray<ORKResult *> *)results;
 
 @end
 

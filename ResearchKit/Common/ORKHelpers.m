@@ -510,4 +510,14 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
     }
 }
 
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableArray *removedViews) {
+    for (NSLayoutConstraint *constraint in [constraints copy]) {
+        for (UIView *view in removedViews) {
+            if (constraint.firstItem == view || constraint.secondItem == view) {
+                [constraints removeObject:constraint];
+            }
+        }
+    }
+}
+
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;

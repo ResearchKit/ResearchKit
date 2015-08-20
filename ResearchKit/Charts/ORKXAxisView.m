@@ -44,6 +44,15 @@ static const CGFloat LastLabelHeight = 20.0;
     NSMutableArray *_titleTickLayers;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentGraphChartView:nil];
+    return self;
+}
+
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
     if (self) {

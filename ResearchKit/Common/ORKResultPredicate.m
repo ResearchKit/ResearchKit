@@ -209,7 +209,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                    expectedStrings:(NSArray *)expectedStrings {
+                                                    expectedStrings:(NSArray<NSString *> *)expectedStrings {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                          resultIdentifier:resultIdentifier
                                                     expectedAnswers:expectedStrings
@@ -241,7 +241,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                   matchingPatterns:(NSArray *)patterns {
+                                                   matchingPatterns:(NSArray<NSString *> *)patterns {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:patterns
@@ -249,7 +249,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                     matchingPatterns:(NSArray *)patterns {
+                                                     matchingPatterns:(NSArray<NSString *> *)patterns {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:nil
                                                    resultIdentifier:resultIdentifier
                                                    matchingPatterns:patterns];

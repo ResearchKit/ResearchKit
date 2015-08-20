@@ -159,9 +159,9 @@
     ORKToneAudiometrySample *sample = [ORKToneAudiometrySample new];
     NSUInteger frequencyIndex = (self.currentTestIndex / 2);
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
-    sample.frequency = frequency;
+    sample.frequency = [frequency doubleValue];
     sample.channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
-    sample.amplitude = @(self.audioGenerator.volumeAmplitude);
+    sample.amplitude = self.audioGenerator.volumeAmplitude;
 
     [self.samples addObject:sample];
 

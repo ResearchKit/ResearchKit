@@ -33,6 +33,7 @@
 
 #import "ORKPieChartPieView.h"
 #import "ORKPieChartView_Internal.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat OriginAngle = -M_PI_2;
@@ -46,6 +47,15 @@ static const CGFloat InterAnimationDelay = 0.05;
     NSMutableArray *_normalizedValues;
     NSMutableArray *_segmentLayers;
     NSMutableArray *_pieSections;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentPieChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {

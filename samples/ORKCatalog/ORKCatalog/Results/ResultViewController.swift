@@ -41,7 +41,7 @@ import ResearchKit
 class ResultViewController: UITableViewController {
     // MARK: Types
     
-    enum CustomSegueIdentifier: String {
+    enum SegueIdentifier: String {
         case ShowTaskResult = "ShowTaskResult"
     }
     
@@ -63,9 +63,7 @@ class ResultViewController: UITableViewController {
             displayed result, and the result that has been most recently set on
             the `ResultViewController`.
         */
-        if result == currentResult && currentResult != nil {
-            return
-        }
+        guard result != currentResult || currentResult == nil else { return }
         
         // Update the currently displayed result.
         currentResult = result
@@ -89,7 +87,10 @@ class ResultViewController: UITableViewController {
             Check to see if the segue identifier is meant for presenting a new
             result view controller.
         */
-        if let segueIdentifier = segue.identifier, let customSegueIdentifier = CustomSegueIdentifier(rawValue: segueIdentifier) where customSegueIdentifier == .ShowTaskResult {
+        if let identifier = segue.identifier,
+               segueIdentifier = SegueIdentifier(rawValue: identifier)
+               where segueIdentifier == .ShowTaskResult {
+            
             let cell = sender as! UITableViewCell
             
             let indexPath = tableView.indexPathForCell(cell)!
@@ -98,7 +99,7 @@ class ResultViewController: UITableViewController {
             
             let collectionResult = result as! ORKCollectionResult
             
-            destinationViewController.result = collectionResult.results![indexPath.row] as? ORKResult
+            destinationViewController.result = collectionResult.results![indexPath.row]
         }
     }
 
