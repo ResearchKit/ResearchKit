@@ -53,6 +53,20 @@ static const CGFloat PieToLegendPadding = 8.0;
     return self;
 }
 
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return self.label.isAccessibilityElement;
+}
+
+- (NSString *)accessibilityLabel {
+    return self.label.accessibilityLabel;
+}
+
+- (CGRect)accessibilityFrame {
+    return self.label.accessibilityFrame;
+}
+
 @end
 
 
@@ -322,6 +336,26 @@ static const CGFloat PieToLegendPadding = 8.0;
     [_pieView animateWithDuration:animationDuration];
     [_legendView animateWithDuration:animationDuration];
     [_titleTextView animateWithDuration:animationDuration];
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSArray *)accessibilityElements {
+    NSMutableArray *accessibilityElements = [[NSMutableArray alloc] init];
+    [accessibilityElements addObjectsFromArray:_titleTextView.accessibilityElements];
+    
+    // Use legends if there are any and percentage labels if not
+    if (_legendView) {
+        [accessibilityElements addObject:_legendView];
+    } else {
+        [accessibilityElements addObjectsFromArray:_pieView.accessibilityElements];
+    }
+    
+    return accessibilityElements;
 }
 
 @end
