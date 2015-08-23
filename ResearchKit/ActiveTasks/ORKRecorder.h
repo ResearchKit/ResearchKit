@@ -104,7 +104,7 @@ ORK_CLASS_AVAILABLE
  If your recorder requires or would benefit from read access to HealthKit at
  runtime during the task, return the appropriate set of `HKSampleType` objects.
  */
-- (nullable NSSet *)requestedHealthKitTypesForReading;
+- (nullable NSSet<HKObjectType *> *)requestedHealthKitTypesForReading;
 
 @end
 

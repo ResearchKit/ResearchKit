@@ -419,6 +419,8 @@ static const NSInteger kNumberOfSamples = 5;
     double speed = 15.0;
     NSDate *timestamp = [NSDate date];
     
+    CLLocationManager *currentLocationManager = [recorder locationManager];
+    
     for (NSInteger i = 0; i < kNumberOfSamples; i++) {
         CLLocation *location = [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(latitude, longitude)
                                                              altitude:altitude
@@ -428,7 +430,7 @@ static const NSInteger kNumberOfSamples = 5;
                                                                 speed:speed
                                                             timestamp:timestamp];
         
-        [clDelegate locationManager:nil didUpdateLocations:@[location]];
+        [clDelegate locationManager:currentLocationManager didUpdateLocations:@[location]];
     }
     
     [recorder stop];

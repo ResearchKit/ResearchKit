@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) ORKPSATKeyboardView *keyboardView;
 
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithPresentationMode:(ORKPSATPresentationMode)presentationMode NS_DESIGNATED_INITIALIZER;
 - (void)setEnabled:(BOOL)enabled;
 - (void)setAddition:(NSUInteger)additionIndex forTotal:(NSUInteger)totalAddition withDigit:(NSNumber *)digit;

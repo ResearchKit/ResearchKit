@@ -44,7 +44,7 @@
 
 
 @implementation ORKConsentDocument {
-    NSMutableArray *_signatures;
+    NSMutableArray<ORKConsentSignature *> *_signatures;
 }
 
 #pragma mark - Initializers
@@ -68,11 +68,11 @@
 
 #pragma mark - Accessors
 
-- (void)setSignatures:(NSArray *)signatures {
+- (void)setSignatures:(NSArray<ORKConsentSignature *> *)signatures {
     _signatures = [signatures mutableCopy];
 }
 
-- (NSArray *)signatures {
+- (NSArray<ORKConsentSignature *> *)signatures {
     return [_signatures copy];
 }
 

@@ -45,6 +45,7 @@
 
 @required
 - (void)towerOfHanoiTowerViewWasSelected:(ORKTowerOfHanoiTowerView *)towerView;
+- (ORKTowerOfHanoiTowerView *)towerOfHanoiHighlightedTowerView;
 
 @end
 

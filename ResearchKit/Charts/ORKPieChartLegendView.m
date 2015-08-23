@@ -35,11 +35,22 @@
 #import "ORKPieChartView_Internal.h"
 #import "ORKPieChartLegendCell.h"
 #import "ORKCenteredCollectionViewLayout.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKPieChartLegendView {
     __weak ORKPieChartView *_parentPieChartView;
     ORKPieChartLegendCell *_sizingCell;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+         collectionViewLayout:(UICollectionViewLayout *)collectionViewLayout {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentPieChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {

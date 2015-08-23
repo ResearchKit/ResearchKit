@@ -45,6 +45,10 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
     return [super init];
 }
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (NSString *)identifierForDestinationStepWithTaskResult:(ORKTaskResult *)taskResult {
     @throw [NSException exceptionWithName:NSGenericException reason:@"You should override this method in a subclass" userInfo:nil];
 }
@@ -72,7 +76,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init];
+    typeof(self) rule = [[[self class] allocWithZone:zone] init_ork];
     return rule;
 }
 
@@ -81,8 +85,8 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 @interface ORKPredicateStepNavigationRule ()
 
-@property (nonatomic, copy) NSArray *resultPredicates;
-@property (nonatomic, copy) NSArray *destinationStepIdentifiers;
+@property (nonatomic, copy) NSArray<NSPredicate *> *resultPredicates;
+@property (nonatomic, copy) NSArray<NSString *> *destinationStepIdentifiers;
 @property (nonatomic, copy) NSString *defaultStepIdentifier;
 
 @end
@@ -91,8 +95,8 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 @implementation ORKPredicateStepNavigationRule
 
 // Internal init without array validation, for serialization support
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier
                           validateArrays:(BOOL)validateArrays {
     if (validateArrays) {
@@ -125,8 +129,8 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
                    defaultStepIdentifier:(NSString *)defaultStepIdentifier {
     return [self initWithResultPredicates:resultPredicates
                destinationStepIdentifiers:destinationStepIdentifiers
@@ -135,8 +139,8 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
 }
 #pragma clang diagnostic pop
 
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers {
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers {
     return [self initWithResultPredicates:resultPredicates
                destinationStepIdentifiers:destinationStepIdentifiers
                     defaultStepIdentifier:nil];
@@ -222,10 +226,10 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init];
-    rule->_resultPredicates = ORKArrayCopyObjects(_resultPredicates);
-    rule->_destinationStepIdentifiers = ORKArrayCopyObjects(_destinationStepIdentifiers);
-    rule->_defaultStepIdentifier = [_defaultStepIdentifier copy];
+    typeof(self) rule = [[[self class] allocWithZone:zone] initWithResultPredicates:ORKArrayCopyObjects(_resultPredicates)
+                                                         destinationStepIdentifiers:ORKArrayCopyObjects(_destinationStepIdentifiers)
+                                                              defaultStepIdentifier:[_defaultStepIdentifier copy]
+                                                                     validateArrays:YES];
     rule->_additionalTaskResults = ORKArrayCopyObjects(_additionalTaskResults);
     return rule;
 }
@@ -292,8 +296,7 @@ static void ORKValidateIdentifiersUnique(NSArray *results, NSString *exceptionRe
 #pragma mark NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    typeof(self) rule = [[[self class] allocWithZone:zone] init];
-    rule->_destinationStepIdentifier = [_destinationStepIdentifier copy];
+    typeof(self) rule = [[[self class] allocWithZone:zone] initWithDestinationStepIdentifier:[_destinationStepIdentifier copy]];
     return rule;
 }
 

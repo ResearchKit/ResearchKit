@@ -35,6 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKAnswerFormat;
+@class ORKFormItem;
 
 /**
  The `ORKFormStep` class is a concrete subclass of `ORKStep`, used for presenting multiple questions
@@ -74,7 +75,7 @@ ORK_CLASS_AVAILABLE
  A form step that contains no items is considered invalid and an exception will be thrown
  when it is presented.
  */
-@property (nonatomic, copy, nullable) NSArray *formItems;
+@property (nonatomic, copy, nullable) NSArray<ORKFormItem *> *formItems;
 
 @end
 
