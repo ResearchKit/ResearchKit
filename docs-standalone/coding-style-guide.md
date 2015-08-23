@@ -316,11 +316,11 @@ Dot notation should be used when accessing proper properties, but should be avoi
 
 Always include [*nullability annotations*](https://developer.apple.com/swift/blog/?id=25) in header files.
 
-Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt out any property or argument declaration that can take `nil` values by annotating it as `nullable`.
+Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt any property or argument declaration that can take `nil` values out by annotating it as `nullable`.
 
 Do not add *nullability annotations* to implementation files.
 
-See **Section 3** for an annotated *Header File Example*.
+See **Section 3** for an nullability-annotated *Header File Example*.
 
 
 ### 3. Header File Example
