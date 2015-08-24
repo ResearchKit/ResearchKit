@@ -148,7 +148,7 @@
                 
                 // Generating an array of labels for all the text choices.
                 NSMutableArray *textChoiceLabels = [NSMutableArray new];
-                for (int i=0; i<=self.slider.numberOfSteps; i++) {
+                for (int i = 0; i <= self.slider.numberOfSteps; i++) {
                     ORKTextChoice *textChoice = self.slider.textChoices[i];
                     ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
                     stepLabel.text = textChoice.text;
@@ -173,7 +173,7 @@
                                                            views:views]];
                 
                 
-                for (int i=0; i<textChoiceLabels.count; i++) {
+                for (int i = 0; i < textChoiceLabels.count; i++) {
                     
                     // Move to the right side of the slider.
                     [self addConstraint:[NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
@@ -196,7 +196,7 @@
                                                                                toItem:self
                                                                             attribute:NSLayoutAttributeCenterX
                                                                            multiplier:1.0
-                                                                             constant:kSliderMargin],
+                                                                             constant:0],
                                                [NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
                                                                             attribute:NSLayoutAttributeCenterY
                                                                             relatedBy:NSLayoutRelationEqual
@@ -225,7 +225,7 @@
                                                                                toItem:textChoiceLabels[i]
                                                                             attribute:NSLayoutAttributeBottom
                                                                            multiplier:1.0
-                                                                             constant:kSideLabelMargin],
+                                                                             constant:0],
                                                [NSLayoutConstraint constraintWithItem:textChoiceLabels[i-1]
                                                                             attribute:NSLayoutAttributeHeight
                                                                             relatedBy:NSLayoutRelationEqual

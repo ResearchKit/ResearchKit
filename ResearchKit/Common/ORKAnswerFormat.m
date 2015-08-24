@@ -1768,6 +1768,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)validateParameters {
     [super validateParameters];
     
+    if (_textChoices.count < 2) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Must have a minimum of 2 text choices." userInfo:nil];
+    } else if (_textChoices.count > 8) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Cannot have more than 8 text choices." userInfo:nil];
+    }
+    
+    
     for (id textChoice in _textChoices){
         if (! [textChoice isKindOfClass:[ORKTextChoice class]]){
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Text choices must be of class ORKTextChoice." userInfo:nil];
@@ -1779,7 +1786,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, textChoices);
+        ORK_DECODE_OBJ_ARRAY(aDecoder, textChoices, ORKTextChoice);
         ORK_DECODE_INTEGER(aDecoder, defaultIndex);
         ORK_DECODE_BOOL(aDecoder, vertical);
     }
