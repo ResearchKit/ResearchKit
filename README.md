@@ -4,19 +4,21 @@ ResearchKit Framework
 The ResearchKit™ framework is an open source software framework that makes it easy to
 create apps for medical research or for other research projects.
 
-* Getting Started: [Getting Started](#gettingstarted)
-* Documentation: ([Programming Guide](http://researchkit.github.io/docs/docs/Overview/GuideOverview.html)) ([API](http://researchkit.github.io/docs/index.html))
-* Best practices: [Best Practices](../../wiki/best-practices)
-* Contributing to ResearchKit: [Contributing](CONTRIBUTING.md)
-* Website and blog: ([researchkit.org](http://researchkit.github.io/index.html))  ([Blog](http://researchkit.github.io/blog.html))
-* ResearchKit BSD License: [License](#license)
+* [Getting Started](#gettingstarted)
+* Documentation:
+    * [Programming Guide](http://researchkit.org/docs/docs/Overview/GuideOverview.html)
+    *  [Framework Reference](http://researchkit.org/docs/index.html)
+* [Best Practices](../../wiki/best-practices)
+* [Contributing to ResearchKit](CONTRIBUTING.md)
+* [Website](http://researchkit.org) and [Blog](http://researchkit.org/blog.html)
+* [ResearchKit BSD License](#license)
 
 Getting More Information
 ========================
 
 * Join [researchkit-users](https://lists.apple.com/mailman/listinfo/researchkit-users) for discussing uses of the ResearchKit framework and related projects.
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
-* Or [contact us](https://developer.apple.com/contact/researchkit/)
+* Or [contact us](https://developer.apple.com/contact/researchkit/).
 
 Use Cases
 ===========
@@ -29,14 +31,14 @@ Surveys
 -------
 
 The ResearchKit framework provides a pre-built user interface for surveys, which can be
-presented modally on an iPhone, iPod Touch, or iPad.  [Surveys](http://researchkit.github.io/docs/docs/Survey/CreatingSurveys.html)
+presented modally on an iPhone, iPod Touch, or iPad. See  *[Creating Surveys](http://researchkit.org/docs/docs/Survey/CreatingSurveys.html)* for more information.
 
 
 Consent
 ----------------
 
 The ResearchKit framework provides visual consent templates that you can customize to
-explain the details of your research study and obtain a signature if needed.  [Consent](http://researchkit.github.io/docs/docs/InformedConsent/InformedConsent.html)
+explain the details of your research study and obtain a signature if needed.  See *[Obtaining Consent](http://researchkit.org/docs/docs/InformedConsent/InformedConsent.html)* for more information.
 
 
 Active Tasks
@@ -45,7 +47,7 @@ Active Tasks
 Some studies may need data beyond survey questions or the passive data collection
 capabilities available through use of the HealthKit and CoreMotion APIs if you are
 programming for iOS. ResearchKit's active tasks invite users to perform activities
-under semi-controlled conditions, while iPhone sensors actively collect data.  [Active Tasks](http://researchkit.github.io/docs/docs/ActiveTasks/ActiveTasks.html)
+under semi-controlled conditions, while iPhone sensors actively collect data.  See *[Active Tasks](http://researchkit.org/docs/docs/ActiveTasks/ActiveTasks.html)* for more information.
 
 
 Getting Started<a name="gettingstarted"></a>
@@ -56,7 +58,7 @@ Requirements
 ------------
 
 The primary ResearchKit framework codebase supports iOS and requires Xcode 7.0
-or newer. Current stable branch supports Xcode 6.4.
+or newer. The current stable branch supports Xcode 6.4.
 The ResearchKit framework has a Base SDK version of 8.0, meaning that apps
 using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 
@@ -125,7 +127,7 @@ the step `myStep`.
 
 *Objective-C*
 
-```objc 	
+```objc
 ORKInstructionStep *myStep =
   [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
 myStep.title = @"Welcome to ResearchKit";
@@ -204,8 +206,8 @@ which you must implement in order to handle the completion of the task:
 *Swift*
 
 ```swift
-func taskViewController(taskViewController: ORKTaskViewController, 
-                didFinishWithReason reason: ORKTaskViewControllerFinishReason, 
+func taskViewController(taskViewController: ORKTaskViewController,
+                didFinishWithReason reason: ORKTaskViewControllerFinishReason,
                                      error: NSError?) {
   let taskResult = taskViewController.result
   // You could do something with the result here.
@@ -215,7 +217,7 @@ func taskViewController(taskViewController: ORKTaskViewController,
 }
 ```
 
- 
+
 If you now run your app, you should see your first ResearchKit framework
 instruction step:
 
@@ -246,22 +248,22 @@ following license unless another license is explicitly identified:
 
 ```
 Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
- 
+
 1.  Redistributions of source code must retain the above copyright notice, this
 list of conditions and the following disclaimer.
- 
+
 2.  Redistributions in binary form must reproduce the above copyright notice,
 this list of conditions and the following disclaimer in the documentation and/or
 other materials provided with the distribution.
- 
+
 3. Neither the name of the copyright holder(s) nor the names of any contributors
 may be used to endorse or promote products derived from this software without
 specific prior written permission. No license is granted to the trademarks of
 the copyright holders even if such marks are included in this software.
- 
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
