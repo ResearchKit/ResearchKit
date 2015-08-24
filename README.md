@@ -16,7 +16,7 @@ Getting More Information
 
 * Join [researchkit-users](https://lists.apple.com/mailman/listinfo/researchkit-users) for discussing uses of the ResearchKit framework and related projects.
 * Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
-* Or [contact us](https://developer.apple.com/contact/researchkit/)
+* Or [contact us](https://developer.apple.com/contact/researchkit/).
 
 Use Cases
 ===========
@@ -56,7 +56,7 @@ Requirements
 ------------
 
 The primary ResearchKit framework codebase supports iOS and requires Xcode 7.0
-or newer. Current stable branch supports Xcode 6.4.
+or newer. The current stable branch supports Xcode 6.4.
 The ResearchKit framework has a Base SDK version of 8.0, meaning that apps
 using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 
@@ -125,7 +125,7 @@ the step `myStep`.
 
 *Objective-C*
 
-```objc 	
+```objc
 ORKInstructionStep *myStep =
   [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
 myStep.title = @"Welcome to ResearchKit";
@@ -204,8 +204,8 @@ which you must implement in order to handle the completion of the task:
 *Swift*
 
 ```swift
-func taskViewController(taskViewController: ORKTaskViewController, 
-                didFinishWithReason reason: ORKTaskViewControllerFinishReason, 
+func taskViewController(taskViewController: ORKTaskViewController,
+                didFinishWithReason reason: ORKTaskViewControllerFinishReason,
                                      error: NSError?) {
   let taskResult = taskViewController.result
   // You could do something with the result here.
@@ -215,7 +215,7 @@ func taskViewController(taskViewController: ORKTaskViewController,
 }
 ```
 
- 
+
 If you now run your app, you should see your first ResearchKit framework
 instruction step:
 
@@ -246,22 +246,22 @@ following license unless another license is explicitly identified:
 
 ```
 Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
- 
+
 1.  Redistributions of source code must retain the above copyright notice, this
 list of conditions and the following disclaimer.
- 
+
 2.  Redistributions in binary form must reproduce the above copyright notice,
 this list of conditions and the following disclaimer in the documentation and/or
 other materials provided with the distribution.
- 
+
 3. Neither the name of the copyright holder(s) nor the names of any contributors
 may be used to endorse or promote products derived from this software without
 specific prior written permission. No license is granted to the trademarks of
 the copyright holders even if such marks are included in this software.
- 
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
