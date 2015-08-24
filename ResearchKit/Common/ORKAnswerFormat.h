@@ -164,7 +164,7 @@ ORK_CLASS_AVAILABLE
                                                         maximumValueDescription:(nullable NSString *)maximumValueDescription
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
-+ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray *)textChoices
++ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray <ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical;
 
@@ -499,7 +499,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized text scale answer format.
  */
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
                            vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
 
@@ -513,13 +513,13 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized text scale answer format.
  */
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex;
 
 /**
  An array of ORKTextChoices that represent the options to display in the slider. (read-only)
  */
-@property (copy, readonly) NSArray *textChoices;
+@property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 
 /**
  The default index for the slider. (read-only)

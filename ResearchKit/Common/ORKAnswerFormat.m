@@ -270,7 +270,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                 minimumValueDescription:minimumValueDescription];
 }
 
-+ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray *)textChoices
++ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                                                       defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical {
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
@@ -1374,7 +1374,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
-- (NSArray *)textChoices {
+- (NSArray<ORKTextChoice *> *)textChoices {
     return nil;
 }
 
@@ -1576,7 +1576,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
-- (NSArray *)textChoices {
+- (NSArray<ORKTextChoice *> *)textChoices {
     return nil;
 }
 
@@ -1696,7 +1696,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKScaleQuestionResult class];
 }
 
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
                            vertical:(BOOL)vertical {
     self = [super init];
@@ -1710,7 +1710,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (instancetype)initWithTextChoices:(NSArray *)textChoices
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex{
     return [self initWithTextChoices:textChoices
                         defaultIndex:defaultIndex
@@ -1771,14 +1771,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     } else if (_textChoices.count > 8) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Cannot have more than 8 text choices." userInfo:nil];
     }
-    
-    
-    for (id textChoice in _textChoices){
-        if (! [textChoice isKindOfClass:[ORKTextChoice class]]){
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Text choices must be of class ORKTextChoice." userInfo:nil];
-        }
-    }
-    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
