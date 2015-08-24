@@ -1702,8 +1702,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super init];
     if (self) {
         _textChoices = textChoices;
-        _vertical = vertical;
         _defaultIndex = defaultIndex;
+        _vertical = vertical;
         
         [self validateParameters];
     }
@@ -1733,12 +1733,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    ORKTextChoice *firstObject = [self.textChoices firstObject];
-    return firstObject.text;
+    return ((ORKTextChoice *)[self.textChoices firstObject]).text;
 }
 - (NSString *)maximumValueDescription {
-    ORKTextChoice *lastObject = [self.textChoices lastObject];
-    return lastObject.text;
+    return ((ORKTextChoice *)[self.textChoices lastObject]).text;
 }
 - (UIImage *)minimumImage {
     return nil;
@@ -1817,7 +1815,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (ORKQuestionType) questionType {
     return ORKQuestionTypeScale;
 }
-
 
 @end
 

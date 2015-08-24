@@ -483,7 +483,7 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKTextScaleAnswerFormat `class represents an answer format that includes a slider control with text choices.
  
- The scale answer format produces an `ORKTextScaleQuestionResult` object that contains a number whose value is the selected slider value.
+ The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose value is the selected slider value.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
@@ -493,7 +493,7 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param textChoices                 Array of NSString objects.
+ @param textChoices                 Array of ORKTextChoice objects.
  @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
  
@@ -508,7 +508,7 @@ ORK_CLASS_AVAILABLE
  
  This method is a convenience initializer.
  
- @param textChoices                 Array of NSString objects.
+ @param textChoices                 Array of ORKTextChoice objects.
  @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
  
  @return An initialized text scale answer format.
@@ -517,7 +517,7 @@ ORK_CLASS_AVAILABLE
                        defaultIndex:(NSInteger)defaultIndex;
 
 /**
- An array of text choices that represent the options to display in the slider. (read-only)
+ An array of ORKTextChoices that represent the options to display in the slider. (read-only)
  */
 @property (copy, readonly) NSArray *textChoices;
 
