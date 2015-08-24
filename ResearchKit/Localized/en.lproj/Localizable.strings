@@ -312,7 +312,7 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tower";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
 
 "AX_GRAPH_RANGE_FORMAT" = "Range from %@ to %@";

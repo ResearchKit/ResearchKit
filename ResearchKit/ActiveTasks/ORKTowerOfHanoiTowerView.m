@@ -261,10 +261,15 @@ static const CGFloat BaseSpacing = 10;
 }
 
 - (NSString *)accessibilityValue {
-    NSString *value = (_diskSizes.count > 0 ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_CONTAINS", nil) : ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_EMPTY", nil));
+    
+    NSString *disksString = @" ";
+    
     for (NSNumber *diskSize in _diskSizes) {
-        value = ORKAccessibilityStringForVariables(value, diskSize.stringValue, @", ");
+        disksString = ORKAccessibilityStringForVariables(disksString, diskSize.stringValue, @", ");
     }
+    
+    NSString *value = (_diskSizes.count > 0 ? [NSString stringWithFormat:ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_CONTAINS", nil), disksString] : ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_EMPTY", nil));
+    
     return value;
 }
 
