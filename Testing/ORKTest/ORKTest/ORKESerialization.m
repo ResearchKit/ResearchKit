@@ -735,7 +735,7 @@ ret =
              return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:GETPROP(dict, textChoices) defaultIndex:[GETPROP(dict, defaultIndex) doubleValue] vertical:[GETPROP(dict, vertical) boolValue]];
          },
          (@{
-            PROPERTY(textChoices, ORKTextChoice, NSArray, NO, nil, nil),
+            PROPERTY(textChoices, ORKTextChoice, NSArray<ORKTextChoice *>, NO, nil, nil),
             PROPERTY(defaultIndex, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
             })),

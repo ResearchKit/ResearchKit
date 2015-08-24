@@ -1771,6 +1771,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     } else if (_textChoices.count > 8) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Cannot have more than 8 text choices." userInfo:nil];
     }
+    
+    for (id textChoice in _textChoices){
+        if (! [textChoice isKindOfClass:[ORKTextChoice class]]){
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Text choices must be of class ORKTextChoice." userInfo:nil];
+        }
+    }
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

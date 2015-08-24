@@ -1523,7 +1523,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
             ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
             ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
             
-            NSArray *textChoices = @[@"HELLO", textChoice2, textChoice3, textChoice4, textChoice5];
+            NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
             
             ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
                                                                                                    defaultIndex:NSIntegerMax
