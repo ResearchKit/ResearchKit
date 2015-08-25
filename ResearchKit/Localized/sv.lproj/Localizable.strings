@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ är mindre än det minsta tillåtna värdet (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ är inte ett giltigt värde.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ogiltig e-postadress: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textinnehållet överskrider maximal längd: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera inte tillgänglig i delad skärm.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Försök %@ av %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Skaka snabbt enheten när den blå cirkeln visas";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tornen i Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Den här aktiviteten utvärderar din förmåga att lösa pussel.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytta hela traven till den markerade plattformen med så få drag som möjligt.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tryck på Kom igång för att börja";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Lös pusslet";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antal drag: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jag kan inte lösa pusslet";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gång med tidtagning";
+"TIMED_WALK_INTRO_DETAIL" = "Den här aktiviteten mäter benfunktionen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Hitta en plats, helst utomhus, där du kan gå ungefär %@ i en rät linje som fort som möjligt, men säkert. Sakta inte ned förrän du har passerat mållinjen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tryck på Nästa för att börja.";
+"TIMED_WALK_FORM_TITLE" = "Assisterande enhet";
+"TIMED_WALK_FORM_TEXT" = "Använd samma assisterande enhet för alla test.";
+"TIMED_WALK_QUESTION_TEXT" = "Bär du en ankel- och fotortos?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Vill du använda assisterande enhet?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tryck här för att välja ett svar.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Ensidig käpp";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Ensidig krycka";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dubbelsidig käpp";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dubbelsidig krycka";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstativ/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gå upp till %@ i en rät linje.";
+"TIMED_WALK_INSTRUCTION_2" = "Vänd om och gå tillbaka till utgångsplatsen.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tryck på Klar när du är färdig.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Inga data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT (Paced Auditory Serial Addition Test) mäter din auditiva bearbetningshastighet och beräkningsförmåga.";
+"PVSAT_INTRO_TEXT" = "PVSAT (Paced Visual Serial Addition Test) mäter din visuella bearbetningshastighet och beräkningsförmåga.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT (Paced Auditory and Visual Serial Addition Test) mäter din auditiva och visuella bearbetningshastighet och beräkningsförmåga.";
+"PSAT_INTRO_TEXT_2_%@" = "Ensiffriga tal visas med intervall på %@ sekunder.\nDu måste addera varje nytt tal till talet som visades omedelbart före det.\nObs! Du ska inte beräkna en löpande totalsumma, utan bara summan av de senaste två talen.";
+"PSAT_CALL_TO_ACTION" = "Tryck på Kom igång för att börja.";
+"PSAT_INITIAL_INSTRUCTION" = "Kom ihåg den första siffran.";
+"PSAT_INSTRUCTION" = "Addera det nya talet till det föregående.";
+"PSAT_NO_DIGIT" = "–";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunde inte skapa fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunde inte ta bort tillräckligt många loggfiler för att nå tröskelvärdet";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Minnesspelbricka";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Spara förhandsvisning";
+"AX_IMAGE_CAPTURED_LABEL" = "Sparad bild";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Ka inte placera skivan med storleken %@ på skivan med storleken %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+"AX_TOWER_OF_HANOI_TOWER" = "Torn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tryck snabbt två gånger för att placera skivan";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tryck snabbt två gånger för att markera den översta skivan";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skivor med storlekarna ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tomt";
+
+"AX_GRAPH_RANGE_FORMAT" = "Intervall från %@ till %@";
+"AX_GRAPH_AND_SEPARATOR" = " och ";
+
 

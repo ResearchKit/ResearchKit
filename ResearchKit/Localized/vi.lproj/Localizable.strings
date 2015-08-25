@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ nhỏ hơn giá trị tối thiểu được phép (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ không phải giá trị hợp lệ.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Địa chỉ email không hợp lệ: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Nội dung văn bản vượt quá độ dài tối đa: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera không có sẵn trong chế độ màn hình tách rời.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -213,8 +222,54 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Hoạt động này giúp đánh giá thời gian bạn phản ứng trước gợi ý bằng hình ảnh.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Lắc thiết bị theo bất kỳ hướng nào ngay khi chấm màu lam xuất hiện trên màn hình. Bạn sẽ được yêu cầu làm việc này %D lần.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %@/%@";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Lần thử %@ / %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Lắc nhanh thiết bị khi vòng tròn màu lam xuất hiện";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tháp Hà Nội";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Hoạt động này đánh giá các kỹ năng giải đố của bạn.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Di chuyển toàn bộ chồng đĩa đến bục được tô sáng với số lần di chuyển ít nhất có thể.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Giải đố";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Số lần Di chuyển: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tôi không thể giải câu đố này";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Đi bộ Tính giờ";
+"TIMED_WALK_INTRO_DETAIL" = "Hoạt động này đo lường chức năng chi dưới của bạn.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Tìm một địa điểm, tốt nhất là ngoài trời, mà bạn có thể đi bộ trong khoảng %@ theo đường thẳng nhanh nhất có thể, nhưng an toàn. Không giảm tốc độ cho tới khi bạn đã vượt qua vạch đích.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Chạm Tiếp để bắt đầu.";
+"TIMED_WALK_FORM_TITLE" = "Thiết bị hỗ trợ";
+"TIMED_WALK_FORM_TEXT" = "Sử dụng cùng thiết bị hỗ trợ cho từng bài kiểm tra.";
+"TIMED_WALK_QUESTION_TEXT" = "Bạn có đeo thiết bị chỉnh hình mắt cá chân không?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Bạn có sử dụng thiết bị hỗ trợ không?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Chạm vào đây để chọn một câu trả lời.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Không có";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Gậy chống Đơn";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Nạng Đơn";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Gậy chống Đôi";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Nạng Đôi";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Khung tập đi/Xe lăn";
+"TIMED_WALK_INSTRUCTION_%@" = "Đi bộ tối đa %@ theo đường thẳng.";
+"TIMED_WALK_INSTRUCTION_2" = "Quay đầu lại và đi bộ về nơi bạn bắt đầu.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Chạm Xong khi hoàn tất.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Không có Dữ liệu";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Bài Kiểm tra Tính tổng Tuần tự bằng Âm thanh Theo tốc độ đo lường tốc độ xử lý thông tin âm thanh cùng với khả năng tính toán của bạn.";
+"PVSAT_INTRO_TEXT" = "Bài Kiểm tra Tính tổng Tuần tự bằng Hình ảnh Theo tốc độ đo lường tốc độ xử lý thông tin hình ảnh cùng với khả năng tính toán của bạn.";
+"PAVSAT_INTRO_TEXT" = "Bài Kiểm tra Tính tổng Tuần tự bằng Âm thanh và Hình ảnh Theo tốc độ đo lường tốc độ xử lý thông tin âm thanh và hình ảnh cùng với khả năng tính toán của bạn.";
+"PSAT_INTRO_TEXT_2_%@" = "Các số duy nhất được đưa ra cứ %@ giây một lần.\nBạn phải cộng từng số mới với số ngay trước nó.\nLưu ý: bạn không được tính tổng liên tục mà chỉ được tính tổng của hai số sau cùng.";
+"PSAT_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"PSAT_INITIAL_INSTRUCTION" = "Ghi nhớ số đầu tiên này.";
+"PSAT_INSTRUCTION" = "Cộng số mới này với số trước đó.";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Ô trò chơi ghi nhớ";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Chụp bản xem trước";
+"AX_IMAGE_CAPTURED_LABEL" = "Ảnh được chụp";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Không thể đặt đĩa có kích cỡ %@ lên trên đĩa có kích cỡ %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Đích";
+"AX_TOWER_OF_HANOI_TOWER" = "Tháp";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Chạm hai lần để đặt đĩa";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Chạm hai lần để chọn đĩa trên cùng";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Có đĩa với các kích cỡ ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Trống";
+
+"AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
+"AX_GRAPH_AND_SEPARATOR" = " và ";
+
 

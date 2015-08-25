@@ -38,7 +38,7 @@
 "CONSENT_REVIEW_ALERT_TITLE" = "Tinjauan";
 "CONSENT_SIGNATURE_TITLE" = "Tanda Tangan";
 "CONSENT_SIGNATURE_INSTRUCTION" = "Silakan tanda tangan menggunakan jari Anda pada baris di bawah.";
-"CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan di sini";
+"CONSENT_SIGNATURE_PLACEHOLDER" = "Tanda Tangan di Sini";
 "CONSENT_PAGE_NUMBER_FORMAT" = "Halaman %1$ld dari %2$ld";
 
 /* Consent section titles. */
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ melebihi nilai maksimum yang diizinkan (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ kurang dari nilai minimum yang diizinkan (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ bukan nilai yang sah.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Alamat email tidak sah: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Konten teks melebihi panjang maksimum: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera tidak tersedia dalam layar terpisah.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -180,7 +189,7 @@
 "TONE_AUDIOMETRY_INTENDED_USE" = "Aktivitas ini mengukur kemampuan Anda untuk mendengar bunyi yang berbeda.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Sebelum memulai, sambungkan dan pakai headphone Anda.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
-"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di samping perangkat Anda.\n\nKetuk tombol saat siap untuk memulai.";
+"TONE_AUDIOMETRY_PREP_TEXT" = "Seharusnya Anda mendengar nada sekarang. Sesuaikan volume menggunakan kontrol di bagian samping perangkat Anda.\n\nKetuk tombol jika Anda siap untuk memulai.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Ketuk tombol setiap kali Anda mulai mendengar bunyi.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, Kiri";
 "TONE_LABEL_%@_RIGHT" = "%@ Hz, Kanan";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percobaan %@ dari %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goyang perangkat dengan cepat saat lingkaran biru muncul";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Menara Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aktivitas ini mengevaluasi kemampuan Anda dalam menyelesaikan teka-teki.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Pindahkan seluruh tumpukan ke platform yang disorot, semakin sedikit gerakan maka semakin baik.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Selesaikan Teka-Teki";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Jumlah Gerakan: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Saya tidak dapat menyelesaikan teka-teki ini";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Berjalan Kaki dibatasi Waktu";
+"TIMED_WALK_INTRO_DETAIL" = "Aktivitas ini mengukur fungsi ekstrem rendah Anda.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Carilah tempat, lebih baik di luar ruangan, di mana Anda dapat berjalan sekitar %@ dengan lurus secepat mungkin, namun tetap aman. Jangan kurangi kecepatan hingga Anda tiba di garis akhir.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Ketuk Berikutnya untuk memulai.";
+"TIMED_WALK_FORM_TITLE" = "Perangkat bantuan";
+"TIMED_WALK_FORM_TEXT" = "Gunakan perangkat bantuan yang sama untuk tiap pengujian.";
+"TIMED_WALK_QUESTION_TEXT" = "Apakah Anda mengenakan ortosis gelang kaki?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Apakah Anda menggunakan perangkat bantuan?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Ketuk di sini untuk memilih jawaban.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Tiada";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Tongkat Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Kruk Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Tongkat Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Kruk Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Walker/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Berjalan kaki hingga %@ dalam garis lurus.";
+"TIMED_WALK_INSTRUCTION_2" = "Putar balik, dan kembali ke tempat Anda memulai.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Ketuk Selesai setelah selesai.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Tidak Ada Data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Pengujian Paced Auditory Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori Anda.";
+"PVSAT_INTRO_TEXT" = "Pengujian Paced Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung visual Anda.";
+"PAVSAT_INTRO_TEXT" = "Pengujian Paced Auditory dan Visual Serial Addition mengukur kecepatan pemrosesan informasi dan kemampuan menghitung auditori dan visual Anda.";
+"PSAT_INTRO_TEXT_2_%@" = "Satu digit ditampilkan setiap %@ detik.\nAnda harus segera menambahkan tiap digit baru ke digit sebelumnya.\nPerhatian, jangan hitung total keseluruhan, tetapi hanya jumlah dua angka terakhir.";
+"PSAT_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"PSAT_INITIAL_INSTRUCTION" = "Ingat digit pertama ini.";
+"PSAT_INSTRUCTION" = "Tambahkan digit baru ini ke digit sebelumnya.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat menghapus cukup file log untuk mencapai ambang";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Ubin permainan memori";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Pratinjau gambar";
+"AX_IMAGE_CAPTURED_LABEL" = "Gambar terambil";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat meletakkan disk dengan ukuran %@ pada disk dengan ukuran %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Target";
+"AX_TOWER_OF_HANOI_TOWER" = "Menara";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Ketuk dua kali untuk meletakkan disk";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Ketuk dua kali untuk memilih disk teratas";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Memiliki disk dengan ukuran ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
+
+"AX_GRAPH_RANGE_FORMAT" = "Berkisar dari %@ hingga %@";
+"AX_GRAPH_AND_SEPARATOR" = " dan ";
+
 

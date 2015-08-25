@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ 低於下限（%2$@）。";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ 不是有效的數值。";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "無效的電郵地址：%@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超出長度上限：%@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "分割螢幕無法使用相機。";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -121,13 +130,13 @@
 "BUTTON_SKIP_QUESTION" = "略過此問題";
 "BUTTON_START_TIMER" = "開始計時器";
 "BUTTON_OPTION_SAVE" = "儲存作日後之用";
-"BUTTON_OPTION_DISCARD" = "放棄結果";
-"BUTTON_OPTION_STOP_TASK" = "結束任務";
+"BUTTON_OPTION_DISCARD" = "放棄測試結果";
+"BUTTON_OPTION_STOP_TASK" = "結束測試任務";
 
 /* General active tasks. */
-"COUNTDOWN_LABEL" = "活動倒數";
-"TASK_COMPLETE_TITLE" = "活動已完成";
-"TASK_COMPLETE_TEXT" = "活動將會通過分析。當得到結果時，你將會收到通知。";
+"COUNTDOWN_LABEL" = "測試活動倒數";
+"TASK_COMPLETE_TITLE" = "測試活動已完成";
+"TASK_COMPLETE_TEXT" = "測試活動將會進行分析。當得到結果時，你將會收到通知。";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "截取圖案";
@@ -143,12 +152,12 @@
 "FITNESS_HEARTRATE_TITLE" = "心跳率（每分鐘次數）";
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "安坐 %@。";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "用最快的速度步行 %@。";
-"FITNESS_INTRO_TEXT_FORMAT" = "此活動能監測你的心跳率，並量度你在 %1$@內能步行的最遠距離。";
+"FITNESS_INTRO_TEXT_FORMAT" = "此測試活動能監測你的心跳率，並量度你在 %1$@內能步行的最遠距離。";
 "FITNESS_INTRO_2_TEXT_FORMAT" = "在室外以盡可能最快的速度步行 %1$@。完成後，安坐並休息 %2$@。若要開始測試，請點一下「開始」。";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步態及平衡";
-"WALK_INTRO_TEXT" = "此活動可測量你步行及站立時的步態及平衡。若你行動不便或行走時需要輔助，請勿繼續進行。";
+"WALK_INTRO_TEXT" = "此測試活動可測量你步行及站立時的步態及平衡。若你行動不便或行走時需要輔助，請勿繼續進行。";
 "WALK_INTRO_2_TEXT_%ld" = "找一個安全的地方，讓你可以不靠輔助地直線步行大約 %ld 步。";
 "WALK_INTRO_2_DETAIL" = "將電話放進口袋、手袋或背包裏，並跟隨語音指示。";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "現在站立 %@。";
@@ -159,7 +168,7 @@
 
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "點按速度";
-"TAPPING_INTRO_TEXT" = "此活動能評估你的點按速度。";
+"TAPPING_INTRO_TEXT" = "此測試活動能評估你的點按速度。";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "請先平放電話。螢幕上將顯示兩個按鈕，請用同一隻手的兩指，在 %@內以最快的速度梅花間竹地點按這些按鈕。";
 "TAPPING_CALL_TO_ACTION" = "點一下「開始」。";
 "TAP_BUTTON_TITLE" = "點按";
@@ -171,13 +180,13 @@
 "AUDIO_CALL_TO_ACTION" = "點一下「開始」。";
 "AUDIO_INSTRUCTION" = "對着咪高風發出「呀─」的聲音，時間愈長愈好。";
 "AUDIO_INTRO_TEXT" = "深呼吸，然後對着咪高風發出「呀─」的聲音，時間愈長愈好。請保持穩定的音量，以使音量棒圖維持藍色。";
-"AUDIO_INTENDED_USE" = "此活動會使用電話底部的咪高風錄音，以評估你的聲音。";
+"AUDIO_INTENDED_USE" = "此測試活動會使用電話底部的咪高風錄音，以評估你的聲音。";
 "AUDIO_TOO_LOUD_LABEL" = "太大聲";
 "AUDIO_GENERIC_ERROR_LABEL" = "無法錄音";
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
-"TONE_AUDIOMETRY_INTENDED_USE" = "此活動能評估你聆聽不同聲音的能力。";
+"TONE_AUDIOMETRY_INTENDED_USE" = "此測試活動能評估你聆聽不同聲音的能力。";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請插入並戴上耳筒。";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」。";
 "TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n若你準備好開始，請點一下按鈕。";
@@ -187,7 +196,7 @@
 
 /* Spatial span memory active task. */
 "SPATIAL_SPAN_MEMORY_TITLE" = "空間記憶";
-"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此活動需要你重覆%@圖案亮起的次序，以測量你的短期空間記憶。";
+"SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "此測試活動需要你重覆%@圖案亮起的次序，以測量你的短期空間記憶。";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "花朵";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分%@圖案會逐個亮起。請以亮起的次序點按這些%@圖案。";
@@ -210,11 +219,57 @@
 
 /* Reaction time active task. */
 "REACTION_TIME_TASK_TITLE" = "反應時間";
-"REACTION_TIME_TASK_INTENDED_USE" = "此活動會評估你對視覺提示作出反應所需的時間。";
+"REACTION_TIME_TASK_INTENDED_USE" = "此測試活動會評估你對視覺提示作出反應所需的時間。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "當螢幕顯示藍色圓點時，請立刻以任何方向搖動裝置。你將需要執行此操作 %D 次。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始」。";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次嘗試";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "當藍色圓圈出現時，請快速搖動裝置";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "河內塔";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "此測試活動會評估你的解題能力。";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "用最少的次數將所有圓盤移到有顏色標示的平台。";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始」";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解開謎題";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動次數：%@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我無法解開此謎題";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "定時步行";
+"TIMED_WALK_INTRO_DETAIL" = "此測試活動可測量你的下肢功能。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "找一個安全的地方（最好在室外），讓你可以快速地直線步行大約 %@。通過終點線前請勿放慢速度。";
+"TIMED_WALK_INTRO_2_DETAIL" = "點一下「下一步」開始。";
+"TIMED_WALK_FORM_TITLE" = "輔助器材";
+"TIMED_WALK_FORM_TEXT" = "每次測試時請使用相同的輔助器材。";
+"TIMED_WALK_QUESTION_TEXT" = "你是否穿戴足踝矯形器？";
+"TIMED_WALK_QUESTION_2_TITLE" = "你是否使用輔助器材？";
+"TIMED_WALK_QUESTION_2_TEXT" = "點一下此處以選擇答案。";
+"TIMED_WALK_QUESTION_2_CHOICE" = "無";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "單邊手杖";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "單邊拐杖";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "雙邊手杖";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "雙邊拐杖";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "助行架或四輪助行架";
+"TIMED_WALK_INSTRUCTION_%@" = "直線步行最多 %@。";
+"TIMED_WALK_INSTRUCTION_2" = "掉頭，然後步行回到起點。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成後，請點一下「完成」。";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "沒有數據";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "定時聽覺連續加法測試（PASAT）可測量你的聽覺資料處理速度及計算能力。";
+"PVSAT_INTRO_TEXT" = "定時視覺連續加法測試（PVSAT）可測量你的視覺資料處理速度及計算能力。";
+"PAVSAT_INTRO_TEXT" = "定時聽覺及視覺連續加法測試（PAVSAT）可測量你的聽覺及視覺資料處理速度及計算能力。";
+"PSAT_INTRO_TEXT_2_%@" = "每 %@ 秒會顯示一個數字。\n你必須將新的數字與前一個數字相加。\n注意：請勿計算所有的數字總和，只需計算最後兩個數字的總和。";
+"PSAT_CALL_TO_ACTION" = "點一下「開始」。";
+"PSAT_INITIAL_INSTRUCTION" = "記住第一個數字。";
+"PSAT_INSTRUCTION" = "將這個新的數字與前一個數字相加。";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "記憶遊戲圖樣";
 
 "AX_IMAGE_CAPTURE_LABEL" = "截取預覽";
+"AX_IMAGE_CAPTURED_LABEL" = "截取的圖案";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "無法將 %@ 號的圓盤放在 %@ 號的圓盤上";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "目標";
+"AX_TOWER_OF_HANOI_TOWER" = "塔座";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "點兩下放置圓盤";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "點兩下選擇最上方的圓盤";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "其中的圓盤大小是 ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
+
+"AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
+"AX_GRAPH_AND_SEPARATOR" = " 與 ";
+
 

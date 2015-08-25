@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ נמוך מהערך המינימלי המותר (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ הוא לא ערך תקין.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "כתובת דוא״ל לא תקינה: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "תוכן המלל חורג מהאורך המרבי: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "המצלמה אינה זמינה במסך מפוצל.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "‎A+‎";
 "BLOOD_TYPE_A-" = "‎A-‎";
@@ -213,8 +222,54 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "פעילות זו מעריכה את משך הזמן שלוקח לך להגיב לרמז חזותי.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "נער/י את המכשיר בכיוון כלשהו ברגע שהנקודה הכחולה מופיעה על המסך. תתבקש/י לעשות זאת %D פעמים.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "ניסיון %@ מתוך %@";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "נסיון %@ מתוך %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "נער/י את המכשיר במהירות כשמופיע העיגול הכחול";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "מגדל האנוי";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "פעילות זו מעריכה את מיומנויות פתרון הפאזלים שלך.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "הזז/י את המערום כולו אל הפלטפורמה המסומנת בכמה שפחות מהלכים שניתן.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "פתור/י את הפאזל";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "מספר מהלכים: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "איני מצליח/ה לפתור את הפאזל";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "הליכה מתוזמנת";
+"TIMED_WALK_INTRO_DETAIL" = "פעילות זו מודדת את תפקוד פלג הגוף התחתון שלך.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "מצא/י מקום, עדיף בחוץ, שבו תוכל/י ללכת במשך %@ בקו ישר במהירות המרבית שניתן, אך בבטחה. אל תאט/י עד שתעבור/י את קו הסיום.";
+"TIMED_WALK_INTRO_2_DETAIL" = "הקש/י על ״הבא״ בכדי להתחיל.";
+"TIMED_WALK_FORM_TITLE" = "אמצעי עזר";
+"TIMED_WALK_FORM_TEXT" = "השתמש/י באותו אמצעי עזר בכל בדיקה.";
+"TIMED_WALK_QUESTION_TEXT" = "האם הינך חובש/ת תומך לקרסול?";
+"TIMED_WALK_QUESTION_2_TITLE" = "האם הינך משתמש/ת באמצעי עזר?";
+"TIMED_WALK_QUESTION_2_TEXT" = "הקש/י כאן לבחירת תשובה.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "ללא";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "מקל הליכה ליד אחת";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "קב ליד אחת";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "מקל הליכה לשתי הידיים";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "קביים לשתי הידיים";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "הליכון";
+"TIMED_WALK_INSTRUCTION_%@" = "לך/י עד %@ בקו ישר.";
+"TIMED_WALK_INSTRUCTION_2" = "הסתובב/י והתהלך/י חזרה למקום שבו התחלת.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "הקש/י על ״סיום״ לאחר שתסיים/י.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "אין נתונים";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של שמע״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך בשמיעה.";
+"PVSAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של ראיה״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך בראיה.";
+"PAVSAT_INTRO_TEXT" = "הבדיקה ״חיבור סדרתי מתוזמן של שמע וראיה״ מודדת את מהירות עיבוד המידע ויכולת החישוב שלך, הן בשמיעה והן בראייה.";
+"PSAT_INTRO_TEXT_2_%@" = "ספרות בודדות מוצגות כל %@ שניות.\nעליך להוסיף ספרה חדשה אל זו שנמצאת ממש לפניה.\nלתשומת לבך, אין לחשב את הסה״כ המצטבר, אלא רק את סכום שני המספרים האחרונים.";
+"PSAT_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"PSAT_INITIAL_INSTRUCTION" = "זכור/י ספרה ראשונה זו.";
+"PSAT_INSTRUCTION" = "הוסף/י ספרה חדשה זו לספרה הקודמת.";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "לא ניתן ליצור את הקובץ";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "אריח משחק זכרון";
 
 "AX_IMAGE_CAPTURE_LABEL" = "צלם תצוגה מקדימה";
+"AX_IMAGE_CAPTURED_LABEL" = "התמונה צולמה";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "לא ניתן למקם דיסקית בגודל %@ על-גבי דיסקית בגודל %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "יעד";
+"AX_TOWER_OF_HANOI_TOWER" = "מגדל";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "הקש/י פעמיים למיקום הדיסקית";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "הקש/י פעמיים לבחירת הדיסקית הכי עליונה";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "כולל דיסקית עם גדלים ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ריק";
+
+"AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
+"AX_GRAPH_AND_SEPARATOR" = " וגם";
+
 

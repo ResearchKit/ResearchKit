@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@은(는) 최소 허용 값보다 작습니다(%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@은(는) 유효한 값이 아닙니다.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "이메일 주소가 유효하지 않음: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "텍스트 내용이 최대 길이를 초과함: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "분할된 화면에서는 카메라를 사용할 수 없습니다.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@ 시도";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "파란 원이 나타나면 재빨리 기기를 흔드십시오.";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "하노이의 탑";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "이 실험은 사용자의 퍼즐 푸는 능력을 평가합니다.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "아래 스택 전체를 최대한 적게 이동하여 하이라이트된 플랫폼으로 옮기십시오.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "퍼즐을 푸십시오.";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "이동 횟수: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "이 퍼즐을 풀 수 없습니다.";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "보행 테스트";
+"TIMED_WALK_INTRO_DETAIL" = "이 실험은 사용자의 하지 기능을 측정합니다.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "되도록 실외로 장소를 골라서 안전하면서도 최대한 빨리 일직선으로 약 %@를 걸으십시오. 결승선을 지나기 전에는 속도를 늦추지 마십시오.";
+"TIMED_WALK_INTRO_2_DETAIL" = "시작하려면 다음을 탭하십시오.";
+"TIMED_WALK_FORM_TITLE" = "보조 기구";
+"TIMED_WALK_FORM_TEXT" = "매 테스트에 동일한 보조 기구를 사용하십시오.";
+"TIMED_WALK_QUESTION_TEXT" = "단하지 보조기를 착용하십니까?";
+"TIMED_WALK_QUESTION_2_TITLE" = "보조 기구를 사용하십니까?";
+"TIMED_WALK_QUESTION_2_TEXT" = "여기를 탭하여 대답을 선택하십시오.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "없음";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "편측 지팡이";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "편측 목발";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "양측 지팡이";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "양측 목발";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "워커/롤레이터";
+"TIMED_WALK_INSTRUCTION_%@" = "일직선으로 %@까지 걸으십시오.";
+"TIMED_WALK_INSTRUCTION_2" = "뒤로 돌아서 시작한 지점으로 되돌아가십시오.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "완료하면 완료를 탭하십시오.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "데이터 없음";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT 테스트(Paced Auditory Serial Addition Test)는 사용자의 청각 정보 처리 속도 및 계산 능력을 측정합니다.";
+"PVSAT_INTRO_TEXT" = "PVSAT 테스트(Paced Visual Serial Addition Test)는 사용자의 시각 정보 처리 속도 및 계산 능력을 측정합니다.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT 테스트(Paced Auditory and Visual Serial Addition Test)는 사용자의 청각 및 시각 정보 처리 속도 및 계산 능력을 측정합니다.";
+"PSAT_INTRO_TEXT_2_%@" = "한 자릿수의 숫자가 %@초마다 제시됩니다.\n새로운 숫자가 제시될 때마다 직전에 제시된 숫자에 더하십시오.\n총 누계를 계산하지 않도록 주의하십시오. 직전에 제시된 두 개의 숫자만 더하십시오.";
+"PSAT_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"PSAT_INITIAL_INSTRUCTION" = "아래 첫 번째 숫자를 기억하십시오.";
+"PSAT_INSTRUCTION" = "아래 새로운 숫자를 이전 숫자에 더하십시오.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "파일을 생성할 수 없습니다.";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "임계값에 이르기 위한 충분한 수의 로그 파일을 제거하는 데 실패했습니다.";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "메모리 게임 타일";
 
 "AX_IMAGE_CAPTURE_LABEL" = "캡처 미리보기";
+"AX_IMAGE_CAPTURED_LABEL" = "캡처된 이미지";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "크기가 %@인 디스크를 크기가 %@인 디스크 위에 놓을 수 없습니다.";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "대상";
+"AX_TOWER_OF_HANOI_TOWER" = "탑";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "디스크를 놓으려면 이중 탭하십시오.";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "가장 위에 있는 디스크를 선택하려면 이중 탭하십시오.";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "디스크 크기";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "비어 있음";
+
+"AX_GRAPH_RANGE_FORMAT" = "%@에서 %@까지의 범위";
+"AX_GRAPH_AND_SEPARATOR" = " 및 ";
+
 
