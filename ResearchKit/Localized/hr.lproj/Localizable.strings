@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Pristanak";
-"CONSENT_NAME_FIRST" = "Ime";
-"CONSENT_NAME_LAST" = "Prezime";
+"CONSENT_NAME_GIVEN" = "Ime";
+"CONSENT_NAME_FAMILY" = "Prezime";
 "CONSENT_NAME_PLACEHOLDER" = "Potrebno";
 "CONSENT_REVIEW_TITLE" = "Pregled informacija";
 "CONSENT_REVIEW_INSTRUCTION" = "Pregledajte obrazac ispod i dodirnite \"Slažem se\" ako ste spremni za nastavak.";

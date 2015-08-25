@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "הסכמה";
-"CONSENT_NAME_FIRST" = "שם פרטי";
-"CONSENT_NAME_LAST" = "שם משפחה";
+"CONSENT_NAME_GIVEN" = "שם פרטי";
+"CONSENT_NAME_FAMILY" = "שם משפחה";
 "CONSENT_NAME_PLACEHOLDER" = "חובה";
 "CONSENT_REVIEW_TITLE" = "סקור/י";
 "CONSENT_REVIEW_INSTRUCTION" = "סקור/י את הטופס הבא, והקש/י על ״אני מסכים/ה״ אם הינך מוכן/ה להמשיך.";

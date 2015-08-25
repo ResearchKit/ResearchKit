@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Suostumus";
-"CONSENT_NAME_FIRST" = "Etunimi";
-"CONSENT_NAME_LAST" = "Sukunimi";
+"CONSENT_NAME_GIVEN" = "Etunimi";
+"CONSENT_NAME_FAMILY" = "Sukunimi";
 "CONSENT_NAME_PLACEHOLDER" = "Vaaditaan";
 "CONSENT_REVIEW_TITLE" = "Tarkasta";
 "CONSENT_REVIEW_INSTRUCTION" = "Tarkasta alla oleva lomake ja napauta ”Hyväksy”, jos olet valmis jatkamaan.";
