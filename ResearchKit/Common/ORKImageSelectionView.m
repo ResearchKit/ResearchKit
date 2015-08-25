@@ -294,8 +294,7 @@ static const CGFloat kSpacerWidth = 10.0;
     button.selected = !button.selected;
     
     if (button.selected) {
-        [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-         {
+        [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              ORKChoiceButtonView *buttonView = obj;
              if (buttonView.button != button) {
                  buttonView.button.selected = NO;
@@ -319,8 +318,7 @@ static const CGFloat kSpacerWidth = 10.0;
 - (NSArray *)selectedIndexes {
     NSMutableArray *array = [NSMutableArray new];
     
-    [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
+    [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
          ORKChoiceButtonView *buttonView = obj;
          if (buttonView.button.selected)
          {

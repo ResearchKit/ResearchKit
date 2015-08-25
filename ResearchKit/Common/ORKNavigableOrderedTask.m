@@ -40,7 +40,7 @@
     NSMutableOrderedSet *_stepIdentifierStack;
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray *)steps {
+- (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;

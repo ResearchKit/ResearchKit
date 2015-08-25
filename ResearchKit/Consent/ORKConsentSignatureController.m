@@ -54,8 +54,8 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
-    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([[ORKTextButton defaultFont] descender])-1 };
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
+    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([ORKTextButton defaultFont].descender)-1 };
     [self setNeedsLayout];
 }
 
@@ -83,7 +83,8 @@
             [self addSubview:_signatureView];
         }
         
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
+        CGFloat margin = ORKStandardHorizMarginForView(self);
+        self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
         
         [self setUpConstraints];
     }

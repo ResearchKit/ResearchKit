@@ -138,7 +138,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 }
 
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
-    UIBarButtonItem *button = [UIBarButtonItem obk_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
+    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }

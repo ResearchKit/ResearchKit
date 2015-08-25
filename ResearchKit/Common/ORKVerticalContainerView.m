@@ -69,7 +69,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
+        CGFloat margin = ORKStandardHorizMarginForView(self);
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
         self.layoutMargins = layoutMargins;
         _scrollContainer = [UIView new];
         [self addSubview:_scrollContainer];
@@ -328,21 +329,29 @@ static const CGFloat AssumedStatusBarHeight = 20;
     if (_stepViewCenterInStepViewContainerConstraint) {
         BOOL offsetCentering = !(hasIllustration || hasCaption || hasInstruction || hasLearnMore || hasContinueOrSkip);
         _stepViewCenterInStepViewContainerConstraint.active = offsetCentering;
-    }
+    }    
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    CGFloat margin = ORKStandardHorizMarginForWindow(window);
+    if (self.layoutMargins.left != margin) {
+        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
+        self.layoutMargins = layoutMargins;
+        _scrollContainer.layoutMargins = layoutMargins;
+        _container.layoutMargins = layoutMargins;
+    }
+
+    ORKScreenType verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
     
-    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
-    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, screenType);
+    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, verticalScreenType);
+    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, verticalScreenType);
     
     {
         BOOL hasIllustration = (_imageView.image != nil);
         _headerView.hasContentAbove = hasIllustration;
 
-        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, screenType);
-        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, screenType);
+        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, verticalScreenType);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, verticalScreenType);
         
         _illustrationHeightConstraint.constant = (_imageView.image ? IllustrationHeight : 0);
         _topToIllustrationConstraint.constant = (_imageView.image ?IllustrationTopMargin : 0);

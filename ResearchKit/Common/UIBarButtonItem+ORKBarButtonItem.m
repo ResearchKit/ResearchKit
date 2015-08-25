@@ -35,7 +35,7 @@
 
 @implementation UIBarButtonItem (ORKBarButtonItem)
 
-+ (UIBarButtonItem *)obk_backBarButtonItemWithTarget:(id)target action:(SEL)selector {
++ (UIBarButtonItem *)ork_backBarButtonItemWithTarget:(id)target action:(SEL)selector {
     UIImage *image = [UIImage imageNamed:@"arrowLeft" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
     UIImage *landscapeImage = [UIImage imageNamed:@"arrowLeftLandscape" inBundle:ORKBundle() compatibleWithTraitCollection:nil];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:image

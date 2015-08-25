@@ -35,7 +35,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DynamicTask.h"
 #import "AppDelegate.h"
-
+#import "ORKTest-Swift.h"
 
 static NSString * const DatePickingTaskIdentifier = @"dates_001";
 static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
@@ -57,6 +57,7 @@ static NSString * const TwoFingerTapTaskIdentifier = @"tap";
 static NSString * const ReactionTimeTaskIdentifier = @"react";
 static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
 static NSString * const TimedWalkTaskIdentifier = @"timed_walk";
+static NSString * const PSATTaskIdentifier = @"PSAT";
 static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
@@ -205,6 +206,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     
     {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showPSATTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"PSAT" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"PSAT"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button addTarget:self action:@selector(showActiveStepTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"ActiveStep Task" forState:UIControlStateNormal];
         [buttonKeys addObject:@"task"];
@@ -264,6 +273,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showImageCapture:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Image Capture" forState:UIControlStateNormal];
         [buttonKeys addObject:@"imageCapture"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showCharts:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Test Charts" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"charts"];
         buttons[buttonKeys.lastObject] = button;
     }
 
@@ -447,6 +464,14 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
                                           distanceInMeters:100
                                                  timeLimit:180
                                                    options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
+        return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
+                               intendedUseDescription:nil
+                                     presentationMode:(ORKPSATPresentationModeAuditory | ORKPSATPresentationModeVisual)
+                                interStimulusInterval:3.0
+                                     stimulusDuration:1.0
+                                         seriesLength:60
+                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1503,7 +1528,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [self beginTaskWithIdentifier:MiniFormTaskIdentifier];
 }
 
-#pragma mark Active tasks
+#pragma mark - Active tasks
 
 - (IBAction)showFitnessTask:(id)sender {
     [self beginTaskWithIdentifier:FitnessTaskIdentifier];
@@ -1541,7 +1566,11 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
 }
 
-#pragma mark Dynamic task
+- (IBAction)showPSATTask:(id)sender {
+    [self beginTaskWithIdentifier:PSATTaskIdentifier];
+}
+
+#pragma mark - Dynamic task
 
 /*
  See the `DynamicTask` class for a definition of this task.
@@ -1550,7 +1579,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [self beginTaskWithIdentifier:DynamicTaskIdentifier];
 }
 
-#pragma mark Screening task
+#pragma mark - Screening task
 
 /*
  This demonstrates a task where if the user enters a value that is too low for
@@ -1594,7 +1623,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     [self beginTaskWithIdentifier:ScreeningTaskIdentifier];
 }
 
-#pragma mark Scales task
+#pragma mark - Scales task
 
 /*
  This task is used to test various uses of discrete and continuous, horizontal and vertical valued sliders.
@@ -2645,6 +2674,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
                 ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
                 NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
+            } else if ([result isKindOfClass:[ORKPSATResult class]]) {
+                ORKPSATResult *pr = (ORKPSATResult *)result;
+                NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }
@@ -2690,7 +2722,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
-#pragma mark UI state restoration
+#pragma mark - UI state restoration
 
 /*
  UI state restoration code for the MainViewController.
@@ -2727,6 +2759,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         _taskViewController.defaultResultSource = _lastRouteResult;
     }
     _taskViewController.delegate = self;
+}
+
+#pragma mark - Charts
+
+- (void)showCharts:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
 @end

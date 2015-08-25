@@ -151,8 +151,7 @@
     CGRect bounds = self.bounds;
     CGRect insetBounds = UIEdgeInsetsInsetRect(bounds, self.layoutMargins);
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
-    CGFloat sideMargin = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreButtonSideMargin, screenType);
+    CGFloat sideMargin = ORKGetMetricForWindow(ORKScreenMetricLearnMoreButtonSideMargin, self.window);
     _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin*2;
 }
 
@@ -160,7 +159,7 @@
     static const CGFloat AssumedNavBarHeight = 44;
     static const CGFloat AssumedStatusBarHeight = 20;
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     
     const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForScreenType(ORKScreenMetricIllustrationToCaptionBaseline, screenType);
     const CGFloat TopToCaptionBaseline = (ORKGetMetricForScreenType(ORKScreenMetricTopToCaptionBaseline, screenType) - AssumedStatusBarHeight - AssumedNavBarHeight);

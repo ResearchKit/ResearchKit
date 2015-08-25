@@ -113,7 +113,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 + (void)initialize {
     if (self == [ORKSignatureView class]) {
-        if([[ORKSignatureView appearance] backgroundColor] == nil) {
+        if ([[ORKSignatureView appearance] backgroundColor] == nil) {
             [[ORKSignatureView appearance] setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
         }
     }
@@ -134,7 +134,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     _heightConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricSignatureViewHeight, screenType);
     _widthConstraint.constant = ORKWidthForSignatureView(window);
 }

@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /// @name Initializers
 
 /**
@@ -60,7 +62,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized ordered task.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray *)steps NS_DESIGNATED_INITIALIZER;
+                             steps:(nullable NSArray<ORKStep *> *)steps NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an ordered task initialized from data in the given unarchiver.
@@ -84,7 +86,7 @@ ORK_CLASS_AVAILABLE
  The associated task view controller presents the steps in
  array order.
  */
-@property (nonatomic, copy, readonly) NSArray *steps;
+@property (nonatomic, copy, readonly) NSArray<ORKStep *> *steps;
 
 @end
 
@@ -465,6 +467,39 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                distanceInMeters:(double)distanceInMeters
                                       timeLimit:(NSTimeInterval)timeLimit
                                         options:(ORKPredefinedTaskOption)options;
+
+/**
+ Returns a predefined task that consists of the paced serial addition test (PSAT).
+ 
+ In a PSAT task, the participant is asked to add a new digit to the one immediately prior to it
+ every 2 or 3 seconds.
+ 
+ A PSAT task can be used to measure the cognitive function that assesses auditory and/or
+ visual information processing speed and flexibility, as well as calculation ability.
+ 
+ Data collected by the task is in the form of an `ORKPSATResult` object.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param intendedUseDescription  A localized string describing the intended use of the data
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text is displayed.
+ @param presentationMode        The presentation mode of the PSAT test (auditory and/or Visual).
+ @param interStimulusInterval   The time interval between two digits presented.
+ @param stimulusDuration        The time duration the digit is shown on screen (only for
+                                    visual PSAT, ie. PVSAT and PAVSAT).
+ @param seriesLength            The number of digits that will be presented during the task.
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active PSAT task that can be presented with an `ORKTaskViewController` object.
+ 
+ */
++ (ORKOrderedTask *)PSATTaskWithIdentifier:(NSString *)identifier
+                    intendedUseDescription:(nullable NSString *)intendedUseDescription
+                          presentationMode:(ORKPSATPresentationMode)presentationMode
+                     interStimulusInterval:(NSTimeInterval)interStimulusInterval
+                          stimulusDuration:(NSTimeInterval)stimulusDuration
+                              seriesLength:(NSInteger)seriesLength
+                                   options:(ORKPredefinedTaskOption)options;
 
 @end
 

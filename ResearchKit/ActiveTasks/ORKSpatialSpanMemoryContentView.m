@@ -258,7 +258,8 @@
 
 
 - (void)updateMargins {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
+    CGFloat margin = ORKStandardHorizMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
     _quantityPairView.layoutMargins = self.layoutMargins;
 }
 

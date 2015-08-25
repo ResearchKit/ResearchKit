@@ -43,7 +43,7 @@
     BOOL _started;
 }
 
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong, nullable) CLLocationManager *locationManager;
 
 @property (nonatomic) NSTimeInterval uptime;
 

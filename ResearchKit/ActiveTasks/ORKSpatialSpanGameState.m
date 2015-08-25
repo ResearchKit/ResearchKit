@@ -31,11 +31,16 @@
 
 #import "ORKSpatialSpanGameState.h"
 #import "ORKSpatialSpanGame.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKSpatialSpanGameState {
     NSMutableArray *_plays;
     ORKSpatialSpanTargetState *_states;
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
 }
 
 - (instancetype)initWithGame:(ORKSpatialSpanGame *)game {

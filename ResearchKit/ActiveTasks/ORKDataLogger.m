@@ -446,6 +446,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     return [[ORKDataLogger alloc] initWithDirectory:url logName:logName formatter:[ORKJSONLogFormatter new] delegate:delegate];
 }
 
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
 - (instancetype)initWithDirectory:(NSURL *)url logName:(NSString *)logName formatter:(ORKLogFormatter *)formatter delegate:(id<ORKDataLoggerDelegate>)delegate {
     self = [super init];
     if (self) {
@@ -626,7 +632,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     return success;
 }
 
-- (BOOL)removeUploadedFiles:(NSArray *)fileURLs withError:(NSError * __autoreleasing *)error {
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * __autoreleasing *)error {
     __block BOOL success = NO;
     dispatch_sync(_queue, ^{
         success = [self queue_removeUploadedFiles:fileURLs withError:error];
@@ -942,7 +948,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     return success;
 }
 
-- (BOOL)queue_removeUploadedFiles:(NSArray *)fileURLs withError:(NSError * __autoreleasing *)error {
+- (BOOL)queue_removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * __autoreleasing *)error {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     __block NSMutableArray *errors = [NSMutableArray array];
     BOOL success = [self queue_enumerateLogs:^(NSURL *logFileUrl, BOOL *stop) {
@@ -1035,6 +1041,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 
 @implementation ORKDataLoggerManager
+
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
 
 - (instancetype)initWithDirectory:(NSURL *)directory delegate:(id<ORKDataLoggerManagerDelegate>)delegate {
     self = [super init];
@@ -1155,8 +1167,8 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     return dataLogger;
 }
 
-- (NSArray *)logNames {
-    __block NSArray *logNames = nil;
+- (NSArray<NSString *> *)logNames {
+    __block NSArray<NSString *> *logNames = nil;
     dispatch_sync(_queue, ^{
         logNames = [_records allKeys];
     });
@@ -1214,7 +1226,7 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     return success;
 }
 
-- (BOOL)queue_removeUploadedFiles:(NSArray *)fileURLs error:(NSError * __autoreleasing *)error {
+- (BOOL)queue_removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __autoreleasing *)error {
     BOOL success = YES;
     NSMutableArray *notRemoved = [NSMutableArray array];
     for (NSURL *url in fileURLs) {
@@ -1237,7 +1249,7 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     return success;
 }
 
-- (BOOL)removeUploadedFiles:(NSArray *)fileURLs error:(NSError * __autoreleasing *)error {
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __autoreleasing *)error {
     
     __block BOOL success = YES;
     dispatch_sync(_queue, ^{
@@ -1246,9 +1258,9 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     return success;
 }
 
-- (BOOL)queue_unmarkUploadedFiles:(NSArray *)fileURLs error:(NSError * __autoreleasing *)error {
+- (BOOL)queue_unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __autoreleasing *)error {
     BOOL success = YES;
-    NSMutableArray *notRemoved = [NSMutableArray array];
+    NSMutableArray<NSURL *> *notRemoved = [NSMutableArray array];
     for (NSURL *url in fileURLs) {
         NSString *logName = [url ork_logNameInDirectory:_directory];
         ORKDataLogger *logger = _records[logName];
@@ -1269,7 +1281,7 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     return success;
 }
 
-- (BOOL)unmarkUploadedFiles:(NSArray *)fileURLs error:(NSError *__autoreleasing *)error {
+- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError *__autoreleasing *)error {
     __block BOOL success = YES;
     dispatch_sync(_queue, ^{
         success = [self queue_unmarkUploadedFiles:fileURLs error:error];

@@ -296,7 +296,7 @@ static const CGFloat kHMargin = 15.0;
     id textFieldView = _textFieldView;
     NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
     
-    if (labelMinWidth >= 0.6 * boundWidth) {
+    if (labelMinWidth >= 0.5 * boundWidth) {
         [_variableConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing
@@ -887,7 +887,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if (_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
     }
     return _formatProvider;

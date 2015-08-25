@@ -118,7 +118,7 @@
 }
 
 - (void)setTapCount:(NSUInteger)tapCount {
-    if (_formatter == nil){
+    if (_formatter == nil) {
         _formatter = [NSNumberFormatter new];
         _formatter.locale = [NSLocale currentLocale];
         _formatter.minimumIntegerDigits = 2;
@@ -255,7 +255,7 @@
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
     CGFloat margin = ORKStandardHorizMarginForView(self);

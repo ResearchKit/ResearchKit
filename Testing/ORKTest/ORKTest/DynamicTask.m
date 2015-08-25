@@ -73,7 +73,7 @@
         return self.step2;
     } else if ([identifier isEqualToString:self.step2.identifier]) {
         ORKStepResult *stepResult = [result stepResultForStepIdentifier:step.identifier];
-        ORKQuestionResult *result = stepResult.results.count > 0 ? stepResult.results.firstObject : nil;
+        ORKQuestionResult *result = (ORKQuestionResult *)(stepResult.results.count > 0 ? stepResult.results.firstObject : nil);
         if (result.answer != nil) {
             if ([((NSArray *)result.answer).firstObject isEqualToString:@"route1"])
             {

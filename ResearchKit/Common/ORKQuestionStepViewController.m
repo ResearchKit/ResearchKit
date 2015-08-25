@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     if (self) {
 		ORKStepResult *stepResult = (ORKStepResult *)result;
 		if (stepResult && [stepResult results].count > 0) {
-            ORKQuestionResult *questionResult = [stepResult results].firstObject;
+            ORKQuestionResult *questionResult = ORKDynamicCast([stepResult results].firstObject, ORKQuestionResult);
             id answer = [questionResult answer];
             if (questionResult != nil && answer == nil) {
                 answer = ORKNullAnswerValue();
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     BOOL scheduledRefresh = NO;
     if (types.count) {
-        NSSet *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
+        NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
         if (! [types isSubsetOfSet:alreadyRequested]) {
             scheduledRefresh = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
