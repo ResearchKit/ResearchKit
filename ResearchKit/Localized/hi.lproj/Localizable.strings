@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ न्यूनतम अनुमत मान (%2$@) से कम है।";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ मान्य मान नहीं है।";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "अमान्य ईमेल पता : %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "टेक्स्ट कॉन्टेंट अधिकतम अनुमत सीमा से अधिक है : %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "स्प्लिट स्क्रीन में कैमरा उपलब्ध नहीं है।";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "प्रयास %1$@/%2$@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "नीले रंग का वृत्त दिखाई देने पर शीघ्रता से उपकरण को हिलाएँ";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "हनोई का टॉवर";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "इस गतिविधि के द्वारा पहेली को हल करने की आपकी क्षमता का मूल्यांकन किया जाएगा।";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "चिह्नांकित प्लेटफ़ॉर्म के पूरे स्टैक को कम से कम प्रयासों में स्थानांतरित करें।";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "पहेली हल करें";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %1$@ \n %2$@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "यह पहेली मेरे द्वारा हल नहीं की जा सकती है";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "समयबद्ध चाल";
+"TIMED_WALK_INTRO_DETAIL" = "इस गतिविधि के द्वारा शरीर के निचले हिस्से के कार्य करने की क्षमता को मापा जाता है।";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "ऐसी जगह ढूँढें, यदि संभव हो तो घर के बाहर, जहाँ पर आप लगभग %@ तक जितना संभव हो, उतनी तेज़ी से लेकिन सुरक्षित रूप से सीधे चल सकें। समाप्ति रेखा तक पहुँचने तक गति कम न करें।";
+"TIMED_WALK_INTRO_2_DETAIL" = "आरंभ करने के लिए “अगला” पर टैप करें।";
+"TIMED_WALK_FORM_TITLE" = "सहायक उपकरण";
+"TIMED_WALK_FORM_TEXT" = "प्रत्येक परीक्षण हेतु समान सहायक उपकरण का उपयोग करें।";
+"TIMED_WALK_QUESTION_TEXT" = "क्या आप टखनों और पैरों को सहारा देने वाला उपकरण पहनते हैं?";
+"TIMED_WALK_QUESTION_2_TITLE" = "क्या आप सहायक उपकरण का उपयोग करते हैं?";
+"TIMED_WALK_QUESTION_2_TEXT" = "उत्तर का चयन करने के लिए यहाँ टैप करें।";
+"TIMED_WALK_QUESTION_2_CHOICE" = "कुछ नहीं";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "एक हाथ के लिए बेंत";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "एक हाथ के लिए बैसाखी";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "दोनों हाथों के लिए बेंत";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "दोनों हाथों के लिए बैसाखी";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "वॉकर/रोलेटर";
+"TIMED_WALK_INSTRUCTION_%@" = "लगभग %@ क़दम सीधे चलें।";
+"TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी उस ओर चलते जाएँ।";
+"TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “पूर्ण” पर टैप करें।";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "कोई डेटा नहीं";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "पेस्ड ऑडिटरी सीरियल ऐडीशन टेस्ट के द्वारा सुनकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PVSAT_INTRO_TEXT" = "पेस्ड विजुअल सीरियल ऐडीशन टेस्ट के द्वारा देखकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PAVSAT_INTRO_TEXT" = "पेस्ड ऑडिटरी एंड विजुअल सीरियल ऐडीशन टेस्ट के द्वारा देख और सुनकर जानकारी संसाधित करने की आपकी गति और परिकलन क्षमता को मापा जाता है।";
+"PSAT_INTRO_TEXT_2_%@" = "एकल अंक प्रति %@ सेकंड में प्रस्तुत किए जाते हैं।\nआपको प्रत्येक नए अंक का उससे ठीक पहले वाले अंक से योग करना है।\nध्यान रखें, आपको कुल योग परिकलित नहीं करना है बल्कि केवल अंतिम दो अंकों का योग परिकलित करना है।";
+"PSAT_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"PSAT_INITIAL_INSTRUCTION" = "इस पहले अंक को याद रखें।";
+"PSAT_INSTRUCTION" = "इस नए अंक को पिछले में जोड़ें।";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "अधिकतम संग्रहण सीमा तक पहुँचने के लिए आवश्यक लॉग फ़ाइलें नहीं हटाई जा सकीं";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "याददाश्त के खेल की टाइल";
 
 "AX_IMAGE_CAPTURE_LABEL" = "पूर्वावलोकन को कैप्चर करें";
+"AX_IMAGE_CAPTURED_LABEL" = "कैप्चर की हुई छवि";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%1$@ आकार के डिस्क पर %1$@ आकार के डिस्क पर नहीं रखा जा सकता";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "लक्ष्य";
+"AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "डिस्क रखने के लिए डबल टैप करें";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "सबसे ऊपर के डिस्क का चयन करने के लिए डबल टैप करें";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें निम्नलिखित आकारों के डिस्क हैं : ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
+
+"AX_GRAPH_RANGE_FORMAT" = "%1$@ से %2$@ तक श्रेणी";
+"AX_GRAPH_AND_SEPARATOR" = " और ";
+
 

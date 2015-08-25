@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ is lager dan de minimaal toegestane waarde (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ is geen geldige waarde.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ongeldig e‑mailadres: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekst overschrijdt maximale lengte: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Camera niet beschikbaar in gedeeld scherm.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Poging %@ van %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Schud het apparaat snel heen en weer als de blauwe cirkel verschijnt";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torens van Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Met deze activiteit wordt gekeken hoe goed u puzzels kunt oplossen.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Verplaats de hele stapel in zo min mogelijk stappen naar het gemarkeerde platform.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Los de puzzel op";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Aantal stappen: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ik kan deze puzzel niet oplossen";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Lopen met tijdmeting";
+"TIMED_WALK_INTRO_DETAIL" = "Met deze activiteit wordt het functioneren van uw onderlichaam gemeten.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Zoek een plek, bij voorkeur buiten, waar u veilig zo snel mogelijk ongeveer %@ in een rechte lijn kunt lopen. Vertraag uw tempo niet totdat u voorbij de eindstreep bent.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tik op 'Volgende' om te beginnen.";
+"TIMED_WALK_FORM_TITLE" = "Loophulpmiddel";
+"TIMED_WALK_FORM_TEXT" = "Gebruik hetzelfde hulpmiddel voor elke test.";
+"TIMED_WALK_QUESTION_TEXT" = "Draagt u een enkel-voetorthese?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Gebruikt u een loophulpmiddel?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tik hier om een antwoord te selecteren.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Geen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Eén wandelstok";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Eén kruk";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Twee wandelstokken";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Twee krukken";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Looprek/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Loop maximaal %@ in een rechte lijn.";
+"TIMED_WALK_INSTRUCTION_2" = "Draai om en loop terug naar het beginpunt.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tik op 'Gereed' als u klaar bent.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Geen gegevens";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Met de PASAT (een stapsgewijze auditieve seriële opteltest) wordt gemeten hoe snel u hoorbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PVSAT_INTRO_TEXT" = "Met de PVSAT (een stapsgewijze visuele seriële opteltest) wordt gemeten hoe snel u zichtbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PAVSAT_INTRO_TEXT" = "Met de PAVSAT (een stapsgewijze auditieve en visuele seriële opteltest) wordt gemeten hoe snel u hoorbare en zichtbare informatie verwerkt en hoe goed u kunt rekenen.";
+"PSAT_INTRO_TEXT_2_%@" = "Elke %@ seconden ziet en/of hoort u een cijfer.\nU moet elk nieuw cijfer optellen bij het vorige cijfer.\nLet op: u moet niet het totaal van alle cijfers berekenen, maar alleen de som van de laatste twee cijfers.";
+"PSAT_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"PSAT_INITIAL_INSTRUCTION" = "Onthoud dit eerste cijfer.";
+"PSAT_INSTRUCTION" = "Tel dit nieuwe cijfer op bij het vorige.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Bestand aanmaken mislukt";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Er kunnen niet genoeg logbestanden worden verwijderd om de drempel te halen";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Tegel in geheugenspel";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Voorvertoning opname";
+"AX_IMAGE_CAPTURED_LABEL" = "Vastgelegde afbeelding";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "De schijf met grootte %@ kan niet op de schijf met grootte %@ worden geplaatst.";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Doel";
+"AX_TOWER_OF_HANOI_TOWER" = "Toren";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tik dubbel om de schijf te plaatsen";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tik dubbel om de bovenste schijf te selecteren";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Heeft schijf met groottes ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Leeg";
+
+"AX_GRAPH_RANGE_FORMAT" = "Bereik van %@ tot %@";
+"AX_GRAPH_AND_SEPARATOR" = " en ";
+
 

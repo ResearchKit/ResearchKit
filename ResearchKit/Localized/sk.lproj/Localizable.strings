@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ nedosahuje minimálnu povolenú hodnotu (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ nie je platná hodnota.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Neplatná emailová adresa: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Textový obsah prekračuje maximálnu dĺžku: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera nie je dostupná v režime rozdelenej obrazovky.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Keď sa zobrazí modrý kruh, rýchlo potraste zariadením.";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojská veža";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Táto aktivita vyhodnotí vašu schopnosť riešiť rébusy.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Presuňte celú pyramídu na zvýraznenú tyč v čo najmenšom počte ťahov.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Začnite klepnutím na Začať";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Vyriešte rébus";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Počet ťahov: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tento rébus nedokážem vyriešiť";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Chôdza na čas";
+"TIMED_WALK_INTRO_DETAIL" = "Táto aktivita meria funkčnosť vašich dolných končatín.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Nájdite si miesto, najlepšie vonku, kde môžete čo najrýchlejšie bezpečne prejsť po priamke najmenej %@. Nespomaľujte, kým neprejdete cieľom.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Pre spustenie klepnite na Ďalej.";
+"TIMED_WALK_FORM_TITLE" = "Asistenčné zariadenie";
+"TIMED_WALK_FORM_TEXT" = "Pre každý test použite rovnaké asistenčné zariadenie.";
+"TIMED_WALK_QUESTION_TEXT" = "Nosíte ortézu na členku?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Používate asistenčné zariadenie?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Klepnutím sem vyberte odpoveď.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Žiadne";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Jednostranná palica";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Jednostranná barla";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Obojstranné palice";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Obojstranné barly";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Chodítko/štvorkolka";
+"TIMED_WALK_INSTRUCTION_%@" = "Prejdite %@ rovno po priamke.";
+"TIMED_WALK_INSTRUCTION_2" = "Otočte sa a choďte späť na miesto, kde ste začali.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Po skončení klepnite na Hotovo.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Žiadne dáta";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Paced Auditory Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom sluchu.";
+"PVSAT_INTRO_TEXT" = "Paced Visual Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom zraku.";
+"PAVSAT_INTRO_TEXT" = "Paced Auditory a Visual Serial Addition Test meria rýchlosť, akou dokážete spracovať a spočítať informácie prijaté prostredníctvom sluchu a zraku.";
+"PSAT_INTRO_TEXT_2_%@" = "Každých %@ s sa zobrazí nové číslo.\nKaždé nové číslo musíte pripočítať k číslu, ktoré bolo zobrazené pred ním.\nPozor, nesmiete počítať celkový súčet týchto čísiel, ale len sumu dvoch posledných čísiel.";
+"PSAT_CALL_TO_ACTION" = "Začnite klepnutím na Začať.";
+"PSAT_INITIAL_INSTRUCTION" = "Zapamätajte si prvé číslo.";
+"PSAT_INSTRUCTION" = "Pripočítajte nové číslo k predošlému číslu.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nepodarilo sa vytvoriť súbor";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodarilo odstrániť dostatok súborov záznamov pre dosiahnutie prahovej hodnoty";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Dlaždica pamäťovej hry";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Náhľad";
+"AX_IMAGE_CAPTURED_LABEL" = "Zachytený obrázok";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kotúč veľkosti %@ nie je možné umiestniť na kotúč veľkosti %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cieľ";
+"AX_TOWER_OF_HANOI_TOWER" = "Veža";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Klepnutím dvakrát umiestnite kotúč";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Klepnutím dvakrát vyberte najvrchnejší kotúč";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje kotúče o veľkostiach ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdne";
+
+"AX_GRAPH_RANGE_FORMAT" = "Rozsah od %@ do %@";
+"AX_GRAPH_AND_SEPARATOR" = " a ";
+
 

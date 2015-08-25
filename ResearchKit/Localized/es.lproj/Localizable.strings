@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ es inferior al valor mínimo permitido (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ no es un valor válido.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Dirección de correo electrónico no válida: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El texto supera la longitud máxima: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Cámara no disponible en pantalla dividida.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intento %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Cuando aparezca el círculo azul, agite rápidamente el dispositivo";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Esta actividad evalúa su habilidad para solucionar rompecabezas.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mueva toda la pila a la plataforma resaltada en el mínimo número de movimientos posible.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Pulse Empezar para comenzar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solucione el rompecabezas";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de movimientos: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No sé resolver este rompecabezas";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Paseo cronometrado";
+"TIMED_WALK_INTRO_DETAIL" = "Esta actividad mide la funcionalidad de su extremidad inferior.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Busque un lugar, preferiblemente al aire libre, donde pueda caminar unos %@ en línea recta lo más rápido posible, pero de forma segura. No disminuya la velocidad hasta que haya llegado al final del recorrido.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Pulse Siguiente para empezar.";
+"TIMED_WALK_FORM_TITLE" = "Dispositivo de ayuda";
+"TIMED_WALK_FORM_TEXT" = "Utilice el mismo dispositivo de ayuda en cada prueba.";
+"TIMED_WALK_QUESTION_TEXT" = "¿Utiliza una ortesis de pie y tobillo?";
+"TIMED_WALK_QUESTION_2_TITLE" = "¿Utiliza algún dispositivo de ayuda?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Pulse aquí para seleccionar una respuesta.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ninguno";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Un bastón";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Una muleta";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dos bastones";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dos muletas";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Caminador/caminador con ruedas";
+"TIMED_WALK_INSTRUCTION_%@" = "Camine %@ en línea recta.";
+"TIMED_WALK_INSTRUCTION_2" = "Dé la vuelta y camine hasta el punto de partida.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Pulse OK cuando haya acabado.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No hay datos";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "La Prueba de suma seriada auditiva por pasos mide su velocidad de procesamiento de información auditiva y su capacidad de cálculo.";
+"PVSAT_INTRO_TEXT" = "La Prueba de suma seriada visual por pasos mide su velocidad de procesamiento de información visual y su capacidad de cálculo.";
+"PAVSAT_INTRO_TEXT" = "La Prueba de suma seriada auditiva y visual por pasos mide su velocidad de procesamiento de información auditiva y visual y su capacidad de cálculo.";
+"PSAT_INTRO_TEXT_2_%@" = "Cada %@ segundos se muestra un dígito.\nDebe sumar cada dígito nuevo al anterior.\nAtención: No debe calcular la suma total de todos los dígitos, sino solo la suma de los dos últimos números.";
+"PSAT_CALL_TO_ACTION" = "Pulse Empezar para comenzar.";
+"PSAT_INITIAL_INSTRUCTION" = "Recuerde este primer dígito.";
+"PSAT_INSTRUCTION" = "Sume este otro dígito al anterior.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se ha podido crear el archivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No se han podido eliminar los archivos de registro suficientes para alcanzar el umbral";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Juego de memoria";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Previsualización de la captura";
+"AX_IMAGE_CAPTURED_LABEL" = "Imagen capturada";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No se puede colocar un disco de tamaño %@ en un disco de tamaño %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Objetivo";
+"AX_TOWER_OF_HANOI_TOWER" = "Torre";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Pulse dos veces para colocar el disco";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Pulse dos veces para seleccionar el disco situado más arriba";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Contiene discos con los tamaños ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vacía";
+
+"AX_GRAPH_RANGE_FORMAT" = "Rango de valores de %@ a %@";
+"AX_GRAPH_AND_SEPARATOR" = " y ";
+
 
