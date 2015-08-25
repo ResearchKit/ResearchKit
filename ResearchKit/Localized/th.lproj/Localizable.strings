@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "ความยินยอม";
-"CONSENT_NAME_FIRST" = "ชื่อ";
-"CONSENT_NAME_LAST" = "นามสกุล";
+"CONSENT_NAME_GIVEN" = "ชื่อ";
+"CONSENT_NAME_FAMILY" = "นามสกุล";
 "CONSENT_NAME_PLACEHOLDER" = "บังคับ";
 "CONSENT_REVIEW_TITLE" = "ตรวจทาน";
 "CONSENT_REVIEW_INSTRUCTION" = "ตรวจทานแบบฟอร์มด้านล่างแล้วแตะยอมรับหากคุณพร้อมดำเนินการต่อแล้ว";

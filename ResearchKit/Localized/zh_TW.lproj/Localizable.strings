@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "許可";
-"CONSENT_NAME_FIRST" = "名字";
-"CONSENT_NAME_LAST" = "姓氏";
+"CONSENT_NAME_GIVEN" = "名字";
+"CONSENT_NAME_FAMILY" = "姓氏";
 "CONSENT_NAME_PLACEHOLDER" = "必填";
 "CONSENT_REVIEW_TITLE" = "檢視";
 "CONSENT_REVIEW_INSTRUCTION" = "檢視下方的表單，準備好繼續時請點一下「同意」。";

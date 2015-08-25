@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "동의";
-"CONSENT_NAME_FIRST" = "이름";
-"CONSENT_NAME_LAST" = "성";
+"CONSENT_NAME_GIVEN" = "이름";
+"CONSENT_NAME_FAMILY" = "성";
 "CONSENT_NAME_PLACEHOLDER" = "필요함";
 "CONSENT_REVIEW_TITLE" = "검토";
 "CONSENT_REVIEW_INSTRUCTION" = "아래 양식을 검토하고 계속할 준비가 되었으면 동의를 탭하십시오.";

@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consentiment";
-"CONSENT_NAME_FIRST" = "Nom";
-"CONSENT_NAME_LAST" = "Cognoms";
+"CONSENT_NAME_GIVEN" = "Nom";
+"CONSENT_NAME_FAMILY" = "Cognoms";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatori";
 "CONSENT_REVIEW_TITLE" = "Revisió";
 "CONSENT_REVIEW_INSTRUCTION" = "Repasseu el formulari de sota i premeu Acceptar si esteu a punt per continuar.";

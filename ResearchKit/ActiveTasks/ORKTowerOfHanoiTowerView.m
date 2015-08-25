@@ -232,12 +232,12 @@ static const CGFloat BaseSpacing = 10;
     return YES;
 }
 
-- (NSString * _Nullable)accessibilityLabel {
+- (NSString *)accessibilityLabel {
     NSString *targetDisk = (self.isTargeted ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_TARGET_DISK", nil) : nil);
     return ORKAccessibilityStringForVariables(ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER", nil), targetDisk);
 }
 
-- (NSString * _Nullable)accessibilityHint {
+- (NSString *)accessibilityHint {
     if (!self.isHighLighted && [self.delegate towerOfHanoiHighlightedTowerView] != nil) {
         return ORKLocalizedString(@"AX_TOWER_OF_HANOI_PLACE_DISK", nil);
     }
@@ -260,7 +260,7 @@ static const CGFloat BaseSpacing = 10;
     return traits;
 }
 
-- (NSString * _Nullable)accessibilityValue {
+- (NSString *)accessibilityValue {
     NSString *value = (_diskSizes.count > 0 ? ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_CONTAINS", nil) : ORKLocalizedString(@"AX_TOWER_OF_HANOI_TOWER_EMPTY", nil));
     for (NSNumber *diskSize in _diskSizes) {
         value = ORKAccessibilityStringForVariables(value, diskSize.stringValue, @", ");

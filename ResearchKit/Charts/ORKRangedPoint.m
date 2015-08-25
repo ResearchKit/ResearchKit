@@ -32,6 +32,7 @@
  
 #import "ORKRangedPoint.h"
 #import "ORKHelpers.h"
+#import "ORKDefines_Private.h"
 
 
 @implementation ORKRangedPoint
@@ -63,6 +64,21 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"{min: %0.0f, max: %0.0f}", self.minimumValue, self.maximumValue];
+}
+
+#pragma mark - Accessibility
+
+- (NSString *)accessibilityLabel {
+    if (self.isUnset) {
+        return nil;
+    }
+
+    if (self.hasEmptyRange || _minimumValue == _maximumValue) {
+        return @(_maximumValue).stringValue;
+    } else {
+        NSString *rangeFormat = ORKLocalizedString(@"AX_GRAPH_RANGE_FORMAT", nil);
+        return [NSString stringWithFormat:rangeFormat, @(_minimumValue).stringValue, @(_maximumValue).stringValue];
+    }
 }
 
 @end

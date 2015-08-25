@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "موافقة";
-"CONSENT_NAME_FIRST" = "الاسم الأول";
-"CONSENT_NAME_LAST" = "اسم العائلة";
+"CONSENT_NAME_GIVEN" = "الاسم الأول";
+"CONSENT_NAME_FAMILY" = "اسم العائلة";
 "CONSENT_NAME_PLACEHOLDER" = "مطلوب";
 "CONSENT_REVIEW_TITLE" = "مراجعة";
 "CONSENT_REVIEW_INSTRUCTION" = "قم بمراجعة النموذج التالي واضغط على \"موافقة\" إذا كنت جاهزًا للمتابعة.";

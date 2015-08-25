@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Beleegyezés";
-"CONSENT_NAME_FIRST" = "Utónév";
-"CONSENT_NAME_LAST" = "Családi név";
+"CONSENT_NAME_GIVEN" = "Utónév";
+"CONSENT_NAME_FAMILY" = "Családi név";
 "CONSENT_NAME_PLACEHOLDER" = "Szükséges";
 "CONSENT_REVIEW_TITLE" = "Áttekintés";
 "CONSENT_REVIEW_INSTRUCTION" = "Tekintse át az alábbi űrlapot, majd koppintson az Elfogadom gombra, ha készen áll a folytatásra.";

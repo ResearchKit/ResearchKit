@@ -157,4 +157,22 @@
                      }];
 }
 
+#pragma mark - Accessibility
+
+- (NSArray *)accessibilityElements {
+    if (!_titleLabel || !_textLabel || !_noDataLabel) {
+        return nil;
+    }
+    
+    NSMutableArray *accessibilityElements = [[NSMutableArray alloc] init];
+    if (!_noDataLabel.hidden) {
+        [accessibilityElements addObject:_noDataLabel];
+    } else {
+        [accessibilityElements addObject:_titleLabel];
+        [accessibilityElements addObject:_textLabel];
+    }
+    
+    return accessibilityElements;
+}
+
 @end

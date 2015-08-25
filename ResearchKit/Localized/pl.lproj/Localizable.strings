@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Zgoda";
-"CONSENT_NAME_FIRST" = "Imię";
-"CONSENT_NAME_LAST" = "Nazwisko";
+"CONSENT_NAME_GIVEN" = "Imię";
+"CONSENT_NAME_FAMILY" = "Nazwisko";
 "CONSENT_NAME_PLACEHOLDER" = "Wymagane";
 "CONSENT_REVIEW_TITLE" = "Przejrzyj";
 "CONSENT_REVIEW_INSTRUCTION" = "Przejrzyj poniższy formularz i stuknij w Akceptuję, jeśli chcesz kontynuować.";

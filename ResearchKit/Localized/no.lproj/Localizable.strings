@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Samtykke";
-"CONSENT_NAME_FIRST" = "Fornavn";
-"CONSENT_NAME_LAST" = "Etternavn";
+"CONSENT_NAME_GIVEN" = "Fornavn";
+"CONSENT_NAME_FAMILY" = "Etternavn";
 "CONSENT_NAME_PLACEHOLDER" = "Kreves";
 "CONSENT_REVIEW_TITLE" = "Se gjennom";
 "CONSENT_REVIEW_INSTRUCTION" = "Se gjennom skjemaet nedenfor, og trykk på Enig hvis du er klar til å fortsette.";

@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Súhlas";
-"CONSENT_NAME_FIRST" = "Meno";
-"CONSENT_NAME_LAST" = "Priezvisko";
+"CONSENT_NAME_GIVEN" = "Meno";
+"CONSENT_NAME_FAMILY" = "Priezvisko";
 "CONSENT_NAME_PLACEHOLDER" = "Povinné";
 "CONSENT_REVIEW_TITLE" = "Skontrolovať";
 "CONSENT_REVIEW_INSTRUCTION" = "Skontrolujte formulár nižšie, a ak ste pripravení pokračovať, klepnite na Súhlasím.";

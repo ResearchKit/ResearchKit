@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "सहमति";
-"CONSENT_NAME_FIRST" = "प्रथम नाम";
-"CONSENT_NAME_LAST" = "उपनाम";
+"CONSENT_NAME_GIVEN" = "प्रथम नाम";
+"CONSENT_NAME_FAMILY" = "उपनाम";
 "CONSENT_NAME_PLACEHOLDER" = "आवश्यक";
 "CONSENT_REVIEW_TITLE" = "समीक्षा";
 "CONSENT_REVIEW_INSTRUCTION" = "नीचे दिए गए फ़ॉर्म को देखें और जारी रखने के लिए “सहमत” पर टैप करें।";
