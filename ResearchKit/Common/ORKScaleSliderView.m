@@ -126,7 +126,7 @@
             // Keep the thumb the same distance from the value label as in horizontal mode
             const CGFloat kValueLabelSliderMargin = 23.0;
             // Keep the shadow of the thumb inside the bounds
-            const CGFloat kSliderMargin = 20.0;
+            const CGFloat kSliderMargin = 50.0;
             const CGFloat kSideLabelMargin = 24;
             [self addConstraint:[NSLayoutConstraint constraintWithItem:_slider
                                                              attribute:NSLayoutAttributeCenterX
