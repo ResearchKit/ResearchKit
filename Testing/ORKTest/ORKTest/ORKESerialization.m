@@ -551,6 +551,7 @@ ret =
           PROPERTY(customAnimationURL, NSURL, NSObject, YES,
                    ^id(id url) { return [(NSURL *)url absoluteString]; },
                    ^id(id string) { return [NSURL URLWithString:string]; }),
+          PROPERTY(omitFromDocument, NSNumber, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKConsentSignature,
         nil,
@@ -758,15 +759,21 @@ ret =
         (@{
           })),
   ENTRY(ORKLocationRecorderConfiguration,
-        nil,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKLocationRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+        },
         (@{
           })),
-  ENTRY(ORKPedometerRecorderConfiguration,
-        nil,
+   ENTRY(ORKPedometerRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+         },
         (@{
           })),
-  ENTRY(ORKTouchRecorderConfiguration,
-        nil,
+   ENTRY(ORKTouchRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+         },
         (@{
           })),
   ENTRY(ORKResult,

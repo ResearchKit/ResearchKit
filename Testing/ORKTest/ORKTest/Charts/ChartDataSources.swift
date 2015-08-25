@@ -37,7 +37,7 @@ func randomColorArray(size: Int) -> [UIColor] {
     }
     
     var colors: [UIColor] = []
-    for index in 0..<size {
+    for _ in 0 ..< size {
         colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
     }
     return colors

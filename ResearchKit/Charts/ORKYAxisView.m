@@ -31,6 +31,7 @@
 
 #import "ORKYAxisView.h"
 #import "ORKGraphChartView_Internal.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat ImageVerticalPadding = 3.0;
@@ -44,6 +45,15 @@ static const CGFloat ImageVerticalPadding = 3.0;
     
     NSMutableDictionary *_tickLayersByFactor;
     NSMutableDictionary *_tickLabelsByFactor;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentGraphChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {

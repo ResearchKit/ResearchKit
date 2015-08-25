@@ -15,6 +15,8 @@
 		86B89AA51AB2C0A5001626A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */; };
 		B115EE121AC1221F001DDE62 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; };
 		B115EE131AC1221F001DDE62 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E39BA091ABF687E00C2ABE5 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B125E3D41B1BA47600FF8759 /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = B125E3D31B1BA47600FF8759 /* tap.aif */; };
+		D401B1321B070ADF000E6D3C /* TextImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */; };
 		BC9A27341B82740D00BDA84D /* TaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27321B82740D00BDA84D /* TaskListRow.swift */; };
 		BC9A27351B82740D00BDA84D /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27331B82740D00BDA84D /* TaskListViewController.swift */; };
 		BC9A273C1B82741900BDA84D /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27381B82741900BDA84D /* ImageTableViewCell.swift */; };
@@ -24,6 +26,7 @@
 		BC9A27431B82742600BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27401B82742600BDA84D /* ChartDataSources.swift */; };
 		BC9A27441B82742600BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27411B82742600BDA84D /* ChartListViewController.swift */; };
 		BC9A27451B82742600BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27421B82742600BDA84D /* ChartTableViewCells.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,8 @@
 		869230BE1AAA890A00BFE11B /* ORKCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORKCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B89A981AB2C0A5001626A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ORKCatalog/Info.plist; sourceTree = SOURCE_ROOT; };
 		86B89A9C1AB2C0A5001626A4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ORKCatalog/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		B125E3D31B1BA47600FF8759 /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = tap.aif; sourceTree = "<group>"; };
+		D401B1311B070ADF000E6D3C /* TextImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextImageTableViewCell.swift; sourceTree = "<group>"; };
 		BC9A27321B82740D00BDA84D /* TaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListRow.swift; path = Tasks/TaskListRow.swift; sourceTree = "<group>"; };
 		BC9A27331B82740D00BDA84D /* TaskListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskListViewController.swift; path = Tasks/TaskListViewController.swift; sourceTree = "<group>"; };
 		BC9A27381B82741900BDA84D /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageTableViewCell.swift; path = Results/ImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 		869230C11AAA890A00BFE11B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B125E3D31B1BA47600FF8759 /* tap.aif */,
 				86B89A981AB2C0A5001626A4 /* Info.plist */,
 				3ED967BA1AC13D37007E2D83 /* Localizable.strings */,
 			);
@@ -276,6 +282,7 @@
 			files = (
 				3E39BA001ABF683F00C2ABE5 /* Images.xcassets in Resources */,
 				3E39B9FB1ABF682D00C2ABE5 /* Main.storyboard in Resources */,
+				B125E3D41B1BA47600FF8759 /* tap.aif in Resources */,
 				3E39B9FE1ABF683700C2ABE5 /* LaunchScreen.xib in Resources */,
 				3ED967B81AC13D37007E2D83 /* Localizable.strings in Resources */,
 			);
@@ -359,6 +366,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -426,6 +434,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ORKCatalog;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,6 +450,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ORKCatalog/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = ORKCatalog;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -33,9 +33,11 @@
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKStep.h>
 #import <ResearchKit/ORKResult.h>
-
+#import <HealthKit/HealthKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class HKSampleType;
 
 /**
 
@@ -192,7 +194,7 @@ requests access to these HealthKit types.
  
  See also: `requestedHealthKitTypesForWriting`.
  */
-@property (nonatomic, copy, readonly, nullable) NSSet *requestedHealthKitTypesForReading;
+@property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForReading;
 
 /**
  The set of HealthKit types for which the task needs to request write access.
@@ -203,7 +205,7 @@ requests access to these HealthKit types.
  
  See also: `requestedHealthKitTypesForReading`.
  */
-@property (nonatomic, copy, readonly, nullable) NSSet *requestedHealthKitTypesForWriting;
+@property (nonatomic, copy, readonly, nullable) NSSet<HKObjectType *> *requestedHealthKitTypesForWriting;
 
 /**
  The set of permissions requested by the task.

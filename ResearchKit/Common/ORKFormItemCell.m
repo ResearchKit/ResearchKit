@@ -275,7 +275,7 @@ static const CGFloat kHMargin = 15.0;
     
     self.myConstraints = [NSMutableArray new];
     
-    if ((labelMinWidth) >= 0.6*boundWidth) {
+    if ((labelMinWidth) >= 0.5*boundWidth) {
 
         [self.myConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
