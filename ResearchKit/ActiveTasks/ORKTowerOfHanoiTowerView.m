@@ -262,7 +262,7 @@ static const CGFloat BaseSpacing = 10;
 
 - (NSString *)accessibilityValue {
     
-    NSString *disksString = @" ";
+    NSString *disksString = @"";
     
     for (NSNumber *diskSize in _diskSizes) {
         disksString = ORKAccessibilityStringForVariables(disksString, diskSize.stringValue, @", ");
