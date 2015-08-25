@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consimțământ";
-"CONSENT_NAME_FIRST" = "Prenume";
-"CONSENT_NAME_LAST" = "Nume de familie";
+"CONSENT_NAME_GIVEN" = "Prenume";
+"CONSENT_NAME_FAMILY" = "Nume de familie";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatoriu";
 "CONSENT_REVIEW_TITLE" = "Recapitulare";
 "CONSENT_REVIEW_INSTRUCTION" = "Recapitulați formularul de mai jos și apăsați “De acord” dacă sunteți gata să continuați.";

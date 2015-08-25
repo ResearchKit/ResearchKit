@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Згода";
-"CONSENT_NAME_FIRST" = "Ім’я";
-"CONSENT_NAME_LAST" = "Прізвище";
+"CONSENT_NAME_GIVEN" = "Ім’я";
+"CONSENT_NAME_FAMILY" = "Прізвище";
 "CONSENT_NAME_PLACEHOLDER" = "Обов’язково";
 "CONSENT_REVIEW_TITLE" = "Огляд";
 "CONSENT_REVIEW_INSTRUCTION" = "Перегляньте наведене нижче і торкніть «Погоджуюсь», якщо ви готові продовжити.";

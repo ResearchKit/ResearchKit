@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "İzin";
-"CONSENT_NAME_FIRST" = "Ad";
-"CONSENT_NAME_LAST" = "Soyad";
+"CONSENT_NAME_GIVEN" = "Ad";
+"CONSENT_NAME_FAMILY" = "Soyad";
 "CONSENT_NAME_PLACEHOLDER" = "Gerekli";
 "CONSENT_REVIEW_TITLE" = "Gözden Geçir";
 "CONSENT_REVIEW_INSTRUCTION" = "Aşağıdaki formu gözden geçirin ve sürdürmeye hazırsanız Kabul Ediyorum’a dokunun.";

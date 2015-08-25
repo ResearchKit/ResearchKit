@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Συναίνεση";
-"CONSENT_NAME_FIRST" = "Όνομα";
-"CONSENT_NAME_LAST" = "Επώνυμο";
+"CONSENT_NAME_GIVEN" = "Όνομα";
+"CONSENT_NAME_FAMILY" = "Επώνυμο";
 "CONSENT_NAME_PLACEHOLDER" = "Απαιτείται";
 "CONSENT_REVIEW_TITLE" = "Έλεγχος";
 "CONSENT_REVIEW_INSTRUCTION" = "Διαβάστε την παρακάτω φόρμα και αγγίξτε «Συμφωνώ» όταν είστε έτοιμοι να συνεχίσετε.";

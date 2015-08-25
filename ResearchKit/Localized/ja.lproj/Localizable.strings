@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "同意";
-"CONSENT_NAME_FIRST" = "名";
-"CONSENT_NAME_LAST" = "姓";
+"CONSENT_NAME_GIVEN" = "名";
+"CONSENT_NAME_FAMILY" = "姓";
 "CONSENT_NAME_PLACEHOLDER" = "必須";
 "CONSENT_REVIEW_TITLE" = "確認";
 "CONSENT_REVIEW_INSTRUCTION" = "下記のフォームを確認して、続ける場合は“同意する”をタップしてください。";

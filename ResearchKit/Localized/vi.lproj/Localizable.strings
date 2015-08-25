@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Đồng ý";
-"CONSENT_NAME_FIRST" = "Tên";
-"CONSENT_NAME_LAST" = "Họ";
+"CONSENT_NAME_GIVEN" = "Tên";
+"CONSENT_NAME_FAMILY" = "Họ";
 "CONSENT_NAME_PLACEHOLDER" = "Bắt buộc";
 "CONSENT_REVIEW_TITLE" = "Xem lại";
 "CONSENT_REVIEW_INSTRUCTION" = "Hãy xem xét biểu mẫu bên dưới và chạm vào Đồng ý nếu bạn sẵn sàng tiếp tục.";

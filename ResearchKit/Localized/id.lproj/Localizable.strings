@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Persetujuan";
-"CONSENT_NAME_FIRST" = "Nama Depan";
-"CONSENT_NAME_LAST" = "Nama Belakang";
+"CONSENT_NAME_GIVEN" = "Nama Depan";
+"CONSENT_NAME_FAMILY" = "Nama Belakang";
 "CONSENT_NAME_PLACEHOLDER" = "Diperlukan";
 "CONSENT_REVIEW_TITLE" = "Tinjauan";
 "CONSENT_REVIEW_INSTRUCTION" = "Tinjau formulir di bawah, dan ketuk Setuju jika Anda siap melanjutkan.";

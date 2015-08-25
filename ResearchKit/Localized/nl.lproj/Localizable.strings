@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Toestemming";
-"CONSENT_NAME_FIRST" = "Voornaam";
-"CONSENT_NAME_LAST" = "Achternaam";
+"CONSENT_NAME_GIVEN" = "Voornaam";
+"CONSENT_NAME_FAMILY" = "Achternaam";
 "CONSENT_NAME_PLACEHOLDER" = "Vereist";
 "CONSENT_REVIEW_TITLE" = "Bekijk";
 "CONSENT_REVIEW_INSTRUCTION" = "Lees het formulier hieronder door en tik op 'Akkoord' als u gereed bent om verder te gaan.";
