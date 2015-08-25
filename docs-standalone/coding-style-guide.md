@@ -320,7 +320,24 @@ Generally, it's a good idea to make the entirety of headers as *audited for null
 
 Do not add *nullability annotations* to implementation files.
 
-See **Section 3** for an nullability-annotated *Header File Example*.
+See **Section 3** for a nullability-annotated *Header File Example*.
+
+
+#### 2.6. Lightweight Generics
+
+Always use [*lightweight generic parametrization*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID173) when declaring `NSArray`, `NSSet` and `NSDictionary` types. This tells the compiler which kind of objects these *Foundation collection classes* will contain. It improves type-safety and interoperability with *Swift*.
+
+Use the same whitespace rules as when declaring *protocol conformance*:
+
+    // DO
+    @property NSArray<ORKStep *> *steps;
+    @property NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask *> *tasks;
+
+    // DON'T
+    @property NSArray <ORKStep *>*steps;
+    @property NSDictionary<NSString *,ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask*> *tasks;
 
 
 ### 3. Header File Example
