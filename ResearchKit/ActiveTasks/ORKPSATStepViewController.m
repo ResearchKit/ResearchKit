@@ -46,7 +46,7 @@
 @property (nonatomic, strong) NSArray *digits;
 @property (nonatomic, assign) NSUInteger currentDigitIndex;
 @property (nonatomic, assign) NSInteger currentAnswer;
-@property (nonatomic, strong) ORKActiveStepTimer *timeoutTimer;
+@property (nonatomic, strong) ORKActiveStepTimer *clearDigitsTimer;
 @property (nonatomic, assign) NSTimeInterval answerStart;
 @property (nonatomic, assign) NSTimeInterval answerEnd;
 
@@ -101,19 +101,6 @@
     self.timerUpdateInterval = [self psatStep].interStimulusInterval;
 }
 
-- (void)setupTimeoutTimer {
-    [self timeoutTimerFired];
-    __weak typeof(self) weakSelf = self;
-    self.timeoutTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self psatStep].stepDuration
-                                                            interval:[self psatStep].interStimulusInterval
-                                                             runtime:0
-                                                             handler:^(ORKActiveStepTimer *timer, BOOL finished) {
-                                                                 typeof(self) strongSelf = weakSelf;
-                                                                 [strongSelf timeoutTimerFired];
-                                                             }];
-    [self.timeoutTimer resume];
-}
-
 - (ORKStepResult *)result {
     
     ORKStepResult *sResult = [super result];
@@ -164,30 +151,37 @@
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
     
-    if ([self psatStep].presentationMode & ORKPSATPresentationModeVisual) {
+    if ([self psatStep].presentationMode & ORKPSATPresentationModeVisual &&
+        ([self psatStep].interStimulusInterval - [self psatStep].stimulusDuration) > 0.05 ) {
+        
+        // Don't show `-` if the difference between stimulusDuration and interStimulusInterval is less than timer's resolution.
         __weak typeof(self) weakSelf = self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self psatStep].stimulusDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            typeof(self) strongSelf = weakSelf;
-            [strongSelf setupTimeoutTimer];
-        });
+        self.clearDigitsTimer = [[ORKActiveStepTimer alloc] initWithDuration:[self psatStep].stepDuration
+                                                                    interval:[self psatStep].interStimulusInterval
+                                                                     runtime:-[self psatStep].stimulusDuration
+                                                                     handler:^(ORKActiveStepTimer *timer, BOOL finished) {
+                                                                         typeof(self) strongSelf = weakSelf;
+                                                                         [strongSelf clearDigitsTimerFired];
+                                                                     }];
+        [self.clearDigitsTimer resume];
     }
     
     [super start];
 }
 
 - (void)suspend {
-    [self.timeoutTimer pause];
+    [self.clearDigitsTimer pause];
     [super suspend];
 }
 
 - (void)resume {
-    [self.timeoutTimer resume];
+    [self.clearDigitsTimer resume];
     [super resume];
 }
 
 - (void)finish {
-    [self.timeoutTimer reset];
-    self.timeoutTimer = nil;
+    [self.clearDigitsTimer reset];
+    self.clearDigitsTimer = nil;
     [super finish];
 }
 
@@ -215,7 +209,7 @@
     [super countDownTimerFired:timer finished:finished];
 }
 
-- (void)timeoutTimerFired {
+- (void)clearDigitsTimerFired {
     [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:@(-1)];
 }
 
