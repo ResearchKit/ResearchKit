@@ -359,12 +359,11 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
         }
 
         // Add dummy points for empty data points
-        if (_dataPoints.count < self.numberOfXAxisPoints ) {
+        NSInteger emptyPointsCount = self.numberOfXAxisPoints - ((NSArray *)_dataPoints[plotIndex]).count;
+        for (NSInteger idx = 0; idx < emptyPointsCount; idx++) {
             ORKRangedPoint *dummyPoint = [[ORKRangedPoint alloc] init];
-            for (NSInteger idx = 0; idx < self.numberOfXAxisPoints - ((NSArray *)_dataPoints[plotIndex]).count; idx++) {
                 [_dataPoints[plotIndex] addObject:dummyPoint];
             }
-        }
         
     }
 }
@@ -426,7 +425,8 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
 
 - (void)updateYAxisPoints {
     [_yAxisPoints removeAllObjects];
-    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    NSInteger numberOfPlots = [self numberOfPlots];
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         [_yAxisPoints addObject:[self normalizedCanvasPointsForPlotIndex:plotIndex canvasHeight:_plotView.bounds.size.height]];
     }
 }
@@ -450,9 +450,10 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
         _verticalReferenceLineLayers = [NSMutableArray new];
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
-        for (NSUInteger i = 1; i < [self numberOfXAxisPoints]; i++) {
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
+        for (NSInteger i = 1; i < numberOfXAxisPoints; i++) {
             CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
-            CGFloat positionOnXAxis = xAxisPoint(i, [self numberOfXAxisPoints], plotViewWidth);
+            CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, plotViewWidth);
             verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
             [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
             [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
@@ -500,7 +501,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         [_pointLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     }
     [_pointLayers removeAllObjects];
-    for (NSInteger plotIndex = 0; plotIndex < self.numberOfPlots; plotIndex++) {
+    
+    NSInteger numberOfPlots = [self numberOfPlots];
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
@@ -531,10 +534,14 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)layoutPointLayers {
-    NSUInteger numberOfPlots = [self numberOfPlots];
-    if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
+    NSInteger numberOfPlots = [self numberOfPlots];
+    
+    if (_yAxisPoints.count != numberOfPlots) {
+        // avoid layout if points have not been normalized yet
+        return;
+    }
 
-    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         [self layoutPointLayersForPlotIndex:plotIndex];
     }
 }
@@ -565,7 +572,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         [_lineLayers[plotIndex] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     }
     [_lineLayers removeAllObjects];
-    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    
+    NSInteger numberOfPlots = [self numberOfPlots];
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
         NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
         [self.lineLayers addObject:currentPlotLineLayers];
@@ -576,10 +585,14 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)layoutLineLayers {
-    NSUInteger numberOfPlots = [self numberOfPlots];
-    if (_yAxisPoints.count != numberOfPlots) { return; } // avoid layout if points have not been normalized yet
     
-    for (NSInteger plotIndex = 0; plotIndex < [self numberOfPlots]; plotIndex++) {
+    NSInteger numberOfPlots = [self numberOfPlots];
+    if (_yAxisPoints.count != numberOfPlots) {
+        // avoid layout if points have not been normalized yet
+        return;
+    }
+    
+    for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         if ([self shouldDrawLinesForPlotIndex:plotIndex]) {
             [self layoutLineLayersForPlotIndex:plotIndex];
         }

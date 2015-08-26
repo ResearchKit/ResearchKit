@@ -152,7 +152,7 @@ static const CGFloat LastLabelHeight = 20.0;
         _titleLabels = [NSMutableArray new];
         _titleTickLayers = [NSMutableArray new];
 
-        NSUInteger numberOfTitleLabels = [_parentGraphChartView numberOfXAxisPoints];
+        NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
         for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
             NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtIndex:i];
             UILabel *label = [UILabel new];
