@@ -987,7 +987,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
         
         // Data points for all plots at any given pointIndex must be included (eg "2 and 4" or "range from 1-2 and range from 4-5").
         NSString *value = nil;
-        for (NSInteger plotIndex = 0; plotIndex < self.numberOfPlots; plotIndex++) {
+        for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
             
             // Boundary check
             if ( pointIndex < [_dataPoints[plotIndex] count] ) {
