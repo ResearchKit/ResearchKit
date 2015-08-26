@@ -280,6 +280,7 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (void)updateLegendView {
     if ([_dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
+        [_legendView removeFromSuperview];
         _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
         [self addSubview:_legendView];
         _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
