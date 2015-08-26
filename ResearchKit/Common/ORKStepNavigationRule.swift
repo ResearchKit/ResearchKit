@@ -31,13 +31,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 public extension ORKPredicateStepNavigationRule {
-    convenience init(resultPredicatesAndDestionationStepIdentifiers tuples: [ (resultPredicate: NSPredicate, destinationStepIdentifier: String) ], defaultStepIdentifier: String? = nil ) {
+    convenience init(resultPredicatesAndDestionationStepIdentifiers tuples: [ (resultPredicate: NSPredicate, destinationStepIdentifier: String) ], defaultStepIdentifierOrNil: String? = nil ) {
         var resultPredicates: [NSPredicate] = []
         var destinationStepIdentifiers: [String] = []
         for tuple in tuples {
             resultPredicates.append(tuple.resultPredicate)
             destinationStepIdentifiers.append(tuple.destinationStepIdentifier)
         }
-        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifier);
+        self.init(resultPredicates: resultPredicates, destinationStepIdentifiers: destinationStepIdentifiers, defaultStepIdentifier: defaultStepIdentifierOrNil, validateArrays: true);
     }
 }
