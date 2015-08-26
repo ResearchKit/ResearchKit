@@ -90,11 +90,11 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
        return plotPoints[plotIndex].count
     }
     
-    func maximumValueForgraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 70
     }
     
-    func minimumValueForgraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 0
     }
     

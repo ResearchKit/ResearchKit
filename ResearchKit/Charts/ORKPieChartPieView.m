@@ -197,6 +197,9 @@ static const CGFloat InterAnimationDelay = 0.05;
                 label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
                 [label sizeToFit];
                 
+                // Only if there are no legends
+                label.isAccessibilityElement = ![_parentPieChartView.dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)];
+                
                 // Calculate the angle to the centre of this segment in radians
                 CGFloat angle = 0;
                 if (_parentPieChartView.drawsClockwise) {
@@ -394,6 +397,12 @@ static const CGFloat InterAnimationDelay = 0.05;
         
         cumulativeValue += value;
     }
+}
+
+#pragma mark - Accessibility
+
+- (NSArray *)accessibilityElements {
+    return _pieSections;
 }
 
 @end

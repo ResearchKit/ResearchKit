@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consentiment";
-"CONSENT_NAME_FIRST" = "Nom";
-"CONSENT_NAME_LAST" = "Cognoms";
+"CONSENT_NAME_GIVEN" = "Nom";
+"CONSENT_NAME_FAMILY" = "Cognoms";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatori";
 "CONSENT_REVIEW_TITLE" = "Revisió";
 "CONSENT_REVIEW_INSTRUCTION" = "Repasseu el formulari de sota i premeu Acceptar si esteu a punt per continuar.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ supera el valor màxim permès (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ és menys que el valor mínim permès (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ no és un valor vàlid.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Adreça electrònica no vàlida: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El contingut del text supera la llargada màxima: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "La càmera no està disponible amb la pantalla dividida.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Intent %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agiteu ràpidament el dispositiu quan aparegui el cercle blau";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aquesta activitat valora la teva capacitat de resoldre trencaclosques.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Traslladeu tota la pila a la plataforma ressaltada en el mínim de moviments possibles.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Per iniciar, premeu Començar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resoleu el joc";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Nombre de moviments: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "No puc resoldre aquest joc";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Caminada cronometrada";
+"TIMED_WALK_INTRO_DETAIL" = "Aquesta activitat mesura la funcionalitat de les teves extremitats inferiors.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Busqueu un lloc, preferiblement a l’aire lliure, on pugueu caminar aproximadament %@ en línia recta tan ràpid com pugueu, amb total seguretat. No abaixeu el ritme fins que hàgiu passat la línia d’arribada.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Premeu Següent per continuar.";
+"TIMED_WALK_FORM_TITLE" = "Tipus d’assistència";
+"TIMED_WALK_FORM_TEXT" = "Utilitzeu el mateix tipus d’assistència per a cada prova.";
+"TIMED_WALK_QUESTION_TEXT" = "Porteu ortesi al turmell?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Feu servir algun tipus d’assistència?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Premeu aquí per seleccionar una resposta.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Cap";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Un bastó";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Una crossa";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dos bastons";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dues crosses";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Caminador";
+"TIMED_WALK_INSTRUCTION_%@" = "Camineu fins a %@ en línia recta.";
+"TIMED_WALK_INSTRUCTION_2" = "Feu mitja volta i torneu allà on heu començat.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Premeu Fet quan hàgiu acabat.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sense dades";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "El PAST (test auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i la teva habilitat de càlcul.";
+"PVSAT_INTRO_TEXT" = "El PAVT (test visual de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació visual i la teva habilitat de càlcul.";
+"PAVSAT_INTRO_TEXT" = "El PAVST (test visual i auditiu de suma en sèrie a ritme) mesura la teva velocitat de processament d’informació auditiva i visual i la teva habilitat de càlcul.";
+"PSAT_INTRO_TEXT_2_%@" = "Es presenten números solts cada %@ segons.\nHeu de sumar cada nou número al número immediatament anterior.\nAtenció: no has d’anar calculant la suma total, sinó només la suma dels dos últims números.";
+"PSAT_CALL_TO_ACTION" = "Per iniciar, premeu Començar.";
+"PSAT_INITIAL_INSTRUCTION" = "Recordeu aquest primer dígit.";
+"PSAT_INSTRUCTION" = "Sumeu aquest número a l’anterior.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Joc de memòria";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Previsualització de la captura";
+"AX_IMAGE_CAPTURED_LABEL" = "Imatge capturada";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "No s’ha pogut situar el disc de mida %@ sobre el disc de mida %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Objectiu";
+"AX_TOWER_OF_HANOI_TOWER" = "Torre";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Premeu dos cops per situar el disc";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Premeu dos cops per seleccionar el disc superior";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Té disc amb mides ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Buidar";
+
+"AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
+"AX_GRAPH_AND_SEPARATOR" = " i ";
+
 

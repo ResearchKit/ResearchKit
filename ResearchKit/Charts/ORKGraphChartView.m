@@ -38,6 +38,7 @@
 #import "ORKYAxisView.h"
 #import "ORKRangedPoint.h"
 #import "ORKDefines_Private.h"
+#import "ORKAccessibility.h"
 
 
 const CGFloat ORKGraphChartViewLeftPadding = 10.0;
@@ -121,6 +122,11 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateContentSizeCategoryFonts)
                                                  name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_axVoiceOverStatusChanged:)
+                                                 name:UIAccessibilityVoiceOverStatusChanged
                                                object:nil];
 }
 
@@ -355,7 +361,7 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
         // Add dummy points for empty data points
         if (_dataPoints.count < self.numberOfXAxisPoints ) {
             ORKRangedPoint *dummyPoint = [[ORKRangedPoint alloc] init];
-            for (NSInteger idx = 0; idx < self.numberOfXAxisPoints - _dataPoints.count; idx++) {
+            for (NSInteger idx = 0; idx < self.numberOfXAxisPoints - ((NSArray *)_dataPoints[plotIndex]).count; idx++) {
                 [_dataPoints[plotIndex] addObject:dummyPoint];
             }
         }
@@ -498,6 +504,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
         [self updatePointLayersForPlotIndex:plotIndex];
+    }
+    
+    // We perform the same double-looping when creating the elements and there is no need to do that if Voice Over is not running.
+    if (!UIAccessibilityIsVoiceOverRunning()) {
+        [self _axCreateAccessibilityElements];
     }
 }
 
@@ -971,6 +982,47 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
     [self throwOverrideException];
     return NO;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+#pragma mark - Accessibility Helpers
+
+- (void)_axVoiceOverStatusChanged:(NSNotification *)notification {
+    if (UIAccessibilityIsVoiceOverRunning()) {
+        [self _axCreateAccessibilityElements];
+    }
+}
+
+- (void)_axCreateAccessibilityElements {
+    NSInteger maxNumberOfPoints = [[_dataPoints valueForKeyPath:@"@max.@count.self"] integerValue];
+    NSMutableArray *accessibilityElements = [[NSMutableArray alloc] initWithCapacity:maxNumberOfPoints];
+    
+    for (NSInteger pointIndex = 0; pointIndex < maxNumberOfPoints; pointIndex++) {
+        ORKLineGraphAccessibilityElement *element = [[ORKLineGraphAccessibilityElement alloc] initWithAccessibilityContainer:self index:pointIndex maxIndex:maxNumberOfPoints];
+        
+        // Data points for all plots at any given pointIndex must be included (eg "2 and 4" or "range from 1-2 and range from 4-5").
+        NSString *value = nil;
+        for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
+            
+            // Boundary check
+            if ( pointIndex < [_dataPoints[plotIndex] count] ) {
+                NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
+                ORKRangedPoint *rangePoint = _dataPoints[plotIndex][pointIndex];
+                value = ORKAccessibilityStringForVariables(value, and, rangePoint.accessibilityLabel);
+            }
+        }
+        
+        element.accessibilityLabel = [self.dataSource graphChartView:self titleForXAxisAtIndex:pointIndex];
+        element.accessibilityValue = value;
+        [accessibilityElements addObject:element];
+    }
+    
+    self.accessibilityElements = accessibilityElements;
 }
 
 @end
