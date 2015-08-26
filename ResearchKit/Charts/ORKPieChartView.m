@@ -38,6 +38,7 @@
 #import "ORKPieChartTitleTextView.h"
 #import "ORKSkin.h"
 #import "ORKDefines_Private.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;
@@ -294,7 +295,10 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (void)updateLegendView {
     if ([_dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
-        [_legendView removeFromSuperview];
+        if (_legendView) {
+            [_legendView removeFromSuperview];
+            ORKRemoveConstraintsForRemovedViews(_variableConstraints, @[_legendView]);
+        }
         _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
         [self addSubview:_legendView];
         _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
@@ -314,9 +318,15 @@ static const CGFloat PieToLegendPadding = 8.0;
     }
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [_legendView invalidateIntrinsicContentSize];
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
+    [self setNeedsLayout];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
     [self setNeedsLayout];
 }
 
