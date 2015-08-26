@@ -335,8 +335,16 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
 #pragma mark - Layout
 
 - (void)setBounds:(CGRect)bounds {
-    BOOL sizeChanged = !CGRectEqualToRect(bounds, self.bounds);
+    BOOL sizeChanged = !CGSizeEqualToSize(bounds.size, self.bounds.size);
     [super setBounds:bounds];
+    if (sizeChanged) {
+        [self setNeedsLayout];
+    }
+}
+
+- (void)setFrame:(CGRect)frame {
+    BOOL sizeChanged = !CGSizeEqualToSize(frame.size, self.frame.size);
+    [super setFrame:frame];
     if (sizeChanged) {
         [self setNeedsLayout];
     }
