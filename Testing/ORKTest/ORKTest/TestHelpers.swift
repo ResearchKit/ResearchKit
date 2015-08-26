@@ -105,7 +105,7 @@ import ResearchKit
         // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
         let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("formFeeling", expectedString: "good")
         let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("formMood", expectedString: "good")
-        let predicateGoodMoodAndFeeling: NSPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateGoodFeeling, predicateGoodMood])
+        let predicateGoodMoodAndFeeling: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
             [ (predicateGoodMoodAndFeeling, "survey_skipped") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "introForm")
@@ -122,9 +122,7 @@ import ResearchKit
         let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("symptom", expectedString: "headache")
         
         // User didn't chose headache at the symptom step
-        let predicateNotHeadache: NSPredicate = NSCompoundPredicate.notPredicateWithSubpredicate(predicateHeadache)
-
-        predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [predicateNotHeadache], destinationStepIdentifiers: ["other_symptom"] )
+        let predicateNotHeadache: NSPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
 
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
             [ (predicateNotHeadache, "other_symptom") ])
@@ -141,8 +139,8 @@ import ResearchKit
         // User chose NO at the severity step
         let predicateSevereNo: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResultWithResultIdentifier("severity", expectedAnswer: false)
         
-        let predicateSevereHeadache: NSPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateHeadache, predicateSevereYes])
-        let predicateLightHeadache: NSPredicate = NSCompoundPredicate.andPredicateWithSubpredicates([predicateHeadache, predicateSevereNo])
+        let predicateSevereHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereYes])
+        let predicateLightHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereNo])
         
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
             [ (predicateSevereHeadache, "severe_headache"), (predicateLightHeadache, "light_headache") ])

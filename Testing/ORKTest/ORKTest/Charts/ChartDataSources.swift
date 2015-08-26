@@ -43,7 +43,7 @@ class PieChartDataSource: NSObject, ORKPieChartViewDataSource {
         }
         
         var colors: [UIColor] = []
-        for index in 0..<number {
+        for _ in 0..<number {
             colors.append(UIColor(red: random(), green: random(), blue: random(), alpha: 1))
         }
         return colors
