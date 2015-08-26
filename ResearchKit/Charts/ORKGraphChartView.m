@@ -429,10 +429,10 @@ inline static CALayer *graphVerticalReferenceLineLayerWithTintColor(UIColor *tin
         _verticalReferenceLineLayers = [NSMutableArray new];
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
-        NSInteger numberOfXAxisPoints = [self numberOfXAxisPoints];
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         for (NSUInteger i = 1; i < numberOfXAxisPoints; i++) {
             CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithTintColor(_referenceLineColor, plotViewHeight);
-            CGFloat positionOnXAxis = xAxisPoint(i, [self numberOfXAxisPoints], plotViewWidth);
+            CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, plotViewWidth);
             verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
             [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
             [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
@@ -481,7 +481,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
     }
     [_pointLayers removeAllObjects];
     
-    NSInteger numberOfPlots = self.numberOfPlots;
+    NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         NSMutableArray *currentPlotPointLayers = [NSMutableArray new];
         [_pointLayers addObject:currentPlotPointLayers];
@@ -513,7 +513,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
 }
 
 - (void)layoutPointLayers {
-    NSUInteger numberOfPlots = [self numberOfPlots];
+    NSInteger numberOfPlots = [self numberOfPlots];
     
     if (_yAxisPoints.count != numberOfPlots) {
         // avoid layout if points have not been normalized yet
@@ -552,7 +552,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
     }
     [_lineLayers removeAllObjects];
     
-    NSUInteger numberOfPlots = [self numberOfPlots];
+    NSInteger numberOfPlots = [self numberOfPlots];
     for (NSInteger plotIndex = 0; plotIndex < numberOfPlots; plotIndex++) {
         // Add array even if it should not draw lines so all layer arays have the same number of elements for animating purposes
         NSMutableArray *currentPlotLineLayers = [NSMutableArray new];
