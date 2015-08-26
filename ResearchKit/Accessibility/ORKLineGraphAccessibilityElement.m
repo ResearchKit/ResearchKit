@@ -28,8 +28,35 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-// Shared header for accessibility functionality.
-#import "UIView+ORKAccessibility.h"
-#import "ORKAccessibilityFunctions.h"
 #import "ORKLineGraphAccessibilityElement.h"
+
+@interface ORKLineGraphAccessibilityElement()
+@property (assign, nonatomic) NSInteger index;
+@property (assign, nonatomic) NSInteger maxIndex;
+@end
+
+@implementation ORKLineGraphAccessibilityElement
+
+- (nonnull instancetype)initWithAccessibilityContainer:(nonnull UIView *)container index:(NSInteger)index maxIndex:(NSInteger)maxIndex {
+    self = [super initWithAccessibilityContainer:container];
+    if (self) {
+        self.index = index;
+        self.maxIndex = maxIndex;
+    }
+    return self;
+}
+
+- (CGRect)accessibilityFrame {
+    if (self.maxIndex == 0) {
+        return [super accessibilityFrame];
+    }
+    
+    CGRect containerFrame = [self.accessibilityContainer frame];
+    CGFloat height = CGRectGetHeight(containerFrame);
+    CGFloat width = CGRectGetWidth(containerFrame) / self.maxIndex;
+    CGFloat x = self.index * width;
+    
+    return UIAccessibilityConvertFrameToScreenCoordinates(CGRectMake(x, 0, width, height), self.accessibilityContainer);
+}
+
+@end

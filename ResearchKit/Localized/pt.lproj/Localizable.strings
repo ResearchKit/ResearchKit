@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consentimento";
-"CONSENT_NAME_FIRST" = "Nome";
-"CONSENT_NAME_LAST" = "Sobrenome";
+"CONSENT_NAME_GIVEN" = "Nome";
+"CONSENT_NAME_FAMILY" = "Sobrenome";
 "CONSENT_NAME_PLACEHOLDER" = "Obrigatório";
 "CONSENT_REVIEW_TITLE" = "Revisão";
 "CONSENT_REVIEW_INSTRUCTION" = "Analise o formulário abaixo e toque em Aceitar se estiver pronto para continuar.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ excede o valor máximo permitido (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ é menor que o valor mínimo permitido (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ não é um valor válido.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Endereço de e-mail inválido: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conteúdo de texto excedendo duração máxima: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "A câmera não está disponível na tela dividia.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativa %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agite o dispositivo rapidamente quando o círculo azul aparecer";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanói";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Esta atividade avalia sua capacidade para resolver quebra-cabeças.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mova toda a pilha para a plataforma em destaque usando o mínimo de movimentos possíveis.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toque em Iniciar para começar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solucione o Quebra-cabeça";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de Movimentos: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo solucionar este quebra-cabeça";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Caminhada Cronometrada";
+"TIMED_WALK_INTRO_DETAIL" = "Esta atividade mede o funcionamento de suas extremidades inferiores.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Encontre um local, de preferência ao ar livre, onde você possa andar por %@ em linha reta o mais rápido que puder com segurança. Não desacelere até ultrapassar a linha de chegada.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Toque em Seguinte para começar.";
+"TIMED_WALK_FORM_TITLE" = "Dispositivo assistivo";
+"TIMED_WALK_FORM_TEXT" = "Use o mesmo dispositivo assistivo em cada teste.";
+"TIMED_WALK_QUESTION_TEXT" = "Você usa uma órtese no tornozelo?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Você usa um dispositivo assistivo?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Toque aqui para selecionar uma resposta.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nenhum";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Bengala Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Muleta Unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bengala Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Muleta Bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Andador/Rodador";
+"TIMED_WALK_INSTRUCTION_%@" = "Ande por até %@ em linha reta.";
+"TIMED_WALK_INSTRUCTION_2" = "Vire-se e volte para o local onde você começou.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Toque em OK ao concluir.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nenhum Dado";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "TASAM";
+"PVSAT_TITLE" = "TASVM";
+"PAVSAT_TITLE" = "TASAVM";
+"PASAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Audição Medida processa a velocidade e capacidade de calcular para medir suas informações auditivas.";
+"PVSAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Visão Medida processa a velocidade e capacidade de calcular para medir suas informações visuais.";
+"PAVSAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Audição e Visão Medidas processa a velocidade e capacidade de calcular para medir suas informações auditivas e visuais.";
+"PSAT_INTRO_TEXT_2_%@" = "Dígitos únicos são apresentados a cada %@ segundos.\nVocê deve adicionar cada novo dígito ao dígito anterior.\nAtenção, não calcule um total cumulativo, apenas a soma dos últimos dois números.";
+"PSAT_CALL_TO_ACTION" = "Toque em Iniciar para começar.";
+"PSAT_INITIAL_INSTRUCTION" = "Memorize este primeiro dígito.";
+"PSAT_INSTRUCTION" = "Adicione esse novo dígito ao anterior.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar o arquivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Não foi possível remover arquivos de registro suficientes para alcançar o limite";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Peça do jogo de memória";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Pré-visualização da captura";
+"AX_IMAGE_CAPTURED_LABEL" = "Imagem capturada";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Não pôde colocar o disco com %@ de tamanho no disco com %@ de tamanho";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Destino";
+"AX_TOWER_OF_HANOI_TOWER" = "Torre";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Toque duas vezes para posicionar o disco";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Toque duas vezes para selecionar o disco mais acima";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tem disco com tamanhos ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Esvaziar";
+
+"AX_GRAPH_RANGE_FORMAT" = "Varia entre %@ e %@";
+"AX_GRAPH_AND_SEPARATOR" = " e ";
+
 
