@@ -109,7 +109,6 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
-    
     CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
     
     if (fillLayer == nil) {
@@ -156,7 +155,6 @@ const CGFloat FillColorAlpha = 0.4;
     [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
         
     fillLayer.path = fillPath.CGPath;
-    
 }
 
 #pragma mark - Graph Calculations
@@ -234,7 +232,6 @@ const CGFloat FillColorAlpha = 0.4;
 #pragma mark - Animations
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    
     [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
         [fillLayer removeAllAnimations];
         fillLayer.opacity = 0;
