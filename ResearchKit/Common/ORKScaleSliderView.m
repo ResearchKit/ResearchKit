@@ -137,9 +137,15 @@
                                                               constant:0.0]];
             
             [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=kValueLabelSliderMargin)-[_slider]-(>=kSliderMargin)-|"
                                                      options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+                                                       views:views]];
+            
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=8)-[_rightRangeDescriptionLabel]"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:nil
                                                        views:views]];
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[rightRangeView(==leftRangeView)]"
