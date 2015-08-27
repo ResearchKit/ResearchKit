@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Согласие";
-"CONSENT_NAME_FIRST" = "Имя";
-"CONSENT_NAME_LAST" = "Фамилия";
+"CONSENT_NAME_GIVEN" = "Имя";
+"CONSENT_NAME_FAMILY" = "Фамилия";
 "CONSENT_NAME_PLACEHOLDER" = "Обязательно";
 "CONSENT_REVIEW_TITLE" = "Проверка";
 "CONSENT_REVIEW_INSTRUCTION" = "Проверьте приведенную ниже форму и коснитесь «Принимаю», если Вы готовы продолжить.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ превышает максимально допустимое значение (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ меньше минимально допустимого значения (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "Недопустимое значение: %@.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Недействительный адрес электронной почты: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Превышены максимальная длина текста: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Камера недоступна в разделенном экране.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A(II)Rh+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Попытка %@ из %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "При появлении синего круга быстро встряхните устройство";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Ханойская башня";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "В этом упражнении проверяется способность решать задачи.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Переместите всю стопку на отмеченное цветом место за наименьшее число ходов.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать»";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Решить задачу";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Число ходов: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Я не могу решить эту задачу";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Ходьба на время";
+"TIMED_WALK_INTRO_DETAIL" = "В этом упражнении проверяется работоспособность ног.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Найдите место, предпочтительно снаружи, где Вы смогли бы безопасно идти %@ по прямой линии с максимальной скоростью. Не замедляйте шаг, пока не дойдете до финиша.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Чтобы начать, коснитесь «Далее».";
+"TIMED_WALK_FORM_TITLE" = "Вспомогательные приспособления";
+"TIMED_WALK_FORM_TEXT" = "Используйте одно и тоже вспомогательное приспособление для всех упражнений.";
+"TIMED_WALK_QUESTION_TEXT" = "Вы носите голеностопный ортез?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Вы пользуетесь вспомогательными приспособлениями?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Коснитесь здесь, чтобы выбрать ответ.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Нет";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Одна трость";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Один костыль";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Трости";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Костыли";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Ходунки/ролятор";
+"TIMED_WALK_INSTRUCTION_%@" = "Пройдите прямо %@.";
+"TIMED_WALK_INSTRUCTION_2" = "Развернитесь и пройдите до исходного местоположения.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Коснитесь «Готово» после завершения.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Нет данных";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "В слуховом тесте на сложение с заданным темпом измеряются способность обрабатывать аудиальную информацию, а также способность к вычислениям.";
+"PVSAT_INTRO_TEXT" = "В визуальном тесте на сложение с заданным темпом измеряются способность обрабатывать визуальную информацию, а также способность к вычислениям.";
+"PAVSAT_INTRO_TEXT" = "В слуховом и визуальном тестах на сложение с заданным темпом измеряются способности обрабатывать аудиальную и визуальную информацию, а также способность к вычислениям.";
+"PSAT_INTRO_TEXT_2_%@" = "Каждые %@ с будет показано однозначное число.\nВам необходимо прибавить каждое новое число к предыдущему.\nВнимание! Общую сумму вычислять не нужно, только сумму последних двух чисел.";
+"PSAT_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
+"PSAT_INITIAL_INSTRUCTION" = "Запомните эту первую цифру.";
+"PSAT_INSTRUCTION" = "Прибавьте это новое число к предыдущему.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не удалось создать файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не удалось удалить файлы журналов, чтобы освободить достаточно места";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Игра на проверку памяти";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Просмотр изображения";
+"AX_IMAGE_CAPTURED_LABEL" = "Отснятое изображение";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Нельзя положить диск размера %@ на диск размера %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Цель";
+"AX_TOWER_OF_HANOI_TOWER" = "Башня";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Коснитесь дважды, чтобы положить диск";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Коснитесь дважды, чтобы выбрать самый верхний диск";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Содержит диск размера ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
+
+"AX_GRAPH_RANGE_FORMAT" = "Диапазон от %@ до %@";
+"AX_GRAPH_AND_SEPARATOR" = " и ";
+
 

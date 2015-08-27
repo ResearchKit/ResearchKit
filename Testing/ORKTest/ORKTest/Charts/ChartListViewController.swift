@@ -1,5 +1,6 @@
 /*
 Copyright (c) 2015, James Cox. All rights reserved.
+Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -44,10 +45,15 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     
-    let pieChartDataSource = PieChartDataSource()
+    let colorlessPieChartDataSource = ColorlessPieChartDataSource()
+    let randomColorPieChartDataSource = RandomColorPieChartDataSource()
+    
     let lineGraphChartDataSource = LineGraphChartDataSource()
+    let coloredLineGraphChartDataSource = ColoredLineGraphChartDataSource()
+    
     let discreteGraphChartDataSource = DiscreteGraphChartDataSource()
     let pieChartIdentifier = "PieChartCell"
+    
     let lineGraphChartIdentifier = "LineGraphChartCell"
     let discreteGraphChartIdentifier = "DiscreteGraphChartCell"
     
@@ -66,12 +72,14 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         // ORKPieChartView
         pieChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(pieChartIdentifier) as! PieChartTableViewCell
         let pieChartView = pieChartTableViewCell.pieChartView
-        pieChartView.dataSource = pieChartDataSource
+        pieChartView.dataSource = randomColorPieChartDataSource
         // Optional custom configuration
         pieChartView.title = "TITLE"
         pieChartView.text = "TEXT"
         pieChartView.lineWidth = 1000
         pieChartView.showsTitleAboveChart = true
+        pieChartView.showsPercentageLabels = false
+        pieChartView.drawsClockwise = false
         executeAfterDelay(1.5) {
             pieChartView.showsTitleAboveChart = false
             pieChartView.lineWidth = 12
@@ -81,30 +89,46 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
             pieChartView.textColor = UIColor.orangeColor()
         }
         executeAfterDelay(2.5) {
-            pieChartView.drawsClockwise = false
+            pieChartView.drawsClockwise = true
+            pieChartView.dataSource = self.colorlessPieChartDataSource
         }
         executeAfterDelay(3.5) {
-            pieChartView.showsPercentageLabels = false
+            pieChartView.showsPercentageLabels = true
+            pieChartView.tintColor = UIColor.purpleColor()
         }
-        
+        executeAfterDelay(4.5) {
+            pieChartView.titleColor = nil
+            pieChartView.textColor = nil
+        }
+
         // ORKLineGraphChartView
         lineGraphChartTableViewCell = tableView.dequeueReusableCellWithIdentifier(lineGraphChartIdentifier) as! LineGraphChartTableViewCell
         let lineGraphChartView = lineGraphChartTableViewCell.graphChartView as! ORKLineGraphChartView
         lineGraphChartView.dataSource = lineGraphChartDataSource
         // Optional custom configuration
         executeAfterDelay(1.5) {
+            lineGraphChartView.tintColor = UIColor.purpleColor()
             lineGraphChartView.showsHorizontalReferenceLines = true
             lineGraphChartView.showsVerticalReferenceLines = true
         }
         executeAfterDelay(2.5) {
             lineGraphChartView.axisColor = UIColor.redColor()
-            lineGraphChartView.axisTitleColor = UIColor.redColor()
+            lineGraphChartView.verticalAxisTitleColor = UIColor.redColor()
             lineGraphChartView.referenceLineColor = UIColor.orangeColor()
             lineGraphChartView.scrubberLineColor = UIColor.blueColor()
             lineGraphChartView.scrubberThumbColor = UIColor.greenColor()
         }
         executeAfterDelay(3.5) {
-            lineGraphChartView.tintColor = UIColor.purpleColor()
+            lineGraphChartView.axisColor = nil
+            lineGraphChartView.verticalAxisTitleColor = nil
+            lineGraphChartView.referenceLineColor = nil
+            lineGraphChartView.scrubberLineColor = nil
+            lineGraphChartView.scrubberThumbColor = nil
+        }
+        executeAfterDelay(4.5) {
+            lineGraphChartView.dataSource = self.coloredLineGraphChartDataSource
+        }
+        executeAfterDelay(5.5) {
             let maximumValueImage = UIImage(named: "GraphMaximumValueTest")!
             let minimumValueImage = UIImage(named: "GraphMinimumValueTest")!
             lineGraphChartView.maximumValueImage = maximumValueImage
@@ -118,9 +142,9 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         // Optional custom configuration
         discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
-        discreteGraphChartView.drawsConnectedRanges = false
+        discreteGraphChartView.drawsConnectedRanges = true
         executeAfterDelay(3.5) {
-            discreteGraphChartView.drawsConnectedRanges = true
+            discreteGraphChartView.drawsConnectedRanges = false
         }
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]

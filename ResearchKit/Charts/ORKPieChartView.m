@@ -38,6 +38,7 @@
 #import "ORKPieChartTitleTextView.h"
 #import "ORKSkin.h"
 #import "ORKDefines_Private.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat TitleToPiePadding = 8.0;
@@ -51,6 +52,20 @@ static const CGFloat PieToLegendPadding = 8.0;
         _angle = angle;
     }
     return self;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return self.label.isAccessibilityElement;
+}
+
+- (NSString *)accessibilityLabel {
+    return self.label.accessibilityLabel;
+}
+
+- (CGRect)accessibilityFrame {
+    return self.label.accessibilityFrame;
 }
 
 @end
@@ -87,6 +102,29 @@ static const CGFloat PieToLegendPadding = 8.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)sharedInit {
+    _lineWidth = 10;
+    _showsTitleAboveChart = NO;
+    _showsPercentageLabels = YES;
+    _drawsClockwise = YES;
+    
+    _legendView = nil; // legend lazily initialized on demand
+    
+    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
+    [self addSubview:_pieView];
+    
+    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
+    [self addSubview:_titleTextView];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    [self setUpConstraints];
+    [self setNeedsUpdateConstraints];
+}
+
 - (void)setDataSource:(id<ORKPieChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     CGFloat sumOfValues = [_pieView normalizeValues];
@@ -118,6 +156,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setNoDataText:(NSString *)noDataText {
+    if (!noDataText) {
+        noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    }
     _titleTextView.noDataLabel.text = noDataText;
 }
 
@@ -126,6 +167,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
+    if (!titleColor) {
+        titleColor = ORKColor(ORKChartDefaultTextColorKey);
+    }
     _titleTextView.titleLabel.textColor = titleColor;
 }
 
@@ -134,6 +178,9 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setTextColor:(UIColor *)textColor {
+    if (!textColor) {
+        textColor = ORKColor(ORKChartDefaultTextColorKey);
+    }
     _titleTextView.textLabel.textColor = textColor;
 }
 
@@ -157,35 +204,17 @@ static const CGFloat PieToLegendPadding = 8.0;
     [_pieView setNeedsLayout];
 }
 
+- (void)tintColorDidChange {
+    [_pieView updateColors];
+    [_legendView reloadData];
+}
+
 - (void)updateContentSizeCategoryFonts {
     _titleTextView.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _titleTextView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     _titleTextView.noDataLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _pieView.percentageLabelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
     _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-}
-
-- (void)sharedInit {
-    _lineWidth = 10;
-    _showsTitleAboveChart = NO;
-    _showsPercentageLabels = YES;
-    _drawsClockwise = YES;
-    
-    _legendView = nil; // legend lazily initialized on demand
-
-    _pieView = [[ORKPieChartPieView alloc] initWithParentPieChartView:self];
-    [self addSubview:_pieView];
-
-    _titleTextView = [[ORKPieChartTitleTextView alloc] initWithParentPieChartView:self];
-    [self addSubview:_titleTextView];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-    [self setUpConstraints];
-    [self setNeedsUpdateConstraints];
 }
 
 - (void)setUpConstraints {
@@ -266,6 +295,10 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 - (void)updateLegendView {
     if ([_dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
+        if (_legendView) {
+            [_legendView removeFromSuperview];
+            ORKRemoveConstraintsForRemovedViews(_variableConstraints, @[_legendView]);
+        }
         _legendView = [[ORKPieChartLegendView alloc] initWithParentPieChartView:self];
         [self addSubview:_legendView];
         _legendView.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
@@ -285,9 +318,15 @@ static const CGFloat PieToLegendPadding = 8.0;
     }
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [_legendView invalidateIntrinsicContentSize];
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
+    [self setNeedsLayout];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    _shouldInvalidateLegendViewIntrinsicContentSize = YES;
     [self setNeedsLayout];
 }
 
@@ -299,16 +338,15 @@ static const CGFloat PieToLegendPadding = 8.0;
         color = [_dataSource pieChartView:self colorForSegmentAtIndex:index];
     }
     else {
-        // Default colors
+        // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
         if (numberOfSegments > 1) {
             // Avoid pure white and pure black
-            CGFloat divisionFactor = (1.0 / (numberOfSegments + 1));
-            CGFloat whiteComponent = (divisionFactor + (divisionFactor * index));
-            color = [UIColor colorWithWhite:whiteComponent
-                                      alpha:1.0f];
+            CGFloat divisionFactor = (1.0 / numberOfSegments);
+            CGFloat alphaComponent = 1 - (divisionFactor * index);
+            color = [self.tintColor colorWithAlphaComponent:alphaComponent];
         } else {
-            color = [UIColor grayColor];
+            color = self.tintColor;
         }
     }
     return color;
@@ -322,6 +360,26 @@ static const CGFloat PieToLegendPadding = 8.0;
     [_pieView animateWithDuration:animationDuration];
     [_legendView animateWithDuration:animationDuration];
     [_titleTextView animateWithDuration:animationDuration];
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return NO;
+}
+
+- (NSArray *)accessibilityElements {
+    NSMutableArray *accessibilityElements = [[NSMutableArray alloc] init];
+    [accessibilityElements addObjectsFromArray:_titleTextView.accessibilityElements];
+    
+    // Use legends if there are any and percentage labels if not
+    if (_legendView) {
+        [accessibilityElements addObject:_legendView];
+    } else {
+        [accessibilityElements addObjectsFromArray:_pieView.accessibilityElements];
+    }
+    
+    return accessibilityElements;
 }
 
 @end
