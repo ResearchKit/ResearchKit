@@ -817,24 +817,27 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     
     for (NSUInteger plotIndex = 0; plotIndex < _pointLayers.count; plotIndex++) {
+      
         NSUInteger numberOfPoints = ((NSArray *)_pointLayers[plotIndex]).count;
-        NSUInteger numberOfLines = ((NSArray *)_lineLayers[plotIndex]).count;
-        
-        CGFloat pointFadeDuration = duration / (numberOfPoints - 1);
-        CGFloat lineFadeDuration = duration / (numberOfLines - 1);
-        
-        CGFloat pointDelay = 0.0;
-        CGFloat lineDelay = 0.0;
-        for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
-            CAShapeLayer *layer = _pointLayers[plotIndex][pointIndex];
-            [self animateLayer:layer keyPath:@"opacity" duration:pointFadeDuration startDelay:pointDelay];
-            pointDelay += pointFadeDuration;
+        if (numberOfPoints > 0) {
+            CGFloat pointFadeDuration = duration / numberOfPoints;
+            CGFloat pointDelay = 0.0;
+            for (NSUInteger pointIndex = 0; pointIndex < numberOfPoints; pointIndex++) {
+                CAShapeLayer *layer = _pointLayers[plotIndex][pointIndex];
+                [self animateLayer:layer keyPath:@"opacity" duration:pointFadeDuration startDelay:pointDelay];
+                pointDelay += pointFadeDuration;
+            }
         }
-        
-        for (NSUInteger pointIndex = 0; pointIndex < numberOfLines; pointIndex++) {
-            CAShapeLayer *layer = _lineLayers[plotIndex][pointIndex];
-            [self animateLayer:layer keyPath:@"strokeEnd" duration:lineFadeDuration startDelay:lineDelay];
-            lineDelay += lineFadeDuration;
+
+        NSUInteger numberOfLines = ((NSArray *)_lineLayers[plotIndex]).count;
+        if (numberOfLines > 0) {
+            CGFloat lineFadeDuration = duration / numberOfLines;
+            CGFloat lineDelay = 0.0;
+            for (NSUInteger lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+                CAShapeLayer *layer = _lineLayers[plotIndex][lineIndex];
+                [self animateLayer:layer keyPath:@"strokeEnd" duration:lineFadeDuration startDelay:lineDelay];
+                lineDelay += lineFadeDuration;
+            }
         }
     }
 }

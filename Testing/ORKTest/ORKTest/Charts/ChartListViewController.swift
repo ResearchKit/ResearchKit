@@ -142,9 +142,9 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         // Optional custom configuration
         discreteGraphChartView.showsHorizontalReferenceLines = true
         discreteGraphChartView.showsVerticalReferenceLines = true
-        discreteGraphChartView.drawsConnectedRanges = false
+        discreteGraphChartView.drawsConnectedRanges = true
         executeAfterDelay(3.5) {
-            discreteGraphChartView.drawsConnectedRanges = true
+            discreteGraphChartView.drawsConnectedRanges = false
         }
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
