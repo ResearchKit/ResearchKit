@@ -77,6 +77,8 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 @property (nonatomic) UIView *scrubberLine;
 
+@property (nonatomic) BOOL scrubberAccessoryViewsHidden;
+
 - (void)sharedInit;
 
 - (NSInteger)numberOfPlots;
@@ -94,8 +96,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
-
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 

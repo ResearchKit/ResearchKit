@@ -245,13 +245,6 @@ const CGFloat FillColorAlpha = 0.4;
     [super animateWithDuration:animationDuration];
 }
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
-        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
-        [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
-    }];
-}
-
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     [super animateLayersSequentiallyWithDuration:duration];
     for (NSUInteger i = 0; i < _fillLayers.count; i++) {

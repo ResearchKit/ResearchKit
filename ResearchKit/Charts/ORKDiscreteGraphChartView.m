@@ -130,21 +130,4 @@
     return canvasYPosition;
 }
 
-#pragma mark - Animation
-
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition plotIndex:plotIndex];
-    if (scrubbingValue == ORKCGFloatInvalidValue) {
-        [self setScrubberLineAccessoriesHidden:YES];
-    }
-    [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
-       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
-    } completion:^(BOOL finished) {
-       if (scrubbingValue != ORKCGFloatInvalidValue) {
-           [self setScrubberLineAccessoriesHidden:NO];
-           [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
-        }
-    }];
-}
-
 @end
