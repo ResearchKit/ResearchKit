@@ -694,9 +694,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             if ([_delegate respondsToSelector:@selector(graphChartViewTouchesBegan:)]) {
                 [_delegate graphChartViewTouchesBegan:self];
             }
-        }
-        
-        else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
             [self setScrubberViewsHidden:YES animated:YES];
             if ([_delegate respondsToSelector:@selector(graphChartViewTouchesEnded:)]) {
                 [_delegate graphChartViewTouchesEnded:self];
@@ -705,7 +703,35 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     }
 }
 
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden {
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
+    void (^updateScrubberLinePosition)() = ^{
+        self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
+    };
+    BOOL scrubberlineAnimated = (self.scrubberLine.alpha > 0);
+    BOOL scrubberlineAccessoriesAnimated = !self.scrubberAccessoryViewsHidden;
+    if (scrubberlineAnimated || scrubberlineAccessoriesAnimated) {
+        [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
+            if (scrubberlineAnimated) {
+                updateScrubberLinePosition();
+            }
+            if (scrubberlineAccessoriesAnimated) {
+                [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
+            }
+        }];
+    }
+    if (!scrubberlineAnimated) {
+        updateScrubberLinePosition();
+    }
+    if (!scrubberlineAccessoriesAnimated) {
+        [self updateScrubberLineAccessories:xPosition plotIndex:plotIndex];
+    }
+}
+
+- (BOOL)scrubberAccessoryViewsHidden {
+    return _scrubberLabel.hidden && _scrubberThumbView.hidden;
+}
+
+- (void)setScrubberAccessoryViewsHidden:(BOOL)hidden {
     _scrubberLabel.hidden = hidden;
     _scrubberThumbView.hidden = hidden;
 }
@@ -713,13 +739,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     CGFloat scrubberYPosition = [self canvasYPointForXPosition:xPosition plotIndex:plotIndex];
     CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition plotIndex:plotIndex];
-    if (scrubbingValue == ORKCGFloatInvalidValue) {
-        [self setScrubberLineAccessoriesHidden:YES];
-        return;
-    }
-    [self setScrubberLineAccessoriesHidden:NO];
-    [_scrubberThumbView setCenter:CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding)];
-    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue];
+
+    _scrubberThumbView.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, scrubberYPosition + TopPadding);
+    _scrubberLabel.text = [NSString stringWithFormat:@"%.0f", scrubbingValue == ORKCGFloatInvalidValue ? 0.0 : scrubbingValue ];
     CGSize textSize = [_scrubberLabel.text boundingRectWithSize:CGSizeMake(_plotView.bounds.size.width,
                                                                            _plotView.bounds.size.height)
                                                         options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
@@ -729,6 +751,12 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
                                       CGRectGetMinY(_scrubberLine.frame),
                                       textSize.width + ScrubberLabelHorizontalPadding,
                                       textSize.height + ScrubberLabelVerticalPadding);
+
+    if (scrubbingValue == ORKCGFloatInvalidValue) {
+        [self setScrubberAccessoryViewsHidden:YES];
+    } else {
+        [self setScrubberAccessoryViewsHidden:NO];
+    }
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
@@ -767,22 +795,19 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 }
 
 - (void)setScrubberViewsHidden:(BOOL)hidden animated:(BOOL)animated {
-    if ([self numberOfValidValuesForPlotIndex:0] > 0) {
-        
-        void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
-            CGFloat alpha = hidden ? 0.0 : 1.0;
-            _scrubberThumbView.alpha = alpha;
-            _scrubberLine.alpha = alpha;
-            _scrubberLabel.alpha = alpha;
-        };
-        
-        if (animated) {
-            [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
-                updateAlpha(hidden);
-            }];
-        } else {
+    void (^updateAlpha)(BOOL) = ^(BOOL hidden) {
+        CGFloat alpha = hidden ? 0.0 : 1.0;
+        _scrubberThumbView.alpha = alpha;
+        _scrubberLine.alpha = alpha;
+        _scrubberLabel.alpha = alpha;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:ScrubberFadeAnimationDuration animations:^{
             updateAlpha(hidden);
-        }
+        }];
+    } else {
+        updateAlpha(hidden);
     }
 }
 
@@ -975,10 +1000,6 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
     @throw [NSException exceptionWithName:NSInvalidArgumentException
                                    reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
                                  userInfo:nil];
-}
-
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
-    [self throwOverrideException];
 }
 
 - (void)scrubReferenceLineForXPosition:(CGFloat)xPosition {
