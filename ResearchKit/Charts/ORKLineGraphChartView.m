@@ -40,14 +40,14 @@
 const CGFloat FillColorAlpha = 0.4;
 
 @implementation ORKLineGraphChartView {
-    NSMutableArray *_fillLayers;
+    NSMutableDictionary *_fillLayers;
 }
 
 #pragma mark - Init
 
 - (void)sharedInit {
     [super sharedInit];
-    _fillLayers = [NSMutableArray new];
+    _fillLayers = [NSMutableDictionary new];
 }
 
 - (BOOL)shouldDrawLinesForPlotIndex:(NSInteger)plotIndex {
@@ -58,15 +58,14 @@ const CGFloat FillColorAlpha = 0.4;
 
 - (void)updatePlotColors {
     [super updatePlotColors];
-    for (NSUInteger plotIndex = 0; plotIndex < _fillLayers.count; plotIndex++) {
-        UIColor *fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:FillColorAlpha];
-        CAShapeLayer *fillLayer = _fillLayers[plotIndex];
+    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(NSNumber *key, CAShapeLayer *fillLayer, BOOL *stop) {
+        UIColor *fillColor = [[self colorForplotIndex:key.integerValue] colorWithAlphaComponent:FillColorAlpha];
         fillLayer.fillColor = fillColor.CGColor;
-    }
+    }];
 }
 
 - (void)updateLineLayers {
-    [_fillLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [[_fillLayers allValues] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_fillLayers removeAllObjects];
     [super updateLineLayers];
 }
@@ -103,10 +102,17 @@ const CGFloat FillColorAlpha = 0.4;
     fillLayer.fillColor = [[self colorForplotIndex:plotIndex] colorWithAlphaComponent:0.4].CGColor;
     
     [self.plotView.layer addSublayer:fillLayer];
-    [_fillLayers addObject:fillLayer];    
+    _fillLayers[@(plotIndex)] = fillLayer;
 }
 
 - (void)layoutLineLayersForPlotIndex:(NSInteger)plotIndex {
+    CAShapeLayer *fillLayer = _fillLayers[@(plotIndex)];
+    
+    if (fillLayer == nil) {
+        // Skip line and fill layout if fillLayer is nil (only points matter)
+        return;
+    }
+    
     NSUInteger lineLayerIndex = 0;
     UIBezierPath *fillPath = [UIBezierPath bezierPath];
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
@@ -144,8 +150,7 @@ const CGFloat FillColorAlpha = 0.4;
     }
     
     [fillPath addLineToPoint:CGPointMake(positionOnXAxis, CGRectGetHeight(self.plotView.frame))];
-    
-    CAShapeLayer *fillLayer = _fillLayers[plotIndex];
+        
     fillLayer.path = fillPath.CGPath;
 }
 
@@ -236,25 +241,24 @@ const CGFloat FillColorAlpha = 0.4;
 #pragma mark - Animations
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    [_fillLayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
-    for (NSUInteger plotIndex = 0; plotIndex < _fillLayers.count; plotIndex++) {
-        for (CAShapeLayer *fillLayer in _fillLayers) {
-            fillLayer.opacity = 0;
-        }
-    }
+    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *fillLayer, BOOL *stop) {
+        [fillLayer removeAllAnimations];
+        fillLayer.opacity = 0;
+    }];
+    
     [super animateWithDuration:animationDuration];
 }
 
 - (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration {
     [super animateLayersSequentiallyWithDuration:duration];
-    for (NSUInteger i = 0; i < _fillLayers.count; i++) {
-        CAShapeLayer *layer = _fillLayers[i];
+    
+    [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
         [self animateLayer:layer
                    keyPath:@"opacity"
                   duration:duration * (1/3.0)
                 startDelay:duration * (2/3.0)
             timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    }
+    }];
 }
 
 @end
