@@ -752,9 +752,9 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
 - (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat value = ORKCGFloatInvalidValue;
-    NSUInteger positionIndex = 0;
     if (snapped) {
-        CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+        NSInteger positionIndex = 0;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
             if (xAxisPointValue == xPosition) {

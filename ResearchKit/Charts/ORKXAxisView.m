@@ -153,7 +153,7 @@ static const CGFloat LastLabelHeight = 20.0;
         _titleTickLayers = [NSMutableArray new];
 
         NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
-        for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
+        for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
             NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtIndex:i];
             UILabel *label = [UILabel new];
             label.text = title;
@@ -178,7 +178,7 @@ static const CGFloat LastLabelHeight = 20.0;
         }
         
         // Add vertical tick layers above labels
-        for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
+        for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
             CALayer *titleTickLayer = [CALayer layer];
             CGFloat positionOnXAxis = xAxisPoint(i, numberOfTitleLabels, self.bounds.size.width);
             titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
