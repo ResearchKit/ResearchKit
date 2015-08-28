@@ -63,4 +63,8 @@
     return [super hash];
 }
 
+- (BOOL)showsProgress {
+    return NO;
+}
+
 @end

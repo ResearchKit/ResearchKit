@@ -66,16 +66,14 @@ typedef enum : NSUInteger {
         
         _position = 0;
         _wrongAttemptsCount = 1;
+        _shouldResignFirstResponder = NO;
+        _isChangingState = NO;
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _passcodeStepView.passcodeType = ORKPasscodeType4Digit;
         _passcodeStepView.textField.delegate = self;
-    
         [self.view addSubview:_passcodeStepView];
-        
-        _shouldResignFirstResponder = NO;
-        _isChangingState = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
@@ -148,10 +146,7 @@ typedef enum : NSUInteger {
     
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                               style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                _shouldResignFirstResponder = NO;
-                                                [self makePasscodeViewBecomeFirstResponder];
-                                            }]];
+                                            handler:nil]];
 
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -252,10 +247,6 @@ typedef enum : NSUInteger {
                         // Change back to entry state.
                         _passcodeState = ORKPasscodeStateEntry;
                         [self updatePasscodeView];
-                        
-                        // Resign first responder to allow alert view.
-                        _shouldResignFirstResponder = YES;
-                        [textField resignFirstResponder];
                         
                         // Show an alert to the user.
                         [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_INVALID_ALERT_MESSAGE", nil)];
