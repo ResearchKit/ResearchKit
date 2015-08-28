@@ -34,6 +34,7 @@
 #import "ORKPasscodeStepView.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 typedef enum : NSUInteger {
     ORKPasscodeStateEntry,
@@ -48,6 +49,7 @@ typedef enum : NSUInteger {
     NSInteger _wrongAttemptsCount;
     ORKPasscodeState _passcodeState;
     BOOL _shouldResignFirstResponder;
+    BOOL _isChangingState;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -69,10 +71,11 @@ typedef enum : NSUInteger {
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _passcodeStepView.passcodeType = ORKPasscodeType4Digit;
         _passcodeStepView.textField.delegate = self;
+    
+        [self.view addSubview:_passcodeStepView];
         
         _shouldResignFirstResponder = NO;
-        
-        [self.view addSubview:_passcodeStepView];
+        _isChangingState = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
@@ -115,7 +118,10 @@ typedef enum : NSUInteger {
         // Show a saved message.
         _passcodeStepView.textField.hidden = YES;
         _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_SAVED_MESSAGE", nil);
-        
+     
+        // Resign the first responder.
+        _shouldResignFirstResponder = YES;
+        [_passcodeStepView.textField resignFirstResponder];
     }
     
     // Update the textField's text.
@@ -154,6 +160,11 @@ typedef enum : NSUInteger {
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
+    // Disable input while changing states.
+    if (_isChangingState) {
+        return !_isChangingState;
+    }
+    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range
                                                              withString:string];
     
@@ -180,6 +191,9 @@ typedef enum : NSUInteger {
     
     // User entered all characters.
     if (_position == textField.text.length) {
+        
+        // Disable input.
+        _isChangingState = YES;
     
         // Show the user the last digit was entered before continuing.
         double delayInSeconds = 0.25;
@@ -214,6 +228,9 @@ typedef enum : NSUInteger {
                     
                 } else {
                     
+                    // Vibrate the phone.
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                    
                     // If the input does not match, notify the user.
                     if (_wrongAttemptsCount < 5) {
                         CAKeyframeAnimation *shakeAnimation = [CAKeyframeAnimation animation];
@@ -224,7 +241,7 @@ typedef enum : NSUInteger {
                         shakeAnimation.delegate = self;
                         shakeAnimation.additive = YES;
                         
-                        [_passcodeStepView.layer addAnimation:shakeAnimation forKey:@"shakeAnimation"];
+                        [textField.layer addAnimation:shakeAnimation forKey:@"shakeAnimation"];
                         
                         [self updatePasscodeView];
                         
@@ -236,9 +253,9 @@ typedef enum : NSUInteger {
                         _passcodeState = ORKPasscodeStateEntry;
                         [self updatePasscodeView];
                         
-                        // Dismiss keyboard to allow alert view.
+                        // Resign first responder to allow alert view.
                         _shouldResignFirstResponder = YES;
-                        [textField endEditing:YES];
+                        [textField resignFirstResponder];
                         
                         // Show an alert to the user.
                         [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_INVALID_ALERT_MESSAGE", nil)];
@@ -248,6 +265,8 @@ typedef enum : NSUInteger {
                 }
             }
             
+            // Enable input.
+            _isChangingState = NO;
         });
     }
     

@@ -51,6 +51,7 @@
         self.textField.translatesAutoresizingMaskIntoConstraints = NO;
   
         self.stepView = self.textField;
+        self.scrollEnabled = NO;
             
         [self updateAppearance];
     }
@@ -79,5 +80,20 @@
     _passcodeType = passcodeType;
     [self updateAppearance];
 }
+
+#pragma mark - Keyboard methods
+
+- (void)keyboardFrameWillChange:(NSNotification *)notification {
+    // Overriding method implementation from superclass.
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    // Overriding method implementation from superclass.
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    // Overriding method implementation from superclass.
+}
+
 
 @end
