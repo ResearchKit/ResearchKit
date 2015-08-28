@@ -236,6 +236,29 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKPasscodeResult` class records the results of a passcode step.
+ 
+ The passcode result object contains the passcode entered by the user and the user's Touch ID authentication status.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKPasscodeResult : ORKResult
+
+/**
+ A string containing the passcode entered by the user.
+ */
+@property (nonatomic, copy, nullable) NSString *passcode;
+
+/**
+ A Boolean value indicating whether the user has Touch ID authentication or not.
+ 
+ The value of this property is `YES` when the user passes Touch ID authentication and `NO` otherwise.
+ */
+@property (nonatomic, assign, getter=isTouchIDAuthenticated) BOOL touchIDAuthenticated;
+
+@end
+
+
+/**
  The `ORKTowerOfHanoiResult` class records the results of a Tower of Hanoi active task.
  
  The tower of hanoi result object records an array of `ORKTowerOfHanoiMove` objects (one for each move)

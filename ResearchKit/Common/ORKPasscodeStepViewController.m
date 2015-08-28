@@ -34,7 +34,10 @@
 #import "ORKPasscodeStepView.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+
 #import <AudioToolbox/AudioToolbox.h>
+#import <LocalAuthentication/LocalAuthentication.h>
+
 
 typedef enum : NSUInteger {
     ORKPasscodeStateEntry,
@@ -44,12 +47,15 @@ typedef enum : NSUInteger {
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
-    NSString *_passcode;
+    NSMutableString *_passcode;
+    NSMutableString *_confirmPasscode;
     NSInteger _position;
     NSInteger _wrongAttemptsCount;
     ORKPasscodeState _passcodeState;
     BOOL _shouldResignFirstResponder;
     BOOL _isChangingState;
+    BOOL _isTouchIDAuthenticated;
+    LAContext *_touchContext;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -63,18 +69,22 @@ typedef enum : NSUInteger {
     _passcodeStepView = nil;
     
     if (self.step && [self isViewLoaded]) {
-        
+
+        _passcode = [NSMutableString new];
+        _confirmPasscode = [NSMutableString new];
         _position = 0;
         _wrongAttemptsCount = 1;
         _shouldResignFirstResponder = NO;
         _isChangingState = NO;
+        _isTouchIDAuthenticated = NO;
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _passcodeStepView.passcodeType = ORKPasscodeType4Digit;
         _passcodeStepView.textField.delegate = self;
+        _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
         [self.view addSubview:_passcodeStepView];
-        
+    
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
 }
@@ -103,13 +113,15 @@ typedef enum : NSUInteger {
         _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_PROMPT_MESSAGE", nil);
         _position = 0;
         _wrongAttemptsCount = 1;
-        _passcode = nil;
+        _passcode = [NSMutableString new];
+        _confirmPasscode = [NSMutableString new];
 
     } else if (_passcodeState == ORKPasscodeStateConfirm) {
 
         // Show a confirm passcode message.
         _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_CONFIRM_MESSAGE", nil);
         _position = 0;
+        _confirmPasscode = [NSMutableString new];
         
     } else if (_passcodeState == ORKPasscodeStateSaved) {
         
@@ -125,7 +137,9 @@ typedef enum : NSUInteger {
     // Update the textField's text.
     NSString *text = (_passcodeStepView.passcodeType == ORKPasscodeType4Digit) ? k4DigitPin : k6DigitPin;
     _passcodeStepView.textField.text = text;
-
+    
+    // Enable input.
+    _isChangingState = NO;
 }
 
 - (void)initializeInternalButtonItems {
@@ -151,6 +165,66 @@ typedef enum : NSUInteger {
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)promptTouchId {
+    NSError *authError = nil;
+    _touchContext = [LAContext new];
+    _touchContext.localizedFallbackTitle = @"";
+    
+    
+    // Check to see if the device supports Touch ID.
+    if ([_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
+        
+        NSString *localizedReason = NSLocalizedString(@"Use Touch ID?", @"");
+        
+        [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                          localizedReason:localizedReason
+                                    reply:^(BOOL success, NSError *error) {
+                                        
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (success) {
+                    // Store that user passed authentication.
+                    _isTouchIDAuthenticated = YES;
+                    [self goForward];
+                     
+                } else if (error.code == kLAErrorUserCancel) {
+                    // User hit the cancel button.
+                    [self goForward];
+                } else {
+                    // Display the error message.
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                   message:error.localizedDescription
+                                                                            preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                       style:UIAlertActionStyleDefault
+                                                                     handler:^(UIAlertAction * __unused action) {
+                        [self goForward];
+                    }];
+                    [alert addAction:okAction];
+                    [self presentViewController:alert animated:YES completion:nil];
+                 }
+            });
+        }];
+        
+    } else {
+        
+        // Device does not support TouchID.
+        [self goForward];
+        
+    }
+}
+
+- (ORKStepResult *)result {
+    ORKStepResult *stepResult = [super result];
+    
+    ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
+    passcodeResult.passcode = _passcode;
+    passcodeResult.touchIDAuthenticated = _isTouchIDAuthenticated;
+    
+    stepResult.results = @[passcodeResult];
+    return stepResult;
+}
+
 # pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -163,25 +237,25 @@ typedef enum : NSUInteger {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range
                                                              withString:string];
     
+    // Store the typed input.
+    if (_passcodeState == ORKPasscodeStateEntry) {
+        [_passcode appendString:string];
+    } else if (_passcodeState == ORKPasscodeStateConfirm) {
+        [_confirmPasscode appendString:string];
+    }
+    
     // User entered a character.
     if (text.length < textField.text.length) {
         // User hit the backspace button.
- 
         if (_position > 0) {
             _position--;
+            textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kEmptyBullet];
         }
-
-        NSString *string = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kEmptyBullet];
-        textField.text = string;
 
     } else if (_position < textField.text.length) {
         // User entered a new character.
-    
-        NSString *string = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kFilledBullet];
-        textField.text = string;
-
+        textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kFilledBullet];
         _position++;
-        
     }
     
     // User entered all characters.
@@ -196,20 +270,16 @@ typedef enum : NSUInteger {
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             
             if (_passcodeState == ORKPasscodeStateEntry) {
-                
-                // Store the passcode and move to confirm state.
+
+                // Move to confirm state.
                 _passcodeState = ORKPasscodeStateConfirm;
-                _passcode = text;
                 [self updatePasscodeView];
                 
             } else {
             
                 // Check to see if the input matches the first passcode.
-                if ([_passcode isEqualToString:text]) {
+                if ([_passcode isEqualToString:_confirmPasscode]) {
                     
-                    // Since the input matches, store the answer.
-                    [[self passcodeStep] setPasscode:_passcode];
-                
                     // Move to saved state.
                     _passcodeState = ORKPasscodeStateSaved;
                     [self updatePasscodeView];
@@ -218,7 +288,7 @@ typedef enum : NSUInteger {
                     double delayInSeconds = 1.0;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                        [self goForward];
+                        [self promptTouchId];
                     });
                     
                 } else {
@@ -238,9 +308,14 @@ typedef enum : NSUInteger {
                         
                         [textField.layer addAnimation:shakeAnimation forKey:@"shakeAnimation"];
                         
-                        [self updatePasscodeView];
-                        
                         _wrongAttemptsCount++;
+                        
+                        // Update the passcode view after the shake animation has ended.
+                        double delayInSeconds = 0.27;
+                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                            [self updatePasscodeView];
+                        });
                         
                     } else {
                         
@@ -256,8 +331,6 @@ typedef enum : NSUInteger {
                 }
             }
             
-            // Enable input.
-            _isChangingState = NO;
         });
     }
     

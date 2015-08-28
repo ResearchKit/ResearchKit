@@ -47,10 +47,6 @@
     return self;
 }
 
-- (void)setPasscode:(NSString *)passcode {
-    // Code to store passcode into keychain.
-}
-
 + (BOOL)supportsSecureCoding {
     return NO;
 }

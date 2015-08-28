@@ -44,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep
 
-@property (nonatomic, copy) NSString *passcode;
-
 @end
 
 NS_ASSUME_NONNULL_END
