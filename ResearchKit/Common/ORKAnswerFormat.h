@@ -481,19 +481,22 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKTextScaleAnswerFormat `class represents an answer format that includes a slider control with text choices.
+ The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control with a text label next to each step.
  
  The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose value is the selected slider value.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns an initialized text scale answer format using the specified values.
  
  This method is the designated initializer.
  
- @param textChoices                 Array of ORKTextChoice objects.
+ @param textChoices                 An array of text choices which will be used to determine the number of steps in the slider, and         
+                                    to fill the text label next to each of the steps. The array must contain between 2 and 8 text choices.
  @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
  @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
  
@@ -508,7 +511,8 @@ ORK_CLASS_AVAILABLE
  
  This method is a convenience initializer.
  
- @param textChoices                 Array of ORKTextChoice objects.
+ @param textChoices                 An array of text choices which will be used to determine the number of steps in the slider, and
+                                    to fill the text label next to each of the steps. The array must contain between 2 and 8 text choices.
  @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
  
  @return An initialized text scale answer format.
@@ -517,7 +521,7 @@ ORK_CLASS_AVAILABLE
                        defaultIndex:(NSInteger)defaultIndex;
 
 /**
- An array of ORKTextChoices that represent the options to display in the slider. (read-only)
+ An array of text choices which provides the text to be shown next to each of the slider steps. (read-only)
  */
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 

@@ -1696,6 +1696,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKScaleQuestionResult class];
 }
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
                        defaultIndex:(NSInteger)defaultIndex
                            vertical:(BOOL)vertical {
@@ -1755,7 +1760,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return _numberFormatter;
 }
 
-- (NSInteger)numberOfSteps{
+- (NSInteger)numberOfSteps {
     return self.textChoices.count - 1;
 }
 
@@ -1772,11 +1777,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Cannot have more than 8 text choices." userInfo:nil];
     }
     
-    for (id textChoice in _textChoices){
-        if (! [textChoice isKindOfClass:[ORKTextChoice class]]){
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Text choices must be of class ORKTextChoice." userInfo:nil];
-        }
-    }
+    ORKValidateArrayForObjectsOfClass(_textChoices, [ORKTextChoice class], @"Text choices must be of class ORKTextChoice.");
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1805,12 +1806,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (_textChoices == castObject.textChoices) &&
+            ORKEqualObjects(_textChoices, castObject.textChoices) &&
             (_defaultIndex == castObject.defaultIndex) &&
             (_vertical == castObject.vertical));
 }
 
-- (ORKQuestionType) questionType {
+- (ORKQuestionType)questionType {
     return ORKQuestionTypeScale;
 }
 
