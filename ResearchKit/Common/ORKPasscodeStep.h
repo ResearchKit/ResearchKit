@@ -34,6 +34,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    ORKPasscodeFlowCreate,
+    ORKPasscodeFlowAuthenticate,
+    ORKPasscodeFlowEdit
+} ORKPasscodeFlow;
+
 /**
  An `ORKPasscodeStep` object provides the participant an authentication step.
  
@@ -43,6 +49,46 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
+
+/**
+ Returns an initialized passcode step using the specified passcode flow.
+ 
+ @param identifier              The string that identifies the step (see `ORKStep`).
+ @param passcodeFlow            The passcode flow determines how the passcode step is being used.
+ @param text                    The text shown immediately below the title (see `ORKStep`).
+ 
+ @return An initialized passcode step.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                              text:(NSString *)text;
+
+/**
+ Returns an initialized passcode step using the specified passcode flow.
+ 
+ @param identifier              The string that identifies the step (see `ORKStep`).
+ @param passcodeFlow            The passcode flow determines how the passcode step is being used.
+ 
+ @return An initialized passcode step.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow;
+
+/**
+ The passcode flow determines how the passcode step is being used.
+ 
+ `ORKPasscodeFlowCreate` should be used to create a new passcode for a new user.
+ An example usage would be at the end of the consent flow.
+ 
+ `ORKPasscodeFlowAuthenticate` should be used to authenticate the user.
+ An exmaple usage would be whenever the application comes into foreground.
+ 
+ `ORKPasscodeFlowEdit` should be used to change the stored passcode.
+ An exmaple usage would be inside a profile or settings page.
+ */
+@property (nonatomic) ORKPasscodeFlow passcodeFlow;
 
 @end
 

@@ -31,7 +31,7 @@
 
 #import "ORKPasscodeStep.h"
 #import "ORKPasscodeStepViewController.h"
-
+#import "ORKHelpers.h"
 
 @implementation ORKPasscodeStep
 
@@ -39,24 +39,61 @@
     return [ORKPasscodeStepViewController class];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier {
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                              text:(NSString *)text {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        
+        self.text = text;
+        self.passcodeFlow = passcodeFlow;
     }
     return self;
 }
 
-+ (BOOL)supportsSecureCoding {
-    return NO;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
+    return [self initWithIdentifier:identifier
+                       passcodeFlow:passcodeFlow
+                               text:@""];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPasscodeStep *step = [super copyWithZone:zone];
+    step.passcodeFlow = self.passcodeFlow;
+    return step;
 }
 
 - (BOOL)isEqual:(id)object {
-    return [super isEqual:object];
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return isParentSame && (self.passcodeFlow == castObject.passcodeFlow);
 }
 
 - (NSUInteger)hash {
     return [super hash];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, passcodeFlow);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, passcodeFlow);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 - (BOOL)showsProgress {
