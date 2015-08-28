@@ -163,7 +163,7 @@
     CGFloat margin = ORKStandardHorizMarginForView(self);
     self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
     
-    static const CGFloat CaptionBaselineToTapCountBaseline = 56;
+    static const CGFloat CaptionBaselineToTapCountBaseline = 60;
     static const CGFloat TapButtonBottomToBottom = 36;
     
     // On the iPhone, _progressView is positioned outside the bounds of this view, to be in-between the header and this view.
