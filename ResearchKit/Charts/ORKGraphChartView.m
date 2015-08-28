@@ -93,43 +93,6 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     return self;
 }
 
-- (void)sharedInit {
-    _numberOfXAxisPoints = -1;
-    _showsHorizontalReferenceLines = NO;
-    _showsVerticalReferenceLines = NO;
-    _dataPoints = [NSMutableArray new];
-    _yAxisPoints = [NSMutableArray new];
-    _pointLayers = [NSMutableArray new];
-    _lineLayers = [NSMutableArray new];
-    _hasDataPoints = NO;
-
-    // init null resetable properties
-    _axisColor =  ORKColor(ORKGraphAxisColorKey);
-    _verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
-    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
-    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
-    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
-    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
-
-    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    _panGestureRecognizer.delaysTouchesBegan = YES;
-    _panGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:_panGestureRecognizer];
-    
-    [self setUpViews];
-    
-    [self updateContentSizeCategoryFonts];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateContentSizeCategoryFonts)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(_axVoiceOverStatusChanged:)
-                                                 name:UIAccessibilityVoiceOverStatusChanged
-                                               object:nil];
-}
-
 - (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
@@ -218,12 +181,49 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
     [self updateAndLayoutVerticalReferenceLineLayers];
 }
 
-- (void)tintColorDidChange {
-    [self updatePlotColors];
+- (void)sharedInit {
+    _numberOfXAxisPoints = -1;
+    _showsHorizontalReferenceLines = NO;
+    _showsVerticalReferenceLines = NO;
+    _dataPoints = [NSMutableArray new];
+    _yAxisPoints = [NSMutableArray new];
+    _pointLayers = [NSMutableArray new];
+    _lineLayers = [NSMutableArray new];
+    _hasDataPoints = NO;
+    
+    // init null resetable properties
+    _axisColor =  ORKColor(ORKGraphAxisColorKey);
+    _verticalAxisTitleColor = ORKColor(ORKGraphAxisTitleColorKey);
+    _referenceLineColor = ORKColor(ORKGraphReferenceLineColorKey);
+    _scrubberLineColor = ORKColor(ORKGraphScrubberLineColorKey);
+    _scrubberThumbColor = ORKColor(ORKGraphScrubberThumbColorKey);
+    _noDataText = ORKLocalizedString(@"CHART_NO_DATA_TEXT", nil);
+    
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    _panGestureRecognizer.delaysTouchesBegan = YES;
+    _panGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_panGestureRecognizer];
+    
+    [self setUpViews];
+    
+    [self updateContentSizeCategoryFonts];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateContentSizeCategoryFonts)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_axVoiceOverStatusChanged:)
+                                                 name:UIAccessibilityVoiceOverStatusChanged
+                                               object:nil];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)tintColorDidChange {
+    [self updatePlotColors];
 }
 
 - (UIColor *)colorForplotIndex:(NSInteger)plotIndex {
