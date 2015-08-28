@@ -146,6 +146,9 @@ class ChartListViewController: UIViewController, UITableViewDataSource {
         executeAfterDelay(3.5) {
             discreteGraphChartView.drawsConnectedRanges = false
         }
+        executeAfterDelay(5.5) {
+            discreteGraphChartView.drawsConnectedRanges = true
+        }
 
         chartTableViewCells = [pieChartTableViewCell, lineGraphChartTableViewCell, discreteGraphChartTableViewCell]
         
