@@ -92,6 +92,13 @@
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
 
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Please try again.";
+"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -120,6 +127,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Agree";
 "BUTTON_CANCEL" = "Cancel";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Clear";
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";

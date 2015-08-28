@@ -64,6 +64,23 @@
 @end
 
 
+@implementation ORKPasscodeTextField
+
+- (UIKeyboardType)keyboardType {
+    return UIKeyboardTypeNumberPad;
+}
+
+- (UIKeyboardAppearance)keyboardAppearance {
+    return UIKeyboardAppearanceDefault;
+}
+
+- (BOOL)allowsSelection {
+    return NO;
+}
+
+@end
+
+
 @implementation ORKUnitTextField {
     NSString *_managedPlaceholder;
     

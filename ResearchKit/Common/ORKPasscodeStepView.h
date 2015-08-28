@@ -29,41 +29,25 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <UIKit/UIKit.h>
+#import "ORKVerticalContainerView.h"
+#import "ORKTextFieldView.h"
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKPasscodeStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+static NSString* const kEmptyBullet = @"\u25CB";
+static NSString* const kFilledBullet = @"\u25CF";
+static NSString* const k4DigitPin = @"\u25CB\u25CB\u25CB\u25CB";
+static NSString* const k6DigitPin = @"\u25CB\u25CB\u25CB\u25CB\u25CB\u25CB";
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+typedef enum : NSUInteger {
+    ORKPasscodeType4Digit,
+    ORKPasscodeType6Digit
+} ORKPasscodeType;
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+@interface ORKPasscodeStepView : ORKVerticalContainerView
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+@property (nonatomic) ORKPasscodeType passcodeType;
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+@property (nonatomic, strong) ORKPasscodeTextField *textField;
 
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
-
+@end

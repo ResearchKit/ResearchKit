@@ -44,6 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@interface ORKPasscodeTextField : ORKCaretOptionalTextField
+
+@end
+
+
 @interface ORKUnitTextField : ORKCaretOptionalTextField
 
 @property (nonatomic, copy, nullable) NSString *unit;
