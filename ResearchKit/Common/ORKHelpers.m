@@ -327,7 +327,7 @@ BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
     static dispatch_once_t onceToken;
     static NSArray *familyNameFirstLangs = nil;
     dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
+        familyNameFirstLangs = @[@"zh", @"ko", @"ja", @"vi"];
     });
     return (language != nil) && [familyNameFirstLangs containsObject:language];
 }
