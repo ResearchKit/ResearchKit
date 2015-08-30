@@ -106,6 +106,28 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                   areSubPredicateFormatsSubquery:NO];
 }
 
++ (NSPredicate *)predicateForNilQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                  stepIdentifier:(NSString *)stepIdentifier
+                                                resultIdentifier:(NSString *)resultIdentifier {
+    return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
+                                resultIdentifier:resultIdentifier
+                         subPredicateFormatArray:@[ @"answer == nil" ]
+                 subPredicateFormatArgumentArray:@[ ]];
+}
+
++ (NSPredicate *)predicateForNilQuestionResultWithStepIdentifier:(NSString *)stepIdentifier
+                                                resultIdentifier:(NSString *)resultIdentifier {
+    return [self predicateForNilQuestionResultWithTaskIdentifier:nil
+                                                  stepIdentifier:stepIdentifier
+                                                resultIdentifier:resultIdentifier];
+}
+
++ (NSPredicate *)predicateForNilQuestionResultWithResultIdentifier:(NSString *)resultIdentifier {
+    return [self predicateForNilQuestionResultWithStepIdentifier:nil
+                                                resultIdentifier:resultIdentifier];
+}
+
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                     stepIdentifier:(NSString *)stepIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier

@@ -533,6 +533,8 @@ ORKDefineStringKey(FormStepIdentifier);
 ORKDefineStringKey(TextFormItemIdentifier);
 ORKDefineStringKey(NumericFormItemIdentifier);
 
+ORKDefineStringKey(NilTextStepIdentifier);
+
 ORKDefineStringKey(AdditionalTaskIdentifier);
 ORKDefineStringKey(AdditionalFormStepIdentifier);
 ORKDefineStringKey(AdditionalTextFormItemIdentifier);
@@ -589,6 +591,9 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     [stepResults addObject:getStepResult(TimeIntervalStepIdentifier, [ORKTimeIntervalQuestionResult class], ORKQuestionTypeTimeInterval, @(IntegerValue))];
 
     [stepResults addObject:getStepResult(TimeOfDayStepIdentifier, [ORKTimeOfDayQuestionResult class], ORKQuestionTypeTimeOfDay, DateComponents())];
+
+    // Nil result (simulate skipped step)
+    [stepResults addObject:getStepResult(NilTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, nil)];
 
     ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:OrderedTaskIdentifier
                                                                   taskRunUUID:[NSUUID UUID]
@@ -1273,6 +1278,10 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
                                                                 minimumExpectedAnswerDate:nil
                                                                 maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    
+    // Result with nil value
+    XCTAssertTrue([[ORKResultPredicate predicateForNilQuestionResultWithResultIdentifier:NilTextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithResultIdentifier:TextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
 }
 
 - (void)testResultPredicates {
