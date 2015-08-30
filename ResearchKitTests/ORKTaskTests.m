@@ -527,6 +527,26 @@ ORKDefineStringKey(FloatNumericStepIdentifier);
 ORKDefineStringKey(TimeOfDayStepIdentifier);
 ORKDefineStringKey(TimeIntervalStepIdentifier);
 ORKDefineStringKey(DateStepIdentifier);
+
+ORKDefineStringKey(FormStepIdentifier);
+
+ORKDefineStringKey(TextFormItemIdentifier);
+ORKDefineStringKey(NumericFormItemIdentifier);
+
+
+ORKDefineStringKey(AdditionalTextFormItemIdentifier);
+ORKDefineStringKey(AdditionalNumericFormItemIdentifier);
+
+ORKDefineStringKey(MatchedDestinationStepIdentifier);
+ORKDefineStringKey(DefaultDestinationStepIdentifier);
+
+ORKDefineStringKey(AdditionalTaskIdentifier);
+
+ORKDefineStringKey(AdditionalTextStepIdentifier);
+ORKDefineStringKey(AdditionalTextValue);
+
+static const NSInteger AdditionalIntegerValue = 42;
+
 static NSDate *(^Date)() = ^NSDate *{ return [NSDate dateWithTimeIntervalSince1970:60*60*24]; };
 static NSDateComponents *(^DateComponents)() = ^NSDateComponents *{
     NSDateComponents *dateComponents = [NSDateComponents new];
@@ -535,12 +555,16 @@ static NSDateComponents *(^DateComponents)() = ^NSDateComponents *{
     return dateComponents;
 };
 
-static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKStepResult *(NSString *stepIdentifier, Class choiceQuestionResultClass, ORKQuestionType questionType, id answer) {
-    ORKQuestionResult *questionResult = [[choiceQuestionResultClass alloc] init];
-    questionResult.identifier = stepIdentifier;
+static ORKQuestionResult *(^getQuestionResult)(NSString *, Class, ORKQuestionType, id) = ^ORKQuestionResult *(NSString *questionResultIdentifier, Class questionResultClass, ORKQuestionType questionType, id answer) {
+    ORKQuestionResult *questionResult = [[questionResultClass alloc] init];
+    questionResult.identifier = questionResultIdentifier;
     questionResult.answer = answer;
     questionResult.questionType = questionType;
-    
+    return questionResult;
+};
+
+static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) = ^ORKStepResult *(NSString *stepIdentifier, Class questionResultClass, ORKQuestionType questionType, id answer) {
+    ORKQuestionResult *questionResult = getQuestionResult(stepIdentifier, questionResultClass, questionType, answer);
     ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:stepIdentifier results:@[questionResult]];
     return stepResult;
 };
@@ -575,27 +599,40 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     return taskResult;
 }
 
-ORKDefineStringKey(MatchedDestinationStepIdentifier);
-ORKDefineStringKey(DefaultDestinationStepIdentifier);
-
-ORKDefineStringKey(AdditionalTaskIdentifier);
-
-ORKDefineStringKey(AdditionalTextStepIdentifier);
-ORKDefineStringKey(AdditionalTextValue);
-
-- (ORKTaskResult *)getSmallTaskResultTreeWithAdditionalOption:(BOOL)isAdditional {
+- (ORKTaskResult *)getSmallTaskResultTreeWithIsAdditionalTask:(BOOL)isAdditionalTask {
     NSMutableArray *stepResults = [NSMutableArray new];
     
-    if (!isAdditional) {
+    if (!isAdditionalTask) {
         [stepResults addObject:getStepResult(TextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, TextValue)];
     } else {
         [stepResults addObject:getStepResult(AdditionalTextStepIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, AdditionalTextValue)];
     }
     
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:!isAdditional ? OrderedTaskIdentifier : AdditionalTaskIdentifier
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:!isAdditionalTask ? OrderedTaskIdentifier : AdditionalTaskIdentifier
                                                                   taskRunUUID:[NSUUID UUID]
                                                               outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
     taskResult.results = stepResults;
+    
+    return taskResult;
+}
+
+- (ORKTaskResult *)getSmallFormTaskResultTreeWithIsAdditionalTask:(BOOL)isAdditionalTask {
+    NSMutableArray *formItemResults = [NSMutableArray new];
+    
+    if (!isAdditionalTask) {
+        [formItemResults addObject:getQuestionResult(TextFormItemIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, TextValue)];
+        [formItemResults addObject:getQuestionResult(NumericFormItemIdentifier, [ORKNumericQuestionResult class], ORKQuestionTypeInteger, @(IntegerValue))];
+    } else {
+        [formItemResults addObject:getQuestionResult(AdditionalTextFormItemIdentifier, [ORKTextQuestionResult class], ORKQuestionTypeText, AdditionalTextValue)];
+        [formItemResults addObject:getQuestionResult(AdditionalNumericFormItemIdentifier, [ORKNumericQuestionResult class], ORKQuestionTypeInteger, @(AdditionalIntegerValue))];
+    }
+    
+    ORKStepResult *formStepResult = [[ORKStepResult alloc] initWithStepIdentifier:FormStepIdentifier results:formItemResults];
+    
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:!isAdditionalTask ? OrderedTaskIdentifier : AdditionalTaskIdentifier
+                                                                  taskRunUUID:[NSUUID UUID]
+                                                              outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
+    taskResult.results = @[formStepResult];
     
     return taskResult;
 }
@@ -616,6 +653,8 @@ ORKDefineStringKey(AdditionalTextValue);
 
 - (void)testPredicateStepNavigationRule {
     NSPredicate *predicate = nil;
+    NSPredicate *predicateA = nil;
+    NSPredicate *predicateB = nil;
     ORKPredicateStepNavigationRule *predicateRule = nil;
     ORKTaskResult *taskResult = nil;
     ORKTaskResult *additionalTaskResult = nil;
@@ -624,80 +663,150 @@ ORKDefineStringKey(AdditionalTextValue);
     NSArray *destinationStepIdentifiers = nil;
     NSString *defaultStepIdentifier = nil;
     
-    // Test predicate step navigation rule initializers
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                        expectedString:TextValue];
-    resultPredicates = @[ predicate ];
-    destinationStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                          destinationStepIdentifiers:destinationStepIdentifiers];
-
-    XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
-    XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
-    XCTAssertNil(predicateRule.defaultStepIdentifier);
-
-    defaultStepIdentifier = DefaultDestinationStepIdentifier;
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
-                                                          destinationStepIdentifiers:destinationStepIdentifiers
-                                                               defaultStepIdentifier:defaultStepIdentifier];
-
-    XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
-    XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
-    XCTAssertEqualObjects(predicateRule.defaultStepIdentifier, defaultStepIdentifier);
-
-    // Predicate matching, no additional task results, matching
-    taskResult = [ORKTaskResult new];
-    taskResult.identifier = OrderedTaskIdentifier;
-
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                        expectedString:TextValue];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
-                                                               defaultStepIdentifier:DefaultDestinationStepIdentifier];
-
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
-
-    taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
-
-    // Predicate matching, no additional task results, non matching
-    predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                        expectedString:OtherTextValue];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
-                                                               defaultStepIdentifier:DefaultDestinationStepIdentifier];
-    taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
-
+    {
+        // Test predicate step navigation rule initializers
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
+                                                                            expectedString:TextValue];
+        resultPredicates = @[ predicate ];
+        destinationStepIdentifiers = @[ MatchedDestinationStepIdentifier ];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                              destinationStepIdentifiers:destinationStepIdentifiers];
+        
+        XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
+        XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
+        XCTAssertNil(predicateRule.defaultStepIdentifier);
+        
+        defaultStepIdentifier = DefaultDestinationStepIdentifier;
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:resultPredicates
+                                                              destinationStepIdentifiers:destinationStepIdentifiers
+                                                                   defaultStepIdentifier:defaultStepIdentifier];
+        
+        XCTAssertEqualObjects(predicateRule.resultPredicates, ORKArrayCopyObjects(resultPredicates));
+        XCTAssertEqualObjects(predicateRule.destinationStepIdentifiers, ORKArrayCopyObjects(destinationStepIdentifiers));
+        XCTAssertEqualObjects(predicateRule.defaultStepIdentifier, defaultStepIdentifier);
+    }
     
-    // Predicate matching, additional task results
-    NSPredicate *currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                                            expectedString:TextValue];
-    NSPredicate *additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
-                                                                                           resultIdentifier:AdditionalTextStepIdentifier
-                                                                                         expectedString:AdditionalTextValue];
-    predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
-                                                          destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
-                                                               defaultStepIdentifier:DefaultDestinationStepIdentifier];
+    {
+        // Predicate matching, no additional task results, matching
+        taskResult = [ORKTaskResult new];
+        taskResult.identifier = OrderedTaskIdentifier;
+        
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
+                                                                            expectedString:TextValue];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+        
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
+    }
     
-    taskResult = [ORKTaskResult new];
-    taskResult.identifier = OrderedTaskIdentifier;
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+    {
+        // Predicate matching, no additional task results, non matching
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
+                                                                            expectedString:OtherTextValue];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+    }
     
-    taskResult = [self getSmallTaskResultTreeWithAdditionalOption:NO];
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+    {
+        NSPredicate *currentPredicate = nil;
+        NSPredicate *additionalPredicate = nil;
+        
+        // Predicate matching, additional task results
+        currentPredicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
+                                                                                                expectedString:TextValue];
+        additionalPredicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                                               resultIdentifier:AdditionalTextStepIdentifier
+                                                                                                 expectedString:AdditionalTextValue];
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        
+        taskResult = [ORKTaskResult new];
+        taskResult.identifier = OrderedTaskIdentifier;
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+        
+        taskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+        
+        additionalTaskResult = [self getSmallTaskResultTreeWithIsAdditionalTask:YES];
+        predicateRule.additionalTaskResults = @[ additionalTaskResult ];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
+    }
+    
+    {
+        // Test duplicate task identifiers check
+        predicateRule.additionalTaskResults = @[ taskResult ];
+        XCTAssertThrows([predicateRule identifierForDestinationStepWithTaskResult:taskResult]);
+        
+        // Test duplicate question result identifiers check
+        XCTAssertThrows(predicateRule.additionalTaskResults = @[ [self getSmallTaskResultTreeWithDuplicateStepIdentifiers] ]);
+    }
+    
+    {
+        // Form predicate matching, no additional task results, matching
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
+                                                                             expectedString:TextValue];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:NumericFormItemIdentifier
+                                                                                expectedAnswer:IntegerValue];
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
+    }
+    
+    {
+        // Form predicate matching, no additional task results, non matching
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
+                                                                            expectedString:OtherTextValue];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+    }
+    
+    {
+        NSPredicate *currentPredicate = nil;
+        NSPredicate *additionalPredicate = nil;
 
-    additionalTaskResult = [self getSmallTaskResultTreeWithAdditionalOption:YES];
-    predicateRule.additionalTaskResults = @[ additionalTaskResult ];
-    XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
-
-    // Test duplicate task identifiers check
-    predicateRule.additionalTaskResults = @[ taskResult ];
-    XCTAssertThrows([predicateRule identifierForDestinationStepWithTaskResult:taskResult]);
-
-    // Test duplicate question result identifiers check
-    XCTAssertThrows(predicateRule.additionalTaskResults = @[ [self getSmallTaskResultTreeWithDuplicateStepIdentifiers] ]);
+        // Form predicate matching, additional task results
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
+                                                                             expectedString:TextValue];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:NumericFormItemIdentifier
+                                                                                expectedAnswer:IntegerValue];
+        currentPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                         resultIdentifier:AdditionalTextFormItemIdentifier
+                                                                           expectedString:AdditionalTextValue];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                            resultIdentifier:AdditionalNumericFormItemIdentifier
+                                                                              expectedAnswer:AdditionalIntegerValue];
+        additionalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
+        
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[currentPredicate, additionalPredicate]];
+        predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
+                                                              destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
+                                                                   defaultStepIdentifier:DefaultDestinationStepIdentifier];
+        
+        taskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:NO];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], DefaultDestinationStepIdentifier);
+        
+        additionalTaskResult = [self getSmallFormTaskResultTreeWithIsAdditionalTask:YES];
+        predicateRule.additionalTaskResults = @[ additionalTaskResult ];
+        XCTAssertEqualObjects([predicateRule identifierForDestinationStepWithTaskResult:taskResult], MatchedDestinationStepIdentifier);
+    }
 }
 
 - (void)testDirectStepNavigationRule {
