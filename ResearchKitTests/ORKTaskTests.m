@@ -533,17 +533,16 @@ ORKDefineStringKey(FormStepIdentifier);
 ORKDefineStringKey(TextFormItemIdentifier);
 ORKDefineStringKey(NumericFormItemIdentifier);
 
-
+ORKDefineStringKey(AdditionalTaskIdentifier);
+ORKDefineStringKey(AdditionalFormStepIdentifier);
 ORKDefineStringKey(AdditionalTextFormItemIdentifier);
 ORKDefineStringKey(AdditionalNumericFormItemIdentifier);
 
-ORKDefineStringKey(MatchedDestinationStepIdentifier);
-ORKDefineStringKey(DefaultDestinationStepIdentifier);
-
-ORKDefineStringKey(AdditionalTaskIdentifier);
-
 ORKDefineStringKey(AdditionalTextStepIdentifier);
 ORKDefineStringKey(AdditionalTextValue);
+
+ORKDefineStringKey(MatchedDestinationStepIdentifier);
+ORKDefineStringKey(DefaultDestinationStepIdentifier);
 
 static const NSInteger AdditionalIntegerValue = 42;
 
@@ -627,9 +626,9 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
         [formItemResults addObject:getQuestionResult(AdditionalNumericFormItemIdentifier, [ORKNumericQuestionResult class], ORKQuestionTypeInteger, @(AdditionalIntegerValue))];
     }
     
-    ORKStepResult *formStepResult = [[ORKStepResult alloc] initWithStepIdentifier:FormStepIdentifier results:formItemResults];
+    ORKStepResult *formStepResult = [[ORKStepResult alloc] initWithStepIdentifier:(!isAdditionalTask ? FormStepIdentifier : AdditionalFormStepIdentifier) results:formItemResults];
     
-    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:!isAdditionalTask ? OrderedTaskIdentifier : AdditionalTaskIdentifier
+    ORKTaskResult *taskResult = [[ORKTaskResult alloc] initWithTaskIdentifier:(!isAdditionalTask ? OrderedTaskIdentifier : AdditionalTaskIdentifier)
                                                                   taskRunUUID:[NSUUID UUID]
                                                               outputDirectory:[NSURL fileURLWithPath:NSTemporaryDirectory()]];
     taskResult.results = @[formStepResult];
@@ -752,10 +751,14 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     {
         // Form predicate matching, no additional task results, matching
-        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
-                                                                             expectedString:TextValue];
-        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:NumericFormItemIdentifier
-                                                                                expectedAnswer:IntegerValue];
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:nil
+                                                                           stepIdentifier:FormStepIdentifier
+                                                                         resultIdentifier:TextFormItemIdentifier
+                                                                           expectedString:TextValue];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:nil
+                                                                              stepIdentifier:FormStepIdentifier
+                                                                            resultIdentifier:NumericFormItemIdentifier
+                                                                              expectedAnswer:IntegerValue];
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
         predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
                                                               destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
@@ -767,8 +770,10 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     
     {
         // Form predicate matching, no additional task results, non matching
-        predicate = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
-                                                                            expectedString:OtherTextValue];
+        predicate = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:nil
+                                                                          stepIdentifier:FormStepIdentifier
+                                                                        resultIdentifier:TextFormItemIdentifier
+                                                                          expectedString:OtherTextValue];
         predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicate ]
                                                               destinationStepIdentifiers:@[ MatchedDestinationStepIdentifier ]
                                                                    defaultStepIdentifier:DefaultDestinationStepIdentifier];
@@ -781,16 +786,22 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
         NSPredicate *additionalPredicate = nil;
 
         // Form predicate matching, additional task results
-        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextFormItemIdentifier
-                                                                             expectedString:TextValue];
-        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:NumericFormItemIdentifier
-                                                                                expectedAnswer:IntegerValue];
+        predicateA = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:nil
+                                                                           stepIdentifier:FormStepIdentifier
+                                                                         resultIdentifier:TextFormItemIdentifier
+                                                                           expectedString:TextValue];
+        predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:nil
+                                                                              stepIdentifier:FormStepIdentifier
+                                                                            resultIdentifier:NumericFormItemIdentifier
+                                                                              expectedAnswer:IntegerValue];
         currentPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
         
         predicateA = [ORKResultPredicate predicateForTextQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                           stepIdentifier:AdditionalFormStepIdentifier
                                                                          resultIdentifier:AdditionalTextFormItemIdentifier
                                                                            expectedString:AdditionalTextValue];
         predicateB = [ORKResultPredicate predicateForNumericQuestionResultWithTaskIdentifier:AdditionalTaskIdentifier
+                                                                              stepIdentifier:AdditionalFormStepIdentifier
                                                                             resultIdentifier:AdditionalNumericFormItemIdentifier
                                                                               expectedAnswer:AdditionalIntegerValue];
         additionalPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateA, predicateB]];
@@ -966,36 +977,36 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     NSDateComponents *expectedDateComponentsMaximum = DateComponents();
     XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:taskIdentifier
                                                                             resultIdentifier:TimeOfDayStepIdentifier
-                                                                   minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                 minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                   maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                 maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                   minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                 minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                   maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                 maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     expectedDateComponentsMinimum.minute -= 2;
     expectedDateComponentsMaximum.minute += 2;
     XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:taskIdentifier
                                                                             resultIdentifier:TimeOfDayStepIdentifier
-                                                                   minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                 minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                   maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                 maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                   minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                 minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                   maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                 maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     expectedDateComponentsMinimum.minute += 3;
     XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:taskIdentifier
                                                                              resultIdentifier:TimeOfDayStepIdentifier
-                                                                    minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                  minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                    maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                  maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                    minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                  minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                    maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                  maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     expectedDateComponentsMinimum.minute -= 3;
     expectedDateComponentsMinimum.hour += 1;
     expectedDateComponentsMaximum.hour += 2;
     XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithTaskIdentifier:taskIdentifier
                                                                              resultIdentifier:TimeOfDayStepIdentifier
-                                                                    minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                  minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                    maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                  maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                    minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                  minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                    maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                  maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     // ORKTimeIntervalQuestionResult
     XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithTaskIdentifier:taskIdentifier
@@ -1179,33 +1190,33 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     NSDateComponents *expectedDateComponentsMinimum = DateComponents();
     NSDateComponents *expectedDateComponentsMaximum = DateComponents();
     XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                     minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                   minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                     maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                   maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                           minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                         minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                           maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                         maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     expectedDateComponentsMinimum.minute -= 2;
     expectedDateComponentsMaximum.minute += 2;
     XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                     minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                   minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                     maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                   maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                           minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                         minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                           maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                         maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     expectedDateComponentsMinimum.minute += 3;
     XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                      minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                    minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                      maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                    maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                            minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                          minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                            maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                          maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     expectedDateComponentsMinimum.minute -= 3;
     expectedDateComponentsMinimum.hour += 1;
     expectedDateComponentsMaximum.hour += 2;
     XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                      minimumExpectedAnswerHour:expectedDateComponentsMinimum.hour
-                                                                    minimumExpectedAnswerMinute:expectedDateComponentsMinimum.minute
-                                                                      maximumExpectedAnswerHour:expectedDateComponentsMaximum.hour
-                                                                    maximumExpectedAnswerMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                            minimumExpectedHour:expectedDateComponentsMinimum.hour
+                                                                          minimumExpectedMinute:expectedDateComponentsMinimum.minute
+                                                                            maximumExpectedHour:expectedDateComponentsMaximum.hour
+                                                                          maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     // ORKTimeIntervalQuestionResult
     XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier

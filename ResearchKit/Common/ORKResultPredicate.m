@@ -38,11 +38,16 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 @implementation ORKResultPredicate
 
 + (NSPredicate *)predicateMatchingTaskIdentifier:(NSString *)taskIdentifier
+                                  stepIdentifier:(NSString *)stepIdentifier
                                 resultIdentifier:(NSString *)resultIdentifier
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray
                  subPredicateFormatArgumentArray:(NSArray *)subPredicateFormatArgumentArray
                   areSubPredicateFormatsSubquery:(BOOL)areSubPredicateFormatsSubquery {
     ORKThrowInvalidArgumentExceptionIfNil(resultIdentifier);
+
+    if (!stepIdentifier) {
+        stepIdentifier = resultIdentifier;
+    }
     
     NSMutableString *format = [[NSMutableString alloc] init];
     NSMutableArray *formatArgumentArray = [[NSMutableArray alloc] init];
@@ -55,16 +60,16 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     } else {
         // If taskIdentifier is nil, ORKPredicateStepNavigationRule will substitute the
         // ORKResultPredicateTaskIdentifierSubstitutionVariableName variable by the identifier of the ongoing task
-        [format appendString:@"SUBQUERY(SELF, $x, $x.identifier like $"];
-        [format appendString:ORKResultPredicateTaskIdentifierVariableName];
+        [format appendFormat:@"SUBQUERY(SELF, $x, $x.identifier like $%@", ORKResultPredicateTaskIdentifierVariableName];
     }
     
     {
         // Match question result identifier
-        [format appendString:@" AND SUBQUERY($x.results, $y, SUBQUERY($y.results, $z, $z.identifier like %@"];
+        [format appendString:@" AND SUBQUERY($x.results, $y, $y.identifier like %@ AND SUBQUERY($y.results, $z, $z.identifier like %@"];
+        [formatArgumentArray addObject:stepIdentifier];
         [formatArgumentArray addObject:resultIdentifier];
         {
-            // Add question sub predicates. They can normal predicates (for question results with only one answer)
+            // Add question sub predicates. They can be normal predicates (for question results with only one answer)
             // or part of an additional subquery predicate (for question results with an array of answers, like ORKChoiceQuestionResult).
             for (NSString *subPredicateFormat in subPredicateFormatArray) {
                 if (!areSubPredicateFormatsSubquery) {
@@ -89,23 +94,35 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateMatchingTaskIdentifier:(NSString *)taskIdentifier
+                                  stepIdentifier:(NSString *)stepIdentifier
                                 resultIdentifier:(NSString *)resultIdentifier
                          subPredicateFormatArray:(NSArray *)subPredicateFormatArray
                  subPredicateFormatArgumentArray:(NSArray *)subPredicateFormatArgumentArray {
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray
                   areSubPredicateFormatsSubquery:NO];
 }
 
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    stepIdentifier:(NSString *)stepIdentifier
+                                                  resultIdentifier:(NSString *)resultIdentifier
+                                                    expectedAnswer:(NSInteger)expectedAnswer {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
+                                                    resultIdentifier:resultIdentifier
+                                                      expectedAnswer:expectedAnswer];
+}
 
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                                     expectedAnswer:(NSInteger)expectedAnswer {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
-                                                    resultIdentifier:resultIdentifier
-                                                      expectedAnswer:expectedAnswer];
+    return [self predicateForScaleQuestionResultWithTaskIdentifier:taskIdentifier
+                                                    stepIdentifier:nil
+                                                  resultIdentifier:resultIdentifier
+                                                    expectedAnswer:expectedAnswer];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -116,13 +133,26 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    stepIdentifier:(NSString *)stepIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                  resultIdentifier:(NSString *)resultIdentifier
+                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
+    return [self predicateForScaleQuestionResultWithTaskIdentifier:taskIdentifier
+                                                    stepIdentifier:nil
+                                                  resultIdentifier:resultIdentifier
+                                        minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                        maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -135,11 +165,22 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
-                                                   resultIdentifier:(NSString *)resultIdentifier
-                                    minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
+                                                    stepIdentifier:(NSString *)stepIdentifier
+                                                  resultIdentifier:(NSString *)resultIdentifier
+                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                  resultIdentifier:(NSString *)resultIdentifier
+                                        minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
+    return [self predicateForScaleQuestionResultWithTaskIdentifier:taskIdentifier
+                                                    stepIdentifier:nil
+                                                  resultIdentifier:resultIdentifier
+                                        minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -150,11 +191,22 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    stepIdentifier:(NSString *)stepIdentifier
                                                   resultIdentifier:(NSString *)resultIdentifier
                                         maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForScaleQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                  resultIdentifier:(NSString *)resultIdentifier
+                                        maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
+    return [self predicateForScaleQuestionResultWithTaskIdentifier:taskIdentifier
+                                                    stepIdentifier:nil
+                                                  resultIdentifier:resultIdentifier
+                                        maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForScaleQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -165,6 +217,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     expectedAnswers:(NSArray *)expectedAnswers
                                                         usePatterns:(BOOL)usePatterns {
@@ -185,6 +238,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:expectedAnswers
@@ -192,12 +246,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                      expectedString:(NSString *)expectedString {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:stepIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:@[ expectedString ]
                                                         usePatterns:NO];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   resultIdentifier:(NSString *)resultIdentifier
+                                                     expectedString:(NSString *)expectedString {
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:nil
+                                                   resultIdentifier:resultIdentifier
+                                                     expectedString:expectedString];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -208,12 +273,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     expectedStrings:(NSArray<NSString *> *)expectedStrings {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                          resultIdentifier:resultIdentifier
                                                     expectedAnswers:expectedStrings
                                                         usePatterns:NO];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   resultIdentifier:(NSString *)resultIdentifier
+                                                    expectedStrings:(NSArray<NSString *> *)expectedStrings {
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:nil
+                                                   resultIdentifier:resultIdentifier
+                                                    expectedStrings:expectedStrings];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -224,12 +300,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                     matchingPattern:(NSString *)pattern {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:stepIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:@[ pattern ]
                                                         usePatterns:YES];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   resultIdentifier:(NSString *)resultIdentifier
+                                                    matchingPattern:(NSString *)pattern {
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:nil
+                                                   resultIdentifier:resultIdentifier
+                                                    matchingPattern:pattern];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -240,12 +327,24 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                     stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
                                                    matchingPatterns:(NSArray<NSString *> *)patterns {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:stepIdentifier
                                                    resultIdentifier:resultIdentifier
                                                     expectedAnswers:patterns
                                                         usePatterns:YES];
+}
+
++ (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   resultIdentifier:(NSString *)resultIdentifier
+                                                   matchingPatterns:(NSArray<NSString *> *)patterns {
+    return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                     stepIdentifier:nil
+                                                   resultIdentifier:resultIdentifier
+                                                   matchingPatterns:patterns];
+
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -256,12 +355,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForBooleanQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      stepIdentifier:(NSString *)stepIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                                       expectedAnswer:(BOOL)expectedAnswer {
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:@[ @"answer == %@" ]
                  subPredicateFormatArgumentArray:@[ @(expectedAnswer) ]];
+}
+
++ (NSPredicate *)predicateForBooleanQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    resultIdentifier:(NSString *)resultIdentifier
+                                                      expectedAnswer:(BOOL)expectedAnswer {
+    return [self predicateForBooleanQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:nil
+                                                    resultIdentifier:resultIdentifier
+                                                      expectedAnswer:expectedAnswer];
 }
 
 + (NSPredicate *)predicateForBooleanQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -272,13 +382,24 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   stepIdentifier:(NSString *)stepIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                                    expectedString:(NSString *)expectedString {
     ORKThrowInvalidArgumentExceptionIfNil(expectedString);
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:@[ @"answer like %@" ]
                  subPredicateFormatArgumentArray:@[ expectedString ]];
+}
+
++ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                 resultIdentifier:(NSString *)resultIdentifier
+                                                   expectedString:(NSString *)expectedString {
+    return [self predicateForTextQuestionResultWithTaskIdentifier:taskIdentifier
+                                                   stepIdentifier:nil
+                                                 resultIdentifier:resultIdentifier
+                                                   expectedString:expectedString];
 }
 
 + (NSPredicate *)predicateForTextQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -289,13 +410,24 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   stepIdentifier:(NSString *)stepIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                                   matchingPattern:(NSString *)pattern {
     ORKThrowInvalidArgumentExceptionIfNil(pattern);
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:@[ @"answer matches %@" ]
                  subPredicateFormatArgumentArray:@[ pattern ]];
+}
+
++ (NSPredicate *)predicateForTextQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                 resultIdentifier:(NSString *)resultIdentifier
+                                                  matchingPattern:(NSString *)pattern {
+    return [self predicateForTextQuestionResultWithTaskIdentifier:taskIdentifier
+                                                   stepIdentifier:nil
+                                                 resultIdentifier:resultIdentifier
+                                                  matchingPattern:pattern];
 }
 
 + (NSPredicate *)predicateForTextQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -306,12 +438,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      stepIdentifier:(NSString *)stepIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                                       expectedAnswer:(NSInteger)expectedAnswer {
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:@[ @"answer == %@" ]
                  subPredicateFormatArgumentArray:@[ @(expectedAnswer) ]];
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    resultIdentifier:(NSString *)resultIdentifier
+                                                      expectedAnswer:(NSInteger)expectedAnswer {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:nil
+                                                    resultIdentifier:resultIdentifier
+                                                      expectedAnswer:expectedAnswer];
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -322,6 +465,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      stepIdentifier:(NSString *)stepIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
@@ -338,9 +482,21 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    resultIdentifier:(NSString *)resultIdentifier
+                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:nil
+                                                    resultIdentifier:resultIdentifier
+                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -353,12 +509,23 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      stepIdentifier:(NSString *)stepIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue
                                           maximumExpectedAnswerValue:ORKIgnoreDoubleValue];
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    resultIdentifier:(NSString *)resultIdentifier
+                                          minimumExpectedAnswerValue:(double)minimumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:nil
+                                                    resultIdentifier:resultIdentifier
+                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -369,11 +536,22 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      stepIdentifier:(NSString *)stepIdentifier
                                                     resultIdentifier:(NSString *)resultIdentifier
                                           maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:ORKIgnoreDoubleValue
+                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForNumericQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                    resultIdentifier:(NSString *)resultIdentifier
+                                          maximumExpectedAnswerValue:(double)maximumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:nil
+                                                    resultIdentifier:resultIdentifier
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
@@ -385,45 +563,74 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForTimeOfDayQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                        stepIdentifier:(NSString *)stepIdentifier
                                                       resultIdentifier:(NSString *)resultIdentifier
-                                             minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
-                                           minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
-                                             maximumExpectedAnswerHour:(NSInteger)maximumExpectedAnswerHour
-                                           maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute {
+                                                   minimumExpectedHour:(NSInteger)minimumExpectedHour
+                                                 minimumExpectedMinute:(NSInteger)minimumExpectedMinute
+                                                   maximumExpectedHour:(NSInteger)maximumExpectedHour
+                                                 maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:@[ @"answer.hour >= %@",
                                                     @"answer.minute >= %@",
                                                     @"answer.hour <= %@",
                                                     @"answer.minute <= %@" ]
-                 subPredicateFormatArgumentArray:@[ @(minimumExpectedAnswerHour),
-                                                    @(minimumExpectedAnswerMinute),
-                                                    @(maximumExpectedAnswerHour),
-                                                    @(maximumExpectedAnswerMinute) ]];
+                 subPredicateFormatArgumentArray:@[ @(minimumExpectedHour),
+                                                    @(minimumExpectedMinute),
+                                                    @(maximumExpectedHour),
+                                                    @(maximumExpectedMinute) ]];
+}
+
++ (NSPredicate *)predicateForTimeOfDayQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                      resultIdentifier:(NSString *)resultIdentifier
+                                                   minimumExpectedHour:(NSInteger)minimumExpectedHour
+                                                 minimumExpectedMinute:(NSInteger)minimumExpectedMinute
+                                                   maximumExpectedHour:(NSInteger)maximumExpectedHour
+                                                 maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
+    return [self predicateForTimeOfDayQuestionResultWithTaskIdentifier:taskIdentifier
+                                                        stepIdentifier:nil
+                                                      resultIdentifier:resultIdentifier
+                                                   minimumExpectedHour:minimumExpectedHour
+                                                 minimumExpectedMinute:minimumExpectedMinute
+                                                   maximumExpectedHour:maximumExpectedHour
+                                                 maximumExpectedMinute:maximumExpectedMinute];
 }
 
 + (NSPredicate *)predicateForTimeOfDayQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                               minimumExpectedAnswerHour:(NSInteger)minimumExpectedAnswerHour
-                                             minimumExpectedAnswerMinute:(NSInteger)minimumExpectedAnswerMinute
-                                               maximumExpectedAnswerHour:(NSInteger)maximumExpectedAnswerHour
-                                             maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute {
+                                                     minimumExpectedHour:(NSInteger)minimumExpectedHour
+                                                   minimumExpectedMinute:(NSInteger)minimumExpectedMinute
+                                                     maximumExpectedHour:(NSInteger)maximumExpectedHour
+                                                   maximumExpectedMinute:(NSInteger)maximumExpectedMinute {
     return [self predicateForTimeOfDayQuestionResultWithTaskIdentifier:nil
                                                       resultIdentifier:resultIdentifier
-                                             minimumExpectedAnswerHour:minimumExpectedAnswerHour
-                                           minimumExpectedAnswerMinute:minimumExpectedAnswerMinute
-                                             maximumExpectedAnswerHour:maximumExpectedAnswerHour
-                                           maximumExpectedAnswerMinute:maximumExpectedAnswerMinute];
+                                                   minimumExpectedHour:minimumExpectedHour
+                                                 minimumExpectedMinute:minimumExpectedMinute
+                                                   maximumExpectedHour:maximumExpectedHour
+                                                 maximumExpectedMinute:maximumExpectedMinute];
+}
 
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                           stepIdentifier:(NSString *)stepIdentifier
+                                                         resultIdentifier:(NSString *)resultIdentifier
+                                               minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
+                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
+    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
+                                                    resultIdentifier:resultIdentifier
+                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
-    return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
-                                                    resultIdentifier:resultIdentifier
-                                          minimumExpectedAnswerValue:minimumExpectedAnswerValue
-                                          maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+    return [self predicateForTimeIntervalQuestionResultWithTaskIdentifier:taskIdentifier
+                                                           stepIdentifier:nil
+                                                         resultIdentifier:resultIdentifier
+                                               minimumExpectedAnswerValue:minimumExpectedAnswerValue
+                                               maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -436,26 +643,48 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                           stepIdentifier:(NSString *)stepIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
 
-+ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                         resultIdentifier:(NSString *)resultIdentifier
                                                minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
+    return [self predicateForTimeIntervalQuestionResultWithTaskIdentifier:taskIdentifier
+                                                           stepIdentifier:nil
+                                                         resultIdentifier:resultIdentifier
+                                               minimumExpectedAnswerValue:minimumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
+                                                 minimumExpectedAnswerValue:(NSTimeInterval)minimumExpectedAnswerValue {
     return [self predicateForTimeIntervalQuestionResultWithTaskIdentifier:nil
                                                          resultIdentifier:resultIdentifier
                                                minimumExpectedAnswerValue:minimumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                           stepIdentifier:(NSString *)stepIdentifier
                                                          resultIdentifier:(NSString *)resultIdentifier
                                                maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
     return [self predicateForNumericQuestionResultWithTaskIdentifier:taskIdentifier
+                                                      stepIdentifier:stepIdentifier
                                                     resultIdentifier:resultIdentifier
                                           maximumExpectedAnswerValue:maximumExpectedAnswerValue];
+}
+
++ (NSPredicate *)predicateForTimeIntervalQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                         resultIdentifier:(NSString *)resultIdentifier
+                                               maximumExpectedAnswerValue:(NSTimeInterval)maximumExpectedAnswerValue {
+    return [self predicateForTimeIntervalQuestionResultWithTaskIdentifier:taskIdentifier
+                                                           stepIdentifier:nil
+                                                         resultIdentifier:resultIdentifier
+                                               maximumExpectedAnswerValue:maximumExpectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForTimeIntervalQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
@@ -466,6 +695,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 }
 
 + (NSPredicate *)predicateForDateQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                   stepIdentifier:(NSString *)stepIdentifier
                                                  resultIdentifier:(NSString *)resultIdentifier
                                         minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
                                         maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate {
@@ -482,9 +712,21 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     }
     
     return [self predicateMatchingTaskIdentifier:taskIdentifier
+                                  stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
                          subPredicateFormatArray:subPredicateFormatArray
                  subPredicateFormatArgumentArray:subPredicateFormatArgumentArray];
+}
+
++ (NSPredicate *)predicateForDateQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
+                                                 resultIdentifier:(NSString *)resultIdentifier
+                                        minimumExpectedAnswerDate:(nullable NSDate *)minimumExpectedAnswerDate
+                                        maximumExpectedAnswerDate:(nullable NSDate *)maximumExpectedAnswerDate {
+    return [self predicateForDateQuestionResultWithTaskIdentifier:taskIdentifier
+                                                   stepIdentifier:nil
+                                                 resultIdentifier:resultIdentifier
+                                        minimumExpectedAnswerDate:minimumExpectedAnswerDate
+                                        maximumExpectedAnswerDate:maximumExpectedAnswerDate];
 }
 
 + (NSPredicate *)predicateForDateQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
