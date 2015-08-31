@@ -2184,15 +2184,17 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     
     // Build navigation rules
     ORKPredicateStepNavigationRule *predicateRule = nil;
-
+    ORKResultIdentifier *resultIdentifier = nil;
+    
     // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
-    NSPredicate *predicateGoodFeeling = [ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:nil
-                                                                                                stepIdentifier:@"introForm"
-                                                                                              resultIdentifier:@"formFeeling"
+    resultIdentifier = [ORKResultIdentifier identifierWithStepIdentifier:@"introForm"
+                                                        resultIdentifier:@"formFeeling"];
+    NSPredicate *predicateGoodFeeling = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:resultIdentifier
                                                                                              expectedAnswerValue:@"good"];
-    NSPredicate *predicateGoodMood = [ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:nil
-                                                                                             stepIdentifier:@"introForm"
-                                                                                           resultIdentifier:@"formMood"
+    
+    resultIdentifier = [ORKResultIdentifier identifierWithStepIdentifier:@"introForm"
+                                                        resultIdentifier:@"formMood"];
+    NSPredicate *predicateGoodMood = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:resultIdentifier
                                                                                           expectedAnswerValue:@"good"];
     NSPredicate *predicateGoodMoodAndFeeling = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateGoodFeeling, predicateGoodMood]];
     
@@ -2211,7 +2213,8 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
     //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom"
+    resultIdentifier = [ORKResultIdentifier identifierWithResultIdentifier:@"symptom"];
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:resultIdentifier
                                                                                           expectedAnswerValue:@"headache"];
     
     // User didn't chose headache at the symptom step
@@ -2229,11 +2232,12 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+    resultIdentifier = [ORKResultIdentifier identifierWithResultIdentifier:@"severity"];
+    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:resultIdentifier
                                                                                                  expectedAnswer:YES];
     
     // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:@"severity"
+    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:resultIdentifier
                                                                                                 expectedAnswer:NO];
 
     NSPredicate *predicateSevereHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
