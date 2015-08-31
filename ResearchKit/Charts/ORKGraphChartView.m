@@ -49,7 +49,7 @@ const CGFloat ORKGraphChartViewYAxisTickPadding = 2.0;
 
 static const CGFloat TopPadding = 7.0;
 static const CGFloat XAxisViewHeight = 30.0;
-static const CGFloat YAxisViewWidthFactor = 0.12;
+static const CGFloat YAxisViewWidth = 45.0;
 static const CGFloat SnappingClosenessFactor = 0.3;
 static const CGSize ScrubberThumbSize = (CGSize){10.0, 10.0};
 static const CGFloat ScrubberFadeAnimationDuration = 0.2;
@@ -384,10 +384,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat yAxisPadding = CGRectGetWidth(self.frame) * YAxisViewWidthFactor;
     CGRect plotViewFrame = CGRectMake(ORKGraphChartViewLeftPadding,
                                       TopPadding,
-                                      CGRectGetWidth(self.frame) - yAxisPadding - ORKGraphChartViewLeftPadding,
+                                      CGRectGetWidth(self.frame) - YAxisViewWidth - ORKGraphChartViewLeftPadding,
                                       CGRectGetHeight(self.frame) - XAxisViewHeight - TopPadding);
 
     _referenceLinesView.frame = plotViewFrame;
@@ -398,11 +397,9 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
                                   CGRectGetWidth(_plotView.frame),
                                   XAxisViewHeight);
 
-    CGFloat yAxisViewXPosition = CGRectGetWidth(self.frame) * (1 - YAxisViewWidthFactor);
-    CGFloat yAxisViewWidth = CGRectGetWidth(self.frame) * YAxisViewWidthFactor;
-    _yAxisView.frame = CGRectMake(yAxisViewXPosition,
+    _yAxisView.frame = CGRectMake(CGRectGetWidth(self.frame) - YAxisViewWidth,
                                   TopPadding,
-                                  yAxisViewWidth,
+                                  YAxisViewWidth,
                                   CGRectGetHeight(_plotView.frame));
     
     [self layoutHorizontalReferenceLineLayers];
