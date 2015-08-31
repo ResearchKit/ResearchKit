@@ -277,6 +277,7 @@ static const CGFloat kHMargin = 15.0;
     
     CGFloat fieldWidth = _textFieldView.estimatedWidth;
     
+    // Leave half space for field, also be able to display placeholder in full.
     if ( labelWidth >= 0.5*boundWidth || (fieldWidth + labelWidth) > 0.9*boundWidth ) {
 
         [self.myConstraints addObjectsFromArray:

@@ -390,8 +390,9 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
         textAndUnit = [textAndUnit stringByAppendingString:unitString];
     }
     
-    CGFloat fieldWidth = [textAndUnit sizeWithAttributes:@{ NSFontAttributeName : self.textField.font }].width;
-    fieldWidth = MAX([placeholderAndUnit sizeWithAttributes:@{ NSFontAttributeName : self.textField.font }].width, fieldWidth);
+    NSDictionary *attributes = @{ NSFontAttributeName : self.textField.font };
+    CGFloat fieldWidth = MAX([placeholderAndUnit sizeWithAttributes:attributes].width,
+                             [textAndUnit sizeWithAttributes:attributes].width);
     
     return fieldWidth;
 }
