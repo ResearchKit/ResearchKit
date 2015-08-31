@@ -116,15 +116,15 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                  subPredicateFormatArgumentArray:@[ ]];
 }
 
-+ (NSPredicate *)predicateForNilQuestionResultWithStepIdentifier:(NSString *)stepIdentifier
++ (NSPredicate *)predicateForNilQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                 resultIdentifier:(NSString *)resultIdentifier {
-    return [self predicateForNilQuestionResultWithTaskIdentifier:nil
-                                                  stepIdentifier:stepIdentifier
+    return [self predicateForNilQuestionResultWithTaskIdentifier:taskIdentifier
+                                                  stepIdentifier:nil
                                                 resultIdentifier:resultIdentifier];
 }
 
 + (NSPredicate *)predicateForNilQuestionResultWithResultIdentifier:(NSString *)resultIdentifier {
-    return [self predicateForNilQuestionResultWithStepIdentifier:nil
+    return [self predicateForNilQuestionResultWithTaskIdentifier:nil
                                                 resultIdentifier:resultIdentifier];
 }
 
@@ -270,55 +270,55 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                      stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                     expectedString:(NSString *)expectedString {
+                                                expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)expectedAnswerValue {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                      stepIdentifier:stepIdentifier
                                                    resultIdentifier:resultIdentifier
-                                                    expectedAnswers:@[ expectedString ]
+                                                    expectedAnswers:@[ expectedAnswerValue ]
                                                         usePatterns:NO];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                     expectedString:(NSString *)expectedString {
+                                                expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)expectedAnswerValue {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                      stepIdentifier:nil
                                                    resultIdentifier:resultIdentifier
-                                                     expectedString:expectedString];
+                                                expectedAnswerValue:expectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                       expectedString:(NSString *)expectedString {
+                                                  expectedAnswerValue:(id<NSCopying, NSCoding, NSObject>)expectedAnswerValue {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:nil
-                                                   resultIdentifier:(NSString *)resultIdentifier
-                                                     expectedString:(NSString *)expectedString];
+                                                   resultIdentifier:resultIdentifier
+                                                expectedAnswerValue:expectedAnswerValue];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                      stepIdentifier:(NSString *)stepIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                    expectedStrings:(NSArray<NSString *> *)expectedStrings {
+                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
-                                                     stepIdentifier:(NSString *)stepIdentifier
-                                                         resultIdentifier:resultIdentifier
-                                                    expectedAnswers:expectedStrings
+                                                     stepIdentifier:stepIdentifier
+                                                   resultIdentifier:resultIdentifier
+                                                    expectedAnswers:expectedAnswerValues
                                                         usePatterns:NO];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier
                                                    resultIdentifier:(NSString *)resultIdentifier
-                                                    expectedStrings:(NSArray<NSString *> *)expectedStrings {
+                                               expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                      stepIdentifier:nil
                                                    resultIdentifier:resultIdentifier
-                                                    expectedStrings:expectedStrings];
+                                               expectedAnswerValues:expectedAnswerValues];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithResultIdentifier:(NSString *)resultIdentifier
-                                                      expectedStrings:(NSArray *)expectedStrings {
+                                                 expectedAnswerValues:(NSArray<id<NSCopying, NSCoding, NSObject>> *)expectedAnswerValues {
     return [self predicateForChoiceQuestionResultWithTaskIdentifier:nil
                                                    resultIdentifier:resultIdentifier
-                                                    expectedStrings:expectedStrings];
+                                               expectedAnswerValues:expectedAnswerValues];
 }
 
 + (NSPredicate *)predicateForChoiceQuestionResultWithTaskIdentifier:(NSString *)taskIdentifier

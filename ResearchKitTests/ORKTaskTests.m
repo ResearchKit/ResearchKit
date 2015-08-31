@@ -170,7 +170,7 @@ ORKDefineStringKey(NavigableOrderedTaskIdentifier);
     
     // User chose headache at the symptom step
     NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:SymptomStepIdentifier
-                                                                                               expectedString:HeadacheChoiceValue];
+                                                                                          expectedAnswerValue:HeadacheChoiceValue];
     // Equivalent to:
     //      [NSPredicate predicateWithFormat:
     //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
@@ -510,9 +510,11 @@ static const float FloatValue = 6.5;
 
 ORKDefineStringKey(SingleChoiceStepIdentifier);
 ORKDefineStringKey(MultipleChoiceStepIdentifier);
+ORKDefineStringKey(MixedMultipleChoiceStepIdentifier);
 ORKDefineStringKey(SingleChoiceValue);
 ORKDefineStringKey(MultipleChoiceValue1);
 ORKDefineStringKey(MultipleChoiceValue2);
+static const NSInteger MultipleChoiceValue3 = 7;
 
 ORKDefineStringKey(BooleanStepIdentifier);
 static const BOOL BooleanValue = YES;
@@ -578,6 +580,7 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
 
     [stepResults addObject:getStepResult(SingleChoiceStepIdentifier, [ORKChoiceQuestionResult class], ORKQuestionTypeSingleChoice, @[SingleChoiceValue])];
     [stepResults addObject:getStepResult(MultipleChoiceStepIdentifier, [ORKChoiceQuestionResult class], ORKQuestionTypeMultipleChoice, @[MultipleChoiceValue1, MultipleChoiceValue2])];
+    [stepResults addObject:getStepResult(MixedMultipleChoiceStepIdentifier, [ORKChoiceQuestionResult class], ORKQuestionTypeMultipleChoice, @[MultipleChoiceValue1, MultipleChoiceValue2, @(MultipleChoiceValue3)])];
 
     [stepResults addObject:getStepResult(BooleanStepIdentifier, [ORKBooleanQuestionResult class], ORKQuestionTypeBoolean, @(BooleanValue))];
 
@@ -875,28 +878,53 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     // ORKChoiceQuestionResult (strings)
     XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                          resultIdentifier:SingleChoiceStepIdentifier
-                                                                           expectedString:SingleChoiceValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                      expectedAnswerValue:SingleChoiceValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                           resultIdentifier:SingleChoiceStepIdentifier
-                                                                            expectedString:OtherTextValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                       expectedAnswerValue:OtherTextValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     NSArray *expectedAnswers = nil;
+    expectedAnswers = @[MultipleChoiceValue1];
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                         resultIdentifier:MultipleChoiceStepIdentifier
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2];
     XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                          resultIdentifier:MultipleChoiceStepIdentifier
-                                                                          expectedStrings:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, OtherTextValue];
     XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                           resultIdentifier:MultipleChoiceStepIdentifier
-                                                                           expectedStrings:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
+                                                                      expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, @(MultipleChoiceValue3)];
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                          resultIdentifier:MultipleChoiceStepIdentifier
+                                                                      expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+
+    expectedAnswers = @[MultipleChoiceValue1];
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                         resultIdentifier:MixedMultipleChoiceStepIdentifier
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    expectedAnswers = @[@(MultipleChoiceValue3)];
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                         resultIdentifier:MixedMultipleChoiceStepIdentifier
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, @(MultipleChoiceValue3)];
+    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                         resultIdentifier:MixedMultipleChoiceStepIdentifier
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, OtherTextValue];
+    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
+                                                                         resultIdentifier:MixedMultipleChoiceStepIdentifier
+                                                                     expectedAnswerValues:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+
     // ORKChoiceQuestionResult (regular expressions)
     XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                          resultIdentifier:SingleChoiceStepIdentifier
                                                                           matchingPattern:@"...gleChoiceValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
                                                                           resultIdentifier:SingleChoiceStepIdentifier
-                                                                            expectedString:@"...SingleChoiceValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+                                                                       expectedAnswerValue:@"...SingleChoiceValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     expectedAnswers = @[@"...tipleChoiceValue1", @"...tipleChoiceValue2"];
     XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithTaskIdentifier:taskIdentifier
@@ -1084,204 +1112,10 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
                                                                        resultIdentifier:DateStepIdentifier
                                                               minimumExpectedAnswerDate:nil
                                                               maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-}
-
-- (void)testResultPredicatesWithSubstitutionVariables:(NSDictionary *)substitutionVariables
-                                          taskResults:(NSArray *)taskResults {
-    // ORKScaleQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ScaleStepIdentifier
-                                                                            expectedAnswer:IntegerValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ScaleStepIdentifier
-                                                                             expectedAnswer:IntegerValue + 1] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                 minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                 maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                 minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForScaleQuestionResultWithResultIdentifier:ContinuousScaleStepIdentifier
-                                                                 maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKChoiceQuestionResult (strings)
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:SingleChoiceStepIdentifier
-                                                                             expectedString:SingleChoiceValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:SingleChoiceStepIdentifier
-                                                                              expectedString:OtherTextValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    NSArray *expectedAnswers = nil;
-    expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2];
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:MultipleChoiceStepIdentifier
-                                                                            expectedStrings:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    expectedAnswers = @[MultipleChoiceValue1, MultipleChoiceValue2, OtherTextValue];
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:MultipleChoiceStepIdentifier
-                                                                             expectedStrings:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKChoiceQuestionResult (regular expressions)
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:SingleChoiceStepIdentifier
-                                                                            matchingPattern:@"...gleChoiceValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:SingleChoiceStepIdentifier
-                                                                              expectedString:@"...SingleChoiceValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    expectedAnswers = @[@"...tipleChoiceValue1", @"...tipleChoiceValue2"];
-    XCTAssertTrue([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:MultipleChoiceStepIdentifier
-                                                                           matchingPatterns:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    expectedAnswers = @[@"...MultipleChoiceValue1", @"...MultipleChoiceValue2", @"...OtherTextValue"];
-    XCTAssertFalse([[ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:MultipleChoiceStepIdentifier
-                                                                            matchingPatterns:expectedAnswers] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKBooleanQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:BooleanStepIdentifier
-                                                                              expectedAnswer:BooleanValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForBooleanQuestionResultWithResultIdentifier:BooleanStepIdentifier
-                                                                               expectedAnswer:!BooleanValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKTextQuestionResult (strings)
-    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                           expectedString:TextValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                            expectedString:OtherTextValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKTextQuestionResult (regular expressions)
-    XCTAssertTrue([[ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                          matchingPattern:@"...tValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTextQuestionResultWithResultIdentifier:TextStepIdentifier
-                                                                           matchingPattern:@"...TextValue"] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKNumericQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:IntegerNumericStepIdentifier
-                                                                              expectedAnswer:IntegerValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:IntegerNumericStepIdentifier
-                                                                               expectedAnswer:IntegerValue + 1] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:ORKIgnoreDoubleValue
-                                                                  maximumExpectedAnswerValue:ORKIgnoreDoubleValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                  maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                   minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                   maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                  maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                   minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                   maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                  minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                   minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                  maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNumericQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                   maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKTimeOfDayQuestionResult
-    NSDateComponents *expectedDateComponentsMinimum = DateComponents();
-    NSDateComponents *expectedDateComponentsMaximum = DateComponents();
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                           minimumExpectedHour:expectedDateComponentsMinimum.hour
-                                                                         minimumExpectedMinute:expectedDateComponentsMinimum.minute
-                                                                           maximumExpectedHour:expectedDateComponentsMaximum.hour
-                                                                         maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    expectedDateComponentsMinimum.minute -= 2;
-    expectedDateComponentsMaximum.minute += 2;
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                           minimumExpectedHour:expectedDateComponentsMinimum.hour
-                                                                         minimumExpectedMinute:expectedDateComponentsMinimum.minute
-                                                                           maximumExpectedHour:expectedDateComponentsMaximum.hour
-                                                                         maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    expectedDateComponentsMinimum.minute += 3;
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                            minimumExpectedHour:expectedDateComponentsMinimum.hour
-                                                                          minimumExpectedMinute:expectedDateComponentsMinimum.minute
-                                                                            maximumExpectedHour:expectedDateComponentsMaximum.hour
-                                                                          maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    expectedDateComponentsMinimum.minute -= 3;
-    expectedDateComponentsMinimum.hour += 1;
-    expectedDateComponentsMaximum.hour += 2;
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeOfDayQuestionResultWithResultIdentifier:TimeOfDayStepIdentifier
-                                                                            minimumExpectedHour:expectedDateComponentsMinimum.hour
-                                                                          minimumExpectedMinute:expectedDateComponentsMinimum.minute
-                                                                            maximumExpectedHour:expectedDateComponentsMaximum.hour
-                                                                          maximumExpectedMinute:expectedDateComponentsMaximum.minute] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKTimeIntervalQuestionResult
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                       minimumExpectedAnswerValue:ORKIgnoreTimeIntervalValue
-                                                                       maximumExpectedAnswerValue:ORKIgnoreTimeIntervalValue] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                       minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                       maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                        minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                        maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                       minimumExpectedAnswerValue:FloatValue - 0.01
-                                                                       maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                        minimumExpectedAnswerValue:FloatValue + 0.05
-                                                                        maximumExpectedAnswerValue:FloatValue + 0.06] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                       minimumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                        minimumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                       maximumExpectedAnswerValue:FloatValue + 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForTimeIntervalQuestionResultWithResultIdentifier:FloatNumericStepIdentifier
-                                                                        maximumExpectedAnswerValue:FloatValue - 0.01] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    // ORKDateQuestionResult
-    NSDate *expectedDate = Date();
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
-                                                                maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                 minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]
-                                                                 maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+120]] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-60]
-                                                                maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                 minimumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+1]
-                                                                 maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                minimumExpectedAnswerDate:nil
-                                                                maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:+60]] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                 minimumExpectedAnswerDate:nil
-                                                                 maximumExpectedAnswerDate:[expectedDate dateByAddingTimeInterval:-1]] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    
-    XCTAssertTrue([[ORKResultPredicate predicateForDateQuestionResultWithResultIdentifier:DateStepIdentifier
-                                                                minimumExpectedAnswerDate:nil
-                                                                maximumExpectedAnswerDate:nil] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
     
     // Result with nil value
-    XCTAssertTrue([[ORKResultPredicate predicateForNilQuestionResultWithResultIdentifier:NilTextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
-    XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithResultIdentifier:TextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    XCTAssertTrue([[ORKResultPredicate predicateForNilQuestionResultWithTaskIdentifier:taskIdentifier resultIdentifier:NilTextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
+    XCTAssertFalse([[ORKResultPredicate predicateForNilQuestionResultWithTaskIdentifier:taskIdentifier resultIdentifier:TextStepIdentifier] evaluateWithObject:taskResults substitutionVariables:substitutionVariables]);
 }
 
 - (void)testResultPredicates {
@@ -1299,9 +1133,6 @@ static ORKStepResult *(^getStepResult)(NSString *, Class, ORKQuestionType, id) =
     [self testResultPredicatesWithTaskIdentifier:nil
                            substitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
                                      taskResults:taskResults];
-    // Test nil task identifier convenience methods
-    [self testResultPredicatesWithSubstitutionVariables:@{ORKResultPredicateTaskIdentifierVariableName: OrderedTaskIdentifier}
-                                            taskResults:taskResults];
 }
 
 @end
