@@ -76,6 +76,7 @@
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowEdit requires the property userPasscode to be set" userInfo:nil];
     } else if (self.passcodeFlow == ORKPasscodeFlowAuthenticate && !self.userPasscode) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowAuthenticate requires the property userPasscode to be set" userInfo:nil];
+    }
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

@@ -45,8 +45,7 @@ typedef enum : NSUInteger {
     ORKPasscodeStateSaved,
     ORKPasscodeStateOldEntry,
     ORKPasscodeStateNewEntry,
-    ORKPasscodeStateConfirmNewEntry,
-    ORKPasscodeStateAuthenticated
+    ORKPasscodeStateConfirmNewEntry
 } ORKPasscodeState;
 
 @implementation ORKPasscodeStepViewController {
@@ -98,6 +97,9 @@ typedef enum : NSUInteger {
         } else if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
             // Send the user a Touch ID prompt, if it is available.
             [self promptTouchId];
+            
+            // Remove the cancel button.
+            self.cancelButtonItem = nil;
         }
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -139,13 +141,6 @@ typedef enum : NSUInteger {
             
         case ORKPasscodeStateSaved:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_SAVED_MESSAGE", nil);
-            _passcodeStepView.textField.hidden = YES;
-            _shouldResignFirstResponder = YES;
-            [_passcodeStepView.textField resignFirstResponder];
-            break;
-            
-        case ORKPasscodeStateAuthenticated:
-            _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_AUTHENTICATED_MESSAGE", nil);
             _passcodeStepView.textField.hidden = YES;
             _shouldResignFirstResponder = YES;
             [_passcodeStepView.textField resignFirstResponder];
@@ -224,8 +219,14 @@ typedef enum : NSUInteger {
                 if (success) {
                     // Store that user passed authentication.
                     _isTouchIDAuthenticated = YES;
-                    [self goForward];
-                     
+                    
+                    // Proceed depending on the flow.
+                    if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    } else {
+                        [self goForward];
+                    }
+                    
                 } else if (error.code == kLAErrorUserCancel) {
                     if (! (_passcodeFlow == ORKPasscodeFlowAuthenticate) ) {
                         // User hit the cancel button.
@@ -394,22 +395,13 @@ typedef enum : NSUInteger {
     
     /* Passcode Flow Authenticate
         1) ORKPasscodeStateEntry                    - User enters their passcode.
-        2) ORKPasscodeStateAuthenticated            - User is shown a passcode authenticated message.
      */
     
     if (_passcodeState == ORKPasscodeStateEntry) {
         // The inputted passcode matches the user's passcode.
         if ([_passcode isEqualToString:[self passcodeStep].userPasscode]) {
-            // Move to new entry step.
-            _passcodeState = ORKPasscodeStateAuthenticated;
-            [self updatePasscodeView];
-            
-            // Go to next step after a short delay of showing passcode authenticated message.
-            double delayInSeconds = 0.5;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self goForward];
-            });
+            // Dismiss the presenting view controller.
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             // Wrong attempt.
             [self wrongAttempt];
