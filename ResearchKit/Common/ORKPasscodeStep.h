@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
     ORKPasscodeFlowCreate,
-    ORKPasscodeFlowAuthenticate,
-    ORKPasscodeFlowEdit
+    ORKPasscodeFlowEdit,
+    ORKPasscodeFlowAuthenticate
 } ORKPasscodeFlow;
 
 /**
@@ -63,7 +63,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                       passcodeFlow:(ORKPasscodeFlow)passcodeFlow
-                              text:(NSString *)text;
+                              text:(nullable NSString *)text;
 
 /**
  Returns an initialized passcode step using the specified passcode flow.
@@ -89,6 +89,17 @@ ORK_CLASS_AVAILABLE
  An exmaple usage would be inside a profile or settings page.
  */
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
+
+
+/**
+ The original passcode entered by the user.
+ 
+ This property must not set with a create passcode flow.
+ This property is required with an edit passcode flow and authenticate passcode flow.
+ The user passcode will be used to verify if the inputted passcode matches with it.
+ Developer must provide the userPasscode that was stroed using a create passcode flow.
+ */
+@property (nonatomic, copy, nullable) NSString *userPasscode;
 
 @end
 

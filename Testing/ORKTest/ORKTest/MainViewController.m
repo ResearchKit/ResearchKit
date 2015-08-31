@@ -1182,8 +1182,12 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode" passcodeFlow:ORKPasscodeFlowCreate];
     passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
+    
+    ORKPasscodeStep *passcodeStep2 = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode_2" passcodeFlow:ORKPasscodeFlowAuthenticate];
+    passcodeStep2.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
+    passcodeStep2.userPasscode = @"1111";
 
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[ step, passcodeStep, reviewStep]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[ passcodeStep2, step, passcodeStep, reviewStep]];
     
     return task;
 }

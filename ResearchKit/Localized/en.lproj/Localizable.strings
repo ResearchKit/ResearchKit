@@ -95,9 +95,13 @@
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
 "PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
+"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
 "PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Please try again.";
-"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";

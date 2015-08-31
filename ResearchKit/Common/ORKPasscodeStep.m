@@ -33,6 +33,7 @@
 #import "ORKPasscodeStepViewController.h"
 #import "ORKHelpers.h"
 
+
 @implementation ORKPasscodeStep
 
 + (Class)stepViewControllerClass {
@@ -44,8 +45,8 @@
                               text:(NSString *)text {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.text = text;
         self.passcodeFlow = passcodeFlow;
+        self.text = text;
     }
     return self;
 }
@@ -54,12 +55,27 @@
                       passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
     return [self initWithIdentifier:identifier
                        passcodeFlow:passcodeFlow
-                               text:@""];
+                               text:nil];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     ORKThrowMethodUnavailableException();
     return nil;
+}
+
+- (BOOL)showsProgress {
+    return NO;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (self.passcodeFlow == ORKPasscodeFlowCreate && self.userPasscode) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowCreate cannot have the property userPasscode set." userInfo:nil];
+    } else if (self.passcodeFlow == ORKPasscodeFlowEdit && !self.userPasscode) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowEdit requires the property userPasscode to be set" userInfo:nil];
+    } else if (self.passcodeFlow == ORKPasscodeFlowAuthenticate && !self.userPasscode) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowAuthenticate requires the property userPasscode to be set" userInfo:nil];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -94,10 +110,6 @@
 
 + (BOOL)supportsSecureCoding {
     return YES;
-}
-
-- (BOOL)showsProgress {
-    return NO;
 }
 
 @end
