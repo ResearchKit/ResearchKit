@@ -55,17 +55,17 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     // Match task identifier
 
     if (taskIdentifier) {
-        [format appendString:@"SUBQUERY(SELF, $x, $x.identifier like %@"];
+        [format appendString:@"SUBQUERY(SELF, $x, $x.identifier == %@"];
         [formatArgumentArray addObject:taskIdentifier];
     } else {
         // If taskIdentifier is nil, ORKPredicateStepNavigationRule will substitute the
         // ORKResultPredicateTaskIdentifierSubstitutionVariableName variable by the identifier of the ongoing task
-        [format appendFormat:@"SUBQUERY(SELF, $x, $x.identifier like $%@", ORKResultPredicateTaskIdentifierVariableName];
+        [format appendFormat:@"SUBQUERY(SELF, $x, $x.identifier == $%@", ORKResultPredicateTaskIdentifierVariableName];
     }
     
     {
         // Match question result identifier
-        [format appendString:@" AND SUBQUERY($x.results, $y, $y.identifier like %@ AND SUBQUERY($y.results, $z, $z.identifier like %@"];
+        [format appendString:@" AND SUBQUERY($x.results, $y, $y.identifier == %@ AND SUBQUERY($y.results, $z, $z.identifier == %@"];
         [formatArgumentArray addObject:stepIdentifier];
         [formatArgumentArray addObject:resultIdentifier];
         {
@@ -253,7 +253,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     NSString *repeatingSubPredicateFormat =
     usePatterns ?
     @"answer, $w, $w matches %@" :
-    @"answer, $w, $w like %@";
+    @"answer, $w, $w == %@";
     
     for (NSInteger i = 0; i < [expectedAnswers count]; i++) {
         [subPredicateFormatArray addObject:repeatingSubPredicateFormat];
@@ -411,7 +411,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
     return [self predicateMatchingTaskIdentifier:taskIdentifier
                                   stepIdentifier:stepIdentifier
                                 resultIdentifier:resultIdentifier
-                         subPredicateFormatArray:@[ @"answer like %@" ]
+                         subPredicateFormatArray:@[ @"answer == %@" ]
                  subPredicateFormatArgumentArray:@[ expectedString ]];
 }
 
