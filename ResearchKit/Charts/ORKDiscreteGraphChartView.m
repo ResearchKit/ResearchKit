@@ -61,8 +61,9 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
-    for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
+    NSUInteger pointCount = ((NSArray *)self.dataPoints[plotIndex]).count;
+    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
@@ -78,17 +79,18 @@
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangedPoint *positionOnYAxis = nil;
-    for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
+    NSUInteger pointCount = ((NSArray *)self.yAxisPoints[plotIndex]).count;
+    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
+        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
         
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             
             UIBezierPath *linePath = [UIBezierPath bezierPath];
             
-            positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
+            positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][i]);
+            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex]);
             
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];

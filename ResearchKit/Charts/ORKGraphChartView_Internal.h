@@ -83,6 +83,8 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (NSInteger)numberOfPlots;
 
+- (ORKRangedPoint *)dataPointAtPlotIndex:(NSUInteger)plotIndex pointIndex:(NSUInteger)pointIndex;
+
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
 
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
