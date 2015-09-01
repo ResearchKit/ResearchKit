@@ -521,3 +521,9 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableA
 }
 
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
+
+void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
+    if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
+        *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
+    }
+}
