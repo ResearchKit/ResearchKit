@@ -510,7 +510,7 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
     }
 }
 
-void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableArray *removedViews) {
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews) {
     for (NSLayoutConstraint *constraint in [constraints copy]) {
         for (UIView *view in removedViews) {
             if (constraint.firstItem == view || constraint.secondItem == view) {
