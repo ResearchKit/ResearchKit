@@ -104,7 +104,9 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .Survey,
                     .Form,
-                    
+                ]),
+            TaskListRowSection(title: "Survey Questions", rows:
+                [
                     .BooleanQuestion,
                     .DateQuestion,
                     .DateTimeQuestion,
@@ -139,34 +141,13 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     // MARK: CustomStringConvertible
     
-    var indentationLevel: Int {
-        switch self {
-        case
-        .BooleanQuestion,
-        .DateQuestion,
-        .DateTimeQuestion,
-        .ImageChoiceQuestion,
-        .NumericQuestion,
-        .ScaleQuestion,
-        .TimeIntervalQuestion,
-        .TimeOfDayQuestion,
-        .TextQuestion,
-        .TextChoiceQuestion,
-        .ValuePickerChoiceQuestion,
-        .ImageCapture:
-            return 2
-        default:
-            return 0
-        }
-    }
-
     var description: String {
         switch self {
         case .Survey:
-            return NSLocalizedString("Survey Example", comment: "")
+            return NSLocalizedString("Simple Survey Example", comment: "")
             
         case .Form:
-            return NSLocalizedString("Form Example", comment: "")
+            return NSLocalizedString("Form Survey Example", comment: "")
 
         case .BooleanQuestion:
             return NSLocalizedString("Boolean Question", comment: "")

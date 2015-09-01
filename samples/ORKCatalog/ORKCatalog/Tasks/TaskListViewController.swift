@@ -69,11 +69,6 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         return TaskListRow.sections[section].title
     }
     
-    override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
-        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
-        return taskListRow.indentationLevel
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
         
