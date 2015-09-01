@@ -58,7 +58,7 @@ inline static CAShapeLayer *graphLineLayer() {
     return lineLayer;
 }
 
-static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
+static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
     return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 

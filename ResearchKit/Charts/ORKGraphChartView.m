@@ -696,7 +696,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
 }
 
 - (CGFloat)snappedXPosition:(CGFloat)xPosition {
-    CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
     CGFloat widthBetweenPoints = CGRectGetWidth(_plotView.frame) / numberOfXAxisPoints;
     for (NSUInteger positionIndex = 0; positionIndex < ((NSArray *)_dataPoints[0]).count; positionIndex++) {
         
@@ -718,7 +718,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
     CGFloat value = ORKCGFloatInvalidValue;
     NSUInteger positionIndex = 0;
     if (snapped) {
-        CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+        NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
         for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
             CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
             if (xAxisPointValue == xPosition) {
@@ -752,7 +752,7 @@ inline static CALayer *graphPointLayerWithTintColor(UIColor *tintColor) {
 
 - (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition {
     NSUInteger positionIndex = 0;
-    CGFloat numberOfXAxisPoints = self.numberOfXAxisPoints;
+    NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
     for (positionIndex = 0; positionIndex < (numberOfXAxisPoints - 1); positionIndex++) {
         CGFloat xAxisPointValue = xAxisPoint(positionIndex, numberOfXAxisPoints, _plotView.bounds.size.width);
         if (xAxisPointValue > xPosition) {
