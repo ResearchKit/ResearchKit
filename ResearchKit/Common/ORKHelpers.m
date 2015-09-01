@@ -323,13 +323,13 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
 }
 
 BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
-    NSString * language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
+    NSString *language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
     static dispatch_once_t onceToken;
-    static NSArray *familyNameFirstLangs = nil;
+    static NSArray *familyNameFirstLanguages = nil;
     dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
+        familyNameFirstLanguages = @[@"zh", @"ko", @"ja", @"vi"];
     });
-    return (language != nil) && [familyNameFirstLangs containsObject:language];
+    return (language != nil) && [familyNameFirstLanguages containsObject:language];
 }
 
 BOOL ORKWantsWideContentMargins(UIScreen *screen) {
