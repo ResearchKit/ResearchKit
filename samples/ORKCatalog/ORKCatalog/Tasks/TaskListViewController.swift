@@ -55,18 +55,29 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     */
     var taskResultFinishedCompletionHandler: (ORKResult -> Void)?
     
-    let taskListRows = TaskListRow.allCases
-    
     // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return TaskListRow.sections.count
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskListRows.count
+        return TaskListRow.sections[section].rows.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return TaskListRow.sections[section].title
+    }
+    
+    override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
+        return taskListRow.indentationLevel
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
         
-        let taskListRow = taskListRows[indexPath.row]
+        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
         
         cell.textLabel!.text = "\(taskListRow)"
         
@@ -79,7 +90,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // Present the task view controller that the user asked for.
-        let taskListRow = taskListRows[indexPath.row]
+        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
         
         // Create a task from the `TaskListRow` to present in the `ORKTaskViewController`.
         let task = taskListRow.representedTask
