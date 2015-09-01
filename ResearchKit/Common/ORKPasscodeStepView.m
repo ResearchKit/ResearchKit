@@ -50,10 +50,9 @@
                                                  NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
         self.textField.textAlignment = NSTextAlignmentCenter;
         self.textField.translatesAutoresizingMaskIntoConstraints = NO;
-        
+                
         self.stepView = self.textField;
-        self.scrollEnabled = NO;
-            
+        
         [self updateAppearance];
     }
     return self;
@@ -69,11 +68,12 @@
     */
     [self addConstraints:@[
                            [NSLayoutConstraint constraintWithItem:self.textField
-                                                     attribute:NSLayoutAttributeWidth
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeWidth multiplier:1.0
-                                                      constant:0]
+                                                        attribute:NSLayoutAttributeWidth
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeWidth
+                                                       multiplier:1.0
+                                                         constant:0]
                            ]];
 }
 
@@ -84,17 +84,17 @@
 
 #pragma mark - Keyboard methods
 
-- (void)keyboardFrameWillChange:(NSNotification *)notification {
-    // Overriding method implementation from superclass.
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    // Overriding method implementation from superclass.
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    // Overriding method implementation from superclass.
-}
+//- (void)keyboardFrameWillChange:(NSNotification *)notification {
+//    // Overriding method implementation from superclass.
+//}
+//
+//- (void)keyboardWillShow:(NSNotification *)notification {
+//    // Overriding method implementation from superclass.
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)notification {
+//    // Overriding method implementation from superclass.
+//}
 
 
 @end

@@ -102,6 +102,7 @@
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
 "PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Please try again.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Use Touch ID?";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";

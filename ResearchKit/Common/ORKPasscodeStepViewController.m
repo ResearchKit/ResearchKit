@@ -30,27 +30,28 @@
 
 
 #import "ORKPasscodeStepViewController.h"
-#import "ORKPasscodeStep.h"
 #import "ORKPasscodeStepView.h"
+#import "ORKPasscodeStep.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKTaskViewController_Internal.h"
+#import "ORKPasscodeStepViewController_Internal.h"
+#import "ORKSkin.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeStateEntry,
     ORKPasscodeStateConfirm,
     ORKPasscodeStateSaved,
     ORKPasscodeStateOldEntry,
     ORKPasscodeStateNewEntry,
     ORKPasscodeStateConfirmNewEntry
-} ORKPasscodeState;
+};
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
-    ORKPasscodeFlow _passcodeFlow;
     NSMutableString *_passcode;
     NSMutableString *_confirmPasscode;
     NSInteger _position;
@@ -60,6 +61,75 @@ typedef enum : NSUInteger {
     BOOL _isChangingState;
     BOOL _isTouchIDAuthenticated;
     LAContext *_touchContext;
+}
+
++ (id)passcodeCreationViewControllerWithText:(NSString *)text
+                                passcodeType:(ORKPasscodeType)passcodeType
+                                    delegate:(id<ORKPasscodeCreationDelegate>)delegate
+                        useTouchIdIfAvaiable:(BOOL)useTouchId {
+    
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.text = text;
+    
+    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
+    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowCreate;
+    passcodeStepViewController.passcodeType = passcodeType;
+    passcodeStepViewController.passcodeDelegate = delegate;
+    passcodeStepViewController.useTouchId = useTouchId;
+    passcodeStepViewController.step = step;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = NO;
+    
+    return navigationController;
+}
+
++ (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
+                                      passcodeType:(ORKPasscodeType)passcodeType
+                                          delegate:(id<ORKPasscodeAuthenticationDelegate>)delegate
+                              useTouchIdIfAvaiable:(BOOL)useTouchId {
+    
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.text = text;
+    
+    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
+    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowAuthenticate;
+    passcodeStepViewController.passcodeType = passcodeType;
+    passcodeStepViewController.passcodeDelegate = delegate;
+    passcodeStepViewController.useTouchId = useTouchId;
+    passcodeStepViewController.step = step;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = NO;
+    
+    return navigationController;
+}
+
++ (id)passcodeEditingViewControllerWithText:(NSString *)text
+                               passcodeType:(ORKPasscodeType)passcodeType
+                                   delegate:(id<ORKPasscodeEditingDelegate>)delegate
+                        useTouchIdIfAvaiable:(BOOL)useTouchId {
+    
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.text = text;
+    
+    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
+    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowEdit;
+    passcodeStepViewController.passcodeType = passcodeType;
+    passcodeStepViewController.passcodeDelegate = delegate;
+    passcodeStepViewController.useTouchId = useTouchId;
+    passcodeStepViewController.step = step;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = NO;
+    
+    return navigationController;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -74,7 +144,6 @@ typedef enum : NSUInteger {
     
     if (self.step && [self isViewLoaded]) {
         
-        _passcodeFlow = [self passcodeStep].passcodeFlow;
         _passcode = [NSMutableString new];
         _confirmPasscode = [NSMutableString new];
         _position = 0;
@@ -85,9 +154,9 @@ typedef enum : NSUInteger {
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _passcodeStepView.passcodeType = ORKPasscodeType4Digit;
         _passcodeStepView.textField.delegate = self;
         _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
+        _passcodeStepView.passcodeType = _passcodeType;
         [self.view addSubview:_passcodeStepView];
         
         // Set the starting state based on flow.
@@ -95,11 +164,11 @@ typedef enum : NSUInteger {
             _passcodeState = ORKPasscodeStateOldEntry;
             [self updatePasscodeView];
         } else if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            // Send the user a Touch ID prompt, if it is available.
-            [self promptTouchId];
-            
             // Remove the cancel button.
             self.cancelButtonItem = nil;
+            
+            // Send the user a Touch ID prompt, if it is available.
+            [self promptTouchId];
         }
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -113,8 +182,7 @@ typedef enum : NSUInteger {
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    _shouldResignFirstResponder = YES;
-    [_passcodeStepView.textField endEditing:YES];
+    [self makePasscodeViewResignFirstResponder];
 }
 
 - (void)viewDidLoad {
@@ -185,7 +253,17 @@ typedef enum : NSUInteger {
 }
 
 - (void)makePasscodeViewBecomeFirstResponder{
-    [_passcodeStepView.textField becomeFirstResponder];
+    if (! _passcodeStepView.textField.isFirstResponder) {
+        _shouldResignFirstResponder = NO;
+        [_passcodeStepView.textField becomeFirstResponder];
+    }
+}
+
+- (void)makePasscodeViewResignFirstResponder {
+    if (_passcodeStepView.textField.isFirstResponder) {
+        _shouldResignFirstResponder = YES;
+        [_passcodeStepView.textField resignFirstResponder];
+    }
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
@@ -205,34 +283,31 @@ typedef enum : NSUInteger {
     _touchContext = [LAContext new];
     _touchContext.localizedFallbackTitle = @"";
     
-    
     // Check to see if the device supports Touch ID.
-    if ([_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
+    if (_useTouchId &&
+        [_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
         
-        NSString *localizedReason = NSLocalizedString(@"Use Touch ID?", @"");
-        
+        NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-                          localizedReason:localizedReason
-                                    reply:^(BOOL success, NSError *error) {
+                      localizedReason:localizedReason
+                                reply:^(BOOL success, NSError *error) {
                                         
             dispatch_sync(dispatch_get_main_queue(), ^{
+                
                 if (success) {
                     // Store that user passed authentication.
                     _isTouchIDAuthenticated = YES;
                     
-                    // Proceed depending on the flow.
-                    if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                    } else {
-                        [self goForward];
+                    if (self.passcodeDelegate &&
+                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchID:)]) {
+                        [self.passcodeDelegate passcodeViewController:self
+                                          didAuthenticateUsingTouchID:_isTouchIDAuthenticated];
                     }
-                    
-                } else if (error.code == kLAErrorUserCancel) {
-                    if (! (_passcodeFlow == ORKPasscodeFlowAuthenticate) ) {
-                        // User hit the cancel button.
-                        [self goForward];
-                    }
-                } else {
+                }
+                
+                if (error.code == kLAErrorUserCancel) {
+                    [self makePasscodeViewBecomeFirstResponder];
+                } else if (error) {
                     // Display the error message.
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                                    message:error.localizedDescription
@@ -240,26 +315,34 @@ typedef enum : NSUInteger {
                     
                     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                                        style:UIAlertActionStyleDefault
-                                                                     handler:^(UIAlertAction * __unused action) {
-                                                                         if (! (_passcodeFlow == ORKPasscodeFlowAuthenticate)) {
-                                                                             [self goForward];
-                                                                         }
-                                                                     }];
+                                                                     handler:nil];
                     [alert addAction:okAction];
                     [self presentViewController:alert animated:YES completion:nil];
                  }
+                
+                if (self.passcodeDelegate &&
+                    [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
+                    [self.passcodeDelegate passcodeViewController:self
+                                            didFinishWithPasscode:_passcode
+                                                andTouchIdEnabled:_isTouchIDAuthenticated];
+                }
             });
         }];
         
-    } else if (! (_passcodeFlow == ORKPasscodeFlowAuthenticate)) {
+    } else {
         // Device does not support TouchID.
-        [self goForward];
+        if (self.passcodeDelegate &&
+            [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
+            [self.passcodeDelegate passcodeViewController:self
+                                    didFinishWithPasscode:_passcode
+                                        andTouchIdEnabled:_isTouchIDAuthenticated];
+        }
     }
 }
 
 - (void)wrongAttempt {
     
-    // Vibrate the phone.
+    // Vibrate the device.
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     // Shake animation.
@@ -324,7 +407,7 @@ typedef enum : NSUInteger {
             
         } else {
             // If the input does not match, notify the user.
-            if (_wrongAttemptsCount < 3) {
+            if (_wrongAttemptsCount < MaxAttempts) {
                 [self wrongAttempt];
             } else {
                 // Change back to entry state.
@@ -348,14 +431,20 @@ typedef enum : NSUInteger {
      */
     
     if (_passcodeState == ORKPasscodeStateOldEntry) {
-        // The inputted passcode matches the old user passcode.
-        if ([_passcode isEqualToString:[self passcodeStep].userPasscode]) {
-            // Move to new entry step.
-            _passcodeState = ORKPasscodeStateNewEntry;
-            [self updatePasscodeView];
-        } else {
-            // Wrong attempt.
-            [self wrongAttempt];
+        // Check if the inputted passcode matches the old user passcode.
+        if (self.passcodeDelegate &&
+            [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:isPasscodeValid:)]) {
+            BOOL isValid = [self.passcodeDelegate passcodeViewController:self
+                                                         isPasscodeValid:_passcode];
+            
+            if (isValid) {
+                // Move to new entry step.
+                _passcodeState = ORKPasscodeStateNewEntry;
+                [self updatePasscodeView];
+            } else {
+                // Wrong attempt.
+                [self wrongAttempt];
+            }
         }
     } else if (_passcodeState == ORKPasscodeStateNewEntry) {
         // Move to confirm new entry state.
@@ -376,7 +465,7 @@ typedef enum : NSUInteger {
             });
         } else {
             // If the input does not match, notify the user.
-            if (_wrongAttemptsCount < 3) {
+            if (_wrongAttemptsCount < MaxAttempts) {
                 [self wrongAttempt];
             } else {
                 // Change back to entry state.
@@ -398,18 +487,24 @@ typedef enum : NSUInteger {
      */
     
     if (_passcodeState == ORKPasscodeStateEntry) {
-        // The inputted passcode matches the user's passcode.
-        if ([_passcode isEqualToString:[self passcodeStep].userPasscode]) {
-            // Dismiss the presenting view controller.
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            // Wrong attempt.
-            [self wrongAttempt];
+        if (self.passcodeDelegate &&
+            [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:isPasscodeValid:)]) {
+            BOOL isValid = [self.passcodeDelegate passcodeViewController:self
+                                                         isPasscodeValid:_passcode];
+            if (isValid) {
+                if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchID:)]) {
+                    [self.passcodeDelegate passcodeViewController:self
+                                      didAuthenticateUsingTouchID:_isTouchIDAuthenticated];
+                }
+            } else {
+                [self wrongAttempt];
+            }
+
         }
     }
 }
 
-# pragma mark - UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     

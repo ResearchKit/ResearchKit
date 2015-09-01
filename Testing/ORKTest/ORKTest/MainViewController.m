@@ -1180,14 +1180,10 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode" passcodeFlow:ORKPasscodeFlowCreate];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
     passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
-    
-    ORKPasscodeStep *passcodeStep2 = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode_2" passcodeFlow:ORKPasscodeFlowAuthenticate];
-    passcodeStep2.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
-    passcodeStep2.userPasscode = @"1111";
 
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[ passcodeStep2, step, passcodeStep, reviewStep]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
     
     return task;
 }

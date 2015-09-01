@@ -29,20 +29,27 @@
  */
 
 
-#import "ORKVerticalContainerView.h"
-#import "ORKTextFieldView.h"
-#import "ORKDefines.h"
+#import "ORKPasscodeStepViewController.h"
 
 
-static NSString* const kEmptyBullet = @"\u25CB";
-static NSString* const kFilledBullet = @"\u25CF";
-static NSString* const k4DigitPin = @"\u25CB\u25CB\u25CB\u25CB";
-static NSString* const k6DigitPin = @"\u25CB\u25CB\u25CB\u25CB\u25CB\u25CB";
+NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKPasscodeStepView : ORKVerticalContainerView
+static NSString * const PasscodeStepIdentifier = @"passcode_step";
+static NSInteger const  MaxAttempts = 3;
 
+typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
+    ORKPasscodeFlowCreate,
+    ORKPasscodeFlowAuthenticate,
+    ORKPasscodeFlowEdit
+};
+
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
+
+@property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic) ORKPasscodeType passcodeType;
-
-@property (nonatomic, strong) ORKPasscodeTextField *textField;
+@property (nonatomic, weak, nullable) id passcodeDelegate;
+@property (nonatomic) BOOL useTouchId;
 
 @end
+
+NS_ASSUME_NONNULL_END

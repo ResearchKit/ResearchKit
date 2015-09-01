@@ -31,7 +31,6 @@
 
 #import "ORKPasscodeStep.h"
 #import "ORKPasscodeStepViewController.h"
-#import "ORKHelpers.h"
 
 
 @implementation ORKPasscodeStep
@@ -40,27 +39,12 @@
     return [ORKPasscodeStepViewController class];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow
-                              text:(NSString *)text {
+- (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.passcodeFlow = passcodeFlow;
-        self.text = text;
+        
     }
     return self;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                      passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
-    return [self initWithIdentifier:identifier
-                       passcodeFlow:passcodeFlow
-                               text:nil];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    ORKThrowMethodUnavailableException();
-    return nil;
 }
 
 - (BOOL)showsProgress {
@@ -69,27 +53,15 @@
 
 - (void)validateParameters {
     [super validateParameters];
-    
-    if (self.passcodeFlow == ORKPasscodeFlowCreate && self.userPasscode) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowCreate cannot have the property userPasscode set." userInfo:nil];
-    } else if (self.passcodeFlow == ORKPasscodeFlowEdit && !self.userPasscode) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowEdit requires the property userPasscode to be set" userInfo:nil];
-    } else if (self.passcodeFlow == ORKPasscodeFlowAuthenticate && !self.userPasscode) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Passcode step with ORKPasscodeFlowAuthenticate requires the property userPasscode to be set" userInfo:nil];
-    }
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPasscodeStep *step = [super copyWithZone:zone];
-    step.passcodeFlow = self.passcodeFlow;
     return step;
 }
 
 - (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return isParentSame && (self.passcodeFlow == castObject.passcodeFlow);
+    return [super isEqual:object];
 }
 
 - (NSUInteger)hash {
@@ -99,14 +71,12 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_INTEGER(aDecoder, passcodeFlow);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_INTEGER(aCoder, passcodeFlow);
 }
 
 + (BOOL)supportsSecureCoding {
