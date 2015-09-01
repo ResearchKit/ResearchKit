@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Verwenden Sie für jeden Test dieselbe Gehhilfe.";
 "TIMED_WALK_QUESTION_TEXT" = "Verwenden Sie eine Unterschenkelorthese?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Verwenden Sie Gehhilfen?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tippen Sie hier, um eine Antwort auszuwählen.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tippen, um eine Antwort auszuwählen.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Ohne";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Gehstock, eine Seite";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Krücke, eine Seite";
@@ -252,7 +252,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Rollator";
 "TIMED_WALK_INSTRUCTION_%@" = "Gehen Sie bis zu %@ in einer geraden Linie.";
 "TIMED_WALK_INSTRUCTION_2" = "Drehen Sie sich um und gehen Sie zum Ausgangspunkt zurück.";
-"TIMED_WALK_INSTRUCTION_TEXT" = "Tippen Sie auf „Fertig“, wenn Sie fertig sind.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tippen Sie danach auf „Fertig“.";
 
 
 /* Charts */

@@ -153,7 +153,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "安坐 %@。";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "用最快的速度步行 %@。";
 "FITNESS_INTRO_TEXT_FORMAT" = "此測試活動能監測你的心跳率，並量度你在 %1$@內能步行的最遠距離。";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "在室外以盡可能最快的速度步行 %1$@。完成後，安坐並休息 %2$@。若要開始測試，請點一下「開始」。";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "在室外以盡可能最快的速度步行 %1$@。完成後，安坐並休息 %2$@。點一下「開始」以進行測試。";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "步態及平衡";
@@ -170,14 +170,14 @@
 "TAPPING_TASK_TITLE" = "點按速度";
 "TAPPING_INTRO_TEXT" = "此測試活動能評估你的點按速度。";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "請先平放電話。螢幕上將顯示兩個按鈕，請用同一隻手的兩指，在 %@內以最快的速度梅花間竹地點按這些按鈕。";
-"TAPPING_CALL_TO_ACTION" = "點一下「開始」。";
+"TAPPING_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "TAP_BUTTON_TITLE" = "點按";
 "TOTAL_TAPS_LABEL" = "點按總次數";
 "TAPPING_INSTRUCTION" = "用兩指以最快的速度點按這些按鈕。";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "語音";
-"AUDIO_CALL_TO_ACTION" = "點一下「開始」。";
+"AUDIO_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "AUDIO_INSTRUCTION" = "對着咪高風發出「呀─」的聲音，時間愈長愈好。";
 "AUDIO_INTRO_TEXT" = "深呼吸，然後對着咪高風發出「呀─」的聲音，時間愈長愈好。請保持穩定的音量，以使音量棒圖維持藍色。";
 "AUDIO_INTENDED_USE" = "此測試活動會使用電話底部的咪高風錄音，以評估你的聲音。";
@@ -188,7 +188,7 @@
 "TONE_AUDIOMETRY_TASK_TITLE" = "純音聽力檢查";
 "TONE_AUDIOMETRY_INTENDED_USE" = "此測試活動能評估你聆聽不同聲音的能力。";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "在開始之前，請插入並戴上耳筒。";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」。";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "TONE_AUDIOMETRY_PREP_TEXT" = "你現在應該聽到一個音頻。請使用裝置旁的音量按鈕以調整音量。\n\n若你準備好開始，請點一下按鈕。";
 "TONE_AUDIOMETRY_INSTRUCTION" = "每次當你開始聽到聲音時，請點一下按鈕。";
 "TONE_LABEL_%@_LEFT" = "%@ Hz，左";
@@ -201,7 +201,7 @@
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "花朵";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "部分%@圖案會逐個亮起。請以亮起的次序點按這些%@圖案。";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "部分%@圖案會逐個亮起。請以亮起的相反次序點按這些%@圖案。";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "若要開始測試，點一下「開始」，然後細心觀看。";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "點一下「開始」以進行測試，然後細心觀看。";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "分數";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "看亮起的%@";
@@ -221,7 +221,7 @@
 "REACTION_TIME_TASK_TITLE" = "反應時間";
 "REACTION_TIME_TASK_INTENDED_USE" = "此測試活動會評估你對視覺提示作出反應所需的時間。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "當螢幕顯示藍色圓點時，請立刻以任何方向搖動裝置。你將需要執行此操作 %D 次。";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始」。";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@/%@ 次嘗試";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "當藍色圓圈出現時，請快速搖動裝置";
 
@@ -229,7 +229,7 @@
 "TOWER_OF_HANOI_TASK_TITLE" = "河內塔";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "此測試活動會評估你的解題能力。";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "用最少的次數將所有圓盤移到有顏色標示的平台。";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始」";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始」以進行測試";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解開謎題";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動次數：%@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我無法解開此謎題";
@@ -266,7 +266,7 @@
 "PVSAT_INTRO_TEXT" = "定時視覺連續加法測試（PVSAT）可測量你的視覺資料處理速度及計算能力。";
 "PAVSAT_INTRO_TEXT" = "定時聽覺及視覺連續加法測試（PAVSAT）可測量你的聽覺及視覺資料處理速度及計算能力。";
 "PSAT_INTRO_TEXT_2_%@" = "每 %@ 秒會顯示一個數字。\n你必須將新的數字與前一個數字相加。\n注意：請勿計算所有的數字總和，只需計算最後兩個數字的總和。";
-"PSAT_CALL_TO_ACTION" = "點一下「開始」。";
+"PSAT_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
 "PSAT_INITIAL_INSTRUCTION" = "記住第一個數字。";
 "PSAT_INSTRUCTION" = "將這個新的數字與前一個數字相加。";
 "PSAT_NO_DIGIT" = "-";

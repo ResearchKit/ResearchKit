@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "すべてのテストで同じ補助器具を使用してください。";
 "TIMED_WALK_QUESTION_TEXT" = "短下肢装具をお付けになりますか?";
 "TIMED_WALK_QUESTION_2_TITLE" = "補助器具をお使いになりますか?";
-"TIMED_WALK_QUESTION_2_TEXT" = "ここをタップして答えを選択してください。";
+"TIMED_WALK_QUESTION_2_TEXT" = "ここをタップして答えを選択。";
 "TIMED_WALK_QUESTION_2_CHOICE" = "なし";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "片側ケイン";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "片側クラッチ";

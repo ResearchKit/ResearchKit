@@ -250,7 +250,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Dva štapa za hodanje";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvije štake";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Hodalica/Guralica";
-"TIMED_WALK_INSTRUCTION_%@" = "Hodajte najviše %ld u ravnoj liniji.";
+"TIMED_WALK_INSTRUCTION_%@" = "Hodajte najviše %@ u ravnoj liniji.";
 "TIMED_WALK_INSTRUCTION_2" = "Okrenite se i hodajte natrag do mjesta od kojeg ste krenuli.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Dodirnite OK kad završite.";
 
@@ -265,7 +265,7 @@
 "PASAT_INTRO_TEXT" = "Auditivni test tempiranog serijskog zbrajanja (PASAT) mjeri brzinu vaše obrade auditivnih podataka te sposobnost računanja.";
 "PVSAT_INTRO_TEXT" = "Vizualni test tempiranog serijskog zbrajanja mjeri (PVSAT) brzinu vaše obrade vizualnih podataka te sposobnost računanja.";
 "PAVSAT_INTRO_TEXT" = "Auditivni i vizualni test tempiranog serijskog zbrajanja (PAVSAT) mjeri brzinu vaše obrade auditivnih i vizualnih podataka te sposobnost računanja.";
-"PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkasti brojevi prikazuju se svakih%@ s.\nSvaku novu znamenku morate zbrojiti s onom koja je neposredno prije nje.\nPažnja, ne smijete izračunavati ukupni iznos, nego samo zbrojiti zadnja dva broja.";
+"PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkasti brojevi prikazuju se svakih %@ s.\nSvaku novu znamenku morate zbrojiti s onom koja je neposredno prije nje.\nPažnja, ne smijete izračunavati ukupni iznos, nego samo zbrojiti zadnja dva broja.";
 "PSAT_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamtite prvu znamenku.";
 "PSAT_INSTRUCTION" = "Zbrojite ovu novu znamenku s prethodnom.";

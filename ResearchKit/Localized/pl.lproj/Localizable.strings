@@ -130,7 +130,7 @@
 "BUTTON_SKIP_QUESTION" = "Pomiń to pytanie";
 "BUTTON_START_TIMER" = "Włącz stoper";
 "BUTTON_OPTION_SAVE" = "Zachowaj na później";
-"BUTTON_OPTION_DISCARD" = "Porzuć wyniki";
+"BUTTON_OPTION_DISCARD" = "Odrzuć wyniki";
 "BUTTON_OPTION_STOP_TASK" = "Zakończ zadanie";
 
 /* General active tasks. */
@@ -139,12 +139,12 @@
 "TASK_COMPLETE_TEXT" = "Twoje dane zostaną przeanalizowane i otrzymasz powiadomienie o wynikach.";
 
 /* Image capture step. */
-"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Przechwyć obrazek";
-"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Przechwyć ponownie obrazek";
+"CAPTURE_BUTTON_CAPTURE_IMAGE" = "Zarejestruj obraz";
+"CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Zarejestruj obraz ponownie";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nie znaleziono aparatu. Nie można wykonać kroku.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Aby wykonać ten krok, przejdź do Ustawień i daj temu programowi dostęp do aparatu.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego dla przechwyconych obrazków.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nie można było zachować przechwyconego obrazka.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego dla zarejestrowanych obrazów.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Nie można było zachować zarejestrowanego obrazu.";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Sprawność";
@@ -186,7 +186,7 @@
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria tonalna";
-"TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność do słyszenia różnych dźwięków.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność słyszenia różnych dźwięków.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Zanim zaczniesz, podłącz i załóż słuchawki.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Dźwięk powinien być teraz słyszalny. Zmień głośność, używając przycisków z boku urządzenia.\n\nAby rozpocząć, stuknij w przycisk.";
@@ -227,12 +227,12 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Wieże Hanoi";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "To ćwiczenie ocenia Twoje zdolności rozwiązywania układanek.";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "To ćwiczenie ocenia Twoją zdolność rozwiązywania łamigłówek.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Przenieś cały zestaw krążków na wyróżnioną podstawę, wykonując jak najmniej ruchów.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rozwiąż układankę";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Rozwiąż łamigłówkę";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Liczba ruchów: %@ \n %@";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nie potrafię rozwiązać tej układanki";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nie potrafię rozwiązać tej łamigłówki";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Chód na czas";
@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Użyj tego samego urządzenia wspomagającego w każdym teście.";
 "TIMED_WALK_QUESTION_TEXT" = "Czy nosisz ortezę stawu skokowego?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Czy używasz urządzenia wspomagającego?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Stuknij tutaj, aby wybrać odpowiedź.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Stuknij tutaj, aby odpowiedzieć.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Brak";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Jedna laska";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Jedna kula";
@@ -304,8 +304,8 @@
 "AX.MEMORY.TILE.QUIESCENT" = "nieaktywna";
 "AX.MEMORY.TILE.LABEL" = "Płytka gry pamięciowej";
 
-"AX_IMAGE_CAPTURE_LABEL" = "Przechwyć podgląd obrazka";
-"AX_IMAGE_CAPTURED_LABEL" = "Przechwycony obrazek";
+"AX_IMAGE_CAPTURE_LABEL" = "Zarejestruj podgląd";
+"AX_IMAGE_CAPTURED_LABEL" = "Zarejestrowany obraz";
 
 "AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nie można umieścić dysku o rozmiarze %@ na dysku o rozmiarze %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Krążek docelowy";

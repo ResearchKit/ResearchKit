@@ -227,12 +227,12 @@
 
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanói";
-"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Esta atividade avalia sua capacidade para resolver quebra-cabeças.";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Esta atividade avalia sua capacidade para resolver puzzles.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mova toda a pilha para a plataforma em destaque usando o mínimo de movimentos possíveis.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toque em Iniciar para começar";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solucione o Quebra-cabeça";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Solucione o Puzzle";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de Movimentos: %@ \n %@";
-"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo solucionar este quebra-cabeça";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo solucionar este puzzle";
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Caminhada Cronometrada";
@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Use o mesmo dispositivo assistivo em cada teste.";
 "TIMED_WALK_QUESTION_TEXT" = "Você usa uma órtese no tornozelo?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Você usa um dispositivo assistivo?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Toque aqui para selecionar uma resposta.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Toque para selecionar resposta.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Nenhum";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Bengala Unilateral";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Muleta Unilateral";
@@ -261,10 +261,10 @@
 /* PSAT active task. */
 "PASAT_TITLE" = "TASAM";
 "PVSAT_TITLE" = "TASVM";
-"PAVSAT_TITLE" = "TASAVM";
+"PAVSAT_TITLE" = "TASAV";
 "PASAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Audição Medida processa a velocidade e capacidade de calcular para medir suas informações auditivas.";
 "PVSAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Visão Medida processa a velocidade e capacidade de calcular para medir suas informações visuais.";
-"PAVSAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Audição e Visão Medidas processa a velocidade e capacidade de calcular para medir suas informações auditivas e visuais.";
+"PAVSAT_INTRO_TEXT" = "O Teste de Adição Sequencial de Audição e Visão mede suas informações auditivas e visuais processando a velocidade e a capacidade de calcular.";
 "PSAT_INTRO_TEXT_2_%@" = "Dígitos únicos são apresentados a cada %@ segundos.\nVocê deve adicionar cada novo dígito ao dígito anterior.\nAtenção, não calcule um total cumulativo, apenas a soma dos últimos dois números.";
 "PSAT_CALL_TO_ACTION" = "Toque em Iniciar para começar.";
 "PSAT_INITIAL_INSTRUCTION" = "Memorize este primeiro dígito.";

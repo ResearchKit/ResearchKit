@@ -90,7 +90,7 @@
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Il testo supera la lunghezza massima: %@";
 
 /* Camera not available during multitasking */
-"CAMERA_UNAVAILABLE_MESSAGE" = "Fotocamera non disponibile in modalità Split Screen.";
+"CAMERA_UNAVAILABLE_MESSAGE" = "Fotocamera non disponibile in modalità “Vista suddivisa”.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -243,14 +243,14 @@
 "TIMED_WALK_FORM_TEXT" = "Utilizza lo stesso ausilio ortopedico per ciascun test.";
 "TIMED_WALK_QUESTION_TEXT" = "Indossi un'ortesi piede-caviglia?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Utilizzi ausili ortopedici? ";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tocca qui per selezionare una risposta.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tocca per selezionare una risposta.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Nessuno";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Bastone unilaterale";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Stampella unilaterale";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Bastoni bilaterali";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Stampelle bilaterali";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Deambulatore/Rollatore";
-"TIMED_WALK_INSTRUCTION_%@" = "Cammina per %ld in linea retta.";
+"TIMED_WALK_INSTRUCTION_%@" = "Cammina per %@ in linea retta.";
 "TIMED_WALK_INSTRUCTION_2" = "Girati e torna verso il punto in cui hai cominciato a camminare.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Al termine, tocca Fine.";
 

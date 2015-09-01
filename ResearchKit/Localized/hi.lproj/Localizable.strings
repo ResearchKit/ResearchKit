@@ -162,7 +162,7 @@
 "WALK_INTRO_2_DETAIL" = "अपने फ़ोन को जेब या बैग में रखें और ऑडियो निर्देशों का अनुसरण करें।";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "अब %@ तक स्थिर खड़े रहें।";
 "WALK_STAND_INSTRUCTION_FORMAT" = "%@ तक स्थिर खड़े रहें।";
-"WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी उस ओर चलते जाएँ।";
+"WALK_RETURN_INSTRUCTION_FORMAT" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
 "WALK_OUTBOUND_INSTRUCTION_FORMAT" = "लगभग %ld कदम सीधे चलें।";
 
 
@@ -250,8 +250,8 @@
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "दोनों हाथों के लिए बेंत";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "दोनों हाथों के लिए बैसाखी";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "वॉकर/रोलेटर";
-"TIMED_WALK_INSTRUCTION_%@" = "लगभग %@ क़दम सीधे चलें।";
-"TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी उस ओर चलते जाएँ।";
+"TIMED_WALK_INSTRUCTION_%@" = "सीधी रेखा में लगभग %@ चलें।";
+"TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
 "TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “पूर्ण” पर टैप करें।";
 
 
@@ -307,7 +307,7 @@
 "AX_IMAGE_CAPTURE_LABEL" = "पूर्वावलोकन को कैप्चर करें";
 "AX_IMAGE_CAPTURED_LABEL" = "कैप्चर की हुई छवि";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%1$@ आकार के डिस्क पर %1$@ आकार के डिस्क पर नहीं रखा जा सकता";
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%2$@ आकार के डिस्क पर %1$@ आकार के डिस्क को रखने में असमर्थ";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "लक्ष्य";
 "AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "डिस्क रखने के लिए डबल टैप करें";

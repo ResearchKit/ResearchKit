@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Her test için aynı yardımcı aygıtı kullanın.";
 "TIMED_WALK_QUESTION_TEXT" = "Ayak bileği ortezi takıyor musunuz?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Yardımcı aygıt kullanıyor musunuz?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Bir yanıt seçmek için buraya dokunun.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Bir yanıt seçmek için dokunun.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Hiçbiri";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Tek Taraflı Baston";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Tek Taraflı Koltuk Değneği";

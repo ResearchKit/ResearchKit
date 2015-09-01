@@ -237,14 +237,14 @@
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gång med tidtagning";
 "TIMED_WALK_INTRO_DETAIL" = "Den här aktiviteten mäter benfunktionen.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Hitta en plats, helst utomhus, där du kan gå ungefär %@ i en rät linje som fort som möjligt, men säkert. Sakta inte ned förrän du har passerat mållinjen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Hitta en plats, helst utomhus, där du kan gå ungefär %@ i en rät linje så fort som möjligt (men fortfarande säkert). Sakta inte ned förrän du har passerat mållinjen.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Tryck på Nästa för att börja.";
-"TIMED_WALK_FORM_TITLE" = "Assisterande enhet";
-"TIMED_WALK_FORM_TEXT" = "Använd samma assisterande enhet för alla test.";
+"TIMED_WALK_FORM_TITLE" = "Hjälpmedel";
+"TIMED_WALK_FORM_TEXT" = "Använd samma hjälpmedel för alla test.";
 "TIMED_WALK_QUESTION_TEXT" = "Bär du en ankel- och fotortos?";
-"TIMED_WALK_QUESTION_2_TITLE" = "Vill du använda assisterande enhet?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Använder du ett hjälpmedel?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Tryck här för att välja ett svar.";
-"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Inget";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Ensidig käpp";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Ensidig krycka";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Dubbelsidig käpp";
