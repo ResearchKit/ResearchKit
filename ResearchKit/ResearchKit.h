@@ -58,7 +58,7 @@
 #import <ResearchKit/ORKConsentSharingStep.h>
 
 #import <ResearchKit/ORKPasscodeStep.h>
-#import <ResearchKit/ORKPasscodeStepViewController.h>
+#import <ResearchKit/ORKPasscodeViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 #import <ResearchKit/ORKActiveStep.h>

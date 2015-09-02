@@ -34,8 +34,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const PasscodeStepIdentifier = @"passcode_step";
-static NSInteger const  MaxAttempts = 3;
+static NSString * const kPasscodeStepIdentifier = @"passcode_step";
+static NSInteger const  kMaxAttempts = 3;
 
 typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
     ORKPasscodeFlowCreate,

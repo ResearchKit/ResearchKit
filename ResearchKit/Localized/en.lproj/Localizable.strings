@@ -103,6 +103,7 @@
 "PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Please try again.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Use Touch ID?";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";

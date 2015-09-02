@@ -50,8 +50,18 @@
                                                  NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
         self.textField.textAlignment = NSTextAlignmentCenter;
         self.textField.translatesAutoresizingMaskIntoConstraints = NO;
-                
+        
         self.stepView = self.textField;
+        
+        [self addConstraints:@[
+                               [NSLayoutConstraint constraintWithItem:self.textField
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:1.0
+                                                             constant:0]
+                               ]];
         
         [self updateAppearance];
     }
@@ -62,39 +72,9 @@
     _textField.text = (_passcodeType == ORKPasscodeType4Digit) ? k4DigitPin : k6DigitPin;
 }
 
-- (void)layoutSubviews {
-    /*
-     Constraints for text field.
-    */
-    [self addConstraints:@[
-                           [NSLayoutConstraint constraintWithItem:self.textField
-                                                        attribute:NSLayoutAttributeWidth
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeWidth
-                                                       multiplier:1.0
-                                                         constant:0]
-                           ]];
-}
-
 - (void)setPasscodeType:(ORKPasscodeType)passcodeType {
     _passcodeType = passcodeType;
     [self updateAppearance];
 }
-
-#pragma mark - Keyboard methods
-
-//- (void)keyboardFrameWillChange:(NSNotification *)notification {
-//    // Overriding method implementation from superclass.
-//}
-//
-//- (void)keyboardWillShow:(NSNotification *)notification {
-//    // Overriding method implementation from superclass.
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)notification {
-//    // Overriding method implementation from superclass.
-//}
-
 
 @end

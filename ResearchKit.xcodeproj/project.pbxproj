@@ -41,6 +41,8 @@
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		241A2E871B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */; };
+		2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */; };
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
 		24898B0D1B7186C000B0E7E7 /* ORKScaleRangeImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 24898B0B1B7186C000B0E7E7 /* ORKScaleRangeImageView.h */; };
 		24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24898B0C1B7186C000B0E7E7 /* ORKScaleRangeImageView.m */; };
@@ -48,7 +50,7 @@
 		24A4DA111B8D0F21009C797A /* ORKPasscodeStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4DA0F1B8D0F21009C797A /* ORKPasscodeStepView.m */; };
 		24A4DA141B8D1115009C797A /* ORKPasscodeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A4DA121B8D1115009C797A /* ORKPasscodeStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24A4DA151B8D1115009C797A /* ORKPasscodeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */; };
-		24A4DA181B8D13FE009C797A /* ORKPasscodeStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A4DA161B8D13FE009C797A /* ORKPasscodeStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24A4DA181B8D13FE009C797A /* ORKPasscodeStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A4DA161B8D13FE009C797A /* ORKPasscodeStepViewController.h */; };
 		24A4DA191B8D13FE009C797A /* ORKPasscodeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4DA171B8D13FE009C797A /* ORKPasscodeStepViewController.m */; };
 		250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */; };
 		250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */; };
@@ -491,6 +493,8 @@
 		147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryStepViewController.h; sourceTree = "<group>"; };
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
 		241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeStepViewController_Internal.h; sourceTree = "<group>"; };
+		2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeViewController.h; sourceTree = "<group>"; };
+		2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeViewController.m; sourceTree = "<group>"; };
 		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
 		24898B0B1B7186C000B0E7E7 /* ORKScaleRangeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleRangeImageView.h; sourceTree = "<group>"; };
 		24898B0C1B7186C000B0E7E7 /* ORKScaleRangeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleRangeImageView.m; sourceTree = "<group>"; };
@@ -1035,6 +1039,8 @@
 				24A4DA171B8D13FE009C797A /* ORKPasscodeStepViewController.m */,
 				24A4DA0E1B8D0F21009C797A /* ORKPasscodeStepView.h */,
 				24A4DA0F1B8D0F21009C797A /* ORKPasscodeStepView.m */,
+				2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */,
+				2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */,
 			);
 			name = "Passcode Step";
 			sourceTree = "<group>";
@@ -2093,6 +2099,7 @@
 				865EA16C1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.h in Headers */,
 				86C40C121A8D7C5C00081FAC /* ORKActiveStepQuantityView.h in Headers */,
 				86C40CCC1A8D7C5C00081FAC /* ORKImageSelectionView.h in Headers */,
+				2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */,
 				B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */,
 				86C40D621A8D7C5C00081FAC /* ORKQuestionStep_Internal.h in Headers */,
 				86C40D641A8D7C5C00081FAC /* ORKQuestionStepViewController.h in Headers */,
@@ -2474,6 +2481,7 @@
 				86C40DCC1A8D7C5C00081FAC /* ORKTaskViewController.m in Sources */,
 				86C40E061A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.m in Sources */,
 				86C40D7A1A8D7C5C00081FAC /* ORKScaleSlider.m in Sources */,
+				244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */,
 				86C40C801A8D7C5C00081FAC /* ORKActiveStep.m in Sources */,
 				86C40D721A8D7C5C00081FAC /* ORKRoundTappingButton.m in Sources */,
 				86C40E2A1A8D7C5C00081FAC /* ORKSignatureView.m in Sources */,

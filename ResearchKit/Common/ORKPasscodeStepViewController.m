@@ -63,75 +63,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     LAContext *_touchContext;
 }
 
-+ (id)passcodeCreationViewControllerWithText:(NSString *)text
-                                passcodeType:(ORKPasscodeType)passcodeType
-                                    delegate:(id<ORKPasscodeCreationDelegate>)delegate
-                        useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
-    step.text = text;
-    
-    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowCreate;
-    passcodeStepViewController.passcodeType = passcodeType;
-    passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.useTouchId = useTouchId;
-    passcodeStepViewController.step = step;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
-    return navigationController;
-}
-
-+ (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
-                                      passcodeType:(ORKPasscodeType)passcodeType
-                                          delegate:(id<ORKPasscodeAuthenticationDelegate>)delegate
-                              useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
-    step.text = text;
-    
-    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowAuthenticate;
-    passcodeStepViewController.passcodeType = passcodeType;
-    passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.useTouchId = useTouchId;
-    passcodeStepViewController.step = step;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
-    return navigationController;
-}
-
-+ (id)passcodeEditingViewControllerWithText:(NSString *)text
-                               passcodeType:(ORKPasscodeType)passcodeType
-                                   delegate:(id<ORKPasscodeEditingDelegate>)delegate
-                        useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
-    step.text = text;
-    
-    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowEdit;
-    passcodeStepViewController.passcodeType = passcodeType;
-    passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.useTouchId = useTouchId;
-    passcodeStepViewController.step = step;
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
-    return navigationController;
-}
-
 - (ORKPasscodeStep *)passcodeStep {
     return (ORKPasscodeStep *)self.step;
 }
@@ -164,11 +95,17 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             _passcodeState = ORKPasscodeStateOldEntry;
             [self updatePasscodeView];
         } else if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            // Remove the cancel button.
-            self.cancelButtonItem = nil;
-            
             // Send the user a Touch ID prompt, if it is available.
             [self promptTouchId];
+        }
+        
+        // Check to see if cancel button should be set or not.
+        if (self.passcodeDelegate &&
+            [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidCancel:)]) {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+                                                                                      style:UIBarButtonItemStyleDone
+                                                                                     target:self
+                                                                                     action:@selector(cancelButtonAction)];
         }
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -209,9 +146,9 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             
         case ORKPasscodeStateSaved:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_SAVED_MESSAGE", nil);
+            _passcodeStepView.headerView.instructionLabel.text = @"";
             _passcodeStepView.textField.hidden = YES;
-            _shouldResignFirstResponder = YES;
-            [_passcodeStepView.textField resignFirstResponder];
+            [self makePasscodeViewResignFirstResponder];
             break;
             
         case ORKPasscodeStateOldEntry:
@@ -251,6 +188,10 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     self.internalContinueButtonItem = nil;
     self.internalDoneButtonItem = nil;
 }
+                                                              
+- (void)cancelButtonAction {
+    [self.passcodeDelegate passcodeViewControllerDidCancel:self];
+}
 
 - (void)makePasscodeViewBecomeFirstResponder{
     if (! _passcodeStepView.textField.isFirstResponder) {
@@ -262,19 +203,15 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 - (void)makePasscodeViewResignFirstResponder {
     if (_passcodeStepView.textField.isFirstResponder) {
         _shouldResignFirstResponder = YES;
-        [_passcodeStepView.textField resignFirstResponder];
+        [_passcodeStepView.textField endEditing:YES];
     }
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_INVALID_ALERT_TITLE", nil)
                                                                    message:text
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
-                                              style:UIAlertActionStyleDefault
-                                            handler:nil]];
-
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -291,7 +228,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
                                 reply:^(BOOL success, NSError *error) {
-                                        
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
                 if (success) {
@@ -308,15 +244,11 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                 if (error.code == kLAErrorUserCancel) {
                     [self makePasscodeViewBecomeFirstResponder];
                 } else if (error) {
+                    
                     // Display the error message.
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil)
                                                                                    message:error.localizedDescription
                                                                             preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:nil];
-                    [alert addAction:okAction];
                     [self presentViewController:alert animated:YES completion:nil];
                  }
                 
@@ -407,7 +339,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             
         } else {
             // If the input does not match, notify the user.
-            if (_wrongAttemptsCount < MaxAttempts) {
+            if (_wrongAttemptsCount < kMaxAttempts) {
                 [self wrongAttempt];
             } else {
                 // Change back to entry state.
@@ -465,7 +397,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             });
         } else {
             // If the input does not match, notify the user.
-            if (_wrongAttemptsCount < MaxAttempts) {
+            if (_wrongAttemptsCount < kMaxAttempts) {
                 [self wrongAttempt];
             } else {
                 // Change back to entry state.
