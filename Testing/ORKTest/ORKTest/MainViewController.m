@@ -1,7 +1,8 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
  Copyright (c) 2015, Bruce Duncan.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -257,6 +258,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Image Capture",
                            @"Image Choices",
                            @"Scale",
+                           @"Mini Form",
+                           @"Selection Survey",
                            ],
                        @[ // Active Tasks
                            @"Active Step Task",
@@ -275,9 +278,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Custom Navigation Item",
                            @"Dynamic Task",
                            @"Interruptible Task",
-                           @"Mini Form",
                            @"Navigable Ordered Task",
-                           @"Selection Survey",
                            @"Test Charts",
                            @"Toggle Tint Color",
                            ],
