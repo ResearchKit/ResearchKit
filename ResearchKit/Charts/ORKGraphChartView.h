@@ -201,7 +201,7 @@ ORK_AVAILABLE_DECL
  See also: `numberOfDivisionsInXAxisForGraphChartView:`.
 
  @param graphChartView    The graph view asking for the tile.
- @param pointIndex   The index corresponding to the number returned by 
+ @param index   The index corresponding to the number returned by 
  `numberOfDivisionsInXAxisForGraphChartView:`.
 
  @return The title string to be displayed adjacent to each division of the x-axis of `graphChartView`.
