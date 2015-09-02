@@ -96,7 +96,7 @@
 }
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    NSArray *sortedCells = [self.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
+    NSArray<UICollectionViewCell *> *sortedCells = [self.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
         return cell1.tag > cell2.tag;
     }];
     NSUInteger cellCount = sortedCells.count;
