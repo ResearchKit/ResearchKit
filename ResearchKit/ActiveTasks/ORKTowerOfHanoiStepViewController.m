@@ -116,15 +116,15 @@ static const NSUInteger kNumberOfTowers = 3;
 #pragma mark - ORKTowerOfHanoiTowerViewDataSource
  
 - (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView {
-     NSInteger towerIndex = [_towerViews indexOfObject:towerView];
-     ORKTowerOfHanoiTower *tower = _towers[towerIndex];
-     return tower.disks.count;
+    NSInteger towerIndex = [_towerViews indexOfObject:towerView];
+    ORKTowerOfHanoiTower *tower = _towers[towerIndex];
+    return tower.disks.count;
 }
  
 - (NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index {
-     NSInteger towerIndex = [_towerViews indexOfObject:towerView];
-     ORKTowerOfHanoiTower *tower = _towers[towerIndex];
-     return tower.disks[index];
+    NSInteger towerIndex = [_towerViews indexOfObject:towerView];
+    ORKTowerOfHanoiTower *tower = _towers[towerIndex];
+    return (index >= tower.disks.count) ? nil :tower.disks[index];
 }
 
 #pragma mark - ORKTowerOfHanoiTowerViewDelegate
@@ -226,11 +226,14 @@ static const NSUInteger kNumberOfTowers = 3;
     else {
         NSNumber *donorSize = [self towerOfHanoiView:_towerViews[donorTowerIndex] diskAtIndex:0];
         NSNumber *recipientSize = [self towerOfHanoiView:_towerViews[recipientTowerIndex] diskAtIndex:0];
-        NSString *invalidMoveAnnouncement = [NSString stringWithFormat:ORKLocalizedString(@"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT", nil), donorSize.stringValue, recipientSize.stringValue];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, invalidMoveAnnouncement);
-        });
+        if (donorSize && recipientSize) {
+            // Only announce if the both donor and recipient are valid
+            NSString *invalidMoveAnnouncement = [NSString stringWithFormat:ORKLocalizedString(@"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT", nil), donorSize.stringValue, recipientSize.stringValue];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, invalidMoveAnnouncement);
+            });
+        }
     }
 }
 

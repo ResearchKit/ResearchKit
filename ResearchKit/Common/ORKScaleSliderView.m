@@ -137,9 +137,15 @@
                                                               constant:0.0]];
             
             [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=kValueLabelSliderMargin)-[_slider]-(>=kSliderMargin)-|"
                                                      options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+                                                       views:views]];
+            
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=8)-[_rightRangeDescriptionLabel]"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:nil
                                                        views:views]];
             
             [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[rightRangeView(==leftRangeView)]"
@@ -147,6 +153,7 @@
                                                                          metrics:nil
                                                                            views:views]];
             
+            // Set the margin between `slider` and `rangeView`
             [self addConstraint:[NSLayoutConstraint constraintWithItem:rightRangeView
                                                              attribute:NSLayoutAttributeRight
                                                              relatedBy:NSLayoutRelationEqual
@@ -163,6 +170,7 @@
                                                             multiplier:1.0
                                                               constant:-kSideLabelMargin]];
             
+            // Align range view with slider's bottom
             [self addConstraint:[NSLayoutConstraint constraintWithItem:rightRangeView
                                                             attribute:NSLayoutAttributeCenterY
                                                             relatedBy:NSLayoutRelationEqual
@@ -200,6 +208,7 @@
                                                        views:views]];
             
             
+            // Set the margin between `slider` and `descriptionLabels`
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
                                                              attribute:NSLayoutAttributeLeft
                                                              relatedBy:NSLayoutRelationEqual
@@ -216,6 +225,25 @@
                                                             multiplier:1.0
                                                               constant:kSideLabelMargin]];
             
+            // Limit the height of descriptionLabels
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                toItem:_slider
+                                                             attribute:NSLayoutAttributeHeight
+                                                            multiplier:0.5
+                                                              constant:kSliderMargin]];
+            
+            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                toItem:_slider
+                                                             attribute:NSLayoutAttributeHeight
+                                                            multiplier:0.5
+                                                              constant:kSliderMargin]];
+            
+            
+            // Align descriptionLabel with rangeView
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
                                                              attribute:NSLayoutAttributeCenterY
                                                              relatedBy:NSLayoutRelationEqual
