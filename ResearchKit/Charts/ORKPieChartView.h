@@ -102,7 +102,7 @@ ORK_AVAILABLE_DECL
 
 @end
 
-/* 
+/**
  The `ORKPieChartView` class presents data provided by an object conforming to the
  `ORKPieChartViewDataSource` protocol as a pie chart.
 */
