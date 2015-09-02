@@ -66,7 +66,7 @@
     if (self) {
         _requiresName = YES;
         _requiresSignatureImage = YES;
-        self.identifier = [[NSUUID UUID] UUIDString];
+        self.identifier = [NSUUID UUID].UUIDString;
     }
     return self;
 }
