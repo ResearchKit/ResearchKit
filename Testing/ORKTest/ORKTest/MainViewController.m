@@ -1183,7 +1183,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
     passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
 
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, passcodeStep, reviewStep]];
     
     return task;
 }
