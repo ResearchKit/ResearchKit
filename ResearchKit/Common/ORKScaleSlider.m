@@ -257,7 +257,7 @@ static CGFloat kPadding = 2.0;
     if (!self.showThumb) {
         return nil;
     } else if (self.textChoices) {
-        ORKTextChoice *textChoice = self.textChoices[(int)self.value-1];
+        ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value-1];
         return textChoice.text;
     }
     return [self _axFormattedValue:self.value];

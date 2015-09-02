@@ -271,7 +271,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                                                      defaultIndex:(NSInteger)defaultIndex
+                                                      defaultIndex:(NSUInteger)defaultIndex
                                                           vertical:(BOOL)vertical {
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
                                                     defaultIndex:defaultIndex
@@ -1702,11 +1702,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSInteger)defaultIndex
+                       defaultIndex:(NSUInteger)defaultIndex
                            vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
-        _textChoices = textChoices;
+        _textChoices = [textChoices copy];
         _defaultIndex = defaultIndex;
         _vertical = vertical;
         
@@ -1716,7 +1716,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSInteger)defaultIndex{
+                       defaultIndex:(NSUInteger)defaultIndex{
     return [self initWithTextChoices:textChoices
                         defaultIndex:defaultIndex
                             vertical:NO];
@@ -1729,7 +1729,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return @(self.textChoices.count);
 }
 - (NSNumber *)defaultNumber {
-    if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
+    if (_defaultIndex >= _textChoices.count) {
         return nil;
     }
     return @(_defaultIndex);

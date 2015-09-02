@@ -165,7 +165,7 @@ ORK_CLASS_AVAILABLE
                                                         minimumValueDescription:(nullable NSString *)minimumValueDescription;
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray <ORKTextChoice *> *)textChoices
-                                                      defaultIndex:(NSInteger)defaultIndex
+                                                      defaultIndex:(NSUInteger)defaultIndex
                                                           vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
@@ -503,7 +503,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized text scale answer format.
  */
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSInteger)defaultIndex
+                       defaultIndex:(NSUInteger)defaultIndex
                            vertical:(BOOL)vertical NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -518,7 +518,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized text scale answer format.
  */
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSInteger)defaultIndex;
+                       defaultIndex:(NSUInteger)defaultIndex;
 
 /**
  An array of text choices which provides the text to be shown next to each of the slider steps. (read-only)
@@ -530,7 +530,7 @@ ORK_CLASS_AVAILABLE
  
  If the value of this property is less than zero or greater than the number of text choices, the slider has no default value.
  */
-@property (readonly) double defaultIndex;
+@property (readonly) NSUInteger defaultIndex;
 
 /**
  A Boolean value indicating whether the scale is oriented vertically. (read-only)
