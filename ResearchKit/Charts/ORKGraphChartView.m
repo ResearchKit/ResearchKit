@@ -562,7 +562,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         if (!dataPointValue.isUnset) {
             CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, _plotView.bounds.size.width);
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            ORKRangedPoint *positionOnYAxis = (ORKRangedPoint *)_yAxisPoints[plotIndex][pointIndex];
+            ORKRangedPoint *positionOnYAxis = _yAxisPoints[plotIndex][pointIndex];
             CALayer *pointLayer = _pointLayers[plotIndex][pointLayerIndex];
             pointLayer.position = CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue);
             pointLayerIndex++;
