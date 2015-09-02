@@ -180,7 +180,7 @@
 }
 
 - (NSString *)logName {
-    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID];
+    return [NSString stringWithFormat:@"%@_%@", [self recorderType], [_recorderUUID UUIDString]];
 }
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
