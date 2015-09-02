@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Utilisez le même appareil d’assistance pour chaque test.";
 "TIMED_WALK_QUESTION_TEXT" = "Portez-vous une orthèse de cheville et de pied?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Utilisez-vous un appareil d’assistance?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Touchez ici pour sélectionner une réponse.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Sélectionnez une réponse.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Aucune";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Une canne";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Une béquille";
@@ -265,7 +265,7 @@
 "PASAT_INTRO_TEXT" = "Le test rythmé d’addition en série auditive (PASAT) mesure la vitesse de traitement d’informations auditives, ainsi que la capacité de calcul.";
 "PVSAT_INTRO_TEXT" = "Le test rythmé d’addition en série visuelle (PAVAT) mesure la vitesse de traitement d’informations visuelles, ainsi que la capacité de calcul.";
 "PAVSAT_INTRO_TEXT" = "Le test rythmé d’addition en série auditive et visuelle (PAVSAT) mesure la vitesse de traitement d’informations auditives et visuelles, ainsi que la capacité de calcul.";
-"PSAT_INTRO_TEXT_2_%@" = "Un chiffre s’affiche toutes les %@ secondes.\nVous devez ajouter chaque nouveau chiffre au chiffre précédent.\nAttention, vous ne devez pas calculer la somme totale, sinon la somme des deux derniers chiffres.";
+"PSAT_INTRO_TEXT_2_%@" = "Un chiffre s’affiche toutes les %@ secondes.\nVous devez ajouter chaque nouveau chiffre au chiffre précédent.\nAttention, vous ne devez pas calculer la somme totale, mais bien la somme des deux derniers chiffres.";
 "PSAT_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
 "PSAT_INITIAL_INSTRUCTION" = "Mémorisez ce premier chiffre.";
 "PSAT_INSTRUCTION" = "Ajoutez ce nouveau chiffre au précédent.";

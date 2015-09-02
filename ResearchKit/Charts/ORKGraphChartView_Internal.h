@@ -77,27 +77,27 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 
 @property (nonatomic) UIView *scrubberLine;
 
+@property (nonatomic) BOOL scrubberAccessoryViewsHidden;
+
 - (void)sharedInit;
 
 - (NSInteger)numberOfPlots;
 
+- (ORKRangedPoint *)dataPointAtPlotIndex:(NSUInteger)plotIndex pointIndex:(NSUInteger)pointIndex;
+
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
-
-- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex;
-
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition;
 
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
+- (NSInteger)scrubbingPlotIndex;
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition;
 
-- (void)updateScrubberLineAccessories:(CGFloat)xPosition;
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 
@@ -110,6 +110,10 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPo
 - (void)updatePointLayers;
 
 - (void)layoutPointLayers;
+
+- (UIColor *)colorForplotIndex:(NSInteger)plotIndex;
+
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath

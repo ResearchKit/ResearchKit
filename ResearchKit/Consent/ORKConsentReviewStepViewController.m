@@ -357,7 +357,10 @@ static NSString *const _FamilyNameIdentifier = @"family";
         animated = NO;
     }
     
-    UIPageViewControllerNavigationDirection direction = (!animated || page > currentIndex)?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
+    UIPageViewControllerNavigationDirection direction = (!animated || page > currentIndex) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+    
+    ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
+    
     _currentPageIndex = page;
     __weak typeof(self) weakSelf = self;
     

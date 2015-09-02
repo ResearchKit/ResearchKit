@@ -70,13 +70,23 @@
     return self;
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+- (void)updateSeparatorInsets {
     if (self.topSeparatorLeftInset > 0) {
-        self.topSeparatorLeftInset = ORKStandardHorizMarginForView(self);
+        self.topSeparatorLeftInset = ORKStandardHorizontalMarginForView(self);
     }
     if (self.bottomSeparatorLeftInset > 0) {
-        self.bottomSeparatorLeftInset = ORKStandardHorizMarginForView(self);
+        self.bottomSeparatorLeftInset = ORKStandardHorizontalMarginForView(self);
     }
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateSeparatorInsets];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateSeparatorInsets];
 }
 
 - (void)setShowBottomSeparator:(BOOL)showBottomSeparator {

@@ -237,11 +237,11 @@
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Jalan Bermasa";
 "TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi ekstremiti bawah badan anda.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus selaju yang mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat yang mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Ketik Seterusnya untuk bermula.";
 "TIMED_WALK_FORM_TITLE" = "Peranti bantuan";
 "TIMED_WALK_FORM_TEXT" = "Gunakan peranti bantuan yang sama untuk setiap ujian.";
-"TIMED_WALK_QUESTION_TEXT" = "Adakah anda memakai ortosis pergelangan kaki ke kaki?";
+"TIMED_WALK_QUESTION_TEXT" = "Adakah anda memakai ortosis buku lali kaki?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Adakah anda menggunakan peranti bantuan?";
 "TIMED_WALK_QUESTION_2_TEXT" = "Ketik di sini untuk memilih jawapan.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Tiada";
@@ -307,7 +307,7 @@
 "AX_IMAGE_CAPTURE_LABEL" = "Pratonton tangkapan";
 "AX_IMAGE_CAPTURED_LABEL" = "Imej ditangkap";
 
-"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat meletakkan cakera bersaiz %@ pada cakera bersaiz %@";
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat menempatkan cakera bersaiz %@ pada cakera bersaiz %@";
 "AX_TOWER_OF_HANOI_TARGET_DISK" = "Sasaran";
 "AX_TOWER_OF_HANOI_TOWER" = "Menara";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dwiketik untuk menempatkan cakera";

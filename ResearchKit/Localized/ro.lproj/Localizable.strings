@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Utilizați același dispozitiv asistiv pentru fiecare test.";
 "TIMED_WALK_QUESTION_TEXT" = "Purtați o orteză de gleznă?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Utilizați un dispozitiv asistiv?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Apăsați aici pentru a alege un răspuns.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Apăsați aici pentru un răspuns.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Nu";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Baston unilateral";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Cârjă unilaterală";

@@ -158,7 +158,7 @@
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Balanse og gange";
 "WALK_INTRO_TEXT" = "Denne aktiviteten måler balansen og gangen din mens du går og står i ro. Ikke fortsett hvis du ikke kan gå trygt uten hjelp.";
-"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå %ld skritt i rett linje.";
+"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå omtrent %ld skritt i rett linje.";
 "WALK_INTRO_2_DETAIL" = "Legg telefonen i lommen eller en veske, og følg lydinstruksjonene.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå stille i %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stå stille i %@.";
@@ -237,7 +237,7 @@
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Gå på tid";
 "TIMED_WALK_INTRO_DETAIL" = "Denne aktiviteten måler funksjonen i nedre kroppshalvdel.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %ld i rett linje, så raskt som mulig. Ikke senk farten til etter at du har passert mållinjen.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %@ i rett linje, så raskt som mulig. Ikke senk farten til etter at du har passert mållinjen.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Trykk på Neste for å begynne.";
 "TIMED_WALK_FORM_TITLE" = "Hjelpemiddel";
 "TIMED_WALK_FORM_TEXT" = "Bruk samme hjelpemiddel i hver test.";

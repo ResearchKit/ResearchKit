@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Вживайте однаковий допоміжний засіб для всіх тестів.";
 "TIMED_WALK_QUESTION_TEXT" = "Ви носите гомілкостопний біопротез?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Ви користуєтесь допоміжними засобами?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут, щоб вибрати відповідь.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут і виберіть відповідь";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Немає";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Однобічна тростина";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Однобічна милиця";

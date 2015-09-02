@@ -243,14 +243,14 @@
 "TIMED_WALK_FORM_TEXT" = "Gebruik hetzelfde hulpmiddel voor elke test.";
 "TIMED_WALK_QUESTION_TEXT" = "Draagt u een enkel-voetorthese?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Gebruikt u een loophulpmiddel?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Tik hier om een antwoord te selecteren.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tik hier om een antwoord te kiezen.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Geen";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Eén wandelstok";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Eén kruk";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Twee wandelstokken";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Twee krukken";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Looprek/Rollator";
-"TIMED_WALK_INSTRUCTION_%@" = "Loop maximaal %@ in een rechte lijn.";
+"TIMED_WALK_INSTRUCTION_%@" = "Loop max. %@ in een rechte lijn.";
 "TIMED_WALK_INSTRUCTION_2" = "Draai om en loop terug naar het beginpunt.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tik op 'Gereed' als u klaar bent.";
 

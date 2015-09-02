@@ -243,7 +243,7 @@
 "TIMED_WALK_FORM_TEXT" = "Используйте одно и тоже вспомогательное приспособление для всех упражнений.";
 "TIMED_WALK_QUESTION_TEXT" = "Вы носите голеностопный ортез?";
 "TIMED_WALK_QUESTION_2_TITLE" = "Вы пользуетесь вспомогательными приспособлениями?";
-"TIMED_WALK_QUESTION_2_TEXT" = "Коснитесь здесь, чтобы выбрать ответ.";
+"TIMED_WALK_QUESTION_2_TEXT" = "Коснитесь, чтобы выбрать ответ.";
 "TIMED_WALK_QUESTION_2_CHOICE" = "Нет";
 "TIMED_WALK_QUESTION_2_CHOICE_2" = "Одна трость";
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Один костыль";
