@@ -62,7 +62,7 @@ static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
 static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, ORKPasscodeAuthenticationDelegate, ORKPasscodeEditingDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -297,6 +297,22 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
         [button addTarget:self action:@selector(showCustomNavigationItemTask:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:@"Custom Navigation Item" forState:UIControlStateNormal];
         [buttonKeys addObject:@"customNavigationItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(authenticatePasscode:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Authenticate Passcode" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"authenticatePasscode"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(editPasscode:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Edit Passcode" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"editPasscode"];
         buttons[buttonKeys.lastObject] = button;
     }
     
@@ -1177,11 +1193,11 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     _currentDocument = [consentDocument copy];
     
     ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visual_consent" document:consentDocument];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
-    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
 
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, passcodeStep, reviewStep]];
     
@@ -2278,6 +2294,53 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
 
 - (IBAction)showCustomNavigationItemTask:(id)sender {
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
+}
+
+#pragma mark - Passcode view controllers
+/*
+ Tests various uses of passcode view controller.
+ 
+ Passcode authentication and passcode editing are presented in
+ the examples. Passcode creation would ideally be as part of
+ the consent process. The consent task has been modified in this
+ project to include the passcode creation step as part of the 
+ consent flow.
+ */
+- (IBAction)authenticatePasscode:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                                                                           passcodeType:ORKPasscodeType4Digit
+                                                                                                               delegate:self
+                                                                                                   useTouchIdIfAvaiable:YES];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+- (IBAction)editPasscode:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                    passcodeType:ORKPasscodeType4Digit
+                                                                                                        delegate:self
+                                                                                            useTouchIdIfAvaiable:YES];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - Passcode delegate
+- (void)passcodeViewControllerDidCancel:(nonnull UIViewController *)viewController {
+    NSLog(@"User tapped the cancel button.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)passcodeViewController:(nonnull UIViewController *)viewController didAuthenticateUsingTouchID:(BOOL)touchId {
+    NSLog(@"Authenticated successfully.");
+    NSLog(@"Did authenticate using Touch ID? : %@", (touchId) ? @"YES" : @"NO");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)passcodeViewController:(nonnull UIViewController *)viewController isPasscodeValid:(nonnull NSString *)passcode {
+    NSLog(@"User's inputted passcode: %@", passcode);
+    return YES;
+}
+
+- (void)passcodeViewController:(nonnull UIViewController *)viewController didFinishWithPasscode:(nonnull NSString *)passcode andTouchIdEnabled:(BOOL)touchId {
+    NSLog(@"User's inputted passcode: %@", passcode);
+    NSLog(@"Did enable Touch ID? : %@", (touchId) ? @"YES" : @"NO");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Helpers

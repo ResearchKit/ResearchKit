@@ -46,7 +46,7 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user has finished setting up passcode with or without Touch ID.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
  @param touchId             A boolean indicating whether Touch Id was enabled or not.
  */
@@ -56,7 +56,7 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user hit the cancel button item.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
@@ -74,7 +74,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the delegate that if the inputted passcode is valid or not.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
  
  @return A boolean with value 'YES' if passcode is valid; otherwise, 'NO'.
@@ -84,16 +84,17 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user was authenticated.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param touchId             A boolean indicating if the authentication was performed with Touch ID or not.
  */
 - (void)passcodeViewController:(UIViewController *)viewController didAuthenticateUsingTouchID:(BOOL)touchId;
 
 @optional
 /**
- Notifies the delegate that the user hit the cancel button item.
+ Notifies the delegate that the user hit the cancel button item. The cancel button item will only be visible
+ if this method is implemented.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
@@ -111,7 +112,7 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user has finished entering their passcode.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
  
  @return A boolean with value 'YES' if passcode is valid; otherwise, 'NO'.
@@ -121,7 +122,7 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user has finished setting up passcode with or without Touch ID.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
  @param touchId             A boolean indicating whether Touch Id was enabled or not.
  */
@@ -131,7 +132,7 @@ ORK_AVAILABLE_DECL
 /**
  Notifies the delegate that the user hit the cancel button item.
  
- @param viewController      The `ORKPasscodeStepViewController` object in which the gesture occurred.
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
@@ -151,17 +152,17 @@ ORK_AVAILABLE_DECL
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
 
-+ (id)passcodeCreationViewControllerWithText:(NSString *)text
++ (id)passcodeCreationViewControllerWithText:(nullable NSString *)text
                                 passcodeType:(ORKPasscodeType)passcodeType
                                     delegate:(id<ORKPasscodeCreationDelegate>)delegate
                         useTouchIdIfAvaiable:(BOOL)useTouchId;
 
-+ (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
++ (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
                                       passcodeType:(ORKPasscodeType)passcodeType
                                           delegate:(id<ORKPasscodeAuthenticationDelegate>)delegate
                               useTouchIdIfAvaiable:(BOOL)useTouchId;
 
-+ (id)passcodeEditingViewControllerWithText:(NSString *)text
++ (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
                                passcodeType:(ORKPasscodeType)passcodeType
                                    delegate:(id<ORKPasscodeEditingDelegate>)delegate
                        useTouchIdIfAvaiable:(BOOL)useTouchId;

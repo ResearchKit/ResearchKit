@@ -212,6 +212,9 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_INVALID_ALERT_TITLE", nil)
                                                                    message:text
                                                             preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
+                                              style:UIAlertActionStyleDefault
+                                            handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -224,17 +227,22 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     if (_useTouchId &&
         [_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
         
+        [self makePasscodeViewResignFirstResponder];
+        
         NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
                                 reply:^(BOOL success, NSError *error) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
+                [self makePasscodeViewBecomeFirstResponder];
+                
                 if (success) {
                     // Store that user passed authentication.
                     _isTouchIDAuthenticated = YES;
                     
                     if (self.passcodeDelegate &&
+                        self.passcodeFlow == ORKPasscodeFlowAuthenticate &&
                         [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchID:)]) {
                         [self.passcodeDelegate passcodeViewController:self
                                           didAuthenticateUsingTouchID:_isTouchIDAuthenticated];
@@ -249,10 +257,14 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE", nil)
                                                                                    message:error.localizedDescription
                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:nil]];
                     [self presentViewController:alert animated:YES completion:nil];
                  }
                 
                 if (self.passcodeDelegate &&
+                    (self.passcodeFlow == ORKPasscodeFlowCreate || self.passcodeFlow == ORKPasscodeFlowEdit) &&
                     [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
                     [self.passcodeDelegate passcodeViewController:self
                                             didFinishWithPasscode:_passcode
@@ -264,6 +276,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     } else {
         // Device does not support TouchID.
         if (self.passcodeDelegate &&
+            (self.passcodeFlow == ORKPasscodeFlowCreate || self.passcodeFlow == ORKPasscodeFlowEdit) &&
             [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
             [self.passcodeDelegate passcodeViewController:self
                                     didFinishWithPasscode:_passcode
