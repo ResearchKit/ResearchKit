@@ -77,8 +77,8 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the color of a segment in the pie chart view.
 
- If this method is not implemented, the pie chart view will use a unique grayscale shade for each
- segment.
+ If this method is not implemented, the pie chart view will use a unique shade of the current
+ `tintColor` for each segment.
 
  @param pieChartView     The pie chart view asking for the color of the segment.
  @param index            An index number specifying the segment in `pieChartView`.
@@ -137,18 +137,20 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *text;
 
 /**
- The color of the title label's text.
+ The color used for the text of the title label.
  
- The default value for this property is a liht gray color.
+ The default value for this property is a liht gray color. Setting this property to `nil` resets it
+ to its default value.
  */
-@property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, strong, null_resettable) UIColor *titleColor;
 
 /**
- The color of the text label's text.
+ The color used for the text of the text label.
  
- The default value for this property is a liht gray color.
+ The default value for this property is a liht gray color. Setting this property to `nil` resets it
+ to its default value.
  */
-@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong, null_resettable) UIColor *textColor;
 
 /**
  A Boolean value indicating wheter the title and text labels should be drawn above the chart.
@@ -175,9 +177,10 @@ ORK_CLASS_AVAILABLE
 /**
  The string that will be displayed if the sum of the values of all segments is zero.
  
- The default value for this property is an appropriate message string.
+ The default value for this property is an appropriate message string. Setting this property to
+ `nil` resets it to its default value.
 */
-@property (nonatomic, strong, nullable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) NSString *noDataText;
 
 /**
  Animates the pie chart when it first displays on the screen.

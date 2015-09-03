@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Згода";
-"CONSENT_NAME_FIRST" = "Ім’я";
-"CONSENT_NAME_LAST" = "Прізвище";
+"CONSENT_NAME_GIVEN" = "Ім’я";
+"CONSENT_NAME_FAMILY" = "Прізвище";
 "CONSENT_NAME_PLACEHOLDER" = "Обов’язково";
 "CONSENT_REVIEW_TITLE" = "Огляд";
 "CONSENT_REVIEW_INSTRUCTION" = "Перегляньте наведене нижче і торкніть «Погоджуюсь», якщо ви готові продовжити.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ перевищує максимально дозволене значення (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ є меншим мінімально дозволеного значення (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ не є правильним значенням.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Хибна адреса е-пошти: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Текстовий вміст перевищує ліміт: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "На розділеному екрані Камера недоступна.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A(II)+";
@@ -144,7 +153,7 @@
 "FITNESS_SIT_INSTRUCTION_FORMAT" = "Сидіть зручно протягом %@.";
 "FITNESS_WALK_INSTRUCTION_FORMAT" = "Ідіть якомога швидше протягом %@.";
 "FITNESS_INTRO_TEXT_FORMAT" = "Ця операція оцінює ваш серцевий ритм і обчислює, скільки ви можете пройти за %1$@.";
-"FITNESS_INTRO_2_TEXT_FORMAT" = "Ідіть надворі своєю найшвидшою ходою протягом %1$@. Коли ви завершили, зручно сядьте і відпочивайте протягом %2$@. Щоб почати, торкніть «Розпочати».";
+"FITNESS_INTRO_2_TEXT_FORMAT" = "Ідіть надворі своєю найшвидшою ходою протягом %1$@. Завершивши, зручно сядьте і відпочивайте протягом %2$@. Щоб почати, торкніть «Розпочати».";
 
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Хода і рівновага";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Спроба %@ із %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Швидко трусніть пристроєм, коли з’явиться синє коло";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Ханойська вежа";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Цей тест оцінює вашу здібність до розв’язання головоломок.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Перенесіть весь стос на виділену платформу мінімальною кількістю ходів.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Розв’яжіть головоломку";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Кількість ходів: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Я не можу розв’язати цю головоломку";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Ходіння за часом";
+"TIMED_WALK_INTRO_DETAIL" = "Цей тест оцінює роботу ваших нижніх кінцівок.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Знайдіть місце, краще надворі, де ви можете якомога швидко і безпечно пройти близько %@ по прямій. Не зменшуйте швидкість, доки не перетнете фінішну лінію.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Торкніть «Далі», щоб почати.";
+"TIMED_WALK_FORM_TITLE" = "Допоміжний пристрій";
+"TIMED_WALK_FORM_TEXT" = "Вживайте однаковий допоміжний засіб для всіх тестів.";
+"TIMED_WALK_QUESTION_TEXT" = "Ви носите гомілкостопний біопротез?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Ви користуєтесь допоміжними засобами?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Торкніть тут і виберіть відповідь";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Немає";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Однобічна тростина";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Однобічна милиця";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Двобічна тростина";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Двобічна милиця";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Ходунки/ролятор";
+"TIMED_WALK_INSTRUCTION_%@" = "Пройдіть до %@ по прямій.";
+"TIMED_WALK_INSTRUCTION_2" = "Розверніться і йдіть туди, де ви почали.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Завершивши, торкніть «Готово».";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Немає даних";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "СТСЗТ";
+"PVSAT_TITLE" = "ВТСЗТ";
+"PAVSAT_TITLE" = "ВСТСЗТ";
+"PASAT_INTRO_TEXT" = "Слуховий тест на складання у заданому темпі вимірює швидкість обробки вами слухової інформації та вашу здібність до обчислення.";
+"PVSAT_INTRO_TEXT" = "Візуальний тест на складання у заданому темпі вимірює швидкість обробки вами візуальної інформації та вашу здібність до обчислення.";
+"PAVSAT_INTRO_TEXT" = "Слуховий і візуальний тест на складання у заданому темпі вимірює швидкість обробки вами слухової і візуальної інформації та вашу здібність до обчислення.";
+"PSAT_INTRO_TEXT_2_%@" = "Кожні %@ с будуть відображатися однозначні числа.\nВам потрібно додавати кожне нове число до попереднього.\nЗауважте, що потрібно обчислювати суму лише двох останніх чисел, а не загальну суму всіх чисел.";
+"PSAT_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"PSAT_INITIAL_INSTRUCTION" = "Запам’ятайте цю першу цифру.";
+"PSAT_INSTRUCTION" = "Додайте це нове число до попереднього.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не вдалося вилучити достатньо файлів журналів, щоб досягти порогу";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Клітинка тесту на пам’ять";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Перегляд знімку";
+"AX_IMAGE_CAPTURED_LABEL" = "Зроблений знімок";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Неможливо розмістити диск розміру %@ на диск розміру %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Ціль";
+"AX_TOWER_OF_HANOI_TOWER" = "Вежа";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Торкніть двічі, щоб розмістити диск";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Торкніть двічі, щоб вибрати верхній диск";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
+
+"AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
+"AX_GRAPH_AND_SEPARATOR" = " і ";
+
 

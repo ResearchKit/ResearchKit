@@ -442,7 +442,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     diastolic values.
     */
     private var formTask: ORKTask {
-        let step = ORKFormStep(identifier: String(Identifier.FormTask), title: exampleQuestionText, text: exampleDetailText)
+        let step = ORKFormStep(identifier: String(Identifier.FormStep), title: exampleQuestionText, text: exampleDetailText)
         
         // A first field, for entering an integer.
         let formItem01Text = NSLocalizedString("Field01", comment: "")

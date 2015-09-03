@@ -60,6 +60,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKUnitTextField *textField;
 
+@property (nonatomic, readonly) CGFloat estimatedWidth;
+
 @end
 
 NS_ASSUME_NONNULL_END
