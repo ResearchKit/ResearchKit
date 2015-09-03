@@ -59,8 +59,8 @@ class SystemSound {
     types of functionality supported by the ResearchKit framework.
 */
 enum TaskListRow: Int, CustomStringConvertible {
-    case Survey = 0
-    case Form
+    case Form = 0
+    case Survey
     
     case BooleanQuestion
     case DateQuestion
@@ -103,8 +103,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         return [
             TaskListRowSection(title: "Surveys", rows:
                 [
-                    .Survey,
                     .Form,
+                    .Survey,
                 ]),
             TaskListRowSection(title: "Survey Questions", rows:
                 [
@@ -144,12 +144,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     var description: String {
         switch self {
+        case .Form:
+            return NSLocalizedString("Form Survey Example", comment: "")
+            
         case .Survey:
             return NSLocalizedString("Simple Survey Example", comment: "")
             
-        case .Form:
-            return NSLocalizedString("Form Survey Example", comment: "")
-
         case .BooleanQuestion:
             return NSLocalizedString("Boolean Question", comment: "")
             
@@ -236,18 +236,18 @@ enum TaskListRow: Int, CustomStringConvertible {
         human-readable meaning.
     */
     private enum Identifier {
-        // Survey task specific identifiers.
-        case SurveyTask
-        case IntroStep
-        case QuestionStep
-        case SummaryStep
-        
         // Task with a form, where multiple items appear on one page.
         case FormTask
         case FormStep
         case FormItem01
         case FormItem02
 
+        // Survey task specific identifiers.
+        case SurveyTask
+        case IntroStep
+        case QuestionStep
+        case SummaryStep
+        
         // Task with a Boolean question.
         case BooleanQuestionTask
         case BooleanQuestionStep
@@ -326,11 +326,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// Returns a new `ORKTask` that the `TaskListRow` enumeration represents.
     var representedTask: ORKTask {
         switch self {
-        case .Survey:
-            return surveyTask
-            
         case .Form:
             return formTask
+            
+        case .Survey:
+            return surveyTask
             
         case .BooleanQuestion:
             return booleanQuestionTask
@@ -406,6 +406,33 @@ enum TaskListRow: Int, CustomStringConvertible {
     // MARK: Task Creation Convenience
     
     /**
+    This task demonstrates a form step, in which multiple items are presented
+    in a single scrollable form. This might be used for entering multi-value
+    data, like taking a blood pressure reading with separate systolic and
+    diastolic values.
+    */
+    private var formTask: ORKTask {
+        let step = ORKFormStep(identifier: String(Identifier.FormStep), title: exampleQuestionText, text: exampleDetailText)
+        
+        // A first field, for entering an integer.
+        let formItem01Text = NSLocalizedString("Field01", comment: "")
+        let formItem01 = ORKFormItem(identifier: String(Identifier.FormItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormatWithUnit(nil))
+        formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        
+        // A second field, for entering a time interval.
+        let formItem02Text = NSLocalizedString("Field02", comment: "")
+        let formItem02 = ORKFormItem(identifier: String(Identifier.FormItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
+        formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+        
+        step.formItems = [
+            formItem01,
+            formItem02
+        ]
+        
+        return ORKOrderedTask(identifier: String(Identifier.FormTask), steps: [step])
+    }
+
+    /**
     A task demonstrating how the ResearchKit framework can be used to present a simple
     survey with an introduction, a question, and a conclusion.
     */
@@ -433,33 +460,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             questionStep,
             summaryStep
             ])
-    }
-
-    /**
-    This task demonstrates a form step, in which multiple items are presented
-    in a single scrollable form. This might be used for entering multi-value
-    data, like taking a blood pressure reading with separate systolic and
-    diastolic values.
-    */
-    private var formTask: ORKTask {
-        let step = ORKFormStep(identifier: String(Identifier.FormStep), title: exampleQuestionText, text: exampleDetailText)
-        
-        // A first field, for entering an integer.
-        let formItem01Text = NSLocalizedString("Field01", comment: "")
-        let formItem01 = ORKFormItem(identifier: String(Identifier.FormItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.integerAnswerFormatWithUnit(nil))
-        formItem01.placeholder = NSLocalizedString("Your placeholder here", comment: "")
-        
-        // A second field, for entering a time interval.
-        let formItem02Text = NSLocalizedString("Field02", comment: "")
-        let formItem02 = ORKFormItem(identifier: String(Identifier.FormItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
-        formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
-        
-        step.formItems = [
-            formItem01,
-            formItem02
-        ]
-        
-        return ORKOrderedTask(identifier: String(Identifier.FormTask), steps: [step])
     }
 
     /// This task presents just a single "Yes" / "No" question.
