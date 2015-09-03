@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tour";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Toucher deux fois pour placer le disque";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Toucher deux fois pour sélectionner le disque supérieur";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Possède un disque de tailles ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Possède un disque de tailles %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vide";
 
 "AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
 "AX_GRAPH_AND_SEPARATOR" = " et ";
-
-

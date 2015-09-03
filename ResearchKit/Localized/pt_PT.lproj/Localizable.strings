@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Torre";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dê dois toques para colocar o disco";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Dê dois toques para selecionar o primeiro disco";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tem disco com tamanhos ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tem disco com tamanhos %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vazio";
 
 "AX_GRAPH_RANGE_FORMAT" = "Intervalo de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
-
-
