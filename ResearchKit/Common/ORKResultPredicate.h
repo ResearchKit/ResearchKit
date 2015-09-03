@@ -60,7 +60,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param taskIdentifier      An optional task identifier string.
  @param stepIdentifier      An optional step identifier string.
@@ -73,7 +73,7 @@ ORK_CLASS_AVAILABLE
                           resultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param taskIdentifier      An optional task identifier string.
  @param resultIdentifier    The result identifier string.
@@ -84,7 +84,7 @@ ORK_CLASS_AVAILABLE
                           resultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param stepIdentifier      An optional step identifier string.
  @param resultIdentifier    The result identifier string.
@@ -95,7 +95,7 @@ ORK_CLASS_AVAILABLE
                           resultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param resultIdentifier    The result identifier string.
  
@@ -104,7 +104,7 @@ ORK_CLASS_AVAILABLE
 + (instancetype)selectorWithResultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param taskIdentifier      An optional task identifier string.
  @param stepIdentifier      An optional step identifier string.
@@ -117,7 +117,7 @@ ORK_CLASS_AVAILABLE
                       resultIdentifier:(NSString *)resultIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param taskIdentifier      An optional task identifier string.
  @param resultIdentifier    The result identifier string.
@@ -128,7 +128,7 @@ ORK_CLASS_AVAILABLE
                       resultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param stepIdentifier      An optional step identifier string.
  @param resultIdentifier    The result identifier string.
@@ -139,7 +139,7 @@ ORK_CLASS_AVAILABLE
                       resultIdentifier:(NSString *)resultIdentifier;
 
 /**
- Returns a result identifier initialized with the specified arguments.
+ Returns a result selector initialized with the specified arguments.
  
  @param resultIdentifier    The result identifier string.
  
