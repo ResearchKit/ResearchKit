@@ -33,6 +33,7 @@
 #import "ORKHelpers.h"
 #import "ORKSkin.h"
 #import "ORKTintedImageView.h"
+#import "ORKPasscodeKeyboardView.h"
 
 
 @implementation ORKPasscodeStepView
@@ -50,7 +51,8 @@
                                                  NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
         self.textField.textAlignment = NSTextAlignmentCenter;
         self.textField.translatesAutoresizingMaskIntoConstraints = NO;
-        
+        self.textField.inputView = [ORKPasscodeKeyboardView new];
+
         self.stepView = self.textField;
         
         [self addConstraints:@[
