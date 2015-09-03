@@ -44,9 +44,9 @@ static const CGFloat InterAnimationDelay = 0.05;
     __weak ORKPieChartView *_parentPieChartView;
     
     CAShapeLayer *_circleLayer;
-    NSMutableArray *_normalizedValues;
-    NSMutableArray *_segmentLayers;
-    NSMutableArray *_pieSections;
+    NSMutableArray<NSNumber *> *_normalizedValues;
+    NSMutableArray<CAShapeLayer *> *_segmentLayers;
+    NSMutableArray<ORKPieChartSection *> *_pieSections;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -158,7 +158,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         segmentLayer.path = _circleLayer.path;
         segmentLayer.lineWidth = _circleLayer.lineWidth;
         segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         
         if (value != 0) {
             if (idx == 0) {
@@ -186,7 +186,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         CGFloat cumulativeValue = 0;
         NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
         for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-            CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+            CGFloat value = _normalizedValues[idx].floatValue;
             
             if (value != 0) {
                 
@@ -246,7 +246,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGFloat cumulativeValue = 0;
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         if (value != 0) {
             // Create a label
             ORKPieChartSection *pieSection = _pieSections[idx];
@@ -287,7 +287,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     return  CGPointMake(x, y);
 }
 
-- (void)adjustIntersectionsOfPercentageLabels:(NSArray *)pieSections pieRadius:(CGFloat)pieRadius {
+- (void)adjustIntersectionsOfPercentageLabels:(NSArray<ORKPieChartSection *> *)pieSections pieRadius:(CGFloat)pieRadius {
     if (pieSections.count == 0) {
         return;
     }
@@ -372,7 +372,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGFloat cumulativeValue = 0;
     for (NSInteger idx = 0; idx < numberOfSegmentLayers ; idx++) {
         CAShapeLayer *segmentLayer = _segmentLayers[idx];
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         strokeAnimation.fromValue = @(segmentLayer.strokeStart);
         strokeAnimation.toValue = @(cumulativeValue + value);
@@ -401,7 +401,7 @@ static const CGFloat InterAnimationDelay = 0.05;
 
 #pragma mark - Accessibility
 
-- (NSArray *)accessibilityElements {
+- (NSArray<id> *)accessibilityElements {
     return _pieSections;
 }
 
