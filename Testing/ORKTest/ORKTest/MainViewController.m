@@ -2326,7 +2326,7 @@ static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationI
     NSLog(@"User tapped the cancel button.");
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)passcodeViewController:(nonnull UIViewController *)viewController didAuthenticateUsingTouchID:(BOOL)touchId {
+- (void)passcodeViewController:(nonnull UIViewController *)viewController didAuthenticateUsingTouchId:(BOOL)touchId {
     NSLog(@"Authenticated successfully.");
     NSLog(@"Did authenticate using Touch ID? : %@", (touchId) ? @"YES" : @"NO");
     [viewController dismissViewControllerAnimated:YES completion:nil];

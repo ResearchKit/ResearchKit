@@ -34,7 +34,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 /**
  An `ORKPasscodeStep` object provides the participant an authentication step.
  
@@ -44,16 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep
-
-/**
- Returns an initialized passcode consent step.
- 
- @param identifier              The string that identifies the step (see `ORKStep`).
- 
- @return An initialized passcode step.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier;
-
 
 @end
 

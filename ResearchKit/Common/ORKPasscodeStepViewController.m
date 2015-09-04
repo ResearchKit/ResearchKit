@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     ORKPasscodeState _passcodeState;
     BOOL _shouldResignFirstResponder;
     BOOL _isChangingState;
-    BOOL _isTouchIDAuthenticated;
+    BOOL _isTouchIdAuthenticated;
     LAContext *_touchContext;
 }
 
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         _wrongAttemptsCount = 1;
         _shouldResignFirstResponder = NO;
         _isChangingState = NO;
-        _isTouchIDAuthenticated = NO;
+        _isTouchIdAuthenticated = NO;
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
@@ -97,12 +97,18 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         [self.view addSubview:_passcodeStepView];
         
         // Set the starting state based on flow.
-        if (_passcodeFlow == ORKPasscodeFlowEdit) {
-            _passcodeState = ORKPasscodeStateOldEntry;
-            [self updatePasscodeView];
-        } else if (_passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            // Send the user a Touch ID prompt, if it is available.
-            [self promptTouchId];
+        switch (_passcodeFlow) {
+            case ORKPasscodeFlowCreate:
+                _passcodeState = ORKPasscodeStateEntry;
+                [self updatePasscodeView];
+                break;
+            
+            case ORKPasscodeFlowAuthenticate:
+                [self promptTouchId];
+                
+            case ORKPasscodeFlowEdit:
+                _passcodeState = ORKPasscodeStateOldEntry;
+                [self updatePasscodeView];
         }
         
         // Check to see if cancel button should be set or not.
@@ -248,13 +254,13 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                 
                 if (success) {
                     // Store that user passed authentication.
-                    _isTouchIDAuthenticated = YES;
+                    _isTouchIdAuthenticated = YES;
                     
                     if (self.passcodeDelegate &&
                         self.passcodeFlow == ORKPasscodeFlowAuthenticate &&
-                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchID:)]) {
+                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchId:)]) {
                         [self.passcodeDelegate passcodeViewController:self
-                                          didAuthenticateUsingTouchID:_isTouchIDAuthenticated];
+                                          didAuthenticateUsingTouchId:_isTouchIdAuthenticated];
                     }
                 }
                 
@@ -277,19 +283,19 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                     [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
                     [self.passcodeDelegate passcodeViewController:self
                                             didFinishWithPasscode:_passcode
-                                                andTouchIdEnabled:_isTouchIDAuthenticated];
+                                                andTouchIdEnabled:_isTouchIdAuthenticated];
                 }
             });
         }];
         
     } else {
-        // Device does not support TouchID.
+        // Device does not support Touch Id.
         if (self.passcodeDelegate &&
             (self.passcodeFlow == ORKPasscodeFlowCreate || self.passcodeFlow == ORKPasscodeFlowEdit) &&
             [self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didFinishWithPasscode:andTouchIdEnabled:)]) {
             [self.passcodeDelegate passcodeViewController:self
                                     didFinishWithPasscode:_passcode
-                                        andTouchIdEnabled:_isTouchIDAuthenticated];
+                                        andTouchIdEnabled:_isTouchIdAuthenticated];
         }
     }
 }
@@ -325,7 +331,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     
     ORKPasscodeResult *passcodeResult = [[ORKPasscodeResult alloc] initWithIdentifier:[self passcodeStep].identifier];
     passcodeResult.passcode = _passcode;
-    passcodeResult.touchIDAuthenticated = _isTouchIDAuthenticated;
+    passcodeResult.touchIdAuthenticated = _isTouchIdAuthenticated;
     
     stepResult.results = @[passcodeResult];
     return stepResult;
@@ -446,9 +452,9 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             BOOL isValid = [self.passcodeDelegate passcodeViewController:self
                                                          isPasscodeValid:_passcode];
             if (isValid) {
-                if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchID:)]) {
+                if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewController:didAuthenticateUsingTouchId:)]) {
                     [self.passcodeDelegate passcodeViewController:self
-                                      didAuthenticateUsingTouchID:_isTouchIDAuthenticated];
+                                      didAuthenticateUsingTouchId:_isTouchIdAuthenticated];
                 }
             } else {
                 [self wrongAttempt];

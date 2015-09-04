@@ -33,16 +33,21 @@
 #import "ORKPasscodeButton.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class ORKPasscodeKeyboardView;
 
 @protocol ORKPasscodeKeyboardDelegate <NSObject>
 
-- (void)keyboardView:(ORKPasscodeKeyboardView *)view didReceivedInput:(NSString *) input;
+- (void)keyboardView:(ORKPasscodeKeyboardView *)view didReceivedInput:(NSString *)input;
 
 @end
+
 
 @interface ORKPasscodeKeyboardView : UIView <UIInputViewAudioFeedback>
 
-@property (nonatomic, weak) id<ORKPasscodeKeyboardDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ORKPasscodeKeyboardDelegate> delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

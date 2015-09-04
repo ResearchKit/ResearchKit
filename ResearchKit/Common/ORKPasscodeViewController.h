@@ -29,8 +29,8 @@
  */
 
 
-#import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKDefines.h>
+#import "ORKStepViewController.h"
+#import "ORKDefines.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,9 +54,11 @@ ORK_AVAILABLE_DECL
 
 @optional
 /**
- Notifies the delegate that the user hit the cancel button item.
+ Notifies the delegate that the user hit the cancel button item. The cancel button item will only be visible
+ if this method is implemented.
  
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ 
  */
 - (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
 
@@ -72,7 +74,7 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Asks the delegate that if the inputted passcode is valid or not.
+ Asks the delegate if the inputted passcode is valid or not.
  
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
@@ -87,7 +89,7 @@ ORK_AVAILABLE_DECL
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param touchId             A boolean indicating if the authentication was performed with Touch ID or not.
  */
-- (void)passcodeViewController:(UIViewController *)viewController didAuthenticateUsingTouchID:(BOOL)touchId;
+- (void)passcodeViewController:(UIViewController *)viewController didAuthenticateUsingTouchId:(BOOL)touchId;
 
 @optional
 /**

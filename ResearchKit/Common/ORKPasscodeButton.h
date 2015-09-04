@@ -33,7 +33,7 @@
 #import "ORKDefines_Private.h"
 
 
-static NSString * const kBackspaceButton = @"⌫";
+static NSString * const kBackspaceButton = @"\u2421";
 
 /**
  Number and backspace buttons for the passcode keyboard.

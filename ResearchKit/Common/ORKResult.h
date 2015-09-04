@@ -249,11 +249,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *passcode;
 
 /**
- A Boolean value indicating whether the user has Touch ID authentication or not.
+ A Boolean value indicating whether the user enabled Touch Id authentication or not.
  
- The value of this property is `YES` when the user passes Touch ID authentication and `NO` otherwise.
+ The value of this property is `YES` when the user passes Touch Id authentication and `NO` otherwise.
  */
-@property (nonatomic, assign, getter=isTouchIDAuthenticated) BOOL touchIDAuthenticated;
+@property (nonatomic, assign, getter=isTouchIdAuthenticated) BOOL touchIdAuthenticated;
 
 @end
 

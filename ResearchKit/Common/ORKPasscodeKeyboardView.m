@@ -140,7 +140,7 @@
     // 9 : Place on the right of 8.
     [self placeButton:_buttonArray[9] rightOfButton:_buttonArray[8]];
     
-    // < : Place to the right of 0.
+    // Backspace : Place to the right of 0.
     [self placeButton:_buttonArray[10] rightOfButton:_buttonArray[0]];
     
 }

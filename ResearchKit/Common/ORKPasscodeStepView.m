@@ -45,7 +45,7 @@
         self.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_PROMPT_MESSAGE", nil);
 
         // Additional configuration for the passcode text field.
-        self.textField = [ORKPasscodeTextField new];
+        self.textField = [ORKCaretOptionalTextField new];
         self.textField.defaultTextAttributes = @{NSKernAttributeName : @(20.0f),
                                                  NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
         self.textField.textAlignment = NSTextAlignmentCenter;

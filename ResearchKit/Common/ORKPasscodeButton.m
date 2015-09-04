@@ -36,7 +36,6 @@
 
 + (id)backspaceButton {
     ORKPasscodeButton *button = [[ORKPasscodeButton alloc] initWithCharacter:kBackspaceButton];
-    button.titleLabel.font = [UIFont fontWithName:@"Courier" size:20.0];
     button.backgroundColor = [UIColor groupTableViewBackgroundColor];
     return button;
 }
@@ -44,7 +43,6 @@
 - (instancetype)initWithCharacter:(NSString *)character {
     self = [super init];
     if (self) {
-        
         [self setBackgroundColor:[UIColor whiteColor]];
         
         [self setTitle:character forState:UIControlStateNormal];

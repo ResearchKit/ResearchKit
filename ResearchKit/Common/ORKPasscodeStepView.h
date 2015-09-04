@@ -43,6 +43,6 @@ static NSString* const k6DigitPin = @"\u25CB\u25CB\u25CB\u25CB\u25CB\u25CB";
 
 @property (nonatomic) ORKPasscodeType passcodeType;
 
-@property (nonatomic, strong) ORKPasscodeTextField *textField;
+@property (nonatomic, strong) ORKCaretOptionalTextField *textField;
 
 @end

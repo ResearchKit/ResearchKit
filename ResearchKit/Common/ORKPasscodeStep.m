@@ -39,48 +39,8 @@
     return [ORKPasscodeStepViewController class];
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    self = [super initWithIdentifier:identifier];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (BOOL)showsProgress {
     return NO;
-}
-
-- (void)validateParameters {
-    [super validateParameters];
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone {
-    ORKPasscodeStep *step = [super copyWithZone:zone];
-    return step;
-}
-
-- (BOOL)isEqual:(id)object {
-    return [super isEqual:object];
-}
-
-- (NSUInteger)hash {
-    return [super hash];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
 }
 
 @end
