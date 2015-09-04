@@ -235,7 +235,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         come from a database, or in a smaller application, might have some
         human-readable meaning.
     */
-
     private enum Identifier {
         // Task with a form, where multiple items appear on one page.
         case FormTask
