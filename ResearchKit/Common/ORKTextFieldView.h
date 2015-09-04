@@ -35,11 +35,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString* const kEmptyBullet = @"\u25CB";
+static NSString* const kFilledBullet = @"\u25CF";
+static NSString* const k4DigitPin = @"\u25CB\u25CB\u25CB\u25CB";
+static NSString* const k6DigitPin = @"\u25CB\u25CB\u25CB\u25CB\u25CB\u25CB";
+
 @interface ORKCaretOptionalTextField : ORKAnswerTextField
 
 @property (nonatomic) BOOL allowsSelection; // Defaults to NO
 
 @property (nonatomic) BOOL hitClearButton;
+
+@end
+
+
+@interface ORKPasscodeTextField : ORKCaretOptionalTextField
 
 @end
 
@@ -59,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ORKTextFieldView : UIView
 
 @property (nonatomic, strong, readonly) ORKUnitTextField *textField;
+
+@property (nonatomic, readonly) CGFloat estimatedWidth;
 
 @end
 

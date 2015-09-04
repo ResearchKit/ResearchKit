@@ -34,15 +34,10 @@
 #import "ORKDefines.h"
 
 
-static NSString* const kEmptyBullet = @"\u25CB";
-static NSString* const kFilledBullet = @"\u25CF";
-static NSString* const k4DigitPin = @"\u25CB\u25CB\u25CB\u25CB";
-static NSString* const k6DigitPin = @"\u25CB\u25CB\u25CB\u25CB\u25CB\u25CB";
-
 @interface ORKPasscodeStepView : ORKVerticalContainerView
 
 @property (nonatomic) ORKPasscodeType passcodeType;
 
-@property (nonatomic, strong) ORKCaretOptionalTextField *textField;
+@property (nonatomic, strong) ORKPasscodeTextField *textField;
 
 @end

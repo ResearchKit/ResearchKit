@@ -146,11 +146,11 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *__nullable window);
 
 CGFloat ORKStandardLeftMarginForTableViewCell(UIView *view);
-CGFloat ORKStandardHorizMarginForView(UIView *view);
+CGFloat ORKStandardHorizontalMarginForView(UIView *view);
 UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UIView *view);
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view);
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view);
-CGFloat ORKWidthForSignatureView(UIWindow *window);
+CGFloat ORKWidthForSignatureView(UIWindow *__nullable window);
 
 void ORKUpdateScrollViewBottomInset(UIScrollView *scrollView, CGFloat bottomInset);
 

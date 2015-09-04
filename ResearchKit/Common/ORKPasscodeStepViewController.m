@@ -104,11 +104,15 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                 break;
             
             case ORKPasscodeFlowAuthenticate:
+                _passcodeState = ORKPasscodeStateEntry;
+                [self updatePasscodeView];
                 [self promptTouchId];
+                break;
                 
             case ORKPasscodeFlowEdit:
                 _passcodeState = ORKPasscodeStateOldEntry;
                 [self updatePasscodeView];
+                break;
         }
         
         // Check to see if cancel button should be set or not.
@@ -529,12 +533,12 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                     [self passcodeFlowCreate];
                     break;
                     
-                case ORKPasscodeFlowEdit:
-                    [self passcodeFlowEdit];
-                    break;
-                    
                 case ORKPasscodeFlowAuthenticate:
                     [self passcodeFlowAuthenticate];
+                    break;
+                    
+                case ORKPasscodeFlowEdit:
+                    [self passcodeFlowEdit];
                     break;
             }
         });

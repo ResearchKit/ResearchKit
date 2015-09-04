@@ -172,7 +172,7 @@
     if (! _outputDirectory) {
         return nil;
     }
-    return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@",[_recorderUUID UUIDString]]]];
+    return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@", _recorderUUID.UUIDString]]];
 }
 
 - (NSString *)recorderType {
@@ -180,7 +180,7 @@
 }
 
 - (NSString *)logName {
-    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID];
+    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID.UUIDString];
 }
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {

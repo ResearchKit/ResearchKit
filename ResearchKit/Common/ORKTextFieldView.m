@@ -63,6 +63,28 @@
 
 @end
 
+@implementation ORKPasscodeTextField
+
+- (BOOL)allowsSelection {
+    return NO;
+}
+
+- (NSString *)accessibilityLabel {
+    return ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL", nil);
+}
+
+- (NSString *)accessibilityValue {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:kFilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
+    NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
+    return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), numberOfFilledBullets, [self.text length]];
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    return UIAccessibilityTraitNone;
+}
+
+@end
+
 
 @implementation ORKUnitTextField {
     NSString *_managedPlaceholder;
@@ -377,6 +399,24 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     [self addConstraint:constraint];
     
     [super updateConstraints];
+}
+
+- (CGFloat)estimatedWidth {
+    
+    NSString *placeholderAndUnit = self.textField.placeholder;
+    NSString *textAndUnit = self.textField.text;
+    
+    if (self.textField.unit.length > 0) {
+        NSString *unitString = [NSString stringWithFormat:@"  %@", self.textField.unit];
+        placeholderAndUnit = [placeholderAndUnit stringByAppendingString:unitString];
+        textAndUnit = [textAndUnit stringByAppendingString:unitString];
+    }
+    
+    NSDictionary *attributes = @{ NSFontAttributeName : self.textField.font };
+    CGFloat fieldWidth = MAX([placeholderAndUnit sizeWithAttributes:attributes].width,
+                             [textAndUnit sizeWithAttributes:attributes].width);
+    
+    return fieldWidth;
 }
 
 

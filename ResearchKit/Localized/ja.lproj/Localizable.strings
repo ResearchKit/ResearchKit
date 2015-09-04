@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "同意";
-"CONSENT_NAME_FIRST" = "名";
-"CONSENT_NAME_LAST" = "姓";
+"CONSENT_NAME_GIVEN" = "名";
+"CONSENT_NAME_FAMILY" = "姓";
 "CONSENT_NAME_PLACEHOLDER" = "必須";
 "CONSENT_REVIEW_TITLE" = "確認";
 "CONSENT_REVIEW_INSTRUCTION" = "下記のフォームを確認して、続ける場合は“同意する”をタップしてください。";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@は許容される最大値（%2$@）を超えています。";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@は許容される最小値（%2$@）より小さいです。";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@は無効な値です。";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "メールアドレスが無効です: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字数が最大許容数を超えています: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "分割画面ではカメラを使用できません。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -213,8 +222,54 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "このアクティビティでは、視覚的な合図に反応するまでの時間が測定されます。";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "画面に青い点が表示されたらすぐにデバイスを振ってください。測定は%D回行います。";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "測定%@/%@";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@回";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "青い円が表示されたら、すぐにデバイスを振ってください";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "ハノイの塔";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "このアクティビティでは、パズルの解決力を評価します。";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "塔全体を色の付いた台にできるだけ少ない回数で移動してください。";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "パズルを解く";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動回数: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "降参";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "歩行時間";
+"TIMED_WALK_INTRO_DETAIL" = "このアクティビティでは、下肢の機能を測定します。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "約%@を安全にまっすぐ歩ける場所を見つけてください。できれば屋外が良いでしょう。このアクティビティでは安全にできるだけ速く歩いていただきます。ゴールを過ぎるまで速度を落とさないでください。";
+"TIMED_WALK_INTRO_2_DETAIL" = "始めるには、“次へ”をタップしてください。";
+"TIMED_WALK_FORM_TITLE" = "補助器具";
+"TIMED_WALK_FORM_TEXT" = "すべてのテストで同じ補助器具を使用してください。";
+"TIMED_WALK_QUESTION_TEXT" = "短下肢装具をお付けになりますか?";
+"TIMED_WALK_QUESTION_2_TITLE" = "補助器具をお使いになりますか?";
+"TIMED_WALK_QUESTION_2_TEXT" = "ここをタップして答えを選択。";
+"TIMED_WALK_QUESTION_2_CHOICE" = "なし";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "片側ケイン";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "片側クラッチ";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "両側ケイン";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "両側クラッチ";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "歩行器";
+"TIMED_WALK_INSTRUCTION_%@" = "まっすぐ%@歩いてください。";
+"TIMED_WALK_INSTRUCTION_2" = "後ろを向いて、元の場所まで歩いて戻ってください。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完了したら、“完了”をタップしてください。";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "データなし";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT（定速聴覚的連続加算）では、聴覚による情報処理速度と計算能力を測定します。";
+"PVSAT_INTRO_TEXT" = "PVSAT（定速視覚的連続加算）では、視覚による情報処理速度と計算能力を測定します。";
+"PAVSAT_INTRO_TEXT" = "PAVSAT（定速聴覚および視覚的連続加算）では、聴覚および視覚による情報処理速度と計算能力を測定します。";
+"PSAT_INTRO_TEXT_2_%@" = "%@秒ごとに1つの数字が表示されます。\n表示された数字を、直前に表示された数字と足してください。\nすべての数字を足すのではありません。常に、表示された数字とその直前の数字の2つだけを足してください。";
+"PSAT_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"PSAT_INITIAL_INSTRUCTION" = "この最初の数字を覚えておいてください。";
+"PSAT_INSTRUCTION" = "この数字を直前の数字と足してください。";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "記憶ゲームタイル";
 
 "AX_IMAGE_CAPTURE_LABEL" = "プレビューを取り込む";
+"AX_IMAGE_CAPTURED_LABEL" = "取り込んだイメージ";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "サイズ%@の円盤をサイズ%@の円盤の上に置くことはできません";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "ターゲット";
+"AX_TOWER_OF_HANOI_TOWER" = "塔";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "ダブルタップして円盤を置く";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "ダブルタップして一番上の円盤を選択";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "次のサイズの円盤があります: ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
+
+"AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
+"AX_GRAPH_AND_SEPARATOR" = "と";
+
 
