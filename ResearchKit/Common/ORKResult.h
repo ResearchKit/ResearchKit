@@ -620,14 +620,14 @@ ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestResult : ORKResult
 
 /**
- The hole peg test orientation.
+ The hole peg test moving direction.
  */
-@property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign) ORKSide movingDirection;
 
 /**
  The step is for the dominant hand.
  */
-@property (nonatomic, assign, getter=isDominantHandTested) BOOL dominantHandTested;
+@property (nonatomic, assign, getter = isDominantHandTested) BOOL dominantHandTested;
 
 /**
  The number of pegs to test.
@@ -642,7 +642,7 @@ ORK_CLASS_AVAILABLE
 /**
  The hole peg test also assesses the rotation capabilities.
  */
-@property (nonatomic, assign, getter=isRotated) BOOL rotated;
+@property (nonatomic, assign, getter = isRotated) BOOL rotated;
 
 /**
  The number of succeeded moves (out of `numberOfPegs` possible).

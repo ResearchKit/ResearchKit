@@ -39,9 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceContentView : ORKActiveStepCustomView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign) ORKSide movingDirection;
 @property (nonatomic, assign) double threshold;
 @property (nonatomic, assign, getter = isRotated) BOOL rotated;
 @property (nonatomic, weak) id<ORKHolePegTestPlaceContentViewDelegate> delegate;

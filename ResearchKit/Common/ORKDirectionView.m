@@ -32,8 +32,8 @@
 #import "ORKDirectionView.h"
 
 
-static const CGFloat kArrowWidth = 8;
-static const CGFloat kArrowLineWidth = 4;
+static const CGFloat ArrowWidth = 8;
+static const CGFloat ArrowLineWidth = 4;
 
 
 @interface ORKArrowView : UIView
@@ -63,32 +63,32 @@ static const CGFloat kArrowLineWidth = 4;
 }
 
 - (CGSize)intrinsicContentSize {
-    return CGSizeMake(kArrowWidth + 2 * kArrowLineWidth, 2 * (kArrowWidth + kArrowLineWidth));
+    return CGSizeMake(ArrowWidth + 2 * ArrowLineWidth, 2 * (ArrowWidth + ArrowLineWidth));
 }
 
 - (void)setCompleted:(BOOL)completed {
     _completed = completed;
-    self.alpha = (completed ? 1.0f : 0.6f);
+    self.alpha = completed ? 1.0f : 0.6f;
 }
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
-    CGContextSetLineWidth(context, kArrowLineWidth);
+    CGContextSetLineWidth(context, ArrowLineWidth);
     CGContextSetLineJoin(context, kCGLineJoinRound);
     CGContextSetLineCap(context, kCGLineCapRound);
     [self.tintColor setStroke];
     
     CGMutablePathRef path = CGPathCreateMutable();
     if (self.orientation == ORKSideLeft) {
-        CGPathMoveToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth);
-        CGPathAddLineToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth + kArrowWidth);
-        CGPathAddLineToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth + 2 * kArrowWidth);
+        CGPathMoveToPoint(path, NULL, ArrowLineWidth + ArrowWidth, ArrowLineWidth);
+        CGPathAddLineToPoint(path, NULL, ArrowLineWidth, ArrowLineWidth + ArrowWidth);
+        CGPathAddLineToPoint(path, NULL, ArrowLineWidth + ArrowWidth, ArrowLineWidth + 2 * ArrowWidth);
     } else {
-        CGPathMoveToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth);
-        CGPathAddLineToPoint(path, NULL, kArrowLineWidth + kArrowWidth, kArrowLineWidth + kArrowWidth);
-        CGPathAddLineToPoint(path, NULL, kArrowLineWidth, kArrowLineWidth + 2 * kArrowWidth);
+        CGPathMoveToPoint(path, NULL, ArrowLineWidth, ArrowLineWidth);
+        CGPathAddLineToPoint(path, NULL, ArrowLineWidth + ArrowWidth, ArrowLineWidth + ArrowWidth);
+        CGPathAddLineToPoint(path, NULL, ArrowLineWidth, ArrowLineWidth + 2 * ArrowWidth);
     }
     
     CGContextAddPath(context, path);
@@ -134,7 +134,7 @@ static const CGFloat kArrowLineWidth = 4;
         [self addSubview:self.rightArrow];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
@@ -194,7 +194,7 @@ static const CGFloat kArrowLineWidth = 4;
     self.index = (self.index + 1) % 4;
 }
 
-- (void)updateConstraints {
+- (void)setUpConstraints {
     if ([_constraints count]) {
         [NSLayoutConstraint deactivateConstraints:_constraints];
         _constraints = nil;
@@ -221,7 +221,6 @@ static const CGFloat kArrowLineWidth = 4;
     [self addConstraints:self.constraints];
     
     [NSLayoutConstraint activateConstraints:self.constraints];
-    [super updateConstraints];
 }
 
 - (void)dealloc {

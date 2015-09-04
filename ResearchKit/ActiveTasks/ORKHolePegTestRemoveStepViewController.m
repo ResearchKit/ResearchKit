@@ -73,7 +73,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.holePegTestRemoveContentView = [[ORKHolePegTestRemoveContentView alloc] initWithOrientation:[self holePegTestRemoveStep].orientation];
+    self.holePegTestRemoveContentView = [[ORKHolePegTestRemoveContentView alloc] initWithMovingDirection:[self holePegTestRemoveStep].movingDirection];
     self.holePegTestRemoveContentView.threshold = [self holePegTestRemoveStep].threshold;
     self.holePegTestRemoveContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestRemoveContentView;
@@ -105,8 +105,8 @@
     
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
-    ORKHolePegTestResult *holePegTestResult = [[ORKHolePegTestResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    holePegTestResult.orientation = [self holePegTestRemoveStep].orientation;
+    ORKHolePegTestResult *holePegTestResult = [[ORKHolePegTestResult alloc] initWithIdentifier:self.step.identifier];
+    holePegTestResult.movingDirection = [self holePegTestRemoveStep].movingDirection;
     holePegTestResult.dominantHandTested = [self holePegTestRemoveStep].isDominantHandTested;
     holePegTestResult.numberOfPegs = [self holePegTestRemoveStep].numberOfPegs;
     holePegTestResult.threshold = [self holePegTestRemoveStep].threshold;
@@ -140,7 +140,7 @@
 #pragma mark - hole peg test content view delegate
 
 - (NSString *)stepTitle {
-    NSString *hand = [self holePegTestRemoveStep].orientation == ORKSideLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil);
+    NSString *hand = ([self holePegTestRemoveStep].movingDirection == ORKSideLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil);
     return [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), hand];
 }
 

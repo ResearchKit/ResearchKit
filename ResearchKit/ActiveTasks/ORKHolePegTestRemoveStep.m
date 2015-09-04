@@ -58,9 +58,9 @@
     
     NSTimeInterval const ORKHolePegTestMinimumDuration = 1.0f;
     
-    if (self.orientation != ORKSideLeft &&
-        self.orientation != ORKSideRight) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"orientation should be left or right."] userInfo:nil];
+    if (self.movingDirection != ORKSideLeft &&
+        self.movingDirection != ORKSideRight) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"moving direction should be left or right."] userInfo:nil];
     }
     
     if (self.numberOfPegs < ORKHolePegTestMinimumNumberOfPegs) {

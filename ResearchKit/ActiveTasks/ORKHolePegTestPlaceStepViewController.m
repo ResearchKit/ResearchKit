@@ -73,8 +73,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithOrientation:[self holePegTestPlaceStep].orientation
-                                                                                           rotated:[self holePegTestPlaceStep].rotated];
+    self.holePegTestPlaceContentView = [[ORKHolePegTestPlaceContentView alloc] initWithMovingDirection:[self holePegTestPlaceStep].movingDirection
+                                                                                               rotated:[self holePegTestPlaceStep].rotated];
     self.holePegTestPlaceContentView.threshold = [self holePegTestPlaceStep].threshold;
     self.holePegTestPlaceContentView.delegate = self;
     self.activeStepView.activeCustomView = self.holePegTestPlaceContentView;
@@ -99,8 +99,8 @@
 
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
 
-    ORKHolePegTestResult *holePegTestResult = [[ORKHolePegTestResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
-    holePegTestResult.orientation = [self holePegTestPlaceStep].orientation;
+    ORKHolePegTestResult *holePegTestResult = [[ORKHolePegTestResult alloc] initWithIdentifier:self.step.identifier];
+    holePegTestResult.movingDirection = [self holePegTestPlaceStep].movingDirection;
     holePegTestResult.dominantHandTested = [self holePegTestPlaceStep].isDominantHandTested;
     holePegTestResult.numberOfPegs = [self holePegTestPlaceStep].numberOfPegs;
     holePegTestResult.threshold = [self holePegTestPlaceStep].threshold;
@@ -134,7 +134,7 @@
 #pragma mark - hole peg test content view delegate
 
 - (NSString *)stepTitle {
-    NSString *hand = [self holePegTestPlaceStep].orientation == ORKSideLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
+    NSString *hand = ([self holePegTestPlaceStep].movingDirection == ORKSideLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
     return [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), hand];
 }
 

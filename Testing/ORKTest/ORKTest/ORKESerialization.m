@@ -448,7 +448,7 @@ ret =
              return [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(orientation, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(movingDirection, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(dominantHandTested, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(numberOfPegs, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(threshold, NSNumber, NSObject, YES, nil, nil),
@@ -459,7 +459,7 @@ ret =
              return [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-            PROPERTY(orientation, NSNumber, NSObject, YES, nil, nil),
+            PROPERTY(movingDirection, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(dominantHandTested, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(numberOfPegs, NSNumber, NSObject, YES, nil, nil),
             PROPERTY(threshold, NSNumber, NSObject, YES, nil, nil)
@@ -878,7 +878,7 @@ ret =
    ENTRY(ORKHolePegTestResult,
          nil,
          (@{
-            PROPERTY(orientation, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(movingDirection, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(dominantHandTested, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(numberOfPegs, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(threshold, NSNumber, NSObject, NO, nil, nil),

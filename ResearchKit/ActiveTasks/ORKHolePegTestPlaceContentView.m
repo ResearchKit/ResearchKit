@@ -51,8 +51,8 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
-@property (nonatomic, assign, getter=isMovable) BOOL movable;
-@property (nonatomic, assign, getter=isMoveEnded) BOOL moveEnded;
+@property (nonatomic, assign, getter = isMovable) BOOL movable;
+@property (nonatomic, assign, getter = hasMoveEnded) BOOL moveEnded;
 @property (nonatomic, assign) CGFloat rotation;
 @property (nonatomic, assign) CGFloat rotationOffset;
 @property (nonatomic, assign) CGPoint translation;
@@ -64,10 +64,10 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 
 @implementation ORKHolePegTestPlaceContentView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation rotated:(BOOL)rotated {
+- (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.orientation = orientation;
+        self.movingDirection = movingDirection;
         self.rotated = rotated;
 
         self.progressView = [UIProgressView new];
@@ -86,7 +86,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.pegView];
         
-        self.directionView = [[ORKDirectionView alloc] initWithOrientation:self.orientation == ORKSideLeft ? ORKSideRight : ORKSideLeft];
+        self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKSideLeft) ? ORKSideRight : ORKSideLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.directionView];
         
@@ -146,7 +146,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:self.orientation == ORKSideLeft ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:nil views:views]];
     
@@ -262,7 +262,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 }
 
 - (void)resetTransformAtPoint:(CGPoint)point {
-    if (!self.isMoveEnded) {
+    if (!self.hasMoveEnded) {
         self.movable = NO;
         self.moveEnded = YES;
 
@@ -270,7 +270,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
         self.panRecognizer.enabled = NO;
         self.rotationRecognizer.enabled = NO;
 
-        BOOL animated = ![self pegViewMoveEndedAtPoint:point];
+        BOOL animated = ![self pegViewMoveDidEndAtPoint:point];
         self.pegView.hidden = !animated;
 
         [UIView animateWithDuration:animated ? 0.15f : 0.0f
@@ -323,7 +323,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (BOOL)pegViewMoveEndedAtPoint:(CGPoint)point {
+- (BOOL)pegViewMoveDidEndAtPoint:(CGPoint)point {
     self.directionView.hidden = NO;
     
     BOOL succeeded = NO;

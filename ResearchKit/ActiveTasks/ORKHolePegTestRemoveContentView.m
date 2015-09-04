@@ -36,8 +36,8 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat ORKPegViewDiameter = 88.0f;
-static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
+static const CGFloat PegViewDiameter = 88.0f;
+static const CGFloat PegViewSeparatorWidth = 2.0f;
 
 
 @interface ORKHolePegTestRemoveContentView () <UIGestureRecognizerDelegate>
@@ -51,8 +51,8 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecognizer;
-@property (nonatomic, assign, getter=isMovable) BOOL movable;
-@property (nonatomic, assign, getter=isMoveEnded) BOOL moveEnded;
+@property (nonatomic, assign, getter = isMovable) BOOL movable;
+@property (nonatomic, assign, getter = hasMoveEnded) BOOL moveEnded;
 @property (nonatomic, assign) CGPoint translation;
 @property (nonatomic, assign) CGPoint translationOffset;
 @property (nonatomic, assign) CGPoint startPoint;
@@ -62,10 +62,10 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
 
 @implementation ORKHolePegTestRemoveContentView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation {
+- (instancetype)initWithMovingDirection:(ORKSide)movingDirection {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        self.orientation = orientation;
+        self.movingDirection = movingDirection;
         self.opaque = NO;
         
         self.container = [UIView new];
@@ -77,7 +77,7 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
         [self.progressView setAlpha:0];
         [self addSubview:self.progressView];
         
-        self.pegView = [[ORKHolePegTestRemovePegView alloc] initWithFrame:CGRectMake(0, 0, ORKPegViewDiameter, ORKPegViewDiameter)];
+        self.pegView = [[ORKHolePegTestRemovePegView alloc] initWithFrame:CGRectMake(0, 0, PegViewDiameter, PegViewDiameter)];
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.container addSubview:self.pegView];
         
@@ -85,7 +85,7 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
         [self.separatorView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.container addSubview:self.separatorView];
         
-        self.directionView = [[ORKDirectionView alloc] initWithOrientation:self.orientation == ORKSideLeft ? ORKSideRight : ORKSideLeft];
+        self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKSideLeft) ? ORKSideRight : ORKSideLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.directionView];
         
@@ -132,7 +132,7 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _container, _pegView, _separatorView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(ORKPegViewDiameter), @"separator" : @(ORKPegViewSeparatorWidth), @"margin" : @((1 + self.threshold) * ORKPegViewDiameter)};
+    NSDictionary *metrics = @{@"diameter" : @(PegViewDiameter), @"separator" : @(PegViewSeparatorWidth), @"margin" : @((1 + self.threshold) * PegViewDiameter)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
@@ -140,7 +140,7 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:self.orientation == ORKSideLeft ? @"H:|-[_pegView(diameter)]->=0-[_separatorView(separator)]-(margin)-|" : @"H:|-(margin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-[_pegView(diameter)]->=0-[_separatorView(separator)]-(margin)-|" : @"H:|-(margin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:metrics views:views]];
     
@@ -236,14 +236,14 @@ static const CGFloat ORKPegViewSeparatorWidth = 2.0f;
 }
 
 - (void)resetTransformAtPoint:(CGPoint)point {
-    if (!self.isMoveEnded) {
+    if (!self.hasMoveEnded) {
         self.movable = NO;
         self.moveEnded = YES;
         
         self.pinchRecognizer.enabled = NO;
         self.panRecognizer.enabled = NO;
         
-        BOOL animated = ![self pegViewMoveEndedAtPoint:point];
+        BOOL animated = ![self pegViewMoveDidEndAtPoint:point];
         
         [UIView animateWithDuration:animated ? 0.15f : 0.0f
                               delay:animated ? 0.0f : 0.30f
@@ -292,7 +292,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (BOOL)pegViewMoveEndedAtPoint:(CGPoint)point {
+- (BOOL)pegViewMoveDidEndAtPoint:(CGPoint)point {
     self.directionView.hidden = NO;
     
     BOOL succeeded = NO;
@@ -314,7 +314,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (BOOL)pegViewBehindLine {
-    if (self.orientation == ORKSideLeft) {
+    if (self.movingDirection == ORKSideLeft) {
         if (CGRectGetMinX(self.pegView.frame) > CGRectGetMaxX(self.separatorView.frame)) {
             return YES;
         } else {

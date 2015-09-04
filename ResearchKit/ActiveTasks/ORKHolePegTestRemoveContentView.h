@@ -39,9 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestRemoveContentView : ORKActiveStepCustomView
 
-- (instancetype)initWithOrientation:(ORKSide)orientation;
+- (instancetype)initWithMovingDirection:(ORKSide)movingDirection;
 
-@property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign) ORKSide movingDirection;
 @property (nonatomic, assign) double threshold;
 @property (nonatomic, weak) id<ORKHolePegTestRemoveContentViewDelegate> delegate;
 

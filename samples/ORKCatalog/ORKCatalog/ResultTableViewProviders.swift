@@ -679,15 +679,15 @@ class HolePegTestResultTableViewProvider: ResultTableViewProvider {
         
         if section == 0 {
             var side = ""
-            let orientation = holePegTestResult.orientation
-            if (orientation == .Left) {
+            let movingDirection = holePegTestResult.movingDirection
+            if (movingDirection == .Left) {
                 side = "left > right"
-            } else if (orientation == .Right) {
+            } else if (movingDirection == .Right) {
                 side = "right > left"
             }
             
-            // The hole peg test orientation.
-            rows.append(ResultRow(text: "orientation", detail: side))
+            // The hole peg test moving direction.
+            rows.append(ResultRow(text: "direction", detail: side))
             
             // The step is for the dominant hand.
             rows.append(ResultRow(text: "dominant hand", detail: holePegTestResult.dominantHandTested))

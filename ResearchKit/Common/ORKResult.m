@@ -711,7 +711,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_ENUM(aCoder, orientation);
+    ORK_ENCODE_ENUM(aCoder, movingDirection);
     ORK_ENCODE_BOOL(aCoder, dominantHandTested);
     ORK_ENCODE_INTEGER(aCoder, numberOfPegs);
     ORK_ENCODE_INTEGER(aCoder, threshold);
@@ -726,7 +726,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_ENUM(aDecoder, orientation);
+        ORK_DECODE_ENUM(aDecoder, movingDirection);
         ORK_DECODE_BOOL(aDecoder, dominantHandTested);
         ORK_DECODE_INTEGER(aDecoder, numberOfPegs);
         ORK_DECODE_INTEGER(aDecoder, threshold);
@@ -749,7 +749,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            (self.orientation == castObject.orientation) &&
+            (self.movingDirection == castObject.movingDirection) &&
             (self.isDominantHandTested == castObject.isDominantHandTested) &&
             (self.numberOfPegs == castObject.numberOfPegs) &&
             (self.threshold == castObject.threshold) &&
@@ -767,7 +767,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKHolePegTestResult *result = [super copyWithZone:zone];
-    result.orientation = self.orientation;
+    result.movingDirection = self.movingDirection;
     result.dominantHandTested = self.isDominantHandTested;
     result.numberOfPegs = self.numberOfPegs;
     result.threshold = self.threshold;

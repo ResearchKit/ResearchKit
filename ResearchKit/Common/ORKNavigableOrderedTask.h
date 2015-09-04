@@ -105,13 +105,13 @@ ORK_CLASS_AVAILABLE
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param intendedUseDescription  A localized string describing the intended use of the data
- collected. If the value of this parameter is `nil`, the default
- localized text will be displayed.
+                                  collected. If the value of this parameter is `nil`, the default
+                                  localized text will be displayed.
  @param dominantHand            The participant dominant hand that will be tested first.
  @param numberOfPegs            The number of pegs to place in the pegboard.
- @param threshold               The detection area.
+ @param threshold               The threshold value used for the detection area.
  @param rotated                 A test variant that also requires peg rotation.
- @param timeLimit               The orientation allowed to validate the peg position.
+ @param timeLimit               The duration allowed to validate the peg position.
  @param options                 Options that affect the features of the predefined task.
  
  @return An active hole peg test task that can be presented with an `ORKTaskViewController` object.
