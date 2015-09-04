@@ -73,7 +73,7 @@ ORK_CLASS_AVAILABLE
  
  @param identifier    The identifier of the step (a step identifier should be unique within the task).
  @param title         A localized string that represents the primary text of the question.
- @param text          A localized string that represents the additional text of the question..
+ @param text          A localized string that represents the additional text of the question.
  @param answerFormat  The format in which the answer is expected.
  */
 + (instancetype)questionStepWithIdentifier:(NSString *)identifier
