@@ -57,6 +57,7 @@
         _answer = answer;
         self.step  = step;
         self.answer = answer;
+        self.clipsToBounds = YES;
     }
     return self;
 }
