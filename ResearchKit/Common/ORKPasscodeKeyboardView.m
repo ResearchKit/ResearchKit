@@ -150,9 +150,9 @@
 - (void)buttonPressed:(id)sender {
     
     if (self.delegate &&
-        [self.delegate respondsToSelector:@selector(keyboardView:receivedInput:)]) {
+        [self.delegate respondsToSelector:@selector(keyboardView:didReceivedInput:)]) {
         ORKPasscodeButton *button = sender;
-        [self.delegate keyboardView:self receivedInput:button.titleLabel.text];
+        [self.delegate keyboardView:self didReceivedInput:button.titleLabel.text];
     }
 }
 

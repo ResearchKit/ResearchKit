@@ -466,7 +466,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 
 #pragma mark - UIPasscodeKeyboardDelegate
 
-- (void)keyboardView:(ORKPasscodeKeyboardView *)view receivedInput:(NSString *)input {
+- (void)keyboardView:(ORKPasscodeKeyboardView *)view didReceivedInput:(NSString *)input {
     
     // Disable input while changing states.
     if (_isChangingState) {

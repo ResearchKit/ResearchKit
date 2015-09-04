@@ -35,7 +35,7 @@
 
 @protocol ORKPasscodeKeyboardDelegate <NSObject>
 
-- (void)keyboardView:(ORKPasscodeKeyboardView *)view receivedInput:(NSString *) input;
+- (void)keyboardView:(ORKPasscodeKeyboardView *)view didReceivedInput:(NSString *) input;
 
 @end
 
