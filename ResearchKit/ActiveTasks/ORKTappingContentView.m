@@ -51,7 +51,7 @@
 
 
 @implementation ORKTappingContentView {
-    
+   
     NSArray *_constraints;
     ORKScreenType _screenType;
     UIView *_buttonContainer;
@@ -108,7 +108,7 @@
         _buttonContainer.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.25];
 #endif
     }
-    return self;
+     return self;
 }
 
 - (void)tintColorDidChange {
@@ -259,7 +259,7 @@
                                                            toItem:_tapButton2
                                                         attribute:NSLayoutAttributeCenterY
                                                        multiplier:1 constant:0]];
-    
+
     
     _constraints = constraints;
     [self addConstraints:_constraints];
