@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Torony";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Koppintson duplán a korong elhelyezéséhez";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Koppintson duplán a legfelső korong kijelöléséhez";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Üres";
 
 "AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
-
-

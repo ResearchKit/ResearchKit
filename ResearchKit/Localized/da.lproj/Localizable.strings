@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tårn";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Tryk to gange for at anbringe ring";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Tryk to gange for at vælge den øverste ring";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har ringe med størrelser";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har ringe med størrelserne %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
 "AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
-
-

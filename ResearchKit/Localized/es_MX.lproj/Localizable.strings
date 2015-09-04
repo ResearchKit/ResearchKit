@@ -169,7 +169,7 @@
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "Velocidad al tocar";
 "TAPPING_INTRO_TEXT" = "Esta actividad mide tu velocidad al tocar.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "Coloca el teléfono sobre una superficie plana. Se mostrarán dos botones en la pantalla durante %@. Usando dos dedos de la mano, toca alternadamente los botones con los de la otra mano tan rápido como puedas.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "Coloca el teléfono sobre una superficie plana. Se mostrarán dos botones en la pantalla durante %@. Usando dos dedos de una misma mano, toca alternadamente los botones tan rápido como puedas.";
 "TAPPING_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
 "TAP_BUTTON_TITLE" = "Tocar";
 "TOTAL_TAPS_LABEL" = "Toques en total";
@@ -265,7 +265,7 @@
 "PASAT_INTRO_TEXT" = "La Prueba de la adición auditiva consecutiva ritmada (PASAT) mide tu capacidad de cálculo y velocidad de procesamiento de información auditiva.";
 "PVSAT_INTRO_TEXT" = "La Prueba de la adición visual consecutiva ritmada (PVSAT) mide tu capacidad de cálculo y velocidad de procesamiento de información visual.";
 "PAVSAT_INTRO_TEXT" = "La Prueba de la adición audiovisual consecutiva ritmada (PAVSAT) mide tu capacidad de cálculo y velocidad de procesamiento de información auditiva y visual.";
-"PSAT_INTRO_TEXT_2_%@" = "Los dígitos únicos se presentan cada %@ segundos.\nDebes agregar cada dígito nuevo al que lo precede inmediatamente.\nNota: No debes calcular un total acumulado; sólo la suma de los últimos dos números.";
+"PSAT_INTRO_TEXT_2_%@" = "Los dígitos únicos se presentan cada %@ segundos.\nDebes sumar cada dígito nuevo al que lo precede inmediatamente.\nNota: No debes calcular un total acumulado; sólo la suma de los últimos dos números.";
 "PSAT_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
 "PSAT_INITIAL_INSTRUCTION" = "Recuerda este primer dígito.";
 "PSAT_INSTRUCTION" = "Agregar este nuevo dígito al anterior.";
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Torre";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Toca dos veces para colocar el disco";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Toca dos veces para seleccionar el disco de hasta arriba.";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tiene discos de tamaño ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tiene discos de tamaño %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vacía";
 
 "AX_GRAPH_RANGE_FORMAT" = "Rango de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
-
-

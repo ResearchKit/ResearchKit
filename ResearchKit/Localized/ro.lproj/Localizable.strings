@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Turn";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Apăsați dublu pentru a plasa discul";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Apăsați dublu pentru a selecta discul cel mai de sus";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Are disc de mărime ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Are disc de mărime %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Gol";
 
 "AX_GRAPH_RANGE_FORMAT" = "Interval de la %@ la %@";
 "AX_GRAPH_AND_SEPARATOR" = " și ";
-
-

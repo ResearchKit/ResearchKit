@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "หอคอย";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "แตะสองครั้งเพื่อวางจาน";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "แตะสองครั้งเพื่อเลือกจานที่อยู่ด้านบนสุด";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "มีจานที่มีขนาด ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "มีจานที่มีขนาด %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ว่างเปล่า";
 
 "AX_GRAPH_RANGE_FORMAT" = "ช่วงตั้งแต่ %@ ถึง %@";
 "AX_GRAPH_AND_SEPARATOR" = " และ ";
-
-
