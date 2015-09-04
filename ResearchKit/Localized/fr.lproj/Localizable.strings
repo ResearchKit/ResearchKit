@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consentement";
-"CONSENT_NAME_FIRST" = "Prénom";
-"CONSENT_NAME_LAST" = "Nom";
+"CONSENT_NAME_GIVEN" = "Prénom";
+"CONSENT_NAME_FAMILY" = "Nom";
 "CONSENT_NAME_PLACEHOLDER" = "Obligatoire";
 "CONSENT_REVIEW_TITLE" = "Vérification";
 "CONSENT_REVIEW_INSTRUCTION" = "Vérifiez le formulaire ci-dessous et touchez Accepter si vous êtes prêt à continuer.";
@@ -75,13 +75,22 @@
 "CONSENT_DOC_LINE_DATE" = "Date";
 
 /* Progress indication (in navigation bar). */
-"STEP_PROGRESS_FORMAT" = "Étape %1$@ sur %2$@";
+"STEP_PROGRESS_FORMAT" = "Étape %1$@ sur %2$@";
 
 /* Alert for out of range values. */
 "RANGE_ALERT_TITLE" = "Valeur non valide";
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ dépasse la valeur maximale autorisée (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ est inférieur à la valeur minimale autorisée (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ n’est pas une valeur valide.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Adresse e-mail non valide : %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "La longueur du texte dépasse la limite : %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Appareil photo non disponible en plein écran.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentative %@ sur %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Secouer rapidement l’appareil lorsque le cercle bleu apparaît";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tour de Hanoï";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Cette activité évalue votre capacité à terminer un jeu de réflexion.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Déplacez toute la pile de disques sur la plateforme en surbrillance en un minimum de déplacements.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toucher Démarrer pour commencer";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Jeu de réflexion";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Nombre de déplacements : %@\n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Je ne parviens pas à faire ce jeu";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Marche chronométrée";
+"TIMED_WALK_INTRO_DETAIL" = "Cette activité évalue le fonctionnement de vos extrémités inférieures.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Trouvez un endroit, de préférence en extérieur, où vous pouvez marcher environ %@ en ligne droite aussi vite que possible, mais sans vous mettre en danger. Ne ralentissez pas avant d’avoir passé la ligne d’arrivée.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Touchez Suivant pour commencer.";
+"TIMED_WALK_FORM_TITLE" = "Appareil d’assistance";
+"TIMED_WALK_FORM_TEXT" = "Utilisez le même appareil d’assistance pour chaque test.";
+"TIMED_WALK_QUESTION_TEXT" = "Portez-vous un releveur de pied ?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Utilisez-vous un appareil d’assistance ?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Touchez ici pour répondre.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Non";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Une canne";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Une béquille";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Deux cannes";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Deux béquilles";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Un déambulateur/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Marchez %@ en ligne droite.";
+"TIMED_WALK_INSTRUCTION_2" = "Faites demi-tour et revenez à votre point de départ.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Touchez Terminé une fois terminé.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Aucune donnée";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Le test PASAT (Paced Auditory Serial Addition Test) mesure votre vitesse de traitement des informations audio et votre capacité à calculer.";
+"PVSAT_INTRO_TEXT" = "Le test PVSAT (Paced Visual Serial Addition Test) mesure votre vitesse de traitement des informations visuelles et votre capacité à calculer.";
+"PAVSAT_INTRO_TEXT" = "Le test PAVSAT (Paced Auditory and Visual Serial Addition Test) mesure votre vitesse de traitement des informations audio et visuelles et votre capacité à calculer.";
+"PSAT_INTRO_TEXT_2_%@" = "Un chiffre apparaît toutes les %@ secondes.\nAjoutez chaque nouveau chiffre à celui qui le précède.\nAttention, vous ne devez pas calculer la somme de tous les chiffres ajoutés mais seulement la somme du nouveau chiffre et du précédent.";
+"PSAT_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"PSAT_INITIAL_INSTRUCTION" = "Souvenez-vous de ce chiffre.";
+"PSAT_INSTRUCTION" = "Ajoutez ce chiffre au précédent.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Impossible de supprimer assez de fichiers journaux pour atteindre le seuil";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Jeu de mémoire";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Aperçu de la capture";
+"AX_IMAGE_CAPTURED_LABEL" = "Image capturée";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Impossible de placer un disque de taille %@ sur un disque de taille %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cible";
+"AX_TOWER_OF_HANOI_TOWER" = "Tour";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Toucher deux fois pour placer le disque";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Toucher deux fois pour sélectionner le disque supérieur";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Possède un disque de tailles ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vide";
+
+"AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
+"AX_GRAPH_AND_SEPARATOR" = " et ";
+
 

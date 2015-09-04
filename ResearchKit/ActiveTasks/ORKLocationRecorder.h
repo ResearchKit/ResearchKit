@@ -30,6 +30,7 @@
 
 
 #import <ResearchKit/ORKRecorder.h>
+#import <CoreLocation/CoreLocation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -57,6 +58,12 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               step:(nullable ORKStep *)step
                    outputDirectory:(nullable NSURL *)outputDirectory NS_DESIGNATED_INITIALIZER;
+
+
+/**
+ The location manager, if any, being used by this recorder.
+ */
+@property (nonatomic, strong, nullable, readonly) CLLocationManager *locationManager;
 
 @end
 

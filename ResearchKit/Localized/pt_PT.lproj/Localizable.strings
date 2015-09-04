@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Autorização";
-"CONSENT_NAME_FIRST" = "Nome";
-"CONSENT_NAME_LAST" = "Apelido";
+"CONSENT_NAME_GIVEN" = "Nome";
+"CONSENT_NAME_FAMILY" = "Apelido";
 "CONSENT_NAME_PLACEHOLDER" = "necessário";
 "CONSENT_REVIEW_TITLE" = "Leia com atenção";
 "CONSENT_REVIEW_INSTRUCTION" = "Leia com atenção o texto abaixo e toque em Concordo se pretende continuar.";
@@ -83,6 +83,15 @@
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ é inferior ao valor mínimo permitido (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ não é um valor válido.";
 
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Endereço de e‑mail inválido: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conteúdo de texto que excede o comprimento máximo: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "A câmara não está disponível em ecrã dividido.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -104,8 +113,8 @@
 
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Toque para responder";
-"NULL_ANSWER" = "Seleccione uma resposta";
-"PLACEHOLDER_IMAGE_CHOICES" = "Toque para seleccionar";
+"NULL_ANSWER" = "Selecione uma resposta";
+"PLACEHOLDER_IMAGE_CHOICES" = "Toque para selecionar";
 "PLACEHOLDER_LONG_TEXT" = "Toque para escrever";
 
 /* Button titles */
@@ -134,7 +143,7 @@
 "CAPTURE_BUTTON_RECAPTURE_IMAGE" = "Voltar a capturar imagem";
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Nenhuma câmara encontrada. This step cannot be completed.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Para completar este passo, permita que esta aplicação aceda à câmara nas Definições.";
-"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum directório de saída para as imagens capturadas.";
+"CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum diretório de saída para as imagens capturadas.";
 "CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Não foi possível guardar a imagem capturada.";
 
 /* Fitness active task. */
@@ -149,12 +158,12 @@
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Equilíbrio e modo de andar";
 "WALK_INTRO_TEXT" = "Este exercício mede o seu equilíbrio e modo de andar. Se não tem condições para andar em segurança sem ajuda, não continue.";
-"WALK_INTRO_2_TEXT_%ld" = "Encontre um sítio onde possa andar em linha recta, em segurança e sem ajuda, durante aproximadamente %ld passos.";
+"WALK_INTRO_2_TEXT_%ld" = "Encontre um sítio onde possa andar em linha reta, em segurança e sem ajuda, durante aproximadamente %ld passos.";
 "WALK_INTRO_2_DETAIL" = "Ponha o telefone no bolso ou dentro da mala e siga as instruções pelos auriculares.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Agora, pare e mantenha-se de pé durante %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Pare e mantenha-se de pé durante %@.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Dê meia‑volta e ande de volta ao ponto de partida.";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Dê até %ld passos em linha recta.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Dê até %ld passos em linha reta.";
 
 
 /* Tapping active task. */
@@ -177,7 +186,7 @@
 
 /* Tone audiometry active task. */
 "TONE_AUDIOMETRY_TASK_TITLE" = "Audiometria de tom";
-"TONE_AUDIOMETRY_INTENDED_USE" = "Esta actividade mede a sua capacidade de ouvir sons diferentes.";
+"TONE_AUDIOMETRY_INTENDED_USE" = "Esta atividade mede a sua capacidade de ouvir sons diferentes.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Antes de começar, ligue os auscultadores e coloque-os na cabeça.";
 "TONE_AUDIOMETRY_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Deve ouvir um som agora. Ajuste o volume usando os controlos na parte lateral do dispositivo.\n\nToque no botão quando estiver pronto para começar.";
@@ -209,12 +218,58 @@
 "MEMORY_GAME_PAUSED_MESSAGE" = "Para continuar, toque em Seguinte";
 
 /* Reaction time active task. */
-"REACTION_TIME_TASK_TITLE" = "Tempo de reacção";
-"REACTION_TIME_TASK_INTENDED_USE" = "Esta actividade avalia o seu tempo de resposta a uma pista visual.";
-"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite o dispositivo em qualquer direcção assim que o ponto azul aparecer no ecrã. Ser-lhe-á pedido para fazer isto %D vezes.";
+"REACTION_TIME_TASK_TITLE" = "Tempo de reação";
+"REACTION_TIME_TASK_INTENDED_USE" = "Esta atividade avalia o seu tempo de resposta a uma pista visual.";
+"REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Agite o dispositivo em qualquer direção assim que o ponto azul aparecer no ecrã. Ser-lhe-á pedido para fazer isto %D vezes.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Tentativa %@ de %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Agite rapidamente o dispositivo quando o círculo azul aparecer";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Este exercício avalia a sua capacidade de resolver puzzles.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mova a pilha inteira para a plataforma destacada no menor número de movimentos possível.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toque em Iniciar para começar";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resolver o puzzle";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de movimentos: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo resolver este puzzle";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Caminhada temporizada";
+"TIMED_WALK_INTRO_DETAIL" = "Esta atividade mede a função das suas extremidades inferiores.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Encontre um lugar, preferencialmente no exterior, onde possa caminhar cerca de %@ em linha reta o mais rapidamente possível, mas em segurança. Não abrande até ultrapassar a meta.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Toque em Seguinte para começar.";
+"TIMED_WALK_FORM_TITLE" = "Dispositivo auxiliar";
+"TIMED_WALK_FORM_TEXT" = "Use o mesmo dispositivo auxiliar para cada teste.";
+"TIMED_WALK_QUESTION_TEXT" = "Utiliza uma órtotese tornozelo-pé?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Utiliza um dispositivo auxiliar?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Toque aqui para responder.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nenhum";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Bengala unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Muleta unilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Bengala bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Muleta bilateral";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Andarilho";
+"TIMED_WALK_INSTRUCTION_%@" = "Caminhe até %@ em linha reta.";
+"TIMED_WALK_INSTRUCTION_2" = "Dê meia‑volta e ande de volta ao ponto de partida.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Toque em OK quando terminar.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sem dados";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "O teste PASAT (Paced Auditory Serial Addition Test) mede a velocidade de processamento de informação auditiva e a capacidade de cálculo.";
+"PVSAT_INTRO_TEXT" = "O teste PVSAT (Paced Auditory Serial Addition Test) mede a velocidade de processamento de informação visual e a capacidade de cálculo.";
+"PAVSAT_INTRO_TEXT" = "O teste PAVSAT (Paced Auditory and Visual Serial Addition Test) mede a velocidade de processamento de informação auditiva e visual e a capacidade de cálculo.";
+"PSAT_INTRO_TEXT_2_%@" = "Os dígitos únicos são apresentados a cada %@ segundos.\nTem de adicionar cada novo dígito ao dígito imediatamente anterior.\nAtenção, não deve calcular o valor total, mas apenas a soma dos últimos dois números.";
+"PSAT_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"PSAT_INITIAL_INSTRUCTION" = "Lembre-se deste primeiro dígito.";
+"PSAT_INSTRUCTION" = "Adicione este novo dígito ao anterior.";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar ficheiro";
@@ -223,7 +278,7 @@
 "ERROR_DATALOGGER_COULD_NOT_MAORK" = "Ficheiro não marcado como pagado (não marcado como enviado).";
 "ERROR_DATALOGGER_MULTIPLE" = "Vários erros ao remover registos.";
 "ERROR_RECORDER_NO_DATA" = "Os dados recolhidos não foram encontrados.";
-"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum directório de saída.";
+"ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Não foi especificado nenhum diretório de saída.";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Voltar";
@@ -235,19 +290,32 @@
 "AX_SIGNVIEW_SIGNED" = "Assinado";
 "AX_SIGNVIEW_UNSIGNED" = "Por assinar";
 
-"AX_SELECTED" = "Seleccionado";
-"AX_UNSELECTED" = "Não seleccionado";
+"AX_SELECTED" = "Selecionado";
+"AX_UNSELECTED" = "Não selecionado";
 
 "AX_SLIDER_LABEL" = "Nivelador de resposta. De %@ a %@";
 "AX_UNLABELED_IMAGE" = "Imagem sem etiqueta";
 
 "AX_ANNOUNCE_BEGIN_TASK" = "Iniciar tarefa";
 
-"AX.MEMORY.TILE.ACTIVE" = "activa";
-"AX.MEMORY.TILE.CORRECT" = "correcto";
-"AX.MEMORY.TILE.INCORRECT" = "incorrecto";
+"AX.MEMORY.TILE.ACTIVE" = "ativa";
+"AX.MEMORY.TILE.CORRECT" = "correto";
+"AX.MEMORY.TILE.INCORRECT" = "incorreto";
 "AX.MEMORY.TILE.QUIESCENT" = "quiescente";
 "AX.MEMORY.TILE.LABEL" = "Mosaico do jogo de memória";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Pré‑visualização da captura";
+"AX_IMAGE_CAPTURED_LABEL" = "Imagem capturada";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Impossível colocar o disco com tamanho %@ no disco com tamanho %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Destino";
+"AX_TOWER_OF_HANOI_TOWER" = "Torre";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dê dois toques para colocar o disco";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dê dois toques para selecionar o primeiro disco";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tem disco com tamanhos ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vazio";
+
+"AX_GRAPH_RANGE_FORMAT" = "Intervalo de %@ a %@";
+"AX_GRAPH_AND_SEPARATOR" = " e ";
+
 

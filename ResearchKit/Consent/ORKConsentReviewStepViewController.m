@@ -138,7 +138,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 }
 
 - (UIBarButtonItem *)goToPreviousPageButtonItem {
-    UIBarButtonItem *button = [UIBarButtonItem obk_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
+    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }
@@ -175,12 +175,12 @@ static NSString *const _FamilyNameIdentifier = @"family";
     nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
     nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
     ORKFormItem *givenName = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
-                                                              text:ORKLocalizedString(@"CONSENT_NAME_FIRST", nil)
+                                                              text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                       answerFormat:nameAnswerFormat];
     givenName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
     ORKFormItem *familyName = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
-                                                             text:ORKLocalizedString(@"CONSENT_NAME_LAST", nil)
+                                                             text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                      answerFormat:nameAnswerFormat];
     familyName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
@@ -357,7 +357,10 @@ static NSString *const _FamilyNameIdentifier = @"family";
         animated = NO;
     }
     
-    UIPageViewControllerNavigationDirection direction = (!animated || page > currentIndex)?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
+    UIPageViewControllerNavigationDirection direction = (!animated || page > currentIndex) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
+    
+    ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
+    
     _currentPageIndex = page;
     __weak typeof(self) weakSelf = self;
     

@@ -57,7 +57,7 @@ static const NSUInteger kNumberOfTowers = 3;
     NSDate *_firstMoveDate;
 }
 
-#pragma Mark -- UIViewController
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,13 +93,13 @@ static const NSUInteger kNumberOfTowers = 3;
     [NSLayoutConstraint activateConstraints:_currentConstraints];
 }
 
-#pragma Mark -- ORKStepViewController
+#pragma mark - ORKStepViewController
 
 - (void)skipForward {
     [self finish];
 }
 
-#pragma Mark -- ORKActiveTaskViewController
+#pragma mark - ORKActiveTaskViewController
 
 - (ORKResult *)result {
     ORKStepResult *stepResult = [super result];
@@ -113,21 +113,21 @@ static const NSUInteger kNumberOfTowers = 3;
     return stepResult;
 }
 
-#pragma Mark -- ORKTowerOfHanoiTowerViewDataSource
+#pragma mark - ORKTowerOfHanoiTowerViewDataSource
  
 - (NSUInteger)numberOfDisksInTowerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView {
-     NSInteger towerIndex = [_towerViews indexOfObject:towerView];
-     ORKTowerOfHanoiTower *tower = _towers[towerIndex];
-     return tower.disks.count;
+    NSInteger towerIndex = [_towerViews indexOfObject:towerView];
+    ORKTowerOfHanoiTower *tower = _towers[towerIndex];
+    return tower.disks.count;
 }
  
 - (NSNumber *)towerOfHanoiView:(ORKTowerOfHanoiTowerView *)towerView diskAtIndex:(NSUInteger)index {
-     NSInteger towerIndex = [_towerViews indexOfObject:towerView];
-     ORKTowerOfHanoiTower *tower = _towers[towerIndex];
-     return tower.disks[index];
+    NSInteger towerIndex = [_towerViews indexOfObject:towerView];
+    ORKTowerOfHanoiTower *tower = _towers[towerIndex];
+    return (index >= tower.disks.count) ? nil :tower.disks[index];
 }
 
-#pragma Mark -- ORKTowerOfHanoiTowerViewDelegate
+#pragma mark - ORKTowerOfHanoiTowerViewDelegate
 
 - (void)towerOfHanoiTowerViewWasSelected:(ORKTowerOfHanoiTowerView *)towerView {
     NSInteger newSelectedIndex = [_towerViews indexOfObject:towerView];
@@ -143,7 +143,11 @@ static const NSUInteger kNumberOfTowers = 3;
     [self evaluatePuzzle];
 }
 
-#pragma Mark -- ORKTowerOfHanoiViewController
+- (ORKTowerOfHanoiTowerView *)towerOfHanoiHighlightedTowerView {
+    return (_selectedIndex != nil ? _towerViews[_selectedIndex.integerValue] : nil);
+}
+
+#pragma mark - ORKTowerOfHanoiViewController
 
 - (NSMutableArray *)moves {
     if (_moves == nil) {
@@ -218,6 +222,18 @@ static const NSUInteger kNumberOfTowers = 3;
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
     if ([recipientTower recieveDiskFrom:donorTower]) {
         [self makeMoveFromTowerAtIndex:donorTowerIndex toTowerAtIndex:recipientTowerIndex];
+    }
+    else {
+        NSNumber *donorSize = [self towerOfHanoiView:_towerViews[donorTowerIndex] diskAtIndex:0];
+        NSNumber *recipientSize = [self towerOfHanoiView:_towerViews[recipientTowerIndex] diskAtIndex:0];
+        
+        if (donorSize && recipientSize) {
+            // Only announce if the both donor and recipient are valid
+            NSString *invalidMoveAnnouncement = [NSString stringWithFormat:ORKLocalizedString(@"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT", nil), donorSize.stringValue, recipientSize.stringValue];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, invalidMoveAnnouncement);
+            });
+        }
     }
 }
 

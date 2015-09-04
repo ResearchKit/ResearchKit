@@ -85,7 +85,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _screenType = ORKGetScreenTypeForWindow(nil);
+        _screenType = ORKGetVerticalScreenTypeForWindow(nil);
         // Text Label
         {
             _captionLabel = [ORKHeadlineLabel new];
@@ -136,7 +136,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
+    _screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
     [self updateConstraintConstants];
     [self updateCaptionLabelPreferredWidth];
 }
@@ -160,8 +160,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
     CGRect bounds = self.bounds;
     CGRect insetBounds = UIEdgeInsetsInsetRect(bounds, self.layoutMargins);
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
-    CGFloat sideMargin = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreButtonSideMargin, screenType);
+    CGFloat sideMargin = ORKGetMetricForWindow(ORKScreenMetricLearnMoreButtonSideMargin, self.window);
     _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin*2;
 }
 

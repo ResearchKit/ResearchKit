@@ -262,20 +262,23 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)updateConstraints {
-    CGFloat labelMinWidth = self.maxLabelWidth;
+    CGFloat labelWidth = self.maxLabelWidth;
     CGFloat boundWidth = self.expectedLayoutWidth;
     
     id labelLabel = self.labelLabel, textFieldView = _textFieldView;
     NSDictionary *dictionary = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
     ORKEnableAutoLayoutForViews([dictionary allValues]);
     
-    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left), @"hSpacer":@(16), @"vSpacer":@(15), @"labelMinWidth": @(labelMinWidth)};
+    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left), @"hSpacer":@(16), @"vSpacer":@(15), @"labelWidth": @(labelWidth)};
     
     [self.contentView removeConstraints:self.myConstraints];
     
     self.myConstraints = [NSMutableArray new];
     
-    if ((labelMinWidth) >= 0.6*boundWidth) {
+    CGFloat fieldWidth = _textFieldView.estimatedWidth;
+    
+    // Leave half space for field, also be able to display placeholder in full.
+    if ( labelWidth >= 0.5*boundWidth || (fieldWidth + labelWidth) > 0.9*boundWidth ) {
 
         [self.myConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
@@ -289,7 +292,7 @@ static const CGFloat kHMargin = 15.0;
     } else {
         
         [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelMinWidth)]-hSpacer-[textFieldView]|" options:NSLayoutFormatAlignAllCenterY metrics:metrics views:dictionary]];
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelWidth)]-hSpacer-[textFieldView]|" options:NSLayoutFormatAlignAllCenterY metrics:metrics views:dictionary]];
         
         [self.myConstraints addObject:
          [NSLayoutConstraint constraintWithItem:labelLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
@@ -831,7 +834,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if (_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
     }
     return _formatProvider;

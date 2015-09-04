@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Beleegyezés";
-"CONSENT_NAME_FIRST" = "Utónév";
-"CONSENT_NAME_LAST" = "Családi név";
+"CONSENT_NAME_GIVEN" = "Utónév";
+"CONSENT_NAME_FAMILY" = "Családi név";
 "CONSENT_NAME_PLACEHOLDER" = "Szükséges";
 "CONSENT_REVIEW_TITLE" = "Áttekintés";
 "CONSENT_REVIEW_INSTRUCTION" = "Tekintse át az alábbi űrlapot, majd koppintson az Elfogadom gombra, ha készen áll a folytatásra.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "A(z) %1$@ túllépi a maximálisan engedélyezett értéket (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "A(z) %1$@ kisebb a minimálisan engedélyezett értéknél (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "A(z) %@ nem érvényes érték.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Érvénytelen e-mail cím: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "A szöveg túllépi a maximális hosszt: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "A kamera nem érhető el osztott képernyős nézetben.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@/%@. kísérlet";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Gyorsan rázza meg a készüléket, amikor megjelenik a kék kör";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanoi tornyai";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ez a tevékenység kiértékeli az Ön kirakómegoldási képességeit.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Helyezze át a teljes köteget a kijelölt oszlopra a lehető legkevesebb lépésben.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "A kirakós megoldása";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Lépések száma: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Nem tudom megoldani ezt a kirakót";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Időre mért gyaloglás";
+"TIMED_WALK_INTRO_DETAIL" = "Ez a tevékenység az alsó végtagok működését méri.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Keressen olyan helyet, lehetőleg kültéren, ahol %@ ideig egyenesen tud gyalogolni olyan gyorsan, ahogy csak tud, de biztonságosan. Ne lassítson le, amíg el nem hagyta a célvonalat.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Koppintson\na Tovább elemre\na kezdéshez.";
+"TIMED_WALK_FORM_TITLE" = "Segítőeszköz";
+"TIMED_WALK_FORM_TEXT" = "Ugyanazt a segítőeszközt használja minden teszthez.";
+"TIMED_WALK_QUESTION_TEXT" = "Használ boka-járáskönnyítőt?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Használ segítőeszközt?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Válasz kijelöléséhez koppintson ide.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nincs";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Egyoldali bot";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Egyoldali mankó";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Kétoldali bot";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Kétoldali mankó";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Járókeret/rollátor";
+"TIMED_WALK_INSTRUCTION_%@" = "Gyalogoljon legalább %@ távolságra egyenesen.";
+"TIMED_WALK_INSTRUCTION_2" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Koppintson a Kész lehetőségre, ha elkészült.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nincs adat";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Az Ütemes hallási sorozatösszeadási teszt a hallási információfeldolgozási sebességet és számítási képességet méri.";
+"PVSAT_INTRO_TEXT" = "Az Ütemes vizuális sorozatösszeadási teszt a vizuális információfeldolgozási sebességet és számítási képességet méri.";
+"PAVSAT_INTRO_TEXT" = "Az Ütemes hallási és vizuális sorozatösszeadási teszt a hallási és vizuális információfeldolgozási sebességet és számítási képességet méri.";
+"PSAT_INTRO_TEXT_2_%@" = "%@ másodpercenként számjegyek jelennek meg.\nMinden új számjegyet adjon hozzá az előtte lévőhöz.\nFigyelem: Ne számítsa ki a teljes sorozat összegét, csak az utolsó két számjegy összegét.";
+"PSAT_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"PSAT_INITIAL_INSTRUCTION" = "Jegyezze meg ezt az első számkegyet.";
+"PSAT_INSTRUCTION" = "Adja hozzá ezt az új számjegyet az előzőhöz.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nem sikerült elég naplófájlt eltávolítani a küszöb eléréséhez";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Memóriajáték címe";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Előnézet rögzítése";
+"AX_IMAGE_CAPTURED_LABEL" = "Készített kép";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Nem helyezhető %@ méretű korong %@ méretű korongra";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cél";
+"AX_TOWER_OF_HANOI_TOWER" = "Torony";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Koppintson duplán a korong elhelyezéséhez";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Koppintson duplán a legfelső korong kijelöléséhez";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "A következő méretű korongokat tárolja: ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Üres";
+
+"AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
+"AX_GRAPH_AND_SEPARATOR" = " és ";
+
 

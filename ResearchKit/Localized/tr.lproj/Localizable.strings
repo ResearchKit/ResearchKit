@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "İzin";
-"CONSENT_NAME_FIRST" = "Ad";
-"CONSENT_NAME_LAST" = "Soyad";
+"CONSENT_NAME_GIVEN" = "Ad";
+"CONSENT_NAME_FAMILY" = "Soyad";
 "CONSENT_NAME_PLACEHOLDER" = "Gerekli";
 "CONSENT_REVIEW_TITLE" = "Gözden Geçir";
 "CONSENT_REVIEW_INSTRUCTION" = "Aşağıdaki formu gözden geçirin ve sürdürmeye hazırsanız Kabul Ediyorum’a dokunun.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@, izin verilen maksimum değeri (%2$@) aşıyor.";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@, izin verilen minimum değerden (%2$@) küçük.";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ geçerli bir değer değil.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Geçersiz e-posta adresi: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Metin içeriği maksimum uzunluğu aşıyor: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Bölünmüş ekranda Kamera kullanılamıyor.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "%@ / %@ Girişim";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Mavi çember göründüğünde aygıtı hızlıca sallayın";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanoi Kulesi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Bu etkinlik bulmaca çözme becerilerinizi ölçer.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Tüm yığını, vurgulanan platforma mümkün olan en az hamlede taşıyın.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Bulmacayı Çöz";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Hamle Sayısı: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Bu bulmacayı çözemedim";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Süreli Yürüme";
+"TIMED_WALK_INTRO_DETAIL" = "Bu etkinlik, alt ekstremite fonksiyonlarınızı ölçer.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Düz bir çizgide mümkün olduğunca hızlı ama güvenli bir şekilde %@ yürüyebileceğiniz bir yer (tercihen dışarıda) bulun. Bitirme çizgisini geçene dek yavaşlamayın.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Başlamak için İleri’ye dokunun.";
+"TIMED_WALK_FORM_TITLE" = "Yardımcı aygıt";
+"TIMED_WALK_FORM_TEXT" = "Her test için aynı yardımcı aygıtı kullanın.";
+"TIMED_WALK_QUESTION_TEXT" = "Ayak bileği ortezi takıyor musunuz?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Yardımcı aygıt kullanıyor musunuz?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Bir yanıt seçmek için dokunun.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Hiçbiri";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Tek Taraflı Baston";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Tek Taraflı Koltuk Değneği";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Çift Taraflı Baston";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Çift Taraflı Koltuk Değneği";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Yürüteç/Yürüme Desteği";
+"TIMED_WALK_INSTRUCTION_%@" = "Düz bir çizgide en fazla %@ yürüyün.";
+"TIMED_WALK_INSTRUCTION_2" = "Geriye dönün ve başladığınız yere yürüyün.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tamamladığınızda Bitti’ye dokunun.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Veri Yok";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Tempolu İşitsel Toplama Testi, işitsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PVSAT_INTRO_TEXT" = "Tempolu Görsel Toplama Testi, görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PAVSAT_INTRO_TEXT" = "Tempolu İşitsel-Görsel Toplama Testi, işitsel ve görsel bilgi işleme hızınızı ve hesaplama becerinizi ölçer.";
+"PSAT_INTRO_TEXT_2_%@" = "Her %@ saniyede bir tek tek rakamlar sunulur.\nHer yeni rakamı bir önceki rakama eklemeniz gerekir.\nDikkat edin, değişen toplamı değil yalnızca son iki rakamın toplamını hesaplamanız gerekir.";
+"PSAT_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"PSAT_INITIAL_INSTRUCTION" = "Bu ilk rakamı aklınızda tutun.";
+"PSAT_INSTRUCTION" = "Bu yeni rakamı bir öncekine ekleyin.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Bellek oyunu taşı";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Yakalanan görüntü önizlemesi";
+"AX_IMAGE_CAPTURED_LABEL" = "Yakalanmış görüntü";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "%@ büyüklüğündeki disk, %@ büyüklüğündeki diskin üzerine yerleştirilemez";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Hedef";
+"AX_TOWER_OF_HANOI_TOWER" = "Kule";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Diski yerleştirmek için çift dokunun";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "En üstteki diski seçmek için çift dokunun";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Şu büyüklüklerde disk içeriyor: ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Boş";
+
+"AX_GRAPH_RANGE_FORMAT" = "%@ - %@ aralığında";
+"AX_GRAPH_AND_SEPARATOR" = " ve ";
+
 
