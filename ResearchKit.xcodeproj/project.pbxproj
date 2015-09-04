@@ -52,10 +52,6 @@
 		24A4DA151B8D1115009C797A /* ORKPasscodeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */; };
 		24A4DA181B8D13FE009C797A /* ORKPasscodeStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A4DA161B8D13FE009C797A /* ORKPasscodeStepViewController.h */; };
 		24A4DA191B8D13FE009C797A /* ORKPasscodeStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A4DA171B8D13FE009C797A /* ORKPasscodeStepViewController.m */; };
-		24B2AF461B97BD190088FD49 /* ORKPasscodeButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 24B2AF441B97BD190088FD49 /* ORKPasscodeButton.h */; };
-		24B2AF471B97BD190088FD49 /* ORKPasscodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2AF451B97BD190088FD49 /* ORKPasscodeButton.m */; };
-		24B2AF4A1B97C3650088FD49 /* ORKPasscodeKeyboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 24B2AF481B97C3650088FD49 /* ORKPasscodeKeyboardView.h */; };
-		24B2AF4B1B97C3650088FD49 /* ORKPasscodeKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2AF491B97C3650088FD49 /* ORKPasscodeKeyboardView.m */; };
 		250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */; };
 		250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */; };
 		250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */; };
@@ -510,10 +506,6 @@
 		24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeStep.m; sourceTree = "<group>"; };
 		24A4DA161B8D13FE009C797A /* ORKPasscodeStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeStepViewController.h; sourceTree = "<group>"; };
 		24A4DA171B8D13FE009C797A /* ORKPasscodeStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeStepViewController.m; sourceTree = "<group>"; };
-		24B2AF441B97BD190088FD49 /* ORKPasscodeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeButton.h; sourceTree = "<group>"; };
-		24B2AF451B97BD190088FD49 /* ORKPasscodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeButton.m; sourceTree = "<group>"; };
-		24B2AF481B97C3650088FD49 /* ORKPasscodeKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeKeyboardView.h; sourceTree = "<group>"; };
-		24B2AF491B97C3650088FD49 /* ORKPasscodeKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeKeyboardView.m; sourceTree = "<group>"; };
 		250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiStep.h; sourceTree = "<group>"; };
 		250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTowerOfHanoiStep.m; sourceTree = "<group>"; };
 		250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKTowerOfHanoiStepViewController.h; sourceTree = "<group>"; };
@@ -1053,8 +1045,6 @@
 				24A4DA0F1B8D0F21009C797A /* ORKPasscodeStepView.m */,
 				2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */,
 				2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */,
-				24B2AF481B97C3650088FD49 /* ORKPasscodeKeyboardView.h */,
-				24B2AF491B97C3650088FD49 /* ORKPasscodeKeyboardView.m */,
 			);
 			name = "Passcode Step";
 			sourceTree = "<group>";
@@ -1358,8 +1348,6 @@
 				86C40BB51A8D7C5C00081FAC /* ORKSelectionTitleLabel.m */,
 				86C40BD11A8D7C5C00081FAC /* ORKTableViewCell.h */,
 				86C40BD21A8D7C5C00081FAC /* ORKTableViewCell.m */,
-				24B2AF441B97BD190088FD49 /* ORKPasscodeButton.h */,
-				24B2AF451B97BD190088FD49 /* ORKPasscodeButton.m */,
 			);
 			name = Skin;
 			sourceTree = "<group>";
@@ -2054,7 +2042,6 @@
 				865EA1681ABA1AA10037C68E /* ORKPicker.h in Headers */,
 				86C40CC81A8D7C5C00081FAC /* ORKFormItemCell.h in Headers */,
 				86C40DF21A8D7C5C00081FAC /* ORKConsentReviewController.h in Headers */,
-				24B2AF461B97BD190088FD49 /* ORKPasscodeButton.h in Headers */,
 				86C40C961A8D7C5C00081FAC /* ORKDataLogger.h in Headers */,
 				BC13CE421B066A990044153C /* ORKStepNavigationRule_Internal.h in Headers */,
 				86C40D781A8D7C5C00081FAC /* ORKScaleSlider.h in Headers */,
@@ -2205,7 +2192,6 @@
 				86C40C821A8D7C5C00081FAC /* ORKActiveStep_Internal.h in Headers */,
 				86C40D481A8D7C5C00081FAC /* ORKInstructionStepViewController_Internal.h in Headers */,
 				86C40D341A8D7C5C00081FAC /* ORKHelpers.h in Headers */,
-				24B2AF4A1B97C3650088FD49 /* ORKPasscodeKeyboardView.h in Headers */,
 				FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */,
 				86C40E341A8D7C5C00081FAC /* ORKVisualConsentStepViewController_Internal.h in Headers */,
 				86C40D381A8D7C5C00081FAC /* ORKHTMLPDFWriter.h in Headers */,
@@ -2525,7 +2511,6 @@
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
-				24B2AF471B97BD190088FD49 /* ORKPasscodeButton.m in Sources */,
 				BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
@@ -2576,7 +2561,6 @@
 				861D11AA1AA691BB003C98A7 /* ORKScaleSliderView.m in Sources */,
 				86C40C141A8D7C5C00081FAC /* ORKActiveStepQuantityView.m in Sources */,
 				86C40C6C1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.m in Sources */,
-				24B2AF4B1B97C3650088FD49 /* ORKPasscodeKeyboardView.m in Sources */,
 				86C40DF01A8D7C5C00081FAC /* UIResponder+ResearchKit.m in Sources */,
 				865EA16D1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.m in Sources */,
 				86C40D261A8D7C5C00081FAC /* ORKFormStepViewController.m in Sources */,

@@ -63,7 +63,12 @@
 
 @end
 
+
 @implementation ORKPasscodeTextField
+
+- (UIKeyboardType)keyboardType {
+    return UIKeyboardTypeNumberPad;
+}
 
 - (BOOL)allowsSelection {
     return NO;

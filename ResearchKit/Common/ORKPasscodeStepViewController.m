@@ -88,11 +88,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
         _passcodeStepView.passcodeType = _passcodeType;
         _passcodeStepView.textField.delegate = self;
-
-        ORKPasscodeKeyboardView *inputView = [ORKPasscodeKeyboardView new];
-        inputView.translatesAutoresizingMaskIntoConstraints = NO;
-        inputView.delegate = self;
-        _passcodeStepView.textField.inputView = inputView;
         
         [self.view addSubview:_passcodeStepView];
         
@@ -289,6 +284,9 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                                             didFinishWithPasscode:_passcode
                                                 andTouchIdEnabled:_isTouchIdAuthenticated];
                 }
+                
+                // If it is being used in a step.
+                [self goForward];
             });
         }];
         
@@ -300,7 +298,11 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             [self.passcodeDelegate passcodeViewController:self
                                     didFinishWithPasscode:_passcode
                                         andTouchIdEnabled:_isTouchIdAuthenticated];
+            
         }
+        
+        // If it is being used in a step.
+        [self goForward];
     }
 }
 
@@ -470,49 +472,33 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    return _shouldResignFirstResponder;
-}
-
-#pragma mark - UIPasscodeKeyboardDelegate
-
-- (void)keyboardView:(ORKPasscodeKeyboardView *)view didReceivedInput:(NSString *)input {
-    
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     // Disable input while changing states.
     if (_isChangingState) {
-        return;
+        return !_isChangingState;
     }
     
-    UITextField *textField = _passcodeStepView.textField;
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    // Store the typed input.
+    if (_passcodeState == ORKPasscodeStateEntry ||
+        _passcodeState == ORKPasscodeStateOldEntry ||
+        _passcodeState == ORKPasscodeStateNewEntry) {
+        [_passcode appendString:string];
+    } else if (_passcodeState == ORKPasscodeStateConfirm ||
+               _passcodeState == ORKPasscodeStateConfirmNewEntry) {
+        [_confirmPasscode appendString:string];
+    }
     
     // User entered a character.
-    if ([input isEqualToString:kBackspaceButton]) {
+    if (text.length < textField.text.length) {
         // User hit the backspace button.
         if (_position > 0) {
             _position--;
             textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kEmptyBullet];
             
-            // Remove the character from the stored input.
-            if (_passcodeState == ORKPasscodeStateEntry ||
-                _passcodeState == ORKPasscodeStateOldEntry ||
-                _passcodeState == ORKPasscodeStateNewEntry) {
-                [_passcode deleteCharactersInRange:NSMakeRange(_position, 1)];
-            } else if (_passcodeState == ORKPasscodeStateConfirm ||
-                       _passcodeState == ORKPasscodeStateConfirmNewEntry) {
-                [_confirmPasscode deleteCharactersInRange:NSMakeRange(_position, 1)];
-            }
         }
     } else if (_position < textField.text.length) {
-        
-        // Store the typed input.
-        if (_passcodeState == ORKPasscodeStateEntry ||
-            _passcodeState == ORKPasscodeStateOldEntry ||
-            _passcodeState == ORKPasscodeStateNewEntry) {
-            [_passcode appendString:input];
-        } else if (_passcodeState == ORKPasscodeStateConfirm ||
-                   _passcodeState == ORKPasscodeStateConfirmNewEntry) {
-            [_confirmPasscode appendString:input];
-        }
         
         // User entered a new character.
         textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kFilledBullet];
@@ -523,7 +509,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     if (_position == textField.text.length) {
         // Disable input.
         _isChangingState = YES;
-    
+        
         // Show the user the last digit was entered before continuing.
         double delayInSeconds = 0.25;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -543,6 +529,13 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             }
         });
     }
+    
+    return NO;
+
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return _shouldResignFirstResponder;
 }
 
 @end

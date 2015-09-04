@@ -30,7 +30,6 @@
 
 
 #import "ORKPasscodeStepViewController.h"
-#import "ORKPasscodeKeyboardView.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -44,7 +43,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
     ORKPasscodeFlowEdit
 };
 
-@interface ORKPasscodeStepViewController() <UITextFieldDelegate, ORKPasscodeKeyboardDelegate>
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
 
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic) ORKPasscodeType passcodeType;
