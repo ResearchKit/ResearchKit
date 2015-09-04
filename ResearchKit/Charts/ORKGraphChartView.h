@@ -108,9 +108,9 @@ ORK_AVAILABLE_DECL
  specified plot.
 
  @param graphChartView      The graphChartView asking for the range point.
+ @param pointIndex          An index number identifying the range point in `graphChartView`.
  @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 0 in
  single-plot graph views.
- @param pointIndex          An index number identifying the range point in  `graphChartView`.
 
  @return The range point specified by `pointIndex` in the plot specified by `plotIndex` for the 
  specified `graphChartView`.
@@ -127,6 +127,31 @@ ORK_AVAILABLE_DECL
  @return The number of plots in `graphChartView`.
 */
 - (NSInteger)numberOfPlotsInGraphChartView:(ORKGraphChartView *)graphChartView;
+
+/**
+ Asks the data source for the color of the specified plot.
+ 
+ If this method is not implemented, the first plot will use chart view will use the current
+ `tintColor`, and all subsequent plots will use the current `referenceLineColor`.
+ 
+ @param graphChartView      The graph view asking for the color of the segment.
+ @param plotIndex           An index number identifying the plot in `graphChartView`. This index is 
+ always 0 in single-plot graph views.
+ 
+ @return The color of the segment at the specified `index` in `pieChartView`.
+ */
+- (UIColor *)graphChartView:(ORKGraphChartView *)graphChartView colorForPlotIndex:(NSInteger)plotIndex;
+
+/**
+ Asks the data source which plot should the scrubber snap to in multi-graph chart views.
+ 
+ If this method is not implemented, the scrubber snaps over the first plot.
+ 
+ @param graphChartView      The graph view asking for the scrubbing plot index.
+ 
+ @return The index of the plot the scrubber should snap to.
+ */
+- (NSInteger)scrubbingPlotIndexForGraphChartView:(ORKGraphChartView *)graphChartView;
 
 /**
  Asks the data source for the upper limit of the y-axis drawn by the graph view.
@@ -189,7 +214,7 @@ ORK_AVAILABLE_DECL
 /**
  The `ORKGraphChartView` class is an abstract class. It holds properties and methods common to classes
  like `ORKLineGraphChartView` and `ORKDiscreteGraphChartView`. You should not instantiate this class directly,
- you should use a subclass.
+ use one of the subclasses instead.
 */
 ORK_CLASS_AVAILABLE
 @interface ORKGraphChartView : UIView
@@ -251,44 +276,52 @@ ORK_CLASS_AVAILABLE
 /**
  The color of the axes drawn by the graphChartView.
  
- The default value for this property is a very light gray color.
+ The default value for this property is a very light gray color. Setting this property to `nil` 
+ resets it to its default value.
 */
-@property (nonatomic, strong) UIColor *axisColor;
+@property (nonatomic, strong, null_resettable) UIColor *axisColor;
 
 /**
- The color of the axes titles.
+ The color of the vertical axis titles.
  
- The default value for this property is a light gray color.
+ @note The horizontal axis titles use the current `tintColor`.
+ 
+ The default value for this property is a light gray color. Setting this property to `nil` resets it
+ to its default value.
 */
-@property (nonatomic, strong) UIColor *axisTitleColor;
+@property (nonatomic, strong, null_resettable) UIColor *verticalAxisTitleColor;
 
 /**
  The color of the reference lines.
  
- The default value for this property is a light gray color.
+ The default value for this property is a light gray color. Setting this property to `nil` resets it
+ to its default value.
 */
-@property (nonatomic, strong) UIColor *referenceLineColor;
+@property (nonatomic, strong, null_resettable) UIColor *referenceLineColor;
 
 /**
  The background color of the thumb on the scrubber line.
  
- The default value for this property is a white color.
+ The default value for this property is a white color. Setting this property to `nil` resets it to
+ its default value.
 */
-@property (nonatomic, strong) UIColor *scrubberThumbColor;
+@property (nonatomic, strong, null_resettable) UIColor *scrubberThumbColor;
 
 /**
  The color of the scrubber line.
  
- The default value for this property is a gray color.
+ The default value for this property is a gray color. Setting this property to `nil` resets it to
+ its default value.
 */
-@property (nonatomic, strong) UIColor *scrubberLineColor;
+@property (nonatomic, strong, null_resettable) UIColor *scrubberLineColor;
 
 /**
  The string that will be displayed if no data points are provided by the `dataSource`.
  
- The default value for this property is an appropriate message string.
+ The default value for this property is an appropriate message string. Setting this property to
+ `nil` resets it to its default value.
 */
-@property (nonatomic, copy, nullable) NSString *noDataText;
+@property (nonatomic, copy, null_resettable) NSString *noDataText;
 
 /**
  An image to be optionally displayed in place of the maximum value label on the y-axis.

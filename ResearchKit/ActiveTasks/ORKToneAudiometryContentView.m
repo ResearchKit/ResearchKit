@@ -101,12 +101,25 @@
     self.tapButton.enabled = NO;
 }
 
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
 - (void)setupConstraints {
     ORKScreenType screenType = _screenType;
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    CGFloat margin = ORKStandardHorizMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
 
     static const CGFloat TapButtonBottomToBottom = 36;
 

@@ -84,12 +84,26 @@
             [self addSubview:_signatureView];
         }
         
-        CGFloat margin = ORKStandardHorizMarginForView(self);
-        self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
-        
         [self setNeedsUpdateConstraints];
     }
     return self;
+}
+
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)setClearButtonEnabled:(BOOL)clearButtonEnabled {

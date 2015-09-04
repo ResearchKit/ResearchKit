@@ -271,7 +271,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                                                      defaultIndex:(NSUInteger)defaultIndex
+                                                      defaultIndex:(NSInteger)defaultIndex
                                                           vertical:(BOOL)vertical {
     return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
                                                     defaultIndex:defaultIndex
@@ -1702,7 +1702,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSUInteger)defaultIndex
+                       defaultIndex:(NSInteger)defaultIndex
                            vertical:(BOOL)vertical {
     self = [super init];
     if (self) {
@@ -1716,7 +1716,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
-                       defaultIndex:(NSUInteger)defaultIndex{
+                       defaultIndex:(NSInteger)defaultIndex{
     return [self initWithTextChoices:textChoices
                         defaultIndex:defaultIndex
                             vertical:NO];
@@ -1729,7 +1729,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return @(self.textChoices.count);
 }
 - (NSNumber *)defaultNumber {
-    if (_defaultIndex >= _textChoices.count) {
+    if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
     return @(_defaultIndex);

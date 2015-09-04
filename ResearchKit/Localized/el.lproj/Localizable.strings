@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Συναίνεση";
-"CONSENT_NAME_FIRST" = "Όνομα";
-"CONSENT_NAME_LAST" = "Επώνυμο";
+"CONSENT_NAME_GIVEN" = "Όνομα";
+"CONSENT_NAME_FAMILY" = "Επώνυμο";
 "CONSENT_NAME_PLACEHOLDER" = "Απαιτείται";
 "CONSENT_REVIEW_TITLE" = "Έλεγχος";
 "CONSENT_REVIEW_INSTRUCTION" = "Διαβάστε την παρακάτω φόρμα και αγγίξτε «Συμφωνώ» όταν είστε έτοιμοι να συνεχίσετε.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "Η τιμή «%1$@» υπερβαίνει τη μέγιστη επιτρεπόμενη τιμή (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "Η τιμή «%1$@» είναι χαμηλότερη από την ελάχιστη επιτρεπόμενη τιμή (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "Το «%@» δεν είναι έγκυρη τιμή.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Μη έγκυρη διεύθυνση email: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Το περιεχόμενο κειμένου υπερβαίνει το επιτρεπόμενο όριο χαρακτήρων: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Η κάμερα δεν διατίθεται στην Προβολή διαίρεσης.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -213,8 +222,54 @@
 "REACTION_TIME_TASK_INTENDED_USE" = "Η δραστηριότητα αυτή υπολογίζει τον χρόνο που χρειάζεστε για να αποκριθείτε σε μια οπτική ένδειξη.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Ανακινήστε τη συσκευή προς οποιαδήποτε κατεύθυνση αμέσως μόλις εμφανιστεί η μπλε κουκκίδα στην οθόνη. Θα σας ζητηθεί να το κάνετε αυτό %D φορές.";
 "REACTION_TIME_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
-"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Προσπάθεια %@ από %@";
+"REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Απόπειρα %@ από %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ανακινήστε γρήγορα τη συσκευή όταν εμφανιστεί ο μπλε κύκλος";
+
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Πύργος του Ανόι";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Αυτή η δραστηριότητα αξιολογεί τις ικανότητές σας ως προς την επίλυση παζλ.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Μετακινήστε ολόκληρη τη στοίβα στην επισημασμένη πλατφόρμα με όσο το δυνατό λιγότερες κινήσεις.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Επιλύστε το παζλ";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Αριθμός κινήσεων: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Δεν μπορώ να λύσω αυτό το παζλ";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Χρονισμένο περπάτημα";
+"TIMED_WALK_INTRO_DETAIL" = "Αυτή η δραστηριότητα αξιολογεί τη λειτουργία των κάτω άκρων σας.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Βρείτε ένα μέρος, κατά προτίμηση σε εξωτερικό χώρο, όπου μπορείτε να περπατήσετε για περίπου %@ σε ευθεία γραμμή όσο το δυνατόν πιο γρήγορα αλλά με ασφάλεια. Μη μειώσετε την ταχύτητά σας μέχρι να περάσετε τη γραμμή τερματισμού.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Αγγίξτε «Επόμενο» για να ξεκινήσετε.";
+"TIMED_WALK_FORM_TITLE" = "Βοηθητική συσκευή";
+"TIMED_WALK_FORM_TEXT" = "Χρησιμοποιήστε την ίδια βοηθητική συσκευή για κάθε τεστ.";
+"TIMED_WALK_QUESTION_TEXT" = "Φοράτε νάρθηκα ποδοκνημικής;";
+"TIMED_WALK_QUESTION_2_TITLE" = "Χρησιμοποιείτε βοηθητική συσκευή;";
+"TIMED_WALK_QUESTION_2_TEXT" = "Αγγίξτε εδώ για επιλογή απάντησης";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Όχι";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Μονόπλευρο μπαστούνι";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Μονόπλευρη πατερίτσα";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Δίπλευρο μπαστούνι";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Δίπλευρη πατερίτσα";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "(Τροχήλατος) Περιπατητήρας";
+"TIMED_WALK_INSTRUCTION_%@" = "Περπατήστε έως %@ σε ευθεία γραμμή.";
+"TIMED_WALK_INSTRUCTION_2" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Αγγίξτε «Τέλος» όταν τελειώσετε.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Η δοκιμασία PASAT (Βηματική ακουστική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PVSAT_INTRO_TEXT" = "Η δοκιμασία PVSAT (Βηματική οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PAVSAT_INTRO_TEXT" = "Η δοκιμασία PAVSAT (Βηματική ακουστική και οπτική πρόσθεση αριθμών σε σειρά) αξιολογεί την ταχύτητα ακουστικής και οπτικής επεξεργασίας πληροφοριών και την ικανότητα υπολογισμών.";
+"PSAT_INTRO_TEXT_2_%@" = "Τα μονά ψηφία εμφανίζονται κάθε %@ δευτερόλεπτα.\nΠρέπει να προσθέτετε κάθε νέο ψηφίο στο αμέσως προηγούμενο ψηφίο.\nΠροσοχή: Δεν πρέπει να υπολογίζετε το τρέχον σύνολο, αλλά μόνο το άθροισμα των τελευταίων δύο αριθμών.";
+"PSAT_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"PSAT_INITIAL_INSTRUCTION" = "Θυμηθείτε αυτό το πρώτο ψηφίο.";
+"PSAT_INSTRUCTION" = "Προσθέστε αυτό το νέο ψηφίο στο προηγούμενο ψηφίο.";
+"PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Δεν ήταν δυνατή η δημιουργία αρχείου";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Πλακίδιο παιχνιδιού μνήμης";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Προεπισκόπηση καταγραφής";
+"AX_IMAGE_CAPTURED_LABEL" = "Καταγεγραμμένη εικόνα";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Δεν είναι δυνατή η τοποθέτηση δίσκου μεγέθους %@ πάνω σε δίσκο μεγέθους %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Στόχος";
+"AX_TOWER_OF_HANOI_TOWER" = "Πύργος";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Αγγίξτε δύο φορές για τοποθέτηση του δίσκου";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Αγγίξτε δύο φορές για επιλογή του ανώτερου δίσκου";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη ";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Κενός";
+
+"AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
+"AX_GRAPH_AND_SEPARATOR" = " και ";
+
 

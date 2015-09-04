@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Tilladelse";
-"CONSENT_NAME_FIRST" = "Fornavn";
-"CONSENT_NAME_LAST" = "Efternavn";
+"CONSENT_NAME_GIVEN" = "Fornavn";
+"CONSENT_NAME_FAMILY" = "Efternavn";
 "CONSENT_NAME_PLACEHOLDER" = "Nødvendig";
 "CONSENT_REVIEW_TITLE" = "Gennemse";
 "CONSENT_REVIEW_INSTRUCTION" = "Gennemse nedenstående formular, og tryk på Enig, hvis du er klar til at fortsætte.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ overskrider den maks. tilladte værdi (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ er mindre end den min. tilladte værdi (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ er ikke en gyldig værdi.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-mailadresse: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstindhold overskrider maks. længde: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ikke tilgængeligt på delt skærm.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøg %@ af %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Ryst hurtigt enheden, når den blå cirkel vises";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktivitet vurderer din evne til at løse opgaver.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flyt hele stakken til den markerede platform med så få træk som muligt.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs opgaven";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antal træk: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg kan ikke løse opgaven";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gå på tid";
+"TIMED_WALK_INTRO_DETAIL" = "Denne aktivitet måler funktionen i dine nedre ekstremiteter.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Find et sted, helst udenfor, hvor du trygt kan gå omkring i %@ på en lige linje så hurtigt som muligt. Sænk ikke farten, før du har passeret mållinjen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Tryk på Næste for at starte.";
+"TIMED_WALK_FORM_TITLE" = "Hjælpemiddelenhed";
+"TIMED_WALK_FORM_TEXT" = "Brug det samme hjælpemiddelenhed til hver test.";
+"TIMED_WALK_QUESTION_TEXT" = "Bruger du en ankel-fodortose?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Bruger du hjælpemiddelenheder?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Tryk her for at vælge et svar.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "En stok";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "En krykke";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "To stokke";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "To krykker";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gangstativ/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gå op til %@ i en lige linje.";
+"TIMED_WALK_INSTRUCTION_2" = "Vend om, og gå tilbage til det sted, hvor du startede.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Tryk på OK, når du er færdig.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT-testen måler, hvor hurtigt du behandler lydoplysninger og din evne til at foretage udregninger.";
+"PVSAT_INTRO_TEXT" = "PVSAT-testen måler, hvor hurtigt du behandler synsoplysninger og din evne til at foretage udregninger.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT-testen (Paced Auditory and Visual Serial Addition Test) måler, hvor hurtigt du behandler lyd- og synsoplysninger og din evne til at foretage udregninger.";
+"PSAT_INTRO_TEXT_2_%@" = "Der vises enkelte tal hvert %@. sekund.\nDu skal lægge hvert nye tal sammen med tallet lige før det.\nBemærk: Du skal ikke lægge alle tallene sammen, kun de to sidste tal.";
+"PSAT_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"PSAT_INITIAL_INSTRUCTION" = "Husk dette første tal.";
+"PSAT_INSTRUCTION" = "Læg dette nye tal sammen med det forrige.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne tilstrækkeligt med logarkiver til at nå grænsen";
@@ -250,4 +305,17 @@
 "AX.MEMORY.TILE.LABEL" = "Brik i memoryspil";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Tag billede af eksempel";
+"AX_IMAGE_CAPTURED_LABEL" = "Taget billede";
+
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke anbringe ring i størrelse %@ på ring i størrelse %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+"AX_TOWER_OF_HANOI_TOWER" = "Tårn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Tryk to gange for at anbringe ring";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Tryk to gange for at vælge den øverste ring";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har ringe med størrelser";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
+
+"AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
+"AX_GRAPH_AND_SEPARATOR" = " og ";
+
 

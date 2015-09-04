@@ -208,7 +208,7 @@
     _textField.text = @"";
     
     _textField.placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
-    _textField.textAlignment = NSTextAlignmentLeft;
+    _textField.textAlignment = NSTextAlignmentNatural;
     _textField.delegate = self;
     _textField.keyboardType = UIKeyboardTypeDefault;
 

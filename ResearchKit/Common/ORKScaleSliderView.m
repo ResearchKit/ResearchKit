@@ -183,7 +183,7 @@
                                                                      attribute:NSLayoutAttributeCenterX
                                                                     multiplier:1.0
                                                                       constant:kSideLabelMargin]];
-            
+                    
                     if (i == 0) {
                         
                         /*
@@ -364,7 +364,6 @@
                                                                 multiplier:1.0
                                                                   constant:0]];
             }
-            
         } else {
                 
                 self.leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
@@ -445,7 +444,7 @@
     NSArray *textChoices = [_formatProvider textChoices];
     
     if (textChoices && value) {
-        ORKTextChoice *textChoice = textChoices[[value intValue] - 1];
+        ORKTextChoice *textChoice = textChoices[MAX(0, [value intValue] - 1)];
         self.valueLabel.text = textChoice.text;
     } else if (value) {
         NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];

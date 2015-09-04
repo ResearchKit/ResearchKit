@@ -50,7 +50,7 @@
 
 - (void)updatePercentageLabels;
 
-- (void)layoutSubviews;
+- (void)updateColors;
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration;
 
