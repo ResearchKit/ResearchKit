@@ -35,30 +35,18 @@
 
 @implementation ORKPasscodeKeyboardView {
     NSMutableArray *_buttonArray;
-    CGFloat _buttonHeight;
-    CGFloat _buttonWidth;
 }
 
 - (instancetype) init {
     self = [super init];
     if (self) {
-
         // Configure the view.
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat keyboardViewWidth = screenRect.size.width;
-        CGFloat keyboardViewHeight = screenRect.size.height/2.5;
-        [self setBounds:CGRectMake(0, 0, keyboardViewWidth, keyboardViewHeight)];
         self.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        // Calculate button dimensions.
-        _buttonHeight = keyboardViewHeight/4;
-        _buttonWidth = _buttonHeight * 1.8;
         
         // Add passcode keyboard buttons.
         _buttonArray = [NSMutableArray new];
         [self addButtons];
     }
-    
     return self;
 }
 
@@ -84,6 +72,27 @@
 }
 
 - (void)setButtonConstraints {
+    
+    // Set width and height constraints for all buttons.
+    for (id button in _buttonArray) {
+        [self addConstraints:@[
+                               [NSLayoutConstraint constraintWithItem:button
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:0.34
+                                                             constant:0],
+                               [NSLayoutConstraint constraintWithItem:button
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeHeight
+                                                           multiplier:0.25
+                                                             constant:0]
+                               ]
+         ];
+    }
     
     // 0 : Anchor everything to the 0. Placing zero on the bottom and centered.
     {
@@ -139,8 +148,18 @@
 }
 
 - (void)buttonPressed:(id)sender {
-    ORKPasscodeButton *button = sender;
-    NSLog(@"%@", button.titleLabel.text);
+    
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(keyboardView:receivedInput:)]) {
+        ORKPasscodeButton *button = sender;
+        [self.delegate keyboardView:self receivedInput:button.titleLabel.text];
+    }
+}
+
+- (CGSize)intrinsicContentSize {
+    [self invalidateIntrinsicContentSize];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    return CGSizeMake(screenRect.size.width, screenRect.size.height/2.5);
 }
 
 #pragma mark - Helpers

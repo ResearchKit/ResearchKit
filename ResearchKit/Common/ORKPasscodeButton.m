@@ -50,11 +50,14 @@
     return self;
 }
 
-- (CGSize)intrinsicContentSize {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat buttonHeight = screenRect.size.height/10;
-    CGFloat buttonWidth = buttonHeight * 1.9;
-    return CGSizeMake(buttonWidth, buttonHeight);
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    
+    if ([self.titleLabel.text isEqualToString:@"<"]) {
+        self.backgroundColor = (highlighted) ? [UIColor whiteColor] : [UIColor groupTableViewBackgroundColor];
+    } else {
+        self.backgroundColor = (highlighted) ? [UIColor groupTableViewBackgroundColor] : [UIColor whiteColor];
+    }
 }
 
 @end

@@ -31,7 +31,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class ORKPasscodeKeyboardView;
+
+@protocol ORKPasscodeKeyboardDelegate <NSObject>
+
+- (void)keyboardView:(ORKPasscodeKeyboardView *)view receivedInput:(NSString *) input;
+
+@end
 
 @interface ORKPasscodeKeyboardView : UIView
+
+@property (nonatomic, weak) id<ORKPasscodeKeyboardDelegate> delegate;
 
 @end

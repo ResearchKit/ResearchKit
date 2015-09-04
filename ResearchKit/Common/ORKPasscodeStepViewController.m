@@ -85,9 +85,15 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        _passcodeStepView.textField.delegate = self;
         _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
         _passcodeStepView.passcodeType = _passcodeType;
+        _passcodeStepView.textField.delegate = self;
+
+        ORKPasscodeKeyboardView *inputView = [ORKPasscodeKeyboardView new];
+        inputView.translatesAutoresizingMaskIntoConstraints = NO;
+        inputView.delegate = self;
+        _passcodeStepView.textField.inputView = inputView;
+        
         [self.view addSubview:_passcodeStepView];
         
         // Set the starting state based on flow.
@@ -103,12 +109,15 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
         if (self.passcodeDelegate &&
             [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidCancel:)]) {
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
-                                                                                      style:UIBarButtonItemStyleDone
+                                                                                      style:UIBarButtonItemStylePlain
                                                                                      target:self
                                                                                      action:@selector(cancelButtonAction)];
         }
     
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makePasscodeViewBecomeFirstResponder) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(makePasscodeViewBecomeFirstResponder)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
     }
 }
 
@@ -451,34 +460,50 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return _shouldResignFirstResponder;
+}
+
+#pragma mark - UIPasscodeKeyboardDelegate
+
+- (void)keyboardView:(ORKPasscodeKeyboardView *)view receivedInput:(NSString *)input {
     
     // Disable input while changing states.
     if (_isChangingState) {
-        return !_isChangingState;
+        return;
     }
     
-    // Store the typed input.
-    if (_passcodeState == ORKPasscodeStateEntry ||
-        _passcodeState == ORKPasscodeStateOldEntry ||
-        _passcodeState == ORKPasscodeStateNewEntry) {
-        [_passcode appendString:string];
-    } else if (_passcodeState == ORKPasscodeStateConfirm ||
-               _passcodeState == ORKPasscodeStateConfirmNewEntry) {
-        [_confirmPasscode appendString:string];
-    }
+    UITextField *textField = _passcodeStepView.textField;
     
     // User entered a character.
-    if (text.length < textField.text.length) {
+    if ([input isEqualToString:@"<"]) {
         // User hit the backspace button.
         if (_position > 0) {
             _position--;
             textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kEmptyBullet];
+            
+            // Remove the character from the stored input.
+            if (_passcodeState == ORKPasscodeStateEntry ||
+                _passcodeState == ORKPasscodeStateOldEntry ||
+                _passcodeState == ORKPasscodeStateNewEntry) {
+                [_passcode deleteCharactersInRange:NSMakeRange(_position, 1)];
+            } else if (_passcodeState == ORKPasscodeStateConfirm ||
+                       _passcodeState == ORKPasscodeStateConfirmNewEntry) {
+                [_confirmPasscode deleteCharactersInRange:NSMakeRange(_position, 1)];
+            }
         }
-
     } else if (_position < textField.text.length) {
+        
+        // Store the typed input.
+        if (_passcodeState == ORKPasscodeStateEntry ||
+            _passcodeState == ORKPasscodeStateOldEntry ||
+            _passcodeState == ORKPasscodeStateNewEntry) {
+            [_passcode appendString:input];
+        } else if (_passcodeState == ORKPasscodeStateConfirm ||
+                   _passcodeState == ORKPasscodeStateConfirmNewEntry) {
+            [_confirmPasscode appendString:input];
+        }
+        
         // User entered a new character.
         textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kFilledBullet];
         _position++;
@@ -508,12 +533,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             }
         });
     }
-    
-    return NO;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    return _shouldResignFirstResponder;
 }
 
 @end
