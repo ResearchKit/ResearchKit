@@ -730,6 +730,15 @@ ret =
           PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
+   ENTRY(ORKTextScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:GETPROP(dict, textChoices) defaultIndex:[GETPROP(dict, defaultIndex) doubleValue] vertical:[GETPROP(dict, vertical) boolValue]];
+         },
+         (@{
+            PROPERTY(textChoices, ORKTextChoice, NSArray<ORKTextChoice *>, NO, nil, nil),
+            PROPERTY(defaultIndex, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKTextAnswerFormat alloc] initWithMaximumLength:[GETPROP(dict, maximumLength) integerValue]];
