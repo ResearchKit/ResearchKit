@@ -169,6 +169,16 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     [super updateConstraints];
 }
 
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self setNeedsDisplay];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self setNeedsDisplay];
+}
+
 - (UIBezierPath *)pathWithRoundedStyle {
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineCapStyle = kCGLineCapRound;

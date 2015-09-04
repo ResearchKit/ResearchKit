@@ -151,6 +151,21 @@
     [self updateConstraintConstantsForWindow:newWindow];
 }
 
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
     
@@ -258,7 +273,7 @@
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    CGFloat margin = ORKStandardHorizMarginForView(self);
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
     self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
     
     static const CGFloat CaptionBaselineToTapCountBaseline = 56;

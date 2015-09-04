@@ -69,16 +69,10 @@ static const CGFloat AssumedStatusBarHeight = 20;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        CGFloat margin = ORKStandardHorizMarginForView(self);
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
-        self.layoutMargins = layoutMargins;
         _scrollContainer = [UIView new];
         [self addSubview:_scrollContainer];
         _container = [UIView new];
         [_scrollContainer addSubview:_container];
-        
-        _scrollContainer.layoutMargins = layoutMargins;
-        _container.layoutMargins = layoutMargins;
         
         {
             _headerView = [ORKStepHeaderView new];
@@ -207,6 +201,16 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
 }
 
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+}
+
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     [self updateConstraintConstantsForWindow:newWindow];
@@ -332,15 +336,15 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }    
 }
 
-- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    CGFloat margin = ORKStandardHorizMarginForWindow(window);
-    if (self.layoutMargins.left != margin) {
-        UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
-        self.layoutMargins = layoutMargins;
-        _scrollContainer.layoutMargins = layoutMargins;
-        _container.layoutMargins = layoutMargins;
-    }
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    UIEdgeInsets layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
+    self.layoutMargins = layoutMargins;
+    _scrollContainer.layoutMargins = layoutMargins;
+    _container.layoutMargins = layoutMargins;
+}
 
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
     ORKScreenType verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
     
     const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, verticalScreenType);
@@ -610,11 +614,11 @@ static const CGFloat AssumedStatusBarHeight = 20;
     
     [self prepareCustomViewContainerConstraints];
     [self prepareStepViewContainerConstraints];
-    
     [NSLayoutConstraint activateConstraints:_variableConstraints];
 
-    [self updateConstraintConstantsForWindow:self.window];
+    [self updateLayoutMargins];
 
+    [self updateConstraintConstantsForWindow:self.window];
     [self updateStepViewCenteringConstraint];
     [self updateContinueButtonConstraints];
 

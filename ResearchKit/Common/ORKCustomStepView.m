@@ -132,4 +132,14 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    self.layoutMargins = ORKStandardFullScreenLayoutMarginsForView(self);
+}
+
 @end

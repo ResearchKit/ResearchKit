@@ -46,6 +46,7 @@
 @implementation ORKConsentReviewController {
     UIToolbar *_toolbar;
     NSString *_htmlString;
+    NSMutableArray *_variableConstraints;
 }
 
 - (instancetype)initWithHTML:(NSString *)html delegate:(id<ORKConsentReviewControllerDelegate>)delegate {
@@ -80,34 +81,36 @@
     _toolbar.translatesAutoresizingMaskIntoConstraints = NO;
     _toolbar.translucent = YES;
 
-    const CGFloat horizMargin = ORKStandardHorizMarginForView(self.view);
     _webView.clipsToBounds = NO;
     _webView.scrollView.clipsToBounds = NO;
-    _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
+    [self updateLayoutMargins];
 
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
-    [self setUpConstraints];
+    [self setUpStaticConstraints];
 }
 
-- (void)setUpConstraints {
+- (void)updateLayoutMargins {
+    const CGFloat margin = ORKStandardHorizontalMarginForView(self.view);
+    _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -margin, .right = -margin};
+}
+    
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self updateLayoutMargins];
+}
+
+- (void)setUpStaticConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
-    const CGFloat horizMargin = ORKStandardHorizMarginForView(self.view);
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
-                                                                      options:(NSLayoutFormatOptions)0
-                                                                      metrics:@{ @"horizMargin": @(horizMargin) }
-                                                                        views:views]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0
-                                                                      metrics:nil
-                                                                        views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
-                                                                      options:(NSLayoutFormatOptions)0
+                                                                             options:(NSLayoutFormatOptions)0
                                                                              metrics:nil
-                                                                        views:views]];
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
+                                                                             options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                               views:views]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
                                                         attribute:NSLayoutAttributeHeight
@@ -118,6 +121,23 @@
                                                          constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateViewConstraints {
+    [super updateViewConstraints];
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
+    }
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
+    const CGFloat horizontalMargin = ORKStandardHorizontalMarginForView(self.view);
+    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
+                                                                      options:(NSLayoutFormatOptions)0
+                                                                                      metrics:@{ @"horizMargin": @(horizontalMargin) }
+                                                                        views:views]];
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
 }
 
 - (IBAction)cancel {

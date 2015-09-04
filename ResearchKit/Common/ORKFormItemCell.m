@@ -284,19 +284,22 @@ static const CGFloat kHMargin = 15.0;
         _variableConstraints = [NSMutableArray new];
     }
     
-    CGFloat labelMinWidth = self.maxLabelWidth;
+    CGFloat labelWidth = self.maxLabelWidth;
     CGFloat boundWidth = self.expectedLayoutWidth;
     
     NSDictionary *metrics = @{@"vMargin":@(10),
                               @"hMargin":@(self.separatorInset.left),
                               @"hSpacer":@(16), @"vSpacer":@(15),
-                              @"labelMinWidth": @(labelMinWidth)};
+                              @"labelWidth": @(labelWidth)};
 
     id labelLabel = self.labelLabel;
     id textFieldView = _textFieldView;
     NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
     
-    if (labelMinWidth >= 0.5 * boundWidth) {
+    CGFloat fieldWidth = _textFieldView.estimatedWidth;
+    
+    // Leave half space for field, and also to be able to display placeholder in full.
+    if ( labelWidth >= 0.5*boundWidth || (fieldWidth + labelWidth) > 0.9*boundWidth ) {
         [_variableConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing
@@ -317,7 +320,7 @@ static const CGFloat kHMargin = 15.0;
         
     } else {
         [_variableConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelMinWidth)]-hSpacer-[textFieldView]|"
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelWidth)]-hSpacer-[textFieldView]|"
                                                  options:NSLayoutFormatAlignAllCenterY
                                                  metrics:metrics
                                                    views:views]];

@@ -573,6 +573,8 @@
     
     UIPageViewControllerNavigationDirection direction = forward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
 
+    ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
+    
     if (!animated) {
         // No animation at all
         viewController.imageHidden = NO;

@@ -255,7 +255,9 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
-void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableArray *removedViews);
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews);
 
 const CGFloat ORKCGFloatInvalidValue;
+
+void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 

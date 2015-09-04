@@ -61,11 +61,12 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
-    for (NSUInteger i = 0; i < ((NSArray *)self.dataPoints[plotIndex]).count; i++) {
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
+    NSUInteger pointCount = ((NSArray *)self.dataPoints[plotIndex]).count;
+    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
-            lineLayer.strokeColor = (plotIndex == 0) ? self.tintColor.CGColor : self.referenceLineColor.CGColor;
+            lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
             lineLayer.lineWidth = ORKGraphChartViewPointAndLineSize;
             
             [self.plotView.layer addSublayer:lineLayer];
@@ -78,17 +79,18 @@
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangedPoint *positionOnYAxis = nil;
-    for (NSUInteger i = 0; i < ((NSArray *)self.yAxisPoints[plotIndex]).count; i++) {
+    NSUInteger pointCount = ((NSArray *)self.yAxisPoints[plotIndex]).count;
+    for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         
-        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][i];
+        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
         
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             
             UIBezierPath *linePath = [UIBezierPath bezierPath];
             
-            positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
+            positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][i]);
+            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex]);
             
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
@@ -120,31 +122,14 @@
 
 #pragma mark - Graph Calculations
 
-- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition {
+- (CGFloat)canvasYPointForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex {
     BOOL snapped = [self isXPositionSnapped:xPosition];
     CGFloat canvasYPosition = 0;
     if (snapped) {
-        NSInteger positionIndex = [self yAxisPositionIndexForXPosition:xPosition];
-        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[0][positionIndex-1]).maximumValue;
+        NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
+        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex-1]).maximumValue;
     }
     return canvasYPosition;
-}
-
-#pragma mark - Animation
-
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition {
-    CGFloat scrubbingValue = [self valueForCanvasXPosition:xPosition];
-    if (scrubbingValue == ORKCGFloatInvalidValue) {
-        [self setScrubberLineAccessoriesHidden:YES];
-    }
-    [UIView animateWithDuration:ORKGraphChartViewScrubberMoveAnimationDuration animations:^{
-       self.scrubberLine.center = CGPointMake(xPosition + ORKGraphChartViewLeftPadding, self.scrubberLine.center.y);
-    } completion:^(BOOL finished) {
-       if (scrubbingValue != ORKCGFloatInvalidValue) {
-           [self setScrubberLineAccessoriesHidden:NO];
-           [self updateScrubberLineAccessories:xPosition];
-        }
-    }];
 }
 
 @end

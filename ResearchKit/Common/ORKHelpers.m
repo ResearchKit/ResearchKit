@@ -38,7 +38,7 @@
 
 
 NSURL *ORKCreateRandomBaseURL() {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [[ NSUUID UUID] UUIDString]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://researchkit.%@/", [NSUUID UUID].UUIDString]];
 }
 
 NSBundle *ORKAssetsBundle(void) {
@@ -323,13 +323,13 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
 }
 
 BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
-    NSString * language = [[NSLocale preferredLanguages].firstObject substringToIndex:2];
+    NSString *language = [[NSLocale preferredLanguages].firstObject substringToIndex:2];
     static dispatch_once_t onceToken;
-    static NSArray *familyNameFirstLangs = nil;
+    static NSArray *familyNameFirstLanguages = nil;
     dispatch_once(&onceToken, ^{
-        familyNameFirstLangs = @[@"zh",@"ko",@"ja"];
+        familyNameFirstLanguages = @[@"zh", @"ko", @"ja", @"vi"];
     });
-    return (language != nil) && [familyNameFirstLangs containsObject:language];
+    return (language != nil) && [familyNameFirstLanguages containsObject:language];
 }
 
 BOOL ORKWantsWideContentMargins(UIScreen *screen) {
@@ -510,7 +510,7 @@ void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass
     }
 }
 
-void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableArray *removedViews) {
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews) {
     for (NSLayoutConstraint *constraint in [constraints copy]) {
         for (UIView *view in removedViews) {
             if (constraint.firstItem == view || constraint.secondItem == view) {
@@ -521,3 +521,9 @@ void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSMutableA
 }
 
 const CGFloat ORKCGFloatInvalidValue = CGFLOAT_MAX;
+
+void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction) {
+    if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
+        *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
+    }
+}

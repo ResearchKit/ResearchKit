@@ -902,8 +902,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     __weak typeof(self) weakSelf = self;
     
-    UIPageViewControllerNavigationDirection direction = goForward?UIPageViewControllerNavigationDirectionForward:UIPageViewControllerNavigationDirectionReverse;
+    UIPageViewControllerNavigationDirection direction = goForward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
+    ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
+
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
     NSString *progressLabel = nil;
