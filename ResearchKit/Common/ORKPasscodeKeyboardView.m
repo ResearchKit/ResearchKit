@@ -30,14 +30,13 @@
 
 
 #import "ORKPasscodeKeyboardView.h"
-#import "ORKPasscodeButton.h"
 
 
 @implementation ORKPasscodeKeyboardView {
     NSMutableArray *_buttonArray;
 }
 
-- (instancetype) init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         // Configure the view.
@@ -58,8 +57,7 @@
         
         // Backspace button
         if (i == 10) {
-            button = [[ORKPasscodeButton alloc] initWithCharacter:@"<"];
-            button.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            button = [ORKPasscodeButton backspaceButton];
         }
         
         button.translatesAutoresizingMaskIntoConstraints = NO;
@@ -149,6 +147,9 @@
 
 - (void)buttonPressed:(id)sender {
     
+    // Play keyboard click sound.
+    [[UIDevice currentDevice] playInputClick];
+    
     if (self.delegate &&
         [self.delegate respondsToSelector:@selector(keyboardView:didReceivedInput:)]) {
         ORKPasscodeButton *button = sender;
@@ -222,6 +223,12 @@
                                                          constant:0]
                            ]
      ];
+}
+
+#pragma mark - UIInputViewAudioFeedback delegate
+
+- (BOOL)enableInputClicksWhenVisible {
+    return YES;
 }
 
 @end

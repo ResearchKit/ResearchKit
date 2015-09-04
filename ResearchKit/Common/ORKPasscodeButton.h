@@ -33,11 +33,15 @@
 #import "ORKDefines_Private.h"
 
 
+static NSString * const kBackspaceButton = @"⌫";
+
 /**
  Number and backspace buttons for the passcode keyboard.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeButton : UIButton
+
++ (id)backspaceButton;
 
 - (instancetype)initWithCharacter:(NSString *)character;
 

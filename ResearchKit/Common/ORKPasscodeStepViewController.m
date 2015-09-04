@@ -121,8 +121,8 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self makePasscodeViewBecomeFirstResponder];
 }
 
@@ -476,7 +476,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     UITextField *textField = _passcodeStepView.textField;
     
     // User entered a character.
-    if ([input isEqualToString:@"<"]) {
+    if ([input isEqualToString:kBackspaceButton]) {
         // User hit the backspace button.
         if (_position > 0) {
             _position--;

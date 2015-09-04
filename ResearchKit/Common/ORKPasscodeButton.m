@@ -34,6 +34,13 @@
 
 @implementation ORKPasscodeButton
 
++ (id)backspaceButton {
+    ORKPasscodeButton *button = [[ORKPasscodeButton alloc] initWithCharacter:kBackspaceButton];
+    button.titleLabel.font = [UIFont fontWithName:@"Courier" size:20.0];
+    button.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    return button;
+}
+
 - (instancetype)initWithCharacter:(NSString *)character {
     self = [super init];
     if (self) {
@@ -53,7 +60,7 @@
 - (void)setHighlighted:(BOOL)highlighted {
     [super setHighlighted:highlighted];
     
-    if ([self.titleLabel.text isEqualToString:@"<"]) {
+    if ([self.titleLabel.text isEqualToString:kBackspaceButton]) {
         self.backgroundColor = (highlighted) ? [UIColor whiteColor] : [UIColor groupTableViewBackgroundColor];
     } else {
         self.backgroundColor = (highlighted) ? [UIColor groupTableViewBackgroundColor] : [UIColor whiteColor];

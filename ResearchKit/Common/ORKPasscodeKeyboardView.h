@@ -30,6 +30,8 @@
 
 
 #import <UIKit/UIKit.h>
+#import "ORKPasscodeButton.h"
+
 
 @class ORKPasscodeKeyboardView;
 
@@ -39,7 +41,7 @@
 
 @end
 
-@interface ORKPasscodeKeyboardView : UIView
+@interface ORKPasscodeKeyboardView : UIView <UIInputViewAudioFeedback>
 
 @property (nonatomic, weak) id<ORKPasscodeKeyboardDelegate> delegate;
 
