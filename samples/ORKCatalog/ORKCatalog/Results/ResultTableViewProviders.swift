@@ -68,80 +68,76 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         `ORKTaskResult` instance).
     */
     switch result {
-        case is ORKScaleQuestionResult:
-            providerType = ScaleQuestionResultTableViewProvider.self
-
-        case is ORKNumericQuestionResult:
-            providerType = NumericQuestionResultTableViewProvider.self
-
-        case is ORKTimeOfDayQuestionResult:
-            providerType = TimeOfDayQuestionResultTableViewProvider.self
-
-        case is ORKDateQuestionResult:
-            providerType = DateQuestionResultTableViewProvider.self
-
-        case is ORKTimeIntervalQuestionResult:
-            providerType = TimeIntervalQuestionResultTableViewProvider.self
-
-        case is ORKTextQuestionResult:
-            providerType = TextQuestionResultTableViewProvider.self
-
-        case is ORKChoiceQuestionResult:
-            providerType = ChoiceQuestionResultTableViewProvider.self
-
-        case is ORKBooleanQuestionResult:
-            providerType = BooleanQuestionResultTableViewProvider.self
-
-        case is ORKTappingIntervalResult:
-            providerType = TappingIntervalResultTableViewProvider.self
-
-        case is ORKSpatialSpanMemoryResult:
-            providerType = SpatialSpanMemoryResultTableViewProvider.self
+        // Survey Questions
+    case is ORKBooleanQuestionResult:
+        providerType = BooleanQuestionResultTableViewProvider.self
         
-        case is ORKReactionTimeResult:
-            providerType = ReactionTimeViewProvider.self
+    case is ORKChoiceQuestionResult:
+        providerType = ChoiceQuestionResultTableViewProvider.self
         
-        case is ORKFileResult:
-            providerType = FileResultTableViewProvider.self
-
-        case is ORKConsentSignatureResult:
-            providerType = ConsentSignatureResultTableViewProvider.self
-
-        case is ORKTaskResult:
-            providerType = TaskResultTableViewProvider.self
+    case is ORKDateQuestionResult:
+        providerType = DateQuestionResultTableViewProvider.self
         
-        case is ORKToneAudiometryResult:
-            providerType = ToneAudiometryResultTableViewProvider.self
+    case is ORKNumericQuestionResult:
+        providerType = NumericQuestionResultTableViewProvider.self
         
-        case is ORKTowerOfHanoiResult:
-            providerType = TowerOfHanoiResultTableViewProvider.self
-            
-        case is ORKTimedWalkResult:
-            providerType = TimedWalkResultTableViewProvider.self
+    case is ORKScaleQuestionResult:
+        providerType = ScaleQuestionResultTableViewProvider.self
+        
+    case is ORKTextQuestionResult:
+        providerType = TextQuestionResultTableViewProvider.self
+        
+    case is ORKTimeIntervalQuestionResult:
+        providerType = TimeIntervalQuestionResultTableViewProvider.self
+        
+    case is ORKTimeOfDayQuestionResult:
+        providerType = TimeOfDayQuestionResultTableViewProvider.self
 
-        case is ORKToneAudiometryResult:
-            providerType = ToneAudiometryResultTableViewProvider.self
-
-        case is ORKPSATResult:
-            providerType = PSATResultTableViewProvider.self
+        // Consent
+    case is ORKConsentSignatureResult:
+        providerType = ConsentSignatureResultTableViewProvider.self
+        
+        // Active Tasks
+    case is ORKFileResult:
+        providerType = FileResultTableViewProvider.self
+        
+    case is ORKPSATResult:
+        providerType = PSATResultTableViewProvider.self
+        
+    case is ORKReactionTimeResult:
+        providerType = ReactionTimeViewProvider.self
+        
+    case is ORKSpatialSpanMemoryResult:
+        providerType = SpatialSpanMemoryResultTableViewProvider.self
+        
+    case is ORKTappingIntervalResult:
+        providerType = TappingIntervalResultTableViewProvider.self
+        
+    case is ORKToneAudiometryResult:
+        providerType = ToneAudiometryResultTableViewProvider.self
+        
+    case is ORKTimedWalkResult:
+        providerType = TimedWalkResultTableViewProvider.self
+        
+    case is ORKToneAudiometryResult:
+        providerType = ToneAudiometryResultTableViewProvider.self
+        
+    case is ORKTowerOfHanoiResult:
+        providerType = TowerOfHanoiResultTableViewProvider.self
+        
+    // All
+    case is ORKTaskResult:
+        providerType = TaskResultTableViewProvider.self
 
         /*
-            Refer to the comment near the switch statement for why the
-            additional guard is here.
+        Refer to the comment near the switch statement for why the
+        additional guard is here.
         */
-        case is ORKCollectionResult where !(result is ORKTaskResult):
-            providerType = CollectionResultTableViewProvider.self
-
-
-        /*
-            Refer to the comment near the switch statement for why the
-            additional guard is here.
-        */
-        case is ORKCollectionResult where !(result is ORKTaskResult):
-            providerType = CollectionResultTableViewProvider.self
-
-        default:
-            fatalError("No ResultTableViewProvider defined for \(result.dynamicType).")
+    case is ORKCollectionResult where !(result is ORKTaskResult):
+        providerType = CollectionResultTableViewProvider.self
+        
+    default:
+        fatalError("No ResultTableViewProvider defined for \(result.dynamicType).")
     }
     
     // Return a new instance of the specific `ResultTableViewProvider`.
@@ -314,16 +310,54 @@ class ResultTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     }
 }
 
-/// Table view provider specific to an `ORKScaleQuestionResult` instance.
-class ScaleQuestionResultTableViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKBooleanQuestionResult` instance.
+class BooleanQuestionResultTableViewProvider: ResultTableViewProvider   {
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let scaleQuestionResult = result as! ORKScaleQuestionResult
+        let boolResult = result as! ORKBooleanQuestionResult
+        
+        var boolResultDetailText: String?
+        if let booleanAnswer = boolResult.booleanAnswer {
+            boolResultDetailText = booleanAnswer.boolValue ? "true" : "false"
+        }
         
         return super.resultRowsForSection(section) + [
-            // The numeric value returned from the discrete or continuous slider.
-            ResultRow(text: "scaleAnswer", detail: scaleQuestionResult.scaleAnswer)
+            ResultRow(text: "bool", detail: boolResultDetailText)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKChoiceQuestionResult` instance.
+class ChoiceQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let choiceResult = result as! ORKChoiceQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            ResultRow(text: "choices", detail: choiceResult.choiceAnswers)
+        ]
+    }
+}
+
+
+/// Table view provider specific to an `ORKDateQuestionResult` instance.
+class DateQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKDateQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            // The date the user entered.
+            ResultRow(text: "dateAnswer", detail: questionResult.dateAnswer),
+            
+            // The calendar that was used when the date picker was presented.
+            ResultRow(text: "calendar", detail: questionResult.calendar),
+            
+            // The timezone when the user answered.
+            ResultRow(text: "timeZone", detail: questionResult.timeZone)
         ]
     }
 }
@@ -341,6 +375,48 @@ class NumericQuestionResultTableViewProvider: ResultTableViewProvider {
 
             // The unit string that was displayed with the numeric value.
             ResultRow(text: "unit", detail: questionResult.unit)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKScaleQuestionResult` instance.
+class ScaleQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let scaleQuestionResult = result as! ORKScaleQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            // The numeric value returned from the discrete or continuous slider.
+            ResultRow(text: "scaleAnswer", detail: scaleQuestionResult.scaleAnswer)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKTextQuestionResult` instance.
+class TextQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKTextQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            // The text the user typed into the text view.
+            ResultRow(text: "textAnswer", detail: questionResult.textAnswer)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKTimeIntervalQuestionResult` instance.
+class TimeIntervalQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKTimeIntervalQuestionResult
+        
+        return super.resultRowsForSection(section) + [
+            // The time interval the user answered.
+            ResultRow(text: "intervalAnswer", detail: questionResult.intervalAnswer)
         ]
     }
 }
@@ -363,329 +439,96 @@ class TimeOfDayQuestionResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
-/// Table view provider specific to an `ORKDateQuestionResult` instance.
-class DateQuestionResultTableViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKConsentSignatureResult` instance.
+class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKDateQuestionResult
+        let signatureResult = result as! ORKConsentSignatureResult
+        let signature = signatureResult.signature!
         
         return super.resultRowsForSection(section) + [
-            // The date the user entered.
-            ResultRow(text: "dateAnswer", detail: questionResult.dateAnswer),
-
-            // The calendar that was used when the date picker was presented.
-            ResultRow(text: "calendar", detail: questionResult.calendar),
+            /*
+            The identifier for the signature, identifying which one it is in
+            the document.
+            */
+            ResultRow(text: "identifier", detail: signature.identifier),
             
-            // The timezone when the user answered.
-            ResultRow(text: "timeZone", detail: questionResult.timeZone)
+            /*
+            The title of the signatory, displayed under the line. For
+            example, "Participant".
+            */
+            ResultRow(text: "title", detail: signature.title),
+            
+            // The given name of the signatory.
+            ResultRow(text: "givenName", detail: signature.givenName),
+            
+            // The family name of the signatory.
+            ResultRow(text: "familyName", detail: signature.familyName),
+            
+            // The date the signature was obtained.
+            ResultRow(text: "date", detail: signature.signatureDate),
+            
+            // The captured image.
+            .TextImage("signature", image: signature.signatureImage)
         ]
     }
-}
-
-/// Table view provider specific to an `ORKTimeIntervalQuestionResult` instance.
-class TimeIntervalQuestionResultTableViewProvider: ResultTableViewProvider {
-    // MARK: ResultTableViewProvider
-
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKTimeIntervalQuestionResult
-        
-        return super.resultRowsForSection(section) + [
-            // The time interval the user answered.
-            ResultRow(text: "intervalAnswer", detail: questionResult.intervalAnswer)
-        ]
-    }
-}
-
-/// Table view provider specific to an `ORKTextQuestionResult` instance.
-class TextQuestionResultTableViewProvider: ResultTableViewProvider {
-    // MARK: ResultTableViewProvider
-
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKTextQuestionResult
-        
-        return super.resultRowsForSection(section) + [
-            // The text the user typed into the text view.
-            ResultRow(text: "textAnswer", detail: questionResult.textAnswer)
-        ]
-    }
-}
-
-/// Table view provider specific to an `ORKChoiceQuestionResult` instance.
-class ChoiceQuestionResultTableViewProvider: ResultTableViewProvider {
-    // MARK: ResultTableViewProvider
     
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let choiceResult = result as! ORKChoiceQuestionResult
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let lastRow = self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1
         
-        return super.resultRowsForSection(section) + [
-            ResultRow(text: "choices", detail: choiceResult.choiceAnswers)
-        ]
-    }
-}
-
-/// Table view provider specific to an `ORKBooleanQuestionResult` instance.
-class BooleanQuestionResultTableViewProvider: ResultTableViewProvider   {
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let boolResult = result as! ORKBooleanQuestionResult
-        
-        var boolResultDetailText: String?
-        if let booleanAnswer = boolResult.booleanAnswer {
-            boolResultDetailText = booleanAnswer.boolValue ? "true" : "false"
+        if indexPath.row == lastRow {
+            return 200
         }
         
-        return super.resultRowsForSection(section) + [
-            ResultRow(text: "bool", detail: boolResultDetailText)
-        ]
+        return UITableViewAutomaticDimension
     }
 }
 
-/// Table view provider specific to an `ORKTappingIntervalResult` instance.
-class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "Samples"
-    }
-    
+/// Table view provider specific to an `ORKFileResult` instance.
+class FileResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKTappingIntervalResult
+        let questionResult = result as! ORKFileResult
         
-        let rows = super.resultRowsForSection(section)
+        let rows = super.resultRowsForSection(section) + [
+            // The MIME content type for the file produced.
+            ResultRow(text: "contentType", detail: questionResult.contentType),
+            
+            // The URL of the generated file on disk.
+            ResultRow(text: "fileURL", detail: questionResult.fileURL)
+        ]
         
-        if section == 0 {
-            return rows + [
-                // The size of the view where the two target buttons are displayed.
-                ResultRow(text: "stepViewSize", detail: questionResult.stepViewSize),
-
-                // The rect corresponding to the left button.
-                ResultRow(text: "buttonRect1", detail: questionResult.buttonRect1),
+        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
+            if let data = NSData(contentsOfURL: fileURL), let image = UIImage(data: data) {
+                return rows + [
+                    // The image of the generated file on disk.
+                    .Image(image)
+                ]
+            }
+        }
+        
+        return rows
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let resultRows = resultRowsForSection(indexPath.section)
+        
+        if !resultRows.isEmpty {
+            switch resultRows[indexPath.row] {
+            case .Image(.Some(let image)):
+                // Keep the aspect ratio the same.
+                let imageAspectRatio = image.size.width / image.size.height
                 
-                // The rect corresponding to the right button.
-                ResultRow(text: "buttonRect2", detail: questionResult.buttonRect2)
-            ]
-        }
-        
-        // Add a `ResultRow` for each sample.
-        return rows + questionResult.samples!.map { tappingSample in
-            
-            // These tap locations are relative to the rectangle defined by `stepViewSize`.
-            let buttonText = tappingSample.buttonIdentifier == .None ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
-            
-            let text = String(format: "%.3f", tappingSample.timestamp)
-            let detail = "\(buttonText) \(tappingSample.location)"
-            
-            return ResultRow(text: text, detail: detail)
-        }
-    }
-}
-
-/// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
-class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
-        return towerOfHanoiResult.moves != nil ? (towerOfHanoiResult.moves!.count + 1) : 1
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "Move \(section )"
-    }
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
-        let rows = super.resultRowsForSection(section)
-        if section == 0 {
-            return rows + [
-                ResultRow(text: "solved", detail: towerOfHanoiResult.puzzleWasSolved ? "true" : "false"),
-                ResultRow(text: "moves", detail: "\(towerOfHanoiResult.moves?.count ?? 0 )")]
-        }
-        // Add a `ResultRow` for each sample.
-        let move = towerOfHanoiResult.moves![section - 1] as! ORKTowerOfHanoiMove
-        return rows + [
-            ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
-            ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
-            ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
-    }
-}
-
-/// Table view provider specific to an `ORKToneAudiometryResult` instance.
-class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-
-        return "Samples"
-    }
-
-    // MARK: ResultTableViewProvider
-
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let toneAudiometryResult = result as! ORKToneAudiometryResult
-        let rows = super.resultRowsForSection(section)
-
-        if section == 0 {
-            return rows + [
-                // The size of the view where the two target buttons are displayed.
-                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
-            ]
-        }
-
-        // Add a `ResultRow` for each sample.
-        return rows + toneAudiometryResult.samples!.map { toneSample in
-            let text: String
-            let detail: String
-
-            let channelName = toneSample.channel == .Left ? "Left" : "Right"
-            
-            text = "\(toneSample.frequency) \(channelName)"
-            detail = "\(toneSample.amplitude)"
-
-            return ResultRow(text: text, detail: detail)
-        }
-    }
-}
-
-/// Table view provider specific to an `ORKSpatialSpanMemoryResult` instance.
-class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "Game Records"
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKSpatialSpanMemoryResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            return rows + [
-                // The score the user received for the game as a whole.
-                ResultRow(text: "score", detail: questionResult.score),
-
-                // The number of games played.
-                ResultRow(text: "numberOfGames", detail: questionResult.numberOfGames),
+                return tableView.frame.size.width / imageAspectRatio
                 
-                // The number of failures.
-                ResultRow(text: "numberOfFailures", detail: questionResult.numberOfFailures)
-            ]
+            default:
+                break
+            }
         }
         
-        return rows + questionResult.gameRecords!.map { gameRecord in
-            // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
-            return ResultRow(text: "game", detail: gameRecord.score)
-        }
-    }
-}
-
-/// Table view provider specific to an `ORKReactionTimeResult` instance.
-class ReactionTimeViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "File Results"
-    }
-    
-    // MARK: ResultTableViewProvider
-
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let reactionTimeResult = result as! ORKReactionTimeResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            return rows + [
-                ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp)
-            ]
-        }
-        
-        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
-        
-        return rows + [
-            ResultRow(text: "File Result", detail: fileResultDetail)
-        ]
-    }
-}
-
-/// Table view provider specific to an `ORKTimedWalkResult` instance.
-class TimedWalkResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return super.tableView(tableView, titleForHeaderInSection: 0)
-    }
-    
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let TimedWalkResult = result as! ORKTimedWalkResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        return rows + [
-            // The timed walk distance in meters.
-            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
-            
-            // The time limit to complete the trials.
-            ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),
-            
-            // The duration for an addition of the PVSAT.
-            ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
-        ]
+        return UITableViewAutomaticDimension
     }
 }
 
@@ -770,96 +613,250 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
-/// Table view provider specific to an `ORKFileResult` instance.
-class FileResultTableViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKReactionTimeResult` instance.
+class ReactionTimeViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "File Results"
+    }
+    
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let questionResult = result as! ORKFileResult
+        let reactionTimeResult = result as! ORKReactionTimeResult
         
-        let rows = super.resultRowsForSection(section) + [
-            // The MIME content type for the file produced.
-            ResultRow(text: "contentType", detail: questionResult.contentType),
-
-            // The URL of the generated file on disk.
-            ResultRow(text: "fileURL", detail: questionResult.fileURL)
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp)
+            ]
+        }
+        
+        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
+        
+        return rows + [
+            ResultRow(text: "File Result", detail: fileResultDetail)
         ]
-
-        if let fileURL = questionResult.fileURL, let contentType = questionResult.contentType where contentType.hasPrefix("image/") {
-            if let data = NSData(contentsOfURL: fileURL), let image = UIImage(data: data) {
-                return rows + [
-                    // The image of the generated file on disk.
-                    .Image(image)
-                ]
-            }
-        }
-        
-        return rows
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let resultRows = resultRowsForSection(indexPath.section)
-        
-        if !resultRows.isEmpty {
-            switch resultRows[indexPath.row] {
-                case .Image(.Some(let image)):
-                    // Keep the aspect ratio the same.
-                    let imageAspectRatio = image.size.width / image.size.height
-
-                    return tableView.frame.size.width / imageAspectRatio
-
-                default:
-                    break
-            }
-        }
-        
-        return UITableViewAutomaticDimension
     }
 }
 
-/// Table view provider specific to an `ORKConsentSignatureResult` instance.
-class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
+/// Table view provider specific to an `ORKSpatialSpanMemoryResult` instance.
+class SpatialSpanMemoryResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Game Records"
+    }
+    
     // MARK: ResultTableViewProvider
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let signatureResult = result as! ORKConsentSignatureResult
-        let signature = signatureResult.signature!
+        let questionResult = result as! ORKSpatialSpanMemoryResult
         
-        return super.resultRowsForSection(section) + [
-            /*
-                The identifier for the signature, identifying which one it is in
-                the document.
-            */
-            ResultRow(text: "identifier", detail: signature.identifier),
-            
-            /*
-                The title of the signatory, displayed under the line. For
-                example, "Participant".
-            */
-            ResultRow(text: "title", detail: signature.title),
-            
-            // The given name of the signatory.
-            ResultRow(text: "givenName", detail: signature.givenName),
-            
-            // The family name of the signatory.
-            ResultRow(text: "familyName", detail: signature.familyName),
-            
-            // The date the signature was obtained.
-            ResultRow(text: "date", detail: signature.signatureDate),
-            
-            // The captured image.
-            .TextImage("signature", image: signature.signatureImage)
-        ]
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                // The score the user received for the game as a whole.
+                ResultRow(text: "score", detail: questionResult.score),
+                
+                // The number of games played.
+                ResultRow(text: "numberOfGames", detail: questionResult.numberOfGames),
+                
+                // The number of failures.
+                ResultRow(text: "numberOfFailures", detail: questionResult.numberOfFailures)
+            ]
+        }
+        
+        return rows + questionResult.gameRecords!.map { gameRecord in
+            // Note `gameRecord` is of type `ORKSpatialSpanMemoryGameRecord`.
+            return ResultRow(text: "game", detail: gameRecord.score)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKTappingIntervalResult` instance.
+class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Samples"
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let lastRow = self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKTappingIntervalResult
         
-        if indexPath.row == lastRow {
-            return 200
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "stepViewSize", detail: questionResult.stepViewSize),
+
+                // The rect corresponding to the left button.
+                ResultRow(text: "buttonRect1", detail: questionResult.buttonRect1),
+                
+                // The rect corresponding to the right button.
+                ResultRow(text: "buttonRect2", detail: questionResult.buttonRect2)
+            ]
         }
-       
-        return UITableViewAutomaticDimension
+        
+        // Add a `ResultRow` for each sample.
+        return rows + questionResult.samples!.map { tappingSample in
+            
+            // These tap locations are relative to the rectangle defined by `stepViewSize`.
+            let buttonText = tappingSample.buttonIdentifier == .None ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
+            
+            let text = String(format: "%.3f", tappingSample.timestamp)
+            let detail = "\(buttonText) \(tappingSample.location)"
+            
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKTimedWalkResult` instance.
+class TimedWalkResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return super.tableView(tableView, titleForHeaderInSection: 0)
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let TimedWalkResult = result as! ORKTimedWalkResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        return rows + [
+            // The timed walk distance in meters.
+            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
+            
+            // The time limit to complete the trials.
+            ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),
+            
+            // The duration for an addition of the PVSAT.
+            ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKToneAudiometryResult` instance.
+class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Samples"
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let toneAudiometryResult = result as! ORKToneAudiometryResult
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                // The size of the view where the two target buttons are displayed.
+                ResultRow(text: "outputVolume", detail: toneAudiometryResult.outputVolume),
+            ]
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + toneAudiometryResult.samples!.map { toneSample in
+            let text: String
+            let detail: String
+            
+            let channelName = toneSample.channel == .Left ? "Left" : "Right"
+            
+            text = "\(toneSample.frequency) \(channelName)"
+            detail = "\(toneSample.amplitude)"
+            
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
+class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
+        return towerOfHanoiResult.moves != nil ? (towerOfHanoiResult.moves!.count + 1) : 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Move \(section )"
+    }
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let towerOfHanoiResult = result as! ORKTowerOfHanoiResult
+        let rows = super.resultRowsForSection(section)
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "solved", detail: towerOfHanoiResult.puzzleWasSolved ? "true" : "false"),
+                ResultRow(text: "moves", detail: "\(towerOfHanoiResult.moves?.count ?? 0 )")]
+        }
+        // Add a `ResultRow` for each sample.
+        let move = towerOfHanoiResult.moves![section - 1] as! ORKTowerOfHanoiMove
+        return rows + [
+            ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
+            ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
+            ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
     }
 }
 

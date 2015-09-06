@@ -1460,6 +1460,44 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             [items addObject:item];
         }
         
+        {
+            ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+            ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+            ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+            ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+            ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+            
+            NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+            
+            ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                                   defaultIndex:NSIntegerMax
+                                                                                                       vertical:NO];
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_007"
+                                                                   text:@"How are you feeling today?"
+                                                           answerFormat:scaleAnswerFormat];
+            [items addObject:item];
+        }
+        
+        {
+            ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+            ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+            ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+            ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+            ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+            
+            NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+            
+            ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                                   defaultIndex:NSIntegerMax
+                                                                                                       vertical:YES];
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_scale_008"
+                                                                   text:@"How are you feeling today?"
+                                                           answerFormat:scaleAnswerFormat];
+            [items addObject:item];
+        }
+        
         [step setFormItems:items];
         [steps addObject:step];
     }
@@ -1838,6 +1876,47 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                      answer:scaleAnswerFormat];
         [steps addObject:step];
     }
+    
+    {
+        ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+        ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+        ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+        ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+        ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+        
+        NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+        
+        ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                               defaultIndex:NSIntegerMax
+                                                                                                   vertical:NO];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_14"
+                                                                      title:@"How are you feeling today?"
+                                                                     answer:scaleAnswerFormat];
+        
+        [steps addObject:step];
+    }
+    
+    {
+        ORKTextChoice *textChoice1 = [ORKTextChoice choiceWithText:@"Poor" value:@(1)];
+        ORKTextChoice *textChoice2 = [ORKTextChoice choiceWithText:@"Fair" value:@(2)];
+        ORKTextChoice *textChoice3 = [ORKTextChoice choiceWithText:@"Good" value:@(3)];
+        ORKTextChoice *textChoice4 = [ORKTextChoice choiceWithText:@"Above Average" value:@(4)];
+        ORKTextChoice *textChoice5 = [ORKTextChoice choiceWithText:@"Excellent" value:@(5)];
+        
+        NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
+        
+        ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
+                                                                                               defaultIndex:NSIntegerMax
+                                                                                                   vertical:YES];
+        
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_15"
+                                                                      title:@"How are you feeling today?"
+                                                                     answer:scaleAnswerFormat];
+        
+        [steps addObject:step];
+    }
+
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScalesTaskIdentifier steps:steps];
     return task;
