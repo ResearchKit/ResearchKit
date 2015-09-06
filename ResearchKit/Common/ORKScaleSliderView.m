@@ -50,6 +50,7 @@
     UIView *_leftRangeView;
     UIView *_rightRangeView;
     ORKScaleValueLabel *_valueLabel;
+    NSMutableArray<ORKScaleRangeLabel *> *_textChoiceLabels;
 }
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider {
@@ -57,41 +58,10 @@
     if (self) {
         _formatProvider = formatProvider;
         
-        self.slider.textChoices = [formatProvider textChoices];
-        
-        if ([formatProvider minimumImage]) {
-            _leftRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
-        } else {
-            ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-            leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
-            _leftRangeView = leftRangeLabel;
-        }
-        
-        if ([formatProvider maximumImage]) {
-            _rightRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
-        } else {
-            ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-            rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
-            _rightRangeView = rightRangeLabel;
-        }
-        
-        [self addSubview:_leftRangeView];
-        [self addSubview:_rightRangeView];
-        
-        if ([formatProvider isVertical]) {
-            _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-            _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-        } else {
-            _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-            _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
-        }
-
-        _leftRangeDescriptionLabel.text = [formatProvider minimumValueDescription];
-        _rightRangeDescriptionLabel.text = [formatProvider maximumValueDescription];
-        
-        _slider.vertical = [formatProvider isVertical];
+        _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
+        _slider.userInteractionEnabled = YES;
+        _slider.contentMode = UIViewContentModeRedraw;
+        [self addSubview:_slider];
         
         _slider.maximumValue = [formatProvider maximumNumber].floatValue;
         _slider.minimumValue = [formatProvider minimumNumber].floatValue;
@@ -99,24 +69,106 @@
         NSInteger numberOfSteps = [formatProvider numberOfSteps];
         _slider.numberOfSteps = numberOfSteps;
         
-        if (self.slider.textChoices) {
-            _leftRangeDescriptionLabel.textColor = [UIColor blackColor];
-            _rightRangeDescriptionLabel.textColor = [UIColor blackColor];
-            _leftRangeLabel.text = @"";
-            _rightRangeLabel.text = @"";
-        }
-
         [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    
+
+        BOOL isVertical = [formatProvider isVertical];
+        _slider.vertical = isVertical;
+
+        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
+        self.slider.textChoices = textChoices;
+        
+        if (isVertical && textChoices) {
+            // Generate an array of labels for all the text choices
+            _textChoiceLabels = [NSMutableArray new];
+            for (int i = 0; i <= numberOfSteps; i++) {
+                ORKTextChoice *textChoice = textChoices[i];
+                ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                stepLabel.text = textChoice.text;
+                stepLabel.textAlignment = NSTextAlignmentLeft;
+                stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
+                [self addSubview:stepLabel];
+                [_textChoiceLabels addObject:stepLabel];
+            }
+        } else {
+            _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
+            _valueLabel.textAlignment = NSTextAlignmentCenter;
+            _valueLabel.text = @" ";
+            [self addSubview:_valueLabel];
+            
+            _leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            _leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:_leftRangeLabel];
+            
+            _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+            _leftRangeDescriptionLabel.numberOfLines = -1;
+            [self addSubview:_leftRangeDescriptionLabel];
+            
+            _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            _rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:_rightRangeLabel];
+            
+            _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+            _rightRangeDescriptionLabel.numberOfLines = -1;
+            [self addSubview:_rightRangeDescriptionLabel];
+            
+            if (textChoices) {
+                _leftRangeDescriptionLabel.textColor = [UIColor blackColor];
+                _rightRangeDescriptionLabel.textColor = [UIColor blackColor];
+                _leftRangeLabel.text = @"";
+                _rightRangeLabel.text = @"";
+            }
+
+#if LAYOUT_DEBUG
+            self.backgroundColor = [UIColor greenColor];
+            _valueLabel.backgroundColor = [UIColor blueColor];
+            _slider.backgroundColor = [UIColor redColor];
+            _leftRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
+            _rightRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
+#endif
+            
+            if ([formatProvider minimumImage]) {
+                _leftRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
+            } else {
+                ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+                leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
+                _leftRangeView = leftRangeLabel;
+            }
+            
+            if ([formatProvider maximumImage]) {
+                _rightRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
+            } else {
+                ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+                rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
+                _rightRangeView = rightRangeLabel;
+            }
+            
+            [self addSubview:_leftRangeView];
+            [self addSubview:_rightRangeView];
+        
+            if (isVertical) {
+                _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+                _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+            } else {
+                _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+                _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
+            }
+            
+            _leftRangeDescriptionLabel.text = [formatProvider minimumValueDescription];
+            _rightRangeDescriptionLabel.text = [formatProvider maximumValueDescription];
+
+            _valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeView.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        }
+        
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        _leftRangeView.translatesAutoresizingMaskIntoConstraints = NO;
-        _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
         _slider.translatesAutoresizingMaskIntoConstraints = NO;
-        _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self setUpConstraints];
     }
@@ -124,10 +176,17 @@
 }
 
 - (void)setUpConstraints {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_slider, _leftRangeView, _rightRangeView, _valueLabel,_leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
+    BOOL isVertical = [_formatProvider isVertical];
+    NSArray<ORKTextChoice *> *textChoices = _slider.textChoices;
+    NSDictionary *views = nil;
+    if (isVertical && textChoices) {
+        views = NSDictionaryOfVariableBindings(_slider);
+    } else {
+        views = NSDictionaryOfVariableBindings(_slider, _leftRangeView, _rightRangeView, _valueLabel, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
+    }
     
     NSMutableArray *constraints = [NSMutableArray new];
-    if ([_formatProvider isVertical]) {
+    if (isVertical) {
         _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
         _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
         
@@ -138,121 +197,88 @@
         const CGFloat kSliderMargin = 20.0;
         const CGFloat kSideLabelMargin = 24;
         
-        if (self.slider.textChoices) {
-            // Remove the extra controls from superview.
-            [_valueLabel removeFromSuperview];
-            [_leftRangeView removeFromSuperview];
-            [_rightRangeView removeFromSuperview];
-            [_leftRangeDescriptionLabel removeFromSuperview];
-            [_rightRangeDescriptionLabel removeFromSuperview];
+        if (textChoices) {
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
             
-            // Generating an array of labels for all the text choices.
-            NSMutableArray *textChoiceLabels = [NSMutableArray new];
-            for (int i = 0; i <= self.slider.numberOfSteps; i++) {
-                ORKTextChoice *textChoice = self.slider.textChoices[i];
-                ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-                stepLabel.text = textChoice.text;
-                stepLabel.textAlignment = NSTextAlignmentLeft;
-                stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
-                [self addSubview:stepLabel];
-                [textChoiceLabels addObject:stepLabel];
-            }
-            
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:_slider
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1.0
-                                                              constant:0]];
-            
-            [self addConstraints:
+            [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:@{@"kSliderMargin": @(kSliderMargin)}
                                                        views:views]];
             
             
-            for (int i = 0; i < textChoiceLabels.count; i++) {
-                
-                // Move to the right side of the slider.
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
+            for (int i = 0; i < _textChoiceLabels.count; i++) {
+                // Put labels to the right side of the slider.
+                [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                  attribute:NSLayoutAttributeLeading
                                                                  relatedBy:NSLayoutRelationEqual
-                                                                    toItem:self.slider
+                                                                    toItem:_slider
                                                                  attribute:NSLayoutAttributeCenterX
                                                                 multiplier:1.0
                                                                   constant:kSideLabelMargin]];
                 
                 if (i == 0) {
-                    
-                    /*
-                     First label constraints
-                     */
-                    [self addConstraints:@[
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
+                    // First label
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeCenterX
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:self
                                                                         attribute:NSLayoutAttributeCenterX
                                                                        multiplier:1.0
-                                                                         constant:0],
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeCenterY
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.slider
+                                                                           toItem:_slider
                                                                         attribute:NSLayoutAttributeBottom
                                                                        multiplier:1.0
-                                                                         constant:0],
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeWidth
                                                                         relatedBy:NSLayoutRelationLessThanOrEqual
                                                                            toItem:self
                                                                         attribute:NSLayoutAttributeWidth
                                                                        multiplier:0.5
-                                                                         constant:0]
-                                           ]];
+                                                                         constant:0.0]];
                 } else {
-                    
-                    /*
-                     In-between labels constraints
-                     */
-                    
-                    [self addConstraints:@[
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i-1]
+                    // Middle labels
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
                                                                         attribute:NSLayoutAttributeTop
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:textChoiceLabels[i]
+                                                                           toItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeBottom
                                                                        multiplier:1.0
-                                                                         constant:0],
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i-1]
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:textChoiceLabels[i]
+                                                                           toItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeHeight
                                                                        multiplier:1.0
-                                                                         constant:0],
-                                           [NSLayoutConstraint constraintWithItem:textChoiceLabels[i-1]
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
                                                                         attribute:NSLayoutAttributeWidth
                                                                         relatedBy:NSLayoutRelationEqual
-                                                                           toItem:textChoiceLabels[i]
+                                                                           toItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeWidth
                                                                        multiplier:1.0
-                                                                         constant:0]
-                                           ]];
+                                                                         constant:0.0]];
                     
-                    /*
-                     Last label constraints
-                     */
-                    if (i==textChoiceLabels.count-1) {
-                        [self addConstraint:[NSLayoutConstraint constraintWithItem:textChoiceLabels[i]
-                                                                         attribute:NSLayoutAttributeCenterY
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:self.slider
-                                                                         attribute:NSLayoutAttributeTop
-                                                                        multiplier:1.0
-                                                                          constant:0]];
+                    // Last label
+                    if (i == (_textChoiceLabels.count - 1)) {
+                        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                            attribute:NSLayoutAttributeCenterY
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_slider
+                                                                            attribute:NSLayoutAttributeTop
+                                                                           multiplier:1.0
+                                                                             constant:0.0]];
                     }
                 }
             }
@@ -419,57 +445,20 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
-        _slider.userInteractionEnabled = YES;
-        _slider.contentMode = UIViewContentModeRedraw;
-        [self addSubview:_slider];
-        
-        _leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-        _leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_leftRangeLabel];
-        
-        _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];        _leftRangeDescriptionLabel.numberOfLines = -1;
-        [self addSubview:_leftRangeDescriptionLabel];
-        
-        _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-        _rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_rightRangeLabel];
-        
-        _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];        _rightRangeDescriptionLabel.numberOfLines = -1;
-        [self addSubview:_rightRangeDescriptionLabel];
-
-             
-        _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
-        _valueLabel.textAlignment = NSTextAlignmentCenter;
-        _valueLabel.text = @" ";
-        [self addSubview:_valueLabel];
-        
-#if LAYOUT_DEBUG
-        self.backgroundColor = [UIColor greenColor];
-        _valueLabel.backgroundColor = [UIColor blueColor];
-        _slider.backgroundColor = [UIColor redColor];
-        _leftRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
-        _rightRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
-#endif
-    }
-    return self;
-}
-
 - (void)setCurrentValue:(NSNumber *)value {
     _currentValue = value;
     _slider.showThumb = value? YES : NO;
     
-    NSArray *textChoices = [_formatProvider textChoices];
-    if (textChoices && value) {
-        ORKTextChoice *textChoice = textChoices[MAX(0, [value intValue] - 1)];
-        self.valueLabel.text = textChoice.text;
-    } else if (value) {
-        NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
-        _slider.value = newValue.floatValue;
-        _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
+    if (value) {
+        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
+        if (textChoices) {
+            ORKTextChoice *textChoice = textChoices[MAX(0, [value intValue] - 1)];
+            self.valueLabel.text = textChoice.text;
+        } else {
+            NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
+            _slider.value = newValue.floatValue;
+            _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
+        }
     } else {
         _valueLabel.text = @"";
     }
