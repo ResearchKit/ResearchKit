@@ -40,7 +40,7 @@
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
     const CGFloat defaultHeadlineSize = 17;
     
-    UIWindow *window = [[UIApplication sharedApplication] windows].firstObject;
+    UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     
     CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForScreenType(surveyMode?ORKScreenMetricFontSizeSurveyHeadline: ORKScreenMetricFontSizeHeadline, screenType);
