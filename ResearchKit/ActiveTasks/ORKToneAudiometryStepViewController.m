@@ -110,7 +110,7 @@
 
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
 
-    ORKToneAudiometryResult *toneResult = [[ORKToneAudiometryResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKToneAudiometryResult *toneResult = [[ORKToneAudiometryResult alloc] initWithIdentifier:self.step.identifier];
     toneResult.startDate = sResult.startDate;
     toneResult.endDate = now;
     toneResult.samples = [self.samples copy];

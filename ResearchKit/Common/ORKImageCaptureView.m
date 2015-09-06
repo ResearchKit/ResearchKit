@@ -167,7 +167,7 @@
     }
 }
 
-- (void)setCapturedImage:(UIImage * __nullable)capturedImage {
+- (void)setCapturedImage:(UIImage *)capturedImage {
     _previewView.capturedImage = capturedImage;
     [self updateAppearance];
 }
@@ -176,7 +176,7 @@
     return _previewView.capturedImage;
 }
 
-- (void)setError:(NSError * __nullable)error {
+- (void)setError:(NSError *)error {
     _error = error;
     [self updateAppearance];
 }
@@ -250,7 +250,7 @@
     return _previewView.session;
 }
 
-- (void)setSession:(AVCaptureSession * __nullable)session {
+- (void)setSession:(AVCaptureSession *)session {
     _previewView.session = session;
     // Set up the proper videoOrientation from the start
     [self orientationDidChange];

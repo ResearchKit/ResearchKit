@@ -136,7 +136,7 @@
     return _previewLayer.session;
 }
 
-- (void)setSession:(AVCaptureSession * __nullable)session {
+- (void)setSession:(AVCaptureSession *)session {
     _previewLayer.session = session;
 }
 
@@ -144,7 +144,7 @@
     return _templateImageView.image;
 }
 
-- (void)setTemplateImage:(UIImage * __nullable)templateImage {
+- (void)setTemplateImage:(UIImage *)templateImage {
     _templateImageView.image = templateImage;
 }
 
@@ -168,7 +168,7 @@
     return _capturedImageView.image;
 }
 
-- (void)setCapturedImage:(UIImage * __nullable)capturedImage {
+- (void)setCapturedImage:(UIImage *)capturedImage {
     _capturedImageView.image = capturedImage;
     _previewLayer.hidden = capturedImage!=nil;
 }
@@ -244,7 +244,7 @@
     return YES;
 }
 
-- (NSString * __nullable)accessibilityLabel {
+- (NSString *)accessibilityLabel {
     return ORKLocalizedString(self.capturedImage ? @"AX_IMAGE_CAPTURED_LABEL" : @"AX_IMAGE_CAPTURE_LABEL", nil);
 }
 

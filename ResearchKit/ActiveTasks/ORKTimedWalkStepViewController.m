@@ -101,7 +101,7 @@ double const kDistanceInMetersTrackingThreshold = 100.0;
     
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
-    ORKTimedWalkResult *timedWalkResult = [[ORKTimedWalkResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKTimedWalkResult *timedWalkResult = [[ORKTimedWalkResult alloc] initWithIdentifier:self.step.identifier];
     timedWalkResult.distanceInMeters = [self timedWalkStep].distanceInMeters;
     timedWalkResult.timeLimit = [self timedWalkStep].stepDuration;
     timedWalkResult.duration = self.trialDuration;

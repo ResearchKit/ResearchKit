@@ -108,7 +108,7 @@
     _imageCaptureView.skipButtonItem = skipButtonItem;
 }
 
-- (void)retakePressed:(void (^ __nullable)())handler {
+- (void)retakePressed:(void (^)())handler {
     // Start the capture session, and reset the captured image to nil
     dispatch_async(_sessionQueue, ^{
         [_captureSession startRunning];
@@ -121,7 +121,7 @@
     });
 }
 
-- (void)capturePressed:(void (^ __nullable)(BOOL))handler {
+- (void)capturePressed:(void (^)(BOOL))handler {
     // Capture the image via the output
     dispatch_async(_sessionQueue, ^{
     	[_stillImageOutput captureStillImageAsynchronouslyFromConnection:[_stillImageOutput connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
@@ -135,7 +135,7 @@
     ((AVCaptureConnection *)_stillImageOutput.connections[0]).videoOrientation = videoOrientation;
 }
 
-- (void)queueCaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^ __nullable)(BOOL))handler {
+- (void)queueCaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^)(BOOL))handler {
     // Capture the JPEG image data, if available
     NSData *capturedImageData = !imageDataSampleBuffer ? nil : [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
     // If something was captured, stop the capture session

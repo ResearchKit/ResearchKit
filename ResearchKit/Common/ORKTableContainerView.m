@@ -106,7 +106,7 @@
     return self;
 }
 
-- (void)setTapOffView:(UIView * __nullable)tapOffView {
+- (void)setTapOffView:(UIView *)tapOffView {
     _tapOffView = tapOffView;
     
     [_tapOffGestureRecognizer.view removeGestureRecognizer:_tapOffGestureRecognizer];
