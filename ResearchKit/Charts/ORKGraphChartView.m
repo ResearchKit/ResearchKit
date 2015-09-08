@@ -1066,7 +1066,11 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
             }
         }
         
-        element.accessibilityLabel = [self.dataSource graphChartView:self titleForXAxisAtIndex:pointIndex];
+        if ([_dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)]) {
+            element.accessibilityLabel = [self.dataSource graphChartView:self titleForXAxisAtPointIndex:pointIndex];
+        } else {
+            element.accessibilityLabel = [[NSString alloc] initWithFormat:ORKLocalizedString(@"AX_CHART_POINT_%@", nil), @(pointIndex).stringValue];
+        }
         element.accessibilityValue = value;
         [accessibilityElements addObject:element];
     }

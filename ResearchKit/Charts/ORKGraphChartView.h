@@ -204,12 +204,12 @@ ORK_AVAILABLE_DECL
  See also: `numberOfDivisionsInXAxisForGraphChartView:`.
 
  @param graphChartView  The graph chart view asking for the tile.
- @param index           The index of the specified x-axis division.
+ @param pointIndex      The index of the specified x-axis division.
 
  @return The title string to be displayed adjacent to each division of the x-axis of the graph chart
  view.
 */
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtIndex:(NSInteger)index;
+- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex;
 
 @end
 

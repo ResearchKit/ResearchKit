@@ -317,3 +317,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Range from %@ to %@";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
+"AX_GRAPH_POINT_%@" = "Point: %@";
