@@ -184,7 +184,7 @@ ORK_AVAILABLE_DECL
 /**
  Asks the data source for the number of divisions in the x-axis. The value is ignored if it is lower
  than the number of data points. A title appearing adjacent to each
- division may optionally be returned in `graphChartView:titleForXAxisAtIndex:`.
+ division may optionally be returned in `graphChartView:titleForXAxisAtPointIndex:`.
 
  @param graphChartView      The graph view asking for the number of divisions in its x-axis.
 

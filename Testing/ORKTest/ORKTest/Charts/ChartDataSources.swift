@@ -198,7 +198,7 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
         return 8
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
         return "\(pointIndex + 1)"
     }
 
