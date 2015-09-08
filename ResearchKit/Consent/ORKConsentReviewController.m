@@ -148,6 +148,8 @@
                                                                    message:self.localizedReasonForConsent
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
+    alert.view.tintColor = self.view.tintColor;
+
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil) style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_AGREE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         // Have to dispatch, so following transition animation works

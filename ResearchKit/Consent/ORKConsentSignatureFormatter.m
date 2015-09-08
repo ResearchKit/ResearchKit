@@ -46,11 +46,11 @@
     BOOL addedSig = NO;
 
     NSMutableArray *signatureElements = [NSMutableArray array];
+    NSString *nameStr = @"&nbsp;";
 
     // Signature
     if (signature.requiresName || signature.familyName || signature.givenName) {
         addedSig = YES;
-        NSString *nameStr = @"&nbsp;";
         if (signature.familyName || signature.givenName) {
             NSMutableArray *names = [NSMutableArray array];
             if (signature.givenName) {
@@ -65,7 +65,7 @@
             nameStr = [names componentsJoinedByString:@"&nbsp;"];
         }
 
-        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil);
+        NSString *titleFormat = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_DOC_LINE_PRINTED_NAME", nil),nameStr];
         [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, nameStr, hr, [NSString stringWithFormat:titleFormat,signature.title]]];
     }
 
@@ -79,7 +79,7 @@
         } else {
             [body appendString:@"<br/>"];
         }
-        NSString *titleFormat = ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil);
+        NSString *titleFormat = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_DOC_LINE_SIGNATURE", nil), nameStr];
         [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, imageTag?:@"&nbsp;", hr, [NSString stringWithFormat:titleFormat, signature.title]]];
     }
 
