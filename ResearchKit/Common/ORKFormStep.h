@@ -129,6 +129,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly) NSString *identifier;
 
 /**
+ A Boolean value indicating whether the form item is optional.
+ 
+ The default value of this property is `NO`. When the value is `YES`, this form item doesn't need
+ to be answered for the Continue/Done button of a step form to be enabled.
+ */
+@property (nonatomic, getter=isOptional) BOOL optional;
+
+/**
  A localized string that describes the form item.
  
  If the descriptive text is sufficiently short, you can display it as a prompt next to the item.
