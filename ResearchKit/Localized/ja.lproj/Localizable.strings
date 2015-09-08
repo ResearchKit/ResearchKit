@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "塔";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "ダブルタップして円盤を置く";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "ダブルタップして一番上の円盤を選択";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "次のサイズの円盤があります: ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@のサイズの円盤があります";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空";
 
 "AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
 "AX_GRAPH_AND_SEPARATOR" = "と";
-
-

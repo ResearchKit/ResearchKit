@@ -40,8 +40,8 @@ static const CGFloat LastLabelHeight = 20.0;
 @implementation ORKXAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
     CALayer *_lineLayer;
-    NSMutableArray *_titleLabels;
-    NSMutableArray *_titleTickLayers;
+    NSMutableArray<UILabel *> *_titleLabels;
+    NSMutableArray<CALayer *> *_titleTickLayers;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -77,11 +77,11 @@ static const CGFloat LastLabelHeight = 20.0;
         titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
         index++;
     }
-    ((UILabel *)_titleLabels.lastObject).layer.cornerRadius = LastLabelHeight * 0.5;
+    _titleLabels.lastObject.layer.cornerRadius = LastLabelHeight * 0.5;
 }
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     
     NSUInteger numberOfTitleLabels = _titleLabels.count;
     for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {
@@ -148,13 +148,13 @@ static const CGFloat LastLabelHeight = 20.0;
     _titleLabels = nil;
     _titleTickLayers = nil;
     
-    if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtIndex:)]) {
+    if ([_parentGraphChartView.dataSource respondsToSelector:@selector(graphChartView:titleForXAxisAtPointIndex:)]) {
         _titleLabels = [NSMutableArray new];
         _titleTickLayers = [NSMutableArray new];
 
         NSInteger numberOfTitleLabels = _parentGraphChartView.numberOfXAxisPoints;
         for (NSInteger i = 0; i < numberOfTitleLabels; i++) {
-            NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtIndex:i];
+            NSString *title = [_parentGraphChartView.dataSource graphChartView:_parentGraphChartView titleForXAxisAtPointIndex:i];
             UILabel *label = [UILabel new];
             label.text = title;
             label.font = _titleFont;

@@ -38,8 +38,6 @@ static const CGFloat ImageVerticalPadding = 3.0;
 
 @implementation ORKYAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
-    NSMutableArray *_titleTickLayers;
-    
     UIImageView *_maxImageView;
     UIImageView *_minImageView;
     

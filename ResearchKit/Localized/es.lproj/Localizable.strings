@@ -249,7 +249,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Una muleta";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Dos bastones";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Dos muletas";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "Andador/andador con ruedas";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Andador (con o sin ruedas)";
 "TIMED_WALK_INSTRUCTION_%@" = "Camina %@ en línea recta.";
 "TIMED_WALK_INSTRUCTION_2" = "Da la vuelta y camina hasta el punto de partida.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Pulsa OK cuando hayas acabado.";
@@ -262,9 +262,9 @@
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
 "PAVSAT_TITLE" = "PAVSAT";
-"PASAT_INTRO_TEXT" = "La Prueba de suma seriada auditiva por pasos mide tu velocidad de procesamiento de información auditiva y tu capacidad de cálculo.";
-"PVSAT_INTRO_TEXT" = "La Prueba de suma seriada visual por pasos mide tu velocidad de procesamiento de información visual y tu capacidad de cálculo.";
-"PAVSAT_INTRO_TEXT" = "La Prueba de suma seriada auditiva y visual por pasos mide tu velocidad de procesamiento de información auditiva y visual y tu capacidad de cálculo.";
+"PASAT_INTRO_TEXT" = "La prueba de suma seriada auditiva por pasos mide tu velocidad de procesamiento de información auditiva y tu capacidad de cálculo.";
+"PVSAT_INTRO_TEXT" = "La prueba de suma seriada visual por pasos mide tu velocidad de procesamiento de información visual y tu capacidad de cálculo.";
+"PAVSAT_INTRO_TEXT" = "La prueba de suma seriada auditiva y visual por pasos mide tu velocidad de procesamiento de información auditiva y visual y tu capacidad de cálculo.";
 "PSAT_INTRO_TEXT_2_%@" = "Cada %@ segundos se muestra un dígito.\nDebes sumar cada dígito nuevo al anterior.\nAtención: No debes calcular la suma total de todos los dígitos, sino solo la suma de los dos últimos números.";
 "PSAT_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
 "PSAT_INITIAL_INSTRUCTION" = "Recuerda este primer dígito.";
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Torre";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Pulsa dos veces para colocar el disco";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Pulsa dos veces para seleccionar el disco situado más arriba";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Contiene discos con los tamaños ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Tiene discos de tamaño %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vacía";
 
 "AX_GRAPH_RANGE_FORMAT" = "Rango de valores de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
-
-
