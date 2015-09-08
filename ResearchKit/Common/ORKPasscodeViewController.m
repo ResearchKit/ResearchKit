@@ -39,37 +39,39 @@
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
                                       passcodeType:(ORKPasscodeType)passcodeType
-                                          delegate:(id<ORKPasscodeAuthenticationDelegate>)delegate
+                                          delegate:(id<ORKPasscodeDelegate>)delegate
                               useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:kPasscodeStepIdentifier];
-    step.text = text;
-    
-    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowAuthenticate;
-    passcodeStepViewController.passcodeType = passcodeType;
-    passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.useTouchId = useTouchId;
-    passcodeStepViewController.step = step;
-    
-    ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
-    return navigationController;
+
+    return [self passcodeViewControllerWithText:text
+                                   passcodeType:passcodeType
+                                       delegate:delegate
+                          useTouchIdIfAvailable:useTouchId
+                                   passcodeFlow:ORKPasscodeFlowAuthenticate];
 }
 
 + (id)passcodeEditingViewControllerWithText:(NSString *)text
                                passcodeType:(ORKPasscodeType)passcodeType
-                                   delegate:(id<ORKPasscodeEditingDelegate>)delegate
+                                   delegate:(id<ORKPasscodeDelegate>)delegate
                        useTouchIdIfAvaiable:(BOOL)useTouchId {
     
+    return [self passcodeViewControllerWithText:text
+                                   passcodeType:passcodeType
+                                       delegate:delegate
+                          useTouchIdIfAvailable:useTouchId
+                                   passcodeFlow:ORKPasscodeFlowEdit];
+}
+
++ (id)passcodeViewControllerWithText:(NSString *)text
+                        passcodeType:(ORKPasscodeType)passcodeType
+                            delegate:(id<ORKPasscodeDelegate>)delegate
+               useTouchIdIfAvailable:(BOOL)useTouchId
+                        passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
+
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:kPasscodeStepIdentifier];
     step.text = text;
     
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowEdit;
+    passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeType = passcodeType;
     passcodeStepViewController.passcodeDelegate = delegate;
     passcodeStepViewController.useTouchId = useTouchId;

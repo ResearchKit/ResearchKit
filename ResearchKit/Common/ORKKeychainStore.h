@@ -30,18 +30,64 @@
 
 
 #import <Foundation/Foundation.h>
+#import "ORKDefines.h"
+
 
 /**
  The `ORKKeychainStore` class is an abstraction layer for the iOS keychain
  communication.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKKeychainStore : NSObject
 
+/**
+ Returns the data in the keychain for the provided key.
+ 
+ @param key         The key used to set the data in the keychain.
+ 
+ @return A NSData object or `nil` if key is not valid.
+ */
 + (NSData *)dataForKey:(NSString *)key;
+
+/**
+ Sets the given data in the keychain for the provided key.
+ 
+ @param data        The data to be stored in the keychain.
+ @param key         The key used to set the data in the keychain.
+ 
+ @return A boolean with a value `YES` if the data was saved; otherwise `NO'.
+ */
 + (BOOL)setData:(NSData *)data forKey:(NSString *)key;
+
+/**
+ Returns a string in the keychain for the provided key.
+ 
+ @param key         The key used to set the string in the keychain.
+ 
+ @return A string or `nil` if key is not valid.
+ */
 + (NSString *)stringForKey:(NSString *)key;
+
+/**
+ Sets the given string in the keychain for the provided key.
+ 
+ @param string      The string to be stored in the keychain.
+ @param key         The key used to set the string in the keychain.
+ 
+ @return A boolean with a value `YES` if the string was saved; otherwise `NO'.
+ */
 + (BOOL)setString:(NSString *)value forKey:(NSString *)key;
+
+/**
+ Removes the value in the keychain for the provided key.
+ 
+ @param key         The key used to set the value in the keychain.
+*/
 + (void)removeValueForKey:(NSString *)key;
+
+/**
+ Removes all values stored in the keychain for the app.
+*/
 + (void)resetKeychain;
 
 @end

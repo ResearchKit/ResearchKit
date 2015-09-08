@@ -30,9 +30,6 @@
 
 
 #import "ORKPasscodeStepView.h"
-#import "ORKHelpers.h"
-#import "ORKSkin.h"
-#import "ORKTintedImageView.h"
 
 
 @implementation ORKPasscodeStepView

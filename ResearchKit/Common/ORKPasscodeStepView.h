@@ -31,7 +31,6 @@
 
 #import "ORKVerticalContainerView.h"
 #import "ORKTextFieldView.h"
-#import "ORKDefines.h"
 
 
 @interface ORKPasscodeStepView : ORKVerticalContainerView

@@ -34,8 +34,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * const kPasscodeKey = @"ORKPasscode";
+static NSString * const kKeychainDictionaryPasscodeKey = @"passcode";
+static NSString * const kKeychainDictionaryTouchIdKey = @"touchIdEnabled";
 static NSString * const kPasscodeStepIdentifier = @"passcode_step";
-static NSInteger const  kMaxAttempts = 3;
 
 typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
     ORKPasscodeFlowCreate,
@@ -43,11 +45,20 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
     ORKPasscodeFlowEdit
 };
 
+typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
+    ORKPasscodeStateEntry,
+    ORKPasscodeStateConfirm,
+    ORKPasscodeStateSaved,
+    ORKPasscodeStateOldEntry,
+    ORKPasscodeStateNewEntry,
+    ORKPasscodeStateConfirmNewEntry
+};
+
 @interface ORKPasscodeStepViewController() <UITextFieldDelegate>
 
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic) ORKPasscodeType passcodeType;
-@property (nonatomic, weak, nullable) id passcodeDelegate;
+@property (nonatomic, weak, nullable) id<ORKPasscodeDelegate> passcodeDelegate;
 @property (nonatomic) BOOL useTouchId;
 
 @end

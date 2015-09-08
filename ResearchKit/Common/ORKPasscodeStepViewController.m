@@ -30,29 +30,15 @@
 
 
 #import "ORKPasscodeStepViewController.h"
+#import "ORKPasscodeStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKPasscodeStepView.h"
 #import "ORKPasscodeStep.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKTaskViewController_Internal.h"
-#import "ORKPasscodeStepViewController_Internal.h"
-#import "ORKSkin.h"
 #import "ORKKeychainStore.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
-
-static NSString * const kKeychainDictionaryPasscodeKey = @"passcode";
-static NSString * const kKeychainDictionaryTouchIdKey = @"touchIdEnabled";
-
-typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
-    ORKPasscodeStateEntry,
-    ORKPasscodeStateConfirm,
-    ORKPasscodeStateSaved,
-    ORKPasscodeStateOldEntry,
-    ORKPasscodeStateNewEntry,
-    ORKPasscodeStateConfirmNewEntry
-};
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
@@ -112,8 +98,15 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                 break;
         }
         
+        // If creating a new passcode, clear out the keychain.
+        if (self.passcodeFlow == ORKPasscodeFlowCreate) {
+            [self removePasscodeFromKeychain];
+            _useTouchId = YES;
+        }
+        
         // If Touch ID was enabled then present it for authentication flow.
-        if (self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
+        if (self.useTouchId &&
+            self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
             NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey];
             NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
             BOOL touchIdIsEnabled = [dictionary[kKeychainDictionaryTouchIdKey] boolValue];
@@ -141,11 +134,6 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self makePasscodeViewBecomeFirstResponder];
-    
-    // If creating a new passcode at any point, clear out the keychain.
-    if (self.passcodeFlow == ORKPasscodeFlowCreate) {
-        [self removePasscodeFromKeychain];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -286,9 +274,8 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                     // Send a delegate callback for authentication flow.
                     if (self.passcodeDelegate &&
                         self.passcodeFlow == ORKPasscodeFlowAuthenticate &&
-                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidAuthenticate:withTouchId:)]) {
-                        [self.passcodeDelegate passcodeViewControllerDidAuthenticate:self
-                                                                         withTouchId:_isTouchIdAuthenticated];
+                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                        [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
                     }
                 } else if (error.code != LAErrorUserCancel) {
                     // Display the error message.
@@ -313,8 +300,8 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
                     // If it is in editing flow, send a delegate callback.
                     if (self.passcodeDelegate &&
                         self.passcodeFlow == ORKPasscodeFlowEdit &&
-                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinish:)]) {
-                        [self.passcodeDelegate passcodeViewControllerDidFinish:self];
+                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                        [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
                     }
                 }
             });
@@ -335,8 +322,8 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             // If it is in editing flow, send a delegate callback.
             if (self.passcodeDelegate &&
                 self.passcodeFlow == ORKPasscodeFlowEdit &&
-                [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinish:)]) {
-                [self.passcodeDelegate passcodeViewControllerDidFinish:self];
+                [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
             }
         }
     }
@@ -445,9 +432,12 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
             _passcodeState = ORKPasscodeStateNewEntry;
             [self updatePasscodeView];
         } else {
+            // Failed authentication, send delegate callback.
             if (self.passcodeDelegate &&
                 [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerFailedAuthentication:)]) {
                 [self.passcodeDelegate passcodeViewControllerFailedAuthentication:self];
+                
+                // Visual cue.
                 [self wrongAttempt];
             }
         }
@@ -492,13 +482,16 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
     
     if (_passcodeState == ORKPasscodeStateEntry) {
         if ([self passcodeMatchesKeychain]) {
-            if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidAuthenticate:withTouchId:)]) {
-                [self.passcodeDelegate passcodeViewControllerDidAuthenticate:self
-                                                                 withTouchId:_isTouchIdAuthenticated];
+            // Passed authentication, send delegate callback.
+            if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
             }
         } else {
+            // Failed authentication, send delegate callback.
             if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerFailedAuthentication:)]) {
                 [self.passcodeDelegate passcodeViewControllerFailedAuthentication:self];
+                
+                // Visual cue.
                 [self wrongAttempt];
             }
         }

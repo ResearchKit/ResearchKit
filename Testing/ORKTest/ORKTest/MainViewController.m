@@ -166,7 +166,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeAuthenticationDelegate, ORKPasscodeEditingDelegate> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -2284,11 +2284,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Passcode delegate
 
-- (void)passcodeViewControllerDidAuthenticate:(UIViewController *)viewController withTouchId:(BOOL)touchId {
-    NSLog(@"Passcode authenticated.");
-    [viewController dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)passcodeViewControllerFailedAuthentication:(UIViewController *)viewController {
     NSLog(@"Passcode authentication failed.");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -2300,7 +2295,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [alert show];
 }
 
-- (void)passcodeViewControllerDidFinish:(UIViewController *)viewController {
+- (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
     NSLog(@"New passcode saved.");
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }

@@ -100,7 +100,7 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
-"PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Invalid input";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
