@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "탑";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "디스크를 놓으려면 이중 탭하십시오.";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "가장 위에 있는 디스크를 선택하려면 이중 탭하십시오.";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "디스크 크기";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ 크기의 디스크가 있음";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "비어 있음";
 
 "AX_GRAPH_RANGE_FORMAT" = "%@에서 %@까지의 범위";
 "AX_GRAPH_AND_SEPARATOR" = " 및 ";
-
-

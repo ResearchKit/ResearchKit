@@ -228,7 +228,7 @@
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "מגדל האנוי";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "פעילות זו מעריכה את מיומנויות פתרון הפאזלים שלך.";
-"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "הזז/י את המערום כולו אל הפלטפורמה המסומנת בכמה שפחות מהלכים שניתן.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "הזז/י את המערום כולו אל הפלטפורמה המסומנת בכמה שפחות מהלכים.";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "פתור/י את הפאזל";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "מספר מהלכים: %@ \n %@";
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "מגדל";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "הקש/י פעמיים למיקום הדיסקית";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "הקש/י פעמיים לבחירת הדיסקית הכי עליונה";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "כולל דיסקית עם גדלים ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "כולל דיסק בגדלים %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ריק";
 
 "AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
 "AX_GRAPH_AND_SEPARATOR" = " וגם";
-
-

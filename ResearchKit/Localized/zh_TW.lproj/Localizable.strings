@@ -250,7 +250,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "雙邊手杖";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "雙邊拐杖";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "助行器/四輪助行器";
-"TIMED_WALK_INSTRUCTION_%@" = "直線步行到最多 %ld。";
+"TIMED_WALK_INSTRUCTION_%@" = "直線步行到最多 %@。";
 "TIMED_WALK_INSTRUCTION_2" = "請掉頭並走回您的起點。";
 "TIMED_WALK_INSTRUCTION_TEXT" = "完成時，請點一下「完成」。";
 
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "塔座";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "點兩下來放置圓盤";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "點兩下來選取最上方的圓盤";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "包含的圓盤大小是 ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "容量為 %@ 的硬碟";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
 
 "AX_GRAPH_RANGE_FORMAT" = "範圍在 %@ 到 %@ 之間";
 "AX_GRAPH_AND_SEPARATOR" = " 和 ";
-
-

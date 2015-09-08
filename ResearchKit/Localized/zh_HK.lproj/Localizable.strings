@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "塔座";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "點兩下放置圓盤";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "點兩下選擇最上方的圓盤";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "其中的圓盤大小是 ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "其中的圓盤大小是 %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
 
 "AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
-
-

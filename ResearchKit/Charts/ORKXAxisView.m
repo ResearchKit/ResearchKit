@@ -40,8 +40,8 @@ static const CGFloat LastLabelHeight = 20.0;
 @implementation ORKXAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
     CALayer *_lineLayer;
-    NSMutableArray *_titleLabels;
-    NSMutableArray *_titleTickLayers;
+    NSMutableArray<UILabel *> *_titleLabels;
+    NSMutableArray<CALayer *> *_titleTickLayers;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -77,11 +77,11 @@ static const CGFloat LastLabelHeight = 20.0;
         titleTickLayer.frame = CGRectMake(positionOnXAxis - 0.5, -ORKGraphChartViewAxisTickLength, 1, ORKGraphChartViewAxisTickLength);
         index++;
     }
-    ((UILabel *)_titleLabels.lastObject).layer.cornerRadius = LastLabelHeight * 0.5;
+    _titleLabels.lastObject.layer.cornerRadius = LastLabelHeight * 0.5;
 }
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     
     NSUInteger numberOfTitleLabels = _titleLabels.count;
     for (NSUInteger i = 0; i < numberOfTitleLabels; i++) {

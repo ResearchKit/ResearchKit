@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Menara";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dwiketik untuk menempatkan cakera";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Dwiketik untuk memilih cakera teratas";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mempunyai cakera dengan saiz ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mempunyai cakera bersaiz %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
 
 "AX_GRAPH_RANGE_FORMAT" = "Julat daripada %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
-
-
