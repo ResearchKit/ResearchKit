@@ -244,16 +244,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKPasscodeResult : ORKResult
 
 /**
- A string containing the passcode entered by the user.
+ A boolean indicating if a passcode was saved or not.
  */
-@property (nonatomic, copy, nullable) NSString *passcode;
-
-/**
- A Boolean value indicating whether the user enabled Touch Id authentication or not.
- 
- The value of this property is `YES` when the user passes Touch Id authentication and `NO` otherwise.
- */
-@property (nonatomic, assign, getter=isTouchIdAuthenticated) BOOL touchIdAuthenticated;
+@property (nonatomic, assign, getter=isPasscodeSaved) BOOL passcodeSaved;
 
 @end
 

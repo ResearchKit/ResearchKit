@@ -32,6 +32,8 @@
 #import <ResearchKit/ORKStepViewController.h>
 
 
+static NSString * const kPasscodeKey = @"ORKPasscode";
+
 /**
  An `ORKPasscodeStepViewController` object is the view controller for an `ORKPasscodeStep` object.
  

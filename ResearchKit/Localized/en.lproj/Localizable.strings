@@ -101,9 +101,10 @@
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
 "PASSCODE_INVALID_ALERT_TITLE" = "Invalid passcode";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Please try again.";
-"PASSCODE_TOUCH_ID_MESSAGE" = "Use Touch ID?";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode progress indicator";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%d of %d digits entered";
 

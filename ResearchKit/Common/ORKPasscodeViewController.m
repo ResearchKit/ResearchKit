@@ -37,29 +37,6 @@
 
 @implementation ORKPasscodeViewController
 
-+ (id)passcodeCreationViewControllerWithText:(NSString *)text
-                                passcodeType:(ORKPasscodeType)passcodeType
-                                    delegate:(id<ORKPasscodeCreationDelegate>)delegate
-                        useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:kPasscodeStepIdentifier];
-    step.text = text;
-    
-    ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
-    passcodeStepViewController.passcodeFlow = ORKPasscodeFlowCreate;
-    passcodeStepViewController.passcodeType = passcodeType;
-    passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.useTouchId = useTouchId;
-    passcodeStepViewController.step = step;
-        
-    ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
-    return navigationController;
-}
-
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
                                       passcodeType:(ORKPasscodeType)passcodeType
                                           delegate:(id<ORKPasscodeAuthenticationDelegate>)delegate

@@ -181,15 +181,13 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, passcode);
-    ORK_ENCODE_BOOL(aCoder, touchIdAuthenticated);
+    ORK_ENCODE_BOOL(aCoder, passcodeSaved);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, passcode);
-        ORK_DECODE_BOOL(aDecoder, touchIdAuthenticated);
+        ORK_DECODE_BOOL(aDecoder, passcodeSaved);
     }
     return self;
 }
@@ -201,19 +199,17 @@
     
     __typeof(self) castObject = object;
     
-    return (ORKEqualObjects(self.passcode, castObject.passcode) &&
-            (self.isTouchIdAuthenticated == castObject.isTouchIdAuthenticated));
+    return ((self.isPasscodeSaved == castObject.isPasscodeSaved));
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKPasscodeResult *result = [super copyWithZone:zone];
-    result.passcode = self.passcode;
-    result.touchIdAuthenticated = self.isTouchIdAuthenticated;
+    result.passcodeSaved = self.isPasscodeSaved;
     return result;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %d", [super description], self.passcode, self.isTouchIdAuthenticated];
+    return [NSString stringWithFormat:@"%@ %d", [super description], self.isPasscodeSaved];
 }
 
 @end

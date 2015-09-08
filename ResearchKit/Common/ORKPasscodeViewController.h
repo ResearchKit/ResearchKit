@@ -36,36 +36,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The passcode creation delegate protocol declares methods which forward the success of passcode
- creation with or without Touch ID.
- */
-ORK_AVAILABLE_DECL
-@protocol ORKPasscodeCreationDelegate <NSObject>
-
-@required
-/**
- Notifies the delegate that the user has finished setting up passcode with or without Touch ID.
- 
- @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
- @param passcode            A string containing the passcode entered by the user.
- @param touchId             A boolean indicating whether Touch Id was enabled or not.
- */
-- (void)passcodeViewController:(UIViewController *)viewController didFinishWithPasscode:(NSString *)passcode andTouchIdEnabled:(BOOL)touchId;
-
-@optional
-/**
- Notifies the delegate that the user hit the cancel button item. The cancel button item will only be visible
- if this method is implemented.
- 
- @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
- 
- */
-- (void)passcodeViewControllerDidCancel:(UIViewController *)viewController;
-
-@end
-
-
-/**
  The passcode authentication delegate protocol declares methods which forward the raw passcode input
  for validation and authentication of the passcode with or without Touch Id.
  */
@@ -74,22 +44,19 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Asks the delegate if the inputted passcode is valid or not.
- 
- @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
- @param passcode            A string containing the passcode entered by the user.
- 
- @return A boolean with value 'YES' if passcode is valid; otherwise, 'NO'.
- */
-- (BOOL)passcodeViewController:(UIViewController *)viewController isPasscodeValid:(NSString *)passcode;
-
-/**
  Notifies the delegate that the user was authenticated.
  
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param touchId             A boolean indicating if the authentication was performed with Touch ID or not.
  */
-- (void)passcodeViewController:(UIViewController *)viewController didAuthenticateUsingTouchId:(BOOL)touchId;
+- (void)passcodeViewControllerDidAuthenticate:(UIViewController *)viewController withTouchId:(BOOL)touchId;
+
+/**
+ Notifies the delegate that the user failed authentication.
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ */
+- (void)passcodeViewControllerFailedAuthentication:(UIViewController *)viewController;
 
 @optional
 /**
@@ -112,23 +79,20 @@ ORK_AVAILABLE_DECL
 
 @required
 /**
- Notifies the delegate that the user has finished entering their passcode.
- 
- @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
- @param passcode            A string containing the passcode entered by the user.
- 
- @return A boolean with value 'YES' if passcode is valid; otherwise, 'NO'.
- */
-- (BOOL)passcodeViewController:(UIViewController *)viewController isPasscodeValid:(NSString *)passcode;
-
-/**
  Notifies the delegate that the user has finished setting up passcode with or without Touch ID.
  
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  @param passcode            A string containing the passcode entered by the user.
  @param touchId             A boolean indicating whether Touch Id was enabled or not.
  */
-- (void)passcodeViewController:(UIViewController *)viewController didFinishWithPasscode:(NSString *)passcode andTouchIdEnabled:(BOOL)touchId;
+- (void)passcodeViewControllerDidFinish:(UIViewController *)viewController;
+
+/**
+ Notifies the delegate that the user failed authentication.
+ 
+ @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
+ */
+- (void)passcodeViewControllerFailedAuthentication:(UIViewController *)viewController;
 
 @optional
 /**
@@ -153,11 +117,6 @@ ORK_AVAILABLE_DECL
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
-
-+ (id)passcodeCreationViewControllerWithText:(nullable NSString *)text
-                                passcodeType:(ORKPasscodeType)passcodeType
-                                    delegate:(id<ORKPasscodeCreationDelegate>)delegate
-                        useTouchIdIfAvaiable:(BOOL)useTouchId;
 
 + (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
                                       passcodeType:(ORKPasscodeType)passcodeType
