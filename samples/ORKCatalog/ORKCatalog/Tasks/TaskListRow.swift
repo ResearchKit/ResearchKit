@@ -277,6 +277,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousVerticalScaleQuestionStep
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
+        case DiscreteScaleHiddenValueLabelQuestionStep
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -612,7 +613,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         step7AnswerFormat.hideValueLabel = true
         
-        let questionStep7 = ORKQuestionStep(identifier: String(Identifier.DiscreteScaleQuestionStep), title: exampleQuestionText, answer: step1AnswerFormat)
+        let questionStep7 = ORKQuestionStep(identifier: String(Identifier.DiscreteScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step1AnswerFormat)
         
         questionStep7.text = exampleDetailText
         
