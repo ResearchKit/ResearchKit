@@ -308,7 +308,7 @@ static NSString * const FilledBullet = @"\u25CF";
     return suffixWidth;
 }
 
-static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right = 6};
+static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     CGRect textRect = [super textRectForBounds:bounds];
