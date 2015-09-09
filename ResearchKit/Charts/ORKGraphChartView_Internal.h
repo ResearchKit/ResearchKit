@@ -58,20 +58,20 @@ inline static CAShapeLayer *graphLineLayer() {
     return lineLayer;
 }
 
-static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
-    return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
+static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
+    return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
 
 @interface ORKGraphChartView ()
 
-@property (nonatomic) NSMutableArray *lineLayers;
+@property (nonatomic) NSMutableArray<NSMutableArray<CAShapeLayer *> *> *lineLayers;
 
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic) NSMutableArray *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic) UIView *plotView; // Holds the plots
 
@@ -82,8 +82,6 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (void)sharedInit;
 
 - (NSInteger)numberOfPlots;
-
-- (ORKRangedPoint *)dataPointAtPlotIndex:(NSUInteger)plotIndex pointIndex:(NSUInteger)pointIndex;
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
 

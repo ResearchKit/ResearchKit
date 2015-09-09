@@ -71,11 +71,12 @@
 }
 
 - (void)updateSeparatorInsets {
+    
     if (self.topSeparatorLeftInset > 0) {
-        self.topSeparatorLeftInset = ORKStandardHorizontalMarginForView(self);
+        self.topSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
     }
     if (self.bottomSeparatorLeftInset > 0) {
-        self.bottomSeparatorLeftInset = ORKStandardHorizontalMarginForView(self);
+        self.bottomSeparatorLeftInset = ORKStandardLeftMarginForTableViewCell(self);
     }
 }
 

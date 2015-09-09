@@ -250,7 +250,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Deux cannes";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Deux béquilles";
 "TIMED_WALK_QUESTION_2_CHOICE_6" = "Cadre de marche / ambulateur";
-"TIMED_WALK_INSTRUCTION_%@" = "Parcourez %ld en ligne droite.";
+"TIMED_WALK_INSTRUCTION_%@" = "Parcourez %@ en ligne droite.";
 "TIMED_WALK_INSTRUCTION_2" = "Retournez-vous, puis marchez vers votre point de départ.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Touchez OK lorsque vous avez terminé.";
 
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tour";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Touchez deux fois pour placer le disque.";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Touchez deux fois pour sélectionner le disque le plus haut.";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Comporte des disques de tailles différentes";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Comporte des disques de tailles %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Vide";
 
 "AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
 "AX_GRAPH_AND_SEPARATOR" = " et ";
-
-

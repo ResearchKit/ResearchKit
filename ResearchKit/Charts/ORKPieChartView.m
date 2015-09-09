@@ -72,7 +72,7 @@ static const CGFloat PieToLegendPadding = 8.0;
 
 
 @implementation ORKPieChartView {
-    NSMutableArray *_variableConstraints;
+    NSMutableArray<NSLayoutConstraint *> *_variableConstraints;
 
     ORKPieChartPieView *_pieView;
     ORKPieChartLegendView *_legendView;
@@ -218,7 +218,7 @@ static const CGFloat PieToLegendPadding = 8.0;
 }
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_pieView);
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_pieView]|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -368,8 +368,8 @@ static const CGFloat PieToLegendPadding = 8.0;
     return NO;
 }
 
-- (NSArray *)accessibilityElements {
-    NSMutableArray *accessibilityElements = [[NSMutableArray alloc] init];
+- (NSArray<id> *)accessibilityElements {
+    NSMutableArray<id> *accessibilityElements = [[NSMutableArray alloc] init];
     [accessibilityElements addObjectsFromArray:_titleTextView.accessibilityElements];
     
     // Use legends if there are any and percentage labels if not

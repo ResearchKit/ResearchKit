@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Věž";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Poklepáním umístíte disk";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Poklepáním vyberte vrchní disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje disk o velikostech ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje disky o velikosti %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdné";
 
 "AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
-
-

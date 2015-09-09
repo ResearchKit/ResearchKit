@@ -74,7 +74,7 @@ const CGFloat DotToLabelPadding = 6.0;
 #pragma mark - Layout
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _dotView);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_titleLabel]-(>=0)-|"

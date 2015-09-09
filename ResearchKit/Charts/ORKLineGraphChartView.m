@@ -75,9 +75,9 @@ const CGFloat FillColorAlpha = 0.4;
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
     BOOL previousPointExists = NO;
     BOOL emptyDataPresent = NO;
-    NSUInteger pointCount = ((NSArray *)self.dataPoints[plotIndex]).count;
+    NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        if ([self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex].isUnset) {
+        if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             emptyDataPresent = YES;
             continue;
         }
@@ -121,9 +121,9 @@ const CGFloat FillColorAlpha = 0.4;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangedPoint *positionOnYAxis = nil;
     BOOL previousPointExists = NO;
-    NSUInteger pointCount = ((NSArray *)self.yAxisPoints[plotIndex]).count;
+    NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        if ([self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex].isUnset) {
+        if (self.dataPoints[plotIndex][pointIndex].isUnset) {
             continue;
         }
         
@@ -139,7 +139,7 @@ const CGFloat FillColorAlpha = 0.4;
         }
         
         positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
-        positionOnYAxis = (ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex];
+        positionOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
         
         if (!previousPointExists) {
             continue;
@@ -181,8 +181,8 @@ const CGFloat FillColorAlpha = 0.4;
         CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
         CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
         
-        CGFloat y1 = [self dataPointAtPlotIndex:plotIndex pointIndex:previousValidIndex].minimumValue;
-        CGFloat y2 = [self dataPointAtPlotIndex:plotIndex pointIndex:nextValidIndex].minimumValue;
+        CGFloat y1 = self.dataPoints[plotIndex][previousValidIndex].minimumValue;
+        CGFloat y2 = self.dataPoints[plotIndex][nextValidIndex].minimumValue;
         
         if (y1 == ORKCGFloatInvalidValue || y2 == ORKCGFloatInvalidValue) {
             return ORKCGFloatInvalidValue;
@@ -207,8 +207,8 @@ const CGFloat FillColorAlpha = 0.4;
     CGFloat x1 = xAxisPoint(previousValidIndex, numberOfXAxisPoints, viewWidth);
     CGFloat x2 = xAxisPoint(nextValidIndex, numberOfXAxisPoints, viewWidth);
     
-    CGFloat y1 = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][previousValidIndex]).minimumValue;
-    CGFloat y2 = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][nextValidIndex]).minimumValue;
+    CGFloat y1 = self.yAxisPoints[plotIndex][previousValidIndex].minimumValue;
+    CGFloat y2 = self.yAxisPoints[plotIndex][nextValidIndex].minimumValue;
         
     CGFloat slope = (y2 - y1)/(x2 - x1);
     
@@ -221,9 +221,9 @@ const CGFloat FillColorAlpha = 0.4;
 - (NSInteger)nextValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     NSUInteger validPosition = pointIndex;
     
-    NSUInteger pointCountMinusOne = (((NSArray *)self.dataPoints[plotIndex]).count - 1);
+    NSUInteger pointCountMinusOne = (self.dataPoints[plotIndex].count - 1);
     while (validPosition < pointCountMinusOne) {
-        if ([self dataPointAtPlotIndex:plotIndex pointIndex:validPosition].maximumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].maximumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition++;
@@ -235,7 +235,7 @@ const CGFloat FillColorAlpha = 0.4;
 - (NSInteger)previousValidPointIndexForPointIndex:(NSInteger)pointIndex plotIndex:(NSInteger)plotIndex {
     NSInteger validPosition = pointIndex - 1;
     while (validPosition > 0) {
-        if ([self dataPointAtPlotIndex:plotIndex pointIndex:validPosition].minimumValue != ORKCGFloatInvalidValue) {
+        if (self.dataPoints[plotIndex][validPosition].minimumValue != ORKCGFloatInvalidValue) {
             break;
         }
         validPosition--;
