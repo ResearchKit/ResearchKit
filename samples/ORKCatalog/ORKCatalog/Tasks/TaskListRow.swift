@@ -618,8 +618,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         questionStep7.text = exampleDetailText
         
-        // The eight step is a horizontal continuous scale control with a hidden value label.
-        let step8AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
+        // The eight step is a vertical continuous scale control with a hidden value label.
+        let step8AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
         
         step8AnswerFormat.hideValueLabel = true
         
