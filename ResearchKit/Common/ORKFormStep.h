@@ -47,10 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
  in the task view controller.
  
  Each question in the form is represented by an `ORKFormItem` object. The form items have an
- `optional` property that defaults to `YES`. All non-optional questions need to be answered for the
+ `optional` property that defaults to `YES`. All required questions need to be answered for the
  Continue button to be enabled. If all the form items are optional, at least one question needs to
  be answered for the Continue button to be enabled. You can allow the user to completely skip a
- form step using the Skip button, even if it has non-optional form items, by setting the form step
+ form step using the Skip button, even if it has required form items, by setting the form step
  `optional` property to yes.
  
  The form can be broken into sections by using an `ORKFormItem` object that includes only a section

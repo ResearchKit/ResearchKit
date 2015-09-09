@@ -1512,7 +1512,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Non-optional form step" text:nil];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Required form step" text:nil];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_001"
                                                                text:@"Value"
                                                        answerFormat:[ORKNumericAnswerFormat valuePickerAnswerFormatWithTextChoices:@[@"1", @"2", @"3"]]];
@@ -1546,7 +1546,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_000" title:@"Optional Form Items" text:@"Optional form with all optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_000" title:@"Optional Form Items" text:@"Optional form with no required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
@@ -1577,7 +1577,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_001" title:@"Optional Form Items" text:@"Optional form with some optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_001" title:@"Optional Form Items" text:@"Optional form with some required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
@@ -1605,7 +1605,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Required"];
             [items addObject:item];
         }
 
@@ -1631,12 +1631,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Optional Form Items" text:@"Optional form with no optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Optional Form Items" text:@"Optional form with all items required"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Required"];
             [items addObject:item];
         }
 
@@ -1682,7 +1682,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_003" title:@"Optional Form Items" text:@"Non-optional form with all optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_003" title:@"Optional Form Items" text:@"Required form with no required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
@@ -1714,7 +1714,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_004" title:@"Optional Form Items" text:@"Non-optional form with some optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_004" title:@"Optional Form Items" text:@"Required form with some required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
@@ -1742,7 +1742,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Required"];
             [items addObject:item];
         }
 
@@ -1769,12 +1769,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_005" title:@"Optional Form Items" text:@"Non-optional form with no optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_005" title:@"Optional Form Items" text:@"Required form with all items required"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Required"];
             [items addObject:item];
         }
 
