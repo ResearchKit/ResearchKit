@@ -613,7 +613,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         step7AnswerFormat.hideValueLabel = true
         
-        let questionStep7 = ORKQuestionStep(identifier: String(Identifier.DiscreteScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step1AnswerFormat)
+        let questionStep7 = ORKQuestionStep(identifier: String(Identifier.DiscreteScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step7AnswerFormat)
         
         questionStep7.text = exampleDetailText
         
