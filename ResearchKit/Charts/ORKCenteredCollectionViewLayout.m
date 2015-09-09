@@ -32,8 +32,8 @@
 
 @implementation ORKCenteredCollectionViewLayout
 
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
+- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSArray<UICollectionViewLayoutAttributes *> *attributesArray = [super layoutAttributesForElementsInRect:rect];
     for (UICollectionViewLayoutAttributes *attributes in attributesArray) {
         attributes.frame = [self layoutAttributesForItemAtIndexPath:attributes.indexPath].frame;
     }

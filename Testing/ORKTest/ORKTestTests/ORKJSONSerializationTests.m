@@ -391,6 +391,9 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
 
         }
         
+        if ([aClass isSubclassOfClass:[ORKTextScaleAnswerFormat class]]) {
+            [instance setValue:@[[ORKTextChoice choiceWithText:@"Poor" value:@1], [ORKTextChoice choiceWithText:@"Excellent" value:@2]] forKey:@"textChoices"];
+        }
         if ([aClass isSubclassOfClass:[ORKContinuousScaleAnswerFormat class]]) {
             [instance setValue:@(100) forKey:@"maximum"];
             [instance setValue:@(ORKNumberFormattingStylePercent) forKey:@"numberStyle"];

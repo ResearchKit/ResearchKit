@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Башня";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Коснитесь дважды, чтобы положить диск";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Коснитесь дважды, чтобы выбрать самый верхний диск";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Содержит диск размера ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Содержит диск размера %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
 
 "AX_GRAPH_RANGE_FORMAT" = "Диапазон от %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " и ";
-
-

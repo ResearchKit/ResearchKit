@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Kule";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Diski yerleştirmek için çift dokunun";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "En üstteki diski seçmek için çift dokunun";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Şu büyüklüklerde disk içeriyor: ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "%@ büyüklüklerinde disk içeriyor";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Boş";
 
 "AX_GRAPH_RANGE_FORMAT" = "%@ - %@ aralığında";
 "AX_GRAPH_AND_SEPARATOR" = " ve ";
-
-

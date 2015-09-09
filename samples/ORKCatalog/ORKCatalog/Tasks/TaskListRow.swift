@@ -275,6 +275,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousScaleQuestionStep
         case DiscreteVerticalScaleQuestionStep
         case ContinuousVerticalScaleQuestionStep
+        case TextScaleQuestionStep
+        case TextVerticalScaleQuestionStep
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -590,11 +592,29 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         questionStep4.text = exampleDetailText
         
+        // The fifth step is a scale control that allows text choices.
+        let textChoices : [ORKTextChoice] = [ORKTextChoice(text: "Poor", value: 1), ORKTextChoice(text: "Fair", value: 2), ORKTextChoice(text: "Good", value: 3), ORKTextChoice(text: "Above Average", value: 10), ORKTextChoice(text: "Excellent", value: 5)]
+
+        let step5AnswerFormat = ORKAnswerFormat.textScaleAnswerFormatWithTextChoices(textChoices, defaultIndex: NSIntegerMax, vertical: false)
+        
+        let questionStep5 = ORKQuestionStep(identifier: String(Identifier.TextScaleQuestionStep), title: exampleQuestionText, answer: step5AnswerFormat)
+        
+        questionStep5.text = exampleDetailText
+        
+        // The sixth step is a vertical scale control that allows text choices.
+        let step6AnswerFormat = ORKAnswerFormat.textScaleAnswerFormatWithTextChoices(textChoices, defaultIndex: NSIntegerMax, vertical: true)
+        
+        let questionStep6 = ORKQuestionStep(identifier: String(Identifier.TextVerticalScaleQuestionStep), title: exampleQuestionText, answer: step6AnswerFormat)
+        
+        questionStep6.text = exampleDetailText
+        
         return ORKOrderedTask(identifier: String(Identifier.ScaleQuestionTask), steps: [
             questionStep1,
             questionStep2,
             questionStep3,
-            questionStep4
+            questionStep4,
+            questionStep5,
+            questionStep6
             ])
     }
     

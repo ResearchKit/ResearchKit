@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Toranj";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dodirnite dvaput za stavljanje pločice";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Dodirnite dvaput za odabir najviše pločice";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima pločicu veličine ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima pločicu veličine %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Isprazni";
 
 "AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
-
-

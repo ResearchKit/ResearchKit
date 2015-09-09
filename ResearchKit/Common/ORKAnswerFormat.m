@@ -270,6 +270,14 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
                                                 minimumValueDescription:minimumValueDescription];
 }
 
++ (ORKTextScaleAnswerFormat *)textScaleAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
+                                                      defaultIndex:(NSInteger)defaultIndex
+                                                          vertical:(BOOL)vertical {
+    return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:textChoices
+                                                    defaultIndex:defaultIndex
+                                                        vertical:vertical];
+}
+
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
 }
@@ -1366,6 +1374,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
+- (NSArray<ORKTextChoice *> *)textChoices {
+    return nil;
+}
+
 - (NSNumberFormatter *)numberFormatter {
     if (! _numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1564,6 +1576,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 
+- (NSArray<ORKTextChoice *> *)textChoices {
+    return nil;
+}
+
 - (NSNumberFormatter *)numberFormatter {
     if (! _numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
@@ -1664,6 +1680,138 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (ORKQuestionType) questionType {
+    return ORKQuestionTypeScale;
+}
+
+@end
+
+
+#pragma mark - ORKTextScaleAnswerFormat
+
+@implementation ORKTextScaleAnswerFormat {
+    NSNumberFormatter *_numberFormatter;
+}
+
+- (Class)questionResultClass {
+    return [ORKScaleQuestionResult class];
+}
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex
+                           vertical:(BOOL)vertical {
+    self = [super init];
+    if (self) {
+        _textChoices = [textChoices copy];
+        _defaultIndex = defaultIndex;
+        _vertical = vertical;
+        
+        [self validateParameters];
+    }
+    return self;
+}
+
+- (instancetype)initWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices
+                       defaultIndex:(NSInteger)defaultIndex{
+    return [self initWithTextChoices:textChoices
+                        defaultIndex:defaultIndex
+                            vertical:NO];
+}
+
+- (NSNumber *)minimumNumber {
+    return @(1);
+}
+- (NSNumber *)maximumNumber {
+    return @(self.textChoices.count);
+}
+- (NSNumber *)defaultNumber {
+    if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
+        return nil;
+    }
+    return @(_defaultIndex);
+}
+- (NSString *)localizedStringForNumber:(NSNumber *)number {
+    return [self.numberFormatter stringFromNumber:number];
+}
+- (NSString *)minimumValueDescription {
+    return ((ORKTextChoice *)[self.textChoices firstObject]).text;
+}
+- (NSString *)maximumValueDescription {
+    return ((ORKTextChoice *)[self.textChoices lastObject]).text;
+}
+- (UIImage *)minimumImage {
+    return nil;
+}
+- (UIImage *)maximumImage {
+    return nil;
+}
+
+- (NSNumberFormatter *)numberFormatter {
+    if (! _numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
+        _numberFormatter.maximumFractionDigits = 0;
+    }
+    return _numberFormatter;
+}
+
+- (NSInteger)numberOfSteps {
+    return self.textChoices.count - 1;
+}
+
+- (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
+    return @([number integerValue]);
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (_textChoices.count < 2) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Must have a minimum of 2 text choices." userInfo:nil];
+    } else if (_textChoices.count > 8) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Cannot have more than 8 text choices." userInfo:nil];
+    }
+    
+    ORKValidateArrayForObjectsOfClass(_textChoices, [ORKTextChoice class], @"Text choices must be of class ORKTextChoice.");
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_ARRAY(aDecoder, textChoices, ORKTextChoice);
+        ORK_DECODE_INTEGER(aDecoder, defaultIndex);
+        ORK_DECODE_BOOL(aDecoder, vertical);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, textChoices);
+    ORK_ENCODE_INTEGER(aCoder, defaultIndex);
+    ORK_ENCODE_BOOL(aCoder, vertical);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(_textChoices, castObject.textChoices) &&
+            (_defaultIndex == castObject.defaultIndex) &&
+            (_vertical == castObject.vertical));
+}
+
+- (ORKQuestionType)questionType {
     return ORKQuestionTypeScale;
 }
 

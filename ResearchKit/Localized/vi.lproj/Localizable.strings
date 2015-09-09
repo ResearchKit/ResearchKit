@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tháp";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Chạm hai lần để đặt đĩa";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Chạm hai lần để chọn đĩa trên cùng";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Có đĩa với các kích cỡ ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Có đĩa có kích cỡ %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Trống";
 
 "AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
-
-

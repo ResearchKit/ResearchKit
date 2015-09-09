@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tårn";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Dobbelttrykk for å plassere skiven";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Dobbelttrykk for å velge øverste skive";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skiver med størrelse ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
 
 "AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
-
-

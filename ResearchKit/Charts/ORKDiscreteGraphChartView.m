@@ -61,9 +61,9 @@
 }
 
 - (void)updateLineLayersForPlotIndex:(NSInteger)plotIndex {
-    NSUInteger pointCount = ((NSArray *)self.dataPoints[plotIndex]).count;
+    NSUInteger pointCount = self.dataPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
-        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
+        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             CAShapeLayer *lineLayer = graphLineLayer();
             lineLayer.strokeColor = [self colorForplotIndex:plotIndex].CGColor;
@@ -79,10 +79,10 @@
     NSUInteger lineLayerIndex = 0;
     CGFloat positionOnXAxis = ORKCGFloatInvalidValue;
     ORKRangedPoint *positionOnYAxis = nil;
-    NSUInteger pointCount = ((NSArray *)self.yAxisPoints[plotIndex]).count;
+    NSUInteger pointCount = self.yAxisPoints[plotIndex].count;
     for (NSUInteger pointIndex = 0; pointIndex < pointCount; pointIndex++) {
         
-        ORKRangedPoint *dataPointValue = [self dataPointAtPlotIndex:plotIndex pointIndex:pointIndex];
+        ORKRangedPoint *dataPointValue = self.dataPoints[plotIndex][pointIndex];
         
         if (!dataPointValue.isUnset && !dataPointValue.hasEmptyRange) {
             
@@ -90,7 +90,7 @@
             
             positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, self.plotView.bounds.size.width);
             positionOnXAxis += [self offsetForPlotIndex:plotIndex];
-            positionOnYAxis = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex]);
+            positionOnYAxis = self.yAxisPoints[plotIndex][pointIndex];
             
             [linePath moveToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.minimumValue)];
             [linePath addLineToPoint:CGPointMake(positionOnXAxis, positionOnYAxis.maximumValue)];
@@ -127,7 +127,7 @@
     CGFloat canvasYPosition = 0;
     if (snapped) {
         NSInteger pointIndex = [self pointIndexForXPosition:xPosition];
-        canvasYPosition = ((ORKRangedPoint *)self.yAxisPoints[plotIndex][pointIndex-1]).maximumValue;
+        canvasYPosition = self.yAxisPoints[plotIndex][pointIndex-1].maximumValue;
     }
     return canvasYPosition;
 }

@@ -37,8 +37,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKLineGraphChartView` class presents data provided by an object conforming to the
- `ORKGraphChartViewDataSource` as a line graph.
+ The `ORKLineGraphChartView` class presents the data provided by an object conforming to the
+ `ORKGraphChartViewDataSource` protocol as a line graph.
  
  The primary plot is colored by the `tintColor`, and any additional plots are colored using the
  `referenceLineColor`.
