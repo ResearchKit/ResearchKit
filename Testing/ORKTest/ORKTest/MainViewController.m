@@ -2284,7 +2284,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Passcode delegate
 
-- (void)passcodeViewControllerFailedAuthentication:(UIViewController *)viewController {
+- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
     NSLog(@"Passcode authentication failed.");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                     message:@"Passcode authentication failed"

@@ -35,6 +35,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * const kPasscodeKey = @"ORKPasscode";
+
 /**
  The passcode delegate protocol declares methods which forward the success or failure of passcode modification
  or authentication.
@@ -55,7 +57,7 @@ ORK_AVAILABLE_DECL
  
  @param viewController      The `ORKPasscodeStepViewController` object in which the passcode input is entered.
  */
-- (void)passcodeViewControllerFailedAuthentication:(UIViewController *)viewController;
+- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController;
 
 @optional
 /**

@@ -39,31 +39,36 @@ static NSString *_defaultService;
 #pragma mark - Public Methods
 
 + (BOOL)setData:(NSData *)data
-         forKey:(NSString *)key {
-    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil];
+         forKey:(NSString *)key
+          error:(NSError **)error {
+    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil error:error];
 }
 
-+ (NSData *)dataForKey:(NSString *)key {
-    return [self dataForKey:key service:[self defaultService] accessGroup:nil];
++ (NSData *)dataForKey:(NSString *)key
+                 error:(NSError **)error {
+    return [self dataForKey:key service:[self defaultService] accessGroup:nil error:error];
 }
 
 + (BOOL)setString:(NSString *)value
-           forKey:(NSString *)key {
+           forKey:(NSString *)key
+            error:(NSError **)error {
     NSData *data = [value dataUsingEncoding:NSUTF8StringEncoding];
-    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil];
+    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil error:error];
 }
 
-+ (NSString *)stringForKey:(NSString *)key {
-    NSData *data = [self dataForKey:key service:[self defaultService] accessGroup:nil];
++ (NSString *)stringForKey:(NSString *)key
+                     error:(NSError **)error {
+    NSData *data = [self dataForKey:key service:[self defaultService] accessGroup:nil error:error];
     return data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
 }
 
-+ (void)removeValueForKey:(NSString *)key {
-    [self removeItemForKey:key service:[self defaultService] accessGroup:nil];
++ (BOOL)removeValueForKey:(NSString *)key
+                    error:(NSError **)error {
+    return [self removeItemForKey:key service:[self defaultService] accessGroup:nil error:error];
 }
 
-+ (void)resetKeychain {
-    [self removeAllItemsForService:[self defaultService] accessGroup:nil];
++ (BOOL)resetKeychainWithError:(NSError **)error {
+    return [self removeAllItemsForService:[self defaultService] accessGroup:nil error:error];
 }
 
 #pragma mark - Private Methods
@@ -76,10 +81,11 @@ static NSString *_defaultService;
     return _defaultService;
 }
 
-+ (NSData *)dataForKey:(NSString *) key
-               service:(NSString *) service
-           accessGroup:(NSString *) __unused accessGroup {
-    NSData * ret = nil;
++ (NSData *)dataForKey:(NSString *)key
+               service:(NSString *)service
+           accessGroup:(NSString *)accessGroup
+                 error:(NSError **)error {
+    NSData *ret = nil;
     if (key) {
         if (!service) {
             service = [self defaultService];
@@ -100,7 +106,11 @@ static NSString *_defaultService;
         CFTypeRef data = nil;
         OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &data);
         if (status != errSecSuccess) {
-//            APCLogDebug(@"SecItemCopyMatching query failed with error code: %lii", status);
+            if (error) {
+                *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                             code:status
+                                         userInfo:nil];
+            }
             return nil;
         }
         
@@ -115,7 +125,8 @@ static NSString *_defaultService;
 + (BOOL)setData:(NSData *)data
          forKey:(NSString *)key
         service:(NSString *)service
-    accessGroup:(NSString *)accessGroup {
+    accessGroup:(NSString *)accessGroup
+          error:(NSError **)error {
     BOOL retValue = NO;
     if (key) {
         if (!service) {
@@ -140,10 +151,15 @@ static NSString *_defaultService;
                 
                 status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)attributesToUpdate);
                 if (status != errSecSuccess) {
-                    goto errReturn;
+                    if (error) {
+                        *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                                     code:status
+                                                 userInfo:nil];
+                    }
+                    return retValue;
                 }
             } else {
-                [self removeItemForKey:key service:service accessGroup:accessGroup];
+                [self removeItemForKey:key service:service accessGroup:accessGroup error:error];
             }
         } else if (status == errSecItemNotFound) {
             NSMutableDictionary *attributes = [[NSMutableDictionary alloc] init];
@@ -162,23 +178,25 @@ static NSString *_defaultService;
             
             status = SecItemAdd((__bridge CFDictionaryRef)attributes, NULL);
             if (status != errSecSuccess) {
-                goto errReturn;
+                if (error) {
+                    *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                                 code:status
+                                             userInfo:nil];
+                }
+                return retValue;
             }
-        }
-        else
-        {
-            goto errReturn;
+        } else {
+            return retValue;
         }
         retValue = YES;
     }
-    
-errReturn:
     return retValue;
 }
 
-+ (BOOL)removeItemForKey:(NSString *) key
-                 service:(NSString *) service
-             accessGroup:(NSString *) __unused accessGroup {
++ (BOOL)removeItemForKey:(NSString *)key
+                 service:(NSString *)service
+             accessGroup:(NSString *)accessGroup
+                   error:(NSError **)error {
     BOOL retValue = NO;
     if (key) {
         if (!service) {
@@ -197,20 +215,23 @@ errReturn:
         
         OSStatus status = SecItemDelete((__bridge CFDictionaryRef)itemToDelete);
         if (status != errSecSuccess && status != errSecItemNotFound) {
+            if (error) {
+                *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                             code:status
+                                         userInfo:nil];
+            }
             retValue = NO;
-        }
-        else
-        {
+        } else {
             retValue = YES;
         }
     }
-    
     return retValue;
 }
 
 + (BOOL)removeAllItemsForService:(NSString *)service
-                     accessGroup:(NSString *)accessGroup {
-    NSArray *items = [self itemsForService:service accessGroup:accessGroup];
+                     accessGroup:(NSString *)accessGroup
+                           error:(NSError **)error {
+    NSArray *items = [self itemsForService:service accessGroup:accessGroup error:error];
     BOOL retValue = NO;
     for (NSDictionary *item in items) {
         NSMutableDictionary *itemToDelete = [[NSMutableDictionary alloc] initWithDictionary:item];
@@ -218,19 +239,22 @@ errReturn:
         
         OSStatus status = SecItemDelete((__bridge CFDictionaryRef)itemToDelete);
         if (status != errSecSuccess) {
+            if (error) {
+                *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                             code:status
+                                         userInfo:nil];
+            }
             retValue = NO;
-        }
-        else
-        {
+        } else {
             retValue = YES;
         }
     }
-    
     return retValue;
 }
 
-+ (NSArray *)itemsForService:(NSString *) service
-                 accessGroup:(NSString *) __unused accessGroup {
++ (NSArray *)itemsForService:(NSString *)service
+                 accessGroup:(NSString *)accessGroup
+                       error:(NSError **)error {
     if (!service) {
         service = [self defaultService];
     }
@@ -253,13 +277,18 @@ errReturn:
     if (status == errSecSuccess || status == errSecItemNotFound) {
         returnValue =  (__bridge NSArray *)(result);
     } else {
+        if (error) {
+            *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                         code:status
+                                     userInfo:nil];
+        }
         returnValue = nil;
     }
-    if(result)
-    {
+    
+    if(result) {
          CFBridgingRelease(result);
     }
-   
+    
     return returnValue;
 }
 

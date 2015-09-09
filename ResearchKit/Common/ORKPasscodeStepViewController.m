@@ -80,7 +80,7 @@
         _isTouchIdAuthenticated = NO;
         _isPasscodeSaved = NO;
         
-        // Set the starting state based on flow.
+        // Set the starting passcode state based on flow.
         switch (_passcodeFlow) {
             case ORKPasscodeFlowCreate:
                 _passcodeState = ORKPasscodeStateEntry;
@@ -107,7 +107,7 @@
         // If Touch ID was enabled then present it for authentication flow.
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey];
+            NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey error:nil];
             NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
             BOOL touchIdIsEnabled = [dictionary[kKeychainDictionaryTouchIdKey] boolValue];
             if (touchIdIsEnabled) {
@@ -252,7 +252,7 @@
     _touchContext.localizedFallbackTitle = @"";
     
     // Check to see if the device supports Touch ID.
-    if (_useTouchId &&
+    if (self.useTouchId &&
         [_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
         /// Device does support Touch ID.
         
@@ -272,9 +272,7 @@
                     _isTouchIdAuthenticated = YES;
                     
                     // Send a delegate callback for authentication flow.
-                    if (self.passcodeDelegate &&
-                        self.passcodeFlow == ORKPasscodeFlowAuthenticate &&
-                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                    if (self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
                         [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
                     }
                 } else if (error.code != LAErrorUserCancel) {
@@ -295,12 +293,8 @@
                     // If it is in creation flow (consent step), go to the next step.
                     if (self.passcodeFlow == ORKPasscodeFlowCreate) {
                         [self goForward];
-                    }
-                    
-                    // If it is in editing flow, send a delegate callback.
-                    if (self.passcodeDelegate &&
-                        self.passcodeFlow == ORKPasscodeFlowEdit &&
-                        [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+                    } else if (self.passcodeFlow == ORKPasscodeFlowEdit) {
+                        // If it is in editing flow, send a delegate callback.
                         [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
                     }
                 }
@@ -314,15 +308,11 @@
         if (! (self.passcodeFlow == ORKPasscodeFlowAuthenticate)) {
             [self savePasscodeToKeychain];
             
-            // If it is in creation flow (consent step), go to the next step.
             if (self.passcodeFlow == ORKPasscodeFlowCreate) {
+                // If it is in creation flow (consent step), go to the next step.
                 [self goForward];
-            }
-            
-            // If it is in editing flow, send a delegate callback.
-            if (self.passcodeDelegate &&
-                self.passcodeFlow == ORKPasscodeFlowEdit &&
-                [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
+            } else if (self.passcodeFlow == ORKPasscodeFlowEdit) {
+                // If it is in editing flow, send a delegate callback.
                 [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
             }
         }
@@ -335,15 +325,15 @@
                                  kKeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
                                  };
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-    _isPasscodeSaved = [ORKKeychainStore setData:data forKey:kPasscodeKey];
+    _isPasscodeSaved = [ORKKeychainStore setData:data forKey:kPasscodeKey error:nil];
 }
 
 - (void)removePasscodeFromKeychain {
-    [ORKKeychainStore removeValueForKey:kPasscodeKey];
+    [ORKKeychainStore removeValueForKey:kPasscodeKey error:nil];
 }
 
 - (BOOL)passcodeMatchesKeychain {
-    NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey];
+    NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey error:nil];
     NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSString *storedPasscode = dictionary[kKeychainDictionaryPasscodeKey];
     return ([storedPasscode isEqualToString:_passcode]);
@@ -351,7 +341,7 @@
 
 - (void)wrongAttempt {
     
-    // Vibrate the device.
+    // Vibrate the device, if available.
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     
     // Shake animation.
@@ -433,13 +423,10 @@
             [self updatePasscodeView];
         } else {
             // Failed authentication, send delegate callback.
-            if (self.passcodeDelegate &&
-                [self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerFailedAuthentication:)]) {
-                [self.passcodeDelegate passcodeViewControllerFailedAuthentication:self];
+            [self.passcodeDelegate passcodeViewControllerDidFailAuthentication:self];
                 
-                // Visual cue.
-                [self wrongAttempt];
-            }
+            // Visual cue.
+            [self wrongAttempt];
         }
     } else if (_passcodeState == ORKPasscodeStateNewEntry) {
         // Move to confirm new entry state.
@@ -483,17 +470,13 @@
     if (_passcodeState == ORKPasscodeStateEntry) {
         if ([self passcodeMatchesKeychain]) {
             // Passed authentication, send delegate callback.
-            if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerDidFinishWithSuccess:)]) {
-                [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
-            }
+            [self.passcodeDelegate passcodeViewControllerDidFinishWithSuccess:self];
         } else {
             // Failed authentication, send delegate callback.
-            if ([self.passcodeDelegate respondsToSelector:@selector(passcodeViewControllerFailedAuthentication:)]) {
-                [self.passcodeDelegate passcodeViewControllerFailedAuthentication:self];
+            [self.passcodeDelegate passcodeViewControllerDidFailAuthentication:self];
                 
-                // Visual cue.
-                [self wrongAttempt];
-            }
+            // Visual cue.
+            [self wrongAttempt];
         }
     }
 }
@@ -506,23 +489,7 @@
         return !_isChangingState;
     }
     
-    // Only allow numeric characters.
-    if (! [[NSScanner scannerWithString:string] scanFloat:NULL]) {
-        [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE", nil)];
-        return NO;
-    }
-    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
-    // Store the typed input.
-    if (_passcodeState == ORKPasscodeStateEntry ||
-        _passcodeState == ORKPasscodeStateOldEntry ||
-        _passcodeState == ORKPasscodeStateNewEntry) {
-        [_passcode appendString:string];
-    } else if (_passcodeState == ORKPasscodeStateConfirm ||
-               _passcodeState == ORKPasscodeStateConfirmNewEntry) {
-        [_confirmPasscode appendString:string];
-    }
     
     // User entered a character.
     if (text.length < textField.text.length) {
@@ -533,10 +500,26 @@
             
         }
     } else if (_position < textField.text.length) {
+        // Only allow numeric characters besides backspace (covered by the previous if statement).
+        if (! [[NSScanner scannerWithString:string] scanFloat:NULL]) {
+            [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE", nil)];
+            return NO;
+        }
         
         // User entered a new character.
         textField.text = [textField.text stringByReplacingCharactersInRange:NSMakeRange(_position, 1) withString:kFilledBullet];
         _position++;
+        
+        // Store the typed input.
+        if (_passcodeState == ORKPasscodeStateEntry ||
+            _passcodeState == ORKPasscodeStateOldEntry ||
+            _passcodeState == ORKPasscodeStateNewEntry) {
+            [_passcode appendString:string];
+        } else if (_passcodeState == ORKPasscodeStateConfirm ||
+                   _passcodeState == ORKPasscodeStateConfirmNewEntry) {
+            [_confirmPasscode appendString:string];
+        }
+
     }
     
     // User entered all characters.
@@ -565,7 +548,6 @@
     }
     
     return NO;
-
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {

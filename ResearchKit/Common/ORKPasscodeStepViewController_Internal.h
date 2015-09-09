@@ -34,7 +34,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const kPasscodeKey = @"ORKPasscode";
 static NSString * const kKeychainDictionaryPasscodeKey = @"passcode";
 static NSString * const kKeychainDictionaryTouchIdKey = @"touchIdEnabled";
 static NSString * const kPasscodeStepIdentifier = @"passcode_step";
@@ -58,7 +57,7 @@ typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
 
 @property (nonatomic) ORKPasscodeFlow passcodeFlow;
 @property (nonatomic) ORKPasscodeType passcodeType;
-@property (nonatomic, weak, nullable) id<ORKPasscodeDelegate> passcodeDelegate;
+@property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;
 @property (nonatomic) BOOL useTouchId;
 
 @end
