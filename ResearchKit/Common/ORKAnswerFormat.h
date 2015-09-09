@@ -547,6 +547,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (readonly, getter=isVertical) BOOL vertical;
 
+/**
+ A Boolean value indicating whether the value label should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+
 @end
 
 
