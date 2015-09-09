@@ -134,6 +134,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (UIImage *)maximumImage;
 - (UIImage *)minimumImage;
 - (NSArray<ORKTextChoice *> *)textChoices;
+- (BOOL)shouldHideValueLabel;
 
 @end
 
