@@ -239,7 +239,7 @@ static NSString * const FilledBullet = @"\u25CF";
     _unit = unit;
     
     if (_unit.length > 0) {
-        _unitWithNumber = [NSString stringWithFormat:@" %@",unit];
+        _unitWithNumber = [NSString stringWithFormat:@" %@", unit];
         _unitRegularColor = [UIColor blackColor];
         _unitActiveColor = [UIColor ork_midGrayTintColor];
     } else {
