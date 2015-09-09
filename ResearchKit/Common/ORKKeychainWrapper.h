@@ -34,11 +34,11 @@
 
 
 /**
- The `ORKKeychainStore` class is an abstraction layer for the iOS keychain
+ The `ORKKeychainWrapper` class is an abstraction layer for the iOS keychain
  communication.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKKeychainStore : NSObject
+@interface ORKKeychainWrapper : NSObject
 
 /**
  Returns the data in the keychain for the provided key.

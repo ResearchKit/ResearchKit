@@ -29,12 +29,12 @@
  */
 
 
-#import "ORKKeychainStore.h"
+#import "ORKKeychainWrapper.h"
 
 
 static NSString *_defaultService;
 
-@implementation ORKKeychainStore
+@implementation ORKKeychainWrapper
 
 #pragma mark - Public Methods
 
@@ -109,7 +109,7 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:nil];
+                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't find Keychain item."}];
             }
             return nil;
         }
@@ -154,7 +154,7 @@ static NSString *_defaultService;
                     if (error) {
                         *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                                      code:status
-                                                 userInfo:nil];
+                                                 userInfo:@{NSLocalizedDescriptionKey : @"Couldn't update Keychain item."}];
                     }
                     return retValue;
                 }
@@ -181,7 +181,7 @@ static NSString *_defaultService;
                 if (error) {
                     *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                                  code:status
-                                             userInfo:nil];
+                                             userInfo:@{NSLocalizedDescriptionKey : @"Couldn't add Keychain item."}];
                 }
                 return retValue;
             }
@@ -218,7 +218,7 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:nil];
+                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't delete Keychain item."}];
             }
             retValue = NO;
         } else {
@@ -242,7 +242,7 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:nil];
+                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't delete Keychain item."}];
             }
             retValue = NO;
         } else {
@@ -280,7 +280,7 @@ static NSString *_defaultService;
         if (error) {
             *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                          code:status
-                                     userInfo:nil];
+                                     userInfo:@{NSLocalizedDescriptionKey : @"Couldn't find Keychain item."}];
         }
         returnValue = nil;
     }

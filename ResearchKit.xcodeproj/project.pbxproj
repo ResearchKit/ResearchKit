@@ -41,8 +41,8 @@
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		241A2E871B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */; };
-		2433C9E31B9A506F0052D375 /* ORKKeychainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2433C9E11B9A506F0052D375 /* ORKKeychainStore.h */; settings = {ASSET_TAGS = (); }; };
-		2433C9E41B9A506F0052D375 /* ORKKeychainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C9E21B9A506F0052D375 /* ORKKeychainStore.m */; settings = {ASSET_TAGS = (); }; };
+		2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */; settings = {ASSET_TAGS = (); }; };
+		2433C9E41B9A506F0052D375 /* ORKKeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */; };
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
@@ -497,8 +497,8 @@
 		147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryStepViewController.h; sourceTree = "<group>"; };
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
 		241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeStepViewController_Internal.h; sourceTree = "<group>"; };
-		2433C9E11B9A506F0052D375 /* ORKKeychainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKKeychainStore.h; sourceTree = "<group>"; };
-		2433C9E21B9A506F0052D375 /* ORKKeychainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainStore.m; sourceTree = "<group>"; };
+		2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKKeychainWrapper.h; sourceTree = "<group>"; };
+		2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainWrapper.m; sourceTree = "<group>"; };
 		2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeViewController.h; sourceTree = "<group>"; };
 		2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeViewController.m; sourceTree = "<group>"; };
 		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
@@ -1040,8 +1040,8 @@
 		24A4DA091B8D0CC8009C797A /* Passcode Step */ = {
 			isa = PBXGroup;
 			children = (
-				2433C9E11B9A506F0052D375 /* ORKKeychainStore.h */,
-				2433C9E21B9A506F0052D375 /* ORKKeychainStore.m */,
+				2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */,
+				2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */,
 				24A4DA121B8D1115009C797A /* ORKPasscodeStep.h */,
 				24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */,
 				241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */,
@@ -2142,7 +2142,7 @@
 				86C40C5A1A8D7C5C00081FAC /* ORKWalkingTaskStep.h in Headers */,
 				86C40E361A8D7C5C00081FAC /* ORKVisualConsentTransitionAnimator.h in Headers */,
 				86AD910D1AB7AE4100361FEB /* ORKNavigationContainerView_Internal.h in Headers */,
-				2433C9E31B9A506F0052D375 /* ORKKeychainStore.h in Headers */,
+				2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */,
 				86C40CEE1A8D7C5C00081FAC /* ORKAnswerTextView.h in Headers */,
 				B12EA0151B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.h in Headers */,
 				86C40C421A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.h in Headers */,
@@ -2471,7 +2471,7 @@
 				861D2AED1B8409B2008C4CD0 /* ORKTimedWalkStepViewController.m in Sources */,
 				86C40C341A8D7C5C00081FAC /* ORKFitnessStepViewController.m in Sources */,
 				86C40E2E1A8D7C5C00081FAC /* ORKVisualConsentStep.m in Sources */,
-				2433C9E41B9A506F0052D375 /* ORKKeychainStore.m in Sources */,
+				2433C9E41B9A506F0052D375 /* ORKKeychainWrapper.m in Sources */,
 				86C40CA61A8D7C5C00081FAC /* ORKLocationRecorder.m in Sources */,
 				86C40CB61A8D7C5C00081FAC /* ORKTouchRecorder.m in Sources */,
 				B12EA0161B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m in Sources */,

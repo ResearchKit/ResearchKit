@@ -34,7 +34,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKPasscodeStepView.h"
 #import "ORKPasscodeStep.h"
-#import "ORKKeychainStore.h"
+#import "ORKKeychainWrapper.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -107,7 +107,7 @@
         // If Touch ID was enabled then present it for authentication flow.
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey error:nil];
+            NSData *data = [ORKKeychainWrapper dataForKey:kPasscodeKey error:nil];
             NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
             BOOL touchIdIsEnabled = [dictionary[kKeychainDictionaryTouchIdKey] boolValue];
             if (touchIdIsEnabled) {
@@ -325,15 +325,15 @@
                                  kKeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
                                  };
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-    _isPasscodeSaved = [ORKKeychainStore setData:data forKey:kPasscodeKey error:nil];
+    _isPasscodeSaved = [ORKKeychainWrapper setData:data forKey:kPasscodeKey error:nil];
 }
 
 - (void)removePasscodeFromKeychain {
-    [ORKKeychainStore removeValueForKey:kPasscodeKey error:nil];
+    [ORKKeychainWrapper removeValueForKey:kPasscodeKey error:nil];
 }
 
 - (BOOL)passcodeMatchesKeychain {
-    NSData *data = [ORKKeychainStore dataForKey:kPasscodeKey error:nil];
+    NSData *data = [ORKKeychainWrapper dataForKey:kPasscodeKey error:nil];
     NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSString *storedPasscode = dictionary[kKeychainDictionaryPasscodeKey];
     return ([storedPasscode isEqualToString:_passcode]);
