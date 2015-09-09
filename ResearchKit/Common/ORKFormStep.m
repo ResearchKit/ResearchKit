@@ -143,7 +143,7 @@
     self = [super init];
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
-        _optional = NO;
+        _optional = YES;
         _identifier = [identifier copy];
         _text = [text copy];
         _answerFormat = [answerFormat copy];

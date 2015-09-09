@@ -1244,6 +1244,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Pre1"];
             [items addObject:item];
         }
+        
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Basic Information"];
             [items addObject:item];
@@ -1550,56 +1551,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [steps addObject:step];
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Optional"];
+            [items addObject:item];
+        }
+
+        {
             ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
             format.multipleLines = NO;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
-                                                                   text:@"Text (optional)"
-                                                           answerFormat:format];
-            item.optional = YES;
-            item.placeholder = @"Input any text here.";
-            [items addObject:item];
-        }
-        
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
-                                                                   text:@"Number (optional)"
-                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-            item.optional = YES;
-            item.placeholder = @"Input any number here.";
-            [items addObject:item];
-        }
-        
-        [step setFormItems:items];
-    }
-    
-    {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_001" title:@"Optional Form Items" text:@"Optional form with some optional items"];
-        NSMutableArray *items = [NSMutableArray new];
-        [steps addObject:step];
-        
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
-        format.multipleLines = NO;
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text1"
-                                                                   text:@"Text A (optional)"
-                                                           answerFormat:format];
-            item.optional = YES;
-            item.placeholder = @"Input any text here.";
-            [items addObject:item];
-        }
-        
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text2"
-                                                                   text:@"Text B (optional)"
-                                                           answerFormat:format];
-            item.optional = YES;
-            item.placeholder = @"Input any text here.";
-            [items addObject:item];
-        }
-        
-        {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
-                                                                   text:@"Text C"
+                                                                   text:@"Text"
                                                            answerFormat:format];
             item.placeholder = @"Input any text here.";
             [items addObject:item];
@@ -1615,12 +1575,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         
         [step setFormItems:items];
     }
-
+    
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Optional Form Items" text:@"Optional form with no optional items"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_001" title:@"Optional Form Items" text:@"Optional form with some optional items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Optional"];
+            [items addObject:item];
+        }
+
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
         format.multipleLines = NO;
         {
@@ -1640,9 +1605,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            [items addObject:item];
+        }
+
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
                                                                    text:@"Text C"
                                                            answerFormat:format];
+            item.optional = NO;
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1651,6 +1622,58 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
                                                                    text:@"Number"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+            item.optional = NO;
+            item.placeholder = @"Input any number here.";
+            [items addObject:item];
+        }
+        
+        [step setFormItems:items];
+    }
+
+    {
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Optional Form Items" text:@"Optional form with no optional items"];
+        NSMutableArray *items = [NSMutableArray new];
+        [steps addObject:step];
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            [items addObject:item];
+        }
+
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
+        format.multipleLines = NO;
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text1"
+                                                                   text:@"Text A"
+                                                           answerFormat:format];
+            item.optional = NO;
+            item.placeholder = @"Input any text here.";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text2"
+                                                                   text:@"Text B"
+                                                           answerFormat:format];
+            item.optional = NO;
+            item.placeholder = @"Input any text here.";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
+                                                                   text:@"Text C"
+                                                           answerFormat:format];
+            item.optional = NO;
+            item.placeholder = @"Input any text here.";
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
+                                                                   text:@"Number"
+                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+            item.optional = NO;
             item.placeholder = @"Input any number here.";
             [items addObject:item];
         }
@@ -1664,22 +1687,25 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [steps addObject:step];
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Optional"];
+            [items addObject:item];
+        }
+
+        {
             ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:6];
             format.multipleLines = NO;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
-                                                                   text:@"Text (optional)"
+                                                                   text:@"Text"
                                                            answerFormat:format];
-            item.optional = YES;
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
         
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
-                                                                   text:@"Number (optional)"
+                                                                   text:@"Number"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
             item.placeholder = @"Input any number here.";
-            item.optional = YES;
             [items addObject:item];
         }
         
@@ -1692,30 +1718,39 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Optional"];
+            [items addObject:item];
+        }
+
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
         format.multipleLines = NO;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text1"
-                                                                   text:@"Text A (optional)"
+                                                                   text:@"Text A"
                                                            answerFormat:format];
-            item.optional = YES;
             item.placeholder = @"Input your text here.";
             [items addObject:item];
         }
         
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text2"
-                                                                   text:@"Text B (optional)"
+                                                                   text:@"Text B"
                                                            answerFormat:format];
-            item.optional = YES;
             item.placeholder = @"Input your text here.";
             [items addObject:item];
         }
         
         {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            [items addObject:item];
+        }
+
+        {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
                                                                    text:@"Text C"
                                                            answerFormat:format];
+            item.optional = NO;
             item.placeholder = @"Input your text here.";
             [items addObject:item];
         }
@@ -1724,6 +1759,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
                                                                    text:@"Number"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+            item.optional = NO;
             item.placeholder = @"Input any number here.";
             [items addObject:item];
         }
@@ -1737,12 +1773,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:@"Non-optional"];
+            [items addObject:item];
+        }
+
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:12];
         format.multipleLines = NO;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text1"
                                                                    text:@"Text A"
                                                            answerFormat:format];
+            item.optional = NO;
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1751,6 +1793,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text2"
                                                                    text:@"Text B"
                                                            answerFormat:format];
+            item.optional = NO;
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1759,6 +1802,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
                                                                    text:@"Text C"
                                                            answerFormat:format];
+            item.optional = NO;
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1767,11 +1811,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
                                                                    text:@"Number"
                                                            answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
+            item.optional = NO;
             item.placeholder = @"Input any number here.";
             [items addObject:item];
         }
         
         [step setFormItems:items];
+        step.optional = NO;
     }
     
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
