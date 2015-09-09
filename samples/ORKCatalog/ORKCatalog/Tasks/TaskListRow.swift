@@ -278,6 +278,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
         case DiscreteScaleHiddenValueLabelQuestionStep
+        case ContinuousScaleHiddenValueLabelQuestionStep
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -617,6 +618,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         questionStep7.text = exampleDetailText
         
+        // The eight step is a horizontal continuous scale control with a hidden value label.
+        let step8AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: false, maximumValueDescription: nil, minimumValueDescription: nil)
+        
+        step8AnswerFormat.hideValueLabel = true
+        
+        let questionStep8 = ORKQuestionStep(identifier: String(Identifier.ContinuousScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step8AnswerFormat)
+        
+        questionStep8.text = exampleDetailText
+        
         return ORKOrderedTask(identifier: String(Identifier.ScaleQuestionTask), steps: [
             questionStep1,
             questionStep2,
@@ -624,7 +634,8 @@ enum TaskListRow: Int, CustomStringConvertible {
             questionStep4,
             questionStep5,
             questionStep6,
-            questionStep7
+            questionStep7,
+            questionStep8
             ])
     }
     
