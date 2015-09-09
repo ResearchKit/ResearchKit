@@ -74,12 +74,8 @@ ORK_AVAILABLE_DECL
 /**
  An `ORKPasscodeStepViewController` object is the view controller for an `ORKPasscodeStep` object.
  
- A passcode view controller can be instanstiated indirectly by adding a passcode step to a consent task
- and present the task using a task view controller. When appropriate, the task view controller instantiates the step
- view controller for the step.
- 
- A passcode view controller can also be instantiated directly by using one of the factory methods below.
- Each factory method requires a delegate to be implemented.
+ A passcode view controller can also be instantiated directly for authentication and editing by using one 
+ of the factory methods below. Each factory method requires a delegate to be implemented.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController

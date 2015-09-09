@@ -41,34 +41,53 @@ static NSString *_defaultService;
 + (BOOL)setData:(NSData *)data
          forKey:(NSString *)key
           error:(NSError **)error {
-    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil error:error];
+    return [self setData:data
+                  forKey:key
+                 service:[self defaultService]
+             accessGroup:nil
+                   error:error];
 }
 
 + (NSData *)dataForKey:(NSString *)key
                  error:(NSError **)error {
-    return [self dataForKey:key service:[self defaultService] accessGroup:nil error:error];
+    return [self dataForKey:key
+                    service:[self defaultService]
+                accessGroup:nil
+                      error:error];
 }
 
 + (BOOL)setString:(NSString *)value
            forKey:(NSString *)key
             error:(NSError **)error {
     NSData *data = [value dataUsingEncoding:NSUTF8StringEncoding];
-    return [self setData:data forKey:key service:[self defaultService] accessGroup:nil error:error];
+    return [self setData:data
+                  forKey:key
+                 service:[self defaultService]
+             accessGroup:nil
+                   error:error];
 }
 
 + (NSString *)stringForKey:(NSString *)key
                      error:(NSError **)error {
-    NSData *data = [self dataForKey:key service:[self defaultService] accessGroup:nil error:error];
+    NSData *data = [self dataForKey:key
+                            service:[self defaultService]
+                        accessGroup:nil
+                              error:error];
     return data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
 }
 
 + (BOOL)removeValueForKey:(NSString *)key
                     error:(NSError **)error {
-    return [self removeItemForKey:key service:[self defaultService] accessGroup:nil error:error];
+    return [self removeItemForKey:key
+                          service:[self defaultService]
+                      accessGroup:nil
+                            error:error];
 }
 
 + (BOOL)resetKeychainWithError:(NSError **)error {
-    return [self removeAllItemsForService:[self defaultService] accessGroup:nil error:error];
+    return [self removeAllItemsForService:[self defaultService]
+                              accessGroup:nil
+                                    error:error];
 }
 
 #pragma mark - Private Methods
@@ -77,7 +96,6 @@ static NSString *_defaultService;
     if (!_defaultService) {
         _defaultService = [[NSBundle mainBundle] bundleIdentifier];
     }
-    
     return _defaultService;
 }
 

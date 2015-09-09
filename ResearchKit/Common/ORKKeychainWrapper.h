@@ -44,6 +44,9 @@ ORK_CLASS_AVAILABLE
  Returns the data in the keychain for the provided key.
  
  @param key         The key used to set the data in the keychain.
+ @param error       If failure occurred, an `NSError` object indicating the reason for the
+                    failure. The value of this parameter is `nil` if `result` does not
+                    indicate failure.
  
  @return A NSData object or `nil` if key is not valid.
  */
@@ -66,6 +69,9 @@ ORK_CLASS_AVAILABLE
  Returns a string in the keychain for the provided key.
  
  @param key         The key used to set the string in the keychain.
+ @param error       If failure occurred, an `NSError` object indicating the reason for the
+                    failure. The value of this parameter is `nil` if `result` does not
+                    indicate failure.
  
  @return A string or `nil` if key is not valid.
  */
@@ -91,9 +97,6 @@ ORK_CLASS_AVAILABLE
  @param error       If failure occurred, an `NSError` object indicating the reason for the
                     failure. The value of this parameter is `nil` if `result` does not
                     indicate failure.
- @param error       If failure occurred, an `NSError` object indicating the reason for the
-                    failure. The value of this parameter is `nil` if `result` does not
-                    indicate failure.
  
  @return A boolean with a value `YES` if the value was removed; otherwise `NO'.
 */
@@ -106,7 +109,7 @@ ORK_CLASS_AVAILABLE
                     failure. The value of this parameter is `nil` if `result` does not
                     indicate failure.
  
- @return A boolean with a value `YES` if the value was removed; otherwise `NO'.
+ @return A boolean with a value `YES` if the keychain was reset; otherwise `NO'.
 */
 + (BOOL)resetKeychainWithError:(NSError **)error;
 
