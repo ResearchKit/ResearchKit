@@ -1530,6 +1530,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _vertical = vertical;
         _maximumValueDescription = maximumValueDescription;
         _minimumValueDescription = minimumValueDescription;
+        _hideValueLabel = NO;
         
         [self validateParameters];
     }
@@ -1644,6 +1645,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_OBJ(aDecoder, minimumValueDescription);
         ORK_DECODE_IMAGE(aDecoder, maximumImage);
         ORK_DECODE_IMAGE(aDecoder, minimumImage);
+        ORK_DECODE_BOOL(aDecoder, hideValueLabel);
     }
     return self;
 }
@@ -1660,6 +1662,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_OBJ(aCoder, minimumValueDescription);
     ORK_ENCODE_IMAGE(aCoder, maximumImage);
     ORK_ENCODE_IMAGE(aCoder, minimumImage);
+    ORK_ENCODE_BOOL(aCoder, hideValueLabel);
 }
 
 + (BOOL)supportsSecureCoding {
