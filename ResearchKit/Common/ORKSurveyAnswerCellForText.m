@@ -113,7 +113,6 @@
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
     self.placeHolder.hidden = (self.textView.text.length > 0) && ![self.textView isFirstResponder];
-    
 }
 
 - (void)setUpConstraints {

@@ -138,7 +138,6 @@ static NSString * const FilledBullet = @"\u25CF";
     NSString *_managedPlaceholder;
     
     NSString *_unitWithNumber;
-    NSString *_unitWithPlaceholder;
  
     UIColor *_unitRegularColor;
     UIColor *_unitActiveColor;
@@ -240,12 +239,10 @@ static NSString * const FilledBullet = @"\u25CF";
     _unit = unit;
     
     if (_unit.length > 0) {
-        _unitWithPlaceholder = [NSString stringWithFormat:@"    %@",unit];
         _unitWithNumber = [NSString stringWithFormat:@" %@",unit];
         _unitRegularColor = [UIColor blackColor];
         _unitActiveColor = [UIColor ork_midGrayTintColor];
     } else {
-        _unitWithPlaceholder = nil;
         _unitWithNumber = nil;
     }
     
@@ -254,16 +251,15 @@ static NSString * const FilledBullet = @"\u25CF";
 
 - (void)updateManagedUnitAndPlaceholder {
     if (_manageUnitAndPlaceholder) {
-        BOOL editing = [self isEditing];
+        BOOL editing = self.isEditing;
         
         if (editing) {
-            [self ork_setPlaceholder: nil];
+            [self ork_setPlaceholder:nil];
             [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
         } else {
             if (_managedPlaceholder.length > 0) {
                 [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
-                NSString *unit = (self.text.length == 0)? _unitWithPlaceholder : _unitWithNumber;
-                [self ork_updateSuffix:unit withColor:_unitRegularColor];
+                [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
             } else {
                 if (self.text.length > 0) {
                     [self ork_setPlaceholder:nil];
@@ -316,7 +312,7 @@ static NSString * const FilledBullet = @"\u25CF";
     return suffixWidth;
 }
 
-static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
+static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right = 6};
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
     CGRect textRect = [super textRectForBounds:bounds];
