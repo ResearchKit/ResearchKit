@@ -251,23 +251,19 @@ static NSString * const FilledBullet = @"\u25CF";
 
 - (void)updateManagedUnitAndPlaceholder {
     if (_manageUnitAndPlaceholder) {
-        BOOL editing = self.isEditing;
+        BOOL isEditing = self.isEditing;
         
-        if (editing) {
-            [self ork_setPlaceholder:nil];
-            [self ork_updateSuffix:_unitWithNumber withColor:_unitActiveColor];
+        UIColor *suffixColor = isEditing ? _unitActiveColor : _unitRegularColor;
+        if (_managedPlaceholder.length > 0) {
+            [self ork_setPlaceholder: (self.text.length == 0) ? _managedPlaceholder : nil];
+            [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
         } else {
-            if (_managedPlaceholder.length > 0) {
-                [self ork_setPlaceholder: (self.text.length == 0)? _managedPlaceholder : nil];
-                [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
+            if (self.text.length > 0 || isEditing) {
+                [self ork_setPlaceholder:nil];
+                [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
             } else {
-                if (self.text.length > 0) {
-                    [self ork_setPlaceholder:nil];
-                    [self ork_updateSuffix:_unitWithNumber withColor:_unitRegularColor];
-                } else {
-                    [self ork_setPlaceholder: _unit];
-                    [self ork_updateSuffix:nil withColor:_unitRegularColor];
-                }
+                [self ork_setPlaceholder: _unit];
+                [self ork_updateSuffix:nil withColor:suffixColor];
             }
         }
     } else {
@@ -302,8 +298,8 @@ static NSString * const FilledBullet = @"\u25CF";
 }
 
 - (BOOL)isPlaceholderVisible {
-    BOOL editing = [self isEditing];
-    return (!editing) && ([self placeholder].length > 0);
+    BOOL isEditing = self.isEditing;
+    return (!isEditing || self.text.length == 0) && (self.placeholder.length > 0);
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
@@ -346,7 +342,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right = 6};
 
 - (CGRect)ork_suffixFrame {
     // Get the text currently 'in' the edit field
-    NSString *textToMeasure = [self isPlaceholderVisible] ? [self placeholder] : self.text;
+    NSString *textToMeasure = [self isPlaceholderVisible] ? self.placeholder : self.text;
     CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
     
     // Get the maximum size of the actual editable area (taking into account prefix/suffix/views/clear button
@@ -395,6 +391,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right = 6};
 - (NSString *)accessibilityValue {
     if (self.text.length > 0) {
         return ORKAccessibilityStringForVariables([super accessibilityValue], _unitWithNumber);
+    
     }
     else if ( _managedPlaceholder ) {
         return ORKAccessibilityStringForVariables(_managedPlaceholder, _unitWithNumber);
@@ -424,6 +421,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right = 6};
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
+    
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
