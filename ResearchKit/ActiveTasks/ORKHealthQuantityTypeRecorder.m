@@ -137,7 +137,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                             {
                                                 if (error) {
                                                     // An error in the query's not the end of the world: we'll probably get another chance. Just log it.
-                                                    ORK_Log_Debug(@"Anchored query error: %@", error);
+                                                    ORK_Log_Warning(@"Anchored query error: %@", error);
                                                     return;
                                                 }
                                                 
@@ -183,8 +183,8 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
                                    withCompletion:^(BOOL success, NSError *error) {
                                        
                                        // Doesn't really matter if this succeeds, but nice if it does.
-                                       if (! success) {
-                                           ORK_Log_Debug(@"Failed to enable background delivery: %@", error);
+                                       if (!success) {
+                                           ORK_Log_Warning(@"Failed to enable background delivery: %@", error);
                                        }
                                    }];
     

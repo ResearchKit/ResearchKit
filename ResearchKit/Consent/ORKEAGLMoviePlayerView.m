@@ -181,7 +181,7 @@ const GLfloat DefaultPreferredRotation = 0;
     if (!_videoTextureCache) {
         CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
         if (err != noErr) {
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreate %d", err);
+            ORK_Log_Warning(@"Error at CVOpenGLESTextureCacheCreate %d", err);
             return;
         }
     }
@@ -213,7 +213,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorBufferHandle);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        ORK_Log_Debug(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        ORK_Log_Warning(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
     
     // Set the view port to the entire view.
@@ -300,7 +300,7 @@ const GLfloat DefaultPreferredRotation = 0;
         ORKEAGLLog(@"Have buffer");
 
         if (!_videoTextureCache) {
-            ORK_Log_Debug(@"No video texture cache");
+            ORK_Log_Warning(@"No video texture cache");
             return NO;
         }
         
@@ -337,7 +337,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            0,
                                                            &_lumaTexture);
         if (err) {
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+            ORK_Log_Warning(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
             return NO;
         }
         
@@ -362,7 +362,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            1,
                                                            &_chromaTexture);
         if (err) {
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+            ORK_Log_Warning(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
             return NO;
         }
         
@@ -469,7 +469,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     glBindRenderbuffer(GL_RENDERBUFFER, _colorBufferHandle);
     if (![_context presentRenderbuffer:GL_RENDERBUFFER]) {
-        ORK_Log_Debug(@"presentRenderBuffer failed");
+        ORK_Log_Warning(@"presentRenderBuffer failed");
     }
     
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
@@ -490,14 +490,14 @@ const GLfloat DefaultPreferredRotation = 0;
     // Create and compile the vertex shader.
     vertShaderURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"MovieTintShader" withExtension:@"vsh"];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER URL:vertShaderURL]) {
-        ORK_Log_Debug(@"Failed to compile vertex shader");
+        ORK_Log_Warning(@"Failed to compile vertex shader");
         return NO;
     }
     
     // Create and compile fragment shader.
     fragShaderURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"MovieTintShader" withExtension:@"fsh"];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER URL:fragShaderURL]) {
-        ORK_Log_Debug(@"Failed to compile fragment shader");
+        ORK_Log_Warning(@"Failed to compile fragment shader");
         return NO;
     }
     
@@ -513,7 +513,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     // Link the program.
     if (![self linkProgram:_programHandle]) {
-        ORK_Log_Debug(@"Failed to link program: %d", _programHandle);
+        ORK_Log_Warning(@"Failed to link program: %d", _programHandle);
         
         if (vertShader) {
             glDeleteShader(vertShader);
@@ -555,7 +555,7 @@ const GLfloat DefaultPreferredRotation = 0;
     NSError *error;
     NSString *sourceString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
     if (sourceString == nil) {
-        ORK_Log_Debug(@"Failed to load vertex shader: %@", [error localizedDescription]);
+        ORK_Log_Warning(@"Failed to load vertex shader: %@", [error localizedDescription]);
         return NO;
     }
     

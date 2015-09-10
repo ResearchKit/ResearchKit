@@ -265,7 +265,7 @@
     NSError *writeError = nil;
     if (![_capturedImageData writeToURL:url options:NSDataWritingAtomic|NSDataWritingFileProtectionCompleteUnlessOpen error:&writeError]) {
         if (writeError) {
-            ORK_Log_Oops(@"%@", writeError);
+            ORK_Log_Warning(@"%@", writeError);
         }
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"CAPTURE_ERROR_CANNOT_WRITE_FILE", nil)}];

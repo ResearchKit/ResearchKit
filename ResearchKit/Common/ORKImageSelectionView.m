@@ -86,7 +86,7 @@
             } else {
                 // Keep Aspect ratio
                 [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
-                ORK_Log_Oops(@"The size of imageChoice's normal image should not be zero. %@",  option.normalStateImage);
+                ORK_Log_Warning(@"The size of imageChoice's normal image should not be zero. %@",  option.normalStateImage);
             }
         }
         
