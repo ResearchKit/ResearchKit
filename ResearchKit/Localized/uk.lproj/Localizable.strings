@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Вежа";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Торкніть двічі, щоб розмістити диск";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Торкніть двічі, щоб вибрати верхній диск";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Має диски з розмірами %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Пусто";
 
 "AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
-
-

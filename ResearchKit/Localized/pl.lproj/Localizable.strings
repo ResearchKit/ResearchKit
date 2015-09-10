@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Wieża";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Stuknij dwukrotnie, aby umieścić krążek";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Stuknij dwukrotnie, aby wybrać krążek znajdujący się na górze";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Zawiera krążki o rozmiarach ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Zawiera krążki o rozmiarach %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Pusta";
 
 "AX_GRAPH_RANGE_FORMAT" = "Zakres %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
-
-

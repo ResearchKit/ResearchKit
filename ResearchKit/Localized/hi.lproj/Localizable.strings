@@ -228,7 +228,7 @@
 /* Tower of Hanoi active task */
 "TOWER_OF_HANOI_TASK_TITLE" = "हनोई का टॉवर";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "इस गतिविधि के द्वारा पहेली को हल करने की आपकी क्षमता का मूल्यांकन किया जाएगा।";
-"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "चिह्नांकित प्लेटफ़ॉर्म के पूरे स्टैक को कम से कम प्रयासों में स्थानांतरित करें।";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "पूरे स्टैक को चिह्नांकित प्लेटफ़ॉर्म पर कम से कम प्रयासों में स्थानांतरित करें।";
 "TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "पहेली हल करें";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "प्रयासों की संख्या : %1$@ \n %2$@";
@@ -268,7 +268,7 @@
 "PSAT_INTRO_TEXT_2_%@" = "एकल अंक प्रति %@ सेकंड में प्रस्तुत किए जाते हैं।\nआपको प्रत्येक नए अंक का उससे ठीक पहले वाले अंक से योग करना है।\nध्यान रखें, आपको कुल योग परिकलित नहीं करना है बल्कि केवल अंतिम दो अंकों का योग परिकलित करना है।";
 "PSAT_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
 "PSAT_INITIAL_INSTRUCTION" = "इस पहले अंक को याद रखें।";
-"PSAT_INSTRUCTION" = "इस नए अंक को पिछले में जोड़ें।";
+"PSAT_INSTRUCTION" = "इस नए अंक का पिछले अंक में योग करें।";
 "PSAT_NO_DIGIT" = "-";
 
 /* Potentially user visible error messages. */
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "टॉवर";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "डिस्क रखने के लिए डबल टैप करें";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "सबसे ऊपर के डिस्क का चयन करने के लिए डबल टैप करें";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें निम्नलिखित आकारों के डिस्क हैं : ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "इसमें %@ आकारों के डिस्क हैं  ";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "ख़ाली";
 
 "AX_GRAPH_RANGE_FORMAT" = "%1$@ से %2$@ तक श्रेणी";
 "AX_GRAPH_AND_SEPARATOR" = " और ";
-
-

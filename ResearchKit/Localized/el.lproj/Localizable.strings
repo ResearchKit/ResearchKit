@@ -249,7 +249,7 @@
 "TIMED_WALK_QUESTION_2_CHOICE_3" = "Μονόπλευρη πατερίτσα";
 "TIMED_WALK_QUESTION_2_CHOICE_4" = "Δίπλευρο μπαστούνι";
 "TIMED_WALK_QUESTION_2_CHOICE_5" = "Δίπλευρη πατερίτσα";
-"TIMED_WALK_QUESTION_2_CHOICE_6" = "(Τροχήλατος) Περιπατητήρας";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Περιπατητήρας";
 "TIMED_WALK_INSTRUCTION_%@" = "Περπατήστε έως %@ σε ευθεία γραμμή.";
 "TIMED_WALK_INSTRUCTION_2" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Αγγίξτε «Τέλος» όταν τελειώσετε.";
@@ -312,10 +312,8 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Πύργος";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Αγγίξτε δύο φορές για τοποθέτηση του δίσκου";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Αγγίξτε δύο φορές για επιλογή του ανώτερου δίσκου";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Έχει δίσκο με μεγέθη %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Κενός";
 
 "AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
 "AX_GRAPH_AND_SEPARATOR" = " και ";
-
-

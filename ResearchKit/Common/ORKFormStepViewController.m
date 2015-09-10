@@ -507,7 +507,7 @@
     }
 }
 
-- (NSInteger)numAnswered {
+- (NSInteger)numberOfAnsweredFormItems {
     __block NSInteger nonNilCount = 0;
     [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
         if (ORKIsAnswerEmpty(answer) == NO) {
@@ -517,11 +517,7 @@
     return nonNilCount;
 }
 
-- (BOOL)allAnswered {
-    return ([self numAnswered] == [self formItems].count);
-}
-
-- (BOOL)allAnswersValid {
+- (BOOL)allAnsweredFormItemsAreValid {
     for (ORKFormItem *item in [self formItems]) {
         id answer = _savedAnswers[item.identifier];
         if (ORKIsAnswerEmpty(answer) == NO && ![item.impliedAnswerFormat isAnswerValid:answer]) {
@@ -531,14 +527,22 @@
     return YES;
 }
 
+- (BOOL)allNonOptionalFormItemsHaveAnswers {
+    for (ORKFormItem *item in [self formItems]) {
+        if (!item.optional) {
+            id answer = _savedAnswers[item.identifier];
+            if (ORKIsAnswerEmpty(answer) || ![item.impliedAnswerFormat isAnswerValid:answer]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    //  Enable the continue button if case (1) or (2) is true below:
-    //  (1) All answers are valid and all questions are answered.
-    //  (2) All answers are valid and either:
-    //      a) The step is optional and there is no skip button.
-    //      b) The step is optional and at least one question has been answered.
-    BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
-    return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
+    return ([self numberOfAnsweredFormItems] > 0
+            && [self allAnsweredFormItemsAreValid]
+            && [self allNonOptionalFormItemsHaveAnswers]);
 }
 
 - (void)updateButtonStates {
