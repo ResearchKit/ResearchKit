@@ -40,4 +40,6 @@
 
 @property (nonatomic, assign, getter=isVertical) BOOL vertical;
 
+@property (nonatomic, copy, nullable) NSArray *textChoices;
+
 @end

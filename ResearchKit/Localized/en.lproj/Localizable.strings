@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Consent";
-"CONSENT_NAME_FIRST" = "First Name";
-"CONSENT_NAME_LAST" = "Last Name";
+"CONSENT_NAME_GIVEN" = "First Name";
+"CONSENT_NAME_FAMILY" = "Last Name";
 "CONSENT_NAME_PLACEHOLDER" = "Required";
 "CONSENT_REVIEW_TITLE" = "Review";
 "CONSENT_REVIEW_INSTRUCTION" = "Review the form below, and tap Agree if you\'re ready to continue.";
@@ -312,8 +312,9 @@
 "AX_TOWER_OF_HANOI_TOWER" = "Tower";
 "AX_TOWER_OF_HANOI_PLACE_DISK" = "Double-tap to place disk";
 "AX_TOWER_OF_HANOI_SELECT_DISK" = "Double-tap to select top-most disk";
-"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes ";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Has disk with sizes %@";
 "AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Empty";
 
 "AX_GRAPH_RANGE_FORMAT" = "Range from %@ to %@";
 "AX_GRAPH_AND_SEPARATOR" = " and ";
+"AX_GRAPH_POINT_%@" = "Point: %@";

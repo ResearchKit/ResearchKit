@@ -195,7 +195,6 @@
 		86717A8C1AC0C0FE00AC2A23 /* ORKTest */ = {
 			isa = PBXGroup;
 			children = (
-				86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */,
 				86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */,
 				86717A911AC0C0FE00AC2A23 /* AppDelegate.h */,
 				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
@@ -214,10 +213,11 @@
 		86717A8D1AC0C0FE00AC2A23 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */,
 				86717A8E1AC0C0FE00AC2A23 /* Info.plist */,
 				86717A8F1AC0C0FE00AC2A23 /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		86717AA61AC0C0FE00AC2A23 /* ORKTestTests */ = {
@@ -267,7 +267,7 @@
 				86717A9C1AC0C0FE00AC2A23 /* LaunchScreen.xib */,
 				86717B091AC0CC0400AC2A23 /* Localizable.strings */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BC9A27111B81732200BDA84D /* Charts */ = {
@@ -513,6 +513,7 @@
 				86717A9D1AC0C0FE00AC2A23 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		86717B091AC0CC0400AC2A23 /* Localizable.strings */ = {
@@ -560,6 +561,7 @@
 				B15636931B1F8A0800B28200 /* en-AU */,
 			);
 			name = Localizable.strings;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -637,15 +639,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ORKTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/ORKTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -656,15 +658,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ORKTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/ORKTest-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -673,10 +675,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -693,10 +692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

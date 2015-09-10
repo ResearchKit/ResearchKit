@@ -103,8 +103,10 @@ import ResearchKit
         var predicateRule: ORKPredicateStepNavigationRule
         
         // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
-        let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("formFeeling", expectedString: "good")
-        let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("formMood", expectedString: "good")
+        var resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formFeeling");
+        let predicateGoodFeeling: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "good")
+        resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formMood");
+        let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "good")
         let predicateGoodMoodAndFeeling: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
         predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
             [ (predicateGoodMoodAndFeeling, "survey_skipped") ])
@@ -119,7 +121,8 @@ import ResearchKit
         //      [NSPredicate predicateWithFormat:
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
         //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-        let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultIdentifier("symptom", expectedString: "headache")
+        resultSelector = ORKResultSelector.init(resultIdentifier: "symptom");
+        let predicateHeadache: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "headache")
         
         // User didn't chose headache at the symptom step
         let predicateNotHeadache: NSPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
@@ -134,10 +137,12 @@ import ResearchKit
         // Equivalent to:
         //      [NSPredicate predicateWithFormat:
         //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-        let predicateSevereYes: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResultWithResultIdentifier("severity", expectedAnswer: true)
+        resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
+        let predicateSevereYes: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: true)
         
         // User chose NO at the severity step
-        let predicateSevereNo: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResultWithResultIdentifier("severity", expectedAnswer: false)
+        resultSelector = ORKResultSelector.init(resultIdentifier: "severity");
+        let predicateSevereNo: NSPredicate = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: false)
         
         let predicateSevereHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereYes])
         let predicateLightHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereNo])

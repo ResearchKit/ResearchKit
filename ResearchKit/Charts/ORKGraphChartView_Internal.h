@@ -58,24 +58,26 @@ inline static CAShapeLayer *graphLineLayer() {
     return lineLayer;
 }
 
-static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoints, CGFloat canvasWidth) {
-    return round((canvasWidth / (numberOfXAxisPoints - 1)) * pointIndex);
+static inline CGFloat xAxisPoint(NSInteger pointIndex, NSInteger numberOfXAxisPoints, CGFloat canvasWidth) {
+    return round((canvasWidth / MAX(1, numberOfXAxisPoints - 1)) * pointIndex);
 }
 
 
 @interface ORKGraphChartView ()
 
-@property (nonatomic) NSMutableArray *lineLayers;
+@property (nonatomic) NSMutableArray<NSMutableArray<CAShapeLayer *> *> *lineLayers;
 
 @property (nonatomic) NSInteger numberOfXAxisPoints;
 
-@property (nonatomic) NSMutableArray *dataPoints; // Actual data
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *dataPoints; // Actual data
 
-@property (nonatomic) NSMutableArray *yAxisPoints; // Normalized for the plot view height
+@property (nonatomic) NSMutableArray<NSMutableArray<ORKRangedPoint *> *> *yAxisPoints; // Normalized for the plot view height
 
 @property (nonatomic) UIView *plotView; // Holds the plots
 
 @property (nonatomic) UIView *scrubberLine;
+
+@property (nonatomic) BOOL scrubberAccessoryViewsHidden;
 
 - (void)sharedInit;
 
@@ -83,21 +85,17 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 
 - (CGFloat)offsetForPlotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)nextValidPositionIndexForPosition:(NSInteger)positionIndex;
-
-- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition;
-
 - (NSInteger)numberOfValidValuesForPlotIndex:(NSInteger)plotIndex;
 
-- (NSInteger)yAxisPositionIndexForXPosition:(CGFloat)xPosition;
+- (NSInteger)scrubbingPlotIndex;
 
-- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
+- (CGFloat)valueForCanvasXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (void)updateScrubberViewForXPosition:(CGFloat)xPosition;
+- (NSInteger)pointIndexForXPosition:(CGFloat)xPosition;
 
-- (void)updateScrubberLineAccessories:(CGFloat)xPosition;
+- (void)updateScrubberViewForXPosition:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
-- (void)setScrubberLineAccessoriesHidden:(BOOL)hidden;
+- (void)updateScrubberLineAccessories:(CGFloat)xPosition plotIndex:(NSInteger)plotIndex;
 
 - (BOOL)isXPositionSnapped:(CGFloat)xPosition;
 
@@ -110,6 +108,10 @@ static inline CGFloat xAxisPoint(NSInteger pointIndex, CGFloat numberOfXAxisPoin
 - (void)updatePointLayers;
 
 - (void)layoutPointLayers;
+
+- (UIColor *)colorForplotIndex:(NSInteger)plotIndex;
+
+- (void)animateLayersSequentiallyWithDuration:(NSTimeInterval)duration;
 
 - (void)animateLayer:(CALayer *)layer
              keyPath:(NSString *)keyPath

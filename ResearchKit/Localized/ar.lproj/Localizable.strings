@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "موافقة";
-"CONSENT_NAME_FIRST" = "الاسم الأول";
-"CONSENT_NAME_LAST" = "اسم العائلة";
+"CONSENT_NAME_GIVEN" = "الاسم الأول";
+"CONSENT_NAME_FAMILY" = "اسم العائلة";
 "CONSENT_NAME_PLACEHOLDER" = "مطلوب";
 "CONSENT_REVIEW_TITLE" = "مراجعة";
 "CONSENT_REVIEW_INSTRUCTION" = "قم بمراجعة النموذج التالي واضغط على \"موافقة\" إذا كنت جاهزًا للمتابعة.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "‏%1$@ تتخطى القيمة القصوى المسموح بها (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "‏%1$@ أقل من القيمة الدنيا المسموح بها (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "‏%@ قيمة غير صالحة.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "عنوان البريد الإلكتروني غير صالح: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "المحتوى النصي يتجاوز الحد الأقصى للطول: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "الكاميرا غير متوفرة في العرض المقسم.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "‎A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "المحاولة %@ من %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "قم بهز الجهاز سريعًا عندما تظهر الدائرة الزرقاء";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "برج هانوي";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "يقيّم هذا النشاط مهاراتك في حل الألغاز.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "انقل الكومة بالكامل إلى المنصة المميزة في أقل عدد ممكن من الحركات.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "حل اللغز";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "عدد الحركات: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "لا أستطيع حل هذا اللغز";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "المشي المحدد بوقت";
+"TIMED_WALK_INTRO_DETAIL" = "يقيس هذا النشاط وظيفة الطرف السفلي لديك.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "ابحث عن مكان، يفضل أن يكون بالخارج، يمكنك المشي فيه %@ تقريبًا في خط مستقيم بأقصى سرعة ممكنة، لكن بأمان. لا تبطئ من سرعتك قبل أن تجتاز خط النهاية.";
+"TIMED_WALK_INTRO_2_DETAIL" = "اضغط على التالي للبدء.";
+"TIMED_WALK_FORM_TITLE" = "الجهاز المساعد";
+"TIMED_WALK_FORM_TEXT" = "استخدم نفس الجهاز المساعد لكل اختبار.";
+"TIMED_WALK_QUESTION_TEXT" = "هل ترتدي مقوام قدم وكاحل؟";
+"TIMED_WALK_QUESTION_2_TITLE" = "هل تستخدم جهازًا مساعدًا؟";
+"TIMED_WALK_QUESTION_2_TEXT" = "اضغط هنا لتحديد إجابة.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "لا شيء";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "عصا أحادية";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "عكاز أحادي";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "عصا ثنائية";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "عكاز ثنائي";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "مشاية";
+"TIMED_WALK_INSTRUCTION_%@" = "قم بالمشي حتى %@ في خط مستقيم.";
+"TIMED_WALK_INSTRUCTION_2" = "قم بالدوران والمشي رجوعًا إلى نقطة بدايتك.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "اضغط على تم عند الانتهاء.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "لا توجد بيانات";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "يقيس اختبار الجمع المتوالى السمعى المتواتر سرعة معالجة المعلومات السمعية والقدرة الحسابية.";
+"PVSAT_INTRO_TEXT" = "يقيس اختبار الجمع المتوالى البصري المتواتر سرعة معالجة المعلومات المرئية والقدرة الحسابية.";
+"PAVSAT_INTRO_TEXT" = "يقيس اختبار الجمع المتوالى السمعى البصري المتواتر سرعة معالجة المعلومات السمعية والمرئية والقدرة الحسابية.";
+"PSAT_INTRO_TEXT_2_%@" = "يتم تقديم الأعداد الفردية كل %@ من الثواني.\nيجب أن تجمع كل عدد جديد على العدد الذي يسبقه مباشرةً.\nانتبه، لا ينبغي أن تحسب مجموع السلسلة المستمرة، لكن احسب فقط مجموع آخر رقمين.";
+"PSAT_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"PSAT_INITIAL_INSTRUCTION" = "تذكر هذا العدد الأول.";
+"PSAT_INSTRUCTION" = "اجمع هذا العدد الجديد على العدد السابق.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "تعذر إنشاء الملف";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "تعذر إزالة ملفات السجل الكافية للوصول إلى الحد";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "عنوان لعبة الذاكرة";
 
 "AX_IMAGE_CAPTURE_LABEL" = "معاينة الالتقاط";
+"AX_IMAGE_CAPTURED_LABEL" = "تم التقاط الصورة";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "غير قادر على وضع القرص بحجم %@ على القرص بحجم %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "الهدف";
+"AX_TOWER_OF_HANOI_TOWER" = "برج";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "اضغط مرتين لوضع القرص";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "اضغط مرتين لتحديد أعلى قرص";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "يحتوي على أقراص بأحجام %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "فارغ";
+
+"AX_GRAPH_RANGE_FORMAT" = "يتراوح من %@ إلى %@";
+"AX_GRAPH_AND_SEPARATOR" = " و ";

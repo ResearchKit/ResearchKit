@@ -60,6 +60,7 @@ const CGFloat DotToLabelPadding = 6.0;
     _titleLabel.textColor = ORKColor(ORKChartDefaultTextColorKey);
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _titleLabel.isAccessibilityElement = NO;
     _dotView = [UIView new];
     _dotView.translatesAutoresizingMaskIntoConstraints = NO;
     _dotView.layer.cornerRadius = DotViewSize * 0.5;
@@ -73,7 +74,7 @@ const CGFloat DotToLabelPadding = 6.0;
 #pragma mark - Layout
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_titleLabel, _dotView);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_titleLabel]-(>=0)-|"
@@ -116,6 +117,16 @@ const CGFloat DotToLabelPadding = 6.0;
 
 + (BOOL)requiresConstraintBasedLayout {
     return YES;
+}
+
+#pragma mark - Accessibility
+
+- (BOOL)isAccessibilityElement {
+    return YES;
+}
+
+- (NSString *)accessibilityLabel {
+    return _titleLabel.accessibilityLabel;
 }
 
 @end

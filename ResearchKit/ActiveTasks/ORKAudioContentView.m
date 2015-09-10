@@ -64,23 +64,6 @@ static const CGFloat kValueLineMargin = 1.5;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:nil
-                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1
-                                                                        constant:CGFLOAT_MAX];
-        constraint1.priority = UILayoutPriorityFittingSizeLevel;
-        NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:self
-                                                              attribute:NSLayoutAttributeHeight
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:nil
-                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1
-                                                                        constant:CGFLOAT_MAX];
-        constraint2.priority = UILayoutPriorityFittingSizeLevel;
-        [NSLayoutConstraint activateConstraints:@[constraint1, constraint2]];
         
 #if TARGET_IPHONE_SIMULATOR
         _values = @[@(0.2),@(0.6),@(0.55), @(0.1), @(0.75), @(0.7)];

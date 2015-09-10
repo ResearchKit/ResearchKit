@@ -38,8 +38,6 @@ static const CGFloat ImageVerticalPadding = 3.0;
 
 @implementation ORKYAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
-    NSMutableArray *_titleTickLayers;
-    
     UIImageView *_maxImageView;
     UIImageView *_minImageView;
     
@@ -61,7 +59,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
     if (self) {
         _parentGraphChartView = parentGraphChartView;
         _axisColor = _parentGraphChartView.axisColor;
-        _titleColor = _parentGraphChartView.axisTitleColor;
+        _titleColor = _parentGraphChartView.verticalAxisTitleColor;
     }
     return self;
 }
@@ -142,7 +140,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
                 tickLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
             }
             tickLabel.backgroundColor = [UIColor clearColor];
-            tickLabel.textColor = _parentGraphChartView.axisTitleColor;
+            tickLabel.textColor = _titleColor;
             tickLabel.textAlignment = NSTextAlignmentRight;
             tickLabel.font = _titleFont;
             tickLabel.minimumScaleFactor = 0.8;

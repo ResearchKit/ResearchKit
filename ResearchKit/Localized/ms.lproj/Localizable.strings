@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Keizinan";
-"CONSENT_NAME_FIRST" = "Nama Pertama";
-"CONSENT_NAME_LAST" = "Nama Akhir";
+"CONSENT_NAME_GIVEN" = "Nama Pertama";
+"CONSENT_NAME_FAMILY" = "Nama Akhir";
 "CONSENT_NAME_PLACEHOLDER" = "Diperlukan";
 "CONSENT_REVIEW_TITLE" = "Semak";
 "CONSENT_REVIEW_INSTRUCTION" = "Semak borang di bawah dan ketik Setuju jika anda bersedia untuk meneruskan.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ melebihi nilai maksimum yang dibenarkan (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ kurang daripada nilai minimum yang dibenarkan (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ bukan nilai yang sah.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Alamat e-mel tidak sah: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Kandungan teks melebihi panjang maksimum: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera tidak tersedia dalam skrin terpisah.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Percubaan %@ daripada %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Goncang peranti dengan cepat apabila bulatan biru muncul";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Menara Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Aktiviti ini menilai keupayaan penyelesaian teka-teki anda.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Alihkan keseluruhan tindanan ke platform yang diserlahkan dalam paling kurang pergerakan yang mungkin.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Ketik Mulakan untuk bermula";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Selesaikan Teka-Teki";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Bilangan Pergerakan: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Saya tidak boleh menyelesaikan teka-teki ini";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Jalan Bermasa";
+"TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi ekstremiti bawah badan anda.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat yang mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Ketik Seterusnya untuk bermula.";
+"TIMED_WALK_FORM_TITLE" = "Peranti bantuan";
+"TIMED_WALK_FORM_TEXT" = "Gunakan peranti bantuan yang sama untuk setiap ujian.";
+"TIMED_WALK_QUESTION_TEXT" = "Adakah anda memakai ortosis buku lali kaki?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Adakah anda menggunakan peranti bantuan?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Ketik di sini untuk memilih jawapan.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Tiada";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Tongkat Satu Tangan";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Topang Satu Tangan";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Tongkat Dua Tangan";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Topang Dua Tangan";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Pejalan/Rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Jalan sehingga %@ dalam garis lurus.";
+"TIMED_WALK_INSTRUCTION_2" = "Pusing dan berjalan balik ke tempat anda bermula.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Ketik Selesai apabila selesai.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Tiada Data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Ujian Penambahan Bersiri Pendengaran Berkadar mengukur kelajuan pemprosesan maklumat pendengaran dan keupayaan pengiraan anda.";
+"PVSAT_INTRO_TEXT" = "Ujian Penambahan Bersiri Visual Berkadar mengukur kelajuan pemprosesan maklumat visual dan keupayaan pengiraan anda.";
+"PAVSAT_INTRO_TEXT" = "Ujian Penambahan Bersiri Pendengaran dan Visual Berkadar mengukur kelajuan pemprosesan maklumat pendengaran dan visual serta keupayaan pengiraan anda.";
+"PSAT_INTRO_TEXT_2_%@" = "Digit tunggal dipaparkan setiap %@ saat.\nAnda mesti menambahkan setiap digit baru dengan digit yang betul-betul sebelumnya.\nHarap maklum, anda tidak boleh mengira jumlah keseluruhan, namun jumlah dua nombor terakhir sahaja.";
+"PSAT_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"PSAT_INITIAL_INSTRUCTION" = "Ingati digit pertama ini.";
+"PSAT_INSTRUCTION" = "Tambah digit baru ini pada yang sebelumnya.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat mencipta fail";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat mengeluarkan fail log yang mencukupi untuk mencapai nilai ambang";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "Jubin permainan memori";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Pratonton tangkapan";
+"AX_IMAGE_CAPTURED_LABEL" = "Imej ditangkap";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Tidak dapat menempatkan cakera bersaiz %@ pada cakera bersaiz %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Sasaran";
+"AX_TOWER_OF_HANOI_TOWER" = "Menara";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dwiketik untuk menempatkan cakera";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dwiketik untuk memilih cakera teratas";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Mempunyai cakera bersaiz %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Kosong";
+
+"AX_GRAPH_RANGE_FORMAT" = "Julat daripada %@ hingga %@";
+"AX_GRAPH_AND_SEPARATOR" = " dan ";

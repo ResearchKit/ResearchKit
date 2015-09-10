@@ -40,7 +40,7 @@
 @implementation ORKPieChartTitleTextView  {
     __weak ORKPieChartView *_parentPieChartView;
     
-    NSMutableArray *_variableConstraints;
+    NSMutableArray<NSLayoutConstraint *> *_variableConstraints;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -87,7 +87,7 @@
 }
 
 - (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
+    NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray new];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_titleLabel
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
@@ -155,6 +155,24 @@
                          _textLabel.alpha = 1.0;
                          _noDataLabel.alpha = 1.0;
                      }];
+}
+
+#pragma mark - Accessibility
+
+- (NSArray<id> *)accessibilityElements {
+    if (!_titleLabel || !_textLabel || !_noDataLabel) {
+        return nil;
+    }
+    
+    NSMutableArray<id> *accessibilityElements = [[NSMutableArray alloc] init];
+    if (!_noDataLabel.hidden) {
+        [accessibilityElements addObject:_noDataLabel];
+    } else {
+        [accessibilityElements addObject:_titleLabel];
+        [accessibilityElements addObject:_textLabel];
+    }
+    
+    return accessibilityElements;
 }
 
 @end
