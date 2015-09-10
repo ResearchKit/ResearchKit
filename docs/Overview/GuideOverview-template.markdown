@@ -84,9 +84,9 @@ currently doesn’t include:
 You are responsible for complying with applicable law for each
 territory in which the app is made available.
 
-## Logging Level
+## Logging Errors and Warnings
 
-The ResearchKit framework supports four logging levels, controlled by four preprocessor macros and their corresponding *`NSLog()`-like* logging macros:
+The ResearchKit framework supports four log levels, controlled by four preprocessor macros and their corresponding *`NSLog()`-like* logging macros:
 * `ORK_LOG_LEVEL_NONE`
 * `ORK_LOG_LEVEL_DEBUG`, `ORK_Log_Debug()`
 * `ORK_LOG_LEVEL_WARNING`, `ORK_Log_Warning()`
