@@ -40,7 +40,7 @@
 #  undef ORK_LOG_LEVEL_ERROR
 #endif
 
-#if ( !defined(ORK_LOG_LEVEL_DEBUG) && !defined(ORK_LOG_LEVEL_WARNING) && !defined(ORK_LOG_LEVEL_ERROR) )
+#if ( !defined(ORK_LOG_LEVEL_NONE) && !defined(ORK_LOG_LEVEL_DEBUG) && !defined(ORK_LOG_LEVEL_WARNING) && !defined(ORK_LOG_LEVEL_ERROR) )
 #  define ORK_LOG_LEVEL_WARNING 1
 #endif
 
