@@ -1,4 +1,4 @@
-# 
+#
 <sub>These materials are for informational purposes only and do not constitute legal advice. You should contact an attorney to obtain advice with respect to the development of a research app and any applicable laws.</sub>
 
 #ResearchKit Framework Programming Guide
@@ -11,7 +11,7 @@ activities and generate data from anywhere.
 
 ##Modules   
 
-The ResearchKit framework provides three customizable modules that address some of 
+The ResearchKit framework provides three customizable modules that address some of
 the most common elements of research: surveys, consent, and
 active tasks. You can use these modules as they are, build on them,
 and even create completely new modules of your own.
@@ -55,7 +55,7 @@ attach the task to a task view controller object
 the task view controller generates a step result object
 (`ORKStepResult`) that records the start and end time for that step,
 and any results from the step.
- 
+
 <center><img src="overview.png" width="80%" alt="ResearchKit framework Overview"/></center>
 
 In a simple app, you can build up your tasks directly in code, collect
@@ -83,3 +83,19 @@ currently doesn’t include:
 
 You are responsible for complying with applicable law for each
 territory in which the app is made available.
+
+## Logging Level
+
+The ResearchKit framework supports four logging levels, controlled by four preprocessor macros and their corresponding *`NSLog()`-like* logging macros:
+* `ORK_LOG_LEVEL_NONE`
+* `ORK_LOG_LEVEL_DEBUG`, `ORK_Log_Debug()`
+* `ORK_LOG_LEVEL_WARNING`, `ORK_Log_Warning()`
+* `ORK_LOG_LEVEL_ERROR`, `ORK_Log_Error()`
+
+Setting the ResearchKit's framework `ORK_LOG_LEVEL_NONE` macro to `1` completely silences all ResearchKit logs, overriding any other specified log level. Setting `ORK_LOG_LEVEL_DEBUG`, `ORK_LOG_LEVEL_WARNING`, or `ORK_LOG_LEVEL_ERROR` to `1` enables logging at that level and at those of higher seriousness.
+
+If you do not explicitly set a log level, `ORK_LOG_LEVEL_WARNING=1` is used by default.
+
+You have to set any of these preprocessor macros in your ResearchKit subproject, not in your main project. Within *Xcode*, you can do so by setting any of them in the `Preprocessor Macros` list on the `Build Settings` of your `ResearchKit` framework target.
+
+See these resources if you are using ResearchKit through CocoaPods and need to change the log level: [[1]](http://stackoverflow.com/a/30038120/269753) [[2]](http://www.mokacoding.com/blog/cocoapods-and-custom-build-configurations/).
