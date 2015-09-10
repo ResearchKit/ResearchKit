@@ -38,28 +38,10 @@ static NSString *_defaultService;
 
 #pragma mark - Public Methods
 
-+ (BOOL)setData:(NSData *)data
-         forKey:(NSString *)key
-          error:(NSError **)error {
-    return [self setData:data
-                  forKey:key
-                 service:[self defaultService]
-             accessGroup:nil
-                   error:error];
-}
-
-+ (NSData *)dataForKey:(NSString *)key
-                 error:(NSError **)error {
-    return [self dataForKey:key
-                    service:[self defaultService]
-                accessGroup:nil
-                      error:error];
-}
-
-+ (BOOL)setString:(NSString *)value
++ (BOOL)setObject:(id<NSSecureCoding>)object
            forKey:(NSString *)key
             error:(NSError **)error {
-    NSData *data = [value dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
     return [self setData:data
                   forKey:key
                  service:[self defaultService]
@@ -67,17 +49,17 @@ static NSString *_defaultService;
                    error:error];
 }
 
-+ (NSString *)stringForKey:(NSString *)key
-                     error:(NSError **)error {
++ (id<NSSecureCoding>)objectForKey:(NSString *)key
+             error:(NSError *__autoreleasing *)error {
     NSData *data = [self dataForKey:key
                             service:[self defaultService]
                         accessGroup:nil
                               error:error];
-    return data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : nil;
+    return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
 }
 
-+ (BOOL)removeValueForKey:(NSString *)key
-                    error:(NSError **)error {
++ (BOOL)removeObjectForKey:(NSString *)key
+                     error:(NSError **)error {
     return [self removeItemForKey:key
                           service:[self defaultService]
                       accessGroup:nil

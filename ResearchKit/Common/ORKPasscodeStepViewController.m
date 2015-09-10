@@ -107,8 +107,13 @@
         // If Touch ID was enabled then present it for authentication flow.
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            NSData *data = [ORKKeychainWrapper dataForKey:kPasscodeKey error:nil];
-            NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            NSError *error;
+            NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:kPasscodeKey error:&error];
+            
+            if (error) {
+                @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+            }
+            
             BOOL touchIdIsEnabled = [dictionary[kKeychainDictionaryTouchIdKey] boolValue];
             if (touchIdIsEnabled) {
                 [self promptTouchId];
@@ -324,17 +329,31 @@
                                  kKeychainDictionaryPasscodeKey : [_passcode copy],
                                  kKeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
                                  };
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dictionary];
-    _isPasscodeSaved = [ORKKeychainWrapper setData:data forKey:kPasscodeKey error:nil];
+    NSError *error;
+    _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:kPasscodeKey error:&error];
+    
+    if (error) {
+        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+    }
 }
 
 - (void)removePasscodeFromKeychain {
-    [ORKKeychainWrapper removeValueForKey:kPasscodeKey error:nil];
+    NSError *error;
+    [ORKKeychainWrapper removeObjectForKey:kPasscodeKey error:&error];
+    
+    if (error) {
+        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+    }
 }
 
 - (BOOL)passcodeMatchesKeychain {
-    NSData *data = [ORKKeychainWrapper dataForKey:kPasscodeKey error:nil];
-    NSDictionary *dictionary = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSError *error;
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:kPasscodeKey error:&error];
+    
+    if (error) {
+        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+    }
+    
     NSString *storedPasscode = dictionary[kKeychainDictionaryPasscodeKey];
     return ([storedPasscode isEqualToString:_passcode]);
 }

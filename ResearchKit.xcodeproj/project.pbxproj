@@ -41,7 +41,7 @@
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		241A2E871B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */; };
-		2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */; settings = {ASSET_TAGS = (); }; };
+		2433C9E31B9A506F0052D375 /* ORKKeychainWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2433C9E41B9A506F0052D375 /* ORKKeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */; };

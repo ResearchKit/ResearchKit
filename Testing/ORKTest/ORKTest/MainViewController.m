@@ -1145,7 +1145,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     ORKVisualConsentStep *step = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visual_consent" document:consentDocument];
     ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
-    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completeing the tasks.";
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";

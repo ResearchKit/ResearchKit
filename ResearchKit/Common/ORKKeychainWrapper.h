@@ -41,66 +41,42 @@ ORK_CLASS_AVAILABLE
 @interface ORKKeychainWrapper : NSObject
 
 /**
- Returns the data in the keychain for the provided key.
+ Sets the given object in the keychain for the provided key.
+ 
+ @param object      The data to be stored in the keychain.
+ @param key         The key used to set the data in the keychain.
+ @param error       If failure occurred, an `NSError` object indicating the reason for the
+                    failure. The value of this parameter is `nil` if `result` does not
+                    indicate failure.
+ 
+ @return A boolean with a value `YES` if the object was saved; otherwise `NO'.
+ */
++ (BOOL)setObject:(id<NSSecureCoding>)object forKey:(NSString *)key error:(NSError **)error;
+
+
+/**
+ Returns the object in the keychain for the provided key.
  
  @param key         The key used to set the data in the keychain.
  @param error       If failure occurred, an `NSError` object indicating the reason for the
                     failure. The value of this parameter is `nil` if `result` does not
                     indicate failure.
  
- @return A NSData object or `nil` if key is not valid.
+ @return An object or `nil` if key is not valid.
  */
-+ (NSData *)dataForKey:(NSString *)key error:(NSError **)error;
++ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError **)error;
 
 /**
- Sets the given data in the keychain for the provided key.
- 
- @param data        The data to be stored in the keychain.
- @param key         The key used to set the data in the keychain.
- @param error       If failure occurred, an `NSError` object indicating the reason for the 
-                    failure. The value of this parameter is `nil` if `result` does not
-                    indicate failure.
- 
- @return A boolean with a value `YES` if the data was saved; otherwise `NO'.
- */
-+ (BOOL)setData:(NSData *)data forKey:(NSString *)key error:(NSError **)error;
-
-/**
- Returns a string in the keychain for the provided key.
- 
- @param key         The key used to set the string in the keychain.
- @param error       If failure occurred, an `NSError` object indicating the reason for the
-                    failure. The value of this parameter is `nil` if `result` does not
-                    indicate failure.
- 
- @return A string or `nil` if key is not valid.
- */
-+ (NSString *)stringForKey:(NSString *)key error:(NSError **)error;
-
-/**
- Sets the given string in the keychain for the provided key.
- 
- @param string      The string to be stored in the keychain.
- @param key         The key used to set the string in the keychain.
- @param error       If failure occurred, an `NSError` object indicating the reason for the
-                    failure. The value of this parameter is `nil` if `result` does not
-                    indicate failure.
- 
- @return A boolean with a value `YES` if the string was saved; otherwise `NO'.
- */
-+ (BOOL)setString:(NSString *)value forKey:(NSString *)key error:(NSError **)error;
-
-/**
- Removes the value in the keychain for the provided key.
+ Removes the object in the keychain for the provided key.
  
  @param key         The key used to set the value in the keychain.
  @param error       If failure occurred, an `NSError` object indicating the reason for the
                     failure. The value of this parameter is `nil` if `result` does not
                     indicate failure.
  
- @return A boolean with a value `YES` if the value was removed; otherwise `NO'.
+ @return A boolean with a value `YES` if the object was removed; otherwise `NO'.
 */
-+ (BOOL)removeValueForKey:(NSString *)key error:(NSError **)error;
++ (BOOL)removeObjectForKey:(NSString *)key error:(NSError **)error;
 
 /**
  Removes all values stored in the keychain for the app.
