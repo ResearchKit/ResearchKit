@@ -271,6 +271,146 @@
 "PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
 "PSAT_NO_DIGIT" = "-";
 
+
+/* Nottingham EADL Survey */
+"NEADL_INTRO_TITLE" = "Daily activities";
+"NEADL_INTRO_TEXT" = "Help us understand what you are now able to do for yourself.\nChoose which answer is most appropriate.\nOnly record what you have ACTUALLY done in the last few weeks.\n\nThis survey is called the Nottingham Extended Activities of Daily Living Scale. It was developed by the University of Nottingham.";
+
+"NEADL_ANSWER_0" = "Not at all";
+"NEADL_ANSWER_1" = "With help";
+"NEADL_ANSWER_2" = "On your own with difficulty";
+"NEADL_ANSWER_3" = "On your own";
+"NEADL_TITLE_MOBILITY" = "Mobility";
+"NEADL_TITLE_KITCHEN" = "In the kitchen";
+"NEADL_TITLE_TASKS" = "Domestic tasks";
+"NEADL_TITLE_LEISURE" = "Leisure activities";
+"NEADL_Q0" = "In the last week, did you walk around outside?";
+"NEADL_Q1" = "In the last week, did you climb stairs?";
+"NEADL_Q2" = "In the last week, did you get in and out of a car?";
+"NEADL_Q3" = "In the last week, did you walk over uneven ground?";
+"NEADL_Q4" = "In the last week, did you cross roads?";
+"NEADL_Q5" = "In the last week, did you travel on public transport?";
+"NEADL_Q6" = "In the last week, did you manage to feed yourself?";
+"NEADL_Q7" = "In the last week, did you make yourself a hot drink?";
+"NEADL_Q8" = "In the last week, did you carry hot drinks from one room to the other?";
+"NEADL_Q9" = "In the last week, did you do the washing up?";
+"NEADL_Q10" = "In the last week, did you make a hot snack?";
+"NEADL_Q11" = "In the last week, did you manage your own money when out?";
+"NEADL_Q12" = "In the last week, did you wash small items of clothing?";
+"NEADL_Q13" = "In the last week, did you do your own housework?";
+"NEADL_Q14" = "In the last week, did you do your own shopping?";
+"NEADL_Q15" = "In the last week, did you do a full clothes wash?";
+"NEADL_Q16" = "In the last week, did you read newspapers or books?";
+"NEADL_Q17" = "In the last week, did you use the telephone?";
+"NEADL_Q18" = "In the last week, did you write letters?";
+"NEADL_Q19" = "In the last week, did you go out socially?";
+"NEADL_Q20" = "In the last week, did you manage your own garden?";
+"NEADL_Q21" = "In the last week, did you drive a car?";
+
+/* Stroke Impact Scale 3.0 Survey */
+
+"SIS_INTRO_TITLE" = "Daily Activities";
+"SIS_INTRO_TEXT" = "Help us understand what you are now able to do for yourself.\nChoose which answer is most appropriate.\nOnly record what you have ACTUALLY done in the last few weeks.\n\nThis survey is called the Stroke Impact Scale.";
+
+"SIS_STRENGTH_ANSWER_1" = "A lot of strength";
+"SIS_STRENGTH_ANSWER_2" = "Quite a bit of strength";
+"SIS_STRENGTH_ANSWER_3" = "Some strength";
+"SIS_STRENGTH_ANSWER_4" = "A little strength";
+"SIS_STRENGTH_ANSWER_5" = "No strength at all";
+
+"SIS_DIFFICULTY_ANSWER_1" = "Not difficult at all";
+"SIS_DIFFICULTY_ANSWER_2" = "A little difficult";
+"SIS_DIFFICULTY_ANSWER_3" = "Somewhat difficult";
+"SIS_DIFFICULTY_ANSWER_4" = "Very difficult";
+"SIS_DIFFICULTY_ANSWER_5" = "Extremely difficult";
+
+"SIS_TIME_ANSWER_1" = "None of the time";
+"SIS_TIME_ANSWER_2" = "A little of the time";
+"SIS_TIME_ANSWER_3" = "Some of the time";
+"SIS_TIME_ANSWER_4" = "Most of the time";
+"SIS_TIME_ANSWER_5" = "All of the time";
+
+"SIS_TITLE_PHYSICAL" = "1. Physical effects";
+"SIS_TITLE_MEMORY" = "2. Memory and thinking";
+"SIS_TITLE_MOOD" = "3. Mood and emotions";
+"SIS_TITLE_COMMUNICATION" = "4. Communication";
+"SIS_TITLE_ACTIVITIES" = "5. Daily activities";
+"SIS_TITLE_MOBILITY" = "6. Mobility";
+"SIS_TITLE_HAND" = "7. Hand function";
+"SIS_TITLE_PARTICIPATE" = "8. Participation / fulfillment";
+"SIS_RECOVERY_TITLE" = "9. Stroke recovery";
+
+"SIS_Q0"  = "a) In the past week, how would you rate the strength of your arm most affected by your stroke?";
+"SIS_Q1"  = "b) In the past week, how would you rate the strength of your grip in the hand most affected by your stroke?";
+"SIS_Q2"  = "c) In the past week, how would you rate the strength of your leg most affected by your stroke?";
+"SIS_Q3"  = "d) In the past week, how would you rate the strength of your foot/ankle most affected by your stroke?";
+
+"SIS_Q4"  = "a) In the past week, how difficult was it to remember things that people just told you?";
+"SIS_Q5"  = "b) In the past week, how difficult was it to remember things that happened the day before?";
+"SIS_Q6"  = "c) In the past week, how difficult was it to remember to do things (e.g. keep scheduled appointments or take medication?";
+"SIS_Q7"  = "d) In the past week, how difficult was it to remember the day of the week?";
+"SIS_Q8"  = "e) In the past week, how difficult was it to concentrate?";
+"SIS_Q9"  = "f) In the past week, how difficult was it to think quickly?";
+"SIS_Q10" = "g) In the past week, how difficult was it to solve everyday problems?";
+
+"SIS_Q11" = "a) In the past week, how often did you feel sad?";
+"SIS_Q12" = "b) In the past week, how often did you feel that there is nobody you are close to?";
+"SIS_Q13" = "c) In the past week, how often did you feel that you are a burden to others?";
+"SIS_Q14" = "d) In the past week, how often did you feel that you have nothing to look forward to?";
+"SIS_Q15" = "e) In the past week, how often did you blame yourself for mistakes that you made?";
+"SIS_Q16" = "f) In the past week, how often did you enjoy things as much as ever?";
+"SIS_Q17" = "g) In the past week, how often did you feel quite nervous?";
+"SIS_Q18" = "h) In the past week, how often did you feel that life is worth living?";
+"SIS_Q19" = "i) In the past week, how often did you smile and laugh at least once a day?";
+
+"SIS_Q20" = "a) In the past week, how difficult was it to say the name of someone who was in front of you?";
+"SIS_Q21" = "b) In the past week, how difficult was it to understand what was being said to you in a conversation?";
+"SIS_Q22" = "c) In the past week, how difficult was it to reply to questions?";
+"SIS_Q23" = "d) In the past week, how difficult was it to correctly name objects?";
+"SIS_Q24" = "e) In the past week, how difficult was it to pariticipate in a conversation with a group of people?";
+"SIS_Q25" = "f) In the past week, how difficult was it to have a conversation on the telephone?";
+"SIS_Q26" = "g) In the past week, how difficult was it to call another person on the telephone, including selecting the correct phone number and dialling?";
+
+"SIS_Q27" = "a) In the past 2 weeks, how difficult was it to cut your food with a knife and fork?";
+"SIS_Q28" = "b) In the past 2 weeks, how difficult was it to dress the top half of your body?";
+"SIS_Q29" = "c) In the past 2 weeks, how difficult was it to bathe yourself?";
+"SIS_Q30" = "d) In the past 2 weeks, how difficult was it to clip your toenails?";
+"SIS_Q31" = "e) In the past 2 weeks, how difficult was it to get to the toilet on time?";
+"SIS_Q32" = "f) In the past 2 weeks, how difficult was it to control your bladder (not have an accident)?";
+"SIS_Q33" = "g) In the past 2 weeks, how difficult was it to control your bowels (not have an accident)?";
+"SIS_Q34" = "h) In the past 2 weeks, how difficult was it to do light household tasks/chores (e.g. dust, make a bed, do the dishes)?";
+"SIS_Q35" = "i) In the past 2 weeks, how difficult was it to go shopping?";
+"SIS_Q36" = "j) In the past 2 weeks, how difficult was it to do heavy household chores (e.g. vacuum, laundry or gardening)?";
+
+"SIS_Q37" = "a) In the past 2 weeks, how difficult was it to stay sitting without losing your balance?";
+"SIS_Q38" = "b) In the past 2 weeks, how difficult was it to stay standing without losing your balance?";
+"SIS_Q39" = "c) In the past 2 weeks, how difficult was it to walk without losing your balance?";
+"SIS_Q40" = "d) In the past 2 weeks, how difficult was it to move from a bed to a chair?";
+"SIS_Q41" = "e) In the past 2 weeks, how difficult was it to walk outside a short distance?";
+"SIS_Q42" = "f) In the past 2 weeks, how difficult was it to walk quickly?";
+"SIS_Q43" = "g) In the past 2 weeks, how difficult was it to climb a flight of stairs?";
+"SIS_Q44" = "h) In the past 2 weeks, how difficult was it to climb several flights of stairs?";
+"SIS_Q45" = "i) In the past 2 weeks, how difficult was it to get in and out of a car?";
+
+"SIS_Q46" = "a) In the past 2 weeks, how difficult was it to use your hand that was most affected by your stroke to carry heavy objects (e.g. a bag of groceries)?";
+"SIS_Q47" = "b) In the past 2 weeks, how difficult was it to use your hand that was most affected by your stroke to turn a doorknob?";
+"SIS_Q48" = "c) In the past 2 weeks, how difficult was it to use your hand that was most affected by your stroke to open a can or jar?";
+"SIS_Q49" = "d) In the past 2 weeks, how difficult was it to use your hand that was most affected by your stroke to tie a shoelace?";
+"SIS_Q50" = "e) In the past 2 weeks, how difficult was it to use your hand that was most affected by your stroke to pick up a coin?";
+
+"SIS_Q51" = "a) In the past 4 weeks, how much of the time have you been limited in your work (paid, voluntary or other)?";
+"SIS_Q52" = "b) In the past 4 weeks, how much of the time have you been limited in your social activities?";
+"SIS_Q53" = "c) In the past 4 weeks, how much of the time have you been limited in quiet recreation (crafts / reading)?";
+"SIS_Q54" = "d) In the past 4 weeks, how much of the time have you been limited in active recreation (sports, outings, travel)?";
+"SIS_Q55" = "e) In the past 4 weeks, how much of the time have you been limited in your role as a family member and/or friend?";
+"SIS_Q56" = "f) In the past 4 weeks, how much of the time have you been limited in your participation in spiritual or religious activities?";
+"SIS_Q57" = "g) In the past 4 weeks, how much of the time have you been limited in your ability to control your life as you wish?";
+"SIS_Q58" = "h) In the past 4 weeks, how much of the time have you been limited in your ability to help others?";
+
+"SIS_RECOVERY_TEXT" = "On a scale between 0 to 100, how much have you recovered from your stroke?";
+"SIS_RECOVERY_MAX" = "Full recovery";
+"SIS_RECOVERY_MIN" = "No recovery";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";

@@ -62,6 +62,8 @@ DefineStringKey(ReactionTimeTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(NottinghamEADLIdentifier);
+DefineStringKey(StrokeImpactScaleIdentifier);
 DefineStringKey(StepNavigationTaskIdentifier);
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 
@@ -247,6 +249,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Consent",
                             @"Question Steps",
                             @"Active Tasks",
+                            @"Prebuilt surveys",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Consent
@@ -273,6 +276,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           ],
+                       @[ // Surveys
+                           @"Nottingham EADL scale",
+                           @"Stroke Impact Scale",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -435,6 +442,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                      stimulusDuration:1.0
                                          seriesLength:60
                                               options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:NottinghamEADLIdentifier]) {
+        return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:NottinghamEADLIdentifier
+                                             prebuiltSurveyType:NottinghamEADL
+                                                        options:0];
+    } else if ([identifier isEqualToString:StrokeImpactScaleIdentifier]) {
+        return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:StrokeImpactScaleIdentifier
+                                             prebuiltSurveyType:StrokeImpactScale
+                                                        options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1569,6 +1584,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)psatTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
+}
+
+- (IBAction)nottinghamEadlScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:NottinghamEADLIdentifier];
+}
+
+- (IBAction)strokeImpactScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StrokeImpactScaleIdentifier];
 }
 
 #pragma mark - Dynamic task
