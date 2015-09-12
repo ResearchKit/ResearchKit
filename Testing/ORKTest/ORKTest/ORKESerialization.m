@@ -30,6 +30,7 @@
 
 
 #import "ORKESerialization.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
@@ -585,6 +586,7 @@ ret =
         },
         (@{
           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+          PROPERTY(optional, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(text, NSString, NSObject, NO, nil, nil),
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
