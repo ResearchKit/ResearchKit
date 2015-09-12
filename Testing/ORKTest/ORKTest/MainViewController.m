@@ -61,10 +61,12 @@ DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(ReactionTimeTaskIdentifier);
 DefineStringKey(ScreeningTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(NottinghamEADLIdentifier);
 DefineStringKey(StrokeImpactScaleIdentifier);
-DefineStringKey(StepNavigationTaskIdentifier);
+
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
 DefineStringKey(StepNavigationTaskIdentifier);
