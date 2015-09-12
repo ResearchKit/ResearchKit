@@ -273,7 +273,7 @@
 
 
 /* Nottingham EADL Survey */
-"NEADL_INTRO_TITLE" = "Daily activities";
+"NEADL_INTRO_TITLE" = "Daily Activities";
 "NEADL_INTRO_TEXT" = "Help us understand what you are now able to do for yourself.\nChoose which answer is most appropriate.\nOnly record what you have ACTUALLY done in the last few weeks.\n\nThis survey is called the Nottingham Extended Activities of Daily Living Scale. It was developed by the University of Nottingham.";
 
 "NEADL_ANSWER_0" = "Not at all";
@@ -410,6 +410,24 @@
 "SIS_RECOVERY_TEXT" = "On a scale between 0 to 100, how much have you recovered from your stroke?";
 "SIS_RECOVERY_MAX" = "Full recovery";
 "SIS_RECOVERY_MIN" = "No recovery";
+
+/* The Epworth Sleep Scale */
+"EPWORTH_INTRO_TITLE" = "How Sleepy Are You?";
+"EPWORTH_INTRO_TEXT" = "How likely are you to doze off or fall asleep in the following situations? You should rate your chances of dozing off, not just feeling tired. Even if you have not done some of these things recently try to determine how they would have affected you.\n\nThis test is called the Epworth Sleepiness Scale.";
+
+"EPWORTH_ANSWER_0" = "No chance of dozing";
+"EPWORTH_ANSWER_1" = "Slight chance of dozing";
+"EPWORTH_ANSWER_2" = "Moderate chance of dozing";
+"EPWORTH_ANSWER_3" = "High chance of dozing";
+
+"EPWORTH_Q0" = "Sitting and reading";
+"EPWORTH_Q1" = "Watching TV";
+"EPWORTH_Q2" = "Sitting inactive in a public place (e.g., a theater or a meeting)";
+"EPWORTH_Q3" = "As a passenger in a car for an hour without a break";
+"EPWORTH_Q4" = "Lying down to rest in the afternoon when circumstances permit";
+"EPWORTH_Q5" = "Sitting and talking to someone";
+"EPWORTH_Q6" = "Sitting quietly after a lunch without alcohol";
+"EPWORTH_Q7" = "In a car, while stopped for a few minutes in traffic";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

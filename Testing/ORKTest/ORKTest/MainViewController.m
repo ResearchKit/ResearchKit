@@ -66,6 +66,7 @@ DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(NottinghamEADLIdentifier);
 DefineStringKey(StrokeImpactScaleIdentifier);
+DefineStringKey(EpworthSleepScaleIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -285,6 +286,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        @[ // Surveys
                            @"Nottingham EADL scale",
                            @"Stroke Impact Scale",
+                           @"Epworth Sleep Scale",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -451,11 +453,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NottinghamEADLIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:NottinghamEADLIdentifier
-                                             prebuiltSurveyType:NottinghamEADL
+                                             prebuiltSurveyType:SurveyTypeNottinghamEADL
                                                         options:0];
     } else if ([identifier isEqualToString:StrokeImpactScaleIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:StrokeImpactScaleIdentifier
-                                             prebuiltSurveyType:StrokeImpactScale
+                                             prebuiltSurveyType:SurveyTypeStrokeImpactScale
+                                                        options:0];
+    } else if ([identifier isEqualToString:EpworthSleepScaleIdentifier]) {
+        return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:EpworthSleepScaleIdentifier
+                                             prebuiltSurveyType:SurveyTypeEpworthSleepScale
                                                         options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
@@ -1892,6 +1898,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)strokeImpactScaleButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:StrokeImpactScaleIdentifier];
+}
+
+- (IBAction)epworthSleepScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EpworthSleepScaleIdentifier];
 }
 
 #pragma mark - Dynamic task

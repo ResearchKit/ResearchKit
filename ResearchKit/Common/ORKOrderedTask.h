@@ -503,8 +503,9 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
 
 
 typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
-    NottinghamEADL,
-    StrokeImpactScale,
+    SurveyTypeNottinghamEADL,
+    SurveyTypeStrokeImpactScale,
+    SurveyTypeEpworthSleepScale
 };
 
 

@@ -366,6 +366,8 @@
 		A201A0CC1BA1065100B7EEDC /* NottinghamEADL.m in Sources */ = {isa = PBXBuildFile; fileRef = A201A0CA1BA1065100B7EEDC /* NottinghamEADL.m */; };
 		A201A0CF1BA10BB400B7EEDC /* StrokeImpactScale.h in Headers */ = {isa = PBXBuildFile; fileRef = A201A0CD1BA10BB400B7EEDC /* StrokeImpactScale.h */; };
 		A201A0D01BA10BB400B7EEDC /* StrokeImpactScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */; };
+		A21DD4221BA4A60300081AD0 /* EpworthSleepScale.h in Headers */ = {isa = PBXBuildFile; fileRef = A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */; };
+		A21DD4231BA4A60300081AD0 /* EpworthSleepScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */; };
 		B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */; };
 		B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -820,6 +822,8 @@
 		A201A0CA1BA1065100B7EEDC /* NottinghamEADL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NottinghamEADL.m; path = ResearchKit/SurveyTasks/NottinghamEADL.m; sourceTree = SOURCE_ROOT; };
 		A201A0CD1BA10BB400B7EEDC /* StrokeImpactScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StrokeImpactScale.h; path = ResearchKit/SurveyTasks/StrokeImpactScale.h; sourceTree = SOURCE_ROOT; };
 		A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StrokeImpactScale.m; path = ResearchKit/SurveyTasks/StrokeImpactScale.m; sourceTree = SOURCE_ROOT; };
+		A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EpworthSleepScale.h; path = ResearchKit/SurveyTasks/EpworthSleepScale.h; sourceTree = SOURCE_ROOT; };
+		A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EpworthSleepScale.m; path = ResearchKit/SurveyTasks/EpworthSleepScale.m; sourceTree = SOURCE_ROOT; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
@@ -1256,6 +1260,8 @@
 				A201A0CA1BA1065100B7EEDC /* NottinghamEADL.m */,
 				A201A0CD1BA10BB400B7EEDC /* StrokeImpactScale.h */,
 				A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */,
+				A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */,
+				A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */,
 			);
 			name = "Survey Tasks";
 			path = Localized;
@@ -2132,6 +2138,7 @@
 				86C40C841A8D7C5C00081FAC /* ORKActiveStepTimer.h in Headers */,
 				86B781BD1AA668ED00688151 /* ORKValuePicker.h in Headers */,
 				86C40DE21A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h in Headers */,
+				A21DD4221BA4A60300081AD0 /* EpworthSleepScale.h in Headers */,
 				BC01B0FB1B0EB99700863803 /* ORKTintedImageView_Internal.h in Headers */,
 				86B89ABE1AB3BFDB001626A4 /* ORKStepHeaderView_Internal.h in Headers */,
 				86C40C1E1A8D7C5C00081FAC /* ORKAudioStepViewController.h in Headers */,
@@ -2456,6 +2463,7 @@
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
+				A21DD4231BA4A60300081AD0 /* EpworthSleepScale.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
