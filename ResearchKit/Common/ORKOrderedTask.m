@@ -58,6 +58,9 @@
 #import "ORKPSATStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
+#import "NottinghamEADL.h"
+#import "StrokeImpactScale.h"
+#import "EpworthSleepScale.h"
 
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
@@ -1196,5 +1199,22 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 
+
++ (ORKOrderedTask *)PrebuiltSurveyTaskWithIdentifier:(NSString *)identifier
+                                  prebuiltSurveyType:(PrebuiltSurveyType)prebuiltSurveyType
+                                             options:(ORKPredefinedTaskOption)options {
+    ORKOrderedTask *surveyTask;
+    switch (prebuiltSurveyType) {
+        case SurveyTypeStrokeImpactScale:
+            surveyTask = [[StrokeImpactScaleSurvey alloc] initWithIdentifier:identifier];
+            break;
+        case SurveyTypeEpworthSleepScale:
+            surveyTask = [[EpworthSleepScale alloc] initWithIdentifier:identifier];
+            break;
+        default:
+            surveyTask = [[NottinghamEADLSurvey alloc] initWithIdentifier:identifier];
+    }
+    return surveyTask;
+}
 
 @end
