@@ -55,6 +55,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             NSString *questionStem = [NSString stringWithFormat:@"EPWORTH_Q%d",questionID];
             step.text = ORKLocalizedString(questionStem, nil);
+            step.optional = false;
         }
         step.answerFormat = answerFormat;
         ORKStepArrayAddStep(steps,step);
