@@ -37,27 +37,27 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
     
     NSArray *answerStrengthChoices = [NSArray arrayWithObjects:
-                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
+                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:1] exclusive:true],
+                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:2] exclusive:true],
+                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:3] exclusive:true],
+                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:4] exclusive:true],
+                                      [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_STRENGTH_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:5] exclusive:true],
                                       nil];
     
     NSArray *answerDifficultyChoices = [NSArray arrayWithObjects:
-                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
+                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:1] exclusive:true],
+                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:2] exclusive:true],
+                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:3] exclusive:true],
+                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:4] exclusive:true],
+                                        [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_DIFFICULTY_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:5] exclusive:true],
                                         nil];
     
     NSArray *answerTimeChoices = [NSArray arrayWithObjects:
-                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
-                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:0] exclusive:true],
+                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_1", nil) detailText:nil value:[NSNumber numberWithInt:1] exclusive:true],
+                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_2", nil) detailText:nil value:[NSNumber numberWithInt:2] exclusive:true],
+                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_3", nil) detailText:nil value:[NSNumber numberWithInt:3] exclusive:true],
+                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_4", nil) detailText:nil value:[NSNumber numberWithInt:4] exclusive:true],
+                                  [[ORKTextChoice alloc] initWithText:ORKLocalizedString(@"SIS_TIME_ANSWER_5", nil) detailText:nil value:[NSNumber numberWithInt:5] exclusive:true],
                                   nil];
     
     ORKTextChoiceAnswerFormat *answerStrengthFormat = [[ORKTextChoiceAnswerFormat alloc] initWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:answerStrengthChoices];
