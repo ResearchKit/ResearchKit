@@ -510,9 +510,11 @@ typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
 
 
 /**
- Returns one of a number of prebuilt validated survey tools.
+ Returns one of a number of prebuilt validated survey tools:
  
  The Nottingham EADL Scale is a standardised survey for measuring function in terms of which daily activities a participant can undertake.
+ The Stroke Impact Scale is a more comprehensive survey looking at the impact of neurological injury on an individual.
+ The Epworth Sleepiness Scale is a validated survey tool which screens for underlying sleep disorders (such as obstructive sleep apnoea).
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param prebuiltSurveyType      The survey tool to be used
