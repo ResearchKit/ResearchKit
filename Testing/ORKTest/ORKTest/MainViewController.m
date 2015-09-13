@@ -67,6 +67,7 @@ DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(NottinghamEADLIdentifier);
 DefineStringKey(StrokeImpactScaleIdentifier);
 DefineStringKey(EpworthSleepScaleIdentifier);
+DefineStringKey(IQCDEIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -287,6 +288,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Nottingham EADL scale",
                            @"Stroke Impact Scale",
                            @"Epworth Sleep Scale",
+                           @"IQCDE",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -462,6 +464,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:EpworthSleepScaleIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:EpworthSleepScaleIdentifier
                                              prebuiltSurveyType:SurveyTypeEpworthSleepScale
+                                                        options:0];
+    } else if ([identifier isEqualToString:IQCDEIdentifier]) {
+        return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:IQCDEIdentifier
+                                             prebuiltSurveyType:SurveyTypeIQCDE
                                                         options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
@@ -1902,6 +1908,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)epworthSleepScaleButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:EpworthSleepScaleIdentifier];
+}
+
+- (IBAction)iqcdeButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:IQCDEIdentifier];
 }
 
 #pragma mark - Dynamic task

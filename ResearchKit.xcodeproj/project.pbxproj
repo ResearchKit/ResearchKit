@@ -368,6 +368,8 @@
 		A201A0D01BA10BB400B7EEDC /* StrokeImpactScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */; };
 		A21DD4221BA4A60300081AD0 /* EpworthSleepScale.h in Headers */ = {isa = PBXBuildFile; fileRef = A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */; };
 		A21DD4231BA4A60300081AD0 /* EpworthSleepScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */; };
+		A2BEF23A1BA5C58D00DEC82D /* IQCDE.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEF2381BA5C58D00DEC82D /* IQCDE.h */; };
+		A2BEF23B1BA5C58D00DEC82D /* IQCDE.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BEF2391BA5C58D00DEC82D /* IQCDE.m */; };
 		B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */; };
 		B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -824,6 +826,8 @@
 		A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StrokeImpactScale.m; path = ResearchKit/SurveyTasks/StrokeImpactScale.m; sourceTree = SOURCE_ROOT; };
 		A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EpworthSleepScale.h; path = ResearchKit/SurveyTasks/EpworthSleepScale.h; sourceTree = SOURCE_ROOT; };
 		A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EpworthSleepScale.m; path = ResearchKit/SurveyTasks/EpworthSleepScale.m; sourceTree = SOURCE_ROOT; };
+		A2BEF2381BA5C58D00DEC82D /* IQCDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IQCDE.h; path = ResearchKit/SurveyTasks/IQCDE.h; sourceTree = SOURCE_ROOT; };
+		A2BEF2391BA5C58D00DEC82D /* IQCDE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IQCDE.m; path = ResearchKit/SurveyTasks/IQCDE.m; sourceTree = SOURCE_ROOT; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
@@ -1262,6 +1266,8 @@
 				A201A0CE1BA10BB400B7EEDC /* StrokeImpactScale.m */,
 				A21DD4201BA4A60300081AD0 /* EpworthSleepScale.h */,
 				A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */,
+				A2BEF2381BA5C58D00DEC82D /* IQCDE.h */,
+				A2BEF2391BA5C58D00DEC82D /* IQCDE.m */,
 			);
 			name = "Survey Tasks";
 			path = Localized;
@@ -2058,6 +2064,7 @@
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
 				86C40D941A8D7C5C00081FAC /* ORKStepViewController.h in Headers */,
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
+				A2BEF23A1BA5C58D00DEC82D /* IQCDE.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,
 				86C40DB61A8D7C5C00081FAC /* ORKSurveyAnswerCellForText.h in Headers */,
 				86C40E281A8D7C5C00081FAC /* ORKSignatureView.h in Headers */,
@@ -2532,6 +2539,7 @@
 				86C40CA21A8D7C5C00081FAC /* ORKHealthQuantityTypeRecorder.m in Sources */,
 				86C40DC01A8D7C5C00081FAC /* ORKTableViewCell.m in Sources */,
 				BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */,
+				A2BEF23B1BA5C58D00DEC82D /* IQCDE.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
 				147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */,

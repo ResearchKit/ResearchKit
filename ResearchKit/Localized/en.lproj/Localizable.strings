@@ -434,6 +434,35 @@
 "EPWORTH_RESULT_1" = "You may be excessively sleepy depending on the situation.";
 "EPWORTH_RESULT_2" = "You are excessively sleepy.";
 
+/* IQCDE (Short Form of the Informant Questionnaire on Cognitive Decline in the Elderly, also known as the Short IQCODE) */
+"IQCDE_INTRO_TITLE" = "Long term memory change";
+"IQCDE_INTRO_TEXT" = "We want you to remember what your friend or relative was like 10 years ago and to compare it with what he/she is like now.\n\nBelow are situations where this person has to use his/her memory or intelligence and we want you to say whether this has improved, stayed the same or got worse.\n\nIt is very important to compare his/her present performance with 10 years ago: if 10 years ago this person always forgot where he/she had left things, and they still do, then this would be considered 'Not much change'.";
+
+"IQCDE_ANSWER_0" = "Much improved";
+"IQCDE_ANSWER_1" = "A bit improved";
+"IQCDE_ANSWER_2" = "Not much change";
+"IQCDE_ANSWER_3" = "A bit worse";
+"IQCDE_ANSWER_4" = "Much worse";
+
+"IQCDE_TITLE" = "Compared to 10 years ago";
+
+"IQCDE_Q0"  = "How good are they at remembering things about friends and family, e.g. occupations, birthdays or addresses?";
+"IQCDE_Q1"  = "How good are they at remembering things that have happened recently?";
+"IQCDE_Q2"  = "How good are they at recalling conversations a few days later?";
+"IQCDE_Q3"  = "How good are they at remembering his or her address and telephone number?";
+"IQCDE_Q4"  = "How good are they at remembering what day and month it is?";
+"IQCDE_Q5"  = "How good are they at remembering where things are usually kept?";
+"IQCDE_Q6"  = "How good are they at remembering where to find things which have been put in a different place from usual?";
+"IQCDE_Q7"  = "How good are they at knowing how to work familiar machines around the house?";
+"IQCDE_Q8"  = "How good are they at learning to use a new gadget or machine around the house?";
+"IQCDE_Q9"  = "How good are they at learning new things in general?";
+"IQCDE_Q10" = "How good are they at following a story in a book or on TV?";
+"IQCDE_Q11" = "How good are they at making decisions on everyday matters?";
+"IQCDE_Q12" = "How good are they at handling money for shopping?";
+"IQCDE_Q13" = "How good are they with financial matters eg. the pension, dealing with the bank?";
+"IQCDE_Q14" = "How good are they with everyday maths (knowing how much food to buy, or how long between visits from family or friends)?";
+"IQCDE_Q15" = "How good are they at using his/her intelligence to understand what's going on and to reason things through?";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
