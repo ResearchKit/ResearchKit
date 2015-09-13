@@ -59,6 +59,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Decimal);
             SQT_CASE(Integer);
             SQT_CASE(Boolean);
+            SQT_CASE(Eligibility)
             SQT_CASE(Text);
             SQT_CASE(DateAndTime);
             SQT_CASE(TimeOfDay);
@@ -280,6 +281,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
+}
+
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithPreferredAnswer:(BOOL)preferredAnswer {
+    return [[ORKEligibilityAnswerFormat alloc] initWithPreferredAnswer:preferredAnswer];
 }
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
@@ -890,6 +895,68 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 @end
+
+
+#pragma mark - ORKEligibilityAnswerFormat
+
+@implementation ORKEligibilityAnswerFormat
+
+- (instancetype)init {
+    self = [self initWithPreferredAnswer:YES];
+    return self;
+}
+
+- (instancetype)initWithPreferredAnswer:(BOOL)preferredAnswer {
+    self = [super init];
+    if (self) {
+        _preferredAnswer = preferredAnswer;
+    }
+    return self;
+}
+
+- (ORKQuestionType) questionType {
+    return ORKQuestionTypeEligibility;
+}
+
+- (Class)questionResultClass {
+    return [ORKBooleanQuestionResult class];
+}
+
+- (BOOL)isAnswerValid:(id)answer {
+    return ([answer boolValue] == self.preferredAnswer);
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.preferredAnswer == castObject.preferredAnswer);
+}
+
+- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
+    return ORKLocalizedString(@"INELIGIBLE_MESSAGE", nil);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, preferredAnswer);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, preferredAnswer);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+@end
+
 
 #pragma mark - ORKTimeOfDayAnswerFormat
 

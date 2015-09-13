@@ -43,6 +43,8 @@
 
 DefineStringKey(ConsentTaskIdentifier);
 DefineStringKey(ConsentReviewTaskIdentifier);
+DefineStringKey(EligibilityFormTaskIdentifier);
+DefineStringKey(EligibilitySurveyTaskIdentifier);
 
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
@@ -256,6 +258,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     _buttonTitles = @[ @[ // Consent
                            @"Consent",
                            @"Consent Review",
+                           @"Eligibility Form",
+                           @"Eligibility Survey"
                            ],
                        @[ // Question Steps
                            @"Date Pickers",
@@ -350,6 +354,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeConsentReviewTask];
     } else if ([identifier isEqualToString:ConsentTaskIdentifier]) {
         return [self makeConsentTask];
+    } else if ([identifier isEqualToString:EligibilityFormTaskIdentifier]) {
+        return [self makeEligibilityFormTask];
+    } else if ([identifier isEqualToString:EligibilitySurveyTaskIdentifier]) {
+        return [self makeEligibilitySurveyTask];
     } else if ([identifier isEqualToString:AudioTaskIdentifier]) {
         id<ORKTask> task = [ORKOrderedTask audioTaskWithIdentifier:AudioTaskIdentifier
                                             intendedUseDescription:nil
@@ -1157,6 +1165,132 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)consentButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ConsentTaskIdentifier];
+}
+
+#pragma mark - Eligibility form task
+/*
+ The eligibility form task is used to test elibility form items (`ORKFormStep`, `ORKFormItem`).
+ */
+- (id<ORKTask>)makeEligibilityFormTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"efid_000"];
+        step.title = @"Eligibility Form";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"efid_001"];
+        step.optional = NO;
+        NSMutableArray *items = [NSMutableArray new];
+        [steps addObject:step];
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_000"
+                                                                   text:@"Are you over 18 years of age?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_001"
+                                                                   text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_002"
+                                                                   text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_003"
+                                                                   text:@"Do you live outside the United States of America?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+            [items addObject:item];
+        }
+        
+        [step setFormItems:items];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"efid_002"];
+        step.title = @"You are eligible to join the study.";
+        step.text = @"Tap the button below to begin the consent process.";
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
+    
+    return task;
+}
+
+- (IBAction)eligibilityFormButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EligibilityFormTaskIdentifier];
+}
+
+#pragma mark - Eligibility survey
+/*
+ The eligibility survey task is used to test elibility survey cell items (`ORKFormStep`, `ORKFormItem`)..
+ */
+- (ORKOrderedTask *)makeEligibilitySurveyTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"esid_001"];
+        step.title = @"Eligibility Survey";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000"
+                                                                      title:@"Are you over 18 years of age?"
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+        step.optional = NO;
+        [steps addObject:step];
+    }
+    
+    {
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001"
+                                                                      title:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+        [steps addObject:step];
+    }
+    
+    {
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_002"
+                                                                      title:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+        step.optional = NO;
+        [steps addObject:step];
+    }
+    
+    {
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
+                                                                      title:@"Do you live outside the United States of America?"
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"esid_002"];
+        step.title = @"You are eligible to join the study.";
+        step.text = @"Tap the button below to begin the consent process.";
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SelectionSurveyTaskIdentifier steps:steps];
+    return task;
+}
+
+- (IBAction)eligibilitySurveyButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EligibilitySurveyTaskIdentifier];
 }
 
 #pragma mark - Mini form task

@@ -736,6 +736,11 @@
                         break;
                     }
                         
+                    case ORKQuestionTypeEligibility: {
+                        class = [ORKFormItemEligibilityCell class];
+                        break;
+                    }
+                        
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
                         break;

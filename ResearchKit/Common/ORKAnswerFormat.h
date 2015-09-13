@@ -60,6 +60,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /// The Boolean question type asks the participant to enter Yes or No (or the appropriate equivalents).
     ORKQuestionTypeBoolean,
     
+    /// The Eligibility question type asks the participant to enter Yes or No (or the appropriate equivalents).
+    ORKQuestionTypeEligibility,
+    
     /// In a text question, the participant can enter multiple lines of text.
     ORKQuestionTypeText,
     
@@ -101,6 +104,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
+@class ORKEligibilityAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
@@ -169,6 +173,8 @@ ORK_CLASS_AVAILABLE
                                                           vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
+
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithPreferredAnswer:(BOOL)preferredAnswer;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
@@ -661,6 +667,34 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+@end
+
+
+/**
+ The `ORKEligibilityAnswerFormat` class provides a custom boolean control with 
+ a preferred answer.
+ 
+ The eligibility answer format produces an `ORKBooleanQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEligibilityAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized eligibility answer format using the specified preferred answer.
+ 
+ @param preferredAnswer         The preferred answer choice to validate eligibility.
+ 
+ @return An initialized eligibility answer format.
+ */
+- (instancetype)initWithPreferredAnswer:(BOOL)preferredAnswer;
+
+/**
+ A Boolean value indicating the correct answer for eligibility.
+ 
+ By default, the value of this property is `YES`.
+ */
+@property (nonatomic) BOOL preferredAnswer;
 
 @end
 

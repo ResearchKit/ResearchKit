@@ -65,6 +65,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case BooleanQuestion
     case DateQuestion
     case DateTimeQuestion
+    case EligibilityQuestion
     case ImageChoiceQuestion
     case NumericQuestion
     case ScaleQuestion
@@ -111,6 +112,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .BooleanQuestion,
                     .DateQuestion,
                     .DateTimeQuestion,
+                    .EligibilityQuestion,
                     .ImageChoiceQuestion,
                     .NumericQuestion,
                     .ScaleQuestion,
@@ -159,6 +161,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .DateTimeQuestion:
             return NSLocalizedString("Date and Time Question", comment: "")
 
+        case .EligibilityQuestion:
+            return NSLocalizedString("Eligibility Question", comment: "")
+            
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
@@ -259,6 +264,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Task with an example of date and time entry.
         case DateTimeQuestionTask
         case DateTimeQuestionStep
+        
+        // Task with an example of an eligibility question.
+        case EligibilityQuestionTask
+        case EligibilityQuestionStep
 
         // Task with an image choice question.
         case ImageChoiceQuestionTask
@@ -342,6 +351,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return dateTimeQuestionTask
+            
+        case .EligibilityQuestion:
+            return eligibilityQuestionTask
 
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -505,6 +517,18 @@ enum TaskListRow: Int, CustomStringConvertible {
         step.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.DateTimeQuestionTask), steps: [step])
+    }
+    
+    /// This task demonstrates an eligibiltiy question.
+    private var eligibilityQuestionTask: ORKTask {
+        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormatWithPreferredAnswer(true);
+        
+        let step = ORKQuestionStep(identifier: String(Identifier.EligibilityQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        step.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(Identifier.EligibilityQuestionTask), steps: [step])
+        
     }
 
     /**

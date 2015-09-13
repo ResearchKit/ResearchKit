@@ -44,6 +44,7 @@
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
+#import "ORKEligibilitySelectionView.h"
 
 
 static const CGFloat kVMargin = 10.0;
@@ -771,6 +772,68 @@ static const CGFloat kHMargin = 15.0;
     }
     
     return YES;
+}
+
+@end
+
+
+#pragma mark - ORKFormItemEligibilityCell
+
+@interface ORKFormItemEligibilityCell () <ORKEligibilitySelectionViewDelegate>
+
+@end
+
+
+@implementation ORKFormItemEligibilityCell
+
+- (void)cellInit {
+    
+    // Add the selection view to the content view of the form item cell.
+    ORKEligibilitySelectionView *selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
+    selectionView.delegate = self;
+    [self.contentView addSubview:selectionView];
+    
+    // Add the label to show the question.
+    UILabel *questionLabel = [UILabel new];
+    questionLabel.text = self.formItem.text;
+    questionLabel.numberOfLines = 0;
+    questionLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:questionLabel];
+    
+    self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(selectionView, questionLabel);
+    ORKEnableAutoLayoutForViews([views allValues]);
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[questionLabel]-20-[selectionView]-20-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    
+    [self.contentView addConstraints:@[
+                                       [NSLayoutConstraint constraintWithItem:questionLabel
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.contentView
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                   multiplier:1.0
+                                                                     constant:-kHMargin*2],
+                                       [NSLayoutConstraint constraintWithItem:questionLabel
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.contentView
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0]
+                                       ]
+     ];
+    
+    [super cellInit];
+}
+
+#pragma mark - ORKEligibilitySelectionViewDelegate
+
+- (void)selectionViewSelectionDidChange:(ORKEligibilitySelectionView *)view {
+    [self ork_setAnswer:view.answer];
+    [self inputValueDidChange];
 }
 
 @end
