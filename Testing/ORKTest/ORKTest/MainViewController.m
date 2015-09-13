@@ -68,6 +68,7 @@ DefineStringKey(NottinghamEADLIdentifier);
 DefineStringKey(StrokeImpactScaleIdentifier);
 DefineStringKey(EpworthSleepScaleIdentifier);
 DefineStringKey(IQCDEIdentifier);
+DefineStringKey(RivermeadMobilityIndexIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -289,6 +290,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Stroke Impact Scale",
                            @"Epworth Sleep Scale",
                            @"IQCDE",
+                           @"Rivermead Mobility Index",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -468,6 +470,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:IQCDEIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:IQCDEIdentifier
                                              prebuiltSurveyType:SurveyTypeIQCDE
+                                                        options:0];
+    } else if ([identifier isEqualToString:RivermeadMobilityIndexIdentifier]) {
+        return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:RivermeadMobilityIndexIdentifier
+                                             prebuiltSurveyType:SurveyTypeRivermeadMobilityIndex
                                                         options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
@@ -1912,6 +1918,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)iqcdeButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:IQCDEIdentifier];
+}
+
+- (IBAction)rivermeadMobilityIndexButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:RivermeadMobilityIndexIdentifier];
 }
 
 #pragma mark - Dynamic task

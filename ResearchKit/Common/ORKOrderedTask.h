@@ -506,7 +506,8 @@ typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
     SurveyTypeNottinghamEADL,
     SurveyTypeStrokeImpactScale,
     SurveyTypeEpworthSleepScale,
-    SurveyTypeIQCDE
+    SurveyTypeIQCDE,
+    SurveyTypeRivermeadMobilityIndex
 };
 
 
@@ -517,6 +518,7 @@ typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
  The Stroke Impact Scale is a more comprehensive survey looking at the impact of neurological injury on an individual.
  The Epworth Sleepiness Scale is a validated survey tool which screens for underlying sleep disorders (such as obstructive sleep apnoea).
  The IQCDE is a validated survey for assessing longterm cognitive decline (to be completed by a long-term friend or relative).
+ The Rivermead Mobility Index is a validated survey quantifying everyday mobility.
  
  @param identifier              The task identifier to use for this task, appropriate to the study.
  @param prebuiltSurveyType      The survey tool to be used

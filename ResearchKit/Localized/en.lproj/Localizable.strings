@@ -436,7 +436,7 @@
 
 /* IQCDE (Short Form of the Informant Questionnaire on Cognitive Decline in the Elderly, also known as the Short IQCODE) */
 "IQCDE_INTRO_TITLE" = "Long term memory change";
-"IQCDE_INTRO_TEXT" = "We want you to remember what your friend or relative was like 10 years ago and to compare it with what he/she is like now.\n\nBelow are situations where this person has to use his/her memory or intelligence and we want you to say whether this has improved, stayed the same or got worse.\n\nIt is very important to compare his/her present performance with 10 years ago: if 10 years ago this person always forgot where he/she had left things, and they still do, then this would be considered 'Not much change'.";
+"IQCDE_INTRO_TEXT" = "Remember what your friend or relative was like 10 years ago and to compare it with what he/she is like now.\n\nBelow are situations where this person has to use his/her memory or intelligence and we want you to say whether this has improved, stayed the same or got worse.\n\nIt is very important to compare his/her present performance with 10 years ago: if 10 years ago this person always forgot where he/she had left things, and they still do, then this would be considered 'Not much change'.";
 
 "IQCDE_ANSWER_0" = "Much improved";
 "IQCDE_ANSWER_1" = "A bit improved";
@@ -462,6 +462,31 @@
 "IQCDE_Q13" = "How good are they with financial matters eg. the pension, dealing with the bank?";
 "IQCDE_Q14" = "How good are they with everyday maths (knowing how much food to buy, or how long between visits from family or friends)?";
 "IQCDE_Q15" = "How good are they at using his/her intelligence to understand what's going on and to reason things through?";
+
+/* Rivermead Mobility Index */
+"RIVERMEAD_INTRO_TITLE" = "Your mobility";
+"RIVERMEAD_INTRO_TEXT" = "Have you been able to perform the following movements in the last week?";
+
+"RIVERMEAD_ANSWER_NO" = "No";
+"RIVERMEAD_ANSWER_YES" = "Yes";
+
+"RIVERMEAD_TITLE" = "Can you:";
+
+"RIVERMEAD_Q0"  = "Turn over from your back to your side without help?";
+"RIVERMEAD_Q1"  = "From lying in bed, are you able to get up to sit on the edge of the bed on your own?";
+"RIVERMEAD_Q2"  = "Sit on the edge of the bed without holding on for 10 seconds?";
+"RIVERMEAD_Q3"  = "Using your hands and an aid if needed, stand up from a chair in under 15 seconds, and stand there for 15 seconds?";
+"RIVERMEAD_Q4"  = "Stand for 10 seconds without using any aid?";
+"RIVERMEAD_Q5"  = "Move from bed to chair and back without any help?";
+"RIVERMEAD_Q6"  = "Walk 10 metres with an aid if necessary but with no standby help?";
+"RIVERMEAD_Q7"  = "Manage a flight of stairs alone, without help?";
+"RIVERMEAD_Q8"  = "Walk around outside alone, on pavements?";
+"RIVERMEAD_Q9"  = "Walk 10 metres inside with no calipers, splints or aids and no standby help?";
+"RIVERMEAD_Q10" = "Walk 5 metres to pick something up off the floor and walk back?";
+"RIVERMEAD_Q11" = "Walk over uneven ground (grass, gravel, snow or ice) without help?";
+"RIVERMEAD_Q12" = "Get in and out of a shower or bath unsupervised, and wash yourself?";
+"RIVERMEAD_Q13" = "Climb up and down four steps with no rail but using an aid if necessary?";
+"RIVERMEAD_Q14" = "Run (or fast walk) 10 metres in 4 seconds without limping?";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";

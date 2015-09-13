@@ -370,6 +370,8 @@
 		A21DD4231BA4A60300081AD0 /* EpworthSleepScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */; };
 		A2BEF23A1BA5C58D00DEC82D /* IQCDE.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEF2381BA5C58D00DEC82D /* IQCDE.h */; };
 		A2BEF23B1BA5C58D00DEC82D /* IQCDE.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BEF2391BA5C58D00DEC82D /* IQCDE.m */; };
+		A2BEF23E1BA5D26C00DEC82D /* RivermeadMobilityIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEF23C1BA5D26C00DEC82D /* RivermeadMobilityIndex.h */; };
+		A2BEF23F1BA5D26C00DEC82D /* RivermeadMobilityIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BEF23D1BA5D26C00DEC82D /* RivermeadMobilityIndex.m */; };
 		B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */; };
 		B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -828,6 +830,8 @@
 		A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EpworthSleepScale.m; path = ResearchKit/SurveyTasks/EpworthSleepScale.m; sourceTree = SOURCE_ROOT; };
 		A2BEF2381BA5C58D00DEC82D /* IQCDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IQCDE.h; path = ResearchKit/SurveyTasks/IQCDE.h; sourceTree = SOURCE_ROOT; };
 		A2BEF2391BA5C58D00DEC82D /* IQCDE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IQCDE.m; path = ResearchKit/SurveyTasks/IQCDE.m; sourceTree = SOURCE_ROOT; };
+		A2BEF23C1BA5D26C00DEC82D /* RivermeadMobilityIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RivermeadMobilityIndex.h; path = ResearchKit/SurveyTasks/RivermeadMobilityIndex.h; sourceTree = SOURCE_ROOT; };
+		A2BEF23D1BA5D26C00DEC82D /* RivermeadMobilityIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RivermeadMobilityIndex.m; path = ResearchKit/SurveyTasks/RivermeadMobilityIndex.m; sourceTree = SOURCE_ROOT; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
@@ -1268,6 +1272,8 @@
 				A21DD4211BA4A60300081AD0 /* EpworthSleepScale.m */,
 				A2BEF2381BA5C58D00DEC82D /* IQCDE.h */,
 				A2BEF2391BA5C58D00DEC82D /* IQCDE.m */,
+				A2BEF23C1BA5D26C00DEC82D /* RivermeadMobilityIndex.h */,
+				A2BEF23D1BA5D26C00DEC82D /* RivermeadMobilityIndex.m */,
 			);
 			name = "Survey Tasks";
 			path = Localized;
@@ -2115,6 +2121,7 @@
 				B183A4DD1A8535D100C76870 /* ResearchKit.h in Headers */,
 				86C40D101A8D7C5C00081FAC /* ORKDefaultFont.h in Headers */,
 				86C40E301A8D7C5C00081FAC /* ORKVisualConsentStepViewController.h in Headers */,
+				A2BEF23E1BA5D26C00DEC82D /* RivermeadMobilityIndex.h in Headers */,
 				86C40DCA1A8D7C5C00081FAC /* ORKTaskViewController.h in Headers */,
 				86C40C7E1A8D7C5C00081FAC /* ORKActiveStep.h in Headers */,
 				BCB6E65E1B7D534C000D5B34 /* ORKGraphChartView.h in Headers */,
@@ -2547,6 +2554,7 @@
 				B12EA01A1B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m in Sources */,
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
+				A2BEF23F1BA5D26C00DEC82D /* RivermeadMobilityIndex.m in Sources */,
 				FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,

@@ -62,6 +62,7 @@
 #import "StrokeImpactScale.h"
 #import "EpworthSleepScale.h"
 #import "IQCDE.h"
+#import "RivermeadMobilityIndex.h"
 
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
@@ -1214,6 +1215,9 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             break;
         case SurveyTypeIQCDE:
             surveyTask = [[IQCDE alloc] initWithIdentifier:identifier];
+            break;
+        case SurveyTypeRivermeadMobilityIndex:
+            surveyTask = [[RivermeadMobilityIndex alloc] initWithIdentifier:identifier];
             break;
         default:
             surveyTask = [[NottinghamEADLSurvey alloc] initWithIdentifier:identifier];
