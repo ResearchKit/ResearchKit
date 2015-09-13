@@ -429,6 +429,11 @@
 "EPWORTH_Q6" = "Sitting quietly after a lunch without alcohol";
 "EPWORTH_Q7" = "In a car, while stopped for a few minutes in traffic";
 
+"EPWORTH_FINAL_TITLE" = "Your results";
+"EPWORTH_RESULT_0" = "You have a normal amount of daytime sleepiness.";
+"EPWORTH_RESULT_1" = "You may be excessively sleepy depending on the situation.";
+"EPWORTH_RESULT_2" = "You are excessively sleepy.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
