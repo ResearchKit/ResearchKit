@@ -37,60 +37,102 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// An enumeration of values that identify the different types of questions that the ResearchKit framework supports.
+/**
+ An enumeration of values that identify the different types of questions that the ResearchKit
+ framework supports.
+ */
 typedef NS_ENUM(NSInteger, ORKQuestionType) {
-    /// No question.
-    ORKQuestionTypeNone,
+    /**
+     No question.
+     */
+     ORKQuestionTypeNone,
     
-    /// The scale question type asks participants to place a mark at an appropriate position on a continuous or discrete line.
+    /**
+     The scale question type asks participants to place a mark at an appropriate position on a
+     continuous or discrete line.
+     */
     ORKQuestionTypeScale,
 
-    /// In a single choice question, the participant can pick only one predefined option.
+    /**
+     In a single choice question, the participant can pick only one predefined option.
+     */
     ORKQuestionTypeSingleChoice,
     
-    /// In a multiple choice question, the participant can pick one or more predefined options.
+    /**
+     In a multiple choice question, the participant can pick one or more predefined options.
+     */
     ORKQuestionTypeMultipleChoice,
     
-    /// The decimal question type asks the participant to enter a decimal number.
+    /**
+     The decimal question type asks the participant to enter a decimal number.
+     */
     ORKQuestionTypeDecimal,
     
-    /// The integer question type asks the participant to enter an integer number.
+    /**
+     The integer question type asks the participant to enter an integer number.
+     */
     ORKQuestionTypeInteger,
     
-    /// The Boolean question type asks the participant to enter Yes or No (or the appropriate equivalents).
+    /**
+     The Boolean question type asks the participant to enter Yes or No (or the appropriate
+     equivalents).
+     */
     ORKQuestionTypeBoolean,
     
-    /// In a text question, the participant can enter multiple lines of text.
+    /**
+     In a text question, the participant can enter multiple lines of text.
+     */
     ORKQuestionTypeText,
     
-    /// In a time of day question, the participant can enter a time of day by using a picker.
+    /**
+     In a time of day question, the participant can enter a time of day by using a picker.
+     */
     ORKQuestionTypeTimeOfDay,
     
-    /// In a date and time question, the participant can enter a combination of date and time by using a picker.
+    /**
+     In a date and time question, the participant can enter a combination of date and time by using
+     a picker.
+     */
     ORKQuestionTypeDateAndTime,
     
-    /// In a date question, the participant can enter a date by using a picker.
+    /**
+     In a date question, the participant can enter a date by using a picker.
+     */
     ORKQuestionTypeDate,
     
-    /// In a time interval question, the participant can enter a time span by using a picker.
+    /**
+     In a time interval question, the participant can enter a time span by using a picker.
+     */
     ORKQuestionTypeTimeInterval
 } ORK_ENUM_AVAILABLE;
 
-/// An enumeration of the types of answer choices available.
+/**
+ An enumeration of the types of answer choices available.
+ */
 typedef NS_ENUM(NSInteger, ORKChoiceAnswerStyle) {
-    /// A single choice question lets the participant pick a single predefined answer option.
+    /**
+     A single choice question lets the participant pick a single predefined answer option.
+     */
     ORKChoiceAnswerStyleSingleChoice,
     
-    /// A multiple choice question lets the participant pick one or more predefined answer options.
+    /**
+     A multiple choice question lets the participant pick one or more predefined answer options.
+     */
     ORKChoiceAnswerStyleMultipleChoice
 } ORK_ENUM_AVAILABLE;
 
-/// An enumeration of the format styles available for scale answers.
+/**
+ An enumeration of the format styles available for scale answers.
+ */
 typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
-    /// The default decimal style.
+    /**
+     The default decimal style.
+     */
     ORKNumberFormattingStyleDefault,
     
-    /// Percent style.
+    /** 
+     Percent style.
+     */
     ORKNumberFormattingStylePercent
 } ORK_ENUM_AVAILABLE;
 
@@ -221,7 +263,8 @@ ORK_CLASS_AVAILABLE
  The `ORKScaleAnswerFormat `class represents an answer format that includes a slider control.
  
  The scale answer format produces an `ORKScaleQuestionResult` object that contains an integer whose
- value is between the scale's minimum and maximum values, and represents one of the quantized step values.
+ value is between the scale's minimum and maximum values, and represents one of the quantized step 
+ values.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
@@ -235,11 +278,15 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
- @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue                The default value of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.
  @param step                        The size of each discrete offset on the scale.
- @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
- @param maximumValueDescription     A localized label to describe the maximum value of the scale. For none, pass `nil`.
- @param minimumValueDescription     A localized label to describe the minimum value of the scale. For none, pass `nil`.
+ @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
+                                        scale, pass `NO`.
+ @param maximumValueDescription     A localized label to describe the maximum value of the scale.
+                                        For none, pass `nil`.
+ @param minimumValueDescription     A localized label to describe the minimum value of the scale.
+                                        For none, pass `nil`.
  
  @return An initialized scale answer format.
  */
@@ -259,9 +306,11 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue    The upper bound of the scale.
  @param minimumValue    The lower bound of the scale.
- @param defaultValue    The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue    The default value of the scale. If this value is out of range, the slider is
+                            displayed without a default value.
  @param step            The size of each discrete offset on the scale.
- @param vertical        Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
+ @param vertical        Pass `YES` to use a vertical scale; for the default horizontal scale,
+                            pass `NO`.
  
  @return An initialized scale answer format.
  */
@@ -278,7 +327,8 @@ ORK_CLASS_AVAILABLE
 
  @param maximumValue    The upper bound of the scale.
  @param minimumValue    The lower bound of the scale.
- @param defaultValue    The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue    The default value of the scale. If this value is out of range, the slider is
+                            displayed without a default value.
  @param step            The size of each discrete offset on the scale.
  
  @return An initialized scale answer format.
@@ -310,8 +360,8 @@ ORK_CLASS_AVAILABLE
 /**
  The default value for the slider. (read-only)
  
- If the value of this property is less than `minimum` or greater than `maximum`, the slider has no default.
- Otherwise, the value is rounded to the nearest valid `step` value.
+ If the value of this property is less than `minimum` or greater than `maximum`, the slider has no
+ default. Otherwise, the value is rounded to the nearest valid `step` value.
  */
 @property (readonly) NSInteger defaultValue;
 
@@ -321,7 +371,8 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
- Number formatter applied to the minimum, maximum, and slider values. Can be overridden by subclasses.
+ Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
+ subclasses.
  */
 @property (readonly) NSNumberFormatter *numberFormatter;
 
@@ -354,7 +405,8 @@ ORK_CLASS_AVAILABLE
  The `ORKContinuousScaleAnswerFormat` class represents an answer format that lets participants
  select a value on a continuous scale.
  
- The continuous scale answer format produces an `ORKScaleQuestionResult` object that has a real-number value.
+ The continuous scale answer format produces an `ORKScaleQuestionResult` object that has a
+ real-number value.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKContinuousScaleAnswerFormat : ORKAnswerFormat
@@ -368,11 +420,15 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue                The upper bound of the scale.
  @param minimumValue                The lower bound of the scale.
- @param defaultValue                The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue                The default value of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.
  @param maximumFractionDigits       The maximum number of fractional digits to display.
- @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
- @param maximumValueDescription     A localized label to describe the maximum value of the scale. For none, pass `nil`.
- @param minimumValueDescription     A localized label to describe the minimum value of the scale. For none, pass `nil`.
+ @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
+                                        scale, pass `NO`.
+ @param maximumValueDescription     A localized label to describe the maximum value of the scale.
+                                        For none, pass `nil`.
+ @param minimumValueDescription     A localized label to describe the minimum value of the scale.
+                                        For none, pass `nil`.
  
  @return An initialized scale answer format.
  */
@@ -389,9 +445,11 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
- @param defaultValue            The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue            The default value of the scale. If this value is out of range, the
+                                    slider is displayed without a default value.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
- @param vertical                Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
+ @param vertical                Pass `YES` to use a vertical scale; for the default horizontal scale,
+                                    pass `NO`.
  
  @return An initialized scale answer format.
  */
@@ -408,7 +466,8 @@ ORK_CLASS_AVAILABLE
  
  @param maximumValue            The upper bound of the scale.
  @param minimumValue            The lower bound of the scale.
- @param defaultValue            The default value of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param defaultValue            The default value of the scale. If this value is out of range, the
+                                    slider is displayed without a default value.
  @param maximumFractionDigits   The maximum number of fractional digits to display.
  
  @return An initialized scale answer format.
@@ -431,7 +490,8 @@ ORK_CLASS_AVAILABLE
 /**
  The default value for the slider. (read-only)
  
- If the value of this property is less than `minimum` or greater than `maximum`, the slider has no default value.
+ If the value of this property is less than `minimum` or greater than `maximum`, the slider has no 
+ default value.
  */
 @property (readonly) double defaultValue;
 
@@ -451,7 +511,8 @@ ORK_CLASS_AVAILABLE
 @property ORKNumberFormattingStyle numberStyle;
 
 /**
- Number formatter applied to the minimum, maximum, and slider values. Can be overridden by subclasses.
+ Number formatter applied to the minimum, maximum, and slider values. Can be overridden by
+ subclasses.
  */
 @property (readonly) NSNumberFormatter *numberFormatter;
 
@@ -481,9 +542,11 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control with a text label next to each step.
+ The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control
+ with a text label next to each step.
  
- The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose value is the selected slider value.
+ The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose
+ value is the selected slider value.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
@@ -495,10 +558,14 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param textChoices                 An array of text choices which will be used to determine the number of steps in the slider, and         
-                                    to fill the text label next to each of the steps. The array must contain between 2 and 8 text choices.
- @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
- @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal scale, pass `NO`.
+ @param textChoices                 An array of text choices which will be used to determine the
+                                        number of steps in the slider, and
+                                    to fill the text label next to each of the steps. The array must
+                                        contain between 2 and 8 text choices.
+ @param defaultIndex                The default index of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.
+ @param vertical                    Pass `YES` to use a vertical scale; for the default horizontal
+                                        scale, pass `NO`.
  
  @return An initialized text scale answer format.
  */
@@ -511,9 +578,12 @@ ORK_CLASS_AVAILABLE
  
  This method is a convenience initializer.
  
- @param textChoices                 An array of text choices which will be used to determine the number of steps in the slider, and
-                                    to fill the text label next to each of the steps. The array must contain between 2 and 8 text choices.
- @param defaultValue                The default index of the scale. If this value is out of range, the slider is displayed without a default value.
+ @param textChoices                 An array of text choices which will be used to determine the
+                                        number of steps in the slider, and
+                                    to fill the text label next to each of the steps. The array must
+                                        contain between 2 and 8 text choices.
+ @param defaultIndex                The default index of the scale. If this value is out of range,
+                                        the slider is displayed without a default value.
  
  @return An initialized text scale answer format.
  */
@@ -521,14 +591,16 @@ ORK_CLASS_AVAILABLE
                        defaultIndex:(NSInteger)defaultIndex;
 
 /**
- An array of text choices which provides the text to be shown next to each of the slider steps. (read-only)
+ An array of text choices which provides the text to be shown next to each of the slider steps.
+ (read-only)
  */
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 
 /**
  The default index for the slider. (read-only)
  
- If the value of this property is less than zero or greater than the number of text choices, the slider has no default value.
+ If the value of this property is less than zero or greater than the number of text choices,
+ the slider has no default value.
  */
 @property (readonly) NSInteger defaultIndex;
 
@@ -541,16 +613,16 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKValuePickerAnswerFormat` class represents an answer format that lets participants use a value picker 
- to choose from a fixed set of text choices.
+ The `ORKValuePickerAnswerFormat` class represents an answer format that lets participants use a
+ value picker to choose from a fixed set of text choices.
  
  When the number of choices is relatively large and the text that describes each choice
- is short, you might want to use the value picker answer format instead of the text choice answer format 
- (`ORKTextChoiceAnswerFormat`). When the text that describes each choice is long, or there are only a 
- very small number of choices, it's usually better to use the text choice answer format.
+ is short, you might want to use the value picker answer format instead of the text choice answer
+ format (`ORKTextChoiceAnswerFormat`). When the text that describes each choice is long, or there
+ are only a very small number of choices, it's usually better to use the text choice answer format.
  
- Note that the value picker answer format reports itself as being of the single choice question type.
- The value picker answer format produces an `ORKChoiceQuestionResult` object.
+ Note that the value picker answer format reports itself as being of the single choice question
+ type. The value picker answer format produces an `ORKChoiceQuestionResult` object.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKValuePickerAnswerFormat : ORKAnswerFormat
@@ -560,7 +632,8 @@ ORK_CLASS_AVAILABLE
 /**
  Returns a value picker answer format using the specified array of text choices.
  
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for each choice that is short enough to fit in a `UIPickerView` object.
+ Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
+ each choice that is short enough to fit in a `UIPickerView` object.
  
  @param textChoices     Array of `ORKTextChoice` objects.
  
@@ -571,7 +644,8 @@ ORK_CLASS_AVAILABLE
 /**
  An array of text choices that represent the options to display in the picker. (read-only)
  
- Note that the `detailText` property of each choice is ignored. Be sure to create localized text for each choice that is short enough to fit in a `UIPickerView` object.
+ Note that the `detailText` property of each choice is ignored. Be sure to create localized text for
+ each choice that is short enough to fit in a `UIPickerView` object.
  */
 @property (copy, readonly) NSArray<ORKTextChoice *> *textChoices;
 
@@ -579,9 +653,11 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKImageChoiceAnswerFormat` class represents an answer format that lets participants choose one image from a fixed set of images in a single choice question.
+ The `ORKImageChoiceAnswerFormat` class represents an answer format that lets participants choose
+ one image from a fixed set of images in a single choice question.
  
- For example, you might use the image choice answer format to represent a range of moods that range from very sad
+ For example, you might use the image choice answer format to represent a range of moods that range
+ from very sad
  to very happy.
  
  The image choice answer format produces an `ORKChoiceQuestionResult` object.
@@ -612,7 +688,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKTextChoiceAnswerFormat` class represents an answer format that lets participants choose from a fixed set of text choices in a multiple or single choice question.
+ The `ORKTextChoiceAnswerFormat` class represents an answer format that lets participants choose
+ from a fixed set of text choices in a multiple or single choice question.
  
  The text choices are presented in a table view, using one row for each answer.
  The text for each answer is given more prominence than the `detailText` in the row, but
@@ -626,7 +703,8 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- Returns an initialized text choice answer format using the specified question style and array of text choices.
+ Returns an initialized text choice answer format using the specified question style and array of
+ text choices.
  
  @param style           The style of question, such as single or multiple choice.
  @param textChoices     An array of `ORKTextChoice` objects.
@@ -678,7 +756,8 @@ ORK_CLASS_AVAILABLE
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- Returns a text choice object that includes the specified primary text, detail text, and exclusivity.
+ Returns a text choice object that includes the specified primary text, detail text,
+ and exclusivity.
  
  @param text        The primary text that describes the choice in a localized string.
  @param detailText  The detail text to display below the primary text, in a localized string.
@@ -700,7 +779,8 @@ ORK_CLASS_AVAILABLE
 + (instancetype)choiceWithText:(NSString *)text value:(id<NSCopying, NSCoding, NSObject>)value;
 
 /**
- Returns an initialized text choice object using the specified primary text, detail text, and exclusivity.
+ Returns an initialized text choice object using the specified primary text, detail text,
+ and exclusivity.
  
  This method is the designated initializer.
  
@@ -726,8 +806,8 @@ ORK_CLASS_AVAILABLE
 /**
  The value to return when this choice is selected.
  
- The value of this property is expected to be a scalar property list type, such as `NSNumber` or `NSString`.
- If no value is provided, the index of the option in the options list in the
+ The value of this property is expected to be a scalar property list type, such as `NSNumber`
+ or `NSString`. If no value is provided, the index of the option in the options list in the
  answer format is used.
  */
 @property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
@@ -735,12 +815,14 @@ ORK_CLASS_AVAILABLE
 /**
  The text that provides additional details about the choice in a localized string.
  
- The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail text.
+ The detail text can span multiple lines. Note that `ORKValuePickerAnswerFormat` ignores detail
+ text.
   */
 @property (copy, readonly, nullable) NSString *detailText;
 
 /**
- In a multiple choice format, this indicates whether this choice requires all other choices to be unselected.
+ In a multiple choice format, this indicates whether this choice requires all other choices to be
+ unselected.
  
  In general, this is used to indicate a "None of the above" choice.
  */
@@ -754,11 +836,12 @@ ORK_CLASS_AVAILABLE
  be included in an `ORKImageChoiceAnswerFormat` object.
  
  Typically, image choices are displayed in a horizontal row, so you need to use appropriate sizes.
- For example, when five image choices are displayed in an `ORKImageChoiceAnswerFormat`, image sizes of about 45 to
- 60 points allow the images to look good in apps that run on all versions of iPhone.
+ For example, when five image choices are displayed in an `ORKImageChoiceAnswerFormat`, image sizes
+ of about 45 to 60 points allow the images to look good in apps that run on all versions of iPhone.
  
  The text that describes an image choice should be reasonably short. However, only the text for the
- currently selected image choice is displayed, so text that wraps to more than one line is supported.
+ currently selected image choice is displayed, so text that wraps to more than one line
+ is supported.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKImageChoice : NSObject <NSSecureCoding, NSCopying>
@@ -801,7 +884,8 @@ ORK_CLASS_AVAILABLE
  The image to display when the choice is not selected. (read-only)
  
  The size of the unselected image depends on the number of choices you need to display. As a
- general rule, it's recommended that you start by creating an image that measures 44 x 44 points, and adjust it if necessary.
+ general rule, it's recommended that you start by creating an image that measures 44 x 44 points,
+ and adjust it if necessary.
  */
 @property (strong, readonly) UIImage *normalStateImage;
 
@@ -825,8 +909,8 @@ ORK_CLASS_AVAILABLE
 /**
  The value to return when the image is selected. (read-only)
  
- The value of this property is expected to be a scalar property list type, such as `NSNumber` or `NSString`.
- If no value is provided, the index of the option in the `ORKImageChoiceAnswerFormat`
+ The value of this property is expected to be a scalar property list type, such as `NSNumber` or
+ `NSString`. If no value is provided, the index of the option in the `ORKImageChoiceAnswerFormat`
  options list is used.
  */
 @property (copy, readonly) id<NSCopying, NSCoding, NSObject> value;
@@ -834,13 +918,20 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-/// The style of answer for an `ORKNumericAnswerFormat` object, which controls the keyboard that is presented during numeric entry.
+/**
+ The style of answer for an `ORKNumericAnswerFormat` object, which controls the keyboard that is
+ presented during numeric entry.
+ */
 typedef NS_ENUM(NSInteger, ORKNumericAnswerStyle) {
 
-    /// A decimal question type asks the participant to enter a decimal number.
+    /**
+     A decimal question type asks the participant to enter a decimal number.
+     */
     ORKNumericAnswerStyleDecimal,
     
-    /// An integer question type asks the participant to enter an integer number.
+    /**
+     An integer question type asks the participant to enter an integer number.
+     */
     ORKNumericAnswerStyleInteger
 } ORK_ENUM_AVAILABLE;
 
@@ -881,7 +972,8 @@ ORK_CLASS_AVAILABLE
                          unit:(nullable NSString *)unit;
 
 /**
-Returns an initialized numeric answer format using the specified style, unit designation, and range values.
+Returns an initialized numeric answer format using the specified style, unit designation, and range
+ values.
  
  This method is the designated initializer.
  
@@ -903,7 +995,8 @@ Returns an initialized numeric answer format using the specified style, unit des
 @property (readonly) ORKNumericAnswerStyle style;
 
 /**
- A string that displays a localized version of the unit designation next to the numeric value. (read-only)
+ A string that displays a localized version of the unit designation next to the numeric value.
+ (read-only)
  
  Examples of unit designations are days, lbs, and liters.
  The unit string is included in the `ORKNumericQuestionResult` object.
@@ -950,21 +1043,28 @@ ORK_CLASS_AVAILABLE
 /**
  The default time of day to display in the picker. (read-only)
  
- Note that both the hour and minute components are observed. If the value of this property is `nil`, the picker displays
- the current time of day.
+ Note that both the hour and minute components are observed. If the value of this property is `nil`,
+ the picker displays the current time of day.
  */
 @property (nonatomic, copy, readonly, nullable) NSDateComponents *defaultComponents;
 
 @end
 
 
-/// The style of date picker to use in an `ORKDateAnswerFormat` object.
+/**
+ The style of date picker to use in an `ORKDateAnswerFormat` object.
+ */
 typedef NS_ENUM(NSInteger, ORKDateAnswerStyle) {
 
-    /// The date and time question type asks participants to choose a time or a combination of date and time, from a picker.
+    /**
+     The date and time question type asks participants to choose a time or a combination of date
+     and time, from a picker.
+     */
     ORKDateAnswerStyleDateAndTime,
     
-    /// The date question type asks participants to choose a particular date from a picker.
+    /**
+     The date question type asks participants to choose a particular date from a picker.
+     */
     ORKDateAnswerStyleDate
 } ORK_ENUM_AVAILABLE;
 
@@ -995,10 +1095,14 @@ ORK_CLASS_AVAILABLE
  This method is the designated initializer.
  
  @param style           The style of date answer, such as date, or date and time.
- @param defaultDate     The default date to display. When the value of this parameter is `nil`, the picker displays the current time.
- @param minimumDate     The minimum date that is accessible in the picker. If the value of this parameter is `nil`, there is no minimum.
- @param maximumDate     The maximum date that is accessible in the picker. If the value of this parameter is `nil`, there is no maximum.
- @param calendar        The calendar to use. If the value of this parameter is `nil`, the picker uses the default calendar for the current locale.
+ @param defaultDate     The default date to display. When the value of this parameter is `nil`, the
+                            picker displays the current time.
+ @param minimumDate     The minimum date that is accessible in the picker. If the value of this 
+                            parameter is `nil`, there is no minimum.
+ @param maximumDate     The maximum date that is accessible in the picker. If the value of this 
+                            parameter is `nil`, there is no maximum.
+ @param calendar        The calendar to use. If the value of this parameter is `nil`, the picker
+                            uses the default calendar for the current locale.
  
  @return An initialized date answer format.
  */
@@ -1038,7 +1142,8 @@ When the value of this property is `nil`, there is no minimum.
 /**
  The calendar to use in the picker.
  
- When the value of this property is `nil`, the picker uses the default calendar for the current locale.
+ When the value of this property is `nil`, the picker uses the default calendar for the current
+ locale.
  */
 @property (copy, readonly, nullable) NSCalendar *calendar;
 
@@ -1046,7 +1151,8 @@ When the value of this property is `nil`, there is no minimum.
 
 
 /**
- The `ORKTextAnswerFormat` class represents the answer format for questions that collect a text response
+ The `ORKTextAnswerFormat` class represents the answer format for questions that collect a text
+ response
  from the user.
  
  An `ORKTextAnswerFormat` object produces an `ORKTextQuestionResult` object.
@@ -1059,7 +1165,8 @@ ORK_CLASS_AVAILABLE
  
  This method is the designated initializer.
  
- @param maximumLength   The maximum number of characters to accept. When the value of this parameter is 0, there is no maximum.
+ @param maximumLength   The maximum number of characters to accept. When the value of this parameter
+                            is 0, there is no maximum.
  
  @return An initialized text answer format.
  */
@@ -1118,8 +1225,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKEmailAnswerFormat` class represents the answer format for questions that collect an email response
- from the user.
+ The `ORKEmailAnswerFormat` class represents the answer format for questions that collect an email
+ response from the user.
  
  An `ORKEmailAnswerFormat` object produces an `ORKTextQuestionResult` object.
  */
@@ -1133,7 +1240,9 @@ ORK_CLASS_AVAILABLE
  The `ORKTimeIntervalAnswerFormat` class represents the answer format for questions that ask users
   to specify a time interval.
  
- The time interval answer format is suitable for time intervals up to 24 hours. If you need to track time intervals of longer duration, use a different answer format, such as `ORKValuePickerAnswerFormat`.
+ The time interval answer format is suitable for time intervals up to 24 hours. If you need to track
+ time intervals of longer duration, use a different answer format, such as
+ `ORKValuePickerAnswerFormat`.
  
  Note that the time interval answer format does not support the selection of 0.
  
@@ -1143,13 +1252,14 @@ ORK_CLASS_AVAILABLE
 @interface ORKTimeIntervalAnswerFormat : ORKAnswerFormat
 
 /**
- Returns an initialized time interval answer format using the specified default interval and step value.
+ Returns an initialized time interval answer format using the specified default interval and step 
+ value.
  
  This method is the designated initializer.
  
  @param defaultInterval     The default value to display in the picker.
- @param step                The step in the interval, in minutes. The value of this parameter must be
-                            between 1 and 30.
+ @param step                The step in the interval, in minutes. The value of this parameter must
+                                be between 1 and 30.
  
  @return An initialized time interval answer format.
  */

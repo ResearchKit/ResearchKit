@@ -138,10 +138,14 @@ class LineGraphChartDataSource: BaseGraphChartDataSource {
         return 10
     }
 
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
-        return "\(pointIndex + 1)"
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+        return (pointIndex % 2 == 0) ? nil : "\(pointIndex + 1)"
     }
-    
+
+    func graphChartView(graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
+        return (pointIndex % 2 == 1) ? false : true
+    }
+
     func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return 2
     }
