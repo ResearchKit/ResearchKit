@@ -277,8 +277,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousVerticalScaleQuestionStep
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
-        case DiscreteScaleHiddenValueLabelQuestionStep
-        case ContinuousScaleHiddenValueLabelQuestionStep
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -615,7 +613,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             questionStep3,
             questionStep4,
             questionStep5,
-            questionStep6,
+            questionStep6
             ])
     }
     
