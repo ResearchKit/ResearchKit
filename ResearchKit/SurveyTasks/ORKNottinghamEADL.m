@@ -1,22 +1,48 @@
-//
-//  NottinghamEADLSurvey.m
-//  ResearchKit
-//
-//  The Nottingham Extended Activities of Daily Living Scale is a commonly used validated survey
-//  To measure current function in the context of rehabilitation or functional decline.
-//
-//  If you would like to read more about the scale, the original paper on this scale is available from
-//  http://www.researchgate.net/publication/246107444_An_Extended_Activities_of_Daily_Living_Index_for_stroke_patients
+/*
+ Copyright (c) 2015, Dr. Andrew Hill.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-//  Added to ResearchKit by Dr. Andrew Hill, Consultant in Stroke Medicine, St Helens and Knowsley NHS Trust
-//  Copyright © 2015 researchkit.org. All rights reserved.
-//
+/*
+ The Nottingham Extended Activities of Daily Living Scale is a commonly used validated survey
+ To measure current function in the context of rehabilitation or functional decline.
+ If you would like to read more about the scale, the original paper on this scale is available from
+ 
+ http://www.researchgate.net/publication/246107444_An_Extended_Activities_of_Daily_Living_Index_for_stroke_patients
+ */
 
-#import "NottinghamEADL.h"
+
+#import "ORKNottinghamEADL.h"
 #import "ORKDefines_Private.h"
 #import "ORKOrderedTask.h"
 
-@implementation NottinghamEADLSurvey
+
+@implementation ORKNottinghamEADLSurvey
 
 static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];

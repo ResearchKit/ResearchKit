@@ -1,27 +1,49 @@
-//
-//  EpworthSleepScale.m
-//  ResearchKit
-//
-//  Created by Andrew Hill on 12/09/2015.
-//  Copyright © 2015 researchkit.org. All rights reserved.
-//
-//
-//  The Epworth Sleep Scale is a validated tool to assess somnolence. High Epworth scores are associated
-//  With diseases such as obstructive sleep apnoea.
-//
-//  If you would like to read more about this research tool, visit the original publication article on
-// http://www.mwjohns.com/wp-content/uploads/2009/murray_papers/reliabiltiy_and_factor_analysis_of_the_epworth_sleepiness_scale.pdf
+/*
+ Copyright (c) 2015, Dr. Andrew Hill.
+ 
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation and/or
+ other materials provided with the distribution.
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ may be used to endorse or promote products derived from this software without
+ specific prior written permission. No license is granted to the trademarks of
+ the copyright holders even if such marks are included in this software.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-//  Added to ResearchKit by Dr. Andrew Hill, Consultant in Stroke Medicine, St Helens and Knowsley NHS Trust
-//  Copyright © 2015 researchkit.org. All rights reserved.
-//
+/*
+ The Epworth Sleep Scale is a validated tool to assess somnolence. High Epworth scores are associated
+ With diseases such as obstructive sleep apnoea.
+ 
+ If you would like to read more about this research tool, visit the original publication article:
+ 
+ http://www.mwjohns.com/wp-content/uploads/2009/murray_papers/reliabiltiy_and_factor_analysis_of_the_epworth_sleepiness_scale.pdf
+ */
 
-#import "EpworthSleepScale.h"
+
+#import "ORKEpworthSleepScale.h"
 #import "ORKDefines_Private.h"
 #import "ORKOrderedTask.h"
 #import "ORKCompletionStep.h"
 
-@implementation EpworthSleepScale
+@implementation ORKEpworthSleepScale
 
 static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
@@ -55,7 +77,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
         {
             NSString *questionStem = [NSString stringWithFormat:@"EPWORTH_Q%d",questionID];
             step.text = ORKLocalizedString(questionStem, nil);
-            step.optional = false;
+            step.optional = NO;
         }
         step.answerFormat = answerFormat;
         ORKStepArrayAddStep(steps,step);
