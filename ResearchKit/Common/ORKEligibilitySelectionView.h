@@ -56,6 +56,8 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, strong, nullable) id answer;
 
+- (void)toggleViewForAnswer:(id)answer;
+
 @end
 
 NS_ASSUME_NONNULL_END

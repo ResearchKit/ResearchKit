@@ -35,30 +35,31 @@
 #import "ORKQuestionStep_Internal.h"
 
 
-@implementation ORKSurveyAnswerCellForEligibility
+@implementation ORKSurveyAnswerCellForEligibility {
+    ORKEligibilitySelectionView *_selectionView;
+}
 
 - (void)prepareView {
     [super prepareView];
 
     // Add the selection view to the content view of the form item cell.
-    ORKEligibilitySelectionView *selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
-    selectionView.delegate = self;
-    selectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addSubview:selectionView];
+    if (! _selectionView) {
+        _selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
+        _selectionView.delegate = self;
+        _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_selectionView];
+    }
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(selectionView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    
+    [self answerDidChange];
 }
 
 - (BOOL)isAnswerValid {
-    
-    if (self.answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
     ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *) [self.step impliedAnswerFormat];
     return [answerFormat isAnswerValid:self.answer];
 }
@@ -73,6 +74,10 @@
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
     return EligibilityButtonHeight;
+}
+
+- (void)answerDidChange {
+    [_selectionView toggleViewForAnswer:self.answer];
 }
 
 #pragma mark - ORKEligibilitySelectionViewDelegate

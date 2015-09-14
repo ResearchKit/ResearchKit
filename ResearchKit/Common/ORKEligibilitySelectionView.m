@@ -31,6 +31,7 @@
 
 #import "ORKEligibilitySelectionView.h"
 #import "ORKHelpers.h"
+#import "ORKAnswerFormat_Internal.h"
 
 
 @implementation ORKEligibilitySelectionView {
@@ -153,24 +154,29 @@
     return self;
 }
 
-- (void)buttonTapped:(ORKEligibilityButton *)button {
-    // Toggle button view for the selection.
-    if ([button isEqual:_yesButton]) {
-        _yesButton.selected = !_yesButton.selected;
-        _noButton.selected = NO;
-    } else if ([button isEqual:_noButton]) {
+- (void)toggleViewForAnswer:(id)answer {
+    if (ORKIsAnswerEmpty(answer)) {
         _yesButton.selected = NO;
-        _noButton.selected = !_noButton.selected;
+        _noButton.selected = NO;
+    } else if ([answer boolValue] == YES) {
+        _yesButton.selected = YES;
+        _noButton.selected = NO;
+    } else if ([answer boolValue] == NO) {
+        _yesButton.selected = NO;
+        _noButton.selected = YES;
     }
-    
+}
+
+- (void)buttonTapped:(ORKEligibilityButton *)button {
     // Set answer based on selection.
-    if (_yesButton.isSelected) {
-        _answer = @1;
-    } else if (_noButton.isSelected) {
-        _answer = @0;
+    if (! button.isSelected) {
+        _answer = ([button isEqual:_yesButton]) ? @1 : @0;
     } else {
         _answer = nil;
     }
+    
+    // Toggle button view for the selection.
+    [self toggleViewForAnswer:_answer];
     
     // Send delegate callback.
     if ([self.delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]) {

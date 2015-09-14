@@ -923,7 +923,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValid:(id)answer {
-    return ([answer boolValue] == self.preferredAnswer);
+    return (ORKIsAnswerEmpty(answer)) ? YES : ([answer boolValue] == self.preferredAnswer);
 }
 
 - (BOOL)isEqual:(id)object {

@@ -45,6 +45,7 @@
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
 #import "ORKEligibilitySelectionView.h"
+#import "ORKSubheadlineLabel.h"
 
 
 static const CGFloat kVMargin = 10.0;
@@ -784,17 +785,19 @@ static const CGFloat kHMargin = 15.0;
 @end
 
 
-@implementation ORKFormItemEligibilityCell
+@implementation ORKFormItemEligibilityCell {
+    ORKEligibilitySelectionView *_selectionView;
+}
 
 - (void)cellInit {
     
     // Add the selection view to the content view of the form item cell.
-    ORKEligibilitySelectionView *selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
-    selectionView.delegate = self;
-    [self.contentView addSubview:selectionView];
+    _selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
+    _selectionView.delegate = self;
+    [self.contentView addSubview:_selectionView];
     
     // Add the label to show the question.
-    UILabel *questionLabel = [UILabel new];
+    ORKSubheadlineLabel *questionLabel = [ORKSubheadlineLabel new];
     questionLabel.text = self.formItem.text;
     questionLabel.numberOfLines = 0;
     questionLabel.textAlignment = NSTextAlignmentCenter;
@@ -802,11 +805,11 @@ static const CGFloat kHMargin = 15.0;
     
     self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(selectionView, questionLabel);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView, questionLabel);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[questionLabel]-20-[selectionView]-20-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[questionLabel]-20-[_selectionView]-20-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     
     [self.contentView addConstraints:@[
                                        [NSLayoutConstraint constraintWithItem:questionLabel
@@ -827,6 +830,10 @@ static const CGFloat kHMargin = 15.0;
      ];
     
     [super cellInit];
+}
+
+- (void)answerDidChange {
+    [_selectionView toggleViewForAnswer:self.answer];
 }
 
 #pragma mark - ORKEligibilitySelectionViewDelegate
