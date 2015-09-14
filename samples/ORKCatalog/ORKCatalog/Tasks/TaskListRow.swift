@@ -609,24 +609,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         questionStep6.text = exampleDetailText
         
-        // The seventh step is a horizontal discrete scale control with ten ticks and a hidden value label.
-        let step7AnswerFormat = ORKAnswerFormat.scaleAnswerFormatWithMaximumValue(10, minimumValue: 1, defaultValue: NSIntegerMax, step: 1, vertical: false, maximumValueDescription: exampleHighValueText, minimumValueDescription: exampleLowValueText)
-        
-        step7AnswerFormat.hideValueLabel = true
-        
-        let questionStep7 = ORKQuestionStep(identifier: String(Identifier.DiscreteScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step7AnswerFormat)
-        
-        questionStep7.text = exampleDetailText
-        
-        // The eight step is a vertical continuous scale control with a hidden value label.
-        let step8AnswerFormat = ORKAnswerFormat.continuousScaleAnswerFormatWithMaximumValue(1.0, minimumValue: 0.0, defaultValue: 99.0, maximumFractionDigits: 0, vertical: true, maximumValueDescription: nil, minimumValueDescription: nil)
-        
-        step8AnswerFormat.hideValueLabel = true
-        
-        let questionStep8 = ORKQuestionStep(identifier: String(Identifier.ContinuousScaleHiddenValueLabelQuestionStep), title: exampleQuestionText, answer: step8AnswerFormat)
-        
-        questionStep8.text = exampleDetailText
-        
         return ORKOrderedTask(identifier: String(Identifier.ScaleQuestionTask), steps: [
             questionStep1,
             questionStep2,
@@ -634,8 +616,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             questionStep4,
             questionStep5,
             questionStep6,
-            questionStep7,
-            questionStep8
             ])
     }
     
