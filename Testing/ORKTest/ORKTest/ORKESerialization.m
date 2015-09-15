@@ -708,7 +708,8 @@ ret =
             return [[ORKEligibilityAnswerFormat alloc] initWithPreferredAnswer:[GETPROP(dict, preferredAnswer) boolValue]];
         },
         (@{
-           PROPERTY(preferredAnswer, NSNumber, NSObject, NO, nil, nil)
+           PROPERTY(preferredAnswer, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(errorMessage, NSString, NSObject, YES, nil, nil)
            })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

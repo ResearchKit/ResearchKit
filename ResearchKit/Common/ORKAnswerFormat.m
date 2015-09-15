@@ -931,17 +931,19 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            self.preferredAnswer == castObject.preferredAnswer);
+            self.preferredAnswer == castObject.preferredAnswer &&
+            ORKEqualObjects(self.errorMessage, castObject.errorMessage));
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    return ORKLocalizedString(@"INELIGIBLE_MESSAGE", nil);
+    return (self.errorMessage) ? self.errorMessage : ORKLocalizedString(@"INELIGIBLE_MESSAGE", nil);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_BOOL(aDecoder, preferredAnswer);
+        ORK_DECODE_OBJ(aDecoder, errorMessage);
     }
     return self;
 }
@@ -949,6 +951,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, preferredAnswer);
+    ORK_ENCODE_OBJ(aCoder, errorMessage);
 }
 
 + (BOOL)supportsSecureCoding {

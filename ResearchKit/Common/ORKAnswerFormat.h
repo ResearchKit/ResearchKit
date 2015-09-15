@@ -696,6 +696,15 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) BOOL preferredAnswer;
 
+/**
+ A string to display if the invalid answer is selected.
+ Only applicable for a survey cell.
+ 
+ If this value is not specified, it will use the fallback message:
+`Unfortunately, you are ineligible to join this study.`
+ */
+@property (copy, nullable) NSString *errorMessage;
+
 @end
 
 

@@ -1249,9 +1249,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
+        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES];
+        answerFormat.errorMessage = @"That is not the desired answer choice.";
+
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000"
                                                                       title:@"Are you over 18 years of age?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+                                                                     answer:answerFormat];
         step.optional = NO;
         [steps addObject:step];
     }
