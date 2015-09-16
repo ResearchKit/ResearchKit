@@ -31,6 +31,7 @@
 
 #import "ORKPasscodeStep.h"
 #import "ORKPasscodeStepViewController.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKPasscodeStep
@@ -41,6 +42,37 @@
 
 - (BOOL)showsProgress {
     return NO;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, passcodeType);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, passcodeType);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPasscodeStep *step = [super copyWithZone:zone];
+    step.passcodeType = self.passcodeType;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.passcodeType == castObject.passcodeType);
 }
 
 @end

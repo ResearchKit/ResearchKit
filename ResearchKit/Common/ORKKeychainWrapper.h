@@ -33,6 +33,8 @@
 #import "ORKDefines.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The `ORKKeychainWrapper` class is an abstraction layer for the iOS keychain
  communication.
@@ -51,7 +53,7 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the object was saved; otherwise `NO'.
  */
-+ (BOOL)setObject:(id<NSSecureCoding>)object forKey:(NSString *)key error:(NSError **)error;
++ (BOOL)setObject:(id<NSSecureCoding>)object forKey:(NSString *)key error:(NSError * __nullable *)error;
 
 
 /**
@@ -64,7 +66,7 @@ ORK_CLASS_AVAILABLE
  
  @return An object or `nil` if key is not valid.
  */
-+ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError **)error;
++ (id<NSSecureCoding>)objectForKey:(NSString *)key error:(NSError * __nullable *)error;
 
 /**
  Removes the object in the keychain for the provided key.
@@ -76,7 +78,7 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the object was removed; otherwise `NO'.
 */
-+ (BOOL)removeObjectForKey:(NSString *)key error:(NSError **)error;
++ (BOOL)removeObjectForKey:(NSString *)key error:(NSError * __nullable *)error;
 
 /**
  Removes all values stored in the keychain for the app.
@@ -87,6 +89,8 @@ ORK_CLASS_AVAILABLE
  
  @return A boolean with a value `YES` if the keychain was reset; otherwise `NO'.
 */
-+ (BOOL)resetKeychainWithError:(NSError **)error;
++ (BOOL)resetKeychainWithError:(NSError * __nullable *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

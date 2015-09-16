@@ -108,6 +108,12 @@
 "PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode progress indicator";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%d of %d digits entered";
 
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";

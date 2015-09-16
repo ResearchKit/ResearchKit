@@ -32,46 +32,37 @@
 #import "ORKPasscodeStepView.h"
 
 
-@implementation ORKPasscodeStepView
+@implementation ORKPasscodeStepView {
+    ORKPasscodeTextField *_textField;
+}
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame passcodeType:(ORKPasscodeType)passcodeType {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        // Header view configuration.
-        self.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_PROMPT_MESSAGE", nil);
-
         // Additional configuration for the passcode text field.
-        self.textField = [ORKPasscodeTextField new];
-        self.textField.defaultTextAttributes = @{NSKernAttributeName : @(20.0f),
-                                                 NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
-        self.textField.textAlignment = NSTextAlignmentCenter;
-        self.textField.translatesAutoresizingMaskIntoConstraints = NO;
+        NSInteger numberOfDigits = (passcodeType == ORKPasscodeType4Digit) ? 4 : 6;
+        _textField = [[ORKPasscodeTextField alloc] initWithNumberOfDigits:numberOfDigits];
+        _textField.translatesAutoresizingMaskIntoConstraints = NO;
         
-        self.stepView = self.textField;
+        self.stepView = _textField;
         
         [self addConstraints:@[
-                               [NSLayoutConstraint constraintWithItem:self.textField
+                               [NSLayoutConstraint constraintWithItem:_textField
                                                             attribute:NSLayoutAttributeWidth
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:self
                                                             attribute:NSLayoutAttributeWidth
                                                            multiplier:1.0
                                                              constant:0]
-                               ]];
+                               ]
+         ];
         
-        [self updateAppearance];
     }
     return self;
 }
 
-- (void)updateAppearance {
-    _textField.text = (_passcodeType == ORKPasscodeType4Digit) ? k4DigitPin : k6DigitPin;
-}
-
-- (void)setPasscodeType:(ORKPasscodeType)passcodeType {
-    _passcodeType = passcodeType;
-    [self updateAppearance];
+- (ORKPasscodeTextField *)textField {
+    return _textField;
 }
 
 @end

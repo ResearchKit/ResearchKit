@@ -93,6 +93,12 @@
     }
     
     __typeof(self) castObject = object;
+    
+    NSLog(@"***** %d", ORKEqualObjects(self.identifier, castObject.identifier));
+    NSLog(@"***** %d, %@, %@", ORKEqualObjects(self.startDate, castObject.startDate) , self.startDate, castObject.startDate);
+    NSLog(@"***** %d, %@, %@", ORKEqualObjects(self.startDate, castObject.startDate), self.endDate, castObject.endDate);
+    NSLog(@"***** %d", ORKEqualObjects(self.userInfo, castObject.userInfo));
+
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.startDate, castObject.startDate)
             && ORKEqualObjects(self.endDate, castObject.endDate)
@@ -193,13 +199,13 @@
 }
 
 - (BOOL)isEqual:(id)object {
-    if ([self class] != [object class]) {
-        return NO;
-    }
-    
+    NSLog(@"-----------------------------------------------");
+    BOOL isParentSame = [super isEqual:object];
+
     __typeof(self) castObject = object;
-    
-    return ((self.isPasscodeSaved == castObject.isPasscodeSaved));
+    NSLog(@"***** %d", self.isPasscodeSaved == castObject.isPasscodeSaved);
+    return (isParentSame &&
+            self.isPasscodeSaved == castObject.isPasscodeSaved);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

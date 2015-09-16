@@ -35,7 +35,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- An `ORKPasscodeStep` object provides the participant an authentication step.
+ An `ORKPasscodeStep` object provides the participant a passcode creation step.
  
  You can use passcode step as part of the consent process to ensure that the
  participant signing the consent is the same participant completing other modules
@@ -43,6 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep
+
+/**
+ The passcode type to be used for the step.
+ 
+ The default value of this property is `ORKPasscodeType4Digit`.
+ */
+@property (nonatomic) ORKPasscodeType passcodeType;
 
 @end
 

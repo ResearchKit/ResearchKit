@@ -238,7 +238,7 @@ ORK_CLASS_AVAILABLE
 /**
  The `ORKPasscodeResult` class records the results of a passcode step.
  
- The passcode result object contains the passcode entered by the user and the user's Touch ID authentication status.
+ The passcode result object contains a boolean indicating whether the passcode was saved or not.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeResult : ORKResult

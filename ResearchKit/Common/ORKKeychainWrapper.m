@@ -30,9 +30,17 @@
 
 
 #import "ORKKeychainWrapper.h"
+#import "ORKDefines_Private.h"
 
 
-static NSString *_defaultService;
+static NSString *ORKKeychainWrapperDefaultService() {
+    static NSString *defaultService;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultService = [[NSBundle mainBundle] bundleIdentifier];
+    });
+    return defaultService;
+}
 
 @implementation ORKKeychainWrapper
 
@@ -44,15 +52,15 @@ static NSString *_defaultService;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
     return [self setData:data
                   forKey:key
-                 service:[self defaultService]
+                 service:ORKKeychainWrapperDefaultService()
              accessGroup:nil
                    error:error];
 }
 
 + (id<NSSecureCoding>)objectForKey:(NSString *)key
-             error:(NSError *__autoreleasing *)error {
+             error:(NSError **)error {
     NSData *data = [self dataForKey:key
-                            service:[self defaultService]
+                            service:ORKKeychainWrapperDefaultService()
                         accessGroup:nil
                               error:error];
     return data ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil;
@@ -61,34 +69,27 @@ static NSString *_defaultService;
 + (BOOL)removeObjectForKey:(NSString *)key
                      error:(NSError **)error {
     return [self removeItemForKey:key
-                          service:[self defaultService]
+                          service:ORKKeychainWrapperDefaultService()
                       accessGroup:nil
                             error:error];
 }
 
 + (BOOL)resetKeychainWithError:(NSError **)error {
-    return [self removeAllItemsForService:[self defaultService]
+    return [self removeAllItemsForService:ORKKeychainWrapperDefaultService()
                               accessGroup:nil
                                     error:error];
 }
 
 #pragma mark - Private Methods
 
-+ (NSString *)defaultService {
-    if (!_defaultService) {
-        _defaultService = [[NSBundle mainBundle] bundleIdentifier];
-    }
-    return _defaultService;
-}
-
 + (NSData *)dataForKey:(NSString *)key
                service:(NSString *)service
            accessGroup:(NSString *)accessGroup
                  error:(NSError **)error {
-    NSData *ret = nil;
+    NSData *returnValue = nil;
     if (key) {
         if (!service) {
-            service = [self defaultService];
+            service = ORKKeychainWrapperDefaultService();
         }
         
         NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
@@ -109,17 +110,16 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't find Keychain item."}];
+                                         userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_FIND_ERROR_MESSAGE", nil)}];
             }
-            return nil;
-        }
-        
-        ret = [NSData dataWithData:(__bridge NSData *)data];
-        if (data) {
-            CFRelease(data);
+        } else {
+            returnValue = [NSData dataWithData:(__bridge NSData *)data];
+            if (data) {
+                CFRelease(data);
+            }
         }
     }
-    return ret;
+    return returnValue;
 }
 
 + (BOOL)setData:(NSData *)data
@@ -127,10 +127,10 @@ static NSString *_defaultService;
         service:(NSString *)service
     accessGroup:(NSString *)accessGroup
           error:(NSError **)error {
-    BOOL retValue = NO;
+    BOOL returnValue = YES;
     if (key) {
         if (!service) {
-            service = [self defaultService];
+            service = ORKKeychainWrapperDefaultService();
         }
         
         NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
@@ -154,9 +154,9 @@ static NSString *_defaultService;
                     if (error) {
                         *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                                      code:status
-                                                 userInfo:@{NSLocalizedDescriptionKey : @"Couldn't update Keychain item."}];
+                                                 userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_UPDATE_ERROR_MESSAGE", nil)}];
                     }
-                    return retValue;
+                    returnValue = NO;
                 }
             } else {
                 [self removeItemForKey:key service:service accessGroup:accessGroup error:error];
@@ -181,26 +181,25 @@ static NSString *_defaultService;
                 if (error) {
                     *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                                  code:status
-                                             userInfo:@{NSLocalizedDescriptionKey : @"Couldn't add Keychain item."}];
+                                             userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_ADD_ERROR_MESSAGE", nil)}];
                 }
-                return retValue;
+                returnValue = NO;
             }
         } else {
-            return retValue;
+            returnValue = NO;
         }
-        retValue = YES;
     }
-    return retValue;
+    return returnValue;
 }
 
 + (BOOL)removeItemForKey:(NSString *)key
                  service:(NSString *)service
              accessGroup:(NSString *)accessGroup
                    error:(NSError **)error {
-    BOOL retValue = NO;
+    BOOL returnValue = NO;
     if (key) {
         if (!service) {
-            service = [self defaultService];
+            service = ORKKeychainWrapperDefaultService();
         }
         
         NSMutableDictionary *itemToDelete = [[NSMutableDictionary alloc] init];
@@ -218,21 +217,21 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't delete Keychain item."}];
+                                         userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_DELETE_ERROR_MESSAGE", nil)}];
             }
-            retValue = NO;
+            returnValue = NO;
         } else {
-            retValue = YES;
+            returnValue = YES;
         }
     }
-    return retValue;
+    return returnValue;
 }
 
 + (BOOL)removeAllItemsForService:(NSString *)service
                      accessGroup:(NSString *)accessGroup
                            error:(NSError **)error {
     NSArray *items = [self itemsForService:service accessGroup:accessGroup error:error];
-    BOOL retValue = NO;
+    BOOL returnValue = NO;
     for (NSDictionary *item in items) {
         NSMutableDictionary *itemToDelete = [[NSMutableDictionary alloc] initWithDictionary:item];
         [itemToDelete setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
@@ -242,21 +241,21 @@ static NSString *_defaultService;
             if (error) {
                 *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:status
-                                         userInfo:@{NSLocalizedDescriptionKey : @"Couldn't delete Keychain item."}];
+                                         userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_DELETE_ERROR_MESSAGE", nil)}];
             }
-            retValue = NO;
+            returnValue = NO;
         } else {
-            retValue = YES;
+            returnValue = YES;
         }
     }
-    return retValue;
+    return returnValue;
 }
 
 + (NSArray *)itemsForService:(NSString *)service
                  accessGroup:(NSString *)accessGroup
                        error:(NSError **)error {
     if (!service) {
-        service = [self defaultService];
+        service = ORKKeychainWrapperDefaultService();
     }
     
     NSMutableDictionary *query = [[NSMutableDictionary alloc] init];
@@ -280,7 +279,7 @@ static NSString *_defaultService;
         if (error) {
             *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                          code:status
-                                     userInfo:@{NSLocalizedDescriptionKey : @"Couldn't find Keychain item."}];
+                                     userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"KEYCHAIN_FIND_ERROR_MESSAGE", nil)}];
         }
         returnValue = nil;
     }
