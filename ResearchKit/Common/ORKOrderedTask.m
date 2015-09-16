@@ -1202,7 +1202,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 
-+ (ORKOrderedTask *)PrebuiltSurveyTaskWithIdentifier:(NSString *)identifier
++ (ORKOrderedTask *)ValidatedSurveyTaskWithIdentifier:(NSString *)identifier
                                   prebuiltSurveyType:(ORKValidatedSurveyType)validatedSurveyType
                                              options:(ORKPredefinedTaskOption)options {
     ORKOrderedTask *surveyTask;

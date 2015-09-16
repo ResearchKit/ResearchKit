@@ -528,7 +528,7 @@ typedef NS_ENUM(NSUInteger, ORKValidatedSurveyType) {
  
  */
 
-+ (ORKOrderedTask *)PrebuiltSurveyTaskWithIdentifier:(NSString *)identifier
++ (ORKOrderedTask *)ValidatedSurveyTaskWithIdentifier:(NSString *)identifier
                                   prebuiltSurveyType:(ORKValidatedSurveyType)validatedSurveyType
                                              options:(ORKPredefinedTaskOption)options;
 
