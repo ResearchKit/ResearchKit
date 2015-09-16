@@ -93,6 +93,7 @@ static const GLfloat kColorConversion709[] = {
     GLint _backingHeight;
     
     EAGLContext *_context;
+    NSMutableArray *_contextStack;
     CVOpenGLESTextureRef _lumaTexture;
     CVOpenGLESTextureRef _chromaTexture;
     CVOpenGLESTextureCacheRef _videoTextureCache;
@@ -144,7 +145,7 @@ const GLfloat DefaultPreferredRotation = 0;
         // Set the context into which the frames will be drawn.
         _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         
-        if (!_context || ![EAGLContext setCurrentContext:_context] || ![self loadShaders]) {
+        if (!_context || ![self loadShaders]) {
             return nil;
         }
         
@@ -161,7 +162,8 @@ const GLfloat DefaultPreferredRotation = 0;
     }
     _glIsSetup = YES;
 
-    [EAGLContext setCurrentContext:_context];
+    [self saveGLContext];
+    
     glDisable(GL_DEPTH_TEST);
     [self setupBuffers];
     
@@ -189,6 +191,7 @@ const GLfloat DefaultPreferredRotation = 0;
     glGenVertexArraysOES(1, &_vertexArrayHandle);
     glGenBuffers(1, &_vertexBufferHandle);
 
+    [self restoreGLContext];
     ORKEAGLLog(@"");
 }
 
@@ -198,6 +201,8 @@ const GLfloat DefaultPreferredRotation = 0;
     if (!_glIsSetup) {
         return;
     }
+    
+    [self saveGLContext];
     
     [self deleteBuffers];
     
@@ -219,10 +224,13 @@ const GLfloat DefaultPreferredRotation = 0;
     // Set the view port to the entire view.
     glViewport(0, 0, _backingWidth, _backingHeight);
 
+    [self restoreGLContext];
     ORKEAGLLog(@"");
 }
 
 - (void)deleteBuffers {
+    [self saveGLContext];
+    
     if (_frameBufferHandle) {
         glDeleteFramebuffers(1, &_frameBufferHandle);
         _frameBufferHandle = 0;
@@ -231,9 +239,13 @@ const GLfloat DefaultPreferredRotation = 0;
         glDeleteRenderbuffers(1, &_colorBufferHandle);
         _colorBufferHandle = 0;
     }
+    
+    [self restoreGLContext];
 }
 
 - (void)cleanUpTextures {
+    [self saveGLContext];
+    
     if (_lumaTexture) {
         CFRelease(_lumaTexture);
         _lumaTexture = NULL;
@@ -246,10 +258,57 @@ const GLfloat DefaultPreferredRotation = 0;
     
     // Periodic texture cache flush every frame
     CVOpenGLESTextureCacheFlush(_videoTextureCache, 0);
+    
+    [self restoreGLContext];
+}
+
+- (BOOL)saveGLContext {
+    BOOL success = YES;
+    
+    if (_contextStack == nil) {
+        _contextStack = [NSMutableArray new];
+    }
+    
+    EAGLContext *currentContext = [EAGLContext currentContext];
+    
+    // Switch context only when necessory
+    if (_context != currentContext) {
+        glFlush();
+        success = [EAGLContext setCurrentContext:_context];
+    }
+    
+    // Always push
+    [_contextStack addObject:currentContext? : [NSNull null]];
+
+    return success;
+}
+
+- (BOOL)restoreGLContext {
+    BOOL success = YES;
+    
+    id lastObject = [_contextStack lastObject];
+    
+    if (lastObject) {
+        EAGLContext *contextToBeRestored = (lastObject != [NSNull null]) ? lastObject : nil;
+        
+        // Switch context only when necessory
+        if (_context != contextToBeRestored) {
+            glFlush();
+            success = [EAGLContext setCurrentContext:contextToBeRestored];
+        }
+    }
+    
+    // Always pop
+    [_contextStack removeLastObject];
+    
+    return success;
 }
 
 - (void)dealloc {
     ORKEAGLLog(@"");
+    
+    [self saveGLContext];
+    
     [self cleanUpTextures];
     
     if (_videoTextureCache) {
@@ -260,9 +319,8 @@ const GLfloat DefaultPreferredRotation = 0;
         glDeleteProgram(_programHandle);
         _programHandle = 0;
     }
-    if (_context == [EAGLContext currentContext]) {
-        [EAGLContext setCurrentContext:nil];
-    }
+    
+    [self restoreGLContext];
 }
 
 - (void)setPresentationSize:(CGSize)presentationSize {
@@ -304,6 +362,8 @@ const GLfloat DefaultPreferredRotation = 0;
             return NO;
         }
         
+        [self saveGLContext];
+        
         [self cleanUpTextures];
         
         /*
@@ -337,6 +397,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            0,
                                                            &_lumaTexture);
         if (err) {
+            [self restoreGLContext];
             ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
             return NO;
         }
@@ -362,6 +423,7 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            1,
                                                            &_chromaTexture);
         if (err) {
+            [self restoreGLContext];
             ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
             return NO;
         }
@@ -373,6 +435,7 @@ const GLfloat DefaultPreferredRotation = 0;
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
+        [self restoreGLContext];
         return YES;
     }
     return NO;
@@ -421,6 +484,8 @@ const GLfloat DefaultPreferredRotation = 0;
         CGRectGetMaxX(textureSamplingRect), CGRectGetMinY(textureSamplingRect)
     };
     
+    [self saveGLContext];
+    
     glBindVertexArrayOES(_vertexArrayHandle);
     
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferHandle);
@@ -431,6 +496,8 @@ const GLfloat DefaultPreferredRotation = 0;
     glEnableVertexAttribArray(ATTRIB_TEXCOORD);
     glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, GL_FALSE, 0, (void *)(8 * sizeof(GLfloat)));
+    
+    [self restoreGLContext];
 }
 
 - (void)updateTintColorUniform {
@@ -438,24 +505,31 @@ const GLfloat DefaultPreferredRotation = 0;
         return;
     }
 
+    [self saveGLContext];
+    
     CGFloat tintColorCG[4];
     [self.tintColor getRed:&tintColorCG[0] green:&tintColorCG[1] blue:&tintColorCG[2] alpha:&tintColorCG[3]];
     glUniform3f(uniforms[UNIFORM_TINT_COLOR], tintColorCG[0], tintColorCG[1], tintColorCG[2]);
+    
+    [self restoreGLContext];
 }
 
 - (void)updatePreferredConversionUniform {
     if (!_glIsSetup) {
         return;
     }
-
+    [self saveGLContext];
     glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
+    [self restoreGLContext];
 }
 
 - (void)render {
     if (!_glIsSetup) {
         return;
     }
-
+    
+    [self saveGLContext];
+    
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
@@ -476,11 +550,16 @@ const GLfloat DefaultPreferredRotation = 0;
     glBindVertexArrayOES(0);
     glUseProgram(0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    
+    [self restoreGLContext];
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
 
 - (BOOL)loadShaders {
+    
+    [self saveGLContext];
+    
     GLuint vertShader, fragShader;
     NSURL *vertShaderURL, *fragShaderURL;
     
@@ -527,7 +606,7 @@ const GLfloat DefaultPreferredRotation = 0;
             glDeleteProgram(_programHandle);
             _programHandle = 0;
         }
-        
+        [self restoreGLContext];
         return NO;
     }
     
@@ -548,6 +627,7 @@ const GLfloat DefaultPreferredRotation = 0;
         glDeleteShader(fragShader);
     }
     
+    [self restoreGLContext];
     return YES;
 }
 
@@ -558,6 +638,8 @@ const GLfloat DefaultPreferredRotation = 0;
         ORK_Log_Debug(@"Failed to load vertex shader: %@", [error localizedDescription]);
         return NO;
     }
+    
+    [self saveGLContext];
     
     GLint status;
     const GLchar *source;
@@ -580,14 +662,18 @@ const GLfloat DefaultPreferredRotation = 0;
     
     glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
     if (status == 0) {
+        [self restoreGLContext];
         glDeleteShader(*shader);
         return NO;
     }
     
+    [self restoreGLContext];
     return YES;
 }
 
 - (BOOL)linkProgram:(GLuint)prog {
+    [self saveGLContext];
+    
     GLint status;
     glLinkProgram(prog);
     
@@ -604,6 +690,8 @@ const GLfloat DefaultPreferredRotation = 0;
     }
 #endif
     
+    [self restoreGLContext];
+    
     if (status == 0) {
         return NO;
     }
@@ -612,6 +700,8 @@ const GLfloat DefaultPreferredRotation = 0;
 }
 
 - (BOOL)validateProgram:(GLuint)prog {
+    [self saveGLContext];
+    
     GLint logLength, status;
     
     glValidateProgram(prog);
@@ -624,6 +714,9 @@ const GLfloat DefaultPreferredRotation = 0;
     }
     
     glGetProgramiv(prog, GL_VALIDATE_STATUS, &status);
+    
+    [self restoreGLContext];
+    
     if (status == 0) {
         return NO;
     }
