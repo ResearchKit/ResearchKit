@@ -502,12 +502,12 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                                    options:(ORKPredefinedTaskOption)options;
 
 
-typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
-    SurveyTypeNottinghamEADL,
-    SurveyTypeStrokeImpactScale,
-    SurveyTypeEpworthSleepScale,
-    SurveyTypeIQCDE,
-    SurveyTypeRivermeadMobilityIndex
+typedef NS_ENUM(NSUInteger, ORKValidatedSurveyType) {
+    ORKValidatedSurveyTypeNottinghamEADL,
+    ORKValidatedSurveyTypeStrokeImpactScale,
+    ORKValidatedSurveyTypeEpworthSleepScale,
+    ORKValidatedSurveyTypeIQCDE,
+    ORKValidatedSurveyTypeRivermeadMobilityIndex
 };
 
 
@@ -529,7 +529,7 @@ typedef NS_ENUM(NSUInteger, PrebuiltSurveyType) {
  */
 
 + (ORKOrderedTask *)PrebuiltSurveyTaskWithIdentifier:(NSString *)identifier
-                                  prebuiltSurveyType:(PrebuiltSurveyType)prebuiltSurveyType
+                                  prebuiltSurveyType:(ORKValidatedSurveyType)validatedSurveyType
                                              options:(ORKPredefinedTaskOption)options;
 
 @end

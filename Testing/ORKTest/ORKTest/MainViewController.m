@@ -457,23 +457,23 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NottinghamEADLIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:NottinghamEADLIdentifier
-                                             prebuiltSurveyType:SurveyTypeNottinghamEADL
+                                             prebuiltSurveyType:ORKValidatedSurveyTypeNottinghamEADL
                                                         options:0];
     } else if ([identifier isEqualToString:StrokeImpactScaleIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:StrokeImpactScaleIdentifier
-                                             prebuiltSurveyType:SurveyTypeStrokeImpactScale
+                                             prebuiltSurveyType:ORKValidatedSurveyTypeStrokeImpactScale
                                                         options:0];
     } else if ([identifier isEqualToString:EpworthSleepScaleIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:EpworthSleepScaleIdentifier
-                                             prebuiltSurveyType:SurveyTypeEpworthSleepScale
+                                             prebuiltSurveyType:ORKValidatedSurveyTypeEpworthSleepScale
                                                         options:0];
     } else if ([identifier isEqualToString:IQCDEIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:IQCDEIdentifier
-                                             prebuiltSurveyType:SurveyTypeIQCDE
+                                             prebuiltSurveyType:ORKValidatedSurveyTypeIQCDE
                                                         options:0];
     } else if ([identifier isEqualToString:RivermeadMobilityIndexIdentifier]) {
         return [ORKOrderedTask PrebuiltSurveyTaskWithIdentifier:RivermeadMobilityIndexIdentifier
-                                             prebuiltSurveyType:SurveyTypeRivermeadMobilityIndex
+                                             prebuiltSurveyType:ORKValidatedSurveyTypeRivermeadMobilityIndex
                                                         options:0];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];

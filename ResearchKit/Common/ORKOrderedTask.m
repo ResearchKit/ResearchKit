@@ -1203,20 +1203,20 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 + (ORKOrderedTask *)PrebuiltSurveyTaskWithIdentifier:(NSString *)identifier
-                                  prebuiltSurveyType:(PrebuiltSurveyType)prebuiltSurveyType
+                                  prebuiltSurveyType:(ORKValidatedSurveyType)validatedSurveyType
                                              options:(ORKPredefinedTaskOption)options {
     ORKOrderedTask *surveyTask;
-    switch (prebuiltSurveyType) {
-        case SurveyTypeStrokeImpactScale:
+    switch (validatedSurveyType) {
+        case ORKValidatedSurveyTypeStrokeImpactScale:
             surveyTask = [[ORKStrokeImpactScaleSurvey alloc] initWithIdentifier:identifier];
             break;
-        case SurveyTypeEpworthSleepScale:
+        case ORKValidatedSurveyTypeEpworthSleepScale:
             surveyTask = [[ORKEpworthSleepScale alloc] initWithIdentifier:identifier];
             break;
-        case SurveyTypeIQCDE:
+        case ORKValidatedSurveyTypeIQCDE:
             surveyTask = [[ORKIQCDE alloc] initWithIdentifier:identifier];
             break;
-        case SurveyTypeRivermeadMobilityIndex:
+        case ORKValidatedSurveyTypeRivermeadMobilityIndex:
             surveyTask = [[ORKRivermeadMobilityIndex alloc] initWithIdentifier:identifier];
             break;
         default:
