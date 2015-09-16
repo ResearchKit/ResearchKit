@@ -43,6 +43,7 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 
 @class ORKResult;
 @class ORKTaskResult;
+@class ORKResultPredicate;
 
 /**
  The `ORKStepNavigationRule` class is the abstract base class for concrete step navigation rules.
@@ -124,8 +125,8 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized predicate step navigation rule.
  */
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
                    defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -141,8 +142,8 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized predicate step navigation rule.
  */
-- (instancetype)initWithResultPredicates:(NSArray *)resultPredicates
-              destinationStepIdentifiers:(NSArray *)destinationStepIdentifiers;
+- (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers;
 
 /**
  Returns a new predicate step navigation rule initialized from data in the given unarchiver.
@@ -168,19 +169,19 @@ ORK_CLASS_AVAILABLE
  
  Each object in the array should be of the `ORKTaskResult` class.
  */
-@property (nonatomic, strong, nullable) NSArray *additionalTaskResults;
+@property (nonatomic, strong, nullable) NSArray<ORKTaskResult *> *additionalTaskResults;
 
 /**
  The array of result predicates. It contains one result predicate for each of the step identifiers
  in `destinationStepIdentifiers`.
 */
-@property (nonatomic, copy, readonly) NSArray *resultPredicates;
+@property (nonatomic, copy, readonly) NSArray<NSPredicate *> *resultPredicates;
 
 /**
  The array of destination step identifiers. It contains one step identifier for each of the
  predicates in `resultPredicates`.
  */
-@property (nonatomic, copy, readonly) NSArray *destinationStepIdentifiers;
+@property (nonatomic, copy, readonly) NSArray<NSString *> *destinationStepIdentifiers;
 
 /**
  The identifier of the step which will be used if none of the result predicates match.

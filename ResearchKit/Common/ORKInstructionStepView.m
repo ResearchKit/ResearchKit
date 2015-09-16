@@ -133,7 +133,7 @@
 - (void)updateConstraintConstants {
     [super updateConstraintConstants];
     
-    ORKScreenType screenType = self.screenType;
+    ORKScreenType screenType = self.verticalScreenType;
     const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
     
     {

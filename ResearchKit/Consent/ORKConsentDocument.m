@@ -44,7 +44,7 @@
 
 
 @implementation ORKConsentDocument {
-    NSMutableArray *_signatures;
+    NSMutableArray<ORKConsentSignature *> *_signatures;
 }
 
 #pragma mark - Initializers
@@ -68,11 +68,11 @@
 
 #pragma mark - Accessors
 
-- (void)setSignatures:(NSArray *)signatures {
+- (void)setSignatures:(NSArray<ORKConsentSignature *> *)signatures {
     _signatures = [signatures mutableCopy];
 }
 
-- (NSArray *)signatures {
+- (NSArray<ORKConsentSignature *> *)signatures {
     return [_signatures copy];
 }
 
@@ -140,7 +140,7 @@
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    [css appendString:[NSString stringWithFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n",mobile?@"66.6%" : @"33.3%"]];
+    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n", mobile ? @"66.6%" : @"33.3%"];
     [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
     [css appendString:@".inbox { position: relative; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];
@@ -184,12 +184,14 @@
         
         // scenes
         for (ORKConsentSection *section in _sections) {
-            [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            if (!section.omitFromDocument) {
+                [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            }
         }
         
         if (! mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\" >%@</h4>", _signaturePageTitle?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
             
             for (ORKConsentSignature *signature in self.signatures) {

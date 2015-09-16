@@ -110,7 +110,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 
 + (void)initialize {
     if (self == [ORKSignatureView class]) {
-        if([[ORKSignatureView appearance] backgroundColor] == nil) {
+        if ([[ORKSignatureView appearance] backgroundColor] == nil) {
             [[ORKSignatureView appearance] setBackgroundColor:ORKColor(ORKBackgroundColorKey)];
         }
     }
@@ -139,6 +139,16 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
         [self addConstraint:widthConstraint];
     }
     return self;
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self setNeedsDisplay];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self setNeedsDisplay];
 }
 
 - (UIBezierPath *)pathWithRoundedStyle {

@@ -1,6 +1,6 @@
 ## ResearchKit Coding Style Guide
 
-Always follow [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
+Always follow the [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html) for naming variables, properties, methods, classes and functions. Do not use any abbreviations except the ones mentioned in [Acceptable Abbreviations and Acronyms](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE).
 
 
 ### 1. Visual Style
@@ -17,7 +17,11 @@ Use groups of 4 spaces (instead of tabs) to denote different indentation levels.
 
 ##### Spaces in Declarations
 
-In `@interface` declarations, there should be one space between: the subclass name; the colon symbol; the superclass name; the adopted protocols section; any adopted protocols.
+Single spaces should be used in the cases detailed in this section. Don't use double spaces and don't add spaces elsewhere.
+
+---
+
+In `@interface` declarations, there should be one space between: the subclass name; the colon symbol; the superclass name; the adopted protocols section; and any adopted protocols.
 
     // DO
     @interface ORKProtocolAdoptingClass : NSObject <ORKProtocolA, ORKProtocolB>
@@ -29,27 +33,28 @@ In `@interface` declarations, there should be one space between: the subclass na
 
 ---
 
-In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attributes; the property type; and the pointer asterisk.
+In `@property` declarations, there should be one space between: the `@property` keyword; the property attributes section; any property attribute; the property type; and the pointer asterisk.
 
     // DO
     @property (nonatomic, weak, nullable) id<ORKDelegateProtocol> delegate;
 
     // DON'T
-    @property (nonatomic,weak,nullable) id <ORKDelegateProtocol> delegate;
     @property(nonatomic, weak, nullable) id <ORKDelegateProtocol> delegate;
+    @property (nonatomic,weak,nullable) id <ORKDelegateProtocol> delegate;
     @property (nonatomic, weak, nullable) id<ORKDelegateProtocol>delegate;
 
 ---
 
-In *method* declarations, there should be one space between: the `-` or `+` character and the `(returnType)`; an argument type and its pointer asterisk.
+In *method* declarations, there should be one space between: the `-` or `+` character and the `(returnType)`; and any argument type and its pointer asterisk.
 
     // DO
     - (void)doSomethingWithString:(NSString *)string number:(NSNumber *)number
 
     // DON'T
-    - (void)doSomethingWithString:(NSString*)string number:(NSNumber *)number
     -(void)doSomethingWithString:(NSString *)string number:(NSNumber *)number
+    - (void)doSomethingWithString:(NSString*)string number:(NSNumber *)number
     - (void)doSomethingWithString:(NSString *)string  number:(NSNumber *)number
+
 
 ##### Spaces between Operators
 
@@ -111,9 +116,9 @@ Always use brackets even when the conditional code is only one statement.
 
 #### 1.3. Line Wrapping
 
-Hard wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`. 
+Hard-wrap lines that exceed 140 characters. You can configure the column guide on *Xcode*: `Preferences -> Text Editing -> Page guide at column: 140`.
 
-When hard wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
+When hard-wrapping method calls, give each parameter its own line. Align each parameter using the colon before the parameter (*Xcode* does this for you by default).
 
     // DO
     - (void)doSomethingWithFoo:(Foo *)foo
@@ -149,7 +154,7 @@ Follow these guidelines when writing *appledoc comments*:
 - When you name classes or methods, enclose them in backticks so *appledoc* creates a reference (`` `ORKStep` is ...``).
 - For multiline code examples, surround them with a triple backtick (```) for cross references within the code block not to be automatically generated.
 - Don't use abbreviations such as *e.g.* or *i.e.* in the documentation.
-- Hard wrap comment lines at column 100.
+- Hard-wrap comment lines at column 100.
 - Read the latest *ResearchKit* documentation for inspiration and try to follow the same literary style.
 
 #### 1.5. Newlines
@@ -187,57 +192,6 @@ You can optionally use one (and only one) blank like to separate:
 - Groups of related `#import` statements.
 - Groups of related statements in a single method implementation.
 
-
-#### 1.6. Header File Example
-
-    /*
-     Copyright (c) 2015, John Appleseed. All rights reserved.
-     ...
-     */
-
-
-    #import <Foundation/Foundation.h>
-    #import <ResearchKit/ORKDefines.h>
-
-
-    NS_ASSUME_NONNULL_BEGIN
-
-    @protocol ORKTask;
-    @class ORKStep;
-
-    /**
-     appledoc class comment.
-     */
-    ORK_CLASS_AVAILABLE
-    @interface ORKMyClass : NSObject <NSSecureCoding, NSCopying>
-
-    /**
-     appledoc method comment.
-     
-     @param parameterA   The first parameter.
-     @param parameterB   The second parameter.
-     
-     @return A new MyClass.
-     */
-    - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
-
-    /**
-     appledoc property comment.
-     */
-    @property (nonatomic, copy, readonly) NSString *aProperty;
-
-    @end
-
-
-    /**
-     appledoc class comment.
-     */
-    ORK_CLASS_AVAILABLE
-    @interface ORKMyOtherClass : ORKMyClass
-
-    @end 
-
-    NS_ASSUME_NONNULL_END
 
 
 ### 2. Code Style
@@ -350,15 +304,99 @@ Dot notation (`object.property`) is a syntax for using properties in a convenien
 Dot notation should be used when accessing proper properties, but should be avoided when invoking regular methods. Use the syntax corresponding to the official documentation or relevant header declaration.
 
     // DO
-    CGRect viewFrame = view.frame;              // Declared as a property
-    NSUInteger numberOfItems = array.count;     // Declared as a property since iOS 8
-    NSUInteger stringLength = string.length;    // Declared as a property since iOS 8
-    [autoreleasePool drain];                    // A method
-    NSArray *constraints = [view constraints];  // A method
+    CGRect viewFrame = view.frame;                                      // Declared as a property
+    NSUInteger numberOfItems = array.count;                             // Declared as a property since iOS 8
+    NSUInteger stringLength = string.length;                            // Declared as a property since iOS 8
+    [autoreleasePool drain];                                            // A method
+    NSArray<NSLayoutConstraint *> *constraints = [view constraints];    // A method
 
     // DON'T
-    CGRect viewFrame = [view frame];            // 'frame' is not declared as a method
-    NSUInteger numberOfItems = [array count];   // 'count' is no longer declared as a method
-    NSUInteger stringLength = [string length];  // 'length' is no longer declared as a method
-    autoreleasePool.drain;                      // Not a property
-    NSArray *constraints = view.constraints;    // Not a property
+    CGRect viewFrame = [view frame];                                    // 'frame' is not declared as a method
+    NSUInteger numberOfItems = [array count];                           // 'count' is no longer declared as a method
+    NSUInteger stringLength = [string length];                          // 'length' is no longer declared as a method
+    autoreleasePool.drain;                                              // Not a property
+    NSArray<NSLayoutConstraint *> *constraints = view.constraints;      // Not a property
+
+#### 2.5. Nullability Annotations
+
+Always include [*nullability annotations*](https://developer.apple.com/swift/blog/?id=25) in header files.
+
+Generally, it's a good idea to make the entirety of headers as *audited for nullability*, which makes any simple pointer type to be assumed as `nonnull` by the compiler. You do this by wrapping the whole file with the `NS_ASSUME_NONNULL_BEGIN` and `NS_ASSUME_NONNULL_END` macros. You can then opt any property or argument declaration that can take `nil` values out by annotating it as `nullable`.
+
+Do not add *nullability annotations* to implementation files.
+
+See **Section 3** for a nullability-annotated *Header File Example*.
+
+
+#### 2.6. Lightweight Generics
+
+Always use [*lightweight generic parametrization*](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/InteractingWithObjective-CAPIs.html#//apple_ref/doc/uid/TP40014216-CH4-ID173) when declaring `NSArray`, `NSSet` and `NSDictionary` types. This tells the compiler which kind of objects these *Foundation collection classes* will contain. It improves type-safety and interoperability with *Swift*.
+
+Use the same whitespace rules as when declaring *protocol conformance*:
+
+    // DO
+    @property NSArray<ORKStep *> *steps;
+    @property NSDictionary<NSString *, ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask *> *tasks;
+
+    // DON'T
+    @property NSArray <ORKStep *>*steps;
+    @property NSDictionary<NSString *,ORKStepNavigationRule *> *stepNavigationRules;
+    @property NSSet<ORKTask*> *tasks;
+
+
+### 3. Header File Example
+
+    /*
+     Copyright (c) 2015, John Appleseed. All rights reserved.
+     ...
+     */
+
+
+    #import <Foundation/Foundation.h>
+    #import <ResearchKit/ORKDefines.h>
+
+
+    NS_ASSUME_NONNULL_BEGIN
+
+    @protocol ORKTask;
+    @class ORKStep;
+
+    /**
+     appledoc class comment.
+     */
+    ORK_CLASS_AVAILABLE
+    @interface ORKMyClass : NSObject <NSSecureCoding, NSCopying>
+
+    /**
+     appledoc method comment.
+
+     @param parameterA   The first parameter.
+     @param parameterB   The second parameter.
+
+     @return A new MyClass.
+     */
+    - (instancetype)initWithParameterA:(NSString *)parameterA parameterB:(NSString *)parameterB NS_DESIGNATED_INITIALIZER;
+
+    /**
+     appledoc property comment.
+     */
+    @property (nonatomic, copy, readonly) NSString *aProperty;
+
+    /**
+     appledoc property comment.
+     */
+    @property (nonatomic, copy, nullable) NSString *aNullableProperty;
+
+    @end
+
+
+    /**
+     appledoc class comment.
+     */
+    ORK_CLASS_AVAILABLE
+    @interface ORKMyOtherClass : ORKMyClass
+
+    @end
+
+    NS_ASSUME_NONNULL_END
