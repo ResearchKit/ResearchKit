@@ -87,6 +87,8 @@
     
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
+    
+    [self.view setNeedsUpdateConstraints];
 }
 
 - (void)updateLayoutMargins {
@@ -95,6 +97,7 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self updateLayoutMargins];
 }
 

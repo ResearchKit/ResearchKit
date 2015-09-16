@@ -58,7 +58,7 @@ Requirements
 ------------
 
 The primary ResearchKit framework codebase supports iOS and requires Xcode 7.0
-or newer. The current stable branch supports Xcode 6.4.
+or newer.
 The ResearchKit framework has a Base SDK version of 8.0, meaning that apps
 using the ResearchKit framework can run on devices with iOS 8.0 or newer.
 
