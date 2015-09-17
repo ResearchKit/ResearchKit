@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The `ORKDiscreteGraphChartView` class presents data provided by an object conforming to the
  `ORKGraphChartViewDataSource` protocol as a discrete graph of ranged points. You can optionally
- display a line connecting each ranged points pair.
+ display a line connecting each ranged point pair.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKDiscreteGraphChartView : ORKGraphChartView
