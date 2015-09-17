@@ -35,6 +35,7 @@
 #import "ORKTapCountLabel.h"
 #import "ORKBorderedButton.h"
 #import "ORKVoiceEngine.h"
+#import "ORKHelpers.h"
 
 
 @interface ORKPSATContentView ()
@@ -50,12 +51,21 @@
 
 @implementation ORKPSATContentView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithPresentationMode:ORKPSATPresentationModeAuditory];
+    return self;
+}
+
 - (instancetype)initWithPresentationMode:(ORKPSATPresentationMode)presentationMode {
-    self = [super init];
+    self = [super initWithFrame:CGRectZero];
     
     if (self) {
         
-        _screenType = ORKGetScreenTypeForWindow(self.window);
+        _screenType = ORKGetVerticalScreenTypeForWindow(self.window);
         
         _digitLabel = [ORKTapCountLabel new];
         _digitLabel.textAlignment = NSTextAlignmentCenter;

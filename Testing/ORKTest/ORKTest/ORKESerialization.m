@@ -30,6 +30,7 @@
 
 
 #import "ORKESerialization.h"
+#import <ResearchKit/ResearchKit_Private.h>
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
@@ -551,6 +552,7 @@ ret =
           PROPERTY(customAnimationURL, NSURL, NSObject, YES,
                    ^id(id url) { return [(NSURL *)url absoluteString]; },
                    ^id(id string) { return [NSURL URLWithString:string]; }),
+          PROPERTY(omitFromDocument, NSNumber, NSObject, YES, nil, nil),
           })),
   ENTRY(ORKConsentSignature,
         nil,
@@ -584,6 +586,7 @@ ret =
         },
         (@{
           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+          PROPERTY(optional, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(text, NSString, NSObject, NO, nil, nil),
           PROPERTY(placeholder, NSString, NSObject, YES, nil, nil),
           PROPERTY(answerFormat, ORKAnswerFormat, NSObject, NO, nil, nil),
@@ -729,6 +732,15 @@ ret =
           PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
           PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
           })),
+   ENTRY(ORKTextScaleAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTextScaleAnswerFormat alloc] initWithTextChoices:GETPROP(dict, textChoices) defaultIndex:[GETPROP(dict, defaultIndex) doubleValue] vertical:[GETPROP(dict, vertical) boolValue]];
+         },
+         (@{
+            PROPERTY(textChoices, ORKTextChoice, NSArray<ORKTextChoice *>, NO, nil, nil),
+            PROPERTY(defaultIndex, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKTextAnswerFormat alloc] initWithMaximumLength:[GETPROP(dict, maximumLength) integerValue]];
@@ -758,15 +770,21 @@ ret =
         (@{
           })),
   ENTRY(ORKLocationRecorderConfiguration,
-        nil,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKLocationRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+        },
         (@{
           })),
-  ENTRY(ORKPedometerRecorderConfiguration,
-        nil,
+   ENTRY(ORKPedometerRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPedometerRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+         },
         (@{
           })),
-  ENTRY(ORKTouchRecorderConfiguration,
-        nil,
+   ENTRY(ORKTouchRecorderConfiguration,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKTouchRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
+         },
         (@{
           })),
   ENTRY(ORKResult,

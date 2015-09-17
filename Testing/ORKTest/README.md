@@ -26,8 +26,8 @@ ResearchKit framework results, to and from JSON.
 
 ## Build Requirements
 
-+ Xcode 6.3 
-+ iOS 8.0 SDK or later
++ Xcode 7.0
++ iOS 9.0 SDK or later
 
 
 ## Runtime Requirements

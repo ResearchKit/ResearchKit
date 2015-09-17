@@ -35,11 +35,23 @@
 #import "ORKPieChartView_Internal.h"
 #import "ORKPieChartLegendCell.h"
 #import "ORKCenteredCollectionViewLayout.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKPieChartLegendView {
     __weak ORKPieChartView *_parentPieChartView;
     ORKPieChartLegendCell *_sizingCell;
+    CGFloat _sumOfValues;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+         collectionViewLayout:(UICollectionViewLayout *)collectionViewLayout {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentPieChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
@@ -48,6 +60,13 @@
     self = [super initWithFrame:CGRectZero collectionViewLayout:centeredCollectionViewLayout];
     if (self) {
         _parentPieChartView = parentPieChartView;
+        _sumOfValues = 0;
+        NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+        for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+            CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:idx];
+            _sumOfValues += value;
+        }
+        
         [self registerClass:[ORKPieChartLegendCell class] forCellWithReuseIdentifier:@"cell"];
 
         _sizingCell = [[ORKPieChartLegendCell alloc] initWithFrame:CGRectZero];
@@ -77,7 +96,7 @@
 }
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    NSArray *sortedCells = [self.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
+    NSArray<UICollectionViewCell *> *sortedCells = [self.visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *cell1, UICollectionViewCell *cell2) {
         return cell1.tag > cell2.tag;
     }];
     NSUInteger cellCount = sortedCells.count;
@@ -102,12 +121,18 @@
 #pragma mark - UICollectionViewDataSource / UICollectionViewDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat value = [_parentPieChartView.dataSource pieChartView:_parentPieChartView valueForSegmentAtIndex:indexPath.item];
+    NSString *title = [_parentPieChartView.dataSource pieChartView:_parentPieChartView titleForSegmentAtIndex:indexPath.item];
+    
     ORKPieChartLegendCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.tag = indexPath.item;
-    cell.titleLabel.text = [_parentPieChartView.dataSource pieChartView:_parentPieChartView
-                                                 titleForSegmentAtIndex:indexPath.item];
+    cell.titleLabel.text = title;
     cell.titleLabel.font = _labelFont;
     cell.dotView.backgroundColor = [_parentPieChartView colorForSegmentAtIndex:indexPath.item];
+    
+    cell.accessibilityLabel = title;
+    cell.accessibilityValue = [NSString stringWithFormat:@"%0.0f%%", (value < .01) ? 1 : value / _sumOfValues * 100];
+    
     return cell;
 }
 

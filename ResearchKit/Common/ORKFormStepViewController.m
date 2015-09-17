@@ -267,7 +267,7 @@
     
     BOOL refreshDefaultsPending = NO;
     if ([types count]) {
-        NSSet *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
+        NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
         if (! [types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
@@ -434,7 +434,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetScreenTypeForWindow(self.view.window);
+        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.view.window);
         _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
@@ -507,7 +507,7 @@
     }
 }
 
-- (NSInteger)numAnswered {
+- (NSInteger)numberOfAnsweredFormItems {
     __block NSInteger nonNilCount = 0;
     [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
         if (ORKIsAnswerEmpty(answer) == NO) {
@@ -517,11 +517,7 @@
     return nonNilCount;
 }
 
-- (BOOL)allAnswered {
-    return ([self numAnswered] == [self formItems].count);
-}
-
-- (BOOL)allAnswersValid {
+- (BOOL)allAnsweredFormItemsAreValid {
     for (ORKFormItem *item in [self formItems]) {
         id answer = _savedAnswers[item.identifier];
         if (ORKIsAnswerEmpty(answer) == NO && ![item.impliedAnswerFormat isAnswerValid:answer]) {
@@ -531,14 +527,22 @@
     return YES;
 }
 
+- (BOOL)allNonOptionalFormItemsHaveAnswers {
+    for (ORKFormItem *item in [self formItems]) {
+        if (!item.optional) {
+            id answer = _savedAnswers[item.identifier];
+            if (ORKIsAnswerEmpty(answer) || ![item.impliedAnswerFormat isAnswerValid:answer]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    //  Enable the continue button if case (1) or (2) is true below:
-    //  (1) All answers are valid and all questions are answered.
-    //  (2) All answers are valid and either:
-    //      a) The step is optional and there is no skip button.
-    //      b) The step is optional and at least one question has been answered.
-    BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
-    return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
+    return ([self numberOfAnsweredFormItems] > 0
+            && [self allAnsweredFormItemsAreValid]
+            && [self allNonOptionalFormItemsHaveAnswers]);
 }
 
 - (void)updateButtonStates {
@@ -649,16 +653,20 @@
 
 - (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
     return (indexPath.row==0||
-            (indexPath.row == ([self tableView:nil numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
+            (indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _sections.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfRowsInSection:(NSInteger)section {
     ORKTableSection *sectionObject = (ORKTableSection *)_sections[section];
     return sectionObject.items.count+(_sections.count == 1?1:2);
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self numberOfRowsInSection:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -738,7 +746,7 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetScreenTypeForWindow(self.view.window)];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetVerticalScreenTypeForWindow(self.view.window)];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.delegate  = self;
@@ -871,7 +879,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if ([self isSeparatorRow:indexPath] &&
-        indexPath.row == ([self tableView:nil numberOfRowsInSection:indexPath.section] - 1)) {
+        indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1)) {
         // Hide separator row completely (setting separator inset does nothing at all)
         cell.hidden = YES;
     }
@@ -943,7 +951,6 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
     for (ORKFormItemCell *cell in _formItemCells) {
         [cell setExpectedLayoutWidth:size.width];
     }

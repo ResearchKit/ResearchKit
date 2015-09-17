@@ -51,7 +51,7 @@
     
     NSDictionary *dict = [quantitySample ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) unit:[HKUnit countUnit]];
     
-    XCTAssertEqualObjects(dict[@"uuid"], [[quantitySample UUID] UUIDString], @"");
+    XCTAssertEqualObjects(dict[@"uuid"], [quantitySample UUID].UUIDString, @"");
     XCTAssertEqualObjects(dict[@"type"], identifier, @"");
     XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(d1), @"");
     XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(d2), @"");
@@ -97,7 +97,7 @@
     NSDictionary *dd = [dPressure ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) unit:unit];
     NSDictionary *ds = [sPressure ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)(ORKSampleIncludeMetadata|ORKSampleIncludeSource|ORKSampleIncludeUUID) unit:unit];
     
-    XCTAssertEqualObjects(dict[@"uuid"], [[correlation UUID] UUIDString], @"");
+    XCTAssertEqualObjects(dict[@"uuid"], [correlation UUID].UUIDString, @"");
     XCTAssertEqualObjects(dict[@"type"], identifier, @"");
     XCTAssertEqualObjects(dict[@"startDate"], ORKStringFromDateISO8601(d1), @"");
     XCTAssertEqualObjects(dict[@"endDate"], ORKStringFromDateISO8601(d2), @"");

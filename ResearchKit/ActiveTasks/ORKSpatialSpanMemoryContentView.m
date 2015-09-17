@@ -258,13 +258,19 @@
     [self updateFooterHidden];
 }
 
-
 - (void)updateMargins {
-    self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin};
     _quantityPairView.layoutMargins = self.layoutMargins;
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateMargins];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
     [self updateMargins];
 }
 

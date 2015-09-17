@@ -1,31 +1,32 @@
 /*
-Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
 
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-1.  Redistributions of source code must retain the above copyright notice, this
-list of conditions and the following disclaimer.
-
-2.  Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation and/or
-other materials provided with the distribution.
-
-3.  Neither the name of the copyright holder(s) nor the names of any contributors
-may be used to endorse or promote products derived from this software without
-specific prior written permission. No license is granted to the trademarks of
-the copyright holders even if such marks are included in this software.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+ 
+ 1.  Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 
+ 2.  Redistributions in binary form must reproduce the above copyright notice, 
+ this list of conditions and the following disclaimer in the documentation and/or 
+ other materials provided with the distribution. 
+ 
+ 3.  Neither the name of the copyright holder(s) nor the names of any contributors 
+ may be used to endorse or promote products derived from this software without 
+ specific prior written permission. No license is granted to the trademarks of 
+ the copyright holders even if such marks are included in this software. 
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE 
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 */
 
 import UIKit
@@ -55,18 +56,24 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     */
     var taskResultFinishedCompletionHandler: (ORKResult -> Void)?
     
-    let taskListRows = TaskListRow.allCases
-    
     // MARK: UITableViewDataSource
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return TaskListRow.sections.count
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskListRows.count
+        return TaskListRow.sections[section].rows.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return TaskListRow.sections[section].title
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier.Default.rawValue, forIndexPath: indexPath)
         
-        let taskListRow = taskListRows[indexPath.row]
+        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
         
         cell.textLabel!.text = "\(taskListRow)"
         
@@ -79,7 +86,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // Present the task view controller that the user asked for.
-        let taskListRow = taskListRows[indexPath.row]
+        let taskListRow = TaskListRow.sections[indexPath.section].rows[indexPath.row]
         
         // Create a task from the `TaskListRow` to present in the `ORKTaskViewController`.
         let task = taskListRow.representedTask
@@ -94,7 +101,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         taskViewController.delegate = self
         
         // Assign a directory to store `taskViewController` output.
-        taskViewController.outputDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String, isDirectory: true)
+        taskViewController.outputDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
 
         /*
             We present the task directly, but it is also possible to use segues.

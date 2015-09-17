@@ -72,6 +72,7 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     answerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [answerButton setTitle:title forState:UIControlStateNormal];
     [answerButton addTarget:self action:@selector(buttonPressed:forEvent:) forControlEvents:UIControlEventTouchUpInside];
+    answerButton.accessibilityTraits |= UIAccessibilityTraitKeyboardKey;
     return answerButton;
 }
 

@@ -250,8 +250,14 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 }
 #define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
+#define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
 #define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
+void ORKRemoveConstraintsForRemovedViews(NSMutableArray *constraints, NSArray *removedViews);
+
 const CGFloat ORKCGFloatInvalidValue;
+
+void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
+

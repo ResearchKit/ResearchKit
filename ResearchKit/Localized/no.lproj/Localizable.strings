@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Samtykke";
-"CONSENT_NAME_FIRST" = "Fornavn";
-"CONSENT_NAME_LAST" = "Etternavn";
+"CONSENT_NAME_GIVEN" = "Fornavn";
+"CONSENT_NAME_FAMILY" = "Etternavn";
 "CONSENT_NAME_PLACEHOLDER" = "Kreves";
 "CONSENT_REVIEW_TITLE" = "Se gjennom";
 "CONSENT_REVIEW_INSTRUCTION" = "Se gjennom skjemaet nedenfor, og trykk på Enig hvis du er klar til å fortsette.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ overstiger høyest tillatte verdi (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ er mindre enn lavest tillatte verdi (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ er ikke en gyldig verdi.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-postadresse: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksten overstiger makslengden: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kameraet er ikke tilgjengelig på delt skjerm.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -149,7 +158,7 @@
 /* Short walk active task. */
 "WALK_TASK_TITLE" = "Balanse og gange";
 "WALK_INTRO_TEXT" = "Denne aktiviteten måler balansen og gangen din mens du går og står i ro. Ikke fortsett hvis du ikke kan gå trygt uten hjelp.";
-"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå %ld skritt i rett linje.";
+"WALK_INTRO_2_TEXT_%ld" = "Finn et sted der du trygt og uten hjelp kan gå omtrent %ld skritt i rett linje.";
 "WALK_INTRO_2_DETAIL" = "Legg telefonen i lommen eller en veske, og følg lydinstruksjonene.";
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Stå stille i %@.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Stå stille i %@.";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Forsøk %@ av %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Rist enheten fort når den blå sirkelen vises";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Tårnet i Hanoi";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Denne aktiviteten vurderer evnen din til å løse oppgaver.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Flytt hele stabelen til den markerte plattformen med så få trekk som mulig.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Trykk på Start for å begynne";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Løs oppgaven";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Antall trekk: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Jeg klarer ikke å løse oppgaven";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Gå på tid";
+"TIMED_WALK_INTRO_DETAIL" = "Denne aktiviteten måler funksjonen i nedre kroppshalvdel.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Finn et sted, helst utendørs, der du trygt kan gå omtrent %@ i rett linje, så raskt som mulig. Ikke senk farten til etter at du har passert mållinjen.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Trykk på Neste for å begynne.";
+"TIMED_WALK_FORM_TITLE" = "Hjelpemiddel";
+"TIMED_WALK_FORM_TEXT" = "Bruk samme hjelpemiddel i hver test.";
+"TIMED_WALK_QUESTION_TEXT" = "Bruker du en ankel- eller fotortose?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Bruker du et hjelpemiddel?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Trykk her for å velge et svar.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ingen";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Én stokk";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Én krykke";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "To stokker";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "To krykker";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Gåstol/rollator";
+"TIMED_WALK_INSTRUCTION_%@" = "Gå opptil %@ i rett linje.";
+"TIMED_WALK_INSTRUCTION_2" = "Snu og gå tilbake der du startet.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Ferdig når du har fullført oppgaven.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "PASAT-testen (Paced Auditory Serial Addition Test) måler hvor raskt du behandler lydinformasjon og evnen din til å gjøre utregninger.";
+"PVSAT_INTRO_TEXT" = "PVSAT-testen (Paced Visual Serial Addition Test) måler hvor raskt du behandler synsinformasjon og evnen din til å gjøre utregninger.";
+"PAVSAT_INTRO_TEXT" = "PAVSAT-testen (Paced Auditory and Visual Serial Addition Test) måler hvor raskt du behandler lyd- og synsinformasjon og evnen din til å gjøre utregninger.";
+"PSAT_INTRO_TEXT_2_%@" = "Enkeltsifre vises hvert %@. sekund.\nDu må legge det nye sifferet sammen med det som ble vist rett før.\nMerk at du ikke skal summere alle tallene, bare de to som ble vist sist.";
+"PSAT_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"PSAT_INITIAL_INSTRUCTION" = "Husk dette første sifferet.";
+"PSAT_INSTRUCTION" = "Legg dette nye sifferet til det forrige.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "Brikke i bildelottospill";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Forhåndsvisning av bilde";
+"AX_IMAGE_CAPTURED_LABEL" = "Tatt bilde";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Kan ikke plassere skive med størrelse %@ på skive med størrelse %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Mål";
+"AX_TOWER_OF_HANOI_TOWER" = "Tårn";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dobbelttrykk for å plassere skiven";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dobbelttrykk for å velge øverste skive";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Har skive med størrelse %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Tom";
+
+"AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
+"AX_GRAPH_AND_SEPARATOR" = " og ";

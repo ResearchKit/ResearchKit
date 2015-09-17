@@ -78,7 +78,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         ]
     ]
     
-    func numberOfPlotsIngraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
@@ -90,15 +90,15 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
        return plotPoints[plotIndex].count
     }
     
-    func maximumValueForgraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 70
     }
     
-    func minimumValueForgraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
         return 0
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
 }
@@ -125,7 +125,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         ]
     ]
     
-    func numberOfPlotsIngraphChartView(graphChartView: ORKGraphChartView) -> Int {
+    func numberOfPlotsInGraphChartView(graphChartView: ORKGraphChartView) -> Int {
         return plotPoints.count
     }
 
@@ -137,7 +137,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints[plotIndex].count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
 

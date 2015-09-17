@@ -72,7 +72,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     if ((options & ORKSampleIncludeUUID)) {
         NSUUID *uuid = [self UUID];
         if (uuid) {
-            mutableDictionary[kHKUUIDKey] = [uuid UUIDString];
+            mutableDictionary[kHKUUIDKey] = uuid.UUIDString;
         }
     }
     

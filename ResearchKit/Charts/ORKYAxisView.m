@@ -31,14 +31,13 @@
 
 #import "ORKYAxisView.h"
 #import "ORKGraphChartView_Internal.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat ImageVerticalPadding = 3.0;
 
 @implementation ORKYAxisView {
     __weak ORKGraphChartView *_parentGraphChartView;
-    NSMutableArray *_titleTickLayers;
-    
     UIImageView *_maxImageView;
     UIImageView *_minImageView;
     
@@ -46,12 +45,21 @@ static const CGFloat ImageVerticalPadding = 3.0;
     NSMutableDictionary *_tickLabelsByFactor;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentGraphChartView:nil];
+    return self;
+}
+
 - (instancetype)initWithParentGraphChartView:(ORKGraphChartView *)parentGraphChartView {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         _parentGraphChartView = parentGraphChartView;
         _axisColor = _parentGraphChartView.axisColor;
-        _titleColor = _parentGraphChartView.axisTitleColor;
+        _titleColor = _parentGraphChartView.verticalAxisTitleColor;
     }
     return self;
 }
@@ -132,7 +140,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
                 tickLabel.text = [NSString stringWithFormat:@"%0.0f", yValue];
             }
             tickLabel.backgroundColor = [UIColor clearColor];
-            tickLabel.textColor = _parentGraphChartView.axisTitleColor;
+            tickLabel.textColor = _titleColor;
             tickLabel.textAlignment = NSTextAlignmentRight;
             tickLabel.font = _titleFont;
             tickLabel.minimumScaleFactor = 0.8;

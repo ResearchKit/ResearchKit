@@ -33,6 +33,7 @@
 
 #import "ORKPieChartPieView.h"
 #import "ORKPieChartView_Internal.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat OriginAngle = -M_PI_2;
@@ -43,9 +44,18 @@ static const CGFloat InterAnimationDelay = 0.05;
     __weak ORKPieChartView *_parentPieChartView;
     
     CAShapeLayer *_circleLayer;
-    NSMutableArray *_normalizedValues;
-    NSMutableArray *_segmentLayers;
-    NSMutableArray *_pieSections;
+    NSMutableArray<NSNumber *> *_normalizedValues;
+    NSMutableArray<CAShapeLayer *> *_segmentLayers;
+    NSMutableArray<ORKPieChartSection *> *_pieSections;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [self initWithParentPieChartView:nil];
+    return self;
 }
 
 - (instancetype)initWithParentPieChartView:(ORKPieChartView *)parentPieChartView {
@@ -148,7 +158,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         segmentLayer.path = _circleLayer.path;
         segmentLayer.lineWidth = _circleLayer.lineWidth;
         segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         
         if (value != 0) {
             if (idx == 0) {
@@ -176,7 +186,7 @@ static const CGFloat InterAnimationDelay = 0.05;
         CGFloat cumulativeValue = 0;
         NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
         for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-            CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+            CGFloat value = _normalizedValues[idx].floatValue;
             
             if (value != 0) {
                 
@@ -186,6 +196,9 @@ static const CGFloat InterAnimationDelay = 0.05;
                 label.font = _percentageLabelFont;
                 label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
                 [label sizeToFit];
+                
+                // Only if there are no legends
+                label.isAccessibilityElement = ![_parentPieChartView.dataSource respondsToSelector:@selector(pieChartView:titleForSegmentAtIndex:)];
                 
                 // Calculate the angle to the centre of this segment in radians
                 CGFloat angle = 0;
@@ -204,6 +217,21 @@ static const CGFloat InterAnimationDelay = 0.05;
     }
 }
 
+- (void)updateColors {
+    NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
+    for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
+        if (_segmentLayers.count == numberOfSegments) {
+            CAShapeLayer *segmentLayer = _segmentLayers[idx];
+            segmentLayer.strokeColor = [_parentPieChartView colorForSegmentAtIndex:idx].CGColor;
+        }
+        if (_pieSections.count == numberOfSegments) {
+            ORKPieChartSection *pieSection = _pieSections[idx];
+            UILabel *label = pieSection.label;
+            label.textColor = [_parentPieChartView colorForSegmentAtIndex:idx];
+        }
+    }
+}
+
 - (void)layoutPieChartLayers {
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
@@ -218,7 +246,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     CGFloat cumulativeValue = 0;
     NSInteger numberOfSegments = [_parentPieChartView.dataSource numberOfSegmentsInPieChartView:_parentPieChartView];
     for (NSInteger idx = 0; idx < numberOfSegments; idx++) {
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         if (value != 0) {
             // Create a label
             ORKPieChartSection *pieSection = _pieSections[idx];
@@ -259,7 +287,7 @@ static const CGFloat InterAnimationDelay = 0.05;
     return  CGPointMake(x, y);
 }
 
-- (void)adjustIntersectionsOfPercentageLabels:(NSArray *)pieSections pieRadius:(CGFloat)pieRadius {
+- (void)adjustIntersectionsOfPercentageLabels:(NSArray<ORKPieChartSection *> *)pieSections pieRadius:(CGFloat)pieRadius {
     if (pieSections.count == 0) {
         return;
     }
@@ -333,29 +361,18 @@ static const CGFloat InterAnimationDelay = 0.05;
 }
 
 - (void)animateWithDuration:(NSTimeInterval)animationDuration {
-    NSUInteger pieSectionCount = _pieSections.count;
+    NSUInteger numberOfSegmentLayers  = _segmentLayers.count;
     NSTimeInterval interAnimationDelay = InterAnimationDelay;
-    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (pieSectionCount-1));
+    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (numberOfSegmentLayers - 1));
     if (singleAnimationDuration < 0) {
         interAnimationDelay = 0;
         singleAnimationDuration = animationDuration;
     }
     
     CGFloat cumulativeValue = 0;
-    for (NSInteger idx = 0; idx < pieSectionCount; idx++) {
-        ORKPieChartSection *section = _pieSections[idx];
-        UILabel *label = section.label;
-        label.alpha = 0;
-        [UIView animateWithDuration:singleAnimationDuration
-                              delay:interAnimationDelay * idx
-                            options:(UIViewAnimationOptions)0
-                         animations:^{
-                             label.alpha = 1.0;
-                         }
-                         completion:nil];
-        
+    for (NSInteger idx = 0; idx < numberOfSegmentLayers ; idx++) {
         CAShapeLayer *segmentLayer = _segmentLayers[idx];
-        CGFloat value = ((NSNumber *)_normalizedValues[idx]).floatValue;
+        CGFloat value = _normalizedValues[idx].floatValue;
         CABasicAnimation *strokeAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
         strokeAnimation.fromValue = @(segmentLayer.strokeStart);
         strokeAnimation.toValue = @(cumulativeValue + value);
@@ -365,8 +382,27 @@ static const CGFloat InterAnimationDelay = 0.05;
         strokeAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         [segmentLayer addAnimation:strokeAnimation forKey:@"strokeAnimation"];
         
+        if (_parentPieChartView.showsPercentageLabels && _pieSections.count == numberOfSegmentLayers) {
+            ORKPieChartSection *pieSection = _pieSections[idx];
+            UILabel *label = pieSection.label;
+            label.alpha = 0;
+            [UIView animateWithDuration:singleAnimationDuration
+                                  delay:interAnimationDelay * idx
+                                options:(UIViewAnimationOptions)0
+                             animations:^{
+                                 label.alpha = 1.0;
+                             }
+                             completion:nil];
+        }
+        
         cumulativeValue += value;
     }
+}
+
+#pragma mark - Accessibility
+
+- (NSArray<id> *)accessibilityElements {
+    return _pieSections;
 }
 
 @end
