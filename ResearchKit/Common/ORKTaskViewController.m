@@ -329,8 +329,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         if (![task conformsToProtocol:@protocol(ORKTask)]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Expected a task" userInfo:nil];
         }
-        if ([task identifier] == nil) {
-            NSLog(@"%@: Task's identifier should not be nil.", NSStringFromSelector(_cmd));
+        if (task.identifier == nil) {
+            ORK_Log_Warning(@"Task identifier should not be nil.");
         }
         if ([task respondsToSelector:@selector(validateParameters)]) {
             [task validateParameters];

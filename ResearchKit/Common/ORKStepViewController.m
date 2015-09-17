@@ -121,8 +121,8 @@
     if (_hasBeenPresented) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Cannot set step after presenting step view controller" userInfo:nil];
     }
-    if ( step && nil == [step identifier]) {
-        NSLog(@"%@ Step's identifier should not be nil.",  NSStringFromSelector(_cmd));
+    if (step && step.identifier == nil) {
+        ORK_Log_Warning(@"Step identifier should not be nil.");
     }
     
     _step = step;
@@ -367,7 +367,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     if (! self.step) {
         // Just logging to the console in this case, since this can happen during a taskVC restoration of a dynamic task.
         // The step VC will get restored, but then never added back to the hierarchy.
-        NSLog(@"%@",[NSString stringWithFormat:@"WARNING: No step provided while restoring %@", NSStringFromClass([self class])]);
+        ORK_Log_Warning(@"%@",[NSString stringWithFormat:@"No step provided while restoring %@", NSStringFromClass([self class])]);
     }
     
     self.presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDateRestoreKey];
