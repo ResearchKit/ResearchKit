@@ -98,7 +98,7 @@ class LineGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return 0
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
 }
@@ -137,7 +137,7 @@ class DiscreteGraphDataSource: NSObject, ORKGraphChartViewDataSource {
         return plotPoints[plotIndex].count
     }
     
-    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String {
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
         return "\(pointIndex + 1)"
     }
 
