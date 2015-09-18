@@ -18,17 +18,17 @@
 
   * **Paced Serial Addition Test (PSAT) Task**
 
-   The *PSAT task* provides support for both the *Paced Auditory Serial Addition Test (PASAT)* and the *Paced Visual Serial Addition Test (PVSAT)* versions.
+    The *PSAT task* provides support for both the *Paced Auditory Serial Addition Test (PASAT)* and the *Paced Visual Serial Addition Test (PVSAT)* versions.
 
-   The *[PASAT](https://en.wikipedia.org/wiki/Paced_Auditory_Serial_Addition_Test)* is a neuropsychological test used to assess capacity and rate of information processing and sustained and divided attention.
+    The *[PASAT](https://en.wikipedia.org/wiki/Paced_Auditory_Serial_Addition_Test)* is a neuropsychological test used to assess capacity and rate of information processing and sustained and divided attention.
 
-   This task is documented in the scientific literature ([[Fos et al., 2000]](http://www.ncbi.nlm.nih.gov/pubmed/11125707), [[Nagels et al., 2005]](http://www.ncbi.nlm.nih.gov/pubmed/15823678)) as a measure of the [*Multiple Sclerosis Functional Score*](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/Multiple-Sclerosis-Functional-Composite-(MSFC).
+    This task is documented in the scientific literature ([[Fos et al., 2000]](http://www.ncbi.nlm.nih.gov/pubmed/11125707), [[Nagels et al., 2005]](http://www.ncbi.nlm.nih.gov/pubmed/15823678)) as a measure of the [*Multiple Sclerosis Functional Score*](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/Multiple-Sclerosis-Functional-Composite-(MSFC).
 
-   It generates a series of single digits (for example, 60), at the specific frequency (for example, one new digit every 2 or 3 seconds). The user must add the newly presented digit to the one prior to it.
+    It generates a series of single digits (for example, 60), at the specific frequency (for example, one new digit every 2 or 3 seconds). The user must add the newly presented digit to the one prior to it.
 
   * **Timed Walk Task**
 
-   This task measures gait speed, in the form of the [Timed 25-Foot Walk](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/Timed-25-Foot-Walk-(T25-FW)) in the context of *multiple sclerosis*.
+    This task measures gait speed, in the form of the [Timed 25-Foot Walk](http://www.nationalmssociety.org/For-Professionals/Researchers/Resources-for-Researchers/Clinical-Study-Measures/Timed-25-Foot-Walk-(T25-FW)) in the context of *multiple sclerosis*.
 
     Gait speed has been demonstrated to be a useful and reliable functional measure of walking ability. When administering the *Timed Walk Task*, patients are allowed to use assistive devices (canes, crutches, walkers).
 
@@ -53,17 +53,17 @@
 - **New Active Tasks**
   - **Reaction Time Task**
 
-   The [*Simple Reaction Time (SRT)*](http://www.cambridgecognition.com/tests/simple-reaction-time-srt) is a test which measures simple reaction time through delivery of a known stimulus to a known location to elicit a known response.
+    The [*Simple Reaction Time (SRT)*](http://www.cambridgecognition.com/tests/simple-reaction-time-srt) is a test which measures simple reaction time through delivery of a known stimulus to a known location to elicit a known response.
 
-   This test is deployed in a range of research questions across fields including medicine, sports science and psychology.
+    This test is deployed in a range of research questions across fields including medicine, sports science and psychology.
 
-   Although it classically involves pressing the space bar or clicking a mouse in response to an event on screen, the *ResearchKit* implementation relies on the study participant shaking the device when she sees a blue circle on the screen, which we think is more correlatable to a true stimulus reaction test.
+    Although it classically involves pressing the space bar or clicking a mouse in response to an event on screen, the *ResearchKit* implementation relies on the study participant shaking the device when she sees a blue circle on the screen, which we think is more correlatable to a true stimulus reaction test.
 
   - **Tone Audiometry Task**
 
-   The [*Pure Tone Audiometry (PTA)*](https://en.wikipedia.org/wiki/Pure_tone_audiometry) test is a key hearing test used to identify hearing threshold levels of an individual, enabling determination of the degree, type and configuration of a hearing loss.
+    The [*Pure Tone Audiometry (PTA)*](https://en.wikipedia.org/wiki/Pure_tone_audiometry) test is a key hearing test used to identify hearing threshold levels of an individual, enabling determination of the degree, type and configuration of a hearing loss.
 
-   The *ResearchKit* implementation generates a series of pure sinusoid sounds, with different frequencies and on different channels (left or right). The test starts at the minimum volume and is gradually increased until the participant perceives it and taps a button. At that time, the current sound amplitude, frequency and channel are recorded.
+    The *ResearchKit* implementation generates a series of pure sinusoid sounds, with different frequencies and on different channels (left or right). The test starts at the minimum volume and is gradually increased until the participant perceives it and taps a button. At that time, the current sound amplitude, frequency and channel are recorded.
 
 - **Vertical Slider Answer Format**
 
