@@ -271,14 +271,14 @@ const GLfloat DefaultPreferredRotation = 0;
     
     EAGLContext *currentContext = [EAGLContext currentContext];
     
-    // Switch context only when necessory
+    // Switch context only when necessary
     if (_context != currentContext) {
         glFlush();
         success = [EAGLContext setCurrentContext:_context];
     }
     
     // Always push
-    [_contextStack addObject:currentContext? : [NSNull null]];
+    [_contextStack addObject:currentContext ? : [NSNull null]];
 
     return success;
 }
@@ -291,7 +291,7 @@ const GLfloat DefaultPreferredRotation = 0;
     if (lastObject) {
         EAGLContext *contextToBeRestored = (lastObject != [NSNull null]) ? lastObject : nil;
         
-        // Switch context only when necessory
+        // Switch context only when necessary
         if (_context != contextToBeRestored) {
             glFlush();
             success = [EAGLContext setCurrentContext:contextToBeRestored];
@@ -396,46 +396,46 @@ const GLfloat DefaultPreferredRotation = 0;
                                                            GL_UNSIGNED_BYTE,
                                                            0,
                                                            &_lumaTexture);
-        if (err) {
-            [self restoreGLContext];
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
-            return NO;
+        if (0 == err) {
+            
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(CVOpenGLESTextureGetTarget(_lumaTexture), CVOpenGLESTextureGetName(_lumaTexture));
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            
+            // UV-plane.
+            err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
+                                                               _videoTextureCache,
+                                                               pixelBuffer,
+                                                               NULL,
+                                                               GL_TEXTURE_2D,
+                                                               GL_RG_EXT,
+                                                               (GLint)CVPixelBufferGetWidthOfPlane(pixelBuffer, 1),
+                                                               (GLint)CVPixelBufferGetHeightOfPlane(pixelBuffer, 1),
+                                                               GL_RG_EXT,
+                                                               GL_UNSIGNED_BYTE,
+                                                               1,
+                                                               &_chromaTexture);
+            
+             if (0 == err) {
+                 glActiveTexture(GL_TEXTURE1);
+                 glBindTexture(CVOpenGLESTextureGetTarget(_chromaTexture), CVOpenGLESTextureGetName(_chromaTexture));
+                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+             }
         }
-        
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(CVOpenGLESTextureGetTarget(_lumaTexture), CVOpenGLESTextureGetName(_lumaTexture));
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        
-        // UV-plane.
-        err = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                           _videoTextureCache,
-                                                           pixelBuffer,
-                                                           NULL,
-                                                           GL_TEXTURE_2D,
-                                                           GL_RG_EXT,
-                                                           (GLint)CVPixelBufferGetWidthOfPlane(pixelBuffer, 1),
-                                                           (GLint)CVPixelBufferGetHeightOfPlane(pixelBuffer, 1),
-                                                           GL_RG_EXT,
-                                                           GL_UNSIGNED_BYTE,
-                                                           1,
-                                                           &_chromaTexture);
-        if (err) {
-            [self restoreGLContext];
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
-            return NO;
-        }
-        
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(CVOpenGLESTextureGetTarget(_chromaTexture), CVOpenGLESTextureGetName(_chromaTexture));
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         
         [self restoreGLContext];
+        
+        if (err) {
+            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+            return NO;
+        }
+        
         return YES;
     }
     return NO;
@@ -566,6 +566,8 @@ const GLfloat DefaultPreferredRotation = 0;
     // Create the shader program.
     _programHandle = glCreateProgram();
     
+    [self restoreGLContext];
+    
     // Create and compile the vertex shader.
     vertShaderURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"MovieTintShader" withExtension:@"vsh"];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER URL:vertShaderURL]) {
@@ -579,6 +581,8 @@ const GLfloat DefaultPreferredRotation = 0;
         ORK_Log_Debug(@"Failed to compile fragment shader");
         return NO;
     }
+    
+    [self saveGLContext];
     
     // Attach vertex shader to program.
     glAttachShader(_programHandle, vertShader);
