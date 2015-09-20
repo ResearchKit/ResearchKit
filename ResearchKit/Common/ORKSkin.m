@@ -40,6 +40,12 @@ NSString *const ORKLightTintColorKey = @"ORKLightTintColorKey";
 NSString *const ORKDarkTintColorKey = @"ORKDarkTintColorKey";
 NSString *const ORKCaptionTextColorKey = @"ORKCaptionTextColorKey";
 NSString *const ORKBlueHighlightColorKey = @"ORKBlueHighlightColorKey";
+NSString *const ORKChartDefaultTextColorKey = @"ORKChartDefaultTextColorKey";
+NSString *const ORKGraphAxisColorKey = @"ORKGraphAxisColorKey";
+NSString *const ORKGraphAxisTitleColorKey = @"ORKGraphAxisTitleColorKey";
+NSString *const ORKGraphReferenceLineColorKey = @"ORKGraphReferenceLineColorKey";
+NSString *const ORKGraphScrubberLineColorKey = @"ORKGraphScrubberLineColorKey";
+NSString *const ORKGraphScrubberThumbColorKey = @"ORKGraphScrubberThumbColorKey";
 
 @implementation UIColor (ORKColor)
 
@@ -75,7 +81,13 @@ static NSMutableDictionary *colors() {
                     ORKLightTintColorKey : ORKRGB(0xeeeeee),
                     ORKDarkTintColorKey : ORKRGB(0x888888),
                     ORKCaptionTextColorKey : ORKRGB(0xcccccc),
-                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]
+                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+                    ORKChartDefaultTextColorKey : [UIColor lightGrayColor],
+                    ORKGraphAxisColorKey : [UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f],
+                    ORKGraphAxisTitleColorKey : [UIColor colorWithRed:142/255.f green:142/255.f blue:147/255.f alpha:1.f],
+                    ORKGraphReferenceLineColorKey : [UIColor colorWithRed:225/255.f green:225/255.f blue:229/255.f alpha:1.f],
+                    ORKGraphScrubberLineColorKey : [UIColor grayColor],
+                    ORKGraphScrubberThumbColorKey : [UIColor colorWithWhite:1 alpha:1.0]
                     } mutableCopy];
     });
     return colors;
@@ -96,7 +108,7 @@ const CGSize ORKiPhone6ScreenSize = (CGSize){375, 667};
 const CGSize ORKiPhone6PlusScreenSize = (CGSize){414, 736};
 const CGSize ORKiPadScreenSize = (CGSize){768, 1024};
 
-ORKScreenType ORKGetScreenTypeForBounds(CGRect bounds) {
+ORKScreenType ORKGetVerticalScreenTypeForBounds(CGRect bounds) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     CGFloat maximumDimension = MAX(bounds.size.width, bounds.size.height);
     if (maximumDimension < ORKiPhone4ScreenSize.height + 1) {
@@ -113,17 +125,47 @@ ORKScreenType ORKGetScreenTypeForBounds(CGRect bounds) {
     return screenType;
 }
 
-ORKScreenType ORKGetScreenTypeForWindow(UIWindow *window) {
-    if (!window) {
-        window = [[[UIApplication sharedApplication] windows] firstObject];
+ORKScreenType ORKGetHorizontalScreenTypeForBounds(CGRect bounds) {
+    ORKScreenType screenType = ORKScreenTypeiPhone6;
+    CGFloat minimumDimension = MIN(bounds.size.width, bounds.size.height);
+    if (minimumDimension < ORKiPhone4ScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhone4;
+    } else if (minimumDimension < ORKiPhone5ScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhone5;
+    } else if (minimumDimension < ORKiPhone6ScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhone6;
+    } else if (minimumDimension < ORKiPhone6PlusScreenSize.width + 1) {
+        screenType = ORKScreenTypeiPhone6Plus;
+    } else {
+        screenType = ORKScreenTypeiPad;
     }
-    return ORKGetScreenTypeForBounds([window bounds]);
+    return screenType;
+}
+
+UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
+    if (!window) {
+        // Use this method instead of UIApplication's keyWindow or UIApplication's delegate's window
+        // because we may need the window before the keyWindow is set (e.g., if a view controller
+        // loads programmatically on the app delegate to be assigned as the root view controller)
+        window = [UIApplication sharedApplication].windows.firstObject;
+    }
+    return window;
+}
+
+ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow *window) {
+    window = ORKDefaultWindowIfWindowIsNil(window);
+    return ORKGetVerticalScreenTypeForBounds([window bounds]);
+}
+
+ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
+    window = ORKDefaultWindowIfWindowIsNil(window);
+    return ORKGetHorizontalScreenTypeForBounds([window bounds]);
 }
 
 ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     if (screen == [UIScreen mainScreen]) {
-        screenType = ORKGetScreenTypeForBounds([screen bounds]);
+        screenType = ORKGetVerticalScreenTypeForBounds([screen bounds]);
     }
     return screenType;
 }
@@ -166,21 +208,36 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {         44,        44,        44,        44,        44},      // ORKScreenMetricToolbarHeight
         {        322,       274,       217,       217,       446},      // ORKScreenMetricVerticalScaleHeight
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
+        {        384,       324,       304,       304,       384},      // ORKScreenMetricPSATKeyboardViewWidth
+        {        197,       167,       157,       157,       197},      // ORKScreenMetricPSATKeyboardViewHeight
     };
     return metrics[metric][screenType];
 }
 
 CGFloat ORKGetMetricForWindow(ORKScreenMetric metric, UIWindow *window) {
-    return ORKGetMetricForScreenType(metric, ORKGetScreenTypeForWindow(window));
+    CGFloat metricValue = 0;
+    switch (metric) {
+        case ORKScreenMetricContinueButtonWidth:
+        case ORKScreenMetricHeadlineSideMargin:
+        case ORKScreenMetricLearnMoreButtonSideMargin:
+            metricValue = ORKGetMetricForScreenType(metric, ORKGetHorizontalScreenTypeForWindow(window));
+            break;
+            
+        default:
+            metricValue = ORKGetMetricForScreenType(metric, ORKGetVerticalScreenTypeForWindow(window));
+            break;
+    }
+    
+    return metricValue;
 }
 
 const CGFloat ORKLayoutMarginWidthRegularBezel = 15.0;
 const CGFloat ORKLayoutMarginWidthThinBezelRegular = 20.0;
 const CGFloat ORKLayoutMarginWidthiPad = 115.0;
 
-CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
+CGFloat ORKStandardLeftTableViewCellMarginForWindow(UIWindow *window) {
     CGFloat margin = 0;
-    switch (ORKGetScreenTypeForWindow(cell.window)) {
+    switch (ORKGetHorizontalScreenTypeForWindow(window)) {
         case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
@@ -195,52 +252,71 @@ CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
     return margin;
 }
 
-CGFloat ORKStandardHorizMarginForView(UIView *view) {
+CGFloat ORKStandardLeftMarginForTableViewCell(UITableViewCell *cell) {
+    return ORKStandardLeftTableViewCellMarginForWindow(cell.window);
+}
+
+CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
+    window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     CGFloat margin = 0;
-    switch (ORKGetScreenTypeForWindow(view.window)) {
+    switch (ORKGetHorizontalScreenTypeForWindow(window)) {
         case ORKScreenTypeiPhone4:
         case ORKScreenTypeiPhone5:
         case ORKScreenTypeiPhone6:
         case ORKScreenTypeiPhone6Plus:
         default:
-            margin = ORKStandardLeftMarginForTableViewCell(view);
+            margin = ORKStandardLeftTableViewCellMarginForWindow(window);
             break;
-        case ORKScreenTypeiPad:
-            margin = ORKLayoutMarginWidthiPad;
+        case ORKScreenTypeiPad:{
+            // Use adaptive side margin, if view is wider than iPhone6 Plus.
+            // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad
+            CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (ORKiPadScreenSize.width - ORKiPhone6PlusScreenSize.width);
+            ratio = MIN(1.0, ratio);
+            ratio = MAX(0.0, ratio);
+            margin = ORKLayoutMarginWidthThinBezelRegular + (ORKLayoutMarginWidthiPad - ORKLayoutMarginWidthThinBezelRegular)*ratio;
             break;
+        }
     }
     return margin;
 }
 
+CGFloat ORKStandardHorizontalMarginForView(UIView *view) {
+    return ORKStandardHorizontalMarginForWindow(view.window);
+}
+
 UIEdgeInsets ORKStandardLayoutMarginsForTableViewCell(UITableViewCell *cell) {
-    return (UIEdgeInsets){.left=ORKStandardLeftMarginForTableViewCell(cell),
-                          .right=ORKStandardLeftMarginForTableViewCell(cell),
-                          .bottom=8,
-                          .top=8};
+    const CGFloat StandardVerticalTableViewCellMargin = 8.0;
+    return (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(cell),
+                          .right = ORKStandardLeftMarginForTableViewCell(cell),
+                          .bottom = StandardVerticalTableViewCellMargin,
+                          .top = StandardVerticalTableViewCellMargin};
 }
 
 UIEdgeInsets ORKStandardFullScreenLayoutMarginsForView(UIView *view) {
     UIEdgeInsets layoutMargins = UIEdgeInsetsZero;
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
     if (screenType == ORKScreenTypeiPad) {
-        layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(view), .right=ORKStandardHorizMarginForView(view)};
+        CGFloat margin = ORKStandardHorizontalMarginForView(view);
+        layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
     }
     return layoutMargins;
 }
 
 UIEdgeInsets ORKScrollIndicatorInsetsForScrollView(UIView *view) {
     UIEdgeInsets scrollIndicatorInsets = UIEdgeInsetsZero;
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    ORKScreenType screenType = ORKGetHorizontalScreenTypeForWindow(view.window);
     if (screenType == ORKScreenTypeiPad) {
-        scrollIndicatorInsets = (UIEdgeInsets){.left=-ORKStandardHorizMarginForView(view), .right=-ORKStandardHorizMarginForView(view)};
+        CGFloat margin = ORKStandardHorizontalMarginForView(view);
+        scrollIndicatorInsets = (UIEdgeInsets){.left = -margin, .right = -margin };
     }
     return scrollIndicatorInsets;
 }
 
 CGFloat ORKWidthForSignatureView(UIWindow *window) {
+    window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     const CGSize windowSize = window.bounds.size;
     const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
-    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardHorizMarginForView(window) + 2*ORKStandardLeftMarginForTableViewCell(window) );
+    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardHorizontalMarginForView(window) + 2*ORKStandardLeftMarginForTableViewCell(window) );
     return signatureViewWidth;
 }
 

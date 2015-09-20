@@ -156,10 +156,10 @@
             (self.shouldUseNextAsSkipButton == castObject.shouldUseNextAsSkipButton));
 }
 
-- (NSSet *)requestedHealthKitTypesForReading {
-    NSMutableSet *set = [NSMutableSet set];
+- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
+    NSMutableSet<HKObjectType *> *set = [NSMutableSet set];
     for (ORKRecorderConfiguration *config in self.recorderConfigurations) {
-        NSSet *subset = [config requestedHealthKitTypesForReading];
+        NSSet<HKObjectType *> *subset = [config requestedHealthKitTypesForReading];
         if (subset) {
             [set unionSet:subset];
         }

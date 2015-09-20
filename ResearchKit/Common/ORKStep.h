@@ -59,6 +59,8 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 ORK_CLASS_AVAILABLE
 @interface ORKStep : NSObject <NSSecureCoding, NSCopying>
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /**
  Returns a new step initialized with the specified identifier.
  

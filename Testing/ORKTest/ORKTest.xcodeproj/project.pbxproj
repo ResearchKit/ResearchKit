@@ -12,7 +12,6 @@
 		86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717A921AC0C0FE00AC2A23 /* AppDelegate.m */; };
 		86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86717A9A1AC0C0FE00AC2A23 /* Images.xcassets */; };
 		86717A9E1AC0C0FE00AC2A23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86717A9C1AC0C0FE00AC2A23 /* LaunchScreen.xib */; };
-		86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD61AC0C53800AC2A23 /* CustomRecorder.m */; };
 		86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717AD71AC0C53800AC2A23 /* MainViewController.m */; };
 		86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 86717ADD1AC0C53800AC2A23 /* DynamicTask.m */; };
 		86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */ = {isa = PBXBuildFile; fileRef = 86717AE01AC0C53800AC2A23 /* image_example.png */; };
@@ -23,6 +22,10 @@
 		86D347F41AC0E198006DB02B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; };
 		86D347F51AC0E198006DB02B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86717AF51AC0C57600AC2A23 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D347F91AC0E1B4006DB02B /* HealthKit.framework */; };
+		BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27151B81743900BDA84D /* ChartDataSources.swift */; };
+		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
+		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
+		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,10 +91,8 @@
 		86717A9D1AC0C0FE00AC2A23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		86717AA31AC0C0FE00AC2A23 /* ORKTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ORKTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		86717AA81AC0C0FE00AC2A23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86717AD61AC0C53800AC2A23 /* CustomRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomRecorder.m; sourceTree = "<group>"; };
 		86717AD71AC0C53800AC2A23 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		86717AD81AC0C53800AC2A23 /* ORKESerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKESerialization.m; path = ../ORKTest/ORKESerialization.m; sourceTree = "<group>"; };
-		86717ADB1AC0C53800AC2A23 /* CustomRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomRecorder.h; sourceTree = "<group>"; };
 		86717ADC1AC0C53800AC2A23 /* DynamicTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicTask.h; sourceTree = "<group>"; };
 		86717ADD1AC0C53800AC2A23 /* DynamicTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicTask.m; sourceTree = "<group>"; };
 		86717ADE1AC0C53800AC2A23 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -142,6 +143,11 @@
 		B1337BA71B1E70AC0098AA54 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636901B1F8A0700B28200 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		B15636931B1F8A0800B28200 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		BC9A27151B81743900BDA84D /* ChartDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataSources.swift; path = Charts/ChartDataSources.swift; sourceTree = "<group>"; };
+		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
+		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
+		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,12 +192,12 @@
 		86717A8C1AC0C0FE00AC2A23 /* ORKTest */ = {
 			isa = PBXGroup;
 			children = (
-				86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */,
 				86717AEE1AC0C57500AC2A23 /* ResearchKit.xcodeproj */,
 				86717A911AC0C0FE00AC2A23 /* AppDelegate.h */,
 				86717A921AC0C0FE00AC2A23 /* AppDelegate.m */,
 				86717ADE1AC0C53800AC2A23 /* MainViewController.h */,
 				86717AD71AC0C53800AC2A23 /* MainViewController.m */,
+				BC9A27111B81732200BDA84D /* Charts */,
 				86717B001AC0C9B100AC2A23 /* CustomizationExamples */,
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
@@ -202,10 +208,11 @@
 		86717A8D1AC0C0FE00AC2A23 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				86D347FB1AC0E1B4006DB02B /* ORKTest.entitlements */,
 				86717A8E1AC0C0FE00AC2A23 /* Info.plist */,
 				86717A8F1AC0C0FE00AC2A23 /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		86717AA61AC0C0FE00AC2A23 /* ORKTestTests */ = {
@@ -239,8 +246,6 @@
 		86717B001AC0C9B100AC2A23 /* CustomizationExamples */ = {
 			isa = PBXGroup;
 			children = (
-				86717ADB1AC0C53800AC2A23 /* CustomRecorder.h */,
-				86717AD61AC0C53800AC2A23 /* CustomRecorder.m */,
 				86717ADC1AC0C53800AC2A23 /* DynamicTask.h */,
 				86717ADD1AC0C53800AC2A23 /* DynamicTask.m */,
 			);
@@ -257,7 +262,19 @@
 				86717A9C1AC0C0FE00AC2A23 /* LaunchScreen.xib */,
 				86717B091AC0CC0400AC2A23 /* Localizable.strings */,
 			);
-			name = Resources;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BC9A27111B81732200BDA84D /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				BC9A271B1B81752800BDA84D /* Charts.storyboard */,
+				BC9A27151B81743900BDA84D /* ChartDataSources.swift */,
+				BC9A27161B81743900BDA84D /* ChartListViewController.swift */,
+				BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */,
+				BC9A27141B81743800BDA84D /* ORKTest-Bridging-Header.h */,
+			);
+			name = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +324,8 @@
 		86717A821AC0C0FE00AC2A23 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = ResearchKit;
 				TargetAttributes = {
 					86717A891AC0C0FE00AC2A23 = {
@@ -425,6 +443,7 @@
 				86717AEA1AC0C53800AC2A23 /* image_example.png in Resources */,
 				86717B071AC0CC0400AC2A23 /* Localizable.strings in Resources */,
 				86717A9B1AC0C0FE00AC2A23 /* Images.xcassets in Resources */,
+				BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +462,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				86717AE81AC0C53800AC2A23 /* DynamicTask.m in Sources */,
-				86717AE41AC0C53800AC2A23 /* CustomRecorder.m in Sources */,
+				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
+				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
+				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,
@@ -486,6 +507,7 @@
 				86717A9D1AC0C0FE00AC2A23 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		86717B091AC0CC0400AC2A23 /* Localizable.strings */ = {
@@ -533,6 +555,7 @@
 				B15636931B1F8A0800B28200 /* en-AU */,
 			);
 			name = Localizable.strings;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -555,6 +578,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -608,13 +632,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ORKTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -623,13 +651,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ORKTest/ORKTest.entitlements;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ORKTest/Supporting Files/ORKTest.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = ORKTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ORKTest/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.researchkit-samplecode.ORKTest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ORKTest/Supporting Files/ORKTest-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -638,10 +669,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -658,10 +686,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ORKTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

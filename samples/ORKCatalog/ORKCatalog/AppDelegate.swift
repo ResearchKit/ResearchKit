@@ -55,11 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: UIApplicationDelegate
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // When a task result has been finished, update the result view controller's task result.
         taskListViewController.taskResultFinishedCompletionHandler = { [unowned self] taskResult in
-
             /*
                 If we're displaying a new result, make sure the result view controller's
                 navigation controller is at the root.

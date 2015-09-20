@@ -55,7 +55,7 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(newWindow);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
     _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType)-ABS([[ORKTextButton defaultFont] descender])-1 };
     [self setNeedsLayout];
 }
@@ -84,11 +84,26 @@
             [self addSubview:_signatureView];
         }
         
-        self.layoutMargins = (UIEdgeInsets){.left=ORKStandardHorizMarginForView(self), .right=ORKStandardHorizMarginForView(self)};
-        
         [self setNeedsUpdateConstraints];
     }
     return self;
+}
+
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin, .right = margin };
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)setClearButtonEnabled:(BOOL)clearButtonEnabled {

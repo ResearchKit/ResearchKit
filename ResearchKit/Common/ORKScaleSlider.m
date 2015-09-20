@@ -38,6 +38,7 @@
 #import "ORKSkin.h"
 #import "ORKScaleSliderView.h"
 #import "ORKScaleRangeDescriptionLabel.h"
+#import "ORKScaleRangeImageView.h"
 
 
 @implementation ORKScaleSlider {
@@ -118,12 +119,20 @@
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     BOOL pointInside = NO;
     if (_vertical) {
-        // In vertical mode, we need to ignore the touch area for the needed extra width
+        
         const CGFloat desiredSliderWidth = 44.0;
-        const CGFloat actualWidth = [self bounds].size.width;
-        const CGFloat centerX = actualWidth / 2;
-        if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
-            pointInside = [super pointInside:point withEvent:event];
+        
+        if (_textChoices) {
+            if (point.y > (self.bounds.size.width - desiredSliderWidth)/2) {
+                pointInside = [super pointInside:point withEvent:event];
+            }
+        } else {
+            // In vertical mode, we need to ignore the touch area for the needed extra width
+            const CGFloat actualWidth = [self bounds].size.width;
+            const CGFloat centerX = actualWidth / 2;
+            if (fabs(point.y - centerX) < desiredSliderWidth / 2) {
+                pointInside = [super pointInside:point withEvent:event];
+            }
         }
     } else {
         pointInside = [super pointInside:point withEvent:event];
@@ -227,8 +236,18 @@ static CGFloat kPadding = 2.0;
     // Include the range description labels if they are set.
     if (sliderView.leftRangeDescriptionLabel.text.length > 0 && sliderView.rightRangeDescriptionLabel.text.length > 0) {
         minimumValue = [minimumValue stringByAppendingFormat:@", %@, ", sliderView.leftRangeDescriptionLabel.text];
-        maximumValue = [maximumValue stringByAppendingFormat:@", %@", sliderView.rightRangeDescriptionLabel.text];
+        maximumValue = [maximumValue stringByAppendingFormat:@", %@, ", sliderView.rightRangeDescriptionLabel.text];
     }
+    
+    // Include the range image accessibilty hints if they are set.
+    if (sliderView.leftRangeImageView.image.accessibilityHint.length > 0) {
+        minimumValue = [minimumValue stringByAppendingString:sliderView.leftRangeImageView.image.accessibilityHint];
+    }
+    if (sliderView.rightRangeImageView.image.accessibilityHint.length > 0) {
+        maximumValue = [maximumValue stringByAppendingString:sliderView.rightRangeImageView.image.accessibilityHint];
+    }
+    
+    
     return [NSString stringWithFormat:ORKLocalizedString(@"AX_SLIDER_LABEL", nil), minimumValue, maximumValue];
 }
 
@@ -237,6 +256,9 @@ static CGFloat kPadding = 2.0;
     // no value (nor a default value), hence we shouldn't return one to VO.
     if (!self.showThumb) {
         return nil;
+    } else if (self.textChoices) {
+        ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value-1];
+        return textChoice.text;
     }
     return [self _axFormattedValue:self.value];
 }

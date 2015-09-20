@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Pristanak";
-"CONSENT_NAME_FIRST" = "Ime";
-"CONSENT_NAME_LAST" = "Prezime";
+"CONSENT_NAME_GIVEN" = "Ime";
+"CONSENT_NAME_FAMILY" = "Prezime";
 "CONSENT_NAME_PLACEHOLDER" = "Potrebno";
 "CONSENT_REVIEW_TITLE" = "Pregled informacija";
 "CONSENT_REVIEW_INSTRUCTION" = "Pregledajte obrazac ispod i dodirnite \"Slažem se\" ako ste spremni za nastavak.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ prekoračuje maksimalnu dozvoljenu vrijednost (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ je manje od minimalne dozvoljene vrijednosti (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ nije važeća vrijednost.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Nevažeća e-mail adresa: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstualni sadržaj prekoračuje maksimalnu duljinu: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Kamera nije dostupna u razdvojenom zaslonu.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %@ od %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kada se pojavi plavi krug, brzo protresite uređaj";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojski toranj";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ova aktivnost procjenjuje vaše vještine rješavanja slagalica.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Premjestite cijeli stog na označenu platformu u što je moguće manje poteza.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Riješite slagalicu";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Broj poteza: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ne mogu riješiti ovu slagalicu";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Tempirana šetnja";
+"TIMED_WALK_INTRO_DETAIL" = "Ova aktivnost mjeri funkcionalnost vaših donjih ekstremiteta.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Pronađite mjesto, po mogućnosti vani, gdje možete hodati otprilike %@ u ravnoj liniji što brže možete, ali sigurno. Nemojte usporavati sve dok ne prijeđete ciljnu liniju.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Dodirnite Sljedeće za početak.";
+"TIMED_WALK_FORM_TITLE" = "Pomagalo";
+"TIMED_WALK_FORM_TEXT" = "Koristite isto pomagalo za svaki test.";
+"TIMED_WALK_QUESTION_TEXT" = "Nosite li ortozu za gležanj i stopalo?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Koristite li pomagalo?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Dodirnite ovdje za odabir odgovora.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Nijedno";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Jedan štap za hodanje";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Jedna štaka";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dva štapa za hodanje";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvije štake";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Hodalica/Guralica";
+"TIMED_WALK_INSTRUCTION_%@" = "Hodajte najviše %@ u ravnoj liniji.";
+"TIMED_WALK_INSTRUCTION_2" = "Okrenite se i hodajte natrag do mjesta od kojeg ste krenuli.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Dodirnite OK kad završite.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Bez podataka";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Auditivni test tempiranog serijskog zbrajanja (PASAT) mjeri brzinu vaše obrade auditivnih podataka te sposobnost računanja.";
+"PVSAT_INTRO_TEXT" = "Vizualni test tempiranog serijskog zbrajanja mjeri (PVSAT) brzinu vaše obrade vizualnih podataka te sposobnost računanja.";
+"PAVSAT_INTRO_TEXT" = "Auditivni i vizualni test tempiranog serijskog zbrajanja (PAVSAT) mjeri brzinu vaše obrade auditivnih i vizualnih podataka te sposobnost računanja.";
+"PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkasti brojevi prikazuju se svakih %@ s.\nSvaku novu znamenku morate zbrojiti s onom koja je neposredno prije nje.\nPažnja, ne smijete izračunavati ukupni iznos, nego samo zbrojiti zadnja dva broja.";
+"PSAT_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"PSAT_INITIAL_INSTRUCTION" = "Zapamtite prvu znamenku.";
+"PSAT_INSTRUCTION" = "Zbrojite ovu novu znamenku s prethodnom.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Datoteka se ne može izraditi";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nije se moglo ukloniti dovoljno log datoteka za dosezanje praga";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "Igra memorije s pločicama";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Snimi pregled";
+"AX_IMAGE_CAPTURED_LABEL" = "Snimljena slika";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Pločica veličine %@ ne može se staviti na pločicu veličine %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cilj";
+"AX_TOWER_OF_HANOI_TOWER" = "Toranj";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Dodirnite dvaput za stavljanje pločice";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Dodirnite dvaput za odabir najviše pločice";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Ima pločicu veličine %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Isprazni";
+
+"AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
+"AX_GRAPH_AND_SEPARATOR" = " i ";

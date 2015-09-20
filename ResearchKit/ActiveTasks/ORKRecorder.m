@@ -40,12 +40,14 @@
 
 @implementation ORKRecorderConfiguration
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
-        if (nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier cannot be nil." userInfo:nil];
-        }
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
         _identifier = [identifier copy];
     }
     return self;
@@ -82,7 +84,7 @@
     return nil;
 }
 
-- (NSSet *)requestedHealthKitTypesForReading {
+- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
     return nil;
 }
 - (ORKPermissionMask)requestedPermissionMask {
@@ -170,7 +172,7 @@
     if (! _outputDirectory) {
         return nil;
     }
-    return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@",[_recorderUUID UUIDString]]]];
+    return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@", _recorderUUID.UUIDString]]];
 }
 
 - (NSString *)recorderType {
@@ -178,7 +180,7 @@
 }
 
 - (NSString *)logName {
-    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID];
+    return [NSString stringWithFormat:@"%@_%@", [self recorderType], _recorderUUID.UUIDString];
 }
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {

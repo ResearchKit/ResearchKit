@@ -49,6 +49,7 @@
     }
     return self;
 }
+
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, detailText);

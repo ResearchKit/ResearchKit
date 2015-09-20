@@ -48,6 +48,7 @@ static const CGFloat kLabelRightMargin = 44.0;
     if (self) {
         self.clipsToBounds = YES;
         _checkView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"checkmark" inBundle:ORKBundle() compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+        self.accessoryView = _checkView;
     }
     return self;
 }
@@ -55,7 +56,7 @@ static const CGFloat kLabelRightMargin = 44.0;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(self.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.window);
     
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
@@ -130,7 +131,7 @@ static const CGFloat kLabelRightMargin = 44.0;
 
 - (void)updateSelectedItem {
     if (_immediateNavigation == NO) {
-        self.accessoryView = _selectedItem ? _checkView : nil;
+        self.accessoryView.hidden = _selectedItem ? NO : YES;
         self.shortLabel.textColor = _selectedItem ? [self tintColor] : [UIColor blackColor];
         self.longLabel.textColor = _selectedItem ? [[self tintColor] colorWithAlphaComponent:192/255.] : [UIColor ork_darkGrayColor];
     }
@@ -153,7 +154,7 @@ static const CGFloat kLabelRightMargin = 44.0;
 + (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(tableView.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(tableView.window);
     CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);

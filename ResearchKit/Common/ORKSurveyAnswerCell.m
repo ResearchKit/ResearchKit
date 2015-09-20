@@ -57,6 +57,7 @@
         _answer = answer;
         self.step  = step;
         self.answer = answer;
+        self.clipsToBounds = YES;
     }
     return self;
 }
@@ -200,7 +201,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    ORKScreenType screenType = ORKGetScreenTypeForWindow(view.window);
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(view.window);
     return ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
 }
 
