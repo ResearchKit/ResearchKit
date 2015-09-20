@@ -131,7 +131,7 @@ const GLfloat DefaultPreferredRotation = 0;
 - (instancetype)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Use 2x scale factor on Retina displays.
-        self.contentScaleFactor = [[UIScreen mainScreen] scale];
+        self.contentScaleFactor = [UIScreen mainScreen].scale;
         
         self.backgroundColor = [UIColor whiteColor];
         

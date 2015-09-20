@@ -64,7 +64,7 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{ __s = [[UIScreen mainScreen] scale]; });
+        dispatch_once(&onceToken, ^{ __s = [UIScreen mainScreen].scale; });
         s = __s;
     }
     if (s == 1.0) {
@@ -75,7 +75,7 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
 }
 
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
-    return AdjustToScale(ORKCGFloor, value, [view contentScaleFactor]);
+    return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
 static id findInArrayByKey(NSArray * array, NSString *key, id value) {

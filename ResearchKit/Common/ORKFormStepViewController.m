@@ -824,7 +824,7 @@
     // Seperator line
     if ([self isSeparatorRow:indexPath]) {
         if (indexPath.row == 0) {
-            return 1/[[UIScreen mainScreen] scale];
+            return 1 / [UIScreen mainScreen].scale;
         } else {
             return 40;
         }
