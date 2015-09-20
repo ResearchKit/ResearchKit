@@ -260,8 +260,8 @@ const CGFloat FillColorAlpha = 0.4;
     [_fillLayers enumerateKeysAndObjectsUsingBlock:^(id key, CAShapeLayer *layer, BOOL *stop) {
         [self animateLayer:layer
                    keyPath:@"opacity"
-                  duration:duration * (1 / 3.0)
-                startDelay:duration * (2 / 3.0)
+                  duration:duration * (1.0 / 3.0)
+                startDelay:duration * (2.0 / 3.0)
             timingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
     }];
 }

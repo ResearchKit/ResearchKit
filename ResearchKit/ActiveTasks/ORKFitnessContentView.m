@@ -311,7 +311,7 @@
     double conversionFactor = 1.0;
     if ([hkUnit isNull] && (unit == NSLengthFormatterUnitYard)) {
         hkUnit = [HKUnit footUnit];
-        conversionFactor = 1 / 3.0;
+        conversionFactor = 1.0 / 3.0;
     }
     HKQuantity *quantity = [HKQuantity quantityWithUnit:[HKUnit meterUnit] doubleValue:displayDistance];
     distanceString = [_lengthFormatter.numberFormatter stringFromNumber:@([quantity doubleValueForUnit:hkUnit]*conversionFactor)];

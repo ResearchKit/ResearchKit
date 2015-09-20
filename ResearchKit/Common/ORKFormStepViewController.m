@@ -824,9 +824,9 @@
     // Seperator line
     if ([self isSeparatorRow:indexPath]) {
         if (indexPath.row == 0) {
-            return 1 / [UIScreen mainScreen].scale;
+            return 1.0 / [UIScreen mainScreen].scale;
         } else {
-            return 40;
+            return 40.0;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
         ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row - 1]);

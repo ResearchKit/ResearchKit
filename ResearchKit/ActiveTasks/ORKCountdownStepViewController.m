@@ -116,7 +116,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    NSDictionary *metrics = @{@"d": @(ProgressIndicatorDiameter + 2*ProgressIndicatorOuterMargin)};
+    NSDictionary *metrics = @{@"d": @(ProgressIndicatorDiameter + 2 * ProgressIndicatorOuterMargin)};
     NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _timeLabel, _progressView);
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]-(>=0)-[_progressView(==d)]|"

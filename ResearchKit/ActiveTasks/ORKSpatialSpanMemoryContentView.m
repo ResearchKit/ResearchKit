@@ -130,8 +130,8 @@
     CGSize gridItemSize = (CGSize){gridItemEdgeLength, gridItemEdgeLength};
     
     CGPoint centeringOffset = CGPointZero;
-    centeringOffset.x = 0.5*(bounds.size.width - (gridItemSize.width * _gridSize.width));
-    centeringOffset.y = 0.5*(bounds.size.height - (gridItemSize.height * _gridSize.height));
+    centeringOffset.x = 0.5 * (bounds.size.width - (gridItemSize.width * _gridSize.width));
+    centeringOffset.y = 0.5 * (bounds.size.height - (gridItemSize.height * _gridSize.height));
     
     NSInteger tileIndex = 0;
     for (NSInteger x = 0; x < _gridSize.width; x++) {

@@ -299,7 +299,7 @@ static const CGFloat kHMargin = 15.0;
     CGFloat fieldWidth = _textFieldView.estimatedWidth;
     
     // Leave half space for field, and also to be able to display placeholder in full.
-    if ( labelWidth >= 0.5*boundWidth || (fieldWidth + labelWidth) > 0.9*boundWidth ) {
+    if ( labelWidth >= 0.5 * boundWidth || (fieldWidth + labelWidth) > 0.9 * boundWidth ) {
         [_variableConstraints addObjectsFromArray:
          [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|"
                                                  options:NSLayoutFormatDirectionLeadingToTrailing

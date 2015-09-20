@@ -113,7 +113,7 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
             theta -= 2.0 * M_PI;
         }
 
-        fadeInFactor += 1/(ORKSineWaveToneGeneratorSampleRateDefault * audioGenerator->_fadeInDuration);
+        fadeInFactor += 1.0 / (ORKSineWaveToneGeneratorSampleRateDefault * audioGenerator->_fadeInDuration);
         if (fadeInFactor >= 1) {
             fadeInFactor = 1;
         }

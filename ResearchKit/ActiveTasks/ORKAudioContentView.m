@@ -133,7 +133,7 @@ static const CGFloat ValueLineMargin = 1.5;
         [centerLine moveToPoint:(CGPoint){.x = 0, .y = midY}];
         [centerLine addLineToPoint:(CGPoint){.x = maxX, .y = midY}];
         
-        CGContextSetLineWidth(context, 1 / scale);
+        CGContextSetLineWidth(context, 1.0 / scale);
         [_keyColor setStroke];
         CGFloat lengths[2] = {3, 3};
         CGContextSetLineDash(context, 0, lengths, 2);
