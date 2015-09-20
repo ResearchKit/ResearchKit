@@ -72,7 +72,7 @@
         [self addSubview:_continueSkipContainer];
         
         NSDictionary *dictionary = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
+        ORKEnableAutoLayoutForViews(dictionary.allValues);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queue_sessionRunning) name:AVCaptureSessionDidStartRunningNotification object:nil];
@@ -195,7 +195,7 @@
     }
     
     NSDictionary *views = NSDictionaryOfVariableBindings(self, _previewView, _continueSkipContainer, _headerView);
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     
     [_variableConstraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headerView]|"

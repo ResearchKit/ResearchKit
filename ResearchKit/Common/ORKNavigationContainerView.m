@@ -218,7 +218,7 @@
     _skipToContinueButtonConstraint.priority = UILayoutPriorityDefaultHigh + 1;
     [constraints addObject:_skipToContinueButtonConstraint];
     
-    for (UIView *view in [views allValues]) {
+    for (UIView *view in views.allValues) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view
                                                             attribute:NSLayoutAttributeCenterX
                                                             relatedBy:NSLayoutRelationEqual

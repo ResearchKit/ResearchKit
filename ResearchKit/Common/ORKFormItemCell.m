@@ -669,7 +669,7 @@ static const CGFloat HorizMargin = 15.0;
 
 - (void)setUpConstraints {
     NSDictionary *views = @{ @"textView": _textView };
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
     
     NSMutableArray *constraints = [NSMutableArray new];
@@ -850,7 +850,7 @@ static const CGFloat HorizMargin = 15.0;
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = @{@"selectionView": _selectionView };
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[selectionView]-|"
                                              options:NSLayoutFormatDirectionLeadingToTrailing
@@ -912,7 +912,7 @@ static const CGFloat HorizMargin = 15.0;
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = @{ @"sliderView": _sliderView };
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
                                              options:NSLayoutFormatDirectionLeadingToTrailing

@@ -67,7 +67,7 @@ const CGFloat FillColorAlpha = 0.4;
 }
 
 - (void)updateLineLayers {
-    [[_fillLayers allValues] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_fillLayers.allValues makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_fillLayers removeAllObjects];
     [super updateLineLayers];
 }

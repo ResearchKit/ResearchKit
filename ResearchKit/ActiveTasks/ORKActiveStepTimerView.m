@@ -153,11 +153,11 @@ static const CGFloat CountDownLabelToButtonMargin = 2.0;
 
 - (void)setUpConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_countDownLabel, _startTimerButton);
-    ORKEnableAutoLayoutForViews([views allValues]);
+    ORKEnableAutoLayoutForViews(views.allValues);
     
     NSMutableArray *constraints = [NSMutableArray new];
     
-    for (UIView *view in [views allValues]) {
+    for (UIView *view in views.allValues) {
         [constraints addObject:[NSLayoutConstraint constraintWithItem:view
                                                             attribute:NSLayoutAttributeWidth
                                                             relatedBy:NSLayoutRelationLessThanOrEqual

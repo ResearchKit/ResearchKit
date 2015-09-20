@@ -1092,7 +1092,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 }
 
 - (NSDictionary *)queue_configuration {
-    NSMutableArray *loggerConfigurations = [[_records allValues] valueForKey:@"configuration"];
+    NSMutableArray *loggerConfigurations = [_records.allValues valueForKey:@"configuration"];
     
     return @{PendingUploadBytesThresholdKey : @(self.pendingUploadBytesThreshold),
              TotalBytesThresholdKey : @(self.totalBytesThreshold),
@@ -1170,7 +1170,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 - (NSArray<NSString *> *)logNames {
     __block NSArray<NSString *> *logNames = nil;
     dispatch_sync(_queue, ^{
-        logNames = [_records allKeys];
+        logNames = _records.allKeys;
     });
     return logNames;
 }
@@ -1179,7 +1179,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     BOOL success = YES;
     NSMutableArray *allFiles = [NSMutableArray array];
     // Collect all the log file URLs so we can sort them by date rather than enumerating by logger.
-    for (ORKDataLogger *logger in [_records allValues]) {
+    for (ORKDataLogger *logger in _records.allValues) {
         success = [logger enumerateLogsNeedingUpload:^(NSURL *logFileUrl, BOOL *stop) {
             [allFiles addObject:logFileUrl];
         } error:error];
@@ -1304,7 +1304,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (totalBytes > bytes) {
-        for (ORKDataLogger *logger  in [_records allValues]) {
+        for (ORKDataLogger *logger  in _records.allValues) {
             [logger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
                 unsigned long long fileSize = [[fileManager attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
                 if (fileSize > 0) {
@@ -1357,7 +1357,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
 - (void)queue_updateBytes {
     unsigned long long pending = 0;
     unsigned long long uploaded = 0;
-    for (ORKDataLogger *logger in [_records allValues]) {
+    for (ORKDataLogger *logger in _records.allValues) {
         pending += logger.pendingBytes;
         uploaded += logger.uploadedBytes;
     }

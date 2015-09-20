@@ -1106,7 +1106,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     // [self result] would not include any results beyond current step.
     // Use _managedResults to get the completed result set.
-    NSArray *results = [_managedResults allValues];
+    NSArray *results = _managedResults.allValues;
     BOOL saveable = NO;
     for (ORKStepResult *result in results) {
         if ([result isSaveable]) {
