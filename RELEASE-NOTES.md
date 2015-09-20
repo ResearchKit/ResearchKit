@@ -2,6 +2,8 @@
 
 ## ResearchKit 1.2 Release Notes
 
+*ResearchKit 1.2* supports *iOS* and requires *Xcode 7.0* or newer. The minimum supported *Base SDK* is *8.0*.
+
 - **New Active Tasks**
 
   * **Tower of Hanoi Task**
@@ -41,6 +43,8 @@
 - **General stability and performance improvements**.
 
 ## ResearchKit 1.1 Release Notes
+
+*ResearchKit 1.1* supports *iOS* and requires *Xcode 6.3* or newer. The minimum supported *Base SDK* is *8.0*.
 
 - **Navigable Ordered Task**
 
