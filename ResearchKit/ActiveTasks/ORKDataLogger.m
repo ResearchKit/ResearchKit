@@ -39,13 +39,13 @@
 #import "ORKDefines_Private.h"
 
 
-static const char * kORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";
+static const char *ORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";
 
 // Default per-logfile settings when a data logger is used in an ORKDataLoggerManager
-static const NSTimeInterval kORKDataLoggerManagerDefaultLogFileLifetime = 60 * 60 * 24 * 3; // 3 days
-static const unsigned long long kORKDataLoggerManagerDefaultLogFileSize = 1024 * 1024; // 1 MB
+static const NSTimeInterval ORKDataLoggerManagerDefaultLogFileLifetime = 60 * 60 * 24 * 3; // 3 days
+static const unsigned long long ORKDataLoggerManagerDefaultLogFileSize = 1024 * 1024; // 1 MB
 
-static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
+static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
 
 
 @interface ORKDataLogger ()
@@ -100,7 +100,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 }
 
 - (BOOL)ork_isUploaded {
-    NSData *data = [self ork_dataForAttr:kORKDataLoggerUploadedAttr];
+    NSData *data = [self ork_dataForAttr:ORKDataLoggerUploadedAttr];
     if (!data) {
         return NO;
     }
@@ -112,7 +112,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 - (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * __autoreleasing *)error {
     NSString *value = (uploaded ? @"1" : @"0");
     NSData *encodedString = [value dataUsingEncoding:NSUTF8StringEncoding];
-    return [self ork_setData:encodedString forAttr:kORKDataLoggerUploadedAttr error:error];
+    return [self ork_setData:encodedString forAttr:ORKDataLoggerUploadedAttr error:error];
 }
 
 - (NSData *)ork_dataForAttr:(const char *)attr {
@@ -1065,7 +1065,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             return nil;
         }
         
-        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfURL:[_directory URLByAppendingPathComponent:kORKDataLoggerManagerConfigurationFilename]];
+        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename]];
         [self loadConfiguration:configuration];
         
         _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"pendingUploadBytesThreshold",@"totalBytesThreshold"] selector:@selector(configurationDidChange)];
@@ -1101,7 +1101,7 @@ ORKDefineStringKey(LoggerConfigurationsKey);
 
 - (void)queue_synchronizeConfiguration {
     NSDictionary *configuration = [self queue_configuration];
-    [configuration writeToURL:[_directory URLByAppendingPathComponent:kORKDataLoggerManagerConfigurationFilename] atomically:YES];
+    [configuration writeToURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename] atomically:YES];
 }
 
 - (void)configurationDidChange {
@@ -1118,8 +1118,8 @@ ORKDefineStringKey(LoggerConfigurationsKey);
     ORKDataLogger *dataLogger = [[ORKDataLogger alloc] initWithDirectory:_directory logName:logName formatter:formatter delegate:self];
     dataLogger.delegate = nil;
     // Pick suitable defaults for a typical use pattern
-    dataLogger.maximumCurrentLogFileLifetime = kORKDataLoggerManagerDefaultLogFileLifetime;
-    dataLogger.maximumCurrentLogFileSize = kORKDataLoggerManagerDefaultLogFileSize;
+    dataLogger.maximumCurrentLogFileLifetime = ORKDataLoggerManagerDefaultLogFileLifetime;
+    dataLogger.maximumCurrentLogFileSize = ORKDataLoggerManagerDefaultLogFileSize;
     dataLogger.delegate = self;
     
     _records[logName] = dataLogger;

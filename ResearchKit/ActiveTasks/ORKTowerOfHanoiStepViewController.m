@@ -38,7 +38,7 @@
 #import "ORKSkin.h"
 
 
-static const NSUInteger kNumberOfTowers = 3;
+static const NSUInteger NumberOfTowers = 3;
 
 @interface ORKTowerOfHanoiViewController () <ORKTowerOfHanoiTowerViewDataSource, ORKTowerOfHanoiTowerViewDelegate>
 
@@ -216,7 +216,7 @@ static const NSUInteger kNumberOfTowers = 3;
         ORKTowerOfHanoiTowerView *towerView = [[ORKTowerOfHanoiTowerView alloc] initWithFrame:CGRectZero maximumNumberOfDisks:[self numberOfDisks]];
         towerView.delegate = self;
         towerView.dataSource = self;
-        towerView.targeted = (index == kNumberOfTowers - 1);
+        towerView.targeted = (index == NumberOfTowers - 1);
         [towerViews addObject:towerView];
         towerView.translatesAutoresizingMaskIntoConstraints = NO;
         [_towerOfHanoiCustomView addSubview:towerView];

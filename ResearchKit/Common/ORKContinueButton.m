@@ -33,7 +33,7 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat kContinueButtonTouchMargin = 10;
+static const CGFloat ContinueButtonTouchMargin = 10;
 
 @implementation ORKContinueButton {
     NSLayoutConstraint *_heightConstraint;
@@ -107,10 +107,10 @@ static const CGFloat kContinueButtonTouchMargin = 10;
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     CGRect outsetRect = UIEdgeInsetsInsetRect(self.bounds,
-                                              (UIEdgeInsets){-kContinueButtonTouchMargin,
-                                                             -kContinueButtonTouchMargin,
-                                                             -kContinueButtonTouchMargin,
-                                                             -kContinueButtonTouchMargin});
+                                              (UIEdgeInsets){-ContinueButtonTouchMargin,
+                                                             -ContinueButtonTouchMargin,
+                                                             -ContinueButtonTouchMargin,
+                                                             -ContinueButtonTouchMargin});
     BOOL isInside = [super pointInside:point withEvent:event] || CGRectContainsPoint(outsetRect, point);
     return isInside;
 }

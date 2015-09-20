@@ -192,10 +192,10 @@
         
         // Vertical slider constraints
         // Keep the thumb the same distance from the value label as in horizontal mode
-        const CGFloat kValueLabelSliderMargin = 23.0;
+        const CGFloat ValueLabelSliderMargin = 23.0;
         // Keep the shadow of the thumb inside the bounds
-        const CGFloat kSliderMargin = 20.0;
-        const CGFloat kSideLabelMargin = 24;
+        const CGFloat SliderMargin = 20.0;
+        const CGFloat SideLabelMargin = 24;
         
         if (textChoices) {
             [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
@@ -209,7 +209,7 @@
             [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:@{@"kSliderMargin": @(kSliderMargin)}
+                                                     metrics:@{@"kSliderMargin": @(SliderMargin)}
                                                        views:views]];
             
             
@@ -221,7 +221,7 @@
                                                                     toItem:_slider
                                                                  attribute:NSLayoutAttributeCenterX
                                                                 multiplier:1.0
-                                                                  constant:kSideLabelMargin]];
+                                                                  constant:SideLabelMargin]];
                 
                 if (i == 0) {
                     // First label
@@ -294,7 +294,7 @@
             [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=kValueLabelSliderMargin)-[_slider]-(>=kSliderMargin)-|"
                                                      options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+                                                     metrics:@{@"kValueLabelSliderMargin": @(ValueLabelSliderMargin), @"kSliderMargin": @(SliderMargin)}
                                                        views:views]];
             
             [constraints addObjectsFromArray:
@@ -316,7 +316,7 @@
                                                                    toItem:_slider
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:-kSideLabelMargin]];
+                                                                 constant:-SideLabelMargin]];
             
             [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeView
                                                                 attribute:NSLayoutAttributeRight
@@ -324,7 +324,7 @@
                                                                    toItem:_slider
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:-kSideLabelMargin]];
+                                                                 constant:-SideLabelMargin]];
             
             // Align the rangeViews with the slider's bottom
             [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeView
@@ -367,7 +367,7 @@
                                                                    toItem:_slider
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:kSideLabelMargin]];
+                                                                 constant:SideLabelMargin]];
             
             [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeDescriptionLabel
                                                                 attribute:NSLayoutAttributeLeft
@@ -375,7 +375,7 @@
                                                                    toItem:_slider
                                                                 attribute:NSLayoutAttributeCenterX
                                                                multiplier:1.0
-                                                                 constant:kSideLabelMargin]];
+                                                                 constant:SideLabelMargin]];
             
             // Limit the height of the descriptionLabels
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
@@ -384,7 +384,7 @@
                                                                 toItem:_slider
                                                              attribute:NSLayoutAttributeHeight
                                                             multiplier:0.5
-                                                              constant:kSliderMargin]];
+                                                              constant:SliderMargin]];
             
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
                                                              attribute:NSLayoutAttributeHeight
@@ -392,7 +392,7 @@
                                                                 toItem:_slider
                                                              attribute:NSLayoutAttributeHeight
                                                             multiplier:0.5
-                                                              constant:kSliderMargin]];
+                                                              constant:SliderMargin]];
             
             
             // Align the descriptionLabels with the rangeViews

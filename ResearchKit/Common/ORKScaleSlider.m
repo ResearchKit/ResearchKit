@@ -192,10 +192,10 @@ static CGFloat LineWidth = 1.0;
     [[UIBezierPath bezierPathWithRect:trackRect] fill];
 }
 
-static CGFloat kPadding = 2.0;
+static const CGFloat Padding = 2.0;
 - (CGRect)trackRectForBounds:(CGRect)bounds {
     CGFloat centerY = (bounds.size.height / 2.0) - (LineWidth / 2.0);
-    CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
+    CGRect rect = CGRectMake(bounds.origin.x + Padding, centerY, bounds.size.width - 2 * Padding, 1.0);
     return rect;
 }
 
@@ -297,9 +297,9 @@ static CGFloat kPadding = 2.0;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
-static const NSTimeInterval kTimeoutSpeakThreshold = 1.0;
+static const NSTimeInterval TimeoutSpeakThreshold = 1.0;
 - (void)_announceNewValue {
-    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > kTimeoutSpeakThreshold ) {
+    if ( (CFAbsoluteTimeGetCurrent() - _axLastOutputTime) > TimeoutSpeakThreshold ) {
         UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, self.accessibilityValue);
         _axLastOutputTime = CFAbsoluteTimeGetCurrent();
     }

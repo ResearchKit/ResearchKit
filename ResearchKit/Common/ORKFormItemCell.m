@@ -46,8 +46,8 @@
 #import "ORKScaleSliderView.h"
 
 
-static const CGFloat kVMargin = 10.0;
-static const CGFloat kHMargin = 15.0;
+static const CGFloat VertMargin = 10.0;
+static const CGFloat HorizMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
@@ -402,10 +402,10 @@ static const CGFloat kHMargin = 15.0;
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;
-    const CGFloat kMinInputTextFieldPaddingRight = 6.0;
+    const CGFloat MinInputTextFieldPaddingRight = 6.0;
     
     // Shorten if necessary
-    if (formattedWidth > textField.frame.size.width - kMinInputTextFieldPaddingRight) {
+    if (formattedWidth > textField.frame.size.width - MinInputTextFieldPaddingRight) {
         formattedValue = [self shortenedFormattedValue];
     }
     
@@ -838,7 +838,7 @@ static const CGFloat kHMargin = 15.0;
                                                                              answer:self.answer];
     _selectionView.delegate = self;
     
-    self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
+    self.contentView.layoutMargins = UIEdgeInsetsMake(VertMargin, HorizMargin, VertMargin, HorizMargin);
     
     [self.contentView addSubview:_selectionView];
     [self setUpConstraints];

@@ -90,8 +90,8 @@
 @end
 
 
-static const CGFloat kPointMinDistance = 5;
-static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
+static const CGFloat PointMinDistance = 5;
+static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistance;
 
 @interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate> {
     CGPoint currentPoint;
@@ -284,7 +284,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     CGFloat dx = point.x - currentPoint.x;
     CGFloat dy = point.y - currentPoint.y;
     
-    if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
+    if ((dx * dx + dy * dy) < PointMinDistanceSquared) {
         return;
     }
     

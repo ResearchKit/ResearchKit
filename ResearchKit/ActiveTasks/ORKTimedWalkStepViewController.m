@@ -38,9 +38,6 @@
 #import "ORKActiveStepView.h"
 
 
-double const kDistanceInMetersTrackingThreshold = 100.0;
-
-
 @interface ORKTimedWalkStepViewController ()
 
 @property (nonatomic, strong) NSMutableArray *samples;

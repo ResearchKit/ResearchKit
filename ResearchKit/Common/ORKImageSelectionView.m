@@ -127,7 +127,7 @@
 @end
 
 
-static const CGFloat kSpacerWidth = 10.0;
+static const CGFloat SpacerWidth = 10.0;
 
 @implementation ORKImageSelectionView {
     ORKChoiceAnswerFormatHelper *_helper;
@@ -230,7 +230,7 @@ static const CGFloat kSpacerWidth = 10.0;
                                                                    toItem:previousView
                                                                 attribute:NSLayoutAttributeRight
                                                                multiplier:1.0
-                                                                 constant:kSpacerWidth]];
+                                                                 constant:SpacerWidth]];
             
             // All ButtonViews has equal width
             [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
@@ -249,7 +249,7 @@ static const CGFloat kSpacerWidth = 10.0;
                                                                    toItem:self
                                                                 attribute:NSLayoutAttributeLeft
                                                                multiplier:1.0
-                                                                 constant:kSpacerWidth]];
+                                                                 constant:SpacerWidth]];
         }
         previousView = buttonView;
     }
@@ -262,7 +262,7 @@ static const CGFloat kSpacerWidth = 10.0;
                                                                toItem:self
                                                             attribute:NSLayoutAttributeRight
                                                            multiplier:1.0
-                                                             constant:-kSpacerWidth]];
+                                                             constant:-SpacerWidth]];
     }
     [NSLayoutConstraint activateConstraints:constraints];
 }

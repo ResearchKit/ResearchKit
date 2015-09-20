@@ -35,7 +35,7 @@
 #import "ORKAccessibility.h"
 
 
-static const CGFloat kLabelRightMargin = 44.0;
+static const CGFloat LabelRightMargin = 44.0;
 
 @implementation ORKChoiceViewCell {
     UIImageView *_checkView;
@@ -63,7 +63,7 @@ static const CGFloat kLabelRightMargin = 44.0;
     
     CGFloat cellLeftMargin = self.separatorInset.left;
 
-    CGFloat labelWidth =  self.bounds.size.width - (cellLeftMargin + kLabelRightMargin);
+    CGFloat labelWidth =  self.bounds.size.width - (cellLeftMargin + LabelRightMargin);
     CGFloat cellHeight = self.bounds.size.height;
     
     if (self.longLabel.text.length == 0 && self.shortLabel.text.length == 0) {
@@ -159,7 +159,7 @@ static const CGFloat kLabelRightMargin = 44.0;
     CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
     CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);
     CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
-    CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + kLabelRightMargin);
+    CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + LabelRightMargin);
    
     if (shortText.length > 0) {
         static ORKSelectionTitleLabel *shortLabel;

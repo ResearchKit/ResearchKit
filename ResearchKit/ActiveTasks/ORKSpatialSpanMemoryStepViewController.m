@@ -47,7 +47,7 @@
 #import "ORKActiveStepView.h"
 
 
-static const NSTimeInterval kMemoryGameActivityTimeout = 20;
+static const NSTimeInterval MemoryGameActivityTimeout = 20;
 
 typedef NS_ENUM(NSInteger, ORKSpatialSpanStepState) {
     ORKSpatialSpanStepStateInitial,
@@ -471,7 +471,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     [_activityTimer invalidate];
     _activityTimer = nil;
     
-    _activityTimer = [NSTimer scheduledTimerWithTimeInterval:kMemoryGameActivityTimeout target:self selector:@selector(activityTimeout) userInfo:nil repeats:NO];
+    _activityTimer = [NSTimer scheduledTimerWithTimeInterval:MemoryGameActivityTimeout target:self selector:@selector(activityTimeout) userInfo:nil repeats:NO];
 }
 
 - (void)startGameplay {
