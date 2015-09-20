@@ -40,6 +40,14 @@
 
    The views in the *Charts Module* can be used independently of the rest of *ResearchKit*. It doesn't automatically connect with any other *ResearchKit* module: the developer has to supply the data to be displayed through the views' `dataSources`, which allows maximum flexibility.
 
+- **Other improvemnets**
+
+  - **Scale Answer Format**: *discrete scales* now support *text choice* labels, and all *scales* support images in place of the minimum and maximum range labels.
+
+  - **Result Predicates**: the predicate-building methods in `ORKResultPredicate` now use the new `ORKResultSelector` class for unequivocally identifying a *question step result* or a *form item result*.
+
+   This eliminates ambiguity when matching results with the same inner scope identifier. For example, a *form item result* can have the same identifier as a *question step result* or as another *form item result* in a different *form step*, and you can now match them separately.
+
 - **General stability and performance improvements**.
 
 ## ResearchKit 1.1 Release Notes
@@ -69,9 +77,11 @@
 
     The *ResearchKit* implementation generates a series of pure sinusoid sounds, with different frequencies and on different channels (left or right). The test starts at the minimum volume and is gradually increased until the participant perceives it and taps a button. At that time, the current sound amplitude, frequency and channel are recorded.
 
-- **Vertical Slider Answer Format**
+- **Scale Answer Format Enhancements**
 
-   Support for *continuous* and *vertical sliders* has been added. Some questions, like *mood measurements* or *symptom severity measurements* may be more naturally presented using a *vertical scale*.
+   Support for discrete and continuous *vertical scales* has been added. Some questions, like mood measurement or symptom severity measurement queries may be more naturally presented using a *vertical scale*.
+
+   The *Scale Answer Format* has also been improved by making it usable within forms.
 
 - **Image Capture Step**
 
