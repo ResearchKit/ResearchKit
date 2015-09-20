@@ -36,6 +36,7 @@
 #import "ORKStepViewController_Internal.h"
 #import "ORKHelpers.h"
 #import "UIBarButtonItem+ORKBarButtonItem.h"
+#import "ORKReviewStep_Internal.h"
 
 
 @interface ORKStepViewController () {
@@ -284,6 +285,10 @@
     return _hasBeenPresented;
 }
 
+- (BOOL)canChangeStepResult {
+    return !_parentReviewStep || !_parentReviewStep.isStandalone;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
@@ -350,6 +355,7 @@
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
+static NSString *const _ORKParentReviewStepKey = @"parentReviewStep";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -357,6 +363,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     [coder encodeObject:_step.identifier forKey:_ORKStepIdentifierRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDateRestoreKey];
     [coder encodeObject:ORKBookmarkDataFromURL(_outputDirectory) forKey:_ORKOutputDirectoryKey];
+    [coder encodeObject:_parentReviewStep forKey:_ORKParentReviewStepKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -378,6 +385,8 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
     }
+    
+    self.parentReviewStep = [coder decodeObjectOfClass:[ORKReviewStep class] forKey:_ORKParentReviewStepKey];
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {

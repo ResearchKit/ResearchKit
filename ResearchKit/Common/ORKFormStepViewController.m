@@ -758,6 +758,7 @@
             }
         }
     }
+    cell.userInteractionEnabled = self.canChangeStepResult;
     return cell;
 }
 

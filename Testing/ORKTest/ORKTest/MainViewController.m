@@ -72,6 +72,7 @@ DefineStringKey(StepNavigationTaskIdentifier);
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
 
+DefineStringKey(ReviewStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -286,6 +287,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Review Step"
                            ],
                        ];
 }
@@ -446,6 +448,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:ReviewStepTaskIdentifier]) {
+        return [self makeReviewStepTask];
     }
     return nil;
 }
@@ -2627,6 +2631,27 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
+#pragma mark - Review step task
+
+- (id<ORKTask>)makeReviewStepTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step1" title:@"Step 1" text:@"Step 1" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step2" title:@"Step 2" text:@"Step 2" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKReviewStep *step3 = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.step3" steps: nil resultSource:nil];
+    step3.title = @"Review";
+    step3.placeholder = @"No steps available for review";
+    ORKQuestionStep *step4 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step4" title:@"Step 4" text:@"Step 4" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    [steps addObject: step1];
+    [steps addObject: step2];
+    [steps addObject: step3];
+    [steps addObject: step4];
+        return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:steps];
+}
+
+- (IBAction)reviewStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ReviewStepTaskIdentifier];
+}
+
 #pragma mark - Helpers
 
 /*
@@ -3064,6 +3089,10 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             }
         }
     }];
+}
+
+- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController reviewStep:(id)reviewStep shouldIncludeStep:(ORKStep *)step {
+    return YES;
 }
 
 #pragma mark - UI state restoration

@@ -32,6 +32,7 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKDefines.h>
 #import <ResearchKit/ORKRecorder.h>
+#import <ResearchKIt/ORKReviewStep.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -354,6 +355,10 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the view controller has been presented before.
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
+
+@property (nonatomic, readonly) BOOL canChangeStepResult;
+
+@property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
 
 @end
 

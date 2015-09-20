@@ -33,6 +33,7 @@
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
+#import <ResearchKit/ORKReviewStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -222,6 +223,8 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  */
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didChangeResult:(ORKTaskResult *)result;
 
+- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController reviewStep:(ORKReviewStep *)reviewStep shouldIncludeStep:(ORKStep *)step;
+
 @end
 
 
@@ -254,7 +257,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  objects in the result hierarchy.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
+@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
 
 /**
  Returns a newly initialized task view controller.
