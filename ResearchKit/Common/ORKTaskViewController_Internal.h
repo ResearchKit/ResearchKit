@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 // So taskVC can monitor scroll view's content offset and update hairline's alpha.
 @property (nonatomic, weak, nullable) UIScrollView *registeredScrollView;
 
+- (nullable ORKReviewStep*)reviewStepForStep:(ORKStep*)step;
+
 @end
 
 NS_ASSUME_NONNULL_END

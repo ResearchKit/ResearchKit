@@ -80,95 +80,31 @@ DefineStringKey(CollectionViewCellReuseIdentifier);
 @end
 
 
-@implementation SectionHeader {
-    UILabel *_title;
-}
+static NSString * const DatePickingTaskIdentifier = @"dates_001";
+static NSString * const SelectionSurveyTaskIdentifier = @"tid_001";
+static NSString * const ActiveStepTaskIdentifier = @"tid_002";
+static NSString * const ConsentReviewTaskIdentifier = @"consent_review";
+static NSString * const ConsentTaskIdentifier = @"consent";
+static NSString * const MiniFormTaskIdentifier = @"miniform";
+static NSString * const ScreeningTaskIdentifier = @"screening";
+static NSString * const ScalesTaskIdentifier = @"scales";
+static NSString * const ImageChoicesTaskIdentifier = @"images";
+static NSString * const ImageCaptureTaskIdentifier = @"imageCapture";
+static NSString * const AudioTaskIdentifier = @"audio";
+static NSString * const ToneAudiometryTaskIdentifier = @"tone_audiometry";
+static NSString * const FitnessTaskIdentifier = @"fitness";
+static NSString * const GaitTaskIdentifier = @"gait";
+static NSString * const MemoryTaskIdentifier = @"memory";
+static NSString * const DynamicTaskIdentifier = @"dynamic_task";
+static NSString * const TwoFingerTapTaskIdentifier = @"tap";
+static NSString * const ReactionTimeTaskIdentifier = @"react";
+static NSString * const TowerOfHanoiTaskIdentifier = @"tower";
+static NSString * const StepNavigationTaskIdentifier = @"step_navigation";
+static NSString * const CustomNavigationItemTaskIdentifier = @"customNavigationItemTask";
+static NSString * const ReviewStepTaskIdentifier = @"reviewStepTask";
+static NSString * const ReviewStepStandaloneTaskIdentifier = @"reviewStepStandaloneTask";
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self sharedInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self sharedInit];
-    }
-    return self;
-}
-
-static UIColor *HeaderColor() {
-    return [UIColor colorWithWhite:0.97 alpha:1.0];
-}
-static const CGFloat HeaderSideLayoutMargin = 16.0;
-
-- (void)sharedInit {
-    self.layoutMargins = UIEdgeInsetsMake(0, HeaderSideLayoutMargin, 0, HeaderSideLayoutMargin);
-    self.backgroundColor = HeaderColor();
-    _title = [UILabel new];
-    _title.font = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold]; // Table view header font
-    [self addSubview:_title];
-    
-    _title.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *views = @{@"title": _title};
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[title]-|"
-                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                 metrics:nil
-                                                                   views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[title]|"
-                                                                 options:0
-                                                                 metrics:nil
-                                                                   views:views]];
-}
-
-- (void)configureHeaderWithTitle:(NSString *)title {
-    _title.text = title;
-}
-
-@end
-
-
-@interface ButtonCell: UICollectionViewCell
-
-- (void)configureButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector;
-
-@end
-
-
-@implementation ButtonCell {
-    UIButton *_button;
-}
-
-- (void)setUpButton {
-    [_button removeFromSuperview];
-    _button = [UIButton buttonWithType:UIButtonTypeSystem];
-    _button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    _button.contentEdgeInsets = UIEdgeInsetsMake(0.0, HeaderSideLayoutMargin, 0.0, 0.0);
-    [self.contentView addSubview:_button];
-    
-    _button.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *views = @{@"button": _button};
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button]|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:views]];
-}
-
-- (void)configureButtonWithTitle:(NSString *)title target:(id)target selector:(SEL)selector {
-    [self setUpButton];
-    [_button setTitle:title forState:UIControlStateNormal];
-    [_button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
-}
-
-@end
-
-
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
+@interface MainViewController () <ORKTaskViewControllerDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -310,31 +246,97 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return _buttonSectionNames.count;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return ((NSArray *)_buttonTitles[section]).count;
-}
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showCustomNavigationItemTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Custom Navigation Item" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"customNavigationItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReviewStepTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Review Step" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"reviewStepItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    SectionHeader *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:CollectionViewHeaderReuseIdentifier forIndexPath:indexPath];
-    [sectionHeader configureHeaderWithTitle:_buttonSectionNames[indexPath.section]];
-    return sectionHeader;
-}
-
-- (SEL)selectorFromButtonTitle:(NSString *)buttonTitle {
-    // "THIS FOO baR title" is converted to the "thisFooBarTitleButtonTapped:" selector
-    buttonTitle = buttonTitle.capitalizedString;
-    NSMutableArray *titleTokens = [[buttonTitle componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] mutableCopy];
-    titleTokens[0] = ((NSString *)titleTokens[0]).lowercaseString;
-    NSString *selectorString = [NSString stringWithFormat:@"%@ButtonTapped:", [titleTokens componentsJoinedByString:@""]];
-    return NSSelectorFromString(selectorString);
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ButtonCell *buttonCell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellReuseIdentifier forIndexPath:indexPath];
-    NSString *buttonTitle = _buttonTitles[indexPath.section][indexPath.row];
-    SEL buttonSelector = [self selectorFromButtonTitle:buttonTitle];
-    [buttonCell configureButtonWithTitle:buttonTitle target:self selector:buttonSelector];
-    return buttonCell;
+    {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button addTarget:self action:@selector(showReviewStepStandaloneTask:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"Review Step Standalone" forState:UIControlStateNormal];
+        [buttonKeys addObject:@"reviewStepStandaloneItem"];
+        buttons[buttonKeys.lastObject] = button;
+    }
+    
+    [buttons enumerateKeysAndObjectsUsingBlock:^(id key, UIView *obj, BOOL *stop) {
+        [obj setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self.view addSubview:obj];
+    }];
+   
+    if (buttons.count > 0) {
+         NSString *horizVisualFormatString  = @"";
+        if (buttons.count == 1) {
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@]|", buttonKeys.firstObject];
+        } else {
+            horizVisualFormatString = [NSString stringWithFormat:@"H:|[%@][%@(==%@)]|", buttonKeys.firstObject, buttonKeys[1], buttonKeys.firstObject];
+        }
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizVisualFormatString 
+                                                                          options:(NSLayoutFormatOptions)0
+                                                                          metrics:nil
+                                                                            views:buttons]];
+        
+        NSArray *allKeys = buttonKeys;
+        BOOL left = YES;
+        NSMutableString *leftVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
+        NSMutableString *rightVisualFormatString = [NSMutableString stringWithString:@"V:|-20-"];
+        
+        NSString *leftFirstKey = nil;
+        NSString *rightFirstKey = nil;
+        
+        for (NSString *key in allKeys) {
+        
+            if (left == YES) {
+            
+                if (leftFirstKey) {
+                    [leftVisualFormatString appendFormat:@"[%@(==%@)]", key, leftFirstKey];
+                } else {
+                    [leftVisualFormatString appendFormat:@"[%@]", key];
+                }
+                
+                if (leftFirstKey == nil) {
+                    leftFirstKey = key;
+                }
+            } else {
+                
+                if (rightFirstKey) {
+                    [rightVisualFormatString appendFormat:@"[%@(==%@)]", key, rightFirstKey];
+                } else {
+                    [rightVisualFormatString appendFormat:@"[%@]", key];
+                }
+                
+                if (rightFirstKey == nil) {
+                    rightFirstKey = key;
+                }
+            }
+            
+            left = !left;
+        }
+        
+        [leftVisualFormatString appendString:@"-20-|"];
+        [rightVisualFormatString appendString:@"-20-|"];
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:leftVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:rightVisualFormatString
+                                                                          options:NSLayoutFormatAlignAllCenterX
+                                                                          metrics:nil
+                                                                            views:buttons]];
+        
+    }
 }
 
 #pragma mark - Mapping identifiers to tasks
@@ -446,6 +448,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:ReviewStepTaskIdentifier]) {
+        return [self makeReviewStepTask];
+    } else if ([identifier isEqualToString:ReviewStepStandaloneTaskIdentifier]) {
+        return [self makeReviewStepStandaloneTask];
     }
     return nil;
 }
@@ -2625,6 +2631,59 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)customNavigationItemButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
+}
+
+#pragma mark - Review step task
+
+- (id<ORKTask>)makeReviewStepTask {
+    ORKQuestionStep *step1 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepTask.step1"];
+    step1.title = @"step 1 title";
+    step1.text = @"step 1 text";
+    step1.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepTask.step2"];
+    step2.title = @"step 2 title";
+    step2.text = @"step 2 text";
+    step2.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.reviewStep"];
+    reviewStep.title = @"review step title";
+    reviewStep.text = @"review step text";
+    reviewStep.optional = YES;
+    ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step3"];
+    step3.title = @"step 3 title";
+    step3.text = @"step 3 text";
+    step3.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
+}
+
+- (IBAction)showReviewStepTask:(id)sender {
+    [self beginTaskWithIdentifier:ReviewStepTaskIdentifier];
+}
+
+#pragma mark - Review step task
+
+- (id<ORKTask>)makeReviewStepStandaloneTask {
+    ORKQuestionStep *step1 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step1"];
+    step1.title = @"step 1 title";
+    step1.text = @"step 1 text";
+    step1.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step2"];
+    step2.title = @"step 2 title";
+    step2.text = @"step 2 text";
+    step2.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.reviewStep"
+                                                                    steps:@[step1, step2]
+                                                             resultSource:nil];
+    reviewStep.title = @"review step title";
+    reviewStep.text = @"review step text";
+    ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"reviewStepStandaloneTask.step3"];
+    step3.title = @"step 3 title";
+    step3.text = @"step 3 text";
+    step3.answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepStandaloneTaskIdentifier steps:@[reviewStep, step3]];
+}
+
+- (IBAction)showReviewStepStandaloneTask:(id)sender {
+    [self beginTaskWithIdentifier:ReviewStepStandaloneTaskIdentifier];
 }
 
 #pragma mark - Helpers

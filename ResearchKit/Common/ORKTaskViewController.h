@@ -32,6 +32,7 @@
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKReviewStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
 
 
@@ -254,7 +255,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  objects in the result hierarchy.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
+@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
 
 /**
  Returns a newly initialized task view controller.
@@ -458,6 +459,7 @@ ORK_CLASS_AVAILABLE
  You can use this method to customize the appearance of the task view controller's navigation bar.
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
+
 
 @end
 

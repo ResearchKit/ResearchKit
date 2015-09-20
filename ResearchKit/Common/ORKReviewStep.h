@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Oliver Schaefer. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,42 +29,34 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
-
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
 #import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKReviewStep.h>
-
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
-
 #import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKReviewStepViewController.h>
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+NS_ASSUME_NONNULL_BEGIN
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+typedef NS_ENUM(NSInteger, ORKReviewStepReviewDirection) {
+    
+    ORKReviewStepReviewDirectionForward,
+    
+    ORKReviewStepReviewDirectionReverse
+} ORK_ENUM_AVAILABLE;
 
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
+ORK_CLASS_AVAILABLE
+@interface ORKReviewStep : ORKStep
 
+@property (nonatomic) ORKReviewStepReviewDirection reviewDirection;
+
+@property (nonatomic, readonly, nullable) NSArray *steps;
+
+@property (nonatomic, readonly, nullable) id<ORKTaskResultSource> resultSource;
+
+@property (nonatomic, readonly) BOOL isStandalone;
+
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
+                             steps:(nullable NSArray *)steps
+                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+
+@end
+
+NS_ASSUME_NONNULL_END

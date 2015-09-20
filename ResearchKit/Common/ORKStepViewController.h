@@ -355,6 +355,10 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
 
+@property (nonatomic, readonly) BOOL canChangeStepResult;
+
+@property (nonatomic) BOOL isBeingReviewed;
+
 @end
 
 NS_ASSUME_NONNULL_END

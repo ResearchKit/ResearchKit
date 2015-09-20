@@ -67,6 +67,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self initializeInternalButtonItems];
+        self.isBeingReviewed = NO;
     }
     return self;
 }
@@ -76,6 +77,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self initializeInternalButtonItems];
+        self.isBeingReviewed = NO;
     }
     return self;
 }
@@ -85,6 +87,7 @@
     if (self) {
         [self initializeInternalButtonItems];
         [self setStep:step];
+        self.isBeingReviewed = NO;
     }
     return self;
 }
@@ -284,6 +287,18 @@
     return _hasBeenPresented;
 }
 
+- (BOOL)canChangeStepResult {
+    if (!self.step || !self.taskViewController) {
+        return NO;
+    }
+    BOOL isReviewStepStandalone = NO;
+    ORKReviewStep *reviewStep = [self.taskViewController reviewStepForStep:self.step];
+    if (reviewStep) {
+        isReviewStepStandalone = reviewStep.isStandalone;
+    }
+    return self.isBeingReviewed ? !isReviewStepStandalone : YES;
+}
+
 #pragma mark - Action Handlers
 
 - (void)goForward {
@@ -345,8 +360,8 @@
     }];
 }
 
+//TODO: restore isBeingReviewed property
 #pragma mark - UIStateRestoring
-
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";
 static NSString *const _ORKPresentedDateRestoreKey = @"presentedDate";
 static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
