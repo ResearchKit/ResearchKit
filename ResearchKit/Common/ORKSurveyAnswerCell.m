@@ -145,7 +145,7 @@
     
     NSDictionary *userInfo = aNotification.userInfo;
     CGSize keyboardSize = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue.size;
-    keyboardSize.height = keyboardSize.height-44;
+    keyboardSize.height = keyboardSize.height - 44;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
     
@@ -158,12 +158,12 @@
     CGRect availableFrame = tableView.frame;
     availableFrame.size.height -= keyboardSize.height;
     
-    desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height/2);
+    desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height / 2);
     
     if (availableFrame.size.height > cellFrame.size.height) {
-        desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height - cellFrame.size.height) - (cellFrame.size.height -55);
+        desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height - cellFrame.size.height) - (cellFrame.size.height - 55);
     }
-    desiredOffset.y = MAX(desiredOffset.y,0);
+    desiredOffset.y = MAX(desiredOffset.y, 0);
 
     [tableView setContentOffset:desiredOffset animated:NO];
 }

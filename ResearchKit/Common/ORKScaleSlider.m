@@ -123,7 +123,7 @@
         const CGFloat desiredSliderWidth = 44.0;
         
         if (_textChoices) {
-            if (point.y > (self.bounds.size.width - desiredSliderWidth)/2) {
+            if (point.y > (self.bounds.size.width - desiredSliderWidth) / 2) {
                 pointInside = [super pointInside:point withEvent:event];
             }
         } else {
@@ -160,15 +160,15 @@
     
     CGFloat newValue = position * (self.maximumValue - self.minimumValue) + self.minimumValue;
     if (_numberOfSteps > 0) {
-        CGFloat stepSize = 1.0/_numberOfSteps;
-        NSUInteger steps = round(position/stepSize);
+        CGFloat stepSize = 1.0 / _numberOfSteps;
+        NSUInteger steps = round(position / stepSize);
         
         newValue = stepSize*steps * (self.maximumValue - self.minimumValue) + self.minimumValue;
     }
     [self setValue:newValue animated:YES];
 }
 
-static CGFloat kLineWidth = 1.0;
+static CGFloat LineWidth = 1.0;
 - (void)drawRect:(CGRect)rect {
     CGRect bounds = self.bounds;
     CGRect trackRect = [self trackRectForBounds:bounds];
@@ -179,11 +179,11 @@ static CGFloat kLineWidth = 1.0;
     if (_numberOfSteps > 0) {
         
         UIBezierPath *path = [[UIBezierPath alloc] init];
-        [path setLineWidth:kLineWidth];
+        [path setLineWidth:LineWidth];
         
         for (int discreteOffset = 0; discreteOffset <= _numberOfSteps; ++discreteOffset) {
-            CGFloat x = trackRect.origin.x + (trackRect.size.width-kLineWidth)*discreteOffset/_numberOfSteps;
-            x += kLineWidth/2; // Draw in center of line (center of pixel on 1x devices)
+            CGFloat x = trackRect.origin.x + (trackRect.size.width - LineWidth) * discreteOffset / _numberOfSteps;
+            x += LineWidth / 2; // Draw in center of line (center of pixel on 1x devices)
             [path moveToPoint:CGPointMake(x, centerY - 3.5)];
             [path addLineToPoint:CGPointMake(x, centerY + 3.5)];
         }
@@ -194,7 +194,7 @@ static CGFloat kLineWidth = 1.0;
 
 static CGFloat kPadding = 2.0;
 - (CGRect)trackRectForBounds:(CGRect)bounds {
-    CGFloat centerY = bounds.size.height / 2.0 - kLineWidth/2;
+    CGFloat centerY = (bounds.size.height / 2.0) - (LineWidth / 2.0);
     CGRect rect = CGRectMake(bounds.origin.x + kPadding, centerY, bounds.size.width - 2 * kPadding, 1.0);
     return rect;
 }
@@ -257,7 +257,7 @@ static CGFloat kPadding = 2.0;
     if (!self.showThumb) {
         return nil;
     } else if (self.textChoices) {
-        ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value-1];
+        ORKTextChoice *textChoice = self.textChoices[(NSInteger)self.value - 1];
         return textChoice.text;
     }
     return [self _axFormattedValue:self.value];

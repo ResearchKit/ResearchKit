@@ -265,7 +265,7 @@
                                                                         metrics:@{ @"s": @(1 / scale) }
                                                                           views:views];
     for (NSLayoutConstraint *constraint in horizConstraints) {
-        constraint.priority = UILayoutPriorityDefaultHigh+1;
+        constraint.priority = UILayoutPriorityDefaultHigh + 1;
     }
     [constraints addObjectsFromArray:horizConstraints];
     

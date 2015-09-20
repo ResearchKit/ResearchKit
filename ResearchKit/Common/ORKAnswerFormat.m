@@ -2011,7 +2011,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     NSTimeInterval value = MAX([self defaultInterval], 0);
     
     // imitate UIDatePicker's behavior
-    NSTimeInterval stepInSeconds = _step*60;
+    NSTimeInterval stepInSeconds = _step * 60;
     value  = floor(value/stepInSeconds)*stepInSeconds;
     
     return value;

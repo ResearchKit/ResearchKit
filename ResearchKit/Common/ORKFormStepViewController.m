@@ -303,7 +303,7 @@
         }
         
         ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-        ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+        ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
             id answer = _savedAnswers[formItem.identifier];
@@ -648,7 +648,7 @@
 #pragma mark UITableViewDataSource
 
 - (BOOL)isLastSection:(NSUInteger)section {
-    return section==(_sections.count-1);
+    return (section == (_sections.count - 1));
 }
 
 - (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
@@ -683,7 +683,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         } else {
             ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-            ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+            ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
             ORKFormItem *formItem = cellItem.formItem;
             id answer = _savedAnswers[formItem.identifier];
             
@@ -829,7 +829,7 @@
             return 40;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
+        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row - 1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;

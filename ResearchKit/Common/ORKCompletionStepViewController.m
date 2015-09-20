@@ -55,13 +55,13 @@ static const CGFloat TickViewSize = 122;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.cornerRadius = TickViewSize/2;
+        self.layer.cornerRadius = TickViewSize / 2;
         [self tintColorDidChange];
         
         UIBezierPath *path = [UIBezierPath new];
-        [path moveToPoint:(CGPoint){37,65}];
-        [path addLineToPoint:(CGPoint){50,78}];
-        [path addLineToPoint:(CGPoint){87,42}];
+        [path moveToPoint:(CGPoint){37, 65}];
+        [path addLineToPoint:(CGPoint){50, 78}];
+        [path addLineToPoint:(CGPoint){87, 42}];
         path.lineCapStyle = kCGLineCapRound;
         path.lineWidth = 5;
     

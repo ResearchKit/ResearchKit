@@ -36,7 +36,7 @@
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
-    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
+    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type + 1];
     fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
     return fullMovieName;
 }

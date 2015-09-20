@@ -341,7 +341,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 #pragma mark ORKSpatialSpanStepStateInitial
 
 - (ORKGridSize)gridSizeForSpan:(NSInteger)span {
-    NSInteger numberOfGridEntriesDesired = span*2;
+    NSInteger numberOfGridEntriesDesired = span * 2;
     NSInteger value = (NSInteger)ceil(sqrt(numberOfGridEntriesDesired));
     value = MAX(value, 2);
     value = MIN(value, 6);
@@ -377,7 +377,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     NSInteger sequenceLength = _nextGameSequenceLength;
     _gridSize = [self gridSizeForSpan:sequenceLength];
     
-    ORKSpatialSpanGame *game = [[ORKSpatialSpanGame alloc] initWithGameSize:_gridSize.width*_gridSize.height sequenceLength:sequenceLength seed:0];
+    ORKSpatialSpanGame *game = [[ORKSpatialSpanGame alloc] initWithGameSize:_gridSize.width * _gridSize.height sequenceLength:sequenceLength seed:0];
     ORKSpatialSpanGameState *gameState = [[ORKSpatialSpanGameState alloc] initWithGame:game];
     
     _currentGameState = gameState;
@@ -413,7 +413,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
         ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
         
         NSInteger index = _playbackIndex;
-        NSInteger previousIndex = index-1;
+        NSInteger previousIndex = index - 1;
         if (step.requireReversal) {
             // Play the indexes in reverse order when we require reversal. The participant
             // is then required to tap the sequence in the forward direction, which
@@ -426,7 +426,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
         [self applyTargetState:ORKSpatialSpanTargetStateQuiescent toSequenceIndex:previousIndex duration:0];
         
         // The active display should be visible for half the timer interval
-        [self applyTargetState:ORKSpatialSpanTargetStateActive toSequenceIndex:index duration:step.playSpeed/2];
+        [self applyTargetState:ORKSpatialSpanTargetStateActive toSequenceIndex:index duration:(step.playSpeed / 2)];
     }
     _playbackIndex++;
 }
@@ -522,8 +522,8 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
             [gameView setState:ORKSpatialSpanTargetStateCorrect forTileIndex:tileIndex animated:YES];
             NSInteger stepIndex = [_currentGameState currentStepIndex];
             
-            [self setNumberOfItems:_numberOfItems+1];
-            [self setScore:_score + (round(log2(stepIndex))+1)*5];
+            [self setNumberOfItems:_numberOfItems + 1];
+            [self setScore:_score + (round(log2(stepIndex)) + 1) * 5];
             
             [self resetActivityTimer];
             if ([_currentGameState isComplete]) {
@@ -544,7 +544,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
     ORKSpatialSpanMemoryStep *step = [self spatialSpanStep];
     if (success) {
         NSInteger sequenceLength = [_currentGameState.game sequenceLength];
-        [self setScore:_score + (round(log2(sequenceLength))+1)*5];
+        [self setScore:_score + (round(log2(sequenceLength)) + 1) * 5];
         _gamesCounter++;
         _consecutiveGamesFailed = 0;
         _nextGameSequenceLength = MIN(_nextGameSequenceLength + 1, step.maximumSpan);

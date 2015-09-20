@@ -200,7 +200,7 @@
     
     __weak AVPlayer *weakPlayer = _moviePlayer;
     [_moviePlayer seekToTime:context.startTime.CMTimeValue
-             toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
+             toleranceBefore:CMTimeMake(NSEC_PER_SEC * (1 / 60.0), NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC * (1 / 60.0), NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
                  AVPlayer *localPlayer = weakPlayer;
                  [localPlayer play];
              }];

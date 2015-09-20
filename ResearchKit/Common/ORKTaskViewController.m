@@ -913,7 +913,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
 
         if (progress.total > 0) {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current + 1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
     }
     
@@ -991,7 +991,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)observedScrollViewDidScroll:(UIScrollView *)scrollView {
     // alpha's range [0.0, 1.0]
-    float alpha = MAX( MIN(scrollView.contentOffset.y/64.0, 1.0), 0.0);
+    float alpha = MAX( MIN(scrollView.contentOffset.y / 64.0, 1.0), 0.0);
     self.hairline.alpha = alpha;
 }
 

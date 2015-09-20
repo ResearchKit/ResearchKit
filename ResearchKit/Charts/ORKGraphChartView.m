@@ -484,7 +484,7 @@ inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     if (!pointImage || ![pointImageColor isEqual:color]) {
         pointImageColor = color;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
-                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
+                                    (CGRect){{0 + (pointLineWidth / 2), 0 + (pointLineWidth / 2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
         CAShapeLayer *pointLayer = [CAShapeLayer new];
         pointLayer.path = circlePath.CGPath;
         pointLayer.fillColor = [UIColor whiteColor].CGColor;

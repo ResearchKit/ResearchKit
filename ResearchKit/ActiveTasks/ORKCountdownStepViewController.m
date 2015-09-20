@@ -94,8 +94,8 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
         [self setUpConstraints];
         
         _circleLayer = [CAShapeLayer layer];
-        static const CGFloat ProgressIndicatorRadius = ProgressIndicatorDiameter/2;
-        _circleLayer.path = [[UIBezierPath bezierPathWithArcCenter:CGPointMake(ProgressIndicatorRadius+ProgressIndicatorOuterMargin, ProgressIndicatorRadius+ProgressIndicatorOuterMargin)
+        static const CGFloat ProgressIndicatorRadius = ProgressIndicatorDiameter / 2;
+        _circleLayer.path = [[UIBezierPath bezierPathWithArcCenter:CGPointMake(ProgressIndicatorRadius + ProgressIndicatorOuterMargin, ProgressIndicatorRadius + ProgressIndicatorOuterMargin)
                                                             radius:ProgressIndicatorRadius
                                                         startAngle:M_PI + M_PI_2
                                                           endAngle:-M_PI_2
@@ -171,7 +171,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
 
 - (void)startAnimateWithDuration:(NSTimeInterval)duration {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = duration*2;
+    animation.duration = duration * 2;
     animation.removedOnCompletion = YES;
     animation.values = @[@(1.0), @(0.0), @(0.0)];
     animation.keyTimes =  @[@(0.0), @(0.5), @(1.0)];
@@ -244,7 +244,7 @@ static const CGFloat ProgressIndicatorOuterMargin = 1.0;
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    _countDown = MAX((_countDown-1), 0);
+    _countDown = MAX((_countDown - 1), 0);
     [self updateCountdownLabel];
     
     if (UIAccessibilityIsVoiceOverRunning()) {

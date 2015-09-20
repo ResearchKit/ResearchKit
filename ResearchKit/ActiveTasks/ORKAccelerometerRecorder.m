@@ -103,7 +103,7 @@
         return;
     }
     
-    self.motionManager.accelerometerUpdateInterval = 1.0/_frequency;
+    self.motionManager.accelerometerUpdateInterval = 1.0 / _frequency;
     
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     

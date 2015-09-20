@@ -55,7 +55,7 @@
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
-    _signatureView.layoutMargins = (UIEdgeInsets){.top=ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([ORKTextButton defaultFont].descender)-1 };
+    _signatureView.layoutMargins = (UIEdgeInsets){.top = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType) - ABS([ORKTextButton defaultFont].descender) - 1};
     [self setNeedsLayout];
 }
 

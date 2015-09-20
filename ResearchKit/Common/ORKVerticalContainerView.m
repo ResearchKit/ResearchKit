@@ -683,8 +683,8 @@ static const CGFloat AssumedStatusBarHeight = 20;
                                                                                          toItem:_stepViewContainer
                                                                                       attribute:NSLayoutAttributeCenterY
                                                                                      multiplier:1.0
-                                                                                       constant:-(AssumedNavBarHeight + AssumedStatusBarHeight)/2];
-                verticalCentering2.priority = UILayoutPriorityRequired-1;
+                                                                                       constant:-(AssumedNavBarHeight + AssumedStatusBarHeight) / 2];
+                verticalCentering2.priority = UILayoutPriorityRequired - 1;
                 [_variableConstraints addObject:verticalCentering2];
                 _stepViewCenterInStepViewContainerConstraint = verticalCentering2;
             }

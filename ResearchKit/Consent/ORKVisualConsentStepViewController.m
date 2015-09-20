@@ -281,7 +281,7 @@
     CGRect animationViewFrame = _animationView.frame;
     animationViewFrame.origin = [ORKDynamicCast(_animationView, ORKAnimationPlaceholderView) defaultFrameOrigin];
     _animationView.frame = animationViewFrame;
-    ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
+    ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex] + 1];
     [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:NO completion:nil];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
         // 'finished' is always YES when not animated
@@ -531,7 +531,7 @@
                     animated:animated
                   completion:^(BOOL finished) {
                       if (preloadNextViewController) {
-                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex]+1];
+                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
                           ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
                           [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
                                                               tintColor:currentSceneImageView.tintColor
@@ -686,7 +686,7 @@
         return nil;
     }
     
-    return [self viewControllerForIndex:index-1];
+    return [self viewControllerForIndex:index - 1];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -695,7 +695,7 @@
         return nil;
     }
     
-    return [self viewControllerForIndex:index+1];
+    return [self viewControllerForIndex:index + 1];
 }
 
 #pragma mark - UIPageViewControllerDelegate

@@ -143,8 +143,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     } else {
         NSUInteger index = [self indexOfStep:step];
         
-        if (NSNotFound != index && index != (steps.count-1)) {
-            nextStep = steps[index+1];
+        if (NSNotFound != index && index != (steps.count - 1)) {
+            nextStep = steps[index + 1];
         }
     }
     return nextStep;
@@ -167,7 +167,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
-            nextStep = steps[index-1];
+            nextStep = steps[index - 1];
         }
     }
     return nextStep;

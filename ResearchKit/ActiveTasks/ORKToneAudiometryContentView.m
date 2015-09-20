@@ -118,7 +118,7 @@
 
 - (void)updateLayoutMargins {
     CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
 }
 
 - (void)setFrame:(CGRect)frame {

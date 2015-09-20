@@ -292,7 +292,7 @@
     if (containByVisibleRect == NO) {
         if (CGRectGetHeight(desiredRect) > CGRectGetHeight(visibleRect)) {
             CGFloat desiredCenterY = CGRectGetMidY(desiredRect);
-            offsetY = desiredCenterY - visibleRect.size.height*0.5;
+            offsetY = desiredCenterY - visibleRect.size.height * 0.5;
         } else {
             if (CGRectGetMinY(desiredRect) < CGRectGetMinY(visibleRect)) {
                 offsetY = CGRectGetMinY(desiredRect);
@@ -306,7 +306,7 @@
     // If there's room, we'd like to leave space below so you can tap on the next cell
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.window);
     // Only go 3/4 of a cell extra; otherwise user might think they tapped the wrong cell
-    CGFloat desiredExtraSpace  = floor(ORKGetMetricForScreenType(ORKScreenMetricTextFieldCellHeight, screenType)*3/4);
+    CGFloat desiredExtraSpace  = floor(ORKGetMetricForScreenType(ORKScreenMetricTextFieldCellHeight, screenType) * (3 / 4.0));
     CGFloat visibleSpaceAboveDesiredRect = CGRectGetMinY(desiredRect) - offsetY;
     CGFloat visibleSpaceBelowDesiredRect = offsetY + visibleHeight - CGRectGetMaxY(desiredRect);
     if ((visibleSpaceAboveDesiredRect > 0) && (visibleSpaceBelowDesiredRect < desiredExtraSpace)) {

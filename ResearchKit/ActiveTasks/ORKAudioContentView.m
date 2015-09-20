@@ -56,8 +56,8 @@ static const CGFloat GraphViewRedZoneHeight = 25;
 @end
 
 
-static const CGFloat kValueLineWidth = 4.5;
-static const CGFloat kValueLineMargin = 1.5;
+static const CGFloat ValueLineWidth = 4.5;
+static const CGFloat ValueLineMargin = 1.5;
 
 @implementation ORKAudioGraphView
 
@@ -122,37 +122,37 @@ static const CGFloat kValueLineMargin = 1.5;
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextFillRect(context, bounds);
     
-    CGFloat scale = [self.window.screen scale];
+    CGFloat scale = self.window.screen.scale;
     
     CGFloat midY = CGRectGetMidY(bounds);
     CGFloat maxX = CGRectGetMaxX(bounds);
-    CGFloat halfHeight = bounds.size.height/2;
+    CGFloat halfHeight = bounds.size.height / 2;
     CGContextSaveGState(context);
     {
         UIBezierPath *centerLine = [UIBezierPath new];
-        [centerLine moveToPoint:(CGPoint){.x=0,.y=midY}];
-        [centerLine addLineToPoint:(CGPoint){.x=maxX,.y=midY}];
+        [centerLine moveToPoint:(CGPoint){.x = 0, .y = midY}];
+        [centerLine addLineToPoint:(CGPoint){.x = maxX, .y = midY}];
         
-        CGContextSetLineWidth(context, 1/scale);
+        CGContextSetLineWidth(context, 1 / scale);
         [_keyColor setStroke];
-        CGFloat lengths[2] = {3,3};
+        CGFloat lengths[2] = {3, 3};
         CGContextSetLineDash(context, 0, lengths, 2);
         
         [centerLine stroke];
     }
     CGContextRestoreGState(context);
     
-    CGFloat lineStep = kValueLineMargin + kValueLineWidth;
+    CGFloat lineStep = ValueLineMargin + ValueLineWidth;
     
     CGContextSaveGState(context);
     {
-        CGFloat x = maxX - lineStep/2;
-        CGContextSetLineWidth(context, kValueLineWidth);
+        CGFloat x = maxX - lineStep / 2;
+        CGContextSetLineWidth(context, ValueLineWidth);
         CGContextSetLineCap(context, kCGLineCapRound);
         
         UIBezierPath *path1 = [UIBezierPath new];
         path1.lineCapStyle = kCGLineCapRound;
-        path1.lineWidth = kValueLineWidth;
+        path1.lineWidth = ValueLineWidth;
         UIBezierPath *path2 = [path1 copy];
         
         for (NSNumber *value in [_values reverseObjectEnumerator]) {
@@ -166,8 +166,8 @@ static const CGFloat kValueLineMargin = 1.5;
                 path = path2;
                 [_keyColor setStroke];
             }
-            [path moveToPoint:(CGPoint){.x=x,.y=midY-floatValue*halfHeight}];
-            [path addLineToPoint:(CGPoint){.x=x,.y=midY+floatValue*halfHeight}];
+            [path moveToPoint:(CGPoint){.x = x, .y = midY - floatValue*halfHeight}];
+            [path addLineToPoint:(CGPoint){.x = x, .y = midY + floatValue*halfHeight}];
             
             x -= lineStep;
             
@@ -243,7 +243,7 @@ static const CGFloat kValueLineMargin = 1.5;
         _timerLabel.text = @"06:00";
         _alertLabel.text = ORKLocalizedString(@"AUDIO_TOO_LOUD_LABEL", nil);
         
-        self.alertThreshold = GraphViewBlueZoneHeight/(GraphViewRedZoneHeight*2+GraphViewBlueZoneHeight);
+        self.alertThreshold = GraphViewBlueZoneHeight / ((GraphViewRedZoneHeight * 2) + GraphViewBlueZoneHeight);
         
         [self updateGraphSamples];
         [self applyKeyColor];
@@ -319,7 +319,7 @@ static const CGFloat kValueLineMargin = 1.5;
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
-                                                         constant:(GraphViewBlueZoneHeight + GraphViewRedZoneHeight*2)]];
+                                                         constant:(GraphViewBlueZoneHeight + GraphViewRedZoneHeight * 2)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -375,7 +375,7 @@ static const CGFloat kValueLineMargin = 1.5;
     [_samples addObject:sample];
     // Try to keep around 250 samples
     if (_samples.count > 500) {
-        _samples = [[_samples subarrayWithRange:(NSRange){250,_samples.count-250}] mutableCopy];
+        _samples = [[_samples subarrayWithRange:(NSRange){250, _samples.count - 250}] mutableCopy];
     }
     [self updateGraphSamples];
 }

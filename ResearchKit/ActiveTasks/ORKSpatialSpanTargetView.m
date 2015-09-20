@@ -284,7 +284,7 @@ static UIBezierPath *ORKErrorBezierPath() {
             
         case ORKSpatialSpanTargetStateIncorrect:
             _flowerView.tintColor = [UIColor ork_redColor];
-            newTransform = CGAffineTransformMakeScale(0.9*_flowerScaleFactor, 0.9*_flowerScaleFactor);
+            newTransform = CGAffineTransformMakeScale(0.9 * _flowerScaleFactor, 0.9 * _flowerScaleFactor);
             oldCircleAlpha = 0;
             newCircleAlpha = 1;
             oldCircleTransform = CGAffineTransformMakeScale(0.2, 0.2);
@@ -296,7 +296,7 @@ static UIBezierPath *ORKErrorBezierPath() {
             
         case ORKSpatialSpanTargetStateCorrect:
             _flowerView.tintColor = [self tintColor];
-            newTransform = CGAffineTransformMakeScale(1.1*_flowerScaleFactor, 1.1*_flowerScaleFactor);
+            newTransform = CGAffineTransformMakeScale(1.1 * _flowerScaleFactor, 1.1 * _flowerScaleFactor);
             oldCircleAlpha = 0;
             newCircleAlpha = 1;
             oldCircleTransform = CGAffineTransformMakeScale(0.2, 0.2);
@@ -336,14 +336,14 @@ static UIBezierPath *ORKErrorBezierPath() {
     
     CGFloat designWidth = ORKFlowerBezierPathSize.width + _ORKFlowerMargins.left + _ORKFlowerMargins.right;
     CGFloat scaleFactor = bounds.size.width / designWidth;
-    CGAffineTransform tfm = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+    CGAffineTransform transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
     
-    CGRect checkRect = CGRectApplyAffineTransform((CGRect){CGPointZero,ORKCheckBezierPathSize}, tfm);
+    CGRect checkRect = CGRectApplyAffineTransform((CGRect){CGPointZero, ORKCheckBezierPathSize}, transform);
     [_checkView setBounds:checkRect];
-    _checkView.layer.cornerRadius = checkRect.size.width/2;
-    CGRect errorRect = CGRectApplyAffineTransform((CGRect){CGPointZero,ORKErrorBezierPathSize}, tfm);
+    _checkView.layer.cornerRadius = checkRect.size.width / 2;
+    CGRect errorRect = CGRectApplyAffineTransform((CGRect){CGPointZero, ORKErrorBezierPathSize}, transform);
     [_errorView setBounds:errorRect];
-    _errorView.layer.cornerRadius = errorRect.size.width/2;
+    _errorView.layer.cornerRadius = errorRect.size.width / 2;
     _errorView.center = _flowerView.center;
     _checkView.center = _flowerView.center;
 }

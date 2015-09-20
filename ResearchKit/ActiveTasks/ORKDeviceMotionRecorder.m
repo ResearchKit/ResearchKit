@@ -94,7 +94,7 @@
     }
     
     self.motionManager = [self createMotionManager];
-    self.motionManager.deviceMotionUpdateInterval = 1.0/_frequency;
+    self.motionManager.deviceMotionUpdateInterval = 1.0 / _frequency;
     
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     

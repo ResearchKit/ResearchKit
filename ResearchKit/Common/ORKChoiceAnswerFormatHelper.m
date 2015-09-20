@@ -108,7 +108,7 @@
         id value = choice.value;
         
         if (value == nil) {
-            value = _isValuePicker? @(index-1) : @(index);
+            value = _isValuePicker? @(index - 1) : @(index);
         }
         
         if (_isValuePicker && index == 0) {

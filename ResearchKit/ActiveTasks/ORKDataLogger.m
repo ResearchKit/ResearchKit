@@ -42,8 +42,8 @@
 static const char * kORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";
 
 // Default per-logfile settings when a data logger is used in an ORKDataLoggerManager
-static const NSTimeInterval kORKDataLoggerManagerDefaultLogFileLifetime = 60*60*24*3; // 3 days
-static const unsigned long long kORKDataLoggerManagerDefaultLogFileSize = 1024*1024; // 1 MB
+static const NSTimeInterval kORKDataLoggerManagerDefaultLogFileLifetime = 60 * 60 * 24 * 3; // 3 days
+static const unsigned long long kORKDataLoggerManagerDefaultLogFileSize = 1024 * 1024; // 1 MB
 
 static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
 
@@ -95,7 +95,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
-    NSString *logDateComponent = [lastComponent substringFromIndex:idx.location+1];
+    NSString *logDateComponent = [lastComponent substringFromIndex:idx.location + 1];
     return logDateComponent;
 }
 

@@ -248,21 +248,21 @@
                                                                          constant:0.0]];
                 } else {
                     // Middle labels
-                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
                                                                         attribute:NSLayoutAttributeTop
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeBottom
                                                                        multiplier:1.0
                                                                          constant:0.0]];
-                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
                                                                         attribute:NSLayoutAttributeHeight
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:_textChoiceLabels[i]
                                                                         attribute:NSLayoutAttributeHeight
                                                                        multiplier:1.0
                                                                          constant:0.0]];
-                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i-1]
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
                                                                         attribute:NSLayoutAttributeWidth
                                                                         relatedBy:NSLayoutRelationEqual
                                                                            toItem:_textChoiceLabels[i]

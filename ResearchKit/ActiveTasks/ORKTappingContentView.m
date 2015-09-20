@@ -153,7 +153,7 @@
 
 - (void)updateLayoutMargins {
     CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right=margin * 2};
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -274,7 +274,7 @@
     const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
     const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
     CGFloat margin = ORKStandardHorizontalMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
     
     static const CGFloat CaptionBaselineToTapCountBaseline = 56;
     static const CGFloat TapButtonBottomToBottom = 36;
@@ -286,7 +286,7 @@
         progressViewOffset = 0;
         topCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {
-        progressViewOffset = (HeaderBaselineToCaptionTop/3) - AssumedHeaderBaselineToStepViewTop;
+        progressViewOffset = (HeaderBaselineToCaptionTop / 3) - AssumedHeaderBaselineToStepViewTop;
         topCaptionLabelOffset = HeaderBaselineToCaptionTop - AssumedHeaderBaselineToStepViewTop;
     }
     

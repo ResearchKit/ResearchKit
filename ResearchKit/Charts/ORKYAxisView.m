@@ -88,7 +88,10 @@ static const CGFloat ImageVerticalPadding = 3.0;
         
         _maxImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.maximumValueImage];
         _maxImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
+        _maxImageView.frame = CGRectMake(width - halfWidth,
+                                         -halfWidth / 2,
+                                         halfWidth,
+                                         halfWidth);
         [self addSubview:_maxImageView];
         
         _minImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.minimumValueImage];
@@ -155,7 +158,10 @@ static const CGFloat ImageVerticalPadding = 3.0;
     CGRect bounds = self.bounds;
     CGFloat width = bounds.size.width;
     CGFloat halfWidth = width / 2;
-    _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
+    _maxImageView.frame = CGRectMake(width - halfWidth,
+                                     -halfWidth / 2,
+                                     halfWidth,
+                                     halfWidth);
     _minImageView.frame = CGRectMake(width - halfWidth,
                                      CGRectGetMaxY(bounds) - halfWidth - ImageVerticalPadding,
                                      halfWidth,

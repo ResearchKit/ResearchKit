@@ -226,7 +226,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
         
     CGFloat y1 = height*bottom;
     UIFont *font = [ORKSelectionTitleLabel defaultFont];
-    return (CGPoint){x1, y1-5 - font.pointSize + font.descender };
+    return (CGPoint){x1, y1 - 5 - font.pointSize + font.descender};
 }
 
 - (NSArray *)backgroundLines {

@@ -32,8 +32,8 @@
 #import "ORKProgressView.h"
 
 
-static const CGFloat kProgressCircleDiameter = 10;
-static const CGFloat kProgressCircleSpacing = 4;
+static const CGFloat ProgressCircleDiameter = 10;
+static const CGFloat ProgressCircleSpacing = 4;
 
 @interface ORKProgressCircleView : UIView
 
@@ -49,7 +49,7 @@ static const CGFloat kProgressCircleSpacing = 4;
     if (self) {
         [self setCompleted:NO];
         self.backgroundColor = [self tintColor];
-        self.layer.cornerRadius = kProgressCircleDiameter/2;
+        self.layer.cornerRadius = ProgressCircleDiameter / 2;
     }
     return self;
 }
@@ -60,11 +60,11 @@ static const CGFloat kProgressCircleSpacing = 4;
 }
 
 - (CGSize)intrinsicContentSize {
-    return (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
+    return (CGSize){ProgressCircleDiameter, ProgressCircleDiameter};
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-    return (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
+    return (CGSize){ProgressCircleDiameter, ProgressCircleDiameter};
 }
 
 - (void)setCompleted:(BOOL)completed {
@@ -144,8 +144,8 @@ static const CGFloat kProgressCircleSpacing = 4;
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-    size.height = kProgressCircleDiameter;
-    size.width = (_count * kProgressCircleDiameter) + MAX(_count-1,0) * kProgressCircleSpacing;
+    size.height = ProgressCircleDiameter;
+    size.width = (_count * ProgressCircleDiameter) + MAX(_count - 1,0) * ProgressCircleSpacing;
     return size;
 }
 
@@ -154,11 +154,11 @@ static const CGFloat kProgressCircleSpacing = 4;
 }
 
 - (void)layoutSubviews {
-    CGSize sz = (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
-    CGFloat xStep = kProgressCircleDiameter + kProgressCircleSpacing;
+    CGSize  size = (CGSize){ProgressCircleDiameter,ProgressCircleDiameter};
+    CGFloat xStep = ProgressCircleDiameter + ProgressCircleSpacing;
     CGFloat x0 = 0;
-    for (UIView *v in _circles) {
-        v.frame = (CGRect){{x0,0},sz};
+    for (UIView *view in _circles) {
+        view.frame = (CGRect){{x0, 0}, size};
         x0 += xStep;
     }
 }

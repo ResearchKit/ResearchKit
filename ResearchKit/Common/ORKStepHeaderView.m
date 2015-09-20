@@ -52,7 +52,7 @@
     UIEdgeInsets layoutMargins = self.layoutMargins;
     
     // If we don't do this, sometimes the label doesn't split onto two lines properly.
-    CGFloat maxLabelLayoutWidth = MAX(self.bounds.size.width - sideMargin*2 - layoutMargins.left - layoutMargins.right, 0);
+    CGFloat maxLabelLayoutWidth = MAX(self.bounds.size.width - sideMargin * 2 - layoutMargins.left - layoutMargins.right, 0);
     
     _captionLabel.preferredMaxLayoutWidth = maxLabelLayoutWidth;
     _instructionLabel.preferredMaxLayoutWidth = maxLabelLayoutWidth;
@@ -152,7 +152,7 @@
     CGRect insetBounds = UIEdgeInsetsInsetRect(bounds, self.layoutMargins);
     
     CGFloat sideMargin = ORKGetMetricForWindow(ORKScreenMetricLearnMoreButtonSideMargin, self.window);
-    _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin*2;
+    _learnMoreButton.titleLabel.preferredMaxLayoutWidth = insetBounds.size.width - sideMargin * 2;
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {

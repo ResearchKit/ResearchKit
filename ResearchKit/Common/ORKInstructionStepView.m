@@ -113,7 +113,7 @@
         [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight*0.5];
+        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
         [style setAlignment:NSTextAlignmentCenter];
         
         NSAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:detail

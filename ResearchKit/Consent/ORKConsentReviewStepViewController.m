@@ -331,12 +331,12 @@ static NSString *const _FamilyNameIdentifier = @"family";
     if (_currentPageIndex == 0 && delta < 0) {
         // Navigate back in our parent task VC.
         [self goBackward];
-    } else if (_currentPageIndex >= pageCount-1 && delta > 0) {
+    } else if (_currentPageIndex >= (pageCount - 1) && delta > 0) {
         // Navigate forward in our parent task VC.
         [self goForward];
     } else {
         // Navigate within our managed steps
-        [self goToPage:(_currentPageIndex+delta) animated:YES];
+        [self goToPage:(_currentPageIndex + delta) animated:YES];
     }
 }
 
@@ -398,7 +398,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 }
 
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController {
-    if (_currentPageIndex < _pageIndices.count-1) {
+    if (_currentPageIndex < (_pageIndices.count - 1)) {
         return YES;
     }
     return [self hasNextStep];

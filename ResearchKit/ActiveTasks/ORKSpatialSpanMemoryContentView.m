@@ -64,7 +64,7 @@
 - (void)resetTilesAnimated:(BOOL)animated {
     NSArray *currentViews = _tileViews;
     NSInteger numberOfTilesOld = _tileViews.count;
-    NSInteger numberOfTilesNew = _gridSize.width*_gridSize.height;
+    NSInteger numberOfTilesNew = _gridSize.width * _gridSize.height;
     NSMutableArray *newViews = [NSMutableArray arrayWithCapacity:numberOfTilesNew];
     NSArray *viewsToRemove = nil;
     if (numberOfTilesOld <= numberOfTilesNew) {
@@ -289,7 +289,7 @@
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1.0
                                                                        constant:ORKScreenMetricMaxDimension];
-    gameViewHeightConstraint.priority = UILayoutPriorityDefaultLow-1;
+    gameViewHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
     [constraints addObject:gameViewHeightConstraint];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|"
@@ -327,7 +327,7 @@
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
                                                                            constant:ORKScreenMetricMaxDimension];
-    maxWidthConstraint.priority = UILayoutPriorityRequired-1;
+    maxWidthConstraint.priority = UILayoutPriorityRequired - 1;
     [constraints addObject:maxWidthConstraint];
     
     [NSLayoutConstraint activateConstraints:constraints];

@@ -59,8 +59,8 @@
 
 - (void)setCountDownValue:(NSInteger)value {
     _currentCountDownValue = value;
-    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
-    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
+    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value / 60)];
+    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value % 60)];
     
     [self renderText];
 }
