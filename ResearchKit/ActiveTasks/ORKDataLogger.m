@@ -1068,16 +1068,16 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename]];
         [self loadConfiguration:configuration];
         
-        _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"pendingUploadBytesThreshold",@"totalBytesThreshold"] selector:@selector(configurationDidChange)];
+        _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"pendingUploadBytesThreshold", @"totalBytesThreshold"] selector:@selector(configurationDidChange)];
         
         [self setNeedsUpdateBytes];
     }
     return self;
 }
 
-ORKDefineStringKey(PendingUploadBytesThresholdKey);
-ORKDefineStringKey(TotalBytesThresholdKey);
-ORKDefineStringKey(LoggerConfigurationsKey);
+static NSString *const PendingUploadBytesThresholdKey = @"pendingUploadBytesThreshold";
+static NSString *const TotalBytesThresholdKey = @"totalBytesThreshold";
+static NSString *const LoggerConfigurationsKey = @"loggers";
 
 - (void)loadConfiguration:(NSDictionary *)configuration {
     self.pendingUploadBytesThreshold = ((NSNumber *)configuration[PendingUploadBytesThresholdKey]).unsignedLongLongValue;
