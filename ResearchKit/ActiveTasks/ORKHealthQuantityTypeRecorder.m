@@ -275,11 +275,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 @end
 
 
-@interface ORKHealthQuantityTypeRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKHealthQuantityTypeRecorderConfiguration
 
 #pragma clang diagnostic push

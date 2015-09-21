@@ -169,11 +169,6 @@
 @end
 
 
-@interface ORKLocationRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKLocationRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

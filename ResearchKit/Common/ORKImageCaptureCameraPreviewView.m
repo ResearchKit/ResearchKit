@@ -36,11 +36,6 @@
 #import "ORKDefines_Private.h"
 
 
-@interface ORKImageCaptureCameraPreviewView ()
-
-@end
-
-
 @implementation ORKImageCaptureCameraPreviewView {
     AVCaptureVideoPreviewLayer *_previewLayer;
     ORKTintedImageView *_templateImageView;

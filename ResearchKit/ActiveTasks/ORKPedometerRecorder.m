@@ -179,11 +179,6 @@
 @end
 
 
-@interface ORKPedometerRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKPedometerRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

@@ -172,11 +172,6 @@
 @end
 
 
-@interface ORKAccelerometerRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKAccelerometerRecorderConfiguration
 
 #pragma clang diagnostic push

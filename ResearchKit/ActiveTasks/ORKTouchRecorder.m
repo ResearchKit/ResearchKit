@@ -203,11 +203,6 @@
 @end
 
 
-@interface ORKTouchRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKTouchRecorderConfiguration
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

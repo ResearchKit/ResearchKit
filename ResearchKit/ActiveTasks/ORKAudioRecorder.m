@@ -266,11 +266,6 @@
 @end
 
 
-@interface ORKAudioRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKAudioRecorderConfiguration
 
 #pragma clang diagnostic push

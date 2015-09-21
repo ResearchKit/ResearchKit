@@ -165,11 +165,6 @@
 @end
 
 
-@interface ORKDeviceMotionRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKDeviceMotionRecorderConfiguration
 
 #pragma clang diagnostic push
