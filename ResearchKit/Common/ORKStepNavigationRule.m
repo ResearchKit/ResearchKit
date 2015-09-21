@@ -106,7 +106,7 @@ NSString *const ORKNullStepIdentifier = @"org.researchkit.step.null";
         NSUInteger resultPredicatesCount = resultPredicates.count;
         NSUInteger destinationStepIdentifiersCount = destinationStepIdentifiers.count;
         if (resultPredicatesCount == 0) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates can not be an empty array" userInfo:nil];
+            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"resultPredicates cannot be an empty array" userInfo:nil];
         }
         if (resultPredicatesCount != destinationStepIdentifiersCount) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Each predicate in resultPredicates must have a destination step identifier in destinationStepIdentifiers" userInfo:nil];

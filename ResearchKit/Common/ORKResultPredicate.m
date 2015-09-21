@@ -264,7 +264,7 @@ NSString *const ORKResultPredicateTaskIdentifierVariableName = @"ORK_TASK_IDENTI
                                                         usePatterns:(BOOL)usePatterns {
     ORKThrowInvalidArgumentExceptionIfNil(expectedAnswers);
     if (expectedAnswers.count == 0) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"expectedAnswer can not be empty." userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"expectedAnswer cannot be empty." userInfo:nil];
     }
     
     NSMutableArray *subPredicateFormatArray = [NSMutableArray new];

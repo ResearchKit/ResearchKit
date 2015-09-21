@@ -462,7 +462,7 @@ static void ork_validateChoices(NSArray *choices) {
     const NSInteger ORKAnswerFormatMinimumNumberOfChoices = 1;
     if (choices.count < ORKAnswerFormatMinimumNumberOfChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"The number of choices can not be less than %@.", @(ORKAnswerFormatMinimumNumberOfChoices)]
+                                       reason:[NSString stringWithFormat:@"The number of choices cannot be less than %@.", @(ORKAnswerFormatMinimumNumberOfChoices)]
                                      userInfo:nil];
     }
 }
