@@ -215,8 +215,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 + (UIPageViewController *)pageViewController {
     UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                                 options:nil];
+                                                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                                             options:nil];
     if ([pageViewController respondsToSelector:@selector(edgesForExtendedLayout)]) {
         pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -276,7 +276,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Ensure taskRunUUID has non-nil valuetaskRunUUID
     (void)[self taskRunUUID];
     self.restorationClass = [ORKTaskViewController class];
-
+    
     return self;
 }
 
@@ -420,7 +420,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)requestCameraAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
-	[AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
         dispatch_async(dispatch_get_main_queue(), ^{
             handler(granted);
         });
@@ -474,10 +474,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         dispatch_async(dispatch_get_main_queue(), ^{
             ORK_Log_Debug(@"Requesting health access");
             [self requestHealthStoreAccessWithReadTypes:readTypes
-                                              writeTypes:writeTypes
-                                                 handler:^{
-                                                     dispatch_semaphore_signal(semaphore);
-                                                 }];
+                                             writeTypes:writeTypes
+                                                handler:^{
+                                                    dispatch_semaphore_signal(semaphore);
+                                                }];
         });
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         if (permissions & ORKPermissionCoreMotionAccelerometer) {
@@ -572,8 +572,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Use PlayAndRecord to avoid overwriting the category being used by
     // recording configurations.
     if (![session setCategory:AVAudioSessionCategoryPlayback
-                   withOptions:0
-                         error:&error]) {
+                  withOptions:0
+                        error:&error]) {
         success = NO;
         ORK_Log_Debug(@"Could not start audio session: %@", error);
     }
@@ -669,7 +669,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Set endDate on TaskVC is dismissed,
     // because nextResponder is not nil when current TaskVC is covered by another modal view
     if (self.nextResponder == nil) {
-         _dismissedDate = [NSDate date];
+        _dismissedDate = [NSDate date];
     }
 }
 
@@ -816,7 +816,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 #pragma mark - internal helpers
 
 - (void)updateLastBeginningInstructionStepIdentifierForStep:(ORKStep *)step
-                                                   goForward:(BOOL)goForward {
+                                                  goForward:(BOOL)goForward {
     if (NO == goForward) {
         // Going backward, check current step to nil saved state
         if (_lastBeginningInstructionStepIdentifier != nil &&
@@ -905,13 +905,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     UIPageViewControllerNavigationDirection direction = goForward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
     
     ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
-
+    
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
     NSString *progressLabel = nil;
     if ([self shouldDisplayProgressLabel]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
-
+        
         if (progress.total > 0) {
             progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current + 1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
@@ -1041,7 +1041,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         
         stepViewController.learnMoreButtonItem = [self defaultLearnMoreButtonItem];
     }
-
+    
     stepViewController.delegate = self;
     
     _stepViewControllerObserver = [[ORKViewControllerToolbarObserver alloc] initWithTargetViewController:stepViewController delegate:self];
@@ -1055,7 +1055,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 #pragma mark - internal action Handlers
 
 - (void)finishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
-
+    
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
         [strongDelegate taskViewController:self didFinishWithReason:reason error:error];
@@ -1072,7 +1072,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                                                    message:nil
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     alert.popoverPresentationController.barButtonItem = sender;
-
+    
     if (supportSaving && saveable) {
         [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OPTION_SAVE", nil)
                                                   style:UIAlertActionStyleDefault
@@ -1171,7 +1171,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             // Remove the identifier from the list
             assert([itemId isEqualToString:_managedStepIdentifiers.lastObject]);
             [_managedStepIdentifiers removeLastObject];
-
+            
             [self showViewController:stepViewController goForward:NO animated:YES];
         }
         
@@ -1321,7 +1321,6 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
             _lastBeginningInstructionStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKLastBeginningInstructionStepIdentifierKey];
             
             _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
-    
         } else {
             ORK_Log_Debug(@"Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);
         }
