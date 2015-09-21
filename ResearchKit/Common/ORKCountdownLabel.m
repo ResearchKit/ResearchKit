@@ -66,7 +66,7 @@
 }
 
 - (void)renderText {
-    if (_minutesString.length==0 || _secondsString.length==0) {
+    if (_minutesString.length == 0 || _secondsString.length == 0) {
         return;
     }
     [self setText:[NSString stringWithFormat:@"%@:%@", _minutesString, _secondsString]];

@@ -652,7 +652,7 @@
 }
 
 - (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
-    return (indexPath.row==0||
+    return (indexPath.row == 0||
             (indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
 }
 
