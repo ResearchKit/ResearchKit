@@ -182,7 +182,7 @@
     [_instructionLabel setContentHuggingPriority:instructionVerticalHugging forAxis:UILayoutConstraintAxisVertical];
     
     {
-        _headerZeroHeightConstraint.active = ! (hasCaptionLabel || hasInstructionLabel || hasLearnMoreButton);
+        _headerZeroHeightConstraint.active = !(hasCaptionLabel || hasInstructionLabel || hasLearnMoreButton);
     }
     
     {

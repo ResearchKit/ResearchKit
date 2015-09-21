@@ -65,7 +65,7 @@
 - (void)setActiveStep:(ORKActiveStep *)step {
     self.continueSkipContainer.useNextForSkip = step.shouldUseNextAsSkipButton;
     _activeStep = step;
-    self.headerView.instructionLabel.hidden = ! (_activeStep.hasText);
+    self.headerView.instructionLabel.hidden = !(_activeStep.hasText);
     
     self.headerView.captionLabel.text = _activeStep.title;
     self.headerView.instructionLabel.text = _activeStep.text;

@@ -284,7 +284,7 @@
 }
 
 - (void)updateKeylineVisible {
-    [_quantityPairView setKeylineHidden:! (_hasDistance && _hasHeartRate)];
+    [_quantityPairView setKeylineHidden:!(_hasDistance && _hasHeartRate)];
 }
 
 - (void)setDistanceInMeters:(double)distanceInMeters {

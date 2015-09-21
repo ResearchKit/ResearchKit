@@ -978,7 +978,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)setFormItem:(ORKFormItem *)formItem {
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
-    if (! (!formItem ||
+    if (!(!formItem ||
            [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
            [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
            [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
