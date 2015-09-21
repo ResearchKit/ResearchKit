@@ -180,8 +180,7 @@
     self.currentTestIndex ++;
     if (self.currentTestIndex == (self.testingFrequencies.count * 2)) {
         [self finish];
-    }
-    else {
+    } else {
         [self startCurrentTest];
     }
 }

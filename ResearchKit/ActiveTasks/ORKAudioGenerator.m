@@ -103,8 +103,7 @@ OSStatus ORKAudioGeneratorRenderTone(void *inRefCon,
         bufferActive[frame] = bufferValue;
         if (audioGenerator->_playsStereo) {
             bufferNonActive[frame] = bufferValue;
-        }
-        else {
+        } else {
             bufferNonActive[frame] = 0;
         }
 

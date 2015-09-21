@@ -229,8 +229,7 @@ static const NSUInteger NumberOfTowers = 3;
     ORKTowerOfHanoiTower *recipientTower = _towers[recipientTowerIndex];
     if ([recipientTower recieveDiskFrom:donorTower]) {
         [self makeMoveFromTowerAtIndex:donorTowerIndex toTowerAtIndex:recipientTowerIndex];
-    }
-    else {
+    } else {
         NSNumber *donorSize = [self towerOfHanoiView:_towerViews[donorTowerIndex] diskAtIndex:0];
         NSNumber *recipientSize = [self towerOfHanoiView:_towerViews[recipientTowerIndex] diskAtIndex:0];
         
