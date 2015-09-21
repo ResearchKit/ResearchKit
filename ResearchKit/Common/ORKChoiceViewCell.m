@@ -84,7 +84,7 @@ static const CGFloat LabelRightMargin = 44.0;
             
             CGRect rect = self.shortLabel.frame;
             
-            CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = [[self.shortLabel font] ascender];
+            CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = self.shortLabel.font.ascender;
             
             rect.origin.y = firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop;
             self.shortLabel.frame = rect;
@@ -98,8 +98,8 @@ static const CGFloat LabelRightMargin = 44.0;
             
             CGRect rect = self.longLabel.frame;
             
-            CGFloat shortLabelBaselineApproximateOffsetFromBottom = ABS([[self.shortLabel font] descender]);
-            CGFloat longLabelApproximateFirstBaselineOffset = [[self.longLabel font] ascender];
+            CGFloat shortLabelBaselineApproximateOffsetFromBottom = ABS(self.shortLabel.font.descender);
+            CGFloat longLabelApproximateFirstBaselineOffset = self.longLabel.font.ascender;
             
             rect.origin.y = CGRectGetMaxY(self.shortLabel.frame) - shortLabelBaselineApproximateOffsetFromBottom + labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset;
     
@@ -172,7 +172,7 @@ static const CGFloat LabelRightMargin = 44.0;
         shortLabel.text = shortText;
         
         ORKAdjustHeightForLabel(shortLabel);
-        CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = [[shortLabel font] ascender];
+        CGFloat shortLabelFirstBaselineApproximateOffsetFromTop = shortLabel.font.ascender;
     
         height += firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop + shortLabel.frame.size.height;
     }
@@ -189,7 +189,7 @@ static const CGFloat LabelRightMargin = 44.0;
         
         ORKAdjustHeightForLabel(longLabel);
         
-        CGFloat longLabelApproximateFirstBaselineOffset = [[longLabel font] ascender];
+        CGFloat longLabelApproximateFirstBaselineOffset = longLabel.font.ascender;
         
         if (shortText.length > 0) {
             height += labelLastBaselineToLabelFirstBaseline - longLabelApproximateFirstBaselineOffset + longLabel.frame.size.height;

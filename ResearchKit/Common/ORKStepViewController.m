@@ -322,7 +322,7 @@
         // No alert if the value is empty
         return;
     }
-    if (_dismissing || ![self isViewLoaded] || ! [self.view window]) {
+    if (_dismissing || ![self isViewLoaded] || !self.view.window) {
         // No alert if not in view chain.
         return;
     }
