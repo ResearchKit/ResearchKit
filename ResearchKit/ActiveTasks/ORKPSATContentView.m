@@ -121,42 +121,40 @@
 }
 
 - (void)updateConstraints {
-    if ([self.constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:self.constraints];
-        self.constraints = nil;
-    }
+    [NSLayoutConstraint deactivateConstraints:self.constraints];
     
     const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewWidth, self.screenType);
     const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewHeight, self.screenType);
     
-    NSMutableArray *constraintsArray = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _digitLabel, _keyboardView);
     
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             metrics:nil
+                                               views:views]];
     
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-[_keyboardView(==%f)]-|", ORKPSATKeyboardWidth]
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_keyboardView(==keyboardWidth)]-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             metrics:@{ @"keyboardWidth": @(ORKPSATKeyboardWidth) }
+                                               views:views]];
     
-    [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[_keyboardView(==%f)]", ORKPSATKeyboardHeight]
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_keyboardView(==keyboardHeight)]"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             metrics:@{ @"keyboardHeight": @(ORKPSATKeyboardHeight) }
+                                               views:views]];
     
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressView]-[_digitLabel]-(>=10)-[_keyboardView]-|"
                                              options:NSLayoutFormatAlignAllCenterX
-                                             metrics:nil views:views]];
+                                             metrics:nil
+                                               views:views]];
     
-    self.constraints = constraintsArray;
-    [self addConstraints:self.constraints];
-    
-    [NSLayoutConstraint activateConstraints:self.constraints];
+    [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];
 }
 
