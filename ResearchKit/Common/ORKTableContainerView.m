@@ -135,6 +135,7 @@
         _tableView.tableHeaderView = nil;
         _tableView.tableHeaderView = _stepHeaderView;
     }
+    
     {
         _tableView.tableFooterView = nil;
         [_realFooterView removeFromSuperview];

@@ -80,11 +80,13 @@ static const CGFloat AssumedStatusBarHeight = 20;
             _headerView.translatesAutoresizingMaskIntoConstraints = NO;
             [_container addSubview:_headerView];
         }
+        
         {
             _stepViewContainer = [UIView new];
             _stepViewContainer.preservesSuperviewLayoutMargins = YES;
             [_container addSubview:_stepViewContainer];
         }
+        
         {
             // This lives in the scroll container, so it doesn't affect the vertical layout of the primary content
             // except through explicit constraints.
@@ -93,6 +95,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
             _continueSkipContainer.translatesAutoresizingMaskIntoConstraints = NO;
             [_scrollContainer addSubview:_continueSkipContainer];
         }
+        
         {
             // Custom View
             _customViewContainer = [UIView new];

@@ -88,8 +88,8 @@ static const CGFloat LabelRightMargin = 44.0;
             
             rect.origin.y = firstBaselineOffsetFromTop - shortLabelFirstBaselineApproximateOffsetFromTop;
             self.shortLabel.frame = rect;
-        
         }
+        
         {
             self.longLabel.frame = CGRectMake(cellLeftMargin, 0,
                                               labelWidth, 1);

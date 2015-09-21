@@ -71,6 +71,7 @@
             _clearButton.alpha = 0;
             [self addSubview:_clearButton];
         }
+        
         {
             _signatureView = [ORKSignatureView new];
             [_signatureView setClipsToBounds:YES];

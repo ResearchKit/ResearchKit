@@ -51,6 +51,7 @@
             _skipButton.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_skipButton];
         }
+        
         {
             _continueButton = [[ORKContinueButton alloc] initWithTitle:@"" isDoneButton:NO];
             _continueButton.alpha = 0;
@@ -240,6 +241,7 @@
         view.layer.borderWidth = 1.0;
 #endif
     }
+    
     {
         NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_continueButton
                                                                             attribute:NSLayoutAttributeBottom
@@ -251,6 +253,7 @@
         bottomConstraint.priority = UILayoutPriorityDefaultHigh + 1;
         [constraints addObject:bottomConstraint];
     }
+    
     {
         NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_skipButton
                                                                             attribute:NSLayoutAttributeBaseline
@@ -262,6 +265,7 @@
         bottomConstraint.priority = UILayoutPriorityDefaultHigh + 1;
         [constraints addObject:bottomConstraint];
     }
+    
     {
         NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                             attribute:NSLayoutAttributeHeight

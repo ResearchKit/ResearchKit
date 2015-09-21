@@ -173,6 +173,7 @@
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
             [(NSMutableArray *)self.items addObject:cellItem];
         }
+        
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
             [(NSMutableArray *)self.items addObject:cellItem];
