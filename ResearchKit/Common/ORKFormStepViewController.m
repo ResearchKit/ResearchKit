@@ -268,10 +268,10 @@
     BOOL refreshDefaultsPending = NO;
     if (types.count) {
         NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (! [types isSubsetOfSet:alreadyRequested]) {
+        if (![types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
-                if (! success) {
+                if (!success) {
                     ORK_Log_Debug(@"Authorization: %@",error);
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -552,7 +552,7 @@
 #pragma mark Helpers
 
 - (ORKFormStep *)formStep {
-    NSAssert(! self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
+    NSAssert(!self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
     return (ORKFormStep *)self.step;
 }
 
@@ -600,7 +600,7 @@
         NSDate *answerDate = now;
         NSCalendar *systemCalendar = [NSCalendar currentCalendar];
         NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
-        if (! _skipped) {
+        if (!_skipped) {
             answer = _savedAnswers[item.identifier];
             answerDate = _savedAnswerDates[item.identifier] ? : now;
             systemCalendar = _savedSystemCalendars[item.identifier];
@@ -671,7 +671,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = @"_ork.separator";
-    if (! [self isSeparatorRow:indexPath]) {
+    if (![self isSeparatorRow:indexPath]) {
         identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
     }
     
@@ -723,7 +723,7 @@
                         
                     case ORKQuestionTypeText: {
                         ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (! textFormat.multipleLines) {
+                        if (!textFormat.multipleLines) {
                             class = [ORKFormItemTextFieldCell class];
                         } else {
                             class = [ORKFormItemTextCell class];

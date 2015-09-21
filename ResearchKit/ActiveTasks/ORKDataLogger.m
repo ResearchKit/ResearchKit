@@ -80,7 +80,7 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
 - (NSString *)ork_logName {
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
 
@@ -91,7 +91,7 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
 - (NSString *)ork_logDateComponent {
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
@@ -145,13 +145,13 @@ static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLog
 }
 
 - (NSString *)ork_logNameInDirectory:(NSURL *)directory {
-    if (! [self isFileURL]) {
+    if (![self isFileURL]) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a fileURL" userInfo:@{@"url":self}];
     }
     
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
@@ -267,7 +267,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
 }
 
 - (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * __autoreleasing *)error {
-    if (! [self canAcceptLogObject:object]) {
+    if (![self canAcceptLogObject:object]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ORKLogFormatter accepts NSData only" userInfo:nil];
     }
     return [self writeData:(NSData *)object fileHandle:fileHandle error:error];
@@ -285,7 +285,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
         }
     }
     
-    if (! success) {
+    if (!success) {
         [self rollbackToCheckpoint:checkpoint fileHandle:fileHandle];
         if (error) {
             *error = errorOut;
@@ -361,7 +361,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
  * object being appended, and the footer bytes.
  */
 - (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * __autoreleasing *)error {
-    if (! fileHandle) {
+    if (!fileHandle) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Filehandle is nil" userInfo:nil];
     }
     NSInteger numObjects = objects.count;
@@ -369,7 +369,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"No objects" userInfo:nil];
     }
     for (NSObject *object in objects) {
-        if (! [self canAcceptLogObject:object]) {
+        if (![self canAcceptLogObject:object]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ORKLogFormatter accepts JSON serializable objects only" userInfo:nil];
         }
     }
@@ -406,7 +406,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             }
         }
     }];
-    if (! success) {
+    if (!success) {
         return success;
     }
     
@@ -417,7 +417,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     success = [self writeData:outputData fileHandle:fileHandle error:error];
     
-    if (! success) {
+    if (!success) {
         [self rollbackToCheckpoint:checkpoint fileHandle:fileHandle];
     }
     
@@ -456,13 +456,13 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     self = [super init];
     if (self) {
         _url = [url copy];
-        if (! [[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"directory does not exist" userInfo:nil];
         }
         if ([logName hasSuffix:@"-"]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName should not terminate with '-'" userInfo:nil];
         }
-        if (! logName.length) {
+        if (!logName.length) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName must be non-empty" userInfo:nil];
         }
         
@@ -486,7 +486,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 - (instancetype)initWithDirectory:(NSURL *)url configuration:(NSDictionary *)configuration delegate:(id<ORKDataLoggerDelegate>)delegate {
     Class formatterClass = NSClassFromString(configuration[@"formatterClass"]);
-    if (! formatterClass) {
+    if (!formatterClass) {
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"%@ is not a class", configuration[@"formatterClass"]] userInfo:nil];
     }
     
@@ -664,7 +664,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (void)queue_setNeedsUpdateBytes {
-    if (! _directoryDirty) {
+    if (!_directoryDirty) {
         _directoryDirty = YES;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), _queue, ^{
@@ -704,7 +704,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSError *errorOut = nil;
     NSMutableArray *urls = [NSMutableArray array];
     for (NSURL *url in enumerator) {
-        if (! [self urlMatchesLogName:url]) {
+        if (![self urlMatchesLogName:url]) {
             continue;
         }
         if ( [[url lastPathComponent] isEqualToString:_logName]) {
@@ -722,7 +722,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
         [urls addObject:url];
     }
     
-    if (! errorOut) {
+    if (!errorOut) {
         // Sort the URLs before beginning enumeration for the caller
         [urls sortUsingComparator:^NSComparisonResult(NSURL *obj1, NSURL *obj2) {
             // We can assume all relate to files in the same directory
@@ -766,12 +766,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSNumber *fileExists = nil;
     [url getResourceValue:&fileExists forKey:NSURLIsRegularFileKey error:nil];
     
-    BOOL createNewFile = ! fileExists.boolValue;
+    BOOL createNewFile = !fileExists.boolValue;
     
     NSFileHandle *fileHandle = nil;
     if (!createNewFile) {
         fileHandle = [NSFileHandle fileHandleForWritingToURL:url error:error];
-        if (! fileHandle) {
+        if (!fileHandle) {
             // Assume it's because we can't open the file, perhaps for security reasons.
             // Close and rename the log.
             [self queue_closeAndRenameLog];
@@ -1052,7 +1052,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     self = [super init];
     if (self) {
         _directory = directory;
-        if (! [[NSFileManager defaultManager] fileExistsAtPath:[_directory path]]) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[_directory path]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"directory does not exist" userInfo:nil];
         }
         _delegate = delegate;
@@ -1232,7 +1232,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     for (NSURL *url in fileURLs) {
         NSString *logName = [url ork_logNameInDirectory:_directory];
         
-        if (! _records[logName]) {
+        if (!_records[logName]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not from a known logger" userInfo:@{@"url":url}];
         }
         
@@ -1264,7 +1264,7 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     for (NSURL *url in fileURLs) {
         NSString *logName = [url ork_logNameInDirectory:_directory];
         ORKDataLogger *logger = _records[logName];
-        if (! logger) {
+        if (!logger) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not from a known logger" userInfo:@{@"url":url}];
         }
         
@@ -1371,14 +1371,14 @@ static NSString *const LoggerConfigurationsKey = @"loggers";
     if (exceededPendingThreshold && !_pendingUploadDelegateSent) {
         [self.delegate dataLoggerManager:self pendingUploadBytesReachedThreshold:pending];
         _pendingUploadDelegateSent = YES;
-    } else if (! exceededPendingThreshold) {
+    } else if (!exceededPendingThreshold) {
         _pendingUploadDelegateSent = NO;
     }
     
     if (exceededTotalThreshold && !_totalBytesDelegateSent) {
         [self.delegate dataLoggerManager:self totalBytesReachedThreshold:(pending + uploaded)];
         _totalBytesDelegateSent = YES;
-    } else if (! exceededTotalThreshold) {
+    } else if (!exceededTotalThreshold) {
         _totalBytesDelegateSent = NO;
     }
 }

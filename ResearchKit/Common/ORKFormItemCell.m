@@ -160,8 +160,8 @@ static const CGFloat HorizMargin = 15.0;
 }
 
 - (void)defaultAnswerDidChange {
-    if (! self.haveChangedAnswer && ! self.answer) {
-        if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
+    if (!self.haveChangedAnswer && !self.answer) {
+        if (self.answer != _defaultAnswer && _defaultAnswer && ![self.answer isEqual:_defaultAnswer]) {
             self.answer = _defaultAnswer;
             
             // Inform delegate of the change too
@@ -441,7 +441,7 @@ static const CGFloat HorizMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
@@ -615,7 +615,7 @@ static const CGFloat HorizMargin = 15.0;
     id answer = ORKNullAnswerValue();
     if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
-        if (! answer) {
+        if (!answer) {
             answer = ORKNullAnswerValue();
             updateInput = YES;
         }
@@ -935,7 +935,7 @@ static const CGFloat HorizMargin = 15.0;
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+        if (![self.answer isKindOfClass:[NSNumber class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
         }
         

@@ -84,7 +84,7 @@
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+        if (![self.answer isKindOfClass:[NSNumber class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
         }
         

@@ -90,7 +90,7 @@
 }
 
 - (void)continueButtonAction:(id)sender {
-    if (_useNextForSkip && _skipButtonItem && ! _continueButtonItem) {
+    if (_useNextForSkip && _skipButtonItem && !_continueButtonItem) {
         [self skipAction:sender];
     } else {
         [self continueAction:sender];

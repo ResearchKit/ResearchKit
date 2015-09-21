@@ -70,7 +70,7 @@
     self.verticalCenteringEnabled = isOverview;
     self.continueHugsContent =  isOverview;
     
-    self.headerView.instructionLabel.hidden = ! [consentSection summary].length;
+    self.headerView.instructionLabel.hidden = ![consentSection summary].length;
     self.headerView.captionLabel.text = consentSection.title;
     
     self.imageView.image = consentSection.image;

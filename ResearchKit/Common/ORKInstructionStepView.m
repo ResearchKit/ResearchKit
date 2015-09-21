@@ -66,9 +66,9 @@
     
     _isCompletionStep = [_instructionStep isKindOfClass:[ORKCompletionStep class]];
     
-    self.verticalCenteringEnabled = ! hasImage;
-    self.continueHugsContent = ! hasImage;
-    self.stepViewFillsAvailableSpace = (hasImage && ! _isCompletionStep);
+    self.verticalCenteringEnabled = !hasImage;
+    self.continueHugsContent = !hasImage;
+    self.stepViewFillsAvailableSpace = (hasImage && !_isCompletionStep);
     
     _instructionImageView.image = image;
     _instructionImageView.shouldApplyTint = instructionStep.shouldTintImages;

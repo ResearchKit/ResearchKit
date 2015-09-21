@@ -172,7 +172,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 - (void)start {
     [super start];
     
-    if (! _state) {
+    if (!_state) {
         [self transitionToState:ORKSpatialSpanStepStateInitial];
     }
     

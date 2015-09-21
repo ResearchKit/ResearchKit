@@ -86,16 +86,16 @@
     
     self.motionManager = [self createMotionManager];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
     }
     
-    if (! self.motionManager || ! self.motionManager.accelerometerAvailable) {
+    if (!self.motionManager || !self.motionManager.accelerometerAvailable) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
                                          userInfo:@{@"recorder" : self}];

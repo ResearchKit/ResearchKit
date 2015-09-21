@@ -75,10 +75,10 @@
 - (void)start {
     [super start];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
@@ -91,7 +91,7 @@
     self.locationManager.pausesLocationUpdatesAutomatically = NO;
     self.locationManager.delegate = self;
     
-    if (! self.locationManager) {
+    if (!self.locationManager) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
                                          userInfo:@{@"recorder" : self}];

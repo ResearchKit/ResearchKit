@@ -237,7 +237,7 @@
 
 - (BOOL)isPlaceholderVisible {
     BOOL editing = [self isEditing];
-    return (! editing) && ([self placeholder].length > 0);
+    return (!editing) && ([self placeholder].length > 0);
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {

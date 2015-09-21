@@ -112,7 +112,7 @@
 - (void)answerDidChange {
     id answer = self.answer;
     self.textView.text = (answer == ORKNullAnswerValue()) ? nil : self.answer;
-    self.placeHolder.hidden = (self.textView.text.length > 0) && ! [self.textView isFirstResponder];
+    self.placeHolder.hidden = (self.textView.text.length > 0) && ![self.textView isFirstResponder];
     
 }
 
@@ -275,7 +275,7 @@
 
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (! [answerFormat isAnswerValidWithString:self.textField.text]) {
+    if (![answerFormat isAnswerValidWithString:self.textField.text]) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
         return NO;
     }

@@ -90,10 +90,10 @@
     _totalNumberOfSteps = 0;
     _totalDistance = -1;
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
@@ -101,7 +101,7 @@
     
     self.pedometer = [self createPedometer];
     
-    if (! [[self.pedometer class] isStepCountingAvailable]) {
+    if (![[self.pedometer class] isStepCountingAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
                                                        userInfo:@{@"recorder" : self}]];

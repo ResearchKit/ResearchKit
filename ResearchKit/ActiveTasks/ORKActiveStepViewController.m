@@ -321,7 +321,7 @@
 
 - (void)suspend {
     ORK_Log_Debug(@"%@",self);
-    if (self.finished || ! self.started) {
+    if (self.finished || !self.started) {
         return;
     }
     
@@ -333,7 +333,7 @@
 
 - (void)resume {
     ORK_Log_Debug(@"%@",self);
-    if (self.finished || ! self.started) {
+    if (self.finished || !self.started) {
         return;
     }
     
@@ -359,7 +359,7 @@
     if (self.activeStep.shouldVibrateOnFinish) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     }
-    if (! self.activeStep.startsFinished) {
+    if (!self.activeStep.startsFinished) {
         if (self.activeStep.shouldContinueOnFinish) {
             [self goForward];
         }

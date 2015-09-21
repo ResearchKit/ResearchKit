@@ -76,7 +76,7 @@
     _imageView.shouldApplyTint = _activeStep.shouldTintImages;
     [self updateStepView];
     
-    BOOL neverHasContinueButton = (step.shouldContinueOnFinish && ! step.startsFinished);
+    BOOL neverHasContinueButton = (step.shouldContinueOnFinish && !step.startsFinished);
     [self.continueSkipContainer setNeverHasContinueButton:neverHasContinueButton];
     
     [self.continueSkipContainer updateContinueAndSkipEnabled];

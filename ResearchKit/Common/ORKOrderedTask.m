@@ -189,7 +189,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     progress.current = [self indexOfStep:step];
     progress.total = _steps.count;
     
-    if (! [step showsProgress]) {
+    if (![step showsProgress]) {
         progress.total = 0;
     }
     return progress;
@@ -333,7 +333,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.detailText = ORKLocalizedString(@"TAPPING_INTRO_TEXT", nil);
             
             NSString *imageName = @"phonetapping";
-            if (! [[NSLocale preferredLanguages].firstObject hasPrefix:@"en"]) {
+            if (![[NSLocale preferredLanguages].firstObject hasPrefix:@"en"]) {
                 imageName = [imageName stringByAppendingString:@"_notap"];
             }
             step.image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -765,7 +765,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.text = [NSString stringWithFormat:requireReversal ? ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@", nil) : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@", nil), targetPluralName, targetPluralName];
             step.detailText = ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION", nil);
             
-            if (! customTargetImage) {
+            if (!customTargetImage) {
                 step.image = [UIImage imageNamed:@"memory-second-screen" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             } else {
                 step.image = customTargetImage;

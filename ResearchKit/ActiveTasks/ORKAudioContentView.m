@@ -358,7 +358,7 @@ static const CGFloat ValueLineMargin = 1.5;
 
 - (void)updateAlertLabelHidden {
     NSNumber *sample = _samples.lastObject;
-    BOOL show = (! _finished && (sample.doubleValue > _alertThreshold)) || _failed;
+    BOOL show = (!_finished && (sample.doubleValue > _alertThreshold)) || _failed;
     _alertLabel.hidden = !show;
 }
 
@@ -369,7 +369,7 @@ static const CGFloat ValueLineMargin = 1.5;
 
 - (void)addSample:(NSNumber *)sample {
     NSAssert(sample != nil, @"Sample should be non-nil");
-    if (! _samples) {
+    if (!_samples) {
         _samples = [NSMutableArray array];
     }
     [_samples addObject:sample];

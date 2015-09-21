@@ -221,7 +221,7 @@
     // On a tap, dismiss the keyboard if the tap was not inside a view that is first responder or a child of a first responder.
     BOOL viewIsChildOfFirstResponder = [self view:_tableView hasFirstResponderOrTableViewCellContainingPoint:[recognizer locationInView:_tableView]];
     
-    if (! viewIsChildOfFirstResponder) {
+    if (!viewIsChildOfFirstResponder) {
         [_tableView endEditing:NO];
     }
 }

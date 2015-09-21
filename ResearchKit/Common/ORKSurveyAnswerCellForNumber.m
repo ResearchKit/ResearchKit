@@ -151,7 +151,7 @@
 - (BOOL)shouldContinue {
     BOOL isValid = [self isAnswerValid];
 
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
     }
     
@@ -194,7 +194,7 @@
     id answer = ORKNullAnswerValue();
     if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
-        if (! answer) {
+        if (!answer) {
             answer = ORKNullAnswerValue();
             updateInput = YES;
         }
@@ -208,7 +208,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     
@@ -222,7 +222,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }

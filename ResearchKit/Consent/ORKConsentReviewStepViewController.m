@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 }
 
 - (void)stepDidChange {
-    if (! [self isViewLoaded]) {
+    if (![self isViewLoaded]) {
         return;
     }
     
@@ -272,7 +272,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (ORKStepResult *)result {
     ORKStepResult *parentResult = [super result];
-    if (! _currentSignature) {
+    if (!_currentSignature) {
         _currentSignature = [[self.consentReviewStep signature] copy];
         
         if (_currentSignature.requiresName) {
@@ -343,7 +343,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 - (void)goToPage:(NSInteger)page animated:(BOOL)animated {
     UIViewController *viewController = [self viewControllerForIndex:page];
     
-    if (! viewController) {
+    if (!viewController) {
         ORK_Log_Debug(@"No view controller!");
         return;
     }

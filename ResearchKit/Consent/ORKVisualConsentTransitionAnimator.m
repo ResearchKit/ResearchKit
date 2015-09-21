@@ -229,7 +229,7 @@
     ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
     playerView.hidden = NO;
     
-    if (_pendingContext && ! _pendingContext.hasCalledLoadHandler) {
+    if (_pendingContext && !_pendingContext.hasCalledLoadHandler) {
         if (_pendingContext.loadHandler) {
             _pendingContext.loadHandler(self, _pendingContext.direction);
         }

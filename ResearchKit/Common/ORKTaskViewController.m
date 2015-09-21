@@ -353,7 +353,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                                    writeTypes:(NSSet *)writeTypes
                                       handler:(void (^)(void))handler {
     NSParameterAssert(handler != nil);
-    if ((! [HKHealthStore isHealthDataAvailable]) || (! readTypes && ! writeTypes)) {
+    if ((![HKHealthStore isHealthDataAvailable]) || (!readTypes && !writeTypes)) {
         _requestedHealthTypesForRead = nil;
         _requestedHealthTypesForWrite = nil;
         handler();
@@ -375,7 +375,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)requestPedometerAccessWithHandler:(void (^)(BOOL success))handler {
     NSParameterAssert(handler != nil);
-    if (! [CMPedometer isStepCountingAvailable]) {
+    if (![CMPedometer isStepCountingAvailable]) {
         handler(NO);
         return;
     }
@@ -557,7 +557,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([task isKindOfClass:[ORKOrderedTask class]]) {
         if ([(ORKOrderedTask *)task providesBackgroundAudioPrompts]) {
             NSError *error = nil;
-            if (! [self startAudioPromptSessionWithError:&error]) {
+            if (![self startAudioPromptSessionWithError:&error]) {
                 // User-visible console log message
                 ORK_Log_Oops(@"ResearchKit: failed to start audio prompt session: %@", error);
             }
@@ -571,7 +571,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     BOOL success = YES;
     // Use PlayAndRecord to avoid overwriting the category being used by
     // recording configurations.
-    if (! [session setCategory:AVAudioSessionCategoryPlayback
+    if (![session setCategory:AVAudioSessionCategoryPlayback
                    withOptions:0
                          error:&error]) {
         success = NO;
@@ -580,7 +580,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     // We are setting the session active so that we can stay live to play audio
     // in the background.
-    if (success && ! [session setActive:YES withOptions:0 error:&error]) {
+    if (success && ![session setActive:YES withOptions:0 error:&error]) {
         success = NO;
         ORK_Log_Debug(@"Could not set audio session active: %@", error);
     }
@@ -600,7 +600,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (_haveAudioSession) {
         AVAudioSession *session = [AVAudioSession sharedInstance];
         NSError *error = nil;
-        if (! [session setActive:NO withOptions:0 error:&error]) {
+        if (![session setActive:NO withOptions:0 error:&error]) {
             ORK_Log_Debug(@"Could not deactivate audio session: %@", error);
         } else {
             ORK_Log_Debug(@"*** Finished audio session");
@@ -838,7 +838,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (BOOL)isStepLastBeginningInstructionStep:(ORKStep *)step {
-    if (! step) {
+    if (!step) {
         return NO;
     }
     return (_lastBeginningInstructionStepIdentifier != nil &&
@@ -1006,16 +1006,16 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         stepViewController = [self.delegate taskViewController:self viewControllerForStep:step];
     }
     
-    if (! stepViewController) {
+    if (!stepViewController) {
         Class stepViewControllerClass = [[step class] stepViewControllerClass];
         
         ORKStepResult *result = nil;
         result = _managedResults[step.identifier];
-        if (! result ) {
+        if (!result ) {
             result = [_defaultResultSource stepResultForStepIdentifier:step.identifier];
         }
         
-        if (! result) {
+        if (!result) {
             result = [[ORKStepResult alloc] initWithIdentifier:step.identifier];
         }
         
@@ -1213,7 +1213,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
     ORKStep *thisStep = stepViewController.step;
-    if (! thisStep) {
+    if (!thisStep) {
         return NO;
     }
     ORKStep *previousStep = [self stepBeforeStep:thisStep];
@@ -1225,7 +1225,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController {
     ORKStep *thisStep = stepViewController.step;
-    if (! thisStep) {
+    if (!thisStep) {
         return NO;
     }
     ORKStep *nextStep = [self stepAfterStep:thisStep];
@@ -1306,7 +1306,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         
         _restoredTaskIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKTaskIdentifierRestoreKey];
         if (_restoredTaskIdentifier) {
-            if (! [_task.identifier isEqualToString:_restoredTaskIdentifier]) {
+            if (![_task.identifier isEqualToString:_restoredTaskIdentifier]) {
                 @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                                reason:[NSString stringWithFormat:@"Restored task identifier %@ does not match task %@ provided",_restoredTaskIdentifier,_task.identifier]
                                              userInfo:nil];
@@ -1334,7 +1334,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     
     _pageViewController = (UIPageViewController *)[self.childNavigationController viewControllers][0];
     
-    if (! _task) {
+    if (!_task) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Task must be provided to restore task view controller"
                                      userInfo:nil];

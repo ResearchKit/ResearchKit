@@ -91,7 +91,7 @@
 
 - (void)setEnabled:(BOOL)enabled {
     _enabled = enabled;
-    self.hidden = ! enabled;
+    self.hidden = !enabled;
     [self setNeedsUpdateConstraints];
 }
 

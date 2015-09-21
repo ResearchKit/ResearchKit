@@ -169,7 +169,7 @@
 }
 
 - (NSURL *)recordingDirectoryURL {
-    if (! _outputDirectory) {
+    if (!_outputDirectory) {
         return nil;
     }
     return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@", _recorderUUID.UUIDString]]];
@@ -185,7 +185,7 @@
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
     NSURL *workingDir = [self recordingDirectoryURL];
-    if (! workingDir) {
+    if (!workingDir) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
         }
@@ -242,7 +242,7 @@
             [self reset];
         }
     } else {
-        if (! error) {
+        if (!error) {
             error = [NSError errorWithDomain:NSCocoaErrorDomain
                                         code:NSFileReadNoSuchFileError
                                     userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_DATA", nil)}];

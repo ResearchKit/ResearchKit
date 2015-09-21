@@ -151,7 +151,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         [_questionView removeFromSuperview];
         _questionView = nil;
         
-        if ([self.questionStep formatRequiresTableView] && ! _customQuestionView) {
+        if ([self.questionStep formatRequiresTableView] && !_customQuestionView) {
             _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
             
             // Create a new one (with correct style)
@@ -262,7 +262,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     BOOL scheduledRefresh = NO;
     if (types.count) {
         NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (! [types isSubsetOfSet:alreadyRequested]) {
+        if (![types isSubsetOfSet:alreadyRequested]) {
             scheduledRefresh = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
                 if (success) {
@@ -273,13 +273,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             }];
         }
     }
-    if (! scheduledRefresh) {
+    if (!scheduledRefresh) {
         [self refreshDefaults];
     }
 }
 
 - (void)answerDidChange {
-    if ([self.questionStep formatRequiresTableView] && ! _customQuestionView) {
+    if ([self.questionStep formatRequiresTableView] && !_customQuestionView) {
         [self.tableView reloadData];
     } else {
         if (_customQuestionView) {
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)defaultAnswerDidChange {
     id defaultAnswer = _defaultAnswer;
-    if (! [self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && ! self.haveChangedAnswer) {
+    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.haveChangedAnswer) {
         _answer = defaultAnswer;
         
         [self answerDidChange];
@@ -462,7 +462,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     self.skipButtonItem = self.internalSkipButtonItem;
-    if (! self.questionStep.optional) {
+    if (!self.questionStep.optional) {
         self.skipButtonItem = nil;
     }
 
@@ -485,7 +485,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)continueButtonEnabled {
-    return ([self hasAnswer] || (self.questionStep.optional && ! self.skipButtonItem));
+    return ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
 }
 
 - (BOOL)allowContinue {
@@ -653,7 +653,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)continueAction:(id)sender {
     if (self.continueActionButton.enabled) {
-        if (! [self shouldContinue]) {
+        if (![self shouldContinue]) {
             return;
         }
         

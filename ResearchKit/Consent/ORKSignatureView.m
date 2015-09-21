@@ -331,7 +331,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         [path stroke];
     }
     
-    if (! [self signatureExists] && (! self.currentPath || [self.currentPath isEmpty])) {
+    if (![self signatureExists] && (!self.currentPath || [self.currentPath isEmpty])) {
         [ORKLocalizedString(@"CONSENT_SIGNATURE_PLACEHOLDER", nil) drawAtPoint:[self placeholderPoint]
                                            withAttributes:@{ NSFontAttributeName : [ORKSelectionTitleLabel defaultFont],
                                                              NSForegroundColorAttributeName : [[UIColor blackColor] colorWithAlphaComponent:0.2]}];

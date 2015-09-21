@@ -53,7 +53,7 @@
             UITableView *tableView = [[UITableView alloc] init];
             defaultSeparatorColor = [tableView separatorColor];
         });
-        if (! defaultSeparatorColor) {
+        if (!defaultSeparatorColor) {
             defaultSeparatorColor = [UIColor lightGrayColor];
         }
         

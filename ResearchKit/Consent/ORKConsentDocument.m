@@ -79,7 +79,7 @@
 #pragma mark - Public
 
 - (void)addSignature:(ORKConsentSignature *)signature {
-    if (! _signatures) {
+    if (!_signatures) {
         _signatures = [NSMutableArray array];
     }
     [_signatures addObject:signature];
@@ -189,7 +189,7 @@
             }
         }
         
-        if (! mobile) {
+        if (!mobile) {
             // page break
             [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];

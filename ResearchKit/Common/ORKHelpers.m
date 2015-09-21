@@ -372,7 +372,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -385,7 +385,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -398,7 +398,7 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }

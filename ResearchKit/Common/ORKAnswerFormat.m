@@ -144,7 +144,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler {
-    if (! unit) {
+    if (!unit) {
         handler(nil, nil);
         return;
     }
@@ -186,7 +186,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             }
         }
     }
-    if (! handled) {
+    if (!handled) {
         handler(nil, nil);
     }
 }
@@ -203,7 +203,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
         if (unit) {
             return unit;
         }
-        if (! _unitsTable) {
+        if (!_unitsTable) {
             _unitsTable = [NSMutableDictionary dictionary];
         }
         
@@ -1234,11 +1234,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    if (! text.length) {
+    if (!text.length) {
         return nil;
     }
     NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
-    if (! num) {
+    if (!num) {
         return nil;
     }
     NSString *string = nil;
@@ -1380,7 +1380,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -1582,7 +1582,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
         _numberFormatter.maximumFractionDigits = _maximumFractionDigits;
@@ -1752,7 +1752,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -1894,9 +1894,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
-    if (! [self isTextLengthValidWithString:text]) {
+    if (![self isTextLengthValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
-    } else if (! [self isEmailAddressValidWithString:text]) {
+    } else if (![self isEmailAddressValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
     return string;

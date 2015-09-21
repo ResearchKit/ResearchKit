@@ -265,7 +265,7 @@ static const CGFloat AssumedStatusBarHeight = 20;
             // If that yOffset would not make the stepView visible, override to align with the top of the stepView.
             CGRect potentialVisibleRect = (CGRect){{0,yOffset},{bounds.size.width,visibleHeight}};
             CGRect targetBounds = [self convertRect:_stepView.bounds fromView:_stepView];
-            if (! CGRectContainsRect(potentialVisibleRect, targetBounds)) {
+            if (!CGRectContainsRect(potentialVisibleRect, targetBounds)) {
                 yOffset = targetBounds.origin.y;
             }
             
