@@ -735,7 +735,7 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
             // These tap locations are relative to the rectangle defined by `stepViewSize`.
             let buttonText = tappingSample.buttonIdentifier == .None ? "None" : "button \(tappingSample.buttonIdentifier.rawValue)"
             
-            let text = String(format: "%.3f", tappingSample.timestamp)
+            let text = String(format: "%.5f", tappingSample.timestamp)
             let detail = "\(buttonText) \(tappingSample.location)"
             
             return ResultRow(text: text, detail: detail)
