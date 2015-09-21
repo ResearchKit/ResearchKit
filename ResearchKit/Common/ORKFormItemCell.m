@@ -46,8 +46,8 @@
 #import "ORKScaleSliderView.h"
 
 
-static const CGFloat VertMargin = 10.0;
-static const CGFloat HorizMargin = 15.0;
+static const CGFloat VerticalMargin = 10.0;
+static const CGFloat HorizontalMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
@@ -838,7 +838,7 @@ static const CGFloat HorizMargin = 15.0;
                                                                              answer:self.answer];
     _selectionView.delegate = self;
     
-    self.contentView.layoutMargins = UIEdgeInsetsMake(VertMargin, HorizMargin, VertMargin, HorizMargin);
+    self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, HorizontalMargin, VerticalMargin, HorizontalMargin);
     
     [self.contentView addSubview:_selectionView];
     [self setUpConstraints];
