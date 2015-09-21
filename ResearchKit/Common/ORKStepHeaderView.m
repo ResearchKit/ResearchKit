@@ -169,49 +169,49 @@
     const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
     const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType);
     
-    BOOL haveCaption = _captionLabel.text.length > 0;
-    BOOL haveInstruction = _instructionLabel.text.length > 0;
-    BOOL haveLearnMore = (_learnMoreButton.alpha > 0);
-    ORKVerticalContainerLog(@"haveCaption=%@ haveInstruction=%@ haveLearnMore=%@", @(haveCaption), @(haveInstruction), @(haveLearnMore));
+    BOOL hasCaptionLabel = _captionLabel.text.length > 0;
+    BOOL hasInstructionLabel = _instructionLabel.text.length > 0;
+    BOOL hasLearnMoreButton = (_learnMoreButton.alpha > 0);
+    ORKVerticalContainerLog(@"hasCaption=%@ hasInstruction=%@ hasLearnMore=%@", @(hasCaption), @(hasInstruction), @(hasLearnMore));
     
     // If one label is empty and the other is not, then allow the empty label to shrink to nothing
     // and the other label to grow to fill
-    UILayoutPriority captionVerticalHugging = haveCaption && !haveInstruction ? UILayoutPriorityDefaultLow - 1 : UILayoutPriorityDefaultLow;
-    UILayoutPriority instructionVerticalHugging = haveInstruction && !haveCaption ? UILayoutPriorityDefaultLow - 1 : UILayoutPriorityDefaultLow;
+    UILayoutPriority captionVerticalHugging = hasCaptionLabel && !hasInstructionLabel ? UILayoutPriorityDefaultLow - 1 : UILayoutPriorityDefaultLow;
+    UILayoutPriority instructionVerticalHugging = hasInstructionLabel && !hasCaptionLabel ? UILayoutPriorityDefaultLow - 1 : UILayoutPriorityDefaultLow;
     [_captionLabel setContentHuggingPriority:captionVerticalHugging forAxis:UILayoutConstraintAxisVertical];
     [_instructionLabel setContentHuggingPriority:instructionVerticalHugging forAxis:UILayoutConstraintAxisVertical];
     
     {
-        _headerZeroHeightConstraint.active = ! (haveCaption || haveInstruction || haveLearnMore);
+        _headerZeroHeightConstraint.active = ! (hasCaptionLabel || hasInstructionLabel || hasLearnMoreButton);
     }
     
     {
         _illustrationToCaptionBaselineConstraint.constant = _hasContentAbove ? IllustrationToCaptionBaseline : TopToCaptionBaseline;
-        _illustrationToCaptionBaselineConstraint.active = haveCaption;
+        _illustrationToCaptionBaselineConstraint.active = hasCaptionLabel;
         _illustrationToCaptionTopConstraint.constant = 0;
-        _illustrationToCaptionTopConstraint.active = !haveCaption;
+        _illustrationToCaptionTopConstraint.active = !hasCaptionLabel;
     }
     
     {
-        _captionToInstructionConstraint.constant = haveInstruction ? CaptionBaselineToInstructionBaseline_WithInstruction : CaptionBaselineToInstructionBaseline_NoInstruction;
+        _captionToInstructionConstraint.constant = hasInstructionLabel ? CaptionBaselineToInstructionBaseline_WithInstruction : CaptionBaselineToInstructionBaseline_NoInstruction;
     }
     
     {
-        _instructionToLearnMoreConstraint.constant = haveLearnMore ? InstructionBaselineToLearnMoreBaseline : 0;
+        _instructionToLearnMoreConstraint.constant = hasLearnMoreButton ? InstructionBaselineToLearnMoreBaseline : 0;
     }
     
     {
         _learnMoreToStepViewConstraint.constant = LearnMoreBaselineToStepViewTop;
-        _learnMoreToStepViewConstraint.active = haveLearnMore;
+        _learnMoreToStepViewConstraint.active = hasLearnMoreButton;
     }
     
     {
-        _captionMinBottomSpacingConstraint.active = haveCaption && !(haveLearnMore || haveInstruction);
+        _captionMinBottomSpacingConstraint.active = hasCaptionLabel && !(hasLearnMoreButton || hasInstructionLabel);
     }
     
     {
         _instructionMinBottomSpacingConstraint.constant = InstructionBaselineToStepViewTopWithNoLearnMore;
-        _instructionMinBottomSpacingConstraint.active = haveInstruction && !(haveLearnMore);
+        _instructionMinBottomSpacingConstraint.active = hasInstructionLabel && !(hasLearnMoreButton);
     }
 }
 

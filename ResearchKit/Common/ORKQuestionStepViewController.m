@@ -97,8 +97,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 @property (nonatomic, readonly) UILabel *questionLabel;
 @property (nonatomic, readonly) UILabel *promptLabel;
 
-// If `haveChangedAnswer`, then a new `defaultAnswer` should not change the answer
-@property (nonatomic, assign) BOOL haveChangedAnswer;
+// If `hasChangedAnswer`, then a new `defaultAnswer` should not change the answer
+@property (nonatomic, assign) BOOL hasChangedAnswer;
 
 @end
 
@@ -138,7 +138,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     [super stepDidChange];
     _answerFormat = [self.questionStep impliedAnswerFormat];
     
-    self.haveChangedAnswer = NO;
+    self.hasChangedAnswer = NO;
     
     if ([self isViewLoaded]) {
         [_tableContainer removeFromSuperview];
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)defaultAnswerDidChange {
     id defaultAnswer = _defaultAnswer;
-    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.haveChangedAnswer) {
+    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.hasChangedAnswer) {
         _answer = defaultAnswer;
         
         [self answerDidChange];
@@ -502,7 +502,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)customQuestionStepView:(ORKQuestionStepCustomView *)customQuestionStepView didChangeAnswer:(id)answer; {
     [self saveAnswer:answer];
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
 }
 
 #pragma mark - UITableViewDataSource
@@ -689,7 +689,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     id answer = (self.questionStep.questionType == ORKQuestionTypeBoolean) ? [_choiceCellGroup answerForBoolean] :[_choiceCellGroup answer];
     
     [self saveAnswer:answer];
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
     
     if (immediateNavigation) {
         // Proceed as continueButton tapped
@@ -753,8 +753,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (void)answerCell:(ORKSurveyAnswerCell *)cell answerDidChangeTo:(id)answer dueUserAction:(BOOL)dueUserAction {
     [self saveAnswer:answer];
     
-    if (self.haveChangedAnswer == NO && dueUserAction == YES) {
-        self.haveChangedAnswer = YES;
+    if (self.hasChangedAnswer == NO && dueUserAction == YES) {
+        self.hasChangedAnswer = YES;
     }
 }
 
@@ -763,20 +763,20 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";
-static NSString *const _ORKHaveChangedAnswerRestoreKey = @"haveChangedAnswer";
+static NSString *const _ORKHasChangedAnswerRestoreKey = @"hasChangedAnswer";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_answer forKey:_ORKAnswerRestoreKey];
-    [coder encodeBool:_haveChangedAnswer forKey:_ORKHaveChangedAnswerRestoreKey];
+    [coder encodeBool:_hasChangedAnswer forKey:_ORKHasChangedAnswerRestoreKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
     self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKAnswerRestoreKey];
-    self.haveChangedAnswer = [coder decodeBoolForKey:_ORKHaveChangedAnswerRestoreKey];
+    self.hasChangedAnswer = [coder decodeBoolForKey:_ORKHasChangedAnswerRestoreKey];
     
     [self answerDidChange];
 }

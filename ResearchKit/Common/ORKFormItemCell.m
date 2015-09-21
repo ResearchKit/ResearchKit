@@ -63,8 +63,8 @@ static const CGFloat HorizontalMargin = 15.0;
 @property (nonatomic, strong) ORKCaption1Label *labelLabel;
 @property (nonatomic, weak) UITableView *_parentTableView;
 
-// If haveChangedAnswer, then a new defaultAnswer should not change the answer
-@property (nonatomic, assign) BOOL haveChangedAnswer;
+// If hasChangedAnswer, then a new defaultAnswer should not change the answer
+@property (nonatomic, assign) BOOL hasChangedAnswer;
 
 @end
 
@@ -143,12 +143,12 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)inputValueDidChange {
     // Subclasses should override this, and should call _setAnswer:
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
 }
 
 - (void)inputValueDidClear {
     // Subclasses should override this, and should call _setAnswer:
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
 }
 
 - (void)answerDidChange {
@@ -160,7 +160,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)defaultAnswerDidChange {
-    if (!self.haveChangedAnswer && !self.answer) {
+    if (!self.hasChangedAnswer && !self.answer) {
         if (self.answer != _defaultAnswer && _defaultAnswer && ![self.answer isEqual:_defaultAnswer]) {
             self.answer = _defaultAnswer;
             
@@ -187,7 +187,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)prepareForReuse {
-    self.haveChangedAnswer = NO;
+    self.hasChangedAnswer = NO;
 }
 
 // Inform delegate of the change

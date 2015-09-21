@@ -163,7 +163,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     NSMutableArray *_managedStepIdentifiers;
     ORKViewControllerToolbarObserver *_stepViewControllerObserver;
     ORKScrollViewObserver *_scrollViewObserver;
-    BOOL _haveSetProgressLabel;
+    BOOL _hasSetProgressLabel;
     BOOL _hasBeenPresented;
     BOOL _hasRequestedHealthData;
     ORKPermissionMask _grantedPermissions;
@@ -177,7 +177,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
     NSString *_lastBeginningInstructionStepIdentifier;
     NSString *_lastRestorableStepIdentifier;
     
-    BOOL _haveAudioSession; // does not need state restoration - temporary
+    BOOL _hasAudioSession; // does not need state restoration - temporary
     
     NSString *_restoredTaskIdentifier;
     NSString *_restoredStepIdentifier;
@@ -589,15 +589,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         *errorOut = error;
     }
     
-    _haveAudioSession = _haveAudioSession || success;
-    if (_haveAudioSession) {
+    _hasAudioSession = _hasAudioSession || success;
+    if (_hasAudioSession) {
         ORK_Log_Debug(@"*** Started audio session");
     }
     return success;
 }
 
 - (void)finishAudioPromptSession {
-    if (_haveAudioSession) {
+    if (_hasAudioSession) {
         AVAudioSession *session = [AVAudioSession sharedInstance];
         NSError *error = nil;
         if (![session setActive:NO withOptions:0 error:&error]) {
@@ -937,11 +937,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         ORK_Log_Debug(@"%@ %@", strongSelf, viewController);
         
         // Set the progress label only if non-nil or if it is nil having previously set a progress label.
-        if (progressLabel || strongSelf->_haveSetProgressLabel) {
+        if (progressLabel || strongSelf->_hasSetProgressLabel) {
             strongSelf.pageViewController.navigationItem.title = progressLabel;
         }
         
-        strongSelf->_haveSetProgressLabel = (progressLabel != nil);
+        strongSelf->_hasSetProgressLabel = (progressLabel != nil);
         
         // Collect toolbarItems
         [strongSelf collectToolbarItemsFromViewController:viewController];
@@ -1253,7 +1253,7 @@ static NSString *const _ORKTaskRunUUIDRestoreKey = @"taskRunUUID";
 static NSString *const _ORKShowsProgressInNavigationBarRestoreKey = @"showsProgressInNavigationBar";
 static NSString *const _ORKManagedResultsRestoreKey = @"managedResults";
 static NSString *const _ORKManagedStepIdentifiersRestoreKey = @"managedStepIdentifiers";
-static NSString *const _ORKHaveSetProgressLabelRestoreKey = @"haveSetProgressLabel";
+static NSString *const _ORKHasSetProgressLabelRestoreKey = @"hasSetProgressLabel";
 static NSString *const _ORKHasRequestedHealthDataRestoreKey = @"hasRequestedHealthData";
 static NSString *const _ORKRequestedHealthTypesForReadRestoreKey = @"requestedHealthTypesForRead";
 static NSString *const _ORKRequestedHealthTypesForWriteRestoreKey = @"requestedHealthTypesForWrite";
@@ -1270,7 +1270,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeBool:self.showsProgressInNavigationBar forKey:_ORKShowsProgressInNavigationBarRestoreKey];
     [coder encodeObject:_managedResults forKey:_ORKManagedResultsRestoreKey];
     [coder encodeObject:_managedStepIdentifiers forKey:_ORKManagedStepIdentifiersRestoreKey];
-    [coder encodeBool:_haveSetProgressLabel forKey:_ORKHaveSetProgressLabelRestoreKey];
+    [coder encodeBool:_hasSetProgressLabel forKey:_ORKHasSetProgressLabelRestoreKey];
     [coder encodeObject:_requestedHealthTypesForRead forKey:_ORKRequestedHealthTypesForReadRestoreKey];
     [coder encodeObject:_requestedHealthTypesForWrite forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
     [coder encodeObject:_presentedDate forKey:_ORKPresentedDate];
@@ -1314,7 +1314,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         }
         
         if ([_task respondsToSelector:@selector(stepWithIdentifier:)]) {
-            _haveSetProgressLabel = [coder decodeBoolForKey:_ORKHaveSetProgressLabelRestoreKey];
+            _hasSetProgressLabel = [coder decodeBoolForKey:_ORKHasSetProgressLabelRestoreKey];
             _requestedHealthTypesForRead = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForReadRestoreKey];
             _requestedHealthTypesForWrite = [coder decodeObjectOfClass:[NSSet class] forKey:_ORKRequestedHealthTypesForWriteRestoreKey];
             _presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDate];
