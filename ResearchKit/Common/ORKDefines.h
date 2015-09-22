@@ -114,3 +114,18 @@ typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
     /// The PVSAT (Paced Visual Series Addition Test).
     ORKPSATPresentationModeVisual = 1 << 1
 } ORK_ENUM_AVAILABLE;
+
+
+/**
+ Progress Indicator Mask
+ */
+typedef NS_OPTIONS(NSInteger, ORKProgressIndicatorMask) {
+    /// No animation.
+    ORKProgressIndicatorMaskNone = 0,
+    /// Spinner animation.
+    ORKProgressIndicatorMaskIndeterminate,
+    /// Progressbar animation.
+    ORKProgressIndicatorMaskProgressBar,
+} ORK_ENUM_AVAILABLE;
+
+

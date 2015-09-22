@@ -61,6 +61,7 @@
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKPSATStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
+#import <ResearchKit/ORKWaitStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
@@ -73,6 +74,7 @@
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKPSATStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
+#import <ResearchKit/ORKWaitStepViewController.h>
 
 // More internal stuff
 #import <ResearchKit/ORKResult_Private.h>

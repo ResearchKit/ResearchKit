@@ -42,6 +42,11 @@ import ResearchKit
     the task by switching to the results tab.
 */
 class TaskListViewController: UITableViewController, ORKTaskViewControllerDelegate {
+    
+    var waitStepViewController: ORKWaitStepViewController?
+    var waitStepUpdateTimer: NSTimer?
+    var waitStepProgress: CGFloat = 0.0
+    
     // MARK: Types
     
     enum TableViewCellIdentifier: String {
@@ -126,4 +131,53 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
 
         taskViewController.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func taskViewController(taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        // Example data processing for the wait step.
+        if stepViewController.step?.identifier == "WaitStepIndeterminate" {
+            delay(5.0, closure: { () -> () in
+                if let stepViewController = stepViewController as? ORKWaitStepViewController {
+                    stepViewController.finish()
+                }
+            })
+        } else if stepViewController.step?.identifier == "WaitStepDeterminate" {
+            delay(1.0, closure: { () -> () in
+                if let stepViewController = stepViewController as? ORKWaitStepViewController {
+                    self.waitStepViewController = stepViewController;
+                    self.waitStepProgress = 0.0
+                    self.waitStepUpdateTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateProgressOfWaitStepViewController", userInfo: nil, repeats: true)
+                    NSRunLoop.mainRunLoop().addTimer(self.waitStepUpdateTimer!, forMode: NSRunLoopCommonModes)
+                }
+            })
+        }
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    func updateProgressOfWaitStepViewController() {
+        if let waitStepViewController = waitStepViewController {
+            waitStepProgress += 0.2
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                waitStepViewController.setProgress(self.waitStepProgress, animated: true)
+            })
+            if (waitStepProgress < 1.0) {
+                return
+            } else {
+                self.waitStepUpdateTimer?.invalidate()
+                waitStepViewController.finish()
+                self.waitStepViewController?.setProgressDescription("Complete")
+                self.waitStepViewController = nil
+            }
+        } else {
+            self.waitStepUpdateTimer?.invalidate()
+        }
+    }
+
 }

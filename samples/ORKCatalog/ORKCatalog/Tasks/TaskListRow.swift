@@ -77,6 +77,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     case Consent
     
+    case Wait
     case Audio
     case Fitness
     case PSAT
@@ -127,6 +128,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
+                    .Wait,
                     .Audio,
                     .Fitness,
                     .PSAT,
@@ -188,6 +190,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
+            
+        case .Wait:
+            return NSLocalizedString("Wait Task", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -311,6 +316,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ConsentDocumentInvestigatorSignature
 
         // Active tasks.
+        case WaitTask
+        case WaitStepIndeterminate
+        case WaitStepDeterminate
         case AudioTask
         case FitnessTask
         case PSATTask
@@ -372,6 +380,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Consent:
             return consentTask
+        
+        case .Wait:
+            return waitTask
             
         case .Audio:
             return audioTask
@@ -790,6 +801,19 @@ enum TaskListRow: Int, CustomStringConvertible {
             sharingConsentStep,
             reviewConsentStep
             ])
+    }
+    
+    
+    /// This task presents a wait task.
+    private var waitTask: ORKTask {
+        let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
+        waitStepIndeterminate.indicatorMask = ORKProgressIndicatorMask.Indeterminate
+        
+        let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
+        waitStepDeterminate.indicatorMask = ORKProgressIndicatorMask.ProgressBar
+        waitStepDeterminate.shouldContinueOnFinish = false
+        
+        return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }
 
     /// This task presents the Audio pre-defined active task.

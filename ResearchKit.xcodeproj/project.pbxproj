@@ -432,6 +432,10 @@
 		BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */; };
 		BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */; };
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
+		CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */; settings = {ASSET_TAGS = (); }; };
+		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		CB16A6F31BB0D0960043CDD8 /* ORKWaitStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
 		D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */; };
 		D44239791AF17F5100559D96 /* ORKImageCaptureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -922,6 +926,10 @@
 		BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartView_Internal.h; path = Charts/ORKPieChartView_Internal.h; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
 		BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultPredicate.m; sourceTree = "<group>"; };
+		CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWaitStep.h; sourceTree = "<group>"; };
+		CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWaitStep.m; sourceTree = "<group>"; };
+		CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWaitStepViewController.h; sourceTree = "<group>"; };
+		CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWaitStepViewController.m; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKImageCaptureView.m; sourceTree = "<group>"; };
 		D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureStep.h; sourceTree = "<group>"; };
@@ -1673,6 +1681,7 @@
 				B12EFF501AB2167400A80147 /* Active Step */,
 				B12EFF5C1AB2175B00A80147 /* Countdown Step */,
 				B12EFF531AB216AA00A80147 /* Recorders */,
+				CB16A6EB1BB0D0660043CDD8 /* Wait Task */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1944,6 +1953,17 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		CB16A6EB1BB0D0660043CDD8 /* Wait Task */ = {
+			isa = PBXGroup;
+			children = (
+				CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */,
+				CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */,
+				CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */,
+				CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */,
+			);
+			name = "Wait Task";
+			sourceTree = "<group>";
+		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2028,6 +2048,7 @@
 				BCB6E6501B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
+				CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */,
 				86C40D941A8D7C5C00081FAC /* ORKStepViewController.h in Headers */,
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,
@@ -2047,6 +2068,7 @@
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
+				CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */,
 				86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */,
 				86C40D021A8D7C5C00081FAC /* ORKContinueButton.h in Headers */,
 				86C40D681A8D7C5C00081FAC /* ORKQuestionStepViewController_Private.h in Headers */,
@@ -2436,6 +2458,7 @@
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
+				CB16A6F31BB0D0960043CDD8 /* ORKWaitStepViewController.m in Sources */,
 				86C40D221A8D7C5C00081FAC /* ORKFormStep.m in Sources */,
 				86C40CD61A8D7C5C00081FAC /* ORKTableContainerView.m in Sources */,
 				257FCE201B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m in Sources */,
@@ -2560,6 +2583,7 @@
 				86C40CEC1A8D7C5C00081FAC /* ORKAnswerTextField.m in Sources */,
 				86C40C441A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.m in Sources */,
 				24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */,
+				CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */,
 				86C40DD81A8D7C5C00081FAC /* ORKUnitLabel.m in Sources */,
 				86C40D361A8D7C5C00081FAC /* ORKHelpers.m in Sources */,
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
