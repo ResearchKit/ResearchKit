@@ -43,8 +43,6 @@
 @property (nonatomic, assign, getter = isAuditory) BOOL auditory;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) ORKTapCountLabel *digitLabel;
-@property (nonatomic, assign) ORKScreenType screenType;
-@property (nonatomic, strong) NSArray *constraints;
 
 @end
 
@@ -64,8 +62,6 @@
     self = [super initWithFrame:CGRectZero];
     
     if (self) {
-        
-        _screenType = ORKGetVerticalScreenTypeForWindow(self.window);
         
         _digitLabel = [ORKTapCountLabel new];
         _digitLabel.textAlignment = NSTextAlignmentCenter;
@@ -123,8 +119,8 @@
 - (void)updateConstraints {
     [NSLayoutConstraint deactivateConstraints:self.constraints];
     
-    const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewWidth, self.screenType);
-    const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForScreenType(ORKScreenMetricPSATKeyboardViewHeight, self.screenType);
+    const CGFloat ORKPSATKeyboardWidth = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewWidth, self.window);
+    const CGFloat ORKPSATKeyboardHeight = ORKGetMetricForWindow(ORKScreenMetricPSATKeyboardViewHeight, self.window);
     
     NSMutableArray *constraints = [NSMutableArray array];
 

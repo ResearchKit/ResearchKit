@@ -270,9 +270,8 @@
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
-    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
+    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToTappingLabelTop, window);
+    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
     CGFloat margin = ORKStandardHorizontalMarginForView(self);
     self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
     
@@ -282,6 +281,7 @@
     // On the iPhone, _progressView is positioned outside the bounds of this view, to be in-between the header and this view.
     // On the iPad, we want to stretch this out a bit so it feels less compressed.
     CGFloat progressViewOffset, topCaptionLabelOffset;
+    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     if (screenType == ORKScreenTypeiPad) {
         progressViewOffset = 0;
         topCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;

@@ -199,7 +199,7 @@
     [_pageViewController didMoveToParentViewController:self];
     
     self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
-                          (CGRect){{0,0},{viewBounds.size.width,ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, ORKScreenTypeiPhone4)}}];
+                          (CGRect){{0, 0}, {viewBounds.size.width, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
     _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
     _animationView.backgroundColor = [UIColor clearColor];
     _animationView.userInteractionEnabled = NO;

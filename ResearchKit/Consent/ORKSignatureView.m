@@ -134,8 +134,7 @@ static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistan
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    _heightConstraint.constant = ORKGetMetricForScreenType(ORKScreenMetricSignatureViewHeight, screenType);
+    _heightConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, window);
     _widthConstraint.constant = ORKWidthForSignatureView(window);
 }
 

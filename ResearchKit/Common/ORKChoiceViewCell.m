@@ -56,10 +56,8 @@ static const CGFloat LabelRightMargin = 44.0;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.window);
-    
-    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
-    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
+    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, self.window);
+    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, self.window);
     
     CGFloat cellLeftMargin = self.separatorInset.left;
 
@@ -154,10 +152,9 @@ static const CGFloat LabelRightMargin = 44.0;
 + (CGFloat)suggestedCellHeightForShortText:(NSString *)shortText LongText:(NSString *)longText inTableView:(UITableView *)tableView {
     CGFloat height = 0;
     
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(tableView.window);
-    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, screenType);
-    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, screenType);
-    CGFloat lastBaselineToBottom = ORKGetMetricForScreenType(ORKScreenMetricChoiceCellLastBaselineToBottom, screenType);
+    CGFloat firstBaselineOffsetFromTop = ORKGetMetricForWindow(ORKScreenMetricChoiceCellFirstBaselineOffsetFromTop, tableView.window);
+    CGFloat labelLastBaselineToLabelFirstBaseline = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLabelLastBaselineToLabelFirstBaseline, tableView.window);
+    CGFloat lastBaselineToBottom = ORKGetMetricForWindow(ORKScreenMetricChoiceCellLastBaselineToBottom, tableView.window);
     CGFloat cellLeftMargin =  ORKStandardLeftMarginForTableViewCell(tableView);
     CGFloat labelWidth =  tableView.bounds.size.width - (cellLeftMargin + LabelRightMargin);
    
@@ -201,7 +198,7 @@ static const CGFloat LabelRightMargin = 44.0;
     
     height += lastBaselineToBottom;
    
-    CGFloat minCellHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+    CGFloat minCellHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, tableView.window);
     
     return MAX(height, minCellHeight);
 }

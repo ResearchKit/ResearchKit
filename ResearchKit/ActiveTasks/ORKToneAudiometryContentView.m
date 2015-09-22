@@ -106,9 +106,8 @@
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
-    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
+    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToTappingLabelTop, window);
+    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
     static const CGFloat TapButtonBottomToBottom = 36.0;
     
     _topToProgressViewConstraint.constant = (HeaderBaselineToCaptionTop / 3) - AssumedHeaderBaselineToStepViewTop;

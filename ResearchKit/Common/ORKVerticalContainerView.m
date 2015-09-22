@@ -348,17 +348,15 @@ static const CGFloat AssumedStatusBarHeight = 20;
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
-    
-    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, verticalScreenType);
-    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMarginForIntroStep, verticalScreenType);
+    const CGFloat StepViewBottomToContinueTop = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMargin, window);
+    const CGFloat StepViewBottomToContinueTopForIntroStep = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMarginForIntroStep, window);
     
     {
         BOOL hasIllustration = (_imageView.image != nil);
         _headerView.hasContentAbove = hasIllustration;
 
-        const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, verticalScreenType);
-        const CGFloat IllustrationTopMargin = ORKGetMetricForScreenType(ORKScreenMetricTopToIllustration, verticalScreenType);
+        const CGFloat IllustrationHeight = ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, window);
+        const CGFloat IllustrationTopMargin = ORKGetMetricForWindow(ORKScreenMetricTopToIllustration, window);
         
         _illustrationHeightConstraint.constant = (_imageView.image ? IllustrationHeight : 0);
         _topToIllustrationConstraint.constant = (_imageView.image ?IllustrationTopMargin : 0);

@@ -435,8 +435,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.view.window);
-        _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+        _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
         _headerView = _tableContainer.stepHeaderView;

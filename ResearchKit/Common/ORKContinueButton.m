@@ -65,10 +65,9 @@ static const CGFloat ContinueButtonTouchMargin = 10;
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType verticalScreenType = ORKGetVerticalScreenTypeForWindow(window);
     CGFloat height = (self.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ?
-        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightCompact, verticalScreenType) :
-        ORKGetMetricForScreenType(ORKScreenMetricContinueButtonHeightRegular, verticalScreenType);
+        ORKGetMetricForWindow(ORKScreenMetricContinueButtonHeightCompact, window) :
+        ORKGetMetricForWindow(ORKScreenMetricContinueButtonHeightRegular, window);
     _heightConstraint.constant = height;
     
     _widthConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricContinueButtonWidth, self.window);

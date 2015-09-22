@@ -140,9 +140,8 @@
 }
 
 - (void)updateConstraintConstantsForWindow:(UIWindow *)window {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    const CGFloat CaptionBaselineToTimerTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToFitnessTimerTop, screenType);
-    const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
+    const CGFloat CaptionBaselineToTimerTop = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToFitnessTimerTop, window);
+    const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
     _topConstraint.constant = (CaptionBaselineToTimerTop - CaptionBaselineToStepViewTop);
 }
 

@@ -159,15 +159,13 @@
     static const CGFloat AssumedNavBarHeight = 44;
     static const CGFloat AssumedStatusBarHeight = 20;
     
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    
-    const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForScreenType(ORKScreenMetricIllustrationToCaptionBaseline, screenType);
-    const CGFloat TopToCaptionBaseline = (ORKGetMetricForScreenType(ORKScreenMetricTopToCaptionBaseline, screenType) - AssumedStatusBarHeight - AssumedNavBarHeight);
-    const CGFloat CaptionBaselineToInstructionBaseline_WithInstruction = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToInstructionBaseline, screenType);
+    const CGFloat IllustrationToCaptionBaseline = ORKGetMetricForWindow(ORKScreenMetricIllustrationToCaptionBaseline, window);
+    const CGFloat TopToCaptionBaseline = (ORKGetMetricForWindow(ORKScreenMetricTopToCaptionBaseline, window) - AssumedStatusBarHeight - AssumedNavBarHeight);
+    const CGFloat CaptionBaselineToInstructionBaseline_WithInstruction = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToInstructionBaseline, window);
     const CGFloat CaptionBaselineToInstructionBaseline_NoInstruction = MIN(26, CaptionBaselineToInstructionBaseline_WithInstruction); // Not part of spec
-    const CGFloat InstructionBaselineToLearnMoreBaseline = ORKGetMetricForScreenType(ORKScreenMetricInstructionBaselineToLearnMoreBaseline, screenType);
-    const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, screenType);
+    const CGFloat InstructionBaselineToLearnMoreBaseline = ORKGetMetricForWindow(ORKScreenMetricInstructionBaselineToLearnMoreBaseline, window);
+    const CGFloat LearnMoreBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
+    const CGFloat InstructionBaselineToStepViewTopWithNoLearnMore = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTopWithNoLearnMore, window);
     
     BOOL hasCaptionLabel = _captionLabel.text.length > 0;
     BOOL hasInstructionLabel = _instructionLabel.text.length > 0;

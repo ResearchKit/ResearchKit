@@ -119,7 +119,7 @@
                                                            toItem:nil
                                                         attribute:NSLayoutAttributeNotAnAttribute
                                                        multiplier:1.0
-                                                         constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4)]];
+                                                         constant:ORKGetMetricForWindow(ORKScreenMetricToolbarHeight, self.view.window)]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }

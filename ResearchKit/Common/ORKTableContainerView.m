@@ -254,8 +254,7 @@
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
     [super willMoveToWindow:newWindow];
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(newWindow);
-    _continueSkipContainerView.topMargin = ORKGetMetricForScreenType(ORKScreenMetricContinueButtonTopMargin, screenType);
+    _continueSkipContainerView.topMargin = ORKGetMetricForWindow(ORKScreenMetricContinueButtonTopMargin, newWindow);
     if (newWindow) {
         [self registerForKeyboardNotifications:YES];
     } else {
@@ -305,9 +304,8 @@
     }
     
     // If there's room, we'd like to leave space below so you can tap on the next cell
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.window);
     // Only go 3/4 of a cell extra; otherwise user might think they tapped the wrong cell
-    CGFloat desiredExtraSpace  = floor(ORKGetMetricForScreenType(ORKScreenMetricTextFieldCellHeight, screenType) * (3 / 4.0));
+    CGFloat desiredExtraSpace  = floor(ORKGetMetricForWindow(ORKScreenMetricTextFieldCellHeight, self.window) * (3 / 4.0));
     CGFloat visibleSpaceAboveDesiredRect = CGRectGetMinY(desiredRect) - offsetY;
     CGFloat visibleSpaceBelowDesiredRect = offsetY + visibleHeight - CGRectGetMaxY(desiredRect);
     if ((visibleSpaceAboveDesiredRect > 0) && (visibleSpaceBelowDesiredRect < desiredExtraSpace)) {
