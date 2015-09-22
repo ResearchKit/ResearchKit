@@ -46,7 +46,7 @@
 
   - **Result Predicates**: the predicate-building methods in `ORKResultPredicate` now use the new `ORKResultSelector` class for unequivocally identifying a *question step result* or a *form item result*.
 
-   This eliminates ambiguity when matching results with the same inner scope identifier. For example, a *form item result* can have the same identifier as a *question step result* or as another *form item result* in a different *form step*, and you can now match them separately.
+    This eliminates ambiguity when matching results with the same inner scope identifier. For example, a *form item result* can have the same identifier as a *question step result* or as another *form item result* in a different *form step*, and you can now match them separately.
 
 - **General stability and performance improvements**.
 
