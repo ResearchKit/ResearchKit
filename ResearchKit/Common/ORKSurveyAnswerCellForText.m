@@ -257,6 +257,19 @@
     return YES;
 }
 
+- (BOOL)isAnswerValid {
+    id answer = self.answer;
+    
+    if (answer == ORKNullAnswerValue()) {
+        return YES;
+    }
+    
+    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
+    ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+    return [textFormat isAnswerValidWithString:self.textField.text];
+}
+
+
 - (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
@@ -301,10 +314,22 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    BOOL isValid = [self isAnswerValid];
+    if (! isValid) {
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
+        return NO;
+    }
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    BOOL isValid = [self isAnswerValid];
+    if (! isValid) {
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
+        return NO;
+    }
+    
     [self.textField resignFirstResponder];
     return YES;
 }

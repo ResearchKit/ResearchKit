@@ -238,7 +238,10 @@ ORK_CLASS_AVAILABLE
                                                 calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
+
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
+
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -1159,6 +1162,33 @@ When the value of this property is `nil`, there is no minimum.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKTextAnswerFormat : ORKAnswerFormat
+
+/**
+ Returns an initialized text answer format using the regular expression.
+ 
+ This method is one of the designated initializers.
+ 
+ @param expression                The regular expression used to valide the text.
+ @param description               The description of the valid input presented to the user upon invalid input.
+ 
+ @return An initialized validated text answer format.
+ */
+- (instancetype)initWithValidationExpression:(nullable NSString *)expression
+                       validInputDescription:(nullable NSString *)description NS_DESIGNATED_INITIALIZER;
+
+/**
+ The regex used to validate users input.
+ 
+ The default value is nil. If set to nil, no validation will be performed.
+ */
+@property (readonly) NSString *regex;
+
+/**
+ The text presented to the user that describes what the valid input is.
+ 
+ The default value is nil.
+ */
+@property (readonly) NSString *validInputDescription;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.

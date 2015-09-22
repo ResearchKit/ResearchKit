@@ -340,8 +340,13 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKTextAnswerFormat *)textAnswerFormat {
     return [ORKTextAnswerFormat new];
 }
+
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength {
     return [[ORKTextAnswerFormat alloc] initWithMaximumLength:maximumLength];
+}
+
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description {
+    return [[ORKTextAnswerFormat alloc] initWithValidationExpression:expression validInputDescription:description];
 }
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat {
@@ -351,6 +356,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat {
     return [ORKTimeIntervalAnswerFormat new];
 }
+
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                          step:(NSInteger)step {
     return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:defaultInterval step:step];
@@ -1836,6 +1842,21 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _keyboardType = UIKeyboardTypeDefault;
         _multipleLines = YES;
         _emailAddress = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description {
+    self = [super init];
+    if (self) {
+        _regex = expression;
+        _validInputDescription = description;
+        _maximumLength = 0;
+        _autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        _autocorrectionType = UITextAutocorrectionTypeDefault;
+        _spellCheckingType = UITextSpellCheckingTypeDefault;
+        _keyboardType = UIKeyboardTypeDefault;
+        _multipleLines = YES;
     }
     return self;
 }
