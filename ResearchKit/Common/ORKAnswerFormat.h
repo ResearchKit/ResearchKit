@@ -251,6 +251,8 @@ ORK_CLASS_AVAILABLE
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
 
++ (ORKLocationAnswerFormat *)locationAnswerFormat;
+
 /// @name Validation
 
 /**
