@@ -42,8 +42,6 @@
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		246D15D81BA3438A009C99FC /* ORKEligibilitySelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */; settings = {ASSET_TAGS = (); }; };
 		246D15D91BA3438A009C99FC /* ORKEligibilitySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */; settings = {ASSET_TAGS = (); }; };
-		246D15DC1BA34952009C99FC /* ORKEligibilityButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15DA1BA34952009C99FC /* ORKEligibilityButton.h */; settings = {ASSET_TAGS = (); }; };
-		246D15DD1BA34952009C99FC /* ORKEligibilityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15DB1BA34952009C99FC /* ORKEligibilityButton.m */; settings = {ASSET_TAGS = (); }; };
 		246D15E21BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */; settings = {ASSET_TAGS = (); }; };
 		246D15E31BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15E11BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m */; settings = {ASSET_TAGS = (); }; };
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
@@ -493,8 +491,6 @@
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
 		246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKEligibilitySelectionView.h; sourceTree = "<group>"; };
 		246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKEligibilitySelectionView.m; sourceTree = "<group>"; };
-		246D15DA1BA34952009C99FC /* ORKEligibilityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKEligibilityButton.h; sourceTree = "<group>"; };
-		246D15DB1BA34952009C99FC /* ORKEligibilityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKEligibilityButton.m; sourceTree = "<group>"; };
 		246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSurveyAnswerCellForEligibility.h; sourceTree = "<group>"; };
 		246D15E11BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSurveyAnswerCellForEligibility.m; sourceTree = "<group>"; };
 		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
@@ -1326,8 +1322,6 @@
 				86C40BB51A8D7C5C00081FAC /* ORKSelectionTitleLabel.m */,
 				86C40BD11A8D7C5C00081FAC /* ORKTableViewCell.h */,
 				86C40BD21A8D7C5C00081FAC /* ORKTableViewCell.m */,
-				246D15DA1BA34952009C99FC /* ORKEligibilityButton.h */,
-				246D15DB1BA34952009C99FC /* ORKEligibilityButton.m */,
 			);
 			name = Skin;
 			sourceTree = "<group>";
@@ -2041,7 +2035,6 @@
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
 				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				86C40C661A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.h in Headers */,
-				246D15DC1BA34952009C99FC /* ORKEligibilityButton.h in Headers */,
 				25ECC0A31AFBDD2700F3D63B /* ORKReactionTimeStimulusView.h in Headers */,
 				86C40D701A8D7C5C00081FAC /* ORKRoundTappingButton.h in Headers */,
 				BCB6E6501B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h in Headers */,
@@ -2447,7 +2440,6 @@
 				86C40E2E1A8D7C5C00081FAC /* ORKVisualConsentStep.m in Sources */,
 				86C40CA61A8D7C5C00081FAC /* ORKLocationRecorder.m in Sources */,
 				86C40CB61A8D7C5C00081FAC /* ORKTouchRecorder.m in Sources */,
-				246D15DD1BA34952009C99FC /* ORKEligibilityButton.m in Sources */,
 				B12EA0161B0D73A500F9F554 /* ORKToneAudiometryPracticeStep.m in Sources */,
 				861D2AF11B8409D9008C4CD0 /* ORKTimedWalkContentView.m in Sources */,
 				86C40DC41A8D7C5C00081FAC /* ORKTapCountLabel.m in Sources */,

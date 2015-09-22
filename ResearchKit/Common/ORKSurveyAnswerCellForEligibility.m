@@ -46,7 +46,6 @@
     if (! _selectionView) {
         _selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
         _selectionView.delegate = self;
-        _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_selectionView];
     }
     

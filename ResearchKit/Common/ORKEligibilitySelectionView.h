@@ -31,10 +31,24 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
-#import "ORKEligibilityButton.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
+
+static const CGFloat EligibilityButtonHeight = 130;
+
+/**
+ Buttons used for `YES` or `NO` values for elgibility.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEligibilityButton : UIButton
+
++ (id)yesEligibilityButton;
+
++ (id)noEligibilityButton;
+
+@end
+
 
 @class ORKEligibilitySelectionView;
 

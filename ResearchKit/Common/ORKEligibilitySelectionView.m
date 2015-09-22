@@ -32,6 +32,46 @@
 #import "ORKEligibilitySelectionView.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKDefines_Private.h"
+
+
+@implementation ORKEligibilityButton
+
++ (id)yesEligibilityButton {
+    return [[ORKEligibilityButton alloc] initWithTitle:ORKLocalizedString(@"BOOL_YES", nil)];
+}
+
++ (id)noEligibilityButton {
+    return [[ORKEligibilityButton alloc] initWithTitle:ORKLocalizedString(@"BOOL_NO", nil)];
+}
+
+- (instancetype)initWithTitle:(NSString *)title {
+    self = [super init];
+    if (self) {
+        [self setTitle:title forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self setTitleColor:self.tintColor forState:UIControlStateSelected];
+        self.titleLabel.font = [ORKEligibilityButton defaultFont];
+    }
+    return self;
+}
+
+- (CGSize)intrinsicContentSize {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    return CGSizeMake(screenBounds.size.width/2 , EligibilityButtonHeight);
+}
+
++ (UIFont *)defaultFont {
+    return [UIFont systemFontOfSize:50.0];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    [self setTitleColor:self.tintColor forState:UIControlStateSelected];
+    [self setNeedsDisplay];
+}
+
+@end
 
 
 @implementation ORKEligibilitySelectionView {
