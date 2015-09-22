@@ -280,18 +280,19 @@
     
     // On the iPhone, _progressView is positioned outside the bounds of this view, to be in-between the header and this view.
     // On the iPad, we want to stretch this out a bit so it feels less compressed.
-    CGFloat progressViewOffset, topCaptionLabelOffset;
+    CGFloat topToProgressViewOffset = 0.0;
+    CGFloat topToCaptionLabelOffset = 0.0;
     ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
     if (screenType == ORKScreenTypeiPad) {
-        progressViewOffset = 0;
-        topCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
+        topToProgressViewOffset = 0;
+        topToCaptionLabelOffset = AssumedHeaderBaselineToStepViewTop;
     } else {
-        progressViewOffset = (HeaderBaselineToCaptionTop / 3) - AssumedHeaderBaselineToStepViewTop;
-        topCaptionLabelOffset = HeaderBaselineToCaptionTop - AssumedHeaderBaselineToStepViewTop;
+        topToProgressViewOffset = (HeaderBaselineToCaptionTop / 3) - AssumedHeaderBaselineToStepViewTop;
+        topToCaptionLabelOffset = HeaderBaselineToCaptionTop - AssumedHeaderBaselineToStepViewTop;
     }
     
-    _topToProgressViewConstraint.constant = progressViewOffset;
-    _topToCaptionLabelConstraint.constant = topCaptionLabelOffset;
+    _topToProgressViewConstraint.constant = topToProgressViewOffset;
+    _topToCaptionLabelConstraint.constant = topToCaptionLabelOffset;
     _captionLabelToTapCountLabelConstraint.constant = CaptionBaselineToTapCountBaseline;
     _tapButtonToBottomConstraint.constant = TapButtonBottomToBottom;
 }
