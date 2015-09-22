@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Brandon McQuilkin, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,24 +28,8 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ORKSurveyAnswerCell.h"
 
-#import <ResearchKit/ResearchKit.h>
-
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKQuestionStep ()
-
-- (BOOL)isFormatImmediateNavigation;
-- (BOOL)isFormatChoiceWithImageOptions;
-- (BOOL)isFormatFitsChoiceCells;
-- (BOOL)isFormatTextfield;
-- (BOOL)isFormatLocation;
-
-- (BOOL)formatRequiresTableView;
-
-- (nullable ORKAnswerFormat *)impliedAnswerFormat;
+@interface ORKSurveyAnswerCellForLocation : ORKSurveyAnswerCell
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -166,4 +166,8 @@
     return [self isFormatFitsChoiceCells];
 }
 
+- (BOOL)isFormatLocation {
+    return [[self impliedAnswerFormat] isKindOfClass:[ORKLocationAnswerFormat class]];
+}
+
 @end

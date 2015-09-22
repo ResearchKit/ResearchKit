@@ -1,5 +1,8 @@
 /*
- Copyright (c) 2015, Apple Inc. All rights reserved.
+ Copyright (c) 2015, Dan Lange, Quintiles Inc.
+ Copyright (c) 2015, Scott Morgan, Quintiles Inc.
+ Copyright (c) 2015, Brandon McQuilkin, Quintiles Inc.
+ Copyright (c) 2015, Eric Rolf, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -28,24 +31,40 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <UIKit/UIKit.h>
+@class MKMapView;
 
-#import <ResearchKit/ResearchKit.h>
+@class ORKLocationSelectionView;
 
+@protocol ORKLocationSelectionViewDelegate <NSObject>
 
-NS_ASSUME_NONNULL_BEGIN
+- (void)selectionViewSelectionDidChange:(nonnull ORKLocationSelectionView *)view;
 
-@interface ORKQuestionStep ()
+- (void)selectionViewDidBeginEditing:(nonnull ORKLocationSelectionView *)view;
 
-- (BOOL)isFormatImmediateNavigation;
-- (BOOL)isFormatChoiceWithImageOptions;
-- (BOOL)isFormatFitsChoiceCells;
-- (BOOL)isFormatTextfield;
-- (BOOL)isFormatLocation;
+- (void)selectionViewDidEndEditing:(nonnull ORKLocationSelectionView *)view;
 
-- (BOOL)formatRequiresTableView;
+- (void)selectionViewNeedsResize:(nonnull ORKLocationSelectionView *)view;
 
-- (nullable ORKAnswerFormat *)impliedAnswerFormat;
+- (void)selectionViewError:(nonnull NSError *)error;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface ORKLocationSelectionView : UIView
+
+@property (nonatomic, weak, nullable) id<ORKLocationSelectionViewDelegate> delegate;
+
+@property (nonatomic, strong, nullable) id answer;
+
+@property (nonatomic, strong, nullable) MKMapView *mapView;
+
+- (void)setPlaceholderText:(nullable NSString *)text;
+
+- (void)setTextColor:(nonnull UIColor *)color;
+
+- (void)hideMapViewAnimated:(BOOL)animated;
+
+- (void)showMapViewAnimated:(BOOL)animated;
+
+@end
+

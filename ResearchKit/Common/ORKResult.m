@@ -38,6 +38,7 @@
 #include <net/if_dl.h>
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 #import "ORKRecorder.h"
 #import "ORKStep.h"
 #import "ORKHelpers.h"
@@ -1665,6 +1666,65 @@
 
 - (ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier {
     return (ORKStepResult *)[self resultForIdentifier:stepIdentifier];
+}
+
+@end
+
+@implementation ORKLocationQuestionResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, locationAnswer);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, NSValue);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            //ORKEqualObjects(_locationAnswer, castObject.locationAnswer)) ;
+            _locationAnswer.MKCoordinateValue.latitude == castObject.locationAnswer.MKCoordinateValue.latitude &&
+            _locationAnswer.MKCoordinateValue.longitude == castObject.locationAnswer.MKCoordinateValue.longitude);
+}
+
+- (NSUInteger)hash {
+    return [super hash];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKLocationQuestionResult *result = [super copyWithZone:zone];
+    result->_locationAnswer = [self.locationAnswer copyWithZone:zone];
+    return result;
+}
+
++ (Class)answerClass {
+    return [NSValue class];
+}
+
+- (void)setAnswer:(id)answer {
+    if ([answer isKindOfClass:[NSArray class]]) {
+        // Because ORKLocationAnswerFormat has ORKChoiceAnswerFormat as its implied format.
+        NSAssert([answer count] <= 1, @"Should be no more than one answer");
+        answer = [answer firstObject];
+    }
+    answer = [self validateAnswer:answer];
+    self.locationAnswer = answer;
+}
+
+- (id)answer {
+    return self.locationAnswer;
 }
 
 @end

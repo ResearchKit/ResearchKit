@@ -74,6 +74,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TimeOfDayQuestion
     case ValuePickerChoiceQuestion
     case ImageCapture
+    case LocationQuestion
     
     case Consent
     
@@ -120,6 +121,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TimeOfDayQuestion,
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
+                    .LocationQuestion,
                 ]),
             TaskListRowSection(title: "Consent", rows:
                 [
@@ -185,6 +187,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
+        
+        case .LocationQuestion:
+            return NSLocalizedString("Location Question", comment: "")
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
@@ -241,6 +246,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case FormStep
         case FormItem01
         case FormItem02
+        case FormItem03
 
         // Survey task specific identifiers.
         case SurveyTask
@@ -301,6 +307,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Image capture task specific identifiers.
         case ImageCaptureTask
         case ImageCaptureStep
+        
+        // Task with a location entry.
+        case LocationQuestionTask
+        case LocationQuestionStep
         
         // Consent task specific identifiers.
         case ConsentTask
@@ -370,6 +380,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ImageCapture:
             return imageCaptureTask
             
+        case .LocationQuestion:
+            return locationQuestionTask
+            
         case .Consent:
             return consentTask
             
@@ -426,9 +439,16 @@ enum TaskListRow: Int, CustomStringConvertible {
         let formItem02 = ORKFormItem(identifier: String(Identifier.FormItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
         formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
         
+        // An third field for selecting a location.
+        let formItem03Text = NSLocalizedString("Field 03", comment: "")
+        let formItem03 = ORKFormItem(identifier: String(Identifier.FormItem03), text: formItem03Text, answerFormat: ORKLocationAnswerFormat())
+        formItem03.placeholder = NSLocalizedString("Your placeholder here", comment: "")
+
+        
         step.formItems = [
             formItem01,
-            formItem02
+            formItem02,
+            formItem03
         ]
         
         return ORKOrderedTask(identifier: String(Identifier.FormTask), steps: [step])
@@ -747,6 +767,20 @@ enum TaskListRow: Int, CustomStringConvertible {
             instructionStep,
             imageCaptureStep
             ])
+    }
+    
+    /// This task presents just a single location question.
+    private var locationQuestionTask: ORKTask {
+        let answerFormat = ORKLocationAnswerFormat()
+        
+        // We attach an answer format to a question step to specify what controls the user sees.
+        let questionStep = ORKQuestionStep(identifier: String(Identifier.LocationQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        // The detail text is shown in a small font below the title.
+        questionStep.text = exampleDetailText
+        questionStep.placeholder = NSLocalizedString("Address", comment: "");
+        
+        return ORKOrderedTask(identifier: String(Identifier.LocationQuestionTask), steps: [questionStep])
     }
     
     /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.

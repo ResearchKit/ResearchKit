@@ -44,7 +44,9 @@
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
+#import "ORKLocationSelectionView.h"
 
+#import <MapKit/MapKit.h>
 
 static const CGFloat kVMargin = 10.0;
 static const CGFloat kHMargin = 15.0;
@@ -208,6 +210,10 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
     [self.delegate formItemCell:self invalidInputAlertWithMessage:text];
+}
+
+- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self.delegate formItemCell:self showErrorAlertWithTitle:title message:message];
 }
 
 @end
@@ -995,6 +1001,174 @@ static const CGFloat kHMargin = 15.0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;
+}
+
+@end
+
+#pragma mark - ORKFormItemLocationCell
+
+@interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
+
+@property (nonatomic, assign) BOOL editingHighlight;
+@property (nonatomic, strong) NSString *placeholder;
+
+@end
+
+@implementation ORKFormItemLocationCell {
+    ORKLocationSelectionView *_selectionView;
+}
+
+- (void)cellInit {
+    [super cellInit];
+    
+    _selectionView = [[ORKLocationSelectionView alloc] init];
+    _selectionView.delegate = self;
+    
+    _selectionView.mapView.layer.cornerRadius = 3;
+    _selectionView.mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
+    _selectionView.mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
+    
+    if (_placeholder != nil) {
+        [_selectionView setPlaceholderText:_placeholder];
+    }
+    
+    [self applyAnswerFormat];
+    [self answerDidChange];
+    
+    [self.contentView addSubview:_selectionView];
+    
+    {
+        NSDictionary *dictionary = @{@"_selectionView":_selectionView};
+        ORKEnableAutoLayoutForViews([dictionary allValues]);
+        NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
+        
+        [self.contentView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[_selectionView]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+        
+        [self.contentView addConstraints:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[_selectionView]-vMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    }
+}
+
+- (void)dealloc {
+    _selectionView.delegate = nil;
+}
+
+- (void)applyAnswerFormat {
+    
+}
+
+- (void)setFormItem:(ORKFormItem *)formItem {
+    [super setFormItem:formItem];
+    
+    if (_selectionView) {
+        [_selectionView setPlaceholderText:formItem.placeholder];
+    } else {
+        _placeholder = formItem.placeholder;
+    }
+    
+    [self applyAnswerFormat];
+}
+
+- (void)answerDidChange {
+    id answer = self.answer;
+    if (answer == ORKNullAnswerValue()) {
+        answer = nil;
+    }
+    _selectionView.answer = (NSValue *)answer;
+    [_selectionView setTextColor:[UIColor blackColor]];
+}
+
+- (void)setEditingHighlight:(BOOL)editingHighlight {
+    _editingHighlight = editingHighlight;
+    [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor blackColor])];
+}
+
+- (void)selectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = YES;
+    [_selectionView showMapViewAnimated:YES];
+    [self.delegate formItemCellDidBecomeFirstResponder:self];
+}
+
+- (void)selectionViewDidEndEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = NO;
+    [_selectionView hideMapViewAnimated:YES];
+    [self.delegate formItemCellDidResignFirstResponder:self];
+}
+
+- (void)selectionViewSelectionDidChange:(ORKLocationSelectionView *)view {
+    [self inputValueDidChange];
+}
+
+- (void)selectionViewNeedsResize:(ORKLocationSelectionView *)view {
+    UITableView *tableView = [self parentTableView];
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
+    
+    CGRect convertedVisibleRect = [tableView convertRect:view.bounds fromView:view];
+    [tableView scrollRectToVisible:convertedVisibleRect animated:YES];
+}
+
+- (void)selectionViewError:(NSError *)error {
+    [self showErrorAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
+}
+
+- (void)inputValueDidChange {
+    [self ork_setAnswer:((_selectionView.answer != nil) ? _selectionView.answer : ORKNullAnswerValue())];
+    [super inputValueDidChange];
+}
+
+- (BOOL)becomeFirstResponder {
+    return [_selectionView becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    BOOL resign = [super resignFirstResponder];
+    resign = [_selectionView resignFirstResponder] || resign;
+    return resign;
+}
+
+- (BOOL)isAnswerValid {
+    id answer = _selectionView.answer;
+    
+    if (answer == ORKNullAnswerValue()) {
+        return YES;
+    }
+    
+    ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
+    ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
+    
+    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
+    
+    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
+    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
+    
+    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+    
+    return [locationFormat isAnswerValidWithString:string];
+}
+
+- (BOOL)shouldContinue {
+    BOOL isValid = [self isAnswerValid];
+    
+    if (! isValid) {
+        id answer = _selectionView.answer;
+        CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
+        
+        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
+        NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
+        
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:[NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]]]];
+    }
+    
+    return isValid;
 }
 
 @end

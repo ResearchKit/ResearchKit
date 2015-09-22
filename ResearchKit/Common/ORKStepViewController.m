@@ -345,6 +345,35 @@
     }];
 }
 
+- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if (![title length] && ![message length]) {
+        // No alert if the value is empty
+        return;
+    }
+    if (_dismissing || ![self isViewLoaded] || ! [self.view window]) {
+        // No alert if not in view chain.
+        return;
+    }
+    
+    if (_presentingAlert) {
+        return;
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+                                              style:UIAlertActionStyleDefault
+                                            handler:nil]];
+    
+    _presentingAlert = YES;
+    [self presentViewController:alert animated:YES completion:^{
+        _presentingAlert = NO;
+    }];
+}
+
+
 #pragma mark - UIStateRestoring
 
 static NSString *const _ORKStepIdentifierRestoreKey = @"stepIdentifier";

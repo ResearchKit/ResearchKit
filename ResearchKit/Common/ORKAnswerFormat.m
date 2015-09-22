@@ -64,6 +64,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
+            SQT_CASE(Location);
     }
 #undef SQT_CASE
 }
@@ -354,6 +355,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                          step:(NSInteger)step {
     return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:defaultInterval step:step];
+}
+
++ (ORKLocationAnswerFormat *)locationAnswerFormat {
+    return [ORKLocationAnswerFormat new];
 }
 
 - (void)validateParameters {
@@ -2055,5 +2060,99 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             (_defaultInterval == castObject.defaultInterval) &&
             (_step == castObject.step));
 }
+
+@end
+
+#pragma mark - ORKLocationAnswerFormat
+
+@implementation ORKLocationAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKLocationQuestionResult class];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+}
+
+- (BOOL)isAnswerValidWithString:(nullable NSString *)text {
+    BOOL isValid = [super isAnswerValidWithString:text];
+    
+    NSArray *components = [text componentsSeparatedByString:@", "];
+    if (components.count != 2) {
+        isValid = false;
+    } else {
+        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
+        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
+        
+        if (latitude.doubleValue < -180.0 || latitude.doubleValue > 180.0) {
+            isValid = false;
+        } else if (longitude.doubleValue < -180.0 || longitude.doubleValue > 180.0) {
+            isValid = false;
+        }
+    }
+    
+    return isValid;
+}
+
+- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
+    if (![text length]) {
+        return nil;
+    }
+    NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
+    if (!num) {
+        return nil;
+    }
+    NSString *string = nil;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    NSArray *components = [text componentsSeparatedByString:@", "];
+    if (components.count != 2) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
+    } else {
+        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
+        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
+        
+        if (latitude.doubleValue < -180.0) {
+            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM", nil), latitude];
+        } else if (latitude.doubleValue > 180.0) {
+            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM", nil), latitude];
+        } else if (longitude.doubleValue < -180.0) {
+            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM", nil), latitude];
+        } else if (longitude.doubleValue > 180.0) {
+            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM", nil), latitude];
+        }
+    }
+    
+    return string;
+}
+
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeLocation;
+}
+
 
 @end
