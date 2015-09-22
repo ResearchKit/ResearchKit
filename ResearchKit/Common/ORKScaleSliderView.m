@@ -388,6 +388,14 @@
                                                                  attribute:NSLayoutAttributeCenterY
                                                                 multiplier:1.0
                                                                   constant:0]];
+                
+                if ([_formatProvider shouldHideValueLabel]) {
+                    [self addConstraints:
+                     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                             options:0
+                                                             metrics:nil
+                                                               views:views]];
+                }
             }
             
         } else {
@@ -423,6 +431,14 @@
                                                      options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
                                                      metrics:@{@"kMargin": @(kMargin)}
                                                        views:views]];
+            
+            if ([_formatProvider shouldHideValueLabel]) {
+                [self addConstraints:
+                 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                         options:0
+                                                         metrics:nil
+                                                           views:views]];
+            }
         }
     }
     return self;

@@ -398,6 +398,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ A Boolean value indicating whether the value label should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+
 @end
 
 
@@ -538,6 +543,11 @@ ORK_CLASS_AVAILABLE
  */
 @property (strong, nullable) UIImage *minimumImage;
 
+/**
+ A Boolean value indicating whether the value label should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+
 @end
 
 
@@ -608,6 +618,11 @@ ORK_CLASS_AVAILABLE
  A Boolean value indicating whether the scale is oriented vertically. (read-only)
  */
 @property (readonly, getter=isVertical) BOOL vertical;
+
+/**
+ A Boolean value indicating whether the value label should be hidden. (read-only)
+ */
+@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
 
 @end
 
