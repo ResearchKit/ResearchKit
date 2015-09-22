@@ -1884,42 +1884,31 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValid:(id)answer {
-    BOOL isValid = NO;
     if ([answer isKindOfClass:[NSString class]]) {
         return [self isAnswerValidWithString:(NSString *)answer];
     }
-    return isValid;
+    return NO;
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    if ([text length] > 0) {
-        return ([self isTextLengthValidWithString:text] && [self isEmailAddressValidWithString:text]);
+    if (text) {
+        BOOL isValid = NO;
+        if (self.regex) {
+            NSString *regExPattern = self.regex;
+            NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+            NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
+            isValid = (regExMatches != 0);
+        } else {
+            isValid = YES;
+        }
+        return isValid;
+    } else {
+        return YES;
     }
-    
-    return YES;
-}
-
-- (BOOL)isTextLengthValidWithString:(NSString *)text {
-    return (_maximumLength == 0 || [text length] <= _maximumLength);
-}
-
-- (BOOL)isEmailAddressValidWithString:(NSString *)text {
-    if (self.isEmailAddress) {
-        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kEmailValidationRegex];
-        return [emailValidationTest evaluateWithObject:text];
-    }
-    
-    return YES;
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    NSString *string = nil;
-    if (! [self isTextLengthValidWithString:text]) {
-        string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
-    } else if (! [self isEmailAddressValidWithString:text]) {
-        string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
-    }
-    return string;
+    return _validInputDescription;
 }
 
 #pragma mark NSSecureCoding
