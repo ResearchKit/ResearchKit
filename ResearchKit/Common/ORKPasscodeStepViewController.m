@@ -99,13 +99,13 @@
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
             NSError *error;
-            NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:kPasscodeKey error:&error];
+            NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
             
             if (error) {
                 @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
             }
             
-            BOOL touchIdIsEnabled = [dictionary[kKeychainDictionaryTouchIdKey] boolValue];
+            BOOL touchIdIsEnabled = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
             if (touchIdIsEnabled) {
                 [self promptTouchId];
             }
@@ -343,11 +343,11 @@
 
 - (void)savePasscodeToKeychain {
     NSDictionary *dictionary = @{
-                                 kKeychainDictionaryPasscodeKey : [_passcode copy],
-                                 kKeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
+                                 KeychainDictionaryPasscodeKey : [_passcode copy],
+                                 KeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
                                  };
     NSError *error;
-    _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:kPasscodeKey error:&error];
+    _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
     
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
@@ -356,7 +356,7 @@
 
 - (void)removePasscodeFromKeychain {
     NSError *error;
-    [ORKKeychainWrapper removeObjectForKey:kPasscodeKey error:&error];
+    [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
     
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
@@ -365,13 +365,13 @@
 
 - (BOOL)passcodeMatchesKeychain {
     NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:kPasscodeKey error:&error];
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
     
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
     }
     
-    NSString *storedPasscode = dictionary[kKeychainDictionaryPasscodeKey];
+    NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
     return [storedPasscode isEqualToString:_passcode];
 }
 

@@ -35,8 +35,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const kPasscodeKey = @"ORKPasscode";
-
 /**
  The passcode delegate protocol declares methods which forward the success or failure of passcode modification
  or authentication.

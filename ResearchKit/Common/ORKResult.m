@@ -93,12 +93,6 @@
     }
     
     __typeof(self) castObject = object;
-    
-    NSLog(@"***** %d", ORKEqualObjects(self.identifier, castObject.identifier));
-    NSLog(@"***** %d, %@, %@", ORKEqualObjects(self.startDate, castObject.startDate) , self.startDate, castObject.startDate);
-    NSLog(@"***** %d, %@, %@", ORKEqualObjects(self.startDate, castObject.startDate), self.endDate, castObject.endDate);
-    NSLog(@"***** %d", ORKEqualObjects(self.userInfo, castObject.userInfo));
-
     return (ORKEqualObjects(self.identifier, castObject.identifier)
             && ORKEqualObjects(self.startDate, castObject.startDate)
             && ORKEqualObjects(self.endDate, castObject.endDate)
@@ -187,11 +181,12 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     ORK_ENCODE_BOOL(aCoder, passcodeSaved);
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_BOOL(aDecoder, passcodeSaved);
     }
@@ -199,11 +194,9 @@
 }
 
 - (BOOL)isEqual:(id)object {
-    NSLog(@"-----------------------------------------------");
     BOOL isParentSame = [super isEqual:object];
 
     __typeof(self) castObject = object;
-    NSLog(@"***** %d", self.isPasscodeSaved == castObject.isPasscodeSaved);
     return (isParentSame &&
             self.isPasscodeSaved == castObject.isPasscodeSaved);
 }

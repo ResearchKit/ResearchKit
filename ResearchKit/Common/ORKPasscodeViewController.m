@@ -67,7 +67,7 @@
                useTouchIdIfAvailable:(BOOL)useTouchId
                         passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
 
-    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:kPasscodeStepIdentifier];
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;
     step.text = text;
     

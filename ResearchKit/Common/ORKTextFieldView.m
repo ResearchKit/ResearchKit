@@ -34,6 +34,9 @@
 #import "ORKAccessibility.h"
 
 
+static NSString * const EmptyBullet = @"\u25CB";
+static NSString * const FilledBullet = @"\u25CF";
+
 @implementation ORKCaretOptionalTextField
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -65,19 +68,14 @@
 
 
 @implementation ORKPasscodeTextField {
-    NSString *_emptyBullet;
-    NSString *_filledBullet;
     NSInteger _numberOfDigits;
 }
 
 - (instancetype)initWithNumberOfDigits:(NSInteger)numberOfDigits {
     self = [super init];
     if (self) {
-        _emptyBullet = @"\u25CB";
-        _filledBullet = @"\u25CF";
         _numberOfDigits = numberOfDigits;
-        self.defaultTextAttributes = @{NSKernAttributeName : @(20.0f),
-                                                 NSFontAttributeName : [UIFont fontWithName:@"Courier" size:35.0]};
+        self.font = [UIFont fontWithName:@"Courier" size:35.0];
         self.textAlignment = NSTextAlignmentCenter;
         
         [self updateTextWithNumberOfFilledBullets:0];
@@ -109,17 +107,23 @@
     // Append the filled bullets.
     NSMutableString *text = [NSMutableString new];
     for (NSInteger i = 0; i < filledBullets; i++) {
-        [text appendString:_filledBullet];
+        [text appendString:FilledBullet];
     }
     
     // Append the empty bullets.
     NSInteger remainingDigits = _numberOfDigits - filledBullets;
     for (NSInteger i = 0; i < remainingDigits; i++) {
-        [text appendString:_emptyBullet];
+        [text appendString:EmptyBullet];
     }
     
+    // Apply spacing attribute to string.
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attributedText addAttribute:NSKernAttributeName
+                             value:@(20.0f)
+                             range:NSMakeRange(0, [text length]-1)];
+
     // Set the textfield's text property.
-    self.text = text;
+    self.attributedText = attributedText;
 }
 
 #pragma mark - Accessibility
@@ -129,7 +133,7 @@
 }
 
 - (NSString *)accessibilityValue {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:_filledBullet options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
     NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
     return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), numberOfFilledBullets, [self.text length]];
 }
