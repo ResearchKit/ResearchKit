@@ -46,8 +46,15 @@ NS_ASSUME_NONNULL_BEGIN
  When the task completes, the user's answers are encoded in the result hierarchy
  in the task view controller.
  
- Each question in the form is represented by an `ORKFormItem` object. The form
- can be broken into sections by using an `ORKFormItem` object that includes only a section title.
+ Each question in the form is represented by an `ORKFormItem` object. The form items have an
+ `optional` property that defaults to `YES`. All required questions need to be answered for the
+ Continue button to be enabled. If all the form items are optional, at least one question needs to
+ be answered for the Continue button to be enabled. You can allow the user to completely skip a
+ form step using the Skip button, even if it has required form items, by setting the form step
+ `optional` property to yes.
+ 
+ The form can be broken into sections by using an `ORKFormItem` object that includes only a section
+ title.
  
  The result of a form step is an `ORKStepResult` object that includes a child `ORKQuestionResult`
  object for each form item.
@@ -127,6 +134,14 @@ ORK_CLASS_AVAILABLE
  generated for the item.
  */
 @property (nonatomic, copy, readonly) NSString *identifier;
+
+/**
+ A Boolean value indicating whether the form item is optional.
+ 
+ The default value of this property is `YES`. When the value is `YES`, this form item doesn't need
+ to be answered for the Continue button of a step form to be enabled.
+ */
+@property (nonatomic, getter=isOptional) BOOL optional;
 
 /**
  A localized string that describes the form item.
