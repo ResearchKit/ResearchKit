@@ -125,7 +125,7 @@
     // Capture the image via the output
     dispatch_async(_sessionQueue, ^{
     	[_stillImageOutput captureStillImageAsynchronouslyFromConnection:[_stillImageOutput connectionWithMediaType:AVMediaTypeVideo] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-            [self queueCaptureImageFromData:imageDataSampleBuffer handler:handler];
+            [self queue_CaptureImageFromData:imageDataSampleBuffer handler:handler];
     	}];
     });
 }
@@ -135,7 +135,7 @@
     ((AVCaptureConnection *)_stillImageOutput.connections[0]).videoOrientation = videoOrientation;
 }
 
-- (void)queueCaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^)(BOOL))handler {
+- (void)queue_CaptureImageFromData:(CMSampleBufferRef)imageDataSampleBuffer handler:(void (^)(BOOL))handler {
     // Capture the JPEG image data, if available
     NSData *capturedImageData = !imageDataSampleBuffer ? nil : [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
     // If something was captured, stop the capture session
@@ -161,7 +161,7 @@
     
     // Setup the capture session
     dispatch_async(_sessionQueue, ^{
-        [self queueSetupCaptureSession];
+        [self queue_SetupCaptureSession];
     });
 }
 
@@ -187,7 +187,7 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)queueSetupCaptureSession {
+- (void)queue_SetupCaptureSession {
     // Create the session
     _captureSession = [[AVCaptureSession alloc] init];
     [_captureSession beginConfiguration];
