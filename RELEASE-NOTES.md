@@ -113,10 +113,16 @@
 
  An *Image Capture Step* has been added. The researcher can ask the participant to take pictures of relevant body parts. The researcher can provide a body part image template to facilitate the scale and orientation of the taken pictures.
 
-- **iPhone landscape support and iPad support**
+- **iPad support**
 
  *Contributed by [Ricardo Sánchez-Sáez](https://github.com/rsanchezsaez) and [Apple Inc](https://github.com/researchkit).*
 
- *iPhone landscape orientation support* and *iPad (all orientations) support* have been implemented.
+ *iPad support* for all orientations has been implemented.
+
+- **iPhone landscape support**
+
+  *Contributed by [Apple Inc.](https://github.com/researchkit) and [Ricardo Sánchez-Sáez](https://github.com/rsanchezsaez).*
+
+  *iPhone landscape orientation support* has been implemented.
 
 - **General stability and performance improvements**.
