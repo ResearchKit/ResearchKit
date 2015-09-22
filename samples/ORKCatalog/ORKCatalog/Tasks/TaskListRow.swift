@@ -305,11 +305,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Consent task specific identifiers.
         case ConsentTask
         case VisualConsentStep
-        case PasscodeConsentStep
         case ConsentSharingStep
         case ConsentReviewStep
         case ConsentDocumentParticipantSignature
         case ConsentDocumentInvestigatorSignature
+        case PasscodeConsentStep
 
         // Active tasks.
         case AudioTask
@@ -763,15 +763,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         let localizedLearnMoreHTMLContent = NSLocalizedString("Your sharing learn more content here.", comment: "")
         
         /*
-        If you want to protect the app using a passcode. It is reccomended to
-        ask user to create passcode as part of the consent process and use the
-        authentication and editing view controllers to interact with the passcode.
-        
-        The passcode is stored in the keychain.
-        */
-        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeConsentStep))
-        
-        /*
         If you want to share the data you collect with other researchers for
         use in other studies beyond this one, it is best practice to get
         explicit permission from the participant. Use the consent sharing step
@@ -795,11 +786,20 @@ enum TaskListRow: Int, CustomStringConvertible {
         reviewConsentStep.text = loremIpsumText
         reviewConsentStep.reasonForConsent = loremIpsumText
         
+        /*
+        If you want to protect the app using a passcode. It is reccomended to
+        ask user to create passcode as part of the consent process and use the
+        authentication and editing view controllers to interact with the passcode.
+        
+        The passcode is stored in the keychain.
+        */
+        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeConsentStep))
+        
         return ORKOrderedTask(identifier: String(Identifier.ConsentTask), steps: [
             visualConsentStep,
-            passcodeConsentStep,
             sharingConsentStep,
-            reviewConsentStep
+            reviewConsentStep,
+            passcodeConsentStep
             ])
     }
 

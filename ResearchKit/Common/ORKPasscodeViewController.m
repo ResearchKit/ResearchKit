@@ -38,34 +38,33 @@
 @implementation ORKPasscodeViewController
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
-                                      passcodeType:(ORKPasscodeType)passcodeType
-                                          delegate:(id<ORKPasscodeDelegate>)delegate
-                              useTouchIdIfAvaiable:(BOOL)useTouchId {
-
+                                          delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
-                                   passcodeType:passcodeType
                                        delegate:delegate
-                          useTouchIdIfAvailable:useTouchId
                                    passcodeFlow:ORKPasscodeFlowAuthenticate];
 }
 
 + (id)passcodeEditingViewControllerWithText:(NSString *)text
-                               passcodeType:(ORKPasscodeType)passcodeType
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                       useTouchIdIfAvaiable:(BOOL)useTouchId {
-    
+                                   delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
-                                   passcodeType:passcodeType
                                        delegate:delegate
-                          useTouchIdIfAvailable:useTouchId
                                    passcodeFlow:ORKPasscodeFlowEdit];
 }
 
 + (id)passcodeViewControllerWithText:(NSString *)text
-                        passcodeType:(ORKPasscodeType)passcodeType
                             delegate:(id<ORKPasscodeDelegate>)delegate
-               useTouchIdIfAvailable:(BOOL)useTouchId
                         passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
+    // Retrieve stored data from the dictionary.
+    NSError *error;
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
+    if (error) {
+        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+    }
+    
+    // Determine passcode type and touch Id enable based on stored data.
+    NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
+    BOOL useTouchId = dictionary[KeychainDictionaryTouchIdKey];
+    ORKPasscodeType passcodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
 
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;

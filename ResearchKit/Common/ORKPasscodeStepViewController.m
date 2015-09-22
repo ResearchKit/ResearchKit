@@ -276,10 +276,10 @@
         [self makePasscodeViewResignFirstResponder];
         
         NSString *localizedReason = ORKLocalizedString(@"PASSCODE_TOUCH_ID_MESSAGE", nil);
+        __weak typeof(self) weakSelf = self;
         [_touchContext evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
                       localizedReason:localizedReason
                                 reply:^(BOOL success, NSError *error) {
-            __weak typeof(self) weakSelf = self;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
                 typeof(self) strongSelf = weakSelf;
@@ -550,18 +550,21 @@
         // Show the user the last digit was entered before continuing.
         double delayInSeconds = 0.25;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        __weak typeof(self) weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            typeof(self) strongSelf = weakSelf;
+            
             switch (_passcodeFlow) {
                 case ORKPasscodeFlowCreate:
-                    [self passcodeFlowCreate];
+                    [strongSelf passcodeFlowCreate];
                     break;
                     
                 case ORKPasscodeFlowAuthenticate:
-                    [self passcodeFlowAuthenticate];
+                    [strongSelf passcodeFlowAuthenticate];
                     break;
                     
                 case ORKPasscodeFlowEdit:
-                    [self passcodeFlowEdit];
+                    [strongSelf passcodeFlowEdit];
                     break;
             }
         });

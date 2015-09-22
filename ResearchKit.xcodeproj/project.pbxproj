@@ -1040,8 +1040,6 @@
 		24A4DA091B8D0CC8009C797A /* Passcode Step */ = {
 			isa = PBXGroup;
 			children = (
-				2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */,
-				2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */,
 				24A4DA121B8D1115009C797A /* ORKPasscodeStep.h */,
 				24A4DA131B8D1115009C797A /* ORKPasscodeStep.m */,
 				241A2E861B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h */,
@@ -1053,6 +1051,17 @@
 				2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */,
 			);
 			name = "Passcode Step";
+			sourceTree = "<group>";
+		};
+		24B3535D1BB21137009ED6F8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2433C9E11B9A506F0052D375 /* ORKKeychainWrapper.h */,
+				2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */,
+				86C40B8C1A8D7C5C00081FAC /* ORKHelpers.h */,
+				86C40B8D1A8D7C5C00081FAC /* ORKHelpers.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		259E76FB1AFFAEAC0070F786 /* Charts */ = {
@@ -1239,6 +1248,7 @@
 				B12EFF3A1AB211CC00A80147 /* Container Views */,
 				B12EFF431AB2141A00A80147 /* PDF */,
 				B12EFF3D1AB2121000A80147 /* Definitions */,
+				24B3535D1BB21137009ED6F8 /* Utilities */,
 				B12EFF321AB2106F00A80147 /* UIKitCategories */,
 				B12EFF311AB2100400A80147 /* Skin */,
 				BC4194261AE8451F00073D6B /* Misc */,
@@ -1504,8 +1514,6 @@
 				86C40B7C1A8D7C5C00081FAC /* ORKDefines_Private.h */,
 				86C40B7D1A8D7C5C00081FAC /* ORKErrors.h */,
 				86C40B7E1A8D7C5C00081FAC /* ORKErrors.m */,
-				86C40B8C1A8D7C5C00081FAC /* ORKHelpers.h */,
-				86C40B8D1A8D7C5C00081FAC /* ORKHelpers.m */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";

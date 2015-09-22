@@ -2646,18 +2646,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  consent flow.
  */
 - (IBAction)authenticatePasscodeButtonTapped:(id)sender {
-    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
-                                                                                                           passcodeType:ORKPasscodeType4Digit
-                                                                                                               delegate:self
-                                                                                                   useTouchIdIfAvaiable:YES];
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                 passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                 delegate:self];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)editPasscodeButtonTapped:(id)sender {
     ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
-                                                                                                    passcodeType:ORKPasscodeType4Digit
-                                                                                                        delegate:self
-                                                                                            useTouchIdIfAvaiable:YES];
+                                                                                                        delegate:self];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 

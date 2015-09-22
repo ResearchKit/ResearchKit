@@ -79,14 +79,10 @@ ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
 
 + (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
-                                      passcodeType:(ORKPasscodeType)passcodeType
-                                          delegate:(id<ORKPasscodeDelegate>)delegate
-                              useTouchIdIfAvaiable:(BOOL)useTouchId;
+                                          delegate:(id<ORKPasscodeDelegate>)delegate;
 
 + (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
-                               passcodeType:(ORKPasscodeType)passcodeType
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                       useTouchIdIfAvaiable:(BOOL)useTouchId;
+                                   delegate:(id<ORKPasscodeDelegate>)delegate;
 
 @end
 
