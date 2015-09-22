@@ -1203,8 +1203,8 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
 
 + (ORKOrderedTask *)validatedSurveyTaskWithIdentifier:(NSString *)identifier
-                                  prebuiltSurveyType:(ORKValidatedSurveyType)validatedSurveyType
-                                             options:(ORKPredefinedTaskOption)options {
+                                  validatedSurveyType:(ORKValidatedSurveyType)validatedSurveyType
+                                              options:(ORKPredefinedTaskOption)options {
     ORKOrderedTask *surveyTask;
     switch (validatedSurveyType) {
         case ORKValidatedSurveyTypeStrokeImpactScale:
