@@ -71,7 +71,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     ORKTextChoiceAnswerFormat *answerFormat = [[ORKTextChoiceAnswerFormat alloc] initWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:answerChoices];
     
-    for (int questionID=0; questionID<8; questionID++) {
+    for (int questionID = 0; questionID < 8; questionID++) {
         ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:[NSString stringWithFormat:@"%d",questionID]];
             step.title = ORKLocalizedString(@"EPWORTH_INTRO_TITLE", nil);
         {
@@ -97,7 +97,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     if ([nextStep.identifier isEqualToString:@"FinalStep"]) {
         int epworthScore = 0;
-        for (int i=0;i<8;i++) {
+        for (int i = 0; i < 8; i++) {
             ORKStepResult *itemResult = (ORKStepResult *)result.results[i];
             if (itemResult.results.count > 0) {
                 if ([itemResult.results[0] isKindOfClass:[ORKChoiceQuestionResult class]]) {
