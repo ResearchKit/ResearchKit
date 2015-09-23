@@ -59,14 +59,14 @@ enum {
 // Color Conversion Constants (YUV to RGB) including adjustment from 16-235/16-240 (video range)
 
 // BT.601, which is the standard for SDTV.
-static const GLfloat kColorConversion601[] = {
+static const GLfloat ColorConversion601[] = {
     1.164,  1.164, 1.164,
       0.0, -0.392, 2.017,
     1.596, -0.813,   0.0,
 };
 
 // BT.709, which is the standard for HDTV.
-static const GLfloat kColorConversion709[] = {
+static const GLfloat ColorConversion709[] = {
     1.164,  1.164, 1.164,
       0.0, -0.213, 2.112,
     1.793, -0.533,   0.0,
@@ -131,7 +131,7 @@ const GLfloat DefaultPreferredRotation = 0;
 - (instancetype)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Use 2x scale factor on Retina displays.
-        self.contentScaleFactor = [[UIScreen mainScreen] scale];
+        self.contentScaleFactor = [UIScreen mainScreen].scale;
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -175,7 +175,7 @@ const GLfloat DefaultPreferredRotation = 0;
     [self updateTintColorUniform];
     glUniform1f(uniforms[UNIFORM_ROTATION_ANGLE], DefaultPreferredRotation);
     // Set the default conversion to BT.709, which is the standard for HDTV.
-    _preferredConversion = kColorConversion709;
+    _preferredConversion = ColorConversion709;
     [self updatePreferredConversionUniform];
     glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
     
@@ -372,9 +372,9 @@ const GLfloat DefaultPreferredRotation = 0;
         CFTypeRef colorAttachments = CVBufferGetAttachment(pixelBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
         
         if (colorAttachments == kCVImageBufferYCbCrMatrix_ITU_R_601_4) {
-            self.preferredConversion = kColorConversion601;
+            self.preferredConversion = ColorConversion601;
         } else {
-            self.preferredConversion = kColorConversion709;
+            self.preferredConversion = ColorConversion709;
         }
         
         /*

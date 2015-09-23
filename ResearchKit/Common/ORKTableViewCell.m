@@ -53,7 +53,7 @@
             UITableView *tableView = [[UITableView alloc] init];
             defaultSeparatorColor = [tableView separatorColor];
         });
-        if (! defaultSeparatorColor) {
+        if (!defaultSeparatorColor) {
             defaultSeparatorColor = [UIColor lightGrayColor];
         }
         
@@ -115,7 +115,7 @@
     
     CGFloat cellWidth = self.bounds.size.width;
     CGFloat cellHeight = self.bounds.size.height;
-    CGFloat separatorHeight = 1.0/[UIScreen mainScreen].scale;
+    CGFloat separatorHeight = 1.0 / [UIScreen mainScreen].scale;
     
     if (_showTopSeparator) {
         _topSeparator.backgroundColor = _orkSeparatorColor;

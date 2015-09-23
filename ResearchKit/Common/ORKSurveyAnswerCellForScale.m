@@ -66,13 +66,15 @@
         [self addSubview:_sliderView];
         
         self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSDictionary *views = NSDictionaryOfVariableBindings(_sliderView);
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
+        NSDictionary *views = @{ @"sliderView": _sliderView };
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
+                                                                     metrics:nil
+                                                                       views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
+                                                                     metrics:nil
+                                                                       views:views]];
     }
     
     [self answerDidChange];
@@ -82,7 +84,7 @@
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+        if (![self.answer isKindOfClass:[NSNumber class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
         }
         

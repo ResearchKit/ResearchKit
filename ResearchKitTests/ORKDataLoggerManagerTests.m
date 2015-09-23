@@ -92,7 +92,7 @@
     [_manager addJSONDataLoggerForLogName:@"test2"];
     [_manager addJSONDataLoggerForLogName:@"test3"];
     
-    XCTAssertEqual([[_manager logNames] count], 3);
+    XCTAssertEqual([_manager logNames].count, 3);
 }
 
 - (void)testPreservesParameters {

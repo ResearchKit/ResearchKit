@@ -75,8 +75,8 @@ static const CGFloat ImageVerticalPadding = 3.0;
     [_minImageView removeFromSuperview];
     _minImageView = nil;
     
-    [[_tickLayersByFactor allValues] makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    [[_tickLabelsByFactor allValues] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_tickLayersByFactor.allValues makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [_tickLabelsByFactor.allValues makeObjectsPerformSelector:@selector(removeFromSuperview)];
     _tickLayersByFactor = nil;
     _tickLabelsByFactor = nil;
     
@@ -88,7 +88,10 @@ static const CGFloat ImageVerticalPadding = 3.0;
         
         _maxImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.maximumValueImage];
         _maxImageView.contentMode = UIViewContentModeScaleAspectFit;
-        _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
+        _maxImageView.frame = CGRectMake(width - halfWidth,
+                                         -halfWidth / 2,
+                                         halfWidth,
+                                         halfWidth);
         [self addSubview:_maxImageView];
         
         _minImageView = [[UIImageView alloc] initWithImage:_parentGraphChartView.minimumValueImage];
@@ -155,13 +158,16 @@ static const CGFloat ImageVerticalPadding = 3.0;
     CGRect bounds = self.bounds;
     CGFloat width = bounds.size.width;
     CGFloat halfWidth = width / 2;
-    _maxImageView.frame = CGRectMake(width - halfWidth, -halfWidth/2, halfWidth, halfWidth);
+    _maxImageView.frame = CGRectMake(width - halfWidth,
+                                     -halfWidth / 2,
+                                     halfWidth,
+                                     halfWidth);
     _minImageView.frame = CGRectMake(width - halfWidth,
                                      CGRectGetMaxY(bounds) - halfWidth - ImageVerticalPadding,
                                      halfWidth,
                                      halfWidth);
     
-    for (NSNumber *factorNumber in [_tickLayersByFactor allKeys]) {
+    for (NSNumber *factorNumber in _tickLayersByFactor.allKeys) {
         CGFloat factor = factorNumber.floatValue;
         CALayer *tickLayer = _tickLayersByFactor[factorNumber];
         CGFloat tickYPosition = CGRectGetHeight(self.bounds) * (1 - factor);
@@ -178,7 +184,7 @@ static const CGFloat ImageVerticalPadding = 3.0;
 
 - (void)setTitleFont:(UIFont *)titleFont {
     _titleFont = titleFont;
-    for (UILabel *label in [_tickLabelsByFactor allValues]) {
+    for (UILabel *label in _tickLabelsByFactor.allValues) {
         label.font = _titleFont;
         [label sizeToFit];
     }
@@ -186,14 +192,14 @@ static const CGFloat ImageVerticalPadding = 3.0;
 
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
-    for (UILabel *label in [_tickLabelsByFactor allValues]) {
+    for (UILabel *label in _tickLabelsByFactor.allValues) {
         label.textColor = titleColor;
     }
 }
 
 - (void)setAxisColor:(UIColor *)axisColor {
     _axisColor = axisColor;
-    for (CALayer *tickLayer in [_tickLayersByFactor allValues]) {
+    for (CALayer *tickLayer in _tickLayersByFactor.allValues) {
         tickLayer.backgroundColor = _axisColor.CGColor;
     }
 }

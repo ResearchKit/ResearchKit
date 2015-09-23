@@ -66,22 +66,23 @@
     
     _isCompletionStep = [_instructionStep isKindOfClass:[ORKCompletionStep class]];
     
-    self.verticalCenteringEnabled = ! hasImage;
-    self.continueHugsContent = ! hasImage;
-    self.stepViewFillsAvailableSpace = (hasImage && ! _isCompletionStep);
+    self.verticalCenteringEnabled = !hasImage;
+    self.continueHugsContent = !hasImage;
+    self.stepViewFillsAvailableSpace = (hasImage && !_isCompletionStep);
     
     _instructionImageView.image = image;
     _instructionImageView.shouldApplyTint = instructionStep.shouldTintImages;
     CGSize imageSize = image.size;
     if (imageSize.width > 0 && imageSize.height > 0) {
-        [_instructionImageView removeConstraints:[_instructionImageView constraints]];
-        [_instructionImageView addConstraint:[NSLayoutConstraint constraintWithItem:_instructionImageView
-                                                                          attribute:NSLayoutAttributeHeight
-                                                                          relatedBy:NSLayoutRelationLessThanOrEqual
-                                                                             toItem:_instructionImageView
-                                                                          attribute:NSLayoutAttributeWidth
-                                                                         multiplier:imageSize.height/imageSize.width
-                                                                           constant:0]];
+        [NSLayoutConstraint deactivateConstraints:[_instructionImageView constraints]];
+        NSMutableArray *constraints = [NSMutableArray new];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_instructionImageView
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                               toItem:_instructionImageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:imageSize.height / imageSize.width
+                                                             constant:0.0]];
         
         _instructionImageHeightConstraint = [NSLayoutConstraint constraintWithItem:_instructionImageView
                                                                          attribute:NSLayoutAttributeHeight
@@ -89,9 +90,11 @@
                                                                             toItem:nil
                                                                          attribute:NSLayoutAttributeNotAnAttribute
                                                                         multiplier:1.0
-                                                                          constant:300];
+                                                                          constant:300.0];
         
-        [_instructionImageView addConstraint:_instructionImageHeightConstraint];
+        [constraints addObject:_instructionImageHeightConstraint];
+        [NSLayoutConstraint activateConstraints:constraints];
+        
         _instructionImageView.isAccessibilityElement = YES;
         _instructionImageView.accessibilityLabel = [NSString stringWithFormat:ORKLocalizedString(@"AX_IMAGE_ILLUSTRATION", nil), _instructionStep.title];
     } else {
@@ -103,14 +106,14 @@
     NSMutableAttributedString *attributedInstruction = [[NSMutableAttributedString alloc] init];
     NSString *detail = _instructionStep.detailText;
     NSString *text = _instructionStep.text;
-    detail = [detail length] ? detail : nil;
-    text = [text length] ? text : nil;
+    detail = detail.length ? detail : nil;
+    text = text.length ? text : nil;
     
     if (detail && text) {
         [attributedInstruction appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n", text] attributes:nil]];
 
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight*0.5];
+        [style setParagraphSpacingBefore:self.headerView.instructionLabel.font.lineHeight * 0.5];
         [style setAlignment:NSTextAlignmentCenter];
         
         NSAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:detail
@@ -130,16 +133,11 @@
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraintConstants {
-    [super updateConstraintConstants];
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    [super updateConstraintConstantsForWindow:window];
     
-    ORKScreenType screenType = self.verticalScreenType;
-    const CGFloat IllustrationHeight = ORKGetMetricForScreenType(ORKScreenMetricInstructionImageHeight, screenType);
-    
-    {
-        NSLayoutConstraint *constraint = _instructionImageHeightConstraint;
-        constraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
-    }
+    const CGFloat IllustrationHeight = ORKGetMetricForWindow(ORKScreenMetricInstructionImageHeight, window);
+    _instructionImageHeightConstraint.constant = (_instructionImageView.image ? IllustrationHeight : 0);
 }
 
 @end
