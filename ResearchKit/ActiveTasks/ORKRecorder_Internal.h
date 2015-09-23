@@ -36,11 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKDataLogger;
 
-@interface ORKRecorderConfiguration ()
-
-@end
-
-
 @interface ORKRecorder ()
 
 @property (nonatomic, strong, nullable) ORKStep *step;

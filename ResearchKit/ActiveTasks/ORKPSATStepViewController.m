@@ -107,7 +107,7 @@
     
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
     
-    ORKPSATResult *PSATResult = [[ORKPSATResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKPSATResult *PSATResult = [[ORKPSATResult alloc] initWithIdentifier:self.step.identifier];
     PSATResult.presentationMode = [self psatStep].presentationMode;
     PSATResult.interStimulusInterval = [self psatStep].interStimulusInterval;
     if ([self psatStep].presentationMode & ORKPSATPresentationModeVisual) {

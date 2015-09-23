@@ -290,12 +290,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        ];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [_collectionView reloadData];
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(self.view.bounds.size.width, 22.0);  // Table view header height
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.bounds.size.width / 2, 44.0);
+    CGFloat viewWidth = self.view.bounds.size.width;
+    NSUInteger numberOfColums = 2;
+    if (viewWidth >= 667.0) {
+        numberOfColums = 3;
+    }
+    CGFloat width = viewWidth / numberOfColums;
+    return CGSizeMake(width, 44.0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -2248,8 +2258,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         
         for (NSNumber *dimension in @[@(360), @(60)])
         {
-            CGSize size1 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].x, [dimension floatValue] * [ratio CGPointValue].y);
-            CGSize size2 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].y, [dimension floatValue] * [ratio CGPointValue].x);
+            CGSize size1 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.x, dimension.floatValue * ratio.CGPointValue.y);
+            CGSize size2 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.y, dimension.floatValue * ratio.CGPointValue.x);
             
             ORKImageChoice *option1 = [ORKImageChoice choiceWithNormalImage:[self imageWithColor:[UIColor redColor] size:size1 border:NO]
                                                               selectedImage:[self imageWithColor:[UIColor redColor] size:size1 border:YES]
@@ -2292,9 +2302,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [steps addObject:step];
         
         for (NSNumber *dimension in @[@(360), @(60), @(20)]) {
-            CGSize size1 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].x, [dimension floatValue] * [ratio CGPointValue].y);
-            CGSize size2 = CGSizeMake([dimension floatValue] * [ratio CGPointValue].y, [dimension floatValue] * [ratio CGPointValue].x);
-            
+            CGSize size1 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.x, dimension.floatValue * ratio.CGPointValue.y);
+            CGSize size2 = CGSizeMake(dimension.floatValue * ratio.CGPointValue.y, dimension.floatValue * ratio.CGPointValue.x);
+
             ORKImageChoice *option1 = [ORKImageChoice choiceWithNormalImage:[self imageWithColor:[UIColor redColor] size:size1 border:NO]
                                                               selectedImage:[self imageWithColor:[UIColor redColor] size:size1 border:YES]
                                                                        text:@"Red\nRed\nRed\nRed" value:@"red"];
@@ -2677,8 +2687,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
          enter a valid answer.
          */
         
-        ORKQuestionResult *qr = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
-        if (qr == nil || [(NSNumber *)qr.answer integerValue] < 18) {
+        ORKQuestionResult *questionResult = (ORKQuestionResult *)[[[taskViewController result] stepResultForStepIdentifier:@"itid_001"] firstResult];
+        if (questionResult == nil || [(NSNumber *)questionResult.answer integerValue] < 18) {
             UIAlertController *alertViewController =
             [UIAlertController alertControllerWithTitle:@"Warning"
                                                 message:@"You can't participate if you are under 18."
@@ -2726,14 +2736,20 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         
         // Have the custom view request the space it needs.
         // A little tricky because we need to let it size to fit if there's not enough space.
-        [customView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]" options:0 metrics:nil views:@{@"c":customView}];
+        customView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[c(>=160)]"
+                                                                               options:(NSLayoutFormatOptions)0
+                                                                               metrics:nil
+                                                                                 views:@{@"c":customView}];
         for (NSLayoutConstraint *constraint in verticalConstraints)
         {
             constraint.priority = UILayoutPriorityFittingSizeLevel;
         }
-        [customView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]" options:0 metrics:nil views:@{@"c":customView}]];
-        [customView addConstraints:verticalConstraints];
+        [NSLayoutConstraint activateConstraints:verticalConstraints];
+        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[c(>=280)]"
+                                                                                        options:(NSLayoutFormatOptions)0
+                                                                                        metrics:nil
+                                                                                          views:@{@"c":customView}]];
         
         [(ORKActiveStepViewController *)stepViewController setCustomView:customView];
         
@@ -2844,8 +2860,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         NSLog(@"--%@", sResult);
         for (ORKResult *result in sResult.results) {
             if ([result isKindOfClass:[ORKDateQuestionResult class]]) {
-                ORKDateQuestionResult *dqr = (ORKDateQuestionResult *)result;
-                NSLog(@"    %@:   %@  %@  %@", result.identifier, dqr.answer, dqr.timeZone, dqr.calendar);
+                ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
+                NSLog(@"    %@:   %@  %@  %@", result.identifier, dateQuestionResult.answer, dateQuestionResult.timeZone, dateQuestionResult.calendar);
             } else if ([result isKindOfClass:[ORKQuestionResult class]]) {
                 ORKQuestionResult *qr = (ORKQuestionResult *)result;
                 NSLog(@"    %@:   %@", result.identifier, qr.answer);
@@ -2877,16 +2893,16 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          and then generate a PDF From the document that includes the signature.
          */
         
-        ORKStep *lastStep = [[(ORKOrderedTask *)taskViewController.task steps] lastObject];
-        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:lastStep.identifier] firstResult];
+        ORKStep *lastStep = ((ORKOrderedTask *)taskViewController.task).steps.lastObject;
+        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[taskViewController.result stepResultForStepIdentifier:lastStep.identifier].firstResult;
         
         [signatureResult applyToDocument:_currentDocument];
         
         [_currentDocument makePDFWithCompletionHandler:^(NSData *pdfData, NSError *error) {
-            NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)[pdfData length], error);
+            NSLog(@"Created PDF of size %lu (error = %@)", (unsigned long)pdfData.length, error);
             
             if (! error) {
-                NSURL *documents = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]];
+                NSURL *documents = [NSURL fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject];
                 NSURL *outputUrl = [documents URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", taskViewController.taskRunUUID.UUIDString]];
                 
                 [pdfData writeToURL:outputUrl atomically:YES];

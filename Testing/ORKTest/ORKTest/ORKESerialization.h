@@ -35,10 +35,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-typedef __nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
-typedef __nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
-typedef __nullable id (^ORKESerializationObjectToJSONBlock)(id object);
-typedef __nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
+typedef _Nullable id (^ORKESerializationPropertyGetter)(NSDictionary *dict, NSString *property);
+typedef _Nullable id (^ORKESerializationInitBlock)(NSDictionary *dict, ORKESerializationPropertyGetter getter);
+typedef _Nullable id (^ORKESerializationObjectToJSONBlock)(id object);
+typedef _Nullable id (^ORKESerializationJSONToObjectBlock)(id jsonObject);
 
 
 @interface ORKESerializer : NSObject
