@@ -97,7 +97,7 @@
     
     NSTimeInterval value;
     if (answer != nil && answer != ORKNullAnswerValue()  && [answer isKindOfClass:[NSNumber class]]) {
-        value = [(NSNumber *)answer doubleValue];
+        value = ((NSNumber *)answer).doubleValue;
     } else {
         value = [_answerFormat pickerDefaultDuration];
     }
@@ -113,7 +113,7 @@
 }
 
 - (NSString *)selectedLabelText {
-    return  (_answer == nil || _answer == ORKNullAnswerValue())? nil : [ORKTimeIntervalLabelFormatter() stringFromTimeInterval: [self.answer floatValue]];
+    return  (_answer == nil || _answer == ORKNullAnswerValue()) ? nil : [ORKTimeIntervalLabelFormatter() stringFromTimeInterval:((NSNumber *)self.answer).floatValue];
 }
 
 - (void)pickerWillAppear {

@@ -225,7 +225,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if appending succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObjects:(NSArray *)objects error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)appendObjects:(NSArray *)objects error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Checks whether a file has been marked as uploaded.
@@ -251,7 +251,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if adding or removing the attribute succeeded; otherwise, `NO`.
  */
-- (BOOL)markFileUploaded:(BOOL)uploaded atURL:(NSURL *)url error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)markFileUploaded:(BOOL)uploaded atURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Removes files if they are marked uploaded.
@@ -265,7 +265,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if removing the files succeeded; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs withError:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Removes all files managed by this logger (files that have the `logName` prefix).
@@ -274,7 +274,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if removing the files succeeded.; otherwise, `NO`.
  */
-- (BOOL)removeAllFilesWithError:(NSError *__nullable __autoreleasing *)error;
+- (BOOL)removeAllFilesWithError:(NSError *_Nullable __autoreleasing *)error;
 
 @end
 
@@ -320,7 +320,7 @@ ORK_CLASS_AVAILABLE
  
  @return  `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)beginLogWithFileHandle:(NSFileHandle *)fileHandle error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)beginLogWithFileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Appends the specified object to the log file.
@@ -331,7 +331,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Appends the specified objects to the log file.
@@ -342,7 +342,7 @@ ORK_CLASS_AVAILABLE
  
  @return  `YES` if the write succeeds; otherwise, `NO`.
  */
-- (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * _Nullable __autoreleasing *)error;
 
 @end
 
@@ -518,7 +518,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)unmarkUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Removes a set of uploaded files.
@@ -532,7 +532,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)removeUploadedFiles:(NSArray<NSURL *> *)fileURLs error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Removes old and uploaded logs to bring total bytes down to a threshold.
@@ -545,7 +545,7 @@ ORK_CLASS_AVAILABLE
  
  @return `YES` if the operation succeeds; otherwise, `NO`.
  */
-- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * __nullable __autoreleasing *)error;
+- (BOOL)removeOldAndUploadedLogsToThreshold:(unsigned long long)bytes error:(NSError * _Nullable __autoreleasing *)error;
 
 @end
 
