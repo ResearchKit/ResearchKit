@@ -199,8 +199,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playbackDidFinish:) name:AVPlayerItemPlaybackStalledNotification object:[_moviePlayer currentItem]];
     
     __weak AVPlayer *weakPlayer = _moviePlayer;
-    [_moviePlayer seekToTime:[context.startTime CMTimeValue]
-             toleranceBefore:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC*1/60, NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
+    [_moviePlayer seekToTime:context.startTime.CMTimeValue
+             toleranceBefore:CMTimeMake(NSEC_PER_SEC * (1.0 / 60.0), NSEC_PER_SEC) toleranceAfter:CMTimeMake(NSEC_PER_SEC * (1.0 / 60.0), NSEC_PER_SEC)  completionHandler:^(BOOL finished) {
                  AVPlayer *localPlayer = weakPlayer;
                  [localPlayer play];
              }];
@@ -229,7 +229,7 @@
     ORKEAGLMoviePlayerView *playerView = [_stepViewController animationPlayerView];
     playerView.hidden = NO;
     
-    if (_pendingContext && ! _pendingContext.hasCalledLoadHandler) {
+    if (_pendingContext && !_pendingContext.hasCalledLoadHandler) {
         if (_pendingContext.loadHandler) {
             _pendingContext.loadHandler(self, _pendingContext.direction);
         }

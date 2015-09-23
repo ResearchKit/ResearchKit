@@ -87,7 +87,7 @@
         [signatureElements addObject:[NSString stringWithFormat:signatureElementWrapper, signature.signatureDate?:@"&nbsp;", hr, ORKLocalizedString(@"CONSENT_DOC_LINE_DATE", nil)]];
     }
 
-    NSInteger numElements = [signatureElements count];
+    NSInteger numElements = signatureElements.count;
     if (numElements > 1) {
         [body appendString:[NSString stringWithFormat:@"<div class='grid border'>"]];
         for (NSString *element in signatureElements) {
@@ -96,7 +96,7 @@
 
         [body appendString:@"</div>"];
     } else if (numElements == 1) {
-        [body appendString:[NSString stringWithFormat:@"<div width='200'>%@</div>",[signatureElements lastObject]]];
+        [body appendString:[NSString stringWithFormat:@"<div width='200'>%@</div>",signatureElements.lastObject]];
     }
     return body;
 }

@@ -318,11 +318,11 @@
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
     
-    if (! [text length]) {
+    if (!text.length) {
         // No alert if the value is empty
         return;
     }
-    if (_dismissing || ![self isViewLoaded] || ! [self.view window]) {
+    if (_dismissing || ![self isViewLoaded] || !self.view.window) {
         // No alert if not in view chain.
         return;
     }
@@ -364,7 +364,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     
     self.outputDirectory = ORKURLFromBookmarkData([coder decodeObjectOfClass:[NSData class] forKey:_ORKOutputDirectoryKey]);
     
-    if (! self.step) {
+    if (!self.step) {
         // Just logging to the console in this case, since this can happen during a taskVC restoration of a dynamic task.
         // The step VC will get restored, but then never added back to the hierarchy.
         ORK_Log_Warning(@"%@",[NSString stringWithFormat:@"No step provided while restoring %@", NSStringFromClass([self class])]);
@@ -373,7 +373,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
     self.presentedDate = [coder decodeObjectOfClass:[NSDate class] forKey:_ORKPresentedDateRestoreKey];
     self.restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
     
-    if (self.step && _restoredStepIdentifier && ! [self.step.identifier isEqualToString:_restoredStepIdentifier]) {
+    if (self.step && _restoredStepIdentifier && ![self.step.identifier isEqualToString:_restoredStepIdentifier]) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:[NSString stringWithFormat:@"Attempted to restore step with identifier %@ but got step identifier %@", _restoredStepIdentifier, self.step.identifier]
                                      userInfo:nil];
@@ -382,7 +382,7 @@ static NSString *const _ORKOutputDirectoryKey = @"outputDirectory";
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder {
     ORKStepViewController *viewController = [[[self class] alloc] initWithStep:nil];
-    viewController.restorationIdentifier = [identifierComponents lastObject];
+    viewController.restorationIdentifier = identifierComponents.lastObject;
     viewController.restorationClass = self;
     return viewController;
 }

@@ -119,7 +119,7 @@
         return;
     }
     
-    NSUInteger stackCount = [_stepIdentifierStack count];
+    NSUInteger stackCount = _stepIdentifierStack.count;
     if (indexOfSource != stackCount - 1) {
         [_stepIdentifierStack removeObjectsInRange:NSMakeRange(indexOfSource + 1, stackCount - (indexOfSource + 1))];
     }

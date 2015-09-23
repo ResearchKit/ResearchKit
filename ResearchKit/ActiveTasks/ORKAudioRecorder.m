@@ -68,10 +68,10 @@
     if (self) {
         
         self.continuesInBackground = YES;
-        if (! recorderSettings) {
+        if (!recorderSettings) {
             recorderSettings = [[self class] defaultRecorderSettings];
         }
-        if (! [recorderSettings isKindOfClass:[NSDictionary class]]) {
+        if (![recorderSettings isKindOfClass:[NSDictionary class]]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"recorderSettings should be a dictionary" userInfo:recorderSettings];
         }
         self.recorderSettings = recorderSettings;
@@ -84,18 +84,18 @@
         @throw [NSException exceptionWithName:NSDestinationInvalidException reason:@"audioRecorder requires an output directory" userInfo:nil];
     }
     // Only create the file when we should actually start recording.
-    if (! _audioRecorder) {
+    if (!_audioRecorder) {
         
         NSError *error = nil;
         NSURL *soundFileURL = [self recordingFileURL];
-        if (! [self recreateFileWithError:&error]) {
+        if (![self recreateFileWithError:&error]) {
             [self finishRecordingWithError:error];
             return;
         }
         
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        if (! [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
+        if (![audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
             [self finishRecordingWithError:error];
             return;
         }
@@ -105,19 +105,19 @@
                           initWithURL:soundFileURL
                           settings:self.recorderSettings
                           error:&error];
-        if (! _audioRecorder) {
+        if (!_audioRecorder) {
             [self finishRecordingWithError:error];
             return;
         }
         
-#if ! TARGET_IPHONE_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
         if (!_audioRecorder.recording) {
             [_audioRecorder prepareToRecord];
         }
 #endif
     }
     
-#if ! TARGET_IPHONE_SIMULATOR
+#if !TARGET_IPHONE_SIMULATOR
     if (!_audioRecorder.recording) {
         [_audioRecorder prepareToRecord];
         [_audioRecorder record];
@@ -128,7 +128,7 @@
 }
 
 - (void)stop {
-    if (! _audioRecorder) {
+    if (!_audioRecorder) {
         // Error has already been returned.
         return;
     }
@@ -136,7 +136,7 @@
     [self doStopRecording];
     
     NSURL *fileUrl = [self recordingFileURL];
-    if (! [[NSFileManager defaultManager] fileExistsAtPath:[[self recordingFileURL] path]]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[[self recordingFileURL] path]]) {
         fileUrl = nil;
     }
     
@@ -151,12 +151,12 @@
 
 - (NSString *)mimeType {
     NSDictionary *recorderSettings = [self recorderSettings];
-    unsigned int recorderFormat = [recorderSettings[AVFormatIDKey] unsignedIntValue];
+    unsigned int recorderFormat = ((NSNumber *)recorderSettings[AVFormatIDKey]).unsignedIntValue;
     
     NSString *contentType = @"audio";
     switch (recorderFormat) {
         case kAudioFormatLinearPCM: {
-            int numBits = [recorderSettings[AVLinearPCMBitDepthKey] intValue] ? : 16;
+            int numBits = ((NSNumber *)recorderSettings[AVLinearPCMBitDepthKey]).intValue ? : 16;
             contentType = [NSString stringWithFormat:@"audio/L%d", numBits];
             break;
         }
@@ -202,7 +202,7 @@
 
 - (NSString *)extension {
     NSDictionary *recorderSettings = [self recorderSettings];
-    unsigned int recorderFormat = [recorderSettings[AVFormatIDKey] unsignedIntValue];
+    unsigned int recorderFormat = ((NSNumber *)recorderSettings[AVFormatIDKey]).unsignedIntValue;
     
     NSString *extension = @"au";
     switch (recorderFormat) {
@@ -233,7 +233,7 @@
 
 - (BOOL)recreateFileWithError:(NSError * __autoreleasing *)error {
     NSURL *url = [self recordingFileURL];
-    if (! url) {
+    if (!url) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
         }
@@ -242,12 +242,12 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    if (! [fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:error]) {
+    if (![fileManager createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:error]) {
         return NO;
     }
     
     if ([fileManager fileExistsAtPath:[url path]]) {
-        if (! [fileManager removeItemAtPath:[url path] error:error]) {
+        if (![fileManager removeItemAtPath:[url path] error:error]) {
             return NO;
         }
     }
@@ -266,11 +266,6 @@
 @end
 
 
-@interface ORKAudioRecorderConfiguration ()
-
-@end
-
-
 @implementation ORKAudioRecorderConfiguration
 
 #pragma clang diagnostic push
@@ -283,7 +278,7 @@
                   recorderSettings:(NSDictionary *)recorderSettings {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        if (recorderSettings && ! [recorderSettings isKindOfClass:[NSDictionary class]]) {
+        if (recorderSettings && ![recorderSettings isKindOfClass:[NSDictionary class]]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"recorderSettings should be a dictionary" userInfo:recorderSettings];
         }
         _recorderSettings = recorderSettings;

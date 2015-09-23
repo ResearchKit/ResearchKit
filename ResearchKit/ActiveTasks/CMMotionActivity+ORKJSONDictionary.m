@@ -33,13 +33,13 @@
 #import "ORKHelpers.h"
 
 
-static NSString *const kActivityUnknown = @"unknown";
-static NSString *const kActivityStationary = @"stationary";
-static NSString *const kActivityWalking = @"walking";
-static NSString *const kActivityRunning = @"running";
-static NSString *const kActivityAutomotive = @"automotive";
-static NSString *const kStartDateKey = @"startDate";
-static NSString *const kEndDateKey = @"endDate";
+static NSString *const ActivityUnknown = @"unknown";
+static NSString *const ActivityStationary = @"stationary";
+static NSString *const ActivityWalking = @"walking";
+static NSString *const ActivityRunning = @"running";
+static NSString *const ActivityAutomotive = @"automotive";
+static NSString *const StartDateKey = @"startDate";
+static NSString *const EndDateKey = @"endDate";
 
 static NSString *stringFromActivityConfidence(CMMotionActivityConfidence confidence) {
     NSDictionary *confidences = @{@(CMMotionActivityConfidenceHigh) : @"high",
@@ -51,33 +51,32 @@ static NSString *stringFromActivityConfidence(CMMotionActivityConfidence confide
 static NSArray *activityArray(CMMotionActivity *activity) {
     NSMutableArray *array = [NSMutableArray array];
     if (activity.unknown) {
-        [array addObject:kActivityUnknown];
+        [array addObject:ActivityUnknown];
     }
     if (activity.stationary) {
-        [array addObject:kActivityStationary];
+        [array addObject:ActivityStationary];
     }
     if (activity.walking) {
-        [array addObject:kActivityWalking];
+        [array addObject:ActivityWalking];
     }
     if (activity.running) {
-        [array addObject:kActivityRunning];
+        [array addObject:ActivityRunning];
     }
     if (activity.automotive) {
-        [array addObject:kActivityAutomotive];
+        [array addObject:ActivityAutomotive];
     }
     return array;
 }
 
-static NSString *const kActivityKey = @"activity";
-
-static NSString *const kConfidenceKey = @"confidence";
+static NSString *const ActivityKey = @"activity";
+static NSString *const ConfidenceKey = @"confidence";
 
 @implementation CMMotionActivity (ORKJSONDictionary)
 
 - (NSDictionary *)ork_JSONDictionary {
-    return @{kConfidenceKey : stringFromActivityConfidence(self.confidence),
-             kActivityKey : activityArray(self),
-             kStartDateKey : ORKStringFromDateISO8601(self.startDate)};
+    return @{ConfidenceKey : stringFromActivityConfidence(self.confidence),
+             ActivityKey : activityArray(self),
+             StartDateKey : ORKStringFromDateISO8601(self.startDate)};
 }
 
 @end

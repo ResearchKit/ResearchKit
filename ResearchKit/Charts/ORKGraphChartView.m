@@ -484,7 +484,7 @@ inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     if (!pointImage || ![pointImageColor isEqual:color]) {
         pointImageColor = color;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
-                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
+                                    (CGRect){{0 + (pointLineWidth / 2), 0 + (pointLineWidth / 2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
         CAShapeLayer *pointLayer = [CAShapeLayer new];
         pointLayer.path = circlePath.CGPath;
         pointLayer.fillColor = [UIColor whiteColor].CGColor;
@@ -1063,7 +1063,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
             
             // Boundary check
-            if ( pointIndex < [_dataPoints[plotIndex] count] ) {
+            if ( pointIndex < _dataPoints[plotIndex].count ) {
                 NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
                 ORKRangedPoint *rangePoint = _dataPoints[plotIndex][pointIndex];
                 value = ORKAccessibilityStringForVariables(value, and, rangePoint.accessibilityLabel);

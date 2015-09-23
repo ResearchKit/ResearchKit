@@ -91,7 +91,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 
 - (void)query_logResults:(NSArray *)results withAnchor:(NSUInteger)newAnchor {
     
-    NSUInteger resultCount = [results count];
+    NSUInteger resultCount = results.count;
     if (resultCount == 0) {
         return;
     }
@@ -103,10 +103,10 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     }];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateMostRecentSample:[results lastObject]];
+        [self updateMostRecentSample:results.lastObject];
         
         NSError *error = nil;
-        if (! [_logger appendObjects:dictionaries error:&error]) {
+        if (![_logger appendObjects:dictionaries error:&error]) {
             // Logger writes are unrecoverable
             [self finishRecordingWithError:error];
             return;
@@ -122,7 +122,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 - (void)doFetchNewData {
-    if (! _healthStore || ! _isRecording) {
+    if (!_healthStore || !_isRecording) {
         return;
     }
     NSAssert(_samplePredicate != nil, @"Sample predicate should be non-nil if recording");
@@ -151,16 +151,16 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 - (void)start {
     [super start];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
     }
     
-    if (! [HKHealthStore isHealthDataAvailable]) {
+    if (![HKHealthStore isHealthDataAvailable]) {
         [self finishRecordingWithError:[NSError errorWithDomain:NSCocoaErrorDomain
                                                            code:NSFeatureUnsupportedError
                                                        userInfo:@{@"recorder" : self}]];
@@ -222,7 +222,7 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
 }
 
 - (void)stop {
-    if (! _isRecording) {
+    if (!_isRecording) {
         return;
     }
     
@@ -271,11 +271,6 @@ static const NSInteger _HealthAnchoredQueryLimit = 100;
     
     _logger = nil;
 }
-
-@end
-
-
-@interface ORKHealthQuantityTypeRecorderConfiguration ()
 
 @end
 
