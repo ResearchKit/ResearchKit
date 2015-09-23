@@ -521,7 +521,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task demonstrates an eligibiltiy question.
     private var eligibilityQuestionTask: ORKTask {
-        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormatWithPreferredAnswer(true);
+        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormatWithExpectedAnswer(true);
         
         let step = ORKQuestionStep(identifier: String(Identifier.EligibilityQuestionStep), title: exampleQuestionText, answer: answerFormat)
         

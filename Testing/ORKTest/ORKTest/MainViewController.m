@@ -1189,7 +1189,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_000"
                                                                    text:@"Are you over 18 years of age?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1197,14 +1197,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_001"
                                                                    text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
             [items addObject:item];
         }
         
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_002"
                                                                    text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1212,7 +1212,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_003"
                                                                    text:@"Do you live outside the United States of America?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
             [items addObject:item];
         }
         
@@ -1249,7 +1249,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES];
+        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES];
         answerFormat.errorMessage = @"That is not the desired answer choice.";
 
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000"
@@ -1262,14 +1262,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001"
                                                                       title:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:YES]];
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
         [steps addObject:step];
     }
     
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_002"
                                                                       title:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
         step.optional = NO;
         [steps addObject:step];
     }
@@ -1277,7 +1277,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
                                                                       title:@"Do you live outside the United States of America?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithPreferredAnswer:NO]];
+                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
         [steps addObject:step];
     }
     

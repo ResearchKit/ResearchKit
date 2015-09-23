@@ -33,7 +33,16 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKDefines_Private.h"
+#import "ORKTextButton.h"
 
+
+@interface ORKEligibilityButton : ORKTextButton
+
+@end
+
+
+static const CGFloat MinFontSize = 48.0;
+static const CGFloat MaxFontSize = 72.0;
 
 @implementation ORKEligibilityButton
 
@@ -62,13 +71,18 @@
 }
 
 + (UIFont *)defaultFont {
-    return [UIFont systemFontOfSize:50.0];
+    UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
+    CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] * 3;
+    
+    // Min and max size caps for the button font size.
+   fontSize = MAX(MIN(fontSize, MaxFontSize), MinFontSize);
+    
+    return [UIFont systemFontOfSize:fontSize];
 }
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
     [self setTitleColor:self.tintColor forState:UIControlStateSelected];
-    [self setNeedsDisplay];
 }
 
 @end
@@ -77,6 +91,7 @@
 @implementation ORKEligibilitySelectionView {
     ORKEligibilityButton *_yesButton;
     ORKEligibilityButton *_noButton;
+    UIView *_separator;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -97,101 +112,104 @@
         [self addSubview:_noButton];
         
         // Create a separator for in between the buttons.
-        UIView *separator = [UIView new];
-        separator.backgroundColor = [UIColor lightGrayColor];
-        [self addSubview:separator];
-        
-        // Constraints for the buttons and separator.
-        ORKEnableAutoLayoutForViews(@[_yesButton, separator, _noButton]);
-        [self addConstraints:@[
-                               [NSLayoutConstraint constraintWithItem:_yesButton
-                                                            attribute:NSLayoutAttributeLeading
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeLeading
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:separator
-                                                            attribute:NSLayoutAttributeLeading
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_yesButton
-                                                            attribute:NSLayoutAttributeTrailing
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:separator
-                                                            attribute:NSLayoutAttributeTrailing
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_noButton
-                                                            attribute:NSLayoutAttributeLeading
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_noButton
-                                                            attribute:NSLayoutAttributeTrailing
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeTrailing
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_yesButton
-                                                            attribute:NSLayoutAttributeWidth
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:_noButton
-                                                            attribute:NSLayoutAttributeWidth
-                                                           multiplier:1.0
-                                                             constant:1],
-                               [NSLayoutConstraint constraintWithItem:separator
-                                                            attribute:NSLayoutAttributeWidth
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:nil
-                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                           multiplier:1.0
-                                                             constant:1],
-                               [NSLayoutConstraint constraintWithItem:separator
-                                                            attribute:NSLayoutAttributeHeight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeHeight
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_yesButton
-                                                            attribute:NSLayoutAttributeHeight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeHeight
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_noButton
-                                                            attribute:NSLayoutAttributeHeight
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeHeight
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_yesButton
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:separator
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0
-                                                             constant:0],
-                               [NSLayoutConstraint constraintWithItem:_noButton
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self
-                                                            attribute:NSLayoutAttributeCenterY
-                                                           multiplier:1.0
-                                                             constant:0]
-                               ]
-         ];
+        _separator = [UIView new];
+        _separator.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:_separator];
+
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setUpConstraints {
+    ORKEnableAutoLayoutForViews(@[_yesButton, _separator, _noButton]);
+    NSArray *constraints = @[
+                             [NSLayoutConstraint constraintWithItem:_yesButton
+                                                          attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeLeading
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_separator
+                                                          attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:_yesButton
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_separator
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:_noButton
+                                                          attribute:NSLayoutAttributeLeading
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_noButton
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_yesButton
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:_noButton
+                                                          attribute:NSLayoutAttributeWidth
+                                                         multiplier:1.0
+                                                           constant:1.0],
+                             [NSLayoutConstraint constraintWithItem:_separator
+                                                          attribute:NSLayoutAttributeWidth
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:nil
+                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                         multiplier:1.0
+                                                           constant:1.0],
+                             [NSLayoutConstraint constraintWithItem:_separator
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_yesButton
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_noButton
+                                                          attribute:NSLayoutAttributeHeight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeHeight
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_yesButton
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_separator
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0
+                                                           constant:0.0],
+                             [NSLayoutConstraint constraintWithItem:_noButton
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)toggleViewForAnswer:(id)answer {
@@ -209,7 +227,7 @@
 
 - (void)buttonTapped:(ORKEligibilityButton *)button {
     // Set answer based on selection.
-    if (! button.isSelected) {
+    if (!button.isSelected) {
         _answer = ([button isEqual:_yesButton]) ? @1 : @0;
     } else {
         _answer = nil;

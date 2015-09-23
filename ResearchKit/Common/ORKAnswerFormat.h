@@ -218,7 +218,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
-+ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithPreferredAnswer:(BOOL)preferredAnswer;
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithExpectedAnswer:(BOOL)expectedAnswer;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
@@ -752,8 +752,8 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKEligibilityAnswerFormat` class provides a custom boolean control with 
- a preferred answer.
+ The `ORKEligibilityAnswerFormat` class provides a custom Boolean control with
+ an expected answer.
  
  The eligibility answer format produces an `ORKBooleanQuestionResult` object.
  */
@@ -761,20 +761,20 @@ ORK_CLASS_AVAILABLE
 @interface ORKEligibilityAnswerFormat : ORKAnswerFormat
 
 /**
- Returns an initialized eligibility answer format using the specified preferred answer.
+ Returns an initialized eligibility answer format using the specified expected answer.
  
- @param preferredAnswer         The preferred answer choice to validate eligibility.
+ @param expectedAnswer         The expected answer choice to validate eligibility.
  
  @return An initialized eligibility answer format.
  */
-- (instancetype)initWithPreferredAnswer:(BOOL)preferredAnswer;
+- (instancetype)initWithExpectedAnswer:(BOOL)expectedAnswer;
 
 /**
  A Boolean value indicating the correct answer for eligibility.
  
  By default, the value of this property is `YES`.
  */
-@property (nonatomic) BOOL preferredAnswer;
+@property (nonatomic) BOOL expectedAnswer;
 
 /**
  A string to display if the invalid answer is selected.

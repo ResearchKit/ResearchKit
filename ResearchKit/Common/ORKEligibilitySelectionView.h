@@ -37,19 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 static const CGFloat EligibilityButtonHeight = 130;
 
-/**
- Buttons used for `YES` or `NO` values for elgibility.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKEligibilityButton : UIButton
-
-+ (id)yesEligibilityButton;
-
-+ (id)noEligibilityButton;
-
-@end
-
-
 @class ORKEligibilitySelectionView;
 
 @protocol ORKEligibilitySelectionViewDelegate <NSObject>
@@ -59,11 +46,6 @@ ORK_CLASS_AVAILABLE
 @end
 
 
-/**
- The `ORKEligibilitySelectionView` class represents the boolean buttons of 
- the eligibilty questions.
- */
-ORK_CLASS_AVAILABLE
 @interface ORKEligibilitySelectionView : UIView
 
 @property (nonatomic, weak, nullable) id<ORKEligibilitySelectionViewDelegate> delegate;

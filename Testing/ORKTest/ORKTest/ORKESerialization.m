@@ -705,10 +705,10 @@ ret =
           })),
   ENTRY(ORKEligibilityAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKEligibilityAnswerFormat alloc] initWithPreferredAnswer:[GETPROP(dict, preferredAnswer) boolValue]];
+            return [[ORKEligibilityAnswerFormat alloc] initWithExpectedAnswer:[GETPROP(dict, expectedAnswer) boolValue]];
         },
         (@{
-           PROPERTY(preferredAnswer, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(expectedAnswer, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(errorMessage, NSString, NSObject, YES, nil, nil)
            })),
   ENTRY(ORKScaleAnswerFormat,
