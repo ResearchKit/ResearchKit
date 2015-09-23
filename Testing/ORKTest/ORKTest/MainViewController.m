@@ -290,12 +290,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        ];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [_collectionView reloadData];
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(self.view.bounds.size.width, 22.0);  // Table view header height
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(self.view.bounds.size.width / 2, 44.0);
+    CGFloat viewWidth = self.view.bounds.size.width;
+    NSUInteger numberOfColums = 2;
+    if (viewWidth >= 667.0) {
+        numberOfColums = 3;
+    }
+    CGFloat width = viewWidth / numberOfColums;
+    return CGSizeMake(width, 44.0);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
