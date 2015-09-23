@@ -1,8 +1,11 @@
 /*
- Copyright (c) 2015, Dan Lange, Quintiles Inc.
- Copyright (c) 2015, Scott Morgan, Quintiles Inc.
- Copyright (c) 2015, Brandon McQuilkin, Quintiles Inc.
- Copyright (c) 2015, Eric Rolf, Quintiles Inc.
+ Copyright (c) 2015, Alejandro Martinez, Quintiles Inc.
+ Copyright (c) 2015, Brian Kelly, Quintiles Inc.
+ Copyright (c) 2015, Bryan Strothmann, Quintiles Inc.
+ Copyright (c) 2015, Greg Yip, Quintiles Inc.
+ Copyright (c) 2015, John Reites, Quintiles Inc.
+ Copyright (c) 2015, Richard Thomas, Quintiles Inc.
+ Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
