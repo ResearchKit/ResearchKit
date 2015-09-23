@@ -118,7 +118,7 @@
                                                             attribute:NSLayoutAttributeWidth
                                                            multiplier:1.0
                                                              constant:0.0]];
-        ORK_Log_Oops(@"The size of imageChoice's normal image should not be zero. %@",  image);
+        ORK_Log_Warning(@"The size of imageChoice's normal image should not be zero. %@", image);
     }
     
     [NSLayoutConstraint activateConstraints:constraints];
