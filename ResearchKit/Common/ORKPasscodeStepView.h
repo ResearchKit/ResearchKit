@@ -35,8 +35,6 @@
 
 @interface ORKPasscodeStepView : ORKVerticalContainerView
 
-- (instancetype)initWithFrame:(CGRect)frame passcodeType:(ORKPasscodeType)passcodeType;
-
 @property (nonatomic, strong, readonly) ORKPasscodeTextField *textField;
 
 @end

@@ -82,7 +82,8 @@ ORK_CLASS_AVAILABLE
                                           delegate:(id<ORKPasscodeDelegate>)delegate;
 
 + (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate;
+                                   delegate:(id<ORKPasscodeDelegate>)delegate
+                               passcodeType:(ORKPasscodeType)passcodeType;
 
 @end
 

@@ -46,11 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKPasscodeTextField : ORKCaretOptionalTextField
 
-- (instancetype)initWithNumberOfDigits:(NSInteger)numberOfDigits;
-
 - (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
 
-@property (nonatomic, readonly) NSInteger numberOfDigits;
+@property (nonatomic) NSInteger numberOfDigits;
 
 @end
 

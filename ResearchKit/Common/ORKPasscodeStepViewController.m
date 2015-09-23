@@ -65,7 +65,7 @@
     
     if (self.step && [self isViewLoaded]) {
         
-        _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds passcodeType:[self passcodeStep].passcodeType];
+        _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _passcodeStepView.headerView.instructionLabel.text = [self passcodeStep].text;
         _passcodeStepView.textField.delegate = self;
@@ -79,18 +79,21 @@
         _isTouchIdAuthenticated = NO;
         _isPasscodeSaved = NO;
         
-        // Set the starting passcode state based on flow.
+        // Set the starting passcode state and textfield based on flow.
         switch (_passcodeFlow) {
             case ORKPasscodeFlowCreate:
+                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:[self passcodeStep].passcodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
                 [self removePasscodeFromKeychain];
                 break;
                 
             case ORKPasscodeFlowAuthenticate:
+                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
                 break;
                 
             case ORKPasscodeFlowEdit:
+                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateOldEntry];
                 break;
         }
@@ -240,6 +243,15 @@
 - (void)changeStateTo:(ORKPasscodeState)passcodeState {
     _passcodeState = passcodeState;
     [self updatePasscodeView];
+}
+
+- (NSInteger)numberOfDigitsForPasscodeType:(ORKPasscodeType)passcodeType {
+    switch (passcodeType) {
+        case ORKPasscodeType4Digit:
+            return 4;
+        case ORKPasscodeType6Digit:
+            return 6;
+    }
 }
 
 - (void)cancelButtonAction {
@@ -450,6 +462,7 @@
         // Check if the inputted passcode matches the old user passcode.
         if ([self passcodeMatchesKeychain]) {
             // Move to new entry step.
+            _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:[self passcodeStep].passcodeType];
             [self changeStateTo:ORKPasscodeStateNewEntry];
         } else {
             // Failed authentication, send delegate callback.

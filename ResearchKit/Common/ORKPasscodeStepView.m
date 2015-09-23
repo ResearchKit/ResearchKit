@@ -36,12 +36,11 @@
     ORKPasscodeTextField *_textField;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame passcodeType:(ORKPasscodeType)passcodeType {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         // Additional configuration for the passcode text field.
-        NSInteger numberOfDigits = (passcodeType == ORKPasscodeType4Digit) ? 4 : 6;
-        _textField = [[ORKPasscodeTextField alloc] initWithNumberOfDigits:numberOfDigits];
+        _textField = [ORKPasscodeTextField new];
         _textField.translatesAutoresizingMaskIntoConstraints = NO;
         
         self.stepView = _textField;

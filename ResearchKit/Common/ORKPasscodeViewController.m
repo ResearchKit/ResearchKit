@@ -41,19 +41,23 @@
                                           delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
-                                   passcodeFlow:ORKPasscodeFlowAuthenticate];
+                                   passcodeFlow:ORKPasscodeFlowAuthenticate
+                                   passcodeType:0];
 }
 
 + (id)passcodeEditingViewControllerWithText:(NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate {
+                                   delegate:(id<ORKPasscodeDelegate>)delegate
+                               passcodeType:(ORKPasscodeType)passcodeType {
     return [self passcodeViewControllerWithText:text
                                        delegate:delegate
-                                   passcodeFlow:ORKPasscodeFlowEdit];
+                                   passcodeFlow:ORKPasscodeFlowEdit
+                                   passcodeType:passcodeType];
 }
 
 + (id)passcodeViewControllerWithText:(NSString *)text
                             delegate:(id<ORKPasscodeDelegate>)delegate
-                        passcodeFlow:(ORKPasscodeFlow)passcodeFlow {
+                        passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                        passcodeType:(ORKPasscodeType)passcodeType {
     // Retrieve stored data from the dictionary.
     NSError *error;
     NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
@@ -63,8 +67,8 @@
     
     // Determine passcode type and touch Id enable based on stored data.
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
-    BOOL useTouchId = dictionary[KeychainDictionaryTouchIdKey];
-    ORKPasscodeType passcodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
+    BOOL useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
+    ORKPasscodeType authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
 
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;
@@ -73,6 +77,7 @@
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
     passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
+    passcodeStepViewController.authenticationPasscodeType = authenticationPasscodeType;
     passcodeStepViewController.useTouchId = useTouchId;
     passcodeStepViewController.step = step;
     

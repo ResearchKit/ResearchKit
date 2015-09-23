@@ -67,24 +67,15 @@ static NSString * const FilledBullet = @"\u25CF";
 @end
 
 
-@implementation ORKPasscodeTextField {
-    NSInteger _numberOfDigits;
-}
+@implementation ORKPasscodeTextField
 
-- (instancetype)initWithNumberOfDigits:(NSInteger)numberOfDigits {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        _numberOfDigits = numberOfDigits;
         self.font = [UIFont fontWithName:@"Courier" size:35.0];
         self.textAlignment = NSTextAlignmentCenter;
-        
-        [self updateTextWithNumberOfFilledBullets:0];
     }
     return self;
-}
-
-- (NSInteger)numberOfDigits {
-    return _numberOfDigits;
 }
 
 - (UIKeyboardType)keyboardType {
@@ -98,7 +89,7 @@ static NSString * const FilledBullet = @"\u25CF";
 - (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets {
     
     // Error checking.
-    if (filledBullets > _numberOfDigits) {
+    if (filledBullets > self.numberOfDigits) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"The number of filled bullets cannot exceed the number of pin digits."
                                      userInfo:nil];
@@ -111,7 +102,7 @@ static NSString * const FilledBullet = @"\u25CF";
     }
     
     // Append the empty bullets.
-    NSInteger remainingDigits = _numberOfDigits - filledBullets;
+    NSInteger remainingDigits = self.numberOfDigits - filledBullets;
     for (NSInteger i = 0; i < remainingDigits; i++) {
         [text appendString:EmptyBullet];
     }
@@ -124,6 +115,11 @@ static NSString * const FilledBullet = @"\u25CF";
 
     // Set the textfield's text property.
     self.attributedText = attributedText;
+}
+
+- (void)setNumberOfDigits:(NSInteger)numberOfDigits {
+    _numberOfDigits = numberOfDigits;
+    [self updateTextWithNumberOfFilledBullets:0];
 }
 
 #pragma mark - Accessibility
