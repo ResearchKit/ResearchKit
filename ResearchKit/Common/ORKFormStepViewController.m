@@ -336,7 +336,7 @@
                 if (defaultValue != nil) {
                     defaults[formItem.identifier] = defaultValue;
                 } else if (error != nil) {
-                    ORK_Log_Debug(@"Error fetching default for %@: %@", formItem, error);
+                    ORK_Log_Warning(@"Error fetching default for %@: %@", formItem, error);
                 }
                 dispatch_semaphore_signal(sem);
             }];

@@ -301,7 +301,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 [self defaultAnswerDidChange];
             });
         } else {
-            ORK_Log_Debug(@"Error fetching default: %@", error);
+            ORK_Log_Warning(@"Error fetching default: %@", error);
         }
     }];
 }
