@@ -110,7 +110,7 @@
 
     NSMutableArray *results = [NSMutableArray arrayWithArray:sResult.results];
 
-    ORKToneAudiometryResult *toneResult = [[ORKToneAudiometryResult alloc] initWithIdentifier:(NSString *__nonnull)self.step.identifier];
+    ORKToneAudiometryResult *toneResult = [[ORKToneAudiometryResult alloc] initWithIdentifier:self.step.identifier];
     toneResult.startDate = sResult.startDate;
     toneResult.endDate = now;
     toneResult.samples = [self.samples copy];
@@ -159,9 +159,9 @@
     ORKToneAudiometrySample *sample = [ORKToneAudiometrySample new];
     NSUInteger frequencyIndex = (self.currentTestIndex / 2);
     NSNumber *frequency = self.testingFrequencies[frequencyIndex];
-    sample.frequency = frequency;
+    sample.frequency = [frequency doubleValue];
     sample.channel = ((self.currentTestIndex % 2) == 0) ? ORKAudioChannelLeft : ORKAudioChannelRight;
-    sample.amplitude = @(self.audioGenerator.volumeAmplitude);
+    sample.amplitude = self.audioGenerator.volumeAmplitude;
 
     [self.samples addObject:sample];
 
@@ -180,8 +180,7 @@
     self.currentTestIndex ++;
     if (self.currentTestIndex == (self.testingFrequencies.count * 2)) {
         [self finish];
-    }
-    else {
+    } else {
         [self startCurrentTest];
     }
 }

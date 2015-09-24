@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "許可";
-"CONSENT_NAME_FIRST" = "名字";
-"CONSENT_NAME_LAST" = "姓氏";
+"CONSENT_NAME_GIVEN" = "名字";
+"CONSENT_NAME_FAMILY" = "姓氏";
 "CONSENT_NAME_PLACEHOLDER" = "必填";
 "CONSENT_REVIEW_TITLE" = "檢視";
 "CONSENT_REVIEW_INSTRUCTION" = "檢視下方的表單，準備好繼續時請點一下「同意」。";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ 超過最大的允許值 (%2$@)。";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ 低於最小的允許值 (%2$@)。";
 "RANGE_ALERT_MESSAGE_OTHER" = "「%@」不是有效值。";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "無效的電子郵件位址：%@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超過最大長度：%@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "分割螢幕無法使用相機。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "第 %@ 次（共 %@ 次）";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "顯示藍色圓圈時快速晃動裝置";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "河內塔";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "此活動會評估您的解題能力。";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "以最少的次數將所有圓盤移到有顏色標示的平台。";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "點一下「開始測試」來開始";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "解開謎題";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "移動次數：%@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "我無法解開此謎題";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "定時步行";
+"TIMED_WALK_INTRO_DETAIL" = "此活動會測量您的下肢功能。";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "請找到一個地方（最好在室外）可讓您快速安全地直線步行約 %@。通過終點線前請勿放慢速度。";
+"TIMED_WALK_INTRO_2_DETAIL" = "點一下「下一步」來開始。";
+"TIMED_WALK_FORM_TITLE" = "輔具";
+"TIMED_WALK_FORM_TEXT" = "每次測試時請使用相同的輔具。";
+"TIMED_WALK_QUESTION_TEXT" = "您是否穿戴踝足副木？";
+"TIMED_WALK_QUESTION_2_TITLE" = "您是否使用輔具？";
+"TIMED_WALK_QUESTION_2_TEXT" = "點一下此處來選取答案。";
+"TIMED_WALK_QUESTION_2_CHOICE" = "無";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "單邊手杖";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "單邊拐杖";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "雙邊手杖";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "雙邊拐杖";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "助行器/四輪助行器";
+"TIMED_WALK_INSTRUCTION_%@" = "直線步行到最多 %@。";
+"TIMED_WALK_INSTRUCTION_2" = "請掉頭並走回您的起點。";
+"TIMED_WALK_INSTRUCTION_TEXT" = "完成時，請點一下「完成」。";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "沒有資料";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "連續聽覺序列附加測試（PASAT）會測量您的聽覺資訊處理速度和計算能力。";
+"PVSAT_INTRO_TEXT" = "連續視覺序列附加測試（PVSAT）會測量您的視覺資訊處理速度和計算能力。";
+"PAVSAT_INTRO_TEXT" = "連續聽覺序列附加測試（PAVSAT）會測量您的視聽覺資訊處理速度和計算能力。";
+"PSAT_INTRO_TEXT_2_%@" = "每 %@ 秒會顯示單一數字。\n您必須將新的數字與前一個數字相加。\n注意：您不能計算所有的數字總和，只需計算前兩個數字的總和。";
+"PSAT_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
+"PSAT_INITIAL_INSTRUCTION" = "記住第一個數字。";
+"PSAT_INSTRUCTION" = "將新的數字與前一個數字相加。";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "無法移除足夠的記錄檔來達到臨界值";
@@ -238,7 +293,7 @@
 "AX_SELECTED" = "已選取";
 "AX_UNSELECTED" = "未選取";
 
-"AX_SLIDER_LABEL" = "回應滑桿。範圍從 %@ 到 %@";
+"AX_SLIDER_LABEL" = "回應滑桿。範圍在 %@ 到 %@ 之間";
 "AX_UNLABELED_IMAGE" = "未標示的影像";
 
 "AX_ANNOUNCE_BEGIN_TASK" = "開始任務";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "記憶遊戲圖塊";
 
 "AX_IMAGE_CAPTURE_LABEL" = "擷取預覽";
+"AX_IMAGE_CAPTURED_LABEL" = "擷取的影像";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "無法將 %@ 號的圓盤放在 %@ 號的圓盤上";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "目標";
+"AX_TOWER_OF_HANOI_TOWER" = "塔座";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "點兩下來放置圓盤";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "點兩下來選取最上方的圓盤";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "容量為 %@ 的硬碟";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "空白";
+
+"AX_GRAPH_RANGE_FORMAT" = "範圍在 %@ 到 %@ 之間";
+"AX_GRAPH_AND_SEPARATOR" = " 和 ";

@@ -66,14 +66,6 @@
     return self;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.optional = YES;
-        self.useSurveyMode = YES;
-    }
-    return self;
-}
 
 - (void)validateParameters {
     [super validateParameters];
@@ -88,7 +80,7 @@
 - (void)validateIdentifiersUnique {
     NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
     NSArray *nonUniqueIdentifiers = [_formItems valueForKeyPath:@"@unionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( [nonUniqueIdentifiers count] != [uniqueIdentifiers count] );
+    BOOL itemsHaveNonUniqueIdentifiers = ( nonUniqueIdentifiers.count != uniqueIdentifiers.count );
     
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Each form item should have a unique identifier" userInfo:nil];
@@ -129,7 +121,7 @@
     return YES;
 }
 
-- (void)setFormItems:(NSArray *)formItems {
+- (void)setFormItems:(NSArray<ORKFormItem *> *)formItems {
     // unset removed formItems
     for (ORKFormItem *item in _formItems) {
          item.step = nil;
@@ -150,10 +142,8 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        if ( nil == identifier) {
-            @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"identifier can not be nil." userInfo:nil];
-        }
-        
+        ORKThrowInvalidArgumentExceptionIfNil(identifier);
+        _optional = YES;
         _identifier = [identifier copy];
         _text = [text copy];
         _answerFormat = [answerFormat copy];
@@ -175,7 +165,8 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKFormItem *item = [[[self class] allocWithZone:zone] initWithIdentifier:[_identifier copy] text:[_text copy] answerFormat:[_answerFormat copy]];
-    item.placeholder = self.placeholder;
+    item.optional = _optional;
+    item.placeholder = _placeholder;
     return item;
 }
 
@@ -183,6 +174,7 @@
     self = [super init];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, identifier, NSString);
+        ORK_DECODE_BOOL(aDecoder, optional);
         ORK_DECODE_OBJ_CLASS(aDecoder, text, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, placeholder, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, answerFormat, ORKAnswerFormat);
@@ -193,6 +185,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     ORK_ENCODE_OBJ(aCoder, identifier);
+    ORK_ENCODE_BOOL(aCoder, optional);
     ORK_ENCODE_OBJ(aCoder, text);
     ORK_ENCODE_OBJ(aCoder, placeholder);
     ORK_ENCODE_OBJ(aCoder, answerFormat);
@@ -208,6 +201,7 @@
     // Ignore the step reference - it's not part of the content of this item
     __typeof(self) castObject = object;
     return (ORKEqualObjects(self.identifier, castObject.identifier)
+            && self.optional == castObject.optional
             && ORKEqualObjects(self.text, castObject.text)
             && ORKEqualObjects(self.placeholder, castObject.placeholder)
             && ORKEqualObjects(self.answerFormat, castObject.answerFormat));
@@ -215,7 +209,7 @@
 
 - (NSUInteger)hash {
      // Ignore the step reference - it's not part of the content of this item
-    return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash];
+    return [_identifier hash] ^ [_text hash] ^ [_placeholder hash] ^ [_answerFormat hash] ^ (_optional ? 0xf : 0x0);
 }
 
 - (ORKAnswerFormat *)impliedAnswerFormat {

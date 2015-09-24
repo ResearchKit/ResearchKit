@@ -38,7 +38,7 @@
 
 @interface ORKChoiceButtonView : UIView
 
-- (instancetype)initWithImageOption:(ORKImageChoice *)option;
+- (instancetype)initWithImageChoice:(ORKImageChoice *)choice;
 
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, copy) NSString *labelText;
@@ -48,47 +48,25 @@
 
 @implementation ORKChoiceButtonView
 
-- (instancetype)initWithImageOption:(ORKImageChoice *)option {
+- (instancetype)initWithImageChoice:(ORKImageChoice *)choice {
     self = [super init];
     if (self) {
-        _labelText = option.text.length > 0? option.text: @" ";
+        _labelText = choice.text.length > 0 ? choice.text: @" ";
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.exclusiveTouch = YES;
        
-        if (option.selectedStateImage) {
-            [_button setImage:option.selectedStateImage forState:UIControlStateSelected];
+        if (choice.selectedStateImage) {
+            [_button setImage:choice.selectedStateImage forState:UIControlStateSelected];
         }
         
-        [_button setImage:option.normalStateImage forState:UIControlStateNormal];
+        [_button setImage:choice.normalStateImage forState:UIControlStateNormal];
         
         _button.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self addSubview:_button];
-        
-        UIView *imageView = _button.imageView;
-        NSDictionary *dictionary = NSDictionaryOfVariableBindings(_button, imageView);
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        
-        {
-            // Add rules for button
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_button]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_button]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            
-        }
-        
-        {
-            if (option.normalStateImage.size.height > 0 && option.normalStateImage.size.width > 0) {
-                // Keep Aspect ratio
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:option.normalStateImage.size.height/option.normalStateImage.size.width constant:0]];
-                // button's height <= image
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:option.normalStateImage.size.height]];
-            } else {
-                // Keep Aspect ratio
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:imageView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
-                ORK_Log_Oops(@"The size of imageChoice's normal image should not be zero. %@",  option.normalStateImage);
-            }
-        }
+        ORKEnableAutoLayoutForViews(@[_button, _button.imageView]);
+        [self setUpConstraints];
         
         // Accessibility
         NSString *trimmedText = [self.labelText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -101,17 +79,61 @@
     return self;
 }
 
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = @{ @"button": _button };
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[button]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[button]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    UIImage *image = [_button imageForState:UIControlStateNormal];
+    if (image.size.height > 0 && image.size.width > 0) {
+        // Keep Aspect ratio
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_button
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_button.imageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:image.size.height / image.size.width
+                                                             constant:0.0]];
+        // button's height <= image
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_button
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationLessThanOrEqual
+                                                               toItem:nil attribute:NSLayoutAttributeHeight
+                                                           multiplier:1.0
+                                                             constant:image.size.height]];
+    } else {
+        // Keep Aspect ratio
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_button
+                                                            attribute:NSLayoutAttributeHeight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:_button.imageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:1.0
+                                                             constant:0.0]];
+        ORK_Log_Warning(@"The size of imageChoice's normal image should not be zero. %@", image);
+    }
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
 @end
 
 
-static const CGFloat kSpacerWidth = 10.0;
+static const CGFloat SpacerWidth = 10.0;
 
 @implementation ORKImageSelectionView {
     ORKChoiceAnswerFormatHelper *_helper;
     NSArray *_buttonViews;
     ORKImageChoiceLabel *_choiceLabel;
     ORKImageChoiceLabel *_placeHolderLabel;
-    ORKImageChoiceLabel *_invisibleLabel; // Hold tallest text to make sure this view allocate enough space to accommodate _choiceLabel
 }
 
 - (ORKImageChoiceLabel *)makeLabel {
@@ -129,77 +151,120 @@ static const CGFloat kSpacerWidth = 10.0;
         
         _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:answerFormat];
         
-        NSArray *choices = answerFormat.imageChoices;
-        
         _placeHolderLabel = [self makeLabel];
         _placeHolderLabel.text = [ORKLocalizedString(@"PLACEHOLDER_IMAGE_CHOICES", nil) stringByAppendingString:@""];
         _placeHolderLabel.textColor = [UIColor ork_midGrayTintColor];
         
         _choiceLabel = [self makeLabel];
         
-        _invisibleLabel = [self makeLabel];
-        _invisibleLabel.hidden = YES;
-        
         [self resetLabelText];
         
         [self addSubview:_choiceLabel];
         [self addSubview:_placeHolderLabel];
-        [self addSubview:_invisibleLabel];
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_choiceLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil  views:@{@"_choiceLabel": _choiceLabel}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_placeHolderLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"_placeHolderLabel": _placeHolderLabel}]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_invisibleLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:@{@"_invisibleLabel": _invisibleLabel}]];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_choiceLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_invisibleLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_placeHolderLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_invisibleLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        
-        ORKChoiceButtonView *previousView;
         NSMutableArray *buttonViews = [NSMutableArray new];
         NSMutableArray *labelTextArray = [NSMutableArray new];
-        for (ORKImageChoice *option in choices) {
-            if (option.text) {
-                [labelTextArray addObject:option.text];
+        
+        NSArray *imageChoices = answerFormat.imageChoices;
+        for (ORKImageChoice *imageChoice in imageChoices) {
+            if (imageChoice.text) {
+                [labelTextArray addObject:imageChoice.text];
             }
             
-            ORKChoiceButtonView *buttonView = [[ORKChoiceButtonView alloc] initWithImageOption:option];
+            ORKChoiceButtonView *buttonView = [[ORKChoiceButtonView alloc] initWithImageChoice:imageChoice];
             [buttonView.button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [buttonViews addObject:buttonView];
-            
             [self addSubview:buttonView];
-            NSDictionary *dictionary = NSDictionaryOfVariableBindings(buttonView, _placeHolderLabel, _choiceLabel, _invisibleLabel);
-            ORKEnableAutoLayoutForViews([dictionary allValues]);
-            
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[buttonView]-30-[_invisibleLabel]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-            
-            if (previousView) {
-                
-                // ButtonView left trailing
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:previousView attribute:NSLayoutAttributeRight multiplier:1.0 constant:kSpacerWidth]];
-                
-                // All ButtonViews has equal width
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:previousView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
-                
-            } else {
-                // ButtonView left trailing
-                [self addConstraint:[NSLayoutConstraint constraintWithItem:buttonView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0 constant:kSpacerWidth]];
-            }
-            previousView = buttonView;
         }
         
-        _invisibleLabel.textArray = labelTextArray;
-        
-        if (previousView) {
-            // ButtonView right trailing
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:previousView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:-kSpacerWidth]];
-        }
-        
+        _choiceLabel.textArray = labelTextArray;
         _buttonViews = buttonViews;
         
-        for (UILabel *label in @[_choiceLabel, _invisibleLabel, _placeHolderLabel]) {
+        for (UILabel *label in @[_choiceLabel, _placeHolderLabel]) {
             label.isAccessibilityElement = NO;
         }
+        
+        ORKEnableAutoLayoutForViews(@[_placeHolderLabel, _choiceLabel]);
+        ORKEnableAutoLayoutForViews(_buttonViews);
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_choiceLabel]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:@{@"_choiceLabel": _choiceLabel}]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_placeHolderLabel]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:@{@"_placeHolderLabel": _placeHolderLabel}]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_placeHolderLabel
+                                                        attribute:NSLayoutAttributeCenterY
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_choiceLabel
+                                                        attribute:NSLayoutAttributeCenterY
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+
+    ORKChoiceButtonView *previousView = nil;
+    for (ORKChoiceButtonView *buttonView in _buttonViews) {
+        NSDictionary *views = NSDictionaryOfVariableBindings(buttonView, _choiceLabel);
+        
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[buttonView]-30-[_choiceLabel]-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:nil
+                                                   views:views]];
+        
+        if (previousView) {
+            // ButtonView left trailing
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:previousView
+                                                                attribute:NSLayoutAttributeRight
+                                                               multiplier:1.0
+                                                                 constant:SpacerWidth]];
+            
+            // All ButtonViews has equal width
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
+                                                                attribute:NSLayoutAttributeWidth
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:previousView
+                                                                attribute:NSLayoutAttributeWidth
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+        } else {
+            // ButtonView left trailing
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:buttonView
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeLeft
+                                                               multiplier:1.0
+                                                                 constant:SpacerWidth]];
+        }
+        previousView = buttonView;
+    }
+    
+    if (previousView) {
+        // ButtonView right trailing
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:previousView
+                                                            attribute:NSLayoutAttributeRight
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeRight
+                                                           multiplier:1.0
+                                                             constant:-SpacerWidth]];
+    }
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setAnswer:(id)answer {
@@ -229,8 +294,7 @@ static const CGFloat kSpacerWidth = 10.0;
     button.selected = !button.selected;
     
     if (button.selected) {
-        [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-         {
+        [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
              ORKChoiceButtonView *buttonView = obj;
              if (buttonView.button != button) {
                  buttonView.button.selected = NO;
@@ -254,8 +318,7 @@ static const CGFloat kSpacerWidth = 10.0;
 - (NSArray *)selectedIndexes {
     NSMutableArray *array = [NSMutableArray new];
     
-    [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
+    [_buttonViews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
          ORKChoiceButtonView *buttonView = obj;
          if (buttonView.button.selected)
          {
@@ -268,8 +331,12 @@ static const CGFloat kSpacerWidth = 10.0;
 
 - (void)setSelectedIndexes:(NSArray *)selectedIndexes {
     [selectedIndexes enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if ([object unsignedIntegerValue] < [_buttonViews count]) {
-            ORKChoiceButtonView *buttonView = _buttonViews[[object unsignedIntegerValue]];
+        if (![object isKindOfClass:[NSNumber class]]) {
+            @throw [NSException exceptionWithName:NSGenericException reason:@"selectedIndexes should only containt objects of the NSNumber kind" userInfo:nil];
+        }
+        NSNumber *number = object;
+        if (number.unsignedIntegerValue < _buttonViews.count) {
+            ORKChoiceButtonView *buttonView = _buttonViews[number.unsignedIntegerValue];
             [buttonView button].selected = YES;
             [self setLabelText:buttonView.labelText];
         }

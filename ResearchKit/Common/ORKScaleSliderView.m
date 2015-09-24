@@ -42,283 +42,430 @@
 
 // #define LAYOUT_DEBUG 1
 
-@interface ORKScaleSliderView ()
-
-@property (nonatomic, strong) id<ORKScaleAnswerFormatProvider> formatProvider;
-
-@property (nonatomic, strong) ORKScaleSlider *slider;
-
-@property (nonatomic, strong) ORKScaleRangeLabel *leftRangeLabel;
-
-@property (nonatomic, strong) ORKScaleRangeImageView *leftRangeImageView;
-
-@property (nonatomic, strong) ORKScaleRangeDescriptionLabel *leftRangeDescriptionLabel;
-
-@property (nonatomic, strong) ORKScaleRangeLabel *rightRangeLabel;
-
-@property (nonatomic, strong) ORKScaleRangeImageView *rightRangeImageView;
-
-@property (nonatomic, strong) ORKScaleRangeDescriptionLabel *rightRangeDescriptionLabel;
-
-@property (nonatomic, strong) ORKScaleValueLabel *valueLabel;
-
-@end
-
-
-@implementation ORKScaleSliderView
+@implementation ORKScaleSliderView {
+    id<ORKScaleAnswerFormatProvider> _formatProvider;
+    ORKScaleSlider *_slider;
+    ORKScaleRangeDescriptionLabel *_leftRangeDescriptionLabel;
+    ORKScaleRangeDescriptionLabel *_rightRangeDescriptionLabel;
+    UIView *_leftRangeView;
+    UIView *_rightRangeView;
+    ORKScaleValueLabel *_valueLabel;
+    NSMutableArray<ORKScaleRangeLabel *> *_textChoiceLabels;
+}
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider {
     self = [self initWithFrame:CGRectZero];
     if (self) {
         _formatProvider = formatProvider;
         
-        UIView *rightRangeView = nil;
-        UIView *leftRangeView = nil;
+        _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
+        _slider.userInteractionEnabled = YES;
+        _slider.contentMode = UIViewContentModeRedraw;
+        [self addSubview:_slider];
         
-        if ([formatProvider minimumImage]) {
-            self.leftRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
-            leftRangeView = self.leftRangeImageView;
-        } else {
-            self.leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            self.leftRangeLabel.textAlignment = NSTextAlignmentCenter;
-            self.leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
-            leftRangeView = self.leftRangeLabel;
-        }
-        
-        if ([formatProvider maximumImage]) {
-            self.rightRangeImageView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
-            rightRangeView = self.rightRangeImageView;
-        } else {
-            self.rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
-            self.rightRangeLabel.textAlignment = NSTextAlignmentCenter;
-            self.rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
-            rightRangeView = self.rightRangeLabel;
-        }
-        
-        [self addSubview:leftRangeView];
-        [self addSubview:rightRangeView];
-        
-        self.leftRangeDescriptionLabel.text = [formatProvider minimumValueDescription];
-        self.rightRangeDescriptionLabel.text = [formatProvider maximumValueDescription];
-        
-        self.slider.vertical = [formatProvider isVertical];
-        
-        self.slider.maximumValue = [[formatProvider maximumNumber] floatValue];
-        self.slider.minimumValue = [[formatProvider minimumNumber] floatValue];
+        _slider.maximumValue = [formatProvider maximumNumber].floatValue;
+        _slider.minimumValue = [formatProvider minimumNumber].floatValue;
         
         NSInteger numberOfSteps = [formatProvider numberOfSteps];
-        self.slider.numberOfSteps = numberOfSteps;
+        _slider.numberOfSteps = numberOfSteps;
         
-        [self.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-    
-        leftRangeView.translatesAutoresizingMaskIntoConstraints = NO;
-        rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        self.slider.translatesAutoresizingMaskIntoConstraints = NO;
-        self.valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+        BOOL isVertical = [formatProvider isVertical];
+        _slider.vertical = isVertical;
+
+        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
+        self.slider.textChoices = textChoices;
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(_slider, leftRangeView, rightRangeView, _valueLabel, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
-        
-        if ([formatProvider isVertical]) {
-            // Vertical slider constraints
-            // Keep the thumb the same distance from the value label as in horizontal mode
-            const CGFloat kValueLabelSliderMargin = 23.0;
-            // Keep the shadow of the thumb inside the bounds
-            const CGFloat kSliderMargin = 20.0;
-            const CGFloat kSideLabelMargin = 24;
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:_slider
-                                                             attribute:NSLayoutAttributeCenterX
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0
-                                                              constant:0.0]];
+        if (isVertical && textChoices) {
+            // Generate an array of labels for all the text choices
+            _textChoiceLabels = [NSMutableArray new];
+            for (int i = 0; i <= numberOfSteps; i++) {
+                ORKTextChoice *textChoice = textChoices[i];
+                ORKScaleRangeLabel *stepLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                stepLabel.text = textChoice.text;
+                stepLabel.textAlignment = NSTextAlignmentLeft;
+                stepLabel.translatesAutoresizingMaskIntoConstraints = NO;
+                [self addSubview:stepLabel];
+                [_textChoiceLabels addObject:stepLabel];
+            }
+        } else {
+            _valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
+            _valueLabel.textAlignment = NSTextAlignmentCenter;
+            _valueLabel.text = @" ";
+            [self addSubview:_valueLabel];
             
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-kValueLabelSliderMargin-[_slider]-kSliderMargin-|"
-                                                     options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:@{@"kValueLabelSliderMargin": @(kValueLabelSliderMargin), @"kSliderMargin": @(kSliderMargin)}
+            _leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            _leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:_leftRangeLabel];
+            
+            _leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+            _leftRangeDescriptionLabel.numberOfLines = -1;
+            [self addSubview:_leftRangeDescriptionLabel];
+            
+            _rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+            _rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:_rightRangeLabel];
+            
+            _rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
+            _rightRangeDescriptionLabel.numberOfLines = -1;
+            [self addSubview:_rightRangeDescriptionLabel];
+            
+            if (textChoices) {
+                _leftRangeDescriptionLabel.textColor = [UIColor blackColor];
+                _rightRangeDescriptionLabel.textColor = [UIColor blackColor];
+                _leftRangeLabel.text = @"";
+                _rightRangeLabel.text = @"";
+            }
+
+#if LAYOUT_DEBUG
+            self.backgroundColor = [UIColor greenColor];
+            _valueLabel.backgroundColor = [UIColor blueColor];
+            _slider.backgroundColor = [UIColor redColor];
+            _leftRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
+            _rightRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
+#endif
+            
+            if ([formatProvider minimumImage]) {
+                _leftRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider minimumImage]];
+            } else {
+                ORKScaleRangeLabel *leftRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                leftRangeLabel.textAlignment = NSTextAlignmentCenter;
+                leftRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider minimumNumber]];
+                _leftRangeView = leftRangeLabel;
+            }
+            
+            if ([formatProvider maximumImage]) {
+                _rightRangeView = [[ORKScaleRangeImageView alloc] initWithImage:[formatProvider maximumImage]];
+            } else {
+                ORKScaleRangeLabel *rightRangeLabel = [[ORKScaleRangeLabel alloc] initWithFrame:CGRectZero];
+                rightRangeLabel.textAlignment = NSTextAlignmentCenter;
+                rightRangeLabel.text = [formatProvider localizedStringForNumber:[formatProvider maximumNumber]];
+                _rightRangeView = rightRangeLabel;
+            }
+            
+            [self addSubview:_leftRangeView];
+            [self addSubview:_rightRangeView];
+        
+            if (isVertical) {
+                _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+                _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+            } else {
+                _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+                _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
+            }
+            
+            _leftRangeDescriptionLabel.text = [formatProvider minimumValueDescription];
+            _rightRangeDescriptionLabel.text = [formatProvider maximumValueDescription];
+
+            _valueLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeView.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeView.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _leftRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            _rightRangeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        }
+        
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _slider.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [self setUpConstraints];
+    }
+    return self;
+}
+
+- (void)setUpConstraints {
+    BOOL isVertical = [_formatProvider isVertical];
+    NSArray<ORKTextChoice *> *textChoices = _slider.textChoices;
+    NSDictionary *views = nil;
+    if (isVertical && textChoices) {
+        views = NSDictionaryOfVariableBindings(_slider);
+    } else {
+        views = NSDictionaryOfVariableBindings(_slider, _leftRangeView, _rightRangeView, _valueLabel, _leftRangeDescriptionLabel, _rightRangeDescriptionLabel);
+    }
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    if (isVertical) {
+        _leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+        _rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+        
+        // Vertical slider constraints
+        // Keep the thumb the same distance from the value label as in horizontal mode
+        const CGFloat ValueLabelSliderMargin = 23.0;
+        // Keep the shadow of the thumb inside the bounds
+        const CGFloat SliderMargin = 20.0;
+        const CGFloat SideLabelMargin = 24;
+        
+        if (textChoices) {
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-kSliderMargin-[_slider]-kSliderMargin-|"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"kSliderMargin": @(SliderMargin)}
                                                        views:views]];
             
-            [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[rightRangeView(==leftRangeView)]"
-                                                                         options:0
-                                                                         metrics:nil
-                                                                           views:views]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:rightRangeView
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.slider
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0
-                                                              constant:-kSideLabelMargin]];
+            for (int i = 0; i < _textChoiceLabels.count; i++) {
+                // Put labels to the right side of the slider.
+                [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                 attribute:NSLayoutAttributeLeading
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:_slider
+                                                                 attribute:NSLayoutAttributeCenterX
+                                                                multiplier:1.0
+                                                                  constant:SideLabelMargin]];
+                
+                if (i == 0) {
+                    // First label
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_slider
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                           toItem:self
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:0.5
+                                                                         constant:0.0]];
+                } else {
+                    // Middle labels
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
+                                                                        attribute:NSLayoutAttributeTop
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+                    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i - 1]
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:_textChoiceLabels[i]
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:1.0
+                                                                         constant:0.0]];
+                    
+                    // Last label
+                    if (i == (_textChoiceLabels.count - 1)) {
+                        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textChoiceLabels[i]
+                                                                            attribute:NSLayoutAttributeCenterY
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:_slider
+                                                                            attribute:NSLayoutAttributeTop
+                                                                           multiplier:1.0
+                                                                             constant:0.0]];
+                    }
+                }
+            }
+        } else {
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:leftRangeView
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.slider
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0
-                                                              constant:-kSideLabelMargin]];
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=kValueLabelSliderMargin)-[_slider]-(>=kSliderMargin)-|"
+                                                     options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"kValueLabelSliderMargin": @(ValueLabelSliderMargin), @"kSliderMargin": @(SliderMargin)}
+                                                       views:views]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:rightRangeView
-                                                            attribute:NSLayoutAttributeCenterY
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:self.slider
-                                                            attribute:NSLayoutAttributeTop
-                                                           multiplier:1.0
-                                                             constant:0]];
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-(>=8)-[_rightRangeDescriptionLabel]"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:nil
+                                                       views:views]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:leftRangeView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.slider
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:0]];
+            [constraints addObjectsFromArray
+             :[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeView(==_leftRangeView)]"
+                                                      options:(NSLayoutFormatOptions)0
+                                                      metrics:nil
+                                                        views:views]];
             
-            self.leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-            self.rightRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+            // Set the margin between slider and the rangeViews
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeView
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:-SideLabelMargin]];
             
-            [self addConstraints:
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeView
+                                                                attribute:NSLayoutAttributeRight
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:-SideLabelMargin]];
+            
+            // Align the rangeViews with the slider's bottom
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeView
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeView
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
+            
+            [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_rightRangeDescriptionLabel]-(>=8)-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:nil
                                                        views:views]];
-            [self addConstraints:
+            [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_leftRangeDescriptionLabel(==_rightRangeDescriptionLabel)]-(>=8)-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:nil
                                                        views:views]];
             
-            [self addConstraints:
+            [constraints addObjectsFromArray:
              [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_rightRangeDescriptionLabel]-(>=8)-[_leftRangeDescriptionLabel]-(>=8)-|"
                                                      options:NSLayoutFormatDirectionLeadingToTrailing
                                                      metrics:nil
                                                        views:views]];
             
+            // Set the margin between the slider and the descriptionLabels
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:SideLabelMargin]];
             
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeDescriptionLabel
+                                                                attribute:NSLayoutAttributeLeft
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_slider
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0
+                                                                 constant:SideLabelMargin]];
+            
+            // Limit the height of the descriptionLabels
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.slider
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0
-                                                              constant:kSideLabelMargin]];
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                toItem:_slider
+                                                             attribute:NSLayoutAttributeHeight
+                                                            multiplier:0.5
+                                                              constant:SliderMargin]];
             
             [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self.slider
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0
-                                                              constant:kSideLabelMargin]];
+                                                             attribute:NSLayoutAttributeHeight
+                                                             relatedBy:NSLayoutRelationLessThanOrEqual
+                                                                toItem:_slider
+                                                             attribute:NSLayoutAttributeHeight
+                                                            multiplier:0.5
+                                                              constant:SliderMargin]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.rightRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:rightRangeView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1.0
-                                                              constant:0]];
             
-            [self addConstraint:[NSLayoutConstraint constraintWithItem:self.leftRangeDescriptionLabel
-                                                             attribute:NSLayoutAttributeCenterY
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:leftRangeView
-                                                             attribute:NSLayoutAttributeCenterY
-                                                            multiplier:1.0
-                                                              constant:0]];
-        } else {
+            // Align the descriptionLabels with the rangeViews
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_rightRangeDescriptionLabel
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_rightRangeView
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
             
-            self.leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-            self.rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
-            
-            // Horizontal slider constraints
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
-                                                     options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeftToRight
-                                                     metrics:nil
-                                                       views:views]];
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_leftRangeDescriptionLabel]-(>=8)-|"
-                                                     options:NSLayoutFormatDirectionLeftToRight
-                                                     metrics:nil
-                                                       views:views]];
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_rightRangeDescriptionLabel]-(>=8)-|"
-                                                     options:NSLayoutFormatDirectionLeftToRight
-                                                     metrics:nil
-                                                       views:views]];
-        
-            const CGFloat kMargin = 17.0;
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[leftRangeView]-kMargin-[_slider]-kMargin-[rightRangeView(==leftRangeView)]-kMargin-|"
-                                                     options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
-                                                     metrics:@{@"kMargin": @(kMargin)}
-                                                       views:views]];
-            [self addConstraints:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeDescriptionLabel]-(>=16)-[_rightRangeDescriptionLabel(==_leftRangeDescriptionLabel)]-kMargin-|"
-                                                     options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
-                                                     metrics:@{@"kMargin": @(kMargin)}
-                                                       views:views]];
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:_leftRangeDescriptionLabel
+                                                                attribute:NSLayoutAttributeCenterY
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_leftRangeView
+                                                                attribute:NSLayoutAttributeCenterY
+                                                               multiplier:1.0
+                                                                 constant:0.0]];
         }
+    } else {
+        // Horizontal slider constraints
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_valueLabel]-[_slider]-(>=8)-|"
+                                                 options:NSLayoutFormatAlignAllCenterX | NSLayoutFormatDirectionLeftToRight
+                                                 metrics:nil
+                                                   views:views]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_leftRangeDescriptionLabel]-(>=8)-|"
+                                                 options:NSLayoutFormatDirectionLeftToRight
+                                                 metrics:nil
+                                                   views:views]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_slider]-[_rightRangeDescriptionLabel]-(>=8)-|"
+                                                 options:NSLayoutFormatDirectionLeftToRight
+                                                 metrics:nil
+                                                   views:views]];
         
+        const CGFloat kMargin = 17.0;
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeView]-kMargin-[_slider]-kMargin-[_rightRangeView(==_leftRangeView)]-kMargin-|"
+                                                 options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
+                                                 metrics:@{@"kMargin": @(kMargin)}
+                                                   views:views]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-kMargin-[_leftRangeDescriptionLabel]-(>=16)-[_rightRangeDescriptionLabel(==_leftRangeDescriptionLabel)]-kMargin-|"
+                                                 options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
+                                                 metrics:@{@"kMargin": @(kMargin)}
+                                                   views:views]];
     }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
-        self.slider.userInteractionEnabled = YES;
-        self.slider.contentMode = UIViewContentModeRedraw;
-        [self addSubview:_slider];
-        
-        self.leftRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-        self.leftRangeDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-        self.leftRangeDescriptionLabel.numberOfLines = -1;
-        [self addSubview:_leftRangeDescriptionLabel];
-        
-        self.rightRangeDescriptionLabel = [[ORKScaleRangeDescriptionLabel alloc] initWithFrame:CGRectZero];
-        self.rightRangeDescriptionLabel.textAlignment = NSTextAlignmentRight;
-        self.rightRangeDescriptionLabel.numberOfLines = -1;
-        [self addSubview:_rightRangeDescriptionLabel];
-
-        self.valueLabel = [[ORKScaleValueLabel alloc] initWithFrame:CGRectZero];
-        self.valueLabel.textAlignment = NSTextAlignmentCenter;
-        self.valueLabel.text = @" ";
-        [self addSubview:_valueLabel];
-        
-#if LAYOUT_DEBUG
-        self.valueLabel.backgroundColor = [UIColor blueColor];
-        self.slider.backgroundColor = [UIColor redColor];
-        self.backgroundColor = [UIColor greenColor];
-        self.leftRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
-        self.rightRangeDescriptionLabel.backgroundColor = [UIColor yellowColor];
-#endif
-    }
-    return self;
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setCurrentValue:(NSNumber *)value {
     _currentValue = value;
-    self.slider.showThumb = value? YES : NO;
+    _slider.showThumb = value? YES : NO;
     
     if (value) {
-        NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
-        self.slider.value = [newValue floatValue];
-        self.valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
+        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
+        if (textChoices) {
+            ORKTextChoice *textChoice = textChoices[MAX(0, [value intValue] - 1)];
+            self.valueLabel.text = textChoice.text;
+        } else {
+            NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
+            _slider.value = newValue.floatValue;
+            _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
+        }
     } else {
-        self.valueLabel.text = @"";
+        _valueLabel.text = @"";
     }
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
-    NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(self.slider.value)];
+    NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(_slider.value)];
     [self setCurrentValue:newValue];
 }
 
@@ -332,15 +479,15 @@
 }
 
 - (NSInteger)accessibilityElementCount {
-    return (self.slider != nil ? 1 : 0);
+    return (_slider != nil ? 1 : 0);
 }
 
 - (id)accessibilityElementAtIndex:(NSInteger)index {
-    return self.slider;
+    return _slider;
 }
 
 - (NSInteger)indexOfAccessibilityElement:(id)element {
-    return (element == self.slider ? 0 : NSNotFound);
+    return (element == _slider ? 0 : NSNotFound);
 }
 
 @end

@@ -44,7 +44,7 @@
 
 
 @implementation ORKConsentDocument {
-    NSMutableArray *_signatures;
+    NSMutableArray<ORKConsentSignature *> *_signatures;
 }
 
 #pragma mark - Initializers
@@ -68,18 +68,18 @@
 
 #pragma mark - Accessors
 
-- (void)setSignatures:(NSArray *)signatures {
+- (void)setSignatures:(NSArray<ORKConsentSignature *> *)signatures {
     _signatures = [signatures mutableCopy];
 }
 
-- (NSArray *)signatures {
+- (NSArray<ORKConsentSignature *> *)signatures {
     return [_signatures copy];
 }
 
 #pragma mark - Public
 
 - (void)addSignature:(ORKConsentSignature *)signature {
-    if (! _signatures) {
+    if (!_signatures) {
         _signatures = [NSMutableArray array];
     }
     [_signatures addObject:signature];
@@ -112,35 +112,35 @@
         
         CGFloat adjustment = [[ORKSubheadlineLabel defaultFont] pointSize] - 17.0;
         NSArray *hPointSizes = @[@([[ORKHeadlineLabel defaultFont] pointSize]),
-                                 @(24.0+adjustment),
-                                 @(19.0+adjustment),
-                                 @(17.0+adjustment),
-                                 @(13.0+adjustment),
-                                 @(11.0+adjustment)];
+                                 @(24.0 + adjustment),
+                                 @(19.0 + adjustment),
+                                 @(17.0 + adjustment),
+                                 @(13.0 + adjustment),
+                                 @(11.0 + adjustment)];
         
         [css appendString:[NSString stringWithFormat:@"h1 { font-family: -apple-system-font ; font-weight: 300; font-size: %.0lf; }\n",
-                           [hPointSizes[0] floatValue]]];
+                           ((NSNumber *)hPointSizes[0]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"h2 { font-family: -apple-system-font ; font-weight: 300; font-size: %.0lf; text-align: left; margin-top: 2em; }\n",
-                           [hPointSizes[1] floatValue]]];
+                           ((NSNumber *)hPointSizes[1]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"h3 { font-family: -apple-system-font ; font-size: %.0lf; margin-top: 2em; }\n",
-                           [hPointSizes[2] floatValue]]];
+                           ((NSNumber *)hPointSizes[2]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"h4 { font-family: -apple-system-font ; font-size: %.0lf; margin-top: 2em; }\n",
-                           [hPointSizes[3] floatValue]]];
+                           ((NSNumber *)hPointSizes[3]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"h5 { font-family: -apple-system-font ; font-size: %.0lf; margin-top: 2em; }\n",
-                           [hPointSizes[4] floatValue]]];
+                           ((NSNumber *)hPointSizes[4]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"h6 { font-family: -apple-system-font ; font-size: %.0lf; margin-top: 2em; }\n",
-                           [hPointSizes[5] floatValue]]];
+                           ((NSNumber *)hPointSizes[5]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"body { font-family: -apple-system-font; font-size: %.0lf; }\n",
-                           [hPointSizes[3] floatValue]]];
+                           ((NSNumber *)hPointSizes[3]).floatValue]];
         [css appendString:[NSString stringWithFormat:@"p, blockquote, ul, fieldset, form, ol, dl, dir, { font-family: -apple-system-font; font-size: %.0lf; margin-top: -.5em; }\n",
-                           [hPointSizes[3] floatValue]]];
+                           ((NSNumber *)hPointSizes[3]).floatValue]];
     } else {
         [css appendString:@"h1, h2 { text-align: center; }\n"];
         [css appendString:@"h2, h3 { margin-top: 3em; }\n"];
         [css appendString:@"body, p, h1, h2, h3 { font-family: Helvetica; }\n"];
     }
     
-    [css appendString:[NSString stringWithFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n",mobile?@"66.6%" : @"33.3%"]];
+    [css appendFormat:@".col-1-3 { width: %@; float: left; padding-right: 20px; }\n", mobile ? @"66.6%" : @"33.3%"];
     [css appendString:@".sigbox { position: relative; height: 100px; max-height:100px; display: inline-block; bottom: 10px }\n"];
     [css appendString:@".inbox { position: relative; top: 100%%; transform: translateY(-100%%); -webkit-transform: translateY(-100%%);  }\n"];
     [css appendString:@".grid:after { content: \"\"; display: table; clear: both; }\n"];
@@ -184,12 +184,14 @@
         
         // scenes
         for (ORKConsentSection *section in _sections) {
-            [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            if (!section.omitFromDocument) {
+                [body appendFormat:@"%@", [_sectionFormatter HTMLForSection:section]];
+            }
         }
         
-        if (! mobile) {
+        if (!mobile) {
             // page break
-            [body appendFormat:@"<h4 class=\"pagebreak\" >%@</h4>", _signaturePageTitle?:@""];
+            [body appendFormat:@"<h4 class=\"pagebreak\">%@</h4>", _signaturePageTitle?:@""];
             [body appendFormat:@"<p>%@</p>", _signaturePageContent?:@""];
             
             for (ORKConsentSignature *signature in self.signatures) {

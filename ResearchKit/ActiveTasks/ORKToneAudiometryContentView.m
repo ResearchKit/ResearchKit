@@ -38,20 +38,19 @@
 @property (nonatomic, strong) ORKUnitLabel *captionLabel;
 @property (nonatomic, strong) UIProgressView *progressView;
 
-- (void)setupConstraints;
-
 @end
 
 
 @implementation ORKToneAudiometryContentView {
-    ORKScreenType _screenType;
+    NSLayoutConstraint *_topToProgressViewConstraint;
+    NSLayoutConstraint *_topToCaptionLabelConstraint;
+    NSLayoutConstraint *_tapButtonToBottomConstraint;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
 
-        _screenType = ORKGetScreenTypeForWindow(self.window);
         _captionLabel = [ORKUnitLabel new];
         _captionLabel.textAlignment = NSTextAlignmentCenter;
         _captionLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -73,11 +72,16 @@
 
         _captionLabel.text = nil;
 
-        [self setupConstraints];
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
+        [self updateConstraintConstantsForWindow:self.window];
     }
 
     return self;
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
 }
 
 - (void)tintColorDidChange {
@@ -101,73 +105,105 @@
     self.tapButton.enabled = NO;
 }
 
-- (void)setupConstraints {
-    ORKScreenType screenType = _screenType;
-    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForScreenType(ORKScreenMetricCaptionBaselineToTappingLabelTop, screenType);
-    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    CGFloat margin = ORKStandardHorizMarginForView(self);
-    self.layoutMargins = (UIEdgeInsets) { .left=margin*2, .right=margin*2 };
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    const CGFloat HeaderBaselineToCaptionTop = ORKGetMetricForWindow(ORKScreenMetricCaptionBaselineToTappingLabelTop, window);
+    const CGFloat AssumedHeaderBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
+    static const CGFloat TapButtonBottomToBottom = 36.0;
+    
+    _topToProgressViewConstraint.constant = (HeaderBaselineToCaptionTop / 3) - AssumedHeaderBaselineToStepViewTop;
+    _topToCaptionLabelConstraint.constant = HeaderBaselineToCaptionTop - AssumedHeaderBaselineToStepViewTop;
+    _tapButtonToBottomConstraint.constant = TapButtonBottomToBottom;
+}
 
-    static const CGFloat TapButtonBottomToBottom = 36;
+- (void)updateLayoutMargins {
+    CGFloat margin = ORKStandardHorizontalMarginForView(self);
+    self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
+}
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+}
+    
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray array];
 
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _captionLabel, _tapButton);
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
-                                                        attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeTop
-                                                       multiplier:1 constant:(HeaderBaselineToCaptionTop/3) - AssumedHeaderBaselineToStepViewTop]];
+    _topToProgressViewConstraint = [NSLayoutConstraint constraintWithItem:_progressView
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.0
+                                                                 constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    [constraints addObject:_topToProgressViewConstraint];
+ 
+    _topToCaptionLabelConstraint = [NSLayoutConstraint constraintWithItem:_captionLabel
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.0
+                                                                 constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    [constraints addObject:_topToCaptionLabelConstraint];
 
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_captionLabel
-                                                        attribute:NSLayoutAttributeTop
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self
-                                                        attribute:NSLayoutAttributeTop
-                                                       multiplier:1 constant:(HeaderBaselineToCaptionTop - AssumedHeaderBaselineToStepViewTop)]];
-
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:self
-                                                        attribute:NSLayoutAttributeBottom
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:_tapButton
-                                                        attribute:NSLayoutAttributeBottom
-                                                       multiplier:1 constant:TapButtonBottomToBottom]];
+    _tapButtonToBottomConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                attribute:NSLayoutAttributeBottom
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:_tapButton
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    [constraints addObject:_tapButtonToBottomConstraint];
 
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_captionLabel]-(>=10)-[_tapButton]"
                                              options:NSLayoutFormatAlignAllCenterX
-                                             metrics:nil views:views]];
+                                             metrics:nil
+                                               views:views]];
 
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
-    NSLayoutConstraint *wideProgress = [NSLayoutConstraint constraintWithItem:_progressView
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1
-                                                                     constant:2000];
-    wideProgress.priority = UILayoutPriorityRequired-1;
-    [constraints addObject:wideProgress];
+                                             metrics:nil
+                                               views:views]];
+    NSLayoutConstraint *progressWidthConstraint = [NSLayoutConstraint constraintWithItem:_progressView
+                                                                               attribute:NSLayoutAttributeWidth
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:nil
+                                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                                              multiplier:1.0
+                                                                                constant:ORKScreenMetricMaxDimension];
+    progressWidthConstraint.priority = UILayoutPriorityRequired - 1;
+    [constraints addObject:progressWidthConstraint];
     
     [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_captionLabel]-|"
                                              options:(NSLayoutFormatOptions)0
-                                             metrics:nil views:views]];
+                                             metrics:nil
+                                               views:views]];
 
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_tapButton
                                                         attribute:NSLayoutAttributeCenterX
                                                         relatedBy:NSLayoutRelationEqual
                                                            toItem:self
                                                         attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1 constant:0]];
+                                                       multiplier:1.0
+                                                         constant:0.0]];
 
     [self addConstraints:constraints];
 
     [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    [self updateConstraintConstantsForWindow:self.window];
+    [super updateConstraints];
 }
 
 @end

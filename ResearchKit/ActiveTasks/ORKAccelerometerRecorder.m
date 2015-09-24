@@ -86,16 +86,16 @@
     
     self.motionManager = [self createMotionManager];
     
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
     }
     
-    if (! self.motionManager || ! self.motionManager.accelerometerAvailable) {
+    if (!self.motionManager || !self.motionManager.accelerometerAvailable) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFeatureUnsupportedError
                                          userInfo:@{@"recorder" : self}];
@@ -103,23 +103,18 @@
         return;
     }
     
-    self.motionManager.accelerometerUpdateInterval = 1.0/_frequency;
+    self.motionManager.accelerometerUpdateInterval = 1.0 / _frequency;
     
     self.uptime = [NSProcessInfo processInfo].systemUptime;
     
     [self.motionManager stopAccelerometerUpdates];
     
-    [self.motionManager
-     startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
-     withHandler:^(CMAccelerometerData *data, NSError *error)
-     {
+    [self.motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMAccelerometerData *data, NSError *error) {
          BOOL success = NO;
-         if (data)
-         {
+         if (data) {
              success = [_logger append:[data ork_JSONDictionary] error:&error];
          }
-         if (!success)
-         {
+         if (!success) {
              dispatch_async(dispatch_get_main_queue(), ^{
                  _recordingError = error;
                  [self stop];
@@ -173,11 +168,6 @@
 - (NSString *)mimeType {
     return @"application/json";
 }
-
-@end
-
-
-@interface ORKAccelerometerRecorderConfiguration ()
 
 @end
 

@@ -199,7 +199,7 @@
     [_pageViewController didMoveToParentViewController:self];
     
     self.animationView = [[ORKAnimationPlaceholderView alloc] initWithFrame:
-                          (CGRect){{0,0},{viewBounds.size.width,ORKGetMetricForScreenType(ORKScreenMetricIllustrationHeight, ORKScreenTypeiPhone4)}}];
+                          (CGRect){{0, 0}, {viewBounds.size.width, ORKGetMetricForWindow(ORKScreenMetricIllustrationHeight, self.view.window)}}];
     _animationView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
     _animationView.backgroundColor = [UIColor clearColor];
     _animationView.userInteractionEnabled = NO;
@@ -235,7 +235,7 @@
 }
 
 - (UIBarButtonItem *)goToPreviousPageButton {
-    UIBarButtonItem *button = [UIBarButtonItem obk_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
+    UIBarButtonItem *button = [UIBarButtonItem ork_backBarButtonItemWithTarget:self action:@selector(goToPreviousPage)];
     button.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     return button;
 }
@@ -281,7 +281,7 @@
     CGRect animationViewFrame = _animationView.frame;
     animationViewFrame.origin = [ORKDynamicCast(_animationView, ORKAnimationPlaceholderView) defaultFrameOrigin];
     _animationView.frame = animationViewFrame;
-    ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex]+1];
+    ORKConsentSceneViewController *nextConsentSceneViewController = [self viewControllerForIndex:[self currentIndex] + 1];
     [(ORKAnimationPlaceholderView *)_animationView scrollToTopAnimated:NO completion:nil];
     [nextConsentSceneViewController scrollToTopAnimated:NO completion:^(BOOL finished) {
         // 'finished' is always YES when not animated
@@ -297,6 +297,7 @@
         for (UIView *view in self.pageViewController.view.subviews) {
             if ([view isKindOfClass:[UIScrollView class]]) {
                 _scrollView = (UIScrollView *)view;
+                break;
             }
         }
     }
@@ -332,7 +333,7 @@
 }
 
 - (NSUInteger)pageCount {
-    return [_visualSections count];
+    return _visualSections.count;
 }
 
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
@@ -514,7 +515,7 @@
 - (ORKConsentSection *)consentSectionForIndex:(NSUInteger)index {
     ORKConsentSection *consentSection = nil;
     NSArray *visualSections = [self visualSections];
-    if (index < [visualSections count]) {
+    if (index < visualSections.count) {
         consentSection = visualSections[index];
     }
     return consentSection;
@@ -530,7 +531,7 @@
                     animated:animated
                   completion:^(BOOL finished) {
                       if (preloadNextViewController) {
-                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex]+1];
+                          ORKConsentSection *nextConsentSection = [self consentSectionForIndex:[self currentIndex] + 1];
                           ORKTintedImageView *currentSceneImageView = viewController.sceneView.imageView;
                           [[ORKTintedImageCache sharedCache] cacheImage:nextConsentSection.image
                                                               tintColor:currentSceneImageView.tintColor
@@ -572,6 +573,8 @@
     
     UIPageViewControllerNavigationDirection direction = forward ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse;
 
+    ORKAdjustPageViewControllerNavigationDirectionForRTL(&direction);
+    
     if (!animated) {
         // No animation at all
         viewController.imageHidden = NO;
@@ -590,7 +593,7 @@
         if (toIndex > currentIndex) {
             
             // Use the custom animation URL, if there is one for the destination index.
-            if (toIndex != NSNotFound && toIndex < [_visualSections count]) {
+            if (toIndex != NSNotFound && toIndex < _visualSections.count) {
                 url = [ORKDynamicCast(_visualSections[toIndex], ORKConsentSection) customAnimationURL];
             }
             BOOL isCustomURL = (url != nil);
@@ -664,14 +667,15 @@
     NSUInteger index = NSNotFound;
     for (NSNumber *key in _viewControllers) {
         if (_viewControllers[key] == viewController) {
-            index = [key unsignedIntegerValue];
+            index = key.unsignedIntegerValue;
+            break;
         }
     }
     return index;
 }
 
 - (NSUInteger)currentIndex {
-    return [self indexOfViewController:[_pageViewController.viewControllers firstObject]];
+    return [self indexOfViewController:_pageViewController.viewControllers.firstObject];
 }
 
 #pragma mark - UIPageViewControllerDataSource
@@ -682,7 +686,7 @@
         return nil;
     }
     
-    return [self viewControllerForIndex:index-1];
+    return [self viewControllerForIndex:index - 1];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -691,7 +695,7 @@
         return nil;
     }
     
-    return [self viewControllerForIndex:index+1];
+    return [self viewControllerForIndex:index + 1];
 }
 
 #pragma mark - UIPageViewControllerDelegate

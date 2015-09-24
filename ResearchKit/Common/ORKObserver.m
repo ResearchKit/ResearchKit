@@ -35,6 +35,10 @@
 
 @implementation ORKObserver
 
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+}
+
 - (instancetype)initWithTarget:(id)target keyPaths:(NSArray *)keyPaths delegate:(id)delegate action:(SEL)action context:(void *)context {
     self = [super init];
     if (self) {

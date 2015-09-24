@@ -52,7 +52,7 @@
 }
 
 - (BOOL)canRecieveDisk:(NSNumber *)disk {
-    return _disks.count == 0 || [_disks.lastObject integerValue] > disk.integerValue;
+    return _disks.count == 0 || ((NSNumber *)_disks.lastObject).integerValue > disk.integerValue;
 }
 
 - (BOOL)recieveDiskFrom:(ORKTowerOfHanoiTower*)donorTower {
@@ -65,6 +65,7 @@
     [donorDisks removeLastObject];
     self.disks = recipientDisks;
     donorTower.disks = donorDisks;
+    
     return YES;
 }
 

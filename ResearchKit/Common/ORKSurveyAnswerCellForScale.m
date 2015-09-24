@@ -48,7 +48,7 @@
 @implementation ORKSurveyAnswerCellForScale
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil) {
+    if (_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.step impliedAnswerFormat];
     }
     return _formatProvider;
@@ -66,13 +66,15 @@
         [self addSubview:_sliderView];
         
         self.sliderView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSDictionary *views = NSDictionaryOfVariableBindings(_sliderView);
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
+        NSDictionary *views = @{ @"sliderView": _sliderView };
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
+                                                                     metrics:nil
+                                                                       views:views]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:nil views:views]];
+                                                                     metrics:nil
+                                                                       views:views]];
     }
     
     [self answerDidChange];
@@ -82,7 +84,7 @@
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+        if (![self.answer isKindOfClass:[NSNumber class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
         }
         
@@ -97,7 +99,13 @@
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
-    [self ork_setAnswer:_sliderView.currentValue];
+    NSArray *textChoices = [self.formatProvider textChoices];
+    if (textChoices) {
+        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
+        [self ork_setAnswer:textChoice.value];
+    } else {
+        [self ork_setAnswer:_sliderView.currentValue];
+    }
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {

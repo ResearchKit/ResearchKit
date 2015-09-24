@@ -115,3 +115,13 @@ typedef NS_ENUM(NSInteger, ORKSide) {
     ORKSideRight
 } ORK_ENUM_AVAILABLE;
 
+/**
+ Values that identify the presentation mode of PSAT (auditory and/or visual).
+ */
+typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
+    /// The PASAT (Paced Auditory Series Addition Test).
+    ORKPSATPresentationModeAuditory = 1 << 0,
+    
+    /// The PVSAT (Paced Visual Series Addition Test).
+    ORKPSATPresentationModeVisual = 1 << 1
+} ORK_ENUM_AVAILABLE;

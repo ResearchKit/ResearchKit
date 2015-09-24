@@ -41,173 +41,25 @@
 #import "ORKWalkingTaskStep.h"
 #import "ORKPedometerRecorder.h"
 #import "ORKActiveStepView.h"
-
-
-static const CGFloat kProgressCircleDiameter = 10;
-static const CGFloat kProgressCircleSpacing = 4;
-
-@interface ORKWalkingProgressCircleView : UIView
-
-@property (nonatomic, assign) BOOL completed;
-
-@end
-
-
-@implementation ORKWalkingProgressCircleView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setCompleted:NO];
-        self.backgroundColor = [self tintColor];
-        self.layer.cornerRadius = kProgressCircleDiameter/2;
-    }
-    return self;
-}
-
-- (void)tintColorDidChange {
-    [super tintColorDidChange];
-    self.backgroundColor = [self tintColor];
-}
-
-- (CGSize)intrinsicContentSize {
-    return (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
-}
-
-- (CGSize)sizeThatFits:(CGSize)size {
-    return (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
-}
-
-- (void)setCompleted:(BOOL)completed {
-    _completed = completed;
-    self.alpha = (completed ? 1.0 : 0.6);
-}
-
-@end
-
-
-@interface ORKWalkingProgressView : UIView
-
-@property (nonatomic, assign) NSInteger count;
-
-@end
-
-
-@implementation ORKWalkingProgressView {
-    NSArray *_circles;
-    NSInteger _index;
-    NSTimer *_timer;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.count = 3;
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [_timer invalidate];
-    _timer = nil;
-}
-
-- (void)setCount:(NSInteger)count {
-    _count = count;
-    if (count != [_circles count]) {
-        for (UIView *v in _circles) {
-            [v removeFromSuperview];
-        }
-        NSMutableArray *newCircles = [NSMutableArray array];
-        for (NSInteger idx = 0; idx < count; idx ++) {
-            ORKWalkingProgressCircleView *circle = [ORKWalkingProgressCircleView new];
-            [newCircles addObject:circle];
-            [self addSubview:circle];
-        }
-        
-        _circles = newCircles;
-        [self invalidateIntrinsicContentSize];
-        [self setNeedsLayout];
-        self.index = _index;
-    }
-}
-
-- (void)setIndex:(NSInteger)index {
-    _index = index;
-    [_circles enumerateObjectsUsingBlock:^(ORKWalkingProgressCircleView *circle, NSUInteger idx, BOOL *stop) {
-        circle.completed = (idx < _index);
-    }];
-}
-
-- (void)didMoveToWindow {
-    if (self.window) {
-        [self startAnimating];
-    } else {
-        [self stopAnimating];
-    }
-}
-- (void)stopAnimating {
-    [_timer invalidate];
-    _timer = nil;
-}
-
-- (void)incrementIndex {
-    self.index = (_index + 1) % (_count + 1);
-}
-
-- (void)startAnimating {
-    [self stopAnimating];
-    self.index = 0;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(incrementIndex) userInfo:nil repeats:YES];
-}
-
-- (CGSize)sizeThatFits:(CGSize)size {
-    size.height = kProgressCircleDiameter;
-    size.width = (_count * kProgressCircleDiameter) + MAX(_count-1,0) * kProgressCircleSpacing;
-    return size;
-}
-
-- (CGSize)intrinsicContentSize {
-    return [self sizeThatFits:CGSizeZero];
-}
-
-- (void)layoutSubviews {
-    CGSize sz = (CGSize){kProgressCircleDiameter,kProgressCircleDiameter};
-    CGFloat xStep = kProgressCircleDiameter + kProgressCircleSpacing;
-    CGFloat x0 = 0;
-    for (UIView *v in _circles) {
-        v.frame = (CGRect){{x0,0},sz};
-        x0 += xStep;
-    }
-}
-
-@end
+#import "ORKProgressView.h"
 
 
 @interface ORKWalkingContentView : ORKActiveStepCustomView {
-    ORKScreenType _screenType;
     NSLayoutConstraint *_topConstraint;
 }
 
-@property  (nonatomic, strong, readonly) ORKWalkingProgressView *progressView;
+@property  (nonatomic, strong, readonly) ORKProgressView *progressView;
 
 @end
 
 
 @implementation ORKWalkingContentView
 
-- (void)willMoveToWindow:(UIWindow *)newWindow {
-    [super willMoveToWindow:newWindow];
-    _screenType = ORKGetScreenTypeForWindow(newWindow);
-    [self updateConstraintConstants];
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _progressView = [ORKWalkingProgressView new];
+        _progressView = [ORKProgressView new];
         _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-        _screenType = ORKScreenTypeiPhone4;
         
 #if LAYOUT_DEBUG
         self.backgroundColor = [[UIColor cyanColor] colorWithAlphaComponent:0.2];
@@ -215,29 +67,53 @@ static const CGFloat kProgressCircleSpacing = 4;
 #endif
         
         [self addSubview:_progressView];
-        [self setNeedsUpdateConstraints];
-        
+        [self setUpConstraints];
+        [self updateConstraintConstantsForWindow:self.window];
     }
     return self;
 }
 
-- (void)updateConstraintConstants {
-    
-    ORKScreenType screenType = _screenType;
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
     const CGFloat CaptionBaselineToProgressTop = 100;
-    const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForScreenType(ORKScreenMetricLearnMoreBaselineToStepViewTop, screenType);
-    [_topConstraint setConstant:(CaptionBaselineToProgressTop - CaptionBaselineToStepViewTop)];
+    const CGFloat CaptionBaselineToStepViewTop = ORKGetMetricForWindow(ORKScreenMetricLearnMoreBaselineToStepViewTop, window);
+    _topConstraint.constant = CaptionBaselineToProgressTop - CaptionBaselineToStepViewTop;
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|"
+                                             options:NSLayoutFormatAlignAllCenterX
+                                             metrics:nil
+                                               views:views]];
+    _topConstraint = [NSLayoutConstraint constraintWithItem:_progressView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                     toItem:self
+                                                  attribute:NSLayoutAttributeTop
+                                                 multiplier:1.0
+                                                   constant:0.0]; // constant will be set in updateConstraintConstantsForWindow:
+    [constraints addObject:_topConstraint];
+   
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
+                                                         attribute:NSLayoutAttributeCenterX
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterX
+                                                        multiplier:1.0
+                                                          constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)updateConstraints {
-    [self removeConstraints:[self constraints]];
-    NSDictionary *views = NSDictionaryOfVariableBindings(_progressView);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressView]-(>=0)-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
-    _topConstraint = [NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    [self updateConstraintConstants];
-    [self addConstraint:_topConstraint];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
-    
+    [self updateConstraintConstantsForWindow:self.window];
     [super updateConstraints];
 }
 

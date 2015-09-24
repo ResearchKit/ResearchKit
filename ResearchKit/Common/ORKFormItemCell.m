@@ -46,8 +46,8 @@
 #import "ORKScaleSliderView.h"
 
 
-static const CGFloat kVMargin = 10.0;
-static const CGFloat kHMargin = 15.0;
+static const CGFloat VerticalMargin = 10.0;
+static const CGFloat HorizontalMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
@@ -63,8 +63,8 @@ static const CGFloat kHMargin = 15.0;
 @property (nonatomic, strong) ORKCaption1Label *labelLabel;
 @property (nonatomic, weak) UITableView *_parentTableView;
 
-// If haveChangedAnswer, then a new defaultAnswer should not change the answer
-@property (nonatomic, assign) BOOL haveChangedAnswer;
+// If hasChangedAnswer, then a new defaultAnswer should not change the answer
+@property (nonatomic, assign) BOOL hasChangedAnswer;
 
 @end
 
@@ -91,8 +91,6 @@ static const CGFloat kHMargin = 15.0;
 
 @interface ORKFormItemCell ()
 
-@property (nonatomic, strong) NSMutableArray *myConstraints;
-
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
 @end
@@ -103,11 +101,9 @@ static const CGFloat kHMargin = 15.0;
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
                                  answer:(id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth
-                             screenType:(ORKScreenType)screenType {
+                          maxLabelWidth:(CGFloat)maxLabelWidth {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        _screenType = screenType;
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
         self.formItem = formItem;
@@ -147,12 +143,12 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)inputValueDidChange {
     // Subclasses should override this, and should call _setAnswer:
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
 }
 
 - (void)inputValueDidClear {
     // Subclasses should override this, and should call _setAnswer:
-    self.haveChangedAnswer = YES;
+    self.hasChangedAnswer = YES;
 }
 
 - (void)answerDidChange {
@@ -164,8 +160,8 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)defaultAnswerDidChange {
-    if (! self.haveChangedAnswer && ! self.answer) {
-        if (self.answer != _defaultAnswer && _defaultAnswer && ! [self.answer isEqual:_defaultAnswer]) {
+    if (!self.hasChangedAnswer && !self.answer) {
+        if (self.answer != _defaultAnswer && _defaultAnswer && ![self.answer isEqual:_defaultAnswer]) {
             self.answer = _defaultAnswer;
             
             // Inform delegate of the change too
@@ -191,7 +187,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)prepareForReuse {
-    self.haveChangedAnswer = NO;
+    self.hasChangedAnswer = NO;
 }
 
 // Inform delegate of the change
@@ -225,10 +221,12 @@ static const CGFloat kHMargin = 15.0;
 @end
 
 
-@implementation ORKFormItemTextFieldBasedCell
+@implementation ORKFormItemTextFieldBasedCell {
+    NSMutableArray *_variableConstraints;
+}
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth screenType:(ORKScreenType)screenType {
-    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth screenType:screenType];
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth {
+    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth];
     if (self != nil) {
         UILabel *label = self.labelLabel;
         label.isAccessibilityElement = NO;
@@ -254,75 +252,117 @@ static const CGFloat kHMargin = 15.0;
     
     [self.contentView addSubview:_textFieldView];
     
-    NSLayoutConstraint *contentConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    contentConstraint.priority = UILayoutPriorityDefaultHigh;
-    [self addConstraint:contentConstraint];
+    self.labelLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _textFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    [self setUpContentConstraint];
     [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints {
-    CGFloat labelMinWidth = self.maxLabelWidth;
-    CGFloat boundWidth = self.expectedLayoutWidth;
-    
-    id labelLabel = self.labelLabel, textFieldView = _textFieldView;
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    
-    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left), @"hSpacer":@(16), @"vSpacer":@(15), @"labelMinWidth": @(labelMinWidth)};
-    
-    [self.contentView removeConstraints:self.myConstraints];
-    
-    self.myConstraints = [NSMutableArray new];
-    
-    if ((labelMinWidth) >= 0.6*boundWidth) {
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self setNeedsUpdateConstraints];
+}
 
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-        
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textFieldView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-        
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[labelLabel]-vSpacer-[textFieldView]-vMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-        
-    } else {
-        
-        [self.myConstraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelMinWidth)]-hSpacer-[textFieldView]|" options:NSLayoutFormatAlignAllCenterY metrics:metrics views:dictionary]];
-        
-        [self.myConstraints addObject:
-         [NSLayoutConstraint constraintWithItem:labelLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
-        
-        [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                      toItem:labelLabel
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                  multiplier:1.0 constant:0.0]];
-        
-        [self.myConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                      toItem:textFieldView
-                                                                   attribute:NSLayoutAttributeHeight
-                                                                  multiplier:1.0 constant:0.0]];
+- (void)setUpContentConstraint {
+    NSLayoutConstraint *contentConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeWidth
+                                                                        multiplier:1.0
+                                                                          constant:0.0];
+    contentConstraint.priority = UILayoutPriorityDefaultHigh;
+    contentConstraint.active = YES;
+}
+
+- (void)updateConstraints {
+    [NSLayoutConstraint deactivateConstraints:_variableConstraints];
+    [_variableConstraints removeAllObjects];
+
+    if (!_variableConstraints) {
+        _variableConstraints = [NSMutableArray new];
     }
     
-    CGFloat height = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, self.screenType);
+    CGFloat labelWidth = self.maxLabelWidth;
+    CGFloat boundWidth = self.expectedLayoutWidth;
     
-    NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                                         attribute:NSLayoutAttributeHeight
-                                                                         relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                            toItem:nil
-                                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                                        multiplier:1
-                                                                          constant:height];
+    NSDictionary *metrics = @{@"vMargin":@(10),
+                              @"hMargin":@(self.separatorInset.left),
+                              @"hSpacer":@(16), @"vSpacer":@(15),
+                              @"labelWidth": @(labelWidth)};
+
+    id labelLabel = self.labelLabel;
+    id textFieldView = _textFieldView;
+    NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
+    
+    CGFloat fieldWidth = _textFieldView.estimatedWidth;
+    
+    // Leave half space for field, and also to be able to display placeholder in full.
+    if ( labelWidth >= 0.5 * boundWidth || (fieldWidth + labelWidth) > 0.9 * boundWidth ) {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel]-hMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
+        
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textFieldView]|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
+        
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[labelLabel]-vSpacer-[textFieldView]-vMargin-|"
+                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                 metrics:metrics
+                                                   views:views]];
+        
+    } else {
+        [_variableConstraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[labelLabel(==labelWidth)]-hSpacer-[textFieldView]|"
+                                                 options:NSLayoutFormatAlignAllCenterY
+                                                 metrics:metrics
+                                                   views:views]];
+        
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:labelLabel
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.contentView
+                                                                     attribute:NSLayoutAttributeCenterY
+                                                                    multiplier:1.0
+                                                                      constant:0]];
+        
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:labelLabel
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+        
+        [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self.contentView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                     relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                        toItem:textFieldView
+                                                                     attribute:NSLayoutAttributeHeight
+                                                                    multiplier:1.0
+                                                                      constant:0.0]];
+    }
+    
+    CGFloat defaultTableCelltHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.window);
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1.0
+                                                                         constant:defaultTableCelltHeight];
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
-    [self.myConstraints addObject:heightConstraint];
-    
-    [self.contentView addConstraints:self.myConstraints];
+    [_variableConstraints addObject:heightConstraint];
+
+    [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
 
@@ -362,10 +402,10 @@ static const CGFloat kHMargin = 15.0;
     
     NSString *formattedValue = [self formattedValue];
     CGFloat formattedWidth = [formattedValue sizeWithAttributes:@{ NSFontAttributeName : textField.font }].width;
-    const CGFloat kMinInputTextFieldPaddingRight = 6.0;
+    const CGFloat MinInputTextFieldPaddingRight = 6.0;
     
     // Shorten if necessary
-    if (formattedWidth > textField.frame.size.width - kMinInputTextFieldPaddingRight) {
+    if (formattedWidth > textField.frame.size.width - MinInputTextFieldPaddingRight) {
         formattedValue = [self shortenedFormattedValue];
     }
     
@@ -401,7 +441,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (! [[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
@@ -457,7 +497,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)inputValueDidChange {
     NSString *text = self.textField.text;
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     
     [super inputValueDidChange];
 }
@@ -470,7 +510,7 @@ static const CGFloat kHMargin = 15.0;
         NSString *text = (NSString *)answer;
         NSInteger maxLength = answerFormat.maximumLength;
         BOOL changedValue = NO;
-        if (maxLength > 0 && [text length] > maxLength) {
+        if (maxLength > 0 && text.length > maxLength) {
             text = [text substringToIndex:maxLength];
             changedValue = YES;
         }
@@ -492,19 +532,19 @@ static const CGFloat kHMargin = 15.0;
     
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
-    if ([textField.text length] < [text length]) {
+    if (textField.text.length < text.length) {
     
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
         NSInteger maxLength = answerFormat.maximumLength;
     
-        if (maxLength > 0 && [text length] > maxLength) {
+        if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
         }
     }
     
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
     
     return YES;
@@ -573,9 +613,9 @@ static const CGFloat kHMargin = 15.0;
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
-    if ([text length]) {
+    if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
-        if (! answer) {
+        if (!answer) {
             answer = ORKNullAnswerValue();
             updateInput = YES;
         }
@@ -624,35 +664,40 @@ static const CGFloat kHMargin = 15.0;
     [self answerDidChange];
     
     [self.contentView addSubview:_textView];
-    
-    {
-        NSDictionary *dictionary = @{@"textView":_textView};
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
+    [self setUpConstraints];
+}
 
-        [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:metrics
-                                                   views:dictionary]];
-        
-        [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
-                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                 metrics:metrics
-                                                   views:dictionary]];
-        
-        
-        NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationGreaterThanOrEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                           multiplier:1.0
-                                                                             constant:120.0];
-        heightConstraint.priority = UILayoutPriorityDefaultHigh;
-        [self.contentView addConstraint:heightConstraint];
-    }
+- (void)setUpConstraints {
+    NSDictionary *views = @{ @"textView": _textView };
+    ORKEnableAutoLayoutForViews(views.allValues);
+    NSDictionary *metrics = @{ @"vMargin":@(10), @"hMargin":@(self.separatorInset.left) };
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[textView]-hMargin-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:metrics
+                                               views:views]];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[textView]-vMargin-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:metrics
+                                               views:views]];
+    
+    
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.contentView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                       multiplier:1.0
+                                                                         constant:120.0];
+    heightConstraint.priority = UILayoutPriorityDefaultHigh;
+    [constraints addObject:heightConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)applyAnswerFormat {
@@ -705,7 +750,7 @@ static const CGFloat kHMargin = 15.0;
 
 - (void)inputValueDidChange {
     NSString *text = _textView.text;
-    [self ork_setAnswer:[text length] ? text : ORKNullAnswerValue()];
+    [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
     [super inputValueDidChange];
 }
 
@@ -716,8 +761,8 @@ static const CGFloat kHMargin = 15.0;
 #pragma mark UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
-    NSInteger lineCount = [[textView.text componentsSeparatedByCharactersInSet:
-                         [NSCharacterSet newlineCharacterSet]] count];
+    NSInteger lineCount = [textView.text componentsSeparatedByCharactersInSet:
+                         [NSCharacterSet newlineCharacterSet]].count;
     
     if (_lastSeenLineCount != lineCount) {
         _lastSeenLineCount = lineCount;
@@ -757,11 +802,11 @@ static const CGFloat kHMargin = 15.0;
     
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
-    if ([textView.text length] < [string length]) {
+    if (textView.text.length < string.length) {
     
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
 
-        if (_maxLength > 0 && [string length] > _maxLength) {
+        if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
         }
@@ -793,17 +838,31 @@ static const CGFloat kHMargin = 15.0;
                                                                              answer:self.answer];
     _selectionView.delegate = self;
     
-    self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
+    self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, HorizontalMargin, VerticalMargin, HorizontalMargin);
     
     [self.contentView addSubview:_selectionView];
-    
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_selectionView);
-    
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:dictionary]];
+    [self setUpConstraints];
     
     [super cellInit];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = @{@"selectionView": _selectionView };
+    ORKEnableAutoLayoutForViews(views.allValues);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[selectionView]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[selectionView]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark ORKImageSelectionViewDelegate
@@ -831,7 +890,7 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (id<ORKScaleAnswerFormatProvider>)formatProvider {
-    if(_formatProvider == nil){
+    if (_formatProvider == nil) {
         _formatProvider = (id<ORKScaleAnswerFormatProvider>)[self.formItem.answerFormat impliedAnswerFormat];
     }
     return _formatProvider;
@@ -844,20 +903,28 @@ static const CGFloat kHMargin = 15.0;
     [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
     
     [self.contentView addSubview:_sliderView];
-    
-    NSDictionary *dictionary = NSDictionaryOfVariableBindings(_sliderView);
-    
-    ORKEnableAutoLayoutForViews([dictionary allValues]);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_sliderView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:dictionary]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_sliderView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:dictionary]];
-    
+    [self setUpConstraints];
+
     [super cellInit];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = @{ @"sliderView": _sliderView };
+    ORKEnableAutoLayoutForViews(views.allValues);
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[sliderView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[sliderView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark recover answer
@@ -868,7 +935,7 @@ static const CGFloat kHMargin = 15.0;
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (! [self.answer isKindOfClass:[NSNumber class]]) {
+        if (![self.answer isKindOfClass:[NSNumber class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
         }
         
@@ -883,7 +950,13 @@ static const CGFloat kHMargin = 15.0;
 }
 
 - (void)inputValueDidChange {
-    [self ork_setAnswer:_sliderView.currentValue];
+    NSArray *textChoices = [self.formatProvider textChoices];
+    if (textChoices) {
+        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
+        [self ork_setAnswer:textChoice.value];
+    } else {
+        [self ork_setAnswer:_sliderView.currentValue];
+    }
     [super inputValueDidChange];
 }
 
@@ -905,7 +978,7 @@ static const CGFloat kHMargin = 15.0;
 - (void)setFormItem:(ORKFormItem *)formItem {
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
-    if (! (!formItem ||
+    if (!(!formItem ||
            [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
            [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
            [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||

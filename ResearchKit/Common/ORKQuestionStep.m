@@ -53,6 +53,18 @@
     return step;
 }
 
++ (instancetype)questionStepWithIdentifier:(NSString *)identifier
+                                     title:(nullable NSString *)title
+                                      text:(nullable NSString *)text
+                                    answer:(nullable ORKAnswerFormat *)answerFormat {
+
+    ORKQuestionStep *step = [[ORKQuestionStep alloc] initWithIdentifier:identifier];
+    step.title = title;
+    step.text = text;
+    step.answerFormat = answerFormat;
+    return step;
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     
     self = [super initWithIdentifier:identifier];
@@ -145,8 +157,8 @@
 }
 
 - (BOOL)isFormatFitsChoiceCells {
-    return ((self.questionType == ORKQuestionTypeSingleChoice && NO==[self isFormatChoiceWithImageOptions] && NO==[self isFormatChoiceValuePicker]) ||
-            (self.questionType == ORKQuestionTypeMultipleChoice && NO==[self isFormatChoiceWithImageOptions]) ||
+    return ((self.questionType == ORKQuestionTypeSingleChoice && ![self isFormatChoiceWithImageOptions] && ![self isFormatChoiceValuePicker]) ||
+            (self.questionType == ORKQuestionTypeMultipleChoice && ![self isFormatChoiceWithImageOptions]) ||
             self.questionType == ORKQuestionTypeBoolean);
 }
 

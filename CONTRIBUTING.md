@@ -75,6 +75,12 @@ tests, add UI to at least one test application so that the new
 features can be reviewed and tested. Consider also whether to add new
 code to other existing demo apps to exercise your feature.
 
+When adding UI driven components, make sure that they are accessible. 
+Follow the steps outlined in the [Best Practices](../../wiki/best-practices) 
+section under Accessibility. Before submitting the pull request, you should 
+audit your components with Voice Over (or other relevant assistive technologies) 
+enabled.
+
 Keep changes that fix different issues separate. For bug fixes,
 separate bugs should be submitted as separate pull requests. A good
 way to do this is to create a new branch in your fork for each new

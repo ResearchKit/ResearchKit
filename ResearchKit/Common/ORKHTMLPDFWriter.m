@@ -65,15 +65,15 @@ static const CGFloat LetterHeight = 11.0f;
 
 - (void)drawFooterForPageAtIndex:(NSInteger)pageIndex
                           inRect:(CGRect)footerRect {
-    NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex+1), (long)[self numberOfPages]];
+    NSString *footer  = [NSString stringWithFormat:ORKLocalizedString(@"CONSENT_PAGE_NUMBER_FORMAT", nil), (long)(pageIndex + 1), (long)[self numberOfPages]];
     
     if (footer) {
         UIFont *font = [UIFont fontWithName:@"Helvetica" size:12];
         CGSize size = [footer sizeWithAttributes:@{ NSFontAttributeName: font}];
         
         // Center Text
-        CGFloat drawX = CGRectGetWidth(footerRect)/2+footerRect.origin.x - size.width/2;
-        CGFloat drawY = footerRect.origin.y+footerRect.size.height/2 - size.height/2;
+        CGFloat drawX = (CGRectGetWidth(footerRect) / 2) + footerRect.origin.x - (size.width / 2);
+        CGFloat drawY = footerRect.origin.y + (footerRect.size.height / 2) - (size.height / 2);
         CGPoint drawPoint = CGPointMake(drawX, drawY);
         
         [footer drawAtPoint:drawPoint withAttributes:@{ NSFontAttributeName: font}];
@@ -99,13 +99,13 @@ static const CGFloat LetterHeight = 11.0f;
 
 @implementation ORKHTMLPDFWriter
 
-static const CGFloat kHeaderHeight = 25.0f;
-static const CGFloat kFooterHeight = 25.0f;
-static const CGFloat kPageEdge = 72.0f/4;
+static const CGFloat HeaderHeight = 25.0;
+static const CGFloat FooterHeight = 25.0;
+static const CGFloat PageEdge = 72.0 / 4;
 
 - (void)writePDFFromHTML:(NSString *)html withCompletionBlock:(void (^)(NSData *data, NSError *error))completionBlock {
     
-    _pageMargins = UIEdgeInsetsMake(kPageEdge, kPageEdge, kPageEdge, kPageEdge);
+    _pageMargins = UIEdgeInsetsMake(PageEdge, PageEdge, PageEdge, PageEdge);
     _pageSize = [ORKHTMLPDFWriter defaultPageSize];
     
     _data = nil;
@@ -134,8 +134,8 @@ static const CGFloat kPageEdge = 72.0f/4;
     
     ORKHTMLPDFPageRenderer *renderer = [[ORKHTMLPDFPageRenderer alloc] init];
     renderer.pageMargins = self.pageMargins;
-    renderer.footerHeight = kFooterHeight;
-    renderer.headerHeight = kHeaderHeight;
+    renderer.footerHeight = FooterHeight;
+    renderer.headerHeight = HeaderHeight;
     
     [renderer addPrintFormatter:formatter startingAtPageAtIndex:0];
     
@@ -144,7 +144,7 @@ static const CGFloat kPageEdge = 72.0f/4;
     CGSize pageSize = [self pageSize];
     CGRect pageRect = CGRectMake(0, 0, pageSize.width, pageSize.height);
     
-    UIGraphicsBeginPDFContextToData(currentReportData, pageRect, nil);
+    UIGraphicsBeginPDFContextToData(currentReportData, pageRect, @{});
     
     [renderer prepareForDrawingPages:NSMakeRange(0, 1)];
     

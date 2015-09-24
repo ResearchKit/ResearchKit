@@ -35,7 +35,7 @@
 #import "ORKSkin.h"
 
 
-@interface ORKConsentLearnMoreViewController ()<UIWebViewDelegate>
+@interface ORKConsentLearnMoreViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, copy) NSString *content;
@@ -54,11 +54,9 @@
     return self;
 }
 
--(instancetype)initWithContentURL:(NSURL * __nonnull)contentURL
-{
+- (instancetype)initWithContentURL:(NSURL *)contentURL {
     self = [super init];
-    if(self)
-    {
+    if (self) {
         self.contentURL = contentURL;
     }
     return self;
@@ -81,12 +79,11 @@
     _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -horizMargin, .right = -horizMargin};
     _webView.opaque = NO; // If opaque is set to YES, _webView shows a black right margin during transition when modally presented. This is an artifact due to disabling clipsToBounds to be able to show the scroll indicator outside the view.
     
-    if(_contentURL)
-    {
+    if (_contentURL) {
         [_webView setScalesPageToFit:YES];
         
         [_webView loadRequest:[NSURLRequest requestWithURL:_contentURL]];
-    }else{
+    } else {
         [_webView loadHTMLString:self.content baseURL:ORKCreateRandomBaseURL()];
     }
     
@@ -94,12 +91,12 @@
     [self.view addSubview:_webView];
     
     _webView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self setupConstraints];
+    [self setUpConstraints];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_webView);
@@ -109,7 +106,8 @@
                                                                              metrics:@{ @"horizMargin": @(horizMargin) }
                                                                                views:views]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView]|"
-                                                                             options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
                                                                                views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];

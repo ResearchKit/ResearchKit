@@ -30,8 +30,8 @@
 
 /* Informed consent process. */
 "CONSENT_NAME_TITLE" = "Souhlas";
-"CONSENT_NAME_FIRST" = "Jméno";
-"CONSENT_NAME_LAST" = "Příjmení";
+"CONSENT_NAME_GIVEN" = "Jméno";
+"CONSENT_NAME_FAMILY" = "Příjmení";
 "CONSENT_NAME_PLACEHOLDER" = "Požadováno";
 "CONSENT_REVIEW_TITLE" = "Kontrola";
 "CONSENT_REVIEW_INSTRUCTION" = "Projděte si níže uvedený formulář a pokud budete chtít pokračovat, klepněte na Souhlasím.";
@@ -82,6 +82,15 @@
 "RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM" = "%1$@ přesahuje maximální povolenou hodnotu (%2$@).";
 "RANGE_ALERT_MESSAGE_BELOW_MAXIMUM" = "%1$@ nedosahuje minimální povolené hodnoty (%2$@).";
 "RANGE_ALERT_MESSAGE_OTHER" = "%@ není platná hodnota.";
+
+/* Alert for invalid email address value */
+"INVALID_EMAIL_ALERT_MESSAGE" = "Neplatná e‑mailová adresa: %@";
+
+/* Alert for exceeding length limit in text answer */
+"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text překračuje maximální délku: %@";
+
+/* Camera not available during multitasking */
+"CAMERA_UNAVAILABLE_MESSAGE" = "Fotoaparát není na rozdělené obrazovce k dispozici.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -154,7 +163,7 @@
 "WALK_STAND_VOICE_INSTRUCTION_FORMAT" = "Nyní po %@ klidně stůjte.";
 "WALK_STAND_INSTRUCTION_FORMAT" = "Po %@ klidně stůjte.";
 "WALK_RETURN_INSTRUCTION_FORMAT" = "Obraťte se a jděte zpátky na začátek.";
-"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Udělejte do %ld kroků v přímém směru.";
+"WALK_OUTBOUND_INSTRUCTION_FORMAT" = "Ujděte až %ld kroků v přímém směru.";
 
 
 /* Tapping active task. */
@@ -216,6 +225,52 @@
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokus %@ z %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Jakmile se objeví modrý kroužek, krátce zařízením zatřeste";
 
+/* Tower of Hanoi active task */
+"TOWER_OF_HANOI_TASK_TITLE" = "Hanojské věže";
+"TOWER_OF_HANOI_TASK_INTENDED_USE" = "Tato aktivita vyhodnotí vaši schopnost řešit hlavolamy.";
+"TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Přesuňte celou sadu na zvýrazněnou podložku s využitím co nejmenšího počtu kroků.";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Začněte klepnutím na Začít";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Vyřešte hlavolam";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Počet kroků: %@ \n %@";
+"TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Tento hlavolam nedokážu vyřešit";
+
+/* Timed walk active task. */
+"TIMED_WALK_TITLE" = "Chůze na čas";
+"TIMED_WALK_INTRO_DETAIL" = "Tato aktivita změří funkci vašich dolních končetin.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Najděte si místo (nejlépe venku), kde můžete co nejrychleji a bezpečně ujít přibližně %@ v přímém směru. Nezpomalujte, dokud nepřekročíte cílovou čáru.";
+"TIMED_WALK_INTRO_2_DETAIL" = "Začněte klepnutím na Další.";
+"TIMED_WALK_FORM_TITLE" = "Asistenční zařízení";
+"TIMED_WALK_FORM_TEXT" = "Při všech testech používejte při chůzi tutéž oporu.";
+"TIMED_WALK_QUESTION_TEXT" = "Používáte kotníkovou ortézu?";
+"TIMED_WALK_QUESTION_2_TITLE" = "Používáte při chůzi oporu?";
+"TIMED_WALK_QUESTION_2_TEXT" = "Klepněte a vyberte odpověď.";
+"TIMED_WALK_QUESTION_2_CHOICE" = "Ne";
+"TIMED_WALK_QUESTION_2_CHOICE_2" = "Jedna hůl";
+"TIMED_WALK_QUESTION_2_CHOICE_3" = "Jedna berla";
+"TIMED_WALK_QUESTION_2_CHOICE_4" = "Dvě hole";
+"TIMED_WALK_QUESTION_2_CHOICE_5" = "Dvě berle";
+"TIMED_WALK_QUESTION_2_CHOICE_6" = "Chodítko";
+"TIMED_WALK_INSTRUCTION_%@" = "Ujděte až %@ v přímém směru.";
+"TIMED_WALK_INSTRUCTION_2" = "Obraťte se a jděte zpátky na začátek.";
+"TIMED_WALK_INSTRUCTION_TEXT" = "Po dokončení klepněte na Hotovo.";
+
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Žádná data";
+
+/* PSAT active task. */
+"PASAT_TITLE" = "PASAT";
+"PVSAT_TITLE" = "PVSAT";
+"PAVSAT_TITLE" = "PAVSAT";
+"PASAT_INTRO_TEXT" = "Paced Auditory a Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání sluchových informací.";
+"PVSAT_INTRO_TEXT" = "Paced Visual Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání zrakových informací.";
+"PAVSAT_INTRO_TEXT" = "Paced Auditory a Visual Serial Addition Test měří vaši rychlost a počtářské dovednosti při zpracovávání sluchových a zrakových informací.";
+"PSAT_INTRO_TEXT_2_%@" = "Vždy po %@ sekundách se vám zobrazí jedno číslo.\nKaždé číslo musíte přičíst k bezprostředně předchozímu.\nPozor, nesčítejte všechna čísla, vždy jen dvě poslední.";
+"PSAT_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"PSAT_INITIAL_INSTRUCTION" = "Zapamatujte si toto první číslo.";
+"PSAT_INSTRUCTION" = "Přičtěte toto číslo k předchozímu.";
+"PSAT_NO_DIGIT" = "-";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodařilo se odstranit dostatečné množství protokolů pro dosažení prahové hodnoty";
@@ -250,4 +305,15 @@
 "AX.MEMORY.TILE.LABEL" = "Kostka paměťové hry";
 
 "AX_IMAGE_CAPTURE_LABEL" = "Náhled";
+"AX_IMAGE_CAPTURED_LABEL" = "Pořízený obrázek";
 
+"AX_TOWER_OF_HANOI_INVALID_MOVE_FORMAT" = "Disk o velikosti %@ nelze umístit na disk o velikosti %@";
+"AX_TOWER_OF_HANOI_TARGET_DISK" = "Cíl";
+"AX_TOWER_OF_HANOI_TOWER" = "Věž";
+"AX_TOWER_OF_HANOI_PLACE_DISK" = "Poklepáním umístíte disk";
+"AX_TOWER_OF_HANOI_SELECT_DISK" = "Poklepáním vyberte vrchní disk";
+"AX_TOWER_OF_HANOI_TOWER_CONTAINS" = "Obsahuje disky o velikosti %@";
+"AX_TOWER_OF_HANOI_TOWER_EMPTY" = "Prázdné";
+
+"AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
+"AX_GRAPH_AND_SEPARATOR" = " a ";

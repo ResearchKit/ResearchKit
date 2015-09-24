@@ -57,6 +57,8 @@ enum TaskListRow: Int, Printable {
     case ToneAudiometry
     case ReactionTime
     case TowerOfHanoi
+    case PSAT
+    case TimedWalk
     case HolePegTest
     case ImageCapture
     case Survey
@@ -140,6 +142,12 @@ enum TaskListRow: Int, Printable {
             
             case .TowerOfHanoi:
                 return NSLocalizedString("Tower of Hanoi Active Task", comment: "")
+            
+            case .PSAT:
+                return NSLocalizedString("PSAT Active Task", comment: "")
+            
+            case .TimedWalk:
+                return NSLocalizedString("Timed Walk", comment: "")
             
             case .HolePegTest:
                 return NSLocalizedString("Hole Peg Test Task", comment: "")
@@ -230,6 +238,8 @@ enum TaskListRow: Int, Printable {
         case ToneAudiometryTask =                                   "ToneAudiometry"
         case ReactionTime =                                         "ReactionTime"
         case TowerOfHanoi =                                         "TowerOfHanoi"
+        case PSATTask =                                             "PSATTask"
+        case TimedWalkTask =                                        "TimedWalkTask"
         case HolePegTestTask =                                      "HolePegTestTask"
         
         // Image capture task specific identifiers.
@@ -318,6 +328,12 @@ enum TaskListRow: Int, Printable {
             
             case .TowerOfHanoi:
                 return towerOfHanoiTask
+            
+            case .PSAT:
+                return PSATTask
+            
+            case .TimedWalk:
+                return TimedWalkTask
             
             case .HolePegTest:
                 return holePegTestTask
@@ -621,6 +637,16 @@ enum TaskListRow: Int, Printable {
     
     private var towerOfHanoiTask: ORKTask {
         return ORKOrderedTask.towerOfHanoiTaskWithIdentifier(Identifier.TowerOfHanoi.rawValue, intendedUseDescription: exampleDescription, numberOfDisks: 5, options: nil)
+    }
+    
+    /// This task presents the PSAT pre-defined active task.
+    private var PSATTask: ORKTask {
+        return ORKOrderedTask.PSATTaskWithIdentifier(Identifier.PSATTask.rawValue, intendedUseDescription: exampleDescription, presentationMode: (.Auditory | .Visual), interStimulusInterval: 3.0, stimulusDuration: 1.0, seriesLength: 60, options: nil)
+    }
+    
+    /// This task presents the Timed Walk pre-defined active task.
+    private var timedWalkTask: ORKTask {
+        return ORKOrderedTask.timedWalkTaskWithIdentifier(String(Identifier.TimedWalkTask), intendedUseDescription: exampleDescription, distanceInMeters: 100.0, timeLimit: 180.0, options: [])
     }
     
     /// This task presents the Hole Peg Test pre-defined active task.
