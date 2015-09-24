@@ -31,6 +31,7 @@
 
 #import "ORKSurveyAnswerCellForImageSelection.h"
 #import "ORKHelpers.h"
+#import "ORKSkin.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKImageSelectionView.h"
 
@@ -53,15 +54,31 @@
     
     [self addSubview:_selectionView];
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
-    ORKEnableAutoLayoutForViews([views allValues]);
+    _selectionView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    NSMutableArray *constraints = [NSMutableArray new];
     
-    NSLayoutConstraint *resistsCompressingConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:20000.0];
-    resistsCompressingConstraint.priority = UILayoutPriorityDefaultHigh;
-    [self addConstraint:resistsCompressingConstraint];
+    NSDictionary *views = @{ @"selectionView": _selectionView };
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[selectionView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[selectionView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    
+    NSLayoutConstraint *resistCompressingConstraint = [NSLayoutConstraint constraintWithItem:_selectionView
+                                                                                   attribute:NSLayoutAttributeWidth
+                                                                                   relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                                                                      toItem:nil
+                                                                                   attribute:NSLayoutAttributeNotAnAttribute
+                                                                                  multiplier:1.0
+                                                                                    constant:ORKScreenMetricMaxDimension];
+    resistCompressingConstraint.priority = UILayoutPriorityDefaultHigh;
+    [constraints addObject:resistCompressingConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark ORKImageSelectionViewDelegate

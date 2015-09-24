@@ -79,9 +79,9 @@
 
     [self addSubview:_containerView];
     
+    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     ORKEnableAutoLayoutForViews(@[_containerView, _textFieldView]);
-        
-    [self setNeedsUpdateConstraints];
+    [self setUpConstraints];
 }
 
 - (void)dealloc {
@@ -94,30 +94,32 @@
     [self answerDidChange];
 }
 
-- (void)setNeedsUpdateConstraints {
-    [NSLayoutConstraint deactivateConstraints:[self constraints]];
-    [NSLayoutConstraint deactivateConstraints:[_containerView constraints]];
-    [super setNeedsUpdateConstraints];
-}
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
-    [self setNeedsUpdateConstraints];
 }
 
-- (void)updateConstraints {
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     NSDictionary *views = NSDictionaryOfVariableBindings(_containerView, _textFieldView);
-    self.layoutMargins = ORKStandardLayoutMarginsForTableViewCell(self);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
-                                                                 options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_containerView(>=0)]-|"
-                                                                 options:0 metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_containerView]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_containerView(>=0)]-|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|" options:0 metrics:nil views:views]];
-    [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|" options:0 metrics:nil views:views]];
-
-    [super updateConstraints];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textFieldView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textFieldView]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (BOOL)becomeFirstResponder {
@@ -149,7 +151,7 @@
 - (BOOL)shouldContinue {
     BOOL isValid = [self isAnswerValid];
 
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
     }
     
@@ -190,9 +192,9 @@
 - (void)setAnswerWithText:(NSString *)text {
     BOOL updateInput = NO;
     id answer = ORKNullAnswerValue();
-    if ([text length]) {
+    if (text.length) {
         answer = [[NSDecimalNumber alloc] initWithString:text locale:[NSLocale currentLocale]];
-        if (! answer) {
+        if (!answer) {
             answer = ORKNullAnswerValue();
             updateInput = YES;
         }
@@ -206,7 +208,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     
@@ -220,7 +222,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid) {
+    if (!isValid) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
         return NO;
     }

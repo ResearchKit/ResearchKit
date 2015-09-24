@@ -166,7 +166,7 @@ ORK_CLASS_AVAILABLE
  @param handler     The handler block for generated PDF data. When successful, the returned
                     data represents a complete PDF document that represents the consent.
  */
-- (void)makePDFWithCompletionHandler:(void (^)(NSData * __nullable PDFData, NSError * __nullable error))handler;
+- (void)makePDFWithCompletionHandler:(void (^)(NSData * _Nullable PDFData, NSError * _Nullable error))handler;
 
 @end
 

@@ -71,8 +71,8 @@
         if ([typeAttribute hasPrefix:@"T@"]) {
              _isPrimitiveType = NO;
             Class typeClass = nil;
-            if ([typeAttribute length] > 4) {
-                NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, [typeAttribute length]-4)];  //turns @"NSDate" into NSDate
+            if (typeAttribute.length > 4) {
+                NSString * typeClassName = [typeAttribute substringWithRange:NSMakeRange(3, typeAttribute.length-4)];  //turns @"NSDate" into NSDate
                 typeClass = NSClassFromString(typeClassName);
             } else {
                 typeClass = [NSObject class];

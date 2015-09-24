@@ -143,11 +143,11 @@
     _cachedContentInsets = tableView.contentInset;
     _cachedScrollIndicatorInsets = tableView.scrollIndicatorInsets;
     
-    NSDictionary *info = [aNotification userInfo];
-    CGSize kbSize = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    kbSize.height = kbSize.height-44;
+    NSDictionary *userInfo = aNotification.userInfo;
+    CGSize keyboardSize = ((NSValue *)userInfo[UIKeyboardFrameEndUserInfoKey]).CGRectValue.size;
+    keyboardSize.height = keyboardSize.height - 44;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
     
     tableView.contentInset = contentInsets;
     tableView.scrollIndicatorInsets = contentInsets;
@@ -155,15 +155,15 @@
     CGRect cellFrame = cell.frame;
     CGPoint desiredOffset = cellFrame.origin;
     
-    CGRect availFrame = tableView.frame;
-    availFrame.size.height -= kbSize.height;
+    CGRect availableFrame = tableView.frame;
+    availableFrame.size.height -= keyboardSize.height;
     
-    desiredOffset.y = cellFrame.origin.y - (availFrame.size.height/2);
+    desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height / 2);
     
-    if (availFrame.size.height > cellFrame.size.height) {
-        desiredOffset.y = cellFrame.origin.y - (availFrame.size.height - cellFrame.size.height) - (cellFrame.size.height -55);
+    if (availableFrame.size.height > cellFrame.size.height) {
+        desiredOffset.y = cellFrame.origin.y - (availableFrame.size.height - cellFrame.size.height) - (cellFrame.size.height - 55);
     }
-    desiredOffset.y = MAX(desiredOffset.y,0);
+    desiredOffset.y = MAX(desiredOffset.y, 0);
 
     [tableView setContentOffset:desiredOffset animated:NO];
 }
@@ -197,12 +197,17 @@
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
-    return @[[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:[[self class] suggestedCellHeightForView:view]]];
+    return @[[NSLayoutConstraint constraintWithItem:self
+                                          attribute:NSLayoutAttributeHeight
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:nil
+                                          attribute:NSLayoutAttributeHeight
+                                         multiplier:1.0
+                                           constant:[[self class] suggestedCellHeightForView:view]]];
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(view.window);
-    return ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+    return ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, view.window);
 }
 
 @end

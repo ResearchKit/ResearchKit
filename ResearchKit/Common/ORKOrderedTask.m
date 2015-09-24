@@ -109,7 +109,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 - (void)validateParameters {
     NSArray *uniqueIdentifiers = [self.steps valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( [self.steps count] != [uniqueIdentifiers count] );
+    BOOL itemsHaveNonUniqueIdentifiers = ( self.steps.count != uniqueIdentifiers.count );
     
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Each step should have a unique identifier" userInfo:nil];
@@ -144,8 +144,8 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
     } else {
         NSUInteger index = [self indexOfStep:step];
         
-        if (NSNotFound != index && index != (steps.count-1)) {
-            nextStep = steps[index+1];
+        if (NSNotFound != index && index != (steps.count - 1)) {
+            nextStep = steps[index + 1];
         }
     }
     return nextStep;
@@ -168,7 +168,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
         NSUInteger index = [self indexOfStep:step];
         
         if (NSNotFound != index && index != 0) {
-            nextStep = steps[index-1];
+            nextStep = steps[index - 1];
         }
     }
     return nextStep;
@@ -188,9 +188,9 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 - (ORKTaskProgress)progressOfCurrentStep:(ORKStep *)step withResult:(ORKTaskResult *)taskResult {
     ORKTaskProgress progress;
     progress.current = [self indexOfStep:step];
-    progress.total = [_steps count];
+    progress.total = _steps.count;
     
-    if (! [step showsProgress]) {
+    if (![step showsProgress]) {
         progress.total = 0;
     }
     return progress;
@@ -219,7 +219,7 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
             [healthTypes unionSet:[activeStep requestedHealthKitTypesForReading]];
         }
     }
-    return [healthTypes count] ? healthTypes : nil;
+    return healthTypes.count ? healthTypes : nil;
 }
 
 - (NSSet *)requestedHealthKitTypesForWriting {
@@ -334,7 +334,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.detailText = ORKLocalizedString(@"TAPPING_INTRO_TEXT", nil);
             
             NSString *imageName = @"phonetapping";
-            if (! [[[NSLocale preferredLanguages] firstObject] hasPrefix:@"en"]) {
+            if (![[NSLocale preferredLanguages].firstObject hasPrefix:@"en"]) {
                 imageName = [imageName stringByAppendingString:@"_notap"];
             }
             step.image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -342,6 +342,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TAPPING_TASK_TITLE", nil);
@@ -416,6 +417,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"AUDIO_TASK_TITLE", nil);
@@ -467,7 +469,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     
     // Exception list: Korean, Chinese (all), Thai, and Vietnamese.
     NSArray *nonSpelledOutLanguages = @[@"ko", @"zh", @"th", @"vi", @"ja"];
-    NSString *currentLanguage = [[[NSBundle mainBundle] preferredLocalizations] firstObject];
+    NSString *currentLanguage = [[NSBundle mainBundle] preferredLocalizations].firstObject;
     NSString *currentLanguageCode = [NSLocale componentsFromLocaleIdentifier:currentLanguage][NSLocaleLanguageCode];
     if ((currentLanguageCode != nil) && [nonSpelledOutLanguages containsObject:currentLanguageCode]) {
         formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
@@ -487,7 +489,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSDateComponentsFormatter *formatter = [self textTimeFormatter];
     
     NSMutableArray *steps = [NSMutableArray array];
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"FITNESS_TASK_TITLE", nil);
@@ -497,6 +499,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"FITNESS_TASK_TITLE", nil);
@@ -607,7 +610,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     NSDateComponentsFormatter *formatter = [self textTimeFormatter];
     
     NSMutableArray *steps = [NSMutableArray array];
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"WALK_TASK_TITLE", nil);
@@ -616,6 +619,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             step.shouldTintImages = YES;
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"WALK_TASK_TITLE", nil);
@@ -760,13 +764,14 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_TITLE", nil);
             step.text = [NSString stringWithFormat:requireReversal ? ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@", nil) : ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@", nil), targetPluralName, targetPluralName];
             step.detailText = ORKLocalizedString(@"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION", nil);
             
-            if (! customTargetImage) {
+            if (!customTargetImage) {
                 step.image = [UIImage imageNamed:@"memory-second-screen" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             } else {
                 step.image = customTargetImage;
@@ -816,7 +821,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     }
 
     NSMutableArray *steps = [NSMutableArray array];
-    if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
+    if (!(options & ORKPredefinedTaskOptionExcludeInstructions)) {
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction0StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
@@ -827,6 +832,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TONE_AUDIOMETRY_TASK_TITLE", nil);
@@ -891,6 +897,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"TOWER_OF_HANOI_TASK_TITLE", nil);
@@ -943,6 +950,7 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
             
             ORKStepArrayAddStep(steps, step);
         }
+        
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = ORKLocalizedString(@"REACTION_TIME_TASK_TITLE", nil);
