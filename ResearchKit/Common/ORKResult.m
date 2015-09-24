@@ -169,7 +169,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %.03f %@", [super description], @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"%@ %@ %.03f %@", super.description, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
 }
 
 @end
@@ -216,7 +216,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@, %d, %@", [super description], self.puzzleWasSolved, self.moves];
+    return [NSString stringWithFormat:@"%@, %d, %@", super.description, self.puzzleWasSolved, self.moves];
 }
 
 @end
@@ -266,7 +266,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", super.description, @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
 }
 
 @end
@@ -314,7 +314,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@", [super description], self.outputVolume, self.samples];
+    return [NSString stringWithFormat:@"%@ %@ %@", super.description, self.outputVolume, self.samples];
 }
 
 @end
@@ -363,7 +363,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %.1lf %@ %.4lf", [super description], self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"%@ %.1lf %@ %.4lf", super.description, self.frequency, @(self.channel), self.amplitude];
 }
 
 @end
@@ -420,7 +420,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
+    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", super.description, @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
 }
 
 @end
@@ -488,7 +488,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", [super description], @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
+    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", super.description, @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
 }
 
 @end
@@ -546,7 +546,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ score=%@", [super description], @(self.score)];
+    return [NSString stringWithFormat:@"%@ score=%@", super.description, @(self.score)];
 }
 
 @end
@@ -602,7 +602,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", [super description], self.samples];
+    return [NSString stringWithFormat:@"%@ %@", super.description, self.samples];
 }
 
 @end
@@ -654,7 +654,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ (%lld bytes)", [super description], self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
+    return [NSString stringWithFormat:@"%@ %@ (%lld bytes)", super.description, self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
 }
 
 @end
@@ -702,7 +702,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %f %@", [super description], self.timestamp, self.fileResult.description];
+    return [NSString stringWithFormat:@"%@ %f %@", super.description, self.timestamp, self.fileResult.description];
 }
 
 @end
@@ -1214,8 +1214,9 @@
 - (void)setAnswer:(id)answer {
     if ([answer isKindOfClass:[NSArray class]]) {
         // Because ORKBooleanAnswerFormat has ORKChoiceAnswerFormat as its implied format.
-        NSAssert([answer count] <= 1, @"Should be no more than one answer");
-        answer = [answer firstObject];
+        NSArray *answerArray = answer;
+        NSAssert(answerArray.count <= 1, @"Should be no more than one answer");
+        answer = answerArray.firstObject;
     }
     answer = [self validateAnswer:answer];
     self.booleanAnswer = answer;
@@ -1605,7 +1606,7 @@
 
 - (ORKResult *)firstResult {
     
-    return [self.results firstObject];
+    return self.results.firstObject;
 }
 
 @end

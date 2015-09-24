@@ -157,8 +157,8 @@
 }
 
 - (BOOL)isFormatFitsChoiceCells {
-    return ((self.questionType == ORKQuestionTypeSingleChoice && NO==[self isFormatChoiceWithImageOptions] && NO==[self isFormatChoiceValuePicker]) ||
-            (self.questionType == ORKQuestionTypeMultipleChoice && NO==[self isFormatChoiceWithImageOptions]) ||
+    return ((self.questionType == ORKQuestionTypeSingleChoice && ![self isFormatChoiceWithImageOptions] && ![self isFormatChoiceValuePicker]) ||
+            (self.questionType == ORKQuestionTypeMultipleChoice && ![self isFormatChoiceWithImageOptions]) ||
             self.questionType == ORKQuestionTypeBoolean);
 }
 

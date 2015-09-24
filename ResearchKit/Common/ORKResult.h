@@ -642,12 +642,12 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, assign) NSInteger length;
 
 /**
- The number of correct sums given (out of 'length' possible).
+ The number of correct sums given (out of 'length' possible ones).
  */
 @property (nonatomic, assign) NSInteger totalCorrect;
 
 /**
- The number of consecutive correct answers (out of 'length-1' possible).
+ The number of consecutive correct answers (out of 'length - 1' possible ones).
  Used to overcome the alternate answer strategy.
  */
 @property (nonatomic, assign) NSInteger totalDyad;

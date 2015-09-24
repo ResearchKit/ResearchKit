@@ -42,11 +42,11 @@ void main() {
 	lowp vec3 rgb;
 	
 	// Subtract constants to map the video range start at 0
-	yuv.x = (texture2D(SamplerY, texCoordVarying).r - (16.0/255.0));
+	yuv.x = (texture2D(SamplerY, texCoordVarying).r - (16.0 / 255.0));
 	yuv.yz = (texture2D(SamplerUV, texCoordVarying).rg - vec2(0.5, 0.5));
 	
 	rgb = colorConversionMatrix * yuv;
-    rgb = vec3(1,1,1) - ((vec3(1,1,1) - rgb)*(vec3(1,1,1) - tintColor));
+    rgb = vec3(1, 1, 1) - ((vec3(1, 1, 1) - rgb) * (vec3(1, 1, 1) - tintColor));
 
-	gl_FragColor = vec4(rgb,1);
+	gl_FragColor = vec4(rgb, 1);
 }

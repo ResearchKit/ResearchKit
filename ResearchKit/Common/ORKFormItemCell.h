@@ -55,15 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
                                  answer:(nullable id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth
-                             screenType:(ORKScreenType)screenType;
+                          maxLabelWidth:(CGFloat)maxLabelWidth;
 
 @property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
 @property (nonatomic, copy, nullable) id answer;
 @property (nonatomic, strong, nullable) ORKFormItem *formItem;
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
-@property (nonatomic) ORKScreenType screenType;
 @property (nonatomic) CGFloat expectedLayoutWidth;
 
 @end

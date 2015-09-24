@@ -37,7 +37,8 @@
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 
-NSString *const kEmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+
+NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
 
 id ORKNullAnswerValue() {
     return [NSNull null];
@@ -46,7 +47,7 @@ id ORKNullAnswerValue() {
 BOOL ORKIsAnswerEmpty(id answer) {
     return  (answer == nil) ||
             (answer == ORKNullAnswerValue()) ||
-            ([answer isKindOfClass:[NSArray class]] && [(NSArray *)answer count] == 0);     // Empty answer of choice or value picker 
+            ([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0);     // Empty answer of choice or value picker
 }
 
 NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
@@ -144,7 +145,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (void)fetchDefaultValueForQuantityType:(HKQuantityType *)quantityType unit:(HKUnit *)unit handler:(void(^)(id defaultValue, NSError *error))handler {
-    if (! unit) {
+    if (!unit) {
         handler(nil, nil);
         return;
     }
@@ -153,7 +154,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         HKSampleQuery *sampleQuery = [[HKSampleQuery alloc] initWithSampleType:quantityType predicate:nil limit:1 sortDescriptors:@[sortDescriptor] resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
-            HKQuantitySample *sample = [results firstObject];
+            HKQuantitySample *sample = results.firstObject;
             id value = nil;
             if (sample) {
                 if (unit == [HKUnit percentUnit]) {
@@ -186,7 +187,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
             }
         }
     }
-    if (! handled) {
+    if (!handled) {
         handler(nil, nil);
     }
 }
@@ -203,7 +204,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
         if (unit) {
             return unit;
         }
-        if (! _unitsTable) {
+        if (!_unitsTable) {
             _unitsTable = [NSMutableDictionary dictionary];
         }
         
@@ -466,7 +467,7 @@ static void ork_validateChoices(NSArray *choices) {
     const NSInteger ORKAnswerFormatMinimumNumberOfChoices = 1;
     if (choices.count < ORKAnswerFormatMinimumNumberOfChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"The number of choices can not be less than %@.", @(ORKAnswerFormatMinimumNumberOfChoices)]
+                                       reason:[NSString stringWithFormat:@"The number of choices cannot be less than %@.", @(ORKAnswerFormatMinimumNumberOfChoices)]
                                      userInfo:nil];
     }
 }
@@ -484,12 +485,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         } else if ([object isKindOfClass:[NSArray class]]) {
             
             NSArray *array = (NSArray *)object;
-            if ([array count] > 1 &&
+            if (array.count > 1 &&
                 [array[0] isKindOfClass:[NSString class]] &&
                 [array[1] isKindOfClass:[NSString class]]) {
                 
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:array[1] value:array[0] exclusive:NO]];
-            } else if ([array count] == 1 &&
+            } else if (array.count == 1 &&
                        [array[0] isKindOfClass:[NSString class]]) {
                 [choices addObject: [ORKTextChoice choiceWithText:array[0] detailText:@"" value:array[0] exclusive:NO]];
             } else {
@@ -1209,11 +1210,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     BOOL isValid = NO;
     if (number) {
         isValid = YES;
-        if (isnan([number doubleValue])) {
+        if (isnan(number.doubleValue)) {
             isValid = NO;
-        } else if (self.minimum && ([self.minimum doubleValue] > [number doubleValue])) {
+        } else if (self.minimum && (self.minimum.doubleValue > number.doubleValue)) {
             isValid = NO;
-        } else if (self.maximum && ([self.maximum doubleValue] < [number doubleValue])) {
+        } else if (self.maximum && (self.maximum.doubleValue < number.doubleValue)) {
             isValid = NO;
         }
     }
@@ -1222,7 +1223,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     BOOL isValid = NO;
-    if ([text length] > 0) {
+    if (text.length > 0) {
         NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
         isValid = [self isAnswerValidWithNumber:number];
     }
@@ -1238,18 +1239,18 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    if (! [text length]) {
+    if (!text.length) {
         return nil;
     }
     NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
-    if (! num) {
+    if (!num) {
         return nil;
     }
     NSString *string = nil;
     NSNumberFormatter *formatter = [self makeNumberFormatter];
-    if (self.minimum && ([self.minimum doubleValue] > [num doubleValue])) {
+    if (self.minimum && (self.minimum.doubleValue > num.doubleValue)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_BELOW_MAXIMUM", nil), text, [formatter stringFromNumber:self.minimum]];
-    } else if (self.maximum && ([self.maximum doubleValue] < [num doubleValue])) {
+    } else if (self.maximum && (self.maximum.doubleValue < num.doubleValue)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_ABOVE_MAXIMUM", nil), text, [formatter stringFromNumber:self.maximum]];
     } else {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
@@ -1384,7 +1385,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -1394,11 +1395,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSInteger)numberOfSteps {
-    return (_maximum - _minimum)/_step;
+    return (_maximum - _minimum) / _step;
 }
 
 - (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
-    return @([number integerValue]);
+    return @(number.integerValue);
 }
 
 - (void)validateParameters {
@@ -1426,7 +1427,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"Expect the difference between maximumValue and minimumValue is divisible by step value"] userInfo:nil];
     }
     
-    NSInteger steps = (_maximum - _minimum)/_step;
+    NSInteger steps = (_maximum - _minimum) / _step;
     if (steps < ORKScaleAnswerFormatMinimumStepCount || steps > ORKScaleAnswerFormatMaximumStepCount) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:[NSString stringWithFormat:@"Expect the total number of steps between minimumValue and maximumValue more than %@ and no more than %@.", @(ORKScaleAnswerFormatMinimumStepCount), @(ORKScaleAnswerFormatMaximumStepCount)]
@@ -1586,7 +1587,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
         _numberFormatter.maximumFractionDigits = _maximumFractionDigits;
@@ -1756,7 +1757,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSNumberFormatter *)numberFormatter {
-    if (! _numberFormatter) {
+    if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -1876,7 +1877,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    if ([text length] > 0) {
+    if (text.length > 0) {
         return ([self isTextLengthValidWithString:text] && [self isEmailAddressValidWithString:text]);
     }
     
@@ -1884,12 +1885,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isTextLengthValidWithString:(NSString *)text {
-    return (_maximumLength == 0 || [text length] <= _maximumLength);
+    return (_maximumLength == 0 || text.length <= _maximumLength);
 }
 
 - (BOOL)isEmailAddressValidWithString:(NSString *)text {
     if (self.isEmailAddress) {
-        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kEmailValidationRegex];
+        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", EmailValidationRegex];
         return [emailValidationTest evaluateWithObject:text];
     }
     
@@ -1898,9 +1899,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
-    if (! [self isTextLengthValidWithString:text]) {
+    if (![self isTextLengthValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
-    } else if (! [self isEmailAddressValidWithString:text]) {
+    } else if (![self isEmailAddressValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
     return string;
@@ -2016,7 +2017,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     NSTimeInterval value = MAX([self defaultInterval], 0);
     
     // imitate UIDatePicker's behavior
-    NSTimeInterval stepInSeconds = _step*60;
+    NSTimeInterval stepInSeconds = _step * 60;
     value  = floor(value/stepInSeconds)*stepInSeconds;
     
     return value;
