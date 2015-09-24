@@ -216,10 +216,10 @@ static const CGFloat MaxFontSize = 72.0;
     if (ORKIsAnswerEmpty(answer)) {
         _yesButton.selected = NO;
         _noButton.selected = NO;
-    } else if ([answer boolValue] == YES) {
+    } else if (((NSNumber *)answer).boolValue == YES) {
         _yesButton.selected = YES;
         _noButton.selected = NO;
-    } else if ([answer boolValue] == NO) {
+    } else if (((NSNumber *)answer).boolValue == NO) {
         _yesButton.selected = NO;
         _noButton.selected = YES;
     }

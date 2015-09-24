@@ -49,23 +49,38 @@
         [self addSubview:_selectionView];
     }
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
-    ORKEnableAutoLayoutForViews([views allValues]);
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [self setUpConstraints];
     
     [self answerDidChange];
 }
 
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
+    ORKEnableAutoLayoutForViews([views allValues]);
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
 - (BOOL)isAnswerValid {
-    ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *) [self.step impliedAnswerFormat];
+    ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[self.step impliedAnswerFormat];
     return [answerFormat isAnswerValid:self.answer];
 }
 
 - (BOOL)shouldContinue {
     BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
+    if (!isValid) {
          [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
     }
     return isValid;

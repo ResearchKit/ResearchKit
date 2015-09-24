@@ -829,6 +829,7 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @implementation ORKFormItemEligibilityCell {
     ORKEligibilitySelectionView *_selectionView;
+    ORKSubheadlineLabel *_questionLabel;
 }
 
 - (void)cellInit {
@@ -839,39 +840,54 @@ static const CGFloat HorizontalMargin = 15.0;
     [self.contentView addSubview:_selectionView];
     
     // Add the label to show the question.
-    ORKSubheadlineLabel *questionLabel = [ORKSubheadlineLabel new];
-    questionLabel.text = self.formItem.text;
-    questionLabel.numberOfLines = 0;
-    questionLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:questionLabel];
+    _questionLabel = [ORKSubheadlineLabel new];
+    _questionLabel.text = self.formItem.text;
+    _questionLabel.numberOfLines = 0;
+    _questionLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:_questionLabel];
     
-    self.contentView.layoutMargins = UIEdgeInsetsMake(kVMargin, kHMargin, kVMargin, kHMargin);
+    self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, HorizontalMargin, VerticalMargin, HorizontalMargin);
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView, questionLabel);
-    ORKEnableAutoLayoutForViews([views allValues]);
-    
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[questionLabel]-20-[_selectionView]-20-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    
-    [self.contentView addConstraints:@[
-                                       [NSLayoutConstraint constraintWithItem:questionLabel
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.contentView
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                   multiplier:1.0
-                                                                     constant:-kHMargin*2],
-                                       [NSLayoutConstraint constraintWithItem:questionLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.contentView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0]
-                                       ]
-     ];
+    [self setUpConstraints];
     
     [super cellInit];
+}
+
+- (void)setUpConstraints {
+    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView, _questionLabel);
+    ORKEnableAutoLayoutForViews([views allValues]);
+    NSDictionary *metrics = @{ @"vMargin":@(VerticalMargin * 2)};
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[_questionLabel]-vMargin-[_selectionView]-vMargin-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:metrics
+                                               views:views]];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|"
+                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                             metrics:nil
+                                               views:views]];
+    [constraints addObjectsFromArray:@[
+                                       [NSLayoutConstraint constraintWithItem:_questionLabel
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.contentView
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                   multiplier:1.0
+                                                                     constant:-HorizontalMargin * 2],
+                                       [NSLayoutConstraint constraintWithItem:_questionLabel
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.contentView
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0.0]
+                                       ]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)answerDidChange {
