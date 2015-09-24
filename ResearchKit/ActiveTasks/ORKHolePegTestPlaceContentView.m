@@ -33,6 +33,7 @@
 #import "ORKHolePegTestPlacePegView.h"
 #import "ORKHolePegTestPlaceHoleView.h"
 #import "ORKDirectionView.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat ORKOrientationThreshold = 12.0f;
@@ -46,6 +47,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 @property (nonatomic, strong) ORKHolePegTestPlacePegView *pegView;
 @property (nonatomic, strong) ORKHolePegTestPlaceHoleView *holeView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
+@property (nonatomic, assign) ORKScreenType screenType;
 @property (nonatomic, copy) NSArray *constraints;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
@@ -67,6 +69,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
 - (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated {
     self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.screenType = ORKGetScreenTypeForWindow(self.window);
         self.movingDirection = movingDirection;
         self.rotated = rotated;
 
@@ -135,10 +138,12 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
         self.constraints = nil;
     }
     
+    const CGFloat ORKStandardHorizontalMarginForView = ORKGetMetricForScreenType(ORKScreenMetricHeadlineSideMargin, self.screenType);
+    
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _pegView, _holeView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(ORKHolePegViewDiameter)};
+    NSDictionary *metrics = @{@"diameter" : @(ORKHolePegViewDiameter), @"viewMargin" : @(ORKStandardHorizontalMarginForView)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
@@ -146,7 +151,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-(viewMargin)-[_pegView]->=0-[_holeView]-(viewMargin)-|" : @"H:|-(viewMargin)-[_holeView]->=0-[_pegView]-(viewMargin)-|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:nil views:views]];
     

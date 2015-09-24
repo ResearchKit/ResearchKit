@@ -47,6 +47,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
 @property (nonatomic, strong) ORKSeparatorView *separatorView;
 @property (nonatomic, strong) ORKDirectionView *directionView;
 @property (nonatomic, strong) UIView *container;
+@property (nonatomic, assign) ORKScreenType screenType;
 @property (nonatomic, copy) NSArray *constraints;
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
@@ -65,6 +66,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
 - (instancetype)initWithMovingDirection:(ORKSide)movingDirection {
     self = [super initWithFrame:CGRectZero];
     if (self) {
+        self.screenType = ORKGetScreenTypeForWindow(self.window);
         self.movingDirection = movingDirection;
         self.opaque = NO;
         
@@ -129,10 +131,12 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
         self.constraints = nil;
     }
     
+    const CGFloat ORKStandardHorizontalMarginForView = ORKGetMetricForScreenType(ORKScreenMetricHeadlineSideMargin, self.screenType);
+    
     NSMutableArray *constraintsArray = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _container, _pegView, _separatorView, _directionView);
-    NSDictionary *metrics = @{@"diameter" : @(PegViewDiameter), @"separator" : @(PegViewSeparatorWidth), @"margin" : @((1 + self.threshold) * PegViewDiameter)};
+    NSDictionary *metrics = @{@"diameter" : @(PegViewDiameter), @"separator" : @(PegViewSeparatorWidth), @"separatorMargin" : @((1 + self.threshold) * PegViewDiameter), @"viewMargin" : @(ORKStandardHorizontalMarginForView)};
     
     [constraintsArray addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_progressView]-|"
@@ -140,7 +144,7 @@ static const CGFloat PegViewSeparatorWidth = 2.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-[_pegView(diameter)]->=0-[_separatorView(separator)]-(margin)-|" : @"H:|-(margin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-(viewMargin)-[_pegView(diameter)]->=0-[_separatorView(separator)]-(separatorMargin)-|" : @"H:|-(separatorMargin)-[_separatorView(separator)]->=0-[_pegView(diameter)]-(viewMargin)-|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:metrics views:views]];
     
