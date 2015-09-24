@@ -218,7 +218,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
-+ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithExpectedAnswer:(BOOL)expectedAnswer;
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 

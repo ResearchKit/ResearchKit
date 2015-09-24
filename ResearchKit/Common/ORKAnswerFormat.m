@@ -284,7 +284,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [ORKBooleanAnswerFormat new];
 }
 
-+ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithExpectedAnswer:(BOOL)expectedAnswer {
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat {
     return [ORKEligibilityAnswerFormat new];
 }
 

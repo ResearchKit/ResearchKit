@@ -1199,7 +1199,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
                                                                    text:@"Are you over 18 years of age?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1207,7 +1207,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_2"
                                                                    text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1215,7 +1215,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_3"
                                                                    text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1223,7 +1223,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_4"
                                                                    text:@"Do you live outside the United States of America?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1299,7 +1299,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES];
+        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormat];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Are you over 18 years of age?"
                                                                      answer:answerFormat];
