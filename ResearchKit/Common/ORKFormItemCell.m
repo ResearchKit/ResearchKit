@@ -835,7 +835,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     
     // Add the selection view to the content view of the form item cell.
-    _selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
+    _selectionView = [ORKEligibilitySelectionView new];
     _selectionView.delegate = self;
     [self.contentView addSubview:_selectionView];
     

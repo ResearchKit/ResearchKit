@@ -94,8 +94,8 @@ static const CGFloat MaxFontSize = 72.0;
     UIView *_separator;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init{
+    self = [super init];
     if (self) {
         // Create the buttons and add them to the view.
         _yesButton = [ORKEligibilityButton yesEligibilityButton];

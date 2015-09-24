@@ -1185,19 +1185,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"efid_000"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
         step.title = @"Eligibility Form";
         [steps addObject:step];
     }
     
     {
-        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"efid_001"];
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"form_step"];
         step.optional = NO;
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_000"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
                                                                    text:@"Are you over 18 years of age?"
                                                            answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
             item.optional = NO;
@@ -1205,14 +1205,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_001"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_2"
                                                                    text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
                                                            answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
+            item.optional = NO;
             [items addObject:item];
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_002"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_3"
                                                                    text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
                                                            answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
             item.optional = NO;
@@ -1220,9 +1221,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"eqid_003"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_4"
                                                                    text:@"Do you live outside the United States of America?"
                                                            answerFormat:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
+            item.optional = NO;
             [items addObject:item];
         }
         
@@ -1230,14 +1232,52 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"efid_002"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        step.title = @"You are ineligible to join the study.";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
         step.title = @"You are eligible to join the study.";
         step.text = @"Tap the button below to begin the consent process.";
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:MiniFormTaskIdentifier steps:steps];
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilityFormTaskIdentifier steps:steps];
     
+    // Build navigation rules.
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+    ORKResultSelector *resultSelector = nil;
+    
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_1"];
+    NSPredicate *predicateFormItem1 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_2"];
+    NSPredicate *predicateFormItem2 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_3"];
+    NSPredicate *predicateFormItem3 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_4"];
+    NSPredicate *predicateFormItem4 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+    
+    NSPredicate *predicateEligible = [NSCompoundPredicate
+                                      andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4]];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateEligible]
+                                                          destinationStepIdentifiers:@[@"eligible_step"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"form_step"];
+    
+    // Add end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule = nil;
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+
     return task;
 }
 
@@ -1249,20 +1289,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  The eligibility survey task is used to test elibility survey cell items (`ORKFormStep`, `ORKFormItem`)..
  */
-- (ORKOrderedTask *)makeEligibilitySurveyTask {
+- (id<ORKTask>)makeEligibilitySurveyTask {
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"esid_001"];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
         step.title = @"Eligibility Survey";
         [steps addObject:step];
     }
     
     {
         ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES];
-        answerFormat.errorMessage = @"That is not the desired answer choice.";
-
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_000"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Are you over 18 years of age?"
                                                                      answer:answerFormat];
         step.optional = NO;
@@ -1270,35 +1308,35 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_001"
-                                                                      title:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:YES]];
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        step.title = @"You are ineligible to join the study.";
         [steps addObject:step];
     }
     
     {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_002"
-                                                                      title:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
-        step.optional = NO;
-        [steps addObject:step];
-    }
-    
-    {
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_003"
-                                                                      title:@"Do you live outside the United States of America?"
-                                                                     answer:[ORKAnswerFormat eligibilityAnswerFormatWithExpectedAnswer:NO]];
-        [steps addObject:step];
-    }
-    
-    {
-        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"esid_002"];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
         step.title = @"You are eligible to join the study.";
         step.text = @"Tap the button below to begin the consent process.";
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SelectionSurveyTaskIdentifier steps:steps];
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilitySurveyTaskIdentifier steps:steps];
+
+    // Build navigation rules.
+    ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
+    NSPredicate *predicateQuestion = [ORKResultPredicate
+                                      predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                      expectedAnswer:YES];
+    ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc]
+                                                     initWithResultPredicates:@[predicateQuestion]
+                                                     destinationStepIdentifiers:@[@"eligible_step"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
+    
+    // Add end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule = nil;
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+    
     return task;
 }
 

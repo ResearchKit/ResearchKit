@@ -44,7 +44,7 @@
 
     // Add the selection view to the content view of the form item cell.
     if (! _selectionView) {
-        _selectionView = [[ORKEligibilitySelectionView alloc] initWithFrame:CGRectZero];
+        _selectionView = [ORKEligibilitySelectionView new];
         _selectionView.delegate = self;
         [self addSubview:_selectionView];
     }
@@ -71,19 +71,6 @@
                                                views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
-}
-
-- (BOOL)isAnswerValid {
-    ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[self.step impliedAnswerFormat];
-    return [answerFormat isAnswerValid:self.answer];
-}
-
-- (BOOL)shouldContinue {
-    BOOL isValid = [self isAnswerValid];
-    if (!isValid) {
-         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
-    }
-    return isValid;
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {

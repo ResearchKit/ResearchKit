@@ -285,7 +285,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 + (ORKEligibilityAnswerFormat *)eligibilityAnswerFormatWithExpectedAnswer:(BOOL)expectedAnswer {
-    return [[ORKEligibilityAnswerFormat alloc] initWithExpectedAnswer:expectedAnswer];
+    return [ORKEligibilityAnswerFormat new];
 }
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
@@ -902,61 +902,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @implementation ORKEligibilityAnswerFormat
 
-- (instancetype)init {
-    self = [self initWithExpectedAnswer:YES];
-    return self;
-}
-
-- (instancetype)initWithExpectedAnswer:(BOOL)expectedAnswer {
-    self = [super init];
-    if (self) {
-        _expectedAnswer = expectedAnswer;
-    }
-    return self;
-}
-
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeEligibility;
 }
 
 - (Class)questionResultClass {
     return [ORKBooleanQuestionResult class];
-}
-
-- (BOOL)isAnswerValid:(id)answer {
-    return (ORKIsAnswerEmpty(answer)) ? YES : ([answer boolValue] == self.expectedAnswer);
-}
-
-- (BOOL)isEqual:(id)object {
-    BOOL isParentSame = [super isEqual:object];
-    
-    __typeof(self) castObject = object;
-    return (isParentSame &&
-            self.expectedAnswer == castObject.expectedAnswer &&
-            ORKEqualObjects(self.errorMessage, castObject.errorMessage));
-}
-
-- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    return (self.errorMessage) ? self.errorMessage : ORKLocalizedString(@"INELIGIBLE_MESSAGE", nil);
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_BOOL(aDecoder, expectedAnswer);
-        ORK_DECODE_OBJ(aDecoder, errorMessage);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_BOOL(aCoder, expectedAnswer);
-    ORK_ENCODE_OBJ(aCoder, errorMessage);
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
 }
 
 @end

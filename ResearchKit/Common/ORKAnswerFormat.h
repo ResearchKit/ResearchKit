@@ -752,38 +752,13 @@ ORK_CLASS_AVAILABLE
 
 
 /**
- The `ORKEligibilityAnswerFormat` class provides a custom Boolean control with
- an expected answer.
+ The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
+ preconfigured to use only Yes and No answers.
  
  The eligibility answer format produces an `ORKBooleanQuestionResult` object.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKEligibilityAnswerFormat : ORKAnswerFormat
-
-/**
- Returns an initialized eligibility answer format using the specified expected answer.
- 
- @param expectedAnswer         The expected answer choice to validate eligibility.
- 
- @return An initialized eligibility answer format.
- */
-- (instancetype)initWithExpectedAnswer:(BOOL)expectedAnswer;
-
-/**
- A Boolean value indicating the correct answer for eligibility.
- 
- By default, the value of this property is `YES`.
- */
-@property (nonatomic) BOOL expectedAnswer;
-
-/**
- A string to display if the invalid answer is selected.
- Only applicable for a survey cell.
- 
- If this value is not specified, it will use the fallback message:
-`Unfortunately, you are ineligible to join this study.`
- */
-@property (copy, nullable) NSString *errorMessage;
 
 @end
 
