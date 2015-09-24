@@ -169,7 +169,7 @@
 }
 
 - (NSURL *)recordingDirectoryURL {
-    if (! _outputDirectory) {
+    if (!_outputDirectory) {
         return nil;
     }
     return [NSURL fileURLWithPath:[_outputDirectory.path stringByAppendingPathComponent:[NSString stringWithFormat:@"recorder-%@", _recorderUUID.UUIDString]]];
@@ -185,7 +185,7 @@
 
 - (ORKDataLogger *)makeJSONDataLoggerWithError:(NSError * __autoreleasing *)error {
     NSURL *workingDir = [self recordingDirectoryURL];
-    if (! workingDir) {
+    if (!workingDir) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteInvalidFileNameError userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_OUTPUT_DIRECTORY", nil)}];
         }
@@ -221,7 +221,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     if (!  [fileManager setAttributes:@{NSFileProtectionKey : ORKFileProtectionFromMode(fileProtection)} ofItemAtPath:[url path] error:&error]) {
-        ORK_Log_Debug(@"Error setting %@ on %@: %@", ORKFileProtectionFromMode(fileProtection), url, error);
+        ORK_Log_Warning(@"Error setting %@ on %@: %@", ORKFileProtectionFromMode(fileProtection), url, error);
     }
 }
 
@@ -233,7 +233,7 @@
             ORKFileResult *result = [[ORKFileResult alloc] initWithIdentifier:self.identifier];
             result.contentType = [self mimeType];
             result.fileURL = fileUrl;
-            result.userInfo = [self userInfo];
+            result.userInfo = self.userInfo;
             result.startDate = self.startDate;
             
             [localDelegate recorder:self didCompleteWithResult:result];
@@ -242,7 +242,7 @@
             [self reset];
         }
     } else {
-        if (! error) {
+        if (!error) {
             error = [NSError errorWithDomain:NSCocoaErrorDomain
                                         code:NSFileReadNoSuchFileError
                                     userInfo:@{NSLocalizedDescriptionKey:ORKLocalizedString(@"ERROR_RECORDER_NO_DATA", nil)}];

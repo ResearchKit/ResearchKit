@@ -76,45 +76,45 @@
     
     if ( self.initialSpan < ORKSpatialSpanMemoryTaskMinimumInitialSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"initialSpan can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumInitialSpan)]
+                                       reason:[NSString stringWithFormat:@"initialSpan cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumInitialSpan)]
                                      userInfo:nil];
     }
     
     if ( self.minimumSpan > self.initialSpan) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"initialSpan can not be less than minimumSpan." userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"initialSpan cannot be less than minimumSpan." userInfo:nil];
     }
     
     if ( self.initialSpan > self.maximumSpan) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"maximumSpan can not be less than initialSpan." userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"maximumSpan cannot be less than initialSpan." userInfo:nil];
     }
     
     if ( self.maximumSpan > ORKSpatialSpanMemoryTaskMaximumSpan) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"maximumSpan can not be more than %@.", @(ORKSpatialSpanMemoryTaskMaximumSpan)]
+                                       reason:[NSString stringWithFormat:@"maximumSpan cannot be more than %@.", @(ORKSpatialSpanMemoryTaskMaximumSpan)]
                                      userInfo:nil];
     }
     
     if  (self.playSpeed < ORKSpatialSpanMemoryTaskMinimumPlaySpeed) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"playSpeed can not be shorter than %@ seconds.", @(ORKSpatialSpanMemoryTaskMinimumPlaySpeed)]
+                                       reason:[NSString stringWithFormat:@"playSpeed cannot be shorter than %@ seconds.", @(ORKSpatialSpanMemoryTaskMinimumPlaySpeed)]
                                      userInfo:nil];
     }
     
     if  (self.playSpeed > ORKSpatialSpanMemoryTaskMaximumPlaySpeed) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"playSpeed can not be longer than %@ seconds.", @(ORKSpatialSpanMemoryTaskMaximumPlaySpeed)]
+                                       reason:[NSString stringWithFormat:@"playSpeed cannot be longer than %@ seconds.", @(ORKSpatialSpanMemoryTaskMaximumPlaySpeed)]
                                      userInfo:nil];
     }
     
     if  (self.maxTests < ORKSpatialSpanMemoryTaskMinimumMaxTests) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"maxTests can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxTests)]
+                                       reason:[NSString stringWithFormat:@"maxTests cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxTests)]
                                      userInfo:nil];
     }
     
     if  (self.maxConsecutiveFailures < ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"maxConsecutiveFailures can not be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)]
+                                       reason:[NSString stringWithFormat:@"maxConsecutiveFailures cannot be less than %@.", @(ORKSpatialSpanMemoryTaskMinimumMaxConsecutiveFailures)]
                                      userInfo:nil];
     }
 }

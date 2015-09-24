@@ -40,7 +40,6 @@
 }
 
 @property (nonatomic, strong) id<ORKPicker> picker;
-@property (nonatomic, strong) NSMutableArray *customConstraints;
 
 @end
 
@@ -51,10 +50,12 @@
     [super prepareView];
     
     // Add a temporary picker view to show the lines the date picker will have
-    if (! _tempPicker && ! self.picker) {
+    if (!_tempPicker && !self.picker) {
         _tempPicker = [UIPickerView new];
         _tempPicker.delegate = self;
         [self addSubview:_tempPicker];
+        
+        [self addHorizontalHuggingConstraintForView:_tempPicker];
     }
     
     _valueChangedDueUserAction = NO;
@@ -68,14 +69,11 @@
         
         [self addSubview:_picker.pickerView];
         
+        // Removing _tempPicker automatically removes its constraints
         [_tempPicker removeFromSuperview];
         _tempPicker = nil;
         
-        if (_customConstraints) {
-            [self removeConstraints:_customConstraints];
-            [_customConstraints removeAllObjects];
-        }
-        [self setNeedsUpdateConstraints];
+        [self addHorizontalHuggingConstraintForView:_picker.pickerView];
     }
 }
 
@@ -95,28 +93,14 @@
     }
 }
 
-- (void)updateConstraints {
-    
-    if (!_customConstraints) {
-        _customConstraints = [NSMutableArray new];
-    }
-    
-    [self addHorizontalHuggingConstraintForView:_tempPicker];
-    [self addHorizontalHuggingConstraintForView:_picker.pickerView];
-    
-    [super updateConstraints];
-}
-
 - (void)addHorizontalHuggingConstraintForView:(UIView *)view {
     if (view) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        
         NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
                                                                        options:NSLayoutFormatDirectionLeadingToTrailing
                                                                        metrics:nil
                                                                          views:@{ @"view": view }];
-        [self addConstraints:constraints];
-        [_customConstraints addObjectsFromArray:constraints];
+        [NSLayoutConstraint activateConstraints:constraints];
     }
 }
 
