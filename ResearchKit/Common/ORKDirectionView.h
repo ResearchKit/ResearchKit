@@ -36,6 +36,8 @@
 ORK_CLASS_AVAILABLE
 @interface ORKDirectionView : UIView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
 
 @end

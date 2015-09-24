@@ -39,7 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestRemoveContentView : ORKActiveStepCustomView
 
-- (instancetype)initWithMovingDirection:(ORKSide)movingDirection;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (instancetype)initWithMovingDirection:(ORKSide)movingDirection NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign) ORKSide movingDirection;
 @property (nonatomic, assign) double threshold;

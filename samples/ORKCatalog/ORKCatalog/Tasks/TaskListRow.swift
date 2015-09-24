@@ -79,6 +79,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     case Audio
     case Fitness
+    case HolePegTest
     case PSAT
     case ReactionTime
     case ShortWalk
@@ -129,6 +130,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .Audio,
                     .Fitness,
+                    .HolePegTest,
                     .PSAT,
                     .ReactionTime,
                     .ShortWalk,
@@ -194,6 +196,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Fitness:
             return NSLocalizedString("Fitness Check", comment: "")
+        
+        case .HolePegTest:
+            return NSLocalizedString("Hole Peg Test", comment: "")
             
         case .PSAT:
             return NSLocalizedString("PSAT", comment: "")
@@ -313,6 +318,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Active tasks.
         case AudioTask
         case FitnessTask
+        case HolePegTestTask
         case PSATTask
         case ReactionTime
         case ShortWalkTask
@@ -378,6 +384,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .Fitness:
             return fitnessTask
+            
+        case .HolePegTest:
+            return holePegTestTask
             
         case .PSAT:
             return PSATTask
@@ -804,6 +813,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     */
     private var fitnessTask: ORKTask {
         return ORKOrderedTask.fitnessCheckTaskWithIdentifier(String(Identifier.FitnessTask), intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: [])
+    }
+    
+    /// This task presents the Hole Peg Test pre-defined active task.
+    private var holePegTestTask: ORKTask {
+        return ORKNavigableOrderedTask.holePegTestTaskWithIdentifier(String(Identifier.HolePegTestTask), intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: [])
     }
     
     /// This task presents the PSAT pre-defined active task.

@@ -30,6 +30,7 @@
 
 
 #import "ORKDirectionView.h"
+#import "ORKHelpers.h"
 
 
 static const CGFloat ArrowWidth = 8;
@@ -38,6 +39,8 @@ static const CGFloat ArrowLineWidth = 4;
 
 @interface ORKArrowView : UIView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign) ORKSide orientation;
@@ -47,6 +50,14 @@ static const CGFloat ArrowLineWidth = 4;
 
 
 @implementation ORKArrowView
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)initWithOrientation:(ORKSide)orientation {
     self = [super initWithFrame:CGRectZero];
@@ -114,6 +125,14 @@ static const CGFloat ArrowLineWidth = 4;
 
 
 @implementation ORKDirectionView
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    ORKThrowMethodUnavailableException();
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    ORKThrowMethodUnavailableException();
+}
 
 - (instancetype)initWithOrientation:(ORKSide)orientation {
     self = [super initWithFrame:CGRectZero];

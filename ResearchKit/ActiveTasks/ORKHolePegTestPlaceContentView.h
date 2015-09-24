@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceContentView : ORKActiveStepCustomView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, assign) ORKSide movingDirection;
