@@ -59,14 +59,14 @@
 
 - (void)setCountDownValue:(NSInteger)value {
     _currentCountDownValue = value;
-    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value/60)];
-    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value%60)];
+    _minutesString = [NSString stringWithFormat:@"%02ld", (long)(value / 60)];
+    _secondsString= [NSString stringWithFormat:@"%02ld", (long)(value % 60)];
     
     [self renderText];
 }
 
 - (void)renderText {
-    if (_minutesString.length==0 || _secondsString.length==0) {
+    if (_minutesString.length == 0 || _secondsString.length == 0) {
         return;
     }
     [self setText:[NSString stringWithFormat:@"%@:%@", _minutesString, _secondsString]];

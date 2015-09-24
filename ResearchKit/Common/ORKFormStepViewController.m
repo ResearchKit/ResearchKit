@@ -173,6 +173,7 @@
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
             [(NSMutableArray *)self.items addObject:cellItem];
         }
+        
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
             [(NSMutableArray *)self.items addObject:cellItem];
@@ -266,12 +267,12 @@
     }
     
     BOOL refreshDefaultsPending = NO;
-    if ([types count]) {
+    if (types.count) {
         NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (! [types isSubsetOfSet:alreadyRequested]) {
+        if (![types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
-                if (! success) {
+                if (!success) {
                     ORK_Log_Debug(@"Authorization: %@",error);
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -303,7 +304,7 @@
         }
         
         ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-        ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+        ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
             id answer = _savedAnswers[formItem.identifier];
@@ -335,7 +336,7 @@
                 if (defaultValue != nil) {
                     defaults[formItem.identifier] = defaultValue;
                 } else if (error != nil) {
-                    ORK_Log_Debug(@"Error fetching default for %@: %@", formItem, error);
+                    ORK_Log_Warning(@"Error fetching default for %@: %@", formItem, error);
                 }
                 dispatch_semaphore_signal(sem);
             }];
@@ -434,8 +435,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.view.window);
-        _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+        _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
         _headerView = _tableContainer.stepHeaderView;
@@ -507,7 +507,7 @@
     }
 }
 
-- (NSInteger)numAnswered {
+- (NSInteger)numberOfAnsweredFormItems {
     __block NSInteger nonNilCount = 0;
     [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
         if (ORKIsAnswerEmpty(answer) == NO) {
@@ -517,11 +517,7 @@
     return nonNilCount;
 }
 
-- (BOOL)allAnswered {
-    return ([self numAnswered] == [self formItems].count);
-}
-
-- (BOOL)allAnswersValid {
+- (BOOL)allAnsweredFormItemsAreValid {
     for (ORKFormItem *item in [self formItems]) {
         id answer = _savedAnswers[item.identifier];
         if (ORKIsAnswerEmpty(answer) == NO && ![item.impliedAnswerFormat isAnswerValid:answer]) {
@@ -531,14 +527,22 @@
     return YES;
 }
 
+- (BOOL)allNonOptionalFormItemsHaveAnswers {
+    for (ORKFormItem *item in [self formItems]) {
+        if (!item.optional) {
+            id answer = _savedAnswers[item.identifier];
+            if (ORKIsAnswerEmpty(answer) || ![item.impliedAnswerFormat isAnswerValid:answer]) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 - (BOOL)continueButtonEnabled {
-    //  Enable the continue button if case (1) or (2) is true below:
-    //  (1) All answers are valid and all questions are answered.
-    //  (2) All answers are valid and either:
-    //      a) The step is optional and there is no skip button.
-    //      b) The step is optional and at least one question has been answered.
-    BOOL optionalButNotEmpty = self.step.optional && ([self numAnswered] > 0 || ! self.skipButtonItem);
-    return [self allAnswersValid] && ([self allAnswered] || optionalButNotEmpty);
+    return ([self numberOfAnsweredFormItems] > 0
+            && [self allAnsweredFormItemsAreValid]
+            && [self allNonOptionalFormItemsHaveAnswers]);
 }
 
 - (void)updateButtonStates {
@@ -548,7 +552,7 @@
 #pragma mark Helpers
 
 - (ORKFormStep *)formStep {
-    NSAssert(! self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
+    NSAssert(!self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
     return (ORKFormStep *)self.step;
 }
 
@@ -558,7 +562,7 @@
 
 - (NSArray *)formItems {
     NSArray *formItems = [self allFormItems];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[formItems count]];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:formItems.count];
     for (ORKFormItem *item in formItems) {
         if (item.answerFormat != nil) {
             [array addObject:item];
@@ -596,7 +600,7 @@
         NSDate *answerDate = now;
         NSCalendar *systemCalendar = [NSCalendar currentCalendar];
         NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
-        if (! _skipped) {
+        if (!_skipped) {
             answer = _savedAnswers[item.identifier];
             answerDate = _savedAnswerDates[item.identifier] ? : now;
             systemCalendar = _savedSystemCalendars[item.identifier];
@@ -644,11 +648,11 @@
 #pragma mark UITableViewDataSource
 
 - (BOOL)isLastSection:(NSUInteger)section {
-    return section==(_sections.count-1);
+    return (section == (_sections.count - 1));
 }
 
 - (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
-    return (indexPath.row==0||
+    return (indexPath.row == 0||
             (indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
 }
 
@@ -667,7 +671,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = @"_ork.separator";
-    if (! [self isSeparatorRow:indexPath]) {
+    if (![self isSeparatorRow:indexPath]) {
         identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
     }
     
@@ -679,7 +683,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         } else {
             ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-            ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+            ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
             ORKFormItem *formItem = cellItem.formItem;
             id answer = _savedAnswers[formItem.identifier];
             
@@ -719,7 +723,7 @@
                         
                     case ORKQuestionTypeText: {
                         ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (! textFormat.multipleLines) {
+                        if (!textFormat.multipleLines) {
                             class = [ORKFormItemTextFieldCell class];
                         } else {
                             class = [ORKFormItemTextCell class];
@@ -742,7 +746,7 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetVerticalScreenTypeForWindow(self.view.window)];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.delegate  = self;
@@ -770,7 +774,7 @@
             if (value) {
                 isSelected = ([answer isEqual:value]);
             } else {
-                isSelected = ([(NSNumber *)answer integerValue] == index);
+                isSelected = (((NSNumber *)answer).integerValue == index);
             }
         }
     }
@@ -820,12 +824,12 @@
     // Seperator line
     if ([self isSeparatorRow:indexPath]) {
         if (indexPath.row == 0) {
-            return 1/[[UIScreen mainScreen] scale];
+            return 1.0 / [UIScreen mainScreen].scale;
         } else {
-            return 40;
+            return 40.0;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
+        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row - 1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
@@ -849,21 +853,32 @@
         
         [view addSubview:label];
         
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                         attribute:NSLayoutAttributeTop
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:label
-                                                         attribute:NSLayoutAttributeFirstBaseline multiplier:1.0 constant:-20.0]];
-        
-        [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)} views:@{@"label": label}]];
-        
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:label
-                                                         attribute:NSLayoutAttributeLastBaseline
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:view
-                                                         attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-10.0]];
+        {
+            NSMutableArray *constraints = [NSMutableArray new];
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:view
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:label
+                                                                attribute:NSLayoutAttributeFirstBaseline
+                                                               multiplier:1.0
+                                                                 constant:-20.0]];
+            
+            [constraints addObjectsFromArray:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
+                                                     options:NSLayoutFormatDirectionLeadingToTrailing
+                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)}
+                                                       views:@{@"label": label}]];
+            
+            [constraints addObject:[NSLayoutConstraint constraintWithItem:label
+                                                                attribute:NSLayoutAttributeLastBaseline
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:view
+                                                                attribute:NSLayoutAttributeBottom
+                                                               multiplier:1.0
+                                                                 constant:-10.0]];
+            
+            [NSLayoutConstraint activateConstraints:constraints];
+        }
     } else {
         view = nil;
     }

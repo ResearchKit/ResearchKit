@@ -197,7 +197,8 @@ ORK_AVAILABLE_DECL
 
 /**
  Asks the data source for the title to be displayed adjacent to each division in the x-axis (the 
- number returned by `numberOfDivisionsInXAxisForGraphChartView:`).
+ number returned by `numberOfDivisionsInXAxisForGraphChartView:`). You can return `nil` from this
+ method if you don't want to display a title for the specified point index.
 
  If this method is not implemented, the x-axis will not have titles.
 
@@ -209,7 +210,20 @@ ORK_AVAILABLE_DECL
  @return The title string to be displayed adjacent to each division of the x-axis of the graph chart
  view.
 */
-- (NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex;
+- (nullable NSString *)graphChartView:(ORKGraphChartView *)graphChartView titleForXAxisAtPointIndex:(NSInteger)pointIndex;
+
+/**
+ Asks the data source if the vertical reference line at the specified point index should be drawn..
+ 
+ If this method is not implemented, the graph chart view will draw all vertical reference lines.
+ 
+ @param graphChartView  The graph view asking for the tile.
+ @param pointIndex      The index corresponding to the number returned by
+                            `numberOfDivisionsInXAxisForGraphChartView:`.
+ 
+ @return Whether the graph chart view should draw the vertical reference line.
+ */
+- (BOOL)graphChartView:(ORKGraphChartView *)graphChartView drawsVerticalReferenceLineAtPointIndex:(NSInteger)pointIndex;
 
 @end
 

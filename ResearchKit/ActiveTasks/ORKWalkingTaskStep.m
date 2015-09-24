@@ -56,7 +56,7 @@
     
     if ( self.numberOfStepsPerLeg < ORKShortWalkTaskMinimumNumberOfStepsPerLeg) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:[NSString stringWithFormat:@"numberOfStepsPerLeg can not be less than %@.", @(ORKShortWalkTaskMinimumNumberOfStepsPerLeg)]
+                                       reason:[NSString stringWithFormat:@"numberOfStepsPerLeg cannot be less than %@.", @(ORKShortWalkTaskMinimumNumberOfStepsPerLeg)]
                                      userInfo:nil];
     }
 }

@@ -81,7 +81,7 @@
             
             #if defined(DEBUG) && DEBUG
             if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
-                ORK_Log_Debug(@"Warning: index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
+                ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
             }
             #endif
         } else {
@@ -110,7 +110,7 @@
     
     NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifier];
     if (indexOfSource == NSNotFound) {
-        ORK_Log_Debug(@"WARNING: you are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifier, destinationIdentifier);
+        ORK_Log_Warning(@"You are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifier, destinationIdentifier);
         [_stepIdentifierStack removeAllObjects];
         if (sourceIdentifier) {
             [_stepIdentifierStack addObject:sourceIdentifier];
@@ -119,7 +119,7 @@
         return;
     }
     
-    NSUInteger stackCount = [_stepIdentifierStack count];
+    NSUInteger stackCount = _stepIdentifierStack.count;
     if (indexOfSource != stackCount - 1) {
         [_stepIdentifierStack removeObjectsInRange:NSMakeRange(indexOfSource + 1, stackCount - (indexOfSource + 1))];
     }
