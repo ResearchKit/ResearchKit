@@ -77,6 +77,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ImageCapture
     
     case Consent
+    case EligibilityTask
     
     case Audio
     case Fitness
@@ -123,9 +124,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
                 ]),
-            TaskListRowSection(title: "Consent", rows:
+            TaskListRowSection(title: "Onboarding", rows:
                 [
                     .Consent,
+                    .EligibilityTask
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
@@ -193,6 +195,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
+            
+        case .EligibilityTask:
+            return NSLocalizedString("Eligibility Task Example", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -318,6 +323,16 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ConsentReviewStep
         case ConsentDocumentParticipantSignature
         case ConsentDocumentInvestigatorSignature
+        
+        // Eligibility task specific indentifiers.
+        case EligibilityTask
+        case EligibilityIntroStep
+        case EligibilityFormStep
+        case EligibilityFormItem01
+        case EligibilityFormItem02
+        case EligibilityFormItem03
+        case EligibilityIneligibleStep
+        case EligibilityEligibleStep
 
         // Active tasks.
         case AudioTask
@@ -384,6 +399,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Consent:
             return consentTask
+            
+        case .EligibilityTask:
+            return eligibilityTask
             
         case .Audio:
             return audioTask
@@ -521,7 +539,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /// This task demonstrates an eligibiltiy question.
     private var eligibilityQuestionTask: ORKTask {
-        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormatWithExpectedAnswer(true);
+        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormat();
         
         let step = ORKQuestionStep(identifier: String(Identifier.EligibilityQuestionStep), title: exampleQuestionText, answer: answerFormat)
         
@@ -814,6 +832,74 @@ enum TaskListRow: Int, CustomStringConvertible {
             sharingConsentStep,
             reviewConsentStep
             ])
+    }
+    
+    /**
+        A task demonstrating how the ResearchKit framework can be used to determine 
+        eligibility using the eligibilty answer format and a navigable ordered task.
+    */
+    private var eligibilityTask: ORKTask {
+        // Intro step
+        let introStep = ORKInstructionStep(identifier: String(Identifier.EligibilityIntroStep))
+        introStep.title = NSLocalizedString("Eligibility Task Example", comment: "")
+        
+        // Form step
+        let formStep = ORKFormStep(identifier: String(Identifier.EligibilityFormStep))
+        formStep.optional = false
+        
+        // Form items
+        let formItem01Text = NSLocalizedString("Are you over 18 years of age?", comment: "")
+        let formItem01 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        formItem01.optional = false
+        let formItem02Text = NSLocalizedString("Can you read and understand English in order to provide informed consent and follow the instructions?", comment: "")
+        let formItem02 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem02), text: formItem02Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        formItem02.optional = false
+        let formItem03Text = NSLocalizedString("Do you live outside the United States?", comment: "")
+        let formItem03 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem03), text: formItem03Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        formItem03.optional = false
+        
+        formStep.formItems = [
+            formItem01,
+            formItem02,
+            formItem03
+        ]
+    
+        // Ineligible step
+        let ineligibleStep = ORKInstructionStep(identifier: String(Identifier.EligibilityIneligibleStep))
+        ineligibleStep.title = NSLocalizedString("You are ineligible to join the study", comment: "")
+        
+        // Eligible step
+        let eligibleStep = ORKCompletionStep(identifier: String(Identifier.EligibilityEligibleStep))
+        eligibleStep.title = NSLocalizedString("You are eligible to join the study", comment: "")
+        
+        // Create the task
+        let eligibilityTask = ORKNavigableOrderedTask(identifier: String(Identifier.EligibilityTask), steps: [
+            introStep,
+            formStep,
+            ineligibleStep,
+            eligibleStep
+            ])
+        
+        // Build navigation rules.
+        var resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem01))
+        let predicateFormItem01 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: true)
+        
+        resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem02))
+        let predicateFormItem02 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: true)
+        
+        resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem03))
+        let predicateFormItem03 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: false)
+        
+        let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [predicateEligible], destinationStepIdentifiers: [String(Identifier.EligibilityEligibleStep)])
+        
+        eligibilityTask.setNavigationRule(predicateRule, forTriggerStepIdentifier:String(Identifier.EligibilityFormStep))
+        
+        // Add end direct rules to skip unneeded steps
+        let directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: ORKNullStepIdentifier)
+        eligibilityTask.setNavigationRule(directRule, forTriggerStepIdentifier:String(Identifier.EligibilityIneligibleStep))
+        
+        return eligibilityTask
     }
 
     /// This task presents the Audio pre-defined active task.

@@ -1240,7 +1240,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
         step.title = @"You are eligible to join the study.";
-        step.text = @"Tap the button below to begin the consent process.";
         [steps addObject:step];
     }
     
@@ -1316,7 +1315,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
         step.title = @"You are eligible to join the study.";
-        step.text = @"Tap the button below to begin the consent process.";
         [steps addObject:step];
     }
     

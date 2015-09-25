@@ -755,6 +755,10 @@ ORK_CLASS_AVAILABLE
  The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
  preconfigured to use only Yes and No answers.
  
+ It is recommended to use an `ORKNavigableOrderedTask` along with this answer format
+ in order to determine if the user is eligible or not. See `ORKCatalog` for an 
+ example (`Eligibility Task Example').
+ 
  The eligibility answer format produces an `ORKBooleanQuestionResult` object.
  */
 ORK_CLASS_AVAILABLE
