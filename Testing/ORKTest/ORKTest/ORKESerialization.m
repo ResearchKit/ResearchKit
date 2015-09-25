@@ -703,12 +703,6 @@ ret =
           PROPERTY(minimum, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximum, NSNumber, NSObject, NO, nil, nil),
           })),
-  ENTRY(ORKBooleanAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKBooleanAnswerFormat alloc] init];
-        },
-        (@{
-           })),
   ENTRY(ORKScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKScaleAnswerFormat alloc] initWithMaximumValue:((NSNumber *)GETPROP(dict, maximum)).integerValue minimumValue:((NSNumber *)GETPROP(dict, minimum)).integerValue defaultValue:((NSNumber *)GETPROP(dict, defaultValue)).integerValue step:((NSNumber *)GETPROP(dict, step)).integerValue vertical:((NSNumber *)GETPROP(dict, vertical)).boolValue maximumValueDescription:GETPROP(dict, maximumValueDescription) minimumValueDescription:GETPROP(dict, minimumValueDescription)];
