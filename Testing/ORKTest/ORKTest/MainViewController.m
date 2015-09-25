@@ -452,7 +452,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
         return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
                                                intendedUseDescription:nil
-                                                         dominantHand:ORKSideRight
+                                                         dominantHand:ORKBodySagittalRight
                                                          numberOfPegs:9
                                                             threshold:0.2
                                                               rotated:NO
