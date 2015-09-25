@@ -111,9 +111,6 @@
 "BOOL_NO" = "No";
 "BOOL_YES" = "Yes";
 
-/* Eligibility strings*/
-"INELIGIBLE_MESSAGE" = "Unfortunately, you are ineligible to join this study.";
-
 /* Default placeholders to request answers in a questionnaire. */
 "PLACEHOLDER_TEXT_OR_NUMBER" = "Tap to answer";
 "NULL_ANSWER" = "Select an answer";
