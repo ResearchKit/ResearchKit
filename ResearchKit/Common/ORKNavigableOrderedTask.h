@@ -118,7 +118,7 @@ ORK_CLASS_AVAILABLE
  */
 + (ORKNavigableOrderedTask *)holePegTestTaskWithIdentifier:(NSString *)identifier
                                     intendedUseDescription:(nullable NSString *)intendedUseDescription
-                                              dominantHand:(ORKSide)dominantHand
+                                              dominantHand:(ORKBodySagittal)dominantHand
                                               numberOfPegs:(int)numberOfPegs
                                                  threshold:(double)threshold
                                                    rotated:(BOOL)rotated

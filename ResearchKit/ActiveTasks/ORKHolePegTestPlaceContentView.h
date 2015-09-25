@@ -41,9 +41,9 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMovingDirection:(ORKBodySagittal)movingDirection rotated:(BOOL)rotated NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, assign) ORKSide movingDirection;
+@property (nonatomic, assign) ORKBodySagittal movingDirection;
 @property (nonatomic, assign) double threshold;
 @property (nonatomic, assign, getter = isRotated) BOOL rotated;
 @property (nonatomic, weak) id<ORKHolePegTestPlaceContentViewDelegate> delegate;

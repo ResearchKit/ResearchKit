@@ -41,9 +41,9 @@ static const CGFloat ArrowLineWidth = 4;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOrientation:(ORKBodySagittal)orientation NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign) ORKBodySagittal orientation;
 @property (nonatomic, assign) BOOL completed;
 
 @end
@@ -59,7 +59,7 @@ static const CGFloat ArrowLineWidth = 4;
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithOrientation:(ORKSide)orientation {
+- (instancetype)initWithOrientation:(ORKBodySagittal)orientation {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.opaque = NO;
@@ -92,7 +92,7 @@ static const CGFloat ArrowLineWidth = 4;
     [self.tintColor setStroke];
     
     CGMutablePathRef path = CGPathCreateMutable();
-    if (self.orientation == ORKSideLeft) {
+    if (self.orientation == ORKBodySagittalLeft) {
         CGPathMoveToPoint(path, NULL, ArrowLineWidth + ArrowWidth, ArrowLineWidth);
         CGPathAddLineToPoint(path, NULL, ArrowLineWidth, ArrowLineWidth + ArrowWidth);
         CGPathAddLineToPoint(path, NULL, ArrowLineWidth + ArrowWidth, ArrowLineWidth + 2 * ArrowWidth);
@@ -113,7 +113,7 @@ static const CGFloat ArrowLineWidth = 4;
 
 @interface ORKDirectionView ()
 
-@property (nonatomic, assign) ORKSide orientation;
+@property (nonatomic, assign) ORKBodySagittal orientation;
 @property (nonatomic, strong) ORKArrowView *leftArrow;
 @property (nonatomic, strong) ORKArrowView *middleArrow;
 @property (nonatomic, strong) ORKArrowView *rightArrow;
@@ -134,7 +134,7 @@ static const CGFloat ArrowLineWidth = 4;
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithOrientation:(ORKSide)orientation {
+- (instancetype)initWithOrientation:(ORKBodySagittal)orientation {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.opaque = NO;
@@ -165,7 +165,7 @@ static const CGFloat ArrowLineWidth = 4;
     self.middleArrow.completed = NO;
     self.rightArrow.completed = NO;
     
-    if (self.orientation == ORKSideLeft) {
+    if (self.orientation == ORKBodySagittalLeft) {
         switch (index) {
             case 3:
                 self.leftArrow.completed = YES;

@@ -74,7 +74,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     ORKThrowMethodUnavailableException();
 }
 
-- (instancetype)initWithMovingDirection:(ORKSide)movingDirection rotated:(BOOL)rotated {
+- (instancetype)initWithMovingDirection:(ORKBodySagittal)movingDirection rotated:(BOOL)rotated {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         self.movingDirection = movingDirection;
@@ -96,7 +96,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
         [self.pegView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.pegView];
         
-        self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKSideLeft) ? ORKSideRight : ORKSideLeft];
+        self.directionView = [[ORKDirectionView alloc] initWithOrientation:(self.movingDirection == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft];
         [self.directionView setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addSubview:self.directionView];
         
@@ -144,6 +144,16 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
     self.layoutMargins = (UIEdgeInsets){.left = margin * 2, .right = margin * 2};
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self updateLayoutMargins];
+}
+
+- (void)setBounds:(CGRect)bounds {
+    [super setBounds:bounds];
+    [self updateLayoutMargins];
+}
+
 - (void)updateConstraints {
     if ([self.constraints count]) {
         [NSLayoutConstraint deactivateConstraints:self.constraints];
@@ -161,7 +171,7 @@ static const CGFloat ORKHolePegViewDiameter = 88.0f;
                                              metrics:nil views:views]];
     
     [constraintsArray addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKSideLeft) ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
+     [NSLayoutConstraint constraintsWithVisualFormat:(self.movingDirection == ORKBodySagittalLeft) ? @"H:|-[_pegView]->=0-[_holeView]-|" : @"H:|-[_holeView]->=0-[_pegView]-|"
                                              options:NSLayoutFormatAlignAllCenterY
                                              metrics:nil views:views]];
     

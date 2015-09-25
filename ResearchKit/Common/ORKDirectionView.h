@@ -38,6 +38,6 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (instancetype)initWithOrientation:(ORKSide)orientation NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOrientation:(ORKBodySagittal)orientation NS_DESIGNATED_INITIALIZER;
 
 @end

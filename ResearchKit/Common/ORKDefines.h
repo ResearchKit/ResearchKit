@@ -107,12 +107,12 @@ typedef NS_ENUM(NSInteger, ORKAudioChannel) {
 /**
  Body side constants.
  */
-typedef NS_ENUM(NSInteger, ORKSide) {
+typedef NS_ENUM(NSInteger, ORKBodySagittal) {
     /// The left side.
-    ORKSideLeft,
+    ORKBodySagittalLeft,
     
     /// The right side.
-    ORKSideRight
+    ORKBodySagittalRight
 } ORK_ENUM_AVAILABLE;
 
 /**

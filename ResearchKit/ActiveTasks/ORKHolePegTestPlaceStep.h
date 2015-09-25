@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKHolePegTestPlaceStep : ORKActiveStep
 
-@property (nonatomic, assign) ORKSide movingDirection;
+@property (nonatomic, assign) ORKBodySagittal movingDirection;
 @property (nonatomic, assign, getter = isDominantHandTested) BOOL dominantHandTested;
 @property (nonatomic, assign) int numberOfPegs;
 @property (nonatomic, assign) double threshold;

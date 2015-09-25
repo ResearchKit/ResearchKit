@@ -729,7 +729,7 @@ ORK_CLASS_AVAILABLE
 /**
  The hole peg test moving direction.
  */
-@property (nonatomic, assign) ORKSide movingDirection;
+@property (nonatomic, assign) ORKBodySagittal movingDirection;
 
 /**
  The step is for the dominant hand.
