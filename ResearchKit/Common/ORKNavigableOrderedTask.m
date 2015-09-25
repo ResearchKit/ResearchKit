@@ -299,7 +299,6 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
             ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestNonDominantRemoveStepIdentifier];
             step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), ndHand];
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
-            step.spokenInstruction = step.title;
             step.movingDirection = dominantHand;
             step.dominantHandTested = NO;
             step.numberOfPegs = numberOfPegs;
