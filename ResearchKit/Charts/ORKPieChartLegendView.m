@@ -101,7 +101,7 @@
     }];
     NSUInteger cellCount = sortedCells.count;
     NSTimeInterval interAnimationDelay = 0.05;
-    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (cellCount-1));
+    NSTimeInterval singleAnimationDuration = animationDuration - (interAnimationDelay * (cellCount - 1));
     if (singleAnimationDuration < 0) {
         interAnimationDelay = 0;
         singleAnimationDuration = animationDuration;

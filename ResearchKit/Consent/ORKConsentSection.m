@@ -36,13 +36,13 @@
 
 
 static NSString *movieNameForType(ORKConsentSectionType type, CGFloat scale) {
-    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type+1];
+    NSString *fullMovieName = [NSString stringWithFormat:@"consent_%02ld", (long)type + 1];
     fullMovieName = [NSString stringWithFormat:@"%@@%dx", fullMovieName, (int)scale];
     return fullMovieName;
 }
 
 NSURL *ORKMovieURLForConsentSectionType(ORKConsentSectionType type) {
-    CGFloat scale = [[UIScreen mainScreen] scale];
+    CGFloat scale = [UIScreen mainScreen].scale;
     
     // For iPad, use the movie for the next scale up
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && scale < 3) {

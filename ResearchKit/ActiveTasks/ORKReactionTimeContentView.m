@@ -34,14 +34,9 @@
 #import "ORKNavigationContainerView.h"
 
 
-@interface ORKReactionTimeContentView ()
-
-@property (nonatomic, strong) ORKReactionTimeStimulusView *stimulusView;
-
-@end
-
-
-@implementation ORKReactionTimeContentView
+@implementation ORKReactionTimeContentView {
+    ORKReactionTimeStimulusView *_stimulusView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
