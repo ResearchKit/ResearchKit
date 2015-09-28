@@ -48,7 +48,7 @@
     NSMutableArray *signatureElements = [NSMutableArray array];
     
     if (signature.title == nil) {
-        @throw [NSException exceptionWithName:NSObjectNotAvailableException reason:@"signature title is missing" userInfo:nil];
+        @throw [NSException exceptionWithName:NSObjectNotAvailableException reason:@"Signature title is missing" userInfo:nil];
     }
 
     // Signature
