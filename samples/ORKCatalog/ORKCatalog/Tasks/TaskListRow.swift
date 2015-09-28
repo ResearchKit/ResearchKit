@@ -76,6 +76,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ImageCapture
     
     case Consent
+    case Passcode
     
     case Audio
     case Fitness
@@ -121,9 +122,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
                 ]),
-            TaskListRowSection(title: "Consent", rows:
+            TaskListRowSection(title: "Onboarding", rows:
                 [
                     .Consent,
+                    .Passcode,
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
@@ -188,6 +190,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
+            
+        case .Passcode:
+            return NSLocalizedString("Passcode Creation", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -309,7 +314,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ConsentReviewStep
         case ConsentDocumentParticipantSignature
         case ConsentDocumentInvestigatorSignature
-        case PasscodeConsentStep
+
+        // Passcode task specific identifiers.
+        case PasscodeTask
+        case PasscodeStep
 
         // Active tasks.
         case AudioTask
@@ -373,6 +381,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Consent:
             return consentTask
+            
+        case .Passcode:
+            return passcodeTask
             
         case .Audio:
             return audioTask
@@ -785,7 +796,16 @@ enum TaskListRow: Int, CustomStringConvertible {
         // In a real application, you would supply your own localized text.
         reviewConsentStep.text = loremIpsumText
         reviewConsentStep.reasonForConsent = loremIpsumText
-        
+
+        return ORKOrderedTask(identifier: String(Identifier.ConsentTask), steps: [
+            visualConsentStep,
+            sharingConsentStep,
+            reviewConsentStep
+            ])
+    }
+    
+    /// This task demonstrates the Passcode creation process.
+    private var passcodeTask: ORKTask {
         /*
         If you want to protect the app using a passcode. It is reccomended to
         ask user to create passcode as part of the consent process and use the
@@ -793,15 +813,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         The passcode is stored in the keychain.
         */
-        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeConsentStep))
-        
-        return ORKOrderedTask(identifier: String(Identifier.ConsentTask), steps: [
-            visualConsentStep,
-            sharingConsentStep,
-            reviewConsentStep,
-            passcodeConsentStep
-            ])
+        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeStep))
+
+        return ORKOrderedTask(identifier: String(Identifier.PasscodeStep), steps: [passcodeConsentStep])
     }
+    
 
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {

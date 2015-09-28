@@ -3089,8 +3089,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          and then generate a PDF From the document that includes the signature.
          */
         
-        ORKStep *lastStep = [[(ORKOrderedTask *)taskViewController.task steps] lastObject];
-        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:lastStep.identifier] firstResult];
+        // Search for the review step.
+        NSArray *steps = [(ORKOrderedTask *)taskViewController.task steps];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"self isKindOfClass: %@", [ORKConsentReviewStep class]];
+        ORKStep *reviewStep = [[steps filteredArrayUsingPredicate:predicate] firstObject];
+        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:reviewStep.identifier] firstResult];
         
         [signatureResult applyToDocument:_currentDocument];
         

@@ -368,10 +368,14 @@
 
 - (void)removePasscodeFromKeychain {
     NSError *error;
-    [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
+    [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
     
-    if (error) {
-        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+    if (!error) {
+        [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:&error];
+    
+        if (error) {
+            @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+        }
     }
 }
 

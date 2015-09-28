@@ -95,17 +95,10 @@ static NSString * const FilledBullet = @"\u25CF";
                                      userInfo:nil];
     }
     
-    // Append the filled bullets.
-    NSMutableString *text = [NSMutableString new];
-    for (NSInteger i = 0; i < filledBullets; i++) {
-        [text appendString:FilledBullet];
-    }
-    
-    // Append the empty bullets.
-    NSInteger remainingDigits = self.numberOfDigits - filledBullets;
-    for (NSInteger i = 0; i < remainingDigits; i++) {
-        [text appendString:EmptyBullet];
-    }
+    // Append the string with the correct number of filled and empty bullets.
+    NSString *text = [NSString new];
+    text = [text stringByPaddingToLength:filledBullets withString:FilledBullet startingAtIndex:0];
+    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBullet startingAtIndex:0];
     
     // Apply spacing attribute to string.
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
