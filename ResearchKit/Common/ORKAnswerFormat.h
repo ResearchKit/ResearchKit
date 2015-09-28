@@ -80,7 +80,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeBoolean,
     
     /**
-     The Eligibility question type asks the participant to enter Yes or No (or the appropriate equivalents).
+     The Eligibility question type asks the participant to enter Yes or No via a custom boolean control.
      */
     ORKQuestionTypeEligibility,
     

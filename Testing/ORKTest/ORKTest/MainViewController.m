@@ -1286,7 +1286,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Eligibility survey
 /*
- The eligibility survey task is used to test elibility survey cell items (`ORKFormStep`, `ORKFormItem`)..
+ The eligibility survey task is used to test elibility survey cell item.
  */
 - (id<ORKTask>)makeEligibilitySurveyTask {
     NSMutableArray *steps = [NSMutableArray new];
