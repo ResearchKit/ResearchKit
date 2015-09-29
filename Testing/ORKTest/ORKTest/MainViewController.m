@@ -490,9 +490,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step5.title = @"Setup Complete";
         [steps addObject:step5];
         
-        return [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
-    } else
-        return nil;
+        return [self makeWaitingTask:steps];
+    }
+
+    return nil;
 }
 
 /*
@@ -3176,6 +3177,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 }
 
 #pragma mark - Wait Task
+
+- (ORKOrderedTask *)makeWaitingTask:(NSArray *)steps {
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
+    return waitTask;
+}
 
 - (void)updateProgress:(CGFloat)progress OfWaitTask:(ORKWaitStepViewController *)viewController {
     if (progress <= 1.0) {

@@ -34,13 +34,20 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <ResearchKit/ResearchKit.h>
-#import <ResearchKit/ORKActiveStep.h>
+
 
 /**
- The `ORKWaitStep` class represents a step that displays a label and an activity indicator mask. 
+ The `ORKWaitStep` class represents a step that displays a label and an activity
+ indicator mask.
  
- This task can be used to indicate to a user that a process is occuring that does not need their input, and possibly indicate the progress that process has made. To update the progress on screen, use the methods provided on the `ORKWaitStepViewController` this step represents. Once the processing is complete, `finish` must be called on the `ORKWaitStepViewController` in order for the user to be able to continue.
+ This task can be used to indicate to a user that a process is occuring that does
+    not need their input, and possibly indicate the progress that process has made.
+    To update the progress on screen, use the methods provided on the
+    `ORKWaitStepViewController` this step represents. Once the processing is complete,
+ `finish` must be called on the `ORKWaitStepViewController` in order for the user to
+ be able to continue.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKWaitStep : ORKActiveStep

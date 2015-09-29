@@ -34,10 +34,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKWaitStep.h"
 #import "ORKWaitStepViewController.h"
 #import "ORKHelpers.h"
 #import "ORKActiveStep_Internal.h"
+
 
 @implementation ORKWaitStep
 
@@ -58,7 +60,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.indicatorMask = ORK_DECODE_ENUM(aDecoder, indicatorMask);
+        ORK_DECODE_ENUM(aDecoder, indicatorMask);
     }
     return self;
 }

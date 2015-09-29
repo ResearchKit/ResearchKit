@@ -34,6 +34,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKWaitStepViewController.h"
 #import "ORKWaitStep.h"
 #import "ORKCustomStepView_Internal.h"
@@ -47,6 +48,7 @@
 #import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
 
+
 @interface ORKWaitView: ORKActiveStepCustomView
 
 - (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading;
@@ -58,13 +60,14 @@
 
 @end
 
+
 @implementation ORKWaitView
 
 - (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
     self = [super init];
     if (self) {
         _indictatorMask = mask;
-        self.translatesAutoresizingMaskIntoConstraints = false;
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _textLabel = [ORKSubheadlineLabel new];
         _textLabel.textAlignment = NSTextAlignmentCenter;
@@ -76,13 +79,12 @@
             case ORKProgressIndicatorMaskProgressBar:
                 _progressView = [UIProgressView new];
                 _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-                _progressView.progressTintColor = [self tintColor];
+                _progressView.progressTintColor = self.tintColor;
                 [self addSubview:_progressView];
                 break;
             case ORKProgressIndicatorMaskIndeterminate:
                 _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-                _activityIndicatorView.tintColor = [self tintColor];
                 [self addSubview:_activityIndicatorView];
                 [_activityIndicatorView startAnimating];
                 break;
@@ -99,27 +101,34 @@
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
-    _progressView.progressTintColor = [self tintColor];
-    _activityIndicatorView.tintColor = [self tintColor];
+    _progressView.progressTintColor = self.tintColor;
+    _activityIndicatorView.tintColor = self.tintColor;
 }
 
 - (void)setupConstraints {
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textLabel]-|"
-                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                 metrics:nil
-                                                                   views:NSDictionaryOfVariableBindings(_textLabel)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_textLabel)]];
+    NSMutableArray *constraints = [NSMutableArray new];
     
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textLabel]-|"
+                                                                   options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                   metrics:nil
+                                                                views:NSDictionaryOfVariableBindings(_textLabel)]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_textLabel)]];
+
     if (_progressView) {
         NSDictionary *screenMetric = @{@"progressWidth": [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 40.0)]};
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|" options:NSLayoutFormatAlignAllBaseline metrics:screenMetric views:NSDictionaryOfVariableBindings(_progressView)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
+        
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|" options:NSLayoutFormatAlignAllBaseline metrics:screenMetric views:NSDictionaryOfVariableBindings(_progressView)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
+
     } else if (_activityIndicatorView) {
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_activityIndicatorView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
+
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_activityIndicatorView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
     }
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark Accessibility
@@ -147,11 +156,13 @@
 
 @end
 
+
 @interface ORKWaitStepViewController ()
 
 @property (nonatomic, strong) ORKWaitView *waitView;
 
 @end
+
 
 @implementation ORKWaitStepViewController {
     ORKProgressIndicatorMask _indicatorMask;
@@ -170,27 +181,24 @@
     
     self.learnMoreButtonItem = nil;
     self.activeStepView.headerView.captionLabel.text = nil;
-
-    _waitView = [[ORKWaitView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:self.step.title];
-    _waitView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.activeStepView.activeCustomView = _waitView;
-    if (((ORKWaitStep *)self.step).shouldContinueOnFinish) {
-        self.activeStepView.continueSkipContainer.hidden = YES;
-    } else {
-        self.activeStepView.continueSkipContainer.continueEnabled = false;
-    }
-    
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
-    if (_waitView) {
-        [_waitView removeFromSuperview];
+
+    if (!_waitView) {
+        _waitView = [[ORKWaitView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:self.step.title];
+        _waitView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.activeStepView.activeCustomView = _waitView;
+        if (((ORKWaitStep *)self.step).shouldContinueOnFinish) {
+            self.activeStepView.continueSkipContainer.hidden = YES;
+        } else {
+            self.activeStepView.continueSkipContainer.continueEnabled = false;
+        }
     }
-    
-    _waitView = [[ORKWaitView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:self.step.title];
-    _waitView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.activeStepView.activeCustomView = _waitView;
+
+    _waitView.indictatorMask = ((ORKWaitStep *)self.step).indicatorMask;
+    _waitView.textLabel.text = self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil);
 }
 
 - (void)setCurrentProgressIndicatorMask:(ORKProgressIndicatorMask)mask {
