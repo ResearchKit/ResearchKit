@@ -362,6 +362,16 @@
 		86CC8EBA1AC09383001CCD89 /* ORKResultTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */; };
 		86CC8EBB1AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */; };
 		86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D348001AC16175006DB02B /* ORKRecorderTests.m */; };
+		A201A0CB1BA1065100B7EEDC /* ORKNottinghamEADL.h in Headers */ = {isa = PBXBuildFile; fileRef = A201A0C91BA1065100B7EEDC /* ORKNottinghamEADL.h */; };
+		A201A0CC1BA1065100B7EEDC /* ORKNottinghamEADL.m in Sources */ = {isa = PBXBuildFile; fileRef = A201A0CA1BA1065100B7EEDC /* ORKNottinghamEADL.m */; };
+		A201A0CF1BA10BB400B7EEDC /* ORKStrokeImpactScale.h in Headers */ = {isa = PBXBuildFile; fileRef = A201A0CD1BA10BB400B7EEDC /* ORKStrokeImpactScale.h */; };
+		A201A0D01BA10BB400B7EEDC /* ORKStrokeImpactScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A201A0CE1BA10BB400B7EEDC /* ORKStrokeImpactScale.m */; };
+		A21DD4221BA4A60300081AD0 /* ORKEpworthSleepScale.h in Headers */ = {isa = PBXBuildFile; fileRef = A21DD4201BA4A60300081AD0 /* ORKEpworthSleepScale.h */; };
+		A21DD4231BA4A60300081AD0 /* ORKEpworthSleepScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A21DD4211BA4A60300081AD0 /* ORKEpworthSleepScale.m */; };
+		A2BEF23A1BA5C58D00DEC82D /* ORKIQCDE.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEF2381BA5C58D00DEC82D /* ORKIQCDE.h */; };
+		A2BEF23B1BA5C58D00DEC82D /* ORKIQCDE.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BEF2391BA5C58D00DEC82D /* ORKIQCDE.m */; };
+		A2BEF23E1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = A2BEF23C1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.h */; };
+		A2BEF23F1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BEF23D1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.m */; };
 		B11C54991A9EEF8800265E61 /* ORKConsentSharingStep.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B11C549B1A9EEF8800265E61 /* ORKConsentSharingStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */; };
 		B11C549F1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -812,6 +822,16 @@
 		86CC8EAF1AC09383001CCD89 /* ORKResultTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultTests.m; sourceTree = "<group>"; };
 		86CC8EB01AC09383001CCD89 /* ORKTextChoiceCellGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKTextChoiceCellGroupTests.m; sourceTree = "<group>"; };
 		86D348001AC16175006DB02B /* ORKRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKRecorderTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A201A0C91BA1065100B7EEDC /* ORKNottinghamEADL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKNottinghamEADL.h; path = ResearchKit/SurveyTasks/ORKNottinghamEADL.h; sourceTree = SOURCE_ROOT; };
+		A201A0CA1BA1065100B7EEDC /* ORKNottinghamEADL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKNottinghamEADL.m; path = ResearchKit/SurveyTasks/ORKNottinghamEADL.m; sourceTree = SOURCE_ROOT; };
+		A201A0CD1BA10BB400B7EEDC /* ORKStrokeImpactScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKStrokeImpactScale.h; path = ResearchKit/SurveyTasks/ORKStrokeImpactScale.h; sourceTree = SOURCE_ROOT; };
+		A201A0CE1BA10BB400B7EEDC /* ORKStrokeImpactScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKStrokeImpactScale.m; path = ResearchKit/SurveyTasks/ORKStrokeImpactScale.m; sourceTree = SOURCE_ROOT; };
+		A21DD4201BA4A60300081AD0 /* ORKEpworthSleepScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKEpworthSleepScale.h; path = ResearchKit/SurveyTasks/ORKEpworthSleepScale.h; sourceTree = SOURCE_ROOT; };
+		A21DD4211BA4A60300081AD0 /* ORKEpworthSleepScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKEpworthSleepScale.m; path = ResearchKit/SurveyTasks/ORKEpworthSleepScale.m; sourceTree = SOURCE_ROOT; };
+		A2BEF2381BA5C58D00DEC82D /* ORKIQCDE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKIQCDE.h; path = ResearchKit/SurveyTasks/ORKIQCDE.h; sourceTree = SOURCE_ROOT; };
+		A2BEF2391BA5C58D00DEC82D /* ORKIQCDE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKIQCDE.m; path = ResearchKit/SurveyTasks/ORKIQCDE.m; sourceTree = SOURCE_ROOT; };
+		A2BEF23C1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKRivermeadMobilityIndex.h; path = ResearchKit/SurveyTasks/ORKRivermeadMobilityIndex.h; sourceTree = SOURCE_ROOT; };
+		A2BEF23D1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKRivermeadMobilityIndex.m; path = ResearchKit/SurveyTasks/ORKRivermeadMobilityIndex.m; sourceTree = SOURCE_ROOT; };
 		B11C54961A9EEF8800265E61 /* ORKConsentSharingStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStep.h; sourceTree = "<group>"; };
 		B11C54971A9EEF8800265E61 /* ORKConsentSharingStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKConsentSharingStep.m; sourceTree = "<group>"; };
 		B11C549C1A9EF4A700265E61 /* ORKConsentSharingStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKConsentSharingStepViewController.h; sourceTree = "<group>"; };
@@ -1160,6 +1180,7 @@
 				B1B894391A00345200C5CF2D /* ResearchKit_Private.h */,
 				86C40B511A8D7C5B00081FAC /* Common */,
 				86C40AF91A8D7C5B00081FAC /* ActiveTasks */,
+				A201A0C81BA1060200B7EEDC /* SurveyTasks */,
 				259E76FB1AFFAEAC0070F786 /* Charts */,
 				86C40BEB1A8D7C5C00081FAC /* Consent */,
 				618DA0471A93D0D600E63AA8 /* Accessibility */,
@@ -1238,6 +1259,24 @@
 				2EBFE11F1AE1B74100CB8254 /* ORKVoiceEngineTests.m */,
 			);
 			path = ResearchKitTests;
+			sourceTree = "<group>";
+		};
+		A201A0C81BA1060200B7EEDC /* SurveyTasks */ = {
+			isa = PBXGroup;
+			children = (
+				A201A0C91BA1065100B7EEDC /* ORKNottinghamEADL.h */,
+				A201A0CA1BA1065100B7EEDC /* ORKNottinghamEADL.m */,
+				A201A0CD1BA10BB400B7EEDC /* ORKStrokeImpactScale.h */,
+				A201A0CE1BA10BB400B7EEDC /* ORKStrokeImpactScale.m */,
+				A21DD4201BA4A60300081AD0 /* ORKEpworthSleepScale.h */,
+				A21DD4211BA4A60300081AD0 /* ORKEpworthSleepScale.m */,
+				A2BEF2381BA5C58D00DEC82D /* ORKIQCDE.h */,
+				A2BEF2391BA5C58D00DEC82D /* ORKIQCDE.m */,
+				A2BEF23C1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.h */,
+				A2BEF23D1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.m */,
+			);
+			name = SurveyTasks;
+			path = Localized;
 			sourceTree = "<group>";
 		};
 		B11DF3B21AA109C8009E76D2 /* docs */ = {
@@ -1995,6 +2034,7 @@
 				86C40D8E1A8D7C5C00081FAC /* ORKStep.h in Headers */,
 				618DA04E1A93D0D600E63AA8 /* ORKAccessibility.h in Headers */,
 				86B781BB1AA668ED00688151 /* ORKTimeIntervalPicker.h in Headers */,
+				A201A0CF1BA10BB400B7EEDC /* ORKStrokeImpactScale.h in Headers */,
 				86C40C6A1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.h in Headers */,
 				86C40CE41A8D7C5C00081FAC /* ORKAnswerFormat.h in Headers */,
 				25ECC0951AFBD68300F3D63B /* ORKReactionTimeStep.h in Headers */,
@@ -2030,6 +2070,7 @@
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
 				86C40D941A8D7C5C00081FAC /* ORKStepViewController.h in Headers */,
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
+				A2BEF23A1BA5C58D00DEC82D /* ORKIQCDE.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,
 				86C40DB61A8D7C5C00081FAC /* ORKSurveyAnswerCellForText.h in Headers */,
 				86C40E281A8D7C5C00081FAC /* ORKSignatureView.h in Headers */,
@@ -2037,6 +2078,7 @@
 				86C40C8C1A8D7C5C00081FAC /* ORKActiveStepViewController.h in Headers */,
 				618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */,
 				86C40C3A1A8D7C5C00081FAC /* ORKSpatialSpanGameState.h in Headers */,
+				A201A0CB1BA1065100B7EEDC /* ORKNottinghamEADL.h in Headers */,
 				10864CA21B27146B000F4158 /* ORKPSATContentView.h in Headers */,
 				618DA0501A93D0D600E63AA8 /* ORKAccessibilityFunctions.h in Headers */,
 				86C40C721A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.h in Headers */,
@@ -2079,6 +2121,7 @@
 				B183A4DD1A8535D100C76870 /* ResearchKit.h in Headers */,
 				86C40D101A8D7C5C00081FAC /* ORKDefaultFont.h in Headers */,
 				86C40E301A8D7C5C00081FAC /* ORKVisualConsentStepViewController.h in Headers */,
+				A2BEF23E1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.h in Headers */,
 				86C40DCA1A8D7C5C00081FAC /* ORKTaskViewController.h in Headers */,
 				86C40C7E1A8D7C5C00081FAC /* ORKActiveStep.h in Headers */,
 				BCB6E65E1B7D534C000D5B34 /* ORKGraphChartView.h in Headers */,
@@ -2109,6 +2152,7 @@
 				86C40C841A8D7C5C00081FAC /* ORKActiveStepTimer.h in Headers */,
 				86B781BD1AA668ED00688151 /* ORKValuePicker.h in Headers */,
 				86C40DE21A8D7C5C00081FAC /* ORKVerticalContainerView_Internal.h in Headers */,
+				A21DD4221BA4A60300081AD0 /* ORKEpworthSleepScale.h in Headers */,
 				BC01B0FB1B0EB99700863803 /* ORKTintedImageView_Internal.h in Headers */,
 				86B89ABE1AB3BFDB001626A4 /* ORKStepHeaderView_Internal.h in Headers */,
 				86C40C1E1A8D7C5C00081FAC /* ORKAudioStepViewController.h in Headers */,
@@ -2433,6 +2477,7 @@
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
+				A21DD4231BA4A60300081AD0 /* ORKEpworthSleepScale.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
@@ -2501,6 +2546,7 @@
 				86C40CA21A8D7C5C00081FAC /* ORKHealthQuantityTypeRecorder.m in Sources */,
 				86C40DC01A8D7C5C00081FAC /* ORKTableViewCell.m in Sources */,
 				BC41942A1AE8453A00073D6B /* ORKObserver.m in Sources */,
+				A2BEF23B1BA5C58D00DEC82D /* ORKIQCDE.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
 				86C40C701A8D7C5C00081FAC /* CMMotionActivity+ORKJSONDictionary.m in Sources */,
 				147503B01AEE8071004B17F3 /* ORKAudioGenerator.m in Sources */,
@@ -2508,6 +2554,7 @@
 				B12EA01A1B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.m in Sources */,
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
+				A2BEF23F1BA5D26C00DEC82D /* ORKRivermeadMobilityIndex.m in Sources */,
 				FA7A9D341B0843A9005A2BEA /* ORKConsentSignatureFormatter.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,
@@ -2547,6 +2594,7 @@
 				86AD91151AB7B97E00361FEB /* ORKQuestionStepView.m in Sources */,
 				10864CA11B27146B000F4158 /* ORKPSATStepViewController.m in Sources */,
 				86C40C5C1A8D7C5C00081FAC /* ORKWalkingTaskStep.m in Sources */,
+				A201A0CC1BA1065100B7EEDC /* ORKNottinghamEADL.m in Sources */,
 				257FCE241B4D37A80001EF06 /* ORKTowerOfHanoiTower.m in Sources */,
 				86C40C3C1A8D7C5C00081FAC /* ORKSpatialSpanGameState.m in Sources */,
 				86C40CF41A8D7C5C00081FAC /* ORKBodyLabel.m in Sources */,
@@ -2562,6 +2610,7 @@
 				24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */,
 				86C40DD81A8D7C5C00081FAC /* ORKUnitLabel.m in Sources */,
 				86C40D361A8D7C5C00081FAC /* ORKHelpers.m in Sources */,
+				A201A0D01BA10BB400B7EEDC /* ORKStrokeImpactScale.m in Sources */,
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
 				86C40C8E1A8D7C5C00081FAC /* ORKActiveStepViewController.m in Sources */,
 				B183A5011A8535D100C76870 /* (null) in Sources */,

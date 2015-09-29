@@ -64,6 +64,11 @@ DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(NottinghamEADLIdentifier);
+DefineStringKey(StrokeImpactScaleIdentifier);
+DefineStringKey(EpworthSleepScaleIdentifier);
+DefineStringKey(IQCDEIdentifier);
+DefineStringKey(RivermeadMobilityIndexIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -251,6 +256,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Consent",
                             @"Question Steps",
                             @"Active Tasks",
+                            @"Validated Surveys",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Consent
@@ -278,6 +284,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           ],
+                       @[ // Surveys
+                           @"Nottingham EADL scale",
+                           @"Stroke Impact Scale",
+                           @"Epworth Sleep Scale",
+                           @"IQCDE",
+                           @"Rivermead Mobility Index",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -452,6 +465,26 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                      stimulusDuration:1.0
                                          seriesLength:60
                                               options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:NottinghamEADLIdentifier]) {
+        return [ORKOrderedTask validatedSurveyTaskWithIdentifier:NottinghamEADLIdentifier
+                                             validatedSurveyType:ORKValidatedSurveyTypeNottinghamEADL
+                                                         options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:StrokeImpactScaleIdentifier]) {
+        return [ORKOrderedTask validatedSurveyTaskWithIdentifier:StrokeImpactScaleIdentifier
+                                             validatedSurveyType:ORKValidatedSurveyTypeStrokeImpactScale
+                                                         options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:EpworthSleepScaleIdentifier]) {
+        return [ORKOrderedTask validatedSurveyTaskWithIdentifier:EpworthSleepScaleIdentifier
+                                             validatedSurveyType:ORKValidatedSurveyTypeEpworthSleepScale
+                                                         options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:IQCDEIdentifier]) {
+        return [ORKOrderedTask validatedSurveyTaskWithIdentifier:IQCDEIdentifier
+                                             validatedSurveyType:ORKValidatedSurveyTypeIQCDE
+                                                         options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:RivermeadMobilityIndexIdentifier]) {
+        return [ORKOrderedTask validatedSurveyTaskWithIdentifier:RivermeadMobilityIndexIdentifier
+                                             validatedSurveyType:ORKValidatedSurveyTypeRivermeadMobilityIndex
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1879,6 +1912,26 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)psatTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
+}
+
+- (IBAction)nottinghamEadlScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:NottinghamEADLIdentifier];
+}
+
+- (IBAction)strokeImpactScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StrokeImpactScaleIdentifier];
+}
+
+- (IBAction)epworthSleepScaleButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EpworthSleepScaleIdentifier];
+}
+
+- (IBAction)iqcdeButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:IQCDEIdentifier];
+}
+
+- (IBAction)rivermeadMobilityIndexButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:RivermeadMobilityIndexIdentifier];
 }
 
 #pragma mark - Dynamic task

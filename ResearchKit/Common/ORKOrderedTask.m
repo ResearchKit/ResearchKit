@@ -58,6 +58,11 @@
 #import "ORKPSATStep.h"
 #import "ORKAccelerometerRecorder.h"
 #import "ORKAudioRecorder.h"
+#import "ORKNottinghamEADL.h"
+#import "ORKStrokeImpactScale.h"
+#import "ORKEpworthSleepScale.h"
+#import "ORKIQCDE.h"
+#import "ORKRivermeadMobilityIndex.h"
 
 
 ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
@@ -1204,5 +1209,28 @@ static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
 }
 
 
+
++ (ORKOrderedTask *)validatedSurveyTaskWithIdentifier:(NSString *)identifier
+                                  validatedSurveyType:(ORKValidatedSurveyType)validatedSurveyType
+                                              options:(ORKPredefinedTaskOption)options {
+    ORKOrderedTask *surveyTask;
+    switch (validatedSurveyType) {
+        case ORKValidatedSurveyTypeStrokeImpactScale:
+            surveyTask = [[ORKStrokeImpactScaleSurvey alloc] initWithIdentifier:identifier];
+            break;
+        case ORKValidatedSurveyTypeEpworthSleepScale:
+            surveyTask = [[ORKEpworthSleepScale alloc] initWithIdentifier:identifier];
+            break;
+        case ORKValidatedSurveyTypeIQCDE:
+            surveyTask = [[ORKIQCDE alloc] initWithIdentifier:identifier];
+            break;
+        case ORKValidatedSurveyTypeRivermeadMobilityIndex:
+            surveyTask = [[ORKRivermeadMobilityIndex alloc] initWithIdentifier:identifier];
+            break;
+        default:
+            surveyTask = [[ORKNottinghamEADLSurvey alloc] initWithIdentifier:identifier];
+    }
+    return surveyTask;
+}
 
 @end

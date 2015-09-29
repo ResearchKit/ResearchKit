@@ -501,6 +501,37 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
                               seriesLength:(NSInteger)seriesLength
                                    options:(ORKPredefinedTaskOption)options;
 
+
+typedef NS_ENUM(NSUInteger, ORKValidatedSurveyType) {
+    ORKValidatedSurveyTypeNottinghamEADL,
+    ORKValidatedSurveyTypeStrokeImpactScale,
+    ORKValidatedSurveyTypeEpworthSleepScale,
+    ORKValidatedSurveyTypeIQCDE,
+    ORKValidatedSurveyTypeRivermeadMobilityIndex
+};
+
+
+/**
+ Returns one of a number of prebuilt validated survey tools:
+ 
+ The Nottingham EADL Scale is a standardised survey for measuring function in terms of which daily activities a participant can undertake.
+ The Stroke Impact Scale is a more comprehensive survey looking at the impact of neurological injury on an individual.
+ The Epworth Sleepiness Scale is a validated survey tool which screens for underlying sleep disorders (such as obstructive sleep apnoea).
+ The IQCDE is a validated survey for assessing longterm cognitive decline (to be completed by a long-term friend or relative).
+ The Rivermead Mobility Index is a validated survey quantifying everyday mobility.
+ 
+ @param identifier              The task identifier to use for this task, appropriate to the study.
+ @param prebuiltSurveyType      The survey tool to be used
+ @param options                 Options that affect the features of the predefined task.
+ 
+ @return An active survey task that can be presented with an `ORKTaskViewController` object.
+ 
+ */
+
++ (ORKOrderedTask *)validatedSurveyTaskWithIdentifier:(NSString *)identifier
+                                  validatedSurveyType:(ORKValidatedSurveyType)validatedSurveyType
+                                              options:(ORKPredefinedTaskOption)options;
+
 @end
 
 NS_ASSUME_NONNULL_END
