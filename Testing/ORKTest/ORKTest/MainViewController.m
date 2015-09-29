@@ -256,7 +256,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Consent",
                             @"Question Steps",
                             @"Active Tasks",
-                            @"Validated surveys",
+                            @"Validated Surveys",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Consent
@@ -468,23 +468,23 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:NottinghamEADLIdentifier]) {
         return [ORKOrderedTask validatedSurveyTaskWithIdentifier:NottinghamEADLIdentifier
                                              validatedSurveyType:ORKValidatedSurveyTypeNottinghamEADL
-                                                         options:0];
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StrokeImpactScaleIdentifier]) {
         return [ORKOrderedTask validatedSurveyTaskWithIdentifier:StrokeImpactScaleIdentifier
                                              validatedSurveyType:ORKValidatedSurveyTypeStrokeImpactScale
-                                                         options:0];
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:EpworthSleepScaleIdentifier]) {
         return [ORKOrderedTask validatedSurveyTaskWithIdentifier:EpworthSleepScaleIdentifier
                                              validatedSurveyType:ORKValidatedSurveyTypeEpworthSleepScale
-                                                         options:0];
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:IQCDEIdentifier]) {
         return [ORKOrderedTask validatedSurveyTaskWithIdentifier:IQCDEIdentifier
                                              validatedSurveyType:ORKValidatedSurveyTypeIQCDE
-                                                         options:0];
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:RivermeadMobilityIndexIdentifier]) {
         return [ORKOrderedTask validatedSurveyTaskWithIdentifier:RivermeadMobilityIndexIdentifier
                                              validatedSurveyType:ORKValidatedSurveyTypeRivermeadMobilityIndex
-                                                         options:0];
+                                                         options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
