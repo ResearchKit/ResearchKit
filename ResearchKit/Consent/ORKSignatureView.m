@@ -90,8 +90,8 @@
 @end
 
 
-static const CGFloat kPointMinDistance = 5;
-static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDistance;
+static const CGFloat PointMinDistance = 5;
+static const CGFloat PointMinDistanceSquared = PointMinDistance * PointMinDistance;
 
 @interface ORKSignatureView () <ORKSignatureGestureRecognizerDelegate> {
     CGPoint currentPoint;
@@ -106,7 +106,10 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
 @end
 
 
-@implementation ORKSignatureView
+@implementation ORKSignatureView {
+    NSLayoutConstraint *_heightConstraint;
+    NSLayoutConstraint *_widthConstraint;
+}
 
 + (void)initialize {
     if (self == [ORKSignatureView class]) {
@@ -120,25 +123,49 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
     self = [super init];
     if (self) {
         [self makeSignatureGestureRecognizer];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self
-                                                         attribute:NSLayoutAttributeHeight
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:nil
-                                                         attribute:NSLayoutAttributeNotAnAttribute
-                                                        multiplier:1
-                                                          constant:ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, self.window)]];
-        NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                           attribute:NSLayoutAttributeWidth
-                                                                           relatedBy:NSLayoutRelationEqual
-                                                                              toItem:nil
-                                                                           attribute:NSLayoutAttributeNotAnAttribute
-                                                                          multiplier:1.0
-                                                                            constant:ORKScreenMetricMaxDimension];
-        widthConstraint.priority = UILayoutPriorityFittingSizeLevel - 5;
-        [self addConstraint:widthConstraint];
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    [super willMoveToWindow:newWindow];
+    [self updateConstraintConstantsForWindow:newWindow];
+}
+
+- (void)updateConstraintConstantsForWindow:(UIWindow *)window {
+    _heightConstraint.constant = ORKGetMetricForWindow(ORKScreenMetricSignatureViewHeight, window);
+    _widthConstraint.constant = ORKWidthForSignatureView(window);
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1.0
+                                                      constant:0.0]; // constant set in updateConstraintConstantsForWindow:
+    [constraints addObject:_heightConstraint];
+
+    _widthConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                    attribute:NSLayoutAttributeWidth
+                                                    relatedBy:NSLayoutRelationEqual
+                                                       toItem:nil
+                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                   multiplier:1.0
+                                                     constant:0.0]; // constant set in updateConstraintConstantsForWindow:
+    [constraints addObject:_widthConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    [self updateConstraintConstantsForWindow:self.window];
+}
+
+- (void)updateConstraints {
+    [self updateConstraintConstantsForWindow:self.window];
+    [super updateConstraints];
 }
 
 - (void)setBounds:(CGRect)bounds {
@@ -198,7 +225,7 @@ static const CGFloat kPointMinDistanceSquared = kPointMinDistance * kPointMinDis
         
     CGFloat y1 = height*bottom;
     UIFont *font = [ORKSelectionTitleLabel defaultFont];
-    return (CGPoint){x1, y1-5 - font.pointSize + font.descender };
+    return (CGPoint){x1, y1 - 5 - font.pointSize + font.descender};
 }
 
 - (NSArray *)backgroundLines {
@@ -256,7 +283,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
     CGFloat dx = point.x - currentPoint.x;
     CGFloat dy = point.y - currentPoint.y;
     
-    if ((dx * dx + dy * dy) < kPointMinDistanceSquared) {
+    if ((dx * dx + dy * dy) < PointMinDistanceSquared) {
         return;
     }
     
@@ -284,7 +311,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
 }
 
 - (void)gestureTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    CGRect rect = [self.currentPath bounds];
+    CGRect rect = self.currentPath.bounds;
     if (CGSizeEqualToSize(rect.size, CGSizeZero)) {
         return;
     }
@@ -303,7 +330,7 @@ static CGPoint mmid_Point(CGPoint p1, CGPoint p2) {
         [path stroke];
     }
     
-    if (! [self signatureExists] && (! self.currentPath || [self.currentPath isEmpty])) {
+    if (![self signatureExists] && (!self.currentPath || [self.currentPath isEmpty])) {
         [ORKLocalizedString(@"CONSENT_SIGNATURE_PLACEHOLDER", nil) drawAtPoint:[self placeholderPoint]
                                            withAttributes:@{ NSFontAttributeName : [ORKSelectionTitleLabel defaultFont],
                                                              NSForegroundColorAttributeName : [[UIColor blackColor] colorWithAlphaComponent:0.2]}];

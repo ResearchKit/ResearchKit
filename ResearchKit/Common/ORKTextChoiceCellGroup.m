@@ -100,7 +100,7 @@
         
     if (_singleChoice) {
         touchedCell.selectedItem = YES;
-        for (ORKChoiceViewCell *cell in [_cells allValues]) {
+        for (ORKChoiceViewCell *cell in _cells.allValues) {
             if (cell != touchedCell) {
                 cell.selectedItem = NO;
             }
@@ -109,9 +109,9 @@
         touchedCell.selectedItem = !touchedCell.selectedItem;
         if (touchedCell.selectedItem) {
             ORKTextChoice *touchedChoice = [_helper textChoiceAtIndex:index];
-            for (NSNumber *num in [_cells allKeys]) {
+            for (NSNumber *num in _cells.allKeys) {
                 ORKChoiceViewCell *cell = _cells[num];
-                ORKTextChoice *choice = [_helper textChoiceAtIndex:[num unsignedIntegerValue]];
+                ORKTextChoice *choice = [_helper textChoiceAtIndex:num.unsignedIntegerValue];
                 if (cell != touchedCell && (touchedChoice.exclusive || (cell.selectedItem && choice.exclusive))) {
                     cell.selectedItem = NO;
                 }
@@ -170,7 +170,7 @@
     // Boolean type uses a different format
     if ([_answer isKindOfClass:[NSArray class]] ) {
         NSArray *answerArray = _answer;
-        return (answerArray.count > 0)? [answerArray firstObject] : nil;
+        return (answerArray.count > 0)? answerArray.firstObject : nil;
     }
     return _answer;
 }

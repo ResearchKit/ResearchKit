@@ -83,12 +83,9 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
 }
 
 - (void)updateConstraints {
-    if ([self.constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:self.constraints];
-        self.constraints = nil;
-    }
+    [NSLayoutConstraint deactivateConstraints:self.constraints];
     
-    NSMutableArray *constraintsArray = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];
     
     ORKBorderedButton *answer3Button = self.answerButtons[0];
     ORKBorderedButton *answer4Button = self.answerButtons[1];
@@ -110,33 +107,30 @@ NSUInteger const ORKPSATMaximumAnswer = 17;
     NSDictionary *views = NSDictionaryOfVariableBindings(answer3Button, answer4Button, answer5Button, answer6Button, answer7Button, answer8Button, answer9Button, answer10Button, answer11Button, answer12Button, answer13Button, answer14Button, answer15Button, answer16Button, answer17Button);
     
     // First line of answer buttons
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer3Button]-[answer4Button(==answer3Button)]-[answer5Button(==answer3Button)]-[answer6Button(==answer3Button)]-[answer7Button(==answer3Button)]-|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Second line of answer buttons
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer8Button]-[answer9Button(==answer8Button)]-[answer10Button(==answer8Button)]-[answer11Button(==answer8Button)]-[answer12Button(==answer8Button)]-|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Third line of answer buttons
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[answer13Button]-[answer14Button(==answer13Button)]-[answer15Button(==answer13Button)]-[answer16Button(==answer13Button)]-[answer17Button(==answer13Button)]-|"
                                              options:NSLayoutFormatAlignAllCenterY|NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom
                                              metrics:nil views:views]];
     
     // Align vertically
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[answer3Button]-[answer8Button(==answer3Button)]-[answer13Button(==answer3Button)]-|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
-    self.constraints = constraintsArray;
-    [self addConstraints:self.constraints];
-    
-    [NSLayoutConstraint activateConstraints:self.constraints];
+    [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];
 }
 

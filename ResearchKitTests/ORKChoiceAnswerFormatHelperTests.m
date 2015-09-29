@@ -154,23 +154,30 @@
         
         id answer = [formatHelper answerForSelectedIndex:idx];
         
-        id value = [(ORKTextChoice *)choices[idx] value];
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        NSArray *answerArray = answer;
+        
+        id value = ((ORKTextChoice *)choices[idx]).value;
         
         if (value == nil) {
             value = @(idx);
         }
         
-        XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+        XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answerArray);
         
         answer = [formatHelper answerForSelectedIndexes:@[@(idx)]];
-        
-        XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        answerArray = answer;
+
+        XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answerArray);
         
         [indexArray addObject:@(idx)];
         
         answer = [formatHelper answerForSelectedIndexes:indexArray];
-        
-        XCTAssertEqual([answer count], idx + 1, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]]);
+        answerArray = answer;
+
+        XCTAssertEqual(answerArray.count, idx + 1, @"%@", answerArray);
         
     }];
 }
@@ -185,27 +192,31 @@
         
         id answer = [formatHelper answerForSelectedIndexes:@[@(0)]];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && [answer count] == 0, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
         
         answer = [formatHelper answerForSelectedIndex:0];
         
-        XCTAssert([answer isKindOfClass:[NSArray class]] && [answer count] == 0, @"%@", answer);
+        XCTAssert([answer isKindOfClass:[NSArray class]] && ((NSArray *)answer).count == 0, @"%@", answer);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
             id answer = [formatHelper answerForSelectedIndex:idx+1];
             
-            id value = [(ORKTextChoice *)textChoices[idx] value];
+            id value = ((ORKTextChoice *)textChoices[idx]).value;
             
             if (value == nil) {
                 value = @(idx);
             }
             
-            XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert([answer isKindOfClass:[NSArray class]]);
+            NSArray *answerArray = answer;
+            XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answer);
             
             answer = [formatHelper answerForSelectedIndexes:@[@(idx+1)]];
+            XCTAssert([answer isKindOfClass:[NSArray class]]);
+            answerArray = answer;
             
-            XCTAssert([answer count] == 1 && [[answer firstObject] isEqual:value], @"%@", answer);
+            XCTAssert(answerArray.count == 1 && [answerArray.firstObject isEqual:value], @"%@", answer);
         }];
         
     }
@@ -253,7 +264,7 @@
     
     [choices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        id value = [(ORKTextChoice *)obj value];
+        id value = ((ORKTextChoice *)obj).value;
         
         if (value == nil) {
             value = @(idx);
@@ -265,7 +276,7 @@
         
         NSArray *indexArray = [formatHelper selectedIndexesForAnswer:@[value]];
         
-        XCTAssertEqualObjects( [indexArray firstObject], @(idx), @"%@ vs %@", indexArray[0], @(idx));
+        XCTAssertEqualObjects( indexArray.firstObject, @(idx), @"%@ vs %@", indexArray[0], @(idx));
         
     }];
 }
@@ -280,23 +291,23 @@
         
         NSArray *indexes = [formatHelper selectedIndexesForAnswer:nil];
         
-        XCTAssertEqualObjects([indexes firstObject], @(0), @"%@", indexes);
+        XCTAssertEqualObjects(indexes.firstObject, @(0), @"%@", indexes);
         
         indexes = [formatHelper selectedIndexesForAnswer:ORKNullAnswerValue()];
         
-        XCTAssertEqualObjects([indexes firstObject], @(0), @"%@", indexes);
+        XCTAssertEqualObjects(indexes.firstObject, @(0), @"%@", indexes);
         
         NSNumber *indexNumber = [formatHelper selectedIndexForAnswer:nil];
         
-        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && [indexNumber unsignedIntegerValue] == 0, @"%@", indexNumber);
+        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && indexNumber.unsignedIntegerValue == 0, @"%@", indexNumber);
         
         indexNumber = [formatHelper selectedIndexForAnswer:ORKNullAnswerValue()];
         
-        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && [indexNumber unsignedIntegerValue] == 0, @"%@", indexNumber);
+        XCTAssert([indexNumber isKindOfClass:[NSNumber class]] && indexNumber.unsignedIntegerValue == 0, @"%@", indexNumber);
         
         [textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             
-            id value = [(ORKTextChoice *)obj value];
+            id value = ((ORKTextChoice *)obj).value;
             
             if (value == nil) {
                 value = @(idx);
@@ -308,7 +319,7 @@
             
             NSArray *indexArray = [formatHelper selectedIndexesForAnswer:@[value]];
             
-            XCTAssertEqualObjects([indexArray firstObject], @(idx+1), @"%@ vs %@", indexArray[0], @(idx+1));
+            XCTAssertEqualObjects(indexArray.firstObject, @(idx+1), @"%@ vs %@", indexArray[0], @(idx+1));
             
         }];
         
