@@ -56,7 +56,7 @@ static const CGFloat BaseSpacing = 10;
         _maximumNumberOfDisks = maximumNumberOfDisks;
         _base = [[UIView alloc] initWithFrame:CGRectZero];
         _base.backgroundColor = [UIColor ork_midGrayTintColor];
-        [_base setTranslatesAutoresizingMaskIntoConstraints:NO];
+        _base.translatesAutoresizingMaskIntoConstraints = NO;
         _base.layer.cornerRadius = 2.5;
         _base.layer.masksToBounds = YES;
         _diskViews = [NSMutableArray new];
@@ -78,7 +78,6 @@ static const CGFloat BaseSpacing = 10;
     }
     
     CGFloat height = (DiskHeight * _maximumNumberOfDisks) + (DiskSpacing * _maximumNumberOfDisks);
-    
     [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:self
                                                                  attribute:NSLayoutAttributeHeight
                                                                  relatedBy:NSLayoutRelationGreaterThanOrEqual
@@ -101,7 +100,7 @@ static const CGFloat BaseSpacing = 10;
                                                                     toItem:nil
                                                                  attribute:NSLayoutAttributeNotAnAttribute
                                                                 multiplier:1.0
-                                                                  constant:2]];
+                                                                  constant:2.0]];
     
     [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_base
                                                                  attribute:NSLayoutAttributeCenterX
@@ -123,7 +122,7 @@ static const CGFloat BaseSpacing = 10;
     for (NSInteger index = 0 ; index < _diskSizes.count ; index++) {
         UIView *disk = _diskViews[index];
         CGFloat divide = 1.0 / _maximumNumberOfDisks;
-        CGFloat multiply = [(NSNumber *)_diskSizes[index] floatValue] * divide;
+        CGFloat multiply = ((NSNumber *)_diskSizes[index]).floatValue * divide;
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
                                                                      attribute:NSLayoutAttributeCenterX
@@ -132,8 +131,6 @@ static const CGFloat BaseSpacing = 10;
                                                                      attribute:NSLayoutAttributeCenterX
                                                                     multiplier:1.0
                                                                       constant:0.0]];
-        
-        
         
         [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:disk
                                                                      attribute:NSLayoutAttributeWidth
@@ -261,7 +258,7 @@ static const CGFloat BaseSpacing = 10;
 }
 
 - (NSString *)accessibilityValue {
-    
+
     NSString *disksString = @"";
     
     for (NSNumber *diskSize in _diskSizes) {

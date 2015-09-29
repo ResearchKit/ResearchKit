@@ -182,7 +182,7 @@ static NSString * const FilledBullet = @"\u25CF";
     } else {
         previousSuffixFrame.size.height = CGRectGetHeight(self.bounds);
     }
-    if ([suffix length] == 0) {
+    if (suffix.length == 0) {
         return;
     }
     _suffixLabel = [self ork_createTextLabelWithTextColor:color ?: [UIColor grayColor]];
@@ -307,7 +307,7 @@ static NSString * const FilledBullet = @"\u25CF";
 
 - (BOOL)isPlaceholderVisible {
     BOOL editing = [self isEditing];
-    return (! editing) && ([[self placeholder] length] > 0);
+    return (!editing) && ([self placeholder].length > 0);
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
@@ -322,7 +322,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGRect textRect = [super textRectForBounds:bounds];
     
     // Leave room for the suffix label
-    if ([_suffixLabel.text length]) {
+    if (_suffixLabel.text.length) {
         CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
@@ -337,7 +337,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGRect r = [super editingRectForBounds:bounds];
     
     // Leave room for the suffix label
-    if ([_suffixLabel.text length]) {
+    if (_suffixLabel.text.length) {
         CGFloat suffixWidth = [self suffixWidthForBounds:bounds];
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
@@ -354,11 +354,11 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     CGSize sizeOfText = [textToMeasure sizeWithAttributes:[self defaultTextAttributes]];
     
     // Get the maximum size of the actual editable area (taking into account prefix/suffix/views/clear button
-    CGRect textFrame = [self textRectForBounds:[self bounds]];
+    CGRect textFrame = [self textRectForBounds:self.bounds];
     
     // Work out the size of our suffix frame
-    CGRect suffixFrame = [super placeholderRectForBounds:[self bounds]];
-    suffixFrame.size.width = [self suffixWidthForBounds:[self bounds]];
+    CGRect suffixFrame = [super placeholderRectForBounds:self.bounds];
+    suffixFrame.size.width = [self suffixWidthForBounds:self.bounds];
     
     // Take padding into account
     CGFloat xMaximum = CGRectGetMaxX(textFrame);
@@ -415,38 +415,39 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
     if (self) {
         _textField = [[ORKUnitTextField alloc] init];
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _textField.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_textField];
+        [self setUpConstraints];
     }
     return self;
 }
 
-- (void)updateConstraints {
-    _textField.translatesAutoresizingMaskIntoConstraints = NO;
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
     
-    [self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textField]|"
-                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                  metrics:nil
-                                                                    views:views]];
-    
-    [self addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField]|"
-                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                  metrics:nil
-                                                                    views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
     
     // Ask to fill the available horizontal space
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:_textField
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:ORKScreenMetricMaxDimension];
-    constraint.priority = UILayoutPriorityDefaultLow;
-    [self addConstraint:constraint];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_textField
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1.0
+                                                                        constant:ORKScreenMetricMaxDimension];
+    widthConstraint.priority = UILayoutPriorityDefaultLow;
+    [constraints addObject:widthConstraint];
     
-    [super updateConstraints];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (CGFloat)estimatedWidth {

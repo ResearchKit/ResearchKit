@@ -84,21 +84,44 @@
     _webView.clipsToBounds = NO;
     _webView.scrollView.clipsToBounds = NO;
     [self updateLayoutMargins];
-    
+
     [self.view addSubview:_webView];
     [self.view addSubview:_toolbar];
     
-    [self.view setNeedsUpdateConstraints];
+    [self setUpStaticConstraints];
 }
 
 - (void)updateLayoutMargins {
     const CGFloat margin = ORKStandardHorizontalMarginForView(self.view);
     _webView.scrollView.scrollIndicatorInsets = (UIEdgeInsets){.left = -margin, .right = -margin};
 }
-
+    
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self updateLayoutMargins];
+}
+
+- (void)setUpStaticConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
+                                                                             options:(NSLayoutFormatOptions)0
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
+                                                                             options:(NSLayoutFormatOptions)0 metrics:nil
+                                                                               views:views]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
+                                                        attribute:NSLayoutAttributeHeight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:nil
+                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                       multiplier:1.0
+                                                         constant:ORKGetMetricForWindow(ORKScreenMetricToolbarHeight, self.view.window)]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)updateViewConstraints {
@@ -112,25 +135,9 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_webView, _toolbar);
     const CGFloat horizontalMargin = ORKStandardHorizontalMarginForView(self.view);
     [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizMargin-[_webView]-horizMargin-|"
-                                                                                      options:(NSLayoutFormatOptions)0
+                                                                      options:(NSLayoutFormatOptions)0
                                                                                       metrics:@{ @"horizMargin": @(horizontalMargin) }
-                                                                                        views:views]];
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_toolbar]|"
-                                                                                      options:(NSLayoutFormatOptions)0
-                                                                                      metrics:nil
-                                                                                        views:views]];
-    [_variableConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView][_toolbar]|"
-                                                                                      options:(NSLayoutFormatOptions)0 metrics:nil
-                                                                                        views:views]];
-    
-    [_variableConstraints addObject:[NSLayoutConstraint constraintWithItem:_toolbar
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:nil
-                                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                                multiplier:1.0
-                                                                  constant:ORKGetMetricForScreenType(ORKScreenMetricToolbarHeight, ORKScreenTypeiPhone4)]];
-    
+                                                                        views:views]];
     [NSLayoutConstraint activateConstraints:_variableConstraints];
 }
 

@@ -39,13 +39,13 @@
 #import "ORKDefines_Private.h"
 
 
-static const char * kORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";
+static const char *ORKDataLoggerUploadedAttr = "com.apple.ResearchKit.uploaded";
 
 // Default per-logfile settings when a data logger is used in an ORKDataLoggerManager
-static const NSTimeInterval kORKDataLoggerManagerDefaultLogFileLifetime = 60*60*24*3; // 3 days
-static const unsigned long long kORKDataLoggerManagerDefaultLogFileSize = 1024*1024; // 1 MB
+static const NSTimeInterval ORKDataLoggerManagerDefaultLogFileLifetime = 60 * 60 * 24 * 3; // 3 days
+static const unsigned long long ORKDataLoggerManagerDefaultLogFileSize = 1024 * 1024; // 1 MB
 
-static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
+static NSString *const ORKDataLoggerManagerConfigurationFilename = @".ORKDataLoggerManagerConfiguration";
 
 
 @interface ORKDataLogger ()
@@ -80,7 +80,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 - (NSString *)ork_logName {
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
 
@@ -91,28 +91,28 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 - (NSString *)ork_logDateComponent {
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
-    NSString *logDateComponent = [lastComponent substringFromIndex:idx.location+1];
+    NSString *logDateComponent = [lastComponent substringFromIndex:idx.location + 1];
     return logDateComponent;
 }
 
 - (BOOL)ork_isUploaded {
-    NSData *data = [self ork_dataForAttr:kORKDataLoggerUploadedAttr];
+    NSData *data = [self ork_dataForAttr:ORKDataLoggerUploadedAttr];
     if (!data) {
         return NO;
     }
     
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return ([string integerValue] != 0);
+    return (string.integerValue != 0);
 }
 
 - (BOOL)ork_setUploaded:(BOOL)uploaded error:(NSError * __autoreleasing *)error {
     NSString *value = (uploaded ? @"1" : @"0");
     NSData *encodedString = [value dataUsingEncoding:NSUTF8StringEncoding];
-    return [self ork_setData:encodedString forAttr:kORKDataLoggerUploadedAttr error:error];
+    return [self ork_setData:encodedString forAttr:ORKDataLoggerUploadedAttr error:error];
 }
 
 - (NSData *)ork_dataForAttr:(const char *)attr {
@@ -125,7 +125,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
     }
     
     NSMutableData *data = [NSMutableData dataWithLength:length];
-    length = getxattr(path, attr, [data mutableBytes], length, 0, 0);
+    length = getxattr(path, attr, data.mutableBytes, length, 0, 0);
     if (length <= 0) {
         return nil;
     }
@@ -135,7 +135,7 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 
 - (BOOL)ork_setData:(NSData *)data forAttr:(const char *)attr error:(NSError * __autoreleasing *)error {
     const char *path = [self fileSystemRepresentation];
-    int rc = setxattr(path, attr, [data bytes], [data length], 0, 0);
+    int rc = setxattr(path, attr, data.bytes, data.length, 0, 0);
     if (rc != 0) {
         if (error) {
             *error = [NSError errorWithDomain:NSCocoaErrorDomain code:rc userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_SET_ATTRIBUTE", nil)}];
@@ -145,13 +145,13 @@ static NSString *const kORKDataLoggerManagerConfigurationFilename = @".ORKDataLo
 }
 
 - (NSString *)ork_logNameInDirectory:(NSURL *)directory {
-    if (! [self isFileURL]) {
+    if (![self isFileURL]) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a fileURL" userInfo:@{@"url":self}];
     }
     
     NSString *lastComponent = [self lastPathComponent];
     NSRange idx = [lastComponent rangeOfString:@"-"];
-    if (! idx.length) {
+    if (!idx.length) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not a completed log file" userInfo:@{@"url":self}];
     }
     
@@ -267,7 +267,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
 }
 
 - (BOOL)appendObject:(id)object fileHandle:(NSFileHandle *)fileHandle error:(NSError * __autoreleasing *)error {
-    if (! [self canAcceptLogObject:object]) {
+    if (![self canAcceptLogObject:object]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ORKLogFormatter accepts NSData only" userInfo:nil];
     }
     return [self writeData:(NSData *)object fileHandle:fileHandle error:error];
@@ -285,7 +285,7 @@ static void *ORKObjectObserverContext = &ORKObjectObserverContext;
         }
     }
     
-    if (! success) {
+    if (!success) {
         [self rollbackToCheckpoint:checkpoint fileHandle:fileHandle];
         if (error) {
             *error = errorOut;
@@ -312,8 +312,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (self) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            _ORKJSON_emptyLogLength = [[kJSONLogEmptyLogString dataUsingEncoding:NSUTF8StringEncoding] length];
-            _ORKJSON_terminatorLength = [[kJSONLogFooterString dataUsingEncoding:NSUTF8StringEncoding] length];
+            _ORKJSON_emptyLogLength = [kJSONLogEmptyLogString dataUsingEncoding:NSUTF8StringEncoding].length;
+            _ORKJSON_terminatorLength = [kJSONLogFooterString dataUsingEncoding:NSUTF8StringEncoding].length;
         });
     }
     return self;
@@ -361,15 +361,15 @@ static NSInteger _ORKJSON_terminatorLength = 0;
  * object being appended, and the footer bytes.
  */
 - (BOOL)appendObjects:(NSArray *)objects fileHandle:(NSFileHandle *)fileHandle error:(NSError * __autoreleasing *)error {
-    if (! fileHandle) {
+    if (!fileHandle) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Filehandle is nil" userInfo:nil];
     }
-    NSInteger numObjects = [objects count];
+    NSInteger numObjects = objects.count;
     if (numObjects == 0) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"No objects" userInfo:nil];
     }
     for (NSObject *object in objects) {
-        if (! [self canAcceptLogObject:object]) {
+        if (![self canAcceptLogObject:object]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"ORKLogFormatter accepts JSON serializable objects only" userInfo:nil];
         }
     }
@@ -406,7 +406,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             }
         }
     }];
-    if (! success) {
+    if (!success) {
         return success;
     }
     
@@ -417,7 +417,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     
     success = [self writeData:outputData fileHandle:fileHandle error:error];
     
-    if (! success) {
+    if (!success) {
         [self rollbackToCheckpoint:checkpoint fileHandle:fileHandle];
     }
     
@@ -456,13 +456,13 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     self = [super init];
     if (self) {
         _url = [url copy];
-        if (! [[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"directory does not exist" userInfo:nil];
         }
         if ([logName hasSuffix:@"-"]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName should not terminate with '-'" userInfo:nil];
         }
-        if (! [logName length]) {
+        if (!logName.length) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"logName must be non-empty" userInfo:nil];
         }
         
@@ -486,7 +486,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 
 - (instancetype)initWithDirectory:(NSURL *)url configuration:(NSDictionary *)configuration delegate:(id<ORKDataLoggerDelegate>)delegate {
     Class formatterClass = NSClassFromString(configuration[@"formatterClass"]);
-    if (! formatterClass) {
+    if (!formatterClass) {
         @throw [NSException exceptionWithName:NSGenericException reason:[NSString stringWithFormat:@"%@ is not a class", configuration[@"formatterClass"]] userInfo:nil];
     }
     
@@ -494,8 +494,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (self) {
         // Don't notify about initial setup
         [_observer pause];
-        self.maximumCurrentLogFileSize = [configuration[@"maximumCurrentLogFileSize"] unsignedLongValue];
-        self.maximumCurrentLogFileLifetime = [configuration[@"maximumCurrentLogFileLifetime"] doubleValue];
+        self.maximumCurrentLogFileSize = ((NSNumber *)configuration[@"maximumCurrentLogFileSize"]).unsignedLongValue;
+        self.maximumCurrentLogFileLifetime = ((NSNumber *)configuration[@"maximumCurrentLogFileLifetime"]).doubleValue;
         [_observer resume];
     }
     return self;
@@ -515,7 +515,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 - (void)setupDirectorySource {
     int dirFD = open([_url fileSystemRepresentation], O_EVTONLY);
     if (dirFD < 0) {
-        ORK_Log_Oops(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
+        ORK_Log_Warning(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
     } else {
         // Dispatch to a concurrent queue, so we don't store up blocks while our
         // queue is working.
@@ -614,7 +614,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (BOOL)appendObjects:(NSArray *)objects error:(NSError * __autoreleasing *)error {
-    if (![objects count]) {
+    if (!objects.count) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Empty array" userInfo:nil];
     }
     __block BOOL success = NO;
@@ -664,7 +664,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 }
 
 - (void)queue_setNeedsUpdateBytes {
-    if (! _directoryDirty) {
+    if (!_directoryDirty) {
         _directoryDirty = YES;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), _queue, ^{
@@ -704,7 +704,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSError *errorOut = nil;
     NSMutableArray *urls = [NSMutableArray array];
     for (NSURL *url in enumerator) {
-        if (! [self urlMatchesLogName:url]) {
+        if (![self urlMatchesLogName:url]) {
             continue;
         }
         if ( [[url lastPathComponent] isEqualToString:_logName]) {
@@ -716,13 +716,13 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             // If there's been an error getting the resource values, give up
             break;
         }
-        if (! [resources[NSURLIsRegularFileKey] boolValue]) {
+        if (!((NSNumber *)resources[NSURLIsRegularFileKey]).boolValue) {
             continue;
         }
         [urls addObject:url];
     }
     
-    if (! errorOut) {
+    if (!errorOut) {
         // Sort the URLs before beginning enumeration for the caller
         [urls sortUsingComparator:^NSComparisonResult(NSURL *obj1, NSURL *obj2) {
             // We can assume all relate to files in the same directory
@@ -766,12 +766,12 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSNumber *fileExists = nil;
     [url getResourceValue:&fileExists forKey:NSURLIsRegularFileKey error:nil];
     
-    BOOL createNewFile = ! [fileExists boolValue];
+    BOOL createNewFile = !fileExists.boolValue;
     
     NSFileHandle *fileHandle = nil;
     if (!createNewFile) {
         fileHandle = [NSFileHandle fileHandleForWritingToURL:url error:error];
-        if (! fileHandle) {
+        if (!fileHandle) {
             // Assume it's because we can't open the file, perhaps for security reasons.
             // Close and rename the log.
             [self queue_closeAndRenameLog];
@@ -858,19 +858,19 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     }
     
     // Check if a non-empty file exists, and create the file handle if so
-    NSDictionary *params = [url resourceValuesForKeys:@[NSURLIsRegularFileKey,NSURLFileSizeKey] error:nil];
+    NSDictionary *parameters = [url resourceValuesForKeys:@[NSURLIsRegularFileKey,NSURLFileSizeKey] error:nil];
     
-    if ( [params[NSURLIsRegularFileKey] boolValue]) {
-        if ([params[NSURLFileSizeKey] intValue] > 0) {
+    if (((NSNumber *)parameters[NSURLIsRegularFileKey]).boolValue) {
+        if (((NSNumber *)parameters[NSURLFileSizeKey]).intValue > 0) {
             NSURL *destinationUrl = [ORKDataLogger nextUrlForDirectoryUrl:_url logName:_logName];
             ORK_Log_Debug(@"Rollover: %@ to %@", [url lastPathComponent], [destinationUrl lastPathComponent]);
             [fileManager moveItemAtURL:url toURL:destinationUrl error:nil];
             if (self.fileProtectionMode == ORKFileProtectionCompleteUnlessOpen) {
                 // Upgrade to complete file protection after roll-over
                 NSError *error = nil;
-                if (! [fileManager setAttributes:@{NSFileProtectionKey : NSFileProtectionComplete}
+                if (![fileManager setAttributes:@{NSFileProtectionKey : NSFileProtectionComplete}
                            ofItemAtPath:[destinationUrl path] error:&error]) {
-                    ORK_Log_Debug(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
+                    ORK_Log_Warning(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
                 }
             }
             
@@ -889,7 +889,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSURL *url = [self currentLogFileURL];
     NSDictionary *parameters = [url resourceValuesForKeys:@[NSURLIsRegularFileKey, NSURLFileSizeKey, NSURLCreationDateKey] error:nil];
     
-    NSInteger fileSize = [parameters[NSURLFileSizeKey] integerValue];
+    NSInteger fileSize = ((NSNumber *)parameters[NSURLFileSizeKey]).integerValue;
     NSDate *creationDate = parameters[NSURLCreationDateKey];
     
     BOOL exceededSizeThreshold = ( (self.maximumCurrentLogFileSize > 0) && (fileSize >= self.maximumCurrentLogFileSize));
@@ -968,7 +968,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     } error:error];
     
     // Reporting multiple errors
-    if ([errors count]) {
+    if (errors.count) {
         if (!success && error && *error) {
             [errors addObject:*error];
             *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{NSLocalizedDescriptionKey : ORKLocalizedString(@"ERROR_DATALOGGER_MULTIPLE", nil), @"errors" : errors}];
@@ -1052,7 +1052,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     self = [super init];
     if (self) {
         _directory = directory;
-        if (! [[NSFileManager defaultManager] fileExistsAtPath:[_directory path]]) {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[_directory path]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"directory does not exist" userInfo:nil];
         }
         _delegate = delegate;
@@ -1065,39 +1065,43 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             return nil;
         }
         
-        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfURL:[_directory URLByAppendingPathComponent:kORKDataLoggerManagerConfigurationFilename]];
+        NSDictionary *configuration = [NSDictionary dictionaryWithContentsOfURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename]];
         [self loadConfiguration:configuration];
         
-        _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"pendingUploadBytesThreshold",@"totalBytesThreshold"] selector:@selector(configurationDidChange)];
+        _observer = [[ORKObjectObserver alloc] initWithObject:self keys:@[@"pendingUploadBytesThreshold", @"totalBytesThreshold"] selector:@selector(configurationDidChange)];
         
         [self setNeedsUpdateBytes];
     }
     return self;
 }
 
+static NSString *const PendingUploadBytesThresholdKey = @"pendingUploadBytesThreshold";
+static NSString *const TotalBytesThresholdKey = @"totalBytesThreshold";
+static NSString *const LoggerConfigurationsKey = @"loggers";
+
 - (void)loadConfiguration:(NSDictionary *)configuration {
-    self.pendingUploadBytesThreshold = [configuration[@"pendingUploadBytesThreshold"] unsignedLongLongValue];
-    self.totalBytesThreshold = [configuration[@"totalBytesThreshold"] unsignedLongLongValue];
+    self.pendingUploadBytesThreshold = ((NSNumber *)configuration[PendingUploadBytesThresholdKey]).unsignedLongLongValue;
+    self.totalBytesThreshold = ((NSNumber *)configuration[TotalBytesThresholdKey]).unsignedLongLongValue;
     
     NSMutableDictionary *records = [NSMutableDictionary dictionary];
-    for (NSDictionary *loggerConfig in configuration[@"loggers"]) {
-        ORKDataLogger *logger = [[ORKDataLogger alloc] initWithDirectory:_directory configuration:loggerConfig delegate:self];
+    for (NSDictionary *loggerConfiguration in configuration[LoggerConfigurationsKey]) {
+        ORKDataLogger *logger = [[ORKDataLogger alloc] initWithDirectory:_directory configuration:loggerConfiguration delegate:self];
         records[logger.logName] = logger;
     }
     _records = records;
 }
 
 - (NSDictionary *)queue_configuration {
-    NSMutableArray *loggerConfigurations = [[_records allValues] valueForKey:@"configuration"];
+    NSMutableArray *loggerConfigurations = [_records.allValues valueForKey:@"configuration"];
     
-    return @{@"pendingUploadBytesThreshold" : @(self.pendingUploadBytesThreshold),
-             @"totalBytesThreshold" : @(self.totalBytesThreshold),
-             @"loggers" : loggerConfigurations };
+    return @{PendingUploadBytesThresholdKey : @(self.pendingUploadBytesThreshold),
+             TotalBytesThresholdKey : @(self.totalBytesThreshold),
+             LoggerConfigurationsKey : loggerConfigurations };
 }
 
 - (void)queue_synchronizeConfiguration {
     NSDictionary *configuration = [self queue_configuration];
-    [configuration writeToURL:[_directory URLByAppendingPathComponent:kORKDataLoggerManagerConfigurationFilename] atomically:YES];
+    [configuration writeToURL:[_directory URLByAppendingPathComponent:ORKDataLoggerManagerConfigurationFilename] atomically:YES];
 }
 
 - (void)configurationDidChange {
@@ -1114,8 +1118,8 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     ORKDataLogger *dataLogger = [[ORKDataLogger alloc] initWithDirectory:_directory logName:logName formatter:formatter delegate:self];
     dataLogger.delegate = nil;
     // Pick suitable defaults for a typical use pattern
-    dataLogger.maximumCurrentLogFileLifetime = kORKDataLoggerManagerDefaultLogFileLifetime;
-    dataLogger.maximumCurrentLogFileSize = kORKDataLoggerManagerDefaultLogFileSize;
+    dataLogger.maximumCurrentLogFileLifetime = ORKDataLoggerManagerDefaultLogFileLifetime;
+    dataLogger.maximumCurrentLogFileSize = ORKDataLoggerManagerDefaultLogFileSize;
     dataLogger.delegate = self;
     
     _records[logName] = dataLogger;
@@ -1166,7 +1170,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 - (NSArray<NSString *> *)logNames {
     __block NSArray<NSString *> *logNames = nil;
     dispatch_sync(_queue, ^{
-        logNames = [_records allKeys];
+        logNames = _records.allKeys;
     });
     return logNames;
 }
@@ -1175,7 +1179,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     BOOL success = YES;
     NSMutableArray *allFiles = [NSMutableArray array];
     // Collect all the log file URLs so we can sort them by date rather than enumerating by logger.
-    for (ORKDataLogger *logger in [_records allValues]) {
+    for (ORKDataLogger *logger in _records.allValues) {
         success = [logger enumerateLogsNeedingUpload:^(NSURL *logFileUrl, BOOL *stop) {
             [allFiles addObject:logFileUrl];
         } error:error];
@@ -1228,7 +1232,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     for (NSURL *url in fileURLs) {
         NSString *logName = [url ork_logNameInDirectory:_directory];
         
-        if (! _records[logName]) {
+        if (!_records[logName]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not from a known logger" userInfo:@{@"url":url}];
         }
         
@@ -1239,7 +1243,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             success = NO;
         }
     }
-    if (error && [notRemoved count]) {
+    if (error && notRemoved.count) {
         *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{@"notRemoved":notRemoved}];
     }
     return success;
@@ -1260,7 +1264,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     for (NSURL *url in fileURLs) {
         NSString *logName = [url ork_logNameInDirectory:_directory];
         ORKDataLogger *logger = _records[logName];
-        if (! logger) {
+        if (!logger) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"URL is not from a known logger" userInfo:@{@"url":url}];
         }
         
@@ -1271,7 +1275,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
             success = NO;
         }
     }
-    if (error && [notRemoved count]) {
+    if (error && notRemoved.count) {
         *error = [NSError errorWithDomain:ORKErrorDomain code:ORKErrorMultipleErrors userInfo:@{@"notRemoved":notRemoved}];
     }
     return success;
@@ -1300,7 +1304,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (totalBytes > bytes) {
-        for (ORKDataLogger *logger  in [_records allValues]) {
+        for (ORKDataLogger *logger  in _records.allValues) {
             [logger enumerateLogsAlreadyUploaded:^(NSURL *logFileUrl, BOOL *stop) {
                 unsigned long long fileSize = [[fileManager attributesOfItemAtPath:[logFileUrl path] error:nil] fileSize];
                 if (fileSize > 0) {
@@ -1353,7 +1357,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 - (void)queue_updateBytes {
     unsigned long long pending = 0;
     unsigned long long uploaded = 0;
-    for (ORKDataLogger *logger in [_records allValues]) {
+    for (ORKDataLogger *logger in _records.allValues) {
         pending += logger.pendingBytes;
         uploaded += logger.uploadedBytes;
     }
@@ -1367,14 +1371,14 @@ static NSInteger _ORKJSON_terminatorLength = 0;
     if (exceededPendingThreshold && !_pendingUploadDelegateSent) {
         [self.delegate dataLoggerManager:self pendingUploadBytesReachedThreshold:pending];
         _pendingUploadDelegateSent = YES;
-    } else if (! exceededPendingThreshold) {
+    } else if (!exceededPendingThreshold) {
         _pendingUploadDelegateSent = NO;
     }
     
     if (exceededTotalThreshold && !_totalBytesDelegateSent) {
         [self.delegate dataLoggerManager:self totalBytesReachedThreshold:(pending + uploaded)];
         _totalBytesDelegateSent = YES;
-    } else if (! exceededTotalThreshold) {
+    } else if (!exceededTotalThreshold) {
         _totalBytesDelegateSent = NO;
     }
 }

@@ -55,13 +55,13 @@
      localizedLearnMoreHTMLContent:(NSString *)localizedLearnMoreHTMLContent {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        if ( [investigatorShortDescription length] == 0 ) {
+        if ( investigatorShortDescription.length == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"investigatorShortDescription should not be empty." userInfo:nil];
         }
-        if ( [investigatorLongDescription length] == 0 ) {
+        if ( investigatorLongDescription.length == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"investigatorLongDescription should not be empty." userInfo:nil];
         }
-        if ( [localizedLearnMoreHTMLContent length] == 0 ) {
+        if ( localizedLearnMoreHTMLContent.length == 0 ) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"localizedLearnMoreHTMLContent should not be empty." userInfo:nil];
         }
         
