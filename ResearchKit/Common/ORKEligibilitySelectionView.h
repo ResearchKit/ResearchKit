@@ -29,78 +29,30 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <ResearchKit/ORKFormStep.h>
-#import "ORKSkin.h"
+#import <Foundation/Foundation.h>
+#import <ResearchKit/ResearchKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKFormItemCell;
+static const CGFloat EligibilityButtonHeight = 130;
 
-@protocol ORKFormItemCellDelegate <NSObject>
+@class ORKEligibilitySelectionView;
 
-@required
-- (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(nullable id)answer;
-- (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
-- (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
-- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
+@protocol ORKEligibilitySelectionViewDelegate <NSObject>
+
+- (void)selectionViewSelectionDidChange:(ORKEligibilitySelectionView *)view;
 
 @end
 
 
-@interface ORKFormItemCell : UITableViewCell
+@interface ORKEligibilitySelectionView : UIView
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
-                               formItem:(ORKFormItem *)formItem
-                                 answer:(nullable id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth;
+@property (nonatomic, weak, nullable) id<ORKEligibilitySelectionViewDelegate> delegate;
 
-@property (nonatomic, weak, nullable) id<ORKFormItemCellDelegate> delegate;
-@property (nonatomic, copy, nullable) id answer;
-@property (nonatomic, strong, nullable) ORKFormItem *formItem;
-@property (nonatomic, copy, nullable) id defaultAnswer;
-@property (nonatomic) CGFloat maxLabelWidth;
-@property (nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic, strong, nullable) id answer;
 
-@end
-
-
-@interface ORKFormItemTextFieldBasedCell : ORKFormItemCell <UITextFieldDelegate>
-
-@end
-
-
-@interface ORKFormItemTextFieldCell : ORKFormItemTextFieldBasedCell
-
-@end
-
-
-@interface ORKFormItemNumericCell : ORKFormItemTextFieldBasedCell
-
-@end
-
-
-@interface ORKFormItemTextCell : ORKFormItemCell <UITextViewDelegate>
-
-@end
-
-
-@interface ORKFormItemEligibilityCell : ORKFormItemCell
-
-@end
-
-
-@interface ORKFormItemImageSelectionCell : ORKFormItemCell
-
-@end
-
-
-@interface ORKFormItemPickerCell : ORKFormItemTextFieldBasedCell
-
-@end
-
-@interface ORKFormItemScaleCell : ORKFormItemCell
+- (void)toggleViewForAnswer:(id)answer;
 
 @end
 

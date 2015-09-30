@@ -80,6 +80,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeBoolean,
     
     /**
+     The Eligibility question type asks the participant to enter Yes or No via a custom boolean control.
+     */
+    ORKQuestionTypeEligibility,
+    
+    /**
      In a text question, the participant can enter multiple lines of text.
      */
     ORKQuestionTypeText,
@@ -143,6 +148,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
+@class ORKEligibilityAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
@@ -211,6 +217,8 @@ ORK_CLASS_AVAILABLE
                                                           vertical:(BOOL)vertical;
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
+
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat;
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
@@ -739,6 +747,22 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+@end
+
+
+/**
+ The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
+ preconfigured to use only Yes and No answers.
+ 
+ It is recommended to use an `ORKNavigableOrderedTask` along with this answer format
+ in order to determine if the user is eligible or not. See `ORKCatalog` for an
+ example (`Eligibility Task Example').
+ 
+ The eligibility answer format produces an `ORKBooleanQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEligibilityAnswerFormat : ORKAnswerFormat
 
 @end
 
