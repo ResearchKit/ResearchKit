@@ -56,14 +56,15 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(MemoryTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(ScreeningTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(MemoryTaskIdentifier);
+DefineStringKey(ScreeningTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(TimedWalkTaskIdentifier);
+DefineStringKey(HolePegTestTaskIdentifier);
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
@@ -272,13 +273,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
+                           @"Hole Peg Test Task",
                            @"Memory Game Task",
                            @"PSAT Task",
-                           @"Reaction Time Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Reaction Time Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -293,10 +295,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Authenticate Passcode"
                            ],
                        ];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [_collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -428,27 +426,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                   options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                                   intendedUseDescription:nil
-                                                  maximumStimulusInterval:8
-                                                  minimumStimulusInterval:4
-                                                    thresholdAcceleration:0.5
-                                                         numberOfAttempts:3
-                                                                  timeout:10
-                                                             successSound:0
-                                                             timeoutSound:0
-                                                             failureSound:0
-                                                                  options:0];
+                                       intendedUseDescription:nil
+                                      maximumStimulusInterval:8
+                                      minimumStimulusInterval:4
+                                        thresholdAcceleration:0.5
+                                             numberOfAttempts:3
+                                                      timeout:10
+                                                 successSound:0
+                                                 timeoutSound:0
+                                                 failureSound:0
+                                                      options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
-    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
-        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
-                                    intendedUseDescription:nil
-                                          distanceInMeters:100
-                                                 timeLimit:180
-                                                   options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
         return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
                                intendedUseDescription:nil
@@ -457,6 +449,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                      stimulusDuration:1.0
                                          seriesLength:60
                                               options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
+        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
+                                    intendedUseDescription:nil
+                                          distanceInMeters:100
+                                                 timeLimit:180
+                                                   options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
+        return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
+                                               intendedUseDescription:nil
+                                                         dominantHand:ORKBodySagittalRight
+                                                         numberOfPegs:9
+                                                            threshold:0.2
+                                                              rotated:NO
+                                                            timeLimit:300.0
+                                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1889,6 +1896,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
+- (IBAction)holePegTestTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
+}
+
 #pragma mark - Dynamic task
 
 /*
@@ -3128,12 +3139,15 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
-            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
-                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
-                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
             } else if ([result isKindOfClass:[ORKPSATResult class]]) {
                 ORKPSATResult *pr = (ORKPSATResult *)result;
                 NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
+            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
+                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
+            } else if ([result isKindOfClass:[ORKHolePegTestResult class]]) {
+                ORKHolePegTestResult *hptr = (ORKHolePegTestResult *)result;
+                NSLog(@"    %@:   totalTime: %@     %@", hptr.identifier, @(hptr.totalTime), hptr.samples);
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }
