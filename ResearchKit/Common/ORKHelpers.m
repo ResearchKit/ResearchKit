@@ -64,7 +64,7 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
     if (s == 0) {
         static CGFloat __s = 1.0;
         static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{ __s = [[UIScreen mainScreen] scale]; });
+        dispatch_once(&onceToken, ^{ __s = [UIScreen mainScreen].scale; });
         s = __s;
     }
     if (s == 1.0) {
@@ -75,7 +75,7 @@ static inline CGFloat AdjustToScale(CGFloat (adjustFn)(CGFloat), CGFloat v, CGFl
 }
 
 CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
-    return AdjustToScale(ORKCGFloor, value, [view contentScaleFactor]);
+    return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
 static id findInArrayByKey(NSArray * array, NSString *key, id value) {
@@ -323,7 +323,7 @@ NSDate *ORKTimeOfDayDateFromComponents(NSDateComponents *dateComponents) {
 }
 
 BOOL ORKCurrentLocalePresentsFamilyNameFirst() {
-    NSString *language = [[[NSLocale preferredLanguages] firstObject] substringToIndex:2];
+    NSString *language = [[NSLocale preferredLanguages].firstObject substringToIndex:2];
     static dispatch_once_t onceToken;
     static NSArray *familyNameFirstLanguages = nil;
     dispatch_once(&onceToken, ^{
@@ -341,7 +341,7 @@ BOOL ORKWantsWideContentMargins(UIScreen *screen) {
     // If our screen's minimum dimension is bigger than a fixed threshold,
     // decide to use wide content margins. This is less restrictive than UIKit,
     // but a good enough approximation.
-    CGRect screenRect = [screen bounds];
+    CGRect screenRect = screen.bounds;
     CGFloat minDimension = MIN(screenRect.size.width, screenRect.size.height);
     BOOL isWideScreenFormat = (minDimension > 375.);
     
@@ -372,7 +372,7 @@ UIFont *ORKThinFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightThin];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Thin" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -385,7 +385,7 @@ UIFont *ORKMediumFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightMedium];
     } else {
         font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -398,7 +398,7 @@ UIFont *ORKLightFontWithSize(CGFloat size) {
         font = [UIFont systemFontOfSize:size weight:UIFontWeightLight];
     } else {
         font = [UIFont fontWithName:@".HelveticaNeueInterface-Light" size:size];
-        if (! font) {
+        if (!font) {
             font = [UIFont systemFontOfSize:size];
         }
     }
@@ -418,7 +418,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
                                        bookmarkDataIsStale:&bookmarkIsStale
                                                      error:&bookmarkError];
     if (!bookmarkURL) {
-        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+        ORK_Log_Warning(@"Error loading URL from bookmark: %@", bookmarkError);
     }
     
     return bookmarkURL;
@@ -435,7 +435,7 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
                                       relativeToURL:nil
                                               error:&error];
     if (!bookmark) {
-        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+        ORK_Log_Warning(@"Error converting URL to bookmark: %@", error);
     }
     return bookmark;
 }
@@ -448,7 +448,7 @@ NSString *ORKPathRelativeToURL(NSURL *url, NSURL *baseURL) {
     NSString *basePath = [standardizedBaseURL absoluteString];
     
     if ([path hasPrefix:basePath]) {
-        NSString *relativePath = [path substringFromIndex:[basePath length]];
+        NSString *relativePath = [path substringFromIndex:basePath.length];
         if ([relativePath hasPrefix:@"/"]) {
             relativePath = [relativePath substringFromIndex:1];
         }

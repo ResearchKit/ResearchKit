@@ -90,29 +90,23 @@
 }
 
 - (void)updateConstraints {
-    if ([self.constraints count]) {
-        [NSLayoutConstraint deactivateConstraints:self.constraints];
-        self.constraints = nil;
-    }
+    [NSLayoutConstraint deactivateConstraints:self.constraints];
     
-    NSMutableArray *constraintsArray = [NSMutableArray array];
+    NSMutableArray *constraints = [NSMutableArray array];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_progressView, _imageView);
     
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressView]|"
                                              options:(NSLayoutFormatOptions)0
                                              metrics:nil views:views]];
     
-    [constraintsArray addObjectsFromArray:
+    [constraints addObjectsFromArray:
      [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_progressView]-(>=10)-[_imageView]-|"
                                              options:NSLayoutFormatAlignAllCenterX
                                              metrics:nil views:views]];
     
-    self.constraints = constraintsArray;
-    [self addConstraints:self.constraints];
-    
-    [NSLayoutConstraint activateConstraints:self.constraints];
+    [NSLayoutConstraint activateConstraints:constraints];
     [super updateConstraints];
 }
 

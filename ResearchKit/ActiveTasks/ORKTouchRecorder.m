@@ -113,10 +113,10 @@
 }
 
 - (void)start {
-    if (! _logger) {
+    if (!_logger) {
         NSError *err = nil;
         _logger = [self makeJSONDataLoggerWithError:&err];
-        if (! _logger) {
+        if (!_logger) {
             [self finishRecordingWithError:err];
             return;
         }
@@ -199,11 +199,6 @@
         [self finishRecordingWithError:err];
     }
 }
-
-@end
-
-
-@interface ORKTouchRecorderConfiguration ()
 
 @end
 

@@ -63,8 +63,8 @@
 
 - (void)resetTilesAnimated:(BOOL)animated {
     NSArray *currentViews = _tileViews;
-    NSInteger numberOfTilesOld = [_tileViews count];
-    NSInteger numberOfTilesNew = _gridSize.width*_gridSize.height;
+    NSInteger numberOfTilesOld = _tileViews.count;
+    NSInteger numberOfTilesNew = _gridSize.width * _gridSize.height;
     NSMutableArray *newViews = [NSMutableArray arrayWithCapacity:numberOfTilesNew];
     NSArray *viewsToRemove = nil;
     if (numberOfTilesOld <= numberOfTilesNew) {
@@ -123,15 +123,15 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGRect bounds = [self bounds];
+    CGRect bounds = self.bounds;
     CGFloat gridItemEdgeLength =  ORKFloorToViewScale(MIN(bounds.size.width / _gridSize.width, bounds.size.height / _gridSize.height), self);
     
     gridItemEdgeLength = MIN(gridItemEdgeLength, 114);
     CGSize gridItemSize = (CGSize){gridItemEdgeLength, gridItemEdgeLength};
     
     CGPoint centeringOffset = CGPointZero;
-    centeringOffset.x = 0.5*(bounds.size.width - (gridItemSize.width * _gridSize.width));
-    centeringOffset.y = 0.5*(bounds.size.height - (gridItemSize.height * _gridSize.height));
+    centeringOffset.x = 0.5 * (bounds.size.width - (gridItemSize.width * _gridSize.width));
+    centeringOffset.y = 0.5 * (bounds.size.height - (gridItemSize.height * _gridSize.height));
     
     NSInteger tileIndex = 0;
     for (NSInteger x = 0; x < _gridSize.width; x++) {
@@ -168,8 +168,6 @@
 @implementation ORKSpatialSpanMemoryContentView {
     ORKQuantityPairView *_quantityPairView;
     ORKNavigationContainerView *_continueView;
-    NSArray *_constraints;
-    NSLayoutConstraint *_topConstraint;
 }
 
 - (ORKActiveStepQuantityView *)countView {
@@ -221,7 +219,7 @@
         [self countView].backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.2];
 #endif
         
-        [self setNeedsUpdateConstraints];
+        [self setUpConstraints];
     }
     return self;
 }
@@ -274,29 +272,25 @@
     [self updateMargins];
 }
 
-- (void)updateConstraints {
-    if (_constraints) {
-        [NSLayoutConstraint deactivateConstraints:_constraints];
-        _constraints = nil;
-    }
-    
-    NSMutableArray *constraints = [NSMutableArray array];
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(_gameView, _quantityPairView, _continueView);
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:views]];
-    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:_gameView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:nil
-                                                          attribute:NSLayoutAttributeNotAnAttribute
-                                                         multiplier:1.0
-                                                           constant:1000.0];
-    constraint1.priority = UILayoutPriorityDefaultLow-1;
-    [constraints addObject:constraint1];
+    [constraints addObjectsFromArray:
+     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[_gameView][_quantityPairView]|"
+                                             options:NSLayoutFormatAlignAllCenterX
+                                             metrics:nil
+                                               views:views]];
+    NSLayoutConstraint *gameViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_gameView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0
+                                                                       constant:ORKScreenMetricMaxDimension];
+    gameViewHeightConstraint.priority = UILayoutPriorityDefaultLow - 1;
+    [constraints addObject:gameViewHeightConstraint];
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_gameView]-|"
                                                                              options:(NSLayoutFormatOptions)0
@@ -333,13 +327,10 @@
                                                                           attribute:NSLayoutAttributeNotAnAttribute
                                                                          multiplier:1.0
                                                                            constant:ORKScreenMetricMaxDimension];
-    maxWidthConstraint.priority = UILayoutPriorityRequired-1;
+    maxWidthConstraint.priority = UILayoutPriorityRequired - 1;
     [constraints addObject:maxWidthConstraint];
     
     [NSLayoutConstraint activateConstraints:constraints];
-    _constraints = constraints;
-    
-    [super updateConstraints];
 }
 
 @end

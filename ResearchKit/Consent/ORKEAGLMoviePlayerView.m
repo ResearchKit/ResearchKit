@@ -59,14 +59,14 @@ enum {
 // Color Conversion Constants (YUV to RGB) including adjustment from 16-235/16-240 (video range)
 
 // BT.601, which is the standard for SDTV.
-static const GLfloat kColorConversion601[] = {
+static const GLfloat ColorConversion601[] = {
     1.164,  1.164, 1.164,
       0.0, -0.392, 2.017,
     1.596, -0.813,   0.0,
 };
 
 // BT.709, which is the standard for HDTV.
-static const GLfloat kColorConversion709[] = {
+static const GLfloat ColorConversion709[] = {
     1.164,  1.164, 1.164,
       0.0, -0.213, 2.112,
     1.793, -0.533,   0.0,
@@ -78,7 +78,7 @@ static const GLfloat kColorConversion709[] = {
         GLenum err = glGetError();
         if (err != GL_NO_ERROR)
         {
-            NSLog(@"glError: 0x%04X", err);
+            ORK_Log_Error(@"glError: 0x%04X", err);
         }
     }
 #else
@@ -131,7 +131,7 @@ const GLfloat DefaultPreferredRotation = 0;
 - (instancetype)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Use 2x scale factor on Retina displays.
-        self.contentScaleFactor = [[UIScreen mainScreen] scale];
+        self.contentScaleFactor = [UIScreen mainScreen].scale;
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -175,7 +175,7 @@ const GLfloat DefaultPreferredRotation = 0;
     [self updateTintColorUniform];
     glUniform1f(uniforms[UNIFORM_ROTATION_ANGLE], DefaultPreferredRotation);
     // Set the default conversion to BT.709, which is the standard for HDTV.
-    _preferredConversion = kColorConversion709;
+    _preferredConversion = ColorConversion709;
     [self updatePreferredConversionUniform];
     glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
     
@@ -183,7 +183,7 @@ const GLfloat DefaultPreferredRotation = 0;
     if (!_videoTextureCache) {
         CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, _context, NULL, &_videoTextureCache);
         if (err != noErr) {
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreate %d", err);
+            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreate %d", err);
             return;
         }
     }
@@ -218,7 +218,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorBufferHandle);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        ORK_Log_Debug(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        ORK_Log_Error(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
     }
     
     // Set the view port to the entire view.
@@ -358,7 +358,7 @@ const GLfloat DefaultPreferredRotation = 0;
         ORKEAGLLog(@"Have buffer");
 
         if (!_videoTextureCache) {
-            ORK_Log_Debug(@"No video texture cache");
+            ORK_Log_Error(@"No video texture cache");
             return NO;
         }
         
@@ -372,9 +372,9 @@ const GLfloat DefaultPreferredRotation = 0;
         CFTypeRef colorAttachments = CVBufferGetAttachment(pixelBuffer, kCVImageBufferYCbCrMatrixKey, NULL);
         
         if (colorAttachments == kCVImageBufferYCbCrMatrix_ITU_R_601_4) {
-            self.preferredConversion = kColorConversion601;
+            self.preferredConversion = ColorConversion601;
         } else {
-            self.preferredConversion = kColorConversion709;
+            self.preferredConversion = ColorConversion709;
         }
         
         /*
@@ -432,7 +432,7 @@ const GLfloat DefaultPreferredRotation = 0;
         [self restoreGLContext];
         
         if (err) {
-            ORK_Log_Debug(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
+            ORK_Log_Error(@"Error at CVOpenGLESTextureCacheCreateTextureFromImage %d", err);
             return NO;
         }
         
@@ -543,7 +543,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     glBindRenderbuffer(GL_RENDERBUFFER, _colorBufferHandle);
     if (![_context presentRenderbuffer:GL_RENDERBUFFER]) {
-        ORK_Log_Debug(@"presentRenderBuffer failed");
+        ORK_Log_Error(@"presentRenderBuffer failed");
     }
     
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
@@ -571,14 +571,14 @@ const GLfloat DefaultPreferredRotation = 0;
     // Create and compile the vertex shader.
     vertShaderURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"MovieTintShader" withExtension:@"vsh"];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER URL:vertShaderURL]) {
-        ORK_Log_Debug(@"Failed to compile vertex shader");
+        ORK_Log_Error(@"Failed to compile vertex shader");
         return NO;
     }
     
     // Create and compile fragment shader.
     fragShaderURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"MovieTintShader" withExtension:@"fsh"];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER URL:fragShaderURL]) {
-        ORK_Log_Debug(@"Failed to compile fragment shader");
+        ORK_Log_Error(@"Failed to compile fragment shader");
         return NO;
     }
     
@@ -596,7 +596,7 @@ const GLfloat DefaultPreferredRotation = 0;
     
     // Link the program.
     if (![self linkProgram:_programHandle]) {
-        ORK_Log_Debug(@"Failed to link program: %d", _programHandle);
+        ORK_Log_Error(@"Failed to link program: %d", _programHandle);
         
         if (vertShader) {
             glDeleteShader(vertShader);
@@ -639,7 +639,7 @@ const GLfloat DefaultPreferredRotation = 0;
     NSError *error;
     NSString *sourceString = [[NSString alloc] initWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
     if (sourceString == nil) {
-        ORK_Log_Debug(@"Failed to load vertex shader: %@", [error localizedDescription]);
+        ORK_Log_Error(@"Failed to load vertex shader: %@", [error localizedDescription]);
         return NO;
     }
     
