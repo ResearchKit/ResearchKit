@@ -44,9 +44,9 @@
 
  *Contributed by [coxy1989](https://github.com/coxy1989) and [Ricardo Sánchez-Sáez](https://github.com/rsanchezsaez).*
 
- A *Charts Module* has been implemented. It features three chart types: a *pie chart* (`ORKPieChartView`), a *line graph chart* (`ORKLineGraphChartView`), and a *discrete graph chart* (`ORKDiscreteGraphChartView`).
+ A *Charts module* has been implemented. It features three chart types: a *pie chart* (`ORKPieChartView`), a *line graph chart* (`ORKLineGraphChartView`), and a *discrete graph chart* (`ORKDiscreteGraphChartView`).
 
- The views in the *Charts Module* can be used independently of the rest of *ResearchKit*. It doesn't automatically connect with any other *ResearchKit* module: the developer has to supply the data to be displayed through the views' `dataSources`, which allows maximum flexibility.
+ The views in the *Charts module* can be used independently of the rest of *ResearchKit*. It doesn't automatically connect with any other *ResearchKit* module: the developer has to supply the data to be displayed through the views' `dataSources`, which allows for maximum flexibility.
 
 - **Other improvemnets**
 
