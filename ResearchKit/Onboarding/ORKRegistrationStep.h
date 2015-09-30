@@ -57,6 +57,9 @@ typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     
     /// Exclude the gender field.
     ORKRegistrationStepExcludeGender = (1 << 4),
+    
+    /// Exclude the date of birth field.
+    ORKRegistrationStepExcludeDOB = (1 << 5)
 } ORK_ENUM_AVAILABLE;
 
 
@@ -132,6 +135,13 @@ ORK_CLASS_AVAILABLE
  These options allow one or more fields to be excluded from the registation step.
  */
 @property (nonatomic, readonly) ORKRegistrationStepOption options;
+
+/**
+ The regex used to validate the passcode form item.
+ 
+ By default, there is no validation on the passcode.
+ */
+@property (nonatomic, copy, nullable) NSString *passcodeValidationRegex;
 
 @end
 

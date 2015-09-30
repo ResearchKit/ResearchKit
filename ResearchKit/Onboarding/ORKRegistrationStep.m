@@ -128,6 +128,24 @@
         [formItems addObject:item];
     }
     
+    if (! (_options & ORKRegistrationStepExcludeGender)) {
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:@"Male" value:@0],
+                                 [ORKTextChoice choiceWithText:@"Female" value:@1]];
+        ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"gender"
+                                                               text:nil
+                                                       answerFormat:answerFormat];
+        item.placeholder = @"Gender";
+        item.optional = NO;
+        [formItems addObject:item];
+    }
+    
+    if (! (_options & ORKRegistrationStepExcludeDOB)) {
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"dob" text:@"Date of Birth" answerFormat:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
+        item.placeholder = @"DOB";
+        [formItems addObject:item];
+    }
+    
     return formItems;
 }
 
@@ -140,6 +158,7 @@
     if (self) {
         ORK_DECODE_OBJ(aDecoder, message);
         ORK_DECODE_INTEGER(aDecoder, options);
+        ORK_DECODE_OBJ(aDecoder, passcodeValidationRegex);
     }
     return self;
 }
@@ -148,12 +167,14 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, message);
     ORK_ENCODE_INTEGER(aCoder, options);
+    ORK_ENCODE_OBJ(aCoder, passcodeValidationRegex);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [[[self class] allocWithZone:zone] init];
     step->_message = self.message;
     step->_options = self.options;
+    step->_passcodeValidationRegex = self.passcodeValidationRegex;
     return step;
 }
 
@@ -163,7 +184,8 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.message, castObject.message) &&
-            self.options == castObject.options);
+            self.options == castObject.options &&
+            ORKEqualObjects(self.passcodeValidationRegex, castObject.passcodeValidationRegex));
 }
 
 @end
