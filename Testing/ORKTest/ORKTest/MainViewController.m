@@ -255,6 +255,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Consent",
                             @"Question Steps",
                             @"Active Tasks",
+                            @"Passcode",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Consent
@@ -280,11 +281,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Hole Peg Test Task",
                            @"Memory Game Task",
                            @"PSAT Task",
+                           @"Reaction Time Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
-                           @"Reaction Time Task",
+                           ],
+                       @[ // Passcode
+                           @"Authenticate Passcode",
+                           @"Create Passcode",
+                           @"Edit Passcode",
+                           @"Remove Passcode",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -293,10 +300,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
-                           @"Create Passcode",
-                           @"Remove Passcode",
-                           @"Edit Passcode",
-                           @"Authenticate Passcode"
                            ],
                        ];
 }
