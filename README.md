@@ -57,6 +57,12 @@ while *iPhone* sensors actively collect data. See
 *[Active Tasks](http://researchkit.org/docs/docs/ActiveTasks/ActiveTasks.html)* for more
 information.
 
+Charts
+------------
+*ResearchKit* includes a *Charts module*. It features three chart types: a *pie chart* (`ORKPieChartView`), a *line graph chart* (`ORKLineGraphChartView`), and a *discrete graph chart* (`ORKDiscreteGraphChartView`).
+
+The views in the *Charts module* can be used independently of the rest of *ResearchKit*. They don't automatically connect with any other part of *ResearchKit*: the developer has to supply the data to be displayed through the views' `dataSources`, which allows for maximum flexibility.
+
 
 Getting Started<a name="gettingstarted"></a>
 ===============
@@ -98,7 +104,7 @@ Adding the ResearchKit framework to your App
 This walk-through shows how to embed the *ResearchKit framework* in your app as a dynamic framework,
 and present a simple task view controller.
 
-###1. Add the ResearchKit framework to Your Project
+### 1. Add the ResearchKit framework to Your Project
 
 To get started, drag `ResearchKit.xcodeproj` from your checkout into your *iOS* app project
 in *Xcode*:
@@ -124,7 +130,7 @@ Then, embed the *ResearchKit framework* as a dynamic framework in your app, by a
 Note: You can also import *ResearchKit* into your project using a
  [dependency manager](./docs-standalone/dependency-management.md) such as *CocoaPods* or *Carthage*.
 
-###2. Create a Step
+### 2. Create a Step
 
 In this walk-through, we will use the *ResearchKit framework* to modally present a simple
  single-step task showing a single instruction.
@@ -148,7 +154,7 @@ let myStep = ORKInstructionStep(identifier: "intro")
 myStep.title = "Welcome to ResearchKit"
 ```
 
-###3. Create a Task
+### 3. Create a Task
 
 Use the ordered task class (`ORKOrderedTask`) to create a task that contains `myStep`. An ordered
 task is just a task where the order and selection of later steps does not depend on the results of
@@ -167,7 +173,7 @@ ORKOrderedTask *task =
 let task = ORKOrderedTask(identifier: "task", steps: [myStep])
 ```
 
-###4. Present the Task
+### 4. Present the Task
 
 Create a task view controller (`ORKTaskViewController`) and initialize it with your `task`. A task
 view controller manages a task and collects the results of each step. In this case, your task view
@@ -239,8 +245,8 @@ What else can the ResearchKit framework do?
 
 The *ResearchKit* [`ORKCatalog`](samples/ORKCatalog) sample app is a good place to start. Find the
 project in ResearchKit's [`samples`](samples) directory. This project includes a list of all the
-types of steps supported by the *ResearchKit framework* in one tab, and displays a browser for the
-results of the last completed task in the other tab.
+types of steps supported by the *ResearchKit framework* in the first tab, and displays a browser for the
+results of the last completed task in the second tab. The third tab shows some examples from the *Charts module*.
 
 
 
