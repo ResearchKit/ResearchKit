@@ -2064,40 +2064,17 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @end
 
+
 #pragma mark - ORKLocationAnswerFormat
 
 @implementation ORKLocationAnswerFormat
-
-- (Class)questionResultClass {
-    return [ORKLocationQuestionResult class];
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-}
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-- (void)validateParameters {
-    [super validateParameters];
-}
 
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text {
     BOOL isValid = [super isAnswerValidWithString:text];
     
     NSArray *components = [text componentsSeparatedByString:@", "];
     if (components.count != 2) {
-        isValid = false;
+        isValid = NO;
     } else {
         NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
         decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
@@ -2106,9 +2083,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
         
         if (latitude.doubleValue < -180.0 || latitude.doubleValue > 180.0) {
-            isValid = false;
+            isValid = NO;
         } else if (longitude.doubleValue < -180.0 || longitude.doubleValue > 180.0) {
-            isValid = false;
+            isValid = NO;
         }
     }
     
@@ -2154,6 +2131,5 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeLocation;
 }
-
 
 @end

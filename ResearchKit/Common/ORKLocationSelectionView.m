@@ -34,6 +34,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKLocationSelectionView.h"
 #import <MapKit/MapKit.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -41,12 +42,14 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 
+
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *textFieldBottomConstraint;
 @property (nonatomic, strong) ORKAnswerTextField *textField;
 @end
+
 
 @implementation ORKLocationSelectionView {
     CLLocationManager *_locationManager;
@@ -77,21 +80,26 @@
         [_currentLocationButton addTarget:self action:@selector(loadCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_currentLocationButton];
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(_textField, _currentLocationButton);
-        ORKEnableAutoLayoutForViews([views allValues]);
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-        [self addConstraint:_textFieldBottomConstraint];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-[_currentLocationButton(20.0)]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_currentLocationButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+        [self setUpConstraints];
     }
     
     return self;
 }
 
-- (void)dealloc {
-    _textField.delegate = nil;
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+
+    NSDictionary *views = NSDictionaryOfVariableBindings(_textField, _currentLocationButton);
+    ORKEnableAutoLayoutForViews([views allValues]);
+
+    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-[_currentLocationButton(20.0)]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_currentLocationButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setPlaceholderText:(NSString *)text {
@@ -286,8 +294,7 @@
     }
 }
 
-- (void)setAnswer:(id)answer
-{
+- (void)setAnswer:(id)answer {
     _answer = answer;
     if (_answer) {
         CLLocationCoordinate2D coordinate = [((NSValue *)answer) MKCoordinateValue];
@@ -338,6 +345,5 @@
     [self geocodeAndDisplay:textField.text];
     return YES;
 }
-
 
 @end

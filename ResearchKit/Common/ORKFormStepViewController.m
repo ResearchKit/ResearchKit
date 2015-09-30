@@ -922,7 +922,7 @@
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
-    [self showErrorAlertWithTitle:title message:message];
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {

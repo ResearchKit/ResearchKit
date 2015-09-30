@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "ORKSurveyAnswerCellForLocation.h"
 #import <MapKit/MapKit.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -37,9 +38,11 @@
 #import "ORKQuestionStep_Internal.h"
 #import "ORKLocationSelectionView.h"
 
+
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>
     
 @end
+
 
 @implementation ORKSurveyAnswerCellForLocation {
     ORKLocationSelectionView *_selectionView;
@@ -63,15 +66,21 @@
     _selectionView.tintColor = self.tintColor;
     [_selectionView showMapViewAnimated:NO];
     [self addSubview:_selectionView];
-    
+
+    [self setUpConstraints];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+
     NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|"
+    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil
                                                                    views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|"
+    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil
                                                                    views:views]];
@@ -84,7 +93,21 @@
                                                                                       multiplier:1.0
                                                                                         constant:20000.0];
     resistsCompressingMapConstraint.priority = UILayoutPriorityDefaultHigh;
-    [self addConstraint:resistsCompressingMapConstraint];
+    [constraints addObject:resistsCompressingMapConstraint];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (NSString *)convertLocationToString:(CLLocationCoordinate2D)location {
+    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+
+    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
+    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
+    
+    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+
+    return string;
 }
 
 - (BOOL)isAnswerValid {
@@ -97,15 +120,8 @@
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
-    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    
     CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
-    
-    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
-    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
-    
-    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+    NSString *string = [self convertLocationToString:location];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -117,13 +133,7 @@
         id answer = _selectionView.answer;
         CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
         
-        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
-        NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
-        NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
-        
-        NSString *message = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+        NSString *message = [self convertLocationToString:location];
         NSString *localizedMessage = [[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
         
         [self showValidityAlertWithMessage:localizedMessage];
@@ -144,8 +154,7 @@
     [_selectionView setPlaceholderText:placeholder];
 }
 
-- (void)selectionViewSelectionDidChange:(ORKLocationSelectionView *)view
-{
+- (void)selectionViewSelectionDidChange:(ORKLocationSelectionView *)view {
     if (_selectionView.answer != nil) {
         [self ork_setAnswer:_selectionView.answer];
     } else {
@@ -154,18 +163,18 @@
 }
 
 - (void)selectionViewError:(NSError *)error {
-    [self showErrorAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
+    [self showValidityAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
 }
 
-- (void)selectionViewDidBeginEditing:(nonnull ORKLocationSelectionView *)view {
+- (void)selectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
     
 }
 
-- (void)selectionViewDidEndEditing:(nonnull ORKLocationSelectionView *)view {
+- (void)selectionViewDidEndEditing:(ORKLocationSelectionView *)view {
     
 }
 
-- (void)selectionViewNeedsResize:(nonnull ORKLocationSelectionView *)view {
+- (void)selectionViewNeedsResize:(ORKLocationSelectionView *)view {
     
 }
 

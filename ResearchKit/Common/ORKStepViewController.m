@@ -317,35 +317,10 @@
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
-    
-    if (!text.length) {
-        // No alert if the value is empty
-        return;
-    }
-    if (_dismissing || ![self isViewLoaded] || !self.view.window) {
-        // No alert if not in view chain.
-        return;
-    }
-    
-    if (_presentingAlert) {
-        return;
-    }
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil)
-                                                                   message:text
-                                                            preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
-                                              style:UIAlertActionStyleDefault
-                                            handler:nil]];
-    
-    _presentingAlert = YES;
-    [self presentViewController:alert animated:YES completion:^{
-        _presentingAlert = NO;
-    }];
+    [self showValidityAlertWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil) message:text];
 }
 
-- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
     if (![title length] && ![message length]) {
         // No alert if the value is empty
         return;

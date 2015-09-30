@@ -48,6 +48,7 @@
 
 #import <MapKit/MapKit.h>
 
+
 static const CGFloat VerticalMargin = 10.0;
 static const CGFloat HorizontalMargin = 15.0;
 
@@ -209,7 +210,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
-    [self.delegate formItemCell:self showErrorAlertWithTitle:title message:message];
+    [self.delegate formItemCell:self invalidInputAlertWithTitle:title message:message];
 }
 
 @end
@@ -1069,6 +1070,7 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @end
 
+
 #pragma mark - ORKFormItemLocationCell
 
 @interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
@@ -1077,6 +1079,7 @@ static const CGFloat HorizontalMargin = 15.0;
 @property (nonatomic, strong) NSString *placeholder;
 
 @end
+
 
 @implementation ORKFormItemLocationCell {
     ORKLocationSelectionView *_selectionView;
@@ -1101,21 +1104,20 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [self.contentView addSubview:_selectionView];
     
-    {
-        NSDictionary *dictionary = @{@"_selectionView":_selectionView};
-        ORKEnableAutoLayoutForViews([dictionary allValues]);
-        NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
-        
-        [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hMargin-[_selectionView]-hMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-        
-        [self.contentView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[_selectionView]-vMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
-    }
+    [self setupConstraints];
 }
 
-- (void)dealloc {
-    _selectionView.delegate = nil;
+- (void)setupConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *dictionary = @{@"_selectionView":_selectionView};
+    ORKEnableAutoLayoutForViews([dictionary allValues]);
+    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[_selectionView]-horizontalMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-verticalMargin-[_selectionView]-verticalMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    
+    [self.contentView addConstraints:constraints];
 }
 
 - (void)applyAnswerFormat {
@@ -1193,6 +1195,18 @@ static const CGFloat HorizontalMargin = 15.0;
     return resign;
 }
 
+- (NSString *)convertLocationToString:(CLLocationCoordinate2D)location {
+    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
+    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
+    
+    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+    
+    return string;
+}
+
 - (BOOL)isAnswerValid {
     id answer = _selectionView.answer;
     
@@ -1203,15 +1217,8 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
-    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    
     CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
-    
-    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
-    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
-    
-    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
+    NSString *string = [self convertLocationToString:location];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -1219,17 +1226,12 @@ static const CGFloat HorizontalMargin = 15.0;
 - (BOOL)shouldContinue {
     BOOL isValid = [self isAnswerValid];
     
-    if (! isValid) {
+    if (!isValid) {
         id answer = _selectionView.answer;
         CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
+        NSString *string = [self convertLocationToString:location];
         
-        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
-        NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
-        NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
-        
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:[NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]]]];
+        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
     }
     
     return isValid;

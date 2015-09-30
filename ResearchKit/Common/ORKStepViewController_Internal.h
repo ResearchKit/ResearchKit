@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
-- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 - (void)skipForward;
 

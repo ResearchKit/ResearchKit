@@ -1135,6 +1135,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKLocationQuestionResult` class represents the result of a question or form item that asks for a location (`ORKLocationAnswerFormat`).
  
@@ -1155,6 +1156,5 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSValue *locationAnswer;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

@@ -1535,8 +1535,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [step setFormItems:items];
         [steps addObject:step];
     }
-    
-    
+
     {
         
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Required form step" text:nil];

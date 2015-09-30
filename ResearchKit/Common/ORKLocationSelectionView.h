@@ -34,7 +34,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <UIKit/UIKit.h>
+
+
 @class MKMapView;
 
 @class ORKLocationSelectionView;
@@ -53,6 +56,7 @@
 
 @end
 
+
 @interface ORKLocationSelectionView : UIView
 
 @property (nonatomic, weak, nullable) id<ORKLocationSelectionViewDelegate> delegate;
@@ -70,4 +74,3 @@
 - (void)showMapViewAnimated:(BOOL)animated;
 
 @end
-

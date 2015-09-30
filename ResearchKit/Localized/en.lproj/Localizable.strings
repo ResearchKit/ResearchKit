@@ -86,6 +86,14 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM" = "Location latitude is below minimum.";
+"LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM" = "Location latitude is above maximum.";
+"LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM" = "Location longitude is below minimum.";
+"LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM" = "Location longitude is above maximum.";
+
+"LOCATION_ERROR_TITLE" = "Location error";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
 

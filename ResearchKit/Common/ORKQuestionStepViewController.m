@@ -562,7 +562,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         class = [ORKSurveyAnswerCellForLocation class];
     }
     
-    
     identifier = NSStringFromClass(class);
     
     NSAssert(class != nil, @"class should not be nil");
@@ -768,7 +767,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)answerCell:(ORKSurveyAnswerCell *)cell errorAlertWithTitle:(NSString *)title message:(NSString *)message {
-    [self showErrorAlertWithTitle:title message:message];
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";

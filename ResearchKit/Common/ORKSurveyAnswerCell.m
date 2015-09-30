@@ -115,7 +115,7 @@
     [self.delegate answerCell:self invalidInputAlertWithMessage:text];
 }
 
-- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
     [self.delegate answerCell:self errorAlertWithTitle:title message:message];
 }
 

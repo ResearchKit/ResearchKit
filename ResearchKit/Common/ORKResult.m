@@ -1671,6 +1671,7 @@
 
 @end
 
+
 @implementation ORKLocationQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

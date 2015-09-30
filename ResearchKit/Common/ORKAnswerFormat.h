@@ -1288,6 +1288,7 @@ ORK_CLASS_AVAILABLE
 
 @end
 
+
 /**
  The `ORKLocationAnswerFormat` class represents the answer format for questions that collect a location response
  from the user.
