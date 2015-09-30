@@ -1851,7 +1851,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super init];
     if (self) {
         _regex = expression;
-        _validInputDescription = description;
+        _invalidMessage = description;
         _maximumLength = 0;
         _autocapitalizationType = UITextAutocapitalizationTypeSentences;
         _autocorrectionType = UITextAutocorrectionTypeDefault;
@@ -1885,10 +1885,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = NO;
     if ([answer isKindOfClass:[NSString class]]) {
-        return [self isAnswerValidWithString:(NSString *)answer];
+        isValid = [self isAnswerValidWithString:(NSString *)answer];
     }
-    return NO;
+    return isValid;
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {

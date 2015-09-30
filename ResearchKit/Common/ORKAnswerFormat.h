@@ -1173,11 +1173,11 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationExpression:(nullable NSString *)expression
-                       validInputDescription:(nullable NSString *)description NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValidationExpression:(NSString *)expression
+                       validInputDescription:(NSString *)description NS_DESIGNATED_INITIALIZER;
 
 /**
- The regex used to validate users input.
+ The regex used to validate user's input.
  
  The default value is nil. If set to nil, no validation will be performed.
  */
@@ -1188,7 +1188,7 @@ ORK_CLASS_AVAILABLE
  
  The default value is nil.
  */
-@property (readonly) NSString *validInputDescription;
+@property (readonly) NSString *invalidMessage;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
@@ -1207,7 +1207,7 @@ ORK_CLASS_AVAILABLE
  
  When the value of this property is 0, there is no maximum.
  */
-@property (readonly) NSInteger maximumLength;
+@property (readwrite) NSInteger maximumLength;
 
 /**
  A Boolean value indicating whether to expect more than one line of input.
