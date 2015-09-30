@@ -254,10 +254,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Faites demi-tour et revenez à votre point de départ.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Touchez Terminé une fois terminé.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Aucune donnée";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -270,6 +266,21 @@
 "PSAT_INITIAL_INSTRUCTION" = "Souvenez-vous de ce chiffre.";
 "PSAT_INSTRUCTION" = "Ajoutez ce chiffre au précédent.";
 "PSAT_NO_DIGIT" = "-";
+
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité mesure le fonctionnement de vos membres supérieurs en vous demandant de placer un rond dans un trou. Il vous sera demandé de le faire %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Vos main %@ et %@ seront testées toutes les deux.\nVous devez prendre un cercle aussi vite que possible, le mettre dans le trou et, après l'avoir fait %@ fois, le retirer %@ fois encore.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"HOLE_PEG_TEST_RIGHT" = "droite";
+"HOLE_PEG_TEST_LEFT" = "gauche";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Mettez la pièce dans le trou en utilisant votre main %@.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Mettez la pièce derrière la ligne en utilisant votre main %@.";
+"HOLE_PEG_TEST_TEXT" = "Prenez la pièce en utilisant deux doigts.";
+"HOLE_PEG_TEST_TEXT_2" = "Soulevez vos doigts pour laisser tomber la pièce.";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Aucune donnée";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Création du fichier impossible";

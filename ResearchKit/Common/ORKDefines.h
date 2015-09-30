@@ -105,6 +105,17 @@ typedef NS_ENUM(NSInteger, ORKAudioChannel) {
 
 
 /**
+ Body side constants.
+ */
+typedef NS_ENUM(NSInteger, ORKBodySagittal) {
+    /// The left side.
+    ORKBodySagittalLeft,
+    
+    /// The right side.
+    ORKBodySagittalRight
+} ORK_ENUM_AVAILABLE;
+
+/**
  Values that identify the presentation mode of PSAT (auditory and/or visual).
  */
 typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
