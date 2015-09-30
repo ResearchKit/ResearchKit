@@ -848,14 +848,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         formStep.optional = false
         
         // Form items
-        let formItem01Text = NSLocalizedString("Are you over 18 years of age?", comment: "")
-        let formItem01 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem01), text: formItem01Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let formItem01 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem01), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
         formItem01.optional = false
-        let formItem02Text = NSLocalizedString("Can you read and understand English in order to provide informed consent and follow the instructions?", comment: "")
-        let formItem02 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem02), text: formItem02Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let formItem02 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem02), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
         formItem02.optional = false
-        let formItem03Text = NSLocalizedString("Do you live outside the United States?", comment: "")
-        let formItem03 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem03), text: formItem03Text, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let formItem03 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem03), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
         formItem03.optional = false
         
         formStep.formItems = [
