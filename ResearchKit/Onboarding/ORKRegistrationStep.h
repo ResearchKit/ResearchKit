@@ -70,23 +70,52 @@ typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
 ORK_CLASS_AVAILABLE
 @interface ORKRegistrationStep : ORKFormStep
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text NS_UNAVAILABLE;
-
 /**
  Returns an initialized registrationg step using the specified identifier, 
- message, and options.
+ title, text, message, and options.
+ 
+ This method is the designated initializer.
  
  @param identifier    The string that identifies the step (see `ORKStep`).
+ @param title         The title of the form (see `ORKStep`).
+ @param text          The text shown immediately below the title (see `ORKStep`).
  @param message       The message to be dislayed below the fields.
  @param options       The options used for the step.
  
- @return As initialized form step object.
+ @return As initialized registration step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text
                            message:(nullable NSString *)message
-                           options:(ORKRegistrationStepOption)options;
+                           options:(ORKRegistrationStepOption)options NS_DESIGNATED_INITIALIZER;
+
+/**
+ Returns an initialized registrationg step using the specified identifier,
+ title, and text.
+ 
+ This method is a convenience initializer.
+ 
+ @param identifier    The string that identifies the step (see `ORKStep`).
+ @param title         The title of the form (see `ORKStep`).
+ @param text          The text shown immediately below the title (see `ORKStep`).
+ 
+ @return As initialized registration step object.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text;
+
+/**
+ Returns an initialized registrationg step using the specified identifier.
+ 
+ This method is a convenience initializer.
+ 
+ @param identifier    The string that identifies the step (see `ORKStep`).
+ 
+ @return As initialized registration step object.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier;
 
 /**
  The message displayed below the fields.

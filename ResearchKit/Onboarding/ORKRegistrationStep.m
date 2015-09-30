@@ -37,18 +37,33 @@
     ORKRegistrationStepOption _options;
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier title:(NSString *)title text:(NSString *)text {
-    ORKThrowMethodUnavailableException();
-    return nil;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier message:(NSString *)message options:(ORKRegistrationStepOption)options {
-    self = [super initWithIdentifier:identifier];
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text
+                           message:(NSString *)message
+                           options:(ORKRegistrationStepOption)options {
+    self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _message = message;
         _options = options;
     }
     return self;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text {
+    return [self initWithIdentifier:identifier
+                              title:title
+                               text:text
+                            message:nil
+                            options:ORKRegistrationStepDefault];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier
+                              title:nil
+                               text:nil];
 }
 
 - (NSArray<ORKFormItem *> *)formItems {
@@ -57,8 +72,10 @@
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"first_name"
-                                                               text:@"First name"
+                                                               text:nil
                                                        answerFormat:answerFormat];
+        item.placeholder = @"First name";
+        item.optional = NO;
         [formItems addObject:item];
     }
     
@@ -66,16 +83,20 @@
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"last_name"
-                                                               text:@"Last name"
+                                                               text:nil
                                                        answerFormat:answerFormat];
+        item.placeholder = @"Last name";
+        item.optional = NO;
         [formItems addObject:item];
     }
 
     if (! (_options & ORKRegistrationStepExcludeEmail)) {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"email"
-                                                               text:@"Email"
+                                                               text:nil
                                                        answerFormat:answerFormat];
+        item.placeholder = @"Email";
+        item.optional = NO;
         [formItems addObject:item];
     }
     
@@ -88,8 +109,10 @@
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
-                                                               text:@"Password"
+                                                               text:nil
                                                        answerFormat:answerFormat];
+        item.placeholder = @"Password";
+        item.optional = NO;
         [formItems addObject:item];
     }
     
@@ -98,8 +121,10 @@
                                  [ORKTextChoice choiceWithText:@"Female" value:@1]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"gender"
-                                                               text:@"Gender"
+                                                               text:nil
                                                        answerFormat:answerFormat];
+        item.placeholder = @"Gender";
+        item.optional = NO;
         [formItems addObject:item];
     }
     
