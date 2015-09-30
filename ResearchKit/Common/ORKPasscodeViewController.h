@@ -78,6 +78,8 @@ ORK_AVAILABLE_DECL
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeViewController : UINavigationController
 
+- (instancetype)init NS_UNAVAILABLE;
+
 + (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate;
 

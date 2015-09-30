@@ -33,9 +33,15 @@
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
 #import "ORKPasscodeStep.h"
+#import "ORKHelpers.h"
 
 
 @implementation ORKPasscodeViewController
+
+- (instancetype)init {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate {
