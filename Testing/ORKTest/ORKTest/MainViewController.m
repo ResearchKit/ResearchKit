@@ -64,6 +64,8 @@ DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(EditPasscodeTaskIdentifier);
+DefineStringKey(AuthenticatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -168,7 +170,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -286,6 +288,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Edit Passcode",
+                           @"Authenticate Passcode"
                            ],
                        ];
 }
@@ -1160,7 +1164,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step,reviewStep]];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
     
     return task;
 }
@@ -2637,6 +2644,54 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
+#pragma mark - Passcode view controllers
+
+/*
+ Tests various uses of passcode view controller.
+ 
+ Passcode authentication and passcode editing are presented in
+ the examples. Passcode creation would ideally be as part of
+ the consent process. The consent task has been modified in this
+ project to include the passcode creation step as part of the 
+ consent flow.
+ */
+- (IBAction)authenticatePasscodeButtonTapped:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                 passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                 delegate:self];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)editPasscodeButtonTapped:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                        delegate:self
+                                                                                                    passcodeType:ORKPasscodeType6Digit];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - Passcode delegate
+
+- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
+    NSLog(@"Passcode authentication failed.");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Passcode authentication failed"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+- (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
+    NSLog(@"New passcode saved.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)passcodeViewControllerDidCancel:(UIViewController *)viewController {
+    NSLog(@"User tapped the cancel button.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Helpers
 
 /*
@@ -3050,8 +3105,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          and then generate a PDF From the document that includes the signature.
          */
         
-        ORKStep *lastStep = ((ORKOrderedTask *)taskViewController.task).steps.lastObject;
-        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[taskViewController.result stepResultForStepIdentifier:lastStep.identifier].firstResult;
+        // Search for the review step.
+        NSArray *steps = [(ORKOrderedTask *)taskViewController.task steps];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"self isKindOfClass: %@", [ORKConsentReviewStep class]];
+        ORKStep *reviewStep = [[steps filteredArrayUsingPredicate:predicate] firstObject];
+        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:reviewStep.identifier] firstResult];
         
         [signatureResult applyToDocument:_currentDocument];
         

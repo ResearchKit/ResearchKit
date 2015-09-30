@@ -29,48 +29,16 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
-
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
-
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
-
-@property (nonatomic) BOOL hitClearButton;
-
-@end
-
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
+#import <ResearchKit/ResearchKit.h>
 
 
 /**
- Manages a text field with unit label and a clear button: [text unit    (x)]
+ An `ORKPasscodeStepViewController` object is the view controller for an `ORKPasscodeStep` object.
+ 
+ A passcode view controller can be instanstiated indirectly by adding a passcode step to a consent task 
+ and present the task using a task view controller. When appropriate, the task view controller instantiates the step
+ view controller for the step.
  */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
+@interface ORKPasscodeStepViewController : ORKStepViewController
 
 @end
-
-NS_ASSUME_NONNULL_END

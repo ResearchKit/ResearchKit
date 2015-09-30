@@ -29,48 +29,39 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
+#import "ORKPasscodeStepView.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKPasscodeStepView {
+    ORKPasscodeTextField *_textField;
+}
 
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Additional configuration for the passcode text field.
+        _textField = [ORKPasscodeTextField new];
+        _textField.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        self.stepView = _textField;
+        
+        [self addConstraints:@[
+                               [NSLayoutConstraint constraintWithItem:_textField
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self
+                                                            attribute:NSLayoutAttributeWidth
+                                                           multiplier:1.0
+                                                             constant:0]
+                               ]
+         ];
+        
+    }
+    return self;
+}
 
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
-
-@property (nonatomic) BOOL hitClearButton;
-
-@end
-
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
-
-
-/**
- Manages a text field with unit label and a clear button: [text unit    (x)]
- */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
+- (ORKPasscodeTextField *)textField {
+    return _textField;
+}
 
 @end
-
-NS_ASSUME_NONNULL_END

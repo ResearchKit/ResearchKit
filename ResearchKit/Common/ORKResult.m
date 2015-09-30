@@ -174,6 +174,46 @@
 @end
 
 
+@implementation ORKPasscodeResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, passcodeSaved);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, passcodeSaved);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.isPasscodeSaved == castObject.isPasscodeSaved);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPasscodeResult *result = [super copyWithZone:zone];
+    result.passcodeSaved = self.isPasscodeSaved;
+    return result;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %d", [super description], self.isPasscodeSaved];
+}
+
+@end
+
+
 @implementation ORKTowerOfHanoiResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

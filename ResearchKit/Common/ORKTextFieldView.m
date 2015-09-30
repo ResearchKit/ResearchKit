@@ -34,6 +34,9 @@
 #import "ORKAccessibility.h"
 
 
+static NSString * const EmptyBullet = @"\u25CB";
+static NSString * const FilledBullet = @"\u25CF";
+
 @implementation ORKCaretOptionalTextField
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -59,6 +62,73 @@
     } else {
         return CGRectZero;
     }
+}
+
+@end
+
+
+@implementation ORKPasscodeTextField
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.font = [UIFont fontWithName:@"Courier" size:35.0];
+        self.textAlignment = NSTextAlignmentCenter;
+    }
+    return self;
+}
+
+- (UIKeyboardType)keyboardType {
+    return UIKeyboardTypeNumberPad;
+}
+
+- (BOOL)allowsSelection {
+    return NO;
+}
+
+- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets {
+    
+    // Error checking.
+    if (filledBullets > self.numberOfDigits) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"The number of filled bullets cannot exceed the number of pin digits."
+                                     userInfo:nil];
+    }
+    
+    // Append the string with the correct number of filled and empty bullets.
+    NSString *text = [NSString new];
+    text = [text stringByPaddingToLength:filledBullets withString:FilledBullet startingAtIndex:0];
+    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBullet startingAtIndex:0];
+    
+    // Apply spacing attribute to string.
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attributedText addAttribute:NSKernAttributeName
+                             value:@(20.0f)
+                             range:NSMakeRange(0, [text length]-1)];
+
+    // Set the textfield's text property.
+    self.attributedText = attributedText;
+}
+
+- (void)setNumberOfDigits:(NSInteger)numberOfDigits {
+    _numberOfDigits = numberOfDigits;
+    [self updateTextWithNumberOfFilledBullets:0];
+}
+
+#pragma mark - Accessibility
+
+- (NSString *)accessibilityLabel {
+    return ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL", nil);
+}
+
+- (NSString *)accessibilityValue {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
+    NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
+    return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), ORKLocalizedStringFromNumber(@(numberOfFilledBullets)), ORKLocalizedStringFromNumber(@([self.text length]))];
+}
+
+- (UIAccessibilityTraits)accessibilityTraits {
+    return UIAccessibilityTraitNone;
 }
 
 @end
