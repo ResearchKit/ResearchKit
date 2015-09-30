@@ -34,7 +34,6 @@
 #import "ORKPasscodeStepViewController_Internal.h"
 #import "ORKPasscodeStep.h"
 #import "ORKHelpers.h"
-#import "ORKDefines_Private.h"
 
 
 @implementation ORKPasscodeViewController

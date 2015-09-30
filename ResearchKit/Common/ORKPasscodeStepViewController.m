@@ -100,7 +100,7 @@
                 break;
         }
         
-        // If TouchID was enabled then present it for authentication flow.
+        // If Touch ID was enabled then present it for authentication flow.
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
             [self promptTouchId];

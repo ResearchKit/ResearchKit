@@ -65,8 +65,6 @@ DefineStringKey(ToneAudiometryTaskIdentifier);
 DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
 DefineStringKey(CreatePasscodeTaskIdentifier);
-DefineStringKey(EditPasscodeTaskIdentifier);
-DefineStringKey(AuthenticatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
