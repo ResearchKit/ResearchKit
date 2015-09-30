@@ -326,14 +326,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ImageCaptureTask
         case ImageCaptureStep
         
-        // Consent task specific identifiers.
-        case ConsentTask
-        case VisualConsentStep
-        case ConsentSharingStep
-        case ConsentReviewStep
-        case ConsentDocumentParticipantSignature
-        case ConsentDocumentInvestigatorSignature
-        
         // Eligibility task specific indentifiers.
         case EligibilityTask
         case EligibilityIntroStep
@@ -343,7 +335,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         case EligibilityFormItem03
         case EligibilityIneligibleStep
         case EligibilityEligibleStep
-
+        
+        // Consent task specific identifiers.
+        case ConsentTask
+        case VisualConsentStep
+        case ConsentSharingStep
+        case ConsentReviewStep
+        case ConsentDocumentParticipantSignature
+        case ConsentDocumentInvestigatorSignature
+        
         // Passcode task specific identifiers.
         case PasscodeTask
         case PasscodeStep
