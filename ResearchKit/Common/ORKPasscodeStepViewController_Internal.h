@@ -29,47 +29,37 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
+#import "ORKPasscodeStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
+static NSString * const KeychainDictionaryPasscodeKey = @"passcode";
+static NSString * const KeychainDictionaryTouchIdKey = @"touchIdEnabled";
+static NSString * const PasscodeStepIdentifier = @"passcode_step";
+static NSString * const PasscodeKey = @"ORKPasscode";
 
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
+typedef NS_ENUM(NSUInteger, ORKPasscodeFlow) {
+    ORKPasscodeFlowCreate,
+    ORKPasscodeFlowAuthenticate,
+    ORKPasscodeFlowEdit
+};
 
-@property (nonatomic) BOOL hitClearButton;
+typedef NS_ENUM(NSUInteger, ORKPasscodeState) {
+    ORKPasscodeStateEntry,
+    ORKPasscodeStateConfirm,
+    ORKPasscodeStateSaved,
+    ORKPasscodeStateOldEntry,
+    ORKPasscodeStateNewEntry,
+    ORKPasscodeStateConfirmNewEntry
+};
 
-@end
+@interface ORKPasscodeStepViewController() <UITextFieldDelegate>
 
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
-
-
-/**
- Manages a text field with unit label and a clear button: [text unit    (x)]
- */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
+@property (nonatomic) ORKPasscodeFlow passcodeFlow;
+@property (nonatomic, weak) id<ORKPasscodeDelegate> passcodeDelegate;
+@property (nonatomic) ORKPasscodeType authenticationPasscodeType;
+@property (nonatomic) BOOL useTouchId;
 
 @end
 

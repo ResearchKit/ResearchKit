@@ -29,48 +29,50 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
+#import "ORKPasscodeStep.h"
+#import "ORKPasscodeStepViewController.h"
+#import "ORKHelpers.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@implementation ORKPasscodeStep
 
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
++ (Class)stepViewControllerClass {
+    return [ORKPasscodeStepViewController class];
+}
 
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
+- (BOOL)showsProgress {
+    return NO;
+}
 
-@property (nonatomic) BOOL hitClearButton;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_INTEGER(aDecoder, passcodeType);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_INTEGER(aCoder, passcodeType);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKPasscodeStep *step = [super copyWithZone:zone];
+    step.passcodeType = self.passcodeType;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.passcodeType == castObject.passcodeType);
+}
 
 @end
-
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
-
-
-/**
- Manages a text field with unit label and a clear button: [text unit    (x)]
- */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
-
-@end
-
-NS_ASSUME_NONNULL_END

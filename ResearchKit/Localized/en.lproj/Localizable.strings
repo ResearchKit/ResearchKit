@@ -92,6 +92,28 @@
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
 
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
+"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Invalid input";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode progress indicator";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -120,6 +142,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Agree";
 "BUTTON_CANCEL" = "Cancel";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Clear";
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";
