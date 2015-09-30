@@ -29,47 +29,27 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
+#import <ResearchKit/ResearchKit.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
-
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
-
-@property (nonatomic) BOOL hitClearButton;
-
-@end
-
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
-
+/**
+ An `ORKPasscodeStep` object provides the participant a passcode creation step.
+ 
+ You can use passcode step as part of the consent process to ensure that the
+ participant signing the consent is the same participant completing other modules
+ within that context.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKPasscodeStep : ORKStep
 
 /**
- Manages a text field with unit label and a clear button: [text unit    (x)]
+ The passcode type to be used for the step.
+ 
+ The default value of this property is `ORKPasscodeType4Digit`.
  */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
+@property (nonatomic) ORKPasscodeType passcodeType;
 
 @end
 

@@ -380,6 +380,14 @@ ret =
          @{
            PROPERTY(consentDocument, ORKConsentDocument, NSObject, NO, nil, nil)
            }),
+   ENTRY(ORKPasscodeStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
+           PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil)
+           })),
    ENTRY(ORKRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKRecorderConfiguration *recorderConfiguration = [[ORKRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];

@@ -29,48 +29,12 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import "ORKAnswerTextField.h"
+#import "ORKVerticalContainerView.h"
+#import "ORKTextFieldView.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKPasscodeStepView : ORKVerticalContainerView
 
-@interface ORKCaretOptionalTextField : ORKAnswerTextField
-
-@property (nonatomic) BOOL allowsSelection; // Defaults to NO
-
-@property (nonatomic) BOOL hitClearButton;
+@property (nonatomic, strong, readonly) ORKPasscodeTextField *textField;
 
 @end
-
-
-@interface ORKPasscodeTextField : ORKCaretOptionalTextField
-
-- (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets;
-
-@property (nonatomic) NSInteger numberOfDigits;
-
-@end
-
-
-@interface ORKUnitTextField : ORKCaretOptionalTextField
-
-@property (nonatomic, copy, nullable) NSString *unit;
-
-@property (nonatomic) BOOL manageUnitAndPlaceholder;
-
-@end
-
-
-/**
- Manages a text field with unit label and a clear button: [text unit    (x)]
- */
-@interface ORKTextFieldView : UIView
-
-@property (nonatomic, strong, readonly) ORKUnitTextField *textField;
-
-@property (nonatomic, readonly) CGFloat estimatedWidth;
-
-@end
-
-NS_ASSUME_NONNULL_END

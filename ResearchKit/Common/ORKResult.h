@@ -236,6 +236,22 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKPasscodeResult` class records the results of a passcode step.
+ 
+ The passcode result object contains a boolean indicating whether the passcode was saved or not.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKPasscodeResult : ORKResult
+
+/**
+ A boolean indicating if a passcode was saved or not.
+ */
+@property (nonatomic, assign, getter=isPasscodeSaved) BOOL passcodeSaved;
+
+@end
+
+
+/**
  The `ORKTowerOfHanoiResult` class records the results of a Tower of Hanoi active task.
  
  The tower of hanoi result object records an array of `ORKTowerOfHanoiMove` objects (one for each move)

@@ -97,6 +97,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
     case is ORKConsentSignatureResult:
         providerType = ConsentSignatureResultTableViewProvider.self
         
+    case is ORKPasscodeResult:
+        providerType = PasscodeResultTableViewProvider.self
+        
         // Active Tasks
     case is ORKFileResult:
         providerType = FileResultTableViewProvider.self
@@ -482,6 +485,22 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
         }
         
         return UITableViewAutomaticDimension
+    }
+}
+
+/// Table view provider specific to an `ORKPasscodeResult` instance.
+class PasscodeResultTableViewProvider: ResultTableViewProvider   {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let passcodeResult = result as! ORKPasscodeResult
+        
+        var passcodeResultDetailText: String?
+        passcodeResultDetailText = passcodeResult.passcodeSaved.boolValue ? "true" : "false"
+        
+        return super.resultRowsForSection(section) + [
+            ResultRow(text: "passcodeSaved", detail: passcodeResultDetailText)
+        ]
     }
 }
 
