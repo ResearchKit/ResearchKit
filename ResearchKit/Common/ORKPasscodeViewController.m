@@ -43,6 +43,11 @@
     return nil;
 }
 
++ (BOOL)isPasscodeStoredInKeychainWithError:(NSError * __nullable *)error {
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:error];
+    return [dictionary objectForKey:KeychainDictionaryPasscodeKey];
+}
+
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
@@ -64,13 +69,10 @@
                             delegate:(id<ORKPasscodeDelegate>)delegate
                         passcodeFlow:(ORKPasscodeFlow)passcodeFlow
                         passcodeType:(ORKPasscodeType)passcodeType {
+
     // Retrieve stored data from the dictionary.
-    NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
-        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
-    }
-    
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+
     // Determine passcode type and touch Id enable based on stored data.
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
     BOOL useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];

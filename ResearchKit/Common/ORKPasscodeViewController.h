@@ -80,6 +80,8 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)init NS_UNAVAILABLE;
 
++ (BOOL)isPasscodeStoredInKeychainWithError:(NSError * __nullable *)error;
+
 + (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate;
 
