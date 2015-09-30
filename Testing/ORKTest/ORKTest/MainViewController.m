@@ -67,8 +67,7 @@ DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(PSATTaskIdentifier);
 DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
-DefineStringKey(EditPasscodeTaskIdentifier);
-DefineStringKey(AuthenticatePasscodeTaskIdentifier);
+DefineStringKey(CreatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -294,6 +293,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Create Passcode",
+                           @"Remove Passcode",
                            @"Edit Passcode",
                            @"Authenticate Passcode"
                            ],
@@ -475,6 +476,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
+        return [self makeCreatePasscodeTask];
     }
     return nil;
 }
@@ -1179,10 +1182,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
-    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
+
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep]];
     
     return task;
 }
@@ -2828,42 +2829,67 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
-#pragma mark - Passcode view controllers
+#pragma mark - Passcode step and view controllers
 
 /*
- Tests various uses of passcode view controller.
+ Tests various uses of passcode step and view controllers.
  
  Passcode authentication and passcode editing are presented in
  the examples. Passcode creation would ideally be as part of
- the consent process. The consent task has been modified in this
- project to include the passcode creation step as part of the 
- consent flow.
+ the consent process.
  */
+
+- (id<ORKTask>)makeCreatePasscodeTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    [steps addObject: passcodeStep];
+    return [[ORKOrderedTask alloc] initWithIdentifier: CreatePasscodeTaskIdentifier steps:steps];
+}
+
+- (IBAction)createPasscodeButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CreatePasscodeTaskIdentifier];
+}
+
+- (IBAction)removePasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
+            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
+        } else {
+            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
+    }
+}
+
 - (IBAction)authenticatePasscodeButtonTapped:(id)sender {
-    ORKPasscodeViewController *viewController = [ORKPasscodeViewController
-                                                 passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
-                                                 delegate:self];
-    [self presentViewController:viewController animated:YES completion:nil];
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                     passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                     delegate:self];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can authenticate it."];
+    }
 }
 
 - (IBAction)editPasscodeButtonTapped:(id)sender {
-    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
-                                                                                                        delegate:self
-                                                                                                    passcodeType:ORKPasscodeType6Digit];
-    [self presentViewController:viewController animated:YES completion:nil];
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                            delegate:self
+                                                                                                        passcodeType:ORKPasscodeType6Digit];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can edit it."];
+    }
 }
 
 #pragma mark - Passcode delegate
 
 - (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
     NSLog(@"Passcode authentication failed.");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:@"Passcode authentication failed"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
+    [self showAlertWithTitle:@"Error" message:@"Passcode authentication failed"];
 }
 
 - (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
@@ -2878,6 +2904,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Helpers
 
+/*
+ Shows an alert.
+ 
+ Used to display an alert with the provided title and message.
+ 
+ @param title       The title text for the alert.
+ @param message     The message text for the alert.
+ */
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+ 
 /*
  Builds a test consent document.
  */
