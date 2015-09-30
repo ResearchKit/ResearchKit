@@ -297,12 +297,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        ];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    if ([ORKPasscodeViewController isPasscodeStoredInKeychainWithError:nil]) {
-        
-    }
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [_collectionView reloadData];
 }
@@ -469,6 +463,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
+        return [self makeCreatePasscodeTask];
     }
     return nil;
 }
@@ -2674,28 +2670,36 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (IBAction)removePasscodeButtonTapped:(id)sender {
-
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
+            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
+        } else {
+            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
+    }
 }
 
 - (IBAction)authenticatePasscodeButtonTapped:(id)sender {
-    if ([ORKPasscodeViewController isPasscodeStoredInKeychainWithError:nil]) {
-        // Show alert.
-    } else {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController
                                                      passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
-                                                        delegate:self];
+                                                     delegate:self];
         [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can authenticate it."];
     }
 }
 
 - (IBAction)editPasscodeButtonTapped:(id)sender {
-    if ([ORKPasscodeViewController isPasscodeStoredInKeychainWithError:nil]) {
-        // Show alert.
-    } else {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
                                                                                                             delegate:self
                                                                                                         passcodeType:ORKPasscodeType6Digit];
         [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can edit it."];
     }
 }
 
@@ -2703,13 +2707,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
     NSLog(@"Passcode authentication failed.");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:@"Passcode authentication failed"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
+    [self showAlertWithTitle:@"Error" message:@"Passcode authentication failed"];
 }
 
 - (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
@@ -2724,6 +2722,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Helpers
 
+/*
+ Shows an alert.
+ 
+ Used to display an alert with the provided title and message.
+ 
+ @param title       The title text for the alert.
+ @param message     The message text for the alert.
+ */
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+ 
 /*
  Builds a test consent document.
  */

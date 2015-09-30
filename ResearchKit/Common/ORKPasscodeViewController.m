@@ -34,6 +34,7 @@
 #import "ORKPasscodeStepViewController_Internal.h"
 #import "ORKPasscodeStep.h"
 #import "ORKHelpers.h"
+#import "ORKDefines_Private.h"
 
 
 @implementation ORKPasscodeViewController
@@ -41,11 +42,6 @@
 - (instancetype)init {
     ORKThrowMethodUnavailableException();
     return nil;
-}
-
-+ (BOOL)isPasscodeStoredInKeychainWithError:(NSError * __nullable *)error {
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:error];
-    return [dictionary objectForKey:KeychainDictionaryPasscodeKey];
 }
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
@@ -70,14 +66,6 @@
                         passcodeFlow:(ORKPasscodeFlow)passcodeFlow
                         passcodeType:(ORKPasscodeType)passcodeType {
 
-    // Retrieve stored data from the dictionary.
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
-
-    // Determine passcode type and touch Id enable based on stored data.
-    NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
-    BOOL useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
-    ORKPasscodeType authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
-
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;
     step.text = text;
@@ -85,8 +73,6 @@
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
     passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.authenticationPasscodeType = authenticationPasscodeType;
-    passcodeStepViewController.useTouchId = useTouchId;
     passcodeStepViewController.step = step;
     
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
@@ -95,6 +81,15 @@
     navigationController.navigationBar.translucent = NO;
     
     return navigationController;
+}
+
++ (BOOL)isPasscodeStoredInKeychain {
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+    return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;
+}
+
++ (BOOL)removePasscodeFromKeychain {
+    return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
 }
 
 @end
