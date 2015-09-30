@@ -375,7 +375,7 @@
     NSError *error;
     NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
     if (error) {
-        [self throwPasscodeNotFoundExceptionWithError:error];
+        [self throwExceptionWithKeychainError:error];
     }
     
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
@@ -386,7 +386,7 @@
     NSError *error;
     NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
     if (error) {
-        [self throwPasscodeNotFoundExceptionWithError:error];
+        [self throwExceptionWithKeychainError:error];
     }
     
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
@@ -420,7 +420,7 @@
     });
 }
 
-- (void)throwPasscodeNotFoundExceptionWithError:(NSError *)error {
+- (void)throwExceptionWithKeychainError:(NSError *)error {
     NSString *errorReason = error.localizedDescription;
     if (error.code == errSecItemNotFound) {
         errorReason = @"There is no passcode stored in the keychain.";

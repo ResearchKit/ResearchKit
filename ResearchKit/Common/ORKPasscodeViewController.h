@@ -84,8 +84,12 @@ ORK_CLASS_AVAILABLE
  An authenticaiton passcode view controller allows a user to be authenticated using
  the passcode stored in the keychain.
  
+ A passcode must already have been created using a passcode step before presenting
+ this view controller (see `ORKPasscodeStep`).
+ 
  You must check to see if the passcode is stored in the keychain before presenting
- this view controller.
+ this view controller. A helper method, `isPasscodeStoredInKeychain`, is provided as
+ part of this class.
  
  @param text        The message displayed to the user.
  @param delegate    The delegate for the passcode view controller.
@@ -99,8 +103,12 @@ ORK_CLASS_AVAILABLE
  An editing passcode view controller allows a user to be authenticated using
  the passcode stored in the keychain and create a new passcode.
  
+ A passcode must already have been created using a passcode step before presenting
+ this view controller (see `ORKPasscodeStep`).
+ 
  You must check to see if the passcode is stored in the keychain before presenting
- this view controller.
+ this view controller. A helper method, `isPasscodeStoredInKeychain`, is provided as
+ part of this class.
  
  @param text            The message displayed to the user.
  @param delegate        The delegate for the passcode view controller.
