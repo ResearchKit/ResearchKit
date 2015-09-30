@@ -37,9 +37,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  An `ORKPasscodeStep` object provides the participant a passcode creation step.
  
- You can use passcode step as part of the consent process to ensure that the
- participant signing the consent is the same participant completing other modules
- within that context.
+ It is recommended to use a passcode step as part of the consent process to ensure
+ that the participant signing the consent is the same participant completing other 
+ modules within that context.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKPasscodeStep : ORKStep

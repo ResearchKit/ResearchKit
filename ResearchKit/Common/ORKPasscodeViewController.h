@@ -80,12 +80,54 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)init NS_UNAVAILABLE;
 
+/**
+ An authenticaiton passcode view controller allows a user to be authenticated using
+ the passcode stored in the keychain.
+ 
+ A passcode must already have been created using a passcode step before presenting
+ this view controller (see `ORKPasscodeStep`).
+ 
+ You must check to see if the passcode is stored in the keychain before presenting
+ this view controller. A helper method, `isPasscodeStoredInKeychain`, is provided as
+ part of this class.
+ 
+ @param text        The message displayed to the user.
+ @param delegate    The delegate for the passcode view controller.
+ 
+ @return A passcode authentication view controller.
+ */
 + (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate;
 
+/**
+ An editing passcode view controller allows a user to be authenticated using
+ the passcode stored in the keychain and create a new passcode.
+ 
+ A passcode must already have been created using a passcode step before presenting
+ this view controller (see `ORKPasscodeStep`).
+ 
+ You must check to see if the passcode is stored in the keychain before presenting
+ this view controller. A helper method, `isPasscodeStoredInKeychain`, is provided as
+ part of this class.
+ 
+ @param text            The message displayed to the user.
+ @param delegate        The delegate for the passcode view controller.
+ @param passcodeType    The passcode type for the new passcode.
+ 
+ @return A passcode editing view controller.
+ */
 + (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
                                    delegate:(id<ORKPasscodeDelegate>)delegate
                                passcodeType:(ORKPasscodeType)passcodeType;
+/**
+ Returns 'YES' if a passcode is stored in the keychain, otherwise 'NO'.
+ */
++ (BOOL)isPasscodeStoredInKeychain;
+
+/**
+ Returns 'YES' if passcode was successfully removed from the keychain, otherwise 'NO'.
+ */
++ (BOOL)removePasscodeFromKeychain;
 
 @end
 

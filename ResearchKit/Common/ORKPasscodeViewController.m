@@ -64,17 +64,6 @@
                             delegate:(id<ORKPasscodeDelegate>)delegate
                         passcodeFlow:(ORKPasscodeFlow)passcodeFlow
                         passcodeType:(ORKPasscodeType)passcodeType {
-    // Retrieve stored data from the dictionary.
-    NSError *error;
-    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    if (error) {
-        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
-    }
-    
-    // Determine passcode type and touch Id enable based on stored data.
-    NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
-    BOOL useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
-    ORKPasscodeType authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
 
     ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
     step.passcodeType = passcodeType;
@@ -83,8 +72,6 @@
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
     passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
-    passcodeStepViewController.authenticationPasscodeType = authenticationPasscodeType;
-    passcodeStepViewController.useTouchId = useTouchId;
     passcodeStepViewController.step = step;
     
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
@@ -93,6 +80,15 @@
     navigationController.navigationBar.translucent = NO;
     
     return navigationController;
+}
+
++ (BOOL)isPasscodeStoredInKeychain {
+    NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:nil];
+    return ([dictionary objectForKey:KeychainDictionaryPasscodeKey]) ? YES : NO;
+}
+
++ (BOOL)removePasscodeFromKeychain {
+    return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
 }
 
 @end

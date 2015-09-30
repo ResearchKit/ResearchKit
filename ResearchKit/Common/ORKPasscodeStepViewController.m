@@ -82,17 +82,19 @@
         // Set the starting passcode state and textfield based on flow.
         switch (_passcodeFlow) {
             case ORKPasscodeFlowCreate:
+                [self removePasscodeFromKeychain];
                 _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:[self passcodeStep].passcodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
-                [self removePasscodeFromKeychain];
                 break;
                 
             case ORKPasscodeFlowAuthenticate:
+                [self setValuesFromKeychain];
                 _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
                 break;
                 
             case ORKPasscodeFlowEdit:
+                [self setValuesFromKeychain];
                 _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateOldEntry];
                 break;
@@ -101,17 +103,7 @@
         // If Touch ID was enabled then present it for authentication flow.
         if (self.useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
-            NSError *error;
-            NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-            
-            if (error) {
-                @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
-            }
-            
-            BOOL touchIdIsEnabled = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
-            if (touchIdIsEnabled) {
-                [self promptTouchId];
-            }
+            [self promptTouchId];
         }
         
         // Check to see if cancel button should be set or not.
@@ -382,13 +374,24 @@
 - (BOOL)passcodeMatchesKeychain {
     NSError *error;
     NSDictionary *dictionary = (NSDictionary *) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
-    
     if (error) {
-        @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
+        [self throwExceptionWithKeychainError:error];
     }
     
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
     return [storedPasscode isEqualToString:_passcode];
+}
+
+- (void)setValuesFromKeychain {
+    NSError *error;
+    NSDictionary *dictionary = (NSDictionary*) [ORKKeychainWrapper objectForKey:PasscodeKey error:&error];
+    if (error) {
+        [self throwExceptionWithKeychainError:error];
+    }
+    
+    NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
+    self.useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
+    self.authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
 }
 
 - (void)wrongAttempt {
@@ -415,6 +418,14 @@
         typeof(self) strongSelf = weakSelf;
         [strongSelf updatePasscodeView];
     });
+}
+
+- (void)throwExceptionWithKeychainError:(NSError *)error {
+    NSString *errorReason = error.localizedDescription;
+    if (error.code == errSecItemNotFound) {
+        errorReason = @"There is no passcode stored in the keychain.";
+    }
+    @throw [NSException exceptionWithName:NSGenericException reason:errorReason userInfo:nil];
 }
 
 #pragma mark - Passcode flows

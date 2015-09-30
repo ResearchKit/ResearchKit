@@ -43,6 +43,8 @@
 
 DefineStringKey(ConsentTaskIdentifier);
 DefineStringKey(ConsentReviewTaskIdentifier);
+DefineStringKey(EligibilityFormTaskIdentifier);
+DefineStringKey(EligibilitySurveyTaskIdentifier);
 
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
@@ -56,16 +58,16 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(MemoryTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(ScreeningTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
-DefineStringKey(EditPasscodeTaskIdentifier);
-DefineStringKey(AuthenticatePasscodeTaskIdentifier);
+DefineStringKey(MemoryTaskIdentifier);
+DefineStringKey(ScreeningTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(TimedWalkTaskIdentifier);
+DefineStringKey(HolePegTestTaskIdentifier);
+DefineStringKey(CreatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -258,6 +260,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     _buttonTitles = @[ @[ // Consent
                            @"Consent",
                            @"Consent Review",
+                           @"Eligibility Form",
+                           @"Eligibility Survey"
                            ],
                        @[ // Question Steps
                            @"Date Pickers",
@@ -273,13 +277,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
+                           @"Hole Peg Test Task",
                            @"Memory Game Task",
                            @"PSAT Task",
-                           @"Reaction Time Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Reaction Time Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -288,14 +293,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Create Passcode",
+                           @"Remove Passcode",
                            @"Edit Passcode",
                            @"Authenticate Passcode"
                            ],
                        ];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [_collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -364,6 +367,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeConsentReviewTask];
     } else if ([identifier isEqualToString:ConsentTaskIdentifier]) {
         return [self makeConsentTask];
+    } else if ([identifier isEqualToString:EligibilityFormTaskIdentifier]) {
+        return [self makeEligibilityFormTask];
+    } else if ([identifier isEqualToString:EligibilitySurveyTaskIdentifier]) {
+        return [self makeEligibilitySurveyTask];
     } else if ([identifier isEqualToString:AudioTaskIdentifier]) {
         id<ORKTask> task = [ORKOrderedTask audioTaskWithIdentifier:AudioTaskIdentifier
                                             intendedUseDescription:nil
@@ -427,27 +434,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                   options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                                   intendedUseDescription:nil
-                                                  maximumStimulusInterval:8
-                                                  minimumStimulusInterval:4
-                                                    thresholdAcceleration:0.5
-                                                         numberOfAttempts:3
-                                                                  timeout:10
-                                                             successSound:0
-                                                             timeoutSound:0
-                                                             failureSound:0
-                                                                  options:0];
+                                       intendedUseDescription:nil
+                                      maximumStimulusInterval:8
+                                      minimumStimulusInterval:4
+                                        thresholdAcceleration:0.5
+                                             numberOfAttempts:3
+                                                      timeout:10
+                                                 successSound:0
+                                                 timeoutSound:0
+                                                 failureSound:0
+                                                      options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
-    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
-        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
-                                    intendedUseDescription:nil
-                                          distanceInMeters:100
-                                                 timeLimit:180
-                                                   options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
         return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
                                intendedUseDescription:nil
@@ -456,10 +457,27 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                      stimulusDuration:1.0
                                          seriesLength:60
                                               options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
+        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
+                                    intendedUseDescription:nil
+                                          distanceInMeters:100
+                                                 timeLimit:180
+                                                   options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
+        return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
+                                               intendedUseDescription:nil
+                                                         dominantHand:ORKBodySagittalRight
+                                                         numberOfPegs:9
+                                                            threshold:0.2
+                                                              rotated:NO
+                                                            timeLimit:300.0
+                                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
+        return [self makeCreatePasscodeTask];
     }
     return nil;
 }
@@ -1164,16 +1182,179 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
-    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
-    
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
+
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep]];
     
     return task;
 }
 
 - (IBAction)consentButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ConsentTaskIdentifier];
+}
+
+#pragma mark - Eligibility form task
+/*
+ The eligibility form task is used to test elibility form items (`ORKFormStep`, `ORKFormItem`).
+ */
+- (id<ORKTask>)makeEligibilityFormTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
+        step.title = @"Eligibility Form";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"form_step"];
+        step.optional = NO;
+        NSMutableArray *items = [NSMutableArray new];
+        [steps addObject:step];
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
+                                                                   text:@"Are you over 18 years of age?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_2"
+                                                                   text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_3"
+                                                                   text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_4"
+                                                                   text:@"Do you live outside the United States of America?"
+                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+            item.optional = NO;
+            [items addObject:item];
+        }
+        
+        [step setFormItems:items];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        step.title = @"You are ineligible to join the study.";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
+        step.title = @"You are eligible to join the study.";
+        [steps addObject:step];
+    }
+    
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilityFormTaskIdentifier steps:steps];
+    
+    // Build navigation rules.
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+    ORKResultSelector *resultSelector = nil;
+    
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_1"];
+    NSPredicate *predicateFormItem1 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_2"];
+    NSPredicate *predicateFormItem2 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_3"];
+    NSPredicate *predicateFormItem3 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
+                                                  resultIdentifier:@"form_item_4"];
+    NSPredicate *predicateFormItem4 = [ORKResultPredicate
+                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+    
+    NSPredicate *predicateEligible = [NSCompoundPredicate
+                                      andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4]];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateEligible]
+                                                          destinationStepIdentifiers:@[@"eligible_step"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"form_step"];
+    
+    // Add end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule = nil;
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+
+    return task;
+}
+
+- (IBAction)eligibilityFormButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EligibilityFormTaskIdentifier];
+}
+
+#pragma mark - Eligibility survey
+/*
+ The eligibility survey task is used to test elibility survey cell item.
+ */
+- (id<ORKTask>)makeEligibilitySurveyTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro_step"];
+        step.title = @"Eligibility Survey";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
+                                                                      title:@"Are you over 18 years of age?"
+                                                                     answer:answerFormat];
+        step.optional = NO;
+        [steps addObject:step];
+    }
+    
+    {
+        ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"ineligible_step"];
+        step.title = @"You are ineligible to join the study.";
+        [steps addObject:step];
+    }
+    
+    {
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"eligible_step"];
+        step.title = @"You are eligible to join the study.";
+        [steps addObject:step];
+    }
+    
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:EligibilitySurveyTaskIdentifier steps:steps];
+
+    // Build navigation rules.
+    ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
+    NSPredicate *predicateQuestion = [ORKResultPredicate
+                                      predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                      expectedAnswer:YES];
+    ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc]
+                                                     initWithResultPredicates:@[predicateQuestion]
+                                                     destinationStepIdentifiers:@[@"eligible_step"]];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
+    
+    // Add end direct rules to skip unneeded steps
+    ORKDirectStepNavigationRule *directRule = nil;
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"ineligible_step"];
+    
+    return task;
+}
+
+- (IBAction)eligibilitySurveyButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EligibilitySurveyTaskIdentifier];
 }
 
 #pragma mark - Mini form task
@@ -1886,6 +2067,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)psatTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
+}
+
+- (IBAction)holePegTestTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
 }
 
 #pragma mark - Dynamic task
@@ -2644,42 +2829,67 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
-#pragma mark - Passcode view controllers
+#pragma mark - Passcode step and view controllers
 
 /*
- Tests various uses of passcode view controller.
+ Tests various uses of passcode step and view controllers.
  
  Passcode authentication and passcode editing are presented in
  the examples. Passcode creation would ideally be as part of
- the consent process. The consent task has been modified in this
- project to include the passcode creation step as part of the 
- consent flow.
+ the consent process.
  */
+
+- (id<ORKTask>)makeCreatePasscodeTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    [steps addObject: passcodeStep];
+    return [[ORKOrderedTask alloc] initWithIdentifier: CreatePasscodeTaskIdentifier steps:steps];
+}
+
+- (IBAction)createPasscodeButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CreatePasscodeTaskIdentifier];
+}
+
+- (IBAction)removePasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
+            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
+        } else {
+            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
+    }
+}
+
 - (IBAction)authenticatePasscodeButtonTapped:(id)sender {
-    ORKPasscodeViewController *viewController = [ORKPasscodeViewController
-                                                 passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
-                                                 delegate:self];
-    [self presentViewController:viewController animated:YES completion:nil];
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                     passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                     delegate:self];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can authenticate it."];
+    }
 }
 
 - (IBAction)editPasscodeButtonTapped:(id)sender {
-    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
-                                                                                                        delegate:self
-                                                                                                    passcodeType:ORKPasscodeType6Digit];
-    [self presentViewController:viewController animated:YES completion:nil];
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                            delegate:self
+                                                                                                        passcodeType:ORKPasscodeType6Digit];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can edit it."];
+    }
 }
 
 #pragma mark - Passcode delegate
 
 - (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
     NSLog(@"Passcode authentication failed.");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:@"Passcode authentication failed"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
+    [self showAlertWithTitle:@"Error" message:@"Passcode authentication failed"];
 }
 
 - (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
@@ -2694,6 +2904,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Helpers
 
+/*
+ Shows an alert.
+ 
+ Used to display an alert with the provided title and message.
+ 
+ @param title       The title text for the alert.
+ @param message     The message text for the alert.
+ */
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+ 
 /*
  Builds a test consent document.
  */
@@ -3086,12 +3312,15 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
-            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
-                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
-                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
             } else if ([result isKindOfClass:[ORKPSATResult class]]) {
                 ORKPSATResult *pr = (ORKPSATResult *)result;
                 NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
+            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
+                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
+            } else if ([result isKindOfClass:[ORKHolePegTestResult class]]) {
+                ORKHolePegTestResult *hptr = (ORKHolePegTestResult *)result;
+                NSLog(@"    %@:   totalTime: %@     %@", hptr.identifier, @(hptr.totalTime), hptr.samples);
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }
