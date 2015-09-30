@@ -245,6 +245,8 @@ ORK_CLASS_AVAILABLE
  completes, it may be appropriate to serialize it for transmission to a server,
  or to immediately perform analysis on it.
  */
+@class ORKTowerOfHanoiMove;
+
 ORK_CLASS_AVAILABLE
 @interface ORKTowerOfHanoiResult : ORKResult
 
@@ -258,7 +260,7 @@ ORK_CLASS_AVAILABLE
 /**
  An array of moves, in which each item is a `ORKTowerOfHanoiMove` object that represents a move.
  */
-@property (nonatomic, copy, nullable) NSArray *moves;
+@property (nonatomic, copy, nullable) NSArray<ORKTowerOfHanoiMove *> *moves;
 
 @end
 
@@ -617,6 +619,8 @@ ORK_CLASS_AVAILABLE
  When the task completes, it may be appropriate to serialize them for transmission to a server,
  or to immediately perform analysis on them.
  */
+@class ORKPSATSample;
+
 ORK_CLASS_AVAILABLE
 @interface ORKPSATResult : ORKResult
 
@@ -666,7 +670,7 @@ ORK_CLASS_AVAILABLE
  An array of collected samples, in which each item is an `ORKPSATSample`
  object that represents an addition sample.
  */
-@property (nonatomic, copy, nullable) NSArray *samples;
+@property (nonatomic, copy, nullable) NSArray<ORKPSATSample *> *samples;
 
 @end
 

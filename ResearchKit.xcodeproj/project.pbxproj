@@ -43,7 +43,7 @@
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
 		24898B0D1B7186C000B0E7E7 /* ORKScaleRangeImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 24898B0B1B7186C000B0E7E7 /* ORKScaleRangeImageView.h */; };
 		24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24898B0C1B7186C000B0E7E7 /* ORKScaleRangeImageView.m */; };
-		250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */; };
+		250F94041B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94021B4C5A6600FA23EB /* ORKTowerOfHanoiStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94031B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m */; };
 		250F94081B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 250F94061B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.h */; };
 		250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F94071B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m */; };
@@ -51,7 +51,7 @@
 		257FCE201B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FCE1E1B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m */; };
 		257FCE231B4D37A80001EF06 /* ORKTowerOfHanoiTower.h in Headers */ = {isa = PBXBuildFile; fileRef = 257FCE211B4D37A80001EF06 /* ORKTowerOfHanoiTower.h */; };
 		257FCE241B4D37A80001EF06 /* ORKTowerOfHanoiTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 257FCE221B4D37A80001EF06 /* ORKTowerOfHanoiTower.m */; };
-		25ECC0951AFBD68300F3D63B /* ORKReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0931AFBD68300F3D63B /* ORKReactionTimeStep.h */; };
+		25ECC0951AFBD68300F3D63B /* ORKReactionTimeStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0931AFBD68300F3D63B /* ORKReactionTimeStep.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		25ECC0961AFBD68300F3D63B /* ORKReactionTimeStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC0941AFBD68300F3D63B /* ORKReactionTimeStep.m */; };
 		25ECC09B1AFBD8B300F3D63B /* ORKReactionTimeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 25ECC0991AFBD8B300F3D63B /* ORKReactionTimeViewController.h */; };
 		25ECC09C1AFBD8B300F3D63B /* ORKReactionTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25ECC09A1AFBD8B300F3D63B /* ORKReactionTimeViewController.m */; };
