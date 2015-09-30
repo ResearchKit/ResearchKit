@@ -88,8 +88,8 @@ git clone https://github.com/ResearchKit/ResearchKit.git
 Building
 --------
 
-Build the *ResearchKit framework* by opening `ResearchKit.xcodeproj` and running the *`ResearchKit`
-framework* target. Optionally, run the unit tests too.
+Build the *ResearchKit framework* by opening `ResearchKit.xcodeproj` and running the `ResearchKit`
+framework target. Optionally, run the unit tests too.
 
 
 Adding the ResearchKit framework to your App

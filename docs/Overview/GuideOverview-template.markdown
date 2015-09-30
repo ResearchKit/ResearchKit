@@ -38,7 +38,7 @@ data. To learn more about active tasks, see [Active Tasks](ActiveTasks-template)
 
 ##Tasks and Steps
 
-A task in the *ResearchKit* framework can be a simple ordered sequence of steps, or it can be
+A task in the *ResearchKit framework* can be a simple ordered sequence of steps, or it can be
 dynamic, with previous results informing what is presented. The task view controller supports saving
 progress in the middle of a long task and restoring it later, as well as UI state restoration to
 prevent data loss if the user switches out of your app in the middle of a task.
