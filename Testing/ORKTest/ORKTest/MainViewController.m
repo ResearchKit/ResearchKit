@@ -272,13 +272,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
+                           @"Hole Peg Test Task",
                            @"Memory Game Task",
-                           @"Two Finger Tapping Task",
-                           @"Tone Audiometry Task",
-                           @"Reaction Time Task",
-                           @"Tower Of Hanoi Task",
                            @"PSAT Task",
                            @"Timed Walk Task",
+                           @"Tone Audiometry Task",
+                           @"Tower Of Hanoi Task",
+                           @"Two Finger Tapping Task",
+                           @"Reaction Time Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -1887,7 +1888,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
-- (IBAction)HolePegTestButtonTapped:(id)sender {
+- (IBAction)holePegTestTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
 }
 
