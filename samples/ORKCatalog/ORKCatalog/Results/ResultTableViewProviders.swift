@@ -68,7 +68,7 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         `ORKTaskResult` instance).
     */
     switch result {
-        // Survey Questions
+    // Survey Questions
     case is ORKBooleanQuestionResult:
         providerType = BooleanQuestionResultTableViewProvider.self
         
@@ -93,46 +93,49 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
     case is ORKTimeOfDayQuestionResult:
         providerType = TimeOfDayQuestionResultTableViewProvider.self
 
-        // Consent
+    // Consent
     case is ORKConsentSignatureResult:
         providerType = ConsentSignatureResultTableViewProvider.self
         
-        // Active Tasks
+    // Active Tasks
+    case is ORKPasscodeResult:
+        providerType = PasscodeResultTableViewProvider.self
+        
     case is ORKFileResult:
         providerType = FileResultTableViewProvider.self
-        
-    case is ORKPSATResult:
-        providerType = PSATResultTableViewProvider.self
-        
-    case is ORKReactionTimeResult:
-        providerType = ReactionTimeViewProvider.self
         
     case is ORKSpatialSpanMemoryResult:
         providerType = SpatialSpanMemoryResultTableViewProvider.self
         
     case is ORKTappingIntervalResult:
         providerType = TappingIntervalResultTableViewProvider.self
-        
+    
     case is ORKToneAudiometryResult:
         providerType = ToneAudiometryResultTableViewProvider.self
+        
+    case is ORKReactionTimeResult:
+        providerType = ReactionTimeViewProvider.self
+        
+    case is ORKTowerOfHanoiResult:
+        providerType = TowerOfHanoiResultTableViewProvider.self
+        
+    case is ORKPSATResult:
+        providerType = PSATResultTableViewProvider.self
         
     case is ORKTimedWalkResult:
         providerType = TimedWalkResultTableViewProvider.self
         
-    case is ORKToneAudiometryResult:
-        providerType = ToneAudiometryResultTableViewProvider.self
-        
-    case is ORKTowerOfHanoiResult:
-        providerType = TowerOfHanoiResultTableViewProvider.self
+    case is ORKHolePegTestResult:
+        providerType = HolePegTestResultTableViewProvider.self
         
     // All
     case is ORKTaskResult:
         providerType = TaskResultTableViewProvider.self
 
-        /*
+    /*
         Refer to the comment near the switch statement for why the
         additional guard is here.
-        */
+    */
     case is ORKCollectionResult where !(result is ORKTaskResult):
         providerType = CollectionResultTableViewProvider.self
         
@@ -485,6 +488,22 @@ class ConsentSignatureResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKPasscodeResult` instance.
+class PasscodeResultTableViewProvider: ResultTableViewProvider   {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let passcodeResult = result as! ORKPasscodeResult
+        
+        var passcodeResultDetailText: String?
+        passcodeResultDetailText = passcodeResult.passcodeSaved.boolValue ? "true" : "false"
+        
+        return super.resultRowsForSection(section) + [
+            ResultRow(text: "passcodeSaved", detail: passcodeResultDetailText)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKFileResult` instance.
 class FileResultTableViewProvider: ResultTableViewProvider {
     // MARK: ResultTableViewProvider
@@ -529,124 +548,6 @@ class FileResultTableViewProvider: ResultTableViewProvider {
         }
         
         return UITableViewAutomaticDimension
-    }
-}
-
-/// Table view provider specific to an `ORKPSATResult` instance.
-class PSATResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "Answers"
-    }
-    
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let PSATResult = result as! ORKPSATResult
-        
-        var rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            var presentation = ""
-            let presentationMode = PSATResult.presentationMode
-            if (presentationMode == .Auditory) {
-                presentation = "PASAT"
-            } else if (presentationMode == .Visual) {
-                presentation = "PVSAT"
-            } else if (presentationMode.contains(.Auditory) && presentationMode.contains(.Visual)) {
-                presentation = "PAVSAT"
-            } else {
-                presentation = "Unknown"
-            }
-            
-            // The presentation mode (auditory and/or visual) of the PSAT.
-            rows.append(ResultRow(text: "presentation", detail: presentation))
-            
-            // The time interval between two digits.
-            rows.append(ResultRow(text: "ISI", detail: PSATResult.interStimulusInterval))
-            
-            // The time duration the digit is shown on screen.
-            rows.append(ResultRow(text: "stimulus", detail: PSATResult.stimulusDuration))
-            
-            // The serie length of the PSAT.
-            rows.append(ResultRow(text: "length", detail: PSATResult.length))
-            
-            // The number of correct answers.
-            rows.append(ResultRow(text: "total correct", detail: PSATResult.totalCorrect))
-            
-            // The total number of consecutive correct answers.
-            rows.append(ResultRow(text: "total dyad", detail: PSATResult.totalDyad))
-            
-            // The total time for the answers.
-            rows.append(ResultRow(text: "total time", detail: PSATResult.totalTime))
-            
-            // The initial digit number.
-            rows.append(ResultRow(text: "initial digit", detail: PSATResult.initialDigit))
-            
-            return rows
-        }
-        
-        // Add a `ResultRow` for each sample.
-        return rows + PSATResult.samples!.map { sample in
-            let PSATSample = sample as! ORKPSATSample
-            
-            let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
-            let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"
-            
-            return ResultRow(text: text, detail: detail)
-        }
-    }
-}
-
-/// Table view provider specific to an `ORKReactionTimeResult` instance.
-class ReactionTimeViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return super.tableView(tableView, titleForHeaderInSection: 0)
-        }
-        
-        return "File Results"
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let reactionTimeResult = result as! ORKReactionTimeResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        if section == 0 {
-            return rows + [
-                ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp)
-            ]
-        }
-        
-        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
-        
-        return rows + [
-            ResultRow(text: "File Result", detail: fileResultDetail)
-        ]
     }
 }
 
@@ -743,44 +644,6 @@ class TappingIntervalResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
-/// Table view provider specific to an `ORKTimedWalkResult` instance.
-class TimedWalkResultTableViewProvider: ResultTableViewProvider {
-    // MARK: UITableViewDataSource
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return super.tableView(tableView, titleForHeaderInSection: 0)
-    }
-    
-    // MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-    
-    // MARK: ResultTableViewProvider
-    
-    override func resultRowsForSection(section: Int) -> [ResultRow] {
-        let TimedWalkResult = result as! ORKTimedWalkResult
-        
-        let rows = super.resultRowsForSection(section)
-        
-        return rows + [
-            // The timed walk distance in meters.
-            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
-            
-            // The time limit to complete the trials.
-            ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),
-            
-            // The duration for an addition of the PVSAT.
-            ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
-        ]
-    }
-}
-
 /// Table view provider specific to an `ORKToneAudiometryResult` instance.
 class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -825,6 +688,43 @@ class ToneAudiometryResultTableViewProvider: ResultTableViewProvider {
     }
 }
 
+/// Table view provider specific to an `ORKReactionTimeResult` instance.
+class ReactionTimeViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "File Results"
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let reactionTimeResult = result as! ORKReactionTimeResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            return rows + [
+                ResultRow(text: "timestamp", detail: reactionTimeResult.timestamp)
+            ]
+        }
+        
+        let fileResultDetail = reactionTimeResult.fileResult.fileURL!.absoluteString
+        
+        return rows + [
+            ResultRow(text: "File Result", detail: fileResultDetail)
+        ]
+    }
+}
+
 /// Table view provider specific to an `ORKTowerOfHanoiResult` instance.
 class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
     // MARK: UITableViewDataSource
@@ -857,6 +757,207 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
             ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
             ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
             ResultRow(text: "timestamp", detail: "\(move.timestamp)")]
+    }
+}
+
+/// Table view provider specific to an `ORKPSATResult` instance.
+class PSATResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Answers"
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let PSATResult = result as! ORKPSATResult
+        
+        var rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            var presentation = ""
+            let presentationMode = PSATResult.presentationMode
+            if (presentationMode == .Auditory) {
+                presentation = "PASAT"
+            } else if (presentationMode == .Visual) {
+                presentation = "PVSAT"
+            } else if (presentationMode.contains(.Auditory) && presentationMode.contains(.Visual)) {
+                presentation = "PAVSAT"
+            } else {
+                presentation = "Unknown"
+            }
+            
+            // The presentation mode (auditory and/or visual) of the PSAT.
+            rows.append(ResultRow(text: "presentation", detail: presentation))
+            
+            // The time interval between two digits.
+            rows.append(ResultRow(text: "ISI", detail: PSATResult.interStimulusInterval))
+            
+            // The time duration the digit is shown on screen.
+            rows.append(ResultRow(text: "stimulus", detail: PSATResult.stimulusDuration))
+            
+            // The serie length of the PSAT.
+            rows.append(ResultRow(text: "length", detail: PSATResult.length))
+            
+            // The number of correct answers.
+            rows.append(ResultRow(text: "total correct", detail: PSATResult.totalCorrect))
+            
+            // The total number of consecutive correct answers.
+            rows.append(ResultRow(text: "total dyad", detail: PSATResult.totalDyad))
+            
+            // The total time for the answers.
+            rows.append(ResultRow(text: "total time", detail: PSATResult.totalTime))
+            
+            // The initial digit number.
+            rows.append(ResultRow(text: "initial digit", detail: PSATResult.initialDigit))
+            
+            return rows
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + PSATResult.samples!.map { sample in
+            let PSATSample = sample as! ORKPSATSample
+            
+            let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
+            let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"
+            
+            return ResultRow(text: text, detail: detail)
+        }
+    }
+}
+
+/// Table view provider specific to an `ORKTimedWalkResult` instance.
+class TimedWalkResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return super.tableView(tableView, titleForHeaderInSection: 0)
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let TimedWalkResult = result as! ORKTimedWalkResult
+        
+        let rows = super.resultRowsForSection(section)
+        
+        return rows + [
+            // The timed walk distance in meters.
+            ResultRow(text: "distance (m)", detail: TimedWalkResult.distanceInMeters),
+            
+            // The time limit to complete the trials.
+            ResultRow(text: "time limit (s)", detail: TimedWalkResult.timeLimit),
+            
+            // The duration for a Timed Walk.
+            ResultRow(text: "duration (s)", detail: TimedWalkResult.duration)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKHolePegTestResult` instance.
+class HolePegTestResultTableViewProvider: ResultTableViewProvider {
+    // MARK: UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return super.tableView(tableView, titleForHeaderInSection: 0)
+        }
+        
+        return "Moves"
+    }
+    
+    // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let holePegTestResult = result as! ORKHolePegTestResult
+        
+        var rows = super.resultRowsForSection(section)
+        
+        if section == 0 {
+            var side = ""
+            let movingDirection = holePegTestResult.movingDirection
+            if (movingDirection == .Left) {
+                side = "left > right"
+            } else if (movingDirection == .Right) {
+                side = "right > left"
+            }
+            
+            // The hole peg test moving direction.
+            rows.append(ResultRow(text: "direction", detail: side))
+            
+            // The step is for the dominant hand.
+            rows.append(ResultRow(text: "dominant hand", detail: holePegTestResult.dominantHandTested))
+            
+            // The number of pegs to test.
+            rows.append(ResultRow(text: "number of pegs", detail: holePegTestResult.numberOfPegs))
+            
+            // The detection area sensitivity.
+            rows.append(ResultRow(text: "threshold", detail: holePegTestResult.threshold))
+            
+            // The hole peg test also assesses the rotation capabilities.
+            if result.identifier.rangeOfString("place") != nil {
+                rows.append(ResultRow(text: "rotated", detail: holePegTestResult.rotated))
+            }
+            
+            // The number of succeeded moves (out of `numberOfPegs` possible).
+            rows.append(ResultRow(text: "total successes", detail: holePegTestResult.totalSuccesses))
+            
+            // The number of failed moves.
+            rows.append(ResultRow(text: "total failures", detail: holePegTestResult.totalFailures))
+            
+            // The total time needed to perform the test step (ie. the sum of all samples time).
+            rows.append(ResultRow(text: "total time", detail: holePegTestResult.totalTime))
+            
+            // The total distance needed to perform the test step (ie. the sum of all samples distance).
+            rows.append(ResultRow(text: "total distance", detail: holePegTestResult.totalDistance))
+            
+            return rows
+        }
+        
+        // Add a `ResultRow` for each sample.
+        return rows + holePegTestResult.samples!.map { sample in
+            let holePegTestSample = sample as! ORKHolePegTestSample
+            
+            let text = "time (s): \(holePegTestSample.time))"
+            let detail = "distance (pt): \(holePegTestSample.distance)"
+            
+            return ResultRow(text: text, detail: detail)
+        }
     }
 }
 

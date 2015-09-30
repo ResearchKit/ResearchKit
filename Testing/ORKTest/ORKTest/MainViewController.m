@@ -58,14 +58,17 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(MemoryTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(ScreeningTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
 DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(MemoryTaskIdentifier);
+DefineStringKey(ScreeningTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(TimedWalkTaskIdentifier);
+DefineStringKey(HolePegTestTaskIdentifier);
+DefineStringKey(EditPasscodeTaskIdentifier);
+DefineStringKey(AuthenticatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
@@ -170,7 +173,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
-@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
+@interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
@@ -275,13 +278,14 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
+                           @"Hole Peg Test Task",
                            @"Memory Game Task",
                            @"PSAT Task",
-                           @"Reaction Time Task",
                            @"Timed Walk Task",
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Reaction Time Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -290,12 +294,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Edit Passcode",
+                           @"Authenticate Passcode"
                            ],
                        ];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [_collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -431,27 +433,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                   options:(ORKPredefinedTaskOption)0];
     } else if ([identifier isEqualToString:ReactionTimeTaskIdentifier]) {
         return [ORKOrderedTask reactionTimeTaskWithIdentifier:ReactionTimeTaskIdentifier
-                                                   intendedUseDescription:nil
-                                                  maximumStimulusInterval:8
-                                                  minimumStimulusInterval:4
-                                                    thresholdAcceleration:0.5
-                                                         numberOfAttempts:3
-                                                                  timeout:10
-                                                             successSound:0
-                                                             timeoutSound:0
-                                                             failureSound:0
-                                                                  options:0];
+                                       intendedUseDescription:nil
+                                      maximumStimulusInterval:8
+                                      minimumStimulusInterval:4
+                                        thresholdAcceleration:0.5
+                                             numberOfAttempts:3
+                                                      timeout:10
+                                                 successSound:0
+                                                 timeoutSound:0
+                                                 failureSound:0
+                                                      options:0];
     } else if ([identifier isEqualToString:TowerOfHanoiTaskIdentifier]) {
         return [ORKOrderedTask towerOfHanoiTaskWithIdentifier:TowerOfHanoiTaskIdentifier
                                        intendedUseDescription:nil
                                                 numberOfDisks:5
                                                       options:0];
-    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
-        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
-                                    intendedUseDescription:nil
-                                          distanceInMeters:100
-                                                 timeLimit:180
-                                                   options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:PSATTaskIdentifier]) {
         return [ORKOrderedTask PSATTaskWithIdentifier:PSATTaskIdentifier
                                intendedUseDescription:nil
@@ -460,6 +456,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                      stimulusDuration:1.0
                                          seriesLength:60
                                               options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:TimedWalkTaskIdentifier]) {
+        return [ORKOrderedTask timedWalkTaskWithIdentifier:TimedWalkTaskIdentifier
+                                    intendedUseDescription:nil
+                                          distanceInMeters:100
+                                                 timeLimit:180
+                                                   options:ORKPredefinedTaskOptionNone];
+    } else if ([identifier isEqualToString:HolePegTestTaskIdentifier]) {
+        return [ORKNavigableOrderedTask holePegTestTaskWithIdentifier:HolePegTestTaskIdentifier
+                                               intendedUseDescription:nil
+                                                         dominantHand:ORKBodySagittalRight
+                                                         numberOfPegs:9
+                                                            threshold:0.2
+                                                              rotated:NO
+                                                            timeLimit:300.0
+                                                              options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -1168,7 +1179,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKConsentReviewStep *reviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consent_review" signature:consentDocument.signatures[0] inDocument:consentDocument];
     reviewStep.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     reviewStep.reasonForConsent = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step,reviewStep]];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ConsentTaskIdentifier steps:@[step, reviewStep, passcodeStep]];
     
     return task;
 }
@@ -2054,6 +2068,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
+- (IBAction)holePegTestTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
+}
+
 #pragma mark - Dynamic task
 
 /*
@@ -2810,6 +2828,54 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
+#pragma mark - Passcode view controllers
+
+/*
+ Tests various uses of passcode view controller.
+ 
+ Passcode authentication and passcode editing are presented in
+ the examples. Passcode creation would ideally be as part of
+ the consent process. The consent task has been modified in this
+ project to include the passcode creation step as part of the 
+ consent flow.
+ */
+- (IBAction)authenticatePasscodeButtonTapped:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                 passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                 delegate:self];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (IBAction)editPasscodeButtonTapped:(id)sender {
+    ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                        delegate:self
+                                                                                                    passcodeType:ORKPasscodeType6Digit];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - Passcode delegate
+
+- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
+    NSLog(@"Passcode authentication failed.");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Passcode authentication failed"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+- (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
+    NSLog(@"New passcode saved.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)passcodeViewControllerDidCancel:(UIViewController *)viewController {
+    NSLog(@"User tapped the cancel button.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Helpers
 
 /*
@@ -3204,12 +3270,15 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
                 ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
                 NSLog(@"    %@:     %@", tor.identifier, tor.samples);
-            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
-                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
-                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
             } else if ([result isKindOfClass:[ORKPSATResult class]]) {
                 ORKPSATResult *pr = (ORKPSATResult *)result;
                 NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
+            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
+                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
+                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
+            } else if ([result isKindOfClass:[ORKHolePegTestResult class]]) {
+                ORKHolePegTestResult *hptr = (ORKHolePegTestResult *)result;
+                NSLog(@"    %@:   totalTime: %@     %@", hptr.identifier, @(hptr.totalTime), hptr.samples);
             } else {
                 NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
             }
@@ -3223,8 +3292,11 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
          and then generate a PDF From the document that includes the signature.
          */
         
-        ORKStep *lastStep = ((ORKOrderedTask *)taskViewController.task).steps.lastObject;
-        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[taskViewController.result stepResultForStepIdentifier:lastStep.identifier].firstResult;
+        // Search for the review step.
+        NSArray *steps = [(ORKOrderedTask *)taskViewController.task steps];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"self isKindOfClass: %@", [ORKConsentReviewStep class]];
+        ORKStep *reviewStep = [[steps filteredArrayUsingPredicate:predicate] firstObject];
+        ORKConsentSignatureResult *signatureResult = (ORKConsentSignatureResult *)[[[taskViewController result] stepResultForStepIdentifier:reviewStep.identifier] firstResult];
         
         [signatureResult applyToDocument:_currentDocument];
         

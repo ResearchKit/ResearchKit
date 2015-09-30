@@ -76,11 +76,13 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ValuePickerChoiceQuestion
     case ImageCapture
     
-    case Consent
     case EligibilityTask
+    case Consent
+    case Passcode
     
     case Audio
     case Fitness
+    case HolePegTest
     case PSAT
     case ReactionTime
     case ShortWalk
@@ -126,13 +128,15 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
+                    .EligibilityTask,
                     .Consent,
-                    .EligibilityTask
+                    .Passcode,
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
                     .Audio,
                     .Fitness,
+                    .HolePegTest,
                     .PSAT,
                     .ReactionTime,
                     .ShortWalk,
@@ -193,17 +197,23 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
 
+        case .EligibilityTask:
+            return NSLocalizedString("Eligibility Task Example", comment: "")
+            
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
             
-        case .EligibilityTask:
-            return NSLocalizedString("Eligibility Task Example", comment: "")
+        case .Passcode:
+            return NSLocalizedString("Passcode Creation", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
             
         case .Fitness:
             return NSLocalizedString("Fitness Check", comment: "")
+        
+        case .HolePegTest:
+            return NSLocalizedString("Hole Peg Test", comment: "")
             
         case .PSAT:
             return NSLocalizedString("PSAT", comment: "")
@@ -334,9 +344,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         case EligibilityIneligibleStep
         case EligibilityEligibleStep
 
+        // Passcode task specific identifiers.
+        case PasscodeTask
+        case PasscodeStep
+
         // Active tasks.
         case AudioTask
         case FitnessTask
+        case HolePegTestTask
         case PSATTask
         case ReactionTime
         case ShortWalkTask
@@ -396,18 +411,24 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return imageCaptureTask
+        
+        case .EligibilityTask:
+            return eligibilityTask
             
         case .Consent:
             return consentTask
             
-        case .EligibilityTask:
-            return eligibilityTask
+        case .Passcode:
+            return passcodeTask
             
         case .Audio:
             return audioTask
 
         case .Fitness:
             return fitnessTask
+            
+        case .HolePegTest:
+            return holePegTestTask
             
         case .PSAT:
             return PSATTask
@@ -791,52 +812,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
     }
     
-    /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.
-    private var consentTask: ORKTask {
-        /*
-        Informed consent starts by presenting an animated sequence conveying
-        the main points of your consent document.
-        */
-        let visualConsentStep = ORKVisualConsentStep(identifier: String(Identifier.VisualConsentStep), document: consentDocument)
-        
-        let investigatorShortDescription = NSLocalizedString("Institution", comment: "")
-        let investigatorLongDescription = NSLocalizedString("Institution and its partners", comment: "")
-        let localizedLearnMoreHTMLContent = NSLocalizedString("Your sharing learn more content here.", comment: "")
-        
-        /*
-        If you want to share the data you collect with other researchers for
-        use in other studies beyond this one, it is best practice to get
-        explicit permission from the participant. Use the consent sharing step
-        for this.
-        */
-        let sharingConsentStep = ORKConsentSharingStep(identifier: String(Identifier.ConsentSharingStep), investigatorShortDescription: investigatorShortDescription, investigatorLongDescription: investigatorLongDescription, localizedLearnMoreHTMLContent: localizedLearnMoreHTMLContent)
-        
-        /*
-        After the visual presentation, the consent review step displays
-        your consent document and can obtain a signature from the participant.
-        
-        The first signature in the document is the participant's signature.
-        This effectively tells the consent review step which signatory is
-        reviewing the document.
-        */
-        let signature = consentDocument.signatures!.first
-        
-        let reviewConsentStep = ORKConsentReviewStep(identifier: String(Identifier.ConsentReviewStep), signature: signature, inDocument: consentDocument)
-        
-        // In a real application, you would supply your own localized text.
-        reviewConsentStep.text = loremIpsumText
-        reviewConsentStep.reasonForConsent = loremIpsumText
-        
-        return ORKOrderedTask(identifier: String(Identifier.ConsentTask), steps: [
-            visualConsentStep,
-            sharingConsentStep,
-            reviewConsentStep
-            ])
-    }
-    
     /**
-        A task demonstrating how the ResearchKit framework can be used to determine 
-        eligibility using the eligibilty answer format and a navigable ordered task.
+    A task demonstrating how the ResearchKit framework can be used to determine
+    eligibility using the eligibilty answer format and a navigable ordered task.
     */
     private var eligibilityTask: ORKTask {
         // Intro step
@@ -860,7 +838,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             formItem02,
             formItem03
         ]
-    
+        
         // Ineligible step
         let ineligibleStep = ORKInstructionStep(identifier: String(Identifier.EligibilityIneligibleStep))
         ineligibleStep.title = NSLocalizedString("You are ineligible to join the study", comment: "")
@@ -898,7 +876,64 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         return eligibilityTask
     }
+    
+    /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.
+    private var consentTask: ORKTask {
+        /*
+        Informed consent starts by presenting an animated sequence conveying
+        the main points of your consent document.
+        */
+        let visualConsentStep = ORKVisualConsentStep(identifier: String(Identifier.VisualConsentStep), document: consentDocument)
+        
+        let investigatorShortDescription = NSLocalizedString("Institution", comment: "")
+        let investigatorLongDescription = NSLocalizedString("Institution and its partners", comment: "")
+        let localizedLearnMoreHTMLContent = NSLocalizedString("Your sharing learn more content here.", comment: "")
+        
+        /*
+        If you want to share the data you collect with other researchers for
+        use in other studies beyond this one, it is best practice to get
+        explicit permission from the participant. Use the consent sharing step
+        for this.
+        */
+        let sharingConsentStep = ORKConsentSharingStep(identifier: String(Identifier.ConsentSharingStep), investigatorShortDescription: investigatorShortDescription, investigatorLongDescription: investigatorLongDescription, localizedLearnMoreHTMLContent: localizedLearnMoreHTMLContent)
+        
+        /*
+        After the visual presentation, the consent review step displays
+        your consent document and can obtain a signature from the participant.
+        
+        The first signature in the document is the participant's signature.
+        This effectively tells the consent review step which signatory is
+        reviewing the document.
+        */
+        let signature = consentDocument.signatures!.first
+        
+        let reviewConsentStep = ORKConsentReviewStep(identifier: String(Identifier.ConsentReviewStep), signature: signature, inDocument: consentDocument)
+        
+        // In a real application, you would supply your own localized text.
+        reviewConsentStep.text = loremIpsumText
+        reviewConsentStep.reasonForConsent = loremIpsumText
 
+        return ORKOrderedTask(identifier: String(Identifier.ConsentTask), steps: [
+            visualConsentStep,
+            sharingConsentStep,
+            reviewConsentStep
+            ])
+    }
+    
+    /// This task demonstrates the Passcode creation process.
+    private var passcodeTask: ORKTask {
+        /*
+        If you want to protect the app using a passcode. It is reccomended to
+        ask user to create passcode as part of the consent process and use the
+        authentication and editing view controllers to interact with the passcode.
+        
+        The passcode is stored in the keychain.
+        */
+        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeStep))
+
+        return ORKOrderedTask(identifier: String(Identifier.PasscodeStep), steps: [passcodeConsentStep])
+    }
+    
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
@@ -911,6 +946,11 @@ enum TaskListRow: Int, CustomStringConvertible {
     */
     private var fitnessTask: ORKTask {
         return ORKOrderedTask.fitnessCheckTaskWithIdentifier(String(Identifier.FitnessTask), intendedUseDescription: exampleDescription, walkDuration: 20, restDuration: 20, options: [])
+    }
+    
+    /// This task presents the Hole Peg Test pre-defined active task.
+    private var holePegTestTask: ORKTask {
+        return ORKNavigableOrderedTask.holePegTestTaskWithIdentifier(String(Identifier.HolePegTestTask), intendedUseDescription: exampleDescription, dominantHand: .Right, numberOfPegs: 9, threshold: 0.2, rotated: false, timeLimit: 300, options: [])
     }
     
     /// This task presents the PSAT pre-defined active task.
