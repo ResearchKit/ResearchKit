@@ -40,6 +40,8 @@
 		147503BA1AEE807C004B17F3 /* ORKToneAudiometryStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */; };
 		147503BB1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
+		2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 2429D5701BBB5397003A512F /* ORKRegistrationStep.h */; settings = {ASSET_TAGS = (); }; };
+		2429D5731BBB5397003A512F /* ORKRegistrationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429D5711BBB5397003A512F /* ORKRegistrationStep.m */; settings = {ASSET_TAGS = (); }; };
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
 		24898B0D1B7186C000B0E7E7 /* ORKScaleRangeImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 24898B0B1B7186C000B0E7E7 /* ORKScaleRangeImageView.h */; };
 		24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24898B0C1B7186C000B0E7E7 /* ORKScaleRangeImageView.m */; };
@@ -485,6 +487,8 @@
 		147503B41AEE807C004B17F3 /* ORKToneAudiometryStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStep.m; sourceTree = "<group>"; };
 		147503B51AEE807C004B17F3 /* ORKToneAudiometryStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKToneAudiometryStepViewController.h; sourceTree = "<group>"; };
 		147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKToneAudiometryStepViewController.m; sourceTree = "<group>"; };
+		2429D5701BBB5397003A512F /* ORKRegistrationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKRegistrationStep.h; path = Onboarding/ORKRegistrationStep.h; sourceTree = "<group>"; };
+		2429D5711BBB5397003A512F /* ORKRegistrationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKRegistrationStep.m; path = Onboarding/ORKRegistrationStep.m; sourceTree = "<group>"; };
 		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
 		24898B0B1B7186C000B0E7E7 /* ORKScaleRangeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleRangeImageView.h; sourceTree = "<group>"; };
 		24898B0C1B7186C000B0E7E7 /* ORKScaleRangeImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleRangeImageView.m; sourceTree = "<group>"; };
@@ -1015,6 +1019,23 @@
 			name = "Tone Audiometry";
 			sourceTree = "<group>";
 		};
+		2429D56D1BBB52E4003A512F /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				2429D56E1BBB5352003A512F /* Account Creation */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		2429D56E1BBB5352003A512F /* Account Creation */ = {
+			isa = PBXGroup;
+			children = (
+				2429D5701BBB5397003A512F /* ORKRegistrationStep.h */,
+				2429D5711BBB5397003A512F /* ORKRegistrationStep.m */,
+			);
+			name = "Account Creation";
+			sourceTree = "<group>";
+		};
 		259E76FB1AFFAEAC0070F786 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1162,6 +1183,7 @@
 				86C40AF91A8D7C5B00081FAC /* ActiveTasks */,
 				259E76FB1AFFAEAC0070F786 /* Charts */,
 				86C40BEB1A8D7C5C00081FAC /* Consent */,
+				2429D56D1BBB52E4003A512F /* Onboarding */,
 				618DA0471A93D0D600E63AA8 /* Accessibility */,
 				B1A860D91A9693C400EA57B7 /* Animations */,
 				861610BF1A8D8EDD00245F7A /* Artwork.xcassets */,
@@ -2046,6 +2068,7 @@
 				86C40C761A8D7C5C00081FAC /* HKSample+ORKJSONDictionary.h in Headers */,
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
+				2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
 				86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */,
 				86C40D021A8D7C5C00081FAC /* ORKContinueButton.h in Headers */,
@@ -2438,6 +2461,7 @@
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
 				86C40D221A8D7C5C00081FAC /* ORKFormStep.m in Sources */,
 				86C40CD61A8D7C5C00081FAC /* ORKTableContainerView.m in Sources */,
+				2429D5731BBB5397003A512F /* ORKRegistrationStep.m in Sources */,
 				257FCE201B4D14E50001EF06 /* ORKTowerOfHanoiTowerView.m in Sources */,
 				861D11AE1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.m in Sources */,
 				86C40C381A8D7C5C00081FAC /* ORKSpatialSpanGame.m in Sources */,
