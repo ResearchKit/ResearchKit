@@ -388,14 +388,6 @@
                                                                  attribute:NSLayoutAttributeCenterY
                                                                 multiplier:1.0
                                                                   constant:0]];
-                
-                if ([_formatProvider shouldHideValueLabel]) {
-                    [self addConstraints:
-                     [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
-                                                             options:0
-                                                             metrics:nil
-                                                               views:views]];
-                }
             }
             
         } else {
@@ -431,14 +423,17 @@
                                                      options:NSLayoutFormatAlignAllCenterY | NSLayoutFormatDirectionLeftToRight
                                                      metrics:@{@"kMargin": @(kMargin)}
                                                        views:views]];
-            
-            if ([_formatProvider shouldHideValueLabel]) {
-                [self addConstraints:
-                 [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
-                                                         options:0
-                                                         metrics:nil
-                                                           views:views]];
-            }
+        }
+        
+        // Hide the value label if necessary
+        // It can't be hidden when it's a vertical text choise slider
+        if ([formatProvider shouldHideValueLabel] &&
+            !([formatProvider isVertical] && self.slider.textChoices)) {
+            [self addConstraints:
+             [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_valueLabel(==0)]"
+                                                     options:0
+                                                     metrics:nil
+                                                       views:views]];
         }
     }
     return self;
