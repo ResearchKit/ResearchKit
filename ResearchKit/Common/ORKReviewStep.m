@@ -44,7 +44,7 @@
     if (self) {
         _steps = steps;
         _resultSource = resultSource;
-        _reviewDirection = self.isStandalone ? ORKReviewStepReviewDirectionForward : ORKReviewStepReviewDirectionReverse;
+        _reverseListing = self.isStandalone;
     }
     return self;
 }
@@ -61,7 +61,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
-        ORK_DECODE_INTEGER(aDecoder, reviewDirection);
+        ORK_DECODE_BOOL(aDecoder, reverseListing);
     }
     return self;
 }
@@ -69,7 +69,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, steps);
-    ORK_ENCODE_INTEGER(aCoder, reviewDirection);
+    ORK_ENCODE_BOOL(aCoder, reverseListing);
 }
 
 - (BOOL)isEqual:(id)object {
@@ -77,7 +77,7 @@
     return [super isEqual:object] &&
     ORKEqualObjects(self.steps, castObject.steps) &&
     ORKEqualObjects(self.resultSource, castObject.resultSource) &&
-    self.reviewDirection == castObject.reviewDirection;
+    self.reverseListing == castObject.reverseListing;
 }
 
 - (BOOL)isStandalone {

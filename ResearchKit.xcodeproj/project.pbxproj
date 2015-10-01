@@ -1528,6 +1528,7 @@
 				B12EFF361AB2117B00A80147 /* Question Step */,
 				B12EFF3C1AB211FB00A80147 /* Form Step */,
 				D44239761AF17EE700559D96 /* Image Capture Step */,
+				24A4DA091B8D0CC8009C797A /* Passcode Step */,
 				BF690AD61BAD3DC0009C5ADA /* Review Step */,
 			);
 			name = Step;

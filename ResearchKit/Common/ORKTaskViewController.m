@@ -1010,20 +1010,17 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         ORKStep *nextStep = reviewStep;
         do {
-            switch (reviewStep.reviewDirection) {
-                case ORKReviewStepReviewDirectionForward:
-                    nextStep = [self stepAfterStep:nextStep];
-                    break;
-                case ORKReviewStepReviewDirectionReverse:
-                    nextStep = [self stepBeforeStep:nextStep];
-                    break;
+            if (reviewStep.reverseListing) {
+                nextStep = [self stepAfterStep:nextStep];
+            } else {
+                nextStep = [self stepBeforeStep:nextStep];
             }
             if (nextStep && ![nextStep isKindOfClass:[ORKReviewStep class]]) {
                 [steps addObject:nextStep];
             }
         } while (nextStep || [nextStep isKindOfClass:[ORKReviewStep class]]);
     }
-    if (reviewStep.reviewDirection == ORKReviewStepReviewDirectionReverse) {
+    if (!reviewStep.reverseListing) {
         steps = [[NSMutableArray alloc] initWithArray:[[steps reverseObjectEnumerator] allObjects]];
     }
     NSMutableArray *filteredSteps = [[NSMutableArray alloc] init];

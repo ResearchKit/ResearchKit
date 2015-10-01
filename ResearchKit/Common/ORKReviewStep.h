@@ -34,14 +34,7 @@
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSInteger, ORKReviewStepReviewDirection) {
-    
-    ORKReviewStepReviewDirectionForward,
-    
-    ORKReviewStepReviewDirectionReverse
-} ORK_ENUM_AVAILABLE;
-
+ 
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStep : ORKStep
 
@@ -49,15 +42,16 @@ ORK_CLASS_AVAILABLE
                              steps:(nullable NSArray *)steps
                       resultSource:(nullable id<ORKTaskResultSource>)resultSource;
 
-@property (nonatomic) ORKReviewStepReviewDirection reviewDirection;
+@property (nonatomic) BOOL reverseListing;
 
 @property (nonatomic, readonly, nullable) NSArray *steps;
 
 @property (nonatomic, readonly, nullable) id<ORKTaskResultSource> resultSource;
 
+/**
+ A localized string that represents the placeholder text displayed when no steps are available for review.
+ */
 @property (nonatomic, nullable) NSString *placeholder;
-
-@property (nonatomic) ORKReviewStep *reviewStep;
 
 @end
 

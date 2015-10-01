@@ -76,7 +76,8 @@ DefineStringKey(StepNavigationTaskIdentifier);
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
 
-DefineStringKey(ReviewStepTaskIdentifier);
+DefineStringKey(EmbeddedReviewStepTaskIdentifier);
+DefineStringKey(StandaloneReviewStepTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -257,6 +258,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                             @"Question Steps",
                             @"Active Tasks",
                             @"Passcode",
+                            @"Review Step",
                             @"Miscellaneous",
                             ];
     _buttonTitles = @[ @[ // Consent
@@ -294,14 +296,17 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Edit Passcode",
                            @"Remove Passcode",
                            ],
+                       @[ // Review Step
+                           @"Embedded Review Step",
+                           @"Standalone Review Step",
+                           ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
                            @"Dynamic Task",
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
                            @"Test Charts",
-                           @"Toggle Tint Color",
-                           @"Review Step"
+                           @"Toggle Tint Color"
                            ],
                        ];
 }
@@ -481,8 +486,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
-    } else if ([identifier isEqualToString:ReviewStepTaskIdentifier]) {
-        return [self makeReviewStepTask];
+    } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
+        return [self makeCreatePasscodeTask];
+    } else if ([identifier isEqualToString:EmbeddedReviewStepTaskIdentifier]) {
+        return [self makeEmbeddedReviewStep];
+    } else if ([identifier isEqualToString:StandaloneReviewStepTaskIdentifier]) {
+        return [self makeStandaloneReviewStep];
     }
     return nil;
 }
@@ -2834,25 +2843,105 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
-#pragma mark - Review step task
+#pragma mark - Passcode step and view controllers
 
-- (id<ORKTask>)makeReviewStepTask {
+/*
+ Tests various uses of passcode step and view controllers.
+ 
+ Passcode authentication and passcode editing are presented in
+ the examples. Passcode creation would ideally be as part of
+ the consent process.
+ */
+
+- (id<ORKTask>)makeCreatePasscodeTask {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
-    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step1" title:@"Step 1" text:@"Step 1" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step2" title:@"Step 2" text:@"Step 2" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *step3 = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStepTask.step3" steps: nil resultSource:nil];
-    step3.title = @"Review";
-    step3.placeholder = @"No steps available for review";
-    ORKQuestionStep *step4 = [ORKQuestionStep questionStepWithIdentifier:@"reviewStepTask.step4" title:@"Step 4" text:@"Step 4" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    [steps addObject: step1];
-    [steps addObject: step2];
-    [steps addObject: step3];
-    [steps addObject: step4];
-        return [[ORKOrderedTask alloc] initWithIdentifier: ReviewStepTaskIdentifier steps:steps];
+    ORKPasscodeStep *passcodeStep = [[ORKPasscodeStep alloc] initWithIdentifier:@"consent_passcode"];
+    passcodeStep.text = @"This passcode protects your privacy and ensures that the user giving consent is the one completing the tasks.";
+    [steps addObject: passcodeStep];
+    return [[ORKOrderedTask alloc] initWithIdentifier: CreatePasscodeTaskIdentifier steps:steps];
 }
 
-- (IBAction)reviewStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ReviewStepTaskIdentifier];
+- (IBAction)createPasscodeButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:CreatePasscodeTaskIdentifier];
+}
+
+- (IBAction)removePasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
+            [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
+        } else {
+            [self showAlertWithTitle:@"Error" message:@"Passcode could not be removed."];
+        }
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"There is no passcode stored in the keychain."];
+    }
+}
+
+- (IBAction)authenticatePasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController
+                                                     passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
+                                                     delegate:self];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can authenticate it."];
+    }
+}
+
+- (IBAction)editPasscodeButtonTapped:(id)sender {
+    if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
+        ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
+                                                                                                            delegate:self
+                                                                                                        passcodeType:ORKPasscodeType6Digit];
+        [self presentViewController:viewController animated:YES completion:nil];
+    } else {
+        [self showAlertWithTitle:@"Error" message:@"A passcode must be created before you can edit it."];
+    }
+}
+
+#pragma mark - Passcode delegate
+
+- (void)passcodeViewControllerDidFailAuthentication:(UIViewController *)viewController {
+    NSLog(@"Passcode authentication failed.");
+    [self showAlertWithTitle:@"Error" message:@"Passcode authentication failed"];
+}
+
+- (void)passcodeViewControllerDidFinishWithSuccess:(UIViewController *)viewController {
+    NSLog(@"New passcode saved.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)passcodeViewControllerDidCancel:(UIViewController *)viewController {
+    NSLog(@"User tapped the cancel button.");
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Review step
+
+- (id<ORKTask>)makeEmbeddedReviewStep {
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStep"];
+    reviewStep.title = @"reviewStep";
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[step1, step2, reviewStep]];
+    return task;
+}
+
+- (IBAction)embeddedReviewStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EmbeddedReviewStepTaskIdentifier];
+}
+
+- (id<ORKTask>)makeStandaloneReviewStep {
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStep" steps:@[step1, step2] resultSource:nil];
+    reviewStep.title = @"reviewStep";
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[reviewStep]];
+    return task;
+}
+
+- (IBAction)standaloneReviewStepButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:StandaloneReviewStepTaskIdentifier];
 }
 
 #pragma mark - Helpers
