@@ -32,6 +32,7 @@
 #import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
+#import <ResearchKit/ResearchKit_Private.h>
 #import <CoreMotion/CoreMotion.h>
 #import <objc/runtime.h>
 #import <stdio.h>
@@ -279,10 +280,52 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
     
 }
 
+- (NSArray<Class> *)classesWithSecureCoding {
+    
+    NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
+    NSMutableArray *stringsForClassesExcluded = [NSMutableArray array];
+    for (Class c in classesExcluded) {
+        [stringsForClassesExcluded addObject:NSStringFromClass(c)];
+    }
+    
+    // Find all classes that conform to NSSecureCoding
+    NSMutableArray<Class> *classesWithSecureCoding = [NSMutableArray new];
+    int numClasses = objc_getClassList(NULL, 0);
+    Class classes[numClasses];
+    numClasses = objc_getClassList(classes, numClasses);
+    for (int index = 0; index < numClasses; index++) {
+        Class aClass = classes[index];
+        if ([stringsForClassesExcluded containsObject:NSStringFromClass(aClass)]) {
+            continue;
+        }
+        
+        if ([NSStringFromClass(aClass) hasPrefix:@"ORK"] &&
+            [aClass conformsToProtocol:@protocol(NSSecureCoding)]) {
+            [classesWithSecureCoding addObject:aClass];
+        }
+    }
+    
+    return [classesWithSecureCoding copy];
+}
+
 - (void)testORKSerialization {
     
-     // Find all classes that are serializable this way
+    // Find all classes that are serializable this way
     NSArray *classesWithORKSerialization = [ORKESerializer serializableClasses];
+    
+    // All classes that conform to NSSecureCoding should also support ORKESerialization
+    NSArray *classesWithSecureCoding = [self classesWithSecureCoding];
+    
+    NSArray *classesExcludedForORKESerialization = @[
+                                                     [ORKStepNavigationRule class],     // abstract base class
+                                                     ];
+    
+    if ((classesExcludedForORKESerialization.count + classesWithORKSerialization.count) != classesWithSecureCoding.count) {
+        NSMutableArray *unregisteredList = [classesWithSecureCoding mutableCopy];
+        [unregisteredList removeObjectsInArray:classesWithORKSerialization];
+        [unregisteredList removeObjectsInArray:classesExcludedForORKESerialization];
+        XCTAssertEqual(unregisteredList.count, 0, @"Classes didn't implement ORKSerialization %@", unregisteredList);
+    }
     
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
@@ -334,7 +377,8 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
                                               @"ORKScaleAnswerFormat.minimumImage",
                                               @"ORKScaleAnswerFormat.maximumImage",
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
-                                              @"ORKContinuousScaleAnswerFormat.maximumImage"];
+                                              @"ORKContinuousScaleAnswerFormat.maximumImage",
+                                              @"ORKDataResult.data",];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class
@@ -491,29 +535,7 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
 
 - (void)testORKSecureCoding {
     
-    NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
-    NSMutableArray *stringsForClassesExcluded = [NSMutableArray array];
-    for (Class c in classesExcluded) {
-        [stringsForClassesExcluded addObject:NSStringFromClass(c)];
-    }
-    
-    // Find all classes that conform to NSSecureCoding
-    NSMutableArray *classesWithSecureCoding = [NSMutableArray new];
-    int numClasses = objc_getClassList(NULL, 0);
-    Class classes[numClasses];
-    numClasses = objc_getClassList(classes, numClasses);
-    for (int index = 0; index < numClasses; index++) {
-        Class aClass = classes[index];
-        if ([stringsForClassesExcluded containsObject:NSStringFromClass(aClass)]) {
-            continue;
-        }
-        
-        if ([NSStringFromClass(aClass) hasPrefix:@"ORK"] &&
-            [aClass conformsToProtocol:@protocol(NSSecureCoding)]) {
-            
-            [classesWithSecureCoding addObject:aClass];
-        }
-    }
+    NSArray<Class> *classesWithSecureCoding = [self classesWithSecureCoding];
     
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",

@@ -65,6 +65,8 @@
 #import <ResearchKit/ORKHolePegTestPlaceStep.h>
 #import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
+#import <ResearchKit/ORKReactionTimeStep.h>
+#import <ResearchKit/ORKTowerOfHanoiStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
