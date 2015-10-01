@@ -348,9 +348,9 @@ ORK_CLASS_AVAILABLE
 @property (strong, nullable) UIImage *minimumImage;
 
 /**
- A Boolean value indicating whether the value label should be hidden. (read-only)
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
  */
-@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+@property (assign, getter=shouldHideValueLabel) BOOL hideSelectedValue;
 
 @end
 
@@ -483,9 +483,9 @@ ORK_CLASS_AVAILABLE
 @property (strong, nullable) UIImage *minimumImage;
 
 /**
- A Boolean value indicating whether the value label should be hidden. (read-only)
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
  */
-@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+@property (assign, getter=shouldHideValueLabel) BOOL hideSelectedValue;
 
 @end
 
@@ -548,9 +548,9 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
- A Boolean value indicating whether the value label should be hidden. (read-only)
+ A Boolean value indicating whether the selected value should be hidden. (read-only)
  */
-@property (assign, getter=shouldHideValueLabel) BOOL hideValueLabel;
+@property (assign, getter=shouldHideValueLabel) BOOL hideSelectedValue;
 
 @end
 
