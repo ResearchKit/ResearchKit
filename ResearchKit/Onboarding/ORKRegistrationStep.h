@@ -35,31 +35,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKRegistrationStepOption` flags let you exclude particular fields from the default fields
- in the registration step.
+ The `ORKRegistrationStepOption` flags let you include particular fields in addition
+ to the default fields in the registration step.
  */
 
 typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     /// Default behavior.
-    ORKRegistrationStepDefault = 0,
+    ORKRegistrationStepDefault = (1 << 0),
     
-    /// Exclude the first name field.
-    ORKRegistrationStepExcludeFirstName = (1 << 0),
+    /// Include the first name field.
+    ORKRegistrationStepIncludeFirstName = (1 << 1),
     
-    /// Exclude the last name field.
-    ORKRegistrationStepExcludeLastName = (1 << 1),
+    /// Include the last name field.
+    ORKRegistrationStepIncludeLastName = (1 << 2),
     
-    /// Exclude the email field.
-    ORKRegistrationStepExcludeEmail = (1 << 2),
+    /// Include the gender field.
+    ORKRegistrationStepIncludeGender = (1 << 3),
     
-    /// Exclude the password field.
-    ORKRegistrationStepExcludePassword = (1 << 3),
-    
-    /// Exclude the gender field.
-    ORKRegistrationStepExcludeGender = (1 << 4),
-    
-    /// Exclude the date of birth field.
-    ORKRegistrationStepExcludeDOB = (1 << 5)
+    /// Include the date of birth field.
+    ORKRegistrationStepIncludeDOB = (1 << 4)
 } ORK_ENUM_AVAILABLE;
 
 
@@ -67,22 +61,19 @@ typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
  The `ORKRegistrationStep` class represents a form step that provides fields commonly used
  for account registration.
  
- The registration step contains all the fields by default. Optionally, any of the fields
- can be excluded based on context and requirements.
+ The registration step contains email and password fields by default. Optionally, any 
+ of the additional fields can be included based on context and requirements.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKRegistrationStep : ORKFormStep
 
 /**
  Returns an initialized registrationg step using the specified identifier, 
- title, text, message, and options.
- 
- This method is the designated initializer.
+ title, text, and options.
  
  @param identifier    The string that identifies the step (see `ORKStep`).
  @param title         The title of the form (see `ORKStep`).
  @param text          The text shown immediately below the title (see `ORKStep`).
- @param message       The message to be dislayed below the fields.
  @param options       The options used for the step.
  
  @return As initialized registration step object.
@@ -90,14 +81,11 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-                           message:(nullable NSString *)message
-                           options:(ORKRegistrationStepOption)options NS_DESIGNATED_INITIALIZER;
+                           options:(ORKRegistrationStepOption)options;
 
 /**
  Returns an initialized registrationg step using the specified identifier,
  title, and text.
- 
- This method is a convenience initializer.
  
  @param identifier    The string that identifies the step (see `ORKStep`).
  @param title         The title of the form (see `ORKStep`).
@@ -111,9 +99,7 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized registrationg step using the specified identifier.
- 
- This method is a convenience initializer.
- 
+  
  @param identifier    The string that identifies the step (see `ORKStep`).
  
  @return As initialized registration step object.
@@ -121,18 +107,9 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier;
 
 /**
- The message displayed below the fields.
- 
- This text provides information about where the data will be stored
- and how it will be used.
- */
-@property (nonatomic, readonly) NSString *message;
-
-
-/**
  The options used for the step.
  
- These options allow one or more fields to be excluded from the registation step.
+ These options allow one or more fields to be included in the registration step.
  */
 @property (nonatomic, readonly) ORKRegistrationStepOption options;
 

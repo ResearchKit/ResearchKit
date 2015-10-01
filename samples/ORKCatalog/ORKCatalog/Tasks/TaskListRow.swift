@@ -76,6 +76,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ImageCapture
     
     case Consent
+    case AccountCreation
     
     case Audio
     case Fitness
@@ -121,9 +122,10 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
                 ]),
-            TaskListRowSection(title: "Consent", rows:
+            TaskListRowSection(title: "Onboarding", rows:
                 [
                     .Consent,
+                    .AccountCreation,
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
@@ -188,6 +190,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
+            
+        case .AccountCreation:
+            return NSLocalizedString("Account Creation", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -309,6 +314,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ConsentReviewStep
         case ConsentDocumentParticipantSignature
         case ConsentDocumentInvestigatorSignature
+        
+        // Account creation task specific identifiers.
+        case AccountCreationTask
+        case RegistrationStep
 
         // Active tasks.
         case AudioTask
@@ -372,6 +381,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Consent:
             return consentTask
+            
+        case .AccountCreation:
+            return accountCreationTask
             
         case .Audio:
             return audioTask
@@ -791,6 +803,21 @@ enum TaskListRow: Int, CustomStringConvertible {
             reviewConsentStep
             ])
     }
+    
+    /// This task presents the Account Creation process.
+    private var accountCreationTask: ORKTask {
+        /*
+        A registration step provides a form step that is populated with email and password fields.
+        If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
+        */
+        let registrationTitle = NSLocalizedString("Registration", comment: "")
+        let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
+        
+        return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
+            registrationStep
+            ])
+    }
+    
 
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {

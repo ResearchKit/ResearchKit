@@ -92,6 +92,19 @@
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
 
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Additional information";
+"FIRST_NAME_ITEM_PLACEHOLDER" = "John";
+"LAST_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Gender";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
+"DOB_FORM_ITEM_TITLE" = "Date of Birth";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";

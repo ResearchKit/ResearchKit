@@ -31,6 +31,7 @@
 
 #import "ORKRegistrationStep.h"
 #import "ORKHelpers.h"
+#import "ORKDefines_Private.h"
 
 
 @implementation ORKRegistrationStep {
@@ -40,12 +41,12 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-                           message:(NSString *)message
                            options:(ORKRegistrationStepOption)options {
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
-        _message = message;
         _options = options;
+        
+        self.optional = NO;
     }
     return self;
 }
@@ -56,7 +57,6 @@
     return [self initWithIdentifier:identifier
                               title:title
                                text:text
-                            message:nil
                             options:ORKRegistrationStepDefault];
 }
 
@@ -68,39 +68,18 @@
 
 - (NSArray<ORKFormItem *> *)formItems {
     NSMutableArray *formItems = [NSMutableArray new];
-    if (! (_options & ORKRegistrationStepExcludeFirstName)) {
-        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
-        answerFormat.multipleLines = NO;
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"first_name"
-                                                               text:nil
-                                                       answerFormat:answerFormat];
-        item.placeholder = @"First name";
-        item.optional = NO;
-        [formItems addObject:item];
-    }
     
-    if (! (_options & ORKRegistrationStepExcludeLastName)) {
-        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
-        answerFormat.multipleLines = NO;
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"last_name"
-                                                               text:nil
-                                                       answerFormat:answerFormat];
-        item.placeholder = @"Last name";
-        item.optional = NO;
-        [formItems addObject:item];
-    }
-
-    if (! (_options & ORKRegistrationStepExcludeEmail)) {
+    {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"email"
-                                                               text:nil
+                                                               text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = @"Email";
+        item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
     
-    if (! (_options & ORKRegistrationStepExcludePassword)) {
+    {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         answerFormat.secureTextEntry = YES;
@@ -109,40 +88,70 @@
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
-                                                               text:nil
+                                                               text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = @"Password";
+        item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
+        item.optional = NO;
+        [formItems addObject:item];
+    }
+
+    if (!(_options & ORKRegistrationStepDefault)) {
+        ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"ADDITIONAL_INFO_SECTION_TITLE", nil)];
+        [formItems addObject:item];
+    }
+    
+    if (_options & ORKRegistrationStepIncludeFirstName) {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"given_name"
+                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
+                                                       answerFormat:answerFormat];
+        item.placeholder = ORKLocalizedString(@"FIRST_NAME_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
     
-    if (! (_options & ORKRegistrationStepExcludeGender)) {
-        NSArray *textChoices = @[[ORKTextChoice choiceWithText:@"Male" value:@0],
-                                 [ORKTextChoice choiceWithText:@"Female" value:@1]];
+    if (_options & ORKRegistrationStepIncludeLastName) {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"family_name"
+                                                               text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
+                                                       answerFormat:answerFormat];
+        item.placeholder = ORKLocalizedString(@"LAST_NAME_ITEM_PLACEHOLDER", nil);
+        item.optional = NO;
+        [formItems addObject:item];
+    }
+    
+    if (_options & ORKRegistrationStepIncludeGender) {
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@0],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@1],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@2]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"gender"
-                                                               text:nil
+                                                               text:ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = @"Gender";
+        item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
     
-    if (! (_options & ORKRegistrationStepExcludeGender)) {
-        NSArray *textChoices = @[[ORKTextChoice choiceWithText:@"Male" value:@0],
-                                 [ORKTextChoice choiceWithText:@"Female" value:@1]];
-        ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"gender"
-                                                               text:nil
+    if (_options & ORKRegistrationStepIncludeDOB) {
+        // Calculate default date (20 years from now).
+        NSDateComponents *minusTwentyYears = [NSDateComponents new];
+        minusTwentyYears.year = -20;
+        NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingComponents:minusTwentyYears
+                                                                                toDate:[NSDate date]
+                                                                               options:0];
+        
+        ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
+                                                                                 minimumDate:nil
+                                                                                 maximumDate:nil
+                                                                                    calendar:nil];
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"dob"
+                                                               text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = @"Gender";
+        item.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
-        [formItems addObject:item];
-    }
-    
-    if (! (_options & ORKRegistrationStepExcludeDOB)) {
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"dob" text:@"Date of Birth" answerFormat:[ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth]]];
-        item.placeholder = @"DOB";
         [formItems addObject:item];
     }
     
@@ -156,7 +165,6 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, message);
         ORK_DECODE_INTEGER(aDecoder, options);
         ORK_DECODE_OBJ(aDecoder, passcodeValidationRegex);
     }
@@ -165,14 +173,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, message);
     ORK_ENCODE_INTEGER(aCoder, options);
     ORK_ENCODE_OBJ(aCoder, passcodeValidationRegex);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [[[self class] allocWithZone:zone] init];
-    step->_message = self.message;
     step->_options = self.options;
     step->_passcodeValidationRegex = self.passcodeValidationRegex;
     return step;
@@ -183,7 +189,6 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.message, castObject.message) &&
             self.options == castObject.options &&
             ORKEqualObjects(self.passcodeValidationRegex, castObject.passcodeValidationRegex));
 }
