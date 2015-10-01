@@ -251,6 +251,12 @@ NSBundle *ORKBundle() {
     return bundle;
 }
 
+NSBundle *ORKDefaultLocaleBundle() {
+    NSString * path = [ORKBundle() pathForResource:@"en" ofType:@"lproj"];
+    NSBundle * bundle = [NSBundle bundleWithPath:path];
+    return bundle;
+}
+
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
