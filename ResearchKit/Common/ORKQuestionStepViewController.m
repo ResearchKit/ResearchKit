@@ -189,13 +189,13 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _customQuestionView.answer = [self answer];
                 _customQuestionView.userInteractionEnabled = self.canChangeStepResult;
             } else {
-                ORKQuestionStepCellHolderView *holder = [ORKQuestionStepCellHolderView new];
-                holder.delegate = self;
-                holder.cell = [self answerCellForTableView:nil];
-                holder.cell.userInteractionEnabled = self.canChangeStepResult;
-                [holder addConstraints:[holder.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
-                holder.answer = [self answer];
-                
+                ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
+                cellHolderView.delegate = self;
+                cellHolderView.cell = [self answerCellForTableView:nil];
+                [NSLayoutConstraint activateConstraints:
+                 [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
+                cellHolderView.answer = [self answer];
+                cellHolderView.userInteractionEnabled = self.canChangeStepResult;
                 _questionView.questionCustomView = cellHolderView;
             }
             
