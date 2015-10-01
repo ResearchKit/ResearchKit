@@ -712,7 +712,8 @@ ret =
           PROPERTY(step, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
           PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
-          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil)
           })),
   ENTRY(ORKContinuousScaleAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -728,7 +729,8 @@ ret =
                    ^id(id numeric) { return tableMapForward([numeric integerValue], numberFormattingStyleTable()); },
                    ^id(id string) { return @(tableMapReverse(string, numberFormattingStyleTable())); }),
           PROPERTY(maximumValueDescription, NSString, NSObject, NO, nil, nil),
-          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil)
+          PROPERTY(minimumValueDescription, NSString, NSObject, NO, nil, nil),
+          PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil)
           })),
    ENTRY(ORKTextScaleAnswerFormat,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -738,6 +740,7 @@ ret =
             PROPERTY(textChoices, ORKTextChoice, NSArray<ORKTextChoice *>, NO, nil, nil),
             PROPERTY(defaultIndex, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(vertical, NSNumber, NSObject, NO, nil, nil),
+            PROPERTY(hideSelectedValue, NSNumber, NSObject, NO, nil, nil)
             })),
   ENTRY(ORKTextAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
