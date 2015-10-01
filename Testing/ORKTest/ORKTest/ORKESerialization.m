@@ -566,6 +566,14 @@ ret =
           PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
           })),
+  ENTRY(ORKRegistrationStep,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKRegistrationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) options:((NSNumber *)GETPROP(dict, options)).integerValue];
+        },
+        (@{
+           PROPERTY(options, NSNumber, NSObject, NO, nil, nil),
+           PROPERTY(passcodeValidationRegex, NSString, NSObject, YES, nil, nil)
+           })),
   ENTRY(ORKDeviceMotionRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];

@@ -178,7 +178,7 @@
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKRegistrationStep *step = [[[self class] allocWithZone:zone] init];
+    ORKRegistrationStep *step = [super copyWithZone:zone];
     step->_options = self.options;
     step->_passcodeValidationRegex = self.passcodeValidationRegex;
     return step;
