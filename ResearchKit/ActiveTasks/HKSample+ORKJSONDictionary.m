@@ -33,16 +33,16 @@
 #import "ORKHelpers.h"
 
 
-static NSString *const kHKSampleIdentifierKey = @"type"; // For compatibility with Health XML export
-static NSString *const kHKUUIDKey = @"uuid";
-static NSString *const kHKSampleStartDateKey = @"startDate";
-static NSString *const kHKSampleEndDateKey = @"endDate";
-static NSString *const kHKSampleValue = @"value";
-static NSString *const kHKMetadataKey = @"metadata";
-static NSString *const kHKSourceKey = @"source";
-static NSString *const kHKUnitKey = @"unit";
-static NSString *const kHKCorrelatedObjectsKey = @"objects";
-// static NSString *const kHKSourceIdentifierKey = @"sourceBundleIdentifier";
+static NSString *const HKSampleIdentifierKey = @"type"; // For compatibility with Health XML export
+static NSString *const HKUUIDKey = @"uuid";
+static NSString *const HKSampleStartDateKey = @"startDate";
+static NSString *const HKSampleEndDateKey = @"endDate";
+static NSString *const HKSampleValue = @"value";
+static NSString *const HKMetadataKey = @"metadata";
+static NSString *const HKSourceKey = @"source";
+static NSString *const HKUnitKey = @"unit";
+static NSString *const HKCorrelatedObjectsKey = @"objects";
+// static NSString *const HKSourceIdentifierKey = @"sourceBundleIdentifier";
 
 
 @implementation HKSample (ORKJSONDictionary)
@@ -52,31 +52,31 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     
     // Type identification
     HKSampleType *sampleType = [self sampleType];
-    mutableDictionary[kHKSampleIdentifierKey] = [sampleType identifier];
+    mutableDictionary[HKSampleIdentifierKey] = [sampleType identifier];
     
     // consider adding @"class" : NSStringFromClass(sampleType) ?
     
     // Start and end dates
     NSDate *startDate = [self startDate];
     if (startDate) {
-        mutableDictionary[kHKSampleStartDateKey] = ORKStringFromDateISO8601(startDate);
+        mutableDictionary[HKSampleStartDateKey] = ORKStringFromDateISO8601(startDate);
     }
     
     NSDate *endDate = [self endDate];
     if (endDate) {
-        mutableDictionary[kHKSampleEndDateKey] = ORKStringFromDateISO8601(endDate);
+        mutableDictionary[HKSampleEndDateKey] = ORKStringFromDateISO8601(endDate);
     }
     if (unit) {
-        mutableDictionary[kHKUnitKey] = [unit unitString];
+        mutableDictionary[HKUnitKey] = [unit unitString];
     }
     if ((options & ORKSampleIncludeUUID)) {
         NSUUID *uuid = [self UUID];
         if (uuid) {
-            mutableDictionary[kHKUUIDKey] = uuid.UUIDString;
+            mutableDictionary[HKUUIDKey] = uuid.UUIDString;
         }
     }
     
-    if ( (options & ORKSampleIncludeMetadata) && [self.metadata count] > 0) {
+    if ( (options & ORKSampleIncludeMetadata) && self.metadata.count > 0) {
         NSMutableDictionary *metadata = [self.metadata mutableCopy];
         for (NSString *k in metadata) {
             id obj = metadata[k];
@@ -85,13 +85,13 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
             }
         }
         
-        mutableDictionary[kHKMetadataKey] = metadata;
+        mutableDictionary[HKMetadataKey] = metadata;
     }
     
     if (options & ORKSampleIncludeSource) {
         HKSource *source = [self source];
         if (source.name) {
-            mutableDictionary[kHKSourceKey] = source.name;
+            mutableDictionary[HKSourceKey] = source.name;
         }
     }
         
@@ -115,8 +115,8 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
 - (NSDictionary *)ork_JSONDictionaryWithOptions:(ORKSampleJSONOptions)options unit:(HKUnit *)unit {
     NSMutableDictionary *dictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:unit];
     
-    NSInteger value = [self value];
-    dictionary[kHKSampleValue] = @(value);
+    NSInteger value = self.value;
+    dictionary[HKSampleValue] = @(value);
     
     return dictionary;
 }
@@ -136,7 +136,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     
     HKQuantity *quantity = [self quantity];
     double value = [quantity doubleValueForUnit:unit];
-    dictionary[kHKSampleValue] = @(value);
+    dictionary[HKSampleValue] = @(value);
     
     
     return dictionary;
@@ -151,7 +151,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
     NSMutableDictionary *mutableDictionary = [self ork_JSONMutableDictionaryWithOptions:options unit:nil];
     
     // The correlated objects
-    NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:[sampleTypes count]];
+    NSMutableArray *correlatedObjects = [NSMutableArray arrayWithCapacity:sampleTypes.count];
     for (HKSample *sample in self.objects) {
         NSUInteger idx = [sampleTypes indexOfObject:sample.sampleType];
         if (idx == NSNotFound) {
@@ -160,7 +160,7 @@ static NSString *const kHKCorrelatedObjectsKey = @"objects";
         
         [correlatedObjects addObject:[sample ork_JSONDictionaryWithOptions:options unit:units[idx]]];
     }
-    mutableDictionary[kHKCorrelatedObjectsKey] = correlatedObjects;
+    mutableDictionary[HKCorrelatedObjectsKey] = correlatedObjects;
     
     return mutableDictionary;
 }

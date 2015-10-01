@@ -78,7 +78,7 @@
     
     NSNumber *indexNumber = [_helper selectedIndexForAnswer:answer];
     if (indexNumber) {
-        [_pickerView selectRow:[indexNumber unsignedIntegerValue] inComponent:0 animated:NO];
+        [_pickerView selectRow:indexNumber.unsignedIntegerValue inComponent:0 animated:NO];
     } else {
         [_pickerView selectRow:0 inComponent:0 animated:NO];
     }
@@ -94,7 +94,7 @@
     }
    
     NSNumber *indexNumber = [_helper selectedIndexForAnswer:_answer];
-    NSInteger row = [indexNumber integerValue];
+    NSInteger row = indexNumber.integerValue;
     
     if (row == 0) {
         return nil;
