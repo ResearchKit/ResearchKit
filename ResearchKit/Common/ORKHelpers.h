@@ -155,6 +155,7 @@
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle();
+NSBundle *ORKDefaultLocaleBundle();
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
