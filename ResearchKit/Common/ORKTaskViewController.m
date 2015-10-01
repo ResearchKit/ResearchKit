@@ -912,7 +912,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     NSString *progressLabel = nil;
     if ([self shouldDisplayProgressLabel]) {
-        if (viewController.parentReviewStep) {
+        if (viewController.parentReviewStep && viewController.parentReviewStep.isStandalone) {
             progressLabel = viewController.parentReviewStep.title;
         } else {
             ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
@@ -953,8 +953,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         [strongSelf collectToolbarItemsFromViewController:viewController];
     }];
 }
-
-//TODO: update custom progress label
 
 - (BOOL)shouldPresentStep:(ORKStep *)step {
     BOOL shouldPresent = (step != nil);
@@ -1269,8 +1267,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
         [strongDelegate taskViewController:self didChangeResult: [self result]];
     }
-    
-    //TODO: update custom progress label
 }
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
