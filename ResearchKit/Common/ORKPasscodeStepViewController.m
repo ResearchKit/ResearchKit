@@ -302,6 +302,7 @@
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction * action) {
+                                                                typeof(self) strongSelf = weakSelf;
                                                                 [strongSelf makePasscodeViewBecomeFirstResponder];
                                                             }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
