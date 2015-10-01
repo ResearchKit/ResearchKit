@@ -45,7 +45,6 @@
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _options = options;
-        
         self.optional = NO;
     }
     return self;
