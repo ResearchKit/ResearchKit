@@ -38,27 +38,48 @@ Accelerometer (optional)
   <td>Touch activity<br/>
   </td> 
 </tr>
-<tr><td>Fitness</td>
+<tr><td rowspan = 2>Fitness</td>
  <td>Fitness</td>
  <td>Accelerometer</td>
-<td>Device motion<br>
-   <br>Pedometer<br>
-    <br>Location<br>
-   <br>Heart rate<br>
+<td>Device motion<br>Pedometer<br>Location<br>Heart rate
    </td> 
 </tr>
-<tr><td>Cognition</td>
+<tr><td>Timed walk</td>
+ <td>Accelerometer</td>
+<td>Device motion<br>Pedometer<br>Location
+   </td> 
+</tr>
+<tr><td rowspan = 3>Cognition</td>
 <td>Spatial memory</td>
-<td>Multi-Touch display</td>
+<td>Multi-Touch display <br>
+Accelerometer (optional)</td>
 <td>
-Touch activity<br>
-Correct and actual sequences<br>
+Touch activity<br>Correct answer<br> Actual sequences
 </td>
+</tr>
+<tr><td>Paced auditory and visual serial addition test (PAVSAT)</td> 
+<td>Multi-Touch display
+</td> 
+  <td>Correct answers
+  </td> 
+</tr>
+<tr><td>Tower of hanoi</td> 
+<td>Multi-Touch display
+</td> 
+  <td>Correct answers<br>
+  Number of moves
+  </td> 
 </tr>
 <tr><td>Voice</td>
 <td>Sustained phonation</td>
     <td>Microphone</td>
     <td>Uncompressed audio</td>
+</tr>
+<tr><td>Audio</td>
+ <td>Tone audiometry</td>
+ <td>Microphone</td>
+<td>Audio signal<br>
+   </td> 
 </tr>
 </tbody>
 </table>
@@ -100,7 +121,7 @@ All of the data is collected from public CoreMotion and HealthKit APIs on iOS,
 and serialized to JSON. No analysis is applied to the data by
 the ResearchKit framework.
 
-#### Voice
+#### Audio 
 
 In the [audio task]([ORKOrderedTask audioTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:duration:recordingSettings:options:]), the user makes a sustained sound, and an audio
 recording is made. Analysis of the audio data is not included in the
@@ -126,6 +147,8 @@ use this semi-controlled task to collect objective measurements which
 can be used to estimate stride length, smoothness, sway, and other
 aspects of the participant's walking.
 
+The screenshots below show an example of a gait and balance task.
+
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Instruction step introducing the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep2.png" style="width: 100%;border: solid black 1px;">Instruction step giving motivation and instruction for the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep3.png" style="width: 100%;border: solid black 1px;">Count down a specified duration into the task.</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep4.png" style="width: 100%;border: solid black 1px; ">Asking user to walk.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep5.png" style="width: 100%;border: solid black 1px;">Asking user to walk.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ShortWalkTaskImages/ShortWalkTaskStep6.png" style="width: 100%;border: solid black 1px;">Asking user to rest.</p>
@@ -140,8 +163,9 @@ targets on the touch screen. The resulting touch data can be used to
 assess basic motor capabilities such as speed, accuracy, and rhythm.
 
 Touch data, and optionally accelerometer data from CoreMotion on iOS, are
-collected using public APIs. No analysis is performed by the ResearchKit framework
-on the data.
+collected using public APIs. No analysis is performed by the ResearchKit framework on the data.
+
+The screenshots below show an example of a tapping speed task.
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Motivation for the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep2.png" style="width: 100%;border: solid black 1px;">Providing instruction for the task.</p><p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep3.png" style="width: 100%;border: solid black 1px; ">The user rapidly taps on the targets.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TwoFingerTappingTaskImages/TwoFingerTappingTaskStep4.png" style="width: 100%;border: solid black 1px;">Task completion.</p>
@@ -166,11 +190,91 @@ row.
 The results collected are scores derived from the game, the details of
 the game, and the touch inputs made by the user.
 
+The screenshots below show an example of a spatial memory task.
+
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3.png" alt="Initial sequence playback screen" style="width: 100%;border: solid black 1px;">The flowers light up in sequence.</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_1.png" alt="Recall sequence screen" style="width: 100%;border: solid black 1px; ">The user must recall the sequence.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_2.png" alt="Consecutive failure screen" style="width: 100%;border: solid black 1px;">If users make a mistake, they will be offered a new pattern.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep3_3.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px;">The user is offered a shorter sequence.</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SpatialSpanMemoryTaskImages/SpatialMemoryTestStep4.png" alt="Task Completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="clear: both;">
+
+#### Paced  Serial Addition Test (PSAT)
+
+In the [paced serial addition task]([ORKOrderedTask PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:]),
+single digits are presented every 2 or 3 seconds and the user must add each new digit to the one immediately prior to it.  A PSAT task can be used to measure the cognitive function that assesses auditory and/or visual information processing speed and flexibility, as well as calculation ability of the user.
+ 
+The score for the PSAT task is the total number correct  answers out of 60 possible answers. Data collected by the task is in the form of an `ORKPSATResult` object. 
+
+The screenshots below show an example of a paced auditory and visual serial addition test task.
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep3.png" alt="Countdown screen" style="width: 100%;border: solid black 1px;">Count down a specified duration into the task.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep4.png" alt="The user must add each new digit on the screen to the one immediately prior to it." style="width: 100%;border: solid black 1px; ">Actual task screen.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep5.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="clear: both;">
+
+
+#### Reaction Time 
+
+In the [reaction time task ]([ORKOrderedTask reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:]),
+the user is asked to shake the device in response to a visual clue on the device's screen. The task finishes when the user successfully completes all the independent attempts as instructed in the task.
+To complete an attempt in a task, the user must shake/move the device with greater acceleration as set in the property `thresholdAcceleration` within the given time. To present this task, use `ORKTaskViewController` object. 
+
+Data collected by this task is in the form of `ORKReactionTimeResult` objects. These objects contain a timestamp representing the delivery of the stimulus and an `ORKFileResult` object which references the motion data collected during an attempt. This task evaluates user's response to the stimulus and calculate their reaction time. 
+ 
+The screenshots below show an example of a reaction time task.
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep3.png" alt="Actual task screen." style="width: 100%;border: solid black 1px; ">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep4.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="clear: both;">
+
+#### Tone Audiometry 
+
+In the [tone audiometry task ]([ORKOrderedTask toneAudiometryTaskWithIdentifier:intendedUseDescription:speechInstruction:shortSpeechInstruction:toneDuration:options:]),
+the user is asked to listen to some tones with different audio
+frequencies, playing on different channels (left and right), with the volume being progressively increased until the participant taps a button.
+A tone audiometry task can be used to measure properties of the user's hearing, based on their reaction to a wide range of frequencies.
+
+Data collected in this task consists of audio signal amplitude for specific frequencies and channels. 
+ 
+The screenshots below show an example of a tone audiometry task.
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep1.png" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep2.png" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep3.png" style="width: 100%;border: solid black 1px;">Preparing user for the task.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep4.png" style="width: 100%;border: solid black 1px; ">Count down a specified duration to begin the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep5.png" style="width: 100%;border: solid black 1px;">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="ToneAudiometryTaskImages/ToneAudiometryTaskStep6.png" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="clear: both;">
+
+#### Tower Of Hanoi 
+
+In the [tower of hanoi task ]([ORKOrderedTask towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:]), the user is asked to solve the classic tower of hanoi puzzle in as few moves as possible. You can use this task to assess the user's problem solving skills. A tower of hanoi task finishes when the user completes the puzzle correctly or concedes that they cannot solve the puzzle.
+ 
+Data collected by this task is in the form of an `ORKTowerOfHanoiResult` object. It contains number of moves taken by the user and whether the puzzle was successfully completed or not.
+ 
+The screenshots below show an example of a tower of hanoi task.
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep3.png" alt="Actual task screen." style="width: 100%;border: solid black 1px; ">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TOHTaskImages/TOHStep4.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="clear: both;">
+
+#### Timed Walk 
+
+In the [timed walk task ]([ORKOrderedTask timedWalkTaskWithIdentifier:intendedUseDescription:distanceInMeters:timeLimit:options:]), the user is asked to walk for a specific distance as quickly as
+possible with safety. The task is immediately administered again by having the user walk back the same distance in the opposite direction.
+A timed walk task can be used to measure lower extremity function.
+The presentation of the timed walk task differs from both the fitness and the short walk task in that the distance walked by the user is fixed.
+ 
+The data collected by this task includes accelerometer, device motion, pedometer data and location of the user. The location is available only if the user agrees to share their location.
+ 
+Data collected by the task is in the form of an `ORKTimedWalkResult` object. 
+The screenshots below show an example of a timed walk task.
+
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep1_notification.png" alt="Notification to access user's location" style="width: 100%;border: solid black 1px;">Ask permission to access user's location.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep2.png" alt="Gather information about the user's assistive device." style="width: 100%;border: solid black 1px;">Gather information about the user's assistive device.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep3.png" alt="Instruction to perform the task" style="width: 100%;border: solid black 1px; ">Instruction to perform the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep4.png" alt="Count down a specified duration to begin the task." style="width: 100%;border: solid black 1px;">Count down a specified duration to begin the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep5.png" alt="Actual task screen" style="width: 100%;border: solid black 1px;">Actual task screen.</p>
+<p style="clear: both;">
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep6.png" alt="Actual task screen" style="width: 100%;border: solid black 1px;">Actual task screen.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="TimedWalkTaskImages/TimedWalkStep7.png" alt="Task Completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
 <p style="clear: both;">
 
 ### Getting the Data
