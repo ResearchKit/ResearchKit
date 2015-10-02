@@ -6,7 +6,8 @@
  Copyright (c) 2015, John Reites, Quintiles Inc.
  Copyright (c) 2015, Richard Thomas, Quintiles Inc.
  Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
- 
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  

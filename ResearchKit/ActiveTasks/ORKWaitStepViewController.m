@@ -6,6 +6,7 @@
  Copyright (c) 2015, John Reites, Quintiles Inc.
  Copyright (c) 2015, Richard Thomas, Quintiles Inc.
  Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -47,6 +48,7 @@
 #import "ORKHelpers.h"
 #import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
+#import "ORKProgressView.h"
 
 
 @interface ORKWaitView: ORKActiveStepCustomView
@@ -55,7 +57,7 @@
 
 @property (nonatomic, strong) ORKSubheadlineLabel *textLabel;
 @property (nonatomic, strong) UIProgressView *progressView;
-@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) ORKProgressView *activityIndicatorView;
 @property (nonatomic, assign) ORKProgressIndicatorMask indictatorMask;
 
 @end
@@ -83,10 +85,9 @@
                 [self addSubview:_progressView];
                 break;
             case ORKProgressIndicatorMaskIndeterminate:
-                _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                _activityIndicatorView = [[ORKProgressView alloc] init];
                 _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
                 [self addSubview:_activityIndicatorView];
-                [_activityIndicatorView startAnimating];
                 break;
             case ORKProgressIndicatorMaskNone:
             default:
