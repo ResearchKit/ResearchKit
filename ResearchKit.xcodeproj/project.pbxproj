@@ -42,9 +42,9 @@
 		147503BC1AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147503B61AEE807C004B17F3 /* ORKToneAudiometryStepViewController.m */; };
 		2429D5721BBB5397003A512F /* ORKRegistrationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 2429D5701BBB5397003A512F /* ORKRegistrationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2429D5731BBB5397003A512F /* ORKRegistrationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 2429D5711BBB5397003A512F /* ORKRegistrationStep.m */; settings = {ASSET_TAGS = (); }; };
-		242C9E051BBDFDAC0088B7F4 /* ORKVerificationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 242C9E031BBDFDAC0088B7F4 /* ORKVerificationStep.h */; settings = {ASSET_TAGS = (); }; };
+		242C9E051BBDFDAC0088B7F4 /* ORKVerificationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 242C9E031BBDFDAC0088B7F4 /* ORKVerificationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242C9E061BBDFDAC0088B7F4 /* ORKVerificationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 242C9E041BBDFDAC0088B7F4 /* ORKVerificationStep.m */; settings = {ASSET_TAGS = (); }; };
-		242C9E0D1BBE03F90088B7F4 /* ORKVerificationStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 242C9E0B1BBE03F90088B7F4 /* ORKVerificationStepViewController.h */; settings = {ASSET_TAGS = (); }; };
+		242C9E0D1BBE03F90088B7F4 /* ORKVerificationStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 242C9E0B1BBE03F90088B7F4 /* ORKVerificationStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242C9E0E1BBE03F90088B7F4 /* ORKVerificationStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242C9E0C1BBE03F90088B7F4 /* ORKVerificationStepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		242C9E111BBE06DE0088B7F4 /* ORKVerificationStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = 242C9E0F1BBE06DE0088B7F4 /* ORKVerificationStepView.h */; settings = {ASSET_TAGS = (); }; };
 		242C9E121BBE06DE0088B7F4 /* ORKVerificationStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 242C9E101BBE06DE0088B7F4 /* ORKVerificationStepView.m */; settings = {ASSET_TAGS = (); }; };

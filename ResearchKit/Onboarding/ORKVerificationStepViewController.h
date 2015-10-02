@@ -29,7 +29,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit.h>
+#import "ORKStepViewController.h"
 
 
 @interface ORKVerificationStepViewController : ORKStepViewController

@@ -32,25 +32,28 @@
 #import "ORKVerificationStepView.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
+#import "ORKNavigationContainerView_Internal.h"
 
 
 @implementation ORKVerificationStepView {
-    ORKSubheadlineLabel *_emailLabel;
+    ORKLabel *_emailLabel;
     UIButton *_changeEmailButton;
     UIButton *_resendEmailButton;
 }
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        _emailLabel = [ORKSubheadlineLabel new];
-        [self.stepView addSubview:_emailLabel];
+        
+        _emailLabel = [ORKLabel new];
+        [_emailLabel setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
+        [self addSubview:_emailLabel];
         
         _changeEmailButton = [UIButton new];
         NSString *changeEmailTitle = ORKLocalizedString(@"CHANGE_EMAIL_BUTTON_TITLE", nil);
         [_changeEmailButton setTitle:changeEmailTitle forState:UIControlStateNormal];
         [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self.stepView addSubview:_changeEmailButton];
+        [self addSubview:_changeEmailButton];
         
         _resendEmailButton = [UIButton new];
         NSString *resendEmailTitle = ORKLocalizedString(@"RESEND_EMAIL_BUTTON_TITLE", nil);
@@ -65,20 +68,50 @@
 }
 
 - (void)setUpConstraints {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_emailLabel, _changeEmailButton, _resendEmailButton);
-    ORKEnableAutoLayoutForViews(views.allValues);
+    ORKEnableAutoLayoutForViews(@[_emailLabel, _changeEmailButton, _resendEmailButton]);
     
     NSMutableArray *constraints = [NSMutableArray new];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_emailLabel]-[_changeEmailButton]-|"
-                                                                             options:(NSLayoutFormatOptions)0
-                                                                             metrics:nil
-                                                                               views:views]];
     [constraints addObjectsFromArray:@[
+                                       [NSLayoutConstraint constraintWithItem:_emailLabel
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_emailLabel
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.headerView.instructionLabel
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_changeEmailButton
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_changeEmailButton
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:_emailLabel
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_resendEmailButton
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
                                        [NSLayoutConstraint constraintWithItem:_resendEmailButton
                                                                     attribute:NSLayoutAttributeBottom
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeBottom
+                                                                       toItem:self.continueSkipContainer
+                                                                    attribute:NSLayoutAttributeTop
                                                                    multiplier:1.0
                                                                      constant:0.0]
                                        ]];

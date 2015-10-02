@@ -45,39 +45,43 @@
     [super stepDidChange];
     
     if (self.step && [self isViewLoaded]) {
-        ORKVerificationStepView *verificationStepView = [ORKVerificationStepView new];
-        verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        ORKVerificationStepView *verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
+        verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
         verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
         verificationStepView.emailLabel.text = [self verificationStep].email;
+        [self.view addSubview:verificationStepView];
 
         [verificationStepView.resendEmailButton addTarget:self
-                                                   action:@selector(resendEmailButton)
+                                                   action:@selector(resendEmailButtonTapped:)
                                          forControlEvents:UIControlEventTouchUpInside];
         
         [verificationStepView.changeEmailButton addTarget:self
-                                                   action:@selector(changeEmailButton)
+                                                   action:@selector(changeEmailButtonTapped:)
                                          forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self stepDidChange];
+}
+
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
-    
     [self.internalContinueButtonItem setAction:@selector(continueButtonTapped:)];
     [self.internalDoneButtonItem setAction:@selector(continueButtonTapped:)];
 }
 
 - (void)continueButtonTapped:(id)sender {
-    
 }
 
 - (void)resendEmailButtonTapped:(id)sender {
-    
+    NSLog(@"Resend email button tapped.");
 }
 
 - (void)changeEmailButtonTapped:(id)sender {
-    
+    NSLog(@"Change email button tapped.");
 }
 
 @end

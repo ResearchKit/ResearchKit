@@ -58,6 +58,8 @@
 #import <ResearchKit/ORKConsentSharingStep.h>
 
 #import <ResearchKit/ORKRegistrationStep.h>
+#import <ResearchKit/ORKVerificationStep.h>
+#import <ResearchKit/ORKVerificationStepViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 #import <ResearchKit/ORKActiveStep.h>

@@ -318,6 +318,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Account creation task specific identifiers.
         case AccountCreationTask
         case RegistrationStep
+        case VerificationStep
 
         // Active tasks.
         case AudioTask
@@ -813,8 +814,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationTitle = NSLocalizedString("Registration", comment: "")
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
         
+        let verificationTitle = NSLocalizedString("Email Verification", comment: "")
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewController: ORKVerificationStepViewController())
+        
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
-            registrationStep
+            registrationStep,
+            verificationStep
             ])
     }
     
@@ -1017,6 +1022,10 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     private var exampleDetailText: String {
         return NSLocalizedString("Additional text can go here.", comment: "")
+    }
+    
+    private var exampleEmailText: String {
+        return NSLocalizedString("jappleseed@example.com", comment: "")
     }
     
     private var loremIpsumText: String {

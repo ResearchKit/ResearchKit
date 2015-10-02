@@ -63,7 +63,7 @@
     return self;
 }
 
-- (BOOL)showsProgress {
+- (BOOL)allowsBackNavigation {
     return NO;
 }
 
