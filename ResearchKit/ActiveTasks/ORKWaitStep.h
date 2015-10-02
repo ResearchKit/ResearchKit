@@ -53,6 +53,12 @@
 ORK_CLASS_AVAILABLE
 @interface ORKWaitStep : ORKActiveStep
 
+/**
+ This property specifies the type of progress bar that will be displayed.
+ 
+ ORKProgressIndicatorMaskIndeterminate (default) is for indeterminate duration operations
+ ORKProgressIndicatorMaskProgressBar is for determinate duration operations
+ */
 @property (nonatomic, assign) ORKProgressIndicatorMask indicatorMask;
 
 @end

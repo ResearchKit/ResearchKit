@@ -89,7 +89,6 @@
                 _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
                 [self addSubview:_activityIndicatorView];
                 break;
-            case ORKProgressIndicatorMaskNone:
             default:
                 break;
         }

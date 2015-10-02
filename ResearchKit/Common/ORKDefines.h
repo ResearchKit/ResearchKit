@@ -120,10 +120,8 @@ typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
  Progress Indicator Mask
  */
 typedef NS_OPTIONS(NSInteger, ORKProgressIndicatorMask) {
-    /// No animation.
-    ORKProgressIndicatorMaskNone = 0,
     /// Spinner animation.
-    ORKProgressIndicatorMaskIndeterminate,
+    ORKProgressIndicatorMaskIndeterminate = 0,
     /// Progressbar animation.
     ORKProgressIndicatorMaskProgressBar,
 } ORK_ENUM_AVAILABLE;
