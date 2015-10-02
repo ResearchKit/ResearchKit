@@ -778,6 +778,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = UIKeyboardType.URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
+        answerFormatDomain.autocorrectionType = UITextAutocorrectionType.No
+        answerFormatDomain.spellCheckingType = UITextSpellCheckingType.No
         let stepDomain = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepDomain), title: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
         stepDomain.text = exampleDetailText
         

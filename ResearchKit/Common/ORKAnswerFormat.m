@@ -1901,7 +1901,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
             isValid = (regExMatches != 0);
         } else if (text.length > 0) {
-	        isValid = ([self isTextLengthValidWithString:text] && [self isEmailAddressValidWithString:text]);
+	        isValid = [self isTextLengthValidWithString:text];
     	} else {
             isValid = YES;
         }
@@ -1915,22 +1915,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (_maximumLength == 0 || text.length <= _maximumLength);
 }
 
-- (BOOL)isEmailAddressValidWithString:(NSString *)text {
-    if (self.isEmailAddress) {
-        NSPredicate *emailValidationTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", EmailValidationRegex];
-        return [emailValidationTest evaluateWithObject:text];
-    }
-    
-    return YES;
-}
-
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
     NSString *string = nil;
     if (![self isTextLengthValidWithString:text]) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
-    } else if (![self isEmailAddressValidWithString:text]) {
-        string = [NSString stringWithFormat:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil), text];
     }
+
     return string;
 }
 
@@ -1998,7 +1988,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_impliedAnswerFormat) {
-        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithMaximumLength:0];
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationExpression:EmailValidationRegex validInputDescription:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;

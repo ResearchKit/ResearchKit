@@ -1540,6 +1540,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         format.multipleLines = NO;
         format.keyboardType = UIKeyboardTypeURL;
         format.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        format.autocorrectionType = UITextAutocorrectionTypeNo;
+        format.spellCheckingType = UITextSpellCheckingTypeNo;
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
                                                                       title:@"What is your website?"
                                                                      answer:format];
