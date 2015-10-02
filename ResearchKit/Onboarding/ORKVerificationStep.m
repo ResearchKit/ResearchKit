@@ -38,6 +38,10 @@
     ORKVerificationStepViewController *_verificationViewController;
 }
 
++ (Class)stepViewControllerClass {
+    return [ORKVerificationStepViewController class];
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     ORKThrowMethodUnavailableException();
     return nil;
