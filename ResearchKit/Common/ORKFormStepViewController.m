@@ -197,6 +197,79 @@
 
 @end
 
+@interface ORKFormSectionHeaderView : UIView
+
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView;
+
+@property (nonatomic, strong) NSLayoutConstraint *leftMarginConstraint;
+
+@property (nonatomic, weak) UITableView *tableView;
+
+@end
+
+@implementation ORKFormSectionHeaderView {
+    ORKFormSectionTitleLabel *_label;
+}
+
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView {
+    self = [super init];
+    if (self) {
+        _tableView = tableView;
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        _label = [ORKFormSectionTitleLabel new];
+        _label.text = title;
+        _label.numberOfLines = 0;
+        _label.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_label];
+        
+        [self setUpConstraints];
+    }
+    return self;
+}
+
+- (void)setUpConstraints {
+    
+    const CGFloat LabelFirstBaselineToTop = 20.0;
+    const CGFloat LabelLastBaselineToBottom = -10.0;
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:LabelFirstBaselineToTop]];
+    
+    self.leftMarginConstraint = [NSLayoutConstraint constraintWithItem:_label
+                                                             attribute:NSLayoutAttributeLeft
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self
+                                                             attribute:NSLayoutAttributeLeft
+                                                            multiplier:1.0
+                                                              constant:0.0];
+    
+    [constraints addObject:self.leftMarginConstraint];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeLastBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1.0
+                                                         constant:LabelLastBaselineToBottom]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+    self.leftMarginConstraint.constant = _tableView.layoutMargins.left;
+}
+
+@end
 
 @interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate, ORKTableContainerViewDelegate>
 
@@ -217,13 +290,9 @@
 @implementation ORKFormStepViewController {
     ORKAnswerDefaultSource *_defaultSource;
     ORKNavigationContainerView *_continueSkipView;
-    
     NSMutableSet *_formItemCells;
-    
-    NSMutableArray *_sections;
-
+    NSMutableArray<ORKTableSection *> *_sections;
     BOOL _skipped;
-    
     ORKFormItemCell *_currentFirstResponderCell;
 }
 
@@ -303,7 +372,7 @@
             continue;
         }
         
-        ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
+        ORKTableSection *section = _sections[indexPath.section];
         ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
@@ -736,6 +805,11 @@
                         break;
                     }
                         
+                    case ORKQuestionTypeEligibility: {
+                        class = [ORKFormItemEligibilityCell class];
+                        break;
+                    }
+                        
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
                         break;
@@ -829,60 +903,32 @@
             return 40.0;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row - 1]);
+        ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row - 1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSString *title = [(ORKTableSection *)_sections[section] title];
+    NSString *title = _sections[section].title;
     return (title.length > 0)? UITableViewAutomaticDimension : 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSString *title = [(ORKTableSection *)_sections[section] title];
+    NSString *title = _sections[section].title;
     
-    UIView *view = [UIView new];
+    ORKFormSectionHeaderView *view = (ORKFormSectionHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
     
     if (title.length > 0) {
-        ORKFormSectionTitleLabel *label = [ORKFormSectionTitleLabel new];
-        label.text = title;
-        label.numberOfLines = 0;
-        label.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [view addSubview:label];
-        
-        {
-            NSMutableArray *constraints = [NSMutableArray new];
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:view
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:label
-                                                                attribute:NSLayoutAttributeFirstBaseline
-                                                               multiplier:1.0
-                                                                 constant:-20.0]];
-            
-            [constraints addObjectsFromArray:
-             [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
-                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)}
-                                                       views:@{@"label": label}]];
-            
-            [constraints addObject:[NSLayoutConstraint constraintWithItem:label
-                                                                attribute:NSLayoutAttributeLastBaseline
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:view
-                                                                attribute:NSLayoutAttributeBottom
-                                                               multiplier:1.0
-                                                                 constant:-10.0]];
-            
-            [NSLayoutConstraint activateConstraints:constraints];
+        if (view == nil) {
+            view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView];
         }
+        
     } else {
         view = nil;
     }
-    view.backgroundColor = [UIColor whiteColor];
+   
     
     return view;
 }
