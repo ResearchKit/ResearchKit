@@ -6,6 +6,7 @@
  Copyright (c) 2015, John Reites, Quintiles Inc.
  Copyright (c) 2015, Richard Thomas, Quintiles Inc.
  Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -163,10 +164,11 @@
         _mapViewHeightConstraint.constant = 228.0;
         __weak __typeof__(self) weakSelf = self;
         [UIView animateWithDuration:0.3 animations:^{
-            [weakSelf layoutIfNeeded];
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            [strongSelf layoutIfNeeded];
             
-            if ([weakSelf.delegate respondsToSelector:@selector(selectionViewNeedsResize:)]) {
-                [weakSelf.delegate selectionViewNeedsResize:self];
+            if ([strongSelf.delegate respondsToSelector:@selector(locationSelectionViewNeedsResize:)]) {
+                [strongSelf.delegate locationSelectionViewNeedsResize:self];
             }
         }];
     }
@@ -189,16 +191,18 @@
         _mapViewHeightConstraint.constant = 0.0;
         __weak __typeof__(self) weakSelf = self;
         [UIView animateWithDuration:0.3 animations:^{
-            [weakSelf layoutIfNeeded];
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            [strongSelf layoutIfNeeded];
         } completion:^(BOOL finished) {
-            [weakSelf.mapView removeFromSuperview];
-            weakSelf.mapView = nil;
-            weakSelf.mapViewHeightConstraint = nil;
-            weakSelf.textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:weakSelf.textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:weakSelf attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-            [weakSelf addConstraint:weakSelf.textFieldBottomConstraint];
-            [weakSelf layoutIfNeeded];
-            if ([weakSelf.delegate respondsToSelector:@selector(selectionViewNeedsResize:)]) {
-                [weakSelf.delegate selectionViewNeedsResize:self];
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            [strongSelf.mapView removeFromSuperview];
+            strongSelf.mapView = nil;
+            strongSelf.mapViewHeightConstraint = nil;
+            strongSelf.textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:strongSelf.textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:strongSelf attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+            [strongSelf addConstraint:strongSelf.textFieldBottomConstraint];
+            [strongSelf layoutIfNeeded];
+            if ([strongSelf.delegate respondsToSelector:@selector(locationSelectionViewNeedsResize:)]) {
+                [strongSelf.delegate locationSelectionViewNeedsResize:self];
             }
         }];
     }
@@ -226,15 +230,17 @@
     }
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    __weak __typeof__(self) weakSelf = self;
     [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            if ([_delegate respondsToSelector:@selector(selectionViewError:)]) {
-                [_delegate selectionViewError:error];
+            if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
+                [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [self addAnnotationForLocation:nil];
+            [strongSelf addAnnotationForLocation:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [self addAnnotationForLocation:placemark.location];
+            [strongSelf addAnnotationForLocation:placemark.location];
         }
     }];
 }
@@ -247,17 +253,19 @@
     }
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    __weak __typeof__(self) weakSelf = self;
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            if ([_delegate respondsToSelector:@selector(selectionViewError:)]) {
-                [_delegate selectionViewError:error];
+            if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
+                [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [self addAnnotationForLocation:nil];
+            [strongSelf addAnnotationForLocation:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
             _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
             [_currentLocationButton setImage:[UIImage imageNamed:@"locationOn" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-            [self addAnnotationForLocation:placemark.location];
+            [strongSelf addAnnotationForLocation:placemark.location];
         }
     }];
 }
@@ -282,14 +290,14 @@
         _answerRegion = region;
         [_mapView setRegion:region animated:YES];
         
-        if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]) {
-            [_delegate selectionViewSelectionDidChange:self];
+        if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
+            [_delegate locationSelectionViewDidChange:self];
         }
     } else {
         _answer = nil;
         _answerRegion = MKCoordinateRegionForMapRect(MKMapRectNull);
-        if ([_delegate respondsToSelector:@selector(selectionViewSelectionDidChange:)]) {
-            [_delegate selectionViewSelectionDidChange:self];
+        if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
+            [_delegate locationSelectionViewDidChange:self];
         }
     }
 }
@@ -326,8 +334,8 @@
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if ([_delegate respondsToSelector:@selector(selectionViewDidBeginEditing:)]) {
-        [_delegate selectionViewDidBeginEditing:self];
+    if ([_delegate respondsToSelector:@selector(locationSelectionViewDidBeginEditing:)]) {
+        [_delegate locationSelectionViewDidBeginEditing:self];
     }
     [_currentLocationButton setImage:[UIImage imageNamed:@"locationOff" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_currentLocationButton setImage:[UIImage imageNamed:@"locationOn" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
@@ -336,8 +344,8 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [textField resignFirstResponder];
     [self geocodeAndDisplay:textField.text];
-    if ([_delegate respondsToSelector:@selector(selectionViewDidEndEditing:)]) {
-        [_delegate selectionViewDidEndEditing:self];
+    if ([_delegate respondsToSelector:@selector(locationSelectionViewDidEndEditing:)]) {
+        [_delegate locationSelectionViewDidEndEditing:self];
     }
 }
 

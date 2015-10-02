@@ -1,5 +1,6 @@
 /*
  Copyright (c) 2015, Brandon McQuilkin, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -154,7 +155,7 @@
     [_selectionView setPlaceholderText:placeholder];
 }
 
-- (void)selectionViewSelectionDidChange:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view {
     if (_selectionView.answer != nil) {
         [self ork_setAnswer:_selectionView.answer];
     } else {
@@ -162,19 +163,19 @@
     }
 }
 
-- (void)selectionViewError:(NSError *)error {
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {
     [self showValidityAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
 }
 
-- (void)selectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
     
 }
 
-- (void)selectionViewDidEndEditing:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
     
 }
 
-- (void)selectionViewNeedsResize:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
     
 }
 

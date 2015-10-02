@@ -921,7 +921,7 @@
     [self showValidityAlertWithMessage:input];
 }
 
-- (void)formItemCell:(ORKFormItemCell *)cell showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
     [self showValidityAlertWithTitle:title message:message];
 }
 

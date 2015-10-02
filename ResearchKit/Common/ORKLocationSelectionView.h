@@ -6,6 +6,7 @@
  Copyright (c) 2015, John Reites, Quintiles Inc.
  Copyright (c) 2015, Richard Thomas, Quintiles Inc.
  Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -44,15 +45,15 @@
 
 @protocol ORKLocationSelectionViewDelegate <NSObject>
 
-- (void)selectionViewSelectionDidChange:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidChange:(nonnull ORKLocationSelectionView *)view;
 
-- (void)selectionViewDidBeginEditing:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidBeginEditing:(nonnull ORKLocationSelectionView *)view;
 
-- (void)selectionViewDidEndEditing:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidEndEditing:(nonnull ORKLocationSelectionView *)view;
 
-- (void)selectionViewNeedsResize:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewNeedsResize:(nonnull ORKLocationSelectionView *)view;
 
-- (void)selectionViewError:(nonnull NSError *)error;
+- (void)locationSelectionView:(nonnull ORKLocationSelectionView *)view didFailWithError:(nonnull NSError *)error;
 
 @end
 

@@ -1150,23 +1150,23 @@ static const CGFloat HorizontalMargin = 15.0;
     [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor blackColor])];
 }
 
-- (void)selectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
     self.editingHighlight = YES;
     [_selectionView showMapViewAnimated:YES];
     [self.delegate formItemCellDidBecomeFirstResponder:self];
 }
 
-- (void)selectionViewDidEndEditing:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
     self.editingHighlight = NO;
     [_selectionView hideMapViewAnimated:YES];
     [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
-- (void)selectionViewSelectionDidChange:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view {
     [self inputValueDidChange];
 }
 
-- (void)selectionViewNeedsResize:(ORKLocationSelectionView *)view {
+- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
     UITableView *tableView = [self parentTableView];
     
     [tableView beginUpdates];
@@ -1176,7 +1176,7 @@ static const CGFloat HorizontalMargin = 15.0;
     [tableView scrollRectToVisible:convertedVisibleRect animated:YES];
 }
 
-- (void)selectionViewError:(NSError *)error {
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {
     [self showErrorAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
 }
 
