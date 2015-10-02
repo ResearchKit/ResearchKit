@@ -69,7 +69,11 @@
 
 - (void)initializeInternalButtonItems {
     [super initializeInternalButtonItems];
+    
+    [self.internalContinueButtonItem setTarget:self];
     [self.internalContinueButtonItem setAction:@selector(continueButtonTapped:)];
+    
+    [self.internalDoneButtonItem setTarget:self];
     [self.internalDoneButtonItem setAction:@selector(continueButtonTapped:)];
 }
 
@@ -77,11 +81,9 @@
 }
 
 - (void)resendEmailButtonTapped:(id)sender {
-    NSLog(@"Resend email button tapped.");
 }
 
 - (void)changeEmailButtonTapped:(id)sender {
-    NSLog(@"Change email button tapped.");
 }
 
 @end

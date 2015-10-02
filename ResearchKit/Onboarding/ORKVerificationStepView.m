@@ -60,7 +60,7 @@
         [_resendEmailButton setTitle:resendEmailTitle forState:UIControlStateNormal];
         [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [self addSubview:_resendEmailButton];
-        
+    
         [self setUpConstraints];
         
     }
@@ -125,7 +125,7 @@
     [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
 }
 
-- (ORKSubheadlineLabel *)emailLabel {
+- (ORKLabel *)emailLabel {
     return _emailLabel;
 }
 

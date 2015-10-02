@@ -158,6 +158,14 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) ORKPermissionMask requestedPermissions;
 
 /**
+ The view controller class for the step. (read-only)
+ 
+ By default, the property forwards to the class method `stepViewControllerClass`. 
+ Subclasses may override this implementation and provide their own view controller class.
+ */
+@property (nonatomic, readonly) Class stepViewControllerClass;
+
+/**
  Checks the parameters of the step and throws exceptions on invalid parameters.
  
  This method is called when there is a need to validate the step's parameters, which is typically

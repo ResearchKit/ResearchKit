@@ -38,8 +38,8 @@
     ORKVerificationStepViewController *_verificationViewController;
 }
 
-+ (Class)stepViewControllerClass {
-    return [ORKVerificationStepViewController class];
+- (Class)stepViewControllerClass {
+    return [_verificationViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {

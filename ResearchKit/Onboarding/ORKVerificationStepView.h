@@ -34,7 +34,7 @@
 
 @interface ORKVerificationStepView : ORKVerticalContainerView
 
-@property (nonatomic, strong, readonly) ORKSubheadlineLabel *emailLabel;
+@property (nonatomic, strong, readonly) ORKLabel *emailLabel;
 
 @property (nonatomic, strong, readonly) UIButton *changeEmailButton;
 

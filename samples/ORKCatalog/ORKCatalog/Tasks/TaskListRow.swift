@@ -814,8 +814,23 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationTitle = NSLocalizedString("Registration", comment: "")
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
         
+        class verificationViewController : ORKVerificationStepViewController {
+            override func changeEmailButtonTapped(sender: AnyObject!) {
+                print("Change email button tapped")
+            }
+            
+            override func resendEmailButtonTapped(sender: AnyObject!) {
+                print("Resend email button tapped")
+            }
+            
+            override func continueButtonTapped(sender: AnyObject!) {
+                print("Continue button tapped")
+            }
+
+        }
+        
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewController: ORKVerificationStepViewController())
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewController: verificationViewController())
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
