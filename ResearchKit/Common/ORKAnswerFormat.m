@@ -33,6 +33,7 @@
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
 #import <HealthKit/HealthKit.h>
+#import <MapKit/MapKit.h>
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
@@ -2072,21 +2073,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text {
     BOOL isValid = [super isAnswerValidWithString:text];
     
-    NSArray *components = [text componentsSeparatedByString:@", "];
-    if (components.count != 2) {
-        isValid = NO;
+    CLLocationCoordinate2D coordinate = [self coordinateFromString:text];
+    
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+        isValid = true;
     } else {
-        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
-        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
-        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
-        
-        if (latitude.doubleValue < -180.0 || latitude.doubleValue > 180.0) {
-            isValid = NO;
-        } else if (longitude.doubleValue < -180.0 || longitude.doubleValue > 180.0) {
-            isValid = NO;
-        }
+        isValid = false;
     }
     
     return isValid;
@@ -2096,33 +2088,20 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (![text length]) {
         return nil;
     }
-    NSDecimalNumber *num = [NSDecimalNumber decimalNumberWithString:text locale:[NSLocale currentLocale]];
-    if (!num) {
-        return nil;
-    }
-    NSString *string = nil;
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
     
-    NSArray *components = [text componentsSeparatedByString:@", "];
-    if (components.count != 2) {
+    CLLocationCoordinate2D coordinate = [self coordinateFromString:text];
+    NSString *string = nil;
+    
+    if (coordinate.latitude < -180.0) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM", nil), coordinate.latitude];
+    } else if (coordinate.latitude > 180.0) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM", nil), coordinate.latitude];
+    } else if (coordinate.longitude < -180.0) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM", nil), coordinate.latitude];
+    } else if (coordinate.longitude > 180.0) {
+        string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM", nil), coordinate.latitude];
+    } else if (CLLocationCoordinate2DIsValid(coordinate)) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
-    } else {
-        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
-        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
-        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
-        
-        if (latitude.doubleValue < -180.0) {
-            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM", nil), latitude];
-        } else if (latitude.doubleValue > 180.0) {
-            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM", nil), latitude];
-        } else if (longitude.doubleValue < -180.0) {
-            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM", nil), latitude];
-        } else if (longitude.doubleValue > 180.0) {
-            string = [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM", nil), latitude];
-        }
     }
     
     return string;
@@ -2130,6 +2109,26 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeLocation;
+}
+
+- (CLLocationCoordinate2D)coordinateFromString:(NSString *)string {
+    NSArray *components = [string componentsSeparatedByString:@", "];
+    
+    if (components.count == 2) {
+        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
+        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
+        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
+        
+        if (latitude != nil && longitude != nil) {
+            return CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+        } else {
+            return kCLLocationCoordinate2DInvalid;
+        }
+    } else {
+        return kCLLocationCoordinate2DInvalid;
+    }
 }
 
 @end
