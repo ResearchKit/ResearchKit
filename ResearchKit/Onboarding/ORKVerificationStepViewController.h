@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,25 +30,14 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import "ORKVerificationStepViewController.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKVerificationStepViewController : ORKStepViewController
 
-@interface ORKVerificationStep : ORKStep
+- (void)continueButtonTapped:(id)sender;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
+- (void)resendEmailButtonTapped:(id)sender;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
-                             email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController;
-
-@property (nonatomic, copy, readonly) NSString *email;
-
-@property (nonatomic, readonly) ORKVerificationStepViewController *verificationViewController;
+- (void)changeEmailButtonTapped:(id)sender;
 
 @end
-
-NS_ASSUME_NONNULL_END

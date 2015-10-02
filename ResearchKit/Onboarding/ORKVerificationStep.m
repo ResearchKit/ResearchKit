@@ -35,7 +35,7 @@
 
 @implementation ORKVerificationStep {
     NSString *_email;
-    UIViewController *_verificationViewController;
+    ORKVerificationStepViewController *_verificationViewController;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -47,7 +47,7 @@
                              title:(NSString *)title
                               text:(NSString *)text
                              email:(NSString *)email
-        verificationViewController:(UIViewController *)verificationViewController {
+        verificationViewController:(ORKVerificationStepViewController *)verificationViewController {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
@@ -57,6 +57,10 @@
         self.optional = NO;
     }
     return self;
+}
+
+- (BOOL)showsProgress {
+    return NO;
 }
 
 + (BOOL)supportsSecureCoding {
