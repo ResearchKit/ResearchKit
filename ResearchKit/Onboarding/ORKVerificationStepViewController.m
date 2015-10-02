@@ -30,8 +30,9 @@
 
 
 #import "ORKVerificationStepViewController.h"
-#import "ORKVerificationStep.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKVerificationStep.h"
+#import "ORKVerificationStepView.h"
 
 
 @implementation ORKVerificationStepViewController
@@ -42,6 +43,29 @@
 
 - (void)stepDidChange {
     [super stepDidChange];
+    
+    if (self.step && [self isViewLoaded]) {
+        ORKVerificationStepView *verificationStepView = [ORKVerificationStepView new];
+        verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
+        verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
+        verificationStepView.emailLabel.text = [self verificationStep].email;
+
+        [verificationStepView.resendEmailButton addTarget:self
+                                                   action:@selector(resendEmailButton)
+                                         forControlEvents:UIControlEventTouchUpInside];
+        
+        [verificationStepView.changeEmailButton addTarget:self
+                                                   action:@selector(changeEmailButton)
+                                         forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)initializeInternalButtonItems {
+    [super initializeInternalButtonItems];
+    
+    [self.internalContinueButtonItem setAction:@selector(continueButtonTapped:)];
+    [self.internalDoneButtonItem setAction:@selector(continueButtonTapped:)];
 }
 
 - (void)continueButtonTapped:(id)sender {

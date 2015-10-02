@@ -105,6 +105,10 @@
 "DOB_FORM_ITEM_TITLE" = "Date of Birth";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
 
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address? Tap here.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
