@@ -77,11 +77,11 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil
                                                                    views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|"
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|"
                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
                                                                  metrics:nil
                                                                    views:views]];

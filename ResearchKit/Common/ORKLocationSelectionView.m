@@ -93,11 +93,11 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField, _currentLocationButton);
     ORKEnableAutoLayoutForViews([views allValues]);
 
-    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
     
-    [constraints addObject:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-[_currentLocationButton(20.0)]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-[_currentLocationButton(20.0)]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_currentLocationButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
