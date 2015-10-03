@@ -38,11 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStep : ORKStep
 
-- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
-                             steps:(nullable NSArray *)steps
-                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
 
-@property (nonatomic) BOOL reverseListing;
++ (instancetype)standaloneReviewStepWithIdentifier:(nonnull NSString *)identifier
+                                             steps:(nullable NSArray *)steps
+                                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+
++ (instancetype)embeddedReviewStepWithIdentifier:(nonnull NSString *)identifier;
 
 @property (nonatomic, readonly, nullable) NSArray *steps;
 

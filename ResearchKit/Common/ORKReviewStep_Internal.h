@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKReviewStep ()
 
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
+                             steps:(nullable NSArray *)steps
+                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+
 @property (nonatomic, readonly) BOOL isStandalone;
 
 @end

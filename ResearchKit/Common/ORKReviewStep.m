@@ -37,20 +37,25 @@
 
 @implementation ORKReviewStep
 
-- (nonnull instancetype)initWithIdentifier:(nonnull NSString *)identifier
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
                                      steps:(nullable NSArray *)steps
                               resultSource:(nullable id<ORKTaskResultSource>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
         _steps = steps;
         _resultSource = resultSource;
-        _reverseListing = self.isStandalone;
     }
     return self;
 }
 
-- (nonnull instancetype)initWithIdentifier:(NSString *)identifier {
-    return [self initWithIdentifier:identifier steps:nil resultSource:nil];
++ (instancetype)standaloneReviewStepWithIdentifier:(nonnull NSString *)identifier
+                                             steps:(nullable NSArray *)steps
+                                      resultSource:(nullable id<ORKTaskResultSource>)resultSource {
+    return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:steps resultSource:resultSource];
+}
+
++ (instancetype)embeddedReviewStepWithIdentifier:(nonnull NSString *)identifier {
+    return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:nil resultSource:nil];
 }
 
 + (Class)stepViewControllerClass {
@@ -61,7 +66,6 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
-        ORK_DECODE_BOOL(aDecoder, reverseListing);
     }
     return self;
 }
@@ -69,15 +73,20 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, steps);
-    ORK_ENCODE_BOOL(aCoder, reverseListing);
 }
 
 - (BOOL)isEqual:(id)object {
     __typeof(self) castObject = object;
     return [super isEqual:object] &&
     ORKEqualObjects(self.steps, castObject.steps) &&
-    ORKEqualObjects(self.resultSource, castObject.resultSource) &&
-    self.reverseListing == castObject.reverseListing;
+    ORKEqualObjects(self.resultSource, castObject.resultSource);
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKReviewStep *reviewStep = [super copyWithZone:zone];
+    reviewStep->_steps = [self.steps copy];
+    reviewStep->_resultSource = self.resultSource;
+    return reviewStep;
 }
 
 - (BOOL)isStandalone {

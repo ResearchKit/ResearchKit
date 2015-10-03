@@ -30,7 +30,6 @@
 
 
 #import "ORKReviewStepViewController.h"
-#import "ORKReviewStepViewController_Internal.h"
 #import "ORKReviewStep.h"
 #import "ORKStep_Private.h"
 #import "ORKTaskViewController_Internal.h"
@@ -70,16 +69,18 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     return self;
 }
 #pragma clang diagnostic pop
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    return self;
-}
  
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray *)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];
     if (self && [self reviewStep]) {
-        _steps = steps;
+        NSMutableArray *filteredSteps = [[NSMutableArray alloc] init];
+        [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]];
+            if (includeStep) {
+                [filteredSteps addObject:obj];
+            }
+        }];
+        _steps = [filteredSteps copy];
         _resultSource = resultSource;
     }
     return self;

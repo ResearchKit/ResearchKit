@@ -910,19 +910,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
-    NSString *progressLabel = nil;
-    if ([self shouldDisplayProgressLabel]) {
-        if (viewController.parentReviewStep && viewController.parentReviewStep.isStandalone) {
-            progressLabel = viewController.parentReviewStep.title;
-        } else {
-            ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
-            
-            if (progress.total > 0) {
-                progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
-            }
-        }
-    }
-    
     [viewController willNavigateDirection:stepDirection];
     
     ORK_Log_Debug(@"%@ %@", self, viewController);
@@ -936,6 +923,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     // Update currentStepViewController now, so we don't accept additional transition requests
     // from the same VC.
     _currentStepViewController = viewController;
+    
+    NSString *progressLabel = nil;
+    if ([self shouldDisplayProgressLabel]) {
+        ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
+        if (progress.total > 0) {
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
+        }
+    }
     
     [self.pageViewController setViewControllers:@[viewController] direction:direction animated:animated completion:^(BOOL finished) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -1004,36 +999,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 - (NSArray *)stepsForReviewStep:(ORKReviewStep *)reviewStep {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     if (reviewStep.isStandalone) {
-        for (ORKStep *step in reviewStep.steps) {
-            [steps addObject:step];
-        }
+        steps = [NSMutableArray arrayWithArray:reviewStep.steps];
     } else {
-        ORKStep *nextStep = reviewStep;
-        do {
-            if (reviewStep.reverseListing) {
-                nextStep = [self stepAfterStep:nextStep];
-            } else {
-                nextStep = [self stepBeforeStep:nextStep];
-            }
-            if (nextStep && ![nextStep isKindOfClass:[ORKReviewStep class]]) {
+        [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
+            if (nextStep && nextStep != reviewStep) {
                 [steps addObject:nextStep];
+            } else {
+                *stop = YES;
             }
-        } while (nextStep || [nextStep isKindOfClass:[ORKReviewStep class]]);
+        }];
     }
-    if (!reviewStep.reverseListing) {
-        steps = [[NSMutableArray alloc] initWithArray:[[steps reverseObjectEnumerator] allObjects]];
-    }
-    NSMutableArray *filteredSteps = [[NSMutableArray alloc] init];
-    [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]];
-        if (includeStep && [self.delegate respondsToSelector:@selector(taskViewController:reviewStep:shouldIncludeStep:)]) {
-            includeStep = [self.delegate taskViewController:self reviewStep:reviewStep shouldIncludeStep:(ORKStep *) obj];
-        }
-        if (includeStep) {
-            [filteredSteps addObject:obj];
-        }
-    }];
-    return filteredSteps;
+    return steps;
 }
 
 - (ORKStepViewController *)viewControllerForStep:(ORKStep *)step {
@@ -1099,7 +1076,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (BOOL)shouldDisplayProgressLabel {
-    return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)];
+    return self.showsProgressInNavigationBar && [_task respondsToSelector:@selector(progressOfCurrentStep:withResult:)] && !(self.currentStepViewController.parentReviewStep.isStandalone);
 }
 
 #pragma mark - internal action Handlers
@@ -1313,6 +1290,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
+    if (stepViewController.parentReviewStep.isStandalone) {
+        stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
+    }
     [self showViewController:stepViewController goForward:YES animated:YES];
 }
 

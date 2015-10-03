@@ -2921,9 +2921,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (id<ORKTask>)makeEmbeddedReviewStep {
     ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStep"];
+    ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"reviewStep"];
     reviewStep.title = @"reviewStep";
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[step1, step2, reviewStep]];
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"step3" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
     return task;
 }
 
@@ -2934,9 +2935,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (id<ORKTask>)makeStandaloneReviewStep {
     ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *reviewStep = [[ORKReviewStep alloc] initWithIdentifier:@"reviewStep" steps:@[step1, step2] resultSource:nil];
+    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2] resultSource:nil];
     reviewStep.title = @"reviewStep";
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[reviewStep]];
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"step3" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[reviewStep, step3]];
     return task;
 }
 

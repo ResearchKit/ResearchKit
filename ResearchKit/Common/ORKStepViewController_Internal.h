@@ -55,6 +55,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
 
+@property (nonatomic, readonly) BOOL canChangeStepResult;
+
+@property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
+
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction;
 
 - (void)notifyDelegateOnResultChange;

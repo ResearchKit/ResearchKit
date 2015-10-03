@@ -356,10 +356,6 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) BOOL hasBeenPresented;
 
-@property (nonatomic, readonly) BOOL canChangeStepResult;
-
-@property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
-
 @end
 
 NS_ASSUME_NONNULL_END
