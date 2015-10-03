@@ -66,6 +66,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case DateQuestion
     case DateTimeQuestion
     case ImageChoiceQuestion
+    case LocationQuestion
     case NumericQuestion
     case ScaleQuestion
     case TextQuestion
@@ -74,7 +75,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TimeOfDayQuestion
     case ValuePickerChoiceQuestion
     case ImageCapture
-    case LocationQuestion
+
     
     case Consent
     
@@ -113,6 +114,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .DateQuestion,
                     .DateTimeQuestion,
                     .ImageChoiceQuestion,
+                    .LocationQuestion,
                     .NumericQuestion,
                     .ScaleQuestion,
                     .TextQuestion,
@@ -121,7 +123,6 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TimeOfDayQuestion,
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
-                    .LocationQuestion,
                 ]),
             TaskListRowSection(title: "Consent", rows:
                 [
@@ -164,6 +165,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
             
+        case .LocationQuestion:
+            return NSLocalizedString("Location Question", comment: "")
+            
         case .NumericQuestion:
             return NSLocalizedString("Numeric Question", comment: "")
             
@@ -187,9 +191,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
-        
-        case .LocationQuestion:
-            return NSLocalizedString("Location Question", comment: "")
 
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
@@ -270,6 +271,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ImageChoiceQuestionTask
         case ImageChoiceQuestionStep
         
+        // Task with a location entry.
+        case LocationQuestionTask
+        case LocationQuestionStep
+        
         // Task with examples of numeric questions.
         case NumericQuestionTask
         case NumericQuestionStep
@@ -307,10 +312,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Image capture task specific identifiers.
         case ImageCaptureTask
         case ImageCaptureStep
-        
-        // Task with a location entry.
-        case LocationQuestionTask
-        case LocationQuestionStep
         
         // Consent task specific identifiers.
         case ConsentTask
@@ -356,6 +357,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
             
+        case .LocationQuestion:
+            return locationQuestionTask
+            
         case .NumericQuestion:
             return numericQuestionTask
             
@@ -379,9 +383,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return imageCaptureTask
-            
-        case .LocationQuestion:
-            return locationQuestionTask
             
         case .Consent:
             return consentTask
@@ -551,6 +552,20 @@ enum TaskListRow: Int, CustomStringConvertible {
         questionStep.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.ImageChoiceQuestionTask), steps: [questionStep])
+    }
+    
+    /// This task presents just a single location question.
+    private var locationQuestionTask: ORKTask {
+        let answerFormat = ORKLocationAnswerFormat()
+        
+        // We attach an answer format to a question step to specify what controls the user sees.
+        let questionStep = ORKQuestionStep(identifier: String(Identifier.LocationQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        // The detail text is shown in a small font below the title.
+        questionStep.text = exampleDetailText
+        questionStep.placeholder = NSLocalizedString("Address", comment: "");
+        
+        return ORKOrderedTask(identifier: String(Identifier.LocationQuestionTask), steps: [questionStep])
     }
     
     /**
@@ -767,20 +782,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             instructionStep,
             imageCaptureStep
             ])
-    }
-    
-    /// This task presents just a single location question.
-    private var locationQuestionTask: ORKTask {
-        let answerFormat = ORKLocationAnswerFormat()
-        
-        // We attach an answer format to a question step to specify what controls the user sees.
-        let questionStep = ORKQuestionStep(identifier: String(Identifier.LocationQuestionStep), title: exampleQuestionText, answer: answerFormat)
-        
-        // The detail text is shown in a small font below the title.
-        questionStep.text = exampleDetailText
-        questionStep.placeholder = NSLocalizedString("Address", comment: "");
-        
-        return ORKOrderedTask(identifier: String(Identifier.LocationQuestionTask), steps: [questionStep])
     }
     
     /// A task demonstrating how the ResearchKit framework can be used to obtain informed consent.
