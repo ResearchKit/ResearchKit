@@ -1112,7 +1112,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     NSDictionary *dictionary = @{@"_selectionView":_selectionView};
     ORKEnableAutoLayoutForViews([dictionary allValues]);
-    NSDictionary *metrics = @{@"vMargin":@(10), @"hMargin":@(self.separatorInset.left)};
+    NSDictionary *metrics = @{@"verticalMargin":@(10), @"horizontalMargin":@(self.separatorInset.left)};
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[_selectionView]-horizontalMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-verticalMargin-[_selectionView]-verticalMargin-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
