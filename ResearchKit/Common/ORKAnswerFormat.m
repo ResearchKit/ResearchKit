@@ -2076,9 +2076,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     CLLocationCoordinate2D coordinate = [self coordinateFromString:text];
     
     if (CLLocationCoordinate2DIsValid(coordinate)) {
-        isValid = true;
+        isValid = YES;
     } else {
-        isValid = false;
+        isValid = NO;
     }
     
     return isValid;
