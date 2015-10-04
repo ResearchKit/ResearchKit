@@ -247,8 +247,25 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 }
 
 NSBundle *ORKBundle() {
-    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
-    return bundle;
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+    });
+    
+    return __bundle;
+}
+
+NSBundle *ORKDefaultLocaleBundle() {
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __bundle = [NSBundle bundleWithPath:[ORKBundle() pathForResource:@"en" ofType:@"lproj"]];
+    });
+    
+    return __bundle;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
