@@ -300,6 +300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Toggle Locale"
                            ],
                        ];
 }
@@ -2649,6 +2650,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UIView *superview = self.view.superview;
     [self.view removeFromSuperview];
     [superview addSubview:self.view];
+}
+
+- (IBAction)toggleLocaleButtonTapped:(id)sender {
+    ORKLocaleIdentifier = ORKLocaleIdentifier ? nil : @"de";
 }
 
 #pragma mark - Navigable Ordered Task

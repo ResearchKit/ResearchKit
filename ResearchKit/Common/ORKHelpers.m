@@ -246,6 +246,8 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     return timeformatter;
 }
 
+NSString *ORKLocaleIdentifier = nil;
+
 NSBundle *ORKBundle() {
     static NSBundle *__bundle;
     
@@ -254,6 +256,12 @@ NSBundle *ORKBundle() {
         __bundle = [NSBundle bundleForClass:[ORKStep class]];
     });
     
+    if (ORKLocaleIdentifier) {
+        NSString *orkLocalePath = [__bundle pathForResource:ORKLocaleIdentifier ofType:@"lproj"];
+        if (orkLocalePath) {
+            return [NSBundle bundleWithPath:orkLocalePath];
+        }
+    }
     return __bundle;
 }
 
