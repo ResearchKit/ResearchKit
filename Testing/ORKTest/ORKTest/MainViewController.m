@@ -2653,7 +2653,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (IBAction)toggleLocaleButtonTapped:(id)sender {
-    ORKLocaleIdentifier = ORKLocaleIdentifier ? nil : @"de";
+    ORKLocaleIdentifier = ORKLocaleIdentifier ? nil : @"vi";
 }
 
 #pragma mark - Navigable Ordered Task

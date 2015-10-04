@@ -44,7 +44,8 @@ ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
 [ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:nil]
 
 #define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
+[ORKLocalizedNumberFormatter() stringFromNumber:number]
+
 
 ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
@@ -52,3 +53,4 @@ ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) 
 ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+ORK_EXTERN NSNumberFormatter *ORKLocalizedNumberFormatter() ORK_AVAILABLE_DECL;

@@ -276,6 +276,19 @@ NSBundle *ORKDefaultLocaleBundle() {
     return __bundle;
 }
 
+NSNumberFormatter *ORKLocalizedNumberFormatter() {
+    static NSNumberFormatter *numberFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterNoStyle;
+    });
+    if (ORKLocaleIdentifier) {
+        numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:ORKLocaleIdentifier];
+    }
+    return numberFormatter;
+}
+
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;
