@@ -139,3 +139,4 @@ typedef NS_ENUM(NSInteger, ORKPasscodeType) {
 } ORK_ENUM_AVAILABLE;
 
 ORK_EXTERN NSString *ORKLocaleIdentifier;
+ORK_EXTERN void ORKSetLocaleIdentifier(NSString *identifer) ORK_AVAILABLE_DECL;

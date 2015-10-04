@@ -248,6 +248,10 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 
 NSString *ORKLocaleIdentifier = nil;
 
+void ORKSetLocaleIdentifier(NSString *identifier) {
+    ORKLocaleIdentifier = identifier;
+}
+
 NSBundle *ORKBundle() {
     static NSBundle *__bundle;
     
