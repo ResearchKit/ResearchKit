@@ -262,7 +262,8 @@ NSBundle *ORKDefaultLocaleBundle() {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        __bundle = [NSBundle bundleWithPath:[ORKBundle() pathForResource:@"en" ofType:@"lproj"]];
+        NSString *path = [ORKBundle() pathForResource:[ORKBundle() objectForInfoDictionaryKey:@"CFBundleDevelopmentRegion"] ofType:@"lproj"];
+        __bundle = [NSBundle bundleWithPath:path];
     });
     
     return __bundle;
