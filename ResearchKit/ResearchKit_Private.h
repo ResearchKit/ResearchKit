@@ -50,6 +50,8 @@
 #import <ResearchKit/ORKCustomStepView.h>
 
 // Specific active task modules
+#import <ResearchKit/ORKOrderedTask_Private.h>
+
 #import <ResearchKit/ORKAudioStep.h>
 #import <ResearchKit/ORKToneAudiometryStep.h>
 #import <ResearchKit/ORKToneAudiometryPracticeStep.h>
@@ -60,6 +62,8 @@
 #import <ResearchKit/ORKTappingIntervalStep.h>
 #import <ResearchKit/ORKTimedWalkStep.h>
 #import <ResearchKit/ORKPSATStep.h>
+#import <ResearchKit/ORKHolePegTestPlaceStep.h>
+#import <ResearchKit/ORKHolePegTestRemoveStep.h>
 #import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKWaitStep.h>
 
@@ -73,6 +77,8 @@
 #import <ResearchKit/ORKTappingIntervalStepViewController.h>
 #import <ResearchKit/ORKTimedWalkStepViewController.h>
 #import <ResearchKit/ORKPSATStepViewController.h>
+#import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
+#import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
 
