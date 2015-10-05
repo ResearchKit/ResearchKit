@@ -55,7 +55,6 @@
 @implementation ORKLocationSelectionView {
     CLLocationManager *_locationManager;
     MKPointAnnotation *_selectedLocationAnnotation;
-    UIButton *_currentLocationButton;
     BOOL _userLocationNeedsUpdate;
     MKCoordinateRegion _answerRegion;
 }
@@ -74,13 +73,6 @@
         _textField.adjustsFontSizeToFitWidth = YES;
         
         [self addSubview:_textField];
-        
-        _currentLocationButton = [[UIButton alloc] init];
-        [_currentLocationButton setImage:[UIImage imageNamed:@"locationOff" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-        [_currentLocationButton setImage:[UIImage imageNamed:@"locationOn" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-        [_currentLocationButton addTarget:self action:@selector(loadCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_currentLocationButton];
-        
         [self setUpConstraints];
     }
     
@@ -90,15 +82,13 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(_textField, _currentLocationButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     ORKEnableAutoLayoutForViews([views allValues]);
 
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-[_currentLocationButton(20.0)]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_currentLocationButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+    _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+    [constraints addObject:_textFieldBottomConstraint];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -264,7 +254,6 @@
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
             _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
-            [_currentLocationButton setImage:[UIImage imageNamed:@"locationOn" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
             [strongSelf addAnnotationForLocation:placemark.location];
         }
     }];
@@ -337,8 +326,6 @@
     if ([_delegate respondsToSelector:@selector(locationSelectionViewDidBeginEditing:)]) {
         [_delegate locationSelectionViewDidBeginEditing:self];
     }
-    [_currentLocationButton setImage:[UIImage imageNamed:@"locationOff" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-    [_currentLocationButton setImage:[UIImage imageNamed:@"locationOn" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
