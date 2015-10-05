@@ -223,6 +223,7 @@
             [strongSelf addAnnotationForLocation:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
+            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
             [strongSelf addAnnotationForLocation:placemark.location];
         }
     }];
