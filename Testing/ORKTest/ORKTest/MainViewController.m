@@ -481,6 +481,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeNavigableOrderedTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
+    } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
+        return [self makeCreatePasscodeTask];
     } if ([identifier isEqualToString:WaitTaskIdentifier]) {
         
         NSMutableArray *steps = [[NSMutableArray alloc] init];

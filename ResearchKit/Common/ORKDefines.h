@@ -128,6 +128,18 @@ typedef NS_OPTIONS(NSInteger, ORKPSATPresentationMode) {
 
 
 /**
+ Identify the type of passcode authentication for `ORKPasscodeStepViewController`.
+ */
+typedef NS_ENUM(NSInteger, ORKPasscodeType) {
+    /// 4 digit pin entry
+    ORKPasscodeType4Digit,
+    
+    /// 6 digit pin entry
+    ORKPasscodeType6Digit
+} ORK_ENUM_AVAILABLE;
+
+
+/**
  Progress Indicator Mask
  */
 typedef NS_OPTIONS(NSInteger, ORKProgressIndicatorMask) {
@@ -136,5 +148,3 @@ typedef NS_OPTIONS(NSInteger, ORKProgressIndicatorMask) {
     /// Progressbar animation.
     ORKProgressIndicatorMaskProgressBar,
 } ORK_ENUM_AVAILABLE;
-
-

@@ -205,6 +205,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
             
+        case .Passcode:
+            return NSLocalizedString("Passcode Creation", comment: "")
+
         case .Wait:
             return NSLocalizedString("Wait Task", comment: "")
             
@@ -928,6 +931,20 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
     }
     
+    /// This task demonstrates the Passcode creation process.
+    private var passcodeTask: ORKTask {
+        /*
+        If you want to protect the app using a passcode. It is reccomended to
+        ask user to create passcode as part of the consent process and use the
+        authentication and editing view controllers to interact with the passcode.
+        
+        The passcode is stored in the keychain.
+        */
+        let passcodeConsentStep = ORKPasscodeStep(identifier: String(Identifier.PasscodeStep))
+
+        return ORKOrderedTask(identifier: String(Identifier.PasscodeStep), steps: [passcodeConsentStep])
+    }
+    
     
     /// This task presents a wait task.
     private var waitTask: ORKTask {
@@ -941,9 +958,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }
 
-        return ORKOrderedTask(identifier: String(Identifier.PasscodeStep), steps: [passcodeConsentStep])
-    }
-    
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
