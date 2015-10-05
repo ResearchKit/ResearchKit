@@ -43,12 +43,17 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 
+#define kORKLocationSelectionViewTextFieldHeight 21.0
+#define kORKLocationSelectionViewTextFieldVerticalMargin 11.5
+#define kORKLocationSelectionViewMapViewHeight 238.0
+
 
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *textFieldBottomConstraint;
 @property (nonatomic, strong) ORKAnswerTextField *textField;
+@property (nonatomic, strong) MKMapView *mapView;
 @end
 
 
@@ -59,9 +64,13 @@
     MKCoordinateRegion _answerRegion;
 }
 
-- (instancetype)init {
+- (instancetype)initWithOpenMap:(BOOL)openMap {
     
-    self = [super init];
+    if (openMap) {
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, kORKLocationSelectionViewTextFieldHeight + (2 * kORKLocationSelectionViewTextFieldVerticalMargin) + kORKLocationSelectionViewMapViewHeight)];
+    } else {
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, kORKLocationSelectionViewTextFieldHeight + (2 * kORKLocationSelectionViewTextFieldVerticalMargin))];
+    }
     
     if (self) {
         
@@ -74,6 +83,9 @@
         
         [self addSubview:_textField];
         [self setUpConstraints];
+        if (openMap) {
+            [self showMapViewAnimated:NO];
+        }
     }
     
     return self;
@@ -85,8 +97,9 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     ORKEnableAutoLayoutForViews([views allValues]);
 
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textField(44.0)]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
-    _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:kORKLocationSelectionViewTextFieldVerticalMargin]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kORKLocationSelectionViewTextFieldHeight]];
+    _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:kORKLocationSelectionViewTextFieldVerticalMargin];
     [constraints addObject:_textFieldBottomConstraint];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
     
@@ -110,7 +123,7 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = _mapView == nil ? 44.0 : 44.0 + 228.0;
+    CGFloat height = kORKLocationSelectionViewTextFieldHeight + (2 * kORKLocationSelectionViewTextFieldVerticalMargin) + (_mapView == nil ? 0.0 : kORKLocationSelectionViewMapViewHeight);
     return CGSizeMake(40, height);
 }
 
@@ -124,6 +137,12 @@
     _mapView.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, 0.0);
     _mapView.userInteractionEnabled = NO;
     ORKEnableAutoLayoutForViews(@[_mapView]);
+    
+    if (!_edgeToEdgeMap) {
+        _mapView.layer.cornerRadius = 3;
+        _mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
+        _mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
+    }
     [self addSubview:_mapView];
     
     if (_answer) {
@@ -133,25 +152,33 @@
     }
     
     if (!animated) {
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
         [self removeConstraint:_textFieldBottomConstraint];
-        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
-        [self addConstraint:_textFieldBottomConstraint];
-        _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:228.0];
-        [self addConstraint:_mapViewHeightConstraint];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+        NSMutableArray *constraints = [NSMutableArray new];
+        
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
+        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-kORKLocationSelectionViewTextFieldVerticalMargin];
+        [constraints addObject:_textFieldBottomConstraint];
+        _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kORKLocationSelectionViewMapViewHeight];
+        [constraints addObject:_mapViewHeightConstraint];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
         [self layoutIfNeeded];
     } else {
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
         [self removeConstraint:_textFieldBottomConstraint];
-        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
-        [self addConstraint:_textFieldBottomConstraint];
-        _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:0.0];
-        [self addConstraint:_mapViewHeightConstraint];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+        NSMutableArray *constraints = [NSMutableArray new];
         
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
+        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-kORKLocationSelectionViewTextFieldVerticalMargin];
+        [constraints addObject:_textFieldBottomConstraint];
+        _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:0.0];
+        [constraints addObject:_mapViewHeightConstraint];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
         [self layoutIfNeeded];
-        _mapViewHeightConstraint.constant = 228.0;
+        
+        _mapViewHeightConstraint.constant = kORKLocationSelectionViewMapViewHeight;
         __weak __typeof__(self) weakSelf = self;
         [UIView animateWithDuration:0.3 animations:^{
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
@@ -165,7 +192,7 @@
 }
 
 - (void)hideMapViewAnimated:(BOOL)animated {
-    if (!_mapView) {
+    /*if (!_mapView) {
         return;
     }
     
@@ -195,7 +222,7 @@
                 [strongSelf.delegate locationSelectionViewNeedsResize:self];
             }
         }];
-    }
+    }*/
 }
 
 - (void)loadCurrentLocation {

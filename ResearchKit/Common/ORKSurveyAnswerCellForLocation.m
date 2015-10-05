@@ -62,10 +62,9 @@
 }
 
 - (void)prepareView {
-    _selectionView = [[ORKLocationSelectionView alloc] init];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:YES];
     _selectionView.delegate = self;
     _selectionView.tintColor = self.tintColor;
-    [_selectionView showMapViewAnimated:NO];
     [self addSubview:_selectionView];
 
     [self setUpConstraints];

@@ -38,9 +38,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-@class MKMapView;
-
 @class ORKLocationSelectionView;
 
 @protocol ORKLocationSelectionViewDelegate <NSObject>
@@ -64,7 +61,9 @@
 
 @property (nonatomic, strong, nullable) id answer;
 
-@property (nonatomic, strong, nullable) MKMapView *mapView;
+@property (nonatomic, assign) BOOL edgeToEdgeMap;
+
+- (nonnull instancetype)initWithOpenMap:(BOOL)openMap;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 

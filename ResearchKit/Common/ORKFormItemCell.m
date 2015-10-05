@@ -1088,12 +1088,9 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     [super cellInit];
     
-    _selectionView = [[ORKLocationSelectionView alloc] init];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO];
     _selectionView.delegate = self;
-    
-    _selectionView.mapView.layer.cornerRadius = 3;
-    _selectionView.mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
-    _selectionView.mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
+    _selectionView.edgeToEdgeMap = NO;
     
     if (_placeholder != nil) {
         [_selectionView setPlaceholderText:_placeholder];
