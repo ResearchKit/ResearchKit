@@ -530,7 +530,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         // No saved data, just create the task and the corresponding task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }
-    
+    self.taskViewController.locale = useCustomLocale ? [NSLocale localeWithLocaleIdentifier:@"jp"] : nil;
     [self beginTask];
 }
 
@@ -2652,12 +2652,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [superview addSubview:self.view];
 }
 
+BOOL useCustomLocale = NO;
+
 - (IBAction)toggleLocaleButtonTapped:(id)sender {
-    if (ORKLocaleIdentifier) {
-        ORKSetLocaleIdentifier(nil);
-    } else {
-        ORKSetLocaleIdentifier(@"de");
-    }
+    useCustomLocale = !useCustomLocale;
 }
 
 #pragma mark - Navigable Ordered Task

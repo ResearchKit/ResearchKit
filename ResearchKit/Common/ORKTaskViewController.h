@@ -459,6 +459,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
+@property (nonatomic, nullable) NSLocale *locale;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -137,6 +137,3 @@ typedef NS_ENUM(NSInteger, ORKPasscodeType) {
     /// 6 digit pin entry
     ORKPasscodeType6Digit
 } ORK_ENUM_AVAILABLE;
-
-ORK_EXTERN NSString *ORKLocaleIdentifier;
-ORK_EXTERN void ORKSetLocaleIdentifier(NSString *identifer) ORK_AVAILABLE_DECL;

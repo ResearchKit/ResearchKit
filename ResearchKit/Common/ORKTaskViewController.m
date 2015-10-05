@@ -1406,4 +1406,17 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     return self.childNavigationController.navigationBar;
 }
 
+- (void)setLocale:(NSLocale *)locale {
+    _locale = locale;
+    if (!_locale) {
+        ORKLocale = _locale;
+    } else {
+        if ([[ORKBundle() localizations] containsObject:[locale objectForKey:NSLocaleLanguageCode]]) {
+            ORKLocale = _locale;
+        } else {
+            ORK_Log_Warning(@"Locale %@ is not contained in ResearchKit", _locale.localeIdentifier);
+        }
+    }
+}
+
 @end

@@ -246,11 +246,7 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     return timeformatter;
 }
 
-NSString *ORKLocaleIdentifier = nil;
-
-void ORKSetLocaleIdentifier(NSString *identifier) {
-    ORKLocaleIdentifier = identifier;
-}
+NSLocale *ORKLocale = nil;
 
 NSBundle *ORKBundle() {
     static NSBundle *__bundle;
@@ -260,12 +256,6 @@ NSBundle *ORKBundle() {
         __bundle = [NSBundle bundleForClass:[ORKStep class]];
     });
     
-    if (ORKLocaleIdentifier) {
-        NSString *orkLocalePath = [__bundle pathForResource:ORKLocaleIdentifier ofType:@"lproj"];
-        if (orkLocalePath) {
-            return [NSBundle bundleWithPath:orkLocalePath];
-        }
-    }
     return __bundle;
 }
 
@@ -280,6 +270,17 @@ NSBundle *ORKDefaultLocaleBundle() {
     return __bundle;
 }
 
+NSBundle *ORKLocalizedBundle() {
+    NSBundle *bundle = ORKBundle();
+    if (ORKLocale) {
+        NSString *orkLocaleBundlePath = [bundle pathForResource:ORKLocale.localeIdentifier ofType:@"lproj"];
+        if (orkLocaleBundlePath) {
+            bundle = [NSBundle bundleWithPath:orkLocaleBundlePath];
+        }
+    }
+    return bundle;
+}
+
 NSNumberFormatter *ORKLocalizedNumberFormatter() {
     static NSNumberFormatter *numberFormatter = nil;
     static dispatch_once_t onceToken;
@@ -287,8 +288,8 @@ NSNumberFormatter *ORKLocalizedNumberFormatter() {
         numberFormatter = [[NSNumberFormatter alloc] init];
         numberFormatter.numberStyle = NSNumberFormatterNoStyle;
     });
-    if (ORKLocaleIdentifier) {
-        numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:ORKLocaleIdentifier];
+    if (ORKLocale) {
+        numberFormatter.locale = ORKLocale;
     }
     return numberFormatter;
 }
