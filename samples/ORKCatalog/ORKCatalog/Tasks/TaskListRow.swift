@@ -825,6 +825,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             override func continueButtonTapped() {
                 print("Continue button tapped")
+                self.goForward();
             }
 
         }

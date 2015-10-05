@@ -86,10 +86,18 @@
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
+        item.optional = NO;
+        [formItems addObject:item];
+        
+        item = [[ORKFormItem alloc] initWithIdentifier:@"confirm_password"
+                                                  text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
+                                          answerFormat:answerFormat];
+        item.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
