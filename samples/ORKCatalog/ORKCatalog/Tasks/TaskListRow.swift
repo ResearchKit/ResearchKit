@@ -815,15 +815,15 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
         
         class verificationViewController : ORKVerificationStepViewController {
-            override func changeEmailButtonTapped(sender: AnyObject!) {
+            override func changeEmailButtonTapped() {
                 print("Change email button tapped")
             }
             
-            override func resendEmailButtonTapped(sender: AnyObject!) {
+            override func resendEmailButtonTapped() {
                 print("Resend email button tapped")
             }
             
-            override func continueButtonTapped(sender: AnyObject!) {
+            override func continueButtonTapped() {
                 print("Continue button tapped")
             }
 

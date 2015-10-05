@@ -58,7 +58,6 @@
         self.text = text;
         _email = email;
         _verificationViewController = verificationViewController;
-        self.optional = NO;
     }
     return self;
 }

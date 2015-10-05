@@ -35,7 +35,9 @@
 #import "ORKVerificationStepView.h"
 
 
-@implementation ORKVerificationStepViewController
+@implementation ORKVerificationStepViewController {
+    ORKVerificationStepView *_verificationStepView;
+}
 
 - (ORKVerificationStep *)verificationStep {
     return (ORKVerificationStep *)self.step;
@@ -45,19 +47,19 @@
     [super stepDidChange];
     
     if (self.step && [self isViewLoaded]) {
-        ORKVerificationStepView *verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
-        verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
-        verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
-        verificationStepView.emailLabel.text = [self verificationStep].email;
-        [self.view addSubview:verificationStepView];
-
-        [verificationStepView.resendEmailButton addTarget:self
-                                                   action:@selector(resendEmailButtonTapped:)
+        _verificationStepView = [[ORKVerificationStepView alloc] initWithFrame:self.view.bounds];
+        _verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
+        _verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
+        _verificationStepView.emailLabel.text = [self verificationStep].email;
+        [self.view addSubview:_verificationStepView];
+        
+        [_verificationStepView.resendEmailButton addTarget:self
+                                                   action:@selector(resendEmailButtonHandler:)
                                          forControlEvents:UIControlEventTouchUpInside];
         
-        [verificationStepView.changeEmailButton addTarget:self
-                                                   action:@selector(changeEmailButtonTapped:)
+        [_verificationStepView.changeEmailButton addTarget:self
+                                                   action:@selector(changeEmailButtonHandler:)
                                          forControlEvents:UIControlEventTouchUpInside];
     }
 }
@@ -67,23 +69,35 @@
     [self stepDidChange];
 }
 
-- (void)initializeInternalButtonItems {
-    [super initializeInternalButtonItems];
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    [super setContinueButtonItem:continueButtonItem];
     
-    [self.internalContinueButtonItem setTarget:self];
-    [self.internalContinueButtonItem setAction:@selector(continueButtonTapped:)];
+    [continueButtonItem setTarget:self];
+    [continueButtonItem setAction:@selector(continueButtonHandler:)];
     
-    [self.internalDoneButtonItem setTarget:self];
-    [self.internalDoneButtonItem setAction:@selector(continueButtonTapped:)];
+    _verificationStepView.continueSkipContainer.continueButtonItem = continueButtonItem;
+    _verificationStepView.continueSkipContainer.continueEnabled = YES;
 }
 
-- (void)continueButtonTapped:(id)sender {
+- (void)continueButtonHandler:(id)sender{
+    [self continueButtonTapped];
 }
 
-- (void)resendEmailButtonTapped:(id)sender {
+- (void)continueButtonTapped {
 }
 
-- (void)changeEmailButtonTapped:(id)sender {
+- (void)resendEmailButtonHandler:(id)sender {
+    [self resendEmailButtonTapped];
+}
+
+- (void)resendEmailButtonTapped {
+}
+
+- (void)changeEmailButtonHandler:(id)sender {
+    [self changeEmailButtonTapped];
+}
+
+- (void)changeEmailButtonTapped {
 }
 
 @end

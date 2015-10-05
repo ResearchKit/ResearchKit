@@ -34,10 +34,10 @@
 
 @interface ORKVerificationStepViewController : ORKStepViewController
 
-- (void)continueButtonTapped:(id)sender;
+- (void)continueButtonTapped;
 
-- (void)resendEmailButtonTapped:(id)sender;
+- (void)resendEmailButtonTapped;
 
-- (void)changeEmailButtonTapped:(id)sender;
+- (void)changeEmailButtonTapped;
 
 @end

@@ -35,32 +35,47 @@
 #import "ORKNavigationContainerView_Internal.h"
 
 
+static const CGFloat VerticalMargin = 30.0;
+
 @implementation ORKVerificationStepView {
     ORKLabel *_emailLabel;
     UIButton *_changeEmailButton;
+    ORKSubheadlineLabel *_resendEmailLabel;
     UIButton *_resendEmailButton;
+    ORKSubheadlineLabel *_verifiedLabel;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.stepView = [UIView new];
+        self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
+        
         _emailLabel = [ORKLabel new];
         [_emailLabel setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
-        [self addSubview:_emailLabel];
+        [self.stepView addSubview:_emailLabel];
         
         _changeEmailButton = [UIButton new];
         NSString *changeEmailTitle = ORKLocalizedString(@"CHANGE_EMAIL_BUTTON_TITLE", nil);
         [_changeEmailButton setTitle:changeEmailTitle forState:UIControlStateNormal];
         [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self addSubview:_changeEmailButton];
+        [self.stepView addSubview:_changeEmailButton];
+        
+        _resendEmailLabel = [ORKSubheadlineLabel new];
+        _resendEmailLabel.text = ORKLocalizedString(@"RESEND_EMAIL_LABEL_MESSAGE", nil);
+        [self.stepView addSubview:_resendEmailLabel];
         
         _resendEmailButton = [UIButton new];
         NSString *resendEmailTitle = ORKLocalizedString(@"RESEND_EMAIL_BUTTON_TITLE", nil);
         [_resendEmailButton setTitle:resendEmailTitle forState:UIControlStateNormal];
         [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self addSubview:_resendEmailButton];
-    
+        [self.stepView addSubview:_resendEmailButton];
+        
+        _verifiedLabel = [ORKSubheadlineLabel new];
+        _verifiedLabel.text = ORKLocalizedString(@"VERIFICATION_LABEL_MESSAGE", nil);
+        [self.stepView addSubview:_verifiedLabel];
+        
         [self setUpConstraints];
         
     }
@@ -68,50 +83,50 @@
 }
 
 - (void)setUpConstraints {
-    ORKEnableAutoLayoutForViews(@[_emailLabel, _changeEmailButton, _resendEmailButton]);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_emailLabel, _changeEmailButton, _resendEmailLabel, _resendEmailButton, _verifiedLabel);
+    ORKEnableAutoLayoutForViews(views.allValues);
+    
+    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin)};
     
     NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_emailLabel][_changeEmailButton]-verticalMargin-[_resendEmailLabel][_resendEmailButton]-verticalMargin-[_verifiedLabel]-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:metrics
+                                                                               views:views]];
     [constraints addObjectsFromArray:@[
                                        [NSLayoutConstraint constraintWithItem:_emailLabel
                                                                     attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_emailLabel
-                                                                    attribute:NSLayoutAttributeTop
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.headerView.instructionLabel
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_changeEmailButton
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
+                                                                       toItem:self.stepView
                                                                     attribute:NSLayoutAttributeCenterX
                                                                    multiplier:1.0
                                                                      constant:0.0],
                                        [NSLayoutConstraint constraintWithItem:_changeEmailButton
-                                                                    attribute:NSLayoutAttributeTop
+                                                                    attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:_emailLabel
-                                                                    attribute:NSLayoutAttributeBottom
+                                                                       toItem:self.stepView
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                   multiplier:1.0
+                                                                     constant:0.0],
+                                       [NSLayoutConstraint constraintWithItem:_resendEmailLabel
+                                                                    attribute:NSLayoutAttributeCenterX
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:self.stepView
+                                                                    attribute:NSLayoutAttributeCenterX
                                                                    multiplier:1.0
                                                                      constant:0.0],
                                        [NSLayoutConstraint constraintWithItem:_resendEmailButton
                                                                     attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self
+                                                                       toItem:self.stepView
                                                                     attribute:NSLayoutAttributeCenterX
                                                                    multiplier:1.0
                                                                      constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_resendEmailButton
-                                                                    attribute:NSLayoutAttributeBottom
+                                       [NSLayoutConstraint constraintWithItem:_verifiedLabel
+                                                                    attribute:NSLayoutAttributeCenterX
                                                                     relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.continueSkipContainer
-                                                                    attribute:NSLayoutAttributeTop
+                                                                       toItem:self.stepView
+                                                                    attribute:NSLayoutAttributeCenterX
                                                                    multiplier:1.0
                                                                      constant:0.0]
                                        ]];

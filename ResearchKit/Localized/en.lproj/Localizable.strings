@@ -106,8 +106,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address? Tap here.";
+"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't recieve an email";
 "RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+"VERIFICATION_LABEL_MESSAGE" = "If verified, tap below.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
