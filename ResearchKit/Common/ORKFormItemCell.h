@@ -86,6 +86,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@interface ORKFormItemEligibilityCell : ORKFormItemCell
+
+@end
+
+
 @interface ORKFormItemImageSelectionCell : ORKFormItemCell
 
 @end
