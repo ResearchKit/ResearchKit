@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
 import ResearchKit
+import MapKit
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows
@@ -77,6 +78,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         
     case is ORKDateQuestionResult:
         providerType = DateQuestionResultTableViewProvider.self
+        
+    case is ORKLocationQuestionResult:
+        providerType = LocationQuestionResultTableViewProvider.self
         
     case is ORKNumericQuestionResult:
         providerType = NumericQuestionResultTableViewProvider.self
@@ -358,6 +362,22 @@ class DateQuestionResultTableViewProvider: ResultTableViewProvider {
             
             // The timezone when the user answered.
             ResultRow(text: "timeZone", detail: questionResult.timeZone)
+        ]
+    }
+}
+
+/// Table view provider specific to an `ORKLocationQuestionResult` instance.
+class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKLocationQuestionResult
+        let coordinate = questionResult.locationAnswer?.MKCoordinateValue
+        
+        return super.resultRowsForSection(section) + [
+            // The latitude of the location the user entered.
+            ResultRow(text: "latitude", detail: coordinate?.latitude),
+            ResultRow(text: "longitude", detail: coordinate?.longitude)
         ]
     }
 }
