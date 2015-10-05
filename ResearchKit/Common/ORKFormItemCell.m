@@ -1155,7 +1155,6 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
     self.editingHighlight = NO;
-    [_selectionView hideMapViewAnimated:YES];
     [self.delegate formItemCellDidResignFirstResponder:self];
 }
 

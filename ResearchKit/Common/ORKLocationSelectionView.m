@@ -191,40 +191,6 @@
     }
 }
 
-- (void)hideMapViewAnimated:(BOOL)animated {
-    /*if (!_mapView) {
-        return;
-    }
-    
-    if (!animated) {
-        [_mapView removeFromSuperview];
-        _mapView = nil;
-        _mapViewHeightConstraint = nil;
-        _textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-        [self addConstraint:_textFieldBottomConstraint];
-        [self layoutIfNeeded];
-    } else {
-        [self layoutIfNeeded];
-        _mapViewHeightConstraint.constant = 0.0;
-        __weak __typeof__(self) weakSelf = self;
-        [UIView animateWithDuration:0.3 animations:^{
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            [strongSelf layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            [strongSelf.mapView removeFromSuperview];
-            strongSelf.mapView = nil;
-            strongSelf.mapViewHeightConstraint = nil;
-            strongSelf.textFieldBottomConstraint = [NSLayoutConstraint constraintWithItem:strongSelf.textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:strongSelf attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-            [strongSelf addConstraint:strongSelf.textFieldBottomConstraint];
-            [strongSelf layoutIfNeeded];
-            if ([strongSelf.delegate respondsToSelector:@selector(locationSelectionViewNeedsResize:)]) {
-                [strongSelf.delegate locationSelectionViewNeedsResize:self];
-            }
-        }];
-    }*/
-}
-
 - (void)loadCurrentLocation {
     
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -365,6 +331,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self geocodeAndDisplay:textField.text];
+    [textField resignFirstResponder];
     return YES;
 }
 
