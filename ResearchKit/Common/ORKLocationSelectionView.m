@@ -62,6 +62,8 @@
     MKPointAnnotation *_selectedLocationAnnotation;
     BOOL _userLocationNeedsUpdate;
     MKCoordinateRegion _answerRegion;
+    MKCoordinateRegion _initalCoordinateRegion;
+    BOOL _setInitialCoordinateRegion;
 }
 
 - (instancetype)initWithOpenMap:(BOOL)openMap {
@@ -316,6 +318,13 @@
     }
 }
 
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
+    if (!_setInitialCoordinateRegion) {
+        _setInitialCoordinateRegion = YES;
+        _initalCoordinateRegion = _mapView.region;
+    }
+}
+
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -335,6 +344,12 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self geocodeAndDisplay:textField.text];
     [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    [_mapView setRegion:_initalCoordinateRegion animated:YES];
+    [self addAnnotationForLocation:nil];
     return YES;
 }
 
