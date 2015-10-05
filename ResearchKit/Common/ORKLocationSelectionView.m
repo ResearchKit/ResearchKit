@@ -145,6 +145,8 @@
     }
     [self addSubview:_mapView];
     
+    [self loadCurrentLocation];
+    
     if (_answer) {
         CLLocationCoordinate2D coordinate = [((NSValue *)_answer) MKCoordinateValue];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
