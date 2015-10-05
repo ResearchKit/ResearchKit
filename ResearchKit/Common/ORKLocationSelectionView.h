@@ -69,6 +69,6 @@
 
 - (void)setTextColor:(nonnull UIColor *)color;
 
-- (void)showMapViewAnimated:(BOOL)animated;
+- (void)showMapView;
 
 @end
