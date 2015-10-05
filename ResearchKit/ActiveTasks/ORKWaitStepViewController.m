@@ -94,7 +94,7 @@
                 break;
         }
         
-        [self setupConstraints];
+        [self setUpConstraints];
         [self setNeedsUpdateConstraints];
     }
     return self;
@@ -106,7 +106,7 @@
     _activityIndicatorView.tintColor = self.tintColor;
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     
     NSMutableArray *constraints = [NSMutableArray new];
     
