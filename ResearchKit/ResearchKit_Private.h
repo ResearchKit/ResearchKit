@@ -45,6 +45,7 @@
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
+#import <ResearchKit/ORKWaitStepViewController.h>
 
 // Custom steps
 #import <ResearchKit/ORKCustomStepView.h>
@@ -67,7 +68,6 @@
 #import <ResearchKit/ORKCompletionStep.h>
 #import <ResearchKit/ORKReactionTimeStep.h>
 #import <ResearchKit/ORKTowerOfHanoiStep.h>
-#import <ResearchKit/ORKWaitStep.h>
 
 #import <ResearchKit/ORKAudioStepViewController.h>
 #import <ResearchKit/ORKToneAudiometryStepViewController.h>
@@ -82,7 +82,6 @@
 #import <ResearchKit/ORKHolePegTestPlaceStepViewController.h>
 #import <ResearchKit/ORKHolePegTestRemoveStepViewController.h>
 #import <ResearchKit/ORKCompletionStepViewController.h>
-#import <ResearchKit/ORKWaitStepViewController.h>
 
 // More internal stuff
 #import <ResearchKit/ORKResult_Private.h>
