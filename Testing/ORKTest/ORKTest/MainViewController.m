@@ -1727,7 +1727,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         /*
          A text question with single-line text entry, text validation, and a URL keyboard.
          */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" validInputDescription:@"Enter a valid URL."];
+        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Enter a valid URL."];
         format.multipleLines = NO;
         format.keyboardType = UIKeyboardTypeURL;
         format.autocapitalizationType = UITextAutocapitalizationTypeNone;

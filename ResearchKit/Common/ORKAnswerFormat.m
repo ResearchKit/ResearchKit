@@ -1868,11 +1868,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (instancetype)initWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description {
+- (instancetype)initWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage {
     self = [super init];
     if (self) {
         _regex = expression;
-        _invalidMessage = description;
+        _invalidMessage = invalidMessage;
         _maximumLength = 0;
         _autocapitalizationType = UITextAutocapitalizationTypeSentences;
         _autocorrectionType = UITextAutocorrectionTypeDefault;
