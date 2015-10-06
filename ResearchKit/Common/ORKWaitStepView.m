@@ -15,7 +15,6 @@
 - (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
     self = [super init];
     if (self) {
-        _indicatorMask = mask;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _textLabel = [ORKSubheadlineLabel new];
@@ -24,21 +23,8 @@
         _textLabel.text =  heading ? heading : ORKLocalizedString(@"WAIT_LABEL", nil);
         [self addSubview:_textLabel];
         
-        switch (_indicatorMask) {
-            case ORKProgressIndicatorMaskProgressBar:
-                _progressView = [UIProgressView new];
-                _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-                _progressView.progressTintColor = self.tintColor;
-                [self addSubview:_progressView];
-                break;
-            case ORKProgressIndicatorMaskIndeterminate:
-                _activityIndicatorView = [[ORKProgressView alloc] init];
-                _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-                [self addSubview:_activityIndicatorView];
-                break;
-            default:
-                break;
-        }
+        _indicatorMask = mask;
+        [self updateIndicatorMaskView];
         
         [self setUpConstraints];
         [self setNeedsUpdateConstraints];
@@ -101,28 +87,36 @@
 - (void)setIndicatorMask:(ORKProgressIndicatorMask)indicatorMask {
     if (_indicatorMask != indicatorMask) {
         _indicatorMask = indicatorMask;
-        
-        switch (_indicatorMask) {
-            case ORKProgressIndicatorMaskProgressBar:
-                [_activityIndicatorView removeFromSuperview];
-                _activityIndicatorView = nil;
-                _progressView = [UIProgressView new];
-                _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-                [self addSubview:_progressView];
-                break;
-            case ORKProgressIndicatorMaskIndeterminate:
-                [_progressView removeFromSuperview];
-                _progressView = nil;
-                _activityIndicatorView = [[ORKProgressView alloc] init];
-                _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-                [self addSubview:_activityIndicatorView];
-                break;
-            default:
-                break;
-        }
-        
+        [self updateIndicatorMaskView];
         [self setUpConstraints];
         [self setNeedsUpdateConstraints];
+    }
+}
+
+- (void)updateIndicatorMaskView {
+    
+    if (_activityIndicatorView) {
+        [_activityIndicatorView removeFromSuperview];
+        _activityIndicatorView = nil;
+    }
+    if (_progressView) {
+        [_progressView removeFromSuperview];
+        _progressView = nil;
+    }
+    
+    switch (_indicatorMask) {
+        case ORKProgressIndicatorMaskProgressBar:
+            _progressView = [UIProgressView new];
+            _progressView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self addSubview:_progressView];
+            break;
+        case ORKProgressIndicatorMaskIndeterminate:
+            _activityIndicatorView = [[ORKProgressView alloc] init];
+            _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self addSubview:_activityIndicatorView];
+            break;
+        default:
+            break;
     }
 }
 
