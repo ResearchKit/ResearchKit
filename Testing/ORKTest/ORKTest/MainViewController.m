@@ -484,38 +484,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
     } if ([identifier isEqualToString:WaitTaskIdentifier]) {
-        
-        NSMutableArray *steps = [[NSMutableArray alloc] init];
-        
-        /*
-         To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
-         */
-        ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
-        step1.title = @"Setup";
-        step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
-        [steps addObject:step1];
-        
-        // Interterminate wait step.
-        ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
-        step2.title = @"Getting Ready";
-        [steps addObject:step2];
-        
-        ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
-        step3.title = @"Account Setup";
-        step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
-        [steps addObject:step3];
-        
-        // Determinate wait step.
-        ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
-        step4.title = @"Syncing Account";
-        step4.indicatorMask = ORKProgressIndicatorMaskProgressBar;
-        [steps addObject:step4];
-        
-        ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
-        step5.title = @"Setup Complete";
-        [steps addObject:step5];
-        
-        return [self makeWaitingTask:steps];
+        return [self makeWaitingTask];
     }
 
     return nil;
@@ -3468,7 +3437,38 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 #pragma mark - Wait Task
 
-- (ORKOrderedTask *)makeWaitingTask:(NSArray *)steps {
+- (ORKOrderedTask *)makeWaitingTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    /*
+     To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
+     */
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
+    step1.title = @"Setup";
+    step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
+    [steps addObject:step1];
+    
+    // Interterminate wait step.
+    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
+    step2.title = @"Getting Ready";
+    [steps addObject:step2];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
+    step3.title = @"Account Setup";
+    step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
+    [steps addObject:step3];
+    
+    // Determinate wait step.
+    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
+    step4.title = @"Syncing Account";
+    step4.indicatorMask = ORKProgressIndicatorMaskProgressBar;
+    [steps addObject:step4];
+    
+    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
+    step5.title = @"Setup Complete";
+    [steps addObject:step5];
+
     ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
     return waitTask;
 }
