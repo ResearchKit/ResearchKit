@@ -50,7 +50,7 @@
  view controller.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKWaitStepViewController: ORKActiveStepViewController
+@interface ORKWaitStepViewController: ORKStepViewController
 
 /**
  Sets the progress indicator mask that is currently displayed in the view controller.

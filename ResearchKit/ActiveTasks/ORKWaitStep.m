@@ -40,7 +40,6 @@
 #import "ORKWaitStep.h"
 #import "ORKWaitStepViewController.h"
 #import "ORKHelpers.h"
-#import "ORKActiveStep_Internal.h"
 
 
 @implementation ORKWaitStep
@@ -53,8 +52,6 @@
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.indicatorMask = ORKProgressIndicatorMaskIndeterminate;
-        self.shouldContinueOnFinish = YES;
-        self.shouldStartTimerAutomatically = YES;
     }
     return self;
 }

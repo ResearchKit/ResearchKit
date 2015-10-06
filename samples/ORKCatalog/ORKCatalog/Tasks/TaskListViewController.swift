@@ -137,7 +137,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
         if stepViewController.step?.identifier == "WaitStepIndeterminate" {
             delay(5.0, closure: { () -> () in
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
-                    stepViewController.finish()
+                    stepViewController.goForward()
                 }
             })
         } else if stepViewController.step?.identifier == "WaitStepDeterminate" {
@@ -171,7 +171,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
                 return
             } else {
                 self.waitStepUpdateTimer?.invalidate()
-                waitStepViewController.finish()
+                waitStepViewController.goForward()
                 self.waitStepViewController?.setProgressDescription("Complete")
                 self.waitStepViewController = nil
             }

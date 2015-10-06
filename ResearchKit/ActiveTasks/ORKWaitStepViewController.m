@@ -50,117 +50,12 @@
 #import "ORKAccessibility.h"
 #import "ORKActiveStepView.h"
 #import "ORKProgressView.h"
-
-
-@interface ORKWaitView: ORKActiveStepCustomView
-
-- (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading;
-
-@property (nonatomic, strong) ORKSubheadlineLabel *textLabel;
-@property (nonatomic, strong) UIProgressView *progressView;
-@property (nonatomic, strong) ORKProgressView *activityIndicatorView;
-@property (nonatomic, assign) ORKProgressIndicatorMask indictatorMask;
-
-@end
-
-
-@implementation ORKWaitView
-
-- (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
-    self = [super init];
-    if (self) {
-        _indictatorMask = mask;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        _textLabel = [ORKSubheadlineLabel new];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _textLabel.text =  heading ? heading : ORKLocalizedString(@"WAIT_LABEL", nil);
-        [self addSubview:_textLabel];
-        
-        switch (_indictatorMask) {
-            case ORKProgressIndicatorMaskProgressBar:
-                _progressView = [UIProgressView new];
-                _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-                _progressView.progressTintColor = self.tintColor;
-                [self addSubview:_progressView];
-                break;
-            case ORKProgressIndicatorMaskIndeterminate:
-                _activityIndicatorView = [[ORKProgressView alloc] init];
-                _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-                [self addSubview:_activityIndicatorView];
-                break;
-            default:
-                break;
-        }
-        
-        [self setUpConstraints];
-        [self setNeedsUpdateConstraints];
-    }
-    return self;
-}
-
-- (void)tintColorDidChange {
-    [super tintColorDidChange];
-    _progressView.progressTintColor = self.tintColor;
-    _activityIndicatorView.tintColor = self.tintColor;
-}
-
-- (void)setUpConstraints {
-    
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textLabel]-|"
-                                                                   options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                   metrics:nil
-                                                                views:NSDictionaryOfVariableBindings(_textLabel)]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_textLabel)]];
-
-    if (_progressView) {
-        NSDictionary *screenMetric = @{@"progressWidth": [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 40.0)]};
-        
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|" options:NSLayoutFormatAlignAllBaseline metrics:screenMetric views:NSDictionaryOfVariableBindings(_progressView)]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
-
-    } else if (_activityIndicatorView) {
-
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_activityIndicatorView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
-    }
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-}
-
-#pragma mark Accessibility
-
-- (BOOL)isAccessibilityElement {
-    return YES;
-}
-
-- (NSString *)accessibilityLabel {
-    if (_progressView) {
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel, _progressView.accessibilityLabel);
-    } else if (_activityIndicatorView) {
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel, _activityIndicatorView.accessibilityLabel);
-    }
-    return nil;
-}
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    if (_progressView) {
-        return [super accessibilityTraits] | UIAccessibilityTraitUpdatesFrequently;
-    } else {
-        return [super accessibilityTraits];
-    }
-}
-
-@end
+#import "ORKWaitStepView.h"
 
 
 @interface ORKWaitStepViewController ()
 
-@property (nonatomic, strong) ORKWaitView *waitView;
+@property (nonatomic, strong) ORKWaitStepView *waitStepView;
 
 @end
 
@@ -169,37 +64,37 @@
     ORKProgressIndicatorMask _indicatorMask;
 }
 
-- (instancetype)initWithStep:(ORKStep *)step {
-    self = [super initWithStep:step];
-    if (self) {
-        self.suspendIfInactive = NO;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.learnMoreButtonItem = nil;
-    self.activeStepView.headerView.captionLabel.text = nil;
+    [self stepDidChange];
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
-
-    if (!_waitView) {
-        _waitView = [[ORKWaitView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:self.step.title];
-        _waitView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.activeStepView.activeCustomView = _waitView;
-        if (((ORKWaitStep *)self.step).shouldContinueOnFinish) {
-            self.activeStepView.continueSkipContainer.hidden = YES;
+    
+    if ([self step] && [self isViewLoaded]) {
+        if (!_waitStepView) {
+            _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:(self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil))];
+            _waitStepView.translatesAutoresizingMaskIntoConstraints = NO;
+            [self.view addSubview:_waitStepView];
+            [self setUpConstraints];
         } else {
-            self.activeStepView.continueSkipContainer.continueEnabled = false;
+            _waitStepView.indicatorMask = ((ORKWaitStep *)self.step).indicatorMask;
+            _waitStepView.textLabel.text = self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil);
+            [self.view setNeedsUpdateConstraints];
         }
     }
+}
 
-    _waitView.indictatorMask = ((ORKWaitStep *)self.step).indicatorMask;
-    _waitView.textLabel.text = self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil);
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setCurrentProgressIndicatorMask:(ORKProgressIndicatorMask)mask {
@@ -208,20 +103,12 @@
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
-    [_waitView.progressView setProgress:progress animated:animated];
+    [_waitStepView.progressView setProgress:progress animated:animated];
 }
 
 - (void)setProgressDescription:(NSString *)description {
-    _waitView.textLabel.text = description;
+    _waitStepView.textLabel.text = description;
     [self.view setNeedsLayout];
-}
-
-- (void)finish {
-    [super finish];
-    
-    if (!((ORKWaitStep *)self.step).shouldContinueOnFinish) {
-        self.activeStepView.continueSkipContainer.continueEnabled = YES;
-    }
 }
 
 @end

@@ -48,11 +48,11 @@
     not need their input, and possibly indicate the progress that process has made.
     To update the progress on screen, use the methods provided on the
     `ORKWaitStepViewController` this step represents. Once the processing is complete,
- `finish` must be called on the `ORKWaitStepViewController` in order for the user to
+ `goForward` must be called on the `ORKWaitStepViewController` in order for the user to
  be able to continue.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKWaitStep : ORKActiveStep
+@interface ORKWaitStep : ORKStep
 
 /**
  This property specifies the type of progress bar that will be displayed.

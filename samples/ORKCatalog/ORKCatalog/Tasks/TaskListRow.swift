@@ -126,6 +126,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TimeOfDayQuestion,
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
+                    .Wait,
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -135,7 +136,6 @@ enum TaskListRow: Int, CustomStringConvertible {
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
-                    .Wait,
                     .Audio,
                     .Fitness,
                     .HolePegTest,
@@ -209,7 +209,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             return NSLocalizedString("Passcode Creation", comment: "")
 
         case .Wait:
-            return NSLocalizedString("Wait Task", comment: "")
+            return NSLocalizedString("Wait Step", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -331,6 +331,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ImageCaptureTask
         case ImageCaptureStep
         
+        // Task with an example of waiting.
+        case WaitTask
+        case WaitStepDeterminate
+        case WaitStepIndeterminate
+        
         // Eligibility task specific indentifiers.
         case EligibilityTask
         case EligibilityIntroStep
@@ -354,9 +359,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case PasscodeStep
 
         // Active tasks.
-        case WaitTask
-        case WaitStepIndeterminate
-        case WaitStepDeterminate
         case AudioTask
         case FitnessTask
         case HolePegTestTask
@@ -953,7 +955,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
         waitStepDeterminate.indicatorMask = ORKProgressIndicatorMask.ProgressBar
-        waitStepDeterminate.shouldContinueOnFinish = false
         
         return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }
