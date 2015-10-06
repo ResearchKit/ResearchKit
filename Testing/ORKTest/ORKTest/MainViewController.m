@@ -3481,8 +3481,9 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         __weak ORKWaitStepViewController *vc = viewController;
         __weak MainViewController *weakSelf = self;
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [weakSelf updateProgress:progress + 0.2 OfWaitTask:vc];
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            __typeof__(self) strongSelf = weakSelf;
+            [strongSelf updateProgress:progress + 0.2 OfWaitTask:vc];
         });
     } else {
         [viewController finish];
