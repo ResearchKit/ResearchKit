@@ -37,7 +37,7 @@
  */
 
 
-#import <ResearchKit/ResearchKit_Private.h>
+#import <ResearchKit/ResearchKit.h>
 
 
 @class ORKWaitStepViewController;
