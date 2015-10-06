@@ -76,7 +76,8 @@
     
     if ([self step] && [self isViewLoaded]) {
         if (!_waitStepView) {
-            _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask heading:(self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil))];
+            _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask
+                                                                   heading:(self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil))];
             _waitStepView.translatesAutoresizingMaskIntoConstraints = NO;
             [self.view addSubview:_waitStepView];
             [self setUpConstraints];
@@ -91,8 +92,20 @@
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView
+                                                        attribute:NSLayoutAttributeBottom
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeCenterY
+                                                       multiplier:1.0
+                                                         constant:0.0]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }

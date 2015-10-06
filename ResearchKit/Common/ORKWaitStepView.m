@@ -54,19 +54,45 @@
                                                                              options:NSLayoutFormatDirectionLeadingToTrailing
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_textLabel)]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_textLabel)]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]"
+                                                                             options:NSLayoutFormatAlignAllCenterX
+                                                                             metrics:nil
+                                                                               views:NSDictionaryOfVariableBindings(_textLabel)]];
     
     if (_progressView) {
         NSDictionary *screenMetric = @{@"progressWidth": [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 40.0)]};
         
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|" options:NSLayoutFormatAlignAllBaseline metrics:screenMetric views:NSDictionaryOfVariableBindings(_progressView)]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|"
+                                                 options:NSLayoutFormatAlignAllBaseline
+                                                 metrics:screenMetric
+                                                   views:NSDictionaryOfVariableBindings(_progressView)]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|"
+                                                 options:NSLayoutFormatAlignAllCenterX
+                                                 metrics:nil
+                                                   views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
         
     } else if (_activityIndicatorView) {
         
-        [constraints addObject:[NSLayoutConstraint constraintWithItem:_activityIndicatorView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|" options:NSLayoutFormatAlignAllBaseline metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
+        [constraints addObject:
+         [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                      attribute:NSLayoutAttributeCenterX
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:self
+                                      attribute:NSLayoutAttributeCenterX
+                                     multiplier:1.0
+                                       constant:0.0]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|"
+                                                 options:NSLayoutFormatAlignAllBaseline
+                                                 metrics:nil
+                                                   views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
+        [constraints addObjectsFromArray:
+         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|"
+                                                 options:NSLayoutFormatAlignAllCenterX
+                                                 metrics:nil
+                                                   views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
     }
     
     [NSLayoutConstraint activateConstraints:constraints];
