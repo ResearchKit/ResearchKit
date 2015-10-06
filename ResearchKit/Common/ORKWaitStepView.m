@@ -46,12 +46,6 @@
     return self;
 }
 
-- (void)tintColorDidChange {
-    [super tintColorDidChange];
-    _progressView.progressTintColor = self.tintColor;
-    _activityIndicatorView.tintColor = self.tintColor;
-}
-
 - (void)setUpConstraints {
     
     NSMutableArray *constraints = [NSMutableArray new];
@@ -88,7 +82,6 @@
                 _activityIndicatorView = nil;
                 _progressView = [UIProgressView new];
                 _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-                _progressView.progressTintColor = self.tintColor;
                 [self addSubview:_progressView];
                 break;
             case ORKProgressIndicatorMaskIndeterminate:
