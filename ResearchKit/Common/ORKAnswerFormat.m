@@ -1935,11 +1935,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    NSString *string = nil;
+    NSMutableString *string = [NSMutableString new];
     if (![self isTextLengthValidWithString:text]) {
-        string = [NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))];
+        [string appendString:[NSString stringWithFormat:ORKLocalizedString(@"TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE", nil), ORKLocalizedStringFromNumber(@(_maximumLength))]];
     }
-
+    if (![self isTextRegexValidWithString:text]) {
+        if (string.length > 0) {
+            [string appendString:@"\n"];
+        }
+        [string appendString:_invalidMessage];
+    }
     return string;
 }
 
