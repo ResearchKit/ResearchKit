@@ -31,13 +31,35 @@
 
 #import "ORKStepViewController.h"
 
-
+/**
+ The `ORKVerificationStepViewController` class is the concrete `ORKStepViewController`
+ implementation for `ORKVerificationStep`.
+ 
+ You should subclass a verification step view controller and override the button action
+ methods to provide your navigation logic.
+ */
+ORK_CLASS_AVAILABLE
 @interface ORKVerificationStepViewController : ORKStepViewController
 
+/**
+ Action method for the continue button.
+ 
+ Override this method to provide custom logic for the button action.
+ */
 - (void)continueButtonTapped;
 
+/**
+ Action method for the resend email button.
+ 
+ Override this method to provide custom logic for the button action.
+ */
 - (void)resendEmailButtonTapped;
 
+/**
+ Action method for the change email button.
+ 
+ Override this method to provide custom logic for the button action.
+ */
 - (void)changeEmailButtonTapped;
 
 @end

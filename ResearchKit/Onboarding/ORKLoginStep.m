@@ -29,14 +29,15 @@
  */
 
 
-#import "ORKVerificationStep.h"
+#import "ORKLoginStep.h"
+#import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 
 
-@implementation ORKVerificationStep
+@implementation ORKLoginStep
 
 - (Class)stepViewControllerClass {
-    return [_verificationViewController class];
+    return [_loginViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -47,20 +48,50 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-                             email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController {
+               loginViewController:(ORKLoginStepViewController *)loginViewController {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
-        _email = email;
-        _verificationViewController = verificationViewController;
+        _loginViewController = loginViewController;
     }
     return self;
 }
 
-- (BOOL)allowsBackNavigation {
-    return NO;
+- (BOOL)isOptional {
+    return YES;
+}
+
+- (NSArray<ORKFormItem *> *)formItems {
+    NSMutableArray *formItems = [NSMutableArray new];
+    
+    {
+        ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"email"
+                                                               text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
+                                                       answerFormat:answerFormat];
+        item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
+        item.optional = NO;
+        [formItems addObject:item];
+    }
+    
+    {
+        ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.multipleLines = NO;
+        answerFormat.secureTextEntry = YES;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
+                                                               text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
+                                                       answerFormat:answerFormat];
+        item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
+        item.optional = NO;
+        [formItems addObject:item];
+    }
+    
+    return formItems;
 }
 
 + (BOOL)supportsSecureCoding {
@@ -70,22 +101,19 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, email);
-        ORK_DECODE_OBJ(aDecoder, verificationViewController);
+        ORK_DECODE_OBJ(aDecoder, loginViewController);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, email);
-    ORK_ENCODE_OBJ(aCoder, verificationViewController);
+    ORK_ENCODE_OBJ(aCoder, loginViewController);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKVerificationStep *step = [super copyWithZone:zone];
-    step->_email = self.email;
-    step->_verificationViewController = self.verificationViewController;
+    ORKLoginStep *step = [super copyWithZone:zone];
+    step->_loginViewController = self.loginViewController;
     return step;
 }
 
@@ -94,8 +122,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.email, castObject.email) &&
-            ORKEqualObjects(self.verificationViewController, castObject.verificationViewController));
+            ORKEqualObjects(self.loginViewController, castObject.loginViewController));
 }
 
 @end

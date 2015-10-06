@@ -113,6 +113,9 @@
 "RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
 "VERIFICATION_LABEL_MESSAGE" = "If verified, tap below.";
 
+/* Login step */
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";

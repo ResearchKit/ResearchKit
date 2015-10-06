@@ -29,46 +29,24 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import "ORKFormStepViewController.h"
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+/**
+ The `ORKLoginStepViewController` class is the concrete `ORKFormStepViewController`
+ implementation for `ORKLoginStep`.
+ 
+ You should subclass a login step view controller and override the button action
+ methods to provide your navigation logic.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKLoginStepViewController : ORKFormStepViewController
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+/**
+ Action method for the continue button.
+ 
+ Override this method to provide custom logic for the button action.
+ */
+- (void)forgotPasswordButtonTapped;
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
-
-#import <ResearchKit/ORKRegistrationStep.h>
-#import <ResearchKit/ORKVerificationStep.h>
-#import <ResearchKit/ORKVerificationStepViewController.h>
-#import <ResearchKit/ORKLoginStep.h>
-#import <ResearchKit/ORKLoginStepViewController.h>
-
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
-
+@end

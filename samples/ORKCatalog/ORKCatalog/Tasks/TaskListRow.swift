@@ -77,6 +77,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     case Consent
     case AccountCreation
+    case Login
     
     case Audio
     case Fitness
@@ -126,6 +127,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .Consent,
                     .AccountCreation,
+                    .Login,
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
                 [
@@ -193,6 +195,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .AccountCreation:
             return NSLocalizedString("Account Creation", comment: "")
+        
+        case .Login:
+            return NSLocalizedString("Login", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -319,6 +324,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         case AccountCreationTask
         case RegistrationStep
         case VerificationStep
+        
+        // Login task specific identifiers.
+        case LoginTask
+        case LoginStep
 
         // Active tasks.
         case AudioTask
@@ -385,6 +394,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .AccountCreation:
             return accountCreationTask
+            
+        case .Login:
+            return loginTask
             
         case .Audio:
             return audioTask
@@ -814,6 +826,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationTitle = NSLocalizedString("Registration", comment: "")
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
         
+        /*
+        A verification step view controller sub class is required in order to use a verification step.
+        This class includes methods that interact with the buttons in the view. 
+        Overriding these methods allows for your desired functionality.
+        */
         class verificationViewController : ORKVerificationStepViewController {
             override func changeEmailButtonTapped() {
                 print("Change email button tapped")
@@ -837,6 +854,28 @@ enum TaskListRow: Int, CustomStringConvertible {
             registrationStep,
             verificationStep
             ])
+    }
+    
+    /// This tasks presents the login step.
+    private var loginTask: ORKTask {
+        /*
+        A login step view controller sub class is required in order to use a login step.
+        This class includes a method that interact with the 'Forgot password?' button in the view.
+        Overriding this method allows for your desired functionality.
+        */
+        class loginViewController: ORKLoginStepViewController {
+            override func forgotPasswordButtonTapped() {
+                print("Forgot password button tapped")
+            }
+        }
+        
+        /*
+        A login step provides a form step that is populated with email and password fields,
+        and a button for `Forgot password?`.
+        */
+        let loginTitle = NSLocalizedString("Login", comment: "")
+        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewController:loginViewController())
+        return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep])
     }
     
 

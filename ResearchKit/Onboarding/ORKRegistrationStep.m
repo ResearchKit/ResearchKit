@@ -34,9 +34,7 @@
 #import "ORKDefines_Private.h"
 
 
-@implementation ORKRegistrationStep {
-    ORKRegistrationStepOption _options;
-}
+@implementation ORKRegistrationStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title

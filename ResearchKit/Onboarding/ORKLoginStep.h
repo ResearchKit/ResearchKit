@@ -30,12 +30,20 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import "ORKVerificationStepViewController.h"
+#import "ORKLoginStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ORKVerificationStep : ORKStep
+@class ORKLoginStepViewController;
+
+/**
+ The `ORKLoginStep` class represents a form step that provides fields commonly used
+ for account login.
+ 
+ The login step contains email and password fields.
+ */
+@interface ORKLoginStep : ORKFormStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
 
@@ -43,26 +51,18 @@ NS_ASSUME_NONNULL_BEGIN
  Returns an initialized registrationg step using the specified identifier,
  title, text, and options.
  
- @param identifier                      The string that identifies the step (see `ORKStep`).
- @param title                           The title of the form (see `ORKStep`).
- @param text                            The text shown immediately below the title (see `ORKStep`).
- @param email                           The email address that needs to be verified.
- @param verificationViewController      The subclassed verification view controller.
+ @param identifier                  The string that identifies the step (see `ORKStep`).
+ @param title                       The title of the form (see `ORKStep`).
+ @param text                        The text shown immediately below the title (see `ORKStep`).
+ @param email                       The email address that needs to be verified.
+ @param loginViewController         The subclassed login view controller.
  
  @return As initialized verification step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-                             email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController;
-
-/**
- The email used for the step.
- 
- The email is displayed on the step for the user to see.
- */
-@property (nonatomic, copy, readonly) NSString *email;
+               loginViewController:(ORKLoginStepViewController *)loginViewController;
 
 /**
  The view controller subclass used for the step.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  The subclass allows you to override button actions in order to provide navigation and logic
  for the button items on the step.
  */
-@property (nonatomic, readonly) ORKVerificationStepViewController *verificationViewController;
+@property (nonatomic, readonly) ORKLoginStepViewController *loginViewController;
 
 @end
 
