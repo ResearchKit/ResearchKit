@@ -351,15 +351,12 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValidForTextField:textField];
-    return isValid;
+    return [self isAnswerValidForTextField:textField];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValidForTextField:textField];
-    
     [self.textField resignFirstResponder];
-    return isValid;
+    return [self isAnswerValidForTextField:textField];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
