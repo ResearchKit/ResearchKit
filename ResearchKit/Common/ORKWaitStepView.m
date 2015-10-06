@@ -10,7 +10,9 @@
 #import "ORKProgressView.h"
 #import "ORKAccessibility.h"
 
-@implementation ORKWaitStepView
+@implementation ORKWaitStepView {
+    NSArray *_customConstraints;
+}
 
 - (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
     self = [super init];
@@ -44,6 +46,13 @@
                                                                              options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:nil
                                                                                views:NSDictionaryOfVariableBindings(_textLabel)]];
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    [self removeConstraints:_customConstraints];
     
     if (_progressView) {
         NSDictionary *screenMetric = @{@"progressWidth": [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 40.0)]};
@@ -82,13 +91,15 @@
     }
     
     [NSLayoutConstraint activateConstraints:constraints];
+    _customConstraints = [constraints copy];
+    
+    [super updateConstraints];
 }
 
 - (void)setIndicatorMask:(ORKProgressIndicatorMask)indicatorMask {
     if (_indicatorMask != indicatorMask) {
         _indicatorMask = indicatorMask;
         [self updateIndicatorMaskView];
-        [self setUpConstraints];
         [self setNeedsUpdateConstraints];
     }
 }
