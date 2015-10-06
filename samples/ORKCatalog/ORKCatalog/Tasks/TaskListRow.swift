@@ -837,7 +837,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
         
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, validInputDescription: NSLocalizedString("Enter a valid URL.", comment: ""))
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, invalidMessage: NSLocalizedString("Enter a valid URL.", comment: ""))
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = UIKeyboardType.URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None

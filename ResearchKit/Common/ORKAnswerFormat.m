@@ -351,8 +351,8 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextAnswerFormat alloc] initWithMaximumLength:maximumLength];
 }
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description {
-    return [[ORKTextAnswerFormat alloc] initWithValidationExpression:expression validInputDescription:description];
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage {
+    return [[ORKTextAnswerFormat alloc] initWithValidationExpression:expression invalidMessage:invalidMessage];
 }
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat {
@@ -1914,26 +1914,26 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
-    if (text) {
-        BOOL isValid = NO;
-        if (self.regex) {
-            NSString *regExPattern = self.regex;
-            NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
-            NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
-            isValid = (regExMatches != 0);
-        } else if (text.length > 0) {
-	        isValid = [self isTextLengthValidWithString:text];
-    	} else {
-            isValid = YES;
-        }
-        return isValid;
-    } else {
-        return YES;
+    BOOL isValid = YES;
+    if (text && text.length > 0) {
+        isValid = ([self isTextLengthValidWithString:text] && [self isTextRegexValidWithString:text]);
     }
+    return isValid;
 }
 
 - (BOOL)isTextLengthValidWithString:(NSString *)text {
     return (_maximumLength == 0 || text.length <= _maximumLength);
+}
+
+- (BOOL)isTextRegexValidWithString:(NSString *)text {
+    BOOL isValid = YES;
+    if (self.regex) {
+        NSString *regExPattern = self.regex;
+        NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+        NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
+        isValid = (regExMatches != 0);
+    }
+    return isValid;
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
@@ -2009,7 +2009,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_impliedAnswerFormat) {
-        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationExpression:EmailValidationRegex validInputDescription:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationExpression:EmailValidationRegex invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;

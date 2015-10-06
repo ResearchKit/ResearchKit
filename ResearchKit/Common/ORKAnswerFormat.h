@@ -1193,12 +1193,12 @@ ORK_CLASS_AVAILABLE
  This method is one of the designated initializers.
  
  @param expression                The regular expression used to valide the text.
- @param description               The description of the valid input presented to the user upon invalid input.
+ @param invalidMessage            The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
 - (instancetype)initWithValidationExpression:(NSString *)expression
-                       validInputDescription:(NSString *)description NS_DESIGNATED_INITIALIZER;
+                              invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
