@@ -72,7 +72,7 @@ In addition to general stability and performance improvements, *ResearchKit 1.2*
 
 *ResearchKit 1.1* supports *iOS* and requires *Xcode 6.3* or newer. The minimum supported *Base SDK* is *8.0*.
 
-In addition to general stability and performance improvmenets, *ResearchKit 1.1* includes the following new features and enhancements.
+In addition to general stability and performance improvements, *ResearchKit 1.1* includes the following new features and enhancements.
 
 - **Navigable Ordered Task**
 
