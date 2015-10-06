@@ -39,6 +39,7 @@
 #import <UIKit/UIKit.h>
 
 @class ORKLocationSelectionView;
+@class MKPlacemark;
 
 @protocol ORKLocationSelectionViewDelegate <NSObject>
 
@@ -59,7 +60,7 @@
 
 @property (nonatomic, weak, nullable) id<ORKLocationSelectionViewDelegate> delegate;
 
-@property (nonatomic, strong, nullable) id answer;
+@property (nonatomic, strong, nullable) MKPlacemark *answer;
 
 @property (nonatomic, assign) BOOL edgeToEdgeMap;
 

@@ -432,6 +432,8 @@
 		BCD192EC1B81245500FCC08A /* ORKPieChartTitleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCD192EA1B81245500FCC08A /* ORKPieChartTitleTextView.m */; };
 		BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */; };
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
+		CA8D0E8A1BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = CA8D0E881BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.h */; settings = {ASSET_TAGS = (); }; };
+		CA8D0E8B1BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E891BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m */; settings = {ASSET_TAGS = (); }; };
 		CBD34A561BB1FB9000F204EA /* ORKLocationSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = CBD34A541BB1FB9000F204EA /* ORKLocationSelectionView.h */; settings = {ASSET_TAGS = (); }; };
 		CBD34A571BB1FB9000F204EA /* ORKLocationSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD34A551BB1FB9000F204EA /* ORKLocationSelectionView.m */; settings = {ASSET_TAGS = (); }; };
 		CBD34A5A1BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = CBD34A581BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h */; settings = {ASSET_TAGS = (); }; };
@@ -926,6 +928,8 @@
 		BCD192ED1B81255F00FCC08A /* ORKPieChartView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKPieChartView_Internal.h; path = Charts/ORKPieChartView_Internal.h; sourceTree = "<group>"; };
 		BCFB2EAF1AE70E4E0070B5D0 /* ORKConsentSceneViewController_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKConsentSceneViewController_Internal.h; sourceTree = "<group>"; };
 		BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKResultPredicate.m; sourceTree = "<group>"; };
+		CA8D0E881BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPlacemark+ORKStringConversion.h"; sourceTree = "<group>"; };
+		CA8D0E891BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPlacemark+ORKStringConversion.m"; sourceTree = "<group>"; };
 		CBD34A541BB1FB9000F204EA /* ORKLocationSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKLocationSelectionView.h; sourceTree = "<group>"; };
 		CBD34A551BB1FB9000F204EA /* ORKLocationSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKLocationSelectionView.m; sourceTree = "<group>"; };
 		CBD34A581BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSurveyAnswerCellForLocation.h; sourceTree = "<group>"; };
@@ -1444,6 +1448,7 @@
 				86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */,
 				86C40B8A1A8D7C5C00081FAC /* ORKHealthAnswerFormat.h */,
 				86C40B8B1A8D7C5C00081FAC /* ORKHealthAnswerFormat.m */,
+				CA8D0E851BC3FF7900BED0F7 /* Categories */,
 				B12EFF421AB2134100A80147 /* Choice Format Helpers */,
 				B12EFF411AB212E100A80147 /* Control Views */,
 				B12EFF3E1AB2123000A80147 /* Form Step Views */,
@@ -1956,6 +1961,15 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		CA8D0E851BC3FF7900BED0F7 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CA8D0E881BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.h */,
+				CA8D0E891BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2167,6 +2181,7 @@
 				86C40C821A8D7C5C00081FAC /* ORKActiveStep_Internal.h in Headers */,
 				86C40D481A8D7C5C00081FAC /* ORKInstructionStepViewController_Internal.h in Headers */,
 				86C40D341A8D7C5C00081FAC /* ORKHelpers.h in Headers */,
+				CA8D0E8A1BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.h in Headers */,
 				FA7A9D2F1B083DD3005A2BEA /* ORKConsentSectionFormatter.h in Headers */,
 				86C40E341A8D7C5C00081FAC /* ORKVisualConsentStepViewController_Internal.h in Headers */,
 				86C40D381A8D7C5C00081FAC /* ORKHTMLPDFWriter.h in Headers */,
@@ -2263,6 +2278,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = ORK;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = researchkit.org;
 				TargetAttributes = {
@@ -2547,6 +2563,7 @@
 				86C40CAE1A8D7C5C00081FAC /* ORKRecorder.m in Sources */,
 				86C40DAC1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.m in Sources */,
 				86C40C541A8D7C5C00081FAC /* ORKTappingIntervalStep.m in Sources */,
+				CA8D0E8B1BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m in Sources */,
 				86C40D6C1A8D7C5C00081FAC /* ORKResult.m in Sources */,
 				86C40CD21A8D7C5C00081FAC /* ORKInstructionStepView.m in Sources */,
 				86C40D181A8D7C5C00081FAC /* ORKErrors.m in Sources */,

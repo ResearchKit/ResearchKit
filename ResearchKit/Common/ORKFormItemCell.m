@@ -45,6 +45,7 @@
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
 #import "ORKLocationSelectionView.h"
+#import "MKPlacemark+ORKStringConversion.h"
 
 #import <MapKit/MapKit.h>
 
@@ -1139,10 +1140,12 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)answerDidChange {
     id answer = self.answer;
+    
     if (answer == ORKNullAnswerValue()) {
         answer = nil;
     }
-    _selectionView.answer = (NSValue *)answer;
+    
+    _selectionView.answer = (MKPlacemark *)answer;
     [_selectionView setTextColor:[UIColor blackColor]];
 }
 
@@ -1210,7 +1213,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)isAnswerValid {
-    id answer = _selectionView.answer;
+    id answer = self.answer;
     
     if (answer == ORKNullAnswerValue()) {
         return YES;
@@ -1219,8 +1222,8 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
-    CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
-    NSString *string = [self convertLocationToString:location];
+    MKPlacemark *placemark = (MKPlacemark *)answer;
+    NSString *string = [placemark ork_stringValue];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -1229,11 +1232,13 @@ static const CGFloat HorizontalMargin = 15.0;
     BOOL isValid = [self isAnswerValid];
     
     if (!isValid) {
-        id answer = _selectionView.answer;
-        CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
-        NSString *string = [self convertLocationToString:location];
+        id answer = self.answer;
+        MKPlacemark *placemark = (MKPlacemark *)answer;
+        NSString *message = [placemark ork_stringValue];
         
-        [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
+        NSString *localizedMessage = [[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
+        
+        [self showValidityAlertWithMessage:localizedMessage];
     }
     
     return isValid;

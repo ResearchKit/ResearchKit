@@ -58,7 +58,6 @@
 
 @implementation ORKLocationSelectionView {
     CLLocationManager *_locationManager;
-    MKPointAnnotation *_selectedLocationAnnotation;
     BOOL _userLocationNeedsUpdate;
     MKCoordinateRegion _answerRegion;
     MKCoordinateRegion _initalCoordinateRegion;
@@ -147,9 +146,7 @@
     [self loadCurrentLocation];
     
     if (_answer) {
-        CLLocationCoordinate2D coordinate = [((NSValue *)_answer) MKCoordinateValue];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-        [self addAnnotationForLocation:location];
+        [self setAnswer:_answer];
     }
     
     NSMutableArray *constraints = [NSMutableArray new];
@@ -183,7 +180,7 @@
 - (void)geocodeAndDisplay:(NSString *)string {
     
     if (string == nil || string.length == 0) {
-        [self addAnnotationForLocation:nil];
+        [self setAnswer:nil];
         return;
     }
     
@@ -195,11 +192,10 @@
             if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
                 [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [strongSelf addAnnotationForLocation:nil];
+            [strongSelf setAnswer:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
-            [strongSelf addAnnotationForLocation:placemark.location];
+            [strongSelf setAnswer:[[MKPlacemark alloc] initWithPlacemark:placemark]];
         }
     }];
 }
@@ -207,7 +203,7 @@
 - (void)reverseGeocodeAndDisplay:(CLLocation *)location {
     
     if (location == nil) {
-        [self addAnnotationForLocation:nil];
+        [self setAnswer:nil];
         return;
     }
     
@@ -219,53 +215,47 @@
             if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
                 [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [strongSelf addAnnotationForLocation:nil];
+            [strongSelf setAnswer:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO)];
-            [strongSelf addAnnotationForLocation:placemark.location];
+            [strongSelf setAnswer:[[MKPlacemark alloc] initWithPlacemark:placemark]];
         }
     }];
 }
 
-- (void)addAnnotationForLocation:(CLLocation *)location {
-    if (_selectedLocationAnnotation) {
-        [_mapView removeAnnotation:_selectedLocationAnnotation];
-        _selectedLocationAnnotation = nil;
+- (void)setAnswer:(MKPlacemark *)answer {
+    
+    if (_answer) {
+        [_mapView removeAnnotation:_answer];
     }
-    if (location) {
-        _selectedLocationAnnotation = [[MKPointAnnotation alloc] init];
-        _selectedLocationAnnotation.coordinate = location.coordinate;
-        [_mapView addAnnotation:_selectedLocationAnnotation];
-        _answer = [NSValue valueWithMKCoordinate:location.coordinate];
+    
+    _answer = answer;
+    
+    if (_answer) {
+        [_mapView addAnnotation:_answer];
         
         float spanX = 0.00725;
         float spanY = 0.00725;
         MKCoordinateRegion region;
-        region.center.latitude = location.coordinate.latitude;
-        region.center.longitude = location.coordinate.longitude;
+        region.center.latitude = answer.location.coordinate.latitude;
+        region.center.longitude = answer.location.coordinate.longitude;
         region.span = MKCoordinateSpanMake(spanX, spanY);
         _answerRegion = region;
         [_mapView setRegion:region animated:YES];
         
-        if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
-            [_delegate locationSelectionViewDidChange:self];
+        if (answer.addressDictionary) {
+            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(answer.addressDictionary, NO)];
+        } else {
+            CLLocationCoordinate2D coordinate = answer.location.coordinate;
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+            [self reverseGeocodeAndDisplay:location];
         }
     } else {
-        _answer = nil;
-        _answerRegion = MKCoordinateRegionForMapRect(MKMapRectNull);
-        if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
-            [_delegate locationSelectionViewDidChange:self];
-        }
+        [_mapView setRegion:_initalCoordinateRegion animated:YES];
     }
-}
-
-- (void)setAnswer:(id)answer {
-    _answer = answer;
-    if (_answer) {
-        CLLocationCoordinate2D coordinate = [((NSValue *)answer) MKCoordinateValue];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-        [self reverseGeocodeAndDisplay:location];
+    
+    if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
+        [_delegate locationSelectionViewDidChange:self];
     }
 }
 
@@ -320,7 +310,7 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     [_mapView setRegion:_initalCoordinateRegion animated:YES];
-    [self addAnnotationForLocation:nil];
+    [self setAnswer:nil];
     return YES;
 }
 

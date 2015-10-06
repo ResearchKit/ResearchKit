@@ -37,6 +37,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
+#import "MKPlacemark+ORKStringConversion.h"
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -2073,9 +2074,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text {
     BOOL isValid = [super isAnswerValidWithString:text];
     
-    CLLocationCoordinate2D coordinate = [self coordinateFromString:text];
+    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithString:text];
     
-    if (CLLocationCoordinate2DIsValid(coordinate)) {
+    if (placemark && CLLocationCoordinate2DIsValid(placemark.coordinate)) {
         isValid = YES;
     } else {
         isValid = NO;
@@ -2089,7 +2090,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
     
-    CLLocationCoordinate2D coordinate = [self coordinateFromString:text];
+    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithString:text];
+    CLLocationCoordinate2D coordinate = placemark.location.coordinate;
     NSString *string = nil;
     
     if (coordinate.latitude < -180.0) {
@@ -2111,24 +2113,15 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeLocation;
 }
 
-- (CLLocationCoordinate2D)coordinateFromString:(NSString *)string {
-    NSArray *components = [string componentsSeparatedByString:@", "];
-    
-    if (components.count == 2) {
-        NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-        decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
-        NSNumber *latitude = [decimalFormatter numberFromString:components[0]];
-        NSNumber *longitude = [decimalFormatter numberFromString:components[1]];
-        
-        if (latitude != nil && longitude != nil) {
-            return CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
-        } else {
-            return kCLLocationCoordinate2DInvalid;
-        }
-    } else {
-        return kCLLocationCoordinate2DInvalid;
-    }
+- (Class)questionResultClass {
+    return [ORKLocationQuestionResult class];
+}
+
+- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
+    ORKLocationQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
+    questionResult.answer = answer;
+    questionResult.locationAnswer = answer;
+    return questionResult;
 }
 
 @end

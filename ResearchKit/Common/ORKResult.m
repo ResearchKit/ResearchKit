@@ -1682,7 +1682,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, NSValue);
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, MKPlacemark);
     }
     return self;
 }
@@ -1695,10 +1695,7 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame &&
-            //ORKEqualObjects(_locationAnswer, castObject.locationAnswer)) ;
-            _locationAnswer.MKCoordinateValue.latitude == castObject.locationAnswer.MKCoordinateValue.latitude &&
-            _locationAnswer.MKCoordinateValue.longitude == castObject.locationAnswer.MKCoordinateValue.longitude);
+    return (isParentSame && [self isEqual:castObject]);
 }
 
 - (NSUInteger)hash {
@@ -1712,15 +1709,10 @@
 }
 
 + (Class)answerClass {
-    return [NSValue class];
+    return [MKPlacemark class];
 }
 
 - (void)setAnswer:(id)answer {
-    if ([answer isKindOfClass:[NSArray class]]) {
-        // Because ORKLocationAnswerFormat has ORKChoiceAnswerFormat as its implied format.
-        NSAssert([answer count] <= 1, @"Should be no more than one answer");
-        answer = [answer firstObject];
-    }
     answer = [self validateAnswer:answer];
     self.locationAnswer = answer;
 }

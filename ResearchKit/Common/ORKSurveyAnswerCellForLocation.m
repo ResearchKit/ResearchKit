@@ -38,6 +38,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKLocationSelectionView.h"
+#import "MKPlacemark+ORKStringConversion.h"
 
 
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>
@@ -111,7 +112,7 @@
 }
 
 - (BOOL)isAnswerValid {
-    id answer = _selectionView.answer;
+    id answer = self.answer;
     
     if (answer == ORKNullAnswerValue()) {
         return YES;
@@ -120,8 +121,8 @@
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
-    CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
-    NSString *string = [self convertLocationToString:location];
+    MKPlacemark *placemark = (MKPlacemark *)answer;
+    NSString *string = [placemark ork_stringValue];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -130,10 +131,10 @@
     BOOL isValid = [self isAnswerValid];
     
     if (!isValid) {
-        id answer = _selectionView.answer;
-        CLLocationCoordinate2D location = ((NSValue *)answer).MKCoordinateValue;
+        id answer = self.answer;
+        MKPlacemark *placemark = (MKPlacemark *)answer;
+        NSString *message = [placemark ork_stringValue];
         
-        NSString *message = [self convertLocationToString:location];
         NSString *localizedMessage = [[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
         
         [self showValidityAlertWithMessage:localizedMessage];
@@ -145,9 +146,9 @@
 - (void)answerDidChange {
     id answer = self.answer;
     
-    NSString *displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
-    if ([displayValue isKindOfClass:[NSValue class]]) {
-        _selectionView.answer = answer;
+    id displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
+    if ([displayValue isKindOfClass:[MKPlacemark class]]) {
+        _selectionView.answer = (MKPlacemark *)answer;
     }
     
     NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);

@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStepResult;
 @class ORKToneAudiometrySample;
 
+@class MKPlacemark;
+
 /**
  The `ORKResult` class defines the attributes of a result from one step or a group
  of steps. When you use the ResearchKit framework APIs, you typically get a result from the `result` property
@@ -1150,10 +1152,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKLocationQuestionResult : ORKQuestionResult
 
 /**
- The NSValue` object wrapped in `MKCoordinate` which repesents the latitude and longitude of the location the user entered,
- or `nil` if the user skipped the question.
+ The placemark representing the coordinate and address of a specific location.
  */
-@property (nonatomic, copy, nullable) NSValue *locationAnswer;
+@property (nonatomic, copy, nullable) MKPlacemark *locationAnswer;
 
 @end
 

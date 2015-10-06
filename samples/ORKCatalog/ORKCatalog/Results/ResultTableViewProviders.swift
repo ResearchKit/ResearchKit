@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 import MapKit
+import AddressBookUI
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows
@@ -372,13 +373,21 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
-        let coordinate = questionResult.locationAnswer?.MKCoordinateValue
+        let placemark = questionResult.locationAnswer
         
-        return super.resultRowsForSection(section) + [
+        var rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
-            ResultRow(text: "latitude", detail: coordinate?.latitude),
-            ResultRow(text: "longitude", detail: coordinate?.longitude)
+            ResultRow(text: "latitude", detail: placemark?.coordinate.latitude),
+            ResultRow(text: "longitude", detail: placemark?.coordinate.longitude)
         ]
+        
+        if let addressDictionary = placemark?.addressDictionary {
+            rows.append(ResultRow(text: "address", detail: ABCreateStringWithAddressDictionary(addressDictionary, false)))
+        } else {
+            rows.append(ResultRow(text: "address", detail: nil))
+        }
+        
+        return rows
     }
 }
 
