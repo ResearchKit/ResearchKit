@@ -1863,7 +1863,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _spellCheckingType = UITextSpellCheckingTypeDefault;
         _keyboardType = UIKeyboardTypeDefault;
         _multipleLines = YES;
-        _emailAddress = NO;
     }
     return self;
 }
@@ -1900,7 +1899,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     fmt->_spellCheckingType = _spellCheckingType;
     fmt->_keyboardType = _keyboardType;
     fmt->_multipleLines = _multipleLines;
-    fmt->_emailAddress = _emailAddress;
     fmt->_secureTextEntry = _secureTextEntry;
     return fmt;
 }
@@ -1957,7 +1955,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
         ORK_DECODE_ENUM(aDecoder, keyboardType);
         ORK_DECODE_BOOL(aDecoder, multipleLines);
-        ORK_DECODE_BOOL(aDecoder, emailAddress);
         ORK_DECODE_BOOL(aDecoder, secureTextEntry);
     }
     return self;
@@ -1971,7 +1968,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
     ORK_ENCODE_ENUM(aCoder, keyboardType);
     ORK_ENCODE_BOOL(aCoder, multipleLines);
-    ORK_ENCODE_BOOL(aCoder, emailAddress);
     ORK_ENCODE_BOOL(aCoder, secureTextEntry);
 }
 
@@ -1989,8 +1985,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
              self.keyboardType == castObject.keyboardType &&
-             self.multipleLines == castObject.multipleLines &&
-             self.isEmailAddress == castObject.isEmailAddress) &&
+             self.multipleLines == castObject.multipleLines) &&
              self.secureTextEntry == castObject.secureTextEntry);
 }
 
@@ -2015,7 +2010,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         _impliedAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _impliedAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        _impliedAnswerFormat.emailAddress = YES;
     }
     return _impliedAnswerFormat;
 }
