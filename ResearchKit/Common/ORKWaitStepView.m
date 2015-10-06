@@ -139,10 +139,14 @@
 
 - (NSString *)accessibilityLabel {
     if (_progressView) {
-        NSString *percentage = [NSString stringWithFormat:@"%li%%", (NSInteger)(_progressView.progress * 100.0)];
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel, _progressView.accessibilityLabel, percentage);
+        NSNumberFormatter *percentFormatter = [[NSNumberFormatter alloc] init];
+        percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
+                                                  _progressView.accessibilityLabel,
+                                                  [percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
     } else if (_activityIndicatorView) {
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel, _activityIndicatorView.accessibilityLabel);
+        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
+                                                  _activityIndicatorView.accessibilityLabel);
     }
     return nil;
 }
