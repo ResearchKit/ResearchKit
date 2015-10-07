@@ -390,9 +390,7 @@ ret =
            })),
    ENTRY(ORKWaitStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             ORKWaitStep *step = [[ORKWaitStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
-             step.indicatorMask = GETPROP(dict, indicatorMask);
-             return step;
+             return [[ORKWaitStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
