@@ -394,10 +394,10 @@ ret =
              step.indicatorMask = GETPROP(dict, indicatorMask);
              return step;
          },
-         @{
+         (@{
            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
            PROPERTY(indicatorMask, NSNumber, NSObject, YES, nil, nil)
-           }),
+           })),
    ENTRY(ORKRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              ORKRecorderConfiguration *recorderConfiguration = [[ORKRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier)];
