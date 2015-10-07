@@ -58,20 +58,22 @@ DefineStringKey(ActiveStepTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
-DefineStringKey(TwoFingerTapTaskIdentifier);
-DefineStringKey(MemoryTaskIdentifier);
-DefineStringKey(ScreeningTaskIdentifier);
-DefineStringKey(ToneAudiometryTaskIdentifier);
-DefineStringKey(ReactionTimeTaskIdentifier);
-DefineStringKey(TowerOfHanoiTaskIdentifier);
-DefineStringKey(PSATTaskIdentifier);
-DefineStringKey(TimedWalkTaskIdentifier);
 DefineStringKey(HolePegTestTaskIdentifier);
+DefineStringKey(MemoryTaskIdentifier);
+DefineStringKey(PSATTaskIdentifier);
+DefineStringKey(ReactionTimeTaskIdentifier);
+DefineStringKey(TwoFingerTapTaskIdentifier);
+DefineStringKey(TimedWalkTaskIdentifier);
+DefineStringKey(ToneAudiometryTaskIdentifier);
+DefineStringKey(TowerOfHanoiTaskIdentifier);
+
 DefineStringKey(CreatePasscodeTaskIdentifier);
 
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
-DefineStringKey(StepNavigationTaskIdentifier);
+DefineStringKey(InterruptibleTaskIdentifier);
+DefineStringKey(NavigableOrderedTaskIdentifier);
+DefineStringKey(NavigableLoopTaskIdentifier);
 
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
@@ -298,6 +300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Dynamic Task",
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
+                           @"Navigable Loop Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
                            ],
@@ -422,8 +425,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                            options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:DynamicTaskIdentifier]) {
         return [DynamicTask new];
-    } else if ([identifier isEqualToString:ScreeningTaskIdentifier]) {
-        return [self makeScreeningTask];
+    } else if ([identifier isEqualToString:InterruptibleTaskIdentifier]) {
+        return [self makeInterruptibleTask];
     } else if ([identifier isEqualToString:ScalesTaskIdentifier]) {
         return [self makeScalesTask];
     } else if ([identifier isEqualToString:ImageChoicesTaskIdentifier]) {
@@ -475,8 +478,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                               rotated:NO
                                                             timeLimit:300.0
                                                               options:ORKPredefinedTaskOptionNone];
-    } else if ([identifier isEqualToString:StepNavigationTaskIdentifier]) {
+    } else if ([identifier isEqualToString:NavigableOrderedTaskIdentifier]) {
         return [self makeNavigableOrderedTask];
+    } else if ([identifier isEqualToString:NavigableLoopTaskIdentifier]) {
+        return [self makeNavigableLoopTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
@@ -506,8 +511,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     id<ORKTask> task = nil;
     NSData *taskData = _savedTasks[identifier];
-    if (taskData)
-    {
+    if (taskData) {
         /*
          We assume any restored task is of the ORKNavigableOrderedTask since that's the only kind
          we're archiving in this example. You have to make sure your are unarchiving a task of the proper class.
@@ -521,8 +525,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         task = [self makeTaskWithIdentifier:identifier];
     }
     
-    if (_savedViewControllers[identifier])
-    {
+    if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     } else {
@@ -552,8 +555,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      For the dynamic task, we remember the last result and use it as a source
      of default values for any optional questions.
      */
-    if ([task isKindOfClass:[DynamicTask class]])
-    {
+    if ([task isKindOfClass:[DynamicTask class]]) {
         self.taskViewController.defaultResultSource = _lastRouteResult;
     }
     
@@ -688,7 +690,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)datePickersButtonTapped:(id)sender {
+- (void)datePickersButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:DatePickingTaskIdentifier];
 }
 
@@ -1017,7 +1019,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)selectionSurveyButtonTapped:(id)sender {
+- (void)selectionSurveyButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:SelectionSurveyTaskIdentifier];
 }
 
@@ -1118,7 +1120,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)activeStepTaskButtonTapped:(id)sender {
+- (void)activeStepTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ActiveStepTaskIdentifier];
 }
 
@@ -1161,7 +1163,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)consentReviewButtonTapped:(id)sender {
+- (void)consentReviewButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ConsentReviewTaskIdentifier];
 }
 
@@ -1191,7 +1193,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)consentButtonTapped:(id)sender {
+- (void)consentButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ConsentTaskIdentifier];
 }
 
@@ -1298,7 +1300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)eligibilityFormButtonTapped:(id)sender {
+- (void)eligibilityFormButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:EligibilityFormTaskIdentifier];
 }
 
@@ -1356,7 +1358,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)eligibilitySurveyButtonTapped:(id)sender {
+- (void)eligibilitySurveyButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:EligibilitySurveyTaskIdentifier];
 }
 
@@ -1750,7 +1752,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)miniFormButtonTapped:(id)sender {
+- (void)miniFormButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:MiniFormTaskIdentifier];
 }
 
@@ -2042,53 +2044,53 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
-- (IBAction)optionalFormButtonTapped:(id)sender {
+- (void)optionalFormButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:OptionalFormTaskIdentifier];
 }
 
 #pragma mark - Active tasks
 
-- (IBAction)fitnessTaskButtonTapped:(id)sender {
+- (void)fitnessTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:FitnessTaskIdentifier];
 }
 
-- (IBAction)gaitTaskButtonTapped:(id)sender {
+- (void)gaitTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:GaitTaskIdentifier];
 }
 
-- (IBAction)memoryGameTaskButtonTapped:(id)sender {
+- (void)memoryGameTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
 }
 
-- (IBAction)audioTaskButtonTapped:(id)sender {
+- (void)audioTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:AudioTaskIdentifier];
 }
 
-- (IBAction)toneAudiometryTaskButtonTapped:(id)sender {
+- (void)toneAudiometryTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ToneAudiometryTaskIdentifier];
 }
 
-- (IBAction)twoFingerTappingTaskButtonTapped:(id)sender {
+- (void)twoFingerTappingTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TwoFingerTapTaskIdentifier];
 }
 
-- (IBAction)reactionTimeTaskButtonTapped:(id)sender {
+- (void)reactionTimeTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ReactionTimeTaskIdentifier];
 }
 
-- (IBAction)towerOfHanoiTaskButtonTapped:(id)sender {
+- (void)towerOfHanoiTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TowerOfHanoiTaskIdentifier];
 }
 
-- (IBAction)timedWalkTaskButtonTapped:(id)sender {
+- (void)timedWalkTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:TimedWalkTaskIdentifier];
 }
 
-- (IBAction)psatTaskButtonTapped:(id)sender {
+- (void)psatTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:PSATTaskIdentifier];
 }
 
-- (IBAction)holePegTestTaskButtonTapped:(id)sender {
+- (void)holePegTestTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:HolePegTestTaskIdentifier];
 }
 
@@ -2097,7 +2099,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  See the `DynamicTask` class for a definition of this task.
  */
-- (IBAction)dynamicTaskButtonTapped:(id)sender {
+- (void)dynamicTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:DynamicTaskIdentifier];
 }
 
@@ -2111,7 +2113,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
  See the implementation of the task view controller delegate methods for specific
  handling of this task.
  */
-- (id<ORKTask>)makeScreeningTask {
+- (id<ORKTask>)makeInterruptibleTask {
     NSMutableArray *steps = [NSMutableArray new];
     
     {
@@ -2137,12 +2139,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [steps addObject:step];
     }
     
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ScreeningTaskIdentifier steps:steps];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:InterruptibleTaskIdentifier steps:steps];
     return task;
 }
 
-- (IBAction)interruptibleTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ScreeningTaskIdentifier];
+- (void)interruptibleTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:InterruptibleTaskIdentifier];
 }
 
 #pragma mark - Scales task
@@ -2444,7 +2446,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
 }
 
-- (IBAction)scaleButtonTapped:(id)sender {
+- (void)scaleButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ScalesTaskIdentifier];
 }
 
@@ -2568,7 +2570,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
 }
 
-- (IBAction)imageChoicesButtonTapped:(id)sender {
+- (void)imageChoicesButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:ImageChoicesTaskIdentifier];
 }
 
@@ -2581,8 +2583,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      take your instructions literally. So, be cautious. Make sure your template image
      is high contrast and very visible against a variety of backgrounds.
      */
-     
-    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"begin"];
         step.title = @"Hands";
@@ -2590,6 +2590,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.detailText = @"In this step we will capture images of both of your hands";
         [steps addObject:step];
     }
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right1"];
         step.title = @"Right Hand";
@@ -2597,6 +2598,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.detailText = @"Let's start by capturing an image of your right hand";
         [steps addObject:step];
     }
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"right2"];
         step.title = @"Right Hand";
@@ -2604,6 +2606,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.detailText = @"Align your right hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
         [steps addObject:step];
     }
+    
     {
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"right3"];
         step.templateImage = [UIImage imageNamed:@"right_hand_outline_big"];
@@ -2612,6 +2615,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.accessibilityHint = @"Captures the image visible in the preview";
         [steps addObject:step];
     }
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left1"];
         step.title = @"Left Hand";
@@ -2619,6 +2623,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.detailText = @"Now let's capture an image of your left hand";
         [steps addObject:step];
     }
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"left2"];
         step.title = @"Left Hand";
@@ -2626,6 +2631,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.detailText = @"Align your left hand with the on-screen outline and capture the image.  Be sure to place your hand over a contrasting background.  You can re-capture the image as many times as you need.";
         [steps addObject:step];
     }
+    
     {
         ORKImageCaptureStep *step = [[ORKImageCaptureStep alloc] initWithIdentifier:@"left3"];
         step.templateImage = [UIImage imageNamed:@"left_hand_outline_big"];
@@ -2634,24 +2640,31 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         step.accessibilityHint = @"Captures the image visible in the preview";
         [steps addObject:step];
     }
+    
     {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
         step.title = @"Complete";
         step.detailText = @"Hand image capture complete";
         [steps addObject:step];
     }
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:ImageCaptureTaskIdentifier steps:steps];
     return task;
-    
-}
-- (IBAction)imageCaptureButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
-}
-- (IBAction)navigableOrderedTaskButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:StepNavigationTaskIdentifier];
 }
 
-- (IBAction)toggleTintColorButtonTapped:(id)sender {
+- (void)imageCaptureButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:ImageCaptureTaskIdentifier];
+}
+
+- (void)navigableOrderedTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:NavigableOrderedTaskIdentifier];
+}
+
+- (void)navigableLoopTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:NavigableLoopTaskIdentifier];
+}
+
+- (void)toggleTintColorButtonTapped:(id)sender {
     static UIColor *defaultTintColor = nil;
     if (!defaultTintColor) {
         defaultTintColor = self.view.tintColor;
@@ -2742,7 +2755,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     step.title = @"This step is intentionally left blank (you should not see it)";
     [steps addObject:step];
 
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:StepNavigationTaskIdentifier
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedTaskIdentifier
                                                                                   steps:steps];
     
     // Build navigation rules
@@ -2831,6 +2844,66 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return task;
 }
 
+#pragma mark - Navigable Loop Task
+
+- (id<ORKTask>)makeNavigableLoopTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    ORKAnswerFormat *answerFormat = nil;
+    ORKStep *step = nil;
+    
+    // Intro step
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
+    step.title = @"This task demonstrates an optional loop within a navigable ordered task";
+    [steps addObject:step];
+
+    // Target step
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"loop_a"];
+    step.title = @"Later on, we'll return to this step";
+    [steps addObject:step];
+
+    // One intermediate step
+    ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
+                                                                                                         minimumValue:1
+                                                                                                         defaultValue:8.725
+                                                                                                maximumFractionDigits:3
+                                                                                                             vertical:YES
+                                                                                              maximumValueDescription:nil
+                                                                                              minimumValueDescription:nil];
+    
+    step = [ORKQuestionStep questionStepWithIdentifier:@"scale"
+                                                 title:@"On a scale of 1 to 10, what is your mood?"
+                                                answer:scaleAnswerFormat];
+    [steps addObject:step];
+
+    // Question steps
+    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"loop_b" title:@"Do you want to repeat the survey?" answer:answerFormat];
+    step.optional = NO;
+    [steps addObject:step];
+    
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+    step.title = @"You have finished the task";
+    [steps addObject:step];
+    
+    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableLoopTaskIdentifier
+                                                                                  steps:steps];
+    
+    // Build navigation rules
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+    ORKResultSelector *resultSelector = nil;
+    
+    // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
+    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"loop_b"];
+    NSPredicate *predicateRepeatYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                                                                                 expectedAnswer:YES];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateRepeatYes ]
+                                                          destinationStepIdentifiers:@[ @"loop_a" ] ];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"loop_b"];
+    
+    return task;
+}
+
 #pragma mark - Custom navigation item task
 
 - (id<ORKTask>)makeCustomNavigationItemTask {
@@ -2844,7 +2917,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return [[ORKOrderedTask alloc] initWithIdentifier: CustomNavigationItemTaskIdentifier steps:steps];
 }
 
-- (IBAction)customNavigationItemButtonTapped:(id)sender {
+- (void)customNavigationItemButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:CustomNavigationItemTaskIdentifier];
 }
 
@@ -2866,11 +2939,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     return [[ORKOrderedTask alloc] initWithIdentifier: CreatePasscodeTaskIdentifier steps:steps];
 }
 
-- (IBAction)createPasscodeButtonTapped:(id)sender {
+- (void)createPasscodeButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:CreatePasscodeTaskIdentifier];
 }
 
-- (IBAction)removePasscodeButtonTapped:(id)sender {
+- (void)removePasscodeButtonTapped:(id)sender {
     if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         if ([ORKPasscodeViewController removePasscodeFromKeychain]) {
             [self showAlertWithTitle:@"Success" message:@"Passcode removed."];
@@ -2882,7 +2955,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 }
 
-- (IBAction)authenticatePasscodeButtonTapped:(id)sender {
+- (void)authenticatePasscodeButtonTapped:(id)sender {
     if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController
                                                      passcodeAuthenticationViewControllerWithText:@"Authenticate your passcode in order to proceed."
@@ -2893,7 +2966,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
 }
 
-- (IBAction)editPasscodeButtonTapped:(id)sender {
+- (void)editPasscodeButtonTapped:(id)sender {
     if ([ORKPasscodeViewController isPasscodeStoredInKeychain]) {
         ORKPasscodeViewController *viewController = [ORKPasscodeViewController passcodeEditingViewControllerWithText:nil
                                                                                                             delegate:self
@@ -3124,7 +3197,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSString *task_identifier = taskViewController.task.identifier;
 
     return ([step isKindOfClass:[ORKInstructionStep class]]
-            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, StepNavigationTaskIdentifier] containsObject:task_identifier]);
+            && NO == [@[AudioTaskIdentifier, FitnessTaskIdentifier, GaitTaskIdentifier, TwoFingerTapTaskIdentifier, NavigableOrderedTaskIdentifier, NavigableLoopTaskIdentifier] containsObject:task_identifier]);
 }
 
 /*
