@@ -98,17 +98,17 @@
     
     for (NSNumber *indexNumber in indexes) {
         
-        NSUInteger index = [indexNumber unsignedIntegerValue];
+        NSUInteger index = indexNumber.unsignedIntegerValue;
         
         if (index >= _choices.count) {
             continue;
         }
         
         id<ORKAnswerOption> choice = _choices[index];
-        id value = [choice value];
+        id value = choice.value;
         
         if (value == nil) {
-            value = _isValuePicker? @(index-1) : @(index);
+            value = _isValuePicker? @(index - 1) : @(index);
         }
         
         if (_isValuePicker && index == 0) {
@@ -122,7 +122,7 @@
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {
     NSArray *indexes = [self selectedIndexesForAnswer:answer];
-    return [indexes count] > 0 ? [indexes firstObject] : nil;
+    return indexes.count > 0 ? indexes.firstObject : nil;
 }
 
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer {
@@ -149,9 +149,9 @@
             if (nil == matchedChoice) {
                 NSAssert([answerValue isKindOfClass:[NSNumber class]], @"");
                 if (_isValuePicker) {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]+1];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue + 1];
                 } else {
-                    matchedChoice = _choices[[(NSNumber *)answerValue unsignedIntegerValue]];
+                    matchedChoice = _choices[((NSNumber *)answerValue).unsignedIntegerValue];
                 }
             }
             

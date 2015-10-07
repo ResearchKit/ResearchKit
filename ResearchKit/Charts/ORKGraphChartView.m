@@ -96,6 +96,7 @@ static const CGFloat ScrubberLabelVerticalPadding = 4.0;
 - (void)setDataSource:(id<ORKGraphChartViewDataSource>)dataSource {
     _dataSource = dataSource;
     _numberOfXAxisPoints = -1; // reset cached number of x axis points
+    [self updateAndLayoutVerticalReferenceLineLayers];
     [self obtainDataPoints];
     [self calculateMinAndMaxValues];
     [_xAxisView updateTitles];
@@ -459,12 +460,15 @@ inline static CALayer *graphVerticalReferenceLineLayerWithColor(UIColor *color, 
         CGFloat plotViewHeight = _plotView.bounds.size.height;
         CGFloat plotViewWidth = _plotView.bounds.size.width;
         NSInteger numberOfXAxisPoints = self.numberOfXAxisPoints;
-        for (NSUInteger i = 1; i < numberOfXAxisPoints; i++) {
-            CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
-            CGFloat positionOnXAxis = xAxisPoint(i, self.numberOfXAxisPoints, plotViewWidth);
-            verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
-            [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
-            [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
+        for (NSUInteger pointIndex = 1; pointIndex < numberOfXAxisPoints; pointIndex++) {
+            if (![_dataSource respondsToSelector:@selector(graphChartView:drawsVerticalReferenceLineAtPointIndex:)]
+                || [_dataSource graphChartView:self drawsVerticalReferenceLineAtPointIndex:pointIndex]) {
+                CALayer *verticalReferenceLineLayer = graphVerticalReferenceLineLayerWithColor(_referenceLineColor, plotViewHeight);
+                CGFloat positionOnXAxis = xAxisPoint(pointIndex, self.numberOfXAxisPoints, plotViewWidth);
+                verticalReferenceLineLayer.position = CGPointMake(positionOnXAxis - 0.5, 0);
+                [_referenceLinesView.layer insertSublayer:verticalReferenceLineLayer atIndex:0];
+                [_verticalReferenceLineLayers addObject:verticalReferenceLineLayer];
+            }
         }
     }
 }
@@ -480,7 +484,7 @@ inline static UIImage *graphPointLayerImageWithColor(UIColor *color) {
     if (!pointImage || ![pointImageColor isEqual:color]) {
         pointImageColor = color;
         UIBezierPath *circlePath = [UIBezierPath bezierPathWithOvalInRect:
-                                    (CGRect){{0 + (pointLineWidth/2), 0 + (pointLineWidth/2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
+                                    (CGRect){{0 + (pointLineWidth / 2), 0 + (pointLineWidth / 2)}, {pointSize - pointLineWidth, pointSize - pointLineWidth}}];
         CAShapeLayer *pointLayer = [CAShapeLayer new];
         pointLayer.path = circlePath.CGPath;
         pointLayer.fillColor = [UIColor whiteColor].CGColor;
@@ -1059,7 +1063,7 @@ inline static CALayer *graphPointLayerWithColor(UIColor *color) {
         for (NSInteger plotIndex = 0; plotIndex < _dataPoints.count; plotIndex++) {
             
             // Boundary check
-            if ( pointIndex < [_dataPoints[plotIndex] count] ) {
+            if ( pointIndex < _dataPoints[plotIndex].count ) {
                 NSString *and = (value == nil || value.length == 0 ? nil : ORKLocalizedString(@"AX_GRAPH_AND_SEPARATOR", nil));
                 ORKRangedPoint *rangePoint = _dataPoints[plotIndex][pointIndex];
                 value = ORKAccessibilityStringForVariables(value, and, rangePoint.accessibilityLabel);

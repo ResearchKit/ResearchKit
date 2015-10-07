@@ -44,7 +44,7 @@
     NSTimeInterval const ORKToneAudiometryTaskToneMinimumDuration = 5.0;
 
     if (self.toneDuration < ORKToneAudiometryTaskToneMinimumDuration) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"tone duration can not be shorter than %@ seconds.", @(ORKToneAudiometryTaskToneMinimumDuration)]  userInfo:nil];
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:[NSString stringWithFormat:@"tone duration cannot be shorter than %@ seconds.", @(ORKToneAudiometryTaskToneMinimumDuration)]  userInfo:nil];
     }
 }
 

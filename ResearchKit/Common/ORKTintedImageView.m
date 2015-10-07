@@ -38,7 +38,7 @@
 #define ORKTintedImageLog(...)
 
 static inline BOOL ORKIsImageAnimated(UIImage *image) {
-    return [[image images] count] > 1;
+    return [image images].count > 1;
 }
 
 UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scale) {
@@ -176,7 +176,7 @@ UIImage *ORKImageByTintingImage(UIImage *image, UIColor *tintColor, CGFloat scal
         } else {
             // Manually apply the tint for animated images (template rendering mode doesn't work: <rdar://problem/19792197>)
             NSArray *animationImages = image.images;
-            NSMutableArray *tintedAnimationImages = [[NSMutableArray alloc] initWithCapacity:[animationImages count]];
+            NSMutableArray *tintedAnimationImages = [[NSMutableArray alloc] initWithCapacity:animationImages.count];
             for (UIImage *animationImage in animationImages) {
                 UIImage *tintedAnimationImage = nil;
                 if (_enableTintedImageCaching) {
