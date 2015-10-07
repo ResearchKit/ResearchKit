@@ -1704,22 +1704,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        /*
-         A text question with single-line text entry, text validation, and a URL keyboard.
-         */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" validInputDescription:@"Enter a valid URL."];
-        format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeURL;
-        format.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        format.autocorrectionType = UITextAutocorrectionTypeNo;
-        format.spellCheckingType = UITextSpellCheckingTypeNo;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your website?"
-                                                                     answer:format];
-        [steps addObject:step];
-    }
-    
-    {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"aid_001"];
         step.title = @"Thanks";
         [steps addObject:step];

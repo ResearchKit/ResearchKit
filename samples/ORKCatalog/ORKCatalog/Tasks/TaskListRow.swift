@@ -75,7 +75,6 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TimeOfDayQuestion
     case ValuePickerChoiceQuestion
     case ImageCapture
-    case ValidatedTextQuestion
     
     case EligibilityTask
     case Consent
@@ -126,7 +125,6 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TimeOfDayQuestion,
                     .ValuePickerChoiceQuestion,
                     .ImageCapture,
-                    .ValidatedTextQuestion,
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -198,9 +196,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
-
-        case .ValidatedTextQuestion:
-            return NSLocalizedString("Validated Text Question", comment: "")
 
         case .EligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -306,11 +301,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousVerticalScaleQuestionStep
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
-        
-        // Task with an exampled of validated text entry.
-        case ValidatedTextQuestionTask
-        case ValidatedTextQuestionStepEmail
-        case ValidatedTextQuestionStepDomain
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -424,9 +414,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         case .EligibilityTask:
             return eligibilityTask
-            
-        case .ValidatedTextQuestion:
-            return validatedTextQuestionTask
             
         case .Consent:
             return consentTask
@@ -823,30 +810,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             instructionStep,
             imageCaptureStep
             ])
-    }
-    
-    /**
-    This task demonstrates asking for text entry. Both single and multi-line
-    text entry are supported, with appropriate parameters to the text answer
-    format.
-    */
-    private var validatedTextQuestionTask: ORKTask {
-        let answerFormatEmail = ORKAnswerFormat.emailAnswerFormat()
-        let stepEmail = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
-        stepEmail.text = exampleDetailText
-        
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-        
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, validInputDescription: NSLocalizedString("Enter a valid URL.", comment: ""))
-        answerFormatDomain.multipleLines = false
-        answerFormatDomain.keyboardType = UIKeyboardType.URL
-        answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
-        answerFormatDomain.autocorrectionType = UITextAutocorrectionType.No
-        answerFormatDomain.spellCheckingType = UITextSpellCheckingType.No
-        let stepDomain = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepDomain), title: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
-        stepDomain.text = exampleDetailText
-        
-        return ORKOrderedTask(identifier: String(Identifier.ValidatedTextQuestionTask), steps: [stepEmail, stepDomain])
     }
     
     /**
