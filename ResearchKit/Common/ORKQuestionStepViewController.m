@@ -42,6 +42,7 @@
 #import "ORKSurveyAnswerCellForText.h"
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKSurveyAnswerCellForImageSelection.h"
+#import "ORKSurveyAnswerCellForEligibility.h"
 #import "ORKSurveyAnswerCellForLocation.h"
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
@@ -545,6 +546,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
+                               @(ORKQuestionTypeEligibility) : [ORKSurveyAnswerCellForEligibility class]};
                                @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
     });
     
@@ -736,6 +738,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         case ORKQuestionTypeDate:
         case ORKQuestionTypeDateAndTime:{
             height = [ORKSurveyAnswerCellForPicker suggestedCellHeightForView:tableView];
+        }
+            break;
+        case ORKQuestionTypeEligibility:{
+            height = [ORKSurveyAnswerCellForEligibility suggestedCellHeightForView:tableView];
         }
             break;
         default:{
