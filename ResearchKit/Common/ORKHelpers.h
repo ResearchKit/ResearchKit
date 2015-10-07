@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -32,6 +33,37 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKErrors.h>
+
+
+#if ( defined(ORK_LOG_LEVEL_NONE) && ORK_LOG_LEVEL_NONE )
+#  undef ORK_LOG_LEVEL_DEBUG
+#  undef ORK_LOG_LEVEL_WARNING
+#  undef ORK_LOG_LEVEL_ERROR
+#endif
+
+#if ( !defined(ORK_LOG_LEVEL_NONE) && !defined(ORK_LOG_LEVEL_DEBUG) && !defined(ORK_LOG_LEVEL_WARNING) && !defined(ORK_LOG_LEVEL_ERROR) )
+#  define ORK_LOG_LEVEL_WARNING 1
+#endif
+
+#define _ORK_LogWithLevel(level,fmt,...) NSLog(@"[ResearchKit]["#level"] %s " fmt, __PRETTY_FUNCTION__, ## __VA_ARGS__)
+
+#if ( ORK_LOG_LEVEL_DEBUG )
+#  define ORK_Log_Debug(fmt,...) _ORK_LogWithLevel(Debug, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Debug(...)
+#endif
+
+#if ( ORK_LOG_LEVEL_DEBUG || ORK_LOG_LEVEL_WARNING )
+#  define ORK_Log_Warning(fmt,...) _ORK_LogWithLevel(Warning, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Warning(...)
+#endif
+
+#if ( ORK_LOG_LEVEL_DEBUG || ORK_LOG_LEVEL_WARNING || ORK_LOG_LEVEL_ERROR )
+#  define ORK_Log_Error(fmt,...) _ORK_LogWithLevel(Error, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Error(...)
+#endif
 
 
 #if !defined(ORK_INLINE)
@@ -123,6 +155,7 @@
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle();
+NSBundle *ORKDefaultLocaleBundle();
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
@@ -136,14 +169,6 @@ NSDate *ORKDateFromStringISO8601(NSString *string);
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL();
-
-#if defined(DEBUG) && DEBUG
-#  define ORK_Log_Debug(fmt,...) NSLog(@"%s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
-#else
-#  define ORK_Log_Debug(...)
-#endif
-
-#define ORK_Log_Oops(fmt,...) NSLog(@"[ORK][OOPS] %s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
 
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);

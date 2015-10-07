@@ -80,6 +80,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeBoolean,
     
     /**
+     The Eligibility question type asks the participant to enter Yes or No via a custom boolean control.
+     */
+    ORKQuestionTypeEligibility,
+    
+    /**
      In a text question, the participant can enter multiple lines of text.
      */
     ORKQuestionTypeText,
@@ -143,6 +148,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
+@class ORKEligibilityAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
@@ -212,6 +218,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat;
+
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
@@ -238,7 +246,10 @@ ORK_CLASS_AVAILABLE
                                                 calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
+
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
+
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -744,6 +755,22 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
+ preconfigured to use only Yes and No answers.
+ 
+ It is recommended to use an `ORKNavigableOrderedTask` along with this answer format
+ in order to determine if the user is eligible or not. See `ORKCatalog` for an
+ example (`Eligibility Task Example').
+ 
+ The eligibility answer format produces an `ORKBooleanQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEligibilityAnswerFormat : ORKAnswerFormat
+
+@end
+
+
+/**
  The `ORKTextChoice` class defines the text for a choice in answer formats such
  as `ORKTextChoiceAnswerFormat` and `ORKValuePickerAnswerFormat`.
  
@@ -1161,6 +1188,33 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextAnswerFormat : ORKAnswerFormat
 
 /**
+ Returns an initialized text answer format using the regular expression.
+ 
+ This method is one of the designated initializers.
+ 
+ @param expression                The regular expression used to valide the text.
+ @param description               The description of the valid input presented to the user upon invalid input.
+ 
+ @return An initialized validated text answer format.
+ */
+- (instancetype)initWithValidationExpression:(NSString *)expression
+                       validInputDescription:(NSString *)description NS_DESIGNATED_INITIALIZER;
+
+/**
+ The regex used to validate user's input.
+ 
+ The default value is nil. If set to nil, no validation will be performed.
+ */
+@property (readonly) NSString *regex;
+
+/**
+ The text presented to the user that describes what the valid input is.
+ 
+ The default value is nil.
+ */
+@property (readonly) NSString *invalidMessage;
+
+/**
  Returns an initialized text answer format using the specified maximum string length.
  
  This method is the designated initializer.
@@ -1177,7 +1231,7 @@ ORK_CLASS_AVAILABLE
  
  When the value of this property is 0, there is no maximum.
  */
-@property (readonly) NSInteger maximumLength;
+@property (readwrite) NSInteger maximumLength;
 
 /**
  A Boolean value indicating whether to expect more than one line of input.

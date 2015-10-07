@@ -515,7 +515,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
 - (void)setupDirectorySource {
     int dirFD = open([_url fileSystemRepresentation], O_EVTONLY);
     if (dirFD < 0) {
-        ORK_Log_Oops(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
+        ORK_Log_Warning(@"Could not track directory %s (%d)", [_url fileSystemRepresentation], [[NSFileManager defaultManager] fileExistsAtPath:[_url path]]);
     } else {
         // Dispatch to a concurrent queue, so we don't store up blocks while our
         // queue is working.
@@ -870,7 +870,7 @@ static NSInteger _ORKJSON_terminatorLength = 0;
                 NSError *error = nil;
                 if (![fileManager setAttributes:@{NSFileProtectionKey : NSFileProtectionComplete}
                            ofItemAtPath:[destinationUrl path] error:&error]) {
-                    ORK_Log_Debug(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
+                    ORK_Log_Warning(@"Error setting NSFileProtectionComplete on %@: %@", destinationUrl, error);
                 }
             }
             

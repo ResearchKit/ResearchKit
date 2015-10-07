@@ -74,14 +74,6 @@ static const CGFloat ValueLineMargin = 1.5;
 }
 
 - (void)setUpConstraints {
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:nil
-                                                                       attribute:NSLayoutAttributeNotAnAttribute
-                                                                      multiplier:1.0
-                                                                        constant:CGFLOAT_MAX];
-    widthConstraint.priority = UILayoutPriorityFittingSizeLevel;
     
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                         attribute:NSLayoutAttributeHeight
@@ -92,7 +84,7 @@ static const CGFloat ValueLineMargin = 1.5;
                                                                          constant:CGFLOAT_MAX];
     heightConstraint.priority = UILayoutPriorityFittingSizeLevel;
     
-    [NSLayoutConstraint activateConstraints:@[widthConstraint, heightConstraint]];
+    [NSLayoutConstraint activateConstraints:@[heightConstraint]];
 }
 
 - (void)setValues:(NSArray *)values {

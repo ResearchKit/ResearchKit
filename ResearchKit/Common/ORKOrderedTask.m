@@ -275,34 +275,34 @@ ORKTaskProgress ORKTaskProgressMake(NSUInteger current, NSUInteger total) {
 
 #pragma mark - Predefined
 
-static NSString * const ORKInstruction0StepIdentifier = @"instruction";
-static NSString * const ORKInstruction1StepIdentifier = @"instruction1";
-static NSString * const ORKCountdownStepIdentifier = @"countdown";
-static NSString * const ORKAudioStepIdentifier = @"audio";
-static NSString * const ORKTappingStepIdentifier = @"tapping";
-static NSString * const ORKConclusionStepIdentifier = @"conclusion";
-static NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
-static NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
-static NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
-static NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
-static NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
-static NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
-static NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
-static NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
-static NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
-static NSString * const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
-static NSString * const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
-static NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
-static NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
-static NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
-static NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
-static NSString * const ORKPSATStepIdentifier = @"psat";
-static NSString * const ORKAudioRecorderIdentifier = @"audio";
-static NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
-static NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
-static NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
-static NSString * const ORKLocationRecorderIdentifier = @"location";
-static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
+NSString * const ORKInstruction0StepIdentifier = @"instruction";
+NSString * const ORKInstruction1StepIdentifier = @"instruction1";
+NSString * const ORKCountdownStepIdentifier = @"countdown";
+NSString * const ORKAudioStepIdentifier = @"audio";
+NSString * const ORKTappingStepIdentifier = @"tapping";
+NSString * const ORKConclusionStepIdentifier = @"conclusion";
+NSString * const ORKFitnessWalkStepIdentifier = @"fitness.walk";
+NSString * const ORKFitnessRestStepIdentifier = @"fitness.rest";
+NSString * const ORKShortWalkOutboundStepIdentifier = @"walking.outbound";
+NSString * const ORKShortWalkReturnStepIdentifier = @"walking.return";
+NSString * const ORKShortWalkRestStepIdentifier = @"walking.rest";
+NSString * const ORKSpatialSpanMemoryStepIdentifier = @"cognitive.memory.spatialspan";
+NSString * const ORKToneAudiometryPracticeStepIdentifier = @"tone.audiometry.practice";
+NSString * const ORKToneAudiometryStepIdentifier = @"tone.audiometry";
+NSString * const ORKReactionTimeStepIdentifier = @"reactionTime";
+NSString * const ORKTowerOfHanoiStepIdentifier = @"towerOfHanoi";
+NSString * const ORKTimedWalkFormStepIdentifier = @"timed.walk.form";
+NSString * const ORKTimedWalkFormAFOStepIdentifier = @"timed.walk.form.afo";
+NSString * const ORKTimedWalkFormAssistanceStepIdentifier = @"timed.walk.form.assistance";
+NSString * const ORKTimedWalkTrial1StepIdentifier = @"timed.walk.trial1";
+NSString * const ORKTimedWalkTrial2StepIdentifier = @"timed.walk.trial2";
+NSString * const ORKPSATStepIdentifier = @"psat";
+NSString * const ORKAudioRecorderIdentifier = @"audio";
+NSString * const ORKAccelerometerRecorderIdentifier = @"accelerometer";
+NSString * const ORKPedometerRecorderIdentifier = @"pedometer";
+NSString * const ORKDeviceMotionRecorderIdentifier = @"deviceMotion";
+NSString * const ORKLocationRecorderIdentifier = @"location";
+NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
 
 + (ORKCompletionStep *)makeCompletionStep {
     ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:ORKConclusionStepIdentifier];
@@ -312,7 +312,7 @@ static NSString * const ORKHeartRateRecorderIdentifier = @"heartRate";
     return step;
 }
 
-static void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
+void ORKStepArrayAddStep(NSMutableArray *array, ORKStep *step) {
     [step validateParameters];
     [array addObject:step];
 }

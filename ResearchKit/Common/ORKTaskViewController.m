@@ -149,7 +149,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
     return [super initWithTarget:target
-                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems"]
+                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView"]
                         delegate:delegate
                           action:@selector(collectToolbarItemsFromViewController:)
                          context:_ORKViewControllerToolbarObserverContext];
@@ -329,8 +329,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         if (![task conformsToProtocol:@protocol(ORKTask)]) {
             @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Expected a task" userInfo:nil];
         }
-        if ([task identifier] == nil) {
-            NSLog(@"%@: Task's identifier should not be nil.", NSStringFromSelector(_cmd));
+        if (task.identifier == nil) {
+            ORK_Log_Warning(@"Task identifier should not be nil.");
         }
         if ([task respondsToSelector:@selector(validateParameters)]) {
             [task validateParameters];
@@ -365,7 +365,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     __block HKHealthStore *healthStore = [HKHealthStore new];
     [healthStore requestAuthorizationToShareTypes:writeTypes readTypes:readTypes completion:^(BOOL success, NSError *error) {
-        ORK_Log_Debug(@"Health access: error=%@", error);
+        ORK_Log_Warning(@"Health access: error=%@", error);
         dispatch_async(dispatch_get_main_queue(), handler);
         
         // Clear self-ref.
@@ -384,7 +384,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [pedometer queryPedometerDataFromDate:[NSDate dateWithTimeIntervalSinceNow:-100]
                                    toDate:[NSDate date]
                               withHandler:^(CMPedometerData *pedometerData, NSError *error) {
-                                  ORK_Log_Debug(@"Pedometer access: error=%@", error);
+                                  ORK_Log_Warning(@"Pedometer access: error=%@", error);
                                   
                                   BOOL success = YES;
                                   if ([[error domain] isEqualToString:CMErrorDomain]) {
@@ -559,7 +559,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
             NSError *error = nil;
             if (![self startAudioPromptSessionWithError:&error]) {
                 // User-visible console log message
-                ORK_Log_Oops(@"ResearchKit: failed to start audio prompt session: %@", error);
+                ORK_Log_Warning(@"Failed to start audio prompt session: %@", error);
             }
         }
     }
@@ -575,14 +575,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
                   withOptions:0
                         error:&error]) {
         success = NO;
-        ORK_Log_Debug(@"Could not start audio session: %@", error);
+        ORK_Log_Warning(@"Could not start audio session: %@", error);
     }
     
     // We are setting the session active so that we can stay live to play audio
     // in the background.
     if (success && ![session setActive:YES withOptions:0 error:&error]) {
         success = NO;
-        ORK_Log_Debug(@"Could not set audio session active: %@", error);
+        ORK_Log_Warning(@"Could not set audio session active: %@", error);
     }
     
     if (errorOut) {
@@ -601,7 +601,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         AVAudioSession *session = [AVAudioSession sharedInstance];
         NSError *error = nil;
         if (![session setActive:NO withOptions:0 error:&error]) {
-            ORK_Log_Debug(@"Could not deactivate audio session: %@", error);
+            ORK_Log_Warning(@"Could not deactivate audio session: %@", error);
         } else {
             ORK_Log_Debug(@"*** Finished audio session");
         }
@@ -1322,7 +1322,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
             
             _restoredStepIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKStepIdentifierRestoreKey];
         } else {
-            ORK_Log_Debug(@"Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);
+            ORK_Log_Warning(@"Not restoring current step of task %@ because it does not implement -stepWithIdentifier:", _task.identifier);
         }
     }
 }

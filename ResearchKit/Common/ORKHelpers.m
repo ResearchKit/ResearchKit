@@ -247,8 +247,26 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 }
 
 NSBundle *ORKBundle() {
-    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
-    return bundle;
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+    });
+    
+    return __bundle;
+}
+
+NSBundle *ORKDefaultLocaleBundle() {
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [ORKBundle() pathForResource:[ORKBundle() objectForInfoDictionaryKey:@"CFBundleDevelopmentRegion"] ofType:@"lproj"];
+        __bundle = [NSBundle bundleWithPath:path];
+    });
+    
+    return __bundle;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
@@ -418,7 +436,7 @@ NSURL *ORKURLFromBookmarkData(NSData *data) {
                                        bookmarkDataIsStale:&bookmarkIsStale
                                                      error:&bookmarkError];
     if (!bookmarkURL) {
-        ORK_Log_Debug(@"Error loading URL from bookmark: %@", bookmarkError);
+        ORK_Log_Warning(@"Error loading URL from bookmark: %@", bookmarkError);
     }
     
     return bookmarkURL;
@@ -435,7 +453,7 @@ NSData *ORKBookmarkDataFromURL(NSURL *url) {
                                       relativeToURL:nil
                                               error:&error];
     if (!bookmark) {
-        ORK_Log_Debug(@"Error converting URL to bookmark: %@", error);
+        ORK_Log_Warning(@"Error converting URL to bookmark: %@", error);
     }
     return bookmark;
 }
