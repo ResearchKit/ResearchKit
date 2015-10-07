@@ -3502,7 +3502,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             [strongSelf updateProgress:progress + 0.2 OfWaitTask:vc];
         });
     } else {
-        [viewController finish];
+        [viewController goForward];
     }
 }
 
