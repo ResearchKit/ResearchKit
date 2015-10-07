@@ -521,14 +521,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         task = [self makeTaskWithIdentifier:identifier];
     }
     
-    if (_savedViewControllers[identifier])
-    {
-        NSData *data = _savedViewControllers[identifier];
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
-    } else {
-        // No saved data, just create the task and the corresponding task view controller.
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
-    }
+    // If we have stored data then data will contain the stored data.
+    // If we don't, data will be nil (and the task will be opened up as a 'new' task.
+    NSData *data = _savedViewControllers[identifier];
+    self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     
     [self beginTask];
 }
