@@ -1802,18 +1802,14 @@
 - (NSString *)description {
     NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: %p; identifier: %@; results: {", self.class.description, self, self.identifier];
     
-    NSUInteger indexOfLastResult = self.results.count - 1;
     [self.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx != 0) {
             [description appendString:@", "];
         }
         [description appendFormat:@"%@", obj.description];
-        if (idx == indexOfLastResult) {
-            [description appendString:@" "];
-        }
     }];
     
-    [description appendString:@"} >"];
+    [description appendString:@"}>"];
     return [description copy];
 }
 

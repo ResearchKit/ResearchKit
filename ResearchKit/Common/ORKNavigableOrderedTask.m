@@ -41,14 +41,12 @@
 
 @implementation ORKNavigableOrderedTask {
     NSMutableDictionary *_stepNavigationRules;
-    NSMutableOrderedSet *_stepIdentifierStack;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier steps:(NSArray<ORKStep *> *)steps {
     self = [super initWithIdentifier:identifier steps:steps];
     if (self) {
         _stepNavigationRules = nil;
-        _stepIdentifierStack = nil;
     }
     return self;
 }
@@ -91,52 +89,20 @@
         } else {
             nextStep = [super stepAfterStep:step withResult:result];
         }
-        if (nextStep) {
-            [self updateStepIdentifierStackWithSourceIdentifier:step.identifier destinationIdentifier:nextStep.identifier];
-        }
     }
     return nextStep;
-}
-    
-- (void)updateStepIdentifierStackWithSourceIdentifier:(NSString *)sourceIdentifier destinationIdentifier:(NSString *)destinationIdentifier {
-    NSParameterAssert(destinationIdentifier);
-    
-    if (!_stepIdentifierStack) {
-        _stepIdentifierStack = [NSMutableOrderedSet new];
-        // sourceIdentifier is nil if the task starts fresh,
-        // but can have a value if the task is being restored to a specific step
-        if (sourceIdentifier) {
-            [_stepIdentifierStack addObject:sourceIdentifier];
-        }
-        [_stepIdentifierStack addObject:destinationIdentifier];
-        return;
-    }
-    
-    NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:sourceIdentifier];
-    if (indexOfSource == NSNotFound) {
-        ORK_Log_Warning(@"You are calling an out of on order step in an ongoing task (\"%@\" -> \"%@\"). Clearing navigation stack.", sourceIdentifier, destinationIdentifier);
-        [_stepIdentifierStack removeAllObjects];
-        if (sourceIdentifier) {
-            [_stepIdentifierStack addObject:sourceIdentifier];
-        }
-        [_stepIdentifierStack addObject:destinationIdentifier];
-        return;
-    }
-    
-    NSUInteger stackCount = _stepIdentifierStack.count;
-    if (indexOfSource != stackCount - 1) {
-        [_stepIdentifierStack removeObjectsInRange:NSMakeRange(indexOfSource + 1, stackCount - (indexOfSource + 1))];
-    }
-    [_stepIdentifierStack addObject:destinationIdentifier];
 }
 
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *previousStep = nil;
-    if (_stepIdentifierStack) {
-        NSUInteger indexOfSource = [_stepIdentifierStack indexOfObject:step.identifier];
-        if (indexOfSource != NSNotFound && indexOfSource >= 1) {
-            previousStep = [self stepWithIdentifier:_stepIdentifierStack[indexOfSource - 1]];
+    __block NSInteger indexOfCurrentStepResult = -1;
+    [result.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([result.identifier isEqualToString:step.identifier]) {
+            indexOfCurrentStepResult = idx;
         }
+    }];
+    if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0) {
+        previousStep = [self stepWithIdentifier:result.results[indexOfCurrentStepResult - 1].identifier];
     }
     return previousStep;
 }
@@ -161,7 +127,6 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_MUTABLE_DICTIONARY(aDecoder, stepNavigationRules, NSString, ORKStepNavigationRule);
-        ORK_DECODE_OBJ_MUTABLE_ORDERED_SET(aDecoder, stepIdentifierStack, NSString);
     }
     return self;
 }
@@ -170,7 +135,6 @@
     [super encodeWithCoder:aCoder];
     
     ORK_ENCODE_OBJ(aCoder, stepNavigationRules);
-    ORK_ENCODE_OBJ(aCoder, stepIdentifierStack);
 }
 
 #pragma mark NSCopying
@@ -178,11 +142,9 @@
 - (instancetype)copyWithZone:(NSZone *)zone {
     typeof(self) task = [super copyWithZone:zone];
     task->_stepNavigationRules = ORKMutableDictionaryCopyObjects(_stepNavigationRules);
-    task->_stepIdentifierStack = ORKMutableOrderedSetCopyObjects(_stepIdentifierStack);
     return task;
 }
 
-// Note: 'isEqual:' and 'hash' ignore _stepIdentifierStack
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     

@@ -178,7 +178,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
     
-    NSMutableDictionary<NSString *, NSData *> *_savedTasks;               // Maps task identifiers to archived task data
     NSMutableDictionary<NSString *, NSData *> *_savedViewControllers;     // Maps task identifiers to task view controller restoration data
     
     UICollectionView *_collectionView;
@@ -204,7 +203,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _savedTasks = [NSMutableDictionary new];
     _savedViewControllers = [NSMutableDictionary new];
     
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
@@ -499,31 +497,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
      If the user saved their work on a previous run of a task with the same
      identifier, we attempt to restore the view controller here.
      
-     We also attempt to restore the task when data for an archived task is found. Task restoration
-     is not always possible nor desirable. Some objects implementing the ORKTask
-     protocol can chose not to adopt NSSecureCoding (such as this project's DynamicTask).
-     Task archival and restoration is recommended for ORKNavigableOrderedTask, since
-     that preserves the navigation stack (which allows you to navigate steps backwards).
-     
      Since unarchiving can throw an exception, in a real application we would
      need to attempt to catch that exception here.
      */
 
-    id<ORKTask> task = nil;
-    NSData *taskData = _savedTasks[identifier];
-    if (taskData) {
-        /*
-         We assume any restored task is of the ORKNavigableOrderedTask since that's the only kind
-         we're archiving in this example. You have to make sure your are unarchiving a task of the proper class.
-         */
-        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:taskData];
-        task = [unarchiver decodeObjectOfClass:[ORKNavigableOrderedTask class] forKey:NSKeyedArchiveRootObjectKey];
-    } else {
-        /*
-         No task was previously stored
-         */
-        task = [self makeTaskWithIdentifier:identifier];
-    }
+    id<ORKTask> task = [self makeTaskWithIdentifier:identifier];
     
     if (_savedViewControllers[identifier]) {
         NSData *data = _savedViewControllers[identifier];
@@ -2851,18 +2829,34 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     ORKAnswerFormat *answerFormat = nil;
     ORKStep *step = nil;
+    NSArray *textChoices = nil;
+    ORKQuestionStep *questionStep = nil;
     
     // Intro step
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"intro"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"introStep"];
     step.title = @"This task demonstrates an optional loop within a navigable ordered task";
     [steps addObject:step];
 
-    // Target step
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"loop_a"];
-    step.title = @"Later on, we'll return to this step";
+    // Loop target step
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"loopAStep"];
+    step.title = @"You'll optionally return to this step";
     [steps addObject:step];
 
-    // One intermediate step
+    // Branching paths
+    textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Scale" value:@"scale"],
+      [ORKTextChoice choiceWithText:@"Text Choice" value:@"textchoice"]
+      ];
+    
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"branchingStep" title:@"Which kind of question do you prefer?" answer:answerFormat];
+    questionStep.optional = NO;
+    [steps addObject:questionStep];
+
+    // Scale question step
     ORKContinuousScaleAnswerFormat *scaleAnswerFormat =  [ORKAnswerFormat continuousScaleAnswerFormatWithMaximumValue:10
                                                                                                          minimumValue:1
                                                                                                          defaultValue:8.725
@@ -2871,18 +2865,32 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                               maximumValueDescription:nil
                                                                                               minimumValueDescription:nil];
     
-    step = [ORKQuestionStep questionStepWithIdentifier:@"scale"
+    step = [ORKQuestionStep questionStepWithIdentifier:@"scaleStep"
                                                  title:@"On a scale of 1 to 10, what is your mood?"
                                                 answer:scaleAnswerFormat];
     [steps addObject:step];
+    
+    // Text choice question step
+    textChoices =
+    @[
+      [ORKTextChoice choiceWithText:@"Good" value:@"good"],
+      [ORKTextChoice choiceWithText:@"Bad" value:@"bad"]
+      ];
+    
+    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                    textChoices:textChoices];
+    
+    questionStep = [ORKQuestionStep questionStepWithIdentifier:@"textChoiceStep" title:@"How is your mood?" answer:answerFormat];
+    questionStep.optional = NO;
+    [steps addObject:questionStep];
 
-    // Question steps
+    // Loop conditional step
     answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"loop_b" title:@"Do you want to repeat the survey?" answer:answerFormat];
+    step = [ORKQuestionStep questionStepWithIdentifier:@"loopBStep" title:@"Do you want to repeat the survey?" answer:answerFormat];
     step.optional = NO;
     [steps addObject:step];
     
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
+    step = [[ORKInstructionStep alloc] initWithIdentifier:@"endStep"];
     step.title = @"You have finished the task";
     [steps addObject:step];
     
@@ -2890,16 +2898,29 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                                   steps:steps];
     
     // Build navigation rules
-    ORKPredicateStepNavigationRule *predicateRule = nil;
     ORKResultSelector *resultSelector = nil;
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+    ORKDirectStepNavigationRule *directRule;
     
-    // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
-    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"loop_b"];
-    NSPredicate *predicateRepeatYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
-                                                                                                 expectedAnswer:YES];
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateRepeatYes ]
-                                                          destinationStepIdentifiers:@[ @"loop_a" ] ];
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"loop_b"];
+    // From the branching step, go to either scaleStep or textChoiceStep
+    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"branchingStep"];
+    NSPredicate *predicateAnswerType = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"scale"];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateAnswerType ]
+                                                          destinationStepIdentifiers:@[ @"scaleStep" ]
+                                                               defaultStepIdentifier:@"textChoiceStep"];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"branchingStep"];
+    
+    // From the loopB step, return to loopA if user chooses so
+    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"loopBStep"];
+    NSPredicate *predicateLoopYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
+                                                                                             expectedAnswer:YES];
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateLoopYes ]
+                                                          destinationStepIdentifiers:@[ @"loopAStep" ] ];
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"loopBStep"];
+    
+    // scaleStep to loopB direct navigation rule
+    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"loopBStep"];
+    [task setNavigationRule:directRule forTriggerStepIdentifier:@"scaleStep"];
     
     return task;
 }
@@ -3356,12 +3377,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
              */
             id<ORKTask> task = taskViewController.task;
             _savedViewControllers[task.identifier] = [taskViewController restorationData];
-            /*
-             Save only tasks of the ORKNavigableOrderedTask class, as it's useful to preserve its navigation stack
-             */
-            if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
-                _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
-            }
             [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
         }
@@ -3372,7 +3387,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }
     
     [_savedViewControllers removeObjectForKey:taskViewController.task.identifier];
-    [_savedTasks removeObjectForKey:taskViewController.task.identifier];
     _taskViewController = nil;
 }
 
