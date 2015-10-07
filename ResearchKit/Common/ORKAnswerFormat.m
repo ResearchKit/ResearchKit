@@ -1943,7 +1943,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         if (string.length > 0) {
             [string appendString:@"\n"];
         }
-        [string appendString:_invalidMessage];
+        [string appendString:[NSString stringWithFormat:ORKLocalizedString(_invalidMessage, nil), text]];
     }
     return string;
 }

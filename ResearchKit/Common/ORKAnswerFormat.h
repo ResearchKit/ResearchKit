@@ -1192,7 +1192,7 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param expression                The regular expression used to valide the text.
+ @param expression                The regular expression used to validate the text.
  @param invalidMessage            The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
@@ -1203,7 +1203,7 @@ ORK_CLASS_AVAILABLE
 /**
  Returns an initialized text answer format using the specified maximum string length.
  
- This method is the designated initializer.
+ This method is one of the designated initializers.
  
  @param maximumLength   The maximum number of characters to accept. When the value of this parameter
                             is 0, there is no maximum.
