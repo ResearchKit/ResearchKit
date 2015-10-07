@@ -3184,12 +3184,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  Dismisses the task view controller.
  */
-- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController removeOutputDirectory:(BOOL)removeDir{
+- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController removeOutputDirectory:(BOOL)removeOutputDirectory {
     _currentDocument = nil;
     
-    NSURL *dir = taskViewController.outputDirectory;
+    NSURL *outputDirectoryURL = taskViewController.outputDirectory;
     [self dismissViewControllerAnimated:YES completion:^{
-        if (dir && removeDir)
+        if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
              We attempt to clean up the output directory.
@@ -3199,8 +3199,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
-                NSLog(@"Error removing %@: %@", dir, err);
+            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+                NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
     }];
