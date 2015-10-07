@@ -12,6 +12,7 @@
 
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;
+    NSNumberFormatter *_percentFormatter;
 }
 
 - (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
@@ -139,11 +140,13 @@
 
 - (NSString *)accessibilityLabel {
     if (_progressView) {
-        NSNumberFormatter *percentFormatter = [[NSNumberFormatter alloc] init];
-        percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        if (!_percentFormatter) {
+            _percentFormatter = [[NSNumberFormatter alloc] init];
+            _percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        }
         return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
                                                   _progressView.accessibilityLabel,
-                                                  [percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
+                                                  [_percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
     } else if (_activityIndicatorView) {
         return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
                                                   _activityIndicatorView.accessibilityLabel);
