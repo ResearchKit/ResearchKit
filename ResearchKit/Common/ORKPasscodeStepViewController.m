@@ -51,6 +51,8 @@
     BOOL _isTouchIdAuthenticated;
     BOOL _isPasscodeSaved;
     LAContext *_touchContext;
+    ORKPasscodeType _authenticationPasscodeType;
+    BOOL _useTouchId;
 }
 
 - (ORKPasscodeStep *)passcodeStep {
@@ -78,6 +80,7 @@
         _isChangingState = NO;
         _isTouchIdAuthenticated = NO;
         _isPasscodeSaved = NO;
+        _useTouchId = YES;
         
         // Set the starting passcode state and textfield based on flow.
         switch (_passcodeFlow) {
@@ -89,19 +92,19 @@
                 
             case ORKPasscodeFlowAuthenticate:
                 [self setValuesFromKeychain];
-                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
+                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:_authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateEntry];
                 break;
                 
             case ORKPasscodeFlowEdit:
                 [self setValuesFromKeychain];
-                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:self.authenticationPasscodeType];
+                _passcodeStepView.textField.numberOfDigits = [self numberOfDigitsForPasscodeType:_authenticationPasscodeType];
                 [self changeStateTo:ORKPasscodeStateOldEntry];
                 break;
         }
         
         // If Touch ID was enabled then present it for authentication flow.
-        if (self.useTouchId &&
+        if (_useTouchId &&
             self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
             [self promptTouchId];
         }
@@ -124,7 +127,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self makePasscodeViewBecomeFirstResponder];
+    if (!_shouldResignFirstResponder) {
+        [self makePasscodeViewBecomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -219,13 +224,6 @@
     return stepResult;
 }
 
-- (BOOL)useTouchId {
-    if (self.passcodeFlow == ORKPasscodeFlowCreate) {
-        _useTouchId = YES;
-    }
-    return _useTouchId;
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -253,17 +251,17 @@
     }
 }
 
-- (void)makePasscodeViewBecomeFirstResponder{
-    if (! _passcodeStepView.textField.isFirstResponder) {
-        _shouldResignFirstResponder = NO;
+- (void)makePasscodeViewBecomeFirstResponder {
+    _shouldResignFirstResponder = NO;
+    if (!_passcodeStepView.textField.isFirstResponder) {
         [_passcodeStepView.textField becomeFirstResponder];
     }
 }
 
 - (void)makePasscodeViewResignFirstResponder {
+    _shouldResignFirstResponder = YES;
     if (_passcodeStepView.textField.isFirstResponder) {
-        _shouldResignFirstResponder = YES;
-        [_passcodeStepView.textField endEditing:YES];
+        [_passcodeStepView.textField resignFirstResponder];
     }
 }
 
@@ -272,7 +270,7 @@
     _touchContext.localizedFallbackTitle = @"";
     
     // Check to see if the device supports Touch ID.
-    if (self.useTouchId &&
+    if (_useTouchId &&
         [_touchContext canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
         /// Device does support Touch ID.
         
@@ -287,8 +285,6 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 
                 typeof(self) strongSelf = weakSelf;
-                
-                [strongSelf makePasscodeViewBecomeFirstResponder];
                 
                 if (success) {
                     // Store that user passed authentication.
@@ -305,8 +301,13 @@
                                                                             preferredStyle:UIAlertControllerStyleAlert];
                     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_OK", nil)
                                                               style:UIAlertActionStyleDefault
-                                                            handler:nil]];
+                                                            handler:^(UIAlertAction * action) {
+                                                                typeof(self) strongSelf = weakSelf;
+                                                                [strongSelf makePasscodeViewBecomeFirstResponder];
+                                                            }]];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
+                } else if (error.code == LAErrorUserCancel) {
+                    [strongSelf makePasscodeViewBecomeFirstResponder];
                 }
                 
                 [strongSelf finishTouchId];
@@ -390,8 +391,11 @@
     }
     
     NSString *storedPasscode = dictionary[KeychainDictionaryPasscodeKey];
-    self.useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
-    self.authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
+    _authenticationPasscodeType = (storedPasscode.length == 4) ? ORKPasscodeType4Digit : ORKPasscodeType6Digit;
+    
+    if (self.passcodeFlow == ORKPasscodeFlowAuthenticate) {
+        _useTouchId = [dictionary[KeychainDictionaryTouchIdKey] boolValue];
+    }
 }
 
 - (void)wrongAttempt {
