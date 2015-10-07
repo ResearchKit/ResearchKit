@@ -81,7 +81,6 @@
 }
 
 - (void)answerDidChange {
-    id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
         if (![self.answer isKindOfClass:[NSNumber class]]) {
@@ -90,11 +89,7 @@
         
         [_sliderView setCurrentValue:answer];
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
-        } else {
-           [self.sliderView setCurrentValue:nil];
-        }
+        [self.sliderView setCurrentValue:nil];
     }
 }
 
