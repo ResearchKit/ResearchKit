@@ -35,8 +35,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKLoginStepViewController;
-
 /**
  The `ORKLoginStep` class represents a form step that provides fields commonly used
  for account login.

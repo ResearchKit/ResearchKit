@@ -31,38 +31,14 @@
 
 #import "ORKLoginStepViewController.h"
 #import "ORKStepViewController_Internal.h"
+#import "ORKLoginStep.h"
 #import "ORKDefines_Private.h"
 
 
-@implementation ORKLoginStepViewController {
-    UIButton *_forgotPasswordButton;
-}
+@implementation ORKLoginStepViewController
 
 - (ORKLoginStep *)loginStep {
     return (ORKLoginStep *)self.step;
-}
-
-- (void)stepDidChange {
-    [super stepDidChange];
-    
-    if (self.step && [self isViewLoaded]) {
-        
-        _forgotPasswordButton = [UIButton new];
-        NSString *forgotPasswordTitle = ORKLocalizedString(@"FORGOT_PASSWORD_BUTTON_TITLE", nil);
-        [_forgotPasswordButton setTitle:forgotPasswordTitle forState:UIControlStateNormal];
-        [_forgotPasswordButton setTitleColor:self.view.tintColor forState:UIControlStateNormal];
-        [self.view addSubview:_forgotPasswordButton];
-        
-        [_forgotPasswordButton addTarget:self
-                                  action:@selector(forgotPasswordButtonHandler:)
-                        forControlEvents:UIControlEventTouchUpInside];
-
-    }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self stepDidChange];
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
@@ -71,11 +47,6 @@
     [skipButtonItem setTarget:self];
     [skipButtonItem setAction:@selector(forgotPasswordButtonHandler:)];
     skipButtonItem.title = ORKLocalizedString(@"FORGOT_PASSWORD_BUTTON_TITLE", nil);
-}
-
-- (void)tintColorDidChange {
-    [super.view tintColorDidChange];
-    [_forgotPasswordButton setTitleColor:self.view.tintColor forState:UIControlStateNormal];
 }
 
 - (void)forgotPasswordButtonHandler:(id)sender {

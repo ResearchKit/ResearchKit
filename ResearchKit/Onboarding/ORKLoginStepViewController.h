@@ -29,7 +29,7 @@
  */
 
 
-#import "ORKFormStepViewController.h"
+#import "ORKStepViewController.h"
 
 
 /**
@@ -40,7 +40,7 @@
  methods to provide your navigation logic.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKLoginStepViewController : ORKFormStepViewController
+@interface ORKLoginStepViewController : ORKStepViewController
 
 /**
  Action method for the continue button.

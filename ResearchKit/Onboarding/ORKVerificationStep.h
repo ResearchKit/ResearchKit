@@ -35,6 +35,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ The `ORKVerificationStep` class represents a step that provides elements
+ commonly used for account verification.
+ 
+ The verification step contains an email field, change email button, and resend
+ email button. The button actions must be overriden inside a subclassed verification
+ view controller to provide navigation logic.
+ */
 @interface ORKVerificationStep : ORKStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;

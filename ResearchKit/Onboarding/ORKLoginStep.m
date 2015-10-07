@@ -58,10 +58,6 @@
     return self;
 }
 
-- (BOOL)isOptional {
-    return YES;
-}
-
 - (NSArray<ORKFormItem *> *)formItems {
     NSMutableArray *formItems = [NSMutableArray new];
     
@@ -92,6 +88,10 @@
     }
     
     return formItems;
+}
+
+- (BOOL)isOptional {
+    return YES;
 }
 
 + (BOOL)supportsSecureCoding {
