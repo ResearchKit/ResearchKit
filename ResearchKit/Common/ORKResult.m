@@ -32,12 +32,6 @@
 #import "ORKResult.h"
 #import "ORKTask.h"
 #import "ORKResult_Private.h"
-#include <sys/socket.h> // Per msqr
-#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
-#import <CoreMotion/CoreMotion.h>
-#import <CoreLocation/CoreLocation.h>
 #import "ORKRecorder.h"
 #import "ORKStep.h"
 #import "ORKHelpers.h"
@@ -47,6 +41,15 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
+#import <CoreMotion/CoreMotion.h>
+#import <CoreLocation/CoreLocation.h>
+
+
+@interface ORKResult ()
+
+@property (nonatomic, readonly) NSString *descriptionPrefix;
+
+@end
 
 
 @implementation ORKResult
@@ -121,6 +124,14 @@
     return self;
 }
 
+- (NSString *)descriptionPrefix {
+    return [NSString stringWithFormat:@"%@: %p; identifier: %@", self.class.description, self, self.identifier];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@>", self.descriptionPrefix];
+}
+
 @end
 
 
@@ -168,7 +179,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %.03f %@", super.description, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
+    return [NSString stringWithFormat:@"<%@: %p; button: %@; timestamp: %.03f; location: %@>", self.class.description, self, @(self.buttonIdentifier), self.timestamp, NSStringFromCGPoint(self.location)];
 }
 
 @end
@@ -208,7 +219,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %d", [super description], self.isPasscodeSaved];
+    return [NSString stringWithFormat:@"<%@; passcodeSaved: %d>", self.descriptionPrefix, self.isPasscodeSaved];
 }
 
 @end
@@ -255,7 +266,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@, %d, %@", super.description, self.puzzleWasSolved, self.moves];
+    return [NSString stringWithFormat:@"<%@; puzzleSolved: %d; moves: %@>", self.descriptionPrefix, self.puzzleWasSolved, self.moves];
 }
 
 @end
@@ -305,7 +316,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", super.description, @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; donorTower: %@; recipientTower: %@>", self.class.description, self, @(self.timestamp), @(self.donorTowerIndex), @(self.recipientTowerIndex)];
 }
 
 @end
@@ -353,7 +364,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@", super.description, self.outputVolume, self.samples];
+    return [NSString stringWithFormat:@"<%@; outputvolume: %@; samples: %@>", self.descriptionPrefix, self.outputVolume, self.samples];
 }
 
 @end
@@ -402,7 +413,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %.1lf %@ %.4lf", super.description, self.frequency, @(self.channel), self.amplitude];
+    return [NSString stringWithFormat:@"<%@: %p; frequency: %.1lf; channel %@; amplitude: %.4lf>", self.class.description, self, self.frequency, @(self.channel), self.amplitude];
 }
 
 @end
@@ -459,7 +470,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", super.description, @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
+    return [NSString stringWithFormat:@"<%@: %p; timestamp: %@; targetIndex: %@; location: %@; correct: %@>", self.class.description, self, @(self.timestamp), @(self.targetIndex), NSStringFromCGPoint(self.location), @(self.isCorrect)];
 }
 
 @end
@@ -527,7 +538,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", super.description, @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
+    return [NSString stringWithFormat:@"<%@: %p; seed: %@; sequence: %@; gameSize: %@; gameStatus: %@; score: %@>", self.class.description, self, @(self.seed), self.sequence, @(self.gameSize), @(self.gameStatus), @(self.score)];
 }
 
 @end
@@ -585,7 +596,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ score=%@", super.description, @(self.score)];
+    return [NSString stringWithFormat:@"<%@: %p; score: %@>", self.class.description, self, @(self.score)];
 }
 
 @end
@@ -641,7 +652,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@", super.description, self.samples];
+    return [NSString stringWithFormat:@"<%@; samples: %@>", self.descriptionPrefix, self.samples];
 }
 
 @end
@@ -693,7 +704,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ (%lld bytes)", super.description, self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
+    return [NSString stringWithFormat:@"<%@; fileURL: %@ (%lld bytes)>", self.descriptionPrefix, self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
 }
 
 @end
@@ -741,10 +752,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %f %@", super.description, self.timestamp, self.fileResult.description];
+    return [NSString stringWithFormat:@"<%@; timestamp: %f; fileResult: %@>", self.descriptionPrefix, self.timestamp, self.fileResult.description];
 }
 
 @end
+
 
 @implementation ORKTimedWalkResult
 
@@ -793,10 +805,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.distanceInMeters), @(self.timeLimit), @(self.duration)];
+    return [NSString stringWithFormat:@"<%@; distance: %@; timeLimit: %@; duration: %@>", self.descriptionPrefix, @(self.distanceInMeters), @(self.timeLimit), @(self.duration)];
 }
 
 @end
+
 
 @implementation ORKPSATSample
 
@@ -845,7 +858,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@ %@", [super description], @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
+    return [NSString stringWithFormat:@"<%@: %p; correct: %@; digit: %@; answer: %@; time: %@>", self.class.description, self, @(self.isCorrect), @(self.digit), @(self.answer), @(self.time)];
 }
 
 @end
@@ -922,10 +935,11 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ total correct=%@/%@ %@", [super description], @(self.totalCorrect), @(self.length),self.samples];
+    return [NSString stringWithFormat:@"<%@; correct: %@/%@; samples: %@>", self.descriptionPrefix, @(self.totalCorrect), @(self.length), self.samples];
 }
 
 @end
+
 
 @implementation ORKHolePegTestResult
 
@@ -1001,7 +1015,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@ %@", [super description], @(self.totalSuccesses), @(self.totalTime), self.samples];
+    return [NSString stringWithFormat:@"<%@; successes: %@; time: %@; samples: %@>", self.descriptionPrefix, @(self.totalSuccesses), @(self.totalTime), self.samples];
 }
 
 @end
@@ -1046,7 +1060,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ %@ %@", [super description], @(self.time), @(self.distance)];
+    return [NSString stringWithFormat:@"<%@: %p; time: %@; distance: %@>", self.class.description, self, @(self.time), @(self.distance)];
 }
 
 @end
@@ -1101,7 +1115,11 @@
 
     return result;
 }
-                                
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@; data: %@; filename: %@; contentType: %@>", self.descriptionPrefix, self.data, self.filename, self.contentType];
+}
+
 @end
 
 
@@ -1161,6 +1179,10 @@
         signatures[indexToBeReplaced] = [_signature copy];
         document.signatures = signatures;
     }
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@; signature: %@; consented: %d>", self.descriptionPrefix, self.signature, self.consented];
 }
 
 @end
@@ -1224,6 +1246,10 @@
 
 - (id)answer {
     return nil;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@; answer: %@>", self.descriptionPrefix, self.answer];
 }
 
 @end
@@ -1771,6 +1797,24 @@
 - (ORKResult *)firstResult {
     
     return self.results.firstObject;
+}
+
+- (NSString *)description {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: %p; identifier: %@; results: {", self.class.description, self, self.identifier];
+    
+    NSUInteger indexOfLastResult = self.results.count - 1;
+    [self.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx != 0) {
+            [description appendString:@", "];
+        }
+        [description appendFormat:@"%@", obj.description];
+        if (idx == indexOfLastResult) {
+            [description appendString:@" "];
+        }
+    }];
+    
+    [description appendString:@"} >"];
+    return [description copy];
 }
 
 @end
