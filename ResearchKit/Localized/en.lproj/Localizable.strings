@@ -92,6 +92,28 @@
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
 
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
+"PASSCODE_SAVED_MESSAGE" = "Passcode saved";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Passcode authenticated";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Enter your old passcode";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Enter your new passcode";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirm your new passcode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Invalid input";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Passcodes did not match. Try again.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode progress indicator";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Could not add Keychain item.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Could not update Keychain item.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Could not delete Keychain item.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Could not find Keychain item.";
+
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
 "BLOOD_TYPE_A-" = "A-";
@@ -120,6 +142,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Agree";
 "BUTTON_CANCEL" = "Cancel";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Clear";
 "BUTTON_DISAGREE" = "Disagree";
 "BUTTON_DONE" = "Done";
@@ -254,10 +277,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Turn around, and walk back to where you started.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tap Done when complete.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "No Data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +290,18 @@
 "PSAT_INSTRUCTION" = "Add this new digit to the previous one.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a circle in a hole. You will be asked to do this %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Both your %@ and %@ hands will be tested.\nYou must pick up the circle as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
+"HOLE_PEG_TEST_RIGHT" = "right";
+"HOLE_PEG_TEST_LEFT" = "left";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Put the peg in the hole using your %@ hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Put the peg behing the line using your %@ hand.";
+"HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
+"HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Could not create file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Could not remove sufficient log files to reach threshold";
@@ -279,6 +310,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Multiple errors removing logs";
 "ERROR_RECORDER_NO_DATA" = "No collected data was found.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No output directory specified";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No Data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Back";

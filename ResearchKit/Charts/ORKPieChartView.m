@@ -336,8 +336,7 @@ static const CGFloat PieToLegendPadding = 8.0;
     UIColor *color = nil;
     if ([_dataSource respondsToSelector:@selector(pieChartView:colorForSegmentAtIndex:)]) {
         color = [_dataSource pieChartView:self colorForSegmentAtIndex:index];
-    }
-    else {
+    } else {
         // Default colors: use tintColor reducing alpha progressively
         NSInteger numberOfSegments = [_dataSource numberOfSegmentsInPieChartView:self];
         if (numberOfSegments > 1) {

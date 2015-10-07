@@ -69,6 +69,9 @@
     CAShapeLayer *_circleLayer;
 }
 
+static const CGFloat ProgressIndicatorDiameter = 104.0;
+static const CGFloat ProgressIndicatorOuterMargin = 1.0;
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -88,55 +91,11 @@
         [self addSubview:_progressView];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        static const CGFloat ProgressIndicatorDiameter = 104;
-        static const CGFloat ProgressIndicatorOuterMargin = 1;
-        NSDictionary *metrics = @{@"d":@(ProgressIndicatorDiameter+2*ProgressIndicatorOuterMargin)};
-        
-        NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _timeLabel, _progressView);
-        
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]-(>=0)-[_progressView(==d)]|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing|NSLayoutFormatAlignAllCenterX
-                                                                     metrics:metrics
-                                                                       views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_textLabel]-(>=0)-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:metrics
-                                                                       views:views]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_progressView(==d)]-(>=0)-|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:metrics
-                                                                       views:views]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView
-                                                         attribute:NSLayoutAttributeCenterX
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeCenterX
-                                                        multiplier:1.0 constant:0]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_timeLabel
-                                                         attribute:NSLayoutAttributeCenterX
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:_progressView
-                                                         attribute:NSLayoutAttributeCenterX
-                                                        multiplier:1.0 constant:0]];
-        
-        // Constant required in order to give appearance of vertical centering (compensating for leading on font)
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_timeLabel
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:_progressView
-                                                         attribute:NSLayoutAttributeCenterY
-                                                        multiplier:1.0 constant:-3]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_progressView
-                                                         attribute:NSLayoutAttributeTop
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:_textLabel
-                                                         attribute:NSLayoutAttributeLastBaseline
-                                                        multiplier:1 constant:16-ProgressIndicatorOuterMargin]];
+        [self setUpConstraints];
         
         _circleLayer = [CAShapeLayer layer];
-        static const CGFloat ProgressIndicatorRadius = ProgressIndicatorDiameter/2;
-        _circleLayer.path = [[UIBezierPath bezierPathWithArcCenter:CGPointMake(ProgressIndicatorRadius+ProgressIndicatorOuterMargin, ProgressIndicatorRadius+ProgressIndicatorOuterMargin)
+        static const CGFloat ProgressIndicatorRadius = ProgressIndicatorDiameter / 2;
+        _circleLayer.path = [[UIBezierPath bezierPathWithArcCenter:CGPointMake(ProgressIndicatorRadius + ProgressIndicatorOuterMargin, ProgressIndicatorRadius + ProgressIndicatorOuterMargin)
                                                             radius:ProgressIndicatorRadius
                                                         startAngle:M_PI + M_PI_2
                                                           endAngle:-M_PI_2
@@ -154,13 +113,65 @@
     return self;
 }
 
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *metrics = @{@"d": @(ProgressIndicatorDiameter + 2 * ProgressIndicatorOuterMargin)};
+    NSDictionary *views = NSDictionaryOfVariableBindings(_textLabel, _timeLabel, _progressView);
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]-(>=0)-[_progressView(==d)]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing | NSLayoutFormatAlignAllCenterX
+                                                                             metrics:metrics
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_textLabel]-(>=0)-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:metrics
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_progressView(==d)]-(>=0)-|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:metrics
+                                                                               views:views]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_timeLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_progressView
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0]];
+    
+    // Constant required in order to give appearance of vertical centering (compensating for leading on font)
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_timeLabel
+                                                        attribute:NSLayoutAttributeCenterY
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_progressView
+                                                        attribute:NSLayoutAttributeCenterY
+                                                       multiplier:1.0
+                                                         constant:-3.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_progressView
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:_textLabel
+                                                        attribute:NSLayoutAttributeLastBaseline
+                                                       multiplier:1.0
+                                                         constant:16.0 - ProgressIndicatorOuterMargin]];
+
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
 - (void)tintColorDidChange {
     _circleLayer.strokeColor = self.tintColor.CGColor;
 }
 
 - (void)startAnimateWithDuration:(NSTimeInterval)duration {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = duration*2;
+    animation.duration = duration * 2;
     animation.removedOnCompletion = YES;
     animation.values = @[@(1.0), @(0.0), @(0.0)];
     animation.keyTimes =  @[@(0.0), @(0.5), @(1.0)];
@@ -224,7 +235,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [@(_countDown) stringValue]);
+    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
     [_countdownView startAnimateWithDuration:[(ORKActiveStep *)self.step stepDuration]];
 }
 
@@ -233,7 +244,7 @@
 }
 
 - (void)countDownTimerFired:(ORKActiveStepTimer *)timer finished:(BOOL)finished {
-    _countDown = MAX((_countDown-1), 0);
+    _countDown = MAX((_countDown - 1), 0);
     [self updateCountdownLabel];
     
     if (UIAccessibilityIsVoiceOverRunning()) {
@@ -247,7 +258,7 @@
                                                           }];
             UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, ORKLocalizedString(@"AX_ANNOUNCE_BEGIN_TASK", nil));
         } else {
-            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, [@(_countDown) stringValue]);
+            UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @(_countDown).stringValue);
             [super countDownTimerFired:timer finished:finished];
         }
     } else {

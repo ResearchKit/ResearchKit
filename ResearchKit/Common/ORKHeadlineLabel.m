@@ -40,11 +40,8 @@
     UIFontDescriptor *descriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleHeadline];
     const CGFloat defaultHeadlineSize = 17;
     
-    UIWindow *window = [[[UIApplication sharedApplication] windows] firstObject];
-    ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(window);
-    
-    CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForScreenType(surveyMode?ORKScreenMetricFontSizeSurveyHeadline: ORKScreenMetricFontSizeHeadline, screenType);
-    CGFloat maxFontSize = ORKGetMetricForScreenType(surveyMode?ORKScreenMetricMaxFontSizeSurveyHeadline:ORKScreenMetricMaxFontSizeHeadline, screenType);
+    CGFloat fontSize = [[descriptor objectForKey: UIFontDescriptorSizeAttribute] doubleValue] - defaultHeadlineSize + ORKGetMetricForWindow(surveyMode ? ORKScreenMetricFontSizeSurveyHeadline : ORKScreenMetricFontSizeHeadline, nil);
+    CGFloat maxFontSize = ORKGetMetricForWindow(surveyMode?ORKScreenMetricMaxFontSizeSurveyHeadline:ORKScreenMetricMaxFontSizeHeadline, nil);
     
     return ORKLightFontWithSize(MIN(maxFontSize, fontSize));
 }

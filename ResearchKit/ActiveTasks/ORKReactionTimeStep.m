@@ -69,7 +69,7 @@
     }
     if (self.maximumStimulusInterval < self.minimumStimulusInterval) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"maximumStimulusInterval can not be less than minimumStimulusInterval"
+                                       reason:@"maximumStimulusInterval cannot be less than minimumStimulusInterval"
                                      userInfo:nil];
     }
     if (self.thresholdAcceleration <= 0) {
