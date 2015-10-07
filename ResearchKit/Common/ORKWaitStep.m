@@ -77,4 +77,18 @@
     return YES;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKWaitStep *step = [super copyWithZone:zone];
+    step.indicatorMask = self.indicatorMask;
+    return step;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            self.indicatorMask == castObject.indicatorMask);
+}
+
 @end
