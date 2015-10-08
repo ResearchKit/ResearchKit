@@ -43,9 +43,9 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 
-#define LocationSelectionViewTextFieldHeight 21.0
-#define LocationSelectionViewTextFieldVerticalMargin 11.5
-#define LocationSelectionViewMapViewHeight 238.0
+static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
+static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
+static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
