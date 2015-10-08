@@ -1261,10 +1261,11 @@ static const CGFloat HorizontalMargin = 15.0;
     _heightConstraint.constant = _selectionView.intrinsicContentSize.height;
     
     [tableView beginUpdates];
-    [tableView endUpdates];
     
     CGRect convertedVisibleRect = [tableView convertRect:view.bounds fromView:view];
     [tableView scrollRectToVisible:convertedVisibleRect animated:YES];
+    
+    [tableView endUpdates];
 }
 
 - (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {
