@@ -276,7 +276,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            ],
                        @[ // Active Tasks
                            @"Active Step Task",
-                           @"Wait Task",
                            @"Audio Task",
                            @"Fitness Task",
                            @"GAIT Task",
@@ -288,6 +287,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Wait Task"
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -3488,7 +3488,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
             
             if ((float)progress == 0.5) {
-                NSString *newText = @"Please wait while the data is downloaded/";
+                NSString *newText = @"Please wait while the data is downloaded.";
                 [viewController updateText:newText];
             }
         });
