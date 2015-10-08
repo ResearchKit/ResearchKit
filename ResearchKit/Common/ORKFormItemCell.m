@@ -1286,18 +1286,6 @@ static const CGFloat HorizontalMargin = 15.0;
     return resign;
 }
 
-- (NSString *)convertLocationToString:(CLLocationCoordinate2D)location {
-    NSNumberFormatter *decimalFormatter = [[NSNumberFormatter alloc] init];
-    decimalFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    
-    NSNumber *latitude = [NSNumber numberWithDouble:location.latitude];
-    NSNumber *longitude = [NSNumber numberWithDouble:location.longitude];
-    
-    NSString *string = [NSString stringWithFormat:@"%@, %@", [decimalFormatter stringFromNumber:latitude], [decimalFormatter stringFromNumber:longitude]];
-    
-    return string;
-}
-
 - (BOOL)isAnswerValid {
     id answer = self.answer;
     
