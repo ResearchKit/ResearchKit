@@ -1189,10 +1189,10 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [self.contentView addSubview:_selectionView];
     
-    [self setupConstraints];
+    [self setUpConstraints];
 }
 
-- (void)setupConstraints {
+- (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *dictionary = @{@"_selectionView":_selectionView};
