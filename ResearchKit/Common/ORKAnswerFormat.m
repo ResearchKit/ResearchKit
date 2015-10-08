@@ -2173,11 +2173,4 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKLocationQuestionResult class];
 }
 
-- (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer {
-    ORKLocationQuestionResult *questionResult = [[[self questionResultClass] alloc] initWithIdentifier:identifier];
-    questionResult.answer = answer;
-    questionResult.locationAnswer = answer;
-    return questionResult;
-}
-
 @end
