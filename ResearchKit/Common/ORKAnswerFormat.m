@@ -1848,7 +1848,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 #pragma mark - ORKTextAnswerFormat
 
-@implementation ORKTextAnswerFormat
+@implementation ORKTextAnswerFormat {
+    NSRegularExpression *_cachedRegEx;
+}
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
@@ -1928,9 +1930,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isTextRegexValidWithString:(NSString *)text {
     BOOL isValid = YES;
     if (self.regex) {
-        NSString *regExPattern = self.regex;
-        NSRegularExpression *regEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
-        NSUInteger regExMatches = [regEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
+        if (!_cachedRegEx) {
+            NSString *regExPattern = self.regex;
+            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+        }
+
+        NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
         isValid = (regExMatches != 0);
     }
     return isValid;
