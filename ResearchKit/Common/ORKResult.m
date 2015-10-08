@@ -1860,7 +1860,9 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && [self isEqual:castObject]);
+    return (isParentSame &&
+            self.locationAnswer.location.coordinate.latitude == castObject.locationAnswer.location.coordinate.latitude &&
+            self.locationAnswer.location.coordinate.longitude == castObject.locationAnswer.location.coordinate.longitude);
 }
 
 - (NSUInteger)hash {

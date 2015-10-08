@@ -31,6 +31,7 @@
 
 #import "ORKESerialization.h"
 #import <ResearchKit/ResearchKit_Private.h>
+#import <MapKit/MapKit.h>
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
@@ -772,6 +773,13 @@ ret =
                    ^id(id string) { return [ORKResultDateTimeFormatter() dateFromString:string]; }),
           
           })),
+  ENTRY(ORKLocationAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKLocationAnswerFormat alloc] init];
+         },
+         (@{
+            
+            })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKNumericAnswerFormat alloc] initWithStyle:((NSNumber *)GETPROP(dict, style)).integerValue unit:GETPROP(dict, unit) minimum:GETPROP(dict, minimum) maximum:GETPROP(dict, maximum)];
@@ -1077,6 +1085,11 @@ ret =
          (@{
             PROPERTY(numericAnswer, NSNumber, NSObject, NO, nil, nil),
             PROPERTY(unit, NSString, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKLocationQuestionResult,
+         nil,
+         (@{
+            PROPERTY(locationAnswer, MKPlacemark, NSObject, NO, nil, nil),
             })),
    ENTRY(ORKTimeOfDayQuestionResult,
          nil,

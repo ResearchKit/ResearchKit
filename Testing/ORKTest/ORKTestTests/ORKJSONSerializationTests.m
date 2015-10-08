@@ -38,6 +38,7 @@
 #import <stdio.h>
 #import <stdlib.h>
 #import <HealthKit/HealthKit.h>
+#import <MapKit/MapKit.h>
 
 #import <ResearchKit/ORKResult_Private.h>
 #import "ORKESerialization.h"
@@ -422,6 +423,8 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
                             //[instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
+                        } else if (p.propertyClass == [MKPlacemark class]) {
+                            [instance setValue:[[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) addressDictionary:nil] forKey:p.propertyName];
                         } else {
                             id itemInstance = [self instanceForClass:p.propertyClass];
                             [instance setValue:itemInstance forKey:p.propertyName];
@@ -522,6 +525,8 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
         [instance setValue:index?[NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese]:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
     } else if (p.propertyClass == [NSTimeZone class]) {
         [instance setValue:index?[NSTimeZone timeZoneWithName:[NSTimeZone knownTimeZoneNames][0]]:[NSTimeZone timeZoneForSecondsFromGMT:1000] forKey:p.propertyName];
+    } else if (p.propertyClass == [MKPlacemark class]) {
+        [instance setValue:[[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(index?2.0:3.0, 3.0) addressDictionary:nil] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
