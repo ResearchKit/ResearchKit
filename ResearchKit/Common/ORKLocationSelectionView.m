@@ -144,7 +144,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     }
     [self addSubview:_mapView];
     
-    [self loadCurrentLocation];
+    [self loadCurrentLocationIfNecessary];
     
     if (_answer) {
         [self setAnswer:_answer];
@@ -164,17 +164,18 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     }
 }
 
-- (void)loadCurrentLocation {
-    
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        _userLocationNeedsUpdate = YES;
-        _mapView.showsUserLocation = YES;
-    } else {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-        [_locationManager requestWhenInUseAuthorization];
+- (void)loadCurrentLocationIfNecessary {
+    if (_useCurrentLocation) {
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        
+        if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+            _userLocationNeedsUpdate = YES;
+            _mapView.showsUserLocation = YES;
+        } else {
+            _locationManager = [[CLLocationManager alloc] init];
+            _locationManager.delegate = self;
+            [_locationManager requestWhenInUseAuthorization];
+        }
     }
 }
 
@@ -264,7 +265,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [self loadCurrentLocation];
+        [self loadCurrentLocationIfNecessary];
     }
 }
 

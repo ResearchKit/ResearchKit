@@ -2114,6 +2114,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @implementation ORKLocationAnswerFormat
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _useCurrentLocation = YES;
+    }
+    return self;
+}
+
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text {
     BOOL isValid = [super isAnswerValidWithString:text];
     
@@ -2165,12 +2173,37 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return string;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, useCurrentLocation);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, useCurrentLocation);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeLocation;
 }
 
 - (Class)questionResultClass {
     return [ORKLocationQuestionResult class];
+}
+
+-(BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            _useCurrentLocation == castObject.useCurrentLocation);
 }
 
 @end

@@ -1179,6 +1179,7 @@ static const CGFloat HorizontalMargin = 15.0;
     _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO];
     _selectionView.delegate = self;
     _selectionView.edgeToEdgeMap = NO;
+    _selectionView.useCurrentLocation = ((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation;
     
     if (_placeholder != nil) {
         [_selectionView setPlaceholderText:_placeholder];

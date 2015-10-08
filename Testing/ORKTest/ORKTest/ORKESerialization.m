@@ -775,10 +775,12 @@ ret =
           })),
   ENTRY(ORKLocationAnswerFormat,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKLocationAnswerFormat alloc] init];
+             ORKLocationAnswerFormat *format = [[ORKLocationAnswerFormat alloc] init];
+             format.useCurrentLocation = ((NSNumber *)GETPROP(dict, useCurrentLocation)).boolValue;
+             return format;
          },
          (@{
-            
+            PROPERTY(useCurrentLocation, NSNumber, NSObject, NO, nil, nil)
             })),
   ENTRY(ORKNumericAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

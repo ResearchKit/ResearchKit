@@ -1352,6 +1352,13 @@ ORK_CLASS_AVAILABLE
 ORK_CLASS_AVAILABLE
 @interface ORKLocationAnswerFormat : ORKAnswerFormat
 
+/**
+ Indicates whether or not the user's current location should be automatically entered the first time they tap on the input field.
+ 
+ By default, this value is true.
+ */
+@property (nonatomic, assign) BOOL useCurrentLocation;
+
 @end
 
 
