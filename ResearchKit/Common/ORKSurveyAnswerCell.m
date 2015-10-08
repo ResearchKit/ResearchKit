@@ -116,7 +116,7 @@
 }
 
 - (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
-    [self.delegate answerCell:self errorAlertWithTitle:title message:message];
+    [self.delegate answerCell:self invalidInputAlertWithTitle:title message:message];
 }
 
 #pragma mark - KeyboardNotifications

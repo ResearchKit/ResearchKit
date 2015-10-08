@@ -772,7 +772,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     [self showValidityAlertWithMessage:input];
 }
 
-- (void)answerCell:(ORKSurveyAnswerCell *)cell errorAlertWithTitle:(NSString *)title message:(NSString *)message {
+- (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
     [self showValidityAlertWithTitle:title message:message];
 }
 

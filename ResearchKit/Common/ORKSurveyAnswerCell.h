@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 - (void)answerCell:(ORKSurveyAnswerCell *)cell answerDidChangeTo:(id)answer dueUserAction:(BOOL)dueUserAction;
 - (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithMessage:(NSString *)input;
-- (void)answerCell:(ORKSurveyAnswerCell *)cell errorAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end
 
