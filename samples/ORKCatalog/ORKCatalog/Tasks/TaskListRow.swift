@@ -327,6 +327,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ValuePickerChoiceQuestionTask
         case ValuePickerChoiceQuestionStep
         
+        // Task with an example of validated text entry.
+        case ValidatedTextQuestionTask
+        case ValidatedTextQuestionStepEmail
+        case ValidatedTextQuestionStepDomain
+        
         // Image capture task specific identifiers.
         case ImageCaptureTask
         case ImageCaptureStep
