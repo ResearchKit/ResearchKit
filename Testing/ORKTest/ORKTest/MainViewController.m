@@ -300,6 +300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Ordered Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Toggle Locale"
                            ],
                        ];
 }
@@ -529,7 +530,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         // No saved data, just create the task and the corresponding task view controller.
         self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
     }
-    
+    self.taskViewController.locale = useCustomLocale ? [NSLocale localeWithLocaleIdentifier:@"jp"] : nil;
     [self beginTask];
 }
 
@@ -2649,6 +2650,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UIView *superview = self.view.superview;
     [self.view removeFromSuperview];
     [superview addSubview:self.view];
+}
+
+BOOL useCustomLocale = NO;
+
+- (IBAction)toggleLocaleButtonTapped:(id)sender {
+    useCustomLocale = !useCustomLocale;
 }
 
 #pragma mark - Navigable Ordered Task

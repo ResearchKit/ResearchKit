@@ -246,6 +246,8 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
     return timeformatter;
 }
 
+NSLocale *ORKLocale = nil;
+
 NSBundle *ORKBundle() {
     static NSBundle *__bundle;
     
@@ -267,6 +269,30 @@ NSBundle *ORKDefaultLocaleBundle() {
     });
     
     return __bundle;
+}
+
+NSBundle *ORKLocalizedBundle() {
+    NSBundle *bundle = ORKBundle();
+    if (ORKLocale) {
+        NSString *orkLocaleBundlePath = [bundle pathForResource:ORKLocale.localeIdentifier ofType:@"lproj"];
+        if (orkLocaleBundlePath) {
+            bundle = [NSBundle bundleWithPath:orkLocaleBundlePath];
+        }
+    }
+    return bundle;
+}
+
+NSNumberFormatter *ORKLocalizedNumberFormatter() {
+    static NSNumberFormatter *numberFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        numberFormatter = [[NSNumberFormatter alloc] init];
+        numberFormatter.numberStyle = NSNumberFormatterNoStyle;
+    });
+    if (ORKLocale) {
+        numberFormatter.locale = ORKLocale;
+    }
+    return numberFormatter;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
