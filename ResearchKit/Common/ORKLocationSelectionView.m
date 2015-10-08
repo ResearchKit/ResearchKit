@@ -43,6 +43,7 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 
+
 static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
 static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
 static const CGFloat LocationSelectionViewMapViewHeight = 238.0;

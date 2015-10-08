@@ -35,8 +35,10 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import "MKPlacemark+ORKStringConversion.h"
 #import "CLLocation+ORKJSONDictionary.h"
+
 
 @implementation MKPlacemark (ORKStringConversion)
 
