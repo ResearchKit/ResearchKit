@@ -1729,22 +1729,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        /*
-         A text question with single-line text entry, text validation, and a URL keyboard.
-         */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" validInputDescription:@"Enter a valid URL."];
-        format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeURL;
-        format.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        format.autocorrectionType = UITextAutocorrectionTypeNo;
-        format.spellCheckingType = UITextSpellCheckingTypeNo;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your website?"
-                                                                     answer:format];
-        [steps addObject:step];
-    }
-    
-    {
         ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:@"aid_001"];
         step.title = @"Thanks";
         [steps addObject:step];
@@ -3099,12 +3083,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  Dismisses the task view controller.
  */
-- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController {
+- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController removeOutputDirectory:(BOOL)removeOutputDirectory {
     _currentDocument = nil;
     
-    NSURL *dir = taskViewController.outputDirectory;
+    NSURL *outputDirectoryURL = taskViewController.outputDirectory;
     [self dismissViewControllerAnimated:YES completion:^{
-        if (dir)
+        if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
              We attempt to clean up the output directory.
@@ -3114,8 +3098,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
-                NSLog(@"Error removing %@: %@", dir, err);
+            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+                NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
     }];
@@ -3289,7 +3273,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
@@ -3305,7 +3289,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
                 _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
             }
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
         }
             break;
