@@ -41,17 +41,20 @@
 @class ORKLocationSelectionView;
 @class MKPlacemark;
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ORKLocationSelectionViewDelegate <NSObject>
 
-- (void)locationSelectionViewDidChange:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view;
 
-- (void)locationSelectionViewDidBeginEditing:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view;
 
-- (void)locationSelectionViewDidEndEditing:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view;
 
-- (void)locationSelectionViewNeedsResize:(nonnull ORKLocationSelectionView *)view;
+- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view;
 
-- (void)locationSelectionView:(nonnull ORKLocationSelectionView *)view didFailWithError:(nonnull NSError *)error;
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error;
 
 @end
 
@@ -64,12 +67,14 @@
 
 @property (nonatomic, assign) BOOL edgeToEdgeMap;
 
-- (nonnull instancetype)initWithOpenMap:(BOOL)openMap;
+- (instancetype)initWithOpenMap:(BOOL)openMap;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 
-- (void)setTextColor:(nonnull UIColor *)color;
+- (void)setTextColor:(UIColor *)color;
 
 - (void)showMapView;
 
 @end
+
+NS_ASSUME_NONNULL_END
