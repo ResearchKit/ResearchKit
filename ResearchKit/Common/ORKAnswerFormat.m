@@ -1854,15 +1854,19 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKTextQuestionResult class];
 }
 
+- (void)commonInit {
+    _autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    _autocorrectionType = UITextAutocorrectionTypeDefault;
+    _spellCheckingType = UITextSpellCheckingTypeDefault;
+    _keyboardType = UIKeyboardTypeDefault;
+    _multipleLines = YES;
+}
+
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
     self = [super init];
     if (self) {
         _maximumLength = maximumLength;
-        _autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        _autocorrectionType = UITextAutocorrectionTypeDefault;
-        _spellCheckingType = UITextSpellCheckingTypeDefault;
-        _keyboardType = UIKeyboardTypeDefault;
-        _multipleLines = YES;
+        [self commonInit];
     }
     return self;
 }
@@ -1873,11 +1877,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _regex = expression;
         _invalidMessage = invalidMessage;
         _maximumLength = 0;
-        _autocapitalizationType = UITextAutocapitalizationTypeSentences;
-        _autocorrectionType = UITextAutocorrectionTypeDefault;
-        _spellCheckingType = UITextSpellCheckingTypeDefault;
-        _keyboardType = UIKeyboardTypeDefault;
-        _multipleLines = YES;
+        [self commonInit];
     }
     return self;
 }
