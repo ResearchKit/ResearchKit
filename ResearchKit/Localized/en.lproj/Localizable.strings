@@ -92,7 +92,6 @@
 "LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM" = "The selected location's longitude is below the minimum value of -180°.";
 "LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM" = "The selected location's longitude is above the maximum value of 180°.";
 "LOCATION_ALERT_MESSAGE_OTHER" = "The selected location's coordinate is invalid.";
-
 "LOCATION_ERROR_TITLE" = "Location error";
 
 /* Alert for exceeding length limit in text answer */
