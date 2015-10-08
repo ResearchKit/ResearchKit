@@ -283,30 +283,6 @@
     return YES;
 }
 
-- (BOOL)isAnswerValid {
-    id answer = self.answer;
-    
-    if (answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
-    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
-    ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-    return [textFormat isAnswerValidWithString:self.textField.text];
-}
-
-// This convenience method checks for answer validity, will display alert
-// if text input is not valid...
-
-- (BOOL)isAnswerValidForTextField:(UITextField *)textField {
-    BOOL isValid = [self isAnswerValid];
-    if (! isValid) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-        isValid = NO;
-    }
-    return isValid;
-}
-
 - (void)answerDidChange {
     id answer = self.answer;
     ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
@@ -365,3 +341,4 @@
 }
 
 @end
+

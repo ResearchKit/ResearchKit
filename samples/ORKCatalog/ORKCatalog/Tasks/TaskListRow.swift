@@ -306,11 +306,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousVerticalScaleQuestionStep
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
-        
-        // Task with an exampled of validated text entry.
-        case ValidatedTextQuestionTask
-        case ValidatedTextQuestionStepEmail
-        case ValidatedTextQuestionStepDomain
 
         // Task with an example of free text entry.
         case TextQuestionTask

@@ -3074,12 +3074,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  Dismisses the task view controller.
  */
-- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController {
+- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController removeOutputDirectory:(BOOL)removeOutputDirectory {
     _currentDocument = nil;
     
-    NSURL *dir = taskViewController.outputDirectory;
+    NSURL *outputDirectoryURL = taskViewController.outputDirectory;
     [self dismissViewControllerAnimated:YES completion:^{
-        if (dir)
+        if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
              We attempt to clean up the output directory.
@@ -3089,8 +3089,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
-                NSLog(@"Error removing %@: %@", dir, err);
+            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+                NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
     }];
@@ -3257,7 +3257,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
@@ -3273,7 +3273,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
                 _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
             }
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
         }
             break;
