@@ -40,77 +40,60 @@
 #import "ORKWaitStepViewController.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKWaitStepView.h"
-
-
-@interface ORKWaitStepViewController ()
-
-@property (nonatomic, strong) ORKWaitStepView *waitStepView;
-
-@end
+#import "ORKHelpers.h"
 
 
 @implementation ORKWaitStepViewController {
-    ORKProgressIndicatorMask _indicatorMask;
+    ORKWaitStepView *_waitStepView;
+    ORKProgressIndicatorType _indicatorType;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.learnMoreButtonItem = nil;
-    [self stepDidChange];
+- (ORKWaitStep *)waitStep {
+    return (ORKWaitStep *)self.step;
 }
 
 - (void)stepDidChange {
     [super stepDidChange];
     
-    if ([self step] && [self isViewLoaded]) {
-        if (!_waitStepView) {
-            _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorMask:((ORKWaitStep *)self.step).indicatorMask
-                                                                   heading:(self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil))];
-            _waitStepView.translatesAutoresizingMaskIntoConstraints = NO;
-            [self.view addSubview:_waitStepView];
-            [self setUpConstraints];
-        } else {
-            _waitStepView.indicatorMask = ((ORKWaitStep *)self.step).indicatorMask;
-            _waitStepView.textLabel.text = self.step.title ? self.step.title : ORKLocalizedString(@"WAIT_LABEL", nil);
-            [self.view setNeedsUpdateConstraints];
-        }
+    if (self.step && [self isViewLoaded]) {
+        _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorType:[self waitStep].indicatorType];
+        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
+        _waitStepView.headerView.instructionLabel.text = [self waitStep].text;
+
+        [self.view addSubview:_waitStepView];
+        
+        [self setUpConstraints];
     }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self stepDidChange];
 }
 
 - (void)setUpConstraints {
     NSMutableArray *constraints = [NSMutableArray new];
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView
-                                                        attribute:NSLayoutAttributeCenterX
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self.view
-                                                        attribute:NSLayoutAttributeCenterX
-                                                       multiplier:1.0
-                                                         constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_waitStepView
-                                                        attribute:NSLayoutAttributeBottom
-                                                        relatedBy:NSLayoutRelationEqual
-                                                           toItem:self.view
-                                                        attribute:NSLayoutAttributeCenterY
-                                                       multiplier:1.0
-                                                         constant:0.0]];
+    NSDictionary *views = @{ @"waitStepView": _waitStepView };
+    ORKEnableAutoLayoutForViews(views.allValues);
     
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[waitStepView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[waitStepView]|"
+                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             metrics:nil
+                                                                               views:views]];
     [NSLayoutConstraint activateConstraints:constraints];
-}
-
-- (void)setCurrentProgressIndicatorMask:(ORKProgressIndicatorMask)mask {
-    ((ORKWaitStep *)self.step).indicatorMask = mask;
-    [super stepDidChange];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [_waitStepView.progressView setProgress:progress animated:animated];
 }
 
-- (void)setProgressDescription:(NSString *)description {
-    _waitStepView.textLabel.text = description;
-    [self.view setNeedsLayout];
+- (void)updateText:(NSString *)text {
+    _waitStepView.headerView.instructionLabel.text = text;
 }
 
 @end

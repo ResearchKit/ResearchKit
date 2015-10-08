@@ -57,9 +57,9 @@ ORK_CLASS_AVAILABLE
 /**
  This property specifies the type of progress bar that will be displayed.
  
- ORKProgressIndicatorMaskIndeterminate (default) is for indeterminate duration operations
- ORKProgressIndicatorMaskProgressBar is for determinate duration operations
+ ORKProgressIndicatorTypeIndeterminate (default) is for indeterminate duration operations
+ ORKProgressIndicatorTypeProgressBar is for determinate duration operations
  */
-@property (nonatomic, assign) ORKProgressIndicatorMask indicatorMask;
+@property (nonatomic) ORKProgressIndicatorType indicatorType;
 
 @end

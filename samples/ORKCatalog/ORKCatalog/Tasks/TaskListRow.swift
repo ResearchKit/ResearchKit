@@ -951,10 +951,14 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This task presents a wait task.
     private var waitTask: ORKTask {
         let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
-        waitStepIndeterminate.indicatorMask = ORKProgressIndicatorMask.Indeterminate
+        waitStepIndeterminate.title = exampleQuestionText
+        waitStepIndeterminate.text = exampleDescription
+        waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.Indeterminate
         
         let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
-        waitStepDeterminate.indicatorMask = ORKProgressIndicatorMask.ProgressBar
+        waitStepDeterminate.title = exampleQuestionText
+        waitStepDeterminate.text = exampleDescription
+        waitStepDeterminate.indicatorType = ORKProgressIndicatorType.ProgressBar
         
         return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }

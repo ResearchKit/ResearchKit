@@ -3240,7 +3240,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
     }else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
         // Indeterminate step
-        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(finish) withObject:nil afterDelay:5.0];
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
         [self updateProgress:0.0 OfWaitTask:((ORKWaitStepViewController *)stepViewController)];
@@ -3452,6 +3452,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     // Interterminate wait step.
     ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
     step2.title = @"Getting Ready";
+    step2.text = @"Please wait while the setup completes.";
     [steps addObject:step2];
     
     ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
@@ -3462,7 +3463,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     // Determinate wait step.
     ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
     step4.title = @"Syncing Account";
-    step4.indicatorMask = ORKProgressIndicatorMaskProgressBar;
+    step4.text = @"Please wait while the data is uploaded.";
+    step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
     [steps addObject:step4];
     
     ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
@@ -3477,13 +3479,18 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     if (progress <= 1.0) {
         [viewController setProgress:progress animated:true];
         
-        double delayInSeconds = 2.0;
+        double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         __weak ORKWaitStepViewController *vc = viewController;
         __weak MainViewController *weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
             __typeof__(self) strongSelf = weakSelf;
-            [strongSelf updateProgress:progress + 0.2 OfWaitTask:vc];
+            [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
+            
+            if ((float)progress == 0.5) {
+                NSString *newText = @"Please wait while the data is downloaded/";
+                [viewController updateText:newText];
+            }
         });
     } else {
         [viewController goForward];

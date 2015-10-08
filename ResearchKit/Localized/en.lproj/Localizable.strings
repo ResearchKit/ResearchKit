@@ -198,8 +198,6 @@
 "TOTAL_TAPS_LABEL" = "Total Taps";
 "TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
 
-/* Wait Task. */
-"WAIT_LABEL" = "Please wait";
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";

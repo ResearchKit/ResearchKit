@@ -6,31 +6,42 @@
 //  Copyright © 2015 researchkit.org. All rights reserved.
 //
 
+
 #import "ORKWaitStepView.h"
 #import "ORKProgressView.h"
 #import "ORKAccessibility.h"
 
+
+static const CGFloat horizontalMargin = 40.0;
+
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;
-    NSNumberFormatter *_percentFormatter;
+    ORKProgressIndicatorType _indicatorType;
+    ORKProgressView *_activityIndicatorView;
 }
 
-- (instancetype)initWithIndicatorMask:(ORKProgressIndicatorMask)mask heading:(NSString *)heading {
+- (instancetype)initWithIndicatorType:(ORKProgressIndicatorType)type {
     self = [super init];
     if (self) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _textLabel = [ORKSubheadlineLabel new];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        _textLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _textLabel.text =  heading ? heading : ORKLocalizedString(@"WAIT_LABEL", nil);
-        [self addSubview:_textLabel];
+        _indicatorType = type;
         
-        _indicatorMask = mask;
-        [self updateIndicatorMaskView];
+        self.stepView = [UIView new];
+        self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.verticalCenteringEnabled = YES;
+        
+        switch (_indicatorType) {
+            case ORKProgressIndicatorTypeProgressBar:
+                _progressView = [UIProgressView new];
+                [self.stepView addSubview:_progressView];
+                break;
+            case ORKProgressIndicatorTypeIndeterminate:
+                _activityIndicatorView = [ORKProgressView new];
+                [self.stepView addSubview:_activityIndicatorView];
+                break;
+        }
         
         [self setUpConstraints];
-        [self setNeedsUpdateConstraints];
     }
     return self;
 }
@@ -39,100 +50,64 @@
     
     NSMutableArray *constraints = [NSMutableArray new];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_textLabel]-|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(_textLabel)]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_textLabel]"
-                                                                             options:NSLayoutFormatAlignAllCenterX
-                                                                             metrics:nil
-                                                                               views:NSDictionaryOfVariableBindings(_textLabel)]];
+    if (_progressView) {
+        ORKEnableAutoLayoutForViews(@[_progressView]);
+        
+        [constraints addObjectsFromArray:@[
+                                           [NSLayoutConstraint constraintWithItem:_progressView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0],
+                                           [NSLayoutConstraint constraintWithItem:_progressView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0
+                                                                         constant:0.0],
+                                           [NSLayoutConstraint constraintWithItem:_progressView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:1.0
+                                                                         constant:-horizontalMargin]
+                                           ]];
+    } else {
+        ORKEnableAutoLayoutForViews(@[_activityIndicatorView]);
+        
+        [constraints addObjectsFromArray:@[
+                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeCenterX
+                                                                       multiplier:1.0
+                                                                         constant:0.0],
+                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeCenterY
+                                                                       multiplier:1.0
+                                                                         constant:0.0],
+                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.stepView
+                                                                        attribute:NSLayoutAttributeWidth
+                                                                       multiplier:1.0
+                                                                         constant:-0.0]
+                                           ]];
+    }
+    
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (void)updateConstraints {
-    
-    NSMutableArray *constraints = [NSMutableArray new];
-    [self removeConstraints:_customConstraints];
-    
-    if (_progressView) {
-        NSDictionary *screenMetric = @{@"progressWidth": [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 40.0)]};
-        
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_progressView(progressWidth)]-(20.0)-|"
-                                                 options:NSLayoutFormatAlignAllBaseline
-                                                 metrics:screenMetric
-                                                   views:NSDictionaryOfVariableBindings(_progressView)]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_progressView]|"
-                                                 options:NSLayoutFormatAlignAllCenterX
-                                                 metrics:nil
-                                                   views:NSDictionaryOfVariableBindings(_progressView, _textLabel)]];
-        
-    } else if (_activityIndicatorView) {
-        
-        [constraints addObject:
-         [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                      attribute:NSLayoutAttributeCenterX
-                                      relatedBy:NSLayoutRelationEqual
-                                         toItem:self
-                                      attribute:NSLayoutAttributeCenterX
-                                     multiplier:1.0
-                                       constant:0.0]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(>=0)-[_activityIndicatorView]-(>=0)-|"
-                                                 options:NSLayoutFormatAlignAllBaseline
-                                                 metrics:nil
-                                                   views:NSDictionaryOfVariableBindings(_activityIndicatorView)]];
-        [constraints addObjectsFromArray:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel]-[_activityIndicatorView]|"
-                                                 options:NSLayoutFormatAlignAllCenterX
-                                                 metrics:nil
-                                                   views:NSDictionaryOfVariableBindings(_activityIndicatorView, _textLabel)]];
-    }
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-    _customConstraints = [constraints copy];
-    
-    [super updateConstraints];
-}
-
-- (void)setIndicatorMask:(ORKProgressIndicatorMask)indicatorMask {
-    if (_indicatorMask != indicatorMask) {
-        _indicatorMask = indicatorMask;
-        [self updateIndicatorMaskView];
-        [self setNeedsUpdateConstraints];
-    }
-}
-
-- (void)updateIndicatorMaskView {
-    
-    if (_activityIndicatorView) {
-        [_activityIndicatorView removeFromSuperview];
-        _activityIndicatorView = nil;
-    }
-    if (_progressView) {
-        [_progressView removeFromSuperview];
-        _progressView = nil;
-    }
-    
-    switch (_indicatorMask) {
-        case ORKProgressIndicatorMaskProgressBar:
-            _progressView = [UIProgressView new];
-            _progressView.translatesAutoresizingMaskIntoConstraints = NO;
-            [self addSubview:_progressView];
-            break;
-        case ORKProgressIndicatorMaskIndeterminate:
-            _activityIndicatorView = [[ORKProgressView alloc] init];
-            _activityIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
-            [self addSubview:_activityIndicatorView];
-            break;
-        default:
-            break;
-    }
-}
-
-#pragma mark Accessibility
+#pragma mark - Accessibility
 
 - (BOOL)isAccessibilityElement {
     return YES;
@@ -140,16 +115,12 @@
 
 - (NSString *)accessibilityLabel {
     if (_progressView) {
-        if (!_percentFormatter) {
-            _percentFormatter = [[NSNumberFormatter alloc] init];
-            _percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
-        }
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
-                                                  _progressView.accessibilityLabel,
-                                                  [_percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
+        NSNumberFormatter *percentFormatter = [NSNumberFormatter new];
+        percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        return ORKAccessibilityStringForVariables(_progressView.accessibilityLabel,
+                                                  [percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
     } else if (_activityIndicatorView) {
-        return ORKAccessibilityStringForVariables(_textLabel.accessibilityLabel,
-                                                  _activityIndicatorView.accessibilityLabel);
+        return ORKAccessibilityStringForVariables(_activityIndicatorView.accessibilityLabel);
     }
     return nil;
 }
