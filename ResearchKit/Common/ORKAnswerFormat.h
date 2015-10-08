@@ -1217,14 +1217,14 @@ ORK_CLASS_AVAILABLE
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (readonly) NSString *regex;
+@property (nonatomic, copy, nullable) NSString *regex;
 
 /**
  The text presented to the user when invalid input is received.
  
  The default value is nil.
  */
-@property (readonly) NSString *invalidMessage;
+@property (nonatomic, copy, nullable) NSString *invalidMessage;
 
 /**
  The maximum length of the text users can enter.

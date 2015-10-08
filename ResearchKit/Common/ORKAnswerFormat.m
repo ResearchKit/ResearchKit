@@ -1894,6 +1894,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
     fmt->_maximumLength = _maximumLength;
+    fmt->_regex = _regex;
+    fmt->_invalidMessage = _invalidMessage;
     fmt->_autocapitalizationType = _autocapitalizationType;
     fmt->_autocorrectionType = _autocorrectionType;
     fmt->_spellCheckingType = _spellCheckingType;
@@ -1955,6 +1957,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
+        ORK_DECODE_OBJ_CLASS(aDecoder, regex, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
         ORK_DECODE_ENUM(aDecoder, spellCheckingType);
@@ -1968,6 +1972,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
+    ORK_ENCODE_OBJ(aCoder, regex);
+    ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
     ORK_ENCODE_ENUM(aCoder, spellCheckingType);
@@ -1986,6 +1992,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.maximumLength == castObject.maximumLength &&
+             ORKEqualObjects(self.regex, castObject.regex) &&
+             ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
              self.spellCheckingType == castObject.spellCheckingType &&
