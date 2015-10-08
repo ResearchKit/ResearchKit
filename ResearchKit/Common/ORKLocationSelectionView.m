@@ -65,7 +65,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     BOOL _setInitialCoordinateRegion;
 }
 
-- (instancetype)initWithOpenMap:(BOOL)openMap {
+- (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation {
     
     if (openMap) {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + LocationSelectionViewMapViewHeight)];
@@ -84,6 +84,9 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
         
         [self addSubview:_textField];
         [self setUpConstraints];
+        
+        _useCurrentLocation = use;
+        _edgeToEdgeMap = edgeToEdgePresentation;
         if (openMap) {
             [self showMapView];
         }

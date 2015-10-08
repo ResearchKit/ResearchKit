@@ -63,10 +63,11 @@
 }
 
 - (void)prepareView {
-    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:YES];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:YES
+                                                    useCurrentLocation:((ORKLocationAnswerFormat *)self.step.answerFormat).useCurrentLocation
+                                                edgeToEdgePresentation:YES];
     _selectionView.delegate = self;
     _selectionView.tintColor = self.tintColor;
-    _selectionView.useCurrentLocation = ((ORKLocationAnswerFormat *)self.step.answerFormat).useCurrentLocation;
     [self addSubview:_selectionView];
 
     [self setUpConstraints];

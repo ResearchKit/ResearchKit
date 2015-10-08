@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL useCurrentLocation;
 
-- (instancetype)initWithOpenMap:(BOOL)openMap;
+- (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 

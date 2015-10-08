@@ -289,7 +289,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)updateConstraints {
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
-
+    
     if (!_variableConstraints) {
         _variableConstraints = [NSMutableArray new];
     }
@@ -301,7 +301,7 @@ static const CGFloat HorizontalMargin = 15.0;
                               @"hMargin":@(self.separatorInset.left),
                               @"hSpacer":@(16), @"vSpacer":@(15),
                               @"labelWidth": @(labelWidth)};
-
+    
     id labelLabel = self.labelLabel;
     id textFieldView = _textFieldView;
     NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
@@ -371,7 +371,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
     [_variableConstraints addObject:heightConstraint];
-
+    
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
@@ -501,7 +501,7 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
-
+    
     [self answerDidChange];
 }
 
@@ -543,11 +543,11 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
     if (textField.text.length < text.length) {
-    
+        
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-    
+        
         NSInteger maxLength = answerFormat.maximumLength;
-    
+        
         if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
@@ -772,13 +772,13 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)textViewDidChange:(UITextView *)textView {
     NSInteger lineCount = [textView.text componentsSeparatedByCharactersInSet:
-                         [NSCharacterSet newlineCharacterSet]].count;
+                           [NSCharacterSet newlineCharacterSet]].count;
     
     if (_lastSeenLineCount != lineCount) {
         _lastSeenLineCount = lineCount;
         
         UITableView *tableView = [self parentTableView];
-    
+        
         [tableView beginUpdates];
         [tableView endUpdates];
         
@@ -813,9 +813,9 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
     if (textView.text.length < string.length) {
-    
+        
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-
+        
         if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
@@ -927,7 +927,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Subclasses should override this
     
     self.labelLabel.text = nil;
-   
+    
     _selectionView = [[ORKImageSelectionView alloc] initWithImageChoiceAnswerFormat:(ORKImageChoiceAnswerFormat *)self.formItem.answerFormat
                                                                              answer:self.answer];
     _selectionView.delegate = self;
@@ -998,7 +998,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [self.contentView addSubview:_sliderView];
     [self setUpConstraints];
-
+    
     [super cellInit];
 }
 
@@ -1073,10 +1073,10 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
     if (!(!formItem ||
-           [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
+          [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
     }
     [super setFormItem:formItem];
@@ -1176,10 +1176,10 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     [super cellInit];
     
-    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO
+                                                    useCurrentLocation:((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation
+                                                edgeToEdgePresentation:NO];
     _selectionView.delegate = self;
-    _selectionView.edgeToEdgeMap = NO;
-    _selectionView.useCurrentLocation = ((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation;
     
     if (_placeholder != nil) {
         [_selectionView setPlaceholderText:_placeholder];
