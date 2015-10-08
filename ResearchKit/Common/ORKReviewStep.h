@@ -38,23 +38,15 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStep : ORKStep
 
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
-
-+ (instancetype)standaloneReviewStepWithIdentifier:(nonnull NSString *)identifier
++ (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
                                              steps:(nullable NSArray *)steps
-                                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+                                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource;
 
-+ (instancetype)embeddedReviewStepWithIdentifier:(nonnull NSString *)identifier;
++ (instancetype)embeddedReviewStepWithIdentifier:(NSString *)identifier;
 
-@property (nonatomic, readonly, nullable) NSArray *steps;
+@property (nonatomic, readonly, nullable) NSArray<ORKStep *> *steps;
 
-@property (nonatomic, readonly, nullable) id<ORKTaskResultSource> resultSource;
-
-/**
- A localized string that represents the placeholder text displayed when no steps are available for review.
- */
-@property (nonatomic, nullable) NSString *placeholder;
+@property (nonatomic, readonly, nullable) id<ORKTaskResultSource, NSSecureCoding> resultSource;
 
 @end
 

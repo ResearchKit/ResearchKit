@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     if (self && [self reviewStep]) {
         NSMutableArray *filteredSteps = [[NSMutableArray alloc] init];
         [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]];
+            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || [obj isKindOfClass:[ORKInstructionStep class]];
             if (includeStep) {
                 [filteredSteps addObject:obj];
             }
@@ -89,7 +89,6 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 - (void)reviewDataDidChange {
     [_tableView reloadData];
     [_tableContainer setNeedsLayout];
-    _headerView.instructionLabel.text = _steps.count > 0 ? [self reviewStep].text : [self reviewStep].placeholder;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -176,12 +175,13 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     [_steps enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
         ORKStep *step = (ORKStep*) object;
         //TODO: process results
-        [textChoices addObject:@[step.title]];
+        if (step.title) {
+            [textChoices addObject:@[step.title]];
+        }
     }];
     _answerFormat = [[ORKTextChoiceAnswerFormat alloc] initWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices: textChoices];
     _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:_answerFormat answer:nil beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] immediateNavigation:YES];
     return _choiceCellGroup.size;
-
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithIdentifier:(nonnull NSString *)identifier
                              steps:(nullable NSArray *)steps
-                      resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource;
 
 @property (nonatomic, readonly) BOOL isStandalone;
 

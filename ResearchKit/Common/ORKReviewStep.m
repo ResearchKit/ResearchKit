@@ -37,9 +37,9 @@
 
 @implementation ORKReviewStep
 
-- (instancetype)initWithIdentifier:(nonnull NSString *)identifier
-                                     steps:(nullable NSArray *)steps
-                              resultSource:(nullable id<ORKTaskResultSource>)resultSource {
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             steps:(nullable NSArray *)steps
+                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
         _steps = steps;
@@ -48,9 +48,9 @@
     return self;
 }
 
-+ (instancetype)standaloneReviewStepWithIdentifier:(nonnull NSString *)identifier
++ (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
                                              steps:(nullable NSArray *)steps
-                                      resultSource:(nullable id<ORKTaskResultSource>)resultSource {
+                                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:steps resultSource:resultSource];
 }
 
@@ -66,6 +66,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
+        ORK_DECODE_OBJ(aDecoder, resultSource);
     }
     return self;
 }
@@ -73,6 +74,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, steps);
+    ORK_ENCODE_OBJ(aCoder, resultSource);
 }
 
 - (BOOL)isEqual:(id)object {
