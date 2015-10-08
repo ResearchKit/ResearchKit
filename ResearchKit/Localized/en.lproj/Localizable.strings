@@ -87,6 +87,7 @@
 "INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
 /* Alerts for invalid location coordinates */
+"LOCATION_ADDRESS" = "Enter an address";
 "LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM" = "The selected location's latitude is below the minimum value of -90°.";
 "LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM" = "The selected location's latitude is above the maximum value of 90°.";
 "LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM" = "The selected location's longitude is below the minimum value of -180°.";
