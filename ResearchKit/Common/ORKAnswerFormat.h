@@ -1355,7 +1355,7 @@ ORK_CLASS_AVAILABLE
 /**
  Indicates whether or not the user's current location should be automatically entered the first time they tap on the input field.
  
- By default, this value is true.
+ By default, this value is YES.
  */
 @property (nonatomic, assign) BOOL useCurrentLocation;
 
