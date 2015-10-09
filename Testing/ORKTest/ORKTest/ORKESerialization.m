@@ -1098,7 +1098,9 @@ ret =
    ENTRY(ORKLocationQuestionResult,
          nil,
          (@{
-            PROPERTY(locationAnswer, MKPlacemark, NSObject, NO, nil, nil),
+            PROPERTY(locationAnswer, MKPlacemark, NSObject, NO,
+                     ^id(id placemark) { return [placemark ork_JSONDictionary]; },
+                     ^id(id dict) { return [MKPlacemark ork_placemarkWithJSONDictionary:dict]; })
             })),
    ENTRY(ORKTimeOfDayQuestionResult,
          nil,

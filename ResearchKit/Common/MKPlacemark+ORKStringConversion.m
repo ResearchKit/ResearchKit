@@ -49,7 +49,7 @@
                      @"latitude": [NSDecimalNumber numberWithDouble:self.location.coordinate.latitude],
                      @"longitude": [NSDecimalNumber numberWithDouble:self.location.coordinate.longitude]
                      },
-             @"addressDictionary": self.addressDictionary
+             @"addressDictionary": self.addressDictionary ? : [NSNull null]
              };
 }
 

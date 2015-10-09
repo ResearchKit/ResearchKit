@@ -42,7 +42,11 @@
 
 @interface MKPlacemark (ORKStringConversion)
 
+- (NSDictionary *)ork_JSONDictionary;
+
 - (NSString *)ork_stringValue;
+
++ (instancetype)ork_placemarkWithJSONDictionary:(NSDictionary *)dictionary;
 
 + (instancetype)ork_placemarkWithString:(NSString *)string;
 
