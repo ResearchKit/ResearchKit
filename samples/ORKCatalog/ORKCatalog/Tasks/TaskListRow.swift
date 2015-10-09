@@ -76,12 +76,12 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ValuePickerChoiceQuestion
     case ValidatedTextQuestion
     case ImageCapture
+    case Wait
     
     case EligibilityTask
     case Consent
     case Passcode
     
-    case Wait
     case Audio
     case Fitness
     case HolePegTest
@@ -203,6 +203,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
+            
+        case .Wait:
+            return NSLocalizedString("Wait Step", comment: "")
 
         case .EligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -212,9 +215,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Passcode:
             return NSLocalizedString("Passcode Creation", comment: "")
-
-        case .Wait:
-            return NSLocalizedString("Wait Step", comment: "")
             
         case .Audio:
             return NSLocalizedString("Audio", comment: "")
@@ -434,15 +434,15 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return imageCaptureTask
+            
+        case .Wait:
+            return waitTask
         
         case .EligibilityTask:
             return eligibilityTask
             
         case .Consent:
             return consentTask
-        
-        case .Wait:
-            return waitTask
             
         case .Passcode:
             return passcodeTask
@@ -862,6 +862,21 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
     }
     
+    /// This task presents a wait task.
+    private var waitTask: ORKTask {
+        let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
+        waitStepIndeterminate.title = exampleQuestionText
+        waitStepIndeterminate.text = exampleDescription
+        waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.Indeterminate
+        
+        let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
+        waitStepDeterminate.title = exampleQuestionText
+        waitStepDeterminate.text = exampleDescription
+        waitStepDeterminate.indicatorType = ORKProgressIndicatorType.ProgressBar
+        
+        return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
+    }
+    
     /**
     A task demonstrating how the ResearchKit framework can be used to determine
     eligibility using the eligibilty answer format and a navigable ordered task.
@@ -984,22 +999,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(Identifier.PasscodeStep), steps: [passcodeConsentStep])
     }
     
-    
-    /// This task presents a wait task.
-    private var waitTask: ORKTask {
-        let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
-        waitStepIndeterminate.title = exampleQuestionText
-        waitStepIndeterminate.text = exampleDescription
-        waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.Indeterminate
-        
-        let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
-        waitStepDeterminate.title = exampleQuestionText
-        waitStepDeterminate.text = exampleDescription
-        waitStepDeterminate.indicatorType = ORKProgressIndicatorType.ProgressBar
-        
-        return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
-    }
-
     /// This task presents the Audio pre-defined active task.
     private var audioTask: ORKTask {
         return ORKOrderedTask.audioTaskWithIdentifier(String(Identifier.AudioTask), intendedUseDescription: exampleDescription, speechInstruction: exampleSpeechInstruction, shortSpeechInstruction: exampleSpeechInstruction, duration: 20, recordingSettings: nil, options: [])
