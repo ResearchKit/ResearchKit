@@ -18,6 +18,7 @@ static const CGFloat horizontalMargin = 40.0;
     NSArray *_customConstraints;
     ORKProgressIndicatorType _indicatorType;
     ORKProgressView *_activityIndicatorView;
+    NSNumberFormatter *_percentFormatter;
 }
 
 - (instancetype)initWithIndicatorType:(ORKProgressIndicatorType)type {
@@ -115,10 +116,12 @@ static const CGFloat horizontalMargin = 40.0;
 
 - (NSString *)accessibilityLabel {
     if (_progressView) {
-        NSNumberFormatter *percentFormatter = [NSNumberFormatter new];
-        percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        if (!_percentFormatter) {
+            _percentFormatter = [[NSNumberFormatter alloc] init];
+            _percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
+        }
         return ORKAccessibilityStringForVariables(_progressView.accessibilityLabel,
-                                                  [percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
+                                                  [_percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
     } else if (_activityIndicatorView) {
         return ORKAccessibilityStringForVariables(_activityIndicatorView.accessibilityLabel);
     }
