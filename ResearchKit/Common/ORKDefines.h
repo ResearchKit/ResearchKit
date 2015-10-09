@@ -140,11 +140,12 @@ typedef NS_ENUM(NSInteger, ORKPasscodeType) {
 
 
 /**
- Progress Indicator Mask
+ Progress indicator type for `ORKWaitStep`.
  */
-typedef NS_OPTIONS(NSInteger, ORKProgressIndicatorMask) {
+typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
     /// Spinner animation.
-    ORKProgressIndicatorMaskIndeterminate = 0,
+    ORKProgressIndicatorTypeIndeterminate = 0,
+    
     /// Progressbar animation.
-    ORKProgressIndicatorMaskProgressBar,
+    ORKProgressIndicatorTypeProgressBar,
 } ORK_ENUM_AVAILABLE;

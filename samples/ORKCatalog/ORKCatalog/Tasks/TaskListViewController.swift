@@ -145,7 +145,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
                 if let stepViewController = stepViewController as? ORKWaitStepViewController {
                     self.waitStepViewController = stepViewController;
                     self.waitStepProgress = 0.0
-                    self.waitStepUpdateTimer = NSTimer(timeInterval: 1.0, target: self, selector: "updateProgressOfWaitStepViewController", userInfo: nil, repeats: true)
+                    self.waitStepUpdateTimer = NSTimer(timeInterval: 0.1, target: self, selector: "updateProgressOfWaitStepViewController", userInfo: nil, repeats: true)
                     NSRunLoop.mainRunLoop().addTimer(self.waitStepUpdateTimer!, forMode: NSRunLoopCommonModes)
                 }
             })
@@ -163,7 +163,7 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
     
     func updateProgressOfWaitStepViewController() {
         if let waitStepViewController = waitStepViewController {
-            waitStepProgress += 0.2
+            waitStepProgress += 0.01
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 waitStepViewController.setProgress(self.waitStepProgress, animated: true)
             })
@@ -172,7 +172,6 @@ class TaskListViewController: UITableViewController, ORKTaskViewControllerDelega
             } else {
                 self.waitStepUpdateTimer?.invalidate()
                 waitStepViewController.goForward()
-                self.waitStepViewController?.setProgressDescription("Complete")
                 self.waitStepViewController = nil
             }
         } else {

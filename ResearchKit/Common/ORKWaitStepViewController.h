@@ -53,13 +53,6 @@ ORK_CLASS_AVAILABLE
 @interface ORKWaitStepViewController: ORKStepViewController
 
 /**
- Sets the progress indicator mask that is currently displayed in the view controller.
- 
- @param mask    The mask to display in the wait step view controller.
- */
-- (void)setCurrentProgressIndicatorMask:(ORKProgressIndicatorMask)mask;
-
-/**
  Updates the amount of progress displayed in the progress bar if the current indicator mask is set to progress bar.
  
  @param progress    The fraction of work completed on the range of zero to one.
@@ -68,10 +61,10 @@ ORK_CLASS_AVAILABLE
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
 /**
- Updates the description of the process that is occuring.
+ Updates the text on the step with the process that is occuring.
  
- @param description     The description of the process that is occuring.
-*/
-- (void)setProgressDescription:(NSString *)description;
+ @param text     The description of the process that is occuring.
+ */
+- (void)updateText:(NSString *)text;
 
 @end

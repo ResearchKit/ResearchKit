@@ -51,7 +51,7 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.indicatorMask = ORKProgressIndicatorMaskIndeterminate;
+        self.indicatorType = ORKProgressIndicatorTypeIndeterminate;
     }
     return self;
 }
@@ -59,27 +59,27 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_ENUM(aDecoder, indicatorMask);
+        ORK_DECODE_ENUM(aDecoder, indicatorType);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_ENUM(aCoder, indicatorMask);
-}
-
-- (BOOL)startsFinished {
-    return NO;
+    ORK_ENCODE_ENUM(aCoder, indicatorType);
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
 
+- (BOOL)allowsBackNavigation {
+    return NO;
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKWaitStep *step = [super copyWithZone:zone];
-    step.indicatorMask = self.indicatorMask;
+    step.indicatorType = self.indicatorType;
     return step;
 }
 
@@ -88,7 +88,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            self.indicatorMask == castObject.indicatorMask);
+            self.indicatorType == castObject.indicatorType);
 }
 
 @end

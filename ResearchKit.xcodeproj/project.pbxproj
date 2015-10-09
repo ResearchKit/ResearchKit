@@ -474,7 +474,7 @@
 		CA8D0E931BC4360F00BED0F7 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */; settings = {ASSET_TAGS = (); }; };
 		CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */; settings = {ASSET_TAGS = (); }; };
-		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CB16A6F31BB0D0960043CDD8 /* ORKWaitStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
 		D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */; };
@@ -2116,10 +2116,10 @@
 			children = (
 				CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */,
 				CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */,
-				CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */,
-				CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */,
 				CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */,
 				CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */,
+				CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */,
+				CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */,
 			);
 			name = "Wait Step";
 			path = ../ActiveTasks;
