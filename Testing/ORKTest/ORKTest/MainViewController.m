@@ -55,6 +55,7 @@ DefineStringKey(OptionalFormTaskIdentifier);
 DefineStringKey(SelectionSurveyTaskIdentifier);
 
 DefineStringKey(ActiveStepTaskIdentifier);
+DefineStringKey(WaitTaskIdentifier);
 DefineStringKey(AudioTaskIdentifier);
 DefineStringKey(FitnessTaskIdentifier);
 DefineStringKey(GaitTaskIdentifier);
@@ -286,6 +287,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Tone Audiometry Task",
                            @"Tower Of Hanoi Task",
                            @"Two Finger Tapping Task",
+                           @"Wait Task"
                            ],
                        @[ // Passcode
                            @"Authenticate Passcode",
@@ -481,7 +483,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
+    } if ([identifier isEqualToString:WaitTaskIdentifier]) {
+        return [self makeWaitingTask];
     }
+
     return nil;
 }
 
@@ -2044,6 +2049,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
 }
 
+- (IBAction)waitTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WaitTaskIdentifier];
+}
+
 - (IBAction)audioTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:AudioTaskIdentifier];
 }
@@ -3229,7 +3238,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [items addObject:@"Item2"];
         [items addObject:@"Item3"];
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
+    }else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
+        // Indeterminate step
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
+    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
+        // Determinate step
+        [self updateProgress:0.0 OfWaitTask:((ORKWaitStepViewController *)stepViewController)];
     }
+
 }
 
 /*
@@ -3417,6 +3433,68 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
     UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
     [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+#pragma mark - Wait Task
+
+- (ORKOrderedTask *)makeWaitingTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    /*
+     To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
+     */
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
+    step1.title = @"Setup";
+    step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
+    [steps addObject:step1];
+    
+    // Interterminate wait step.
+    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
+    step2.title = @"Getting Ready";
+    step2.text = @"Please wait while the setup completes.";
+    [steps addObject:step2];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
+    step3.title = @"Account Setup";
+    step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
+    [steps addObject:step3];
+    
+    // Determinate wait step.
+    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
+    step4.title = @"Syncing Account";
+    step4.text = @"Please wait while the data is uploaded.";
+    step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
+    [steps addObject:step4];
+    
+    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
+    step5.title = @"Setup Complete";
+    [steps addObject:step5];
+
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
+    return waitTask;
+}
+
+- (void)updateProgress:(CGFloat)progress OfWaitTask:(ORKWaitStepViewController *)viewController {
+    if (progress <= 1.0) {
+        [viewController setProgress:progress animated:true];
+        
+        double delayInSeconds = 0.1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        __weak ORKWaitStepViewController *vc = viewController;
+        __weak MainViewController *weakSelf = self;
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            __typeof__(self) strongSelf = weakSelf;
+            [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
+            
+            if ((float)progress == 0.5) {
+                NSString *newText = @"Please wait while the data is downloaded.";
+                [viewController updateText:newText];
+            }
+        });
+    } else {
+        [viewController goForward];
+    }
 }
 
 @end
