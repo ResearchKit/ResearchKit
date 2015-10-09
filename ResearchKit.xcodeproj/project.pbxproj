@@ -2137,20 +2137,20 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-        CB16A6EB1BB0D0660043CDD8 /* Wait Step */ = {
-            isa = PBXGroup;
-            children = (
-                CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */,
-                CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */,
-                CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */,
-                CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */,
-                CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */,
-                CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */,
-            );
-            name = "Wait Step";
-            path = ../ActiveTasks;
-            sourceTree = "<group>";
-        };
+		CB16A6EB1BB0D0660043CDD8 /* Wait Step */ = {
+			isa = PBXGroup;
+			children = (
+				CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */,
+				CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */,
+				CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */,
+				CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */,
+				CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */,
+				CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */,
+			);
+			name = "Wait Step";
+			path = ../ActiveTasks;
+			sourceTree = "<group>";
+		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
 			isa = PBXGroup;
 			children = (
