@@ -828,12 +828,13 @@ ret =
         },
         (@{
           PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(regex, NSString, NSObject, YES, nil, nil),
+          PROPERTY(invalidMessage, NSString, NSObject, YES, nil, nil),
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
           })),
    ENTRY(ORKEmailAnswerFormat,

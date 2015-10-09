@@ -836,27 +836,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
         [steps addObject:step];
     }
-    
-    
-    {
-        /*
-         A text question with single-line text entry and a URL keyboard.
-         */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
-        format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeURL;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your website?"
-                                                                     answer:format];
-        [steps addObject:step];
-    }
-    
+
     {
         /*
          An email question with single-line text entry.
          */
         ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
                                                                       title:@"What is your email?"
                                                                      answer:format];
         [steps addObject:step];
@@ -869,7 +855,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:10];
         format.secureTextEntry = YES;
         format.multipleLines = NO;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005sec"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
                                                                       title:@"What is your passcode?"
                                                                      answer:format];
         step.placeholder = @"Tap your passcode here";
@@ -1518,7 +1504,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            format.multipleLines = NO;
+            format.keyboardType = UIKeyboardTypeURL;
+            format.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            format.autocorrectionType = UITextAutocorrectionTypeNo;
+            format.spellCheckingType = UITextSpellCheckingTypeNo;
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"URL"
+                                                           answerFormat:format];
+            item.placeholder = @"Enter URL";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Message"
                                                            answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
             item.placeholder = @"Your message (limit 20 characters).";
             [items addObject:item];
@@ -1529,7 +1529,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             format.secureTextEntry = YES;
             format.multipleLines = NO;
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Passcode"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_008" text:@"Passcode"
                                                            answerFormat:format];
             item.placeholder = @"Enter Passcode";
             [items addObject:item];
