@@ -394,7 +394,7 @@ ret =
          },
          (@{
            PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
-           PROPERTY(indicatorMask, NSNumber, NSObject, YES, nil, nil)
+           PROPERTY(indicatorType, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
