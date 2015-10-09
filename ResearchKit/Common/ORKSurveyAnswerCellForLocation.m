@@ -112,7 +112,7 @@
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
     MKPlacemark *placemark = (MKPlacemark *)answer;
-    NSString *string = [placemark ork_stringValue];
+    NSString *string = [placemark ork_JSONStringValue];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -123,7 +123,7 @@
     if (!isValid) {
         id answer = self.answer;
         MKPlacemark *placemark = (MKPlacemark *)answer;
-        NSString *message = [placemark ork_stringValue];
+        NSString *message = [placemark ork_JSONStringValue];
         
         NSString *localizedMessage = [[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
         

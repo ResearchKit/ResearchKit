@@ -2137,7 +2137,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isAnswerValidWithString:(nullable NSString *)text {
     BOOL isValid = [super isAnswerValidWithString:text];
     
-    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithString:text];
+    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithJSONString:text];
     
     if (placemark && CLLocationCoordinate2DIsValid(placemark.coordinate)) {
         isValid = YES;
@@ -2153,7 +2153,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
     
-    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithString:text];
+    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithJSONString:text];
     CLLocationCoordinate2D coordinate = placemark.location.coordinate;
     NSMutableString *string = [NSMutableString new];
     

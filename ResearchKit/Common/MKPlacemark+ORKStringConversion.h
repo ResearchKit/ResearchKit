@@ -44,10 +44,10 @@
 
 - (NSDictionary *)ork_JSONDictionary;
 
-- (NSString *)ork_stringValue;
+- (NSString *)ork_JSONStringValue;
 
 + (instancetype)ork_placemarkWithJSONDictionary:(NSDictionary *)dictionary;
 
-+ (instancetype)ork_placemarkWithString:(NSString *)string;
++ (instancetype)ork_placemarkWithJSONString:(NSString *)string;
 
 @end

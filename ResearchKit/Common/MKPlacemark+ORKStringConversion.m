@@ -53,7 +53,7 @@
              };
 }
 
-- (NSString *)ork_stringValue {
+- (NSString *)ork_JSONStringValue {
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self ork_JSONDictionary] options:0 error:&error];
     
@@ -81,7 +81,7 @@
     return [[MKPlacemark alloc] initWithCoordinate:location addressDictionary:addressDictionary];
 }
 
-+ (instancetype)ork_placemarkWithString:(NSString *)string {
++ (instancetype)ork_placemarkWithJSONString:(NSString *)string {
     NSError *error;
     NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
     

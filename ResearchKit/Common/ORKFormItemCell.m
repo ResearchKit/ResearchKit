@@ -1299,7 +1299,7 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
     MKPlacemark *placemark = (MKPlacemark *)answer;
-    NSString *string = [placemark ork_stringValue];
+    NSString *string = [placemark ork_JSONStringValue];
     
     return [locationFormat isAnswerValidWithString:string];
 }
@@ -1310,7 +1310,7 @@ static const CGFloat HorizontalMargin = 15.0;
     if (!isValid) {
         id answer = self.answer;
         MKPlacemark *placemark = (MKPlacemark *)answer;
-        NSString *message = [placemark ork_stringValue];
+        NSString *message = [placemark ork_JSONStringValue];
         
         NSString *localizedMessage = [[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
         
