@@ -393,7 +393,6 @@ ret =
              return [[ORKWaitStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
            PROPERTY(indicatorType, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKRecorderConfiguration,
