@@ -170,9 +170,16 @@ In the ResearchKit™ framework, an answer format defines how the user should be
 answer a question or an item in a form.  For example, consider a
 survey question such as "On a scale of 1 to 10, how much pain do you
 feel?" The answer format for this question would naturally be a
-continuous scale on that range, so you can use
-`ORKScaleAnswerFormat`, and set its `minimum` and `maximum` properties
-to reflect the desired range.
+continuous scale on that range, so you can use scale answer format (`ORKScaleAnswerFormat`), and set its `minimum` and `maximum` properties
+to reflect the desired range.  
+The following are the rules bound with scale answer format -
+
+* Minimum number off step in a task should not be less than 1.
+* Minimum step count  should not be less than 1.
+* Maximum step count should not be more than 13.
+* The lower bound value in scale answer format cannot be lower than - 10000.
+* The upper bound value in scale answer format cannot be more than 10000.
+
 The screenshots below show the standard answer formats that the ResearchKit framework provides.
 
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/ScaleAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Scale answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/BooleanAnswerFormat.png" style="width: 100%;border: solid black 1px;">Boolean answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/ValuePickerAnswerFormat.png" style="width: 100%;border: solid black 1px;">Value picker answer format  </p>
