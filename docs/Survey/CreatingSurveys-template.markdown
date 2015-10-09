@@ -268,13 +268,19 @@ includes start and end times, using the `startDate` and `endDate`
 properties respectively. These properties can be used to infer how long the user
 spent on the step.
 
-#### Step Results That Determine the Next Step
+### Step Results That Determine the Next Step
 
 Sometimes it's important to know the result of a step before
-presenting the next step.  For example, suppose a step asks "Do you
+presenting the next step. For example, suppose a step asks "Do you
 have a fever?" If the user answers “Yes,” the next question the next question might be "What is your
 temperature now?"; otherwise it might be, "Do you have any additional
 health concerns?"
+To add custom conditional behavior in your task, use either ordered task ()`ORKOrderedTask`)  or navigable ordered task (`ORKNavigableOrderedTask`). 
+
+#### Ordered Tasks
+
+The `ORKOrderedTask` class provides functionality to present different set of steps depending on the user's answer to a question. To present the step after the specified step, override the `stepAfterStep:withResult:` method.  
+This method lets you use a result of a current step to determine the next step. Similarly to present the step that precedes the specified step, override  `stepBeforeStep:withResult` method. 
 
 The following example demonstrates how to subclass
 `ORKOrderedTask` to provide a different set of steps depending on the
@@ -302,6 +308,13 @@ is usually necessary.
         return [super stepAfterStep:step withResult:result];
     }
 ```
+
+#### Navigable Ordered Task
+The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it lets you add a condition while the user navigates through the steps in the task by adding a conditional step navigation. 
+
+Adding a navigation rule, to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If so, than the most recent rule is executed.
+ 
+For example, to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
 
 #### Saving Results on Task Completion
 

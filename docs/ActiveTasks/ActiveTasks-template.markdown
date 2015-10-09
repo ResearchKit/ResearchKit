@@ -40,12 +40,12 @@ Accelerometer (optional)
 </tr>
 <tr><td rowspan = 2>Fitness</td>
  <td>Fitness</td>
- <td>Accelerometer</td>
+ <td>GPS<br>Gyroscope</td>
 <td>Device motion<br>Pedometer<br>Location<br>Heart rate
    </td> 
 </tr>
 <tr><td>Timed walk</td>
- <td>Accelerometer</td>
+  <td>GPS<br>Gyroscope</td>
 <td>Device motion<br>Pedometer<br>Location
    </td> 
 </tr>
@@ -58,22 +58,22 @@ Touch activity<br>Correct answer<br> Actual sequences
 </td>
 </tr>
 <tr><td>Paced auditory and visual serial addition test (PSAT)</td> 
-<td>Multi-Touch display<br>Microphone (optional)
+<td>Multi-Touch display
 </td> 
-  <td>Correct answers
+  <td>Addition results 
+from user
   </td> 
 </tr>
 <tr><td>Tower of hanoi</td> 
 <td>Multi-Touch display
 </td> 
-  <td>Correct answers<br>
-  Number of moves
+  <td>Every move taken by the user
   </td> 
 </tr>
 <tr><td>Reaction time</td> 
-<td>Multi-Touch display
+<td>Accelerometer<br>Gyroscope
 </td> 
-  <td>Reaction time
+  <td>Device motion 
   </td> 
 
 </tr>
@@ -84,8 +84,9 @@ Touch activity<br>Correct answer<br> Actual sequences
 </tr>
 <tr><td>Audio</td>
  <td>Tone audiometry</td>
- <td>Microphone</td>
-<td>Audio signal<br>
+ <td><?></td>
+<td>Minimum amplitude for the user 
+to recognize the sound<br>
    </td> 
 </tr>
 </tbody>
@@ -211,22 +212,21 @@ The screenshots below show an example of a spatial memory task.
 In the [paced serial addition task]([ORKOrderedTask PSATTaskWithIdentifier:intendedUseDescription:presentationMode:interStimulusInterval:stimulusDuration:seriesLength:options:]), 
 single digits are appeared in every 2 or 3 seconds on the screen of the device and the user must add each new digit to the one immediately prior to it.  A PSAT task measures the cognitive function that assesses auditory and/or visual information processing speed, flexibility, and the calculation ability of the user.
  
-The score for the PSAT task is the total number correct  answers out of 60 possible correct answers. Data collected by the task is in the form of an `ORKPSATResult` object. 
+The score for the PSAT task is the total number correct  answers out of the number of possible correct answers. Data collected by the task is in the form of an `ORKPSATResult` object. 
 
-The screenshots below show an example of a paced serial addition test task. Note that the visual and auditory components of the task are optional.
-
+The screenshots below show an example of a paced serial addition test task. Note that the visual and auditory components of the task are optional. You can choose to include either of them or both.
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep3.png" alt="Countdown screen" style="width: 100%;border: solid black 1px;">Count down a specified duration into the task.</p>
 <p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep4.png" alt="The user must add each new digit on the screen to the one immediately prior to it." style="width: 100%;border: solid black 1px; ">Actual task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep5.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep4.png" alt="The user must add each new digit on the screen to the one immediately prior to it." style="width: 100%;border: solid black 1px; ">The user must add each new digit on the screen to the one immediately prior to it.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="PsatTaskImages/PSATStep5.png" alt="Task completion screen" style="width: 100%;border: solid black 1px;">Task completion.</p>
 <p style="clear: both;">
 
 
 #### Reaction Time 
 
 In the [reaction time task ]([ORKOrderedTask reactionTimeTaskWithIdentifier:intendedUseDescription:maximumStimulusInterval:minimumStimulusInterval:thresholdAcceleration:numberOfAttempts:timeout:successSound:timeoutSound:failureSound:options:]),
-the user is asked to shake/move the device in response to a visual clue on the device's screen. The task is divided into three attempts. To complete an attempt in a task, the user must shake/move the device with greater acceleration as set in the property `thresholdAcceleration` within the given time. The task finishes when the user successfully completes all three  attempts as instructed in the task. Use this task to evaluate user's response to the stimulus and calculate their reaction time. 
+the user is asked to shake/move the device in response to a visual clue on the device's screen. The task is divided into few attempts (you can decide number of attempts). To complete an attempt in a task, the user must shake/move the device with greater acceleration as set in the property `thresholdAcceleration` within the given time. The task finishes when the user successfully completes all the attempts as instructed in the task. Use this task to evaluate user's response to the stimulus and calculate their reaction time. 
 
-Data collected by this task is in the form of `ORKReactionTimeResult` objects. These objects contain a timestamp representing the delivery of the stimulus and an `ORKFileResult` object which references the motion data collected during an attempt. To present this task, use `ORKTaskViewController` object. 
+Data collected by this task is in the form of `ORKReactionTimeResult` objects. Each of these objects contain a timestamp representing the delivery of the stimulus and an `ORKFileResult` object which references the motion data collected during an attempt. To present this task, use `ORKTaskViewController` object. 
 
 The screenshots below show an example of a reaction time task.
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep1.png" alt="Welcome/introduction Screen" style="width: 100%;border: solid black 1px; ">Gives the purpose of the task.</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="ReactionTimeTaskImages/ReactionTimeStep2.png" alt="Instruction step" style="width: 100%;border: solid black 1px;">Describes what the user must do.</p>
@@ -251,7 +251,7 @@ The screenshots below show an example of a tone audiometry task.
 
 In the [tower of hanoi task ]([ORKOrderedTask towerOfHanoiTaskWithIdentifier:intendedUseDescription:numberOfDisks:options:]), the user is asked to solve the classic tower of hanoi puzzle in minimum number of moves. To solve the puzzle the user must move the entire stack to the highlighted platform making minimum moves. This task measures the user's problem solving skills. A tower of hanoi task finishes when the user completes the puzzle correctly or concedes that they cannot solve the puzzle.
  
-Data collected by this task is in the form of an `ORKTowerOfHanoiResult` object. It contains number of moves taken by the user and whether the puzzle was successfully completed or not.
+Data collected by this task is in the form of an `ORKTowerOfHanoiResult` object. It contains every move taken by the user and whether the puzzle was successfully completed or not.
  
 The screenshots below show an example of a tower of hanoi task.
 
