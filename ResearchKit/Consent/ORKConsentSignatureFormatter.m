@@ -46,6 +46,10 @@
     BOOL addedSig = NO;
 
     NSMutableArray *signatureElements = [NSMutableArray array];
+    
+    if (signature.title == nil) {
+        @throw [NSException exceptionWithName:NSObjectNotAvailableException reason:@"Signature title is missing" userInfo:nil];
+    }
 
     // Signature
     if (signature.requiresName || signature.familyName || signature.givenName) {

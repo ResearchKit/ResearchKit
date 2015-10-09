@@ -40,6 +40,7 @@
 #import <ResearchKit/ORKFormStep.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 #import <ResearchKit/ORKImageCaptureStep.h>
+#import <ResearchKit/ORKWaitStep.h>
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
@@ -62,6 +63,10 @@
 #import <ResearchKit/ORKVerificationStepViewController.h>
 #import <ResearchKit/ORKLoginStep.h>
 #import <ResearchKit/ORKLoginStepViewController.h>
+
+#import <ResearchKit/ORKKeychainWrapper.h>
+#import <ResearchKit/ORKPasscodeStep.h>
+#import <ResearchKit/ORKPasscodeViewController.h>
 
 #import <ResearchKit/ORKRecorder.h>
 #import <ResearchKit/ORKActiveStep.h>
