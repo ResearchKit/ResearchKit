@@ -529,7 +529,8 @@
     
     NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
                                      @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice)];
+                                     @(ORKQuestionTypeMultipleChoice),
+                                     @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header
