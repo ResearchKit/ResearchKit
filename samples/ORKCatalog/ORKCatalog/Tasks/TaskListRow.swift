@@ -76,6 +76,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case ValuePickerChoiceQuestion
     case ValidatedTextQuestion
     case ImageCapture
+    case Wait
     
     case EligibilityTask
     case Consent
@@ -127,6 +128,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .ValuePickerChoiceQuestion,
                     .ValidatedTextQuestion,
                     .ImageCapture,
+                    .Wait,
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -201,6 +203,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return NSLocalizedString("Image Capture Step", comment: "")
+            
+        case .Wait:
+            return NSLocalizedString("Wait Step", comment: "")
 
         case .EligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -336,6 +341,11 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ImageCaptureTask
         case ImageCaptureStep
         
+        // Task with an example of waiting.
+        case WaitTask
+        case WaitStepDeterminate
+        case WaitStepIndeterminate
+        
         // Eligibility task specific indentifiers.
         case EligibilityTask
         case EligibilityIntroStep
@@ -424,6 +434,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageCapture:
             return imageCaptureTask
+            
+        case .Wait:
+            return waitTask
         
         case .EligibilityTask:
             return eligibilityTask
@@ -847,6 +860,21 @@ enum TaskListRow: Int, CustomStringConvertible {
             instructionStep,
             imageCaptureStep
             ])
+    }
+    
+    /// This task presents a wait task.
+    private var waitTask: ORKTask {
+        let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
+        waitStepIndeterminate.title = exampleQuestionText
+        waitStepIndeterminate.text = exampleDescription
+        waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.Indeterminate
+        
+        let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
+        waitStepDeterminate.title = exampleQuestionText
+        waitStepDeterminate.text = exampleDescription
+        waitStepDeterminate.indicatorType = ORKProgressIndicatorType.ProgressBar
+        
+        return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }
     
     /**

@@ -385,8 +385,14 @@ ret =
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
            PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil)
+           })),
+   ENTRY(ORKWaitStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKWaitStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+           PROPERTY(indicatorType, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
