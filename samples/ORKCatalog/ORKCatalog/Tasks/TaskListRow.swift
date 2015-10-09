@@ -75,8 +75,9 @@ enum TaskListRow: Int, CustomStringConvertible {
     case TimeIntervalQuestion
     case TimeOfDayQuestion
     case ValuePickerChoiceQuestion
-    case ImageCapture
     case ValidatedTextQuestion
+    case ImageCapture
+    case Wait
     
     case EligibilityTask
     case Consent
@@ -127,8 +128,9 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .TimeIntervalQuestion,
                     .TimeOfDayQuestion,
                     .ValuePickerChoiceQuestion,
-                    .ImageCapture,
                     .ValidatedTextQuestion,
+                    .ImageCapture,
+                    .Wait,
                 ]),
             TaskListRowSection(title: "Onboarding", rows:
                 [
@@ -201,11 +203,14 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ValuePickerChoiceQuestion:
             return NSLocalizedString("Value Picker Choice Question", comment: "")
             
-        case .ImageCapture:
-            return NSLocalizedString("Image Capture Step", comment: "")
-
         case .ValidatedTextQuestion:
             return NSLocalizedString("Validated Text Question", comment: "")
+            
+        case .ImageCapture:
+            return NSLocalizedString("Image Capture Step", comment: "")
+            
+        case .Wait:
+            return NSLocalizedString("Wait Step", comment: "")
 
         case .EligibilityTask:
             return NSLocalizedString("Eligibility Task Example", comment: "")
@@ -316,11 +321,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ContinuousVerticalScaleQuestionStep
         case TextScaleQuestionStep
         case TextVerticalScaleQuestionStep
-        
-        // Task with an exampled of validated text entry.
-        case ValidatedTextQuestionTask
-        case ValidatedTextQuestionStepEmail
-        case ValidatedTextQuestionStepDomain
 
         // Task with an example of free text entry.
         case TextQuestionTask
@@ -342,9 +342,19 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ValuePickerChoiceQuestionTask
         case ValuePickerChoiceQuestionStep
         
+        // Task with an example of validated text entry.
+        case ValidatedTextQuestionTask
+        case ValidatedTextQuestionStepEmail
+        case ValidatedTextQuestionStepDomain
+        
         // Image capture task specific identifiers.
         case ImageCaptureTask
         case ImageCaptureStep
+        
+        // Task with an example of waiting.
+        case WaitTask
+        case WaitStepDeterminate
+        case WaitStepIndeterminate
         
         // Eligibility task specific indentifiers.
         case EligibilityTask
@@ -432,14 +442,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .ValuePickerChoiceQuestion:
                 return valuePickerChoiceQuestionTask
             
+        case .ValidatedTextQuestion:
+            return validatedTextQuestionTask
+            
         case .ImageCapture:
             return imageCaptureTask
+            
+        case .Wait:
+            return waitTask
         
         case .EligibilityTask:
             return eligibilityTask
-            
-        case .ValidatedTextQuestion:
-            return validatedTextQuestionTask
             
         case .Consent:
             return consentTask
@@ -832,6 +845,30 @@ enum TaskListRow: Int, CustomStringConvertible {
         return ORKOrderedTask(identifier: String(Identifier.ValuePickerChoiceQuestionTask), steps: [questionStep])
     }
 
+    /**
+     This task demonstrates asking for text entry. Both single and multi-line
+     text entry are supported, with appropriate parameters to the text answer
+     format.
+     */
+    private var validatedTextQuestionTask: ORKTask {
+        let answerFormatEmail = ORKAnswerFormat.emailAnswerFormat()
+        let stepEmail = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
+        stepEmail.text = exampleDetailText
+        
+        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, invalidMessage:"Invalid URL: %@")
+        answerFormatDomain.multipleLines = false
+        answerFormatDomain.keyboardType = UIKeyboardType.URL
+        answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
+        answerFormatDomain.autocorrectionType = UITextAutocorrectionType.No
+        answerFormatDomain.spellCheckingType = UITextSpellCheckingType.No
+        let stepDomain = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepDomain), title: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
+        stepDomain.text = exampleDetailText
+        
+        return ORKOrderedTask(identifier: String(Identifier.ValidatedTextQuestionTask), steps: [stepEmail, stepDomain])
+    }
+    
     /// This task presents the image capture step in an ordered task.
     private var imageCaptureTask: ORKTask {
         // Create the intro step.
@@ -859,28 +896,19 @@ enum TaskListRow: Int, CustomStringConvertible {
             ])
     }
     
-    /**
-    This task demonstrates asking for text entry. Both single and multi-line
-    text entry are supported, with appropriate parameters to the text answer
-    format.
-    */
-    private var validatedTextQuestionTask: ORKTask {
-        let answerFormatEmail = ORKAnswerFormat.emailAnswerFormat()
-        let stepEmail = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
-        stepEmail.text = exampleDetailText
+    /// This task presents a wait task.
+    private var waitTask: ORKTask {
+        let waitStepIndeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepIndeterminate))
+        waitStepIndeterminate.title = exampleQuestionText
+        waitStepIndeterminate.text = exampleDescription
+        waitStepIndeterminate.indicatorType = ORKProgressIndicatorType.Indeterminate
         
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let waitStepDeterminate = ORKWaitStep(identifier: String(Identifier.WaitStepDeterminate))
+        waitStepDeterminate.title = exampleQuestionText
+        waitStepDeterminate.text = exampleDescription
+        waitStepDeterminate.indicatorType = ORKProgressIndicatorType.ProgressBar
         
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, validInputDescription: NSLocalizedString("Enter a valid URL.", comment: ""))
-        answerFormatDomain.multipleLines = false
-        answerFormatDomain.keyboardType = UIKeyboardType.URL
-        answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
-        answerFormatDomain.autocorrectionType = UITextAutocorrectionType.No
-        answerFormatDomain.spellCheckingType = UITextSpellCheckingType.No
-        let stepDomain = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepDomain), title: NSLocalizedString("URL", comment: ""), answer: answerFormatDomain)
-        stepDomain.text = exampleDetailText
-        
-        return ORKOrderedTask(identifier: String(Identifier.ValidatedTextQuestionTask), steps: [stepEmail, stepDomain])
+        return ORKOrderedTask(identifier: String(Identifier.WaitTask), steps: [waitStepIndeterminate, waitStepDeterminate])
     }
     
     /**
