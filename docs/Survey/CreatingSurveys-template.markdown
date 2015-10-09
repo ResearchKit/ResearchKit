@@ -181,7 +181,8 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;">Vertical answer format</p>
+
 <p style="clear: both;"></p>
 
 In addition to the preceding answer formats, the ResearchKit framework provides
@@ -268,7 +269,7 @@ includes start and end times, using the `startDate` and `endDate`
 properties respectively. These properties can be used to infer how long the user
 spent on the step.
 
-### Step Results That Determine the Next Step
+### Step Results that Determine the Next Step
 
 Sometimes it's important to know the result of a step before
 presenting the next step. For example, suppose a step asks "Do you
@@ -308,7 +309,6 @@ is usually necessary.
         return [super stepAfterStep:step withResult:result];
     }
 ```
-
 #### Navigable Ordered Task
 The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it lets you add a condition while the user navigates through the steps in the task by adding a conditional step navigation. 
 
