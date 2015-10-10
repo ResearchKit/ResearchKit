@@ -482,7 +482,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                             timeLimit:300.0
                                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NavigableOrderedTaskIdentifier]) {
-        return [self makeNavigableOrderedTask];
+        return [TaskFactory makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
@@ -2662,13 +2662,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UIView *superview = self.view.superview;
     [self.view removeFromSuperview];
     [superview addSubview:self.view];
-}
-
-#pragma mark - Navigable Ordered Task
-
-- (id<ORKTask>)makeNavigableOrderedTask {
-    // Task generated from swift to test ORKPredicateStepNavigationRule overlay
-    return [TaskFactory makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
 }
 
 #pragma mark - Custom navigation item task
