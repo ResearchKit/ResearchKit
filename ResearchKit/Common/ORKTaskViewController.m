@@ -908,14 +908,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     ORKStepViewControllerNavigationDirection stepDirection = goForward?ORKStepViewControllerNavigationDirectionForward : ORKStepViewControllerNavigationDirectionReverse;
     
-    NSString *progressLabel = nil;
-    if ([self shouldDisplayProgressLabel]) {
-        ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
-        
-        if (progress.total > 0) {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current + 1)), ORKLocalizedStringFromNumber(@(progress.total))];
-        }
-    }
+    NSString *progressLabel = [self progressLabelForStepViewController:viewController];
     
     [viewController willNavigateDirection:stepDirection];
     
@@ -1046,6 +1039,18 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     _stepViewControllerObserver = [[ORKViewControllerToolbarObserver alloc] initWithTargetViewController:stepViewController delegate:self];
     return stepViewController;
+}
+
+- (NSString*)progressLabelForStepViewController:(ORKStepViewController*)stepViewController {
+    NSString *progressLabel = nil;
+    if ([self shouldDisplayProgressLabel]) {
+        ORKTaskProgress progress = [_task progressOfCurrentStep:stepViewController.step withResult:[self result]];
+        
+        if (progress.total > 0) {
+            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current + 1)), ORKLocalizedStringFromNumber(@(progress.total))];
+        }
+    }
+    return progressLabel;
 }
 
 - (BOOL)shouldDisplayProgressLabel {
@@ -1209,6 +1214,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
         [strongDelegate taskViewController:self didChangeResult: [self result]];
     }
+    NSString *progressLabel = [self progressLabelForStepViewController:stepViewController];
+    if (progressLabel || _hasSetProgressLabel) {
+        self.pageViewController.navigationItem.title = progressLabel;
+    }
+    _hasSetProgressLabel = (progressLabel != nil);
 }
 
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController *)stepViewController {
