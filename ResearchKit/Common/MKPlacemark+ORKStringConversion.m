@@ -41,15 +41,20 @@
 #import "CLLocation+ORKJSONDictionary.h"
 
 
+static NSString *const LocationKey = @"location";
+static NSString *const LatitudeKey = @"latitude";
+static NSString *const LongitudeKey = @"longitude";
+static NSString *const AddressDictionaryKey = @"addressDictionary";
+
 @implementation MKPlacemark (ORKStringConversion)
 
 - (NSDictionary *)ork_JSONDictionary {
     return @{
-             @"location": @{
-                     @"latitude": [NSDecimalNumber numberWithDouble:self.location.coordinate.latitude],
-                     @"longitude": [NSDecimalNumber numberWithDouble:self.location.coordinate.longitude]
+             LocationKey: @{
+                     LatitudeKey: [NSDecimalNumber numberWithDouble:self.location.coordinate.latitude],
+                     LongitudeKey: [NSDecimalNumber numberWithDouble:self.location.coordinate.longitude]
                      },
-             @"addressDictionary": self.addressDictionary ? : [NSNull null]
+             AddressDictionaryKey: self.addressDictionary ? : [NSNull null]
              };
 }
 
@@ -68,14 +73,14 @@
 + (instancetype)ork_placemarkWithJSONDictionary:(NSDictionary *)dictionary {
     CLLocationCoordinate2D location = kCLLocationCoordinate2DInvalid;
     NSDictionary *addressDictionary = nil;
-    if (dictionary[@"location"] && [[dictionary[@"location"] class] isSubclassOfClass:[NSDictionary class]]) {
-        NSDictionary *locationDictionary = dictionary[@"location"];
-        if (locationDictionary[@"latitude"] && locationDictionary[@"longitude"] && [[locationDictionary[@"latitude"] class] isSubclassOfClass:[NSNumber class]] && [[locationDictionary[@"longitude"] class] isSubclassOfClass:[NSNumber class]]) {
-            location = CLLocationCoordinate2DMake(((NSNumber *)locationDictionary[@"latitude"]).doubleValue, ((NSNumber *)locationDictionary[@"longitude"]).doubleValue);
+    if (dictionary[LocationKey] && [[dictionary[LocationKey] class] isSubclassOfClass:[NSDictionary class]]) {
+        NSDictionary *locationDictionary = dictionary[LocationKey];
+        if (locationDictionary[LatitudeKey] && locationDictionary[LongitudeKey] && [[locationDictionary[LatitudeKey] class] isSubclassOfClass:[NSNumber class]] && [[locationDictionary[LongitudeKey] class] isSubclassOfClass:[NSNumber class]]) {
+            location = CLLocationCoordinate2DMake(((NSNumber *)locationDictionary[LatitudeKey]).doubleValue, ((NSNumber *)locationDictionary[LongitudeKey]).doubleValue);
         }
     }
-    if (dictionary[@"addressDictionary"] && [[dictionary[@"addressDictionary"] class] isSubclassOfClass:[NSDictionary class]]) {
-        addressDictionary = dictionary[@"addressDictionary"];
+    if (dictionary[AddressDictionaryKey] && [[dictionary[AddressDictionaryKey] class] isSubclassOfClass:[NSDictionary class]]) {
+        addressDictionary = dictionary[AddressDictionaryKey];
     }
 
     return [[MKPlacemark alloc] initWithCoordinate:location addressDictionary:addressDictionary];
