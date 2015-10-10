@@ -1162,7 +1162,6 @@ static const CGFloat HorizontalMargin = 15.0;
 @interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
 
 @property (nonatomic, assign) BOOL editingHighlight;
-@property (nonatomic, strong) NSString *placeholder;
 
 @end
 
@@ -1180,14 +1179,13 @@ static const CGFloat HorizontalMargin = 15.0;
                                                 edgeToEdgePresentation:NO];
     _selectionView.delegate = self;
     
-    if (_placeholder != nil) {
-        [_selectionView setPlaceholderText:_placeholder];
+    [self.contentView addSubview:_selectionView];
+
+    if (self.formItem.placeholder != nil) {
+        [_selectionView setPlaceholderText:self.formItem.placeholder];
     }
     
     [self answerDidChange];
-    
-    [self.contentView addSubview:_selectionView];
-    
     [self setUpConstraints];
 }
 
@@ -1212,8 +1210,6 @@ static const CGFloat HorizontalMargin = 15.0;
     
     if (_selectionView) {
         [_selectionView setPlaceholderText:formItem.placeholder];
-    } else {
-        _placeholder = formItem.placeholder;
     }
 }
 
