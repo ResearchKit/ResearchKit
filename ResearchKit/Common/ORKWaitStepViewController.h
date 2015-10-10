@@ -1,6 +1,15 @@
 /*
+ Copyright (c) 2015, Alejandro Martinez, Quintiles Inc.
+ Copyright (c) 2015, Brian Kelly, Quintiles Inc.
+ Copyright (c) 2015, Bryan Strothmann, Quintiles Inc.
+ Copyright (c) 2015, Greg Yip, Quintiles Inc.
+ Copyright (c) 2015, John Reites, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
+ Copyright (c) 2015, Richard Thomas, Quintiles Inc.
+ Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Steve Cadwallader, Quintiles Inc.
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,45 +38,34 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ResearchKit.h>
 
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKWaitStep.h>
 
-#import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
+@class ORKWaitStepViewController;
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
+/**
+ The `ORKWaitStepViewController` class represents the step view controller that corresponds to an `ORKWaitStep`.
+ 
+ It is not usually necessary to instantiate this view controller directly.
+ Instead, add a wait step to a task, and present the task in a task
+ view controller.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWaitStepViewController: ORKStepViewController
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
+/**
+ Updates the amount of progress displayed in the progress bar if the current indicator mask is set to progress bar.
+ 
+ @param progress    The fraction of work completed on the range of zero to one.
+ @param animated    If true, the update is animated.
+ */
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+/**
+ Updates the text on the step with the process that is occuring.
+ 
+ @param text     The description of the process that is occuring.
+ */
+- (void)updateText:(NSString *)text;
 
-#import <ResearchKit/ORKKeychainWrapper.h>
-#import <ResearchKit/ORKPasscodeStep.h>
-#import <ResearchKit/ORKPasscodeViewController.h>
-
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
-
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
-
+@end

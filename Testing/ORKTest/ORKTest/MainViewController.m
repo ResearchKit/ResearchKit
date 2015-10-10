@@ -74,6 +74,7 @@ DefineStringKey(DynamicTaskIdentifier);
 DefineStringKey(InterruptibleTaskIdentifier);
 DefineStringKey(NavigableOrderedTaskIdentifier);
 DefineStringKey(NavigableLoopTaskIdentifier);
+DefineStringKey(WaitTaskIdentifier);
 
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
@@ -301,6 +302,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Navigable Loop Task",
                            @"Test Charts",
                            @"Toggle Tint Color",
+                           @"Wait Task",
                            ],
                        ];
 }
@@ -484,7 +486,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
+    } if ([identifier isEqualToString:WaitTaskIdentifier]) {
+        return [self makeWaitingTask];
     }
+
     return nil;
 }
 
@@ -816,27 +821,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
         [steps addObject:step];
     }
-    
-    
-    {
-        /*
-         A text question with single-line text entry and a URL keyboard.
-         */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
-        format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeURL;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your website?"
-                                                                     answer:format];
-        [steps addObject:step];
-    }
-    
+
     {
         /*
          An email question with single-line text entry.
          */
         ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
                                                                       title:@"What is your email?"
                                                                      answer:format];
         [steps addObject:step];
@@ -849,7 +840,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:10];
         format.secureTextEntry = YES;
         format.multipleLines = NO;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005sec"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
                                                                       title:@"What is your passcode?"
                                                                      answer:format];
         step.placeholder = @"Tap your passcode here";
@@ -1498,7 +1489,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            format.multipleLines = NO;
+            format.keyboardType = UIKeyboardTypeURL;
+            format.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            format.autocorrectionType = UITextAutocorrectionTypeNo;
+            format.spellCheckingType = UITextSpellCheckingTypeNo;
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"URL"
+                                                           answerFormat:format];
+            item.placeholder = @"Enter URL";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Message"
                                                            answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
             item.placeholder = @"Your message (limit 20 characters).";
             [items addObject:item];
@@ -1509,7 +1514,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             format.secureTextEntry = YES;
             format.multipleLines = NO;
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Passcode"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_008" text:@"Passcode"
                                                            answerFormat:format];
             item.placeholder = @"Enter Passcode";
             [items addObject:item];
@@ -2022,6 +2027,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (void)memoryGameTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
+}
+
+- (IBAction)waitTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WaitTaskIdentifier];
 }
 
 - (void)audioTaskButtonTapped:(id)sender {
@@ -3323,7 +3332,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [items addObject:@"Item2"];
         [items addObject:@"Item3"];
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
+    }else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
+        // Indeterminate step
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
+    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
+        // Determinate step
+        [self updateProgress:0.0 OfWaitTask:((ORKWaitStepViewController *)stepViewController)];
     }
+
 }
 
 /*
@@ -3504,6 +3520,68 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
     UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
     [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+#pragma mark - Wait Task
+
+- (ORKOrderedTask *)makeWaitingTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    /*
+     To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
+     */
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
+    step1.title = @"Setup";
+    step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
+    [steps addObject:step1];
+    
+    // Interterminate wait step.
+    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
+    step2.title = @"Getting Ready";
+    step2.text = @"Please wait while the setup completes.";
+    [steps addObject:step2];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
+    step3.title = @"Account Setup";
+    step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
+    [steps addObject:step3];
+    
+    // Determinate wait step.
+    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
+    step4.title = @"Syncing Account";
+    step4.text = @"Please wait while the data is uploaded.";
+    step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
+    [steps addObject:step4];
+    
+    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
+    step5.title = @"Setup Complete";
+    [steps addObject:step5];
+
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
+    return waitTask;
+}
+
+- (void)updateProgress:(CGFloat)progress OfWaitTask:(ORKWaitStepViewController *)viewController {
+    if (progress <= 1.0) {
+        [viewController setProgress:progress animated:true];
+        
+        double delayInSeconds = 0.1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        __weak ORKWaitStepViewController *vc = viewController;
+        __weak MainViewController *weakSelf = self;
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            __typeof__(self) strongSelf = weakSelf;
+            [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
+            
+            if ((float)progress == 0.5) {
+                NSString *newText = @"Please wait while the data is downloaded.";
+                [viewController updateText:newText];
+            }
+        });
+    } else {
+        [viewController goForward];
+    }
 }
 
 @end
