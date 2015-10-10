@@ -1184,7 +1184,6 @@ static const CGFloat HorizontalMargin = 15.0;
         [_selectionView setPlaceholderText:_placeholder];
     }
     
-    [self applyAnswerFormat];
     [self answerDidChange];
     
     [self.contentView addSubview:_selectionView];
@@ -1208,10 +1207,6 @@ static const CGFloat HorizontalMargin = 15.0;
     [self.contentView addConstraints:constraints];
 }
 
-- (void)applyAnswerFormat {
-    
-}
-
 - (void)setFormItem:(ORKFormItem *)formItem {
     [super setFormItem:formItem];
     
@@ -1220,8 +1215,6 @@ static const CGFloat HorizontalMargin = 15.0;
     } else {
         _placeholder = formItem.placeholder;
     }
-    
-    [self applyAnswerFormat];
 }
 
 - (void)answerDidChange {
