@@ -198,6 +198,7 @@
 "TOTAL_TAPS_LABEL" = "Total Taps";
 "TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
 
+
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";
 "AUDIO_CALL_TO_ACTION" = "Tap Get Started to begin.";
