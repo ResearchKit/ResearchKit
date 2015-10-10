@@ -48,7 +48,6 @@
 #import "ORKSubheadlineLabel.h"
 #import "ORKLocationSelectionView.h"
 #import "MKPlacemark+ORKStringConversion.h"
-
 #import <MapKit/MapKit.h>
 
 
