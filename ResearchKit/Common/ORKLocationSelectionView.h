@@ -50,11 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view;
 
+@optional
+
 - (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view;
 
 - (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view;
 
 - (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view;
+
+@required
 
 - (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error;
 

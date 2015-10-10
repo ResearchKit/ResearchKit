@@ -157,16 +157,4 @@
     [self showValidityAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
 }
 
-- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
-    
-}
-
-- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
-    
-}
-
-- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
-    
-}
-
 @end
