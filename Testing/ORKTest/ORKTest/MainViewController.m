@@ -2668,7 +2668,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (id<ORKTask>)makeNavigableOrderedTask {
     // Task generated from swift to test ORKPredicateStepNavigationRule overlay
-    return [TestHelpers makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
+    return [TaskFactory makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
 }
 
 #pragma mark - Custom navigation item task
