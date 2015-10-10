@@ -1216,7 +1216,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)answerDidChange {
     id answer = self.answer;
     
-    if (answer == ORKNullAnswerValue()) {
+    if (ORKIsAnswerEmpty(answer)) {
         answer = nil;
     }
     
