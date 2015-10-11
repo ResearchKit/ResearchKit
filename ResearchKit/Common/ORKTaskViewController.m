@@ -898,7 +898,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
-    if ([step isRestorable] && !viewController.parentReviewStep) {
+    if ([step isRestorable] && !(viewController.parentReviewStep && viewController.parentReviewStep.isStandalone)) {
         _lastRestorableStepIdentifier = step.identifier;
     }
     
@@ -1330,7 +1330,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
     
     ORKStep *step = [_currentStepViewController step];
-    if ([step isRestorable] && !_currentStepViewController.parentReviewStep) {
+    if ([step isRestorable] && !(_currentStepViewController.parentReviewStep && _currentStepViewController.parentReviewStep.isStandalone)) {
         [coder encodeObject:step.identifier forKey:_ORKStepIdentifierRestoreKey];
     } else if (_lastRestorableStepIdentifier) {
         [coder encodeObject:_lastRestorableStepIdentifier forKey:_ORKStepIdentifierRestoreKey];
