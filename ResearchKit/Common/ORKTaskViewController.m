@@ -160,7 +160,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 @interface ORKTaskViewController () <ORKViewControllerToolbarObserverDelegate, ORKScrollViewObserverDelegate> {
     NSMutableDictionary *_managedResults;
-    NSMutableOrderedSet *_managedStepIdentifiers;
+    NSMutableArray *_managedStepIdentifiers;
     ORKViewControllerToolbarObserver *_stepViewControllerObserver;
     ORKScrollViewObserver *_scrollViewObserver;
     BOOL _hasSetProgressLabel;
@@ -264,7 +264,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.showsProgressInNavigationBar = YES;
     
     _managedResults = [NSMutableDictionary dictionary];
-    _managedStepIdentifiers = [NSMutableOrderedSet orderedSet];
+    _managedStepIdentifiers = [NSMutableArray array];
     
     self.taskRunUUID = taskRunUUID;
     
@@ -893,16 +893,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         }
     }
     
-    NSString *stepIdentifier = step.identifier;
-    if (stepIdentifier) {
-        NSUInteger indexOfStep = [_managedStepIdentifiers indexOfObject:stepIdentifier];
-        if (indexOfStep == NSNotFound) {
-            [_managedStepIdentifiers addObject:stepIdentifier];
-        } else {
-            // If the step being shown has been visited before, remove all the managed step identifiers visited after it
-            NSUInteger numberManagedOfStepIdentifiers = _managedStepIdentifiers.count;
-            [_managedStepIdentifiers removeObjectsInRange:NSMakeRange(indexOfStep + 1, numberManagedOfStepIdentifiers - (indexOfStep + 1))];
-        }
+    if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
+        [_managedStepIdentifiers addObject:step.identifier];
     }
 
     if ([step isRestorable]) {
@@ -1141,7 +1133,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [self finishWithReason:ORKTaskViewControllerFinishReasonFailed error:error];
 }
 
-- (IBAction)flipToNextPageFrom:(ORKStepViewController *)fromController {
+- (void)flipToNextPageFrom:(ORKStepViewController *)fromController {
     if (fromController != _currentStepViewController) {
         return;
     }
@@ -1162,7 +1154,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
 }
 
-- (IBAction)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
+- (void)flipToPreviousPageFrom:(ORKStepViewController *)fromController {
     if (fromController != _currentStepViewController) {
         return;
     }
@@ -1171,8 +1163,15 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = nil;
     
     if ([self shouldPresentStep:step]) {
+        ORKStep *currentStep = _currentStepViewController.step;
+        NSString *itemId = currentStep.identifier;
+        
         stepViewController = [self viewControllerForStep:step];
         if (stepViewController) {
+            // Remove the identifier from the list
+            assert([itemId isEqualToString:_managedStepIdentifiers.lastObject]);
+            [_managedStepIdentifiers removeLastObject];
+            
             [self showViewController:stepViewController goForward:NO animated:YES];
         }
     }
@@ -1302,7 +1301,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
         
         // Recover partially entered results, even if we may not be able to jump to the desired step.
         _managedResults = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKManagedResultsRestoreKey];
-        _managedStepIdentifiers = [coder decodeObjectOfClass:[NSMutableOrderedSet class] forKey:_ORKManagedStepIdentifiersRestoreKey];
+        _managedStepIdentifiers = [coder decodeObjectOfClass:[NSMutableArray class] forKey:_ORKManagedStepIdentifiersRestoreKey];
         
         _restoredTaskIdentifier = [coder decodeObjectOfClass:[NSString class] forKey:_ORKTaskIdentifierRestoreKey];
         if (_restoredTaskIdentifier) {
