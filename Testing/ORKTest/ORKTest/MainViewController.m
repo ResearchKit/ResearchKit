@@ -3399,39 +3399,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
  */
 - (void)taskViewControllerDidComplete:(ORKTaskViewController *)taskViewController {
     
-    NSLog(@"%@", taskViewController.result);
-    for (ORKStepResult *sResult in taskViewController.result.results) {
-        NSLog(@"--%@", sResult);
-        for (ORKResult *result in sResult.results) {
-            if ([result isKindOfClass:[ORKDateQuestionResult class]]) {
-                ORKDateQuestionResult *dateQuestionResult = (ORKDateQuestionResult *)result;
-                NSLog(@"    %@:   %@  %@  %@", result.identifier, dateQuestionResult.answer, dateQuestionResult.timeZone, dateQuestionResult.calendar);
-            } else if ([result isKindOfClass:[ORKQuestionResult class]]) {
-                ORKQuestionResult *qr = (ORKQuestionResult *)result;
-                NSLog(@"    %@:   %@", result.identifier, qr.answer);
-            } else if ([result isKindOfClass:[ORKTappingIntervalResult class]]) {
-                ORKTappingIntervalResult *tir = (ORKTappingIntervalResult *)result;
-                NSLog(@"    %@:     %@\n    %@ %@", tir.identifier, tir.samples, NSStringFromCGRect(tir.buttonRect1), NSStringFromCGRect(tir.buttonRect2));
-            } else if ([result isKindOfClass:[ORKFileResult class]]) {
-                ORKFileResult *fileResult = (ORKFileResult *)result;
-                NSLog(@"    File: %@", fileResult.fileURL);
-            } else if ([result isKindOfClass:[ORKToneAudiometryResult class]]) {
-                ORKToneAudiometryResult *tor = (ORKToneAudiometryResult *)result;
-                NSLog(@"    %@:     %@", tor.identifier, tor.samples);
-            } else if ([result isKindOfClass:[ORKPSATResult class]]) {
-                ORKPSATResult *pr = (ORKPSATResult *)result;
-                NSLog(@"    %@:     %@\n    Total correct:     %@/%@", pr.identifier, pr.samples, @(pr.totalCorrect), @(pr.length));
-            } else if ([result isKindOfClass:[ORKTimedWalkResult class]]) {
-                ORKTimedWalkResult *twr = (ORKTimedWalkResult *)result;
-                NSLog(@"%@ %@ %@ %@", twr.identifier, @(twr.distanceInMeters), @(twr.timeLimit), @(twr.duration));
-            } else if ([result isKindOfClass:[ORKHolePegTestResult class]]) {
-                ORKHolePegTestResult *hptr = (ORKHolePegTestResult *)result;
-                NSLog(@"    %@:   totalTime: %@     %@", hptr.identifier, @(hptr.totalTime), hptr.samples);
-            } else {
-                NSLog(@"    %@:   userInfo: %@", result.identifier, result.userInfo);
-            }
-        }
-    }
+    NSLog(@"[ORKTest] task results: %@", taskViewController.result);
     
     if (_currentDocument)
     {

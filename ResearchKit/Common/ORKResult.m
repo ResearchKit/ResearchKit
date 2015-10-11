@@ -125,7 +125,7 @@
 }
 
 - (NSString *)descriptionPrefix {
-    return [NSString stringWithFormat:@"%@: %p; identifier: %@", self.class.description, self, self.identifier];
+    return [NSString stringWithFormat:@"%@: %p; identifier: \"%@\"", self.class.description, self, self.identifier];
 }
 
 - (NSString *)description {
@@ -1800,7 +1800,7 @@
 }
 
 - (NSString *)description {
-    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: %p; identifier: %@; results: {", self.class.description, self, self.identifier];
+    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@; results: {", self.descriptionPrefix];
     
     [self.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx != 0) {
