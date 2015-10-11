@@ -81,11 +81,9 @@
         if (nextStepIdentifier) {
             nextStep = [self stepWithIdentifier:nextStepIdentifier];
             
-            #if defined(DEBUG) && DEBUG
             if (step && nextStep && [self indexOfStep:nextStep] <= [self indexOfStep:step]) {
-                ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules.", nextStep.identifier, step.identifier);
+                ORK_Log_Warning(@"Index of next step (\"%@\") is equal or lower than index of current step (\"%@\") in ordered task. Make sure this is intentional as you could loop idefinitely without appropriate navigation rules. Also please note that you'll get duplicate result entries each time you loop over the same step.", nextStep.identifier, step.identifier);
             }
-            #endif
         } else {
             nextStep = [super stepAfterStep:step withResult:result];
         }
@@ -96,9 +94,10 @@
 - (ORKStep *)stepBeforeStep:(ORKStep *)step withResult:(ORKTaskResult *)result {
     ORKStep *previousStep = nil;
     __block NSInteger indexOfCurrentStepResult = -1;
-    [result.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+    [result.results enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(ORKResult *result, NSUInteger idx, BOOL *stop) {
         if ([result.identifier isEqualToString:step.identifier]) {
             indexOfCurrentStepResult = idx;
+            *stop = YES;
         }
     }];
     if (indexOfCurrentStepResult != -1 && indexOfCurrentStepResult != 0) {
