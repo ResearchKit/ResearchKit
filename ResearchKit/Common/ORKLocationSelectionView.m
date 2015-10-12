@@ -256,6 +256,8 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
             CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
             [self reverseGeocodeAndDisplay:location];
         }
+        
+        _userLocationNeedsUpdate = NO;
     } else {
         [_mapView setRegion:_initalCoordinateRegion animated:YES];
     }
