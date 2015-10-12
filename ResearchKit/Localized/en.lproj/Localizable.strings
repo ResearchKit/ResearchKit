@@ -88,7 +88,6 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_ADDRESS" = "Enter an address";
-"LOCATION_ALERT_MESSAGE" = "'%@' is not a valid location.";
 "LOCATION_ERROR_TITLE" = "Location error";
 
 /* Alert for exceeding length limit in text answer */

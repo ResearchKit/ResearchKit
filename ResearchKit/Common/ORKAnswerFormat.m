@@ -2144,14 +2144,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return isValid;
 }
 
-- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
-    if (![text length]) {
-        return nil;
-    }
-    
-    return [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE", nil), text];
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

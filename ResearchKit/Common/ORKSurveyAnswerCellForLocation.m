@@ -101,38 +101,6 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (BOOL)isAnswerValid {
-    id answer = self.answer;
-    
-    if (answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
-    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
-    ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
-    
-    return [locationFormat isAnswerValid:_selectionView.answer];
-}
-
-- (BOOL)shouldContinue {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (!isValid) {
-        
-        NSString *address = nil;
-        if (((MKPlacemark *)self.answer).addressDictionary) {
-            address = ABCreateStringWithAddressDictionary(((MKPlacemark *)self.answer).addressDictionary, NO);
-        } else {
-            address = [_selectionView enteredLocation];
-        }
-        NSString *localizedMessage = [[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:address];
-        
-        [self showValidityAlertWithMessage:localizedMessage];
-    }
-    
-    return isValid;
-}
-
 - (void)answerDidChange {
     id answer = self.answer;
     

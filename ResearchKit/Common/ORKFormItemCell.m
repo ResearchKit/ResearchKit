@@ -1277,37 +1277,4 @@ static const CGFloat HorizontalMargin = 15.0;
     return resign;
 }
 
-- (BOOL)isAnswerValid {
-    id answer = self.answer;
-    
-    if (answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
-    ORKAnswerFormat *answerFormat = [self.formItem impliedAnswerFormat];
-    ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
-    
-    MKPlacemark *placemark = (MKPlacemark *)answer;
-    
-    return [locationFormat isAnswerValid:placemark];
-}
-
-- (BOOL)shouldContinue {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (!isValid) {
-        NSString *address = nil;
-        if (((MKPlacemark *)self.answer).addressDictionary) {
-            address = ABCreateStringWithAddressDictionary(((MKPlacemark *)self.answer).addressDictionary, NO);
-        } else {
-            address = [_selectionView enteredLocation];
-        }
-        NSString *localizedMessage = [[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:address];
-        
-        [self showValidityAlertWithMessage:localizedMessage];
-    }
-    
-    return isValid;
-}
-
 @end
