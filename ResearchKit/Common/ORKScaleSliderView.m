@@ -51,12 +51,15 @@
     UIView *_rightRangeView;
     ORKScaleValueLabel *_valueLabel;
     NSMutableArray<ORKScaleRangeLabel *> *_textChoiceLabels;
+    NSNumber *_currentNumberValue;
 }
 
-- (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider {
+- (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider
+                              delegate:(id<ORKScaleSliderViewDelegate>)delegate {
     self = [self initWithFrame:CGRectZero];
     if (self) {
         _formatProvider = formatProvider;
+        _delegate = delegate;
         
         _slider = [[ORKScaleSlider alloc] initWithFrame:CGRectZero];
         _slider.userInteractionEnabled = YES;
@@ -75,7 +78,7 @@
         _slider.vertical = isVertical;
 
         NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
-        self.slider.textChoices = textChoices;
+        _slider.textChoices = textChoices;
         
         if (isVertical && textChoices) {
             // Generate an array of labels for all the text choices
@@ -445,18 +448,28 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
-- (void)setCurrentValue:(NSNumber *)value {
-    _currentValue = value;
-    _slider.showThumb = value? YES : NO;
+- (void)setCurrentNumberValue:(NSNumber *)value {
     
-    if (value) {
-        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
-        if (textChoices) {
-            ORKTextChoice *textChoice = textChoices[MAX(0, [value intValue] - 1)];
+    _currentNumberValue = value ? [_formatProvider normalizedValueForNumber:value] : nil;
+    _slider.showThumb = _currentNumberValue ? YES : NO;
+    
+    [self updateCurrentValueLabel];
+    _slider.value = _currentNumberValue.floatValue;
+
+}
+
+- (NSUInteger)currentTextChoiceIndex {
+    return [_currentNumberValue unsignedIntegerValue] - 1;
+}
+
+- (void)updateCurrentValueLabel {
+    
+    if (_currentNumberValue) {
+        if ([_formatProvider textChoices]) {
+            ORKTextChoice *textChoice = [_formatProvider textChoiceForIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
         } else {
-            NSNumber *newValue = [_formatProvider normalizedValueForNumber:value];
-            _slider.value = newValue.floatValue;
+            NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
             _valueLabel.text = [_formatProvider localizedStringForNumber:newValue];
         }
     } else {
@@ -465,8 +478,56 @@
 }
 
 - (IBAction)sliderValueChanged:(id)sender {
-    NSNumber *newValue = [_formatProvider normalizedValueForNumber:@(_slider.value)];
-    [self setCurrentValue:newValue];
+    
+    _currentNumberValue = [_formatProvider normalizedValueForNumber:@(_slider.value)];
+    [self updateCurrentValueLabel];
+    [self notifyDelegate];
+}
+
+- (void)notifyDelegate {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scaleSliderViewCurrentValueDidChange:)]) {
+        [self.delegate scaleSliderViewCurrentValueDidChange:self];
+    }
+}
+
+- (void)setCurrentTextChoiceValue:(id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
+    
+    if (currentTextChoiceValue) {
+        NSUInteger index = [_formatProvider textChoiceIndexForValue:currentTextChoiceValue];
+        if (index != NSNotFound) {
+            [self setCurrentNumberValue: @(index + 1)];
+        }
+    } else {
+        [self setCurrentNumberValue: nil];
+    }
+}
+
+- (id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
+    id<NSCopying, NSCoding, NSObject> value = [_formatProvider textChoiceForIndex:[self currentTextChoiceIndex]].value;
+    return value;
+}
+
+- (id)currentAnswerValue {
+    if ([_formatProvider textChoices]) {
+        id<NSCopying, NSCoding, NSObject> value = [self currentTextChoiceValue];
+        return value ? @[value] : @[];
+    } else {
+        return _currentNumberValue;
+    }
+}
+
+- (void)setCurrentAnswerValue:(id)currentAnswerValue {
+    if ([_formatProvider textChoices]) {
+        
+        if (ORKIsAnswerEmpty(currentAnswerValue)) {
+            [self setCurrentTextChoiceValue:nil];
+        } else {
+            [self setCurrentTextChoiceValue:[currentAnswerValue firstObject]];
+        }
+    } else {
+        return [self setCurrentNumberValue:currentAnswerValue];
+    }
 }
 
 #pragma mark - Accessibility

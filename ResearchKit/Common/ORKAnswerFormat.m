@@ -1721,7 +1721,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (Class)questionResultClass {
-    return [ORKScaleQuestionResult class];
+    return [ORKChoiceQuestionResult class];
 }
 
 - (instancetype)init {
@@ -1760,7 +1760,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
-    return @(_defaultIndex);
+    // slider's minimumNumber is 1
+    return @(_defaultIndex + 1);
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [self.numberFormatter stringFromNumber:number];
@@ -1794,6 +1795,32 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
     return @([number integerValue]);
+}
+
+- (ORKTextChoice *)textChoiceForIndex:(NSUInteger)index {
+    
+    if (index >= _textChoices.count) {
+        return nil;
+    }
+    return _textChoices[index];
+}
+
+- (ORKTextChoice *)textChoiceForValue:(id<NSCopying, NSCoding, NSObject>)value {
+    __block ORKTextChoice *choice = nil;
+    
+    [_textChoices enumerateObjectsUsingBlock:^(ORKTextChoice * _Nonnull textChoice, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([textChoice.value isEqual:value]) {
+            choice = textChoice;
+            *stop = YES;
+        }
+    }];
+    
+    return choice;
+}
+
+- (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value {
+   ORKTextChoice *choice = [self textChoiceForValue:value];
+   return choice ? [_textChoices indexOfObject:choice] : NSNotFound;
 }
 
 - (void)validateParameters {

@@ -2397,7 +2397,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
         
         ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
-                                                                                               defaultIndex:NSIntegerMax
+                                                                                               defaultIndex:3
                                                                                                    vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_14"
