@@ -377,6 +377,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Account creation task specific identifiers.
         case AccountCreationTask
         case RegistrationStep
+        case WaitStep
         case VerificationStep
         
         // Login task specific identifiers.
@@ -1020,21 +1021,33 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: ORKRegistrationStepOption.Default)
         
         /*
+        A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
+        */
+        let waitTitle = NSLocalizedString("Creating account", comment: "")
+        let waitText = NSLocalizedString("Please wait while we upload your data", comment: "")
+        let waitStep = ORKWaitStep(identifier: String(Identifier.WaitStep))
+        waitStep.title = waitTitle
+        waitStep.text = waitText
+        
+        /*
         A verification step view controller sub class is required in order to use a verification step.
         This class includes methods that interact with the buttons in the view. 
         Overriding these methods allows for your desired functionality.
         */
         class verificationViewController : ORKVerificationStepViewController {
             override func changeEmailButtonTapped() {
-                print("Change email button tapped")
+                let alert = UIAlertController(title: "Wrong email address?", message: "Button tapped", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
             
             override func resendEmailButtonTapped() {
-                print("Resend email button tapped")
+                let alert = UIAlertController(title: "Resend Verification Email", message: "Button tapped", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
             
             override func continueButtonTapped() {
-                print("Continue button tapped")
                 self.goForward();
             }
 
@@ -1045,6 +1058,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
+            waitStep,
             verificationStep
             ])
     }
