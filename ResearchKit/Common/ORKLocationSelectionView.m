@@ -43,6 +43,7 @@
 #import "ORKAnswerTextField.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKPlacemark.h"
 
 
 static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
@@ -115,6 +116,10 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 - (void)setTextColor:(UIColor *)color {
     _textField.textColor = color;
+}
+
+- (NSString *)enteredLocation {
+    return [_textField.text copy];
 }
 
 - (BOOL)becomeFirstResponder {
@@ -201,7 +206,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
             [strongSelf setAnswer:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[MKPlacemark alloc] initWithPlacemark:placemark]];
+            [strongSelf setAnswer:[[ORKPlacemark alloc] initWithPlacemark:placemark]];
         }
     }];
 }
@@ -224,12 +229,12 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
             [strongSelf setAnswer:nil];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[MKPlacemark alloc] initWithPlacemark:placemark]];
+            [strongSelf setAnswer:[[ORKPlacemark alloc] initWithPlacemark:placemark]];
         }
     }];
 }
 
-- (void)setAnswer:(MKPlacemark *)answer {
+- (void)setAnswer:(ORKPlacemark *)answer {
     
     if (_answer) {
         [_mapView removeAnnotation:_answer];

@@ -41,7 +41,7 @@
 
 
 @class ORKLocationSelectionView;
-@class MKPlacemark;
+@class ORKPlacemark;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id<ORKLocationSelectionViewDelegate> delegate;
 
-@property (nonatomic, strong, nullable) MKPlacemark *answer;
+@property (nonatomic, strong, nullable) ORKPlacemark *answer;
 
 @property (nonatomic, assign) BOOL edgeToEdgeMap;
 
@@ -82,6 +82,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setTextColor:(UIColor *)color;
 
 - (void)showMapView;
+
+- (NSString *)enteredLocation;
 
 @end
 

@@ -47,7 +47,8 @@
 #import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKLocationSelectionView.h"
-#import "MKPlacemark+ORKStringConversion.h"
+#import "ORKPlacemark.h"
+#import <AddressBookUI/AddressBookUI.h>
 #import <MapKit/MapKit.h>
 
 
@@ -1287,20 +1288,21 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKLocationAnswerFormat *locationFormat = (ORKLocationAnswerFormat *)answerFormat;
     
     MKPlacemark *placemark = (MKPlacemark *)answer;
-    NSString *string = [placemark ork_JSONStringValue];
     
-    return [locationFormat isAnswerValidWithString:string];
+    return [locationFormat isAnswerValid:placemark];
 }
 
 - (BOOL)shouldContinue {
     BOOL isValid = [self isAnswerValid];
     
     if (!isValid) {
-        id answer = self.answer;
-        MKPlacemark *placemark = (MKPlacemark *)answer;
-        NSString *message = [placemark ork_JSONStringValue];
-        
-        NSString *localizedMessage = [[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:message];
+        NSString *address = nil;
+        if (((MKPlacemark *)self.answer).addressDictionary) {
+            address = ABCreateStringWithAddressDictionary(((MKPlacemark *)self.answer).addressDictionary, NO);
+        } else {
+            address = [_selectionView enteredLocation];
+        }
+        NSString *localizedMessage = [[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:address];
         
         [self showValidityAlertWithMessage:localizedMessage];
     }

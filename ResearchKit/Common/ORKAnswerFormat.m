@@ -37,7 +37,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
-#import "MKPlacemark+ORKStringConversion.h"
+#import "ORKPlacemark.h"
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -2134,14 +2134,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (BOOL)isAnswerValidWithString:(nullable NSString *)text {
-    BOOL isValid = [super isAnswerValidWithString:text];
+- (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = [super isAnswerValid:answer];
     
-    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithJSONString:text];
-    
-    if (placemark && CLLocationCoordinate2DIsValid(placemark.coordinate)) {
-        isValid = YES;
-    } else {
+    if (![[ORKPlacemark alloc] initWithPlacemark:(MKPlacemark *)answer]) {
         isValid = NO;
     }
     
@@ -2153,36 +2149,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
     
-    MKPlacemark *placemark = [MKPlacemark ork_placemarkWithJSONString:text];
-    CLLocationCoordinate2D coordinate = placemark.location.coordinate;
-    NSMutableString *string = [NSMutableString new];
-    
-    if (coordinate.latitude < -90.0) {
-        [string appendString:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_BELOW_MINIMUM", nil)];
-    }
-    if (coordinate.latitude > 90.0) {
-        if (string.length > 0) {
-            [string appendString:@" "];
-        }
-        [string appendString:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LATITUDE_ABOVE_MAXIMUM", nil)];
-    }
-    if (coordinate.longitude < -180.0) {
-        if (string.length > 0) {
-            [string appendString:@" "];
-        }
-        [string appendString:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_BELOW_MINIMUM", nil)];
-    }
-    if (coordinate.longitude > 180.0) {
-        if (string.length > 0) {
-            [string appendString:@" "];
-        }
-        [string appendString:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_LONGITUDE_ABOVE_MAXIMUM", nil)];
-    }
-    if (CLLocationCoordinate2DIsValid(coordinate) && text.length == 0) {
-        [string appendString:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE_OTHER", nil)];
-    }
-    
-    return string;
+    return [NSString stringWithFormat:ORKLocalizedString(@"LOCATION_ALERT_MESSAGE", nil), text];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
