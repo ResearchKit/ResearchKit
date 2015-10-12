@@ -170,21 +170,32 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (void)fetchDefaultValueForAnswerFormat:(ORKAnswerFormat *)answerFormat handler:(void(^)(id defaultValue, NSError *error))handler {
-    HKObjectType *objectType = [answerFormat healthKitObjectType];
     BOOL handled = NO;
-    if (objectType) {
-        if ([HKHealthStore isHealthDataAvailable]) {
-            if ([answerFormat isKindOfClass:[ORKHealthKitCharacteristicTypeAnswerFormat class]]) {
-                NSError *error = nil;
-                id defaultValue = [self defaultValueForCharacteristicType:(HKCharacteristicType *)objectType error:&error];
-                handler(defaultValue, error);
-                handled = YES;
-            } else if ([answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
-                [self updateHealthKitUnitForAnswerFormat:answerFormat force:NO];
-                HKUnit *unit = [answerFormat healthKitUserUnit];
-                [self fetchDefaultValueForQuantityType:(HKQuantityType *)objectType unit:unit handler:handler];
-                handled = YES;
-            }
+    if ([answerFormat isKindOfClass:[ORKScaleAnswerFormat class]]) {
+        ORKScaleAnswerFormat *scaleAnswerFormat = (ORKScaleAnswerFormat *)answerFormat;
+        if (scaleAnswerFormat.defaultValue >= scaleAnswerFormat.minimum && scaleAnswerFormat.defaultValue <= scaleAnswerFormat.maximum) {
+            handler(@(scaleAnswerFormat.defaultValue), nil);
+            handled = YES;
+        }
+    } else if ([answerFormat isKindOfClass:[ORKContinuousScaleAnswerFormat class]]) {
+        ORKContinuousScaleAnswerFormat *scaleAnswerFormat = (ORKContinuousScaleAnswerFormat *)answerFormat;
+        if (scaleAnswerFormat.defaultValue >= scaleAnswerFormat.minimum && scaleAnswerFormat.defaultValue <= scaleAnswerFormat.maximum) {
+            handler(@(scaleAnswerFormat.defaultValue), nil);
+            handled = YES;
+        }
+    } else
+        if ([answerFormat isKindOfClass:[ORKHealthKitCharacteristicTypeAnswerFormat class]] || [answerFormat isKindOfClass:[ORKHealthKitQuantityTypeAnswerFormat class]]) {
+        HKObjectType *healthKitObjectType = [answerFormat healthKitObjectType];
+        if (healthKitObjectType && [HKHealthStore isHealthDataAvailable]) {
+            NSError *error = nil;
+            id defaultValue = [self defaultValueForCharacteristicType:(HKCharacteristicType *)healthKitObjectType error:&error];
+            handler(defaultValue, error);
+            handled = YES;
+        } else if (healthKitObjectType && [HKHealthStore isHealthDataAvailable]) {
+            [self updateHealthKitUnitForAnswerFormat:answerFormat force:NO];
+            HKUnit *unit = [answerFormat healthKitUserUnit];
+            [self fetchDefaultValueForQuantityType:(HKQuantityType *)healthKitObjectType unit:unit handler:handler];
+            handled = YES;
         }
     }
     if (!handled) {

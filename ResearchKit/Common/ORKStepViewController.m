@@ -264,12 +264,11 @@
 }
 
 - (ORKStepResult *)result {
+    ORKStepResult *stepResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
+    stepResult.startDate = self.presentedDate;
+    stepResult.endDate = self.dismissedDate? :[NSDate date];
     
-    ORKStepResult *sResult = [[ORKStepResult alloc] initWithStepIdentifier:self.step.identifier results:@[]];
-    sResult.startDate = self.presentedDate;
-    sResult.endDate = self.dismissedDate? :[NSDate date];
-    
-    return sResult;
+    return stepResult;
 }
 
 - (void)notifyDelegateOnResultChange {
