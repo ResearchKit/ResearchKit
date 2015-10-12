@@ -150,7 +150,6 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
         _continueSkipView.continueEnabled = YES;
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        _continueSkipView.hidden = self.parentReviewStep;
         [_tableContainer setNeedsLayout];
     }
 }
