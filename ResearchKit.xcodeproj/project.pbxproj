@@ -474,6 +474,7 @@
 		CA8D0E8B1BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E891BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m */; };
 		CA8D0E921BC4360F00BED0F7 /* ORKWaitStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */; };
 		CA8D0E931BC4360F00BED0F7 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */; };
+		CAA870CD1BCBE96400D0FC28 /* MKPlacemark+ORKStringConversionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA870CC1BCBE96400D0FC28 /* MKPlacemark+ORKStringConversionTests.m */; settings = {ASSET_TAGS = (); }; };
 		CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */; };
 		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1014,6 +1015,7 @@
 		CA8D0E891BC3FFDE00BED0F7 /* MKPlacemark+ORKStringConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "MKPlacemark+ORKStringConversion.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKWaitStepView.h; path = ../Common/ORKWaitStepView.h; sourceTree = "<group>"; };
 		CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKWaitStepView.m; path = ../Common/ORKWaitStepView.m; sourceTree = "<group>"; };
+		CAA870CC1BCBE96400D0FC28 /* MKPlacemark+ORKStringConversionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPlacemark+ORKStringConversionTests.m"; sourceTree = "<group>"; };
 		CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKWaitStep.h; path = ../Common/ORKWaitStep.h; sourceTree = "<group>"; };
 		CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKWaitStep.m; path = ../Common/ORKWaitStep.m; sourceTree = "<group>"; };
 		CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKWaitStepViewController.h; path = ../Common/ORKWaitStepViewController.h; sourceTree = "<group>"; };
@@ -1393,6 +1395,7 @@
 			children = (
 				FA7A9D351B09362D005A2BEA /* Consent */,
 				86CC8EA71AC09383001CCD89 /* Info.plist */,
+				CAA870CC1BCBE96400D0FC28 /* MKPlacemark+ORKStringConversionTests.m */,
 				86CC8EA81AC09383001CCD89 /* ORKAccessibilityTests.m */,
 				248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */,
 				86CC8EA91AC09383001CCD89 /* ORKChoiceAnswerFormatHelperTests.m */,
@@ -2647,6 +2650,7 @@
 				FA7A9D371B09365F005A2BEA /* ORKConsentSectionFormatterTests.m in Sources */,
 				86D348021AC161B0006DB02B /* ORKRecorderTests.m in Sources */,
 				86CC8EB61AC09383001CCD89 /* ORKDataLoggerManagerTests.m in Sources */,
+				CAA870CD1BCBE96400D0FC28 /* MKPlacemark+ORKStringConversionTests.m in Sources */,
 				86CC8EB31AC09383001CCD89 /* ORKAccessibilityTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
