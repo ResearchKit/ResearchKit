@@ -43,7 +43,6 @@
 #import <ResearchKit/ORKInstructionStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
-#import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
 #import <ResearchKit/ORKWaitStepViewController.h>
 

@@ -30,49 +30,10 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import "ORKLoginStepViewController.h"
 
 
-NS_ASSUME_NONNULL_BEGIN
+@interface ORKFormStepViewController ()
 
-/**
- The `ORKLoginStep` class represents a form step that provides fields commonly used
- for account login.
- 
- The login step contains email and password fields.
- */
-ORK_CLASS_AVAILABLE
-@interface ORKLoginStep : ORKFormStep
-
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
-
-- (instancetype)initWithIdentifier:(NSString *)identifier title:(nullable NSString *)title text:(nullable NSString *)text NS_UNAVAILABLE;
-
-/**
- Returns an initialized registrationg step using the specified identifier,
- title, text, and options.
- 
- @param identifier                      The string that identifies the step (see `ORKStep`).
- @param title                           The title of the form (see `ORKStep`).
- @param text                            The text shown immediately below the title (see `ORKStep`).
- @param email                           The email address that needs to be verified.
- @param loginStepViewControllerClass    The login step view controller class.
- 
- @return As initialized verification step object.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text
-          loginViewControllerClass:(Class)loginViewControllerClass;
-
-/**
- The view controller subclass used for the step.
- 
- The subclass allows you to override button actions in order to provide navigation and logic
- for the button items on the step.
- */
-@property (nonatomic, readonly) Class loginViewControllerClass;
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem;
 
 @end
-
-NS_ASSUME_NONNULL_END

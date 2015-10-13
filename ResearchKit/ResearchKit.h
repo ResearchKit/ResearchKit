@@ -50,6 +50,7 @@
 
 #import <ResearchKit/ORKTaskViewController.h>
 #import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKFormStepViewController.h>
 
 #import <ResearchKit/ORKConsentDocument.h>
 #import <ResearchKit/ORKConsentSignature.h>

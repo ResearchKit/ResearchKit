@@ -43,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  email button. The button actions must be overriden inside a subclassed verification
  view controller to provide navigation logic.
  */
+ORK_CLASS_AVAILABLE
 @interface ORKVerificationStep : ORKStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
@@ -63,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
                              email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController;
+   verificationViewControllerClass:(Class)verificationViewControllerClass;
 
 /**
  The email used for the step.
@@ -78,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  The subclass allows you to override button actions in order to provide navigation and logic
  for the button items on the step.
  */
-@property (nonatomic, readonly) ORKVerificationStepViewController *verificationViewController;
+@property (nonatomic, readonly) Class verificationViewControllerClass;
 
 @end
 

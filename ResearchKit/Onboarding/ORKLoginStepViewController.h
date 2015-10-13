@@ -29,21 +29,20 @@
  */
 
 
-#import "ORKStepViewController.h"
+#import <ResearchKit/ResearchKit.h>
 
 
 /**
- The `ORKLoginStepViewController` class is the concrete `ORKFormStepViewController`
+ The `ORKLoginStepViewController` class is the concrete `ORKStepViewController`
  implementation for `ORKLoginStep`.
  
  You should subclass a login step view controller and override the button action
  methods to provide your navigation logic.
  */
-ORK_CLASS_AVAILABLE
-@interface ORKLoginStepViewController : ORKStepViewController
+@interface ORKLoginStepViewController : ORKFormStepViewController
 
 /**
- Action method for the continue button.
+ Action method for the forgot password button.
  
  Override this method to provide custom logic for the button action.
  */

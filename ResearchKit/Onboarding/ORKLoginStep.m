@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -37,7 +37,7 @@
 @implementation ORKLoginStep
 
 - (Class)stepViewControllerClass {
-    return [_loginViewController class];
+    return _loginViewControllerClass;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -47,13 +47,20 @@
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
+                              text:(NSString *)text {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
                               text:(NSString *)text
-               loginViewController:(ORKLoginStepViewController *)loginViewController {
+          loginViewControllerClass:(Class)loginViewControllerClass {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
-        _loginViewController = loginViewController;
+        _loginViewControllerClass = loginViewControllerClass;
     }
     return self;
 }
@@ -101,19 +108,19 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, loginViewController);
+        ORK_DECODE_OBJ(aDecoder, loginViewControllerClass);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, loginViewController);
+    ORK_ENCODE_OBJ(aCoder, loginViewControllerClass);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLoginStep *step = [super copyWithZone:zone];
-    step->_loginViewController = self.loginViewController;
+    step->_loginViewControllerClass = self.loginViewControllerClass;
     return step;
 }
 
@@ -122,7 +129,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.loginViewController, castObject.loginViewController));
+            ORKEqualObjects(self.loginViewControllerClass, castObject.loginViewControllerClass));
 }
 
 @end

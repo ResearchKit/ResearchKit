@@ -30,26 +30,21 @@
 
 
 #import "ORKLoginStepViewController.h"
-#import "ORKStepViewController_Internal.h"
-#import "ORKLoginStep.h"
 #import "ORKDefines_Private.h"
+#import "ORKFormStepViewController_Internal.h"
 
 
 @implementation ORKLoginStepViewController
 
-- (ORKLoginStep *)loginStep {
-    return (ORKLoginStep *)self.step;
-}
-
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
     
+    [skipButtonItem setTitle:ORKLocalizedString(@"FORGOT_PASSWORD_BUTTON_TITLE", nil)];
     [skipButtonItem setTarget:self];
     [skipButtonItem setAction:@selector(forgotPasswordButtonHandler:)];
-    skipButtonItem.title = ORKLocalizedString(@"FORGOT_PASSWORD_BUTTON_TITLE", nil);
 }
 
-- (void)forgotPasswordButtonHandler:(id)sender {
+- (void)forgotPasswordButtonHandler:(id)sender{
     [self forgotPasswordButtonTapped];
 }
 

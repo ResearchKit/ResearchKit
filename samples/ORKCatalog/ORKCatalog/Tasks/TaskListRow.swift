@@ -1036,13 +1036,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         class verificationViewController : ORKVerificationStepViewController {
             override func changeEmailButtonTapped() {
-                let alert = UIAlertController(title: "Wrong email address?", message: "Button tapped", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertTitle = NSLocalizedString("Wrong email address?", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             
             override func resendEmailButtonTapped() {
-                let alert = UIAlertController(title: "Resend Verification Email", message: "Button tapped", preferredStyle: UIAlertControllerStyle.Alert)
+                let alertTitle = NSLocalizedString("Resend Verification Email", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
@@ -1054,7 +1058,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         }
         
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewController: verificationViewController())
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewControllerClass: verificationViewController.self)
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
@@ -1067,12 +1071,16 @@ enum TaskListRow: Int, CustomStringConvertible {
     private var loginTask: ORKTask {
         /*
         A login step view controller sub class is required in order to use a login step.
-        This class includes a method that interact with the 'Forgot password?' button in the view.
-        Overriding this method allows for your desired functionality.
+        This class includes methods that interact with the buttons in the view.
+        Overriding these methods allows for your desired functionality.
         */
-        class loginViewController: ORKLoginStepViewController {
+        class loginViewController : ORKLoginStepViewController {
             override func forgotPasswordButtonTapped() {
-                print("Forgot password button tapped")
+                let alertTitle = NSLocalizedString("Forgot password?", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
         
@@ -1081,7 +1089,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         and a button for `Forgot password?`.
         */
         let loginTitle = NSLocalizedString("Login", comment: "")
-        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewController:loginViewController())
+        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: loginViewController.self)
         return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep])
     }
     
