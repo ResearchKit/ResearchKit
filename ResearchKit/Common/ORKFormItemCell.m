@@ -1186,7 +1186,6 @@ static const CGFloat HorizontalMargin = 15.0;
         [_selectionView setPlaceholderText:self.formItem.placeholder];
     }
     
-    [self answerDidChange];
     [self setUpConstraints];
 }
 

@@ -240,9 +240,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 - (void)setAnswer:(id)answer {
     
-    if (_answer && _answer != ORKNullAnswerValue()) {
-        [_mapView removeAnnotation:_answer];
-    }
+    [_mapView removeAnnotations:_mapView.annotations];
     
     if ([[answer class] isSubclassOfClass:[CLPlacemark class]]) {
         _answer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
