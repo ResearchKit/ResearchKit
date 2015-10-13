@@ -195,7 +195,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 - (void)geocodeAndDisplay:(NSString *)string {
     
     if (string == nil || string.length == 0) {
-        [self setAnswer:nil];
+        [self setAnswer:ORKNullAnswerValue()];
         return;
     }
     
@@ -207,10 +207,10 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
             if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
                 [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [strongSelf setAnswer:nil];
+            [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKPlacemark alloc] initWithPlacemark:placemark]];
+            [strongSelf setAnswer:placemark];
         }
     }];
 }
@@ -218,7 +218,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 - (void)reverseGeocodeAndDisplay:(CLLocation *)location {
     
     if (location == nil) {
-        [self setAnswer:nil];
+        [self setAnswer:ORKNullAnswerValue()];
         return;
     }
     
@@ -230,45 +230,54 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
             if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
                 [_delegate locationSelectionView:self didFailWithError:error];
             }
-            [strongSelf setAnswer:nil];
+            [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKPlacemark alloc] initWithPlacemark:placemark]];
+            [strongSelf setAnswer:placemark];
         }
     }];
 }
 
-- (void)setAnswer:(ORKPlacemark *)answer {
+- (void)setAnswer:(id)answer {
     
-    if (_answer) {
+    if (_answer && _answer != ORKNullAnswerValue()) {
         [_mapView removeAnnotation:_answer];
     }
     
-    _answer = answer;
+    if ([[answer class] isSubclassOfClass:[CLPlacemark class]]) {
+        _answer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
+    } else {
+        _answer = answer == ORKNullAnswerValue() ? ORKNullAnswerValue() : nil;
+    }
     
     if (_answer) {
-        [_mapView addAnnotation:_answer];
+        _userLocationNeedsUpdate = NO;
+    }
+    
+    if ([[_answer class] isSubclassOfClass:[CLPlacemark class]]) {
+        ORKPlacemark *placemarkAnswer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
+        [_mapView addAnnotation:placemarkAnswer];
         
         float spanX = 0.00725;
         float spanY = 0.00725;
         MKCoordinateRegion region;
-        region.center.latitude = answer.location.coordinate.latitude;
-        region.center.longitude = answer.location.coordinate.longitude;
+        region.center.latitude = placemarkAnswer.location.coordinate.latitude;
+        region.center.longitude = placemarkAnswer.location.coordinate.longitude;
         region.span = MKCoordinateSpanMake(spanX, spanY);
         _answerRegion = region;
         [_mapView setRegion:region animated:YES];
         
-        if (answer.addressDictionary) {
-            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(answer.addressDictionary, NO)];
+        if (placemarkAnswer.addressDictionary) {
+            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemarkAnswer.addressDictionary, NO)];
         } else {
-            CLLocationCoordinate2D coordinate = answer.location.coordinate;
+            CLLocationCoordinate2D coordinate = placemarkAnswer.location.coordinate;
             CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
             [self reverseGeocodeAndDisplay:location];
         }
-        
-        _userLocationNeedsUpdate = NO;
     } else {
-        [_mapView setRegion:_initalCoordinateRegion animated:YES];
+        if (_setInitialCoordinateRegion) {
+            //[_mapView setRegion:_initalCoordinateRegion animated:YES];
+        }
     }
     
     if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
@@ -327,7 +336,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     [_mapView setRegion:_initalCoordinateRegion animated:YES];
-    [self setAnswer:nil];
+    [self setAnswer:ORKNullAnswerValue()];
     return YES;
 }
 

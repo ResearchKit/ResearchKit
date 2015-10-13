@@ -1215,13 +1215,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)answerDidChange {
-    id answer = self.answer;
-    
-    if (ORKIsAnswerEmpty(answer)) {
-        answer = nil;
-    }
-    
-    _selectionView.answer = (MKPlacemark *)answer;
+    _selectionView.answer = self.answer;
     [_selectionView setTextColor:[UIColor blackColor]];
 }
 
@@ -1263,7 +1257,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)inputValueDidChange {
-    [self ork_setAnswer:((_selectionView.answer != nil) ? _selectionView.answer : ORKNullAnswerValue())];
+    [self ork_setAnswer:_selectionView.answer];
     [super inputValueDidChange];
 }
 

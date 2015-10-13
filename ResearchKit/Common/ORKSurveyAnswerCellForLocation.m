@@ -102,23 +102,13 @@
 }
 
 - (void)answerDidChange {
-    id answer = self.answer;
-    
-    id displayValue = (answer && answer != ORKNullAnswerValue()) ? answer : nil;
-    if ([displayValue isKindOfClass:[MKPlacemark class]]) {
-        _selectionView.answer = [[ORKPlacemark alloc] initWithPlacemark:(MKPlacemark *)answer];
-    }
-    
+    _selectionView.answer = self.answer;
     NSString *placeholder = self.step.placeholder? : ORKLocalizedString(@"PLACEHOLDER_TEXT_OR_NUMBER", nil);
     [_selectionView setPlaceholderText:placeholder];
 }
 
 - (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view {
-    if (_selectionView.answer != nil) {
-        [self ork_setAnswer:_selectionView.answer];
-    } else {
-        [self ork_setAnswer:ORKNullAnswerValue()];
-    }
+    [self ork_setAnswer:_selectionView.answer];
 }
 
 - (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {

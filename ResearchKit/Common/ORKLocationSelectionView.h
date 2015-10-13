@@ -41,7 +41,6 @@
 
 
 @class ORKLocationSelectionView;
-@class ORKPlacemark;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -69,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak, nullable) id<ORKLocationSelectionViewDelegate> delegate;
 
-@property (nonatomic, strong, nullable) ORKPlacemark *answer;
+@property (nonatomic, strong, nullable) id answer;
 
 @property (nonatomic, assign) BOOL edgeToEdgeMap;
 
