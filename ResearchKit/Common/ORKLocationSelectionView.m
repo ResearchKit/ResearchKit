@@ -147,7 +147,6 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     _mapView = [[MKMapView alloc] init];
     _mapView.delegate = self;
     _mapView.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, 0.0);
-    _mapView.userInteractionEnabled = NO;
     ORKEnableAutoLayoutForViews(@[_mapView]);
     
     if (!_edgeToEdgeMap) {
@@ -263,6 +262,10 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
         region.center.longitude = placemarkAnswer.location.coordinate.longitude;
         region.span = MKCoordinateSpanMake(spanX, spanY);
         _answerRegion = region;
+        if (!_setInitialCoordinateRegion) {
+            _setInitialCoordinateRegion = YES;
+            _initalCoordinateRegion = _mapView.region;
+        }
         [_mapView setRegion:region animated:YES];
         
         if (placemarkAnswer.addressDictionary) {
@@ -300,13 +303,6 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
         [_mapView setRegion:reigon animated:YES];
         [self reverseGeocodeAndDisplay:userLocation.location];
         _userLocationNeedsUpdate = NO;
-    }
-}
-
-- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
-    if (!_setInitialCoordinateRegion) {
-        _setInitialCoordinateRegion = YES;
-        _initalCoordinateRegion = _mapView.region;
     }
 }
 
