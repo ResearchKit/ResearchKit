@@ -170,19 +170,22 @@ static NSString *const _FamilyNameIdentifier = @"family";
     nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
     nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
     nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-    ORKFormItem *givenName = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
+    ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                       answerFormat:nameAnswerFormat];
-    givenName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
-    ORKFormItem *familyName = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
+    ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
                                                              text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                      answerFormat:nameAnswerFormat];
-    familyName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
-    NSArray *formItems = @[givenName, familyName];
+    givenNameFormItem.optional = NO;
+    familyNameFormItem.optional = NO;
+    
+    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
     if (ORKCurrentLocalePresentsFamilyNameFirst()) {
-        formItems = @[familyName, givenName];
+        formItems = @[familyNameFormItem, givenNameFormItem];
     }
     
     [formStep setFormItems:formItems];

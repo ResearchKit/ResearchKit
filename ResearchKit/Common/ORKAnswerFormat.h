@@ -249,7 +249,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression validInputDescription:(NSString *)description;
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
@@ -1192,32 +1192,18 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param expression                The regular expression used to valide the text.
- @param description               The description of the valid input presented to the user upon invalid input.
+ @param expression                The regular expression used to validate the text.
+ @param invalidMessage            The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
 - (instancetype)initWithValidationExpression:(NSString *)expression
-                       validInputDescription:(NSString *)description NS_DESIGNATED_INITIALIZER;
-
-/**
- The regex used to validate user's input.
- 
- The default value is nil. If set to nil, no validation will be performed.
- */
-@property (readonly) NSString *regex;
-
-/**
- The text presented to the user that describes what the valid input is.
- 
- The default value is nil.
- */
-@property (readonly) NSString *invalidMessage;
+                              invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
  
- This method is the designated initializer.
+ This method is one of the designated initializers.
  
  @param maximumLength   The maximum number of characters to accept. When the value of this parameter
                             is 0, there is no maximum.
@@ -1227,11 +1213,25 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
 /**
- The maximum length of the text users can enter. (read-only)
+ The regex used to validate user's input.
+ 
+ The default value is nil. If set to nil, no validation will be performed.
+ */
+@property (nonatomic, copy, nullable) NSString *regex;
+
+/**
+ The text presented to the user when invalid input is received.
+ 
+ The default value is nil.
+ */
+@property (nonatomic, copy, nullable) NSString *invalidMessage;
+
+/**
+ The maximum length of the text users can enter.
  
  When the value of this property is 0, there is no maximum.
  */
-@property (readwrite) NSInteger maximumLength;
+@property NSInteger maximumLength;
 
 /**
  A Boolean value indicating whether to expect more than one line of input.

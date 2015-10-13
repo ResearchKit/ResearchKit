@@ -385,8 +385,14 @@ ret =
              return [[ORKPasscodeStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
          },
          (@{
-           PROPERTY(identifier, NSString, NSObject, NO, nil, nil),
            PROPERTY(passcodeType, NSNumber, NSObject, YES, nil, nil)
+           })),
+   ENTRY(ORKWaitStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKWaitStep alloc] initWithIdentifier:GETPROP(dict, identifier)];
+         },
+         (@{
+           PROPERTY(indicatorType, NSNumber, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKRecorderConfiguration,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -828,12 +834,13 @@ ret =
         },
         (@{
           PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
+          PROPERTY(regex, NSString, NSObject, YES, nil, nil),
+          PROPERTY(invalidMessage, NSString, NSObject, YES, nil, nil),
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(spellCheckingType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(keyboardType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(multipleLines, NSNumber, NSObject, YES, nil, nil),
-          PROPERTY(emailAddress, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(secureTextEntry, NSNumber, NSObject, YES, nil, nil)
           })),
    ENTRY(ORKEmailAnswerFormat,
