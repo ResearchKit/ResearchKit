@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_ADDRESS" = "Enter an address";
-"LOCATION_ERROR_TITLE" = "Location error";
+"LOCATION_ERROR_TITLE" = "Failed to Resolve Specified Address";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
