@@ -300,6 +300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
                            @"Test Charts",
+                           @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
                            ],
@@ -3427,7 +3428,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 - (void)testChartsButtonTapped:(id)sender {
     UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+- (void)testChartsPerformanceButtonTapped:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
     [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
