@@ -130,6 +130,10 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     return [_textField isFirstResponder];
 }
 
+- (BOOL)resignFirstResponder {
+    return [_textField resignFirstResponder];
+}
+
 - (CGSize)intrinsicContentSize {
     CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView == nil ? 0.0 : LocationSelectionViewMapViewHeight);
     return CGSizeMake(40, height);

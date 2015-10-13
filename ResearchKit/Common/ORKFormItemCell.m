@@ -1272,9 +1272,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)resignFirstResponder {
-    BOOL resign = [super resignFirstResponder];
-    resign = [_selectionView resignFirstResponder] || resign;
-    return resign;
+    return [_selectionView resignFirstResponder];
 }
 
 @end
