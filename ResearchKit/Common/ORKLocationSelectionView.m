@@ -274,7 +274,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
         }
     } else {
         if (_setInitialCoordinateRegion) {
-            //[_mapView setRegion:_initalCoordinateRegion animated:YES];
+            [_mapView setRegion:_initalCoordinateRegion animated:YES];
         }
     }
     

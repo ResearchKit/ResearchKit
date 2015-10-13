@@ -1215,7 +1215,6 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)answerDidChange {
     _selectionView.answer = self.answer;
-    [_selectionView setTextColor:[UIColor blackColor]];
 }
 
 - (void)setEditingHighlight:(BOOL)editingHighlight {
