@@ -174,7 +174,7 @@ continuous scale on that range, so you can use scale answer format (`ORKScaleAns
 to reflect the desired range.  
 The following are the rules bound with scale answer format -
 
-* Minimum number off step in a task should not be less than 1.
+* Minimum number of step in a task should not be less than 1.
 * Minimum step count  should not be less than 1.
 * Maximum step count should not be more than 13.
 * The lower bound value in scale answer format cannot be lower than - 10000.

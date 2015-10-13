@@ -441,12 +441,13 @@ ORK_CLASS_AVAILABLE
 @property (readonly, getter=isVertical) BOOL vertical;
 
 /**
- Formatting style applied to the minimum, maximum, and slider values.
+ A formatting style applied to the minimum, maximum, and slider values.
  */
 @property ORKNumberFormattingStyle numberStyle;
 
 /**
- Number formatter applied to the minimum, maximum, and slider values. Can be overridden by subclasses.
+ A number formatter applied to the minimum, maximum, and slider values. 
+ @discussion This property can be overridden by subclasses.
  */
 @property (readonly) NSNumberFormatter *numberFormatter;
 
@@ -461,14 +462,14 @@ ORK_CLASS_AVAILABLE
 @property (readonly, nullable) NSString *minimumValueDescription;
 
 /**
- An image for the upper bound of the slider. The recommended image size is 30 x 30 points.
- The maximum range label will not be visible.
+ An image for the upper bound of the slider. 
+ @discussion The recommended image size is 30 x 30 points. The maximum range label will not be visible.
  */
 @property (strong, nullable) UIImage *maximumImage;
 
 /**
- An image for the lower bound of the slider. The recommended image size is 30 x 30 points.
- The minimum range label will not be visible.
+ An image for the lower bound of the slider. 
+ @discussion The recommended image size is 30 x 30 points. The minimum range label will not be visible.
  */
 @property (strong, nullable) UIImage *minimumImage;
 

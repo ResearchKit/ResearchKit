@@ -46,14 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
                                         one or more step results in the ongoing task.
  @param destinationStepIdentifiers  An array of possible destination step identifiers. This array
                                         must contain one step identifier for each of the predicates
-                                        in `resultPredicates`.
- @param defaultStepIdentifier       The identifier of the step which will be used if none of the
+                                        in the `resultPredicates` parameter.
+ @param defaultStepIdentifier       The identifier of the step which is used if none of the
                                     result predicates match. If this argument is `nil` and none
                                     of the predicates match, the default ordered task navigation
-                                    behavior takes place (i.e, the task goes to the next step in
+                                    behavior takes place (that is, the task goes to the next step in
                                     order).
- @param validateArrays              `YES` to throw an exception if `resultPredicates` or
-                                        `destinationStepIdentifiers` are `nil` or empty; `NO` to skip
+ @param validateArrays              `YES` to throw an exception if result predicates or
+                                        destination step identifiers are `nil` or empty; `NO` to skip
                                         their validation.
  
  @return An initialized predicate step navigation rule.
