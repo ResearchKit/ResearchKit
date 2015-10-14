@@ -484,11 +484,6 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @implementation ORKFormItemConfirmTextCell
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    NSDictionary *savedAnswers = *self.savedAnswers;
-    return !ORKIsAnswerEmpty(savedAnswers[@"password"]);
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [super textFieldShouldEndEditing:textField];
     if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
@@ -521,7 +516,7 @@ static const CGFloat HorizontalMargin = 15.0;
         ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
         NSString *originalItemIdentifier = [answerFormat.originalItemIdentifier copy];
         NSString *originalPassword = savedAnswers[originalItemIdentifier];
-        if ([originalPassword isEqualToString:string]) {
+        if (originalPassword != ORKNullAnswerValue() && [originalPassword isEqualToString:string]) {
             isValid = YES;
         }
     }
