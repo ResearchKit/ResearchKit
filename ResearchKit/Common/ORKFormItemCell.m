@@ -1042,11 +1042,11 @@ static const CGFloat HorizontalMargin = 15.0;
         [_sliderView setCurrentAnswerValue:answer];
 
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [_sliderView setCurrentNumberValue:[formatProvider defaultNumber]];
+        if (answer == nil && [formatProvider defaultAnswer]) {
+            [_sliderView setCurrentAnswerValue:[formatProvider defaultAnswer]];
             [self ork_setAnswer:_sliderView.currentAnswerValue];
         } else {
-            [_sliderView setCurrentNumberValue:nil];
+            [_sliderView setCurrentAnswerValue:nil];
         }
     }
 }

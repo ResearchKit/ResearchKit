@@ -72,8 +72,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKScaleValueLabel *valueLabel;
 
-- (void)setCurrentNumberValue:(nullable NSNumber *)number;
-
 // Accepts NSNumber for continous scale or discrete scale.
 // Accepts NSArray<id<NSCopying, NSCoding, NSObject>> for text scale.
 @property (nonatomic, strong, nullable) id currentAnswerValue;

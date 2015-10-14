@@ -85,11 +85,11 @@
     if (answer && answer != ORKNullAnswerValue()) {
         [_sliderView setCurrentAnswerValue:answer];
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [self.sliderView setCurrentNumberValue:[formatProvider defaultNumber]];
+        if (answer == nil && [formatProvider defaultAnswer]) {
+            [self.sliderView setCurrentAnswerValue:[formatProvider defaultAnswer]];
             [self ork_setAnswer:self.sliderView.currentAnswerValue];
         } else {
-           [self.sliderView setCurrentNumberValue:nil];
+           [self.sliderView setCurrentAnswerValue:nil];
         }
     }
 }

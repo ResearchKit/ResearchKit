@@ -1389,7 +1389,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(_maximum);
 }
-- (NSNumber *)defaultNumber {
+- (NSNumber *)defaultAnswer {
     if ( _defaultValue > _maximum || _defaultValue < _minimum) {
         return nil;
     }
@@ -1594,7 +1594,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(_maximum);
 }
-- (NSNumber *)defaultNumber {
+- (NSNumber *)defaultAnswer {
     if ( _defaultValue > _maximum || _defaultValue < _minimum) {
         return nil;
     }
@@ -1756,12 +1756,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(self.textChoices.count);
 }
-- (NSNumber *)defaultNumber {
+- (id<NSObject, NSCopying, NSCoding>)defaultAnswer {
     if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
-    // slider's minimumNumber is 1
-    return @(_defaultIndex + 1);
+   
+    return @[[self.textChoices objectAtIndex:_defaultIndex].value];
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [self.numberFormatter stringFromNumber:number];
