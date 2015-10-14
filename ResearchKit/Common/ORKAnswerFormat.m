@@ -1394,7 +1394,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
     
-    NSInteger integer = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
+    NSInteger integer = round( (double)( _defaultValue - _minimum ) / (double)_step ) * _step + _minimum;
     
     return @(integer);
 }
@@ -1767,10 +1767,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    return ((ORKTextChoice *)[self.textChoices firstObject]).text;
+    return ([self.textChoices firstObject]).text;
 }
 - (NSString *)maximumValueDescription {
-    return ((ORKTextChoice *)[self.textChoices lastObject]).text;
+    return ([self.textChoices lastObject]).text;
 }
 - (UIImage *)minimumImage {
     return nil;
