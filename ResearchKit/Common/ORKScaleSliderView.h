@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface ORKScaleSliderView : UIView
 
 - (instancetype)initWithFormatProvider:(id<ORKScaleAnswerFormatProvider>)formatProvider delegate:(id<ORKScaleSliderViewDelegate>)delegate;

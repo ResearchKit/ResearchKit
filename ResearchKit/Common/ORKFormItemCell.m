@@ -107,8 +107,8 @@ static const CGFloat HorizontalMargin = 15.0;
                                delegate:(id<ORKFormItemCellDelegate>)delegate {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Setting `delegate` during init is required.
-        // Some question need this to report its default answer to ORKFormStepViewController;
+        // Setting the 'delegate' on init is required, as some questions (such as the scale questions)
+        // need it when they wish to report their default answers to 'ORKFormStepViewController'.
         _delegate = delegate;
         
         _maxLabelWidth = maxLabelWidth;
@@ -986,6 +986,7 @@ static const CGFloat HorizontalMargin = 15.0;
 @interface ORKFormItemScaleCell () <ORKScaleSliderViewDelegate>
 
 @end
+
 
 @implementation ORKFormItemScaleCell {
     ORKScaleSliderView *_sliderView;

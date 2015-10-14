@@ -151,6 +151,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 @end
 
+
 @interface ORKTextScaleAnswerFormat () <ORKScaleAnswerFormatProvider>
 
 @end
@@ -209,6 +210,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 - (void)updateHealthKitUnitForAnswerFormat:(ORKAnswerFormat *)answerFormat force:(BOOL)force;
 
 @end
+
 
 NS_ASSUME_NONNULL_END
 
