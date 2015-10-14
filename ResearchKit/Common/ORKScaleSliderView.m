@@ -77,7 +77,7 @@
         BOOL isVertical = [formatProvider isVertical];
         _slider.vertical = isVertical;
 
-        NSArray<ORKTextChoice *> *textChoices = [_formatProvider textChoices];
+        NSArray<ORKTextChoice *> *textChoices = [[self textScaleFormatProvider] textChoices];
         _slider.textChoices = textChoices;
         
         if (isVertical && textChoices) {
@@ -448,6 +448,13 @@
     [NSLayoutConstraint activateConstraints:constraints];
 }
 
+- (id<ORKTextScaleAnswerFormatProvider>)textScaleFormatProvider {
+    if ([[_formatProvider class] conformsToProtocol:@protocol(ORKTextScaleAnswerFormatProvider)]) {
+        return (id<ORKTextScaleAnswerFormatProvider>)_formatProvider;
+    }
+    return nil;
+}
+
 - (void)setCurrentNumberValue:(NSNumber *)value {
     
     _currentNumberValue = value ? [_formatProvider normalizedValueForNumber:value] : nil;
@@ -465,8 +472,8 @@
 - (void)updateCurrentValueLabel {
     
     if (_currentNumberValue) {
-        if ([_formatProvider textChoices]) {
-            ORKTextChoice *textChoice = [_formatProvider textChoiceForIndex:[self currentTextChoiceIndex]];
+        if ([self textScaleFormatProvider]) {
+            ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceForIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
@@ -494,7 +501,7 @@
 - (void)setCurrentTextChoiceValue:(id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
     
     if (currentTextChoiceValue) {
-        NSUInteger index = [_formatProvider textChoiceIndexForValue:currentTextChoiceValue];
+        NSUInteger index = [[self textScaleFormatProvider] textChoiceIndexForValue:currentTextChoiceValue];
         if (index != NSNotFound) {
             [self setCurrentNumberValue: @(index + 1)];
         }
@@ -504,12 +511,12 @@
 }
 
 - (id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
-    id<NSCopying, NSCoding, NSObject> value = [_formatProvider textChoiceForIndex:[self currentTextChoiceIndex]].value;
+    id<NSCopying, NSCoding, NSObject> value = [[self textScaleFormatProvider] textChoiceForIndex:[self currentTextChoiceIndex]].value;
     return value;
 }
 
 - (id)currentAnswerValue {
-    if ([_formatProvider textChoices]) {
+    if ([self textScaleFormatProvider]) {
         id<NSCopying, NSCoding, NSObject> value = [self currentTextChoiceValue];
         return value ? @[value] : @[];
     } else {
@@ -518,7 +525,7 @@
 }
 
 - (void)setCurrentAnswerValue:(id)currentAnswerValue {
-    if ([_formatProvider textChoices]) {
+    if ([self textScaleFormatProvider]) {
         
         if (ORKIsAnswerEmpty(currentAnswerValue)) {
             [self setCurrentTextChoiceValue:nil];
