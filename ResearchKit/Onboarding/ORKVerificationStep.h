@@ -64,7 +64,7 @@ ORK_CLASS_AVAILABLE
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
                              email:(NSString *)email
-   verificationViewControllerClass:(Class)verificationViewControllerClass;
+        verificationViewController:(ORKVerificationStepViewController *)verificationViewController;
 
 /**
  The email used for the step.
@@ -79,7 +79,7 @@ ORK_CLASS_AVAILABLE
  The subclass allows you to override button actions in order to provide navigation and logic
  for the button items on the step.
  */
-@property (nonatomic, readonly) Class verificationViewControllerClass;
+@property (nonatomic, readonly) ORKVerificationStepViewController *verificationViewController;
 
 @end
 

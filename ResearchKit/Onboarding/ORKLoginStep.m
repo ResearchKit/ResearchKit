@@ -37,7 +37,7 @@
 @implementation ORKLoginStep
 
 - (Class)stepViewControllerClass {
-    return _loginViewControllerClass;
+    return [_loginViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -55,12 +55,12 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-          loginViewControllerClass:(Class)loginViewControllerClass {
+               loginViewController:(ORKLoginStepViewController *)loginViewController {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
-        _loginViewControllerClass = loginViewControllerClass;
+        _loginViewController = loginViewController;
     }
     return self;
 }
@@ -108,19 +108,19 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, loginViewControllerClass);
+        ORK_DECODE_OBJ(aDecoder, loginViewController);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, loginViewControllerClass);
+    ORK_ENCODE_OBJ(aCoder, loginViewController);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLoginStep *step = [super copyWithZone:zone];
-    step->_loginViewControllerClass = self.loginViewControllerClass;
+    step->_loginViewController = self.loginViewController;
     return step;
 }
 
@@ -129,7 +129,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.loginViewControllerClass, castObject.loginViewControllerClass));
+            ORKEqualObjects(self.loginViewController, castObject.loginViewController));
 }
 
 @end

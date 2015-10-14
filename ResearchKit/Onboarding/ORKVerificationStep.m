@@ -36,7 +36,7 @@
 @implementation ORKVerificationStep
 
 - (Class)stepViewControllerClass {
-    return _verificationViewControllerClass;
+    return [_verificationViewController class];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -48,13 +48,13 @@
                              title:(NSString *)title
                               text:(NSString *)text
                              email:(NSString *)email
-        verificationViewControllerClass:(Class)verificationViewControllerClass {
+        verificationViewController:(ORKVerificationStepViewController *)verificationViewController {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
         _email = email;
-        _verificationViewControllerClass = verificationViewControllerClass;
+        _verificationViewController = verificationViewController;
     }
     return self;
 }
@@ -71,7 +71,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ(aDecoder, email);
-        ORK_DECODE_OBJ(aDecoder, verificationViewControllerClass);
+        ORK_DECODE_OBJ(aDecoder, verificationViewController);
     }
     return self;
 }
@@ -79,13 +79,13 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, email);
-    ORK_ENCODE_OBJ(aCoder, verificationViewControllerClass);
+    ORK_ENCODE_OBJ(aCoder, verificationViewController);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKVerificationStep *step = [super copyWithZone:zone];
     step->_email = self.email;
-    step->_verificationViewControllerClass = self.verificationViewControllerClass;
+    step->_verificationViewController = self.verificationViewController;
     return step;
 }
 
@@ -95,7 +95,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.email, castObject.email) &&
-            ORKEqualObjects(self.verificationViewControllerClass, castObject.verificationViewControllerClass));
+            ORKEqualObjects(self.verificationViewController, castObject.verificationViewController));
 }
 
 @end

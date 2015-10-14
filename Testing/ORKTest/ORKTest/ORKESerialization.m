@@ -661,6 +661,21 @@ ret =
            PROPERTY(options, NSNumber, NSObject, NO, nil, nil),
            PROPERTY(passcodeValidationRegex, NSString, NSObject, YES, nil, nil)
            })),
+   ENTRY(ORKVerificationStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) email:GETPROP(dict, email) verificationViewController:GETPROP(dict, verificationViewController)];
+         },
+         (@{
+            PROPERTY(email, NSString, NSObject, NO, nil, nil),
+            PROPERTY(verificationViewController, ORKVerificationStepViewController, ORKStepViewController, YES, nil, nil)
+            })),
+   ENTRY(ORKLoginStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKLoginStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) loginViewController:GETPROP(dict, loginViewController)];
+         },
+         (@{
+            PROPERTY(loginViewController, ORKLoginStepViewController, ORKFormStepViewController, YES, nil, nil)
+            })),
   ENTRY(ORKDeviceMotionRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];

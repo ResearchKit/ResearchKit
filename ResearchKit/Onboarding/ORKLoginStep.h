@@ -35,6 +35,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ORKLoginStepViewController;
+
 /**
  The `ORKLoginStep` class represents a form step that provides fields commonly used
  for account login.
@@ -56,14 +58,14 @@ ORK_CLASS_AVAILABLE
  @param title                           The title of the form (see `ORKStep`).
  @param text                            The text shown immediately below the title (see `ORKStep`).
  @param email                           The email address that needs to be verified.
- @param loginStepViewControllerClass    The login step view controller class.
+ @param loginStepViewController         The subclassed login step view controller.
  
  @return As initialized verification step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-          loginViewControllerClass:(Class)loginViewControllerClass;
+               loginViewController:(ORKLoginStepViewController *)loginViewController;
 
 /**
  The view controller subclass used for the step.
@@ -71,7 +73,7 @@ ORK_CLASS_AVAILABLE
  The subclass allows you to override button actions in order to provide navigation and logic
  for the button items on the step.
  */
-@property (nonatomic, readonly) Class loginViewControllerClass;
+@property (nonatomic, readonly) ORKLoginStepViewController *loginViewController;
 
 @end
 

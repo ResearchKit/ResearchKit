@@ -1058,7 +1058,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         }
         
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewControllerClass: verificationViewController.self)
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewController: verificationViewController())
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
@@ -1089,7 +1089,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         and a button for `Forgot password?`.
         */
         let loginTitle = NSLocalizedString("Login", comment: "")
-        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: loginViewController.self)
+        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewController: loginViewController())
         return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep])
     }
     
