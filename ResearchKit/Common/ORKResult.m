@@ -48,6 +48,7 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
+#import "ORKPlacemark.h"
 
 
 @implementation ORKResult
@@ -1847,7 +1848,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, MKPlacemark);
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKPlacemark);
     }
     return self;
 }
@@ -1860,9 +1861,7 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame &&
-            self.locationAnswer.location.coordinate.latitude == castObject.locationAnswer.location.coordinate.latitude &&
-            self.locationAnswer.location.coordinate.longitude == castObject.locationAnswer.location.coordinate.longitude);
+    return (isParentSame && [self.locationAnswer isEqual:castObject.locationAnswer]);
 }
 
 - (NSUInteger)hash {

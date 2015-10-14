@@ -64,4 +64,21 @@
     return self;
 }
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [[ORKPlacemark alloc] initWithPlacemark:self];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([[object class] isSubclassOfClass:[ORKPlacemark class]]) {
+        return (self.location.coordinate.latitude == ((ORKPlacemark *)object).location.coordinate.latitude &&
+                self.location.coordinate.longitude == ((ORKPlacemark *)object).location.coordinate.longitude);
+    } else {
+        return NO;
+    }
+}
+
 @end

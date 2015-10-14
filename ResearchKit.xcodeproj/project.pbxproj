@@ -472,7 +472,7 @@
 		BCFF24BD1B0798D10044EC35 /* ORKResultPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF24BC1B0798D10044EC35 /* ORKResultPredicate.m */; };
 		CA8D0E921BC4360F00BED0F7 /* ORKWaitStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = CA8D0E901BC4360F00BED0F7 /* ORKWaitStepView.h */; };
 		CA8D0E931BC4360F00BED0F7 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */; };
-		CAA870D01BCBF23700D0FC28 /* ORKPlacemark.h in Headers */ = {isa = PBXBuildFile; fileRef = CAA870CE1BCBF23700D0FC28 /* ORKPlacemark.h */; settings = {ASSET_TAGS = (); }; };
+		CAA870D01BCBF23700D0FC28 /* ORKPlacemark.h in Headers */ = {isa = PBXBuildFile; fileRef = CAA870CE1BCBF23700D0FC28 /* ORKPlacemark.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAA870D11BCBF23700D0FC28 /* ORKPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA870CF1BCBF23700D0FC28 /* ORKPlacemark.m */; settings = {ASSET_TAGS = (); }; };
 		CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */; };

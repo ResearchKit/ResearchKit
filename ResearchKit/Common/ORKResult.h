@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKConsentSignatureResult;
 @class ORKStepResult;
 @class ORKToneAudiometrySample;
+@class ORKPlacemark;
 
 @class MKPlacemark;
 
@@ -1269,7 +1270,7 @@ ORK_CLASS_AVAILABLE
 /**
  The placemark representing the coordinate and address of a specific location.
  */
-@property (nonatomic, copy, nullable) MKPlacemark *locationAnswer;
+@property (nonatomic, copy, nullable) ORKPlacemark *locationAnswer;
 
 @end
 
