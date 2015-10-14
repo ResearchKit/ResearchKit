@@ -1767,10 +1767,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    return ([self.textChoices firstObject]).text;
+    return self.textChoices.firstObject.text;
 }
 - (NSString *)maximumValueDescription {
-    return ([self.textChoices lastObject]).text;
+    return self.textChoices.lastObject.text;
 }
 - (UIImage *)minimumImage {
     return nil;
