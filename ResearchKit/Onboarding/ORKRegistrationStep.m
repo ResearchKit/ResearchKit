@@ -32,6 +32,8 @@
 #import "ORKRegistrationStep.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
+#import "ORKAnswerFormat_Internal.h"
+#import "ORKFormItem_Internal.h"
 
 
 @implementation ORKRegistrationStep
@@ -82,22 +84,29 @@
         answerFormat.secureTextEntry = YES;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
 
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
+        ORKFormItem *passwordItem = [[ORKFormItem alloc] initWithIdentifier:@"password"
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
-        item.optional = NO;
-        [formItems addObject:item];
+        passwordItem.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
+        passwordItem.optional = NO;
+        [formItems addObject:passwordItem];
         
-        item = [[ORKFormItem alloc] initWithIdentifier:@"confirm_password"
-                                                  text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
-                                          answerFormat:answerFormat];
-        item.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
-        item.optional = NO;
-        [formItems addObject:item];
+        ORKConfirmTextAnswerFormat *confirmAnswerFormat = [ORKConfirmTextAnswerFormat new];
+        confirmAnswerFormat.multipleLines = NO;
+        confirmAnswerFormat.secureTextEntry = YES;
+        confirmAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        confirmAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        confirmAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
+        confirmAnswerFormat.originalItemIdentifier = passwordItem.identifier;
+        
+        ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:@"confirm_password"
+                                                                       text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
+                                                               answerFormat:confirmAnswerFormat];
+        confirmItem.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
+        confirmItem.optional = NO;
+        [formItems addObject:confirmItem];
     }
 
     if (!(_options & ORKRegistrationStepDefault)) {

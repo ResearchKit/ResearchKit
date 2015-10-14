@@ -790,11 +790,15 @@
                     }
                         
                     case ORKQuestionTypeText: {
-                        ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (!textFormat.multipleLines) {
-                            class = [ORKFormItemTextFieldCell class];
+                        if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+                            class = [ORKFormItemConfirmTextCell class];
                         } else {
-                            class = [ORKFormItemTextCell class];
+                            ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+                            if (!textFormat.multipleLines) {
+                                class = [ORKFormItemTextFieldCell class];
+                            } else {
+                                class = [ORKFormItemTextCell class];
+                            }
                         }
                         break;
                     }
@@ -825,6 +829,9 @@
                         formCell.delegate  = self;
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
+                        if ([class isSubclassOfClass:[ORKFormItemConfirmTextCell class]]) {
+                            formCell.savedAnswers = &_savedAnswers;
+                        }
                         cell = formCell;
                     }
                 }

@@ -62,6 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) CGFloat expectedLayoutWidth;
+@property (nonatomic) NSMutableDictionary   * __nullable __strong * __nullable savedAnswers;
 
 @end
 
@@ -72,6 +73,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface ORKFormItemTextFieldCell : ORKFormItemTextFieldBasedCell
+
+@end
+
+
+@interface ORKFormItemConfirmTextCell : ORKFormItemTextFieldCell
 
 @end
 

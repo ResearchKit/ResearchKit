@@ -480,6 +480,53 @@ static const CGFloat HorizontalMargin = 15.0;
 @end
 
 
+#pragma mark - ORKFormItemConfirmTextCell
+
+@implementation ORKFormItemConfirmTextCell
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    NSDictionary *savedAnswers = *self.savedAnswers;
+    return !ORKIsAnswerEmpty(savedAnswers[@"password"]);
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [super textFieldShouldEndEditing:textField];
+    if (![self isAnswerValidWithString:textField.text]) {
+        [self showValidityAlertWithMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (![self isAnswerValidWithString:text]) {
+        [self ork_setAnswer:@"NO"];
+    }
+    return YES;
+}
+
+- (BOOL)isAnswerValidWithString:(NSString *)string {
+    BOOL isValid = YES;
+    if (string.length > 0) {
+
+        NSDictionary *savedAnswers = *self.savedAnswers;
+        ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
+        NSString *originalItemIdentifier = answerFormat.originalItemIdentifier;
+
+        // DO NOT FORGET TO CHANGE THIS BACK TO THE INVERSE.
+        if (!originalItemIdentifier) {
+            if (!ORKIsAnswerEmpty(savedAnswers[@"password"]) && ![savedAnswers[@"password"] isEqualToString:string]) {
+                isValid = NO;
+            }
+        }
+    }
+    return isValid;
+}
+
+@end
+
+
 #pragma mark - ORKFormItemTextFieldCell
 
 @implementation ORKFormItemTextFieldCell

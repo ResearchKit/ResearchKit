@@ -188,6 +188,13 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 @end
 
 
+@interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
+
+@property (nonatomic, copy) NSString *originalItemIdentifier;
+
+@end
+
+
 @interface ORKAnswerDefaultSource : NSObject
 
 + (instancetype)sourceWithHealthStore:(HKHealthStore *)healthStore;

@@ -2035,6 +2035,26 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
+#pragma mark - ORKConfirmTextAnswerFormat
+
+@implementation ORKConfirmTextAnswerFormat
+
+- (Class)questionResultClass {
+    return [ORKTextQuestionResult class];
+}
+
+- (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = YES;
+    NSString *stringAnswer = (NSString *)answer;
+    if ([stringAnswer isEqualToString:@"NO"]) {
+        isValid = NO;
+    }
+    return isValid;
+}
+
+@end
+
+
 #pragma mark - ORKTimeIntervalAnswerFormat
 
 @implementation ORKTimeIntervalAnswerFormat
