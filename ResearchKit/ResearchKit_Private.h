@@ -87,3 +87,4 @@
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
 #import <ResearchKit/ORKStepNavigationRule_Private.h>
+#import <ResearchKit/ORKAnswerFormat_Private.h>

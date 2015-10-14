@@ -855,6 +855,13 @@ ret =
          nil,
          (@{
             })),
+   ENTRY(ORKConfirmTextAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:GETPROP(dict, originalItemIdentifier)];
+         },
+         (@{
+            PROPERTY(originalItemIdentifier, NSString, NSObject, NO, nil, nil),
+            })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:((NSNumber *)GETPROP(dict, defaultInterval)).doubleValue step:((NSNumber *)GETPROP(dict, step)).integerValue];

@@ -34,6 +34,7 @@
 #import "ORKHelpers.h"
 #import <HealthKit/HealthKit.h>
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKAnswerFormat_Private.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 
@@ -2040,16 +2041,51 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @implementation ORKConfirmTextAnswerFormat
 
 - (Class)questionResultClass {
-    return [ORKTextQuestionResult class];
+    return [ORKBooleanQuestionResult class];
+}
+
+- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier {
+    self = [super init];
+    if (self) {
+        _originalItemIdentifier = [originalItemIdentifier copy];
+    }
+    return self;
 }
 
 - (BOOL)isAnswerValid:(id)answer {
-    BOOL isValid = YES;
-    NSString *stringAnswer = (NSString *)answer;
-    if ([stringAnswer isEqualToString:@"NO"]) {
-        isValid = NO;
+    NSNumber *numberAnswer = (NSNumber *)answer;
+    return [numberAnswer isEqual:@YES] ? YES : NO;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKConfirmTextAnswerFormat *fmt = [super copyWithZone:zone];
+    fmt->_originalItemIdentifier = _originalItemIdentifier;
+    return fmt;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, originalItemIdentifier);
     }
-    return isValid;
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, originalItemIdentifier);
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            ORKEqualObjects(self.originalItemIdentifier, castObject.originalItemIdentifier));
 }
 
 @end

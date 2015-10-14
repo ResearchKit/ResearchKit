@@ -491,34 +491,38 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [super textFieldShouldEndEditing:textField];
-    if (![self isAnswerValidWithString:textField.text]) {
+    if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
+        textField.text = @"";
+        [self inputValueDidClear];
         [self showValidityAlertWithMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
     }
     return YES;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.editingHighlight = NO;
+    [self.delegate formItemCellDidResignFirstResponder:self];
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    [super textField:textField shouldChangeCharactersInRange:range replacementString:string];
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (![self isAnswerValidWithString:text]) {
-        [self ork_setAnswer:@"NO"];
+    if ([self isAnswerValidWithString:text]) {
+        [self ork_setAnswer:@YES];
+    } else {
+        [self ork_setAnswer:@NO];
     }
     return YES;
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)string {
-    BOOL isValid = YES;
+    BOOL isValid = NO;
     if (string.length > 0) {
-
         NSDictionary *savedAnswers = *self.savedAnswers;
         ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
-        NSString *originalItemIdentifier = answerFormat.originalItemIdentifier;
-
-        // DO NOT FORGET TO CHANGE THIS BACK TO THE INVERSE.
-        if (!originalItemIdentifier) {
-            if (!ORKIsAnswerEmpty(savedAnswers[@"password"]) && ![savedAnswers[@"password"] isEqualToString:string]) {
-                isValid = NO;
-            }
+        NSString *originalItemIdentifier = [answerFormat.originalItemIdentifier copy];
+        NSString *originalPassword = savedAnswers[originalItemIdentifier];
+        if ([originalPassword isEqualToString:string]) {
+            isValid = YES;
         }
     }
     return isValid;

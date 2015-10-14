@@ -76,6 +76,7 @@
 		2433C9E41B9A506F0052D375 /* ORKKeychainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */; settings = {ASSET_TAGS = (); }; };
 		2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */; };
+		244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		246D15D81BA3438A009C99FC /* ORKEligibilitySelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */; settings = {ASSET_TAGS = (); }; };
 		246D15D91BA3438A009C99FC /* ORKEligibilitySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */; settings = {ASSET_TAGS = (); }; };
 		246D15E21BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */; settings = {ASSET_TAGS = (); }; };
@@ -578,6 +579,7 @@
 		2433C9E21B9A506F0052D375 /* ORKKeychainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKKeychainWrapper.m; sourceTree = "<group>"; };
 		2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeViewController.h; sourceTree = "<group>"; };
 		2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeViewController.m; sourceTree = "<group>"; };
+		244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAnswerFormat_Private.h; sourceTree = "<group>"; };
 		246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKEligibilitySelectionView.h; sourceTree = "<group>"; };
 		246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKEligibilitySelectionView.m; sourceTree = "<group>"; };
 		246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSurveyAnswerCellForEligibility.h; sourceTree = "<group>"; };
@@ -1653,6 +1655,7 @@
 				86C40B641A8D7C5B00081FAC /* ORKAnswerFormat.h */,
 				86C40B651A8D7C5B00081FAC /* ORKAnswerFormat.m */,
 				86C40B661A8D7C5B00081FAC /* ORKAnswerFormat_Internal.h */,
+				244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */,
 				86C40B8A1A8D7C5C00081FAC /* ORKHealthAnswerFormat.h */,
 				86C40B8B1A8D7C5C00081FAC /* ORKHealthAnswerFormat.m */,
 				B12EFF421AB2134100A80147 /* Choice Format Helpers */,
@@ -2224,6 +2227,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
 				BC13CE391B0660220044153C /* ORKNavigableOrderedTask.h in Headers */,
 				86C40C921A8D7C5C00081FAC /* ORKAudioRecorder.h in Headers */,

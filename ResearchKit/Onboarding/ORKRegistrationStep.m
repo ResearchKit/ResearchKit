@@ -32,7 +32,7 @@
 #import "ORKRegistrationStep.h"
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
-#import "ORKAnswerFormat_Internal.h"
+#import "ORKAnswerFormat_Private.h"
 #import "ORKFormItem_Internal.h"
 
 
@@ -93,16 +93,17 @@
         passwordItem.optional = NO;
         [formItems addObject:passwordItem];
         
-        ORKConfirmTextAnswerFormat *confirmAnswerFormat = [ORKConfirmTextAnswerFormat new];
+        NSString *originalItemIdentifier = [passwordItem.identifier copy];
+        ORKConfirmTextAnswerFormat *confirmAnswerFormat = [[ORKConfirmTextAnswerFormat alloc]
+                                                           initWithOriginalItemIdentifier:originalItemIdentifier];
         confirmAnswerFormat.multipleLines = NO;
         confirmAnswerFormat.secureTextEntry = YES;
         confirmAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         confirmAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         confirmAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        confirmAnswerFormat.originalItemIdentifier = passwordItem.identifier;
-        
+
         ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:@"confirm_password"
-                                                                       text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
+                                                                      text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
                                                                answerFormat:confirmAnswerFormat];
         confirmItem.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         confirmItem.optional = NO;
