@@ -539,11 +539,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.textChoices, castObject.textChoices));
+            ORKEqualObjects(_textChoices, castObject.textChoices));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.textChoices hash];
+    return [super hash] ^ [_textChoices hash];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -681,12 +681,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.textChoices, castObject.textChoices) &&
+            ORKEqualObjects(_textChoices, castObject.textChoices) &&
             (_style == castObject.style));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.textChoices hash] ^ _style;
+    return [super hash] ^ [_textChoices hash] ^ _style;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1754,23 +1754,23 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return @(1);
 }
 - (NSNumber *)maximumNumber {
-    return @(self.textChoices.count);
+    return @(_textChoices.count);
 }
 - (id<NSObject, NSCopying, NSCoding>)defaultAnswer {
     if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
    
-    return @[[self.textChoices objectAtIndex:_defaultIndex].value];
+    return @[[_textChoices objectAtIndex:_defaultIndex].value];
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    return self.textChoices.firstObject.text;
+    return _textChoices.firstObject.text;
 }
 - (NSString *)maximumValueDescription {
-    return self.textChoices.lastObject.text;
+    return _textChoices.lastObject.text;
 }
 - (UIImage *)minimumImage {
     return nil;
@@ -1790,7 +1790,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSInteger)numberOfSteps {
-    return self.textChoices.count - 1;
+    return _textChoices.count - 1;
 }
 
 - (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
