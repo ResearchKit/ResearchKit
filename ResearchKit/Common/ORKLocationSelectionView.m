@@ -65,6 +65,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     MKCoordinateRegion _answerRegion;
     MKCoordinateRegion _initalCoordinateRegion;
     BOOL _setInitialCoordinateRegion;
+    BOOL _edgeToEdgeMap;
 }
 
 - (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation {
@@ -76,7 +77,6 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     }
     
     if (self) {
-        
         _textField = [[ORKAnswerTextField alloc] init];
         _textField.delegate = self;
         _textField.placeholder = ORKLocalizedString(@"LOCATION_ADDRESS",nil);
@@ -84,11 +84,12 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.adjustsFontSizeToFitWidth = YES;
         
-        [self addSubview:_textField];
-        [self setUpConstraints];
-        
         _useCurrentLocation = use;
         _edgeToEdgeMap = edgeToEdgePresentation;
+        
+        [self addSubview:_textField];
+        [self setUpConstraints];
+
         if (openMap) {
             [self showMapView];
         }
@@ -105,7 +106,9 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:LocationSelectionViewTextFieldHeight]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20.0)-[_textField]-(20.0)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:views]];
+    
+    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(20.0) : @(0.0))};
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_textField]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }

@@ -70,8 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) id answer;
 
-@property (nonatomic, assign) BOOL edgeToEdgeMap;
-
 @property (nonatomic, assign) BOOL useCurrentLocation;
 
 - (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
