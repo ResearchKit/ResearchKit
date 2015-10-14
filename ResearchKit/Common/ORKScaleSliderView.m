@@ -462,7 +462,6 @@
     
     [self updateCurrentValueLabel];
     _slider.value = _currentNumberValue.floatValue;
-
 }
 
 - (NSUInteger)currentTextChoiceIndex {
@@ -503,10 +502,10 @@
     if (currentTextChoiceValue) {
         NSUInteger index = [[self textScaleFormatProvider] textChoiceIndexForValue:currentTextChoiceValue];
         if (index != NSNotFound) {
-            [self setCurrentNumberValue: @(index + 1)];
+            [self setCurrentNumberValue:@(index + 1)];
         }
     } else {
-        [self setCurrentNumberValue: nil];
+        [self setCurrentNumberValue:nil];
     }
 }
 
