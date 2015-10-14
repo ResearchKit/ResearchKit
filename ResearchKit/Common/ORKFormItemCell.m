@@ -1251,7 +1251,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {
-    [self showErrorAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedDescription];
+    [self showErrorAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedFailureReason];
 }
 
 - (void)inputValueDidChange {
