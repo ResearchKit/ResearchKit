@@ -44,11 +44,11 @@
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKPlacemark.h"
+#import "ORKSkin.h"
 
 
 static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
 static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
-static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 
 
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
@@ -71,7 +71,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 - (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation {
     
     if (openMap) {
-        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + LocationSelectionViewMapViewHeight)];
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin))];
     }
@@ -138,7 +138,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView == nil ? 0.0 : LocationSelectionViewMapViewHeight);
+    CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView == nil ? 0.0 : ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
     return CGSizeMake(40, height);
 }
 
@@ -169,7 +169,7 @@ static const CGFloat LocationSelectionViewMapViewHeight = 238.0;
     
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-LocationSelectionViewTextFieldVerticalMargin]];
-    _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:LocationSelectionViewMapViewHeight];
+    _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
     [constraints addObject:_mapViewHeightConstraint];
     
     [NSLayoutConstraint activateConstraints:constraints];
