@@ -1749,7 +1749,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         {
-            ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"scale_form_00" title:@"Optional Form Items" text:@"Optional form with no required items and a default scale value"];
+            ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"scale_form_00" title:@"Optional Form Items" text:@"Optional form with a required scale item with a default value"];
             NSMutableArray *items = [NSMutableArray new];
             [steps addObject:step];
             
