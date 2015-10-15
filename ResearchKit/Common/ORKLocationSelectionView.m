@@ -257,8 +257,7 @@
         float spanX = 0.00725;
         float spanY = 0.00725;
         MKCoordinateRegion region;
-        region.center.latitude = placemarkAnswer.location.coordinate.latitude;
-        region.center.longitude = placemarkAnswer.location.coordinate.longitude;
+        region.center = placemarkAnswer.location.coordinate;
         region.span = MKCoordinateSpanMake(spanX, spanY);
         _answerRegion = region;
         if (!_setInitialCoordinateRegion) {
