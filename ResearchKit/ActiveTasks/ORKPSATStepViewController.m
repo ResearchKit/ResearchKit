@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSMutableArray *samples;
 @property (nonatomic, strong) ORKPSATContentView *psatContentView;
-@property (nonatomic, strong) NSArray *digits;
+@property (nonatomic, strong) NSArray<NSNumber *> *digits;
 @property (nonatomic, assign) NSUInteger currentDigitIndex;
 @property (nonatomic, assign) NSInteger currentAnswer;
 @property (nonatomic, strong) ORKActiveStepTimer *clearDigitsTimer;
@@ -116,7 +116,7 @@
         PSATResult.stimulusDuration = 0.0;
     }
     PSATResult.length = [self psatStep].seriesLength;
-    PSATResult.initialDigit = [(NSNumber *)[self.digits objectAtIndex:0] integerValue];
+    PSATResult.initialDigit = self.digits[0].integerValue;
     NSInteger totalCorrect = 0;
     BOOL previousAnswerCorrect = NO;
     NSInteger totalDyad = 0;
@@ -146,7 +146,7 @@
 - (void)start {
     self.digits = [self arrayWithPSATDigits];
     self.currentDigitIndex = 0;
-    [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+    [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:self.digits[self.currentDigitIndex]];
     [self.psatContentView setProgress:0.001 animated:NO];
     self.currentAnswer = -1;
     self.samples = [NSMutableArray array];
@@ -198,7 +198,7 @@
     self.answerEnd = 0;
     
     if (self.currentDigitIndex <= [self psatStep].seriesLength) {
-        [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:[self.digits objectAtIndex:self.currentDigitIndex]];
+        [self.psatContentView setAddition:self.currentDigitIndex forTotal:[self psatStep].seriesLength withDigit:self.digits[self.currentDigitIndex]];
     }
     
     self.currentAnswer = -1;
@@ -215,8 +215,8 @@
 
 - (void)saveSample {
     ORKPSATSample *sample = [[ORKPSATSample alloc] init];
-    NSInteger previousDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex - 1] integerValue];
-    NSInteger currentDigit = [(NSNumber *)[self.digits objectAtIndex:self.currentDigitIndex] integerValue];
+    NSInteger previousDigit = self.digits[self.currentDigitIndex - 1].integerValue;
+    NSInteger currentDigit = self.digits[self.currentDigitIndex].integerValue;;
     sample.correct = previousDigit + currentDigit == self.currentAnswer ? YES : NO;
     sample.digit = currentDigit;
     sample.answer = self.currentAnswer;

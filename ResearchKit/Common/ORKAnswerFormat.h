@@ -556,9 +556,8 @@ ORK_CLASS_AVAILABLE
  The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control
  with a text label next to each step.
  
- The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose
- value is the selected slider value.
- */
+ The scale answer format produces an `ORKChoiceQuestionResult` object that contains the selected text 
+ choice's value. */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
 

@@ -752,7 +752,7 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
                 ResultRow(text: "moves", detail: "\(towerOfHanoiResult.moves?.count ?? 0 )")]
         }
         // Add a `ResultRow` for each sample.
-        let move = towerOfHanoiResult.moves![section - 1] as! ORKTowerOfHanoiMove
+        let move = towerOfHanoiResult.moves![section - 1]
         return rows + [
             ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
             ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
@@ -831,7 +831,7 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
         
         // Add a `ResultRow` for each sample.
         return rows + PSATResult.samples!.map { sample in
-            let PSATSample = sample as! ORKPSATSample
+            let PSATSample = sample
             
             let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
             let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"

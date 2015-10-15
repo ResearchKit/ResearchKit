@@ -309,7 +309,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)defaultAnswerDidChange {
     id defaultAnswer = _defaultAnswer;
-    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.hasChangedAnswer) {
+    if (![self hasAnswer] && defaultAnswer && !self.hasChangedAnswer) {
         _answer = defaultAnswer;
         
         [self answerDidChange];

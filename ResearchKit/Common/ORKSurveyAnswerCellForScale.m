@@ -37,7 +37,7 @@
 #import "ORKScaleSliderView.h"
 
 
-@interface ORKSurveyAnswerCellForScale ()
+@interface ORKSurveyAnswerCellForScale () <ORKScaleSliderViewDelegate>
 
 @property (nonatomic, strong) ORKScaleSliderView *sliderView;
 @property (nonatomic, strong) id<ORKScaleAnswerFormatProvider> formatProvider;
@@ -60,8 +60,7 @@
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     
     if (_sliderView == nil) {
-        _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:formatProvider];
-        [_sliderView.slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:formatProvider delegate:self];
         
         [self addSubview:_sliderView];
         
@@ -84,32 +83,23 @@
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (![self.answer isKindOfClass:[NSNumber class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
-        }
-        
-        [_sliderView setCurrentValue:answer];
+        [_sliderView setCurrentAnswerValue:answer];
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [self.sliderView setCurrentValue:[formatProvider defaultNumber]];
+        if (answer == nil && [formatProvider defaultAnswer]) {
+            [self.sliderView setCurrentAnswerValue:[formatProvider defaultAnswer]];
+            [self ork_setAnswer:self.sliderView.currentAnswerValue];
         } else {
-           [self.sliderView setCurrentValue:nil];
+           [self.sliderView setCurrentAnswerValue:nil];
         }
-    }
-}
-
-- (IBAction)sliderValueChanged:(id)sender {
-    NSArray *textChoices = [self.formatProvider textChoices];
-    if (textChoices) {
-        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
-        [self ork_setAnswer:textChoice.value];
-    } else {
-        [self ork_setAnswer:_sliderView.currentValue];
     }
 }
 
 - (NSArray *)suggestedCellHeightConstraintsForView:(UIView *)view {
     return @[];
+}
+
+- (void)scaleSliderViewCurrentValueDidChange:(ORKScaleSliderView *)sliderView {
+    [self ork_setAnswer:sliderView.currentAnswerValue];
 }
 
 @end
