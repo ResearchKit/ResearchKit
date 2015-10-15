@@ -503,6 +503,8 @@
         NSUInteger index = [[self textScaleFormatProvider] textChoiceIndexForValue:currentTextChoiceValue];
         if (index != NSNotFound) {
             [self setCurrentNumberValue:@(index + 1)];
+        } else {
+            [self setCurrentNumberValue:nil];
         }
     } else {
         [self setCurrentNumberValue:nil];
