@@ -268,7 +268,7 @@
         [_mapView setRegion:region animated:YES];
         
         if (placemarkAnswer.addressDictionary) {
-            _textField.text = [NSString stringWithFormat:@"%@", ABCreateStringWithAddressDictionary(placemarkAnswer.addressDictionary, NO)];
+            _textField.text = ABCreateStringWithAddressDictionary(placemarkAnswer.addressDictionary, NO);
         } else {
             CLLocationCoordinate2D coordinate = placemarkAnswer.location.coordinate;
             CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
