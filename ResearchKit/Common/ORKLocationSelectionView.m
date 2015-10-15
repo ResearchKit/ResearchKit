@@ -79,6 +79,9 @@
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.adjustsFontSizeToFitWidth = YES;
         
+        _mapView = [[MKMapView alloc] init];
+        _mapView.delegate = self;
+        
         _useCurrentLocation = use;
         _edgeToEdgeMap = edgeToEdgePresentation;
         
@@ -86,7 +89,7 @@
         [self setUpConstraints];
 
         if (openMap) {
-            [self showMapView];
+            [self showMapViewIfNecessary];
         }
     }
     
@@ -133,17 +136,15 @@
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView == nil ? 0.0 : ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
+    CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView.superview == nil ? 0.0 : ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
     return CGSizeMake(40, height);
 }
 
-- (void)showMapView {
-    if (_mapView) {
+- (void)showMapViewIfNecessary {
+    if (_mapView.superview) {
         return;
     }
     
-    _mapView = [[MKMapView alloc] init];
-    _mapView.delegate = self;
     _mapView.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, 0.0);
     ORKEnableAutoLayoutForViews(@[_mapView]);
     

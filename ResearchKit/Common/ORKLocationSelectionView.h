@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setTextColor:(UIColor *)color;
 
-- (void)showMapView;
+- (void)showMapViewIfNecessary;
 
 @end
 
