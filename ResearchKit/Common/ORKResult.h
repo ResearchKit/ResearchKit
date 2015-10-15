@@ -50,7 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKToneAudiometrySample;
 @class ORKPlacemark;
 
-@class MKPlacemark;
 
 /**
  The `ORKResult` class defines the attributes of a result from one step or a group
