@@ -87,8 +87,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showMapView;
 
-- (NSString *)enteredLocation;
-
 @end
 
 NS_ASSUME_NONNULL_END
