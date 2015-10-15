@@ -2137,7 +2137,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isAnswerValid:(id)answer {
     BOOL isValid = [super isAnswerValid:answer];
     
-    if (![[ORKPlacemark alloc] initWithPlacemark:(MKPlacemark *)answer]) {
+    if (![[ORKPlacemark alloc] initWithPlacemark:answer]) {
         isValid = NO;
     }
     

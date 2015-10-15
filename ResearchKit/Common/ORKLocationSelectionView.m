@@ -241,7 +241,7 @@
     [_mapView removeAnnotations:_mapView.annotations];
     
     if ([[answer class] isSubclassOfClass:[CLPlacemark class]]) {
-        _answer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
+        _answer = [[ORKPlacemark alloc] initWithPlacemark:answer];
     } else {
         _answer = answer == ORKNullAnswerValue() ? ORKNullAnswerValue() : nil;
     }
