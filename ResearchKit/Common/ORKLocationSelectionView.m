@@ -58,7 +58,6 @@
 @implementation ORKLocationSelectionView {
     CLLocationManager *_locationManager;
     BOOL _userLocationNeedsUpdate;
-    MKCoordinateRegion _answerRegion;
     MKCoordinateRegion _initalCoordinateRegion;
     BOOL _setInitialCoordinateRegion;
     BOOL _edgeToEdgeMap;
@@ -259,7 +258,6 @@
         MKCoordinateRegion region;
         region.center = placemarkAnswer.location.coordinate;
         region.span = MKCoordinateSpanMake(spanX, spanY);
-        _answerRegion = region;
         if (!_setInitialCoordinateRegion) {
             _setInitialCoordinateRegion = YES;
             _initalCoordinateRegion = _mapView.region;
