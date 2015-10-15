@@ -1244,7 +1244,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [tableView beginUpdates];
     
-    CGRect convertedVisibleRect = [tableView convertRect:view.bounds fromView:view];
+    CGRect convertedVisibleRect = [tableView convertRect:view.textField.bounds fromView:view.textField];
     [tableView scrollRectToVisible:convertedVisibleRect animated:YES];
     
     [tableView endUpdates];

@@ -45,6 +45,7 @@ static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
 
 
 @class ORKLocationSelectionView;
+@class ORKAnswerTextField;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -75,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) id answer;
 
 @property (nonatomic, assign) BOOL useCurrentLocation;
+
+@property (nonatomic, strong, readonly) ORKAnswerTextField *textField;
 
 - (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
 

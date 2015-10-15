@@ -50,7 +50,7 @@
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
-@property (nonatomic, strong) ORKAnswerTextField *textField;
+@property (nonatomic, strong, readwrite) ORKAnswerTextField *textField;
 @property (nonatomic, strong) MKMapView *mapView;
 @end
 
