@@ -204,7 +204,7 @@ ORK_CLASS_AVAILABLE
                                         to finish the ongoing task when the direct step navigation
                                         rule is triggered.
  
- @return A direct step navigation rule.
+ @return A direct-step navigation rule.
  */
 - (instancetype)initWithDestinationStepIdentifier:(NSString *)destinationStepIdentifier NS_DESIGNATED_INITIALIZER;
 
@@ -213,7 +213,7 @@ ORK_CLASS_AVAILABLE
  
  @param aDecoder    The coder from which to initialize the step navigation rule.
  
- @return A new direct step navigation rule.
+ @return A new direct-step navigation rule.
  */
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
