@@ -39,6 +39,7 @@
 #import "ORKQuestionStep_Internal.h"
 #import "ORKLocationSelectionView.h"
 #import "ORKPlacemark.h"
+#import "ORKSkin.h"
 
 
 @interface ORKSurveyAnswerCellForLocation () <ORKLocationSelectionViewDelegate>
@@ -59,7 +60,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return 282;
+    return LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
 }
 
 - (void)prepareView {

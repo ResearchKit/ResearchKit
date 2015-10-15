@@ -40,6 +40,10 @@
 #import <UIKit/UIKit.h>
 
 
+static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
+static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
+
+
 @class ORKLocationSelectionView;
 
 

@@ -47,10 +47,6 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
-static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
-
-
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
