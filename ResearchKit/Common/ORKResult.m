@@ -1861,7 +1861,7 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return (isParentSame && [self.locationAnswer isEqual:castObject.locationAnswer]);
+    return (isParentSame && ORKEqualObjects(self.locationAnswer, castObject.locationAnswer));
 }
 
 - (NSUInteger)hash {
