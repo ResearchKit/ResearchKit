@@ -560,8 +560,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         class = [ORKSurveyAnswerCellForTextField class];
     } else if ([[self.questionStep impliedAnswerFormat] isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
         class = [ORKSurveyAnswerCellForPicker class];
-    } else if ([self.questionStep isFormatLocation]) {
-        class = [ORKSurveyAnswerCellForLocation class];
     }
     
     identifier = NSStringFromClass(class);
