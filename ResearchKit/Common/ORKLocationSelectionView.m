@@ -254,8 +254,8 @@
         ORKPlacemark *placemarkAnswer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
         [_mapView addAnnotation:placemarkAnswer];
         
-        float spanX = 0.00725;
-        float spanY = 0.00725;
+        const float spanX = 0.00725;
+        const float spanY = 0.00725;
         MKCoordinateRegion region;
         region.center = placemarkAnswer.location.coordinate;
         region.span = MKCoordinateSpanMake(spanX, spanY);
