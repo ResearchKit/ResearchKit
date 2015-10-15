@@ -1880,7 +1880,7 @@
 
 - (void)setAnswer:(id)answer {
     answer = [self validateAnswer:answer];
-    self.locationAnswer = answer;
+    self.locationAnswer = [answer copy];
 }
 
 - (id)answer {
