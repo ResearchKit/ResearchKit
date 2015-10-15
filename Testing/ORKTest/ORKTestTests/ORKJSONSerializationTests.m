@@ -460,9 +460,6 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
         }
         
         // Serialization
-        if ([instance isKindOfClass:[ORKPlacemark class]]) {
-            NSLog(@" ");
-        }
         id mockDictionary = [[MockCountingDictionary alloc] initWithDictionary:[ORKESerializer JSONObjectForObject:instance error:NULL]];
         
         // Must contain corrected _class field
