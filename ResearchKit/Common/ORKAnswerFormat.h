@@ -217,6 +217,15 @@ ORK_CLASS_AVAILABLE
  
  The scale answer format produces an `ORKScaleQuestionResult` object that contains an integer whose
  value is between the scale's minimum and maximum values, and represents one of the quantized step values.
+
+ The following are the rules bound with scale answer format -
+ 
+ * Minimum number of step in a task should not be less than 1.
+ * Minimum number of section on a scale (step count) should not be less than 1.
+ * Maximum number of section on a scale (step count) should not be more than 13.
+ * The lower bound value in scale answer format cannot be lower than - 10000.
+ * The upper bound value in scale answer format cannot be more than 10000.
+
  */
 ORK_CLASS_AVAILABLE
 @interface ORKScaleAnswerFormat : ORKAnswerFormat
