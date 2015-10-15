@@ -170,7 +170,7 @@ In the ResearchKit™ framework, an answer format defines how the user should be
 answer a question or an item in a form.  For example, consider a
 survey question such as "On a scale of 1 to 10, how much pain do you
 feel?" The answer format for this question would naturally be a
-continuous scale on that range, so you can use scale answer format (`ORKScaleAnswerFormat`), and set its `minimum` and `maximum` properties
+discrete scale on that range, so you can use scale answer format (`ORKScaleAnswerFormat`), and set its `minimum` and `maximum` properties
 to reflect the desired range.  
 The following are the rules bound with scale answer format -
 
@@ -188,7 +188,7 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
-<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;">Vertical answer format</p>
+<p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Scale answer format (vertical)</p>
 
 <p style="clear: both;"></p>
 
@@ -287,8 +287,7 @@ To add custom conditional behavior in your task, use either ordered task ()`ORKO
 
 #### Ordered Tasks
 
-The `ORKOrderedTask` class provides functionality to present different set of steps depending on the user's answer to a question. To present the step after the specified step, override the `stepAfterStep:withResult:` method.  
-This method lets you use a result of a current step to determine the next step. Similarly to present the step that precedes the specified step, override  `stepBeforeStep:withResult` method. 
+A sequential (static) task, such as a survey or an active task, can be represented as an ordered task. If you want further custom conditional behaviors in a task, it can be easier to subclass `ORKOrderedTask` and override particular `ORKTask` methods like `stepAfterStep:withResult`, and `stepBeforeStep:withResult:` and call super for all other methods.
 
 The following example demonstrates how to subclass
 `ORKOrderedTask` to provide a different set of steps depending on the
@@ -317,9 +316,9 @@ is usually necessary.
     }
 ```
 #### Navigable Ordered Task
-The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it lets you add a condition while the user navigates through the steps in the task by adding a conditional step navigation. 
+The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it provides functionality to present different set of steps depending on the user's answer to a question
 
-Adding a navigation rule, to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If so, than the most recent rule is executed.
+You can add a condition while the user navigates through the steps in a task by adding a conditional step navigation. Such as, add navigation rule to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If so, than the most recent rule is executed.
  
 For example, to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
 
