@@ -189,8 +189,8 @@ The screenshots below show the standard answer formats that the ResearchKit fram
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/NumericAnswerFormat.png" style="width: 100%;border: solid black 1px; ">Numeric answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TimeOfTheDayAnswerFormat.png" style="width: 100%;border: solid black 1px;">TimeOfTheDay answer format</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 3%; margin-bottom: 0.5em;"><img src="SurveyImages/DateAnswerFormat.png" style="width: 100%;border: solid black 1px;">Date answer format</p>
 <p style="clear: both;">
 <p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_1.png" style="width: 100%;border: solid black 1px; ">Text answer format (unlimited text entry)</p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/TextAnswerFormat_2.png" style="width: 100%;border: solid black 1px;">Text answer format (limited text entry) </p><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/VerticalSliderAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Scale answer format (vertical)</p>
-
-<p style="clear: both;"></p>
+<p style="clear: both;"><p style="float: left; font-size: 9pt; text-align: center; width: 25%; margin-right: 5%; margin-bottom: 0.5em;"><img src="SurveyImages/EmailAnswerFormat.png" style="width: 100%;border: solid black 1px;"> Email answer format</p>
+<p style="clear: both;">
 
 In addition to the preceding answer formats, the ResearchKit framework provides
 special answer formats for asking questions about quantities or
@@ -283,11 +283,12 @@ presenting the next step. For example, suppose a step asks "Do you
 have a fever?" If the user answers “Yes,” the next question the next question might be "What is your
 temperature now?"; otherwise it might be, "Do you have any additional
 health concerns?"
-To add custom conditional behavior in your task, use either ordered task ()`ORKOrderedTask`)  or navigable ordered task (`ORKNavigableOrderedTask`). 
+
+To add custom conditional behavior in your task, use either ordered task (`ORKOrderedTask`)  or navigable ordered task (`ORKNavigableOrderedTask`), and override particular `ORKTask` methods like `stepAfterStep:withResult`, and `stepBeforeStep:withResult:` and call super for all other methods.
 
 #### Ordered Tasks
 
-A sequential (static) task, such as a survey or an active task, can be represented as an ordered task. If you want further custom conditional behaviors in a task, it can be easier to subclass `ORKOrderedTask` and override particular `ORKTask` methods like `stepAfterStep:withResult`, and `stepBeforeStep:withResult:` and call super for all other methods.
+A sequential (static) task, such as a survey or an active task, can be represented as an ordered task.  
 
 The following example demonstrates how to subclass
 `ORKOrderedTask` to provide a different set of steps depending on the
@@ -316,11 +317,31 @@ is usually necessary.
     }
 ```
 #### Navigable Ordered Task
-The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it provides functionality to present different set of steps depending on the user's answer to a question
+The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it provides functionality to present different set of steps depending on the user's answer to a question.
 
 You can add a condition while the user navigates through the steps in a task by adding a conditional step navigation. Such as, add navigation rule to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If so, than the most recent rule is executed.
  
 For example, to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
+
+The following example demonstrates how you can add a navigation rule to go to different step in the task depending on the user's selection to the symptom type. For example, from the "symptom" step, go to "other_symptom" step when the user didn't chose headache.  Otherwise, default to going to next step (the regular ordered task (`ORKOrderedTask`) applies.
+
+
+	ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:StepNavigationTaskIdentifier steps:steps];
+                                                                              
+    
+    // Build a navigation rule
+    ORKPredicateStepNavigationRule *predicateRule = nil;
+ 
+    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom" expectedString:@"headache"];
+                                                                                               
+
+    // The user didn't chose headache at the symptom step
+    NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
+
+    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
+                                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
+
+    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
 
 #### Saving Results on Task Completion
 
