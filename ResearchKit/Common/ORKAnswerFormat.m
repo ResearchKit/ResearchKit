@@ -1761,7 +1761,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         return nil;
     }
    
-    return @[[_textChoices objectAtIndex:_defaultIndex].value];
+    return @[[self textChoiceAtIndex:_defaultIndex].value];
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [self.numberFormatter stringFromNumber:number];
@@ -1797,7 +1797,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return @([number integerValue]);
 }
 
-- (ORKTextChoice *)textChoiceForIndex:(NSUInteger)index {
+- (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
     
     if (index >= _textChoices.count) {
         return nil;

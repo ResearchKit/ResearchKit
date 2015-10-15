@@ -472,7 +472,7 @@
     
     if (_currentNumberValue) {
         if ([self textScaleFormatProvider]) {
-            ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceForIndex:[self currentTextChoiceIndex]];
+            ORKTextChoice *textChoice = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]];
             self.valueLabel.text = textChoice.text;
         } else {
             NSNumber *newValue = [_formatProvider normalizedValueForNumber:_currentNumberValue];
@@ -510,7 +510,7 @@
 }
 
 - (id<NSCopying, NSCoding, NSObject>)currentTextChoiceValue {
-    id<NSCopying, NSCoding, NSObject> value = [[self textScaleFormatProvider] textChoiceForIndex:[self currentTextChoiceIndex]].value;
+    id<NSCopying, NSCoding, NSObject> value = [[self textScaleFormatProvider] textChoiceAtIndex:[self currentTextChoiceIndex]].value;
     return value;
 }
 
