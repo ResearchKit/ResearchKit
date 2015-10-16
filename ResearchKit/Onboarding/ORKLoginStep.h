@@ -53,17 +53,18 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
 
-- (instancetype)initWithIdentifier:(NSString *)identifier title:(nullable NSString *)title text:(nullable NSString *)text NS_UNAVAILABLE;
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text NS_UNAVAILABLE;
 
 /**
- Returns an initialized registrationg step using the specified identifier,
- title, text, and options.
+ Returns an initialized login step using the specified identifier, title, text, and options.
  
  @param identifier                      The string that identifies the step (see `ORKStep`).
  @param title                           The title of the form (see `ORKStep`).
  @param text                            The text shown immediately below the title (see `ORKStep`).
  @param email                           The email address that needs to be verified.
- @param loginStepViewControllerClass    The subclassed login step view controller.
+ @param loginViewControllerClass        The subclassed login step view controller class.
  
  @return As initialized verification step object.
  */

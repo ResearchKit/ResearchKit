@@ -1021,7 +1021,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName];
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: registrationOptions)
         registrationStep.passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
-//        registrationStep.passcodeInvalidMessage = NSLocalizedString("A valid password can only be between 4 and 8 digits long and include at least one numeric character.", comment: "")
+        registrationStep.passcodeInvalidMessage = NSLocalizedString("A valid password can only be between 4 and 8 digits long and include at least one numeric character.", comment: "")
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
@@ -1034,7 +1034,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         /*
         A verification step view controller sub class is required in order to use a verification step.
-        This class includes methods that interact with the buttons in the view. 
+        This class includes methods that interact with the buttons in the view and the email label.
         Overriding these methods allows for your desired functionality.
         */
         class verificationViewController : ORKVerificationStepViewController {
@@ -1063,7 +1063,6 @@ enum TaskListRow: Int, CustomStringConvertible {
                 let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemEmail) as? ORKTextQuestionResult
                 return emailQuestionResult?.textAnswer;
             }
-
         }
         
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")

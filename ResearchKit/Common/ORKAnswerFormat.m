@@ -2090,6 +2090,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (void)validateParameters {
+    [super validateParameters];
+    
     if (!_originalItemIdentifier) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Original item identifier cannot be nil." userInfo:nil];
     }

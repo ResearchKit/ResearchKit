@@ -52,10 +52,10 @@ ORK_CLASS_AVAILABLE
  Returns an initialized verification step using the specified identifier,
  title, text, and class.
   
- @param identifier                      The string that identifies the step (see `ORKStep`).
- @param title                           The title of the form (see `ORKStep`).
- @param text                            The text shown immediately below the title (see `ORKStep`).
- @param verificationViewController      The subclassed verification view controller.
+ @param identifier                          The string that identifies the step (see `ORKStep`).
+ @param title                               The title of the form (see `ORKStep`).
+ @param text                                The text shown immediately below the title (see `ORKStep`).
+ @param verificationViewControllerClass     The subclassed verification view controller class.
  
  @return As initialized verification step object.
  */
