@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -36,18 +36,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKRegistrationStepOption` flags let you include particular fields in addition
- to the default fields in the registration step.
+ to the default fields (email and password) in the registration step.
  */
-
 typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     /// Default behavior.
     ORKRegistrationStepDefault = (1 << 0),
     
-    /// Include the first name field.
-    ORKRegistrationStepIncludeFirstName = (1 << 1),
+    /// Include the given name field.
+    ORKRegistrationStepIncludeGivenName = (1 << 1),
     
-    /// Include the last name field.
-    ORKRegistrationStepIncludeLastName = (1 << 2),
+    /// Include the family name field.
+    ORKRegistrationStepIncludeFamilyName = (1 << 2),
     
     /// Include the gender field.
     ORKRegistrationStepIncludeGender = (1 << 3),
@@ -55,6 +54,18 @@ typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     /// Include the date of birth field.
     ORKRegistrationStepIncludeDOB = (1 << 4)
 } ORK_ENUM_AVAILABLE;
+
+
+/**
+ Constants for the form items included in the registration step.
+ These allow for convenient retrieval of user's inputted data from the result.
+ */
+ORK_EXTERN NSString *const ORKRegistrationFormItemEmail ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemPassword ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemGivenName ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemFamilyName ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemGender ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemDOB ORK_AVAILABLE_DECL;
 
 
 /**
@@ -68,13 +79,13 @@ ORK_CLASS_AVAILABLE
 @interface ORKRegistrationStep : ORKFormStep
 
 /**
- Returns an initialized registrationg step using the specified identifier, 
+ Returns an initialized registration step using the specified identifier,
  title, text, and options.
- 
+  
  @param identifier    The string that identifies the step (see `ORKStep`).
  @param title         The title of the form (see `ORKStep`).
  @param text          The text shown immediately below the title (see `ORKStep`).
- @param options       The options used for the step.
+ @param options       The options used for the step (see `ORKRegistrationStepOption`).
  
  @return As initialized registration step object.
  */
@@ -82,29 +93,6 @@ ORK_CLASS_AVAILABLE
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
                            options:(ORKRegistrationStepOption)options;
-
-/**
- Returns an initialized registrationg step using the specified identifier,
- title, and text.
- 
- @param identifier    The string that identifies the step (see `ORKStep`).
- @param title         The title of the form (see `ORKStep`).
- @param text          The text shown immediately below the title (see `ORKStep`).
- 
- @return As initialized registration step object.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text;
-
-/**
- Returns an initialized registrationg step using the specified identifier.
-  
- @param identifier    The string that identifies the step (see `ORKStep`).
- 
- @return As initialized registration step object.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier;
 
 /**
  The options used for the step.
@@ -116,9 +104,18 @@ ORK_CLASS_AVAILABLE
 /**
  The regex used to validate the passcode form item.
  
+ The passcode invalid message property should also be set along with this property.
  By default, there is no validation on the passcode.
  */
 @property (nonatomic, copy, nullable) NSString *passcodeValidationRegex;
+
+/**
+ The invalid message displayed if the passcode does not match the validation regex.
+ 
+ The passcode validation regex property should also be set along with this property.
+ By default, there is no invalid message.
+ */
+@property (nonatomic, copy, nullable) NSString *passcodeInvalidMessage;
 
 @end
 

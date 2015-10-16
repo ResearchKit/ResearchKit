@@ -35,6 +35,9 @@
 #import "ORKHelpers.h"
 
 
+NSString *const ORKLoginFormItemEmail = @"ORKLoginFormItemEmail";
+NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
+
 @implementation ORKLoginStep
 
 - (Class)stepViewControllerClass {
@@ -42,13 +45,21 @@
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text {
+    ORKThrowMethodUnavailableException();
+    return nil;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
           loginViewControllerClass:(Class)loginViewControllerClass {
-    self = [super initWithIdentifier:identifier];
+    
+    NSParameterAssert([loginViewControllerClass isSubclassOfClass:[ORKLoginStepViewController class]]);
+    
+    self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
-        self.title = title;
-        self.text = text;
         _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
     }
     return self;
@@ -59,7 +70,7 @@
     
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"email"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
@@ -73,9 +84,8 @@
         answerFormat.secureTextEntry = YES;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-        answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"password"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
@@ -91,6 +101,7 @@
 }
 
 - (BOOL)isOptional {
+    // This is necessary because the skip button is used as a `Forgot password?` button.
     return YES;
 }
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -30,7 +30,6 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import "ORKVerificationStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,19 +40,21 @@ NS_ASSUME_NONNULL_BEGIN
  
  The verification step contains an email field, change email button, and resend
  email button. The button actions must be overriden inside a subclassed verification
- view controller to provide navigation logic.
+ view controller to provide navigation logic. The email method must be overriden
+ to populate the email label.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStep : ORKStep
 
+- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
+
 /**
- Returns an initialized registrationg step using the specified identifier,
- title, text, and options.
- 
+ Returns an initialized verification step using the specified identifier,
+ title, text, and class.
+  
  @param identifier                      The string that identifies the step (see `ORKStep`).
  @param title                           The title of the form (see `ORKStep`).
  @param text                            The text shown immediately below the title (see `ORKStep`).
- @param email                           The email address that needs to be verified.
  @param verificationViewController      The subclassed verification view controller.
  
  @return As initialized verification step object.
@@ -61,21 +62,13 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-                             email:(NSString *)email
    verificationViewControllerClass:(Class)verificationViewControllerClass;
-
-/**
- The email used for the step.
- 
- The email is displayed on the step for the user to see.
- */
-@property (nonatomic, copy, readonly) NSString *email;
 
 /**
  The view controller subclass used for the step.
  
- The subclass allows you to override button actions in order to provide navigation and logic
- for the button items on the step.
+ The subclass allows you to override button actions in order to provide navigation logic
+ for the button items on the step, as well as, populating the email label.
  */
 @property (nonatomic, readonly) Class verificationViewControllerClass;
 

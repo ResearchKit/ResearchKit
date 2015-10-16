@@ -445,9 +445,9 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
         } else if ([aClass isSubclassOfClass:[ORKTimeIntervalAnswerFormat class]]) {
             [instance setValue:@(1) forKey:@"step"];
         } else if ([aClass isSubclassOfClass:[ORKLoginStep class]]) {
-            [instance setValue:NSStringFromClass([ORKLoginStep class]) forKey:@"loginViewControllerString"];
+            [instance setValue:NSStringFromClass([ORKLoginStepViewController class]) forKey:@"loginViewControllerString"];
         } else if ([aClass isSubclassOfClass:[ORKVerificationStep class]]) {
-            [instance setValue:NSStringFromClass([ORKVerificationStep class]) forKey:@"verificationViewControllerString"];
+            [instance setValue:NSStringFromClass([ORKVerificationStepViewController class]) forKey:@"verificationViewControllerString"];
         }
         
         // Serialization

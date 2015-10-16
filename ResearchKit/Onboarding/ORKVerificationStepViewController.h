@@ -63,4 +63,11 @@ ORK_CLASS_AVAILABLE
  */
 - (void)changeEmailButtonTapped;
 
+/**
+ The email address that is pending verification.
+ 
+ Override this method to populate the email label's text.
+ */
+- (NSString *)emailAddress;
+
 @end

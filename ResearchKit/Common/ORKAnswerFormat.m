@@ -1921,6 +1921,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeText;
 }
 
+- (void)validateParameters {
+    [super validateParameters];
+    
+    NSParameterAssert((self.regex && self.invalidMessage) || !(self.regex || self.invalidMessage));
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
     fmt->_maximumLength = _maximumLength;
@@ -2080,8 +2086,13 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValid:(id)answer {
-    NSNumber *numberAnswer = (NSNumber *)answer;
-    return [numberAnswer isEqual:@YES] ? YES : NO;
+    return [(NSNumber *)answer isEqual:@YES] ? YES : NO;
+}
+
+- (void)validateParameters {
+    if (!_originalItemIdentifier) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Original item identifier cannot be nil." userInfo:nil];
+    }
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

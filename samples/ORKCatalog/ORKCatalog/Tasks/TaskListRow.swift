@@ -1018,8 +1018,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let registrationOptions: ORKRegistrationStepOption = [.IncludeFirstName, .IncludeLastName];
+        let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName];
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: registrationOptions)
+        registrationStep.passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+//        registrationStep.passcodeInvalidMessage = NSLocalizedString("A valid password can only be between 4 and 8 digits long and include at least one numeric character.", comment: "")
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
@@ -1055,11 +1057,17 @@ enum TaskListRow: Int, CustomStringConvertible {
             override func continueButtonTapped() {
                 self.goForward();
             }
+            
+            override func emailAddress() -> String! {
+                let registrationStepResult = self.taskViewController?.result.resultForIdentifier(String(Identifier.RegistrationStep)) as? ORKStepResult
+                let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemEmail) as? ORKTextQuestionResult
+                return emailQuestionResult?.textAnswer;
+            }
 
         }
         
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, email: exampleEmailText, verificationViewControllerClass: verificationViewController.self)
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, verificationViewControllerClass: verificationViewController.self)
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,

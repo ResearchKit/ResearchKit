@@ -32,16 +32,12 @@
 #import "ORKVerificationStepView.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
-#import "ORKNavigationContainerView_Internal.h"
 
 
 static const CGFloat VerticalMargin = 30.0;
 
 @implementation ORKVerificationStepView {
-    ORKLabel *_emailLabel;
-    UIButton *_changeEmailButton;
     ORKSubheadlineLabel *_resendEmailLabel;
-    UIButton *_resendEmailButton;
     ORKSubheadlineLabel *_verifiedLabel;
 }
 
@@ -57,8 +53,7 @@ static const CGFloat VerticalMargin = 30.0;
         [self.stepView addSubview:_emailLabel];
         
         _changeEmailButton = [UIButton new];
-        NSString *changeEmailTitle = ORKLocalizedString(@"CHANGE_EMAIL_BUTTON_TITLE", nil);
-        [_changeEmailButton setTitle:changeEmailTitle forState:UIControlStateNormal];
+        [_changeEmailButton setTitle:ORKLocalizedString(@"CHANGE_EMAIL_BUTTON_TITLE", nil) forState:UIControlStateNormal];
         [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [self.stepView addSubview:_changeEmailButton];
         
@@ -67,8 +62,7 @@ static const CGFloat VerticalMargin = 30.0;
         [self.stepView addSubview:_resendEmailLabel];
         
         _resendEmailButton = [UIButton new];
-        NSString *resendEmailTitle = ORKLocalizedString(@"RESEND_EMAIL_BUTTON_TITLE", nil);
-        [_resendEmailButton setTitle:resendEmailTitle forState:UIControlStateNormal];
+        [_resendEmailButton setTitle:ORKLocalizedString(@"RESEND_EMAIL_BUTTON_TITLE", nil) forState:UIControlStateNormal];
         [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
         [self.stepView addSubview:_resendEmailButton];
         
@@ -138,18 +132,6 @@ static const CGFloat VerticalMargin = 30.0;
     [super tintColorDidChange];
     [_changeEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
     [_resendEmailButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-}
-
-- (ORKLabel *)emailLabel {
-    return _emailLabel;
-}
-
-- (UIButton *)changeEmailButton {
-    return _changeEmailButton;
-}
-
-- (UIButton *)resendEmailButton {
-    return _resendEmailButton;
 }
 
 @end

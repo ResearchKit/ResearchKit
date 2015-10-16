@@ -51,7 +51,7 @@
         _verificationStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _verificationStepView.headerView.captionLabel.text = [self verificationStep].title;
         _verificationStepView.headerView.instructionLabel.text = [self verificationStep].text;
-        _verificationStepView.emailLabel.text = [self verificationStep].email;
+        _verificationStepView.emailLabel.text = self.emailAddress;
         [self.view addSubview:_verificationStepView];
         
         [_verificationStepView.resendEmailButton addTarget:self
@@ -98,6 +98,10 @@
 }
 
 - (void)changeEmailButtonTapped {
+}
+
+- (NSString *)emailAddress {
+    return nil;
 }
 
 @end

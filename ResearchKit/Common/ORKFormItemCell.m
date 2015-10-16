@@ -497,6 +497,32 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @implementation ORKFormItemConfirmTextCell
 
+- (BOOL)isAnswerValidWithString:(NSString *)string {
+    BOOL isValid = NO;
+    if (string.length > 0) {
+        NSDictionary *savedAnswers = *self.savedAnswers;
+        ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
+        NSString *originalItemIdentifier = [answerFormat.originalItemIdentifier copy];
+        NSString *originalPassword = savedAnswers[originalItemIdentifier];
+        if (!ORKIsAnswerEmpty(originalPassword) && [originalPassword isEqualToString:string]) {
+            isValid = YES;
+        }
+    }
+    return isValid;
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([self isAnswerValidWithString:text]) {
+        [self ork_setAnswer:@YES];
+    } else {
+        [self ork_setAnswer:@NO];
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [super textFieldShouldEndEditing:textField];
     if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
@@ -510,30 +536,6 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.editingHighlight = NO;
     [self.delegate formItemCellDidResignFirstResponder:self];
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([self isAnswerValidWithString:text]) {
-        [self ork_setAnswer:@YES];
-    } else {
-        [self ork_setAnswer:@NO];
-    }
-    return YES;
-}
-
-- (BOOL)isAnswerValidWithString:(NSString *)string {
-    BOOL isValid = NO;
-    if (string.length > 0) {
-        NSDictionary *savedAnswers = *self.savedAnswers;
-        ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
-        NSString *originalItemIdentifier = [answerFormat.originalItemIdentifier copy];
-        NSString *originalPassword = savedAnswers[originalItemIdentifier];
-        if (originalPassword != ORKNullAnswerValue() && [originalPassword isEqualToString:string]) {
-            isValid = YES;
-        }
-    }
-    return isValid;
 }
 
 @end

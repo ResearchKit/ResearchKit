@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -43,13 +43,14 @@
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-                             email:(NSString *)email
    verificationViewControllerClass:(Class)verificationViewControllerClass {
+    
+    NSParameterAssert([verificationViewControllerClass isSubclassOfClass:[ORKVerificationStepViewController class]]);
+    
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
-        _email = email;
         _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
     }
     return self;
@@ -70,7 +71,6 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, email);
         ORK_DECODE_OBJ(aDecoder, verificationViewControllerString);
     }
     return self;
@@ -78,13 +78,11 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, email);
     ORK_ENCODE_OBJ(aCoder, verificationViewControllerString);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKVerificationStep *step = [super copyWithZone:zone];
-    step->_email = self.email;
     step->_verificationViewControllerString = self.verificationViewControllerString;
     return step;
 }
@@ -94,7 +92,6 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.email, castObject.email) &&
             ORKEqualObjects(self.verificationViewControllerString, castObject.verificationViewControllerString));
 }
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -33,8 +33,15 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Private.h"
-#import "ORKFormItem_Internal.h"
 
+
+NSString *const ORKRegistrationFormItemEmail = @"ORKRegistrationFormItemEmail";
+NSString *const ORKRegistrationFormItemPassword = @"ORKRegistrationFormItemPassword";
+NSString *const ORKRegistrationFormItemConfirmPassword = @"ORKRegistrationFormItemConfirmPassword";
+NSString *const ORKRegistrationFormItemGivenName = @"ORKRegistrationFormItemGivenName";
+NSString *const ORKRegistrationFormItemFamilyName = @"ORKRegistrationFormItemFamilyName";
+NSString *const ORKRegistrationFormItemGender = @"ORKRegistrationFormItemGender";
+NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 
 @implementation ORKRegistrationStep
 
@@ -70,7 +77,7 @@
     
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"email"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
@@ -80,13 +87,15 @@
     
     {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
+        answerFormat.regex = self.passcodeValidationRegex;
+        answerFormat.invalidMessage = self.passcodeInvalidMessage;
         answerFormat.multipleLines = NO;
         answerFormat.secureTextEntry = YES;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
 
-        ORKFormItem *passwordItem = [[ORKFormItem alloc] initWithIdentifier:@"password"
+        ORKFormItem *passwordItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         passwordItem.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
@@ -102,7 +111,7 @@
         confirmAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         confirmAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
 
-        ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:@"confirm_password"
+        ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemConfirmPassword
                                                                       text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
                                                                answerFormat:confirmAnswerFormat];
         confirmItem.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
@@ -115,24 +124,24 @@
         [formItems addObject:item];
     }
     
-    if (_options & ORKRegistrationStepIncludeFirstName) {
+    if (_options & ORKRegistrationStepIncludeGivenName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"given_name"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGivenName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = ORKLocalizedString(@"FIRST_NAME_ITEM_PLACEHOLDER", nil);
+        item.placeholder = ORKLocalizedString(@"GIVEN_NAME_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
     
-    if (_options & ORKRegistrationStepIncludeLastName) {
+    if (_options & ORKRegistrationStepIncludeFamilyName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"family_name"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemFamilyName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                        answerFormat:answerFormat];
-        item.placeholder = ORKLocalizedString(@"LAST_NAME_ITEM_PLACEHOLDER", nil);
+        item.placeholder = ORKLocalizedString(@"FAMILY_NAME_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
         [formItems addObject:item];
     }
@@ -142,7 +151,7 @@
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@1],
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@2]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"gender"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGender
                                                                text:ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
@@ -162,7 +171,7 @@
                                                                                  minimumDate:nil
                                                                                  maximumDate:nil
                                                                                     calendar:nil];
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"dob"
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemDOB
                                                                text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
@@ -182,6 +191,7 @@
     if (self) {
         ORK_DECODE_INTEGER(aDecoder, options);
         ORK_DECODE_OBJ(aDecoder, passcodeValidationRegex);
+        ORK_DECODE_OBJ(aDecoder, passcodeInvalidMessage);
     }
     return self;
 }
@@ -190,12 +200,14 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, options);
     ORK_ENCODE_OBJ(aCoder, passcodeValidationRegex);
+    ORK_ENCODE_OBJ(aCoder, passcodeInvalidMessage);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [super copyWithZone:zone];
     step->_options = self.options;
     step->_passcodeValidationRegex = self.passcodeValidationRegex;
+    step->_passcodeInvalidMessage = self.passcodeInvalidMessage;
     return step;
 }
 
@@ -205,7 +217,8 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             self.options == castObject.options &&
-            ORKEqualObjects(self.passcodeValidationRegex, castObject.passcodeValidationRegex));
+            ORKEqualObjects(self.passcodeValidationRegex, castObject.passcodeValidationRegex) &&
+            ORKEqualObjects(self.passcodeInvalidMessage, castObject.passcodeInvalidMessage));
 }
 
 @end

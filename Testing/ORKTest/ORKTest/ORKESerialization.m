@@ -659,14 +659,14 @@ ret =
         },
         (@{
            PROPERTY(options, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(passcodeValidationRegex, NSString, NSObject, YES, nil, nil)
+           PROPERTY(passcodeValidationRegex, NSString, NSObject, YES, nil, nil),
+           PROPERTY(passcodeInvalidMessage, NSString, NSObject, YES, nil, nil)
            })),
    ENTRY(ORKVerificationStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) email:GETPROP(dict, email) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
+             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
          },
          (@{
-            PROPERTY(email, NSString, NSObject, NO, nil, nil),
             PROPERTY(verificationViewControllerString, NSString, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKLoginStep,

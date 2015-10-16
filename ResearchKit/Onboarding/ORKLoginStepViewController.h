@@ -43,7 +43,8 @@
 
 /**
  Action method for the forgot password button.
- 
+
+ The forgot password button is shown in place of the skip button.
  Override this method to provide custom logic for the button action.
  */
 - (void)forgotPasswordButtonTapped;

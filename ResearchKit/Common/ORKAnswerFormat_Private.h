@@ -36,12 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text
- response
- from the user and validates it with another text answer format.
+ response from the user and validates it with another text answer format.
  
  An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
 @interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
+
+- (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
@@ -50,14 +51,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns an initialized text answer format using the original item identifier.
  
- @param originalItemIdentifier    The original item identifier against which this answer item is validated.
+ @param originalItemIdentifier    The form item identifier against which this answer item is validated.
  
  @return An initialized confirm text answer format.
  */
 - (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier;
 
 /**
- The identifier for the original item that the current item will be validated against.
+ The identifier for the form item that the current item will be validated against.
  */
 @property (nonatomic, copy, readonly) NSString *originalItemIdentifier;
 

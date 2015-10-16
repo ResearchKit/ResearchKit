@@ -30,12 +30,17 @@
 
 
 #import <ResearchKit/ResearchKit.h>
-#import "ORKLoginStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ORKLoginStepViewController;
+/**
+ Constants for the form items included in the login step.
+ These allow for convenient retrieval of user's inputted data from the result.
+ */
+ORK_EXTERN NSString *const ORKLoginFormItemEmail ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKLoginFormItemPassword ORK_AVAILABLE_DECL;
+
 
 /**
  The `ORKLoginStep` class represents a form step that provides fields commonly used
@@ -58,7 +63,7 @@ ORK_CLASS_AVAILABLE
  @param title                           The title of the form (see `ORKStep`).
  @param text                            The text shown immediately below the title (see `ORKStep`).
  @param email                           The email address that needs to be verified.
- @param loginStepViewController         The subclassed login step view controller.
+ @param loginStepViewControllerClass    The subclassed login step view controller.
  
  @return As initialized verification step object.
  */
@@ -70,7 +75,7 @@ ORK_CLASS_AVAILABLE
 /**
  The view controller subclass used for the step.
  
- The subclass allows you to override button actions in order to provide navigation and logic
+ The subclass allows you to override button actions in order to provide navigation logic
  for the button items on the step.
  */
 @property (nonatomic, readonly) Class loginViewControllerClass;
