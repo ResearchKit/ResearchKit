@@ -251,7 +251,7 @@
     }
     
     if ([[_answer class] isSubclassOfClass:[CLPlacemark class]]) {
-        ORKPlacemark *placemarkAnswer = [[ORKPlacemark alloc] initWithPlacemark:(CLPlacemark *)answer];
+        ORKPlacemark *placemarkAnswer = [[ORKPlacemark alloc] initWithPlacemark:answer];
         [_mapView addAnnotation:placemarkAnswer];
         
         const float spanX = 0.00725;
