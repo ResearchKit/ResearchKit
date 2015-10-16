@@ -540,11 +540,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.textChoices, castObject.textChoices));
+            ORKEqualObjects(_textChoices, castObject.textChoices));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.textChoices hash];
+    return [super hash] ^ [_textChoices hash];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -682,12 +682,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.textChoices, castObject.textChoices) &&
+            ORKEqualObjects(_textChoices, castObject.textChoices) &&
             (_style == castObject.style));
 }
 
 - (NSUInteger)hash {
-    return [super hash] ^ [self.textChoices hash] ^ _style;
+    return [super hash] ^ [_textChoices hash] ^ _style;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -1390,12 +1390,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(_maximum);
 }
-- (NSNumber *)defaultNumber {
+- (NSNumber *)defaultAnswer {
     if ( _defaultValue > _maximum || _defaultValue < _minimum) {
         return nil;
     }
     
-    NSInteger integer = round((double)(_defaultValue-_minimum)/(double)_step)*_step + _minimum;
+    NSInteger integer = round( (double)( _defaultValue - _minimum ) / (double)_step ) * _step + _minimum;
     
     return @(integer);
 }
@@ -1595,7 +1595,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSNumber *)maximumNumber {
     return @(_maximum);
 }
-- (NSNumber *)defaultNumber {
+- (NSNumber *)defaultAnswer {
     if ( _defaultValue > _maximum || _defaultValue < _minimum) {
         return nil;
     }
@@ -1722,7 +1722,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (Class)questionResultClass {
-    return [ORKScaleQuestionResult class];
+    return [ORKChoiceQuestionResult class];
 }
 
 - (instancetype)init {
@@ -1755,22 +1755,23 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return @(1);
 }
 - (NSNumber *)maximumNumber {
-    return @(self.textChoices.count);
+    return @(_textChoices.count);
 }
-- (NSNumber *)defaultNumber {
+- (id<NSObject, NSCopying, NSCoding>)defaultAnswer {
     if (_defaultIndex < 0 || _defaultIndex >= _textChoices.count) {
         return nil;
     }
-    return @(_defaultIndex);
+   
+    return @[[self textChoiceAtIndex:_defaultIndex].value];
 }
 - (NSString *)localizedStringForNumber:(NSNumber *)number {
     return [self.numberFormatter stringFromNumber:number];
 }
 - (NSString *)minimumValueDescription {
-    return ((ORKTextChoice *)[self.textChoices firstObject]).text;
+    return _textChoices.firstObject.text;
 }
 - (NSString *)maximumValueDescription {
-    return ((ORKTextChoice *)[self.textChoices lastObject]).text;
+    return _textChoices.lastObject.text;
 }
 - (UIImage *)minimumImage {
     return nil;
@@ -1790,11 +1791,37 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSInteger)numberOfSteps {
-    return self.textChoices.count - 1;
+    return _textChoices.count - 1;
 }
 
 - (NSNumber *)normalizedValueForNumber:(NSNumber *)number {
     return @([number integerValue]);
+}
+
+- (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
+    
+    if (index >= _textChoices.count) {
+        return nil;
+    }
+    return _textChoices[index];
+}
+
+- (ORKTextChoice *)textChoiceForValue:(id<NSCopying, NSCoding, NSObject>)value {
+    __block ORKTextChoice *choice = nil;
+    
+    [_textChoices enumerateObjectsUsingBlock:^(ORKTextChoice * _Nonnull textChoice, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([textChoice.value isEqual:value]) {
+            choice = textChoice;
+            *stop = YES;
+        }
+    }];
+    
+    return choice;
+}
+
+- (NSUInteger)textChoiceIndexForValue:(id<NSCopying, NSCoding, NSObject>)value {
+   ORKTextChoice *choice = [self textChoiceForValue:value];
+   return choice ? [_textChoices indexOfObject:choice] : NSNotFound;
 }
 
 - (void)validateParameters {

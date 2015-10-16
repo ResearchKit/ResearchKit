@@ -304,10 +304,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     
     if (self) {
         self.delegate = delegate;
-        self.restorationClass = [self class];
-        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-        [self decodeRestorableStateWithCoder:unarchiver];
-        [self applicationFinishedRestoringState];
+        if (data != nil) {
+            self.restorationClass = [self class];
+            NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+            [self decodeRestorableStateWithCoder:unarchiver];
+            [self applicationFinishedRestoringState];
+        }
     }
     return self;
 }

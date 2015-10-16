@@ -300,6 +300,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
                            @"Test Charts",
+                           @"Test Charts Performance",
                            @"Toggle Tint Color",
                            @"Wait Task",
                            ],
@@ -526,14 +527,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         task = [self makeTaskWithIdentifier:identifier];
     }
     
-    if (_savedViewControllers[identifier])
-    {
-        NSData *data = _savedViewControllers[identifier];
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
-    } else {
-        // No saved data, just create the task and the corresponding task view controller.
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
-    }
+    // If we have stored data then data will contain the stored data.
+    // If we don't, data will be nil (and the task will be opened up as a 'new' task.
+    NSData *data = _savedViewControllers[identifier];
+    self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     
     [self beginTask];
 }
@@ -1752,6 +1749,24 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSMutableArray *steps = [NSMutableArray new];
     
     {
+        {
+            ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"scale_form_00" title:@"Optional Form Items" text:@"Optional form with a required scale item with a default value"];
+            NSMutableArray *items = [NSMutableArray new];
+            [steps addObject:step];
+            
+            {
+                ORKScaleAnswerFormat *format = [ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:4 step:1 vertical:YES maximumValueDescription:nil minimumValueDescription:nil];
+                ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale_form"
+                                                                       text:@"Optional scale"
+                                                               answerFormat:format];
+                item.optional = NO;
+                [items addObject:item];
+            }
+                 
+            [step setFormItems:items];
+        }
+
+        
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_000" title:@"Optional Form Items" text:@"Optional form with no required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
@@ -2401,7 +2416,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
         
         ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
-                                                                                               defaultIndex:NSIntegerMax
+                                                                                               defaultIndex:3
                                                                                                    vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_14"
@@ -3431,7 +3446,13 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 - (void)testChartsButtonTapped:(id)sender {
     UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+- (void)testChartsPerformanceButtonTapped:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
     [self presentViewController:chartListViewController animated:YES completion:nil];
 }
 
