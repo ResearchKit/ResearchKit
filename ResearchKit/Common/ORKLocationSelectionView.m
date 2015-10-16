@@ -47,6 +47,9 @@
 #import "ORKSkin.h"
 
 
+static const CGFloat HorizontalMargin = 15.0;
+static const CGFloat HorizontalTextFieldMargin = 20.0;
+
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
@@ -105,7 +108,7 @@
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:LocationSelectionViewTextFieldHeight]];
     
-    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(20.0) : @(0.0))};
+    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(HorizontalTextFieldMargin) : @(0.0))};
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_textField]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
@@ -163,7 +166,8 @@
     
     NSMutableArray *constraints = [NSMutableArray new];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_mapView)]];
+    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(0.0) : @(HorizontalMargin))};
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-LocationSelectionViewTextFieldVerticalMargin]];
     _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
     [constraints addObject:_mapViewHeightConstraint];
