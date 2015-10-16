@@ -109,15 +109,15 @@ ORK_CLASS_AVAILABLE
  
  @param identifier    The string that identifies the form item, which should be unique within the form step.
  @param text          The text displayed as a prompt for the form item's question.
- @param optional      Is this item optional?
  @param answerFormat  The answer format for the form item.
+ @param optional      Is this item optional?
  
  @return An initialized form item.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                               text:(nullable NSString *)text
-                          optional:(BOOL) optional
-                      answerFormat:(nullable ORKAnswerFormat *)answerFormat;
+                      answerFormat:(nullable ORKAnswerFormat *)answerFormat
+                          optional:(BOOL) optional;
 
 /**
  Returns an initialized form item using the specified identifier, title, and answer format.
