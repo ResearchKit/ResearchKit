@@ -981,12 +981,14 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)collectToolbarItemsFromViewController:(UIViewController *)viewController {
-    _pageViewController.toolbarItems = viewController.toolbarItems;
-    _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
-    _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
-    if (![self shouldDisplayProgressLabel]) {
-        _pageViewController.navigationItem.title = viewController.navigationItem.title;
-        _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+    if (_currentStepViewController == viewController) {
+        _pageViewController.toolbarItems = viewController.toolbarItems;
+        _pageViewController.navigationItem.leftBarButtonItem = viewController.navigationItem.leftBarButtonItem;
+        _pageViewController.navigationItem.rightBarButtonItem = viewController.navigationItem.rightBarButtonItem;
+        if (![self shouldDisplayProgressLabel]) {
+            _pageViewController.navigationItem.title = viewController.navigationItem.title;
+            _pageViewController.navigationItem.titleView = viewController.navigationItem.titleView;
+        }
     }
 }
 
@@ -1290,6 +1292,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
+    //TODO: move code to stepViewController: goForward: animated:, after stepViewControllerWillAppear: call
     if (stepViewController.parentReviewStep.isStandalone) {
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
     }
