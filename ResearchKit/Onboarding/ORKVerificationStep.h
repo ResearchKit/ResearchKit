@@ -46,8 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStep : ORKStep
 
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_UNAVAILABLE;
-
 /**
  Returns an initialized registrationg step using the specified identifier,
  title, text, and options.
@@ -64,7 +62,7 @@ ORK_CLASS_AVAILABLE
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
                              email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController;
+   verificationViewControllerClass:(Class)verificationViewControllerClass;
 
 /**
  The email used for the step.
@@ -79,7 +77,7 @@ ORK_CLASS_AVAILABLE
  The subclass allows you to override button actions in order to provide navigation and logic
  for the button items on the step.
  */
-@property (nonatomic, readonly) ORKVerificationStepViewController *verificationViewController;
+@property (nonatomic, readonly) Class verificationViewControllerClass;
 
 @end
 

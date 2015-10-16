@@ -30,6 +30,7 @@
 
 
 #import "ORKLoginStep.h"
+#import "ORKLoginStep_Internal.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
 
@@ -37,30 +38,18 @@
 @implementation ORKLoginStep
 
 - (Class)stepViewControllerClass {
-    return [_loginViewController class];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    ORKThrowMethodUnavailableException();
-    return nil;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
-                              text:(NSString *)text {
-    ORKThrowMethodUnavailableException();
-    return nil;
+    return self.loginViewControllerClass;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-               loginViewController:(ORKLoginStepViewController *)loginViewController {
+          loginViewControllerClass:(Class)loginViewControllerClass {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
-        _loginViewController = loginViewController;
+        _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
     }
     return self;
 }
@@ -97,6 +86,10 @@
     return formItems;
 }
 
+- (Class)loginViewControllerClass {
+    return NSClassFromString(_loginViewControllerString);
+}
+
 - (BOOL)isOptional {
     return YES;
 }
@@ -108,19 +101,19 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ(aDecoder, loginViewController);
+        ORK_DECODE_OBJ(aDecoder, loginViewControllerString);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    ORK_ENCODE_OBJ(aCoder, loginViewController);
+    ORK_ENCODE_OBJ(aCoder, loginViewControllerString);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLoginStep *step = [super copyWithZone:zone];
-    step->_loginViewController = self.loginViewController;
+    step->_loginViewControllerString = self.loginViewControllerString;
     return step;
 }
 
@@ -129,7 +122,7 @@
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.loginViewController, castObject.loginViewController));
+            ORKEqualObjects(self.loginViewControllerString, castObject.loginViewControllerString));
 }
 
 @end

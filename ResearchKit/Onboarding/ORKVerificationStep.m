@@ -30,33 +30,33 @@
 
 
 #import "ORKVerificationStep.h"
+#import "ORKVerificationStep_Internal.h"
 #import "ORKHelpers.h"
 
 
 @implementation ORKVerificationStep
 
 - (Class)stepViewControllerClass {
-    return [_verificationViewController class];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    ORKThrowMethodUnavailableException();
-    return nil;
+    return self.verificationViewControllerClass;
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
                              email:(NSString *)email
-        verificationViewController:(ORKVerificationStepViewController *)verificationViewController {
+   verificationViewControllerClass:(Class)verificationViewControllerClass {
     self = [super initWithIdentifier:identifier];
     if (self) {
         self.title = title;
         self.text = text;
         _email = email;
-        _verificationViewController = verificationViewController;
+        _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
     }
     return self;
+}
+
+- (Class)verificationViewControllerClass {
+    return NSClassFromString(_verificationViewControllerString);
 }
 
 - (BOOL)allowsBackNavigation {
@@ -71,7 +71,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ(aDecoder, email);
-        ORK_DECODE_OBJ(aDecoder, verificationViewController);
+        ORK_DECODE_OBJ(aDecoder, verificationViewControllerString);
     }
     return self;
 }
@@ -79,13 +79,13 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, email);
-    ORK_ENCODE_OBJ(aCoder, verificationViewController);
+    ORK_ENCODE_OBJ(aCoder, verificationViewControllerString);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKVerificationStep *step = [super copyWithZone:zone];
     step->_email = self.email;
-    step->_verificationViewController = self.verificationViewController;
+    step->_verificationViewControllerString = self.verificationViewControllerString;
     return step;
 }
 
@@ -95,7 +95,7 @@
     __typeof(self) castObject = object;
     return (isParentSame &&
             ORKEqualObjects(self.email, castObject.email) &&
-            ORKEqualObjects(self.verificationViewController, castObject.verificationViewController));
+            ORKEqualObjects(self.verificationViewControllerString, castObject.verificationViewControllerString));
 }
 
 @end

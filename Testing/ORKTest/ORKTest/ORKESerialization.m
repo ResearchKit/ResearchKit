@@ -663,18 +663,18 @@ ret =
            })),
    ENTRY(ORKVerificationStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) email:GETPROP(dict, email) verificationViewController:GETPROP(dict, verificationViewController)];
+             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) email:GETPROP(dict, email) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
          },
          (@{
             PROPERTY(email, NSString, NSObject, NO, nil, nil),
-            PROPERTY(verificationViewController, ORKVerificationStepViewController, ORKStepViewController, YES, nil, nil)
+            PROPERTY(verificationViewControllerString, NSString, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKLoginStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKLoginStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) loginViewController:GETPROP(dict, loginViewController)];
+             return [[ORKLoginStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) loginViewControllerClass:NSClassFromString(GETPROP(dict, loginViewControllerString))];
          },
          (@{
-            PROPERTY(loginViewController, ORKLoginStepViewController, ORKFormStepViewController, YES, nil, nil)
+            PROPERTY(loginViewControllerString, NSString, NSObject, NO, nil, nil)
             })),
   ENTRY(ORKDeviceMotionRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
@@ -876,6 +876,7 @@ ret =
          },
          (@{
             PROPERTY(originalItemIdentifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(maximumLength, NSNumber, NSObject, YES, nil, nil)
             })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
