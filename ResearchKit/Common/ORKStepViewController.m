@@ -285,8 +285,12 @@
     return _hasBeenPresented;
 }
 
-- (BOOL)canChangeStepResult {
-    return !_parentReviewStep || !_parentReviewStep.isStandalone;
+- (BOOL)isBeingReviewed {
+    return _parentReviewStep != nil;
+}
+
+- (BOOL)readOnlyMode {
+    return self.isBeingReviewed && _parentReviewStep.isStandalone;
 }
 
 #pragma mark - Action Handlers

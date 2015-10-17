@@ -1001,11 +1001,11 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 - (NSArray *)stepsForReviewStep:(ORKReviewStep *)reviewStep {
     NSMutableArray *steps = [[NSMutableArray alloc] init];
     if (reviewStep.isStandalone) {
-        steps = [NSMutableArray arrayWithArray:reviewStep.steps];
+        steps = nil;
     } else {
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
-            if (nextStep && nextStep != reviewStep) {
+            if (nextStep && nextStep.identifier != reviewStep.identifier) {
                 [steps addObject:nextStep];
             } else {
                 *stop = YES;
@@ -1220,7 +1220,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)stepViewController:(ORKStepViewController *)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction {
     
-    if (stepViewController.canChangeStepResult) {
+    if (!stepViewController.readOnlyMode) {
         // Add step result object
         [self setManagedResult:[stepViewController result] forKey:stepViewController.step.identifier];
     }
@@ -1292,7 +1292,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
-    //TODO: move code to stepViewController: goForward: animated:, after stepViewControllerWillAppear: call
     if (stepViewController.parentReviewStep.isStandalone) {
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
     }

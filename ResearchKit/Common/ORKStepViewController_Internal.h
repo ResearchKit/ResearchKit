@@ -55,7 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
 
-@property (nonatomic, readonly) BOOL canChangeStepResult;
+@property (nonatomic, readonly) BOOL readOnlyMode;
+
+@property (nonatomic, readonly) BOOL isBeingReviewed;
 
 @property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
 

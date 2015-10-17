@@ -38,7 +38,7 @@
 #import "ORKTableContainerView.h"
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
-#import "ORKTextChoiceCellGroup.h"
+#import "ORKChoiceViewCell.h"
 
 
 typedef NS_ENUM(NSInteger, ORKReviewSection) {
@@ -51,15 +51,11 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) ORKStepHeaderView *headerView;
 
 @end
 
 @implementation ORKReviewStepViewController {
     ORKNavigationContainerView *_continueSkipView;
-    ORKTextChoiceCellGroup *_choiceCellGroup;
-    ORKTextChoiceAnswerFormat *_answerFormat;
 }
 
 #pragma clang diagnostic push
@@ -70,31 +66,26 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 }
 #pragma clang diagnostic pop
  
-- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray *)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
+- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *>*)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];
     if (self && [self reviewStep]) {
-        NSMutableArray *filteredSteps = [[NSMutableArray alloc] init];
-        [steps enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSArray<ORKStep *> *stepsToFilter = [self reviewStep].steps != nil ? [self reviewStep].steps : steps;
+        NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
+        [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || [obj isKindOfClass:[ORKInstructionStep class]];
             if (includeStep) {
                 [filteredSteps addObject:obj];
             }
         }];
         _steps = [filteredSteps copy];
-        _resultSource = resultSource;
+        _resultSource = [self reviewStep].resultSource != nil ? [self reviewStep].resultSource : resultSource;
     }
     return self;
 }
 
-- (void)reviewDataDidChange {
-    [_tableView reloadData];
-    [_tableContainer setNeedsLayout];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self reviewDataDidChange];
-    [self.taskViewController setRegisteredScrollView:_tableView];
+    [self.taskViewController setRegisteredScrollView: _tableContainer.tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -109,7 +100,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 
 - (void)setLearnMoreButtonItem:(UIBarButtonItem *)learnMoreButtonItem {
     [super setLearnMoreButtonItem:learnMoreButtonItem];
-    _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+    _tableContainer.stepHeaderView.learnMoreButtonItem = self.learnMoreButtonItem;
 }
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
@@ -123,27 +114,23 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     [_tableContainer removeFromSuperview];
     _tableContainer = nil;
     
-    _tableView.delegate = nil;
-    _tableView.dataSource = nil;
-    _tableView = nil;
-    _headerView = nil;
+    _tableContainer.tableView.delegate = nil;
+    _tableContainer.tableView.dataSource = nil;
     _continueSkipView = nil;
     
     if ([self reviewStep]) {
         _tableContainer = [[ORKTableContainerView alloc] initWithFrame:self.view.bounds];
-        _tableView = _tableContainer.tableView;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.clipsToBounds = YES;
+        _tableContainer.tableView.delegate = self;
+        _tableContainer.tableView.dataSource = self;
+        _tableContainer.tableView.clipsToBounds = YES;
 
         [self.view addSubview:_tableContainer];
         _tableContainer.tapOffView = self.view;
         
-        _headerView = _tableContainer.stepHeaderView;
-        _headerView.captionLabel.useSurveyMode = self.step.useSurveyMode;
-        _headerView.captionLabel.text = [self reviewStep].title;
-        _headerView.instructionLabel.text = [self reviewStep].text;
-        _headerView.learnMoreButtonItem = self.learnMoreButtonItem;
+        _tableContainer.stepHeaderView.captionLabel.useSurveyMode = self.step.useSurveyMode;
+        _tableContainer.stepHeaderView.captionLabel.text = [self reviewStep].title;
+        _tableContainer.stepHeaderView.instructionLabel.text = [self reviewStep].text;
+        _tableContainer.stepHeaderView.learnMoreButtonItem = self.learnMoreButtonItem;
         
         _continueSkipView = _tableContainer.continueSkipContainerView;
         _continueSkipView.skipButtonItem = self.skipButtonItem;
@@ -167,20 +154,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) {
-        return 1;
-    }
-    NSMutableArray *textChoices = [[NSMutableArray alloc] init];
-    [_steps enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        ORKStep *step = (ORKStep*) object;
-        //TODO: process results
-        if (step.title) {
-            [textChoices addObject:@[step.title]];
-        }
-    }];
-    _answerFormat = [[ORKTextChoiceAnswerFormat alloc] initWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices: textChoices];
-    _choiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:_answerFormat answer:nil beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] immediateNavigation:YES];
-    return _choiceCellGroup.size;
+    return (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) ? 1 : _steps.count;
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -197,8 +171,10 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
     ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
+        cell = [[ORKChoiceViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    cell.immediateNavigation = YES;
+    cell.shortLabel.text = _steps[indexPath.row].title;
     return cell;
 }
 
@@ -223,20 +199,14 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [_choiceCellGroup didSelectCellAtIndexPath:indexPath];
     if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:willReviewStep:)]) {
         [self.reviewDelegate reviewStepViewController:self willReviewStep:_steps[indexPath.row]];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == ORKReviewSectionAnswer ? [self heightForChoiceItemOptionAtIndex:indexPath.row] : 1;
-}
-
-- (CGFloat)heightForChoiceItemOptionAtIndex:(NSInteger)index {
-    ORKTextChoice *option = [(ORKTextChoiceAnswerFormat *)_answerFormat textChoices][index];
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:option.text LongText:option.detailText inTableView:_tableView];
-    return height;
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:_steps[indexPath.row].title LongText:@"" inTableView:_tableContainer.tableView];
+    return indexPath.section == ORKReviewSectionAnswer ? height : 1;
 }
 
 @end

@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
-            _continueSkipView.hidden = self.parentReviewStep;
+            _continueSkipView.hidden = self.isBeingReviewed;
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -187,7 +187,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.questionCustomView = _customQuestionView;
                 _customQuestionView.delegate = self;
                 _customQuestionView.answer = [self answer];
-                _customQuestionView.userInteractionEnabled = self.canChangeStepResult;
+                _customQuestionView.userInteractionEnabled = !self.readOnlyMode;
             } else {
                 ORKQuestionStepCellHolderView *cellHolderView = [ORKQuestionStepCellHolderView new];
                 cellHolderView.delegate = self;
@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 [NSLayoutConstraint activateConstraints:
                  [cellHolderView.cell suggestedCellHeightConstraintsForView:self.parentViewController.view]];
                 cellHolderView.answer = [self answer];
-                cellHolderView.userInteractionEnabled = self.canChangeStepResult;
+                cellHolderView.userInteractionEnabled = !self.readOnlyMode;
                 _questionView.questionCustomView = cellHolderView;
             }
             
@@ -204,7 +204,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-            _questionView.continueSkipContainer.hidden = self.parentReviewStep;
+            _questionView.continueSkipContainer.hidden = self.isBeingReviewed;
             
             NSMutableArray *constraints = [NSMutableArray new];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
@@ -499,7 +499,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 // Not to use `ImmediateNavigation` when current step already has an answer.
 // So user is able to review the answer when it is present.
 - (BOOL)isStepImmediateNavigation {
-    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.parentReviewStep;
+    return [self.questionStep isFormatImmediateNavigation] && [self hasAnswer] == NO && !self.isBeingReviewed;
 }
 
 #pragma mark - ORKQuestionStepCustomViewDelegate
@@ -620,7 +620,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         cell = [_choiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
     }
     
-    cell.userInteractionEnabled = self.canChangeStepResult;
+    cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
 }
 

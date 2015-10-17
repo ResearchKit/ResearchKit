@@ -3413,10 +3413,6 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     }];
 }
 
-- (BOOL)taskViewController:(ORKTaskViewController *)taskViewController reviewStep:(id)reviewStep shouldIncludeStep:(ORKStep *)step {
-    return YES;
-}
-
 #pragma mark - UI state restoration
 
 /*

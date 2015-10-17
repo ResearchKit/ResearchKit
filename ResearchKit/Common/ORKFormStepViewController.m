@@ -518,6 +518,7 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
+        _continueSkipView.hidden = self.isBeingReviewed;
     }
 }
 
@@ -832,7 +833,7 @@
             }
         }
     }
-    cell.userInteractionEnabled = self.canChangeStepResult;
+    cell.userInteractionEnabled = !self.readOnlyMode;
     return cell;
 }
 

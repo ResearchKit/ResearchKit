@@ -51,7 +51,7 @@ ORK_CLASS_AVAILABLE
 
 @property (nonatomic, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 
-@property (nonatomic, nullable, readonly) NSArray *steps;
+@property (nonatomic, nullable, readonly) NSArray<ORKStep *> *steps;
 
 @property (nonatomic, nullable, readonly) id<ORKTaskResultSource> resultSource;
 
