@@ -1334,7 +1334,7 @@ static NSString *const _ORKPresentedDate = @"presentedDate";
     [coder encodeObject:_task.identifier forKey:_ORKTaskIdentifierRestoreKey];
     
     ORKStep *step = [_currentStepViewController step];
-    if ([step isRestorable] && !(_currentStepViewController.parentReviewStep && _currentStepViewController.parentReviewStep.isStandalone)) {
+    if ([step isRestorable] && !(_currentStepViewController.isBeingReviewed && _currentStepViewController.parentReviewStep.isStandalone)) {
         [coder encodeObject:step.identifier forKey:_ORKStepIdentifierRestoreKey];
     } else if (_lastRestorableStepIdentifier) {
         [coder encodeObject:_lastRestorableStepIdentifier forKey:_ORKStepIdentifierRestoreKey];
