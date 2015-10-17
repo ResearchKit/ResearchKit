@@ -307,7 +307,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Interruptible Task",
                            @"Navigable Ordered Task",
                            @"Test Charts",
-                           @"Toggle Tint Color"
+                           @"Test Charts Performance",
+                           @"Toggle Tint Color",
+                           @"Wait Task",
                            ],
                        ];
 }
@@ -493,6 +495,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeEmbeddedReviewStep];
     } else if ([identifier isEqualToString:StandaloneReviewStepTaskIdentifier]) {
         return [self makeStandaloneReviewStep];
+    } if ([identifier isEqualToString:WaitTaskIdentifier]) {
+        return [self makeWaitingTask];
     }
 
     return nil;

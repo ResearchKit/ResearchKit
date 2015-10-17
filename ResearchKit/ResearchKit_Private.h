@@ -46,6 +46,7 @@
 #import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
 #import <ResearchKit/ORKReviewStepViewController.h>
+#import <ResearchKit/ORKWaitStepViewController.h>
 
 // Custom steps
 #import <ResearchKit/ORKCustomStepView.h>
