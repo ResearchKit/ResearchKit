@@ -658,9 +658,7 @@ ret =
             return [[ORKRegistrationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) options:((NSNumber *)GETPROP(dict, options)).integerValue];
         },
         (@{
-           PROPERTY(options, NSNumber, NSObject, NO, nil, nil),
-           PROPERTY(passcodeValidationRegex, NSString, NSObject, YES, nil, nil),
-           PROPERTY(passcodeInvalidMessage, NSString, NSObject, YES, nil, nil)
+           PROPERTY(options, NSNumber, NSObject, NO, nil, nil)
            })),
    ENTRY(ORKVerificationStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {

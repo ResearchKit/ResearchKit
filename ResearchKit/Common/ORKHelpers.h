@@ -162,6 +162,7 @@ UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
 id ORKFindInArrayByStudyId(NSArray *array, NSString *studyIdentifier);
+id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier);
 
 NSString *ORKStringFromDateISO8601(NSDate *date);
 NSDate *ORKDateFromStringISO8601(NSString *string);

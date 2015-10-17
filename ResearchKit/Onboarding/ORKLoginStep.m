@@ -61,11 +61,12 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
+        self.formItems = [self loginFormItems];
     }
     return self;
 }
 
-- (NSArray<ORKFormItem *> *)formItems {
+- (NSArray *)loginFormItems {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {

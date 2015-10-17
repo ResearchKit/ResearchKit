@@ -1924,7 +1924,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)validateParameters {
     [super validateParameters];
     
-    NSParameterAssert((self.regex && self.invalidMessage) || !(self.regex || self.invalidMessage));
+    NSAssert(((self.regex && !self.invalidMessage) || (!self.regex && self.invalidMessage)),
+             @"Both regex and invalidMessage properties must be set.");
+
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {

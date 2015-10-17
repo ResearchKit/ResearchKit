@@ -369,7 +369,9 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
                                               @"ORKDataResult.data",
                                               @"ORKVerificationStep.verificationViewControllerClass",
-                                              @"ORKLoginStep.loginViewControllerClass"];
+                                              @"ORKLoginStep.loginViewControllerClass",
+                                              @"ORKRegistrationStep.passcodeValidationRegex",
+                                              @"ORKRegistrationStep.passcodeInvalidMessage"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class

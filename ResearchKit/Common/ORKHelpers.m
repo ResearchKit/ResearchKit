@@ -91,6 +91,10 @@ id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
     return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
 }
 
+id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier) {
+    return findInArrayByKey(array, @"identifier", formItemIdentifier);
+}
+
 NSString *ORKStringFromDateISO8601(NSDate *date) {
     static NSDateFormatter *__formatter = nil;
     static dispatch_once_t onceToken;

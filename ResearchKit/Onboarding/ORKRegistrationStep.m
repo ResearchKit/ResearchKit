@@ -52,6 +52,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _options = options;
+        self.formItems = [self registrationFormItems];
         self.optional = NO;
     }
     return self;
@@ -72,7 +73,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
                                text:nil];
 }
 
-- (NSArray<ORKFormItem *> *)formItems {
+- (NSArray *)registrationFormItems {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {
@@ -87,8 +88,6 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     
     {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
-        answerFormat.regex = self.passcodeValidationRegex;
-        answerFormat.invalidMessage = self.passcodeInvalidMessage;
         answerFormat.multipleLines = NO;
         answerFormat.secureTextEntry = YES;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -182,6 +181,28 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     return formItems;
 }
 
+- (ORKTextAnswerFormat *)passwordAnswerFormat {
+    ORKFormItem *passwordFormItem = ORKFindInArrayByFormItemId(self.formItems, ORKRegistrationFormItemPassword);
+    ORKTextAnswerFormat *passwordAnswerFormat = (ORKTextAnswerFormat *)passwordFormItem.answerFormat;
+    return passwordAnswerFormat;
+}
+
+- (NSString *)passcodeValidationRegex {
+    return [self passwordAnswerFormat].regex;
+}
+
+- (NSString *)passcodeInvalidMessage {
+    return [self passwordAnswerFormat].invalidMessage;
+}
+
+- (void)setPasscodeValidationRegex:(NSString *)passcodeValidationRegex {
+    [self passwordAnswerFormat].regex = passcodeValidationRegex;
+}
+
+- (void)setPasscodeInvalidMessage:(NSString *)passcodeInvalidMessage {
+    [self passwordAnswerFormat].invalidMessage = passcodeInvalidMessage;
+}
+
 + (BOOL)supportsSecureCoding {
     return YES;
 }
@@ -190,8 +211,6 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_INTEGER(aDecoder, options);
-        ORK_DECODE_OBJ(aDecoder, passcodeValidationRegex);
-        ORK_DECODE_OBJ(aDecoder, passcodeInvalidMessage);
     }
     return self;
 }
@@ -199,15 +218,11 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, options);
-    ORK_ENCODE_OBJ(aCoder, passcodeValidationRegex);
-    ORK_ENCODE_OBJ(aCoder, passcodeInvalidMessage);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [super copyWithZone:zone];
     step->_options = self.options;
-    step->_passcodeValidationRegex = self.passcodeValidationRegex;
-    step->_passcodeInvalidMessage = self.passcodeInvalidMessage;
     return step;
 }
 
@@ -216,9 +231,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            self.options == castObject.options &&
-            ORKEqualObjects(self.passcodeValidationRegex, castObject.passcodeValidationRegex) &&
-            ORKEqualObjects(self.passcodeInvalidMessage, castObject.passcodeInvalidMessage));
+            self.options == castObject.options);
 }
 
 @end
