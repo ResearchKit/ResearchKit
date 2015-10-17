@@ -1000,21 +1000,21 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     self.hairline.alpha = alpha;
 }
 
-- (NSArray *)stepsForReviewStep:(ORKReviewStep *)reviewStep {
-    NSMutableArray *steps = [[NSMutableArray alloc] init];
+- (NSArray<ORKStep *> *)stepsForReviewStep:(ORKReviewStep *)reviewStep {
+    NSMutableArray<ORKStep *> *steps = [[NSMutableArray<ORKStep *> alloc] init];
     if (reviewStep.isStandalone) {
         steps = nil;
     } else {
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
-            if (nextStep && nextStep.identifier != reviewStep.identifier) {
+            if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier]) {
                 [steps addObject:nextStep];
             } else {
                 *stop = YES;
             }
         }];
     }
-    return steps;
+    return [steps copy];
 }
 
 - (ORKStepViewController *)viewControllerForStep:(ORKStep *)step {
