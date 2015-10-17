@@ -139,6 +139,10 @@
 
 @implementation ORKFormItem
 
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
+    return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
+}
+
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
     self = [super init];
     if (self) {
@@ -149,10 +153,6 @@
         _optional = optional;
     }
     return self;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
-    return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
 }
 
 - (instancetype)initWithSectionTitle:(NSString *)sectionTitle {

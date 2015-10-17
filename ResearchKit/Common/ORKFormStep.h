@@ -105,6 +105,19 @@ ORK_CLASS_AVAILABLE
 @interface ORKFormItem : NSObject <NSSecureCoding, NSCopying>
 
 /**
+ Returns an initialized form item using the specified identifier, title, and answer format.
+ 
+ @param identifier    The string that identifies the form item, which should be unique within the form step.
+ @param text          The text displayed as a prompt for the form item's question.
+ @param answerFormat  The answer format for the form item.
+ 
+ @return An initialized form item.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                              text:(nullable NSString *)text
+                      answerFormat:(nullable ORKAnswerFormat *)answerFormat;
+
+/**
  Returns an initialized form item using the specified identifier, title, optionality and answer format.
  
  @param identifier    The string that identifies the form item, which should be unique within the form step.
@@ -118,19 +131,6 @@ ORK_CLASS_AVAILABLE
                               text:(nullable NSString *)text
                       answerFormat:(nullable ORKAnswerFormat *)answerFormat
                           optional:(BOOL) optional;
-
-/**
- Returns an initialized form item using the specified identifier, title, and answer format.
- 
- @param identifier    The string that identifies the form item, which should be unique within the form step.
- @param text          The text displayed as a prompt for the form item's question.
- @param answerFormat  The answer format for the form item.
- 
- @return An initialized form item.
- */
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                              text:(nullable NSString *)text
-                      answerFormat:(nullable ORKAnswerFormat *)answerFormat;
 
 /**
  Returns an initialized form item using the specified section title.
