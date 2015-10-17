@@ -474,6 +474,12 @@
 		BF690ADA1BAD3E41009C5ADA /* ORKReviewStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BF690AD81BAD3E41009C5ADA /* ORKReviewStep.m */; settings = {ASSET_TAGS = (); }; };
 		BF690AE01BAD5809009C5ADA /* ORKReviewStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF690ADD1BAD5809009C5ADA /* ORKReviewStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF690AE11BAD5809009C5ADA /* ORKReviewStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF690ADE1BAD5809009C5ADA /* ORKReviewStepViewController.m */; settings = {ASSET_TAGS = (); }; };
+		BF9D62BE1BD244B0000AA6A7 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9D62B81BD244B0000AA6A7 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF9D62BF1BD244B0000AA6A7 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9D62B91BD244B0000AA6A7 /* ORKWaitStep.m */; settings = {ASSET_TAGS = (); }; };
+		BF9D62C01BD244B0000AA6A7 /* ORKWaitStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9D62BA1BD244B0000AA6A7 /* ORKWaitStepView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BF9D62C11BD244B0000AA6A7 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9D62BB1BD244B0000AA6A7 /* ORKWaitStepView.m */; settings = {ASSET_TAGS = (); }; };
+		BF9D62C21BD244B0000AA6A7 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9D62BC1BD244B0000AA6A7 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BF9D62C31BD244B0000AA6A7 /* ORKWaitStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9D62BD1BD244B0000AA6A7 /* ORKWaitStepViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D42FEFB81AF7557000A124F8 /* ORKImageCaptureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */; };
 		D42FEFB91AF7557000A124F8 /* ORKImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */; };
 		D44239791AF17F5100559D96 /* ORKImageCaptureStep.h in Headers */ = {isa = PBXBuildFile; fileRef = D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1007,6 +1013,12 @@
 		BF690ADB1BAD3ED7009C5ADA /* ORKReviewStep_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKReviewStep_Internal.h; sourceTree = "<group>"; };
 		BF690ADD1BAD5809009C5ADA /* ORKReviewStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKReviewStepViewController.h; sourceTree = "<group>"; };
 		BF690ADE1BAD5809009C5ADA /* ORKReviewStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKReviewStepViewController.m; sourceTree = "<group>"; };
+		BF9D62B81BD244B0000AA6A7 /* ORKWaitStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWaitStep.h; sourceTree = "<group>"; };
+		BF9D62B91BD244B0000AA6A7 /* ORKWaitStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWaitStep.m; sourceTree = "<group>"; };
+		BF9D62BA1BD244B0000AA6A7 /* ORKWaitStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWaitStepView.h; sourceTree = "<group>"; };
+		BF9D62BB1BD244B0000AA6A7 /* ORKWaitStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWaitStepView.m; sourceTree = "<group>"; };
+		BF9D62BC1BD244B0000AA6A7 /* ORKWaitStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWaitStepViewController.h; sourceTree = "<group>"; };
+		BF9D62BD1BD244B0000AA6A7 /* ORKWaitStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWaitStepViewController.m; sourceTree = "<group>"; };
 		D42FEFB61AF7557000A124F8 /* ORKImageCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureView.h; sourceTree = "<group>"; };
 		D42FEFB71AF7557000A124F8 /* ORKImageCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ORKImageCaptureView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D44239771AF17F5100559D96 /* ORKImageCaptureStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKImageCaptureStep.h; sourceTree = "<group>"; };
@@ -1527,6 +1539,7 @@
 				B12EFF3C1AB211FB00A80147 /* Form Step */,
 				D44239761AF17EE700559D96 /* Image Capture Step */,
 				24A4DA091B8D0CC8009C797A /* Passcode Step */,
+				BF9D62C41BD244C4000AA6A7 /* Wait Step */,
 				BF690AD61BAD3DC0009C5ADA /* Review Step */,
 			);
 			name = Step;
@@ -2120,6 +2133,19 @@
 			name = "Review Step";
 			sourceTree = "<group>";
 		};
+		BF9D62C41BD244C4000AA6A7 /* Wait Step */ = {
+			isa = PBXGroup;
+			children = (
+				BF9D62B81BD244B0000AA6A7 /* ORKWaitStep.h */,
+				BF9D62B91BD244B0000AA6A7 /* ORKWaitStep.m */,
+				BF9D62BA1BD244B0000AA6A7 /* ORKWaitStepView.h */,
+				BF9D62BB1BD244B0000AA6A7 /* ORKWaitStepView.m */,
+				BF9D62BC1BD244B0000AA6A7 /* ORKWaitStepViewController.h */,
+				BF9D62BD1BD244B0000AA6A7 /* ORKWaitStepViewController.m */,
+			);
+			name = "Wait Step";
+			sourceTree = "<group>";
+		};
 		D44239761AF17EE700559D96 /* Image Capture Step */ = {
 			isa = PBXGroup;
 			children = (
@@ -2164,6 +2190,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF9D62BE1BD244B0000AA6A7 /* ORKWaitStep.h in Headers */,
 				BF690AE01BAD5809009C5ADA /* ORKReviewStepViewController.h in Headers */,
 				BF690AD91BAD3E41009C5ADA /* ORKReviewStep.h in Headers */,
 				BCA5C0351AEC05F20092AC8D /* ORKStepNavigationRule.h in Headers */,
@@ -2179,7 +2206,6 @@
 				86C40D0A1A8D7C5C00081FAC /* ORKCustomStepView.h in Headers */,
 				BCD192EE1B81255F00FCC08A /* ORKPieChartView_Internal.h in Headers */,
 				86C40DCE1A8D7C5C00081FAC /* ORKTaskViewController_Internal.h in Headers */,
-				CA8D0E921BC4360F00BED0F7 /* ORKWaitStepView.h in Headers */,
 				25ECC09F1AFBD92D00F3D63B /* ORKReactionTimeContentView.h in Headers */,
 				10FF9AC31B79EF2800ECB5B4 /* ORKHolePegTestRemoveStep.h in Headers */,
 				86C40C361A8D7C5C00081FAC /* ORKSpatialSpanGame.h in Headers */,
@@ -2202,6 +2228,8 @@
 				86C40D841A8D7C5C00081FAC /* ORKSelectionTitleLabel.h in Headers */,
 				BC13CE3C1B0662990044153C /* ORKStepNavigationRule_Private.h in Headers */,
 				86C40D3C1A8D7C5C00081FAC /* ORKImageChoiceLabel.h in Headers */,
+				BF9D62C21BD244B0000AA6A7 /* ORKWaitStepViewController.h in Headers */,
+				BF9D62C01BD244B0000AA6A7 /* ORKWaitStepView.h in Headers */,
 				BC4194291AE8453A00073D6B /* ORKObserver.h in Headers */,
 				10FF9AD31B79F5EA00ECB5B4 /* ORKHolePegTestRemovePegView.h in Headers */,
 				86C40C661A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.h in Headers */,
@@ -2211,7 +2239,6 @@
 				BCB6E6501B7D533B000D5B34 /* ORKCenteredCollectionViewLayout.h in Headers */,
 				865EA1621AB8DF750037C68E /* ORKDateTimePicker.h in Headers */,
 				86C40DA01A8D7C5C00081FAC /* ORKSurveyAnswerCell.h in Headers */,
-				CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */,
 				86C40D941A8D7C5C00081FAC /* ORKStepViewController.h in Headers */,
 				B8760F2B1AFBEFB0007FA16F /* ORKScaleRangeDescriptionLabel.h in Headers */,
 				86C40C221A8D7C5C00081FAC /* ORKCountdownStep.h in Headers */,
@@ -2232,7 +2259,6 @@
 				86C40CEA1A8D7C5C00081FAC /* ORKAnswerTextField.h in Headers */,
 				B12EA0191B0D76AD00F9F554 /* ORKToneAudiometryPracticeStepViewController.h in Headers */,
 				B183A4A21A8535D100C76870 /* ResearchKit_Private.h in Headers */,
-				CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */,
 				86C40CE81A8D7C5C00081FAC /* ORKAnswerFormat_Internal.h in Headers */,
 				106FF29E1B663FCE004EACF2 /* ORKHolePegTestPlaceStep.h in Headers */,
 				86C40D021A8D7C5C00081FAC /* ORKContinueButton.h in Headers */,
@@ -2638,7 +2664,6 @@
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
 				BCB6E6531B7D533B000D5B34 /* ORKPieChartLegendCell.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
-				CB16A6F31BB0D0960043CDD8 /* ORKWaitStepViewController.m in Sources */,
 				86C40D221A8D7C5C00081FAC /* ORKFormStep.m in Sources */,
 				10FF9ACC1B79F22900ECB5B4 /* ORKHolePegTestRemoveStepViewController.m in Sources */,
 				86C40CD61A8D7C5C00081FAC /* ORKTableContainerView.m in Sources */,
@@ -2737,7 +2762,9 @@
 				86C40C6C1A8D7C5C00081FAC /* CMDeviceMotion+ORKJSONDictionary.m in Sources */,
 				86C40DF01A8D7C5C00081FAC /* UIResponder+ResearchKit.m in Sources */,
 				865EA16D1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.m in Sources */,
+				BF9D62C31BD244B0000AA6A7 /* ORKWaitStepViewController.m in Sources */,
 				86C40D261A8D7C5C00081FAC /* ORKFormStepViewController.m in Sources */,
+				BF9D62C11BD244B0000AA6A7 /* ORKWaitStepView.m in Sources */,
 				86C40C8A1A8D7C5C00081FAC /* ORKActiveStepTimerView.m in Sources */,
 				86AD91111AB7B8A600361FEB /* ORKActiveStepView.m in Sources */,
 				86C40C201A8D7C5C00081FAC /* ORKAudioStepViewController.m in Sources */,
@@ -2748,7 +2775,6 @@
 				86C40DAC1A8D7C5C00081FAC /* ORKSurveyAnswerCellForNumber.m in Sources */,
 				86C40C541A8D7C5C00081FAC /* ORKTappingIntervalStep.m in Sources */,
 				86C40D6C1A8D7C5C00081FAC /* ORKResult.m in Sources */,
-				CA8D0E931BC4360F00BED0F7 /* ORKWaitStepView.m in Sources */,
 				86C40CD21A8D7C5C00081FAC /* ORKInstructionStepView.m in Sources */,
 				10FF9AD81B7A045E00ECB5B4 /* ORKSeparatorView.m in Sources */,
 				86C40D181A8D7C5C00081FAC /* ORKErrors.m in Sources */,
@@ -2765,6 +2791,7 @@
 				106FF2A71B665CF5004EACF2 /* ORKHolePegTestPlaceContentView.m in Sources */,
 				86C40D761A8D7C5C00081FAC /* ORKScaleRangeLabel.m in Sources */,
 				86C40C741A8D7C5C00081FAC /* CMPedometerData+ORKJSONDictionary.m in Sources */,
+				BF9D62BF1BD244B0000AA6A7 /* ORKWaitStep.m in Sources */,
 				86AD91151AB7B97E00361FEB /* ORKQuestionStepView.m in Sources */,
 				10864CA11B27146B000F4158 /* ORKPSATStepViewController.m in Sources */,
 				86C40C5C1A8D7C5C00081FAC /* ORKWalkingTaskStep.m in Sources */,
@@ -2783,7 +2810,6 @@
 				86C40CEC1A8D7C5C00081FAC /* ORKAnswerTextField.m in Sources */,
 				86C40C441A8D7C5C00081FAC /* ORKSpatialSpanMemoryStep.m in Sources */,
 				24898B0E1B7186C000B0E7E7 /* ORKScaleRangeImageView.m in Sources */,
-				CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */,
 				86C40DD81A8D7C5C00081FAC /* ORKUnitLabel.m in Sources */,
 				86C40D361A8D7C5C00081FAC /* ORKHelpers.m in Sources */,
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
