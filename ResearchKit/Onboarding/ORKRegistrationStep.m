@@ -78,11 +78,13 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     
@@ -99,6 +101,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
                                                        answerFormat:answerFormat];
         passwordItem.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         passwordItem.optional = NO;
+        
         [formItems addObject:passwordItem];
         
         NSString *originalItemIdentifier = [passwordItem.identifier copy];
@@ -115,33 +118,39 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
                                                                answerFormat:confirmAnswerFormat];
         confirmItem.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         confirmItem.optional = NO;
+        
         [formItems addObject:confirmItem];
     }
 
     if (!(_options & ORKRegistrationStepDefault)) {
         ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"ADDITIONAL_INFO_SECTION_TITLE", nil)];
+        
         [formItems addObject:item];
     }
     
     if (_options & ORKRegistrationStepIncludeGivenName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGivenName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"GIVEN_NAME_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     
     if (_options & ORKRegistrationStepIncludeFamilyName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemFamilyName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"FAMILY_NAME_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     
@@ -150,11 +159,13 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@1],
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@2]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGender
                                                                text:ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+       
         [formItems addObject:item];
     }
     
@@ -170,11 +181,13 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
                                                                                  minimumDate:nil
                                                                                  maximumDate:nil
                                                                                     calendar:nil];
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemDOB
                                                                text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     

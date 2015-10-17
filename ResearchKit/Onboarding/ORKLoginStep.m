@@ -71,11 +71,13 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
     
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     
@@ -86,11 +88,13 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         item.optional = NO;
+        
         [formItems addObject:item];
     }
     
