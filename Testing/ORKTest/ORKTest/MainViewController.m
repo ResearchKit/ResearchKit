@@ -72,6 +72,7 @@ DefineStringKey(CreatePasscodeTaskIdentifier);
 DefineStringKey(CustomNavigationItemTaskIdentifier);
 DefineStringKey(DynamicTaskIdentifier);
 DefineStringKey(StepNavigationTaskIdentifier);
+DefineStringKey(WaitTaskIdentifier);
 
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
@@ -493,6 +494,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:StandaloneReviewStepTaskIdentifier]) {
         return [self makeStandaloneReviewStep];
     }
+
     return nil;
 }
 
@@ -532,14 +534,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         task = [self makeTaskWithIdentifier:identifier];
     }
     
-    if (_savedViewControllers[identifier])
-    {
-        NSData *data = _savedViewControllers[identifier];
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
-    } else {
-        // No saved data, just create the task and the corresponding task view controller.
-        self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task taskRunUUID:[NSUUID UUID]];
-    }
+    // If we have stored data then data will contain the stored data.
+    // If we don't, data will be nil (and the task will be opened up as a 'new' task.
+    NSData *data = _savedViewControllers[identifier];
+    self.taskViewController = [[ORKTaskViewController alloc] initWithTask:task restorationData:data delegate:self];
     
     [self beginTask];
 }
@@ -847,27 +845,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                      answer:[ORKTextAnswerFormat textAnswerFormatWithMaximumLength:20]];
         [steps addObject:step];
     }
-    
-    
-    {
-        /*
-         A text question with single-line text entry and a URL keyboard.
-         */
-        ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormat];
-        format.multipleLines = NO;
-        format.keyboardType = UIKeyboardTypeURL;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
-                                                                      title:@"What is your website?"
-                                                                     answer:format];
-        [steps addObject:step];
-    }
-    
+
     {
         /*
          An email question with single-line text entry.
          */
         ORKEmailAnswerFormat *format = [ORKAnswerFormat emailAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005c"
                                                                       title:@"What is your email?"
                                                                      answer:format];
         [steps addObject:step];
@@ -880,7 +864,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithMaximumLength:10];
         format.secureTextEntry = YES;
         format.multipleLines = NO;
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005sec"
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_005d"
                                                                       title:@"What is your passcode?"
                                                                      answer:format];
         step.placeholder = @"Tap your passcode here";
@@ -1529,7 +1513,21 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"Message"
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            format.multipleLines = NO;
+            format.keyboardType = UIKeyboardTypeURL;
+            format.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            format.autocorrectionType = UITextAutocorrectionTypeNo;
+            format.spellCheckingType = UITextSpellCheckingTypeNo;
+            
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_006" text:@"URL"
+                                                           answerFormat:format];
+            item.placeholder = @"Enter URL";
+            [items addObject:item];
+        }
+
+        {
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Message"
                                                            answerFormat:[ORKAnswerFormat textAnswerFormatWithMaximumLength:20]];
             item.placeholder = @"Your message (limit 20 characters).";
             [items addObject:item];
@@ -1540,7 +1538,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             format.secureTextEntry = YES;
             format.multipleLines = NO;
             
-            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_007" text:@"Passcode"
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_008" text:@"Passcode"
                                                            answerFormat:format];
             item.placeholder = @"Enter Passcode";
             [items addObject:item];
@@ -1758,6 +1756,24 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSMutableArray *steps = [NSMutableArray new];
     
     {
+        {
+            ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"scale_form_00" title:@"Optional Form Items" text:@"Optional form with a required scale item with a default value"];
+            NSMutableArray *items = [NSMutableArray new];
+            [steps addObject:step];
+            
+            {
+                ORKScaleAnswerFormat *format = [ORKScaleAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:1 defaultValue:4 step:1 vertical:YES maximumValueDescription:nil minimumValueDescription:nil];
+                ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"scale_form"
+                                                                       text:@"Optional scale"
+                                                               answerFormat:format];
+                item.optional = NO;
+                [items addObject:item];
+            }
+                 
+            [step setFormItems:items];
+        }
+
+        
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_000" title:@"Optional Form Items" text:@"Optional form with no required items"];
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
@@ -2053,6 +2069,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 - (IBAction)memoryGameTaskButtonTapped:(id)sender {
     [self beginTaskWithIdentifier:MemoryTaskIdentifier];
+}
+
+- (IBAction)waitTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:WaitTaskIdentifier];
 }
 
 - (IBAction)audioTaskButtonTapped:(id)sender {
@@ -2403,7 +2423,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         NSArray *textChoices = @[textChoice1, textChoice2, textChoice3, textChoice4, textChoice5];
         
         ORKTextScaleAnswerFormat *scaleAnswerFormat = [ORKAnswerFormat textScaleAnswerFormatWithTextChoices:textChoices
-                                                                                               defaultIndex:NSIntegerMax
+                                                                                               defaultIndex:3
                                                                                                    vertical:NO];
         
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"scale_14"
@@ -3115,12 +3135,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 /*
  Dismisses the task view controller.
  */
-- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController {
+- (void)dismissTaskViewController:(ORKTaskViewController *)taskViewController removeOutputDirectory:(BOOL)removeOutputDirectory {
     _currentDocument = nil;
     
-    NSURL *dir = taskViewController.outputDirectory;
+    NSURL *outputDirectoryURL = taskViewController.outputDirectory;
     [self dismissViewControllerAnimated:YES completion:^{
-        if (dir)
+        if (outputDirectoryURL && removeOutputDirectory)
         {
             /*
              We attempt to clean up the output directory.
@@ -3130,8 +3150,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
              delete your data when you've processed it or sent it to a server.
              */
             NSError *err = nil;
-            if (! [[NSFileManager defaultManager] removeItemAtURL:dir error:&err]) {
-                NSLog(@"Error removing %@: %@", dir, err);
+            if (! [[NSFileManager defaultManager] removeItemAtURL:outputDirectoryURL error:&err]) {
+                NSLog(@"Error removing %@: %@", outputDirectoryURL, err);
             }
         }
     }];
@@ -3270,7 +3290,14 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [items addObject:@"Item2"];
         [items addObject:@"Item3"];
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
+    }else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
+        // Indeterminate step
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
+    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
+        // Determinate step
+        [self updateProgress:0.0 OfWaitTask:((ORKWaitStepViewController *)stepViewController)];
     }
+
 }
 
 /*
@@ -3298,7 +3325,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
@@ -3314,7 +3341,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             if ([task isKindOfClass:[ORKNavigableOrderedTask class]]) {
                 _savedTasks[task.identifier] = [NSKeyedArchiver archivedDataWithRootObject:task];
             }
-            [self dismissTaskViewController:taskViewController];
+            [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
         }
             break;
@@ -3456,8 +3483,76 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 
 - (void)testChartsButtonTapped:(id)sender {
     UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
-    UIViewController *chartListViewController = [chartStoryboard instantiateInitialViewController];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartListViewController"];
     [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+- (void)testChartsPerformanceButtonTapped:(id)sender {
+    UIStoryboard *chartStoryboard = [UIStoryboard storyboardWithName:@"Charts" bundle:nil];
+    UIViewController *chartListViewController = [chartStoryboard instantiateViewControllerWithIdentifier:@"ChartPerformanceListViewController"];
+    [self presentViewController:chartListViewController animated:YES completion:nil];
+}
+
+#pragma mark - Wait Task
+
+- (ORKOrderedTask *)makeWaitingTask {
+    
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    /*
+     To properly use the wait steps, one needs to implement the "" method of ORKTaskViewControllerDelegate to start their background action when the wait task begins, and then call the "finish" method on the ORKWaitTaskViewController when the background task has been completed.
+     */
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step1"];
+    step1.title = @"Setup";
+    step1.detailText = @"ORKTest needs to set up some things before you begin, once the setup is complete you will be able to continue.";
+    [steps addObject:step1];
+    
+    // Interterminate wait step.
+    ORKWaitStep *step2 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step2"];
+    step2.title = @"Getting Ready";
+    step2.text = @"Please wait while the setup completes.";
+    [steps addObject:step2];
+    
+    ORKInstructionStep *step3 = [[ORKInstructionStep alloc] initWithIdentifier:@"waitTask.step3"];
+    step3.title = @"Account Setup";
+    step3.detailText = @"The information you entered will be sent to the secure server to complete your account setup.";
+    [steps addObject:step3];
+    
+    // Determinate wait step.
+    ORKWaitStep *step4 = [[ORKWaitStep alloc] initWithIdentifier:@"waitTask.step4"];
+    step4.title = @"Syncing Account";
+    step4.text = @"Please wait while the data is uploaded.";
+    step4.indicatorType = ORKProgressIndicatorTypeProgressBar;
+    [steps addObject:step4];
+    
+    ORKCompletionStep *step5 = [[ORKCompletionStep alloc] initWithIdentifier:@"waitTask.step5"];
+    step5.title = @"Setup Complete";
+    [steps addObject:step5];
+
+    ORKOrderedTask *waitTask = [[ORKOrderedTask alloc] initWithIdentifier:WaitTaskIdentifier steps:steps];
+    return waitTask;
+}
+
+- (void)updateProgress:(CGFloat)progress OfWaitTask:(ORKWaitStepViewController *)viewController {
+    if (progress <= 1.0) {
+        [viewController setProgress:progress animated:true];
+        
+        double delayInSeconds = 0.1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        __weak ORKWaitStepViewController *vc = viewController;
+        __weak MainViewController *weakSelf = self;
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+            __typeof__(self) strongSelf = weakSelf;
+            [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
+            
+            if ((float)progress == 0.5) {
+                NSString *newText = @"Please wait while the data is downloaded.";
+                [viewController updateText:newText];
+            }
+        });
+    } else {
+        [viewController goForward];
+    }
 }
 
 @end

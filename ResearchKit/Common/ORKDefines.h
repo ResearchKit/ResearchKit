@@ -137,3 +137,15 @@ typedef NS_ENUM(NSInteger, ORKPasscodeType) {
     /// 6 digit pin entry
     ORKPasscodeType6Digit
 } ORK_ENUM_AVAILABLE;
+
+
+/**
+ Progress indicator type for `ORKWaitStep`.
+ */
+typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
+    /// Spinner animation.
+    ORKProgressIndicatorTypeIndeterminate = 0,
+    
+    /// Progressbar animation.
+    ORKProgressIndicatorTypeProgressBar,
+} ORK_ENUM_AVAILABLE;

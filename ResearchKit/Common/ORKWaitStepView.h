@@ -1,4 +1,13 @@
 /*
+ Copyright (c) 2015, Alejandro Martinez, Quintiles Inc.
+ Copyright (c) 2015, Brian Kelly, Quintiles Inc.
+ Copyright (c) 2015, Bryan Strothmann, Quintiles Inc.
+ Copyright (c) 2015, Greg Yip, Quintiles Inc.
+ Copyright (c) 2015, John Reites, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
+ Copyright (c) 2015, Richard Thomas, Quintiles Inc.
+ Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Steve Cadwallader, Quintiles Inc.
  Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
@@ -29,26 +38,13 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import "ORKVerticalContainerView.h"
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+@interface ORKWaitStepView : ORKVerticalContainerView
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+- (instancetype)initWithIndicatorType:(ORKProgressIndicatorType)type;
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:nil]
+@property (nonatomic, readonly) UIProgressView *progressView;
 
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:nil]
-
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
-
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+@end

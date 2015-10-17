@@ -1,6 +1,15 @@
 /*
+ Copyright (c) 2015, Alejandro Martinez, Quintiles Inc.
+ Copyright (c) 2015, Brian Kelly, Quintiles Inc.
+ Copyright (c) 2015, Bryan Strothmann, Quintiles Inc.
+ Copyright (c) 2015, Greg Yip, Quintiles Inc.
+ Copyright (c) 2015, John Reites, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
+ Copyright (c) 2015, Richard Thomas, Quintiles Inc.
+ Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Steve Cadwallader, Quintiles Inc.
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,26 +38,29 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ResearchKit.h>
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+/**
+ The `ORKWaitStep` class represents a step that displays a label and an activity
+ indicator mask.
+ 
+ This task can be used to indicate to a user that a process is occuring that does
+    not need their input, and possibly indicate the progress that process has made.
+    To update the progress on screen, use the methods provided on the
+    `ORKWaitStepViewController` this step represents. Once the processing is complete,
+ `goForward` must be called on the `ORKWaitStepViewController` in order for the user to
+ be able to continue.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWaitStep : ORKStep
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+/**
+ This property specifies the type of progress bar that will be displayed.
+ 
+ ORKProgressIndicatorTypeIndeterminate (default) is for indeterminate duration operations
+ ORKProgressIndicatorTypeProgressBar is for determinate duration operations
+ */
+@property (nonatomic) ORKProgressIndicatorType indicatorType;
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:nil]
-
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:nil]
-
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
-
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+@end

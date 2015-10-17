@@ -1,6 +1,15 @@
 /*
+ Copyright (c) 2015, Alejandro Martinez, Quintiles Inc.
+ Copyright (c) 2015, Brian Kelly, Quintiles Inc.
+ Copyright (c) 2015, Bryan Strothmann, Quintiles Inc.
+ Copyright (c) 2015, Greg Yip, Quintiles Inc.
+ Copyright (c) 2015, John Reites, Quintiles Inc.
+ Copyright (c) 2015, Pavel Kanzelsberger, Quintiles Inc.
+ Copyright (c) 2015, Richard Thomas, Quintiles Inc.
+ Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
+ Copyright (c) 2015, Steve Cadwallader, Quintiles Inc.
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -29,26 +38,34 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
+#import <ResearchKit/ResearchKit.h>
 
 
-#define STRONGTYPE(x) __strong __typeof(x)
+@class ORKWaitStepViewController;
 
-ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
+/**
+ The `ORKWaitStepViewController` class represents the step view controller that corresponds to an `ORKWaitStep`.
+ 
+ It is not usually necessary to instantiate this view controller directly.
+ Instead, add a wait step to a task, and present the task in a task
+ view controller.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKWaitStepViewController: ORKStepViewController
 
-#define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:nil]
+/**
+ Updates the amount of progress displayed in the progress bar if the current indicator mask is set to progress bar.
+ 
+ @param progress    The fraction of work completed on the range of zero to one.
+ @param animated    If true, the update is animated.
+ */
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
-#define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:nil]
+/**
+ Updates the text on the step with the process that is occuring.
+ 
+ @param text     The description of the process that is occuring.
+ */
+- (void)updateText:(NSString *)text;
 
-#define ORKLocalizedStringFromNumber(number) \
-[NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
-
-ORK_EXTERN NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateComponents *ORKTimeOfDayComponentsFromString(NSString *string) ORK_AVAILABLE_DECL;
-
-ORK_EXTERN NSDateFormatter *ORKResultDateTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultTimeFormatter() ORK_AVAILABLE_DECL;
-ORK_EXTERN NSDateFormatter *ORKResultDateFormatter() ORK_AVAILABLE_DECL;
+@end
