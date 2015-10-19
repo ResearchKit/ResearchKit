@@ -206,3 +206,135 @@ class DiscreteGraphChartDataSource: BaseGraphChartDataSource {
         return 1
     }
 }
+
+class PerformanceLineGraphChartDataSource: BaseGraphChartDataSource {
+    
+    override init() {
+        super.init()
+        plotPoints =
+            [
+                [
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                ],
+                [
+                    ORKRangedPoint(value: 2),
+                    ORKRangedPoint(value: 4),
+                    ORKRangedPoint(value: 8),
+                    ORKRangedPoint(value: 16),
+                    ORKRangedPoint(value: 32),
+                    ORKRangedPoint(value: 50),
+                    ORKRangedPoint(value: 64),
+                    ORKRangedPoint(value: 2),
+                    ORKRangedPoint(value: 4),
+                    ORKRangedPoint(value: 8),
+                    ORKRangedPoint(value: 16),
+                    ORKRangedPoint(value: 32),
+                    ORKRangedPoint(value: 50),
+                    ORKRangedPoint(value: 64),
+                    ORKRangedPoint(value: 2),
+                    ORKRangedPoint(value: 4),
+                    ORKRangedPoint(value: 8),
+                    ORKRangedPoint(value: 16),
+                    ORKRangedPoint(value: 32),
+                    ORKRangedPoint(value: 50),
+                    ORKRangedPoint(value: 64),
+                    ORKRangedPoint(value: 2),
+                    ORKRangedPoint(value: 4),
+                    ORKRangedPoint(value: 8),
+                    ORKRangedPoint(value: 16),
+                    ORKRangedPoint(value: 32),
+                    ORKRangedPoint(value: 50),
+                    ORKRangedPoint(value: 64),
+                ],
+                [
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 20),
+                    ORKRangedPoint(value: 25),
+                    ORKRangedPoint(),
+                    ORKRangedPoint(value: 30),
+                    ORKRangedPoint(value: 40),
+                    ORKRangedPoint(),
+                ],
+        ]
+    }
+    
+    func maximumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+        return 70
+    }
+    
+    func minimumValueForGraphChartView(graphChartView: ORKGraphChartView) -> CGFloat {
+        return 0
+    }
+    
+    func numberOfDivisionsInXAxisForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 10
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
+        return (pointIndex % 2 == 0) ? nil : "\(pointIndex + 1)"
+    }
+    
+    func graphChartView(graphChartView: ORKGraphChartView, drawsVerticalReferenceLineAtPointIndex pointIndex: Int) -> Bool {
+        return (pointIndex % 2 == 1) ? false : true
+    }
+    
+    func scrubbingPlotIndexForGraphChartView(graphChartView: ORKGraphChartView) -> Int {
+        return 2
+    }
+}
