@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
  Constants for the form items included in the login step.
  These allow for convenient retrieval of user's inputted data from the result.
  */
-ORK_EXTERN NSString *const ORKLoginFormItemEmail ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKLoginFormItemPassword ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKLoginFormItemIdentifierEmail ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKLoginFormItemIdentifierPassword ORK_AVAILABLE_DECL;
 
 
 /**

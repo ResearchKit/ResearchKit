@@ -35,8 +35,8 @@
 #import "ORKHelpers.h"
 
 
-NSString *const ORKLoginFormItemEmail = @"ORKLoginFormItemEmail";
-NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
+NSString *const ORKLoginFormItemIdentifierEmail = @"ORKLoginFormItemEmail";
+NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword";
 
 @implementation ORKLoginStep
 
@@ -73,7 +73,7 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemEmail
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
@@ -90,7 +90,7 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemPassword
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
