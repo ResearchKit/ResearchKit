@@ -330,7 +330,7 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
-                                       @"descriptionPrefix",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",
@@ -541,7 +541,7 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
-                                       @"descriptionPrefix",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",
@@ -715,7 +715,7 @@ ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWi
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
-                                       @"descriptionPrefix",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",
