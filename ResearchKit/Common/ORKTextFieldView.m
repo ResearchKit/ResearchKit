@@ -184,7 +184,7 @@ static NSString * const FilledBullet = @"\u25CF";
     if (suffix.length == 0) {
         return;
     }
-    _suffixLabel = [self ork_createTextLabelWithTextColor:color ?: [UIColor grayColor]];
+    _suffixLabel = [self ork_createTextLabelWithTextColor:(color ?: [UIColor ork_midGrayTintColor])];
     _suffixLabel.text = suffix;
     _suffixLabel.font = self.font;
     _suffixLabel.textAlignment = NSTextAlignmentLeft;
