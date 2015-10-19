@@ -60,12 +60,12 @@ typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
  Constants for the form items included in the registration step.
  These allow for convenient retrieval of user's inputted data from the result.
  */
-ORK_EXTERN NSString *const ORKRegistrationFormItemEmail ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKRegistrationFormItemPassword ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKRegistrationFormItemGivenName ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKRegistrationFormItemFamilyName ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKRegistrationFormItemGender ORK_AVAILABLE_DECL;
-ORK_EXTERN NSString *const ORKRegistrationFormItemDOB ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierEmail ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierPassword ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierGivenName ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierFamilyName ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierGender ORK_AVAILABLE_DECL;
+ORK_EXTERN NSString *const ORKRegistrationFormItemIdentifierDOB ORK_AVAILABLE_DECL;
 
 
 /**

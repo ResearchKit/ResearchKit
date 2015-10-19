@@ -849,7 +849,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
         
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, invalidMessage:"Invalid URL: %@")
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationRegex(domainRegex, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = UIKeyboardType.URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
@@ -1060,7 +1060,7 @@ enum TaskListRow: Int, CustomStringConvertible {
             
             override func emailAddress() -> String! {
                 let registrationStepResult = self.taskViewController?.result.resultForIdentifier(String(Identifier.RegistrationStep)) as? ORKStepResult
-                let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemEmail) as? ORKTextQuestionResult
+                let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemIdentifierEmail) as? ORKTextQuestionResult
                 return emailQuestionResult?.textAnswer;
             }
         }

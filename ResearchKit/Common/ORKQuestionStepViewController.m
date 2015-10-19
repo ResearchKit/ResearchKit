@@ -564,8 +564,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     
     NSAssert(class != nil, @"class should not be nil");
     
-    NSAssert([[self.answerFormat class] isKindOfClass:[ORKConfirmTextAnswerFormat class]], @"ORKConfirmTextAnswerFormat can only be used with an ORKFormStep.");
-    
     ORKSurveyAnswerCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) { 

@@ -515,11 +515,8 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([self isAnswerValidWithString:text]) {
-        [self ork_setAnswer:@YES];
-    } else {
-        [self ork_setAnswer:@NO];
-    }
+    [self ork_setAnswer:@([self isAnswerValidWithString:text])];
+    
     return YES;
 }
 

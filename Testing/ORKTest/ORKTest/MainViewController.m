@@ -1506,7 +1506,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationRegex:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
             format.multipleLines = NO;
             format.keyboardType = UIKeyboardTypeURL;
             format.autocapitalizationType = UITextAutocapitalizationTypeNone;

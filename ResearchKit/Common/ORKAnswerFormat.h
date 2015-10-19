@@ -249,12 +249,14 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage;
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
+                                              invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
-+ (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
++ (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
+                                                                        step:(NSInteger)step;
 
 /// @name Validation
 
@@ -1191,13 +1193,13 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param expression                The regular expression used to validate the text.
+ @param validationRegex                The regular expression used to validate the text.
  @param invalidMessage            The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationExpression:(NSString *)expression
-                              invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+                         invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
  Returns an initialized text answer format using the specified maximum string length.
@@ -1216,7 +1218,7 @@ ORK_CLASS_AVAILABLE
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (nonatomic, copy, nullable) NSString *regex;
+@property (nonatomic, copy, nullable) NSString *validationRegex;
 
 /**
  The text presented to the user when invalid input is received.

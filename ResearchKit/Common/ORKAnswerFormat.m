@@ -352,8 +352,8 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextAnswerFormat alloc] initWithMaximumLength:maximumLength];
 }
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage {
-    return [[ORKTextAnswerFormat alloc] initWithValidationExpression:expression invalidMessage:invalidMessage];
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
+    return [[ORKTextAnswerFormat alloc] initWithValidationRegex:validationRegex invalidMessage:invalidMessage];
 }
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat {
@@ -1901,10 +1901,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (instancetype)initWithValidationExpression:(NSString *)expression invalidMessage:(NSString *)invalidMessage {
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
     self = [super init];
     if (self) {
-        _regex = expression;
+        _validationRegex = validationRegex;
         _invalidMessage = invalidMessage;
         _maximumLength = 0;
         [self commonInit];
@@ -1924,15 +1924,18 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)validateParameters {
     [super validateParameters];
     
-    NSAssert(((!self.regex && !self.invalidMessage) || (self.regex && self.invalidMessage)),
-             @"Both regex and invalidMessage properties must be set.");
+    if ( (!self.validationRegex && self.invalidMessage) || (self.validationRegex && !self.invalidMessage) ){
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"Both regex and invalid message properties must be set."
+                                     userInfo:nil];
+    }
 
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
     fmt->_maximumLength = _maximumLength;
-    fmt->_regex = _regex;
+    fmt->_validationRegex = _validationRegex;
     fmt->_invalidMessage = _invalidMessage;
     fmt->_autocapitalizationType = _autocapitalizationType;
     fmt->_autocorrectionType = _autocorrectionType;
@@ -1965,9 +1968,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (BOOL)isTextRegexValidWithString:(NSString *)text {
     BOOL isValid = YES;
-    if (self.regex) {
+    if (self.validationRegex) {
         if (!_cachedRegEx) {
-            NSString *regExPattern = self.regex;
+            NSString *regExPattern = self.validationRegex;
             _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
         }
 
@@ -1998,7 +2001,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
-        ORK_DECODE_OBJ_CLASS(aDecoder, regex, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, validationRegex, NSString);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
@@ -2013,7 +2016,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
-    ORK_ENCODE_OBJ(aCoder, regex);
+    ORK_ENCODE_OBJ(aCoder, validationRegex);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
@@ -2033,7 +2036,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             (self.maximumLength == castObject.maximumLength &&
-             ORKEqualObjects(self.regex, castObject.regex) &&
+             ORKEqualObjects(self.validationRegex, castObject.validationRegex) &&
              ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
@@ -2058,7 +2061,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_impliedAnswerFormat) {
-        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationExpression:EmailValidationRegex invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegex:EmailValidationRegex invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
@@ -2080,6 +2083,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier {
+    
+    NSAssert(originalItemIdentifier, @"Original item identifier cannot be nil.");
+    
     self = [super init];
     if (self) {
         _originalItemIdentifier = [originalItemIdentifier copy];
@@ -2088,18 +2094,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (BOOL)isAnswerValid:(id)answer {
-    return [(NSNumber *)answer isEqual:@YES] ? YES : NO;
-}
-
-- (void)validateParameters {
-    [super validateParameters];
-    
-    NSAssert(_originalItemIdentifier, @"Original item identifier cannot be nil.");
+    BOOL isValid = NO;
+    if ([answer isKindOfClass:[NSNumber class]]) {
+        isValid =  [(NSNumber *)answer isEqual:@YES] ? YES : NO;
+    }
+    return isValid;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConfirmTextAnswerFormat *fmt = [super copyWithZone:zone];
-    fmt->_originalItemIdentifier = _originalItemIdentifier;
+    fmt->_originalItemIdentifier = [_originalItemIdentifier copy];
     return fmt;
 }
 

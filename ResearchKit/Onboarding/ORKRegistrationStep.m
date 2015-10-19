@@ -35,13 +35,13 @@
 #import "ORKAnswerFormat_Private.h"
 
 
-NSString *const ORKRegistrationFormItemEmail = @"ORKRegistrationFormItemEmail";
-NSString *const ORKRegistrationFormItemPassword = @"ORKRegistrationFormItemPassword";
-NSString *const ORKRegistrationFormItemConfirmPassword = @"ORKRegistrationFormItemConfirmPassword";
-NSString *const ORKRegistrationFormItemGivenName = @"ORKRegistrationFormItemGivenName";
-NSString *const ORKRegistrationFormItemFamilyName = @"ORKRegistrationFormItemFamilyName";
-NSString *const ORKRegistrationFormItemGender = @"ORKRegistrationFormItemGender";
-NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
+NSString *const ORKRegistrationFormItemIdentifierEmail = @"ORKRegistrationFormItemEmail";
+NSString *const ORKRegistrationFormItemIdentifierPassword = @"ORKRegistrationFormItemPassword";
+NSString *const ORKRegistrationFormItemIdentifierConfirmPassword = @"ORKRegistrationFormItemConfirmPassword";
+NSString *const ORKRegistrationFormItemIdentifierGivenName = @"ORKRegistrationFormItemGivenName";
+NSString *const ORKRegistrationFormItemIdentifierFamilyName = @"ORKRegistrationFormItemFamilyName";
+NSString *const ORKRegistrationFormItemIdentifierGender = @"ORKRegistrationFormItemGender";
+NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItemDOB";
 
 @implementation ORKRegistrationStep
 
@@ -79,7 +79,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     {
         ORKEmailAnswerFormat *answerFormat = [ORKAnswerFormat emailAnswerFormat];
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemEmail
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
@@ -96,24 +96,25 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
 
-        ORKFormItem *passwordItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemPassword
+        ORKFormItem *passwordItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         passwordItem.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
         passwordItem.optional = NO;
         
         [formItems addObject:passwordItem];
-        
-        NSString *originalItemIdentifier = [passwordItem.identifier copy];
+    }
+    
+    {
         ORKConfirmTextAnswerFormat *confirmAnswerFormat = [[ORKConfirmTextAnswerFormat alloc]
-                                                           initWithOriginalItemIdentifier:originalItemIdentifier];
+                                                           initWithOriginalItemIdentifier:ORKRegistrationFormItemIdentifierPassword];
         confirmAnswerFormat.multipleLines = NO;
         confirmAnswerFormat.secureTextEntry = YES;
         confirmAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         confirmAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         confirmAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
 
-        ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemConfirmPassword
+        ORKFormItem *confirmItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierConfirmPassword
                                                                       text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
                                                                answerFormat:confirmAnswerFormat];
         confirmItem.placeholder = ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
@@ -132,7 +133,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGivenName
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierGivenName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"GIVEN_NAME_ITEM_PLACEHOLDER", nil);
@@ -145,7 +146,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemFamilyName
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierFamilyName
                                                                text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"FAMILY_NAME_ITEM_PLACEHOLDER", nil);
@@ -155,12 +156,12 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     }
     
     if (_options & ORKRegistrationStepIncludeGender) {
-        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@0],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@1],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@2]];
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@"female"],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@"male"],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@"other"]];
         ORKValuePickerAnswerFormat *answerFormat = [ORKAnswerFormat valuePickerAnswerFormatWithTextChoices:textChoices];
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemGender
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierGender
                                                                text:ORKLocalizedString(@"GENDER_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
@@ -171,18 +172,17 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     
     if (_options & ORKRegistrationStepIncludeDOB) {
         // Calculate default date (20 years from now).
-        NSDateComponents *minusTwentyYears = [NSDateComponents new];
-        minusTwentyYears.year = -20;
-        NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingComponents:minusTwentyYears
-                                                                                toDate:[NSDate date]
-                                                                               options:0];
+        NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear
+                                                                       value:-20
+                                                                      toDate:[NSDate date]
+                                                                     options:kNilOptions];
         
         ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
                                                                                  minimumDate:nil
                                                                                  maximumDate:nil
                                                                                     calendar:nil];
         
-        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemDOB
+        ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
                                                                text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat];
         item.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
@@ -195,13 +195,13 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 }
 
 - (ORKTextAnswerFormat *)passwordAnswerFormat {
-    ORKFormItem *passwordFormItem = ORKFindInArrayByFormItemId(self.formItems, ORKRegistrationFormItemPassword);
+    ORKFormItem *passwordFormItem = ORKFindInArrayByFormItemId(self.formItems, ORKRegistrationFormItemIdentifierPassword);
     ORKTextAnswerFormat *passwordAnswerFormat = (ORKTextAnswerFormat *)passwordFormItem.answerFormat;
     return passwordAnswerFormat;
 }
 
 - (NSString *)passcodeValidationRegex {
-    return [self passwordAnswerFormat].regex;
+    return [self passwordAnswerFormat].validationRegex;
 }
 
 - (NSString *)passcodeInvalidMessage {
@@ -209,7 +209,7 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 }
 
 - (void)setPasscodeValidationRegex:(NSString *)passcodeValidationRegex {
-    [self passwordAnswerFormat].regex = passcodeValidationRegex;
+    [self passwordAnswerFormat].validationRegex = passcodeValidationRegex;
 }
 
 - (void)setPasscodeInvalidMessage:(NSString *)passcodeInvalidMessage {
@@ -225,8 +225,8 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     if (self) {
         
         // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
-        // are transparent properties. The secure coding for these properties are
-        // defined in the answer format.
+        // are transparent properties. The `initWithCoder:` for these properties is
+        // defined in the answer format (super).
         ORK_DECODE_INTEGER(aDecoder, options);
     }
     return self;
@@ -236,13 +236,17 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
     [super encodeWithCoder:aCoder];
     
     // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
-    // are transparent properties. The secure coding for these properties are
-    // defined in the answer format.
+    // are transparent properties. The `encodeWithCoder:` for these properties is
+    // defined in the answer format (super).
     ORK_ENCODE_INTEGER(aCoder, options);
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKRegistrationStep *step = [super copyWithZone:zone];
+    
+    // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
+    // are transparent properties. The `copyWithZone:` for these properties is
+    // defined in the answer format (super).
     step->_options = self.options;
     return step;
 }

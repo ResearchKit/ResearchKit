@@ -855,7 +855,7 @@ ret =
         },
         (@{
           PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(regex, NSString, NSObject, YES, nil, nil),
+          PROPERTY(validationRegex, NSString, NSObject, YES, nil, nil),
           PROPERTY(invalidMessage, NSString, NSObject, YES, nil, nil),
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),

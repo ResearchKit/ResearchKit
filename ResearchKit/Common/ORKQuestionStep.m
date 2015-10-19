@@ -32,6 +32,7 @@
 #import "ORKQuestionStep.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
+#import "ORKAnswerFormat_Private.h"
 #import "ORKStep_Private.h"
 #import "ORKQuestionStepViewController.h"
 #import "ORKDefines_Private.h"
@@ -86,6 +87,10 @@
 
 - (void)validateParameters {
     [super validateParameters];
+    
+    NSAssert(![self.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]],
+             @"ORKConfirmTextAnswerFormat can only be used with an ORKFormStep.");
+    
     [[self impliedAnswerFormat] validateParameters];
 }
 

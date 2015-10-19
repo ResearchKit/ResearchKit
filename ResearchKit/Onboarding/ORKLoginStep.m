@@ -53,7 +53,15 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
     
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
-        _loginViewControllerString = NSStringFromClass(loginViewControllerClass);
+        
+        NSString *loginViewControllerString = NSStringFromClass(loginViewControllerClass);
+        if (!loginViewControllerString) {
+            @throw [NSException exceptionWithName:NSGenericException
+                                           reason:@"Unable to convert class into string."
+                                         userInfo:nil];
+        }
+        
+        _loginViewControllerString = loginViewControllerString;
         self.formItems = [self loginFormItems];
     }
     return self;
@@ -95,7 +103,17 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
 }
 
 - (Class)loginViewControllerClass {
-    return NSClassFromString(_loginViewControllerString);
+    Class class = NSClassFromString(_loginViewControllerString);
+    if (!class) {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"Unable to convert string into class."
+                                     userInfo:nil];
+    } else if (![class isSubclassOfClass:[ORKLoginStepViewController class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"ORKLoginStepViewController must pass a subclass of itself."
+                                     userInfo:nil];
+    }
+    return class;
 }
 
 - (BOOL)isOptional {

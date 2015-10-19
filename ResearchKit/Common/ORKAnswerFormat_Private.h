@@ -46,8 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-- (instancetype)initWithValidationExpression:(NSString *)expression
-                              invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+                         invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
 /**
  Returns an initialized text answer format using the original item identifier.
