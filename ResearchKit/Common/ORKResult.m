@@ -1875,7 +1875,7 @@
 }
 
 + (Class)answerClass {
-    return [MKPlacemark class];
+    return [ORKPlacemark class];
 }
 
 - (void)setAnswer:(id)answer {
