@@ -185,12 +185,12 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
         NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear
                                                                        value:-20
                                                                       toDate:[NSDate date]
-                                                                     options:kNilOptions];
+                                                                     options:(NSCalendarOptions)0];
         
         ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
                                                                                  minimumDate:nil
                                                                                  maximumDate:nil
-                                                                                    calendar:nil];
+                                                                                    calendar:[NSCalendar currentCalendar]];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
                                                                text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
