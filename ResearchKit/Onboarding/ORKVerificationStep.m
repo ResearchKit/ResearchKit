@@ -51,32 +51,25 @@
     if (self) {
         self.title = title;
         self.text = text;
+        _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
         
-        NSString *verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
-        if (!verificationViewControllerString) {
-            @throw [NSException exceptionWithName:NSGenericException
-                                           reason:@"Unable to convert class into string."
-                                         userInfo:nil];
-        }
-        
-        _verificationViewControllerString = verificationViewControllerString;
-        
+        [self validateParameters];
     }
     return self;
 }
 
 - (Class)verificationViewControllerClass {
-    Class class = NSClassFromString(_verificationViewControllerString);
-    if (!class) {
+    return NSClassFromString(_verificationViewControllerString);
+}
+
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (!_verificationViewControllerString) {
         @throw [NSException exceptionWithName:NSGenericException
-                                       reason:@"Unable to convert string into class."
-                                     userInfo:nil];
-    } else if (![class isSubclassOfClass:[ORKVerificationStepViewController class]]) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"ORKVerificationStepViewController must pass a subclass of itself."
+                                       reason:@"Unable to convert class into string."
                                      userInfo:nil];
     }
-    return class;
 }
 
 - (BOOL)allowsBackNavigation {

@@ -155,6 +155,16 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
         [formItems addObject:item];
     }
     
+    // Adjust order of given name and family name form item cells based on current locale.
+    if ((_options & ORKRegistrationStepIncludeGivenName) && (_options & ORKRegistrationStepIncludeFamilyName)) {
+        if (ORKCurrentLocalePresentsFamilyNameFirst()) {
+            ORKFormItem *givenNameFormItem = ORKFindInArrayByFormItemId(formItems, ORKRegistrationFormItemIdentifierGivenName);
+            ORKFormItem *familyNameFormItem = ORKFindInArrayByFormItemId(formItems, ORKRegistrationFormItemIdentifierFamilyName);
+            [formItems exchangeObjectAtIndex:[formItems indexOfObject:givenNameFormItem]
+                           withObjectAtIndex:[formItems indexOfObject:familyNameFormItem]];
+        }
+    }
+    
     if (_options & ORKRegistrationStepIncludeGender) {
         NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@"female"],
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@"male"],
