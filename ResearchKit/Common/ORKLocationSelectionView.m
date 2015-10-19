@@ -77,7 +77,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     if (self) {
         _textField = [[ORKAnswerTextField alloc] init];
         _textField.delegate = self;
-        _textField.placeholder = ORKLocalizedString(@"LOCATION_ADDRESS",nil);
+        _textField.placeholder = ORKLocalizedString(@"LOCATION_QUESTION_PLACEHOLDER",nil);
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.adjustsFontSizeToFitWidth = YES;

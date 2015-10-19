@@ -87,7 +87,7 @@
 "INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
 /* Alerts for invalid location coordinates */
-"LOCATION_ADDRESS" = "Enter an address";
+"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
 "LOCATION_ERROR_TITLE" = "Failed to Resolve Specified Address";
 
 /* Alert for exceeding length limit in text answer */
