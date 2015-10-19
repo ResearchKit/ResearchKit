@@ -1864,10 +1864,6 @@
     return (isParentSame && ORKEqualObjects(self.locationAnswer, castObject.locationAnswer));
 }
 
-- (NSUInteger)hash {
-    return [super hash];
-}
-
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLocationQuestionResult *result = [super copyWithZone:zone];
     result->_locationAnswer = [self.locationAnswer copyWithZone:zone];
