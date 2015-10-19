@@ -1866,7 +1866,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLocationQuestionResult *result = [super copyWithZone:zone];
-    result->_locationAnswer = [self.locationAnswer copyWithZone:zone];
+    result->_locationAnswer = [self.locationAnswer copy];
     return result;
 }
 
