@@ -47,7 +47,11 @@
 
 @interface ORKResult ()
 
-@property (nonatomic, readonly) NSString *descriptionPrefix;
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
+
+@property (nonatomic) NSString *descriptionSuffix;
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
 
 @end
 
@@ -124,12 +128,20 @@
     return self;
 }
 
-- (NSString *)descriptionPrefix {
-    return [NSString stringWithFormat:@"%@: %p; identifier: \"%@\"", self.class.description, self, self.identifier];
+- (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@<%@: %p; identifier: \"%@\"", ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces), self.class.description, self, self.identifier];
+}
+
+- (NSString *)descriptionSuffix {
+    return @">";
+}
+
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.descriptionSuffix];
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@>", self.descriptionPrefix];
+    return [self descriptionWithNumberOfPaddingSpaces:0];
 }
 
 @end
@@ -218,8 +230,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; passcodeSaved: %d>", self.descriptionPrefix, self.isPasscodeSaved];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; passcodeSaved: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.isPasscodeSaved, self.descriptionSuffix];
 }
 
 @end
@@ -265,8 +277,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; puzzleSolved: %d; moves: %@>", self.descriptionPrefix, self.puzzleWasSolved, self.moves];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; puzzleSolved: %d; moves: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.puzzleWasSolved, self.moves, self.descriptionSuffix];
 }
 
 @end
@@ -363,8 +375,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; outputvolume: %@; samples: %@>", self.descriptionPrefix, self.outputVolume, self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; outputvolume: %@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.outputVolume, self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -595,8 +607,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p; score: %@>", self.class.description, self, @(self.score)];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; score: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.score), self.descriptionSuffix];
 }
 
 @end
@@ -651,8 +663,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; samples: %@>", self.descriptionPrefix, self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -703,8 +715,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; fileURL: %@ (%lld bytes)>", self.descriptionPrefix, self.fileURL, [[[NSFileManager defaultManager] attributesOfItemAtPath:[self.fileURL path] error:nil] fileSize]];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; fileURL: %@ (%lld bytes)%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.fileURL, [[NSFileManager defaultManager] attributesOfItemAtPath:self.fileURL.path error:nil].fileSize, self.descriptionSuffix];
 }
 
 @end
@@ -751,8 +763,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; timestamp: %f; fileResult: %@>", self.descriptionPrefix, self.timestamp, self.fileResult.description];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; timestamp: %f; fileResult: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.timestamp, self.fileResult.description, self.descriptionSuffix];
 }
 
 @end
@@ -804,8 +816,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; distance: %@; timeLimit: %@; duration: %@>", self.descriptionPrefix, @(self.distanceInMeters), @(self.timeLimit), @(self.duration)];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; distance: %@; timeLimit: %@; duration: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.distanceInMeters), @(self.timeLimit), @(self.duration), self.descriptionSuffix];
 }
 
 @end
@@ -934,8 +946,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; correct: %@/%@; samples: %@>", self.descriptionPrefix, @(self.totalCorrect), @(self.length), self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; correct: %@/%@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.totalCorrect), @(self.length), self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -1014,8 +1026,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; successes: %@; time: %@; samples: %@>", self.descriptionPrefix, @(self.totalSuccesses), @(self.totalTime), self.samples];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; successes: %@; time: %@; samples: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], @(self.totalSuccesses), @(self.totalTime), self.samples, self.descriptionSuffix];
 }
 
 @end
@@ -1116,8 +1128,8 @@
     return result;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; data: %@; filename: %@; contentType: %@>", self.descriptionPrefix, self.data, self.filename, self.contentType];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; data: %@; filename: %@; contentType: %@%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.data, self.filename, self.contentType, self.descriptionSuffix];
 }
 
 @end
@@ -1181,8 +1193,8 @@
     }
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; signature: %@; consented: %d>", self.descriptionPrefix, self.signature, self.consented];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    return [NSString stringWithFormat:@"%@; signature: %@; consented: %d%@", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces], self.signature, self.consented, self.descriptionSuffix];
 }
 
 @end
@@ -1248,8 +1260,19 @@
     return nil;
 }
 
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@; answer: %@>", self.descriptionPrefix, self.answer];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@; answer:", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
+    id answer = self.answer;
+    if ([answer isKindOfClass:[NSArray class]]
+        || [answer isKindOfClass:[NSDictionary class]]
+        || [answer isKindOfClass:[NSSet class]]
+        || [answer isKindOfClass:[NSOrderedSet class]]) {
+        [description appendFormat:@"\n%@\n%@>", answer, ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces)];
+    } else {
+        [description appendFormat:@" %@%@", answer, self.descriptionSuffix];
+    }
+    
+    return [description copy];
 }
 
 @end
@@ -1799,17 +1822,23 @@
     return self.results.firstObject;
 }
 
-- (NSString *)description {
-    NSMutableString *description = [NSMutableString stringWithFormat:@"<%@; results: {", self.descriptionPrefix];
+- (NSString *)descriptionWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@; results: (", [self descriptionPrefixWithNumberOfPaddingSpaces:numberOfPaddingSpaces]];
     
-    [self.results enumerateObjectsUsingBlock:^(ORKResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx != 0) {
-            [description appendString:@", "];
+    NSUInteger numberOfResults = self.results.count;
+    [self.results enumerateObjectsUsingBlock:^(ORKResult *result, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == 0) {
+            [description appendString:@"\n"];
         }
-        [description appendFormat:@"%@", obj.description];
+        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + 4]];
+        if (idx != numberOfResults - 1) {
+            [description appendString:@",\n"];
+        } else {
+            [description appendString:@"\n"];
+        }
     }];
     
-    [description appendString:@"}>"];
+    [description appendFormat:@"%@)%@", ORKPaddingWithNumberOfSpaces((numberOfResults == 0) ? 0 : numberOfPaddingSpaces), self.descriptionSuffix];
     return [description copy];
 }
 
