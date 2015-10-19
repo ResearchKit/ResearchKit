@@ -34,8 +34,8 @@
 #import "ORKAccessibility.h"
 
 
-static NSString * const EmptyBullet = @"\u25CB";
-static NSString * const FilledBullet = @"\u25CF";
+static NSString *const EmptyBulletString = @"\u25CB";
+static NSString *const FilledBulletString = @"\u25CF";
 
 @implementation ORKCaretOptionalTextField
 
@@ -87,7 +87,6 @@ static NSString * const FilledBullet = @"\u25CF";
 }
 
 - (void)updateTextWithNumberOfFilledBullets:(NSInteger)filledBullets {
-    
     // Error checking.
     if (filledBullets > self.numberOfDigits) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
@@ -97,8 +96,8 @@ static NSString * const FilledBullet = @"\u25CF";
     
     // Append the string with the correct number of filled and empty bullets.
     NSString *text = [NSString new];
-    text = [text stringByPaddingToLength:filledBullets withString:FilledBullet startingAtIndex:0];
-    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBullet startingAtIndex:0];
+    text = [text stringByPaddingToLength:filledBullets withString:FilledBulletString startingAtIndex:0];
+    text = [text stringByPaddingToLength:self.numberOfDigits withString:EmptyBulletString startingAtIndex:0];
     
     // Apply spacing attribute to string.
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text];
@@ -122,7 +121,7 @@ static NSString * const FilledBullet = @"\u25CF";
 }
 
 - (NSString *)accessibilityValue {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBullet options:NSRegularExpressionCaseInsensitive error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:FilledBulletString options:NSRegularExpressionCaseInsensitive error:nil];
     NSUInteger numberOfFilledBullets = [regex numberOfMatchesInString:self.text options:0 range:NSMakeRange(0, [self.text length])];
     return [NSString stringWithFormat:ORKLocalizedString(@"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE", nil), ORKLocalizedStringFromNumber(@(numberOfFilledBullets)), ORKLocalizedStringFromNumber(@([self.text length]))];
 }
@@ -327,7 +326,7 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
 
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    CGRect r = [super editingRectForBounds:bounds];
+    CGRect rect = [super editingRectForBounds:bounds];
     
     // Leave room for the suffix label
     if (_suffixLabel.text.length) {
@@ -335,10 +334,10 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
         if (suffixWidth > 0) {
             suffixWidth += paddingGuess.right;
         }
-        r.size.width = MAX(0, r.size.width - suffixWidth);
+        rect.size.width = MAX(0, rect.size.width - suffixWidth);
     }
     
-    return r;
+    return rect;
 }
 
 - (CGRect)ork_suffixFrame {
@@ -464,6 +463,5 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 2, .right = 6};
     
     return fieldWidth;
 }
-
 
 @end
