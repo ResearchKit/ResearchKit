@@ -870,9 +870,7 @@ ret =
           })),
   ENTRY(ORKLocationAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            ORKLocationAnswerFormat *format = [[ORKLocationAnswerFormat alloc] init];
-            format.useCurrentLocation = ((NSNumber *)GETPROP(dict, useCurrentLocation)).boolValue;
-            return format;
+            return [[ORKLocationAnswerFormat alloc] init];
         },
         (@{
           PROPERTY(useCurrentLocation, NSNumber, NSObject, NO, nil, nil)
