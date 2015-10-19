@@ -45,13 +45,6 @@ NSString *const ORKLoginFormItemPassword = @"ORKLoginFormItemPassword";
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
-                              text:(nullable NSString *)text {
-    ORKThrowMethodUnavailableException();
-    return nil;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
           loginViewControllerClass:(Class)loginViewControllerClass {

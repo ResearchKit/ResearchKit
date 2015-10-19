@@ -223,6 +223,10 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        
+        // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
+        // are transparent properties. The secure coding for these properties are
+        // defined in the answer format.
         ORK_DECODE_INTEGER(aDecoder, options);
     }
     return self;
@@ -230,6 +234,10 @@ NSString *const ORKRegistrationFormItemDOB = @"ORKRegistrationFormItemDOB";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
+    
+    // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
+    // are transparent properties. The secure coding for these properties are
+    // defined in the answer format.
     ORK_ENCODE_INTEGER(aCoder, options);
 }
 

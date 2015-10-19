@@ -57,7 +57,7 @@ ORK_CLASS_AVAILABLE
  @param text                                The text shown immediately below the title (see `ORKStep`).
  @param verificationViewControllerClass     The subclassed verification view controller class.
  
- @return As initialized verification step object.
+ @return An initialized verification step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title

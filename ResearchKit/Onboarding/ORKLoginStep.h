@@ -66,7 +66,7 @@ ORK_CLASS_AVAILABLE
  @param email                           The email address that needs to be verified.
  @param loginViewControllerClass        The subclassed login step view controller class.
  
- @return As initialized verification step object.
+ @return An initialized login step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
