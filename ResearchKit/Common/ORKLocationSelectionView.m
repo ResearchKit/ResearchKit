@@ -47,7 +47,7 @@
 #import "ORKSkin.h"
 
 
-static const CGFloat HorizontalMargin = 15.0;
+static const CGFloat HorizontalMapMargin = 15.0;
 static const CGFloat HorizontalTextFieldMargin = 20.0;
 
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
@@ -63,7 +63,8 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     BOOL _userLocationNeedsUpdate;
     MKCoordinateRegion _initalCoordinateRegion;
     BOOL _setInitialCoordinateRegion;
-    BOOL _edgeToEdgeMap;
+    CGFloat _mapHorizontalMargin;
+    CGFloat _textFieldHorizontalMargin;
 }
 
 - (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation {
@@ -84,9 +85,15 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
         
         _mapView = [[MKMapView alloc] init];
         _mapView.delegate = self;
-        
+        if (!edgeToEdgePresentation) {
+            _mapView.layer.cornerRadius = 3;
+            _mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
+            _mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
+        }
+
         _useCurrentLocation = use;
-        _edgeToEdgeMap = edgeToEdgePresentation;
+        _textFieldHorizontalMargin = edgeToEdgePresentation ? HorizontalTextFieldMargin : 0.0;
+        _mapHorizontalMargin = edgeToEdgePresentation ? 0.0 : HorizontalMapMargin;
         
         [self addSubview:_textField];
         [self setUpConstraints];
@@ -108,7 +115,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:LocationSelectionViewTextFieldHeight]];
     
-    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(HorizontalTextFieldMargin) : @(0.0))};
+    NSDictionary *metrics = @{@"horizontalMargin": @(_textFieldHorizontalMargin)};
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_textField]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
@@ -150,12 +157,6 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     
     _mapView.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, 0.0);
     ORKEnableAutoLayoutForViews(@[_mapView]);
-    
-    if (!_edgeToEdgeMap) {
-        _mapView.layer.cornerRadius = 3;
-        _mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
-        _mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
-    }
     [self addSubview:_mapView];
     
     [self loadCurrentLocationIfNecessary];
@@ -166,7 +167,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     
     NSMutableArray *constraints = [NSMutableArray new];
     
-    NSDictionary *metrics = @{@"horizontalMargin": (_edgeToEdgeMap ? @(0.0) : @(HorizontalMargin))};
+    NSDictionary *metrics = @{@"horizontalMargin": @(_mapHorizontalMargin)};
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-LocationSelectionViewTextFieldVerticalMargin]];
     _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
