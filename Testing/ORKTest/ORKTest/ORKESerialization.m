@@ -1127,11 +1127,7 @@ ret =
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {\
              CLLocation *location = GETPROP(dict, location);
              NSDictionary *address = GETPROP(dict, addressDictionary);
-             if ([address isKindOfClass:[NSDictionary class]]) {
-                 return [[ORKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:address];
-             } else {
-                 return [[ORKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil];
-             }
+             return [[ORKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:address];
          },
          (@{
             PROPERTY(addressDictionary, NSDictionary, NSObject, NO, nil, nil),
