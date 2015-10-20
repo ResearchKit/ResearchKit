@@ -547,10 +547,5 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
 }
 
 NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
-    NSMutableString *padding = [NSMutableString new];
-    while (numberOfPaddingSpaces) {
-        [padding appendString:@" "];
-        numberOfPaddingSpaces--;
-    }
-    return padding;
+    return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
 }
