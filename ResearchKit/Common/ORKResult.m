@@ -1830,7 +1830,8 @@
         if (idx == 0) {
             [description appendString:@"\n"];
         }
-        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + 4]];
+        const NSUInteger numberOfPaddingSpacesForIndentationLevel = 4;
+        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + numberOfPaddingSpacesForIndentationLevel]];
         if (idx != numberOfResults - 1) {
             [description appendString:@",\n"];
         } else {
