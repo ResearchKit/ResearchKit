@@ -45,6 +45,8 @@
 #import <CoreLocation/CoreLocation.h>
 
 
+const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
+
 @interface ORKResult ()
 
 - (NSString *)descriptionPrefixWithNumberOfPaddingSpaces:(NSUInteger)numberOfPaddingSpaces;
@@ -1267,7 +1269,18 @@
         || [answer isKindOfClass:[NSDictionary class]]
         || [answer isKindOfClass:[NSSet class]]
         || [answer isKindOfClass:[NSOrderedSet class]]) {
-        [description appendFormat:@"\n%@\n%@>", answer, ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces)];
+        NSMutableString *indentatedAnswerDescription = [NSMutableString new];
+        NSString *answerDescription = [answer description];
+        NSArray *answerLines = [answerDescription componentsSeparatedByString:@"\n"];
+        const NSUInteger numberOfAnswerLines = answerLines.count;
+        [answerLines enumerateObjectsUsingBlock:^(NSString *answerLineString, NSUInteger idx, BOOL *stop) {
+            [indentatedAnswerDescription appendFormat:@"%@%@", ORKPaddingWithNumberOfSpaces(numberOfPaddingSpaces + NumberOfPaddingSpacesForIndentationLevel), answerLineString];
+            if (idx != numberOfAnswerLines - 1) {
+                [indentatedAnswerDescription appendString:@"\n"];
+            }
+        }];
+        
+        [description appendFormat:@"\n%@>", indentatedAnswerDescription];
     } else {
         [description appendFormat:@" %@%@", answer, self.descriptionSuffix];
     }
@@ -1830,8 +1843,7 @@
         if (idx == 0) {
             [description appendString:@"\n"];
         }
-        const NSUInteger numberOfPaddingSpacesForIndentationLevel = 4;
-        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + numberOfPaddingSpacesForIndentationLevel]];
+        [description appendFormat:@"%@", [result descriptionWithNumberOfPaddingSpaces:numberOfPaddingSpaces + NumberOfPaddingSpacesForIndentationLevel]];
         if (idx != numberOfResults - 1) {
             [description appendString:@",\n"];
         } else {
