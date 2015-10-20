@@ -60,7 +60,8 @@
                                              selector:@selector(updateAppearance)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textViewTextDidChange:)
+    [[NSNotificationCenter defaultCenter]  addObserver:self
+                                              selector:@selector(textViewTextDidChange:)
                                                   name:UITextViewTextDidChangeNotification
                                                 object:self];
 
