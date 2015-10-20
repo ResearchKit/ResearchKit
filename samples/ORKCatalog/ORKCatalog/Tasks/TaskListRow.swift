@@ -516,16 +516,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         let formItem02 = ORKFormItem(identifier: String(Identifier.FormItem02), text: formItem02Text, answerFormat: ORKTimeIntervalAnswerFormat())
         formItem02.placeholder = NSLocalizedString("Your placeholder here", comment: "")
         
-        // An third field for selecting a location.
-        let formItem03Text = NSLocalizedString("Field 03", comment: "")
-        let formItem03 = ORKFormItem(identifier: String(Identifier.FormItem03), text: formItem03Text, answerFormat: ORKLocationAnswerFormat())
-        formItem03.placeholder = NSLocalizedString("Your placeholder here", comment: "")
-
-        
         step.formItems = [
             formItem01,
-            formItem02,
-            formItem03
+            formItem02
         ]
         
         return ORKOrderedTask(identifier: String(Identifier.FormTask), steps: [step])
