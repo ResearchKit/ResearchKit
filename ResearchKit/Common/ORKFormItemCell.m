@@ -756,6 +756,7 @@ static const CGFloat HorizontalMargin = 15.0;
     _textView.contentInset = UIEdgeInsetsMake(-5.0, -4.0, -5.0, 0.0);
     _textView.textAlignment = NSTextAlignmentNatural;
     _textView.scrollEnabled = NO;
+    _textView.placeholder = self.formItem.placeholder;
     
     [self applyAnswerFormat];
     [self answerDidChange];
@@ -823,17 +824,6 @@ static const CGFloat HorizontalMargin = 15.0;
         answer = nil;
     }
     _textView.text = (NSString *)answer;
-    _textView.textColor = [UIColor blackColor];
-    
-    if (_textView.text.length == 0) {
-        if ([_textView isFirstResponder]) {
-            _textView.text = nil;
-            _textView.textColor = [UIColor blackColor];
-        } else {
-            _textView.text = self.formItem.placeholder;
-            _textView.textColor = [self placeholderColor];
-        }
-    }
 }
 
 - (BOOL)becomeFirstResponder {

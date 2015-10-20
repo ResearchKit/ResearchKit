@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -150,9 +151,9 @@ static NSString *const FilledBulletString = @"\u25CF";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
-        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidBeginEditing:) name:UITextFieldTextDidBeginEditingNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidEndEditing:) name:UITextFieldTextDidEndEditingNotification object:self];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:self];
         
     }
     return self;
@@ -279,16 +280,16 @@ static NSString *const FilledBulletString = @"\u25CF";
     [self invalidateIntrinsicContentSize];
 }
 
-- (void)textFieldDidBeginEditing:(NSNotification *)notification {
+- (void)textFieldTextDidBeginEditing:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
 }
 
-- (void)textFieldDidEndEditing:(NSNotification *)notification {
+- (void)textFieldTextDidEndEditing:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
     
 }
 
-- (void)textFieldDidChange:(NSNotification *)notification {
+- (void)textFieldTextDidChange:(NSNotification *)notification {
     [self updateManagedUnitAndPlaceholder];
 }
 
