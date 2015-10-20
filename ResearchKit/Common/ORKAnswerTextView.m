@@ -78,7 +78,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    // Setting the frame directly causes a layout error on a form step (it looks like an iOS bug, as setting the frame should produce the same effect as settings the bounds and the center)
+    // Setting the frame directly causes a layout error on a form step (it looks like an iOS bug, as setting the frame should produce the same effect as setting the bounds and the center)
     CGRect answerTextViewBounds = self.bounds;
     _placeholderTextView.bounds = answerTextViewBounds;
     _placeholderTextView.center = CGPointMake(answerTextViewBounds.size.width / 2, answerTextViewBounds.size.height / 2);
