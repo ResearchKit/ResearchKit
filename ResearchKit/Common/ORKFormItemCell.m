@@ -497,26 +497,47 @@ static const CGFloat HorizontalMargin = 15.0;
 
 @implementation ORKFormItemConfirmTextCell
 
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    [super setSavedAnswers:savedAnswers];
+    
+    [savedAnswers addObserver:self
+                   forKeyPath:[self originalItemIdentifier]
+                      options:0
+                      context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqual:[self originalItemIdentifier]]) {
+        self.textField.text = nil;
+    }
+}
+
 - (BOOL)isAnswerValidWithString:(NSString *)string {
     BOOL isValid = NO;
     if (string.length > 0) {
-        NSDictionary *savedAnswers = *self.savedAnswers;
-        ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
-        NSString *originalItemIdentifier = [answerFormat.originalItemIdentifier copy];
-        NSString *originalPassword = savedAnswers[originalItemIdentifier];
-        if (!ORKIsAnswerEmpty(originalPassword) && [originalPassword isEqualToString:string]) {
+        NSString *originalItemAnswer = self.savedAnswers[[self originalItemIdentifier]];
+        if (!ORKIsAnswerEmpty(originalItemAnswer) && [originalItemAnswer isEqualToString:string]) {
             isValid = YES;
         }
     }
     return isValid;
 }
 
+- (NSString *)originalItemIdentifier {
+    ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
+    return [answerFormat.originalItemIdentifier copy];
+}
+
+- (void)dealloc {
+    [self.savedAnswers removeObserver:self forKeyPath:[self originalItemIdentifier]];
+}
+
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    [self ork_setAnswer:@([self isAnswerValidWithString:text])];
-    
+    [self ork_setAnswer:([self isAnswerValidWithString:text] ? text : @"")];
+
     return YES;
 }
 
@@ -524,7 +545,7 @@ static const CGFloat HorizontalMargin = 15.0;
     [super textFieldShouldEndEditing:textField];
     if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
         textField.text = @"";
-        [self inputValueDidClear];
+        [self ork_setAnswer:textField.text];
         [self showValidityAlertWithMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
     }
     return YES;

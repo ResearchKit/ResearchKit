@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) id defaultAnswer;
 @property (nonatomic) CGFloat maxLabelWidth;
 @property (nonatomic) CGFloat expectedLayoutWidth;
-@property (nonatomic) NSDictionary   * __nullable __strong * __nullable savedAnswers;
+@property (nonatomic) NSDictionary *savedAnswers;
 
 @end
 

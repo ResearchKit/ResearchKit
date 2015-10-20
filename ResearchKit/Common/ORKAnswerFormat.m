@@ -2079,7 +2079,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @implementation ORKConfirmTextAnswerFormat
 
 - (Class)questionResultClass {
-    return [ORKBooleanQuestionResult class];
+    return [ORKTextQuestionResult class];
 }
 
 - (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier {
@@ -2095,8 +2095,9 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (BOOL)isAnswerValid:(id)answer {
     BOOL isValid = NO;
-    if ([answer isKindOfClass:[NSNumber class]]) {
-        isValid =  [(NSNumber *)answer isEqual:@YES] ? YES : NO;
+    if ([answer isKindOfClass:[NSString class]]) {
+        NSString *stringAnswer = (NSString *)answer;
+        isValid = (stringAnswer.length > 0) ? YES : NO;
     }
     return isValid;
 }

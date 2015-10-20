@@ -829,7 +829,10 @@
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
                         if ([class isSubclassOfClass:[ORKFormItemConfirmTextCell class]]) {
-                            formCell.savedAnswers = &_savedAnswers;
+                            if (!_savedAnswers) {
+                                _savedAnswers = [NSMutableDictionary new];
+                            }
+                            formCell.savedAnswers = _savedAnswers;
                         }
                         cell = formCell;
                     }
