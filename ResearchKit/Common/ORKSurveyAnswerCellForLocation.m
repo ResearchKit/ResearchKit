@@ -112,8 +112,8 @@
     [self ork_setAnswer:_selectionView.answer];
 }
 
-- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error {
-    [self showValidityAlertWithTitle:ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"") message:error.localizedFailureReason];
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithErrorTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 @end

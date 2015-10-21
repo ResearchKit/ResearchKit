@@ -207,9 +207,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
-                [_delegate locationSelectionView:self didFailWithError:error];
-            }
+            [self notifyDelegateOfError:error fromGeocoder:YES];
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
@@ -230,9 +228,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithError:)]) {
-                [_delegate locationSelectionView:self didFailWithError:error];
-            }
+            [self notifyDelegateOfError:error fromGeocoder:YES];
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
@@ -288,12 +284,51 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     }
 }
 
+- (void)notifyDelegateOfError:(NSError *)error fromGeocoder:(BOOL)fromGeocoder{
+    NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"");
+    NSString *message = nil;
+    
+    switch (error.code) {
+        case kCLErrorLocationUnknown:
+        case kCLErrorHeadingFailure:
+            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN", @"");
+            break;
+        case kCLErrorDenied:
+        case kCLErrorRegionMonitoringDenied:
+            message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_DENIED", @"");
+            break;
+        case kCLErrorNetwork:
+            if (!fromGeocoder) {
+                message = ORKLocalizedString(@"LOCATION_ERROR_NETWORK", @"");
+            } else {
+                message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
+            }
+            break;
+        case kCLErrorGeocodeFoundNoResult:
+        case kCLErrorGeocodeFoundPartialResult:
+        case kCLErrorGeocodeCanceled:
+            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
+            break;
+        default:
+            message = ORKLocalizedString(@"LOCATION_ERROR_UNKNOWN", @"");
+            break;
+    }
+    
+    if ([_delegate respondsToSelector:@selector(locationSelectionView:didFailWithErrorTitle:message:)] && message != nil) {
+        [_delegate locationSelectionView:self didFailWithErrorTitle:title message:message];
+    }
+}
+
 # pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self loadCurrentLocationIfNecessary];
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [self notifyDelegateOfError:error fromGeocoder:NO];
 }
 
 #pragma mark MKMapViewDelegate
@@ -306,6 +341,10 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
         [self reverseGeocodeAndDisplay:userLocation.location];
         _userLocationNeedsUpdate = NO;
     }
+}
+
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
+    [self notifyDelegateOfError:error fromGeocoder:NO];
 }
 
 #pragma mark UITextFieldDelegate

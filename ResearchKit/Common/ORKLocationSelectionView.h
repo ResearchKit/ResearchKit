@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @required
 
-- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithError:(NSError *)error;
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithErrorTitle:(NSString *)title message:(NSString *)message;
 
 @end
 
