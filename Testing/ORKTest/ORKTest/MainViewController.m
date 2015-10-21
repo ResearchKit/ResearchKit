@@ -494,7 +494,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     } else if ([identifier isEqualToString:EmbeddedReviewStepTaskIdentifier]) {
         return [self makeEmbeddedReviewStep];
     } else if ([identifier isEqualToString:StandaloneReviewStepTaskIdentifier]) {
-        return [self makeStandaloneReviewStep];
+        if (embeddedReviewStepResult != nil) {
+            return [self makeStandaloneReviewStep];
+        } else {
+            [self showAlertWithTitle:@"Alert" message:@"Please run embedded review step task first"];
+            return nil;
+        }
     } if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
     }
@@ -2942,12 +2947,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Review step
 
+ORKTaskResult *embeddedReviewStepResult = nil;
+
 - (id<ORKTask>)makeEmbeddedReviewStep {
-    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"Do you feel sad?" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Do you feel happy?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"reviewStep"];
-    reviewStep.title = @"reviewStep";
-    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"step3" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers";
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"Do you feel angry?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
     return task;
 }
@@ -2957,13 +2965,13 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (id<ORKTask>)makeStandaloneReviewStep {
-    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"step1" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"step2" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2] resultSource:nil];
-    reviewStep.title = @"reviewStep";
-    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"step3" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[reviewStep, step3]];
-    return task;
+    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"Do you feel sad?" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Do you feel happy?" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"Do you feel angry?" answer:[ORKAnswerFormat booleanAnswerFormat]];
+    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2, step3] resultSource:embeddedReviewStepResult];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers from your last survey";
+    return [[ORKOrderedTask alloc] initWithIdentifier:@"reviewStepTask" steps:@[reviewStep]];
 }
 
 - (IBAction)standaloneReviewStepButtonTapped:(id)sender {
@@ -3323,16 +3331,25 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
+            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
+                embeddedReviewStepResult = taskViewController.result;
+            }
             [self taskViewControllerDidComplete:taskViewController];
             break;
         case ORKTaskViewControllerFinishReasonFailed:
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
+            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
+                embeddedReviewStepResult = nil;
+            }
             [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
+            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
+                embeddedReviewStepResult = taskViewController.result;
+            }
             /*
              Save the restoration data, dismiss the task VC, and do an early return
              so we don't clear the restoration data.

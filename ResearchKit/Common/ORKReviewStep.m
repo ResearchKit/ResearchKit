@@ -42,14 +42,14 @@
                       resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
-        _steps = steps;
+        _steps = [steps copy];
         _resultSource = resultSource;
     }
     return self;
 }
 
 + (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
-                                             steps:(nullable NSArray *)steps
+                                             steps:(nonnull NSArray *)steps
                                       resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:steps resultSource:resultSource];
 }

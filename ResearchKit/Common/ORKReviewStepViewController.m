@@ -30,7 +30,9 @@
 
 
 #import "ORKReviewStepViewController.h"
+#import "ORKReviewStepViewController_Internal.h"
 #import "ORKReviewStep.h"
+#import "ORKReviewStep_Internal.h"
 #import "ORKStep_Private.h"
 #import "ORKTaskViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *>*)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];
     if (self && [self reviewStep]) {
-        NSArray<ORKStep *> *stepsToFilter = [self reviewStep].steps != nil ? [self reviewStep].steps : steps;
+        NSArray<ORKStep *> *stepsToFilter = [self reviewStep].isStandalone ? [self reviewStep].steps : steps;
         NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
         [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || [obj isKindOfClass:[ORKInstructionStep class]];
@@ -78,7 +80,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
             }
         }];
         _steps = [filteredSteps copy];
-        _resultSource = [self reviewStep].resultSource != nil ? [self reviewStep].resultSource : resultSource;
+        _resultSource = [self reviewStep].isStandalone ? [self reviewStep].resultSource : resultSource;
     }
     return self;
 }
@@ -174,7 +176,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
         cell = [[ORKChoiceViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.immediateNavigation = YES;
-    cell.shortLabel.text = _steps[indexPath.row].title;
+    cell.shortLabel.text = _steps[indexPath.row].title != nil ? _steps[indexPath.row].title : _steps[indexPath.row].text;
     return cell;
 }
 

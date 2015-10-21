@@ -42,6 +42,7 @@
 #import "ORKTaskViewController_Internal.h"
 #import "ORKStepViewController_Internal.h"
 #import "ORKFormStepViewController.h"
+#import "ORKReviewStepViewController_Internal.h"
 
 #import "ORKActiveStep.h"
 #import "ORKQuestionStep.h"
@@ -57,7 +58,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <ORKReviewStep.h>
+#import "ORKReviewStep.h"
 #import "ORKReviewStep_Internal.h"
 
 
@@ -1291,7 +1292,12 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 
 - (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
                   willReviewStep:(ORKStep *)step {
+    id<ORKTaskResultSource> resultSource = _defaultResultSource;
+    if (reviewStepViewController.reviewStep && reviewStepViewController.reviewStep.isStandalone) {
+        _defaultResultSource = reviewStepViewController.reviewStep.resultSource;
+    }
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
+    _defaultResultSource = resultSource;
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
     if (stepViewController.parentReviewStep.isStandalone) {
