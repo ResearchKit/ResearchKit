@@ -1833,8 +1833,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
                                                                    text:@"Text C"
-                                                           answerFormat:format];
-            item.optional = NO;
+                                                           answerFormat:format
+                                                               optional:NO];
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1842,8 +1842,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
                                                                    text:@"Number"
-                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-            item.optional = NO;
+                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]
+                                                               optional:NO];
             item.placeholder = @"Input any number here.";
             [items addObject:item];
         }
@@ -1866,8 +1866,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text1"
                                                                    text:@"Text A"
-                                                           answerFormat:format];
-            item.optional = NO;
+                                                           answerFormat:format
+                                                               optional:NO];
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1875,8 +1875,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text2"
                                                                    text:@"Text B"
-                                                           answerFormat:format];
-            item.optional = NO;
+                                                           answerFormat:format
+                                                               optional:NO];
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1884,8 +1884,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text3"
                                                                    text:@"Text C"
-                                                           answerFormat:format];
-            item.optional = NO;
+                                                           answerFormat:format
+                                                               optional:NO];
             item.placeholder = @"Input any text here.";
             [items addObject:item];
         }
@@ -1893,8 +1893,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fqid_text4"
                                                                    text:@"Number"
-                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]];
-            item.optional = NO;
+                                                           answerFormat:[ORKNumericAnswerFormat decimalAnswerFormatWithUnit:nil]
+                                                               optional:NO];
             item.placeholder = @"Input any number here.";
             [items addObject:item];
         }
