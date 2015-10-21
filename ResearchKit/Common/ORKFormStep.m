@@ -140,13 +140,17 @@
 @implementation ORKFormItem
 
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
+    return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
     self = [super init];
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
-        _optional = YES;
         _identifier = [identifier copy];
         _text = [text copy];
         _answerFormat = [answerFormat copy];
+        _optional = optional;
     }
     return self;
 }
