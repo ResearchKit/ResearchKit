@@ -32,9 +32,15 @@
 #import "ORKLoginStepViewController.h"
 #import "ORKDefines_Private.h"
 #import "ORKFormStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 
 
 @implementation ORKLoginStepViewController
+
+- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
+    [super setContinueButtonItem:continueButtonItem];
+    continueButtonItem.title = ORKLocalizedString(@"LOGIN_CONTINUE_BUTTON_TITLE", nil);
+}
 
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     [super setSkipButtonItem:skipButtonItem];
@@ -48,7 +54,12 @@
     [self forgotPasswordButtonTapped];
 }
 
+#pragma mark Override methods
+
 - (void)forgotPasswordButtonTapped {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];
 }
 
 @end

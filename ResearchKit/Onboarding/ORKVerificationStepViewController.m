@@ -83,24 +83,38 @@
     [self continueButtonTapped];
 }
 
-- (void)continueButtonTapped {
-}
-
 - (void)resendEmailButtonHandler:(id)sender {
     [self resendEmailButtonTapped];
-}
-
-- (void)resendEmailButtonTapped {
 }
 
 - (void)changeEmailButtonHandler:(id)sender {
     [self changeEmailButtonTapped];
 }
 
+#pragma mark Override methods
+
+- (void)continueButtonTapped {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];;
+}
+
+- (void)resendEmailButtonTapped {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];;
+}
+
 - (void)changeEmailButtonTapped {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];;
 }
 
 - (NSString *)emailAddress {
+    @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
+                                 userInfo:nil];;
     return nil;
 }
 

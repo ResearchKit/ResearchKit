@@ -383,6 +383,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Login task specific identifiers.
         case LoginTask
         case LoginStep
+        case LoginWaitStep
 
         // Passcode task specific identifiers.
         case PasscodeTask
@@ -1098,7 +1099,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         */
         let loginTitle = NSLocalizedString("Login", comment: "")
         let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: loginViewController.self)
-        return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep])
+        
+        /*
+        A wait step allows you to validate the data from the user login against your server before proceeding.
+        */
+        let waitTitle = NSLocalizedString("Logging in", comment: "")
+        let waitText = NSLocalizedString("Please wait while we validate your credentials", comment: "")
+        let waitStep = ORKWaitStep(identifier: String(Identifier.LoginWaitStep))
+        waitStep.title = waitTitle
+        waitStep.text = waitText
+        
+        return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep, waitStep])
     }
     
     /// This task demonstrates the Passcode creation process.

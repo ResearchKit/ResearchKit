@@ -115,6 +115,7 @@
 "VERIFICATION_LABEL_MESSAGE" = "If verified, tap below.";
 
 /* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
 
 /* Passcode step */

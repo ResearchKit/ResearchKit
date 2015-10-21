@@ -33,6 +33,7 @@
 #import "ORKLoginStep_Internal.h"
 #import "ORKDefines_Private.h"
 #import "ORKHelpers.h"
+#import "ORKStep_Private.h"
 
 
 NSString *const ORKLoginFormItemIdentifierEmail = @"ORKLoginFormItemEmail";
@@ -69,9 +70,9 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierEmail
                                                                text:ORKLocalizedString(@"EMAIL_FORM_ITEM_TITLE", nil)
-                                                       answerFormat:answerFormat];
+                                                       answerFormat:answerFormat
+                                                           optional:NO];
         item.placeholder = ORKLocalizedString(@"EMAIL_FORM_ITEM_PLACEHOLDER", nil);
-        item.optional = NO;
         
         [formItems addObject:item];
     }
@@ -86,9 +87,9 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKLoginFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
-                                                       answerFormat:answerFormat];
+                                                       answerFormat:answerFormat
+                                                           optional:NO];
         item.placeholder = ORKLocalizedString(@"PASSWORD_FORM_ITEM_PLACEHOLDER", nil);
-        item.optional = NO;
         
         [formItems addObject:item];
     }
@@ -113,6 +114,10 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 - (BOOL)isOptional {
     // This is necessary because the skip button is used as a `Forgot password?` button.
     return YES;
+}
+
+- (BOOL)showsProgress {
+    return NO;
 }
 
 + (BOOL)supportsSecureCoding {
