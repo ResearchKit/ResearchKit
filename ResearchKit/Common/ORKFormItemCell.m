@@ -520,6 +520,9 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqual:[self originalItemIdentifier]]) {
         self.textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
     }
 }
 
@@ -555,7 +558,10 @@ static const CGFloat HorizontalMargin = 15.0;
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [super textFieldShouldEndEditing:textField];
     if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
-        textField.text = @"";
+        textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
         [self showValidityAlertWithMessage:[self.formItem.answerFormat localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
