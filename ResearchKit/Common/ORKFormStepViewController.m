@@ -828,12 +828,10 @@
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
-                        if ([class isSubclassOfClass:[ORKFormItemConfirmTextCell class]]) {
-                            if (!_savedAnswers) {
-                                _savedAnswers = [NSMutableDictionary new];
-                            }
-                            formCell.savedAnswers = _savedAnswers;
+                        if (!_savedAnswers) {
+                            _savedAnswers = [NSMutableDictionary new];
                         }
+                        formCell.savedAnswers = _savedAnswers;
                         cell = formCell;
                     }
                 }

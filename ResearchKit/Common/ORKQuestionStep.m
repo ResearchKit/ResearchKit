@@ -88,8 +88,11 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    NSAssert(![self.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]],
-             @"ORKConfirmTextAnswerFormat can only be used with an ORKFormStep.");
+    if([self.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"ORKConfirmTextAnswerFormat can only be used with an ORKFormStep."
+                                     userInfo:nil];
+    }
     
     [[self impliedAnswerFormat] validateParameters];
 }

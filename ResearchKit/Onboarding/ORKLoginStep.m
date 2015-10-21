@@ -61,7 +61,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
     return self;
 }
 
-- (NSArray *)loginFormItems {
+- (NSArray <ORKFormItem *> *)loginFormItems {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {
@@ -103,9 +103,9 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 - (void)validateParameters {
     [super validateParameters];
     
-    if (!_loginViewControllerString) {
+    if (!_loginViewControllerString || !NSClassFromString(_loginViewControllerString)) {
         @throw [NSException exceptionWithName:NSGenericException
-                                       reason:@"Unable to convert class into string."
+                                       reason:@"Unable to find ORKLoginStepViewController subclass."
                                      userInfo:nil];
     }
 }
@@ -134,7 +134,7 @@ NSString *const ORKLoginFormItemIdentifierPassword = @"ORKLoginFormItemPassword"
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKLoginStep *step = [super copyWithZone:zone];
-    step->_loginViewControllerString = self.loginViewControllerString;
+    step->_loginViewControllerString = [self.loginViewControllerString copy];
     return step;
 }
 

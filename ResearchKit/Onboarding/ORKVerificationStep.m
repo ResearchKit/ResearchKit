@@ -65,9 +65,9 @@
 - (void)validateParameters {
     [super validateParameters];
     
-    if (!_verificationViewControllerString) {
+    if (!_verificationViewControllerString || !NSClassFromString(_verificationViewControllerString)) {
         @throw [NSException exceptionWithName:NSGenericException
-                                       reason:@"Unable to convert class into string."
+                                       reason:@"Unable to find ORKVerificationStepViewController subclass."
                                      userInfo:nil];
     }
 }
@@ -95,7 +95,7 @@
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKVerificationStep *step = [super copyWithZone:zone];
-    step->_verificationViewControllerString = self.verificationViewControllerString;
+    step->_verificationViewControllerString = [self.verificationViewControllerString copy];
     return step;
 }
 

@@ -56,12 +56,19 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return An initialized confirm text answer format.
  */
-- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier;
+- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                  errorMessage:(NSString *)errorMessage;
 
 /**
  The identifier for the form item that the current item will be validated against.
  */
 @property (nonatomic, copy, readonly) NSString *originalItemIdentifier;
+
+
+/**
+ The error message displayed if validation fails.
+ */
+@property (nonatomic, copy, readonly) NSString *errorMessage;
 
 @end
 

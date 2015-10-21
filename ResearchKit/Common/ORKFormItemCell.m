@@ -182,6 +182,17 @@ static const CGFloat HorizontalMargin = 15.0;
     [self defaultAnswerDidChange];
 }
 
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    _savedAnswers = savedAnswers;
+
+    if (!_savedAnswers) {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"Saved answers cannot be nil."
+                                     userInfo:nil];
+    }
+    
+}
+
 - (BOOL)becomeFirstResponder {
     // Subclasses should override this
     return YES;
@@ -545,15 +556,9 @@ static const CGFloat HorizontalMargin = 15.0;
     [super textFieldShouldEndEditing:textField];
     if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
         textField.text = @"";
-        [self ork_setAnswer:textField.text];
-        [self showValidityAlertWithMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
+        [self showValidityAlertWithMessage:[self.formItem.answerFormat localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.editingHighlight = NO;
-    [self.delegate formItemCellDidResignFirstResponder:self];
 }
 
 @end

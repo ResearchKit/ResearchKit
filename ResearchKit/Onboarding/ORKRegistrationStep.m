@@ -73,7 +73,7 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
                                text:nil];
 }
 
-- (NSArray *)registrationFormItems {
+- (NSArray <ORKFormItem *> *)registrationFormItems {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {
@@ -107,7 +107,8 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
     
     {
         ORKConfirmTextAnswerFormat *confirmAnswerFormat = [[ORKConfirmTextAnswerFormat alloc]
-                                                           initWithOriginalItemIdentifier:ORKRegistrationFormItemIdentifierPassword];
+                                                           initWithOriginalItemIdentifier:ORKRegistrationFormItemIdentifierPassword
+                                                           errorMessage:ORKLocalizedString(@"CONFIRM_PASSWORD_ERROR_MESSAGE", nil)];
         confirmAnswerFormat.multipleLines = NO;
         confirmAnswerFormat.secureTextEntry = YES;
         confirmAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;

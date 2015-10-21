@@ -2078,17 +2078,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 @implementation ORKConfirmTextAnswerFormat
 
-- (Class)questionResultClass {
-    return [ORKTextQuestionResult class];
-}
-
-- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier {
+- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                  errorMessage:(NSString *)errorMessage {
     
-    NSAssert(originalItemIdentifier, @"Original item identifier cannot be nil.");
+    NSParameterAssert(originalItemIdentifier);
+    NSParameterAssert(errorMessage);
     
     self = [super init];
     if (self) {
         _originalItemIdentifier = [originalItemIdentifier copy];
+        _errorMessage = [errorMessage copy];
     }
     return self;
 }
@@ -2097,14 +2096,19 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     BOOL isValid = NO;
     if ([answer isKindOfClass:[NSString class]]) {
         NSString *stringAnswer = (NSString *)answer;
-        isValid = (stringAnswer.length > 0) ? YES : NO;
+        isValid = (stringAnswer.length > 0);
     }
     return isValid;
+}
+
+- (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
+    return self.errorMessage;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKConfirmTextAnswerFormat *fmt = [super copyWithZone:zone];
     fmt->_originalItemIdentifier = [_originalItemIdentifier copy];
+    fmt->_errorMessage = [_errorMessage copy];
     return fmt;
 }
 
@@ -2116,6 +2120,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ(aDecoder, originalItemIdentifier);
+        ORK_DECODE_OBJ(aDecoder, errorMessage);
     }
     return self;
 }
@@ -2123,6 +2128,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, originalItemIdentifier);
+    ORK_ENCODE_OBJ(aCoder, errorMessage);
 }
 
 - (BOOL)isEqual:(id)object {
@@ -2130,7 +2136,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     __typeof(self) castObject = object;
     return (isParentSame &&
-            ORKEqualObjects(self.originalItemIdentifier, castObject.originalItemIdentifier));
+            ORKEqualObjects(self.originalItemIdentifier, castObject.originalItemIdentifier) &&
+            ORKEqualObjects(self.errorMessage, castObject.errorMessage));
 }
 
 @end

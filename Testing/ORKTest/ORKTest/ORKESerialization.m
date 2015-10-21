@@ -870,10 +870,11 @@ ret =
             })),
    ENTRY(ORKConfirmTextAnswerFormat,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:GETPROP(dict, originalItemIdentifier)];
+             return [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:GETPROP(dict, originalItemIdentifier) errorMessage:GETPROP(dict, errorMessage)];
          },
          (@{
             PROPERTY(originalItemIdentifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(errorMessage, NSString, NSObject, NO, nil, nil),
             PROPERTY(maximumLength, NSNumber, NSObject, YES, nil, nil)
             })),
   ENTRY(ORKTimeIntervalAnswerFormat,
