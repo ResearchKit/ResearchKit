@@ -77,8 +77,8 @@ DefineStringKey(WaitTaskIdentifier);
 DefineStringKey(CollectionViewHeaderReuseIdentifier);
 DefineStringKey(CollectionViewCellReuseIdentifier);
 
-DefineStringKey(EmbeddedReviewStepTaskIdentifier);
-DefineStringKey(StandaloneReviewStepTaskIdentifier);
+DefineStringKey(EmbeddedReviewTaskIdentifier);
+DefineStringKey(StandaloneReviewTaskIdentifier);
 
 @interface SectionHeader: UICollectionReusableView
 
@@ -185,6 +185,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UICollectionView *_collectionView;
     NSArray<NSString *> *_buttonSectionNames;
     NSArray<NSArray<NSString *> *> *_buttonTitles;
+    
+    ORKTaskResult *_embeddedReviewTaskResult;
 }
 
 @property (nonatomic, strong) ORKTaskViewController *taskViewController;
@@ -298,8 +300,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Remove Passcode",
                            ],
                        @[ // Review Step
-                           @"Embedded Review Step",
-                           @"Standalone Review Step",
+                           @"Embedded Review Task",
+                           @"Standalone Review Task",
                            ],
                        @[ // Miscellaneous
                            @"Custom Navigation Item",
@@ -491,15 +493,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
-    } else if ([identifier isEqualToString:EmbeddedReviewStepTaskIdentifier]) {
-        return [self makeEmbeddedReviewStep];
-    } else if ([identifier isEqualToString:StandaloneReviewStepTaskIdentifier]) {
-        if (embeddedReviewStepResult != nil) {
-            return [self makeStandaloneReviewStep];
-        } else {
-            [self showAlertWithTitle:@"Alert" message:@"Please run embedded review step task first"];
-            return nil;
-        }
+    } else if ([identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+        return [self makeEmbeddedReviewTask];
+    } else if ([identifier isEqualToString:StandaloneReviewTaskIdentifier]) {
+        return [self makeStandaloneReviewTask];
     } if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
     }
@@ -2947,35 +2944,37 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Review step
 
-ORKTaskResult *embeddedReviewStepResult = nil;
-
-- (id<ORKTask>)makeEmbeddedReviewStep {
+- (id<ORKTask>)makeEmbeddedReviewTask {
     ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"Do you feel sad?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Do you feel happy?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"reviewStep"];
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers";
     ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"Do you feel angry?" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewStepTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewTaskIdentifier steps:@[step1, step2, reviewStep, step3]];
     return task;
 }
 
-- (IBAction)embeddedReviewStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:EmbeddedReviewStepTaskIdentifier];
+- (IBAction)embeddedReviewTaskButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:EmbeddedReviewTaskIdentifier];
 }
 
-- (id<ORKTask>)makeStandaloneReviewStep {
+- (id<ORKTask>)makeStandaloneReviewTask {
     ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"Do you feel sad?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Do you feel happy?" answer:[ORKAnswerFormat booleanAnswerFormat]];
     ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"Do you feel angry?" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2, step3] resultSource:embeddedReviewStepResult];
+    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2, step3] resultSource:_embeddedReviewTaskResult];
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers from your last survey";
-    return [[ORKOrderedTask alloc] initWithIdentifier:@"reviewStepTask" steps:@[reviewStep]];
+    return [[ORKOrderedTask alloc] initWithIdentifier:StandaloneReviewTaskIdentifier steps:@[reviewStep]];
 }
 
-- (IBAction)standaloneReviewStepButtonTapped:(id)sender {
-    [self beginTaskWithIdentifier:StandaloneReviewStepTaskIdentifier];
+- (IBAction)standaloneReviewTaskButtonTapped:(id)sender {
+    if (_embeddedReviewTaskResult != nil) {
+        [self beginTaskWithIdentifier:StandaloneReviewTaskIdentifier];
+    } else {
+        [self showAlertWithTitle:@"Alert" message:@"Please run embedded review task first"];
+    }
 }
 
 #pragma mark - Helpers
@@ -3331,8 +3330,8 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
 - (void)taskViewController:(ORKTaskViewController *)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError *)error {
     switch (reason) {
         case ORKTaskViewControllerFinishReasonCompleted:
-            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
-                embeddedReviewStepResult = taskViewController.result;
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = taskViewController.result;
             }
             [self taskViewControllerDidComplete:taskViewController];
             break;
@@ -3340,15 +3339,15 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
             NSLog(@"Error on step %@: %@", taskViewController.currentStepViewController.step, error);
             break;
         case ORKTaskViewControllerFinishReasonDiscarded:
-            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
-                embeddedReviewStepResult = nil;
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = nil;
             }
             [self dismissTaskViewController:taskViewController removeOutputDirectory:YES];
             break;
         case ORKTaskViewControllerFinishReasonSaved:
         {
-            if (taskViewController.task.identifier == EmbeddedReviewStepTaskIdentifier) {
-                embeddedReviewStepResult = taskViewController.result;
+            if ([taskViewController.task.identifier isEqualToString:EmbeddedReviewTaskIdentifier]) {
+                _embeddedReviewTaskResult = taskViewController.result;
             }
             /*
              Save the restoration data, dismiss the task VC, and do an early return
@@ -3478,6 +3477,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     
     [coder encodeObject:_taskViewController forKey:@"taskVC"];
     [coder encodeObject:_lastRouteResult forKey:@"lastRouteResult"];
+    [coder encodeObject:_embeddedReviewTaskResult forKey:@"embeddedReviewTaskResult"];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {

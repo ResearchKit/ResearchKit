@@ -147,8 +147,6 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     return [self.step isKindOfClass:[ORKReviewStep class]] ? (ORKReviewStep *) self.step : nil;
 }
 
-//TODO: state restoration
-
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
