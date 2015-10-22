@@ -872,7 +872,7 @@ ret =
             return [[ORKLocationAnswerFormat alloc] init];
         },
         (@{
-          PROPERTY(useCurrentLocation, NSNumber, NSObject, NO, nil, nil)
+          PROPERTY(useCurrentLocation, NSNumber, NSObject, YES, nil, nil)
           })),
   ENTRY(ORKLocationRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
