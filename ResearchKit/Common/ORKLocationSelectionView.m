@@ -310,7 +310,6 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
             message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE", @"");
             break;
         default:
-            message = ORKLocalizedString(@"LOCATION_ERROR_UNKNOWN", @"");
             break;
     }
     
