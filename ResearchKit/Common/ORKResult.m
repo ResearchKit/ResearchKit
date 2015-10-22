@@ -31,6 +31,7 @@
 
 #import "ORKResult.h"
 #import "ORKTask.h"
+#import "ORKResult_Private.h"
 #import "ORKRecorder.h"
 #import "ORKStep.h"
 #import "ORKHelpers.h"
