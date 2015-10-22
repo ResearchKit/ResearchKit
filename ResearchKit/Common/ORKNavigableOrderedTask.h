@@ -48,6 +48,15 @@ NS_ASSUME_NONNULL_BEGIN
  For example, if you want to display a survey question only when the user answered Yes to a previous
  question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump
  between two steps you can use `ORKDirectStepNavigationRule`.
+ 
+ Navigable ordered tasks support looping over previously visited steps. Note, however, that results
+ for steps that are visited more than once will be ovewritten when you revisit the step on the loop.
+ Thus, going over a loop will produce duplicate results within the task results for the steps that
+ are seen more than once, but all the duplicate step results will point to the same result instance:
+ the one corresponding to the last time you visited the step.
+ 
+ The same applies when navigating backwards over looped steps: only your last valid answer is shown
+ every time you encounter a revisited step.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKNavigableOrderedTask : ORKOrderedTask

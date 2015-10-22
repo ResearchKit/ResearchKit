@@ -67,7 +67,7 @@
         const char * type = property_getAttributes(property);
         NSString * typeString = [NSString stringWithUTF8String:type];
         NSArray * attributes = [typeString componentsSeparatedByString:@","];
-        NSString * typeAttribute = [attributes objectAtIndex:0];
+        NSString * typeAttribute = attributes[0];
         
         _isPrimitiveType = YES;
         if ([typeAttribute hasPrefix:@"T@"]) {
@@ -332,6 +332,7 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",
@@ -546,6 +547,7 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",
@@ -720,6 +722,7 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
     // Predefined exception
     NSArray *propertyExclusionList = @[@"superclass",
                                        @"description",
+                                       @"descriptionSuffix",
                                        @"debugDescription",
                                        @"hash",
                                        @"requestedHealthKitTypesForReading",

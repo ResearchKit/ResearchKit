@@ -107,9 +107,14 @@ static const CGFloat HorizontalMargin = 15.0;
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
                                  answer:(id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth {
+                          maxLabelWidth:(CGFloat)maxLabelWidth
+                               delegate:(id<ORKFormItemCellDelegate>)delegate {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+        // Setting the 'delegate' on init is required, as some questions (such as the scale questions)
+        // need it when they wish to report their default answers to 'ORKFormStepViewController'.
+        _delegate = delegate;
+        
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
         self.formItem = formItem;
@@ -235,8 +240,16 @@ static const CGFloat HorizontalMargin = 15.0;
     NSMutableArray *_variableConstraints;
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth {
-    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth];
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
+                               formItem:(ORKFormItem *)formItem
+                                 answer:(id)answer
+                          maxLabelWidth:(CGFloat)maxLabelWidth
+                               delegate:(id<ORKFormItemCellDelegate>)delegate{
+    self = [super initWithReuseIdentifier:reuseIdentifier
+                                 formItem:formItem
+                                   answer:answer
+                            maxLabelWidth:maxLabelWidth
+                                 delegate:delegate];
     if (self != nil) {
         UILabel *label = self.labelLabel;
         label.isAccessibilityElement = NO;
@@ -978,6 +991,11 @@ static const CGFloat HorizontalMargin = 15.0;
 
 #pragma mark - ORKFormItemScaleCell
 
+@interface ORKFormItemScaleCell () <ORKScaleSliderViewDelegate>
+
+@end
+
+
 @implementation ORKFormItemScaleCell {
     ORKScaleSliderView *_sliderView;
     id<ORKScaleAnswerFormatProvider> _formatProvider;
@@ -993,8 +1011,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     self.labelLabel.text = nil;
     
-    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
-    [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
+    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat delegate:self];
     
     [self.contentView addSubview:_sliderView];
     [self setUpConstraints];
@@ -1029,28 +1046,22 @@ static const CGFloat HorizontalMargin = 15.0;
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (![self.answer isKindOfClass:[NSNumber class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
-        }
         
-        [_sliderView setCurrentValue:answer];
+        [_sliderView setCurrentAnswerValue:answer];
+
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [_sliderView setCurrentValue:[formatProvider defaultNumber]];
+        if (answer == nil && [formatProvider defaultAnswer]) {
+            [_sliderView setCurrentAnswerValue:[formatProvider defaultAnswer]];
+            [self ork_setAnswer:_sliderView.currentAnswerValue];
         } else {
-            [_sliderView setCurrentValue:nil];
+            [_sliderView setCurrentAnswerValue:nil];
         }
     }
 }
 
-- (void)inputValueDidChange {
-    NSArray *textChoices = [self.formatProvider textChoices];
-    if (textChoices) {
-        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
-        [self ork_setAnswer:textChoice.value];
-    } else {
-        [self ork_setAnswer:_sliderView.currentValue];
-    }
+- (void)scaleSliderViewCurrentValueDidChange:(ORKScaleSliderView *)sliderView {
+    
+    [self ork_setAnswer:sliderView.currentAnswerValue];
     [super inputValueDidChange];
 }
 
