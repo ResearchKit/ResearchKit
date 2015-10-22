@@ -94,7 +94,6 @@
 "LOCATION_ERROR_NETWORK" = "Resolving address requires internet connection, please turn on your WiFi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet.";
 "LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your WiFi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
-"LOCATION_ERROR_UNKNOWN" = "An unknown error occured. Please try again later.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
