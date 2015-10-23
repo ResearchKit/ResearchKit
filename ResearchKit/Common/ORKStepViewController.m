@@ -317,8 +317,11 @@
 }
 
 - (void)showValidityAlertWithMessage:(NSString *)text {
-    
-    if (!text.length) {
+    [self showValidityAlertWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil) message:text];
+}
+
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if (![title length] && ![message length]) {
         // No alert if the value is empty
         return;
     }
@@ -331,8 +334,8 @@
         return;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:ORKLocalizedString(@"RANGE_ALERT_TITLE", nil)
-                                                                   message:text
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
@@ -344,6 +347,7 @@
         _presentingAlert = NO;
     }];
 }
+
 
 #pragma mark - UIStateRestoring
 

@@ -46,6 +46,10 @@
 #import "ORKScaleSliderView.h"
 #import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
+#import "ORKLocationSelectionView.h"
+#import "ORKPlacemark.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import <MapKit/MapKit.h>
 
 
 static const CGFloat VerticalMargin = 10.0;
@@ -213,6 +217,10 @@ static const CGFloat HorizontalMargin = 15.0;
     [self.delegate formItemCell:self invalidInputAlertWithMessage:text];
 }
 
+- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self.delegate formItemCell:self invalidInputAlertWithTitle:title message:message];
+}
+
 @end
 
 
@@ -294,7 +302,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)updateConstraints {
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
-
+    
     if (!_variableConstraints) {
         _variableConstraints = [NSMutableArray new];
     }
@@ -306,7 +314,7 @@ static const CGFloat HorizontalMargin = 15.0;
                               @"hMargin":@(self.separatorInset.left),
                               @"hSpacer":@(16), @"vSpacer":@(15),
                               @"labelWidth": @(labelWidth)};
-
+    
     id labelLabel = self.labelLabel;
     id textFieldView = _textFieldView;
     NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
@@ -376,7 +384,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
     [_variableConstraints addObject:heightConstraint];
-
+    
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
@@ -506,7 +514,7 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
-
+    
     [self answerDidChange];
 }
 
@@ -548,11 +556,11 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
     if (textField.text.length < text.length) {
-    
+        
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-    
+        
         NSInteger maxLength = answerFormat.maximumLength;
-    
+        
         if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
@@ -777,13 +785,13 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)textViewDidChange:(UITextView *)textView {
     NSInteger lineCount = [textView.text componentsSeparatedByCharactersInSet:
-                         [NSCharacterSet newlineCharacterSet]].count;
+                           [NSCharacterSet newlineCharacterSet]].count;
     
     if (_lastSeenLineCount != lineCount) {
         _lastSeenLineCount = lineCount;
         
         UITableView *tableView = [self parentTableView];
-    
+        
         [tableView beginUpdates];
         [tableView endUpdates];
         
@@ -818,9 +826,9 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
     if (textView.text.length < string.length) {
-    
+        
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-
+        
         if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
@@ -932,7 +940,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Subclasses should override this
     
     self.labelLabel.text = nil;
-   
+    
     _selectionView = [[ORKImageSelectionView alloc] initWithImageChoiceAnswerFormat:(ORKImageChoiceAnswerFormat *)self.formItem.answerFormat
                                                                              answer:self.answer];
     _selectionView.delegate = self;
@@ -1007,7 +1015,7 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [self.contentView addSubview:_sliderView];
     [self setUpConstraints];
-
+    
     [super cellInit];
 }
 
@@ -1076,10 +1084,10 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
     if (!(!formItem ||
-           [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
+          [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
     }
     [super setFormItem:formItem];
@@ -1156,6 +1164,119 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;
+}
+
+@end
+
+
+#pragma mark - ORKFormItemLocationCell
+
+@interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
+
+@property (nonatomic, assign) BOOL editingHighlight;
+
+@end
+
+
+@implementation ORKFormItemLocationCell {
+    ORKLocationSelectionView *_selectionView;
+    NSLayoutConstraint *_heightConstraint;
+    NSLayoutConstraint *_bottomConstraint;
+}
+
+- (void)cellInit {
+    [super cellInit];
+    
+    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO
+                                                    useCurrentLocation:((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation
+                                                edgeToEdgePresentation:NO];
+    _selectionView.delegate = self;
+    
+    [self.contentView addSubview:_selectionView];
+
+    if (self.formItem.placeholder != nil) {
+        [_selectionView setPlaceholderText:self.formItem.placeholder];
+    }
+    
+    [self setUpConstraints];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *dictionary = @{@"_selectionView":_selectionView};
+    ORKEnableAutoLayoutForViews([dictionary allValues]);
+    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(self.separatorInset.left), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    _bottomConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+    [constraints addObject:_bottomConstraint];
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_selectionView.intrinsicContentSize.height];
+    _heightConstraint.priority = UILayoutPriorityDefaultHigh;
+    [constraints addObject:_heightConstraint];
+    
+    [self.contentView addConstraints:constraints];
+}
+
+- (void)setFormItem:(ORKFormItem *)formItem {
+    [super setFormItem:formItem];
+    
+    if (_selectionView) {
+        [_selectionView setPlaceholderText:formItem.placeholder];
+    }
+}
+
+- (void)answerDidChange {
+    _selectionView.answer = self.answer;
+}
+
+- (void)setEditingHighlight:(BOOL)editingHighlight {
+    _editingHighlight = editingHighlight;
+    [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor blackColor])];
+}
+
+- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = YES;
+    [_selectionView showMapViewIfNecessary];
+    [self.delegate formItemCellDidBecomeFirstResponder:self];
+}
+
+- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = NO;
+    [self.delegate formItemCellDidResignFirstResponder:self];
+}
+
+- (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view {
+    [self inputValueDidChange];
+}
+
+- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
+    UITableView *tableView = [self parentTableView];
+    
+    _heightConstraint.constant = _selectionView.intrinsicContentSize.height;
+    _bottomConstraint.constant = -(VerticalMargin - (1.0 / [UIScreen mainScreen].scale));
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
+
+}
+
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithErrorTitle:(NSString *)title message:(NSString *)message {
+    [self showErrorAlertWithTitle:title message:message];
+}
+
+- (void)inputValueDidChange {
+    [self ork_setAnswer:_selectionView.answer];
+    [super inputValueDidChange];
+}
+
+- (BOOL)becomeFirstResponder {
+    return [_selectionView becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    return [_selectionView resignFirstResponder];
 }
 
 @end

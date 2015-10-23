@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showValidityAlertWithMessage:(NSString *)text;
 
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message;
+
 - (void)skipForward;
 
 - (void)initializeInternalButtonItems;
