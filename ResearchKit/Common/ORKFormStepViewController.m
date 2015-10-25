@@ -529,7 +529,8 @@
     
     NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
                                      @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice)];
+                                     @(ORKQuestionTypeMultipleChoice),
+                                     @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header
@@ -810,6 +811,11 @@
                         break;
                     }
                         
+                    case ORKQuestionTypeLocation: {
+                        class = [ORKFormItemLocationCell class];
+                        break;
+                    }
+                        
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
                         break;
@@ -959,6 +965,10 @@
 
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
+}
+
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {

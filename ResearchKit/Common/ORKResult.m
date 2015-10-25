@@ -41,8 +41,10 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
+#import "ORKPlacemark.h"
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
@@ -1913,6 +1915,54 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 - (ORKStepResult *)stepResultForStepIdentifier:(NSString *)stepIdentifier {
     return (ORKStepResult *)[self resultForIdentifier:stepIdentifier];
+}
+
+@end
+
+
+@implementation ORKLocationQuestionResult
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, locationAnswer);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKPlacemark);
+    }
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame && ORKEqualObjects(self.locationAnswer, castObject.locationAnswer));
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKLocationQuestionResult *result = [super copyWithZone:zone];
+    result->_locationAnswer = [self.locationAnswer copy];
+    return result;
+}
+
++ (Class)answerClass {
+    return [ORKPlacemark class];
+}
+
+- (void)setAnswer:(id)answer {
+    answer = [self validateAnswer:answer];
+    self.locationAnswer = [answer copy];
+}
+
+- (id)answer {
+    return self.locationAnswer;
 }
 
 @end

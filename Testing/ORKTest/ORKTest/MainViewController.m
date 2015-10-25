@@ -990,6 +990,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         [steps addObject:step];
     }
     
+    {
+        /*
+         An example of a location question.
+         */
+        ORKLocationAnswerFormat *format = [ORKAnswerFormat locationAnswerFormat];
+        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_location" title:@"Where are you right now?" answer:format];
+        [steps addObject:step];
+    }
+
+    
     ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:SelectionSurveyTaskIdentifier steps:steps];
     return task;
 }
@@ -1698,10 +1708,16 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
             [items addObject:item];
         }
         
+        {
+            //Location
+            ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"fiqd_location" text:@"Pick a location" answerFormat:[ORKAnswerFormat locationAnswerFormat]];
+            [items addObject:item];
+        }
+        
         [step setFormItems:items];
         [steps addObject:step];
     }
-    
+
     {
         
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"fid_002" title:@"Required form step" text:nil];
