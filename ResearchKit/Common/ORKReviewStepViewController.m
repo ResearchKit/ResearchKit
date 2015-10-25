@@ -41,6 +41,7 @@
 #import "ORKStepHeaderView_Internal.h"
 #import "ORKNavigationContainerView_Internal.h"
 #import "ORKChoiceViewCell.h"
+#import "ORKAnswerFormat_Internal.h"
 
 
 typedef NS_ENUM(NSInteger, ORKReviewSection) {
@@ -74,7 +75,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
         NSArray<ORKStep *> *stepsToFilter = [self reviewStep].isStandalone ? [self reviewStep].steps : steps;
         NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
         [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || [obj isKindOfClass:[ORKInstructionStep class]];
+            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || ([self reviewStep].isStandalone && [obj isKindOfClass:[ORKInstructionStep class]]);
             if (includeStep) {
                 [filteredSteps addObject:obj];
             }
@@ -174,7 +175,10 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
         cell = [[ORKChoiceViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.immediateNavigation = YES;
-    cell.shortLabel.text = _steps[indexPath.row].title != nil ? _steps[indexPath.row].title : _steps[indexPath.row].text;
+    ORKStep *step = _steps[indexPath.row];
+    ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
+    cell.shortLabel.text = step.title != nil ? step.title : step.text;
+    cell.longLabel.text = [self answerStringForStep:step withStepResult:stepResult];
     return cell;
 }
 
@@ -185,6 +189,59 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     } else {
         cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
     }
+}
+
+#pragma mark answer string
+
+- (NSString *)answerStringForStep:(ORKStep *)step withStepResult:(ORKStepResult *)stepResult {
+    if (!step || !stepResult) {
+        return nil;
+    }
+    if (![step.identifier isEqualToString:stepResult.identifier]) {
+        return nil;
+    }
+    if ([step isKindOfClass:[ORKQuestionStep class]]) {
+        ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+        if (stepResult.firstResult && [stepResult.firstResult isKindOfClass:[ORKQuestionResult class]]) {
+            ORKQuestionResult *questionResult = (ORKQuestionResult *)stepResult.firstResult;
+            return [self answerStringForQuestionStep:questionStep withQuestionResult:questionResult];
+        }
+    } else if ([step isKindOfClass:[ORKFormStep class]]) {
+        return [self answerStringForFormStep:(ORKFormStep *)step withStepResult:stepResult];
+    }
+    return nil;
+}
+
+- (NSString *)answerStringForQuestionStep:(ORKQuestionStep *)questionStep withQuestionResult:(ORKQuestionResult *)questionResult {
+    if (!questionStep || !questionResult) {
+        return nil;
+    }
+    if (questionStep.answerFormat && [questionResult isKindOfClass:questionStep.answerFormat.questionResultClass] && questionResult.answer) {
+        return [questionStep.answerFormat stringForAnswer:questionResult.answer];
+    } else {
+        return nil;
+    }
+}
+
+- (NSString *)answerStringForFormStep:(ORKFormStep *)formStep withStepResult:(ORKStepResult *)stepResult {
+    if (!(formStep && formStep.formItems) || !stepResult) {
+        return nil;
+    }
+    NSMutableArray *answerStrings = [[NSMutableArray alloc] init];
+    for (ORKFormItem *formItem in formStep.formItems) {
+        ORKResult *formItemResult = [stepResult resultForIdentifier:formItem.identifier];
+        if (formItemResult && [formItemResult isKindOfClass:[ORKQuestionResult class]]) {
+            ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
+            if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
+                NSString *formItemTextString = formItem.text;
+                NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
+                if (formItemTextString && formItemAnswerString) {
+                    [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@": "]];
+                }
+            }
+        }
+    }
+    return [answerStrings componentsJoinedByString:@"\n"];
 }
 
 #pragma mark UITableViewDelegate
@@ -205,7 +262,11 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:_steps[indexPath.row].title LongText:@"" inTableView:_tableContainer.tableView];
+    ORKStep *step = _steps[indexPath.row];
+    ORKStepResult *stepResult = [_resultSource stepResultForStepIdentifier:step.identifier];
+    NSString *shortText = step.title != nil ? step.title : step.text;
+    NSString *longText = [self answerStringForStep:step withStepResult:stepResult];
+    CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:shortText LongText:longText inTableView:_tableContainer.tableView];
     return indexPath.section == ORKReviewSectionAnswer ? height : 1;
 }
 

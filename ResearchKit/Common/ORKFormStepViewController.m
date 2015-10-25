@@ -321,6 +321,11 @@
     return [self ORKFormStepViewController_initWithResult:result];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self stepDidChange];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -489,7 +494,7 @@
     _headerView = nil;
     _continueSkipView = nil;
     
-    if (self.step) {
+    if (self.isViewLoaded && self.step) {
         [self buildSections];
         
         _formItemCells = [NSMutableSet new];

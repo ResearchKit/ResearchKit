@@ -464,6 +464,29 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return nil;
 }
 
+- (NSString *)stringForAnswer:(id)answer {
+    return nil;
+}
+
+- (NSString*)stringForAnswer:(id)answer fromTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
+    __block NSString *answerString = nil;
+    if ([answer isKindOfClass:[NSArray class]]) {
+        NSArray *answerArray = (NSArray *)answer;
+        if (answerArray.count == 1) {
+            [textChoices enumerateObjectsUsingBlock:^(ORKTextChoice *obj, NSUInteger idx, BOOL *stop) {
+                if ([obj.value isEqual:answerArray.firstObject]) {
+                    answerString = obj.text;
+                    *stop = YES;
+                }
+            }];
+        } else if (answerArray.count > 1) {
+            //TODO: localize string
+            answerString = @"Multiple answers";
+        }
+    }
+    return answerString;
+}
+
 @end
 
 
@@ -571,6 +594,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeSingleChoice;
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    return [self stringForAnswer:answer fromTextChoices:_textChoices];
+}
+
 @end
 
 
@@ -647,6 +674,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKChoiceQuestionResult class];
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
+    for (ORKImageChoice *imageChoice in _imageChoices) {
+        if (imageChoice.text) {
+            [textChoices addObject:[[ORKTextChoice alloc] initWithText:imageChoice.text detailText:nil value:imageChoice.value exclusive:false]];
+        }
+    }
+    return textChoices.count > 0 ? [self stringForAnswer:answer fromTextChoices:textChoices] : nil;
+}
+
 @end
 
 
@@ -715,6 +752,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (Class)questionResultClass {
     return [ORKChoiceQuestionResult class];
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    return [self stringForAnswer:answer fromTextChoices:_textChoices];
 }
 
 @end
@@ -901,6 +942,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKBooleanQuestionResult class];
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    return [self.impliedAnswerFormat stringForAnswer: @[answer]];
+}
+
 @end
 
 
@@ -915,6 +960,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (Class)questionResultClass {
     return [ORKBooleanQuestionResult class];
 }
+
+//TODO: implement stringForAnswer:
 
 @end
 
@@ -987,6 +1034,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    return ORKTimeOfDayStringFromComponents(answer);
 }
 
 @end
@@ -1065,7 +1116,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         default:
             break;
     }
-    
+    //TODO: localization
     dfm = [dfm copy];
     dfm.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     return dfm;
@@ -1121,6 +1172,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    return [self stringFromDate:answer];
 }
 
 @end
@@ -1257,6 +1312,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.maximumFractionDigits = NSDecimalNoScale;
     numberFormatter.usesGroupingSeparator = NO;
+    //TODO: localization
     return numberFormatter;
 }
 
@@ -1278,6 +1334,17 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         string = [NSString stringWithFormat:ORKLocalizedString(@"RANGE_ALERT_MESSAGE_OTHER", nil), text];
     }
     return string;
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    if ([self isAnswerValid:answer]) {
+        NSNumberFormatter *formatter = [self makeNumberFormatter];
+        [formatter setPositiveSuffix:self.unit];
+        [formatter setNegativeSuffix:self.unit];
+        return [formatter stringFromNumber:answer];
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - Text Sanitization
@@ -1410,6 +1477,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        //TODO: localization
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
         _numberFormatter.maximumFractionDigits = 0;
     }
@@ -1521,6 +1589,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeScale;
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    return [self localizedStringForNumber:answer];
+}
+
 @end
 
 
@@ -1613,6 +1685,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
         _numberFormatter.maximumFractionDigits = _maximumFractionDigits;
+        //TODO: localization
     }
     return _numberFormatter;
 }
@@ -1709,6 +1782,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeScale;
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    return [self localizedStringForNumber:answer];
 }
 
 @end
@@ -1868,6 +1945,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKQuestionType)questionType {
     return ORKQuestionTypeScale;
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    return [self stringForAnswer:answer fromTextChoices:_textChoices];
 }
 
 @end
@@ -2034,6 +2115,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.secureTextEntry == castObject.secureTextEntry);
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    return [self isAnswerValid:answer] && !_secureTextEntry ? answer : nil;
+}
+
+
 @end
 
 
@@ -2137,6 +2223,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             (_defaultInterval == castObject.defaultInterval) &&
             (_step == castObject.step));
+}
+
+- (NSString*)stringForAnswer:(id)answer {
+    //TODO: number formatter with localized suffix
+    return ORKLocalizedStringFromNumber(answer);
 }
 
 @end
