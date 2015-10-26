@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_OPTIONS(NSUInteger, ORKRegistrationStepOption) {
     /// Default behavior.
-    ORKRegistrationStepDefault = (1 << 0),
+    ORKRegistrationStepDefault = 0,
     
     /// Include the given name field.
     ORKRegistrationStepIncludeGivenName = (1 << 1),

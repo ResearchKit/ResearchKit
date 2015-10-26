@@ -124,7 +124,7 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
         [formItems addObject:item];
     }
 
-    if (!(_options & ORKRegistrationStepDefault)) {
+    if (_options & (ORKRegistrationStepIncludeFamilyName | ORKRegistrationStepIncludeGivenName | ORKRegistrationStepIncludeDOB | ORKRegistrationStepIncludeGender)) {
         ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"ADDITIONAL_INFO_SECTION_TITLE", nil)];
         
         [formItems addObject:item];
@@ -265,6 +265,9 @@ NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItem
 - (BOOL)isEqual:(id)object {
     BOOL isParentSame = [super isEqual:object];
     
+    // The `passcodeValidationRegex` and `passcodeInvalidMessage` properties
+    // are transparent properties. The `isEqual:` for these properties is
+    // defined in the answer format (super).
     __typeof(self) castObject = object;
     return (isParentSame &&
             self.options == castObject.options);

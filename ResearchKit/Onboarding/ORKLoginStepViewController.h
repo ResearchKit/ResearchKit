@@ -37,7 +37,7 @@
  implementation for `ORKLoginStep`.
  
  You should subclass a login step view controller and override the button action
- methods to provide your navigation logic.
+ methods to provide your navigation logic. All override methods are required.
  */
 @interface ORKLoginStepViewController : ORKFormStepViewController
 

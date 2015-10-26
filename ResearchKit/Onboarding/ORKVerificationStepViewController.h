@@ -37,7 +37,8 @@
  implementation for `ORKVerificationStep`.
  
  You should subclass a verification step view controller and override the button action
- methods to provide your navigation logic.
+ methods to provide your navigation logic, as well as the email address method to populate
+ the email address label. All override methods are required.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStepViewController : ORKStepViewController
