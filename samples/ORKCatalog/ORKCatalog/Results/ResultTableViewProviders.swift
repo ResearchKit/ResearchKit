@@ -30,6 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
 import ResearchKit
+import MapKit
+import AddressBookUI
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows
@@ -77,6 +79,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         
     case is ORKDateQuestionResult:
         providerType = DateQuestionResultTableViewProvider.self
+        
+    case is ORKLocationQuestionResult:
+        providerType = LocationQuestionResultTableViewProvider.self
         
     case is ORKNumericQuestionResult:
         providerType = NumericQuestionResultTableViewProvider.self
@@ -362,6 +367,30 @@ class DateQuestionResultTableViewProvider: ResultTableViewProvider {
             // The timezone when the user answered.
             ResultRow(text: "timeZone", detail: questionResult.timeZone)
         ]
+    }
+}
+
+/// Table view provider specific to an `ORKLocationQuestionResult` instance.
+class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKLocationQuestionResult
+        let placemark = questionResult.locationAnswer
+        
+        var rows = super.resultRowsForSection(section) + [
+            // The latitude of the location the user entered.
+            ResultRow(text: "latitude", detail: placemark?.coordinate.latitude),
+            ResultRow(text: "longitude", detail: placemark?.coordinate.longitude)
+        ]
+        
+        if let addressDictionary = placemark?.addressDictionary {
+            rows.append(ResultRow(text: "address", detail: ABCreateStringWithAddressDictionary(addressDictionary, false)))
+        } else {
+            rows.append(ResultRow(text: "address", detail: nil))
+        }
+        
+        return rows
     }
 }
 

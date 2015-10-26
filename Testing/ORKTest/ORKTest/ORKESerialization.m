@@ -31,6 +31,7 @@
 
 #import "ORKESerialization.h"
 #import <ResearchKit/ResearchKit_Private.h>
+#import <MapKit/MapKit.h>
 
 
 static NSString *ORKEStringFromDateISO8601(NSDate *date) {
@@ -866,6 +867,13 @@ ret =
         },
         (@{
           })),
+  ENTRY(ORKLocationAnswerFormat,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKLocationAnswerFormat alloc] init];
+        },
+        (@{
+          PROPERTY(useCurrentLocation, NSNumber, NSObject, YES, nil, nil)
+          })),
   ENTRY(ORKLocationRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKLocationRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict,identifier)];
@@ -1108,6 +1116,31 @@ ret =
             PROPERTY(timeZone, NSTimeZone, NSObject, NO,
                      ^id(id timezone) { return @([timezone secondsFromGMT]); },
                      ^id(id number) { return [NSTimeZone timeZoneForSecondsFromGMT:((NSNumber *)number).doubleValue]; })
+            })),
+   ENTRY(ORKLocationQuestionResult,
+         nil,
+         (@{
+            PROPERTY(locationAnswer, ORKPlacemark, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKPlacemark,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {\
+             CLLocation *location = GETPROP(dict, location);
+             NSDictionary *address = GETPROP(dict, addressDictionary);
+             return [[ORKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:address];
+         },
+         (@{
+            PROPERTY(addressDictionary, NSDictionary, NSObject, NO, nil, nil),
+            PROPERTY(location, CLLocation, NSObject, NO,
+                     (^id(id location) { return @{
+                                                  @"latitude": [NSNumber numberWithDouble:((CLLocation *)location).coordinate.latitude],
+                                                  @"longitude": [NSNumber numberWithDouble:((CLLocation *)location).coordinate.longitude]
+                                                  };
+         }),
+                     ^id(id dict) {
+                         NSNumber *latitude = dict[@"latitude"];
+                         NSNumber *longitude = dict[@"longitude"];
+                         return [[CLLocation alloc] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue];
+                     })
             })),
    ENTRY(ORKConsentSignatureResult,
          nil,
