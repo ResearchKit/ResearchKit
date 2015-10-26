@@ -47,6 +47,7 @@
 
 #import <ResearchKit/ORKResult.h>
 #import <ResearchKit/ORKResultPredicate.h>
+#import <ResearchKit/ORKPlacemark.h>
 
 #import <ResearchKit/ORKTaskViewController.h>
 #import <ResearchKit/ORKStepViewController.h>

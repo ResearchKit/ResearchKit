@@ -33,10 +33,12 @@
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
 #import <HealthKit/HealthKit.h>
+#import <MapKit/MapKit.h>
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKAnswerFormat_Private.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
+#import "ORKPlacemark.h"
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -67,6 +69,7 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(TimeOfDay);
             SQT_CASE(Date);
             SQT_CASE(TimeInterval);
+            SQT_CASE(Location);
     }
 #undef SQT_CASE
 }
@@ -367,6 +370,10 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                          step:(NSInteger)step {
     return [[ORKTimeIntervalAnswerFormat alloc] initWithDefaultInterval:defaultInterval step:step];
+}
+
++ (ORKLocationAnswerFormat *)locationAnswerFormat {
+    return [ORKLocationAnswerFormat new];
 }
 
 - (void)validateParameters {
@@ -2218,6 +2225,70 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             (_defaultInterval == castObject.defaultInterval) &&
             (_step == castObject.step));
+}
+
+@end
+
+
+#pragma mark - ORKLocationAnswerFormat
+
+@implementation ORKLocationAnswerFormat
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _useCurrentLocation = YES;
+    }
+    return self;
+}
+
+- (BOOL)isAnswerValid:(id)answer {
+    BOOL isValid = [super isAnswerValid:answer];
+    
+    if (![[ORKPlacemark alloc] initWithPlacemark:answer]) {
+        isValid = NO;
+    }
+    
+    return isValid;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_BOOL(aDecoder, useCurrentLocation);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_BOOL(aCoder, useCurrentLocation);
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (ORKQuestionType)questionType {
+    return ORKQuestionTypeLocation;
+}
+
+- (Class)questionResultClass {
+    return [ORKLocationQuestionResult class];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+    ORKLocationAnswerFormat *locationAnswerFormat = [[[self class] allocWithZone:zone] init];
+    locationAnswerFormat->_useCurrentLocation = _useCurrentLocation;
+    return locationAnswerFormat;
+}
+
+-(BOOL)isEqual:(id)object {
+    BOOL isParentSame = [super isEqual:object];
+    
+    __typeof(self) castObject = object;
+    return (isParentSame &&
+            _useCurrentLocation == castObject.useCurrentLocation);
 }
 
 @end

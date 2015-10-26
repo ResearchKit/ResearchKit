@@ -67,6 +67,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     case DateTimeQuestion
     case EligibilityQuestion
     case ImageChoiceQuestion
+    case LocationQuestion
     case NumericQuestion
     case ScaleQuestion
     case TextQuestion
@@ -121,6 +122,7 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .DateTimeQuestion,
                     .EligibilityQuestion,
                     .ImageChoiceQuestion,
+                    .LocationQuestion,
                     .NumericQuestion,
                     .ScaleQuestion,
                     .TextQuestion,
@@ -180,6 +182,9 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
+            
+        case .LocationQuestion:
+            return NSLocalizedString("Location Question", comment: "")
             
         case .NumericQuestion:
             return NSLocalizedString("Numeric Question", comment: "")
@@ -281,6 +286,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         case FormStep
         case FormItem01
         case FormItem02
+        case FormItem03
 
         // Survey task specific identifiers.
         case SurveyTask
@@ -307,6 +313,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Task with an image choice question.
         case ImageChoiceQuestionTask
         case ImageChoiceQuestionStep
+        
+        // Task with a location entry.
+        case LocationQuestionTask
+        case LocationQuestionStep
         
         // Task with examples of numeric questions.
         case NumericQuestionTask
@@ -428,6 +438,9 @@ enum TaskListRow: Int, CustomStringConvertible {
 
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
+            
+        case .LocationQuestion:
+            return locationQuestionTask
             
         case .NumericQuestion:
             return numericQuestionTask
@@ -647,6 +660,20 @@ enum TaskListRow: Int, CustomStringConvertible {
         questionStep.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.ImageChoiceQuestionTask), steps: [questionStep])
+    }
+    
+    /// This task presents just a single location question.
+    private var locationQuestionTask: ORKTask {
+        let answerFormat = ORKLocationAnswerFormat()
+        
+        // We attach an answer format to a question step to specify what controls the user sees.
+        let questionStep = ORKQuestionStep(identifier: String(Identifier.LocationQuestionStep), title: exampleQuestionText, answer: answerFormat)
+        
+        // The detail text is shown in a small font below the title.
+        questionStep.text = exampleDetailText
+        questionStep.placeholder = NSLocalizedString("Address", comment: "");
+        
+        return ORKOrderedTask(identifier: String(Identifier.LocationQuestionTask), steps: [questionStep])
     }
     
     /**

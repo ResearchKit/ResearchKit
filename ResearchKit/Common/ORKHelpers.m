@@ -549,3 +549,7 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
         *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
     }
 }
+
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
+    return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
+}

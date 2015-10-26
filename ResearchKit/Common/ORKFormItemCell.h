@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)formItemCellDidBecomeFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCellDidResignFirstResponder:(ORKFormItemCell *)cell;
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input;
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end
 
@@ -107,7 +108,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @interface ORKFormItemScaleCell : ORKFormItemCell
+
+@end
+
+
+@interface ORKFormItemLocationCell : ORKFormItemCell
 
 @end
 

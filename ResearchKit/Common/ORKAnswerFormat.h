@@ -108,7 +108,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /**
      In a time interval question, the participant can enter a time span by using a picker.
      */
-    ORKQuestionTypeTimeInterval
+    ORKQuestionTypeTimeInterval,
+    
+    /**
+     In a location question, the participant can enter a location using a map view.
+     */
+    ORKQuestionTypeLocation
 } ORK_ENUM_AVAILABLE;
 
 /**
@@ -155,6 +160,7 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKTextAnswerFormat;
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
+@class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
 @class ORKImageChoice;
@@ -257,6 +263,8 @@ ORK_CLASS_AVAILABLE
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
                                                                         step:(NSInteger)step;
+
++ (ORKLocationAnswerFormat *)locationAnswerFormat;
 
 /// @name Validation
 
@@ -1334,5 +1342,25 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSInteger step;
 
 @end
+
+
+/**
+ The `ORKLocationAnswerFormat` class represents the answer format for questions that collect a location response
+ from the user.
+ 
+ An `ORKLocationAnswerFormat` object produces an `ORKLocationQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKLocationAnswerFormat : ORKAnswerFormat
+
+/**
+ Indicates whether or not the user's current location should be automatically entered the first time they tap on the input field.
+ 
+ By default, this value is YES.
+ */
+@property (nonatomic, assign) BOOL useCurrentLocation;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
