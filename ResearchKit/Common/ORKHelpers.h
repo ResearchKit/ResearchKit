@@ -286,3 +286,4 @@ const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);
