@@ -243,10 +243,6 @@
     
     // Show the error in the image capture view
     _imageCaptureView.error = error;
-    
-    // Tell the task view controller that we have failed so that it removes our result
-    STRONGTYPE(self.delegate) strongDelegate = self.delegate;
-    [strongDelegate stepViewControllerDidFail:self withError:error];
 }
 
 - (void)setCapturedImageData:(NSData *)capturedImageData {
