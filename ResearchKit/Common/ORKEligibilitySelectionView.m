@@ -82,6 +82,7 @@ static const CGFloat MaxFontSize = 72.0;
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
+    [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self setTitleColor:self.tintColor forState:UIControlStateSelected];
 }
 
