@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  `ORKStepNavigationRule` and attach them to trigger steps by using the
  `setNavigationRule:forTriggerStepIdentifier:` method.
  
- For example, if you want to display a survey question only when the user answered `Yes` to a previous
+ For example, if you want to display a survey question only when the user answered yes to a previous
  question, you can use the `ORKPredicateStepNavigationRule` class; or if you want to define an arbitrary jump between two steps, you can use the `ORKDirectStepNavigationRule` class.
  */
 ORK_CLASS_AVAILABLE

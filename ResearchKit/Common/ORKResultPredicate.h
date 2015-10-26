@@ -45,20 +45,20 @@ ORK_EXTERN NSString *const ORKResultPredicateTaskIdentifierVariableName ORK_AVAI
  `ORKQuestionResult` subtypes.
  
  You use result predicates to create `ORKPredicateStepNavigationRule` objects. The result predicates
- are used to match specific `ORKQuestionResult` instances (created in response to the participant's
+ are used to match specific ORKQuestionResult instances (created in response to the participant's
  answers) and navigate accordingly. You can match results both in an ongoing task or in previously
  completed tasks.
  
  @warning Note that each `ORKStep` object produces one `ORKStepResult` collection object. A step
- result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object which has
+ result produced by an `ORKQuestionStep` object contains one `ORKQuestionResult` object, which has
  the same identifier as the step that generated it. A step result produced by an `ORKFormStep`
- object can contain one or more `ORKQuestionResult` objects which have the identifiers of the
+ object can contain one or more `ORKQuestionResult` objects that have the identifiers of the
  `ORKFormItem` objects that generated them.
  
  Make sure you match the `resultIdentifier` appropriately:
  
- - The question step identifier for `ORKQuestionStep` produced results.
- - The form item identifier in the case of `ORKFormStep` produced results.
+ - The question step identifier for ORKQuestionStep produced results.
+ - The form item identifier in the case of ORKFormStep produced results.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKResultPredicate : NSObject
@@ -300,12 +300,12 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
- specified boolean value.
+ specified Boolean value.
  
  @param taskIdentifier      The identifier of the task whose result you want to match. Pass `nil`
                                 to match the ongoing task.
  @param resultIdentifier    The identifier of the question result you are interested in.
- @param expectedAnswer      The expected boolean value.
+ @param expectedAnswer      The expected Boolean value.
  
  @return A result predicate.
  */
@@ -315,10 +315,10 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns a predicate matching a result of type `ORKBooleanQuestionResult` whose answer is the
- specified boolean value.
+ specified Boolean value.
  
  @param resultIdentifier    The identifier of the question result you are interested in.
- @param expectedAnswer      The expected boolean value.
+ @param expectedAnswer      The expected Boolean value.
  
  @return A result predicate.
  */
@@ -504,7 +504,7 @@ ORK_CLASS_AVAILABLE
  the specified hour and minute values.
  
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
- If you are interested in additional components, you will have to build the predicate manually.
+ If you are interested in additional components, you must build the predicate manually.
  
  @param taskIdentifier                  The identifier of the task whose result you want to match.
                                             Pass `nil` to match the ongoing task.
@@ -528,7 +528,7 @@ ORK_CLASS_AVAILABLE
  the specified hour and minute values.
  
  Note that `ORKTimeOfDayQuestionResult` internally stores its answer as an `NSDateComponents` object.
- If you are interested in additional components, you will have to build the predicate manually.
+ If you are interested in additional components, you must build the predicate manually.
  
  @param resultIdentifier                The identifier of the question result you are interested in.
  @param minimumExpectedAnswerHour       The minimum expected hour component value.
@@ -545,8 +545,8 @@ ORK_CLASS_AVAILABLE
                                              maximumExpectedAnswerMinute:(NSInteger)maximumExpectedAnswerMinute;
 
 /**
- Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is the
- is within the specified `NSTimeInterval` values.
+ Returns a predicate matching a result of type `ORKTimeIntervalQuestionResult` whose answer is
+within the specified `NSTimeInterval` values.
  
  @param taskIdentifier              The identifier of the task whose result you want to match. Pass 
                                         `nil` to match the ongoing task.

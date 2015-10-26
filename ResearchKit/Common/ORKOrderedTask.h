@@ -43,8 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  If you want further custom conditional behaviors in a task, it can be easier to subclass
  `ORKOrderedTask` or `ORKNavigableOrderedTask` and override particular `ORKTask` methods than it is
- to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:`, and
- `stepBeforeStep:withResult:` and call super for all other methods.
+ to implement the `ORKTask` protocol directly. Override the methods `stepAfterStep:withResult:` and
+ `stepBeforeStep:withResult:`, and call super for all other methods.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKOrderedTask : NSObject <ORKTask, NSSecureCoding, NSCopying>
@@ -482,7 +482,7 @@ typedef NS_OPTIONS(NSUInteger, ORKPredefinedTaskOption) {
  @param intendedUseDescription  A localized string describing the intended use of the data
                                   collected. If the value of this parameter is `nil`, the default
                                   localized text is displayed.
- @param presentationMode        The presentation mode of the PSAT test (auditory or Visual or both).
+ @param presentationMode        The presentation mode of the PSAT test (auditory or visual or both).
  @param interStimulusInterval   The time interval between two digits presented.
  @param stimulusDuration        The time duration the digit is shown on screen (only for
                                     visual PSAT, that is PVSAT and PAVSAT).
