@@ -38,6 +38,7 @@
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
 #import "ORKPlacemark.h"
+#import <AddressBookUI/AddressBookUI.h>
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -2299,6 +2300,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     __typeof(self) castObject = object;
     return (isParentSame &&
             _useCurrentLocation == castObject.useCurrentLocation);
+}
+
+- (NSString *)stringForAnswer:(id)answer {
+    return ABCreateStringWithAddressDictionary(((ORKPlacemark *)answer).addressDictionary, NO);
 }
 
 @end
