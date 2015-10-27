@@ -91,9 +91,4 @@
                         && ORKEqualObjects(self.accessibilityInstructions, castObject.accessibilityInstructions);
 }
 
-- (ORKPermissionMask)requestedPermissions {
-    ORKPermissionMask mask = [super requestedPermissions];
-    return mask | ORKPermissionCamera;
-}
-
 @end
