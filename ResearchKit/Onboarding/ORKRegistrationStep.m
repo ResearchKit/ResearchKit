@@ -33,8 +33,6 @@
 #import "ORKHelpers.h"
 #import "ORKDefines_Private.h"
 #import "ORKAnswerFormat_Private.h"
-#import "ORKStep_Private.h"
-#import "ORKRegistrationStepViewController.h"
 
 
 NSString *const ORKRegistrationFormItemIdentifierEmail = @"ORKRegistrationFormItemEmail";
@@ -46,10 +44,6 @@ NSString *const ORKRegistrationFormItemIdentifierGender = @"ORKRegistrationFormI
 NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItemDOB";
 
 @implementation ORKRegistrationStep
-
-- (Class)stepViewControllerClass {
-    return [ORKRegistrationStepViewController class];
-}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
