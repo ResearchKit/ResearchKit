@@ -72,7 +72,7 @@ result, indicates how long the user had the question on screen. It
 also has a child, an [ORKQuestionResult](#) subclass that reports the
 user's answer.
 
-The following code configures a simple numeric question step.
+The following code configures a simple numeric question step:
 
 ``````
     ORKNumericAnswerFormat *format =
@@ -198,11 +198,11 @@ Health database.
 
 ## 2. Create a Survey Task<a name="task"></a>
 
-Once you create one or more steps, create an `ORKOrderedTask` to
+Once you create one or more steps, create an `ORKOrderedTask` object to
 hold them. The code below shows a Boolean step being added to a task.
 
 ``````
-    // Create a boolean step to include in the task.
+    // Create a Boolean step to include in the task.
     ORKStep *booleanStep = 
       [[ORKQuestionStep alloc] initWithIdentifier:kNutritionIdentifier];
     booleanStep.title = @"Do you take nutritional supplements?";
@@ -231,7 +231,7 @@ it. The code below shows how to create a task view controller and present it mod
 
 *Note: `ORKOrderedTask` assumes that you will always present all the questions,
 and will never decide what question to show based on previous answers.
-To introduce conditional logic, you must need to either subclass
+To introduce conditional logic, you must either subclass
 `ORKOrderedTask` or implement the `ORKTask` protocol yourself.*
 
 ##3. Collect Results<a name="results"></a>
@@ -270,15 +270,15 @@ includes start and end times, using the [startDate]([ORKResult startDate]) and [
 properties respectively. These properties can be used to infer how long the user
 spent on the step.
 
-### Step Results that Determine the Next Step
+### Step Results That Determine the Next Step
 
 Sometimes it's important to know the result of a step before
 presenting the next step. For example, suppose a step asks "Do you
-have a fever?" If the user answers “Yes,” the next question the next question might be "What is your
+have a fever?" If the user answers `Yes`, the next question the next question might be "What is your
 temperature now?"; otherwise it might be, "Do you have any additional
 health concerns?"
 
-To add custom conditional behavior in your task, use either ordered task (`ORKOrderedTask`)  or navigable ordered task (`ORKNavigableOrderedTask`), and override particular `ORKTask` methods like `stepAfterStep:withResult`, and `stepBeforeStep:withResult:` and call super for all other methods.
+To add custom conditional behavior in your task, use either ordered task (`ORKOrderedTask`)  or navigable ordered task (`ORKNavigableOrderedTask`), and override particular `ORKTask` methods like `stepAfterStep:withResult`, and `stepBeforeStep:withResult:` and call `super` for all other methods.
 
 #### Ordered Tasks
 
@@ -286,7 +286,7 @@ A sequential (static) task, such as a survey or an active task, can be represent
 
 The following example demonstrates how to subclass
 `ORKOrderedTask` to provide a different set of steps depending on the
-user's answer to a Boolean question. Although the code shows the step after step method, a corresponding implementation of "step before step"
+user's answer to a Boolean question. Although the code shows the step-after-step method, a corresponding implementation of "step-before-step"
 is usually necessary.
 
 ``````
@@ -311,11 +311,11 @@ is usually necessary.
     }
 ``````
 #### Navigable Ordered Task
-The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to the behavior of ordered task it provides functionality to present different set of steps depending on the user's answer to a question.
+The navigable ordered task (`ORKNavigableOrderedTask`)  inherits its behavior from the ordered task (`ORKOrderedTask`) class. In addition to inheriting the behavior of ordered task it provides functionality to present different set of steps depending on the user's answer to a question.
 
-You can add a condition while the user navigates through the steps in a task by adding a conditional step navigation. Such as, add navigation rule to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If so, than the most recent rule is executed.
+You can add a condition while the user navigates through the steps in a task by adding a conditional step navigation. For example, add a navigation rule to obtain a new destination step when the user goes forward from one step to another. You cannot add more than one navigation rule to the same step. If you do, then the most recent rule is executed.
  
-For example, to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps you can use `ORKDirectStepNavigationRule`.
+For example, to display a survey question only when the user answered Yes to a previous question you can use `ORKPredicateStepNavigationRule`; or if you want to define an arbitrary jump between two steps, you can use `ORKDirectStepNavigationRule`.
 
 The following example demonstrates how you can add a navigation rule to go to different step in the task depending on the user's selection to the symptom type. For example, from the "symptom" step, go to "other_symptom" step when the user didn't chose headache.  Otherwise, default to going to next step (the regular ordered task ([ORKOrderedTask](#)) applies).
 
@@ -329,7 +329,7 @@ The following example demonstrates how you can add a navigation rule to go to di
     NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultIdentifier:@"symptom" expectedString:@"headache"];
                                                                                                
 
-    // The user didn't chose headache at the symptom step
+    // The user didn't choose headache at the symptom step
     NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
 
     predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
@@ -340,12 +340,12 @@ The following example demonstrates how you can add a navigation rule to go to di
 
 #### Saving Results on Task Completion
 
-After the task is completed, you can save or upload the results. This
+After the task is completed, you can save or upload the results. This approach 
 will likely include serializing the result hierarchy in some form,
-either using the built-in `NSSecureCoding` support, or to another
+either using the built-in `NSSecureCoding` support, or another
 format appropriate for your application.
 
-If your task can produce file output, the files are generally referenced by an `ORKFileResult`, and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
+If your task can produce file output, the files are generally referenced by an `ORKFileResult` object and they are placed in the output directory that you set on the task view controller. After you complete a task, one implementation might be to serialize the result hierarchy into the output directory, zip up the entire output
 directory, and share it.
 
 In the following example, the result is archived with
