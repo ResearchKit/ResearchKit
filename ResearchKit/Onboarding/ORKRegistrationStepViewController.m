@@ -29,26 +29,11 @@
  */
 
 
-#import "ORKLoginStepViewController.h"
-#import "ORKDefines_Private.h"
-#import "ORKFormStepViewController_Internal.h"
-#import "ORKStepViewController_Internal.h"
+#import "ORKRegistrationStepViewController.h"
+#import "ORKResult_Private.h"
 
 
-@implementation ORKLoginStepViewController
-
-- (void)setContinueButtonItem:(UIBarButtonItem *)continueButtonItem {
-    [super setContinueButtonItem:continueButtonItem];
-    continueButtonItem.title = ORKLocalizedString(@"LOGIN_CONTINUE_BUTTON_TITLE", nil);
-}
-
-- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
-    [super setSkipButtonItem:skipButtonItem];
-    
-    [skipButtonItem setTitle:ORKLocalizedString(@"FORGOT_PASSWORD_BUTTON_TITLE", nil)];
-    [skipButtonItem setTarget:self];
-    [skipButtonItem setAction:@selector(forgotPasswordButtonHandler:)];
-}
+@implementation ORKRegistrationStepViewController
 
 - (void)setCancelButtonItem:(UIBarButtonItem *)cancelButtonItem {
     [super setCancelButtonItem:cancelButtonItem];
@@ -57,22 +42,29 @@
 }
 
 - (void)cancelButtonHandler:(id)sender {
-    STRONGTYPE(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
-    if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
-        [strongDelegate taskViewController:self.taskViewController didFinishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
-    }
-}
-
-- (void)forgotPasswordButtonHandler:(id)sender{
-    [self forgotPasswordButtonTapped];
-}
-
-#pragma mark Override methods
-
-- (void)forgotPasswordButtonTapped {
-    @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                   reason:[NSString stringWithFormat:@"%s must be overridden in a subclass/category", __PRETTY_FUNCTION__]
-                                 userInfo:nil];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    alert.popoverPresentationController.barButtonItem = sender;
+    
+    NSString *discardTitle = ORKLocalizedString(@"BUTTON_OPTION_STOP_TASK", nil);
+    
+    [alert addAction:[UIAlertAction actionWithTitle:discardTitle
+                                              style:UIAlertActionStyleDestructive
+                                            handler:^(UIAlertAction *action) {
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    STRONGTYPE(self.taskViewController.delegate) strongDelegate = self.taskViewController.delegate;
+                                                    if ([strongDelegate respondsToSelector:@selector(taskViewController:didFinishWithReason:error:)]) {
+                                                        [strongDelegate taskViewController:self.taskViewController didFinishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
+                                                    }
+                                                });
+                                            }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
