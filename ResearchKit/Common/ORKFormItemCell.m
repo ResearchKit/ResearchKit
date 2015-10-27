@@ -47,7 +47,6 @@
 #import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKLocationSelectionView.h"
-#import "ORKPlacemark.h"
 #import <AddressBookUI/AddressBookUI.h>
 #import <MapKit/MapKit.h>
 

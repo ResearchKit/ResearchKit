@@ -38,7 +38,6 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKQuestionStep_Internal.h"
 #import "ORKLocationSelectionView.h"
-#import "ORKPlacemark.h"
 #import "ORKSkin.h"
 
 

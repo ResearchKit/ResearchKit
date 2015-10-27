@@ -131,6 +131,9 @@
 #define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@STRINGIFY(x)]
 
+#define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@STRINGIFY(x.latitude)],[d decodeDoubleForKey:@STRINGIFY(x.longitude)])
+#define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@STRINGIFY(x.longitude)];
+
 /*
  * Helpers for completions which call the block only if non-nil
  *

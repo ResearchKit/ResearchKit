@@ -37,7 +37,6 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
-#import "ORKPlacemark.h"
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -2159,16 +2158,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _useCurrentLocation = YES;
     }
     return self;
-}
-
-- (BOOL)isAnswerValid:(id)answer {
-    BOOL isValid = [super isAnswerValid:answer];
-    
-    if (![[ORKPlacemark alloc] initWithPlacemark:answer]) {
-        isValid = NO;
-    }
-    
-    return isValid;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

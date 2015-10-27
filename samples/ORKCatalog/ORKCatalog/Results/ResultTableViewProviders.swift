@@ -376,19 +376,14 @@ class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
     
     override func resultRowsForSection(section: Int) -> [ResultRow] {
         let questionResult = result as! ORKLocationQuestionResult
-        let placemark = questionResult.locationAnswer
-        
-        var rows = super.resultRowsForSection(section) + [
+        let location = questionResult.locationAnswer
+        let address = location?.address.stringByReplacingOccurrencesOfString("\n", withString: " ")
+        let rows = super.resultRowsForSection(section) + [
             // The latitude of the location the user entered.
-            ResultRow(text: "latitude", detail: placemark?.coordinate.latitude),
-            ResultRow(text: "longitude", detail: placemark?.coordinate.longitude)
+            ResultRow(text: "latitude", detail: location?.coordinate.latitude),
+            ResultRow(text: "longitude", detail: location?.coordinate.longitude),
+            ResultRow(text: "address", detail: address)
         ]
-        
-        if let addressDictionary = placemark?.addressDictionary {
-            rows.append(ResultRow(text: "address", detail: ABCreateStringWithAddressDictionary(addressDictionary, false)))
-        } else {
-            rows.append(ResultRow(text: "address", detail: nil))
-        }
         
         return rows
     }

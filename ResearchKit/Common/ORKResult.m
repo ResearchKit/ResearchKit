@@ -41,10 +41,8 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
-#import "ORKPlacemark.h"
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
@@ -1920,6 +1918,62 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @end
 
 
+@implementation ORKLocation
+
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate address:(NSString *)address {
+    self = [super init];
+    if (self) {
+        _coordinate = coordinate;
+        _address = [address copy];
+    }
+    return self;
+}
+
+- (instancetype)initWithPlaceMark:(CLPlacemark *)placeMark {
+    self = [super init];
+    if (self) {
+        _coordinate = placeMark.location.coordinate;
+        _address = [ABCreateStringWithAddressDictionary(placeMark.addressDictionary, NO) copy] ;
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    // This object is not mutable
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, address);
+    ORK_ENCODE_COORDINATE(aCoder, coordinate);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_COORDINATE(aDecoder, coordinate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, address, NSString);
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.address, castObject.address) &&
+            ORKEqualObjects([NSValue valueWithMKCoordinate:self.coordinate], [NSValue valueWithMKCoordinate:castObject.coordinate]));
+}
+
+@end
+
+
 @implementation ORKLocationQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -1930,7 +1984,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKPlacemark);
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKLocation);
     }
     return self;
 }
@@ -1953,7 +2007,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 + (Class)answerClass {
-    return [ORKPlacemark class];
+    return [ORKLocation class];
 }
 
 - (void)setAnswer:(id)answer {

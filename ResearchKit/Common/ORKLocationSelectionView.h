@@ -79,7 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKAnswerTextField *textField;
 
-- (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
+- (instancetype)initWithOpenMap:(BOOL)openMap
+             useCurrentLocation:(BOOL)useCurrentLocation
+         edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 

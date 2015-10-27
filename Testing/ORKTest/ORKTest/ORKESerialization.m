@@ -110,6 +110,14 @@ static UIEdgeInsets edgeInsetsFromDictionary(NSDictionary *dict) {
     return (UIEdgeInsets){.top = ((NSNumber *)dict[@"top"]).doubleValue, .left = ((NSNumber *)dict[@"left"]).doubleValue, .bottom = ((NSNumber *)dict[@"bottom"]).doubleValue, .right = ((NSNumber *)dict[@"right"]).doubleValue};
 }
 
+static NSDictionary *dictionaryFromCoordinate (CLLocationCoordinate2D coordinate) {
+    return @{ @"latitude" : @(coordinate.latitude), @"longitude" : @(coordinate.longitude) };
+}
+
+static CLLocationCoordinate2D coordinateFromDictionary(NSDictionary *dict) {
+    return (CLLocationCoordinate2D){.latitude = ((NSNumber *)dict[@"latitude"]).doubleValue, .longitude = ((NSNumber *)dict[@"longitude"]).doubleValue };
+}
+
 static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
     return tableMapReverse(s, ORKNumericAnswerStyleTable());
 }
@@ -1117,30 +1125,21 @@ ret =
                      ^id(id timezone) { return @([timezone secondsFromGMT]); },
                      ^id(id number) { return [NSTimeZone timeZoneForSecondsFromGMT:((NSNumber *)number).doubleValue]; })
             })),
+   ENTRY(ORKLocation,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             CLLocationCoordinate2D coordinate = coordinateFromDictionary(dict[@ESTRINGIFY(coordinate)]);
+             return [[ORKLocation alloc] initWithCoordinate:coordinate address:GETPROP(dict, address)];
+         },
+         (@{
+            PROPERTY(address, NSString, NSObject, NO, nil, nil),
+            PROPERTY(coordinate, NSValue, NSObject, NO,
+                     ^id(id value) { return value?dictionaryFromCoordinate(((NSValue *)value).MKCoordinateValue):nil; },
+                     ^id(id dict) { return [NSValue valueWithMKCoordinate:coordinateFromDictionary(dict)]; }),
+            })),
    ENTRY(ORKLocationQuestionResult,
          nil,
          (@{
-            PROPERTY(locationAnswer, ORKPlacemark, NSObject, NO, nil, nil)
-            })),
-   ENTRY(ORKPlacemark,
-         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {\
-             CLLocation *location = GETPROP(dict, location);
-             NSDictionary *address = GETPROP(dict, addressDictionary);
-             return [[ORKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:address];
-         },
-         (@{
-            PROPERTY(addressDictionary, NSDictionary, NSObject, NO, nil, nil),
-            PROPERTY(location, CLLocation, NSObject, NO,
-                     (^id(id location) { return @{
-                                                  @"latitude": [NSNumber numberWithDouble:((CLLocation *)location).coordinate.latitude],
-                                                  @"longitude": [NSNumber numberWithDouble:((CLLocation *)location).coordinate.longitude]
-                                                  };
-         }),
-                     ^id(id dict) {
-                         NSNumber *latitude = dict[@"latitude"];
-                         NSNumber *longitude = dict[@"longitude"];
-                         return [[CLLocation alloc] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue];
-                     })
+            PROPERTY(locationAnswer, ORKLocation, NSObject, NO, nil, nil)
             })),
    ENTRY(ORKConsentSignatureResult,
          nil,
