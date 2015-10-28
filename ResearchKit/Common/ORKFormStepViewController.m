@@ -29,7 +29,6 @@
  */
 
 
-#import "ORKFormStepViewController.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKHelpers.h"
 #import "ORKFormItemCell.h"
@@ -792,11 +791,15 @@
                     }
                         
                     case ORKQuestionTypeText: {
-                        ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (!textFormat.multipleLines) {
-                            class = [ORKFormItemTextFieldCell class];
+                        if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+                            class = [ORKFormItemConfirmTextCell class];
                         } else {
-                            class = [ORKFormItemTextCell class];
+                            ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+                            if (!textFormat.multipleLines) {
+                                class = [ORKFormItemTextFieldCell class];
+                            } else {
+                                class = [ORKFormItemTextCell class];
+                            }
                         }
                         break;
                     }
@@ -831,6 +834,10 @@
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
+                        if (!_savedAnswers) {
+                            _savedAnswers = [NSMutableDictionary new];
+                        }
+                        formCell.savedAnswers = _savedAnswers;
                         cell = formCell;
                     }
                 }

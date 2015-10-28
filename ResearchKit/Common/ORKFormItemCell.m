@@ -186,6 +186,17 @@ static const CGFloat HorizontalMargin = 15.0;
     [self defaultAnswerDidChange];
 }
 
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    _savedAnswers = savedAnswers;
+
+    if (!_savedAnswers) {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"Saved answers cannot be nil."
+                                     userInfo:nil];
+    }
+    
+}
+
 - (BOOL)becomeFirstResponder {
     // Subclasses should override this
     return YES;
@@ -496,6 +507,72 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (BOOL)isAccessibilityElement {
     return NO;
+}
+
+@end
+
+
+#pragma mark - ORKFormItemConfirmTextCell
+
+@implementation ORKFormItemConfirmTextCell
+
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    [super setSavedAnswers:savedAnswers];
+    
+    [savedAnswers addObserver:self
+                   forKeyPath:[self originalItemIdentifier]
+                      options:0
+                      context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqual:[self originalItemIdentifier]]) {
+        self.textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
+    }
+}
+
+- (BOOL)isAnswerValidWithString:(NSString *)string {
+    BOOL isValid = NO;
+    if (string.length > 0) {
+        NSString *originalItemAnswer = self.savedAnswers[[self originalItemIdentifier]];
+        if (!ORKIsAnswerEmpty(originalItemAnswer) && [originalItemAnswer isEqualToString:string]) {
+            isValid = YES;
+        }
+    }
+    return isValid;
+}
+
+- (NSString *)originalItemIdentifier {
+    ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
+    return [answerFormat.originalItemIdentifier copy];
+}
+
+- (void)dealloc {
+    [self.savedAnswers removeObserver:self forKeyPath:[self originalItemIdentifier]];
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self ork_setAnswer:([self isAnswerValidWithString:text] ? text : @"")];
+
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [super textFieldShouldEndEditing:textField];
+    if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
+        textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
+        [self showValidityAlertWithMessage:[self.formItem.answerFormat localizedInvalidValueStringWithAnswerString:textField.text]];
+    }
+    return YES;
 }
 
 @end

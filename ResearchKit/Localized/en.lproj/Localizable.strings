@@ -101,6 +101,32 @@
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
 
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Gender";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
+"DOB_FORM_ITEM_TITLE" = "Date of Birth";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't recieve an email";
+"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+"VERIFICATION_LABEL_MESSAGE" = "If verified, tap the button below.";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
+
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
 "PASSCODE_CONFIRM_MESSAGE" = "Confirm passcode";
