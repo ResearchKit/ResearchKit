@@ -43,6 +43,10 @@ NSString *const ORKRegistrationFormItemIdentifierFamilyName = @"ORKRegistrationF
 NSString *const ORKRegistrationFormItemIdentifierGender = @"ORKRegistrationFormItemGender";
 NSString *const ORKRegistrationFormItemIdentifierDOB = @"ORKRegistrationFormItemDOB";
 
+static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier) {
+    return findInArrayByKey(array, @"identifier", formItemIdentifier);
+}
+
 @implementation ORKRegistrationStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier

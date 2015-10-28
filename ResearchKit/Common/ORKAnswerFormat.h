@@ -1201,7 +1201,7 @@ ORK_CLASS_AVAILABLE
  
  This method is one of the designated initializers.
  
- @param validationRegex                The regular expression used to validate the text.
+ @param validationRegex           The regular expression used to validate the text.
  @param invalidMessage            The text presented to the user when invalid input is received.
  
  @return An initialized validated text answer format.

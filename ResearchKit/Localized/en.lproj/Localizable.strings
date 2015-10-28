@@ -121,7 +121,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "I didn't recieve an email";
 "RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
-"VERIFICATION_LABEL_MESSAGE" = "If verified, tap below.";
+"VERIFICATION_LABEL_MESSAGE" = "If verified, tap the button below.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";

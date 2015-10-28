@@ -1911,8 +1911,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (instancetype)initWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
     self = [super init];
     if (self) {
-        _validationRegex = validationRegex;
-        _invalidMessage = invalidMessage;
+        _validationRegex = [validationRegex copy];
+        _invalidMessage = [invalidMessage copy];
         _maximumLength = 0;
         [self commonInit];
     }
@@ -1936,14 +1936,23 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                                        reason:@"Both regex and invalid message properties must be set."
                                      userInfo:nil];
     }
+    
+    NSError *error;
+    if (self.validationRegex && ![[NSRegularExpression alloc] initWithPattern:self.validationRegex
+                                                                      options:NSRegularExpressionCaseInsensitive
+                                                                        error:&error]) {
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:@"Validation regex is not valid."
+                                     userInfo:error.userInfo];
+    }
 
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
     fmt->_maximumLength = _maximumLength;
-    fmt->_validationRegex = _validationRegex;
-    fmt->_invalidMessage = _invalidMessage;
+    fmt->_validationRegex = [_validationRegex copy];
+    fmt->_invalidMessage = [_invalidMessage copy];
     fmt->_autocapitalizationType = _autocapitalizationType;
     fmt->_autocorrectionType = _autocorrectionType;
     fmt->_spellCheckingType = _spellCheckingType;

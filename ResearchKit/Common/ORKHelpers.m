@@ -78,21 +78,13 @@ CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
-static id findInArrayByKey(NSArray * array, NSString *key, id value) {
+id findInArrayByKey(NSArray * array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
     if (matches.count) {
         return matches[0];
     }
     return nil;
-}
-
-id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
-    return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
-}
-
-id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifier) {
-    return findInArrayByKey(array, @"identifier", formItemIdentifier);
 }
 
 NSString *ORKStringFromDateISO8601(NSDate *date) {
