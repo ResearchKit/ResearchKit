@@ -1929,11 +1929,11 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return self;
 }
 
-- (instancetype)initWithPlaceMark:(CLPlacemark *)placeMark {
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark {
     self = [super init];
     if (self) {
-        _coordinate = placeMark.location.coordinate;
-        _address = [ABCreateStringWithAddressDictionary(placeMark.addressDictionary, NO) copy] ;
+        _coordinate = placemark.location.coordinate;
+        _address = [ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO) copy] ;
     }
     return self;
 }

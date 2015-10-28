@@ -213,7 +213,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlaceMark:placemark]];
+            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark]];
         }
     }];
 }
@@ -234,7 +234,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlaceMark:placemark]];
+            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark]];
         }
     }];
 }
@@ -243,18 +243,13 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     
     [_mapView removeAnnotations:_mapView.annotations];
     
-    if (NO == [[answer class] isSubclassOfClass:[ORKLocation class]]) {
-        _answer = answer == ORKNullAnswerValue() ? ORKNullAnswerValue() : nil;
-    } else {
-        _answer = answer;
-    }
+    _answer = (([[answer class] isSubclassOfClass:[ORKLocation class]]) || answer == ORKNullAnswerValue()) ? answer : nil;
     
     if (_answer) {
         _userLocationNeedsUpdate = NO;
     }
     
     if ([[_answer class] isSubclassOfClass:[ORKLocation class]]) {
-        ORKLocation *location = (ORKLocation *)_answer;
         MKPlacemark *placemarkAnswer = [[MKPlacemark alloc] initWithCoordinate:answer.coordinate addressDictionary:nil];
         [_mapView addAnnotation:placemarkAnswer];
         
@@ -269,6 +264,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
         }
         [_mapView setRegion:region animated:YES];
         
+        ORKLocation *location = (ORKLocation *)_answer;
         if (location.address) {
             _textField.text = location.address;
         } else {

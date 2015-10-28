@@ -995,11 +995,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        /*
-         An example of a location question.
-         */
-        ORKLocationAnswerFormat *format = [ORKAnswerFormat locationAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_location" title:@"Where are you right now?" answer:format];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"completion"];
+        step.title = @"Survey Complete";
         [steps addObject:step];
     }
 

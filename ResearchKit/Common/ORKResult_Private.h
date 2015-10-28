@@ -96,7 +96,7 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate address:(NSString *)address;
 
-- (instancetype)initWithPlaceMark:(CLPlacemark *)placeMark;
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark;
 
 @end
 
