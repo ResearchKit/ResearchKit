@@ -31,7 +31,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import UIKit
 import ResearchKit
 import MapKit
-import AddressBookUI
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows

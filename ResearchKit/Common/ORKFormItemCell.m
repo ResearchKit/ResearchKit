@@ -47,7 +47,6 @@
 #import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKLocationSelectionView.h"
-#import <AddressBookUI/AddressBookUI.h>
 #import <MapKit/MapKit.h>
 
 
@@ -1186,9 +1185,9 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     [super cellInit];
     
-    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:NO
-                                                    useCurrentLocation:((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation
-                                                edgeToEdgePresentation:NO];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithFormMode:YES
+                                                     useCurrentLocation:((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation
+                                                          leadingMargin:self.separatorInset.left];
     _selectionView.delegate = self;
     
     [self.contentView addSubview:_selectionView];
@@ -1207,7 +1206,7 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKEnableAutoLayoutForViews([dictionary allValues]);
     NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(self.separatorInset.left), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
     _bottomConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
     [constraints addObject:_bottomConstraint];

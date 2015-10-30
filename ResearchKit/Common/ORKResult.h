@@ -1266,9 +1266,19 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
 /**
- The human readable address for this coordinate.
+ The region describes the size of the placemark of the location.
  */
-@property (nonatomic, copy, readonly) NSString *address;
+@property (nonatomic, copy, readonly) CLCircularRegion *region;
+
+/**
+ The human readable address typed in by user.
+ */
+@property (nonatomic, copy, readonly) NSString *userInput;
+
+/**
+ The address dicitonary for this coordinate from MapKit.
+ */
+@property (nonatomic, copy, readonly) NSDictionary *addressDictionary;
 
 @end
 

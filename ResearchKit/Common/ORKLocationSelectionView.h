@@ -40,8 +40,7 @@
 #import <UIKit/UIKit.h>
 
 
-static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
-static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
+static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 10;
 
 
 @class ORKLocationSelectionView;
@@ -79,15 +78,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKAnswerTextField *textField;
 
-- (instancetype)initWithOpenMap:(BOOL)openMap
-             useCurrentLocation:(BOOL)useCurrentLocation
-         edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
+- (instancetype)initWithFormMode:(BOOL)formMode
+              useCurrentLocation:(BOOL)useCurrentLocation
+                   leadingMargin:(CGFloat)leadingMargin;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 
 - (void)setTextColor:(UIColor *)color;
 
 - (void)showMapViewIfNecessary;
+
++ (CGFloat)textFieldHeight;
 
 @end
 

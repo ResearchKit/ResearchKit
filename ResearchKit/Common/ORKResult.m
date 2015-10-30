@@ -1920,20 +1920,27 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 
 @implementation ORKLocation
 
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate address:(NSString *)address {
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                            region:(CLCircularRegion *)region
+                         userInput:(NSString *)userInput
+                 addressDictionary:(NSDictionary *)addressDictionary {
     self = [super init];
     if (self) {
         _coordinate = coordinate;
-        _address = [address copy];
+        _region = region;
+        _userInput = [userInput copy];
+        _addressDictionary = [addressDictionary copy];
     }
     return self;
 }
 
-- (instancetype)initWithPlacemark:(CLPlacemark *)placemark {
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput {
     self = [super init];
     if (self) {
         _coordinate = placemark.location.coordinate;
-        _address = [ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO) copy] ;
+        _userInput =  [userInput copy];
+        _region = (CLCircularRegion *)placemark.region;
+        _addressDictionary = [placemark.addressDictionary copy];
     }
     return self;
 }
@@ -1947,16 +1954,37 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     return YES;
 }
 
+static NSString * const RegionCenterLatitudeKey = @"region.center.latitude";
+static NSString * const RegionCenterLongitudeKey = @"region.center.longitude";
+static NSString * const RegionRadiusKey = @"region.radius";
+static NSString * const RegionIdentifierKey = @"region.identifier";
+
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    ORK_ENCODE_OBJ(aCoder, address);
+    ORK_ENCODE_OBJ(aCoder, userInput);
     ORK_ENCODE_COORDINATE(aCoder, coordinate);
+    ORK_ENCODE_OBJ(aCoder, addressDictionary);
+
+    [aCoder encodeObject:@(_region.center.latitude) forKey:RegionCenterLatitudeKey];
+    [aCoder encodeObject:@(_region.center.longitude) forKey:RegionCenterLongitudeKey];
+    [aCoder encodeObject:_region.identifier forKey:RegionIdentifierKey];
+    [aCoder encodeObject:@(_region.radius) forKey:RegionRadiusKey];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, userInput, NSString);
         ORK_DECODE_COORDINATE(aDecoder, coordinate);
-        ORK_DECODE_OBJ_CLASS(aDecoder, address, NSString);
+        ORK_DECODE_OBJ_CLASS(aDecoder, addressDictionary, NSDictionary);
+        ORK_DECODE_OBJ_CLASS(aDecoder, region, CLCircularRegion);
+        
+        NSNumber *latitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLatitudeKey];
+        NSNumber *longitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLongitudeKey];
+        NSNumber *radius = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionRadiusKey];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+        _region = [[CLCircularRegion alloc] initWithCenter:coordinate
+                                                    radius:radius.doubleValue
+                                                identifier:[aDecoder decodeObjectOfClass:[NSString class] forKey:RegionIdentifierKey]];
     }
     return self;
 }
@@ -1967,7 +1995,9 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
     }
     
     __typeof(self) castObject = object;
-    return (ORKEqualObjects(self.address, castObject.address) &&
+    return (ORKEqualObjects(self.userInput, castObject.userInput) &&
+            ORKEqualObjects(self.addressDictionary, castObject.addressDictionary) &&
+            ORKEqualObjects(self.region, castObject.region) &&
             ORKEqualObjects([NSValue valueWithMKCoordinate:self.coordinate], [NSValue valueWithMKCoordinate:castObject.coordinate]));
 }
 

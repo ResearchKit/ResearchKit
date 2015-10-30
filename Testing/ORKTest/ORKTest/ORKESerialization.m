@@ -1128,13 +1128,39 @@ ret =
    ENTRY(ORKLocation,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
              CLLocationCoordinate2D coordinate = coordinateFromDictionary(dict[@ESTRINGIFY(coordinate)]);
-             return [[ORKLocation alloc] initWithCoordinate:coordinate address:GETPROP(dict, address)];
+             return [[ORKLocation alloc] initWithCoordinate:coordinate
+                                                     region:GETPROP(dict, region)
+                                                  userInput:GETPROP(dict, userInput)
+                                          addressDictionary:GETPROP(dict, addressDictionary)];
          },
          (@{
-            PROPERTY(address, NSString, NSObject, NO, nil, nil),
+            PROPERTY(userInput, NSString, NSObject, NO, nil, nil),
+            PROPERTY(addressDictionary, NSString, NSDictionary, NO, nil, nil),
             PROPERTY(coordinate, NSValue, NSObject, NO,
-                     ^id(id value) { return value?dictionaryFromCoordinate(((NSValue *)value).MKCoordinateValue):nil; },
+                     ^id(id value) { return value ? dictionaryFromCoordinate(((NSValue *)value).MKCoordinateValue) : nil; },
                      ^id(id dict) { return [NSValue valueWithMKCoordinate:coordinateFromDictionary(dict)]; }),
+            PROPERTY(region, CLCircularRegion, NSObject, NO,
+                     ^id(id value) {
+                         if ( nil == value ) {
+                             return nil;
+                         }
+                         CLCircularRegion *region = value;
+                         NSMutableDictionary* dict = [NSMutableDictionary dictionary];
+                         dict[@"coordinate"] = dictionaryFromCoordinate(region.center);
+                         dict[@"radius"] = @(region.radius);
+                         dict[@"identifier"] = region.identifier;
+                         return dict;
+                     },
+                     ^id(id dict) {
+                         NSDictionary *regionDict = dict;
+                         if (nil == regionDict) {
+                             return nil;
+                         }
+                         CLLocationCoordinate2D coordinate = coordinateFromDictionary(regionDict[@"coordinate"]);
+                         NSNumber *radius = regionDict[@"radius"];
+                         NSString *identifier = regionDict[@"identifier"];
+                         return [[CLCircularRegion alloc] initWithCenter:coordinate radius:radius.doubleValue identifier:identifier];
+                     }),
             })),
    ENTRY(ORKLocationQuestionResult,
          nil,
@@ -1193,7 +1219,7 @@ static NSArray *classEncodingsForClass(Class c) {
 
 static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJSONToObjectBlock converterBlock) {
     id output = nil;
-    if (converterBlock != nil) {
+    if (converterBlock != nil) {NSLog(@"!!!!converterBlock");
         input = converterBlock(input);
     }
     

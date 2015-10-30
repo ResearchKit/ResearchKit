@@ -32,7 +32,6 @@
 
 #import "ORKSurveyAnswerCellForLocation.h"
 #import <MapKit/MapKit.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import "ORKAnswerTextField.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
@@ -59,13 +58,13 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
+    return [ORKLocationSelectionView.class textFieldHeight] + (LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
 }
 
 - (void)prepareView {
-    _selectionView = [[ORKLocationSelectionView alloc] initWithOpenMap:YES
-                                                    useCurrentLocation:((ORKLocationAnswerFormat *)self.step.answerFormat).useCurrentLocation
-                                                edgeToEdgePresentation:YES];
+    _selectionView = [[ORKLocationSelectionView alloc] initWithFormMode:NO
+                                                     useCurrentLocation:((ORKLocationAnswerFormat *)self.step.answerFormat).useCurrentLocation
+                                                          leadingMargin:self.separatorInset.left];
     _selectionView.delegate = self;
     _selectionView.tintColor = self.tintColor;
     [self addSubview:_selectionView];

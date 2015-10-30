@@ -31,7 +31,6 @@
 
 #import <ResearchKit/ResearchKit_Private.h>
 #import <MapKit/MapKit.h>
-#import <AddressBookUI/AddressBookUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -94,9 +93,12 @@ ORK_CLASS_AVAILABLE
 
 @interface ORKLocation ()
 
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate address:(NSString *)address;
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                            region:(nullable CLCircularRegion *)region
+                         userInput:(nullable NSString *)userInput
+                 addressDictionary:(NSDictionary *)addressDictionary;
 
-- (instancetype)initWithPlacemark:(CLPlacemark *)placemark;
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput;
 
 @end
 
