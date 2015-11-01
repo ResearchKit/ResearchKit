@@ -179,15 +179,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 
 /**
- A subclass is required for Login Step.
+ A subclass is required for the Login Step.
  
  The implementation below demonstrates how to subclass and override button actions.
  */
-@interface loginViewController : ORKLoginStepViewController
+@interface LoginViewController : ORKLoginStepViewController
 
 @end
 
-@implementation loginViewController
+@implementation LoginViewController
 
 - (void)forgotPasswordButtonTapped {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Forgot password?"
@@ -201,15 +201,15 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 
 /**
- A subclass is required for Verification Step.
+ A subclass is required for the Verification Step.
  
  The implementation below demonstrates how to subclass and override button actions.
  */
-@interface verificationViewController : ORKVerificationStepViewController
+@interface VerificationViewController : ORKVerificationStepViewController
 
 @end
 
-@implementation verificationViewController
+@implementation VerificationViewController
 
 - (void)showAlertWithTitle:(NSString *)title {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
@@ -1431,7 +1431,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKLoginStep *step = [[ORKLoginStep alloc] initWithIdentifier:@"login_step"
                                                                 title:@"Login"
                                                                  text:@"Enter your credentials"
-                                             loginViewControllerClass:[loginViewController class]];
+                                             loginViewControllerClass:[LoginViewController class]];
         [steps addObject:step];
     }
     
@@ -1482,7 +1482,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step"
                                                                               title:@"Verfication"
                                                                                text:@"Please verify your email"
-                                                    verificationViewControllerClass:[verificationViewController class]];
+                                                    verificationViewControllerClass:[VerificationViewController class]];
         [steps addObject:step];
     }
     
@@ -3519,12 +3519,12 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         [items addObject:@"Item2"];
         [items addObject:@"Item3"];
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
-    }else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
+    } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
         // Indeterminate step
         [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
-        [self updateProgress:0.0 OfWaitTask:((ORKWaitStepViewController *)stepViewController)];
+        [self updateProgress:0.0 waitStepViewController:((ORKWaitStepViewController *)stepViewController)];
     }
 
 }
@@ -3563,7 +3563,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
              so we don't clear the restoration data.
              */
             id<ORKTask> task = taskViewController.task;
-            _savedViewControllers[task.identifier] = [taskViewController restorationData];
+            _savedViewControllers[task.identifier] = taskViewController.restorationData;
             [self dismissTaskViewController:taskViewController removeOutputDirectory:NO];
             return;
         }
@@ -3723,17 +3723,17 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return waitTask;
 }
 
-- (void)updateProgress:(CGFloat)progress OfWaitTask:(ORKWaitStepViewController *)viewController {
+- (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)viewController {
     if (progress <= 1.0) {
         [viewController setProgress:progress animated:true];
         
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        __weak ORKWaitStepViewController *vc = viewController;
+        __weak ORKWaitStepViewController *weakViewController = viewController;
         __weak MainViewController *weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
             __typeof__(self) strongSelf = weakSelf;
-            [strongSelf updateProgress:progress + 0.01 OfWaitTask:vc];
+            [strongSelf updateProgress:progress + 0.01 waitStepViewController:weakViewController];
             
             if ((float)progress == 0.5) {
                 NSString *newText = @"Please wait while the data is downloaded.";
