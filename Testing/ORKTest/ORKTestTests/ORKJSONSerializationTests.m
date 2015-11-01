@@ -263,20 +263,9 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
     [data writeToFile:tempPath atomically:YES];
     NSLog(@"JSON file at %@", tempPath);
     
-    NSLog(@"----%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] );
-    
-    NSLog(@"######################################################");
-    
-    NSLog(@"----%@",dict1);
-    
-    NSLog(@"######################################################");
-    
     ORKOrderedTask *task2 = [ORKESerializer objectFromJSONObject:dict1 error:nil];
     
     NSDictionary *dict2 = [ORKESerializer JSONObjectForObject:task2 error:nil];
-    
-    NSLog(@"----%@",dict2);
-    
     
     XCTAssertTrue([dict1 isEqualToDictionary:dict2], @"Should be equal");
     
@@ -381,7 +370,11 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
                                               @"ORKScaleAnswerFormat.maximumImage",
                                               @"ORKContinuousScaleAnswerFormat.minimumImage",
                                               @"ORKContinuousScaleAnswerFormat.maximumImage",
-                                              @"ORKDataResult.data",];
+                                              @"ORKDataResult.data",
+                                              @"ORKVerificationStep.verificationViewControllerClass",
+                                              @"ORKLoginStep.loginViewControllerClass",
+                                              @"ORKRegistrationStep.passcodeValidationRegex",
+                                              @"ORKRegistrationStep.passcodeInvalidMessage"];
     NSArray *allowedUnTouchedKeys = @[@"_class"];
     
     // Test Each class
@@ -458,6 +451,10 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
             [instance setValue:[NSValue valueWithUIEdgeInsets:(UIEdgeInsets){1,1,1,1}] forKey:@"templateImageInsets"];
         } else if ([aClass isSubclassOfClass:[ORKTimeIntervalAnswerFormat class]]) {
             [instance setValue:@(1) forKey:@"step"];
+        } else if ([aClass isSubclassOfClass:[ORKLoginStep class]]) {
+            [instance setValue:NSStringFromClass([ORKLoginStepViewController class]) forKey:@"loginViewControllerString"];
+        } else if ([aClass isSubclassOfClass:[ORKVerificationStep class]]) {
+            [instance setValue:NSStringFromClass([ORKVerificationStepViewController class]) forKey:@"verificationViewControllerString"];
         }
         
         // Serialization
@@ -565,6 +562,8 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
                                               @"ORKTextChoice.value",
                                               @"ORKImageChoice.value",
                                               @"ORKQuestionResult.answer",
+                                              @"ORKVerificationStep.verificationViewControllerClass",
+                                              @"ORKLoginStep.loginViewControllerClass",
                                               
                                               // Not serialized - computed property
                                               @"ORKAnswerFormat.healthKitUnit",

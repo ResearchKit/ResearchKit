@@ -28,35 +28,12 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKStep.h>
+
+#import <ResearchKit/ResearchKit.h>
 
 
-@interface ORKStep ()
+@interface ORKFormStepViewController ()
 
-/**
- Returns the class that the task view controller should instantiate to display
- this step.
- 
- This method is used within the framework so that steps can define their
- step view controller pairing.
- 
- Outside the framework, developers should instantiate the required view
- controller in their task view controller delegate to override the task
- view controller's default.
- */
-+ (Class)stepViewControllerClass;
-
-- (Class)stepViewControllerClass;
-
-@property (nonatomic, assign) BOOL shouldTintImages;
-
-// Override whether to show progress for this step in the default task.
-@property (nonatomic, assign, readonly) BOOL showsProgress;
-
-// Whether to allow navigation back from this step.
-@property (nonatomic, assign, readonly) BOOL allowsBackNavigation;
-
-@property (nonatomic, assign) BOOL useSurveyMode;
+- (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem;
 
 @end
-
