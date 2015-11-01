@@ -179,7 +179,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 
 /**
- A subclass is required for the Login Step.
+ A subclass is required for the login step.
  
  The implementation below demonstrates how to subclass and override button actions.
  */
@@ -201,7 +201,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 
 /**
- A subclass is required for the Verification Step.
+ A subclass is required for the verification step.
  
  The implementation below demonstrates how to subclass and override button actions.
  */
