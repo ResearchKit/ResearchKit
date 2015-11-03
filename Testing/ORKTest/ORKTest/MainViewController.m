@@ -3723,25 +3723,20 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     return waitTask;
 }
 
-- (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)viewController {
+- (void)updateProgress:(CGFloat)progress waitStepViewController:(ORKWaitStepViewController *)waitStepviewController {
     if (progress <= 1.0) {
-        [viewController setProgress:progress animated:true];
-        
+        [waitStepviewController setProgress:progress animated:true];
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        __weak ORKWaitStepViewController *weakViewController = viewController;
-        __weak MainViewController *weakSelf = self;
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            __typeof__(self) strongSelf = weakSelf;
-            [strongSelf updateProgress:progress + 0.01 waitStepViewController:weakViewController];
-            
-            if ((float)progress == 0.5) {
+            [self updateProgress:(progress + 0.01) waitStepViewController:waitStepviewController];
+            if (progress > 0.495 && progress < 0.505) {
                 NSString *newText = @"Please wait while the data is downloaded.";
-                [viewController updateText:newText];
+                [waitStepviewController updateText:newText];
             }
         });
     } else {
-        [viewController goForward];
+        [waitStepviewController goForward];
     }
 }
 
