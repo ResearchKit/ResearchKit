@@ -39,6 +39,7 @@
 #import "ORKResult_Private.h"
 #import "ORKPlacemark.h"
 #import <AddressBookUI/AddressBookUI.h>
+#import "ORKChoiceAnswerFormatHelper.h"
 
 
 NSString *const EmailValidationRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -476,23 +477,21 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return nil;
 }
 
-- (NSString*)stringForAnswer:(id)answer fromTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
-    __block NSString *answerString = nil;
-    if ([answer isKindOfClass:[NSArray class]]) {
-        NSArray *answerArray = (NSArray *)answer;
-        if (answerArray.count == 1) {
-            [textChoices enumerateObjectsUsingBlock:^(ORKTextChoice *obj, NSUInteger idx, BOOL *stop) {
-                if ([obj.value isEqual:answerArray.firstObject]) {
-                    answerString = obj.text;
-                    *stop = YES;
-                }
-            }];
-        } else if (answerArray.count > 1) {
-            //TODO: localize string
-            answerString = @"Multiple answers";
+- (NSString*)stringForAnswer:(id)answer fromTextChoices:(NSArray<ORKTextChoice *> *)textChoices {  
+    __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    for (NSNumber *index in [helper selectedIndexesForAnswer:answer]) {
+        if ([self isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
+            ORKTextChoice *textChoice = [helper textChoiceAtIndex:[index integerValue]];
+            [answerStrings addObject:textChoice.text];
+        } else if ([self isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
+            ORKImageChoice *imageChoice = [helper imageChoiceAtIndex:[index integerValue]];
+            if (imageChoice.text != nil) {
+                [answerStrings addObject:imageChoice.text];
+            }
         }
     }
-    return answerString;
+    return [answerStrings componentsJoinedByString:@"\n"];
 }
 
 @end
@@ -969,7 +968,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKBooleanQuestionResult class];
 }
 
-//TODO: implement stringForAnswer:
+- (NSString*)stringForAnswer:(id)answer {
+    ORKAnswerFormat *impliedAnswerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                     textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
+                                                   [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO) ]]];
+    return [impliedAnswerFormat stringForAnswer:@[answer]];
+}
 
 @end
 
@@ -2153,6 +2157,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return _impliedAnswerFormat;
 }
 
+- (NSString*)stringForAnswer:(id)answer {
+    return [self.impliedAnswerFormat stringForAnswer: answer];
+}
+
 @end
 
 
@@ -2234,8 +2242,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    //TODO: number formatter with localized suffix
-    return ORKLocalizedStringFromNumber(answer);
+    //TODO: localization
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[answer doubleValue]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    return [dateFormatter stringFromDate:date];
 }
 
 @end
