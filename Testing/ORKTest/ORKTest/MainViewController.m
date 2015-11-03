@@ -45,6 +45,9 @@ DefineStringKey(ConsentTaskIdentifier);
 DefineStringKey(ConsentReviewTaskIdentifier);
 DefineStringKey(EligibilityFormTaskIdentifier);
 DefineStringKey(EligibilitySurveyTaskIdentifier);
+DefineStringKey(LoginTaskIdentifier);
+DefineStringKey(RegistrationTaskIdentifier);
+DefineStringKey(VerificationTaskIdentifier);
 
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
@@ -176,6 +179,66 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 @end
 
 
+/**
+ A subclass is required for Login Step.
+ 
+ The implementation below demonstrates how to subclass and override button actions.
+ */
+@interface loginViewController : ORKLoginStepViewController
+
+@end
+
+@implementation loginViewController
+
+- (void)forgotPasswordButtonTapped {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Forgot password?"
+                                                                   message:@"Button tapped"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+@end
+
+
+/**
+ A subclass is required for Verification Step.
+ 
+ The implementation below demonstrates how to subclass and override button actions.
+ */
+@interface verificationViewController : ORKVerificationStepViewController
+
+@end
+
+@implementation verificationViewController
+
+- (void)showAlertWithTitle:(NSString *)title {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:@"Button tapped"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)continueButtonTapped {
+    [self goForward];
+}
+
+- (void)resendEmailButtonTapped {
+    [self showAlertWithTitle:@"Resend Verification Email"];
+}
+
+- (void)changeEmailButtonTapped {
+    [self showAlertWithTitle:@"Wrong email address?"];
+}
+
+- (NSString *)emailAddress {
+    return @"jappleseed@example.com";
+}
+
+@end
+
+
 @interface MainViewController () <ORKTaskViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ORKPasscodeDelegate> {
     id<ORKTaskResultSource> _lastRouteResult;
     ORKConsentDocument *_currentDocument;
@@ -254,17 +317,20 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                                         views:views]];
     
     _buttonSectionNames = @[
-                            @"Consent",
+                            @"Onboarding",
                             @"Question Steps",
                             @"Active Tasks",
                             @"Passcode",
                             @"Miscellaneous",
                             ];
-    _buttonTitles = @[ @[ // Consent
+    _buttonTitles = @[ @[ // Onboarding
                            @"Consent",
                            @"Consent Review",
                            @"Eligibility Form",
-                           @"Eligibility Survey"
+                           @"Eligibility Survey",
+                           @"Login",
+                           @"Registration",
+                           @"Verification",
                            ],
                        @[ // Question Steps
                            @"Date Pickers",
@@ -380,6 +446,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeEligibilityFormTask];
     } else if ([identifier isEqualToString:EligibilitySurveyTaskIdentifier]) {
         return [self makeEligibilitySurveyTask];
+    } else if ([identifier isEqualToString:LoginTaskIdentifier]) {
+        return [self makeLoginTask];
+    } else if ([identifier isEqualToString:RegistrationTaskIdentifier]) {
+        return [self makeRegistrationTask];
+    } else if ([identifier isEqualToString:VerificationTaskIdentifier]) {
+        return [self makeVerificationTask];
     } else if ([identifier isEqualToString:AudioTaskIdentifier]) {
         id<ORKTask> task = [ORKOrderedTask audioTaskWithIdentifier:AudioTaskIdentifier
                                             intendedUseDescription:nil
@@ -1348,6 +1420,81 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [self beginTaskWithIdentifier:EligibilitySurveyTaskIdentifier];
 }
 
+#pragma mark - Login task
+/*
+ The login task is used to demonstrate a login step.
+ */
+
+- (id<ORKTask>)makeLoginTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKLoginStep *step = [[ORKLoginStep alloc] initWithIdentifier:@"login_step"
+                                                                title:@"Login"
+                                                                 text:@"Enter your credentials"
+                                             loginViewControllerClass:[loginViewController class]];
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:LoginTaskIdentifier steps:steps];
+    return task;
+}
+
+- (IBAction)loginButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:LoginTaskIdentifier];
+}
+
+#pragma mark - Registration task
+/*
+ The registration task is used to demonstrate a registration step.
+ */
+- (id<ORKTask>)makeRegistrationTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKRegistrationStepOption options = (ORKRegistrationStepIncludeFamilyName |
+                                             ORKRegistrationStepIncludeGivenName |
+                                             ORKRegistrationStepIncludeDOB |
+                                             ORKRegistrationStepIncludeGender);
+        ORKRegistrationStep *step = [[ORKRegistrationStep alloc] initWithIdentifier:@"registration_step"
+                                                                              title:@"Registration"
+                                                                               text:@"Fill out the form below"
+                                                                            options:options];
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:RegistrationTaskIdentifier steps:steps];
+    return task;
+}
+
+- (IBAction)registrationButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:RegistrationTaskIdentifier];
+}
+
+
+#pragma mark - Verification task
+/*
+ The verification task is used to demonstrate a verification step.
+ */
+- (id<ORKTask>)makeVerificationTask {
+    NSMutableArray *steps = [NSMutableArray new];
+    
+    {
+        ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step"
+                                                                              title:@"Verfication"
+                                                                               text:@"Please verify your email"
+                                                    verificationViewControllerClass:[verificationViewController class]];
+        [steps addObject:step];
+    }
+    
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:VerificationTaskIdentifier steps:steps];
+    return task;
+}
+
+- (IBAction)verificationButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:VerificationTaskIdentifier];
+}
+
 #pragma mark - Mini form task
 
 /*
@@ -1506,7 +1653,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         }
         
         {
-            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationExpression:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
+            ORKTextAnswerFormat *format = [ORKAnswerFormat textAnswerFormatWithValidationRegex:@"^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$" invalidMessage:@"Invalid URL: %@"];
             format.multipleLines = NO;
             format.keyboardType = UIKeyboardTypeURL;
             format.autocapitalizationType = UITextAutocapitalizationTypeNone;

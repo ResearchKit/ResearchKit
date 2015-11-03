@@ -29,52 +29,47 @@
  */
 
 
-#import <ResearchKit/ORKDefines.h>
-
-#import <ResearchKit/ORKTask.h>
-#import <ResearchKit/ORKOrderedTask.h>
-#import <ResearchKit/ORKNavigableOrderedTask.h>
-#import <ResearchKit/ORKStep.h>
-#import <ResearchKit/ORKQuestionStep.h>
-#import <ResearchKit/ORKInstructionStep.h>
-#import <ResearchKit/ORKFormStep.h>
-#import <ResearchKit/ORKStepNavigationRule.h>
-#import <ResearchKit/ORKImageCaptureStep.h>
-#import <ResearchKit/ORKWaitStep.h>
-
 #import <ResearchKit/ORKAnswerFormat.h>
-#import <ResearchKit/ORKHealthAnswerFormat.h>
 
-#import <ResearchKit/ORKResult.h>
-#import <ResearchKit/ORKResultPredicate.h>
 
-#import <ResearchKit/ORKTaskViewController.h>
-#import <ResearchKit/ORKStepViewController.h>
-#import <ResearchKit/ORKFormStepViewController.h>
+NS_ASSUME_NONNULL_BEGIN
 
-#import <ResearchKit/ORKConsentDocument.h>
-#import <ResearchKit/ORKConsentSignature.h>
-#import <ResearchKit/ORKConsentSection.h>
-#import <ResearchKit/ORKVisualConsentStep.h>
-#import <ResearchKit/ORKConsentReviewStep.h>
-#import <ResearchKit/ORKConsentSharingStep.h>
+/**
+ The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text
+ response from the user and validates it with another text answer format.
+ 
+ An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
+ */
+@interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
-#import <ResearchKit/ORKRegistrationStep.h>
-#import <ResearchKit/ORKVerificationStep.h>
-#import <ResearchKit/ORKVerificationStepViewController.h>
-#import <ResearchKit/ORKLoginStep.h>
-#import <ResearchKit/ORKLoginStepViewController.h>
+- (instancetype)init NS_UNAVAILABLE;
 
-#import <ResearchKit/ORKKeychainWrapper.h>
-#import <ResearchKit/ORKPasscodeStep.h>
-#import <ResearchKit/ORKPasscodeViewController.h>
+- (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-#import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKActiveStep.h>
-#import <ResearchKit/ORKActiveStepViewController.h>
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+                         invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
-#import <ResearchKit/ORKRangedPoint.h>
-#import <ResearchKit/ORKLineGraphChartView.h>
-#import <ResearchKit/ORKDiscreteGraphChartView.h>
-#import <ResearchKit/ORKPieChartView.h>
+/**
+ Returns an initialized text answer format using the original item identifier.
+ 
+ @param originalItemIdentifier    The form item identifier against which this answer item is validated.
+ 
+ @return An initialized confirm text answer format.
+ */
+- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                  errorMessage:(NSString *)errorMessage;
 
+/**
+ The identifier for the form item that the current item will be validated against.
+ */
+@property (nonatomic, copy, readonly) NSString *originalItemIdentifier;
+
+
+/**
+ The error message displayed if validation fails.
+ */
+@property (nonatomic, copy, readonly) NSString *errorMessage;
+
+@end
+
+NS_ASSUME_NONNULL_END
