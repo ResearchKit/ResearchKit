@@ -42,7 +42,7 @@
 # This script has been tested with Python 2.7.6. You need to have Xcode Command Line Tools installed (it uses plutil).
 #
 # Single file usage example:
-#   ./plist-to-strings.py -m en.lproj/Localizable.strings -t es.lproj/Localizable.strings 
+#   ./plist-to-strings.py -m en.lproj/ResearchKit.strings -t es.lproj/ResearchKit.strings
 #
 # Whole project usage example (using 'en.lproj' as the master plaintext localization):
 #   localizedFolder="../ProjectPath/Localized"; for languageFolder in $(ls $localizedFolder); do if [[ "$languageFolder" != "en.lproj" ]]; then ./plist-to-strings.py -m ${localizedFolder}/en.lproj/Localizable.strings -t ${localizedFolder}/${languageFolder}/Localizable.strings; fi; done
