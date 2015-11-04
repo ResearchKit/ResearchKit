@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Bruce Duncan. All rights reserved.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -29,55 +29,73 @@
  */
 
 
-#import "ORKImageCaptureStep.h"
+#import "ORKVerificationStep.h"
+#import "ORKVerificationStep_Internal.h"
 #import "ORKHelpers.h"
-#import "ORKStep_Private.h"
-#import "ORKImageCaptureStepViewController.h"
 
 
-@implementation ORKImageCaptureStep
+@implementation ORKVerificationStep
 
-+ (Class)stepViewControllerClass {
-    return [ORKImageCaptureStepViewController class];
+- (Class)stepViewControllerClass {
+    return self.verificationViewControllerClass;
 }
 
-- (instancetype)initWithIdentifier:(NSString *)identifier {
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text
+   verificationViewControllerClass:(Class)verificationViewControllerClass {
+    
+    NSParameterAssert([verificationViewControllerClass isSubclassOfClass:[ORKVerificationStepViewController class]]);
+    
     self = [super initWithIdentifier:identifier];
     if (self) {
-        self.optional = YES;
+        self.title = title;
+        self.text = text;
+        _verificationViewControllerString = NSStringFromClass(verificationViewControllerClass);
+        
+        [self validateParameters];
     }
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        ORK_DECODE_IMAGE(aDecoder, templateImage);
-        ORK_DECODE_UIEDGEINSETS(aDecoder, templateImageInsets);
-        ORK_DECODE_OBJ(aDecoder, accessibilityHint);
-        ORK_DECODE_OBJ(aDecoder, accessibilityInstructions);
-    }
-    return self;
+- (Class)verificationViewControllerClass {
+    return NSClassFromString(_verificationViewControllerString);
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [super encodeWithCoder:aCoder];
-    ORK_ENCODE_IMAGE(aCoder, templateImage);
-    ORK_ENCODE_UIEDGEINSETS(aCoder, templateImageInsets);
-    ORK_ENCODE_OBJ(aCoder, accessibilityHint);
-    ORK_ENCODE_OBJ(aCoder, accessibilityInstructions);
+- (void)validateParameters {
+    [super validateParameters];
+    
+    if (!_verificationViewControllerString || !NSClassFromString(_verificationViewControllerString)) {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"Unable to find ORKVerificationStepViewController subclass."
+                                     userInfo:nil];
+    }
+}
+
+- (BOOL)allowsBackNavigation {
+    return NO;
 }
 
 + (BOOL)supportsSecureCoding {
     return YES;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        ORK_DECODE_OBJ(aDecoder, verificationViewControllerString);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    ORK_ENCODE_OBJ(aCoder, verificationViewControllerString);
+}
+
 - (instancetype)copyWithZone:(NSZone *)zone {
-    ORKImageCaptureStep *step = [super copyWithZone:zone];
-    step.templateImage = self.templateImage;
-    step.templateImageInsets = self.templateImageInsets;
-    step.accessibilityHint = self.accessibilityHint;
-    step.accessibilityInstructions = self.accessibilityInstructions;
+    ORKVerificationStep *step = [super copyWithZone:zone];
+    step->_verificationViewControllerString = [self.verificationViewControllerString copy];
     return step;
 }
 
@@ -85,10 +103,8 @@
     BOOL isParentSame = [super isEqual:object];
     
     __typeof(self) castObject = object;
-    return isParentSame && ORKEqualObjects(self.templateImage, castObject.templateImage)
-                        && UIEdgeInsetsEqualToEdgeInsets(self.templateImageInsets, castObject.templateImageInsets)
-                        && ORKEqualObjects(self.accessibilityHint, castObject.accessibilityHint)
-                        && ORKEqualObjects(self.accessibilityInstructions, castObject.accessibilityInstructions);
+    return (isParentSame &&
+            ORKEqualObjects(self.verificationViewControllerString, castObject.verificationViewControllerString));
 }
 
 @end

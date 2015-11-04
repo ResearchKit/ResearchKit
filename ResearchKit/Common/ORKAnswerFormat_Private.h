@@ -28,35 +28,48 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ResearchKit/ORKStep.h>
+
+#import <ResearchKit/ORKAnswerFormat.h>
 
 
-@interface ORKStep ()
+NS_ASSUME_NONNULL_BEGIN
 
 /**
- Returns the class that the task view controller should instantiate to display
- this step.
+ The `ORKConfirmTextAnswerFormat` class represents the answer format for questions that collect a text
+ response from the user and validates it with another text answer format.
  
- This method is used within the framework so that steps can define their
- step view controller pairing.
- 
- Outside the framework, developers should instantiate the required view
- controller in their task view controller delegate to override the task
- view controller's default.
+ An `ORKConfirmTextAnswerFormat` object produces an `ORKBooleanQuestionResult` object.
  */
-+ (Class)stepViewControllerClass;
+@interface ORKConfirmTextAnswerFormat : ORKTextAnswerFormat
 
-- (Class)stepViewControllerClass;
+- (instancetype)init NS_UNAVAILABLE;
 
-@property (nonatomic, assign) BOOL shouldTintImages;
+- (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-// Override whether to show progress for this step in the default task.
-@property (nonatomic, assign, readonly) BOOL showsProgress;
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+                         invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
-// Whether to allow navigation back from this step.
-@property (nonatomic, assign, readonly) BOOL allowsBackNavigation;
+/**
+ Returns an initialized text answer format using the original item identifier.
+ 
+ @param originalItemIdentifier    The form item identifier against which this answer item is validated.
+ 
+ @return An initialized confirm text answer format.
+ */
+- (instancetype)initWithOriginalItemIdentifier:(NSString *)originalItemIdentifier
+                                  errorMessage:(NSString *)errorMessage;
 
-@property (nonatomic, assign) BOOL useSurveyMode;
+/**
+ The identifier for the form item that the current item will be validated against.
+ */
+@property (nonatomic, copy, readonly) NSString *originalItemIdentifier;
+
+
+/**
+ The error message displayed if validation fails.
+ */
+@property (nonatomic, copy, readonly) NSString *errorMessage;
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -81,6 +81,8 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     case EligibilityTask
     case Consent
+    case AccountCreation
+    case Login
     case Passcode
     
     case Audio
@@ -136,6 +138,8 @@ enum TaskListRow: Int, CustomStringConvertible {
                 [
                     .EligibilityTask,
                     .Consent,
+                    .AccountCreation,
+                    .Login,
                     .Passcode,
                 ]),
             TaskListRowSection(title: "Active Tasks", rows:
@@ -217,7 +221,13 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .Consent:
             return NSLocalizedString("Consent-Obtaining Example", comment: "")
-            
+
+        case .AccountCreation:
+            return NSLocalizedString("Account Creation", comment: "")
+        
+        case .Login:
+            return NSLocalizedString("Login", comment: "")
+
         case .Passcode:
             return NSLocalizedString("Passcode Creation", comment: "")
             
@@ -374,6 +384,17 @@ enum TaskListRow: Int, CustomStringConvertible {
         case ConsentDocumentParticipantSignature
         case ConsentDocumentInvestigatorSignature
         
+        // Account creation task specific identifiers.
+        case AccountCreationTask
+        case RegistrationStep
+        case WaitStep
+        case VerificationStep
+        
+        // Login task specific identifiers.
+        case LoginTask
+        case LoginStep
+        case LoginWaitStep
+
         // Passcode task specific identifiers.
         case PasscodeTask
         case PasscodeStep
@@ -457,6 +478,12 @@ enum TaskListRow: Int, CustomStringConvertible {
         case .Consent:
             return consentTask
             
+        case .AccountCreation:
+            return accountCreationTask
+            
+        case .Login:
+            return loginTask
+
         case .Passcode:
             return passcodeTask
             
@@ -850,7 +877,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
         
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationExpression(domainRegex, invalidMessage:"Invalid URL: %@")
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationRegex(domainRegex, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = UIKeyboardType.URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
@@ -1010,6 +1037,106 @@ enum TaskListRow: Int, CustomStringConvertible {
             sharingConsentStep,
             reviewConsentStep
             ])
+    }
+    
+    /// This task presents the Account Creation process.
+    private var accountCreationTask: ORKTask {
+        /*
+        A registration step provides a form step that is populated with email and password fields.
+        If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
+        */
+        let registrationTitle = NSLocalizedString("Registration", comment: "")
+        let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName, .IncludeGender, .IncludeDOB];
+        let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: registrationOptions)
+        registrationStep.passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        registrationStep.passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
+        
+        /*
+        A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
+        */
+        let waitTitle = NSLocalizedString("Creating account", comment: "")
+        let waitText = NSLocalizedString("Please wait while we upload your data", comment: "")
+        let waitStep = ORKWaitStep(identifier: String(Identifier.WaitStep))
+        waitStep.title = waitTitle
+        waitStep.text = waitText
+        
+        /*
+        A verification step view controller sub class is required in order to use a verification step.
+        This class includes methods that interact with the buttons in the view and the email label.
+        Overriding these methods allows for your desired functionality.
+        */
+        class verificationViewController : ORKVerificationStepViewController {
+            override func changeEmailButtonTapped() {
+                let alertTitle = NSLocalizedString("Wrong email address?", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            override func resendEmailButtonTapped() {
+                let alertTitle = NSLocalizedString("Resend Verification Email", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            override func continueButtonTapped() {
+                self.goForward();
+            }
+            
+            override func emailAddress() -> String! {
+                let registrationStepResult = self.taskViewController?.result.resultForIdentifier(String(Identifier.RegistrationStep)) as? ORKStepResult
+                let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemIdentifierEmail) as? ORKTextQuestionResult
+                return emailQuestionResult?.textAnswer;
+            }
+        }
+        
+        let verificationTitle = NSLocalizedString("Email Verification", comment: "")
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, verificationViewControllerClass: verificationViewController.self)
+        
+        return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
+            registrationStep,
+            waitStep,
+            verificationStep
+            ])
+    }
+    
+    /// This tasks presents the login step.
+    private var loginTask: ORKTask {
+        /*
+        A login step view controller sub class is required in order to use a login step.
+        This class includes methods that interact with the buttons in the view.
+        Overriding these methods allows for your desired functionality.
+        */
+        class loginViewController : ORKLoginStepViewController {
+            override func forgotPasswordButtonTapped() {
+                let alertTitle = NSLocalizedString("Forgot password?", comment: "")
+                let alertMessage = NSLocalizedString("Button tapped", comment: "")
+                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        
+        /*
+        A login step provides a form step that is populated with email and password fields,
+        and a button for `Forgot password?`.
+        */
+        let loginTitle = NSLocalizedString("Login", comment: "")
+        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: loginViewController.self)
+        
+        /*
+        A wait step allows you to validate the data from the user login against your server before proceeding.
+        */
+        let waitTitle = NSLocalizedString("Logging in", comment: "")
+        let waitText = NSLocalizedString("Please wait while we validate your credentials", comment: "")
+        let waitStep = ORKWaitStep(identifier: String(Identifier.LoginWaitStep))
+        waitStep.title = waitTitle
+        waitStep.text = waitText
+        
+        return ORKOrderedTask(identifier: String(Identifier.LoginTask), steps: [loginStep, waitStep])
     }
     
     /// This task demonstrates the Passcode creation process.
@@ -1229,6 +1356,10 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     private var exampleDetailText: String {
         return NSLocalizedString("Additional text can go here.", comment: "")
+    }
+    
+    private var exampleEmailText: String {
+        return NSLocalizedString("jappleseed@example.com", comment: "")
     }
     
     private var loremIpsumText: String {

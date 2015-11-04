@@ -653,6 +653,27 @@ ret =
           PROPERTY(requiresSignatureImage, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(signatureDateFormatString, NSString, NSObject, YES, nil, nil),
           })),
+  ENTRY(ORKRegistrationStep,
+        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+            return [[ORKRegistrationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) options:((NSNumber *)GETPROP(dict, options)).integerValue];
+        },
+        (@{
+           PROPERTY(options, NSNumber, NSObject, NO, nil, nil)
+           })),
+   ENTRY(ORKVerificationStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
+         },
+         (@{
+            PROPERTY(verificationViewControllerString, NSString, NSObject, NO, nil, nil)
+            })),
+   ENTRY(ORKLoginStep,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKLoginStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) loginViewControllerClass:NSClassFromString(GETPROP(dict, loginViewControllerString))];
+         },
+         (@{
+            PROPERTY(loginViewControllerString, NSString, NSObject, NO, nil, nil)
+            })),
   ENTRY(ORKDeviceMotionRecorderConfiguration,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKDeviceMotionRecorderConfiguration alloc] initWithIdentifier:GETPROP(dict, identifier) frequency:((NSNumber *)GETPROP(dict, frequency)).doubleValue];
@@ -834,7 +855,7 @@ ret =
         },
         (@{
           PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(regex, NSString, NSObject, YES, nil, nil),
+          PROPERTY(validationRegex, NSString, NSObject, YES, nil, nil),
           PROPERTY(invalidMessage, NSString, NSObject, YES, nil, nil),
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),
@@ -846,6 +867,15 @@ ret =
    ENTRY(ORKEmailAnswerFormat,
          nil,
          (@{
+            })),
+   ENTRY(ORKConfirmTextAnswerFormat,
+         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
+             return [[ORKConfirmTextAnswerFormat alloc] initWithOriginalItemIdentifier:GETPROP(dict, originalItemIdentifier) errorMessage:GETPROP(dict, errorMessage)];
+         },
+         (@{
+            PROPERTY(originalItemIdentifier, NSString, NSObject, NO, nil, nil),
+            PROPERTY(errorMessage, NSString, NSObject, NO, nil, nil),
+            PROPERTY(maximumLength, NSNumber, NSObject, YES, nil, nil)
             })),
   ENTRY(ORKTimeIntervalAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
