@@ -187,10 +187,6 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
     return YES;
 }
 
-- (NSString *)stringForAnswer:(id)answer {
-    return [self.impliedAnswerFormat stringForAnswer:answer];
-}
-
 @end
 
 
@@ -314,10 +310,6 @@ NSString *ORKHKBloodTypeString(HKBloodType bloodType) {
 
 + (BOOL)supportsSecureCoding {
     return YES;
-}
-
-- (NSString *)stringForAnswer:(id)answer {
-    return [self.impliedAnswerFormat stringForAnswer:answer];
 }
 
 @end

@@ -75,6 +75,14 @@
     return _choices.count;
 }
 
+- (id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index {
+    if (index >= _choices.count) {
+        return nil;
+    }
+    
+    return _choices[index];
+}
+
 - (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
     if (index >= _choices.count) {
         return nil;

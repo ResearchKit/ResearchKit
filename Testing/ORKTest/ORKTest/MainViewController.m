@@ -3229,6 +3229,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKQuestionStep *step5 = [ORKQuestionStep questionStepWithIdentifier:@"step5" title:@"When did you wake up today?" answer:[ORKAnswerFormat timeOfDayAnswerFormat]];
     // ORKDateAnswerFormat
     ORKQuestionStep *step6 = [ORKQuestionStep questionStepWithIdentifier:@"step6" title:@"When is your birthday?" answer:[ORKAnswerFormat dateAnswerFormat]];
+    // ORKReviewStep
+    ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"embeddedReviewStep"];
+    reviewStep.title = @"Review";
+    reviewStep.text = @"Review your answers";
     // ORKNumericAnswerFormat
     ORKQuestionStep *step7 = [ORKQuestionStep questionStepWithIdentifier:@"step7" title:@"How many children do you have?" answer:[ORKAnswerFormat integerAnswerFormatWithUnit:@"children"]];
     // ORKScaleAnswerFormat
@@ -3246,7 +3250,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // ORKLocationAnswerFormat
     ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
 
-    return @[step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, step11, step12, step13, step14];
+    return @[step1, step2, step3, step4, step5, step6, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14];
 }
 
 - (id<ORKTask>)makeEmbeddedReviewTask {

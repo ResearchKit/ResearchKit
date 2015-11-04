@@ -475,21 +475,17 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 }
 
 - (NSString *)stringForAnswer:(id)answer {
-    return nil;
+    ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
+    return impliedFormat == self ? nil : [impliedFormat stringForAnswer:answer];
 }
 
-- (NSString*)stringForAnswer:(id)answer fromTextChoices:(NSArray<ORKTextChoice *> *)textChoices {  
+- (NSString*)stringForChoiceAnswer:(id)answer {
     __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
     ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     for (NSNumber *index in [helper selectedIndexesForAnswer:answer]) {
-        if ([self isKindOfClass:[ORKTextChoiceAnswerFormat class]] || [self isKindOfClass:[ORKTextScaleAnswerFormat class]] || [self isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
-            ORKTextChoice *textChoice = [helper textChoiceAtIndex:[index integerValue]];
-            [answerStrings addObject:textChoice.text];
-        } else if ([self isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
-            ORKImageChoice *imageChoice = [helper imageChoiceAtIndex:[index integerValue]];
-            if (imageChoice.text != nil) {
-                [answerStrings addObject:imageChoice.text];
-            }
+        NSString *text = [[helper answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
         }
     }
     return [answerStrings componentsJoinedByString:@"\n"];
@@ -603,7 +599,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForAnswer:answer fromTextChoices:_textChoices];
+    return [self stringForChoiceAnswer:answer];
 }
 
 @end
@@ -683,13 +679,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
-    for (ORKImageChoice *imageChoice in _imageChoices) {
-        if (imageChoice.text) {
-            [textChoices addObject:[[ORKTextChoice alloc] initWithText:imageChoice.text detailText:nil value:imageChoice.value exclusive:false]];
-        }
-    }
-    return textChoices.count > 0 ? [self stringForAnswer:answer fromTextChoices:textChoices] : nil;
+    return [self stringForChoiceAnswer:answer];
 }
 
 @end
@@ -763,7 +753,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForAnswer:answer fromTextChoices:_textChoices];
+    return [self stringForChoiceAnswer:answer];
 }
 
 @end
@@ -970,10 +960,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    ORKAnswerFormat *impliedAnswerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                     textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
-                                                   [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO) ]]];
-    return [impliedAnswerFormat stringForAnswer:@[answer]];
+    return [answer isEqual:@(YES)] ? ORKLocalizedString(@"BOOL_YES",nil) : ORKLocalizedString(@"BOOL_NO",nil);
 }
 
 @end
@@ -1962,7 +1949,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForAnswer:answer fromTextChoices:_textChoices];
+    return [self stringForChoiceAnswer:answer];
 }
 
 @end
@@ -2153,7 +2140,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [self isAnswerValid:answer] && !_secureTextEntry ? answer : nil;
 }
 
-
 @end
 
 
@@ -2335,10 +2321,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSString*)stringForAnswer:(id)answer {
     //TODO: localization
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[answer doubleValue]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    return [dateFormatter stringFromDate:date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    calendar.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
+    NSDateComponentsFormatter *formatter = [[NSDateComponentsFormatter alloc] init];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+    return [formatter stringFromDateComponents:components];
 }
 
 @end

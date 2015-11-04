@@ -31,6 +31,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ResearchKit.h>
+#import "ORKAnswerFormat_Internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSUInteger)choiceCount;
 
+- (id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
 - (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
 - (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
 
