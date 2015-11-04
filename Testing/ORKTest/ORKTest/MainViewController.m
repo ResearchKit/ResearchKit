@@ -3063,8 +3063,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Review step
 
-- (id<ORKTask>)makeEmbeddedReviewTask {
-    // ORKValuePickerAnswerFormat
+- (NSArray<ORKStep *> *)stepsForReviewTasks {
     NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
     [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Good" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
     [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Average" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
@@ -3076,7 +3075,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     [imageChoices addObject:[[ORKImageChoice alloc] initWithNormalImage:[UIImage imageNamed:@"left_hand_outline"] selectedImage:[UIImage imageNamed:@"left_hand_solid"] text:@"Left hand" value:[NSNumber numberWithInt:1]]];
     ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Which hand was injured?" answer:[ORKAnswerFormat choiceAnswerFormatWithImageChoices:imageChoices]];
     // ORKTextChoiceAnswerFormat
-    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"How do you feel today?" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:textChoices]];
+    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"How do you feel today?" answer:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices]];
     // ORKBooleanAnswerFormat
     ORKQuestionStep *step4 = [ORKQuestionStep questionStepWithIdentifier:@"step4" title:@"Are you at least 18 years old?" answer:[ORKAnswerFormat eligibilityAnswerFormat]];
     // ORKTimeOfDayAnswerFormat
@@ -3099,11 +3098,18 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKQuestionStep *step13 = [ORKQuestionStep questionStepWithIdentifier:@"step13" title:@"How many hours did you sleep last night?" answer:[ORKAnswerFormat timeIntervalAnswerFormat]];
     // ORKLocationAnswerFormat
     ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
-    
+
+    return @[step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, step11, step12, step13, step14];
+}
+
+- (id<ORKTask>)makeEmbeddedReviewTask {
+    // ORKValuePickerAnswerFormat
+    NSMutableArray<ORKStep *> *steps = [[NSMutableArray alloc] initWithArray:[self stepsForReviewTasks]];
     ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"reviewStep"];
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers";
-    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewTaskIdentifier steps:@[step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, step11, step12, step13, step14, reviewStep]];
+    [steps addObject:reviewStep];
+    ORKOrderedTask *task = [[ORKOrderedTask alloc] initWithIdentifier:EmbeddedReviewTaskIdentifier steps:steps];
     return task;
 }
 
@@ -3112,10 +3118,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 }
 
 - (id<ORKTask>)makeStandaloneReviewTask {
-    ORKQuestionStep *step1 = [ORKQuestionStep questionStepWithIdentifier:@"step1" title:@"Do you feel sad?" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKQuestionStep *step2 = [ORKQuestionStep questionStepWithIdentifier:@"step2" title:@"Do you feel happy?" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKQuestionStep *step3 = [ORKQuestionStep questionStepWithIdentifier:@"step3" title:@"Do you feel angry?" answer:[ORKAnswerFormat booleanAnswerFormat]];
-    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:@[step1, step2, step3] resultSource:_embeddedReviewTaskResult];
+    NSMutableArray<ORKStep *> *steps = [[NSMutableArray alloc] initWithArray:[self stepsForReviewTasks]];
+    ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:steps resultSource:_embeddedReviewTaskResult];
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers from your last survey";
     return [[ORKOrderedTask alloc] initWithIdentifier:StandaloneReviewTaskIdentifier steps:@[reviewStep]];

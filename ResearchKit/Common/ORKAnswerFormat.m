@@ -481,7 +481,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
     ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     for (NSNumber *index in [helper selectedIndexesForAnswer:answer]) {
-        if ([self isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
+        if ([self isKindOfClass:[ORKTextChoiceAnswerFormat class]] || [self isKindOfClass:[ORKTextScaleAnswerFormat class]] || [self isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKTextChoice *textChoice = [helper textChoiceAtIndex:[index integerValue]];
             [answerStrings addObject:textChoice.text];
         } else if ([self isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
@@ -1350,9 +1350,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString*)stringForAnswer:(id)answer {
     if ([self isAnswerValid:answer]) {
+        //TODO: localization
         NSNumberFormatter *formatter = [self makeNumberFormatter];
-        [formatter setPositiveSuffix:self.unit];
-        [formatter setNegativeSuffix:self.unit];
+        [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
+        [formatter setNegativeSuffix:[NSString stringWithFormat:@"%@ ", self.unit]];
         return [formatter stringFromNumber:answer];
     } else {
         return nil;

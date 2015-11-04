@@ -45,7 +45,8 @@
     if (self) {
         NSArray *validClasses = @[[ORKValuePickerAnswerFormat class],
                                   [ORKTextChoiceAnswerFormat class],
-                                  [ORKImageChoiceAnswerFormat class]];
+                                  [ORKImageChoiceAnswerFormat class],
+                                  [ORKTextScaleAnswerFormat class]];
         
         if (![validClasses containsObject:[answerFormat class]]) {
             @throw [NSException exceptionWithName:NSGenericException reason:@"Not a valid answerformat for this helper." userInfo:nil];
@@ -62,6 +63,9 @@
         } else if ([answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
             ORKImageChoiceAnswerFormat *iaf = (ORKImageChoiceAnswerFormat *)answerFormat;
             _choices = iaf.imageChoices;
+        } else if ([answerFormat isKindOfClass:[ORKTextScaleAnswerFormat class]]) {
+            ORKTextScaleAnswerFormat *textScaleAnswerFormat = (ORKTextScaleAnswerFormat *)answerFormat;
+            _choices = textScaleAnswerFormat.textChoices;
         }
     }
     return self;
