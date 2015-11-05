@@ -38,10 +38,10 @@ ORK_EXTERN NSBundle *ORKBundle() ORK_AVAILABLE_DECL;
 ORK_EXTERN NSBundle *ORKDefaultLocaleBundle();
 
 #define ORKDefaultLocalizedValue(key) \
-[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:nil]
+[ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
 
 #define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:nil]
+[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
 
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]
