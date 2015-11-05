@@ -16,9 +16,7 @@ create apps for medical research or for other research projects.
 Getting More Information
 ========================
 
-* Join [researchkit-users](https://lists.apple.com/mailman/listinfo/researchkit-users) for discussing uses of the ResearchKit framework and related projects.
-* Join [researchkit-dev](https://lists.apple.com/mailman/listinfo/researchkit-dev) for discussing ongoing work to improve and expand the framework.
-* Or [contact us](https://developer.apple.com/contact/researchkit/).
+* Join the [ResearchKit Forum](https://forums.developer.apple.com/community/researchkit) for discussing uses of the ResearchKit framework and related projects.
 
 Use Cases
 ===========
