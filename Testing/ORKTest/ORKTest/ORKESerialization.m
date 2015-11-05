@@ -1249,7 +1249,7 @@ static NSArray *classEncodingsForClass(Class c) {
 
 static id objectForJsonObject(id input, Class expectedClass, ORKESerializationJSONToObjectBlock converterBlock) {
     id output = nil;
-    if (converterBlock != nil) {NSLog(@"!!!!converterBlock");
+    if (converterBlock != nil) {
         input = converterBlock(input);
     }
     
