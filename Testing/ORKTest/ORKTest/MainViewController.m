@@ -52,6 +52,7 @@ DefineStringKey(VerificationTaskIdentifier);
 DefineStringKey(DatePickingTaskIdentifier);
 DefineStringKey(ImageCaptureTaskIdentifier);
 DefineStringKey(ImageChoicesTaskIdentifier);
+DefineStringKey(LocationTaskIdentifier);
 DefineStringKey(ScalesTaskIdentifier);
 DefineStringKey(MiniFormTaskIdentifier);
 DefineStringKey(OptionalFormTaskIdentifier);
@@ -335,6 +336,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                            @"Date Pickers",
                            @"Image Capture",
                            @"Image Choices",
+                           @"Location",
                            @"Scale",
                            @"Mini Form",
                            @"Optional Form",
@@ -559,8 +561,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         return [self makeCustomNavigationItemTask];
     } else if ([identifier isEqualToString:CreatePasscodeTaskIdentifier]) {
         return [self makeCreatePasscodeTask];
-    } if ([identifier isEqualToString:WaitTaskIdentifier]) {
+    } else if ([identifier isEqualToString:WaitTaskIdentifier]) {
         return [self makeWaitingTask];
+    }else if ([identifier isEqualToString:LocationTaskIdentifier]) {
+        return [self makeLocationTask];
     }
 
     return nil;
@@ -1063,11 +1067,8 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        /*
-         An example of a location question.
-         */
-        ORKLocationAnswerFormat *format = [ORKAnswerFormat locationAnswerFormat];
-        ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"qid_location" title:@"Where are you right now?" answer:format];
+        ORKCompletionStep *step = [[ORKCompletionStep alloc] initWithIdentifier:@"completion"];
+        step.title = @"Survey Complete";
         [steps addObject:step];
     }
 
@@ -3743,6 +3744,41 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
     } else {
         [viewController goForward];
     }
+}
+
+#pragma mark - Location Task
+
+- (IBAction)locationButtonTapped:(id)sender {
+    [self beginTaskWithIdentifier:LocationTaskIdentifier];
+}
+
+- (ORKOrderedTask *)makeLocationTask {
+    NSMutableArray *steps = [[NSMutableArray alloc] init];
+    
+    ORKInstructionStep *step1 = [[ORKInstructionStep alloc] initWithIdentifier:@"locationTask.step1"];
+    step1.title = @"Location Survey";
+    [steps addObject:step1];
+    
+    // Location question with current location observing on
+    ORKQuestionStep *step2 = [[ORKQuestionStep alloc] initWithIdentifier:@"locationTask.step2"];
+    step2.title = @"Where are you right now?";
+    step2.answerFormat = [[ORKLocationAnswerFormat alloc] init];
+    [steps addObject:step2];
+    
+    // Location question with current location observing off
+    ORKQuestionStep *step3 = [[ORKQuestionStep alloc] initWithIdentifier:@"locationTask.step3"];
+    step3.title = @"Where is your home?";
+    ORKLocationAnswerFormat* locationAnswerFormat  = [[ORKLocationAnswerFormat alloc] init];
+    locationAnswerFormat.useCurrentLocation= NO;
+    step3.answerFormat = locationAnswerFormat;
+    [steps addObject:step3];
+    
+    ORKCompletionStep *step4 = [[ORKCompletionStep alloc] initWithIdentifier:@"locationTask.step4"];
+    step4.title = @"Survey Complete";
+    [steps addObject:step4];
+    
+    ORKOrderedTask *locationTask = [[ORKOrderedTask alloc] initWithIdentifier:LocationTaskIdentifier steps:steps];
+    return locationTask;
 }
 
 @end

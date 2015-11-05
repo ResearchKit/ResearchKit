@@ -39,22 +39,37 @@
 
 #import "ORKLocationSelectionView.h"
 #import <MapKit/MapKit.h>
-#import <AddressBookUI/AddressBookUI.h>
 #import "ORKAnswerTextField.h"
 #import "ORKHelpers.h"
 #import "ORKAnswerFormat_Internal.h"
-#import "ORKPlacemark.h"
 #import "ORKSkin.h"
+#import "ORKResult_Private.h"
 
 
-static const CGFloat HorizontalMapMargin = 15.0;
-static const CGFloat HorizontalTextFieldMargin = 20.0;
+static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 
 @interface ORKLocationSelectionView () <UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSLayoutConstraint *mapViewHeightConstraint;
 @property (nonatomic, strong, readwrite) ORKAnswerTextField *textField;
 @property (nonatomic, strong) MKMapView *mapView;
+
+@end
+
+
+@interface CLPlacemark (ork_addressLine)
+
+@property (nonatomic, copy, readonly) NSString* ork_addressLine;
+
+@end
+
+
+@implementation CLPlacemark (ork_addressLine)
+
+- (NSString *)ork_addressLine {
+     return [self.addressDictionary[FormattedAddressLines] componentsJoinedByString:@" "];
+}
+
 @end
 
 
@@ -65,14 +80,25 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     BOOL _setInitialCoordinateRegion;
     CGFloat _mapHorizontalMargin;
     CGFloat _textFieldHorizontalMargin;
+    
+    UIView *_seperator1;
+    UIView *_seperator2;
 }
 
-- (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation {
++ (CGFloat)textFieldHeight {
+    return ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, nil);
+}
+
+- (instancetype)initWithFormMode:(BOOL)formMode
+              useCurrentLocation:(BOOL)useCurrentLocation
+                   leadingMargin:(CGFloat)leadingMargin; {
     
-    if (openMap) {
-        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
+    
+    
+    if (NO == formMode) {
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + LocationSelectionViewTextFieldVerticalMargin + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {
-        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin))];
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight])];
     }
     
     if (self) {
@@ -85,22 +111,30 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
         
         _mapView = [[MKMapView alloc] init];
         _mapView.delegate = self;
-        if (!edgeToEdgePresentation) {
-            _mapView.layer.cornerRadius = 3;
-            _mapView.layer.borderColor = [UIColor colorWithRed:(204.0/255.0) green:(204.0/255.0) blue:(204.0/255.0) alpha:.75].CGColor;
-            _mapView.layer.borderWidth = 1.0 / [UIScreen mainScreen].scale;
-        }
 
-        _useCurrentLocation = use;
-        _textFieldHorizontalMargin = edgeToEdgePresentation ? HorizontalTextFieldMargin : 0.0;
-        _mapHorizontalMargin = edgeToEdgePresentation ? 0.0 : HorizontalMapMargin;
+        _useCurrentLocation = useCurrentLocation;
+        _textFieldHorizontalMargin = leadingMargin;
+        _mapHorizontalMargin = formMode ? leadingMargin : 0;
         
         [self addSubview:_textField];
+        
+        if (NO == formMode) {
+            // For Question step
+            _seperator1 = [[UIView alloc] init];
+            _seperator1.backgroundColor = [UIColor ork_midGrayTintColor];
+            _seperator2 = [[UIView alloc] init];
+            _seperator2.backgroundColor = [UIColor ork_midGrayTintColor];
+            [self addSubview:_seperator1];
+            [self addSubview:_seperator2];
+        }
+        
         [self setUpConstraints];
 
-        if (openMap) {
+        if (NO == formMode) {
             [self showMapViewIfNecessary];
         }
+        
+        
     }
     
     return self;
@@ -112,11 +146,28 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     NSDictionary *views = NSDictionaryOfVariableBindings(_textField);
     ORKEnableAutoLayoutForViews([views allValues]);
     
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:LocationSelectionViewTextFieldHeight]];
-    
     NSDictionary *metrics = @{@"horizontalMargin": @(_textFieldHorizontalMargin)};
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_textField]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
+    if (_seperator1) {
+        _seperator1.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator1);
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_seperator1 attribute:NSLayoutAttributeTop multiplier:1.0 constant:-1.0/[UIScreen mainScreen].scale]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_seperator1]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:seperators]];
+    }
+    
+    if (_seperator2) {
+        _seperator2.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator2);
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_seperator2 attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_seperator2]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:seperators]];
+    }
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:[self.class textFieldHeight]]];
+    
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_textField]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:views]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -146,7 +197,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = LocationSelectionViewTextFieldHeight + (2 * LocationSelectionViewTextFieldVerticalMargin) + (_mapView.superview == nil ? 0.0 : ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
+    CGFloat height = [self.class textFieldHeight] + (_mapView.superview == nil ? 0.0 : LocationSelectionViewTextFieldVerticalMargin + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
     return CGSizeMake(40, height);
 }
 
@@ -159,17 +210,14 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     ORKEnableAutoLayoutForViews(@[_mapView]);
     [self addSubview:_mapView];
     
-    [self loadCurrentLocationIfNecessary];
-    
-    if (_answer) {
-        [self setAnswer:_answer];
-    }
-    
     NSMutableArray *constraints = [NSMutableArray new];
     
     NSDictionary *metrics = @{@"horizontalMargin": @(_mapHorizontalMargin)};
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mapView]-(horizontalMargin)-|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_mapView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-LocationSelectionViewTextFieldVerticalMargin]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeBottom multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
+    
+    
+    
     _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
     [constraints addObject:_mapViewHeightConstraint];
     
@@ -207,16 +255,16 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            [self notifyDelegateOfError:error fromGeocoder:YES];
+            [self notifyDelegateOfError:error];
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:placemark];
+            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark userInput:string]];
         }
     }];
 }
 
-- (void)reverseGeocodeAndDisplay:(CLLocation *)location {
+- (void)reverseGeocodeAndDisplay:(ORKLocation *)location {
     
     if (location == nil) {
         [self setAnswer:ORKNullAnswerValue()];
@@ -225,58 +273,53 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     __weak __typeof__(self) weakSelf = self;
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+    CLLocation *cllocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+    [geocoder reverseGeocodeLocation:cllocation completionHandler:^(NSArray *placemarks, NSError *error) {
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
         if (error) {
-            [self notifyDelegateOfError:error fromGeocoder:YES];
+            [self notifyDelegateOfError:error];
             [strongSelf setAnswer:ORKNullAnswerValue()];
         } else {
             CLPlacemark *placemark = [placemarks lastObject];
-            [strongSelf setAnswer:placemark];
+            [strongSelf setAnswer:[[ORKLocation alloc] initWithPlacemark:placemark
+                                                               userInput:location.userInput ? : placemark.ork_addressLine]
+                        updateMap:YES];
         }
     }];
 }
 
-- (void)setAnswer:(id)answer {
+- (void)setAnswer:(ORKLocation *)answer {
+    [self setAnswer:answer updateMap:YES];
+}
+
+- (void)setAnswer:(ORKLocation *)answer updateMap:(BOOL)updateMap {
     
-    [_mapView removeAnnotations:_mapView.annotations];
-    
-    if ([[answer class] isSubclassOfClass:[CLPlacemark class]]) {
-        _answer = [[ORKPlacemark alloc] initWithPlacemark:answer];
-    } else {
-        _answer = answer == ORKNullAnswerValue() ? ORKNullAnswerValue() : nil;
-    }
+    BOOL isAnswerClassORKLocation = [[answer class] isSubclassOfClass:[ORKLocation class]];
+    _answer = (isAnswerClassORKLocation || answer == ORKNullAnswerValue()) ? answer : nil;
     
     if (_answer) {
         _userLocationNeedsUpdate = NO;
+    } else {
+         [self loadCurrentLocationIfNecessary];
     }
     
-    if ([[_answer class] isSubclassOfClass:[CLPlacemark class]]) {
-        ORKPlacemark *placemarkAnswer = [[ORKPlacemark alloc] initWithPlacemark:answer];
-        [_mapView addAnnotation:placemarkAnswer];
+    ORKLocation *location = isAnswerClassORKLocation ? (ORKLocation *)_answer : nil;
+    
+    if (location) {
         
-        const float spanX = 0.00725;
-        const float spanY = 0.00725;
-        MKCoordinateRegion region;
-        region.center = placemarkAnswer.location.coordinate;
-        region.span = MKCoordinateSpanMake(spanX, spanY);
-        if (!_setInitialCoordinateRegion) {
-            _setInitialCoordinateRegion = YES;
-            _initalCoordinateRegion = _mapView.region;
-        }
-        [_mapView setRegion:region animated:YES];
-        
-        if (placemarkAnswer.addressDictionary) {
-            _textField.text = ABCreateStringWithAddressDictionary(placemarkAnswer.addressDictionary, NO);
-        } else {
-            CLLocationCoordinate2D coordinate = placemarkAnswer.location.coordinate;
-            CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+        if (!location.userInput || !location.region |!location.addressDictionary) {
+            // redo geo decoding if any of them is missing
             [self reverseGeocodeAndDisplay:location];
+            return;
         }
-    } else {
-        if (_setInitialCoordinateRegion) {
-            [_mapView setRegion:_initalCoordinateRegion animated:YES];
+        
+        if (location.userInput) {
+            _textField.text = location.userInput;
         }
+    }
+    
+    if (updateMap) {
+        [self updateMapWithLocation:location];
     }
     
     if ([_delegate respondsToSelector:@selector(locationSelectionViewDidChange:)]) {
@@ -284,7 +327,33 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     }
 }
 
-- (void)notifyDelegateOfError:(NSError *)error fromGeocoder:(BOOL)fromGeocoder{
+- (void)updateMapWithLocation:(ORKLocation *)location {
+    
+    MKPlacemark *placemark = location ? [[MKPlacemark alloc] initWithCoordinate:location.coordinate addressDictionary:nil] : nil;
+    
+    [_mapView removeAnnotations:_mapView.annotations];
+    
+    if (placemark) {
+        [_mapView addAnnotation:placemark];
+        CLLocationDistance span = MAX(200, location.region.radius);
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(location.region.center, span, span);
+        [self setMapRegion:region];
+    } else {
+        if (_setInitialCoordinateRegion) {
+            [self setMapRegion:_initalCoordinateRegion];
+        }
+    }
+}
+
+- (void)setMapRegion:(MKCoordinateRegion)region {
+    if (!_setInitialCoordinateRegion) {
+        _setInitialCoordinateRegion = YES;
+        _initalCoordinateRegion = _mapView.region;
+    }
+    [_mapView setRegion:region animated:YES];
+}
+
+- (void)notifyDelegateOfError:(NSError *)error {
     NSString *title = ORKLocalizedString(@"LOCATION_ERROR_TITLE", @"");
     NSString *message = nil;
     
@@ -298,11 +367,7 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
             message = ORKLocalizedString(@"LOCATION_ERROR_MESSAGE_DENIED", @"");
             break;
         case kCLErrorNetwork:
-            if (!fromGeocoder) {
-                message = ORKLocalizedString(@"LOCATION_ERROR_NETWORK", @"");
-            } else {
-                message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
-            }
+            message = ORKLocalizedString(@"LOCATION_ERROR_GEOCODE_NETWORK", @"");
             break;
         case kCLErrorGeocodeFoundNoResult:
         case kCLErrorGeocodeFoundPartialResult:
@@ -326,24 +391,20 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    [self notifyDelegateOfError:error fromGeocoder:NO];
-}
-
 #pragma mark MKMapViewDelegate
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     if (_userLocationNeedsUpdate) {
-        _textField.text = @"";
-        MKCoordinateRegion reigon = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 1000, 1000);
-        [_mapView setRegion:reigon animated:YES];
-        [self reverseGeocodeAndDisplay:userLocation.location];
+        [self reverseGeocodeAndDisplay:[[ORKLocation alloc] initWithCoordinate:userLocation.location.coordinate
+                                                                        region:nil
+                                                                     userInput:nil
+                                                             addressDictionary:@{}]];
         _userLocationNeedsUpdate = NO;
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
-    [self notifyDelegateOfError:error fromGeocoder:NO];
+    // Be quiet if map cannot find user current location
 }
 
 #pragma mark UITextFieldDelegate
@@ -360,6 +421,15 @@ static const CGFloat HorizontalTextFieldMargin = 20.0;
     if ([_delegate respondsToSelector:@selector(locationSelectionViewDidEndEditing:)]) {
         [_delegate locationSelectionViewDidEndEditing:self];
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // Clear answer to prevent user continue with invalid answer.
+    if ( NO == ORKIsAnswerEmpty(_answer) ) {
+        [self setAnswer:ORKNullAnswerValue() updateMap:NO];
+    }
+    
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
