@@ -38,8 +38,6 @@
 #import "ORKAnswerFormat_Private.h"
 #import "ORKHealthAnswerFormat.h"
 #import "ORKResult_Private.h"
-#import "ORKPlacemark.h"
-#import <AddressBookUI/AddressBookUI.h>
 #import "ORKChoiceAnswerFormatHelper.h"
 
 
@@ -1116,7 +1114,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         default:
             break;
     }
-    //TODO: localization
     dfm = [dfm copy];
     dfm.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     return dfm;
@@ -1312,7 +1309,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.maximumFractionDigits = NSDecimalNoScale;
     numberFormatter.usesGroupingSeparator = NO;
-    //TODO: localization
     return numberFormatter;
 }
 
@@ -1338,7 +1334,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (NSString*)stringForAnswer:(id)answer {
     if ([self isAnswerValid:answer]) {
-        //TODO: localization
         NSNumberFormatter *formatter = [self makeNumberFormatter];
         [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
         [formatter setNegativeSuffix:[NSString stringWithFormat:@"%@ ", self.unit]];
@@ -1478,7 +1473,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (!_numberFormatter) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        //TODO: localization
         _numberFormatter.locale = [NSLocale autoupdatingCurrentLocale];
         _numberFormatter.maximumFractionDigits = 0;
     }
@@ -1686,7 +1680,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _numberFormatter = [[NSNumberFormatter alloc] init];
         _numberFormatter.numberStyle = ORKNumberFormattingStyleConvert(_numberStyle);
         _numberFormatter.maximumFractionDigits = _maximumFractionDigits;
-        //TODO: localization
     }
     return _numberFormatter;
 }
@@ -2319,7 +2312,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    //TODO: localization
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[answer doubleValue]];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     calendar.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
@@ -2384,7 +2376,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString *)stringForAnswer:(id)answer {
-    return ABCreateStringWithAddressDictionary(((ORKPlacemark *)answer).addressDictionary, NO);
+    ORKLocation *location = answer;
+    // access address dictionary directly since 'ABCreateStringWithAddressDictionary:' is deprecated in iOS9
+    NSArray<NSString *> *addressLines = [location.addressDictionary valueForKey:@"FormattedAddressLines"];
+    return addressLines ? [addressLines componentsJoinedByString:@"\n"] :
+        MKStringFromMapPoint(MKMapPointForCoordinate(location.coordinate));
 }
 
 @end

@@ -197,8 +197,6 @@ void ORKEnableAutoLayoutForViews(NSArray *views) {
     }];
 }
 
-//TODO: localization
-
 NSDateFormatter *ORKResultDateTimeFormatter() {
     static NSDateFormatter *dateTimeformatter = nil;
     static dispatch_once_t onceToken;
@@ -301,8 +299,6 @@ NSCalendar *ORKTimeOfDayReferenceCalendar() {
     });
     return calendar;
 }
-
-//TODO: localization
 
 NSString *ORKTimeOfDayStringFromComponents(NSDateComponents *dateComponents) {
     static NSDateComponentsFormatter *timeOfDayFormatter = nil;

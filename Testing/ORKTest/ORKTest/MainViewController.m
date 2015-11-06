@@ -3212,6 +3212,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 #pragma mark - Review step
 
 - (NSArray<ORKStep *> *)stepsForReviewTasks {
+    // ORKInstructionStep
+    ORKInstructionStep *instructionStep = [[ORKInstructionStep alloc] initWithIdentifier:@"instructionStep"];
+    instructionStep.title = @"Review Task";
+    instructionStep.text = @"The task demonstrates the usage of ORKReviewStep within a task";
     NSMutableArray<ORKTextChoice *> *textChoices = [[NSMutableArray alloc] init];
     [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Good" detailText:@"" value:[NSNumber numberWithInt:0] exclusive:NO]];
     [textChoices addObject:[[ORKTextChoice alloc] initWithText:@"Average" detailText:@"" value:[NSNumber numberWithInt:1] exclusive:NO]];
@@ -3230,6 +3234,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKQuestionStep *step5 = [ORKQuestionStep questionStepWithIdentifier:@"step5" title:@"When did you wake up today?" answer:[ORKAnswerFormat timeOfDayAnswerFormat]];
     // ORKDateAnswerFormat
     ORKQuestionStep *step6 = [ORKQuestionStep questionStepWithIdentifier:@"step6" title:@"When is your birthday?" answer:[ORKAnswerFormat dateAnswerFormat]];
+    // ORKFormStep
+    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"formStep" title:@"Survey" text:@"Please answer the following set of questions"];
+    ORKFormItem *formItem1 = [[ORKFormItem alloc] initWithIdentifier:@"formItem1" text:@"How do you feel today?" answerFormat:[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice textChoices:textChoices]];
+    ORKFormItem *formItem2 = [[ORKFormItem alloc] initWithIdentifier:@"formItem2" text:@"Are you pregnant?" answerFormat:[ORKAnswerFormat booleanAnswerFormat]];
+    formStep.formItems = @[formItem1, formItem2];
     // ORKReviewStep
     ORKReviewStep *reviewStep = [ORKReviewStep embeddedReviewStepWithIdentifier:@"embeddedReviewStep"];
     reviewStep.title = @"Review";
@@ -3251,7 +3260,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // ORKLocationAnswerFormat
     ORKQuestionStep *step14 = [ORKQuestionStep questionStepWithIdentifier:@"step14" title:@"Where do you live?" answer:[ORKAnswerFormat locationAnswerFormat]];
 
-    return @[step1, step2, step3, step4, step5, step6, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14];
+    return @[instructionStep, step1, step2, step3, step4, step5, step6, formStep, reviewStep, step7, step8, step9, step10, step11, step12, step13, step14];
 }
 
 - (id<ORKTask>)makeEmbeddedReviewTask {

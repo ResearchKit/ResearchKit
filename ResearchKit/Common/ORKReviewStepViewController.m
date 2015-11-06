@@ -236,12 +236,12 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
                 NSString *formItemTextString = formItem.text;
                 NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
                 if (formItemTextString && formItemAnswerString) {
-                    [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@": "]];
+                    [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
                 }
             }
         }
     }
-    return [answerStrings componentsJoinedByString:@"\n"];
+    return [answerStrings componentsJoinedByString:@"\n\n"];
 }
 
 #pragma mark UITableViewDelegate
