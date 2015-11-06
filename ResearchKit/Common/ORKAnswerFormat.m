@@ -2344,16 +2344,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return self;
 }
 
-- (BOOL)isAnswerValid:(id)answer {
-    BOOL isValid = [super isAnswerValid:answer];
-    
-    if (![[ORKPlacemark alloc] initWithPlacemark:answer]) {
-        isValid = NO;
-    }
-    
-    return isValid;
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {

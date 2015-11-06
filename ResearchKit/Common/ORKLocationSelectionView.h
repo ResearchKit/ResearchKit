@@ -8,6 +8,7 @@
  Copyright (c) 2015, Richard Thomas, Quintiles Inc.
  Copyright (c) 2015, Shelby Brooks, Quintiles Inc.
  Copyright (c) 2015, Steve Cadwallader, Quintiles Inc.
+ Copyright (c) 2015, Apple Inc. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
@@ -40,8 +41,7 @@
 #import <UIKit/UIKit.h>
 
 
-static const CGFloat LocationSelectionViewTextFieldHeight = 21.0;
-static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 11.5;
+static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 10;
 
 
 @class ORKLocationSelectionView;
@@ -79,13 +79,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) ORKAnswerTextField *textField;
 
-- (instancetype)initWithOpenMap:(BOOL)openMap useCurrentLocation:(BOOL)use edgeToEdgePresentation:(BOOL)edgeToEdgePresentation;
+- (instancetype)initWithFormMode:(BOOL)formMode
+              useCurrentLocation:(BOOL)useCurrentLocation
+                   leadingMargin:(CGFloat)leadingMargin;
 
 - (void)setPlaceholderText:(nullable NSString *)text;
 
 - (void)setTextColor:(UIColor *)color;
 
 - (void)showMapViewIfNecessary;
+
++ (CGFloat)textFieldHeight;
 
 @end
 

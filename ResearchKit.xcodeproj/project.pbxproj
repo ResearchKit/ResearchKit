@@ -2205,8 +2205,6 @@
 			children = (
 				BC4194271AE8453A00073D6B /* ORKObserver.h */,
 				BC4194281AE8453A00073D6B /* ORKObserver.m */,
-				CAA870CE1BCBF23700D0FC28 /* ORKPlacemark.h */,
-				CAA870CF1BCBF23700D0FC28 /* ORKPlacemark.m */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -2459,7 +2457,6 @@
 				86C40DF61A8D7C5C00081FAC /* ORKConsentSignatureController.h in Headers */,
 				86C40CDC1A8D7C5C00081FAC /* ORKTintedImageView.h in Headers */,
 				86C40D281A8D7C5C00081FAC /* ORKFormTextView.h in Headers */,
-				CAA870D01BCBF23700D0FC28 /* ORKPlacemark.h in Headers */,
 				86C40DEE1A8D7C5C00081FAC /* UIResponder+ResearchKit.h in Headers */,
 				86C40E041A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.h in Headers */,
 				25ECC09B1AFBD8B300F3D63B /* ORKReactionTimeViewController.h in Headers */,
@@ -2807,7 +2804,6 @@
 				86C40DB81A8D7C5C00081FAC /* ORKSurveyAnswerCellForText.m in Sources */,
 				86C40CF01A8D7C5C00081FAC /* ORKAnswerTextView.m in Sources */,
 				86C40D3E1A8D7C5C00081FAC /* ORKImageChoiceLabel.m in Sources */,
-				CAA870D11BCBF23700D0FC28 /* ORKPlacemark.m in Sources */,
 				250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */,
 				86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */,
 				BCD192E81B81243900FCC08A /* ORKPieChartLegendView.m in Sources */,

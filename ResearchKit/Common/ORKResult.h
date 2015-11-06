@@ -32,6 +32,7 @@
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKDefines.h>
+#import <CoreLocation/CoreLocation.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,7 +49,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKConsentSignatureResult;
 @class ORKStepResult;
 @class ORKToneAudiometrySample;
-@class ORKPlacemark;
 
 
 /**
@@ -1254,6 +1254,36 @@ ORK_CLASS_AVAILABLE
 
 
 /**
+ The `ORKLocation` class represents the location addess obtained from a locaton question.
+ */
+@interface ORKLocation : NSObject <NSCopying, NSSecureCoding>
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ The geographical coordinate information.
+ */
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
+/**
+ The region describes the size of the placemark of the location.
+ */
+@property (nonatomic, copy, readonly) CLCircularRegion *region;
+
+/**
+ The human readable address typed in by user.
+ */
+@property (nonatomic, copy, readonly) NSString *userInput;
+
+/**
+ The address dicitonary for this coordinate from MapKit.
+ */
+@property (nonatomic, copy, readonly) NSDictionary *addressDictionary;
+
+@end
+
+
+/**
  The `ORKLocationQuestionResult` class represents the result of a question or form item that asks for a location (`ORKLocationAnswerFormat`).
  
  A Location question result is produced by the task view controller when it presents a question or form
@@ -1267,9 +1297,9 @@ ORK_CLASS_AVAILABLE
 @interface ORKLocationQuestionResult : ORKQuestionResult
 
 /**
- The placemark representing the coordinate and address of a specific location.
+ The answer representing the coordinate and the address of a specific location.
  */
-@property (nonatomic, copy, nullable) ORKPlacemark *locationAnswer;
+@property (nonatomic, copy, nullable) ORKLocation *locationAnswer;
 
 @end
 

@@ -198,7 +198,10 @@ ORK_MAKE_TEST_INIT(ORKAccelerometerRecorderConfiguration, ^{return [super initWi
 ORK_MAKE_TEST_INIT(ORKHealthQuantityTypeRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKAudioRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
 ORK_MAKE_TEST_INIT(ORKDeviceMotionRecorderConfiguration, ^{ return [super initWithIdentifier:@"testRecorder"];});
-ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) addressDictionary:nil];});
+ORK_MAKE_TEST_INIT(ORKLocation, (^{
+    ORKLocation *location = [self initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}];
+    return location;
+}));
 
 @interface ORKJSONSerializationTests : XCTestCase <NSKeyedUnarchiverDelegate>
 
@@ -418,8 +421,8 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
                             //[instance setValue:[HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType] forKey:p.propertyName];
                         } else if (p.propertyClass == [NSCalendar class]) {
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
-                        } else if (p.propertyClass == [ORKPlacemark class]) {
-                            [instance setValue:[[ORKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) addressDictionary:nil] forKey:p.propertyName];
+                        } else if (p.propertyClass == [ORKLocation class]) {
+                            [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
                         } else {
                             id itemInstance = [self instanceForClass:p.propertyClass];
                             [instance setValue:itemInstance forKey:p.propertyName];
@@ -524,8 +527,10 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
         [instance setValue:index?[NSCalendar calendarWithIdentifier:NSCalendarIdentifierChinese]:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
     } else if (p.propertyClass == [NSTimeZone class]) {
         [instance setValue:index?[NSTimeZone timeZoneWithName:[NSTimeZone knownTimeZoneNames][0]]:[NSTimeZone timeZoneForSecondsFromGMT:1000] forKey:p.propertyName];
-    } else if (p.propertyClass == [ORKPlacemark class]) {
-        [instance setValue:[[ORKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(index?2.0:3.0, 3.0) addressDictionary:nil] forKey:p.propertyName];
+    } else if (p.propertyClass == [ORKLocation class]) {
+        [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
+    } else if (p.propertyClass == [CLCircularRegion class]) {
+        [instance setValue:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(index? 2.0 : 3.0, 3.0) radius:100.0 identifier:@"identifier"] forKey:p.propertyName];
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
@@ -684,7 +689,7 @@ ORK_MAKE_TEST_INIT(ORKPlacemark, ^{return [self initWithCoordinate:CLLocationCoo
          (c == [ORKImageChoice class]) ||
          ([c isSubclassOfClass:[ORKAnswerFormat class]]) ||
          ([c isSubclassOfClass:[ORKRecorderConfiguration class]]) ||
-         ([c isSubclassOfClass:[ORKPlacemark class]]))
+         (c == [ORKLocation class]))
     ) {
         return [[c alloc] orktest_init];
     }
