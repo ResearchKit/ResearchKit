@@ -376,6 +376,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                        ];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [_collectionView reloadData];
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(self.view.bounds.size.width, 22.0);  // Table view header height
 }
@@ -554,7 +558,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
                                                             timeLimit:300.0
                                                               options:ORKPredefinedTaskOptionNone];
     } else if ([identifier isEqualToString:NavigableOrderedTaskIdentifier]) {
-        return [self makeNavigableOrderedTask];
+        return [TaskFactory makeNavigableOrderedTask:NavigableOrderedTaskIdentifier];
     } else if ([identifier isEqualToString:NavigableLoopTaskIdentifier]) {
         return [self makeNavigableLoopTask];
     } else if ([identifier isEqualToString:CustomNavigationItemTaskIdentifier]) {
@@ -2837,170 +2841,6 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     UIView *superview = self.view.superview;
     [self.view removeFromSuperview];
     [superview addSubview:self.view];
-}
-
-#pragma mark - Navigable Ordered Task
-
-- (id<ORKTask>)makeNavigableOrderedTask {
-    NSMutableArray *steps = [NSMutableArray new];
-    
-    ORKAnswerFormat *answerFormat = nil;
-    ORKStep *step = nil;
-    NSArray *textChoices = nil;
-    
-    // Form step
-    textChoices =
-    @[
-      [ORKTextChoice choiceWithText:@"Good" value:@"good"],
-      [ORKTextChoice choiceWithText:@"Bad" value:@"bad"]
-      ];
-
-    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                                    textChoices:textChoices];
-    
-    ORKFormItem *formItemFeeling = [[ORKFormItem alloc] initWithIdentifier:@"formFeeling" text:@"How do you feel" answerFormat:answerFormat];
-    ORKFormItem *formItemMood = [[ORKFormItem alloc] initWithIdentifier:@"formMood" text:@"How is your mood" answerFormat:answerFormat];
-    
-    ORKFormStep *formStep = [[ORKFormStep alloc] initWithIdentifier:@"introForm"];
-    formStep.optional = NO;
-    formStep.formItems = @[ formItemFeeling, formItemMood ];
-    [steps addObject:formStep];
-
-    // Question steps
-    textChoices =
-    @[
-      [ORKTextChoice choiceWithText:@"Headache" value:@"headache"],
-      [ORKTextChoice choiceWithText:@"Dizziness" value:@"dizziness"],
-      [ORKTextChoice choiceWithText:@"Nausea" value:@"nausea"]
-      ];
-    
-    answerFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                                    textChoices:textChoices];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"symptom" title:@"Which is your most severe symptom?" answer:answerFormat];
-    step.optional = NO;
-    [steps addObject:step];
-
-    answerFormat = [ORKAnswerFormat booleanAnswerFormat];
-    step = [ORKQuestionStep questionStepWithIdentifier:@"severity" title:@"Does your symptom interfere with your daily life?" answer:answerFormat];
-    step.optional = NO;
-    [steps addObject:step];
-
-    // Instruction steps
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blank"];
-    step.title = @"This step is intentionally left blank (you should not see it)";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"severe_headache"];
-    step.title = @"You have a severe headache";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"light_headache"];
-    step.title = @"You have a light headache";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"other_symptom"];
-    step.title = @"Your symptom is not a headache";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"survey_skipped"];
-    step.title = @"Please come back to this survey when you don't feel good or your mood is low.";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"end"];
-    step.title = @"You have finished the task";
-    [steps addObject:step];
-
-    step = [[ORKInstructionStep alloc] initWithIdentifier:@"blankB"];
-    step.title = @"This step is intentionally left blank (you should not see it)";
-    [steps addObject:step];
-
-    ORKNavigableOrderedTask *task = [[ORKNavigableOrderedTask alloc] initWithIdentifier:NavigableOrderedTaskIdentifier
-                                                                                  steps:steps];
-    
-    // Build navigation rules
-    ORKPredicateStepNavigationRule *predicateRule = nil;
-    ORKResultSelector *resultSelector = nil;
-    
-    // From the feel/mood form step, skip the survey if the user is feeling okay and has a good mood
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"introForm"
-                                                                        resultIdentifier:@"formFeeling"];
-    NSPredicate *predicateGoodFeeling = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
-                                                                                           expectedAnswerValue:@"good"];
-    
-    resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"introForm"
-                                                                        resultIdentifier:@"formMood"];
-    NSPredicate *predicateGoodMood = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
-                                                                                        expectedAnswerValue:@"good"];
-    NSPredicate *predicateGoodMoodAndFeeling = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateGoodFeeling, predicateGoodMood]];
-    
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateGoodMoodAndFeeling ]
-                                                          destinationStepIdentifiers:@[ @"survey_skipped" ] ];
-    
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"introForm"];
-
-    
-    // From the "symptom" step, go to "other_symptom" is user didn't chose headache.
-    // Otherwise, default to going to next step (the regular ORKOrderedTask order applies
-    //  when the defaultStepIdentifier argument is omitted).
-    
-    // User chose headache at the symptom step
-    // Equivalent to:
-    //      [NSPredicate predicateWithFormat:
-    //          @"SUBQUERY(SELF, $x, $x.identifier like 'symptom' \
-    //                     AND SUBQUERY($x.answer, $y, $y like 'headache').@count > 0).@count > 0"];
-    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"symptom"];
-    NSPredicate *predicateHeadache = [ORKResultPredicate predicateForChoiceQuestionResultWithResultSelector:resultSelector
-                                                                                        expectedAnswerValue:@"headache"];
-    
-    // User didn't chose headache at the symptom step
-    NSPredicate *predicateNotHeadache = [NSCompoundPredicate notPredicateWithSubpredicate:predicateHeadache];
-
-    predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateNotHeadache ]
-                                                          destinationStepIdentifiers:@[ @"other_symptom" ] ];
-    
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"symptom"];
-
-    
-    // From the "severity" step, go to "severe_headache" or "light_headache" depending on the user answer
-    
-    // User chose YES at the severity step
-    // Equivalent to:
-    //      [NSPredicate predicateWithFormat:
-    //          @"SUBQUERY(SELF, $x, $x.identifier like 'severity' AND $x.answer == YES).@count > 0"];
-    resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"severity"];
-    NSPredicate *predicateSevereYes = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
-                                                                                               expectedAnswer:YES];
-    
-    // User chose NO at the severity step
-    NSPredicate *predicateSevereNo = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector
-                                                                                              expectedAnswer:NO];
-
-    NSPredicate *predicateSevereHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereYes]];
-
-    NSPredicate *predicateLightHeadache = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicateHeadache, predicateSevereNo]];
-    
-    predicateRule =
-    [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[ predicateSevereHeadache,
-                                                                        predicateLightHeadache ]
-                                          destinationStepIdentifiers:@[ @"severe_headache",
-                                                                        @"light_headache" ] ];
-    
-    [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"severity"];
-    
-    
-    // Add end direct rules to skip unneeded steps
-    ORKDirectStepNavigationRule *directRule = nil;
-    
-    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:@"end"];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"severe_headache"];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"light_headache"];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"other_symptom"];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"survey_skipped"];
-
-    directRule = [[ORKDirectStepNavigationRule alloc] initWithDestinationStepIdentifier:ORKNullStepIdentifier];
-    [task setNavigationRule:directRule forTriggerStepIdentifier:@"end"];
-    
-    return task;
 }
 
 #pragma mark - Navigable Loop Task

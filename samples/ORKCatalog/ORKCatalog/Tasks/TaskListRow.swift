@@ -985,7 +985,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let predicateFormItem03 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: false)
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
-        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [predicateEligible], destinationStepIdentifiers: [String(Identifier.EligibilityEligibleStep)])
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers: [ (predicateEligible, String(Identifier.EligibilityEligibleStep)) ])
         
         eligibilityTask.setNavigationRule(predicateRule, forTriggerStepIdentifier:String(Identifier.EligibilityFormStep))
         
