@@ -493,7 +493,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)continueButtonEnabled {
-    return self.isBeingReviewed ? ![self.answer isEqual:self.originalAnswer] : ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    if (self.isBeingReviewed) {
+        return enabled && ![self.answer isEqual:self.originalAnswer];
+    } else {
+        return enabled;
+    }
 }
 
 - (BOOL)allowContinue {
