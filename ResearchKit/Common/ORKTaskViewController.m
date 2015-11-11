@@ -1169,7 +1169,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         return;
     }
     
-    ORKStep *step = [self nextStep];
+    ORKStep *step = fromController.parentReviewStep;
+    if (!step) {
+        step = [self nextStep];
+    }
     
     if (step == nil) {
         if ([self.delegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
@@ -1238,7 +1241,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (void)stepViewControllerResultDidChange:(ORKStepViewController *)stepViewController {
-    [self setManagedResult:stepViewController.result forKey:stepViewController.step.identifier];
+    if (!stepViewController.readOnlyMode) {
+        [self setManagedResult:stepViewController.result forKey:stepViewController.step.identifier];
+    }
     
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
     if ([strongDelegate respondsToSelector:@selector(taskViewController:didChangeResult:)]) {
@@ -1297,6 +1302,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     _defaultResultSource = resultSource;
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
+    //TODO: localize strings
+    stepViewController.continueButtonTitle = @"Save";
+    stepViewController.skipButtonTitle = @"Clear answer";
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
     if (stepViewController.parentReviewStep.isStandalone) {
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;

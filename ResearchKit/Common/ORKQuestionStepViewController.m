@@ -102,6 +102,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 // If `hasChangedAnswer`, then a new `defaultAnswer` should not change the answer
 @property (nonatomic, assign) BOOL hasChangedAnswer;
 
+@property (nonatomic, copy) id<NSCopying, NSObject, NSCoding> originalAnswer;
+
 @end
 
 
@@ -123,6 +125,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 answer = ORKNullAnswerValue();
             }
 			self.answer = answer;
+            self.originalAnswer = answer;
 		}
     }
     return self;
@@ -176,7 +179,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
-            _continueSkipView.hidden = self.isBeingReviewed;
+            _continueSkipView.hidden = self.readOnlyMode;
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -205,7 +208,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-            _questionView.continueSkipContainer.hidden = self.isBeingReviewed;
+            _questionView.continueSkipContainer.hidden = self.readOnlyMode;
             
             NSMutableArray *constraints = [NSMutableArray new];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"
@@ -490,7 +493,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (BOOL)continueButtonEnabled {
-    return ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
+    return self.isBeingReviewed ? ![self.answer isEqual:self.originalAnswer] : ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
 }
 
 - (BOOL)allowContinue {
@@ -655,6 +658,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 }
 
 - (void)goBackward {
+    if (self.isBeingReviewed) {
+        [self saveAnswer:self.originalAnswer];
+    }
     [self notifyDelegateOnResultChange];
     [super goBackward];
 }
@@ -793,6 +799,7 @@ static NSString *const _ORKHasChangedAnswerRestoreKey = @"hasChangedAnswer";
     
     self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKAnswerRestoreKey];
     self.hasChangedAnswer = [coder decodeBoolForKey:_ORKHasChangedAnswerRestoreKey];
+    self.originalAnswer = self.answer;
     
     [self answerDidChange];
 }
