@@ -84,21 +84,13 @@
 }
 
 - (ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index {
-    if (index >= _choices.count) {
-        return nil;
-    }
-    
-    ORKImageChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKImageChoice class]]? choice : nil;
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKImageChoice class]] ? (ORKImageChoice *) option : nil;
 }
 
 - (ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index {
-    if (index >= _choices.count) {
-        return nil;
-    }
-    
-    ORKTextChoice *choice = _choices[index];
-    return [choice isKindOfClass:[ORKTextChoice class]]? choice : nil;
+    id<ORKAnswerOption> option = [self answerOptionAtIndex:index];
+    return option && [option isKindOfClass:[ORKTextChoice class]] ? (ORKTextChoice *) option : nil;
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {

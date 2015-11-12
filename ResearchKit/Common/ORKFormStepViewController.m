@@ -166,7 +166,11 @@
             [(NSMutableArray *)self.items addObject:cellItem];
         }];
         
-    } else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
+    }
+    // ORKBooleanAnswerFormat uses ORKTextChoiceAnswerFormat as it's impliedAnswerFormat
+    // that case is handled above so the following block never get called
+    /*
+    else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
         _hasChoiceRows = YES;
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
@@ -178,7 +182,9 @@
             [(NSMutableArray *)self.items addObject:cellItem];
         }
         
-    } else {
+    } 
+    */
+    else {
         ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item];
        [(NSMutableArray *)self.items addObject:cellItem];
     }
@@ -280,6 +286,7 @@
 @property (nonatomic, strong) NSMutableDictionary *savedAnswerDates;
 @property (nonatomic, strong) NSMutableDictionary *savedSystemCalendars;
 @property (nonatomic, strong) NSMutableDictionary *savedSystemTimeZones;
+@property (nonatomic, strong) NSDictionary *originalAnswers;
 
 @property (nonatomic, strong) NSMutableDictionary *savedDefaults;
 
@@ -305,6 +312,7 @@
             id answer = result.answer ? : ORKNullAnswerValue();
             [self setAnswer:answer forIdentifier:result.identifier];
         }
+        self.originalAnswers = [[NSDictionary alloc] initWithDictionary:self.savedAnswers];
     }
     return self;
 }
@@ -615,9 +623,14 @@
 }
 
 - (BOOL)continueButtonEnabled {
-    return ([self numberOfAnsweredFormItems] > 0
-            && [self allAnsweredFormItemsAreValid]
-            && [self allNonOptionalFormItemsHaveAnswers]);
+    BOOL enabled = ([self numberOfAnsweredFormItems] > 0
+                    && [self allAnsweredFormItemsAreValid]
+                    && [self allNonOptionalFormItemsHaveAnswers]);
+    if (self.isBeingReviewed) {
+        return enabled && (![self.savedAnswers isEqualToDictionary:self.originalAnswers]);
+    } else {
+        return enabled;
+    }
 }
 
 - (void)updateButtonStates {
@@ -718,6 +731,13 @@
     [self notifyDelegateOnResultChange];
     
     [super skipForward];
+}
+
+- (void)goBackward {
+    if (self.isBeingReviewed) {
+        self.savedAnswers = [[NSMutableDictionary alloc] initWithDictionary:self.originalAnswers];
+    }
+    [super goBackward];
 }
 
 #pragma mark UITableViewDataSource
@@ -898,7 +918,12 @@
         ORKTableCellItem *cellItem = section.items[indexPath.row - 1];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
         
+        // formItem's questionType is ORKQuestionTypeSingleChoice even if answerFormat is ORKAnswerFormatBoolean
+        // should check for answerFormat rather than questionType
+        /*
         id answer = (cellItem.formItem.questionType == ORKQuestionTypeBoolean)? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
+        */
+        id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]])? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
         
         NSString *formItemIdentifier = cellItem.formItem.identifier;
         if (answer && formItemIdentifier) {
@@ -1008,6 +1033,7 @@ static NSString *const _ORKSavedAnswersRestoreKey = @"savedAnswers";
 static NSString *const _ORKSavedAnswerDatesRestoreKey = @"savedAnswerDates";
 static NSString *const _ORKSavedSystemCalendarsRestoreKey = @"savedSystemCalendars";
 static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZones";
+static NSString *const _ORKOriginalAnswersRestoreKey = @"originalAnswers";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
@@ -1016,6 +1042,7 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
     [coder encodeObject:_savedAnswerDates forKey:_ORKSavedAnswerDatesRestoreKey];
     [coder encodeObject:_savedSystemCalendars forKey:_ORKSavedSystemCalendarsRestoreKey];
     [coder encodeObject:_savedSystemTimeZones forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    [coder encodeObject:_originalAnswers forKey:_ORKOriginalAnswersRestoreKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -1025,6 +1052,7 @@ static NSString *const _ORKSavedSystemTimeZonesRestoreKey = @"savedSystemTimeZon
     _savedAnswerDates = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedAnswerDatesRestoreKey];
     _savedSystemCalendars = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemCalendarsRestoreKey];
     _savedSystemTimeZones = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKSavedSystemTimeZonesRestoreKey];
+    _originalAnswers = [coder decodeObjectOfClass:[NSMutableDictionary class] forKey:_ORKOriginalAnswersRestoreKey];
 }
 
 #pragma mark Rotate

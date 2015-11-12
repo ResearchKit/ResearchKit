@@ -791,12 +791,14 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";
 static NSString *const _ORKHasChangedAnswerRestoreKey = @"hasChangedAnswer";
+static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
 
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder {
     [super encodeRestorableStateWithCoder:coder];
     
     [coder encodeObject:_answer forKey:_ORKAnswerRestoreKey];
     [coder encodeBool:_hasChangedAnswer forKey:_ORKHasChangedAnswerRestoreKey];
+    [coder encodeObject:_originalAnswer forKey:_ORKOriginalAnswerRestoreKey];
 }
 
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
@@ -804,7 +806,7 @@ static NSString *const _ORKHasChangedAnswerRestoreKey = @"hasChangedAnswer";
     
     self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKAnswerRestoreKey];
     self.hasChangedAnswer = [coder decodeBoolForKey:_ORKHasChangedAnswerRestoreKey];
-    self.originalAnswer = self.answer;
+    self.originalAnswer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKOriginalAnswerRestoreKey];
     
     [self answerDidChange];
 }
