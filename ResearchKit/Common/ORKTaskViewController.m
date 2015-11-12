@@ -901,7 +901,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (step.identifier && ![_managedStepIdentifiers.lastObject isEqualToString:step.identifier]) {
         [_managedStepIdentifiers addObject:step.identifier];
     }
-    if ([step isRestorable] && !(viewController.parentReviewStep && viewController.parentReviewStep.isStandalone)) {
+    if ([step isRestorable] && !(viewController.isBeingReviewed && viewController.parentReviewStep.isStandalone)) {
         _lastRestorableStepIdentifier = step.identifier;
     }
     
@@ -1008,10 +1008,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
-            if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier]) {
+            if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier] && ![steps containsObject:nextStep]) {
                 [steps addObject:nextStep];
-            } else {
-                *stop = YES;
             }
         }];
     }
