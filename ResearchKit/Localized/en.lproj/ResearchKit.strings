@@ -118,7 +118,7 @@
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't recieve an email";
+"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't receive an email";
 "RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
 "VERIFICATION_LABEL_MESSAGE" = "If verified, tap the button below.";
 
@@ -139,7 +139,7 @@
 "PASSCODE_TOUCH_ID_MESSAGE" = "Please authenticate with Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID error";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Only numeric characters allowed.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode progress indicator";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Passcode entry progress indicator";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ of %@ digits entered";
 
 /* Keychain wrapper */
@@ -333,7 +333,7 @@
 "HOLE_PEG_TEST_RIGHT" = "right";
 "HOLE_PEG_TEST_LEFT" = "left";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Put the peg in the hole using your %@ hand.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Put the peg behing the line using your %@ hand.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Put the peg behind the line using your %@ hand.";
 "HOLE_PEG_TEST_TEXT" = "Pick up the peg using two fingers.";
 "HOLE_PEG_TEST_TEXT_2" = "Lift fingers to drop the peg.";
 
