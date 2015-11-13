@@ -115,6 +115,10 @@
     [self.delegate answerCell:self invalidInputAlertWithMessage:text];
 }
 
+- (void)showValidityAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self.delegate answerCell:self invalidInputAlertWithTitle:title message:message];
+}
+
 #pragma mark - KeyboardNotifications
 
 // Call this method somewhere in your view controller setup code.

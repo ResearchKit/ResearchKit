@@ -131,6 +131,9 @@
 #define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@STRINGIFY(x)]
 
+#define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@STRINGIFY(x.latitude)],[d decodeDoubleForKey:@STRINGIFY(x.longitude)])
+#define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@STRINGIFY(x.longitude)];
+
 /*
  * Helpers for completions which call the block only if non-nil
  *
@@ -155,12 +158,13 @@
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle();
+NSBundle *ORKDefaultLocaleBundle();
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-id ORKFindInArrayByStudyId(NSArray *array, NSString *studyIdentifier);
+id findInArrayByKey(NSArray * array, NSString *key, id value);
 
 NSString *ORKStringFromDateISO8601(NSDate *date);
 NSDate *ORKDateFromStringISO8601(NSString *string);
@@ -285,3 +289,4 @@ const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);

@@ -43,8 +43,8 @@
 #import <ResearchKit/ORKInstructionStepViewController.h>
 #import <ResearchKit/ORKVisualConsentStepViewController.h>
 #import <ResearchKit/ORKConsentReviewStepViewController.h>
-#import <ResearchKit/ORKFormStepViewController.h>
 #import <ResearchKit/ORKImageCaptureStepViewController.h>
+#import <ResearchKit/ORKWaitStepViewController.h>
 
 // Custom steps
 #import <ResearchKit/ORKCustomStepView.h>
@@ -87,3 +87,4 @@
 #import <ResearchKit/ORKQuestionStepViewController_Private.h>
 #import <ResearchKit/ORKRecorder_Private.h>
 #import <ResearchKit/ORKStepNavigationRule_Private.h>
+#import <ResearchKit/ORKAnswerFormat_Private.h>

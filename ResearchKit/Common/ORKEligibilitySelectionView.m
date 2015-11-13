@@ -58,8 +58,7 @@ static const CGFloat MaxFontSize = 72.0;
     self = [super init];
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
-        [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [self setTitleColor:self.tintColor forState:UIControlStateSelected];
+        [self applyTintColor];
         self.titleLabel.font = [ORKEligibilityButton defaultFont];
     }
     return self;
@@ -82,6 +81,11 @@ static const CGFloat MaxFontSize = 72.0;
 
 - (void)tintColorDidChange {
     [super tintColorDidChange];
+    [self applyTintColor];
+}
+
+- (void)applyTintColor {
+    [self setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self setTitleColor:self.tintColor forState:UIControlStateSelected];
 }
 

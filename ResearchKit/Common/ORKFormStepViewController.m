@@ -29,7 +29,6 @@
  */
 
 
-#import "ORKFormStepViewController.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKHelpers.h"
 #import "ORKFormItemCell.h"
@@ -529,7 +528,8 @@
     
     NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
                                      @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice)];
+                                     @(ORKQuestionTypeMultipleChoice),
+                                     @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header
@@ -791,11 +791,15 @@
                     }
                         
                     case ORKQuestionTypeText: {
-                        ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (!textFormat.multipleLines) {
-                            class = [ORKFormItemTextFieldCell class];
+                        if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+                            class = [ORKFormItemConfirmTextCell class];
                         } else {
-                            class = [ORKFormItemTextCell class];
+                            ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+                            if (!textFormat.multipleLines) {
+                                class = [ORKFormItemTextFieldCell class];
+                            } else {
+                                class = [ORKFormItemTextCell class];
+                            }
                         }
                         break;
                     }
@@ -810,6 +814,11 @@
                         break;
                     }
                         
+                    case ORKQuestionTypeLocation: {
+                        class = [ORKFormItemLocationCell class];
+                        break;
+                    }
+                        
                     default:
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
                         break;
@@ -820,12 +829,15 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth delegate:self];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
-                        formCell.delegate  = self;
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
+                        if (!_savedAnswers) {
+                            _savedAnswers = [NSMutableDictionary new];
+                        }
+                        formCell.savedAnswers = _savedAnswers;
                         cell = formCell;
                     }
                 }
@@ -960,6 +972,10 @@
 
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
+}
+
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {

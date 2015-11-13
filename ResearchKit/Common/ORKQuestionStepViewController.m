@@ -43,6 +43,7 @@
 #import "ORKSurveyAnswerCellForPicker.h"
 #import "ORKSurveyAnswerCellForImageSelection.h"
 #import "ORKSurveyAnswerCellForEligibility.h"
+#import "ORKSurveyAnswerCellForLocation.h"
 #import "ORKAnswerFormat.h"
 #import "ORKHelpers.h"
 #import "ORKCustomStepView.h"
@@ -309,7 +310,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)defaultAnswerDidChange {
     id defaultAnswer = _defaultAnswer;
-    if (![self hasAnswer] && (self.answer != ORKNullAnswerValue()) && defaultAnswer && !self.hasChangedAnswer) {
+    if (![self hasAnswer] && defaultAnswer && !self.hasChangedAnswer) {
         _answer = defaultAnswer;
         
         [self answerDidChange];
@@ -545,7 +546,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                                @(ORKQuestionTypeDateAndTime) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeTimeInterval) : [ORKSurveyAnswerCellForPicker class],
                                @(ORKQuestionTypeInteger) : [ORKSurveyAnswerCellForNumber class],
-                               @(ORKQuestionTypeEligibility) : [ORKSurveyAnswerCellForEligibility class]};
+                               @(ORKQuestionTypeEligibility) : [ORKSurveyAnswerCellForEligibility class],
+                               @(ORKQuestionTypeLocation) : [ORKSurveyAnswerCellForLocation class]};
     });
     
     // SingleSelectionPicker Cell && Other Cells
@@ -766,6 +768,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 
 - (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
+}
+
+- (void)answerCell:(ORKSurveyAnswerCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 static NSString *const _ORKAnswerRestoreKey = @"answer";

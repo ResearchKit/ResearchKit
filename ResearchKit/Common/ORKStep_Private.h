@@ -46,6 +46,8 @@
  */
 + (Class)stepViewControllerClass;
 
+- (Class)stepViewControllerClass;
+
 @property (nonatomic, assign) BOOL shouldTintImages;
 
 // Override whether to show progress for this step in the default task.

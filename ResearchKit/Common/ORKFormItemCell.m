@@ -46,6 +46,8 @@
 #import "ORKScaleSliderView.h"
 #import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
+#import "ORKLocationSelectionView.h"
+#import <MapKit/MapKit.h>
 
 
 static const CGFloat VerticalMargin = 10.0;
@@ -103,9 +105,14 @@ static const CGFloat HorizontalMargin = 15.0;
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
                                formItem:(ORKFormItem *)formItem
                                  answer:(id)answer
-                          maxLabelWidth:(CGFloat)maxLabelWidth {
+                          maxLabelWidth:(CGFloat)maxLabelWidth
+                               delegate:(id<ORKFormItemCellDelegate>)delegate {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+        // Setting the 'delegate' on init is required, as some questions (such as the scale questions)
+        // need it when they wish to report their default answers to 'ORKFormStepViewController'.
+        _delegate = delegate;
+        
         _maxLabelWidth = maxLabelWidth;
         _answer = [answer copy];
         self.formItem = formItem;
@@ -177,6 +184,17 @@ static const CGFloat HorizontalMargin = 15.0;
     [self defaultAnswerDidChange];
 }
 
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    _savedAnswers = savedAnswers;
+
+    if (!_savedAnswers) {
+        @throw [NSException exceptionWithName:NSGenericException
+                                       reason:@"Saved answers cannot be nil."
+                                     userInfo:nil];
+    }
+    
+}
+
 - (BOOL)becomeFirstResponder {
     // Subclasses should override this
     return YES;
@@ -208,6 +226,10 @@ static const CGFloat HorizontalMargin = 15.0;
     [self.delegate formItemCell:self invalidInputAlertWithMessage:text];
 }
 
+- (void)showErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self.delegate formItemCell:self invalidInputAlertWithTitle:title message:message];
+}
+
 @end
 
 
@@ -227,8 +249,16 @@ static const CGFloat HorizontalMargin = 15.0;
     NSMutableArray *_variableConstraints;
 }
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier formItem:(ORKFormItem *)formItem answer:(id)answer maxLabelWidth:(CGFloat)maxLabelWidth {
-    self = [super initWithReuseIdentifier:reuseIdentifier formItem:formItem answer:answer maxLabelWidth:maxLabelWidth];
+- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
+                               formItem:(ORKFormItem *)formItem
+                                 answer:(id)answer
+                          maxLabelWidth:(CGFloat)maxLabelWidth
+                               delegate:(id<ORKFormItemCellDelegate>)delegate{
+    self = [super initWithReuseIdentifier:reuseIdentifier
+                                 formItem:formItem
+                                   answer:answer
+                            maxLabelWidth:maxLabelWidth
+                                 delegate:delegate];
     if (self != nil) {
         UILabel *label = self.labelLabel;
         label.isAccessibilityElement = NO;
@@ -281,7 +311,7 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)updateConstraints {
     [NSLayoutConstraint deactivateConstraints:_variableConstraints];
     [_variableConstraints removeAllObjects];
-
+    
     if (!_variableConstraints) {
         _variableConstraints = [NSMutableArray new];
     }
@@ -293,7 +323,7 @@ static const CGFloat HorizontalMargin = 15.0;
                               @"hMargin":@(self.separatorInset.left),
                               @"hSpacer":@(16), @"vSpacer":@(15),
                               @"labelWidth": @(labelWidth)};
-
+    
     id labelLabel = self.labelLabel;
     id textFieldView = _textFieldView;
     NSDictionary *views = NSDictionaryOfVariableBindings(labelLabel,textFieldView);
@@ -363,7 +393,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Lower the priority to avoid conflicts with system supplied UIView-Encapsulated-Layout-Height constraint.
     heightConstraint.priority = 999;
     [_variableConstraints addObject:heightConstraint];
-
+    
     [NSLayoutConstraint activateConstraints:_variableConstraints];
     [super updateConstraints];
 }
@@ -480,6 +510,72 @@ static const CGFloat HorizontalMargin = 15.0;
 @end
 
 
+#pragma mark - ORKFormItemConfirmTextCell
+
+@implementation ORKFormItemConfirmTextCell
+
+- (void)setSavedAnswers:(NSDictionary *)savedAnswers {
+    [super setSavedAnswers:savedAnswers];
+    
+    [savedAnswers addObserver:self
+                   forKeyPath:[self originalItemIdentifier]
+                      options:0
+                      context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqual:[self originalItemIdentifier]]) {
+        self.textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
+    }
+}
+
+- (BOOL)isAnswerValidWithString:(NSString *)string {
+    BOOL isValid = NO;
+    if (string.length > 0) {
+        NSString *originalItemAnswer = self.savedAnswers[[self originalItemIdentifier]];
+        if (!ORKIsAnswerEmpty(originalItemAnswer) && [originalItemAnswer isEqualToString:string]) {
+            isValid = YES;
+        }
+    }
+    return isValid;
+}
+
+- (NSString *)originalItemIdentifier {
+    ORKConfirmTextAnswerFormat *answerFormat = (ORKConfirmTextAnswerFormat *)self.formItem.answerFormat;
+    return [answerFormat.originalItemIdentifier copy];
+}
+
+- (void)dealloc {
+    [self.savedAnswers removeObserver:self forKeyPath:[self originalItemIdentifier]];
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self ork_setAnswer:([self isAnswerValidWithString:text] ? text : @"")];
+
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [super textFieldShouldEndEditing:textField];
+    if (![self isAnswerValidWithString:textField.text] && textField.text.length > 0) {
+        textField.text = nil;
+        if (self.answer) {
+            [self inputValueDidClear];
+        }
+        [self showValidityAlertWithMessage:[self.formItem.answerFormat localizedInvalidValueStringWithAnswerString:textField.text]];
+    }
+    return YES;
+}
+
+@end
+
+
 #pragma mark - ORKFormItemTextFieldCell
 
 @implementation ORKFormItemTextFieldCell
@@ -493,7 +589,7 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.spellCheckingType = answerFormat.spellCheckingType;
     self.textField.keyboardType = answerFormat.keyboardType;
     self.textField.secureTextEntry = answerFormat.secureTextEntry;
-
+    
     [self answerDidChange];
 }
 
@@ -535,11 +631,11 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textField.text = researchki` and the `text = researchkit`.
     if (textField.text.length < text.length) {
-    
+        
         text = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-    
+        
         NSInteger maxLength = answerFormat.maximumLength;
-    
+        
         if (maxLength > 0 && text.length > maxLength) {
             [self showValidityAlertWithMessage:[answerFormat localizedInvalidValueStringWithAnswerString:text]];
             return NO;
@@ -764,13 +860,13 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (void)textViewDidChange:(UITextView *)textView {
     NSInteger lineCount = [textView.text componentsSeparatedByCharactersInSet:
-                         [NSCharacterSet newlineCharacterSet]].count;
+                           [NSCharacterSet newlineCharacterSet]].count;
     
     if (_lastSeenLineCount != lineCount) {
         _lastSeenLineCount = lineCount;
         
         UITableView *tableView = [self parentTableView];
-    
+        
         [tableView beginUpdates];
         [tableView endUpdates];
         
@@ -805,9 +901,9 @@ static const CGFloat HorizontalMargin = 15.0;
     // Only need to validate the text if the user enters a character other than a backspace.
     // For example, if the `textView.text = researchki` and the `string = researchkit`.
     if (textView.text.length < string.length) {
-    
+        
         string = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-
+        
         if (_maxLength > 0 && string.length > _maxLength) {
             [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:string]];
             return NO;
@@ -919,7 +1015,7 @@ static const CGFloat HorizontalMargin = 15.0;
     // Subclasses should override this
     
     self.labelLabel.text = nil;
-   
+    
     _selectionView = [[ORKImageSelectionView alloc] initWithImageChoiceAnswerFormat:(ORKImageChoiceAnswerFormat *)self.formItem.answerFormat
                                                                              answer:self.answer];
     _selectionView.delegate = self;
@@ -970,6 +1066,11 @@ static const CGFloat HorizontalMargin = 15.0;
 
 #pragma mark - ORKFormItemScaleCell
 
+@interface ORKFormItemScaleCell () <ORKScaleSliderViewDelegate>
+
+@end
+
+
 @implementation ORKFormItemScaleCell {
     ORKScaleSliderView *_sliderView;
     id<ORKScaleAnswerFormatProvider> _formatProvider;
@@ -985,12 +1086,11 @@ static const CGFloat HorizontalMargin = 15.0;
 - (void)cellInit {
     self.labelLabel.text = nil;
     
-    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat];
-    [_sliderView.slider addTarget:self action:@selector(inputValueDidChange) forControlEvents:UIControlEventValueChanged];
+    _sliderView = [[ORKScaleSliderView alloc] initWithFormatProvider:(ORKScaleAnswerFormat *)self.formItem.answerFormat delegate:self];
     
     [self.contentView addSubview:_sliderView];
     [self setUpConstraints];
-
+    
     [super cellInit];
 }
 
@@ -1021,28 +1121,22 @@ static const CGFloat HorizontalMargin = 15.0;
     id<ORKScaleAnswerFormatProvider> formatProvider = self.formatProvider;
     id answer = self.answer;
     if (answer && answer != ORKNullAnswerValue()) {
-        if (![self.answer isKindOfClass:[NSNumber class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Answer should be NSNumber" userInfo:nil];
-        }
         
-        [_sliderView setCurrentValue:answer];
+        [_sliderView setCurrentAnswerValue:answer];
+
     } else {
-        if (answer == nil && [formatProvider defaultNumber]) {
-            [_sliderView setCurrentValue:[formatProvider defaultNumber]];
+        if (answer == nil && [formatProvider defaultAnswer]) {
+            [_sliderView setCurrentAnswerValue:[formatProvider defaultAnswer]];
+            [self ork_setAnswer:_sliderView.currentAnswerValue];
         } else {
-            [_sliderView setCurrentValue:nil];
+            [_sliderView setCurrentAnswerValue:nil];
         }
     }
 }
 
-- (void)inputValueDidChange {
-    NSArray *textChoices = [self.formatProvider textChoices];
-    if (textChoices) {
-        ORKTextChoice *textChoice = textChoices[[_sliderView.currentValue intValue] - 1];
-        [self ork_setAnswer:textChoice.value];
-    } else {
-        [self ork_setAnswer:_sliderView.currentValue];
-    }
+- (void)scaleSliderViewCurrentValueDidChange:(ORKScaleSliderView *)sliderView {
+    
+    [self ork_setAnswer:sliderView.currentAnswerValue];
     [super inputValueDidChange];
 }
 
@@ -1065,10 +1159,10 @@ static const CGFloat HorizontalMargin = 15.0;
     ORKAnswerFormat *answerFormat = formItem.impliedAnswerFormat;
     
     if (!(!formItem ||
-           [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
-           [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
+          [answerFormat isKindOfClass:[ORKDateAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeOfDayAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKTimeIntervalAnswerFormat class]] ||
+          [answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]])) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"formItem.answerFormat should be an ORKDateAnswerFormat or ORKTimeOfDayAnswerFormat or ORKTimeIntervalAnswerFormat or ORKValuePicker instance" userInfo:nil];
     }
     [super setFormItem:formItem];
@@ -1145,6 +1239,119 @@ static const CGFloat HorizontalMargin = 15.0;
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;
+}
+
+@end
+
+
+#pragma mark - ORKFormItemLocationCell
+
+@interface ORKFormItemLocationCell () <ORKLocationSelectionViewDelegate>
+
+@property (nonatomic, assign) BOOL editingHighlight;
+
+@end
+
+
+@implementation ORKFormItemLocationCell {
+    ORKLocationSelectionView *_selectionView;
+    NSLayoutConstraint *_heightConstraint;
+    NSLayoutConstraint *_bottomConstraint;
+}
+
+- (void)cellInit {
+    [super cellInit];
+    
+    _selectionView = [[ORKLocationSelectionView alloc] initWithFormMode:YES
+                                                     useCurrentLocation:((ORKLocationAnswerFormat *)self.formItem.answerFormat).useCurrentLocation
+                                                          leadingMargin:self.separatorInset.left];
+    _selectionView.delegate = self;
+    
+    [self.contentView addSubview:_selectionView];
+
+    if (self.formItem.placeholder != nil) {
+        [_selectionView setPlaceholderText:self.formItem.placeholder];
+    }
+    
+    [self setUpConstraints];
+}
+
+- (void)setUpConstraints {
+    NSMutableArray *constraints = [NSMutableArray new];
+    
+    NSDictionary *dictionary = @{@"_selectionView":_selectionView};
+    ORKEnableAutoLayoutForViews([dictionary allValues]);
+    NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin), @"horizontalMargin":@(self.separatorInset.left), @"verticalMarginBottom":@(VerticalMargin - (1.0 / [UIScreen mainScreen].scale))};
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_selectionView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_selectionView]" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:dictionary]];
+    _bottomConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+    [constraints addObject:_bottomConstraint];
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:_selectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:_selectionView.intrinsicContentSize.height];
+    _heightConstraint.priority = UILayoutPriorityDefaultHigh;
+    [constraints addObject:_heightConstraint];
+    
+    [self.contentView addConstraints:constraints];
+}
+
+- (void)setFormItem:(ORKFormItem *)formItem {
+    [super setFormItem:formItem];
+    
+    if (_selectionView) {
+        [_selectionView setPlaceholderText:formItem.placeholder];
+    }
+}
+
+- (void)answerDidChange {
+    _selectionView.answer = self.answer;
+}
+
+- (void)setEditingHighlight:(BOOL)editingHighlight {
+    _editingHighlight = editingHighlight;
+    [_selectionView setTextColor:( _editingHighlight ? [self tintColor] : [UIColor blackColor])];
+}
+
+- (void)locationSelectionViewDidBeginEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = YES;
+    [_selectionView showMapViewIfNecessary];
+    [self.delegate formItemCellDidBecomeFirstResponder:self];
+}
+
+- (void)locationSelectionViewDidEndEditing:(ORKLocationSelectionView *)view {
+    self.editingHighlight = NO;
+    [self.delegate formItemCellDidResignFirstResponder:self];
+}
+
+- (void)locationSelectionViewDidChange:(ORKLocationSelectionView *)view {
+    [self inputValueDidChange];
+}
+
+- (void)locationSelectionViewNeedsResize:(ORKLocationSelectionView *)view {
+    UITableView *tableView = [self parentTableView];
+    
+    _heightConstraint.constant = _selectionView.intrinsicContentSize.height;
+    _bottomConstraint.constant = -(VerticalMargin - (1.0 / [UIScreen mainScreen].scale));
+    
+    [tableView beginUpdates];
+    [tableView endUpdates];
+
+}
+
+- (void)locationSelectionView:(ORKLocationSelectionView *)view didFailWithErrorTitle:(NSString *)title message:(NSString *)message {
+    [self showErrorAlertWithTitle:title message:message];
+}
+
+- (void)inputValueDidChange {
+    [self ork_setAnswer:_selectionView.answer];
+    [super inputValueDidChange];
+}
+
+- (BOOL)becomeFirstResponder {
+    return [_selectionView becomeFirstResponder];
+}
+
+- (BOOL)resignFirstResponder {
+    return [_selectionView resignFirstResponder];
 }
 
 @end

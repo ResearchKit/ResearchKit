@@ -86,11 +86,45 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Invalid email address: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Enter an address";
+"LOCATION_ERROR_TITLE" = "Failed to Resolve Specified Address";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Unable to resolve your current location. Please type in an address or move to a location with better GPS signal if applicable.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Access to location services has been denied. Please grant this app permission to use location services through Settings.";
+"LOCATION_ERROR_GEOCODE" = "Unable to find a result for the entered address. Please make sure the address is valid.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Either you are not connected to the internet or you have exceeded the maximum amount of address lookup requests. If you are not connected to the internet, please turn on your WiFi to answer this question, skip this question if skip button is available, or come back to the survey when you are connected to the internet. Otherwise, please try again in a few minutes.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text content exceeding maximum length: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera not available in split screen.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Password";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirm";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Enter password again";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passwords do not match.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Additional Information";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Gender";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pick a gender";
+"DOB_FORM_ITEM_TITLE" = "Date of Birth";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't recieve an email";
+"RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
+"VERIFICATION_LABEL_MESSAGE" = "If verified, tap the button below.";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Forgot password?";
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Enter passcode";
@@ -197,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Tap";
 "TOTAL_TAPS_LABEL" = "Total Taps";
 "TAPPING_INSTRUCTION" = "Tap the buttons as quickly as you can using two fingers.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voice";

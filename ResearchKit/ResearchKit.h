@@ -40,6 +40,7 @@
 #import <ResearchKit/ORKFormStep.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 #import <ResearchKit/ORKImageCaptureStep.h>
+#import <ResearchKit/ORKWaitStep.h>
 
 #import <ResearchKit/ORKAnswerFormat.h>
 #import <ResearchKit/ORKHealthAnswerFormat.h>
@@ -49,6 +50,7 @@
 
 #import <ResearchKit/ORKTaskViewController.h>
 #import <ResearchKit/ORKStepViewController.h>
+#import <ResearchKit/ORKFormStepViewController.h>
 
 #import <ResearchKit/ORKConsentDocument.h>
 #import <ResearchKit/ORKConsentSignature.h>
@@ -56,6 +58,12 @@
 #import <ResearchKit/ORKVisualConsentStep.h>
 #import <ResearchKit/ORKConsentReviewStep.h>
 #import <ResearchKit/ORKConsentSharingStep.h>
+
+#import <ResearchKit/ORKRegistrationStep.h>
+#import <ResearchKit/ORKVerificationStep.h>
+#import <ResearchKit/ORKVerificationStepViewController.h>
+#import <ResearchKit/ORKLoginStep.h>
+#import <ResearchKit/ORKLoginStepViewController.h>
 
 #import <ResearchKit/ORKKeychainWrapper.h>
 #import <ResearchKit/ORKPasscodeStep.h>

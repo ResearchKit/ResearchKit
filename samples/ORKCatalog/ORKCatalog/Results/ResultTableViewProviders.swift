@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
 import ResearchKit
+import MapKit
 
 /**
     Create a `protocol<UITableViewDataSource, UITableViewDelegate>` that knows
@@ -77,6 +78,9 @@ func resultTableViewProviderForResult(result: ORKResult?) -> protocol<UITableVie
         
     case is ORKDateQuestionResult:
         providerType = DateQuestionResultTableViewProvider.self
+        
+    case is ORKLocationQuestionResult:
+        providerType = LocationQuestionResultTableViewProvider.self
         
     case is ORKNumericQuestionResult:
         providerType = NumericQuestionResultTableViewProvider.self
@@ -362,6 +366,25 @@ class DateQuestionResultTableViewProvider: ResultTableViewProvider {
             // The timezone when the user answered.
             ResultRow(text: "timeZone", detail: questionResult.timeZone)
         ]
+    }
+}
+
+/// Table view provider specific to an `ORKLocationQuestionResult` instance.
+class LocationQuestionResultTableViewProvider: ResultTableViewProvider {
+    // MARK: ResultTableViewProvider
+    
+    override func resultRowsForSection(section: Int) -> [ResultRow] {
+        let questionResult = result as! ORKLocationQuestionResult
+        let location = questionResult.locationAnswer
+        let address = location?.address.stringByReplacingOccurrencesOfString("\n", withString: " ")
+        let rows = super.resultRowsForSection(section) + [
+            // The latitude of the location the user entered.
+            ResultRow(text: "latitude", detail: location?.coordinate.latitude),
+            ResultRow(text: "longitude", detail: location?.coordinate.longitude),
+            ResultRow(text: "address", detail: address)
+        ]
+        
+        return rows
     }
 }
 
@@ -752,7 +775,7 @@ class TowerOfHanoiResultTableViewProvider: ResultTableViewProvider {
                 ResultRow(text: "moves", detail: "\(towerOfHanoiResult.moves?.count ?? 0 )")]
         }
         // Add a `ResultRow` for each sample.
-        let move = towerOfHanoiResult.moves![section - 1] as! ORKTowerOfHanoiMove
+        let move = towerOfHanoiResult.moves![section - 1]
         return rows + [
             ResultRow(text: "donor tower", detail: "\(move.donorTowerIndex)"),
             ResultRow(text: "recipient tower", detail: "\(move.recipientTowerIndex)"),
@@ -831,7 +854,7 @@ class PSATResultTableViewProvider: ResultTableViewProvider {
         
         // Add a `ResultRow` for each sample.
         return rows + PSATResult.samples!.map { sample in
-            let PSATSample = sample as! ORKPSATSample
+            let PSATSample = sample
             
             let text = String(format: "%@", PSATSample.correct ? "correct" : "error")
             let detail = "\(PSATSample.answer) (digit: \(PSATSample.digit), time: \(PSATSample.time))"

@@ -27,6 +27,8 @@
 		BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27161B81743900BDA84D /* ChartListViewController.swift */; };
 		BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */; };
 		BC9A271C1B81752800BDA84D /* Charts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC9A271B1B81752800BDA84D /* Charts.storyboard */; };
+		CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF31DCE1BC6AEA200041163 /* MapKit.framework */; };
+		BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,9 @@
 		BC9A27161B81743900BDA84D /* ChartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartListViewController.swift; path = Charts/ChartListViewController.swift; sourceTree = "<group>"; };
 		BC9A27171B81743900BDA84D /* ChartTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartTableViewCells.swift; path = Charts/ChartTableViewCells.swift; sourceTree = "<group>"; };
 		BC9A271B1B81752800BDA84D /* Charts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Charts.storyboard; path = Charts/Charts.storyboard; sourceTree = "<group>"; };
+		CAF31DCE1BC6AEA200041163 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ORKTest-Bridging-Header.h"; sourceTree = "<group>"; };
+		BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF31DCF1BC6AEA200041163 /* MapKit.framework in Frameworks */,
 				86D347F41AC0E198006DB02B /* ResearchKit.framework in Frameworks */,
 				86D347FA1AC0E1B4006DB02B /* HealthKit.framework in Frameworks */,
 			);
@@ -175,6 +181,7 @@
 		86717A811AC0C0FE00AC2A23 = {
 			isa = PBXGroup;
 			children = (
+				CAF31DCE1BC6AEA200041163 /* MapKit.framework */,
 				86D347F91AC0E1B4006DB02B /* HealthKit.framework */,
 				86717A8C1AC0C0FE00AC2A23 /* ORKTest */,
 				86717AA61AC0C0FE00AC2A23 /* ORKTestTests */,
@@ -203,6 +210,8 @@
 				86717B001AC0C9B100AC2A23 /* CustomizationExamples */,
 				86717B011AC0C9D400AC2A23 /* Resources */,
 				86717A8D1AC0C0FE00AC2A23 /* Supporting Files */,
+				BCB0809D1B83E9B300A3F400 /* TaskFactory.swift */,
+				BCB0809C1B83E9B200A3F400 /* ORKTest-Bridging-Header.h */,
 			);
 			path = ORKTest;
 			sourceTree = "<group>";
@@ -468,6 +477,7 @@
 				BC9A27181B81743900BDA84D /* ChartDataSources.swift in Sources */,
 				BC9A27191B81743900BDA84D /* ChartListViewController.swift in Sources */,
 				BC9A271A1B81743900BDA84D /* ChartTableViewCells.swift in Sources */,
+				BCB0809E1B83E9B300A3F400 /* TaskFactory.swift in Sources */,
 				86717A931AC0C0FE00AC2A23 /* AppDelegate.m in Sources */,
 				86717AE51AC0C53800AC2A23 /* MainViewController.m in Sources */,
 				86717A901AC0C0FE00AC2A23 /* main.m in Sources */,

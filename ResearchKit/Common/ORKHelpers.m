@@ -78,17 +78,13 @@ CGFloat ORKFloorToViewScale(CGFloat value, UIView *view) {
     return AdjustToScale(ORKCGFloor, value, view.contentScaleFactor);
 }
 
-static id findInArrayByKey(NSArray * array, NSString *key, id value) {
+id findInArrayByKey(NSArray * array, NSString *key, id value) {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"%K == %@", key, value];
     NSArray *matches = [array filteredArrayUsingPredicate:pred];
     if (matches.count) {
         return matches[0];
     }
     return nil;
-}
-
-id ORKFindInArrayByStudyId(NSArray * array, NSString *studyIdentifier) {
-    return findInArrayByKey(array, @"studyIdentifier", studyIdentifier);
 }
 
 NSString *ORKStringFromDateISO8601(NSDate *date) {
@@ -247,8 +243,26 @@ NSDateFormatter *ORKTimeOfDayLabelFormatter() {
 }
 
 NSBundle *ORKBundle() {
-    NSBundle *bundle = [NSBundle bundleForClass:[ORKStep class]];
-    return bundle;
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __bundle = [NSBundle bundleForClass:[ORKStep class]];
+    });
+    
+    return __bundle;
+}
+
+NSBundle *ORKDefaultLocaleBundle() {
+    static NSBundle *__bundle;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *path = [ORKBundle() pathForResource:[ORKBundle() objectForInfoDictionaryKey:@"CFBundleDevelopmentRegion"] ofType:@"lproj"];
+        __bundle = [NSBundle bundleWithPath:path];
+    });
+    
+    return __bundle;
 }
 
 NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
@@ -526,4 +540,8 @@ void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNa
     if ([UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft) {
         *direction = (*direction == UIPageViewControllerNavigationDirectionForward) ? UIPageViewControllerNavigationDirectionReverse : UIPageViewControllerNavigationDirectionForward;
     }
+}
+
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces) {
+    return [@"" stringByPaddingToLength:numberOfPaddingSpaces withString:@" " startingAtIndex:0];
 }

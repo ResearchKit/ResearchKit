@@ -87,7 +87,7 @@ way to do this is to create a new branch in your fork for each new
 bug work on.
 
 Any new user-visible strings should be included in the English
-`Localizable.strings` table so that they can be picked up and
+`ResearchKit.strings` table so that they can be picked up and
 localized in the next release cycle.
 
 
