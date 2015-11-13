@@ -804,9 +804,9 @@ static NSString *const _ORKOriginalAnswerRestoreKey = @"originalAnswer";
 - (void)decodeRestorableStateWithCoder:(NSCoder *)coder {
     [super decodeRestorableStateWithCoder:coder];
     
-    self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKAnswerRestoreKey];
+    self.answer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class], [NSString class], [NSDateComponents class], [NSArray class], nil] forKey:_ORKAnswerRestoreKey];
     self.hasChangedAnswer = [coder decodeBoolForKey:_ORKHasChangedAnswerRestoreKey];
-    self.originalAnswer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class],[NSString class],[NSDateComponents class],[NSArray class], nil] forKey:_ORKOriginalAnswerRestoreKey];
+    self.originalAnswer = [coder decodeObjectOfClasses:[NSSet setWithObjects:[NSNumber class], [NSString class], [NSDateComponents class], [NSArray class], nil] forKey:_ORKOriginalAnswerRestoreKey];
     
     [self answerDidChange];
 }

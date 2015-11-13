@@ -1008,8 +1008,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else {
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
-            if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier] && ![steps containsObject:nextStep]) {
+            if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier]) {
                 [steps addObject:nextStep];
+            } else {
+                *stop = YES;
             }
         }];
     }
@@ -1181,6 +1183,9 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     } else if ([self shouldPresentStep:step]) {
         ORKStepViewController *stepViewController = [self viewControllerForStep:step];
         NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
+        if (fromController.isBeingReviewed) {
+            [_managedStepIdentifiers removeLastObject];
+        }
         [self showViewController:stepViewController goForward:YES animated:YES];
     }
     
@@ -1300,8 +1305,8 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     ORKStepViewController *stepViewController = [self viewControllerForStep:step];
     _defaultResultSource = resultSource;
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
-    stepViewController.continueButtonTitle = ORKLocalizedString(@"BUTTON_DONE", nil);
-    stepViewController.skipButtonTitle = ORKLocalizedString(@"BUTTON_CLEAR", nil);
+    stepViewController.continueButtonTitle = ORKLocalizedString(@"BUTTON_SAVE", nil);
+    stepViewController.skipButtonTitle = ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil);
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
     if (stepViewController.parentReviewStep.isStandalone) {
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;

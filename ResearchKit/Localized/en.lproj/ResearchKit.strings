@@ -189,6 +189,8 @@
 "BUTTON_OPTION_SAVE" = "Save for Later";
 "BUTTON_OPTION_DISCARD" = "Discard Results";
 "BUTTON_OPTION_STOP_TASK" = "End Task";
+"BUTTON_SAVE" = "Save";
+"BUTTON_CLEAR_ANSWER" = "Clear answer";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";
