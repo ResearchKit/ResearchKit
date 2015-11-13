@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Nevažeća e-mail adresa: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Unesite adresu";
+"LOCATION_ERROR_TITLE" = "Nije moguće riješiti navedenu adresu";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nije moguće utvrditi vašu trenutnu lokaciju. Molimo unesite adresu ili se premjestite na lokaciju s boljim GPS signalom, ako je primjenjivo.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Odbijen je pristup lokacijskim uslugama. Molimo dajte ovoj aplikaciji dopuštenje da koristi lokacijske usluge putem Postavki.";
+"LOCATION_ERROR_GEOCODE" = "Nije moguće naći rezultat za unesenu adresu. Molimo provjerite je li adresa valjana.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ili niste spojeni na internet ili ste premašili maksimalni broj zahtjeva za pretraživanje adresa. Ako niste spojeni na internet, molimo uključite svoj Wi-Fi da biste odgovorili na ovo pitanje, preskočite ovo pitanje ako je dostupna tipka za preskakanje, ili se vratite na anketu kada budete spojeni na internet. U suprotnom, molimo da pokušate ponovno za nekoliko minuta.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstualni sadržaj prekoračuje maksimalnu duljinu: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera nije dostupna u razdvojenom zaslonu.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Pošaljite e-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ihorvat@primjer.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Lozinka";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Unesite lozinku";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrdi";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ponovno unesite lozinku";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Lozinke nisu iste.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Dodatne informacije";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ivan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Horvat";
+"GENDER_FORM_ITEM_TITLE" = "Spol";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Izaberite rod";
+"DOB_FORM_ITEM_TITLE" = "Datum rođenja";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Izaberite datum";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "Kriva e-mail adresa?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "E-mail nije zaprimljen";
+"RESEND_EMAIL_BUTTON_TITLE" = "Ponovno pošalji e-mail za provjeru";
+"VERIFICATION_LABEL_MESSAGE" = "Ako je provjereno, dodirnite tipku u nastavku.";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Prijava";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Zaboravili ste lozinku?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Unesite lozinku";
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrdi lozinku";
+"PASSCODE_SAVED_MESSAGE" = "Lozinka je spremljena";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Lozinka je autorizirana";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Unesite staru lozinku";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Unesite novu lozinku";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrdite vašu novu lozinku";
+"PASSCODE_INVALID_ALERT_TITLE" = "Nevažeći unos";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Lozinke nisu iste. Pokušajte ponovno.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Molimo autorizirajte pomoću Touch ID-a";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Greška Touch ID-a";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dopušteni su samo numerički znakovi.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka lozinke";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ od %@ unesenih znamenki";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nije moguće dodati stavku privjeska ključeva.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nije moguće ažurirati stavku privjeska ključeva.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nije moguće obrisati stavku privjeska ključeva.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nije moguće pronaći stavku privjeska ključeva.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Slažem se";
 "BUTTON_CANCEL" = "Poništi";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Očisti";
 "BUTTON_DISAGREE" = "Ne slažem se";
 "BUTTON_DONE" = "OK";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Dodirnite";
 "TOTAL_TAPS_LABEL" = "Ukupan broj dodira";
 "TAPPING_INSTRUCTION" = "Dodirujte tipke što brže možete koristeći dva prsta.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Glas";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Okrenite se i hodajte natrag do mjesta od kojeg ste krenuli.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Dodirnite OK kad završite.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Bez podataka";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,18 @@
 "PSAT_INSTRUCTION" = "Zbrojite ovu novu znamenku s prethodnom.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Test s %@ rupa i klinovima";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost mjeri funkciju gornjih ekstremiteta tako da od vas traži da u rupu stavite krug. To ćete morati učiniti %@ puta.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Testirat će se i vaše%@ i %@ ruke.\nMorate podići krug što je brže moguće, staviti ga u rupu, i nakon što to uradite %@ puta, ponovno ga ukloniti %@ puta.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"HOLE_PEG_TEST_RIGHT" = "desno";
+"HOLE_PEG_TEST_LEFT" = "lijevo";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Stavite klin u rupu korištenjem %@ ruke.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Stavite klin iza linije korištenjem %@ ruke.";
+"HOLE_PEG_TEST_TEXT" = "Podignite klin s dva prsta.";
+"HOLE_PEG_TEST_TEXT_2" = "Podignite prste da biste ispustili klin.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Datoteka se ne može izraditi";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nije se moglo ukloniti dovoljno log datoteka za dosezanje praga";
@@ -279,6 +345,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Više grešaka prilikom uklanjanja log zapisa";
 "ERROR_RECORDER_NO_DATA" = "Nisu pronađeni prikupljeni podaci.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Izlazni direktorij nije naveden";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Bez podataka";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Natrag";
@@ -317,3 +386,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
+"AX_GRAPH_POINT_%@" = "Točka: %@";

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Correo electrónico no válido: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Ingresa una dirección";
+"LOCATION_ERROR_TITLE" = "Error al determinar la dirección ingresada";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No se pudo determinar tu ubicación actual. Ingresa una dirección o ve a una ubicación con mejor recepción de señal GPS, si aplica.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Se rechazó el acceso a los servicios de localización. Otorga a esta app permiso para usar los servicios de localización desde Configuración.";
+"LOCATION_ERROR_GEOCODE" = "No fue posible encontrar coincidencias con la dirección ingresada. Asegúrate de que la dirección es válida.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Puede que no estés conectado a Internet o que hayas superado el límite máximo de solicitudes de búsqueda de direcciones. Si no estás conectado a Internet, activa el WiFi para responder esta pregunta, omite esta pregunta si el botón Omitir está disponible, o regresa a la encuesta cuando estés conectado a Internet. Si no funciona, vuelve a intentarlo en unos minutos.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El texto sobrepasa la longitud máxima: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "No se puede usar la cámara con la pantalla dividida.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Correo";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "juanlopez@ejemplo.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Contraseña";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ingresar contraseña";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Vuelve a ingresar la contraseña";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Las contraseñas no coinciden.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Información adicional";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Juan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "López";
+"GENDER_FORM_ITEM_TITLE" = "Género";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Elige un género";
+"DOB_FORM_ITEM_TITLE" = "Fecha de nacimiento";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Elige una fecha";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "¿Dirección de correo incorrecta?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "No recibí el correo";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo electrónico de verificación";
+"VERIFICATION_LABEL_MESSAGE" = "Si verificaste, toca el botón de abajo.";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inicio de sesión";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "¿Olvidaste tu contraseña?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Ingresa el código";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
+"PASSCODE_SAVED_MESSAGE" = "Código guardado";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Código autenticado";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ingresa el código antiguo";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Ingresa el nuevo código";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nuevo código";
+"PASSCODE_INVALID_ALERT_TITLE" = "Datos de entrada no válidos";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Intenta de nuevo.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentica con Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se permiten caracteres numéricos.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progreso del código";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos ingresados";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "No se pudo agregar el elemento de Llavero.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "No se pudo actualizar el elemento de Llavero.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "No se pudo eliminar el elemento de Llavero.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "No se pudo encontrar el elemento de Llavero.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Acepto";
 "BUTTON_CANCEL" = "Cancelar";
+"BUTTON_OK" = "Aceptar";
 "BUTTON_CLEAR" = "Borrar";
 "BUTTON_DISAGREE" = "No acepto";
 "BUTTON_DONE" = "Aceptar";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Tocar";
 "TOTAL_TAPS_LABEL" = "Toques en total";
 "TAPPING_INSTRUCTION" = "Toca los botones usando dos dedos tan rápido como puedas.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Da vuelta y regresa al punto de inicio.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Toca OK al terminar.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Sin datos";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,18 @@
 "PSAT_INSTRUCTION" = "Agregar este nuevo dígito al anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Prueba con estaca y agujero";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la función de tus extremidades superiores al pedirte que coloques un círculo en un agujero. Será necesario repetir esta tarea %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Se pondrá a prueba tanto a tu mano %@ como la %@.\nDeberás recoger el círculo lo más rápido posible, colocarlo en el agujero y, después de repetirlo %@ veces, deberás sacarlo %@ veces.";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
+"HOLE_PEG_TEST_RIGHT" = "derecha";
+"HOLE_PEG_TEST_LEFT" = "izquierda";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Pon la estaca en el agujero usando la mano %@.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Pon la estaca detrás de la línea usando la mano %@.";
+"HOLE_PEG_TEST_TEXT" = "Recoge la estaca con dos dedos.";
+"HOLE_PEG_TEST_TEXT_2" = "Levanta los dedos para soltar la estaca.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se pudo crear el archivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No se pudo eliminar suficientes registros para alcanzar el umbral";
@@ -279,6 +345,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Varios errores al eliminar registros";
 "ERROR_RECORDER_NO_DATA" = "Datos recopilados no encontrados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Directorio de salida no especificado";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sin datos";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Atrás";
@@ -317,3 +386,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Rango de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
+"AX_GRAPH_POINT_%@" = "Punto: %@";

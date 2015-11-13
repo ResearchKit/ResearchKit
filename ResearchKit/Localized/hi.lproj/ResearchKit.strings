@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "अमान्य ईमेल पता : %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "पता दर्ज करें";
+"LOCATION_ERROR_TITLE" = "निर्दिष्ट पते को प्राप्त करने में विफल";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "आपके वर्तमान स्थान का पता लगाने में असमर्थ। कृपया कोई पता टाइप करें या लागू होने पर किसी ऐसे स्थान पर जाएँ जहाँ बेहतर GPS सिग्नल हों।";
+"LOCATION_ERROR_MESSAGE_DENIED" = "“स्थान सेवाएँ” तक पहुँच को अस्वीकृत किया गया। कृपया सेटिंग्ज़ द्वारा इस ऐप को “स्थान सेवाएँ” का प्रयोग करने की अनुमति प्रदान करें।";
+"LOCATION_ERROR_GEOCODE" = "दर्ज किए गए पते के लिए कोई परिणाम नहीं मिले। कृपया सुनिश्चित करें कि यह पता मान्य है।";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "या तो आप इंटरनेट से कनेक्टेड नहीं हैं या आपने पता खोजने के अनुरोधों की अधिकतम संख्या को पार कर लिया है। यदि आप इंटरनेट से कनेक्टेड नहीं हैं, तो इस सवाल का जवाब देने के लिए अपने वाई-फ़ाई को चालू करें, यदि स्किप बटन उपलब्ध हो तो इस प्रश्न को स्किप करें या फिर इंटरनेट से कनेक्ट होने पर इस सर्वेक्षण पर वापस आएँ। अन्यथा, कृपया कुछ मिनटों बाद पुनः प्रयास करें।";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "टेक्स्ट कॉन्टेंट अधिकतम अनुमत सीमा से अधिक है : %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "स्प्लिट स्क्रीन में कैमरा उपलब्ध नहीं है।";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "ईमेल";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "पासवर्ड";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "पासवर्ड दर्ज करें";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "पुष्टि करें";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "पासवर्ड पुनः दर्ज करें";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "पासवर्ड मेल नहीं खा रहे हैं।";
+"ADDITIONAL_INFO_SECTION_TITLE" = "अतिरिक्त जानकारी";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "साहिल";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "मलिक";
+"GENDER_FORM_ITEM_TITLE" = "लिंग";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "लिंग चुनें";
+"DOB_FORM_ITEM_TITLE" = "जन्मतिथि";
+"DOB_FORM_ITEM_PLACEHOLDER" = "तिथि चुनें";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "ईमेल पता ग़लत है?";
+"RESEND_EMAIL_LABEL_MESSAGE" = "मुझे कोई ईमेल नहीं मिला";
+"RESEND_EMAIL_BUTTON_TITLE" = "सत्यापन ईमेल फिर से भेजें";
+"VERIFICATION_LABEL_MESSAGE" = "यदि सत्यापन हो गया हो, नीचे दिए गए बटन पर टैप करें।";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "लॉगइन करें";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "पासवर्ड भूल गए?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "पासकोड दर्ज करें";
+"PASSCODE_CONFIRM_MESSAGE" = "पासकोड की पुष्टि करें";
+"PASSCODE_SAVED_MESSAGE" = "पासकोड सहेजा गया";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "पासकोड प्रमाणित किया गया";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "अपना पुराना पासकोड दर्ज करें";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "अपना नया पासकोड दर्ज करें";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "अपने नए पासकोड की पुष्टि करें";
+"PASSCODE_INVALID_ALERT_TITLE" = "अमान्य इनपुट";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "पासकोड एक समान नहीं हैं। पुनः प्रयास करें।";
+"PASSCODE_TOUCH_ID_MESSAGE" = "कृपया Touch ID से प्रमाणित करें।";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID त्रुटि";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "केवल न्यूमैरिक वर्णों की अनुमति है।";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "पासकोड प्रगति सूचक";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%1$@/%2$@ मान दर्ज किए गए";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "कीचेन आइटम को जोड़ा नहीं जा सका।";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "कीचेन आइटम को अपडेट नहीं किया जा सका।";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "कीचेन आइटम को डिलीट नहीं किया जा सका।";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "कीचेन आइटम को खोजा नहीं जा सका।";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "सहमत";
 "BUTTON_CANCEL" = "रद्द करें";
+"BUTTON_OK" = "ठीक";
 "BUTTON_CLEAR" = "साफ़ करें";
 "BUTTON_DISAGREE" = "असहमत";
 "BUTTON_DONE" = "पूर्ण";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "टैप करें";
 "TOTAL_TAPS_LABEL" = "कुल टैप";
 "TAPPING_INSTRUCTION" = "दो ऊँगलियों से बटनों को जितना संभव हो सके उतनी तेज़ी से एक के बाद एक दबाएँ।";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "आवाज़";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "पीछे मुड़ें और जहाँ से आपने शुरूआत की थी, वहाँ वापस चलकर जाएँ।";
 "TIMED_WALK_INSTRUCTION_TEXT" = "पूरा हो जाने पर “पूर्ण” पर टैप करें।";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "कोई डेटा नहीं";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,18 @@
 "PSAT_INSTRUCTION" = "इस नए अंक का पिछले अंक में योग करें।";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-होल पेग परीक्षण";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "एक छिद्र में वृत्त को डालने के लिए कहकर इस गतिविधि द्वारा आपकी अपर एक्सट्रेमिटी फ़ंक्शन का मापन किया जाता है। आपसे %@ बार ऐसा करने का अनुरोध किया जाएगा।";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "आपके %@ और %@, दोनों हाथों का परीक्षण किया जाएगा।\nआपको जितना जल्दी हो सके, वृत्त को छिद्र में डालना होगा, और %1$@ बार करने के बाद %2$@ बार पुनः उसे वहाँ से हटाना होगा।";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "आरंभ करने के लिए “आरंभ करें” पर टैप करें।";
+"HOLE_PEG_TEST_RIGHT" = "दाएँ";
+"HOLE_PEG_TEST_LEFT" = "बाएँ";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "%@ हाथ से पेग को छिद्र में डालिये।";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "%@ हाथ से पेग को रेखा के पीछे करिये।";
+"HOLE_PEG_TEST_TEXT" = "दो ऊँगलियों से पेग को लीजिए।";
+"HOLE_PEG_TEST_TEXT_2" = "पेग को डालने के लिए ऊँगलियों को उठाएँ।";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "फ़ाइल नहीं बन सकी";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "अधिकतम संग्रहण सीमा तक पहुँचने के लिए आवश्यक लॉग फ़ाइलें नहीं हटाई जा सकीं";
@@ -279,6 +345,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "लॉग हटाने में कई त्रुटियाँ";
 "ERROR_RECORDER_NO_DATA" = "कोई संग्रहित डेटा नहीं मिला।";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "कोई आउटपुट निर्देशिका निर्दिष्ट नहीं";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "कोई डेटा नहीं";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "वापस";
@@ -317,3 +386,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "%1$@ से %2$@ तक श्रेणी";
 "AX_GRAPH_AND_SEPARATOR" = " और ";
+"AX_GRAPH_POINT_%@" = "पॉइंट : %@";

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "ที่อยู่อีเมลที่ไม่ถูกต้อง: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "ป้อนที่อยู่";
+"LOCATION_ERROR_TITLE" = "ไม่สามารถหาตำแหน่งที่ตั้งของที่อยู่ที่ป้อน";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "ไม่สามารถหาตำแหน่งที่ตั้งปัจจุบันของคุณ กรุณาป้อนที่อยู่หรือไปอยู่ในที่ที่มีสัญญาณ GPS ที่ดีกว่านี้หากเป็นไปได้";
+"LOCATION_ERROR_MESSAGE_DENIED" = "การเข้าถึงบริการหาตำแหน่งที่ตั้งถูกปฏิเสธ กรุณาอนุญาตให้แอพนี้ใช้บริการหาตำแหน่งที่ตั้งได้ผ่านทางการตั้งค่า";
+"LOCATION_ERROR_GEOCODE" = "ไม่มีผลการค้นหาสำหรับที่อยู่ที่ป้อน กรุณาตรวจสอบให้แน่ใจว่าที่อยู่ถูกต้อง";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "อาจเป็นไปได้ว่าคุณไม่ได้เชื่อมต่อกับอินเทอร์เน็ตหรือการขอเข้าสู่อินเทอร์เน็ตเต็มแล้ว ถ้าคุณไม่ได้เชื่อมต่ออยู่กับอินเทอร์เน็ต กรุณาเปิด WiFi ของคุณเพื่อตอบคำถามนี้ คุณสามารถข้ามคำถามนี้ได้หากมีปุ่มข้าม หรือกลับมาที่การสำรวจนี้เมื่อคุณเชื่อมต่อกับอินเทอร์เน็ต หรือรอสักครู่หนึ่งแล้วลองอีกครั้ง";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "เนื้อหาข้อความที่เกินจำนวนสูงสุด: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "ไม่สามารถใช้งานกล้องในหน้าจอแบบแยกได้";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "อีเมล";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "รหัสผ่าน";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "ป้อนรหัสผ่าน";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "ยืนยัน";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "ป้อนรหัสผ่านอีกครั้ง";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "รหัสผ่านไม่ตรงกัน";
+"ADDITIONAL_INFO_SECTION_TITLE" = "ข้อมูลเพิ่มเติม";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "เพศ";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "เลือกเพศ";
+"DOB_FORM_ITEM_TITLE" = "วันเกิด";
+"DOB_FORM_ITEM_PLACEHOLDER" = "เลือกวันที่";
+
+/* Verification step */
+"CHANGE_EMAIL_BUTTON_TITLE" = "ที่อยู่อีเมลผิดหรือเปล่า";
+"RESEND_EMAIL_LABEL_MESSAGE" = "ฉันไม่ได้รับอีเมล";
+"RESEND_EMAIL_BUTTON_TITLE" = "ส่งอีเมลการยืนยันอีกครั้ง";
+"VERIFICATION_LABEL_MESSAGE" = "ถ้าผ่านการยืนยัน ให้แตะปุ่มข้างล่างนี้";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "เข้าสู่ระบบ";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "ลืมรหัสผ่านหรือไม่";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "ป้อนรหัสผ่านตัวเลข";
+"PASSCODE_CONFIRM_MESSAGE" = "ยืนยันรหัสผ่านตัวเลข";
+"PASSCODE_SAVED_MESSAGE" = "ได้บันทึกรหัสผ่านตัวเลขแล้ว";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "รหัสผ่านตัวเลขผ่านการตรวจสอบแล้ว";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "ป้อนรหัสผ่านตัวเลขเก่าของคุณ";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "ป้อนรหัสผ่านตัวเลขใหม่ของคุณ";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "ยืนยันรหัสผ่านตัวเลขใหม่ของคุณ";
+"PASSCODE_INVALID_ALERT_TITLE" = "รหัสผ่านตัวเลขที่ป้อนไม่ถูกต้อง";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "รหัสผ่านตัวเลขไม่ตรงกัน ลองอีกครั้ง";
+"PASSCODE_TOUCH_ID_MESSAGE" = "กรุณาใช้ Touch ID ตรวจสอบรหัสผ่านตัวเลข";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID ผิดพลาด";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "เฉพาะตัวเลขเท่านั้น";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "สัญลักษณ์แสดงว่ากำลังตรวจสอบรหัสผ่านตัวเลขอยู่";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "ตัวเลขที่ป้อนหลักที่ %@ จาก %@ หลัก";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "ไม่สามารถเพิ่มรายการในพวงกุญแจ";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "ไม่สามารถอัพเดทรายการในพวงกุญแจ";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "ไม่สามารถลบรายการในพวงกุญแจ";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "ไม่สามารถค้นหารายการในพวงกุญแจ";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "ยอมรับ";
 "BUTTON_CANCEL" = "ยกเลิก";
+"BUTTON_OK" = "ตกลง";
 "BUTTON_CLEAR" = "ล้าง";
 "BUTTON_DISAGREE" = "ไม่ยอมรับ";
 "BUTTON_DONE" = "เสร็จ";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "แตะ";
 "TOTAL_TAPS_LABEL" = "การแตะทั้งหมด";
 "TAPPING_INSTRUCTION" = "แตะปุ่มโดยใช้สองนิ้วให้เร็วที่สุดเท่าที่จะทำได้";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "เสียง";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "หันหลัง แล้วเดินกลับไปจุดเริ่มต้น";
 "TIMED_WALK_INSTRUCTION_TEXT" = "แตะเสร็จสิ้นเมื่อทำเสร็จ";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "ไม่มีข้อมูล";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,18 @@
 "PSAT_INSTRUCTION" = "เพิ่มตัวเลขตัวใหม่นี้ไปที่ตัวเลขก่อนหน้า";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "การทดสอบ Peg %@-Hole";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "การกระทำนี้จะวัดสมรรถภาพของแขนส่วนบนของคุณโดยการหยิบหมุดวางลงในช่องวงกลม คุณจะต้องทำอย่างนี้ %@ ครั้ง";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "ทั้งมือ%@และ%@ของคุณจะถูกทดสอบ\nคุณต้องหยิบวงกลมให้เร็วที่สุดเท่าที่จะเร็วได้ วางลงในช่องวงกลม ทำซ้ำ %@ ครั้ง แล้วหยิบออกจากวงกลมอีก %@ ครั้ง";
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
+"HOLE_PEG_TEST_RIGHT" = "ขวา";
+"HOLE_PEG_TEST_LEFT" = "ซ้าย";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "ใช้มือ%@หยิบหมุดวางลงในช่องวงกลม";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "ใช้มือ%@หยิบหมุดวางไว้ข้างหลังเส้น";
+"HOLE_PEG_TEST_TEXT" = "ใช้นิ้วสองนิ้วหยิบหมุด";
+"HOLE_PEG_TEST_TEXT_2" = "ปล่อยนิ้วเพื่อปล่อยหมุด";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "สร้างไฟล์ไม่ได้";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "ไม่สามารถเอาไฟล์บันทึกออกให้เพียงพอกับค่าที่กำหนด";
@@ -279,6 +345,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "ข้อผิดพลาดหลายส่วนเกี่ยวกับการเอาบันทึกออก";
 "ERROR_RECORDER_NO_DATA" = "ไม่พบข้อมูลที่เก็บรวบรวม";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "ไม่ได้ระบุสารบบผลลัพธ์ไว้";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "ไม่มีข้อมูล";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "ย้อนกลับ";
@@ -317,3 +386,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "ช่วงตั้งแต่ %@ ถึง %@";
 "AX_GRAPH_AND_SEPARATOR" = " และ ";
+"AX_GRAPH_POINT_%@" = "จุด: %@";
