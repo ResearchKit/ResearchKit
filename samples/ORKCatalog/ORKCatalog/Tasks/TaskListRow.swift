@@ -985,7 +985,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         let predicateFormItem03 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: false)
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
-        let predicateRule = ORKPredicateStepNavigationRule(resultPredicates: [predicateEligible], destinationStepIdentifiers: [String(Identifier.EligibilityEligibleStep)])
+        let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers: [ (predicateEligible, String(Identifier.EligibilityEligibleStep)) ])
         
         eligibilityTask.setNavigationRule(predicateRule, forTriggerStepIdentifier:String(Identifier.EligibilityFormStep))
         
@@ -1061,11 +1061,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         waitStep.text = waitText
         
         /*
-        A verification step view controller sub class is required in order to use a verification step.
-        This class includes methods that interact with the buttons in the view and the email label.
-        Overriding these methods allows for your desired functionality.
+        A verification step view controller subclass is required in order to use the verification step.
+        The subclass provides the view controller button and UI behavior by overriding the following methods.
         */
-        class verificationViewController : ORKVerificationStepViewController {
+        class VerificationViewController : ORKVerificationStepViewController {
             override func changeEmailButtonTapped() {
                 let alertTitle = NSLocalizedString("Wrong email address?", comment: "")
                 let alertMessage = NSLocalizedString("Button tapped", comment: "")
@@ -1094,7 +1093,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         }
         
         let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, verificationViewControllerClass: verificationViewController.self)
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, verificationViewControllerClass: VerificationViewController.self)
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
@@ -1106,11 +1105,10 @@ enum TaskListRow: Int, CustomStringConvertible {
     /// This tasks presents the login step.
     private var loginTask: ORKTask {
         /*
-        A login step view controller sub class is required in order to use a login step.
-        This class includes methods that interact with the buttons in the view.
-        Overriding these methods allows for your desired functionality.
+        A login step view controller subclass is required in order to use the login step.
+        The subclass provides the behavior for the login step forgot password button.
         */
-        class loginViewController : ORKLoginStepViewController {
+        class LoginViewController : ORKLoginStepViewController {
             override func forgotPasswordButtonTapped() {
                 let alertTitle = NSLocalizedString("Forgot password?", comment: "")
                 let alertMessage = NSLocalizedString("Button tapped", comment: "")
@@ -1125,7 +1123,7 @@ enum TaskListRow: Int, CustomStringConvertible {
         and a button for `Forgot password?`.
         */
         let loginTitle = NSLocalizedString("Login", comment: "")
-        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: loginViewController.self)
+        let loginStep = ORKLoginStep(identifier: String(Identifier.LoginStep), title: loginTitle, text: exampleDetailText, loginViewControllerClass: LoginViewController.self)
         
         /*
         A wait step allows you to validate the data from the user login against your server before proceeding.

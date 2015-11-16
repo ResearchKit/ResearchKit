@@ -41,10 +41,8 @@
 #import "ORKAnswerFormat_Internal.h"
 #import "ORKConsentDocument.h"
 #import "ORKConsentSignature.h"
-#import "ORKPlacemark.h"
 #import <CoreMotion/CoreMotion.h>
 #import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
 
 
 const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
@@ -1920,6 +1918,92 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 @end
 
 
+@implementation ORKLocation
+
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate
+                            region:(CLCircularRegion *)region
+                         userInput:(NSString *)userInput
+                 addressDictionary:(NSDictionary *)addressDictionary {
+    self = [super init];
+    if (self) {
+        _coordinate = coordinate;
+        _region = region;
+        _userInput = [userInput copy];
+        _addressDictionary = [addressDictionary copy];
+    }
+    return self;
+}
+
+- (instancetype)initWithPlacemark:(CLPlacemark *)placemark userInput:(NSString *)userInput {
+    self = [super init];
+    if (self) {
+        _coordinate = placemark.location.coordinate;
+        _userInput =  [userInput copy];
+        _region = (CLCircularRegion *)placemark.region;
+        _addressDictionary = [placemark.addressDictionary copy];
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    // This object is not mutable
+    return self;
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+static NSString * const RegionCenterLatitudeKey = @"region.center.latitude";
+static NSString * const RegionCenterLongitudeKey = @"region.center.longitude";
+static NSString * const RegionRadiusKey = @"region.radius";
+static NSString * const RegionIdentifierKey = @"region.identifier";
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    ORK_ENCODE_OBJ(aCoder, userInput);
+    ORK_ENCODE_COORDINATE(aCoder, coordinate);
+    ORK_ENCODE_OBJ(aCoder, addressDictionary);
+
+    [aCoder encodeObject:@(_region.center.latitude) forKey:RegionCenterLatitudeKey];
+    [aCoder encodeObject:@(_region.center.longitude) forKey:RegionCenterLongitudeKey];
+    [aCoder encodeObject:_region.identifier forKey:RegionIdentifierKey];
+    [aCoder encodeObject:@(_region.radius) forKey:RegionRadiusKey];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        ORK_DECODE_OBJ_CLASS(aDecoder, userInput, NSString);
+        ORK_DECODE_COORDINATE(aDecoder, coordinate);
+        ORK_DECODE_OBJ_CLASS(aDecoder, addressDictionary, NSDictionary);
+        ORK_DECODE_OBJ_CLASS(aDecoder, region, CLCircularRegion);
+        
+        NSNumber *latitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLatitudeKey];
+        NSNumber *longitude = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionCenterLongitudeKey];
+        NSNumber *radius = [aDecoder decodeObjectOfClass:[NSNumber class] forKey:RegionRadiusKey];
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude.doubleValue, longitude.doubleValue);
+        _region = [[CLCircularRegion alloc] initWithCenter:coordinate
+                                                    radius:radius.doubleValue
+                                                identifier:[aDecoder decodeObjectOfClass:[NSString class] forKey:RegionIdentifierKey]];
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([self class] != [object class]) {
+        return NO;
+    }
+    
+    __typeof(self) castObject = object;
+    return (ORKEqualObjects(self.userInput, castObject.userInput) &&
+            ORKEqualObjects(self.addressDictionary, castObject.addressDictionary) &&
+            ORKEqualObjects(self.region, castObject.region) &&
+            ORKEqualObjects([NSValue valueWithMKCoordinate:self.coordinate], [NSValue valueWithMKCoordinate:castObject.coordinate]));
+}
+
+@end
+
+
 @implementation ORKLocationQuestionResult
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -1930,7 +2014,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKPlacemark);
+        ORK_DECODE_OBJ_CLASS(aDecoder, locationAnswer, ORKLocation);
     }
     return self;
 }
@@ -1953,7 +2037,7 @@ const NSUInteger NumberOfPaddingSpacesForIndentationLevel = 4;
 }
 
 + (Class)answerClass {
-    return [ORKPlacemark class];
+    return [ORKLocation class];
 }
 
 - (void)setAnswer:(id)answer {
