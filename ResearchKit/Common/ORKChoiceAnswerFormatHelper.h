@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSNumber *)selectedIndexForAnswer:(nullable id)answer;
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer;
 
+- (NSString*)stringForChoiceAnswer:(id)answer;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -166,25 +166,7 @@
             [(NSMutableArray *)self.items addObject:cellItem];
         }];
         
-    }
-    // ORKBooleanAnswerFormat uses ORKTextChoiceAnswerFormat as it's impliedAnswerFormat
-    // that case is handled above so the following block never get called
-    /*
-    else if ([[item impliedAnswerFormat] isKindOfClass:[ORKBooleanAnswerFormat class]]) {
-        _hasChoiceRows = YES;
-        {
-            ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
-            [(NSMutableArray *)self.items addObject:cellItem];
-        }
-        
-        {
-            ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
-            [(NSMutableArray *)self.items addObject:cellItem];
-        }
-        
-    } 
-    */
-    else {
+    } else {
         ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item];
        [(NSMutableArray *)self.items addObject:cellItem];
     }

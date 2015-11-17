@@ -174,4 +174,15 @@
     
 }
 
+- (NSString*)stringForChoiceAnswer:(id)answer {
+    __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    for (NSNumber *index in [self selectedIndexesForAnswer:answer]) {
+        NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
+        }
+    }
+    return [answerStrings componentsJoinedByString:@"\n"];
+}
+
 @end

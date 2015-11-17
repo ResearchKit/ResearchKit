@@ -477,18 +477,6 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return impliedFormat == self ? nil : [impliedFormat stringForAnswer:answer];
 }
 
-- (NSString*)stringForChoiceAnswer:(id)answer {
-    __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
-    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    for (NSNumber *index in [helper selectedIndexesForAnswer:answer]) {
-        NSString *text = [[helper answerOptionAtIndex:[index integerValue]] text];
-        if (text != nil) {
-            [answerStrings addObject:text];
-        }
-    }
-    return [answerStrings componentsJoinedByString:@"\n"];
-}
-
 @end
 
 
@@ -597,7 +585,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForChoiceAnswer:answer];
+    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    return [helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -677,7 +666,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForChoiceAnswer:answer];
+    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    return [helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -751,7 +741,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForChoiceAnswer:answer];
+    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    return [helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -1335,8 +1326,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (NSString*)stringForAnswer:(id)answer {
     if ([self isAnswerValid:answer]) {
         NSNumberFormatter *formatter = [self makeNumberFormatter];
-        [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
-        [formatter setNegativeSuffix:[NSString stringWithFormat:@"%@ ", self.unit]];
+        if (self.unit && self.unit.length > 0) {
+            [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
+            [formatter setNegativeSuffix:[NSString stringWithFormat:@" %@", self.unit]];
+        }
         return [formatter stringFromNumber:answer];
     } else {
         return nil;
@@ -1942,7 +1935,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self stringForChoiceAnswer:answer];
+    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
+    return [helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -2129,8 +2123,10 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
              self.secureTextEntry == castObject.secureTextEntry);
 }
 
+static NSString * const kSecureTextEntryEscapeString = @"*";
+
 - (NSString*)stringForAnswer:(id)answer {
-    return [self isAnswerValid:answer] && !_secureTextEntry ? answer : nil;
+    return [self isAnswerValid:answer] && !_secureTextEntry ? answer : [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0];
 }
 
 @end
@@ -2312,13 +2308,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[answer doubleValue]];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    calendar.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:date];
-    NSDateComponentsFormatter *formatter = [[NSDateComponentsFormatter alloc] init];
-    formatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
-    return [formatter stringFromDateComponents:components];
+    return [ORKTimeIntervalLabelFormatter() stringFromTimeInterval:((NSNumber *)answer).floatValue];
 }
 
 @end
@@ -2375,10 +2365,12 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             _useCurrentLocation == castObject.useCurrentLocation);
 }
 
+static NSString * const formattedAddressLinesKey = @"FormattedAddressLines";
+
 - (NSString *)stringForAnswer:(id)answer {
     ORKLocation *location = answer;
     // access address dictionary directly since 'ABCreateStringWithAddressDictionary:' is deprecated in iOS9
-    NSArray<NSString *> *addressLines = [location.addressDictionary valueForKey:@"FormattedAddressLines"];
+    NSArray<NSString *> *addressLines = [location.addressDictionary valueForKey:formattedAddressLinesKey];
     return addressLines ? [addressLines componentsJoinedByString:@"\n"] :
         MKStringFromMapPoint(MKMapPointForCoordinate(location.coordinate));
 }
