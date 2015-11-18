@@ -61,13 +61,10 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     ORKNavigationContainerView *_continueSkipView;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     return self;
 }
-#pragma clang diagnostic pop
  
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *>*)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];

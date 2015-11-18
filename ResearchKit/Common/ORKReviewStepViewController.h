@@ -49,7 +49,7 @@ ORK_CLASS_AVAILABLE
 
 - (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *> *)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource;
 
-@property (nonatomic, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
+@property (nonatomic, weak, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 
 @end
 

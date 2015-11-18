@@ -899,14 +899,7 @@
         ORKTableSection *section = _sections[indexPath.section];
         ORKTableCellItem *cellItem = section.items[indexPath.row - 1];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
-        
-        // formItem's questionType is ORKQuestionTypeSingleChoice even if answerFormat is ORKAnswerFormatBoolean
-        // should check for answerFormat rather than questionType
-        /*
-        id answer = (cellItem.formItem.questionType == ORKQuestionTypeBoolean)? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
-        */
         id answer = ([cellItem.formItem.answerFormat isKindOfClass:[ORKBooleanAnswerFormat class]])? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
-        
         NSString *formItemIdentifier = cellItem.formItem.identifier;
         if (answer && formItemIdentifier) {
             [self setAnswer:answer forIdentifier:formItemIdentifier];

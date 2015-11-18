@@ -2126,7 +2126,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 static NSString * const kSecureTextEntryEscapeString = @"*";
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self isAnswerValid:answer] && !_secureTextEntry ? answer : [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0];
+    if ([self isAnswerValid:answer]) {
+        return _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
+    } else {
+        return nil;
+    }
 }
 
 @end
@@ -2155,7 +2159,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 }
 
 - (NSString*)stringForAnswer:(id)answer {
-    return [self.impliedAnswerFormat stringForAnswer: answer];
+    return [self.impliedAnswerFormat stringForAnswer:answer];
 }
 
 @end
