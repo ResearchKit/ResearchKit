@@ -134,7 +134,7 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Oppgi den gamle koden";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Angi den nye koden";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekreft den nye koden";
-"PASSCODE_INVALID_ALERT_TITLE" = "Ugyldig inndata";
+"PASSCODE_INVALID_ALERT_TITLE" = "Ugyldig inntasting";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Kodene er ikke like. Prøv igjen.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentiser med Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-feil";
@@ -327,13 +327,9 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-hulls pluggtest";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en sirkel i et hull for å måle funksjonen til overkroppen din. Du vil bli bedt om å gjøre det %@ ganger.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Både %@ og %@ hånd vil bli testet.\nDu må plukke opp sirkelen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en sirkel i et hull for å måle funksjonen i armene dine. Du vil bli bedt om å gjøre det %@ ganger.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
-"HOLE_PEG_TEST_RIGHT" = "høyre";
-"HOLE_PEG_TEST_LEFT" = "venstre";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Plasser pluggen i hullet med %@ hånd.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Plasser pluggen bak streken med %@ hånd.";
 "HOLE_PEG_TEST_TEXT" = "Bruk to fingre til å løfte opp pluggen.";
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for å slippe pluggen.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+

@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
-"LOCATION_ERROR_TITLE" = "Gagal Menanggulangi Alamat yang Ditetapkan";
+"LOCATION_ERROR_TITLE" = "Gagal Menentukan Alamat yang Ditetapkan";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menemukan lokasi Anda saat ini. Ketikkan alamat atau pindah ke lokasi dengan sinyal GPS yang lebih baik jika memungkinkan.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Akses ke layanan lokasi telah ditolak. Izinkan app ini untuk menggunakan layanan lokasi melalui Pengaturan.";
 "LOCATION_ERROR_GEOCODE" = "Tidak dapat menemukan hasil untuk alamat yang dimasukkan. Pastikan bahwa alamat sah.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan WiFi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survey setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan WiFi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survei setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Konten teks melebihi panjang maksimum: %@";
@@ -328,14 +328,10 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan lingkaran di lubang. Anda akan dimintai untuk melakukan ini %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Tangan %@ dan %@ akan diuji.\nAnda harus mengambil lingkaran secepat mungkin, memasukkannya di lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
-"HOLE_PEG_TEST_RIGHT" = "kanan";
-"HOLE_PEG_TEST_LEFT" = "kiri";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Letakkan sumbat di lubang menggunakan tangan %@ Anda.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Letakkan sumbat di belakang garis menggunakan tangan %@ Anda.";
 "HOLE_PEG_TEST_TEXT" = "Ambil sumbat dengan dua jari.";
-"HOLE_PEG_TEST_TEXT_2" = "Jari kiri untuk menjatuhkan sumbat.";
+"HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan sumbat.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Berkisar dari %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Poin: %@";
+

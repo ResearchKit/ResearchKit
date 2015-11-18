@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Pošaljite e-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "ihorvat@primjer.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ihorvat@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Lozinka";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Unesite lozinku";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrdi";
@@ -193,7 +193,7 @@
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Započinjanje aktivnosti za";
 "TASK_COMPLETE_TITLE" = "Aktivnost je dovršena";
-"TASK_COMPLETE_TEXT" = "Vaši podaci će se analizirati i bit ćete obaviješteni kad vaši rezultati budu spremni.";
+"TASK_COMPLETE_TEXT" = "Vaši podaci će se analizirati i bit ćete obaviješteni kad rezultati budu spremni.";
 
 /* Image capture step. */
 "CAPTURE_BUTTON_CAPTURE_IMAGE" = "Snimi sliku";
@@ -227,7 +227,7 @@
 "TAPPING_TASK_TITLE" = "Brzina dodirivanja";
 "TAPPING_INTRO_TEXT" = "Ova aktivnost mjeri vašu brzinu dodirivanja.";
 "TAPPING_INTRO_TEXT_2_FORMAT" = "Stavite telefon na ravnu podlogu. Na zaslonu će se prikazati dvije tipke za %@. Koristeći dva prsta iste ruke, naizmjence dodirujte tipke što brže možete.";
-"TAPPING_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"TAPPING_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "TAP_BUTTON_TITLE" = "Dodirnite";
 "TOTAL_TAPS_LABEL" = "Ukupan broj dodira";
 "TAPPING_INSTRUCTION" = "Dodirujte tipke što brže možete koristeći dva prsta.";
@@ -235,7 +235,7 @@
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Glas";
-"AUDIO_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"AUDIO_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "AUDIO_INSTRUCTION" = "Izgovarajte \"Aaaaaa\" u mikrofon što dulje možete.";
 "AUDIO_INTRO_TEXT" = "Duboko udahnite i izgovorite \"Aaaaaa\" u mikrofon što dulje možete. Održavajte ujednačenu glasnoću glasa tako da audio stupci ostanu plavi.";
 "AUDIO_INTENDED_USE" = "Ova aktivnost evaluira vaš glas tako što ga snima pomoću mikrofona na dnu vašeg telefona.";
@@ -246,7 +246,7 @@
 "TONE_AUDIOMETRY_TASK_TITLE" = "Tonalna audiometrija";
 "TONE_AUDIOMETRY_INTENDED_USE" = "Ovom se aktivnošću mjeri vaša sposobnost da čujete različite zvukove.";
 "TONE_AUDIOMETRY_INTRO_TEXT" = "Prije početka priključite i stavite slušalice.";
-"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"TONE_AUDIOMETRY_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "TONE_AUDIOMETRY_PREP_TEXT" = "Sada biste trebali čuti ton. Podesite glasnoću uz pomoć kontrola s bočne strane uređaja.\n\nDodirnite tipku kada ste spremni za početak.";
 "TONE_AUDIOMETRY_INSTRUCTION" = "Dodirnite tipku svaki put kada začujete zvuk.";
 "TONE_LABEL_%@_LEFT" = "%@ Hz, lijevo";
@@ -259,7 +259,7 @@
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "cvjetovi";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ istim redoslijedom kojim su zasvijetlili.";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Gledajte %@ kako će zasvijetliti jedan za drugim. Dodirnite te %@ obrnutim redoslijedom od onog kojim su zasvijetlili.";
-"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Dodirnite Pokreni, zatim gledajte pažljivo.";
+"SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Za početak, dodirnite Pokreni, zatim gledajte pažljivo.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Rezultat";
 "MEMORY_GAME_PLAYBACK_TITLE_%@" = "Gledajte %@ kako svijetle";
@@ -279,7 +279,7 @@
 "REACTION_TIME_TASK_TITLE" = "Vrijeme reakcije";
 "REACTION_TIME_TASK_INTENDED_USE" = "Ovom se aktivnošću procjenjuje koliko vam je vremena potrebno za reakciju na vizualni znak.";
 "REACTION_TIME_TASK_INTRO_TEXT_FORMAT" = "Protresite uređaj u bilo kojem smjeru čim se na zaslonu pojavi plava točka. Od vas će se zatražiti da to učinite %D puta.";
-"REACTION_TIME_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"REACTION_TIME_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "REACTION_TIME_TASK_ATTEMPTS_FORMAT" = "Pokušaj %@ od %@";
 "REACTION_TIME_TASK_ACTIVE_STEP_TITLE" = "Kada se pojavi plavi krug, brzo protresite uređaj";
 
@@ -287,7 +287,7 @@
 "TOWER_OF_HANOI_TASK_TITLE" = "Hanojski toranj";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Ova aktivnost procjenjuje vaše vještine rješavanja slagalica.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Premjestite cijeli stog na označenu platformu u što je moguće manje poteza.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Dodirnite Pokreni za početak";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Riješite slagalicu";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Broj poteza: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Ne mogu riješiti ovu slagalicu";
@@ -320,7 +320,7 @@
 "PVSAT_INTRO_TEXT" = "Vizualni test tempiranog serijskog zbrajanja mjeri (PVSAT) brzinu vaše obrade vizualnih podataka te sposobnost računanja.";
 "PAVSAT_INTRO_TEXT" = "Auditivni i vizualni test tempiranog serijskog zbrajanja (PAVSAT) mjeri brzinu vaše obrade auditivnih i vizualnih podataka te sposobnost računanja.";
 "PSAT_INTRO_TEXT_2_%@" = "Jednoznamenkasti brojevi prikazuju se svakih %@ s.\nSvaku novu znamenku morate zbrojiti s onom koja je neposredno prije nje.\nPažnja, ne smijete izračunavati ukupni iznos, nego samo zbrojiti zadnja dva broja.";
-"PSAT_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
+"PSAT_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "PSAT_INITIAL_INSTRUCTION" = "Zapamtite prvu znamenku.";
 "PSAT_INSTRUCTION" = "Zbrojite ovu novu znamenku s prethodnom.";
 "PSAT_NO_DIGIT" = "-";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test s %@ rupa i klinovima";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost mjeri funkciju gornjih ekstremiteta tako da od vas traži da u rupu stavite krug. To ćete morati učiniti %@ puta.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Testirat će se i vaše%@ i %@ ruke.\nMorate podići krug što je brže moguće, staviti ga u rupu, i nakon što to uradite %@ puta, ponovno ga ukloniti %@ puta.";
-"HOLE_PEG_TEST_CALL_TO_ACTION" = "Dodirnite Pokreni za pokretanje.";
-"HOLE_PEG_TEST_RIGHT" = "desno";
-"HOLE_PEG_TEST_LEFT" = "lijevo";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Stavite klin u rupu korištenjem %@ ruke.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Stavite klin iza linije korištenjem %@ ruke.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
 "HOLE_PEG_TEST_TEXT" = "Podignite klin s dva prsta.";
 "HOLE_PEG_TEST_TEXT_2" = "Podignite prste da biste ispustili klin.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Točka: %@";
+

@@ -201,7 +201,7 @@
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Tiada kamera ditemui.  Langkah ini tidak boleh dilengkapkan.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan aplikasi ini mengakses kamera dalam Seting.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan untuk imej yang ditangkap.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak boleh disimpan.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak dapat disimpan.";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kecergasan";
@@ -295,7 +295,7 @@
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Jalan Bermasa";
 "TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi anggota badan bawah anda.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat yang mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Ketik Seterusnya untuk bermula.";
 "TIMED_WALK_FORM_TITLE" = "Peranti bantuan";
 "TIMED_WALK_FORM_TEXT" = "Gunakan peranti bantuan yang sama untuk setiap ujian.";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Ujian Pancang %@ Lubang";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktiviti ini mengukur fungsi anggota badan atas anda dengan meminta anda meletakkan bulatan ke dalam lubang. Anda akan diminta melakukan ini %@ kali.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Tangan %@ dan %@ anda akan diuji.\nAnda mesti mengutip bulatan secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan %@ kali, keluarkannya sekali lagi %@ kali.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
-"HOLE_PEG_TEST_RIGHT" = "kanan";
-"HOLE_PEG_TEST_LEFT" = "kiri";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Letakkan pancang ke dalam lubang menggunakan tangan %@ anda.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Letakkan pancang di belakang garis menggunakan tangan %@ anda.";
 "HOLE_PEG_TEST_TEXT" = "Kutip pancang menggunakan dua jari.";
 "HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan pancang.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Julat daripada %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Titik: %@";
+

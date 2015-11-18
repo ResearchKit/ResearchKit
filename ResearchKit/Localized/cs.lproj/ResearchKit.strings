@@ -134,7 +134,7 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Zadejte starý kód";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Zadejte nový kód";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrďte nový kód";
-"PASSCODE_INVALID_ALERT_TITLE" = "Neplatný vstup";
+"PASSCODE_INVALID_ALERT_TITLE" = "Chyba v zadání";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Kódy se neshodují. Zkuste to znovu.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Použijte ověření pomocí Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Chyba Touch ID";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@kolíkový test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tato aktivita změří motorickou funkci vašich horních končetin pomocí vkládání kroužků do otvorů. Tento úkon provedete %@krát.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Test se provádí postupně %@ i %@ rukou.\nÚkolem je uchopit co nejrychleji kroužek a vložit jej do otvoru a poté, co tento pohyb provedete %@krát, opět kroužek z otvoru %@krát vyjmout.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
-"HOLE_PEG_TEST_RIGHT" = "pravou";
-"HOLE_PEG_TEST_LEFT" = "levou";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Vložte kolík do otvoru %@ rukou.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Přemístěte kolík za čáru %@ rukou.";
 "HOLE_PEG_TEST_TEXT" = "Uchopte kolík dvěma prsty.";
 "HOLE_PEG_TEST_TEXT_2" = "Zvednutím prstů kolík položíte.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
 "AX_GRAPH_POINT_%@" = "Bod: %@";
+

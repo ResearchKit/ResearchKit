@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-Mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "max@beispiel.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "max@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Passwort";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Passwort eingeben";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bestätigen";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole-Peg-Test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Mit dieser Aktivität wird die Reaktionsfähigkeit Ihrer oberen Extremitäten gemessen, indem Sie aufgefordert werden, einen Kreis auf einem Loch zu platzieren. Das Ganze wird %@-mal wiederholt.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Die Reaktionsfähigkeit Ihrer %@ und %@ Hand wird getestet.\nHeben Sie den Kreis so schnell wie möglich und bewegen Sie ihn auf das Loch. Wenn Sie dies %@-mal getan haben, entfernen Sie ihn %@-mal.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tippen Sie zum Starten auf „Los geht’s“.";
-"HOLE_PEG_TEST_RIGHT" = "rechten";
-"HOLE_PEG_TEST_LEFT" = "linken";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Bewegen Sie den Kreis mit der %@ Hand auf das Loch.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Bewegen Sie den Kreis mit der %@ Hand hinter die Linie.";
 "HOLE_PEG_TEST_TEXT" = "Bewegen Sie den Kreis mit zwei Fingern.";
 "HOLE_PEG_TEST_TEXT_2" = "Heben Sie den Finger, um den Kreis auf die Zielposition zu setzen.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Bereich von %@ bis %@";
 "AX_GRAPH_AND_SEPARATOR" = " und ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+

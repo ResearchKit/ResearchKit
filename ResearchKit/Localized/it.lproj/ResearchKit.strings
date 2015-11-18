@@ -92,7 +92,7 @@
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Impossibile individuare la tua posizione attuale. Inserisci l'indirizzo o spostati in una zona con una migliore copertura GPS.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "L'accesso ai servizi di localizzazione è stato negato. Vai in Impostazioni e autorizza l'applicazione a utilizzare i servizi di localizzazione.";
 "LOCATION_ERROR_GEOCODE" = "Impossibile trovare risultati per l'indirizzo inserito, assicurati che sia valido.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Non sei connesso a Internet o hai superato il numero massimo di tentativi di ricerca dell'indirizzo. Se non sei connesso a Internet, attiva la rete Wi-Fi, ignora il passaggio se è disponibile il tasto Ignora o torna al sondaggio una volta connesso. In alternativa, riprova tra qualche minuto.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Non sei connesso a Internet o hai superato il numero massimo di tentativi di ricerca dell'indirizzo. Se non sei connesso a Internet, attiva la rete Wi-Fi per rispondere a questa domanda, ignora il passaggio se è disponibile il tasto Ignora o torna al sondaggio una volta connesso. In alternativa, riprova tra qualche minuto.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Il testo supera la lunghezza massima: %@";
@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmela@esempio.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmela@xample.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Password";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Inserisci password";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Conferma";
@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "L'indirizzo e-mail non è corretto?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Non ho ricevuto nessuna e-mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Invia di nuovo e-mail di verifica";
-"VERIFICATION_LABEL_MESSAGE" = "Se hai completato la procedura di verifica, seleziona il pulsante di seguito.";
+"VERIFICATION_LABEL_MESSAGE" = "Se è stato verificato, tocca il pulsante in basso.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Accedi";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-hole peg (NHPT)";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Questo test valuta la funzionalità delle tue estremità superiori. Dovrai posizionare l'icona azzurra a forma di cerchio nella sagoma vuota %@ volte.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Verrà esaminata la funzionalità della mano %@ e di quella %@.\nÈ necessario selezionare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuoverla altre %@ volte.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
-"HOLE_PEG_TEST_RIGHT" = "destra";
-"HOLE_PEG_TEST_LEFT" = "sinistra";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Sposta l'icona colorata nella sagoma vuota usando la mano %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Sposta l'icona colorata dietro la linea usando la mano %@.";
 "HOLE_PEG_TEST_TEXT" = "Seleziona l'icona colorata utilizzando due dita.";
 "HOLE_PEG_TEST_TEXT_2" = "Solleva le dita per rilasciare l'icona colorata.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Intervallo da %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Punto: %@";
+

@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "การทดสอบ Peg %@-Hole";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "การกระทำนี้จะวัดสมรรถภาพของแขนส่วนบนของคุณโดยการหยิบหมุดวางลงในช่องวงกลม คุณจะต้องทำอย่างนี้ %@ ครั้ง";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "ทั้งมือ%@และ%@ของคุณจะถูกทดสอบ\nคุณต้องหยิบวงกลมให้เร็วที่สุดเท่าที่จะเร็วได้ วางลงในช่องวงกลม ทำซ้ำ %@ ครั้ง แล้วหยิบออกจากวงกลมอีก %@ ครั้ง";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "แตะเริ่มต้นใช้งานเพื่อเริ่ม";
-"HOLE_PEG_TEST_RIGHT" = "ขวา";
-"HOLE_PEG_TEST_LEFT" = "ซ้าย";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "ใช้มือ%@หยิบหมุดวางลงในช่องวงกลม";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "ใช้มือ%@หยิบหมุดวางไว้ข้างหลังเส้น";
 "HOLE_PEG_TEST_TEXT" = "ใช้นิ้วสองนิ้วหยิบหมุด";
 "HOLE_PEG_TEST_TEXT_2" = "ปล่อยนิ้วเพื่อปล่อยหมุด";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "ช่วงตั้งแต่ %@ ถึง %@";
 "AX_GRAPH_AND_SEPARATOR" = " และ ";
 "AX_GRAPH_POINT_%@" = "จุด: %@";
+

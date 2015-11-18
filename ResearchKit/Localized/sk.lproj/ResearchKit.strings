@@ -134,7 +134,7 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Zadajte staré heslo";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Zadajte nové heslo";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrďte nové heslo";
-"PASSCODE_INVALID_ALERT_TITLE" = "Neplatný vstup";
+"PASSCODE_INVALID_ALERT_TITLE" = "Chybné zadanie";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Heslá sa nezhodujú. Skúste to znovu.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentifikujte sa pomocou Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Chyba Touch ID";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-jamkový test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Táto aktivita meria funkčnosť vašej hornej končatiny zobrazením výzvy na umiestnenie krúžku do jamky. Túto úlohu musíte vykonať %@-krát.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Vykoná sa test vašej %@ aj %@ ruky.\nKrúžok musíte čo najrýchlejšie zdvihnúť a vložiť do jamky. Keď to urobíte %@-krát, znovu ho %@-krát vyberte.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Začnite klepnutím na Začať.";
-"HOLE_PEG_TEST_RIGHT" = "pravej";
-"HOLE_PEG_TEST_LEFT" = "ľavej";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Umiestnite krúžok do jamky pomocou %@ ruky.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Umiestnite krúžok za čiaru pomocou %@ ruky.";
 "HOLE_PEG_TEST_TEXT" = "Zdvihnite krúžok dvomi prstami.";
 "HOLE_PEG_TEST_TEXT_2" = "Zdvihnutím prstov uvoľnite krúžok.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Rozsah od %@ do %@";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
 "AX_GRAPH_POINT_%@" = "Bod: %@";
+

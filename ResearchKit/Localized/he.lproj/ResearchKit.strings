@@ -128,7 +128,7 @@
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "הקש/י את קוד הגישה";
-"PASSCODE_CONFIRM_MESSAGE" = "אשר קוד גישה";
+"PASSCODE_CONFIRM_MESSAGE" = "אשר/י קוד גישה";
 "PASSCODE_SAVED_MESSAGE" = "קוד הגישה נשמר";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "קוד הגישה מאומת";
 "PASSCODE_OLD_ENTRY_MESSAGE" = "הקש/י את קוד הגישה הישן";
@@ -226,7 +226,7 @@
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "מהירות הקשה";
 "TAPPING_INTRO_TEXT" = "פעילות זו מודדת את מהירות ההקשה שלך.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "הנח/י את הטלפון על משטח שטוח. שני כפתורים יופיעו במסך למשך @%. כעת, השתמש/י בשתי אצבעות מאותה יד בכדי להקיש לחלופין על הכפתורים שמופיעים במהירות המרבית שתוכל/י.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "הנח/י את הטלפון על משטח שטוח. שני כפתורים יופיעו במסך למשך %@. כעת, השתמש/י בשתי אצבעות מאותה יד בכדי להקיש לחלופין על הכפתורים שמופיעים במהירות המרבית שתוכל/י.";
 "TAPPING_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
 "TAP_BUTTON_TITLE" = "הקש/י";
 "TOTAL_TAPS_LABEL" = "סה״כ הקשות";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "היד ה%@ וה%@ שלך ייבדקו.\nעליך לבחור בעיגול במהירות המרבית ולהכניס אותו לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותו שוב %@ פעמים.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
-"HOLE_PEG_TEST_RIGHT" = "ימינה";
-"HOLE_PEG_TEST_LEFT" = "שמאלה";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "מקם/י את הדיסקית בתוך החור באמצעות ידך ה%@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "הנח/י את הדיסקית מאחורי הקו באמצעות ידך ה%@.";
 "HOLE_PEG_TEST_TEXT" = "הרם/י את הדיסקית בשתי אצבעות.";
 "HOLE_PEG_TEST_TEXT_2" = "הרם/י את אצבעותיך כדי להפיל את הדיסקית.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
 "AX_GRAPH_AND_SEPARATOR" = " וגם";
 "AX_GRAPH_POINT_%@" = "נקודה: %@";
+

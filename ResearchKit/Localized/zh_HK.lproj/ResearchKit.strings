@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ 孔柱測試";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "此測試活動需要你將圓形放進洞內，以測量你的上肢功能。你將需要執行此操作 %@ 次。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "測試活動將會測試你的%@手及%@手。\n你必須以最快的速度拿起圓圈並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
-"HOLE_PEG_TEST_RIGHT" = "右";
-"HOLE_PEG_TEST_LEFT" = "左";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "請用%@手將圓柱放進洞內。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "請用%@手將圓柱放進線後。";
 "HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
 "HOLE_PEG_TEST_TEXT_2" = "放開手指以放下圓柱。";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
 "AX_GRAPH_POINT_%@" = "點數：%@";
+

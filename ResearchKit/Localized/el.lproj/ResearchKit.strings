@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Λανθασμένη διεύθυνση email;";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Δεν έλαβα email";
 "RESEND_EMAIL_BUTTON_TITLE" = "Εκ νέου αποστολή email επιβεβαίωσης";
-"VERIFICATION_LABEL_MESSAGE" = "Αν έγινε επαλήθευση, αγγίξτε το κουμπί παρακάτω.";
+"VERIFICATION_LABEL_MESSAGE" = "Αν έγινε επαλήθευση, αγγίξτε το κάτω κουμπί.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Είσοδος";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Δοκιμή %@-HPT";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Η δραστηριότητα αυτή μετρά την επιδεξιότητα των άνω άκρων σας ζητώντας σας να τοποθετήσετε έναν κύκλο σε μια τρύπα. Αυτό θα σας ζητηθεί να το κάνετε %@ φορές.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Θα δοκιμαστεί και το %@ και το %@ χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και, μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
-"HOLE_PEG_TEST_RIGHT" = "δεξιό";
-"HOLE_PEG_TEST_LEFT" = "αριστερό";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Τοποθετήστε τον κύκλο στην τρύπα με το %@ χέρι σας.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το %@ χέρι σας.";
 "HOLE_PEG_TEST_TEXT" = "Σηκώστε τoν κύκλο με δύο δάχτυλα.";
 "HOLE_PEG_TEST_TEXT_2" = "Σηκώστε τα δάχτυλα για να αφήσετε τον κύκλο.";
 
@@ -386,4 +382,5 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
 "AX_GRAPH_AND_SEPARATOR" = " και ";
-"AX_GRAPH_POINT_%@" = "Σημείο: %d";
+"AX_GRAPH_POINT_%@" = "Σημείο: %@";
+

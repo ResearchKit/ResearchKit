@@ -328,14 +328,10 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Kiểm tra Bảng %@ Lỗ";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một vòng tròn vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Cả tay %@ và %@ của bạn sẽ được kiểm tra.\nBạn phải nhặt vòng tròn nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy tháo ra %@ lần nữa.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
-"HOLE_PEG_TEST_RIGHT" = "phải";
-"HOLE_PEG_TEST_LEFT" = "trái";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Đặt miếng gỗ vào trong lỗ bằng tay %@ của bạn.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay %@ của bạn.";
 "HOLE_PEG_TEST_TEXT" = "Nhặt miếng gỗ bằng hai ngón tay.";
-"HOLE_PEG_TEST_TEXT_2" = "Các ngón tay trái làm rơi miếng gỗ.";
+"HOLE_PEG_TEST_TEXT_2" = "Nhấc các ngón tay để thả rơi miếng gỗ.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Không thể tạo tệp";
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
 "AX_GRAPH_POINT_%@" = "Điểm: %@";
+

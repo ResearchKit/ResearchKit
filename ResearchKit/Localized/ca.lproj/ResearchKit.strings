@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una rodona dins d’un forat. Ho hauràs de fer %@ cops.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "S’avaluaran la mà %@ i %@.\nHas d’agafar la rodona tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
-"HOLE_PEG_TEST_RIGHT" = "dreta";
-"HOLE_PEG_TEST_LEFT" = "esquerra";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Posa la clavilla al forat amb la mà %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Posa la clavilla darrere de la línia amb la mà %@.";
 "HOLE_PEG_TEST_TEXT" = "Agafa la clavilla fent servir dos dits.";
 "HOLE_PEG_TEST_TEXT_2" = "Aixeca els dits per deixar caure la clavilla.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
+

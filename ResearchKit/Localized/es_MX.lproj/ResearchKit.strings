@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Correo";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "juanlopez@ejemplo.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "juanlopez@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Contraseña";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Ingresar contraseña";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
@@ -111,15 +111,15 @@
 "ADDITIONAL_INFO_SECTION_TITLE" = "Información adicional";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "Juan";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "López";
-"GENDER_FORM_ITEM_TITLE" = "Género";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Elige un género";
+"GENDER_FORM_ITEM_TITLE" = "Sexo";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Elige un sexo";
 "DOB_FORM_ITEM_TITLE" = "Fecha de nacimiento";
 "DOB_FORM_ITEM_PLACEHOLDER" = "Elige una fecha";
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "¿Dirección de correo incorrecta?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "No recibí el correo";
-"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo electrónico de verificación";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo de verificación";
 "VERIFICATION_LABEL_MESSAGE" = "Si verificaste, toca el botón de abajo.";
 
 /* Login step */
@@ -131,10 +131,10 @@
 "PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
 "PASSCODE_SAVED_MESSAGE" = "Código guardado";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Código autenticado";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Ingresa el código antiguo";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Ingresa el código anterior";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Ingresa el nuevo código";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nuevo código";
-"PASSCODE_INVALID_ALERT_TITLE" = "Datos de entrada no válidos";
+"PASSCODE_INVALID_ALERT_TITLE" = "Datos ingresados no validos";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Intenta de nuevo.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentica con Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
@@ -294,7 +294,7 @@
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Caminata cronometrada";
-"TIMED_WALK_INTRO_DETAIL" = "Esta actividad mide el funcionamiento de tus extremidades inferiores.";
+"TIMED_WALK_INTRO_DETAIL" = "Esta actividad mide la función de tus extremidades inferiores.";
 "TIMED_WALK_INTRO_2_TEXT_%@" = "Encuentra un lugar, de preferencia al aire libre, donde puedas caminar alrededor de %@ en línea recta tan rápido como sea posible pero de forma segura. No te detengas sino hasta cruzar la meta.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Toca Siguiente para comenzar.";
 "TIMED_WALK_FORM_TITLE" = "Dispositivo de ayuda";
@@ -326,14 +326,10 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Prueba con estaca y agujero";
+"HOLE_PEG_TEST_TITLE_%@" = "%@-Prueba de las %@ estacas";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la función de tus extremidades superiores al pedirte que coloques un círculo en un agujero. Será necesario repetir esta tarea %@ veces.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Se pondrá a prueba tanto a tu mano %@ como la %@.\nDeberás recoger el círculo lo más rápido posible, colocarlo en el agujero y, después de repetirlo %@ veces, deberás sacarlo %@ veces.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
-"HOLE_PEG_TEST_RIGHT" = "derecha";
-"HOLE_PEG_TEST_LEFT" = "izquierda";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Pon la estaca en el agujero usando la mano %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Pon la estaca detrás de la línea usando la mano %@.";
 "HOLE_PEG_TEST_TEXT" = "Recoge la estaca con dos dedos.";
 "HOLE_PEG_TEST_TEXT_2" = "Levanta los dedos para soltar la estaca.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Rango de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
 "AX_GRAPH_POINT_%@" = "Punto: %@";
+

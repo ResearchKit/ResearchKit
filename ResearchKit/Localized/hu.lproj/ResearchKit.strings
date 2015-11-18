@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "nagyede@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Jelszó";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Jelszó megadása";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Megerősítés";
@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Az e-mail cím helytelen?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Nem kaptam e-mail üzenetet";
 "RESEND_EMAIL_BUTTON_TITLE" = "Ellenőrző e-mail újraküldése";
-"VERIFICATION_LABEL_MESSAGE" = "Ha ellenőrizve van, koppintson az alábbi gombra.";
+"VERIFICATION_LABEL_MESSAGE" = "Ellenőrzés után koppintson a gombra.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Bejelentkezés";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ lyukú körillesztő teszt";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ez a tevékenység a felső végtagok mozgását vizsgálja, amelynek során a rendszer megkéri Önt, hogy illesszen bele egy kört egy lyukba. Ezt %@ alkalommal kell megtennie.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "A %@ és a %@ keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a köröket, és illessze be őket a lyukakba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
-"HOLE_PEG_TEST_RIGHT" = "jobb";
-"HOLE_PEG_TEST_LEFT" = "bal";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Tegye bele a kört a lyukba a %@ kezével.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Tegye a kört a vonal mögé a %@ kezével.";
 "HOLE_PEG_TEST_TEXT" = "Fogja meg a kört két ujjal.";
 "HOLE_PEG_TEST_TEXT_2" = "Emelje fel az ujjait a kör elhelyezéséhez.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
 "AX_GRAPH_POINT_%@" = "Pont: %@";
+

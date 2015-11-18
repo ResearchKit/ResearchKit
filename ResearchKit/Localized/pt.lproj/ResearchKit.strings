@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jaime@exemplo.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Senha";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Digite a senha";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
@@ -119,7 +119,7 @@
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "Endereço de e-mail incorreto?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Não recebi um e-mail";
-"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar E-mail de Verificação";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar e-mail de verificação";
 "VERIFICATION_LABEL_MESSAGE" = "Se verificado, toque no botão abaixo.";
 
 /* Login step */
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ Pinos nos Buracos";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta atividade determinará a capacidade das suas extremidades superiores solicitando que você coloque um círculo em um buraco. Você precisará fazer isso %@ vezes.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Tanto a sua mão %@ como a %@ serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Toque em Iniciar para começar.";
-"HOLE_PEG_TEST_RIGHT" = "direita";
-"HOLE_PEG_TEST_LEFT" = "esquerda";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Coloque o círculo no buraco com sua mão %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Coloque o círculo atrás da linha com sua mão %@.";
 "HOLE_PEG_TEST_TEXT" = "Pegue o círculo usando dois dedos.";
 "HOLE_PEG_TEST_TEXT_2" = "Tire o dedo da tela para largar o círculo.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Varia entre %@ e %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Ponto: %@";
+

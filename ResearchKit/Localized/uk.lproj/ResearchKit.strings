@@ -102,15 +102,15 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Е-пошта";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "syabluchko@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Пароль";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Підтвердити";
 "CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль ще раз";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Паролі не збігаються.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Додаткова інформація";
-"GIVEN_NAME_ITEM_PLACEHOLDER" = "Джоні";
-"FAMILY_NAME_ITEM_PLACEHOLDER" = "Еплсід";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Степан";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Яблучко";
 "GENDER_FORM_ITEM_TITLE" = "Стать";
 "GENDER_FORM_ITEM_PLACEHOLDER" = "Виберіть стать";
 "DOB_FORM_ITEM_TITLE" = "Дата народження";
@@ -118,9 +118,9 @@
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "Хибна адреса е-пошти?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Я не одержав листа";
-"RESEND_EMAIL_BUTTON_TITLE" = "Надіслати перевірочний лист ще раз";
-"VERIFICATION_LABEL_MESSAGE" = "Якщо перевірку пройдено, торкніть кнопку нижче.";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Лист перевірки не одеражно";
+"RESEND_EMAIL_BUTTON_TITLE" = "Надіслати лист перевірки ще раз";
+"VERIFICATION_LABEL_MESSAGE" = "Перевірено? Торкніть «Готово».";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Ім’я";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Кілковий тест на %@ отворів";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "У цьому тесті вас попросять покласти коло в отвір, щоб оцінити функцію ваших верхніх кінцівок. Вам знадобиться повторити це %@ разів.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Буде перевірено вашу %@ і %@ руку.\nВам потрібно підняти коло якомога швидше, покласти його в отвір, і коли ви зробите це %@ разів, зніміть його знов %@ разів.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
-"HOLE_PEG_TEST_RIGHT" = "права";
-"HOLE_PEG_TEST_LEFT" = "ліва";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Покладіть кілок в отвір своєю %@ рукою.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Покладіть кілок за лінію своєю %@ рукою.";
 "HOLE_PEG_TEST_TEXT" = "Візьміть кілок двома пальцями.";
 "HOLE_PEG_TEST_TEXT_2" = "Підніміть пальці, щоб опустити кілок.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
 "AX_GRAPH_POINT_%@" = "Точка: %@";
+

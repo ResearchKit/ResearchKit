@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ 孔插棒测试";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "本活动通过将圆饼放入圆孔来测量您的上肢功能。您将需要完成此操作 %@ 次。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "您的%@手和%@手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成 %@ 次后，再将其移除 %@ 次。";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
-"HOLE_PEG_TEST_RIGHT" = "右";
-"HOLE_PEG_TEST_LEFT" = "左";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "用您的%@手将圆饼放入圆孔中。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "用您的%@手将圆饼放在线条后方。";
 "HOLE_PEG_TEST_TEXT" = "用两个手指拿起圆饼。";
 "HOLE_PEG_TEST_TEXT_2" = "抬起手指以放下圆饼。";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "范围：%@ ~ %@";
 "AX_GRAPH_AND_SEPARATOR" = "、";
 "AX_GRAPH_POINT_%@" = "分数：%@";
+

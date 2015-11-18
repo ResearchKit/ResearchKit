@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-huls Pegtest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler dine fingerfærdigheder ved at bede dig om at anbringe en cirkel i et hul. Du bliver bedt om at gøre dette %@ gange.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Både din %@ og %@ hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
-"HOLE_PEG_TEST_RIGHT" = "højre";
-"HOLE_PEG_TEST_LEFT" = "venstre";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Anbring cirklen i hullet vha. din %@ hånd.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Anbring cirklen bag ved stregen vha. din %@ hånd.";
 "HOLE_PEG_TEST_TEXT" = "Saml cirklen op vha. to fingre.";
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for at slippe cirklen.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
+

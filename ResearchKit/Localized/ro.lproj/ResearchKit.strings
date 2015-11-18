@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "ioanapopa@exemplu.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ioanapopa@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Parolă";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduceți parola";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmați";
@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Adresă de e-mail incorectă?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Nu am primit un e-mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Retrimite e‑mailul de verificare";
-"VERIFICATION_LABEL_MESSAGE" = "Dacă este verificat, apăsați butonul de mai jos.";
+"VERIFICATION_LABEL_MESSAGE" = "Dacă este verificat,\napăsați butonul de mai jos.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Testul cu %@ cercuri";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Această activitate vă măsoară funcționalitatea membrelor superioare, solicitându-vă să plasați un cerc într-un orificiu. Va trebui să repetați acțiunea de %@ ori.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Va fi testată atât mâna %@, cât și mâna %@.\nTrebuie să ridicați cercul cât mai repede posibil, să-l introduceți în orificiu și, după ce repetați acțiunea de %@ ori, să-l scoateți de %@ ori.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
-"HOLE_PEG_TEST_RIGHT" = "dreaptă";
-"HOLE_PEG_TEST_LEFT" = "stângă";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Introduceți cercul în orificiu folosind mâna %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Plasați cercul dincolo de linie folosind mâna %@.";
 "HOLE_PEG_TEST_TEXT" = "Ridicați cercul folosind două degete.";
 "HOLE_PEG_TEST_TEXT_2" = "Ridicați degetele pentru a elibera cercul.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Interval de la %@ la %@";
 "AX_GRAPH_AND_SEPARATOR" = " și ";
 "AX_GRAPH_POINT_%@" = "Punctul: %@";
+

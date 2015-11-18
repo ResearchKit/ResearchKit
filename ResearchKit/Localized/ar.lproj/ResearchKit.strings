@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "هذا النشاط يقيس وظيفة الطرف العلوي عن طريق الطلب منك بأن تضع الدائرة في حفرة. سوف يطلب منك أن تفعل هذا %@ مرات.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "سيتم فحص كلا اليدين %@ و %@.\nيجب عليك التقاط الدائرة في أسرع وقت ممكن، ووضعها في الحفرة، وبعد إنهاء %@ مرات، قم بإزالتها مرة أخرى %@ مرات.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
-"HOLE_PEG_TEST_RIGHT" = "يمين";
-"HOLE_PEG_TEST_LEFT" = "يسار";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "قم بوضع العقدة في الحفرة باستخدام اليد %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "قم بوضع العقدة خلف السطر باستخدام اليد %@.";
 "HOLE_PEG_TEST_TEXT" = "رفع العقدة باستخدام اصبعين.";
 "HOLE_PEG_TEST_TEXT_2" = "ارفع الأصابع لإسقاط العقدة.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "يتراوح من %@ إلى %@";
 "AX_GRAPH_AND_SEPARATOR" = " و ";
 "AX_GRAPH_POINT_%@" = "النقطة: %@";
+

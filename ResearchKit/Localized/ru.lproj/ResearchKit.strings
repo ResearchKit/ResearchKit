@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Е‑mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@primer.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Пароль";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введите пароль";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Подтверждение";
@@ -119,7 +119,7 @@
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "Неверный адрес e-mail?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Я не получил(а) e‑mail";
-"RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить проверочный e‑mail";
+"RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить e‑mail";
 "VERIFICATION_LABEL_MESSAGE" = "Если проверено, нажмите кнопку ниже.";
 
 /* Login step */
@@ -257,8 +257,8 @@
 "SPATIAL_SPAN_MEMORY_INTRO_TEXT_%@" = "Во время этого упражнения оцениваются возможности Вашей кратковременной пространственной памяти. Программа попросит Вас повторить последовательность, в которой подсвечиваются %@.";
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "цветы";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "цветы";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Некоторые изображения (%@) будут подсвечиваться поочередно в определенном порядке. Коснитесь этих изображений в том же порядке.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые изображения (%@) будут подсвечиваться поочередно в определенном порядке. Коснитесь этих изображений в обратном порядке.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в том же порядке.";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в обратном порядке.\n";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать» и внимательно смотрите на экран.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Счет";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Тест «Вставляем %@ колышков»";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "В этом упражнении проверяется работоспособность верхних конечностей. Вам предложат поместить круг в лунку %@ раз(а).";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Будет выполнена проверка %@ и %@ рук.\nВам потребуется поднять круг как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
-"HOLE_PEG_TEST_RIGHT" = "правой";
-"HOLE_PEG_TEST_LEFT" = "левой";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Поместите колышек в лунку %@ рукой.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Поместите колышек за линию %@ рукой.";
 "HOLE_PEG_TEST_TEXT" = "Поднимите колышек двумя пальцами.";
 "HOLE_PEG_TEST_TEXT_2" = "Приподнимите пальцы, чтобы бросить колышек.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Диапазон от %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " и ";
 "AX_GRAPH_POINT_%@" = "Точка: %d";
+

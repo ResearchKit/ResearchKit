@@ -112,7 +112,7 @@
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "길동";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "홍";
 "GENDER_FORM_ITEM_TITLE" = "성별";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "선별 선택";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "성별 선택";
 "DOB_FORM_ITEM_TITLE" = "생년월일";
 "DOB_FORM_ITEM_PLACEHOLDER" = "날짜 선택";
 
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-홀 페그 테스트";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "이 실험은 원을 구멍에 넣는 동작을 통해 사용자의 상지 기능을 측정합니다. 이 동작을 %@번 해야 합니다.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "%@ 및 %@ 모두 테스트합니다.\n최대한 빨리 원을 집어서 구멍에 넣으십시오. 이 동작을 %@번 완료하면 원을 제거하는 동작을 다시 %@번 하십시오.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
-"HOLE_PEG_TEST_RIGHT" = "오른손";
-"HOLE_PEG_TEST_LEFT" = "왼손";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "%@을 사용하여 페그를 구멍에 넣으십시오.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "%@을 사용하여 페그를 선 뒤에 놓으십시오.";
 "HOLE_PEG_TEST_TEXT" = "두 손가락을 사용하여 페그를 집으십시오.";
 "HOLE_PEG_TEST_TEXT_2" = "손가락을 떼어서 페그를 내려놓으십시오.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "%@에서 %@까지의 범위";
 "AX_GRAPH_AND_SEPARATOR" = " 및 ";
 "AX_GRAPH_POINT_%@" = "포인트: %@";
+

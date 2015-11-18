@@ -88,8 +88,8 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Digite um endereço";
-"LOCATION_ERROR_TITLE" = "Não foi possível resolver o endereço especificado.";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Não foi possível resolver a localização atual. Digite um endereço ou desloque‑se para um local com sinal GPS mais forte.";
+"LOCATION_ERROR_TITLE" = "Não foi possível encontrar o endereço especificado.";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Não foi possível encontrar a localização atual. Digite um endereço ou desloque‑se para um local com sinal GPS mais forte.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "O acesso aos serviços de localização foi recusado. Permita a esta aplicação aceder a estes serviços nas Definições.";
 "LOCATION_ERROR_GEOCODE" = "Não foi encontrado nenhum resultado. Certifique‑se de que o endereço indicado é válido.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Ou não dispõe de ligação à Internet ou excedeu o número limite de consultas. Caso não tenha ligação estabelecida à Internet, ative a rede Wi‑Fi para responder a esta pergunta ou para a ignorar (se esta opção estiver disponível). Também pode optar por voltar ao questionário quando tiver estabelecido ligação à Internet ou por voltar a tentar dentro de alguns minutos.";
@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Endereço de e‑mail incorreto?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Não recebi nenhum e‑mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Reenviar e‑mail de confirmação";
-"VERIFICATION_LABEL_MESSAGE" = "Se estiver confirmado, toque no botão abaixo.";
+"VERIFICATION_LABEL_MESSAGE" = "Se estiver confirmado,\ntoque no botão abaixo.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Iniciar sessão";
@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ buracos e pinos";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta exercício mede as funções das extremidades superiores pedindo‑lhe que coloque um círculo dentro de um buraco. Ser-lhe-à pedido que repita %@ vezes.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Ambas as mãos (%@ e %@) serão testadas.\nTem de pegar no círculo o mais depressa possível e arrastá‑lo para o buraco. Depois de o fazer %@ vezes, faça o movimento contrário e remova o círculo do buraco %@ vezes.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
-"HOLE_PEG_TEST_RIGHT" = "direita";
-"HOLE_PEG_TEST_LEFT" = "esquerda";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Usando a mão %@, ponha o círculo no buraco.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Usando a mão %@, ponha o círculo do outro lado da linha.";
 "HOLE_PEG_TEST_TEXT" = "Apanhe o círculo com dois dedos.";
 "HOLE_PEG_TEST_TEXT_2" = "Levante os dedos para largar o círculo.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Intervalo de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Ponto: %@";
+

@@ -328,12 +328,8 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-schijventest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tijdens deze activiteit meet u het functioneren van uw bovenste ledematen door een schijfje in een cirkel te plaatsen. Dit moet u %@ keer doen.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Zowel uw %@hand als %@hand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
-"HOLE_PEG_TEST_RIGHT" = "rechter";
-"HOLE_PEG_TEST_LEFT" = "linker";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Plaats met uw %@hand het schijfje in de cirkel.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Plaats met uw %@hand het schijfje achter de lijn.";
 "HOLE_PEG_TEST_TEXT" = "Pak het schijfje op met twee vingers.";
 "HOLE_PEG_TEST_TEXT_2" = "Til uw vingers op om het schijfje los te laten.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Bereik van %@ tot %@";
 "AX_GRAPH_AND_SEPARATOR" = " en ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
+

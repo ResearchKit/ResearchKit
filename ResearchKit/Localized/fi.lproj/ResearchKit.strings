@@ -326,14 +326,10 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-reiän pegtesti";
+"HOLE_PEG_TEST_TITLE_%@" = "%@ reiän palikkatesti";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan ympyrän reikään. Tämä toistetaan %@ kertaa.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Sekä %@ että %@ käsi testataan.\nSinun on poimittava ympyrä mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
-"HOLE_PEG_TEST_RIGHT" = "oikea";
-"HOLE_PEG_TEST_LEFT" = "vasen";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Laita palikka reikään kädellä: %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Laita palikka viivan taakse kädellä: %@.";
 "HOLE_PEG_TEST_TEXT" = "Poimi palikka kahdella sormella.";
 "HOLE_PEG_TEST_TEXT_2" = "Pudota palikka nostamalla sormia.";
 
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "Alue välillä %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " ja ";
 "AX_GRAPH_POINT_%@" = "Piste: %@";
+

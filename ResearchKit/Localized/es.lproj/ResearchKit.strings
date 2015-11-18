@@ -87,11 +87,11 @@
 "INVALID_EMAIL_ALERT_MESSAGE" = "Dirección de correo electrónico no válida: %@";
 
 /* Alerts for invalid location coordinates */
-"LOCATION_QUESTION_PLACEHOLDER" = "Introduzca una dirección";
+"LOCATION_QUESTION_PLACEHOLDER" = "Introduce una dirección";
 "LOCATION_ERROR_TITLE" = "No se ha podido resolver la dirección especificada";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No se ha podido determinar su ubicación actual. Escriba una dirección o diríjase a una ubicación donde la señal GPS sea mejor.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Se ha denegado el acceso a los servicios de localización. Vaya a Ajustes para conceder a esta app permiso para utilizar los servicios de localización.";
-"LOCATION_ERROR_GEOCODE" = "No se ha encontrado ningún resultado para la dirección introducida. Asegúrese de que la dirección es válida.";
+"LOCATION_ERROR_GEOCODE" = "No se ha encontrado ningún resultado para la dirección introducida. Asegúrate de que la dirección es válida.";
 "LOCATION_ERROR_GEOCODE_NETWORK" = "Puede que no esté conectado a Internet o que haya superado el número máximo de solicitudes de búsqueda de dirección. Si no está conectado a Internet, active la conexión mediante WiFi para responder a esta pregunta, omítala si el botón Omitir está disponible o vuelva a la encuesta cuando tenga conexión a Internet. De lo contrario, vuelva a intentarlo en unos minutos.";
 
 /* Alert for exceeding length limit in text answer */
@@ -104,38 +104,38 @@
 "EMAIL_FORM_ITEM_TITLE" = "Correo electrónico";
 "EMAIL_FORM_ITEM_PLACEHOLDER" = "juan@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Contraseña";
-"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduzca la contraseña";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduce la contraseña";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
-"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduzca de nuevo la contraseña";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduce de nuevo la contraseña";
 "CONFIRM_PASSWORD_ERROR_MESSAGE" = "Las contraseñas no coinciden.";
 "ADDITIONAL_INFO_SECTION_TITLE" = "Información adicional";
 "GIVEN_NAME_ITEM_PLACEHOLDER" = "Juan";
 "FAMILY_NAME_ITEM_PLACEHOLDER" = "López";
-"GENDER_FORM_ITEM_TITLE" = "Género";
-"GENDER_FORM_ITEM_PLACEHOLDER" = "Seleccione un género";
+"GENDER_FORM_ITEM_TITLE" = "Sexo";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona tu sexo";
 "DOB_FORM_ITEM_TITLE" = "Fecha de nacimiento";
-"DOB_FORM_ITEM_PLACEHOLDER" = "Seleccione una fecha";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una fecha";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "¿La dirección de correo electrónico no es correcta?";
+"CHANGE_EMAIL_BUTTON_TITLE" = "¿La dirección de correo electrónico/nno es correcta?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "No recibí ningún mensaje de correo electrónico";
 "RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo de verificación";
-"VERIFICATION_LABEL_MESSAGE" = "Si se ha verificado, pulse el botón que aparece abajo.";
+"VERIFICATION_LABEL_MESSAGE" = "Si se ha verificado,/npulsa el botón que aparece abajo.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Iniciar sesión";
 "FORGOT_PASSWORD_BUTTON_TITLE" = "¿Ha olvidado su contraseña?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Introduzca el código";
+"PASSCODE_PROMPT_MESSAGE" = "Introduce el código";
 "PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
 "PASSCODE_SAVED_MESSAGE" = "Código guardado";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Autenticado por código";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Introduzca el código antiguo";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Introduzca el código nuevo";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Introduce el código antiguo";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Introduce el código nuevo";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme el nuevo código";
 "PASSCODE_INVALID_ALERT_TITLE" = "Datos de entrada no válidos";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Inténtelo de nuevo.";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Inténtalo de nuevo.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentíquese con Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se admiten caracteres numéricos.";
@@ -327,15 +327,11 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Prueba de las %@ clavijas";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la función de su extremidad superior pidiéndole que coloque un círculo en un agujero. Se le pedirá que lo haga %@ veces.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "La prueba se realizará para ambas manos, la %@ y la %@.\nDebe elegir el círculo lo antes posible, colocarlo en el agujero y, una vez que lo haya hecho %@ veces, volver a quitarlo %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la función de tu extremidad superior pidiéndote que coloques un círculo en un agujero. Se te pedirá que lo haga %@ veces.";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
-"HOLE_PEG_TEST_RIGHT" = "derecha";
-"HOLE_PEG_TEST_LEFT" = "izquierda";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "Introduzca la clavija en el agujero con la mano %@.";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "Coloque la clavija detrás de la línea con la mano %@.";
-"HOLE_PEG_TEST_TEXT" = "Coja la clavija con dos dedos.";
-"HOLE_PEG_TEST_TEXT_2" = "Levante los dedos para soltar la clavija.";
+"HOLE_PEG_TEST_TEXT" = "Coge la clavija con dos dedos.";
+"HOLE_PEG_TEST_TEXT_2" = "Levanta los dedos para soltar la clavija.";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se ha podido crear el archivo";
@@ -386,4 +382,5 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Rango de valores de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
-"AX_GRAPH_POINT_%@" = "Punto: %d";
+"AX_GRAPH_POINT_%@" = "Punto: %@";
+

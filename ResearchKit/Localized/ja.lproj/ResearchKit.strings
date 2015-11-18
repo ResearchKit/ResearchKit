@@ -328,14 +328,10 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "%@手と%@手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
-"HOLE_PEG_TEST_RIGHT" = "右";
-"HOLE_PEG_TEST_LEFT" = "左";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "%@手で円を穴に入れてください。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "%@手で円を線の向こう側に置いてください。";
-"HOLE_PEG_TEST_TEXT" = "2本の指で円をつかんでください。";
-"HOLE_PEG_TEST_TEXT_2" = "指を持ち上げて円を放してください。";
+"HOLE_PEG_TEST_TEXT" = "2本の指で円をつまんでください。";
+"HOLE_PEG_TEST_TEXT_2" = "指で円を持ち上げて移動させ落としてください。";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "ファイルを作成できませんでした";
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
 "AX_GRAPH_AND_SEPARATOR" = "と";
 "AX_GRAPH_POINT_%@" = "ポイント: %@";
+

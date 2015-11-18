@@ -87,12 +87,12 @@
 "INVALID_EMAIL_ALERT_MESSAGE" = "無效的電子郵件位址：%@";
 
 /* Alerts for invalid location coordinates */
-"LOCATION_QUESTION_PLACEHOLDER" = "輸入位址";
-"LOCATION_ERROR_TITLE" = "無法解析指定的位址";
-"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法解析您的目前位置。請輸入位址，或者如果可以，請移至 GPS 訊號較佳的位置。";
+"LOCATION_QUESTION_PLACEHOLDER" = "輸入地址";
+"LOCATION_ERROR_TITLE" = "無法解析指定的地址";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法解析您的目前位置。請輸入地址，或者如果可以，請移至 GPS 訊號較佳的位置。";
 "LOCATION_ERROR_MESSAGE_DENIED" = "拒絕取用定位服務。請透過「設定」來許可此項 App 權限使用定位服務。";
-"LOCATION_ERROR_GEOCODE" = "無法找到輸入位址的結果。請確定位址有效。";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "您可能無法連接 Internet 或是您已超出位址查詢要求的最大數量。若您未連接 Internet，請開啟 WiFi 來回答此問題（如果顯示「略過」按鈕，則略過此問題），或是在您連接 Internet 之後再返回問卷。否則，請在幾分鐘後重試一次。";
+"LOCATION_ERROR_GEOCODE" = "無法找到輸入地址的結果。請確定地址有效。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "您可能無法連接 Internet 或是您已超出地址查詢要求的最大數量。若您未連接 Internet，請開啟 WiFi 來回答此問題（如果顯示「略過」按鈕，則略過此問題），或是在您連接 Internet 之後再返回問卷。否則，請在幾分鐘後重試一次。";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文字內容超過最大長度：%@";
@@ -139,7 +139,7 @@
 "PASSCODE_TOUCH_ID_MESSAGE" = "請使用 Touch ID 認證";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 錯誤";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "僅允許數字字元。";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼進度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "密碼輸入進度指示器";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已輸入 %1$@ 個數字（共 %2$@ 個）";
 
 /* Keychain wrapper */
@@ -326,16 +326,12 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-掛孔測試";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此活動會要求您將圓圈放入孔中，藉此測量您的下肢功能。將會要求您執行%@次。";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "將會測試您的%@手和%@手。\n您必須儘快撿起圓圈，將其放入洞中。完成 %@ 次後，請將其移除 %@ 次。";
+"HOLE_PEG_TEST_TITLE_%@" = "%@孔圓柱測試";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此活動會要求您將圓圈放入孔中，藉此測量您的上肢功能。將會要求您執行 %@ 次。";
+
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始測試」來開始。";
-"HOLE_PEG_TEST_RIGHT" = "右";
-"HOLE_PEG_TEST_LEFT" = "左";
-"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@" = "用您的%@手將孔栓放入孔中。";
-"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@" = "用您的%@手將孔栓放在線的後方。";
-"HOLE_PEG_TEST_TEXT" = "用兩指拿起孔栓。";
-"HOLE_PEG_TEST_TEXT_2" = "舉起手指來放下孔栓。";
+"HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
+"HOLE_PEG_TEST_TEXT_2" = "抬起手指來放下圓柱。";
 
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "無法製作檔案";
@@ -387,3 +383,4 @@
 "AX_GRAPH_RANGE_FORMAT" = "範圍在 %@ 到 %@ 之間";
 "AX_GRAPH_AND_SEPARATOR" = " 和 ";
 "AX_GRAPH_POINT_%@" = "點：%@";
+
