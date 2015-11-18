@@ -108,7 +108,7 @@ import ResearchKit
         resultSelector = ORKResultSelector.init(stepIdentifier: "introForm", resultIdentifier: "formMood");
         let predicateGoodMood: NSPredicate = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "good")
         let predicateGoodMoodAndFeeling: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateGoodFeeling, predicateGoodMood])
-        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
+        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateGoodMoodAndFeeling, "survey_skipped") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "introForm")
         
@@ -127,7 +127,7 @@ import ResearchKit
         // User didn't chose headache at the symptom step
         let predicateNotHeadache: NSPredicate = NSCompoundPredicate(notPredicateWithSubpredicate: predicateHeadache)
 
-        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
+        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateNotHeadache, "other_symptom") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "symptom")
         
@@ -147,7 +147,7 @@ import ResearchKit
         let predicateSevereHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereYes])
         let predicateLightHeadache: NSPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateHeadache, predicateSevereNo])
         
-        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestionationStepIdentifiers:
+        predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers:
             [ (predicateSevereHeadache, "severe_headache"), (predicateLightHeadache, "light_headache") ])
         task.setNavigationRule(predicateRule, forTriggerStepIdentifier: "severity")
         
