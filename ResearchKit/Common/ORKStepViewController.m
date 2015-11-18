@@ -296,9 +296,9 @@
 #pragma mark - Action Handlers
 
 - (void)goForward {
-    
+    ORKStepViewControllerNavigationDirection direction = self.isBeingReviewed ? ORKStepViewControllerNavigationDirectionReverse : ORKStepViewControllerNavigationDirectionForward;
     STRONGTYPE(self.delegate) strongDelegate = self.delegate;
-    [strongDelegate stepViewController:self didFinishWithNavigationDirection:ORKStepViewControllerNavigationDirectionForward];
+    [strongDelegate stepViewController:self didFinishWithNavigationDirection:direction];
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
