@@ -1485,7 +1485,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     
     {
         ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step"
-                                                                              title:@"Verfication"
+                                                                              title:@"Verification"
                                                                                text:@"Please verify your email"
                                                     verificationViewControllerClass:[VerificationViewController class]];
         [steps addObject:step];
