@@ -28,6 +28,7 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
 #import <Foundation/Foundation.h>
 #import <ResearchKit/ORKDefines.h>
 
@@ -127,7 +128,7 @@ ORK_CLASS_AVAILABLE
  */
 - (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
               destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers
-                   defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER;
+                   defaultStepIdentifier:(nullable NSString *)defaultStepIdentifier NS_DESIGNATED_INITIALIZER NS_SWIFT_UNAVAILABLE("Use the Swift init(resultPredicatesAndDestinationStepIdentifiers: [(NSPredicate, String)], defaultStepIdentifierOrNil: String?) initializer instead.");
 
 /**
  Returns an initialized predicate step navigation rule using the specified result predicates and
@@ -143,7 +144,7 @@ ORK_CLASS_AVAILABLE
  @return An initialized predicate step navigation rule.
  */
 - (instancetype)initWithResultPredicates:(NSArray<NSPredicate *> *)resultPredicates
-              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers;
+              destinationStepIdentifiers:(NSArray<NSString *> *)destinationStepIdentifiers NS_SWIFT_UNAVAILABLE("Use the Swift init(resultPredicatesAndDestinationStepIdentifiers: [(NSPredicate, String)], defaultStepIdentifierOrNil: String?) initializer instead.");
 
 /**
  Returns a new predicate step navigation rule initialized from data in the given unarchiver.
