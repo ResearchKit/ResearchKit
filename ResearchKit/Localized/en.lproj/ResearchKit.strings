@@ -327,8 +327,8 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a circle in a hole. You will be asked to do this %@ times.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Both your %@ and %@ hands will be tested.\nYou must pick up the circle as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "This activity measures your upper extremity function by asking you to place a peg in a hole. You will be asked to do this %@ times.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_%@" = "Both your %@ and %@ hands will be tested.\nYou must pick up the peg as quickly as possible, put it in the hole, and, once done %@ times, remove it again %@ times.";
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tap Get Started to begin.";
 "HOLE_PEG_TEST_RIGHT" = "right";
 "HOLE_PEG_TEST_LEFT" = "left";
