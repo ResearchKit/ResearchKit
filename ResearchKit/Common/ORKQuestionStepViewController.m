@@ -179,7 +179,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueEnabled = [self continueButtonEnabled];
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
-            _continueSkipView.hidden = self.readOnlyMode;
+            if (self.readOnlyMode) {
+                _continueSkipView.continueButton.hidden = YES;
+                [_continueSkipView.skipButton setEnabled:NO];
+            }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
             _questionView = [ORKQuestionStepView new];
@@ -208,7 +211,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.headerView.learnMoreButtonItem = self.learnMoreButtonItem;
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
-            _questionView.continueSkipContainer.hidden = self.readOnlyMode;
+            if (self.readOnlyMode) {
+                _questionView.continueSkipContainer.continueButton.hidden = YES;
+                [_questionView.continueSkipContainer.skipButton setEnabled:NO];
+            }
+
             
             NSMutableArray *constraints = [NSMutableArray new];
             [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[questionView]|"

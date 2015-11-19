@@ -512,7 +512,11 @@
         _continueSkipView.continueEnabled = [self continueButtonEnabled];
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
-        _continueSkipView.hidden = self.readOnlyMode;
+        if (self.readOnlyMode) {
+            _continueSkipView.continueButton.hidden = YES;
+            [_continueSkipView.skipButton setEnabled:NO];
+        }
+
     }
 }
 

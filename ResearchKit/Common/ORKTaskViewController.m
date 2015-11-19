@@ -1306,7 +1306,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     _defaultResultSource = resultSource;
     NSAssert(stepViewController != nil, @"A non-nil step should always generate a step view controller");
     stepViewController.continueButtonTitle = ORKLocalizedString(@"BUTTON_SAVE", nil);
-    stepViewController.skipButtonTitle = ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil);
+    stepViewController.skipButtonTitle = reviewStepViewController.reviewStep && reviewStepViewController.reviewStep.isStandalone ? ORKLocalizedString(@"BUTTON_READ_ONLY_MODE", nil) : ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil);
     stepViewController.parentReviewStep = (ORKReviewStep *) reviewStepViewController.step;
     if (stepViewController.parentReviewStep.isStandalone) {
         stepViewController.navigationItem.title = stepViewController.parentReviewStep.title;
