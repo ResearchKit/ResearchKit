@@ -617,6 +617,16 @@
 
 - (void)updateButtonStates {
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
+    if (self.isBeingReviewed) {
+        __block BOOL enabled = NO;
+        [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            if (!ORKIsAnswerEmpty(self.savedAnswers[key])) {
+                enabled = YES;
+                *stop = YES;
+            }
+        }];
+        _continueSkipView.skipButton.enabled = enabled;
+    }
 }
 
 #pragma mark Helpers

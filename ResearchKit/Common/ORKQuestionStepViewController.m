@@ -378,6 +378,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         _continueSkipView.neverHasContinueButton = YES;
         _continueSkipView.continueButtonItem = nil;
     }
+    if (self.isBeingReviewed) {
+        _questionView.continueSkipContainer.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
+        _continueSkipView.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
+    }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
 }
