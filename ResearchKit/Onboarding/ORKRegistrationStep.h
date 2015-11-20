@@ -111,6 +111,15 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, nullable) NSString *passcodeValidationRegex;
 
 /**
+ The regex options to use when validating the passcode form item.
+ This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
+
+ The passcodeValidationRegex property must also be set along with this property.
+ By default, this uses the default ORKTextAnswerFormat value.
+ */
+@property (nonatomic, assign) NSRegularExpressionOptions passcodeValidationRegexOptions;
+
+/**
  The invalid message displayed if the passcode does not match the validation regex.
  This is a transparent property pointing to its definition in `ORKTextAnswerFormat`.
  

@@ -1896,6 +1896,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     _spellCheckingType = UITextSpellCheckingTypeDefault;
     _keyboardType = UIKeyboardTypeDefault;
     _multipleLines = YES;
+    _validationRegexOptions = NSRegularExpressionCaseInsensitive;
 }
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength {
@@ -1938,7 +1939,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     NSError *error;
     if (self.validationRegex && ![[NSRegularExpression alloc] initWithPattern:self.validationRegex
-                                                                      options:NSRegularExpressionCaseInsensitive
+                                                                      options:self.validationRegexOptions
                                                                         error:&error]) {
         @throw [NSException exceptionWithName:NSInvalidArgumentException
                                        reason:@"Validation regex is not valid."
@@ -1951,6 +1952,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     ORKTextAnswerFormat *fmt = [[[self class] allocWithZone:zone] init];
     fmt->_maximumLength = _maximumLength;
     fmt->_validationRegex = [_validationRegex copy];
+    fmt->_validationRegexOptions = _validationRegexOptions;
     fmt->_invalidMessage = [_invalidMessage copy];
     fmt->_autocapitalizationType = _autocapitalizationType;
     fmt->_autocorrectionType = _autocorrectionType;
@@ -1986,7 +1988,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self.validationRegex) {
         if (!_cachedRegEx) {
             NSString *regExPattern = self.validationRegex;
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
+            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:self.validationRegexOptions error:nil];
         }
 
         NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
@@ -2017,6 +2019,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
         ORK_DECODE_OBJ_CLASS(aDecoder, validationRegex, NSString);
+        ORK_DECODE_INTEGER(aDecoder, validationRegexOptions);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
@@ -2032,6 +2035,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
     ORK_ENCODE_OBJ(aCoder, validationRegex);
+    ORK_ENCODE_INTEGER(aCoder, validationRegexOptions);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
@@ -2052,6 +2056,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return (isParentSame &&
             (self.maximumLength == castObject.maximumLength &&
              ORKEqualObjects(self.validationRegex, castObject.validationRegex) &&
+             self.validationRegexOptions == castObject.validationRegexOptions &&
              ORKEqualObjects(self.invalidMessage, castObject.invalidMessage) &&
              self.autocapitalizationType == castObject.autocapitalizationType &&
              self.autocorrectionType == castObject.autocorrectionType &&
