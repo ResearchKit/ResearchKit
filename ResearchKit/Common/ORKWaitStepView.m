@@ -39,7 +39,6 @@
 
 
 #import "ORKWaitStepView.h"
-#import "ORKProgressView.h"
 #import "ORKAccessibility.h"
 
 
@@ -48,7 +47,7 @@ static const CGFloat horizontalMargin = 40.0;
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;
     ORKProgressIndicatorType _indicatorType;
-    ORKProgressView *_activityIndicatorView;
+    UIActivityIndicatorView *_activityIndicatorView;
     NSNumberFormatter *_percentFormatter;
 }
 
@@ -68,8 +67,9 @@ static const CGFloat horizontalMargin = 40.0;
                 [self.stepView addSubview:_progressView];
                 break;
             case ORKProgressIndicatorTypeIndeterminate:
-                _activityIndicatorView = [ORKProgressView new];
+                _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 [self.stepView addSubview:_activityIndicatorView];
+                [_activityIndicatorView startAnimating];
                 break;
         }
         
