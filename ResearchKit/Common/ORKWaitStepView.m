@@ -42,8 +42,6 @@
 #import "ORKAccessibility.h"
 
 
-static const CGFloat horizontalMargin = 40.0;
-
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;
     ORKProgressIndicatorType _indicatorType;
@@ -56,87 +54,22 @@ static const CGFloat horizontalMargin = 40.0;
     if (self) {
         
         _indicatorType = type;
-        
-        self.stepView = [UIView new];
-        self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
         self.verticalCenteringEnabled = YES;
         
         switch (_indicatorType) {
             case ORKProgressIndicatorTypeProgressBar:
                 _progressView = [UIProgressView new];
-                [self.stepView addSubview:_progressView];
+                self.stepView = _progressView;
                 break;
             case ORKProgressIndicatorTypeIndeterminate:
                 _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                [self.stepView addSubview:_activityIndicatorView];
                 [_activityIndicatorView startAnimating];
+                self.stepView = _activityIndicatorView;
                 break;
         }
         
-        [self setUpConstraints];
     }
     return self;
-}
-
-- (void)setUpConstraints {
-    
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    if (_progressView) {
-        ORKEnableAutoLayoutForViews(@[_progressView]);
-        
-        [constraints addObjectsFromArray:@[
-                                           [NSLayoutConstraint constraintWithItem:_progressView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:_progressView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:_progressView
-                                                                        attribute:NSLayoutAttributeWidth
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeWidth
-                                                                       multiplier:1.0
-                                                                         constant:-horizontalMargin]
-                                           ]];
-    } else {
-        ORKEnableAutoLayoutForViews(@[_activityIndicatorView]);
-        
-        [constraints addObjectsFromArray:@[
-                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeCenterX
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeCenterY
-                                                                       multiplier:1.0
-                                                                         constant:0.0],
-                                           [NSLayoutConstraint constraintWithItem:_activityIndicatorView
-                                                                        attribute:NSLayoutAttributeWidth
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.stepView
-                                                                        attribute:NSLayoutAttributeWidth
-                                                                       multiplier:1.0
-                                                                         constant:-0.0]
-                                           ]];
-    }
-    
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 #pragma mark - Accessibility
