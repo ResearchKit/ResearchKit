@@ -55,6 +55,7 @@
         
         _indicatorType = type;
         self.verticalCenteringEnabled = YES;
+        self.stepViewFillsAvailableSpace = YES;
         
         switch (_indicatorType) {
             case ORKProgressIndicatorTypeProgressBar:

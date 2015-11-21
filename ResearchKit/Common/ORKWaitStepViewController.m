@@ -47,6 +47,7 @@
 @implementation ORKWaitStepViewController {
     ORKWaitStepView *_waitStepView;
     ORKProgressIndicatorType _indicatorType;
+    NSString *_updatedText;
 }
 
 - (ORKWaitStep *)waitStep {
@@ -56,10 +57,18 @@
 - (void)stepDidChange {
     [super stepDidChange];
     
+    [_waitStepView removeFromSuperview];
+    
     if (self.step && [self isViewLoaded]) {
+        if (!_waitStepView) {
+            // Collect the text content from step during the when _waitStepView hasn't been initialized.
+            _updatedText = [self waitStep].text;
+        }
+        
         _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorType:[self waitStep].indicatorType];
+        _waitStepView.frame = self.view.bounds;
         _waitStepView.headerView.captionLabel.text = [self waitStep].title;
-        _waitStepView.headerView.instructionLabel.text = [self waitStep].text;
+        _waitStepView.headerView.instructionLabel.text = _updatedText;
 
         [self.view addSubview:_waitStepView];
         
@@ -94,7 +103,8 @@
 }
 
 - (void)updateText:(NSString *)text {
-    _waitStepView.headerView.instructionLabel.text = text;
+    _updatedText = text;
+    [self stepDidChange];
 }
 
 @end
