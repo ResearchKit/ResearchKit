@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Podaj adres";
-"LOCATION_ERROR_TITLE" = "Nie udało się rozpoznać podanego adresu";
+"LOCATION_ERROR_TITLE" = "Nie można było znaleźć określonego adresu";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nie można określić Twojego bieżącego położenia. Podaj adres lub przenieś się w miejsce z lepszym sygnałem GPS.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Nastąpiła odmowa dostępu do usług lokalizacji. Przejdź do Ustawień i pozwól temu programowi używać usług lokalizacji.";
 "LOCATION_ERROR_GEOCODE" = "Nie można znaleźć wyniku dla podanego adresu. Upewnij się, że adres jest prawidłowy.";
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-HPT (otwory i kołki)";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność kończyn górnych: umieszczasz „kołek” (pełne kółko) w „otworze” (puste kółko). (Do wykonania %@ razy).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Test obejmuje zarówno lewą, jak i prawą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Test obejmuje zarówno prawą, jak i lewą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” w „otworze”, używając lewej ręki.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” w „otworze”, używając prawej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” za linią, używając lewej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” za linią, używając prawej ręki.";
 "HOLE_PEG_TEST_TEXT" = "Podnieś „kołek” dwoma palcami.";
 "HOLE_PEG_TEST_TEXT_2" = "Unieś palce, aby upuścić „kołek”.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Zakres %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
-

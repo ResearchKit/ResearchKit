@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "住所を入力";
-"LOCATION_ERROR_TITLE" = "入力した住所を確認できませんでした";
+"LOCATION_ERROR_TITLE" = "指定した住所が見つかりませんでした";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "現在地を確認できません。住所を入力するか、GPS信号の受信状況が良好な場所に移動してください。";
 "LOCATION_ERROR_MESSAGE_DENIED" = "位置情報サービスへのアクセスが拒否されました。“設定”でこのAppに位置情報サービスの使用を許可してください。";
 "LOCATION_ERROR_GEOCODE" = "入力した住所の結果が見つかりません。住所が正しいことを確認してください。";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "古いパスコードを入力してください";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "新しいパスコードを入力してください";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "新しいパスコードを確認してください";
-"PASSCODE_INVALID_ALERT_TITLE" = "入力が無効です";
+"PASSCODE_INVALID_ALERT_TITLE" = "パスコードが正しくありません";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "パスコードが一致しません。もう一度入力してください。";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Touch IDで認証してください";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch IDエラー";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "入力できるのは数字のみです。";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコードの進行状況インジケータ";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "パスコード入力の進行状況インジケータ";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@桁を入力しました";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ホールペグテスト";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "このアクティビティでは、円を穴に入れる動作で上肢機能を測定します。測定は%@回行います。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "左手と右手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "右手と左手の両方をテストします。\n円をできるだけすばやくつかんでください。穴に入れる動作を%@回繰り返したら、今度は穴から円を取り出す動作を%@回繰り返します。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "始めるには、“開始”をタップしてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "左手で円を穴に置いてください。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "右手で円を穴に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "左手で円を線の向こう側に置いてください。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "右手で円を線の向こう側に置いてください。";
 "HOLE_PEG_TEST_TEXT" = "2本の指で円をつまんでください。";
 "HOLE_PEG_TEST_TEXT_2" = "指で円を持ち上げて移動させ落としてください。";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "範囲%@〜%@";
 "AX_GRAPH_AND_SEPARATOR" = "と";
 "AX_GRAPH_POINT_%@" = "ポイント: %@";
-

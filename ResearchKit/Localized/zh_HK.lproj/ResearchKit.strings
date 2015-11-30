@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "輸入地址";
-"LOCATION_ERROR_TITLE" = "無法找出指定地址";
+"LOCATION_ERROR_TITLE" = "找不到指定的地址";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "無法找出現時位置，請輸入地址或移動至 GPS 訊號較佳的位置（如適用）。";
 "LOCATION_ERROR_MESSAGE_DENIED" = "定位服務存取遭拒，請前往「設定」以授權此 App 使用定位服務。";
 "LOCATION_ERROR_GEOCODE" = "找不到輸入的地址，請確定地址是否正確。";
@@ -134,7 +134,7 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "輸入舊密碼";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "輸入新密碼";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "確認新密碼";
-"PASSCODE_INVALID_ALERT_TITLE" = "無效的輸入";
+"PASSCODE_INVALID_ALERT_TITLE" = "密碼不正確";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "密碼不符，請再試一次。";
 "PASSCODE_TOUCH_ID_MESSAGE" = "請使用 Touch ID 認證";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 錯誤";
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ 孔柱測試";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此測試活動需要你將圓形放進洞內，以測量你的上肢功能。你將需要執行此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "此測試活動需要你將圓柱放進洞內，以測量你的上肢功能。你將需要執行此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "測試活動將會測試你的左手及右手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "測試活動將會測試你的右手及左手。\n你必須以最快的速度拿起圓柱並放進洞中，完成 %@ 次後需要拿走 %@ 次。";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "點一下「開始」以進行測試。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進洞中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進洞中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "請用左手將圓柱放進線後。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "請用右手將圓柱放進線後。";
 "HOLE_PEG_TEST_TEXT" = "用兩指拿起圓柱。";
 "HOLE_PEG_TEST_TEXT_2" = "放開手指以放下圓柱。";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "範圍介乎 %@ 至 %@";
 "AX_GRAPH_AND_SEPARATOR" = " 與 ";
 "AX_GRAPH_POINT_%@" = "點數：%@";
-

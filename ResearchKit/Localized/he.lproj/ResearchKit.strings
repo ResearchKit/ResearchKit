@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "הקש/י כתובת";
-"LOCATION_ERROR_TITLE" = "לא ניתן לזהות את הכתובת שצוינה";
+"LOCATION_ERROR_TITLE" = "לא ניתן למצוא את הכתובת שצוינה";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "לא ניתן לזהות את מיקומך הנוכחי. הקלד/י כתובת או עבור/י אל מיקום שבו קליטת ה-GPS טובה יותר, אם אפשר.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "הגישה אל שירותי המיקום נדחתה. הענק/י ליישום זה הרשאה להשתמש בשירותי המיקום דרך ״הגדרות״.";
 "LOCATION_ERROR_GEOCODE" = "לא ניתן למצוא תוצאה עבור הכתובת שהוקשה. ודא/י שהכתובת תקינה.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "הקש/י את קוד הגישה הישן";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "הקש/י את קוד הגישה החדש";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "אשר/י את קוד הגישה החדש";
-"PASSCODE_INVALID_ALERT_TITLE" = "קלט בלתי חוקי";
+"PASSCODE_INVALID_ALERT_TITLE" = "קוד הגישה שגוי";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "קודי הגישה לא היו זהים. נסה/י שוב.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "בצע/י אימות באמצעות Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "שגיאת Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "ניתן להשתמש בתווי ספרות בלבד.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של קוד גישה";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של הקשת קוד גישה";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "הוקשו %@ מתוך %@ ספרות";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך לבחור בדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך לבחור בדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך הימנית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך הימנית.";
 "HOLE_PEG_TEST_TEXT" = "הרם/י את הדיסקית בשתי אצבעות.";
 "HOLE_PEG_TEST_TEXT_2" = "הרם/י את אצבעותיך כדי להפיל את הדיסקית.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
 "AX_GRAPH_AND_SEPARATOR" = " וגם";
 "AX_GRAPH_POINT_%@" = "נקודה: %@";
-

@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Adresse courriel incorrecte?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Je n’ai pas reçu de courriel";
 "RESEND_EMAIL_BUTTON_TITLE" = "Renvoyer le courriel de vérification";
-"VERIFICATION_LABEL_MESSAGE" = "Si l’adresse est vérifiée,\ntouchez le bouton ci-dessous.";
+"VERIFICATION_LABEL_MESSAGE" = "Touchez OK si l’adresse est vérifiée.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Connexion";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Entrez votre ancien code.";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Entrez votre nouveau code.";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirmez votre nouveau code.";
-"PASSCODE_INVALID_ALERT_TITLE" = "Entrée non valide";
+"PASSCODE_INVALID_ALERT_TITLE" = "Code incorrect";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Les codes sont différents. Réessayez.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Authentifiez-vous avec Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erreur de Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Seuls les caractères numériques sont autorisés.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicateur de progression du code";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicateur de progression de saisie du code";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ sur %@ chiffres entrés";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test des %@ trous";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité mesure la dextérité de vos membres supérieurs en vous demandant de placer un cercle dans un trou. On vous demandera de le faire %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Votre main gauche et votre main droite seront testées.\nVous devez saisir le cercle aussi rapidement que possible, le placer dans le trou et, après avoir fait cela %@ fois, le retirer à nouveau %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Votre main droite et votre main gauche seront testées.\nVous devez saisir le cercle aussi rapidement que possible, le placer dans le trou et, après avoir fait cela %@ fois, le retirer à nouveau %@ fois.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placez le cercle dans le trou en utilisant votre main gauche.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Placez le cercle dans le trou en utilisant votre main droite.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Placez le cercle derrière la ligne en utilisant votre main gauche.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Placez le cercle derrière la ligne en utilisant votre main droite.";
 "HOLE_PEG_TEST_TEXT" = "Saisissez le cercle avec deux doigts.";
 "HOLE_PEG_TEST_TEXT_2" = "Levez vos doigts pour relâcher le cercle.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
 "AX_GRAPH_AND_SEPARATOR" = " et ";
 "AX_GRAPH_POINT_%@" = "Point : %@";
-

@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Введите адрес";
-"LOCATION_ERROR_TITLE" = "Сбой устранения проблемы с указанным адресом";
+"LOCATION_ERROR_TITLE" = "Указанный адрес не найден";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не удается устранить проблему с текущей геопозицией. Введите адрес или переместитесь в геопозицию с лучшим GPS‑сигналом, если возможно.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "В доступе к службам геолокации отказано. Разрешите этой программе использовать службы геолокации в Настройках.";
 "LOCATION_ERROR_GEOCODE" = "Не удается найти результат по введенному адресу. Убедитесь, что адрес действителен.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Введите старый код‑пароль";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Введите новый код‑пароль";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Подтвердите новый код-пароль";
-"PASSCODE_INVALID_ALERT_TITLE" = "Неверный ввод";
+"PASSCODE_INVALID_ALERT_TITLE" = "Неверный код‑пароль";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Код‑пароли не совпали. Повторите попытку.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Выполните аутентификацию с Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Ошибка Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Можно использовать только цифры.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Индикатор хода создания код‑пароля";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Индикатор ход ввода код‑пароля";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено цифр: %@ из %@";
 
 /* Keychain wrapper */
@@ -258,7 +258,7 @@
 "SPATIAL_SPAN_MEMORY_TARGET_PLURAL" = "цветы";
 "SPATIAL_SPAN_MEMORY_TARGET_STANDALONE" = "цветы";
 "SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в том же порядке.";
-"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в обратном порядке.\n";
+"SPATIAL_SPAN_MEMORY_INTRO_2_TEXT_REVERSE_%@" = "Некоторые %@ будут подсвечиваться поочередно в определенном порядке. Коснитесь этих %@ в обратном порядке.";
 "SPATIAL_SPAN_MEMORY_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать» и внимательно смотрите на экран.";
 "MEMORY_GAME_ITEM_COUNT_TITLE_%@" = "%@";
 "MEMORY_GAME_SCORE_TITLE" = "Счет";
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Тест «Вставляем %@ колышков»";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "В этом упражнении проверяется работоспособность верхних конечностей. Вам предложат поместить круг в лунку %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "В этом упражнении проверяется работоспособность верхних конечностей. Вам предложат поместить колышек в лунку %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Проверены будут обе руки: левая и правая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Проверены будут обе руки: правая и левая.\nВам потребуется поднять колышек как можно быстрее, поместить его в лунку, а затем, повторив упражнение %@ раз(а), удалить его снова %@ раз(а).";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Чтобы приступить, коснитесь «Начать».";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Поместите колышек в лунку левой рукой.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Поместите колышек в лунку правой рукой.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Поместите колышек за линию левой рукой.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Поместите колышек за линию правой рукой.";
 "HOLE_PEG_TEST_TEXT" = "Поднимите колышек двумя пальцами.";
 "HOLE_PEG_TEST_TEXT_2" = "Приподнимите пальцы, чтобы бросить колышек.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Диапазон от %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " и ";
 "AX_GRAPH_POINT_%@" = "Точка: %d";
-

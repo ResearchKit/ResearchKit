@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Введіть адресу";
-"LOCATION_ERROR_TITLE" = "Не вдалося відстежити вказану адресу";
+"LOCATION_ERROR_TITLE" = "Не вдалося знайти вказану адресу";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не вдається відстежити ваше поточне місце. Введіть адресу або перейдіть у місце з кращим сигналом GPS, якщо це можливо.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "У доступі до Служби локації відмовлено. Надайте цій програмі дозвіл на використання Служби локації у Параметрах.";
 "LOCATION_ERROR_GEOCODE" = "Не вдається знайти збіги для введеної адреси. Перевірте правильність адреси.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Ви або не підключені до Інтернету, або перевищили ліміт запитів пошуку адрес. Якщо ви не підключені до Інтернету, увімкніть Wi-Fi, щоб відповісти на це питання, пропустіть питання, якщо кнопка пропуску доступна, або пройдіть опитування, коли підключитесь до Інтернету. В іншому випадку повторіть спробу через кілька хвилин.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ви або не підключені до Інтернету, або перевищили ліміт запитів пошуку адреси. Якщо ви не підключені до Інтернету, увімкніть Wi-Fi, щоб відповісти на це питання, пропустити це питання, якщо кнопка пропуску доступна, або повертайтесь до опитування, коли підключитесь до Інтернету. У іншому випадку повторіть спробу через кілька хвилин.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Текстовий вміст перевищує ліміт: %@";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Введіть старий код допуску";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Введіть новий код допуску";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Підтвердіть свій новий код";
-"PASSCODE_INVALID_ALERT_TITLE" = "Хибні дані";
+"PASSCODE_INVALID_ALERT_TITLE" = "Неправильний код допуску";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Незбіг кодів. Спробуйте ще раз.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Будь ласка, засвідчіть своїм Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Помилка Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Дозволено тільки цифри.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор прогресу коду";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор перебігу вводу коду допуску";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено: %@ із %@";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Кілковий тест на %@ отворів";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "У цьому тесті вас попросять покласти коло в отвір, щоб оцінити функцію ваших верхніх кінцівок. Вам знадобиться повторити це %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Цей тест оцінює функцію ваших верхніх кінцівок, коли вам потрібно покласти кілок в отвір. Вас попросять зробити це %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Буде перевірено вашу ліву і праву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Буде перевірено вашу праву і ліву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок в отвір лівою рукою.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок в отвір правою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок за лінію лівою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок за лінію правою рукою.";
 "HOLE_PEG_TEST_TEXT" = "Візьміть кілок двома пальцями.";
 "HOLE_PEG_TEST_TEXT_2" = "Підніміть пальці, щоб опустити кілок.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
 "AX_GRAPH_POINT_%@" = "Точка: %@";
-

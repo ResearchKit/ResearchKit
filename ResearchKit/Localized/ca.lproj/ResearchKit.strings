@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Escriu una adreça";
-"LOCATION_ERROR_TITLE" = "No s’ha pogut resoldre l’adreça especificada";
+"LOCATION_ERROR_TITLE" = "No s’ha trobat l‘adreça especificada";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No s’ha pogut determinar la ubicació actual. Escriu una adreça o vés a un lloc que tingui un senyal de GPS més bo, si pot ser.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’aplicació utilitzi els serveis de localització des de Configuració.";
 "LOCATION_ERROR_GEOCODE" = "No s’ha trobat cap resultat per a l’adreça especificada. Comprova que sigui vàlida.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Escriu el codi antic";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Escriu el codi nou";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nou codi";
-"PASSCODE_INVALID_ALERT_TITLE" = "Entrada no vàlida";
+"PASSCODE_INVALID_ALERT_TITLE" = "Codi incorrecte";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Els codis no coincideixen. Torna-ho a provar.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Identifica’t amb el Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Només es permeten caràcters numèrics.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés del codi";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés d’ingrés del codi";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígits introduïts";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una rodona dins d’un forat. Ho hauràs de fer %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla al forat amb la mà esquerra.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla al forat amb la mà dreta.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla darrere de la línia amb la mà esquerra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla darrere de la línia amb la mà dreta.";
 "HOLE_PEG_TEST_TEXT" = "Agafa la clavilla fent servir dos dits.";
 "HOLE_PEG_TEST_TEXT_2" = "Aixeca els dits per deixar caure la clavilla.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
-

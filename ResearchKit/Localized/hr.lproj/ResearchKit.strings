@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Unesite adresu";
-"LOCATION_ERROR_TITLE" = "Nije moguće riješiti navedenu adresu";
+"LOCATION_ERROR_TITLE" = "Navedena adresa nije pronađena";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nije moguće utvrditi vašu trenutnu lokaciju. Molimo unesite adresu ili se premjestite na lokaciju s boljim GPS signalom, ako je primjenjivo.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Odbijen je pristup lokacijskim uslugama. Molimo dajte ovoj aplikaciji dopuštenje da koristi lokacijske usluge putem Postavki.";
 "LOCATION_ERROR_GEOCODE" = "Nije moguće naći rezultat za unesenu adresu. Molimo provjerite je li adresa valjana.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Ili niste spojeni na internet ili ste premašili maksimalni broj zahtjeva za pretraživanje adresa. Ako niste spojeni na internet, molimo uključite svoj Wi-Fi da biste odgovorili na ovo pitanje, preskočite ovo pitanje ako je dostupna tipka za preskakanje, ili se vratite na anketu kada budete spojeni na internet. U suprotnom, molimo da pokušate ponovno za nekoliko minuta.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Niste spojeni na internet ili ste premašili maksimalan broj zahtjeva za traženjem adresa. Ako niste spojeni na internet, uključite Wi-Fi kako biste odgovorili na ovo pitanje, preskočite pitanje ako je dostupna tipka za preskakanje ili se vratite na anketu kad ste spojeni na internet. U protivnom probajte ponovno za nekoliko minuta.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstualni sadržaj prekoračuje maksimalnu duljinu: %@";
@@ -118,7 +118,7 @@
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "Kriva e-mail adresa?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "E-mail nije zaprimljen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Nisam primio/la e-mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Ponovno pošalji e-mail za provjeru";
 "VERIFICATION_LABEL_MESSAGE" = "Ako je provjereno, dodirnite tipku u nastavku.";
 
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Unesite staru lozinku";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Unesite novu lozinku";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrdite vašu novu lozinku";
-"PASSCODE_INVALID_ALERT_TITLE" = "Nevažeći unos";
+"PASSCODE_INVALID_ALERT_TITLE" = "Netočna lozinka";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Lozinke nisu iste. Pokušajte ponovno.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Molimo autorizirajte pomoću Touch ID-a";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Greška Touch ID-a";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dopušteni su samo numerički znakovi.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka lozinke";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka unošenja lozinke";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ od %@ unesenih znamenki";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test s %@ rupa i klinovima";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost mjeri funkciju gornjih ekstremiteta tako da od vas traži da u rupu stavite krug. To ćete morati učiniti %@ puta.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ova aktivnost mjeri funkciju vaših gornjih ekstremiteta tako što traži da stavite klin u rupu. Od vas će se zatražiti da to učinite %@ puta.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Testirat će vam se i lijeva i desna ruka.\nMorate uhvatiti klin što brže možete, staviti ga u rupu i kad to učinite %@ puta, ponovno ga ukloniti %@ puta.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Testirat će vam se i desna i lijeva ruka.\nMorate uhvatiti klin što brže možete, staviti ga u rupu i kad to učinite %@ puta, ponovno ga ukloniti %@ puta.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Dodirnite Pokreni za početak.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Stavite klin u rupu koristeći se lijevom rukom.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Stavite klin u rupu koristeći se desnom rukom.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Stavite klin iza crte koristeći se lijevom rukom.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Stavite klin iza crte koristeći se desnom rukom.";
 "HOLE_PEG_TEST_TEXT" = "Podignite klin s dva prsta.";
 "HOLE_PEG_TEST_TEXT_2" = "Podignite prste da biste ispustili klin.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Raspon od %@ do %@.";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
 "AX_GRAPH_POINT_%@" = "Točka: %@";
-

@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Digite um endereço";
-"LOCATION_ERROR_TITLE" = "Não foi possível encontrar o endereço especificado.";
+"LOCATION_ERROR_TITLE" = "Não foi possível encontrar o endereço indicado.";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Não foi possível encontrar a localização atual. Digite um endereço ou desloque‑se para um local com sinal GPS mais forte.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "O acesso aos serviços de localização foi recusado. Permita a esta aplicação aceder a estes serviços nas Definições.";
 "LOCATION_ERROR_GEOCODE" = "Não foi encontrado nenhum resultado. Certifique‑se de que o endereço indicado é válido.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Digite o código antigo";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Digite o novo código";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme o novo código";
-"PASSCODE_INVALID_ALERT_TITLE" = "Dados inválidos";
+"PASSCODE_INVALID_ALERT_TITLE" = "Código incorreto";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Introduziu códigos diferentes. Volte a tentar.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Efetue autenticação com o Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erro do Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Só são permitidos caracteres numéricos.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progresso do código";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progresso de introdução do código";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos introduzidos";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ buracos e pinos";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta exercício mede as funções das extremidades superiores pedindo‑lhe que coloque um círculo dentro de um buraco. Ser-lhe-à pedido que repita %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "As duas mãos serão testadas.\nTem de pegar no círculo o mais depressa possível e arrastá‑lo para o buraco. Depois de o fazer %@ vezes, faça o movimento contrário e remova o círculo do buraco %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "As duas mãos serão testadas.\nTem de pegar no círculo o mais depressa possível e arrastá‑lo para o buraco. Depois de o fazer %@ vezes, faça o movimento contrário e remova o círculo do buraco %@ vezes.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Com a mão esquerda, ponha o círculo dentro do buraco.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Com a mão direita, ponha o círculo dentro do buraco.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Com a mão esquerda, ponha o círculo do outro lado da linha.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Com a mão direita, ponha o círculo do outro lado da linha.";
 "HOLE_PEG_TEST_TEXT" = "Apanhe o círculo com dois dedos.";
 "HOLE_PEG_TEST_TEXT_2" = "Levante os dedos para largar o círculo.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Intervalo de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Ponto: %@";
-

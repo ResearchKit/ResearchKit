@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Inserisci un indirizzo";
-"LOCATION_ERROR_TITLE" = "Impossibile individuare l'indirizzo specificato";
+"LOCATION_ERROR_TITLE" = "Impossibile trovare l'indirizzo specificato";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Impossibile individuare la tua posizione attuale. Inserisci l'indirizzo o spostati in una zona con una migliore copertura GPS.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "L'accesso ai servizi di localizzazione è stato negato. Vai in Impostazioni e autorizza l'applicazione a utilizzare i servizi di localizzazione.";
 "LOCATION_ERROR_GEOCODE" = "Impossibile trovare risultati per l'indirizzo inserito, assicurati che sia valido.";
@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "E-mail";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmela@xample.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmela@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Password";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Inserisci password";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Conferma";
@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "L'indirizzo e-mail non è corretto?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Non ho ricevuto nessuna e-mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Invia di nuovo e-mail di verifica";
-"VERIFICATION_LABEL_MESSAGE" = "Se è stato verificato, tocca il pulsante in basso.";
+"VERIFICATION_LABEL_MESSAGE" = "Se è stato verificato, tocca Fine.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Accedi";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Inserisci il vecchio codice";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Inserisci il nuovo codice";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Conferma il nuovo codice";
-"PASSCODE_INVALID_ALERT_TITLE" = "Valore inserito non valido";
+"PASSCODE_INVALID_ALERT_TITLE" = "Codice non corretto";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "I codici non corrispondono, riprova.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Effettua l'autenticazione con Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Errore Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sono consentiti solo caratteri numerici.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicatore progresso codice";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicatore progresso inserimento codice";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ di %@ cifre inserite";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test %@-hole peg (NHPT)";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Questo test valuta la funzionalità delle tue estremità superiori. Dovrai posizionare l'icona azzurra a forma di cerchio nella sagoma vuota %@ volte.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Questo test valuta la funzionalità delle tue estremità superiori. Dovrai posizionare l'icona azzurra nella sagoma vuota %@ volte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Verrà esaminata la funzionalità di entrambe le mani.\nÈ necessario selezionare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Verrà esaminata la funzionalità di entrambe le mani.\nÈ necessario selezionare l'icona colorata il più velocemente possibile e inserirla nell'apposita sagoma vuota. Una volta completata l'operazione %@ volte, dovrai rimuovere l'icona altre %@ volte.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tocca Inizia per cominciare.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Sposta l'icona colorata nella sagoma vuota usando la mano sinistra.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Sposta l'icona colorata nella sagoma vuota usando la mano destra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Sposta l'icona colorata dietro la linea usando la mano sinistra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Sposta l'icona colorata dietro la linea usando la mano destra.";
 "HOLE_PEG_TEST_TEXT" = "Seleziona l'icona colorata utilizzando due dita.";
 "HOLE_PEG_TEST_TEXT_2" = "Solleva le dita per rilasciare l'icona colorata.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Intervallo da %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
 "AX_GRAPH_POINT_%@" = "Punto: %@";
-

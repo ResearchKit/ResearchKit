@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Voer een adres in";
-"LOCATION_ERROR_TITLE" = "Het opgegeven adres kan niet worden bepaald";
+"LOCATION_ERROR_TITLE" = "Opgegeven adres niet gevonden";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "De huidige locatie kan niet worden bepaald. Typ een adres of ga indien nodig naar een plek met een beter GPS-signaal.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Toegang tot 'Locatievoorzieningen' is geweigerd. Ga naar Instellingen en geef deze app toestemming om 'Locatievoorzieningen' te gebruiken.";
 "LOCATION_ERROR_GEOCODE" = "Het ingevoerde adres is niet gevonden. Zorg dat u een geldig adres invoert.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Voer uw oude toegangscode in";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Voer uw nieuwe toegangscode in";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Herhaal uw nieuwe wachtwoord";
-"PASSCODE_INVALID_ALERT_TITLE" = "Ongeldige invoer";
+"PASSCODE_INVALID_ALERT_TITLE" = "Toegangscode onjuist";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "De codes komen niet overeen. Probeer het opnieuw.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Log in met Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fout";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Alleen cijfertekens toegestaan.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode-invoer";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ van %@ cijfers ingevoerd";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-schijventest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tijdens deze activiteit meet u het functioneren van uw bovenste ledematen door een schijfje in een cirkel te plaatsen. Dit moet u %@ keer doen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Zowel uw linker- als rechterhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Zowel uw rechter- als linkerhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje achter de lijn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje achter de lijn.";
 "HOLE_PEG_TEST_TEXT" = "Pak het schijfje op met twee vingers.";
 "HOLE_PEG_TEST_TEXT_2" = "Til uw vingers op om het schijfje los te laten.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Bereik van %@ tot %@";
 "AX_GRAPH_AND_SEPARATOR" = " en ";
 "AX_GRAPH_POINT_%@" = "Punt: %@";
-

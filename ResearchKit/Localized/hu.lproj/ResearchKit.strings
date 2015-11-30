@@ -88,7 +88,7 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Adjon meg egy címet";
-"LOCATION_ERROR_TITLE" = "A megadott cím feloldása nem sikerült";
+"LOCATION_ERROR_TITLE" = "A megadott cím nem található";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Az aktuális hely feloldása nem sikerült. Írjon be egy címet, vagy menjen olyan helyre, ahol a GPS-jelerősség kedvezőbb.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "A helymeghatározáshoz való hozzáférés le van tiltva. Engedélyezze az alkalmazás számára a helymeghatározás funkció használatát a Beállításokban.";
 "LOCATION_ERROR_GEOCODE" = "A megadott címhez nem található eredmény. Győződjön meg arról, hogy a cím érvényes.";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Adja meg a régi jelkódját";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Adja meg az új jelkódját";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Erősítse meg az új jelkódját";
-"PASSCODE_INVALID_ALERT_TITLE" = "Érvénytelen adatbevitel";
+"PASSCODE_INVALID_ALERT_TITLE" = "A jelkód helytelen";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "A jelkódok nem egyeznek meg. Próbálja újra.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Kérjük, végezzen hitelesítést a Touch ID-val";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-val kapcsolatos hiba";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kizárólag számkarakterek engedélyezettek.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Jelkód folyamatjelzője";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Jelkóddal történő belépés folyamatjelzője";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@ számjegy megadva";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ lyukú körillesztő teszt";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ez a tevékenység a felső végtagok mozgását vizsgálja, amelynek során a rendszer megkéri Önt, hogy illesszen bele egy kört egy lyukba. Ezt %@ alkalommal kell megtennie.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "A bal és a jobb keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "A jobb és a bal keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a lyukba a bal kezével.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a lyukba a jobb kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a vonal mögé a bal kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a vonal mögé a jobb kezével.";
 "HOLE_PEG_TEST_TEXT" = "Fogja meg a kört két ujjal.";
 "HOLE_PEG_TEST_TEXT_2" = "Emelje fel az ujjait a kör elhelyezéséhez.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
 "AX_GRAPH_POINT_%@" = "Pont: %@";
-

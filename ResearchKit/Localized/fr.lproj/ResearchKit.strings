@@ -120,7 +120,7 @@
 "CHANGE_EMAIL_BUTTON_TITLE" = "Adresse e-mail incorrecte ?";
 "RESEND_EMAIL_LABEL_MESSAGE" = "Je n’ai pas reçu d’e-mail";
 "RESEND_EMAIL_BUTTON_TITLE" = "Renvoyer l’e-mail de vérification";
-"VERIFICATION_LABEL_MESSAGE" = "Si l’adresse est vérifiée,\ntouchez le bouton ci-dessous.";
+"VERIFICATION_LABEL_MESSAGE" = "Si vérifiée, touchez ci-dessous.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Connexion";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Saisir votre ancien code";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Saisir votre nouveau code";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirmer votre nouveau code";
-"PASSCODE_INVALID_ALERT_TITLE" = "Saisie incorrecte";
+"PASSCODE_INVALID_ALERT_TITLE" = "Code incorrect";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Les codes sont différents. Réessayez.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Authentification avec Touch ID requise";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erreur Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Caractères numériques uniquement.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicateur de progression du code";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicateur de progression de la saisie du code";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ sur %@ chiffres saisis";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test des %@ chevilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité évalue le fonctionnement de vos extrémités supérieures. Vous devez placer un rond dans un trou et répéter cette opération %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et une fois réalisé %@ fois, retirez le rond %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et une fois réalisé %@ fois, retirez le rond %@ fois.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placez le rond dans le trou avec votre main gauche.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Placez le rond dans le trou avec votre main droite.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Placez le rond derrière la ligne avec votre main gauche.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Placez le rond derrière la ligne avec votre main droite.";
 "HOLE_PEG_TEST_TEXT" = "Ramassez le rond avec deux doigts.";
 "HOLE_PEG_TEST_TEXT_2" = "Levez les doigts pour faire tomber le rond.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "De %@ à %@";
 "AX_GRAPH_AND_SEPARATOR" = " et ";
 "AX_GRAPH_POINT_%@" = "Point : %@";
-

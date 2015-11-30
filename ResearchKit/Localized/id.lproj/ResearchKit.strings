@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
-"LOCATION_ERROR_TITLE" = "Gagal Menentukan Alamat yang Ditetapkan";
+"LOCATION_ERROR_TITLE" = "Tidak Dapat Menemukan Alamat yang Ditetapkan";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menemukan lokasi Anda saat ini. Ketikkan alamat atau pindah ke lokasi dengan sinyal GPS yang lebih baik jika memungkinkan.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Akses ke layanan lokasi telah ditolak. Izinkan app ini untuk menggunakan layanan lokasi melalui Pengaturan.";
 "LOCATION_ERROR_GEOCODE" = "Tidak dapat menemukan hasil untuk alamat yang dimasukkan. Pastikan bahwa alamat sah.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan WiFi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survei setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan Wi-Fi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survey setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Konten teks melebihi panjang maksimum: %@";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang lama";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang baru";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Konfirmasi kode sandi baru Anda";
-"PASSCODE_INVALID_ALERT_TITLE" = "Input tidak sah";
+"PASSCODE_INVALID_ALERT_TITLE" = "Kode Sandi Salah";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Kode sandi tidak cocok. Coba lagi.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Sahkan dengan Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Kesalahan Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya karakter numerik yang diizinkan.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator kemajuan kode sandi";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator kemajuan entri kode sandi";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ dari %@ digit dimasukkan";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan lingkaran di lubang. Anda akan dimintai untuk melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan dimintai untuk melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kanan Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kanan Anda.";
 "HOLE_PEG_TEST_TEXT" = "Ambil sumbat dengan dua jari.";
 "HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan sumbat.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Berkisar dari %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
 "AX_GRAPH_POINT_%@" = "Poin: %@";
-

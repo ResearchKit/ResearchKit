@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Nhập một địa chỉ";
-"LOCATION_ERROR_TITLE" = "Không thể Xử lý Địa chỉ Đã chỉ định";
+"LOCATION_ERROR_TITLE" = "Không thể Tìm thấy Địa chỉ Được chỉ định";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Không thể xử lý vị trí hiện tại của bạn. Vui lòng nhập địa chỉ hoặc di chuyển đến một vị trí có tín hiệu GPS tốt hơn nếu có thể.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Truy cập vào dịch vụ định vị này đã bị từ chối. Vui lòng cấp quyền cho ứng dụng này sử dụng dịch vụ định vị qua phần Cài đặt.";
 "LOCATION_ERROR_GEOCODE" = "Không thể tìm thấy kết quả cho địa chỉ đã nhập. Vui lòng đảm bảo địa chỉ này hợp lệ.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Bạn không được kết nối vào internet hoặc bạn đã vượt quá số lượng yêu cầu tra cứu địa chỉ tối đa. Nếu bạn không được kết nối vào internet, vui lòng bật WiFi để trả lời câu hỏi này, bỏ qua câu hỏi này nếu có nút bỏ qua hoặc quay trở lại bản khảo sát khi bạn được kết nối vào internet. Nếu không, vui lòng thử lại sau một vài phút nữa.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Bạn không được kết nối vào internet hoặc bạn đã vượt quá số lượng yêu cầu tra cứu địa chỉ tối đa. Nếu bạn không được kết nối vào internet, vui lòng bật Wi-Fi để trả lời câu hỏi này, bỏ qua câu hỏi này nếu có nút bỏ qua hoặc quay trở lại bản khảo sát khi bạn được kết nối vào internet. Nếu không, vui lòng thử lại sau một vài phút nữa.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Nội dung văn bản vượt quá độ dài tối đa: %@";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Nhập mã khóa cũ của bạn";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Nhập mã khóa mới của bạn";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Xác nhận mã khóa mới của bạn";
-"PASSCODE_INVALID_ALERT_TITLE" = "Đầu vào không hợp lệ";
+"PASSCODE_INVALID_ALERT_TITLE" = "Mã khóa Không đúng";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Các mã khóa không khớp. Thử lại.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Vui lòng xác thực bằng Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Lỗi Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Chỉ cho phép các ký tự số.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình mã khóa";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Chỉ báo tiến trình nhập mã khóa";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Đã nhập %@ / %@ số";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Kiểm tra Bảng %@ Lỗ";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một vòng tròn vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Hoạt động này đánh giá chức năng phần thân trên của bạn bằng cách yêu cầu bạn đặt một miếng gỗ vào trong lỗ. Bạn sẽ được yêu cầu thực hiện việc này %@ lần.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Cả tay trái và phải của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Cả tay phải và trái của bạn sẽ được kiểm tra.\nBạn phải nhặt miếng gỗ nhanh nhất có thể, đặt vào trong lỗ, và khi đã thực hiện xong %@ lần, hãy lấy ra %@ lần nữa.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Chạm vào Bắt đầu để bắt đầu.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ vào trong lỗ bằng tay phải của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay trái của bạn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Đặt miếng gỗ phía sau dòng kẻ bằng tay phải của bạn.";
 "HOLE_PEG_TEST_TEXT" = "Nhặt miếng gỗ bằng hai ngón tay.";
 "HOLE_PEG_TEST_TEXT_2" = "Nhấc các ngón tay để thả rơi miếng gỗ.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Trong khoảng từ %@ đến %@";
 "AX_GRAPH_AND_SEPARATOR" = " và ";
 "AX_GRAPH_POINT_%@" = "Điểm: %@";
-

@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Syötä osoite";
-"LOCATION_ERROR_TITLE" = "Määritettyä osoitetta ei voitu selvittää";
+"LOCATION_ERROR_TITLE" = "Määritettyä osoitetta ei löydy";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nykyistä sijaintiasi ei voida määrittää. Kirjoita osoite tai, jos mahdollista, siirry paikkaan, jossa GPS-signaali on parempi.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Sijaintipalveluiden käyttö on kielletty. Anna Asetuksissa tälle ohjelmalle oikeus käyttää Sijaintipalveluita.";
 "LOCATION_ERROR_GEOCODE" = "Syötetyllä osoitteella ei löydy tuloksia. Varmista, että osoite on oikein.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Joko et ole yhteydessä internetiin tai olet ylittänyt osoitehakupyyntöjen enimmäismäärän. Jos et ole yhteydessä internetiin, laita WiFi päälle vastataksesi tähän kysymykseen, ohita tämä kysymys (jos ohituspainike on käytettävissä), tai palaa kyselyyn, kun olet internet-yhteydessä. Muussa tapauksessa yritä muutaman minuutin päästä uudelleen.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Joko et ole yhteydessä internetiin tai olet ylittänyt osoitehakupyyntöjen enimmäismäärän. Jos et ole yhteydessä internetiin, laita Wi-Fi päälle vastataksesi tähän kysymykseen, ohita tämä kysymys (jos ohituspainike on käytettävissä), tai palaa kyselyyn, kun olet internet-yhteydessä. Muussa tapauksessa yritä muutaman minuutin päästä uudelleen.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstisisältö ylittää maksimipituuden: %@";
@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Sähköposti";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "matti@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Salasana";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Syötä salasana";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Vahvista";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Syötä vanha pääsykoodi";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Syötä uusi pääsykoodi";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Vahvista uusi pääsykoodi";
-"PASSCODE_INVALID_ALERT_TITLE" = "Virheellinen syöte";
+"PASSCODE_INVALID_ALERT_TITLE" = "Virheellinen pääsykoodi";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Pääsykoodit eivät täsmää. Yritä uudelleen.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Tunnistaudu Touch ID:llä";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID -virhe";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Vain numerot ovat sallittuja.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Pääsykoodin edistymisen osoitin";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Pääsykoodin syötön edistymisen osoitin";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ merkkiä yhteensä %@ merkistä syötetty";
 
 /* Keychain wrapper */
@@ -327,9 +327,15 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@ reiän palikkatesti";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan ympyrän reikään. Tämä toistetaan %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan palikan reikään. Tämä toistetaan %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sekä oikea että vasen käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Laita palikka reikään vasemmalla kädellä.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Laita palikka reikään oikealla kädellä.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Laita palikka viivan taakse vasemmalla kädellä.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Laita palikka viivan taakse oikealla kädellä.";
 "HOLE_PEG_TEST_TEXT" = "Poimi palikka kahdella sormella.";
 "HOLE_PEG_TEST_TEXT_2" = "Pudota palikka nostamalla sormia.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Alue välillä %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " ja ";
 "AX_GRAPH_POINT_%@" = "Piste: %@";
-

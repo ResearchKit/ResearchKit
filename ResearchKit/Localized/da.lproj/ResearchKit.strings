@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Indtast en adresse";
-"LOCATION_ERROR_TITLE" = "Den angivne adresse kunne ikke findes";
+"LOCATION_ERROR_TITLE" = "Den angivne adresse blev ikke fundet";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Din aktuelle lokalitet blev ikke fundet. Skriv en adresse, eller flyt til en lokalitet med bedre GPS-signal, hvis relevant.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Der er nægtet adgang til lokalitetstjenester. Giv denne app tilladelse til at bruge lokalitetstjenester vha. Indstillinger.";
 "LOCATION_ERROR_GEOCODE" = "Den indtastede adresse blev ikke fundet. Kontroller, at adressen er gyldig.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Enten har du ikke oprettet forbindelse til internettet, eller også har du overskredet det maksimale antal anmodninger om adresseopslag. Hvis du ikke har oprettet forbindelse til internettet, skal du slå WiFi til for at besvare dette spørgsmål, springe dette spørgsmål over, hvis knappen spring over er tilgængelig, eller vende tilbage til denne undersøgelse, når du har oprettet forbindelse til internettet. Ellers prøv igen om nogle minutter.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Enten har du ikke oprettet forbindelse til internettet, eller også har du overskredet det maksimale antal anmodninger om adresseopslag. Hvis du ikke har oprettet forbindelse til internettet, skal du slå Wi-Fi til for at besvare dette spørgsmål, springe dette spørgsmål over, hvis knappen spring over er tilgængelig, eller vende tilbage til denne undersøgelse, når du har oprettet forbindelse til internettet. Ellers prøv igen om nogle minutter.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstindhold overskrider maks. længde: %@";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Skriv den gamle adgangskode";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Skriv den nye adgangskode";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekræft den nye adgangskode";
-"PASSCODE_INVALID_ALERT_TITLE" = "Ugyldig indtastning";
+"PASSCODE_INVALID_ALERT_TITLE" = "Forkert adgangskode";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Adgangskoderne stemte ikke overens. Prøv igen.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Godkend med Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fejl";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tilladt.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusindikator for adgangskode";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusindikator for indtastning af adgangskode";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ af %@ cifre indtastet";
 
 /* Keychain wrapper */
@@ -328,8 +328,14 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "%@-huls Pegtest";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler dine fingerfærdigheder ved at bede dig om at anbringe en cirkel i et hul. Du bliver bedt om at gøre dette %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Anbring cirklen i hullet vha. din venstre hånd.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Anbring cirklen i hullet vha. din højre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Anbring cirklen bag ved stregen vha. din venstre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Anbring cirklen bag ved stregen vha. din højre hånd.";
 "HOLE_PEG_TEST_TEXT" = "Saml cirklen op vha. to fingre.";
 "HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for at slippe cirklen.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
 "AX_GRAPH_POINT_%@" = "Punkt: %@";
-

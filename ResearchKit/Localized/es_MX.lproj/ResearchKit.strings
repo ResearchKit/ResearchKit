@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "Ingresa una dirección";
-"LOCATION_ERROR_TITLE" = "Error al determinar la dirección ingresada";
+"LOCATION_ERROR_TITLE" = "No se encontró la dirección especificada";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No se pudo determinar tu ubicación actual. Ingresa una dirección o ve a una ubicación con mejor recepción de señal GPS, si aplica.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Se rechazó el acceso a los servicios de localización. Otorga a esta app permiso para usar los servicios de localización desde Configuración.";
 "LOCATION_ERROR_GEOCODE" = "No fue posible encontrar coincidencias con la dirección ingresada. Asegúrate de que la dirección es válida.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Puede que no estés conectado a Internet o que hayas superado el límite máximo de solicitudes de búsqueda de direcciones. Si no estás conectado a Internet, activa el WiFi para responder esta pregunta, omite esta pregunta si el botón Omitir está disponible, o regresa a la encuesta cuando estés conectado a Internet. Si no funciona, vuelve a intentarlo en unos minutos.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "No estás conectado a Internet o excediste la cantidad máxima de solicitudes de búsqueda de direcciones. Si no estás conectado a Internet, activa tu red Wi-Fi para contestar esta pregunta. También puedes omitirla (si el botón de omitir está disponible) o regresar a la encuesta cuando estés conectado a Internet. De lo contrario, vuelve a intentar en unos minutos.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El texto sobrepasa la longitud máxima: %@";
@@ -118,7 +118,7 @@
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "¿Dirección de correo incorrecta?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "No recibí el correo";
+"RESEND_EMAIL_LABEL_MESSAGE" = "No recibí el correo electrónico";
 "RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo de verificación";
 "VERIFICATION_LABEL_MESSAGE" = "Si verificaste, toca el botón de abajo.";
 
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Ingresa el código anterior";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Ingresa el nuevo código";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nuevo código";
-"PASSCODE_INVALID_ALERT_TITLE" = "Datos ingresados no validos";
+"PASSCODE_INVALID_ALERT_TITLE" = "Código incorrecto";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Intenta de nuevo.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentica con Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se permiten caracteres numéricos.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progreso del código";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador del progreso de ingreso de código";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos ingresados";
 
 /* Keychain wrapper */
@@ -176,7 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Acepto";
 "BUTTON_CANCEL" = "Cancelar";
-"BUTTON_OK" = "Aceptar";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Borrar";
 "BUTTON_DISAGREE" = "No acepto";
 "BUTTON_DONE" = "Aceptar";
@@ -326,10 +326,16 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Prueba de las %@ estacas";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la función de tus extremidades superiores al pedirte que coloques un círculo en un agujero. Será necesario repetir esta tarea %@ veces.";
+"HOLE_PEG_TEST_TITLE_%@" = "Prueba de las %@ estacas";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la funcionalidad de tus extremidades superiores pidiéndote que coloques una estaca en un hoyo. Se te pedirá que hagas esto %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Se probarán tanto tu mano izquierda como la derecha.\nDebes recoger la estaca tan rápido como te sea posible y ponerla en el hoyo; y una vez que hayas hecho eso %@ veces, debes quitarla otras %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Se probarán tanto tu mano derecha como la izquierda.\nDebes recoger la estaca tan rápido como te sea posible y ponerla en el hoyo; y una vez que hayas hecho eso %@ veces, debes quitarla otras %@ veces.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Toca Empezar para comenzar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Coloca la estaca en el hoyo usando tu mano izquierda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Coloca la estaca en el hoyo usando tu mano derecha.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Coloca la estaca detrás de la línea usando tu mano izquierda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Coloca la estaca detrás de la línea usando tu mano derecha.";
 "HOLE_PEG_TEST_TEXT" = "Recoge la estaca con dos dedos.";
 "HOLE_PEG_TEST_TEXT_2" = "Levanta los dedos para soltar la estaca.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "Rango de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
 "AX_GRAPH_POINT_%@" = "Punto: %@";
-

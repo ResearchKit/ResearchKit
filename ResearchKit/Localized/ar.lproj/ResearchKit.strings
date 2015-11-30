@@ -88,11 +88,11 @@
 
 /* Alerts for invalid location coordinates */
 "LOCATION_QUESTION_PLACEHOLDER" = "أدخل عنوان";
-"LOCATION_ERROR_TITLE" = "فشل حل العنوان المحدد";
+"LOCATION_ERROR_TITLE" = "تعذر العثور على العنوان المحدد";
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "غير قادر على حل موقعك الحالي. يرجى كتابة العنوان أو الانتقال إلى موقع فيه إشارة GPS أفضل إن وجد.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "تم رفض الوصول إلى خدمات الموقع. يرجي منح هذا التطبيق الإذن لاستخدام خدمات الموقع في الإعدادات.";
 "LOCATION_ERROR_GEOCODE" = "تعذر العثور على نتيجة للعنوان الذي تم إدخاله. يرجى التأكد من أن العنوان صالح.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "إما أنك غير متصل بالإنترنت أو أنك تجاوزت الحد الأقصى من طلبات البحث عن العنوان. إذا لم تكن متصلًا بالإنترنت، يرجى تشغيل الـ WiFi للإجابة على هذا السؤال، قم بتخطي هذا السؤال إذا زر التخطي متاح، أو العودة للاستبيان عندما تكون متصلًا بالإنترنت. خلاف ذلك، يرجى المحاولة مرة أخرى خلال بضع دقائق.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "إما أنك غير متصل بالإنترنت أو أنك تجاوزت الحد الأقصى من طلبات البحث عن العنوان. إذا لم تكن متصلًا بالإنترنت، يرجى تشغيل الـ Wi-Fi للإجابة على هذا السؤال، قم بتخطي هذا السؤال إذا زر التخطي متاح، أو العودة للاستبيان عندما تكون متصلًا بالإنترنت. خلاف ذلك، يرجى المحاولة مرة أخرى خلال بضع دقائق.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "المحتوى النصي يتجاوز الحد الأقصى للطول: %@";
@@ -134,12 +134,12 @@
 "PASSCODE_OLD_ENTRY_MESSAGE" = "أدخل رمز الدخول القديم";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "أدخل رمز الدخول الجديد";
 "PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "تأكيد رمز الدخول الجديد";
-"PASSCODE_INVALID_ALERT_TITLE" = "إدخال غير صالح";
+"PASSCODE_INVALID_ALERT_TITLE" = "رمز الدخول غير صحيح";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "رمزي الدخول غير متطابقين. حاول مجدداً.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "الرجاء المصادقة باستخدام Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "خطأ في Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "فقط الأرقام مسموح بها.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم رمز الدخول";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم إدخال رمز الدخول";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "تم إدخال %1$@ من %2$@ من الأرقام";
 
 /* Keychain wrapper */
@@ -326,10 +326,16 @@
 "PSAT_NO_DIGIT" = "-";
 
 /* Hole peg test active task. */
-"HOLE_PEG_TEST_TITLE_%@" = "%@-Hole Peg Test";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "هذا النشاط يقيس وظيفة الطرف العلوي عن طريق الطلب منك بأن تضع الدائرة في حفرة. سوف يطلب منك أن تفعل هذا %@ مرات.";
+"HOLE_PEG_TEST_TITLE_%@" = "‏%@-فحص العقدة والحفرة";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "هذا النشاط يقيس وظيفة الطرف العلوي عن طريق الطلب منك بأن تضع العقدة في حفرة. سوف يطلب منك أن تفعل هذا %@ مرات.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "سيتم فحص كلا اليدين اليسار واليمين.\nيجب عليك التقاط العقدة في أسرع وقت ممكن، ووضعها في الحفرة، وبعد إنهاء %@ مرات، قم بإزالتها مرة أخرى %@ مرات.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "سيتم فحص كلا اليدين اليمين واليسار.\nيجب عليك التقاط العقدة في أسرع وقت ممكن، ووضعها في الحفرة، وبعد إنهاء %@ مرات، قم بإزالتها مرة أخرى %@ مرات.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "قم بوضع العقدة في الحفرة باستخدام اليد اليسرى.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "قم بوضع العقدة في الحفرة باستخدام اليد اليمنى.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "قم بوضع العقدة خلف السطر باستخدام اليد اليسرى.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "قم بوضع العقدة خلف السطر باستخدام اليد اليمنى.";
 "HOLE_PEG_TEST_TEXT" = "رفع العقدة باستخدام اصبعين.";
 "HOLE_PEG_TEST_TEXT_2" = "ارفع الأصابع لإسقاط العقدة.";
 
@@ -383,4 +389,3 @@
 "AX_GRAPH_RANGE_FORMAT" = "يتراوح من %@ إلى %@";
 "AX_GRAPH_AND_SEPARATOR" = " و ";
 "AX_GRAPH_POINT_%@" = "النقطة: %@";
-
