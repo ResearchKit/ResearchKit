@@ -78,52 +78,31 @@ static const CGFloat VerticalMargin = 30.0;
 
 - (void)setUpConstraints {
     NSDictionary *views = NSDictionaryOfVariableBindings(_emailLabel, _changeEmailButton, _resendEmailLabel, _resendEmailButton, _verifiedLabel);
+    
+    for (UIView *view in views.allValues) {
+        UILabel *label = [view isKindOfClass:[UILabel class]] ? (UILabel *)view : ([view isKindOfClass:[UIButton class]] ? [(UIButton *)view titleLabel] : nil);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+    }
+    
     ORKEnableAutoLayoutForViews(views.allValues);
     
     NSDictionary *metrics = @{@"verticalMargin":@(VerticalMargin)};
     
     NSMutableArray *constraints = [NSMutableArray new];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_emailLabel][_changeEmailButton]-verticalMargin-[_resendEmailLabel][_resendEmailButton]-verticalMargin-[_verifiedLabel]-|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                             options:NSLayoutFormatAlignAllCenterX
                                                                              metrics:metrics
                                                                                views:views]];
-    [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:_emailLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_changeEmailButton
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_resendEmailLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_resendEmailButton
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0],
-                                       [NSLayoutConstraint constraintWithItem:_verifiedLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.stepView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0]
-                                       ]];
+    
+    for (NSString *view in views.allKeys) {
+        NSString* format = [NSString stringWithFormat:@"H:|-[%@]-|", view];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:format
+                                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                 metrics:metrics
+                                                                                   views:views]];
+    }
 
     [NSLayoutConstraint activateConstraints:constraints];
 }
