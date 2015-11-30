@@ -3362,6 +3362,7 @@ stepViewControllerWillAppear:(ORKStepViewController *)stepViewController {
         stepViewController.navigationItem.titleView = [[UISegmentedControl alloc] initWithItems:items];
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step2"]) {
         // Indeterminate step
+        [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(updateText:) withObject:@"Updated text" afterDelay:2.0];
         [((ORKWaitStepViewController *)stepViewController) performSelector:@selector(goForward) withObject:nil afterDelay:5.0];
     } else if ([stepViewController.step.identifier isEqualToString:@"waitTask.step4"]) {
         // Determinate step
