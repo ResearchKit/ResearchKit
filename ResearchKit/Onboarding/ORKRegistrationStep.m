@@ -194,7 +194,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         
         ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
                                                                                  minimumDate:nil
-                                                                                 maximumDate:nil
+                                                                                 maximumDate:[NSDate date]
                                                                                     calendar:[NSCalendar currentCalendar]];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
