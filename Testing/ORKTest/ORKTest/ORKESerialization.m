@@ -83,7 +83,7 @@ static NSDictionary *dictionaryFromCGPoint(CGPoint p) {
 }
 
 static NSDictionary *dictionaryFromCGSize(CGSize s) {
-    return @{ @"h" : @(s.width), @"w" : @(s.width) };
+    return @{ @"h" : @(s.height), @"w" : @(s.width) };
 }
 
 static NSDictionary *dictionaryFromCGRect(CGRect r) {
