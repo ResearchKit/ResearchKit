@@ -47,7 +47,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
     return findInArrayByKey(array, @"identifier", formItemIdentifier);
 }
 
-NSArray *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
+static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {
@@ -164,7 +164,7 @@ NSArray *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
         
         ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
                                                                                  minimumDate:nil
-                                                                                 maximumDate:nil
+                                                                                 maximumDate:[NSDate date]
                                                                                     calendar:[NSCalendar currentCalendar]];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
@@ -215,7 +215,26 @@ NSArray *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
 }
 
 - (NSArray <ORKFormItem *> *)formItems {
-    return ORKRegistrationFormItems(_options);
+    static dispatch_once_t once;
+    static id registrationFormItems;
+    dispatch_once(&once, ^{
+        registrationFormItems = ORKRegistrationFormItems(_options);
+    });
+    
+    ORKFormItem *dobFormItem = ORKFindInArrayByFormItemId(registrationFormItems, ORKRegistrationFormItemIdentifierDOB);
+    ORKDateAnswerFormat *originalAnswerFormat = (ORKDateAnswerFormat *)dobFormItem.answerFormat;
+    ORKDateAnswerFormat *modifiedAnswerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:originalAnswerFormat.defaultDate
+                                                                                     minimumDate:originalAnswerFormat.minimumDate
+                                                                                     maximumDate:[NSDate date]
+                                                                                        calendar:originalAnswerFormat.calendar];
+
+    dobFormItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
+                                                     text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
+                                             answerFormat:modifiedAnswerFormat
+                                                 optional:NO];
+    dobFormItem.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
+    
+    return registrationFormItems;
 }
 
 - (NSString *)passcodeValidationRegex {
