@@ -109,6 +109,11 @@
     }
 }
 
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    self.progressView.progressTintColor = self.tintColor;
+}
+
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     [self.progressView setProgress:progress animated:animated];
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
