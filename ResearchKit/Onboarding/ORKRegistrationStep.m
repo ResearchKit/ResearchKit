@@ -188,7 +188,6 @@ NSArray *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _options = options;
-        self.formItems = ORKRegistrationFormItems(_options);
         self.optional = NO;
     }
     return self;
@@ -213,6 +212,10 @@ NSArray *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
     ORKFormItem *passwordFormItem = ORKFindInArrayByFormItemId(self.formItems, ORKRegistrationFormItemIdentifierPassword);
     ORKTextAnswerFormat *passwordAnswerFormat = (ORKTextAnswerFormat *)passwordFormItem.answerFormat;
     return passwordAnswerFormat;
+}
+
+- (NSArray <ORKFormItem *> *)formItems {
+    return ORKRegistrationFormItems(_options);
 }
 
 - (NSString *)passcodeValidationRegex {
