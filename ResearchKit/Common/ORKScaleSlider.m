@@ -284,6 +284,8 @@ static const CGFloat Padding = 2.0;
 }
 
 - (void)axBumpValue:(BOOL)increment {
+    self.showThumb = YES;
+    
     // If there's no fixed number of steps, we rely on the default implementation.
     if (_numberOfSteps == 0) {
         (increment ? [super accessibilityIncrement] : [super accessibilityDecrement]);
