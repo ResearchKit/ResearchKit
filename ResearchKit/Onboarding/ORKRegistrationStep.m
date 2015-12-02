@@ -184,13 +184,29 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
+           passcodeValidationRegex:(NSString *)passcodeValidationRegex
+            passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options {
     self = [super initWithIdentifier:identifier title:title text:text];
     if (self) {
         _options = options;
+        self.passcodeValidationRegex = passcodeValidationRegex;
+        self.passcodeInvalidMessage = passcodeInvalidMessage;
         self.optional = NO;
     }
     return self;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text
+                           options:(ORKRegistrationStepOption)options {
+    return [self initWithIdentifier:identifier
+                              title:title
+                               text:text
+            passcodeValidationRegex:nil
+             passcodeInvalidMessage:nil
+                            options:options];
 }
 
 - (instancetype)initWithIdentifier:(NSString *)identifier

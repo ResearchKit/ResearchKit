@@ -1046,10 +1046,10 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName, .IncludeGender, .IncludeDOB];
-        let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, options: registrationOptions)
-        registrationStep.passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
-        registrationStep.passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
+        let passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
+        let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName, .IncludeGender, .IncludeDOB]
+        let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegex: passcodeValidationRegex, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)
         
         /*
         A wait step allows you to upload the data from the user registration onto your server before presenting the verification step.
