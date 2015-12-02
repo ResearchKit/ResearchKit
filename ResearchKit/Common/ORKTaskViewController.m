@@ -815,6 +815,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     [_currentStepViewController goBackward];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [self.currentStepViewController supportedInterfaceOrientations];
+}
+
 #pragma mark - internal helpers
 
 - (void)updateLastBeginningInstructionStepIdentifierForStep:(ORKStep *)step

@@ -228,6 +228,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - Helpers
 
 - (void)changeStateTo:(ORKPasscodeState)passcodeState {
