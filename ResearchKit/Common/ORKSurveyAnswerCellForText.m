@@ -169,35 +169,18 @@
     [self ork_setAnswer:(self.textView.text.length > 0)? self.textView.text : ORKNullAnswerValue()];
 }
 
-- (BOOL)isAnswerValid {
-    id answer = self.answer;
-    
-    if (answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
-    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
-    ORKTextAnswerFormat *numericFormat = (ORKTextAnswerFormat *)answerFormat;
-    return [numericFormat isAnswerValidWithString:self.textView.text];
-}
-
 - (BOOL)shouldContinue {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (!isValid) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textView.text]];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    if (![answerFormat isAnswerValidWithString:self.textView.text]) {
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
+        return NO;
     }
-    
-    return isValid;
+    return YES;
 }
 
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    
-    if (![[self.step impliedAnswerFormat] isAnswerValidWithString:textView.text]) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textView.text]];
-    }
     
     [self textDidChange];
     self.placeHolder.hidden = (self.textView.text.length > 0);
@@ -299,26 +282,13 @@
     [super prepareView];
 }
 
-- (BOOL)isAnswerValid {
-    id answer = self.answer;
-    
-    if (answer == ORKNullAnswerValue()) {
-        return YES;
-    }
-    
-    ORKAnswerFormat *answerFormat = [self.step impliedAnswerFormat];
-    ORKTextAnswerFormat *numericFormat = (ORKTextAnswerFormat *)answerFormat;
-    return [numericFormat isAnswerValidWithString:self.textField.text];
-}
-
 - (BOOL)shouldContinue {
-    BOOL isValid = [self isAnswerValid];
-    
-    if (!isValid) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.textField.text]];
+    ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
+    if (![answerFormat isAnswerValidWithString:self.textView.text]) {
+        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
+        return NO;
     }
-    
-    return isValid;
+    return YES;
 }
 
 - (void)answerDidChange {
@@ -365,29 +335,15 @@
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (![[self.step impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (![[self.step impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-        return NO;
-    }
-    
     [self.textField resignFirstResponder];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    if (![[self.step impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
-        [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
-    }
-    
     NSString *text = self.textField.text;
     [self ork_setAnswer:text.length ? text : ORKNullAnswerValue()];
 }
