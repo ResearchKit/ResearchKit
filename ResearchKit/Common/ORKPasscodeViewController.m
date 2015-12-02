@@ -43,6 +43,20 @@
     return nil;
 }
 
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationBar.shadowImage = [UIImage new];
+        self.navigationBar.translucent = NO;
+    }
+    return self;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
                                           delegate:(id<ORKPasscodeDelegate>)delegate {
     return [self passcodeViewControllerWithText:text
@@ -75,10 +89,6 @@
     passcodeStepViewController.step = step;
     
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
-    [navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    navigationController.navigationBar.shadowImage = [UIImage new];
-    navigationController.navigationBar.translucent = NO;
-    
     return navigationController;
 }
 
