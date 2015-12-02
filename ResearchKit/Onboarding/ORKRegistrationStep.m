@@ -179,7 +179,9 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     return formItems;
 }
 
-@implementation ORKRegistrationStep
+@implementation ORKRegistrationStep {
+    NSArray <ORKFormItem *> * _registrationFormItems;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
@@ -231,13 +233,11 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 }
 
 - (NSArray <ORKFormItem *> *)formItems {
-    static dispatch_once_t once;
-    static id registrationFormItems;
-    dispatch_once(&once, ^{
-        registrationFormItems = ORKRegistrationFormItems(_options);
-    });
+    if (!_registrationFormItems) {
+        _registrationFormItems = ORKRegistrationFormItems(_options);
+    }
     
-    ORKFormItem *dobFormItem = ORKFindInArrayByFormItemId(registrationFormItems, ORKRegistrationFormItemIdentifierDOB);
+    ORKFormItem *dobFormItem = ORKFindInArrayByFormItemId(_registrationFormItems, ORKRegistrationFormItemIdentifierDOB);
     ORKDateAnswerFormat *originalAnswerFormat = (ORKDateAnswerFormat *)dobFormItem.answerFormat;
     ORKDateAnswerFormat *modifiedAnswerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:originalAnswerFormat.defaultDate
                                                                                      minimumDate:originalAnswerFormat.minimumDate
@@ -250,7 +250,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
                                                  optional:NO];
     dobFormItem.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
     
-    return registrationFormItems;
+    return _registrationFormItems;
 }
 
 - (NSString *)passcodeValidationRegex {
