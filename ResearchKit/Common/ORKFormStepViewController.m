@@ -514,7 +514,7 @@
         _continueSkipView.optional = self.step.optional;
         if (self.readOnlyMode) {
             _continueSkipView.continueButton.hidden = YES;
-            [_continueSkipView.skipButton setEnabled:NO];
+            _continueSkipView.skipButton.enabled = NO;
         }
 
     }
@@ -613,7 +613,8 @@
                     && [self allAnsweredFormItemsAreValid]
                     && [self allNonOptionalFormItemsHaveAnswers]);
     if (self.isBeingReviewed) {
-        return enabled && (![self.savedAnswers isEqualToDictionary:self.originalAnswers]);
+        BOOL answerHasChanged = ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
+        return [self allAnsweredFormItemsAreValid] && [self allNonOptionalFormItemsHaveAnswers] && answerHasChanged;
     } else {
         return enabled;
     }
@@ -622,14 +623,19 @@
 - (void)updateButtonStates {
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
     if (self.isBeingReviewed) {
-        __block BOOL enabled = NO;
-        [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            if (!ORKIsAnswerEmpty(self.savedAnswers[key])) {
-                enabled = YES;
-                *stop = YES;
-            }
-        }];
-        _continueSkipView.skipButton.enabled = enabled;
+        if (self.readOnlyMode) {
+            _continueSkipView.continueButton.hidden = YES;
+            _continueSkipView.skipButton.enabled = NO;
+        } else {
+            __block BOOL enabled = NO;
+            [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                if (!ORKIsAnswerEmpty(self.savedAnswers[key])) {
+                    enabled = YES;
+                    *stop = YES;
+                }
+            }];
+            _continueSkipView.skipButton.enabled = enabled;
+        }
     }
 }
 

@@ -121,7 +121,7 @@
             [array addObject:value];
         }
     }
-    return [array copy];
+    return array.count > 0 ? [array copy] : ORKNullAnswerValue();
 }
 
 - (NSNumber *)selectedIndexForAnswer:(nullable id)answer {

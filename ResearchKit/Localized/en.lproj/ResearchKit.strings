@@ -191,7 +191,7 @@
 "BUTTON_OPTION_STOP_TASK" = "End Task";
 "BUTTON_SAVE" = "Save";
 "BUTTON_CLEAR_ANSWER" = "Clear answer";
-"BUTTON_READ_ONLY_MODE" = "This step can't be modified.";
+"BUTTON_READ_ONLY_MODE" = "This answer cannot be modified.";
 
 /* General active tasks. */
 "COUNTDOWN_LABEL" = "Starting activity in";

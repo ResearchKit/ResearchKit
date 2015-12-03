@@ -58,7 +58,7 @@
     _internalBackButtonItem.accessibilityLabel = ORKLocalizedString(@"AX_BUTTON_BACK", nil);
     _internalContinueButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_NEXT", nil) style:UIBarButtonItemStylePlain target:self action:@selector(goForward)];
     _internalDoneButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_DONE", nil) style:UIBarButtonItemStyleDone target:self action:@selector(goForward)];
-    _internalSkipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil) style:UIBarButtonItemStylePlain target:self action:@selector(skipForward)];
+    _internalSkipButtonItem = [[UIBarButtonItem alloc] initWithTitle:ORKLocalizedString(@"BUTTON_SKIP", nil) style:UIBarButtonItemStylePlain target:self action:@selector(skip)];
     _backButtonItem = _internalBackButtonItem;
 }
 
@@ -309,9 +309,32 @@
     UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 }
 
+- (void)skip {
+    if (self.isBeingReviewed) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CLEAR_ANSWER", nil)
+                                                  style:UIAlertActionStyleDestructive
+                                                handler:^(UIAlertAction *action) {
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        [self skipForward];
+                                                    });
+                                                }]];
+        [alert addAction:[UIAlertAction actionWithTitle:ORKLocalizedString(@"BUTTON_CANCEL", nil)
+                                                  style:UIAlertActionStyleCancel
+                                                handler:nil
+                          ]];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self skipForward];
+    }
+}
+
 - (void)skipForward {
     [self goForward];
 }
+
 
 - (ORKTaskViewController *)taskViewController {
     UIPageViewController *pageViewController = (UIPageViewController *)[self parentViewController];

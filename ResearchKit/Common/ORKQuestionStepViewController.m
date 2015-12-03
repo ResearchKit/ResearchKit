@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.optional = self.step.optional;
             if (self.readOnlyMode) {
                 _continueSkipView.continueButton.hidden = YES;
-                [_continueSkipView.skipButton setEnabled:NO];
+                _continueSkipView.skipButton.enabled = NO;
             }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
@@ -212,8 +212,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
             if (self.readOnlyMode) {
-                _questionView.continueSkipContainer.continueButton.hidden = YES;
-                [_questionView.continueSkipContainer.skipButton setEnabled:NO];
+                _questionView.continueSkipContainer.continueButton.hidden = YES; 
+                _questionView.continueSkipContainer.skipButton.enabled = NO;
             }
 
             
@@ -386,8 +386,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         _continueSkipView.continueButtonItem = nil;
     }
     if (self.isBeingReviewed) {
-        _questionView.continueSkipContainer.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
-        _continueSkipView.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
+        if (self.readOnlyMode) {
+            _questionView.continueSkipContainer.continueButton.hidden = YES;
+            _continueSkipView.continueButton.hidden = YES;
+            _questionView.continueSkipContainer.skipButton.enabled = NO;
+            _continueSkipView.skipButton.enabled = NO;
+        }
     }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
@@ -506,7 +510,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (BOOL)continueButtonEnabled {
     BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
     if (self.isBeingReviewed) {
-        return enabled && ![self.answer isEqual:self.originalAnswer];
+        return ([self hasAnswer] || self.step.optional) && ![self.answer isEqual:self.originalAnswer];
     } else {
         return enabled;
     }
