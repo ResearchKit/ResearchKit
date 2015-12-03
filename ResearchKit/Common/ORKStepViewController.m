@@ -310,7 +310,7 @@
 }
 
 - (void)skip {
-    if (self.isBeingReviewed) {
+    if (self.isBeingReviewed && !self.readOnlyMode) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:nil
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];

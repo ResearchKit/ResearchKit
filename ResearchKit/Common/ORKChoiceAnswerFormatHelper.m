@@ -54,8 +54,8 @@
         
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKValuePickerAnswerFormat *vpaf = (ORKValuePickerAnswerFormat *)answerFormat;
-            ORKTextChoice *nullChocie = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
-            _choices = [@[nullChocie] arrayByAddingObjectsFromArray:vpaf.textChoices];
+            ORKTextChoice *nullChoice = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
+            _choices = [@[nullChoice] arrayByAddingObjectsFromArray:vpaf.textChoices];
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
             ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)answerFormat;

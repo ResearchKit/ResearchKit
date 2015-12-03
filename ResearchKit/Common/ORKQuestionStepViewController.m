@@ -180,6 +180,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueButtonItem = self.continueButtonItem;
             _continueSkipView.optional = self.step.optional;
             if (self.readOnlyMode) {
+                _continueSkipView.optional = YES;
                 _continueSkipView.continueButton.hidden = YES;
                 _continueSkipView.skipButton.enabled = NO;
             }
@@ -212,6 +213,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.continueSkipContainer.skipButtonItem = self.skipButtonItem;
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
             if (self.readOnlyMode) {
+                _questionView.continueSkipContainer.optional = YES;
                 _questionView.continueSkipContainer.continueButton.hidden = YES; 
                 _questionView.continueSkipContainer.skipButton.enabled = NO;
             }
@@ -391,6 +393,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.continueButton.hidden = YES;
             _questionView.continueSkipContainer.skipButton.enabled = NO;
             _continueSkipView.skipButton.enabled = NO;
+        } else {
+            _questionView.continueSkipContainer.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
+            _continueSkipView.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
         }
     }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];

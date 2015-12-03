@@ -513,6 +513,7 @@
         _continueSkipView.continueButtonItem = self.continueButtonItem;
         _continueSkipView.optional = self.step.optional;
         if (self.readOnlyMode) {
+            _continueSkipView.optional = YES;
             _continueSkipView.continueButton.hidden = YES;
             _continueSkipView.skipButton.enabled = NO;
         }
@@ -627,14 +628,14 @@
             _continueSkipView.continueButton.hidden = YES;
             _continueSkipView.skipButton.enabled = NO;
         } else {
-            __block BOOL enabled = NO;
+            __block BOOL atLeastOneFormItemHasAnswer = NO;
             [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                 if (!ORKIsAnswerEmpty(self.savedAnswers[key])) {
-                    enabled = YES;
+                    atLeastOneFormItemHasAnswer = YES;
                     *stop = YES;
                 }
             }];
-            _continueSkipView.skipButton.enabled = enabled;
+            _continueSkipView.skipButton.enabled = atLeastOneFormItemHasAnswer;
         }
     }
 }
