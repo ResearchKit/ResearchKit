@@ -284,10 +284,11 @@
 
 - (BOOL)shouldContinue {
     ORKTextAnswerFormat *answerFormat = (ORKTextAnswerFormat *)[self.step impliedAnswerFormat];
-    if (![answerFormat isAnswerValidWithString:self.textView.text]) {
+    if (![answerFormat isAnswerValidWithString:self.textField.text]) {
         [self showValidityAlertWithMessage:[[self.step impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:self.answer]];
         return NO;
     }
+    
     return YES;
 }
 
