@@ -118,7 +118,7 @@
 
 /* Verification step */
 "CHANGE_EMAIL_BUTTON_TITLE" = "이메일 주소가 올바르지 않습니까?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "이메일을 받지 않음";
+"RESEND_EMAIL_LABEL_MESSAGE" = "이메일을 받지 못함";
 "RESEND_EMAIL_BUTTON_TITLE" = "확인 이메일 다시 보내기";
 "VERIFICATION_LABEL_MESSAGE" = "확인되면 아래의 버튼을 탭하십시오.";
 

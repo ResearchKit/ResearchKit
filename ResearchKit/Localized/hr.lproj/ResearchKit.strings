@@ -92,7 +92,7 @@
 "LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nije moguće utvrditi vašu trenutnu lokaciju. Molimo unesite adresu ili se premjestite na lokaciju s boljim GPS signalom, ako je primjenjivo.";
 "LOCATION_ERROR_MESSAGE_DENIED" = "Odbijen je pristup lokacijskim uslugama. Molimo dajte ovoj aplikaciji dopuštenje da koristi lokacijske usluge putem Postavki.";
 "LOCATION_ERROR_GEOCODE" = "Nije moguće naći rezultat za unesenu adresu. Molimo provjerite je li adresa valjana.";
-"LOCATION_ERROR_GEOCODE_NETWORK" = "Niste spojeni na internet ili ste premašili maksimalan broj zahtjeva za traženjem adresa. Ako niste spojeni na internet, uključite Wi-Fi kako biste odgovorili na ovo pitanje, preskočite pitanje ako je dostupna tipka za preskakanje ili se vratite na anketu kad ste spojeni na internet. U protivnom probajte ponovno za nekoliko minuta.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Niste spojeni na internet ili ste prekoračili maksimalan broj zahtjeva za traženje adresa. Ako niste spojeni na internet, uključite Wi-Fi kako biste odgovorili na ovo pitanje, preskočite pitanje ako je dostupna tipka za preskakanje ili se vratite na anketu kad ste spojeni na internet. U suprotnom, probajte ponovno za nekoliko minuta.";
 
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstualni sadržaj prekoračuje maksimalnu duljinu: %@";
@@ -127,19 +127,19 @@
 "FORGOT_PASSWORD_BUTTON_TITLE" = "Zaboravili ste lozinku?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Unesite lozinku";
-"PASSCODE_CONFIRM_MESSAGE" = "Potvrdi lozinku";
-"PASSCODE_SAVED_MESSAGE" = "Lozinka je spremljena";
-"PASSCODE_AUTHENTICATED_MESSAGE" = "Lozinka je autorizirana";
-"PASSCODE_OLD_ENTRY_MESSAGE" = "Unesite staru lozinku";
-"PASSCODE_NEW_ENTRY_MESSAGE" = "Unesite novu lozinku";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrdite vašu novu lozinku";
-"PASSCODE_INVALID_ALERT_TITLE" = "Netočna lozinka";
-"PASSCODE_INVALID_ALERT_MESSAGE" = "Lozinke nisu iste. Pokušajte ponovno.";
+"PASSCODE_PROMPT_MESSAGE" = "Unesite šifru";
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrdite šifru";
+"PASSCODE_SAVED_MESSAGE" = "Šifra je spremljena";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Šifra je autorizirana";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Unesite staru šifru";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Unesite novu šifru";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrdite vašu novu šifru";
+"PASSCODE_INVALID_ALERT_TITLE" = "Netočna šifra";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Šifre nisu iste. Pokušajte ponovno.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Molimo autorizirajte pomoću Touch ID-a";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Greška Touch ID-a";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dopušteni su samo numerički znakovi.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka unošenja lozinke";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator napretka unošenja šifre";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ od %@ unesenih znamenki";
 
 /* Keychain wrapper */

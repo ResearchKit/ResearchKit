@@ -328,7 +328,7 @@
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Test des %@ chevilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité évalue le fonctionnement de vos extrémités supérieures. Vous devez placer un rond dans un trou et répéter cette opération %@ fois.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et une fois réalisé %@ fois, retirez le rond %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et, après avoir fait cela %@ fois, retirez le rond %@ fois.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et une fois réalisé %@ fois, retirez le rond %@ fois.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";

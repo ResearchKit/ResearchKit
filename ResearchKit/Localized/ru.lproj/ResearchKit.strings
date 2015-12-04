@@ -139,7 +139,7 @@
 "PASSCODE_TOUCH_ID_MESSAGE" = "Выполните аутентификацию с Touch ID";
 "PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Ошибка Touch ID";
 "PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Можно использовать только цифры.";
-"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Индикатор ход ввода код‑пароля";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Индикатор хода ввода код‑пароля";
 "PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено цифр: %@ из %@";
 
 /* Keychain wrapper */

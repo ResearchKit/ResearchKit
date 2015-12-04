@@ -102,7 +102,7 @@
 
 /* Registration step */
 "EMAIL_FORM_ITEM_TITLE" = "Sähköposti";
-"EMAIL_FORM_ITEM_PLACEHOLDER" = "matti@example.com";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
 "PASSWORD_FORM_ITEM_TITLE" = "Salasana";
 "PASSWORD_FORM_ITEM_PLACEHOLDER" = "Syötä salasana";
 "CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Vahvista";

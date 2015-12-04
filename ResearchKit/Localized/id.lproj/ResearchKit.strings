@@ -327,7 +327,7 @@
 
 /* Hole peg test active task. */
 "HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
-"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan dimintai untuk melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan diminta untuk melakukan ini %@ kali.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
 
