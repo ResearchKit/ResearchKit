@@ -514,8 +514,8 @@
         _continueSkipView.optional = self.step.optional;
         if (self.readOnlyMode) {
             _continueSkipView.optional = YES;
-            _continueSkipView.continueButton.hidden = YES;
-            _continueSkipView.skipButton.enabled = NO;
+            [_continueSkipView setNeverHasContinueButton:YES];
+            _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
         }
 
     }
@@ -614,30 +614,25 @@
                     && [self allAnsweredFormItemsAreValid]
                     && [self allNonOptionalFormItemsHaveAnswers]);
     if (self.isBeingReviewed) {
-        BOOL answerHasChanged = ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
-        return [self allAnsweredFormItemsAreValid] && [self allNonOptionalFormItemsHaveAnswers] && answerHasChanged;
+        return enabled && ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
     } else {
         return enabled;
     }
 }
 
+- (BOOL)skipButtonEnabled {
+    BOOL enabled = self.formStep.optional;
+    if (self.isBeingReviewed) {
+        return self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswers);
+    } else {
+        return enabled;
+    }
+}
+
+
 - (void)updateButtonStates {
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
-    if (self.isBeingReviewed) {
-        if (self.readOnlyMode) {
-            _continueSkipView.continueButton.hidden = YES;
-            _continueSkipView.skipButton.enabled = NO;
-        } else {
-            __block BOOL atLeastOneFormItemHasAnswer = NO;
-            [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                if (!ORKIsAnswerEmpty(self.savedAnswers[key])) {
-                    atLeastOneFormItemHasAnswer = YES;
-                    *stop = YES;
-                }
-            }];
-            _continueSkipView.skipButton.enabled = atLeastOneFormItemHasAnswer;
-        }
-    }
+    _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
 }
 
 #pragma mark Helpers

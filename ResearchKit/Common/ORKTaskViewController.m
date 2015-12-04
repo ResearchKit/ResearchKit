@@ -1147,7 +1147,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         }
     }
     
-    if (isCurrentInstructionStep && saveable == NO) {
+    BOOL isStandaloneReviewStep = NO;
+    if ([self.currentStepViewController.step isKindOfClass:[ORKReviewStep class]]) {
+        ORKReviewStep *reviewStep = (ORKReviewStep *)self.currentStepViewController.step;
+        isStandaloneReviewStep = reviewStep.isStandalone;
+    }
+    
+    if ((isCurrentInstructionStep && saveable == NO) || isStandaloneReviewStep || self.currentStepViewController.readOnlyMode) {
         [self finishWithReason:ORKTaskViewControllerFinishReasonDiscarded error:nil];
     } else {
         [self presentCancelOptions:saveable sender:sender];

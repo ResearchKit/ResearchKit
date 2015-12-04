@@ -181,8 +181,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _continueSkipView.optional = self.step.optional;
             if (self.readOnlyMode) {
                 _continueSkipView.optional = YES;
-                _continueSkipView.continueButton.hidden = YES;
-                _continueSkipView.skipButton.enabled = NO;
+                [_continueSkipView setNeverHasContinueButton:YES];
+                _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
             }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
@@ -214,8 +214,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
             if (self.readOnlyMode) {
                 _questionView.continueSkipContainer.optional = YES;
-                _questionView.continueSkipContainer.continueButton.hidden = YES; 
-                _questionView.continueSkipContainer.skipButton.enabled = NO;
+                [_questionView.continueSkipContainer setNeverHasContinueButton:YES];
+                _questionView.continueSkipContainer.skipButton.enabled = [self skipButtonEnabled];
             }
 
             
@@ -387,19 +387,10 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
         _continueSkipView.neverHasContinueButton = YES;
         _continueSkipView.continueButtonItem = nil;
     }
-    if (self.isBeingReviewed) {
-        if (self.readOnlyMode) {
-            _questionView.continueSkipContainer.continueButton.hidden = YES;
-            _continueSkipView.continueButton.hidden = YES;
-            _questionView.continueSkipContainer.skipButton.enabled = NO;
-            _continueSkipView.skipButton.enabled = NO;
-        } else {
-            _questionView.continueSkipContainer.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
-            _continueSkipView.skipButton.enabled = !ORKIsAnswerEmpty(self.answer);
-        }
-    }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
+    _questionView.continueSkipContainer.skipButton.enabled = [self skipButtonEnabled];
+    _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
 }
 
 // Override to monitor button title change
@@ -490,7 +481,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     
     self.skipButtonItem = self.internalSkipButtonItem;
-    if (!self.questionStep.optional) {
+    if (!self.questionStep.optional && !self.readOnlyMode) {
         self.skipButtonItem = nil;
     }
 
@@ -515,7 +506,16 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (BOOL)continueButtonEnabled {
     BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
     if (self.isBeingReviewed) {
-        return ([self hasAnswer] || self.step.optional) && ![self.answer isEqual:self.originalAnswer];
+        return enabled && (![self.answer isEqual:self.originalAnswer]);
+    } else {
+        return enabled;
+    }
+}
+
+- (BOOL)skipButtonEnabled {
+    BOOL enabled = self.questionStep.optional;
+    if (self.isBeingReviewed) {
+        return self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswer);
     } else {
         return enabled;
     }
