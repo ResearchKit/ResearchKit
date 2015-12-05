@@ -40,7 +40,7 @@
 
 #import "ORKWaitStepView.h"
 #import "ORKAccessibility.h"
-
+#import "ORKSkin.h"
 
 @implementation ORKWaitStepView {
     NSArray *_customConstraints;
@@ -54,23 +54,55 @@
     if (self) {
         
         _indicatorType = type;
-        self.verticalCenteringEnabled = YES;
-        self.stepViewFillsAvailableSpace = YES;
         
+        self.stepView = [UIView new];
         switch (_indicatorType) {
             case ORKProgressIndicatorTypeProgressBar:
                 _progressView = [UIProgressView new];
-                self.stepView = _progressView;
+                [self.stepView addSubview:_progressView];
                 break;
             case ORKProgressIndicatorTypeIndeterminate:
                 _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
                 [_activityIndicatorView startAnimating];
-                self.stepView = _activityIndicatorView;
+                [self.stepView addSubview:_activityIndicatorView];
                 break;
         }
-        
+        self.verticalCenteringEnabled = YES;
+        self.continueHugsContent = YES;
+        self.stepViewFillsAvailableSpace = NO;
+        self.continueSkipContainer.neverHasContinueButton = YES;
+
+        [self setUpConstraints];
     }
     return self;
+}
+
+- (void)setUpConstraints {
+  
+    UIView *indicatorView = _progressView ? :(_activityIndicatorView ? : nil);
+    
+    if (indicatorView) {
+        
+        const CGFloat horizontalMargin = 2 * ORKStandardHorizontalMarginForView(self);
+        
+        self.stepView.translatesAutoresizingMaskIntoConstraints = NO;
+        indicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSMutableArray* constraints = [NSMutableArray new];
+        
+        [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-horizontalMargin-[indicatorView]-horizontalMargin-|"
+                                                                                  options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                  metrics:@{@"horizontalMargin": @(horizontalMargin)}
+                                                                                    views:@{@"indicatorView" : indicatorView}]];
+        
+        
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[indicatorView]-|"
+                                                                                 options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                                 metrics:nil
+                                                                                   views:@{@"indicatorView" : indicatorView}]];
+        
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
 }
 
 #pragma mark - Accessibility

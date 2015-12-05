@@ -67,35 +67,17 @@
         
         _waitStepView = [[ORKWaitStepView alloc] initWithIndicatorType:[self waitStep].indicatorType];
         _waitStepView.frame = self.view.bounds;
-        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
-        _waitStepView.headerView.instructionLabel.text = _updatedText;
-
+        _waitStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_waitStepView];
         
-        [self setUpConstraints];
+        _waitStepView.headerView.captionLabel.text = [self waitStep].title;
+        _waitStepView.headerView.instructionLabel.text = _updatedText;
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self stepDidChange];
-}
-
-- (void)setUpConstraints {
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    NSDictionary *views = @{ @"waitStepView": _waitStepView };
-    ORKEnableAutoLayoutForViews(views.allValues);
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[waitStepView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[waitStepView]|"
-                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                             metrics:nil
-                                                                               views:views]];
-    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
