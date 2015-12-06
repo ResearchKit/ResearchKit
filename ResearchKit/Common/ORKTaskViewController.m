@@ -1006,8 +1006,10 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if (reviewStep.isStandalone) {
         steps = nil;
     } else {
+        __weak typeof(self) weakSelf = self;
         [_managedStepIdentifiers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            ORKStep *nextStep = [self.task stepWithIdentifier:(NSString*) obj];
+            typeof(self) strongSelf = weakSelf;
+            ORKStep *nextStep = [strongSelf.task stepWithIdentifier:(NSString*) obj];
             if (nextStep && ![nextStep.identifier isEqualToString:reviewStep.identifier]) {
                 [steps addObject:nextStep];
             } else {
@@ -1043,7 +1045,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
         }
         
         if ([step isKindOfClass:[ORKReviewStep class]]) {
-            ORKReviewStep *reviewStep = (ORKReviewStep *) step;
+            ORKReviewStep *reviewStep = (ORKReviewStep *)step;
             NSArray *steps = [self stepsForReviewStep:reviewStep];
             id<ORKTaskResultSource> resultSource = reviewStep.isStandalone ? reviewStep.resultSource : self.result;
             stepViewController = [[ORKReviewStepViewController alloc] initWithReviewStep:(ORKReviewStep *) step steps:steps resultSource:resultSource];
@@ -1300,7 +1302,6 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 #pragma mark - ORKReviewStepViewControllerDelegate
-
 
 - (void)reviewStepViewController:(ORKReviewStepViewController *)reviewStepViewController
                   willReviewStep:(ORKStep *)step {

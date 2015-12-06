@@ -29,6 +29,7 @@
  */
 
 
+#import "ORKReviewStepViewController.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,8 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nullable, readonly) id<ORKTaskResultSource> resultSource;
 
 @property (nonatomic, nullable, readonly) ORKReviewStep *reviewStep;
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 
 @end
 

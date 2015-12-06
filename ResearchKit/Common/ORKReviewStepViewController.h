@@ -44,10 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
                   willReviewStep:(ORKStep*)step;
 @end
 
+
 ORK_CLASS_AVAILABLE
 @interface ORKReviewStepViewController : ORKStepViewController
 
-- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *> *)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource;
+- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(NSArray<ORKStep *> *)steps resultSource:(id<ORKTaskResultSource>)resultSource;
 
 @property (nonatomic, weak, nullable) id<ORKReviewStepViewControllerDelegate> reviewDelegate;
 

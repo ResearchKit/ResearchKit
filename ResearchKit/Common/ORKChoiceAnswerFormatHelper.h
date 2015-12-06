@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSUInteger)choiceCount;
 
-- (id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
+- (nullable id<ORKAnswerOption>)answerOptionAtIndex:(NSUInteger)index;
 - (nullable ORKImageChoice *)imageChoiceAtIndex:(NSUInteger)index;
 - (nullable ORKTextChoice *)textChoiceAtIndex:(NSUInteger)index;
 
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSNumber *)selectedIndexForAnswer:(nullable id)answer;
 - (NSArray *)selectedIndexesForAnswer:(nullable id)answer;
 
-- (NSString *)stringForChoiceAnswer:(id)answer;
+- (nullable NSString *)stringForChoiceAnswer:(id)answer;
 
 @end
 

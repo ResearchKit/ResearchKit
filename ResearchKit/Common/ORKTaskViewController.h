@@ -33,7 +33,6 @@
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
-#import <ResearchKit/ORKReviewStepViewController.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

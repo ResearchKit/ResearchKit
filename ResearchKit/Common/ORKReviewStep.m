@@ -44,17 +44,18 @@
     if (self) {
         _steps = [steps copy];
         _resultSource = resultSource;
+        _excludeInstructionSteps = NO;
     }
     return self;
 }
 
 + (instancetype)standaloneReviewStepWithIdentifier:(NSString *)identifier
-                                             steps:(nonnull NSArray *)steps
-                                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
+                                             steps:(NSArray *)steps
+                                      resultSource:(id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:steps resultSource:resultSource];
 }
 
-+ (instancetype)embeddedReviewStepWithIdentifier:(nonnull NSString *)identifier {
++ (instancetype)embeddedReviewStepWithIdentifier:(NSString *)identifier {
     return [[ORKReviewStep alloc] initWithIdentifier:identifier steps:nil resultSource:nil];
 }
 
@@ -62,11 +63,12 @@
     return [ORKReviewStepViewController class];
 }
 
-- (nonnull instancetype)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         ORK_DECODE_OBJ_CLASS(aDecoder, steps, NSArray);
         ORK_DECODE_OBJ(aDecoder, resultSource);
+        ORK_DECODE_BOOL(aDecoder, excludeInstructionSteps);
     }
     return self;
 }
@@ -75,19 +77,22 @@
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_OBJ(aCoder, steps);
     ORK_ENCODE_OBJ(aCoder, resultSource);
+    ORK_ENCODE_BOOL(aCoder, excludeInstructionSteps);
 }
 
 - (BOOL)isEqual:(id)object {
     __typeof(self) castObject = object;
     return [super isEqual:object] &&
     ORKEqualObjects(self.steps, castObject.steps) &&
-    ORKEqualObjects(self.resultSource, castObject.resultSource);
+    ORKEqualObjects(self.resultSource, castObject.resultSource) &&
+    self.excludeInstructionSteps == castObject.excludeInstructionSteps;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
     ORKReviewStep *reviewStep = [super copyWithZone:zone];
     reviewStep->_steps = [self.steps copy];
     reviewStep->_resultSource = self.resultSource;
+    reviewStep->_excludeInstructionSteps = self.excludeInstructionSteps;
     return reviewStep;
 }
 

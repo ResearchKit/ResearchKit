@@ -3123,6 +3123,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     ORKReviewStep *reviewStep = [ORKReviewStep standaloneReviewStepWithIdentifier:@"reviewStep" steps:steps resultSource:_embeddedReviewTaskResult];
     reviewStep.title = @"Review";
     reviewStep.text = @"Review your answers from your last survey";
+    reviewStep.excludeInstructionSteps = YES;
     return [[ORKOrderedTask alloc] initWithIdentifier:StandaloneReviewTaskIdentifier steps:@[reviewStep]];
 }
 

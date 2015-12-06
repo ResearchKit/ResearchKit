@@ -182,7 +182,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             if (self.readOnlyMode) {
                 _continueSkipView.optional = YES;
                 [_continueSkipView setNeverHasContinueButton:YES];
-                _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
+                _continueSkipView.skipEnabled = [self skipButtonEnabled];
             }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
             if (self.readOnlyMode) {
                 _questionView.continueSkipContainer.optional = YES;
                 [_questionView.continueSkipContainer setNeverHasContinueButton:YES];
-                _questionView.continueSkipContainer.skipButton.enabled = [self skipButtonEnabled];
+                _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
             }
 
             
@@ -389,8 +389,8 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
     }
     _questionView.continueSkipContainer.continueEnabled = [self continueButtonEnabled];
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
-    _questionView.continueSkipContainer.skipButton.enabled = [self skipButtonEnabled];
-    _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
+    _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
+    _continueSkipView.skipEnabled = [self skipButtonEnabled];
 }
 
 // Override to monitor button title change
@@ -506,19 +506,17 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
 - (BOOL)continueButtonEnabled {
     BOOL enabled = ([self hasAnswer] || (self.questionStep.optional && !self.skipButtonItem));
     if (self.isBeingReviewed) {
-        return enabled && (![self.answer isEqual:self.originalAnswer]);
-    } else {
-        return enabled;
+        enabled = enabled && (![self.answer isEqual:self.originalAnswer]);
     }
+    return enabled;
 }
 
 - (BOOL)skipButtonEnabled {
-    BOOL enabled = self.questionStep.optional;
+    BOOL enabled = [self questionStep].optional;
     if (self.isBeingReviewed) {
-        return self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswer);
-    } else {
-        return enabled;
+        enabled = self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswer);
     }
+    return enabled;
 }
 
 - (BOOL)allowContinue {

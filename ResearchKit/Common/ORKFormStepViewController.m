@@ -515,7 +515,7 @@
         if (self.readOnlyMode) {
             _continueSkipView.optional = YES;
             [_continueSkipView setNeverHasContinueButton:YES];
-            _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
+            _continueSkipView.skipEnabled = [self skipButtonEnabled];
         }
 
     }
@@ -577,14 +577,18 @@
     }
 }
 
-- (NSInteger)numberOfAnsweredFormItems {
+- (NSInteger)numberOfAnsweredFormItemsInDictionary:(NSDictionary *)dictionary {
     __block NSInteger nonNilCount = 0;
-    [self.savedAnswers enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id answer, BOOL *stop) {
         if (ORKIsAnswerEmpty(answer) == NO) {
             nonNilCount ++;
         }
     }];
     return nonNilCount;
+}
+
+- (NSInteger)numberOfAnsweredFormItems {
+    return [self numberOfAnsweredFormItemsInDictionary:self.savedAnswers];
 }
 
 - (BOOL)allAnsweredFormItemsAreValid {
@@ -614,25 +618,23 @@
                     && [self allAnsweredFormItemsAreValid]
                     && [self allNonOptionalFormItemsHaveAnswers]);
     if (self.isBeingReviewed) {
-        return enabled && ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
-    } else {
-        return enabled;
+        enabled = enabled && ![self.savedAnswers isEqualToDictionary:self.originalAnswers];
     }
+    return enabled;
 }
 
 - (BOOL)skipButtonEnabled {
     BOOL enabled = self.formStep.optional;
     if (self.isBeingReviewed) {
-        return self.readOnlyMode ? NO : enabled && !ORKIsAnswerEmpty(self.originalAnswers);
-    } else {
-        return enabled;
+        enabled = self.readOnlyMode ? NO : enabled && [self numberOfAnsweredFormItemsInDictionary:self.originalAnswers] > 0;
     }
+    return enabled;
 }
 
 
 - (void)updateButtonStates {
     _continueSkipView.continueEnabled = [self continueButtonEnabled];
-    _continueSkipView.skipButton.enabled = [self skipButtonEnabled];
+    _continueSkipView.skipEnabled = [self skipButtonEnabled];
 }
 
 #pragma mark Helpers

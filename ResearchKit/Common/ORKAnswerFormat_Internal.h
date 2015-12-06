@@ -88,7 +88,7 @@ ORK_DESIGNATE_CODING_AND_SERIALIZATION_INITIALIZERS(ORKTimeIntervalAnswerFormat)
 
 - (ORKQuestionResult *)resultWithIdentifier:(NSString *)identifier answer:(id)answer;
 
-- (NSString*)stringForAnswer:(id)answer;
+- (nullable NSString *)stringForAnswer:(id)answer;
 
 @end
 

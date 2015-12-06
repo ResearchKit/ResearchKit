@@ -452,20 +452,12 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 - (BOOL)isAnswerValid:(id)answer {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
-    if (impliedFormat == self) {
-        return YES;
-    } else {
-        return [impliedFormat isAnswerValid:answer];
-    }
+    return impliedFormat == self ? YES : [impliedFormat isAnswerValid:answer];
 }
 
 - (BOOL)isAnswerValidWithString:(NSString *)text {
     ORKAnswerFormat *impliedFormat = [self impliedAnswerFormat];
-    if (impliedFormat == self) {
-        return YES;
-    } else {
-        return [impliedFormat isAnswerValidWithString:text];
-    }
+    return impliedFormat == self ? YES : [impliedFormat isAnswerValidWithString:text];
 }
 
 - (NSString *)localizedInvalidValueStringWithAnswerString:(NSString *)text {
@@ -1324,16 +1316,16 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 - (NSString*)stringForAnswer:(id)answer {
+    NSString *answerString = nil;
     if ([self isAnswerValid:answer]) {
         NSNumberFormatter *formatter = [self makeNumberFormatter];
         if (self.unit && self.unit.length > 0) {
             [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
             [formatter setNegativeSuffix:[NSString stringWithFormat:@" %@", self.unit]];
         }
-        return [formatter stringFromNumber:answer];
-    } else {
-        return nil;
+        answerString = [formatter stringFromNumber:answer];
     }
+    return answerString;
 }
 
 #pragma mark - Text Sanitization
@@ -2126,11 +2118,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 static NSString * const kSecureTextEntryEscapeString = @"*";
 
 - (NSString*)stringForAnswer:(id)answer {
+    NSString *answerString = nil;
     if ([self isAnswerValid:answer]) {
-        return _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
-    } else {
-        return nil;
+        answerString = _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
     }
+    return answerString;
 }
 
 @end
@@ -2372,11 +2364,15 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
 static NSString * const formattedAddressLinesKey = @"FormattedAddressLines";
 
 - (NSString *)stringForAnswer:(id)answer {
-    ORKLocation *location = answer;
-    // access address dictionary directly since 'ABCreateStringWithAddressDictionary:' is deprecated in iOS9
-    NSArray<NSString *> *addressLines = [location.addressDictionary valueForKey:formattedAddressLinesKey];
-    return addressLines ? [addressLines componentsJoinedByString:@"\n"] :
+    NSString *answerString = nil;
+    if ([answer isKindOfClass:[ORKLocation class]]) {
+        ORKLocation *location = answer;
+        // access address dictionary directly since 'ABCreateStringWithAddressDictionary:' is deprecated in iOS9
+        NSArray<NSString *> *addressLines = [location.addressDictionary valueForKey:formattedAddressLinesKey];
+        answerString = addressLines ? [addressLines componentsJoinedByString:@"\n"] :
         MKStringFromMapPoint(MKMapPointForCoordinate(location.coordinate));
+    }
+    return answerString;
 }
 
 @end

@@ -175,8 +175,9 @@
 }
 
 - (NSString *)stringForChoiceAnswer:(id)answer {
-    __block NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
-    for (NSNumber *index in [self selectedIndexesForAnswer:answer]) {
+    NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    NSArray *indexes = [self selectedIndexesForAnswer:answer];
+    for (NSNumber *index in indexes) {
         NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
         if (text != nil) {
             [answerStrings addObject:text];

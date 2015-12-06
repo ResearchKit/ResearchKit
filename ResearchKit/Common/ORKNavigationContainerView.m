@@ -178,6 +178,11 @@
     [self updateContinueAndSkipEnabled];
 }
 
+- (void)setSkipEnabled:(BOOL)skipEnabled {
+    _skipEnabled = skipEnabled;
+    self.skipButton.enabled = _skipEnabled;
+}
+
 - (void)setSkipButtonItem:(UIBarButtonItem *)skipButtonItem {
     _skipButtonItem = skipButtonItem;
     [self updateContinueAndSkipEnabled];

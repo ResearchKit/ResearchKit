@@ -57,22 +57,20 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 
 @end
 
+
 @implementation ORKReviewStepViewController {
     ORKNavigationContainerView *_continueSkipView;
 }
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    return self;
-}
  
-- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(nullable NSArray<ORKStep *>*)steps resultSource:(nullable id<ORKTaskResultSource>)resultSource {
+- (instancetype)initWithReviewStep:(ORKReviewStep *)reviewStep steps:(NSArray<ORKStep *>*)steps resultSource:(id<ORKTaskResultSource>)resultSource {
     self = [self initWithStep:reviewStep];
     if (self && [self reviewStep]) {
         NSArray<ORKStep *> *stepsToFilter = [self reviewStep].isStandalone ? [self reviewStep].steps : steps;
         NSMutableArray<ORKStep *> *filteredSteps = [[NSMutableArray alloc] init];
+        __weak typeof(self) weakSelf = self;
         [stepsToFilter enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || ([self reviewStep].isStandalone && [obj isKindOfClass:[ORKInstructionStep class]]);
+            typeof(self) strongSelf = weakSelf;
+            BOOL includeStep = [obj isKindOfClass:[ORKQuestionStep class]] || [obj isKindOfClass:[ORKFormStep class]] || (![[strongSelf reviewStep] excludeInstructionSteps] && [obj isKindOfClass:[ORKInstructionStep class]]);
             if (includeStep) {
                 [filteredSteps addObject:obj];
             }
@@ -155,7 +153,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     return (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) ? 1 : _steps.count;
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     tableView.layoutMargins = UIEdgeInsetsZero;
     if (indexPath.section == ORKReviewSectionSpace1 || indexPath.section == ORKReviewSectionSpace2) {
         static NSString *SpaceIdentifier = @"Space";
@@ -191,54 +189,49 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 #pragma mark answer string
 
 - (NSString *)answerStringForStep:(ORKStep *)step withStepResult:(ORKStepResult *)stepResult {
-    if (!step || !stepResult) {
-        return nil;
-    }
-    if (![step.identifier isEqualToString:stepResult.identifier]) {
-        return nil;
-    }
-    if ([step isKindOfClass:[ORKQuestionStep class]]) {
-        ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
-        if (stepResult.firstResult && [stepResult.firstResult isKindOfClass:[ORKQuestionResult class]]) {
-            ORKQuestionResult *questionResult = (ORKQuestionResult *)stepResult.firstResult;
-            return [self answerStringForQuestionStep:questionStep withQuestionResult:questionResult];
+    NSString *answerString = nil;
+    if (step && stepResult && [step.identifier isEqualToString:stepResult.identifier]) {
+        if ([step isKindOfClass:[ORKQuestionStep class]]) {
+            ORKQuestionStep *questionStep = (ORKQuestionStep *)step;
+            if (stepResult.firstResult && [stepResult.firstResult isKindOfClass:[ORKQuestionResult class]]) {
+                ORKQuestionResult *questionResult = (ORKQuestionResult *)stepResult.firstResult;
+                answerString = [self answerStringForQuestionStep:questionStep withQuestionResult:questionResult];
+            }
+        } else if ([step isKindOfClass:[ORKFormStep class]]) {
+            answerString = [self answerStringForFormStep:(ORKFormStep *)step withStepResult:stepResult];
         }
-    } else if ([step isKindOfClass:[ORKFormStep class]]) {
-        return [self answerStringForFormStep:(ORKFormStep *)step withStepResult:stepResult];
     }
-    return nil;
+    return answerString;
 }
 
 - (NSString *)answerStringForQuestionStep:(ORKQuestionStep *)questionStep withQuestionResult:(ORKQuestionResult *)questionResult {
-    if (!questionStep || !questionResult) {
-        return nil;
+    NSString *answerString = nil;
+    if (questionStep && questionResult && questionStep.answerFormat && [questionResult isKindOfClass:questionStep.answerFormat.questionResultClass] && questionResult.answer) {
+        answerString = [questionStep.answerFormat stringForAnswer:questionResult.answer];
     }
-    if (questionStep.answerFormat && [questionResult isKindOfClass:questionStep.answerFormat.questionResultClass] && questionResult.answer) {
-        return [questionStep.answerFormat stringForAnswer:questionResult.answer];
-    } else {
-        return nil;
-    }
+    return answerString;
 }
 
 - (NSString *)answerStringForFormStep:(ORKFormStep *)formStep withStepResult:(ORKStepResult *)stepResult {
-    if (!(formStep && formStep.formItems) || !stepResult) {
-        return nil;
-    }
-    NSMutableArray *answerStrings = [[NSMutableArray alloc] init];
-    for (ORKFormItem *formItem in formStep.formItems) {
-        ORKResult *formItemResult = [stepResult resultForIdentifier:formItem.identifier];
-        if (formItemResult && [formItemResult isKindOfClass:[ORKQuestionResult class]]) {
-            ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
-            if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
-                NSString *formItemTextString = formItem.text;
-                NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
-                if (formItemTextString && formItemAnswerString) {
-                    [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
+    NSString *answerString = nil;
+    if (formStep && formStep.formItems && stepResult) {
+        NSMutableArray *answerStrings = [[NSMutableArray alloc] init];
+        for (ORKFormItem *formItem in formStep.formItems) {
+            ORKResult *formItemResult = [stepResult resultForIdentifier:formItem.identifier];
+            if (formItemResult && [formItemResult isKindOfClass:[ORKQuestionResult class]]) {
+                ORKQuestionResult *questionResult = (ORKQuestionResult *)formItemResult;
+                if (formItem.answerFormat && [questionResult isKindOfClass:formItem.answerFormat.questionResultClass] && questionResult.answer) {
+                    NSString *formItemTextString = formItem.text;
+                    NSString *formItemAnswerString = [formItem.answerFormat stringForAnswer:questionResult.answer];
+                    if (formItemTextString && formItemAnswerString) {
+                        [answerStrings addObject:[@[formItemTextString, formItemAnswerString] componentsJoinedByString:@"\n"]];
+                    }
                 }
             }
         }
+        answerString = [answerStrings componentsJoinedByString:@"\n\n"];
     }
-    return [answerStrings componentsJoinedByString:@"\n\n"];
+    return answerString;
 }
 
 #pragma mark UITableViewDelegate
