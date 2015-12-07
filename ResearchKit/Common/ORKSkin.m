@@ -59,10 +59,10 @@ c##m = [[UIColor alloc] initWithRed:r green:g blue:b alpha:a]; \
 return c##m; \
 }
 
-cachedColorMethod(ork_midGrayTintColor, 0./255., 0./255., 25./255., .22)
-cachedColorMethod(ork_redColor, 255./255.,  59./255.,  48./255., 1.)
-cachedColorMethod(ork_grayColor, 142./255., 142./255., 147./255., 1.)
-cachedColorMethod(ork_darkGrayColor, 102./255., 102./255., 102./255., 1.)
+cachedColorMethod(ork_midGrayTintColor, 0.0 / 255.0, 0.0 / 255.0, 25.0 / 255.0, 0.22)
+cachedColorMethod(ork_redColor, 255.0 / 255.0,  59.0 / 255.0,  48.0 / 255.0, 1.0)
+cachedColorMethod(ork_grayColor, 142.0 / 255.0, 142.0 / 255.0, 147.0 / 255.0, 1.0)
+cachedColorMethod(ork_darkGrayColor, 102.0 / 255.0, 102.0 / 255.0, 102.0 / 255.0, 1.0)
 
 #undef cachedColorMethod
 
@@ -81,13 +81,13 @@ static NSMutableDictionary *colors() {
                     ORKLightTintColorKey : ORKRGB(0xeeeeee),
                     ORKDarkTintColorKey : ORKRGB(0x888888),
                     ORKCaptionTextColorKey : ORKRGB(0xcccccc),
-                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+                    ORKBlueHighlightColorKey : [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0],
                     ORKChartDefaultTextColorKey : [UIColor lightGrayColor],
-                    ORKGraphAxisColorKey : [UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f],
-                    ORKGraphAxisTitleColorKey : [UIColor colorWithRed:142/255.f green:142/255.f blue:147/255.f alpha:1.f],
-                    ORKGraphReferenceLineColorKey : [UIColor colorWithRed:225/255.f green:225/255.f blue:229/255.f alpha:1.f],
+                    ORKGraphAxisColorKey : [UIColor colorWithRed:217.0 / 255.0 green:217.0 / 255.0 blue:217.0 / 255.0 alpha:1.0],
+                    ORKGraphAxisTitleColorKey : [UIColor colorWithRed:142.0 / 255.0 green:142.0 / 255.0 blue:147.0 / 255.0 alpha:1.0],
+                    ORKGraphReferenceLineColorKey : [UIColor colorWithRed:225.0 / 255.0 green:225.0 / 255.0 blue:229.0 / 255.0 alpha:1.0],
                     ORKGraphScrubberLineColorKey : [UIColor grayColor],
-                    ORKGraphScrubberThumbColorKey : [UIColor colorWithWhite:1 alpha:1.0]
+                    ORKGraphScrubberThumbColorKey : [UIColor colorWithWhite:1.0 alpha:1.0]
                     } mutableCopy];
     });
     return colors;
@@ -154,18 +154,18 @@ UIWindow *ORKDefaultWindowIfWindowIsNil(UIWindow *window) {
 
 ORKScreenType ORKGetVerticalScreenTypeForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window);
-    return ORKGetVerticalScreenTypeForBounds([window bounds]);
+    return ORKGetVerticalScreenTypeForBounds(window.bounds);
 }
 
 ORKScreenType ORKGetHorizontalScreenTypeForWindow(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window);
-    return ORKGetHorizontalScreenTypeForBounds([window bounds]);
+    return ORKGetHorizontalScreenTypeForBounds(window.bounds);
 }
 
 ORKScreenType ORKGetScreenTypeForScreen(UIScreen *screen) {
     ORKScreenType screenType = ORKScreenTypeiPhone6;
     if (screen == [UIScreen mainScreen]) {
-        screenType = ORKGetVerticalScreenTypeForBounds([screen bounds]);
+        screenType = ORKGetVerticalScreenTypeForBounds(screen.bounds);
     }
     return screenType;
 }
@@ -210,6 +210,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {        156,       156,       156,       156,       256},      // ORKScreenMetricSignatureViewHeight
         {        384,       324,       304,       304,       384},      // ORKScreenMetricPSATKeyboardViewWidth
         {        197,       167,       157,       157,       197},      // ORKScreenMetricPSATKeyboardViewHeight
+        {        238,       238,       150,       90,       238},      // ORKScreenMetricLocationQuestionMapHeight
     };
     return metrics[metric][screenType];
 }
@@ -268,7 +269,7 @@ CGFloat ORKStandardHorizontalMarginForWindow(UIWindow *window) {
             margin = ORKStandardLeftTableViewCellMarginForWindow(window);
             break;
         case ORKScreenTypeiPad:{
-            // Use adaptive side margin, if view is wider than iPhone6 Plus.
+            // Use adaptive side margin, if window is wider than iPhone6 Plus.
             // Min Marign = ORKLayoutMarginWidthThinBezelRegular, Max Marign = ORKLayoutMarginWidthiPad
             CGFloat ratio =  (window.bounds.size.width - ORKiPhone6PlusScreenSize.width) / (ORKiPadScreenSize.width - ORKiPhone6PlusScreenSize.width);
             ratio = MIN(1.0, ratio);
@@ -316,7 +317,7 @@ CGFloat ORKWidthForSignatureView(UIWindow *window) {
     window = ORKDefaultWindowIfWindowIsNil(window); // need a proper window to use bounds
     const CGSize windowSize = window.bounds.size;
     const CGFloat windowPortraitWidth = MIN(windowSize.width, windowSize.height);
-    const CGFloat signatureViewWidth = windowPortraitWidth - ( 2*ORKStandardHorizontalMarginForView(window) + 2*ORKStandardLeftMarginForTableViewCell(window) );
+    const CGFloat signatureViewWidth = windowPortraitWidth - (2 * ORKStandardHorizontalMarginForView(window) + 2 * ORKStandardLeftMarginForTableViewCell(window));
     return signatureViewWidth;
 }
 

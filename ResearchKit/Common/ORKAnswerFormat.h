@@ -80,6 +80,11 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeBoolean,
     
     /**
+     The Eligibility question type asks the participant to enter Yes or No via a custom boolean control.
+     */
+    ORKQuestionTypeEligibility,
+    
+    /**
      In a text question, the participant can enter multiple lines of text.
      */
     ORKQuestionTypeText,
@@ -103,7 +108,12 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     /**
      In a time interval question, the participant can enter a time span by using a picker.
      */
-    ORKQuestionTypeTimeInterval
+    ORKQuestionTypeTimeInterval,
+    
+    /**
+     In a location question, the participant can enter a location using a map view.
+     */
+    ORKQuestionTypeLocation
 } ORK_ENUM_AVAILABLE;
 
 /**
@@ -143,12 +153,14 @@ typedef NS_ENUM(NSInteger, ORKNumberFormattingStyle) {
 @class ORKImageChoiceAnswerFormat;
 @class ORKTextChoiceAnswerFormat;
 @class ORKBooleanAnswerFormat;
+@class ORKEligibilityAnswerFormat;
 @class ORKNumericAnswerFormat;
 @class ORKTimeOfDayAnswerFormat;
 @class ORKDateAnswerFormat;
 @class ORKTextAnswerFormat;
 @class ORKEmailAnswerFormat;
 @class ORKTimeIntervalAnswerFormat;
+@class ORKLocationAnswerFormat;
 
 @class ORKTextChoice;
 @class ORKImageChoice;
@@ -212,6 +224,8 @@ ORK_CLASS_AVAILABLE
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat;
 
++ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat;
+
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices;
 
 + (ORKImageChoiceAnswerFormat *)choiceAnswerFormatWithImageChoices:(NSArray<ORKImageChoice *> *)imageChoices;
@@ -238,12 +252,19 @@ ORK_CLASS_AVAILABLE
                                                 calendar:(nullable NSCalendar *)calendar;
 
 + (ORKTextAnswerFormat *)textAnswerFormat;
+
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
+
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
+                                              invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
 
 + (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormat;
-+ (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval step:(NSInteger)step;
++ (ORKTimeIntervalAnswerFormat *)timeIntervalAnswerFormatWithDefaultInterval:(NSTimeInterval)defaultInterval
+                                                                        step:(NSInteger)step;
+
++ (ORKLocationAnswerFormat *)locationAnswerFormat;
 
 /// @name Validation
 
@@ -545,9 +566,8 @@ ORK_CLASS_AVAILABLE
  The `ORKTextScaleAnswerFormat` represents an answer format that includes a discrete slider control
  with a text label next to each step.
  
- The scale answer format produces an `ORKScaleQuestionResult` object that contains a number whose
- value is the selected slider value.
- */
+ The scale answer format produces an `ORKChoiceQuestionResult` object that contains the selected text 
+ choice's value. */
 ORK_CLASS_AVAILABLE
 @interface ORKTextScaleAnswerFormat : ORKAnswerFormat
 
@@ -739,6 +759,22 @@ ORK_CLASS_AVAILABLE
  */
 ORK_CLASS_AVAILABLE
 @interface ORKBooleanAnswerFormat : ORKAnswerFormat
+
+@end
+
+
+/**
+ The `ORKEligibilityAnswerFormat` class provides a custom Boolean control that is
+ preconfigured to use only Yes and No answers.
+ 
+ It is recommended to use an `ORKNavigableOrderedTask` along with this answer format
+ in order to determine if the user is eligible or not. See `ORKCatalog` for an
+ example (`Eligibility Task Example').
+ 
+ The eligibility answer format produces an `ORKBooleanQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKEligibilityAnswerFormat : ORKAnswerFormat
 
 @end
 
@@ -1161,9 +1197,22 @@ ORK_CLASS_AVAILABLE
 @interface ORKTextAnswerFormat : ORKAnswerFormat
 
 /**
+ Returns an initialized text answer format using the regular expression.
+ 
+ This method is one of the designated initializers.
+ 
+ @param validationRegex           The regular expression used to validate the text.
+ @param invalidMessage            The text presented to the user when invalid input is received.
+ 
+ @return An initialized validated text answer format.
+ */
+- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+                         invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
+
+/**
  Returns an initialized text answer format using the specified maximum string length.
  
- This method is the designated initializer.
+ This method is one of the designated initializers.
  
  @param maximumLength   The maximum number of characters to accept. When the value of this parameter
                             is 0, there is no maximum.
@@ -1173,11 +1222,25 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_DESIGNATED_INITIALIZER;
 
 /**
- The maximum length of the text users can enter. (read-only)
+ The regex used to validate user's input.
+ 
+ The default value is nil. If set to nil, no validation will be performed.
+ */
+@property (nonatomic, copy, nullable) NSString *validationRegex;
+
+/**
+ The text presented to the user when invalid input is received.
+ 
+ The default value is nil.
+ */
+@property (nonatomic, copy, nullable) NSString *invalidMessage;
+
+/**
+ The maximum length of the text users can enter.
  
  When the value of this property is 0, there is no maximum.
  */
-@property (readonly) NSInteger maximumLength;
+@property NSInteger maximumLength;
 
 /**
  A Boolean value indicating whether to expect more than one line of input.
@@ -1279,5 +1342,25 @@ ORK_CLASS_AVAILABLE
 @property (readonly) NSInteger step;
 
 @end
+
+
+/**
+ The `ORKLocationAnswerFormat` class represents the answer format for questions that collect a location response
+ from the user.
+ 
+ An `ORKLocationAnswerFormat` object produces an `ORKLocationQuestionResult` object.
+ */
+ORK_CLASS_AVAILABLE
+@interface ORKLocationAnswerFormat : ORKAnswerFormat
+
+/**
+ Indicates whether or not the user's current location should be automatically entered the first time they tap on the input field.
+ 
+ By default, this value is YES.
+ */
+@property (nonatomic, assign) BOOL useCurrentLocation;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

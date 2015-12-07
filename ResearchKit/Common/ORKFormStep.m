@@ -80,7 +80,7 @@
 - (void)validateIdentifiersUnique {
     NSArray *uniqueIdentifiers = [_formItems valueForKeyPath:@"@distinctUnionOfObjects.identifier"];
     NSArray *nonUniqueIdentifiers = [_formItems valueForKeyPath:@"@unionOfObjects.identifier"];
-    BOOL itemsHaveNonUniqueIdentifiers = ( [nonUniqueIdentifiers count] != [uniqueIdentifiers count] );
+    BOOL itemsHaveNonUniqueIdentifiers = ( nonUniqueIdentifiers.count != uniqueIdentifiers.count );
     
     if (itemsHaveNonUniqueIdentifiers) {
         @throw [NSException exceptionWithName:NSGenericException reason:@"Each form item should have a unique identifier" userInfo:nil];
@@ -140,13 +140,17 @@
 @implementation ORKFormItem
 
 - (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat {
+    return [self initWithIdentifier:identifier text:text answerFormat:answerFormat optional:YES];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier text:(NSString *)text answerFormat:(ORKAnswerFormat *)answerFormat optional:(BOOL) optional {
     self = [super init];
     if (self) {
         ORKThrowInvalidArgumentExceptionIfNil(identifier);
-        _optional = YES;
         _identifier = [identifier copy];
         _text = [text copy];
         _answerFormat = [answerFormat copy];
+        _optional = optional;
     }
     return self;
 }

@@ -29,7 +29,6 @@
  */
 
 
-#import "ORKFormStepViewController.h"
 #import <ResearchKit/ResearchKit_Private.h>
 #import "ORKHelpers.h"
 #import "ORKFormItemCell.h"
@@ -173,6 +172,7 @@
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:0];
             [(NSMutableArray *)self.items addObject:cellItem];
         }
+        
         {
             ORKTableCellItem *cellItem = [[ORKTableCellItem alloc] initWithFormItem:item choiceIndex:1];
             [(NSMutableArray *)self.items addObject:cellItem];
@@ -196,6 +196,79 @@
 
 @end
 
+@interface ORKFormSectionHeaderView : UIView
+
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView;
+
+@property (nonatomic, strong) NSLayoutConstraint *leftMarginConstraint;
+
+@property (nonatomic, weak) UITableView *tableView;
+
+@end
+
+@implementation ORKFormSectionHeaderView {
+    ORKFormSectionTitleLabel *_label;
+}
+
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView {
+    self = [super init];
+    if (self) {
+        _tableView = tableView;
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        _label = [ORKFormSectionTitleLabel new];
+        _label.text = title;
+        _label.numberOfLines = 0;
+        _label.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_label];
+        
+        [self setUpConstraints];
+    }
+    return self;
+}
+
+- (void)setUpConstraints {
+    
+    const CGFloat LabelFirstBaselineToTop = 20.0;
+    const CGFloat LabelLastBaselineToBottom = -10.0;
+    
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeFirstBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeTop
+                                                       multiplier:1.0
+                                                         constant:LabelFirstBaselineToTop]];
+    
+    self.leftMarginConstraint = [NSLayoutConstraint constraintWithItem:_label
+                                                             attribute:NSLayoutAttributeLeft
+                                                             relatedBy:NSLayoutRelationEqual
+                                                                toItem:self
+                                                             attribute:NSLayoutAttributeLeft
+                                                            multiplier:1.0
+                                                              constant:0.0];
+    
+    [constraints addObject:self.leftMarginConstraint];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeLastBaseline
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeBottom
+                                                       multiplier:1.0
+                                                         constant:LabelLastBaselineToBottom]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+}
+
+- (void)updateConstraints {
+    [super updateConstraints];
+    self.leftMarginConstraint.constant = _tableView.layoutMargins.left;
+}
+
+@end
 
 @interface ORKFormStepViewController () <UITableViewDataSource, UITableViewDelegate, ORKFormItemCellDelegate, ORKTableContainerViewDelegate>
 
@@ -216,13 +289,9 @@
 @implementation ORKFormStepViewController {
     ORKAnswerDefaultSource *_defaultSource;
     ORKNavigationContainerView *_continueSkipView;
-    
     NSMutableSet *_formItemCells;
-    
-    NSMutableArray *_sections;
-
+    NSMutableArray<ORKTableSection *> *_sections;
     BOOL _skipped;
-    
     ORKFormItemCell *_currentFirstResponderCell;
 }
 
@@ -266,12 +335,12 @@
     }
     
     BOOL refreshDefaultsPending = NO;
-    if ([types count]) {
+    if (types.count) {
         NSSet<HKObjectType *> *alreadyRequested = [[self taskViewController] requestedHealthTypesForRead];
-        if (! [types isSubsetOfSet:alreadyRequested]) {
+        if (![types isSubsetOfSet:alreadyRequested]) {
             refreshDefaultsPending = YES;
             [_defaultSource.healthStore requestAuthorizationToShareTypes:nil readTypes:types completion:^(BOOL success, NSError *error) {
-                if (! success) {
+                if (!success) {
                     ORK_Log_Debug(@"Authorization: %@",error);
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -302,8 +371,8 @@
             continue;
         }
         
-        ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-        ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+        ORKTableSection *section = _sections[indexPath.section];
+        ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
             id answer = _savedAnswers[formItem.identifier];
@@ -335,7 +404,7 @@
                 if (defaultValue != nil) {
                     defaults[formItem.identifier] = defaultValue;
                 } else if (error != nil) {
-                    ORK_Log_Debug(@"Error fetching default for %@: %@", formItem, error);
+                    ORK_Log_Warning(@"Error fetching default for %@: %@", formItem, error);
                 }
                 dispatch_semaphore_signal(sem);
             }];
@@ -434,8 +503,7 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
-        ORKScreenType screenType = ORKGetVerticalScreenTypeForWindow(self.view.window);
-        _tableView.estimatedRowHeight = ORKGetMetricForScreenType(ORKScreenMetricTableCellDefaultHeight, screenType);
+        _tableView.estimatedRowHeight = ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, self.view.window);
         _tableView.estimatedSectionHeaderHeight = 30.0;
         
         _headerView = _tableContainer.stepHeaderView;
@@ -460,7 +528,8 @@
     
     NSArray * singleSectionTypes = @[@(ORKQuestionTypeBoolean),
                                      @(ORKQuestionTypeSingleChoice),
-                                     @(ORKQuestionTypeMultipleChoice)];
+                                     @(ORKQuestionTypeMultipleChoice),
+                                     @(ORKQuestionTypeLocation)];
 
     for (ORKFormItem *item in items) {
         // Section header
@@ -552,7 +621,7 @@
 #pragma mark Helpers
 
 - (ORKFormStep *)formStep {
-    NSAssert(! self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
+    NSAssert(!self.step || [self.step isKindOfClass:[ORKFormStep class]], nil);
     return (ORKFormStep *)self.step;
 }
 
@@ -562,7 +631,7 @@
 
 - (NSArray *)formItems {
     NSArray *formItems = [self allFormItems];
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[formItems count]];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:formItems.count];
     for (ORKFormItem *item in formItems) {
         if (item.answerFormat != nil) {
             [array addObject:item];
@@ -600,7 +669,7 @@
         NSDate *answerDate = now;
         NSCalendar *systemCalendar = [NSCalendar currentCalendar];
         NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
-        if (! _skipped) {
+        if (!_skipped) {
             answer = _savedAnswers[item.identifier];
             answerDate = _savedAnswerDates[item.identifier] ? : now;
             systemCalendar = _savedSystemCalendars[item.identifier];
@@ -648,11 +717,11 @@
 #pragma mark UITableViewDataSource
 
 - (BOOL)isLastSection:(NSUInteger)section {
-    return section==(_sections.count-1);
+    return (section == (_sections.count - 1));
 }
 
 - (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
-    return (indexPath.row==0||
+    return (indexPath.row == 0||
             (indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
 }
 
@@ -671,7 +740,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = @"_ork.separator";
-    if (! [self isSeparatorRow:indexPath]) {
+    if (![self isSeparatorRow:indexPath]) {
         identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
     }
     
@@ -683,7 +752,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         } else {
             ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-            ORKTableCellItem *cellItem = [section items][indexPath.row-1];
+            ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
             ORKFormItem *formItem = cellItem.formItem;
             id answer = _savedAnswers[formItem.identifier];
             
@@ -722,17 +791,31 @@
                     }
                         
                     case ORKQuestionTypeText: {
-                        ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                        if (! textFormat.multipleLines) {
-                            class = [ORKFormItemTextFieldCell class];
+                        if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+                            class = [ORKFormItemConfirmTextCell class];
                         } else {
-                            class = [ORKFormItemTextCell class];
+                            ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+                            if (!textFormat.multipleLines) {
+                                class = [ORKFormItemTextFieldCell class];
+                            } else {
+                                class = [ORKFormItemTextCell class];
+                            }
                         }
                         break;
                     }
                         
                     case ORKQuestionTypeScale: {
                         class = [ORKFormItemScaleCell class];
+                        break;
+                    }
+                        
+                    case ORKQuestionTypeEligibility: {
+                        class = [ORKFormItemEligibilityCell class];
+                        break;
+                    }
+                        
+                    case ORKQuestionTypeLocation: {
+                        class = [ORKFormItemLocationCell class];
                         break;
                     }
                         
@@ -746,12 +829,15 @@
                         NSAssert(NO, @"SHOULD NOT FALL IN HERE");
                     } else {
                         ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth screenType:ORKGetVerticalScreenTypeForWindow(self.view.window)];
+                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth delegate:self];
                         [_formItemCells addObject:formCell];
                         [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
-                        formCell.delegate  = self;
                         formCell.selectionStyle = UITableViewCellSelectionStyleNone;
                         formCell.defaultAnswer = _savedDefaults[formItem.identifier];
+                        if (!_savedAnswers) {
+                            _savedAnswers = [NSMutableDictionary new];
+                        }
+                        formCell.savedAnswers = _savedAnswers;
                         cell = formCell;
                     }
                 }
@@ -774,7 +860,7 @@
             if (value) {
                 isSelected = ([answer isEqual:value]);
             } else {
-                isSelected = ([(NSNumber *)answer integerValue] == index);
+                isSelected = (((NSNumber *)answer).integerValue == index);
             }
         }
     }
@@ -824,54 +910,37 @@
     // Seperator line
     if ([self isSeparatorRow:indexPath]) {
         if (indexPath.row == 0) {
-            return 1/[[UIScreen mainScreen] scale];
+            return 1.0 / [UIScreen mainScreen].scale;
         } else {
-            return 40;
+            return 40.0;
         }
     } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ((ORKTableCellItem *)[_sections[indexPath.section] items][indexPath.row-1]);
+        ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row - 1]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    NSString *title = [(ORKTableSection *)_sections[section] title];
+    NSString *title = _sections[section].title;
     return (title.length > 0)? UITableViewAutomaticDimension : 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSString *title = [(ORKTableSection *)_sections[section] title];
+    NSString *title = _sections[section].title;
     
-    UIView *view = [UIView new];
+    ORKFormSectionHeaderView *view = (ORKFormSectionHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
     
     if (title.length > 0) {
-        ORKFormSectionTitleLabel *label = [ORKFormSectionTitleLabel new];
-        label.text = title;
-        label.numberOfLines = 0;
-        label.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [view addSubview:label];
+        if (view == nil) {
+            view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView];
+        }
         
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:view
-                                                         attribute:NSLayoutAttributeTop
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:label
-                                                         attribute:NSLayoutAttributeFirstBaseline multiplier:1.0 constant:-20.0]];
-        
-        [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(hMargin)-[label]|"
-                                                                     options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                     metrics:@{@"hMargin": @(tableView.layoutMargins.left)} views:@{@"label": label}]];
-        
-        [view addConstraint:[NSLayoutConstraint constraintWithItem:label
-                                                         attribute:NSLayoutAttributeLastBaseline
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:view
-                                                         attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-10.0]];
     } else {
         view = nil;
     }
-    view.backgroundColor = [UIColor whiteColor];
+   
     
     return view;
 }
@@ -903,6 +972,10 @@
 
 - (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithMessage:(NSString *)input {
     [self showValidityAlertWithMessage:input];
+}
+
+- (void)formItemCell:(ORKFormItemCell *)cell invalidInputAlertWithTitle:(NSString *)title message:(NSString *)message {
+    [self showValidityAlertWithTitle:title message:message];
 }
 
 - (void)formItemCell:(ORKFormItemCell *)cell answerDidChangeTo:(id)answer {

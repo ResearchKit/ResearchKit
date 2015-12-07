@@ -1,6 +1,7 @@
 /*
  Copyright (c) 2015, Apple Inc. All rights reserved.
- 
+ Copyright (c) 2015, Ricardo Sánchez-Sáez.
+
  Redistribution and use in source and binary forms, with or without modification,
  are permitted provided that the following conditions are met:
  
@@ -32,6 +33,37 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <ResearchKit/ORKErrors.h>
+
+
+#if ( defined(ORK_LOG_LEVEL_NONE) && ORK_LOG_LEVEL_NONE )
+#  undef ORK_LOG_LEVEL_DEBUG
+#  undef ORK_LOG_LEVEL_WARNING
+#  undef ORK_LOG_LEVEL_ERROR
+#endif
+
+#if ( !defined(ORK_LOG_LEVEL_NONE) && !defined(ORK_LOG_LEVEL_DEBUG) && !defined(ORK_LOG_LEVEL_WARNING) && !defined(ORK_LOG_LEVEL_ERROR) )
+#  define ORK_LOG_LEVEL_WARNING 1
+#endif
+
+#define _ORK_LogWithLevel(level,fmt,...) NSLog(@"[ResearchKit]["#level"] %s " fmt, __PRETTY_FUNCTION__, ## __VA_ARGS__)
+
+#if ( ORK_LOG_LEVEL_DEBUG )
+#  define ORK_Log_Debug(fmt,...) _ORK_LogWithLevel(Debug, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Debug(...)
+#endif
+
+#if ( ORK_LOG_LEVEL_DEBUG || ORK_LOG_LEVEL_WARNING )
+#  define ORK_Log_Warning(fmt,...) _ORK_LogWithLevel(Warning, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Warning(...)
+#endif
+
+#if ( ORK_LOG_LEVEL_DEBUG || ORK_LOG_LEVEL_WARNING || ORK_LOG_LEVEL_ERROR )
+#  define ORK_Log_Error(fmt,...) _ORK_LogWithLevel(Error, fmt, ## __VA_ARGS__)
+#else
+#  define ORK_Log_Error(...)
+#endif
 
 
 #if !defined(ORK_INLINE)
@@ -99,6 +131,9 @@
 #define ORK_DECODE_UIEDGEINSETS(d,x)  _ ## x = (__typeof(_ ## x))[d decodeUIEdgeInsetsForKey:@STRINGIFY(x)]
 #define ORK_ENCODE_UIEDGEINSETS(c,x)  [c encodeUIEdgeInsets:_ ## x forKey:@STRINGIFY(x)]
 
+#define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@STRINGIFY(x.latitude)],[d decodeDoubleForKey:@STRINGIFY(x.longitude)])
+#define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@STRINGIFY(x.longitude)];
+
 /*
  * Helpers for completions which call the block only if non-nil
  *
@@ -123,12 +158,13 @@
 // Bundle for video assets
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle();
+NSBundle *ORKDefaultLocaleBundle();
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
 UIColor *ORKRGBA(uint32_t x, CGFloat alpha);
 
-id ORKFindInArrayByStudyId(NSArray *array, NSString *studyIdentifier);
+id findInArrayByKey(NSArray * array, NSString *key, id value);
 
 NSString *ORKStringFromDateISO8601(NSDate *date);
 NSDate *ORKDateFromStringISO8601(NSString *string);
@@ -136,14 +172,6 @@ NSDate *ORKDateFromStringISO8601(NSString *string);
 NSString *ORKSignatureStringFromDate(NSDate *date);
 
 NSURL *ORKCreateRandomBaseURL();
-
-#if defined(DEBUG) && DEBUG
-#  define ORK_Log_Debug(fmt,...) NSLog(@"%s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
-#else
-#  define ORK_Log_Debug(...)
-#endif
-
-#define ORK_Log_Oops(fmt,...) NSLog(@"[ORK][OOPS] %s %d " fmt, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
 
 // Marked extern so it is accessible to unit tests
 ORK_EXTERN NSString *ORKFileProtectionFromMode(ORKFileProtectionMode mode);
@@ -187,7 +215,7 @@ ORKArrayCopyObjects(NSArray *a) {
     if (!a) {
         return nil;
     }
-    NSMutableArray *b = [NSMutableArray arrayWithCapacity:[a count]];
+    NSMutableArray *b = [NSMutableArray arrayWithCapacity:a.count];
     [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [b addObject:[obj copy]];
     }];
@@ -199,7 +227,7 @@ ORKMutableOrderedSetCopyObjects(NSOrderedSet *a) {
     if (!a) {
         return nil;
     }
-    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:[a count]];
+    NSMutableOrderedSet *b = [NSMutableOrderedSet orderedSetWithCapacity:a.count];
     [a enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [b addObject:[obj copy]];
     }];
@@ -211,7 +239,7 @@ ORKMutableDictionaryCopyObjects(NSDictionary *a) {
     if (!a) {
         return nil;
     }
-    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:[a count]];
+    NSMutableDictionary *b = [NSMutableDictionary dictionaryWithCapacity:a.count];
     [a enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         b[key] = [obj copy];
     }];
@@ -251,7 +279,7 @@ ORKCGFloatNearlyEqualToFloat(CGFloat f1, CGFloat f2) {
 #define ORKDefineStringKey(x) static NSString *const x = @STRINGIFY(x)
 
 #define ORKThrowMethodUnavailableException()  @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"method unavailable" userInfo:nil];
-#define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" can not be nil." userInfo:nil]; }
+#define ORKThrowInvalidArgumentExceptionIfNil(argument)  if (!argument) { @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@#argument" cannot be nil." userInfo:nil]; }
 
 void ORKValidateArrayForObjectsOfClass(NSArray *array, Class expectedObjectClass, NSString *exceptionReason);
 
@@ -261,3 +289,4 @@ const CGFloat ORKCGFloatInvalidValue;
 
 void ORKAdjustPageViewControllerNavigationDirectionForRTL(UIPageViewControllerNavigationDirection *direction);
 
+NSString *ORKPaddingWithNumberOfSpaces(NSUInteger numberOfPaddingSpaces);

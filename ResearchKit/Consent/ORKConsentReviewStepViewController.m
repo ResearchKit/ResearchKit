@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, ORKConsentReviewPhase) {
 }
 
 - (void)stepDidChange {
-    if (! [self isViewLoaded]) {
+    if (![self isViewLoaded]) {
         return;
     }
     
@@ -170,19 +170,22 @@ static NSString *const _FamilyNameIdentifier = @"family";
     nameAnswerFormat.autocapitalizationType = UITextAutocapitalizationTypeWords;
     nameAnswerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
     nameAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-    ORKFormItem *givenName = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
+    ORKFormItem *givenNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_GivenNameIdentifier
                                                               text:ORKLocalizedString(@"CONSENT_NAME_GIVEN", nil)
                                                       answerFormat:nameAnswerFormat];
-    givenName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    givenNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
-    ORKFormItem *familyName = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
+    ORKFormItem *familyNameFormItem = [[ORKFormItem alloc] initWithIdentifier:_FamilyNameIdentifier
                                                              text:ORKLocalizedString(@"CONSENT_NAME_FAMILY", nil)
                                                      answerFormat:nameAnswerFormat];
-    familyName.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
+    familyNameFormItem.placeholder = ORKLocalizedString(@"CONSENT_NAME_PLACEHOLDER", nil);
     
-    NSArray *formItems = @[givenName, familyName];
+    givenNameFormItem.optional = NO;
+    familyNameFormItem.optional = NO;
+    
+    NSArray *formItems = @[givenNameFormItem, familyNameFormItem];
     if (ORKCurrentLocalePresentsFamilyNameFirst()) {
-        formItems = @[familyName, givenName];
+        formItems = @[familyNameFormItem, givenNameFormItem];
     }
     
     [formStep setFormItems:formItems];
@@ -239,11 +242,11 @@ static NSString *const _FamilyNameIdentifier = @"family";
 }
 
 - (UIViewController *)viewControllerForIndex:(NSUInteger)index {
-    if (index >= [_pageIndices count]) {
+    if (index >= _pageIndices.count) {
         return nil;
     }
     
-    ORKConsentReviewPhase phase = [_pageIndices[index] integerValue];
+    ORKConsentReviewPhase phase = ((NSNumber *)_pageIndices[index]).integerValue;
     
     UIViewController *viewController = nil;
     switch (phase) {
@@ -272,7 +275,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (ORKStepResult *)result {
     ORKStepResult *parentResult = [super result];
-    if (! _currentSignature) {
+    if (!_currentSignature) {
         _currentSignature = [[self.consentReviewStep signature] copy];
         
         if (_currentSignature.requiresName) {
@@ -326,24 +329,24 @@ static NSString *const _FamilyNameIdentifier = @"family";
 
 - (void)navigateDelta:(NSInteger)delta {
     // Entry point for forward/back navigation.
-    NSUInteger pageCount = [_pageIndices count];
+    NSUInteger pageCount = _pageIndices.count;
     
     if (_currentPageIndex == 0 && delta < 0) {
         // Navigate back in our parent task VC.
         [self goBackward];
-    } else if (_currentPageIndex >= pageCount-1 && delta > 0) {
+    } else if (_currentPageIndex >= (pageCount - 1) && delta > 0) {
         // Navigate forward in our parent task VC.
         [self goForward];
     } else {
         // Navigate within our managed steps
-        [self goToPage:(_currentPageIndex+delta) animated:YES];
+        [self goToPage:(_currentPageIndex + delta) animated:YES];
     }
 }
 
 - (void)goToPage:(NSInteger)page animated:(BOOL)animated {
     UIViewController *viewController = [self viewControllerForIndex:page];
     
-    if (! viewController) {
+    if (!viewController) {
         ORK_Log_Debug(@"No view controller!");
         return;
     }
@@ -398,7 +401,7 @@ static NSString *const _FamilyNameIdentifier = @"family";
 }
 
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController {
-    if (_currentPageIndex < [_pageIndices count]-1) {
+    if (_currentPageIndex < (_pageIndices.count - 1)) {
         return YES;
     }
     return [self hasNextStep];
