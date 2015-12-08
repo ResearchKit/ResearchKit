@@ -38,8 +38,8 @@
 @implementation ORKReviewStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             steps:(nullable NSArray *)steps
-                      resultSource:(nullable id<ORKTaskResultSource, NSSecureCoding>)resultSource {
+                             steps:(NSArray *)steps
+                      resultSource:(id<ORKTaskResultSource, NSSecureCoding>)resultSource {
     self = [super initWithIdentifier:identifier];
     if (self) {
         _steps = [steps copy];

@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 @end
 
 
+
 @implementation ORKReviewStepViewController {
     ORKNavigationContainerView *_continueSkipView;
 }
@@ -145,15 +146,15 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 
 #pragma mark UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(nonnull UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _steps.count > 0 ? ORKReviewSectionCount : 0;
 }
 
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) ? 1 : _steps.count;
 }
 
-- (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.layoutMargins = UIEdgeInsetsZero;
     if (indexPath.section == ORKReviewSectionSpace1 || indexPath.section == ORKReviewSectionSpace2) {
         static NSString *SpaceIdentifier = @"Space";
