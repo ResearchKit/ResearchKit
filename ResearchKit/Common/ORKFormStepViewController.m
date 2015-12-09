@@ -232,6 +232,7 @@
     
     const CGFloat LabelFirstBaselineToTop = 20.0;
     const CGFloat LabelLastBaselineToBottom = -10.0;
+    const CGFloat LabelRightMargin = -4.0;
     
     NSMutableArray *constraints = [NSMutableArray new];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
@@ -259,6 +260,14 @@
                                                         attribute:NSLayoutAttributeBottom
                                                        multiplier:1.0
                                                          constant:LabelLastBaselineToBottom]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeRight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeRight
+                                                       multiplier:1.0
+                                                         constant:LabelRightMargin]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
