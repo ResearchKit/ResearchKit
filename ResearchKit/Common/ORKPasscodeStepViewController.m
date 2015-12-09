@@ -228,7 +228,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 
