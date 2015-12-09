@@ -284,16 +284,12 @@
     return _hasBeenPresented;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return [[self class] supportedInterfaceOrientations];
-}
-
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     // The default values for a view controller's supported interface orientations is set to
     // UIInterfaceOrientationMaskAll for the iPad idiom and UIInterfaceOrientationMaskAllButUpsideDown for the iPhone idiom.
-    NSUInteger supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    UIInterfaceOrientationMask supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        return UIInterfaceOrientationMaskAll;
+        supportedOrientations = UIInterfaceOrientationMaskAll;
     }
     return supportedOrientations;
 }

@@ -228,6 +228,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
+}
+
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }

@@ -32,6 +32,7 @@
 #import "ORKPasscodeViewController.h"
 #import "ORKPasscodeStepViewController.h"
 #import "ORKPasscodeStepViewController_Internal.h"
+#import "ORKStepViewController_Internal.h"
 #import "ORKPasscodeStep.h"
 #import "ORKHelpers.h"
 
@@ -54,7 +55,7 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
 }
 
 + (id)passcodeAuthenticationViewControllerWithText:(NSString *)text
