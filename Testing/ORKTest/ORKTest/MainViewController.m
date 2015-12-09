@@ -1261,7 +1261,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Eligibility form task
 /*
- The eligibility form task is used to test elibility form items (`ORKFormStep`, `ORKFormItem`).
+ The eligibility form task is used to demonstrate an eligibility form (`ORKFormStep`, `ORKFormItem`).
  */
 - (id<ORKTask>)makeEligibilityFormTask {
     NSMutableArray *steps = [NSMutableArray new];
@@ -1275,13 +1275,22 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     {
         ORKFormStep *step = [[ORKFormStep alloc] initWithIdentifier:@"form_step"];
         step.optional = NO;
+        step.title = @"Eligibility Form";
+        step.text = @"Please answer the questions below.";
+        
         NSMutableArray *items = [NSMutableArray new];
         [steps addObject:step];
         
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@"Yes"],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@"No"],
+                                 [ORKTextChoice choiceWithText:@"N/A" value:@"N/A"]];
+        ORKTextChoiceAnswerFormat *answerFormat = (ORKTextChoiceAnswerFormat *)[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                                                                                textChoices:textChoices];
         {
+            
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_1"
                                                                    text:@"Are you over 18 years of age?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+                                                           answerFormat:answerFormat];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1289,7 +1298,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_2"
                                                                    text:@"Have you been diagnosed with pre-diabetes or type 2 diabetes?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+                                                           answerFormat:answerFormat];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1297,7 +1306,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_3"
                                                                    text:@"Can you not read and understand English in order to provide informed consent and follow the instructions?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+                                                           answerFormat:answerFormat];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1305,7 +1314,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
         {
             ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:@"form_item_4"
                                                                    text:@"Do you live outside the United States of America?"
-                                                           answerFormat:[ORKAnswerFormat eligibilityAnswerFormat]];
+                                                           answerFormat:answerFormat];
             item.optional = NO;
             [items addObject:item];
         }
@@ -1334,19 +1343,19 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
                                                   resultIdentifier:@"form_item_1"];
     NSPredicate *predicateFormItem1 = [ORKResultPredicate
-                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+                                       predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"Yes"];
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
                                                   resultIdentifier:@"form_item_2"];
     NSPredicate *predicateFormItem2 = [ORKResultPredicate
-                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+                                       predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"Yes"];
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
                                                   resultIdentifier:@"form_item_3"];
     NSPredicate *predicateFormItem3 = [ORKResultPredicate
-                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+                                       predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"No"];
     resultSelector = [ORKResultSelector selectorWithStepIdentifier:@"form_step"
                                                   resultIdentifier:@"form_item_4"];
     NSPredicate *predicateFormItem4 = [ORKResultPredicate
-                                       predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:NO];
+                                       predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"No"];
     
     NSPredicate *predicateEligible = [NSCompoundPredicate
                                       andPredicateWithSubpredicates:@[predicateFormItem1,predicateFormItem2, predicateFormItem3, predicateFormItem4]];
@@ -1368,7 +1377,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 #pragma mark - Eligibility survey
 /*
- The eligibility survey task is used to test elibility survey cell item.
+ The eligibility survey task is used to demonstrate an eligibility survey.
  */
 - (id<ORKTask>)makeEligibilitySurveyTask {
     NSMutableArray *steps = [NSMutableArray new];
@@ -1380,7 +1389,11 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        ORKEligibilityAnswerFormat *answerFormat = (ORKEligibilityAnswerFormat *)[ORKAnswerFormat eligibilityAnswerFormat];
+        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@"Yes"],
+                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@"No"],
+                                 [ORKTextChoice choiceWithText:@"N/A" value:@"N/A"]];
+        ORKTextChoiceAnswerFormat *answerFormat = (ORKTextChoiceAnswerFormat *)[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
+                                                                                                                textChoices:textChoices];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Are you over 18 years of age?"
                                                                      answer:answerFormat];
@@ -1405,8 +1418,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     // Build navigation rules.
     ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
     NSPredicate *predicateQuestion = [ORKResultPredicate
-                                      predicateForBooleanQuestionResultWithResultSelector:resultSelector
-                                      expectedAnswer:YES];
+                                      predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"Yes"];
     ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc]
                                                      initWithResultPredicates:@[predicateQuestion]
                                                      destinationStepIdentifiers:@[@"eligible_step"]];

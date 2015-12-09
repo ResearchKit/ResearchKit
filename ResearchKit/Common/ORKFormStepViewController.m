@@ -808,12 +808,7 @@
                         class = [ORKFormItemScaleCell class];
                         break;
                     }
-                        
-                    case ORKQuestionTypeEligibility: {
-                        class = [ORKFormItemEligibilityCell class];
-                        break;
-                    }
-                        
+                    
                     case ORKQuestionTypeLocation: {
                         class = [ORKFormItemLocationCell class];
                         break;

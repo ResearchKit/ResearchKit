@@ -899,12 +899,6 @@ ret =
         },
         (@{
           })),
-  ENTRY(ORKEligibilityAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKEligibilityAnswerFormat alloc] init];
-        },
-        (@{
-          })),
   ENTRY(ORKLocationAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKLocationAnswerFormat alloc] init];
