@@ -212,28 +212,12 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
 @implementation VerificationViewController
 
-- (void)showAlertWithTitle:(NSString *)title {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+- (void)resendEmailButtonTapped {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Resend Verification Email"
                                                                    message:@"Button tapped"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)continueButtonTapped {
-    [self goForward];
-}
-
-- (void)resendEmailButtonTapped {
-    [self showAlertWithTitle:@"Resend Verification Email"];
-}
-
-- (void)changeEmailButtonTapped {
-    [self showAlertWithTitle:@"Wrong email address?"];
-}
-
-- (NSString *)emailAddress {
-    return @"jappleseed@example.com";
 }
 
 @end
@@ -1484,9 +1468,7 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     NSMutableArray *steps = [NSMutableArray new];
     
     {
-        ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step"
-                                                                              title:@"Verification"
-                                                                               text:@"Please verify your email"
+        ORKVerificationStep *step = [[ORKVerificationStep alloc] initWithIdentifier:@"verification_step" text:@"Check your email and click on the link to verify your email address and start using the app."
                                                     verificationViewControllerClass:[VerificationViewController class]];
         [steps addObject:step];
     }
