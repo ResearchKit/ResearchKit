@@ -41,6 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
  The verification step contains a text field and a resend email button. The button 
  actions must be overriden inside a subclassed verification view controller to provide
  navigation logic.
+ 
+ The developer should redirect user back to the app once the verification is done 
+ and move forward automatically.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStep : ORKStep
