@@ -65,7 +65,6 @@ enum TaskListRow: Int, CustomStringConvertible {
     case BooleanQuestion
     case DateQuestion
     case DateTimeQuestion
-    case EligibilityQuestion
     case ImageChoiceQuestion
     case LocationQuestion
     case NumericQuestion
@@ -120,7 +119,6 @@ enum TaskListRow: Int, CustomStringConvertible {
                     .BooleanQuestion,
                     .DateQuestion,
                     .DateTimeQuestion,
-                    .EligibilityQuestion,
                     .ImageChoiceQuestion,
                     .LocationQuestion,
                     .NumericQuestion,
@@ -176,9 +174,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return NSLocalizedString("Date and Time Question", comment: "")
-
-        case .EligibilityQuestion:
-            return NSLocalizedString("Eligibility Question", comment: "")
             
         case .ImageChoiceQuestion:
             return NSLocalizedString("Image Choice Question", comment: "")
@@ -305,10 +300,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         // Task with an example of date and time entry.
         case DateTimeQuestionTask
         case DateTimeQuestionStep
-        
-        // Task with an example of an eligibility question.
-        case EligibilityQuestionTask
-        case EligibilityQuestionStep
 
         // Task with an image choice question.
         case ImageChoiceQuestionTask
@@ -432,9 +423,6 @@ enum TaskListRow: Int, CustomStringConvertible {
             
         case .DateTimeQuestion:
             return dateTimeQuestionTask
-            
-        case .EligibilityQuestion:
-            return eligibilityQuestionTask
 
         case .ImageChoiceQuestion:
             return imageChoiceQuestionTask
@@ -622,18 +610,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         step.text = exampleDetailText
         
         return ORKOrderedTask(identifier: String(Identifier.DateTimeQuestionTask), steps: [step])
-    }
-    
-    /// This task demonstrates an eligibiltiy question.
-    private var eligibilityQuestionTask: ORKTask {
-        let answerFormat = ORKAnswerFormat.eligibilityAnswerFormat();
-        
-        let step = ORKQuestionStep(identifier: String(Identifier.EligibilityQuestionStep), title: exampleQuestionText, answer: answerFormat)
-        
-        step.text = exampleDetailText
-        
-        return ORKOrderedTask(identifier: String(Identifier.EligibilityQuestionTask), steps: [step])
-        
     }
 
     /**
@@ -933,7 +909,7 @@ enum TaskListRow: Int, CustomStringConvertible {
     
     /**
     A task demonstrating how the ResearchKit framework can be used to determine
-    eligibility using the eligibilty answer format and a navigable ordered task.
+    eligibility using a navigable ordered task.
     */
     private var eligibilityTask: ORKTask {
         // Intro step
@@ -942,14 +918,19 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // Form step
         let formStep = ORKFormStep(identifier: String(Identifier.EligibilityFormStep))
+        formStep.title = NSLocalizedString("Eligibility", comment: "")
+        formStep.text = exampleQuestionText
         formStep.optional = false
         
         // Form items
-        let formItem01 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem01), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let textChoices : [ORKTextChoice] = [ORKTextChoice(text: "Yes", value: "Yes"), ORKTextChoice(text: "No", value: "No"), ORKTextChoice(text: "N/A", value: "N/A")]
+        let answerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.SingleChoice, textChoices: textChoices)
+        
+        let formItem01 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem01), text: exampleQuestionText, answerFormat: answerFormat)
         formItem01.optional = false
-        let formItem02 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem02), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let formItem02 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem02), text: exampleQuestionText, answerFormat: answerFormat)
         formItem02.optional = false
-        let formItem03 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem03), text: exampleQuestionText, answerFormat: ORKAnswerFormat.eligibilityAnswerFormat())
+        let formItem03 = ORKFormItem(identifier: String(Identifier.EligibilityFormItem03), text: exampleQuestionText, answerFormat: answerFormat)
         formItem03.optional = false
         
         formStep.formItems = [
@@ -976,13 +957,13 @@ enum TaskListRow: Int, CustomStringConvertible {
         
         // Build navigation rules.
         var resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem01))
-        let predicateFormItem01 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: true)
+        let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "Yes")
         
         resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem02))
-        let predicateFormItem02 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: true)
+        let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "Yes")
         
         resultSelector = ORKResultSelector(stepIdentifier: String(Identifier.EligibilityFormStep), resultIdentifier: String(Identifier.EligibilityFormItem03))
-        let predicateFormItem03 = ORKResultPredicate.predicateForBooleanQuestionResultWithResultSelector(resultSelector, expectedAnswer: false)
+        let predicateFormItem03 = ORKResultPredicate.predicateForChoiceQuestionResultWithResultSelector(resultSelector, expectedAnswerValue: "No")
         
         let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02, predicateFormItem03])
         let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(Identifier.EligibilityEligibleStep)) ])
