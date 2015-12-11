@@ -1387,14 +1387,9 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
     }
     
     {
-        NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@"Yes"],
-                                 [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@"No"],
-                                 [ORKTextChoice choiceWithText:@"N/A" value:@"N/A"]];
-        ORKTextChoiceAnswerFormat *answerFormat = (ORKTextChoiceAnswerFormat *)[ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
-                                                                                                                textChoices:textChoices];
         ORKQuestionStep *step = [ORKQuestionStep questionStepWithIdentifier:@"question_01"
                                                                       title:@"Are you over 18 years of age?"
-                                                                     answer:answerFormat];
+                                                                     answer:[ORKAnswerFormat booleanAnswerFormat]];
         step.optional = NO;
         [steps addObject:step];
     }
@@ -1415,11 +1410,10 @@ static const CGFloat HeaderSideLayoutMargin = 16.0;
 
     // Build navigation rules.
     ORKResultSelector *resultSelector = [ORKResultSelector selectorWithResultIdentifier:@"question_01"];
-    NSPredicate *predicateQuestion = [ORKResultPredicate
-                                      predicateForChoiceQuestionResultWithResultSelector:resultSelector expectedAnswerValue:@"Yes"];
-    ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc]
-                                                     initWithResultPredicates:@[predicateQuestion]
-                                                     destinationStepIdentifiers:@[@"eligible_step"]];
+    NSPredicate *predicateQuestion = [ORKResultPredicate predicateForBooleanQuestionResultWithResultSelector:resultSelector expectedAnswer:YES];
+
+    ORKPredicateStepNavigationRule *predicateRule = [[ORKPredicateStepNavigationRule alloc] initWithResultPredicates:@[predicateQuestion]
+                                                                                          destinationStepIdentifiers:@[@"eligible_step"]];
     [task setNavigationRule:predicateRule forTriggerStepIdentifier:@"question_01"];
     
     // Add end direct rules to skip unneeded steps
