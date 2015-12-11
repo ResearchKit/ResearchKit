@@ -229,6 +229,10 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return [[ORKPasscodeStepViewController class] supportedInterfaceOrientations];
+}
+
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 

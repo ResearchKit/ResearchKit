@@ -62,7 +62,6 @@ NSString *ORKQuestionTypeString(ORKQuestionType questionType) {
             SQT_CASE(Decimal);
             SQT_CASE(Integer);
             SQT_CASE(Boolean);
-            SQT_CASE(Eligibility)
             SQT_CASE(Text);
             SQT_CASE(DateAndTime);
             SQT_CASE(TimeOfDay);
@@ -285,10 +284,6 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
 
 + (ORKBooleanAnswerFormat *)booleanAnswerFormat {
     return [ORKBooleanAnswerFormat new];
-}
-
-+ (ORKEligibilityAnswerFormat *)eligibilityAnswerFormat {
-    return [ORKEligibilityAnswerFormat new];
 }
 
 + (ORKValuePickerAnswerFormat *)valuePickerAnswerFormatWithTextChoices:(NSArray<ORKTextChoice *> *)textChoices {
@@ -902,21 +897,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleSingleChoice
                                             textChoices:@[[ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_YES",nil) value:@(YES)],
                                                           [ORKTextChoice choiceWithText:ORKLocalizedString(@"BOOL_NO",nil) value:@(NO) ]]];
-}
-
-- (Class)questionResultClass {
-    return [ORKBooleanQuestionResult class];
-}
-
-@end
-
-
-#pragma mark - ORKEligibilityAnswerFormat
-
-@implementation ORKEligibilityAnswerFormat
-
-- (ORKQuestionType)questionType {
-    return ORKQuestionTypeEligibility;
 }
 
 - (Class)questionResultClass {

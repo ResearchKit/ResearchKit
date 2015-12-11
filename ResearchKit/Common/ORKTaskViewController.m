@@ -816,7 +816,13 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return [self.currentStepViewController supportedInterfaceOrientations];
+    UIInterfaceOrientationMask supportedOrientations;
+    if (self.currentStepViewController) {
+        supportedOrientations = self.currentStepViewController.supportedInterfaceOrientations;
+    } else {
+        supportedOrientations = [[self nextStep].stepViewControllerClass supportedInterfaceOrientations];
+    }
+    return supportedOrientations;
 }
 
 #pragma mark - internal helpers

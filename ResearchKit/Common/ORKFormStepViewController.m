@@ -791,17 +791,12 @@
                         } else {
                             class = [ORKFormItemTextCell class];
                         }
+                        break;
                     }
-                    break;
                 }
                     
                 case ORKQuestionTypeScale: {
                     class = [ORKFormItemScaleCell class];
-                    break;
-                }
-                    
-                case ORKQuestionTypeEligibility: {
-                    class = [ORKFormItemEligibilityCell class];
                     break;
                 }
                     

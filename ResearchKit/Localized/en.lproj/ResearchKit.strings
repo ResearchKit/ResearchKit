@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pick a date";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Wrong email address?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "I didn't receive an email";
+"VERIFICATION_NAV_TITLE" = "Verification";
+"VERIFICATION_STEP_TITLE" = "Verify your Email";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tap on the link below if you did not receive a verification email and would like it sent again.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Resend Verification Email";
-"VERIFICATION_LABEL_MESSAGE" = "If verified, tap the button below.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";

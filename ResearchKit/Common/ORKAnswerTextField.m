@@ -75,13 +75,6 @@
 
 #pragma mark - Accessibility
 
-- (NSString *)accessibilityValue {
-    if (self.text.length > 0) {
-        return self.text;
-    }
-    return self.placeholder;
-}
-
 - (CGRect)accessibilityFrame {
     UITableViewCell *containingCell = (UITableViewCell *)[self ork_superviewOfType:[UITableViewCell class]];
     if (containingCell != nil) {
