@@ -40,10 +40,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-static const CGFloat LocationSelectionViewTextFieldVerticalMargin = 10;
-
-
 @class ORKLocationSelectionView;
 @class ORKAnswerTextField;
 
@@ -90,6 +86,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showMapViewIfNecessary;
 
 + (CGFloat)textFieldHeight;
+
++ (CGFloat)textFieldBottomMargin;
 
 @end
 
