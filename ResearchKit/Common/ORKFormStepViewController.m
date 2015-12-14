@@ -791,8 +791,8 @@
                         } else {
                             class = [ORKFormItemTextCell class];
                         }
-                        break;
                     }
+                    break;
                 }
                     
                 case ORKQuestionTypeScale: {
