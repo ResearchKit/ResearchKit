@@ -562,20 +562,20 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(UITextField *)textFieldImpl shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    ORKPasscodeTextField *textField = _passcodeStepView.textField;
-    [textField insertText:string];
+    ORKPasscodeTextField *passcodeTextField = _passcodeStepView.textField;
+    [passcodeTextField insertText:string];
 
     // Disable input while changing states.
     if (_isChangingState) {
         return !_isChangingState;
     }
     
-    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSString *text = [passcodeTextField.text stringByReplacingCharactersInRange:range withString:string];
     
     // User entered a character.
-    if (text.length < textField.text.length) {
+    if (text.length < passcodeTextField.text.length) {
         // User hit the backspace button.
         if (_numberOfFilledBullets > 0) {
             _numberOfFilledBullets--;
@@ -590,7 +590,7 @@
                 [_confirmPasscode deleteCharactersInRange:NSMakeRange([_confirmPasscode length]-1, 1)];
             }
         }
-    } else if (_numberOfFilledBullets < textField.numberOfDigits) {
+    } else if (_numberOfFilledBullets < passcodeTextField.numberOfDigits) {
         // Only allow numeric characters besides backspace (covered by the previous if statement).
         if (! [[NSScanner scannerWithString:string] scanFloat:NULL]) {
             [self showValidityAlertWithMessage:ORKLocalizedString(@"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE", nil)];
@@ -610,10 +610,10 @@
         // User entered a new character.
         _numberOfFilledBullets++;
     }
-    [textField updateTextWithNumberOfFilledBullets:_numberOfFilledBullets];
+    [passcodeTextField updateTextWithNumberOfFilledBullets:_numberOfFilledBullets];
     
     // User entered all characters.
-    if (_numberOfFilledBullets == textField.numberOfDigits) {
+    if (_numberOfFilledBullets == passcodeTextField.numberOfDigits) {
         // Disable input.
         _isChangingState = YES;
         
