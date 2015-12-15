@@ -42,6 +42,7 @@
 
 @implementation ORKPasscodeStepViewController {
     ORKPasscodeStepView *_passcodeStepView;
+    UITextField *_accessibilityPasscodeField;
     NSMutableString *_passcode;
     NSMutableString *_confirmPasscode;
     NSInteger _numberOfFilledBullets;
@@ -62,10 +63,20 @@
 - (void)stepDidChange {
     [super stepDidChange];
     
+    [_accessibilityPasscodeField removeFromSuperview];
+    _accessibilityPasscodeField = nil;
+    
     [_passcodeStepView removeFromSuperview];
     _passcodeStepView = nil;
     
     if (self.step && [self isViewLoaded]) {
+        
+        _accessibilityPasscodeField = [UITextField new];
+        _accessibilityPasscodeField.hidden = YES;
+        _accessibilityPasscodeField.delegate = self;
+        _accessibilityPasscodeField.secureTextEntry = YES;
+        _accessibilityPasscodeField.keyboardType = UIKeyboardTypeNumberPad;
+        [self.view addSubview:_accessibilityPasscodeField];
         
         _passcodeStepView = [[ORKPasscodeStepView alloc] initWithFrame:self.view.bounds];
         _passcodeStepView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
@@ -148,6 +159,7 @@
         case ORKPasscodeStateEntry:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_PROMPT_MESSAGE", nil);
             _numberOfFilledBullets = 0;
+            _accessibilityPasscodeField.text = @"";
             _passcode = [NSMutableString new];
             _confirmPasscode = [NSMutableString new];
             break;
@@ -155,6 +167,7 @@
         case ORKPasscodeStateConfirm:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_CONFIRM_MESSAGE", nil);
             _numberOfFilledBullets = 0;
+            _accessibilityPasscodeField.text = @"";
             _confirmPasscode = [NSMutableString new];
             break;
             
@@ -168,6 +181,7 @@
         case ORKPasscodeStateOldEntry:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_OLD_ENTRY_MESSAGE", nil);
             _numberOfFilledBullets = 0;
+            _accessibilityPasscodeField.text = @"";
             _passcode = [NSMutableString new];
             _confirmPasscode = [NSMutableString new];
             break;
@@ -175,6 +189,7 @@
         case ORKPasscodeStateNewEntry:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_NEW_ENTRY_MESSAGE", nil);
             _numberOfFilledBullets = 0;
+            _accessibilityPasscodeField.text = @"";
             _passcode = [NSMutableString new];
             _confirmPasscode = [NSMutableString new];
             break;
@@ -182,6 +197,7 @@
         case ORKPasscodeStateConfirmNewEntry:
             _passcodeStepView.headerView.captionLabel.text = ORKLocalizedString(@"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE", nil);
             _numberOfFilledBullets = 0;
+            _accessibilityPasscodeField.text = @"";
             _confirmPasscode = [NSMutableString new];
             break;
     }
@@ -261,15 +277,15 @@
 
 - (void)makePasscodeViewBecomeFirstResponder {
     _shouldResignFirstResponder = NO;
-    if (!_passcodeStepView.textField.isFirstResponder) {
-        [_passcodeStepView.textField becomeFirstResponder];
+    if (![_accessibilityPasscodeField isFirstResponder]) {
+        [_accessibilityPasscodeField becomeFirstResponder];
     }
 }
 
 - (void)makePasscodeViewResignFirstResponder {
     _shouldResignFirstResponder = YES;
-    if (_passcodeStepView.textField.isFirstResponder) {
-        [_passcodeStepView.textField resignFirstResponder];
+    if ([_accessibilityPasscodeField isFirstResponder]) {
+        [_accessibilityPasscodeField resignFirstResponder];
     }
 }
 
@@ -546,7 +562,11 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textField:(ORKPasscodeTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textField:(UITextField *)textFieldImpl shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    ORKPasscodeTextField *textField = _passcodeStepView.textField;
+    [textField insertText:string];
+
     // Disable input while changing states.
     if (_isChangingState) {
         return !_isChangingState;
@@ -559,6 +579,16 @@
         // User hit the backspace button.
         if (_numberOfFilledBullets > 0) {
             _numberOfFilledBullets--;
+            
+            // Remove last character
+            if (_passcodeState == ORKPasscodeStateEntry ||
+                _passcodeState == ORKPasscodeStateOldEntry ||
+                _passcodeState == ORKPasscodeStateNewEntry) {
+                [_passcode deleteCharactersInRange:NSMakeRange([_passcode length]-1, 1)];
+            } else if (_passcodeState == ORKPasscodeStateConfirm ||
+                       _passcodeState == ORKPasscodeStateConfirmNewEntry) {
+                [_confirmPasscode deleteCharactersInRange:NSMakeRange([_confirmPasscode length]-1, 1)];
+            }
         }
     } else if (_numberOfFilledBullets < textField.numberOfDigits) {
         // Only allow numeric characters besides backspace (covered by the previous if statement).
@@ -610,7 +640,7 @@
         });
     }
     
-    return NO;
+    return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
