@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Выберите дату";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Неверный адрес e-mail?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Я не получил(а) e‑mail";
+"VERIFICATION_NAV_TITLE" = "Проверка";
+"VERIFICATION_STEP_TITLE" = "Проверка e‑mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Нажмите ссылку ниже, если Вы не получили e‑mail с подтверждением и хотите, чтобы он был отправлен повторно.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Повторно отправить e‑mail";
-"VERIFICATION_LABEL_MESSAGE" = "Если проверено, нажмите кнопку ниже.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Вход";

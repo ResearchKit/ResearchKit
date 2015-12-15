@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Kies een datum";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Onjuist e‑mailadres?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Ik heb geen e‑mail gekregen";
+"VERIFICATION_NAV_TITLE" = "Verificatie";
+"VERIFICATION_STEP_TITLE" = "Verifieer uw e-mailadres";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tik op de koppeling hieronder als u geen verificatiemail hebt ontvangen en u deze opnieuw wilt laten versturen.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Stuur controlemail opnieuw";
-"VERIFICATION_LABEL_MESSAGE" = "Tik na controle op de knop hieronder.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggen";

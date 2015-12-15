@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Dátum kiválasztása";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Az e-mail cím helytelen?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Nem kaptam e-mail üzenetet";
+"VERIFICATION_NAV_TITLE" = "Ellenőrzés";
+"VERIFICATION_STEP_TITLE" = "E-mail ellenőrzése";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Koppintson az alábbi linkre, ha nem kapott ellenőrző e-mailt, és azt szeretné, ha újra elküldenénk.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Ellenőrző e-mail újraküldése";
-"VERIFICATION_LABEL_MESSAGE" = "Ellenőrzés után koppintson a gombra.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Bejelentkezés";

@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Valitse päiväys";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Väärä sähköpostiosoite?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "En saanut sähköpostia";
+"VERIFICATION_NAV_TITLE" = "Vahvistus";
+"VERIFICATION_STEP_TITLE" = "Vahvista sähköpostisi";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Napauta alla olevaa linkkiä, jos et saanut vahvistussähköpostia ja haluat, että se lähetetään uudelleen.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Lähetä uusi vahvistussähköposti";
-"VERIFICATION_LABEL_MESSAGE" = "Jos vahvistettu, napauta painiketta alla.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Kirjaudu sisään";

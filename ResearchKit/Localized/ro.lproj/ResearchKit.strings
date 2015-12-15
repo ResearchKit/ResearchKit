@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Alegeți o dată";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Adresă de e-mail incorectă?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Nu am primit un e‑mail";
+"VERIFICATION_NAV_TITLE" = "Verificare";
+"VERIFICATION_STEP_TITLE" = "Verificați-vă e‑mailul";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Apăsați pe linkul de mai jos dacă nu ați primit un e‑mail de verificare și ați dori retrimiterea acestuia.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Retrimite e‑mailul de verificare";
-"VERIFICATION_LABEL_MESSAGE" = "După verificare, apăsați butonul OK.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Login";

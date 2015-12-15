@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "בחר/י תאריך";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "כתובת דוא״ל שגויה?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "לא קיבלתי דוא״ל";
+"VERIFICATION_NAV_TITLE" = "אימות";
+"VERIFICATION_STEP_TITLE" = "אימות הדוא״ל שלך";
+"RESEND_EMAIL_LABEL_MESSAGE" = "הקש/י על הקישור שלמטה אם לא קיבלת דוא״ל אימות וברצונך שהוא יישלח שוב.";
 "RESEND_EMAIL_BUTTON_TITLE" = "שלח הודעת דוא״ל לאימות מחדש";
-"VERIFICATION_LABEL_MESSAGE" = "לאחר האימות, הקש/י על הכפתור להלן.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "התחבר";

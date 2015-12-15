@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "选择日期";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "错误的电子邮件地址？";
-"RESEND_EMAIL_LABEL_MESSAGE" = "我没有收到电子邮件";
+"VERIFICATION_NAV_TITLE" = "验证";
+"VERIFICATION_STEP_TITLE" = "验证您的电子邮件";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果您未收到验证电子邮件并希望再收一次，请轻点下方的链接。";
 "RESEND_EMAIL_BUTTON_TITLE" = "重新发送验证电子邮件";
-"VERIFICATION_LABEL_MESSAGE" = "如果已验证，请轻点下方的按钮。";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "登录";

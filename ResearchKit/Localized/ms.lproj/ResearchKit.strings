@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tarikh";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Alamat e-mel salah?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Saya tidak menerima e-mel";
+"VERIFICATION_NAV_TITLE" = "Pengesahan";
+"VERIFICATION_STEP_TITLE" = "Sahkan E-mel anda";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ketik pautan di bawah jika anda tidak menerima e-mel pengesahan dan mahu e-mel tersebut dihantar sekali lagi.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Hantar Semula E-mel Pengesahan";
-"VERIFICATION_LABEL_MESSAGE" = "Jika disahkan, ketik butang di bawah.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Log Masuk";

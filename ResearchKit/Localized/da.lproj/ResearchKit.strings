@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Vælg en dato";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Forkert e-mailadresse?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Jeg modtog ikke en e-mail";
+"VERIFICATION_NAV_TITLE" = "Bekræftelse";
+"VERIFICATION_STEP_TITLE" = "Bekræft din e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryk på linket nedenfor, hvis du ikke modtog en e-mail med bekræftelse og gerne vil have den sendt igen.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Send e-mail med bekræftelse igen";
-"VERIFICATION_LABEL_MESSAGE" = "Hvis bekræftet, tryk på knappen nedenfor.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Log ind";

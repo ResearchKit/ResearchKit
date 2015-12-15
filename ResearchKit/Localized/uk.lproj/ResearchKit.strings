@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Виберіть дату";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Хибна адреса е-пошти?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Лист перевірки не одеражно";
+"VERIFICATION_NAV_TITLE" = "Перевірка";
+"VERIFICATION_STEP_TITLE" = "Перевірка е-пошти";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Торкніть наведене нижче посилання, якщо ви не отримали лист перевірки і хочете, щоб його надіслали повторно.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Надіслати лист перевірки ще раз";
-"VERIFICATION_LABEL_MESSAGE" = "Перевірено? Торкніть «Готово».";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Ім’я";

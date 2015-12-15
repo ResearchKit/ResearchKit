@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "選擇日期";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "電子郵件位址錯誤？";
-"RESEND_EMAIL_LABEL_MESSAGE" = "我未收到電子郵件";
+"VERIFICATION_NAV_TITLE" = "驗證";
+"VERIFICATION_STEP_TITLE" = "驗證您的電子郵件";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果您未收到驗證電子郵件並希望系統再寄送一次，請點下方連結。";
 "RESEND_EMAIL_BUTTON_TITLE" = "重新傳送驗證電子郵件";
-"VERIFICATION_LABEL_MESSAGE" = "若已驗證，請點下方的按鈕。";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "登入";

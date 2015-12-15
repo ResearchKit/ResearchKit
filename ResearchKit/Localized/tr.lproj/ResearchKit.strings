@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Bir tarih seçin";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Yanlış e-posta adresi mi?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "E-posta almadım";
+"VERIFICATION_NAV_TITLE" = "Doğrulama";
+"VERIFICATION_STEP_TITLE" = "E-postanızı doğrulayın";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Doğrulama e-postası almadıysanız ve yeniden gönderilmesini istiyorsanız, lütfen aşağıdaki bağlantıya dokunun.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Doğrulama E-postasını Yeniden Gönder";
-"VERIFICATION_LABEL_MESSAGE" = "Doğrulandıysa, Bitti'ye dokunun.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Oturum Aç";
