@@ -98,6 +98,10 @@ class ProfileViewController: UITableViewController, HealthClientType {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     // MARK: Cell configuration
     
     func configureCellWithDateOfBirth(cell: ProfileStaticTableViewCell) {
