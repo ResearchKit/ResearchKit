@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Définir la date";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Adresse e-mail incorrecte ?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Je n’ai pas reçu d’e-mail";
+"VERIFICATION_NAV_TITLE" = "Vérification";
+"VERIFICATION_STEP_TITLE" = "Vérifier votre adresse e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Touchez le lien ci-dessous si vous n’avez pas reçu d’e-mail de vérification et aimeriez le renvoyer.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Renvoyer l’e-mail de vérification";
-"VERIFICATION_LABEL_MESSAGE" = "Si vérifiée, touchez ci-dessous.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Connexion";
@@ -329,7 +329,7 @@
 "HOLE_PEG_TEST_TITLE_%@" = "Test des %@ chevilles";
 "HOLE_PEG_TEST_INTRO_TEXT_%@" = "Cette activité évalue le fonctionnement de vos extrémités supérieures. Vous devez placer un rond dans un trou et répéter cette opération %@ fois.";
 "HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et, après avoir fait cela %@ fois, retirez le rond %@ fois.";
-"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et une fois réalisé %@ fois, retirez le rond %@ fois.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vos deux mains seront testées.\nRamassez le rond aussi vite que possible, placez-le dans le trou et, après avoir fait cela %@ fois, retirez le rond %@ fois.";
 
 "HOLE_PEG_TEST_CALL_TO_ACTION" = "Touchez Démarrer pour commencer.";
 "HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Placez le rond dans le trou avec votre main gauche.";

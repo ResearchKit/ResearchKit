@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Angi dato";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Feil e-postadresse?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Jeg mottok ingen e-post";
+"VERIFICATION_NAV_TITLE" = "Verifisering";
+"VERIFICATION_STEP_TITLE" = "Verifiser e-postadressen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på koblingen nedenfor hvis du ikke mottok verifiseringsmeldingen på e-post og vil sende den på nytt.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Send verifiseringsmelding på nytt";
-"VERIFICATION_LABEL_MESSAGE" = "Trykk på knappen nedenfor etter verifisering.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Logg på";

@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "اختيار تاريخ";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "عنوان بريد إلكتروني غير صالح؟";
-"RESEND_EMAIL_LABEL_MESSAGE" = "لم استلم بريد إلكتروني";
+"VERIFICATION_NAV_TITLE" = "التحقق";
+"VERIFICATION_STEP_TITLE" = "التحقق من البريد الإلكتروني";
+"RESEND_EMAIL_LABEL_MESSAGE" = "اضغط على الرابط أدناه إذا كنت لم تتلق بريد التحقق، وترغب بإرساله لك مرة أخرى.";
 "RESEND_EMAIL_BUTTON_TITLE" = "إعادة إرسال بريد التحقق";
-"VERIFICATION_LABEL_MESSAGE" = "إذا تم التحقق، اضغط على زر أدناه.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "تسجيل الدخول";

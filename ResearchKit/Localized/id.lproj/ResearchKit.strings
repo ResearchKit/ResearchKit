@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tanggal";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Alamat email salah?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Saya tidak menerima email";
+"VERIFICATION_NAV_TITLE" = "Verifikasi";
+"VERIFICATION_STEP_TITLE" = "Verifikasi Email Anda";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ketuk tautan di bawah jika Anda tidak menerima email verifikasi dan ingin email dikirimkan lagi.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Kirim Ulang Email Verifikasi";
-"VERIFICATION_LABEL_MESSAGE" = "Jika terverifikasi, ketuk tombol di bawah.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Masuk";

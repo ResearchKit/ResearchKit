@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una data";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Adreça electrònica incorrecta?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "No he rebut cap correu electrònic";
+"VERIFICATION_NAV_TITLE" = "Verificació";
+"VERIFICATION_STEP_TITLE" = "Verifica el teu correu electrònic";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Prem l’enllaç de sota si no has rebut cap correu de verificació i vols que se’t torni a enviar.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correu de verificació";
-"VERIFICATION_LABEL_MESSAGE" = "Si és correcte, prem el botó de sota.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Inici de sessió";

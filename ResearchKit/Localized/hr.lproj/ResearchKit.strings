@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Izaberite datum";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Kriva e-mail adresa?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Nisam primio/la e-mail";
+"VERIFICATION_NAV_TITLE" = "Potvrda";
+"VERIFICATION_STEP_TITLE" = "Potvrdite vaš e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ako niste primili e-mail za potvrdu i želite da bude ponovno poslan, dodirnite link ispod.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Ponovno pošalji e-mail za provjeru";
-"VERIFICATION_LABEL_MESSAGE" = "Ako je provjereno, dodirnite tipku u nastavku.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Prijava";

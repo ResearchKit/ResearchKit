@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Chọn một ngày";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Địa chỉ email không đúng?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Tôi không nhận được email";
+"VERIFICATION_NAV_TITLE" = "Xác minh";
+"VERIFICATION_STEP_TITLE" = "Xác minh Email của bạn";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Chạm vào liên kết bên dưới nếu bạn không nhận được email xác minh và muốn được gửi lại.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Gửi lại Email Xác minh";
-"VERIFICATION_LABEL_MESSAGE" = "Nếu đã xác minh, chạm vào nút bên dưới.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Đăng nhập";

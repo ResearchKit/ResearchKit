@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Escolha uma data";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Endereço de e‑mail incorreto?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Não recebi nenhum e‑mail";
+"VERIFICATION_NAV_TITLE" = "Confirmação";
+"VERIFICATION_STEP_TITLE" = "Confirme o e‑mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Caso não tenha recebido um e‑mail de confirmação, toque na hiperligação abaixo; o e‑mail voltará a ser enviado.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Reenviar e‑mail de confirmação";
-"VERIFICATION_LABEL_MESSAGE" = "Se estiver confirmado,\ntoque no botão abaixo.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Iniciar sessão";
@@ -287,7 +287,7 @@
 "TOWER_OF_HANOI_TASK_TITLE" = "Torre de Hanoi";
 "TOWER_OF_HANOI_TASK_INTENDED_USE" = "Este exercício avalia a sua capacidade de resolver puzzles.";
 "TOWER_OF_HANOI_TASK_INTRO_TEXT" = "Mova a pilha inteira para a plataforma destacada no menor número de movimentos possível.";
-"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Toque em Iniciar para começar";
+"TOWER_OF_HANOI_TASK_TASK_CALL_TO_ACTION" = "Para iniciar, toque em Começar.";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_INTRO_TEXT" = "Resolver o puzzle";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_PROGRESS_TEXT" = "Número de movimentos: %@ \n %@";
 "TOWER_OF_HANOI_TASK_ACTIVE_STEP_SKIP_BUTTON_TITLE" = "Não consigo resolver este puzzle";

@@ -213,6 +213,7 @@ CGFloat ORKGetMetricForScreenType(ORKScreenMetric metric, ORKScreenType screenTy
         {        238,       238,       150,        90,       238},      // ORKScreenMetricLocationQuestionMapHeight
         {         40,        40,        20,        14,        40},      // ORKScreenMetricTopToIconImageViewTop
         {         44,        44,        40,        40,        80},      // ORKScreenMetricIconImageViewToCaptionBaseline
+        {         30,        30,        26,        22,        30},      // ORKScreenMetricVerificationTextBaselineToResendButtonBaseline
     };
     return metrics[metric][screenType];
 }

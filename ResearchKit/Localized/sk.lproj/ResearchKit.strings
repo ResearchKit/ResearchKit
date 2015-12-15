@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Vyberte dátum";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Nesprávna emailová adresa?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Nebol mi doručený email";
+"VERIFICATION_NAV_TITLE" = "Overenie";
+"VERIFICATION_STEP_TITLE" = "Overte svoj email";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ak vám nebol doručený overovací email a chcete ho znovu odoslať, klepnite na odkaz nižšie.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Znovu odoslať overovací email";
-"VERIFICATION_LABEL_MESSAGE" = "Po overení klepnite na tlačidlo nižšie.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Prihlásenie";

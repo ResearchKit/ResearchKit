@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε ημερομηνία";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Λανθασμένη διεύθυνση email;";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Δεν έλαβα email";
+"VERIFICATION_NAV_TITLE" = "Επαλήθευση";
+"VERIFICATION_STEP_TITLE" = "Επαληθεύστε το email σας";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Αν δεν έχετε λάβει email επαλήθευσης, αγγίξτε τον παρακάτω σύνδεσμο για να σταλεί ξανά.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Εκ νέου αποστολή email επιβεβαίωσης";
-"VERIFICATION_LABEL_MESSAGE" = "Αν έγινε επαλήθευση, αγγίξτε «Τέλος».";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Είσοδος";

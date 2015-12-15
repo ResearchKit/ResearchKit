@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Välj ett datum";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Fel e-postadress?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Jag fick inte något e-brev";
+"VERIFICATION_NAV_TITLE" = "Verifiering";
+"VERIFICATION_STEP_TITLE" = "Bekräfta ditt e-brev";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryck på länken nedan om du inte fick något bekräftelsebrev och vill att det skickas på nytt.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Skicka bekräftelsebrev igen";
-"VERIFICATION_LABEL_MESSAGE" = "Tryck på knappen nedan om verifierad.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggning";

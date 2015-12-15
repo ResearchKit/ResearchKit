@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Datum wählen";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Falsche E-Mail-Adresse?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Keine E-Mail erhalten";
+"VERIFICATION_NAV_TITLE" = "Überprüfung";
+"VERIFICATION_STEP_TITLE" = "E‑Mail überprüfen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Wenn Sie keine E-Mail zur Überprüfung erhalten haben, klicken Sie auf den Link unten, um sie sich erneut senden zu lassen.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Bestätigungs-E‑Mail erneut senden";
-"VERIFICATION_LABEL_MESSAGE" = "Tippen Sie, wenn verifiziert, auf die Taste unten.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Anmeldung";

@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "Vyberte datum";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "Chybná e‑mailová adresa?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "Nepřišel mi e-mail";
+"VERIFICATION_NAV_TITLE" = "Ověření";
+"VERIFICATION_STEP_TITLE" = "Ověřte svůj e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pokud jste neobdrželi ověřovací e-mail a chcete, abychom vám ho zaslali znovu, klepněte na odkaz níže.";
 "RESEND_EMAIL_BUTTON_TITLE" = "Znovu odeslat ověřovací e‑mail";
-"VERIFICATION_LABEL_MESSAGE" = "Po ověření klepněte na tlačítko dole.";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "Přihlásit se";

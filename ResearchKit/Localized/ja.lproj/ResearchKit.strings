@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "日付を選択";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "メールアドレスを訂正";
-"RESEND_EMAIL_LABEL_MESSAGE" = "メールが届かなかった場合";
+"VERIFICATION_NAV_TITLE" = "確認";
+"VERIFICATION_STEP_TITLE" = "メールを確認";
+"RESEND_EMAIL_LABEL_MESSAGE" = "確認メールが届いておらず、送信し直したい場合は、下のリンクをタップしてください。";
 "RESEND_EMAIL_BUTTON_TITLE" = "確認メールを再送信";
-"VERIFICATION_LABEL_MESSAGE" = "確認が完了したら、下のボタンをタップしてください。";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "ログイン";

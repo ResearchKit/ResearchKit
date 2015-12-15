@@ -1111,6 +1111,8 @@ static const CGFloat HorizontalMargin = 15.0;
     
     [self ork_setAnswer:_picker.answer];
     
+    [self.textField setSelectedTextRange:nil];
+    
     [super inputValueDidChange];
 }
 

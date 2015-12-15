@@ -117,10 +117,10 @@
 "DOB_FORM_ITEM_PLACEHOLDER" = "तिथि चुनें";
 
 /* Verification step */
-"CHANGE_EMAIL_BUTTON_TITLE" = "ईमेल पता ग़लत है?";
-"RESEND_EMAIL_LABEL_MESSAGE" = "मुझे ईमेल प्राप्त नहीं हुआ";
+"VERIFICATION_NAV_TITLE" = "सत्यापन";
+"VERIFICATION_STEP_TITLE" = "अपना ईमेल सत्यापित करें";
+"RESEND_EMAIL_LABEL_MESSAGE" = "यदि आपको सत्यापन ईमेल प्राप्त नहीं होता है और आप इसे पुनः प्राप्त करना चाहते हैं तो नीचे दिये गए लिंक पर टैप करें।";
 "RESEND_EMAIL_BUTTON_TITLE" = "सत्यापन ईमेल फिर से भेजें";
-"VERIFICATION_LABEL_MESSAGE" = "सत्यापन के बाद नीचे दिए गए बटन पर टैप करें।";
 
 /* Login step */
 "LOGIN_CONTINUE_BUTTON_TITLE" = "लॉगइन करें";
