@@ -1046,14 +1046,6 @@ enum TaskListRow: Int, CustomStringConvertible {
         The subclass provides the view controller button and UI behavior by overriding the following methods.
         */
         class VerificationViewController : ORKVerificationStepViewController {
-            override func changeEmailButtonTapped() {
-                let alertTitle = NSLocalizedString("Wrong email address?", comment: "")
-                let alertMessage = NSLocalizedString("Button tapped", comment: "")
-                let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-            
             override func resendEmailButtonTapped() {
                 let alertTitle = NSLocalizedString("Resend Verification Email", comment: "")
                 let alertMessage = NSLocalizedString("Button tapped", comment: "")
@@ -1061,20 +1053,9 @@ enum TaskListRow: Int, CustomStringConvertible {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
-            
-            override func continueButtonTapped() {
-                self.goForward();
-            }
-            
-            override func emailAddress() -> String! {
-                let registrationStepResult = self.taskViewController?.result.resultForIdentifier(String(Identifier.RegistrationStep)) as? ORKStepResult
-                let emailQuestionResult = registrationStepResult?.resultForIdentifier(ORKRegistrationFormItemIdentifierEmail) as? ORKTextQuestionResult
-                return emailQuestionResult?.textAnswer;
-            }
         }
         
-        let verificationTitle = NSLocalizedString("Email Verification", comment: "")
-        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), title: verificationTitle, text: exampleDetailText, verificationViewControllerClass: VerificationViewController.self)
+        let verificationStep = ORKVerificationStep(identifier: String(Identifier.VerificationStep), text: exampleDetailText, verificationViewControllerClass: VerificationViewController.self)
         
         return ORKOrderedTask(identifier: String(Identifier.AccountCreationTask), steps: [
             registrationStep,
