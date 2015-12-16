@@ -349,7 +349,7 @@ NSNumberFormatterStyle ORKNumberFormattingStyleConvert(ORKNumberFormattingStyle 
     return [[ORKTextAnswerFormat alloc] initWithMaximumLength:maximumLength];
 }
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex invalidMessage:(NSString *)invalidMessage {
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSRegularExpression *)validationRegex invalidMessage:(NSString *)invalidMessage {
     return [[ORKTextAnswerFormat alloc] initWithValidationRegex:validationRegex invalidMessage:invalidMessage];
 }
 
@@ -1862,9 +1862,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 #pragma mark - ORKTextAnswerFormat
 
-@implementation ORKTextAnswerFormat {
-    NSRegularExpression *_cachedRegEx;
-}
+@implementation ORKTextAnswerFormat
 
 - (Class)questionResultClass {
     return [ORKTextQuestionResult class];
@@ -1915,16 +1913,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
                                        reason:@"Both regex and invalid message properties must be set."
                                      userInfo:nil];
     }
-    
-    NSError *error;
-    if (self.validationRegex && ![[NSRegularExpression alloc] initWithPattern:self.validationRegex
-                                                                      options:NSRegularExpressionCaseInsensitive
-                                                                        error:&error]) {
-        @throw [NSException exceptionWithName:NSInvalidArgumentException
-                                       reason:@"Validation regex is not valid."
-                                     userInfo:error.userInfo];
-    }
-
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone {
@@ -1964,12 +1952,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (BOOL)isTextRegexValidWithString:(NSString *)text {
     BOOL isValid = YES;
     if (self.validationRegex) {
-        if (!_cachedRegEx) {
-            NSString *regExPattern = self.validationRegex;
-            _cachedRegEx = [[NSRegularExpression alloc] initWithPattern:regExPattern options:NSRegularExpressionCaseInsensitive error:nil];
-        }
-
-        NSUInteger regExMatches = [_cachedRegEx numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
+        NSUInteger regExMatches = [self.validationRegex numberOfMatchesInString:text options:0 range:NSMakeRange(0, [text length])];
         isValid = (regExMatches != 0);
     }
     return isValid;
@@ -1996,7 +1979,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         _multipleLines = YES;
         ORK_DECODE_INTEGER(aDecoder, maximumLength);
-        ORK_DECODE_OBJ_CLASS(aDecoder, validationRegex, NSString);
+        ORK_DECODE_REGEX(aDecoder, validationRegex);
         ORK_DECODE_OBJ_CLASS(aDecoder, invalidMessage, NSString);
         ORK_DECODE_ENUM(aDecoder, autocapitalizationType);
         ORK_DECODE_ENUM(aDecoder, autocorrectionType);
@@ -2011,7 +1994,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
     ORK_ENCODE_INTEGER(aCoder, maximumLength);
-    ORK_ENCODE_OBJ(aCoder, validationRegex);
+    ORK_ENCODE_REGEX(aCoder, validationRegex);
     ORK_ENCODE_OBJ(aCoder, invalidMessage);
     ORK_ENCODE_ENUM(aCoder, autocapitalizationType);
     ORK_ENCODE_ENUM(aCoder, autocorrectionType);
@@ -2056,7 +2039,11 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 - (ORKAnswerFormat *)impliedAnswerFormat {
     if (!_impliedAnswerFormat) {
-        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegex:EmailValidationRegex invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
+        NSRegularExpression * emailRegex = [[NSRegularExpression alloc] initWithPattern:EmailValidationRegex
+                                                                                options:NSRegularExpressionCaseInsensitive
+                                                                                  error:nil];
+        _impliedAnswerFormat = [ORKTextAnswerFormat textAnswerFormatWithValidationRegex:emailRegex
+                                                                         invalidMessage:ORKLocalizedString(@"INVALID_EMAIL_ALERT_MESSAGE", nil)];
         _impliedAnswerFormat.keyboardType = UIKeyboardTypeEmailAddress;
         _impliedAnswerFormat.multipleLines = NO;
         _impliedAnswerFormat.spellCheckingType = UITextSpellCheckingTypeNo;

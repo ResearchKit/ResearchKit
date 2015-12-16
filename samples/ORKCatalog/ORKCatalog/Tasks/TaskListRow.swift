@@ -851,9 +851,9 @@ enum TaskListRow: Int, CustomStringConvertible {
         let stepEmail = ORKQuestionStep(identifier: String(Identifier.ValidatedTextQuestionStepEmail), title: NSLocalizedString("Email", comment: ""), answer: answerFormatEmail)
         stepEmail.text = exampleDetailText
         
-        let domainRegex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-        
-        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationRegex(domainRegex, invalidMessage:"Invalid URL: %@")
+        let domainRegexPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let domainRegularExpression = try? NSRegularExpression(pattern: domainRegexPattern, options: .CaseInsensitive)
+        let answerFormatDomain = ORKAnswerFormat.textAnswerFormatWithValidationRegex(domainRegularExpression!, invalidMessage:"Invalid URL: %@")
         answerFormatDomain.multipleLines = false
         answerFormatDomain.keyboardType = UIKeyboardType.URL
         answerFormatDomain.autocapitalizationType = UITextAutocapitalizationType.None
@@ -1027,7 +1027,8 @@ enum TaskListRow: Int, CustomStringConvertible {
         If you wish to include any of the additional fields, then you can specify it through the `options` parameter.
         */
         let registrationTitle = NSLocalizedString("Registration", comment: "")
-        let passcodeValidationRegex = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationPattern = "^(?=.*\\d).{4,8}$"
+        let passcodeValidationRegex = try? NSRegularExpression(pattern: passcodeValidationPattern, options: .CaseInsensitive);
         let passcodeInvalidMessage = NSLocalizedString("A valid password must be 4 and 8 digits long and include at least one numeric character.", comment: "")
         let registrationOptions: ORKRegistrationStepOption = [.IncludeGivenName, .IncludeFamilyName, .IncludeGender, .IncludeDOB]
         let registrationStep = ORKRegistrationStep(identifier: String(Identifier.RegistrationStep), title: registrationTitle, text: exampleDetailText, passcodeValidationRegex: passcodeValidationRegex, passcodeInvalidMessage: passcodeInvalidMessage, options: registrationOptions)

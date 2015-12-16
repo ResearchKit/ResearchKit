@@ -94,7 +94,7 @@ ORK_CLASS_AVAILABLE
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(nullable NSString *)title
                               text:(nullable NSString *)text
-           passcodeValidationRegex:(nullable NSString *)passcodeValidationRegex
+           passcodeValidationRegex:(nullable NSRegularExpression *)passcodeValidationRegex
             passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options;
 
@@ -128,7 +128,7 @@ ORK_CLASS_AVAILABLE
  The passcode invalid message property must also be set along with this property.
  By default, there is no validation on the passcode.
  */
-@property (nonatomic, copy, nullable) NSString *passcodeValidationRegex;
+@property (nonatomic, copy, nullable) NSRegularExpression *passcodeValidationRegex;
 
 /**
  The invalid message displayed if the passcode does not match the validation regex.

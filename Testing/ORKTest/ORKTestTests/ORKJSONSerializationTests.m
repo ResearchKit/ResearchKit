@@ -423,6 +423,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
                             [instance setValue:[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian] forKey:p.propertyName];
                         } else if (p.propertyClass == [ORKLocation class]) {
                             [instance setValue:[[ORKLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(2.0, 3.0) region:[[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(2.0, 3.0) radius:100.0 identifier:@"identifier"] userInput:@"addressString" addressDictionary:@{@"city":@"city", @"street":@"street"}] forKey:p.propertyName];
+                        }else if (p.propertyClass == [NSRegularExpression class]) {
+                             [instance setValue:[[NSRegularExpression alloc] initWithPattern:@"abc" options:NSRegularExpressionCaseInsensitive error:nil] forKey:p.propertyName];
                         } else {
                             id itemInstance = [self instanceForClass:p.propertyClass];
                             [instance setValue:itemInstance forKey:p.propertyName];
@@ -534,6 +536,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
     } else if (equality && (p.propertyClass == [UIImage class])) {
         // do nothing - meaningless for the equality check
         return NO;
+    } else if (p.propertyClass == [NSRegularExpression class]) {
+        [instance setValue:[[NSRegularExpression alloc] initWithPattern:index? @"abc" : @"cde" options:NSRegularExpressionCaseInsensitive error:nil] forKey:p.propertyName];
     } else {
         id instanceForChild = [self instanceForClass:p.propertyClass];
         [instance setValue:instanceForChild forKey:p.propertyName];

@@ -134,6 +134,9 @@
 #define ORK_DECODE_COORDINATE(d,x)  _ ## x = CLLocationCoordinate2DMake([d decodeDoubleForKey:@STRINGIFY(x.latitude)],[d decodeDoubleForKey:@STRINGIFY(x.longitude)])
 #define ORK_ENCODE_COORDINATE(c,x)  [c encodeDouble:_ ## x.latitude forKey:@STRINGIFY(x.latitude)];[c encodeDouble:_ ## x.longitude forKey:@STRINGIFY(x.longitude)];
 
+#define ORK_DECODE_REGEX(d,x)  { if ([d decodeObjectForKey:@STRINGIFY(x.pattern)]) { _ ## x = [[NSRegularExpression alloc] initWithPattern:[d decodeObjectForKey:@STRINGIFY(x.pattern)] options:[d decodeIntegerForKey:@STRINGIFY(x.options)] error:nil]; } }
+#define ORK_ENCODE_REGEX(c,x)  [c encodeObject:_ ## x.pattern forKey:@STRINGIFY(x.pattern)];[c encodeInteger:_ ## x.options forKey:@STRINGIFY(x.options)];
+
 /*
  * Helpers for completions which call the block only if non-nil
  *

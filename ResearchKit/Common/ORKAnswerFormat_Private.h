@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithMaximumLength:(NSInteger)maximumLength NS_UNAVAILABLE;
 
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+- (instancetype)initWithValidationRegex:(NSRegularExpression *)validationRegex
                          invalidMessage:(NSString *)invalidMessage NS_UNAVAILABLE;
 
 /**

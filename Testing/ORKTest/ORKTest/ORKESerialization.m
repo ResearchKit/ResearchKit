@@ -118,6 +118,21 @@ static CLLocationCoordinate2D coordinateFromDictionary(NSDictionary *dict) {
     return (CLLocationCoordinate2D){.latitude = ((NSNumber *)dict[@"latitude"]).doubleValue, .longitude = ((NSNumber *)dict[@"longitude"]).doubleValue };
 }
 
+static NSDictionary *dictionaryFromRegularExpression (NSRegularExpression *regex) {
+    if (regex.pattern) {
+        return @{ @"pattern" : regex.pattern, @"options" : @(regex.options) };
+    }
+    return @{};
+}
+
+static NSRegularExpression *regularExpressionFromDictionary(NSDictionary *dict) {
+    NSRegularExpression *regex;
+    if (dict[@"pattern"]) {
+        regex = [[NSRegularExpression alloc] initWithPattern:dict[@"pattern"] options: ((NSNumber *)dict[@"options"]).unsignedIntegerValue error:nil];
+    }
+    return regex;
+}
+
 static ORKNumericAnswerStyle ORKNumericAnswerStyleFromString(NSString *s) {
     return tableMapReverse(s, ORKNumericAnswerStyleTable());
 }
@@ -863,7 +878,9 @@ ret =
         },
         (@{
           PROPERTY(maximumLength, NSNumber, NSObject, NO, nil, nil),
-          PROPERTY(validationRegex, NSString, NSObject, YES, nil, nil),
+          PROPERTY(validationRegex, NSRegularExpression, NSObject, YES,
+                   ^id(id regex) { return dictionaryFromRegularExpression(regex); },
+                   ^id(id dict) { return regularExpressionFromDictionary(dict); }),
           PROPERTY(invalidMessage, NSString, NSObject, YES, nil, nil),
           PROPERTY(autocapitalizationType, NSNumber, NSObject, YES, nil, nil),
           PROPERTY(autocorrectionType, NSNumber, NSObject, YES, nil, nil),

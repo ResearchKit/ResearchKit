@@ -247,7 +247,7 @@ ORK_CLASS_AVAILABLE
 
 + (ORKTextAnswerFormat *)textAnswerFormatWithMaximumLength:(NSInteger)maximumLength;
 
-+ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSString *)validationRegex
++ (ORKTextAnswerFormat *)textAnswerFormatWithValidationRegex:(NSRegularExpression *)validationRegex
                                               invalidMessage:(NSString *)invalidMessage;
 
 + (ORKEmailAnswerFormat *)emailAnswerFormat;
@@ -1182,7 +1182,7 @@ ORK_CLASS_AVAILABLE
  
  @return An initialized validated text answer format.
  */
-- (instancetype)initWithValidationRegex:(NSString *)validationRegex
+- (instancetype)initWithValidationRegex:(NSRegularExpression *)validationRegex
                          invalidMessage:(NSString *)invalidMessage NS_DESIGNATED_INITIALIZER;
 
 /**
@@ -1202,7 +1202,7 @@ ORK_CLASS_AVAILABLE
  
  The default value is nil. If set to nil, no validation will be performed.
  */
-@property (nonatomic, copy, nullable) NSString *validationRegex;
+@property (nonatomic, copy, nullable) NSRegularExpression *validationRegex;
 
 /**
  The text presented to the user when invalid input is received.

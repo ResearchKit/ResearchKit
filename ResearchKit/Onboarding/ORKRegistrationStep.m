@@ -184,7 +184,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
 - (instancetype)initWithIdentifier:(NSString *)identifier
                              title:(NSString *)title
                               text:(NSString *)text
-           passcodeValidationRegex:(NSString *)passcodeValidationRegex
+           passcodeValidationRegex:(NSRegularExpression *)passcodeValidationRegex
             passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
                            options:(ORKRegistrationStepOption)options {
     self = [super initWithIdentifier:identifier title:title text:text];
@@ -251,7 +251,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     return [super formItems];
 }
 
-- (NSString *)passcodeValidationRegex {
+- (NSRegularExpression *)passcodeValidationRegex {
     return [self passwordAnswerFormat].validationRegex;
 }
 
@@ -259,7 +259,7 @@ static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOptio
     return [self passwordAnswerFormat].invalidMessage;
 }
 
-- (void)setPasscodeValidationRegex:(NSString *)passcodeValidationRegex {
+- (void)setPasscodeValidationRegex:(NSRegularExpression *)passcodeValidationRegex {
     [self passwordAnswerFormat].validationRegex = passcodeValidationRegex;
 }
 
