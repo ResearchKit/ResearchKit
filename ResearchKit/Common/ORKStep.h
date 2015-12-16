@@ -85,7 +85,7 @@ ORK_CLASS_AVAILABLE
 /**
  Returns a copy of this step initialized with the specified identifier.
  
- @param identifier   The unique identifier of the step.
+ @param identifier   The unique identifier for the new step to be returned.
  
  @return A new step.
  */
