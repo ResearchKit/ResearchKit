@@ -105,32 +105,4 @@
     }
 }
 
-#pragma mark - Accessibility
-
-- (BOOL)isAccessibilityElement {
-    return YES;
-}
-
-- (NSString *)accessibilityLabel {
-    if (_progressView) {
-        if (!_percentFormatter) {
-            _percentFormatter = [[NSNumberFormatter alloc] init];
-            _percentFormatter.numberStyle = NSNumberFormatterPercentStyle;
-        }
-        return ORKAccessibilityStringForVariables(_progressView.accessibilityLabel,
-                                                  [_percentFormatter stringFromNumber:[NSNumber numberWithFloat:_progressView.progress]]);
-    } else if (_activityIndicatorView) {
-        return ORKAccessibilityStringForVariables(_activityIndicatorView.accessibilityLabel);
-    }
-    return nil;
-}
-
-- (UIAccessibilityTraits)accessibilityTraits {
-    if (_progressView) {
-        return [super accessibilityTraits] | UIAccessibilityTraitUpdatesFrequently;
-    } else {
-        return [super accessibilityTraits];
-    }
-}
-
 @end
