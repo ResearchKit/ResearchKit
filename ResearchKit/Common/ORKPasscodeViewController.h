@@ -96,8 +96,8 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode authentication view controller.
  */
-+ (id)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
-                                          delegate:(id<ORKPasscodeDelegate>)delegate;
++ (instancetype)passcodeAuthenticationViewControllerWithText:(nullable NSString *)text
+                                                    delegate:(id<ORKPasscodeDelegate>)delegate;
 
 /**
  An editing passcode view controller allows a user to be authenticated using
@@ -116,9 +116,9 @@ ORK_CLASS_AVAILABLE
  
  @return A passcode editing view controller.
  */
-+ (id)passcodeEditingViewControllerWithText:(nullable NSString *)text
-                                   delegate:(id<ORKPasscodeDelegate>)delegate
-                               passcodeType:(ORKPasscodeType)passcodeType;
++ (instancetype)passcodeEditingViewControllerWithText:(nullable NSString *)text
+                                             delegate:(id<ORKPasscodeDelegate>)delegate
+                                         passcodeType:(ORKPasscodeType)passcodeType;
 /**
  Returns 'YES' if a passcode is stored in the keychain, otherwise 'NO'.
  */
