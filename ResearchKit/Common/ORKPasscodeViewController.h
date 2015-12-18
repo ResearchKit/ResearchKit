@@ -129,6 +129,17 @@ ORK_CLASS_AVAILABLE
  */
 + (BOOL)removePasscodeFromKeychain;
 
+/**
+ This method allows to force the passcode to be a certain value. You only want to use this capability when you're moving your existing users
+ from a custom passcode entry mechanism to the one provided by ResearchKit.
+ 
+ This method will raise an exception if `passcode` is nil.
+ 
+ @param passcode          The passcode to store
+ @param touchIdEnabled    Whether TouchId will be available during passcode entry
+ */
++ (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled;
+
 @end
 
 NS_ASSUME_NONNULL_END

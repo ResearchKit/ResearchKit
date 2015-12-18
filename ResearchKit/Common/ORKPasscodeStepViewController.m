@@ -35,6 +35,7 @@
 #import "ORKPasscodeStepView.h"
 #import "ORKPasscodeStep.h"
 #import "ORKKeychainWrapper.h"
+#import "ORKHelpers.h"
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <LocalAuthentication/LocalAuthentication.h>
@@ -347,13 +348,18 @@
 }
 
 - (void)savePasscodeToKeychain {
+    [[self class] savePasscode:_passcode withTouchIdEnabled:_isTouchIdAuthenticated];
+    _isPasscodeSaved = YES;     // otherwise an exception would have been thrown
+}
+
++ (void)savePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
+    ORKThrowInvalidArgumentExceptionIfNil(passcode)
     NSDictionary *dictionary = @{
-                                 KeychainDictionaryPasscodeKey : [_passcode copy],
-                                 KeychainDictionaryTouchIdKey : @(_isTouchIdAuthenticated)
+                                 KeychainDictionaryPasscodeKey : [passcode copy],
+                                 KeychainDictionaryTouchIdKey : @(touchIdEnabled)
                                  };
     NSError *error;
-    _isPasscodeSaved = [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
-    
+    [ORKKeychainWrapper setObject:dictionary forKey:PasscodeKey error:&error];
     if (error) {
         @throw [NSException exceptionWithName:NSGenericException reason:error.localizedDescription userInfo:nil];
     }

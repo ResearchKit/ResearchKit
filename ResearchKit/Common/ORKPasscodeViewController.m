@@ -91,4 +91,9 @@
     return [ORKKeychainWrapper removeObjectForKey:PasscodeKey error:nil];
 }
 
++ (void)forcePasscode:(NSString *)passcode withTouchIdEnabled:(BOOL)touchIdEnabled {
+    ORKThrowInvalidArgumentExceptionIfNil(passcode)
+    [ORKPasscodeStepViewController savePasscode:passcode withTouchIdEnabled:touchIdEnabled];
+}
+
 @end
