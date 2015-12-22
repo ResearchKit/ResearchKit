@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Virheellinen sähköpostiosoite: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Syötä osoite";
+"LOCATION_ERROR_TITLE" = "Määritettyä osoitetta ei löydy";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nykyistä sijaintiasi ei voida määrittää. Kirjoita osoite tai, jos mahdollista, siirry paikkaan, jossa GPS-signaali on parempi.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Sijaintipalveluiden käyttö on kielletty. Anna Asetuksissa tälle ohjelmalle oikeus käyttää Sijaintipalveluita.";
+"LOCATION_ERROR_GEOCODE" = "Syötetyllä osoitteella ei löydy tuloksia. Varmista, että osoite on oikein.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Joko et ole yhteydessä internetiin tai olet ylittänyt osoitehakupyyntöjen enimmäismäärän. Jos et ole yhteydessä internetiin, laita Wi-Fi päälle vastataksesi tähän kysymykseen, ohita tämä kysymys (jos ohituspainike on käytettävissä), tai palaa kyselyyn, kun olet internet-yhteydessä. Muussa tapauksessa yritä muutaman minuutin päästä uudelleen.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstisisältö ylittää maksimipituuden: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ei ole käytettävissä jaetulla näytöllä.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Sähköposti";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Salasana";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Syötä salasana";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Vahvista";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Syötä salasana uudelleen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Salasanat eivät täsmää.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Lisätietoja";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Sukupuoli";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Valitse sukupuoli";
+"DOB_FORM_ITEM_TITLE" = "Syntymäaika";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Valitse päiväys";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Vahvistus";
+"VERIFICATION_STEP_TITLE" = "Vahvista sähköpostisi";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Napauta alla olevaa linkkiä, jos et saanut vahvistussähköpostia ja haluat, että se lähetetään uudelleen.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Lähetä uusi vahvistussähköposti";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Kirjaudu sisään";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Unohditko salasanan?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Syötä pääsykoodi";
+"PASSCODE_CONFIRM_MESSAGE" = "Vahvista pääsykoodi";
+"PASSCODE_SAVED_MESSAGE" = "Pääsykoodi tallennettu";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Pääsykoodi todennettu";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Syötä vanha pääsykoodi";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Syötä uusi pääsykoodi";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Vahvista uusi pääsykoodi";
+"PASSCODE_INVALID_ALERT_TITLE" = "Virheellinen pääsykoodi";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Pääsykoodit eivät täsmää. Yritä uudelleen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Tunnistaudu Touch ID:llä";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID -virhe";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Vain numerot ovat sallittuja.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Pääsykoodin syötön edistymisen osoitin";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ merkkiä yhteensä %@ merkistä syötetty";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Avainnipun kohdetta ei voitu lisätä.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Avainnipun kohdetta ei voitu päivittää.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Avainnipun kohdetta ei voitu poistaa.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Avainnipun kohdetta ei löydy.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Hyväksy";
 "BUTTON_CANCEL" = "Kumoa";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Tyhjennä";
 "BUTTON_DISAGREE" = "Hylkää";
 "BUTTON_DONE" = "Valmis";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Napauta";
 "TOTAL_TAPS_LABEL" = "Napautuksia yhteensä";
 "TAPPING_INSTRUCTION" = "Napauta painikkeita niin nopeasti kuin pystyt kahdella sormella.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ääni";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Käänny ympäri ja kävele takaisin alkupisteeseen.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Kun se on tehty, napauta Valmis.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Ei dataa";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Lisää tämä uusi numero edelliseen.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ reiän palikkatesti";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tämä aktiviteetti mittaa yläraajojen toimintaa pyytämällä sinua asettamaan palikan reikään. Tämä toistetaan %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Sekä vasen että oikea käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Sekä oikea että vasen käsi testataan.\nSinun on poimittava palikka mahdollisimman nopeasti, asetettava se reikään, ja tehtyäsi tämän %@ kertaa, poistettava se jälleen %@ kertaa.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Aloita napauttamalla Aloita-painiketta.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Laita palikka reikään vasemmalla kädellä.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Laita palikka reikään oikealla kädellä.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Laita palikka viivan taakse vasemmalla kädellä.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Laita palikka viivan taakse oikealla kädellä.";
+"HOLE_PEG_TEST_TEXT" = "Poimi palikka kahdella sormella.";
+"HOLE_PEG_TEST_TEXT_2" = "Pudota palikka nostamalla sormia.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tiedostoa ei voitu luoda";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Ei voitu poistaa riittävästi lokitiedostoja raja-arvon saavuttamiseksi.";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Useita virheitä poistettaessa lokeja";
 "ERROR_RECORDER_NO_DATA" = "Kerättyjä tietoja ei löytynyt.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ei määritettyä tulostehakemistoa";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ei dataa";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Takaisin";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Alue välillä %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " ja ";
+"AX_GRAPH_POINT_%@" = "Piste: %@";

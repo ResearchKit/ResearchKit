@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Endereço de e-mail inválido: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Digite um endereço";
+"LOCATION_ERROR_TITLE" = "Não Foi Possível Encontrar o Endereço Especificado";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Não foi possível determinar sua localização atual. Digite um endereço ou vá para um local com melhor sinal GPS, se aplicável.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "O acesso aos Serviços de Localização foi negado. Permita que este aplicativo use os Serviços de Localização nos Ajustes.";
+"LOCATION_ERROR_GEOCODE" = "Não foi possível encontrar um resultado para o endereço inserido. Certifique-se de que o endereço é válido.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Você não esta conectado à Internet ou o número máximo de solicitações de busca de endereço foi atingido. Se você não está conectado à Internet, ative a conexão Wi-Fi para responder a esta pergunta, pule esta pergunta se houver um botão que permita esta ação ou volte para a busca quando estiver conectado à Internet. Caso contrário, tente novamente em alguns minutos.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conteúdo de texto excedendo duração máxima: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "A câmera não está disponível na tela dividia.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jaime@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Senha";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Digite a senha";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Digite a senha novamente";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "As senhas não coincidem.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informações Adicionais";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jaime";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Silveira";
+"GENDER_FORM_ITEM_TITLE" = "Sexo";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Escolha um sexo";
+"DOB_FORM_ITEM_TITLE" = "Data de Nascimento";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Escolha uma data";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificação";
+"VERIFICATION_STEP_TITLE" = "Verifique seu E-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Caso não tenha recebido um e-mail de verificação e gostaria que ele fosse enviado novamente, toque no link abaixo.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar e-mail de verificação";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Início de Sessão";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Esqueceu a senha?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Digite o código";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
+"PASSCODE_SAVED_MESSAGE" = "Código salvo";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Código autenticado";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Digite o seu código anterior";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Digite seu novo código";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme o seu novo código";
+"PASSCODE_INVALID_ALERT_TITLE" = "Código Incorreto";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Os códigos não coincidem. Tente de novo.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Realize a autenticação com Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Erro do Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Apenas caracteres numéricos são permitidos.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progresso de inserção de código";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Você digitou %@ de %@ dígitos";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Não foi possível adicionar a chave.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Não foi possível atualizar a chave.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Não foi possível apagar a chave.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Não foi possível encontrar a chave.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Concordar";
 "BUTTON_CANCEL" = "Cancelar";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Limpar";
 "BUTTON_DISAGREE" = "Discordar";
 "BUTTON_DONE" = "OK";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Toque";
 "TOTAL_TAPS_LABEL" = "Total de Toques";
 "TAPPING_INSTRUCTION" = "Toque nos botões o mais rápido que conseguir usando dois dedos.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Vire-se e volte para o local onde você começou.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Toque em OK ao concluir.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Nenhum Dado";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "TASAM";
 "PVSAT_TITLE" = "TASVM";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Adicione esse novo dígito ao anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Teste dos %@ Pinos nos Buracos";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta atividade determinará a capacidade das suas extremidades superiores solicitando que você coloque um círculo em um buraco. Você precisará fazer isso %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tanto a sua mão direita como a esquerda serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tanto a sua mão direita como a esquerda serão testadas.\nVocê deve pegar o círculo o mais rapidamente possível, colocá-lo no buraco e, após repetir %@ vezes, removê-lo novamente %@ vezes.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Toque em Iniciar para começar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Coloque o círculo no buraco com sua mão esquerda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Coloque o círculo no buraco com sua mão direita.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Coloque o círculo atrás da linha com sua mão esquerda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Coloque o círculo atrás da linha com sua mão direita.";
+"HOLE_PEG_TEST_TEXT" = "Pegue o círculo usando dois dedos.";
+"HOLE_PEG_TEST_TEXT_2" = "Tire o dedo da tela para largar o círculo.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Não foi possível criar o arquivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Não foi possível remover arquivos de registro suficientes para alcançar o limite";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Múltiplos erros ao remover os registros";
 "ERROR_RECORDER_NO_DATA" = "Nenhum dado coletado foi encontrado.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Um diretório de saída não foi especificado";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nenhum Dado";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Voltar";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Varia entre %@ e %@";
 "AX_GRAPH_AND_SEPARATOR" = " e ";
+"AX_GRAPH_POINT_%@" = "Ponto: %@";

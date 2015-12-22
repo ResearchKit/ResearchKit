@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Μη έγκυρη διεύθυνση email: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Εισαγάγετε διεύθυνση";
+"LOCATION_ERROR_TITLE" = "Δεν βρέθηκε η καθορισμένη διεύθυνση";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Δεν είναι δυνατή η επίλυση της τρέχουσας τοποθεσίας σας. Πληκτρολογήστε μια διεύθυνση ή μετακινηθείτε σε μια τοποθεσία με καλύτερο σήμα GPS, αν είναι δυνατόν.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Δεν επιτράπηκε η πρόσβαση στις υπηρεσίες τοποθεσίας. Παραχωρήστε άδεια σε αυτήν την εφαρμογή για χρήση των υπηρεσιών τοποθεσίας μέσω των Ρυθμίσεων.";
+"LOCATION_ERROR_GEOCODE" = "Δεν είναι δυνατή η εύρεση αποτελέσματος για την εισηγμένη διεύθυνση. Βεβαιωθείτε ότι η διεύθυνση είναι έγκυρη.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Είτε δεν είστε συνδεδεμένοι στο Διαδίκτυο είτε έχετε υπερβεί το μέγιστο πλήθος αιτήσεων αναζήτησης διευθύνσεων. Αν δεν είστε συνδεδεμένοι στο Διαδίκτυο, ενεργοποιήστε το Wi-Fi για να απαντήσετε σε αυτήν την ερώτηση, παραλείψτε την ερώτηση αν είναι διαθέσιμο το κουμπί παράλειψης, ή επιστρέψτε στο ερωτηματολόγιο όταν συνδεθείτε στο Διαδίκτυο. Διαφορετικά, δοκιμάστε ξανά σε λίγα λεπτά.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Το περιεχόμενο κειμένου υπερβαίνει το επιτρεπόμενο όριο χαρακτήρων: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Η κάμερα δεν διατίθεται στην Προβολή διαίρεσης.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "gmilosporos@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Συνθηματικό";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε συνθηματικό";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Επιβεβαίωση";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Εισαγάγετε πάλι το συνθηματικό";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Τα συνθηματικά δεν ταιριάζουν.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Πρόσθετες πληροφορίες";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Γιάννης";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Μηλοσπόρος";
+"GENDER_FORM_ITEM_TITLE" = "Φύλο";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε φύλο";
+"DOB_FORM_ITEM_TITLE" = "Ημερομηνία γέννησης";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Επιλέξτε ημερομηνία";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Επαλήθευση";
+"VERIFICATION_STEP_TITLE" = "Επαληθεύστε το email σας";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Αν δεν έχετε λάβει email επαλήθευσης, αγγίξτε τον παρακάτω σύνδεσμο για να σταλεί ξανά.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Εκ νέου αποστολή email επιβεβαίωσης";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Είσοδος";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ξεχάσατε το συνθηματικό;";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Εισαγάγετε συνθηματικό";
+"PASSCODE_CONFIRM_MESSAGE" = "Επιβεβαίωση συνθηματικού";
+"PASSCODE_SAVED_MESSAGE" = "Το συνθηματικό αποθηκεύτηκε";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Έγινε έλεγχος ταυτότητας συνθηματικού";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Εισαγάγετε το παλιό συνθηματικό";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Εισαγάγετε το νέο συνθηματικό";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Επιβεβαίωση νέου συνθηματικού";
+"PASSCODE_INVALID_ALERT_TITLE" = "Λανθασμένο συνθηματικό";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Ασυμφωνία συνθηματικών. Δοκιμάστε ξανά.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Πραγματοποιήστε έλεγχο ταυτότητας με Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Σφάλμα Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Επιτρέπονται μόνο αριθμητικοί χαρακτήρες.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Ένδειξη προόδου εισαγωγής συνθηματικού";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Εισάχθηκαν %@ από %@ ψηφία";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Δεν ήταν δυνατή η προσθήκη στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η ενημέρωση στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Δεν ήταν δυνατή η διαγραφή στοιχείου της Κλειδοθήκης.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Δεν ήταν δυνατή η εύρεση στοιχείου της Κλειδοθήκης.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Συμφωνώ";
 "BUTTON_CANCEL" = "Ακύρωση";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Εκκαθάριση";
 "BUTTON_DISAGREE" = "Διαφωνώ";
 "BUTTON_DONE" = "Τέλος";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Αγγίξτε";
 "TOTAL_TAPS_LABEL" = "Συνολικά αγγίγματα";
 "TAPPING_INSTRUCTION" = "Αγγίξτε τα κουμπιά όσο πιο γρήγορα μπορείτε χρησιμοποιώντας δύο δάχτυλα.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Φωνή";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Γυρίστε πίσω και περπατήστε μέχρι το σημείο όπου αρχίσατε.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Αγγίξτε «Τέλος» όταν τελειώσετε.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Προσθέστε αυτό το νέο ψηφίο στο προηγούμενο ψηφίο.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Δοκιμή %@-HPT";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Η δραστηριότητα αυτή μετρά την επιδεξιότητα των άνω άκρων σας ζητώντας σας να τοποθετήσετε έναν κύκλο σε μια τρύπα. Αυτό θα σας ζητηθεί να το κάνετε %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το αριστερό και το δεξί χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Θα δοκιμαστούν και το δεξί και το αριστερό χέρι σας.\nΠρέπει να σηκώσετε τον κύκλο όσο το δυνατόν πιο γρήγορα, να τον τοποθετήσετε στην τρύπα και μόλις το κάνετε %@ φορές, να τον αφαιρέσετε πάλι %@ φορές.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Αγγίξτε «Έναρξη» για να αρχίσετε.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο στην τρύπα με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το αριστερό χέρι σας.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Τοποθετήστε τον κύκλο πίσω από τη γραμμή με το δεξί χέρι σας.";
+"HOLE_PEG_TEST_TEXT" = "Σηκώστε τoν κύκλο με δύο δάχτυλα.";
+"HOLE_PEG_TEST_TEXT_2" = "Σηκώστε τα δάχτυλα για να αφήσετε τον κύκλο.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Δεν ήταν δυνατή η δημιουργία αρχείου";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Δεν ήταν δυνατή η αφαίρεση επαρκών αρχείων καταγραφής για την επίτευξη ορίου";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Πολλαπλά σφάλματα κατά την αφαίρεση αρχείων καταγραφής";
 "ERROR_RECORDER_NO_DATA" = "Δεν βρέθηκαν συλλεγμένα δεδομένα.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Δεν έχει καθοριστεί κατάλογος εξόδου";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Δεν υπάρχουν δεδομένα";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Πίσω";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Εύρος από %@ έως %@";
 "AX_GRAPH_AND_SEPARATOR" = " και ";
+"AX_GRAPH_POINT_%@" = "Σημείο: %@";

@@ -83,7 +83,7 @@ static NSDictionary *dictionaryFromCGPoint(CGPoint p) {
 }
 
 static NSDictionary *dictionaryFromCGSize(CGSize s) {
-    return @{ @"h" : @(s.width), @"w" : @(s.width) };
+    return @{ @"h" : @(s.height), @"w" : @(s.width) };
 }
 
 static NSDictionary *dictionaryFromCGRect(CGRect r) {
@@ -670,7 +670,7 @@ ret =
            })),
    ENTRY(ORKVerificationStep,
          ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) title:GETPROP(dict, title) text:GETPROP(dict, text) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
+             return [[ORKVerificationStep alloc] initWithIdentifier:GETPROP(dict, identifier) text:GETPROP(dict, text) verificationViewControllerClass:NSClassFromString(GETPROP(dict, verificationViewControllerString))];
          },
          (@{
             PROPERTY(verificationViewControllerString, NSString, NSObject, NO, nil, nil)
@@ -896,12 +896,6 @@ ret =
   ENTRY(ORKBooleanAnswerFormat,
         ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
             return [[ORKBooleanAnswerFormat alloc] init];
-        },
-        (@{
-          })),
-  ENTRY(ORKEligibilityAnswerFormat,
-        ^id(NSDictionary *dict, ORKESerializationPropertyGetter getter) {
-            return [[ORKEligibilityAnswerFormat alloc] init];
         },
         (@{
           })),

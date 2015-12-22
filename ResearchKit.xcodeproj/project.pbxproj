@@ -77,10 +77,6 @@
 		2441034F1B966D4C00EEAB0C /* ORKPasscodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		244103501B966D4C00EEAB0C /* ORKPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */; };
 		244EFAD21BCEFD83001850D9 /* ORKAnswerFormat_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		246D15D81BA3438A009C99FC /* ORKEligibilitySelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */; };
-		246D15D91BA3438A009C99FC /* ORKEligibilitySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */; };
-		246D15E21BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */; };
-		246D15E31BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 246D15E11BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m */; };
 		24850E191BCDA9C7006E91FB /* ORKLoginStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 24850E171BCDA9C7006E91FB /* ORKLoginStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24850E1A1BCDA9C7006E91FB /* ORKLoginStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24850E181BCDA9C7006E91FB /* ORKLoginStepViewController.m */; };
 		248604061B4C98760010C8A0 /* ORKAnswerFormatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */; };
@@ -491,7 +487,7 @@
 		CA8D0E931BC4360F00BED0F7 /* ORKWaitStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8D0E911BC4360F00BED0F7 /* ORKWaitStepView.m */; };
 		CB16A6F01BB0D0960043CDD8 /* ORKWaitStep.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EC1BB0D0960043CDD8 /* ORKWaitStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB16A6F11BB0D0960043CDD8 /* ORKWaitStep.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6ED1BB0D0960043CDD8 /* ORKWaitStep.m */; };
-		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		CB16A6F21BB0D0960043CDD8 /* ORKWaitStepViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB16A6EE1BB0D0960043CDD8 /* ORKWaitStepViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB16A6F31BB0D0960043CDD8 /* ORKWaitStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB16A6EF1BB0D0960043CDD8 /* ORKWaitStepViewController.m */; };
 		CBD34A561BB1FB9000F204EA /* ORKLocationSelectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = CBD34A541BB1FB9000F204EA /* ORKLocationSelectionView.h */; };
 		CBD34A571BB1FB9000F204EA /* ORKLocationSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD34A551BB1FB9000F204EA /* ORKLocationSelectionView.m */; };
@@ -587,10 +583,6 @@
 		2441034D1B966D4C00EEAB0C /* ORKPasscodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKPasscodeViewController.h; sourceTree = "<group>"; };
 		2441034E1B966D4C00EEAB0C /* ORKPasscodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKPasscodeViewController.m; sourceTree = "<group>"; };
 		244EFAD11BCEFD83001850D9 /* ORKAnswerFormat_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKAnswerFormat_Private.h; sourceTree = "<group>"; };
-		246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKEligibilitySelectionView.h; sourceTree = "<group>"; };
-		246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKEligibilitySelectionView.m; sourceTree = "<group>"; };
-		246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKSurveyAnswerCellForEligibility.h; sourceTree = "<group>"; };
-		246D15E11BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKSurveyAnswerCellForEligibility.m; sourceTree = "<group>"; };
 		24850E171BCDA9C7006E91FB /* ORKLoginStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ORKLoginStepViewController.h; path = Onboarding/ORKLoginStepViewController.h; sourceTree = "<group>"; };
 		24850E181BCDA9C7006E91FB /* ORKLoginStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ORKLoginStepViewController.m; path = Onboarding/ORKLoginStepViewController.m; sourceTree = "<group>"; };
 		248604051B4C98760010C8A0 /* ORKAnswerFormatTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAnswerFormatTests.m; sourceTree = "<group>"; };
@@ -1737,8 +1729,6 @@
 				86C40BCE1A8D7C5C00081FAC /* ORKSurveyAnswerCellForText.m */,
 				865EA16A1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.h */,
 				865EA16B1ABA1BE20037C68E /* ORKSurveyAnswerCellForPicker.m */,
-				246D15E01BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h */,
-				246D15E11BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m */,
 				CBD34A581BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.h */,
 				CBD34A591BB207FC00F204EA /* ORKSurveyAnswerCellForLocation.m */,
 			);
@@ -1768,8 +1758,6 @@
 				865EA1611AB8DF750037C68E /* ORKDateTimePicker.m */,
 				865EA1661ABA1AA10037C68E /* ORKPicker.h */,
 				865EA1671ABA1AA10037C68E /* ORKPicker.m */,
-				246D15D61BA3438A009C99FC /* ORKEligibilitySelectionView.h */,
-				246D15D71BA3438A009C99FC /* ORKEligibilitySelectionView.m */,
 			);
 			name = "Control Views";
 			sourceTree = "<group>";
@@ -2467,7 +2455,6 @@
 				86C40C5E1A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.h in Headers */,
 				BCB6E66C1B7D537B000D5B34 /* ORKRangedPoint.h in Headers */,
 				86C40D2C1A8D7C5C00081FAC /* ORKHeadlineLabel.h in Headers */,
-				246D15E21BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.h in Headers */,
 				86C40D1C1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.h in Headers */,
 				86C40CBC1A8D7C5C00081FAC /* UITouch+ORKJSONDictionary.h in Headers */,
 				241A2E871B94FD8800ED3B39 /* ORKPasscodeStepViewController_Internal.h in Headers */,
@@ -2485,7 +2472,6 @@
 				106FF2A21B665B86004EACF2 /* ORKHolePegTestPlaceStepViewController.h in Headers */,
 				24A4DA101B8D0F21009C797A /* ORKPasscodeStepView.h in Headers */,
 				86C40C9A1A8D7C5C00081FAC /* ORKDataLogger_Private.h in Headers */,
-				246D15D81BA3438A009C99FC /* ORKEligibilitySelectionView.h in Headers */,
 				861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */,
 				86C40C461A8D7C5C00081FAC /* ORKSpatialSpanMemoryStepViewController.h in Headers */,
 				86C40C521A8D7C5C00081FAC /* ORKTappingIntervalStep.h in Headers */,
@@ -2770,12 +2756,10 @@
 				250F94051B4C5A6600FA23EB /* ORKTowerOfHanoiStep.m in Sources */,
 				86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */,
 				BCD192E81B81243900FCC08A /* ORKPieChartLegendView.m in Sources */,
-				246D15D91BA3438A009C99FC /* ORKEligibilitySelectionView.m in Sources */,
 				86C40D1E1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.m in Sources */,
 				250F94091B4C5AA400FA23EB /* ORKTowerOfHanoiStepViewController.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
-				246D15E31BA4EE49009C99FC /* ORKSurveyAnswerCellForEligibility.m in Sources */,
 				86C40C601A8D7C5C00081FAC /* ORKWalkingTaskStepViewController.m in Sources */,
 				BCD192E01B81240400FCC08A /* ORKPieChartPieView.m in Sources */,
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
