@@ -398,11 +398,13 @@ static const UIEdgeInsets paddingGuess = (UIEdgeInsets){.left = 6, .right=6};
 
 - (NSString *)accessibilityValue {
     if (self.text.length > 0) {
-        return ORKAccessibilityStringForVariables(self.text, _unitWithNumber);
+        return ORKAccessibilityStringForVariables([super accessibilityValue], _unitWithNumber);
     }
-    
-    NSString *placeholder = _managedPlaceholder ?: self.placeholder;
-    return ORKAccessibilityStringForVariables(placeholder, _unitWithNumber);
+    else if ( _managedPlaceholder ) {
+        return ORKAccessibilityStringForVariables(_managedPlaceholder, _unitWithNumber);
+    }
+
+    return [super accessibilityValue];
 }
 
 @end

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Alamat email tidak sah: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
+"LOCATION_ERROR_TITLE" = "Tidak Dapat Menemukan Alamat yang Ditetapkan";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menemukan lokasi Anda saat ini. Ketikkan alamat atau pindah ke lokasi dengan sinyal GPS yang lebih baik jika memungkinkan.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Akses ke layanan lokasi telah ditolak. Izinkan app ini untuk menggunakan layanan lokasi melalui Pengaturan.";
+"LOCATION_ERROR_GEOCODE" = "Tidak dapat menemukan hasil untuk alamat yang dimasukkan. Pastikan bahwa alamat sah.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Anda tidak terhubung ke internet atau telah melampaui jumlah maksimum permintaan pencarian alamat. Jika Anda tidak terhubung ke internet, nyalakan Wi-Fi untuk menjawab pertanyaan ini, lewati pertanyaan ini jika tombol lewati tersedia, atau kembali ke survey setelah Anda terhubung ke internet. Jika tidak, coba lagi dalam beberapa menit.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Konten teks melebihi panjang maksimum: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera tidak tersedia dalam layar terpisah.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Kata Sandi";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata sandi";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Konfirmasi";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata sandi lagi";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Kata sandi tidak cocok.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informasi Tambahan";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Jenis Kelamin";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pilih jenis kelamin";
+"DOB_FORM_ITEM_TITLE" = "Tanggal Lahir";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tanggal";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifikasi";
+"VERIFICATION_STEP_TITLE" = "Verifikasi Email Anda";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ketuk tautan di bawah jika Anda tidak menerima email verifikasi dan ingin email dikirimkan lagi.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Kirim Ulang Email Verifikasi";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Masuk";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Lupa kata sandi?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Masukkan kode sandi";
+"PASSCODE_CONFIRM_MESSAGE" = "Konfirmasi kode sandi";
+"PASSCODE_SAVED_MESSAGE" = "Kode sandi disimpan";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kode sandi disahkan";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang lama";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Masukkan kode sandi Anda yang baru";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Konfirmasi kode sandi baru Anda";
+"PASSCODE_INVALID_ALERT_TITLE" = "Kode Sandi Salah";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kode sandi tidak cocok. Coba lagi.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Sahkan dengan Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Kesalahan Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya karakter numerik yang diizinkan.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikator kemajuan entri kode sandi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ dari %@ digit dimasukkan";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Tidak dapat menambah item Rantai Kunci.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Tidak dapat memperbarui item Rantai Kunci.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Tidak dapat menghapus item Rantai Kunci.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Tidak dapat menemukan item Rantai Kunci.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Setuju";
 "BUTTON_CANCEL" = "Batalkan";
+"BUTTON_OK" = "OKE";
 "BUTTON_CLEAR" = "Bersihkan";
 "BUTTON_DISAGREE" = "Tidak Setuju";
 "BUTTON_DONE" = "Selesai";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Ketuk";
 "TOTAL_TAPS_LABEL" = "Total Ketukan";
 "TAPPING_INSTRUCTION" = "Ketuk tombol secepat Anda bisa menggunakan dua jari.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Suara";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Putar balik, dan kembali ke tempat Anda memulai.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Ketuk Selesai setelah selesai.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Tidak Ada Data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Tambahkan digit baru ini ke digit sebelumnya.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Uji Sumbat %@ Lubang";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktivitas ini mengukur fungsi bagian teratas dengan meminta Anda untuk meletakkan sumbat di lubang. Anda akan diminta untuk melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri Anda akan diuji.\nAnda harus mengambil sumbat secepat mungkin, memasukkannya ke lubang, dan setelah selesai %@ kali, pindahkan lagi %@ kali.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketuk Mulai untuk memulai.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di lubang menggunakan tangan kanan Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kiri Anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Letakkan sumbat di belakang garis menggunakan tangan kanan Anda.";
+"HOLE_PEG_TEST_TEXT" = "Ambil sumbat dengan dua jari.";
+"HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan sumbat.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat membuat file";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat menghapus cukup file log untuk mencapai ambang";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Beberapa kesalahan saat menghapus log";
 "ERROR_RECORDER_NO_DATA" = "Tidak ada data terkumpul yang ditemukan.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Tidak ada direktori output yang ditentukan";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Tidak Ada Data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Kembali";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Berkisar dari %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
+"AX_GRAPH_POINT_%@" = "Poin: %@";

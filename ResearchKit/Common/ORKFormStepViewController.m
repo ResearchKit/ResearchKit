@@ -158,7 +158,7 @@
         
         _textChoiceCellGroup = [[ORKTextChoiceCellGroup alloc] initWithTextChoiceAnswerFormat:textChoiceAnswerFormat
                                                                                        answer:nil
-                                                                           beginningIndexPath:[NSIndexPath indexPathForRow:1 inSection:_index]
+                                                                           beginningIndexPath:[NSIndexPath indexPathForRow:0 inSection:_index]
                                                                           immediateNavigation:NO];
         
         [textChoiceAnswerFormat.textChoices enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -198,7 +198,7 @@
 
 @interface ORKFormSectionHeaderView : UIView
 
-- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView;
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView firstSection:(BOOL)firstSection;
 
 @property (nonatomic, strong) NSLayoutConstraint *leftMarginConstraint;
 
@@ -208,13 +208,14 @@
 
 @implementation ORKFormSectionHeaderView {
     ORKFormSectionTitleLabel *_label;
+    BOOL _firstSection;
 }
 
-- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView {
+- (instancetype)initWithTitle:(NSString *)title tableView:(UITableView *)tableView firstSection:(BOOL)firstSection {
     self = [super init];
     if (self) {
         _tableView = tableView;
-        
+        _firstSection = firstSection;
         self.backgroundColor = [UIColor whiteColor];
         
         _label = [ORKFormSectionTitleLabel new];
@@ -222,7 +223,6 @@
         _label.numberOfLines = 0;
         _label.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_label];
-        
         [self setUpConstraints];
     }
     return self;
@@ -230,8 +230,9 @@
 
 - (void)setUpConstraints {
     
-    const CGFloat LabelFirstBaselineToTop = 20.0;
+    const CGFloat LabelFirstBaselineToTop = _firstSection ? 20.0 : 40.0;
     const CGFloat LabelLastBaselineToBottom = -10.0;
+    const CGFloat LabelRightMargin = -4.0;
     
     NSMutableArray *constraints = [NSMutableArray new];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
@@ -259,6 +260,14 @@
                                                         attribute:NSLayoutAttributeBottom
                                                        multiplier:1.0
                                                          constant:LabelLastBaselineToBottom]];
+    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_label
+                                                        attribute:NSLayoutAttributeRight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self
+                                                        attribute:NSLayoutAttributeRight
+                                                       multiplier:1.0
+                                                         constant:LabelRightMargin]];
     
     [NSLayoutConstraint activateConstraints:constraints];
 }
@@ -367,12 +376,9 @@
     
     for (ORKFormItemCell *cell in [_tableView visibleCells]) {
         NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
-        if ([self isSeparatorRow:indexPath]) {
-            continue;
-        }
         
         ORKTableSection *section = _sections[indexPath.section];
-        ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
+        ORKTableCellItem *cellItem = [section items][indexPath.row];
         ORKFormItem *formItem = cellItem.formItem;
         if ([cell isKindOfClass:[ORKChoiceViewCell class]]) {
             id answer = _savedAnswers[formItem.identifier];
@@ -716,22 +722,13 @@
 
 #pragma mark UITableViewDataSource
 
-- (BOOL)isLastSection:(NSUInteger)section {
-    return (section == (_sections.count - 1));
-}
-
-- (BOOL)isSeparatorRow:(NSIndexPath *)indexPath {
-    return (indexPath.row == 0||
-            (indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1) && _sections.count > 1));
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _sections.count;
 }
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
     ORKTableSection *sectionObject = (ORKTableSection *)_sections[section];
-    return sectionObject.items.count+(_sections.count == 1?1:2);
+    return sectionObject.items.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -739,111 +736,100 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = @"_ork.separator";
-    if (![self isSeparatorRow:indexPath]) {
-        identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
-    }
+    NSString *identifier = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
-        if ([self isSeparatorRow:indexPath]) {
-            // seperator
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
+        ORKTableCellItem *cellItem = [section items][indexPath.row];
+        ORKFormItem *formItem = cellItem.formItem;
+        id answer = _savedAnswers[formItem.identifier];
+        
+        if (section.textChoiceCellGroup) {
+            [section.textChoiceCellGroup setAnswer:answer];
+            cell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
         } else {
-            ORKTableSection *section = (ORKTableSection *)_sections[indexPath.section];
-            ORKTableCellItem *cellItem = [section items][indexPath.row - 1];
-            ORKFormItem *formItem = cellItem.formItem;
-            id answer = _savedAnswers[formItem.identifier];
             
-            if (section.textChoiceCellGroup) {
-                [section.textChoiceCellGroup setAnswer:answer];
-                cell = [section.textChoiceCellGroup cellAtIndexPath:indexPath withReuseIdentifier:identifier];
-            } else {
-                ORKAnswerFormat *answerFormat = [cellItem.formItem impliedAnswerFormat];
-                ORKQuestionType type = answerFormat.questionType;
-                
-               
-                Class class = nil;
-                switch (type) {
-                    case ORKQuestionTypeSingleChoice:
-                    case ORKQuestionTypeMultipleChoice: {
-                        if ([formItem.impliedAnswerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
-                            class = [ORKFormItemImageSelectionCell class];
-                        } else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
-                            class = [ORKFormItemPickerCell class];
-                        }
-                        break;
-                    }
-                        
-                    case ORKQuestionTypeDateAndTime:
-                    case ORKQuestionTypeDate:
-                    case ORKQuestionTypeTimeOfDay:
-                    case ORKQuestionTypeTimeInterval: {
+            ORKAnswerFormat *answerFormat = [cellItem.formItem impliedAnswerFormat];
+            ORKQuestionType type = answerFormat.questionType;
+            
+            
+            Class class = nil;
+            switch (type) {
+                case ORKQuestionTypeSingleChoice:
+                case ORKQuestionTypeMultipleChoice: {
+                    if ([formItem.impliedAnswerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
+                        class = [ORKFormItemImageSelectionCell class];
+                    } else if ([formItem.impliedAnswerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
                         class = [ORKFormItemPickerCell class];
-                        break;
                     }
-                        
-                    case ORKQuestionTypeDecimal:
-                    case ORKQuestionTypeInteger: {
-                        class = [ORKFormItemNumericCell class];
-                        break;
-                    }
-                        
-                    case ORKQuestionTypeText: {
-                        if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
-                            class = [ORKFormItemConfirmTextCell class];
-                        } else {
-                            ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
-                            if (!textFormat.multipleLines) {
-                                class = [ORKFormItemTextFieldCell class];
-                            } else {
-                                class = [ORKFormItemTextCell class];
-                            }
-                        }
-                        break;
-                    }
-                        
-                    case ORKQuestionTypeScale: {
-                        class = [ORKFormItemScaleCell class];
-                        break;
-                    }
-                        
-                    case ORKQuestionTypeEligibility: {
-                        class = [ORKFormItemEligibilityCell class];
-                        break;
-                    }
-                        
-                    case ORKQuestionTypeLocation: {
-                        class = [ORKFormItemLocationCell class];
-                        break;
-                    }
-                        
-                    default:
-                        NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
-                        break;
+                    break;
                 }
-                
-                if (class) {
-                    if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
-                        NSAssert(NO, @"SHOULD NOT FALL IN HERE");
+                    
+                case ORKQuestionTypeDateAndTime:
+                case ORKQuestionTypeDate:
+                case ORKQuestionTypeTimeOfDay:
+                case ORKQuestionTypeTimeInterval: {
+                    class = [ORKFormItemPickerCell class];
+                    break;
+                }
+                    
+                case ORKQuestionTypeDecimal:
+                case ORKQuestionTypeInteger: {
+                    class = [ORKFormItemNumericCell class];
+                    break;
+                }
+                    
+                case ORKQuestionTypeText: {
+                    if ([formItem.answerFormat isKindOfClass:[ORKConfirmTextAnswerFormat class]]) {
+                        class = [ORKFormItemConfirmTextCell class];
                     } else {
-                        ORKFormItemCell *formCell = nil;
-                        formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth delegate:self];
-                        [_formItemCells addObject:formCell];
-                        [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
-                        formCell.selectionStyle = UITableViewCellSelectionStyleNone;
-                        formCell.defaultAnswer = _savedDefaults[formItem.identifier];
-                        if (!_savedAnswers) {
-                            _savedAnswers = [NSMutableDictionary new];
+                        ORKTextAnswerFormat *textFormat = (ORKTextAnswerFormat *)answerFormat;
+                        if (!textFormat.multipleLines) {
+                            class = [ORKFormItemTextFieldCell class];
+                        } else {
+                            class = [ORKFormItemTextCell class];
                         }
-                        formCell.savedAnswers = _savedAnswers;
-                        cell = formCell;
                     }
+                    break;
+                }
+                    
+                case ORKQuestionTypeScale: {
+                    class = [ORKFormItemScaleCell class];
+                    break;
+                }
+                    
+                case ORKQuestionTypeLocation: {
+                    class = [ORKFormItemLocationCell class];
+                    break;
+                }
+                    
+                default:
+                    NSAssert(NO, @"SHOULD NOT FALL IN HERE %@ %@", @(type), answerFormat);
+                    break;
+            }
+            
+            if (class) {
+                if ([class isSubclassOfClass:[ORKChoiceViewCell class]]) {
+                    NSAssert(NO, @"SHOULD NOT FALL IN HERE");
+                } else {
+                    ORKFormItemCell *formCell = nil;
+                    formCell = [[class alloc] initWithReuseIdentifier:identifier formItem:formItem answer:answer maxLabelWidth:section.maxLabelWidth delegate:self];
+                    [_formItemCells addObject:formCell];
+                    [formCell setExpectedLayoutWidth:self.tableView.bounds.size.width];
+                    formCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    formCell.defaultAnswer = _savedDefaults[formItem.identifier];
+                    if (!_savedAnswers) {
+                        _savedAnswers = [NSMutableDictionary new];
+                    }
+                    formCell.savedAnswers = _savedAnswers;
+                    cell = formCell;
                 }
             }
         }
     }
+    
     return cell;
 }
 
@@ -870,13 +856,10 @@
 #pragma mark UITableViewDelegate
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ([self isSeparatorRow:indexPath] == NO);
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self isSeparatorRow:indexPath]) {
-        return;
-    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
@@ -888,7 +871,7 @@
         [tableView endEditing:NO];
         
         ORKTableSection *section = _sections[indexPath.section];
-        ORKTableCellItem *cellItem = section.items[indexPath.row - 1];
+        ORKTableCellItem *cellItem = section.items[indexPath.row];
         [section.textChoiceCellGroup didSelectCellAtIndexPath:indexPath];
         
         id answer = (cellItem.formItem.questionType == ORKQuestionTypeBoolean)? [section.textChoiceCellGroup answerForBoolean] : [section.textChoiceCellGroup answer];
@@ -907,15 +890,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Seperator line
-    if ([self isSeparatorRow:indexPath]) {
-        if (indexPath.row == 0) {
-            return 1.0 / [UIScreen mainScreen].scale;
-        } else {
-            return 40.0;
-        }
-    } else if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
-        ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row - 1]);
+
+    if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ORKChoiceViewCell class]]) {
+        ORKTableCellItem *cellItem = ([_sections[indexPath.section] items][indexPath.row]);
         return [ORKChoiceViewCell suggestedCellHeightForShortText:cellItem.choice.text LongText:cellItem.choice.detailText inTableView:_tableView];
     }
     return UITableViewAutomaticDimension;
@@ -923,7 +900,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     NSString *title = _sections[section].title;
-    return (title.length > 0)? UITableViewAutomaticDimension : 0;
+    // Make first section header view zero height when there is no title
+    return (title.length > 0)? UITableViewAutomaticDimension : (section == 0)? 0 : UITableViewAutomaticDimension;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -931,27 +909,14 @@
     
     ORKFormSectionHeaderView *view = (ORKFormSectionHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:@(section).stringValue];
     
-    if (title.length > 0) {
-        
-        if (view == nil) {
-            view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView];
+    if (view == nil) {
+        // Do not create a header view if first section header has no title
+        if (title.length > 0 || section > 0) {
+            view = [[ORKFormSectionHeaderView alloc] initWithTitle:title tableView:tableView firstSection:(section == 0)];
         }
-        
-    } else {
-        view = nil;
     }
-   
-    
+
     return view;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if ([self isSeparatorRow:indexPath] &&
-        indexPath.row == ([self numberOfRowsInSection:indexPath.section] - 1)) {
-        // Hide separator row completely (setting separator inset does nothing at all)
-        cell.hidden = YES;
-    }
 }
 
 #pragma mark ORKFormItemCellDelegate

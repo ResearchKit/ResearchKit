@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Nieprawidłowy adres email: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Podaj adres";
+"LOCATION_ERROR_TITLE" = "Nie można było znaleźć określonego adresu";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Nie można określić Twojego bieżącego położenia. Podaj adres lub przenieś się w miejsce z lepszym sygnałem GPS.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Nastąpiła odmowa dostępu do usług lokalizacji. Przejdź do Ustawień i pozwól temu programowi używać usług lokalizacji.";
+"LOCATION_ERROR_GEOCODE" = "Nie można znaleźć wyniku dla podanego adresu. Upewnij się, że adres jest prawidłowy.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nie masz połączenia z Internetem lub przekroczona została maksymalna liczba żądań wyszukiwania adresu. Jeśli nie masz połączenia z Internetem, włącz sieć Wi-Fi, aby odpowiedzieć na to pytanie, pomiń pytanie (jeśli dostępny jest przycisk pomijania) lub powróć do ankiety po nawiązaniu połączenia z Internetem. W przeciwnym przypadku spróbuj ponownie za kilka minut.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Przekroczony limit długości tekstu: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera niedostępna na ekranie podzielonym.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Email";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jjablonka@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Hasło";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Podaj hasło";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potwierdź";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Powtórz hasło";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Hasła są niezgodne.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informacje dodatkowe";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Jabłonka";
+"GENDER_FORM_ITEM_TITLE" = "Płeć";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Wybierz płeć";
+"DOB_FORM_ITEM_TITLE" = "Data urodzenia";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Wybierz datę";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Weryfikacja";
+"VERIFICATION_STEP_TITLE" = "Zweryfikuj adres email";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Jeśli email weryfikacji nie dotarł na Twoje konto, stuknij w łącze poniżej, aby wysłać go ponownie.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Wyślij ponownie email z weryfikacją";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Logowanie";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Nie pamiętasz hasła?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Podaj kod";
+"PASSCODE_CONFIRM_MESSAGE" = "Potwierdź kod";
+"PASSCODE_SAVED_MESSAGE" = "Kod został zachowany";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kod został uwierzytelniony";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Podaj stary kod";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Podaj nowy kod";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potwierdź nowy kod";
+"PASSCODE_INVALID_ALERT_TITLE" = "Nieprawidłowy kod";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Niezgodne kody. Spróbuj ponownie.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Uwierzytelnij przy użyciu Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Błąd Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Dozwolone są tylko znaki numeryczne.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Wskaźnik postępu podawania kodu";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Liczba wprowadzonych cyfr: %@ z %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nie można było dodać rzeczy pęku kluczy.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nie można było uaktualnić rzeczy pęku kluczy.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nie można było usunąć rzeczy pęku kluczy.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nie można było znaleźć rzeczy pęku kluczy.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Akceptuję";
 "BUTTON_CANCEL" = "Anuluj";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Wymaż";
 "BUTTON_DISAGREE" = "Nie akceptuję";
 "BUTTON_DONE" = "Gotowe";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Stuknij";
 "TOTAL_TAPS_LABEL" = "Liczba stuknięć";
 "TAPPING_INSTRUCTION" = "Stukaj w przyciski dwoma palcami jak najszybciej potrafisz.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Głos";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Odwróć się i przejdź do miejsca startu.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Gdy skończysz, stuknij w Gotowe.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Brak danych";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Dodaj tę nową cyfrę do poprzedniej.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Test %@-HPT (otwory i kołki)";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "To ćwiczenie mierzy sprawność kończyn górnych: umieszczasz „kołek” (pełne kółko) w „otworze” (puste kółko). (Do wykonania %@ razy).";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Test obejmuje zarówno lewą, jak i prawą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Test obejmuje zarówno prawą, jak i lewą rękę.\nMusisz jak najszybciej podnieść „kołek” i umieścić go w „otworze”. Gdy wykonasz to %@ razy, wyjmij go również %@ razy.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Aby rozpocząć, stuknij w Start.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” w „otworze”, używając lewej ręki.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” w „otworze”, używając prawej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umieść „kołek” za linią, używając lewej ręki.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umieść „kołek” za linią, używając prawej ręki.";
+"HOLE_PEG_TEST_TEXT" = "Podnieś „kołek” dwoma palcami.";
+"HOLE_PEG_TEST_TEXT_2" = "Unieś palce, aby upuścić „kołek”.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Nie można było utworzyć pliku";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nie można było usunąć liczby plików dzienników pozwalającej na osiągnięcie progu";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Wiele błędów usuwania dzienników";
 "ERROR_RECORDER_NO_DATA" = "Nie znaleziono zgromadzonych danych.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nie wskazano katalogu wyjściowego";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Brak danych";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Wróć";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Zakres %@–%@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

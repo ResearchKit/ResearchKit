@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Хибна адреса е-пошти: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Введіть адресу";
+"LOCATION_ERROR_TITLE" = "Не вдалося знайти вказану адресу";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Не вдається відстежити ваше поточне місце. Введіть адресу або перейдіть у місце з кращим сигналом GPS, якщо це можливо.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "У доступі до Служби локації відмовлено. Надайте цій програмі дозвіл на використання Служби локації у Параметрах.";
+"LOCATION_ERROR_GEOCODE" = "Не вдається знайти збіги для введеної адреси. Перевірте правильність адреси.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ви або не підключені до Інтернету, або перевищили ліміт запитів пошуку адреси. Якщо ви не підключені до Інтернету, увімкніть Wi-Fi, щоб відповісти на це питання, пропустити це питання, якщо кнопка пропуску доступна, або повертайтесь до опитування, коли підключитесь до Інтернету. У іншому випадку повторіть спробу через кілька хвилин.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Текстовий вміст перевищує ліміт: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "На розділеному екрані Камера недоступна.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Е-пошта";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "syabluchko@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Пароль";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Підтвердити";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Введіть пароль ще раз";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Паролі не збігаються.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Додаткова інформація";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Степан";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Яблучко";
+"GENDER_FORM_ITEM_TITLE" = "Стать";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Виберіть стать";
+"DOB_FORM_ITEM_TITLE" = "Дата народження";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Виберіть дату";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Перевірка";
+"VERIFICATION_STEP_TITLE" = "Перевірка е-пошти";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Торкніть наведене нижче посилання, якщо ви не отримали лист перевірки і хочете, щоб його надіслали повторно.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Надіслати лист перевірки ще раз";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Ім’я";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Забули пароль?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Введіть код допуску";
+"PASSCODE_CONFIRM_MESSAGE" = "Підтвердьте код";
+"PASSCODE_SAVED_MESSAGE" = "Код допуску збережено";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Код допуску прийнято";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Введіть старий код допуску";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Введіть новий код допуску";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Підтвердіть свій новий код";
+"PASSCODE_INVALID_ALERT_TITLE" = "Неправильний код допуску";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Незбіг кодів. Спробуйте ще раз.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Будь ласка, засвідчіть своїм Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Помилка Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Дозволено тільки цифри.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Індикатор перебігу вводу коду допуску";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Введено: %@ із %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Не вдалося додати елемент до В'язки.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Не вдалося оновити елемент В'язки.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Не вдалося видалити елемент із В'язки.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Не вдалося знайти елемент В'язки.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A(II)+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Погоджуюсь";
 "BUTTON_CANCEL" = "Скасувати";
+"BUTTON_OK" = "ОК";
 "BUTTON_CLEAR" = "Очистити";
 "BUTTON_DISAGREE" = "Не погоджуюсь";
 "BUTTON_DONE" = "Готово";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Торкнути";
 "TOTAL_TAPS_LABEL" = "Всього дотиків";
 "TAPPING_INSTRUCTION" = "Торкайте кнопки якомога швидше двома пальцями.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Голос";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Розверніться і йдіть туди, де ви почали.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Завершивши, торкніть «Готово».";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Немає даних";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "СТСЗТ";
 "PVSAT_TITLE" = "ВТСЗТ";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Додайте це нове число до попереднього.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Кілковий тест на %@ отворів";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Цей тест оцінює функцію ваших верхніх кінцівок, коли вам потрібно покласти кілок в отвір. Вас попросять зробити це %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Буде перевірено вашу ліву і праву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Буде перевірено вашу праву і ліву руку.\nВам потрібно взяти кілок якомога швидше, покласти його в отвір, і зробивши це %@ разів, заберіть його %@ разів.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Торкніть «Розпочати», щоб почати.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок в отвір лівою рукою.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок в отвір правою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Покладіть кілок за лінію лівою рукою.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Покладіть кілок за лінію правою рукою.";
+"HOLE_PEG_TEST_TEXT" = "Візьміть кілок двома пальцями.";
+"HOLE_PEG_TEST_TEXT_2" = "Підніміть пальці, щоб опустити кілок.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Не вдалося створити файл";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Не вдалося вилучити достатньо файлів журналів, щоб досягти порогу";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Кілька помилок під час вилучення журналів";
 "ERROR_RECORDER_NO_DATA" = "Не знайдено жодних зібраних даних.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Не задано вихідний каталог";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Немає даних";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Назад";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Діапазон від %@ до %@";
 "AX_GRAPH_AND_SEPARATOR" = " і ";
+"AX_GRAPH_POINT_%@" = "Точка: %@";

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Dirección de correo electrónico no válida: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Introduce una dirección";
+"LOCATION_ERROR_TITLE" = "No se ha encontrado la dirección especificada";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No se ha podido determinar su ubicación actual. Escriba una dirección o diríjase a una ubicación donde la señal GPS sea mejor.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Se ha denegado el acceso a los servicios de localización. Vaya a Ajustes para conceder a esta app permiso para utilizar los servicios de localización.";
+"LOCATION_ERROR_GEOCODE" = "No se ha encontrado ningún resultado para la dirección introducida. Asegúrate de que la dirección es válida.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "O bien no estás conectado a Internet o bien has excedido el número máximo de búsquedas de direcciones. Si no estás conectado a Internet, activa la conexión Wi-Fi para responder a esta pregunta, omítela si el botón de omisión está disponible, o vuelve al estudio cuando dispongas de conexión a Internet. Si no es posible, inténtalo de nuevo dentro de unos minutos.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El texto supera la longitud máxima: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Cámara no disponible en pantalla dividida.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Correo electrónico";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "juan@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Contraseña";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduce la contraseña";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduce de nuevo la contraseña";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Las contraseñas no coinciden.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Información adicional";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Juan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "López";
+"GENDER_FORM_ITEM_TITLE" = "Sexo";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona tu sexo";
+"DOB_FORM_ITEM_TITLE" = "Fecha de nacimiento";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una fecha";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificación";
+"VERIFICATION_STEP_TITLE" = "Verifica tu correo electrónico";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pulsa en el enlace siguiente si no has recibido un mensaje de correo de verificación y quieres que se te vuelva a enviar.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correo de verificación";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Iniciar sesión";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "¿Ha olvidado su contraseña?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Introduce el código";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
+"PASSCODE_SAVED_MESSAGE" = "Código guardado";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Autenticado por código";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Introduce el código antiguo";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Introduce el código nuevo";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme el nuevo código";
+"PASSCODE_INVALID_ALERT_TITLE" = "Código incorrecto";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Inténtalo de nuevo.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentíquese con Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Solo se admiten caracteres numéricos.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progreso de introducción de código";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígitos introducidos";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "No se ha podido añadir el ítem del llavero.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "No se ha podido actualizar el ítem del llavero.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "No se ha podido eliminar el ítem del llavero.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "No se ha podido encontrar el ítem del llavero.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Acepto";
 "BUTTON_CANCEL" = "Cancelar";
+"BUTTON_OK" = "Aceptar";
 "BUTTON_CLEAR" = "Borrar";
 "BUTTON_DISAGREE" = "No acepto";
 "BUTTON_DONE" = "OK";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Pulsar";
 "TOTAL_TAPS_LABEL" = "N.º total de pulsaciones";
 "TAPPING_INSTRUCTION" = "Pulsa los botones lo más rápido que puedas utilizando dos dedos.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voz";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Da la vuelta y camina hasta el punto de partida.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Pulsa OK cuando hayas acabado.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "No hay datos";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Suma este otro dígito al anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Prueba de las %@ clavijas";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Esta actividad mide la capacidad funcional de tus extremidades superiores, para lo cual se te pedirá que introduzcas una clavija en un orificio %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano izquierda como con la derecha.\nHay que introducir la clavija lo más rápido posible en el orificio y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "La prueba debe realizarse tanto con la mano derecha como con la izquierda.\nHay que introducir la clavija lo más rápido posible en el orificio y, una vez que lo hayas hecho %@ veces, volver a extraerla %@ veces.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Pulsa Empezar para comenzar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Introduce la clavija en el orificio con la mano izquierda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Introduce la clavija en el orificio con la mano derecha.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Coloca la clavija detrás de la línea con la mano izquierda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Coloca la clavija detrás de la línea con la mano derecha.";
+"HOLE_PEG_TEST_TEXT" = "Coge la clavija con dos dedos.";
+"HOLE_PEG_TEST_TEXT_2" = "Levanta los dedos para soltar la clavija.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No se ha podido crear el archivo";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No se han podido eliminar los archivos de registro suficientes para alcanzar el umbral";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Varios errores al eliminar los registros";
 "ERROR_RECORDER_NO_DATA" = "No se han encontrado datos recopilados.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No se ha especificado ningún directorio de salida";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "No hay datos";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Atrás";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Rango de valores de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " y ";
+"AX_GRAPH_POINT_%@" = "Punto: %@";
