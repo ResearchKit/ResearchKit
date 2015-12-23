@@ -83,10 +83,20 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     
     UIView *_seperator1;
     UIView *_seperator2;
+    UIView *_seperator3;
 }
 
 + (CGFloat)textFieldHeight {
     return ORKGetMetricForWindow(ORKScreenMetricTableCellDefaultHeight, nil);
+}
+
++ (CGFloat)textFieldBottomMargin {
+    static CGFloat textFieldBottomMargin = 0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        textFieldBottomMargin = 1.0/[UIScreen mainScreen].scale;
+    });
+    return textFieldBottomMargin;
 }
 
 - (instancetype)initWithFormMode:(BOOL)formMode
@@ -96,7 +106,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     
     
     if (NO == formMode) {
-        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + LocationSelectionViewTextFieldVerticalMargin + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
+        self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window))];
     } else {
         self = [super initWithFrame:CGRectMake(0.0, 0.0, 200.0, [self.class textFieldHeight])];
     }
@@ -124,8 +134,11 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
             _seperator1.backgroundColor = [UIColor ork_midGrayTintColor];
             _seperator2 = [[UIView alloc] init];
             _seperator2.backgroundColor = [UIColor ork_midGrayTintColor];
+            _seperator3 = [[UIView alloc] init];
+            _seperator3.backgroundColor = [UIColor ork_midGrayTintColor];
             [self addSubview:_seperator1];
             [self addSubview:_seperator2];
+            [self addSubview:_seperator3];
         }
         
         [self setUpConstraints];
@@ -152,7 +165,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
         NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator1);
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_seperator1 attribute:NSLayoutAttributeTop multiplier:1.0 constant:-1.0/[UIScreen mainScreen].scale]];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator1 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_seperator1]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:seperators]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator1]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
     }
     
     if (_seperator2) {
@@ -160,7 +173,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
         NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator2);
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_seperator2 attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
         [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator2 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_seperator2]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:seperators]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator2]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
     }
     
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_textField attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
@@ -197,7 +210,7 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
 }
 
 - (CGSize)intrinsicContentSize {
-    CGFloat height = [self.class textFieldHeight] + (_mapView.superview == nil ? 0.0 : LocationSelectionViewTextFieldVerticalMargin + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
+    CGFloat height = [self.class textFieldHeight] + (_mapView.superview == nil ? 0.0 : [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window));
     return CGSizeMake(40, height);
 }
 
@@ -214,12 +227,19 @@ static const NSString *FormattedAddressLines = @"FormattedAddressLines";
     
     NSDictionary *metrics = @{@"horizontalMargin": @(_mapHorizontalMargin)};
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(horizontalMargin)-[_mapView]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:metrics views:NSDictionaryOfVariableBindings(_mapView)]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeBottom multiplier:1.0 constant:LocationSelectionViewTextFieldVerticalMargin]];
-    
-    
+    [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_textField attribute:NSLayoutAttributeBottom multiplier:1.0 constant:[ORKLocationSelectionView.class textFieldBottomMargin]]];
     
     _mapViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, self.window)];
     [constraints addObject:_mapViewHeightConstraint];
+    
+    if (_seperator3) {
+        [self bringSubviewToFront:_seperator3];
+        _seperator3.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *seperators = NSDictionaryOfVariableBindings(_seperator3);
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_mapView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_seperator3 attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+        [constraints addObject:[NSLayoutConstraint constraintWithItem:_seperator3 attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0 / [UIScreen mainScreen].scale]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_seperator3]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:seperators]];
+    }
     
     [NSLayoutConstraint activateConstraints:constraints];
     [self layoutIfNeeded];

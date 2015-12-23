@@ -173,8 +173,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
                                                    options:(ORKPredefinedTaskOption)options {
     
     NSMutableArray *steps = [NSMutableArray array];
-    NSString *dHand = (dominantHand == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil);
-    NSString *ndHand = (dominantHand == ORKBodySagittalLeft) ? ORKLocalizedString(@"HOLE_PEG_TEST_RIGHT", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_LEFT", nil);
+    BOOL dominantHandLeft = (dominantHand == ORKBodySagittalLeft);
     NSTimeInterval stepDuration = (timeLimit == 0) ? CGFLOAT_MAX : timeLimit;
     
     if (! (options & ORKPredefinedTaskOptionExcludeInstructions)) {
@@ -193,7 +192,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         {
             ORKInstructionStep *step = [[ORKInstructionStep alloc] initWithIdentifier:ORKInstruction1StepIdentifier];
             step.title = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_TITLE_%@", nil), pegs];
-            step.text = [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_%@", nil), dHand, ndHand, pegs, pegs];
+            step.text = dominantHandLeft ? [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@", nil), pegs, pegs] : [[NSString alloc] initWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@", nil), pegs, pegs];
             step.detailText = ORKLocalizedString(@"HOLE_PEG_TEST_CALL_TO_ACTION", nil);
             UIImage *image1 = [UIImage imageNamed:@"holepegtest1" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
             UIImage *image2 = [UIImage imageNamed:@"holepegtest2" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
@@ -211,7 +210,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
     {
         {
             ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestDominantPlaceStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), dHand];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
             step.movingDirection = dominantHand;
@@ -227,7 +226,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         
         {
             ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestDominantRemoveStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), dHand];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
             step.movingDirection = (dominantHand == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft;
@@ -242,7 +241,7 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         
         {
             ORKHolePegTestPlaceStep *step = [[ORKHolePegTestPlaceStep alloc] initWithIdentifier:ORKHolePegTestNonDominantPlaceStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_%@", nil), ndHand];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
             step.spokenInstruction = step.title;
             step.movingDirection = (dominantHand == ORKBodySagittalLeft) ? ORKBodySagittalRight : ORKBodySagittalLeft;
@@ -258,8 +257,9 @@ NSString * const ORKHolePegTestNonDominantRemoveStepIdentifier = @"hole.peg.test
         
         {
             ORKHolePegTestRemoveStep *step = [[ORKHolePegTestRemoveStep alloc] initWithIdentifier:ORKHolePegTestNonDominantRemoveStepIdentifier];
-            step.title = [NSString stringWithFormat:ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_%@", nil), ndHand];
+            step.title = dominantHandLeft ? ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND", nil) : ORKLocalizedString(@"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND", nil);
             step.text = ORKLocalizedString(@"HOLE_PEG_TEST_TEXT", nil);
+            step.spokenInstruction = step.title;
             step.movingDirection = dominantHand;
             step.dominantHandTested = NO;
             step.numberOfPegs = numberOfPegs;

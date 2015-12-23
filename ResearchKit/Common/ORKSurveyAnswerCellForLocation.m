@@ -58,7 +58,7 @@
 }
 
 + (CGFloat)suggestedCellHeightForView:(UIView *)view {
-    return [ORKLocationSelectionView.class textFieldHeight] + (LocationSelectionViewTextFieldVerticalMargin) + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
+    return [ORKLocationSelectionView.class textFieldHeight] + [ORKLocationSelectionView.class textFieldBottomMargin]*2 + ORKGetMetricForWindow(ORKScreenMetricLocationQuestionMapHeight, nil);
 }
 
 - (void)prepareView {

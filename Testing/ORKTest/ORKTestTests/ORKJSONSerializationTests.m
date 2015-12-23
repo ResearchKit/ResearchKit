@@ -494,7 +494,7 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
         // Serialize again, the output ought to be equal
         NSDictionary *dictionary2 = [ORKESerializer JSONObjectForObject:instance2 error:NULL];
         BOOL isMatch = [mockDictionary isEqualToDictionary:dictionary2];
-        if (! isMatch)
+        if (!isMatch)
         {
             XCTAssertTrue(isMatch, @"Should be equal for class: %@", NSStringFromClass(aClass));
         }
@@ -699,7 +699,8 @@ ORK_MAKE_TEST_INIT(ORKLocation, (^{
 
 - (void)testEquality {
     NSArray *classesExcluded = @[]; // classes not intended to be serialized standalone
-    NSMutableArray *stringsForClassesExcluded = [NSMutableArray array];
+    // Each time ORKRegistrationStep returns a new date in its answer fromat, cannot be tested.
+    NSMutableArray *stringsForClassesExcluded = [NSMutableArray arrayWithObjects:NSStringFromClass([ORKRegistrationStep class]), nil];
     for (Class c in classesExcluded) {
         [stringsForClassesExcluded addObject:NSStringFromClass(c)];
     }
