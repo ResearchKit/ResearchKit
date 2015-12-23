@@ -59,36 +59,36 @@
 }
 
 + (instancetype)passcodeAuthenticationViewControllerWithText:(NSString *)text
-													delegate:(id<ORKPasscodeDelegate>)delegate {
-	return [self passcodeViewControllerWithText:text
-									   delegate:delegate
-								   passcodeFlow:ORKPasscodeFlowAuthenticate
-								   passcodeType:0];
+                                                    delegate:(id<ORKPasscodeDelegate>)delegate {
+    return [self passcodeViewControllerWithText:text
+                                       delegate:delegate
+                                   passcodeFlow:ORKPasscodeFlowAuthenticate
+                                   passcodeType:0];
 }
 
 + (instancetype)passcodeEditingViewControllerWithText:(NSString *)text
-											 delegate:(id<ORKPasscodeDelegate>)delegate
-										 passcodeType:(ORKPasscodeType)passcodeType {
-	return [self passcodeViewControllerWithText:text
-									   delegate:delegate
-								   passcodeFlow:ORKPasscodeFlowEdit
-								   passcodeType:passcodeType];
+                                             delegate:(id<ORKPasscodeDelegate>)delegate
+                                         passcodeType:(ORKPasscodeType)passcodeType {
+    return [self passcodeViewControllerWithText:text
+                                       delegate:delegate
+                                   passcodeFlow:ORKPasscodeFlowEdit
+                                   passcodeType:passcodeType];
 }
 
 + (instancetype)passcodeViewControllerWithText:(NSString *)text
-									  delegate:(id<ORKPasscodeDelegate>)delegate
-								  passcodeFlow:(ORKPasscodeFlow)passcodeFlow
-								  passcodeType:(ORKPasscodeType)passcodeType {
-	
-	ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
-	step.passcodeType = passcodeType;
-	step.text = text;
-	
+                                      delegate:(id<ORKPasscodeDelegate>)delegate
+                                  passcodeFlow:(ORKPasscodeFlow)passcodeFlow
+                                  passcodeType:(ORKPasscodeType)passcodeType {
+    
+    ORKPasscodeStep *step = [[ORKPasscodeStep alloc] initWithIdentifier:PasscodeStepIdentifier];
+    step.passcodeType = passcodeType;
+    step.text = text;
+    
     ORKPasscodeStepViewController *passcodeStepViewController = [ORKPasscodeStepViewController new];
     passcodeStepViewController.passcodeFlow = passcodeFlow;
     passcodeStepViewController.passcodeDelegate = delegate;
     passcodeStepViewController.step = step;
-	
+    
     ORKPasscodeViewController *navigationController = [[ORKPasscodeViewController alloc] initWithRootViewController:passcodeStepViewController];
     return navigationController;
 }
