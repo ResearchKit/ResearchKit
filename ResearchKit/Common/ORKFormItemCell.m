@@ -44,7 +44,6 @@
 #import "ORKAccessibility.h"
 #import "ORKPicker.h"
 #import "ORKScaleSliderView.h"
-#import "ORKEligibilitySelectionView.h"
 #import "ORKSubheadlineLabel.h"
 #import "ORKLocationSelectionView.h"
 #import <MapKit/MapKit.h>
@@ -916,90 +915,6 @@ static const CGFloat HorizontalMargin = 15.0;
 @end
 
 
-#pragma mark - ORKFormItemEligibilityCell
-
-@interface ORKFormItemEligibilityCell () <ORKEligibilitySelectionViewDelegate>
-
-@end
-
-
-@implementation ORKFormItemEligibilityCell {
-    ORKEligibilitySelectionView *_selectionView;
-    ORKSubheadlineLabel *_questionLabel;
-}
-
-- (void)cellInit {
-    
-    // Add the selection view to the content view of the form item cell.
-    _selectionView = [ORKEligibilitySelectionView new];
-    _selectionView.delegate = self;
-    [self.contentView addSubview:_selectionView];
-    
-    // Add the label to show the question.
-    _questionLabel = [ORKSubheadlineLabel new];
-    _questionLabel.text = self.formItem.text;
-    _questionLabel.numberOfLines = 0;
-    _questionLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:_questionLabel];
-    
-    self.contentView.layoutMargins = UIEdgeInsetsMake(VerticalMargin, HorizontalMargin, VerticalMargin, HorizontalMargin);
-    
-    [self setUpConstraints];
-    
-    [super cellInit];
-}
-
-- (void)setUpConstraints {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_selectionView, _questionLabel);
-    ORKEnableAutoLayoutForViews([views allValues]);
-    NSDictionary *metrics = @{ @"vMargin":@(VerticalMargin * 2)};
-    
-    NSMutableArray *constraints = [NSMutableArray new];
-    
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vMargin-[_questionLabel]-vMargin-[_selectionView]-vMargin-|"
-                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                             metrics:metrics
-                                               views:views]];
-    [constraints addObjectsFromArray:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_selectionView]-|"
-                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                             metrics:nil
-                                               views:views]];
-    [constraints addObjectsFromArray:@[
-                                       [NSLayoutConstraint constraintWithItem:_questionLabel
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.contentView
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                   multiplier:1.0
-                                                                     constant:-HorizontalMargin * 2],
-                                       [NSLayoutConstraint constraintWithItem:_questionLabel
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:self.contentView
-                                                                    attribute:NSLayoutAttributeCenterX
-                                                                   multiplier:1.0
-                                                                     constant:0.0]
-                                       ]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-}
-
-- (void)answerDidChange {
-    [_selectionView toggleViewForAnswer:self.answer];
-}
-
-#pragma mark - ORKEligibilitySelectionViewDelegate
-
-- (void)selectionViewSelectionDidChange:(ORKEligibilitySelectionView *)view {
-    [self ork_setAnswer:view.answer];
-    [self inputValueDidChange];
-}
-
-@end
-
-
 #pragma mark - ORKFormItemImageSelectionCell
 
 @interface ORKFormItemImageSelectionCell () <ORKImageSelectionViewDelegate>
@@ -1195,6 +1110,8 @@ static const CGFloat HorizontalMargin = 15.0;
     self.textField.text = [_picker selectedLabelText];
     
     [self ork_setAnswer:_picker.answer];
+    
+    [self.textField setSelectedTextRange:nil];
     
     [super inputValueDidChange];
 }

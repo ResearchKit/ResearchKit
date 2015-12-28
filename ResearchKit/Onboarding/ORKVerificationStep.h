@@ -35,13 +35,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- The `ORKVerificationStep` class represents a step that provides elements
- commonly used for account verification.
+ The `ORKVerificationStep` class represents a step that serves as placeholder
+ step to use while the user attempts to verify their account.
  
- The verification step contains an email field, change email button, and resend
- email button. The button actions must be overriden inside a subclassed verification
- view controller to provide navigation logic. The email method must be overriden
- to populate the email label.
+ The verification step contains a text field and a resend email button. The button 
+ actions must be overriden inside a subclassed verification view controller to provide
+ navigation logic.
+ 
+ The developer should redirect user back to the app once the verification is done 
+ and move forward automatically.
  */
 ORK_CLASS_AVAILABLE
 @interface ORKVerificationStep : ORKStep
@@ -53,14 +55,12 @@ ORK_CLASS_AVAILABLE
  title, text, and class.
   
  @param identifier                          The string that identifies the step (see `ORKStep`).
- @param title                               The title of the form (see `ORKStep`).
  @param text                                The text shown immediately below the title (see `ORKStep`).
  @param verificationViewControllerClass     The subclassed verification view controller class.
  
  @return An initialized verification step object.
  */
 - (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(nullable NSString *)title
                               text:(nullable NSString *)text
    verificationViewControllerClass:(Class)verificationViewControllerClass;
 
@@ -68,7 +68,7 @@ ORK_CLASS_AVAILABLE
  The view controller subclass used for the step.
  
  The subclass allows you to override button actions in order to provide navigation logic
- for the button items on the step, as well as, populating the email label.
+ for the button items on the step.
  */
 @property (nonatomic, readonly) Class verificationViewControllerClass;
 

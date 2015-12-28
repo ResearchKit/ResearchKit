@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "无效的电子邮件地址：%@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "输入地址";
+"LOCATION_ERROR_TITLE" = "无法找到指定地址";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "未能解析您的当前位置。请键入地址或转移到 GPS 信号较好的位置（若条件允许）。";
+"LOCATION_ERROR_MESSAGE_DENIED" = "访问位置服务已被拒绝。请通过“设置”来授权此应用使用位置服务。";
+"LOCATION_ERROR_GEOCODE" = "未能找到所输入地址的相关结果。请确定该地址是否有效。";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "您未连接到互联网，或已超出地址查询请求的次数上限。如果未连接到互联网，请打开您的 Wi-Fi 以回答此问题，跳过按钮可用时可跳过此问题，或在连接到互联网后继续参与该调查。如果超出请求次数上限，请等待几分钟后再次尝试。";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "文本内容超过最大长度：%@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "相机在拆分屏幕中不可用。";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "电子邮件";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "密码";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "输入密码";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "确认";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "再次输入密码";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "密码不匹配。";
+"ADDITIONAL_INFO_SECTION_TITLE" = "其他信息";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "性别";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "选择性别";
+"DOB_FORM_ITEM_TITLE" = "出生日期";
+"DOB_FORM_ITEM_PLACEHOLDER" = "选择日期";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "验证";
+"VERIFICATION_STEP_TITLE" = "验证您的电子邮件";
+"RESEND_EMAIL_LABEL_MESSAGE" = "如果您未收到验证电子邮件并希望再收一次，请轻点下方的链接。";
+"RESEND_EMAIL_BUTTON_TITLE" = "重新发送验证电子邮件";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "登录";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "忘记了密码？";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "输入口令";
+"PASSCODE_CONFIRM_MESSAGE" = "确认口令";
+"PASSCODE_SAVED_MESSAGE" = "口令已存储";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "口令已鉴定";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "输入旧口令";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "输入新口令";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "确认新口令";
+"PASSCODE_INVALID_ALERT_TITLE" = "口令不正确";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "口令不匹配。请再试一次。";
+"PASSCODE_TOUCH_ID_MESSAGE" = "请使用 Touch ID 进行鉴定";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 错误";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "仅允许数字字符。";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "口令输入进度指示器";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "已输入 %@/%@ 位";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "无法添加钥匙串项。";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "无法更新钥匙串项。";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "无法删除钥匙串项。";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "无法找到钥匙串项。";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "同意";
 "BUTTON_CANCEL" = "取消";
+"BUTTON_OK" = "好";
 "BUTTON_CLEAR" = "清除";
 "BUTTON_DISAGREE" = "不同意";
 "BUTTON_DONE" = "完成";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "轻按";
 "TOTAL_TAPS_LABEL" = "轻按总次数";
 "TAPPING_INSTRUCTION" = "使用两个手指以最快速度轻按按钮。";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "嗓音";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "转身并走回起点。";
 "TIMED_WALK_INSTRUCTION_TEXT" = "完成后，轻点“完成”。";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "无数据";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "将这个新数字与前一个数字相加。";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ 孔插棒测试";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "本活动通过将圆饼放入圆孔来测量您的上肢功能。您将需要完成此操作 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "您的左手和右手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成 %@ 次后，再将其移除 %@ 次。";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "您的右手和左手都需要进行测试。\n您必须以最快速度拿起圆饼，将其放入圆孔中，完成 %@ 次后，再将其移除 %@ 次。";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "轻按“开始”来进行测试。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放入圆孔中。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "用您的左手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "用您的右手将圆饼放在线条后方。";
+"HOLE_PEG_TEST_TEXT" = "用两个手指拿起圆饼。";
+"HOLE_PEG_TEST_TEXT_2" = "抬起手指以放下圆饼。";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "无法创建文件";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "无法移除足够的日志文件来达到阈值";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "移除日志时出现多个错误";
 "ERROR_RECORDER_NO_DATA" = "未找到任何已收集的数据。";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "未指定输出目录";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "无数据";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "上一步";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "范围：%@ ~ %@";
 "AX_GRAPH_AND_SEPARATOR" = "、";
+"AX_GRAPH_POINT_%@" = "分数：%@";

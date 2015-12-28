@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Alamat e-mel tidak sah: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Masukkan alamat";
+"LOCATION_ERROR_TITLE" = "Tidak Menemui Alamat yang Ditentukan";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Tidak dapat menyelesaikan lokasi semasa anda. Sila taipkan alamat atau pergi ke lokasi dengan isyarat GPS yang lebih baik jika berkenaan.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Akses kepada perkhidmatan lokasi telah ditolak. Sila berikan aplikasi ini kebenaran untuk menggunakan perkhidmatan lokasi menerusi Seting.";
+"LOCATION_ERROR_GEOCODE" = "Tidak dapat mencari hasil untuk alamat yang dimasukkan. Sila pastikan alamat adalah sah.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Sama ada anda tidak disambungkan ke internet atau anda telah melebihi bilangan maksimum permintaan carian alamat. Jika anda tidak disambungkan ke internet, sila aktifkan Wi-Fi anda untuk menjawab soalan ini, langkau soalan ini jika butang langkau tersedia, atau kembali ke tinjauan apabila anda disambungkan ke internet. Sebaliknya, sila cuba lagi dalam masa beberapa minit.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Kandungan teks melebihi panjang maksimum: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera tidak tersedia dalam skrin terpisah.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mel";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Kata Laluan";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata laluan";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Sahkan";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Masukkan kata laluan sekali lagi";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Kata laluan tidak sepadan.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Maklumat Tambahan";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Jantina";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Pilih jantina";
+"DOB_FORM_ITEM_TITLE" = "Tarikh Lahir";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Pilih tarikh";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Pengesahan";
+"VERIFICATION_STEP_TITLE" = "Sahkan E-mel anda";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Ketik pautan di bawah jika anda tidak menerima e-mel pengesahan dan mahu e-mel tersebut dihantar sekali lagi.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Hantar Semula E-mel Pengesahan";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Log Masuk";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Terlupa kata laluan?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Masukkan kod laluan";
+"PASSCODE_CONFIRM_MESSAGE" = "Sahkan kod laluan";
+"PASSCODE_SAVED_MESSAGE" = "Kod laluan disimpan";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kod laluan disahkan";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Masukkan kod laluan lama anda";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Masukkan kod laluan baru anda";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Sahkan kata laluan baru anda";
+"PASSCODE_INVALID_ALERT_TITLE" = "Kod Laluan Salah";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kod laluan tidak sepadan. Cuba lagi.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Sila sahkan menggunakan Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Ralat Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Hanya aksara angka dibenarkan.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Penunjuk kemajuan entri kod laluan";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ daripada %@ digit dimasukkan";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Tidak dapat menambah item Rantai Kunci.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Tidak dapat mengemas kini item Rantai Kunci.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Tidak dapat memadamkan item Rantai Kunci.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Tidak dapat mencari item Rantai Kunci.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Setuju";
 "BUTTON_CANCEL" = "Batal";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Kosongkan";
 "BUTTON_DISAGREE" = "Tidak Setuju";
 "BUTTON_DONE" = "Selesai";
@@ -144,7 +201,7 @@
 "CAPTURE_ERROR_CAMERA_NOT_FOUND" = "Tiada kamera ditemui.  Langkah ini tidak boleh dilengkapkan.";
 "CAPTURE_ERROR_NO_PERMISSIONS" = "Untuk melengkapkan langkah ini, benarkan aplikasi ini mengakses kamera dalam Seting.";
 "CAPTURE_ERROR_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan untuk imej yang ditangkap.";
-"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak boleh disimpan.";
+"CAPTURE_ERROR_CANNOT_WRITE_FILE" = "Imej yang ditangkap tidak dapat disimpan.";
 
 /* Fitness active task. */
 "FITNESS_TASK_TITLE" = "Kecergasan";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Ketik";
 "TOTAL_TAPS_LABEL" = "Jumlah Ketikan";
 "TAPPING_INSTRUCTION" = "Ketik butang secepat yang anda boleh menggunakan dua jari.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Suara";
@@ -236,8 +294,8 @@
 
 /* Timed walk active task. */
 "TIMED_WALK_TITLE" = "Jalan Bermasa";
-"TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi ekstremiti bawah badan anda.";
-"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat yang mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
+"TIMED_WALK_INTRO_DETAIL" = "Aktiviti ini mengukur fungsi anggota badan bawah anda.";
+"TIMED_WALK_INTRO_2_TEXT_%@" = "Cari sesuatu tempat, lebih baik jika di luar bangunan, yang boleh anda berjalan selama lebih kurang %@ dalam garis lurus secepat mungkin, namun dengan selamat. Jangan perlahankan diri sehingga anda melepasi garisan penamat.";
 "TIMED_WALK_INTRO_2_DETAIL" = "Ketik Seterusnya untuk bermula.";
 "TIMED_WALK_FORM_TITLE" = "Peranti bantuan";
 "TIMED_WALK_FORM_TEXT" = "Gunakan peranti bantuan yang sama untuk setiap ujian.";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Pusing dan berjalan balik ke tempat anda bermula.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Ketik Selesai apabila selesai.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Tiada Data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Tambah digit baru ini pada yang sebelumnya.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Ujian Pancang %@ Lubang";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aktiviti ini mengukur fungsi anggota badan atas anda dengan meminta anda meletakkan pancang ke dalam lubang. Anda akan diminta melakukan ini %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Tangan kiri dan kanan anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan %@ kali, keluarkannya sekali lagi %@ kali.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Tangan kanan dan kiri anda akan diuji.\nAnda mesti mengutip pancang secepat mungkin, memasukkannya ke dalam lubang dan setelah dilakukan %@ kali, keluarkannya sekali lagi %@ kali.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Ketik Mulakan untuk memulakan.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Letakkan pancang ke dalam lubang menggunakan tangan kiri anda.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Letakkan pancang ke dalam lubang menggunakan tangan kanan anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Letakkan pancang di belakang garis menggunakan tangan kiri anda.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Letakkan pancang di belakang garis menggunakan tangan kanan anda.";
+"HOLE_PEG_TEST_TEXT" = "Kutip pancang menggunakan dua jari.";
+"HOLE_PEG_TEST_TEXT_2" = "Angkat jari untuk menjatuhkan pancang.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Tidak dapat mencipta fail";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Tidak dapat mengeluarkan fail log yang mencukupi untuk mencapai nilai ambang";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Berbilang ralat semasa mengeluarkan log";
 "ERROR_RECORDER_NO_DATA" = "Tiada data yang dikumpulkan ditemui.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Tiada direktori output ditentukan";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Tiada Data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Balik";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Julat daripada %@ hingga %@";
 "AX_GRAPH_AND_SEPARATOR" = " dan ";
+"AX_GRAPH_POINT_%@" = "Titik: %@";

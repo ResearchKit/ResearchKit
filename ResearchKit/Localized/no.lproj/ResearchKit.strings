@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-postadresse: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Skriv inn en adresse";
+"LOCATION_ERROR_TITLE" = "Fant ikke angitt adresse";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Finner ikke din nåværende posisjon. Skriv inn adressen, eller gå om mulig til et sted med bedre GPS-signal.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Du har ikke gitt appen tilgang til stedstjenester. Du kan endre tilgangen til stedstjenester i Innstillinger.";
+"LOCATION_ERROR_GEOCODE" = "Fant ingen treff for angitt adresse. Kontroller at adressen er riktig og prøv igjen.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Du er enten ikke koblet til Internett, eller du har oversteget grensen for antall adressesøk. Hvis du ikke er koblet til Internett, må du slå på Wi-Fi for å svare på spørsmålet. Du kan hoppe over spørsmålet hvis hopp over-knappen er tilgjengelig, eller komme tilbake til undersøkelsen når du er koblet til Internett. Prøv ellers igjen om noen minutter.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Teksten overstiger makslengden: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kameraet er ikke tilgjengelig på delt skjerm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-post";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Passord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Oppgi passord";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekreft";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Oppgi passordet igjen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Passordene er ikke like.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Tilleggsinformasjon";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Kjønn";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Angi kjønn";
+"DOB_FORM_ITEM_TITLE" = "Fødselsdato";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Angi dato";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verifisering";
+"VERIFICATION_STEP_TITLE" = "Verifiser e-postadressen";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Trykk på koblingen nedenfor hvis du ikke mottok verifiseringsmeldingen på e-post og vil sende den på nytt.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Send verifiseringsmelding på nytt";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Logg på";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Glemt passordet?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Oppgi kode";
+"PASSCODE_CONFIRM_MESSAGE" = "Bekreft kode";
+"PASSCODE_SAVED_MESSAGE" = "Kode arkivert";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kode godkjent";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Oppgi den gamle koden";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Angi den nye koden";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekreft den nye koden";
+"PASSCODE_INVALID_ALERT_TITLE" = "Koden er feil";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kodene er ikke like. Prøv igjen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentiser med Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-feil";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tillatt.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Framdriftsindikator for inntasting av kode";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ av %@ sifre oppgitt";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Kunne ikke legge til nøkkelringobjekt.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Kunne ikke oppdatere nøkkelringobjekt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Kunne ikke slette nøkkelringobjekt.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Fant ikke nøkkelringobjekt.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Enig";
 "BUTTON_CANCEL" = "Avbryt";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Fjern";
 "BUTTON_DISAGREE" = "Uenig";
 "BUTTON_DONE" = "Ferdig";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Trykk";
 "TOTAL_TAPS_LABEL" = "Trykk totalt";
 "TAPPING_INSTRUCTION" = "Trykk på knappene så fort du kan med to fingre.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Snu og gå tilbake der du startet.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Trykk på Ferdig når du har fullført oppgaven.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Ingen data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Legg dette nye sifferet til det forrige.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-hulls pluggtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "I denne aktiviteten skal du plassere en plugg i et hull for å måle funksjonen i armene dine. Du vil bli bedt om å gjøre det %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både venstre og høyre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både høyre og venstre hånd vil bli testet.\nDu må plukke opp pluggen så fort som mulig, og legge den i hullet. Gjør dette %@ ganger, og fjern den så igjen %@ ganger.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Trykk på Start for å begynne.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plasser pluggen i hullet med venstre hånd.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plasser pluggen i hullet med høyre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plasser pluggen bak streken med venstre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Plasser pluggen bak streken med høyre hånd.";
+"HOLE_PEG_TEST_TEXT" = "Bruk to fingre til å løfte opp pluggen.";
+"HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for å slippe pluggen.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke opprette fil";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne nok loggfiler til å nå grensen";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Flere feil ved fjerning av logger";
 "ERROR_RECORDER_NO_DATA" = "Fant ingen innsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Ingen katalog angitt";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbake";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Område fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

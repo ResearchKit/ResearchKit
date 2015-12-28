@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "이메일 주소가 유효하지 않음: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "주소 입력";
+"LOCATION_ERROR_TITLE" = "지정된 주소를 찾을 수 없음";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "사용자의 현재 위치를 확인할 수 없습니다. 주소를 입력하거나, 가능한 경우 GPS 신호가 좋은 곳으로 위치를 이동하십시오.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "위치 서비스에 대한 접근이 거부되었습니다. 설정에서 위치 서비스를 사용할 수 있는 권한을 이 App에 허용하십시오.";
+"LOCATION_ERROR_GEOCODE" = "입력한 주소에 대한 결과를 찾을 수 없습니다. 주소가 유효한지 확인하십시오.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "인터넷에 연결되어 있지 않거나 주소 검색을 요청할 수 있는 최대치를 초과하였습니다. 인터넷에 연결되어 있지 않으면 Wi-Fi를 켜고 질문에 답하십시오. 건너뛰기 버튼을 사용할 수 있는 경우 질문을 건너뛸 수 있습니다. 그렇지 않으면 인터넷에 연결되어 있을 때 다시 설문 조사를 재개하거나 몇 분 후에 다시 시도해 보십시오.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "텍스트 내용이 최대 길이를 초과함: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "분할된 화면에서는 카메라를 사용할 수 없습니다.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "이메일";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "암호";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "암호 입력";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "확인";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "암호 다시 입력";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "암호가 일치하지 않습니다.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "추가 정보";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "길동";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "홍";
+"GENDER_FORM_ITEM_TITLE" = "성별";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "성별 선택";
+"DOB_FORM_ITEM_TITLE" = "생년월일";
+"DOB_FORM_ITEM_PLACEHOLDER" = "날짜 선택";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "확인";
+"VERIFICATION_STEP_TITLE" = "이메일 확인";
+"RESEND_EMAIL_LABEL_MESSAGE" = "확인 이메일을 받지 못했다면 아래 링크를 탭하여 다시 보낼 수 있습니다.";
+"RESEND_EMAIL_BUTTON_TITLE" = "확인 이메일 다시 보내기";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "로그인";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "암호를 잊어버렸습니까?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "암호 입력";
+"PASSCODE_CONFIRM_MESSAGE" = "암호 확인";
+"PASSCODE_SAVED_MESSAGE" = "암호가 저장됨";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "암호가 인증됨";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "이전 암호 입력";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "새로운 암호 입력";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "새로운 암호 확인";
+"PASSCODE_INVALID_ALERT_TITLE" = "올바르지 않은 암호";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "암호가 일치하지 않습니다. 다시 시도하십시오.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Touch ID를 사용하여 인증하십시오.";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID 오류";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "숫자만 허용됩니다.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "암호 입력 진행 과정 표시기";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%2$@개 중 %1$@개의 숫자가 입력됨";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "키체인 항목을 추가할 수 없습니다.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "키체인 항목을 업데이트할 수 없습니다.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "키체인 항목을 삭제할 수 없습니다.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "키체인 항목을 찾을 수 없습니다.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "동의";
 "BUTTON_CANCEL" = "취소";
+"BUTTON_OK" = "확인";
 "BUTTON_CLEAR" = "지우기";
 "BUTTON_DISAGREE" = "동의 안 함";
 "BUTTON_DONE" = "완료";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "탭";
 "TOTAL_TAPS_LABEL" = "탭한 총 횟수";
 "TAPPING_INSTRUCTION" = "두 손가락으로 최대한 빨리 버튼을 탭하십시오.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "음성";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "뒤로 돌아서 시작한 지점으로 되돌아가십시오.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "완료하면 완료를 탭하십시오.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "데이터 없음";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "아래 새로운 숫자를 이전 숫자에 더하십시오.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-홀 페그 테스트";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "이 실험은 페그를 구멍에 넣는 동작을 통해 사용자의 상지 기능을 측정합니다. 이 동작을 %@번 해야 합니다.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "왼손과 오른손을 모두 테스트합니다.\n페그를 최대한 빨리 집어서 구멍에 넣으십시오. 이 동작을 %@번 완료하면, 페그를 제거하는 동작을 다시 %@번 하십시오.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "오른손과 왼손을 모두 테스트합니다.\n페그를 최대한 빨리 집어서 구멍에 넣으십시오. 이 동작을 %@번 완료하면, 페그를 제거하는 동작을 다시 %@번 하십시오.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "시작하려면 시작하기를 탭하십시오.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "왼손을 사용하여 페그를 구멍에 넣으십시오.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "오른손을 사용하여 페그를 구멍에 넣으십시오.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "왼손을 사용하여 페그를 선 뒤에 놓으십시오.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "오른손을 사용하여 페그를 선 뒤에 놓으십시오.";
+"HOLE_PEG_TEST_TEXT" = "두 손가락을 사용하여 페그를 집으십시오.";
+"HOLE_PEG_TEST_TEXT_2" = "손가락을 떼어서 페그를 내려놓으십시오.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "파일을 생성할 수 없습니다.";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "임계값에 이르기 위한 충분한 수의 로그 파일을 제거하는 데 실패했습니다.";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "로그 제거 중에 여러 개의 오류 발생";
 "ERROR_RECORDER_NO_DATA" = "수집된 데이터를 찾을 수 없습니다.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "지정된 출력 디렉토리 없음";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "데이터 없음";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "뒤로";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "%@에서 %@까지의 범위";
 "AX_GRAPH_AND_SEPARATOR" = " 및 ";
+"AX_GRAPH_POINT_%@" = "포인트: %@";

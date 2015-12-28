@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Ongeldig e‑mailadres: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Voer een adres in";
+"LOCATION_ERROR_TITLE" = "Opgegeven adres niet gevonden";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "De huidige locatie kan niet worden bepaald. Typ een adres of ga indien nodig naar een plek met een beter GPS-signaal.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Toegang tot 'Locatievoorzieningen' is geweigerd. Ga naar Instellingen en geef deze app toestemming om 'Locatievoorzieningen' te gebruiken.";
+"LOCATION_ERROR_GEOCODE" = "Het ingevoerde adres is niet gevonden. Zorg dat u een geldig adres invoert.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "U bent niet verbonden met het internet of u hebt te vaak naar een adres gezocht. Zet om deze vraag te beantwoorden Wi‑Fi aan als u niet verbonden bent met het internet. U kunt deze vraag ook overslaan als er een knop 'Sla over' is of verdergaan met deze vragenlijst als de internetverbinding actief is. Of u kunt het over een paar minuten opnieuw proberen.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekst overschrijdt maximale lengte: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera niet beschikbaar in gedeeld scherm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Wachtwoord";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Voer wachtwoord in";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Herhaal";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Herhaal wachtwoord";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "De wachtwoorden komen niet overeen.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Aanvullende informatie";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "John";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Appleseed";
+"GENDER_FORM_ITEM_TITLE" = "Geslacht";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Kies een geslacht";
+"DOB_FORM_ITEM_TITLE" = "Geboortedatum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Kies een datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificatie";
+"VERIFICATION_STEP_TITLE" = "Verifieer uw e-mailadres";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tik op de koppeling hieronder als u geen verificatiemail hebt ontvangen en u deze opnieuw wilt laten versturen.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Stuur controlemail opnieuw";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inloggen";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Wachtwoord vergeten?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Voer toegangscode in";
+"PASSCODE_CONFIRM_MESSAGE" = "Herhaal toegangscode";
+"PASSCODE_SAVED_MESSAGE" = "Toegangscode bewaard";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Toegangscode geverifieerd";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Voer uw oude toegangscode in";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Voer uw nieuwe toegangscode in";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Herhaal uw nieuwe wachtwoord";
+"PASSCODE_INVALID_ALERT_TITLE" = "Toegangscode onjuist";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "De codes komen niet overeen. Probeer het opnieuw.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Log in met Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fout";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Alleen cijfertekens toegestaan.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Voortgangsindicator toegangscode-invoer";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ van %@ cijfers ingevoerd";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden toegevoegd.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden bijgewerkt.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Sleutelhangeronderdeel kan niet worden verwijderd.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Sleutelhangeronderdeel is onvindbaar.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Akkoord";
 "BUTTON_CANCEL" = "Annuleer";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Wis";
 "BUTTON_DISAGREE" = "Niet akkoord";
 "BUTTON_DONE" = "Gereed";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Tik";
 "TOTAL_TAPS_LABEL" = "Totaal aantal tikken";
 "TAPPING_INSTRUCTION" = "Tik zo snel mogelijk afwisselend met twee vingers op de knoppen.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stem";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Draai om en loop terug naar het beginpunt.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tik op 'Gereed' als u klaar bent.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Geen gegevens";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Tel dit nieuwe cijfer op bij het vorige.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-schijventest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tijdens deze activiteit meet u het functioneren van uw bovenste ledematen door een schijfje in een cirkel te plaatsen. Dit moet u %@ keer doen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Zowel uw linker- als rechterhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Zowel uw rechter- als linkerhand wordt getest.\nU moet het schijfje zo snel mogelijk oppakken en in de cirkel plaatsen. Nadat u dit %@ keer hebt gedaan, moet u het schijfje %@ keer weer weghalen.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tik op 'Start' om te beginnen.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje in de cirkel.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Plaats met uw linkerhand het schijfje achter de lijn.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Plaats met uw rechterhand het schijfje achter de lijn.";
+"HOLE_PEG_TEST_TEXT" = "Pak het schijfje op met twee vingers.";
+"HOLE_PEG_TEST_TEXT_2" = "Til uw vingers op om het schijfje los te laten.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Bestand aanmaken mislukt";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Er kunnen niet genoeg logbestanden worden verwijderd om de drempel te halen";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Meerder fouten bij logbestanden verwijderen";
 "ERROR_RECORDER_NO_DATA" = "Geen verzamelde gegevens gevonden.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Geen uitvoerdirectory opgegeven";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Geen gegevens";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Terug";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Bereik van %@ tot %@";
 "AX_GRAPH_AND_SEPARATOR" = " en ";
+"AX_GRAPH_POINT_%@" = "Punt: %@";

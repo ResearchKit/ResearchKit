@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Érvénytelen e-mail cím: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Adjon meg egy címet";
+"LOCATION_ERROR_TITLE" = "A megadott cím nem található";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Az aktuális hely feloldása nem sikerült. Írjon be egy címet, vagy menjen olyan helyre, ahol a GPS-jelerősség kedvezőbb.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "A helymeghatározáshoz való hozzáférés le van tiltva. Engedélyezze az alkalmazás számára a helymeghatározás funkció használatát a Beállításokban.";
+"LOCATION_ERROR_GEOCODE" = "A megadott címhez nem található eredmény. Győződjön meg arról, hogy a cím érvényes.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Ön nem csatlakozik az internethez, vagy túllépte a címkeresési kérelmek maximálisan engedélyezett számát. Ha nem csatlakozik az internethez, akkor kapcsolja be a Wi-Fi-t és válaszoljon erre a kérdésre, ha a kihagyás gomb megjelenik, akkor hagyja ki ezt a kérdést, vagy térjen vissza a kérdőívre, amikor már csatlakozik az internethez. Ellenkező esetben próbálkozzon újra néhány perc múlva.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "A szöveg túllépi a maximális hosszt: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "A kamera nem érhető el osztott képernyős nézetben.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "nagyede@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Jelszó";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Jelszó megadása";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Megerősítés";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Jelszó ismételt megadása";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "A jelszavak nem egyeznek meg.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "További információk";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ede";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Nagy";
+"GENDER_FORM_ITEM_TITLE" = "Nem";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Nem kiválasztása";
+"DOB_FORM_ITEM_TITLE" = "Születési dátum";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Dátum kiválasztása";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ellenőrzés";
+"VERIFICATION_STEP_TITLE" = "E-mail ellenőrzése";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Koppintson az alábbi linkre, ha nem kapott ellenőrző e-mailt, és azt szeretné, ha újra elküldenénk.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Ellenőrző e-mail újraküldése";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Bejelentkezés";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Elfelejtette a jelszót?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Adja meg a jelkódot";
+"PASSCODE_CONFIRM_MESSAGE" = "Erősítse meg a jelkódját";
+"PASSCODE_SAVED_MESSAGE" = "A jelkód mentve";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "A jelkód hitelesítve van";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Adja meg a régi jelkódját";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Adja meg az új jelkódját";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Erősítse meg az új jelkódját";
+"PASSCODE_INVALID_ALERT_TITLE" = "A jelkód helytelen";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "A jelkódok nem egyeznek meg. Próbálja újra.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Kérjük, végezzen hitelesítést a Touch ID-val";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-val kapcsolatos hiba";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kizárólag számkarakterek engedélyezettek.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Jelkóddal történő belépés folyamatjelzője";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@/%@ számjegy megadva";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nem lehetett hozzáadni a Kulcskarika-elemet.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nem lehetett frissíteni a Kulcskarika-elemet.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nem lehetett törölni a Kulcskarika-elemet.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "A Kulcskarika-elem nem található.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Elfogadom";
 "BUTTON_CANCEL" = "Mégsem";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Törlés";
 "BUTTON_DISAGREE" = "Nem fogadom el";
 "BUTTON_DONE" = "Kész";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Koppintás";
 "TOTAL_TAPS_LABEL" = "Összes koppintás";
 "TAPPING_INSTRUCTION" = "Két ujjal koppintson a gombokra olyan gyorsan, ahogy csak tud.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hang";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Forduljon meg, és menjen vissza a kiindulási ponthoz.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Koppintson a Kész lehetőségre, ha elkészült.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Nincs adat";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Adja hozzá ezt az új számjegyet az előzőhöz.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ lyukú körillesztő teszt";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Ez a tevékenység a felső végtagok mozgását vizsgálja, amelynek során a rendszer megkéri Önt, hogy illesszen bele egy kört egy lyukba. Ezt %@ alkalommal kell megtennie.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "A bal és a jobb keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "A jobb és a bal keze egyaránt tesztelve lesz.\nMinél gyorsabban vegye fel a kört, és illessze be a lyukba, és miután ezt %@ alkalommal megtette, távolítsa el %@ alkalommal.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "A kezdéshez koppintson a Kezdés elemre.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a lyukba a bal kezével.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a lyukba a jobb kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Tegye a kört a vonal mögé a bal kezével.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Tegye a kört a vonal mögé a jobb kezével.";
+"HOLE_PEG_TEST_TEXT" = "Fogja meg a kört két ujjal.";
+"HOLE_PEG_TEST_TEXT_2" = "Emelje fel az ujjait a kör elhelyezéséhez.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "A fájl nem hozható létre";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nem sikerült elég naplófájlt eltávolítani a küszöb eléréséhez";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Több hiba történt a naplók eltávolításakor";
 "ERROR_RECORDER_NO_DATA" = "Nem található összegyűjtött adat.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nincs megadva kimeneti könyvtár";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nincs adat";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Vissza";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Tartomány ettől: %@ eddig: %@";
 "AX_GRAPH_AND_SEPARATOR" = " és ";
+"AX_GRAPH_POINT_%@" = "Pont: %@";

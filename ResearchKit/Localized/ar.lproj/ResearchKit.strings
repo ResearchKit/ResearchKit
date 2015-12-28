@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "عنوان البريد الإلكتروني غير صالح: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "أدخل عنوان";
+"LOCATION_ERROR_TITLE" = "تعذر العثور على العنوان المحدد";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "غير قادر على حل موقعك الحالي. يرجى كتابة العنوان أو الانتقال إلى موقع فيه إشارة GPS أفضل إن وجد.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "تم رفض الوصول إلى خدمات الموقع. يرجي منح هذا التطبيق الإذن لاستخدام خدمات الموقع في الإعدادات.";
+"LOCATION_ERROR_GEOCODE" = "تعذر العثور على نتيجة للعنوان الذي تم إدخاله. يرجى التأكد من أن العنوان صالح.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "إما أنك غير متصل بالإنترنت أو أنك تجاوزت الحد الأقصى من طلبات البحث عن العنوان. إذا لم تكن متصلًا بالإنترنت، يرجى تشغيل الـ Wi-Fi للإجابة على هذا السؤال، قم بتخطي هذا السؤال إذا كان زر التخطي متاحاً، أو العودة للاستبيان عندما تكون متصلًا بالإنترنت. خلاف ذلك، يرجى المحاولة مرة أخرى خلال بضع دقائق.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "المحتوى النصي يتجاوز الحد الأقصى للطول: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "الكاميرا غير متوفرة في العرض المقسم.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "البريد الإلكتروني";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jappleseed@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "كلمة السر";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "أدخل كلمة السر";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "تأكيد";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "أدخل كلمة السر مرة أخرى";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "كلمتا السر غير متطابقتين.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "معلومات إضافية";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "باسل";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "أسعد";
+"GENDER_FORM_ITEM_TITLE" = "الجنس";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "اختيار الجنس";
+"DOB_FORM_ITEM_TITLE" = "تاريخ الميلاد";
+"DOB_FORM_ITEM_PLACEHOLDER" = "اختيار تاريخ";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "التحقق";
+"VERIFICATION_STEP_TITLE" = "التحقق من البريد الإلكتروني";
+"RESEND_EMAIL_LABEL_MESSAGE" = "اضغط على الرابط أدناه إذا كنت لم تتلق بريد التحقق، وترغب بإرساله لك مرة أخرى.";
+"RESEND_EMAIL_BUTTON_TITLE" = "إعادة إرسال بريد التحقق";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "تسجيل الدخول";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "هل نسيت كلمة السر؟";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "أدخل رمز الدخول";
+"PASSCODE_CONFIRM_MESSAGE" = "تأكيد رمز الدخول";
+"PASSCODE_SAVED_MESSAGE" = "تم حفظ رمز الدخول";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "رمز الدخول غير مصدّق";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "أدخل رمز الدخول القديم";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "أدخل رمز الدخول الجديد";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "تأكيد رمز الدخول الجديد";
+"PASSCODE_INVALID_ALERT_TITLE" = "رمز الدخول غير صحيح";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "رمزي الدخول غير متطابقين. حاول مجدداً.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "الرجاء المصادقة باستخدام Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "خطأ في Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "فقط الأرقام مسموح بها.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "مؤشر تقدم إدخال رمز الدخول";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "تم إدخال %1$@ من %2$@ من الأرقام";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "تعذر إضافة عنصر سلسلة المفاتيح.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "تعذر تحديث عنصر سلسلة المفاتيح.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "تعذر حذف عنصر سلسلة المفاتيح.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "تعذر العثور على عنصر سلسلة المفاتيح.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "‎A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "موافقة";
 "BUTTON_CANCEL" = "إلغاء";
+"BUTTON_OK" = "موافق";
 "BUTTON_CLEAR" = "مسح";
 "BUTTON_DISAGREE" = "عدم الموافقة";
 "BUTTON_DONE" = "تم";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "الضغط";
 "TOTAL_TAPS_LABEL" = "إجمالي الضغطات";
 "TAPPING_INSTRUCTION" = "اضغط على الزرين بأقصى سرعة ممكنة لديك باستخدام إصبعين.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "الصوت";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "قم بالدوران والمشي رجوعًا إلى نقطة بدايتك.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "اضغط على تم عند الانتهاء.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "لا توجد بيانات";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "اجمع هذا العدد الجديد على العدد السابق.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "‏%@-فحص العقدة والحفرة";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "هذا النشاط يقيس وظيفة الطرف العلوي عن طريق الطلب منك بأن تضع العقدة في حفرة. سوف يطلب منك أن تفعل هذا %@ مرات.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "سيتم فحص كلا اليدين اليسرى واليمنى.\nيجب عليك التقاط العقدة في أسرع وقت ممكن، ووضعها في الحفرة، وبعد إنهاء %@ مرات، قم بإزالتها مرة أخرى %@ مرات.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "سيتم فحص كلا اليدين اليمنى واليسرى.\nيجب عليك التقاط العقدة في أسرع وقت ممكن، ووضعها في الحفرة، وبعد إنهاء %@ مرات، قم بإزالتها مرة أخرى %@ مرات.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "اضغط على البدء لكي تبدأ.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "قم بوضع العقدة في الحفرة باستخدام اليد اليسرى.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "قم بوضع العقدة في الحفرة باستخدام اليد اليمنى.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "قم بوضع العقدة خلف السطر باستخدام اليد اليسرى.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "قم بوضع العقدة خلف السطر باستخدام اليد اليمنى.";
+"HOLE_PEG_TEST_TEXT" = "رفع العقدة باستخدام اصبعين.";
+"HOLE_PEG_TEST_TEXT_2" = "ارفع الأصابع لإسقاط العقدة.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "تعذر إنشاء الملف";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "تعذر إزالة ملفات السجل الكافية للوصول إلى الحد";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "حدثت عدة أخطاء أثناء إزالة السجلات";
 "ERROR_RECORDER_NO_DATA" = "لم يتم العثور على أي بيانات تم جمعها.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "لم يتم تحديد دليل إخراج";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "لا توجد بيانات";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "السابق";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "يتراوح من %@ إلى %@";
 "AX_GRAPH_AND_SEPARATOR" = " و ";
+"AX_GRAPH_POINT_%@" = "النقطة: %@";

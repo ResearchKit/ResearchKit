@@ -41,7 +41,7 @@
 #import <ResearchKit/ResearchKit.h>
 
 
-@class ORKWaitStepViewController;
+@class ORKStepViewController;
 
 /**
  The `ORKWaitStepViewController` class represents the step view controller that corresponds to an `ORKWaitStep`.
