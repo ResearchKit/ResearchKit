@@ -522,6 +522,7 @@
             _continueSkipView.optional = YES;
             [_continueSkipView setNeverHasContinueButton:YES];
             _continueSkipView.skipEnabled = [self skipButtonEnabled];
+            _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
         }
 
     }

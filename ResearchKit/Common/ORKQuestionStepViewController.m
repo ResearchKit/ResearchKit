@@ -180,6 +180,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _continueSkipView.optional = YES;
                 [_continueSkipView setNeverHasContinueButton:YES];
                 _continueSkipView.skipEnabled = [self skipButtonEnabled];
+                _continueSkipView.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
             [_tableContainer setNeedsLayout];
         } else if (self.step) {
@@ -213,6 +214,7 @@ typedef NS_ENUM(NSInteger, ORKQuestionSection) {
                 _questionView.continueSkipContainer.optional = YES;
                 [_questionView.continueSkipContainer setNeverHasContinueButton:YES];
                 _questionView.continueSkipContainer.skipEnabled = [self skipButtonEnabled];
+                _questionView.continueSkipContainer.skipButton.accessibilityTraits = UIAccessibilityTraitStaticText;
             }
 
             
