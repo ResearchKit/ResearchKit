@@ -44,13 +44,6 @@
 #import "ORKAnswerFormat_Internal.h"
 
 
-typedef NS_ENUM(NSInteger, ORKReviewSection) {
-    ORKReviewSectionSpace1 = 0,
-    ORKReviewSectionAnswer = 1,
-    ORKReviewSectionSpace2 = 2,
-    ORKReviewSectionCount
-};
-
 @interface ORKReviewStepViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) ORKTableContainerView *tableContainer;
@@ -147,23 +140,15 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _steps.count > 0 ? ORKReviewSectionCount : 0;
+    return _steps.count > 0 ? 1 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == ORKReviewSectionSpace1 || section == ORKReviewSectionSpace2) ? 1 : _steps.count;
+    return _steps.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.layoutMargins = UIEdgeInsetsZero;
-    if (indexPath.section == ORKReviewSectionSpace1 || indexPath.section == ORKReviewSectionSpace2) {
-        static NSString *SpaceIdentifier = @"Space";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SpaceIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SpaceIdentifier];
-        }
-        return cell;
-    }
     static NSString *identifier = nil;
     identifier = [NSStringFromClass([self class]) stringByAppendingFormat:@"%@", @(indexPath.row)];
     ORKChoiceViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -176,15 +161,6 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     cell.shortLabel.text = step.title != nil ? step.title : step.text;
     cell.longLabel.text = [self answerStringForStep:step withStepResult:stepResult];
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.layoutMargins = UIEdgeInsetsZero;
-    if (indexPath.section == ORKReviewSectionSpace2) {
-        cell.separatorInset = (UIEdgeInsets){.left = ORKScreenMetricMaxDimension};
-    } else {
-        cell.separatorInset = (UIEdgeInsets){.left = ORKStandardLeftMarginForTableViewCell(tableView)};
-    }
 }
 
 #pragma mark answer string
@@ -237,14 +213,6 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
 
 #pragma mark UITableViewDelegate
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == ORKReviewSectionAnswer ? indexPath : nil;
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == ORKReviewSectionAnswer;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.reviewDelegate respondsToSelector:@selector(reviewStepViewController:willReviewStep:)]) {
@@ -258,7 +226,7 @@ typedef NS_ENUM(NSInteger, ORKReviewSection) {
     NSString *shortText = step.title != nil ? step.title : step.text;
     NSString *longText = [self answerStringForStep:step withStepResult:stepResult];
     CGFloat height = [ORKChoiceViewCell suggestedCellHeightForShortText:shortText LongText:longText inTableView:_tableContainer.tableView];
-    return indexPath.section == ORKReviewSectionAnswer ? height : 1;
+    return height;
 }
 
 @end

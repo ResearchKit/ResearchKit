@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
 
++ (UIInterfaceOrientationMask)supportedInterfaceOrientations;
+
 // this property is set to `YES` when the step is part of a standalone review step. If set to `YES it will prevent any user input that might change the step result.
 @property (nonatomic, readonly) BOOL readOnlyMode;
 

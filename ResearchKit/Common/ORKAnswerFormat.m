@@ -923,25 +923,6 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 @end
 
 
-#pragma mark - ORKEligibilityAnswerFormat
-
-@implementation ORKEligibilityAnswerFormat
-
-- (ORKQuestionType)questionType {
-    return ORKQuestionTypeEligibility;
-}
-
-- (Class)questionResultClass {
-    return [ORKBooleanQuestionResult class];
-}
-
-- (NSString*)stringForAnswer:(id)answer {
-    return [answer isEqual:@(YES)] ? ORKLocalizedString(@"BOOL_YES",nil) : ORKLocalizedString(@"BOOL_NO",nil);
-}
-
-@end
-
-
 #pragma mark - ORKTimeOfDayAnswerFormat
 
 @implementation ORKTimeOfDayAnswerFormat
