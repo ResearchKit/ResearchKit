@@ -472,7 +472,7 @@ static const CGFloat HorizontalMargin = 15.0;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if (![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
+    if (textField.text.length > 0 && ![[self.formItem impliedAnswerFormat] isAnswerValidWithString:textField.text]) {
         [self showValidityAlertWithMessage:[[self.formItem impliedAnswerFormat] localizedInvalidValueStringWithAnswerString:textField.text]];
     }
     return YES;
