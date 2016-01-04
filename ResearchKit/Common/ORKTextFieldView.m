@@ -256,7 +256,7 @@ static NSString *const FilledBulletString = @"\u25CF";
         
         UIColor *suffixColor = isEditing ? _unitActiveColor : _unitRegularColor;
         if (_managedPlaceholder.length > 0) {
-            [self ork_setPlaceholder: (self.text.length == 0) ? _managedPlaceholder : nil];
+            [self ork_setPlaceholder: (isEditing && _unit.length > 0) ? nil : _managedPlaceholder];
             [self ork_updateSuffix:_unitWithNumber withColor:suffixColor];
         } else {
             if (self.text.length > 0 || isEditing) {
@@ -300,7 +300,8 @@ static NSString *const FilledBulletString = @"\u25CF";
 
 - (BOOL)isPlaceholderVisible {
     BOOL isEditing = self.isEditing;
-    return (!isEditing || self.text.length == 0) && (self.placeholder.length > 0);
+    return (self.placeholder.length > 0) &&
+            ((!isEditing && self.text.length == 0) || (isEditing && self.text.length == 0 && _unit.length == 0));
 }
 
 - (CGFloat)suffixWidthForBounds:(CGRect)bounds {
