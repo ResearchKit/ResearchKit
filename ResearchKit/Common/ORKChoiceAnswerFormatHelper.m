@@ -43,25 +43,20 @@
 - (instancetype)initWithAnswerFormat:(ORKAnswerFormat *)answerFormat {
     self = [super init];
     if (self) {
-        NSArray *validClasses = @[[ORKValuePickerAnswerFormat class],
-                                  [ORKTextChoiceAnswerFormat class],
-                                  [ORKImageChoiceAnswerFormat class]];
-        
-        if (![validClasses containsObject:[answerFormat class]]) {
-            @throw [NSException exceptionWithName:NSGenericException reason:@"Not a valid answerformat for this helper." userInfo:nil];
-        }
-        
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
-            ORKValuePickerAnswerFormat *vpaf = (ORKValuePickerAnswerFormat *)answerFormat;
-            ORKTextChoice *nullChocie = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
-            _choices = [@[nullChocie] arrayByAddingObjectsFromArray:vpaf.textChoices];
+            ORKValuePickerAnswerFormat *valuePickerAnswerFormat = (ORKValuePickerAnswerFormat *)answerFormat;
+            ORKTextChoice *nullChoice = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
+            _choices = [@[nullChoice] arrayByAddingObjectsFromArray:valuePickerAnswerFormat.textChoices];
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
             ORKTextChoiceAnswerFormat *textChoiceAnswerFormat = (ORKTextChoiceAnswerFormat *)answerFormat;
             _choices = textChoiceAnswerFormat.textChoices;
         } else if ([answerFormat isKindOfClass:[ORKImageChoiceAnswerFormat class]]) {
-            ORKImageChoiceAnswerFormat *iaf = (ORKImageChoiceAnswerFormat *)answerFormat;
-            _choices = iaf.imageChoices;
+            ORKImageChoiceAnswerFormat *imageChoiceAnswerFormat = (ORKImageChoiceAnswerFormat *)answerFormat;
+            _choices = imageChoiceAnswerFormat.imageChoices;
+        } else {
+            NSString *exceptionReason = [NSString stringWithFormat:@"%@ is not a currently supported answer format for the choice answer format helper.", NSStringFromClass([answerFormat class])];
+            @throw [NSException exceptionWithName:NSGenericException reason:exceptionReason userInfo:nil];
         }
     }
     return self;
