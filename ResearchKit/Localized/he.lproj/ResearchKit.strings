@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "כתובת דוא״ל לא תקינה: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "הקש/י כתובת";
+"LOCATION_ERROR_TITLE" = "לא ניתן למצוא את הכתובת שצוינה";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "לא ניתן לזהות את מיקומך הנוכחי. הקלד/י כתובת או עבור/י אל מיקום שבו קליטת ה-GPS טובה יותר, אם אפשר.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "הגישה אל שירותי המיקום נדחתה. הענק/י ליישום זה הרשאה להשתמש בשירותי המיקום דרך ״הגדרות״.";
+"LOCATION_ERROR_GEOCODE" = "לא ניתן למצוא תוצאה עבור הכתובת שהוקשה. ודא/י שהכתובת תקינה.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "יתכן שאינך מחובר/ת לאינטרנט, או שחרגת מהמספר המרבי המותר של בקשות בדיקת כתובת. אם אינך מחובר/ת לאינטרנט, הפעל/י את הרשת האלחוטית בכדי לענות על שאלה זו, דלג/י על השאלה אם כפתור הדילוג זמין, או חזור/י ובצע/י שוב את הסקר כשתהיה/י מחובר/ת לאינטרנט. אחרת, נסה/י שוב בעוד כמה דקות.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "תוכן המלל חורג מהאורך המרבי: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "המצלמה אינה זמינה במסך מפוצל.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "שלח בדוא״ל";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "israelisraeli@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "סיסמה";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "הקש/י סיסמה";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "אשר/י";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "הקש/י את הסיסמה שוב";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "הסיסמאות לא היו זהות.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "מידע נוסף";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "ישראל";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "ישראלי";
+"GENDER_FORM_ITEM_TITLE" = "מין";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "בחר/י מין";
+"DOB_FORM_ITEM_TITLE" = "תאריך לידה";
+"DOB_FORM_ITEM_PLACEHOLDER" = "בחר/י תאריך";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "אימות";
+"VERIFICATION_STEP_TITLE" = "אימות הדוא״ל שלך";
+"RESEND_EMAIL_LABEL_MESSAGE" = "הקש/י על הקישור שלמטה אם לא קיבלת דוא״ל אימות וברצונך שהוא יישלח שוב.";
+"RESEND_EMAIL_BUTTON_TITLE" = "שלח הודעת דוא״ל לאימות מחדש";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "התחבר";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "שכחת את הסיסמה?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "הקש/י את קוד הגישה";
+"PASSCODE_CONFIRM_MESSAGE" = "אשר/י קוד גישה";
+"PASSCODE_SAVED_MESSAGE" = "קוד הגישה נשמר";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "קוד הגישה מאומת";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "הקש/י את קוד הגישה הישן";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "הקש/י את קוד הגישה החדש";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "אשר/י את קוד הגישה החדש";
+"PASSCODE_INVALID_ALERT_TITLE" = "קוד הגישה שגוי";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "קודי הגישה לא היו זהים. נסה/י שוב.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "בצע/י אימות באמצעות Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "שגיאת Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "ניתן להשתמש בתווי ספרות בלבד.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "מד התקדמות של הקשת קוד גישה";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "הוקשו %@ מתוך %@ ספרות";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "לא ניתן היה להוסיף את פריט צרור המפתחות.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "לא ניתן היה לעדכן את פריט צרור המפתחות.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "לא ניתן היה למחוק את פריט צרור המפתחות.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "לא ניתן היה למצוא את פריט צרור המפתחות.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "‎A+‎";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "אני מסכים/ה";
 "BUTTON_CANCEL" = "ביטול";
+"BUTTON_OK" = "אישור";
 "BUTTON_CLEAR" = "נקה";
 "BUTTON_DISAGREE" = "איני מסכים/ה";
 "BUTTON_DONE" = "סיום";
@@ -169,11 +226,12 @@
 /* Tapping active task. */
 "TAPPING_TASK_TITLE" = "מהירות הקשה";
 "TAPPING_INTRO_TEXT" = "פעילות זו מודדת את מהירות ההקשה שלך.";
-"TAPPING_INTRO_TEXT_2_FORMAT" = "הנח/י את הטלפון על משטח שטוח. שני כפתורים יופיעו במסך למשך @%. כעת, השתמש/י בשתי אצבעות מאותה יד בכדי להקיש לחלופין על הכפתורים שמופיעים במהירות המרבית שתוכל/י.";
+"TAPPING_INTRO_TEXT_2_FORMAT" = "הנח/י את הטלפון על משטח שטוח. שני כפתורים יופיעו במסך למשך %@. כעת, השתמש/י בשתי אצבעות מאותה יד בכדי להקיש לחלופין על הכפתורים שמופיעים במהירות המרבית שתוכל/י.";
 "TAPPING_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
 "TAP_BUTTON_TITLE" = "הקש/י";
 "TOTAL_TAPS_LABEL" = "סה״כ הקשות";
 "TAPPING_INSTRUCTION" = "הקש/י על הכפתורים במהירות הכי גבוהה שתוכל/י בשתי אצבעות.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "קול";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "הסתובב/י והתהלך/י חזרה למקום שבו התחלת.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "הקש/י על ״סיום״ לאחר שתסיים/י.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "אין נתונים";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "הוסף/י ספרה חדשה זו לספרה הקודמת.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "מבחן דיסקית של %@ חורים";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "פעילות זו מודדת את תפקוד פלג הגוף העליון בכך שהיא מבקשת ממך להניח דיסקית עגולה בתוך חור. את הפעולה הזו תתבקש/י לבצע %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד השמאלית והימנית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "כעת תתבצע בדיקה של היד הימנית והשמאלית שלך.\nעליך להרים את הדיסקית במהירות המרבית ולהכניס אותה לחור. לאחר שתבצע/י זאת %@ פעמים, עליך להוציא אותה שוב %@ פעמים.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "הקש/י על ״התחל״ בכדי להתחיל.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית בתוך החור באמצעות ידך הימנית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך השמאלית.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "מקם/י את הדיסקית מאחורי הקו באמצעות ידך הימנית.";
+"HOLE_PEG_TEST_TEXT" = "הרם/י את הדיסקית בשתי אצבעות.";
+"HOLE_PEG_TEST_TEXT_2" = "הרם/י את אצבעותיך כדי להפיל את הדיסקית.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "לא ניתן ליצור את הקובץ";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "לא ניתן היה להסיר מספיק קובצי רישום בכדי להגיע לסף";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "ארעו שגיאות מרובות במהלך הסרת קובצי הרישום";
 "ERROR_RECORDER_NO_DATA" = "לא נמצאו נתונים שנאספו.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "לא צוינה ספריית פלט";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "אין נתונים";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "הקודם";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "נע בין %@ ל-%@";
 "AX_GRAPH_AND_SEPARATOR" = " וגם";
+"AX_GRAPH_POINT_%@" = "נקודה: %@";

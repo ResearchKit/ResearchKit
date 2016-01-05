@@ -80,6 +80,26 @@ ORK_CLASS_AVAILABLE
 
 /**
  Returns an initialized registration step using the specified identifier,
+ title, text, options, passcodeValidationRegex, and passcodeInvalidMessage.
+ 
+ @param identifier                  The string that identifies the step (see `ORKStep`).
+ @param title                       The title of the form (see `ORKStep`).
+ @param text                        The text shown immediately below the title (see `ORKStep`).
+ @param passcodeValidationRegex     The regex used to validate the passcode form item (see `ORKTextAnswerFormat`).
+ @param passcodeInvalidMessage      The invalid message displayed for invalid input (see `ORKTextAnswerFormat`).
+ @param options                     The options used for the step (see `ORKRegistrationStepOption`).
+ 
+ @return An initialized registration step object.
+ */
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(nullable NSString *)title
+                              text:(nullable NSString *)text
+           passcodeValidationRegex:(nullable NSString *)passcodeValidationRegex
+            passcodeInvalidMessage:(nullable NSString *)passcodeInvalidMessage
+                           options:(ORKRegistrationStepOption)options;
+
+/**
+ Returns an initialized registration step using the specified identifier,
  title, text, and options.
   
  @param identifier    The string that identifies the step (see `ORKStep`).

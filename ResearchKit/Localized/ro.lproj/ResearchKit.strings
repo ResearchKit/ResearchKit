@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Adresă de e-mail nevalidă: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Introduceți o adresă";
+"LOCATION_ERROR_TITLE" = "Adresa specificată nu a putut fi găsită";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Imposibil de rezolvat localizarea dvs. actuală. Introduceți o adresă sau mergeți într-un loc cu semnal GPS mai bun dacă este cazul.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Accesul la serviciile de localizare a fost refuzat. Acordați acestei aplicații permisiunea de a utiliza serviciile de localizare din Configurări.";
+"LOCATION_ERROR_GEOCODE" = "Imposibil de găsit un rezultat pentru adresa introdusă. Asigurați-vă că adresa este validă.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nu dispuneți de o conexiune la Internet sau ați depășit numărul maxim al solicitărilor de identificare a adreselor. Dacă nu dispuneți de conexiune la Internet, activați Wi-Fi pentru a răspunde la această întrebare, omiteți întrebarea dacă butonul de omitere este disponibil sau reveniți la chestionar după ce vă conectați la Internet. În caz contrar, reîncercați peste câteva minute.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Conținutul de text depășește lungimea maximă: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Camera nu este disponibilă în ecranul divizat.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ioanapopa@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Parolă";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduceți parola";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmați";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Introduceți din nou parola";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Parolele nu coincid.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Informații suplimentare";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ioana";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Popescu";
+"GENDER_FORM_ITEM_TITLE" = "Sex";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Alegeți o opțiune";
+"DOB_FORM_ITEM_TITLE" = "Data nașterii";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Alegeți o dată";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificare";
+"VERIFICATION_STEP_TITLE" = "Verificați-vă e‑mailul";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Apăsați pe linkul de mai jos dacă nu ați primit un e‑mail de verificare și ați dori retrimiterea acestuia.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Retrimite e‑mailul de verificare";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Login";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Ați uitat parola?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Introduceți codul";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmare cod";
+"PASSCODE_SAVED_MESSAGE" = "Cod salvat";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Cod autentificat";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Introduceți codul vechi";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Introduceți codul nou";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirmați noul cod";
+"PASSCODE_INVALID_ALERT_TITLE" = "Cod incorect";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Codurile nu coincid. Reîncercați.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Autentificați-vă cu Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Eroare Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Sunt permise doar caractere numerice.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicator de progres pentru introducerea codului";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ din %@ cifre introduse";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Imposibil de adăugat articolul din portchei.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Imposibil de actualizat articolul din portchei.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Imposibil de șters articolul din portchei.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Imposibil de găsit articolul din portchei.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "De acord";
 "BUTTON_CANCEL" = "Anulați";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Degajați";
 "BUTTON_DISAGREE" = "Nu sunt de acord";
 "BUTTON_DONE" = "OK";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Apăsați";
 "TOTAL_TAPS_LABEL" = "Total apăsări";
 "TAPPING_INSTRUCTION" = "Apăsați butoanele cât de repede puteți folosind două degete.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Voce";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Întorceți-vă și mergeți înapoi la locul de pornire.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Apăsați OK când terminați.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Nu există date";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Adăugați această nouă cifră la cea anterioară.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Testul cu %@ cercuri";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Această activitate vă măsoară funcționalitatea extremităților superioare, solicitându‑vă să plasați un cerc într‑un orificiu. Va trebui să repetați acțiunea de %@ ori.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Vor fi testate atât mâna dvs. stângă, cât și cea dreaptă.\nTrebuie să ridicați cercul cât mai repede posibil, să îl puneți în orificiu și, după ce repetați acțiunea de %@ ori, să îl eliminați din nou de %@ ori.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Vor fi testate atât mâna dvs. dreaptă, cât și cea stângă.\nTrebuie să ridicați cercul cât mai repede posibil, să îl puneți în orificiu și, după ce repetați acțiunea de %@ ori, să îl eliminați din nou de %@ ori.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Apăsați “Start” pentru a începe.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Puneți cercul în orificiu folosind mâna stângă.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Puneți cercul în orificiu folosind mâna dreaptă.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Puneți cercul după linie folosind mâna stângă.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Puneți cercul după linie folosind mâna dreaptă.";
+"HOLE_PEG_TEST_TEXT" = "Ridicați cercul folosind două degete.";
+"HOLE_PEG_TEST_TEXT_2" = "Ridicați degetele pentru a elibera cercul.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Fișierul nu a putut fi creat";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nu au putut fi eliminate suficiente fișiere jurnal pentru atingerea pragului admis";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Mai multe erori la eliminarea jurnalelor";
 "ERROR_RECORDER_NO_DATA" = "Nu au fost găsite date colectate.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nu a fost specificat un director de ieșire";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Nu există date";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Înapoi";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Interval de la %@ la %@";
 "AX_GRAPH_AND_SEPARATOR" = " și ";
+"AX_GRAPH_POINT_%@" = "Punctul: %@";

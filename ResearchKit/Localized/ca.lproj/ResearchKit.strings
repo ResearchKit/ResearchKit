@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Adreça electrònica no vàlida: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Escriu una adreça";
+"LOCATION_ERROR_TITLE" = "No s’ha trobat l‘adreça especificada";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "No s’ha pogut determinar la ubicació actual. Escriu una adreça o vés a un lloc que tingui un senyal de GPS més bo, si pot ser.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "S’ha denegat l’accés als serveis de localització. Dóna permís perquè l’aplicació utilitzi els serveis de localització des de Configuració.";
+"LOCATION_ERROR_GEOCODE" = "No s’ha trobat cap resultat per a l’adreça especificada. Comprova que sigui vàlida.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "O no tens connexió a Internet o has superat el nombre màxim de peticions de cerca d’adreces. Si no tens connexió a Internet, activa la Wi-Fi per contestar aquesta pregunta, passa aquesta pregunta si hi ha disponible un botó d’omissió o recupera l’enquesta quan et puguis connectar a Internet. També pots tornar-ho a provar d’aquí a una mica.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "El contingut del text supera la llargada màxima: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "La càmera no està disponible amb la pantalla dividida.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "Correu electrònic";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jmartorell@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Contrasenya";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Escriu la contrasenya";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Confirmar";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Torna a escriure la contrasenya";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Les contrasenyes no coincideixen.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Més informació";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jordi";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Martorell";
+"GENDER_FORM_ITEM_TITLE" = "Sexe";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Selecciona un sexe";
+"DOB_FORM_ITEM_TITLE" = "Data de naixement";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Selecciona una data";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Verificació";
+"VERIFICATION_STEP_TITLE" = "Verifica el teu correu electrònic";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Prem l’enllaç de sota si no has rebut cap correu de verificació i vols que se’t torni a enviar.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Reenviar correu de verificació";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Inici de sessió";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Contrasenya oblidada?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Escriu el codi";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirma el codi";
+"PASSCODE_SAVED_MESSAGE" = "Codi desat";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Codi autenticat";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Escriu el codi antic";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Escriu el codi nou";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nou codi";
+"PASSCODE_INVALID_ALERT_TITLE" = "Codi incorrecte";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Els codis no coincideixen. Torna-ho a provar.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Identifica’t amb el Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Error de Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Només es permeten caràcters numèrics.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indicador de progrés d’ingrés del codi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ de %@ dígits introduïts";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "No s’ha pogut afegir l’ítem del clauer.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "No s’ha pogut actualitzar l’ítem del clauer.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "No s’ha pogut eliminar l’ítem del clauer.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "No s’ha trobat l’ítem del clauer.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Acceptar";
 "BUTTON_CANCEL" = "Cancel·lar";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Esborrar";
 "BUTTON_DISAGREE" = "No acceptar";
 "BUTTON_DONE" = "Fet";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Prem";
 "TOTAL_TAPS_LABEL" = "Tocs totals";
 "TAPPING_INSTRUCTION" = "Prem els botons tan ràpid com puguis amb dos dits.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Veu";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Fes mitja volta i torna allà on has començat.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Prem Fet quan hagis acabat.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Sense dades";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Suma aquest número a l’anterior.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "Test de la clavilla amb %@ forats";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Aquesta activitat mesura la funcionalitat de les teves extremitats superiors demanant-te que fiquis una clavilla dins d’un forat. Ho hauràs de fer %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "S’avaluaran la mà esquerra i la dreta.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "S’avaluaran la mà dreta i l’esquerra.\nHas d’agafar la clavilla tan ràpid com puguis, posar-la al forat i, un cop fet %@ cops, tornar-la a treure %@ cops.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Per iniciar, prem Començar.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla al forat amb la mà esquerra.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla al forat amb la mà dreta.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Posa la clavilla darrere de la línia amb la mà esquerra.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Posa la clavilla darrere de la línia amb la mà dreta.";
+"HOLE_PEG_TEST_TEXT" = "Agafa la clavilla fent servir dos dits.";
+"HOLE_PEG_TEST_TEXT_2" = "Aixeca els dits per deixar caure la clavilla.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "No s’ha pogut crear l’arxiu";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "No s’han pogut eliminar prou arxius de registre per assolir el llindar";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Diversos errors a l’eliminar registres";
 "ERROR_RECORDER_NO_DATA" = "No s’han trobat dades recollides.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "No s’ha especificat cap directori de sortida";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Sense dades";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Enrere";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Interval de %@ a %@";
 "AX_GRAPH_AND_SEPARATOR" = " i ";
+"AX_GRAPH_POINT_%@" = "Punt: %@";

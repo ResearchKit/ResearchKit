@@ -47,37 +47,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
     return findInArrayByKey(array, @"identifier", formItemIdentifier);
 }
 
-@implementation ORKRegistrationStep
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
-                              text:(NSString *)text
-                           options:(ORKRegistrationStepOption)options {
-    self = [super initWithIdentifier:identifier title:title text:text];
-    if (self) {
-        _options = options;
-        self.formItems = [self registrationFormItems];
-        self.optional = NO;
-    }
-    return self;
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier
-                             title:(NSString *)title
-                              text:(NSString *)text {
-    return [self initWithIdentifier:identifier
-                              title:title
-                               text:text
-                            options:ORKRegistrationStepDefault];
-}
-
-- (instancetype)initWithIdentifier:(NSString *)identifier {
-    return [self initWithIdentifier:identifier
-                              title:nil
-                               text:nil];
-}
-
-- (NSArray <ORKFormItem *> *)registrationFormItems {
+static NSArray <ORKFormItem*> *ORKRegistrationFormItems(ORKRegistrationStepOption options) {
     NSMutableArray *formItems = [NSMutableArray new];
     
     {
@@ -99,7 +69,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
-
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierPassword
                                                                text:ORKLocalizedString(@"PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat
@@ -118,7 +88,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         answerFormat.spellCheckingType = UITextSpellCheckingTypeNo;
         answerFormat.autocapitalizationType = UITextAutocapitalizationTypeNone;
         answerFormat.autocorrectionType = UITextAutocorrectionTypeNo;
-
+        
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierConfirmPassword
                                                                text:ORKLocalizedString(@"CONFIRM_PASSWORD_FORM_ITEM_TITLE", nil)
                                                        answerFormat:answerFormat
@@ -127,14 +97,14 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         
         [formItems addObject:item];
     }
-
-    if (_options & (ORKRegistrationStepIncludeFamilyName | ORKRegistrationStepIncludeGivenName | ORKRegistrationStepIncludeDOB | ORKRegistrationStepIncludeGender)) {
+    
+    if (options & (ORKRegistrationStepIncludeFamilyName | ORKRegistrationStepIncludeGivenName | ORKRegistrationStepIncludeDOB | ORKRegistrationStepIncludeGender)) {
         ORKFormItem *item = [[ORKFormItem alloc] initWithSectionTitle:ORKLocalizedString(@"ADDITIONAL_INFO_SECTION_TITLE", nil)];
         
         [formItems addObject:item];
     }
     
-    if (_options & ORKRegistrationStepIncludeGivenName) {
+    if (options & ORKRegistrationStepIncludeGivenName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         
@@ -147,7 +117,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         [formItems addObject:item];
     }
     
-    if (_options & ORKRegistrationStepIncludeFamilyName) {
+    if (options & ORKRegistrationStepIncludeFamilyName) {
         ORKTextAnswerFormat *answerFormat = [ORKAnswerFormat textAnswerFormat];
         answerFormat.multipleLines = NO;
         
@@ -161,7 +131,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
     }
     
     // Adjust order of given name and family name form item cells based on current locale.
-    if ((_options & ORKRegistrationStepIncludeGivenName) && (_options & ORKRegistrationStepIncludeFamilyName)) {
+    if ((options & ORKRegistrationStepIncludeGivenName) && (options & ORKRegistrationStepIncludeFamilyName)) {
         if (ORKCurrentLocalePresentsFamilyNameFirst()) {
             ORKFormItem *givenNameFormItem = ORKFindInArrayByFormItemId(formItems, ORKRegistrationFormItemIdentifierGivenName);
             ORKFormItem *familyNameFormItem = ORKFindInArrayByFormItemId(formItems, ORKRegistrationFormItemIdentifierFamilyName);
@@ -170,7 +140,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         }
     }
     
-    if (_options & ORKRegistrationStepIncludeGender) {
+    if (options & ORKRegistrationStepIncludeGender) {
         NSArray *textChoices = @[[ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_FEMALE", nil) value:@"female"],
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_MALE", nil) value:@"male"],
                                  [ORKTextChoice choiceWithText:ORKLocalizedString(@"GENDER_OTHER", nil) value:@"other"]];
@@ -181,11 +151,11 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
                                                        answerFormat:answerFormat
                                                            optional:NO];
         item.placeholder = ORKLocalizedString(@"GENDER_FORM_ITEM_PLACEHOLDER", nil);
-       
+        
         [formItems addObject:item];
     }
     
-    if (_options & ORKRegistrationStepIncludeDOB) {
+    if (options & ORKRegistrationStepIncludeDOB) {
         // Calculate default date (20 years from now).
         NSDate *defaultDate = [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear
                                                                        value:-20
@@ -194,7 +164,7 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
         
         ORKDateAnswerFormat *answerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:defaultDate
                                                                                  minimumDate:nil
-                                                                                 maximumDate:nil
+                                                                                 maximumDate:[NSDate date]
                                                                                     calendar:[NSCalendar currentCalendar]];
         
         ORKFormItem *item = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
@@ -209,10 +179,76 @@ static id ORKFindInArrayByFormItemId(NSArray *array, NSString *formItemIdentifie
     return formItems;
 }
 
+@implementation ORKRegistrationStep
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text
+           passcodeValidationRegex:(NSString *)passcodeValidationRegex
+            passcodeInvalidMessage:(NSString *)passcodeInvalidMessage
+                           options:(ORKRegistrationStepOption)options {
+    self = [super initWithIdentifier:identifier title:title text:text];
+    if (self) {
+        _options = options;
+        self.passcodeValidationRegex = passcodeValidationRegex;
+        self.passcodeInvalidMessage = passcodeInvalidMessage;
+        self.optional = NO;
+    }
+    return self;
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text
+                           options:(ORKRegistrationStepOption)options {
+    return [self initWithIdentifier:identifier
+                              title:title
+                               text:text
+            passcodeValidationRegex:nil
+             passcodeInvalidMessage:nil
+                            options:options];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                             title:(NSString *)title
+                              text:(NSString *)text {
+    return [self initWithIdentifier:identifier
+                              title:title
+                               text:text
+                            options:ORKRegistrationStepDefault];
+}
+
+- (instancetype)initWithIdentifier:(NSString *)identifier {
+    return [self initWithIdentifier:identifier
+                              title:nil
+                               text:nil];
+}
+
 - (ORKTextAnswerFormat *)passwordAnswerFormat {
     ORKFormItem *passwordFormItem = ORKFindInArrayByFormItemId(self.formItems, ORKRegistrationFormItemIdentifierPassword);
     ORKTextAnswerFormat *passwordAnswerFormat = (ORKTextAnswerFormat *)passwordFormItem.answerFormat;
     return passwordAnswerFormat;
+}
+
+- (NSArray <ORKFormItem *> *)formItems {
+    if (![super formItems]) {
+        self.formItems = ORKRegistrationFormItems(_options);
+    }
+    
+    ORKFormItem *dobFormItem = ORKFindInArrayByFormItemId([super formItems], ORKRegistrationFormItemIdentifierDOB);
+    ORKDateAnswerFormat *originalAnswerFormat = (ORKDateAnswerFormat *)dobFormItem.answerFormat;
+    ORKDateAnswerFormat *modifiedAnswerFormat = [ORKAnswerFormat dateAnswerFormatWithDefaultDate:originalAnswerFormat.defaultDate
+                                                                                     minimumDate:originalAnswerFormat.minimumDate
+                                                                                     maximumDate:[NSDate date]
+                                                                                        calendar:originalAnswerFormat.calendar];
+
+    dobFormItem = [[ORKFormItem alloc] initWithIdentifier:ORKRegistrationFormItemIdentifierDOB
+                                                     text:ORKLocalizedString(@"DOB_FORM_ITEM_TITLE", nil)
+                                             answerFormat:modifiedAnswerFormat
+                                                 optional:NO];
+    dobFormItem.placeholder = ORKLocalizedString(@"DOB_FORM_ITEM_PLACEHOLDER", nil);
+    
+    return [super formItems];
 }
 
 - (NSString *)passcodeValidationRegex {

@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Ugyldig e-mailadresse: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Indtast en adresse";
+"LOCATION_ERROR_TITLE" = "Den angivne adresse blev ikke fundet";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Din aktuelle lokalitet blev ikke fundet. Skriv en adresse, eller flyt til en lokalitet med bedre GPS-signal, hvis relevant.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Der er nægtet adgang til lokalitetstjenester. Giv denne app tilladelse til at bruge lokalitetstjenester vha. Indstillinger.";
+"LOCATION_ERROR_GEOCODE" = "Den indtastede adresse blev ikke fundet. Kontroller, at adressen er gyldig.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Enten har du ikke oprettet forbindelse til internettet, eller også har du overskredet det maksimale antal anmodninger om adresseopslag. Hvis du ikke har oprettet forbindelse til internettet, skal du slå Wi-Fi til for at besvare dette spørgsmål, springe dette spørgsmål over, hvis knappen spring over er tilgængelig, eller vende tilbage til denne undersøgelse, når du har oprettet forbindelse til internettet. Ellers prøv igen om nogle minutter.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Tekstindhold overskrider maks. længde: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Kamera ikke tilgængeligt på delt skærm.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "cfriis@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Adgangskode";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Skriv adgangskode";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Bekræft";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Skriv adgangskoden igen";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Adgangskoder er forskellige.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Yderligere oplysninger";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Clara";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Friis";
+"GENDER_FORM_ITEM_TITLE" = "Køn";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Vælg køn";
+"DOB_FORM_ITEM_TITLE" = "Fødselsdato";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Vælg en dato";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Bekræftelse";
+"VERIFICATION_STEP_TITLE" = "Bekræft din e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Tryk på linket nedenfor, hvis du ikke modtog en e-mail med bekræftelse og gerne vil have den sendt igen.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Send e-mail med bekræftelse igen";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Log ind";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Glemt adgangskode?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Skriv adgangskode";
+"PASSCODE_CONFIRM_MESSAGE" = "Bekræft adgangskode";
+"PASSCODE_SAVED_MESSAGE" = "Adgangskode arkiveret";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Adgangskode godkendt";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Skriv den gamle adgangskode";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Skriv den nye adgangskode";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Bekræft den nye adgangskode";
+"PASSCODE_INVALID_ALERT_TITLE" = "Forkert adgangskode";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Adgangskoderne stemte ikke overens. Prøv igen.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Godkend med Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID-fejl";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Kun numeriske tegn er tilladt.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Statusindikator for indtastning af adgangskode";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ af %@ cifre indtastet";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nøgleringsemne kunne ikke tilføjes.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nøgleringsemne kunne ikke opdateres.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nøgleringsemne kunne ikke slettes.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nøgleringsemne blev ikke fundet.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Enig";
 "BUTTON_CANCEL" = "Annuller";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Ryd";
 "BUTTON_DISAGREE" = "Uenig";
 "BUTTON_DONE" = "OK";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Tryk";
 "TOTAL_TAPS_LABEL" = "Tryk i alt";
 "TAPPING_INSTRUCTION" = "Tryk på knapperne så hurtigt, som du kan med to fingre.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Stemme";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Vend om, og gå tilbage til det sted, hvor du startede.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tryk på OK, når du er færdig.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Ingen data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Læg dette nye tal sammen med det forrige.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@-huls Pegtest";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Denne aktivitet måler dine fingerfærdigheder ved at bede dig om at anbringe en cirkel i et hul. Du bliver bedt om at gøre dette %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Både din venstre og højre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Både din højre og venstre hånd testes.\nDu skal samle cirklen op så hurtigt som muligt, anbringe den i hullet, og når det er gjort %@ gange, skal du fjerne den igen %@ gange.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Tryk på Gå i gang for at starte.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Anbring cirklen i hullet vha. din venstre hånd.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Anbring cirklen i hullet vha. din højre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Anbring cirklen bag ved stregen vha. din venstre hånd.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Anbring cirklen bag ved stregen vha. din højre hånd.";
+"HOLE_PEG_TEST_TEXT" = "Saml cirklen op vha. to fingre.";
+"HOLE_PEG_TEST_TEXT_2" = "Løft fingrene for at slippe cirklen.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Kunne ikke oprette arkiv";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Kunne ikke fjerne tilstrækkeligt med logarkiver til at nå grænsen";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Flere fejl under fjernelse af logarkiver";
 "ERROR_RECORDER_NO_DATA" = "Der blev ikke fundet nogen indsamlede data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Intet resultatbibliotek anført";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Ingen data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Tilbage";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Udsnit fra %@ til %@";
 "AX_GRAPH_AND_SEPARATOR" = " og ";
+"AX_GRAPH_POINT_%@" = "Punkt: %@";

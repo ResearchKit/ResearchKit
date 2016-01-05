@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Geçersiz e-posta adresi: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Adres girin";
+"LOCATION_ERROR_TITLE" = "Belirtilen Adres Bulunamadı";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Şu anki konumunuz çözülemedi. Lütfen bir adres girin veya uygunsa daha iyi GPS sinyalı olan bir konuma gidin.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Konum servislerine erişim reddedildi. Lütfen konum servislerini kullanmak için Ayarlar'da bu uygulamaya izin verin.";
+"LOCATION_ERROR_GEOCODE" = "Girilen adres için bir sonuç bulunmadı. Lütfen adresin geçerli olduğundan emin olun.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "İnternet'e bağlı değilsiniz veya en fazla adres arama isteği miktarını aştınız. İnternet'e bağlı değilseniz lütfen bu soruya yanıt vermek için Wi-Fi'yi açın, atlama düğmesi varsa bu soruyu atlayın ya da İnternet'e bağlı olduğunuzda anket için yeniden sayfayı ziyaret edin. Aksi takdirde, birkaç dakika sonra yeniden deneyin.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Metin içeriği maksimum uzunluğu aşıyor: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Bölünmüş ekranda Kamera kullanılamıyor.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E-posta";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "ad@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Parola";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parola girin";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Doğrula";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Parolayı yeniden girin";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Parolalar eşleşmiyor.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Ek Bilgi";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Ali";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Utku";
+"GENDER_FORM_ITEM_TITLE" = "Cinsiyet";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Bir cinsiyet seçin";
+"DOB_FORM_ITEM_TITLE" = "Doğum Tarihi";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Bir tarih seçin";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Doğrulama";
+"VERIFICATION_STEP_TITLE" = "E-postanızı doğrulayın";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Doğrulama e-postası almadıysanız ve yeniden gönderilmesini istiyorsanız, lütfen aşağıdaki bağlantıya dokunun.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Doğrulama E-postasını Yeniden Gönder";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Oturum Aç";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Parolayı mı unuttunuz?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Parola girin";
+"PASSCODE_CONFIRM_MESSAGE" = "Parolayı doğrulayın";
+"PASSCODE_SAVED_MESSAGE" = "Parola kaydedildi";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Parola doğrulandı";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Eski parolanızı girin";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Yeni parolanızı girin";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Yeni parolanızı doğrulayın";
+"PASSCODE_INVALID_ALERT_TITLE" = "Parola Doğru Değil";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Parolalar eşleşmedi. Yeniden deneyin.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Lütfen Touch ID ile kimlik doğrulayın";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Touch ID hatası";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Yalnızca sayısal karakterlere izin veriliyor.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Parola giriş ilerleme göstergesi";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "%@ / %@ basamak girildi";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Anahtar zinciri öğesi eklenemedi.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Anahtar zinciri öğesi güncellenemedi.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Anahtar zinciri öğesi silinemedi.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Anahtar zinciri öğesi bulunamadı.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Kabul Ediyorum";
 "BUTTON_CANCEL" = "Vazgeç";
+"BUTTON_OK" = "Tamam";
 "BUTTON_CLEAR" = "Sil";
 "BUTTON_DISAGREE" = "Kabul Etmiyorum";
 "BUTTON_DONE" = "Bitti";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Dokun";
 "TOTAL_TAPS_LABEL" = "Toplam Dokunma";
 "TAPPING_INSTRUCTION" = "İki parmağınızı kullanarak düğmelere dokunabildiğiniz kadar çabuk dokunun.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Ses";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Geriye dönün ve başladığınız yere yürüyün.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Tamamladığınızda Bitti’ye dokunun.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Veri Yok";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Bu yeni rakamı bir öncekine ekleyin.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@ Delikli Daire Testi";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Bu aktivite, bir daireyi deliğe yerleştirmenizi isteyerek üst uzuvlarınızın işlevini ölçer. Bunu %@ kez yapmanız istenecektir.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Hem sol hem de sağ eliniz test edilecektir.\nDaireyi mümkün olduğu kadar hızlı bir şekilde almalı, onu deliğe koymalı ve bunu %@ kez yaptıktan sonra yeniden %@ kez kaldırmalısınız.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Hem sağ hem de sol eliniz test edilecektir.\nDaireyi mümkün olduğu kadar hızlı bir şekilde almalı, onu deliğe koymalı ve bunu %@ kez yaptıktan sonra yeniden %@ kez kaldırmalısınız.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Başlamak için Başla’ya dokunun.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Sol elinizi kullanarak daireyi deliğin içine koyun.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Sağ elinizi kullanarak daireyi deliğin içine koyun.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Sol elinizi kullanarak daireyi çizginin arkasına koyun.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Sağ elinizi kullanarak daireyi çizginin arkasına koyun.";
+"HOLE_PEG_TEST_TEXT" = "İki parmağınızla daireyi alın.";
+"HOLE_PEG_TEST_TEXT_2" = "Daireyi bırakmak için parmakları kaldırın.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Dosya yaratılamadı";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Eşiğe ulaşmaya yetecek kadar günlük dosyası silinemedi";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Günlükleri silmeyle ilgili birden fazla hata";
 "ERROR_RECORDER_NO_DATA" = "Toplanmış bir veri bulunamadı.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Çıkış dizini belirtilmemiş";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Veri Yok";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Geri";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "%@ - %@ aralığında";
 "AX_GRAPH_AND_SEPARATOR" = " ve ";
+"AX_GRAPH_POINT_%@" = "Nokta: %@";

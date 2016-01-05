@@ -86,11 +86,67 @@
 /* Alert for invalid email address value */
 "INVALID_EMAIL_ALERT_MESSAGE" = "Neplatná e‑mailová adresa: %@";
 
+/* Alerts for invalid location coordinates */
+"LOCATION_QUESTION_PLACEHOLDER" = "Zadejte adresu";
+"LOCATION_ERROR_TITLE" = "Zadanou adresu se nepodařilo najít";
+"LOCATION_ERROR_MESSAGE_LOCATION_UNKNOWN" = "Vaši aktuální polohu nelze zjistit. Zadejte adresu nebo se přesuňte na místo s lepším GPS signálem, je‑li to možné.";
+"LOCATION_ERROR_MESSAGE_DENIED" = "Přístup k polohovým službám byl odepřen. Přejděte do Nastavení a udělte této aplikaci oprávnění k používání polohových služeb.";
+"LOCATION_ERROR_GEOCODE" = "Pro zadanou adresu se nepodařilo najít výsledek. Ověřte správnost adresy.";
+"LOCATION_ERROR_GEOCODE_NETWORK" = "Nejste připojeni k internetu nebo jste překročili maximální počet žádostí o vyhledání adresy. Pokud nejste připojeni k internetu a chcete tuto otázku zodpovědět, zapněte Wi-Fi. Je-li k dispozici tlačítko přeskočit, můžete otázku přeskočit nebo se můžete k průzkumu vrátit, až bude internet dostupný. Případně to můžete zkusit za několik minut znovu.";
+
 /* Alert for exceeding length limit in text answer */
 "TEXT_ANSWER_EXCEEDING_MAX_LENGTH_ALERT_MESSAGE" = "Text překračuje maximální délku: %@";
 
 /* Camera not available during multitasking */
 "CAMERA_UNAVAILABLE_MESSAGE" = "Fotoaparát není na rozdělené obrazovce k dispozici.";
+
+/* Registration step */
+"EMAIL_FORM_ITEM_TITLE" = "E‑mail";
+"EMAIL_FORM_ITEM_PLACEHOLDER" = "jnovak@example.com";
+"PASSWORD_FORM_ITEM_TITLE" = "Heslo";
+"PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo";
+"CONFIRM_PASSWORD_FORM_ITEM_TITLE" = "Potvrzení";
+"CONFIRM_PASSWORD_FORM_ITEM_PLACEHOLDER" = "Zadejte heslo ještě jednou";
+"CONFIRM_PASSWORD_ERROR_MESSAGE" = "Hesla se neshodují.";
+"ADDITIONAL_INFO_SECTION_TITLE" = "Doplňující informace";
+"GIVEN_NAME_ITEM_PLACEHOLDER" = "Jan";
+"FAMILY_NAME_ITEM_PLACEHOLDER" = "Novák";
+"GENDER_FORM_ITEM_TITLE" = "Pohlaví";
+"GENDER_FORM_ITEM_PLACEHOLDER" = "Vyberte pohlaví";
+"DOB_FORM_ITEM_TITLE" = "Datum narození";
+"DOB_FORM_ITEM_PLACEHOLDER" = "Vyberte datum";
+
+/* Verification step */
+"VERIFICATION_NAV_TITLE" = "Ověření";
+"VERIFICATION_STEP_TITLE" = "Ověřte svůj e-mail";
+"RESEND_EMAIL_LABEL_MESSAGE" = "Pokud jste neobdrželi ověřovací e-mail a chcete, abychom vám ho zaslali znovu, klepněte na odkaz níže.";
+"RESEND_EMAIL_BUTTON_TITLE" = "Znovu odeslat ověřovací e‑mail";
+
+/* Login step */
+"LOGIN_CONTINUE_BUTTON_TITLE" = "Přihlásit se";
+"FORGOT_PASSWORD_BUTTON_TITLE" = "Zapomněli jste heslo?";
+
+/* Passcode step */
+"PASSCODE_PROMPT_MESSAGE" = "Zadejte kód";
+"PASSCODE_CONFIRM_MESSAGE" = "Potvrďte kód";
+"PASSCODE_SAVED_MESSAGE" = "Kód byl uložen";
+"PASSCODE_AUTHENTICATED_MESSAGE" = "Kód byl ověřen";
+"PASSCODE_OLD_ENTRY_MESSAGE" = "Zadejte starý kód";
+"PASSCODE_NEW_ENTRY_MESSAGE" = "Zadejte nový kód";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Potvrďte nový kód";
+"PASSCODE_INVALID_ALERT_TITLE" = "Nesprávný kód";
+"PASSCODE_INVALID_ALERT_MESSAGE" = "Kódy se neshodují. Zkuste to znovu.";
+"PASSCODE_TOUCH_ID_MESSAGE" = "Použijte ověření pomocí Touch ID";
+"PASSCODE_TOUCH_ID_ERROR_ALERT_TITLE" = "Chyba Touch ID";
+"PASSCODE_TEXTFIELD_INVALID_INPUT_MESSAGE" = "Jsou povoleny jen číselné znaky.";
+"PASSCODE_TEXTFIELD_ACCESSIBILITY_LABEL" = "Indikátor průběhu zadávání kódu";
+"PASSCODE_TEXTFIELD_ACCESSIBILTIY_VALUE" = "Zadané číslice: %@ z %@";
+
+/* Keychain wrapper */
+"KEYCHAIN_ADD_ERROR_MESSAGE" = "Nepodařilo se přidat položku do svazku klíčů.";
+"KEYCHAIN_UPDATE_ERROR_MESSAGE" = "Nepodařilo se aktualizovat položku ve svazku klíčů.";
+"KEYCHAIN_DELETE_ERROR_MESSAGE" = "Nepodařilo se smazat položku ze svazku klíčů.";
+"KEYCHAIN_FIND_ERROR_MESSAGE" = "Nepodařilo se najít položku ve svazku klíčů.";
 
 /* Blood types */
 "BLOOD_TYPE_A+" = "A+";
@@ -120,6 +176,7 @@
 /* Button titles */
 "BUTTON_AGREE" = "Souhlasím";
 "BUTTON_CANCEL" = "Zrušit";
+"BUTTON_OK" = "OK";
 "BUTTON_CLEAR" = "Smazat";
 "BUTTON_DISAGREE" = "Nesouhlasím";
 "BUTTON_DONE" = "Hotovo";
@@ -174,6 +231,7 @@
 "TAP_BUTTON_TITLE" = "Klepněte";
 "TOTAL_TAPS_LABEL" = "Počet klepnutí";
 "TAPPING_INSTRUCTION" = "Dvěma prsty co nejrychleji klepejte na tlačítka.";
+
 
 /* Audio active task. */
 "AUDIO_TASK_TITLE" = "Hlas";
@@ -254,10 +312,6 @@
 "TIMED_WALK_INSTRUCTION_2" = "Obraťte se a jděte zpátky na začátek.";
 "TIMED_WALK_INSTRUCTION_TEXT" = "Po dokončení klepněte na Hotovo.";
 
-
-/* Charts */
-"CHART_NO_DATA_TEXT" = "Žádná data";
-
 /* PSAT active task. */
 "PASAT_TITLE" = "PASAT";
 "PVSAT_TITLE" = "PVSAT";
@@ -271,6 +325,20 @@
 "PSAT_INSTRUCTION" = "Přičtěte toto číslo k předchozímu.";
 "PSAT_NO_DIGIT" = "-";
 
+/* Hole peg test active task. */
+"HOLE_PEG_TEST_TITLE_%@" = "%@kolíkový test";
+"HOLE_PEG_TEST_INTRO_TEXT_%@" = "Tato aktivita otestuje motoriku vašich horních končetin. Požádáme vás o zasunutí kolíku do otvoru. Budete k tomu vyzváni celkem %@×.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_LEFT_HAND_FIRST_%@" = "Budeme testovat vaši levou i pravou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+"HOLE_PEG_TEST_INTRO_TEXT_2_RIGHT_HAND_FIRST_%@" = "Budeme testovat vaši pravou i levou ruku.\nCo nejrychleji uchopte kolík, %@× ho zasuňte do otvoru a poté ho %@× vytáhněte.";
+
+"HOLE_PEG_TEST_CALL_TO_ACTION" = "Začněte klepnutím na Začít.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_LEFT_HAND" = "Zasuňte kolík do otvoru levou rukou.";
+"HOLE_PEG_TEST_PLACE_INSTRUCTION_RIGHT_HAND" = "Zasuňte kolík do otvoru pravou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_LEFT_HAND" = "Umístěte kolík za čáru levou rukou.";
+"HOLE_PEG_TEST_REMOVE_INSTRUCTION_RIGHT_HAND" = "Umístěte kolík za čáru pravou rukou.";
+"HOLE_PEG_TEST_TEXT" = "Uchopte kolík dvěma prsty.";
+"HOLE_PEG_TEST_TEXT_2" = "Zvednutím prstů kolík pusťte.";
+
 /* Potentially user visible error messages. */
 "ERROR_DATALOGGER_CREATE_FILE" = "Soubor nelze vytvořit";
 "ERROR_DATALOGGER_COULD_NOT_FREE_SPACE" = "Nepodařilo se odstranit dostatečné množství protokolů pro dosažení prahové hodnoty";
@@ -279,6 +347,9 @@
 "ERROR_DATALOGGER_MULTIPLE" = "Při odstraňování protokolů došlo k více chybám";
 "ERROR_RECORDER_NO_DATA" = "Nebyla nalezena žádná shromážděná data.";
 "ERROR_RECORDER_NO_OUTPUT_DIRECTORY" = "Nebyl určen výstupní adresář";
+
+/* Charts */
+"CHART_NO_DATA_TEXT" = "Žádná data";
 
 /* Accessibility */
 "AX_BUTTON_BACK" = "Zpět";
@@ -317,3 +388,4 @@
 
 "AX_GRAPH_RANGE_FORMAT" = "Rozmezí od %@ do %@";
 "AX_GRAPH_AND_SEPARATOR" = " a ";
+"AX_GRAPH_POINT_%@" = "Bod: %@";
