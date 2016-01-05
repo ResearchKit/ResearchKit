@@ -510,6 +510,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 }
 
 
+@interface ORKValuePickerAnswerFormat () {
+
+    ORKChoiceAnswerFormatHelper *_helper;
+}
+
+@end
+
+
 @implementation ORKValuePickerAnswerFormat
 
 
@@ -522,8 +530,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     
     self = [super init];
     if (self) {
-        
         _textChoices = ork_processTextChoices(textChoices);
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     }
     return self;
 }
@@ -571,15 +579,22 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeSingleChoice;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
-    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    return [helper stringForChoiceAnswer:answer];
+- (NSString *)stringForAnswer:(id)answer {
+    return [_helper stringForChoiceAnswer:answer];
 }
 
 @end
 
 
 #pragma mark - ORKImageChoiceAnswerFormat
+
+@interface ORKImageChoiceAnswerFormat () {
+    
+    ORKChoiceAnswerFormatHelper *_helper;
+}
+
+@end
+
 
 @implementation ORKImageChoiceAnswerFormat
 
@@ -604,6 +619,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
             }
         }
         _imageChoices = choices;
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     }
     return self;
 }
@@ -652,15 +668,22 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKChoiceQuestionResult class];
 }
 
-- (NSString*)stringForAnswer:(id)answer {
-    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    return [helper stringForChoiceAnswer:answer];
+- (NSString *)stringForAnswer:(id)answer {
+    return [_helper stringForChoiceAnswer:answer];
 }
 
 @end
 
 
 #pragma mark - ORKTextChoiceAnswerFormat
+
+@interface ORKTextChoiceAnswerFormat () {
+    
+    ORKChoiceAnswerFormatHelper *_helper;
+}
+
+@end
+
 
 @implementation ORKTextChoiceAnswerFormat
 
@@ -676,6 +699,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     if (self) {
         _style = style;
         _textChoices = ork_processTextChoices(textChoices);
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
     }
     return self;
 }
@@ -727,9 +751,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKChoiceQuestionResult class];
 }
 
-- (NSString*)stringForAnswer:(id)answer {
-    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    return [helper stringForChoiceAnswer:answer];
+- (NSString *)stringForAnswer:(id)answer {
+    return [_helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -916,7 +939,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return [ORKBooleanQuestionResult class];
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [self.impliedAnswerFormat stringForAnswer: @[answer]];
 }
 
@@ -993,7 +1016,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return YES;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return ORKTimeOfDayStringFromComponents(answer);
 }
 
@@ -1130,7 +1153,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return YES;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [self stringFromDate:answer];
 }
 
@@ -1291,15 +1314,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return string;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;
     if ([self isAnswerValid:answer]) {
         NSNumberFormatter *formatter = [self makeNumberFormatter];
-        if (self.unit && self.unit.length > 0) {
-            [formatter setPositiveSuffix: [NSString stringWithFormat:@" %@", self.unit]];
-            [formatter setNegativeSuffix:[NSString stringWithFormat:@" %@", self.unit]];
-        }
         answerString = [formatter stringFromNumber:answer];
+        if (self.unit && self.unit.length > 0) {
+            answerString = [NSString stringWithFormat:@"%@ %@", answerString, self.unit];
+        }
     }
     return answerString;
 }
@@ -1545,7 +1567,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeScale;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [self localizedStringForNumber:answer];
 }
 
@@ -1739,7 +1761,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeScale;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [self localizedStringForNumber:answer];
 }
 
@@ -1747,6 +1769,14 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 
 #pragma mark - ORKTextScaleAnswerFormat
+
+@interface ORKTextScaleAnswerFormat () {
+    
+    ORKChoiceAnswerFormatHelper *_helper;
+}
+
+@end
+
 
 @implementation ORKTextScaleAnswerFormat {
     NSNumberFormatter *_numberFormatter;
@@ -1769,6 +1799,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
         _textChoices = [textChoices copy];
         _defaultIndex = defaultIndex;
         _vertical = vertical;
+        _helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
         
         [self validateParameters];
     }
@@ -1902,9 +1933,8 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
     return ORKQuestionTypeScale;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
-    ORKChoiceAnswerFormatHelper *helper = [[ORKChoiceAnswerFormatHelper alloc] initWithAnswerFormat:self];
-    return [helper stringForChoiceAnswer:answer];
+- (NSString *)stringForAnswer:(id)answer {
+    return [_helper stringForChoiceAnswer:answer];
 }
 
 @end
@@ -2093,7 +2123,7 @@ static NSArray *ork_processTextChoices(NSArray<ORKTextChoice *> *textChoices) {
 
 static NSString * const kSecureTextEntryEscapeString = @"*";
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     NSString *answerString = nil;
     if ([self isAnswerValid:answer]) {
         answerString = _secureTextEntry ? [@"" stringByPaddingToLength:((NSString *)answer).length withString:kSecureTextEntryEscapeString startingAtIndex:0] : answer;
@@ -2126,7 +2156,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
     return _impliedAnswerFormat;
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [self.impliedAnswerFormat stringForAnswer:answer];
 }
 
@@ -2279,7 +2309,7 @@ static NSString * const kSecureTextEntryEscapeString = @"*";
             (_step == castObject.step));
 }
 
-- (NSString*)stringForAnswer:(id)answer {
+- (NSString *)stringForAnswer:(id)answer {
     return [ORKTimeIntervalLabelFormatter() stringFromTimeInterval:((NSNumber *)answer).floatValue];
 }
 
